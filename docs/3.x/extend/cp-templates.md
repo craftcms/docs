@@ -15,11 +15,11 @@ To add a new full page to the control panel, create a template that extends the 
 At a minimum, your template should set a `title` variable and define a `content` block:
 
 ```twig
-{% extends "_layouts/cp" %}
+{% extends "_layouts/cp.html" %}
 {% set title = "Page Title"|t('plugin-handle') %}
 
 {% block content %}
-    <p>Page content goes here</p>
+  <p>Page content goes here</p>
 {% endblock %}
 ```
 
@@ -31,7 +31,7 @@ Variable | Description
 -------- | -----------
 `title` | The page title.
 `bodyClass` | An array of class names that should be added to the `<body>` tag.
-`fullPageForm` | Whether the entire page should be wrapped in one big `<form>` element (see [Full Page Forms](#full-page-forms)).
+`fullPageForm` | Whether the entire page should be wrapped in one big `<form>` element (see [Form Pages](#form-pages)).
 `crumbs` | An array of breadcrumbs (see [Adding Breadcrumbs](#adding-breadcrumbs)).
 `tabs` | An array of tabs (see [Adding Tabs](#adding-tabs)).
 `selectedTab` | The ID of the selected tab.
@@ -82,14 +82,14 @@ For example, the following `crumbs` array defines two breadcrumbs:
 
 ### Adding Tabs
 
-To add breadcrumbs to your page, define a `tabs` variable, set to a hash of the tabs, indexed by tab IDs.
+To add tabs to your page, define a `tabs` variable, set to a hash of the tabs, indexed by tab IDs.
 
 Each tab should be represented as a nested hash with the following keys:
 
 Key | Description
 --- | -----------
-`label` | The breadcrumb label.
-`url` | The URL or anchor that the breadcrumb should link to.
+`label` | The tab label.
+`url` | The URL or anchor that the tab should link to.
 `class` | A class name that should be added to the tab (in addition to `tab`).
 
 For example, the following `tabs` hash defines two tabs, which will toggle the `hidden` class of `<div>` elements whose IDs match the anchors:
@@ -113,9 +113,9 @@ The first tab will be selected by default. You can force a different tab to be s
 {% set selectedTab = 'settings' %}
 ```
 
-### Full Page Forms
+### Form Pages
 
-Set the `fullPageForm` variable to `true` if your page’s purpose in to present one single form:
+If the purpose of your template is to present a form to the user, start by setting the `fullPageForm` variable to `true` at the top:
 
 ```twig
 {% set fullPageForm = true %}
@@ -134,11 +134,45 @@ Your template can also define the following variables, to customize the form beh
 
 Variable | Description
 -------- | -----------
-`formActions` | An array of available Save menu actions for the form (see below).
+`formActions` | An array of available Save menu actions for the form (see [Alternate Form Actions](#alternate-form-actions)).
 `mainFormAttributes` | A hash of HTML attributes that should be added to the `<form>` tag.
 `retainScrollOnSaveShortcut` | Whether the page’s scroll position should be retained on the subsequent page load when the <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>S</kbd> keyboard shortcut is used.
 `saveShortcutRedirect` | The URL that the page should be redirected to when the <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>S</kbd> keyboard shortcut is used.
 `saveShortcut` | Whether the page should support a <kbd>Ctrl</kbd>/<kbd>Command</kbd> + <kbd>S</kbd> keyboard shortcut (`true` by default).
+
+#### Form Inputs
+
+Craft’s [_includes/forms.html](https://github.com/craftcms/cms/blob/develop/src/templates/_includes/forms.html) template defines several macros that can be used to display your form elements.
+
+Most input types have two macros: one for outputting _just_ the input; and another for outputting the input as a “field”, complete with a label, author instructions, etc.
+
+For example, if you just want to output a date input, but nothing else, you could use the `date` macro:
+
+```twig
+{% import '_includes/forms' as forms %}
+
+{{ forms.date({
+  id: 'start-date',
+  name: 'startDate',
+  value: event.startDate,
+}) }}
+```
+
+However if you want to wrap the input with a label, author instructions, a “Required” indicator, and any validation errors, you could use the `dateField` macro instead:
+
+```twig
+{% import '_includes/forms' as forms %}
+
+{{ forms.dateField({
+  label: 'Start Date'|t('plugin-handle'),
+  instructions: 'The start date of the event.'|t('plugin-handle'),
+  id: 'start-date',
+  name: 'startDate',
+  value: event.startDate,
+  required: true,
+  errors: event.getErrors('startDate'),
+}) }}
+```
 
 #### Alternate Form Actions
 

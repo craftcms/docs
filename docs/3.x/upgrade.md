@@ -10,13 +10,18 @@ Before you begin, make sure that:
 - your server meets Craft 3’s [minimum requirements](requirements.md) (Craft 3 requires PHP 7.2.5+ and at least 256 MB of memory allocated to PHP)
 - your site is running at least **Craft 2.6.2788**
 - your plugins are all up-to-date, and you’ve verified that they’ve been updated for Craft 3 (you can see a report of your plugins’ Craft 3 compatibility status from the Updates page in the Craft 2 control panel)
+- you’ve pulled your latest production database into each environment you’ll be updating
 - your **database is backed up** in case everything goes horribly wrong
 
-Once you've completed everything listed above you can continue with the upgrade process.
+One of Craft 3’s most significant new features is [project config](project-config.md), and we highly recommend taking a moment to better understand what it is and what it will mean for your workflow and [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices). The most important part is to get all your environments using the exact same database, which is why that’s a prerequisite step.
+
+Once you’ve completed everything listed above you can continue with the upgrade process.
 
 ## Performing the Upgrade
 
-The best way to upgrade a Craft 2 site is to approach it like you’re building a new Craft 3 site. So to begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
+The best way to upgrade a Craft 2 site is to approach it like you’re building a new Craft 3 site.
+
+To begin, create a new directory alongside your current project, and follow steps 1-3 in the [installation instructions](installation.md).
 
 With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 
@@ -44,11 +49,15 @@ With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 
 10. Update your web server to point to your new project’s `web/` directory.
 
-11. Point your browser to your control panel URL (e.g. `http://my-project.test/admin`). If you see the update prompt, you did everything right! Go ahead and click “Finish up” to update your database.
+11. Point your browser to your control panel URL (e.g. `http://my-project.tld/admin`). If you see the update prompt, you did everything right! Go ahead and click “Finish up” to update your database.
 
 12. If you had any plugins installed, you’ll need to install their Craft 3 counterparts from the “Plugin Store” section in the control panel. (See the plugins’ documentation for any additional upgrade instructions.)
 
 Now that you’ve upgraded your install to use Craft 3, please take some time to review the changes on this page and update your project to follow the changes in Craft 3.
+
+::: warning
+If you need to re-attempt the upgrade process, delete your `config/project/` directory first. You’ll only want to commit what Craft writes there once everything’s ready to roll.
+:::
 
 ### Troubleshooting
 
@@ -175,7 +184,7 @@ Some PHP constants have been deprecated in Craft 3, and will no longer work in C
 | Old PHP Constant | What to do instead
 | ---------------- | ----------------------------------------
 | `CRAFT_LOCALE`   | Use the [CRAFT_SITE](config/README.md#craft-site) constant<sup>1</sup>
-| `CRAFT_SITE_URL` | Use the <config3:siteUrl> config setting or [environment variables](config/#environmental-configuration)
+| `CRAFT_SITE_URL` | Use [environment variables](config/#environmental-configuration)
 
 *<sup>1</sup> Craft 3 doesn’t require each site/locale to have its own `index.php` file anymore, so alternatively you can remove all unnecessary site/locale web roots and subfolders. See the [Localization guide](sites.md) for more info.*
 
@@ -239,7 +248,7 @@ Twig 1 let you call `block()` even for blocks that didn’t exist:
 
 ```twig
 {% if block('foo') is not empty %}
-    {{ block('foo') }}
+  {{ block('foo') }}
 {% endif %}
 ```
 
@@ -247,7 +256,7 @@ Twig 2 will throw an error unless it’s a `defined` test:
 
 ```twig
 {% if block('foo') is defined %}
-    {{ block('foo') }}
+  {{ block('foo') }}
 {% endif %}
 ```
 
@@ -287,6 +296,8 @@ Some template functions have been removed completely:
 *<sup>1</sup> Only available if the `queue` component implements <craft3:craft\queue\QueueInterface>.*
 
 Some template functions have been deprecated in Craft 3, and will be completely removed in Craft 4:
+
+<!-- textlint-disable -->
 
 | Old Template Function                                   | What to do instead
 | ------------------------------------------------------- | ---------------------------------------------
@@ -404,11 +415,15 @@ Some template functions have been deprecated in Craft 3, and will be completely 
 | `craft.session.getFlash()`                              | `craft.app.session.getFlash()`
 | `craft.session.hasFlash()`                              | `craft.app.session.hasFlash()`
 
+<!-- textlint-enable -->
+
 *<sup>1</sup> `craft.app.request.isLivePreview` is also deprecated, and only will return `true` when previewing categories or plugin-supplied element types that don’t support the new previewing system. If you were calling this to work around Craft templating bugs in Live Preview requests, you can simply delete the condition now, and treat Live Preview requests the same as any other request type.*
 
 ## Date Formatting
 
 Craft’s extended DateTime class has been removed in Craft 3. Here’s a list of things you used to be able to do in your templates, and what the Craft 3 equivalent is. (The DateTime object is represented by the `d` variable. In reality it could be `entry.postDate`, `now`, etc.)
+
+<!-- textlint-disable -->
 
 | Old                               | New
 | --------------------------------- | ----------------------------------
@@ -433,6 +448,8 @@ Craft’s extended DateTime class has been removed in Craft 3. Here’s a list o
 | `{{ d.w3c() }}`                   | `{{ d|date('Y-m-d\\TH:i:sP') }}`
 | `{{ d.w3cDate() }}`               | `{{ d|date('Y-m-d') }}`
 | `{{ d.year() }}`                  | `{{ d|date('Y') }}`
+
+<!-- textlint-enable -->
 
 ## Currency Formatting
 
@@ -488,11 +505,11 @@ If you want to set a param value to an array, you now **must** type out the arra
 ```twig
 Old:
 {% set query = craft.entries()
-    .relatedTo('and', 1, 2, 3) %}
+  .relatedTo('and', 1, 2, 3) %}
 
 New:
 {% set query = craft.entries()
-    .relatedTo(['and', 1, 2, 3]) %}
+  .relatedTo(['and', 1, 2, 3]) %}
 ```
 
 #### Cloning Element Queries
@@ -506,7 +523,7 @@ In Craft 2, each time you call a parameter-setter method (e.g. `.type('article')
 That made it possible to execute variations of an element query, without affecting subsequent queries. For example:
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articleEntries = query.type('article').find() %}
 {% set totalEntries = query.total() %}
 ```
@@ -523,7 +540,7 @@ Which means in the above code example, `totalEntries` will be set to the total _
 If you have any templates that count on the Craft 2 behavior, you can fix them using the [clone()](dev/functions.md#clone-object) function.
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articleEntries = clone(query).type('article').all() %}
 {% set totalEntries = query.count() %}
 ```
@@ -550,11 +567,11 @@ When you need to loop over an element query, you should start explicitly calling
 
 ```twig
 Old:
-{% for entry in craft.entries.section('news') %}...{% endfor %}
+{% for entry in craft.entries().section('news') %}...{% endfor %}
 {% for asset in entry.myAssetsField %}...{% endfor %}
 
 New:
-{% for entry in craft.entries.section('news').all() %}...{% endfor %}
+{% for entry in craft.entries().section('news').all() %}...{% endfor %}
 {% for asset in entry.myAssetsField.all() %}...{% endfor %}
 ```
 
@@ -562,18 +579,18 @@ When you need to get the total number of results from an element query, you shou
 
 ```twig
 Old:
-{% set total = craft.entries.section('news')|length %}
+{% set total = craft.entries().section('news')|length %}
 
 New:
-{% set total = craft.entries.section('news').count() %}
+{% set total = craft.entries().section('news').count() %}
 ```
 
 Alternatively, if you already needed to fetch the actual query results, and you didn’t set the `offset` or `limit` params, you can use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter to find the total size of the results array without the need for an extra database query.
 
 ```twig
 {% set entries = craft.entries()
-    .section('news')
-    .all() %}
+  .section('news')
+  .all() %}
 {% set total = entries|length %}
 ```
 
@@ -588,9 +605,9 @@ In most cases you can replace calls to `.last()` with `.inReverse().one()` and g
    it to `postDate ASC`, returning the oldest News entry: #}
 
 {% set oldest = craft.entries()
-    .section('news')
-    .inReverse()
-    .one() %}
+  .section('news')
+  .inReverse()
+  .one() %}
 ```
 
 There are two cases where `inReverse()` won’t work as expected, though:
@@ -602,7 +619,7 @@ In those cases, you can just replace the `.last()` call with what it’s already
 
 ```twig
 {% set query = craft.entries()
-    .section('news') %}
+  .section('news') %}
 {% set total = query.count() %}
 {% set last = query.nth(total - 1) %}
 ```

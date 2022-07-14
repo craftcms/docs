@@ -20,7 +20,7 @@ There are other apps like [Hyper](https://hyper.is/) (cross-platform) and [iTerm
 
 Once you’ve launched your terminal, you’ll be greeted by an empty prompt that’s ready for input.
 
-Later on we’ll refer to “running” commands, in a format that look like this:
+Later on we’ll refer to “running” commands, in a format that looks like this:
 
 ```bash
 echo "hello world"
@@ -28,7 +28,7 @@ echo "hello world"
 
 In this example, you would copy+paste or type `echo "hello world"` exactly as you see it above, then hit <kbd>return</kbd> or <kbd>enter</kbd> to execute the command. The result, or output, will be printed and you’ll be returned to the empty prompt.
 
-The `echo` console command just repeats back whatever you pass to it. Here’s what you'd see after running that command:
+The `echo` console command just repeats back whatever you pass to it. Here’s what you’d see after running that command:
 
 ```bash
 echo "hello world"

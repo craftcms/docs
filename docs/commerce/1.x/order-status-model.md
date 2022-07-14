@@ -6,22 +6,22 @@ OrderStatusModels have the following attributes and methods:
 
 ## Attributes
 
-### id
+### `id`
 
 The status ID.
 
-### name
+### `name`
 
 The name of the order status.
 
-### handle
+### `handle`
 
 The handle of the order status.
 
-### color
+### `color`
 
 The name of the color of the order status
 
-### default
+### `default`
 
 Returns `true` or `false` depending on if this status is the default applied to new orders.

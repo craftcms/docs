@@ -4,7 +4,7 @@ Rather than requiring that everyone upload images at a certain size, Craft lets 
 
 ## Defining Transforms from the Control Panel
 
-You can define transforms from the Control Panel by going to Settings → Assets → Image Transforms and clicking the “New Transform” button.
+You can define transforms from the control panel by going to Settings → Assets → Image Transforms and clicking the “New Transform” button.
 
 ![transform-settings.2x](./images/transform-settings.2x.jpg)
 
@@ -48,7 +48,7 @@ If you leave **Quality** blank, Craft will use the quality set by your <config2:
 
 If you leave **Image Format** blank, Craft will use the original image’s format if it’s web-safe (.jpg, .png, or .gif); otherwise it will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagik isn’t installed), it will just go with .jpg.
 
-### Applying CP-defined Transforms to Images
+### Applying Control-Panel-Defined Transforms to Images
 
 To output an image with a transform applied, simply pass your transform’s handle into your [AssetFileModel’s](templating/assetfilemodel.md) `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
@@ -59,7 +59,7 @@ To output an image with a transform applied, simply pass your transform’s hand
 >
 ```
 
-## Defining Transforms in your Templates
+## Defining Transforms in Your Templates
 
 You can also define transforms directly in your templates.
 
@@ -84,11 +84,11 @@ Then you can pass that object into your AssetFileModel’s `getUrl()`, `getWidth
 >
 ```
 
-Note how in that example there are no quotes around “`thumb`”, like there were in the first one. That’s because in the first one, we were passing a _string_ set to a CP-defined transform’s handle, whereas in this example we’re passing a _variable_ referencing the ‘thumb’ object we created within the template.
+Note how in that example there are no quotes around “`thumb`”, like there were in the first one. That’s because in the first one, we were passing a _string_ set to a control-panel-defined transform’s handle, whereas in this example we’re passing a _variable_ referencing the ‘thumb’ object we created within the template.
 
 ### Possible Values
 
-All of the same settings available to CP-defined transforms are also available to template-defined transforms.
+All of the same settings available to control-panel-defined transforms are also available to template-defined transforms.
 
 * The `mode` property can be set to either `'crop'`, `'fit'`, or `'stretch'`.
 * If `mode` is set to `'crop'`, you can pass a `position` property, set to either `'top-left'`, `'top-center'`, `'top-right'`, `'center-left'`, `'center-center'`, `'center-right'`, `'bottom-left'`, `'bottom-center'`, or `'bottom-right'`.

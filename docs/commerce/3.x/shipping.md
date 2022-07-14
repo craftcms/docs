@@ -74,7 +74,7 @@ Shipping rules belong to a shipping method and may be edited in that shipping me
 
 The matching of the shipping rules to the cart is based on the following rules conditions:
 
-![A default Shipping Method Rule Conditions form.](./assets/shipping-method-conditions.png)
+![A default Shipping Method Rule Conditions form.](./images/shipping-method-conditions.png)
 
 ### Shipping Zone
 
@@ -82,7 +82,19 @@ Each shipping rule can have a single zone. This condition is met if the order’
 
 ### Order Condition Formula
 
-An optional condition for specifying criteria to be met for the shipping method to be available for selection. This formula may include any attributes on the order, including any custom fields. (For safety, you cannot call any order or custom field methods in the condition formula.)
+An optional condition for specifying criteria for the shipping method to be available for selection.
+
+The condition formula can use an `order` variable, which for safety is an array and not the order element—it’s the same representation of the order you’d see if you exported it from the order index page. This data-only format prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
+
+::: tip
+The condition formula’s `order` array is generated with:
+
+```php
+$order->toArray(
+    [], ['lineItems.snapshot', 'shippingAddress', 'billingAddress']
+);
+```
+:::
 
 ### Order Total Quantity
 
@@ -108,7 +120,7 @@ This rule can allow, disallow, or require certain products to match this rule.
 
 ## Shipping Rule Costs
 
-![A default Shipping Method Rule Costs form.](./assets/shipping-method-costs.png)
+![A default Shipping Method Rule Costs form.](./images/shipping-method-costs.png)
 
 ### Base Rate
 
@@ -181,15 +193,15 @@ Returns the shipping method options available for the current cart. Some shippin
 
 ```twig
 {% for handle, method in cart.availableShippingMethodOptions %}
-    {% set isCurrentSelection = handle == cart.shippingMethodHandle %}
-    {% set formattedPrice = method.priceForOrder(cart)|currency(cart.currency) %}
-    <label>
-        <input type="radio"
-            name="shippingMethodHandle"
-            value="{{ handle }}"
-            {{ isCurrentSelection ? ' checked' : '' }}
-        />
-        <strong>{{ method.name }}</strong> {{ formattedPrice }}
-    </label>
+  {% set isCurrentSelection = handle == cart.shippingMethodHandle %}
+  {% set formattedPrice = method.priceForOrder(cart)|currency(cart.currency) %}
+  <label>
+    <input type="radio"
+      name="shippingMethodHandle"
+      value="{{ handle }}"
+      {{ isCurrentSelection ? ' checked' : '' }}
+    />
+    <strong>{{ method.name }}</strong> {{ formattedPrice }}
+  </label>
 {% endfor %}
 ```

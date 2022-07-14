@@ -37,8 +37,8 @@ That will give you an [ElementCriteriaModel](templating/elementcriteriamodel.md)
 
 ```twig
 {% set categories = craft.categories({
-    relatedTo: { sourceElement: entry, field: "categoriesFieldHandle" },
-    limit:     null
+  relatedTo: { sourceElement: entry, field: "categoriesFieldHandle" },
+  limit:     null
 }) %}
 ```
 
@@ -50,7 +50,7 @@ To check if your Categories field has any selected tags, you can use the `length
 
 ```twig
 {% if entry.categoriesFieldHandle | length %}
-    ...
+  ...
 {% endif %}
 ```
 
@@ -69,10 +69,10 @@ Rather than typing “`entry.categoriesFieldHandle`” every time, you can call 
 
 {% if categories | length %}
 
-    <h3>Some great categories</h3>
-    {% nav category in categories %}
-        ...
-    {% endnav %}
+  <h3>Some great categories</h3>
+  {% nav category in categories %}
+    ...
+  {% endnav %}
 
 {% endif %}
 ```
@@ -89,7 +89,7 @@ If your Categories field is only meant to have a single category selected, remem
 {% set category = entry.myCategoriesField.first() %}
 
 {% if category %}
-    ...
+  ...
 {% endif %}
 ```
 

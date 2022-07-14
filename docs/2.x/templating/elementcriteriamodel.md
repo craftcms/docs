@@ -14,21 +14,21 @@ Whenever you fetch elements in your templates, this happens:
 
 Craft provides five functions which create and return new ElementCriteriaModel objects. They are:
 
-* [craft.assets](craft.assets.md)
-* [craft.categories](craft.categories.md)
-* [craft.entries](craft.entries.md)
-* [craft.tags](craft.tags.md)
-* [craft.users](craft.users.md)
+- [craft.assets](craft.assets.md)
+- [craft.categories](craft.categories.md)
+- [craft.entries](craft.entries.md)
+- [craft.tags](craft.tags.md)
+- [craft.users](craft.users.md)
 
 Those aren’t the only ways you’ll interact with ElementCriteriaModel objects, though. They’re actually used all over the place. Here are two examples:
 
-* Calling a relational field (e.g. an [Assets](../assets-fields.md) field) from an element will give you an ElementCriteriaModel with its [relatedTo](../relations.md#the-relatedTo-param) parameter pre-populated.
+- Calling a relational field (e.g. an [Assets](../assets-fields.md) field) from an element will give you an ElementCriteriaModel with its [relatedTo](../relations.md#the-relatedTo-param) parameter pre-populated.
 
     ```twig
     {% set assets = entry.myAssetsField %}
     ```
 
-* Calling a category’s [getChildren()](categorymodel.md#getchildren) function will give you an ElementCriteriaModel with its [descendantOf](craft.categories.md#descendantof) and [descendantDist](craft.categories.md#descendantdist) parameters pre-populated.
+- Calling a category’s [getChildren()](categorymodel.md#getchildren) function will give you an ElementCriteriaModel with its [descendantOf](craft.categories.md#descendantof) and [descendantDist](craft.categories.md#descendantdist) parameters pre-populated.
 
     ```twig
     {% set children = category.getChildren() %}
@@ -55,8 +55,8 @@ There are two ways you can add parameters to your ElementCriteriaModel object:
 
     ```twig
     {% set entries = craft.entries({
-        section: 'blog',
-        limit: 10
+      section: 'blog',
+      limit: 10
     }) %}
     ```
 
@@ -70,9 +70,9 @@ Total entries: {{ craft.entries(params).total() }}
 The last 10 entries:
 
 <ul>
-    {% for entry in craft.entries(params).limit(10) %}
-        <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-    {% endfor %}
+  {% for entry in craft.entries(params).limit(10) %}
+    <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+  {% endfor %}
 </ul>
 ```
 
@@ -125,9 +125,9 @@ You don’t actually need to call `find()` yourself though: It will be called au
 {# `entries` is still an ElementCriteriaModel here #}
 
 {% for entry in entries %}
-    {# Behind the scenes, the {% for %} tag just called our ElementCriteriaModel’s find() method for us.
-       `entries` is still an ElementCriteriaModel, though #}
-    <li>{{ entry.getLink() }}</li>
+  {# Behind the scenes, the {% for %} tag just called our ElementCriteriaModel’s find() method for us.
+    `entries` is still an ElementCriteriaModel, though #}
+  <li>{{ entry.getLink() }}</li>
 {% endfor %}
 ```
 
@@ -140,7 +140,7 @@ This function will return the first matching element, if it can find one.
 {# `image` is either an AssetFileModel or null #}
 
 {% if image %}
-    <img src="{{ image.url }}">
+  <img src="{{ image.url }}">
 {% endif %}
 ```
 
@@ -157,7 +157,7 @@ This function will return the last matching element, if it can find one.
 {# `lastEntry` is either an EntryModel or null #}
 
 {% if lastEntry %}
-    <a href="{{ lastEntry.url }}" title="{{ lastEntry.title }}">&larr; Previous</a>
+  <a href="{{ lastEntry.url }}" title="{{ lastEntry.title }}">&larr; Previous</a>
 {% endif %}
 ```
 
@@ -170,7 +170,7 @@ This function will return the *n*<wbr>th matching element, if it can find one.
 {# `secondEntry` is either an EntryModel or null #}
 
 {% if secondEntry %}
-    <a href="{{ secondEntry.url }}" title="{{ secondEntry.title }}">{{ secondEntry.title }}</a>
+  <a href="{{ secondEntry.url }}" title="{{ secondEntry.title }}">{{ secondEntry.title }}</a>
 {% endif %}
 ```
 
@@ -200,12 +200,12 @@ If you are going to be looping through elements using the **exact** same paramet
 
 ```twig
 {% if entry.myAssetsField|length %}
-    <h3>Image Gallery</h3>
-    <ul>
-        {% for image in entry.myAssetsField %}
-            <img src="{{ image.getUrl('thumb') }}">
-        {% endfor %}
-    </ul>
+  <h3>Image Gallery</h3>
+  <ul>
+    {% for image in entry.myAssetsField %}
+      <img src="{{ image.getUrl('thumb') }}">
+    {% endfor %}
+  </ul>
 {% endif %}
 ```
 :::

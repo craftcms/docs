@@ -12,7 +12,7 @@ The layout is important for this because it will be the base our other templates
 
 The underscore (`_`) at the beginning of `_layout.twig` means the template is private. 
 
-Unlike the quick example we started with, you _cannot_ view the template by visiting `https://tutorial.nitro/_layout`. We can use those underscores when it makes sense. In this case the layout is only a shell and we never want it to appear on its own, so a private template is perfect.
+Unlike the quick example we started with, you _cannot_ view the template by visiting `https://tutorial.ddev.site/_layout`. We can use those underscores when it makes sense. In this case the layout is only a shell and we never want it to appear on its own, so a private template is perfect.
 
 Copy the following into the `templates/_layout.twig` file you created:
 
@@ -50,7 +50,7 @@ We’ll blend HTML and Twig in our templates to display content we manage in the
 
 Now download a copy of the example styles into `web/styles.css`: <https://raw.githubusercontent.com/craftcms/tutorial-project/main/web/styles.css>
 
-This static stylesheet will offer some basic styling for our templates.
+This static style sheet will offer some basic styling for our templates.
 
 The layout template sets the page’s language to match Craft’s and adds `meta` details that tell browsers how to interpret text and how the page fits into different browser windows.
 
@@ -78,7 +78,7 @@ Now that we have a layout template, let’s use it for our blog post detail page
 Create `templates/blog/_entry.twig` and add the following to it:
 
 ```twig
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% block content %}
   <h1 class="text-4xl text-black font-display my-4">I’m a blog post!</h1>
@@ -91,7 +91,7 @@ The first line _extends_ the layout template, meaning it will use that as a star
 
 Now that the blog section’s template is ready, you can visit the URL for a published post:
 
-<BrowserShot url="https://tutorial.nitro/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/my-first-post" :link="false" caption="">
 <img src="../images/entry-static.png" alt="Screenshot of empty page with generic title" />
 </BrowserShot>
 
@@ -104,7 +104,7 @@ Clearly we don’t want to display the same title on every page, so let’s chan
 For any detail page template, Craft CMS provides a special `entry` variable we can use to access that entry’s content. Let’s display the `title` and `postDate` properties in the template:
 
 ```twig{4,6}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% block content %}
   <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
@@ -115,7 +115,7 @@ For any detail page template, Craft CMS provides a special `entry` variable we c
 
 Now it’s looking better!
 
-<BrowserShot url="https://tutorial.nitro/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/my-first-post" :link="false" caption="">
 <img src="../images/entry-dynamic.png" alt="Screenshot of detail page with dynamic title and entry date" />
 </BrowserShot>
 
@@ -124,7 +124,7 @@ Notice how we’re using the [`|date` Twig filter](/3.x/dev/filters.md#date) to 
 Let’s display the “Feature Image” next, using the `featureImage` handle we created with that custom field:
 
 ```twig{8-12}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% block content %}
   <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
@@ -150,7 +150,7 @@ For each asset, we output a `img` HTML tag which tells the browser to display an
 
 We should now see the image after refreshing the page:
 
-<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
 <img src="../images/entry-with-image.png" alt="Screenshot of detail page with dynamic image added" />
 </BrowserShot>
 
@@ -163,7 +163,7 @@ It’s pretty big.
 We’ll use Twig to create an object called `featureImage` with the settings we want, then pass those settings to `image.getUrl()` in place of `image.url`:
 
 ```twig{3-8,17}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set featureImage = {
   mode: 'crop',
@@ -187,7 +187,7 @@ We’ll use Twig to create an object called `featureImage` with the settings we 
 
 You can now refresh the front end and see your transformed asset:
 
-<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
 <img src="../images/image-resized.png" alt="Screenshot of detail page with auto-sized image" />
 </BrowserShot>
 
@@ -201,13 +201,13 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 2. use an `if` statement to handle output based on the block type
 
 ```twig{21-33}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set featureImage = {
-    mode: 'crop',
-    width: 900,
-    height: 600,
-    quality: 90
+  mode: 'crop',
+  width: 900,
+  height: 600,
+  quality: 90
 } %}
 
 {% block content %}
@@ -239,7 +239,7 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 
 The Matrix content will now be included on the page:
 
-<BrowserShot url="http://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
+<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
 <img src="../images/matrix-content.png" alt="Screenshot of detail page with post content" />
 </BrowserShot>
 
@@ -270,13 +270,13 @@ Create `templates/_includes/post-blocks.twig` and copy that code to it:
 We can now go back to `templates/blog/_entry.twig` and _include_ that template instead:
 
 ```twig{21}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set featureImage = {
-    mode: 'crop',
-    width: 900,
-    height: 600,
-    quality: 90
+  mode: 'crop',
+  width: 900,
+  height: 600,
+  quality: 90
 } %}
 
 {% block content %}
@@ -290,7 +290,7 @@ We can now go back to `templates/blog/_entry.twig` and _include_ that template i
     {% endfor %}
   {% endif %}
 
-  {% include "_includes/post-blocks" with { blocks: entry.postContent.all() } only %}
+  {% include "_includes/post-blocks.twig" with { blocks: entry.postContent.all() } only %}
 {% endblock %}
 ```
 
@@ -323,14 +323,14 @@ There’s nothing special about the `_includes` folder, it’s just the name we 
 While we’re building, let’s add some comments so we can remember what we’ve done. Twig ignores anything wrapped with `{#` and `#}`, which is what we’ll use to leave human-friendly notes:
 
 ```twig{3,16,23}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {# create settings for image transform #}
 {% set featureImage = {
-    mode: 'crop',
-    width: 900,
-    height: 600,
-    quality: 90
+  mode: 'crop',
+  width: 900,
+  height: 600,
+  quality: 90
 } %}
 
 {% block content %}
@@ -346,7 +346,7 @@ While we’re building, let’s add some comments so we can remember what we’v
   {% endif %}
 
   {# render Matrix blocks for the “Post Content” field, passed as `blocks` #}
-  {% include "_includes/post-blocks" with { blocks: entry.postContent.all() } only %}
+  {% include "_includes/post-blocks.twig" with { blocks: entry.postContent.all() } only %}
 {% endblock %}
 ```
 
@@ -357,7 +357,7 @@ You may find that the human you most often leave the note for is yourself.
 The last thing we need to do on the post detail template is output the post categories using the `postCategories` field handle:
 
 ```twig{26-35}
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {# create settings for image transform #}
 {% set featureImage = {
@@ -380,7 +380,7 @@ The last thing we need to do on the post detail template is output the post cate
   {% endif %}
 
   {# render Matrix blocks for the “Post Content” field, passed as `blocks` #}
-  {% include "_includes/post-blocks" with { blocks: entry.postContent.all() } only %}
+  {% include "_includes/post-blocks.twig" with { blocks: entry.postContent.all() } only %}
 
   {# display post categories #}
   {% if entry.postCategories|length %}
@@ -447,10 +447,10 @@ We’ll display a listing of posts in two places: in the blog index and again on
 
 Let’s start with our landing page first.
 
-Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `https://tutorial.nitro/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
+Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html`, that will be the default template or page in a given folder. So when we visit `https://tutorial.ddev.site/blog/`, that folder’s `blog/index.twig` will be used for rendering the result. Add the following to that template:
 
 ```twig
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set posts = craft.entries().section('blog').all() %}
 
@@ -458,7 +458,7 @@ Create `templates/blog/index.twig`. Any time you use `index.twig` or `index.html
 
   <h1 class="text-4xl text-black font-display my-4">Blog Posts</h1>
 
-  {% include "_includes/listing" with { posts: posts } only %}
+  {% include "_includes/listing.twig" with { posts: posts } only %}
 {% endblock %}
 ```
 
@@ -480,8 +480,8 @@ Now create `templates/_includes/listing.twig`. We’ll use this for listing blog
       {% set image = post.featureImage.one() %}
       <div class="w-1/4">
         <img src="{{ image.getUrl({ width: 300, height: 300}) }}"
-            alt="{{ image.title }}"
-            class="block"
+          alt="{{ image.title }}"
+          class="block"
         />
       </div>
     {% endif %}
@@ -495,7 +495,7 @@ The image transform is similar to what we did earlier, except we used `.one()` i
 
 Here’s what the result looks like:
 
-<BrowserShot url="https://tutorial.nitro/blog/" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/" :link="false" caption="">
 <img src="../images/listing.png" alt="Screenshot of listing page" />
 </BrowserShot>
 
@@ -512,7 +512,7 @@ Transformed images will automatically be cropped from the center, but a content 
 
 Back on the front end, refresh the listing page and you’ll see the re-cropped thumbnail:
 
-<BrowserShot url="http://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
+<BrowserShot url="https://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
 <img src="../images/listing-with-custom-focal-point.png" alt="Screenshot of listing page where post thumbnail is cropped toward focal point of image" />
 </BrowserShot>
 
@@ -521,7 +521,7 @@ Back on the front end, refresh the listing page and you’ll see the re-cropped 
 Create `templates/blog/_category.twig` and add the following:
 
 ```twig
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% set posts = craft.entries().section('blog').relatedTo(category).all() %}
 
@@ -531,7 +531,7 @@ Create `templates/blog/_category.twig` and add the following:
     Blog Posts in “{{ category.title }}”
   </h1>
 
-  {% include "_includes/listing" with { posts: posts } only %}
+  {% include "_includes/listing.twig" with { posts: posts } only %}
 {% endblock %}
 ```
 
@@ -543,7 +543,7 @@ In the same way that entry detail pages came automatically loaded with an `entry
 
 Our post category listings, which you can navigate to by choosing any of a blog post’s tags, should be working now:
 
-<BrowserShot url="https://tutorial.nitro/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
+<BrowserShot url="https://tutorial.ddev.site/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
 <img src="../images/listing-category.png" alt="Screenshot of listing page limited by category" />
 </BrowserShot>
 
@@ -582,7 +582,7 @@ Now let’s include that in `templates/_layout.twig`:
     <link href="/styles.css" rel="stylesheet">
   </head>
   <body class="ltr">
-    {% include "_includes/nav" %}
+    {% include "_includes/nav.twig" %}
     <div class="container mx-auto px-4">
       {% block content %}
       {% endblock %}
@@ -595,7 +595,7 @@ Now let’s include that in `templates/_layout.twig`:
 </html>
 ```
 
-<BrowserShot url="https://tutorial.nitro/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
+<BrowserShot url="https://tutorial.ddev.site/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
 <img src="../images/navigation.png" alt="Screenshot of blog listing with new top navigation" />
 </BrowserShot>
 
@@ -610,7 +610,7 @@ Next, let’s set up the about page. We set it up as a single, using the templat
 Create `template/_singles/about.twig` and add the following to it:
 
 ```twig
-{% extends "_layout" %}
+{% extends "_layout.twig" %}
 
 {% block content %}
   <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
@@ -624,7 +624,7 @@ Create `template/_singles/about.twig` and add the following to it:
       {% endif %}
     </div>
     <div class="w-1/2 px-4">
-      {% include "_includes/post-blocks" with { blocks: entry.postContent.all() } only %}
+      {% include "_includes/post-blocks.twig" with { blocks: entry.postContent.all() } only %}
     </div>
   </div>
 {% endblock %}
@@ -632,7 +632,6 @@ Create `template/_singles/about.twig` and add the following to it:
 
 We’re using specific CSS utility classes to create a two-column layout, but otherwise you’ll recognize all the pieces from previous examples!
 
-<BrowserShot url="https://tutorial.nitro/about" :link="false" caption="The About page.">
+<BrowserShot url="https://tutorial.ddev.site/about" :link="false" caption="The About page.">
 <img src="../images/single.png" alt="Screenshot of two-column About page" />
 </BrowserShot>
-

@@ -12,8 +12,8 @@ This field will either return a `1` or `0` from the database, so you can test if
 
 ```twig
 {% if entry.lightswitchFieldHandle %}
-    <p>I'm on!</p>
+  <p>I'm on!</p>
 {% else %}
-    <p>I'm off.</p>
+  <p>I'm off.</p>
 {% endif %}
 ```

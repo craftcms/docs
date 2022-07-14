@@ -13,7 +13,7 @@ All fields share a few common settings:
 - **Field Type** – What type of field it is
 
 
-<BrowserShot url="https://mysite.test/admin/settings/fields/new" :link="false" :max-height="500">
+<BrowserShot url="https://my-project.tld/admin/settings/fields/new" :link="false" :max-height="500">
 <img src="./images/fields-field-settings.png">
 </BrowserShot>
 
@@ -57,7 +57,9 @@ Fields can have the following translation method:
 
 If you choose “Custom…”, a “Translation Key Format” setting will appear below, where you can define a template that will help Craft which sites to copy the field value over to. When a new field value is saved, Craft will render this template for all sites, and the field value will be copied to all sites where the translation key matches the original site’s.
 
-For example, if a field’s translation key format were `{site.handle[0:2]}`, then new field values would be copied over to any other sites where the first two characters of the site handle matches the first to characters of the original site’s handle.
+For example, if a field’s translation key format were `{site.handle[0:2]}`, then new field values would be copied over to any other sites where the first two characters of the site handle matches the first two characters of the original site’s handle.
+
+If the translation key format returns an empty string (`''`), the field will not indicate that it’s available for translation. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per site from _only_ the `blog` section—otherwise it would not be available for translation in any other context.
 
 ## Field Layouts
 
@@ -65,16 +67,16 @@ Once you’ve created your fields, you can display them in your edit forms by ad
 
 Everything in Craft that has content associated with it will provide a field layout for selecting fields:
 
-- [Entries](entries.md) use the field layout defined by their entry type in **Settings** → **Sections** → **Edit Entry Types** → [Entry Type name] → **Field Layout**.
-- [Global sets](globals.md) each get their own field layout, defined in **Settings** → **Globals** → [Global Set name] → **Field Layout**.
-- [Assets](assets.md) use the field layout defined by their asset volume in **Settings** → **Assets** → [Asset Volume name] → **Field Layout**.
-- [Categories](categories.md) use the field layout defined by their Category Group in **Settings** → **Categories** → [Category Group name] → **Field Layout**.
-- [Tags](tags.md) use the field layout defined by their Tag Group in **Settings** → **Tags** → [Tag Group name] → **Field Layout**.
+- [Entries](entries.md) use the field layout defined by their entry type in **Settings** → **Sections** → **Edit Entry Types** → [entry type name] → **Field Layout**.
+- [Global sets](globals.md) each get their own field layout, defined in **Settings** → **Globals** → [global set name] → **Field Layout**.
+- [Assets](assets.md) use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
+- [Categories](categories.md) use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
+- [Tags](tags.md) use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
 - [Users](users.md) all share a single field layout defined in **Settings** → **Users** → **Fields**.
 
 When editing a field layout, you will find a “Content” tab at the top, and a list of all of your site’s fields, grouped into their field groups, at the bottom. Selecting a field is as simple as dragging it from the bottom area to the top, positioning it wherever you want alongside the other selected fields. You can also drag selected fields around to change their order.
 
-Once a field is selected, a gear icon will appear beside it. Clicking on it will reveal a context menu with two options:
+Once a field is selected, a gear icon (<icon kind="settings" />) will appear beside it. Pressing it will reveal a context menu with two options:
 
 - Make required
 - Remove

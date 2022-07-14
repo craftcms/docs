@@ -1,4 +1,0 @@
-[[headers]]
-  for = "/*"
-  [headers.values]
-    robots = "noindex, nofollow"

@@ -2,6 +2,12 @@
 
 Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can [register event listeners](https://craftcms.com/knowledge-base/custom-module-events), typically in their `init()` methods, to modify Commerce’s behavior.
 
+## Event Code Generator
+
+Select an event for details and a code snippet. See Craft’s [Events](../../../3.x/extend/events.md) page for Craft and Yii events.
+
+<event-browser source="commerce-3" />
+
 ## Variant Events
 
 ### `beforeCaptureVariantSnapshot`
@@ -515,7 +521,7 @@ Event::on(
 
 ### `modifyCartInfo`
 
-The event that’s triggered when a cart is returned as an array for AJAX cart update requests.
+The event that’s triggered when a cart is returned as an array for Ajax cart update requests.
 
 ```php
 use craft\commerce\controllers\BaseFrontEndController;
@@ -919,7 +925,7 @@ Event::on(
         // @var Transaction $transaction
         $transaction = $event->transaction;
 
-        // Notify the warehouse we're ready to ship
+        // Notify the warehouse we’re ready to ship
         // ...
     }
 );
@@ -1500,7 +1506,6 @@ Event::on(
         // Add an `$addressQuery->andWhere(..)` to change the addresses that will be purged query
         // $event->addressQuery = $addressQuery
     }
-}
 );
 ```
 

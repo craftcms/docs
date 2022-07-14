@@ -26,8 +26,8 @@ module.exports = {
         title: "1. Install Craft CMS",
         collapsable: true,
         children: [
-          "install/files",
-          "install/setup"
+          "install/",
+          "install/files"
         ]
       },
       {

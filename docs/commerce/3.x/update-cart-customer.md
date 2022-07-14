@@ -16,18 +16,18 @@ Example:
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
-    {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+  {{ redirectInput('shop/cart') }}
 
-    <input type="text"
-        name="email"
-        class="{% if cart.getFirstError('email') %}has-error{% endif %}"
-        value="{{ cart.email }}"
-        placeholder="{{ "your@email.com"|t }}"
-    >
+  <input type="text"
+    name="email"
+    class="{% if cart.getFirstError('email') %}has-error{% endif %}"
+    value="{{ cart.email }}"
+    placeholder="{{ "your@email.com"|t }}"
+  >
 
-    <button type="submit">Update Cart Email</button>
+  <button type="submit">Update Cart Email</button>
 <form>
 ```
 
@@ -43,7 +43,7 @@ When guiding users through the checkout, it’s a good idea to collect the email
 
 ```twig
 {% if craft.users.email(cart.email).one() %}
-    You are already a user, please log in.
+  You are already a user, please log in.
 {% endif %}
 ```
 
@@ -52,25 +52,25 @@ Once a user logs in, the cart’s customer will switch to be the registered user
 ## Registering a guest customer as a user
 
 If the customer is a guest and they do not have an account, you can present them with a standard [Craft CMS user registration
-form](https://craftcms.com/docs/3.x/dev/examples/user-registration-form.html) during checkout.
+form](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form) during checkout.
 
 If you would like to allow the customer to register on checkout, you can update the order and flag it to register the user on
 order completion. This can again be done with the same `commerce/cart/update-cart` form action:
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/update-cart') }}
-    {{ redirectInput('shop/cart') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/cart/update-cart') }}
+  {{ redirectInput('shop/cart') }}
 
-    <label for="registerUserOnOrderComplete">
-        <input type="checkbox"
-            id="registerUserOnOrderComplete"
-            name="registerUserOnOrderComplete"
-            value="1"
-        /> Register me for a user account
-    </label>
-    <button type="submit">Update Cart</button>
+  <label for="registerUserOnOrderComplete">
+    <input type="checkbox"
+      id="registerUserOnOrderComplete"
+      name="registerUserOnOrderComplete"
+      value="1"
+    /> Register me for a user account
+  </label>
+  <button type="submit">Update Cart</button>
 <form>
 ```
 
@@ -80,11 +80,11 @@ Alternatively, as seen in the [example templates](example-templates.md), you can
 {{ hiddenInput('action', commerce/payments/pay') }}
 {# ... payment form ... #}
 <label for="registerUserOnOrderComplete">
-    <input type="checkbox"
-        id="registerUserOnOrderComplete"
-        name="registerUserOnOrderComplete"
-        value="1"
-    /> Register me for a user account
+  <input type="checkbox"
+    id="registerUserOnOrderComplete"
+    name="registerUserOnOrderComplete"
+    value="1"
+  /> Register me for a user account
 </label>
 ```
 

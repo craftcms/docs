@@ -49,7 +49,7 @@ Additional Omnipay gateways can be added to Craft Commerce. They require the cre
 
 ## Storing config outside of the database
 
-If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s settings by placing a `paymentMethodSettings` key into your `commerce.php` config file. You then use the payment method's ID  as the key to the config for that payment method.
+If you do not wish to store your payment gateway config information in the database (which could include secret API keys), you can override the values of a payment method’s settings by placing a `paymentMethodSettings` key into your `commerce.php` config file. You then use the payment method’s ID as the key to the config for that payment method.
 
 ```php
 return [
@@ -99,7 +99,7 @@ The manual payment gateway is a special gateway that does not communicate with a
 
 When you need to accept cheque or bank deposit payments, you should use the manual payment gateway.
 
-The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as captured in the Control Panel when payment is received.
+The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as captured in the control panel when payment is received.
 
 ::: tip
 When creating a Manual payment method, you must select the payment type to be “Authorize Only”.
@@ -109,7 +109,7 @@ When creating a Manual payment method, you must select the payment type to be �
 
 The “Worldpay JSON” gateway is the newly recommended modern gateway API for Worldpay. The “Worldpay” gateway below is the older offsite gateway API.
 
-The Worldpay JSON gateway uses client side JavaScript `worldpay.js` on your payment template page to generate a token representing the credit card. This token can be passed to the standard `commerce/payments/pay` form action like the Stripe gateway.
+The Worldpay JSON gateway uses client-side JavaScript `worldpay.js` on your payment template page to generate a token representing the credit card. This token can be passed to the standard `commerce/payments/pay` form action like the Stripe gateway.
 
 You have the option of a simple implementation using the `worldpay.js` “Template Form” documented [here](https://developer.worldpay.com/jsonapi/docs/template-form), and a more advanced customized implementation called “Own Form” documented [here](https://developer.worldpay.com/jsonapi/docs/own-form).
 

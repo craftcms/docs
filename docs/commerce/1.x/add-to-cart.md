@@ -11,11 +11,11 @@ The following is an example of getting the first product found in your store. We
 {% set variant = product.defaultVariant %}
 
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/updateCart">
-    <input type="hidden" name="redirect" value="commerce/cart">
-    <input type="hidden" name="qty" value="1">
-    <input type="hidden" name="purchasableId" value="{{ variant.purchasableId }}">
-    <input type="submit" value="Add to cart">
+  <input type="hidden" name="action" value="commerce/cart/updateCart">
+  <input type="hidden" name="redirect" value="commerce/cart">
+  <input type="hidden" name="qty" value="1">
+  <input type="hidden" name="purchasableId" value="{{ variant.purchasableId }}">
+  <input type="submit" value="Add to cart">
 </form>
 ```
 * The `qty` param is not required as it defaults to `1` if not supplied.
@@ -26,15 +26,15 @@ The above is a simple example, if your product’s type has multiple variants yo
 {% set product = craft.commerce.products.first() %}
 
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/updateCart">
-    <input type="hidden" name="redirect" value="commerce/cart">
-    <input type="hidden" name="qty" value="1">
-    <select name="purchasableId">
-        {% for variant in product.variants %}
-            <option value="{{ variant.purchasableId }}">{{ variant.sku }}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Add to cart">
+  <input type="hidden" name="action" value="commerce/cart/updateCart">
+  <input type="hidden" name="redirect" value="commerce/cart">
+  <input type="hidden" name="qty" value="1">
+  <select name="purchasableId">
+    {% for variant in product.variants %}
+      <option value="{{ variant.purchasableId }}">{{ variant.sku }}</option>
+    {% endfor %}
+  </select>
+  <input type="submit" value="Add to cart">
 </form>
 ```
 
@@ -52,24 +52,24 @@ Here is an example of an add to cart form with both a `notes` and `options` para
 {% set product = craft.commerce.products.first() %}
 {% set variant = product.defaultVariant %}
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/cart/updateCart">
-    <input type="hidden" name="redirect" value="commerce/cart">
-    <input type="hidden" name="qty" value="1">
+  <input type="hidden" name="action" value="commerce/cart/updateCart">
+  <input type="hidden" name="redirect" value="commerce/cart">
+  <input type="hidden" name="qty" value="1">
 
-    <input type="text" name="note" value="">
+  <input type="text" name="note" value="">
 
-    <select name="options[engraving]">
-        <option value="happy-birthday">Happy Birthday</option>
-        <option value="good-riddance">Good Riddance</option>
-    </select>
+  <select name="options[engraving]">
+    <option value="happy-birthday">Happy Birthday</option>
+    <option value="good-riddance">Good Riddance</option>
+  </select>
 
-    <select name="options[giftwrap]">
-        <option value="yes">Yes Please</option>
-        <option value="no">No Thanks</option>
-    </select>
+  <select name="options[giftwrap]">
+    <option value="yes">Yes Please</option>
+    <option value="no">No Thanks</option>
+  </select>
 
-    <input type="hidden" name="purchasableId" value="{{ variant.purchasableId }}">
-    <input type="submit" value="Add to cart">
+  <input type="hidden" name="purchasableId" value="{{ variant.purchasableId }}">
+  <input type="submit" value="Add to cart">
 </form>
 ```
 
@@ -89,6 +89,6 @@ Once the order is complete, the notes and options can be found on the View Order
 
 ## Options uniqueness
 
-The options data submitted to the line item are hashed into an `optionsSignature` for uniqueness. If you submit the same purchasableId to the cart with different option data, two line items with be created.
+The options data submitted to the line item are hashed into an `optionsSignature` for uniqueness. If you submit the same `purchasableId` to the cart with different option data, two line items with be created.
 
 Another way to think about it is that each line item is unique based on the combination of `purchasableId` and `optionsSignature`.

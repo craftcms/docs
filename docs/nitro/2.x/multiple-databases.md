@@ -33,7 +33,7 @@ databases:
     port: "5432"
 ```
 
-We’ve specified port `33061` above—and not the default `3306`—because MySQL 8.0 is already running on that port and each database must have its own.
+We’ve specified port `33061` above—and not the default `3306`—because MySQL 8.0 is already running on that port and each database must have its own. (See [How Nitro Works](how-nitro-works.md#databases) for more on Nitro’s layout and those internal and external ports.)
 
 Running [`apply`](commands.md#apply) will create the new database container and prompt you to update your hosts file.
 

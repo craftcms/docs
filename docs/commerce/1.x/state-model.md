@@ -4,33 +4,33 @@ StateModel objects have the following attributes and methods:
 
 ## Attributes
 
-### id
+### `id`
 
 The address record ID.
 
-### name
+### `name`
 
 The countries name (required).
 
-### formatName
+### `formatName`
 
 The states’ name followed by the states’ country in parenthesis. For example:
 
 `California (United States)`
 
-### abbreviation
+### `abbreviation`
 
 The states’s ISO code (required).
 
-### country
+### `country`
 
 The [Country model](country-model.md) of the country this state belongs to (required).
 
-### countryId
+### `countryId`
 
 The record ID of the country this state belongs to (required).
 
-### cpEditUrl
+### `cpEditUrl`
 
 A URL to edit this state in the Control Panel.
 

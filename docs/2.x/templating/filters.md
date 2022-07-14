@@ -44,13 +44,13 @@ Groups the items of an array together based on common properties.
 {% set allEntriesByYear = allEntries|group('postDate.year') %}
 
 {% for year, entriesInYear in allEntriesByYear %}
-    <h2>{{ year }}</h2>
+  <h2>{{ year }}</h2>
 
-    <ul>
-        {% for entry in entriesInYear %}
-            <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
-        {% endfor %}
-    </ul>
+  <ul>
+    {% for entry in entriesInYear %}
+      <li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+    {% endfor %}
+  </ul>
 {% endfor %}
 ```
 
@@ -83,7 +83,7 @@ Returns the index of a passed-in value within an array, or the position of a pas
 
 {% set position = "team"|indexOf('i') %}
 {% if position != -1 %}
-    <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
+  <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
 {% endif %}
 ```
 
@@ -93,25 +93,25 @@ Returns an array containing only the values that are also in a passed-in array.
 
 ```twig
 {% set ownedIngredients = [
-    'vodka',
-    'gin',
-    'triple sec',
-    'tonic',
-    'grapefruit juice'
+  'vodka',
+  'gin',
+  'triple sec',
+  'tonic',
+  'grapefruit juice'
 ] %}
 
 {% set longIslandIcedTeaIngredients = [
-    'vodka',
-    'tequila',
-    'rum',
-    'gin',
-    'triple sec',
-    'sweet and sour mix',
-    'Coke'
+  'vodka',
+  'tequila',
+  'rum',
+  'gin',
+  'triple sec',
+  'sweet and sour mix',
+  'Coke'
 ] %}
 
 {% set ownedLongIslandIcedTeaIngredients =
-    ownedIngredients|intersect(longIslandIcedTeaIngredients)
+  ownedIngredients|intersect(longIslandIcedTeaIngredients)
 %}
 ```
 
@@ -166,7 +166,7 @@ Parses a string for [reference tags](../reference-tags.md).
 
 ```twig
 {% set content %}
-    {entry:blog/hello-world:link} was my first blog post. Pretty geeky, huh?
+  {entry:blog/hello-world:link} was my first blog post. Pretty geeky, huh?
 {% endset %}
 
 {{ content|parseRefs|raw }}
@@ -195,8 +195,8 @@ You can replace multiple things at once by passing in an object of search/replac
 {% set str = "Hello, FIRST LAST" %}
 
 {{ str|replace({
-    FIRST: currentUser.firstName,
-    LAST:  currentUser.lastName
+  FIRST: currentUser.firstName,
+  LAST:  currentUser.lastName
 }) }}
 ```
 

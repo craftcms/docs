@@ -4,16 +4,16 @@ You can access your site’s [categories](../categories.md) from your templates 
 
 ```twig
 <ul>
-    {% nav category in craft.categories.group('newsCategories') %}
-        <li>
-            <a href="{{ category.url }}">{{ category.title }}</a>
-            {% ifchildren %}
-                <ul>
-                    {% children %}
-                </ul>
-            {% endifchildren %}
-        </li>
-    {% endnav %}
+  {% nav category in craft.categories.group('newsCategories') %}
+    <li>
+      <a href="{{ category.url }}">{{ category.title }}</a>
+      {% ifchildren %}
+        <ul>
+          {% children %}
+        </ul>
+      {% endifchildren %}
+    </li>
+  {% endnav %}
 </ul>
 ```
 

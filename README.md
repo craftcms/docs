@@ -13,17 +13,16 @@ The only content not part of a docset is the homepage at `docs/README.md`.
 The pages served from `docs/` are treated like any other VuePress project, and the theme modifies resolvers so any displayed content is assumed to be part of an active set once selected.
 
 - `docs/`
-    - `.storybook/` has everything to configure the Storybook project, which depends on `postcss.config.js` and `tailwind.config.js`.
-    - `.vuepress/`
-        - `public/` for static files to be published with the build.
-        - `sets/` for our docset configurations.
-        - `theme/` all the JavaScript, Vue, PostCSS and Stylus for the custom VuePress theme.
-        - `anchor-prefixes.js`: configuration for abbreviated link shortcuts like `yii2:` and `craft3:`.
-        - `config.js` is the root VuePress configuration.
-        - `head.js` for customizing global `<head>` contents for published pages.
-        - `placeholders.js` for configuring special placeholders to be emphasized in code samples.
-    - `*/` docset markdown as you’d see it on its own in each legacy VuePress project.
-    - `README.md` the topmost homepage for all docsets.
+  - `.vuepress/`
+    - `public/` for static files to be published with the build.
+    - `sets/` for our docset configurations.
+    - `theme/` all the JavaScript, Vue, PostCSS and Stylus for the custom VuePress theme.
+    - `anchor-prefixes.js`: configuration for abbreviated link shortcuts like `yii2:` and `craft3:`.
+    - `config.js` is the root VuePress configuration.
+    - `head.js` for customizing global `<head>` contents for published pages.
+    - `placeholders.js` for configuring special placeholders to be emphasized in code samples.
+  - `*/` docset Markdown as you’d see it on its own in each legacy VuePress project.
+  - `README.md` the topmost homepage for all docsets.
 - `postcss.config.js`
 - `tailwind.config.js`
 
@@ -36,17 +35,9 @@ npm run docs:dev
 
 Quit the process and re-run if you’ve made changes to any `.js` config files.
 
-## Storybook
-
-You can examine some of the theme’s custom styles and components by running Storybook:
-
-```
-npm run storybook
-```
-
 ## Writing Tips
 
-Most stock VuePress markdown extensions are supported here. See the [Markdown Extensions](https://v1.vuepress.vuejs.org/guide/markdown.html) page to learn more about linking, frontmatter, and highlighting lines in code samples.
+Most stock VuePress Markdown extensions are supported here. See the [Markdown Extensions](https://v1.vuepress.vuejs.org/guide/markdown.html) page to learn more about linking, frontmatter, and highlighting lines in code samples.
 
 - Keep code block line lengths up to 85 characters long to avoid horizontal scrollbars.
 - Avoid placing highlighted code blocks `::: details` toggles because the performance is terrible in WebKit. Use our height-limited `<toggle-tip>` component instead.

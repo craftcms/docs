@@ -31,17 +31,17 @@ We can display the 10 most recent Clothing products by doing the following:
 ```twig
 {# Create a product query with the 'type' and 'limit' parameters #}
 {% set myProductQuery = craft.products()
-    .type('clothing')
-    .limit(10) %}
+  .type('clothing')
+  .limit(10) %}
 
 {# Fetch the products #}
 {% set products = myProductQuery.all() %}
 
 {# Display the products #}
 {% for product in products %}
-    <h1><a href="{{ product.url }}">{{ product.title }}</a></h1>
-    {{ product.summary }}
-    <a href="{{ product.url }}">Learn more</a>
+  <h1><a href="{{ product.url }}">{{ product.title }}</a></h1>
+  {{ product.summary }}
+  <a href="{{ product.url }}">Learn more</a>
 {% endfor %}
 ```
 
@@ -177,7 +177,7 @@ Narrows the query results to only products that are available for purchase.
 ::: code
 ```twig
 {# Fetch products that are available for purchase #}
-{% set products = {twig-function}
+{% set products = craft.products()
     .availableForPurchase()
     .all() %}
 ```
@@ -787,7 +787,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch disabled products #}
-{% set products = {twig-function}
+{% set products = craft.products()
     .status('disabled')
     .all() %}
 ```

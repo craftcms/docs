@@ -24,7 +24,7 @@ composer require craftcms/commerce:"^2.0"
 ```
 
 ::: tip
-Once installed via Composer don't forget to install the plugin in Craft itself via Settings → Plugins.
+Once installed via Composer don’t forget to install the plugin in Craft itself via Settings → Plugins.
 :::
 
 ## Example Templates

@@ -18,7 +18,7 @@ Example of getting the customers addresses:
 
 ```twig
 {% for address in user.customerInfo.addresses %}
-    {{ address.firstName}} <br>
+  {{ address.firstName }}<br>
 {% endfor %}
 ```
 
@@ -26,6 +26,6 @@ Example of getting the customers past orders:
 
 ```twig
 {% for order in user.customerInfo.orders %}
-    {{ order.number}} <br>
+  {{ order.number }}<br>
 {% endfor %}
 ```

@@ -1,0 +1,46 @@
+{
+  "filters": {
+    "comments": true
+  },
+  "rules": {
+    "apostrophe": true,
+    "no-todo": true,
+    "linkable-params": true,
+    "terminology": {
+      "defaultTerms": true,
+      "skip": ["Image", "Code"],
+      "terms": [
+        "Plugin Store",
+        "Craft ID",
+        ["(\\s)pdf", "PDF"],
+        ["(\\s)png", "PNG"],
+        ["(\\s)jpg", "JPG"],
+        ["(\\s)gif", "GIF"],
+        ["(\\s)html", "HTML"],
+        ["(\\s)css", "CSS"],
+        ["(\\s)url", "URL"],
+        ["grey", "gray"],
+        ["sub-folder", "subfolder"],
+        ["CP", "control panel"],
+        ["e-commerce", "ecommerce"],
+        ["web-?root", "web root"]
+      ],
+      "exclude": [
+        "front[- ]end(\\w*)",
+        "back[- ]end(\\w*)",
+        "command ?line",
+        "PDF",
+        "PNG",
+        "JPG",
+        "GIF",
+        "HTML",
+        "CSS",
+        "ID",
+        "Markdown",
+        "URL",
+        "walk[- ]through",
+        "web[- ]?site(s)?"
+      ]
+    }
+  }
+}

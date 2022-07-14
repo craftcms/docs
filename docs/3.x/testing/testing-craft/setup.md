@@ -13,7 +13,7 @@ This guide can be used for setting up tests for a Craft site & Modules/Plugins.
 
 ## Step 1: Install Codeception 3.1 or Higher
 
-Follow instruction 1 and 2 Codeception's [website](https://codeception.com/quickstart). Ensure you install
+Follow instructions 1 and 2 on Codeception’s [website](https://codeception.com/quickstart). Ensure you install
 `codeception/codeception` at `3.1`or higher.
 
 ::: tip
@@ -60,7 +60,7 @@ modules:
   config:
     \craft\test\Craft:
       configFile: "tests/_craft/config/test.php"
-      entryUrl: "https://your-site-url.test/index.php"
+      entryUrl: "http://my-project.test/index.php"
       projectConfig: {}
       migrations: []
       plugins: []
@@ -83,7 +83,7 @@ DB_USER="root"
 DB_PASSWORD=""
 DB_TABLE_PREFIX=""
 SECURITY_KEY=""
-PRIMARY_SITE_URL="https://your-site-url.test/" # Set this to the `entryUrl` param in the `codeception.yml` file.
+PRIMARY_SITE_URL="http://my-project.test/" # Set this to the `entryUrl` param in the `codeception.yml` file.
 ```
 
 ::: tip
@@ -186,7 +186,7 @@ in these `_bootstrap.php` files. i.e. if you want specific PHP code to run only 
 Codeception provides a generation script for various types of tests which can
 be found in their [documentation](https://codeception.com/docs/02-GettingStarted).
 
-For the purpose of this guide let's create one test manually. Create a `ExampleTest.php`
+For the purpose of this guide let’s create one test manually. Create a `ExampleTest.php`
 file in `tests/unit/` and add the following content.
 
 ```php
@@ -225,7 +225,7 @@ Run the following command:
 codecept run unit
 ```
 
-This will take a second to load as it has to install all of Craft's database tables.
+This will take a second to load as it has to install all of Craft’s database tables.
 Once completed it will say:
 
 ```bash

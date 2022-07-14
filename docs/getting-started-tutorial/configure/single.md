@@ -43,7 +43,7 @@ Now we can create the about page single:
 4. Enter `about` for **URI**, and `_singles/about` for **Template**.
 5. Save this section.
 
-<BrowserShot url="https://tutorial.nitro/admin/settings/sections/new" :link="false" caption="Settings for the new about single.">
+<BrowserShot url="https://tutorial.ddev.site/admin/settings/sections/new" :link="false" caption="Settings for the new about single.">
 <img src="../images/about-single.png" alt="Screenshot of new single fields" />
 </BrowserShot>
 
@@ -53,7 +53,7 @@ We’ll follow the same process we did for the blog to add fields to our new abo
 2. Create a “Content” tab and drag the “About Image” and “Post Content” fields to it. (Notice we’re re-using the “Post Content” field we created for blog entries.)
 3. Save the entry type.
 
-<BrowserShot url="https://tutorial.nitro/admin/settings/sections/2/entrytypes/2" :link="false" caption="The new about single’s field layout configuration.">
+<BrowserShot url="https://tutorial.ddev.site/admin/settings/sections/2/entrytypes/2" :link="false" caption="The new about single’s field layout configuration.">
 <img src="../images/about-field-layout.png" alt="Screenshot of about field type configuration" />
 </BrowserShot>
 

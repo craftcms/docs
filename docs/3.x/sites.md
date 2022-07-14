@@ -32,7 +32,7 @@ Site Groups allow you to organize your sites together by commonality, like langu
 
 Craft creates the first Site Group for you, named after the default site, and assigns the default site to that group.
 
-Similar to Field Groups, Site Groups are for organization only.
+In addition to organization, Site Groups can be used in a section’s Propagation Method. By selecting **Save entries to other sites in the same group**, Craft will only propagate that section’s new entries to sites in the same group.
 
 You can access the current site’s group information using `currentSite.group`:
 
@@ -59,17 +59,17 @@ In your templates, you can also access the language setting via `craft.app.langu
 
 ```twig
 {% if craft.app.language == 'de' %}
-    <p>Guten Tag!</p>
+  <p>Guten Tag!</p>
 {% endif %}
 ```
 
 Or as a way to automatically include the proper template for each language:
 
 ```twig
-{% include '_share/footer-' ~ craft.app.language %}
+{% include '_share/footer-' ~ craft.app.language ~ '.twig' %}
 ```
 
-where your template name would be, for example, `_share/footer-de`.
+where your template name would be, for example, `_share/footer-de.twig`.
 
 
 ### Primary Site
@@ -80,14 +80,18 @@ You can change the Primary site once you create additional sites. Craft will aut
 
 ### Site URL
 
-Each site has a Base URL, which Craft uses as the starting point when generating dynamic links to entries and other site content.
+Each site has a Base URL Craft uses to generate links to entries and other site content.
 
-Multiple sites can share the same host name, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different host names, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
+Multiple sites can share the same hostname, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different hostnames, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
 
-If you want to create a site with a different host name, you must configure your server to handle traffic for it. The host name can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
+If you want to create a site with a different hostname, you must configure your server to handle traffic for it. The hostname can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
 
 ::: tip
-If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ of the sites.
+If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ sites.
+:::
+
+::: tip
+If your primary site’s Base URL includes a subdirectory (i.e. `https://foo.dev/bar/`), you should set the [baseCpUrl](config3:baseCpUrl) config setting.
 :::
 
 ::: warning
@@ -101,17 +105,17 @@ In the settings for each Channel Section is an option to propagate entries in th
 
 When enabled, Craft will create the new entry in each site enabled for that section using the submitted content.
 
-If you would like the section's content to be separate then disable this option for that section.
+If you would like the section’s content to be separate then disable this option for that section.
 
 ## Setting Up a New Site
 
-In this short guide we'll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
+In this short guide we’ll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
 
 ### Step 1: Create the Site in Settings
 
 The first step is to create the new site in the Settings of your Craft installation.
 
-1. Go to **Settings** → **Sites** and choose **New Site**.
+1. Go to **Settings** → **Sites** and press **New Site**.
 2. Use the dropdown menu to choose the group your site should belong to. The group selection won’t have any impact on your site’s functionality.
 3. Give your site a name. Craft uses the site name in the control panel, and you can also display it in your templates using `{{ siteName }}`.
 4. Based on the Site name, Craft will generate a Site Handle. You can edit the Handle if you’d like. You will use the Site Handle to refer to this site in the templates.
@@ -172,7 +176,7 @@ Craft will allow you to update this field’s content in each entry on a per-lan
 
 ### Step 4: Update Your Templates
 
-If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site's handle, and place the templates in there.
+If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site’s handle, and place the templates in there.
 
 For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
 
@@ -187,7 +191,7 @@ Use `craft.app.language` to toggle specific parts of your templates, depending o
 
 ```twig
 {% if craft.app.language == 'de' %}
-    <p>I like bread and beer.</p>
+  <p>I like bread and beer.</p>
 {% endif %}
 ```
 
@@ -241,12 +245,12 @@ echo Craft::t('site', 'Contact us');
 
 Once you’ve prepped a message for translations, you need to supply the actual translation.
 
-To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create massages for (`site.php` for project messages, `app.php` to overwrite Craft's control panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
+To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create massages for (`site.php` for project messages, `app.php` to overwrite Craft’s control panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
 
 For example, if you want to translate your project’s messages into German, this is what your project’s directory structure should look like:
 
 ```treeview
-my-project.test/
+my-project/
 ├── config/
 ├── ...
 └── translations/
@@ -266,6 +270,10 @@ return [
 
 Now, when Craft is processing the message translation for a German site, “Contact us” will be replaced with  “Kontaktiere uns”.
 
+::: tip
+Craft uses `|t('site')` when showing your custom field names in the control panel, so you can use `site.php` translations for control panel users, too!
+:::
+
 #### Message Parameters
 
 Static messages can have [placeholder values](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-parameters). For example:
@@ -283,7 +291,7 @@ To replace the placeholder values with dynamic values when translating the messa
 ::: code
 ```twig
 <a href="/contact">{{ 'Welcome back, {name}'|t(params = {
-    name: currentUser.friendlyName,
+  name: currentUser.friendlyName,
 }) }}</a>
 ```
 ```php
@@ -292,3 +300,9 @@ echo Craft::t('site', 'Welcome back, {name}', [
 ]);
 ```
 :::
+
+## Further Reading
+
+- [The Power of t() in Craft 3](https://medium.com/@drifter/the-power-of-t-in-craft-3-b4bc3489edc4)
+- [Language switcher for Craft 3 by Jan D’Hollander](https://www.thebasement.be/language-switcher-for-craft-3/)
+- [Stack Exchange: Getting full native language name in Craft 3 language switcher](https://craftcms.stackexchange.com/questions/27116/getting-full-native-language-name-in-craft3-language-switcher)

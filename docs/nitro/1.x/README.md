@@ -1,3 +1,7 @@
+---
+description: Official documentation for Craft Nitro 1.
+---
+
 # About Craft Nitro
 
 Nitro is a speedy local development environment tuned for [Craft CMS](https://craftcms.com/), powered by [Multipass](https://multipass.run/).

@@ -20,10 +20,10 @@ Once you obtain a sufficient understanding of the basic concepts you should be a
 Every product in your store has a tax category. This allows the tax engine to select to apply the correct tax for the tax category.
 For example you may make the following tax categories:
 
-- GST
-- GSTFREE
+- `GST`
+- `GSTFREE`
 
-By default all items in your store would get the GST tax category, but at various times, an author may choose to mark a product as GST tax free.
+By default all items in your store would get the `GST` tax category, but at various times, an author may choose to mark a product as `GST` tax free.
 
 ## Tax Zone
 

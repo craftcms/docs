@@ -84,7 +84,7 @@ Alias of [getPrev](#getprev).
 
 ### `status`
 
-The user’s status ('active', 'locked', 'suspended', 'pending', 'archived').
+The user’s status (`'active'`, `'locked'`, `'suspended'`, `'pending'`, `'archived'`).
 
 ### `username`
 
@@ -101,7 +101,7 @@ Returns whether the user has a given permission, either directly or via one of i
 
 ```twig
 {% if currentUser.can('accessCp') %}
-    <a href="{{ cpUrl() }}">Control Panel</a>
+  <a href="{{ cpUrl() }}">Ccntrol Panel</a>
 {% endif %}
 ```
 
@@ -133,19 +133,19 @@ Here’s an example of the `getPrev()` and `getNext()` methods in action:
 
 ```twig
 {% set params = {
-    group: 'authors',
-    order: 'firstName, lastName'
+  group: 'authors',
+  order: 'firstName, lastName'
 } %}
 
 {% set prevAuthor = entry.getPrev(params) %}
 {% set nextAuthor = entry.getNext(params) %}
 
 {% if prevAuthor %}
-    <p>Previous: <a href="/authors/{{ prevAuthor.username }}">{{ prevAuthor.name }}</a></p>
+  <p>Previous: <a href="/authors/{{ prevAuthor.username }}">{{ prevAuthor.name }}</a></p>
 {% endif %}
 
 {% if nextAuthor %}
-    <p>Next: <a href="/authors/{{ nextAuthor.username }}">{{ nextAuthor.name }}</a></p>
+  <p>Next: <a href="/authors/{{ nextAuthor.username }}">{{ nextAuthor.name }}</a></p>
 {% endif %}
 ```
 
@@ -161,19 +161,19 @@ Here’s an example of the `getPrev()` and `getNext()` methods in action:
 
 ```twig
 {% set params = {
-    group: 'authors',
-    order: 'firstName, lastName'
+  group: 'authors',
+  order: 'firstName, lastName'
 } %}
 
 {% set prevAuthor = entry.getPrev(params) %}
 {% set nextAuthor = entry.getNext(params) %}
 
 {% if prevAuthor %}
-    <p>Previous: <a href="/authors/{{ prevAuthor.username }}">{{ prevAuthor.name }}</a></p>
+  <p>Previous: <a href="/authors/{{ prevAuthor.username }}">{{ prevAuthor.name }}</a></p>
 {% endif %}
 
 {% if nextAuthor %}
-    <p>Next: <a href="/authors/{{ nextAuthor.username }}">{{ nextAuthor.name }}</a></p>
+  <p>Next: <a href="/authors/{{ nextAuthor.username }}">{{ nextAuthor.name }}</a></p>
 {% endif %}
 ```
 

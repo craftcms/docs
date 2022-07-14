@@ -12,7 +12,7 @@ From **Utilities** → **Updates**, any available Commerce updates will be liste
 Always check the release notes for any changes that may impact your site. Any critical changes will be clearly identified at the top.
 :::
 
-You can then choose the “Update” button next to Commerce to update the plugin, or “Update All” to run all available updates.
+You can then choose the **Update** button next to Commerce to update the plugin, or **Update All** to run all available plugin updates.
 
 ## Updating from the Terminal
 

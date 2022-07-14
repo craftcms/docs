@@ -26,15 +26,15 @@ Updating your front end templates for Craft Commerce should be as simple as perf
 
 Find | Replace
 -----|--------
-craft.market. | craft.commerce.
-cart.shippingMethodId | cart.shippingMethodHandle
-\|marketCurrency | \|commerceCurrency
-name="action" value="market/cart/setEmail" | name="action" value="commerce/cart/updateCart"
-name="action" value="market/cartAddress/chooseAddresses" | name="action" value="commerce/cart/updateCart"
-name="action" value="market/cart/setShippingMethod" | name="action" value="commerce/cart/updateCart"
-name="action" value="market/cart/add" | name="action" value="commerce/cart/updateCart"
-name="action" value="market/cart/remove" | name="action" value="commerce/cart/removeLineItem"
-name="action" value="market/cart/removeAll" | name="action" value="commerce/cart/removeAllLineItems"
-name="action" value="market/cart/applyCoupon" | name="action" value="commerce/cart/updateCart"
+`craft.market.` | `craft.commerce.`
+`cart.shippingMethodId` | `cart.shippingMethodHandle`
+`|marketCurrency` | `|commerceCurrency`
+`name="action" value="market/cart/setEmail"` | `name="action" value="commerce/cart/updateCart"`
+`name="action" value="market/cartAddress/chooseAddresses"` | `name="action" value="commerce/cart/updateCart"`
+`name="action" value="market/cart/setShippingMethod"` | `name="action" value="commerce/cart/updateCart"`
+`name="action" value="market/cart/add"` | `name="action" value="commerce/cart/updateCart"`
+`name="action" value="market/cart/remove"` | `name="action" value="commerce/cart/removeLineItem"`
+`name="action" value="market/cart/removeAll"` | `name="action" value="commerce/cart/removeAllLineItems"`
+`name="action" value="market/cart/applyCoupon"` | `name="action" value="commerce/cart/updateCart"`
 
 The `product.implicitVariant`, in all cases, has been replaced with a `product.defaultVariant`, but there is no longer the need to check if the product type has multiple variants before accessing it. For non variant products, the first variant is always the default. For products with multiple variants, the variant selected with the Default toggle is the `defaultVariant`.

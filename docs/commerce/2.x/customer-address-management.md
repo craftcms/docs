@@ -20,7 +20,7 @@ See <commerce2:craft\commerce\models\Customer> to learn about the methods availa
 
 See <commerce2:craft\commerce\models\Address> to learn about the fields available on an address.
 
-## Get a specific address belonging to the current customer by its id
+## Get a specific address belonging to the current customer by its ID
 
 ```twig
 {% set address = craft.commerce.customer.getAddressById(id) %}
@@ -32,7 +32,7 @@ See <commerce2:craft\commerce\models\Address> to learn about the fields availabl
 <form method="post">
   <input type="hidden" name="action" value="commerce/customer-addresses/save">
   {{ redirectInput('commerce/customer/addresses') }}
-	{{ csrfInput() }}
+  {{ csrfInput() }}
   <input type="text" name="address[firstName]" value="{{ address is defined ? address.firstName : '' }}">
   <input type="text" name="address[lastName]" value="{{ address is defined ? address.lastName : '' }}">
   ...
@@ -42,16 +42,16 @@ See <commerce2:craft\commerce\models\Address> to learn about the fields availabl
 
 Including an `address[id]` param with a valid address ID that belongs to the current customer will update that address.
 
-## Deleting a customer's address
+## Deleting a customer’s address
 
 ```twig
 <form method="POST">
   <input type="hidden" name="action" value="commerce/customer-addresses/delete">
   {{ redirectInput('commerce/customer/addresses') }}
-	{{ csrfInput() }}
+  {{ csrfInput() }}
   <input type="hidden" name="id" value="{{ address.id }}"/>
   <input type="submit" value="delete"/>
 </form>
 ```
 
-Deleting an address that is currently applied as the billing or shipping address of the current customer's cart will result in the addresses on the cart being removed.
+Deleting an address that is currently applied as the billing or shipping address of the current customer’s cart will result in the addresses on the cart being removed.

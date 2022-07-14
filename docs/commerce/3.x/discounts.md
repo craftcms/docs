@@ -42,7 +42,7 @@ The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/
 If the expression is calculated as `true` then the discount matches the order. If not, the condition disqualifies the order from the discount. A blank condition is the same as
 a `true` expression.
 
-The condition formula can use an `order` variable, which for safety is available as an array and not the order element. This prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
+The condition formula can use an `order` variable, which for safety is an array and not the order element—it’s the same representation of the order you’d see if you exported it from the order index page. This data-only format prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
 
 ::: tip
 The condition formula’s `order` array is generated with:
@@ -53,9 +53,6 @@ $order->toArray(
 );
 ```
 :::
-
-Inside the condition formula you have access to the `order` variable. This is a data only representation of the order.
-The variable contains the same data you’d see exported from the order index page.
 
 Here are some examples of an discount’s condition formula:
 
@@ -93,9 +90,14 @@ This would be a way of giving this discount to anyone that’s chosen a specific
 For safety, only a serialized representation of order attributes is available; you can’t call custom field methods from a condition formula.
 :::
 
-### User Groups
+### Users
 
-Limit the discount to selected user groups the customer must belong to when checking out.
+Limit the discount to selected user groups the customer must belong to when checking out. There are four options, where all but the first require that you specify one or more applicable groups:
+
+- **All users**: discount applies to all users regardless of group membership.
+- **Users in all of these groups:**: discount applies to customers belonging to each of the specified groups.
+- **Users in any of these groups:**: discount applies to customers belonging to any one of the specified groups.
+- **Users in none of these groups:**: discount applies to customers not belonging to any of the specified groups.
 
 ### Product Variant
 
@@ -240,7 +242,7 @@ Returns an array of all enabled discounts set up in the system active for the cu
 
 ```twig
 {% for discount in craft.commerce.discounts.allActiveDiscounts %}
-    {{ discount.name }} - {{ discount.description }}
+  {{ discount.name }} - {{ discount.description }}
 {% endfor %}
 ```
 
@@ -251,6 +253,6 @@ Returns a [Discount](commerce3:craft\commerce\models\Discount) model that matche
 ```twig
 {% set discount = craft.commerce.discounts.getDiscountByCode('HALFOFF') %}
 {% if discount %}
-    {{ discount.name }} - {{ discount.description }}
+  {{ discount.name }} - {{ discount.description }}
 {% endif %}
 ```

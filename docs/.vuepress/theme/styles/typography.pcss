@@ -66,16 +66,28 @@
 
   h5 {
     @apply text-base;
-    
+
     code {
       @apply font-bold;
     }
   }
 
-  p {
+  p,
+  li {
     a[target="_blank"] {
-      @apply whitespace-no-wrap;
+      span {
+        @apply inline-block;
+
+        .icon.outbound {
+          width: 14px;
+          height: 14px;
+        }
+      }
     }
+  }
+
+  .command-subheading {
+    @apply text-base mb-2;
   }
 
   a:hover {
@@ -123,19 +135,16 @@
   }
 
   dl {
-    @apply flex py-5 px-6 leading-relaxed rounded;
-    flex-flow: row wrap;
-    background: #f1f5f8;
+    @apply py-5 px-6 rounded;
+    background: var(--dl-color);
 
     dt,
     dd {
       @apply mt-1 mx-0 mb-0;
-      word-wrap: break-word;
     }
 
     dt {
-      @apply pr-4 box-border text-right justify-end font-medium;
-      width: 9rem;
+      @apply pr-4 box-border font-medium;
 
       code {
         @apply font-semibold bg-transparent px-0;
@@ -143,15 +152,50 @@
     }
 
     dd {
-      width: calc(100% - 9rem);
+      @apply pl-8;
 
       code {
         @apply bg-transparent px-0;
+      }
+    
+      p:first-child {
+        @apply mt-0;
+      }
+
+      .custom-block p:first-child {
+        @apply mt-4;
       }
     }
 
     code {
       background: #dadfe3;
+    }
+  }
+
+  .compact dl {
+    @apply flex leading-relaxed;
+    flex-flow: row wrap;
+    dt,
+    dd {
+      word-wrap: break-word;
+    }
+
+    dt {
+      @apply pr-4 box-border text-right justify-end font-medium;
+      width: 9rem;
+    }
+
+    dd {
+      width: calc(100% - 9rem);
+      @apply pl-0;
+
+      code {
+        @apply bg-transparent px-0;
+      }
+
+      p:first-child {
+        @apply mt-0;
+      }
     }
   }
 
@@ -229,7 +273,7 @@
   }
 
   div.table {
-    @apply block my-4 mx-0 overflow-x-auto max-w-full;
+    @apply block relative my-4 mx-0 overflow-x-auto max-w-full;
     border: 1px solid #dfe2e5;
 
     table {

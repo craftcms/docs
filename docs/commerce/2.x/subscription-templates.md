@@ -14,30 +14,29 @@ For starting a subscription, the following example is a good start. A thing to n
 {% set plans = craft.commerce.getPlans().getAllPlans() %}
 
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/subscriptions/subscribe">
+  {{ csrfInput() }}
+  <input type="hidden" name="action" value="commerce/subscriptions/subscribe">
 
-    {{ csrfInput() }}
+  <div>
+    <select name="planUid" id="planSelect">
+      {% for plan in plans %}
+        <option value="{{ plan.uid|hash }}">{{ plan.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
 
-    <div>
-        <select name="planUid" id="planSelect">
-            {% for plan in plans %}
-                <option value="{{ plan.uid|hash }}">{{ plan.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
+  {# Display only if the user does not have a payment soure saved #}
+  {# {{ plan.getGateway().getPaymentFormHtml({})|raw }} #}
 
-    {# Display only if the user does not have a payment soure saved #}
-    {# {{ plan.getGateway().getPaymentFormHtml({})|raw }} #}
-
-    <button type="submit">{{ "Subscribe"|t('commerce') }}</button>
+  <button type="submit">{{ "Subscribe"|t('commerce') }}</button>
 </form>
 ```
 
 There are several things to note:
 
-* Subscribing a user to a plan requires that the user have a stored payment source. If a user does not have one, you can add it by displaying the payment form.
-* If you wish to set subscription parameters, such as amount of trial days, it is strongly recommended to make use of the [subscription events](events.md#the-beforecreatesubscription-event) instead of POST data.
-* When using Stripe, it is not possible to choose which payment source to use, if multiple are saved. Instead, Stripe will use the default payment source associated with that customer.
+- Subscribing a user to a plan requires that the user have a stored payment source. If a user does not have one, you can add it by displaying the payment form.
+- If you wish to set subscription parameters, such as amount of trial days, it is strongly recommended to make use of the [subscription events](events.md#the-beforecreatesubscription-event) instead of POST data.
+- When using Stripe, it is not possible to choose which payment source to use, if multiple are saved. Instead, Stripe will use the default payment source associated with that customer.
 
 ## Canceling the subscription
 
@@ -45,14 +44,14 @@ To cancel a subscription you can use the following template that assumes that th
 
 ```twig
 <form method="POST">
-    <input type="hidden" name="action" value="commerce/subscriptions/cancel">
-    <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}" />
-    {{ redirectInput('shop/services') }}
-    {{ csrfInput() }}
+  {{ csrfInput() }}
+  <input type="hidden" name="action" value="commerce/subscriptions/cancel">
+  <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}" />
+  {{ redirectInput('shop/services') }}
 
-    {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
+  {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
 
-    <button type="submit">{{ "Unsubscribe"|t('commerce') }}</button>
+  <button type="submit">{{ "Unsubscribe"|t('commerce') }}</button>
 </form>
 ```
 
@@ -64,17 +63,17 @@ To switch a subscription plan you can use the following template that assumes th
 
 ```twig
 {% for plan in subscription.alternativePlans %}
-    <div><strong>Switch to {{ plan.name }}</strong></div>
-    <form method="POST">
-        <input type="hidden" name="action" value="commerce/subscriptions/switch">
-        <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
-        <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
-        {{ csrfInput() }}
+  <div><strong>Switch to {{ plan.name }}</strong></div>
+  <form method="POST">
+    {{ csrfInput() }}
+    <input type="hidden" name="action" value="commerce/subscriptions/switch">
+    <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
+    <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
 
-        {{ plan.gateway.getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
-        <button type="submit" class="button link">{{ "Switch"|t('commerce') }}</button>
-    </form>
-    <hr />
+    {{ plan.gateway.getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
+    <button type="submit" class="button link">{{ "Switch"|t('commerce') }}</button>
+  </form>
+  <hr />
 {% endfor %}
 ```
 
@@ -88,12 +87,12 @@ Note, that not all canceled subscriptions might be available for reactivation, s
 
 ```twig
 {% if subscription.canReactivate() %}
-    <form method="POST">
-        <input type="hidden" name="action" value="commerce/subscriptions/reactivate">
-        <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
-        {{ csrfInput() }}
+  <form method="POST">
+    {{ csrfInput() }}
+    <input type="hidden" name="action" value="commerce/subscriptions/reactivate">
+    <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">
 
-        <button type="submit" class="button link">{{ "Reactivate"|t('commerce') }}</button>
-    </form>
+    <button type="submit" class="button link">{{ "Reactivate"|t('commerce') }}</button>
+  </form>
 {% endif %}
 ```

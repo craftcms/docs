@@ -27,7 +27,9 @@
           v-if="!$activeSet && shouldShowSetTitle(s, i)"
           class="suggestion-doc-set"
           :class="{ first: shouldShowSetTitle(s, i) && i === 0 }"
-        >{{ s.docSetTitle }}</div>
+        >
+          {{ s.docSetTitle }}
+        </div>
         <div
           class="suggestion"
           :class="{
@@ -91,7 +93,7 @@ export default {
       focusIndex: 0,
       maxSuggestions: 10,
       suggestions: null,
-      hotkeys: ["s", "/"],
+      hotkeys: ["/"]
     };
   },
   computed: {
@@ -101,7 +103,7 @@ export default {
         .trim()
         .toLowerCase()
         .split(/[^\p{L}]+/iu)
-        .filter((t) => t);
+        .filter(t => t);
       return result;
     },
     showSuggestions() {
@@ -121,12 +123,12 @@ export default {
         this.$site.themeConfig.searchPlaceholder ||
         ""
       );
-    },
+    }
   },
   watch: {
     query() {
       this.getSuggestions();
-    },
+    }
   },
   mounted() {
     searchService.buildIndex(this.$site.pages);
@@ -140,7 +142,7 @@ export default {
       if (!this.queryTerms.length) return str;
       // safely use HTML lines in result
       str = this.escapeHtml(str.trim());
-      return str.replace(new RegExp(this.query, "gi"), (match) => {
+      return str.replace(new RegExp(this.query, "gi"), match => {
         return `<mark>${match}</mark>`;
       });
     },
@@ -235,8 +237,8 @@ export default {
         !previousSuggestion ||
         previousSuggestion.docSetTitle !== suggestion.docSetTitle
       );
-    },
-  },
+    }
+  }
 };
 </script>
 

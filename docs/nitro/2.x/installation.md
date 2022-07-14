@@ -8,6 +8,10 @@
     bash <(curl -sLS http://installer.getnitro.sh)
     ````
 
+::: warning
+Nitro does not support MySQL for Apple Silicon, but you can use MariaDB interchangeably.
+:::
+
 ### macOS via Brew
 
 You can alternatively install Nitro using the [Homebrew](https://brew.sh) package manager if you have it installed.
@@ -89,7 +93,6 @@ Read [Developing using Nitro and WSL2](windows.md).
     ```
 10. From the WSL terminal, run `bash <(curl -sLS http://installer.getnitro.sh)`.
 
-
 ### Windows Manual Installation
 
 If you run into issues with the shell script installer, you can manually install Nitro:
@@ -99,6 +102,17 @@ If you run into issues with the shell script installer, you can manually install
 3. If `/usr/local/bin` does not exist for you, create it with `sudo mkdir -p -m 775 /usr/local/bin && sudo chown $USER: /usr/local/bin`.
 4. Move the binary into your path with `sudo mv ./nitro /usr/local/bin`.
 5. Run `nitro init` and follow the prompts to initialize the Nitro environment.
+
+## Troubleshooting
+
+### I’ve installed Nitro but can’t access any sites in my browser.
+
+Nitro should establish [the Docker containers it needs](how-nitro-works.md#architecture) and either edit or prompt for your help editing your machine’s hosts file so custom local domain names can be routed to those containers.
+
+If you can’t access any sites you’ve created...
+
+1. Make sure your machine’s hosts file includes the `# <nitro>` + `# </nitro>` lines with custom domains you’ve specified.
+2. Use the [`nitro ls`](commands.md#ls) command or Docker Desktop to make sure you’ve got a container called `nitro-proxy` and that it’s running. If it’s *not*, you may have something already running on a port it expects to use, which you can get around by [customizing Nitro’s default ports](customizing.md#how-to-customize-nitro-s-defaults).
 
 ## Uninstalling Nitro
 

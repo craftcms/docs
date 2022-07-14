@@ -28,9 +28,9 @@ You can also access the option’s value in conditionals:
 
 ```twig
 {% if entry.positionSelectFieldHandle in ['left', 'right'] %}
-    {# ... #}
+  {# ... #}
 {% elseif entry.positionSelectFieldHandle == 'center' %}
-    {# ... #}
+  {# ... #}
 {% endif %}
 ```
 
@@ -38,11 +38,11 @@ Or you can feed it into a [switch](templating/switch.md) tag:
 
 ```twig
 {% switch entry.positionSelectFieldHandle %}
-    {% case 'left' %}
-        {# ... #}
-    {% case 'right' %}
-        {# ... #}
-    {% case 'center' %}
-        {# ... #}
+  {% case 'left' %}
+    {# ... #}
+  {% case 'right' %}
+    {# ... #}
+  {% case 'center' %}
+    {# ... #}
 {% endswitch %}
 ```

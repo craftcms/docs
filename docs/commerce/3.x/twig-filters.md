@@ -23,27 +23,27 @@ This can be used as a drop-in replacement for [Craft’s `|currency` filter](htt
 {{ 10|commerceCurrency(baseCurrency) }} {# Output: $10.00 #}
 
 {{ order.outstandingBalance|commerceCurrency(
-    paymentCurrency,
-    convert=true
+  paymentCurrency,
+  convert=true
 ) }} {# Output: A$13.00 #}
 
 {{ order.outstandingBalance|commerceCurrency(
-    paymentCurrency,
-    convert=true,
-    format=false
+  paymentCurrency,
+  convert=true,
+  format=false
 ) }} {# Output: 13 #}
 
 {{ order.outstandingBalance|commerceCurrency(
-    paymentCurrency,
-    convert=true,
-    format=true
+  paymentCurrency,
+  convert=true,
+  format=true
 ) }} {# Output: A$13.00 #}
 
 {{ order.outstandingBalance|commerceCurrency(
-    paymentCurrency,
-    convert=true,
-    format=true,
-    stripZeros=true
+  paymentCurrency,
+  convert=true,
+  format=true,
+  stripZeros=true
 ) }} {# Output: A$13 #}
 ```
 
@@ -51,9 +51,9 @@ You might want to show the order’s price in all available payment currencies:
 
 ```twig
 {% for currency in craft.commerce.paymentCurrencies %}
-    Total in {{ currency.iso|upper }}: {{ cart.outstandingBalance|commerceCurrency(
-        currency,
-        convert=true
-    ) }}<br>
+  Total in {{ currency.iso|upper }}: {{ cart.outstandingBalance|commerceCurrency(
+    currency,
+    convert=true
+  ) }}<br>
 {% endfor %}
 ```

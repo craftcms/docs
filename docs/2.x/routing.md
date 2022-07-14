@@ -8,11 +8,11 @@ Here is an outline of what that entails:
 
    It’s important to keep in mind that Craft doesn’t actually get involved for *every* request that touches your server – only requests that go to your `index.php` file.
 
-   The .htaccess file that [comes with Craft](https://craftcms.com/support/remove-index.php) will redirect all would-be 404 requests over to `index.php` behind the scenes, which is why Craft is able to respond to URLs that don’t point to any actual folder/file in your web root. But if you point your browser directly at a file that *does* exist (such as a front-end image URL), Apache is going to serve that file directly. Craft won’t be summoned for that.
+   The .htaccess file that [comes with Craft](https://craftcms.com/knowledge-base/removing-index-php-from-urls) will redirect all would-be 404 requests over to `index.php` behind the scenes, which is why Craft is able to respond to URLs that don’t point to any actual folder/file in your web root. But if you point your browser directly at a file that *does* exist (such as a front-end image URL), Apache is going to serve that file directly. Craft won’t be summoned for that.
 
 1. **Is it a resource request?**
 
-   Resource request URIs begin with `cpresources/` (or whatever your <config2:resourceTrigger> config setting is set to). They are used to serve CP resources, user photos, etc..
+   Resource request URIs begin with `cpresources/` (or whatever your <config2:resourceTrigger> config setting is set to). They are used to serve control panel resources, user photos, etc..
 
 2. **Is it an action request?**
 
@@ -62,7 +62,7 @@ So if you want to match URIs that look like `blog/archive/2013`, you would type 
 Your URI should **not** begin with a slash (/).
 :::
 
-After defining your URI pattern and entering a template path, click the ‘Save’ button. The modal will close, revealing your new route on the page. Now when you point your browser to `http://example.com/blog/archive/2013`, it will match your new route, and the specified template will get loaded. The value of the ‘year’ token will also be available to the template as a variable called “year”.
+After defining your URI pattern and entering a template path, click the ‘Save’ button. The modal will close, revealing your new route on the page. Now when you point your browser to `http://my-project.tld/blog/archive/2013`, it will match your new route, and the specified template will get loaded. The value of the ‘year’ token will also be available to the template as a variable called “year”.
 
 
 ### Available Tokens
@@ -111,7 +111,7 @@ If your route contains any subpatterns, a ‘matches’ array will be passed to 
 'news/(\d{4})/(\d{2})' => 'news/_archive',
 ```
 
-…if you access `http://example.com/news/2014/04`, your `news/_archive.html` template will get loaded with a `matches` variable set to this:
+…if you access `http://my-project.tld/news/2014/04`, your `news/_archive.html` template will get loaded with a `matches` variable set to this:
 
 ```php
 array(
@@ -127,7 +127,7 @@ If you specify any named subpatterns, then those matches will also get their own
 'news/(?P<year>\d{4})/(?P<month>\d{2})' => 'news/_archive',
 ```
 
-…if you access `http://example.com/news/2014/04`, your `news/_archive.html` template will get loaded with `year` and `month` variables set to `2014` and `04`.
+…if you access `http://my-project.tld/news/2014/04`, your `news/_archive.html` template will get loaded with `year` and `month` variables set to `2014` and `04`.
 
 ### Routing to Controller Actions
 

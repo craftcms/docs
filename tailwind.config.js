@@ -14,6 +14,7 @@ module.exports = {
       colors: {
         slate: "#2d3748",
         soft: "#f1f5fd",
+        "soft-gray": "#f1f5f8",
         softer: "#fafbfe",
         blue: "#4a7cf6",
         red: "#da5a47",

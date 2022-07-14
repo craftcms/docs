@@ -1,3 +1,7 @@
+---
+description: Official documentation for Craft Nitro 2.
+---
+
 # About Craft Nitro
 
 Nitro is a console-based tool for managing a Docker-based local PHP development environment. \

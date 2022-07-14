@@ -30,9 +30,9 @@ Returns an array of <commerce3:craft\commerce\models\Country> objects representi
 {% set countries = craft.commerce.countries.allEnabledCountries %}
 <select>
 {% for country in countries %}
-    <option value="{{ country.id }}">
-        {{- country.name -}}
-    </option>
+  <option value="{{ country.id }}">
+    {{- country.name -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -59,9 +59,9 @@ Data returned as `[32:'Australia', 72:'United States']`.
 {% set countries = craft.commerce.countries.allEnabledCountriesAsList %}
 <select>
 {% for id, countryName in countries %}
-    <option value="{{ id }}">
-        {{- countryName -}}
-    </option>
+  <option value="{{ id }}">
+    {{- countryName -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -86,9 +86,9 @@ Returns an array of <commerce3:craft\commerce\models\Country> objects representi
 {% set countries = craft.commerce.countries.allCountries %}
 <select name="country">
 {% for country in countries %}
-    <option value="{{ country.id }}">
-        {{- country.name -}}
-    </option>
+  <option value="{{ country.id }}">
+    {{- country.name -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -140,12 +140,12 @@ Returns an array of <commerce3:craft\commerce\models\Country> objects representi
 ::: code
 ```twig
 {% set countries = craft.commerce.countries
-    .countriesByShippingZoneId(shippingZoneId) %}
+  .countriesByShippingZoneId(shippingZoneId) %}
 <select name="country">
 {% for country in countries %}
-    <option value="{{ country.id }}">
-        {{- country.name -}}
-    </option>
+  <option value="{{ country.id }}">
+    {{- country.name -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -170,9 +170,9 @@ Returns an array of <commerce3:craft\commerce\models\Country> objects representi
 {% set countries = craft.commerce.countries.countriesByTaxZoneId(taxZoneId) %}
 <select name="country">
 {% for country in countries %}
-    <option value="{{ country.id }}">
-        {{- country.name -}}
-    </option>
+  <option value="{{ country.id }}">
+    {{- country.name -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -250,9 +250,9 @@ Returns an array of <commerce3:craft\commerce\models\State> objects representing
 ```twig
 <select>
 {% for state in craft.commerce.states.allEnabledStates %}
-    <option value="{{ state.id }}">
-        {{- state.name -}}
-    </option>
+  <option value="{{ state.id }}">
+    {{- state.name -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -278,9 +278,9 @@ Data returned as `[1:'Australian Capital Territory', 2:'New South Wales']`.
 {% set states = craft.commerce.states.allEnabledStatesAsList %}
 <select>
 {% for id, stateName in states %}
-    <option value="{{ id }}">
-        {{- stateName -}}
-    </option>
+  <option value="{{ id }}">
+    {{- stateName -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -305,13 +305,13 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 ::: code
 ```twig
 {% set statesByCountryId = craft.commerce.states
-    .allEnabledStatesAsListGroupedByCountryId %}
+  .allEnabledStatesAsListGroupedByCountryId %}
 <select>
 {% for countryId, states in statesByCountryId %}
-    {% set country = craft.commerce.countries.getCountryById(countryId) %}
-    <optgroup label="{{ country.name }}">
+  {% set country = craft.commerce.countries.getCountryById(countryId) %}
+  <optgroup label="{{ country.name }}">
     {% for stateId, stateName in states %}
-        <option value="{{ stateId }}">{{ stateName }}</option>
+      <option value="{{ stateId }}">{{ stateName }}</option>
     {% endfor %}
   </optgroup>
 {% endfor %}
@@ -342,9 +342,9 @@ Returns an array of <commerce3:craft\commerce\models\State> objects representing
 ```twig
 <select>
 {% for state in craft.commerce.states.allStates %}
-    <option value="{{ state.id }}">
-        {{- state.name -}}
-    </option>
+  <option value="{{ state.id }}">
+    {{- state.name -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -370,9 +370,9 @@ Data returned as `[1:'Australian Capital Territory', 2:'New South Wales']`.
 {% set states = craft.commerce.states.allStatesAsList %}
 <select>
 {% for id, stateName in states %}
-    <option value="{{ id }}">
-        {{- stateName -}}
-    </option>
+  <option value="{{ id }}">
+    {{- stateName -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -396,9 +396,9 @@ Returns an array of <commerce3:craft\commerce\models\State> objects representing
 ```twig
 <select>
 {% for state in craft.commerce.states.statesByCountryId(countryId) %}
-    <option value="{{ state.id }}">
-        {{- state.name -}}
-    </option>
+  <option value="{{ state.id }}">
+    {{- state.name -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -421,9 +421,9 @@ Returns an array of <commerce3:craft\commerce\models\State> objects representing
 ```twig
 <select>
 {% for state in craft.commerce.states.statesByShippingZoneId(shippingZoneId) %}
-    <option value="{{ state.id }}">
-        {{- state.name -}}
-    </option>
+  <option value="{{ state.id }}">
+    {{- state.name -}}
+  </option>
 {% endfor %}
 </select>
 ```
@@ -446,9 +446,9 @@ Returns an array of <commerce3:craft\commerce\models\State> objects representing
 ```twig
 <select>
 {% for state in craft.commerce.states.statesByTaxZoneId(taxZoneId) %}
-    <option value="{{ state.id }}">
-        {{- state.name -}}
-    </option>
+  <option value="{{ state.id }}">
+    {{- state.name -}}
+  </option>
 {% endfor %}
 </select>
 ```

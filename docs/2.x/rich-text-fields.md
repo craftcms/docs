@@ -14,7 +14,7 @@ Rich Text fields have the following settings:
 
 ## Redactor Configs
 
-Redactor configs are .json files stored in craft/config/redactor, which contain Javascript objects that define [Redactor config settings](https://imperavi.com/redactor/docs/settings/). Their contents get passed directly into the `redactor()` jQuery plugin, so you can paste the examples in there verbatim.
+Redactor configs are .json files stored in craft/config/redactor, which contain JavaScript objects that define [Redactor config settings](https://imperavi.com/redactor/docs/settings/). Their contents get passed directly into the `redactor()` jQuery plugin, so you can paste the examples in there verbatim.
 
 Craft comes with two Redactor configs by default:
 
@@ -22,7 +22,7 @@ Craft comes with two Redactor configs by default:
 
 ```javascript
 {
-    "buttons": ["bold","italic"]
+  "buttons": ["bold","italic"]
 }
 ```
 
@@ -30,8 +30,8 @@ Craft comes with two Redactor configs by default:
 
 ```javascript
 {
-    "buttons": ["format","bold","italic","lists","link","file","horizontalrule"],
-    "plugins": ["source","fullscreen"]
+  "buttons": ["format","bold","italic","lists","link","file","horizontalrule"],
+  "plugins": ["source","fullscreen"]
 }
 ```
 
@@ -59,8 +59,8 @@ Now open up the config’s JSON file, located in `craft/config/redactor/`, and a
 
 ```javascript
 {
-    "buttons": [/* ... */],
-    "plugins": ["pagebreak"]
+  "buttons": [/* ... */],
+  "plugins": ["pagebreak"]
 }
 ```
 
@@ -74,9 +74,9 @@ Returns an array of all pages’ content.
 
 ```twig
 {% for page in entry.richTextFieldHandle.getPages() %}
-    <div class="page">
-        {{ page }}
-    </div>
+  <div class="page">
+    {{ page }}
+  </div>
 {% endfor %}
 ```
 
@@ -86,15 +86,15 @@ Returns the contents of a specific page.
 
 ```twig
 {% for entry in craft.entries.section('blog') %}
-    <article>
-        <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
+  <article>
+    <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
 
-        {{ entry.richTextFieldHandle.getPage(1) }}
+    {{ entry.richTextFieldHandle.getPage(1) }}
 
-        {% if entry.richTextFieldHandle.getTotalPages() > 1 %}
-            <a href="{{ entry.url }}">Continue reading…</a>
-        {% endif %}
-    </article>
+    {% if entry.richTextFieldHandle.getTotalPages() > 1 %}
+      <a href="{{ entry.url }}">Continue reading…</a>
+    {% endif %}
+  </article>
 {% endfor %}
 ```
 
@@ -104,14 +104,14 @@ Returns the total number of pages for the field.
 
 ```twig
 {% for entry in craft.entries.section('blog') %}
-    <article>
-        <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
+  <article>
+    <h1><a href="{{ entry.url }}">{{ entry.title }}</a></h1>
 
-        {{ entry.richTextFieldHandle.getPage(1) }}
+    {{ entry.richTextFieldHandle.getPage(1) }}
 
-        {% if entry.richTextFieldHandle.getTotalPages() > 1 %}
-            <a href="{{ entry.url }}">Continue reading…</a>
-        {% endif %}
-    </article>
+    {% if entry.richTextFieldHandle.getTotalPages() > 1 %}
+      <a href="{{ entry.url }}">Continue reading…</a>
+    {% endif %}
+  </article>
 {% endfor %}
 ```

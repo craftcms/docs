@@ -38,9 +38,9 @@ That will give you an [ElementCriteriaModel](templating/elementcriteriamodel.md)
 
 ```twig
 {% set tags = craft.tags({
-    relatedTo: { sourceElement: entry, field: "tagsFieldHandle" },
-    order:     "sortOrder",
-    limit:     null
+  relatedTo: { sourceElement: entry, field: "tagsFieldHandle" },
+  order:     "sortOrder",
+  limit:     null
 }) %}
 ```
 
@@ -52,7 +52,7 @@ To check if your Tags field has any selected tags, you can use the `length` filt
 
 ```twig
 {% if entry.tagsFieldHandle | length %}
-    ...
+  ...
 {% endif %}
 ```
 
@@ -60,7 +60,7 @@ To loop through the selected tags, you can treat the field like an array:
 
 ```twig
 {% for tag in entry.tagsFieldHandle %}
-    ...
+  ...
 {% endfor %}
 ```
 
@@ -71,10 +71,10 @@ Rather than typing “`entry.tagsFieldHandle`” every time, you can call it onc
 
 {% if tags | length %}
 
-    <h3>Some great tags</h3>
-    {% for tag in tags %}
-        ...
-    {% endfor %}
+  <h3>Some great tags</h3>
+  {% for tag in tags %}
+    ...
+  {% endfor %}
 
 {% endif %}
 ```
@@ -91,7 +91,7 @@ If your Tags field is only meant to have a single tag selected, remember that ca
 {% set tag = entry.myTagsField.first() %}
 
 {% if tag %}
-    ...
+  ...
 {% endif %}
 ```
 

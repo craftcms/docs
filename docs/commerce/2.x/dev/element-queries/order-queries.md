@@ -34,14 +34,14 @@ We can display an order with a given order number by doing the following:
 
 {# Create an order query with the 'number' parameter #}
 {% set myOrderQuery = craft.orders()
-    .number(orderNumber) %}
+  .number(orderNumber) %}
 
 {# Fetch the order #}
 {% set order = myOrderQuery.one() %}
 
 {# Make sure it exists #}
 {% if not order %}
-    {% exit 404 %}
+  {% exit 404 %}
 {% endif %}
 
 {# Display the order #}
@@ -496,7 +496,7 @@ Narrows the query results to only carts that have at least one transaction.
 ::: code
 ```twig
 {# Fetch carts that have attempted payments #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .hasTransactions()
     .all() %}
 ```
@@ -598,7 +598,7 @@ Narrows the query results to only orders that are completed.
 ::: code
 ```twig
 {# Fetch completed orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .isCompleted()
     .all() %}
 ```
@@ -621,7 +621,7 @@ Narrows the query results to only orders that are paid.
 ::: code
 ```twig
 {# Fetch paid orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .isPaid()
     .all() %}
 ```
@@ -644,7 +644,7 @@ Narrows the query results to only orders that are not paid.
 ::: code
 ```twig
 {# Fetch unpaid orders #}
-{% set orders = {twig-function}
+{% set orders = craft.orders()
     .isUnpaid()
     .all() %}
 ```

@@ -3,7 +3,7 @@
 Nitro does its best to give you 80 percent of what you need for local development. However, some Craft projects have to interact with non-common tools such as MongoDB, Elasticsearch, and etc. Installing and managing these tools can be cumbersome and error-prone process, but Nitro supports `container` commands that leverage Docker for easier setup.
 
 ::: tip
-Nitro exposes common tools such as [Minio](services/minio.md) and [Mailhog](services/mailhog.md) as services with the [`enable`](commands.md#enable) command.
+Nitro exposes common tools such as [MinIO](services/minio.md) and [Mailhog](services/mailhog.md) as services with the [`enable`](commands.md#enable) command.
 :::
 
 ## Adding a Custom Container

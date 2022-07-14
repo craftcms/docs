@@ -6,15 +6,15 @@ For example, here’s a template that loops through a list of entries, and displ
 
 ```twig
 {% set entries = craft.entries({
-    section: 'news'
+  section: 'news'
 }) %}
 
 {% for entry in entries %}
-    {# Get the related asset, if there is one #}
-    {% set image = entry.assetsField.first() %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the related asset, if there is one #}
+  {% set image = entry.assetsField.first() %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 {% endfor %}
 ```
 
@@ -28,16 +28,16 @@ Here’s how to apply the `with` param to our example:
 
 ```twig
 {% set entries = craft.entries({
-    section: 'news',
-    with: ['assetsField']
+  section: 'news',
+  with: ['assetsField']
 }) %}
 
 {% for entry in entries %}
-    {# Get the eager-loaded asset, if there is one #}
-    {% set image = entry.assetsField[0] ?? null %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the eager-loaded asset, if there is one #}
+  {% set image = entry.assetsField[0] ?? null %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 {% endfor %}
 ```
 
@@ -68,24 +68,24 @@ If you have multiple sets of elements you wish to eager-load off of the top list
 
 ```twig
 {% set entries = craft.entries({
-    section: 'news',
-    with: [
-        'assetsField',
-        'matrixField'
-    ]
+  section: 'news',
+  with: [
+    'assetsField',
+    'matrixField'
+  ]
 }) %}
 
 {% for entry in entries %}
-    {# Get the eager-loaded asset, if there is one #}
-    {% set image = entry.assetsField[0] ?? null %}
-    {% if image %}
-        <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
+  {# Get the eager-loaded asset, if there is one #}
+  {% set image = entry.assetsField[0] ?? null %}
+  {% if image %}
+    <img src="{{ image.url }}" alt="{{ image.title }}">
+  {% endif %}
 
-    {# Loop through any eager-loaded Matrix blocks #}
-    {% for block in entry.matrixField %}
-        {{ block.textField }}
-    {% endfor %}
+  {# Loop through any eager-loaded Matrix blocks #}
+  {% for block in entry.matrixField %}
+    {{ block.textField }}
+  {% endfor %}
 {% endfor %}
 ```
 
@@ -97,21 +97,21 @@ It’s also possible to load _nested_ sets of elements, using this syntax:
 
 ```twig
 {% set entries = craft.entries({
-    section: 'news',
-    with: [
-        'entriesField.assetsField'
-    ]
+  section: 'news',
+  with: [
+    'entriesField.assetsField'
+  ]
 }) %}
 
 {% for entry in entries %}
-    {# Loop through any eager-loaded sub-entries #}
-    {% for relatedEntry in entry.entriesField %}
-        {# Get the eager-loaded asset, if there is one #}
-        {% set image = relatedEntry.assetsField[0] ?? null %}
-        {% if image %}
-            <img src="{{ image.url }}" alt="{{ image.title }}">
-        {% endif %}
-    {% endfor %}
+  {# Loop through any eager-loaded sub-entries #}
+  {% for relatedEntry in entry.entriesField %}
+    {# Get the eager-loaded asset, if there is one #}
+    {% set image = relatedEntry.assetsField[0] ?? null %}
+    {% if image %}
+      <img src="{{ image.url }}" alt="{{ image.title }}">
+    {% endif %}
+  {% endfor %}
 {% endfor %}
 ```
 
@@ -121,10 +121,10 @@ You can define custom criteria parameters that will get applied as elements are 
 
 ```twig
 {% set entries = craft.entries({
-    section: 'news',
-    with: [
-        ['assetsField', { kind: 'image' }]
-    ]
+  section: 'news',
+  with: [
+    ['assetsField', { kind: 'image' }]
+  ]
 }) %}
 ```
 
@@ -132,11 +132,11 @@ When eager-loading nested sets of elements, you can apply parameters at any leve
 
 ```twig
 {% set entries = craft.entries({
-    section: 'news',
-    with: [
-        ['entriesField', { authorId: 5 }],
-        ['entriesField.assetsField', { kind: 'image' }]
-    ]
+  section: 'news',
+  with: [
+    ['entriesField', { authorId: 5 }],
+    ['entriesField.assetsField', { kind: 'image' }]
+  ]
 }) %}
 ```
 
@@ -146,7 +146,7 @@ The syntax for eager-loading relations from Matrix blocks is a little different 
 
 ```twig
 {% set blocks = entry.matrixField.find({
-    with: ['blockType:assetsField']
+  with: ['blockType:assetsField']
 }) %}
 ```
 
@@ -156,8 +156,8 @@ This applies if the Matrix blocks themselves are being eager-loaded, too.
 
 ```twig
 {% set entries = craft.entries({
-    section: 'news',
-    with: ['matrixField.blockType:assetsField']
+  section: 'news',
+  with: ['matrixField.blockType:assetsField']
 }) %}
 ```
 
@@ -169,10 +169,10 @@ This problem can be solved with the `withTransforms` asset criteria parameter:
 
 ```twig
 {% set assets = entry.assetsField.find({
-    withTransforms: [
-        'heroImage',
-        { width: 100, height: 100 }
-    ]
+  withTransforms: [
+    'heroImage',
+    { width: 100, height: 100 }
+  ]
 }) %}
 ```
 
@@ -184,10 +184,10 @@ Image transform indexes can be eager-loaded on assets that are also eager-loaded
 
 ```twig
 {% set entries = craft.entries({
-    with: [
-        ['assetsField', {
-            withTransforms: ['heroImage']
-        }]
-    ]
+  with: [
+    ['assetsField', {
+      withTransforms: ['heroImage']
+    }]
+  ]
 }) %}
 ```

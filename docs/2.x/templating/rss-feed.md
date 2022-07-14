@@ -8,28 +8,28 @@ If you save this in a template that ends with a “.rss” file extension, Craft
 
 ```twig
 <?xml version="1.0"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>{{ siteName }}</title>
-        <link>{{ siteUrl }}</link>
-        <atom:link href="{{ url(craft.request.path) }}" rel="self" type="application/rss+xml" />
-        <description>{{ globals.siteDescription }}</description>
-        <language>en-us</language>
-        <pubDate>{{ now.rss }}</pubDate>
-        <lastBuildDate>{{ now.rss }}</lastBuildDate>
+<rss version="2.0" xmlns:atom="https://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ siteName }}</title>
+    <link>{{ siteUrl }}</link>
+    <atom:link href="{{ url(craft.request.path) }}" rel="self" type="application/rss+xml" />
+    <description>{{ globals.siteDescription }}</description>
+    <language>en-us</language>
+    <pubDate>{{ now.rss }}</pubDate>
+    <lastBuildDate>{{ now.rss }}</lastBuildDate>
 
-        {% for entry in craft.entries.find() %}
-            <item>
-                <title>{{ entry.title }}</title>
-                <link>{{ entry.url }}</link>
-                <pubDate>{{ entry.postDate.rss }}</pubDate>
-                <author>{{ entry.author }}</author>
-                <guid>{{ entry.url }}</guid>
-                <description><![CDATA[
-                    {{ entry.body }}
-                ]]></description>
-            </item>
-        {% endfor %}
-    </channel>
+    {% for entry in craft.entries.find() %}
+      <item>
+        <title>{{ entry.title }}</title>
+        <link>{{ entry.url }}</link>
+        <pubDate>{{ entry.postDate.rss }}</pubDate>
+        <author>{{ entry.author }}</author>
+        <guid>{{ entry.url }}</guid>
+        <description><![CDATA[
+          {{ entry.body }}
+        ]]></description>
+      </item>
+    {% endfor %}
+  </channel>
 </rss>
 ```

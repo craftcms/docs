@@ -4,83 +4,83 @@ AddressModel objects have the following attributes and methods:
 
 ## Attributes
 
-### id
+### `id`
 
 The address record ID.
 
-### firstName
+### `firstName`
 
 The customers first name (required).
 
-### lastName
+### `lastName`
 
 The customers last name (required).
 
-### address1
+### `address1`
 
 The first line of the address,
 
-### address2
+### `address2`
 
 Second address line.
 
-### city
+### `city`
 
 The city.
 
-### zipCode
+### `zipCode`
 
 The zip or postcode.
 
-### phone
+### `phone`
 
 Phone number.
 
-### alternativePhone
+### `alternativePhone`
 
 An alternative phone number
 
-### businessName
+### `businessName`
 
 Business Name.
 
-### businessTaxId
+### `businessTaxId`
 
 Business tax ID. No automatic validation of this ID occurs.
 
-### stateText
+### `stateText`
 
 Alias of `getStateText()`
 Returns the `stateName` if it exists, otherwise the related state’s name.
 
-### stateName
+### `stateName`
 
-### countryId
+### `countryId`
 
 The record ID of the related country (required).
 
-### stateId
+### `stateId`
 
 The record ID of the related state.
 
-### stateText
+### `stateText`
 
-Alias of getStateText()
+Alias of `getStateText()`.
 
-### countryText
+### `countryText`
 
-Alias of getCountryText()
+Alias of `getCountryText()`,
 
 ## Methods
 
-### getStateText()
+### `getStateText()`
 
 Returns the `stateName` if it exists, otherwise the related state’s name.
 
-## getCountry()
+## `getCountry()`
 
 Returns the related [Country model](country-model.md) is it exists, or a blank string if it does not.
 
-## getState()
+## `getState()`
 
 Returns the related [State model](state-model.md) is it exists, or null if it does not.

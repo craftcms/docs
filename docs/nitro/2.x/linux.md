@@ -2,12 +2,15 @@
 
 ## Trusting Nitro’s Certificate in Browsers
 
-If you’re getting browser warnings for https Nitro URLs, you’ll need to manually configure the browser to trust the certificate you’ll find in `~/.nitro/nitro.crt`.
+If you’re getting browser warnings for HTTPS Nitro URLs, you’ll need to manually configure the browser to trust the certificate you’ll find in `~/.nitro/nitro.crt`.
 
 ### Firefox Example
 
 Firefox will display a warning for your Nitro sites until you’ve told it to trust the root Nitro certificate:\
     ![Firefox SSL/https warning](./images/ubuntu-firefox-ssl-warning.png)
+
+<!-- textlint-disable terminology -->
+<!-- “websites” is problematic but it’s quoted from Firefox settings -->
 
 1. Open the **Certificate Manager** by choosing the browser’s settings menu, **Preferences** → **Security & Privacy**, finding the **Certificates** section, and choosing **View Certificates**:\
     ![Firefox Certificate Manager](./images/ubuntu-firefox-certificate-manager.png)
@@ -16,6 +19,8 @@ Firefox will display a warning for your Nitro sites until you’ve told it to tr
 
 3. A dialog will allow you to designate trust purposes. Check **Trust this CA to identify websites.** and choose **OK**:\
     ![Downloading Certificate dialog](./images/ubuntu-firefox-downloading-certificate.png =550x300)
+
+<!-- textlint-enable terminology -->
 
 You should now be able to refresh the tab with the SSL warning and get back to normal:
 

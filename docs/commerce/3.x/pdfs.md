@@ -15,7 +15,7 @@ You’ll need to enter a few details:
 - **Name** is whatever you’d like to call the PDF in the control panel.
 - **Handle** is a reference to be used in templates.
 - **Description** is an optional note for explaining the template’s layout or purpose.
-- **PDF Template Path** should point to the Twig template that should be used for rendering the PDF file. (Add the [receipt example template](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/_private/receipt/index.twig) here if you’d like to see one in action.)
+- **PDF Template Path** should point to the Twig template that should be used for rendering the PDF file. (Add the [receipt example template](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/receipt/index.twig) here if you’d like to see one in action.)
 - **Order PDF Filename Format** determines what the generated filename should look like. It can include tags for outputting order properties such as `{number}` or `{myOrderCustomField}`. (A `.pdf` extension will automatically be appended so you don’t need to add it here.)
 - **Enabled?** can be used to quickly toggle the PDF and control whether it’s available and sent in emails configured to use it.
 - **Default Order PDF** will appear only when you’re editing an additional or non-default PDF. Select this checkbox to make the current template the new default when you save it.
@@ -24,9 +24,11 @@ Once you’ve saved an enabled template, you’ll immediately be able to use it 
 
 ## Downloading a PDF
 
-Once at least one PDF is enabled, you can download it from any order detail page in the control panel.
+Once at least one PDF is enabled, you can download it from the control panel’s order listing or any order detail page.
 
-Visit **Commerce** → **Orders**, choose an order, and then choose **Download PDF** from the top right corner of the page. If multiple PDFs are available, the single download button will download the default PDF and include a dropdown menu for selecting whichever PDF you would like.
+Visit **Commerce** → **Orders**. Check one or more orders in the list and press **Download PDF…** at the top of the page. Choose your desired PDF format and whether you’d prefer a ZIP file containing your document(s) or a single, collated PDF.
+
+You can also click any order and choose **Download PDF** from the top right corner of its detail page. If multiple PDFs are available, the main button will download the default PDF and include a dropdown menu for selecting whichever PDF format you’d like.
 
 ## Including a PDF in an Order Email
 
@@ -36,7 +38,7 @@ Create a new [order status email](emails.md) or select an existing one. You’ll
 
 ## Creating PDF Templates
 
-It might be easiest to start by modifying the [example receipt template](https://github.com/craftcms/commerce/blob/main/example-templates/build/shop/_private/receipt/index.twig), previewing it in a browser for convenience until things are mostly as you’d like them.
+It might be easiest to start by modifying the [example receipt template](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/receipt/index.twig), previewing it in a browser for convenience until things are mostly as you’d like them.
 
 Avoid extending your regular site layouts for PDF templates, since your site most likely includes references to scripts and styles that may cause issues with PDF conversion.
 
@@ -85,7 +87,7 @@ The [`pdfAllowRemoteImages`](config-settings.md#pdfallowremoteimages) setting is
 
 ```twig
 {# base64-encoded SVG image works when `pdfAllowRemoteImages` is `false` #}
-<img width="75" height="75" src="{{ dataUrl('@webroot/images/store-logo.svg') }}>
+<img width="75" height="75" src="{{ dataUrl('@webroot/images/store-logo.svg') }}" alt="Store logo"/>
 ```
 
 Enabling `pdfAllowRemoteImages` will make it possible to utilize image URLs in your templates, but you’ll likely need to experiment with URLs that work for your environment and Dompdf version.

@@ -169,7 +169,7 @@ Returns an [AssetSourceModel](assetsourcemodel.md) object representing the asset
 
 Returns the image’s URL.
 
-You may optionally pass in a transform handle/object to get the url of the image for the given transform. (See [image-transforms](../image-transforms.md) for more info.)
+You may optionally pass in a transform handle/object to get the URL of the image for the given transform. (See [image-transforms](../image-transforms.md) for more info.)
 
 If you’ve already set a default transform via [setTransform()](#settransform) and you wish to get the original image URL, you can pass in `false` instead.
 
@@ -187,9 +187,9 @@ Sets the default transform that should be used by [getWidth()](#getwidth), [getH
 
 ```twig
 {% set transform = {
-    mode: 'crop',
-    width: 100,
-    height: 100
+  mode: 'crop',
+  width: 100,
+  height: 100
 } %}
 
 {% do image.setTransform(transform) %}

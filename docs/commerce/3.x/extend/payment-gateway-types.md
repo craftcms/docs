@@ -27,7 +27,7 @@ At a high level, a Craft Commerce gateway may use the following parts:
 - Methods that return `true` or `false` to indicate gateway feature support.
 - An HTML settings view for managing details like API keys from the Craft control panel.
 - A model for collecting and validating payment form details that are sent to the gateway.
-- Vital methods that faciliate payment: `purchase()`, `capture()`, `refund()`, etc.
+- Vital methods that facilitate payment: `purchase()`, `capture()`, `refund()`, etc.
 - Front end responses and redirects that facilitate the customer journey.
 - A publicly-available endpoint that can receive webhook events from the gateway.
 
@@ -35,7 +35,12 @@ At a high level, a Craft Commerce gateway may use the following parts:
 It may be easiest to extend the [Gateway](commerce3:craft\commerce\base\Gateway) or [SubscriptionGateway](commerce3:craft\commerce\base\SubscriptionGateway) classes in order to save time and minimize the amount of code you need to write.
 :::
 
+<!-- textlint-disable terminology -->
+<!-- this “walk through” functions as a verb -->
+
 Let’s walk through the customer order process to highlight different gateway interactions.
+
+<!-- textlint-enable terminology -->
 
 ### Checkout Page
 
@@ -48,7 +53,11 @@ At this stage the Craft developer—the person building the site that *uses* you
 Your gateway class can use [`availableForUseWithOrder($order)`](commerce3:craft\commerce\base\GatewayInterface::availableForUseWithOrder()) to examine the order and return `true` if the gateway should be available as a payment option. Even if the store doesn’t expose customer-facing gateway selection, this method is called immediately before sending payment information to the gateway to make sure it _should_. This can be useful, for example, to prevent a $0.00 “charge” from being attempted when there’s no need for it.
 
 ```php
-// only allow this gateway for orders in Australia
+public function availableForUseWithOrder(\craft\commerce\elements\Order $order): bool
+{
+    // only allow this gateway for orders in Australia
+    return $order->getBillingAddress()->countryIso === 'AU';
+}
 ```
 
 ### Payment Page

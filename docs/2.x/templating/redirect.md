@@ -4,7 +4,7 @@ This tag will redirect the browser to a different URL.
 
 ```twig
 {% if not user or not user.isInGroup('members') %}
-    {% redirect "pricing" %}
+  {% redirect "pricing" %}
 {% endif %}
 ```
 

@@ -15,14 +15,14 @@ The payment gateway is set on the cart. This template uses `cart.gateway.getPaym
 ```twig
 {# @var cart craft\commerce\elements\Order #}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/payments/pay') }}
-    {{ redirectInput('/commerce/customer/order?number={number}') }}
-    {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
+  {{ csrfInput() }}
+  {{ actionInput('commerce/payments/pay') }}
+  {{ redirectInput('/commerce/customer/order?number={number}') }}
+  {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
 
-    {{ cart.gateway.getPaymentFormHtml({})|raw }}
+  {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
-    <button type="submit">Pay Now</button>
+  <button type="submit">Pay Now</button>
 </form>
 ```
 
@@ -37,81 +37,81 @@ This manual form example assumes the availability of a `paymentForm` variable, a
 ```twig
 {% import "_includes/forms" as forms %}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('commerce/payments/pay') }}
-    {{ redirectInput('/commerce/customer/order?number={number}') }}
-    {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
+  {{ csrfInput() }}
+  {{ actionInput('commerce/payments/pay') }}
+  {{ redirectInput('/commerce/customer/order?number={number}') }}
+  {{ hiddenInput('cancelUrl', '/commerce/checkout/payment'|hash) }}
 
-    {# first and last name #}
-    <fieldset>
-        <legend>Card Holder</legend>
+  {# First and last name #}
+  <fieldset>
+    <legend>Card Holder</legend>
 
-        {{ forms.text({
-            name: 'firstName',
-            maxlength: 70,
-            placeholder: "First Name",
-            autocomplete: false,
-            class: 'card-holder-first-name'~(paymentForm.getErrors('firstName') ? ' error'),
-            value: paymentForm.firstName,
-            required: true,
-        }) }}
+    {{ forms.text({
+      name: 'firstName',
+      maxlength: 70,
+      placeholder: "First Name",
+      autocomplete: false,
+      class: 'card-holder-first-name'~(paymentForm.getErrors('firstName') ? ' error'),
+      value: paymentForm.firstName,
+      required: true,
+    }) }}
 
-        {{ forms.text({
-            name: 'lastName',
-            maxlength: 70,
-            placeholder: "Last Name",
-            autocomplete: false,
-            class: 'card-holder-last-name'~(paymentForm.getErrors('lastName') ? ' error'),
-            value: paymentForm.lastName,
-            required: true,
-        }) }}
+    {{ forms.text({
+      name: 'lastName',
+      maxlength: 70,
+      placeholder: "Last Name",
+      autocomplete: false,
+      class: 'card-holder-last-name'~(paymentForm.getErrors('lastName') ? ' error'),
+      value: paymentForm.lastName,
+      required: true,
+    }) }}
 
-        {% set errors = [] %}
-        {% for attributeKey in ['firstName', 'lastName'] %}
-            {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
-        {% endfor %}
+    {% set errors = [] %}
+    {% for attributeKey in ['firstName', 'lastName'] %}
+      {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
+    {% endfor %}
 
-        {{ forms.errorList(errors) }}
-    </fieldset>
+    {{ forms.errorList(errors) }}
+  </fieldset>
 
-    {# card number #}
-    <fieldset>
-        <legend>Card</legend>
+  {# Card number #}
+  <fieldset>
+    <legend>Card</legend>
 
-        {{ forms.text({
-            name: 'number',
-            maxlength: 19,
-            placeholder: "Card Number",
-            autocomplete: false,
-            class: 'card-number'~(paymentForm.getErrors('number') ? ' error'),
-            value: paymentForm.number
-        }) }}
+    {{ forms.text({
+      name: 'number',
+      maxlength: 19,
+      placeholder: "Card Number",
+      autocomplete: false,
+      class: 'card-number'~(paymentForm.getErrors('number') ? ' error'),
+      value: paymentForm.number
+    }) }}
 
-        {{ forms.text({
-            class: 'card-expiry'~(paymentForm.getErrors('month') or paymentForm.getErrors('year') ? ' error'),
-            type: 'tel',
-            name: 'expiry',
-            placeholder: "MM / YYYY",
-            value: paymentForm.expiry
-        }) }}
+    {{ forms.text({
+      name: 'expiry',
+      class: 'card-expiry'~(paymentForm.getErrors('month') or paymentForm.getErrors('year') ? ' error'),
+      type: 'tel',
+      placeholder: "MM / YYYY",
+      value: paymentForm.expiry
+    }) }}
 
-        {{ forms.text({
-            type: 'tel',
-            name: 'cvv',
-            placeholder: "CVV",
-            class: 'card-cvc'~(paymentForm.getErrors('cvv') ? ' error'),
-            value: paymentForm.cvv
-        }) }}
+    {{ forms.text({
+      name: 'cvv',
+      type: 'tel',
+      placeholder: "CVV",
+      class: 'card-cvc'~(paymentForm.getErrors('cvv') ? ' error'),
+      value: paymentForm.cvv
+    }) }}
 
-        {% set errors = [] %}
-        {% for attributeKey in ['number', 'month', 'year', 'cvv'] %}
-            {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
-        {% endfor %}
+    {% set errors = [] %}
+    {% for attributeKey in ['number', 'month', 'year', 'cvv'] %}
+      {% set errors = errors|merge(paymentForm.getErrors(attributeKey)) %}
+    {% endfor %}
 
-        {{ forms.errorList(errors) }}
-    </fieldset>
+    {{ forms.errorList(errors) }}
+  </fieldset>
 
-    <button type="submit">Pay Now</button>
+  <button type="submit">Pay Now</button>
 </form>
 ```
 
@@ -130,11 +130,11 @@ Once the [allowCheckoutWithoutPayment](config-settings.md#allowcheckoutwithoutpa
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/cart/complete') }}
-    {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/cart/complete') }}
+  {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
 
-    <button type="submit">Commit to Buy</button>
+  <button type="submit">Commit to buy</button>
 </form>
 ```
 
@@ -151,7 +151,13 @@ If you enable order completion without payment, completed orders will have the s
 
 ### Checkout with Partial Payment
 
-If you’d like to permit customers to check out with partial payments, you can enable the [allowPartialPaymentOnCheckout](config-settings.md#allowpartialpaymentoncheckout) setting to allow an additional `paymentAmount` field when posting to the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action.
+A _partial_ payment is one that’s less than an order’s outstanding balance at any point in time.
+
+If you’d like to permit customers to check out with partial payments and the gateway supports them, you can enable the [allowPartialPaymentOnCheckout](config-settings.md#allowpartialpaymentoncheckout) setting to allow an additional `paymentAmount` field when posting to the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action. (If no `paymentAmount` field is submitted, the order’s oustanding balance amount will be applied.)
+
+::: tip
+Multiple payments can still be made on an order when `allowPartialPaymentOnCheckout` is `false`, as long as each payment is equal to the outstanding balance at the time it was made.
+:::
 
 The partial amount cannot be entered directly by the customer; for security, the field must contain a hashed value in the cart’s `paymentCurrency`.
 
@@ -161,29 +167,29 @@ This example provides a dropdown menu that allows the customer to choose half or
 {# ... payment form ... #}
 
 {% set halfAmount = craft.commerce
-    .paymentCurrencies
-    .convertCurrency(
-        cart.outstandingBalace * 0.5,
-        cart.currency,
-        cart.paymentCurrency
-    )
+  .paymentCurrencies
+  .convertCurrency(
+    cart.outstandingBalace * 0.5,
+    cart.currency,
+    cart.paymentCurrency
+  )
 %}
 
 {% set fullAmount = craft.commerce
-    .paymentCurrencies
-    .convertCurrency(
-        cart.outstandingBalace,
-        cart.currency,
-        cart.paymentCurrency
-    )
+  .paymentCurrencies
+  .convertCurrency(
+    cart.outstandingBalace,
+    cart.currency,
+    cart.paymentCurrency
+  )
 %}
 
 <select name="paymentAmount">
     <option value="{{ halfAmount|hash }}">50%
-        ({{ halfAmount|commerceCurrency(cart.paymentCurrency) }})
+      ({{ halfAmount|commerceCurrency(cart.paymentCurrency) }})
     </option>
     <option value="{{ fullAmount|hash }}">100%
-        ({{ fullAmount|commerceCurrency(cart.paymentCurrency) }})
+      ({{ fullAmount|commerceCurrency(cart.paymentCurrency) }})
     </option>
 </select>
 
@@ -201,7 +207,7 @@ You can use the [`paidInFull`](extend/events.md#paidinfull) event if you need to
 You can allow a customer to pay the outstanding balance on a cart or order using the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action similarly to taking full payment at checkout, taking care to explicitly provide the order number whose outstanding balance should be paid.
 
 ::: tip
-There’s a full example of this in the [example templates](example-templates.md) at [shop/checkout/pay-static.twig](https://github.com/craftcms/commerce/tree/main/example-templates/build/shop/checkout/pay-static.twig).
+There’s a full example of this in the [example templates](example-templates.md) at [shop/checkout/pay-static.twig](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/checkout/pay-static.twig).
 :::
 
 Here we’re pretending the relevant order number is 12345, the customer’s email address is email@address.foo, and the gateway is already set on the order:
@@ -213,16 +219,16 @@ Here we’re pretending the relevant order number is 12345, the customer’s ema
 {% set cancelUrl = craft.app.request.getUrl()|hash %}
 
 <form method="post">
-    {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/payments/pay') }}
-    {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
-    {{ hiddenInput('cancelUrl', cancelUrl) }}
-    {{ hiddenInput('email', email) }}
-    {{ hiddenInput('orderNumber', cart.number) }}
+  {{ csrfInput() }}
+  {{ hiddenInput('action', 'commerce/payments/pay') }}
+  {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
+  {{ hiddenInput('cancelUrl', cancelUrl) }}
+  {{ hiddenInput('email', email) }}
+  {{ hiddenInput('orderNumber', cart.number) }}
 
-    {{ cart.gateway.getPaymentFormHtml({})|raw }}
+  {{ cart.gateway.getPaymentFormHtml({})|raw }}
 
-    <button type="submit">Submit</button>
+  <button type="submit">Submit</button>
 </form>
 ```
 
@@ -248,11 +254,11 @@ To make a partial payment in the Craft control panel:
 2. Choose a cart or order to view its edit page
 3. Select the **Transactions** tab and choose **Make Payment**.
 4. Select a gateway that supports partial payments to enter the payment details and amount:\
-    ![Store manager’s partial payment modal](./assets/partial-payment-modal.png)
+    ![Store manager’s partial payment modal](./images/partial-payment-modal.png)
 5. Choose **Pay** to process the payment.
 
 ::: tip
 To more quickly identify partially-paid orders, a store manager may want to add the **Paid Status** column on the order index page.
 
-![Orders table Paid Status column](./assets/paid-status-column.png)
+![Orders table Paid Status column](./images/paid-status-column.png)
 :::

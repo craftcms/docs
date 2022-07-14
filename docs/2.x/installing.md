@@ -44,7 +44,7 @@ $craftPath = './craft';
 
 The other files in `public/` are all optional. Here’s what they do:
 
-* `htaccess` – This file configures Apache servers to direct all traffic hitting your site to that `index.php` file, without actually needing to include `index.php` in the URLs. Note that it must be renamed to `.htaccess` (with the dot) for it to actually work. (See “[Removing “index.php” from URLs](https://craftcms.com/support/remove-index.php)” for more info.)
+* `htaccess` – This file configures Apache servers to direct all traffic hitting your site to that `index.php` file, without actually needing to include `index.php` in the URLs. Note that it must be renamed to `.htaccess` (with the dot) for it to actually work. (See “[Removing “index.php” from URLs](https://craftcms.com/knowledge-base/removing-index-php-from-urls)” for more info.)
 * `web.config` – This is our IIS equivelant of the `.htaccess` file, for those of you that are into that sort of thing.
 * `robots.txt` – If you couldn’t upload the `craft/` folder above your web root, you can use this file to prevent Google from indexing it.
 
@@ -73,7 +73,7 @@ The exact permissions you should be setting depends on the relationship between 
 Here are some recommended permissions depending on that relationship:
 
 * If they are the same user, use `744`.
-* If they're in the same group, then use `774`.
+* If they’re in the same group, then use `774`.
 * If they’re neither the same user nor in the same group, or if you just prefer to live life on the edge, you can use `777`, just please do not do that in a production environment.
 
 ::: tip
@@ -102,13 +102,13 @@ Once you’ve finished setting your DB config settings, save the file and close 
 
 ### Step 5: Run the installer!
 
-Now that everything’s set up, point your browser to `http://example.com/admin`. If you see a monkey in your browser, you’ve done everything right!
+Now that everything’s set up, point your browser to `http://my-project.tld/admin`. If you see a monkey in your browser, you’ve done everything right!
 
 ![Install Screen 1](./images/install1.png)
 
 No monkey? Here’s a couple tips:
 
-* If you’re getting a 404, your server might not be configured to redirect would-be 404’s to `index.php` correctly. Try going to `http://example.com/index.php/admin` or `http://example.com/index.php?p=admin` instead.
+* If you’re getting a 404, your server might not be configured to redirect would-be 404’s to `index.php` correctly. Try going to `http://my-project.tld/index.php/admin` or `http://my-project.tld/index.php?p=admin` instead.
 * If you’re getting an error about how Craft can’t connect to your DB, you’ll need to revisit Step 4.
 
 The first step of the installer is to create a user account. Don’t be one of *those* people and be sure to pick a strong password.

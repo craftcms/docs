@@ -8,7 +8,7 @@ You can access any of your config settings in `craft/config/general.php` by trea
 
 ```twig
 {% if craft.config.devMode %}
-    <p>Craft is running in Dev Mode.</p>
+  <p>Craft is running in Dev Mode.</p>
 {% endif %}
 ```
 

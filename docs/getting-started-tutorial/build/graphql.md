@@ -21,16 +21,16 @@ First upgrade your Craft Solo edition to Craft Pro:
 1. From the control panel, choose the **Solo** badge at the bottom of the screen.
 2. In the <badge type="edition" vertical="middle">Pro</badge> panel, choose **Try for free**.
 
-<BrowserShot url="https://tutorial.nitro/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
+<BrowserShot url="https://tutorial.ddev.site/admin/plugin-store/upgrade-craft" :link="false" caption="Upgrading from Solo to Pro.">
 <img src="../images/upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
 </BrowserShot>
 
-Once you edition is upgraded and you’ll see a GraphQL item in the navigation menu. Choose that.
+Once you edition is upgraded and you’ll see a GraphQL item in the navigation menu. Choose that and click **GraphiQL**.
 
-This is the GraphiQL explorer for browsing API documentation and running queries directly in the browser:
+This new tab is the GraphiQL explorer you can use for browsing API documentation and running queries directly in the browser:
 
-<BrowserShot url="https://tutorial.nitro/admin/graphql" :link="false" caption="The GraphiQL explorer.">
-<img src="../images/graphql.png" alt="Screenshot of GraphiQL" />
+<BrowserShot url="https://tutorial.ddev.site/admin/graphiql" :link="false" caption="The GraphiQL explorer.">
+<img src="../images/graphiql.png" alt="Screenshot of GraphiQL" />
 </BrowserShot>
 
 ::: tip
@@ -45,8 +45,8 @@ Try running a test GraphQL query:
 
 You’ll see `pong` in the response signaling that everything’s ready to go:
 
-<BrowserShot url="https://tutorial.nitro/admin/graphql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
-<img src="../images/graphql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
+<BrowserShot url="https://tutorial.ddev.site/admin/graphiql?query=%7B%20ping%20%7D%0A" :link="false" caption="It’s working!">
+<img src="../images/graphiql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
 </BrowserShot>
 
 By default, the Craft CMS GraphiQL interface will use the full schema, or available set of information, without any restrictions. In other words, it has access to all content through the GraphQL API.
@@ -108,7 +108,7 @@ The blog post detail template displays an entire blog post with its full content
 - `entry.postCategories`
   - `title`
   - `url`
-- `siteInformation.siteDescription` processed by markdown
+- `siteInformation.siteDescription` processed by Markdown
 
 With the Twig setup, the web server provides its URL to Craft CMS, which uses its routing logic to fetch the entry and make it available as `entry` in the template.
 
@@ -167,12 +167,12 @@ The response should be something like this:
       "title": "My first post",
       "postDate": "20 Mar 2020",
       "postDateAlt": "2020-03-20",
-      "url": "https://tutorial.nitro/blog/my-first-post",
+      "url": "https://tutorial.ddev.site/blog/my-first-post",
       "featureImage": [
         {
           "title": "Craft Image from Unsplash",
-          "url": "https://tutorial.nitro/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-          "sized": "https://tutorial.nitro/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
+          "url": "https://tutorial.ddev.site/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+          "sized": "https://tutorial.ddev.site/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
         }
       ],
       "postContent": [
@@ -185,7 +185,7 @@ The response should be something like this:
           "image": [
             {
               "title": "Little Drinks",
-              "url": "https://tutorial.nitro/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
+              "url": "https://tutorial.ddev.site/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
             }
           ]
         },
@@ -197,7 +197,7 @@ The response should be something like this:
       "postCategories": [
         {
           "title": "Ramblings",
-          "uri": "https://tutorial.nitro/blog/category/ramblings"
+          "uri": "https://tutorial.ddev.site/blog/category/ramblings"
         }
       ]
     },
@@ -239,12 +239,12 @@ Result:
     "entries": [
       {
         "title": "My first post",
-        "url": "https://tutorial.nitro/blog/my-first-post",
+        "url": "https://tutorial.ddev.site/blog/my-first-post",
         "featureImage": [
           {
             "title": "Craft Image from Unsplash",
-            "url": "https://tutorial.nitro/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-            "sized": "https://tutorial.nitro/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+            "url": "https://tutorial.ddev.site/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
+            "sized": "https://tutorial.ddev.site/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
             "focalPoint": [0.2059, 0.6287]
           }
         ]
@@ -354,7 +354,7 @@ Result:
       "aboutImage": [
         {
           "title": "Floating in Space",
-          "url": "https://tutorial.nitro/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
+          "url": "https://tutorial.ddev.site/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
         }
       ],
       "postContent": [

@@ -4,7 +4,7 @@ If you have Craft Pro, you can access your site’s [users](../users.md) from yo
 
 ```twig
 {% for author in craft.users.group('authors') %}
-    <li><a href="{{ url('authors/'~author.id) }}">{{ author.name }}</a></li>
+  <li><a href="{{ url('authors/'~author.id) }}">{{ author.name }}</a></li>
 {% endfor %}
 ```
 

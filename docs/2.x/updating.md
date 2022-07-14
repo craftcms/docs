@@ -2,9 +2,9 @@
 
 ## One-click Updating
 
-When an update is available, users with the permission to update Craft will see a badge in the CP header. Clicking on that badge will take you to a page that shows the release notes of all the available updates.
+When an update is available, users with the permission to update Craft will see a badge in the control panel header. Clicking on that badge will take you to a page that shows the release notes of all the available updates.
 
-You can get to that page at any time by clicking the “Check for updates” link in the CP footer as well. Whenever you go to the page, whether Craft thinks updates are available or not, the page will clear its cache and re-check for available updates.
+You can get to that page at any time by clicking the “Check for updates” link in the control panel footer as well. Whenever you go to the page, whether Craft thinks updates are available or not, the page will clear its cache and re-check for available updates.
 
 At the top of the page there is an “Update” button. Clicking that will initiate Craft’s self-updating process.
 
@@ -13,7 +13,7 @@ For one-click updates to work, your craft/app folder and all its enclosed files 
 Here are some recommended permissions depending on that relationship:
 
 * If they are the same user, use `744`.
-* If they're in the same group, then use `774`.
+* If they’re in the same group, then use `774`.
 * Otherwise, use `777`.
 
 
@@ -35,5 +35,5 @@ If you’re manually updating a live site, we recommend you follow these instruc
 3. Once `app-new/` is done uploading, your FTP client may have uploaded the `app-new/` folder with different permissions that what your `craft/app/` folder currently has. If so, make sure app-new matches what `craft/app/` currently has.
 4. Rename the old `craft/app/` folder to `craft/app-old/`.
 5. Rename `app-new/` to `app/`.
-6. Point your browser to your Craft Control Panel. If the update needs to run any new database migrations, you will be prompted to proceed with a database update. Click “Finish up” and let the database updates run.
+6. Point your browser to your Craft control panel. If the update needs to run any new database migrations, you will be prompted to proceed with a database update. Click “Finish up” and let the database updates run.
 7. Delete the `app-old/` folder.

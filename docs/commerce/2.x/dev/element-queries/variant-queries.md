@@ -34,14 +34,14 @@ We can display a specific variant by its ID by doing the following:
 
 {# Create a variant query with the 'id' parameter #}
 {% set myVariantQuery = craft.variants()
-    .id(variantId) %}
+  .id(variantId) %}
 
 {# Fetch the variant #}
 {% set variant = myVariantQuery.one() %}
 
 {# Make sure it exists #}
 {% if not variant %}
-    {% exit 404 %}
+  {% exit 404 %}
 {% endif %}
 
 {# Display the variant #}
@@ -368,7 +368,7 @@ Narrows the query results to only default variants.
 ::: code
 ```twig
 {# Fetch default variants #}
-{% set variants = {twig-function}
+{% set variants = craft.variants()
     .isDefault()
     .all() %}
 ```
