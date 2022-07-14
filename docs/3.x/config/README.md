@@ -68,11 +68,15 @@ The following aliases are available out of the box:
 | `@web` | The URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | The path to the folder that contains the `index.php` file that was loaded for the request
 
-You can override these default aliases with the <config3:aliases> config setting if needed. We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+You can override these default aliases with the <config3:aliases> config setting if needed. 
+
+::: tip
+We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+:::
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
 ];
 ```
 
@@ -80,7 +84,7 @@ If your web root is something besides `web/`, `public/`, `public_html/`, or `htm
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
 ];
 ```
@@ -89,7 +93,7 @@ You can define additional custom aliases using the <config3:aliases> config sett
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
     '@assetBaseUrl' => '@web/assets',
     '@assetBasePath' => '@webroot/assets',
@@ -101,7 +105,7 @@ With those in place, you could begin your asset volumes’ Base URL and File Sys
 If you’d like, you can set the alias values with environment variables, either from your `.env` file or somewhere in your environment’s configuration:
 
 ```bash
-ASSETS_BASE_URL=https://my-project.com/assets
+ASSETS_BASE_URL=https://my-project.tld/assets
 ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 
@@ -301,9 +305,14 @@ return [
 
 In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
 
+::: tip
+The `session` component should be overridden from `app.web.php` so it gets defined for web requests, but not console requests.
+:::
+
 #### Redis Example
 
 ```php
+// config/app.php
 <?php
 
 use craft\helpers\App;
@@ -316,6 +325,18 @@ return [
             'port' => 6379,
             'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
+    ],
+];
+```
+
+```php
+// config/app.web.php
+<?php
+
+use craft\helpers\App;
+
+return [
+    'components' => [
         'session' => function() {
             // Get the default component config
             $config = App::sessionConfig();
@@ -376,7 +397,7 @@ return [
 
             // Override the transport adapter settings
             $settings->transportSettings = [
-                'domain' => 'foo.com',
+                'domain' => 'my-project.tld',
                 'apiKey' => 'key-xxxxxxxxxx',
             ];
 
@@ -391,7 +412,7 @@ return [
 ```
 
 ::: tip
-Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from Settings → Email.
+Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from **Settings** → **Email**.
 :::
 
 ### Queue Component
@@ -450,7 +471,7 @@ Some settings in the control panel can be set to environment variables (like the
   - **HTML Email Template**
   - **Username** (Gmail and SMTP)
   - **Password** (Gmail and SMTP)
-  - **Host Name** (SMTP)
+  - **Hostname** (SMTP)
   - **Port** (SMTP)
   - **Use authentication** (SMTP)
   - **Encryption Method** (SMTP)
@@ -473,7 +494,7 @@ For example, you can define a `ROOT_URL` environment variable that is set to the
 
 ```bash
 # -- .env --
-ROOT_URL="http://my-project.test"
+ROOT_URL="http://my-project.tld"
 ```
 Then create a `@rootUrl` alias that references it:
 
@@ -525,6 +546,10 @@ return [
 ```
 
 The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
+
+::: tip
+Make sure your key(s) are sufficiently unique! Craft reads your array of config settings from top to bottom, applying config settings wherever the `CRAFT_ENVIRONMENT` value *contains* the key.
+:::
 
 By default, new Craft 3 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
 
@@ -613,10 +638,10 @@ The path that Craft should store its license key file, including its filename. (
 
 ### `CRAFT_LOG_PHP_ERRORS`
 
-Can be set to `false` to prevent Craft from setting PHP’s [log_errors](http://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) setting, leaving it up to whatever’s set in `php.ini`.
+Can be set to `false` to prevent Craft from setting PHP’s [log_errors](https://php.net/manual/en/errorfunc.configuration.php#ini.log-errors) and [error_log](https://php.net/manual/en/errorfunc.configuration.php#ini.error-log) settings, leaving it up to whatever’s set in `php.ini`.
 
 ```php
-// Don't send PHP error logs to storage/logs/phperrors.log
+// Don’t send PHP error logs to storage/logs/phperrors.log
 define('CRAFT_LOG_PHP_ERRORS', false);
 ```
 
@@ -639,7 +664,7 @@ Make sure you set this to a valid folder path, otherwise it will be ignored.
 
 ### `CRAFT_STREAM_LOG`
 
-When set to `true`, Craft will additionally send log output to `stderr` and `stdout`.
+When set to `true`, Craft will additionally send log output to `stderr` and `stdout`. PHP fatal errors will be sent to `stderr`.
 
 ### `CRAFT_TEMPLATES_PATH`
 
@@ -653,4 +678,25 @@ The path to the `translations/` folder. (It is assumed to live within the base d
 
 The path to the [vendor/](../directory-structure.md#vendor) folder. (It is assumed to live 4 directories up from the bootstrap script by default.)
 
+## Mutex Configuration
 
+Craft uses a file-based mutex driver by default, which should be switched to a different driver in [load-balanced environments](https://craftcms.com/knowledge-base/configuring-load-balanced-environments#mutex-locks).
+
+::: tip
+A [NullMutex](craft3:craft\mutex\NullMutex) driver is used when Dev Mode is enabled, since mutex drivers aren’t necessary for local development and we’ve seen issues with mutex in some Windows and Linux filesystems.
+:::
+
+You can configure a custom mutex driver by configuring the `mutex` component’s nested `$mutex` property:
+
+```php
+// Use mutex driver provided by yii2-redis
+return [
+    'components' => [
+        'mutex' => [
+            'mutex' => 'yii\redis\Mutex',
+        ],
+    ],
+];
+```
+
+Notice we’re modifying the _nested_ `mutex` property and leaving the main `mutex` component in place.

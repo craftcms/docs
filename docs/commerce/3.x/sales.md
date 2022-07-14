@@ -96,7 +96,7 @@ There are additional options for how the sale is applied to the product:
 
 This setting will disregard any previous sale that affected the price of the item matched in this sale.
 
-For example, `Sale 1` reduced the price by 10%. Checking this box within `Sale 2` will apply its affect on the original price of the purchasable, ignoring the 10% off.
+For example, `Sale 1` reduced the price by 10%. Checking this box within `Sale 2` will apply its effect on the original price of the purchasable, ignoring the 10% off.
 
 This is automatically true if either of the following pricing effects are used:
 

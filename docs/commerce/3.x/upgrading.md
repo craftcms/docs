@@ -8,7 +8,7 @@ If you’re upgrading from Commerce 1, see the [Changes in Commerce 2](https://c
 
 Before you begin, make sure that:
 
-1. You’ve reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/master/CHANGELOG.md#300---2020-01-28)
+1. You’ve reviewed the [changes in Commerce 3](https://github.com/craftcms/commerce/blob/main/CHANGELOG.md#300---2020-01-28)
 2. Your site’s running at least **Craft 3.4** and **the latest version of Commerce 2** (2.2.27)
 3. Your **database is backed up** in case everything goes horribly wrong
 
@@ -54,7 +54,7 @@ Automatic cart merging has been removed.
 
 The cart is still retrieved from the front end templates using `craft.commerce.carts.cart` in your templates, but the optional `mergeCarts` param has been removed, and it is no longer possible to automicatically merge previous carts of the current user.
 
-We now recommend the customer manually adds items from the [previous carts to their current cart](adding-to-and-updating-the-cart.md#restoring-previous-cart-contents). An example of this is in the example templates.
+We now recommend the customer manually adds items from the [previous carts to their current cart](orders-carts.md#restoring-previous-cart-contents). An example of this is in the example templates.
 
 Merging carts as manual process is better since the customer can decide what to do with any validation issues like maximum quanity rules. The previous merge feature would just fail to merge correctly with no error messages.
 
@@ -133,7 +133,7 @@ Commerce 2 used discount categories as the “Source” for discount matches, an
 
 ## Custom Line Item Pricing
 
-If your store customizes line item pricing with the [`populateLineItem` event](events.md#populatelineitem), it’s important to know that the `salePrice` property is handled differently in Commerce 3.
+If your store customizes line item pricing with the [`populateLineItem` event](extend/events.md#populatelineitem), it’s important to know that the `salePrice` property is handled differently in Commerce 3.
 
 Commerce 2 set the line item’s `salePrice` to the sum of `saleAmount` and `price` immediately *after* the `populateLineItem` event. Commerce 3 does not modify `salePrice` after the event is triggered, so any pricing adjustments should explicitly set `salePrice`.
 

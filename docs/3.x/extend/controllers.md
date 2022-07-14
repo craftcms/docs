@@ -60,7 +60,7 @@ Provide an `action` param set to your controller’s action path:
 
 ```bash
 curl -d "action=plugin-handle/controller/action" \
-  -X POST https://my-project.test/
+  -X POST https://my-project.tld/
 ```
 
 ### Custom Route
@@ -80,7 +80,7 @@ return [
 By default, Craft makes an `actions/` route available for appending any valid action path. This can be customized with the <config3:actionTrigger> config setting.
 
 ```bash
-curl -X POST https://my-project.test/actions/plugin-handle/controller/action
+curl -X POST https://my-project.tld/actions/plugin-handle/controller/action
 ```
 
 #### Default Route Format

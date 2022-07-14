@@ -6,7 +6,7 @@ In the control panel, you’ll find addresses within the context of Orders and C
 
 You can also manage any customer’s addresses from their user account. Navigate to **Users**, choose a user to visit their edit page, and see the **Addresses** section of the **Customer Info** tab:
 
-![A user’s addresses seen from their Craft user account page](./assets/user-addresses.png)
+![A user’s addresses seen from their Craft user account page](./images/user-addresses.png)
 
 ## Managing Addresses
 
@@ -75,7 +75,7 @@ The address model has a read-only `addressLines` parameter that returns a key-va
 
 This parameter is designed to allow consistency when displaying a customer’s address on the front end and in the control panel.
 
-Address lines are used, for example, on the [order edit](orders.md#editing-orders) page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/address/address.twig) in the [example templates](example-templates.md).
+Address lines are used, for example, on the [order edit](orders-carts.md#editing-orders) page in the control panel. There are examples for [displaying an address](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/address/address.twig) in the [example templates](example-templates.md).
 
 You can customize this array using the [defineAddressLines](extend/events.md#defineaddresslines) event.
 
@@ -448,10 +448,10 @@ If an address is designated for shipping or billing in a cart, edits will carry 
 
 ## Validating Addresses
 
-Commerce saves customer address data without any validation. If you’d like to provide your own validation rules, you can either do that on the front end or use a custom plugin or module to provide server side validation.
+Commerce saves customer address data without any validation. If you’d like to provide your own validation rules, you can either do that on the front end or use a custom plugin or module to provide server-side validation.
 
 ::: tip
-If you’d like to provide your own server side validation, make sure you’re comfortable [creating a plugin or module for Craft CMS](https://craftcms.com/docs/3.x/extend/). Take a look at this Knowledge Base article for a complete example: [craftcms.com/knowledge-base/custom-module-events](https://craftcms.com/knowledge-base/custom-module-events)
+If you’d like to provide your own server-side validation, make sure you’re comfortable [creating a plugin or module for Craft CMS](https://craftcms.com/docs/3.x/extend/). Take a look at this Knowledge Base article for a complete example: [craftcms.com/knowledge-base/custom-module-events](https://craftcms.com/knowledge-base/custom-module-events)
 :::
 
 If you write your own plugin or module, you’ll want to use its `init()` method to subscribe to the event that’s triggered when the `Address` model collects it rules prior to attempting validation. Your event listener can add additional [validation rules](https://www.yiiframework.com/doc/guide/2.0/en/input-validation#declaring-rules) for the Address model.

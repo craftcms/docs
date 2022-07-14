@@ -11,7 +11,8 @@ You can get the donation purchasable in a template using `craft.commerce.donatio
 ## Adding the Donation to the Cart
 
 Since the donation purchasable has no default price, a price must be supplied with the donation when adding to the cart.
-This is done through [line item options](adding-to-and-updating-the-cart.md#line-item-options-and-notes) by submitting a `donationAmount` option parameter.
+
+This is done through [line item options](orders-carts.md#line-item-options-and-notes) by submitting a `donationAmount` option parameter.
 
 The form to add the donation to the cart would look like this:
 

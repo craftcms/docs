@@ -50,13 +50,13 @@
     {
         "class": "craft\\commerce\\adjusters\\Discount",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\adjusters\\Discount",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -92,13 +92,13 @@
     {
         "class": "craft\\commerce\\adjusters\\Shipping",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\adjusters\\Shipping",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -134,13 +134,13 @@
     {
         "class": "craft\\commerce\\adjusters\\Tax",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\adjusters\\Tax",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -212,13 +212,13 @@
     {
         "class": "craft\\commerce\\base\\Gateway",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\base\\Gateway",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -254,13 +254,13 @@
     {
         "class": "craft\\commerce\\base\\Model",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\base\\Model",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -296,13 +296,13 @@
     {
         "class": "craft\\commerce\\base\\Plan",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\base\\Plan",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -347,10 +347,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -393,10 +389,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -441,10 +433,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -487,10 +475,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -535,10 +519,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -581,10 +561,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -629,10 +605,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -675,10 +647,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -723,10 +691,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -769,10 +733,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -817,10 +777,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -863,10 +819,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -911,10 +863,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -957,10 +905,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1005,10 +949,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1051,10 +991,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1099,10 +1035,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1145,10 +1077,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1193,10 +1121,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1239,10 +1163,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1287,10 +1207,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1333,10 +1249,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1381,10 +1293,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1427,10 +1335,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1475,10 +1379,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1521,10 +1421,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1569,10 +1465,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1615,10 +1507,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1757,10 +1645,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1803,10 +1687,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1851,10 +1731,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1871,7 +1747,7 @@
     {
         "class": "craft\\commerce\\base\\Purchasable",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -1898,10 +1774,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -1918,7 +1790,7 @@
     {
         "class": "craft\\commerce\\base\\Purchasable",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -1944,10 +1816,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -1992,10 +1860,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -2039,10 +1903,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -2077,13 +1937,13 @@
     {
         "class": "craft\\commerce\\base\\ShippingMethod",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\base\\ShippingMethod",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2155,13 +2015,13 @@
     {
         "class": "craft\\commerce\\base\\SubscriptionGateway",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\base\\SubscriptionGateway",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -2878,10 +2738,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -2924,10 +2780,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -2972,10 +2824,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3018,10 +2866,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3066,10 +2910,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3112,10 +2952,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3160,10 +2996,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3206,10 +3038,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3254,10 +3082,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3300,10 +3124,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3348,10 +3168,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3394,10 +3210,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3442,10 +3254,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3488,10 +3296,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3536,10 +3340,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3582,10 +3382,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3630,10 +3426,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3676,10 +3468,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3724,10 +3512,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3770,10 +3554,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3818,10 +3598,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3864,10 +3640,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -3912,10 +3684,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -3958,10 +3726,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4006,10 +3770,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4052,10 +3812,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4100,10 +3856,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4146,10 +3898,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4288,10 +4036,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4334,10 +4078,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4382,10 +4122,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4402,7 +4138,7 @@
     {
         "class": "craft\\commerce\\elements\\Donation",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -4429,10 +4165,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4449,7 +4181,7 @@
     {
         "class": "craft\\commerce\\elements\\Donation",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -4475,10 +4207,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4523,10 +4251,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4569,10 +4293,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4617,10 +4337,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4663,10 +4379,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4711,10 +4423,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4757,10 +4465,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4805,10 +4509,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4851,10 +4551,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4899,10 +4595,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -4945,10 +4637,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -4993,10 +4681,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5039,10 +4723,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5087,10 +4767,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5133,10 +4809,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5181,10 +4853,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5227,10 +4895,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5275,10 +4939,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5321,10 +4981,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5369,10 +5025,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5415,10 +5067,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5463,10 +5111,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5509,10 +5153,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5557,10 +5197,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5603,10 +5239,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5651,10 +5283,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5697,10 +5325,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5745,10 +5369,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5791,10 +5411,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5839,10 +5455,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5885,10 +5497,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -5933,10 +5541,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -5979,10 +5583,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6027,10 +5627,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6073,10 +5669,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6121,10 +5713,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6167,10 +5755,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6215,10 +5799,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6262,10 +5842,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6308,10 +5884,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6450,10 +6022,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6496,10 +6064,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6544,10 +6108,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6564,7 +6124,7 @@
     {
         "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -6591,10 +6151,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6611,7 +6167,7 @@
     {
         "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -6637,10 +6193,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6685,10 +6237,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6731,10 +6279,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6779,10 +6323,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6825,10 +6365,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6873,10 +6409,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -6919,10 +6451,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -6967,10 +6495,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7013,10 +6537,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7061,10 +6581,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7107,10 +6623,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7155,10 +6667,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7201,10 +6709,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7249,10 +6753,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7295,10 +6795,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7343,10 +6839,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7389,10 +6881,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7437,10 +6925,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7483,10 +6967,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7531,10 +7011,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7577,10 +7053,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7625,10 +7097,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7671,10 +7139,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7719,10 +7183,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7765,10 +7225,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7813,10 +7269,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7859,10 +7311,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -7907,10 +7355,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -7953,10 +7397,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8001,10 +7441,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8047,10 +7483,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8189,10 +7621,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8235,10 +7663,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8283,10 +7707,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8303,7 +7723,7 @@
     {
         "class": "craft\\commerce\\elements\\Product",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -8330,10 +7750,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8350,7 +7766,7 @@
     {
         "class": "craft\\commerce\\elements\\Product",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -8376,10 +7792,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8424,10 +7836,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8470,10 +7878,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8518,10 +7922,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8564,10 +7964,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8612,10 +8008,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8658,10 +8050,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8706,10 +8094,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8752,10 +8136,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8800,10 +8180,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8846,10 +8222,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8894,10 +8266,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -8940,10 +8308,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -8988,10 +8352,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9034,10 +8394,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9082,10 +8438,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9128,10 +8480,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9176,10 +8524,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9222,10 +8566,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9270,10 +8610,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9316,10 +8652,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9364,10 +8696,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9410,10 +8738,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9458,10 +8782,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9504,10 +8824,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9552,10 +8868,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9598,10 +8910,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9646,10 +8954,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9692,10 +8996,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9740,10 +9040,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9786,10 +9082,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -9928,10 +9220,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -9974,10 +9262,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10022,10 +9306,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10042,7 +9322,7 @@
     {
         "class": "craft\\commerce\\elements\\Subscription",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -10069,10 +9349,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10089,7 +9365,7 @@
     {
         "class": "craft\\commerce\\elements\\Subscription",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -10115,10 +9391,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10163,10 +9435,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10209,10 +9477,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10257,10 +9521,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10303,10 +9563,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10351,10 +9607,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10397,10 +9649,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10445,10 +9693,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10491,10 +9735,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10539,10 +9779,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10585,10 +9821,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10633,10 +9865,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10679,10 +9907,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10727,10 +9951,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10773,10 +9993,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10821,10 +10037,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10867,10 +10079,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -10915,10 +10123,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -10961,10 +10165,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11009,10 +10209,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11055,10 +10251,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11103,10 +10295,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11149,10 +10337,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11197,10 +10381,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11243,10 +10423,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11291,10 +10467,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11337,10 +10509,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11385,10 +10553,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11431,10 +10595,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11479,10 +10639,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11525,10 +10681,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11573,10 +10725,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11619,10 +10767,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11667,10 +10811,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11713,10 +10853,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11855,10 +10991,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11901,10 +11033,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -11949,10 +11077,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -11969,7 +11093,7 @@
     {
         "class": "craft\\commerce\\elements\\Variant",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields",
         "filters": {
             "duplicating": {
@@ -11996,10 +11120,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12016,7 +11136,7 @@
     {
         "class": "craft\\commerce\\elements\\Variant",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields",
         "filters": {
             "duplicating": {
@@ -12042,10 +11162,6 @@
                     "revision",
                     "resaving"
                 ]
-            },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
             },
             "propagating": {
                 "label": "Element is being propagated",
@@ -12090,10 +11206,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12137,10 +11249,6 @@
                     "resaving"
                 ]
             },
-            "isNew": {
-                "label": "Element is new",
-                "conditionsPhp": "$event->isNew"
-            },
             "propagating": {
                 "label": "Element is being propagated",
                 "conditionsPhp": "$event->sender->propagating"
@@ -12181,13 +11289,13 @@
     {
         "class": "craft\\commerce\\elements\\actions\\CopyLoadCartUrl",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\elements\\actions\\CopyLoadCartUrl",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12229,13 +11337,13 @@
     {
         "class": "craft\\commerce\\elements\\actions\\CreateDiscount",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\elements\\actions\\CreateDiscount",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12277,13 +11385,13 @@
     {
         "class": "craft\\commerce\\elements\\actions\\CreateSale",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\elements\\actions\\CreateSale",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12325,13 +11433,13 @@
     {
         "class": "craft\\commerce\\elements\\actions\\DeleteOrder",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\elements\\actions\\DeleteOrder",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12373,13 +11481,13 @@
     {
         "class": "craft\\commerce\\elements\\actions\\DeleteProduct",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\elements\\actions\\DeleteProduct",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12421,13 +11529,13 @@
     {
         "class": "craft\\commerce\\elements\\actions\\DownloadOrderPdfAction",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\elements\\actions\\DownloadOrderPdfAction",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12469,13 +11577,13 @@
     {
         "class": "craft\\commerce\\elements\\actions\\UpdateOrderStatus",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\elements\\actions\\UpdateOrderStatus",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12661,13 +11769,13 @@
     {
         "class": "craft\\commerce\\engines\\Tax",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\engines\\Tax",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12703,13 +11811,13 @@
     {
         "class": "craft\\commerce\\exports\\Expanded",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\exports\\Expanded",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12745,13 +11853,13 @@
     {
         "class": "craft\\commerce\\exports\\LineItemExport",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\exports\\LineItemExport",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12787,13 +11895,13 @@
     {
         "class": "craft\\commerce\\exports\\OrderExport",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\exports\\OrderExport",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -12925,13 +12033,13 @@
     {
         "class": "craft\\commerce\\fields\\Products",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\fields\\Products",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13063,13 +12171,13 @@
     {
         "class": "craft\\commerce\\fields\\Variants",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\fields\\Variants",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13141,13 +12249,13 @@
     {
         "class": "craft\\commerce\\gateways\\Dummy",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\gateways\\Dummy",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13219,13 +12327,13 @@
     {
         "class": "craft\\commerce\\gateways\\Manual",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\gateways\\Manual",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13297,13 +12405,13 @@
     {
         "class": "craft\\commerce\\gateways\\MissingGateway",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\gateways\\MissingGateway",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13357,13 +12465,13 @@
     {
         "class": "craft\\commerce\\models\\Address",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Address",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13399,13 +12507,13 @@
     {
         "class": "craft\\commerce\\models\\Country",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Country",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13441,13 +12549,13 @@
     {
         "class": "craft\\commerce\\models\\Currency",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Currency",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13483,13 +12591,13 @@
     {
         "class": "craft\\commerce\\models\\Customer",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Customer",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13525,13 +12633,13 @@
     {
         "class": "craft\\commerce\\models\\Discount",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Discount",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13567,13 +12675,13 @@
     {
         "class": "craft\\commerce\\models\\Email",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Email",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13609,13 +12717,13 @@
     {
         "class": "craft\\commerce\\models\\LineItem",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\LineItem",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13651,13 +12759,13 @@
     {
         "class": "craft\\commerce\\models\\LineItemStatus",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\LineItemStatus",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13693,13 +12801,13 @@
     {
         "class": "craft\\commerce\\models\\LiteShippingSettings",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\LiteShippingSettings",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13735,13 +12843,13 @@
     {
         "class": "craft\\commerce\\models\\LiteTaxSettings",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\LiteTaxSettings",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13777,13 +12885,13 @@
     {
         "class": "craft\\commerce\\models\\OrderAdjustment",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\OrderAdjustment",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13819,13 +12927,13 @@
     {
         "class": "craft\\commerce\\models\\OrderHistory",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\OrderHistory",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13861,13 +12969,13 @@
     {
         "class": "craft\\commerce\\models\\OrderNotice",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\OrderNotice",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13903,13 +13011,13 @@
     {
         "class": "craft\\commerce\\models\\OrderStatus",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\OrderStatus",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13945,13 +13053,13 @@
     {
         "class": "craft\\commerce\\models\\PaymentCurrency",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\PaymentCurrency",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -13987,13 +13095,13 @@
     {
         "class": "craft\\commerce\\models\\PaymentSource",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\PaymentSource",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14029,13 +13137,13 @@
     {
         "class": "craft\\commerce\\models\\Pdf",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Pdf",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14071,13 +13179,13 @@
     {
         "class": "craft\\commerce\\models\\ProductType",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\ProductType",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14113,13 +13221,13 @@
     {
         "class": "craft\\commerce\\models\\ProductTypeSite",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\ProductTypeSite",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14155,13 +13263,13 @@
     {
         "class": "craft\\commerce\\models\\Sale",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Sale",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14197,13 +13305,13 @@
     {
         "class": "craft\\commerce\\models\\Settings",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Settings",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14239,13 +13347,13 @@
     {
         "class": "craft\\commerce\\models\\ShippingAddressZone",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\ShippingAddressZone",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14281,13 +13389,13 @@
     {
         "class": "craft\\commerce\\models\\ShippingCategory",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\ShippingCategory",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14323,13 +13431,13 @@
     {
         "class": "craft\\commerce\\models\\ShippingMethod",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\ShippingMethod",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14365,13 +13473,13 @@
     {
         "class": "craft\\commerce\\models\\ShippingMethodOption",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\ShippingMethodOption",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14407,13 +13515,13 @@
     {
         "class": "craft\\commerce\\models\\ShippingRule",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\ShippingRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14449,13 +13557,13 @@
     {
         "class": "craft\\commerce\\models\\ShippingRuleCategory",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\ShippingRuleCategory",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14491,13 +13599,13 @@
     {
         "class": "craft\\commerce\\models\\State",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\State",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14533,13 +13641,13 @@
     {
         "class": "craft\\commerce\\models\\TaxAddressZone",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\TaxAddressZone",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14575,13 +13683,13 @@
     {
         "class": "craft\\commerce\\models\\TaxCategory",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\TaxCategory",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14617,13 +13725,13 @@
     {
         "class": "craft\\commerce\\models\\TaxRate",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\TaxRate",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14659,13 +13767,13 @@
     {
         "class": "craft\\commerce\\models\\Transaction",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\Transaction",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14701,13 +13809,13 @@
     {
         "class": "craft\\commerce\\models\\payments\\BasePaymentForm",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\payments\\BasePaymentForm",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14743,13 +13851,13 @@
     {
         "class": "craft\\commerce\\models\\payments\\CreditCardPaymentForm",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\payments\\CreditCardPaymentForm",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14785,13 +13893,13 @@
     {
         "class": "craft\\commerce\\models\\payments\\DummyPaymentForm",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\payments\\DummyPaymentForm",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14827,13 +13935,13 @@
     {
         "class": "craft\\commerce\\models\\payments\\OffsitePaymentForm",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\payments\\OffsitePaymentForm",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14869,13 +13977,13 @@
     {
         "class": "craft\\commerce\\models\\subscriptions\\CancelSubscriptionForm",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\subscriptions\\CancelSubscriptionForm",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14911,13 +14019,13 @@
     {
         "class": "craft\\commerce\\models\\subscriptions\\DummyPlan",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\subscriptions\\DummyPlan",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14953,13 +14061,13 @@
     {
         "class": "craft\\commerce\\models\\subscriptions\\SubscriptionForm",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\subscriptions\\SubscriptionForm",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -14995,13 +14103,13 @@
     {
         "class": "craft\\commerce\\models\\subscriptions\\SubscriptionPayment",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\subscriptions\\SubscriptionPayment",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -15037,13 +14145,13 @@
     {
         "class": "craft\\commerce\\models\\subscriptions\\SwitchPlansForm",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\models\\subscriptions\\SwitchPlansForm",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -18877,13 +17985,13 @@
     {
         "class": "craft\\commerce\\services\\Formulas",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\services\\Formulas",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -18973,13 +18081,13 @@
     {
         "class": "craft\\commerce\\services\\OrderNotices",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\services\\OrderNotices",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19261,13 +18369,13 @@
     {
         "class": "craft\\commerce\\services\\Taxes",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\services\\Taxes",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19363,13 +18471,13 @@
     {
         "class": "craft\\commerce\\widgets\\AverageOrderTotal",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\AverageOrderTotal",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19441,13 +18549,13 @@
     {
         "class": "craft\\commerce\\widgets\\NewCustomers",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\NewCustomers",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19519,13 +18627,13 @@
     {
         "class": "craft\\commerce\\widgets\\Orders",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\Orders",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19597,13 +18705,13 @@
     {
         "class": "craft\\commerce\\widgets\\RepeatCustomers",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\RepeatCustomers",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19675,13 +18783,13 @@
     {
         "class": "craft\\commerce\\widgets\\TopCustomers",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\TopCustomers",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19753,13 +18861,13 @@
     {
         "class": "craft\\commerce\\widgets\\TopProductTypes",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\TopProductTypes",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19831,13 +18939,13 @@
     {
         "class": "craft\\commerce\\widgets\\TopProducts",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\TopProducts",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19909,13 +19017,13 @@
     {
         "class": "craft\\commerce\\widgets\\TopPurchasables",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\TopPurchasables",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -19987,13 +19095,13 @@
     {
         "class": "craft\\commerce\\widgets\\TotalOrders",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\TotalOrders",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -20065,13 +19173,13 @@
     {
         "class": "craft\\commerce\\widgets\\TotalOrdersByCountry",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\TotalOrdersByCountry",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
@@ -20143,13 +19251,13 @@
     {
         "class": "craft\\commerce\\widgets\\TotalRevenue",
         "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
         "class": "craft\\commerce\\widgets\\TotalRevenue",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineRulesEvent",
+        "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {

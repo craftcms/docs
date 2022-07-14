@@ -19,19 +19,19 @@ It returns an [ElementCriteriaModel](https://craftcms.com/docs/2.x/templating/el
 
 `craft.commerce.products` supports the following parameters:
 
-### ID
+### `id`
 
 The product’s element ID.
 
-### type
+### `type`
 
 Product Type model or handle.
 
-### typeId
+### `typeId`
 
 Product type ID.
 
-### status
+### `status`
 
 Only fetch products with the given status.
 
@@ -42,43 +42,43 @@ An entry is `live` if it is enabled, has a `availableOn` in the past and an `exp
 An entry is `pending` if it is enabled and has `availableOn` and `expiresOn` Dates in the future.
 An entry is `expired` if it is enabled and has `availableOn` and `expiresOn` Dates in the past.
 
-### postDate
+### `postDate`
 
 Fetch products based on their postDate.
 
-### expiryDate
+### `expiryDate`
 
 Fetch products based on their date of expiry.
 
-### after
+### `after`
 
 Fetch products based on available dates after this date.
 
-### before
+### `before`
 
 Fetch products based on their date available.
 
-### defaultWeight
+### `defaultWeight`
 
-Fetch products based on the default variant’s weight
+Fetch products based on the default variant’s weight.
 
-### defaultHeight
+### `defaultHeight`
 
-Fetch products based on the default variant’s height
+Fetch products based on the default variant’s height.
 
-### defaultLength
+### `defaultLength`
 
-Fetch products based on the default variant’s length
+Fetch products based on the default variant’s length.
 
-### defaultWidth
+### `defaultWidth`
 
-Fetch products based on the default variant’s width
+Fetch products based on the default variant’s width.
 
-### defaultSku
+### `defaultSku`
 
-Fetch products based on the default variant’s SKU
+Fetch products based on the default variant’s SKU.
 
-### hasVariant
+### `hasVariant`
 
 Only return products where the `hasVariant` params match the product’s variants.
 
@@ -92,7 +92,7 @@ For example:
 
 There is no way to query all variants directly, but within the `hasVariant` product criteria parameters you have access to all basic element criteria parameters in addition to the following special criteria that apply to variants:
 
-### hasStock
+### `hasStock`
 
 Returns products that have at least one variant in stock.
 
@@ -108,7 +108,7 @@ For example:
 }) %}
 ```
 
-### hasSales
+### `hasSales`
 
 Returns products that have at least one sale available to the current user.
 

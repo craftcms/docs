@@ -40,7 +40,7 @@ That will give you an ElementCriteriaModel object, prepped to output all of the 
 }) %}
 ```
 
-(See [Relations](https://craftcms.com/docs/relations) for more info on the relatedTo param.)
+(See [Relations](https://craftcms.com/docs/2.x/relations.html) for more info on the relatedTo param.)
 
 ## Examples
 

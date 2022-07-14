@@ -44,21 +44,30 @@ Searching for… | will find elements…
 `salty OR dog` | containing either “salty” or “dog” (or both).
 `salty -dog` | containing “salty” but not “dog”.
 `"salty dog"` | containing the exact phrase “salty dog”.
-`*ty` | containing a word that ends with “ty”.
-`*alt*` | containing a word that contains “alt”.
 `body:salty` | where the `body` field contains “salty”.
 `body:salty body:dog` | where the `body` field contains both “salty” and “dog”.
 `body:salty OR body:dog` | where the `body` field contains either “salty” or “dog”.
 `body:salty -body:dog` | where the `body` field contains “salty” but not “dog”.
 `body:"salty dog"` | where the `body` field contains the exact phrase “salty dog”.
-`body:*ty` | where the `body` field contains a word that ends with “ty”.
-`body:*alt*` | where the `body` field contains a word that contains “alt”.
 `body::salty` | where the `body` field is set to “salty” and nothing more.
 `body::"salty dog"` | where the `body` field is set to “salty dog” and nothing more.
+
+### Wildcard Syntax
+
+You can use a wildcard character (`*`) to modify search behavior:
+
+Searching for… | will find elements…
+-|-
+`*ty` | containing a word that ends with “ty”.
+`*alt*` | containing a word that contains “alt”.
+`body:*ty` | where the `body` field contains a word that ends with “ty”.
+`body:*alt*` | where the `body` field contains a word that contains “alt”.
 `body::salty*` | where the `body` field begins with “salty”.
 `body::*dog` | where the `body` field ends with “dog”.
 `body:*` | where the `body` field contains any value.
 `-body:*` | where the `body` field is empty.
+
+The exact behavior will depend on your [`defaultSearchTermOptions`](config3:defaultSearchTermOptions) config setting, where `subLeft` and `subRight`—when set to `true`—add a wildcard to search keywords by default behind the scenes.
 
 ## Searching for Specific Element Attributes
 

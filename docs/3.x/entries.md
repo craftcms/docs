@@ -15,7 +15,7 @@ Before you can create entries, you must create Sections to contain them. In each
 - Which template should get loaded if an entry’s URL is requested
 - What types of entries should be available in the section, and which fields each of those entry types should have
 
-If you're using Craft with multiple sites then you can also define in your Section:
+If you’re using Craft with multiple sites then you can also define in your Section:
 
 - Which sites’ entries in the section should target
 - Which sites are enabled by default for new entries
@@ -24,9 +24,11 @@ To create a new section, go to **Settings** → **Sections** and choose **New Se
 
 ### Section Types
 
-Not all sections are created equal. Craft has three different types of sections:
+Craft has three different types of sections:
 
 #### Singles
+
+![Illustration of Entries layout with “Singles” selected, showing “About Us”, “Contact” and “Home” entries](./images/singles.png)
 
 Singles are used for one-off pages that have unique content requirements, such as:
 
@@ -38,6 +40,8 @@ Unlike the other section types, Singles only have one entry associated with them
 
 #### Channels
 
+![Illustration of Entries layout with a “News Articles” channel selected, showing three dated news entries](./images/channels.png)
+
 Channels are used for streams of similar content, such as:
 
 - a Blog
@@ -46,7 +50,15 @@ Channels are used for streams of similar content, such as:
 
 #### Structures
 
-Structures are good for times when you need to store multiple similar entries, and sort them into a specific order. They can also be hierarchical. Examples include:
+Structures are good for times when you need to store multiple similar entries, and sort them into a specific order. They can also be hierarchical.
+
+![Illustration of Entries layout with an “Exhibits” structure selected, showing four demonstration exhibits entries with nesting and drag-and-drop handles](./images/structures.png)
+
+Unlike other sections, Structures have a “Structure” sort option that provies the manually-ordered, drag-and-drop hierarchy seen above:
+
+![Illustration of entry listing sort menu with “Structure” selected](./images/structure-view-mode.png)
+
+Examples include:
 
 - Documentation
 - a Services section, where the order of services matters
@@ -99,7 +111,7 @@ You can designate any one entry as a site’s homepage using a special `__home__
 :::
 
 ::: tip
-You can use an attribute from a query in the entry’s URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+You can use an attribute from a query in the entry’s URI. Use double curly braces (e.g. `{{craft.entries().section('mySingle').one().slug}}/news`).
 :::
 
 ::: tip
@@ -127,7 +139,7 @@ You can use environment variables and aliases in the preview target URL. These d
 :::
 
 ::: tip
-Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries.section('mySingle').one().url }}`).
+Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries().section('mySingle').one().url }}`).
 :::
 
 When an author is editing an entry from a section with custom preview targets, the **View** button will be replaced with a menu that lists the **Primary entry page** (if the section has an Entry URI Format), plus the names of each preview target.
@@ -202,7 +214,7 @@ Conditionals are also fair game. There’s no shortcut syntax for those, so if y
 
 ## Editing Entries
 
-If you have at least one section, there will be an **Entries** tab in the primary control panel navigation. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
+If you have at least one section, there will be an **Entries** menu item in the primary control panel navigation. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
 
 You can perform the following actions from the Edit Entry page:
 
@@ -277,6 +289,10 @@ Entry queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#after)                           | Narrows the query results to only entries that were posted on or after a certain date.
@@ -302,7 +318,6 @@ Entry queries support the following parameters:
 | [drafts](#drafts)                         | Narrows the query results to only drafts entries.
 | [expiryDate](#expirydate)                 | Narrows the query results based on the entries’ expiry dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants in their structure.
 | [id](#id)                                 | Narrows the query results based on the entries’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -342,6 +357,10 @@ Entry queries support the following parameters:
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#uri)                               | Narrows the query results based on the entries’ URIs.
 | [with](#with)                             | Causes the query to return matching entries eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `after`
 
@@ -936,7 +955,7 @@ Narrows the query results to only drafts entries.
 ::: code
 ```twig
 {# Fetch a draft entry #}
-{% set entries = {twig-function}
+{% set entries = craft.entries()
   .drafts()
   .id(123)
   .one() %}
@@ -995,6 +1014,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -1014,15 +1037,6 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `hasDescendants`
@@ -1402,8 +1416,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -1622,7 +1636,7 @@ Narrows the query results to only revision entries.
 ::: code
 ```twig
 {# Fetch a revision entry #}
-{% set entries = {twig-function}
+{% set entries = craft.entries()
   .revisions()
   .id(123)
   .one() %}
@@ -1649,7 +1663,7 @@ Narrows the query results to only unpublished drafts which have been saved after
 ::: code
 ```twig
 {# Fetch saved, unpublished draft entries #}
-{% set entries = {twig-function}
+{% set entries = craft.entries()
   .draftOf(false)
   .savedDraftsOnly()
   .all() %}
@@ -1963,6 +1977,7 @@ Possible values include:
 | `'expired'` | that are expired (enabled with an Expiry Date in the past).
 | `'disabled'` | that are disabled.
 | `['live', 'pending']` | that are live or pending.
+| `['not', 'live', 'pending']` | that are not live or pending.
 
 
 

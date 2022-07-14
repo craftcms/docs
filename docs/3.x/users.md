@@ -60,6 +60,10 @@ User queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
@@ -75,7 +79,6 @@ User queries support the following parameters:
 | [email](#email)                           | Narrows the query results based on the users’ email addresses.
 | [firstName](#firstname)                   | Narrows the query results based on the users’ first names.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the user group the users belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | [hasPhoto](#hasphoto)                     | Narrows the query results to only users that have (or don’t have) a user photo.
@@ -88,9 +91,7 @@ User queries support the following parameters:
 | [offset](#offset)                         | Determines how many users should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only users that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only users that match a search query.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the users’ IDs in the `elements_sites` table.
 | [status](#status)                         | Narrows the query results based on the users’ statuses.
@@ -99,6 +100,10 @@ User queries support the following parameters:
 | [username](#username)                     | Narrows the query results based on the users’ usernames.
 | [with](#with)                             | Causes the query to return matching users eager-loaded with related elements.
 | [withGroups](#withgroups)                 | Causes the query to return matching users eager-loaded with their user groups.
+
+
+<!-- textlint-enable -->
+
 
 #### `admin`
 
@@ -346,9 +351,9 @@ Possible values include:
 
 | Value | Fetches users…
 | - | -
-| `'foo@bar.baz'` | with an email of `foo@bar.baz`.
-| `'not foo@bar.baz'` | not with an email of `foo@bar.baz`.
-| `'*@bar.baz'` | with an email that ends with `@bar.baz`.
+| `'me@domain.tld'` | with an email of `me@domain.tld`.
+| `'not me@domain.tld'` | not with an email of `me@domain.tld`.
+| `'*@domain.tld'` | with an email that ends with `@domain.tld`.
 
 
 
@@ -405,6 +410,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -426,15 +435,6 @@ $users = \craft\elements\User::find()
 :::
 
 
-#### `getCacheTags`
-
-
-
-
-
-
-
-
 #### `group`
 
 Narrows the query results based on the user group the users belong to.
@@ -446,6 +446,7 @@ Possible values include:
 | `'foo'` | in a group with a handle of `foo`.
 | `'not foo'` | not in a group with a handle of `foo`.
 | `['foo', 'bar']` | in a group with a handle of `foo` or `bar`.
+| `['and', 'foo', 'bar']` | in both groups with handles of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a group with a handle of `foo` or `bar`.
 | a [UserGroup](craft3:craft\models\UserGroup) object | in a group represented by the object.
 
@@ -479,6 +480,7 @@ Possible values include:
 | `1` | in a group with an ID of 1.
 | `'not 1'` | not in a group with an ID of 1.
 | `[1, 2]` | in a group with an ID of 1 or 2.
+| `['and', 1, 2]` | in both groups with IDs of 1 or 2.
 | `['not', 1, 2]` | not in a group with an ID of 1 or 2.
 
 
@@ -743,8 +745,8 @@ If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.ht
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -766,33 +768,6 @@ $users = \craft\elements\User::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
-    ->all();
-```
-:::
-
-
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set users = craft.users()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$users = \craft\elements\User::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
     ->all();
 ```
 :::
@@ -820,33 +795,6 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 // Fetch all users that are related to $myCategory
 $users = \craft\elements\User::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft users #}
-{% set users = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft users
-$users = \craft\elements\User::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -932,6 +880,7 @@ Possible values include:
 | `'pending'` | with accounts that are still pending activation.
 | `'locked'` | with locked accounts (regardless of whether they’re active or suspended).
 | `['active', 'suspended']` | with active or suspended accounts.
+| `['not', 'active', 'suspended']` | without active or suspended accounts.
 
 
 

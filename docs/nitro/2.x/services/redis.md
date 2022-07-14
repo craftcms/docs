@@ -8,7 +8,7 @@ To enable Redis in Nitro, run the following command:
 
 `nitro enable redis`
 
-Nitro will then prompt you to `apply` the changes. After the changes have been applied Redis will be available at [https://redis.service.nitro](https://redis.service.nitro).
+Nitro will then prompt you to `apply` the changes. After the changes have been applied Redis will be available at `redis.service.nitro`.
 
 ## Using Redis
 

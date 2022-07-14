@@ -3,14 +3,14 @@
     <div class="switch-wrapper hidden xl:block">
       <ColorModeSwitch v-on="$listeners" :on="isDark" />
     </div>
-    <div class="sidebar-link-wrapper">
+    <nav class="sidebar-link-wrapper">
       <SidebarLinks
         :depth="depth"
         :sidebar-depth="$page.frontmatter.sidebarDepth || sidebarDepth"
         :items="headingItems"
         fixed-heading="On this Page"
       />
-    </div>
+    </nav>
   </div>
 </template>
 
@@ -72,8 +72,11 @@ export default {
     .sidebar-link {
       @apply mx-0 px-0 border-0 pr-4;
       color: var(--sidebar-link-color);
-
       opacity: 0.6;
+
+      &:hover {
+        @apply text-blue opacity-100;
+      }
 
       &.active {
         @apply opacity-100;

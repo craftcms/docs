@@ -15,7 +15,7 @@ To add a new full page to the control panel, create a template that extends the 
 At a minimum, your template should set a `title` variable and define a `content` block:
 
 ```twig
-{% extends "_layouts/cp" %}
+{% extends "_layouts/cp.html" %}
 {% set title = "Page Title"|t('plugin-handle') %}
 
 {% block content %}
@@ -82,14 +82,14 @@ For example, the following `crumbs` array defines two breadcrumbs:
 
 ### Adding Tabs
 
-To add breadcrumbs to your page, define a `tabs` variable, set to a hash of the tabs, indexed by tab IDs.
+To add tabs to your page, define a `tabs` variable, set to a hash of the tabs, indexed by tab IDs.
 
 Each tab should be represented as a nested hash with the following keys:
 
 Key | Description
 --- | -----------
-`label` | The breadcrumb label.
-`url` | The URL or anchor that the breadcrumb should link to.
+`label` | The tab label.
+`url` | The URL or anchor that the tab should link to.
 `class` | A class name that should be added to the tab (in addition to `tab`).
 
 For example, the following `tabs` hash defines two tabs, which will toggle the `hidden` class of `<div>` elements whose IDs match the anchors:

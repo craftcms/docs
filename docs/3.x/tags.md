@@ -8,7 +8,7 @@ Before you can create tags, you must create Tag Groups to contain them.
 
 To create a new tag group, go to Settings → Tags and click New Tag Group.
 
-Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don't need to assign any fields to the Tag Group Field Layout in order to use the group.
+Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don’t need to assign any fields to the Tag Group Field Layout in order to use the group.
 
 ## Assigning Tags
 
@@ -68,6 +68,10 @@ Tag queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -79,7 +83,6 @@ Tag queries support the following parameters:
 | [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the tag groups the tags belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 | [id](#id)                                 | Narrows the query results based on the tags’ IDs.
@@ -89,9 +92,7 @@ Tag queries support the following parameters:
 | [offset](#offset)                         | Determines how many tags should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only tags that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only tags that match a search query.
 | [site](#site)                             | Determines which site(s) the tags should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the tags should be queried in, per the site’s ID.
@@ -102,6 +103,10 @@ Tag queries support the following parameters:
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#uri)                               | Narrows the query results based on the tags’ URIs.
 | [with](#with)                             | Causes the query to return matching tags eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -299,6 +304,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -318,15 +327,6 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `group`
@@ -549,8 +549,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -572,33 +572,6 @@ $tags = \craft\elements\Tag::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
-    ->all();
-```
-:::
-
-
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set tags = craft.tags()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$tags = \craft\elements\Tag::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
     ->all();
 ```
 :::
@@ -626,33 +599,6 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 // Fetch all tags that are related to $myCategory
 $tags = \craft\elements\Tag::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft tags #}
-{% set tags = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft tags
-$tags = \craft\elements\Tag::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::

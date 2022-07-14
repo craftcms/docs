@@ -13,7 +13,7 @@ Filter | Description
 [camel](#camel) | Formats a string into camelCase.
 [capitalize](https://twig.symfony.com/doc/2.x/filters/capitalize.html) | Capitalizes the first character of a string.
 [column](#column) | Returns the values from a single property or key in an array.
-[contains](#contains) | Returns whether an array contains a nested item with a given key/value pair.
+[contains](#contains) | Returns whether an array contains a nested item with a given key-value pair.
 [convert_encoding](https://twig.symfony.com/doc/2.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
 [currency](#currency) | Formats a number as currency.
 [date](#date) | Formats a date.
@@ -52,6 +52,7 @@ Filter | Description
 [merge](#merge) | Merges an array with another one.
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
 [namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[namespaceAttributes](#namespaceattributes) | Namespaces `id` and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
 [nl2br](https://twig.symfony.com/doc/2.x/filters/nl2br.html) | Replaces newlines with `<br>` tags.
@@ -88,7 +89,7 @@ Filter | Description
 [upper](https://twig.symfony.com/doc/2.x/filters/upper.html) | Formats a string into “UPPER CASE”.
 [url_encode](https://twig.symfony.com/doc/2.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
 [values](#values) | Returns all the values in an array, resetting its keys.
-[where](#where) | Filters an array by key/value pairs.
+[where](#where) | Filters an array by key-value pairs.
 [withoutKey](#withoutkey) | Returns an array without the specified key.
 [without](#without) | Returns an array without the specified element(s).
 
@@ -204,6 +205,18 @@ If you want to completely replace a `class` or `style` attribute, remove it firs
 {{ tag|attr({class: false})|attr({class: 'bar'}) }}
 {# Output: <div class="bar"> #}
 ```
+
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{% set tag = '<input type="text">' %}
+{{ tag|attr({
+  type: 'submit',
+  value: 'Register & Subscribe →'
+}) }}
+{# Output: <input type="submit" value="Register &amp; Subscribe →"> #}
+```
+:::
 
 ## `camel`
 
@@ -450,7 +463,7 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 Groups items in an array by a the results of an arrow function.
 
 ```twig
-{% set allEntries = craft.entries.section('blog').all() %}
+{% set allEntries = craft.entries().section('blog').all() %}
 {% set allEntriesByYear = allEntries|group(e => e.postDate|date('Y')) %}
 
 {% for year, entriesInYear in allEntriesByYear %}
@@ -792,6 +805,53 @@ That would result in:
 <input class="foo-text" id="foo-title" name="foo[title]" type="text">
 ```
 
+## `namespaceAttributes`
+
+The `|namespaceAttributes` filter can be used to namespace `id` and other HTML attributes, as well as CSS selectors.
+
+It’s identical to the [namespace](#namespace) filter, except that inputs’ `name` attributes won’t be modified.
+
+For example, this:
+
+```twig
+{% set html %}
+<style>
+  .text { font-size: larger; }
+  #title { font-weight: bold; }
+</style>
+<input class="text" id="title" name="title" type="text">
+{% endset %}
+{{ html|namespaceAttributes('foo') }}
+```
+
+would become this:
+
+```html
+<style>
+  .text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="text" id="foo-title" name="title" type="text">
+```
+
+Notice how the `#title` CSS selector became `#foo-title`, the `id` attribute changed from `title` to `foo-title`, but the `name` attribute wasn’t changed.
+
+If you want class names to get namespaced as well, pass `withClasses=true`. That will affect both class CSS selectors and `class` attributes:
+
+```twig
+{{ html|namespaceAttributes('foo', withClasses=true) }}
+```
+
+That would result in:
+
+```html{2,5}
+<style>
+  .foo-text { font-size: larger; }
+  #foo-title { font-weight: bold; }
+</style>
+<input class="foo-text" id="foo-title" name="title" type="text">
+```
+
 ## `namespaceInputId`
 
 Namepaces an element ID.
@@ -998,6 +1058,10 @@ You can also use a regular expression to search for matches by starting and endi
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
 ```
 
+::: tip
+Any backslashes in the regular expression will need to be double-escaped '`\\`' for them to work properly.
+:::
+
 ## `rss`
 
 Outputs a date in the format required for RSS feeds (`D, d M Y H:i:s O`).
@@ -1171,7 +1235,7 @@ Runs an array through <craft3:craft\helpers\ArrayHelper::where()>.
 Returns an array without the specified element(s).
 
 ```twig
-{% set entries = craft.entries.section('articles').limit(3).find %}
+{% set entries = craft.entries().section('articles').limit(3).find %}
 {% set firstEntry = entries[0] %}
 {% set remainingEntries = entries|without(firstEntry) %}
 ```

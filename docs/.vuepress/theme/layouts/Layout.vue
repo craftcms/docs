@@ -14,18 +14,18 @@
       :extra-items="extraSidebarItems"
       @toggle-sidebar="toggleSidebar"
       @select-version="handleVersionUpdate"
-      @select-language="handleLanguageUpdate"
     />
     <div id="main" class="main-container">
       <div id="top-bar" class="top-bar">
         <Hamburger @click="toggleSidebar" />
         <div
           class="ml-12 lg:ml-0 lg:block max-w-screen-md h-full flex items-center"
+          role="search"
         >
           <SearchBox
             v-if="
               $site.themeConfig.search !== false &&
-                $page.frontmatter.search !== false
+              $page.frontmatter.search !== false
             "
           />
         </div>
@@ -161,10 +161,9 @@ import {
   resolveSidebarItems,
   resolveExtraSidebarItems,
   resolveHeaders,
-  getAlternateVersion,
   getPageWithRelativePath,
   fixDoubleSlashes,
-  getSameContentForVersion
+  getSameContentForVersion,
 } from "../util";
 
 import { getStorage, setStorage, unsetStorage } from "../Storage";
@@ -177,7 +176,7 @@ export default {
     LeftBar,
     RightBar,
     SearchBox,
-    Hamburger
+    Hamburger,
   },
 
   data: () => ({
@@ -192,8 +191,8 @@ export default {
         : 0,
     colorModes: {
       light: "theme-light",
-      dark: "theme-dark"
-    }
+      dark: "theme-dark",
+    },
   }),
 
   computed: {
@@ -227,9 +226,9 @@ export default {
         {
           "no-navbar": !this.shouldShowNavbar,
           "sidebar-open": this.isSidebarOpen,
-          "sidebar-transitioning": this.isSidebarTransitioning
+          "sidebar-transitioning": this.isSidebarTransitioning,
         },
-        userPageClass
+        userPageClass,
       ];
     },
 
@@ -263,7 +262,7 @@ export default {
 
     colorMode() {
       return this.isDark ? "dark" : "light";
-    }
+    },
   },
 
   mounted() {
@@ -284,7 +283,7 @@ export default {
         setTimeout(() => {
           if (element) {
             element.scrollIntoView({
-              behavior: this.getPrefersReducedMotion() ? "auto" : "smooth"
+              behavior: this.getPrefersReducedMotion() ? "auto" : "smooth",
             });
           }
         }, 750);
@@ -296,6 +295,60 @@ export default {
 
   unmounted() {
     window.removeEventListener("resize", this.handleWidthChange);
+  },
+
+  /**
+   * Add a canonical tag that points to the default version’s equivalent page.
+   *
+   * If there’s no modern equivalent, omit the tag.
+   */
+  created() {
+    if (typeof this.$ssrContext === 'undefined') {
+      // Don’t do anything unless we’re generating static pages
+      return;
+    }
+
+    let baseUrl = this.$themeConfig.baseUrl;
+
+    if (this.$page.path === "/") {
+      // Add a canonical tag to the homepage because Moz said so
+      this.$ssrContext.userHeadTags += `\n    <link rel="canonical" href="${
+        baseUrl
+      }">`;
+
+      return;
+    }
+
+    if (! this.$activeSet) {
+      // Bail if we aren’t in a doc set at this point
+      return;
+    }
+
+    let latestVersion = this.$activeSet.defaultVersion;
+    let latestVersionActive = this.$activeVersion === latestVersion;
+
+    if (latestVersionActive) {
+      // If we’re on the lastest version, add a canonical tag
+      this.$ssrContext.userHeadTags += `\n    <link rel="canonical" href="${
+        baseUrl + this.$page.path
+      }">`;
+    } else {
+      // Get path to same page in latest version, or `false` if there isn’t one
+      let defaultVersionEquivalent = getSameContentForVersion(
+        latestVersion,
+        this.$activeSet,
+        this.$activeVersion,
+        this.$page,
+        this.$site.pages,
+        true
+      );
+
+      if (defaultVersionEquivalent) {
+        this.$ssrContext.userHeadTags += `\n    <link rel="canonical" href="${
+          baseUrl + defaultVersionEquivalent
+        }">`;
+      }
+    }
   },
 
   methods: {
@@ -335,50 +388,6 @@ export default {
           false
         )
       );
-    },
-
-    /**
-     * Routes to equivalent content, based on matching filename, in target
-     * language—or to root of target language if no matching content is found.
-     */
-    handleLanguageUpdate(language) {
-      const { locales } = this.$activeSet;
-
-      let targetPath = this.$page.relativePath;
-      let setBase = this.$activeSet.baseDir;
-
-      if (this.$activeVersion) {
-        setBase += this.$activeVersion;
-      }
-
-      let currentLocaleSegment;
-      let targetLocaleSegment;
-
-      for (const [path, settings] of Object.entries(locales)) {
-        if (settings.lang === this.$lang) {
-          currentLocaleSegment = path;
-        }
-
-        if (settings.lang === language) {
-          targetLocaleSegment = path;
-        }
-      }
-
-      const currentSetBase = setBase + currentLocaleSegment;
-      const targetSetBase = setBase + targetLocaleSegment;
-
-      targetPath = targetPath.replace(currentSetBase, targetSetBase);
-
-      // do we have the equivalent of this page in the desired language?
-      const targetPage = getPageWithRelativePath(this.$site.pages, targetPath);
-
-      if (targetPage) {
-        targetPath = "/" + targetPage.path;
-      } else {
-        targetPath = "/" + targetSetBase;
-      }
-
-      this.$router.push(fixDoubleSlashes(targetPath));
     },
 
     toggleColorMode() {
@@ -452,7 +461,7 @@ export default {
     onTouchStart(e) {
       this.touchStart = {
         x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY
+        y: e.changedTouches[0].clientY,
       };
     },
 
@@ -474,7 +483,7 @@ export default {
       setTimeout(() => {
         this.isSidebarTransitioning = false;
       }, 1500);
-    }
-  }
+    },
+  },
 };
 </script>

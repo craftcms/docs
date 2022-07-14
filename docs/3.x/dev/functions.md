@@ -116,6 +116,14 @@ Generates a list of HTML attributes based on the given [hash](twig-primer.md#has
 <div {{ attr(myAttributes) }}></div>
 ```
 
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+<div {{ attr({ title: 'Greetings & Salutations' }) }}></div>
+{# Output: <input type="submit" value="Greetings &amp; Salutations"> #}
+```
+:::
+
 ## `beginBody`
 
 Outputs any scripts and styles that were registered for the “begin body” position. It should be placed right after your `<body>` tag.
@@ -158,7 +166,7 @@ Returns the fully qualified class name of a given object.
 Clones a given object.
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articles = clone(query).type('articles') %}
 ```
 
@@ -565,7 +573,7 @@ To view the current number in the sequence without incrementing it, set the `nex
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = craft.entries.section('promos').all() %}
+{% set promos = craft.entries().section('promos').all() %}
 {% set shuffledPromos = shuffle(promos) %}
 
 {% for promo in shuffledPromos %}
@@ -646,11 +654,20 @@ By default, if you pass an asset or raw markup into the function, the SVG will b
 
 Images passed via path/alias will _not_ automatically be sanitized and namespaced.
 
+<!-- textlint-disable terminology -->
+<!-- This “node” is legit and not Node.js -->
+
 You can also specify a custom class name that should be added to the root `<svg>` node using the [attr](filters.md#attr) filter:
+
+<!-- textlint-enable terminology -->
 
 ```twig
 {{ svg('@webroot/icons/lemon.svg')|attr({ class: 'lemon-icon' }) }}
 ```
+
+::: tip
+Consider caching the output, especially if you’re loading SVG files from remote volumes or URLs, so Craft doesn’t download the file each time your template is rendered.
+:::
 
 ## `source`
 
@@ -697,14 +714,25 @@ If an attribute is set to `true`, it will be added without a value.
 
 ```twig
 {{ tag('input', {
-  id: "foo",
-  name: "bar",
+  id: 'foo',
+  name: 'bar',
   required: true
 }) }}
 {# Output: <input id="foo" name="bar" required> #}
 ```
 
 Any attribute set to `null` or `false` will be omitted.
+
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{{ tag('input', {
+  name: 'bar',
+  value: 'Foobar & Baz',
+}) }}
+{# Output: <input name="bar" value="Foobar &amp; Baz"> #}
+```
+:::
 
 ## `ul`
 
@@ -760,7 +788,7 @@ Using the `url()` function has advantages over hard-coding URLs in your template
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
-{{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Output: "https://my-project.com?foo=1" #}
+{{ url('http://my-project.tld', 'foo=1', 'https') }}
+{# Output: "https://my-project.tld?foo=1" #}
 ```
 :::

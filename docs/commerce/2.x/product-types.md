@@ -10,7 +10,7 @@ You can also attach fields, and tab layouts to products and variants at the prod
 
 ### Name
 
-This is the name of the product type as displayed in the Control Panel.
+This is the name of the product type as displayed in the control panel.
 
 ### Handle
 

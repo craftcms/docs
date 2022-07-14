@@ -7,40 +7,47 @@ You can create taxonomies for your [entries](entries.md), [users](users.md), and
 Before you can create categories, you must create Category Groups to contain them. Each Category Group lets you define the following:
 
 - Category Group name
-- Category Group handle (how you'll refer to the Category Group in your templates)
+- Category Group handle (how you’ll refer to the Category Group in your templates)
 - Maximum number of levels you can nest categories in the group
 - The format of the category URI
 - Which template should load if a category’s URL is accessed
 - Which [fields](fields.md) categories in the group should have
 
-To create a new category group, go to Settings → Categories and click the “New Category Group” button.
+To create a new category group, go to **Settings** → **Categories** and click “New Category Group”.
 
 After you create at least one category group, you will be able to create categories for that group.
 
 ## Category Field Layout
 
-Each Category Groups can have its own Field Layout, which allows you to customize the data that is associated with each category in the group. By default, every category will have a Title field (the category name).
+Each Category Group can have its own Field Layout, which allows you to customize the data that’s associated with each category in the group. By default, every category will have a Title field (the category name).
 
-You can also add additional fields using all of the available field types in Craft. If a field doesn't yet exist, you must first create it via Settings → Fields. The new field will then be available to assign to the Field Layout of your Category Group.
+You can also add additional fields using all of the available field types in Craft. If a field doesn’t yet exist, you must first create it via **Settings** → **Fields**. The new field will then be available to assign to the Field Layout of your Category Group.
 
 ## Creating and Editing Categories
 
-If you have at least one category group, there will be a “Categories” tab in the primary control panel navigation. Clicking on it will take you to the category index. From there you can choose a category group from the sidebar, and add/reorder/delete categories within it:
+When there’s at least one category group, **Categories** will appear in the primary control panel navigation. Clicking it will take you to the category index. From there, you can choose a category group from the sidebar, and add/reorder/delete categories within it:
 
-![Category Index](./images/categories-category-index.png)
+![Screenshot of the categories index, with “Categories” active in the main navigation, the “Types of Coffee Drinks” category group selected, and a listing of category names in a nested hierarchy](./images/categories-category-index.png)
 
-Double-clicking on a category will bring up a modal that lets you edit its name, slug, and any fields you’ve assigned to the group.
+::: tip
+Select the “Structure” sort to work with a drag-and-drop hierarchy:
+![Close crop of a screenshot with an arrow pointing to the “Structure” view option in the menu immediately to the right of the search bar](./images/category-structure-view.png)
+:::
 
-![Category Edit Modal](./images/categories-edit-popup.png)
+Double-clicking a category’s status icon opens a slideout for quickly editing that category’s details:
+
+![Screenshot of the category listing with a slideout opened for editing the “Americano” category fields](./images/category-slideout.png)
+
+You can also click a category’s title to visit its edit page just like an entry.
 
 When you create a category, you have the following options:
 
-- Fill out the category fields (if you didn't define any then the only field available will be Title)
-- Edit the slug (it's automatically populated based on the title).
+- Fill out the category fields (if you didn’t define any then the only field available will be Title)
+- Edit the slug (it’s automatically populated based on the title).
 - Choose a Parent category. The new category will have a hierarchical relationship with its parent. This is helpful for creating taxonomies with multiple levels. You also have the option of creating a new category while assigning the Parent.
 
 ::: tip
-You can only nest categories up to the level specified in the Max Level field Category Group settings. If no level is specified then the nesting level is unlimited.
+You can only nest categories up to the level specified in the **Max Level** field Category Group settings. If it’s empty, the nesting level is unlimited.
 :::
 
 ## Assigning Categories
@@ -117,6 +124,10 @@ Category queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -132,7 +143,6 @@ Category queries support the following parameters:
 | [descendantDist](#descendantdist)         | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
 | [descendantOf](#descendantof)             | Narrows the query results to only categories that are descendants of another category in its structure.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)             |
 | [group](#group)                           | Narrows the query results based on the category groups the categories belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
 | [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the categories have any descendants in their structure.
@@ -149,9 +159,7 @@ Category queries support the following parameters:
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only categories that are positioned before another category in its structure.
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the category that comes immediately before another category in its structure.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only categories that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only categories that match a search query.
 | [siblingOf](#siblingof)                   | Narrows the query results to only categories that are siblings of another category in its structure.
 | [site](#site)                             | Determines which site(s) the categories should be queried in.
@@ -165,6 +173,10 @@ Category queries support the following parameters:
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#uri)                               | Narrows the query results based on the categories’ URIs.
 | [with](#with)                             | Causes the query to return matching categories eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -492,6 +504,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -511,15 +527,6 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `group`
@@ -927,8 +934,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -987,33 +994,6 @@ $category = \craft\elements\Category::find()
 :::
 
 
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set categories = craft.categories()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$categories = \craft\elements\Category::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
-    ->all();
-```
-:::
-
-
 #### `relatedTo`
 
 Narrows the query results to only categories that are related to certain other elements.
@@ -1036,33 +1016,6 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 // Fetch all categories that are related to $myCategory
 $categories = \craft\elements\Category::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft categories #}
-{% set categories = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft categories
-$categories = \craft\elements\Category::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -1300,6 +1253,7 @@ Possible values include:
 | - | -
 | `'enabled'`  _(default)_ | that are enabled.
 | `'disabled'` | that are disabled.
+| `['not', 'disabled']` | that are not disabled.
 
 
 

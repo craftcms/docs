@@ -60,6 +60,10 @@ Matrix block queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                       | Description
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
@@ -75,7 +79,6 @@ Matrix block queries support the following parameters:
 | [field](#field)                             | Narrows the query results based on the field the Matrix blocks belong to.
 | [fieldId](#fieldid)                         | Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.
 | [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
-| [getCacheTags](#getcachetags)               |
 | [id](#id)                                   | Narrows the query results based on the Matrix blocks’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
@@ -85,9 +88,7 @@ Matrix block queries support the following parameters:
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 | [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [provisionalDrafts](#provisionaldrafts)     | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                     | Narrows the query results to only Matrix blocks that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)         | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                           | Narrows the query results to only Matrix blocks that match a search query.
 | [site](#site)                               | Determines which site(s) the Matrix blocks should be queried in.
 | [siteId](#siteid)                           | Determines which site(s) the Matrix blocks should be queried in, per the site’s ID.
@@ -99,6 +100,10 @@ Matrix block queries support the following parameters:
 | [uid](#uid)                                 | Narrows the query results based on the Matrix blocks’ UIDs.
 | [unique](#unique)                           | Determines whether only elements with unique IDs should be returned by the query.
 | [with](#with)                               | Causes the query to return matching Matrix blocks eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -389,6 +394,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -408,15 +417,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
-
-
-#### `getCacheTags`
-
-
-
-
-
-
 
 
 #### `id`
@@ -629,8 +629,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -652,33 +652,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
-    ->all();
-```
-:::
-
-
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set MatrixBlocks = craft.matrixBlocks()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
     ->all();
 ```
 :::
@@ -706,33 +679,6 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 // Fetch all Matrix blocks that are related to $myCategory
 $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft Matrix blocks #}
-{% set MatrixBlocks = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft Matrix blocks
-$MatrixBlocks = \craft\elements\MatrixBlock::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::
@@ -895,6 +841,7 @@ Possible values include:
 | - | -
 | `'enabled'`  _(default)_ | that are enabled.
 | `'disabled'` | that are disabled.
+| `['not', 'disabled']` | that are not disabled.
 
 
 

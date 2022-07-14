@@ -43,7 +43,7 @@ $ingredient->name = "Tonic Water";
 $ingredient->type = "mixer";
 ```
 
-In the event that you already have an array of key/value pairs that maps to a model’s attributes, you can use the `populateModel()` static method instead, provided by BaseModel:
+In the event that you already have an array of key-value pairs that maps to a model’s attributes, you can use the `populateModel()` static method instead, provided by BaseModel:
 
 ```php
 <?php
@@ -52,7 +52,7 @@ namespace Craft;
 $ingredient = CocktailRecipes_IngredientModel::populateModel($data);
 ```
 
-There’s also a corresponding `populateModels()` static method if you have an array of arrays of key/value pairs:
+There’s also a corresponding `populateModels()` static method if you have an array of arrays of key-value pairs:
 
 ```php
 <?php

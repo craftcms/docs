@@ -205,7 +205,7 @@ The `{% css %}` tag can be used to register a CSS file or a CSS code block.
 ```
 
 ::: tip
-To register a CSS file, the URL must end in `.css`.
+To register a CSS file, the URL must begin with `https://` or `http://`, or end in `.css`.
 :::
 
 ### Parameters
@@ -227,7 +227,7 @@ Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()
 This tag will dump a variable out to the browser and then end the request. (`dd` stands for “Dump-and-Die”.)
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
+{% set entry = craft.entries().id(entryId).one() %}
 {% dd entry %}
 ```
 
@@ -236,7 +236,7 @@ This tag will dump a variable out to the browser and then end the request. (`dd`
 This tag will prevent the rest of the template from executing, and end the request.
 
 ```twig
-{% set entry = craft.entries.id(entryId).one() %}
+{% set entry = craft.entries().id(entryId).one() %}
 
 {% if not entry %}
   {% exit 404 %}
@@ -249,7 +249,11 @@ The `{% exit %}` tag supports the following parameter:
 
 #### Status
 
-You can optionally set the HTTP status code that should be included with the response. If you do, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist. Craft will fallback on its own template corresponding to the status code.
+If you choose to set the HTTP status code that should be included with the response, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist, Craft will fall back on its own template corresponding to the status code.
+
+::: tip
+`{% exit %}` throws an [HttpException](yii2:yii\web\HttpException) with the appropriate status code, so with <config3:devMode> enabled a full error report and stack trace will be shown instead of an error template.
+:::
 
 ## `header`
 
@@ -348,7 +352,7 @@ The `{% js %}` tag can be used to register a JavaScript file or a JavaScript cod
 ```
 
 ::: tip
-To register a JavaScript file, the URL must end in `.js`.
+To register a JavaScript file, the URL must begin with `https://` or `http://`, or end in `.js`.
 
 To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft3:craft\web\View::registerJsFile()) instead:
 ```twig
@@ -452,7 +456,7 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
 
 ```twig
-{% set entries = craft.entries.section('pages').all() %}
+{% set entries = craft.entries().section('pages').all() %}
 
 <ul id="nav">
   {% nav entry in entries %}
@@ -520,10 +524,10 @@ This tag makes it easy to paginate query results across multiple pages.
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
-Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.test/news/p2`.
+Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.tld/news/p2`.
 
 ::: tip
-You can use the <config3:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.test/news/page/2`.
+You can use the <config3:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.tld/news/page/2`.
 :::
 
 ::: warning
@@ -565,7 +569,7 @@ The `{% paginate %}` tag won’t actually output the current page’s results fo
 Following your `{% paginate %}` tag, you will need to loop through this page’s results using a [for](https://twig.symfony.com/doc/tags/for.html) tag.
 
 ```twig
-{% paginate craft.entries.section('blog').limit(10) as pageEntries %}
+{% paginate craft.entries().section('blog').limit(10) as pageEntries %}
 
 {% for entry in pageEntries %}
   <article>
@@ -840,17 +844,39 @@ It’s similar to the [tag](functions.md#tag) _function_, however the `{% tag %}
 {# Output: <div class="foo"><p class="welcome">Hello, Tim</p></div> #}
 ```
 
+::: tip
+Attribute values are HTML-encoded automatically:
+```twig
+{% tag 'p' with {
+  title: 'Hello & Welcome',
+} %}
+  Hello, {{ currentUser.friendlyName }}
+{% endtag %}
+{# Output: <p title="Hello &amp; Welcome">Hello, Tim</p> #}
+```
+:::
+
 ### Parameters
 
 The `{% tag %}` tag has the following parameters:
 
 #### Name
 
+<!-- textlint-disable terminology -->
+<!-- This “node” is legit and not Node.js -->
+
 The first thing you must pass to the `{% tag %}` tag is the name of the node that should be rendered.
+
+<!-- textlint-enable terminology -->
 
 #### `with`
 
+<!-- textlint-disable terminology -->
+<!-- This “node” is legit and not Node.js -->
+
 Next, you can optionally type “` with `” followed by an object with attributes for the node.
+
+<!-- textlint-enable terminology -->
 
 These will be rendered using <yii2:yii\helpers\BaseHtml::renderTagAttributes()> just like the [tag](functions.md#tag) function, except for the `html` and `text` keys because inner content will go between `{% tag %}` and `{% endtag %}` instead.
 

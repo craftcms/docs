@@ -151,7 +151,13 @@ If you enable order completion without payment, completed orders will have the s
 
 ### Checkout with Partial Payment
 
-If you’d like to permit customers to check out with partial payments, you can enable the [allowPartialPaymentOnCheckout](config-settings.md#allowpartialpaymentoncheckout) setting to allow an additional `paymentAmount` field when posting to the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action.
+A _partial_ payment is one that’s less than an order’s outstanding balance at any point in time.
+
+If you’d like to permit customers to check out with partial payments and the gateway supports them, you can enable the [allowPartialPaymentOnCheckout](config-settings.md#allowpartialpaymentoncheckout) setting to allow an additional `paymentAmount` field when posting to the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action. (If no `paymentAmount` field is submitted, the order’s oustanding balance amount will be applied.)
+
+::: tip
+Multiple payments can still be made on an order when `allowPartialPaymentOnCheckout` is `false`, as long as each payment is equal to the outstanding balance at the time it was made.
+:::
 
 The partial amount cannot be entered directly by the customer; for security, the field must contain a hashed value in the cart’s `paymentCurrency`.
 
@@ -248,11 +254,11 @@ To make a partial payment in the Craft control panel:
 2. Choose a cart or order to view its edit page
 3. Select the **Transactions** tab and choose **Make Payment**.
 4. Select a gateway that supports partial payments to enter the payment details and amount:\
-    ![Store manager’s partial payment modal](./assets/partial-payment-modal.png)
+    ![Store manager’s partial payment modal](./images/partial-payment-modal.png)
 5. Choose **Pay** to process the payment.
 
 ::: tip
 To more quickly identify partially-paid orders, a store manager may want to add the **Paid Status** column on the order index page.
 
-![Orders table Paid Status column](./assets/paid-status-column.png)
+![Orders table Paid Status column](./images/paid-status-column.png)
 :::

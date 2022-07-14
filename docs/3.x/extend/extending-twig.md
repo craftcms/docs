@@ -21,18 +21,22 @@ public function init()
 {
     parent::init();
 
-    Event::on(CraftVariable::class, CraftVariable::EVENT_INIT, function(Event $e) {
-        /** @var CraftVariable $variable */
-        $variable = $e->sender;
+    Event::on(
+        CraftVariable::class,
+        CraftVariable::EVENT_INIT,
+        function(Event $e) {
+            /** @var CraftVariable $variable */
+            $variable = $e->sender;
 
-        // Attach a behavior:
-        $variable->attachBehaviors([
-            MyBehavior::class,
-        ]);
+            // Attach a behavior:
+            $variable->attachBehaviors([
+                MyBehavior::class,
+            ]);
 
-        // Attach a service:
-        $variable->set('serviceId', MyService::class);
-    });
+            // Attach a service:
+            $variable->set('serviceId', MyService::class);
+        }
+    );
 }
 ```
 

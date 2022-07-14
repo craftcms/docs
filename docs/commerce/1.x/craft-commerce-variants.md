@@ -17,31 +17,31 @@ It returns an [ElementCriteriaModel](https://craftcms.com/docs/2.x/templating/el
 
 `craft.commerce.variants` supports the following parameters:
 
-### ID
+### `id`
 
 The variant’s element ID.
 
-### productId
+### `productId`
 
 The product ID this variant belongs to.
 
-### sku
+### `sku`
 
 The variant’s SKU
 
-### default
+### `default`
 
 Whether the variant is the product’s default variant
 
 Accepts: boolean (`true` or `false`)
 
-### stock
+### `stock`
 
 The stock amount
 
 Accepts: integer
 
-### hasStock
+### `hasStock`
 
 Whether the variant has unlimited stock or stock greater than zero.
 

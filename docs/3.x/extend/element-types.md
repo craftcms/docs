@@ -195,7 +195,7 @@ class ProductQuery extends ElementQuery
         // join in the products table
         $this->joinElementTable('products');
 
-        // select the price column
+        // select the price and currency columns
         $this->query->select([
             'products.price',
             'products.currency',
@@ -255,6 +255,8 @@ If you want to make it possible for templates to query for your elements, you ca
 <?php
 namespace mynamespace;
 
+use mynamespace\elements\Product;
+use mynamespace\elements\db\ProductQuery;
 use Craft;
 use yii\base\Behavior;
 
@@ -611,7 +613,7 @@ When a source is selected, Craft will configure your [element query](#element-qu
 You can give your [control panel section](cp-section.md) an index page for your element type using the following template:
 
 ```twig
-{% extends '_layouts/elementindex' %}
+{% extends '_layouts/elementindex.html' %}
 {% set title = 'Products' %}
 {% set elementType = 'ns\\prefix\\elements\\Product' %}
 ```
@@ -901,7 +903,7 @@ public function getCpEditUrl()
 ```
 
 ::: tip
-Elements that are editable (per `getIsEditable()`) and which define a CP Edit URL (via `getCpEditUrl()`) will be accessible from a discoverable `/admin/edit/{id|uid}` URL, which will redirect to their edit page.
+Elements that are editable (per `getIsEditable()`) and which define a control panel edit URL (via `getCpEditUrl()`) will be accessible from a discoverable `/admin/edit/{id|uid}` URL, which will redirect to their edit page.
 :::
 
 ## Relations

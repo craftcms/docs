@@ -10,7 +10,7 @@ module.exports = {
   ],
   defaultVersion: "2.x",
   searchPlaceholder: "Search the Nitro docs (Press “/” to focus)",
-  primarySet: true,
+  primarySet: false,
   sidebar: {
     "2.x": {
       "/": [

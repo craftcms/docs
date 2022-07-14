@@ -123,7 +123,7 @@ Then pass that hash into your asset’s `getUrl()`, `getWidth()`, and `getHeight
 >
 ```
 
-Notice in this example there are no quotes around “`thumb`” like there were in our earlier examples. That’s because before we were passing a [string](dev/twig-primer.md#strings) set to a CP-defined transform’s handle, whereas in this example we’re passing a [variable](dev/twig-primer.md#variables) referencing the `thumb` hash we created in the template.
+Notice in this example there are no quotes around “`thumb`” like there were in our earlier examples. That’s because before we were passing a [string](dev/twig-primer.md#strings) set to a control-panel-defined transform’s handle, whereas in this example we’re passing a [variable](dev/twig-primer.md#variables) referencing the `thumb` hash we created in the template.
 
 It would look similar using `setTransform()` like we did in the previous section:
 
@@ -147,7 +147,7 @@ All the same settings available to named transforms are available to template-de
 
 ### Generating `srcset` Sizes
 
-It’s common to need not just one sized image, but a range of them for use with [`srcset`](https://www.w3schools.com/tags/att_source_srcset.asp).
+It’s common to need not just one sized image, but a range of them for use with [`srcset`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset).
 
 One way you could achieve this is by combining the [`tag` template function](dev/functions.md#tag) with Craft’s [`getSrcSet()`](craft3:craft\elements\Asset::getSrcSet()) method to output an image tag with a range of `srcset` sizes relative to the initial dimensions:
 

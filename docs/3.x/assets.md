@@ -149,7 +149,7 @@ You can cache-bust asset URLs automatically by enabling the [revAssetUrls](confi
 
 ```twig
 <img src="{{ url(image.getUrl('thumb'), {v: image.dateModified.timestamp}) }}">
-{# <img src="https://mysite.foo/images/_thumb/bar.jpg?v=1614374621"> #}
+{# <img src="https://my-project.tld/images/_thumb/bar.jpg?v=1614374621"> #}
 ```
 
 ### Parameters
@@ -157,6 +157,10 @@ You can cache-bust asset URLs automatically by enabling the [revAssetUrls](confi
 Asset queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
+
+
+
+<!-- textlint-disable -->
 
 | Param                                     | Description
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -172,7 +176,7 @@ Asset queries support the following parameters:
 | [filename](#filename)                     | Narrows the query results based on the assets’ filenames.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [folderId](#folderid)                     | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
-| [getCacheTags](#getcachetags)             |
+| [folderPath](#folderpath)                 | Narrows the query results based on the folders the assets belong to, per the folders’ paths.
 | [height](#height)                         | Narrows the query results based on the assets’ image heights.
 | [id](#id)                                 | Narrows the query results based on the assets’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -183,9 +187,7 @@ Asset queries support the following parameters:
 | [offset](#offset)                         | Determines how many assets should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only assets that match a search query.
 | [site](#site)                             | Determines which site(s) the assets should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the assets should be queried in, per the site’s ID.
@@ -201,6 +203,10 @@ Asset queries support the following parameters:
 | [width](#width)                           | Narrows the query results based on the assets’ image widths.
 | [with](#with)                             | Causes the query to return matching assets eager-loaded with related elements.
 | [withTransforms](#withtransforms)         | Causes the query to return matching assets eager-loaded with image transform indexes.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -468,6 +474,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -525,13 +535,37 @@ $assets = \craft\elements\Asset::find()
 ::: tip
 This can be combined with [includeSubfolders](#includesubfolders) if you want to include assets in all the subfolders of a certain folder.
 :::
-#### `getCacheTags`
+#### `folderPath`
+
+Narrows the query results based on the folders the assets belong to, per the folders’ paths.
+
+Possible values include:
+
+| Value | Fetches assets…
+| - | -
+| `foo/` | in a `foo/` folder (excluding nested folders).
+| `foo/*` | in a `foo/` folder (including nested folders).
+| `'not foo/*'` | not in a `foo/` folder (including nested folders).
+| `['foo/*', 'bar/*']` | in a `foo/` or `bar/` folder (including nested folders).
+| `['not', 'foo/*', 'bar/*']` | not in a `foo/` or `bar/` folder (including nested folders).
 
 
 
+::: code
+```twig
+{# Fetch assets in the foo/ folder or its nested folders #}
+{% set assets = craft.assets()
+  .folderPath('foo/*')
+  .all() %}
+```
 
-
-
+```php
+// Fetch assets in the foo/ folder or its nested folders
+$assets = \craft\elements\Asset::find()
+    ->folderPath('foo/*')
+    ->all();
+```
+:::
 
 
 #### `height`
@@ -804,8 +838,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -827,33 +861,6 @@ $assets = \craft\elements\Asset::find()
     ->site('*')
     ->unique()
     ->preferSites(['a', 'b'])
-    ->all();
-```
-:::
-
-
-#### `provisionalDrafts`
-
-Narrows the query results to only provisional drafts.
-
-
-
-
-
-::: code
-```twig
-{# Fetch provisional drafts created by the current user #}
-{% set assets = craft.assets()
-  .provisionalDrafts()
-  .draftCreator(currentUser)
-  .all() %}
-```
-
-```php
-// Fetch provisional drafts created by the current user
-$assets = \craft\elements\Asset::find()
-    ->provisionalDrafts()
-    ->draftCreator(Craft::$app->user->identity)
     ->all();
 ```
 :::
@@ -881,33 +888,6 @@ See [Relations](https://craftcms.com/docs/3.x/relations.html) for a full explana
 // Fetch all assets that are related to $myCategory
 $assets = \craft\elements\Asset::find()
     ->relatedTo($myCategory)
-    ->all();
-```
-:::
-
-
-#### `savedDraftsOnly`
-
-Narrows the query results to only unpublished drafts which have been saved after initial creation.
-
-
-
-
-
-::: code
-```twig
-{# Fetch saved, unpublished draft assets #}
-{% set assets = {twig-function}
-  .draftOf(false)
-  .savedDraftsOnly()
-  .all() %}
-```
-
-```php
-// Fetch saved, unpublished draft assets
-$assets = \craft\elements\Asset::find()
-    ->draftOf(false)
-    ->savedDraftsOnly()
     ->all();
 ```
 :::

@@ -17,5 +17,5 @@ This tab contains the following information:
 - **Orders** – A list of previous orders for the customer.
 - **Active Carts** – A list of active carts for the customer based on the [Commerce::$activeCartDuration](configuration.md#activecartduration).
 - **Inactive Carts** – A list of inactive carts for the customer [Commerce::$activeCartDuration](configuration.md#activecartduration).
-- **Addresses** – A list of the customer's addresses with the ability to edit or delete.
-- **Subscriptions** – A list of the customer's subscriptions.
+- **Addresses** – A list of the customer’s addresses with the ability to edit or delete.
+- **Subscriptions** – A list of the customer’s subscriptions.

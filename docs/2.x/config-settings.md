@@ -8,7 +8,7 @@ Craft comes with a bunch of config settings that give you control over various a
 
 All config settings should be placed within the `array()` in your `craft/config/general.php` file.
 
-For example, if you want to enable Dev Mode and set Craft to use uncompressed Javascript files, your array would look like this:
+For example, if you want to enable Dev Mode and set Craft to use uncompressed JavaScript files, your array would look like this:
 
 ```php
 return array(
@@ -37,7 +37,7 @@ The application ID, which is used for things like storing data caches and user s
 
 ### `cacheDuration`
 
-**Accepts**: A string set to any valid PHP interval specification, or '0' if you wish to cache data indefinitely.
+**Accepts**: A string set to any valid PHP interval specification, or `0` if you wish to cache data indefinitely.
 
 **Default**: `'P1D'` (one day)
 
@@ -73,7 +73,7 @@ The DB, file, Memcache(d), and Redis cache methods each have their own additiona
 
 ### `customAsciiCharMappings`
 
-**Accepts**: An array of key/value pairs mapping character codes to lower ASCII strings
+**Accepts**: An array of key-value pairs mapping character codes to lower ASCII strings
 
 **Default**: `array()` (an empty array)
 
@@ -85,7 +85,11 @@ This array is merged into the default mapping array in <craft2:Craft\StringHelpe
 
 The keys should be the HTML decimal code equivalent of the character to search for and the value is the ASCII character used for swapping.
 
+<!-- textlint-disable terminology -->
+
 For example, the code for `Æ` is `198`. See sites like [Website Builders](https://websitebuilders.com/tools/html-codes/a-z/) to look up additional codes.
+
+<!-- textlint-enable terminology -->
 
 ```php
 'customAsciiCharMappings' => array(
@@ -106,12 +110,12 @@ For example, the code for `Æ` is `198`. See sites like [Website Builders](https
 The default domain name Craft will use when sending cookies to the browser. If it is left blank, Craft will leave it up to the browser to decide – which will be whatever the current request’s domain name is.
 
 ```php
-'defaultCookieDomain' => '.example.com',
+'defaultCookieDomain' => '.my-project.tld',
 ```
 
 ### `defaultSearchTermOptions`
 
-**Accepts**: An array of key/value pairs
+**Accepts**: An array of key-value pairs
 
 **Default**: `array('attribute' => null, 'exact' => false, 'exclude' => false, 'subLeft' => false, 'subRight' => false)`
 
@@ -164,7 +168,7 @@ The number representing the default Week Start Day preference value for new user
 
 ### `environmentVariables`
 
-**Accepts**: An array of key/value string pairs
+**Accepts**: An array of key-value string pairs
 
 **Default**: `array()` (an empty array)
 
@@ -174,7 +178,7 @@ An array of environment-specific variables which can be accessed as tags within 
 
 ```php
 'environmentVariables' => array(
-    'baseAssetUrl'  => '//example.com/',
+    'baseAssetUrl'  => '//my-project.tld/',
     'baseAssetPath' => './',
 ),
 ```
@@ -197,7 +201,7 @@ Overrides the “System Status” setting in Settings → General if set to `tru
 
 **Accepts**: A valid method name, callable, or function.
 
-**Default**: 'var_export'
+**Default**: `'var_export'`
 
 **Since**: Craft 2.3
 
@@ -276,7 +280,7 @@ This setting should be disabled for servers running Win32, or with Apache’s mo
 If disabled, an alternate task running trigger *must* be set up separately. For example, this Cron command would trigger a task runner once every minute:
 
 ```
-*/1 * * * * /usr/bin/curl --silent --compressed http://example.com/index.php?p=actions/tasks/runPendingTasks
+*/1 * * * * /usr/bin/curl --silent --compressed http://my-project.tld/index.php?p=actions/tasks/runPendingTasks
 ```
 
 ### `sameSiteCookieValue`
@@ -344,8 +348,8 @@ This is the recommended way to set the site URL on multi-lingual sites, as it gi
 
 ```php
 'siteUrl' => array(
-    'en' => 'http://example.com/',
-    'de' => 'http://example.de/'
+    'en' => 'http://my-project.com/',
+    'de' => 'http://my-project.de/'
 ),
 ```
 
@@ -385,7 +389,7 @@ Tells Craft whether to surround all strings that are ran through `Craft::t()` or
 
 **Since**: Craft 1.0
 
-Tells Craft whether to use compressed Javascript files whenever possible, to cut down on page load times.
+Tells Craft whether to use compressed JavaScript files whenever possible, to cut down on page load times.
 
 ```php
 'useCompressedJs' => false,
@@ -534,7 +538,7 @@ The query string parameter name that Craft should use for system tokens.
 
 **Since**: Craft 2.6.2793
 
-Whether tokenized URLs (email verification links, entry draft sharing links, etc.) should begin with https or not. When set to `'auto'`, https will be used if either the base site URL or the current URL have https.
+Whether tokenized URLs (email verification links, entry draft sharing links, etc.) should begin with `https`. When set to `'auto'`, `https` will be used if either the base site URL or the current URL have `https`.
 
 ```php
 'useSslOnTokenizedUrls' => true,
@@ -563,7 +567,7 @@ If this is set to `'auto'`, it will resolve to `true` or `false` depending on wh
 If set to `true`, the following request parameters will need to be hashed to ensure they weren’t tampered with:
 
 - all `redirect` parameters
-- possibly 3rd party plugin parameters
+- possibly third-party plugin parameters
 
 ```php
 'validateUnsafeRequestParams' => true,
@@ -713,21 +717,21 @@ Whether uppercase letters should be allowed in entry and category slugs. Note th
 
 **Since**: Craft 2.1
 
-Explicitly sets the base URL to the Control Panel, which may be used if the dynamically-determined URL is not desired for some reason.
+Explicitly sets the base URL to the control panel, which may be used if the dynamically-determined URL is not desired for some reason.
 
 ```php
-'baseCpUrl' => 'http://admin.example.com/',
+'baseCpUrl' => 'http://cms.my-project.tld/',
 ```
 
 ### `cpTrigger`
 
 **Accepts**: A string set to any valid URI segment
 
-**Default**: 'admin'
+**Default**: `'admin'`
 
 **Since**: Craft 1.0
 
-The URI segment Craft should look for when determining if the current request should route to the CP rather than the front-end website.
+The URI segment Craft should look for when determining if the current request should route to the control panel rather than the front-end site.
 
 ```php
 'cpTrigger' => 's3cret',
@@ -814,7 +818,7 @@ The URI segment Craft should look for when determining if the current request sh
 ```
 
 ::: tip
-The default resourceTrigger value changed in Craft 2.0. In Craft 1.x it was 'resources'.
+The default resourceTrigger value changed in Craft 2.0. In Craft 1.x it was `'resources'`.
 :::
 
 ### `slugWordSeparator`
@@ -927,7 +931,7 @@ The template filenames Craft will look for within a directory to represent the d
 
 **Since**: Craft 2.0
 
-The prefix that can be placed before a template folder/file name to forbid direct HTTP traffic to it.
+The prefix that can be placed before a template folder/filename to forbid direct HTTP traffic to it.
 
 ```php
 'privateTemplateTrigger' => "."
@@ -1037,7 +1041,7 @@ Set to `false` to keep the account locked indefinitely, requiring an admin to ma
 
 **Since**: Craft 2.4
 
-The default language that the Control Panel should be rendered in, for users that haven’t specified their Preferred Locale.
+The default language that the control panel should be rendered in, for users that haven’t specified their Preferred Locale.
 
 ```php
 'defaultCpLanguage' => 'en',
@@ -1147,9 +1151,9 @@ The number of invalid login attempts Craft will allow within the specified durat
 
 **Since**: Craft 2.2
 
-The path that users should be redirected to after logging in from the Control Panel.
+The path that users should be redirected to after logging in from the control panel.
 
-This setting will also come into effect if the user visits the CP’s Login page when they are already logged in, or the CP’s root URL (e.g. /admin).
+This setting will also come into effect if the user visits the control panel’s Login page when they are already logged in, or the control panel’s root URL (e.g. /admin).
 
 ```php
 'postCpLoginRedirect' => 'entries',
@@ -1193,7 +1197,7 @@ The amount of time to wait before Craft purges pending users from the system tha
 
 **Since**: Craft 1.0
 
-The amount of time Craft will remember a username and pre-populate it on the CP login page.
+The amount of time Craft will remember a username and pre-populate it on the control panel login page.
 
 Set to `false` to disable this feature altogether.
 
@@ -1253,7 +1257,7 @@ Whether Craft should require the existence of a user agent string and IP address
 
 **Since**: Craft 1.0
 
-The URI and template path that Craft should use for user password resetting. Note that this only affects front-end site requests, and Password Reset emails will only use this setting for users that don’t have access to the Control Panel.
+The URI and template path that Craft should use for user password resetting. Note that this only affects front-end site requests, and Password Reset emails will only use this setting for users that don’t have access to the control panel.
 
 ```php
 'setPasswordPath' => array(
@@ -1290,7 +1294,7 @@ The URI and template path that Craft should use upon successfully setting a user
 Configures Craft to send all system emails to a single email address (or multiple email addresses), for testing purposes.
 
 ```php
-'testToEmailAddress' => 'me@example.com',
+'testToEmailAddress' => 'me@domain.tld',
 ```
 
 ### `useEmailAsUsername`
@@ -1301,7 +1305,7 @@ Configures Craft to send all system emails to a single email address (or multipl
 
 **Since**: Craft 2.1
 
-Removes “Username” fields in the Control Panel, and automatically saves users’ usernames based on their email addresses.
+Removes “Username” fields in the control panel, and automatically saves users’ usernames based on their email addresses.
 
 ```php
 'useEmailAsUsername' => true,
@@ -1357,7 +1361,7 @@ A list of file extensions that Craft will allow when a user is uploading files. 
 
 **Since**: Craft 2.4
 
-Whether Craft should convert any non-ASCII characters in uploaded file names to ASCII.
+Whether Craft should convert any non-ASCII characters in uploaded filenames to ASCII.
 
 ```php
 'convertFilenamesToAscii' => true,

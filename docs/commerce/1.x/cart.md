@@ -6,7 +6,8 @@ You can view all carts on the Orders index page. You can also only view only _ac
 
 You can set the system to purge (delete) abandoned carts after a given time period in [your config](configuration.md), the default of which is 3 months.
 
-In your templates, you can get the current user’s cart with [craft.commerce.cart](craft-commerce-cart.md)
+In your templates, you can get the current user’s cart with [craft.commerce.cart](craft-commerce-cart.md):
+
 ```twig
 {% set cart = craft.commerce.getCart() %}
 ```

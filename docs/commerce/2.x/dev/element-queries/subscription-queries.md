@@ -373,7 +373,7 @@ Narrows the query results to only subscriptions that have started.
 ::: code
 ```twig
 {# Fetch started subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .hasStarted()
     .all() %}
 ```
@@ -475,7 +475,7 @@ Narrows the query results to only subscriptions that are canceled.
 ::: code
 ```twig
 {# Fetch canceled subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .isCanceled()
     .all() %}
 ```
@@ -498,7 +498,7 @@ Narrows the query results to only subscriptions that have expired.
 ::: code
 ```twig
 {# Fetch expired subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .isExpired()
     .all() %}
 ```
@@ -521,7 +521,7 @@ Narrows the query results to only subscriptions that are suspended.
 ::: code
 ```twig
 {# Fetch suspended subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .isSuspended()
     .all() %}
 ```
@@ -625,7 +625,7 @@ Narrows the query results to only subscriptions that are on trial.
 ::: code
 ```twig
 {# Fetch trialed subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .onTrial()
     .all() %}
 ```
@@ -844,7 +844,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch expired subscriptions #}
-{% set subscriptions = {twig-function}
+{% set subscriptions = craft.subscriptions()
     .status('expired')
     .all() %}
 ```

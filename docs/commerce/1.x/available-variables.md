@@ -2,7 +2,7 @@
 
 The following twig template variables are available:
 
-## craft.commerce.settings
+## `craft.commerce.settings`
 
 To get all Craft Commerce general settings:
 
@@ -10,19 +10,19 @@ To get all Craft Commerce general settings:
 {% set settings = craft.commerce.settings %}
 ```
 
-## craft.commerce.products
+## `craft.commerce.products`
 
 See [craft.commerce.products](craft-commerce-products.md)
 
-## craft.commerce.orders
+## `craft.commerce.orders`
 
 See [craft.commerce.orders](craft-commerce-orders.md)
 
-## craft.commerce.cart
+## `craft.commerce.cart`
 
 See [craft.commerce.cart](craft-commerce-cart.md)
 
-## craft.commerce.countriesList
+## `craft.commerce.countriesList`
 
 Returns a list usable for a dropdown select box.
 
@@ -36,7 +36,7 @@ Data returned as `[32:'Australia', 72:'USA']`
 </select>
 ```
 
-## craft.commerce.countries
+## `craft.commerce.countries`
 
 Returns an array of [Country models](country-model.md).
 
@@ -48,7 +48,7 @@ Returns an array of [Country models](country-model.md).
 </select>
 ```
 
-## craft.commerce.statesArray
+## `craft.commerce.statesArray`
 
 Returns an array indexed by country IDs, usable for a dropdown select box.
 
@@ -66,7 +66,7 @@ Data returned as `[72:[3:'California', 4:'Washington'],32:[7:'New South Wales']]
 </select>
 ```
 
-## craft.commerce.states
+## `craft.commerce.states`
 
 Returns an array of [State models](state-model.md).
 
@@ -78,7 +78,7 @@ Returns an array of [State models](state-model.md).
 </select>
 ```
 
-## craft.commerce.availableShippingMethods
+## `craft.commerce.availableShippingMethods`
 
 Returns the shipping methods available to applied to the current cart. Will not include some shipping methods if none of the shipping method’s rules can match the cart.
 
@@ -95,7 +95,7 @@ Returns the shipping methods available to applied to the current cart. Will not 
 {% endfor %}
 ```
 
-## craft.commerce.paymentMethods
+## `craft.commerce.paymentMethods`
 
 Returns all payment methods available to the customer.
 
@@ -122,7 +122,7 @@ Returns all payment methods available to the customer.
 {% endif %}
 ```
 
-## craft.commerce.taxCategories
+## `craft.commerce.taxCategories`
 
 Returns an array of all tax categories set up in the system.
 
@@ -134,7 +134,7 @@ Returns an array of all tax categories set up in the system.
 
 See [Order Status Model](order-status-model.md)
 
-## craft.commerce.productTypes
+## `craft.commerce.productTypes`
 
 Returns an array of all product types set up in the system.
 
@@ -144,7 +144,7 @@ Returns an array of all product types set up in the system.
 {% endfor %}
 ```
 
-## craft.commerce.orderStatuses
+## `craft.commerce.orderStatuses`
 
 Returns an array of all the [Order Status models](order-status-model.md) set up in the system.
 
@@ -154,7 +154,7 @@ Returns an array of all the [Order Status models](order-status-model.md) set up 
 {% endfor %}
 ```
 
-## craft.commerce.discounts
+## `craft.commerce.discounts`
 
 Returns an array of all discounts set up in the system.
 
@@ -164,7 +164,7 @@ Returns an array of all discounts set up in the system.
 {% endfor %}
 ```
 
-## craft.commerce.getDiscountByCode(code)
+## `craft.commerce.getDiscountByCode(code)`
 
 Returns a discount that matches the code supplied.
 
@@ -175,7 +175,7 @@ Returns a discount that matches the code supplied.
 {% endif %}
 ```
 
-## craft.commerce.sales
+## `craft.commerce.sales`
 
 Returns an array of all sales set up in the system.
 

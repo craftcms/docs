@@ -2,6 +2,90 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-07-12
+### Added
+- Documented change in default Craft 4 user query behavior.
+
+## 2022-07-08
+### Added
+- Documented user statuses.
+
+## 2022-06-24
+### Added
+- Added canonical tags to most pages to promote latest product versions.
+
+### Fixed
+- Improved mobile Safari’s dark mode browser chrome.
+
+## 2022-06-20
+### Changed
+- Documented the `namespaceAttributes` filter for Craft 3 and 4.
+
+## 2022-05-27
+### Added
+- Added a note about Craft 4.x element type garbage collection.
+
+## 2022-05-25
+### Added
+- Covered Commerce 4.x’s email suppression feature.
+- Mentioned empty user folder garbage collection in Craft 4.
+
+### Fixed
+- Updated Commerce 4.x’s controller action reference and upgrade guide to reflect removed `customer-orders/get-orders` action.
+
+## 2022-05-18
+### Fixed
+- Fixed the Money field development example.
+
+## 2022-05-12
+### Changed
+- Updated Craft 4.x database connection settings intro to use `craft\helpers\App::env()` and new `CRAFT_` config setting override support.
+
+## 2022-05-04
+### Changed
+- Switched default documentation versions to Craft 4.x and Commerce 4.x. 🎉
+
+## 2022-03-25
+### Added
+- Added a page on Craft 4’s Address element.
+
+### Changed
+- The `session` component example is now defined in `app.web.php`. ([craftcms/cms#10820](https://github.com/craftcms/cms/issues/10820))
+
+## 2022-03-16
+### Added
+- Added Commerce 4 beta docs.
+
+## 2022-03-09
+### Added
+- Added Craft 4 beta docs.
+
+## 2022-02-14
+### Added
+- Added an overview of Nitro’s site paths.
+
+## 2022-02-11
+### Added
+- Added plugin naming tips.
+
+## 2022-02-08
+### Added
+- Documented `clear-deprecations`, `plugin/list`, `users/activation-url`, and `users/password-reset-url` commands added in Craft 3.7.31.
+- Documented `users/list-admins` and `users/set-password` commands added in Craft 3.6.0.
+
+## 2022-02-02
+### Removed
+- Moved stale + partial Craft 3.x translations to https://github.com/craftcms/docs-translations.
+
+## 2022-01-20
+### Added
+- Noted default mutex behavior with configuration example for Craft 3.7.30.
+
+## 2022-01-18
+### Changed
+- Updated wording to reflect Craft CMS 3.7.29’s PHP fatal error logging to `stderr`.
+- Updated Craft CMS `resave/*` console command reference for 3.7.29.
+
 ## 2021-12-15
 ### Added
 - Added Event Code Generator to the Craft Commerce docs “Events” page.
