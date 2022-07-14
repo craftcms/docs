@@ -28,21 +28,23 @@ This example creates a form for each available plan, posting the selection to th
     <h4>{{ plan.name }}</h4>
 
     {% set paymentSources = craft.commerce.
-        getPaymentSources().
-        getAllGatewayPaymentSourcesByUserId(
-            plan.getGateway().id,
-            currentUser.id ?? null
-        )
+      getPaymentSources().
+      getAllGatewayPaymentSourcesByUserId(
+        plan.getGateway().id,
+        currentUser.id ?? null
+      )
     %}
 
     {# If we don’t have a saved payment soruce, collect details for the gateway #}
     {% if not paymentSources|length %}
       <div class="paymentForm">
-        {{ plan.getGateway().getPaymentFormHtml({})|raw }}
+        {% namespace plan.getGateway().handle|commercePaymentFormNamespace %}
+          {{ plan.getGateway().getPaymentFormHtml({})|raw }}
+        {% endnamespace %}
       </div>
     {% endif %}
 
-    <button type="submit">{{ "Subscribe"|t }}</button>
+    <button>{{ "Subscribe"|t }}</button>
   </form>
 {% endfor %}
 ```
@@ -64,9 +66,11 @@ To cancel a subscription you can use the following template. It assumes the `sub
   {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
   {{ redirectInput('shop/services') }}
 
-  {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
+  {% namespace subscription.getGateway().handle|commercePaymentFormNamespace %}
+    {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml()|raw }}
+  {% endnamespace %}
 
-  <button type="submit">Unsubscribe</button>
+  <button>Unsubscribe</button>
 </form>
 ```
 
@@ -87,7 +91,7 @@ To switch a subscription plan you can use the following template. It assumes tha
 
     {{ plan.getGateway().getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
 
-    <button type="submit" class="button link">Switch</button>
+    <button class="button link">Switch</button>
   </form>
   <hr />
 {% endfor %}
@@ -106,7 +110,7 @@ To reactivate a subscription plan you can use the following template. It assumes
     {{ hiddenInput('action', 'commerce/subscriptions/reactivate') }}
     {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
 
-    <button type="submit" class="button link">Reactivate</button>
+    <button class="button link">Reactivate</button>
   </form>
 {% endif %}
 ```

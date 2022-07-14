@@ -166,7 +166,7 @@ Returns the fully qualified class name of a given object.
 Clones a given object.
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articles = clone(query).type('articles') %}
 ```
 
@@ -573,7 +573,7 @@ To view the current number in the sequence without incrementing it, set the `nex
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = craft.entries.section('promos').all() %}
+{% set promos = craft.entries().section('promos').all() %}
 {% set shuffledPromos = shuffle(promos) %}
 
 {% for promo in shuffledPromos %}
@@ -654,7 +654,12 @@ By default, if you pass an asset or raw markup into the function, the SVG will b
 
 Images passed via path/alias will _not_ automatically be sanitized and namespaced.
 
+<!-- textlint-disable terminology -->
+<!-- This “node” is legit and not Node.js -->
+
 You can also specify a custom class name that should be added to the root `<svg>` node using the [attr](filters.md#attr) filter:
+
+<!-- textlint-enable terminology -->
 
 ```twig
 {{ svg('@webroot/icons/lemon.svg')|attr({ class: 'lemon-icon' }) }}
@@ -783,7 +788,7 @@ Using the `url()` function has advantages over hard-coding URLs in your template
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
 ```twig
-{{ url('http://my-project.com', 'foo=1', 'https') }}
-{# Output: "https://my-project.com?foo=1" #}
+{{ url('http://my-project.tld', 'foo=1', 'https') }}
+{# Output: "https://my-project.tld?foo=1" #}
 ```
 :::

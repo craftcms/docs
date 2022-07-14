@@ -12,9 +12,52 @@ return [
 ];
 ```
 
+You can read general config settings in Twig templates or PHP files via the config service:
+
+::: code
+```twig
+{% set devModeEnabled = craft.app.config.general.devMode %}
+```
+```php
+$devModeEnabled = Craft::$app->config->general->devMode;
+```
+:::
+
 ## Database Connection Settings
 
 Craft supports several [database connection settings](db-settings.md). You can override their default values in your `config/db.php` file.
+
+You can read database config settings in Twig templates or PHP files via the config service:
+
+::: code
+```twig
+{% set database = craft.app.config.db.database %}
+```
+```php
+$database = Craft::$app->config->db->database;
+```
+:::
+
+## Custom Config Settings
+
+You can optionally define your own config settings by creating a `config/custom.php` file:
+
+```php
+return [
+    'myCustomSetting' => 'foo',
+];
+```
+
+Custom config settings can be read in Twig templates or PHP files via the config service:
+
+::: code
+```twig
+{% set mySetting = craft.app.config.custom.myCustomSetting %}
+```
+```php
+$mySetting = Craft::$app->config->custom->myCustomSetting;
+```
+:::
 
 ## Guzzle Config
 
@@ -47,7 +90,7 @@ Some settings and functions in Craft support [Yii aliases](https://www.yiiframew
 - Sites’ Base URL settings
 - Volumes’ Base URL settings
 - Local volumes’ File System Path settings
-- The <config3:resourceBasePath> and <config3:resourceBaseUrl> config settings
+- The <config4:resourceBasePath> and <config4:resourceBaseUrl> config settings
 - The [svg()](../dev/functions.md#svg-svg-sanitize) Twig function
 
 The following aliases are available out of the box:
@@ -68,11 +111,15 @@ The following aliases are available out of the box:
 | `@web` | The URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | The path to the folder that contains the `index.php` file that was loaded for the request
 
-You can override these default aliases with the <config3:aliases> config setting if needed. We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+You can override these default aliases with the <config4:aliases> config setting if needed. 
+
+::: tip
+We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+:::
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
 ];
 ```
 
@@ -80,16 +127,16 @@ If your web root is something besides `web/`, `public/`, `public_html/`, or `htm
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
 ];
 ```
 
-You can define additional custom aliases using the <config3:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
+You can define additional custom aliases using the <config4:aliases> config setting as well. For example, you may wish to create aliases that define the base URL and base path that your asset volumes will live in.
 
 ```php
 'aliases' => [
-    '@web' => 'https://my-project.com',
+    '@web' => 'https://my-project.tld',
     '@webroot' => dirname(__DIR__) . '/path/to/webroot',
     '@assetBaseUrl' => '@web/assets',
     '@assetBasePath' => '@webroot/assets',
@@ -101,11 +148,11 @@ With those in place, you could begin your asset volumes’ Base URL and File Sys
 If you’d like, you can set the alias values with environment variables, either from your `.env` file or somewhere in your environment’s configuration:
 
 ```bash
-ASSETS_BASE_URL=https://my-project.com/assets
+ASSETS_BASE_URL=https://my-project.tld/assets
 ASSETS_BASE_PATH=/path/to/webroot/assets
 ```
 
-Then you can pull them into the alias definitions using [App::env()](craft3:craft\helpers\App::env()):
+Then you can pull them into the alias definitions using [App::env()](craft4:craft\helpers\App::env()):
 
 ```php
 'aliases' => [
@@ -123,6 +170,14 @@ You can parse aliases in your templates by passing them to the [alias()](../dev/
 
 ```twig
 {{ alias('@assetBaseUrl') }}
+```
+:::
+
+::: tip
+You can parse aliases in your modules or configs by passing them to the [getAlias()](yii2:yii\BaseYii::getAlias()) function:
+
+```php
+Craft::getAlias('@webroot');
 ```
 :::
 
@@ -145,7 +200,7 @@ Craft’s default configuration is defined by [src/config/app.php](https://githu
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
 ::: tip
-Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/master/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `APP_ID` environment variable to your `.env` file:
+Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/main/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `CRAFT_APP_ID` environment variable to your `.env` file:
 
     php craft setup/app-id
 :::
@@ -158,7 +213,7 @@ If you want to store data caches in the database, first you will need to create 
 php craft setup/db-cache-table
 ```
 
-Once that’s done, you can set your `cache` application component to use <craft3:craft\cache\DbCache>.
+Once that’s done, you can set your `cache` application component to use <craft4:craft\cache\DbCache>.
 
 ```php
 <?php
@@ -170,7 +225,7 @@ return [
 ```
 
 ::: tip
-If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft3:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
+If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft4:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
 :::
 
 #### APC Example
@@ -185,7 +240,7 @@ return [
         'cache' => [
             'class' => yii\caching\ApcCache::class,
             'useApcu' => true,
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
+            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -209,7 +264,7 @@ return [
             'defaultDuration' => 86400,
             'servers' => [
                 [
-                    'host' => 'localhost',
+                    'host' => App::env('MEMCACHED_HOST') ?: 'localhost',
                     'persistent' => true,
                     'port' => 11211,
                     'retryInterval' => 15,
@@ -218,7 +273,7 @@ return [
                     'weight' => 1,
                 ],
             ],
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
+            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -237,14 +292,14 @@ return [
     'components' => [
         'redis' => [
             'class' => yii\redis\Connection::class,
-            'hostname' => 'localhost',
+            'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
             'port' => 6379,
             'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
         'cache' => [
             'class' => yii\redis\Cache::class,
             'defaultDuration' => 86400,
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
+            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
         ],
     ],
 ];
@@ -274,7 +329,7 @@ return [
             $config['replicaConfig'] = [
                 'username' => App::env('DB_REPLICA_USER'),
                 'password' => App::env('DB_REPLICA_PASSWORD'),
-                'tablePrefix' => App::env('DB_TABLE_PREFIX'),
+                'tablePrefix' => App::env('CRAFT_DB_TABLE_PREFIX'),
                 'attributes' => [
                     // Use a smaller connection timeout
                     PDO::ATTR_TIMEOUT => 10,
@@ -317,7 +372,7 @@ return [
     'components' => [
         'redis' => [
             'class' => yii\redis\Connection::class,
-            'hostname' => 'localhost',
+            'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
             'port' => 6379,
             'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
@@ -373,7 +428,7 @@ return [
 ```
 
 ::: tip
-The `session` component **must** be configured with the <craft3:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
+The `session` component **must** be configured with the <craft4:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
 :::
 
 ### Mailer Component
@@ -393,7 +448,7 @@ return [
 
             // Override the transport adapter settings
             $settings->transportSettings = [
-                'domain' => 'foo.com',
+                'domain' => 'my-project.tld',
                 'apiKey' => 'key-xxxxxxxxxx',
             ];
 
@@ -413,16 +468,20 @@ Any changes you make to the Mailer component from `config/app.php` will not be r
 
 ### Queue Component
 
-Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft3:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md), but you can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`:
+Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft4:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md).
+
+You can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`, however that will result in a loss of visibility into the queue’s state from the control panel. Instead you should take a hybrid approach, by setting your custom queue driver config on <craft4:craft\queue\Queue::$proxyQueue>:
 
 ```php
 <?php
 return [
     'components' => [
         'queue' => [
-            'class' => yii\queue\redis\Queue::class,
-            'redis' => 'redis', // Redis connection component or its config
-            'channel' => 'queue', // Queue channel key
+            'proxyQueue' => [
+                'class' => yii\queue\redis\Queue::class,
+                'redis' => 'redis', // Redis connection component or its config
+                'channel' => 'queue', // Queue channel key
+            ],
         ],
     ],
 ];
@@ -431,11 +490,11 @@ return [
 Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
 
 ::: warning
-Only drivers that implement <craft3:craft\queue\QueueInterface> will be visible within the control panel.
+Only drivers that implement <craft4:craft\queue\QueueInterface> will be visible within the control panel.
 :::
 
 ::: tip
-If your queue driver supplies its own worker, set the <config3:runQueueAutomatically> config setting to `false` in `config/general.php`.
+If your queue driver supplies its own worker, set the <config4:runQueueAutomatically> config setting to `false` in `config/general.php`.
 :::
 
 ### Modules
@@ -467,7 +526,7 @@ Some settings in the control panel can be set to environment variables (like the
   - **HTML Email Template**
   - **Username** (Gmail and SMTP)
   - **Password** (Gmail and SMTP)
-  - **Host Name** (SMTP)
+  - **Hostname** (SMTP)
   - **Port** (SMTP)
   - **Use authentication** (SMTP)
   - **Encryption Method** (SMTP)
@@ -490,7 +549,7 @@ For example, you can define a `ROOT_URL` environment variable that is set to the
 
 ```bash
 # -- .env --
-ROOT_URL="http://my-project.test"
+ROOT_URL="http://my-project.tld"
 ```
 Then create a `@rootUrl` alias that references it:
 
@@ -503,19 +562,15 @@ Then create a `@rootUrl` alias that references it:
 
 Then you could go into your User Photos volume’s settings (for example) and set its Base URL to `@rootUrl/images/user-photos`.
 
+### Config Environment Variables
+
+Craft’s [general config settings](config-settings.md) and [database connection settings](db-settings.md) can be defined exclusively by environment variables using a `CRAFT_` or `CRAFT_DB_` prefix respectively.
+
+Combine the prefix with the config setting in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). The <config4:allowUpdates> setting, for example, would be `CRAFT_ALLOW_UPDATES`. The database [port](db-settings.md#port) setting would be `CRAFT_DB_PORT`.
+
 ### Config Files
 
-You can set your [general config settings](config-settings.md), [database connection settings](db-settings.md), and other PHP config files to environment variables using Craft’s [App::env()](craft3:craft\helpers\App::env()) function:
-
-```bash
-# -- .env --
-CP_TRIGGER="secret-word"
-```
-
-```php
-// -- config/general.php --
-'cpTrigger' => craft\helpers\App::env('CP_TRIGGER') ?: 'admin',
-```
+Craft still supports setting [general config settings](config-settings.md), [database connection settings](db-settings.md), and other settings via static PHP files. A few non-scalar config settings, like <config4:cpHeadTags>, must be set this way because there’s no way to provide a nested array via environment variable.
 
 #### Multi-Environment Configs
 
@@ -541,22 +596,15 @@ return [
 ];
 ```
 
-The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant, which should be defined by your `web/index.php` file. (Your server’s hostname will be used as a fallback.)
+The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant or environment variable. (Your server’s hostname will be used as a fallback.)
 
 ::: tip
 Make sure your key(s) are sufficiently unique! Craft reads your array of config settings from top to bottom, applying config settings wherever the `CRAFT_ENVIRONMENT` value *contains* the key.
 :::
 
-By default, new Craft 4 projects will define the [CRAFT_ENVIRONMENT](#craft-environment) constant using an environment variable called `ENVIRONMENT`, which is defined in the `.env` file:
-
 ```bash
 # -- .env --
-ENVIRONMENT="dev"
-```
-
-```php
-// -- web/index.php --
-define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production');
+CRAFT_ENVIRONMENT=dev
 ```
 
 ## PHP Constants
@@ -603,17 +651,16 @@ define('CRAFT_CP', true);
 
 If this isn’t defined, Craft will treat the request as a control panel request if either of these are true:
 
-- The <config3:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config3:cpTrigger> setting, if set).
-- The <config3:baseCpUrl> setting **is not** set, and the request URI begins with the <config3:cpTrigger> setting.
+- The <config4:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config4:cpTrigger> setting, if set).
+- The <config4:baseCpUrl> setting **is not** set, and the request URI begins with the <config4:cpTrigger> setting.
 
 ### `CRAFT_ENVIRONMENT`
 
-The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays. (The [craftcms/craft](https://github.com/craftcms/craft) starter project sets this to the value of an `ENVIRONMENT` environment variable, or falls back to `production` if it’s not defined.)
+The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays.
 
-```php
-// Set the environment from the ENVIRONMENT env var, or default to 'production'
-define('CRAFT_ENVIRONMENT', craft\helpers\App::env('ENVIRONMENT') ?: 'production');
-```
+::: warning
+Prior to Craft 4, `craftcms/craft` projects had `CRAFT_ENVIRONMENT` fall back to a value of `production` by default. This is no longer the case, as the default is [explicitly set to `dev`](https://github.com/craftcms/craft/blob/main/.env.example#L5).
+:::
 
 ### `CRAFT_EPHEMERAL`
 
@@ -660,7 +707,7 @@ Make sure you set this to a valid folder path, otherwise it will be ignored.
 
 ### `CRAFT_STREAM_LOG`
 
-When set to `true`, Craft will additionally send log output to `stderr` and `stdout`. PHP fatal errors will be sent to `stderr`.
+When set to `true`, Craft will send log output to `stderr` and `stdout`, instead of to log files. PHP fatal errors will be sent to `stderr`.
 
 ### `CRAFT_TEMPLATES_PATH`
 
@@ -679,7 +726,7 @@ The path to the [vendor/](../directory-structure.md#vendor) folder. (It is assum
 Craft uses a file-based mutex driver by default, which should be switched to a different driver in [load-balanced environments](https://craftcms.com/knowledge-base/configuring-load-balanced-environments#mutex-locks).
 
 ::: tip
-A [NullMutex](craft3:craft\mutex\NullMutex) driver is used when Dev Mode is enabled, since mutex drivers aren’t necessary for local development and we’ve seen issues with mutex in some Windows and Linux filesystems.
+A [NullMutex](craft4:craft\mutex\NullMutex) driver is used when Dev Mode is enabled, since mutex drivers aren’t necessary for local development and we’ve seen issues with mutex in some Windows and Linux filesystems.
 :::
 
 You can configure a custom mutex driver by configuring the `mutex` component’s nested `$mutex` property:

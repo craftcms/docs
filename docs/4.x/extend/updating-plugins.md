@@ -1,6 +1,6 @@
 # Updating Plugins for Craft 4
 
-While [the changelog](https://github.com/craftcms/cms/blob/4.0/CHANGELOG.md) is the most comprehensive list of changes, this guide provides high-level overview and organizes changes by category.
+While [the changelog](https://github.com/craftcms/cms/blob/main/CHANGELOG.md) is the most comprehensive list of changes, this guide provides high-level overview and organizes changes by category.
 
 ::: tip
 If you think something is missing, please [create an issue](https://github.com/craftcms/docs/issues/new).
@@ -23,7 +23,7 @@ Some events, permissions, and controller actions have changed largely in support
 
 It’s best to update any existing plugin for Craft 4 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path.
 
-We anticipate most developers will choose to release a new major version of their plugin that requires Craft 4, though all Craft and the plugin store look at for compatibility is what’s required by `composer.json`.
+We anticipate most developers will choose to release a new major version of their plugin that requires Craft 4, though all Craft and the Plugin Store look at for compatibility is what’s required by `composer.json`.
 
 You’ll need to explicitly state support for each major Craft version. Any `craftcms/cms` constraint beginning with `>=` will be treated as `^`. If your plugin supports Craft 3 and 4, for example, you’ll need to set your `craftcms/cms` constraint to `^3.0|^4.0` rather than `>=3.0`.
 
@@ -51,9 +51,10 @@ While there’s no requirement that you use these tools, we encourage all develo
 
 If you decide to use PHPStan and/or ECS, we recommend doing it in the following order:
 
-1. Run PHPStan on your existing Craft 3 code base and apply the greatest level of fixes you’re comfortable with.
+1. Run PHPStan on your existing Craft 3 codebase and apply the greatest level of fixes you’re comfortable with.
 2. Run Craft’s [Rector](#rector) rules to prep a bunch of your code for Craft 4.
-3. Run PHPStan again to identify issues and opportunities specifically related to Craft 4 changes.
+3. Update your `craftcms/cms` requirement to `^4.0.0` and run `composer update`.
+4. Run PHPStan again to identify issues and opportunities specifically related to Craft 4 changes.
 
 ## Rector
 
@@ -99,7 +100,6 @@ If you have a plugin or module that implements custom element types and want to 
 - [createAnother()](craft4:craft\base\ElementInterface::createAnother()) – Returns a new, unsaved element for “Save and add another” actions. (No need to worry about permissions here; canSave() will be in effect for it.)
 - [hasRevisions()](craft4:craft\base\ElementInterface::hasRevisions()) – Whether the element type is creating revisions for itself.
 - [getPostEditUrl()](craft4:craft\base\ElementInterface::getPostEditUrl()) – The URL that the browser should be redirected to after the element is saved.
-- [getCrumbs()](craft4:craft\base\ElementInterface::getCrumbs()) – Array of breadcrumbs that should be shown on the element’s edit page.
 - [getAdditionalButtons()](craft4:craft\base\ElementInterface::getAdditionalButtons()) – HTML for any additional buttons that should be shown beside “Save”.
 - [prepareEditScreen()](craft4:craft\base\ElementInterface::prepareEditScreen()) – [Optional customization](https://github.com/craftcms/cms/discussions/10784) of the edit screen response.
 
@@ -137,7 +137,7 @@ Any element type providing control panel editing UI may need to update it.
 
 If your element type already supported custom field layouts and behaved well with slideout UI in Craft 3, you may only need to update a few renamed [events](#events) and [permissions](#user-permissions).
 
-If your element type relies on [getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml()), however, whether it’s because it has legacy UI or does its own thing entirely, you’ll need to migrate those pieces elsewhere since that method has been removed. Craft 3.7’s [getSidebarHtml()](craft4:craft\base\ElementInterface::getSidebarHtml()) and [getMetadata()](craft4:craft\base\ElementInterface::getMetadata()) are still available for tailoring what’s displayed in sidebar and metadata areas, but Craft will always give priority to any custom field layout when it exists.
+If your element type relies on [getEditorHtml()](craft4:craft\base\ElementInterface::getEditorHtml()), however, whether it’s because it has legacy UI or does its own thing entirely, you’ll need to migrate those pieces elsewhere since that method has been removed. Craft 3.7’s [getSidebarHtml()](craft4:craft\base\ElementInterface::getSidebarHtml()) and [getMetadata()](craft4:craft\base\ElementInterface::getMetadata()) are still available for tailoring what’s displayed in sidebar and metadata areas, but Craft will always give priority to any custom field layout when it exists.
 
 ::: warning
 Each elements type’s `defineRules()` method needs to fully cover any inputs that could be posted via native field elements, `getSidebarHtml()`, and `getMetadata()`.
@@ -380,7 +380,7 @@ public function actionSave() {
 }
 ```
 
-[asErrorJson()](craft4:craft\web\Controller::asErrorJson()) has been deprecated in Craft 4 and will be removed in Craft 5. Use [asFailure()](craft4:craft\web\Controller::asFailure()) instead:
+[asErrorJson()](craft3:craft\web\Controller::asErrorJson()) has been deprecated in Craft 4 and will be removed in Craft 5. Use [asFailure()](craft4:craft\web\Controller::asFailure()) instead:
 
 ```php
 // Craft 3
@@ -447,7 +447,7 @@ Control panel template updates have largely been in support of the [unified elem
 If your Craft 3 plugin was using Craft’s editable table (via `editableTableField()` or `editableTable`), you may need to explicitly set `allowAdd`, `allowDelete`, and `allowReorder` to `true` for it to behave the same in Craft 4:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import _includes/forms.twig' as forms %}
 
 {# Craft 3 #}
 {{ forms.editableTableField({
@@ -473,10 +473,10 @@ If your Craft 3 plugin was using Craft’s editable table (via `editableTableFie
 
 The control panel’s `_includes/forms` got a few new macros: `button`, `submitButton`, `fs`, and `fsField`.
 
-The `button` and `submitButton` macros can each take a `spinner` option that will include markup for a loading animation you can use for AJAX requests:
+The `button` and `submitButton` macros can each take a `spinner` option that will include markup for a loading animation you can use for Ajax requests:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.button({
   label: 'Save a Copy',
@@ -751,3 +751,114 @@ class MyModel extends \yii\base\Model
 ::: tip
 Thanks to Craft 4’s [Typecast](craft4:craft\helpers\Typecast) helper, all arrays, floats, booleans, and strings are normalized correctly in addition to DateTime values.
 :::
+
+## Templates
+
+### `View::renderTemplateMacro()` has been removed
+
+With changes in Twig 3, the [View](craft4:craft\web\View) class has removed its `renderTemplateMacro()` method.
+
+<!-- textlint-disable terminology -->
+<!-- `Cp` is the name of the class here, so be cool textlint -->
+
+The [Cp](craft4:craft\helpers\Cp) helper includes methods for rendering Craft’s built-in form components you may be able to use (like [Cp::textFieldHtml()](craft4:craft\helpers\Cp::textFieldHtml()))—otherwise any macros will need to be moved to their own full templates.
+
+<!-- textlint-enable terminology -->
+
+### Template Hooks
+
+Element-specific [control panel template hooks](template-hooks.md#control-panel-template-hooks) have been removed:
+
+- `cp.assets.edit.content`
+- `cp.assets.edit.details`
+- `cp.assets.edit.meta`
+- `cp.assets.edit.settings`
+- `cp.assets.edit`
+- `cp.categories.edit.content`
+- `cp.categories.edit.details`
+- `cp.categories.edit.meta`
+- `cp.categories.edit.settings`
+- `cp.categories.edit`
+- `cp.elements.edit`
+- `cp.entries.edit.content`
+- `cp.entries.edit.details`
+- `cp.entries.edit.meta`
+- `cp.entries.edit.settings`
+- `cp.entries.edit`
+
+With the new [unified element editor](#unified-element-editor), anything that needs to be included in the editor should be provided in a field layout.
+
+If your plugin appended non-field content to a main content area, however, you can use Craft 4’s [ElementsController::EVENT_DEFINE_EDITOR_CONTENT](craft4:craft\controllers\ElementsController::EVENT_DEFINE_EDITOR_CONTENT) to check the event object’s `$element` property and optionally append markup to `$html`.
+
+## GraphQL
+
+[TypeManager::prepareFieldDefinitions()](craft4:craft\gql\TypeManager::prepareFieldDefinitions()) has been deprecated. Use [Gql::prepareFieldDefinitions()](craft4:craft\services\Gql::prepareFieldDefinitions()) instead:
+
+```php
+// Craft 3
+public static function getFieldDefinitions(): array
+{
+    return craft\gql\TypeManager::prepareFieldDefinitions([
+        // ...
+    ], self::getName());
+}
+
+// Craft 4
+public static function getFieldDefinitions(): array
+{
+    return Craft::$app->getGql()->prepareFieldDefinitions([
+        // ...
+    ], self::getName());
+}
+```
+
+### Defining Components
+
+Plugins can now define their components (like services) using a new static [config()](craft4:craft\base\PluginInterface::config()) method rather than [setComponents()](yii2:yii\di\ServiceLocator::setComponents()). This makes the plugin’s service extendable in the same way Craft’s main app config can be extended via `config/app`.
+
+To take advantage of this, you could move your existing component definition...
+
+```php
+// Craft 3/4 `setComponents()`
+public function init(): void
+{
+    // …
+    $this->setComponents([
+        'myComponent' => MyComponent::class
+    ]);
+}
+```
+
+...to the new `config()` method:
+
+```php
+// Craft 4 `config()`
+public static function config(): array
+{
+    return [
+        'components' => [
+            'myComponent' => ['class' => MyComponent::class],
+        ],
+    ];
+}
+```
+
+A project then has the option to customize the component from `config/app.php`:
+
+```php
+return [
+    'components' => [
+        'plugins' => [
+            'pluginConfigs' => [
+                'my-plugin' => [
+                    'components' => [
+                        'myComponent' => [
+                            'myProperty' => 'foo',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+    ],
+];
+```

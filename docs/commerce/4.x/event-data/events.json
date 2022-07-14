@@ -1394,6 +1394,49 @@
     },
     {
         "class": "craft\\commerce\\base\\Purchasable",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the cache tags that should be cleared when this element is saved.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\base\\Purchasable",
         "name": "EVENT_DEFINE_KEYWORDS",
         "type": "craft\\events\\DefineAttributeKeywordsEvent",
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
@@ -2405,7 +2448,7 @@
         "class": "craft\\commerce\\controllers\\BaseFrontEndController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\BaseFrontEndController",
@@ -2459,7 +2502,7 @@
         "class": "craft\\commerce\\controllers\\CartController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\CartController",
@@ -2501,7 +2544,7 @@
         "class": "craft\\commerce\\controllers\\DownloadsController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\DownloadsController",
@@ -2651,7 +2694,7 @@
         "class": "craft\\commerce\\controllers\\PaymentSourcesController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\PaymentSourcesController",
@@ -2669,7 +2712,7 @@
         "class": "craft\\commerce\\controllers\\PaymentsController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\PaymentsController",
@@ -2891,7 +2934,7 @@
         "class": "craft\\commerce\\controllers\\UserOrdersController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
-        "desc": "The event that’s triggered when a cart is returned as an array for AJAX cart update requests."
+        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
     },
     {
         "class": "craft\\commerce\\controllers\\UserOrdersController",
@@ -3960,6 +4003,49 @@
         "name": "EVENT_SET_ROUTE",
         "type": "craft\\events\\SetElementRouteEvent",
         "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Donation",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the cache tags that should be cleared when this element is saved.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -6201,6 +6287,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Order",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the cache tags that should be cleared when this element is saved.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_DEFINE_KEYWORDS",
         "type": "craft\\events\\DefineAttributeKeywordsEvent",
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
@@ -8015,6 +8144,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Product",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the cache tags that should be cleared when this element is saved.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Product",
         "name": "EVENT_DEFINE_KEYWORDS",
         "type": "craft\\events\\DefineAttributeKeywordsEvent",
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
@@ -9789,6 +9961,49 @@
         "name": "EVENT_SET_ROUTE",
         "type": "craft\\events\\SetElementRouteEvent",
         "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Subscription",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the cache tags that should be cleared when this element is saved.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -11815,6 +12030,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Variant",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the cache tags that should be cleared when this element is saved.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Variant",
         "name": "EVENT_DEFINE_KEYWORDS",
         "type": "craft\\events\\DefineAttributeKeywordsEvent",
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
@@ -13159,6 +13417,54 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
+        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
+        "desc": "The event that is triggered when defining the condition rule types."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\conditions\\users\\DiscountGroupConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -13201,6 +13507,54 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
+        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
+        "desc": "The event that is triggered when defining the condition rule types."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
         "name": "EVENT_BEFORE_PREPARE",
         "type": "craft\\elements\\db\\Event",
@@ -13214,7 +13568,19 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\DonationQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\DonationQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
     },
@@ -13244,7 +13610,19 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\OrderQuery",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\OrderQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\OrderQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
     },
@@ -13274,7 +13652,19 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\ProductQuery",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\ProductQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\ProductQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
     },
@@ -13304,7 +13694,19 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
     },
@@ -13334,7 +13736,19 @@
     },
     {
         "class": "craft\\commerce\\elements\\db\\VariantQuery",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\VariantQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\VariantQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
     },
@@ -19186,7 +19600,7 @@
         "class": "craft\\commerce\\services\\LineItems",
         "name": "EVENT_AFTER_SAVE_LINE_ITEM",
         "type": "craft\\commerce\\events\\LineItemEvent",
-        "desc": "The event that is triggeredd after a line item is saved."
+        "desc": "The event that is triggered after a line item is saved."
     },
     {
         "class": "craft\\commerce\\services\\LineItems",
@@ -19335,13 +19749,13 @@
     {
         "class": "craft\\commerce\\services\\Pdfs",
         "name": "EVENT_BEFORE_SAVE_PDF",
-        "type": "craft\\commerce\\events\\PdfSaveEvent",
+        "type": "craft\\commerce\\events\\PdfEvent",
         "desc": "The event that is triggered before an pdf is saved."
     },
     {
         "class": "craft\\commerce\\services\\Pdfs",
         "name": "EVENT_AFTER_SAVE_PDF",
-        "type": "craft\\commerce\\events\\PdfSaveEvent",
+        "type": "craft\\commerce\\events\\PdfEvent",
         "desc": "The event that is triggered after an PDF is saved."
     },
     {
@@ -19361,6 +19775,12 @@
         "name": "EVENT_MODIFY_RENDER_OPTIONS",
         "type": "craft\\commerce\\events\\PdfRenderOptionsEvent",
         "desc": "The event that allows additional setting of pdf render options."
+    },
+    {
+        "class": "craft\\commerce\\services\\Pdfs",
+        "name": "EVENT_BEFORE_DELETE_PDF",
+        "type": "craft\\commerce\\events\\PdfEvent",
+        "desc": "The event that is triggered before a pdf is deleted."
     },
     {
         "class": "craft\\commerce\\services\\Plans",

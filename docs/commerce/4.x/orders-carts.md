@@ -5,7 +5,7 @@ sidebarDepth: 2
 
 Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
 
-When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce3:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
+When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce4:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
 
 ## Carts
 
@@ -44,7 +44,7 @@ In your templates, you can get the current user’s cart like this:
 {% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
-You could also fetch the cart via AJAX. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
+You could also fetch the cart via Ajax. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
 
 ::: code
 ```twig jQuery
@@ -78,9 +78,9 @@ axios.get('', {
 ```
 :::
 
-Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
+Either of the examples above will generate a new cart cookie if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
-To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
+To see what cart information you can use in your templates, take a look at the [Order](commerce4:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
 
 <toggle-tip title="Example Order">
 
@@ -108,7 +108,7 @@ This gets a product and creates a form that will add its default variant to the 
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
   {{ hiddenInput('purchasableId', variant.id) }}
-  <button type="submit">Add to Cart</button>
+  <button>Add to Cart</button>
 </form>
 ```
 
@@ -129,7 +129,7 @@ If the product has multiple variants, you could provide a dropdown menu to allow
       <option value="{{ variant.id }}">{{ variant.sku }}</option>
     {% endfor %}
   </select>
-  <button type="submit">Add to Cart</button>
+  <button>Add to Cart</button>
 </form>
 ```
 
@@ -154,7 +154,7 @@ You can add multiple purchasables to the cart in a single request using a `purch
      {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
      {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
   {% endfor %}
-  <button type="submit">Add all variants to cart</button>
+  <button>Add all variants to cart</button>
 </form>
 ```
 
@@ -198,7 +198,7 @@ In this example, we’re providing the customer with an option to include a note
     <option value="no">No Thanks</option>
   </select>
   {{ hiddenInput('purchasableId', variant.id) }}
-  <button type="submit">Add to Cart</button>
+  <button>Add to Cart</button>
 </form>
 ```
 ```twig Multiple Items
@@ -219,13 +219,13 @@ In this example, we’re providing the customer with an option to include a note
       <option value="no">No Thanks</option>
     </select>
   {% endfor %}
-  <button type="submit">Add to Cart</button>
+  <button>Add to Cart</button>
 </form>
 ```
 :::
 
 ::: warning
-Commerce does not validate the `options` and `note` parameters. If you’d like to limit user input, use front-end validation or use the [`Model::EVENT_DEFINE_RULES`](craft3:craft\base\Model::EVENT_DEFINE_RULES) event to add validation rules for the [`LineItem`](commerce3:craft\commerce\models\LineItem) model.
+Commerce does not validate the `options` and `note` parameters. If you’d like to limit user input, use front-end validation or use the [`Model::EVENT_DEFINE_RULES`](craft4:craft\base\Model::EVENT_DEFINE_RULES) event to add validation rules for the [`LineItem`](commerce4:craft\commerce\models\LineItem) model.
 :::
 
 The note and options will be visible on the order’s detail page in the control panel:
@@ -247,7 +247,7 @@ You can directly modify any line item’s `qty`, `note`, and `options` using tha
     <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
     <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
   {% endfor %}
-  <button type="submit">Update Line Item</button>
+  <button>Update Line Item</button>
 </form>
 ```
 
@@ -263,7 +263,7 @@ You can remove a line item by including a `remove` parameter in the request. Thi
     <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
     <input type="checkbox" name="lineItems[{{ item.id }}][remove]" value="1"> Remove item<br>
   {% endfor %}
-  <button type="submit">Update Line Item</button>
+  <button>Update Line Item</button>
 </form>
 ```
 
@@ -293,14 +293,14 @@ Each line item includes several totals:
 
 ### Loading a Cart
 
-Commerce provides a `commerce/cart/load-cart` endpoint for loading an existing cart into the current customer’s session.
+Commerce provides a `commerce/cart/load-cart` endpoint for loading an existing cart into a cookie for the current customer.
 
 You can have the user interact with the endpoint by either [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form). Either way, the cart number is required.
 
 Each method will store any errors in the session’s error flash data (`craft.app.session.getFlash('error')`), and the cart being loaded can be active or inactive.
 
 ::: tip
-If the desired cart belongs to a user, that user must be logged in to load it into their session.
+If the desired cart belongs to a user, that user must be logged in to load it into a browser cookie.
 :::
 
 The [`loadCartRedirectUrl`](config-settings.md#loadCartRedirectUrl) setting determines where the customer will be sent by default after the cart’s loaded.
@@ -352,22 +352,26 @@ This is a simplified version of [`shop/cart/load.twig`](https://github.com/craft
   {{ redirectInput('/shop/cart') }}
 
   <input type="text" name="number" value="{{ cart.number }}">
-  <button type="submit">Submit</button>
+  <button>Submit</button>
 </form>
 ```
 
 #### Restoring Previous Cart Contents
 
-If the customer’s a registered user they may want to continue shopping from another browser or computer. If that customer has an empty cart—as they would by default—and they log into the site, the cart from a previous session will automatically be loaded.
+If the customer’s a registered user they may want to continue shopping from another browser or computer. If that customer has an empty cart—as they would by default—and they log into the site, any previous cart will automatically be loaded.
 
-You can allow a customer to see carts from previous logged-in sessions:
+::: tip
+If a customer is a guest with a cart and they create an account, that cart will be maintained after logging in.
+:::
+
+You can allow a customer to see previously-loaded carts:
 
 ::: code
 ```twig
 {% if currentUser %}
   {% set currentCart = craft.commerce.carts.cart %}
   {% if currentCart.id %}
-    {# Return all incomplete carts *except* the one from this session #}
+    {# Return all incomplete carts *except* the currently-loaded one #}
     {% set oldCarts = craft.orders()
       .isCompleted(false)
       .id('not '~currentCart.id)
@@ -390,7 +394,7 @@ $currentUser = Craft::$app->getUser()->getIdentity();
 if ($currentUser) {
     $currentCart = Commerce::getInstance()->getCarts()->getCart();
     if ($currentCart->id) {
-        // return all incomplete carts *except* the one from this session
+        // Return all incomplete carts *except* the currently-loaded one
         $oldCarts = Order::findAll()
             ->isCompleted(false)
             ->id('not '.$currentCart->id)
@@ -404,15 +408,36 @@ if ($currentUser) {
 ```
 :::
 
-You could then loop over the line items in those older carts and allow the customer to add them to the current order.
+You could then loop over the line items in those older carts and allow the customer to add them to the current order:
 
-::: tip
-You’ll find an example of this in the [example templates](example-templates.md).
-:::
+```twig
+<h2>Previous Cart Items</h2>
+
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+
+  {% for oldCart in oldCarts %}
+    {% for lineItem in oldCart.lineItems %}
+      {{ lineItem.description }}
+      <label>
+        {{ input('checkbox', 'purchasables[][id]', lineItem.getPurchasable().id) }}
+        Add to cart
+      </label>
+    {% endfor %}
+  {% endfor %}
+
+  <button>Update Cart</button>
+</form>
+```
 
 ### Forgetting a Cart
 
-A logged-in customer’s cart is removed from their session automatically when they log out. You can call the `forgetCart()` method directly at any time to remove the current cart from the session. The cart itself will not be deleted, but only disassociated with the active session.
+A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart.
+
+If the customer logs out, their cart will automatically be forgotten.
+
+You can call the `forgetCart()` method manually to remove the current cart cookie. The cart itself will not be deleted, but disassociated with any sessions until it’s loaded again.
 
 ::: code
 ```twig
@@ -442,7 +467,7 @@ Instead of being recalculated on each change like a cart, the order will only be
 
 Adjustments for discounts, shipping, and tax may be applied when an order is recalcuated. Each adjustment is related to its order, and can optionally relate to a specific line item.
 
-If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce3:craft\commerce\elements\Order> class reference for a complete list of available properties.
+If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce4:craft\commerce\elements\Order> class reference for a complete list of available properties.
 
 ### Order Numbers
 
@@ -450,7 +475,7 @@ There are three ways to identify an order: by order number, short order number, 
 
 #### Order Number
 
-The order number is a hash generated when the cart is first created in the user’s session. It exists even before the cart is saved in the database, and remains the same for the entire life of the order.
+The order number is a hash generated when the cart cookie is first created. It exists even before the cart is saved in the database, and remains the same for the entire life of the order.
 
 This is different from the order reference number, which is only generated after the cart has been completed and becomes an order.
 
@@ -633,7 +658,7 @@ This example clears all the notices on the cart:
   {{ actionInput('commerce/cart/update-cart') }}
   {{ hiddenInput('successMessage', 'All notices dismissed'|hash) }}
   {{ hiddenInput('clearNotices') }}
-  <button type="submit">Dismiss</button>
+  <button>Dismiss</button>
 </form>
 ```
 ```php{7}
@@ -741,6 +766,10 @@ Order queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -793,6 +822,10 @@ Order queries support the following parameters:
 | [withCustomer](#withcustomer)             | Eager loads the user on the resulting orders.
 | [withLineItems](#withlineitems)           | Eager loads the line items on the resulting orders.
 | [withTransactions](#withtransactions)     | Eager loads the transactions on the resulting orders.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -1200,6 +1233,10 @@ Causes the query results to be returned in the order specified by [id](#id).
 
 
 
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -1566,23 +1603,23 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| `en` | with an order language that is 'en'.
-| `'not en'` | not with an order language that is no 'en'.
-| `['en', 'en-us']` | with an order language that is 'en' or 'en-us'.
-| `['not', 'en']` | not with an order language that is not 'en'.
+| `'en'` | with an order language that is `'en'`.
+| `'not en'` | not with an order language that is not `'en'`.
+| `['en', 'en-us']` | with an order language that is `'en'` or `'en-us'`.
+| `['not', 'en']` | not with an order language that is not `'en'`.
 
 
 
 ::: code
 ```twig
-{# Fetch orders with an order status with an ID of 1 #}
+{# Fetch orders with an order language that is `'en'` #}
 {% set orders = craft.orders()
   .orderLanguage('en')
   .all() %}
 ```
 
 ```php
-// Fetch orders with an order status with an ID of 1
+// Fetch orders with an order language that is `'en'`
 $orders = \craft\commerce\elements\Order::find()
     ->orderLanguage('en')
     ->all();
@@ -1726,8 +1763,8 @@ If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.ht
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 

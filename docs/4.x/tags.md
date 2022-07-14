@@ -8,7 +8,7 @@ Before you can create tags, you must create Tag Groups to contain them.
 
 To create a new tag group, go to Settings → Tags and click New Tag Group.
 
-Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don't need to assign any fields to the Tag Group Field Layout in order to use the group.
+Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don’t need to assign any fields to the Tag Group Field Layout in order to use the group.
 
 ## Assigning Tags
 
@@ -31,7 +31,7 @@ $myTagQuery = \craft\elements\Tag::find();
 ```
 :::
 
-Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Tag](craft3:craft\elements\Tag) objects will be returned.
+Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Tag](craft4:craft\elements\Tag) objects will be returned.
 
 ::: tip
 See [Element Queries](element-queries.md) to learn about how element queries work.
@@ -68,6 +68,10 @@ Tag queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -87,6 +91,7 @@ Tag queries support the following parameters:
 | [offset](#offset)                         | Determines how many tags should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only tags that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only tags that match a search query.
 | [site](#site)                             | Determines which site(s) the tags should be queried in.
@@ -98,6 +103,10 @@ Tag queries support the following parameters:
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#uri)                               | Narrows the query results based on the tags’ URIs.
 | [with](#with)                             | Causes the query to return matching tags eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -515,8 +524,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -541,6 +550,15 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`

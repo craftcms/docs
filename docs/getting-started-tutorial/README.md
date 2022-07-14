@@ -13,7 +13,7 @@ If you get stuck, [join us on Discord](https://craftcms.com/discord) where frien
 
 ## Why Craft CMS?
 
-Craft CMS is a content management system for building bespoke websites.
+Craft CMS is a content management system for building bespoke web projects.
 
 There are lots of options when it comes to choosing a CMS, and Craft CMS is a blank slate that puts your content first. It provides a flexible, tailored experience for developers and content authors.
 
@@ -31,8 +31,8 @@ We’re going to get Craft CMS running in a local environment and create a simpl
     - [Get to know your terminal](environment/terminal.md)
     - [Choose a code editor](environment/editor.md)
     - [Set up a development stack](environment/stack.md)
-1. [**Install Craft CMS**](install/files.md)
-    - [Finish setup](install/setup.md)
+1. [**Install Craft CMS**](install/)
+    - [Project File Structure](install/files.md)
 2. [**Build Your Content**](configure/)
     - [Building Your Content](configure/)
     - [Control panel tour](configure/control-panel.md)

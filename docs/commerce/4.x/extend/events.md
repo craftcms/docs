@@ -4,7 +4,7 @@ Craft Commerce provides a multitude of events for extending its functionality. M
 
 ## Event Code Generator
 
-Select an event for details and a code snippet. See Craft’s [Events](../../../3.x/extend/events.md) page for Craft and Yii events.
+Select an event for details and a code snippet. See Craft’s [Events](/4.x/extend/events.md) page for Craft and Yii events.
 
 <event-browser source="commerce-4" />
 
@@ -521,7 +521,7 @@ Event::on(
 
 ### `modifyCartInfo`
 
-The event that’s triggered when a cart is returned as an array for AJAX cart update requests.
+The event that’s triggered when a cart is returned as an array for Ajax cart update requests.
 
 ```php
 use craft\commerce\controllers\BaseFrontEndController;
@@ -813,7 +813,7 @@ Event::on(
 
 The event that is triggered when getting a default status for a line item.
 
-You may set [DefaultLineItemStatusEvent::lineItemStatus](commerce3:craft\commerce\events\DefaultLineItemStatusEvent) to a desired LineItemStatus to override the default status set in the control panel.
+You may set [DefaultLineItemStatusEvent::lineItemStatus](commerce4:craft\commerce\events\DefaultLineItemStatusEvent) to a desired LineItemStatus to override the default status set in the control panel.
 
 Plugins can get notified when a default line item status is being fetched.
 
@@ -925,7 +925,7 @@ Event::on(
         // @var Transaction $transaction
         $transaction = $event->transaction;
 
-        // Notify the warehouse we're ready to ship
+        // Notify the warehouse we’re ready to ship
         // ...
     }
 );
@@ -1559,7 +1559,7 @@ Event::on(
 
 ### `defineAddressLines`
 
-The event that is triggered when defining the [arrayable address fields](commerce3:craft\commerce\models\Address::getAddressLines()).
+The event that is triggered when defining the [arrayable address fields](commerce4:craft\commerce\models\Address::getAddressLines()).
 
 ```php
 use craft\commerce\events\DefineAddressLinesEvent;
@@ -1744,7 +1744,7 @@ Event handlers can customize PDF rendering by modifying several properties on th
 
 | Property    | Value                                                                                                                     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `order`     | populated [Order](commerce3:craft\commerce\elements\Order) model                                                                |
+| `order`     | populated [Order](commerce4:craft\commerce\elements\Order) model                                                                |
 | `template`  | optional Twig template path (string) to be used for rendering                                                             |
 | `variables` | populated with the variables availble to the template used for rendering                                                  |
 | `option`    | optional string for the template that can be used to show different details based on context (example: `receipt`, `ajax`) |

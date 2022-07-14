@@ -16,7 +16,9 @@ Custom order statuses can be managed from **Commerce** → **Settings** → **Or
 
 ## Functionality
 
-Order statuses allow a store owner to track an order through the various stages of its life cycle. For example you may set up a default status as “Received”, which gets set when the order is completed. When you have packed the order, you might set the orders status to 'Packed'. When you are waiting on a product to get into stock before packing you might set the status to 'Pending Stock'. When you have shipped the order you might set the status to 'Completed'. Every year you might set all order with a 'Completed' status to a status called 'Archived'.
+Order statuses allow a store owner to track an order through the various stages of its lifecycle.
+
+For example, you may set up a default status as “Received”, which gets set when the order is completed. When you have packed the order, you might set the order’s status to “Packed”. When you’re waiting on a product to get into stock before packing, you might set the status to “Pending Stock”. When you’ve shipped the order, you might set the status to “Completed”. Every year you might set all orders with a “Completed” status to a status called “Archived”.
 
 You can set up as many statuses as you want, with any meaning ascribed to them, and you can move your order between statuses freely.
 

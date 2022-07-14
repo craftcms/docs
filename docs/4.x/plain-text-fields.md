@@ -6,9 +6,11 @@ Plain Text fields give you either a normal text input or a multi-line textarea, 
 
 Plain Text fields have the following settings:
 
-* **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet.
-* **Max Length** – The maximum number of characters the field can contain.
-* **Allow line breaks** – Whether or not to allow line breaks in this field.
+- **UI Mode** – How the field should be presented in the control panel. (Defaults to “Normal”, can be “Enlarged”.)
+- **Placeholder Text** – The field’s placeholder text, to be displayed if the field has no value yet.
+- **Field Limit** – The maximum number of characters or bytes the field is allowed to have. (Accepts a number and a unit, which defaults to “Characters” with another option for “Bytes”.)
+- **Use a monospaced font** – Whether field contents should be displayed in a monospaced font.
+- **Allow line breaks** – Whether to allow line breaks in this field.
 
 ## The Field
 

@@ -89,6 +89,6 @@ Once the order is complete, the notes and options can be found on the View Order
 
 ## Options uniqueness
 
-The options data submitted to the line item are hashed into an `optionsSignature` for uniqueness. If you submit the same purchasableId to the cart with different option data, two line items with be created.
+The options data submitted to the line item are hashed into an `optionsSignature` for uniqueness. If you submit the same `purchasableId` to the cart with different option data, two line items with be created.
 
 Another way to think about it is that each line item is unique based on the combination of `purchasableId` and `optionsSignature`.

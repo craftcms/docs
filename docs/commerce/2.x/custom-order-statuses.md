@@ -12,11 +12,11 @@ The only differences between an order and a cart is:
 
 When a customer completes their order, the `dateOrdered` is set to the current time and date. Also, a custom order status is set on the order. The custom order status set depends on which order status you have set as the default.
 
-Custom order statuses can be managed from Commerce → Settings → Order Statuses in the Control Panel. There you can choose the order status that is set by default on new orders.
+Custom order statuses can be managed from Commerce → Settings → Order Statuses in the control panel. There you can choose the order status that is set by default on new orders.
 
 ## Functionality
 
-Order statuses allow a store owner to track an order through the various stages of its life cycle. For example you may set up a default status as “Received”, which gets set when the order is completed. When you have packed the order, you might set the orders status to “Packed”. When you are waiting on a product to get into stock before packing you might set the status to “Pending Stock”. When you have shipped the order you might set the status to “Completed”. Every year you might set all order with a “Completed” status to a status called “Archived”.
+Order statuses allow a store owner to track an order through the various stages of its lifecycle. For example you may set up a default status as “Received”, which gets set when the order is completed. When you have packed the order, you might set the orders status to “Packed”. When you are waiting on a product to get into stock before packing you might set the status to “Pending Stock”. When you have shipped the order you might set the status to “Completed”. Every year you might set all order with a “Completed” status to a status called “Archived”.
 
 You can set up as many statuses as you want, with any meaning ascribed to them, and you can move your order between statuses freely.
 
@@ -30,9 +30,9 @@ In addition to setting a new status, you can record a message which is stored wi
 
 ### In the control panel
 
-An order’s status can be changed on the Edit Order Page within the control panel. Clicking the 'Update Order Status' button will present you with a model window that allows the selection of the new status, and also a message associated with the change. After clicking submit, the order’s status will be updated an a new order history record will be created.
+An order’s status can be changed on the Edit Order Page within the control panel. Clicking **Update Order Status** will present you with a model window that allows the selection of the new status, and also a message associated with the change. After clicking submit, the order’s status will be updated an a new order history record will be created.
 
-You can change the status of multiple orders at the same time on the Order Index Page using the checkbox selection and then the 'Update Order Status' from the action menu.
+You can change the status of multiple orders at the same time on the Order Index Page using the checkbox selection and then **Update Order Status** from the action menu.
 
 ### In code
 

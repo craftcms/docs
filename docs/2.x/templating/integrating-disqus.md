@@ -2,9 +2,9 @@
 
 You can easily add comments to your Craft entry pages by utilizing a third-party comment service such as [Disqus](https://disqus.com/).
 
-To do this, you will need to have an output for displaying a single entry you want to allow comments on.  In this example, we'll use a template located at craft/templates/_entry.html.
+To do this, you will need to have an output for displaying a single entry you want to allow comments on.  In this example, we’ll use a template located at craft/templates/_entry.html.
 
-You'll want to sign up with Disqus and get your Universal Code on Disqus’ site in Admin → Settings → Install. Disqus has certain configuration variables that you can use to ensure comments end up on the right post.  Look for:
+You’ll want to sign up with Disqus and get your Universal Code on Disqus’ site in Admin → Settings → Install. Disqus has certain configuration variables that you can use to ensure comments end up on the right post.  Look for:
 
 ```javascript
 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */

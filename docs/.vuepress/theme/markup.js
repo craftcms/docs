@@ -14,28 +14,6 @@ function renderInlineCode(tokens, idx, options, env, renderer) {
   );
 }
 
-function findPrev(tokens, idx, check) {
-  for (let i = idx - 1; i >= 0; i--) {
-    if (check(tokens[i])) {
-      return i;
-    }
-  }
-  return false;
-}
-
-function findNext(tokens, idx, check) {
-  for (let i = idx + 1; i < tokens.length; i++) {
-    if (check(tokens[i])) {
-      return i;
-    }
-  }
-  return false;
-}
-
-function increment(tokens) {
-  tokens.forEach(t => t.level++);
-}
-
 /**
  * Wrap tables in div.table for stylistic improvement.
  * @param {*} tokens

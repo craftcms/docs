@@ -42,11 +42,11 @@ If you have templates located at both `templates/recipes/ingredients.twig` *and*
 
 Craft treats templates with names prefixed with an underscore, for example `recipes/_entry.twig`, as hidden templates that are not directly accessible.
 
-If we have a recipe entry that is available at the entry URL `http://mysite.com/recipes/gin-tonic`, which uses the template located at `recipes/entry`, someone could access the template directly at `http://mysite.com/recipes/entry`.
+If we have a recipe entry that is available at the entry URL `http://my-project.tld/recipes/gin-tonic`, which uses the template located at `recipes/entry`, someone could access the template directly at `http://my-project.tld/recipes/entry`.
 
-In this example there is no reason to access the template directly because it's only ever used as part of an entry URL. We change its filename to `_entry.twig` so it is considered hidden by Craft and update the settings in our Section.
+In this example there is no reason to access the template directly because it’s only ever used as part of an entry URL. We change its filename to `_entry.twig` so it is considered hidden by Craft and update the settings in our Section.
 
-Now when we try to access `http://mysite.com/recipes/entry` Craft returns a 404 error instead of attempting to render the template.
+Now when we try to access `http://my-project.tld/recipes/entry` Craft returns a 404 error instead of attempting to render the template.
 
 ## Template Localization
 

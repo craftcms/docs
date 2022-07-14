@@ -1,6 +1,6 @@
 # Store Management
 
-Craft Commerce adds user permissions you can customize in any of your [Craft CMS user groups](/3.x/user-management.md).
+Craft Commerce adds user permissions you can customize in any of your [Craft CMS user groups](/4.x/user-management.md).
 
 ## Store Managers
 
@@ -16,7 +16,7 @@ The exact permissions you choose for “Store Managers” will depend on the nee
 
 The following Commerce permissions are available for Craft users and user groups.
 
-![Commerce user permissions](./images/user-permissions.png)
+![Screenshot of Commerce user permissions, which cover products, orders, promotions, subscriptions, shipping, taxes, and store settings](./images/user-permissions.png)
 
 ### Access Craft Commerce
 
@@ -25,12 +25,12 @@ Whether the user is able to access the Commerce section of the control panel.
 ::: tip
 Unlike the others, you’ll find it under Craft’s **Access the control panel** permission:
 
-![](./images/general-permissions.png =375x375)
+![Screenshot of General permissions with an “Access Craft Commerce” checkbox under “Access the control panel”](./images/general-permissions.png =375x375)
 :::
 
 ### Manage products
 
-Whether the user can see, create, save, edit, and delete products by product type.
+Whether the user can manage products, with each product type having its own create and delete permissions.
 
 ### Manage orders
 
@@ -52,13 +52,33 @@ Whether the user may click the “Capture” button on an authorized transaction
 
 Whether the user may click the “Refund” button on a successful payment.
 
-### Manage customers
-
-Whether the user can see the customers listing and individual customer information.
-
 ### Manage promotions
 
-Whether the user can see, create and edit discounts and sales.
+Whether the user can manage promotions.
+
+#### Edit sales
+
+Whether the user can edit existing sales.
+
+#### Create sales
+
+Whether the user can create new sales.
+
+#### Delete sales
+
+Whether the user can delete sales.
+
+#### Edit discounts
+
+Whether the user can edit existing discounts.
+
+#### Create discounts
+
+Whether the user can create new discounts.
+
+#### Delete discounts
+
+Whether the user can delete discounts.
 
 ### Manage subscriptions
 

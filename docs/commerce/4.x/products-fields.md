@@ -7,8 +7,14 @@ Commerce Products fields allow you to relate [products](products-variants.md#pro
 Commerce Products fields have the following settings:
 
 - **Sources** – the product types you want to relate entries from. (Default is “All”.)
-- **Limit** – the maximum number of products that can be related with the field at once. (Default is no limit.)
+- **Min Relations** – the minimum number of products that must be selected. (Default is none.)
+- **Max Relations** – the maximum number of products that can be selected. (Default is no limit.)
 - **Selection Label** – the label to be shown on the field’s selection button. (Default is “Add a product”.)
+- **Validate related products** – whether validation errors on selected products should prevent the source element from being saved. (Default is un-checked.)
+
+### Advanced
+
+- **Allow self relations** – whether the source element should be able to select itself in this field.
 
 ## The Field
 
@@ -28,10 +34,10 @@ If you have an element with a products field in your template, you can access it
 {% set products = entry.myFieldHandle %}
 ```
 
-That will give you an [element query](/3.x/element-queries.md) prepped to output all the selected products for the given field.
+That will give you an [element query](/4.x/element-queries.md) prepped to output all the selected products for the given field.
 
 ::: tip
-See [Relations](/3.x/relations.md) for more info on the `relatedTo` param.
+See [Relations](/4.x/relations.md) for more info on the `relatedTo` param.
 :::
 
 ## Examples

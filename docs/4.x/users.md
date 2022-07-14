@@ -8,6 +8,22 @@ There are also preferences for localization, accessibility, and debugging that m
 
 Users can be part of groups you create that [fine-tune permissions](user-management.md).
 
+### Active and Inactive Users
+
+A Craft user can be active or inactive, meaning they have a credentialed account or simply exist as a record in the system. Navigate to the **Users** screen and you’ll find these represented by **Credentialed** and **Inactive** groupings under the “Account Type” heading.
+
+![](./images/account-type-subnav.png)
+
+You’ll most likely be creating active user accounts for content managers or site members to log in and do things. Each active account has its own status to describe that user’s level of access to the system:
+
+- **Active** – Account was activated by an admin, or the user set credentials to gain system access.
+- **Pending** – User was invited to activate their account but hasn’t completed the process.
+- **Suspended** – Account’s system access was explicitly revoked by another user with sufficient permissions.
+- **Locked** – Account was locked because of too many failed login attempts per the <config4:maxInvalidLogins> and <config4:cooldownDuration> config settings.
+- **Inactive** – Account never had credentials, or was explicitly deactivated.
+
+You can’t create an inactive user from the control panel, but you can deactivate a user account by choosing **Deactivate...** from its action menu (<icon kind="settings" />). Inactive user accounts are best suited for specific circumstances, like Craft Commerce guest customers or an imaginary Craft-based CRM that manages contacts.
+
 ## Querying Users
 
 You can fetch users in your templates or PHP code using **user queries**.
@@ -23,7 +39,7 @@ $myUserQuery = \craft\elements\User::find();
 ```
 :::
 
-Once you’ve created a user query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [User](craft3:craft\elements\User) objects will be returned.
+Once you’ve created a user query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [User](craft4:craft\elements\User) objects will be returned.
 
 ::: tip
 See [Element Queries](element-queries.md) to learn about how element queries work.
@@ -60,6 +76,10 @@ User queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
@@ -89,6 +109,7 @@ User queries support the following parameters:
 | [offset](#offset)                         | Determines how many users should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only users that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only users that match a search query.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the users’ IDs in the `elements_sites` table.
@@ -98,6 +119,10 @@ User queries support the following parameters:
 | [username](#username)                     | Narrows the query results based on the users’ usernames.
 | [with](#with)                             | Causes the query to return matching users eager-loaded with related elements.
 | [withGroups](#withgroups)                 | Causes the query to return matching users eager-loaded with their user groups.
+
+
+<!-- textlint-enable -->
+
 
 #### `admin`
 
@@ -366,9 +391,9 @@ Possible values include:
 
 | Value | Fetches users…
 | - | -
-| `'foo@bar.baz'` | with an email of `foo@bar.baz`.
-| `'not foo@bar.baz'` | not with an email of `foo@bar.baz`.
-| `'*@bar.baz'` | with an email that ends with `@bar.baz`.
+| `'me@domain.tld'` | with an email of `me@domain.tld`.
+| `'not me@domain.tld'` | not with an email of `me@domain.tld`.
+| `'*@domain.tld'` | with an email that ends with `@domain.tld`.
 
 
 
@@ -790,8 +815,8 @@ If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.ht
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -816,6 +841,15 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`
@@ -920,9 +954,11 @@ Possible values include:
 
 | Value | Fetches users…
 | - | -
-| `'active'` _(default)_ | with active accounts.
-| `'suspended'` | with suspended accounts.
+| `'inactive'` | with inactive accounts.
+| `'active'` | with active accounts.
 | `'pending'` | with accounts that are still pending activation.
+| `'credentialed'` | with either active or pending accounts.
+| `'suspended'` | with suspended accounts.
 | `'locked'` | with locked accounts (regardless of whether they’re active or suspended).
 | `['active', 'suspended']` | with active or suspended accounts.
 | `['not', 'active', 'suspended']` | without active or suspended accounts.

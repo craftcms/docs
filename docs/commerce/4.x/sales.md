@@ -50,7 +50,7 @@ This field specifies the type of relationship must exist between the purchasable
 - **Target**: the category has a product/variant relational field.
 - **Both**: the relationship can be either **Source** or **Target**
 
-For more information on how this works, see [Relations Terminology](https://craftcms.com/docs/3.x/relations.html#terminology).
+For more information on how this works, see [Relations Terminology](/4.x/relations.md#terminology).
 
 ### Other Purchasables
 
@@ -115,7 +115,7 @@ This is a sale-level option, not a purchasable-level option like the above `Igno
 
 ### craft.commerce.sales.allSales
 
-Returns an array of all sales set up in the system, each represented as a [Sale](commerce3:craft\commerce\models\Sale) model.
+Returns an array of all sales set up in the system, each represented as a [Sale](commerce4:craft\commerce\models\Sale) model.
 
 ```twig
 {% for sale in craft.commerce.sales.allSales %}

@@ -11,7 +11,7 @@ The first thing we’ll do is create a new Section for our blog posts.
 5. Enter `blog/_entry` for the **Template** setting. We’ll create that template later on.
 6. Leave the rest of the default settings as they are and choose **Save**.
 
-<BrowserShot url="https://tutorial.nitro/admin/settings/sections/new" :link="false" caption="Settings for the new blog section.">
+<BrowserShot url="https://tutorial.ddev.site/admin/settings/sections/new" :link="false" caption="Settings for the new blog section.">
 <img src="../images/new-section.png" alt="Screenshot of new section fields" />
 </BrowserShot>
 
@@ -19,7 +19,7 @@ You’ll see a new **Entries** menu item in the sidebar navigation. Choose that,
 
 We can create a new blog post now, but all it would have is a **Title** field:
 
-<BrowserShot url="https://tutorial.nitro/entries/blog6?draftId=5&fresh=1" :link="false" caption="The new blog post entry doesn’t yet have any custom fields.">
+<BrowserShot url="https://tutorial.ddev.site/entries/blog6?draftId=5&fresh=1" :link="false" caption="The new blog post entry doesn’t yet have any custom fields.">
 <img src="../images/empty-new-entry.png" alt="Screenshot of new blog post entry with only a title" />
 </BrowserShot>
 
@@ -56,10 +56,10 @@ We’ll create a local Asset Volume within the web root for blog post images:
 Craft will create that folder and let you upload and manage its Assets from the control panel.
 
 ::: tip
-`@web` and `@webroot` are [aliases](/3.x/config/#aliases) Craft includes by default, pointing to the base website URL and document root file path respectively.
+`@web` and `@webroot` are [aliases](/3.x/config/#aliases) Craft includes by default, pointing to the base site URL and document root file path respectively.
 :::
 
-<BrowserShot url="https://tutorial.nitro/admin/settings/assets/volumes/new" :link="false" caption="Settings for the new blog volume.">
+<BrowserShot url="https://tutorial.ddev.site/admin/settings/assets/volumes/new" :link="false" caption="Settings for the new blog volume.">
 <img src="../images/new-asset-volume.png" alt="Screenshot of settings for the new asset volume" />
 </BrowserShot>
 
@@ -77,7 +77,7 @@ Now create a Category Group we can use for blog post categories:
 4. For **Category URI Format**, enter `blog/category/{slug}` and set the **Template** to `blog/_category`.
 5. Save the Category Group.
 
-<BrowserShot url="https://tutorial.nitro/admin/settings/categories/new" :link="false" caption="Settings for the new blog category group.">
+<BrowserShot url="https://tutorial.ddev.site/admin/settings/categories/new" :link="false" caption="Settings for the new blog category group.">
 <img src="../images/new-category-group.png" alt="Screenshot of new category group fields" />
 </BrowserShot>
 
@@ -87,8 +87,8 @@ You’ll probably want a rich text editor (WYSIWYG) for editing the main text of
 
 Let’s be adventurous and use console commands:
 
-1. From your terminal, run `nitro composer require craftcms/redactor`. Composer will download the plugin and add it to your project.
-2. Now run `nitro craft plugin/install redactor`.
+1. From your terminal, run `ddev composer require craftcms/redactor`. Composer will download the plugin and add it to your project.
+2. Now run `ddev php craft plugin/install redactor`.
 
 ::: tip
 You can install Craft and Craft plugins from the browser like we did earlier **or** using terminal commands like we did here. 😎
@@ -96,7 +96,7 @@ You can install Craft and Craft plugins from the browser like we did earlier **o
 
 That’s it! The Redactor plugin is installed and ready to use in our site.
 
-<BrowserShot url="https://tutorial.nitro/admin/settings/plugins" :link="false" caption="Redactor now appears in the list of installed plugins, where it can be disabled or uninstalled.">
+<BrowserShot url="https://tutorial.ddev.site/admin/settings/plugins" :link="false" caption="Redactor now appears in the list of installed plugins, where it can be disabled or uninstalled.">
 <img src="../images/redactor-plugin.png" alt="Screenshot of plugins list showing Redactor installed" />
 </BrowserShot>
 
@@ -152,7 +152,7 @@ Next, let’s create the individual fields for our blog posts. With Craft, we ex
    
    Save the field.
 
-<BrowserShot url="https://tutorial.nitro/admin/settings/fields/2" :link="false" caption="Our complete group of new fields.">
+<BrowserShot url="https://tutorial.ddev.site/admin/settings/fields/2" :link="false" caption="Our complete group of new fields.">
 <img src="../images/new-blog-fields.png" alt="Screenshot of complete Blog Post Fields group" />
 </BrowserShot>
 
@@ -171,7 +171,7 @@ It’s time to *use* our custom fields by creating a blog section Field Layout:
 7. Enter `Headline` for **Title Field Label**.
 8. Save the field layout.
 
-<BrowserShot url="https://tutorial.nitro/admin/settings/sections/1/entrytypes/1" :link="false" caption="Completed blog entry type field layout.">
+<BrowserShot url="https://tutorial.ddev.site/admin/settings/sections/1/entrytypes/1" :link="false" caption="Completed blog entry type field layout.">
 <img src="../images/blog-field-layout.png" alt="Screenshot of complete blog field layout" />
 </BrowserShot>
 
@@ -179,6 +179,6 @@ That **Title Field Label** is a simple way to relabel the title—which *every* 
 
 Once you’ve added fields to the blog section’s field layout, return to **Entries** and create a new blog entry. Now you’ll see each of the fields you created and you’re ready to publish some content!
 
-<BrowserShot url="https://tutorial.nitro/admin/entries/blog/7?draftId=6&fresh=1" :link="false" caption="A new blog post entry now includes our custom fields.">
+<BrowserShot url="https://tutorial.ddev.site/admin/entries/blog/7?draftId=6&fresh=1" :link="false" caption="A new blog post entry now includes our custom fields.">
 <img src="../images/new-entry-with-fields.png" alt="Screenshot of new entry screen with our custom fields" />
 </BrowserShot>

@@ -4,7 +4,7 @@ Color fields give you a color picker, and save a hexadecimal value of the select
 
 ## The Field
 
-Color fields will either use your browser’s color picker (if your browser supports `<input type="color">`) or a Javascript-powered color picker.
+Color fields will either use your browser’s color picker (if your browser supports `<input type="color">`) or a JavaScript-powered color picker.
 
 ![color-entry.2x](./images/field-types/color/color-entry.2x.png)
 

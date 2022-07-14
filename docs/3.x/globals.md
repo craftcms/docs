@@ -1,32 +1,32 @@
 # Globals
 
-Globals store content that is available globally throughout your templates. They're a convenient way to make non-Entry content easily editable via the control panel.
+Globals store content that is available globally throughout your templates. They’re a convenient way to make non-Entry content easily editable via the control panel.
 
-Craft organizes Globals into Global Sets. Each Global Set has its own [field layout](fields.md#field-layouts) using any of the existing fields or new fields.
+Craft organizes globals into global sets. Each global set has its own [field layout](fields.md#field-layouts) using any of the existing fields or new fields.
 
-To create a Global Set, go to **Settings** → **Globals**.
+To create a global set, go to **Settings** → **Globals**.
 
-If you have at least one Global Set, Craft will add a new “Globals” item to the main control panel navigation. Clicking this will take you to a page that lists all your Global Sets in a sidebar, as well as all of the fields associated with the selected Global Set in the main content area.
+If you have at least one global set, Craft will add a new “Globals” item to the main control panel navigation. Clicking this will take you to a page that lists all your global sets in a sidebar, as well as all of the fields associated with the selected global set in the main content area.
 
 ::: tip
-Unlike [entries](entries.md#entries), Global Sets don’t have the Live Preview feature, since they aren’t associated with any one particular URL.
+Unlike [entries](entries.md#entries), global sets don’t have the Live Preview feature, since they aren’t associated with any one particular URL.
 :::
 
 ## Global Sets in Templates
 
-You can access your Global Sets from any template via their handles.
+You can access your global sets from any template via their handles.
 
-If you have a Global Set with the handle `companyInfo` and it has a field with the handle `yearEstablished`, you can access that field anywhere using this code:
+If you have a global set with the handle `companyInfo` and it has a field with the handle `yearEstablished`, you can access that field anywhere using this code:
 
 ```twig
 {{ companyInfo.yearEstablished }}
 ```
 
-For additional Global Set properties you can use besides your custom fields see <craft3:craft\elements\GlobalSet> for a full reference.
+For additional global set properties you can use besides your custom fields see <craft3:craft\elements\GlobalSet> for a full reference.
 
 ### Manually Loading Global Sets
 
-In some special situations, like within email templates, Global Sets won’t be available by default. Any Global Set may still be loaded manually. The above example could be loaded with `getSetByHandle()`:
+In some special situations, like within email templates, global sets won’t be available by default. Any global set may still be loaded manually. The above example could be loaded with `getSetByHandle()`:
 
 ::: code
 ```twig
@@ -41,11 +41,11 @@ More details are available in the [Globals service class documentation](craft3:c
 
 ## Global Sets with Multiple Sites
 
-If you run multiple sites with Craft, Global Sets are available in all sites. However, you can set the values in those sets on a per site basis, even leaving some fields blank, if desired.
+If you run multiple sites with Craft, global sets are available in all sites. However, you can set the values in those sets on a per site basis, even leaving some fields blank, if desired.
 
 To do that, edit the global set’s fields, and make sure that their “Translation Method” settings are set to “Translate for each site”.
 
-To toggle between sites while viewing Global Sets, use the drop-down menu at the top left of the Global Sets page in the control panel.
+To toggle between sites while viewing global sets, use the dropdown menu at the top left of the global sets page in the control panel.
 
 ![Toggling between sites in Globals](./images/globals-multisite-nav.png)
 
@@ -102,6 +102,10 @@ Global set queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
@@ -130,6 +134,10 @@ Global set queries support the following parameters:
 | [uid](#uid)                               | Narrows the query results based on the global sets’ UIDs.
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [with](#with)                             | Causes the query to return matching global sets eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -326,6 +334,10 @@ $globalSets = \craft\elements\GlobalSet::find()
 Causes the query results to be returned in the order specified by [id](#id).
 
 
+
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
 
 
 
@@ -535,8 +547,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 

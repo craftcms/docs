@@ -24,15 +24,15 @@ when creating the mock.
 
 <hr>
 
-Let's say you have a module/plugin called `Mailchimp` that facilitates
+Let’s say you have a module/plugin called `Mailchimp` that facilitates
 an integration between Craft and Mailchimp. For this integration you may need
 to create a method called `getUsersFromMailchimp` that makes a GET request to Mailchimp.
-Now in your test, you don't want to *actually* make a GET request to the Mailchimp
-servers. Let's say all requests to the Mailchimp servers are done via a
+Now in your test, you don’t want to *actually* make a GET request to the Mailchimp
+servers. Let’s say all requests to the Mailchimp servers are done via a
 [service](../../extend/services.md)
 called `Externals`
 
-Now seeing as you don't want to make call the Mailchimp servers in a test environment
+Now seeing as you don’t want to make call the Mailchimp servers in a test environment
 you would have to mock this method. For this, you can use `mockMethods`.
 Mocking your `Externals` service with an `externals` component handle would look 
 something like this:

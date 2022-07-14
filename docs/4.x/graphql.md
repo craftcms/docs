@@ -8,7 +8,7 @@ Craft Pro provides a [GraphQL](https://graphql.org) API you can use to work with
 
 ## Getting Started
 
-Make sure you’re running Craft Pro 3.3 or later and [the `enableGql` setting](config3:enableGql) is not set to `false`.
+Make sure you’re running Craft Pro and [the `enableGql` setting](config4:enableGql) is not set to `false`.
 
 Because GraphQL is self-documenting, you can jump right into Craft’s included [GraphiQL IDE](#using-the-graphiql-ide) from the control panel and interactively build and execute queries. Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
@@ -30,7 +30,7 @@ Here’s what a [query](#query-reference) for two news entries might look like, 
     ... on news_article_Entry {
       shortDescription
       featuredImage {
-        url @transform (width: 300, immediately: true)
+        url @transform (width: 300)
       }
     }
   }
@@ -140,13 +140,13 @@ return [
 ```
 
 ::: tip
-Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config3:allowedGraphqlOrigins> setting.
+Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config4:allowedGraphqlOrigins> setting.
 :::
 
-Pretending your endpoint is `http://my-project.test/api`, you can verify that it’s configured correctly by sending a `{ping}` query to it:
+Pretending your endpoint is `http://my-project.tld/api`, you can verify that it’s configured correctly by sending a `{ping}` query to it:
 
 ```bash
-curl -H "Content-Type: application/graphql" -d '{ping}' http://my-project.test/api
+curl -H "Content-Type: application/graphql" -d '{ping}' http://my-project.tld/api
 ```
 
 If you get a `pong` in your response, your GraphQL API is up and running!
@@ -190,12 +190,12 @@ The included GraphiQL IDE preselects a special “Full Schema” option for opti
 
 Additional GraphQL IDEs are available as well:
 
-* [Insomnia](https://insomnia.rest/)
-* [GraphQL Playground](https://github.com/prisma/graphql-playground)
-* [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
+- [Insomnia](https://insomnia.rest/)
+- [GraphQL Playground](https://github.com/prisma/graphql-playground)
+- [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
 
 ::: tip
-When you’re initially exploring the API, make sure <config3:devMode> is enabled so the IDE can be informed about the entire schema available to it.
+When you’re initially exploring the API, make sure <config4:devMode> is enabled so the IDE can be informed about the entire schema available to it.
 :::
 
 ### Sending Requests Manually
@@ -206,23 +206,23 @@ The GraphQL API can be queried in three ways:
   ```bash
   curl \
     --data-urlencode "query={ping}" \
-    http://craft32.test/api
+    http://my-project.tld/api
   # or
-  curl http://craft32.test/api?query=%7Bping%7D
+  curl http://my-project.tld/api?query=%7Bping%7D
   ```
 2. **A `POST` request with an `application/json` content type** and the GraphQL query defined by a `query` key:
   ```bash
   curl \
     -H "Content-Type: application/json" \
     -d '{"query":"{ping}"}' \
-    http://my-project.test/api
+    http://my-project.tld/api
   ```
 3. **A `POST` request with an `application/graphql` content type** and the GraphQL query defined by the raw request body:
   ```bash
   curl \
     -H "Content-Type: application/graphql" \
     -d '{ping}' \
-    http://my-project.test/api
+    http://my-project.tld/api
   ```
 
 #### Specifying Variables
@@ -236,7 +236,7 @@ curl \
         "query": "query($id:[Int]) { entries(id: $id) { id, title } }",
         "variables": { "id": [1, 2, 3] }
       }' \
-  http://my-project.test/api
+  http://my-project.tld/api
 ```
 
 #### Querying a Private Schema
@@ -248,7 +248,7 @@ curl \
   -H "Authorization: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/graphql" \
   -d '{entries{id}}' \
-  http://my-project.test/api
+  http://my-project.tld/api
 ```
 
 ::: warning
@@ -270,7 +270,7 @@ RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 ## Caching
 
-Query results are cached by default to speed up subsequent queries, and you can disable that caching with the <config3:enableGraphQlCaching> setting.
+Query results are cached by default to speed up subsequent queries, and you can disable that caching with the <config4:enableGraphQlCaching> setting.
 
 The entire GraphQL cache is purged for any schema changes, otherwise Craft only purges caches based on content changes relevant to a given query. The more specific your query, the less likely its cache will be cleared when an entry is saved or deleted. For example:
 
@@ -332,6 +332,7 @@ This query is used to query for assets.
 | `width`| `[String]` | Narrows the query results based on the assets’ image widths.
 | `size`| `[String]` | Narrows the query results based on the assets’ file sizes (in bytes).
 | `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
+| `hasAlt`| `Boolean` | Narrows the query results based on whether the assets have alternative text.
 | `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
 | `withTransforms`| `[String]` | A list of transform handles to preload.
 | `uploader`| `QueryArgument` | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.
@@ -378,6 +379,7 @@ This query is used to return the number of assets.
 | `width`| `[String]` | Narrows the query results based on the assets’ image widths.
 | `size`| `[String]` | Narrows the query results based on the assets’ file sizes (in bytes).
 | `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
+| `hasAlt`| `Boolean` | Narrows the query results based on whether the assets have alternative text.
 | `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
 | `withTransforms`| `[String]` | A list of transform handles to preload.
 | `uploader`| `QueryArgument` | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.
@@ -424,6 +426,7 @@ This query is used to query for a single asset.
 | `width`| `[String]` | Narrows the query results based on the assets’ image widths.
 | `size`| `[String]` | Narrows the query results based on the assets’ file sizes (in bytes).
 | `dateModified`| `String` | Narrows the query results based on the assets’ files’ last-modified dates.
+| `hasAlt`| `Boolean` | Narrows the query results based on whether the assets have alternative text.
 | `includeSubfolders`| `Boolean` | Broadens the query results to include assets from any of the subfolders of the folder specified by `folderId`.
 | `withTransforms`| `[String]` | A list of transform handles to preload.
 | `uploader`| `QueryArgument` | Narrows the query results based on the user the assets were uploaded by, per the user’s ID.
@@ -737,9 +740,12 @@ This query is used to query for users.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
+| `fullName`| `[String]` | Narrows the query results based on the users’ full names.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
 | `lastName`| `[String]` | Narrows the query results based on the users’ last names.
 | `hasPhoto`| `Boolean` | Narrows the query results to only users that have (or don’t have) a user photo.
+| `assetUploaders`| `Boolean` | Narrows the query results based on whether the users have uploaded any assets.
+| `authors`| `Boolean` | Narrows the query results based on whether the users are listed as the author of any entries.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
 
@@ -778,9 +784,12 @@ This query is used to return the number of users.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
+| `fullName`| `[String]` | Narrows the query results based on the users’ full names.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
 | `lastName`| `[String]` | Narrows the query results based on the users’ last names.
 | `hasPhoto`| `Boolean` | Narrows the query results to only users that have (or don’t have) a user photo.
+| `assetUploaders`| `Boolean` | Narrows the query results based on whether the users have uploaded any assets.
+| `authors`| `Boolean` | Narrows the query results based on whether the users are listed as the author of any entries.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
 
@@ -819,9 +828,12 @@ This query is used to query for a single user.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
 | `email`| `[String]` | Narrows the query results based on the users’ email addresses.
 | `username`| `[String]` | Narrows the query results based on the users’ usernames.
+| `fullName`| `[String]` | Narrows the query results based on the users’ full names.
 | `firstName`| `[String]` | Narrows the query results based on the users’ first names.
 | `lastName`| `[String]` | Narrows the query results based on the users’ last names.
 | `hasPhoto`| `Boolean` | Narrows the query results to only users that have (or don’t have) a user photo.
+| `assetUploaders`| `Boolean` | Narrows the query results based on whether the users have uploaded any assets.
+| `authors`| `Boolean` | Narrows the query results based on whether the users are listed as the author of any entries.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
 
@@ -1083,6 +1095,132 @@ This query is used to query for a single category.
 | `group`| `[String]` | Narrows the query results based on the category groups the categories belong to per the group’s handles.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
 
+### The `addresses` query
+This query is used to query for addresses.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
+| `ownerId`| `[QueryArgument]` | Narrows the query results based on the addresses’ owners.
+| `countryCode`| `[String]` | Narrows the query results based on the addresses’ country codes.
+| `administrativeArea`| `[String]` | Narrows the query results based on the addresses’ administrative areas.
+
+### The `addressCount` query
+This query is used to return the number of addresses.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
+| `ownerId`| `[QueryArgument]` | Narrows the query results based on the addresses’ owners.
+| `countryCode`| `[String]` | Narrows the query results based on the addresses’ country codes.
+| `administrativeArea`| `[String]` | Narrows the query results based on the addresses’ administrative areas.
+
+### The `address` query
+This query is used to query for a single address.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
+| `ownerId`| `[QueryArgument]` | Narrows the query results based on the addresses’ owners.
+| `countryCode`| `[String]` | Narrows the query results based on the addresses’ country codes.
+| `administrativeArea`| `[String]` | Narrows the query results based on the addresses’ administrative areas.
+
 <!-- END QUERIES -->
 
 ## List of available directives
@@ -1135,7 +1273,7 @@ Formats a money object to the desired format. It can be applied to any fields, b
 
 <!-- END DIRECTIVES -->
 
-## Pre-defined interfaces
+## Predefined interfaces
 Craft defines several interfaces to be implemented by the different GraphQL types.
 
 <!-- BEGIN INTERFACES -->
@@ -1144,8 +1282,8 @@ Craft defines several interfaces to be implemented by the different GraphQL type
 This is the interface implemented by all assets.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1157,26 +1295,27 @@ This is the interface implemented by all assets.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `uploaderId`| `Int` | The ID of the user who first added this asset (if known).
 | `uploader`| `UserInterface` | The user who first added this asset (if known).
+| `alt`| `String` | Alternative text for the asset.
 | `volumeId`| `Int` | The ID of the volume that the asset belongs to.
 | `folderId`| `Int!` | The ID of the folder that the asset belongs to.
 | `filename`| `String!` | The filename of the asset file.
 | `extension`| `String!` | The file extension for the asset file.
 | `hasFocalPoint`| `Boolean!` | Whether a user-defined focal point is set on the asset.
-| `focalPoint`| `[Float]` | The focal point represented as an array with `x` and `y` keys, or null if it's not an image.
+| `focalPoint`| `[Float]` | The focal point represented as an array with `x` and `y` keys, or null if it’s not an image.
 | `kind`| `String!` | The file kind.
 | `size`| `String` | The file size in bytes.
-| `height`| `Int` | The height in pixels or null if it's not an image.
-| `width`| `Int` | The width in pixels or null if it's not an image.
+| `height`| `Int` | The height in pixels or null if it’s not an image.
+| `width`| `Int` | The width in pixels or null if it’s not an image.
 | `img`| `String` | An `<img>` tag based on this asset.
 | `srcset`| `String` | Returns a `srcset` attribute value based on the given widths or x-descriptors.
 | `url`| `String` | The full URL of the asset. This field accepts the same fields as the `transform` directive.
 | `mimeType`| `String` | The file’s MIME type, if it can be determined.
-| `path`| `String!` | The asset's path in the volume.
+| `path`| `String!` | The asset’s path in the volume.
 | `dateModified`| `DateTime` | The date the asset file was last modified.
 | `prev`| `AssetInterface` | Returns the previous element relative to this one, from a given set of criteria.
 | `next`| `AssetInterface` | Returns the next element relative to this one, from a given set of criteria.
@@ -1186,8 +1325,8 @@ This is the interface implemented by all assets.
 This is the interface implemented by all entries.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1199,7 +1338,7 @@ This is the interface implemented by all entries.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `lft`| `Int` | The element’s left position within its structure.
@@ -1215,7 +1354,7 @@ This is the interface implemented by all entries.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
 | `authorId`| `Int` | The ID of the author of this entry.
-| `author`| `UserInterface` | The entry's author.
+| `author`| `UserInterface` | The entry’s author.
 | `draftCreator`| `UserInterface` | The creator of a given draft.
 | `drafts`| `[EntryInterface]` | The drafts for the entry.
 | `revisionCreator`| `UserInterface` | The creator of a given revision.
@@ -1229,7 +1368,7 @@ This is the interface implemented by all entries.
 | `sectionHandle`| `String!` | The handle of the section that contains the entry.
 | `typeId`| `Int!` | The ID of the entry type that contains the entry.
 | `typeHandle`| `String!` | The handle of the entry type that contains the entry.
-| `postDate`| `DateTime` | The entry's post date.
+| `postDate`| `DateTime` | The entry’s post date.
 | `expiryDate`| `DateTime` | The expiry date of the entry.
 | `children`| `[EntryInterface!]!` | The entry’s children, if the section is a structure. Accepts the same arguments as the `entries` query.
 | `descendants`| `[EntryInterface!]!` | The entry’s descendants, if the section is a structure. Accepts the same arguments as the `entries` query.
@@ -1245,8 +1384,8 @@ This is the interface implemented by all entries.
 This is the interface implemented by all global sets.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1258,7 +1397,7 @@ This is the interface implemented by all global sets.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `name`| `String!` | The name of the global set.
@@ -1269,8 +1408,8 @@ This is the interface implemented by all global sets.
 This is the interface implemented by all matrix blocks.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1282,13 +1421,13 @@ This is the interface implemented by all matrix blocks.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `fieldId`| `Int!` | The ID of the field that owns the matrix block.
 | `primaryOwnerId`| `Int!` | The ID of the primary owner of the Matrix block.
-| `typeId`| `Int!` | The ID of the matrix block's type.
-| `typeHandle`| `String!` | The handle of the matrix block's type.
+| `typeId`| `Int!` | The ID of the matrix block’s type.
+| `typeHandle`| `String!` | The handle of the matrix block’s type.
 | `sortOrder`| `Int` | The sort order of the matrix block within the owner element field.
 
 
@@ -1296,8 +1435,8 @@ This is the interface implemented by all matrix blocks.
 This is the interface implemented by all users.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1309,26 +1448,27 @@ This is the interface implemented by all users.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
-| `friendlyName`| `String` | The user's first name or username.
-| `fullName`| `String` | The user's full name.
-| `name`| `String!` | The user's full name or username.
+| `friendlyName`| `String` | The user’s first name or username.
+| `fullName`| `String` | The user’s full name.
+| `name`| `String!` | The user’s full name or username.
 | `preferences`| `String!` | The user’s preferences.
 | `preferredLanguage`| `String` | The user’s preferred language.
 | `username`| `String` | The username.
-| `firstName`| `String` | The user's first name.
-| `lastName`| `String` | The user's last name.
-| `email`| `String` | The user's email.
+| `firstName`| `String` | The user’s first name.
+| `lastName`| `String` | The user’s last name.
+| `email`| `String` | The user’s email.
+| `addresses`| `[AddressInterface]` | The user’s addresses.
 
 
 ### The `CategoryInterface` interface
 This is the interface implemented by all categories.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1340,7 +1480,7 @@ This is the interface implemented by all categories.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `lft`| `Int` | The element’s left position within its structure.
@@ -1362,8 +1502,8 @@ This is the interface implemented by all categories.
 This is the interface implemented by all tags.
 | Field | Type | Description
 | - | - | -
-| `id`| `ID` | The id of the entity
-| `uid`| `String` | The uid of the entity
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1375,11 +1515,48 @@ This is the interface implemented by all tags.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
 | `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
-| `status`| `String` | The element's status.
+| `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
 | `groupId`| `Int!` | The ID of the group that contains the tag.
 | `groupHandle`| `String!` | The handle of the group that contains the tag.
+
+
+### The `AddressInterface` interface
+This is the interface implemented by all addresses.
+| Field | Type | Description
+| - | - | -
+| `id`| `ID` | The ID of the entity
+| `uid`| `String` | The UID of the entity
+| `_count`| `Int` | Return a number of related elements for a field.
+| `title`| `String` | The element’s title.
+| `slug`| `String` | The element’s slug.
+| `uri`| `String` | The element’s URI.
+| `enabled`| `Boolean` | Whether the element is enabled or not.
+| `archived`| `Boolean` | Whether the element is archived or not.
+| `siteId`| `Int` | The ID of the site the element is associated with.
+| `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
+| `language`| `String` | The language of the site element is associated with.
+| `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `status`| `String` | The element’s status.
+| `dateCreated`| `DateTime` | The date the element was created.
+| `dateUpdated`| `DateTime` | The date the element was last updated.
+| `fullName`| `String` | The full name on the address.
+| `firstName`| `String` | The first name on the address.
+| `lastName`| `String` | The last name on the address.
+| `countryCode`| `String!` | Two-letter country code
+| `administrativeArea`| `String` | Administrative area.
+| `locality`| `String` | Locality
+| `dependentLocality`| `String` | Dependent locality
+| `postalCode`| `String` | Postal code
+| `sortingCode`| `String` | Sorting code
+| `addressLine1`| `String` | First line of the address
+| `addressLine2`| `String` | Second line of the address
+| `organization`| `String` | Organization name
+| `organizationTaxId`| `String` | Organization tax ID
+| `latitude`| `String` | Latitude
+| `longitude`| `String` | Longitude
 
 <!-- END INTERFACES -->
 
@@ -1620,14 +1797,14 @@ If more than one of the block types are defined, only the block type that is lis
 
 ### Saving Files via Mutations
 
-You can provide files for Assets as either Base64-encoded data, or a URL that Craft will download.
+You can provide files for Assets as either base64-encoded data, or a URL that Craft will download.
 
 Either way you’ll use the `FileInput` GraphQL input type, which has the following fields:
 
 | Field      | Description
 | ---------- | -----------
 | `url`      | URL of a file to be downloaded.
-| `fileData` | File contents in Base64 format. If provided, takes precedence over `url`.
+| `fileData` | File contents in base64 format. If provided, takes precedence over `url`.
 | `filename` | Filename to use for the saved Asset. If omitted, Craft will create a filename.
 
 ### Mutating Entries
@@ -1656,7 +1833,7 @@ To save an [entry](entries.md), use the entry type-specific mutation which will 
 The `id`, `uid` and `authorId` arguments do no exist for single entries. This is because single entries have no authors and are identified already by the exact mutation. In a similar fashion, there are additional arguments available for structured entries. For more information, refer to [mutating structure data](#mutating-structure-data).
 
 ::: tip
-After saving an entry, Craft runs queue jobs for updating revisions and search indexes. If you’re using Craft headlessly or infrequently accessing the control panel, consider disabling <config3:runQueueAutomatically> and [establishing an always-running daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to keep revisions and search indexes up to date.
+After saving an entry, Craft runs queue jobs for updating revisions and search indexes. If you’re using Craft headlessly or infrequently accessing the control panel, consider disabling <config4:runQueueAutomatically> and [establishing an always-running daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to keep revisions and search indexes up to date.
 :::
 
 #### Editing Existing Entries

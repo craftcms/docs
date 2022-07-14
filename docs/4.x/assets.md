@@ -109,7 +109,7 @@ $myAssetQuery = \craft\elements\Asset::find();
 ```
 :::
 
-Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Asset](craft3:craft\elements\Asset) objects will be returned.
+Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Asset](craft4:craft\elements\Asset) objects will be returned.
 
 ::: tip
 See [Element Queries](element-queries.md) to learn about how element queries work.
@@ -145,11 +145,11 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
 :::
 
-You can cache-bust asset URLs automatically by enabling the [revAssetUrls](config3:revAssetUrls) config setting, or handle them individually by using Craft’s [`url()` function](dev/functions.md#url) to append a query parameter with the last-modified timestamp:
+You can cache-bust asset URLs automatically by enabling the [revAssetUrls](config4:revAssetUrls) config setting, or handle them individually by using Craft’s [`url()` function](dev/functions.md#url) to append a query parameter with the last-modified timestamp:
 
 ```twig
 <img src="{{ url(image.getUrl('thumb'), {v: image.dateModified.timestamp}) }}">
-{# <img src="https://mysite.foo/images/_thumb/bar.jpg?v=1614374621"> #}
+{# <img src="https://my-project.tld/images/_thumb/bar.jpg?v=1614374621"> #}
 ```
 
 ### Parameters
@@ -157,6 +157,10 @@ You can cache-bust asset URLs automatically by enabling the [revAssetUrls](confi
 Asset queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
+
+
+
+<!-- textlint-disable -->
 
 | Param                                     | Description
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -171,6 +175,7 @@ Asset queries support the following parameters:
 | [filename](#filename)                     | Narrows the query results based on the assets’ filenames.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [folderId](#folderid)                     | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
+| [folderPath](#folderpath)                 | Narrows the query results based on the folders the assets belong to, per the folders’ paths.
 | [hasAlt](#hasalt)                         | Narrows the query results based on whether the assets have alternative text.
 | [height](#height)                         | Narrows the query results based on the assets’ image heights.
 | [id](#id)                                 | Narrows the query results based on the assets’ IDs.
@@ -182,6 +187,7 @@ Asset queries support the following parameters:
 | [offset](#offset)                         | Determines how many assets should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only assets that match a search query.
 | [site](#site)                             | Determines which site(s) the assets should be queried in.
@@ -198,6 +204,10 @@ Asset queries support the following parameters:
 | [width](#width)                           | Narrows the query results based on the assets’ image widths.
 | [with](#with)                             | Causes the query to return matching assets eager-loaded with related elements.
 | [withTransforms](#withtransforms)         | Causes the query to return matching assets eager-loaded with image transform indexes.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -501,6 +511,39 @@ $assets = \craft\elements\Asset::find()
 ::: tip
 This can be combined with [includeSubfolders](#includesubfolders) if you want to include assets in all the subfolders of a certain folder.
 :::
+#### `folderPath`
+
+Narrows the query results based on the folders the assets belong to, per the folders’ paths.
+
+Possible values include:
+
+| Value | Fetches assets…
+| - | -
+| `foo/` | in a `foo/` folder (excluding nested folders).
+| `foo/*` | in a `foo/` folder (including nested folders).
+| `'not foo/*'` | not in a `foo/` folder (including nested folders).
+| `['foo/*', 'bar/*']` | in a `foo/` or `bar/` folder (including nested folders).
+| `['not', 'foo/*', 'bar/*']` | not in a `foo/` or `bar/` folder (including nested folders).
+
+
+
+::: code
+```twig
+{# Fetch assets in the foo/ folder or its nested folders #}
+{% set assets = craft.assets()
+  .folderPath('foo/*')
+  .all() %}
+```
+
+```php
+// Fetch assets in the foo/ folder or its nested folders
+$assets = \craft\elements\Asset::find()
+    ->folderPath('foo/*')
+    ->all();
+```
+:::
+
+
 #### `hasAlt`
 
 Narrows the query results based on whether the assets have alternative text.
@@ -780,8 +823,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -806,6 +849,15 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`

@@ -134,6 +134,14 @@ Clears Asset caches.
 
 Clears Asset indexing data.
 
+<h3 id="clear-caches-compiled-classes">
+    <a href="#clear-caches-compiled-classes" class="header-anchor">#</a>
+    <code>clear-caches/compiled-classes</code>
+</h3>
+
+
+Clears compiled classes.
+
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
     <code>clear-caches/compiled-templates</code>
@@ -1560,10 +1568,6 @@ Re-saves assets.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1629,10 +1633,6 @@ Re-saves categories.
 
 --limit
 : The number of elements to resave.
-
-
---propagate
-: Whether to save the elements across all their enabled sites.
 
 
 --update-search-index
@@ -1714,10 +1714,6 @@ Re-saves entries.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1791,10 +1787,6 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1866,10 +1858,6 @@ Re-saves tags.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1935,10 +1923,6 @@ Re-saves users.
 
 --limit
 : The number of elements to resave.
-
-
---propagate
-: Whether to save the elements across all their enabled sites.
 
 
 --update-search-index
@@ -2028,11 +2012,11 @@ Alias for [setup/db-creds](#setup-db-creds).
 
 
 --driver
-: The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+: The database driver to use. Either `'mysql'` for MySQL or `'pgsql'` for PostgreSQL.
 
 
 --server
-: The database server name or IP address. Usually 'localhost' or '127.0.0.1'.
+: The database server name or IP address. Usually `'localhost'` or `'127.0.0.1'`.
 
 
 --port
@@ -2081,11 +2065,11 @@ Stores new DB connection settings to the `.env` file.
 
 
 --driver
-: The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+: The database driver to use. Either `'mysql'` for MySQL or `'pgsql'` for PostgreSQL.
 
 
 --server
-: The database server name or IP address. Usually 'localhost' or '127.0.0.1'.
+: The database server name or IP address. Usually `'localhost'` or `'127.0.0.1'`.
 
 
 --port

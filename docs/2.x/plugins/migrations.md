@@ -12,7 +12,7 @@ chmod 777 yiic
 
 The `<MIGRATION-DESCRIPTION>` should contain letters, digits and/or underscore characters only.
 
-The `<PLUGIN-HANDLE>` is the name of your primary plugin class minus the word 'Plugin'.  For 'CocktailRecipesPlugin', it would be 'CocktailRecipes'.
+The `<PLUGIN-HANDLE>` is the name of your primary plugin class minus the word “Plugin”. For `CocktailRecipesPlugin`, it would be `CocktailRecipes`.
 
 That will create a new migration file in your plugins’ `migrations/` folder (and create that folder if it doesn’t exist), which will look something like this:
 
@@ -65,7 +65,7 @@ Craft will automatically attempt to run any new migrations for a plugin if it de
 
 If you add entirely new records to your plugin, the tables will automatically get created for people just installing your plugin.  For users that already have your plugin installed, you will need to write a migration that adds the tables and any foreign key constraints that will get added during their next update.
 
-We've made this fairly painless with this `yiic` command:
+We’ve made this fairly painless with this `yiic` command:
 
 ```bash
 yiic querygen all <RECORD-CLASS-NAME>

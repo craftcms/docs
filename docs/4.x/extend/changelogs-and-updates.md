@@ -2,7 +2,7 @@
 
 When you [publish](plugin-store.md) your plugin in the Plugin Store, you will be able to specify a path to your plugin’s changelog within the repository.
 
-If this is set to a valid changelog path, then each time you release a new update for your plugin, the Plugin Store will re-download your changelog, and use it to display release notes for any available plugin updates on the Utilities → Updates page.
+If this is set to a valid changelog path, the Plugin Store will re-download your changelog on each release. Those release notes will then be displayed for your plugin on the page at **Utilities** → **Updates**.
 
 ## Setting Up a Changelog
 
@@ -26,7 +26,7 @@ There’s a little wiggle room on that:
 
 - Other text can come before the version number, like the plugin’s name.
 - A 4th version number is allowed (e.g. `1.2.3.4`).
-- Pre-release versions are allowed (e.g. `1.0.0-alpha.1`).
+- Prerelease versions are allowed (e.g. `1.0.0-alpha.1`).
 - The version can start with `v` (e.g. `v1.2.3`).
 - The version can be hyperlinked (e.g. `[1.2.3]`).
 - Dates can use dots as separators, rather than hyphens (e.g. `2017.01.21`).
@@ -67,7 +67,7 @@ If you have any reference-style links in your release notes, you will need to de
 ### Added
 - New [superFoo] config setting
 
-[superFoo]: https://docs.foo.com/config#superFoo
+[superFoo]: https://docs.my-plugin.tld/config#superFoo
 ```
 
 ## Critical Updates

@@ -1,6 +1,6 @@
 # Config Settings
 
-In addition to the settings in **Commerce** → **Settings**, the config items below can be saved in a `config/commerce.php` file using the same format as [Craft’s general config settings](/4.x/config/config-settings.md) in `config/general.php`.
+In addition to the settings in **Commerce** → **Settings**, the config items below can be saved in a `config/commerce.php` file using the same format as [Craft’s general config settings](/4.x/config/config-settings.md).
 
 For example, if you wanted to change the [inactive carts duration](#purgeinactivecartsduration) in dev environments but not on staging or production, you could do this:
 
@@ -80,7 +80,7 @@ Defined by
 
 Default email address Commerce system messages should be sent from.
 
-If `null` (default), Craft’s [MailSettings::$fromEmail](craft3:craft\models\MailSettings::$fromEmail) will be used.
+If `null` (default), Craft’s [MailSettings::$fromEmail](craft4:craft\models\MailSettings::$fromEmail) will be used.
 
 
 
@@ -101,7 +101,7 @@ Defined by
 
 Placeholder value displayed for the sender address control panel settings field.
 
-If `null` (default), Craft’s [MailSettings::$fromEmail](craft3:craft\models\MailSettings::$fromEmail) will be used.
+If `null` (default), Craft’s [MailSettings::$fromEmail](craft4:craft\models\MailSettings::$fromEmail) will be used.
 
 
 
@@ -122,7 +122,7 @@ Defined by
 
 Default from name used for Commerce system emails.
 
-If `null` (default), Craft’s [MailSettings::$fromName](craft3:craft\models\MailSettings::$fromName) will be used.
+If `null` (default), Craft’s [MailSettings::$fromName](craft4:craft\models\MailSettings::$fromName) will be used.
 
 
 
@@ -143,7 +143,7 @@ Defined by
 
 Placeholder value displayed for the sender name control panel settings field.
 
-If `null` (default), Craft’s [MailSettings::$fromName](craft3:craft\models\MailSettings::$fromName) will be used.
+If `null` (default), Craft’s [MailSettings::$fromName](craft4:craft\models\MailSettings::$fromName) will be used.
 
 
 
@@ -191,7 +191,7 @@ Since
 
 How long a cart should go without being updated before it’s considered inactive.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](craft3:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](craft4:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
 
 
 
@@ -316,7 +316,7 @@ Since
 
 Default URL to be loaded after using the [load cart controller action](orders-carts.md#loading-a-cart).
 
-If `null` (default), Craft’s default [`siteUrl`](config3:siteUrl) will be used.
+If `null` (default), Craft’s default [`siteUrl`](config4:siteUrl) will be used.
 
 
 
@@ -360,7 +360,7 @@ Defined by
 
 Default length of time before inactive carts are purged. (Defaults to 90 days.)
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](craft3:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](craft4:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
 
 
 
@@ -461,7 +461,7 @@ How Commerce should handle minimum total price for an order.
 
 Options:
 
-- `'default'` [rounds](commerce3:\craft\commerce\helpers\Currency::round()) the sum of the item subtotal and adjustments.
+- `'default'` [rounds](commerce4:\craft\commerce\helpers\Currency::round()) the sum of the item subtotal and adjustments.
 - `'zero'` returns `0` if the result from `'default'` would’ve been negative; minimum order total is `0`.
 - `'shipping'` returns the total shipping cost if the `'default'` result would’ve been negative; minimum order total equals shipping amount.
 

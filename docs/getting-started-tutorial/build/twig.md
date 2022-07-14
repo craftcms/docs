@@ -10,7 +10,7 @@ If you’ve used Twig in other projects that’ll be useful here. Craft adds its
 
 Creating Twig templates isn’t all that different from working with HTML, CSS, or JavaScript. In fact, you can write an entire Twig template without even using Twig!
 
-If you’ve never written any part of a website before that’s okay, but it might help to familiarize yourself with fundamental [HTML, CSS, and JavaScript](https://developer.mozilla.org/en-US/docs/Web/Guide/Introduction_to_Web_development).
+If you’ve never built any part of a site before that’s okay, but it might help to familiarize yourself with fundamental [HTML, CSS, and JavaScript](https://developer.mozilla.org/en-US/docs/Web/Guide/Introduction_to_Web_development).
 
 The idea is that you build whatever normal parts you need for a web page and Twig provides super powers for rendering dynamic content wherever you need it.
 
@@ -63,7 +63,7 @@ Next, add the exact same contents to each one:
 Hi! This site’s name is {{ siteName }}.
 ```
 
-Without any setup in Craft CMS, you can go directly to `https://tutorial.nitro/twig-hello` and `https://tutorial.nitro/html-hello.html` to see each one in your browser. Try it!
+Without any setup in Craft CMS, you can go directly to `https://tutorial.ddev.site/twig-hello` and `https://tutorial.ddev.site/html-hello.html` to see each one in your browser. Try it!
 
 The Twig version gets parsed and displays the name of your site, with a clean URL that doesn’t require a file extension.
 
@@ -87,7 +87,7 @@ You’ll need to restart the app so they can all take effect.
 
 ![](../images/vs-code-extension-pane.png)
 
-Once the extensions are installed, your Twig templates will get helpful syntax highlighting to make code more readable and auto-complete tips. Here’s a before and after comparison:
+Once the extensions are installed, your Twig templates will get helpful syntax highlighting to make code more readable and autocomplete tips. Here’s a before and after comparison:
 
 ![](../images/vs-code-extensions.png)
 

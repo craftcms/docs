@@ -1,8 +1,8 @@
 # Element Action Types
 
-Plugins can provide custom action types for element index pages by creating a class that implements <craft3:craft\base\ElementActionInterface>. The class will serve both as a way to communicate various things about your action type (with static methods), and as a model that actions of its type will be instantiated with.
+Plugins can provide custom action types for element index pages by creating a class that implements <craft4:craft\base\ElementActionInterface>. The class will serve both as a way to communicate various things about your action type (with static methods), and as a model that actions of its type will be instantiated with.
 
-As a convenience, you can extend <craft3:craft\base\ElementAction>, which provides a base action type implementation.
+As a convenience, you can extend <craft4:craft\base\ElementAction>, which provides a base action type implementation.
 
 You can refer to Craft’s own element action classes for examples. They are located in `vendor/craftcms/cms/src/elements/actions/`.
 

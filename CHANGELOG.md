@@ -2,6 +2,49 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-07-12
+### Added
+- Documented change in default Craft 4 user query behavior.
+
+## 2022-07-08
+### Added
+- Documented user statuses.
+
+## 2022-06-24
+### Added
+- Added canonical tags to most pages to promote latest product versions.
+
+### Fixed
+- Improved mobile Safari’s dark mode browser chrome.
+
+## 2022-06-20
+### Changed
+- Documented the `namespaceAttributes` filter for Craft 3 and 4.
+
+## 2022-05-27
+### Added
+- Added a note about Craft 4.x element type garbage collection.
+
+## 2022-05-25
+### Added
+- Covered Commerce 4.x’s email suppression feature.
+- Mentioned empty user folder garbage collection in Craft 4.
+
+### Fixed
+- Updated Commerce 4.x’s controller action reference and upgrade guide to reflect removed `customer-orders/get-orders` action.
+
+## 2022-05-18
+### Fixed
+- Fixed the Money field development example.
+
+## 2022-05-12
+### Changed
+- Updated Craft 4.x database connection settings intro to use `craft\helpers\App::env()` and new `CRAFT_` config setting override support.
+
+## 2022-05-04
+### Changed
+- Switched default documentation versions to Craft 4.x and Commerce 4.x. 🎉
+
 ## 2022-03-25
 ### Added
 - Added a page on Craft 4’s Address element.

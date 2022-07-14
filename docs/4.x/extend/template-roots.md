@@ -6,7 +6,7 @@ A template root is a directory that contains templates, which are accessible to 
 
 For example, you could create a plugin that provides common Twig utility macros, which could be accessible from `_utils/macros.twig`.
 
-To do that, use the [EVENT_REGISTER_SITE_TEMPLATE_ROOTS](craft3:craft\web\View::EVENT_REGISTER_SITE_TEMPLATE_ROOTS) event:
+To do that, use the [EVENT_REGISTER_SITE_TEMPLATE_ROOTS](craft4:craft\web\View::EVENT_REGISTER_SITE_TEMPLATE_ROOTS) event:
 
 ```php
 use craft\events\RegisterTemplateRootsEvent;
@@ -27,7 +27,7 @@ public function init()
 }
 ```
 
-If you want to register new control panel template roots, use the [EVENT_REGISTER_CP_TEMPLATE_ROOTS](craft3:craft\web\View::EVENT_REGISTER_CP_TEMPLATE_ROOTS) event instead.
+If you want to register new control panel template roots, use the [EVENT_REGISTER_CP_TEMPLATE_ROOTS](craft4:craft\web\View::EVENT_REGISTER_CP_TEMPLATE_ROOTS) event instead.
 
 ## Plugin Control Panel Templates
 

@@ -7,12 +7,20 @@ Entries fields allow you to relate [entries](entries.md) to other elements.
 Entries fields have the following settings:
 
 - **Sources** – Which sections (or other entry index sources) the field should be able to relate entries from.
-- **Limit** – The maximum number of entries that can be related with the field at once. (Default is no limit.)
+- **Selectable Entries Condition** – Rules that determine which entries should be available for selection.
+- **Min Relations** – The minimum number of entries that can be related with the field at once. (Default is no limit.)
+- **Max Relations** – The maximum number of entries that can be related with the field at once. (Default is no limit.)
 - **Selection Label** – The label that should be used on the field’s selection button.
+
+### Advanced Settings
+
+Additional settings are included under an “Advanced” toggle.
+
+- **Allow self relations** – Whether the entry with the field should be allowed to relate to itself.
 
 ### Multi-Site Settings
 
-On multi-site installs, the following settings will also be available (under “Advanced”):
+On multi-site installs, additional advanced settings will be available:
 
 - **Relate entries from a specific site?** – Whether to only allow relations to entries from a specific site.
 
@@ -20,17 +28,19 @@ On multi-site installs, the following settings will also be available (under “
 
   If disabled, related entries will always be pulled from the current site.
 
+- **Show the site menu** – Whether to display the site menu in entry selection modals. (The selected site isn’t stored, so this should only be enabled if some entries aren’t propagated to all sites.)
+
 - **Manage relations on a per-site basis** – Whether each site should get its own set of related entries.
 
 ## The Field
 
 Entries fields list all of the currently-related entries, with a button to select new ones.
 
-Clicking the “Add an entry” button will bring up a modal window where you can find and select additional entries. You can create new entries from this modal as well, by clicking the “New entry” button.
+Pressing **Add an entry** will open a modal window where you can find and select additional entries. (You also press **+ New entry** from this modal to create a new entry in a slideout panel.)
 
 ### Inline Entry Editing
 
-When you double-click on a related entry, a HUD will appear where you can edit the entry’s title and custom fields.
+When you double-click a related entry, a slideout will appear where you can edit the entry’s title and custom fields.
 
 ## Development
 
@@ -48,8 +58,8 @@ Possible values include:
 | `[100, 200]` | that are related to an entry with an ID of 100 or 200.
 | `[':empty:', 100, 200]` | with no related entries, or related to an entry with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the entries with IDs of 100 and 200.
-| an [Entry](craft3:craft\elements\Entry) object | that are related to the entry.
-| an [EntryQuery](craft3:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.
+| an [Entry](craft4:craft\elements\Entry) object | that are related to the entry.
+| an [EntryQuery](craft4:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.
 
 ::: code
 ```twig
@@ -83,7 +93,7 @@ $query = $entry->myFieldHandle;
 
 That will give you an [entry query](entries.md#querying-entries), prepped to output all of the related entries for the given field.
 
-To loop through all the related entries, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
+To loop through all the related entries, call [all()](craft4:craft\db\Query::all()) and then loop over the results:
 
 ::: code
 ```twig
@@ -106,7 +116,7 @@ if (count($relatedEntries)) {
 ```
 :::
 
-If you only want the first related entry, call [one()](craft3:craft\db\Query::one()) instead, and then make sure it returned something:
+If you only want the first related entry, call [one()](craft4:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ::: code
 ```twig
@@ -123,7 +133,7 @@ if ($rel) {
 ```
 :::
 
-If you’d like to check for related entries without fetching them, you can call [exists()](craft3:craft\db\Query::exists()):
+If you’d like to check for related entries without fetching them, you can call [exists()](craft4:craft\db\Query::exists()):
 
 ::: code
 ```twig
@@ -201,5 +211,5 @@ You could then make the checkbox list sortable, so users have control over the o
 ## See Also
 
 - [Entry Queries](entries.md#querying-entries)
-- <craft3:craft\elements\Entry>
+- <craft4:craft\elements\Entry>
 - [Relations](relations.md)

@@ -6,7 +6,7 @@ Radio Buttons fields give you a group of radio buttons.
 
 Radio Buttons fields have the following settings:
 
-* **Radio Button Options** – Define the radio buttons that will be available in the field. You even get to set the option values and labels separately, and choose which one should be selected by default.
+- **Radio Button Options** – Define the radio buttons that will be available in the field. You even get to set the option values and labels separately, and choose which one should be selected by default.
 
 ## Development
 
@@ -51,9 +51,9 @@ $value = $entry->myFieldHandle;
 ```
 :::
 
-That will give you a <craft3:craft\fields\data\SingleOptionFieldData> object that contains the field data.
+That will give you a <craft4:craft\fields\data\SingleOptionFieldData> object that contains the field data.
 
-To show the selected option, output it as a string, or output the [value](craft3:craft\fields\data\SingleOptionFieldData::$value) property:
+To show the selected option, output it as a string, or output the [value](craft4:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ::: code
 ```twig
@@ -64,7 +64,7 @@ To show the selected option, output it as a string, or output the [value](craft3
 ```
 :::
 
-To see if an option is selected, use the [value](craft3:craft\fields\data\SingleOptionFieldData::$value) property:
+To see if an option is selected, use the [value](craft4:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ::: code
 ```twig
@@ -75,7 +75,7 @@ if ($entry->myFieldHandle->value) {
 ```
 :::
 
-To show the selected option’s label, output the [label](craft3:craft\fields\data\SingleOptionFieldData::$label) property:
+To show the selected option’s label, output the [label](craft4:craft\fields\data\SingleOptionFieldData::$label) property:
 
 ::: code
 ```twig
@@ -86,7 +86,7 @@ To show the selected option’s label, output the [label](craft3:craft\fields\da
 ```
 :::
 
-To loop through all the available options, iterate over the [options](craft3:craft\fields\data\SingleOptionFieldData::getOptions()) property:
+To loop through all the available options, iterate over the [options](craft4:craft\fields\data\SingleOptionFieldData::getOptions()) property:
 
 ::: code
 ```twig

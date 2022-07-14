@@ -58,10 +58,10 @@ $mySubscriptionQuery = \craft\commerce\elements\Subscription::find();
 ```
 :::
 
-Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/4.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Subscription](commerce3:craft\commerce\elements\Subscription) objects will be returned.
+Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](/4.x/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Subscription](commerce4:craft\commerce\elements\Subscription) objects will be returned.
 
 ::: tip
-See [Element Queries](https://craftcms.com/docs/4.x/element-queries.html) in the Craft docs to learn about how element queries work.
+See [Element Queries](/4.x/element-queries.md) in the Craft docs to learn about how element queries work.
 :::
 
 ### Example
@@ -99,6 +99,10 @@ We can display all of the current user’s subscriptions by doing the following:
 Subscription queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
+
+
+
+<!-- textlint-disable -->
 
 | Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -141,6 +145,10 @@ Subscription queries support the following parameters:
 | [user](#user)                             | Narrows the query results based on the subscriptions’ user accounts.
 | [userId](#userid)                         | Narrows the query results based on the subscriptions’ user accounts’ IDs.
 | [with](#with)                             | Causes the query to return matching subscriptions eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -416,6 +424,10 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 Causes the query results to be returned in the order specified by [id](#id).
 
 
+
+::: tip
+If no IDs were passed to [id](#id), setting this to `true` will result in an empty result set.
+:::
 
 
 
@@ -821,8 +833,8 @@ If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.ht
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 

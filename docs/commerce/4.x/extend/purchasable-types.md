@@ -1,19 +1,19 @@
 # Purchasable Types
 
-Purchasables should be extended to add useful attributes like Commerce’s included [product variant](../products-variants.md#variants) and [donation](../donations.md) purchasables. [Plugins and modules](https://craftcms.com/docs/3.x/extend/) can provide their own purchasables.
+Purchasables should be extended to add useful attributes like Commerce’s included [product variant](../products-variants.md#variants) and [donation](../donations.md) purchasables. [Plugins and modules](/4.x/extend/) can provide their own purchasables.
 
 ## Custom Purchasables
 
-If you’d like to introduce your own purchasable in a custom module or plugin, you can either implement [`craft\commerce\base\PurchasableInterface`](commerce3:craft\commerce\base\PurchasableInterface) or extend [`craft\commerce\base\Purchasable`](commerce3:craft\commerce\base\Purchasable).
+If you’d like to introduce your own purchasable in a custom module or plugin, you can either implement [`craft\commerce\base\PurchasableInterface`](commerce4:craft\commerce\base\PurchasableInterface) or extend [`craft\commerce\base\Purchasable`](commerce4:craft\commerce\base\Purchasable).
 
-We recommend extending [the base Purchasable](commerce3:craft\commerce\base\Purchasable) because you’ll automatically get...
+We recommend extending [the base Purchasable](commerce4:craft\commerce\base\Purchasable) because you’ll automatically get...
 
 - `getSalePrice()` calculation
 - `getSales()` to see the details of each sale applied in that calculation
 - a standard Yii model that includes everything in `attributes()` and `extraFields()`
 - automatic `sku` validation
 
-You may alternatively choose to implement [PurchasableInterface](commerce3:craft\commerce\base\PurchasableInterface), but you’ll need to handle these and any additional features yourself.
+You may alternatively choose to implement [PurchasableInterface](commerce4:craft\commerce\base\PurchasableInterface), but you’ll need to handle these and any additional features yourself.
 
 ## Implementation
 
@@ -94,7 +94,7 @@ Defaults to the ID of the purchasable element, which would be sufficient for mos
 ## Purchasable deletion
 
 ::: tip
-Craft 3.1 added [soft delete support](https://craftcms.com/docs/3.x/extend/soft-deletes.html) for all element types, including purchasables. You might want to familiarize yourself with soft deletion before adding delete and restore capabilities for your purchasable element.
+Craft CMS includes [soft delete support](/4.x/extend/soft-deletes.md) for all element types, including purchasables. You might want to familiarize yourself with soft deletion before adding delete and restore capabilities for your purchasable element.
 :::
 
 When you inherit from `craft\commerce\base\Purchasable` and your element is saved, Commerce automatically updates the `commerce_purchasables` table with the purchasable’s `sku` so that all purchasables have a central location to check their `sku` uniqueness.

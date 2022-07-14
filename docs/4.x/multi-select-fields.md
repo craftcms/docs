@@ -6,7 +6,7 @@ Multi-select fields give you an input where multiple items may be selected.
 
 Multi-select fields have the following settings:
 
-* **Multi-select Options** – Define the options that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be selected by default.
+- **Multi-select Options** – Define the options that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be selected by default.
 
 ## Development
 
@@ -51,7 +51,7 @@ $value = $entry->myFieldHandle;
 ```
 :::
 
-That will give you a <craft3:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
+That will give you a <craft4:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
 
 To loop through all the selected options, iterate over the field value:
 
@@ -70,7 +70,7 @@ foreach ($entry->myFieldHandle as $option) {
 ```
 :::
 
-To loop through all the available options, iterate over the [options](craft3:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
+To loop through all the available options, iterate over the [options](craft4:craft\fields\data\MultiOptionsFieldData::getOptions()) property:
 
 ::: code
 ```twig
@@ -100,7 +100,7 @@ if (count($entry->myFieldHandle)) {
 ```
 :::
 
-To see if a particular option is selected, use [contains()](craft3:craft\fields\data\MultiOptionsFieldData::contains())
+To see if a particular option is selected, use [contains()](craft4:craft\fields\data\MultiOptionsFieldData::contains())
 
 ::: code
 ```twig

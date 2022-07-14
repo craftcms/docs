@@ -4,7 +4,7 @@ Color fields give you a hexadecimal color input with a preview of the current co
 
 ## Development
 
-Calling a Color field in your templates will return a <craft3:craft\fields\data\ColorData> object, or `null` if no color was selected.
+Calling a Color field in your templates will return a <craft4:craft\fields\data\ColorData> object, or `null` if no color was selected.
 
 By default, the bare field handle will return a hexadecimal representation of that color:
 
@@ -31,7 +31,7 @@ if ($entry->myFieldHandle) {
 ```
 :::
 
-Here’s an impractical example illustrating each <craft3:craft\fields\data\ColorData> method:
+Here’s an impractical example illustrating each <craft4:craft\fields\data\ColorData> method:
 
 ::: code
 ```twig

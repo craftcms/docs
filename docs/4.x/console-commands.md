@@ -140,7 +140,7 @@ Clears Asset indexing data.
 </h3>
 
 
-Clears the caches.
+Clears compiled classes.
 
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
@@ -268,6 +268,19 @@ collation
 
 
 
+<h3 id="db-drop-all-tables">
+    <a href="#db-drop-all-tables" class="header-anchor">#</a>
+    <code>db/drop-all-tables</code>
+</h3>
+
+
+Drops all tables in the database.
+
+Example:
+```
+php craft db/drop-all-tables
+```
+
 <h3 id="db-restore">
     <a href="#db-restore" class="header-anchor">#</a>
     <code>db/restore</code>
@@ -285,6 +298,56 @@ php craft db/restore ./my-backup.sql
 
 path
 :  The path to the database backup file.
+
+
+
+<h4 id="db-restore-options" class="command-subheading">Options</h4>
+
+
+--drop-all-tables
+: Whether to drop all preexisting tables in the database prior to restoring the backup.
+
+
+
+## `elements`
+
+Manages elements.
+
+<h3 id="elements-delete">
+    <a href="#elements-delete" class="header-anchor">#</a>
+    <code>elements/delete</code>
+</h3>
+
+
+Deletes an element by its ID.
+
+<h4 id="elements-delete-parameters" class="command-subheading">Parameters</h4>
+
+id
+:  The element ID to delete.
+
+
+
+<h4 id="elements-delete-options" class="command-subheading">Options</h4>
+
+
+--hard
+: Whether the element should be hard-deleted.
+
+
+
+<h3 id="elements-restore">
+    <a href="#elements-restore" class="header-anchor">#</a>
+    <code>elements/restore</code>
+</h3>
+
+
+Restores an element by its ID.
+
+<h4 id="elements-restore-parameters" class="command-subheading">Parameters</h4>
+
+id
+:  The element ID to restore.
 
 
 
@@ -728,7 +791,7 @@ Runs the install migration.
 
 
 --language
-: The default langcode for the first site to create during install.
+: The default language for the first site to create during install.
 
 
 
@@ -1370,13 +1433,41 @@ Applies project config file changes.
 </h3>
 
 
-Prints a diff of the pending project config YAML changes.
+Outputs a diff of the pending project config YAML changes.
 
 <h4 id="project-config-diff-options" class="command-subheading">Options</h4>
 
 
 --invert
 : Whether to treat the loaded project config as the source of truth, instead of the YAML files.
+
+
+
+<h3 id="project-config-get">
+    <a href="#project-config-get" class="header-anchor">#</a>
+    <code>project-config/get</code>
+</h3>
+
+
+Outputs a project config value.
+
+Example:
+```
+php craft project-config/get system.edition
+```
+
+<h4 id="project-config-get-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+
+
+<h4 id="project-config-get-options" class="command-subheading">Options</h4>
+
+
+--external
+: Whether to pull values from the project config YAML files instead of the loaded config.
 
 
 
@@ -1387,6 +1478,65 @@ Prints a diff of the pending project config YAML changes.
 
 
 Rebuilds the project config.
+
+<h3 id="project-config-remove">
+    <a href="#project-config-remove" class="header-anchor">#</a>
+    <code>project-config/remove</code>
+</h3>
+
+
+Removes a project config value.
+
+Example:
+```
+php craft project-config/set system.edition pro
+```
+
+<h4 id="project-config-remove-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+
+
+<h3 id="project-config-set">
+    <a href="#project-config-set" class="header-anchor">#</a>
+    <code>project-config/set</code>
+</h3>
+
+
+Sets a project config value.
+
+Example:
+```
+php craft project-config/set system.edition pro
+```
+
+<h4 id="project-config-set-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+value
+:  The config item value as a valid YAML string
+
+
+
+<h4 id="project-config-set-options" class="command-subheading">Options</h4>
+
+
+--force
+: Whether every entry change should be force-applied.
+
+
+--message
+: A message describing the changes.
+
+
+--update-timestamp
+: Whether the `dateModified` value should be updated
+
+
 
 <h3 id="project-config-touch">
     <a href="#project-config-touch" class="header-anchor">#</a>
@@ -1588,10 +1738,6 @@ Re-saves assets.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1611,7 +1757,7 @@ Re-saves assets.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1659,10 +1805,6 @@ Re-saves categories.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1682,7 +1824,7 @@ Re-saves categories.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1742,10 +1884,6 @@ Re-saves entries.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1769,7 +1907,7 @@ Re-saves entries.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1819,10 +1957,6 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1846,7 +1980,7 @@ You must supply the `--field` or `--element-id` argument for this to work proper
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1894,10 +2028,6 @@ Re-saves tags.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1917,7 +2047,7 @@ Re-saves tags.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -1965,10 +2095,6 @@ Re-saves users.
 : The number of elements to resave.
 
 
---propagate
-: Whether to save the elements across all their enabled sites.
-
-
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
 
@@ -1988,7 +2114,7 @@ Re-saves users.
     - An attribute name: `--to myCustomField`
     - An object template: `--to "={myCustomField|lower}"`
     - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn($element) => $element->callSomething()"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
 
 
@@ -2056,11 +2182,11 @@ Alias for [setup/db-creds](#setup-db-creds).
 
 
 --driver
-: The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+: The database driver to use. Either `'mysql'` for MySQL or `'pgsql'` for PostgreSQL.
 
 
 --server
-: The database server name or IP address. Usually 'localhost' or '127.0.0.1'.
+: The database server name or IP address. Usually `'localhost'` or `'127.0.0.1'`.
 
 
 --port
@@ -2109,11 +2235,11 @@ Stores new DB connection settings to the `.env` file.
 
 
 --driver
-: The database driver to use. Either 'mysql' for MySQL or 'pgsql' for PostgreSQL.
+: The database driver to use. Either `'mysql'` for MySQL or `'pgsql'` for PostgreSQL.
 
 
 --server
-: The database server name or IP address. Usually 'localhost' or '127.0.0.1'.
+: The database server name or IP address. Usually `'localhost'` or `'127.0.0.1'`.
 
 
 --port
@@ -2149,6 +2275,9 @@ be no more than 5 characters, and must be all lowercase.
 
 
 Sets up all the things.
+
+This is an interactive wrapper for the `setup/app-id`, `setup/security-key`, `setup/db-creds`,
+and `install` commands, each of which support being run non-interactively.
 
 <h3 id="setup-php-session-table">
     <a href="#setup-php-session-table" class="header-anchor">#</a>

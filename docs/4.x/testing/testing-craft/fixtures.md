@@ -20,11 +20,11 @@ Craft’s element fixtures are based on the [robuust](https://robuust.digital/) 
 
 #### Working with your own custom element type?
 
-You can extend [craft\test\fixtures\elements\ElementFixture](craft3:craft\test\fixtures\elements\BaseElementFixture) for your own testing and to offer other developers the ability to use your element type as a fixture testing their code.
+You can extend [craft\test\fixtures\elements\ElementFixture](craft4:craft\test\fixtures\elements\BaseElementFixture) for your own testing and to offer other developers the ability to use your element type as a fixture testing their code.
 
 ### Asset Fixtures
 
-You can add Asset fixtures by extending [craft\test\fixtures\elements\AssetFixture](craft3:craft\test\fixtures\elements\AssetFixture).
+You can add Asset fixtures by extending [craft\test\fixtures\elements\AssetFixture](craft4:craft\test\fixtures\elements\AssetFixture).
 
 The fixture data file could look like this:
 
@@ -56,7 +56,7 @@ Please ensure the `tempFilePath` points to a filename this directory.
 
 ### Category Fixtures
 
-You can add Category fixtures by extending [craft\test\fixtures\elements\CategoryFixture](craft3:craft\test\fixtures\elements\CategoryFixture).
+You can add Category fixtures by extending [craft\test\fixtures\elements\CategoryFixture](craft4:craft\test\fixtures\elements\CategoryFixture).
 
 
 The fixture data file could look like this:
@@ -78,7 +78,7 @@ The primary keys are: `siteId`, `groupId` and `title`.
 
 ### Entry Fixtures
 
-You can add Entry fixtures by extending [craft\test\fixtures\elements\EntryFixture](craft3:craft\test\fixtures\elements\EntryFixture).
+You can add Entry fixtures by extending [craft\test\fixtures\elements\EntryFixture](craft4:craft\test\fixtures\elements\EntryFixture).
 
 The fixture data file could look like this:
 
@@ -100,7 +100,7 @@ The primary keys are: `siteId`, `sectionId`, `typeId` and `title`.
 
 ### Global Set Fixture
 
-You can add Global Set fixtures by extending [craft\test\fixtures\elements\GlobalSetFixture](craft3:craft\test\fixtures\elements\GlobalSetFixture).
+You can add global set fixtures by extending [craft\test\fixtures\elements\GlobalSetFixture](craft4:craft\test\fixtures\elements\GlobalSetFixture).
 
 The fixture data file could look like this:
 
@@ -117,12 +117,12 @@ return [
 The primary keys are: `handle`.
 
 ::: tip
-By default, a Global Set doesn’t get its own database row. If you need it to, you can set `$useActiveRecord` to `true`.
+By default, a global set doesn’t get its own database row. If you need it to, you can set `$useActiveRecord` to `true`.
 :::
 
 ### Tag Fixtures
 
-You can add Tag fixtures by extending [craft\test\fixtures\elements\TagFixture](craft3:craft\test\fixtures\elements\TagFixture).
+You can add Tag fixtures by extending [craft\test\fixtures\elements\TagFixture](craft4:craft\test\fixtures\elements\TagFixture).
 
 The fixture data file could look like this:
 
@@ -143,7 +143,7 @@ The primary keys are: `siteId`, `groupId` and `title`.
 
 ### User Fixtures
 
-You can add User fixtures by extending [craft\test\fixtures\elements\UserFixture](craft3:craft\test\fixtures\elements\UserFixture).
+You can add User fixtures by extending [craft\test\fixtures\elements\UserFixture](craft4:craft\test\fixtures\elements\UserFixture).
 
 The fixture data file could look like this:
 
@@ -153,7 +153,7 @@ The fixture data file could look like this:
 return [
     [
         'username' => 'User',
-        'email' => 'info@example.com',
+        'email' => 'info@domain.tld',
     ],
 ];
 ```
@@ -209,9 +209,9 @@ Field Layouts are another Craft-specific concept. They consist of:
 - Tabs
 - Fields
 
-These are linked to one another and would be difficult to manage in a test environment with ordinary fixtures. Craft provides a special [FieldLayoutFixture](craft3:craft\test\fixtures\FieldLayoutFixture) class that provides all the required support for field layouts along with their tabs and the underlying fields—this includes creating the fields in the `{{%content}}` table.
+These are linked to one another and would be difficult to manage in a test environment with ordinary fixtures. Craft provides a special [FieldLayoutFixture](craft4:craft\test\fixtures\FieldLayoutFixture) class that provides all the required support for field layouts along with their tabs and the underlying fields—this includes creating the fields in the `{{%content}}` table.
 
-To use this, first create an ordinary fixture class extending [craft\test\fixtures\FieldLayoutFixture](craft3:craft\test\fixtures\FieldLayoutFixture).
+To use this, first create an ordinary fixture class extending [craft\test\fixtures\FieldLayoutFixture](craft4:craft\test\fixtures\FieldLayoutFixture).
 
 Then, add the `public $dataFile = 'path/to/datafile/` property that points to a datafile containing at least the following keys (including the nested position).
 

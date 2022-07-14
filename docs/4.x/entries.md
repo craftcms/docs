@@ -15,7 +15,7 @@ Before you can create entries, you must create Sections to contain them. In each
 - Which template should get loaded if an entry’s URL is requested
 - What types of entries should be available in the section, and which fields each of those entry types should have
 
-If you're using Craft with multiple sites then you can also define in your Section:
+If you’re using Craft with multiple sites then you can also define in your Section:
 
 - Which sites’ entries in the section should target
 - Which sites are enabled by default for new entries
@@ -24,9 +24,11 @@ To create a new section, go to **Settings** → **Sections** and choose **New Se
 
 ### Section Types
 
-Not all sections are created equal. Craft has three different types of sections:
+Craft has three different types of sections:
 
 #### Singles
+
+![Illustration of Entries layout with “Singles” selected, showing “About Us”, “Contact” and “Home” entries](./images/singles.png)
 
 Singles are used for one-off pages that have unique content requirements, such as:
 
@@ -38,6 +40,8 @@ Unlike the other section types, Singles only have one entry associated with them
 
 #### Channels
 
+![Illustration of Entries layout with a “News Articles” channel selected, showing three dated news entries](./images/channels.png)
+
 Channels are used for streams of similar content, such as:
 
 - a Blog
@@ -46,11 +50,27 @@ Channels are used for streams of similar content, such as:
 
 #### Structures
 
-Structures are good for times when you need to store multiple similar entries, and sort them into a specific order. They can also be hierarchical. Examples include:
+Structures are good for times when you need to store multiple similar entries, and sort them into a specific order. They can also be hierarchical.
+
+![Illustration of Entries layout with an “Exhibits” structure selected, showing four demonstration exhibits entries with nesting and drag-and-drop handles](./images/structures.png)
+
+Unlike other sections, Structures have a “Structure” sort option that provies the manually-ordered, drag-and-drop hierarchy seen above:
+
+![Illustration of entry listing sort menu with “Structure” selected](./images/structure-view-mode.png)
+
+Examples include:
 
 - Documentation
 - a Services section, where the order of services matters
 - a company organization chart
+
+#### Custom Sources
+
+Content authors can add their own special element sources based on existing Singles, Channels, and Structures by creating custom sources. Each custom source lists all entries by default, and can be filtered to only those that meet customized **Entry Criteria**.
+
+To create a new custom source, go to **Entries** → **Customize (<icon kind="settings" />)**, and from the bottom-left “+” menu choose **New custom source**:
+
+![Screenshot of a modal window with fields for a new custom source: Label, Entry Criteria, and Table Columns](./images/custom-source.png)
 
 ### Entry URI Formats
 
@@ -99,7 +119,7 @@ You can designate any one entry as a site’s homepage using a special `__home__
 :::
 
 ::: tip
-You can use an attribute from a query in the entry’s URI. Use double curly braces (e.g. `{{craft.entries.section('mySingle').one().slug}}/news`).
+You can use an attribute from a query in the entry’s URI. Use double curly braces (e.g. `{{craft.entries().section('mySingle').one().slug}}/news`).
 :::
 
 ::: tip
@@ -127,25 +147,25 @@ You can use environment variables and aliases in the preview target URL. These d
 :::
 
 ::: tip
-Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries.section('mySingle').one().url }}`).
+Preview target URLs can include an attribute on the result of a query. Here double curly braces must be used (e.g. `{{ craft.entries().section('mySingle').one().url }}`).
 :::
 
 When an author is editing an entry from a section with custom preview targets, the **View** button will be replaced with a menu that lists the **Primary entry page** (if the section has an Entry URI Format), plus the names of each preview target.
 
 ![An entry’s View menu with 3 custom preview targets.](./images/share-with-targets.png =394x)
 
-If you share a link from this menu that includes a preview token, it will expire by default after one day. You can customize this with the [defaultTokenDuration](config3:defaultTokenDuration) config setting.
+If you share a link from this menu that includes a preview token, it will expire by default after one day. You can customize this with the [defaultTokenDuration](config4:defaultTokenDuration) config setting.
 
 The targets will also be available within **Preview**.
 
 #### Previewing Decoupled Front Ends
 
-If your site’s front end lives outside of Craft, for example as a Vue or React app, you can still support previewing drafts and revisions with **Preview** or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever your <config3:tokenParam> config setting is set to). If it’s in the URL, then you will need to pass that same token in the Craft API request that loads the page content. This token will cause the API request to respond with the correct content based on what’s actually being previewed.
+If your site’s front end lives outside of Craft, for example as a Vue or React app, you can still support previewing drafts and revisions with **Preview** or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever your <config4:tokenParam> config setting is set to). If it’s in the URL, then you will need to pass that same token in the Craft API request that loads the page content. This token will cause the API request to respond with the correct content based on what’s actually being previewed.
 
-You can pass the token via either a query string parameter named after your <config3:tokenParam> config setting, or an `X-Craft-Token` header.
+You can pass the token via either a query string parameter named after your <config4:tokenParam> config setting, or an `X-Craft-Token` header.
 
 ::: tip
-For live preview, you should also consider [enabling iFrame Resizer](config3:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
+For live preview, you should also consider [enabling iFrame Resizer](config4:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
 :::
 
 ## Entry Types
@@ -169,7 +189,7 @@ If you want your entries to have auto-generated titles rather than requiring aut
 
 The Title Format is a full-blown Twig template, and it will get parsed whenever your entries are saved.
 
-The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft3:craft\elements\Entry#public-properties) in two ways:
+The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft4:craft\elements\Entry#public-properties) in two ways:
 
 1. normal Twig syntax: `{{ object.property }}`
 2. shortcut Twig syntax: `{property}`
@@ -202,7 +222,7 @@ Conditionals are also fair game. There’s no shortcut syntax for those, so if y
 
 ## Editing Entries
 
-If you have at least one section, there will be an **Entries** tab in the primary control panel navigation. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
+If you have at least one section, there will be an **Entries** menu item in the primary control panel navigation. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
 
 You can perform the following actions from the Edit Entry page:
 
@@ -237,7 +257,7 @@ $myEntryQuery = \craft\elements\Entry::find();
 ```
 :::
 
-Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Entry](craft3:craft\elements\Entry) objects will be returned.
+Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Entry](craft4:craft\elements\Entry) objects will be returned.
 
 ::: tip
 See [Element Queries](element-queries.md) to learn about how element queries work.
@@ -277,6 +297,10 @@ Entry queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#after)                           | Narrows the query results to only entries that were posted on or after a certain date.
@@ -315,6 +339,7 @@ Entry queries support the following parameters:
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry in its structure.
 | [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the entry that comes immediately before another entry in its structure.
 | [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                   | Narrows the query results to only entries that are related to certain other elements.
@@ -340,6 +365,10 @@ Entry queries support the following parameters:
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#uri)                               | Narrows the query results based on the entries’ URIs.
 | [with](#with)                             | Causes the query to return matching entries eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `after`
 
@@ -1371,8 +1400,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -1397,6 +1426,15 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `prevSiblingOf`

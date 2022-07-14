@@ -139,7 +139,7 @@ Raised when an update is beginning.
 
 #### Params:
 
-- `type` – A string either set to 'auto' or 'manual' indicating if the update is a manual update or auto-update.
+- `type` – A string either set to `'auto'` or `'manual'` indicating if the update is a manual update or auto-update.
 
 ### updates.onEndUpdate
 
@@ -222,8 +222,8 @@ Raised when any element merged with another element.
 
 #### Params:
 
-- `mergedElementId` – The id of the element being merged.
-- `prevailingElementId` – The id of the element that prevailed in the merge.
+- `mergedElementId` – The ID of the element being merged.
+- `prevailingElementId` – The ID of the element that prevailed in the merge.
 
 ### structures.onBeforeMoveElement
 
@@ -784,7 +784,7 @@ Raised right before a Global Set’s content is saved.
 
 #### Params:
 
-- `globalSet` – A <craft2:Craft\GlobalSetModel> object representing the Global Set whose content is about to be saved.
+- `globalSet` – A <craft2:Craft\GlobalSetModel> object representing the global set whose content is about to be saved.
 
 ::: tip
 Event handlers can prevent the global set from getting saved by setting [$event->performAction](craft2:Craft\Event::performAction) to `false`.
@@ -800,7 +800,7 @@ Raised when a Global Set’s content is saved.
 
 #### Params:
 
-- `globalSet` – A <craft2:Craft\GlobalSetModel> object representing the Global Set whose content was just saved.
+- `globalSet` – A <craft2:Craft\GlobalSetModel> object representing the global set whose content was just saved.
 
 ## User API Events
 
@@ -1134,7 +1134,7 @@ Raised towards the end of a public user registration request before a user is as
 #### Params:
 
 - `user` – A <craft2:Craft\UserModel> object representing the user that was just registered.
-- `defaultGroupId` – The id of the user group that the user is about to be assigned to.
+- `defaultGroupId` – The ID of the user group that the user is about to be assigned to.
 
 ### userGroups.onAssignUserToDefaultGroup
 
@@ -1147,4 +1147,4 @@ Raised towards the end of a public user registration request after a user is ass
 #### Params:
 
 - `user` – A <craft2:Craft\UserModel> object representing the user that was just registered.
-- `defaultGroupId` – The id of the user group that the user was just assigned to.
+- `defaultGroupId` – The ID of the user group that the user was just assigned to.

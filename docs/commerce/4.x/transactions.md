@@ -6,7 +6,7 @@ The typical checkout flow will involve multiple transactions, with the exact ste
 
 The sum of an order’s transactions determines total paid, total price, and outstanding balance amounts—and those totals determine the order’s payment status.
 
-In Craft Commerce, each of these is represented by a [transaction](commerce3:craft\commerce\models\Transaction) model. A transaction can only have one [type](#transaction-types) and [status](#transaction-statuses), and it may have a relationship to a parent transaction.
+In Craft Commerce, each of these is represented by a [transaction](commerce4:craft\commerce\models\Transaction) model. A transaction can only have one [type](#transaction-types) and [status](#transaction-statuses), and it may have a relationship to a parent transaction.
 
 In the Craft control panel, you’ll find transactions listed in a **Transactions** tab in any order’s detail page.
 
@@ -72,5 +72,5 @@ A `success` status indicates that any one of the [transaction types](#transactio
 A `failed` status indicates that any one of the [transaction types](#transaction-types) was failed.
 
 ::: tip
-Commerce’s [RequestResponseInterface](commerce3:craft\commerce\base\RequestResponseInterface) stores the HTTP response code and message from the payment gateway, which may include a reason or reference code for the failed transaction.
+Commerce’s [RequestResponseInterface](commerce4:craft\commerce\base\RequestResponseInterface) stores the HTTP response code and message from the payment gateway, which may include a reason or reference code for the failed transaction.
 :::

@@ -2,10 +2,10 @@
 
 Commerce 4 brings the power of element types to customers and addresses and incorporates new Craft 4 features.
 
-Address and Customer models have gone away, replaced by [Address](craft4:craft\elements\Address) and [User](craft4:craft\elements\User) elements. Thanks to the now-integrated [commerceguys/addressing](https://github.com/commerceguys/addressing) library (no relation), address data is now more pleasant to work with no matter what part of the planet you’re on.
+Address and Customer models have gone away, replaced by [Address](craft4:craft\elements\Address) and [User](craft4:craft\elements\User) elements. Thanks to the now-integrated [commerceguys/addressing](https://github.com/commerceguys/addressing) library, address data is now more pleasant to work with no matter what part of the planet you’re on.
 
 ::: warning
-If you’re upgrading from Commerce 2, see the [Changes in Commerce 3](https://craftcms.com/docs/commerce/3.x/upgrading.html) and upgrade to the latest Commerce 3 version before upgrading to Commerce 4.
+If you’re upgrading from Commerce 2, see the [Changes in Commerce 3](/commerce/3.x/upgrading.md) and upgrade to the latest Commerce 3 version before upgrading to Commerce 4.
 :::
 
 ## Preparing for the Upgrade
@@ -15,6 +15,7 @@ Before you begin, make sure that:
 - you’ve reviewed the changes in Commerce 4 [in the changelog](https://github.com/craftcms/commerce/blob/main/CHANGELOG.md#400) and further down this page
 - you’re running the latest version of Commerce 3.4.x
 - you’ve made sure there are no deprecation warnings from Commerce 3 that need fixing
+- you’ve checked the [Payment Gateways](#payment-gateways) section below and made sure any gateway plugins are ready before the upgrade
 - your **database and files are backed up** in case everything goes horribly wrong
 
 Once you’ve completed these steps, you’re ready continue with the upgrade process.
@@ -23,6 +24,7 @@ Once you’ve completed these steps, you’re ready continue with the upgrade pr
 
 1. Upgrade Craft CMS, Craft Commerce, and any other plugins, per the [Craft 4 upgrade instructions](../../4.x/upgrade.md). (Your `composer.json` should require `"craftcms/commerce": "^4.0.0-beta.1"`.)
 2. In your terminal, run `php craft commerce/upgrade` and follow the interactive prompts.
+3. Go to **Settings** → **Users** → **Address Fields** and drag the “Full Name”, “Organization”, and “Organization Tax ID” fields into the address field layout, so they remain editable within customers’ address books.
 
 Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
 
@@ -173,6 +175,16 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 
 The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
 
+### Address `phone` Fields
+
+The `phone` field is no longer included by default with each address.
+
+If you’re upgrading a project that’s using `phone` fields, those will be migrated automatically. To store address phone numbers in a fresh Commerce 4 install, you’ll need to manually add a custom `phone` field to the address field layout.
+
+### Address `firstName` and `lastName` Fields
+
+Any front-end address forms must submit `fullName` instead of `firstName` and `lastName`. You can still access the `firstName` and `lastName` properties on an address like you normally would, however.
+
 ### Address Template Changes
 
 The change in address format means you’ll need to update some references in your templates.
@@ -318,7 +330,35 @@ Use `paymentFormErrors` to get the payment form errors instead.
 
 ## Config Settings
 
+### PDF Settings
+
 The `orderPdfFilenameFormat` and `orderPdfPath` settings have been removed. Create a default order [PDF](pdfs.md#creating-a-pdf) instead.
+
+### Gateway Settings
+
+Support for `commerce-gateways.php` has been removed. We recommend migrating any gateway-specific setting overrides to [environment variables](/4.x/config/#environmental-configuration).
+
+**Commerce 3**
+
+```php
+// config/commerce-gateways.php
+return [
+    'myStripeGateway' => [
+        'apiKey' => getenv('STRIPE_API_KEY'),
+    ],
+];
+```
+
+**Commerce 4**
+
+```sh
+# .env
+STRIPE_API_KEY="<MY-API-KEY>"
+```
+
+![Screenshot of Stripe gateway settings in the control panel cropped to emphasize the Secret API Key field containing a $STRIPE_API_KEY environment variable placeholder](./images/stripe-gateway-api-key.png)
+
+
 
 ## Twig Filters
 
@@ -332,6 +372,7 @@ The [Order::EVENT_AFTER_REMOVE_LINE_ITEM](commerce4:craft\commerce\elements\Orde
 
 - The `cartUpdatedNotice` param is no longer accepted for `commerce/cart/*` requests. Use a hashed `successMessage` param instead.
 - The `commerce/orders/purchasable-search` action was removed. Use `commerce/orders/purchasables-table` instead.
+- The `customer-orders/get-orders` action was removed. Use `{{ currentUser.getOrders() }}` in Twig templates or the [Element API](https://plugins.craftcms.com/element-api) to provide your own controller endpoint.
 
 ## Elements
 
@@ -355,8 +396,8 @@ Some element methods have been removed in Commerce 4:
 | [Order::getShouldRecalculateAdjustments()](commerce3:craft\commerce\elements\Order::getShouldRecalculateAdjustments()) | [recalculationMode](commerce4:craft\commerce\elements\Order::recalculationMode)
 | [Order::getTotalTaxablePrice()](commerce3:craft\commerce\elements\Order::getTotalTaxablePrice()) | Taxable price is now calculated within the tax adjuster.
 | [Order::isEditable](commerce3:craft\commerce\elements\Order::isEditable) | [canSave()](commerce4:craft\commerce\elements\Order::canSave())
-| [Order::removeEstimatedBillingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedBillingAddress()) | [setEstimatedBillingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedBillingAddress(null))
-| [Order::removeEstimatedShippingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedShippingAddress()) | [setEstimatedShippingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedShippingAddress(null))
+| [Order::removeEstimatedBillingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedBillingAddress()) | [setEstimatedBillingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedBillingAddress())
+| [Order::removeEstimatedShippingAddress()](commerce3:craft\commerce\elements\Order::removeEstimatedShippingAddress()) | [setEstimatedShippingAddress(null)](commerce4:craft\commerce\elements\Order::setEstimatedShippingAddress())
 | [Order::setShouldRecalculateAdjustments()](commerce3:craft\commerce\elements\Order::setShouldRecalculateAdjustments()) | [recalculationMode](commerce4:craft\commerce\elements\Order::recalculationMode)
 | [Product::getIsDeletable()](commerce3:craft\commerce\elements\Product::getIsDeletable()) | [canDelete()](commerce4:craft\commerce\elements\Product::canDelete())
 | [Product::getIsEditable()](commerce3:craft\commerce\elements\Product::getIsEditable()) | [canSave()](commerce4:craft\commerce\elements\Product::canSave())
@@ -446,11 +487,38 @@ A few controller methods have been removed as well:
 
 - [OrdersController::_prepCustomersArray()](commerce3:craft\commerce\controllers\OrdersController::_prepCustomersArray()) (Use [_customerToArray()](commerce4:craft\commerce\controllers\OrdersController::_customerToArray()) instead.)
 - [PlansController::actionRedirect()](commerce3:craft\commerce\controllers\PlansController::actionRedirect())
-- [ProductsPreviewController::enforceProductPermissions()](commerce3:craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions())
+- [ProductsPreviewController::<wbr>enforceProductPermissions()](commerce3:craft\commerce\controllers\ProductsPreviewController::enforceProductPermissions())
 
 ## User Permissions
 
-Permissions for managing products have become more granular in Commerce 4:
+Some permissions have changed in Commerce 4:
 
-- `commerce-manageProducts` has been replaced by `commerce-editProductType:<uid>` and nested `commerce-createProducts:<uid>` and `commerce-deleteProducts:<uid>` permissions
+- `commerce-manageProducts` has been replaced by `commerce-editProductType:<uid>`, with nested permissions:
+    - `commerce-createProducts:<uid>`
+    - `commerce-deleteProducts:<uid>`
+- `commerce-managePromotions` has new, more granular nested permissions:
+    - `commerce-editSales`
+    - `commerce-createSales`
+    - `commerce-deleteSales`
+    - `commerce-editDiscounts`
+    - `commerce-createDiscounts`
+    - `commerce-deleteDiscounts`
 - `commerce-manageCustomers` has been replaced by Craft’s standard user management permissions.
+
+## Payment Gateways
+
+There are gateway-specific changes to be aware of in Commerce 4 in addition to the [removed support for `commerce-gateways.php`](#gateway-settings).
+
+### Stripe
+
+The “Charge” gateway has been removed. Use the “Payment Intents” gateway instead.
+
+## Cart Cookies
+
+The customer’s current cart number is now stored in a new cart cookie rather than in the session. This allows for a guest cart to persist even after a browser is closed. Current cart sessions are automatically migrated to the cookie when the customer visits the the front end.
+
+::: tip
+The cart cookie and its default one-year expiry can be [modified via `config/app.php`](configuration.md#cart-cookie-configuration).
+:::
+
+This only requires attention if you have a custom plugin or module that manually modifies the current cart number in the session.

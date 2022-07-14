@@ -62,7 +62,7 @@ Their syntax always begins with “`{#`” and ends with “`#}`”.
 
 ## Variables
 
-Variables in Twig are just like variables in Javascript or any other programming language. There are different types of variables – strings, arrays, booleans, and objects. You can pass them into functions, manipulate them, and output them.
+Variables in Twig are just like variables in JavaScript or any other programming language. There are different types of variables – strings, arrays, booleans, and objects. You can pass them into functions, manipulate them, and output them.
 
 All of your Craft templates are pre-loaded with a few [global variables](templating/global-variables.md); templates that are loaded as a result of a matching [route](routing.md#dynamic-routes) get pre-loaded with the variables defined by the route’s tokens; and templates that are loaded as the result of a matching [entry](sections-and-entries.md) URL get an “entry” variable (see [routing](routing.md) for more details).
 
@@ -113,5 +113,4 @@ Resources:
 There are several learning resources available online for learning Twig:
 
 * [Twig for Template Designers](https://twig.symfony.com/doc/templates.html) documents all of Twig’s features in detail. It can be overly technical at times, but we still recommend you read through it.
-* [Straight up Craft](https://straightupcraft.com/twig-templating) has some great articles on how to use Twig within Craft.
 * [Twig for Designers](https://github.com/brandonkelly/TwigForDesigners) is an in-progress eBook that aims to explain how Twig works to non-developers.

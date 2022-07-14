@@ -177,6 +177,10 @@ Address queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                     | Description
 | ----------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [administrativeArea](#administrativearea) | Narrows the query results based on the administrative area the assets belong to.
@@ -198,12 +202,17 @@ Address queries support the following parameters:
 | [owner](#owner)                           | Sets the [ownerId](#ownerid) parameter based on a given owner element.
 | [ownerId](#ownerid)                       | Narrows the query results based on the addresses’ owner elements, per their IDs.
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only addresses that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only addresses that match a search query.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
 | [trashed](#trashed)                       | Narrows the query results to only addresses that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the addresses’ UIDs.
 | [with](#with)                             | Causes the query to return matching addresses eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `administrativeArea`
 
@@ -645,9 +654,7 @@ Possible values include:
 | Value | Fetches addresses…
 | - | -
 | `1` | created for an element with an ID of 1.
-| `'not 1'` | not created for an element with an ID of 1.
 | `[1, 2]` | created for an element with an ID of 1 or 2.
-| `['not', 1, 2]` | not created for an element with an ID of 1 or 2.
 
 
 
@@ -675,8 +682,8 @@ If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.ht
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -701,6 +708,15 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `relatedTo`

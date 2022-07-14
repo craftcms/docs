@@ -28,7 +28,7 @@ Tags fields list all the currently-related tags with a text input to add new one
 As you type into the text input, the Tags field will search through the existing tags that belong to the field’s tag group (per its Source setting), and suggest tags in a menu below the text input. If an exact match is not found, the first option in the menu will create a new tag named after the input value.
 
 ::: tip
-By default you won’t be able to create multiple tags that are too similar in name. You can change that behavior by enabling the <config3:allowSimilarTags> config setting.
+By default you won’t be able to create multiple tags that are too similar in name. You can change that behavior by enabling the <config4:allowSimilarTags> config setting.
 :::
 
 ### Inline Tag Editing
@@ -51,8 +51,8 @@ Possible values include:
 | `[100, 200]` | that are related to a tag with an ID of 100 or 200.
 | `[':empty:', 100, 200]` | with no related tags, or related to a tag with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the tags with IDs of 100 and 200.
-| an [Tag](craft3:craft\elements\Tag) object | that are related to the tag.
-| an [TagQuery](craft3:craft\elements\db\TagQuery) object | that are related to any of the resulting tags.
+| an [Tag](craft4:craft\elements\Tag) object | that are related to the tag.
+| an [TagQuery](craft4:craft\elements\db\TagQuery) object | that are related to any of the resulting tags.
 
 ::: code
 ```twig
@@ -84,7 +84,7 @@ $query = $entry->myFieldHandle;
 
 That will give you a [tag query](tags.md#querying-tags), prepped to output all the related tags for the given field.
 
-To loop through all the related tags, call [all()](craft3:craft\db\Query::all()) and then loop over the results:
+To loop through all the related tags, call [all()](craft4:craft\db\Query::all()) and then loop over the results:
 
 ::: code
 ```twig
@@ -109,7 +109,7 @@ if (count($relatedTags)) {
 ```
 :::
 
-If you only want the first related tag, call [one()](craft3:craft\db\Query::one()) and make sure it returned something:
+If you only want the first related tag, call [one()](craft4:craft\db\Query::one()) and make sure it returned something:
 
 ::: code
 ```twig
@@ -127,7 +127,7 @@ if ($rel) {
 ```
 :::
 
-If you need to check for any related tags without fetching them, you can call [exists()](craft3:craft\db\Query::exists()):
+If you need to check for any related tags without fetching them, you can call [exists()](craft4:craft\db\Query::exists()):
 
 ::: code
 ```twig
@@ -205,5 +205,5 @@ You could then make the checkbox list sortable, so users have control over the o
 ## See Also
 
 - [Tag Queries](tags.md#querying-tags)
-- <craft3:craft\elements\Tag>
+- <craft4:craft\elements\Tag>
 - [Relations](relations.md)

@@ -16,7 +16,7 @@ The exact permissions you choose for “Store Managers” will depend on the nee
 
 The following Commerce permissions are available for Craft users and user groups.
 
-![Commerce user permissions](./assets/user-permissions.png)
+![Commerce user permissions](./images/user-permissions.png)
 
 ### Access Craft Commerce
 
@@ -25,7 +25,7 @@ Whether the user is able to access the Commerce section of the control panel.
 ::: tip
 Unlike the others, you’ll find it under Craft’s **Access the control panel** permission:
 
-![](./assets/general-permissions.png =375x375)
+![](./images/general-permissions.png =375x375)
 :::
 
 ### Manage products

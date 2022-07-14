@@ -6,7 +6,7 @@ Transforms can be defined in the control panel and directly from your templates 
 
 ## Defining Transforms from the Control Panel
 
-You can define named transforms from the control panel by navigating to **Settings** → **Assets** → **Image Transforms** and press **New Transform**.
+You can define named transforms from the control panel by navigating to **Settings** → **Assets** → **Image Transforms** and pressing **New Transform**.
 
 Each transform has the following settings:
 
@@ -38,7 +38,7 @@ If **Mode** is set to “Crop”, an additional “Default Focal Point” settin
 
 If you leave **Width** or **Height** blank, that dimension will be set to whatever maintains the image’s aspect ratio. For example, if you have an image that is 600 by 400 pixels, and you set a transform’s Width to 60, but leave Height blank, the resulting height will be 40.
 
-If you leave **Quality** blank, Craft will use the quality set by your <config3:defaultImageQuality> config setting.
+If you leave **Quality** blank, Craft will use the quality set by your <config4:defaultImageQuality> config setting.
 
 **Image Format** can be set to the following values:
 
@@ -47,11 +47,11 @@ If you leave **Quality** blank, Craft will use the quality set by your <config3:
 - gif
 - webp
 
-If you leave **Image Format** blank, Craft will use the original image’s format if it’s [web-safe](craft3:craft\helpers\Image::webSafeFormats()). Otherwise Craft will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagick isn’t installed), it will go with .jpg.
+If you leave **Image Format** blank, Craft will use the original image’s format if it’s [web-safe](craft4:craft\helpers\Image::webSafeFormats()). Otherwise Craft will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagick isn’t installed), it will go with .jpg.
 
 ### Applying Named Transforms to Images
 
-To output an image with your named transform applied, pass its handle into your asset’s [getUrl()](craft3:craft\elements\Asset::getUrl()), [getWidth()](craft3:craft\elements\Asset::getWidth()), and [getHeight()](craft3:craft\elements\Asset::getHeight()) functions:
+To output an image with your named transform applied, pass its handle into your asset’s [getUrl()](craft4:craft\elements\Asset::getUrl()), [getWidth()](craft4:craft\elements\Asset::getWidth()), and [getHeight()](craft4:craft\elements\Asset::getHeight()) functions:
 
 ```twig
 <img src="{{ asset.getUrl('thumb') }}"
@@ -123,7 +123,7 @@ Then pass that hash into your asset’s `getUrl()`, `getWidth()`, and `getHeight
 >
 ```
 
-Notice in this example there are no quotes around “`thumb`” like there were in our earlier examples. That’s because before we were passing a [string](dev/twig-primer.md#strings) set to a CP-defined transform’s handle, whereas in this example we’re passing a [variable](dev/twig-primer.md#variables) referencing the `thumb` hash we created in the template.
+Notice in this example there are no quotes around “`thumb`” like there were in our earlier examples. That’s because before we were passing a [string](dev/twig-primer.md#strings) set to a control-panel-defined transform’s handle, whereas in this example we’re passing a [variable](dev/twig-primer.md#variables) referencing the `thumb` hash we created in the template.
 
 It would look similar using `setTransform()` like we did in the previous section:
 
@@ -147,9 +147,9 @@ All the same settings available to named transforms are available to template-de
 
 ### Generating `srcset` Sizes
 
-It’s common to need not just one sized image, but a range of them for use with [`srcset`](https://www.w3schools.com/tags/att_source_srcset.asp).
+It’s common to need not just one sized image, but a range of them for use with [`srcset`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset).
 
-One way you could achieve this is by combining the [`tag` template function](dev/functions.md#tag) with Craft’s [`getSrcSet()`](craft3:craft\elements\Asset::getSrcSet()) method to output an image tag with a range of `srcset` sizes relative to the initial dimensions:
+One way you could achieve this is by combining the [`tag` template function](dev/functions.md#tag) with Craft’s [`getSrcSet()`](craft4:craft\elements\Asset::getSrcSet()) method to output an image tag with a range of `srcset` sizes relative to the initial dimensions:
 
 ```twig
 {% do asset.setTransform({ width: 300, height: 300 }) %}
@@ -162,12 +162,12 @@ One way you could achieve this is by combining the [`tag` template function](dev
 }) }}
 ```
 
-You can also pass a `sizes` argument to the [`getImg()`](craft3:craft\elements\Asset::getImg()) method to accomplish the same thing:
+You can also pass a `sizes` argument to the [`getImg()`](craft4:craft\elements\Asset::getImg()) method to accomplish the same thing:
 
 ```twig
 {{ asset.getImg({ width: 300, height: 300 }, ['1.5x', '2x', '3x']) }}
 ```
 
 ::: tip
-You can also provide relative image sizes when eager-loading asset transforms. See [`AssetQuery::withTransforms()`](craft3:craft\elements\db\AssetQuery::withTransforms()) in the class reference for an example.
+You can also provide relative image sizes when eager-loading asset transforms. See [`AssetQuery::withTransforms()`](craft4:craft\elements\db\AssetQuery::withTransforms()) in the class reference for an example.
 :::

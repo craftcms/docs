@@ -7,7 +7,7 @@ When a cart becomes an order, the following things happen:
 1) The `dateOrdered` order attribute is set to the current date.
 2) The `isCompleted` order attribute is set to `true`.
 3) The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
-4) The order reference number is generated for the order, based on the ‘Order Reference Number Format‘ setting found in Commerce → Settings → General Settings section of the Control Panel.
+4) The order reference number is generated for the order, based on the “Order Reference Number Format” setting found in Commerce → Settings → General Settings section of the control panel.
 
 ## Order Numbers
 
@@ -31,7 +31,7 @@ This is short enough to still be unique, and is a little friendlier to customers
 
 The order reference number is generated on cart completion by the ‘Order Reference Number Format’ in general settings.
 
-This number is usually the best to use as the customer facing identifier of the order, but shouldn't be used in URLs.
+This number is usually the best to use as the customer facing identifier of the order, but shouldn’t be used in URLs.
 
 ```twig
 {{ object.reference }}

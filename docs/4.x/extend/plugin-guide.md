@@ -29,7 +29,7 @@ To create a plugin, create a new directory for it somewhere on your computer. A 
 
 ```treeview
 ~/dev/
-├── my-project.test/
+├── my-project/
 │   └── ...
 └── my-plugin/
     ├── CHANGELOG.md
@@ -41,10 +41,6 @@ To create a plugin, create a new directory for it somewhere on your computer. A 
 ```
 
 The name of your plugin directory doesn’t matter. Just choose something that is easy to identify.
-
-::: tip
-Use [pluginfactory.io](https://pluginfactory.io/) to create your plugin’s scaffolding with just a few clicks.
-:::
 
 ## composer.json
 
@@ -166,7 +162,7 @@ In your terminal, go to your Craft project and tell Composer to require your plu
 
 ```bash
 # go to the project directory
-cd /path/to/my-project.test
+cd /path/to/my-project
 
 # require the plugin package
 composer require package/name
@@ -183,7 +179,7 @@ One caveat of `path` Composer repositories is that Composer may ignore `path`-ba
 
 ```bash
 # go to the project directory
-cd /path/to/my-project.test
+cd /path/to/my-project
 
 # remove the plugin package
 composer remove package/name
@@ -200,7 +196,7 @@ If you’re ready to publicly release your plugin, register it as a new Composer
 
 ```bash
 # go to the project directory
-cd /path/to/my-project.test
+cd /path/to/my-project
 
 # require the plugin package
 composer require package/name
@@ -210,7 +206,7 @@ composer require package/name
 
 Plugins can provide an icon, which will be visible on the **Settings** → **Plugins** page.
 
-<BrowserShot url="https://mysite.test/admin/settings/plugins" :link="false" caption="The Settings → Plugins page in Craft’s control panel.">
+<BrowserShot url="https://my-project.tld/admin/settings/plugins" :link="false" caption="The Settings → Plugins page in Craft’s control panel.">
 <img src="../images/plugin-index.png" alt="Screenshot of control panel Settings → Plugins">
 </BrowserShot>
 

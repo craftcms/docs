@@ -71,7 +71,7 @@ public function testSomething()
 
 Because the `consoleCommand` returns a [fluid interface](https://en.wikipedia.org/wiki/Fluent_interface#PHP)
 you can add as many methods ([see options below](#methods)) in order to
-specify what 'user journey' your console command will follow.
+specify what user journey your console command will follow.
 
 ```php
 public function testSomething()

@@ -42,8 +42,8 @@ Enter the name of this email as it will be shown when managing it in the control
 
 The subject of the email, which can be plain text or use Twig to set dynamic values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 `order` is the cart or order relevant to the notification. The “Email Subject” we enter, for example, might be:
 
@@ -61,8 +61,8 @@ If “Send to custom recipient” is selected, an email address can be entered. 
 
 Like the [Email Subject](#email-subject), this field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 `order` is the cart or order relevant to the notification. The “Recipient” we enter, for example, might be:
 
@@ -78,8 +78,8 @@ The Reply-To address for this email.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 ### BCC’d Recipient
 
@@ -89,8 +89,8 @@ Separate multiple addresses with a comma (`,`).
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 ### CC’d Recipient
 
@@ -98,8 +98,8 @@ The CC addresses for this email. Separate multiple addresses with a comma (`,`).
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 ### HTML Email Template Path
 
@@ -107,8 +107,8 @@ The path to an HTML template in your site’s `templates/` folder.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce3:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce3:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
 
 This allows you to have full design flexibility.
 
@@ -142,6 +142,31 @@ Select the email by name in the **Status Emails** field. You can select as many 
 
 Once you choose **Save**, the designated emails will be sent when an order is assigned that status.
 
+## Suppressing Emails
+
+There may be cases where you don’t want an order status change to send an email.
+
+Orders have a memory-only [suppressEmails](commerce4:craft\commerce\elements\Order::$suppressEmails) attribute you can set to `true` to avoid sending email for anything that happens in that request. This is what the “Suppress email” options set when changing status from the order listing or edit views.
+
+![Screenshot of order status edit modal with “Update Order Status” heading, a status dropdown, message field, and “Suppress emails” checkbox](./images/update-order-status.png)
+
+Any time an order status email is prepared, Commerce triggers a cancelable event. Set the event object’s `$isValid` proprty to `false` to prevent a status change email from being sent:
+
+```php
+use craft\commerce\events\OrderStatusEmailsEvent;
+use craft\commerce\services\OrderStatuses;
+use yii\base\Event;
+
+Event::on(
+    OrderStatuses::class,
+    OrderStatuses::EVENT_ORDER_STATUS_CHANGE_EMAILS,
+    function (OrderStatusEmailsEvent $event) {
+        // Prevent sending an order status email
+        $event->isValid = false;
+    }
+);
+```
+
 ## Troubleshooting
 
 It’s a good idea to always test your status email templates before relying on them in production.
@@ -155,7 +180,7 @@ You can add `&orderNumber=ORDER_NUMBER` to the preview URL to use a specific num
 If your template is rendering successfully but messages are failing to send, you’ll want to check these things in order:
 
 1. **Make sure Craft’s queue is running.**\
-If the [`runQueueAutomatically`](config3:runQueueAutomatically) setting is `true` you may want to establish a more reliable queue worker.
+If the [`runQueueAutomatically`](config4:runQueueAutomatically) setting is `true` you may want to establish a more reliable queue worker.
 2. **Make sure any dynamic settings are parsed properly.**\
 Some email settings support dynamic Twig values, where parsing errors can cause sending to fail: 
     - Email Subject
@@ -170,7 +195,7 @@ Syntax issues, undeclared variables, or missing information may prevent template
 4. **Make sure included PDFs render properly.**\
 If you’re including a [PDF](pdfs.md), it could have its own rendering issues that cause sending to fail. Be sure to preview the relevant PDF separately and ensure it’s working as expected.
 5. **Avoid cart and session references.**\
-Emails are sent by queue processes that don’t have access to sessions or carts that depend on them. References to `craft.commerce.carts.cart` or `craft.commerce.customers.customer`, for example, will result in session-related errors.
+Emails are sent by queue processes that don’t have access to cookies or sessions the cart depends on. References to `craft.commerce.carts.cart` or `craft.commerce.customers.customer`, for example, will result in session-related errors.
 
 Commerce adds email jobs to the queue with [high priority](/4.x/extend/queue-jobs.md#specifying-priority) for drivers that support it. This helps ensure outgoing messages don’t get stuck behind slow, long-running tasks.
 

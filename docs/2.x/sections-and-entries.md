@@ -99,7 +99,7 @@ Conditionals are also fair game. There’s no shortcut syntax for those, so if y
 
 ## Editing Entries
 
-If you have at least one section, there will be an “Entries” tab in the primary CP nav. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
+If you have at least one section, there will be an “Entries” menu item in the primary control panel navigation. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
 
 You can perform the following actions from the Edit Entry page:
 

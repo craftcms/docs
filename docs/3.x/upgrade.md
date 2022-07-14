@@ -49,7 +49,7 @@ With Craft 3 downloaded and prepped, follow these steps to complete the upgrade:
 
 10. Update your web server to point to your new project’s `web/` directory.
 
-11. Point your browser to your control panel URL (e.g. `http://my-project.test/admin`). If you see the update prompt, you did everything right! Go ahead and click “Finish up” to update your database.
+11. Point your browser to your control panel URL (e.g. `http://my-project.tld/admin`). If you see the update prompt, you did everything right! Go ahead and click “Finish up” to update your database.
 
 12. If you had any plugins installed, you’ll need to install their Craft 3 counterparts from the “Plugin Store” section in the control panel. (See the plugins’ documentation for any additional upgrade instructions.)
 
@@ -297,6 +297,8 @@ Some template functions have been removed completely:
 
 Some template functions have been deprecated in Craft 3, and will be completely removed in Craft 4:
 
+<!-- textlint-disable -->
+
 | Old Template Function                                   | What to do instead
 | ------------------------------------------------------- | ---------------------------------------------
 | `round(num)`                                            | `num|round`
@@ -413,11 +415,15 @@ Some template functions have been deprecated in Craft 3, and will be completely 
 | `craft.session.getFlash()`                              | `craft.app.session.getFlash()`
 | `craft.session.hasFlash()`                              | `craft.app.session.hasFlash()`
 
+<!-- textlint-enable -->
+
 *<sup>1</sup> `craft.app.request.isLivePreview` is also deprecated, and only will return `true` when previewing categories or plugin-supplied element types that don’t support the new previewing system. If you were calling this to work around Craft templating bugs in Live Preview requests, you can simply delete the condition now, and treat Live Preview requests the same as any other request type.*
 
 ## Date Formatting
 
 Craft’s extended DateTime class has been removed in Craft 3. Here’s a list of things you used to be able to do in your templates, and what the Craft 3 equivalent is. (The DateTime object is represented by the `d` variable. In reality it could be `entry.postDate`, `now`, etc.)
+
+<!-- textlint-disable -->
 
 | Old                               | New
 | --------------------------------- | ----------------------------------
@@ -442,6 +448,8 @@ Craft’s extended DateTime class has been removed in Craft 3. Here’s a list o
 | `{{ d.w3c() }}`                   | `{{ d|date('Y-m-d\\TH:i:sP') }}`
 | `{{ d.w3cDate() }}`               | `{{ d|date('Y-m-d') }}`
 | `{{ d.year() }}`                  | `{{ d|date('Y') }}`
+
+<!-- textlint-enable -->
 
 ## Currency Formatting
 
@@ -515,7 +523,7 @@ In Craft 2, each time you call a parameter-setter method (e.g. `.type('article')
 That made it possible to execute variations of an element query, without affecting subsequent queries. For example:
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articleEntries = query.type('article').find() %}
 {% set totalEntries = query.total() %}
 ```
@@ -532,7 +540,7 @@ Which means in the above code example, `totalEntries` will be set to the total _
 If you have any templates that count on the Craft 2 behavior, you can fix them using the [clone()](dev/functions.md#clone-object) function.
 
 ```twig
-{% set query = craft.entries.section('news') %}
+{% set query = craft.entries().section('news') %}
 {% set articleEntries = clone(query).type('article').all() %}
 {% set totalEntries = query.count() %}
 ```
@@ -559,11 +567,11 @@ When you need to loop over an element query, you should start explicitly calling
 
 ```twig
 Old:
-{% for entry in craft.entries.section('news') %}...{% endfor %}
+{% for entry in craft.entries().section('news') %}...{% endfor %}
 {% for asset in entry.myAssetsField %}...{% endfor %}
 
 New:
-{% for entry in craft.entries.section('news').all() %}...{% endfor %}
+{% for entry in craft.entries().section('news').all() %}...{% endfor %}
 {% for asset in entry.myAssetsField.all() %}...{% endfor %}
 ```
 
@@ -571,10 +579,10 @@ When you need to get the total number of results from an element query, you shou
 
 ```twig
 Old:
-{% set total = craft.entries.section('news')|length %}
+{% set total = craft.entries().section('news')|length %}
 
 New:
-{% set total = craft.entries.section('news').count() %}
+{% set total = craft.entries().section('news').count() %}
 ```
 
 Alternatively, if you already needed to fetch the actual query results, and you didn’t set the `offset` or `limit` params, you can use the [length](https://twig.symfony.com/doc/2.x/filters/length.html) filter to find the total size of the results array without the need for an extra database query.

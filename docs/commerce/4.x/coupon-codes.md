@@ -1,24 +1,36 @@
-# Coupon Codes
+# Coupon Codes <badge type="edition" vertical="middle" title="Discounts are only available in Commerce Pro">Pro</badge>
 
-Coupon codes are unique strings that may be entered by a user in order to receive a discount.
+Coupon codes are unique strings customers may enter for an order to receive a [discount](discounts.md).
+
+Craft Commerce treats coupon codes as conditions within a discount promotion. Go to **Commerce** → **Promotions** → **Discounts**, select an existing promotion or press **+ New discount** to start a new one, and select to the “Coupons” tab:
+
+![Screenshot of a new discount’s settings with its “Coupons” tab selected, displaying a “Generate” button and a separate “Add a coupon button”](./images/discount-coupons.png)
+
+There are no coupon codes by default, meaning no coupon code is necessary for the discount to work.
+
+## Adding Coupon Codes
+
+You can click **+ Add a coupon** to create them one at a time, where each one needs a **Code** and optional **Max Uses**. Individual code uses will be updated automatically in the **Uses** column each time an order is completed using that code for a matching discount:
+
+![Screenshot of a row in the Coupons table, with three columns: “Code”, “Uses”, and “Max Uses”](./images/coupon-code.png)
 
 ::: warning
-Discounts are only available in the [Pro edition](editions.md) of Craft Commerce.
+Store managers can edit a coupon code’s **Uses** for flexibility, so that number may be different from counting rows in a database query.
 :::
 
-With Craft Commerce, coupon codes are set up as a condition within a discount promotion.
+Press **Generate** if you’d like to create codes in bulk:
 
-To create a new discount promotion, navigate to **Commerce** → **Promotions** → **Discounts** in the control panel. To see the coupon condition, select to the “Coupon” tab.
+![Screenshot of the “Generate” HUD, with a “Number of Coupons” field and a “Generated Coupon Format” field](./images/generate-coupons.png)
 
-An empty coupon field on the discount means no coupon is needed for the discount to work. Adding a coupon requires that a coupon is submitted to the cart. This makes the discount available to match the order but still needs to match all other discount conditions.
+Set the number of coupons you’d like to generate along with a desired format, where pound signs (`#`) will be replaced with random letters. Press **Submit** and they’ll be generated and added to the set.
 
-Read more about [Discounts](discounts.md).
+::: tip
+To make a coupon code no longer available for use, you can either delete it from the table or set its **Max Uses** to `0`.
+:::
 
-## Using a coupon
+## Using a Coupon Code
 
-To add a coupon to the cart, a customer submits the `couponCode` parameter using the `commerce/cart/update-cart` form action.
-
-Example:
+To add a coupon to the cart, a customer submits the `couponCode` parameter using the `commerce/cart/update-cart` form action:
 
 ```twig
 <form method="post">
@@ -30,17 +42,46 @@ Example:
   <input type="text"
     name="couponCode"
     value="{{ cart.couponCode }}"
-    class="{% if cart.getFirstError('couponCode') %}has-error{% endif %}"
     placeholder="{{ "Coupon Code"|t }}"
   >
 
-  <button type="submit">Update Cart</button>
+  <button>Update Cart</button>
 </form>
 ```
 
-Only one coupon code can exist on the cart at a time. To see the value of the current cart’s coupon code, use `{{ cart.couponCode }}`.
+Only one coupon code can exist on the cart at a time, accessible via `{{ cart.couponCode }}`.
 
-You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode`:
+If the customer submits an invalid code, Commerce may update the cart but adds an [order notice](carts-orders.md#order-notices):
+
+```twig{7-8,16}
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ hiddenInput('successMessage', 'Added coupon code.'|hash) }}
+  {{ redirectInput('shop/cart') }}
+
+  {# Get the first notice for the `couponCode` attribute, if we have one #}
+  {% set couponCodeNotice = cart.getFirstNotice(null, 'couponCode') %}
+
+  {# Get any lower-level coupon code errors just in case #}
+  {% set couponCodeError = cart.getFirstError('couponCode') %}
+
+  <input type="text"
+    name="couponCode"
+    value="{{ cart.couponCode }}"
+    class="{% if couponCodeNotice or couponCodeError %}has-error{% endif %}"
+    placeholder="{{ "Coupon Code"|t }}"
+  >
+
+  <button>Update Cart</button>
+</form>
+```
+
+::: tip
+The example above includes `cart.getFirstError('couponCode')` as a precaution. Commerce won’t throw any coupon errors, but another plugin or custom module could.
+:::
+
+You can retrieve the discount associated with the coupon code using `craft.commerce.discounts.getDiscountByCode()`:
 
 ```twig
 {# @var discount craft\commerce\models\Discount #}

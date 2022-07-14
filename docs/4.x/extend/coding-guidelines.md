@@ -61,7 +61,7 @@ The Craft Autocomplete package provides Twig template autocompletion in PhpStorm
 - Don’t use a `switch` statement when a single `if` condition will suffice.
 - Use single quotes (`'`) whenever double quotes (`"`) aren’t needed.
 - Use shortcut operators (`+=`, `-=`, `*=`, `/=`, `%=`, `.=`, etc.) whenever possible.
-- Use shortcut regex patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
+- Use shortcut regular expression patterns (`\d`, `\D`, `\w`, `\W`, etc.) whenever possible.
 - Use the `DIRECTORY_SEPARATOR` constant rather than `'/'` when defining file paths.
 
 ::: tip
@@ -233,7 +233,7 @@ $this->requireAcceptsJson();
 ## Exceptions
 
 - If an exception is likely to occur as a result of user error, use the <yii2:yii\base\UserException> class (or a subclass)
-- Only translate exception messages with <craft3:Craft::t()> if it’s a <yii2:yii\base\UserException>.
+- Only translate exception messages with <craft4:Craft::t()> if it’s a <yii2:yii\base\UserException>.
 
 ## DB Queries
 

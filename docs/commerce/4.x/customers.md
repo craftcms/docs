@@ -1,64 +1,39 @@
 # Customers
 
-With Craft Commerce, a _Customer_ is a model representing a person who may place an order.
+With Craft Commerce, a _Customer_ is a [user](/4.x/users.md) element representing a person who may place an order.
 
-That person could have placed an order as a guest, or as a registered user with an associated Craft [user account](/4.x/users.md) for logging in and placing orders with saved information.
-
-Every Craft user has a customer record by default, even if that user has never created an order.
-
-::: tip
-The 1:1 user-to-customer relationship is new to Craft Commerce 3. A migration from Commerce 2 will create a new customer record for any existing Craft user that doesn’t already have one.
-:::
-
-## Customer List
-
-Customers can be found in the control panel by navigating to **Commerce** → **Customers**.
-
-The customer list is a paginated data set of all customers in the system linked to a user or having completed orders. The customer list can be searched by name, email, address, and order reference number.
-
-Customers having user accounts will appear with a link to the respective Craft user in the listing table.
-
-Choose any customer’s email address to see more information.
-
-## Customer
-
-The customer view will show you important information about the customer. The details on this page are the same as those on the [customer info tab](#user-customer-info-tab).
+That person could have placed an order as a guest, or as a credentialed user that can log in and place orders with saved information.
 
 ## User Customer Info Tab
 
-A “Customer Info” tab will be available on each user account page in the control panel containing the following information:
+Go to **Users** in Craft’s global navigation to see a complete list of the site’s users. Clicking any user’s name will take you to their edit screen, where you’ll find a **Commerce** tab:
 
-- **Orders**: list of previous orders for the customer.
-- **Active Carts**: list of the customer’s active carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
-- **Inactive Carts**: list of the customer’s inactive carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
-- **Addresses**: list of the customer’s [addresses](addresses.md), which can be edited and deleted.
-- **Subscriptions**: list of the customer's subscriptions.
+![Screenshot of user edit screen with four tabs: Account, Content, Permissions, and Commerce](./images/users-commerce-tab.png)
 
-This tab is shown by default but you can control its visibility with the [Commerce::\$showCustomerInfoTab](configuration.md#showcustomerinfotab) setting.
+This tab includes the following:
+
+- **Orders** – a searchable list of the customer’s orders.
+- **Active Carts** – a list of the customer’s active carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
+- **Inactive Carts** – a list of the customer’s inactive carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
+- **Subscriptions** – a list of the customer’s subscriptions.
+
+This tab is shown by default but you can control its visibility with the [showCustomerInfoTab](config-settings.md#showeditusercommercetab) setting.
+
+::: tip
+If you’d like to be able to see and manage customer addresses from the control panel, [include the Addresses field](/4.x/addresses.html#managing-address-fields) in the User Fields layout.
+:::
 
 ## Customers and Users
 
-A customer with saved login information also has a Craft user account—but not *all* customers have user accounts.
+A customer with saved login information also has a Craft user account—but not *all* customers have user accounts. All users are listed in Craft’s global **Users** area, where the **Account Type** submenu will allow you to view the _Credentialed_ ones that are registered and the _Inactive_ ones that likely checked out as guests.
 
-Unlike a Craft user, a customer may be a guest without saved login information and thus not have a user account.
-
-Every Craft user, however, has a customer record by default. This is true even if the user has never created an order.
-
-::: tip
-The 1:1 user-to-customer relationship is new to Commerce 3. A migration from Commerce 2 will create a new customer record for any existing Craft user that doesn’t already have one.
-:::
-
-Commerce consolidates customers by email address on order completion.
+You can allow any guest user to transition from an inactive to a credentialed account at any time.
 
 ### Customer Flow
 
 #### Guest Checkout
 
-If someone visits the store and checks out as a guest, a new customer record is saved and related to the order.
-
-If there’s already a customer record with the same email address, the order will be associated with the original customer record and the new orphaned one will be marked for garbage collection.
-
-If the guest’s email address matches a Craft user account, the order will be associated with that user instead—via that user’s customer record—and appear in that user’s order history.
+If someone visits the store and checks out as a guest, a new inactive user is created and related to the order.
 
 #### User Checkout
 
@@ -80,15 +55,18 @@ If a customer chooses to register an account on order completion, a Craft user a
 
 If any of the above fail, the user account will not be created; errors will be logged but not displayed or returned.
 
-The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Register me for a user account” checkbox at the payment stage—but only if a user account doesn’t already exist for the email address on the cart:
+The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Create an account” checkbox at the payment stage—but only if a user account doesn’t already exist for the email address on the cart:
 
 ```twig
 {# Get a user account using the same email address as the cart #}
 {% set user = craft.users.email(cart.email).one() %}
-{% if not user %}
+{% if not user or not user.getIsCredentialed() %}
   <label for="registerUserOnOrderComplete">
-    <input type="checkbox" name="registerUserOnOrderComplete" value="1" />
-    {{ "Register me for a user account"|t }}
+    {{ hiddenInput('registerUserOnOrderComplete', false) }}
+    {{ input('checkbox', 'registerUserOnOrderComplete', 1, {
+      id: 'registerUserOnOrderComplete'
+    }) }}
+    {{ 'Create an account'|t }}
   </label>
 {% endif %}
 ```

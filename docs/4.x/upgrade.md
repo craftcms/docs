@@ -22,18 +22,22 @@ If you’ve got custom plugins or modules, running Craft’s [Rector](extend/upd
 
 ## Performing the Upgrade
 
-The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up to date at all at once, then proceed like it’s a normal software update.
+The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up to date all at once, then proceed like it’s a normal software update.
 
 1. Pull a fresh database backup down from your production environment and import it locally.
 2. If your database has `entrydrafts` and `entryversions` tables, check them for any meaningful data. Craft 3.2 stopped using these tables when drafts and revisions became elements, and the tables will be removed as part of the Craft 4 install process.
 3. Make sure you don’t have any pending or active jobs in your queue.
 4. Run `php craft project-config/rebuild` and make sure all background tasks have completed.
 5. Create a new database backup just in case things go sideways.
-6. Edit your project’s `composer.json` to require `"craftcms/cms": "^4.0.0-beta.1"` and Craft-4-compatible plugins all at once. (You may also need to update your platform requirement to `php: "8.0.2"`.)
+6. Edit your project’s `composer.json` to require `"craftcms/cms": "^4.0.0"` and Craft-4-compatible plugins all at once.\
+(You may also need to update your platform requirement to `php: "8.0.2"`.)
+    ::: tip
+    You’ll need to manually edit each plugin version in `composer.json`, and you may need to change your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability)—and include `"prefer-stable": true`—if you’re including beta versions of plugins.
+    :::
 7. Run `composer update`.
 8. Run `php craft migrate/all`.
 
-Now that you’ve upgraded your install to use Craft 4, please take some time to review the changes on this page and update your project.
+Now that you’ve upgraded your install to use Craft 4, please take some time to review the changes on this page and update your project. You may also need to follow any plugin-specific upgrade guides, like [Upgrading to Commerce 4](/commerce/4.x/upgrading.md).
 
 Once you’ve verified everything’s looking great, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory and roll those changes out normally into each additional environment.
 
@@ -57,7 +61,7 @@ Some config settings have been removed in Craft 4:
 | `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](https://craftcms.com/docs/4.x/project-config.html#manual-yaml-file-generation).
 
 ::: tip
-You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your custom config settings will be accessible via `Craft::$app->config->{mycustomsetting}`.
+You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](config/README.md#custom-config-settings) will be accessible via `Craft::$app->config->custom->{mycustomsetting}`.
 :::
 
 ### Volumes
@@ -140,17 +144,7 @@ Some PHP constants have been deprecated in Craft 4, and will no longer work in C
 
 ## Template Tags
 
-Some Twig tags have been deprecated in Craft 4, and will be completely removed in Craft 5:
-
-| Old Tag                 | What to do instead
-| ------------------------| ---------------------------------------------
-| `{% includeCss %}`      | `{% css %}`
-| `{% includeCssFile %}`  | `{% css %}`
-| `{% includeHiResCss %}` | Add your own media selector to `{% css %}`.
-| `{% includeJs %}`       | `{% js %}`
-| `{% includeJsFile %}`   | `{% js %}`
-
-[Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG) has removed some template tags, too:
+[Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG) has removed some template tags:
 
 | Old Tag           | What to do instead
 | ----------------- | ------------------------
@@ -171,9 +165,13 @@ Twig 3 also removed support for the `if` param in `{% for %}` tags, but you can 
 {% endfor %}
 ```
 
+The `{% cache %}` tag now stores any external references from `{% css %}` and `{% js %}` tags now, in addition to any inline content.
+
 ## Template Functions
 
 Some template functions have been removed completely:
+
+<!-- textlint-disable -->
 
 | Old Template Function | What to do instead
 | --------------------- | -------------------
@@ -202,6 +200,8 @@ Some template functions have been removed completely:
 | `nice()`              | `|dateTime('short')`
 | `uiTimestamp()`       | `|timestamp('short')`
 
+<!-- textlint-enable -->
+
 ## Template Variables
 
 | Old Template Variable     | What to do instead
@@ -211,7 +211,7 @@ Some template functions have been removed completely:
 | `craft.deprecator`        | `craft.app.deprecator`
 | `craft.elementIndexes`    | `craft.app.elementIndexes`
 | `craft.emailMessages`     | `craft.app.systemMessages`
-| `craft.feeds`             | `craft.app.feeds`
+| `craft.feeds`             | n/a (see below)
 | `craft.fields`            | `craft.app.fields`
 | `craft.globals`           | `craft.app.globals`
 | `craft.i18n`              | `craft.app.i18n`
@@ -223,6 +223,17 @@ Some template functions have been removed completely:
 | `craft.systemSettings`    | `craft.app.systemSettings`
 | `craft.userGroups`        | `craft.app.userGroups`
 | `craft.userPermissions`   | `craft.app.userPermissions`
+
+::: tip Reading Feeds?
+You can use [dodecastudio/craft-feedreader](https://github.com/dodecastudio/craft-feedreader) as a drop-in replacement for Craft’s removed feed service:
+```twig
+{# Craft 3 #}
+{% set feed = craft.app.feeds.getFeed('https://craftcms.com/blog.rss') %}
+
+{# Craft 4 #}
+{% set feed = craft.feedreader.getFeed('https://craftcms.com/blog.rss') %}
+```
+:::
 
 ## Template Operators
 
@@ -241,6 +252,49 @@ The change in behavior has the potential to break templates relying on Craft 3�
 ::: warning
 Element queries can no longer be traversed or accessed like an array. Use a query execution method such as `all()`, `collect()`, or `one()` to fetch the results before working with them.
 :::
+
+Templates that check the `|length` of an element query, for example, behave differently in Craft 4:
+
+```twig
+{# Get an element query #}
+{% set entryQuery = craft.entries() %}
+
+{% if entryQuery|length %}
+  {# Craft 3: land here when the element query implicitly returns 1+ elements #}
+  {# Craft 4: *always* land here; element query treated as multi-property array #}
+{% else %}
+  {# Craft 3: land here when the element query returned 0 elements #}
+  {# Craft 4: *never* land here; arrayified element query always has >1 properties #}
+{% endif %}
+```
+
+You need to explicitly get whatever results you need from that element query.
+
+Use [.count()](element-queries.md#count) if you need to check for results without using them for anything else:
+
+```twig
+{# Get an element query #}
+{% set entryQuery = craft.entries() %}
+
+{# Execute the query to get the number of results #}
+{% if entryQuery.count() %}
+  {# ... #}
+{% endif %}
+```
+
+If you’re using those entries somewhere else in your template, fetch them with [.all()](element-queries.md#all) or [.collect()](craft4:craft\db\Query::collect()) before your condition:
+
+```twig
+{# Use .all() to get the results of an element query #}
+{% set entries = craft.entries().all() %}
+
+{# Check the length of the results #}
+{% if entries|length %}
+  {# ... #}
+{% endif %}
+
+{# ... do stuff with the entries ... #}
+```
 
 ### Query Params
 
@@ -273,6 +327,31 @@ Some element query methods have been removed in Craft 4.
 | `first()`       | `one()`
 | `last()`        | `inReverse().one()`
 | `total()`       | `count()`
+
+### User Queries
+
+User queries now return _all_ users by default in Craft 4, instead of only active users. Any user queries relying on this default behavior may need to be updated:
+
+::: code
+```twig
+{# Craft 3 returned all *active* users by default #}
+{% set activeUsers = craft.users().all() %}
+
+{# Craft 4 returns *all* users by default; specify status for the same behavior #}
+{% set activeUsers = craft.users()
+  .status('active')
+  .all() %}
+```
+```php
+// Craft 3 returned all *active* users by default
+$activeUsers = Craft::$app->getUsers()->all();
+
+// Craft 4 returns *all* users by default; specify status for the same behavior
+$activeUsers = Craft::$app->getUsers()
+  ->status('active')
+  ->all();
+```
+:::
 
 ## Collections
 
@@ -371,9 +450,11 @@ If you’re already using your own custom field for this, you can [use Craft’s
     ```
 3. If everything looks good, you can optionally empty the content out of your original field:
     ```shell
-    php craft resave/entries --set myAltTextField --to :empty:
+    php craft resave/assets --set myAltTextField --to :empty:
     ```
 4. Remove the old field from each relevant field layout.
+
+For deployment, you’ll probably want to take a phased approach: upgrade your site, migrate off your existing field to the native one, then remove the existing field after you’ve migrated the data in all your environments.
 
 Don’t forget to update your templates and GraphQL queries!
 
@@ -388,6 +469,23 @@ A few user permissions have been removed in Craft 4:
 - `assignUserGroups` previously let authorized users assign other users to their own groups. Authorization must now be explicitly granted for each group.
 - `customizeSources` had made it possible for authorized users to customize element sources. Only admins can customize element sources now, and only from an environment that allows admin changes.
 - `publishPeerEntryDrafts:<uid>` permissions wouldn’t have stopped users from viewing, copying, and saving draft content themselves.
+
+## Queue Drivers
+
+If you’re overriding Craft’s `queue` component in `config/app.php`, you may want to override Craft’s built-in queue driver’s [`proxyQueue`](craft4:craft\queue\Queue::$proxyQueue) property instead. That way you’ll regain visibility into the queue’s state from the control panel.
+
+```php
+<?php
+return [
+    'components' => [
+        'queue' => [
+            'proxyQueue' => [
+                // custom queue config goes here
+            ],
+        ],
+    ],
+];
+```
 
 ## Plugins
 

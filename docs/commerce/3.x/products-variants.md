@@ -11,7 +11,7 @@ Products are the items available in your store.
 
 A product itself is never sold; what goes into a cart for purchase is actually one of the product’s [variants](#variants). In the Craft control panel, you’ll see Products listed by Product Type.
 
-![Diagram depicting Product with common fields and its relationship to one or more Variants](./assets/product-variant.png)
+![Diagram depicting Product with common fields and its relationship to one or more Variants](./images/product-variant.png)
 
 In the same way that all Craft CMS entries have common fields, Craft Commerce products have some of their own:
 
@@ -27,7 +27,7 @@ Product Types are a way to distinguish products in your system. Similar to Craft
 
 You can manage Product Types in the control panel from **Commerce** → **System Settings** → **Product Types**.
 
-<img src="./assets/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
+<img src="./images/product-type-entry-screen.png" width="797" alt="Edit Product Type page">
 
 ### Product Type Options
 
@@ -215,6 +215,10 @@ Product queries support the following parameters:
 
 <!-- BEGIN PRODUCTQUERY_PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                                 | Description
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#product-after)                               | Narrows the query results to only products that were posted on or after a certain date.
@@ -228,12 +232,12 @@ Product queries support the following parameters:
 | [clearCachedResult](#product-clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/3.x/element-queries.html#cache).
 | [dateCreated](#product-datecreated)                   | Narrows the query results based on the products’ creation dates.
 | [dateUpdated](#product-dateupdated)                   | Narrows the query results based on the products’ last-updated dates.
-| [defaultHeight](#product-defaultheight)               | Narrows the query results based on the products’ default variant height domention IDs.
-| [defaultLength](#product-defaultlength)               | Narrows the query results based on the products’ default variant length domention IDs.
+| [defaultHeight](#product-defaultheight)               | Narrows the query results based on the products’ default variant height dimension IDs.
+| [defaultLength](#product-defaultlength)               | Narrows the query results based on the products’ default variant length dimension IDs.
 | [defaultPrice](#product-defaultprice)                 | Narrows the query results based on the products’ default variant price.
 | [defaultSku](#product-defaultsku)                     | Narrows the query results based on the default productvariants defaultSku
-| [defaultWeight](#product-defaultweight)               | Narrows the query results based on the products’ default variant weight domention IDs.
-| [defaultWidth](#product-defaultwidth)                 | Narrows the query results based on the products’ default variant width domention IDs.
+| [defaultWeight](#product-defaultweight)               | Narrows the query results based on the products’ default variant weight dimension IDs.
+| [defaultWidth](#product-defaultwidth)                 | Narrows the query results based on the products’ default variant width dimension IDs.
 | [expiryDate](#product-expirydate)                     | Narrows the query results based on the products’ expiry dates.
 | [fixedOrder](#product-fixedorder)                     | Causes the query results to be returned in the order specified by [id](#product-id).
 | [hasVariant](#product-hasvariant)                     | Narrows the query results to only products that have certain variants.
@@ -260,6 +264,10 @@ Product queries support the following parameters:
 | [unique](#product-unique)                             | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#product-uri)                                   | Narrows the query results based on the products’ URIs.
 | [with](#product-with)                                 | Causes the query to return matching products eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 <h4 id="product-after"><a href="#product-after" class="header-anchor">#</a> <code>after</code></h4>
 
@@ -544,29 +552,29 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-defaultheight"><a href="#product-defaultheight" class="header-anchor">#</a> <code>defaultHeight</code></h4>
 
-Narrows the query results based on the products’ default variant height domention IDs.
+Narrows the query results based on the products’ default variant height dimension IDs.
 
 Possible values include:
 
 | Value | Fetches products…
 | - | -
-| `1` | of a type with a domention of 1.
-| `'not 1'` | not a domention of 1.
-| `[1, 2]` | of a a domention 1 or 2.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000,] | of a dimention between 100 and 2000
+| `1` | of a type with a dimension of 1.
+| `'not 1'` | not a dimension of 1.
+| `[1, 2]` | of a a dimension 1 or 2.
+| `['and', '>= ' ~ 100, '<= ' ~ 2000]` | of a dimension between 100 and 2000
 
 
 
 ::: code
 ```twig
-{# Fetch products of the product default dimention of 1 #}
+{# Fetch products of the product default dimension of 1 #}
 {% set products = craft.products()
   .defaultHeight(1)
   .all() %}
 ```
 
 ```php
-// Fetch products of the  product default dimention of 1
+// Fetch products of the product default dimension of 1
 $products = \craft\commerce\elements\Product::find()
     ->defaultHeight(1)
     ->all();
@@ -576,29 +584,29 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-defaultlength"><a href="#product-defaultlength" class="header-anchor">#</a> <code>defaultLength</code></h4>
 
-Narrows the query results based on the products’ default variant length domention IDs.
+Narrows the query results based on the products’ default variant length dimension IDs.
 
 Possible values include:
 
 | Value | Fetches products…
 | - | -
-| `1` | of a type with a domention of 1.
-| `'not 1'` | not a domention of 1.
-| `[1, 2]` | of a a domention 1 or 2.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000] | of a dimention between 100 and 2000
+| `1` | of a type with a dimension of 1.
+| `'not 1'` | not a dimension of 1.
+| `[1, 2]` | of a a dimension 1 or 2.
+| `['and', '>= ' ~ 100, '<= ' ~ 2000]` | of a dimension between 100 and 2000
 
 
 
 ::: code
 ```twig
-{# Fetch products of the product default dimention of 1 #}
+{# Fetch products of the product default dimension of 1 #}
 {% set products = craft.products()
   .defaulLength(1)
   .all() %}
 ```
 
 ```php
-// Fetch products of the  product default dimention of 1
+// Fetch products of the  product default dimension of 1
 $products = \craft\commerce\elements\Product::find()
     ->defaulLength(1)
     ->all();
@@ -615,7 +623,7 @@ Possible values include:
 | Value | Fetches products…
 | - | -
 | `10` | of a price of 10.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000,] | of a default variant price between 100 and 2000
+| `['and', '>= ' ~ 100, '<= ' ~ 2000]` | of a default variant price between 100 and 2000
 
 
 
@@ -670,29 +678,29 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-defaultweight"><a href="#product-defaultweight" class="header-anchor">#</a> <code>defaultWeight</code></h4>
 
-Narrows the query results based on the products’ default variant weight domention IDs.
+Narrows the query results based on the products’ default variant weight dimension IDs.
 
 Possible values include:
 
 | Value | Fetches products…
 | - | -
-| `1` | of a type with a domention of 1.
-| `'not 1'` | not a domention of 1.
-| `[1, 2]` | of a a domention 1 or 2.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000] | of a dimention between 100 and 2000
+| `1` | of a type with a dimension of 1.
+| `'not 1'` | not a dimension of 1.
+| `[1, 2]` | of a a dimension 1 or 2.
+| `['and', '>= ' ~ 100, '<= ' ~ 2000]` | of a dimension between 100 and 2000
 
 
 
 ::: code
 ```twig
-{# Fetch products of the product default dimention of 1 #}
+{# Fetch products of the product default dimension of 1 #}
 {% set products = craft.products()
   .defaultWeight(1)
   .all() %}
 ```
 
 ```php
-// Fetch products of the  product default dimention of 1
+// Fetch products of the  product default dimension of 1
 $products = \craft\commerce\elements\Product::find()
     ->defaultWeight(1)
     ->all();
@@ -702,29 +710,29 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-defaultwidth"><a href="#product-defaultwidth" class="header-anchor">#</a> <code>defaultWidth</code></h4>
 
-Narrows the query results based on the products’ default variant width domention IDs.
+Narrows the query results based on the products’ default variant width dimension IDs.
 
 Possible values include:
 
 | Value | Fetches products…
 | - | -
-| `1` | of a type with a domention of 1.
-| `'not 1'` | not a domention of 1.
-| `[1, 2]` | of a a domention 1 or 2.
-| `['and', '>= ' ~ 100, '<= ' ~ 2000] | of a dimention between 100 and 2000
+| `1` | of a type with a dimension of 1.
+| `'not 1'` | not a dimension of 1.
+| `[1, 2]` | of a a dimension 1 or 2.
+| `['and', '>= ' ~ 100, '<= ' ~ 2000]` | of a dimension between 100 and 2000
 
 
 
 ::: code
 ```twig
-{# Fetch products of the product default dimention of 1 #}
+{# Fetch products of the product default dimension of 1 #}
 {% set products = craft.products()
   .defaultWidth(1)
   .all() %}
 ```
 
 ```php
-// Fetch products of the  product default dimention of 1
+// Fetch products of the  product default dimension of 1
 $products = \craft\commerce\elements\Product::find()
     ->defaultWidth(1)
     ->all();
@@ -1573,11 +1581,11 @@ If a product type has multiple variants enabled, the author can choose which one
 
 For a single-variant product, variant details are shown in a unified view with custom product fields:
 
-![Single-Variant Product](./assets/single-variant.png)
+![Single-Variant Product](./images/single-variant.png)
 
 When a product supports multiple variants, the default variant will be identified in a **Variants** field where more variants can be added:
 
-![Multi-Variant Product](./assets/multi-variant.png)
+![Multi-Variant Product](./images/multi-variant.png)
 
 ### Variant Stock
 
@@ -1688,6 +1696,10 @@ Variant queries support the following parameters:
 
 <!-- BEGIN VARIANTQUERY_PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                             | Description
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#variant-afterpopulate)           | Performs any post-population processing on elements.
@@ -1734,6 +1746,10 @@ Variant queries support the following parameters:
 | [weight](#variant-weight)                         | Narrows the query results based on the variants’ weight dimension.
 | [width](#variant-width)                           | Narrows the query results based on the variants’ width dimension.
 | [with](#variant-with)                             | Causes the query to return matching variants eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 <h4 id="variant-afterpopulate"><a href="#variant-afterpopulate" class="header-anchor">#</a> <code>afterPopulate</code></h4>
 

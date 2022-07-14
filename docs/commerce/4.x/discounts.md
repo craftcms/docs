@@ -10,17 +10,65 @@ You’ll need _Manage discounts_ permission to work with discounts in the contro
 
 Discounts are processed and applied in the order they are sorted in the control panel.
 
-Inside each discount is a checkbox labelled **Stop processing further discounts after this discount matches**. If this option is ticked and the discount matches the order, no further discounts will be applied to the cart.
+Each discount’s **Actions** tab includes a lightswitch labeled **Don’t apply any subsequent discounts to an order if this discount is applied**. If this option is enabled and the discount matches the order, no further discounts will be applied to the cart.
 
 ## Coupon Discounts
 
-Discounts can have a coupon requirement as an optional condition, which you can manage on the **Coupon** tab.
+Discounts can have a coupon requirement as an optional condition, which you can manage on the **Coupons** tab.
 
 If no coupon is entered for the cart and the discount has a coupon code, the discount will not apply.
 
 If a coupon is added to the discount, all other conditions still need to be met in addition to the coupon being applied to the cart.
 
-To update the coupon code on the cart, see the [coupon codes](coupon-codes.md) template guide.
+For more on coupon code setup and templating, see the [coupon codes](coupon-codes.md) page.
+
+## Discount Matching Items
+
+Each discount’s **Matching Items** tab provides options for limiting what store items qualify for the discount. By default, all purchasables and categories may qualify for the discount.
+
+### Purchasables
+
+The **All purchsables** lightswitch is on by default, but you can switch it off to select zero or more **Product Variant** relationships. Be careful with this, because switching off **All purchasables** and not selecting any variants will result in no variants qualifying for the discount!
+
+::: tip
+Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
+:::
+
+### Categories
+
+The **Categories** lightswitch is also on by default, bug you can switch it off to select zero or more product categories that should qualify for the discount. Just like the purchasables switch above, you should be sure to designate categories if the **All categories** lightswitch is disabled—otherwise it won’t be possible for any items to match the discount.
+
+### Advanced
+
+You can click the “Advanced” toggle to display a **Categories Relationship Type** field that determines how related purchasables and categories should behave matching items. Options:
+
+- **Either (Default)** – the relationship field is on the purchasable or the category
+- **Source** – the category relationship field is on the purchasable
+- **Target** – the purchasable relationship field is on the category
+
+::: tip
+This behavior is consistent with all Craft’s relationships; see the [Terminology](/4.x/relations.html#terminology) section on the Relations page.
+:::
+
+## Discount Conditions Rules
+
+The **Conditions Rules** tab has flexible, rule-based condition fields for controlling which orders, customers, and/or addresses should qualify for the discount.
+
+### Match Order
+
+By default, any order can qualify for the discount. You can use this setting to add any number of rules to further limit which orders may qualify.
+
+### Match Customer
+
+By default, any customer can qualify for the discount. You can use this setting to add any number of rules to further limit which customers may qualify.
+
+### Match Shipping Address
+
+By default, any shipping address can qualify for the discount. You can use this setting to add any number of rules to further limit shipping addresses that may qualify.
+
+### Match Billing Address
+
+By default, any billing address can qualify for the discount. You can use this setting to add any number of rules to further limit billing addresses that may qualify.
 
 ## Discount Conditions
 
@@ -32,15 +80,14 @@ Conditions are all optional and can be used in any combination.
 
 Restrict the discount to a specific time period defined by start and end date fields.
 
-### Discount Condition Formula
+### Order Condition Formula
 
-The discount condition formula lets you use a simple Twig condition syntax to add a matching rule to the discount.
-If the field is left blank, then the condition will match the order being matched to the discount (the other conditions will still apply).
+The order condition formula lets you use a simple Twig condition syntax to add a matching rule to the discount.
+If the field is left blank, the condition will match the order being matched to the discount (the other conditions will still apply).
 
-The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/2.x/templates.html#expressions), which is an expression that returns `true` or `false`.
+The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/3.x/templates.html#expressions), which is an expression that returns `true` or `false`.
 
-If the expression is calculated as `true` then the discount matches the order. If not, the condition disqualifies the order from the discount. A blank condition is the same as
-a `true` expression.
+If the expression is calculated as `true`, the discount matches the order. If not, the condition disqualifies the order from the discount. An empty condition is the same as a `true` expression.
 
 The condition formula can use an `order` variable, which for safety is an array and not the order element—it’s the same representation of the order you’d see if you exported it from the order index page. This data-only format prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
 
@@ -89,37 +136,6 @@ This would be a way of giving this discount to anyone that’s chosen a specific
 ::: tip
 For safety, only a serialized representation of order attributes is available; you can’t call custom field methods from a condition formula.
 :::
-
-### Users
-
-Limit the discount to selected user groups the customer must belong to when checking out. There are four options, where all but the first require that you specify one or more applicable groups:
-
-- **All users**: discount applies to all users regardless of group membership.
-- **Users in all of these groups:**: discount applies to customers belonging to each of the specified groups.
-- **Users in any of these groups:**: discount applies to customers belonging to any one of the specified groups.
-- **Users in none of these groups:**: discount applies to customers not belonging to any of the specified groups.
-
-### Product Variant
-
-Require one or more specific product variants for the discount to apply.
-
-::: tip
-Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
-:::
-
-### Categories
-
-Limit the discount to one or more categories the purchasables/products must relate to.
-
-### Categories Relationship Type
-
-This field specifies the type of relationship must exist between the purchasable and category in order for the [Categories](#categories) condition to be met. There are three options:
-
-- **Source**: the relational field exists on the product/purchasable.
-- **Target**: the category has a product/variant relational field.
-- **Both**: the relationship can be either **Source** or **Target**
-
-For more information on how this works please see [Relations Terminology](/4.x/relations.md#terminology).
 
 ### Purchase Total
 
@@ -210,7 +226,7 @@ Matching line items are those items used to match this discount’s conditions, 
 
 ### Flat Amount Off Order
 
-A discounted currency amount to be taken off the whole order e.g. \$100.
+A discounted currency amount to be taken off the whole order e.g. $100.
 
 This amount will be spread across the whole order from the most expensive item to the least expensive item.
 
@@ -248,7 +264,7 @@ Returns an array of all enabled discounts set up in the system active for the cu
 
 ### craft.commerce.discounts.getDiscountByCode(code)
 
-Returns a [Discount](commerce3:craft\commerce\models\Discount) model that matches the supplied code.
+Returns a [Discount](commerce4:craft\commerce\models\Discount) model that matches the supplied code.
 
 ```twig
 {% set discount = craft.commerce.discounts.getDiscountByCode('HALFOFF') %}

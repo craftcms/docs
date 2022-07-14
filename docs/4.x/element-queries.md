@@ -186,12 +186,12 @@ $entries = Entry::find()
 This is a layer on top of data caching that’s different from the [template {% cache %} tag](./dev/tags.md#cache).
 
 ::: tip
-Craft registers an [ElementQueryTagDependency](craft3:craft\cache\ElementQueryTagDependency) for you by default, so cache dependencies and invalidation are handled automatically.
+Craft registers an [ElementQueryTagDependency](craft4:craft\cache\ElementQueryTagDependency) for you by default, so cache dependencies and invalidation are handled automatically.
 :::
 
 ## Advanced Element Queries
 
-Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <craft3:craft\db\Query>.
+Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <craft4:craft\db\Query>.
 
 ### Selections
 
@@ -218,8 +218,9 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 ### Query Execution
 
 - [all()](yii2:yii\db\Query::all())
+- [collect()](craft4:craft\db\Query::collect())
 - [one()](yii2:yii\db\Query::one())
-- [nth()](craft3:craft\db\Query::nth())
+- [nth()](craft4:craft\db\Query::nth())
 - [exists()](yii2:yii\db\Query::exists())
 - [count()](yii2:yii\db\Query::count())
 - [column()](yii2:yii\db\Query::column())
@@ -228,13 +229,14 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [average()](yii2:yii\db\Query::average())
 - [min()](yii2:yii\db\Query::min())
 - [max()](yii2:yii\db\Query::max())
+- [pairs()](craft4:craft\db\Query::pairs())
 
 :::tip
 If you need to reference a custom field column in any of the above methods, you will need to use its complete column name (e.g. `field_altText_xssyxqvs`).
 :::
 
 ::: tip
-When customizing an element query, you can call [getRawSql()](craft3:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
+When customizing an element query, you can call [getRawSql()](craft4:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
 
 ```twig
 {{ dump(query.getRawSql()) }}

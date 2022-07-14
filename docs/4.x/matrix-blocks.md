@@ -19,7 +19,7 @@ $myMatrixBlockQuery = \craft\elements\MatrixBlock::find();
 ```
 :::
 
-Once you’ve created a Matrix block query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [MatrixBlock](craft3:craft\elements\MatrixBlock) objects will be returned.
+Once you’ve created a Matrix block query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [MatrixBlock](craft4:craft\elements\MatrixBlock) objects will be returned.
 
 ::: tip
 See [Element Queries](element-queries.md) to learn about how element queries work.
@@ -60,6 +60,10 @@ Matrix block queries support the following parameters:
 
 <!-- BEGIN PARAMS -->
 
+
+
+<!-- textlint-disable -->
+
 | Param                                       | Description
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
@@ -83,6 +87,7 @@ Matrix block queries support the following parameters:
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 | [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [primaryOwner](#primaryowner)               | Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
 | [primaryOwnerId](#primaryownerid)           | Narrows the query results based on the primary owner element of the Matrix blocks, per the owners’ IDs.
 | [relatedTo](#relatedto)                     | Narrows the query results to only Matrix blocks that are related to certain other elements.
@@ -97,6 +102,10 @@ Matrix block queries support the following parameters:
 | [uid](#uid)                                 | Narrows the query results based on the Matrix blocks’ UIDs.
 | [unique](#unique)                           | Determines whether only elements with unique IDs should be returned by the query.
 | [with](#with)                               | Causes the query to return matching Matrix blocks eager-loaded with related elements.
+
+
+<!-- textlint-enable -->
+
 
 #### `afterPopulate`
 
@@ -597,8 +606,8 @@ If [unique](#unique) is set, this determines which site should be selected when 
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -623,6 +632,15 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `primaryOwner`

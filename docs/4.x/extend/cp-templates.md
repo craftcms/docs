@@ -1,6 +1,6 @@
 # Control Panel Templates
 
-The control panel is built using Twig templates, so extending it with new pages should feel familiar if you’ve worked with Twig on the front-end.
+The control panel is built using Twig templates, so extending it with new pages should feel familiar if you’ve worked with Twig on the front end.
 
 Plugins can define templates within the `templates/` folder within their base source folder. Templates within there can be referenced using the plugin’s handle as the template path prefix.
 
@@ -10,7 +10,7 @@ Modules can have templates too, but they will need to manually define a [templat
 
 ## Page Templates
 
-To add a new full page to the control panel, create a template that extends the [_layouts/cp.html](https://github.com/craftcms/cms/blob/develop/src/templates/_layouts/cp.html) template.
+To add a new full page to the control panel, create a template that extends the [_layouts/cp.twig](https://github.com/craftcms/cms/blob/4.0/src/templates/_layouts/cp.twig) template.
 
 At a minimum, your template should set a `title` variable and define a `content` block:
 
@@ -25,7 +25,7 @@ At a minimum, your template should set a `title` variable and define a `content`
 
 ### Supported Variables
 
-The following variables are supported by the `_layouts/cp.html` template:
+The following variables are supported by the `_layouts/cp.twig` template:
 
 Variable | Description
 -------- | -----------
@@ -142,14 +142,14 @@ Variable | Description
 
 #### Form Inputs
 
-Craft’s [_includes/forms.html](https://github.com/craftcms/cms/blob/develop/src/templates/_includes/forms.html) template defines several macros that can be used to display your form elements.
+Craft’s [_includes/forms.twig](https://github.com/craftcms/cms/blob/4.0/src/templates/_includes/forms.twig) template defines several macros that can be used to display your form elements.
 
 Most input types have two macros: one for outputting _just_ the input; and another for outputting the input as a “field”, complete with a label, author instructions, etc.
 
 For example, if you just want to output a date input, but nothing else, you could use the `date` macro:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.date({
   id: 'start-date',
@@ -161,7 +161,7 @@ For example, if you just want to output a date input, but nothing else, you coul
 However if you want to wrap the input with a label, author instructions, a “Required” indicator, and any validation errors, you could use the `dateField` macro instead:
 
 ```twig
-{% import '_includes/forms' as forms %}
+{% import '_includes/forms.twig' as forms %}
 
 {{ forms.dateField({
   label: 'Start Date'|t('plugin-handle'),

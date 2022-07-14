@@ -117,12 +117,12 @@ Param | Description
 `fields[]` | Optional array of custom fields to be submitted to the cart.
 `forceSave` | Optionally set to `true` to force saving the cart.
 `gatewayId` | The payment gateway ID to be used when the cart is completed.
-`lineItems[]` | Array of one or more of the cart’s line items to update. Each must have an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
+`lineItems[]` | Array of one or more of the cart’s line items to update. Each must have an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
 `number` | Optional order number for specific, existing cart.
 `paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the cart.
 `paymentSourceId` | The ID for a payment source that should be used when the cart is completed.
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
-`purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key/value pair, and may include `options`, `note`, and `qty` key/value pairs.
+`purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs.
 `redirect` | The hashed URL the browser should redirect to. (Automatically set to [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) if a GET request that doesn’t expect JSON.)
 `registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
 `shippingAddress[]` | Array of shipping address lines. (See [Addresses](../addresses.md#address-lines)).
@@ -206,7 +206,7 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`address.{$attr}` | Address object with any of the key/value pairs in the system’s [address lines](../addresses.md#address-lines).
+`address.{$attr}` | Address object with any of the key-value pairs in the system’s [address lines](../addresses.md#address-lines).
 `address.id` | Required address ID to be edited, which must belong to the current customer.
 `fields[]` | Custom fields to be saved on the cart if it’s using the provided address.
 `makePrimaryBillingAddress` | Whether to save as the primary billing address.

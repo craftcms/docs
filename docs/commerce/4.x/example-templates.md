@@ -17,3 +17,7 @@ If your system supports it, you could also symlink these folders into your proje
 ```bash
 ln -s vendor/craftcms/commerce/example-templates/dist/shop ./templates/shop
 ```
+
+::: tip
+You can also visit [craftcms.com/demo](https://craftcms.com/demo) to spin up the Spoke & Chain Craft Commerce demo. The source code is available at [github.com/craftcms/spoke-and-chain](https://github.com/craftcms/spoke-and-chain).
+:::

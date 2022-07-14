@@ -39,7 +39,7 @@ The manual payment gateway is a special gateway that does not communicate with a
 
 When you need to accept cheque or bank deposit payments, you should use the manual payment gateway.
 
-The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as captured in the Control Panel when payment is received.
+The gateway simply authorizes all payments, allowing the order to proceed. You may then manually mark the payment as captured in the control panel when payment is received.
 
 ## Other gateway specifics
 

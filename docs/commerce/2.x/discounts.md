@@ -6,11 +6,11 @@ rules that apply to product *before* they are added to the cart.
 
 Discounts are only available in the Pro edition of Craft Commerce.
 
-To create a new discount, go to Commerce → Promotions → Discounts in the Control Panel.
+To create a new discount, go to **Commerce** → **Promotions** → **Discounts** in the control panel.
 
 ## Discount Sort Order
 
-Discounts are processed and applied in the order they are sorted in the Control Panel.
+Discounts are processed and applied in the order they are sorted in the control panel.
 
 Inside a discount there is a checkbox labelled “Stop processing further discounts after this discount matches”.
 If this checkbox is turned on, and the discount matches the order, no further discounts will be applied to the cart.

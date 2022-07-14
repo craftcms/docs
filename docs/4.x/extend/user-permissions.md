@@ -1,6 +1,6 @@
 # User Permissions
 
-Modules and plugins can register new [user permissions](../user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft3:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
+Modules and plugins can register new [user permissions](../user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft4:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
 
 ```php
 use craft\events\RegisterUserPermissionsEvent;
@@ -15,9 +15,12 @@ public function init()
         UserPermissions::class,
         UserPermissions::EVENT_REGISTER_PERMISSIONS,
         function(RegisterUserPermissionsEvent $event) {
-            $event->permissions['Permission Group Name'] = [
-                'permissionName' => [
-                    'label' => 'Permission Label',
+            $event->permissions[] = [
+                'heading' => 'Permission Group Name',
+                'permissions' => [
+                    'permissionName' => [
+                        'label' => 'Permission Label',
+                    ],
                 ],
             ];
         }
@@ -44,7 +47,7 @@ Nesting is meant for UI only; if you wanted to reference `nestedPermissionName` 
 
 ## Requiring Permissions
 
-Controllers can require that the logged-in user has a permission by calling [requirePermission()](craft3:craft\web\Controller::requirePermission()).
+Controllers can require that the logged-in user has a permission by calling [requirePermission()](craft4:craft\web\Controller::requirePermission()).
 
 ```php
 public function actionStayUpLate()
@@ -64,7 +67,7 @@ Templates can also ensure that the user has a permission with the [requirePermis
 
 ## Checking Permissions
 
-You can check if the logged-in user has a permission by calling <craft3:craft\web\User::checkPermission()>:
+You can check if the logged-in user has a permission by calling <craft4:craft\web\User::checkPermission()>:
 
 ```php
 // See if they have the `stayUpLate` permission
@@ -73,7 +76,7 @@ if (Craft::$app->user->checkPermission('stayUpLate')) {
 }
 ```
 
-You can also see if any given user has a permission by calling <craft3:craft\elements\User::can()>:
+You can also see if any given user has a permission by calling <craft4:craft\elements\User::can()>:
 
 ```php
 /** @var \craft\elements\User $user */

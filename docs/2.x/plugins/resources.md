@@ -1,6 +1,6 @@
 # Front End Resources
 
-If your plugin has any CSS, Javascript, images, or other front-end resources, you can place them in a `resources/` subfolder within your plugin’s folder.
+If your plugin has any CSS, JavaScript, images, or other front-end resources, you can place them in a `resources/` subfolder within your plugin’s folder.
 
 Craft provides a helper function, `UrlHelper::getResourceUrl('path/to/file.ext')`, which returns the URL to a resource file. Templates have a similar function: `{{ resourceUrl('path/to/file.ext') }}`. The URL returned by these functions will work even if the `craft/` folder is placed above the web root.
 

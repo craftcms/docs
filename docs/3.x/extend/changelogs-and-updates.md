@@ -26,7 +26,7 @@ There’s a little wiggle room on that:
 
 - Other text can come before the version number, like the plugin’s name.
 - A 4th version number is allowed (e.g. `1.2.3.4`).
-- Pre-release versions are allowed (e.g. `1.0.0-alpha.1`).
+- Prerelease versions are allowed (e.g. `1.0.0-alpha.1`).
 - The version can start with `v` (e.g. `v1.2.3`).
 - The version can be hyperlinked (e.g. `[1.2.3]`).
 - Dates can use dots as separators, rather than hyphens (e.g. `2017.01.21`).
@@ -67,7 +67,7 @@ If you have any reference-style links in your release notes, you will need to de
 ### Added
 - New [superFoo] config setting
 
-[superFoo]: https://docs.foo.com/config#superFoo
+[superFoo]: https://docs.my-plugin.tld/config#superFoo
 ```
 
 ## Critical Updates

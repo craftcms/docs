@@ -68,6 +68,12 @@ The array can contain the following keys:
 - `useShapes` – Whether shapes should be used to represent statuses
 - `underlineLinks` – Whether links should be underlined
 
+```php
+'accessibilityDefaults' => [
+    'useShapes' => true,
+]
+```
+
 
 
 ### `allowAdminChanges`
@@ -100,6 +106,15 @@ It’s best to disable this in production environments with a deployment workflo
 Don’t disable this setting until **all** environments have been updated to Craft 3.1.0 or later.
 :::
 
+::: code
+```php Static Config
+'allowAdminChanges' => false,
+```
+```shell Environment Override
+CRAFT_ALLOW_ADMIN_CHANGES=false
+```
+:::
+
 
 
 ### `allowSimilarTags`
@@ -118,6 +133,15 @@ Defined by
 </div>
 
 Whether users should be allowed to create similarly-named tags.
+
+::: code
+```php Static Config
+'allowSimilarTags' => true,
+```
+```shell Environment Override
+CRAFT_ALLOW_SIMILAR_TAGS=1
+```
+:::
 
 
 
@@ -138,7 +162,16 @@ Defined by
 
 Whether Craft should allow system and plugin updates in the control panel, and plugin installation from the Plugin Store.
 
-This setting will automatically be disabled if <config3:allowAdminChanges> is disabled.
+This setting will automatically be disabled if <config4:allowAdminChanges> is disabled.
+
+::: code
+```php Static Config
+'allowUpdates' => false,
+```
+```shell Environment Override
+CRAFT_ALLOW_UPDATES=false
+```
+:::
 
 
 
@@ -159,6 +192,15 @@ Defined by
 
 Whether users should automatically be logged in after activating their account or resetting their password.
 
+::: code
+```php Static Config
+'autoLoginAfterAccountActivation' => true,
+```
+```shell Environment Override
+CRAFT_ALLOW_AUTO_LOGIN_AFTER_ACCOUNT_ACTIVATION=true
+```
+:::
+
 
 
 ### `autosaveDrafts`
@@ -177,11 +219,23 @@ Defined by
 Since
 :  3.5.6
 
+Deprecated
+:  in 4.0.0
+
 </div>
 
 Whether drafts should be saved automatically as they are edited.
 
-Note that drafts *will* be autosaved while Live Preview is open, regardless of this setting.
+Drafts *will* be autosaved while Live Preview is open, regardless of this setting.
+
+::: code
+```php Static Config
+'autosaveDrafts' => false,
+```
+```shell Environment Override
+CRAFT_AUTOSAVE_DRAFTS=false
+```
+:::
 
 
 
@@ -201,6 +255,15 @@ Defined by
 </div>
 
 Whether Craft should create a database backup before applying a new system update.
+
+::: code
+```php Static Config
+'backupOnUpdate' => false,
+```
+```shell Environment Override
+CRAFT_BACKUP_ON_UPDATE=false
+```
+:::
 
 
 
@@ -224,6 +287,15 @@ The default length of time Craft will store data, RSS feed, and template caches.
 If set to `0`, data and RSS feed caches will be stored indefinitely; template caches will be stored for one year.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: code
+```php Static Config
+'cacheDuration' => 0,
+```
+```shell Environment Override
+CRAFT_CACHE_DURATION=0
+```
+:::
 
 
 
@@ -251,7 +323,7 @@ Each tag can be specified as an array of the tag name and its attributes.
 
 For example, you can give the control panel a custom favicon (etc.) like this:
 
-```php
+```php Static Config
 'cpHeadTags' => [
     // Traditional favicon
     ['link', ['rel' => 'icon', 'href' => '/icons/favicon.ico']],
@@ -283,6 +355,15 @@ Defined by
 
 The default language the control panel should use for users who haven’t set a preferred language yet.
 
+::: code
+```php Static Config
+'defaultCpLanguage' => 'en-US',
+```
+```shell Environment Override
+CRAFT_DEFAULT_CP_LANGUAGE=en-US
+```
+:::
+
 
 
 ### `defaultCpLocale`
@@ -306,7 +387,16 @@ Since
 The default locale the control panel should use for date/number formatting, for users who haven’t set
 a preferred language or formatting locale.
 
-If this is `null`, the <config3:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
+If this is `null`, the <config4:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
+
+::: code
+```php Static Config
+'defaultCpLocale' => 'en-US',
+```
+```shell Environment Override
+CRAFT_DEFAULT_CP_LOCALE=en-US
+```
+:::
 
 
 
@@ -329,6 +419,15 @@ The default permission to be set for newly-generated directories.
 
 If set to `null`, the permission will be determined by the current environment.
 
+::: code
+```php Static Config
+'defaultDirMode' => 0744,
+```
+```shell Environment Override
+CRAFT_DEFAULT_DIR_MODE=0744
+```
+:::
+
 
 
 ### `defaultFileMode`
@@ -349,6 +448,15 @@ Defined by
 The default permission to be set for newly-generated files.
 
 If set to `null`, the permission will be determined by the current environment.
+
+::: code
+```php Static Config
+'defaultFileMode' => 0744,
+```
+```shell Environment Override
+CRAFT_DEFAULT_FILE_MODE=0744
+```
+:::
 
 
 
@@ -371,11 +479,17 @@ The default options that should be applied to each search term.
 
 Options include:
 
-- `attribute` – The attribute that the term should apply to (e.g. 'title'), if any. (`null` by default)
-- `exact` – Whether the term must be an exact match (only applies if `attribute` is set). (`false` by default)
-- `exclude` – Whether search results should *exclude* records with this term. (`false` by default)
-- `subLeft` – Whether to include keywords that contain the term, with additional characters before it. (`false` by default)
-- `subRight` – Whether to include keywords that contain the term, with additional characters after it. (`true` by default)
+- `subLeft` – Whether to include keywords that contain the term, with additional characters before it. (`false` by default)
+- `subRight` – Whether to include keywords that contain the term, with additional characters after it. (`true` by default)
+- `exclude` – Whether search results should *exclude* records with this term. (`false` by default)
+- `exact` – Whether the term must be an exact match (only applies if the search term specifies an attribute). (`false` by default)
+
+```php Static Config
+'defaultSearchTermOptions' => [
+    'subLeft' => true,
+    'exclude' => 'secret',
+],
+```
 
 
 
@@ -398,6 +512,15 @@ Defined by
 </div>
 
 The template file extensions Craft will look for when matching a template path to a file on the front end.
+
+::: code
+```php Static Config
+'defaultTemplateExtensions' => ['html', 'twig', 'txt'],
+```
+```shell Environment Override
+CRAFT_DEFAULT_TEMPLATE_EXTENSIONS=html,twig,txt
+```
+:::
 
 
 
@@ -428,6 +551,15 @@ This should be set to one of the following integers:
 - `5` – Friday
 - `6` – Saturday
 
+::: code
+```php Static Config
+'defaultWeekStartDay' => 0,
+```
+```shell Environment Override
+CRAFT_DEFAULT_WEEK_START_DAY=0
+```
+:::
+
 
 
 ### `devMode`
@@ -446,6 +578,15 @@ Defined by
 </div>
 
 Whether the system should run in [Dev Mode](https://craftcms.com/support/dev-mode).
+
+::: code
+```php Static Config
+'devMode' => true,
+```
+```shell Environment Override
+CRAFT_DEV_MODE=true
+```
+:::
 
 
 
@@ -469,7 +610,7 @@ Since
 
 Array of plugin handles that should be disabled, regardless of what the project config says.
 
-```php
+```php Static Config
 'dev' => [
     'disabledPlugins' => ['webhooks'],
 ],
@@ -477,7 +618,7 @@ Array of plugin handles that should be disabled, regardless of what the project 
 
 This can also be set to `'*'` to disable **all** plugins.
 
-```php
+```php Static Config
 'dev' => [
     'disabledPlugins' => '*',
 ],
@@ -486,6 +627,15 @@ This can also be set to `'*'` to disable **all** plugins.
 ::: warning
 This should not be set on a per-environment basis, as it could result in plugin schema version mismatches
 between environments, which will prevent project config changes from getting applied.
+:::
+
+::: code
+```php Static Config
+'disabledPlugins' => ['redactor', 'webhooks'],
+```
+```shell Environment Override
+CRAFT_DISABLED_PLUGINS=redactor,webhooks
+```
 :::
 
 
@@ -513,6 +663,15 @@ and links on the page should not be followed, by web crawlers.
 
 ::: tip
 This should be set to `true` for development and staging environments.
+:::
+
+::: code
+```php Static Config
+'disallowRobots' => true,
+```
+```shell Environment Override
+CRAFT_DISALLOW_ROBOTS=1
+```
 :::
 
 
@@ -553,7 +712,16 @@ Defined by
 
 The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
 
-If set to `'_'` your site’s 404 template would live at `templates/_404.html`, for example.
+If set to `'_'` your site’s 404 template would live at `templates/_404.twig`, for example.
+
+::: code
+```php Static Config
+'errorTemplatePrefix' => '_',
+```
+```shell Environment Override
+CRAFT_ERROR_TEMPLATE_PREFIX=_
+```
+:::
 
 
 
@@ -562,7 +730,7 @@ If set to `'_'` your site’s 404 template would live at `templates/_404.html`, 
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)[], [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+:  [string](https://php.net/language.types.string)[], [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -572,7 +740,16 @@ Defined by
 
 </div>
 
-List of file extensions that will be merged into the <config3:allowedFileExtensions> config setting.
+List of file extensions that will be merged into the <config4:allowedFileExtensions> config setting.
+
+::: code
+```php Static Config
+'extraAllowedFileExtensions' => ['mbox', 'xml'],
+```
+```shell Environment Override
+CRAFT_EXTRA_ALLOWED_FILE_EXTENSIONS=mbox,xml
+```
+:::
 
 
 
@@ -596,6 +773,15 @@ Since
 
 List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
 
+::: code
+```php Static Config
+'extraAppLocales' => ['uk'],
+```
+```shell Environment Override
+CRAFT_EXTRA_APP_LOCALES=uk
+```
+:::
+
 
 
 ### `handleCasing`
@@ -617,12 +803,6 @@ Since
 </div>
 
 The casing to use for autogenerated component handles.
-
-This can be set to one of the following:
-
-- `camel` – for camelCase
-- `pascal` – for PascalCase (aka UpperCamelCase)
-- `snake` – for snake_case
 
 
 
@@ -653,12 +833,21 @@ When this is enabled, the following changes will take place:
 - Front-end routing will skip checks for element and template requests.
 - Front-end responses will be JSON-formatted rather than HTML by default.
 - Twig will be configured to escape unsafe strings for JavaScript/JSON rather than HTML by default for front-end requests.
-- The <config3:loginPath>, <config3:logoutPath>, <config3:setPasswordPath>, and <config3:verifyEmailPath> settings will be ignored.
+- The <config4:loginPath>, <config4:logoutPath>, <config4:setPasswordPath>, and <config4:verifyEmailPath> settings will be ignored.
 
 ::: tip
 With Headless Mode enabled, users may only set passwords and verify email addresses via the control panel. Be sure to grant “Access the control
-panel” permission to all content editors and administrators. You’ll also need to set the <config3:baseCpUrl> config setting if the control
+panel” permission to all content editors and administrators. You’ll also need to set the <config4:baseCpUrl> config setting if the control
 panel is located on a different domain than your front end.
+:::
+
+::: code
+```php Static Config
+'headlessMode' => true,
+```
+```shell Environment Override
+CRAFT_HEADLESS_MODE=1
+```
 :::
 
 
@@ -685,6 +874,15 @@ The proxy server that should be used for outgoing HTTP requests.
 
 This can be set to a URL (`http://localhost`) or a URL plus a port (`http://localhost:8125`).
 
+::: code
+```php Static Config
+'httpProxy' => 'http://localhost',
+```
+```shell Environment Override
+CRAFT_HTTP_PROXY=http://localhost
+```
+:::
+
 
 
 ### `indexTemplateFilenames`
@@ -706,6 +904,15 @@ Defined by
 
 The template filenames Craft will look for within a directory to represent the directory’s “index” template when
 matching a template path to a file on the front end.
+
+::: code
+```php Static Config
+'indexTemplateFilenames' => ['index', 'default'],
+```
+```shell Environment Override
+CRAFT_INDEX_TEMPLATE_FILENAMES=index,default
+```
+:::
 
 
 
@@ -730,6 +937,15 @@ See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-w
 
 If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v3/craft-web-request.html#ipheaders) value will be used.
 
+::: code
+```php Static Config
+'ipHeaders' => ['X-Forwarded-For', 'CF-Connecting-IP'],
+```
+```shell Environment Override
+CRAFT_IP_HEADERS=X-Forwarded-For,CF-Connecting-IP
+```
+:::
+
 
 
 ### `isSystemLive`
@@ -749,6 +965,15 @@ Defined by
 
 Whether the site is currently live. If set to `true` or `false`, it will take precedence over the System Status setting
 in Settings → General.
+
+::: code
+```php Static Config
+'isSystemLive' => true,
+```
+```shell Environment Override
+CRAFT_IS_SYSTEM_LIVE=true
+```
+:::
 
 
 
@@ -773,6 +998,15 @@ Whether non-ASCII characters in auto-generated slugs should be converted to ASCI
 This only affects the JavaScript auto-generated slugs. Non-ASCII characters can still be used in slugs if entered manually.
 :::
 
+::: code
+```php Static Config
+'limitAutoSlugsToAscii' => true,
+```
+```shell Environment Override
+CRAFT_LIMIT_AUTO_SLUGS_TO_ASCII=1
+```
+:::
+
 
 
 ### `maxBackups`
@@ -792,6 +1026,15 @@ Defined by
 
 The number of backups Craft should make before it starts deleting the oldest backups. If set to `false`, Craft will
 not delete any backups.
+
+::: code
+```php Static Config
+'maxBackups' => 5,
+```
+```shell Environment Override
+CRAFT_MAX_BACKUPS=5
+```
+:::
 
 
 
@@ -817,6 +1060,15 @@ The maximum number of revisions that should be stored for each element.
 
 Set to `0` if you want to store an unlimited number of revisions.
 
+::: code
+```php Static Config
+'maxRevisions' => 25,
+```
+```shell Environment Override
+CRAFT_MAX_REVISIONS=25
+```
+:::
+
 
 
 ### `maxSlugIncrement`
@@ -835,6 +1087,15 @@ Defined by
 </div>
 
 The highest number Craft will tack onto a slug in order to make it unique before giving up and throwing an error.
+
+::: code
+```php Static Config
+'maxSlugIncrement' => 10,
+```
+```shell Environment Override
+CRAFT_MAX_SLUG_INCREMENT=10
+```
+:::
 
 
 
@@ -858,6 +1119,15 @@ Since
 
 The `Permissions-Policy` header that should be sent for web responses.
 
+::: code
+```php Static Config
+'permissionsPolicyHeader' => 'Permissions-Policy: geolocation=(self)',
+```
+```shell Environment Override
+CRAFT_PERMISSIONS_POLICY_HEADER=Permissions-Policy: geolocation=(self)
+```
+:::
+
 
 
 ### `phpMaxMemoryLimit`
@@ -879,6 +1149,15 @@ The maximum amount of memory Craft will try to reserve during memory-intensive o
 unzipping and updating. Defaults to an empty string, which means it will use as much memory as it can.
 
 See <https://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
+
+::: code
+```php Static Config
+'phpMaxMemoryLimit' => '512M',
+```
+```shell Environment Override
+CRAFT_PHP_MAX_MEMORY_LIMIT=512M
+```
+:::
 
 
 
@@ -902,7 +1181,7 @@ Since
 
 Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) that should be used for preview iframes.
 
-```php
+```php Static Config
 'previewIframeResizerOptions' => [
     'autoResize' => false,
 ],
@@ -929,6 +1208,15 @@ The template path segment prefix that should be used to identify “private” t
 directly accessible via a matching URL.
 
 Set to an empty value to disable public template routing.
+
+::: code
+```php Static Config
+'privateTemplateTrigger' => '',
+```
+```shell Environment Override
+CRAFT_PRIVATE_TEMPLATE_TRIGGER=
+```
+:::
 
 
 
@@ -962,6 +1250,15 @@ This setting should be disabled for servers running Win32, or with Apache’s mo
 where PHP’s [flush()](https://php.net/manual/en/function.flush.php) method won’t work.
 :::
 
+::: code
+```php Static Config
+'runQueueAutomatically' => false,
+```
+```shell Environment Override
+CRAFT_RUN_QUEUE_AUTOMATICALLY=false
+```
+:::
+
 
 
 ### `sameSiteCookieValue`
@@ -969,7 +1266,7 @@ where PHP’s [flush()](https://php.net/manual/en/function.flush.php) method won
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+:  
 
 Default value
 :  `null`
@@ -982,9 +1279,7 @@ Since
 
 </div>
 
-The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
-This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
 
 
 
@@ -1008,6 +1303,15 @@ Since
 
 Whether a `Content-Length` header should be sent with responses.
 
+::: code
+```php Static Config
+'sendContentLengthHeader' => true,
+```
+```shell Environment Override
+CRAFT_SEND_CONTENT_LENGTH_HEADER=1
+```
+:::
+
 
 
 ### `sendPoweredByHeader`
@@ -1028,6 +1332,15 @@ Defined by
 Whether an `X-Powered-By: Craft CMS` header should be sent, helping services like [BuiltWith](https://builtwith.com/) and
 [Wappalyzer](https://www.wappalyzer.com/) identify that the site is running on Craft.
 
+::: code
+```php Static Config
+'sendPoweredByHeader' => false,
+```
+```shell Environment Override
+CRAFT_SEND_POWERED_BY_HEADER=false
+```
+:::
+
 
 
 ### `slugWordSeparator`
@@ -1046,6 +1359,15 @@ Defined by
 </div>
 
 The character(s) that should be used to separate words in slugs.
+
+::: code
+```php Static Config
+'slugWordSeparator' => '.',
+```
+```shell Environment Override
+CRAFT_SLUG_WORD_SEPARATOR=.
+```
+:::
 
 
 
@@ -1068,7 +1390,16 @@ Configures Craft to send all system emails to either a single email address or a
 for testing purposes.
 
 By default, the recipient name(s) will be “Test Recipient”, but you can customize that by setting the value with the format
-`['email@address.com' => 'Name']`.
+`['me@domain.tld' => 'Name']`.
+
+::: code
+```php Static Config
+'testToEmailAddress' => 'me@domain.tld',
+```
+```shell Environment Override
+CRAFT_TEST_TO_EMAIL_ADDRESS=me@domain.tld
+```
+:::
 
 
 
@@ -1091,6 +1422,15 @@ The timezone of the site. If set, it will take precedence over the Timezone sett
 
 This can be set to one of PHP’s [supported timezones](https://php.net/manual/en/timezones.php).
 
+::: code
+```php Static Config
+'timezone' => 'Europe/London',
+```
+```shell Environment Override
+CRAFT_TIMEZONE=Europe/London
+```
+:::
+
 
 
 ### `translationDebugOutput`
@@ -1110,6 +1450,15 @@ Defined by
 
 Whether translated messages should be wrapped in special characters to help find any strings that are not being run through
 `Craft::t()` or the `|translate` filter.
+
+::: code
+```php Static Config
+'translationDebugOutput' => true,
+```
+```shell Environment Override
+CRAFT_TRANSLATION_DEBUG_OUTPUT=1
+```
+:::
 
 
 
@@ -1136,6 +1485,15 @@ If you enable this setting after user accounts already exist, run this terminal 
 php craft utils/update-usernames
 ```
 
+::: code
+```php Static Config
+'useEmailAsUsername' => true,
+```
+```shell Environment Override
+CRAFT_USE_EMAIL_AS_USERNAME=1
+```
+:::
+
 
 
 ### `useFileLocks`
@@ -1158,6 +1516,15 @@ Whether to grab an exclusive lock on a file when writing to it by using the `LOC
 Some file systems, such as NFS, do not support exclusive file locking.
 
 If `null`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
+
+::: code
+```php Static Config
+'useFileLocks' => false,
+```
+```shell Environment Override
+CRAFT_USE_FILE_LOCKS=false
+```
+:::
 
 
 
@@ -1193,7 +1560,16 @@ page as well for this to work. You can conditionally include it for only Live Pr
 `x-craft-live-preview` query string parameter.
 
 ::: tip
-You can customize the behavior of iFrame Resizer via the <config3:previewIframeResizerOptions> config setting.
+You can customize the behavior of iFrame Resizer via the <config4:previewIframeResizerOptions> config setting.
+:::
+
+::: code
+```php Static Config
+'useIframeResizer' => true,
+```
+```shell Environment Override
+CRAFT_USE_IFRAME_RESIZER=1
+```
 :::
 
 
@@ -1216,6 +1592,12 @@ Defined by
 </div>
 
 Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) that should be defined for every request.
+
+```php Static Config
+'aliases' => [
+    '@webroot' => '/var/www/',
+],
+```
 
 
 
@@ -1243,12 +1625,54 @@ You may provide your own command optionally using several tokens Craft will swap
 
 - `{path}` - the target backup file path
 - `{port}` - the current database port
-- `{server}` - the current database host name
+- `{server}` - the current database hostname
 - `{user}` - the user to connect to the database
 - `{database}` - the current database name
 - `{schema}` - the current database schema (if any)
 
 This can also be set to `false` to disable database backups completely.
+
+::: code
+```php Static Config
+'backupCommand' => false,
+```
+```shell Environment Override
+CRAFT_BACKUP_COMMAND=false
+```
+:::
+
+
+
+### `buildId`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$buildId](craft4:craft\config\GeneralConfig::$buildId)
+
+Since
+:  4.0.0
+
+</div>
+
+A unique ID representing the current build of the codebase.
+
+This should be set to something unique to the deployment, e.g. a Git SHA or a deployment timestamp.
+
+::: code
+```php Static Config
+'buildId' => \craft\helpers\App::env('GIT_SHA'),
+```
+```shell Environment Override
+CRAFT_BUILD_ID=$GIT_SHA
+```
+:::
 
 
 
@@ -1269,7 +1693,16 @@ Defined by
 
 The domain that cookies generated by Craft should be created for. If blank, it will be left up to the browser to determine
 which domain to use (almost always the current). If you want the cookies to work for all subdomains, for example, you could
-set this to `'.domain.com'`.
+set this to `'.my-project.tld'`.
+
+::: code
+```php Static Config
+'defaultCookieDomain' => '.my-project.tld',
+```
+```shell Environment Override
+CRAFT_DEFAULT_COOKIE_DOMAIN=.my-project.tld
+```
+:::
 
 
 
@@ -1290,6 +1723,15 @@ Defined by
 
 The path to the root directory that should store published control panel resources.
 
+::: code
+```php Static Config
+'resourceBasePath' => '@webroot/craft-resources',
+```
+```shell Environment Override
+CRAFT_RESOURCE_BASE_PATH=@webroot/craft-resources
+```
+:::
+
 
 
 ### `resourceBaseUrl`
@@ -1308,6 +1750,15 @@ Defined by
 </div>
 
 The URL to the root directory that should store published control panel resources.
+
+::: code
+```php Static Config
+'resourceBaseUrl' => '@web/craft-resources',
+```
+```shell Environment Override
+CRAFT_RESOURCE_BASE_URL=@web/craft-resources
+```
+:::
 
 
 
@@ -1334,12 +1785,21 @@ There are several tokens you can use that Craft will swap out at runtime:
 
 - `{path}` - the backup file path
 - `{port}` - the current database port
-- `{server}` - the current database host name
+- `{server}` - the current database hostname
 - `{user}` - the user to connect to the database
 - `{database}` - the current database name
 - `{schema}` - the current database schema (if any)
 
 This can also be set to `false` to disable database restores completely.
+
+::: code
+```php Static Config
+'restoreCommand' => false,
+```
+```shell Environment Override
+CRAFT_RESTORE_COMMAND=false
+```
+:::
 
 
 
@@ -1362,6 +1822,15 @@ Defined by
 
 The URI segment Craft should look for when determining if the current request should be routed to a controller action.
 
+::: code
+```php Static Config
+'actionTrigger' => 'do-it',
+```
+```shell Environment Override
+CRAFT_ACTION_TRIGGER=do-it
+```
+:::
+
 
 
 ### `activateAccountSuccessPath`
@@ -1383,6 +1852,15 @@ The URI that users without access to the control panel should be redirected to a
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
+::: code
+```php Static Config
+'activateAccountSuccessPath' => 'welcome',
+```
+```shell Environment Override
+CRAFT_ACTIVATE_ACCOUNT_SUCCESS_PATH=welcome
+```
+:::
+
 
 
 ### `addTrailingSlashesToUrls`
@@ -1402,6 +1880,15 @@ Defined by
 
 Whether auto-generated URLs should have trailing slashes.
 
+::: code
+```php Static Config
+'addTrailingSlashesToUrls' => true,
+```
+```shell Environment Override
+CRAFT_ADD_TRAILING_SLASHES_TO_URLS=1
+```
+:::
+
 
 
 ### `allowUppercaseInSlug`
@@ -1420,6 +1907,15 @@ Defined by
 </div>
 
 Whether uppercase letters should be allowed in slugs.
+
+::: code
+```php Static Config
+'allowUppercaseInSlug' => true,
+```
+```shell Environment Override
+CRAFT_ALLOW_UPPERCASE_IN_SLUG=1
+```
+:::
 
 
 
@@ -1443,7 +1939,16 @@ The base URL Craft should use when generating control panel URLs.
 It will be determined automatically if left blank.
 
 ::: tip
-The base control panel URL should **not** include the [control panel trigger word](config3:cpTrigger) (e.g. `/admin`).
+The base control panel URL should **not** include the [control panel trigger word](config4:cpTrigger) (e.g. `/admin`).
+:::
+
+::: code
+```php Static Config
+'baseCpUrl' => 'https://cms.my-project.tld/',
+```
+```shell Environment Override
+CRAFT_BASE_CP_URL=https://cms.my-project.tld/
+```
 :::
 
 
@@ -1466,18 +1971,27 @@ Defined by
 The URI segment Craft should look for when determining if the current request should route to the control panel rather than
 the front-end website.
 
-This can be set to `null` if you have a dedicated host name for the control panel (e.g. `cms.example.com`), or you are running Craft in
-[Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own webroot
+This can be set to `null` if you have a dedicated hostname for the control panel (e.g. `cms.my-project.tld`), or you are running Craft in
+[Headless Mode](config4:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root
 directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
 
 ```php
 define('CRAFT_CP', true);
 ```
 
-Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your
-control panel due to URI conflicts with actual folders/files in your main webroot.
+Alternatively, you can set the <config4:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your
+control panel due to URI conflicts with actual folders/files in your main web root.
 
 (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
+
+::: code
+```php Static Config
+'cpTrigger' => null,
+```
+```shell Environment Override
+CRAFT_CP_TRIGGER=null
+```
+:::
 
 
 
@@ -1501,6 +2015,17 @@ passwords. Note that this only affects front-end site requests.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
+::: code
+```php Static Config
+// 1 day
+'invalidUserTokenPath' => 'nope',
+```
+```shell Environment Override
+# 1 day
+CRAFT_INVALID_USER_TOKEN_PATH=nope
+```
+:::
+
 
 
 ### `loginPath`
@@ -1522,9 +2047,18 @@ The URI Craft should use for user login on the front end.
 
 This can be set to `false` to disable front-end login.
 
-Note that this config setting is ignored when <config3:headlessMode> is enabled.
+Note that this config setting is ignored when <config4:headlessMode> is enabled.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+::: code
+```php Static Config
+'loginPath' => false,
+```
+```shell Environment Override
+CRAFT_LOGIN_PATH=false
+```
+:::
 
 
 
@@ -1547,9 +2081,18 @@ The URI Craft should use for user logout on the front end.
 
 This can be set to `false` to disable front-end logout.
 
-Note that this config setting is ignored when <config3:headlessMode> is enabled.
+Note that this config setting is ignored when <config4:headlessMode> is enabled.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+::: code
+```php Static Config
+'logoutPath' => false,
+```
+```shell Environment Override
+CRAFT_LOGOUT_PATH=false
+```
+:::
 
 
 
@@ -1568,9 +2111,9 @@ Defined by
 
 </div>
 
-Whether generated URLs should omit `index.php` (e.g. `http://domain.com/path` instead of `http://domain.com/index.php/path`)
+Whether generated URLs should omit `index.php` (e.g. `http://my-project.tld/path` instead of `http://my-project.tld/index.php/path`)
 
-This can only be possible if your server is configured to redirect would-be 404's to `index.php`, for example, with the redirect found
+This can only be possible if your server is configured to redirect would-be 404s to `index.php`, for example, with the redirect found
 in the `.htaccess` file that came with Craft:
 
 ```
@@ -1579,6 +2122,15 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule (.+) /index.php?p= [QSA,L]
 ```
+
+::: code
+```php Static Config
+'omitScriptNameInUrls' => true,
+```
+```shell Environment Override
+CRAFT_OMIT_SCRIPT_NAME_IN_URLS=1
+```
+:::
 
 
 
@@ -1608,8 +2160,17 @@ Example Value | Example URI
 `?page` | `/news?page=5`
 
 ::: tip
-If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config3:pathParam> setting which defaults to `p`.
+If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config4:pathParam> setting which defaults to `p`.
 If your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
+:::
+
+::: code
+```php Static Config
+'pageTrigger' => 'page',
+```
+```shell Environment Override
+CRAFT_PAGE_TRIGGER=page
+```
 :::
 
 
@@ -1638,6 +2199,15 @@ If you’re using Apache, that means you’ll need to change the `RewriteRule` l
 RewriteRule (.+) index.php [QSA,L]
 ```
 
+::: code
+```php Static Config
+'pathParam' => null,
+```
+```shell Environment Override
+CRAFT_PATH_PARAM=null
+```
+:::
+
 
 
 ### `postCpLoginRedirect`
@@ -1662,6 +2232,15 @@ root URL (`/admin`) when they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
+::: code
+```php Static Config
+'postCpLoginRedirect' => 'entries',
+```
+```shell Environment Override
+CRAFT_POST_CP_LOGIN_REDIRECT=entries
+```
+:::
+
 
 
 ### `postLoginRedirect`
@@ -1681,10 +2260,19 @@ Defined by
 
 The path users should be redirected to after logging in from the front-end site.
 
-This setting will also come into effect if the user visits the login page (as specified by the <config3:loginPath> config setting) when
+This setting will also come into effect if the user visits the login page (as specified by the <config4:loginPath> config setting) when
 they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+::: code
+```php Static Config
+'postLoginRedirect' => 'welcome',
+```
+```shell Environment Override
+CRAFT_POST_LOGIN_REDIRECT=welcome
+```
+:::
 
 
 
@@ -1707,6 +2295,15 @@ The path that users should be redirected to after logging out from the front-end
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
+::: code
+```php Static Config
+'postLogoutRedirect' => 'goodbye',
+```
+```shell Environment Override
+CRAFT_POST_LOGOUT_REDIRECT=goodbye
+```
+:::
+
 
 
 ### `setPasswordPath`
@@ -1726,12 +2323,21 @@ Defined by
 
 The URI or URL that Craft should use for Set Password forms on the front end.
 
-Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
+This setting is ignored when <config4:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: tip
-You might also want to set <config3:invalidUserTokenPath> in case a user clicks on an expired password reset link.
+You might also want to set <config4:invalidUserTokenPath> in case a user clicks on an expired password reset link.
+:::
+
+::: code
+```php Static Config
+'setPasswordPath' => 'set-password',
+```
+```shell Environment Override
+CRAFT_SET_PASSWORD_PATH=set-password
+```
 :::
 
 
@@ -1761,8 +2367,17 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
 
 ::: tip
-You’ll also need to set [setPasswordPath](config3:setPasswordPath), which determines the URI and template path for the Set Password form
+You’ll also need to set [setPasswordPath](config4:setPasswordPath), which determines the URI and template path for the Set Password form
 where the user resets their password after following the link in the Password Reset email.
+:::
+
+::: code
+```php Static Config
+'setPasswordRequestPath' => 'request-password',
+```
+```shell Environment Override
+CRAFT_SET_PASSWORD_REQUEST_PATH=request-password
+```
 :::
 
 
@@ -1786,6 +2401,15 @@ The URI Craft should redirect users to after setting their password from the fro
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
+::: code
+```php Static Config
+'setPasswordSuccessPath' => 'password-set',
+```
+```shell Environment Override
+CRAFT_SET_PASSWORD_SUCCESS_PATH=password-set
+```
+:::
+
 
 
 ### `siteToken`
@@ -1808,6 +2432,15 @@ Since
 
 The query string parameter name that site tokens should be set to.
 
+::: code
+```php Static Config
+'siteToken' => 't',
+```
+```shell Environment Override
+CRAFT_SITE_TOKEN=t
+```
+:::
+
 
 
 ### `tokenParam`
@@ -1826,6 +2459,15 @@ Defined by
 </div>
 
 The query string parameter name that Craft tokens should be set to.
+
+::: code
+```php Static Config
+'tokenParam' => 't',
+```
+```shell Environment Override
+CRAFT_TOKEN_PARAM=t
+```
+:::
 
 
 
@@ -1846,7 +2488,16 @@ Defined by
 
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
-Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to `false`.
+This setting only takes effect if <config4:omitScriptNameInUrls> is set to `false`.
+
+::: code
+```php Static Config
+'usePathInfo' => true,
+```
+```shell Environment Override
+CRAFT_USE_PATH_INFO=1
+```
+:::
 
 
 
@@ -1866,10 +2517,19 @@ Defined by
 </div>
 
 Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the
-current site’s base URL and the protocol of the current request and if either of them are https will use `https` in the tokenized URL. If not,
+current site’s base URL and the protocol of the current request and if either of them are HTTPS will use `https` in the tokenized URL. If not,
 will use `http`.
 
 If set to `false`, Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
+
+::: code
+```php Static Config
+'useSslOnTokenizedUrls' => true,
+```
+```shell Environment Override
+CRAFT_USE_SSL_ON_TOKENIZED_URLS=1
+```
+:::
 
 
 
@@ -1893,9 +2553,18 @@ Since
 
 The URI or URL that Craft should use for email verification links on the front end.
 
-Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
+This setting is ignored when <config4:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+::: code
+```php Static Config
+'verifyEmailPath' => 'verify-email',
+```
+```shell Environment Override
+CRAFT_VERIFY_EMAIL_PATH=verify-email
+```
+:::
 
 
 
@@ -1920,6 +2589,15 @@ Since
 The URI that users without access to the control panel should be redirected to after verifying a new email address.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+::: code
+```php Static Config
+'verifyEmailSuccessPath' => 'verified-email',
+```
+```shell Environment Override
+CRAFT_VERIFY_EMAIL_SUCCESS_PATH=verified-email
+```
+:::
 
 
 
@@ -1965,6 +2643,15 @@ Set to `0` to disable this feature altogether.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
+::: code
+```php Static Config
+'rememberUsernameDuration' => 0,
+```
+```shell Environment Override
+CRAFT_REMEMBER_USERNAME_DURATION=0
+```
+:::
+
 
 
 ### `rememberedUserSessionDuration`
@@ -1988,6 +2675,15 @@ Set to `0` to disable the “Remember Me” feature altogether.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
+::: code
+```php Static Config
+'rememberedUserSessionDuration' => 0,
+```
+```shell Environment Override
+CRAFT_REMEMBERED_USER_SESSION_DURATION=0
+```
+:::
+
 
 
 ### `requireMatchingUserAgentForSession`
@@ -2007,6 +2703,15 @@ Defined by
 
 Whether Craft should require a matching user agent string when restoring a user session from a cookie.
 
+::: code
+```php Static Config
+'requireMatchingUserAgentForSession' => false,
+```
+```shell Environment Override
+CRAFT_REQUIRE_MATCHING_USER_AGENT_FOR_SESSION=false
+```
+:::
+
 
 
 ### `requireUserAgentAndIpForSession`
@@ -2025,6 +2730,15 @@ Defined by
 </div>
 
 Whether Craft should require the existence of a user agent string and IP address when creating a new user session.
+
+::: code
+```php Static Config
+'requireUserAgentAndIpForSession' => false,
+```
+```shell Environment Override
+CRAFT_REQUIRE_USER_AGENT_AND_IP_FOR_SESSION=false
+```
+:::
 
 
 
@@ -2048,6 +2762,17 @@ The amount of time before a user will get logged out due to inactivity.
 Set to `0` if you want users to stay logged in as long as their browser is open rather than a predetermined amount of time.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: code
+```php Static Config
+// 3 hours
+'userSessionDuration' => 10800,
+```
+```shell Environment Override
+# 3 hours
+CRAFT_USER_SESSION_DURATION=10800
+```
+:::
 
 
 
@@ -2079,6 +2804,15 @@ The time taken to compute the hash doubles for every increment by one for this v
 For example, if the hash takes 1 second to compute when the value is 14 then the compute time varies as
 2^(value - 14) seconds.
 
+::: code
+```php Static Config
+'blowfishHashCost' => 15,
+```
+```shell Environment Override
+CRAFT_BLOWFISH_HASH_COST=15
+```
+:::
+
 
 
 ### `cooldownDuration`
@@ -2103,6 +2837,15 @@ Set to `0` to keep the account locked indefinitely, requiring an admin to manual
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
+::: code
+```php Static Config
+'cooldownDuration' => 0,
+```
+```shell Environment Override
+CRAFT_COOLDOWN_DURATION=0
+```
+:::
+
 
 
 ### `csrfTokenName`
@@ -2120,7 +2863,7 @@ Defined by
 
 </div>
 
-The name of CSRF token used for CSRF validation if <config3:enableCsrfProtection> is set to `true`.
+The name of CSRF token used for CSRF validation if <config4:enableCsrfProtection> is set to `true`.
 
 
 
@@ -2142,6 +2885,17 @@ Defined by
 The default amount of time tokens can be used before expiring.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: code
+```php Static Config
+// One week
+'defaultTokenDuration' => 604800,
+```
+```shell Environment Override
+# One week
+CRAFT_DEFAULT_TOKEN_DURATION=604800
+```
+:::
 
 
 
@@ -2166,6 +2920,15 @@ removes that requirement for the initial registration form.
 If you have email verification enabled, new users will set their password once they’ve followed the verification link in the email.
 If you don’t, the only way they can set their password is to go through your “forgot password” workflow.
 
+::: code
+```php Static Config
+'deferPublicRegistrationPassword' => true,
+```
+```shell Environment Override
+CRAFT_DEFER_PUBLIC_REGISTRATION_PASSWORD=true
+```
+:::
+
 
 
 ### `elevatedSessionDuration`
@@ -2189,6 +2952,15 @@ Set to `0` to disable elevated session support.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
+::: code
+```php Static Config
+'elevatedSessionDuration' => 0,
+```
+```shell Environment Override
+CRAFT_ELEVATED_SESSION_DURATION=0
+```
+:::
+
 
 
 ### `enableBasicHttpAuth`
@@ -2211,6 +2983,15 @@ Since
 
 Whether front-end web requests should support basic HTTP authentication.
 
+::: code
+```php Static Config
+'enableBasicHttpAuth' => true,
+```
+```shell Environment Override
+CRAFT_ENABLE_BASIC_HTTP_AUTH=1
+```
+:::
+
 
 
 ### `enableCsrfCookie`
@@ -2228,9 +3009,18 @@ Defined by
 
 </div>
 
-Whether to use a cookie to persist the CSRF token if <config3:enableCsrfProtection> is enabled. If false, the CSRF token will be
+Whether to use a cookie to persist the CSRF token if <config4:enableCsrfProtection> is enabled. If false, the CSRF token will be
 stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security,
 it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
+
+::: code
+```php Static Config
+'enableCsrfCookie' => false,
+```
+```shell Environment Override
+CRAFT_ENABLE_CSRF_COOKIE=false
+```
+:::
 
 
 
@@ -2250,6 +3040,15 @@ Defined by
 </div>
 
 Whether to enable CSRF protection via hidden form inputs for all forms submitted via Craft.
+
+::: code
+```php Static Config
+'enableCsrfProtection' => false,
+```
+```shell Environment Override
+CRAFT_ENABLE_CSRF_PROTECTION=false
+```
+:::
 
 
 
@@ -2272,6 +3071,17 @@ The amount of time to track invalid login attempts for a user, for determining i
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
+::: code
+```php Static Config
+// 1 day
+'invalidLoginWindowDuration' => 86400,
+```
+```shell Environment Override
+# 1 day
+CRAFT_INVALID_LOGIN_WINDOW_DURATION=86400
+```
+:::
+
 
 
 ### `maxInvalidLogins`
@@ -2279,7 +3089,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 <div class="compact">
 
 Allowed types
-:  [integer](https://php.net/language.types.integer)
+:  [integer](https://php.net/language.types.integer), [false](https://php.net/language.types.boolean)
 
 Default value
 :  `5`
@@ -2290,6 +3100,15 @@ Defined by
 </div>
 
 The number of invalid login attempts Craft will allow within the specified duration before the account gets locked.
+
+::: code
+```php Static Config
+'maxInvalidLogins' => 3,
+```
+```shell Environment Override
+CRAFT_MAX_INVALID_LOGINS=3
+```
+:::
 
 
 
@@ -2314,6 +3133,15 @@ When set to `false` and you go through the “forgot password” flow from the c
 whether the username/email exists and whether an email was sent with further instructions. This can be helpful for the user attempting to
 log in but allow for username/email enumeration based on the response.
 
+::: code
+```php Static Config
+'preventUserEnumeration' => true,
+```
+```shell Environment Override
+CRAFT_PREVENT_USER_ENUMERATION=1
+```
+:::
+
 
 
 ### `previewTokenDuration`
@@ -2336,7 +3164,20 @@ Since
 
 The amount of time content preview tokens can be used before expiring.
 
+Defaults to <config4:defaultTokenDuration> value.
+
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: code
+```php Static Config
+// 1 hour
+'previewTokenDuration' => 3600,
+```
+```shell Environment Override
+# 1 hour
+CRAFT_PREVIEW_TOKEN_DURATION=3600
+```
+:::
 
 
 
@@ -2360,6 +3201,15 @@ Since
 
 Whether images uploaded via the control panel should be sanitized.
 
+::: code
+```php Static Config
+'sanitizeCpImageUploads' => false,
+```
+```shell Environment Override
+CRAFT_SANITIZE_CP_IMAGE_UPLOADS=false
+```
+:::
+
 
 
 ### `sanitizeSvgUploads`
@@ -2380,6 +3230,15 @@ Defined by
 Whether Craft should sanitize uploaded SVG files and strip out potential malicious-looking content.
 
 This should definitely be enabled if you are accepting SVG uploads from untrusted sources.
+
+::: code
+```php Static Config
+'sanitizeSvgUploads' => false,
+```
+```shell Environment Override
+CRAFT_SANITIZE_SVG_UPLOADS=false
+```
+:::
 
 
 
@@ -2404,6 +3263,22 @@ See [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/y
 
 If not set, the default [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) value will be used.
 
+::: code
+```php Static Config
+'secureHeaders' => [
+    'X-Forwarded-For',
+    'X-Forwarded-Host',
+    'X-Forwarded-Proto',
+    'X-Rewrite-Url',
+    'X-Original-Host',
+    'CF-Connecting-IP',
+],
+```
+```shell Environment Override
+CRAFT_SECURE_HEADERS=X-Forwarded-For,X-Forwarded-Host,X-Forwarded-Proto,X-Rewrite-Url,X-Original-Host,CF-Connecting-IP
+```
+:::
+
 
 
 ### `secureProtocolHeaders`
@@ -2427,6 +3302,20 @@ See [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/a
 
 If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) value will be used.
 
+```php Static Config
+'secureProtocolHeaders' => [
+    'X-Forwarded-Proto' => [
+        'https',
+    ],
+    'Front-End-Https' => [
+        'on',
+    ],
+    'CF-Visitor' => [
+        '{\"scheme\":\"https\"}'
+    ]
+],
+```
+
 
 
 ### `securityKey`
@@ -2447,6 +3336,10 @@ Defined by
 A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft4:craft\services\Security).
 
 This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
+
+```php Static Config
+'securityKey' => '2cf24dba5...',
+```
 
 
 
@@ -2469,6 +3362,15 @@ Since
 </div>
 
 Whether user IP addresses should be stored/logged by the system.
+
+::: code
+```php Static Config
+'storeUserIps' => true,
+```
+```shell Environment Override
+CRAFT_STORE_USER_IPS=1
+```
+:::
 
 
 
@@ -2495,6 +3397,15 @@ See [yii\web\Request::$trustedHosts](https://www.yiiframework.com/doc/api/2.0/yi
 
 By default, all hosts are trusted.
 
+::: code
+```php Static Config
+'trustedHosts' => ['trusted-one.foo', 'trusted-two.foo'],
+```
+```shell Environment Override
+CRAFT_TRUSTED_HOSTS=trusted-one.foo,trusted-two.foo
+```
+:::
+
 
 
 ### `useSecureCookies`
@@ -2517,6 +3428,15 @@ Whether Craft will set the “secure” flag when saving cookies when using `Cra
 Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you’re currently accessing
 is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
 
+::: code
+```php Static Config
+'useSecureCookies' => true,
+```
+```shell Environment Override
+CRAFT_USE_SECURE_COOKIES=1
+```
+:::
+
 
 
 ### `verificationCodeDuration`
@@ -2538,6 +3458,17 @@ The amount of time a user verification code can be used before expiring.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
+::: code
+```php Static Config
+// 1 hour
+'verificationCodeDuration' => 3600,
+```
+```shell Environment Override
+# 1 hour
+CRAFT_VERIFICATION_CODE_DURATION=3600
+```
+:::
+
 
 
 ## Assets
@@ -2547,7 +3478,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 <div class="compact">
 
 Allowed types
-:  [string](https://php.net/language.types.string)[], [string](https://php.net/language.types.string)
+:  [string](https://php.net/language.types.string)[]
 
 Default value
 :  `[
@@ -2654,6 +3585,13 @@ Defined by
 
 The file extensions Craft should allow when a user is uploading files.
 
+```php Static Config
+// Nothing bug GIFs!
+'allowedFileExtensions' => [
+    'gif',
+],
+```
+
 
 
 ### `convertFilenamesToAscii`
@@ -2675,6 +3613,15 @@ Whether uploaded filenames with non-ASCII characters should be converted to ASCI
 
 ::: tip
 You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII filenames to all existing assets.
+:::
+
+::: code
+```php Static Config
+'convertFilenamesToAscii' => false,
+```
+```shell Environment Override
+CRAFT_CONVERT_FILENAMES_TO_ASCII=false
+```
 :::
 
 
@@ -2700,7 +3647,7 @@ Since
 List of additional file kinds Craft should support. This array will get merged with the one defined in
 `\craft\helpers\Assets::_buildFileKinds()`.
 
-```php
+```php Static Config
 'extraFileKinds' => [
     // merge .psb into list of Photoshop file kinds
     'photoshop' => [
@@ -2716,7 +3663,7 @@ List of additional file kinds Craft should support. This array will get merged w
 
 ::: tip
 File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with
-the <config3:extraAllowedFileExtensions> config setting.
+the <config4:extraAllowedFileExtensions> config setting.
 :::
 
 
@@ -2737,6 +3684,15 @@ Defined by
 </div>
 
 The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
+
+::: code
+```php Static Config
+'filenameWordSeparator' => false,
+```
+```shell Environment Override
+CRAFT_FILENAME_WORD_SEPARATOR=false
+```
+:::
 
 
 
@@ -2759,6 +3715,17 @@ The maximum upload file size allowed.
 
 See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) for a list of supported value types.
 
+::: code
+```php Static Config
+// 25MB
+'maxUploadFileSize' => 26214400,
+```
+```shell Environment Override
+# 25MB
+CRAFT_MAX_UPLOAD_FILE_SIZE=26214400
+```
+:::
+
 
 
 ### `revAssetUrls`
@@ -2780,6 +3747,15 @@ Since
 </div>
 
 Whether asset URLs should be revved so browsers don’t load cached versions when they’re modified.
+
+::: code
+```php Static Config
+'revAssetUrls' => true,
+```
+```shell Environment Override
+CRAFT_REV_ASSET_URLS=1
+```
+:::
 
 
 
@@ -2808,6 +3784,15 @@ The server path to an image file that should be sent when responding to an image
 
 This can be set to an aliased path such as `@webroot/assets/404.svg`.
 
+::: code
+```php Static Config
+'brokenImagePath' => '@webroot/assets/404.svg',
+```
+```shell Environment Override
+CRAFT_BROKEN_IMAGE_PATH=@webroot/assets/404.svg
+```
+:::
+
 
 
 ### `defaultImageQuality`
@@ -2828,6 +3813,15 @@ Defined by
 The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (worst quality, smallest file) to
 100 (best quality, biggest file).
 
+::: code
+```php Static Config
+'defaultImageQuality' => 90,
+```
+```shell Environment Override
+CRAFT_DEFAULT_IMAGE_QUALITY=90
+```
+:::
+
 
 
 ### `generateTransformsBeforePageLoad`
@@ -2846,6 +3840,15 @@ Defined by
 </div>
 
 Whether image transforms should be generated before page load.
+
+::: code
+```php Static Config
+'generateTransformsBeforePageLoad' => true,
+```
+```shell Environment Override
+CRAFT_GENERATE_TRANSFORMS_BEFORE_PAGE_LOAD=1
+```
+:::
 
 
 
@@ -2866,6 +3869,15 @@ Defined by
 
 The image driver Craft should use to cleanse and transform images. By default Craft will use ImageMagick if it’s installed
 and otherwise fall back to GD. You can explicitly set either `'imagick'` or `'gd'` here to override that behavior.
+
+::: code
+```php Static Config
+'imageDriver' => 'imagick',
+```
+```shell Environment Override
+CRAFT_IMAGE_DRIVER=imagick
+```
+:::
 
 
 
@@ -2897,6 +3909,16 @@ Defined by
 An array containing the selectable image aspect ratios for the image editor. The array must be in the format
 of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of “none” and “original” are allowed.
 
+```php Static Config
+'imageEditorRatios' => [
+    'Unconstrained' => 'none',
+    'Original' => 'original',
+    'Square' => 1,
+    'IMAX' => 1.9,
+    'Widescreen' => 1.78,
+],
+```
+
 
 
 ### `maxCachedCloudImageSize`
@@ -2915,6 +3937,15 @@ Defined by
 </div>
 
 The maximum dimension size to use when caching images from external sources to use in transforms. Set to `0` to never cache them.
+
+::: code
+```php Static Config
+'maxCachedCloudImageSize' => 0,
+```
+```shell Environment Override
+CRAFT_MAX_CACHED_CLOUD_IMAGE_SIZE=0
+```
+:::
 
 
 
@@ -2935,6 +3966,15 @@ Defined by
 
 Whether Craft should optimize images for reduced file sizes without noticeably reducing image quality. (Only supported when
 ImageMagick is used.)
+
+::: code
+```php Static Config
+'optimizeImageFilesize' => false,
+```
+```shell Environment Override
+CRAFT_OPTIMIZE_IMAGE_FILESIZE=1
+```
+:::
 
 
 
@@ -2961,6 +4001,15 @@ Whether CMYK should be preserved as the colorspace when manipulating images.
 Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause
 image color distortion. This will only have an effect if ImageMagick is in use.
 
+::: code
+```php Static Config
+'preserveCmykColorspace' => true,
+```
+```shell Environment Override
+CRAFT_PRESERVE_CMYK_COLORSPACE=1
+```
+:::
+
 
 
 ### `preserveExifData`
@@ -2984,6 +4033,15 @@ Setting this to `true` will result in larger image file sizes.
 
 This will only have effect if ImageMagick is in use.
 
+::: code
+```php Static Config
+'preserveExifData' => true,
+```
+```shell Environment Override
+CRAFT_PRESERVE_EXIF_DATA=1
+```
+:::
+
 
 
 ### `preserveImageColorProfiles`
@@ -3005,6 +4063,15 @@ Whether the embedded Image Color Profile (ICC) should be preserved when manipula
 
 Setting this to `false` will reduce the image size a little bit, but on some ImageMagick versions can cause images to be saved with
 an incorrect gamma value, which causes the images to become very dark. This will only have effect if ImageMagick is in use.
+
+::: code
+```php Static Config
+'preserveImageColorProfiles' => false,
+```
+```shell Environment Override
+CRAFT_PRESERVE_IMAGE_COLOR_PROFILES=false
+```
+:::
 
 
 
@@ -3028,7 +4095,16 @@ Since
 
 Whether SVG thumbnails should be rasterized.
 
-Note this will only work if ImageMagick is installed, and <config3:imageDriver> is set to either `auto` or `imagick`.
+This will only work if ImageMagick is installed, and <config4:imageDriver> is set to either `auto` or `imagick`.
+
+::: code
+```php Static Config
+'rasterizeSvgThumbs' => true,
+```
+```shell Environment Override
+CRAFT_RASTERIZE_SVG_THUMBS=1
+```
+:::
 
 
 
@@ -3048,6 +4124,15 @@ Defined by
 </div>
 
 Whether Craft should rotate images according to their EXIF data on upload.
+
+::: code
+```php Static Config
+'rotateImagesOnUploadByExifData' => false,
+```
+```shell Environment Override
+CRAFT_ROTATE_IMAGES_ON_UPLOAD_BY_EXIF_DATA=false
+```
+:::
 
 
 
@@ -3071,6 +4156,15 @@ Since
 
 Whether GIF files should be cleansed/transformed.
 
+::: code
+```php Static Config
+'transformGifs' => false,
+```
+```shell Environment Override
+CRAFT_TRANSFORM_GIFS=false
+```
+:::
+
 
 
 ### `transformSvgs`
@@ -3093,6 +4187,15 @@ Since
 
 Whether SVG files should be transformed.
 
+::: code
+```php Static Config
+'transformSvgs' => false,
+```
+```shell Environment Override
+CRAFT_TRANSFORM_SVGS=false
+```
+:::
+
 
 
 ### `upscaleImages`
@@ -3114,6 +4217,15 @@ Since
 </div>
 
 Whether images should be upscaled if the provided transform size is larger than the image.
+
+::: code
+```php Static Config
+'upscaleImages' => false,
+```
+```shell Environment Override
+CRAFT_UPSCALE_IMAGES=false
+```
+:::
 
 
 
@@ -3144,6 +4256,15 @@ in the `Access-Control-Allow-Origin` response header if it’s listed here.
 
 If this is set to `false`, then the `Access-Control-Allow-Origin` response header will never be sent.
 
+::: code
+```php Static Config
+'allowedGraphqlOrigins' => false,
+```
+```shell Environment Override
+CRAFT_ALLOW_GRAPHQL_ORIGINS=false
+```
+:::
+
 
 
 ### `disableGraphqlTransformDirective`
@@ -3165,6 +4286,15 @@ Since
 </div>
 
 Whether the `transform` directive should be disabled for the GraphQL API.
+
+::: code
+```php Static Config
+'disableGraphqlTransformDirective' => true,
+```
+```shell Environment Override
+CRAFT_DISABLE_GRAPHQL_TRANSFORM_DIRECTIVE=1
+```
+:::
 
 
 
@@ -3188,7 +4318,16 @@ Since
 
 Whether the GraphQL API should be enabled.
 
-Note that the GraphQL API is only available for Craft Pro.
+The GraphQL API is only available for Craft Pro.
+
+::: code
+```php Static Config
+'enableGql' => false,
+```
+```shell Environment Override
+CRAFT_ENABLE_GQL=false
+```
+:::
 
 
 
@@ -3218,6 +4357,15 @@ an element is saved, the site structure is updated, or a GraphQL schema is saved
 This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide its own
 caching logic and setting the `result` property.
 
+::: code
+```php Static Config
+'enableGraphqlCaching' => false,
+```
+```shell Environment Override
+CRAFT_ENABLE_GRAPHQL_CACHING=false
+```
+:::
+
 
 
 ### `enableGraphqlIntrospection`
@@ -3238,7 +4386,16 @@ Since
 
 </div>
 
-Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the CP.
+Whether GraphQL introspection queries are allowed. Defaults to `true` and is always allowed in the control panel.
+
+::: code
+```php Static Config
+'enableGraphqlIntrospection' => false,
+```
+```shell Environment Override
+CRAFT_ENABLE_GRAPHQL_INTROSPECTION=false
+```
+:::
 
 
 
@@ -3259,6 +4416,15 @@ Defined by
 
 Prefix to use for all type names returned by GraphQL.
 
+::: code
+```php Static Config
+'gqlTypePrefix' => 'craft_',
+```
+```shell Environment Override
+CRAFT_GQL_TYPE_PREFIX=craft_
+```
+:::
+
 
 
 ### `maxGraphqlComplexity`
@@ -3273,9 +4439,6 @@ Default value
 
 Defined by
 :  [GeneralConfig::$maxGraphqlComplexity](craft4:craft\config\GeneralConfig::$maxGraphqlComplexity)
-
-Since
-:  3.6.0
 
 </div>
 
@@ -3303,6 +4466,15 @@ Since
 
 The maximum allowed depth a GraphQL query is allowed to reach. Set to `0` to allow any depth.
 
+::: code
+```php Static Config
+'maxGraphqlDepth' => 5,
+```
+```shell Environment Override
+CRAFT_MAX_GRAPHQL_DEPTH=5
+```
+:::
+
 
 
 ### `maxGraphqlResults`
@@ -3325,6 +4497,15 @@ Since
 
 The maximum allowed results for a single GraphQL query. Set to `0` to disable any limits.
 
+::: code
+```php Static Config
+'maxGraphqlResults' => 100,
+```
+```shell Environment Override
+CRAFT_MAX_GRAPHQL_RESULTS=100
+```
+:::
+
 
 
 ### `prefixGqlRootTypes`
@@ -3345,7 +4526,16 @@ Since
 
 </div>
 
-Whether the <config3:gqlTypePrefix> config setting should have an impact on `query`, `mutation`, and `subscription` types.
+Whether the <config4:gqlTypePrefix> config setting should have an impact on `query`, `mutation`, and `subscription` types.
+
+::: code
+```php Static Config
+'prefixGqlRootTypes' => false,
+```
+```shell Environment Override
+CRAFT_PREFIX_GQL_ROOT_TYPES=false
+```
+:::
 
 
 
@@ -3368,6 +4558,15 @@ Since
 </div>
 
 Whether dates returned by the GraphQL API should be set to the system time zone by default, rather than UTC.
+
+::: code
+```php Static Config
+'setGraphqlDatesToSystemTimeZone' => true,
+```
+```shell Environment Override
+CRAFT_SET_GRAPHQL_DATES_TO_SYSTEM_TIMEZONE=1
+```
+:::
 
 
 
@@ -3400,6 +4599,17 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 Users will only be purged when [garbage collection](https://craftcms.com/docs/4.x/gc.html) is run.
 :::
 
+::: code
+```php Static Config
+// 2 weeks
+'purgePendingUsersDuration' => 1209600,
+```
+```shell Environment Override
+# 2 weeks
+CRAFT_PURGE_PENDING_USERS_DURATION=1209600
+```
+:::
+
 
 
 ### `purgeStaleUserSessionDuration`
@@ -3425,6 +4635,17 @@ The amount of time to wait before Craft purges stale user sessions from the sess
 Set to `0` to disable this feature.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: code
+```php Static Config
+// 1 week
+'purgeStaleUserSessionDuration' => 604800,
+```
+```shell Environment Override
+# 1 week
+CRAFT_PURGE_STALE_USER_SESSION_DURATION=604800
+```
+:::
 
 
 
@@ -3452,6 +4673,15 @@ Set to `0` to disable this feature.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
+::: code
+```php Static Config
+'purgeUnsavedDraftsDuration' => 0,
+```
+```shell Environment Override
+CRAFT_PURGE_UNSAVED_DRAFTS_DURATION=0
+```
+:::
+
 
 
 ### `softDeleteDuration`
@@ -3477,6 +4707,15 @@ The amount of time before a soft-deleted item will be up for hard-deletion by ga
 Set to `0` if you don’t ever want to delete soft-deleted items.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: code
+```php Static Config
+'softDeleteDuration' => 0,
+```
+```shell Environment Override
+CRAFT_SOFT_DELETE_DURATION=0
+```
+:::
 
 
 

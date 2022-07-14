@@ -61,9 +61,9 @@ class CocktailRecipesPlugin extends BasePlugin
 
 ## Plugin Icons
 
-If you want your plugin to have a custom icon in the Control Panel, create a `resources` folder for your plugin and place an `icon.svg` file in it.
+If you want your plugin to have a custom icon in the control panel, create a `resources` folder for your plugin and place an `icon.svg` file in it.
 
-Plugins with Control Panel sections can have a custom icon in the global sidebar by placing an `icon-mask.svg` file within their `resources` folder.
+Plugins with control panel sections can have a custom icon in the global sidebar by placing an `icon-mask.svg` file within their `resources` folder.
 
 ### Methods
 
@@ -175,7 +175,7 @@ If the plugin has database tables, returns the database schema version number fo
 
 #### `hasCpSection()`:
 
-Returns whether the plugin should get its own tab in the CP header. (See [templates](templates.md) for information on that.)
+Returns whether the plugin should get its own menu item in the main control panel navigation. (See [templates](templates.md) for information on that.)
 
 #### `onAfterInstall()`:
 

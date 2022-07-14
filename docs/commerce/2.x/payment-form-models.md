@@ -16,7 +16,7 @@ The following attributes make up the default payment form model for gateways han
 
 If a token is found on the payment form, no validation of other field is performed and the data is ignored.
 
-The token represents a pre validated credit card and is provided by a gateways client side JavaScript library. For example [Stripe.js](https://stripe.com/docs/stripe-js).
+The token represents a pre validated credit card and is provided by a gateways client-side JavaScript library. For example [Stripe.js](https://stripe.com/docs/stripe-js).
 
 ### firstName
 
