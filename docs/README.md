@@ -2,7 +2,7 @@
 editLink: false
 helpfulVotes: false
 home: true
-description: Official documentation for Craft CMS, Craft Commerce, and Craft Nitro.
+description: Official documentation for Craft CMS and Craft Commerce.
 ---
 
 # Documentation
