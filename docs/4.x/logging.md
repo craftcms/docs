@@ -245,3 +245,7 @@ Craft::error(new PsrMessage(
     ],
 ));
 ```
+
+## Further Reading
+
+- [Adding Logging to Craft Plugins with Monolog](https://putyourlightson.com/articles/adding-logging-to-craft-plugins-with-monolog)
