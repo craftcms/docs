@@ -58,7 +58,7 @@ When <config4:devMode> is disabled, as in a production environment, log files ar
 
 ### Sensitive Information
 
-If you don’t want sensitive variables printed in your logs, you’re in luck! Craft automatically obfuscates values with sensitive-sounding keys, like “password”, “token”, and “key”. (Entire list under `sensitiveKeywords` in [config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php).)
+If you don’t want sensitive variables printed in your logs, you’re in luck! Craft automatically obfuscates values with sensitive-sounding keys, like “password”, “token”, and “key”. (See the entire list under `sensitiveKeywords` in [config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), which you can override to add your own keys if you need to!)
 
 ```
 "CRAFT_DB_DATABASE":"db","CRAFT_DB_USER":"db","CRAFT_DB_PASSWORD":"•••••",
