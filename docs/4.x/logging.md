@@ -66,7 +66,7 @@ If you don’t want sensitive variables printed in your logs, you’re in luck! 
 
 ### Log Rotation
 
-Logs are grouped by date without any specific size limit. The number of files is limited to 5 by default, per  <craft4:craft\log\MonologTarget::$maxFiles>. For this reason, log files may accumulate and eventually consume a fair amount of disk space, especially in a busy local development environment.
+Logs are grouped by date without any specific size limit. The number of files is limited to 5 by default, per  <craft4:craft\log\MonologTarget::$maxFiles>.
 
 ## Customizing Logs
 
