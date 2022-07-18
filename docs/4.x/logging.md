@@ -74,6 +74,10 @@ You have a lot of control over how logs are formatted and where they end up goin
 
 ### Monolog Configuration
 
+Craft includes a [default Monolog target](craft4:craft\log\MonologTarget). You can customize that default and introduce new targets of your own, all via `config/app.php` or your custom plugin or module’s `init()` method.
+
+Here’s an annotated example of an app config that customizes the `log` component:
+
 ```php
 <?php
 
