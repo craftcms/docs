@@ -792,7 +792,7 @@ Order queries support the following parameters:
 | [hasLineItems](#haslineitems)             | Narrows the query results to only orders that have line items.
 | [hasPurchasables](#haspurchasables)       | Narrows the query results to only orders that have certain purchasables.
 | [hasTransactions](#hastransactions)       | Narrows the query results to only carts that have at least one transaction.
-| [id](#id)                                 | Narrows the query results based on the orders’ IDs.
+| [id](#id)                                 |
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [isCompleted](#iscompleted)               | Narrows the query results to only orders that are completed.
@@ -808,6 +808,7 @@ Order queries support the following parameters:
 | [orderStatusId](#orderstatusid)           | Narrows the query results based on the order statuses, per their IDs.
 | [origin](#origin)                         | Narrows the query results based on the origin.
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [reference](#reference)                   | Narrows the query results based on the order reference.
 | [relatedTo](#relatedto)                   | Narrows the query results to only orders that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only orders that match a search query.
@@ -1349,42 +1350,11 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `id`
 
-Narrows the query results based on the orders’ IDs.
 
 
 
-Possible values include:
-
-| Value | Fetches orders…
-| - | -
-| `1` | with an ID of 1.
-| `'not 1'` | not with an ID of 1.
-| `[1, 2]` | with an ID of 1 or 2.
-| `['not', 1, 2]` | not with an ID of 1 or 2.
 
 
-
-::: code
-```twig
-{# Fetch the order by its ID #}
-{% set order = craft.orders()
-  .id(1)
-  .one() %}
-```
-
-```php
-// Fetch the order by its ID
-$order = \craft\commerce\elements\Order::find()
-    ->id(1)
-    ->one();
-```
-:::
-
-
-
-::: tip
-This can be combined with [fixedOrder](#fixedorder) if you want the results to be returned in a specific order.
-:::
 
 
 #### `ignorePlaceholders`
@@ -1789,6 +1759,15 @@ $orders = \craft\commerce\elements\Order::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `reference`

@@ -248,6 +248,7 @@ Product queries support the following parameters:
 | [orderBy](#product-orderby)                           | Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
 | [postDate](#product-postdate)                         | Narrows the query results based on the products’ post dates.
 | [preferSites](#product-prefersites)                   | If [unique](#product-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#product-preparesubquery)           | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#product-relatedto)                       | Narrows the query results to only products that are related to certain other elements.
 | [search](#product-search)                             | Narrows the query results to only products that match a search query.
 | [site](#product-site)                                 | Determines which site(s) the products should be queried in.
@@ -1013,6 +1014,15 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
+<h4 id="product-preparesubquery"><a href="#product-preparesubquery" class="header-anchor">#</a> <code>prepareSubquery</code></h4>
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
+
+
 <h4 id="product-relatedto"><a href="#product-relatedto" class="header-anchor">#</a> <code>relatedTo</code></h4>
 
 Narrows the query results to only products that are related to certain other elements.
@@ -1704,16 +1714,17 @@ Variant queries support the following parameters:
 | [offset](#variant-offset)                         | Determines how many variants should be skipped in the results.
 | [orderBy](#variant-orderby)                       | Determines the order that the variants should be returned in. (If empty, defaults to `sortOrder ASC`.)
 | [preferSites](#variant-prefersites)               | If [unique](#variant-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#variant-preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [price](#variant-price)                           | Narrows the query results based on the variants’ price.
 | [product](#variant-product)                       | Narrows the query results based on the variants’ product.
 | [productId](#variant-productid)                   | Narrows the query results based on the variants’ products’ IDs.
 | [relatedTo](#variant-relatedto)                   | Narrows the query results to only variants that are related to certain other elements.
 | [search](#variant-search)                         | Narrows the query results to only variants that match a search query.
 | [site](#variant-site)                             | Determines which site(s) the variants should be queried in.
-| [siteId](#variant-siteid)                         | Determines which site(s) the variants should be queried in, per the site’s ID.
+| [siteId](#variant-siteid)                         |
 | [siteSettingsId](#variant-sitesettingsid)         | Narrows the query results based on the variants’ IDs in the `elements_sites` table.
 | [sku](#variant-sku)                               | Narrows the query results based on the variants’ SKUs.
-| [status](#variant-status)                         | Narrows the query results based on the variants’ statuses.
+| [status](#variant-status)                         |
 | [stock](#variant-stock)                           | Narrows the query results based on the variants’ stock.
 | [title](#variant-title)                           | Narrows the query results based on the variants’ titles.
 | [trashed](#variant-trashed)                       | Narrows the query results to only variants that have been soft-deleted.
@@ -2245,6 +2256,15 @@ $variants = \craft\commerce\elements\Variant::find()
 :::
 
 
+<h4 id="variant-preparesubquery"><a href="#variant-preparesubquery" class="header-anchor">#</a> <code>prepareSubquery</code></h4>
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
+
+
 <h4 id="variant-price"><a href="#variant-price" class="header-anchor">#</a> <code>price</code></h4>
 
 Narrows the query results based on the variants’ price.
@@ -2392,38 +2412,11 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-siteid"><a href="#variant-siteid" class="header-anchor">#</a> <code>siteId</code></h4>
 
-Determines which site(s) the variants should be queried in, per the site’s ID.
 
 
 
-The current site will be used by default.
-
-Possible values include:
-
-| Value | Fetches variants…
-| - | -
-| `1` | from the site with an ID of `1`.
-| `[1, 2]` | from a site with an ID of `1` or `2`.
-| `['not', 1, 2]` | not in a site with an ID of `1` or `2`.
-| `'*'` | from any site.
 
 
-
-::: code
-```twig
-{# Fetch variants from the site with an ID of 1 #}
-{% set variants = craft.variants()
-  .siteId(1)
-  .all() %}
-```
-
-```php
-// Fetch variants from the site with an ID of 1
-$variants = \craft\commerce\elements\Variant::find()
-    ->siteId(1)
-    ->all();
-```
-:::
 
 
 <h4 id="variant-sitesettingsid"><a href="#variant-sitesettingsid" class="header-anchor">#</a> <code>siteSettingsId</code></h4>
@@ -2503,35 +2496,11 @@ $variant = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-status"><a href="#variant-status" class="header-anchor">#</a> <code>status</code></h4>
 
-Narrows the query results based on the variants’ statuses.
 
 
 
-Possible values include:
-
-| Value | Fetches variants…
-| - | -
-| `'enabled'`  _(default)_ | that are enabled.
-| `'disabled'` | that are disabled.
-| `['not', 'disabled']` | that are not disabled.
 
 
-
-::: code
-```twig
-{# Fetch disabled variants #}
-{% set variants = craft.variants()
-  .status('disabled')
-  .all() %}
-```
-
-```php
-// Fetch disabled variants
-$variants = \craft\commerce\elements\Variant::find()
-    ->status('disabled')
-    ->all();
-```
-:::
 
 
 <h4 id="variant-stock"><a href="#variant-stock" class="header-anchor">#</a> <code>stock</code></h4>
