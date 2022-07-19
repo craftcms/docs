@@ -2391,6 +2391,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\commerce\\console\\controllers\\TransferCustomerDataController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\commerce\\console\\controllers\\TransferCustomerDataController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\commerce\\console\\controllers\\TransferCustomerDataController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\commerce\\console\\controllers\\UpgradeController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -5172,6 +5190,49 @@
         "name": "EVENT_AFTER_ORDER_AUTHORIZED",
         "type": "yii\\base\\Event",
         "desc": "This event is raised after an order is authorized in full and completed",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Order",
+        "name": "EVENT_BEFORE_APPLY_ADD_NOTICE",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered before a notice has been added to the order.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -19588,7 +19649,7 @@
         "class": "craft\\commerce\\services\\LineItemStatuses",
         "name": "EVENT_DEFAULT_LINE_ITEM_STATUS",
         "type": "craft\\commerce\\events\\DefaultLineItemStatusEvent",
-        "desc": "The event that is triggered when getting a default status for a line item. You may set `DefaultLineItemStatusEvent::lineItemStatus` to a desired LineItemStatus to override the default status set in CP"
+        "desc": "The event that is triggered when getting a default status for a line item. You may set `DefaultLineItemStatusEvent::lineItemStatus` to a desired LineItemStatus to override the default status set in control panel."
     },
     {
         "class": "craft\\commerce\\services\\LineItems",
