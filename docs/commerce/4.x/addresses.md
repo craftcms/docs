@@ -333,8 +333,6 @@ When a customer is logged in and checks out with a new address, that address is 
 
 Customers can only add and remove addresses from the front end while they’re logged in.
 
-See [the Customer model](commerce4:craft\commerce\models\Customer) to learn about the methods available to retrieve customer address data e.g. [Customer::getPrimaryBillingAddress()](<commerce4:craft\commerce\models\Customer::getPrimaryBillingAddress()>), [Customer::getPrimaryShippingAddress()](<commerce4:craft\commerce\models\Customer::getPrimaryShippingAddress()>) and [Customer::getAddressById()](<commerce4:craft\commerce\models\Customer::getAddressById()>).
-
 ### Get All Current Customer Addresses
 
 You can fetch a list of addresses directly from any [user](craft4:craft\elements\User) element:
@@ -488,4 +486,4 @@ In any of the above examples that post to the `users/save-address` action, you w
 {% endif %}
 ```
 
-For a complete template example that outputs individual field validation errors, see [shop/_includes/addresses/form.twig](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/_private/address/form.twig) in the [example templates](example-templates.md).
+For a complete template example that outputs individual field validation errors, see [shop/_private/address/fields.twig](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/address/fields.twig) in the [example templates](example-templates.md).
