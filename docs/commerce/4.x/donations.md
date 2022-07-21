@@ -37,7 +37,7 @@ The form to add the donation to the cart would look like this:
 The `donationAmount` option parameter is required when adding the donation purchasable to the cart. The value submitted must also be numeric.
 
 Customers can add more than one donation to the cart, but the line item will be replaced if the
-[`optionSignature`](adding-to-and-updating-the-cart.md#options-uniqueness) remains the same, just like it does for any purchasables added to the cart. (For example, two donations added for the same amount will be consolidated into one line item with a quantity of `2`.)
+[`optionSignature`](orders-carts.md#options-uniqueness) remains the same, just like it does for any purchasables added to the cart. (For example, two donations added for the same amount will be consolidated into one line item with a quantity of `2`.)
 
 Once the donation is in the cart, the donation amount can also be updated using the standard line item option update form. You would normally hide the `qty` field, because while it continues to work it’s most common for customers to donate a single amount.
 
