@@ -262,7 +262,7 @@ It’s common to provide a shipping or tax cost estimate before a customer has e
 To help with this, the cart can use estimated shipping and billing addresses for calculations before complete addresses are available.
 
 ::: tip
-An estimated address is an [Address element](commerce4:craft\elements\Address) assigned to the order’s `estimatedShippingAddressId` or `estimatedBillingAddressId`.
+An estimated address is an [Address element](craft4:craft\elements\Address) assigned to the order’s `estimatedShippingAddressId` or `estimatedBillingAddressId`.
 :::
 
 #### Adding a Shipping Estimate Address to the Cart
