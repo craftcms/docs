@@ -10,7 +10,7 @@ Modules can have templates too, but they will need to manually define a [templat
 
 ## Page Templates
 
-To add a new full page to the control panel, create a template that extends the [_layouts/cp.html](https://github.com/craftcms/cms/blob/develop/src/templates/_layouts/cp.html) template.
+To add a new full page to the control panel, create a template that extends the [_layouts/cp.html](https://github.com/craftcms/cms/blob/v3/src/templates/_layouts/cp.html) template.
 
 At a minimum, your template should set a `title` variable and define a `content` block:
 
