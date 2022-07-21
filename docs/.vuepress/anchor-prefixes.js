@@ -18,6 +18,7 @@ module.exports = {
   'commerce1': { base: 'https://docs.craftcms.com/commerce/api/v1/', format: 'internal' },
   'yii2': { base: 'https://www.yiiframework.com/doc/api/2.0/', format: 'yii' },
   'yii1': { base: 'https://www.yiiframework.com/doc/api/1.1/', format: 'yii' },
+  'guide': { base: 'https://www.yiiframework.com/doc/guide/2.0/en/', format: 'generic' },
   'config4': { base: '/4.x/config/config-settings.md#', format: 'config' },
   'config3': { base: '/3.x/config/config-settings.md#', format: 'config' },
   'config2': { base: '/2.x/config-settings.md#', format: 'config' },
