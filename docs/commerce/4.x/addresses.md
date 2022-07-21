@@ -21,7 +21,7 @@ Every order may have a shipping and billing address, and customers with accounts
 - Methods for working with the store’s [countries & states](countries-states.md) provided by Craft’s supporting [address repository](/4.x/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
-The store address is available via the [Store service](craft4:craft\commerce\services\Store):
+The store address is available via the [Store service](commerce4:craft\commerce\services\Store):
 
 ::: code
 ```twig
