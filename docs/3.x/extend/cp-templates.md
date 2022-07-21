@@ -142,7 +142,7 @@ Variable | Description
 
 #### Form Inputs
 
-Craft’s [_includes/forms.html](https://github.com/craftcms/cms/blob/develop/src/templates/_includes/forms.html) template defines several macros that can be used to display your form elements.
+Craft’s [_includes/forms.html](https://github.com/craftcms/cms/blob/v3/src/templates/_includes/forms.html) template defines several macros that can be used to display your form elements.
 
 Most input types have two macros: one for outputting _just_ the input; and another for outputting the input as a “field”, complete with a label, author instructions, etc.
 
