@@ -857,8 +857,6 @@ $fieldsHtml = $form->render();
 ```
 :::
 
-- Edit Category page template: [categories/_edit.html](https://github.com/craftcms/cms/blob/develop/src/templates/categories/_edit.html)
-
 Here’s a simple example of the code needed to save an element programatically, which could live within an `actionSave()` controller action:
 
 ```php
