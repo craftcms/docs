@@ -2655,6 +2655,10 @@ Prunes excess element revisions.
 <h4 id="utils-prune-revisions-index-options" class="command-subheading">Options</h4>
 
 
+--section
+: The section handle(s) to prune revisions from. Can be set to multiple comma-separated sections.
+
+
 --max-revisions
 : The maximum number of revisions an element can have.
 
