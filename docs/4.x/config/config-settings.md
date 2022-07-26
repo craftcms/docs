@@ -36,6 +36,72 @@ Here’s the full list of config settings that Craft supports:
 
 <!-- BEGIN SETTINGS -->
 
+### `passwordPath`
+
+<div class="compact">
+
+Allowed types
+:  `mixed`
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$passwordPath](craft4:craft\config\GeneralConfig::$passwordPath)
+
+Since
+:  4.2.0
+
+</div>
+
+
+
+
+
+### `passwordRequestPath`
+
+<div class="compact">
+
+Allowed types
+:  `mixed`
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$passwordRequestPath](craft4:craft\config\GeneralConfig::$passwordRequestPath)
+
+Since
+:  4.2.0
+
+</div>
+
+
+
+
+
+### `passwordSuccessPath`
+
+<div class="compact">
+
+Allowed types
+:  `mixed`
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$passwordSuccessPath](craft4:craft\config\GeneralConfig::$passwordSuccessPath)
+
+Since
+:  4.2.0
+
+</div>
+
+
+
+
+
 ## System
 
 ### `accessibilityDefaults`
@@ -50,6 +116,7 @@ Default value
     'alwaysShowFocusRings' => false,
     'useShapes' => false,
     'underlineLinks' => false,
+    'notificationDuration' => 5000,
 ]`
 
 Defined by
@@ -64,9 +131,11 @@ The default user accessibility preferences that should be applied to users that 
 
 The array can contain the following keys:
 
-- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus
-- `useShapes` – Whether shapes should be used to represent statuses
-- `underlineLinks` – Whether links should be underlined
+- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus.
+- `useShapes` – Whether shapes should be used to represent statuses.
+- `underlineLinks` – Whether links should be underlined.
+- `notificationDuration` – How long notifications should be shown before they disappear automatically (in
+  milliseconds). Set to `0` to show them indefinitely.
 
 ```php
 'accessibilityDefaults' => [
@@ -3326,7 +3395,7 @@ Allowed types
 :  [string](https://php.net/language.types.string)
 
 Default value
-:  `null`
+:  `''`
 
 Defined by
 :  [GeneralConfig::$securityKey](craft4:craft\config\GeneralConfig::$securityKey)

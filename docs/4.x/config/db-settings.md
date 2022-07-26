@@ -333,7 +333,7 @@ The schema that Postgres is configured to use by default (PostgreSQL only).
 
 ::: tip
 To force Craft to use the specified schema regardless of PostgreSQL’s `search_path` setting, you must enable
-the [setSchemaOnConnect](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#setschemaonconnect) setting.
+the [setSchemaOnConnect()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-setschemaonconnect) setting.
 :::
 
 ::: code
@@ -393,7 +393,7 @@ Since
 
 </div>
 
-Whether the [schema](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#schema) should be explicitly used for database queries (PostgreSQL only).
+Whether the [schema()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-schema) should be explicitly used for database queries (PostgreSQL only).
 
 ::: warning
 This will cause an extra `SET search_path` SQL query to be executed per database connection. Ideally,
@@ -486,7 +486,7 @@ Defined by
 
 The database connection URL, if one was provided by your hosting environment.
 
-If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database), [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), and [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) will be extracted from it.
+If this is set, the values for [driver()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-driver), [user()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-user), [database()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-database), [server()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-server), [port()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-port), and [database()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-database) will be extracted from it.
 
 ::: code
 ```php Static Config
