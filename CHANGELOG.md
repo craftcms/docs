@@ -5,7 +5,8 @@ Theme and significant content changes will be documented in this file.
 ## 2022-07-26
 ### Changed
 - The Craft 3 upgrade guide no longer mentions that support for treating element queries as arrays has been deprecated.
-- The Craft 4 upgrade guid eno longer mentions that support for treating element queries as arrays has been removed.
+- The Craft 4 upgrade guide no longer mentions that support for treating element queries as arrays has been removed.
+- Updated the `|duration` and `|length` Twig filter docs for Craft 4.2 changes.
 
 ## 2022-07-12
 ### Added
