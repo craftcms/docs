@@ -7,7 +7,7 @@ The first step is to decide where you want your Craft project to live. If you al
 In your terminal, go to your `tutorial` folder, and run the following command to configure a new DDEV project there:
 
 ```sh
-ddev config --project-type=php --php-version=8.0
+ddev config --project-name=tutorial --project-type=php --php-version=8.0
 ```
 
 Then run the following command to download the [craftcms/craft](https://github.com/craftcms/craft/) starter project contents, and install its Composer dependencies (namely [craftcms/cms](https://github.com/craftcms/cms/)):
