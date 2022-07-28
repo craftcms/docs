@@ -7,8 +7,12 @@ The first step is to decide where you want your Craft project to live. If you al
 In your terminal, go to your `tutorial` folder, and run the following command to configure a new DDEV project there:
 
 ```sh
-ddev config --project-name=tutorial --project-type=php --php-version=8.0
+ddev config --project-type=php --php-version=8.0
 ```
+
+::: tip
+This will configure ddev to host your site at https://tutorial.ddev.site, where the subdomain name comes from the folder you created. To use a different ddev subdomain pass the `--project-name` argument, for example `--project-name=my-craft-tutorial`.
+:::
 
 Then run the following command to download the [craftcms/craft](https://github.com/craftcms/craft/) starter project contents, and install its Composer dependencies (namely [craftcms/cms](https://github.com/craftcms/cms/)):
 
@@ -27,6 +31,10 @@ At the end of that command, it will ask whether you’d like to begin the setup.
 - **Database table prefix** → _(leave blank)_
 
 Answer `yes` to the prompt on whether to install Craft now, and answer the remaining prompts as you like. The only one that matters is **Site URL**, which you should answer with `https://tutorial.ddev.site`.
+
+::: warning
+The Site URL subdomain should match the ddev project name. If you specified a project name in the `ddev config` command, use that in place of `tutorial` here. For example `https://my-craft-tutorial.ddev.site`.
+:::
 
 Now set your DDEV web server’s document root to the `web/` folder like so:
 
