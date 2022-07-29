@@ -42,6 +42,10 @@ ddev start
 
 In your browser, you should be able to head over to <https://tutorial.ddev.site/> and see the Craft CMS welcome template.
 
+```sh
+ddev launch
+```
+
 <BrowserShot url="https://tutorial.ddev.site/" :link="true">
 <img src="../images/welcome-template.png" alt="Screenshot of the Craft CMS welcome template" />
 </BrowserShot>
