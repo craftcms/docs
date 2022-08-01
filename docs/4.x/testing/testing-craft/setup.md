@@ -111,6 +111,13 @@ define('CRAFT_MIGRATIONS_PATH', __DIR__ . '/_craft/migrations');
 define('CRAFT_TRANSLATIONS_PATH', __DIR__ . '/_craft/translations');
 define('CRAFT_VENDOR_PATH', dirname(__DIR__).'/vendor');
 
+// Load dotenv?
+if (class_exists(Dotenv\Dotenv::class)) {
+    // By default, this will allow .env file values to override environment variables
+    // with matching names. Use `createUnsafeImmutable` to disable this.
+    Dotenv\Dotenv::createUnsafeMutable(CRAFT_TESTS_PATH)->load();
+}
+
 TestSetup::configureCraft();
 ```
 
