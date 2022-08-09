@@ -105,7 +105,7 @@ Commerce-specific Address models are now Craft [Address](craft4:craft\elements\A
 
 This will almost certainly require changes to your front-end templates, though it comes with several benefits:
 
-- locale specific address validation ([see removing address validation](https://craftcms.com/knowledge-base/removing-commerce-address-validation))
+- locale-specific address validation (see [Removing Commerce Address Validation](https://craftcms.com/knowledge-base/removing-commerce-address-validation))
 - better address formatting defaults
 - easier address format customization
 - custom address fields can be managed in field layouts—so no more need for `custom1`, `custom2`, etc.
