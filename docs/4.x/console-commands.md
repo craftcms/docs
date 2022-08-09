@@ -1443,6 +1443,39 @@ Outputs a diff of the pending project config YAML changes.
 
 
 
+<h3 id="project-config-export">
+    <a href="#project-config-export" class="header-anchor">#</a>
+    <code>project-config/export</code>
+</h3>
+
+
+Exports the entire project config to a single file.
+
+<h4 id="project-config-export-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The path the project config should be exported to.
+Can be any of the following:
+    
+    - A full file path
+    - A folder path (export will be saved in there with a dynamically-generated name)
+    - A filename (export will be saved in the working directory with the given name)
+    - Blank (export will be saved in the working directly with a dynamically-generated name)
+
+
+
+<h4 id="project-config-export-options" class="command-subheading">Options</h4>
+
+
+--external
+: Whether to pull values from the project config YAML files instead of the loaded config.
+
+
+--overwrite
+: Whether to overwrite an existing export file, if a specific file path is given.
+
+
+
 <h3 id="project-config-get">
     <a href="#project-config-get" class="header-anchor">#</a>
     <code>project-config/get</code>
