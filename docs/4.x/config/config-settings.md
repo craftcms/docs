@@ -679,18 +679,16 @@ Since
 
 Array of plugin handles that should be disabled, regardless of what the project config says.
 
-```php Static Config
-'dev' => [
-    'disabledPlugins' => ['webhooks'],
+```php
+'disabledPlugins' => [
+    'webhooks',
 ],
 ```
 
 This can also be set to `'*'` to disable **all** plugins.
 
-```php Static Config
-'dev' => [
-    'disabledPlugins' => '*',
-],
+```php
+'disabledPlugins' => '*',
 ```
 
 ::: warning
@@ -700,7 +698,10 @@ between environments, which will prevent project config changes from getting app
 
 ::: code
 ```php Static Config
-'disabledPlugins' => ['redactor', 'webhooks'],
+'disabledPlugins' => [
+    'redactor',
+    'webhooks',
+],
 ```
 ```shell Environment Override
 CRAFT_DISABLED_PLUGINS=redactor,webhooks
@@ -761,6 +762,15 @@ Defined by
 </div>
 
 Whether to enable Craft’s template `{% cache %}` tag on a global basis.
+
+::: code
+```php Static Config
+'enableTemplateCaching' => false,
+```
+```shell Environment Override
+CRAFT_ENABLE_TEMPLATE_CACHING=false
+```
+:::
 
 
 
@@ -2689,6 +2699,15 @@ Defined by
 
 The name of the PHP session cookie.
 
+::: code
+```php Static Config
+'phpSessionName' => null,
+```
+```shell Environment Override
+CRAFT_PHP_SESSION_NAME=null
+```
+:::
+
 
 
 ### `rememberUsernameDuration`
@@ -2933,6 +2952,15 @@ Defined by
 </div>
 
 The name of CSRF token used for CSRF validation if <config4:enableCsrfProtection> is set to `true`.
+
+::: code
+```php Static Config
+'csrfTokenName' => 'MY_CSRF',
+```
+```shell Environment Override
+CRAFT_CSRF_TOKEN_NAME=MY_CSRF
+```
+:::
 
 
 
@@ -3380,8 +3408,8 @@ If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yi
         'on',
     ],
     'CF-Visitor' => [
-        '{\"scheme\":\"https\"}'
-    ]
+        '{\"scheme\":\"https\"}',
+    ],
 ],
 ```
 

@@ -77,10 +77,10 @@ For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo
 you’d set these:
 
 ```php
-[
-    PDO::MYSQL_ATTR_SSL_KEY    => '/path/to/my/client-key.pem',
-    PDO::MYSQL_ATTR_SSL_CERT   => '/path/to/my/client-cert.pem',
-    PDO::MYSQL_ATTR_SSL_CA     => '/path/to/my/ca-cert.pem',
+'attributes' => [
+    PDO::MYSQL_ATTR_SSL_KEY => '/path/to/my/client-key.pem',
+    PDO::MYSQL_ATTR_SSL_CERT => '/path/to/my/client-cert.pem',
+    PDO::MYSQL_ATTR_SSL_CA => '/path/to/my/ca-cert.pem',
 ],
 ```
 
