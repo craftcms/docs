@@ -1,7 +1,17 @@
 <template>
   <div>
-    <div v-if="prev || next" class="page-nav content-wrapper">
-      <p class="inner border-t mt-0 pt-4 overflow-auto">
+    <div v-if="prev || next || relatedItems" class="page-nav content-wrapper">
+      <div v-if="relatedItems" class="inner border-t pt-4">
+        <h4>See Also</h4>
+        <ul>
+          <li v-for="(item, index) in relatedItems" :key="index">
+            <a v-if="item.external" :href="item.uri">{{ item.label }} <OutboundLink /></a>
+            <a v-else :href="item.uri">{{ item.label }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <p class="inner border-t pt-4 overflow-auto" :class="{ 'mt-4': relatedItems }">
         <span v-if="prev" class="prev">
           <span class="paging-arrow inline-block">←</span>
           <a
@@ -59,7 +69,7 @@
 </style>
 
 <script>
-import { resolvePage, resolveHeaders } from "../util";
+import { isExternal, resolvePage, resolveHeaders } from "../util";
 import isString from "lodash/isString";
 import isNil from "lodash/isNil";
 import SidebarLinks from "./SidebarLinks";
@@ -74,6 +84,24 @@ export default {
   computed: {
     headingItems() {
       return resolveHeaders(this.$page);
+    },
+
+    relatedItems() {
+      const related = this.$frontmatter.related;
+
+      if (!related) {
+        return [];
+      }
+
+      return related.map((r) => {
+        const rp = resolvePage(this.$site.pages, r.uri);
+
+        return {
+          label: r.label || rp.title,
+          uri: rp.path,
+          external: isExternal(rp.path),
+        };
+      });
     },
 
     prev() {
