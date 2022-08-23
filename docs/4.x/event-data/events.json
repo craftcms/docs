@@ -3855,6 +3855,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\utils\\FixFieldLayoutUidsController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\utils\\FixFieldLayoutUidsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\utils\\FixFieldLayoutUidsController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\utils\\PruneProvisionalDraftsController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -35164,6 +35182,24 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\services\\Addresses",
+        "name": "EVENT_DEFINE_USED_FIELDS",
+        "type": "craft\\events\\DefineAddressFieldsEvent",
+        "desc": "The event that is triggered when defining the address fields that are used by a given country code."
+    },
+    {
+        "class": "craft\\services\\Addresses",
+        "name": "EVENT_DEFINE_USED_SUBDIVISION_FIELDS",
+        "type": "craft\\events\\DefineAddressFieldsEvent",
+        "desc": "The event that is triggered when defining the subdivision address fields that are used by a given country code."
+    },
+    {
+        "class": "craft\\services\\Addresses",
+        "name": "EVENT_DEFINE_FIELD_LABEL",
+        "type": "craft\\events\\DefineAddressFieldLabelEvent",
+        "desc": "The event that is triggered when defining the label of an address field for a given country code."
+    },
+    {
         "class": "craft\\services\\Assets",
         "name": "EVENT_BEFORE_REPLACE_ASSET",
         "type": "craft\\events\\ReplaceAssetEvent",
@@ -35744,6 +35780,42 @@
         "name": "EVENT_INVALIDATE_CACHES",
         "type": "craft\\events\\InvalidateElementCachesEvent",
         "desc": "The event that is triggered when element caches are invalidated."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_AUTHORIZE_VIEW",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to view an element’s edit page."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_AUTHORIZE_SAVE",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to save an element in its current state."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_AUTHORIZE_CREATE_DRAFTS",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to create drafts for an element."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_AUTHORIZE_DUPLICATE",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to duplicate an element."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_AUTHORIZE_DELETE",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to delete an element."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_AUTHORIZE_DELETE_FOR_SITE",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to delete an element for its current site."
     },
     {
         "class": "craft\\services\\Fields",
@@ -37124,6 +37196,12 @@
         "name": "EVENT_REGISTER_SITE_URL_RULES",
         "type": "craft\\events\\RegisterUrlRulesEvent",
         "desc": "The event that is triggered when registering URL rules for the front-end site."
+    },
+    {
+        "class": "craft\\web\\View",
+        "name": "EVENT_AFTER_CREATE_TWIG",
+        "type": "craft\\events\\CreateTwigEvent",
+        "desc": "The event that is triggered when a Twig environment is created."
     },
     {
         "class": "craft\\web\\View",

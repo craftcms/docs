@@ -2655,6 +2655,17 @@ Converts all non-ASCII asset filenames to ASCII.
 
 Ensures all elements UIDs are unique.
 
+## `utils/fix-field-layout-uids`
+
+
+<h3 id="utils-fix-field-layout-uids-index">
+    <a href="#utils-fix-field-layout-uids-index" class="header-anchor">#</a>
+    <code>utils/fix-field-layout-uids</code>
+</h3>
+
+
+Fixes any duplicate UUIDs found within field layout components in the project config.
+
 ## `utils/prune-provisional-drafts`
 
 
