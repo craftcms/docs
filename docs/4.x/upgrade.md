@@ -107,8 +107,8 @@ Logs in Craft 4 now use [Monolog](https://github.com/Seldaek/monolog), which com
         ]
     ],
     ```
-- Query logging is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableLogging](./config/db-settings.md#enablelogging) config setting in `config/db.php`.
-- Query profiling is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableProfiling](./config/db-settings.md#enableprofiling) config setting in `config/db.php`.
+- Query logging is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableLogging](./config/db.md#enablelogging) config setting in `config/db.php`.
+- Query profiling is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableProfiling](./config/db.md#enableprofiling) config setting in `config/db.php`.
 - When [CRAFT_STREAM_LOG](./config/#craft-stream-log) is set to `true`, file logging will **not** be enabled.
 
 ::: tip

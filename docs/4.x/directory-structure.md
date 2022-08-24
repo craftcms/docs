@@ -7,7 +7,7 @@ When you download a fresh copy of Craft 4, your project will have the following 
 Holds all of your Craft and plugin [configuration files](config/README.md), as well as your `license.key` file.
 
 ::: tip
-You can customize the name and location of this folder by setting the [CRAFT_CONFIG_PATH](config/README.md#craft-config-path) PHP constant in `web/index.php`.
+You can customize the name and location of this folder by setting the [CRAFT_CONFIG_PATH](config/README.md#craft-config-path) PHP constant.
 :::
 
 ### `modules/`

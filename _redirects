@@ -39,6 +39,8 @@
 /docs/3.x/testing/testing-craft/getting-started.html /docs/3.x/testing/testing-craft/setup.html
 /docs/commerce/3.x/gateway-config.html /docs/commerce/3.x/payment-gateways.html#storing-config-outside-of-the-database
 /docs/4.x/upgrading.html /docs/4.x/upgrade.html
+/docs/4.x/config/config-settings /docs/4.x/config/general
+/docs/4.x/config/db-settings /docs/4.x/config/db
 # 2.x plugin index is empty—forward to introduction
 /docs/2.x/plugins /docs/2.x/plugins/introduction.html
 

@@ -1,87 +1,219 @@
+---
+# This feature hasn't been merged yet--just stashing for later!
+related:
+  - uri: https://nystudio107.com/blog/fluent-multi-environment-config-for-craft-cms-4
+    label: Fluent multi-environment config for Craft CMS
+  - uri: /project-config
+---
+
 # Configuring Craft
 
-There are several ways to configure Craft depending on your needs.
+Craft can be configured to work in a way that makes sense for you, your team, and your infrastructure.
 
-## General Config Settings
+Broadly, configuration refers to how Craft will behave in a particular environment. Most applications will only require [database connection information](db.md) to work, but as you get familiar with more of Craft's features, install plugins, or start using additional services, you may need to provide additional config.
 
-Craft supports several [general config settings](config-settings.md). You can override their default values in your `config/general.php` file.
+We'll start by looking at how Craft assembles its config in a context-aware way, then move through some specific options.
+
+::: tip
+[Project Config](/project-config) is a discrete concept, but was designed to integrate with the lower-level config system. You'll see some examples in a moment!
+:::
+
+## Where Configuration Happens
+
+The most common way to customize your Craft project is by editing files in the [`config/` folder](../directory-structure.md).
+
+| Concern | File Name(s) | Description
+| ------- | -------- | -----------
+| [General Configuration](#general) | `general.php` | Global options that can affect the front-end, control panel, debugging, etc.
+| [Database Settings](#database) | `db.php` | Connection settings for your database.
+| [Custom Options](#custom-settings) | `db.php` | Connection settings for your database.
+| [Routing](#url-rules) | `routes.php` | Custom HTTP routes.
+| [Application Configuration](#application-configuration) | `app.php`, `app.web.php`, `app.console.php` | Overrides for the root Application and any of its [Components](https://www.yiiframework.com/doc/guide/2.0/en/concept-components).
+| Plugin Settings | `{plugin-handle}.php`, or other custom files | Consult the plugin's documentation for specifics.
+| Advanced | | Specific library options and/or behaviors that may be exposed in a non-standard way.
+
+::: tip
+You may find other files in the `config/` folder, like `license.key` or the `project/` folder. Craft (and many plugins) may ask you to place config-adjacent files here, even if they don't work in a consistent way.
+:::
+
+Sensitive credentials like your database's password should be kept out of tracked files—but instead of ignoring config files outright, let's take a look at our options.
+
+## Setting, Resolving, and Accessing Options
+
+Each setting accepts specific types and values (like an integer, interval expression string, or boolean), but Craft is able to resolve them in a few different ways:
+
+- **Static:** A scalar value is explicitly set in a config file, and is the same for all environments.
+- **Environment-dependent:** Specific values are set for [different known environments](#multi-environment-configs), like `dev` and `production`.
+- **Dynamic:** A value is determined either by a call to `craft\helpers\App::env('MY_ENVIRONMENT_VAR')` (using a key that you expect to be defined in all target environments), or by using an [alias](#aliases) that is resolved at runtime.
+
+You can combine these methods to create flexibility where you need it and rigidity where you don't. Let's look at some other ways values are resolved.
+
+::: tip
+When working on a team or deploying your project in a new environment, it ought to be easy to discover what Craft options were configured to make the site or application work as intended. While some of the following strategies are convenient, consider their impacts on clarity.
+:::
+
+### Priority
+
+Craft will begin resolving values in this order, increasing in specificity:
+
+0. **Defaults:** Every option has a default value, even if it’s `null`. Those values are provided in the documentation for each setting.
+1. **Config Files:** Craft [evaluates and merges](#multi-environment-configs) PHP config files.
+2. **Magic Environment Variables:** For general and database settings, Craft looks for [special environment variables](#config-environment-variables).
+
+This allows you to set 
+
+### Style: Map vs. Fluent
+
+At its simplest, a config file might only return a map of settings:
+
+```php
+use craft\helpers\App;
+
+return [
+    'devMode' => App::env('CRAFT_ENVIRONMENT') === 'dev',
+    'userSessionDuration' => 'P1D',
+];
+```
+
+If you are interested in auto-completion and type hints from your editor, the equivalent "fluent" style declaration <Since ver="4.2" feature="Fluent config" /> would look like this:
+
+```php
+use craft\config\GeneralConfig;
+use craft\helpers\App;
+
+return GeneralConfig::create()
+    ->devMode(App::env('CRAFT_ENVIRONMENT') === 'dev')
+    ->userSessionDuration('P1D');
+```
+
+Each option becomes a method call, returning the modified config object to support chaining. You can dynamically set values with an in-line expression or by breaking the chain into logical chunks:
+
+```php{5,8-10}
+use craft\config\GeneralConfig;
+use craft\helpers\App;
+
+$config = GeneralConfig::create()
+    ->devMode(false)
+    ->userSessionDuration('P1D');
+
+if (App::env('CRAFT_ENVIRONMENT') === 'dev') {
+    $config->devMode(true);
+}
+
+return $config;
+```
+
+::: warning
+Fluent config is currently only available for general and database settings, and not all plugins support it. When in doubt, use a config map!
+:::
+
+### Multi-Environment Configs
+
+Craft’s PHP config files can supply separate config settings for each environment by declaring a `*` key at the top-level of the returned array.
+
+Options in the splat apply to all environments, and additional options nested within a key matching the [`CRAFT_ENVIRONMENT`](#craft-environment) PHP constant or environment variable are merged on top of it. This also means that you can use `*` to set up your own "defaults," while still being able to override them in a specific environment.
+
+```php
+// -- config/general.php --
+return [
+    // Activate multi-environment config:
+    '*' => [
+        // Applies to all environments:
+        'omitScriptNameInUrls' => true,
+    ],
+
+    'dev' => [
+        // Only applies to development environments, overriding anything in `*`:
+        'devMode' => true,
+    ],
+
+    'production' => [
+        // Only applies to the production environment, overriding anything in `*`:
+        'cpTrigger' => 'secret-word',
+    ],
+];
+```
+
+Presuming your environment was evaluated to `dev`, Craft would compile a config object equivalent to:
 
 ```php
 return [
+    'omitScriptNameInUrls' => true,
     'devMode' => true,
 ];
 ```
 
-You can read general config settings in Twig templates or PHP files via the config service:
+::: tip
+Make sure your key(s) are sufficiently unique! Craft reads your array of config settings from top to bottom, applying config settings wherever the `CRAFT_ENVIRONMENT` value *contains* the key.
+
+If the environment cannot be determined, your server’s hostname will be used.
+:::
+
+### Accessing Configured Values
+
+If you need to check a setting in your templates or module, everything is available via the `Config` service. For example, if you wanted to switch some debugging information on or off, you could do the following:
 
 ::: code
 ```twig
-{% set devModeEnabled = craft.app.config.general.devMode %}
+{# Output entry ID for debugging: #}
+{% if craft.app.config.general.devMode %}
+  ID: <code>{{ entry.id }}</code>
+{% endif %}
 ```
 ```php
-$devModeEnabled = Craft::$app->config->general->devMode;
+// Add `DevMode` header when active:
+if (Craft::$app->config->general->devMode) {
+  Craft::$app->request->headers->set('DevMode', 'On');
+}
 ```
 :::
 
-## Database Connection Settings
+## Categories
 
-Craft supports several [database connection settings](db-settings.md). You can override their default values in your `config/db.php` file.
+To make config settings easier to find, they're organized into a few groups.
 
-You can read database config settings in Twig templates or PHP files via the config service:
+### General
 
-::: code
-```twig
-{% set database = craft.app.config.db.database %}
-```
-```php
-$database = Craft::$app->config->db->database;
-```
-:::
+[General config settings](config-settings.md) are set via the `config/general.php` file or special environment variables.
 
-## Custom Config Settings
+### Database
 
-You can optionally define your own config settings by creating a `config/custom.php` file:
+Your [database connection settings](db.md) are set via the `config/db.php` file.
+
+### URL Rules
+
+You can define custom [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
+
+### Application
+
+Some systems may require customization of Craft [application components](app.md) beyond what is exposed through specific config files. This is done directly via the `config/app.php` file.
+
+### Custom Settings
+
+Settings defined in a `config/custom.php` file don't map to or affect any built-in features, but can useful to centralize data, flags, or secrets that otherwise don't have a place to live.
 
 ```php
 return [
-    'myCustomSetting' => 'foo',
+    'serviceBaseUrl' => 'https://api.service.com/v1',
+    'servicePublishableKey' => App::env('SERVICE_PUBLISHABLE_KEY'),
+    'servicePrivateKey' => App::env('SERVICE_PRIVATE_KEY'),
 ];
 ```
 
-Custom config settings can be read in Twig templates or PHP files via the config service:
+Custom settings also support the multi-environment structure, so you can use the resolved values in a predictable way in any context:
 
 ::: code
 ```twig
-{% set mySetting = craft.app.config.custom.myCustomSetting %}
+{% set publishableKey = craft.app.config.custom.servicePublishableKey %}
 ```
 ```php
-$mySetting = Craft::$app->config->custom->myCustomSetting;
+$privateKey = Craft::$app->config->custom->servicePrivateKey;
 ```
 :::
 
-## Guzzle Config
-
-Craft uses [Guzzle](http://docs.guzzlephp.org/en/latest/) whenever creating HTTP requests, such as:
-
-- when checking for Craft updates
-- when sending in a support request from the Craft Support widget
-- when loading RSS feeds from the Feeds widget
-- when working with assets on remote volumes, like Amazon S3
-
-You can customize the config settings Guzzle uses when sending these requests by creating a `guzzle.php` file in your `config/` folder. The file does not support Craft’s [multi-environment configuration](#environmental-configuration) and should return an array, with your config overrides.
-
-```php
-<?php
-
-return [
-    'headers' => ['Foo' => 'Bar'],
-    'query'   => ['testing' => '123'],
-    'auth'    => ['username', 'password'],
-    'proxy'   => 'https://myproxy:1234',
-];
-```
-
-The options defined here will be passed into new `GuzzleHttp\Client` instances. See [Guzzle’s documentation](http://docs.guzzlephp.org/en/latest/) for a list of available options.
+::: tip
+If these settings need to be changed frequently, or don't depend on the environment, they may be a better fit for a [Global Set](../globals.md).
+:::
 
 ## Aliases
 
@@ -181,326 +313,6 @@ Craft::getAlias('@webroot');
 ```
 :::
 
-## URL Rules
-
-You can define custom [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
-
-## Application Configuration
-
-You can customize Craft’s entire [Yii application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) from `config/app.php`. Any items returned by that array will get merged into the main application configuration array.
-
-You can also customize Craft’s application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
-
-::: tip
-Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php). Refer to these files when you need to override existing application components.
-:::
-
-### Cache Component
-
-By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
-
-::: tip
-Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/main/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `CRAFT_APP_ID` environment variable to your `.env` file:
-
-    php craft setup/app-id
-:::
-
-#### Database Cache Example
-
-If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a console command for convenience:
-
-```bash
-php craft setup/db-cache-table
-```
-
-Once that’s done, you can set your `cache` application component to use <craft4:craft\cache\DbCache>.
-
-```php
-<?php
-return [
-    'components' => [
-        'cache' => craft\cache\DbCache::class,
-    ],
-];
-```
-
-::: tip
-If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft4:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
-:::
-
-#### APC Example
-
-```php
-<?php
-
-use craft\helpers\App;
-
-return [
-    'components' => [
-        'cache' => [
-            'class' => yii\caching\ApcCache::class,
-            'useApcu' => true,
-            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
-        ],
-    ],
-];
-```
-
-
-#### Memcached Example
-
-```php
-<?php
-
-use craft\helpers\App;
-
-return [
-    'components' => [
-        'cache' => [
-            'class' => yii\caching\MemCache::class,
-            'useMemcached' => true,
-            'username' => App::env('MEMCACHED_USERNAME'),
-            'password' => App::env('MEMCACHED_PASSWORD'),
-            'defaultDuration' => 86400,
-            'servers' => [
-                [
-                    'host' => App::env('MEMCACHED_HOST') ?: 'localhost',
-                    'persistent' => true,
-                    'port' => 11211,
-                    'retryInterval' => 15,
-                    'status' => true,
-                    'timeout' => 15,
-                    'weight' => 1,
-                ],
-            ],
-            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
-        ],
-    ],
-];
-```
-
-#### Redis Example
-
-To use Redis cache storage, you will first need to install the [yii2-redis](https://github.com/yiisoft/yii2-redis) library. Then configure Craft’s `cache` component to use it:
-
-```php
-<?php
-
-use craft\helpers\App;
-
-return [
-    'components' => [
-        'redis' => [
-            'class' => yii\redis\Connection::class,
-            'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
-            'port' => 6379,
-            'password' => App::env('REDIS_PASSWORD') ?: null,
-        ],
-        'cache' => [
-            'class' => yii\redis\Cache::class,
-            'defaultDuration' => 86400,
-            'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
-        ],
-    ],
-];
-```
-
-### Database Component
-
-If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db-settings.md), you can do that by overriding the `db` component.
-
-This example configures read/write splitting by defining read replicas. The writer will be whatever’s configured in `config/db.php`.
-
-```php
-<?php
-
-use craft\helpers\App;
-
-return [
-    'components' => [
-        'db' => function() {
-            // Get the default component config
-            $config = App::dbConfig();
-
-            // Use read/write query splitting
-            // (requires Craft 3.4.25 or later)
-
-            // Define the default config for replica DB connections
-            $config['replicaConfig'] = [
-                'username' => App::env('DB_REPLICA_USER'),
-                'password' => App::env('DB_REPLICA_PASSWORD'),
-                'tablePrefix' => App::env('CRAFT_DB_TABLE_PREFIX'),
-                'attributes' => [
-                    // Use a smaller connection timeout
-                    PDO::ATTR_TIMEOUT => 10,
-                ],
-                'charset' => 'utf8',
-            ];
-
-            // Define the replica DB connections
-            $config['replicas'] = [
-                ['dsn' => App::env('DB_REPLICA_DSN_1')],
-                ['dsn' => App::env('DB_REPLICA_DSN_2')],
-                ['dsn' => App::env('DB_REPLICA_DSN_3')],
-                ['dsn' => App::env('DB_REPLICA_DSN_4')],
-            ];
-
-            // Instantiate and return it
-            return Craft::createObject($config);
-        },
-    ],
-];
-```
-
-### Session Component
-
-In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
-
-::: tip
-The `session` component should be overridden from `app.web.php` so it gets defined for web requests, but not console requests.
-:::
-
-#### Redis Example
-
-```php
-// config/app.php
-<?php
-
-use craft\helpers\App;
-
-return [
-    'components' => [
-        'redis' => [
-            'class' => yii\redis\Connection::class,
-            'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
-            'port' => 6379,
-            'password' => App::env('REDIS_PASSWORD') ?: null,
-        ],
-    ],
-];
-```
-
-```php
-// config/app.web.php
-<?php
-
-use craft\helpers\App;
-
-return [
-    'components' => [
-        'session' => function() {
-            // Get the default component config
-            $config = App::sessionConfig();
-
-            // Override the class to use Redis' session class
-            $config['class'] = yii\redis\Session::class;
-
-            // Instantiate and return it
-            return Craft::createObject($config);
-        },
-    ],
-];
-```
-
-#### Database Example
-
-First, you must create the database table that will store PHP’s sessions. You can do that by running the `craft setup/php-session-table` console command from your project’s root folder.
-
-```php
-<?php
-return [
-    'components' => [
-        'session' => function() {
-            // Get the default component config
-            $config = craft\helpers\App::sessionConfig();
-
-            // Override the class to use DB session class
-            $config['class'] = yii\web\DbSession::class;
-
-            // Set the session table name
-            $config['sessionTable'] = craft\db\Table::PHPSESSIONS;
-
-            // Instantiate and return it
-            return Craft::createObject($config);
-        },
-    ],
-];
-```
-
-::: tip
-The `session` component **must** be configured with the <craft4:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
-:::
-
-### Mailer Component
-
-To override the `mailer` component config (which is responsible for sending emails), do this in `config/app.php`:
-
-```php
-<?php
-return [
-    'components' => [
-        'mailer' => function() {
-            // Get the stored email settings
-            $settings = craft\helpers\App::mailSettings();
-
-            // Override the transport adapter class
-            $settings->transportType = craft\mailgun\MailgunAdapter::class;
-
-            // Override the transport adapter settings
-            $settings->transportSettings = [
-                'domain' => 'my-project.tld',
-                'apiKey' => 'key-xxxxxxxxxx',
-            ];
-
-            // Create a Mailer component config with these settings
-            $config = craft\helpers\App::mailerConfig($settings);
-
-            // Instantiate and return it
-            return Craft::createObject($config);
-        },
-    ],
-];
-```
-
-::: tip
-Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from **Settings** → **Email**.
-:::
-
-### Queue Component
-
-Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft4:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md).
-
-You can switch to a different driver by overriding Craft’s `queue` component from `config/app.php`, however that will result in a loss of visibility into the queue’s state from the control panel. Instead you should take a hybrid approach, by setting your custom queue driver config on <craft4:craft\queue\Queue::$proxyQueue>:
-
-```php
-<?php
-return [
-    'components' => [
-        'queue' => [
-            'proxyQueue' => [
-                'class' => yii\queue\redis\Queue::class,
-                'redis' => 'redis', // Redis connection component or its config
-                'channel' => 'queue', // Queue channel key
-            ],
-        ],
-    ],
-];
-```
-
-Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
-
-::: warning
-Only drivers that implement <craft4:craft\queue\QueueInterface> will be visible within the control panel.
-:::
-
-::: tip
-If your queue driver supplies its own worker, set the <config4:runQueueAutomatically> config setting to `false` in `config/general.php`.
-:::
-
-### Modules
-
-You can register and bootstrap custom Yii modules into the application from `config/app.php` as well. See [How to Build a Module](../extend/module-guide.md) for more info.
-
 ## Environmental Configuration
 
 Some settings should be defined on a per-environment basis. For example, when developing locally, you may want your site’s base URL to be `http://my-project.test`, but on production it should be `https://my-project.com`.
@@ -564,52 +376,17 @@ Then you could go into your User Photos volume’s settings (for example) and se
 
 ### Config Environment Variables
 
-Craft’s [general config settings](config-settings.md) and [database connection settings](db-settings.md) can be defined exclusively by environment variables using a `CRAFT_` or `CRAFT_DB_` prefix respectively.
+Craft’s [general config settings](config-settings.md) and [database connection settings](db.md) can be defined exclusively by environment variables using a `CRAFT_` or `CRAFT_DB_` prefix respectively.
 
-Combine the prefix with the config setting in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). The <config4:allowUpdates> setting, for example, would be `CRAFT_ALLOW_UPDATES`. The database [port](db-settings.md#port) setting would be `CRAFT_DB_PORT`.
-
-### Config Files
-
-Craft still supports setting [general config settings](config-settings.md), [database connection settings](db-settings.md), and other settings via static PHP files. A few non-scalar config settings, like <config4:cpHeadTags>, must be set this way because there’s no way to provide a nested array via environment variable.
-
-#### Multi-Environment Configs
-
-Craft’s PHP config files can optionally define separate config settings for each individual environment.
-
-```php
-// -- config/general.php --
-return [
-    // Global settings
-    '*' => [
-        'omitScriptNameInUrls' => true,
-    ],
-
-    // Dev environment settings
-    'dev' => [
-        'devMode' => true,
-    ],
-
-    // Production environment settings
-    'production' => [
-        'cpTrigger' => 'secret-word',
-    ],
-];
-```
-
-The `'*'` key is required here so Craft knows to treat it as a multi-environment key, but the other keys are up to you. Craft will look for the key(s) that match the [CRAFT_ENVIRONMENT](#craft-environment) PHP constant or environment variable. (Your server’s hostname will be used as a fallback.)
+Combine the prefix with the config setting in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). The <config4:allowUpdates> setting, for example, would be `CRAFT_ALLOW_UPDATES`. The database [port](db.md#port) setting would be `CRAFT_DB_PORT`.
 
 ::: tip
-Make sure your key(s) are sufficiently unique! Craft reads your array of config settings from top to bottom, applying config settings wherever the `CRAFT_ENVIRONMENT` value *contains* the key.
+If you are working with others and your `.env` isn't checked in to version control (it probably shouldn't be!), make sure you have a way of communicating what options are required to get your application running! A `.env.example` file is a great place to store keys + comments, without exposing secrets—and it lets you simply copy the file when spinning up a new environment.
 :::
-
-```bash
-# -- .env --
-CRAFT_ENVIRONMENT=dev
-```
 
 ## PHP Constants
 
-Your `web/index.php` and `craft` files can define certain PHP constants Craft’s bootstrap script will check for while loading and configuring Craft.
+You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` executable, or consolidate common values into a single file, as the [composter starter project](https://github.com/craftcms/craft) does.
 
 ::: tip
 Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
@@ -677,7 +454,7 @@ define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
 
 ### `CRAFT_LICENSE_KEY_PATH`
 
-The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../directory-structure.md#config) folder by default.)
+The path that Craft should store its license key file, including its file name. (It will be stored as `license.key` within your [config/](../directory-structure.md#config) folder by default.)
 
 ### `CRAFT_LOG_PHP_ERRORS`
 
@@ -721,7 +498,32 @@ The path to the `translations/` folder. (It is assumed to live within the base d
 
 The path to the [vendor/](../directory-structure.md#vendor) folder. (It is assumed to live 4 directories up from the bootstrap script by default.)
 
-## Mutex Configuration
+## Advanced Options
+
+### Guzzle
+
+Craft uses [Guzzle](http://docs.guzzlephp.org/en/latest/) whenever creating HTTP requests, such as:
+
+- when checking for Craft updates
+- when sending in a support request from the Craft Support widget
+- when loading RSS feeds from the Feeds widget
+- when working with assets on remote volumes, like Amazon S3
+
+You can customize the config settings Guzzle uses when sending these requests by creating a `guzzle.php` file in your `config/` folder. The file does not support Craft’s [multi-environment configuration](#environmental-configuration) and should return an array, with your config overrides.
+
+```php
+return [
+    'headers' => ['Foo' => 'Bar'],
+    'query'   => ['testing' => '123'],
+    'auth'    => ['username', 'password'],
+    'proxy'   => 'https://myproxy:1234',
+];
+```
+
+The options defined here will be passed into new `GuzzleHttp\Client` instances. See [Guzzle’s documentation](http://docs.guzzlephp.org/en/latest/) for a list of available options.
+
+
+### Mutex Configuration
 
 Craft uses a file-based mutex driver by default, which should be switched to a different driver in [load-balanced environments](https://craftcms.com/knowledge-base/configuring-load-balanced-environments#mutex-locks).
 
