@@ -246,7 +246,7 @@ return [
 ```
 
 ::: tip
-The `session` component **must** be configured with the <craft4:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
+The `session` component **must** have the <craft4:craft\behaviors\SessionBehavior> behavior attached, which provides methods that the system relies on. This is handled by the factory function in the closure above, but when configuring the component from scratch, you must explicitly include it by setting `$config['as session'] = SessionBehavior::class;`, where `as session` is a [Yii shorthand](https://www.yiiframework.com/doc/guide/2.0/en/concept-configurations#configuration-format) for attaching behaviors via a configuration object.
 :::
 
 ### Mailer
