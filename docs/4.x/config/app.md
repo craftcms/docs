@@ -1,26 +1,32 @@
 # Application Configuration
 
-You can customize Craft’s entire [Yii application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) from `config/app.php`. Any items returned by that array will get merged into the main application configuration array.
+Craft’s entire [application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) can be customized via `config/app.php`. Any items in the returned array will get merged into the main application configuration array.
 
-You can also customize Craft’s application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
+You can further customize the application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
 
-::: tip
-Craft’s default configuration is defined by [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php), and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php). Refer to these files when you need to override existing application components.
+::: warning
+New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.php` to set an app ID and [bootstrap an example Module](#modules). Most applications will _not_ require any deeper application config.
 :::
 
-### Cache Component
+## Common Components
+
+We'll only cover a few commonly-customized components here. Refer to Craft's own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components and properties can be customized. For example, Craft swaps out <craft4:craft\web\Request> for <craft4:craft\console\Request> to help smooth over some differences in Yii's HTTP and CLI APIs.
+
+Even in the native application config map, some properties are omitted for brevity. Every component will be declared either as a closure (with an internal call to a config factory helper) or an array with a `class` key. All public properties (as well as private properties with the appropriate magic getter/setter methods) on those classes are configurable!
+
+### Cache
 
 By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
 
 ::: tip
-Make sure that your `config/app.php` file is setting a unique `id` for your application, like [new Craft projects are doing](https://github.com/craftcms/craft/blob/main/config/app.php#L23). If not, add that missing line, and run the following command to add a unique `CRAFT_APP_ID` environment variable to your `.env` file:
+To help avoid key collisions with non-standard cache drivers, set a unique application `id`. See the  [Craft starter project](https://github.com/craftcms/craft/blob/main/config/app.php#L23) for an example of how this is configured, then run the following command to append a `CRAFT_APP_ID` variable to your `.env` file:
 
     php craft setup/app-id
 :::
 
-#### Database Cache Example
+#### Database Example
 
-If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a console command for convenience:
+If you want to store data caches in the database, first you will need to create a `cache` table as specified by <yii2:yii\caching\DbCache::$cacheTable>. Craft provides a console command for convenience, which will honor your [`tablePrefix`](db.md#tableprefix) setting:
 
 ```bash
 php craft setup/db-cache-table
@@ -58,7 +64,6 @@ return [
     ],
 ];
 ```
-
 
 #### Memcached Example
 
@@ -118,11 +123,11 @@ return [
 ];
 ```
 
-### Database Component
+### Database
 
 If you need to configure the database connection beyond what’s possible with Craft’s [database config settings](db.md), you can do that by overriding the `db` component.
 
-This example configures read/write splitting by defining read replicas. The writer will be whatever’s configured in `config/db.php`.
+This example sets up read/write splitting by defining read replicas. The writer will be whatever is configured in `config/db.php`.
 
 ```php
 <?php
@@ -165,7 +170,7 @@ return [
 ];
 ```
 
-### Session Component
+### Session
 
 In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
 
@@ -244,7 +249,7 @@ return [
 The `session` component **must** be configured with the <craft4:craft\behaviors\SessionBehavior> behavior, which adds methods to the component that the system relies on.
 :::
 
-### Mailer Component
+### Mailer
 
 To override the `mailer` component config (which is responsible for sending emails), do this in `config/app.php`:
 
@@ -279,7 +284,7 @@ return [
 Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing email settings from **Settings** → **Email**.
 :::
 
-### Queue Component
+### Queue
 
 Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default Craft will use a [custom queue driver](craft4:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md).
 
@@ -310,6 +315,6 @@ Only drivers that implement <craft4:craft\queue\QueueInterface> will be visible 
 If your queue driver supplies its own worker, set the <config4:runQueueAutomatically> config setting to `false` in `config/general.php`.
 :::
 
-### Modules
+## Modules
 
 You can register and bootstrap custom Yii modules into the application from `config/app.php` as well. See [How to Build a Module](../extend/module-guide.md) for more info.
