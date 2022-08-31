@@ -10,9 +10,9 @@ New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.p
 
 ## Common Components
 
-We'll only cover a few commonly-customized components here. Refer to Craft's own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components and properties can be customized. For example, Craft swaps out <craft4:craft\web\Request> for <craft4:craft\console\Request> to help smooth over some differences in Yii’s HTTP and CLI APIs.
+We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components and properties can be customized. For example, Craft swaps out <craft4:craft\web\Request> for <craft4:craft\console\Request> to help smooth over some differences in Yii’s HTTP and CLI APIs.
 
-Even in Craft’s default application config map, some components’ properties are omitted for brevity. Every component will be declared either as a closure (with an internal call to a config factory helper) or an array with a `class` key. All public properties (as well as private properties with the appropriate magic getter/setter methods) on those classes are configurable! Refer to the [class reference](https://docs.craftcms.com/api/v4/), or use GitHub’s [code navigation](https://docs.github.com/en/repositories/working-with-files/using-files/navigating-code-on-github) feature on [Craft's source code](https://github.com/craftcms/cms).
+Even in Craft’s default application config map, some components’ properties are omitted for brevity. Every component will be declared either as a closure (with an internal call to a config factory helper) or an array with a `class` key. All public properties (as well as private properties with the appropriate magic getter/setter methods) on those classes are configurable! Refer to the [class reference](https://docs.craftcms.com/api/v4/), or use GitHub’s [code navigation](https://docs.github.com/en/repositories/working-with-files/using-files/navigating-code-on-github) feature on [Craft’s source code](https://github.com/craftcms/cms).
 
 ### Cache
 
@@ -337,7 +337,7 @@ return [
 ```
 
 ::: warning
-Pay careful attention to the structure, here—we’re only modifying the existing component's `mutex` _property_ and leaving the rest of its config as-is.
+Pay careful attention to the structure, here—we’re only modifying the existing component’s `mutex` _property_ and leaving the rest of its config as-is.
 :::
 
 ## Modules

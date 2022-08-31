@@ -10,19 +10,19 @@ related:
 
 Craft can be configured to work in a way that makes sense for you, your team, and your infrastructure.
 
-Broadly, configuration refers to how Craft will behave in a particular environment. Most applications will only require [database connection information](db.md) to work, but as you get familiar with more of Craft's features, install plugins, or start using additional services, you may need to provide additional config.
+Broadly, configuration refers to how Craft will behave in a particular environment. Most applications will only require [database connection information](db.md) to work, but as you get familiar with more of Craft’s features, install plugins, or start using additional services, you may need to provide additional config.
 
-We'll start by looking at how Craft builds its config in a context-aware way, then get into some specific options.
+We’ll start by looking at how Craft builds its config in a context-aware way, then get into some specific options.
 
 ::: tip
-[Project config](/project-config) is a discrete concept, but was designed to integrate with the core config system. We'll look at some examples in just a moment.
+[Project config](/project-config) is a discrete concept, but was designed to integrate with the core config system. We’ll look at some examples in just a moment.
 :::
 
 ## Where Configuration Happens
 
 ### Config Files
 
-The most common way to customize your Craft project is by editing files in the [`config/` folder](../directory-structure.md). These files serve as a canonical map of what customizations you've made to a project, and connect specific settings with [environment-specific values](#setting-and-resolving-options).
+The most common way to customize your Craft project is by editing files in the [`config/` folder](../directory-structure.md). These files serve as a canonical map of what customizations you’ve made to a project, and connect specific settings with [environment-specific values](#setting-and-resolving-options).
 
 | Concern | File Name(s) | Description
 | ------- | -------- | -----------
@@ -31,14 +31,14 @@ The most common way to customize your Craft project is by editing files in the [
 | [Custom Options](#custom-settings) | `custom.php` | Arbitrary key-value storage for your own options.
 | [Routing](#url-rules) | `routes.php` | Custom HTTP routes.
 | [Application Configuration](#application-configuration) | `app.php`, `app.web.php`, `app.console.php` | Overrides for the root Application and any of its [Components](https://www.yiiframework.com/doc/guide/2.0/en/concept-components).
-| Plugin Settings | `{plugin-handle}.php`, or other custom files | Consult the plugin's documentation for specifics.
+| Plugin Settings | `{plugin-handle}.php`, or other custom files | Consult the plugin’s documentation for specifics.
 | [Advanced](#advanced) | | Specific library options and/or behaviors that may be exposed in a non-standard way.
 
 ::: tip
-You may find other files in the `config/` folder, like `license.key` or the `project/` folder. Craft (and many plugins) will ask you to place config-adjacent files here, even if they don't work in a consistent way.
+You may find other files in the `config/` folder, like `license.key` or the `project/` folder. Craft (and many plugins) will ask you to place config-adjacent files here, even if they don’t work in a consistent way.
 :::
 
-Sensitive credentials like your database's password should be kept out of tracked files—but instead of ignoring config files outright, let's take a look at some options.
+Sensitive credentials like your database’s password should be kept out of tracked files—but instead of ignoring config files outright, let’s take a look at some options.
 
 ### `.env`
 
@@ -51,7 +51,7 @@ CRAFT_ENVIRONMENT=dev
 # ...
 ```
 
-These values can be referenced in your config files by calling <craft4:craft\helpers\App::env()>, or using them in a control panel setting. Craft doesn't require your variables to follow any kind of naming convention, but it can automatically discover [some specific environment variables](#config-environment-variables).
+These values can be referenced in your config files by calling <craft4:craft\helpers\App::env()>, or using them in a control panel setting. Craft doesn’t require your variables to follow any kind of naming convention, but it can automatically discover [some specific environment variables](#config-environment-variables).
 
 The `.env` file is the only place where secrets should be stored. Avoid checking it in to version control!
 
@@ -67,7 +67,7 @@ Each setting accepts specific types and values (like an integer, interval expres
 - **Environment-dependent:** Explicit values are set for [different known environments](#multi-environment-configs), like `dev` and `production`. Use case: Make sessions last indefinitely during development.
 - **Dynamic:** A value is determined either by a call to `craft\helpers\App::env('MY_ENVIRONMENT_VAR')` (using a key that you expect to be defined in the target environments), or by using an [alias](#aliases) that is resolved at runtime. Use case: database hostnames or public storage bucket URLs are different in all environments.
 
-You can combine these methods to create flexibility where you need it and rigidity where you don't. Let's look at some other ways values are resolved.
+You can combine these methods to create flexibility where you need it and rigidity where you don’t. Let’s look at some other ways values are resolved.
 
 ::: tip
 When working on a team or deploying your project in a new environment, it ought to be easy to discover what Craft options were configured to make the site or application work as intended. While some of the following strategies are convenient, consider their impact on clarity.
@@ -200,13 +200,13 @@ Add the prefix to any [general config](config-settings.md) (`CRAFT_`) or [databa
 - General: <config4:testToEmailAddress> &rarr; `CRAFT_TEST_TO_EMAIL_ADDRESS`
 
 ::: danger
-Note that any environment variable names matching the format of a known config setting will have the highest priority! The `CRAFT_` prefix is intended to reduce the likelihood of collisions with other environment variables that a site, server, or platform might inject—so it's actually _inadvisable_ to use this naming convention for site-specific variables you maintain.
+Note that any environment variable names matching the format of a known config setting will have the highest priority! The `CRAFT_` prefix is intended to reduce the likelihood of collisions with other environment variables that a site, server, or platform might inject—so it’s actually _inadvisable_ to use this naming convention for site-specific variables you maintain.
 :::
 
 Enforcing a structure for database connection details (even with a multi-environment config file) can cause problems when working with others, or across environments—magic variables make it possible to use whatever connection parameters are available in the current environment, without having to maintain a config file just to map variables to config settings.
 
 ::: tip
-If you are working with others and your `.env` isn't checked in to version control (it probably shouldn't be!), make sure you have a way of communicating what options are required to get your application running! A `.env.example` file is a great place to store keys + comments, without exposing secrets—and it lets you simply copy the file when spinning up a new environment.
+If you are working with others and your `.env` isn’t checked in to version control (it probably shouldn’t be!), make sure you have a way of communicating what options are required to get your application running! A `.env.example` file is a great place to store keys + comments, without exposing secrets—and it lets you simply copy the file when spinning up a new environment.
 :::
 
 ## Using Configured Values
@@ -289,7 +289,7 @@ craft\helpers\App::parseEnv(Craft::$app->config->custom->myDynamicValue);
 
 ## Config Categories
 
-To make config settings easier to find, they're organized into a few groups.
+To make config settings easier to find, they’re organized into a few groups.
 
 ### General
 
@@ -309,7 +309,7 @@ Some projects may require customization of Craft [application components](app.md
 
 ### Advanced
 
-In rare cases, you may need to customize parts of Craft that don't follow the normal configuration scheme.
+In rare cases, you may need to customize parts of Craft that don’t follow the normal configuration scheme.
 
 #### Guzzle
 
@@ -335,7 +335,7 @@ The options defined here will be passed into new `GuzzleHttp\Client` instances. 
 
 ### Custom Settings
 
-Settings defined in a `config/custom.php` file don't map to or affect any built-in Craft features, but can useful to centralize data, flags, or secrets that otherwise don't have a place to live.
+Settings defined in a `config/custom.php` file don’t map to or affect any built-in Craft features, but can useful to centralize data, flags, or secrets that otherwise don’t have a place to live.
 
 ```php
 return [
@@ -370,7 +370,7 @@ $client->post('/donations', [
 :::
 
 ::: tip
-If these settings need to be changed frequently (or don't depend on the environment), they may be a better fit for a [Global Set](../globals.md).
+If these settings need to be changed frequently (or don’t depend on the environment), they may be a better fit for a [Global Set](../globals.md).
 :::
 
 ## PHP Constants
