@@ -18,7 +18,7 @@ return [
 
 ## Environmental Configuration
 
-Some Commerce settings should be defined on a [per-environment basis](/4.x/config/#environmental-configuration).
+Some Commerce settings should be defined on a [per-environment basis](/4.x/config/#multi-environment-config).
 
 - System Settings
     - General Settings

@@ -128,7 +128,8 @@ module.exports = {
         {
           title: "Configuration",
           collapsable: false,
-          children: ["config/", "config/general", "config/db",  "config/app"]
+          children: ["config/", "config/general", "config/db"],
+          toggleChildren: ["config/app"]
         },
         {
           title: "System Overview",

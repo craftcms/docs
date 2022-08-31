@@ -58,7 +58,7 @@ Some config settings have been removed in Craft 4:
 | `config/general.php` | `siteUrl`                 | Set in the control panel, optionally using environment variables. (See [example](https://craftcms.com/knowledge-base/preparing-for-craft-4#replace-siteName-and-siteUrl-config-settings).)
 | `config/general.php` | `suppressTemplateErrors`  | 
 | `config/general.php` | `useCompressedJs`         | Craft always serves compressed JavaScript files now.
-| `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](https://craftcms.com/docs/4.x/project-config.html#manual-yaml-file-generation).
+| `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](./project-config.md#manual-yaml-file-generation).
 
 ::: tip
 You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](config/README.md#custom-config-settings) will be accessible via `Craft::$app->config->custom->{mycustomsetting}`.

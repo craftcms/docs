@@ -1,6 +1,6 @@
 # Application Configuration
 
-Craft’s entire [application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) can be customized via `config/app.php`. Any items in the returned array will get merged into the main application configuration array.
+Craft’s entire [application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) can be customized via `config/app.php`. Any items returned by an `app.php` config file will get merged into the main application configuration array.
 
 You can further customize the application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
 
@@ -10,16 +10,16 @@ New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.p
 
 ## Common Components
 
-We'll only cover a few commonly-customized components here. Refer to Craft's own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components and properties can be customized. For example, Craft swaps out <craft4:craft\web\Request> for <craft4:craft\console\Request> to help smooth over some differences in Yii's HTTP and CLI APIs.
+We'll only cover a few commonly-customized components here. Refer to Craft's own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components and properties can be customized. For example, Craft swaps out <craft4:craft\web\Request> for <craft4:craft\console\Request> to help smooth over some differences in Yii’s HTTP and CLI APIs.
 
-Even in the native application config map, some properties are omitted for brevity. Every component will be declared either as a closure (with an internal call to a config factory helper) or an array with a `class` key. All public properties (as well as private properties with the appropriate magic getter/setter methods) on those classes are configurable!
+Even in Craft’s default application config map, some components’ properties are omitted for brevity. Every component will be declared either as a closure (with an internal call to a config factory helper) or an array with a `class` key. All public properties (as well as private properties with the appropriate magic getter/setter methods) on those classes are configurable! Refer to the [class reference](https://docs.craftcms.com/api/v4/), or use GitHub’s [code navigation](https://docs.github.com/en/repositories/working-with-files/using-files/navigating-code-on-github) feature on [Craft's source code](https://github.com/craftcms/cms).
 
 ### Cache
 
-By default, Craft will store data caches in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) by overriding the `cache` application component from `config/app.php`.
+By default, Craft will store data caches on disk in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) layer by overriding the `cache` application component from `config/app.php`.
 
 ::: tip
-To help avoid key collisions with non-standard cache drivers, set a unique application `id`. See the  [Craft starter project](https://github.com/craftcms/craft/blob/main/config/app.php#L23) for an example of how this is configured, then run the following command to append a `CRAFT_APP_ID` variable to your `.env` file:
+To help avoid key collisions with non-standard cache drivers, set a unique application `id`. See the  [Craft starter project](https://github.com/craftcms/craft/blob/main/config/app.php#L23) for an example of how this is configured, then run the following command to generate and append a `CRAFT_APP_ID` value to your `.env` file:
 
     php craft setup/app-id
 :::
@@ -99,7 +99,7 @@ return [
 
 #### Redis Example
 
-To use Redis cache storage, you will first need to install the [yii2-redis](https://github.com/yiisoft/yii2-redis) library. Then configure Craft’s `cache` component to use it:
+To use Redis cache storage, you will first need to install the [yii2-redis](https://github.com/yiisoft/yii2-redis) library and provide connection details to the `redis` component. The `cache` component can then be replaced with `yii\redis\Cache::class`:
 
 ```php
 <?php
@@ -313,6 +313,31 @@ Only drivers that implement <craft4:craft\queue\QueueInterface> will be visible 
 
 ::: tip
 If your queue driver supplies its own worker, set the <config4:runQueueAutomatically> config setting to `false` in `config/general.php`.
+:::
+
+### Mutex
+
+Craft uses a file-based mutex (or "mutual exclusivity") driver by default, which should be switched to a different driver in [load-balanced environments](https://craftcms.com/knowledge-base/configuring-load-balanced-environments#mutex-locks).
+
+::: tip
+A [NullMutex](craft4:craft\mutex\NullMutex) driver is used when Dev Mode is enabled, since mutex drivers aren’t necessary for local development and we’ve seen issues with mutex in some Windows and Linux filesystems.
+:::
+
+You can configure a custom mutex driver by configuring the `mutex` component’s nested `$mutex` property:
+
+```php
+// Use mutex driver provided by yii2-redis
+return [
+    'components' => [
+        'mutex' => [
+            'mutex' => yii\redis\Mutex::class,
+        ],
+    ],
+];
+```
+
+::: warning
+Pay careful attention to the structure, here—we’re only modifying the existing component's `mutex` _property_ and leaving the rest of its config as-is.
 :::
 
 ## Modules

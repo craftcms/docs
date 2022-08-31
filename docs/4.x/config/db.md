@@ -5,9 +5,7 @@ sidebarLevel: 3
 
 Craft supports several database connection settings that give you control over how Craft connects to the database.
 
-Database connection settings may be set from `config/db.php`, but we recommend using environment variables (such as in your `.env` file).
-
-For example, in [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file should define these environment variables:
+Database connection settings may be set from `config/db.php`, but we recommend using environment variables (such as in your `.env` file). For example, in [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file should define these environment variables:
 
 ```bash
 CRAFT_APP_ID=
@@ -22,6 +20,8 @@ CRAFT_DB_PASSWORD=
 CRAFT_DB_SCHEMA=public
 CRAFT_DB_TABLE_PREFIX=
 ```
+
+Magic environment variables are covered in greater detail on the [configuration overview page](../config#magic-environment-variables).
 
 The `DB_` variables are database connection settings, and the `CRAFT_` prefix is a special convention for overriding any config setting—meaning you don’t need to use a `config/db.php` file in Craft 4.
 
