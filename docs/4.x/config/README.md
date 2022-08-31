@@ -173,6 +173,8 @@ If the environment cannot be determined, your server’s hostname will be used.
 
 Some settings and functions in Craft support [Yii aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases), which are most often used as placeholders for file system paths and URLs.
 
+Out of the box, Craft provides these aliases—but you can override them or provide new ones with the <config4:aliases> config setting:
+
 | Alias | Description
 | ----- | -----------
 | `@app` | Path to `vendor/craftcms/cms/src/`
@@ -188,6 +190,25 @@ Some settings and functions in Craft support [Yii aliases](https://www.yiiframew
 | `@vendor` | Path to your `vendor/` folder
 | `@web` | URL to the folder that contains the `index.php` file that was loaded for the request
 | `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request
+
+::: tip
+We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+:::
+
+Aliases can be set to explicit values, or to the content of an environment variable. Keep in mind that aliases are resolved recursively, so you can define one based on another:
+
+```php
+use craft\helpers\App;
+
+return [
+    'aliases' => [
+        '@web' => App::env('DEFAULT_SITE_URL'),
+        '@shared' => App::env('SHARED_PATH'),
+        '@uploads' => '@shared/uploads',
+        '@assets' => '@web/uploads',
+    ],
+];
+```
 
 ### Magic Environment Variables
 
