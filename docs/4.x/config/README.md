@@ -464,7 +464,7 @@ define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
 
 ### `CRAFT_LICENSE_KEY_PATH`
 
-The path that Craft should store its license key file, including its file name. (It will be stored as `license.key` within your [config/](../directory-structure.md#config) folder by default.)
+The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../directory-structure.md#config) folder by default.)
 
 ### `CRAFT_LOG_PHP_ERRORS`
 
