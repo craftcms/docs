@@ -386,6 +386,27 @@ Your [database connection settings](db.md) are set via the `config/db.php` file.
 
 You can define custom [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
 
+<!-- These anchors make sure anyone landing here from an old link is taken to the new Application Configuration heading! -->
+<a name="cache-component"></a>
+<a name="database-cache-example"></a>
+<a name="apc-example"></a>
+<a name="memcached-example"></a>
+<a name="redis-example"></a>
+
+<a name="database-component"></a>
+
+<a name="session-component"></a>
+<a name="redis-example2"></a>
+<a name="database-example"></a>
+
+<a name="mailer-component"></a>
+
+<a name="queue-component"></a>
+
+<a name="modules"></a>
+
+<a name="mutex-configuration"></a>
+
 ### Application Configuration
 
 Some projects may require customization of Craft [application components](app.md) beyond what is exposed through specific config files. This is done directly via the `config/app.php` file.
