@@ -3,14 +3,17 @@ sidebarLevel: 3
 ---
 # Database Connection Settings
 
-Craft supports several database connection settings that give you control over how Craft connects to the database.
+Craft can connect to MySQL and Postgres databases.
 
-Database connection settings may be set from `config/db.php`, but we recommend using environment variables (such as in your `.env` file). For example, in [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file should define these environment variables:
+Database connection settings may be set from a `config/db.php` file, but because they're often entirely environment-specific, Craft supports assigning [directly from environment variables](../config#environment-overrides). In [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file will need to define these options:
 
 ```bash
+# Required variables:
 CRAFT_APP_ID=
 CRAFT_ENVIRONMENT=dev
 CRAFT_SECURITY_KEY=
+
+# Database-specific variables:
 CRAFT_DB_DRIVER=mysql
 CRAFT_DB_SERVER=127.0.0.1
 CRAFT_DB_PORT=3306
@@ -21,11 +24,16 @@ CRAFT_DB_SCHEMA=public
 CRAFT_DB_TABLE_PREFIX=
 ```
 
-Magic environment variables are covered in greater detail on the [configuration overview page](../config#magic-environment-variables).
+We recommend this approach because it:
 
-The `DB_` variables are database connection settings, and the `CRAFT_` prefix is a special convention for overriding any config setting—meaning you don’t need to use a `config/db.php` file in Craft 4.
+1. Keeps sensitive information out of your project’s codebase (`.env` files should never be shared or committed to version control);
+2. Makes collaborating with other developers easier, as each developer can define their own settings from scratch, without overwriting someone else’s settings.
 
-If you wanted to use your own environment variables in a static config file, you could create a `config/db.php` to return an array of settings (defined below), using the thread-safe [App::env()](craft4:craft\helpers\App::env()) to get the value of each environment variable:
+::: tip
+Environment overrides are covered in greater detail on the [configuration overview page](../config#environment-overrides).
+:::
+
+If you prefer to use your own environment variables in a static config file, create a `config/db.php` and return an array of settings (defined below), using [App::env()](craft4:craft\helpers\App::env()) to get the value of each environment variable.
 
 ```php
 use craft\helpers\App;
@@ -42,16 +50,11 @@ return [
 ];
 ```
 
-::: tip
-You may also provide a `DB_DSN` environment variable. If defined, Craft will use that.
+::: warning
+If you want finer-grain control of Craft's database connection—or your application uses multiple database servers—you may need to configure the underlying [`db` application component](./app.md#database).
 :::
 
-We recommend this environment variable approach for two reasons:
-
-1. It keeps sensitive information out of your project’s codebase. (`.env` files should never be shared or committed to Git.)
-2. It makes collaborating with other developers easier, as each developer can define their own settings without overwriting someone else’s settings.
-
-Here’s the full list of database connection settings that Craft supports:
+## Supported Settings
 
 <!-- BEGIN SETTINGS -->
 
