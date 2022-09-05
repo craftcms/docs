@@ -72,7 +72,7 @@ This is your [PHP dotenv](https://github.com/vlucas/phpdotenv) `.env` file templ
 
 ### `.gitignore`
 
-Tells Git which files it should exclude when committing changes. At minimum, this should ignore `.env` and Composer's `vendor/` directory.
+Tells Git which files it should exclude when committing changes. At minimum, this should ignore `.env` and Composer’s `vendor/` directory.
 
 ### `composer.json`
 

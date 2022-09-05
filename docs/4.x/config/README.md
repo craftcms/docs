@@ -161,10 +161,10 @@ return [
 ];
 ```
 
-In this example, the `postLoginRedirect` function will be called by [ConfigHelper::localizedValue()](craft4:craft\helpers\ConfigHelper::localizedValue()), with the current site's handle. Keep in mind that while scalar values are automatically "normalized" during configuration, the return value of a function *is not*.
+In this example, the `postLoginRedirect` function will be called by [ConfigHelper::localizedValue()](craft4:craft\helpers\ConfigHelper::localizedValue()), with the current site’s handle. Keep in mind that while scalar values are automatically "normalized" during configuration, the return value of a function *is not*.
 
 ::: tip
-Refer to a config property's documentation for a full list of its supported types and values!
+Refer to a config property’s documentation for a full list of its supported types and values!
 :::
 
 ### Multi-Environment Configs
@@ -212,7 +212,7 @@ If the environment cannot be determined, your server’s hostname will be used.
 
 #### Flattening Configuration
 
-If you prefer to use a single, “flat” configuration object, it's still possible to alter configuration based on the environment. The example above might look like this, instead:
+If you prefer to use a single, “flat” configuration object, it’s still possible to alter configuration based on the environment. The example above might look like this, instead:
 
 ```php
 use craft\helpers\App;
@@ -479,7 +479,7 @@ If these settings need to be changed frequently, edited by a control panel user,
 
 ## PHP Constants
 
-You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [composter starter project](https://github.com/craftcms/craft) does—but they'll get picked up as long as they're set prior to calling `$app->run()`.
+You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [composter starter project](https://github.com/craftcms/craft) does—but they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
 ::: tip
 Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
