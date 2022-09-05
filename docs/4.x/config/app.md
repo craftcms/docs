@@ -5,7 +5,7 @@ Craft’s entire [application configuration](https://www.yiiframework.com/doc/gu
 You can further customize the application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
 
 ::: warning
-New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.php` to set an app ID and [bootstrap an example Module](#modules). Most applications will _not_ require any deeper application config.
+New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.php` to set an app ID and [bootstrap an example Module](#modules). Most applications will _not_ require any direct application config.
 :::
 
 ## Common Components
