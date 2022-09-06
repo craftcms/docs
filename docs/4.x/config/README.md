@@ -380,7 +380,7 @@ To make config settings easier to find, they’re organized into a few groups.
 
 ### General
 
-[General config settings](config-settings.md) are set via the `config/general.php` file or special environment variables.
+[General config settings](general.md) are set via the `config/general.php` file or special environment variables.
 
 ### Database
 
