@@ -258,7 +258,7 @@ Out of the box, Craft provides these aliases—but you can override them or prov
 | `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request
 
 ::: tip
-We recommend overriding the `@web` alias if you plan on using it, to avoid a cache poisoning vulnerability.
+To prevent a variety of security issues, we recommend explicitly overriding the `@web` alias with a fully-qualified URL.
 :::
 
 Aliases can be set to explicit values, or to the content of an environment variable. Keep in mind that aliases are resolved recursively, so you can define one based on another (including in values coming from the environment):
