@@ -61,6 +61,10 @@ The `.env` file is the only place where secrets should be stored. Avoid checking
 Some platforms (especially those that have ephemeral filesystems) provide a GUI for managing environment variables, and automatically inject them when the server or process starts. `App::env()` is still recommended, in this situation.
 :::
 
+### Entry Script
+
+Craft will also respond to a handful of specific [PHP constants](#php-constants), set prior to bootstrapping the application in your entry script. In most cases, this will be either `index.php` in your web root, or the `craft` executable at the root of your project.
+
 ## Setting and Resolving Options
 
 Each setting accepts specific [types and values](#types-and-values) (like an integer, interval expression string, or boolean), but Craft is able to resolve them in a few different ways:
