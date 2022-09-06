@@ -137,13 +137,10 @@ use craft\helpers\App;
 return [
     'components' => [
         'db' => function() {
-            // Get the default component config
+            // Get the default component config (using values in `db.php`):
             $config = App::dbConfig();
 
-            // Use read/write query splitting
-            // (requires Craft 3.4.25 or later)
-
-            // Define the default config for replica DB connections
+            // Define the default config for replica connections:
             $config['replicaConfig'] = [
                 'username' => App::env('DB_REPLICA_USER'),
                 'password' => App::env('DB_REPLICA_PASSWORD'),
@@ -155,7 +152,7 @@ return [
                 'charset' => 'utf8',
             ];
 
-            // Define the replica DB connections
+            // Define the replica connections, with unique DSNs:
             $config['replicas'] = [
                 ['dsn' => App::env('DB_REPLICA_DSN_1')],
                 ['dsn' => App::env('DB_REPLICA_DSN_2')],
@@ -163,7 +160,7 @@ return [
                 ['dsn' => App::env('DB_REPLICA_DSN_4')],
             ];
 
-            // Instantiate and return it
+            // Instantiate and return the configuration object:
             return Craft::createObject($config);
         },
     ],
