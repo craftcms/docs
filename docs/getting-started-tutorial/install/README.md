@@ -12,8 +12,8 @@ ddev config --project-name=tutorial --project-type=php --php-version=8.0
 
 Then run the following command to download the [craftcms/craft](https://github.com/craftcms/craft/) starter project contents, and install its Composer dependencies (namely [craftcms/cms](https://github.com/craftcms/cms/)):
 
-```shell
-ddev composer create -y craftcms/craft
+```sh
+ddev composer create -y --no-scripts craftcms/craft && ddev composer run post-create-project-cmd
 ```
 
 At the end of that command, it will ask whether you’d like to begin the setup. Go ahead and answer `yes`. Then answer the subsequent prompts as follows:
