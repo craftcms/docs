@@ -33,7 +33,7 @@ We recommend this approach because it:
 Environment overrides are covered in greater detail on the [configuration overview page](../config#environment-overrides).
 :::
 
-If you prefer to use your own environment variables in a static config file, create a `config/db.php` and return an array of settings (defined below), using [App::env()](craft4:craft\helpers\App::env()) to get the value of each environment variable.
+If you need to use your own environment variables in a config file (or connection details are provided via platform-specific keys), create `config/db.php` and return an explicit array of settings:
 
 ```php
 use craft\helpers\App;
@@ -51,7 +51,7 @@ return [
 ```
 
 ::: warning
-If you want finer-grain control of Craft’s database connection—or your application uses multiple database servers—you may need to configure the underlying [`db` application component](./app.md#database).
+Finer-grain control of Craft’s database connection is possible by configuring the underlying [`db` application component](./app.md#database). This may be necessary if you have specific security requirements, or your app needs to connect to multiple databases.
 :::
 
 ## Supported Settings
