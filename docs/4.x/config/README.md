@@ -22,7 +22,7 @@ We’ll start by looking at how Craft builds its config in a context-aware way, 
 
 ### Config Files
 
-The most common way to customize your Craft project is by editing files in the [`config/` folder](../directory-structure.md). These files act as a canonical map of what customizations you’ve made to a project, and connect specific settings with [environment-specific values](#setting-and-resolving-options).
+The most common way to customize your Craft project is by editing files in the [`config/` folder](../directory-structure.md). These files act as a canonical map of what customizations you’ve made to a project, and as a bridge between specific settings and [environment variables](#setting-and-resolving-options).
 
 | Concern | File(s) | Description
 | ------- | -------- | -----------
@@ -30,7 +30,7 @@ The most common way to customize your Craft project is by editing files in the [
 | [Database Settings](#database) | `db.php` | Connection settings for your database.
 | [Custom Options](#custom-settings) | `custom.php` | Arbitrary key-value storage for your own options.
 | [Routing](#url-rules) | `routes.php` | Custom HTTP routes.
-| [Application Configuration](#application-configuration) | `app.php`, `app.web.php`, `app.console.php` | Overrides for the root Application and any of its [Components](https://www.yiiframework.com/doc/guide/2.0/en/concept-components).
+| [Application Configuration](#application-configuration) | `app.php`, `app.web.php`, `app.console.php` | Overrides for the root application and any of its [Components](https://www.yiiframework.com/doc/guide/2.0/en/concept-components).
 | Plugin Settings | `{plugin-handle}.php`, or other custom files | Consult the plugin’s documentation for specifics.
 | [Advanced](#advanced) | | Specific library options and/or behaviors that may be exposed in a non-standard way.
 
@@ -42,7 +42,7 @@ Sensitive credentials like your database’s password should be kept out of trac
 
 ### `.env`
 
-Out of the box, Craft uses [DotEnv](https://github.com/vlucas/phpdotenv) to load values into the environment from a `.env` file in the root of your project. A basic `.env` file contains pairs of keys and values:
+New [Craft projects]() use [DotEnv](https://github.com/vlucas/phpdotenv) to load values into the environment from a `.env` file in the root of your project. A basic `.env` file contains pairs of keys and values:
 
 ```env
 CRAFT_APP_ID=my-project
@@ -58,44 +58,37 @@ Craft doesn’t require your variables to follow any kind of naming convention, 
 The `.env` file is the only place where secrets should be stored. Avoid checking it in to version control!
 
 ::: tip
-Some platforms (especially those that have ephemeral filesystems) provide a GUI for managing environment variables, and automatically inject them when the server or process starts. `App::env()` is still recommended, in this situation.
+Some platforms (especially those with ephemeral filesystems) provide a GUI for managing environment variables in lieu of using a `.env` file, and will automatically inject them when the server or process starts. `App::env()` is still the recommended method for retrieving environment variables set in this way.
 :::
 
 ### Entry Script
 
-Craft will also respond to a handful of specific [PHP constants](#php-constants), set prior to bootstrapping the application in your entry script. In most cases, this will be either `index.php` in your web root, or the `craft` executable at the root of your project.
+Craft will also respond to a handful of specific [PHP constants](#php-constants), as long as they are set prior to bootstrapping the application in your entry script.
 
 ## Setting and Resolving Options
 
-Each setting accepts specific [types and values](#types-and-values) (like an integer, interval expression string, or boolean), but Craft is able to resolve them in a few different ways:
+Each setting accepts specific [types and values](#types-and-values) (like an integer, interval expression string, or boolean), but Craft can resolve them in two ways:
 
-- **Static:** A value is explicitly set in a config file, and is the same for all environments. Use case: customize file types that can be uploaded.
-- **Environment-dependent:** Explicit values are set for [different known environments](#multi-environment-configs), like `dev` and `production`. Use case: Make sessions last indefinitely during development.
-- **Dynamic:** A value is determined either by a call to `craft\helpers\App::env('MY_ENVIRONMENT_VAR')` (using a key that you expect to be defined in the target environments), or by using an [alias](#aliases) that is resolved at runtime. Use case: database hostnames or public storage bucket URLs are different in all environments.
-
-You can combine these methods to create flexibility where you need it and rigidity where you don’t.
-
-::: tip
-When working on a team or deploying your project in a new environment, it ought to be easy to discover what Craft options were configured to make the site or application work as intended. While some of the following strategies are convenient, consider their impact on clarity.
-:::
+- **Statically:** A value is set explicitly in a config file, and is the same in all environments. Example: Customizing file types that can be uploaded.
+- **Dynamically:** Values are only known at runtime, or are set conditionally based on the current environment. Typically, this will involve a call to [App::env()](craft4:craft\helpers\App::env()) using the name of an environment variable that is expected to exist—or whose absence is significant. Example: Dev mode, database connection details, or a storage bucket URL.
 
 ### Priority
 
-Craft will begin resolving values in this order, overwriting previous values when they are discovered:
+Craft takes the first discovered value, in this order:
 
-0. **Defaults:** Every option has a default value, even if it’s `null`. You can find these defaults in the documentation for each setting.
+0. **Environment Overrides:** For general and database settings, Craft looks for special [environment variables](#environment-overrides) and [PHP constants](#php-constants).
 1. **Config Files:** Craft [evaluates and merges](#multi-environment-configs) PHP config files.
-2. **Environment Overrides:** For general and database settings, Craft looks for [special environment variables](#environment-overrides).
+2. **Defaults:** Every option has a default value, even if it’s `null`. You can find these defaults in the documentation for each setting.
 
 ### Style: Map vs. Fluent
 
-At its simplest, a config file might only return a map of settings:
+At its simplest, a config file returns a map of settings:
 
 ```php
 use craft\helpers\App;
 
 return [
-    'devMode' => App::env('CRAFT_ENVIRONMENT') === 'dev',
+    'devMode' => App::env('DEV_MODE') ?? false,
     'userSessionDuration' => 'P1D',
 ];
 ```
@@ -107,26 +100,11 @@ use craft\config\GeneralConfig;
 use craft\helpers\App;
 
 return GeneralConfig::create()
-    ->devMode(App::env('CRAFT_ENVIRONMENT') === 'dev')
+    ->devMode(App::env('DEV_MODE') ?? false)
     ->userSessionDuration('P1D');
 ```
 
-Each option becomes a method call, returning the modified config object to allow chaining. You can dynamically set values with an in-line expression (see above) or by breaking the chain into logical chunks:
-
-```php{5,8-10}
-use craft\config\GeneralConfig;
-use craft\helpers\App;
-
-$config = GeneralConfig::create()
-    ->devMode(false)
-    ->userSessionDuration('P1D');
-
-if (App::env('CRAFT_ENVIRONMENT') === 'dev') {
-    $config->devMode(true);
-}
-
-return $config;
-```
+Each option becomes a method call, accepting the same values that you would provide in a config map. The modified configuration object is returned to allow chaining.
 
 ::: warning
 Fluent config is currently only available for _general_ and _database_ settings, and not all plugins support it. When in doubt, use a config map!
@@ -134,23 +112,24 @@ Fluent config is currently only available for _general_ and _database_ settings,
 
 ### Types and Values
 
-Most config settings expect a [scalar](https://www.php.net/manual/en/function.is-scalar.php) value, and will generate exceptions if they are not (and can not be coerced to) the correct type.
+Most config settings expect a [scalar](https://www.php.net/manual/en/function.is-scalar.php) value, and will generate exceptions if they are not (and can not be coerced to) a valid type.
 
-Normalization may occur on some values. For instance, any setting that expects a “file size” will interpret an integer value in bytes, but a string will be parsed by [ConfigHelper::sizeInBytes()](craft4:craft\helpers\ConfigHelper::sizeInBytes()). bringing support for other formats like `256M` or `1G`.
+Normalization may occur on some values. For instance, any setting that expects a “file size” (like [`maxUploadFileSize](config4:maxUploadFileSize)) will interpret a numeric value in bytes—but passing a string allows you to use other formats like `256M` or `1G` by virtue of Craft normalizing the value with [ConfigHelper::sizeInBytes()](craft4:craft\helpers\ConfigHelper::sizeInBytes()).
 
 A few settings support complex types, like arrays and closures:
 
 ```php
-return [
-    // Arrays and nested arrays:
-    'extraFileKinds' => [
+use craft\config\GeneralConfig;
+
+return GeneralConfig::create()
+    // Arrays:
+    ->extraFileKinds([
         'fonts' => [
             'extensions' => ['otf', 'ttf', 'woff', 'woff2'],
         ],
-    ],
-
+    ])
     // Functions or "closures":
-    'postLoginRedirect' => function($siteHandle) {
+    ->postLoginRedirect(function($siteHandle) {
         // Perform tests on the signed-in User:
         $user = Craft::$app->getUser()->getIdentity();
 
@@ -161,11 +140,12 @@ return [
 
         // ...or the homepage, by default:
         return '/';
-    },
-];
+    });
 ```
 
-In this example, the `postLoginRedirect` function will be called by [ConfigHelper::localizedValue()](craft4:craft\helpers\ConfigHelper::localizedValue()), with the current site’s handle. Keep in mind that while scalar values are automatically "normalized" during configuration, the return value of a function *is not*.
+In this example, the function passed to `postLoginRedirect` will be called by [ConfigHelper::localizedValue()](craft4:craft\helpers\ConfigHelper::localizedValue()) with the current site’s handle, only *at the time the value needed*. This distinction is important, because Craft is not fully initialized when configuration files are *evaluated*, but will be by the time the application is ready to redirect a logged-in user.
+
+Keep in mind that while scalar values are automatically normalized during configuration, the return value of a function *is not*.
 
 ::: tip
 Refer to a config property’s documentation for a full list of its supported types and values!
@@ -173,14 +153,13 @@ Refer to a config property’s documentation for a full list of its supported ty
 
 ### Multi-Environment Configs
 
-Config files can be set up to supply separate values for each environment by declaring a `*` key at the top-level of the returned array.
+Config files using the traditional map style can be set up to supply separate values for each environment by declaring a `*` key at the top-level of the returned array.
 
-Any options set in the `*` are applied to all environments. Additional options nested within a key matching the [`CRAFT_ENVIRONMENT`](#craft-environment) PHP constant or environment variable are merged on top of it—this means you can use `*` to set up your own "defaults," while still being able to override them in a specific environment.
+Any options set in the `*` are applied to all environments. Additional options nested within a key matching the [`CRAFT_ENVIRONMENT`](#craft-environment) environment variable or PHP constant are merged on top of it—this means you can use `*` to set up your own "defaults," while still being able to override them in a specific environment.
 
-```php
+```php{3-6}
 // -- config/general.php --
 return [
-    // Activate multi-environment config:
     '*' => [
         // Applies to all environments:
         'omitScriptNameInUrls' => true,
@@ -214,27 +193,6 @@ Make sure your key(s) are sufficiently unique! Craft reads your array of config 
 If the environment cannot be determined, your server’s hostname will be used.
 :::
 
-#### Flattening Configuration
-
-If you prefer to use a single, “flat” configuration object, it’s still possible to alter configuration based on the environment. The example above might look like this, instead:
-
-```php
-use craft\helpers\App;
-
-// Set up tests for particular target environment(s):
-$isDev = App::env('CRAFT_ENVIRONMENT') === 'dev';
-
-return [
-    'omitScriptNameInUrls' => true,
-    // Assign the computed boolean value, directly...
-    'devMode' => $isDev,
-    // ...or use ternary logic:
-    'cpTrigger' => $isDev ? null : 'secret-word',
-];
-```
-
-The same strategy can be seen in the [fluent config](#style-map-vs-fluent) section!
-
 ### Aliases
 
 Some settings and functions in Craft support [Yii aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases), which are most often used as placeholders for file system paths and URLs.
@@ -261,7 +219,7 @@ Out of the box, Craft provides these aliases—but you can override them or prov
 To prevent a variety of security issues, we recommend explicitly overriding the `@web` alias with a fully-qualified URL.
 :::
 
-Aliases can be set to explicit values, or to the content of an environment variable. Keep in mind that aliases are resolved recursively, so you can define one based on another (including in values coming from the environment):
+Aliases can be set to plain strings, or to the content of an environment variable. Keep in mind that **aliases are resolved recursively**, so you can define one based on another (including those whose values came from the environment):
 
 ```php
 use craft\helpers\App;
@@ -287,13 +245,13 @@ Add the prefix to any [general config](config-settings.md) (`CRAFT_`) or [databa
 - General: <config4:testToEmailAddress> &rarr; `CRAFT_TEST_TO_EMAIL_ADDRESS`
 
 ::: danger
-Note that any environment variable names matching the format of a known config setting will have the highest priority! The `CRAFT_` prefix is intended to reduce the likelihood of collisions with other environment variables that a site, server, or platform might inject—so it’s actually _inadvisable_ to use this naming convention for site-specific variables you maintain.
+Note that any environment variable names matching the format of a known config setting will have the [highest priority](#priority)! The `CRAFT_` prefix is intended to reduce the likelihood of collisions with other environment variables that a site, server, or platform might inject—so it’s actually _inadvisable_ to use this naming convention for site-specific variables you maintain.
 :::
 
-Enforcing a structure for database connection details (even with a multi-environment config file) can cause problems when working with others, or across environments—magic variables make it possible to use whatever connection parameters are available in the current environment, without having to maintain a config file just to map variables to config settings.
+Enforcing a structure for database connection details (even with a multi-environment config file) can cause problems when working with others, or across environments. Overrides make it possible to use whatever connection parameters are available in the current environment, without having to maintain a config file just to map variables to config settings.
 
 ::: tip
-If you are working with others and your `.env` isn’t checked in to version control (it probably shouldn’t be!), make sure you have a way of communicating what options are required to get your application running! A `.env.example` file is a great place to store keys + comments, without exposing secrets—and it lets you simply copy the file when spinning up a new environment.
+If you are working with others and your `.env` isn’t checked in to version control (it probably shouldn’t be!), make sure you have a way of communicating what options are required to get your application running! A `.env.example` file is a great place to store keys and comments, without exposing secrets—and it lets you simply copy the file when spinning up a new environment.
 :::
 
 ## Using Configured Values
@@ -326,7 +284,7 @@ Aliases have the extra benefit of allowing extra path segments, so `@web/uploads
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
 :::
 
-### Templates + Modules
+### Templates and Modules
 
 #### Accessing Config Values
 
@@ -380,11 +338,11 @@ To make config settings easier to find, they’re organized into a few groups.
 
 ### General
 
-[General config settings](general.md) are set via the `config/general.php` file or special environment variables.
+[General config settings](general.md) are set via the `config/general.php` file, or using special environment variables.
 
 ### Database
 
-Your [database connection settings](db.md) are set via the `config/db.php` file.
+Your [database connection settings](db.md) are set via the `config/db.php` file, or using special environment variables.
 
 ### URL Rules
 
@@ -483,11 +441,13 @@ If these settings need to be changed frequently, edited by a control panel user,
 
 ## PHP Constants
 
-You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [composter starter project](https://github.com/craftcms/craft) does—but they’ll get picked up as long as they’re set prior to calling `$app->run()`.
+You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
 ::: tip
 Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
 :::
+
+The following options can _only_ be set by PHP constants, but general and database configuration settings can also be set via constants matching the same pattern defined in [environment overrides](#environment-overrides).
 
 ### `CRAFT_BASE_PATH`
 
@@ -533,7 +493,7 @@ If this isn’t defined, Craft will treat the request as a control panel request
 The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays.
 
 ::: warning
-Prior to Craft 4, `craftcms/craft` projects had `CRAFT_ENVIRONMENT` fall back to a value of `production` by default. This is no longer the case, as the default is [explicitly set to `dev`](https://github.com/craftcms/craft/blob/main/.env.example#L5).
+Prior to Craft 4, `craftcms/craft` projects allowed this fall back to the default `production` value, for security. Now, the starter kit comes with three `.env` examples, each of which explicitly sets a `CRAFT_ENVIRONMENT`.
 :::
 
 ### `CRAFT_EPHEMERAL`
