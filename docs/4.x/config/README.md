@@ -166,11 +166,14 @@ For example, given the following multi-environment config:
 return [
     '*' => [
         // Applies to all environments:
+        'defaultWeekStartDay' => 1,
         'omitScriptNameInUrls' => true,
+        'allowAdminChanges' => false,
     ],
 
     'dev' => [
         // Only applies to development environments, overriding anything in `*`:
+        'allowAdminChanges' => true,
         'devMode' => true,
     ],
 
@@ -185,7 +188,9 @@ Environments matching `dev` would end up with the following merged config:
 
 ```php
 return [
+    'defaultWeekStartDay' => 1,
     'omitScriptNameInUrls' => true,
+    'allowAdminChanges' => true,
     'devMode' => true,
 ];
 ```
