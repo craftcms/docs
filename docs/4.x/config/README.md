@@ -153,11 +153,15 @@ Refer to a config property’s documentation for a full list of its supported ty
 
 ### Multi-Environment Configs
 
-Config files using the traditional map style can be set up to supply separate values for each environment by declaring a `*` key at the top-level of the returned array.
+Config files using the traditional map style can define configurations for each of your environments all in one place—called a “multi-environment config”. 
 
-Any options set in the `*` are applied to all environments. Additional options nested within a key matching the [`CRAFT_ENVIRONMENT`](#craft-environment) environment variable or PHP constant are merged on top of it—this means you can use `*` to set up your own "defaults," while still being able to override them in a specific environment.
+To establish that your config file should be treated as a multi-environment config, it must have a `*` key which defines the base config that should be applied to each of your environments, followed by additional keys which will be matched against the [`CRAFT_ENVIRONMENT`](#craft-environment) environment variable or PHP constant.
 
-```php{3-6}
+When determining the exact configuration that should be used for a request, the base config and environment-specific config arrays will be merged together. If any config settings are defined by both arrays, the environment-specific config will take precedence.
+
+For example, given the following multi-environment config:
+
+```php
 // -- config/general.php --
 return [
     '*' => [
@@ -177,13 +181,12 @@ return [
 ];
 ```
 
-Presuming your environment was evaluated to `dev`, Craft would combine the `*` and `dev` keys to create a config object equivalent to:
+Environments matching `dev` would end up with the following merged config:
 
 ```php
 return [
     'omitScriptNameInUrls' => true,
     'devMode' => true,
-    // `cpTrigger` does not take effect!
 ];
 ```
 
