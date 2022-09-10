@@ -114,7 +114,7 @@ Fluent config is currently only available for _general_ and _database_ settings,
 
 Most config settings expect a [scalar](https://www.php.net/manual/en/function.is-scalar.php) value, and will generate exceptions if they are not (and can not be coerced to) a valid type.
 
-Normalization may occur on some values. For instance, any setting that expects a “file size” (like [`maxUploadFileSize](config4:maxUploadFileSize)) will interpret a numeric value in bytes—but passing a string allows you to use other formats like `256M` or `1G` by virtue of Craft normalizing the value with [ConfigHelper::sizeInBytes()](craft4:craft\helpers\ConfigHelper::sizeInBytes()).
+Normalization may occur on some values. For instance, any setting that expects a “file size” (like [`maxUploadFileSize`](config4:maxUploadFileSize)) will interpret a numeric value in bytes—but passing a string allows you to use other formats like `256M` or `1G` by virtue of Craft normalizing the value with [ConfigHelper::sizeInBytes()](craft4:craft\helpers\ConfigHelper::sizeInBytes()).
 
 A few settings support complex types, like arrays and closures:
 
