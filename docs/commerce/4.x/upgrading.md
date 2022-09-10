@@ -22,7 +22,7 @@ Once you’ve completed these steps, you’re ready continue with the upgrade pr
 
 ## Performing the Upgrade
 
-1. Upgrade Craft CMS, Craft Commerce, and any other plugins, per the [Craft 4 upgrade instructions](../../4.x/upgrade.md). (Your `composer.json` should require `"craftcms/commerce": "^4.0.0-beta.1"`.)
+1. Upgrade Craft CMS, Craft Commerce, and any other plugins, per the [Craft 4 upgrade instructions](../../4.x/upgrade.md). (Your `composer.json` should require `"craftcms/commerce": "^4.0.0"`.)
 2. In your terminal, run `php craft commerce/upgrade` and follow the interactive prompts.
 3. Go to **Settings** → **Users** → **Address Fields** and drag the “Full Name”, “Organization”, and “Organization Tax ID” fields into the address field layout, so they remain editable within customers’ address books.
 

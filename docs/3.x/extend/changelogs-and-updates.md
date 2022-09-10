@@ -39,19 +39,22 @@ All content that follows a version heading (up to the next H2) will be treated a
 
 When writing release notes, we recommend that you follow the guidelines at [keepachangelog.com](https://keepachangelog.com/), but all forms of [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) are allowed. The only thing that is *not* allowed is actual HTML code, which will be escaped.
 
-### Tips and Warnings
+### Notes, Warnings, and Tips
 
-You can include tips, warnings, and other notes in your release notes using this syntax:
+You can include important notes, warnings, and tips in your release notes using this syntax:
 
 ```markdown
-> {tip} A helpful tip.
+> **Note**
+> An important note.
 
-> {warning} A word of warning.
+> **Warning**
+> A word of warning.
 
-> {note} A serious note.
+> **Tip**
+> A helpful tip.
 ```
 
-Any updates that contain one of these will be auto-expanded on the Utilities → Updates page.
+These notes will each be styled appropriately within the plugin’s changelog in the Plugin Store and within the Updates utility. The Updates utility will also auto-expand any updates that contain a note.
 
 ### Links
 

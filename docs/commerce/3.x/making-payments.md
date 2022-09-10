@@ -169,7 +169,7 @@ This example provides a dropdown menu that allows the customer to choose half or
 {% set halfAmount = craft.commerce
   .paymentCurrencies
   .convertCurrency(
-    cart.outstandingBalace * 0.5,
+    cart.outstandingBalance * 0.5,
     cart.currency,
     cart.paymentCurrency
   )
@@ -178,7 +178,7 @@ This example provides a dropdown menu that allows the customer to choose half or
 {% set fullAmount = craft.commerce
   .paymentCurrencies
   .convertCurrency(
-    cart.outstandingBalace,
+    cart.outstandingBalance,
     cart.currency,
     cart.paymentCurrency
   )
