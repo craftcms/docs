@@ -40,7 +40,7 @@ These steps assume you have a local development environment that meets Craft 4�
 8. Make any required changes to your [configuration](#configuration).
 9. Run `php craft migrate/all`.
 
-Your site is now running Craft 4! If you began this process with no deprecation warnings, you may be done.
+Your site is now running Craft 4! If you began this process with no deprecation warnings, you’re nearly done.
 
 ::: warning
 Thoroughly review the list of changes on this page, making note of any features you use in templates or modules. Only a fraction of your site’s code is actually evaluated during an upgrade, so it’s your responsibility to check templates and modules for consistency. You may also need to follow any plugin-specific upgrade guides, like [Upgrading to Commerce 4](/commerce/4.x/upgrading.md).
@@ -440,7 +440,7 @@ A few user permissions have been removed in Craft 4:
 
 ## Queue Drivers
 
-If you’re overriding Craft’s `queue` component in `config/app.php`, you may want to override Craft’s built-in queue driver’s [`proxyQueue`](craft4:craft\queue\Queue::$proxyQueue) property instead. That way you’ll regain visibility into the queue’s state from the control panel.
+If you’re overriding Craft’s `queue` component in `config/app.php`, you may want to override the [`proxyQueue`](craft4:craft\queue\Queue::$proxyQueue) property of Craft’s built-in queue driver, instead. This way, you’ll regain visibility into the queue’s state from the control panel.
 
 ```php
 <?php
