@@ -268,6 +268,9 @@ Most configuration is applied automatically on every request, and requires no ad
 
 However, Craft provides a powerful way to use dynamically-resolved config values in other parts of the system.
 
+<!-- Preserve links while craftcms/cms#11886 is in limbo! -->
+<a name="environmental-configuration"></a>
+
 ### Control Panel Settings
 
 Most values in the **Settings** area of Craft’s control panel are recorded in [Project config](../project-config). While this makes schema changes much easier to move between environments, it presents a challenge when something like a URL needs to change per-environment, or an API key leaks into YAML files.
