@@ -11,7 +11,7 @@ Before you begin, make sure that:
     - [PHP 8.0.2+ and MySQL 5.7.8+, MariaDB 10.2.7+, or PostgreSQL 10+](https://craftcms.com/knowledge-base/preparing-for-craft-4#upgrade-your-environment)
     - newly-required PHP extensions: [BCMath](https://www.php.net/manual/en/book.bc.php) and [Intl](http://php.net/manual/en/book.intl.php)
 - your site is running [the latest **Craft 3.7** release](https://craftcms.com/knowledge-base/preparing-for-craft-4#update-to-the-latest-version-of-craft-3)
-- your plugins are up to date and you’ve verified that they’ve been updated for Craft 4
+- you have the most recent (Craft 3-compatible) version of all plugins installed, and you’ve verified that they’ve been updated for Craft 4
 - you’ve made sure there are no [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-4#fix-deprecation-warnings) anywhere that need fixing
 
 Once you’ve completed everything above you can continue with the upgrade process.
