@@ -1,49 +1,66 @@
 # Upgrading from Craft 3
 
-The first step to upgrading your site to Craft 4 is updating the CMS itself.
+The smoothest way to upgrade to Craft 4 is to start with a [fully-updated Craft 3 project](/3.x/updating.md).
 
 ## Preparing for the Upgrade
 
-Before you begin, make sure that:
+Let’s take a moment to audit the current state of your site, and make sure:
 
-- you’ve reviewed the changes in Craft 4 further down this page
+- your **live site** is running [the latest version of Craft 3](https://craftcms.com/knowledge-base/preparing-for-craft-4#update-to-the-latest-version-of-craft-3)
+- you have the most recent Craft 3-compatible version of all plugins installed, and you’ve verified that Craft 4-compatible versions are available
+- there are no [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-4#fix-deprecation-warnings) to be fixed
 - all your environments meet Craft 4’s [minimum requirements](requirements.md)
     - [PHP 8.0.2+ and MySQL 5.7.8+, MariaDB 10.2.7+, or PostgreSQL 10+](https://craftcms.com/knowledge-base/preparing-for-craft-4#upgrade-your-environment)
     - newly-required PHP extensions: [BCMath](https://www.php.net/manual/en/book.bc.php) and [Intl](http://php.net/manual/en/book.intl.php)
-- your site is running [the latest **Craft 3.7** release](https://craftcms.com/knowledge-base/preparing-for-craft-4#update-to-the-latest-version-of-craft-3)
-- you have the most recent (Craft 3-compatible) version of all plugins installed, and you’ve verified that they’ve been updated for Craft 4
-- you’ve made sure there are no [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-4#fix-deprecation-warnings) anywhere that need fixing
+- you’ve reviewed the changes in Craft 4 further down this page and understand what work may lie ahead, post-upgrade
 
-Once you’ve completed everything above you can continue with the upgrade process.
+Once you’ve completed everything above, you’re ready to start the upgrade process.
 
 ::: tip
-If you’ve got custom plugins or modules, running Craft’s [Rector](extend/updating-plugins.md#rector) ruleset might save you some time!
+If your project uses custom plugins or modules, we have an additional [extension upgrade guide](extend/updating-plugins.md).
 :::
 
 ## Performing the Upgrade
 
-The best way to upgrade a Craft 3 site is to get everything squeaky-clean and up to date all at once, then proceed like it’s a normal software update.
+Like [any other update](updating.md), it’s essential that you have a safe place to test the upgrade prior to rolling it out.
 
-1. Pull a fresh database backup down from your production environment and import it locally.
+These steps assume you have a local development environment that meets Craft 4’s [requirements](requirements.md), and that any changes made [in preparation for the upgrade](#preparing-for-the-upgrade) have been deployed to your live site.
+
+1. Capture a fresh database backup from your live environment and import it.
 2. If your database has `entrydrafts` and `entryversions` tables, check them for any meaningful data. Craft 3.2 stopped using these tables when drafts and revisions became elements, and the tables will be removed as part of the Craft 4 install process.
 3. Make sure you don’t have any pending or active jobs in your queue.
-4. Run `php craft project-config/rebuild` and make sure all background tasks have completed.
-5. Create a new database backup just in case things go sideways.
-6. Edit your project’s `composer.json` to require `"craftcms/cms": "^4.0.0"` and Craft-4-compatible plugins all at once.\
-(You may also need to update your platform requirement to `php: "8.0.2"`.)
+4. Run `php craft project-config/rebuild` and allow any new background tasks to complete.
+5. Capture a database backup _of your local environment_, just in case things go sideways.
+6. Edit your project’s `composer.json` to require `"craftcms/cms": "^4.0.0"` and Craft-4-compatible plugins all at once.
     ::: tip
-    You’ll need to manually edit each plugin version in `composer.json`, and you may need to change your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability)—and include `"prefer-stable": true`—if you’re including beta versions of plugins.
+    You’ll need to manually edit each plugin version in `composer.json`. If any plugins are still in beta, you may need to change your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings.
     :::
+    You may also need to add `"php": "8.0.2"` to your [platform](https://getcomposer.org/doc/06-config.md#platform) requirements.
 7. Run `composer update`.
-8. Run `php craft migrate/all`.
+8. Make any required changes to your [configuration](#configuration).
+9. Run `php craft migrate/all`.
 
-Now that you’ve upgraded your install to use Craft 4, please take some time to review the changes on this page and update your project. You may also need to follow any plugin-specific upgrade guides, like [Upgrading to Commerce 4](/commerce/4.x/upgrading.md).
+Your site is now running Craft 4! If you began this process with no deprecation warnings, you may be done.
 
-Once you’ve verified everything’s looking great, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory and roll those changes out normally into each additional environment.
-
-::: tip
-If you’re using MySQL, we recommend running [`php craft db/convert-charset`](console-commands.md#db-convert-charset) along with the upgrade process to ensure optimal database performance.
+::: warning
+Thoroughly review the list of changes on this page, making note of any features you use in templates or modules. Only a fraction of your site’s code is actually evaluated during an upgrade, so it’s your responsibility to check templates and modules for consistency. You may also need to follow any plugin-specific upgrade guides, like [Upgrading to Commerce 4](/commerce/4.x/upgrading.md).
 :::
+
+Once you’ve verified everything’s in order, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory (along with any template, configuration, or module files that required updates) and deploy those changes normally in each additional environment.
+
+### Optional Steps
+
+These steps aren’t required to use Craft 4, but it’s the perfect time to do some housekeeping.
+
+#### MySQL Character Sets
+
+If you’re using MySQL, we recommend running [`php craft db/convert-charset`](console-commands.md#db-convert-charset) along with the upgrade process to ensure optimal database performance.
+
+#### Entry Script
+
+The [Craft starter project](https://github.com/craftcms/craft) is kept up-to-date with new Craft features, and will occasionally have official recommendations for your entry scripts (`index.php` and the `craft` CLI executable), configuration structure, etc. It’s a good idea to look this over keep your upgraded projects as similar as possible to fresh ones.
+
+Changing your entry script(s) may also involve updating [DotEnv](https://github.com/vlucas/phpdotenv) via `composer.json`. As long as its use in the entry script is compatible with the required version, you’re fine—Craft doesn’t rely on it, internally.
 
 ## Configuration
 
@@ -61,7 +78,7 @@ Some config settings have been removed in Craft 4:
 | `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](./project-config.md#manual-yaml-file-generation).
 
 ::: tip
-You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](config/README.md#custom-config-settings) will be accessible via `Craft::$app->config->custom->{mycustomsetting}`.
+You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](config/README.md#custom-settings) will be accessible via `Craft::$app->config->custom->{mycustomsetting}`.
 :::
 
 ### Volumes
