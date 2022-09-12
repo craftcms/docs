@@ -455,6 +455,8 @@ return [
 ];
 ```
 
-## Plugins
+<a name="plugins"></a>
 
-See [Updating Plugins for Craft 4](extend/updating-plugins.md).
+## Plugins and Modules
+
+Plugin authors (and module maintainers) should refer to our guide on [updating Plugins for Craft 4](extend/updating-plugins.md).
