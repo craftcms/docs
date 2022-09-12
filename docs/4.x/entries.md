@@ -123,7 +123,7 @@ You can use an attribute from a query in the entry’s URI. Use double curly bra
 :::
 
 ::: tip
-You can use aliases in the entry’s URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+You can use aliases in the entry’s URI. Use the `alias()` function in double curly braces (e.g. `{{alias(@rootUrl)}}/news`, `{{alias(@mySectionUri)}}`). [Read more](config/#control-panel-settings) about special configuration values.
 :::
 
 ### Preview Targets
@@ -143,7 +143,7 @@ If you want to include the entry’s ID or UID in a preview target URL, use `{ca
 :::
 
 ::: tip
-You can use environment variables and aliases in the preview target URL. These do not get wrapped in curly braces (e.g. `$NEWS_INDEX`, `@rootUrl/news`, `@rootUrl/news/{slug}`). See [Environmental Configuration](config/#environmental-configuration) to learn more about how those work.
+You can use environment variables and aliases in the preview target URL. These do not get wrapped in curly braces (e.g. `$NEWS_INDEX`, `@rootUrl/news`, `@rootUrl/news/{slug}`). [Read more](config/#control-panel-settings) about special configuration values.
 :::
 
 ::: tip

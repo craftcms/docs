@@ -58,7 +58,7 @@ Some config settings have been removed in Craft 4:
 | `config/general.php` | `siteUrl`                 | Set in the control panel, optionally using environment variables. (See [example](https://craftcms.com/knowledge-base/preparing-for-craft-4#replace-siteName-and-siteUrl-config-settings).)
 | `config/general.php` | `suppressTemplateErrors`  | 
 | `config/general.php` | `useCompressedJs`         | Craft always serves compressed JavaScript files now.
-| `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](https://craftcms.com/docs/4.x/project-config.html#manual-yaml-file-generation).
+| `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](./project-config.md#manual-yaml-file-generation).
 
 ::: tip
 You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](config/README.md#custom-config-settings) will be accessible via `Craft::$app->config->custom->{mycustomsetting}`.
@@ -107,8 +107,8 @@ Logs in Craft 4 now use [Monolog](https://github.com/Seldaek/monolog), which com
         ]
     ],
     ```
-- Query logging is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableLogging](./config/db-settings.md#enablelogging) config setting in `config/db.php`.
-- Query profiling is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableProfiling](./config/db-settings.md#enableprofiling) config setting in `config/db.php`.
+- Query logging is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableLogging](./config/db.md#enablelogging) config setting in `config/db.php`.
+- Query profiling is no longer enabled by default when `devMode` is set to `false`. This can be changed using the new [enableProfiling](./config/db.md#enableprofiling) config setting in `config/db.php`.
 - When [CRAFT_STREAM_LOG](./config/#craft-stream-log) is set to `true`, file logging will **not** be enabled.
 
 ::: tip

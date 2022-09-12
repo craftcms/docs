@@ -1,38 +1,24 @@
-# General Config Settings
+# General Settings
 
-Craft supports several configuration settings that give you control over its behavior.
+This group of settings affects a wide variety of Craft’s features and behaviors. If you are uncertain about whether something is configurable or not, refer to the categories in the table of contents.
 
-To set a new config setting, open `config/general.php` and define it in one of the environment config arrays, depending on which environment(s) you want the setting to apply to.
+General settings go in `config/general.php`. The config file that ships with [new Craft projects](https://github.com/craftcms/craft/blob/master/config/general.php) looks like this:
 
-For example, if you want to allow Craft to be updated in dev environments but not on staging or production environments, do this:
+```php
+use craft\config\GeneralConfig;
+use craft\helpers\App;
 
-```php{4,10}
-return [
-    // Global settings
-    '*' => [
-        'allowUpdates' => false,
-        // ...
-    ],
-
-    // Dev environment settings
-    'dev' => [
-        'allowUpdates' => true,
-        // ...
-    ],
-
-    // Staging environment settings
-    'staging' => [
-        // ...
-    ],
-
-    // Production environment settings
-    'production' => [
-        // ...
-    ],
-];
+return GeneralConfig::create()
+    ->defaultWeekStartDay(1)
+    ->omitScriptNameInUrls()
+    ->devMode(App::env('DEV_MODE') ?? false)
+    ->allowAdminChanges(App::env('ALLOW_ADMIN_CHANGES') ?? false)
+    ->disallowRobots(App::env('DISALLOW_ROBOTS') ?? false)
 ```
 
-Here’s the full list of config settings that Craft supports:
+::: tip
+There are a number of [ways to provide configuration](./README.md). This file uses the new “[fluent](./README.md#style-map-vs-fluent)” syntax, and contains references to [environment variables](./README.md#env) for settings that may change between environments.
+:::
 
 <!-- BEGIN SETTINGS -->
 

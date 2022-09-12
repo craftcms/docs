@@ -11,7 +11,7 @@ You can manage your project’s volumes from **Settings** → **Assets**.
 All volumes let you choose whether the assets within them should have public URLs, and if so, what their **base URL** should be.
 
 ::: tip
-Volumes’ base URLs can be set to an environment variable, or begin with an alias. See [Environmental Configuration](config/#environmental-configuration) to learn more about that.
+Volumes’ base URLs can be set to an environment variable, or begin with an alias. [Read more](config/#control-panel-settings) about special configuration values.
 :::
 
 ### Local Volumes
@@ -21,7 +21,7 @@ Out of the box, you can create one type of volume, “Local”. Local volumes re
 Local volumes have one setting: **File System Path**. Use this setting to define the path to the volume’s root directory on the server.
 
 ::: tip
-Local volumes’ file system path can be set to an environment variable, or begin with an alias. See [Environmental Configuration](config/#environmental-configuration) to learn more about that.
+Local volumes’ file system path can be set to an environment variable, or begin with an alias. [Read more](config/#control-panel-settings) about special configuration values.
 :::
 
 Note that Craft/PHP must be able to write to the directory you created.

@@ -85,7 +85,7 @@ Some of your system components may require sensitive information in their settin
 - a Gmail/SMTP password in your email settings
 - a secret access key in an AWS S3 volume
 
-To prevent those values from being saved into your YAML files, make sure you’re setting those fields to environment variables. See [Environmental Configuration](config/#environmental-configuration) for more information.
+To prevent those values from being saved into your YAML files, make sure you’re setting those fields to environment variables. See [Environmental Configuration](config/#control-panel-settings) for more information.
 
 ### Production Changes May Be Forgotten
 

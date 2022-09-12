@@ -337,7 +337,7 @@ The `orderPdfFilenameFormat` and `orderPdfPath` settings have been removed. Crea
 
 ### Gateway Settings
 
-Support for `commerce-gateways.php` has been removed. We recommend migrating any gateway-specific setting overrides to [environment variables](/4.x/config/#environmental-configuration).
+Support for `commerce-gateways.php` has been removed. We recommend migrating any gateway-specific setting overrides to [environment variables](/4.x/config/#control-panel-settings).
 
 **Commerce 3**
 
