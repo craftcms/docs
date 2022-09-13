@@ -10,7 +10,7 @@ If you think something is missing, please [create an issue](https://github.com/c
 
 The majority of work updating plugins for Craft 4 will be adding type declarations throughout the code. We’ve released a [Rector package](#rector) that can handle most of that work for you.
 
-Custom volume types will need to be updated, as will anything deprecated in Craft 3 that’s removed in Craft 4.
+Custom volume types will need to be updated, as will anything deprecated in Craft 3 that’s been completely removed in Craft 4.
 
 Some events, permissions, and controller actions have changed largely in support of new features you may want to take advantage of:
 
@@ -21,7 +21,7 @@ Some events, permissions, and controller actions have changed largely in support
 
 ### Plugin Store Considerations
 
-It’s best to update any existing plugin for Craft 4 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path.
+It’s best to update an existing plugin for Craft 4 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path.
 
 We anticipate most developers will choose to release a new major version of their plugin that requires Craft 4, though all Craft and the Plugin Store look at for compatibility is what’s required by `composer.json`.
 

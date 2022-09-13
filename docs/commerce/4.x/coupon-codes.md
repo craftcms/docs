@@ -51,7 +51,7 @@ To add a coupon to the cart, a customer submits the `couponCode` parameter using
 
 Only one coupon code can exist on the cart at a time, accessible via `{{ cart.couponCode }}`.
 
-If the customer submits an invalid code, Commerce may update the cart but adds an [order notice](carts-orders.md#order-notices):
+If the customer submits an invalid code, Commerce may update the cart but adds an [order notice](orders-carts.md#order-notices):
 
 ```twig{7-8,16}
 <form method="post">

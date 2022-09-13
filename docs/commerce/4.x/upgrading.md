@@ -22,7 +22,7 @@ Once you’ve completed these steps, you’re ready continue with the upgrade pr
 
 ## Performing the Upgrade
 
-1. Upgrade Craft CMS, Craft Commerce, and any other plugins, per the [Craft 4 upgrade instructions](../../4.x/upgrade.md). (Your `composer.json` should require `"craftcms/commerce": "^4.0.0-beta.1"`.)
+1. Upgrade Craft CMS, Craft Commerce, and any other plugins, per the [Craft 4 upgrade instructions](../../4.x/upgrade.md). (Your `composer.json` should require `"craftcms/commerce": "^4.0.0"`.)
 2. In your terminal, run `php craft commerce/upgrade` and follow the interactive prompts.
 3. Go to **Settings** → **Users** → **Address Fields** and drag the “Full Name”, “Organization”, and “Organization Tax ID” fields into the address field layout, so they remain editable within customers’ address books.
 
@@ -105,6 +105,7 @@ Commerce-specific Address models are now Craft [Address](craft4:craft\elements\A
 
 This will almost certainly require changes to your front-end templates, though it comes with several benefits:
 
+- locale-specific address validation (see [Removing Commerce Address Validation](https://craftcms.com/knowledge-base/removing-commerce-address-validation))
 - better address formatting defaults
 - easier address format customization
 - custom address fields can be managed in field layouts—so no more need for `custom1`, `custom2`, etc.
@@ -336,7 +337,7 @@ The `orderPdfFilenameFormat` and `orderPdfPath` settings have been removed. Crea
 
 ### Gateway Settings
 
-Support for `commerce-gateways.php` has been removed. We recommend migrating any gateway-specific setting overrides to [environment variables](/4.x/config/#environmental-configuration).
+Support for `commerce-gateways.php` has been removed. We recommend migrating any gateway-specific setting overrides to [environment variables](/4.x/config/#control-panel-settings).
 
 **Commerce 3**
 

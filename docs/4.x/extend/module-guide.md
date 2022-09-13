@@ -30,14 +30,14 @@ Use [pluginfactory.io](https://pluginfactory.io/) to create your module’s scaf
 
 ## Set up class autoloading
 
-Next up, you need to tell Composer how to find your module’s classes by setting the [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) field in your project’s `composer.json` file. For example, if your module’s namespace is `bar`, and it’s located at `modules/foo/`, this is what you should add:
+Next up, you need to tell Composer how to find your module’s classes by setting the [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) field in your project’s `composer.json` file. For example, if your module’s namespace is `foo`, and it’s located at `modules/foo/`, this is what you should add:
 
 ```json
 {
   // ...
   "autoload": {
     "psr-4": {
-      "bar\\": "modules/foo/"
+      "foo\\": "modules/foo/"
     }
   }
 }
@@ -79,7 +79,7 @@ Use this template as a starting point for your `Module.php` file:
 
 ```php
 <?php
-namespace bar;
+namespace foo;
 
 use Craft;
 
@@ -88,13 +88,13 @@ class Module extends \yii\base\Module
     public function init()
     {
         // Define a custom alias named after the namespace
-        Craft::setAlias('@bar', __DIR__);
+        Craft::setAlias('@foo', __DIR__);
 
         // Set the controllerNamespace based on whether this is a console or web request
         if (Craft::$app->getRequest()->getIsConsoleRequest()) {
-            $this->controllerNamespace = 'bar\\console\\controllers';
+            $this->controllerNamespace = 'foo\\console\\controllers';
         } else {
-            $this->controllerNamespace = 'bar\\controllers';
+            $this->controllerNamespace = 'foo\\controllers';
         }
 
         parent::init();
@@ -104,7 +104,7 @@ class Module extends \yii\base\Module
 }
 ```
 
-Replace `bar` with your module’s actual namespace, and `'@bar'` with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) name based on your actual namespace (with any `\`s converted to `/`s).
+Replace `foo` with your module’s actual namespace, and `'@foo'` with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) name based on your actual namespace (with any `\`s converted to `/`s).
 
 ## Further Reading
 

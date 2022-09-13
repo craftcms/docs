@@ -150,7 +150,7 @@ A functional test tor this page/template might look like this:
 ```php
 use FunctionalTester;
 
-class FunctionalCest
+class FunctionalTest
 {
     public function testWelcomeMessage(FunctionalTester $I)
     {

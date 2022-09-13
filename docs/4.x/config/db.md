@@ -3,16 +3,17 @@ sidebarLevel: 3
 ---
 # Database Connection Settings
 
-Craft supports several database connection settings that give you control over how Craft connects to the database.
+Craft can connect to MySQL and Postgres databases.
 
-Database connection settings may be set from `config/db.php`, but we recommend using environment variables (such as in your `.env` file).
-
-For example, in [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file should define these environment variables:
+Database connection settings may be set from a `config/db.php` file, but because they’re often entirely environment-specific, Craft supports assigning [directly from environment variables](../config#environment-overrides). In [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file will need to define these options:
 
 ```bash
+# Required variables:
 CRAFT_APP_ID=
 CRAFT_ENVIRONMENT=dev
 CRAFT_SECURITY_KEY=
+
+# Database-specific variables:
 CRAFT_DB_DRIVER=mysql
 CRAFT_DB_SERVER=127.0.0.1
 CRAFT_DB_PORT=3306
@@ -23,9 +24,16 @@ CRAFT_DB_SCHEMA=public
 CRAFT_DB_TABLE_PREFIX=
 ```
 
-The `DB_` variables are database connection settings, and the `CRAFT_` prefix is a special convention for overriding any config setting—meaning you don’t need to use a `config/db.php` file in Craft 4.
+We recommend this approach because it:
 
-If you wanted to use your own environment variables in a static config file, you could create a `config/db.php` to return an array of settings (defined below), using the thread-safe [App::env()](craft4:craft\helpers\App::env()) to get the value of each environment variable:
+1. Keeps sensitive information out of your project’s codebase (`.env` files should never be shared or committed to version control);
+2. Makes collaborating with other developers easier, as each developer can define their own settings from scratch, without overwriting someone else’s settings.
+
+::: tip
+Environment overrides are covered in greater detail on the [configuration overview page](../config#environment-overrides).
+:::
+
+If you need to use your own environment variables in a config file (or connection details are provided via platform-specific keys), create `config/db.php` and return an explicit array of settings:
 
 ```php
 use craft\helpers\App;
@@ -42,16 +50,11 @@ return [
 ];
 ```
 
-::: tip
-You may also provide a `DB_DSN` environment variable. If defined, Craft will use that.
+::: warning
+Finer-grain control of Craft’s database connection is possible by configuring the underlying [`db` application component](./app.md#database). This may be necessary if you have specific security requirements, or your app needs to connect to multiple databases.
 :::
 
-We recommend this environment variable approach for two reasons:
-
-1. It keeps sensitive information out of your project’s codebase. (`.env` files should never be shared or committed to Git.)
-2. It makes collaborating with other developers easier, as each developer can define their own settings without overwriting someone else’s settings.
-
-Here’s the full list of database connection settings that Craft supports:
+## Supported Settings
 
 <!-- BEGIN SETTINGS -->
 
@@ -77,10 +80,10 @@ For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo
 you’d set these:
 
 ```php
-[
-    PDO::MYSQL_ATTR_SSL_KEY    => '/path/to/my/client-key.pem',
-    PDO::MYSQL_ATTR_SSL_CERT   => '/path/to/my/client-cert.pem',
-    PDO::MYSQL_ATTR_SSL_CA     => '/path/to/my/ca-cert.pem',
+'attributes' => [
+    PDO::MYSQL_ATTR_SSL_KEY => '/path/to/my/client-key.pem',
+    PDO::MYSQL_ATTR_SSL_CERT => '/path/to/my/client-cert.pem',
+    PDO::MYSQL_ATTR_SSL_CA => '/path/to/my/ca-cert.pem',
 ],
 ```
 
@@ -333,7 +336,7 @@ The schema that Postgres is configured to use by default (PostgreSQL only).
 
 ::: tip
 To force Craft to use the specified schema regardless of PostgreSQL’s `search_path` setting, you must enable
-the [setSchemaOnConnect](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#setschemaonconnect) setting.
+the [setSchemaOnConnect()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-setschemaonconnect) setting.
 :::
 
 ::: code
@@ -393,7 +396,7 @@ Since
 
 </div>
 
-Whether the [schema](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#schema) should be explicitly used for database queries (PostgreSQL only).
+Whether the [schema()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-schema) should be explicitly used for database queries (PostgreSQL only).
 
 ::: warning
 This will cause an extra `SET search_path` SQL query to be executed per database connection. Ideally,
@@ -486,7 +489,7 @@ Defined by
 
 The database connection URL, if one was provided by your hosting environment.
 
-If this is set, the values for [driver](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#driver), [user](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#user), [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database), [server](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#server), [port](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#port), and [database](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#database) will be extracted from it.
+If this is set, the values for [driver()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-driver), [user()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-user), [database()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-database), [server()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-server), [port()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-port), and [database()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-database) will be extracted from it.
 
 ::: code
 ```php Static Config

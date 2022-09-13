@@ -1443,6 +1443,39 @@ Outputs a diff of the pending project config YAML changes.
 
 
 
+<h3 id="project-config-export">
+    <a href="#project-config-export" class="header-anchor">#</a>
+    <code>project-config/export</code>
+</h3>
+
+
+Exports the entire project config to a single file.
+
+<h4 id="project-config-export-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The path the project config should be exported to.
+Can be any of the following:
+    
+    - A full file path
+    - A folder path (export will be saved in there with a dynamically-generated name)
+    - A filename (export will be saved in the working directory with the given name)
+    - Blank (export will be saved in the working directly with a dynamically-generated name)
+
+
+
+<h4 id="project-config-export-options" class="command-subheading">Options</h4>
+
+
+--external
+: Whether to pull values from the project config YAML files instead of the loaded config.
+
+
+--overwrite
+: Whether to overwrite an existing export file, if a specific file path is given.
+
+
+
 <h3 id="project-config-get">
     <a href="#project-config-get" class="header-anchor">#</a>
     <code>project-config/get</code>
@@ -1742,6 +1775,10 @@ Re-saves assets.
 : Whether to update the search indexes for the resaved elements.
 
 
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
 --volume
 : The volume handle(s) to save assets from. Can be set to multiple comma-separated volumes.
 
@@ -1807,6 +1844,10 @@ Re-saves categories.
 
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
+
+
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
 
 
 --group
@@ -1888,6 +1929,10 @@ Re-saves entries.
 : Whether to update the search indexes for the resaved elements.
 
 
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
 --section
 : The section handle(s) to save entries from. Can be set to multiple comma-separated sections.
 
@@ -1961,6 +2006,10 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 : Whether to update the search indexes for the resaved elements.
 
 
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
 --type
 : The type handle(s) of the elements to resave.
 
@@ -2032,6 +2081,10 @@ Re-saves tags.
 : Whether to update the search indexes for the resaved elements.
 
 
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
 --group
 : The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
@@ -2097,6 +2150,10 @@ Re-saves users.
 
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
+
+
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
 
 
 --group
@@ -2622,6 +2679,17 @@ Converts all non-ASCII asset filenames to ASCII.
 
 Ensures all elements UIDs are unique.
 
+## `utils/fix-field-layout-uids`
+
+
+<h3 id="utils-fix-field-layout-uids-index">
+    <a href="#utils-fix-field-layout-uids-index" class="header-anchor">#</a>
+    <code>utils/fix-field-layout-uids</code>
+</h3>
+
+
+Fixes any duplicate UUIDs found within field layout components in the project config.
+
 ## `utils/prune-provisional-drafts`
 
 
@@ -2653,6 +2721,10 @@ Prunes provisional drafts for elements that have more than one per user.
 Prunes excess element revisions.
 
 <h4 id="utils-prune-revisions-index-options" class="command-subheading">Options</h4>
+
+
+--section
+: The section handle(s) to prune revisions from. Can be set to multiple comma-separated sections.
 
 
 --max-revisions

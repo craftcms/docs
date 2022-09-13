@@ -21,7 +21,7 @@ Every order may have a shipping and billing address, and customers with accounts
 - Methods for working with the store’s [countries & states](countries-states.md) provided by Craft’s supporting [address repository](/4.x/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
-The store address is available via the [Store service](craft4:craft\commerce\services\Store):
+The store address is available via the [Store service](commerce4:craft\commerce\services\Store):
 
 ::: code
 ```twig
@@ -262,7 +262,7 @@ It’s common to provide a shipping or tax cost estimate before a customer has e
 To help with this, the cart can use estimated shipping and billing addresses for calculations before complete addresses are available.
 
 ::: tip
-An estimated address is an [Address element](commerce4:craft\elements\Address) assigned to the order’s `estimatedShippingAddressId` or `estimatedBillingAddressId`.
+An estimated address is an [Address element](craft4:craft\elements\Address) assigned to the order’s `estimatedShippingAddressId` or `estimatedBillingAddressId`.
 :::
 
 #### Adding a Shipping Estimate Address to the Cart
@@ -327,13 +327,9 @@ A full example of this can be seen in the [example templates](example-templates.
 
 ## Customer Addresses
 
-Your front end can modify customer addresses indepdendently of the cart.
-
-When a customer is logged in and checks out with a new address, that address is saved to their address book. (This is not true for guests since they don’t have any need for an address book.)
+Your front end can modify customer addresses independently of the cart.
 
 Customers can only add and remove addresses from the front end while they’re logged in.
-
-See [the Customer model](commerce4:craft\commerce\models\Customer) to learn about the methods available to retrieve customer address data e.g. [Customer::getPrimaryBillingAddress()](<commerce4:craft\commerce\models\Customer::getPrimaryBillingAddress()>), [Customer::getPrimaryShippingAddress()](<commerce4:craft\commerce\models\Customer::getPrimaryShippingAddress()>) and [Customer::getAddressById()](<commerce4:craft\commerce\models\Customer::getAddressById()>).
 
 ### Get All Current Customer Addresses
 
@@ -488,4 +484,4 @@ In any of the above examples that post to the `users/save-address` action, you w
 {% endif %}
 ```
 
-For a complete template example that outputs individual field validation errors, see [shop/_includes/addresses/form.twig](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/_private/address/form.twig) in the [example templates](example-templates.md).
+For a complete template example that outputs individual field validation errors, see [shop/_private/address/fields.twig](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/address/fields.twig) in the [example templates](example-templates.md).

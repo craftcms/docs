@@ -64,7 +64,7 @@ The action’s output depends on whether the entry saved successfully and the re
 
 Success | Output
 ------- | ------
-<check-mark/> | Redirect response per the hashed `redirect` param.
+<check-mark/> | 302 redirect response per the hashed `redirect` param.
 <x-mark/> | None; the request will be routed per the URI. An `entry` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getFirstError()](yii2:yii\base\Model::getFirstError()), etc.
 
 </span>
@@ -75,8 +75,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> | JSON response with `success`, `id`, `title`, `slug`, `authorUsername`, `dateCreated`, `dateUpdated`, and `postDate` keys.
-<x-mark/> | JSON response with an `errors` key set to the result of [getErrors()](yii2:yii\base\Model::getErrors()).
+<check-mark/> | 200 JSON response with `id`, `title`, `slug`, `authorUsername`, `dateCreated`, `dateUpdated`, and `postDate` keys.
+<x-mark/> | 200 JSON response with an `errors` key set to the result of [getErrors()](yii2:yii\base\Model::getErrors()).
 
 </span>
 
@@ -109,7 +109,7 @@ The output of the action depends on whether the login was successful and the req
 
 Success | Output
 ------- | ------
-<check-mark/> | Redirect response per the hashed `redirect` param, or the user session’s return URL.
+<check-mark/> | 302 redirect response per the hashed `redirect` param, or the user session’s return URL.
 <x-mark/> | None; the request will be routed per the URI. `loginName`, `rememberMe`, `errorCode`, and `errorMessage` variables will be passed to the resulting template.
 
 </span>
@@ -120,8 +120,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> | JSON response with `success` and `returnUrl` keys.
-<x-mark/> | JSON response with `errorCode` and `error` keys.
+<check-mark/> | 200 JSON response with `success` and `returnUrl` keys.
+<x-mark/> | 200 JSON response with `errorCode` and `error` keys.
 
 </span>
 
@@ -174,7 +174,7 @@ The output depends on whether the user save action was successful and the reques
 
 Success | Output
 ------- | ------
-<check-mark/> | Redirect response per the hashed `redirect` param, or the <config3:activateAccountSuccessPath> config setting if email verification is not required.
+<check-mark/> | 302 redirect response per the hashed `redirect` param, or the <config3:activateAccountSuccessPath> config setting if email verification is not required.
 <x-mark/> | None; the request will be routed per the URI. A `user` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getFirstError()](yii2:yii\base\Model::getFirstError()), etc.
 
 </span>
@@ -185,8 +185,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> | JSON response with `success` and `id` keys.
-<x-mark/> | JSON response with an `errors` key.
+<check-mark/> | 200 JSON response with `success` and `id` keys.
+<x-mark/> | 200 JSON response with an `errors` key.
 
 </span>
 
@@ -218,7 +218,7 @@ The output of the action depends on whether the reset password email was sent su
 
 Success | Output
 ------- | ------
-<check-mark/> | Redirect response per the hashed `redirect` param.
+<check-mark/> | 302 redirect response per the hashed `redirect` param.
 <x-mark/> | None; the request will be routed per the URI. `errors` and `loginName` variables will be passed to the resulting template.
 
 </span>
@@ -229,8 +229,8 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> | JSON response with a `success` key.
-<x-mark/> | JSON response with an `error` key.
+<check-mark/> | 200 JSON response with a `success` key.
+<x-mark/> | 200 JSON response with an `error` key.
 
 </span>
 
@@ -261,7 +261,7 @@ The output of the action depends on whether the password was updated successfull
 
 Success | Output
 ------- | ------
-<check-mark/> | Redirect response depending on the <config3:autoLoginAfterAccountActivation> and <config3:setPasswordSuccessPath> config settings, and whether the user has access to the control panel.
+<check-mark/> | 302 redirect response depending on the <config3:autoLoginAfterAccountActivation> and <config3:setPasswordSuccessPath> config settings, and whether the user has access to the control panel.
 <x-mark/> | None; the request will be routed per the URI. `errors` , `code`, `id`, and `newUser` variables will be passed to the resulting template.
 
 </span>
@@ -272,7 +272,7 @@ Success | Output
 
 Success | Output
 ------- | ------
-<check-mark/> | JSON response with `success` and (possibly) `csrfTokenValue` keys.
-<x-mark/> | JSON response with an `error` key.
+<check-mark/> | 200 JSON response with `success` and (possibly) `csrfTokenValue` keys.
+<x-mark/> | 200 JSON response with an `error` key.
 
 </span>

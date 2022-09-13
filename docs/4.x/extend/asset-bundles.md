@@ -36,7 +36,7 @@ namespace mynamespace;
 use craft\web\AssetBundle;
 use craft\web\assets\cp\CpAsset;
 
-class MyPluginAsset extends AssetBundle
+class FooBundle extends AssetBundle
 {
     public function init()
     {

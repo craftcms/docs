@@ -1,40 +1,92 @@
-# General Config Settings
+# General Settings
 
-Craft supports several configuration settings that give you control over its behavior.
+This group of settings affects a wide variety of Craft’s features and behaviors. If you are uncertain about whether something is configurable or not, refer to the categories in the table of contents.
 
-To set a new config setting, open `config/general.php` and define it in one of the environment config arrays, depending on which environment(s) you want the setting to apply to.
+General settings go in `config/general.php`. The config file that ships with [new Craft projects](https://github.com/craftcms/craft/blob/master/config/general.php) looks like this:
 
-For example, if you want to allow Craft to be updated in dev environments but not on staging or production environments, do this:
+```php
+use craft\config\GeneralConfig;
+use craft\helpers\App;
 
-```php{4,10}
-return [
-    // Global settings
-    '*' => [
-        'allowUpdates' => false,
-        // ...
-    ],
-
-    // Dev environment settings
-    'dev' => [
-        'allowUpdates' => true,
-        // ...
-    ],
-
-    // Staging environment settings
-    'staging' => [
-        // ...
-    ],
-
-    // Production environment settings
-    'production' => [
-        // ...
-    ],
-];
+return GeneralConfig::create()
+    ->defaultWeekStartDay(1)
+    ->omitScriptNameInUrls()
+    ->devMode(App::env('DEV_MODE') ?? false)
+    ->allowAdminChanges(App::env('ALLOW_ADMIN_CHANGES') ?? false)
+    ->disallowRobots(App::env('DISALLOW_ROBOTS') ?? false)
 ```
 
-Here’s the full list of config settings that Craft supports:
+::: tip
+There are a number of [ways to provide configuration](./README.md). This file uses the new “[fluent](./README.md#style-map-vs-fluent)” syntax, and contains references to [environment variables](./README.md#env) for settings that may change between environments.
+:::
 
 <!-- BEGIN SETTINGS -->
+
+### `passwordPath`
+
+<div class="compact">
+
+Allowed types
+:  `mixed`
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$passwordPath](craft4:craft\config\GeneralConfig::$passwordPath)
+
+Since
+:  4.2.0
+
+</div>
+
+
+
+
+
+### `passwordRequestPath`
+
+<div class="compact">
+
+Allowed types
+:  `mixed`
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$passwordRequestPath](craft4:craft\config\GeneralConfig::$passwordRequestPath)
+
+Since
+:  4.2.0
+
+</div>
+
+
+
+
+
+### `passwordSuccessPath`
+
+<div class="compact">
+
+Allowed types
+:  `mixed`
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$passwordSuccessPath](craft4:craft\config\GeneralConfig::$passwordSuccessPath)
+
+Since
+:  4.2.0
+
+</div>
+
+
+
+
 
 ## System
 
@@ -50,6 +102,7 @@ Default value
     'alwaysShowFocusRings' => false,
     'useShapes' => false,
     'underlineLinks' => false,
+    'notificationDuration' => 5000,
 ]`
 
 Defined by
@@ -64,9 +117,11 @@ The default user accessibility preferences that should be applied to users that 
 
 The array can contain the following keys:
 
-- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus
-- `useShapes` – Whether shapes should be used to represent statuses
-- `underlineLinks` – Whether links should be underlined
+- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus.
+- `useShapes` – Whether shapes should be used to represent statuses.
+- `underlineLinks` – Whether links should be underlined.
+- `notificationDuration` – How long notifications should be shown before they disappear automatically (in
+  milliseconds). Set to `0` to show them indefinitely.
 
 ```php
 'accessibilityDefaults' => [
@@ -610,18 +665,16 @@ Since
 
 Array of plugin handles that should be disabled, regardless of what the project config says.
 
-```php Static Config
-'dev' => [
-    'disabledPlugins' => ['webhooks'],
+```php
+'disabledPlugins' => [
+    'webhooks',
 ],
 ```
 
 This can also be set to `'*'` to disable **all** plugins.
 
-```php Static Config
-'dev' => [
-    'disabledPlugins' => '*',
-],
+```php
+'disabledPlugins' => '*',
 ```
 
 ::: warning
@@ -631,7 +684,10 @@ between environments, which will prevent project config changes from getting app
 
 ::: code
 ```php Static Config
-'disabledPlugins' => ['redactor', 'webhooks'],
+'disabledPlugins' => [
+    'redactor',
+    'webhooks',
+],
 ```
 ```shell Environment Override
 CRAFT_DISABLED_PLUGINS=redactor,webhooks
@@ -692,6 +748,15 @@ Defined by
 </div>
 
 Whether to enable Craft’s template `{% cache %}` tag on a global basis.
+
+::: code
+```php Static Config
+'enableTemplateCaching' => false,
+```
+```shell Environment Override
+CRAFT_ENABLE_TEMPLATE_CACHING=false
+```
+:::
 
 
 
@@ -2620,6 +2685,15 @@ Defined by
 
 The name of the PHP session cookie.
 
+::: code
+```php Static Config
+'phpSessionName' => null,
+```
+```shell Environment Override
+CRAFT_PHP_SESSION_NAME=null
+```
+:::
+
 
 
 ### `rememberUsernameDuration`
@@ -2864,6 +2938,15 @@ Defined by
 </div>
 
 The name of CSRF token used for CSRF validation if <config4:enableCsrfProtection> is set to `true`.
+
+::: code
+```php Static Config
+'csrfTokenName' => 'MY_CSRF',
+```
+```shell Environment Override
+CRAFT_CSRF_TOKEN_NAME=MY_CSRF
+```
+:::
 
 
 
@@ -3311,8 +3394,8 @@ If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yi
         'on',
     ],
     'CF-Visitor' => [
-        '{\"scheme\":\"https\"}'
-    ]
+        '{\"scheme\":\"https\"}',
+    ],
 ],
 ```
 
@@ -3326,7 +3409,7 @@ Allowed types
 :  [string](https://php.net/language.types.string)
 
 Default value
-:  `null`
+:  `''`
 
 Defined by
 :  [GeneralConfig::$securityKey](craft4:craft\config\GeneralConfig::$securityKey)

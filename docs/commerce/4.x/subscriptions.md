@@ -134,6 +134,7 @@ Subscription queries support the following parameters:
 | [plan](#plan)                             | Narrows the query results based on the subscription plan.
 | [planId](#planid)                         | Narrows the query results based on the subscription plans’ IDs.
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [reference](#reference)                   | Narrows the query results based on the reference.
 | [relatedTo](#relatedto)                   | Narrows the query results to only subscriptions that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only subscriptions that match a search query.
@@ -859,6 +860,15 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
+
+
+#### `prepareSubquery`
+
+Prepares the element query and returns its subquery (which determines what elements will be returned).
+
+
+
+
 
 
 #### `reference`

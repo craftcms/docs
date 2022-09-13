@@ -45,7 +45,7 @@ Filter | Description
 [keys](https://twig.symfony.com/doc/3.x/filters/keys.html) | Returns the keys of an array.
 [last](https://twig.symfony.com/doc/3.x/filters/last.html) | Returns the last character/item of a string/array.
 [lcfirst](#lcfirst) | Lowercases the first character of a string.
-[length](https://twig.symfony.com/doc/3.x/filters/length.html) | Returns the length of a string or array.
+[length](#length) | Returns the length of a string or array, or the count of a query.
 [literal](#literal) | Escapes an untrusted string for use with element query params.
 [lower](https://twig.symfony.com/doc/3.x/filters/lower.html) | Lowercases a string.
 [map](https://twig.symfony.com/doc/3.x/filters/map.html) | Applies an arrow function to the items in an array.
@@ -407,7 +407,7 @@ arrays passed into the filter.
 
 ## `duration`
 
-Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object through <craft4:craft\helpers\DateTimeHelper::humanDurationFromInterval()>
+Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object or integer (number of seconds) through <craft4:craft\helpers\DateTimeHelper::humanDuration()> to output human-friendly duration text.
 
 ```twig
 <p>Posted {{ entry.postDate.diff(now)|duration(false) }} ago.</p>
@@ -629,6 +629,12 @@ Lowercases the first character of a string.
 {{ 'Foobar'|lcfirst }}
 {# Output: foobar #}
 ```
+
+## `length`
+
+Returns the length of a string or array, or the result count of a query.
+
+If used on anything besides a query, Twig’s built-in [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter logic will be used.
 
 ## `literal`
 
@@ -1304,7 +1310,7 @@ This can be useful to prevent typographic [widows and orphans](https://en.wikipe
 
 ## `without`
 
-Returns an array without the specified element(s).
+Returns an array without the specified item(s).
 
 ```twig
 {% set entries = craft.entries().section('articles').limit(3).find %}
