@@ -1605,6 +1605,10 @@ Re-saves assets.
 : Whether to update the search indexes for the resaved elements.
 
 
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
 --volume
 : The volume handle(s) to save assets from. Can be set to multiple comma-separated volumes.
 
@@ -1670,6 +1674,10 @@ Re-saves categories.
 
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
+
+
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
 
 
 --group
@@ -1751,6 +1759,10 @@ Re-saves entries.
 : Whether to update the search indexes for the resaved elements.
 
 
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
 --section
 : The section handle(s) to save entries from. Can be set to multiple comma-separated sections.
 
@@ -1824,6 +1836,10 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 : Whether to update the search indexes for the resaved elements.
 
 
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
 --type
 : The type handle(s) of the elements to resave.
 
@@ -1895,6 +1911,10 @@ Re-saves tags.
 : Whether to update the search indexes for the resaved elements.
 
 
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
 --group
 : The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
@@ -1960,6 +1980,10 @@ Re-saves users.
 
 --update-search-index
 : Whether to update the search indexes for the resaved elements.
+
+
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
 
 
 --group
