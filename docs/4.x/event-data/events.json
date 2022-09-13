@@ -3363,6 +3363,12 @@
         "desc": "The event that is triggered before handling an exception."
     },
     {
+        "class": "craft\\console\\ErrorHandler",
+        "name": "EVENT_SHUTDOWN",
+        "type": "yii\\base\\Event",
+        "desc": "an event that is triggered when the handler is called by shutdown function via `handleFatalError()`."
+    },
+    {
         "class": "craft\\console\\controllers\\BackupController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -36196,6 +36202,12 @@
         "desc": "The event that is triggered after a search is performed."
     },
     {
+        "class": "craft\\services\\Search",
+        "name": "EVENT_BEFORE_SCORE_RESULTS",
+        "type": "craft\\events\\SearchEvent",
+        "desc": "The event that is triggered before the results are scored."
+    },
+    {
         "class": "craft\\services\\Sections",
         "name": "EVENT_BEFORE_SAVE_SECTION",
         "type": "craft\\events\\SectionEvent",
@@ -37168,6 +37180,12 @@
         "desc": "The event that is triggered before handling an exception."
     },
     {
+        "class": "craft\\web\\ErrorHandler",
+        "name": "EVENT_SHUTDOWN",
+        "type": "yii\\base\\Event",
+        "desc": "an event that is triggered when the handler is called by shutdown function via `handleFatalError()`."
+    },
+    {
         "class": "craft\\web\\Response",
         "name": "EVENT_BEFORE_SEND",
         "type": "yii\\base\\Event",
@@ -37976,6 +37994,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "yii\\base\\ErrorHandler",
+        "name": "EVENT_SHUTDOWN",
+        "type": "yii\\base\\Event",
+        "desc": "an event that is triggered when the handler is called by shutdown function via `handleFatalError()`."
     },
     {
         "class": "yii\\base\\Model",
