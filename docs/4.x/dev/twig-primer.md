@@ -192,7 +192,7 @@ You can chain filters together. Each subsequent filters will use the result of t
 ```twig
 {% set text = "I **really** love Tom Petty." %}
 {{ text|markdown|striptags|upper }}
-{# Output: I REALLY LOVE TOM PETTY.</p> #}
+{# Output: I REALLY LOVE TOM PETTY. #}
 ```
 
 Note that filters will only apply to the value that immediately precedes it. If you want to apply the filter to the result of an expression, you must wrap the expression in parentheses first.
