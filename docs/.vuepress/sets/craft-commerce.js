@@ -7,10 +7,11 @@ module.exports = {
   versions: [
     ["4.x", { label: "4.x" }],
     ["3.x", { label: "3.x" }],
-    ["2.x", { label: "2.x" }],
-    ["1.x", { label: "1.x" }]
+    ["2.x", { label: "2.x", isEol: true }],
+    ["1.x", { label: "1.x", isEol: true }]
   ],
   defaultVersion: "4.x",
+  abandoned: false,
   searchPlaceholder: "Search the Commerce docs (Press “/” to focus)",
   primarySet: true,
   sidebar: {

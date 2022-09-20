@@ -3,6 +3,7 @@ module.exports = {
   handle: "getting-started",
   icon: "/docs/icons/tutorial.svg",
   baseDir: "getting-started-tutorial",
+  abandoned: false,
   searchPlaceholder: "Search the tutorial (Press “/” to focus)",
   primarySet: false,
   sidebar: {

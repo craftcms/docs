@@ -1,11 +1,20 @@
 <template>
   <div class="post-heading">
     <div
-      v-if="suggestedUpdatePath"
-      class="version-warning block w-full mt-2 px-3 py-2 rounded border border-yellow-300"
+      v-if="$activeSet.abandoned"
+      class="version-warning"
+      v-html="$activeSet.deprecationMessage"></div>
+    <div
+      v-else-if="$activeVersionInfo && $activeVersionInfo.isEol"
+      class="version-warning">
+      This document is for a version of {{ $activeSet.setTitle }} that is no longer supported. Please refer to the <RouterLink :to="suggestedPath">latest version →</RouterLink>
+    </div>
+    <div
+      v-else-if="isSearchReferral && suggestedPath"
+      class="version-warning"
     >
       This document is for an older version of {{ $activeSet.setTitle }}.
-      <RouterLink :to="suggestedUpdatePath">View latest version →</RouterLink>
+      <RouterLink :to="suggestedPath">View latest version →</RouterLink>
     </div>
     <div
       class="auto-toc block xl:hidden"
@@ -38,6 +47,12 @@
     }
   }
 }
+
+.version-warning {
+  @apply block w-full mt-2 px-5 py-4 rounded border border-yellow-300;
+
+  background-image: repeating-linear-gradient(-45deg, transparent 0px, var(--sidebar-bg-color) 0px, var(--sidebar-bg-color) 4px, transparent 4px, transparent 8px);
+}
 </style>
 
 <script>
@@ -49,20 +64,28 @@ export default {
     SidebarLinks,
   },
   mounted() {
-    this.checkReferrer();
+    const searchMatch = [
+      /google\.com/,
+      /yahoo\.com/,
+      /bing\.com/,
+      /duckduckgo\.com/,
+    ];
+
+    // Does it look like the visitor came from a search engine?
+    this.isSearchReferral = searchMatch.some((item) =>
+      item.test(document.referrer)
+    );
   },
   data() {
     return {
-      suggestedUpdatePath: null,
+      isSearchReferral: false,
     };
   },
   computed: {
     headingItems() {
       return resolveHeaders(this.$page);
     },
-  },
-  methods: {
-    checkReferrer() {
+    suggestedPath() {
       if (
         !this.$activeSet ||
         !this.$activeSet.versions ||
@@ -82,7 +105,7 @@ export default {
         return;
       }
 
-      const alternateVersionPath = getSameContentForVersion(
+      return getSameContentForVersion(
         this.$activeSet.defaultVersion,
         this.$activeSet,
         this.$activeVersion,
@@ -90,26 +113,6 @@ export default {
         this.$site.pages,
         false
       );
-
-      if (alternateVersionPath === false) {
-        return;
-      }
-
-      const searchMatch = [
-        /google\.com/,
-        /yahoo\.com/,
-        /bing\.com/,
-        /duckduckgo\.com/,
-      ];
-
-      // does it look like the visitor came from a search engine?
-      const isSearchReferral = searchMatch.some((item) =>
-        item.test(document.referrer)
-      );
-
-      if (isSearchReferral) {
-        this.suggestedUpdatePath = alternateVersionPath;
-      }
     },
   },
 };

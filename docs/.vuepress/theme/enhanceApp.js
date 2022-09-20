@@ -101,6 +101,17 @@ export default ({ Vue, options, router, siteData }) => {
           return this.$activeSet.defaultVersion;
         }
       },
+      $activeVersionInfo() {
+        if (!this.$activeVersion) {
+          return;
+        }
+
+        for (const [v, info] of this.$activeSet.versions) {
+          if (v === this.$activeVersion) {
+            return info;
+          }
+        }
+      },
       /**
        * Every doc set base path, including set base, version, and/or language. Example:
        * - `/2.x/`
