@@ -1,5 +1,6 @@
 ---
 sidebarLevel: 3
+updatedVersion: 4.x/config/db.md
 ---
 # Database Connection Settings
 
