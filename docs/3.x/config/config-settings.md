@@ -1,3 +1,6 @@
+---
+updatedVersion: 4.x/config/general.md
+---
 # General Config Settings
 
 Craft supports several configuration settings that give you control over its behavior.

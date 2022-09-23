@@ -124,9 +124,9 @@ The array can contain the following keys:
   milliseconds). Set to `0` to show them indefinitely.
 
 ```php
-'accessibilityDefaults' => [
+->accessibilityDefaults([
     'useShapes' => true,
-]
+])
 ```
 
 
@@ -163,7 +163,7 @@ Don’t disable this setting until **all** environments have been updated to Cra
 
 ::: code
 ```php Static Config
-'allowAdminChanges' => false,
+->allowAdminChanges(false)
 ```
 ```shell Environment Override
 CRAFT_ALLOW_ADMIN_CHANGES=false
@@ -191,7 +191,7 @@ Whether users should be allowed to create similarly-named tags.
 
 ::: code
 ```php Static Config
-'allowSimilarTags' => true,
+->allowSimilarTags(true)
 ```
 ```shell Environment Override
 CRAFT_ALLOW_SIMILAR_TAGS=1
@@ -221,7 +221,7 @@ This setting will automatically be disabled if <config4:allowAdminChanges> is di
 
 ::: code
 ```php Static Config
-'allowUpdates' => false,
+->allowUpdates(false)
 ```
 ```shell Environment Override
 CRAFT_ALLOW_UPDATES=false
@@ -249,7 +249,7 @@ Whether users should automatically be logged in after activating their account o
 
 ::: code
 ```php Static Config
-'autoLoginAfterAccountActivation' => true,
+->autoLoginAfterAccountActivation(true)
 ```
 ```shell Environment Override
 CRAFT_ALLOW_AUTO_LOGIN_AFTER_ACCOUNT_ACTIVATION=true
@@ -285,7 +285,7 @@ Drafts *will* be autosaved while Live Preview is open, regardless of this settin
 
 ::: code
 ```php Static Config
-'autosaveDrafts' => false,
+->autosaveDrafts(false)
 ```
 ```shell Environment Override
 CRAFT_AUTOSAVE_DRAFTS=false
@@ -313,7 +313,7 @@ Whether Craft should create a database backup before applying a new system updat
 
 ::: code
 ```php Static Config
-'backupOnUpdate' => false,
+->backupOnUpdate(false)
 ```
 ```shell Environment Override
 CRAFT_BACKUP_ON_UPDATE=false
@@ -345,7 +345,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 ::: code
 ```php Static Config
-'cacheDuration' => 0,
+->cacheDuration(0)
 ```
 ```shell Environment Override
 CRAFT_CACHE_DURATION=0
@@ -379,7 +379,7 @@ Each tag can be specified as an array of the tag name and its attributes.
 For example, you can give the control panel a custom favicon (etc.) like this:
 
 ```php Static Config
-'cpHeadTags' => [
+->cpHeadTags([
     // Traditional favicon
     ['link', ['rel' => 'icon', 'href' => '/icons/favicon.ico']],
     // Scalable favicon for browsers that support them
@@ -388,7 +388,7 @@ For example, you can give the control panel a custom favicon (etc.) like this:
     ['link', ['rel' => 'apple-touch-icon', 'sizes' => '180x180', 'href' => '/icons/touch-icon.svg']],
     // Pinned tab icon for Safari
     ['link', ['rel' => 'mask-icon', 'href' => '/icons/mask-icon.svg', 'color' => '#663399']],
-],
+])
 ```
 
 
@@ -412,7 +412,7 @@ The default language the control panel should use for users who haven’t set a 
 
 ::: code
 ```php Static Config
-'defaultCpLanguage' => 'en-US',
+->defaultCpLanguage('en-US')
 ```
 ```shell Environment Override
 CRAFT_DEFAULT_CP_LANGUAGE=en-US
@@ -446,7 +446,7 @@ If this is `null`, the <config4:defaultCpLanguage> config setting will determine
 
 ::: code
 ```php Static Config
-'defaultCpLocale' => 'en-US',
+->defaultCpLocale('en-US')
 ```
 ```shell Environment Override
 CRAFT_DEFAULT_CP_LOCALE=en-US
@@ -476,7 +476,7 @@ If set to `null`, the permission will be determined by the current environment.
 
 ::: code
 ```php Static Config
-'defaultDirMode' => 0744,
+->defaultDirMode(0744)
 ```
 ```shell Environment Override
 CRAFT_DEFAULT_DIR_MODE=0744
@@ -506,7 +506,7 @@ If set to `null`, the permission will be determined by the current environment.
 
 ::: code
 ```php Static Config
-'defaultFileMode' => 0744,
+->defaultFileMode(0744)
 ```
 ```shell Environment Override
 CRAFT_DEFAULT_FILE_MODE=0744
@@ -540,10 +540,10 @@ Options include:
 - `exact` – Whether the term must be an exact match (only applies if the search term specifies an attribute). (`false` by default)
 
 ```php Static Config
-'defaultSearchTermOptions' => [
+->defaultSearchTermOptions([
     'subLeft' => true,
     'exclude' => 'secret',
-],
+])
 ```
 
 
@@ -570,7 +570,7 @@ The template file extensions Craft will look for when matching a template path t
 
 ::: code
 ```php Static Config
-'defaultTemplateExtensions' => ['html', 'twig', 'txt'],
+->defaultTemplateExtensions(['html', 'twig', 'txt'])
 ```
 ```shell Environment Override
 CRAFT_DEFAULT_TEMPLATE_EXTENSIONS=html,twig,txt
@@ -608,7 +608,7 @@ This should be set to one of the following integers:
 
 ::: code
 ```php Static Config
-'defaultWeekStartDay' => 0,
+->defaultWeekStartDay(0)
 ```
 ```shell Environment Override
 CRAFT_DEFAULT_WEEK_START_DAY=0
@@ -636,7 +636,7 @@ Whether the system should run in [Dev Mode](https://craftcms.com/support/dev-mod
 
 ::: code
 ```php Static Config
-'devMode' => true,
+->devMode(true)
 ```
 ```shell Environment Override
 CRAFT_DEV_MODE=true
@@ -666,15 +666,15 @@ Since
 Array of plugin handles that should be disabled, regardless of what the project config says.
 
 ```php
-'disabledPlugins' => [
+->disabledPlugins([
     'webhooks',
-],
+])
 ```
 
 This can also be set to `'*'` to disable **all** plugins.
 
 ```php
-'disabledPlugins' => '*',
+->disabledPlugins'('*')
 ```
 
 ::: warning
@@ -684,10 +684,10 @@ between environments, which will prevent project config changes from getting app
 
 ::: code
 ```php Static Config
-'disabledPlugins' => [
+->disabledPlugins([
     'redactor',
     'webhooks',
-],
+])
 ```
 ```shell Environment Override
 CRAFT_DISABLED_PLUGINS=redactor,webhooks
@@ -723,7 +723,7 @@ This should be set to `true` for development and staging environments.
 
 ::: code
 ```php Static Config
-'disallowRobots' => true,
+->disallowRobots(true)
 ```
 ```shell Environment Override
 CRAFT_DISALLOW_ROBOTS=1
@@ -751,7 +751,7 @@ Whether to enable Craft’s template `{% cache %}` tag on a global basis.
 
 ::: code
 ```php Static Config
-'enableTemplateCaching' => false,
+->enableTemplateCaching(false)
 ```
 ```shell Environment Override
 CRAFT_ENABLE_TEMPLATE_CACHING=false
@@ -781,7 +781,7 @@ If set to `'_'` your site’s 404 template would live at `templates/_404.twig`, 
 
 ::: code
 ```php Static Config
-'errorTemplatePrefix' => '_',
+->errorTemplatePrefix('_')
 ```
 ```shell Environment Override
 CRAFT_ERROR_TEMPLATE_PREFIX=_
@@ -809,7 +809,7 @@ List of file extensions that will be merged into the <config4:allowedFileExtensi
 
 ::: code
 ```php Static Config
-'extraAllowedFileExtensions' => ['mbox', 'xml'],
+->extraAllowedFileExtensions(['mbox', 'xml'])
 ```
 ```shell Environment Override
 CRAFT_EXTRA_ALLOWED_FILE_EXTENSIONS=mbox,xml
@@ -840,7 +840,7 @@ List of extra locale IDs that the application should support, and users should b
 
 ::: code
 ```php Static Config
-'extraAppLocales' => ['uk'],
+->extraAppLocales(['uk'])
 ```
 ```shell Environment Override
 CRAFT_EXTRA_APP_LOCALES=uk
@@ -908,7 +908,7 @@ panel is located on a different domain than your front end.
 
 ::: code
 ```php Static Config
-'headlessMode' => true,
+->headlessMode(true)
 ```
 ```shell Environment Override
 CRAFT_HEADLESS_MODE=1
@@ -941,7 +941,7 @@ This can be set to a URL (`http://localhost`) or a URL plus a port (`http://loca
 
 ::: code
 ```php Static Config
-'httpProxy' => 'http://localhost',
+->httpProxy('<http://localhost')>
 ```
 ```shell Environment Override
 CRAFT_HTTP_PROXY=http://localhost
@@ -972,7 +972,7 @@ matching a template path to a file on the front end.
 
 ::: code
 ```php Static Config
-'indexTemplateFilenames' => ['index', 'default'],
+->indexTemplateFilenames(['index', 'default'])
 ```
 ```shell Environment Override
 CRAFT_INDEX_TEMPLATE_FILENAMES=index,default
@@ -1004,7 +1004,7 @@ If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.co
 
 ::: code
 ```php Static Config
-'ipHeaders' => ['X-Forwarded-For', 'CF-Connecting-IP'],
+->ipHeaders(['X-Forwarded-For', 'CF-Connecting-IP'])
 ```
 ```shell Environment Override
 CRAFT_IP_HEADERS=X-Forwarded-For,CF-Connecting-IP
@@ -1033,7 +1033,7 @@ in Settings → General.
 
 ::: code
 ```php Static Config
-'isSystemLive' => true,
+->isSystemLive(true)
 ```
 ```shell Environment Override
 CRAFT_IS_SYSTEM_LIVE=true
@@ -1065,7 +1065,7 @@ This only affects the JavaScript auto-generated slugs. Non-ASCII characters can 
 
 ::: code
 ```php Static Config
-'limitAutoSlugsToAscii' => true,
+->limitAutoSlugsToAscii(true)
 ```
 ```shell Environment Override
 CRAFT_LIMIT_AUTO_SLUGS_TO_ASCII=1
@@ -1094,7 +1094,7 @@ not delete any backups.
 
 ::: code
 ```php Static Config
-'maxBackups' => 5,
+->maxBackups(5)
 ```
 ```shell Environment Override
 CRAFT_MAX_BACKUPS=5
@@ -1127,7 +1127,7 @@ Set to `0` if you want to store an unlimited number of revisions.
 
 ::: code
 ```php Static Config
-'maxRevisions' => 25,
+->maxRevisions(25)
 ```
 ```shell Environment Override
 CRAFT_MAX_REVISIONS=25
@@ -1155,7 +1155,7 @@ The highest number Craft will tack onto a slug in order to make it unique before
 
 ::: code
 ```php Static Config
-'maxSlugIncrement' => 10,
+->maxSlugIncrement(10)
 ```
 ```shell Environment Override
 CRAFT_MAX_SLUG_INCREMENT=10
@@ -1186,7 +1186,7 @@ The `Permissions-Policy` header that should be sent for web responses.
 
 ::: code
 ```php Static Config
-'permissionsPolicyHeader' => 'Permissions-Policy: geolocation=(self)',
+->permissionsPolicyHeader('Permissions-Policy: geolocation=(self)')
 ```
 ```shell Environment Override
 CRAFT_PERMISSIONS_POLICY_HEADER=Permissions-Policy: geolocation=(self)
@@ -1217,7 +1217,7 @@ See <https://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a lis
 
 ::: code
 ```php Static Config
-'phpMaxMemoryLimit' => '512M',
+->phpMaxMemoryLimit('512M')
 ```
 ```shell Environment Override
 CRAFT_PHP_MAX_MEMORY_LIMIT=512M
@@ -1247,9 +1247,9 @@ Since
 Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) that should be used for preview iframes.
 
 ```php Static Config
-'previewIframeResizerOptions' => [
+->previewIframeResizerOptions([
     'autoResize' => false,
-],
+])
 ```
 
 
@@ -1276,7 +1276,7 @@ Set to an empty value to disable public template routing.
 
 ::: code
 ```php Static Config
-'privateTemplateTrigger' => '',
+->privateTemplateTrigger('')
 ```
 ```shell Environment Override
 CRAFT_PRIVATE_TEMPLATE_TRIGGER=
@@ -1317,7 +1317,7 @@ where PHP’s [flush()](https://php.net/manual/en/function.flush.php) method won
 
 ::: code
 ```php Static Config
-'runQueueAutomatically' => false,
+->runQueueAutomatically(false)
 ```
 ```shell Environment Override
 CRAFT_RUN_QUEUE_AUTOMATICALLY=false
@@ -1370,7 +1370,7 @@ Whether a `Content-Length` header should be sent with responses.
 
 ::: code
 ```php Static Config
-'sendContentLengthHeader' => true,
+->sendContentLengthHeader(true)
 ```
 ```shell Environment Override
 CRAFT_SEND_CONTENT_LENGTH_HEADER=1
@@ -1399,7 +1399,7 @@ Whether an `X-Powered-By: Craft CMS` header should be sent, helping services lik
 
 ::: code
 ```php Static Config
-'sendPoweredByHeader' => false,
+->sendPoweredByHeader(false)
 ```
 ```shell Environment Override
 CRAFT_SEND_POWERED_BY_HEADER=false
@@ -1427,7 +1427,7 @@ The character(s) that should be used to separate words in slugs.
 
 ::: code
 ```php Static Config
-'slugWordSeparator' => '.',
+->slugWordSeparator('.')
 ```
 ```shell Environment Override
 CRAFT_SLUG_WORD_SEPARATOR=.
@@ -1459,7 +1459,7 @@ By default, the recipient name(s) will be “Test Recipient”, but you can cust
 
 ::: code
 ```php Static Config
-'testToEmailAddress' => 'me@domain.tld',
+->testToEmailAddress('me@domain.tld')
 ```
 ```shell Environment Override
 CRAFT_TEST_TO_EMAIL_ADDRESS=me@domain.tld
@@ -1489,7 +1489,7 @@ This can be set to one of PHP’s [supported timezones](https://php.net/manual/e
 
 ::: code
 ```php Static Config
-'timezone' => 'Europe/London',
+->timezone('Europe/London')
 ```
 ```shell Environment Override
 CRAFT_TIMEZONE=Europe/London
@@ -1518,7 +1518,7 @@ Whether translated messages should be wrapped in special characters to help find
 
 ::: code
 ```php Static Config
-'translationDebugOutput' => true,
+->translationDebugOutput(true)
 ```
 ```shell Environment Override
 CRAFT_TRANSLATION_DEBUG_OUTPUT=1
@@ -1552,7 +1552,7 @@ php craft utils/update-usernames
 
 ::: code
 ```php Static Config
-'useEmailAsUsername' => true,
+->useEmailAsUsername(true)
 ```
 ```shell Environment Override
 CRAFT_USE_EMAIL_AS_USERNAME=1
@@ -1584,7 +1584,7 @@ If `null`, Craft will try to detect if the underlying file system supports exclu
 
 ::: code
 ```php Static Config
-'useFileLocks' => false,
+->useFileLocks(false)
 ```
 ```shell Environment Override
 CRAFT_USE_FILE_LOCKS=false
@@ -1630,7 +1630,7 @@ You can customize the behavior of iFrame Resizer via the <config4:previewIframeR
 
 ::: code
 ```php Static Config
-'useIframeResizer' => true,
+->useIframeResizer(true)
 ```
 ```shell Environment Override
 CRAFT_USE_IFRAME_RESIZER=1
@@ -1659,9 +1659,9 @@ Defined by
 Any custom Yii [aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) that should be defined for every request.
 
 ```php Static Config
-'aliases' => [
+->aliases([
     '@webroot' => '/var/www/',
-],
+])
 ```
 
 
@@ -1699,7 +1699,7 @@ This can also be set to `false` to disable database backups completely.
 
 ::: code
 ```php Static Config
-'backupCommand' => false,
+->backupCommand(false)
 ```
 ```shell Environment Override
 CRAFT_BACKUP_COMMAND=false
@@ -1732,7 +1732,7 @@ This should be set to something unique to the deployment, e.g. a Git SHA or a de
 
 ::: code
 ```php Static Config
-'buildId' => \craft\helpers\App::env('GIT_SHA'),
+->buildId(\craft\helpers\App::env('GIT_SHA'))
 ```
 ```shell Environment Override
 CRAFT_BUILD_ID=$GIT_SHA
@@ -1762,7 +1762,7 @@ set this to `'.my-project.tld'`.
 
 ::: code
 ```php Static Config
-'defaultCookieDomain' => '.my-project.tld',
+->defaultCookieDomain('.my-project.tld')
 ```
 ```shell Environment Override
 CRAFT_DEFAULT_COOKIE_DOMAIN=.my-project.tld
@@ -1790,7 +1790,7 @@ The path to the root directory that should store published control panel resourc
 
 ::: code
 ```php Static Config
-'resourceBasePath' => '@webroot/craft-resources',
+->resourceBasePath('@webroot/craft-resources')
 ```
 ```shell Environment Override
 CRAFT_RESOURCE_BASE_PATH=@webroot/craft-resources
@@ -1818,7 +1818,7 @@ The URL to the root directory that should store published control panel resource
 
 ::: code
 ```php Static Config
-'resourceBaseUrl' => '@web/craft-resources',
+->resourceBaseUrl('@web/craft-resources')
 ```
 ```shell Environment Override
 CRAFT_RESOURCE_BASE_URL=@web/craft-resources
@@ -1859,7 +1859,7 @@ This can also be set to `false` to disable database restores completely.
 
 ::: code
 ```php Static Config
-'restoreCommand' => false,
+->restoreCommand(false)
 ```
 ```shell Environment Override
 CRAFT_RESTORE_COMMAND=false
@@ -1889,7 +1889,7 @@ The URI segment Craft should look for when determining if the current request sh
 
 ::: code
 ```php Static Config
-'actionTrigger' => 'do-it',
+->actionTrigger('do-it')
 ```
 ```shell Environment Override
 CRAFT_ACTION_TRIGGER=do-it
@@ -1919,7 +1919,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'activateAccountSuccessPath' => 'welcome',
+->activateAccountSuccessPath('welcome')
 ```
 ```shell Environment Override
 CRAFT_ACTIVATE_ACCOUNT_SUCCESS_PATH=welcome
@@ -1947,7 +1947,7 @@ Whether auto-generated URLs should have trailing slashes.
 
 ::: code
 ```php Static Config
-'addTrailingSlashesToUrls' => true,
+->addTrailingSlashesToUrls(true)
 ```
 ```shell Environment Override
 CRAFT_ADD_TRAILING_SLASHES_TO_URLS=1
@@ -1975,7 +1975,7 @@ Whether uppercase letters should be allowed in slugs.
 
 ::: code
 ```php Static Config
-'allowUppercaseInSlug' => true,
+->allowUppercaseInSlug(true)
 ```
 ```shell Environment Override
 CRAFT_ALLOW_UPPERCASE_IN_SLUG=1
@@ -2009,7 +2009,7 @@ The base control panel URL should **not** include the [control panel trigger wor
 
 ::: code
 ```php Static Config
-'baseCpUrl' => 'https://cms.my-project.tld/',
+->baseCpUrl('<https://cms.my-project.tld/')>
 ```
 ```shell Environment Override
 CRAFT_BASE_CP_URL=https://cms.my-project.tld/
@@ -2051,7 +2051,7 @@ control panel due to URI conflicts with actual folders/files in your main web ro
 
 ::: code
 ```php Static Config
-'cpTrigger' => null,
+->cpTrigger(null)
 ```
 ```shell Environment Override
 CRAFT_CP_TRIGGER=null
@@ -2118,7 +2118,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'loginPath' => false,
+->loginPath(false)
 ```
 ```shell Environment Override
 CRAFT_LOGIN_PATH=false
@@ -2152,7 +2152,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'logoutPath' => false,
+->logoutPath(false)
 ```
 ```shell Environment Override
 CRAFT_LOGOUT_PATH=false
@@ -2190,7 +2190,7 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 
 ::: code
 ```php Static Config
-'omitScriptNameInUrls' => true,
+->omitScriptNameInUrls(true)
 ```
 ```shell Environment Override
 CRAFT_OMIT_SCRIPT_NAME_IN_URLS=1
@@ -2231,7 +2231,7 @@ If your server is running Apache, you’ll need to update the redirect code in y
 
 ::: code
 ```php Static Config
-'pageTrigger' => 'page',
+->pageTrigger('page')
 ```
 ```shell Environment Override
 CRAFT_PAGE_TRIGGER=page
@@ -2266,7 +2266,7 @@ RewriteRule (.+) index.php [QSA,L]
 
 ::: code
 ```php Static Config
-'pathParam' => null,
+->pathParam(null)
 ```
 ```shell Environment Override
 CRAFT_PATH_PARAM=null
@@ -2299,7 +2299,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'postCpLoginRedirect' => 'entries',
+->postCpLoginRedirect('entries')
 ```
 ```shell Environment Override
 CRAFT_POST_CP_LOGIN_REDIRECT=entries
@@ -2332,7 +2332,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'postLoginRedirect' => 'welcome',
+->postLoginRedirect('welcome')
 ```
 ```shell Environment Override
 CRAFT_POST_LOGIN_REDIRECT=welcome
@@ -2362,7 +2362,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'postLogoutRedirect' => 'goodbye',
+->postLogoutRedirect('goodbye')
 ```
 ```shell Environment Override
 CRAFT_POST_LOGOUT_REDIRECT=goodbye
@@ -2398,7 +2398,7 @@ You might also want to set <config4:invalidUserTokenPath> in case a user clicks 
 
 ::: code
 ```php Static Config
-'setPasswordPath' => 'set-password',
+->setPasswordPath('set-password')
 ```
 ```shell Environment Override
 CRAFT_SET_PASSWORD_PATH=set-password
@@ -2438,7 +2438,7 @@ where the user resets their password after following the link in the Password Re
 
 ::: code
 ```php Static Config
-'setPasswordRequestPath' => 'request-password',
+->setPasswordRequestPath('request-password')
 ```
 ```shell Environment Override
 CRAFT_SET_PASSWORD_REQUEST_PATH=request-password
@@ -2468,7 +2468,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'setPasswordSuccessPath' => 'password-set',
+->setPasswordSuccessPath('password-set')
 ```
 ```shell Environment Override
 CRAFT_SET_PASSWORD_SUCCESS_PATH=password-set
@@ -2499,7 +2499,7 @@ The query string parameter name that site tokens should be set to.
 
 ::: code
 ```php Static Config
-'siteToken' => 't',
+->siteToken('t')
 ```
 ```shell Environment Override
 CRAFT_SITE_TOKEN=t
@@ -2527,7 +2527,7 @@ The query string parameter name that Craft tokens should be set to.
 
 ::: code
 ```php Static Config
-'tokenParam' => 't',
+->tokenParam('t')
 ```
 ```shell Environment Override
 CRAFT_TOKEN_PARAM=t
@@ -2557,7 +2557,7 @@ This setting only takes effect if <config4:omitScriptNameInUrls> is set to `fals
 
 ::: code
 ```php Static Config
-'usePathInfo' => true,
+->usePathInfo(true)
 ```
 ```shell Environment Override
 CRAFT_USE_PATH_INFO=1
@@ -2589,7 +2589,7 @@ If set to `false`, Craft will always use `http`. If set to `true`, then, Craft w
 
 ::: code
 ```php Static Config
-'useSslOnTokenizedUrls' => true,
+->useSslOnTokenizedUrls(true)
 ```
 ```shell Environment Override
 CRAFT_USE_SSL_ON_TOKENIZED_URLS=1
@@ -2624,7 +2624,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'verifyEmailPath' => 'verify-email',
+->verifyEmailPath('verify-email')
 ```
 ```shell Environment Override
 CRAFT_VERIFY_EMAIL_PATH=verify-email
@@ -2657,7 +2657,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 
 ::: code
 ```php Static Config
-'verifyEmailSuccessPath' => 'verified-email',
+->verifyEmailSuccessPath('verified-email')
 ```
 ```shell Environment Override
 CRAFT_VERIFY_EMAIL_SUCCESS_PATH=verified-email
@@ -2687,7 +2687,7 @@ The name of the PHP session cookie.
 
 ::: code
 ```php Static Config
-'phpSessionName' => null,
+->phpSessionName(null)
 ```
 ```shell Environment Override
 CRAFT_PHP_SESSION_NAME=null
@@ -2719,7 +2719,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 ::: code
 ```php Static Config
-'rememberUsernameDuration' => 0,
+->rememberUsernameDuration(0)
 ```
 ```shell Environment Override
 CRAFT_REMEMBER_USERNAME_DURATION=0
@@ -2751,7 +2751,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 ::: code
 ```php Static Config
-'rememberedUserSessionDuration' => 0,
+->rememberedUserSessionDuration(0)
 ```
 ```shell Environment Override
 CRAFT_REMEMBERED_USER_SESSION_DURATION=0
@@ -2779,7 +2779,7 @@ Whether Craft should require a matching user agent string when restoring a user 
 
 ::: code
 ```php Static Config
-'requireMatchingUserAgentForSession' => false,
+->requireMatchingUserAgentForSession(false)
 ```
 ```shell Environment Override
 CRAFT_REQUIRE_MATCHING_USER_AGENT_FOR_SESSION=false
@@ -2807,7 +2807,7 @@ Whether Craft should require the existence of a user agent string and IP address
 
 ::: code
 ```php Static Config
-'requireUserAgentAndIpForSession' => false,
+->requireUserAgentAndIpForSession(false)
 ```
 ```shell Environment Override
 CRAFT_REQUIRE_USER_AGENT_AND_IP_FOR_SESSION=false
@@ -2880,7 +2880,7 @@ For example, if the hash takes 1 second to compute when the value is 14 then the
 
 ::: code
 ```php Static Config
-'blowfishHashCost' => 15,
+->blowfishHashCost(15)
 ```
 ```shell Environment Override
 CRAFT_BLOWFISH_HASH_COST=15
@@ -2913,7 +2913,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 ::: code
 ```php Static Config
-'cooldownDuration' => 0,
+->cooldownDuration(0)
 ```
 ```shell Environment Override
 CRAFT_COOLDOWN_DURATION=0
@@ -2941,7 +2941,7 @@ The name of CSRF token used for CSRF validation if <config4:enableCsrfProtection
 
 ::: code
 ```php Static Config
-'csrfTokenName' => 'MY_CSRF',
+->csrfTokenName('MY_CSRF')
 ```
 ```shell Environment Override
 CRAFT_CSRF_TOKEN_NAME=MY_CSRF
@@ -3005,7 +3005,7 @@ If you don’t, the only way they can set their password is to go through your �
 
 ::: code
 ```php Static Config
-'deferPublicRegistrationPassword' => true,
+->deferPublicRegistrationPassword(true)
 ```
 ```shell Environment Override
 CRAFT_DEFER_PUBLIC_REGISTRATION_PASSWORD=true
@@ -3037,7 +3037,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 ::: code
 ```php Static Config
-'elevatedSessionDuration' => 0,
+->elevatedSessionDuration(0)
 ```
 ```shell Environment Override
 CRAFT_ELEVATED_SESSION_DURATION=0
@@ -3068,7 +3068,7 @@ Whether front-end web requests should support basic HTTP authentication.
 
 ::: code
 ```php Static Config
-'enableBasicHttpAuth' => true,
+->enableBasicHttpAuth(true)
 ```
 ```shell Environment Override
 CRAFT_ENABLE_BASIC_HTTP_AUTH=1
@@ -3098,7 +3098,7 @@ it requires starting a session for every page that a CSRF token is needed, which
 
 ::: code
 ```php Static Config
-'enableCsrfCookie' => false,
+->enableCsrfCookie(false)
 ```
 ```shell Environment Override
 CRAFT_ENABLE_CSRF_COOKIE=false
@@ -3126,7 +3126,7 @@ Whether to enable CSRF protection via hidden form inputs for all forms submitted
 
 ::: code
 ```php Static Config
-'enableCsrfProtection' => false,
+->enableCsrfProtection(false)
 ```
 ```shell Environment Override
 CRAFT_ENABLE_CSRF_PROTECTION=false
@@ -3186,7 +3186,7 @@ The number of invalid login attempts Craft will allow within the specified durat
 
 ::: code
 ```php Static Config
-'maxInvalidLogins' => 3,
+->maxInvalidLogins(3)
 ```
 ```shell Environment Override
 CRAFT_MAX_INVALID_LOGINS=3
@@ -3218,7 +3218,7 @@ log in but allow for username/email enumeration based on the response.
 
 ::: code
 ```php Static Config
-'preventUserEnumeration' => true,
+->preventUserEnumeration(true)
 ```
 ```shell Environment Override
 CRAFT_PREVENT_USER_ENUMERATION=1
@@ -3286,7 +3286,7 @@ Whether images uploaded via the control panel should be sanitized.
 
 ::: code
 ```php Static Config
-'sanitizeCpImageUploads' => false,
+->sanitizeCpImageUploads(false)
 ```
 ```shell Environment Override
 CRAFT_SANITIZE_CP_IMAGE_UPLOADS=false
@@ -3316,7 +3316,7 @@ This should definitely be enabled if you are accepting SVG uploads from untruste
 
 ::: code
 ```php Static Config
-'sanitizeSvgUploads' => false,
+->sanitizeSvgUploads(false)
 ```
 ```shell Environment Override
 CRAFT_SANITIZE_SVG_UPLOADS=false
@@ -3348,14 +3348,14 @@ If not set, the default [yii\web\Request::$secureHeaders](https://www.yiiframewo
 
 ::: code
 ```php Static Config
-'secureHeaders' => [
+->secureHeaders([
     'X-Forwarded-For',
     'X-Forwarded-Host',
     'X-Forwarded-Proto',
     'X-Rewrite-Url',
     'X-Original-Host',
     'CF-Connecting-IP',
-],
+])
 ```
 ```shell Environment Override
 CRAFT_SECURE_HEADERS=X-Forwarded-For,X-Forwarded-Host,X-Forwarded-Proto,X-Rewrite-Url,X-Original-Host,CF-Connecting-IP
@@ -3386,7 +3386,7 @@ See [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/a
 If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) value will be used.
 
 ```php Static Config
-'secureProtocolHeaders' => [
+->secureProtocolHeaders([
     'X-Forwarded-Proto' => [
         'https',
     ],
@@ -3396,7 +3396,7 @@ If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yi
     'CF-Visitor' => [
         '{\"scheme\":\"https\"}',
     ],
-],
+])
 ```
 
 
@@ -3421,7 +3421,7 @@ A private, random, cryptographically-secure key that is used for hashing and enc
 This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
 
 ```php Static Config
-'securityKey' => '2cf24dba5...',
+->securityKey('2cf24dba5...')
 ```
 
 
@@ -3448,7 +3448,7 @@ Whether user IP addresses should be stored/logged by the system.
 
 ::: code
 ```php Static Config
-'storeUserIps' => true,
+->storeUserIps(true)
 ```
 ```shell Environment Override
 CRAFT_STORE_USER_IPS=1
@@ -3482,7 +3482,7 @@ By default, all hosts are trusted.
 
 ::: code
 ```php Static Config
-'trustedHosts' => ['trusted-one.foo', 'trusted-two.foo'],
+->trustedHosts(['trusted-one.foo', 'trusted-two.foo'])
 ```
 ```shell Environment Override
 CRAFT_TRUSTED_HOSTS=trusted-one.foo,trusted-two.foo
@@ -3513,7 +3513,7 @@ is over `https://`. `true` will always set the flag, regardless of protocol and 
 
 ::: code
 ```php Static Config
-'useSecureCookies' => true,
+->useSecureCookies(true)
 ```
 ```shell Environment Override
 CRAFT_USE_SECURE_COOKIES=1
@@ -3700,7 +3700,7 @@ You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII fi
 
 ::: code
 ```php Static Config
-'convertFilenamesToAscii' => false,
+->convertFilenamesToAscii(false)
 ```
 ```shell Environment Override
 CRAFT_CONVERT_FILENAMES_TO_ASCII=false
@@ -3731,7 +3731,7 @@ List of additional file kinds Craft should support. This array will get merged w
 `\craft\helpers\Assets::_buildFileKinds()`.
 
 ```php Static Config
-'extraFileKinds' => [
+->extraFileKinds([
     // merge .psb into list of Photoshop file kinds
     'photoshop' => [
         'extensions' => ['psb'],
@@ -3741,7 +3741,7 @@ List of additional file kinds Craft should support. This array will get merged w
         'label' => 'Stylesheet',
         'extensions' => ['css', 'less', 'pcss', 'sass', 'scss', 'styl'],
     ],
-],
+])
 ```
 
 ::: tip
@@ -3770,7 +3770,7 @@ The string to use to separate words when uploading Assets. If set to `false`, sp
 
 ::: code
 ```php Static Config
-'filenameWordSeparator' => false,
+->filenameWordSeparator(false)
 ```
 ```shell Environment Override
 CRAFT_FILENAME_WORD_SEPARATOR=false
@@ -3833,7 +3833,7 @@ Whether asset URLs should be revved so browsers don’t load cached versions whe
 
 ::: code
 ```php Static Config
-'revAssetUrls' => true,
+->revAssetUrls(true)
 ```
 ```shell Environment Override
 CRAFT_REV_ASSET_URLS=1
@@ -3869,7 +3869,7 @@ This can be set to an aliased path such as `@webroot/assets/404.svg`.
 
 ::: code
 ```php Static Config
-'brokenImagePath' => '@webroot/assets/404.svg',
+->brokenImagePath('@webroot/assets/404.svg')
 ```
 ```shell Environment Override
 CRAFT_BROKEN_IMAGE_PATH=@webroot/assets/404.svg
@@ -3898,7 +3898,7 @@ The quality level Craft will use when saving JPG and PNG files. Ranges from 1 (w
 
 ::: code
 ```php Static Config
-'defaultImageQuality' => 90,
+->defaultImageQuality(90)
 ```
 ```shell Environment Override
 CRAFT_DEFAULT_IMAGE_QUALITY=90
@@ -3926,7 +3926,7 @@ Whether image transforms should be generated before page load.
 
 ::: code
 ```php Static Config
-'generateTransformsBeforePageLoad' => true,
+->generateTransformsBeforePageLoad(true)
 ```
 ```shell Environment Override
 CRAFT_GENERATE_TRANSFORMS_BEFORE_PAGE_LOAD=1
@@ -3955,7 +3955,7 @@ and otherwise fall back to GD. You can explicitly set either `'imagick'` or `'gd
 
 ::: code
 ```php Static Config
-'imageDriver' => 'imagick',
+->imageDriver('imagick')
 ```
 ```shell Environment Override
 CRAFT_IMAGE_DRIVER=imagick
@@ -3993,13 +3993,13 @@ An array containing the selectable image aspect ratios for the image editor. The
 of `label` => `ratio`, where ratio must be a float or a string. For string values, only values of “none” and “original” are allowed.
 
 ```php Static Config
-'imageEditorRatios' => [
+->imageEditorRatios([
     'Unconstrained' => 'none',
     'Original' => 'original',
     'Square' => 1,
     'IMAX' => 1.9,
     'Widescreen' => 1.78,
-],
+])
 ```
 
 
@@ -4023,7 +4023,7 @@ The maximum dimension size to use when caching images from external sources to u
 
 ::: code
 ```php Static Config
-'maxCachedCloudImageSize' => 0,
+->maxCachedCloudImageSize(0)
 ```
 ```shell Environment Override
 CRAFT_MAX_CACHED_CLOUD_IMAGE_SIZE=0
@@ -4052,7 +4052,7 @@ ImageMagick is used.)
 
 ::: code
 ```php Static Config
-'optimizeImageFilesize' => false,
+->optimizeImageFilesize(false)
 ```
 ```shell Environment Override
 CRAFT_OPTIMIZE_IMAGE_FILESIZE=1
@@ -4086,7 +4086,7 @@ image color distortion. This will only have an effect if ImageMagick is in use.
 
 ::: code
 ```php Static Config
-'preserveCmykColorspace' => true,
+->preserveCmykColorspace(true)
 ```
 ```shell Environment Override
 CRAFT_PRESERVE_CMYK_COLORSPACE=1
@@ -4118,7 +4118,7 @@ This will only have effect if ImageMagick is in use.
 
 ::: code
 ```php Static Config
-'preserveExifData' => true,
+->preserveExifData(true)
 ```
 ```shell Environment Override
 CRAFT_PRESERVE_EXIF_DATA=1
@@ -4149,7 +4149,7 @@ an incorrect gamma value, which causes the images to become very dark. This will
 
 ::: code
 ```php Static Config
-'preserveImageColorProfiles' => false,
+->preserveImageColorProfiles(false)
 ```
 ```shell Environment Override
 CRAFT_PRESERVE_IMAGE_COLOR_PROFILES=false
@@ -4182,7 +4182,7 @@ This will only work if ImageMagick is installed, and <config4:imageDriver> is se
 
 ::: code
 ```php Static Config
-'rasterizeSvgThumbs' => true,
+->rasterizeSvgThumbs(true)
 ```
 ```shell Environment Override
 CRAFT_RASTERIZE_SVG_THUMBS=1
@@ -4210,7 +4210,7 @@ Whether Craft should rotate images according to their EXIF data on upload.
 
 ::: code
 ```php Static Config
-'rotateImagesOnUploadByExifData' => false,
+->rotateImagesOnUploadByExifData(false)
 ```
 ```shell Environment Override
 CRAFT_ROTATE_IMAGES_ON_UPLOAD_BY_EXIF_DATA=false
@@ -4241,7 +4241,7 @@ Whether GIF files should be cleansed/transformed.
 
 ::: code
 ```php Static Config
-'transformGifs' => false,
+->transformGifs(false)
 ```
 ```shell Environment Override
 CRAFT_TRANSFORM_GIFS=false
@@ -4272,7 +4272,7 @@ Whether SVG files should be transformed.
 
 ::: code
 ```php Static Config
-'transformSvgs' => false,
+->transformSvgs(false)
 ```
 ```shell Environment Override
 CRAFT_TRANSFORM_SVGS=false
@@ -4303,7 +4303,7 @@ Whether images should be upscaled if the provided transform size is larger than 
 
 ::: code
 ```php Static Config
-'upscaleImages' => false,
+->upscaleImages(false)
 ```
 ```shell Environment Override
 CRAFT_UPSCALE_IMAGES=false
@@ -4341,7 +4341,7 @@ If this is set to `false`, then the `Access-Control-Allow-Origin` response heade
 
 ::: code
 ```php Static Config
-'allowedGraphqlOrigins' => false,
+->allowedGraphqlOrigins(false)
 ```
 ```shell Environment Override
 CRAFT_ALLOW_GRAPHQL_ORIGINS=false
@@ -4372,7 +4372,7 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 
 ::: code
 ```php Static Config
-'disableGraphqlTransformDirective' => true,
+->disableGraphqlTransformDirective(true)
 ```
 ```shell Environment Override
 CRAFT_DISABLE_GRAPHQL_TRANSFORM_DIRECTIVE=1
@@ -4405,7 +4405,7 @@ The GraphQL API is only available for Craft Pro.
 
 ::: code
 ```php Static Config
-'enableGql' => false,
+->enableGql(false)
 ```
 ```shell Environment Override
 CRAFT_ENABLE_GQL=false
@@ -4442,7 +4442,7 @@ caching logic and setting the `result` property.
 
 ::: code
 ```php Static Config
-'enableGraphqlCaching' => false,
+->enableGraphqlCaching(false)
 ```
 ```shell Environment Override
 CRAFT_ENABLE_GRAPHQL_CACHING=false
@@ -4473,7 +4473,7 @@ Whether GraphQL introspection queries are allowed. Defaults to `true` and is alw
 
 ::: code
 ```php Static Config
-'enableGraphqlIntrospection' => false,
+->enableGraphqlIntrospection(false)
 ```
 ```shell Environment Override
 CRAFT_ENABLE_GRAPHQL_INTROSPECTION=false
@@ -4501,7 +4501,7 @@ Prefix to use for all type names returned by GraphQL.
 
 ::: code
 ```php Static Config
-'gqlTypePrefix' => 'craft_',
+->gqlTypePrefix('craft_')
 ```
 ```shell Environment Override
 CRAFT_GQL_TYPE_PREFIX=craft_
@@ -4551,7 +4551,7 @@ The maximum allowed depth a GraphQL query is allowed to reach. Set to `0` to all
 
 ::: code
 ```php Static Config
-'maxGraphqlDepth' => 5,
+->maxGraphqlDepth(5)
 ```
 ```shell Environment Override
 CRAFT_MAX_GRAPHQL_DEPTH=5
@@ -4582,7 +4582,7 @@ The maximum allowed results for a single GraphQL query. Set to `0` to disable an
 
 ::: code
 ```php Static Config
-'maxGraphqlResults' => 100,
+->maxGraphqlResults(100)
 ```
 ```shell Environment Override
 CRAFT_MAX_GRAPHQL_RESULTS=100
@@ -4613,7 +4613,7 @@ Whether the <config4:gqlTypePrefix> config setting should have an impact on `que
 
 ::: code
 ```php Static Config
-'prefixGqlRootTypes' => false,
+->prefixGqlRootTypes(false)
 ```
 ```shell Environment Override
 CRAFT_PREFIX_GQL_ROOT_TYPES=false
@@ -4644,7 +4644,7 @@ Whether dates returned by the GraphQL API should be set to the system time zone 
 
 ::: code
 ```php Static Config
-'setGraphqlDatesToSystemTimeZone' => true,
+->setGraphqlDatesToSystemTimeZone(true)
 ```
 ```shell Environment Override
 CRAFT_SET_GRAPHQL_DATES_TO_SYSTEM_TIMEZONE=1
@@ -4758,7 +4758,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 ::: code
 ```php Static Config
-'purgeUnsavedDraftsDuration' => 0,
+->purgeUnsavedDraftsDuration(0)
 ```
 ```shell Environment Override
 CRAFT_PURGE_UNSAVED_DRAFTS_DURATION=0
@@ -4793,7 +4793,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 
 ::: code
 ```php Static Config
-'softDeleteDuration' => 0,
+->softDeleteDuration(0)
 ```
 ```shell Environment Override
 CRAFT_SOFT_DELETE_DURATION=0

@@ -80,11 +80,11 @@ For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo
 you’d set these:
 
 ```php
-'attributes' => [
+->attributes([
     PDO::MYSQL_ATTR_SSL_KEY => '/path/to/my/client-key.pem',
     PDO::MYSQL_ATTR_SSL_CERT => '/path/to/my/client-cert.pem',
     PDO::MYSQL_ATTR_SSL_CA => '/path/to/my/ca-cert.pem',
-],
+])
 ```
 
 
@@ -116,7 +116,7 @@ php craft db/convert-charset
 
 ::: code
 ```php Static Config
-'charset' => 'utf8mb4',
+->charset('utf8mb4')
 ```
 ```shell Environment Override
 CRAFT_DB_CHARSET=utf8mb4
@@ -162,7 +162,7 @@ php craft db/convert-charset
 
 ::: code
 ```php Static Config
-'collation' => 'utf8mb4_0900_ai_ci',
+->collation('utf8mb4_0900_ai_ci')
 ```
 ```shell Environment Override
 CRAFT_DB_COLLATION=utf8mb4_0900_ai_ci
@@ -190,7 +190,7 @@ The name of the database to select.
 
 ::: code
 ```php Static Config
-'database' => 'mydatabase',
+->database('mydatabase')
 ```
 ```shell Environment Override
 CRAFT_DB_DATABASE=mydatabase
@@ -218,7 +218,7 @@ The database driver to use. Either `mysql` for MySQL or `pgsql` for PostgreSQL.
 
 ::: code
 ```php Static Config
-'driver' => 'mysql',
+->driver('mysql')
 ```
 ```shell Environment Override
 CRAFT_DB_DRIVER=mysql
@@ -252,7 +252,7 @@ For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
 
 ::: code
 ```php Static Config
-'dsn' => 'mysql:host=127.0.0.1;port=3306;dbname=acme_corp',
+->dsn('mysql:host=127.0.0.1;port=3306;dbname=acme_corp')
 ```
 ```shell Environment Override
 CRAFT_DB_DSN=mysql:host=127.0.0.1;port=3306;dbname=acme_corp
@@ -280,7 +280,7 @@ The database password to connect with.
 
 ::: code
 ```php Static Config
-'password' => 'super-secret',
+->password('super-secret')
 ```
 ```shell Environment Override
 CRAFT_DB_PASSWORD=super-secret
@@ -308,7 +308,7 @@ The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
 
 ::: code
 ```php Static Config
-'port' => 3306,
+->port(3306)
 ```
 ```shell Environment Override
 CRAFT_DB_PORT=3306
@@ -341,7 +341,7 @@ the [setSchemaOnConnect()](https://docs.craftcms.com/api/v3/craft-config-dbconfi
 
 ::: code
 ```php Static Config
-'schema' => 'myschema,public',
+->schema('myschema,public')
 ```
 ```shell Environment Override
 CRAFT_DB_SCHEMA=myschema,public
@@ -369,7 +369,7 @@ The database server name or IP address. Usually `localhost` or `127.0.0.1`.
 
 ::: code
 ```php Static Config
-'server' => 'localhost',
+->server('localhost')
 ```
 ```shell Environment Override
 CRAFT_DB_SERVER=localhost
@@ -405,7 +405,7 @@ PostgreSQL’s `search_path` setting should be configured to prioritize the desi
 
 ::: code
 ```php Static Config
-'setSchemaOnConnect' => true,
+->setSchemaOnConnect(true)
 ```
 ```shell Environment Override
 CRAFT_DB_SET_SCHEMA_ON_CONNECT=true
@@ -434,7 +434,7 @@ you can set a table prefix here to avoid per-install table naming conflicts. Thi
 
 ::: code
 ```php Static Config
-'tablePrefix' => 'craft_',
+->tablePrefix('craft_')
 ```
 ```shell Environment Override
 CRAFT_DB_TABLE_PREFIX=craft_
@@ -463,7 +463,7 @@ the server and port. If this is specified, then `server` and `port` settings are
 
 ::: code
 ```php Static Config
-'unixSocket' => '/Applications/MAMP/tmp/mysql/mysql.sock',
+->unixSocket('/Applications/MAMP/tmp/mysql/mysql.sock')
 ```
 ```shell Environment Override
 CRAFT_DB_UNIX_SOCKET=/Applications/MAMP/tmp/mysql/mysql.sock
@@ -493,7 +493,7 @@ If this is set, the values for [driver()](https://docs.craftcms.com/api/v3/craft
 
 ::: code
 ```php Static Config
-'url' => 'jdbc:mysql://database.foo:3306/mydb',
+->url('jdbc:mysql://database.foo:3306/mydb')
 ```
 ```shell Environment Override
 CRAFT_DB_URL=jdbc:mysql://database.foo:3306/mydb
@@ -531,7 +531,7 @@ For more on Craft batch queries, see <https://craftcms.com/knowledge-base/query-
 
 ::: code
 ```php Static Config
-'useUnbufferedConnections' => true,
+->useUnbufferedConnections(true)
 ```
 ```shell Environment Override
 CRAFT_DB_USE_UNBUFFERED_CONNECTIONS=true
@@ -559,7 +559,7 @@ The database username to connect with.
 
 ::: code
 ```php Static Config
-'user' => 'db',
+->user('db')
 ```
 ```shell Environment Override
 CRAFT_DB_USER=db

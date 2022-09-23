@@ -88,3 +88,25 @@ Once you’ve decided on a version, follow these steps:
 3. Once everything is good to go and committed to Git, [create a tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) named after the version number, optionally beginning with `v` (e.g. `v3.0.0` or `v3.0.0-beta.1`). Prefixing the tag name with `release-` is also allowed (e.g. `release-3.0.0` or `release-v3.0.0`).
 
 4. Push your latest commits and your new version tag to GitHub. At this point the Plugin Store should automatically get notified about the release, and will start recording it. If all goes well, it will show up in the Plugin Store within a minute or two.
+
+## Changing the GitHub Repository URL
+
+You can change your plugin’s GitHub repository URL at any time. After you’ve done so, you will need to contact [support@craftcms.com](mailto:support@craftcms.com) to notify Pixel & Tonic of the change, so we can update your plugin’s listing with the new URL. Until the listing has been updated, new release tags won’t be picked up automatically by the Plugin Store.
+
+## Changing the Package Name
+
+If you need to change your plugin’s Composer package name (the `name` property in `composer.json`), follow these steps:
+
+1. [Tag a new release](#plugin-releases) with the new package name, for _each_ of the major Craft versions your plugin has ever been compatible with. For example, if your plugin is listed in the [Craft 3 Plugin Store](https://plugins.craftcms.com/?craft3) and the [Craft 4 Plugin Store](https://plugins.craftcms.com/?craft4), you will need to tag new Craft 3 and Craft 4 versions of your plugin with the updated package name.
+2. [Submit](https://packagist.org/packages/submit) your plugin as a **new** package on [Packagist](https://packagist.org/).
+3. If your plugin was already listed on Packagist with its old package name, mark the old package as abandoned, and list your new package name as the recommended replacement package.
+4. Contact [support@craftcms.com](mailto:support@craftcms.com) to notify Pixel & Tonic of the change, so we can update your plugin’s listing with the new package name.
+
+## Transferring Ownership
+
+If you need to transfer ownership of your plugin to another developer, follow these steps:
+
+1. Visit your plugin’s GitHub repository and click on its **Settings** tab.
+2. Scroll down to the bottom and press the **Transfer** button within the **Danger Zone** section, and submit the transfer form. 
+3. The new developer will likely want to [change the package name](#changing-the-package-name) at this point. Once they’ve done so, remember to mark the old package name as abandoned.
+4. Have the new developer contact [support@craftcms.com](mailto:support@craftcms.com) to notify Pixel & Tonic of the change, so we can transfer the plugin to their Craft ID account and update its repository URL and package name.
