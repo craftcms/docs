@@ -125,7 +125,9 @@ a.sidebar-link {
   @apply px-2 py-1 font-normal inline-block w-full box-border;
   color: var(--sidebar-link-color);
   line-height: 1.4;
-  transition: all 0.25s ease-out;
+  transition:
+    color 0.25s ease-out,
+    opacity 0.25s ease-out;
 
   .sidebar-group & {
     @apply pl-4;
