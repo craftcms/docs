@@ -54,7 +54,7 @@ Structures are good for times when you need to store multiple similar entries, a
 
 ![Illustration of Entries layout with an “Exhibits” structure selected, showing four demonstration exhibits entries with nesting and drag-and-drop handles](./images/structures.png)
 
-Unlike other sections, Structures have a “Structure” sort option that provies the manually-ordered, drag-and-drop hierarchy seen above:
+Unlike other sections, Structures have a “Structure” sort option that provides the manually-ordered, drag-and-drop hierarchy seen above:
 
 ![Illustration of entry listing sort menu with “Structure” selected](./images/structure-view-mode.png)
 
