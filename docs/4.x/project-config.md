@@ -105,7 +105,7 @@ If you had previously opted out or are upgrading from earlier than Craft 3.1, it
 
 It’s now safe to deploy changes in your `config/project/` folder to other environments!
 
-## Troubleshooting
+## Troubleshooting + Trivia
 
 There are a few things you should keep in mind when working with Project Config:
 
@@ -154,6 +154,24 @@ php craft project-config/apply --force
 ```
 
 This will treat all Project Config values as added or updated, resulting in a longer sync process and potentially overriding any expected changes that might have been favored in the database.
+
+### IDs, UUIDs, and Handles
+
+Project Config uses UUIDs rather than IDs to track settings that are synchronized to the database. Unlike volatile IDs (or even `handle`s), UUIDs remain stable for the life of a section, entry type, category group, or other record—even when updating their handles.
+
+You can (and should) still use handles in your templates, because there is no guarantee that referencing a resource by its ID will point to the same record in all environments! If you do find the need to use the ID of a system resource, you should use Craft's APIs to look it up by its handle rather than hard-coding it:
+
+```twig
+{# Load the field definition via the fields API: #}
+{% set matrixField = craft.app.fields.getFieldByHandle('myMatrixFieldHandle') %}
+
+{# Use the loaded ID: #}
+{% set myMatrixBlockQuery = craft.matrixBlocks()
+  .owner(featuredPost)
+  .fieldId(matrixField.id)
+  .type('text')
+  .all() %}
+```
 
 ## Manual YAML File Generation
 
