@@ -98,9 +98,9 @@ If you had previously opted out or are upgrading from earlier than Craft 3.1, it
 2. Go to **Utilities** → **Project Config** on that environment, and click the “Rebuild” button (or use the CLI: `php craft project-config/rebuild`) to ensure that its Project Config is up to date with settings stored throughout the database.
 3. Back up the database on the primary environment.
 4. In your secondary/development environment:
-  - Import the database backup created in step #3;
-  - Delete the contents of the `config/project/` folder;
-  - Make a request to the control panel to trigger a regeneration of the YAML files in `config/project/`;
+    - Import the database backup created in step #3;
+    - Delete the contents of the `config/project/` folder;
+    - Make a request to the control panel to trigger a regeneration of the YAML files in `config/project/`;
 5. Disable the <config4:allowAdminChanges> config setting on the primary environment (and all non-development environments, for that matter) to avoid [losing changes](#production-changes-reverted), going forward.
 
 It’s now safe to deploy changes in your `config/project/` folder to other environments!
