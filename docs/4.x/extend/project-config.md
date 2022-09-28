@@ -4,7 +4,7 @@ If your plugin has any configurable components that store settings outside of yo
 
 ## Is Project Config Support Right for You?
 
-Before adding project config support to your component, consider the tradeoff: components that are managed by the project config [should](../project-config.md#production-changes-may-be-forgotten) only be editable by admins on development environments.
+Before adding project config support to your component, consider the tradeoff: components that are managed by the project config [should](../project-config.md#production-changes-reverted) only be editable by admins on development environments.
 
 Ask yourself:
 

@@ -42,7 +42,7 @@ Sensitive credentials like your database’s password should be kept out of trac
 
 ### `.env`
 
-New [Craft projects]() use [DotEnv](https://github.com/vlucas/phpdotenv) to load values into the environment from a `.env` file in the root of your project. A basic `.env` file contains pairs of keys and values:
+New [Craft projects](https://github.com/craftcms/craft) use [DotEnv](https://github.com/vlucas/phpdotenv) to load values into the environment from a `.env` file in the root of your project. A basic `.env` file contains pairs of keys and values:
 
 ```env
 CRAFT_APP_ID=my-project
@@ -273,7 +273,7 @@ However, Craft provides a powerful way to use dynamically-resolved config values
 
 ### Control Panel Settings
 
-Most values in the **Settings** area of Craft’s control panel are recorded in [Project config](../project-config). While this makes schema changes much easier to move between environments, it presents a challenge when something like a URL needs to change per-environment, or an API key leaks into YAML files.
+Most values in the **Settings** area of Craft’s control panel are recorded in [Project config](../project-config.md). While this makes schema changes much easier to move between environments, it presents a challenge when something like a URL needs to change per-environment, or an API key leaks into YAML files.
 
 For this reason, Craft provides a way to bind system settings to dynamic aliases and environment variables.
 
