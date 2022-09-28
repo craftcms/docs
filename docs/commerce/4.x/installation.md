@@ -13,7 +13,7 @@ Log into the control panel, navigate to **Plugin Store** and search for “Comme
 Ensure that you have Composer [installed correctly](/4.x/installation.md#downloading-with-composer), then run the following terminal commands from within your Craft 4 project:
 
 ```bash
-composer require craftcms/commerce
+composer require -w craftcms/commerce
 php craft plugin/install commerce
 ```
 
