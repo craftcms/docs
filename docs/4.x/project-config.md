@@ -159,7 +159,7 @@ This will treat all Project Config values as added or updated, resulting in a lo
 
 Project Config uses UUIDs rather than IDs to track settings that are synchronized to the database. Unlike volatile IDs (or even `handle`s), UUIDs remain stable for the life of a section, entry type, category group, or other record—even when updating their handles.
 
-You can (and should) still use handles in your templates, because there is no guarantee that referencing a resource by its ID will point to the same record in all environments! If you do find the need to use the ID of a system resource, you should use Craft's APIs to look it up by its handle rather than hard-coding it:
+You can (and should) still use handles in your templates, because there is no guarantee that referencing a resource by its ID will point to the same record in all environments! If you do find the need to use the ID of a system resource, you should use Craft’s APIs to look it up by its handle rather than hard-coding it:
 
 ```twig
 {# Load the field definition via the fields API: #}
