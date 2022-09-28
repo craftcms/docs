@@ -22,4 +22,5 @@ module.exports = {
   'config4': { base: '/4.x/config/general.md#', format: 'config' },
   'config3': { base: '/3.x/config/config-settings.md#', format: 'config' },
   'config2': { base: '/2.x/config-settings.md#', format: 'config' },
+  'kb': { base: 'https://craftcms.com/knowledge-base/', format: 'generic' },
 };
