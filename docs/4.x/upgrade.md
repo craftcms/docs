@@ -58,7 +58,7 @@ If you’re using MySQL, we recommend running [`php craft db/convert-charset`](c
 
 #### Entry Script
 
-The [Craft starter project](https://github.com/craftcms/craft) is kept up-to-date with new Craft features, and will occasionally have official recommendations for your entry scripts (`index.php` and the `craft` CLI executable), configuration structure, etc. It’s a good idea to look this over keep your upgraded projects as similar as possible to fresh ones.
+The [Craft starter project](https://github.com/craftcms/craft) is kept up-to-date with new Craft features, and provides official recommendations for your entry scripts (`index.php` and the `craft` CLI executable), configuration structure, etc. It’s a good idea to look this over to keep your upgraded projects as similar as possible to fresh ones.
 
 Changing your entry script(s) may also involve updating [DotEnv](https://github.com/vlucas/phpdotenv) via `composer.json`. As long as its use in the entry script is compatible with the required version, you’re fine—Craft doesn’t rely on it, internally.
 
