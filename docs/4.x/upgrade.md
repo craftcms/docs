@@ -50,7 +50,7 @@ Once you’ve verified everything’s in order, commit your updated `composer.js
 
 ### Optional Steps
 
-These steps aren’t required to use Craft 4, but it’s the perfect time to do some housekeeping.
+These steps aren’t _required_ to use Craft 4, but it’s the perfect time to do some housekeeping.
 
 #### MySQL Character Sets
 
@@ -58,11 +58,15 @@ If you’re using MySQL, we recommend running [`php craft db/convert-charset`](c
 
 #### Entry Script
 
-The [Craft starter project](https://github.com/craftcms/craft) is kept up-to-date with new Craft features, and provides official recommendations for your entry scripts (`index.php` and the `craft` CLI executable), configuration structure, etc. It’s a good idea to look this over to keep your upgraded projects as similar as possible to fresh ones.
+The [Craft starter project](https://github.com/craftcms/craft) is kept up-to-date with new Craft features, and provides official recommendations for your entry scripts (`index.php` and the `craft` CLI executable), configuration structure, etc. It’s a good idea to look this over as a means of keeping your upgraded projects as similar as possible to fresh ones. Be mindful of any customizations you’ve made to the scripts, over time—this is where you would have set any [additional PHP constants](./config/README.md#php-constants).
 
-Changing your entry script(s) may also involve updating [DotEnv](https://github.com/vlucas/phpdotenv) via `composer.json`. As long as its use in the entry script is compatible with the required version, you’re fine—Craft doesn’t rely on it, internally.
+Incorporating updated entry script(s) into your project may also involve changing the required version of [DotEnv](https://github.com/vlucas/phpdotenv) in `composer.json` to match the starter project.
 
 ## Configuration
+
+Depending on when your project was first created (or when you last updated your [entry scripts](#entry-script)), you may need to review [how your environment is set](./config/README.md#multi-environment-configs).
+
+Craft 4 looks for an environment variable (or PHP constant) named `CRAFT_ENVIRONMENT`. Use of the `ENVIRONMENT` variable is no longer recommended, as it relies on an older entry script to assign the constant.
 
 ### Config Settings
 
@@ -77,8 +81,10 @@ Some config settings have been removed in Craft 4:
 | `config/general.php` | `useCompressedJs`         | Craft always serves compressed JavaScript files now.
 | `config/general.php` | `useProjectConfigFile`    | Project config always writes YAML now, but you can [manually control when](./project-config.md#manual-yaml-file-generation).
 
+Leaving legacy settings in `general.php` will throw an error.
+
 ::: tip
-You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](config/README.md#custom-settings) will be accessible via `Craft::$app->config->custom->{mycustomsetting}`.
+You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](./config/README.md#custom-settings) will be accessible via `Craft::$app->config->custom->myCustomSetting`, or `{{ craft.app.config.custom.myCustomSetting }}`.
 :::
 
 ### Volumes
