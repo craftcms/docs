@@ -2,6 +2,10 @@
 
 Theme and significant content changes will be documented in this file.
 
+## 2022-09-03
+### Changed
+- Improved clarity around upgrade processes, environment variable overrides/naming
+
 ## 2022-07-26
 ### Changed
 - The Craft 3 upgrade guide no longer mentions that support for treating element queries as arrays has been deprecated.
