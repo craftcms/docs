@@ -244,7 +244,7 @@ return [
 
 ### Environment Overrides
 
-Craft allows some settings to be defined directly from environment variables using the special `CRAFT_` prefix.
+Craft allows some settings to be defined directly from environment variables or PHP constants using the special `CRAFT_` prefix.
 
 Add the prefix to any [general config](config-settings.md) (`CRAFT_`) or [database connection settings](db.md) (`CRAFT_DB_`) in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). For example:
 
@@ -253,7 +253,7 @@ Add the prefix to any [general config](config-settings.md) (`CRAFT_`) or [databa
 - General: <config4:testToEmailAddress> &rarr; `CRAFT_TEST_TO_EMAIL_ADDRESS`
 
 ::: danger
-Note that any environment variable names matching the format of a known config setting will have the [highest priority](#priority)! The `CRAFT_` prefix is intended to reduce the likelihood of collisions with other environment variables that a site, server, or platform might inject—so it’s actually _inadvisable_ to use this naming convention for site-specific variables you maintain.
+Any environment variable or constant names that match a known config setting (using the formula above) will have the [highest priority](#priority)! The `CRAFT_` prefix is intended to reduce the likelihood of collisions with other environment variables that a server or platform might inject—it’s actually _inadvisable_ to use this prefix when defining custom variables that aren’t intended to be used as overrides.
 :::
 
 Enforcing a structure for database connection details (even with a multi-environment config file) can cause problems when working with others, or across environments. Overrides make it possible to use whatever connection parameters are available in the current environment, without having to maintain a config file just to map variables to config settings.
