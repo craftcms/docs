@@ -5,6 +5,7 @@ Theme and significant content changes will be documented in this file.
 ## 2022-09-03
 ### Changed
 - Improved clarity around upgrade processes, environment variable overrides/naming
+- Recommendations for configuring Redis have been updated to avoid confusion regarding overrides, precedence, and key collision.
 
 ## 2022-07-26
 ### Changed
