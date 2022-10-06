@@ -232,7 +232,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch addresses in the AU #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .administrativeArea('AU')
   .all() %}
 ```
@@ -272,7 +272,7 @@ See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explana
 ::: code
 ```twig
 {# Fetch all addresses that are related to myCategoryA and myCategoryB #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .relatedTo(myCategoryA)
   .andRelatedTo(myCategoryB)
   .all() %}
@@ -299,7 +299,7 @@ Causes the query to return matching addresses as arrays of data, rather than [Ad
 ::: code
 ```twig
 {# Fetch addresses as arrays #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .asArray()
   .all() %}
 ```
@@ -353,7 +353,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch addresses in the AU #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .countryCode('AU')
   .all() %}
 ```
@@ -389,7 +389,7 @@ Possible values include:
 {% set start = date('first day of last month')|atom %}
 {% set end = date('first day of this month')|atom %}
 
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .dateCreated(['and', ">= #{start}", "< #{end}"])
   .all() %}
 ```
@@ -427,7 +427,7 @@ Possible values include:
 {# Fetch addresses updated in the last week #}
 {% set lastWeek = date('1 week ago')|atom %}
 
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .dateUpdated(">= #{lastWeek}")
   .all() %}
 ```
@@ -458,7 +458,7 @@ If no IDs were passed to [id](#id), setting this to `true` will result in an emp
 ::: code
 ```twig
 {# Fetch addresses in a specific order #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .id([1, 2, 3, 4, 5])
   .fixedOrder()
   .all() %}
@@ -494,7 +494,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch the address by its ID #}
-{% set address = craft.queryFunction()
+{% set address = craft.addresses()
   .id(1)
   .one() %}
 ```
@@ -539,7 +539,7 @@ Causes the query results to be returned in reverse order.
 ::: code
 ```twig
 {# Fetch addresses in reverse #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .inReverse()
   .all() %}
 ```
@@ -562,7 +562,7 @@ Determines the number of addresses that should be returned.
 ::: code
 ```twig
 {# Fetch up to 10 addresses  #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .limit(10)
   .all() %}
 ```
@@ -585,7 +585,7 @@ Determines how many addresses should be skipped in the results.
 ::: code
 ```twig
 {# Fetch all addresses except for the first 3 #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .offset(3)
   .all() %}
 ```
@@ -608,7 +608,7 @@ Determines the order that the addresses should be returned in. (If empty, defaul
 ::: code
 ```twig
 {# Fetch all addresses in order of date created #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .orderBy('dateCreated ASC')
   .all() %}
 ```
@@ -631,7 +631,7 @@ Sets the [ownerId](#ownerid) parameter based on a given owner element.
 ::: code
 ```twig
 {# Fetch addresses for the current user #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .owner(currentUser)
   .all() %}
 ```
@@ -661,7 +661,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch addresses created for an element with an ID of 1 #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .ownerId(1)
   .all() %}
 ```
@@ -692,7 +692,7 @@ If this isn’t set, then preference goes to the current site.
 ::: code
 ```twig
 {# Fetch unique addresses from Site A, or Site B if they don’t exist in Site A #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .site('*')
   .unique()
   .preferSites(['a', 'b'])
@@ -732,7 +732,7 @@ See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explana
 ::: code
 ```twig
 {# Fetch all addresses that are related to myCategory #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .relatedTo(myCategory)
   .all() %}
 ```
@@ -762,7 +762,7 @@ See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explana
 {% set searchQuery = craft.app.request.getQueryParam('q') %}
 
 {# Fetch all addresses that match the search query #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .search(searchQuery)
   .all() %}
 ```
@@ -799,7 +799,7 @@ Possible values include:
 ::: code
 ```twig
 {# Fetch the address by its ID in the elements_sites table #}
-{% set address = craft.queryFunction()
+{% set address = craft.addresses()
   .siteSettingsId(1)
   .one() %}
 ```
@@ -824,7 +824,7 @@ Narrows the query results to only addresses that have been soft-deleted.
 ::: code
 ```twig
 {# Fetch trashed addresses #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .trashed()
   .all() %}
 ```
@@ -849,7 +849,7 @@ Narrows the query results based on the addresses’ UIDs.
 ::: code
 ```twig
 {# Fetch the address by its UID #}
-{% set address = craft.queryFunction()
+{% set address = craft.addresses()
   .uid('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
   .one() %}
 ```
@@ -876,7 +876,7 @@ See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-ele
 ::: code
 ```twig
 {# Fetch addresses eager-loaded with the "Related" field’s relations #}
-{% set addresses = craft.queryFunction()
+{% set addresses = craft.addresses()
   .with(['related'])
   .all() %}
 ```
