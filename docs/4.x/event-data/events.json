@@ -3525,6 +3525,18 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\HelpController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\HelpController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\IndexAssetsController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
