@@ -563,6 +563,14 @@ If not provided, all available commands will be displayed.
 
 
 
+<h4 id="help-index-options" class="command-subheading">Options</h4>
+
+
+--as-json, -j
+: Should the commands help be returned in JSON format?
+
+
+
 <h3 id="help-list">
     <a href="#help-list" class="header-anchor">#</a>
     <code>help/list</code>
