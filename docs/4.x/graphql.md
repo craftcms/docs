@@ -1290,6 +1290,7 @@ This is the interface implemented by all assets.
 | `uri`| `String` | The element’s URI.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
+| `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
@@ -1333,6 +1334,7 @@ This is the interface implemented by all entries.
 | `uri`| `String` | The element’s URI.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
+| `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
@@ -1392,6 +1394,7 @@ This is the interface implemented by all global sets.
 | `uri`| `String` | The element’s URI.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
+| `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
@@ -1416,6 +1419,7 @@ This is the interface implemented by all matrix blocks.
 | `uri`| `String` | The element’s URI.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
+| `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
@@ -1443,6 +1447,7 @@ This is the interface implemented by all users.
 | `uri`| `String` | The element’s URI.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
+| `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
@@ -1475,6 +1480,7 @@ This is the interface implemented by all categories.
 | `uri`| `String` | The element’s URI.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
+| `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
@@ -1510,6 +1516,7 @@ This is the interface implemented by all tags.
 | `uri`| `String` | The element’s URI.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
+| `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
@@ -1534,6 +1541,7 @@ This is the interface implemented by all addresses.
 | `uri`| `String` | The element’s URI.
 | `enabled`| `Boolean` | Whether the element is enabled or not.
 | `archived`| `Boolean` | Whether the element is archived or not.
+| `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
