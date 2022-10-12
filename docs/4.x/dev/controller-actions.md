@@ -27,7 +27,7 @@ All `POST` requests are made through forms or [AJAX](#ajax), and require an `act
 
 ```twig
 {# Let your users request a password reset: #}
-<form method="post" accept-charset="UTF-8">
+<form method="post">
     {{ csrfInput() }}
     {{ actionInput('users/send-password-reset-email') }}
 
