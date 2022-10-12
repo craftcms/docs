@@ -236,7 +236,7 @@ Craft redirects all log output from Monolog targets to `stdout` and `stderr` whe
 
 ## Logging Your Own Events
 
-You can log your own messages from a custom plugin or module.
+You can log your own messages from a plugin or module.
 
 ### Using Craft’s Logger
 
