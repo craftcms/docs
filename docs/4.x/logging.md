@@ -201,7 +201,7 @@ return [
                     'logVars' => [],
                 ],
 
-                // Add a Monolog target for module-specific messages:
+                // 2. Add a Monolog target for module-specific messages:
                 [
                     'class' => MonologTarget::class,
                     'name' => 'custom-module',
@@ -232,7 +232,7 @@ The available options for each type of `Target` will differ, and may include thi
 
 ### `stdout` and `stderr`
 
-Craft redirects all log output from all Monolog targets to `stdout` and `stderr` when [`CRAFT_STREAM_LOG`](./config/README.md#craft-stream-log) is set to `true`. This is common in load-balanced environments and servers with ephemeral filesystems, where log output is aggregated from multiple sources, or the sources themselves are not directly accessible.
+Craft redirects all log output from Monolog targets to `stdout` and `stderr` when [`CRAFT_STREAM_LOG`](./config/README.md#craft-stream-log) is set to `true`. This is common in load-balanced environments and servers with ephemeral filesystems, where log output is aggregated from multiple sources, or the sources themselves are not directly accessible.
 
 ## Logging Your Own Events
 
