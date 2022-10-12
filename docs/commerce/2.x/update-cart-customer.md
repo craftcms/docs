@@ -19,7 +19,7 @@ the same controller action as updating anything else on the cart.
 Example:
 
 ```twig
-<form method="POST">
+<form method="post">
 <input type="hidden" name="action" value="commerce/cart/update-cart">
 {{ redirectInput('shop/cart') }}
 {{ csrfInput() }}
@@ -57,7 +57,7 @@ order completion. This can be done with the same controller action as updating a
 Example:
 
  ```twig
-<form method="POST">
+<form method="post">
  <input type="hidden" name="action" value="commerce/cart/update-cart">
  {{ redirectInput('shop/cart') }}
  {{ csrfInput() }}

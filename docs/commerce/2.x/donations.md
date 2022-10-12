@@ -20,7 +20,7 @@ The form to add the donation to the cart would look like this:
  ```twig
   {% set donation = craft.commerce.donation %}
   {% if donation and donation.isAvailable %}
-  <form method="POST" class="pt-2 pb-8 text-center">
+  <form method="post" class="pt-2 pb-8 text-center">
     <input type="hidden" name="action" value="commerce/cart/update-cart">
     {{ redirectInput('shop/cart') }}
     {{ csrfInput() }}

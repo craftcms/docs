@@ -13,7 +13,7 @@ For starting a subscription, the following example is a good start. A thing to n
 ```twig
 {% set plans = craft.commerce.getPlans().getAllPlans() %}
 
-<form method="POST">
+<form method="post">
   {{ csrfInput() }}
   <input type="hidden" name="action" value="commerce/subscriptions/subscribe">
 
@@ -43,7 +43,7 @@ There are several things to note:
 To cancel a subscription you can use the following template that assumes that the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`.
 
 ```twig
-<form method="POST">
+<form method="post">
   {{ csrfInput() }}
   <input type="hidden" name="action" value="commerce/subscriptions/cancel">
   <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}" />
@@ -64,7 +64,7 @@ To switch a subscription plan you can use the following template that assumes th
 ```twig
 {% for plan in subscription.alternativePlans %}
   <div><strong>Switch to {{ plan.name }}</strong></div>
-  <form method="POST">
+  <form method="post">
     {{ csrfInput() }}
     <input type="hidden" name="action" value="commerce/subscriptions/switch">
     <input type="hidden" name="planUid" value="{{ plan.uid|hash }}">
@@ -87,7 +87,7 @@ Note, that not all canceled subscriptions might be available for reactivation, s
 
 ```twig
 {% if subscription.canReactivate() %}
-  <form method="POST">
+  <form method="post">
     {{ csrfInput() }}
     <input type="hidden" name="action" value="commerce/subscriptions/reactivate">
     <input type="hidden" name="subscriptionUid" value="{{ subscription.uid|hash }}">

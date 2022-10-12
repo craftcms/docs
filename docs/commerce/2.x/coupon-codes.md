@@ -20,7 +20,7 @@ To add a coupon to the cart, a customer submits the `couponCode` parameter to th
 Example:
 
 ```twig
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/update-cart">
   <input type="hidden" name="cartUpdatedNotice" value="Added coupon code.">
   {{ redirectInput('shop/cart') }}

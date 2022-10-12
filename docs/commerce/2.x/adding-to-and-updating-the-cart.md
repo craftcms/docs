@@ -12,7 +12,7 @@ The following is an example of getting the first product found in your store. We
 {% set product = craft.products.one() %}
 {% set variant = product.defaultVariant %}
 
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/update-cart">
   <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
   {{ redirectInput('shop/cart') }}
@@ -28,7 +28,7 @@ The above is a simple example, if your product’s type has multiple variants yo
 ```twig
 {% set product = craft.products.one() %}
 
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/update-cart">
   <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
   {{ redirectInput('shop/cart') }}
@@ -61,7 +61,7 @@ Here is an example of an add to cart form with both a `notes` and `options` para
 ```twig
 {% set product = craft.products.one() %}
 {% set variant = product.defaultVariant %}
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/update-cart">
   <input type="hidden" name="cartUpdatedNotice" value="Added {{ product.title }} to the cart.">
   {{ redirectInput('shop/cart') }}
@@ -111,7 +111,7 @@ You can add multiple purchasables to the cart in an update cart form. You supply
 
 ```twig
 {% set product = craft.products.one() %}
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/update-cart">
   <input type="hidden" name="cartUpdatedNotice" value="Products added to the cart.">
   {{ redirectInput('shop/cart') }}
@@ -142,7 +142,7 @@ To update a line item, submit a form array param with the name of `lineItems`, w
 Example:
 
 ```twig
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/update-cart">
   <input type="hidden" name="cartUpdatedNotice" value="Updated line items.">
   {{ redirectInput('shop/cart') }}
