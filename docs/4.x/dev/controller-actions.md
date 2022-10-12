@@ -8,13 +8,13 @@ To get a sense for the kind of things you can do, jump to the [available actions
 
 ## Making Requests
 
-An “action request” is one that explicitly declares the controller and action to use, via an `action` query or body param. Craft also supports routing to specific actions using a path defined by the <config4:actionTrigger> setting, or [aliased in `routes.php`](../routing.md#advanced-routing-with-url-rules).
+An “action request” is one that explicitly declares the controller and action to use, via an `action` query or body param. Craft also supports routing to specific actions using a path defined by the <config4:actionTrigger> setting, or by creating an [alias in `routes.php`](../routing.md#advanced-routing-with-url-rules).
 
 ::: tip
 This `action` parameter is different from the `<form action="...">` attribute:
 
 - The `action` _param_ should be used within a URL query string (`?action=...`) for `GET` requests, or in the body of a `POST` request.
-- The _form attribute_ should only be used when you want a form to submit to a different path than the user is already on. This attribute has no effect if a redirect is issued in response to the request. When an `action` param is _not_ present in the request, you can use an “action path” like `action="/actions/users/login"`.
+- The _form attribute_ should only be used when you want a form to submit to a different path than the user is already on. When an `action` param is _not_ present in the request, you can use an “action path” like `action="/actions/users/login"`. This attribute has no effect if a redirect is issued in response to the request!
 :::
 
 ### HTTP Verbs
