@@ -75,6 +75,7 @@ Filter | Description
 [round](https://twig.symfony.com/doc/3.x/filters/round.html) | Rounds a number.
 [rss](#rss) | Converts a date to RSS date format.
 [slice](https://twig.symfony.com/doc/3.x/filters/slice.html) | Extracts a slice of a string or array.
+[slug](https://twig.symfony.com/doc/3.x/filters/slug.html) | Transforms a given string into another string that only includes safe ASCII characters.
 [snake](#snake) | Formats a string into “snake_case”.
 [sort](https://twig.symfony.com/doc/3.x/filters/sort.html) | Sorts an array.
 [spaceless](https://twig.symfony.com/doc/3.x/filters/spaceless.html) | Removes whitespace between HTML tags.
