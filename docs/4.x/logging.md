@@ -36,7 +36,7 @@ Session and environment variables are printed after the last log line for the re
 
 What you see in your log files depends on the environment.
 
-When you’re working locally with <config4:devMode> enabled, logs will be in a more verbose, multi-line format that’s human-readable. Each message will be represented on one or more lines. Any exceptions will include a stack trace.
+When you’re working locally with <config4:devMode> enabled, logs are output in a verbose, multi-line format that’s human-readable. Any exceptions will include a stack trace.
 
 ```
 [2022-04-15T17:00:11+00:00] web.INFO: Opening DB connection: pgsql:host=db;dbname=db;port=5432 {"trace":[],"memory":9646256,"category":"yii\\db\\Connection::open"}
