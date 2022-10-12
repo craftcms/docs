@@ -211,7 +211,7 @@ return [
                     'categories' => ['custom-module'],
                     'logContext' => false,
                 ],
-            ]
+            ],
         ],
     ],
 ];
