@@ -24,6 +24,10 @@ You’ll most likely be creating active user accounts for content managers or si
 
 You can’t create an inactive user from the control panel, but you can deactivate a user account by choosing **Deactivate...** from its action menu (<icon kind="settings" />). Inactive user accounts are best suited for specific circumstances, like Craft Commerce guest customers or an imaginary Craft-based CRM that manages contacts.
 
+### Addresses
+
+Users each have an address book. [Addresses](./addresses.md) can be managed on behalf of a User via the control panel, or [by the user themselves](./dev/controller-actions.md#post-users-save-address).
+
 ## Querying Users
 
 You can fetch users in your templates or PHP code using **user queries**.

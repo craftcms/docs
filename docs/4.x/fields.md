@@ -72,7 +72,8 @@ Everything in Craft that has content associated with it will provide a field lay
 - [Assets](assets.md) use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
 - [Categories](categories.md) use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
 - [Tags](tags.md) use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
-- [Users](users.md) all share a single field layout defined in **Settings** → **Users** → **Fields**.
+- [Users](users.md) all share a single field layout defined in **Settings** → **Users** → **User Fields**.
+- [Addresses](addresses.md) also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
 
 The field layout editor works the same way regardless of which content type you’re looking at:
 

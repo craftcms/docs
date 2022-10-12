@@ -1,8 +1,8 @@
 # Addresses
 
-Addresses are special elements Craft includes so each [User](users.md) can have an address book.
+Addresses are special elements in Craft that belong to [Users](users.md).
 
-They’re element types with their own fields, but they’re strictly available to User’s field layouts. Querying addresses and working with their field data, however, is nearly identical to the experience you’d have with any other element type.
+They’re element types with their own fields, but they’re strictly available to the User element’s field layout. Querying addresses and working with their field data, however, is nearly identical to the experience working with any other element type.
 
 ## Managing Address Fields
 
@@ -126,7 +126,7 @@ If we just want a key-value array instead of the extra information that comes wi
 ```
 
 ::: tip
-There’s a lot more you can do here, including translated place names, postal codes, timezones, and formatting! Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples.
+Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and formatting!
 :::
 
 ## Querying Addresses
@@ -150,24 +150,24 @@ See [Element Queries](element-queries.md) to learn about how element queries wor
 
 ### Example
 
-We can get all the addresses for a user by passing their ID to the `ownerId` parameter.
+We can get all the addresses for a user by passing their ID to the `owner` parameter.
 
 1. Create an address query with `craft.addresses()`.
-2. Set the [`ownerId`](#ownerId) parameter on it.
+2. Restrict the query to addresses owned by the current User, using the [`owner`](#owner) parameter.
 3. Fetch the addresses with `.collect()`.
 4. Loop through the addresses using a [`{% for %}`](https://twig.symfony.com/doc/3.x/tags/for.html) tag.
 5. Output preformatted address details with the [`|address`](dev/filters.md#address) filter.
 
 ```twig
-{# Prepare an element query for addresses belonging to user having ID = 3 #}
-{% set myAddressQuery = craft.addresses().ownerId(3) %}
+{# Prepare an element query for addresses belonging to the current user: #}
+{% set myAddressQuery = craft.addresses().ownerId(currentUser.id) %}
 
-{# Fetch the addresses as a collection #}
+{# Fetch the addresses as a collection: #}
 {% set addresses = myAddressQuery.collect() %}
 
-{# Loop through addresses and output each one #}
+{# Loop through addresses and output each one: #}
 {% for addr in addresses %}
-  {{ addr|address }}
+  <address>{{ addr|address }}</address>
 {% endfor %}
 ```
 
@@ -980,6 +980,10 @@ The default formatter includes the following options:
   Сполучені Штати
 #}
 ```
+
+### Managing Addresses
+
+Your users can add, edit, and remove their own addresses from the front-end.
 
 ### Customizing the Formatter
 
