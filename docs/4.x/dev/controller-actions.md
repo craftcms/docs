@@ -52,6 +52,9 @@ Flashes are _not_ set when using [AJAX](#ajax). Look for errors in the response!
 ```twig Anchor/Link
 {# Output a “log out” link: #}
 <a href="{{ actionUrl('users/logout') }}">Log Out</a>
+
+{# Craft actually provides a shortcut for this: #}
+<a href="{{ logoutUrl }}">Log Out</a>
 ```
 ```twig Form
 {# Pass any element to this (as a Twig partial) to get a CP edit link: #}
