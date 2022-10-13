@@ -230,12 +230,13 @@ While abbreviated, this “user profile” form contains all the patterns requir
         {{ input('text', 'fullName', user.fullName, {
             id: 'fullName',
             aria: {
-                errormessage: user.hasErrors('fullName') ? 'fullName-errors',
+                invalid: user.hasErrors('fullName'),
+                errormessage: user.hasErrors('fullName') ? 'fullName-errors' : null,
             },
         }) }}
 
         {% if user.hasErrors('fullName') %}
-            <ul>
+            <ul id="fullName-errors">
                 {% for error in user.getErrors('fullName') %}
                     <li>{{ error }}</li>
                 {% endfor %}
