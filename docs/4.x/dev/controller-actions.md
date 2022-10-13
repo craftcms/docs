@@ -307,7 +307,7 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [users/save-address](#post-users-save-address) | Create or update an [Address](../addresses.md) element.
 <badge vertical="baseline" type="verb">POST</badge> [users/delete-address](#post-users-delete-address) | Delete an Address element.
 <badge vertical="baseline" type="verb">GET</badge> [users/session-info](#get-users-session-info) | Retrieve information about the current session.
-<badge vertical="baseline" type="verb">GET</badge> [app/health-check](#get-app-health-check) | Verify your app is accessible.
+<badge vertical="baseline" type="verb">GET</badge> [app/health-check](#get-app-health-check) | Ping your app to make sure it’s up.
 
 
 ### <badge vertical="baseline" type="verb">POST</badge> `entries/save-entry`
