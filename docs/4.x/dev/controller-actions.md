@@ -46,7 +46,7 @@ Flashes are _not_ set when using [AJAX](#ajax). Look for errors in the response!
 
 #### `GET`
 
-`GET` requests are made by accessing an action URL by way of a regular anchor tag, a form submission, or AJAX. `GET` action requests are much less common than `POST`, as the bulk of read-only request routing is handled for you, out of the box.
+`GET` requests are made by accessing an action URL by way of a regular anchor tag, a form submission, or AJAX. In the [examples](#available-actions) that follow, `GET` action requests are much less common than `POST`, as the bulk of read-only request routing is handled for you, out of the box.
 
 ::: code
 ```twig Anchor/Link
