@@ -587,3 +587,20 @@ State   | AJAX
 <x-mark/> | 400 status code, with an error message.
 
 </span>
+
+### <badge vertical="baseline" type="verb">GET</badge> `app/health-check`
+
+A “[no-op](https://en.wikipedia.org/wiki/NOP_(code))” action provided for automated monitoring.
+
+#### Response
+
+The response will be successful (but empty) in all but “exceptional” situations, like an issue connecting to the database.
+
+<span class="croker-table">
+
+State   | Any
+------- | ---
+<check-mark/> | An empty document with a 200 status code.
+<x-mark/> | 400- or 500-level status, with an error message or stack trace (in `devMode`, or when the current user has enabled the “show full exception views” preference).
+
+</span>
