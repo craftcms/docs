@@ -273,10 +273,6 @@ While abbreviated, this “user profile” form contains all the patterns requir
 
 The same principles apply to anything else you want to make editable in the front-end, so long as the user has the correct permissions. Take a look at the [public registration forms](kb:front-end-user-accounts) for some examples of validation on forms available to guests—and to learn about some nice abstractions that will help reduce repetition in your form markup!
 
-::: tip
-HTML forms have great [native accessibility features](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/forms)!
-:::
-
 #### Flashes
 
 Flashes are temporary messages Craft stores in your session, typically under keys corresponding to their severity, like `notice` or `error`. You can output flashes in your templates:
