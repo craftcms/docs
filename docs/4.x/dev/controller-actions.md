@@ -8,7 +8,9 @@ To get a sense for the kind of things you can do, jump to the [available actions
 
 ## Making Requests
 
-An “action request” is one that explicitly declares the controller and action to use, via an `action` query or body param. Craft also supports routing to specific actions using a path defined by the <config4:actionTrigger> setting, or by creating an [alias in `routes.php`](../routing.md#advanced-routing-with-url-rules).
+An “action request” is one that explicitly declares the controller and action to use, via an `action` query or body param. Actions are usually in the 
+
+Craft also supports routing to specific actions using a path defined by the <config4:actionTrigger> setting, or by creating an [alias in `routes.php`](../routing.md#advanced-routing-with-url-rules).
 
 ::: tip
 This `action` parameter is different from the `<form action="...">` attribute:
@@ -202,39 +204,72 @@ A lot of the data creation and manipulation we’ll cover in the examples below 
 
 If you encounter errors when creating or saving something, it will usually be passed back to your template as a special variable like `entry` or `user`, and a [flash](#flashes) will be set. Every model has a `.getErrors()` method that returns a list of messages for any attribute (or custom field) that did not validate.
 
-While abbreviated, this form contains all the patterns required to display contextual validation errors:
+While abbreviated, this “user profile” form contains all the patterns required to display contextual validation errors:
 
-```twig
-{# Normalize the `user` variable, so we can use it in the form regardless of whether or not it was rendered following a submission attempt: #}
-{% set user = user ?? currentUser %}
+::: code
+```twig account.twig
+{% extends '_layouts/default' %}
 
-<form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('users/save-user') }}
-    {{ hiddenInput('userId', user.id) }}
+{# Require an active user session: #}
+{% requireLogin %}
 
-    <label for="fullName">Full Name</label>
+{% block content %}
+    {# Display the user’s saved name: #}
+    <h1>Hello, {{ currentUser.fullName }}</h1>
 
-    {{ input('text', 'fullName', user.fullName, {
-        id: 'fullName',
-        aria: {
-            errormessage: user.hasErrors('fullName') ? 'fullName-errors',
-        },
-    }) }}
+    {# Normalize the `user` variable, so we can use it in the form regardless of whether or not it was rendered following a submission attempt: #}
+    {% set user = user ?? currentUser %}
 
-    {% if user.hasErrors('fullName') %}
-        <ul>
-            {% for error in user.getErrors('fullName') %}
-                <li>{{ error }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <form method="post">
+        {{ csrfInput() }}
+        {{ actionInput('users/save-user') }}
+        {{ hiddenInput('userId', user.id) }}
 
-    {# ...other fields and attributes... #}
+        <label for="fullName">Full Name</label>
 
-    <button>Save</button>
-</form>
+        {{ input('text', 'fullName', user.fullName, {
+            id: 'fullName',
+            aria: {
+                errormessage: user.hasErrors('fullName') ? 'fullName-errors',
+            },
+        }) }}
+
+        {% if user.hasErrors('fullName') %}
+            <ul>
+                {% for error in user.getErrors('fullName') %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {# ...other fields and attributes... #}
+
+        <button>Save</button>
+    </form>
+{% endblock %}
 ```
+```twig _layouts/default.twig
+<!DOCTYPE html>
+<html lang="{{ currentSite.language }}">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ siteName }} — Account</title>
+    </head>
+    <body>
+        {# Output flashes in a global space: #}
+        {% set flashes = craft.app.session.getAllFlashes(true) %}
+
+        {% if flashes | length %}
+            {% for type, flash in flashes %}
+                <p class="{{ type }}" role="alert">{{ flash }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% block content null %}
+    </body>
+</html>
+```
+:::
 
 The same principles apply to anything else you want to make editable in the front-end, so long as the user has the correct permissions. Take a look at the [public registration forms](kb:front-end-user-accounts) for some examples of validation on forms available to guests—and to learn about some nice abstractions that will help reduce repetition in your form markup!
 
