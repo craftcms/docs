@@ -306,6 +306,26 @@ Action | Description
 <badge vertical="baseline" type="verb">GET</badge> [users/session-info](#get-users-session-info) | Retrieve information about the current session.
 <badge vertical="baseline" type="verb">GET</badge> [app/health-check](#get-app-health-check) | Ping your app to make sure it’s up.
 
+In each of the following examples, you’ll find a list of **Supported Params** (the values you can send as <badge vertical="baseline" type="verb">GET</badge> query params or in the <badge vertical="baseline" type="verb">POST</badge> body) and information about the possible **Response** conditions.
+
+**Supported Params** can be added directly to URLs, provided in a `<form>`, or as properties in a [JSON payload](#ajax).
+
+::: code
+```twig URL Params
+{{ actionUrl('') }}
+```
+```twig Forms
+<form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('entries/save-entry') }}
+
+    <input type="text" name="title" value="{{ entry.title }}">
+
+    <button>Submit</button>
+</form>
+```
+:::
+
 
 ### <badge vertical="baseline" type="verb">POST</badge> `entries/save-entry`
 
