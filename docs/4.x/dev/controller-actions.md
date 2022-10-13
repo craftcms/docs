@@ -604,3 +604,15 @@ State   | Any
 <x-mark/> | 400- or 500-level status, with an error message or stack trace (in `devMode`, or when the current user has enabled the “show full exception views” preference).
 
 </span>
+
+## Plugins + Custom Actions
+
+Many plugins expose functionality via their own controllers and actions. Their accepted parameters and response types are entirely up to the author, but the [fundamentals](#making-requests) will be the same. Consult the appropriate documentation for specifics!
+
+Here are some examples in our own plugins:
+
+- [Commerce](https://plugins.craftcms.com/commerce): A variety of cart management capabilities are provided for users and guests.
+- [Contact Form](https://plugins.craftcms.com/contact-form): Adds the `contact-form/send` action for processing submissions and delivering notifications.
+- [Element API](https://plugins.craftcms.com/element-api): Customizable routes get mapped to queries, and return JSON representations of elements.
+
+Custom modules can also provide actions via a [Controller](../extend/controllers.md).
