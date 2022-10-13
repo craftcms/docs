@@ -270,7 +270,6 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [users/delete-address](#post-users-delete-address) | Delete an Address element.
 <badge vertical="baseline" type="verb">GET</badge> [users/session-info](#get-users-session-info) | Retrieve information about the current session.
 <badge vertical="baseline" type="verb">GET</badge> [app/health-check](#get-app-health-check) | Verify your app is accessible.
-<badge vertical="baseline" type="verb">GET</badge> [redirect](#get-redirect) | Redirects the user to another (validated) URL.
 
 
 ### <badge vertical="baseline" type="verb">POST</badge> `entries/save-entry`
