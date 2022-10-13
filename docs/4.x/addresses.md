@@ -6,11 +6,7 @@ They’re element types with their own fields, but they’re strictly available 
 
 ## Managing Address Fields
 
-By default, address fields aren’t shown anywhere in the control panel—but they’re ready to customize and add to User field layouts.
-
-In the control panel, navigate to **Settings** → **Users**.
-
-The **User Fields** editor lets you manage whatever fields you’d like to be available for all users:
+The Address management interface is optional, but can be added to the User field layout by navigating to  **Settings** → **Users** -> **User Fields**.
 
 ![Screenshot of User Fields’ Field Layout editor, with an empty layout and an available Addresses field under Native Fields in the sidebar](./images/user-fields.png)
 
