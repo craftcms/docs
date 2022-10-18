@@ -2344,6 +2344,14 @@ Sets up all the things.
 This is an interactive wrapper for the `setup/app-id`, `setup/security-key`, `setup/db-creds`,
 and `install` commands, each of which support being run non-interactively.
 
+<h3 id="setup-keys">
+    <a href="#setup-keys" class="header-anchor">#</a>
+    <code>setup/keys</code>
+</h3>
+
+
+Generates an application ID and security key (if they don’t exist), and saves them in the `.env` file.
+
 <h3 id="setup-php-session-table">
     <a href="#setup-php-session-table" class="header-anchor">#</a>
     <code>setup/php-session-table</code>

@@ -36526,6 +36526,18 @@
         "desc": "The event that is triggered when registering user permissions."
     },
     {
+        "class": "craft\\services\\UserPermissions",
+        "name": "EVENT_AFTER_SAVE_USER_PERMISSIONS",
+        "type": "craft\\events\\UserPermissionsEvent",
+        "desc": "The event triggered before saving user permissions."
+    },
+    {
+        "class": "craft\\services\\UserPermissions",
+        "name": "EVENT_AFTER_SAVE_GROUP_PERMISSIONS",
+        "type": "craft\\events\\UserGroupPermissionsEvent",
+        "desc": "The event triggered before saving group permissions."
+    },
+    {
         "class": "craft\\services\\Users",
         "name": "EVENT_BEFORE_VERIFY_EMAIL",
         "type": "craft\\events\\UserEvent",
