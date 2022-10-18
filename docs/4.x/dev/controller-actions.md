@@ -167,7 +167,7 @@ getSessionInfo()
     .then(console.log);
 ```
 
-This example assumes you have no preexisting HTML from the server (as though it was part of a [headless](config4:headlessMode) application). If you are working on a hybrid front-end (and sprinkling interactivity into primarily server-rendered pages), you could eliminate the first request by stashing the User’s ID and CSRF token in the document’s `<head>` (or on a relevant element) and reading it with Javascript:
+This example assumes you have no preexisting HTML from the server (as though it was part of a [headless](config4:headlessMode) application). If you are working on a hybrid front-end (and sprinkling interactivity into primarily server-rendered pages), you could eliminate the first request by stashing the User’s ID and CSRF token in the document’s `<head>` (or on a relevant element) and reading it with JavaScript:
 
 ```twig
 <button
@@ -590,7 +590,7 @@ State   | Standard | Ajax
 
 ### <badge vertical="baseline" type="verb">GET</badge> `users/session-info`
 
-Retrieves information about the current session. Data is returned as JSON, and is only intended for consumption over Ajax via Javascript.
+Retrieves information about the current session. Data is returned as JSON, and is only intended for consumption over Ajax via JavaScript.
 
 #### Response
 
