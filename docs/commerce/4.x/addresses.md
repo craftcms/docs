@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # Addresses
 
 ::: tip
@@ -10,9 +14,9 @@ In the control panel, you’ll encounter addresses within the context of orders 
 
 Customer’s addresses are managed from their user account, if you’ve [added the native Addresses field](/4.x/addresses.md#setup) to Users’ field layout. Commerce also inserts a **Commerce Settings** field into the [address field layout](/4.x/addresses.md#native-and-custom-fields)) with primary shipping and billing controls.
 
-## Managing Addresses
+### How Addresses are Used
 
-Your customers will work with addresses [directly](#address-book), or [via the cart](#cart-addresses).
+Your customers will work with addresses [via the cart](#cart-addresses), or [directly](#address-book).
 
 ::: tip
 Your primary source for information about [working with Addresses](/4.x/addresses.md) is the main Craft documentation!
@@ -25,7 +29,7 @@ Every order may have a shipping and billing address, and customers with accounts
 - Methods for working with the store’s [countries & states](countries-states.md) provided by Craft’s supporting [address repository](/4.x/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
-### Store Address
+#### Store Address
 
 The store address (set via **Commerce** &rarr; **Store Settings** &rarr; **Store**) is available via the [Store service](commerce4:craft\commerce\services\Store):
 
