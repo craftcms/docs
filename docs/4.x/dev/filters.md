@@ -100,7 +100,7 @@ Filter | Description
 
 ## `address`
 
-Applies formatting to an [Address](craft4:craft\elements\Address).
+Applies formatting to an [Address](../addresses.md#address-formatter).
 
 ```twig
 {% set myAddress = currentUser.getAddresses()|first %}
