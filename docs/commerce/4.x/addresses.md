@@ -1,27 +1,33 @@
 # Addresses
 
-::: warning
-Addresses have changed significantly in Commerce 4 and this page isn’t up to date yet!
+::: tip
+Addresses are now a native part of Craft! We recommend reviewing the [main documentation on addresses](/4.x/addresses.md) before digging in on Commerce-specifics.
 :::
 
-Commerce manages shipping and billing addresses using Craft’s [Address](craft4:craft\elements\Address) elements, adding a mandatory **Commerce Settings** field to the address field layout with primary shipping and billing controls.
+Commerce manages shipping and billing information using Craft’s <craft4:craft\elements\Address> element type.
 
-In the control panel, you’ll find addresses within the context of Orders and Customers. A Store Location may also be entered at **Commerce** → **Store Settings** → **Store** → **Store Location**.
+In the control panel, you’ll encounter addresses within the context of orders and users. A [Store Location](#store-address) address may also be entered at **Commerce** → **Store Settings** → **Store** → **Store Location**.
 
-You manage any customer’s addresses from their user account once you’ve added the native Addresses field to Users’ Field Layout.
+Customer’s addresses are managed from their user account, if you’ve [added the native Addresses field](/4.x/addresses.md#setup) to Users’ field layout. Commerce also inserts a **Commerce Settings** field into the [address field layout](/4.x/addresses.md#native-and-custom-fields)) with primary shipping and billing controls.
 
 ## Managing Addresses
 
-Your front end can work with addresses [by way of the cart](#cart-addresses) and [via customer accounts](#customer-addresses).
+Your customers will work with addresses [directly](#address-book), or [via the cart](#cart-addresses).
 
-Every order may have a shipping and billing address, and customers with accounts can save and re-use addresses when placing new orders. How you collect and validate addresses on the front end is up to you. Commerce provides tools that help streamline address management:
+::: tip
+Your primary source for information about [working with Addresses](/4.x/addresses.md) is the main Craft documentation!
+:::
+
+Every order may have a shipping and billing address, and customers with accounts can save and re-use addresses when placing new orders. How you collect and validate addresses on the front end is up to you—but Craft and Commerce provide tools that help streamline address management:
 
 - The ability to use [estimated addresses](#estimate-addresses) to calculate shipping and tax costs with minimal data entry before checkout.
-- Multiple ways of [updating cart addresses](#updating-cart-addresses) and avoid data re-entry.
+- Multiple ways of [updating cart addresses](#updating-cart-addresses) to avoid data re-entry.
 - Methods for working with the store’s [countries & states](countries-states.md) provided by Craft’s supporting [address repository](/4.x/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
-The store address is available via the [Store service](commerce4:craft\commerce\services\Store):
+### Store Address
+
+The store address (set via **Commerce** &rarr; **Store Settings** &rarr; **Store**) is available via the [Store service](commerce4:craft\commerce\services\Store):
 
 ::: code
 ```twig
@@ -39,22 +45,14 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 :::
 
 ::: tip
-That `getStore().getStore()` is not a typo! We’re getting the store service with the first method and getting the store model with the second.
+That `getStore().getStore()` is not a typo! We’re getting the <commerce4:craft\commerce\services\Store> _service_ with the first method and getting the <commerce4:craft\commerce\models\Store> _model_ with the second.
 :::
-
-If you flattened `storeAddress` into an array, this is what it might look like:
-
-<toggle-tip title="Example Address">
-
-<<< @/docs/commerce/4.x/example-objects/storeAddress.php
-
-</toggle-tip>
 
 ## Cart Addresses
 
 ### Fetching Cart Addresses
 
-Once you have [a cart object](orders-carts.md#fetching-a-cart), you can access order addresses via `cart.shippingAddress` and `cart.billingAddress`:
+Once you have [a cart object](orders-carts.md#fetching-a-cart), you can access the attached addresses via `cart.shippingAddress` and `cart.billingAddress`:
 
 ```twig
 {% if cart.shippingAddress %}
@@ -68,102 +66,97 @@ Once you have [a cart object](orders-carts.md#fetching-a-cart), you can access o
 {% endif %}
 ```
 
-If present, the address will be an [Address](craft4:craft\elements\Address) object like the store location example above. Otherwise the `shippingAddress` or `billingAddress` property will return `null` if an address is not set.
+It’s important to code defensively, here! If the customer hasn’t set an address yet, you’ll get back `null`—otherwise, it’ll be an [Address](craft4:craft\elements\Address) object.
 
 ::: tip
-You don’t need to add your own logic for checking `shippingAddressSameAsBilling` or `billingAddressSameAsShipping`; Commerce will return the correct address taking those options into account.
+You don’t need to add your own logic to handle `shippingAddressSameAsBilling` or `billingAddressSameAsShipping`; Commerce will return the correct address taking those options into account.
 :::
 
 ### Updating Cart Addresses
 
 Any post to the `commerce/cart/update-cart` action can include parameters for modifying shipping and billing address information in two formats:
 
-1. A `shippingAddress` and/or `billingAddress` array with details to be added, along with an ID (i.e. `shippingAddress[id]`) to update an existing address.
-2. A `shippingAddressId` and/or `billingAddressId` parameter for designating an existing addresses by its ID.
+1. A `shippingAddress` and/or `billingAddress` array with details to be added (guests and logged-in users)
+2. A `shippingAddressId` and/or `billingAddressId` parameter for choosing an existing address by ID (logged-in users only)
 
-With either approach, you can also use `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` parameters to synchronize addresses and not have to send the same information in two places.
+#### Synchronizing Shipping and Billing Addresses
 
-If you provide a `shippingAddress` or `shippingAddressId`, for example, and the order’s billing address should be identical, you can simply pass `billingAddressSameAsShipping` with a value of `1` rather than supplying the same `billingAddress` or `billingAddressId`.
+With either approach, you can leverage the `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` parameters to synchronize addresses and avoid having to send the same information twice.
 
-If you provide conflicting information for an address, like passing `shippingAddress` fields *and* `shippingAddressId` for example, Commerce will ignore the `shippingAddress` information and honor `shippingAddressId`.
+If you provide a `shippingAddress` or `shippingAddressId`, for example, and the order’s billing address should be identical, you can simply pass a non-empty value under `billingAddressSameAsShipping` rather than supplying the same `billingAddress` or `billingAddressId`.
+
+If you provide `shippingAddress` fields *and* `shippingAddressId`, the latter takes precedence.
 
 ::: warning
 Commerce doesn’t require an order to have a shipping address, but providing one is important for the tax and shipping engine to calculate more accurate options and costs.
 :::
 
+#### Address Fields
+
+The specific properties and fields supported when updating an order’s `shippingAddress` or `billingAddress` in this way are determined by the [Address](craft4:craft\elements\Address) element, regional differences based on the provided `countryCode`, and any custom fields assigned to it.
+
+```twig
+<form method="post">
+  {# ... #}
+
+  <input type="text" name="shippingAddress[firstName]" value="{{ cart.shippingAddress.firstName }}">
+</form>
+```
+
+#### Address Ownership
+
+Logged-in users can directly [manage their addresses](/4.x/addresses.md#managing-addresses) via the front-end, and pick from them during checkout. However, addresses are only ever “owned” by one element—let’s look at some examples of how Commerce handles this:
+
+- When an address is selected by updating a cart with a `shippingAddressId` or `billingAddressId`, the order keeps track of where the address came from via `sourceShippingAddressId` and `sourceBillingAddressId` properties, but _clones_ the actual address element. This means that `shippingAddressId` and `sourceShippingAddressId` will never be the same!
+- Addresses provided by sending individual fields under the `shippingAddress[...]` and `billingAddress[...]` keys are created and owned by the order.
+- Similarly, sending individual field values for an order’s shipping or billing address (regardless of how it was originally populated) will only update the order address, and breaks any association to the user’s address book via `sourceShippingAddressId` or `sourceBillingAddressId`.
+
+::: tip
+If you want to make it clear that your customer has selected a preexisting address, compare `order.sourceShippingAddressId` or `order.sourceBillingAddressId` with the IDs of the addresses in their address book. We have an [example of this](#select-an-existing-address), below.
+:::
+
 ### Cart Address Examples
 
-The following are a handful of approaches you can take updating cart addresses.
+Let’s look at some approaches to updating order addresses during checkout.
 
-#### Use an Existing Address by Default
+::: tip
+With either of these strategies, you can apply changes to shipping and billing addresses, simultaneously. Read more about [synchronizing addresses](#synchronizing-shipping-and-billing-addresses).
+:::
 
-This creates a form for adding the customer’s first saved address as the `shippingAddressId` and using it for the billing address with the `billingAddressSameAsShipping` parameter. The fields are hidden so the user doesn’t have any fields to populate.
+#### Submit New Addresses
 
-```twig
-{% set address = craft.commerce.customers.customer.addresses|first %}
-
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ hiddenInput('shippingAddressId', address.id) }}
-  {{ hiddenInput('billingAddressSameAsShipping', '1') }}
-  <button>Submit</button>
-</form>
-```
-
-You could achieve the inverse providing the first address as the `billingAddressId` and setting the `shippingAddressSameAsBilling` param.
-
-The same thing could also be done explicitly setting each address ID:
-
-```twig
-{% set address = craft.commerce.customers.customer.addresses|first %}
-
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ hiddenInput('shippingAddressId', address.id) }}
-  {{ hiddenInput('billingAddressId', address.id) }}
-  <button>Submit</button>
-</form>
-```
-
-Every order address designates the order as its `ownerId`. If a customer uses one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
-
-#### Submit New Addresses During Checkout
-
-The customer, especially if they’re a guest, needs to enter an address at checkout.
-
-This example creates a form for collecting the customer’s name and country, which are applied for the shipping and billing addresses.
+Customers—especially guests—will probably need to enter an address at checkout. To set address information directly on the order, pass individual properties under a `shippingAddress` or `billingAddress` key, depending on what you want to update:
 
 ```twig
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
-  {{ hiddenInput('successMessage', 'Updated shipping address.'|hash) }}
 
-  {# You can send a blank string here or omit this form parameter #}
-  {{ hiddenInput('shippingAddressId', '') }}
+  {{ input('text', 'shippingAddress[firstName]', shippingAddress.fullName) }}
 
-  <input type="text" name="shippingAddress[firstName]" value="">
-  <input type="text" name="shippingAddress[lastName]" value="">
   <select name="shippingAddress[countryCode]">
     {% for code, name in craft.commerce.getStore().getStore().getCountriesList() %}
-      <option value="{{ code }}">{{ name }}</option>
+      {{ tag('option', {
+        value: code,
+        text: name,
+        selected: code == shippingAddress.countryCode,
+      }) }}
     {% endfor %}
   </select>
-  {{ hiddenInput('billingAddressSameAsShipping', '1') }}
 
-  <button>Add to Cart</button>
+  {# ... #}
+
+  <button>Save Shipping Address</button>
 </form>
 ```
 
-The example sends the `shippingAddressId` parameter with an empty string, which behaves the same as omitting the parameter. When `shippingAddressId` is an integer, the address form data is ignored and the form action attempts to set the shipping address to that of the ID.
+::: warning
+If your request also includes a non-empty `shippingAddressId` or `billingAddressId param, the corresponding individual address fields are ignored and Commerce attempts to fill from an [existing address](#auto-fill-from-address-book).
+:::
 
-If we were updating an existing address, we could use this same form but simply populate `shippingAddressId` with the ID of the address we’d like to update.
+#### Auto-fill from Address Book
 
-#### Select an Existing Address
-
-If your customers have saved multiple addresses, you can display radio buttons allowing the a customer to select the proper `shippingAddressId` and `billingAddressId`, or create a new address on the fly:
+You can allow your customers to populate order addresses with a previously-saved one by sending a `shippingAddressId` and/or `billingAddressId` param when updating the cart.
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -172,65 +165,34 @@ If your customers have saved multiple addresses, you can display radio buttons a
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
-  {{ hiddenInput('successMessage', 'Updated addresses.'|hash) }}
 
   {# Display saved addresses as options if we have them #}
   {% if customerAddresses | length %}
     <div class="shipping-address">
       {% for address in customerAddresses %}
         <label>
-          <input type="radio"
-            name="shippingAddressId"
-            value="{{ address.id }}" {{- cart.shippingAddressId ? ' checked' : null }}
-          >
-          {# Identifying address information, up to you! #}
-          {# ... #}
+          {{ input('radio', 'shippingAddressId', address.id, {
+            checked: cart.sourceShippingAddressId == address.id,
+          }) }}
+          {{ address|address }}
         </label>
       {% endfor %}
     </div>
 
-    <div class="billing-address">
-      {% for address in customerAddresses %}
-        <label>
-          <input type="radio"
-            name="billingAddressId"
-            value="{{ address.id }}" {{- cart.billingAddressId ? ' checked' : null }}
-          >
-          {# Identifying address information, up to you! #}
-          {# ... #}
-        </label>
-      {% endfor %}
-    </div>
+    {# ... same process for `billingAddressId` ... #}
   {% else %}
-    {# No existing addresses; provide forms to add new ones #}
-    <div class="new-billing-address">
-      <label>
-        First Name
-        <input type="text" name="billingAddress[firstName]">
-      </label>
-      {# Remaining address fields #}
-      {# ... #}
-    </div>
-
-    <div class="new-shipping-address">
-      <label>
-        First Name
-        <input type="text" name="shippingAddress[firstName]">
-      </label>
-      {# Remaining address fields #}
-      {# ... #}
-    </div>
+    {# No existing addresses! See examples above to learn about sending a new address. #}
   {% endif %}
+
+  <button>Save Addresses</button>
 </form>
 ```
 
-You may need to create custom routes to allow customers to manage these addresses, or introduce logic in the browser to hide and show new address forms based on the type(s) of addresses you need.
+You may need to create custom routes to allow customers to [manage these addresses](/4.x/addresses.md#managing-addresses), or introduce logic in the browser to hide and show new address forms based on the type(s) of addresses you need.
 
 #### Update an Existing Address
 
-An address in the cart may be updated by passing the `id` part of the address model e.g. `shippingAddress[id]`.
-
-This example starts a form that could be used to update the shipping address attached to the cart:
+An address on the cart may be updated in-place by passing individual address properties.
 
 ```twig
 {% set cart = craft.commerce.carts.getCart() %}
@@ -239,31 +201,25 @@ This example starts a form that could be used to update the shipping address att
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
-  {{ hiddenInput('successMessage', 'Updated addresses.'|hash) }}
 
-  {{ hiddenInput('shippingAddress[id]', address.id) }}
-  <input type="text" name="shippingAddress[firstName]" value="{{ address.firstName }}">
-  <input type="text" name="shippingAddress[lastName]" value="{{ address.lastName }}">
+  {{ input('text', 'shippingAddress[fullName]', address.fullName) }}
+  {{ input('text', 'shippingAddress[addressLine1]', address.addressLine1) }}
 
   {# ... #}
 
-  <button>Update Address</button>
+  <button>Save Shipping Info</button>
 </form>
 ```
 
 ::: warning
-If a cart’s billing and shipping address IDs are the same, updating the shipping address will have no effect as the billing address takes precedence.
+Updates to an order address filled from the customer’s address book will _not_ propagate back to the source, and 
 :::
 
 ### Estimate Cart Addresses
 
-It’s common to provide a shipping or tax cost estimate before a customer has entered full address details.
+It’s common to provide a shipping or tax cost estimate before a customer has entered full address details. To help with this, the cart can use “estimated” shipping and billing addresses for calculations, before complete addresses are available.
 
-To help with this, the cart can use estimated shipping and billing addresses for calculations before complete addresses are available.
-
-::: tip
-An estimated address is an [Address element](craft4:craft\elements\Address) assigned to the order’s `estimatedShippingAddressId` or `estimatedBillingAddressId`.
-:::
+Estimated addresses are <craft4:craft\elements\Address> elements, just like shipping and billing addresses.
 
 #### Adding a Shipping Estimate Address to the Cart
 
@@ -273,6 +229,7 @@ In this example we’ll first check for existing estimate addresses with the `es
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
+{% set store = craft.commerce.getStore().getStore() %}
 
 <form method="post">
   {{ csrfInput() }}
@@ -282,14 +239,14 @@ In this example we’ll first check for existing estimate addresses with the `es
   {% if not cart.estimatedShippingAddressId %}
     {# Display country selection dropdown #}
     <select name="estimatedShippingAddress[countryCode]">
-      {% for code, option in craft.commerce.getStore().getStore().getCountriesList() %}
+      {% for code, option in store.getCountriesList() %}
         <option value="{{ code }}">{{ option }}</option>
       {% endfor %}
     </select>
 
     {# Display state selection dropdown #}
     <select name="estimatedShippingAddress[administrativeArea]">
-      {% for states in craft.commerce.getStore().getStore().getAdministrativeAreasListByCountryCode() %}
+      {% for states in store.getAdministrativeAreasListByCountryCode() %}
         {% for key, option in states %}
           <option value="{{ key }}">{{ option }}</option>
         {% endfor %}
@@ -325,15 +282,15 @@ In this example we’ll first check for existing estimate addresses with the `es
 
 A full example of this can be seen in the [example templates](example-templates.md) on the cart page.
 
-## Customer Addresses
+## Address Book
 
-Your front end can modify customer addresses independently of the cart.
+When logged in, your customers can modify their addresses independently of the cart.
 
-Customers can only add and remove addresses from the front end while they’re logged in.
+Refer to the main [Address documentation](/4.x/addresses.md) for more information and examples.
 
 ### Get All Current Customer Addresses
 
-You can fetch a list of addresses directly from any [user](craft4:craft\elements\User) element:
+You can fetch a list of addresses directly from any [User](craft4:craft\elements\User) element:
 
 ::: code
 ```twig
@@ -357,23 +314,6 @@ You can also do the same thing using an [address query](/4.x/addresses.md#queryi
 $addresses = \craft\elements\Address::find()
     ->ownerId(Craft::$app->user->id)
     ->all();
-```
-:::
-
-### Get Current Customer Address by ID
-
-Use an [address query](/4.x/addresses.md#querying-addresses) to get a specific address by its ID:
-
-::: code
-```twig
-{% set address = craft.addresses()
-  .id(8)
-  .one() %}
-```
-```php
-$address = \craft\elements\Address::find()
-    ->id(8)
-    ->one();
 ```
 :::
 
@@ -443,45 +383,3 @@ The form action for deleting a customer address is `users/delete-address`. All t
 ::: warning
 If an address is designated for shipping or billing in a cart, edits will carry over to the cart before checkout. Deleting an address will remove it from the cart and require further user action to complete the order.
 :::
-
-## Validating Addresses
-
-Addresses are validated similarly to other element types. You can set requirements for custom fields in the Address Fields field layout, and you can add custom validation to native address fields using a custom plugin or module.
-
-::: tip
-If you’d like to provide your own server-side validation, make sure you’re comfortable [creating a plugin or module for Craft CMS](../../4.x/extend/). Take a look at the [Using Events in a Custom Module](https://craftcms.com/knowledge-base/custom-module-events) Knowledge Base article for a complete example.
-:::
-
-If you write your own plugin or module, you’ll want to use its `init()` method to subscribe to the event that’s triggered when the `Address` element collects it rules prior to attempting validation. Your event listener can add additional [validation rules](https://www.yiiframework.com/doc/guide/2.0/en/input-validation#declaring-rules) for the Address model.
-
-In this example, a new rule is added to make `firstName` and `lastName` required:
-
-```php
-use craft\elements\Address;
-use craft\base\Model;
-use craft\events\DefineRulesEvent;
-
-Event::on(
-    Address::class,
-    Model::EVENT_DEFINE_RULES,
-    function(DefineRulesEvent $event) {
-        $rules = $event->rules;
-        $rules[] = [['firstName', 'lastName'], 'required'];
-        $event->rules = $rules;
-    }
-);
-```
-
-In any of the above examples that post to the `users/save-address` action, you would access validation errors in your template like any other element:
-
-```twig
-{% if address %}
-  {# Get all validation errors for the address #}
-  {% set errors = address.getErrors() %}
-
-  {# Get the `firstName` error for the address #}
-  {% set firstNameErrors = address.getErrors('firstName') %}
-{% endif %}
-```
-
-For a complete template example that outputs individual field validation errors, see [shop/_private/address/fields.twig](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/_private/address/fields.twig) in the [example templates](example-templates.md).

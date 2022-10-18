@@ -43,6 +43,7 @@
 /docs/4.x/config/db-settings.html /docs/4.x/config/db.html
 # 2.x plugin index is empty—forward to introduction
 /docs/2.x/plugins /docs/2.x/plugins/introduction.html
+/docs/commerce/4.x/update-cart-custom-fields.html /docs/commerce/4.x/orders-carts.html#storing-data-in-custom-fields
 
 # dynamic ones
 /docs/commerce/3.x/order-status-emails.html* /docs/commerce/3.x/emails.html:splat
