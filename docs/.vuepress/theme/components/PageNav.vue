@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div v-if="prev || next" class="page-nav content-wrapper">
-      <p class="inner border-t mt-0 pt-4 overflow-auto">
-        <span v-if="prev" class="prev">
-          <span class="paging-arrow inline-block">←</span>
+  <div v-if="prev || next || relatedItems.length" class="content-wrapper">
+    <nav class="page-nav">
+      <div v-if="prev || next" class="p-4">
+        <span v-if="prev" class="prev float-left">
+          <span class="paging-arrow inline-block" aria-hidden="true">←</span>
           <a
             v-if="prev.type === 'external'"
             class="prev"
@@ -16,9 +16,7 @@
           </a>
 
           <RouterLink v-else class="prev" :to="prev.path">
-            {{
-            prev.title || prev.path
-            }}
+            {{ prev.title || prev.path }}
           </RouterLink>
         </span>
 
@@ -34,19 +32,37 @@
           </a>
 
           <RouterLink v-else :to="next.path">
-            {{
-            next.title || next.path
-            }}
+            {{ next.title || next.path }}
           </RouterLink>
-          <span class="paging-arrow inline-block">→</span>
+          <span class="paging-arrow inline-block" aria-hidden="true">→</span>
         </span>
-      </p>
-    </div>
+
+        <div class="clear-both"></div>
+      </div>
+
+      <div v-if="relatedItems.length" class="see-also p-4 border-t">
+        <h4 class="font-bold mb-4">See Also</h4>
+        <ul class="list-disc pl-5">
+          {{ /* For raw HTML items, just output the content; URIs that appear to be external resources use an explicit label; Internal URIs will include the label of the referenced page: */ }}
+          <li v-for="(item, index) in relatedItems" :key="index">
+            <div v-if="item.html" v-html="item.html">{{ /* This content may have multiple links within it! */ }}</div>
+            <a
+              v-else-if="item.external"
+              :href="item.uri"
+              target="_blank">{{ item.label }} <OutboundLink /></a>
+            <RouterLink v-else :to="item.uri">{{ item.label }}</RouterLink>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
 </template>
 
 <style lang="postcss">
 .page-nav {
+    @apply rounded;
+    border: 1px solid var(--border-color);
+
   .inner {
     min-height: 2rem;
     border-color: var(--border-color);
@@ -56,24 +72,36 @@
     color: #718096;
   }
 }
+
+.see-also {
+  border-top-color: var(--border-color);
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
 </style>
 
 <script>
 import { resolvePage, resolveHeaders } from "../util";
+import resolveRelated from "../util/relationships";
 import isString from "lodash/isString";
 import isNil from "lodash/isNil";
-import SidebarLinks from "./SidebarLinks";
 
 export default {
   name: "PageNav",
 
   props: ["sidebarItems"],
 
-  components: { SidebarLinks },
-
   computed: {
     headingItems() {
       return resolveHeaders(this.$page);
+    },
+
+    relatedItems() {
+      return resolveRelated(this.$page, this.$site);
     },
 
     prev() {
