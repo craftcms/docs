@@ -301,8 +301,8 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [users/save-user](#post-users-save-user) | Creates or updates a user account.
 <badge vertical="baseline" type="verb">POST</badge> [users/send-password-reset-email](#post-users-send-password-reset-email) | Sends a password reset email.
 <badge vertical="baseline" type="verb">POST</badge> [users/set-password](#post-users-set-password) | Sets a new password on a user account.
-<badge vertical="baseline" type="verb">POST</badge> [users/save-address](#post-users-save-address) | Create or update an [Address](../addresses.md) element.
-<badge vertical="baseline" type="verb">POST</badge> [users/delete-address](#post-users-delete-address) | Delete an Address element.
+<badge vertical="baseline" type="verb">POST</badge> [users/save-address](#post-users-save-address) | Create or update an [address](../addresses.md) element.
+<badge vertical="baseline" type="verb">POST</badge> [users/delete-address](#post-users-delete-address) | Delete an address element.
 <badge vertical="baseline" type="verb">GET</badge> [users/session-info](#get-users-session-info) | Retrieve information about the current session.
 <badge vertical="baseline" type="verb">GET</badge> [app/health-check](#get-app-health-check) | Ping your app to make sure it’s up.
 
@@ -530,7 +530,7 @@ State   | Standard | Ajax
 
 ### <badge vertical="baseline" type="verb">POST</badge> `users/save-address`
 
-Saves or updates an [Address](../addresses.md) element against the current User’s account.
+Saves or updates an [address](../addresses.md) element against the current User’s account.
 
 #### Supported Params
 
@@ -538,18 +538,18 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`addressId` | An existing Address’s ID can be sent to update it, as long as it’s owned by the current User.
-`userId` | Owner of the new Address. Owners cannot be changed after creation, and new Addresses can only be created for the current user and other users they are allowed to edit.
+`addressId` | An existing address’s ID can be sent to update it, as long as it’s owned by the current user.
+`userId` | Owner of the new address. Owners cannot be changed after creation, and new addresses can only be created for the current user or other users they are allowed to edit.
 `fullName` | Name for the address. First and last names are not stored discretely, but can by submitted separately.
 `firstName` | Can be submitted independently from `lastName`, but will be combined for storage.
 `lastName` | Can be submitted independently from `firstName`, but will be combined for storage.
-`countryCode` | Required to localize and validate the rest of the Address.
+`countryCode` | Required to localize and validate the rest of the address.
 `organization` | Additional line for an organization or business name.
 `organizationTaxId` | Tax/VAT ID.
 `latitude` and `longitude` | GPS coordinates for the address. Not automatically populated or validated.
 
 ::: warning
-The remaining params depend upon the submitted `countryCode`—refer to the [`commerceguys/addressing` library](https://github.com/commerceguys/addressing/blob/master/src/AddressFormat/AddressField.php#L15-L25) for a comprehensive list, or [learn more about managing Addresses](../addresses.md#managing-addresses) in Craft.
+The remaining params depend upon the submitted `countryCode`—refer to the [`commerceguys/addressing` library](https://github.com/commerceguys/addressing/blob/master/src/AddressFormat/AddressField.php#L15-L25) for a comprehensive list, or [learn more about managing addresses](../addresses.md#managing-addresses) in Craft.
 :::
 
 #### Response
@@ -574,7 +574,7 @@ Deletes an address owned by the current user or another user they can edit.
 
 Param | Description
 ----- | -----------
-`addressId` | An existing Address ID, owned by the current user or a user they’re allowed to edit.
+`addressId` | An existing address ID, owned by the current user or a user they’re allowed to edit.
 
 #### Response
 
