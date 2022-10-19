@@ -1,46 +1,45 @@
 # Install Craft CMS
 
-At this point you should have a local development environment running with a database and know how to run console commands. Now it’s time to install Craft CMS.
+At this point you should have [DDEV](https://ddev.com/) 1.21.2+ installed, and know how to run console commands. Now it’s time to install Craft CMS.
 
-The first step is to decide where you want your Craft project to live. If you already have a place you like to store dev projects, create a new `tutorial/` folder in there. Otherwise, you might consider creating a `dev/tutorial/` folder within your system’s home folder,  (e.g. `~/<username>/dev/tutorial/`).
+The first step is to create a folder to contain the tutorial project, called `tutorial`. You can create it alongside your other development projects, wherever you prefer to store them.
 
-In your terminal, go to your `tutorial` folder, and run the following command to configure a new DDEV project there:
+In your terminal, run the following commands to create and go to your `tutorial` folder:
 
 ```sh
-ddev config --project-name=tutorial --project-type=php --php-version=8.0
+cd /path/to/dev/folder
+mkdir tutorial
+cd tutorial
 ```
 
-Then run the following command to download the [craftcms/craft](https://github.com/craftcms/craft/) starter project contents, and install its Composer dependencies (namely [craftcms/cms](https://github.com/craftcms/cms/)):
+Then run the following commands to configure a new DDEV project there:
 
 ```sh
-ddev composer create -y --no-scripts craftcms/craft && ddev composer run post-create-project-cmd
-```
+# configure a new DDEV project
+ddev config --project-type=craftcms
 
-At the end of that command, it will ask whether you’d like to begin the setup. Go ahead and answer `yes`. Then answer the subsequent prompts as follows:
+# download the craftcms/craft starter project files
+ddev composer create -y --no-scripts --no-install craftcms/craft
 
-- **Which database driver are you using? (mysql or pgsql)** → `mysql` (default)
-- **Database server name or IP address** → `db`
-- **Database port** → `3306` (default)
-- **Database username** → `db`
-- **Database password** → `db`
-- **Database name** → `db`
-- **Database table prefix** → _(leave blank)_
-
-Answer `yes` to the prompt on whether to install Craft now, and answer the remaining prompts as you like. The only one that matters is **Site URL**, which you should answer with `https://tutorial.ddev.site`.
-
-Now set your DDEV web server’s document root to the `web/` folder like so:
-
-```sh
-ddev config --docroot=web
-```
-
-Finally, you’re ready to start up your new web server:
-
-```sh
+# start the web server
 ddev start
+
+# install the Composer dependencies
+ddev composer update
+
+# run the Craft CMS installer
+ddev craft install
 ```
 
-In your browser, you should be able to head over to <https://tutorial.ddev.site/> and see the Craft CMS welcome template.
+Answer the questions prompted by the `ddev craft install` command, and leave `Site URL` set to the default value (`https://tutorial.ddev.site`).
+
+Once the command has finished, Craft will be fully installed. You can verify by running the following command, which will load <https://tutorial.ddev.site/> in a new browser window:
+
+```sh
+ddev launch
+```
+
+You should see Craft’s default welcome template.
 
 <BrowserShot url="https://tutorial.ddev.site/" :link="true">
 <img src="../images/welcome-template.png" alt="Screenshot of the Craft CMS welcome template" />

@@ -21,3 +21,11 @@ There are several cross-platform local development tools that package all of the
 Craft works with each of these and more, so if you already have a preferred stack that meets Craft’s requirements, feel free to stick with it. For the purposes of this tutorial, we’re going to assume you’re using [DDEV](https://ddev.com/), as it’s quickly becoming a favorite among the Craft and PHP communities.
 
 Instructions for installing DDEV are available in the [DDEV documentation](https://ddev.readthedocs.io/en/stable/).
+
+::: tip
+DDEV 1.21.2 added official support for Craft CMS, so make sure you’re running 1.21.2 or later. You can check which version you’re currently running with the following command:
+
+```sh
+ddev -v
+```
+:::

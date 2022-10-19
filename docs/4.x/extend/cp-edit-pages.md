@@ -8,7 +8,7 @@ Register two URL rules via <craft4:craft\web\UrlManager::EVENT_REGISTER_CP_URL_R
 
 ```php
 use craft\events\RegisterUrlRulesEvent;
-use craft\web\Urlmanager;
+use craft\web\UrlManager;
 use yii\base\Event;
 
 Event::on(

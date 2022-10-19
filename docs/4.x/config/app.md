@@ -265,6 +265,10 @@ return [
 ];
 ```
 
+### Log
+
+Check out the [guide on Logging](../logging.md#customizing-logs) for some detailed examples.
+
 ### Session
 
 In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
