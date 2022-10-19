@@ -1,18 +1,34 @@
+---
+related:
+  - uri: /commerce/4.x/addresses.md
+    label: Using addresses in Craft Commerce
+  - uri: /4.x/dev/controller-actions.md
+    label: Controller actions reference
+---
+
 # Addresses
 
-Addresses are a type of [element](./elements.md) used most commonly in conjunction with [Users](users.md).
+Addresses are a type of [element](./elements.md) you’ll most commonly encounter in conjunction with [Users](users.md). [Querying addresses](#querying-addresses) and working with their [field data](#fields-and-formatting) is nearly identical to the experience working with any other element type.
 
-In the control panel, the only place you will encounter an Address a User’s field layout—but [querying addresses](#querying-addresses) and working with their [field data](#fields-and-formatting) is nearly identical to the experience working with any other element type.
+For sites supporting [public registration](./user-management.md#public-registration) (like a storefront built on [Craft Commerce](/commerce/4.x/)) users can manage their own [address book](#managing-addresses).
 
-Users are also able to [manage their own addresses](#managing-addresses)—as you might expect in an [ecommerce application](/commerce/4.x/)—and plugins can 
+::: tip
+Plugins are also able to use addresses to store their own location data.
+:::
 
 ## Setup
 
-The Address management interface is optional, but can be added to the User field layout by navigating to  **Settings** → **Users** -> **User Fields**.
+The Address management interface can be added to the User field layout by navigating to  **Settings** → **Users** -> **User Fields**.
 
 ![Screenshot of User Fields’ Field Layout editor, with an empty layout and an available Addresses field under Native Fields in the sidebar](./images/user-fields.png)
 
-You can drag the native **Addresses** field into the user field layout. If you created your own “Contact Information” tab and moved **Addresses** into it, you’d see that tab and field on every user detail page:
+Create a “Contact Information” tab and drag the **Addresses** field layout element into it to make the interface available on every user detail page.
+
+::: tip
+Clicking the <icon kind="settings" /> settings icon on the address field layout element opens additional settings for the address management UI, including tools for [displaying it conditionally](./fields.md#field-layouts).
+:::
+
+Take a look at any User’s edit screen to get familiar with the interface:
 
 ![Screenshot of My Account page with a “Contact Information” tab selected and the “Addresses” field heading with “+ Add an address” just underneath it](./images/my-account-contact-information.png)
 
@@ -25,8 +41,6 @@ Back in **User Settings**, the **Address Fields** editor lets you manage the fie
 The address field layout has additional native (but optional) fields for a handful of useful attributes. Addresses—just like other element types—support custom fields for anything else you might need to store.
 
 For compatibility and localization, core address components (aside from the Country Code) can’t be separated from one another in the field layout.
-
-Once you’ve [loaded an address](#querying-addresses), you can start [working with its data](#fields-and-formatting).
 
 ## Querying Addresses
 
@@ -49,28 +63,27 @@ Addresses are just elements, so everything you know about [Element Queries](elem
 
 ### Example
 
-We can get all the addresses for a user by passing their ID to the `owner` parameter.
+Let’s output a list of the logged-in user’s addresses:
 
 1. Create an address query with `craft.addresses()`.
-2. Restrict the query to addresses owned by the current User, using the [`owner`](#owner) parameter.
-3. Fetch the addresses with `.collect()`.
+2. Restrict the query to addresses owned by the current User, with the [`owner`](#owner) parameter.
+3. Fetch the addresses with `.all()`.
 4. Loop through the addresses using a [`{% for %}` tag](https://twig.symfony.com/doc/3.x/tags/for.html).
 5. Output preformatted address details with the [`|address`](dev/filters.md#address) filter.
 
 ```twig
 {% requireLogin #}
 
-{# Prepare an element query for addresses belonging to the current user: #}
-{% set myAddressQuery = craft.addresses().owner(currentUser) %}
+{% set addresses = craft.addresses()
+  .owner(currentUser)
+  .all() %}
 
-{# Fetch the addresses as a collection: #}
-{% set addresses = myAddressQuery.collect() %}
-
-{# Loop through addresses and output each one: #}
 {% for addr in addresses %}
   <address>{{ addr|address }}</address>
 {% endfor %}
 ```
+
+We’ll expand on this example in the [Managing Addresses](#managing-addresses) section.
 
 ::: warning
 Protect your users’ personal information by carefully auditing queries and displaying addresses only on pages that [require login](./dev/tags.md#requirelogin).
@@ -1272,7 +1285,7 @@ To edit an existing address, we’ll use the `addressUid` parameter from our rou
 
 Addresses are validated like any other type of element, but some of the rules are dependent upon its localized format.
 
-You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), but additional validation of any address properties requires a [custom plugin or module](../../4.x/extend/).
+You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), but additional validation of any address properties requires a [custom plugin or module](/4.x/extend/).
 
 ::: tip
 Take a look at the [Using Events in a Custom Module](kb:custom-module-events) Knowledge Base article for a dedicated primer on module setup and events.
