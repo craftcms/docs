@@ -93,7 +93,7 @@ A tab’s settings include its name and optional conditions that determine when 
 
 - **Name** – the label displayed for the tab when it’s visible in the editor.
 - **Current User Condition** – optional rules for determining which users should see the tab in the editor. (When the tab is not displayed, its fields are hidden regardless of their individual conditions.)
-- **Entry Condition** – optional rules, based on the entry, that determine when the tab and its fields should be displayed in the editor.
+- **Element Condition** – optional rules (based on the current element) that determine when the tab and its fields should be displayed in the editor.
 
 ### Fields
 
@@ -111,7 +111,7 @@ The field’s settings let you control if and how it’s displayed:
 - **Label** – override for the label already given to that field.
 - **Instructions** – override for the instructions already given to that field.
 - **Current User Condition** – optional rules for determining which users should see the field in the editor.
-- **Entry Condition** – optional rules, based on the entry, that determine when the field should be displayed in the editor.
+- **Element Condition** – optional rules (based on the element) that determine when the field should be displayed in the editor.
 
 A field that’s required will have an asterisk (<icon kind="asterisk" />) beside the field’s name.
 
