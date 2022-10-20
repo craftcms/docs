@@ -11,7 +11,7 @@ related:
 
 Controllers are Craft’s way of talking to the outside world. Pretty much everything you do with Craft is part of a request that involves a [controller action](guide:structure-controllers)—from updating settings to rendering an entry.
 
-Most controllers and actions are carefully locked down with [permissions](../user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions, to support features like [public registration](../user-management.md#public-registration or [cart management](/docs/commerce/4.x/orders-carts.md)).
+Most controllers and actions are carefully locked down with [permissions](../user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../user-management.md#public-registration) or [cart management](/docs/commerce/4.x/orders-carts.md)).
 
 To get a sense for the kind of things you can do, jump to the [available actions](#available-actions).
 
