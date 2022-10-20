@@ -115,7 +115,7 @@ return [
 ];
 ```
 
-Craft also supports special tokens that you can use within the regular expression portion of your [named parameters](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#named-parameters):
+Craft also supports special tokens that you can use within the regular expression portion of your [named parameters](guide:runtime-routing#named-parameters):
 
 - `{handle}` – matches a field handle, volume handle, etc.
 - `{slug}` – matches an entry slug, category slug, etc.
