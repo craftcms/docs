@@ -16,7 +16,7 @@ Customer’s addresses are managed from their user account, if you’ve [added t
 
 ### How Addresses are Used
 
-Your customers will work with addresses [via the cart](#cart-addresses), or [directly](#address-book).
+Your customers will work with addresses [directly](#address-book), or [via the cart](#cart-addresses).
 
 ::: tip
 Your primary source for information about [working with Addresses](/4.x/addresses.md) is the main Craft documentation!
@@ -288,102 +288,6 @@ A full example of this can be seen in the [example templates](example-templates.
 
 ## Address Book
 
-When logged in, your customers can modify their addresses independently of the cart.
+When logged in, your customers can manage their addresses independently of the cart. Refer to the main [addresses documentation](/4.x/addresses.md) for more information and examples.
 
-Refer to the main [Address documentation](/4.x/addresses.md) for more information and examples.
-
-### Get All Current Customer Addresses
-
-You can fetch a list of addresses directly from any [User](craft4:craft\elements\User) element:
-
-::: code
-```twig
-{% set addresses = currentUser.getAddresses() %}
-```
-```php
-$addresses = Craft::$app->user->getIdentity()
-    ->getAddresses();
-```
-:::
-
-You can also do the same thing using an [address query](/4.x/addresses.md#querying-addresses) to get the addresses owned by the current user ID:
-
-::: code
-```twig
-{% set addresses = craft.addresses()
-  .ownerId(currentUser.id)
-  .all() %}
-```
-```php
-$addresses = \craft\elements\Address::find()
-    ->ownerId(Craft::$app->user->id)
-    ->all();
-```
-:::
-
-### Add or Update a Customer Address
-
-The form action for adding or updating a customer’s address is `users/save-address`.
-
-This example would add a new address for the customer with the details in the `address` form field:
-
-```twig
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('users/save-address') }}
-  {{ redirectInput('commerce/customer/addresses') }}
-  <input type="text" name="firstName" value="{{ address is defined ? address.firstName : '' }}">
-  <input type="text" name="lastName" value="{{ address is defined ? address.lastName : '' }}">
-  {# ... #}
-  <button>Save</button>
-</form>
-```
-
-To update an existing address, include its ID for the value of a `addressId` parameter:
-
-```twig{5}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('users/save-address') }}
-  {{ redirectInput('commerce/customer/addresses') }}
-  <input type="text" name="addressId" value="{{ address.id }}">
-  <input type="text" name="firstName" value="{{ address.firstName }}">
-  <input type="text" name="lastName" value="{{ address.lastName }}">
-  {# ... #}
-  <button>Save</button>
-</form>
-```
-
-Like other element types, any custom fields should be included in a `fields` array. If we had a field with a handle of `myCustomField`, for example, we’d include it like this:
-
-```twig{6}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('users/save-address') }}
-  {{ redirectInput('commerce/customer/addresses') }}
-  <input type="text" name="addressId" value="{{ address.id }}">
-  <input type="text" name="firstName" value="{{ address.firstName }}">
-  <input type="text" name="lastName" value="{{ address.lastName }}">
-  <input type="text" name="fields[myCustomField]" value="{{ address.myCustomField }}">
-  {# ... #}
-  <button>Save</button>
-</form>
-```
-
-### Delete a Customer Address
-
-The form action for deleting a customer address is `users/delete-address`. All that’s needed is the address ID:
-
-```twig
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('users/delete-address') }}
-  {{ redirectInput('commerce/customer/addresses') }}
-  {{ hiddenInput('addressId', address.id) }}
-  <button>Delete</button>
-</form>
-```
-
-::: warning
-If an address is designated for shipping or billing in a cart, edits will carry over to the cart before checkout. Deleting an address will remove it from the cart and require further user action to complete the order.
-:::
+In addition to the [natively supported](/4.x/dev/controller-actions.md#post-users-save-address) params, Commerce will look for `isPrimaryShipping` and `isPrimaryBilling`. These values determine which addresses get attached to a fresh cart when the [autoSetNewCartAddresses](./config-settings.md#autosetnewcartaddresses) option is enabled.
