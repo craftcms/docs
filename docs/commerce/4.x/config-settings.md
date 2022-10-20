@@ -165,7 +165,7 @@ Since
 
 </div>
 
-Whether the [Commerce Tab](customers.md#user-customer-info-tab) should be shown when viewing users in the control panel.
+Whether the [Commerce Tab](customers.md#customer-info-tab) should be shown when viewing users in the control panel.
 
 
 
