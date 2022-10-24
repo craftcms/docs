@@ -16,7 +16,7 @@ For sites supporting [public registration](./user-management.md#public-registrat
 Plugins are also able to use addresses to store their own location data.
 :::
 
-## Setup
+## Setup <badge text="Pro" type="edition" vertical="middle">Pro</badge>
 
 The Address management interface can be added to the User field layout by navigating to  **Settings** → **Users** -> **User Fields**.
 
