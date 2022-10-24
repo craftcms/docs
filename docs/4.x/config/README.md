@@ -1,9 +1,8 @@
 ---
-# This feature hasn't been merged yet--just stashing for later!
 related:
   - uri: https://nystudio107.com/blog/fluent-multi-environment-config-for-craft-cms-4
     label: Fluent multi-environment config for Craft CMS
-  - uri: /project-config
+  - uri: ./project-config
 ---
 
 # Configuring Craft
