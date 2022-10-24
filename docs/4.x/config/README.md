@@ -2,7 +2,7 @@
 related:
   - uri: https://nystudio107.com/blog/fluent-multi-environment-config-for-craft-cms-4
     label: Fluent multi-environment config for Craft CMS
-  - uri: ./project-config
+  - uri: /4.x/project-config.md
 ---
 
 # Configuring Craft
