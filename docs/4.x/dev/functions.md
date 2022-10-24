@@ -11,6 +11,7 @@ Function | Description
 [attribute](https://twig.symfony.com/doc/3.x/functions/attribute.html) | Accesses a dynamic attribute of a variable.
 [beginBody](#beginbody) | Outputs scripts and styles that were registered for the “begin body” position.
 [block](https://twig.symfony.com/doc/3.x/functions/block.html) | Prints a block’s output.
+[canCreateDrafts](#cancreatedrafts)<br> [canDelete](#candelete)<br> [canDeleteForSite](#candeleteforsite)<br> [canDuplicate](#canduplicate)<br> [canSave](#cansave)<br> [canView](#canview) | Check permissions for a given element.
 [ceil](#ceil) | Rounds a number up.
 [className](#classname) | Returns the fully qualified class name of a given object.
 [clone](#clone) | Clones an object.
@@ -144,6 +145,66 @@ Outputs any scripts and styles that were registered for the “begin body” pos
 Prints a block’s output.
 
 This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/3.x/functions/block.html) function.
+
+## `canCreateDrafts` <Since ver="4.3" feature="This Twig function" />
+
+Checks whether the current user (or a specific user, when provided) can create drafts from the passed element.
+
+```twig
+{% if canCreateDrafts(entry) %}
+  <a href="{{ entry.getCpEditUrl() }}">Edit</a>
+{% endif %}
+```
+
+## `canDelete` <Since ver="4.3" feature="This Twig function" />
+
+Checks whether the current user (or a specific user, when provided) can delete the passed element.
+
+```twig
+{% if canDelete(entry) %}
+  <a href="{{ entry.getCpEditUrl() }}">Edit</a>
+{% endif %}
+```
+
+## `canDeleteForSite` <Since ver="4.3" feature="This Twig function" />
+
+Checks whether the current user (or a specific user, when provided) can delete the passed element from the site it was loaded in.
+
+```twig
+{% if canDeleteForSite(entry) %}
+  <a href="{{ entry.getCpEditUrl() }}">Edit</a>
+{% endif %}
+```
+
+## `canDuplicate` <Since ver="4.3" feature="This Twig function" />
+
+Checks whether the current user (or a specific user, when provided) can duplicate the passed element.
+
+```twig
+{% if canDuplicate(entry) %}
+  <a href="{{ entry.getCpEditUrl() }}">Edit</a>
+{% endif %}
+```
+
+## `canSave` <Since ver="4.3" feature="This Twig function" />
+
+Checks whether the current user (or a specific user, when provided) can save the passed element.
+
+```twig
+{% if canSave(entry) %}
+  <a href="{{ entry.getCpEditUrl() }}">Edit</a>
+{% endif %}
+```
+
+## `canView` <Since ver="4.3" feature="This Twig function" />
+
+Checks whether the current user (or a specific user, when provided) can view the passed element within the control panel.
+
+```twig
+{% if canView(entry) %}
+  <a href="{{ entry.getCpEditUrl() }}">Edit</a>
+{% endif %}
+```
 
 ## `ceil`
 
