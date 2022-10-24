@@ -138,7 +138,7 @@ return [
 ];
 ```
 
-If your Craft installation has multiple sites, you can create site-specific URL rules by placing them in a sub-array, and set the key to the site’s handle. Craft will take care of determining the site’s base URL via this handle, so you don't need to declare it as part of the route.
+If your Craft installation has multiple sites, you can create site-specific URL rules by placing them in a sub-array, and set the key to the site’s handle. Craft will take care of determining the site’s base URL via this handle, so you don’t need to declare it as part of the route.
 
 ```php
 return [
