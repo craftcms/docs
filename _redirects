@@ -41,6 +41,7 @@
 /docs/4.x/upgrading.html /docs/4.x/upgrade.html
 /docs/4.x/config/config-settings.html /docs/4.x/config/general.html
 /docs/4.x/config/db-settings.html /docs/4.x/config/db.html
+/docs/4.x/config/aliases.html /docs/4.x/config#aliases
 # 2.x plugin index is empty—forward to introduction
 /docs/2.x/plugins /docs/2.x/plugins/introduction.html
 
