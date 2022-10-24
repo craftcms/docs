@@ -1079,7 +1079,7 @@ We can instantiate and use that just like the postal label formatter:
 
 Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](./dev/controller-actions.md).
 
-Craft doesn’t automatically give Addresses their own URLs, though—so it’s up to you to define a routing scheme for them via `routes.php`. We’ll cover each of these three routes in the following sections:
+Craft doesn’t automatically give Addresses their own URLs, though—so it’s up to you to define a [routing scheme](./routing.md#advanced-routing-with-url-rules) for them via `routes.php`. We’ll cover each of these three routes in the following sections:
 
 ```php
 <?php
@@ -1288,10 +1288,10 @@ Addresses are validated like any other type of element, but some of the rules ar
 You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), but additional validation of any address properties requires a [custom plugin or module](/4.x/extend/).
 
 ::: tip
-Take a look at the [Using Events in a Custom Module](kb:custom-module-events) Knowledge Base article for a dedicated primer on module setup and events.
+Take a look at the [Using Events in a Custom Module](kb:custom-module-events) article for a dedicated primer on module setup and events.
 :::
 
-Validation rules are added via the `Model::EVENT_DEFINE_RULES` event:
+[Validation rules](guide:input-validation) are added via the `Model::EVENT_DEFINE_RULES` event:
 
 ```php
 use yii\base\Event;
@@ -1313,4 +1313,4 @@ Event::on(
 );
 ```
 
-Errors are available through the same `address.getErrors()` method used in other [action examples](./dev/controller-actions.md#models-and-validation), regardless of whether they were produced by native rules or ones you added.
+Errors are available through the same `address.getErrors()` method used in other action and model validation [examples](./dev/controller-actions.md#models-and-validation), regardless of whether they were produced by built-in rules or ones you added.

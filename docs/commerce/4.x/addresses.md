@@ -10,7 +10,7 @@ Addresses are now a native part of Craft! We recommend reviewing the [main docum
 
 Commerce manages shipping and billing information using Craft’s <craft4:craft\elements\Address> element type.
 
-In the control panel, you’ll encounter addresses within the context of orders and users. A [Store Location](#store-address) address may also be entered at **Commerce** → **Store Settings** → **Store** → **Store Location**.
+In the control panel, you’ll encounter addresses within the context of [orders](./orders-carts.md) and [users](/4.x/users.md). A [Store Location](#store-address) address may also be entered at **Commerce** → **Store Settings** → **Store** → **Store Location**.
 
 Customer’s addresses are managed from their user account, if you’ve [added the native Addresses field](/4.x/addresses.md#setup) to Users’ field layout. Commerce also inserts a **Commerce Settings** field into the [address field layout](/4.x/addresses.md#native-and-custom-fields)) with primary shipping and billing controls.
 
