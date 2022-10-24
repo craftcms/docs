@@ -76,20 +76,20 @@ When you point your browser to `https://my-project.tld/blog/archive/2018`, it wi
 ```twig
 {# Fetch posts in the specified `year`: #}
 {% set posts = craft.entries()
-    .section('posts')
-    .postDate([
-        'and',
-        ">= #{year}",
-        "< #{year + 1}",
-    ])
-    .all() %}
+  .section('posts')
+  .postDate([
+    'and',
+    ">= #{year}",
+    "< #{year + 1}",
+  ])
+  .all() %}
 
 {% for post in posts %}
-    <article>
-        <h2>{{ post.title }}</h2>
-        {{ post.description | md }}
-        <a href="{{ post.url }}">{{ 'Read More' | t }}</a>
-    </article>
+  <article>
+    <h2>{{ post.title }}</h2>
+    {{ post.description | md }}
+    <a href="{{ post.url }}">{{ 'Read More' | t }}</a>
+  </article>
 {% endfor %}
 ```
 
@@ -130,11 +130,11 @@ In addition to routes defined via the control panel, you can define [URL rules](
 
 ```php
 return [
-    // Route blog/archive/YYYY to a controller action
-    'blog/archive/<year:\d{4}>' => 'controller/action/path',
+  // Route blog/archive/YYYY to a controller action
+  'blog/archive/<year:\d{4}>' => 'controller/action/path',
 
-    // Route blog/archive/YYYY to a template
-    'blog/archive/<year:\d{4}>' => ['template' => 'blog/_archive'],
+  // Route blog/archive/YYYY to a template
+  'blog/archive/<year:\d{4}>' => ['template' => 'blog/_archive'],
 ];
 ```
 
@@ -142,9 +142,9 @@ If your Craft installation has multiple sites, you can create site-specific URL 
 
 ```php
 return [
-    'siteHandle' => [
-        'blog/archive/<year:\d{4}>' => 'controller/action/path',
-    ],
+  'siteHandle' => [
+    'blog/archive/<year:\d{4}>' => 'controller/action/path',
+  ],
 ];
 ```
 
@@ -156,8 +156,8 @@ A subset of the [tokens](#available-tokens) above can be used within the regular
 
 ```php
 return [
-    // Be aware that URIs matching an existing element route will be picked up by step #2, above!
-    'blog/<entrySlug:{slug}>' => 'controller/action/path',
+  // Be aware that URIs matching an existing element route will be picked up by step #2, above!
+  'blog/<entrySlug:{slug}>' => 'controller/action/path',
 ];
 ```
 
@@ -195,26 +195,26 @@ use craft\web\Controller;
 
 class BlogController extends Controller
 {
-    /**
-     * Create a comment for the specified blog post ID.
-     * 
-     * @param int $postId Blog Post ID defined by route parameters.
-     */
-    public function actionComment(int $postId)
-    {
-        $this->requirePostRequest();
+  /**
+   * Create a comment for the specified blog post ID.
+   * 
+   * @param int $postId Blog Post ID defined by route parameters.
+   */
+  public function actionComment(int $postId)
+  {
+    $this->requirePostRequest();
 
-        // Use the ID to look up the entry...
-        $entry = Entry::find()
-            ->section('posts')
-            ->id($postId)
-            ->one();
+    // Use the ID to look up the entry...
+    $entry = Entry::find()
+      ->section('posts')
+      ->id($postId)
+      ->one();
 
-        // ...and grab the comment content from the request:
-        $comment = Craft::$app->getRequest()->getBodyParam('comment');
+    // ...and grab the comment content from the request:
+    $comment = Craft::$app->getRequest()->getBodyParam('comment');
 
-        // ...
-    }
+    // ...
+  }
 }
 ```
 
@@ -222,13 +222,13 @@ This rule only serves as an alias to the controller action, which will always be
 
 ```twig
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('my-module/blog/comment') }}
-    {{ hiddenInput('postId', entry.id) }}
+  {{ csrfInput() }}
+  {{ actionInput('my-module/blog/comment') }}
+  {{ hiddenInput('postId', entry.id) }}
 
-    <textarea name="comment"></textarea>
+  <textarea name="comment"></textarea>
 
-    <button>Post Comment</button>
+  <button>Post Comment</button>
 </form>
 ```
 
