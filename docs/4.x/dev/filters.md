@@ -11,6 +11,7 @@ Filter | Description
 [atom](#atom) | Converts a date to an ISO-8601 timestamp.
 [attr](#attr) | Modifies an HTML tag’s attributes.
 [batch](https://twig.symfony.com/doc/3.x/filters/batch.html) | Batches items in an array.
+[boolean](#boolean) | Coerces the passed value to a boolean.
 [camel](#camel) | Formats a string into camelCase.
 [capitalize](https://twig.symfony.com/doc/3.x/filters/capitalize.html) | Capitalizes the first character of a string.
 [column](#column) | Returns the values from a single property or key in an array.
@@ -30,6 +31,7 @@ Filter | Description
 [filesize](#filesize) | Formats a number of bytes into something else.
 [filter](#filter) | Filters the items in an array.
 [first](https://twig.symfony.com/doc/3.x/filters/first.html) | Returns the first character/item of a string/array.
+[float](#float) | Coerces the passed value to a float.
 [format](https://twig.symfony.com/doc/3.x/filters/format.html) | Formats a string by replacing placeholders.
 [group](#group) | Groups items in an array.
 [hash](#hash) | Prefixes a string with a keyed-hash message authentication code (HMAC).
@@ -37,6 +39,7 @@ Filter | Description
 [id](#id) | Normalizes an element ID into only alphanumeric characters, underscores, and dashes.
 [index](#index) | Indexes the items in an array.
 [indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
+[integer](#integer) | Coerces the passed value to an integer.
 [intersect](#intersect) | Returns the intersecting items of two arrays.
 [join](https://twig.symfony.com/doc/3.x/filters/join.html) | Concatenates multiple strings into one.
 [json_decode](#json_decode) | JSON-decodes a value.
@@ -80,6 +83,7 @@ Filter | Description
 [sort](https://twig.symfony.com/doc/3.x/filters/sort.html) | Sorts an array.
 [spaceless](https://twig.symfony.com/doc/3.x/filters/spaceless.html) | Removes whitespace between HTML tags.
 [split](https://twig.symfony.com/doc/3.x/filters/split.html) | Splits a string by a delimiter.
+[string](#string) | Coerces the passed value to a string.
 [striptags](https://twig.symfony.com/doc/3.x/filters/striptags.html) | Strips SGML/XML tags from a string.
 [time](#time) | Formats a time.
 [timestamp](#timestamp) | Formats a human-readable timestamp.
@@ -241,6 +245,10 @@ Attribute values are HTML-encoded automatically:
 {# Output: <input type="submit" value="Register &amp; Subscribe →"> #}
 ```
 :::
+
+## `boolean` <Since ver="4.3" feature="This Twig filter" />
+
+Coerces the passed value to a boolean using PHP’s [`boolval()`](https://www.php.net/manual/en/function.boolval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
 ## `camel`
 
@@ -482,6 +490,10 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 {# Result: ['bar', 'baz'] #}
 ```
 
+## `float` <Since ver="4.3" feature="This Twig filter" />
+
+Coerces the passed value to a float using PHP’s [`floatval()`](https://www.php.net/manual/en/function.floatval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
+
 ## `group`
 
 Groups items in an array by a the results of an arrow function.
@@ -566,6 +578,10 @@ Returns the index of a passed-in value within an array, or the position of a pas
   <p>There <em>is</em> an “i” in “team”! It’s at position {{ position + 1 }}.</p>
 {% endif %}
 ```
+
+## `integer` <Since ver="4.3" feature="This Twig filter" />
+
+Coerces the passed value to a integer using PHP’s [`intval()`](https://www.php.net/manual/en/function.intval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
 ## `intersect`
 
@@ -1133,6 +1149,10 @@ Returns a string formatted in “snake_case”.
 {{ 'foo bar'|snake }}
 {# Output: foo_bar #}
 ```
+
+## `string` <Since ver="4.3" feature="This Twig filter" />
+
+Coerces the passed value to a string using PHP’s [`strval()`](https://www.php.net/manual/en/function.strval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
 ## `time`
 
