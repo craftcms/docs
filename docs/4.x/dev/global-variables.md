@@ -32,7 +32,10 @@ Variable | Description
 [SORT_REGULAR](#sort-regular) | The `SORT_REGULAR` PHP constant.
 [SORT_STRING](#sort-string) | The `SORT_STRING` PHP constant.T
 [systemName](#systemname) | The system name.
+[today](#today) | Midnight of the current day.
+[tomorrow](#tomorrow) | Midnight, tomorrow.
 [view](#view) | The app’s `view` component.
+[yesterday](#yesterday) | Midnight, yesterday.
 
 ## `craft`
 
@@ -233,9 +236,21 @@ Twig-facing copy of the `SORT_STRING` PHP constant.
 
 The System Name, as defined in Settings → General.
 
+## `today` <Since ver="4.3" feature="This global variable" />
+
+A [DateTime](http://php.net/manual/en/class.datetime.php) object in the system’s timezone, set to midnight (00:00 in 24-hour time, or 12:00AM in 12-hour) of the _current_ day.
+
+## `tomorrow` <Since ver="4.3" feature="This global variable" />
+
+A [DateTime](http://php.net/manual/en/class.datetime.php) object in the system’s timezone, set to midnight (00:00 in 24-hour time, or 12:00AM in 12-hour) of the _next_ day.
+
 ## `view`
 
 A reference to the <craft4:craft\web\View> instance that is driving the template.
+
+## `yesterday` <Since ver="4.3" feature="This global variable" />
+
+A [DateTime](http://php.net/manual/en/class.datetime.php) object in the system’s timezone, set to midnight (00:00 in 24-hour time, or 12:00AM in 12-hour) of the _previous_ day.
 
 ## Global Set Variables
 
