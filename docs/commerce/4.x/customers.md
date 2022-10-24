@@ -31,17 +31,22 @@ A customer with saved login information is considered a [credentialed](/4.x/user
 
 If someone visits the store and checks out as a guest, a new inactive user is created and related to the order—and any future orders using the same email address will be consolidated under that user.
 
-### User Checkout
+### User Checkout <badge text="Pro" type="edition" vertical="middle">Pro</badge>
 
 Logged in customers are bound to their cart the moment it is created.
 
-### Registration at Checkout <badge text="Pro" type="edition" vertical="middle">Pro</badge>
+A guest can register for an account before or after checkout using a standard [Craft user registration form](kb:front-end-user-accounts#registration-form). This workflow may look a bit different depending on your configuration:
 
-A guest can register for an account before or after checkout using the normal [Craft user registration form](kb:front-end-user-accounts).
+Setting | Result
+------- | ------
+<config4:useEmailAsUsername> | Only requires an email address to register; can be pre-filled if the customer already set an email on their cart (as this creates an inactive user, behind the scenes).
+<config4:deferPublicRegistrationPassword> | A password is set only after activating their account (typically only used in combination with [email verification](/4.x/user-management.md#public-registration)).
 
-You can also offer the option to complete registration _at_ checkout by setting the `registerUserOnOrderComplete` param when [updating a cart](./dev/controller-actions.md#post-cart-update-cart) or [submitting payment](./dev/controller-actions.md#post-payments-pay).
+#### Registration at Checkout
 
-If a customer chooses to register an account on order completion, an activation link is sent to the email on file.
+You can also offer the option to initiate registration _at_ checkout by sending the `registerUserOnOrderComplete` param when [updating a cart](./dev/controller-actions.md#post-cart-update-cart) or [submitting payment](./dev/controller-actions.md#post-payments-pay).
+
+If a customer chooses to register an account upon order completion, an activation link is sent to the email on file.
 
 ::: tip
 The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Create an account” checkbox at the payment stage.
