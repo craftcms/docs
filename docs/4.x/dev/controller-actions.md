@@ -604,7 +604,7 @@ A “[no-op](https://en.wikipedia.org/wiki/NOP_(code))” action provided for au
 
 #### Response
 
-The response will be successful (but empty) in all but “exceptional” situations, like an issue connecting to the database.
+The response will be successful (but empty) in all but “exceptional” situations, like an issue connecting to the database. Read more about [the criteria](kb:configuring-load-balanced-environments#health-check-endpoint) for a successful health check.
 
 <span class="croker-table">
 
