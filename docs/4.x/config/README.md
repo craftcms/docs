@@ -106,7 +106,7 @@ return GeneralConfig::create()
 Each option becomes a method call, accepting the same values that you would provide in a config map. The modified configuration object is returned to allow chaining.
 
 ::: warning
-Fluent config is currently only available for _general_ and _database_ settings, and not all plugins support it. When in doubt, use a config map!
+Fluent config is currently only available for _general_ and _database_ settings, and unsupported in plugins. When in doubt, use a config map!
 :::
 
 ### Types and Values
