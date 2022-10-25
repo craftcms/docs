@@ -312,6 +312,7 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [entries/save-entry](#post-entries-save-entry) | Creates or updates an entry.
 <badge vertical="baseline" type="verb">POST</badge> [users/login](#post-users-login) | Logs a user in.
 <badge vertical="baseline" type="verb">POST</badge> [users/save-user](#post-users-save-user) | Creates or updates a user account.
+<badge vertical="baseline" type="verb">POST</badge> [users/upload-user-photo](#post-users-upload-user-photo) | Sets a user’s photo.
 <badge vertical="baseline" type="verb">POST</badge> [users/send-password-reset-email](#post-users-send-password-reset-email) | Sends a password reset email.
 <badge vertical="baseline" type="verb">POST</badge> [users/set-password](#post-users-set-password) | Sets a new password on a user account.
 <badge vertical="baseline" type="verb">POST</badge> [users/save-address](#post-users-save-address) | Create or update an [address](../addresses.md) element.
@@ -456,6 +457,37 @@ State   | Standard | Ajax
 ------- | -------- | ----
 <check-mark/> | 302 redirect response per the hashed `redirect` param, or the <config4:activateAccountSuccessPath> config setting if email verification is not required. | 200 JSON response with `id` and `csrfTokenValue` keys.
 <x-mark/> | None; the request will be routed per the URI. A `user` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getFirstError()](yii2:yii\base\Model::getFirstError()), etc. | 400 JSON response with an `errors` key.
+
+</span>
+
+
+### <badge vertical="baseline" type="verb">POST</badge> `users/upload-user-photo`
+
+Sets a user’s photo to an uploaded image.
+
+::: tip
+You can update a user’s other properties and fields at the same time as uploading a photo, via [`users/save-user`](#post-users-save-user).
+:::
+
+#### Supported Params
+
+The following params can be sent with the request:
+
+Param | Description
+----- | -----------
+`userId` | ID of the user. Required, pass `{{ currentUser.id }}` to change a user’s own photo.
+`photo` | Uploaded image. Use `<input type="file">`.
+
+#### Response
+
+The output depends on whether the upload was successful. Only JSON is returned, and the request must include the `Accept: application/json` header.
+
+<span class="croker-table">
+
+State   | Ajax
+------- | ----
+<check-mark/> | 200 JSON response with `html` and `photoId` <Since ver="4.3" feature="The photoId response property" /> properties.
+<x-mark/> | 400 JSON response with a `message` key.
 
 </span>
 
