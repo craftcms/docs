@@ -22,7 +22,7 @@ This example creates a form for each available plan, posting the selection to th
 {% for plan in plans %}
   <form method="post">
     {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/subscriptions/subscribe') }}
+    {{ actionInput('commerce/subscriptions/subscribe') }}
     {{ hiddenInput('planUid', plan.uid|hash) }}
 
     <h4>{{ plan.name }}</h4>
@@ -62,7 +62,7 @@ To cancel a subscription you can use the following template. It assumes the `sub
 ```twig
 <form method="post">
   {{ csrfInput() }}
-  {{ hiddenInput('action', 'commerce/subscriptions/cancel') }}
+  {{ actionInput('commerce/subscriptions/cancel') }}
   {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
   {{ redirectInput('shop/services') }}
 
@@ -85,7 +85,7 @@ To switch a subscription plan you can use the following template. It assumes tha
   <strong>Switch to {{ plan.name }}</strong>
   <form method="post">
     {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/subscriptions/switch') }}
+    {{ actionInput('commerce/subscriptions/switch') }}
     {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
     {{ hiddenInput('planUid', plan.uid|hash) }}
 
@@ -107,7 +107,7 @@ To reactivate a subscription plan you can use the following template. It assumes
 {% if subscription.canReactivate() %}
   <form method="post">
     {{ csrfInput() }}
-    {{ hiddenInput('action', 'commerce/subscriptions/reactivate') }}
+    {{ actionInput('commerce/subscriptions/reactivate') }}
     {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
 
     <button class="button link">Reactivate</button>

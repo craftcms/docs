@@ -17,20 +17,18 @@ Carts and orders are both listed on the Orders index page in the control panel, 
 
 Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](config-settings.md#purgeInactiveCarts) and [`purgeInactiveCartsDuration`](config-settings.md#purgeInactiveCartsDuration) settings.
 
-On the front end, cart interactions happen via the `commerce/cart/update-cart` form action.
-
-Here’s what we’ll cover in the sections that follow:
+Let’s go over a few common actions you may want to perform on a cart:
 
 - [Fetching a Cart](#fetching-a-cart)
 - [Adding Items to a Cart](#adding-items-to-a-cart)
 - [Working with Line Items](#working-with-line-items)
 - [Loading a Cart](#loading-a-cart)
+- [Using Custom Fields](#storing-data-in-custom-fields)
 - [Forgetting a Cart](#forgetting-a-cart)
 
 More topics are covered in separate pages:
 
 - [Addresses](addresses.md)
-- [Updating Custom Fields in a Cart](update-cart-custom-fields.md)
 - [cart.availableShippingMethodOptions](shipping.md#cart-availableshippingmethodoptions)
 
 ### Fetching a Cart
@@ -44,41 +42,21 @@ In your templates, you can get the current user’s cart like this:
 {% set cart = craft.commerce.getCarts().getCart() %}
 ```
 
-You could also fetch the cart via Ajax. This example could be added to a Twig template, and outputs the cart data to the browser’s development console:
+The current cart is also available via Ajax:
 
-::: code
-```twig jQuery
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-$.ajax({
-  url: '',
-  data: {
-    '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
-    'action': 'commerce/cart/get-cart'
+```js
+fetch('/actions/commerce/cart/get-cart', {
+  headers: {
+    'Accept': 'application/json',
   },
-  success: function(response) {
-    console.log(response);
-  },
-  dataType: 'json'
-});
-</script>
-```
-```twig Axios
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
-axios.get('', {
-  params: {
-    '{{ craft.config.csrfTokenName|e('js') }}': '{{ craft.request.csrfToken|e('js') }}',
-    action: 'commerce/cart/get-cart'
-  }
-}).then((response) => {
-  console.log(response.data);
-});
-</script>
-```
-:::
+})
+  .then(r => r.json())
+  .then(console.log);
 
-Either of the examples above will generate a new cart cookie if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
+// -> { cart: { ... } }
+```
+
+Either of the examples above will generate a new cart _cookie_ if none exists. However, Commerce will only create an order element when a change is made to the cart—this prevents runaway creation of empty carts for guests or bots who happen to request a page that displays some cart information like the current item quantity or total.
 
 To see what cart information you can use in your templates, take a look at the [Order](commerce4:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
 
@@ -88,7 +66,7 @@ To see what cart information you can use in your templates, take a look at the [
 
 </toggle-tip>
 
-Once a cart’s completed and turned into an order, calling `craft.commerce.carts.cart` again will return a new cart.
+Once a cart’s completed and turned into an order, calling `craft.commerce.carts.cart` starts this process over.
 
 ### Adding Items to a Cart
 
@@ -121,7 +99,7 @@ If the product has multiple variants, you could provide a dropdown menu to allow
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
   {{ redirectInput('shop/cart') }}
-  {{ hiddenInput('successMessage', 'Added ' ~ product.title ~ ' to cart.'|hash) }}
+  {{ successMessageInput('Added ' ~ product.title ~ ' to cart.') }}
   {{ hiddenInput('qty', 1) }}
 
   <select name="purchasableId">
@@ -149,7 +127,7 @@ You can add multiple purchasables to the cart in a single request using a `purch
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
   {{ redirectInput('shop/cart') }}
-  {{ hiddenInput('successMessage', 'Products added to the cart.'|hash) }}
+  {{ successMessageInput('Products added to the cart.') }}
   {% for variant in product.variants %}
      {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
      {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
@@ -431,6 +409,33 @@ You could then loop over the line items in those older carts and allow the custo
 </form>
 ```
 
+### Storing Data in Custom Fields
+
+Like any other type of [element](/4.x/elements.md), orders can have custom fields associated with them via a field layout. To customize the fields available on carts and orders, visit **Commerce** &rarr; **System Settings** &rarr; **Order Fields**.
+
+Custom fields are perfect for storing information about an order that falls outside [line item options or notes](orders-carts.md#line-item-options-and-notes).
+
+::: tip
+Now that [Addresses](/4.x/addresses.md#setup) are stored as elements, they support custom fields, too!
+:::
+
+You can update custom fields on a cart by posting data to the [`commerce/cart/update-cart`](dev/controller-actions.md#post-cart-update-cart) action under a `fields` key:
+
+```twig
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ redirectInput('shop/cart') }}
+
+  <label>
+    Gift Message
+    {{ input('text', 'fields[giftMessage]', cart.giftMessage) }}
+  </label>
+
+  <button>Update Cart</button>
+</form>
+```
+
 ### Forgetting a Cart
 
 A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart.
@@ -656,7 +661,7 @@ This example clears all the notices on the cart:
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
-  {{ hiddenInput('successMessage', 'All notices dismissed'|hash) }}
+  {{ successMessageInput('All notices dismissed') }}
   {{ hiddenInput('clearNotices') }}
   <button>Dismiss</button>
 </form>

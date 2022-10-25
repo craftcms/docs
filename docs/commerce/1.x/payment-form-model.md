@@ -55,7 +55,7 @@ Validation: [Luhn algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
 Below is an example of a payment form using the payment form model.
 
 ```twig
-<form method="POST" class="form-horizontal">
+<form method="post" class="form-horizontal">
 <input type="hidden" name="action" value="commerce/payments/pay"/>
 <input type="hidden" name="redirect" value="/commerce/customer/order?number={number}"/>
 <input type="hidden" name="cancelUrl" value="/commerce/checkout/payment"/>

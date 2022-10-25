@@ -92,8 +92,8 @@ Returns all payment gateways available to the customer.
 {% if gateways|length %}
 <form method="post">
   {{ csrfInput() }}
-  {{ hiddenInput('action', 'commerce/cart/update-cart') }}
-  {{ hiddenInput('redirect', 'commerce/checkout/payment') }}
+  {{ actionInput('commerce/cart/update-cart') }}
+  {{ redirectInput('commerce/checkout/payment') }}
 
   <label for="gatewayId">Payment Method</label>
   <select name="gatewayId" id="gatewayId">

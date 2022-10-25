@@ -135,7 +135,7 @@ Once the [allowCheckoutWithoutPayment](config-settings.md#allowcheckoutwithoutpa
 ```twig
 <form method="post">
   {{ csrfInput() }}
-  {{ hiddenInput('action', 'commerce/cart/complete') }}
+  {{ actionInput('commerce/cart/complete') }}
   {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
 
   <button>Commit to buy</button>
@@ -224,7 +224,7 @@ Here we’re pretending the relevant order number is 12345, the customer’s ema
 
 <form method="post">
   {{ csrfInput() }}
-  {{ hiddenInput('action', 'commerce/payments/pay') }}
+  {{ actionInput('commerce/payments/pay') }}
   {{ redirectInput('/shop/customer/order?number='~cart.number~'&success=true') }}
   {{ hiddenInput('cancelUrl', cancelUrl) }}
   {{ hiddenInput('email', email) }}

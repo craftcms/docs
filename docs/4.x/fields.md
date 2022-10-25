@@ -72,7 +72,8 @@ Everything in Craft that has content associated with it will provide a field lay
 - [Assets](assets.md) use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
 - [Categories](categories.md) use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
 - [Tags](tags.md) use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
-- [Users](users.md) all share a single field layout defined in **Settings** → **Users** → **Fields**.
+- [Users](users.md) all share a single field layout defined in **Settings** → **Users** → **User Fields**.
+- [Addresses](addresses.md) also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
 
 The field layout editor works the same way regardless of which content type you’re looking at:
 
@@ -92,7 +93,7 @@ A tab’s settings include its name and optional conditions that determine when 
 
 - **Name** – the label displayed for the tab when it’s visible in the editor.
 - **Current User Condition** – optional rules for determining which users should see the tab in the editor. (When the tab is not displayed, its fields are hidden regardless of their individual conditions.)
-- **Entry Condition** – optional rules, based on the entry, that determine when the tab and its fields should be displayed in the editor.
+- **Element Condition** – optional rules (based on the current element) that determine when the tab and its fields should be displayed in the editor.
 
 ### Fields
 
@@ -110,7 +111,7 @@ The field’s settings let you control if and how it’s displayed:
 - **Label** – override for the label already given to that field.
 - **Instructions** – override for the instructions already given to that field.
 - **Current User Condition** – optional rules for determining which users should see the field in the editor.
-- **Entry Condition** – optional rules, based on the entry, that determine when the field should be displayed in the editor.
+- **Element Condition** – optional rules (based on the element) that determine when the field should be displayed in the editor.
 
 A field that’s required will have an asterisk (<icon kind="asterisk" />) beside the field’s name.
 

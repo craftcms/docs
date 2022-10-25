@@ -36,7 +36,7 @@ Including an `address[id]` param with a valid address ID that belongs to the cur
 ## Deleting a customers address
 
 ```twig
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/customerAddresses/delete">
   <input type="hidden" name="redirect" value="commerce/customer/addresses">
   <input type="hidden" name="id" value="{{ address.id }}"/>

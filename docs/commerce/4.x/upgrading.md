@@ -101,11 +101,11 @@ Please review your tax and shipping zones. We encourage you to use standardized 
 
 ## Address Management
 
-Commerce-specific Address models are now Craft [Address](craft4:craft\elements\Address) elements.
+Commerce’s `Address` models have been replaced by the new Craft-native [Address](/4.x/addresses.md) element.
 
 This will almost certainly require changes to your front-end templates, though it comes with several benefits:
 
-- locale-specific address validation (see [Removing Commerce Address Validation](https://craftcms.com/knowledge-base/removing-commerce-address-validation))
+- locale-specific address validation (see [Removing Commerce Address Validation](kb:removing-commerce-address-validation))
 - better address formatting defaults
 - easier address format customization
 - custom address fields can be managed in field layouts—so no more need for `custom1`, `custom2`, etc.
@@ -114,37 +114,15 @@ If store managers had been editing user addresses directly from their profile pa
 
 ### Order Addresses
 
-Each address can only have a single owner, whether that’s an order or a user.
-
-An order’s addresses (both estimated and normal billing + shipping) belong solely to that order. If a customer designates one of their saved addresses for an order’s shipping or billing, the address will be cloned to that order with references to the original address element stored in `order.sourceBillingAddressId` and `order.sourceShippingAddressId`.
+Refer to the [addresses](./addresses.md) page for information on how to handle setting address information on orders in Commerce 4.
 
 ::: warning
-Addresses are no longer automatically added to a customer’s address book when an order is completed, and a user must be logged in to be able to save an address to their address book. `makePrimaryBillingAddress` and `makePrimaryShippingAddress` will not have any effect for a user that’s not logged in.
+Addresses are no longer automatically added to a customer’s address book when an order is completed, and a user must be logged in to be able to [save an address to their address book](/4.x/addresses.md#managing-addresses). `makePrimaryBillingAddress` and `makePrimaryShippingAddress` will have no effect for guests.
 :::
 
 ### User Addresses
 
-You can use [User::getAddresses()](craft4:craft\elements\User::getAddresses()) to fetch any user’s addresses, including the currently-logged-in user:
-
-::: code
-```twig
-{% set userAddresses = currentUser.getAddresses() %}
-```
-```php
-$userAddresses = Craft::$app->getUser()->getIdentity()->getAddresses();
-```
-:::
-
-If you’d like to save a new address to a user’s address book, you must provide an `ownerId`:
-
-```php{3-4}
-$address = new \craft\elements\Address();
-$address->setAttributes($addressData);
-// Designate the logged-in user as the owner of this address
-$address->ownerId = Craft::$app->getUser()->getIdentity()->id;
-
-Craft::$app->getElements()->saveElement($address);
-```
+Learn about address management in the [main address documentation](/4.x/addresses.md).
 
 ### Store Address
 
@@ -286,7 +264,6 @@ Check out the [example templates](example-templates.md)—they’re compatible w
 If you’re providing a way for customers to save their addresses on the front end, you’ll need to make a few adjustments:
 
 - Address field names will need to be [updated](#address-template-changes), where any custom field names should follow the `fields[myFieldName]` format used by other element types.
-- You must specify the user’s ID in an `ownerId` field for the address you’re saving.
 - If you’re saving an _existing_ address, as opposed to a new one, you’ll need to reference it via the `addressId` param instead of `id`.
 - The form action should be `users/save-address` rather than `commerce/customer-addresses/save`.
 - The (optional) `makePrimaryShippingAddress` and `makePrimaryBillingAddress` params are now `isPrimaryShipping` and `isPrimaryBilling`.

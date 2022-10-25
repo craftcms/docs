@@ -1,3 +1,7 @@
+---
+updatedVersion: commerce/4.x/orders-carts.md#storing-data-in-custom-fields
+---
+
 # Update Cart Custom Fields
 
 Carts ([Orders](orders-carts.md)) are [Element Types](https://craftcms.com/docs/3.x/extend/element-types.html) and can have custom fields associated with them.
