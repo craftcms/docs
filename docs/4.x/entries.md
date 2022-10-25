@@ -380,6 +380,7 @@ Possible values include:
 | - | -
 | `'2018-04-01'` | that were posted after 2018-04-01.
 | a [DateTime](https://php.net/class.datetime) object | that were posted after the date represented by the object.
+| `now`/`today`/`tomorrow`/`yesterday` | that were posted after midnight of the specified relative date.
 
 
 
@@ -644,6 +645,7 @@ Possible values include:
 | - | -
 | `'2018-04-01'` | that were posted before 2018-04-01.
 | a [DateTime](https://php.net/class.datetime) object | that were posted before the date represented by the object.
+| `now`/`today`/`tomorrow`/`yesterday` | that were posted before midnight of specified relative date.
 
 
 
@@ -701,8 +703,9 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `'>= 2018-04-01'` | that were created on or after 2018-04-01.
-| `'< 2018-05-01'` | that were created before 2018-05-01
+| `'< 2018-05-01'` | that were created before 2018-05-01.
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01.
+| `now`/`today`/`tomorrow`/`yesterday` | that were created at midnight of the specified relative date.
 
 
 
@@ -740,8 +743,9 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `'>= 2018-04-01'` | that were updated on or after 2018-04-01.
-| `'< 2018-05-01'` | that were updated before 2018-05-01
+| `'< 2018-05-01'` | that were updated before 2018-05-01.
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01.
+| `now`/`today`/`tomorrow`/`yesterday` | that were updated at midnight of the specified relative date.
 
 
 
@@ -968,6 +972,7 @@ Possible values include:
 | `'>= 2020-04-01'` | that will expire on or after 2020-04-01.
 | `'< 2020-05-01'` | that will expire before 2020-05-01
 | `['and', '>= 2020-04-04', '< 2020-05-01']` | that will expire between 2020-04-01 and 2020-05-01.
+| `now`/`today`/`tomorrow`/`yesterday` | that expire at midnight of the specified relative date.
 
 
 
@@ -1365,8 +1370,9 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `'>= 2018-04-01'` | that were posted on or after 2018-04-01.
-| `'< 2018-05-01'` | that were posted before 2018-05-01
+| `'< 2018-05-01'` | that were posted before 2018-05-01.
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were posted between 2018-04-01 and 2018-05-01.
+| `now`/`today`/`tomorrow`/`yesterday` | that were posted at midnight of the specified relative date.
 
 
 

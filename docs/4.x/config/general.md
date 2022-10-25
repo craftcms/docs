@@ -4804,5 +4804,100 @@ CRAFT_SOFT_DELETE_DURATION=0
 
 
 
+## Users
+
+### `extraLastNamePrefixes`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)[]
+
+Default value
+:  `[]`
+
+Defined by
+:  [GeneralConfig::$extraLastNamePrefixes](craft4:craft\config\GeneralConfig::$extraLastNamePrefixes)
+
+Since
+:  4.3.0
+
+</div>
+
+Any additional last name prefixes that should be supported by the name parser.
+
+::: code
+```php Static Config
+'extraLastNamePrefixes' => ['Dal', 'Van Der'],
+```
+```shell Environment Override
+CRAFT_EXTRA_LAST_NAME_PREFIXES="Dal,Van Der"
+```
+:::
+
+
+
+### `extraNameSalutations`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)[]
+
+Default value
+:  `[]`
+
+Defined by
+:  [GeneralConfig::$extraNameSalutations](craft4:craft\config\GeneralConfig::$extraNameSalutations)
+
+Since
+:  4.3.0
+
+</div>
+
+Any additional name salutations that should be supported by the name parser.
+
+::: code
+```php Static Config
+'extraNameSalutations' => ['Lady', 'Sire'],
+```
+```shell Environment Override
+CRAFT_EXTRA_NAME_SALUTATIONS=Lady,Sire
+```
+:::
+
+
+
+### `extraNameSuffixes`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)[]
+
+Default value
+:  `[]`
+
+Defined by
+:  [GeneralConfig::$extraNameSuffixes](craft4:craft\config\GeneralConfig::$extraNameSuffixes)
+
+Since
+:  4.3.0
+
+</div>
+
+Any additional name suffixes that should be supported by the name parser.
+
+::: code
+```php Static Config
+'extraNameSuffixes' => ['CCNA', 'OBE'],
+```
+```shell Environment Override
+CRAFT_EXTRA_NAME_SUFFIXES=CCNA,OBE
+```
+:::
+
+
+
 
 <!-- END SETTINGS -->
