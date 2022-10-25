@@ -64,7 +64,7 @@ You can customize the name and location of this folder. If you move it so it’s
 
 ### `.env`
 
-This is your [PHP dotenv](https://github.com/vlucas/phpdotenv) `.env` configuration file. It defines sensitive or environment-specific config values that don’t make sense to commit to version control.
+This is your [PHP dotenv](https://github.com/vlucas/phpdotenv) `.env` configuration file. It defines sensitive or [environment-specific config](./config/README.md#env) values that don’t make sense to commit to version control.
 
 ### `.env.example`
 
