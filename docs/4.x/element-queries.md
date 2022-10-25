@@ -200,7 +200,7 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [distinct()](yii2:yii\db\Query::distinct())
 - [groupBy()](yii2:yii\db\Query::groupBy())
 
-Custom field column names will be automatically resolved when using `select()`. <Since ver="4.3" feature="Column aliases when using advanced SQL methods" /> In earlier versions, you may find that some field’s database columns include a random suffix and will require translating the field handle with `craft4:craft\helpers\ElementHelper::fieldColumnFromField()`.
+Custom field column names will be automatically resolved when using `select()`. <Since ver="4.3" feature="Column aliases when using advanced SQL methods" /> In earlier versions, you may find that some field’s database columns include a random suffix and will require translating the field handle with <craft4:craft\helpers\ElementHelper::fieldColumnFromField()>.
 
 ### Joins
 
