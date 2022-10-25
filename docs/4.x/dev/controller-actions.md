@@ -593,7 +593,7 @@ The response will differ for guests and logged-in users.
 
 State   | Ajax
 ------- | ----
-<check-mark/> | A JSON string containing at least `isGuest` and `timeout` keys, plus `csrfTokenValue` (when CSRF protection is enabled) and the `id`, `uid`, `username`, and `email` of the current user.
+<check-mark/> | A JSON string containing at least `isGuest` and `timeout` keys, plus a `csrfTokenName` and `csrfTokenValue` (when CSRF protection is enabled), and the current user’s `id`, `uid`, `username`, and `email` (if logged in).
 <x-mark/> | 400 status code, with an error message.
 
 </span>
@@ -604,7 +604,7 @@ A “[no-op](https://en.wikipedia.org/wiki/NOP_(code))” action provided for au
 
 #### Response
 
-The response will be successful (but empty) in all but “exceptional” situations, like an issue connecting to the database.
+The response will be successful (but empty) in all but “exceptional” situations, like an issue connecting to the database. Read more about [the criteria](kb:configuring-load-balanced-environments#health-check-endpoint) for a successful health check.
 
 <span class="croker-table">
 

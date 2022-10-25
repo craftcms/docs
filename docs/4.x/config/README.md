@@ -1,21 +1,20 @@
 ---
-# This feature hasn't been merged yet--just stashing for later!
 related:
   - uri: https://nystudio107.com/blog/fluent-multi-environment-config-for-craft-cms-4
     label: Fluent multi-environment config for Craft CMS
-  - uri: /project-config
+  - uri: /4.x/project-config.md
 ---
 
 # Configuring Craft
 
 Craft can be configured to work in a way that makes sense for you, your team, and your infrastructure.
 
-Broadly, configuration refers to how Craft will behave in a particular environment. Most applications will only require [database connection information](db.md) to work, but as you get familiar with more of Craft’s features, install plugins, or start using additional services, you may need to provide additional config.
+Broadly, configuration refers to how Craft will behave in a particular environment. Most applications will only require [database connection information](./db.md) to work, but as you get familiar with more of Craft’s features, install plugins, or start using additional services, you may need to provide additional config.
 
 We’ll start by looking at how Craft builds its config in a context-aware way, then get into some specific options. Keep in mind that—unlike most aspects of a Craft project—this will require some basic PHP knowledge.
 
 ::: tip
-[Project config](/project-config) is a discrete concept, but was designed to integrate with the core config system. We’ll look at some examples in just a moment.
+[Project config](../project-config.md) is a discrete concept, but was designed to integrate with the core config system. We’ll look at some examples in just a moment.
 :::
 
 ## Where Configuration Happens
@@ -107,7 +106,7 @@ return GeneralConfig::create()
 Each option becomes a method call, accepting the same values that you would provide in a config map. The modified configuration object is returned to allow chaining.
 
 ::: warning
-Fluent config is currently only available for _general_ and _database_ settings, and not all plugins support it. When in doubt, use a config map!
+Fluent config is currently only available for _general_ and _database_ settings, and unsupported in plugins. When in doubt, use a config map!
 :::
 
 ### Types and Values
@@ -207,24 +206,26 @@ Some settings and functions in Craft support [Yii aliases](https://www.yiiframew
 
 Out of the box, Craft provides these aliases—but you can override them or provide new ones with the <config4:aliases> config setting:
 
-| Alias | Description
-| ----- | -----------
-| `@app` | Path to `vendor/craftcms/cms/src/`
-| `@config` | Path to your `config/` folder
-| `@contentMigrations` | Path to your `migrations/` folder
-| `@craft` | Path to `vendor/craftcms/cms/src/`
-| `@lib` | Path to `vendor/craftcms/cms/lib/`
-| `@root` | The root project path (same as the [CRAFT_BASE_PATH](#craft-base-path) PHP constant)
-| `@runtime` | Path to your `storage/runtime/` folder
-| `@storage` | Path to your `storage/` folder
-| `@templates` | Path to your `templates/` folder
-| `@translations` | Path to your `translations/` folder
-| `@vendor` | Path to your `vendor/` folder
-| `@web` | URL to the folder that contains the `index.php` file that was loaded for the request
-| `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request
+| Alias | Description | Based On
+| ----- | ----------- | --------
+| `@app` | Path to Craft’s source code. | [CRAFT_VENDOR_PATH](#craftvendorpath)
+| `@config` | Path to your `config/` folder. | [CRAFT_BASE_PATH](#craftbasepath)
+| `@contentMigrations` | Path to your `migrations/` folder. | [CRAFT_BASE_PATH](#craftbasepath)
+| `@craft` | Path to Craft’s source code. | `@app`
+| `@dotenv` | Path to your [.env](../directory-structure.md#env) file. | [CRAFT_DOTENV_PATH](#craftdotenvpath)
+| `@lib` | Path to extra libraries packaged with Craft. | `@app`
+| `@root` | The root project path. | [CRAFT_BASE_PATH](#craft-base-path)
+| `@runtime` | Path to your `storage/runtime/` folder. | `@storage`
+| `@storage` | Path to your `storage/` folder. | [CRAFT_STORAGE_PATH](#craftstoragepath)
+| `@templates` | Path to your `templates/` folder. | [CRAFT_TEMPLATES_PATH](#crafttemplatespath)
+| `@tests` | Path to your `tests/` folder. | [CRAFT_TESTS_PATH](#crafttestspath)
+| `@translations` | Path to your `translations/` folder. | [CRAFT_TRANSLATIONS_PATH](#crafttranslationspath)
+| `@vendor` | Path to your `vendor/` folder. | [CRAFT_VENDOR_PATH](#craftvendorpath)
+| `@web` | URL to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_URL](#craftweburl)
+| `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_ROOT](#craftwebroot)
 
 ::: tip
-To prevent a variety of security issues, we recommend explicitly overriding the `@web` alias with a fully-qualified URL.
+To prevent a variety of security issues, we recommend explicitly setting the `@web` alias with a fully-qualified URL, either via a configuration file (see below) or [environment variable](#env).
 :::
 
 Aliases can be set to plain strings, or to the content of an environment variable. Keep in mind that **aliases are resolved recursively**, so you can define one based on another (including those whose values came from the environment):
@@ -498,6 +499,10 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 - The <config4:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config4:cpTrigger> setting, if set).
 - The <config4:baseCpUrl> setting **is not** set, and the request URI begins with the <config4:cpTrigger> setting.
+
+### `CRAFT_DOTENV_PATH`
+
+Path to your project’s [`.env` file](../directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craftbasepath).
 
 ### `CRAFT_ENVIRONMENT`
 

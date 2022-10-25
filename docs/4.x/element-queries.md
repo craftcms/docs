@@ -200,6 +200,8 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [distinct()](yii2:yii\db\Query::distinct())
 - [groupBy()](yii2:yii\db\Query::groupBy())
 
+Custom field column names will be automatically resolved when using `select()`. <Since ver="4.3" feature="Column aliases when using advanced SQL methods" /> In earlier versions, you may find that some field’s database columns include a random suffix and will require translating the field handle with <craft4:craft\helpers\ElementHelper::fieldColumnFromField()>.
+
 ### Joins
 
 - [innerJoin()](yii2:yii\db\Query::innerJoin())
@@ -207,6 +209,8 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [rightJoin()](yii2:yii\db\Query::rightJoin())
 
 ### Conditions
+
+Exercise caution when using these methods directly—some will completely overwrite the existing query conditions and cause unpredictable results.
 
 - [where()](yii2:yii\db\QueryTrait::where())
 - [andWhere()](yii2:yii\db\QueryTrait::andWhere())
@@ -230,10 +234,6 @@ Element queries are specialized [query builders](https://www.yiiframework.com/do
 - [min()](yii2:yii\db\Query::min())
 - [max()](yii2:yii\db\Query::max())
 - [pairs()](craft4:craft\db\Query::pairs())
-
-:::tip
-If you need to reference a custom field column in any of the above methods, you will need to use its complete column name (e.g. `field_altText_xssyxqvs`).
-:::
 
 ::: tip
 When customizing an element query, you can call [getRawSql()](craft4:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
