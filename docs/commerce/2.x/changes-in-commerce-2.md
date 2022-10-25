@@ -142,7 +142,7 @@ If either of these is submitted, the corresponding `shippingAddress` and `billin
 Example:
 
 ```html
-<form method="POST">
+<form method="post">
  <input type="hidden" name="action" value="commerce/cart/update-cart">
  {{ redirectInput('shop/shipping') }}
  {{ csrfInput() }}
@@ -159,7 +159,7 @@ To submit a new address, or update an existing address while submitting to the c
 Example 1:
 
 ```html
-<form method="POST">
+<form method="post">
  <input type="hidden" name="action" value="commerce/cart/update-cart">
  {{ redirectInput('shop/shipping') }}
  {{ csrfInput() }}
@@ -173,7 +173,7 @@ The above would submit a new address to the cart and save it to the customer’s
 Example 2:
 
 ```html
-<form method="POST">
+<form method="post">
  <input type="hidden" name="action" value="commerce/cart/update-cart">
  {{ redirectInput('shop/shipping') }}
  {{ csrfInput() }}

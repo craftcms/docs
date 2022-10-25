@@ -1,3 +1,6 @@
+---
+updatedVersion: commerce/4.x/orders-carts.md
+---
 # Update Cart Customer
 
 A cart always has an associated customer. That customer can either be a guest with no user association, or a registered user—which is a customer associated with a Craft user.

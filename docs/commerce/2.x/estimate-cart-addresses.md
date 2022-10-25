@@ -15,7 +15,7 @@ The example below shows how you can add a shipping estimate address to the cart.
 ```twig
 {% set cart = craft.commerce.carts.cart %}
 
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/update-cart">
   <input type="hidden" name="estimatedBillingAddressSameAsShipping" value="1">
 

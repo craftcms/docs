@@ -5,7 +5,7 @@ Once you’ve set up the store and payment gateways, here’s a quick example to
 It is assumed that the payment gateway is set on the cart and that the `cart` variable is available to the template as an instance of `craft\commerce\elements\Order`.
 
 ```twig
-<form method="POST" class="form-horizontal">
+<form method="post" class="form-horizontal">
   <input type="hidden" name="action" value="commerce/payments/pay"/>
   <input type="hidden" name="redirect" value="/commerce/customer/order?number={number}"/>
   <input type="hidden" name="cancelUrl" value="{{ '/commerce/checkout/payment'|hash }}"/>
@@ -24,7 +24,7 @@ This example assumes the availability of a `paymentForm` variable, as discussed 
 
 ```twig
 {% import "_includes/forms" as forms %}
-<form method="POST" class="form-horizontal">
+<form method="post" class="form-horizontal">
   <input type="hidden" name="action" value="commerce/payments/pay"/>
   <input type="hidden" name="redirect" value="/commerce/customer/order?number={number}"/>
   <input type="hidden" name="cancelUrl" value="{{ '/commerce/checkout/payment'|hash }}"/>

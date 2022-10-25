@@ -2,7 +2,7 @@
 
 Users are Craft’s representation of people.
 
-Each user has an email address and username by default, and optional fields for a name, photo, and password. Like other elements, users can have any number of additional custom fields.
+Each user has an email address and username by default, as well as optional fields for a name, photo, and password. Like other [elements](./elements.md), users support custom fields by way of a [field layout](./fields.md#field-layouts).
 
 There are also preferences for localization, accessibility, and debugging that may be relevant depending on how you build your site and whether you grant the user access to the control panel.
 
@@ -23,6 +23,10 @@ You’ll most likely be creating active user accounts for content managers or si
 - **Inactive** – Account never had credentials, or was explicitly deactivated.
 
 You can’t create an inactive user from the control panel, but you can deactivate a user account by choosing **Deactivate...** from its action menu (<icon kind="settings" />). Inactive user accounts are best suited for specific circumstances, like Craft Commerce guest customers or an imaginary Craft-based CRM that manages contacts.
+
+### Addresses
+
+Users each have an address book. [Addresses](./addresses.md) can be managed on behalf of a User via the control panel, or [by the user themselves](./dev/controller-actions.md#post-users-save-address).
 
 ## Querying Users
 

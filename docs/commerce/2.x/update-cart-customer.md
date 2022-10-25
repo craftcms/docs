@@ -1,3 +1,6 @@
+---
+updatedVersion: commerce/4.x/orders-carts.md
+---
 # Update Cart Customer
 
 A cart always has an associated customer. That customer can be a guest (no associated user), or a customer that is not a guest
@@ -19,7 +22,7 @@ the same controller action as updating anything else on the cart.
 Example:
 
 ```twig
-<form method="POST">
+<form method="post">
 <input type="hidden" name="action" value="commerce/cart/update-cart">
 {{ redirectInput('shop/cart') }}
 {{ csrfInput() }}
@@ -57,7 +60,7 @@ order completion. This can be done with the same controller action as updating a
 Example:
 
  ```twig
-<form method="POST">
+<form method="post">
  <input type="hidden" name="action" value="commerce/cart/update-cart">
  {{ redirectInput('shop/cart') }}
  {{ csrfInput() }}

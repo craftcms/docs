@@ -31,7 +31,7 @@ The first example below shows adding the first address owned by the customer as 
 ```
 {% set address = craft.commerce.customer.addresses|first %}
 
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/updateCart">
     <input type="hidden" name="redirect" value="commerce/cart">
     <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
@@ -45,7 +45,7 @@ Another way of achieving the same thing is is setting both addresses explicitly:
 ```
 {% set address = craft.commerce.customer.addresses|first %}
 
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/updateCart">
     <input type="hidden" name="redirect" value="commerce/cart">
     <input type="hidden" name="shippingAddressId" value="{{ address.id }}">
@@ -62,7 +62,7 @@ This will only work if the `shippingAddressId` is not supplied or is set to a no
 If `shippingAddressId` is an integer then the address form data is ignored and the form action attempts to set the shipping address to that of the ID.
 
 ```
-<form method="POST">
+<form method="post">
     <input type="hidden" name="action" value="commerce/cart/updateCart">
     <input type="hidden" name="redirect" value="commerce/cart">
     <input type="hidden" name="shippingAddressId" value="new">

@@ -10,7 +10,7 @@ The following is an example of getting the first product found in your store. We
 {% set product = craft.commerce.products.first() %}
 {% set variant = product.defaultVariant %}
 
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/updateCart">
   <input type="hidden" name="redirect" value="commerce/cart">
   <input type="hidden" name="qty" value="1">
@@ -25,7 +25,7 @@ The above is a simple example, if your product’s type has multiple variants yo
 ```twig
 {% set product = craft.commerce.products.first() %}
 
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/updateCart">
   <input type="hidden" name="redirect" value="commerce/cart">
   <input type="hidden" name="qty" value="1">
@@ -51,7 +51,7 @@ Here is an example of an add to cart form with both a `notes` and `options` para
 ```twig
 {% set product = craft.commerce.products.first() %}
 {% set variant = product.defaultVariant %}
-<form method="POST">
+<form method="post">
   <input type="hidden" name="action" value="commerce/cart/updateCart">
   <input type="hidden" name="redirect" value="commerce/cart">
   <input type="hidden" name="qty" value="1">

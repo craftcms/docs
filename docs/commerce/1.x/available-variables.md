@@ -105,7 +105,7 @@ Returns all payment methods available to the customer.
 {% endif %}
 
 {% if craft.commerce.paymentMethods|length %}
-<form method="POST" id="paymentMethod" class="form-inline">
+<form method="post" id="paymentMethod" class="form-inline">
   <input type="hidden" name="action" value="commerce/cart/updateCart">
   <input type="hidden" name="redirect" value="commerce/checkout/payment">
   {{ getCsrfInput() }}

@@ -1,10 +1,10 @@
 # Customers
 
-With Craft Commerce, a _Customer_ is a [user](/4.x/users.md) element representing a person who may place an order.
+Commerce leverages Craft’s native [User](/4.x/users.md) element to represent and track customers.
 
-That person could have placed an order as a guest, or as a credentialed user that can log in and place orders with saved information.
+As soon as an email address is added to an [Order](./orders-carts.md), a customer is created or attached—but because some customers remain guests through checkout, the underlying user may never become [credentialed](#customers-and-users).
 
-## User Customer Info Tab
+## Customer Info Tab
 
 Go to **Users** in Craft’s global navigation to see a complete list of the site’s users. Clicking any user’s name will take you to their edit screen, where you’ll find a **Commerce** tab:
 
@@ -13,60 +13,41 @@ Go to **Users** in Craft’s global navigation to see a complete list of the sit
 This tab includes the following:
 
 - **Orders** – a searchable list of the customer’s orders.
-- **Active Carts** – a list of the customer’s active carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
-- **Inactive Carts** – a list of the customer’s inactive carts based on the [activeCartDuration](config-settings.md#activecartduration) setting.
+- **Active Carts** – a list of the customer’s _active_ carts, based on the [activeCartDuration](config-settings.md#activecartduration) setting.
+- **Inactive Carts** – a list of the customer’s _inactive_ carts, based on the [activeCartDuration](config-settings.md#activecartduration) setting.
 - **Subscriptions** – a list of the customer’s subscriptions.
 
-This tab is shown by default but you can control its visibility with the [showCustomerInfoTab](config-settings.md#showeditusercommercetab) setting.
+The visibility of this tab is controlled by the [showCustomerInfoTab](config-settings.md#showeditusercommercetab) setting.
 
 ::: tip
-If you’d like to be able to see and manage customer addresses from the control panel, [include the Addresses field](/4.x/addresses.html#managing-address-fields) in the User Fields layout.
+If you’d like to be able to see and manage customer addresses from the control panel, [include the addresses field](/4.x/addresses.md#setup) in the user field layout.
 :::
 
 ## Customers and Users
 
-A customer with saved login information also has a Craft user account—but not *all* customers have user accounts. All users are listed in Craft’s global **Users** area, where the **Account Type** submenu will allow you to view the _Credentialed_ ones that are registered and the _Inactive_ ones that likely checked out as guests.
+A customer with saved login information is considered a [credentialed](/4.x/users.md#active-and-inactive-users) user. Conversely, customers who check out as guests are set up as inactive users.
 
-You can allow any guest user to transition from an inactive to a credentialed account at any time.
+### Guest Checkout
 
-### Customer Flow
+If someone visits the store and checks out as a guest, a new inactive user is created and related to the order—and any future orders using the same email address will be consolidated under that user.
 
-#### Guest Checkout
+### User Checkout <badge text="Pro" type="edition" vertical="middle">Pro</badge>
 
-If someone visits the store and checks out as a guest, a new inactive user is created and related to the order.
+Logged in customers are bound to their cart the moment it is created.
 
-#### User Checkout
+A guest can register for an account before or after checkout using a standard [Craft user registration form](kb:front-end-user-accounts#registration-form). This workflow may look a bit different depending on your configuration:
 
-If the customer is logged in, the order will be associated with that user the moment the cart is created and on through completion.
+Setting | Result
+------- | ------
+<config4:useEmailAsUsername> | Only requires an email address to register; can be pre-filled if the customer already set an email on their cart (as this creates an inactive user, behind the scenes).
+<config4:deferPublicRegistrationPassword> | A password is set only after activating their account (typically only used in combination with [email verification](/4.x/user-management.md#public-registration)).
 
-#### Guest Into User
+#### Registration at Checkout
 
-A customer can register for an account before or after checkout using a normal [Craft user registration form](https://craftcms.com/knowledge-base/front-end-user-accounts).
+You can also offer the option to initiate registration _at_ checkout by sending the `registerUserOnOrderComplete` param when [updating a cart](./dev/controller-actions.md#post-cart-update-cart) or [submitting payment](./dev/controller-actions.md#post-payments-pay).
 
-You can also offer the option to register a user account during the checkout process by setting the `registerUserOnOrderComplete` order property to `true`. (See the [Update Cart Customer](update-cart-customer.md#registering-a-guest-customer-as-a-user) page for examples.)
+If a customer chooses to register an account upon order completion, an activation link is sent to the email on file.
 
-If a customer chooses to register an account on order completion, a Craft user account is created and the customer is emailed an activation link. Commerce requires several conditions to be met before creating the account:
-
-- The store must be using Commerce Pro.
-- The customer must be a guest and not a logged-in user.
-- The order cannot already be associated with a user account.
-- There cannot already be a user account with the email address used on the order.
-- The order must have an email address—which likely would have been caught earlier in the checkout process.
-
-If any of the above fail, the user account will not be created; errors will be logged but not displayed or returned.
-
-The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Create an account” checkbox at the payment stage—but only if a user account doesn’t already exist for the email address on the cart:
-
-```twig
-{# Get a user account using the same email address as the cart #}
-{% set user = craft.users.email(cart.email).one() %}
-{% if not user or not user.getIsCredentialed() %}
-  <label for="registerUserOnOrderComplete">
-    {{ hiddenInput('registerUserOnOrderComplete', false) }}
-    {{ input('checkbox', 'registerUserOnOrderComplete', 1, {
-      id: 'registerUserOnOrderComplete'
-    }) }}
-    {{ 'Create an account'|t }}
-  </label>
-{% endif %}
-```
+::: tip
+The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Create an account” checkbox at the payment stage.
+:::
