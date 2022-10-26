@@ -20,7 +20,7 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [cart/complete](#post-cart-complete) | Completes an order without payment.
 <badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
 <badge vertical="baseline" type="verb">GET</badge> [cart/load-cart](#get-cart-load-cart) | Loads a cookie for the given cart.
-<badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Updates the cart by adding purchasables, updating line items, or updating various cart attributes.
+<badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Manage a customer’s current [cart](../orders-carts.md).
 <badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
@@ -44,8 +44,6 @@ See the [Making Payments](../making-payments.md#checkout-without-payment) page f
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `forceSave` | Optionally set to `true` to force saving the cart.
@@ -54,14 +52,14 @@ Param | Description
 
 #### Response
 
-The output of the action depends on whether the cart was completed successfully and the request included an `Accept: application/json` header.
+The output of the action depends on whether the cart was completed successfully and the `Accept` header.
 
 <span class="croker-table">
 
-State | Standard | Ajax
------ | -------- | ----
-<check-mark/> | Redirect response per the hashed `redirect` param, or the user session’s return URL. Success message will be set on the flash `notice` key. | JSON object with the following keys: `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
-<x-mark/> | None; the request will be routed per the URI. Cart will be available in the template under the [cartVariable](../config-settings.md#cartvariable), following the [models and validation](/4.x/dev/controller-actions.md#models-and-validation) pattern. | JSON object with the following keys: `error`, `errors`, `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+<x-mark label="Failure" /> | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request); cart is available in the template under a variable determined by the [cartVariable](../config-settings.md#cartvariable). | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable) config setting.
 
 </span>
 
@@ -74,8 +72,6 @@ The request must include `Accept: application/json` in its headers.
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `number` | Optional order number for a specific, existing cart.
@@ -85,9 +81,9 @@ Param | Description
 
 <span class="croker-table">
 
-State | Ajax
------ | ----
-<check-mark/> | JSON object with the current cart under the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+State | `application/json`
+----- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable) config setting.
 
 </span>
 
@@ -97,8 +93,6 @@ State | Ajax
 Updates the cart by [adding](../orders-carts.md#adding-items-to-a-cart) or [updating](../orders-carts.md#working-with-line-items) line items, or setting other cart attributes.
 
 #### Supported Params
-
-The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
@@ -129,14 +123,14 @@ Param | Description
 
 #### Response
 
-The output of the action depends on whether the cart was updated successfully and the request included an `Accept: application/json` header.
+The output of the action depends on whether the cart was updated successfully and the `Accept` header.
 
 <span class="croker-table">
 
-State | Standard | Ajax
------ | -------- | ----
-<check-mark/> | Redirect response per the hashed `redirect` param. | JSON object with the following keys: `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
-<x-mark/> | None; the request will be routed per the URI. Cart will be available in the template under the [cartVariable](../config-settings.md#cartvariable), following the [models and validation](/4.x/dev/controller-actions.md#models-and-validation) pattern. | JSON object with the following keys: `error`, `errors`, `success`, `message`, and the cart in the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+<x-mark label="Failure" /> | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request). | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable) config setting.
 
 </span>
 
@@ -147,45 +141,41 @@ Loads a cookie for the specified cart.
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `number` | Required cart number to be loaded.
 
 #### Response
 
-The action’s output depends on whether the cart was loaded successfully and the request included an `Accept: application/json` header.
+The action’s output depends on whether the cart was loaded successfully and the `Accept` header.
 
 <span class="croker-table">
 
-State | Output
------ | ------
-<check-mark/> | <badge vertical="baseline" type="verb">GET</badge> requests are redirected to the [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl). <badge vertical="baseline" type="verb">POST</badge> requests are redirected to the hashed `redirect` param, or to the original URI. | JSON object with a `success` key.
-<x-mark/> | GET requests will be redirected per the [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl) config setting, and POST requests routed per the URI. A failure message will be set on the flash `error` key. | JSON object with an error message in its `error` key.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#success); <badge vertical="baseline" type="verb">GET</badge> requests are redirected to the [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl). | [Standard behavior](/4.x/dev/controller-actions.md#success).
+<x-mark label="Failure" /> | [Standard behavior](/4.x/dev/controller-actions.md#failure); <badge vertical="baseline" type="verb">GET</badge> requests are redirected per the [loadCartRedirectUrl](../config-settings.md#loadcartredirecturl). | [Standard behavior](/4.x/dev/controller-actions.md#failure).
 
 </span>
 
 ### <badge vertical="baseline" type="verb">GET</badge> `downloads/pdf`
 
-Returns an order PDF as a file.
+Generates and sends an order [PDF](../pdfs.md) as a file.
 
 #### Supported Params
-
-The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
 `number` | Required order number.
 `option` | Optional string value that’s passed to the PDF template.
-`pdfHandle` | Handle of the [PDF](../pdfs.md) to be rendered.
+`pdfHandle` | Handle of a configured PDF to be rendered.
 
 #### Response
 
 State | Output
 ----- | ------
-<check-mark/> | File response with the rendered PDF and an `application/pdf` MIME type.
-<x-mark/> | Exceptions will be rendered with the normal [error template](/4.x/routing.md#error-templates).
+<check-mark label="Success" /> | File response with the rendered PDF and an `application/pdf` MIME type.
+<x-mark label="Failure" /> | Exceptions will be rendered with the normal [error template](/4.x/routing.md#error-templates).
 
 
 ### <badge vertical="baseline" type="verb">POST</badge> `payment-sources/add`
@@ -193,8 +183,6 @@ State | Output
 Creates a new payment source.
 
 #### Supported Params
-
-The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
@@ -204,16 +192,20 @@ Param | Description
 
 #### Response
 
-The action’s output depends on whether the payment source was saved and the request included an `Accept: application/json` header.
+The action’s output depends on whether the payment source was saved and the `Accept` header.
 
 <span class="croker-table">
 
-State | Standard | Ajax
------ | -------- | ----
-<check-mark/> | Redirect response per the hashed `redirect` param. | JSON object with a `success` key with a value of `true`, with the payment source on its `paymentSource` key.
-<x-mark/> | Routed per the request URI. The <commerce4:craft\commerce\models\payments\BasePaymentForm> will be available in the template as `paymentForm`, following the [models and validation](/4.x/dev/controller-actions.md#models-and-validation) pattern. | JSON object with errors under an `errors` key.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request); [PaymentSource](commerce4:craft\commerce\models\PaymentSource) data available under the `paymentSource` key.
+<x-mark label="Failure" /> | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request); [BasePaymentForm](commerce4:craft\commerce\models\payments\BasePaymentForm) subclass available in the template as `paymentForm`, | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request); payment form data available under the `paymentForm` key.
 
 </span>
+
+::: warning
+Note that successful requests will return the [payment _source_](../saving-payment-sources.md) that was created; failures will bounce back the [payment _form_](../payment-form-models.md) with errors.
+:::
 
 ### <badge vertical="baseline" type="verb">POST</badge> `payment-sources/delete`
 
@@ -221,43 +213,28 @@ Deletes a payment source.
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `id` | ID of the saved payment source to delete. (Must belong to the customer, otherwise the user deleting must have `commerce-manageOrders` permission.)
 
 #### Response
 
-The action’s output depends on whether the payment source was removed successfully and the request included an `Accept: application/json` header.
+The action’s output depends on whether the payment source was removed successfully and the `Accept` header.
 
 <span class="croker-table">
 
-State | Standard | Ajax
------ | -------- | ----
-<check-mark/> | Redirect response to the POST URI. Success message will be set on the flash `notice` key. | JSON object with a `success` key with a value of `true`.
-<x-mark/> | Routed per the POST URI. A failure message will be set on the flash `error` key. | JSON object with an error message in its `error` key.
-
-</span>
-
-#### With JSON Request Header
-
-<span class="croker-table">
-
-State | Output
------ | ------
-<check-mark/> | JSON object with a `success` key with a value of `true`.
-<x-mark/> | JSON object with an error message in its `error` key.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request).
+<x-mark label="Failure" /> | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request). | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request).
 
 </span>
 
 ### <badge vertical="baseline" type="verb">POST</badge> `payments/pay`
 
-Makes a payment on an order.
+Makes a payment on an order. Read more about [making payments](../making-payments.md).
 
 #### Supported Params
-
-The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
@@ -274,27 +251,20 @@ Param | Description
 
 #### Response
 
-The action’s output depends on whether payment was applied successfully and the request included an `Accept: application/json` header.
-
-#### Standard Request
+The action’s output depends on whether payment was applied successfully and `Accept` header.
 
 <span class="croker-table">
 
-State | Output
------ | ------
-<check-mark/> | Redirect response per the order’s `returnUrl` if set, or to the POST URI. Success message will be set on the flash `notice` key.
-<x-mark/> | Routed per the POST URI. A failure message will be set on the flash `error` key, and the payment form model and cart will be populated in a `paymentForm` variable and a variable named per the [cartVariable](../config-settings.md#cartvariable) config setting. There may also be a `paymentFormErrors` variable with an array of error messages.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request); redirection defaults to the order’s `returnUrl`. | [Standard behavior](/4.x/dev/controller-actions.md#after-a-post-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable), as well as special `paymentForm`, `transactionId`, and `transactionHash` properties.
+<x-mark label="Failure" /> | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request); cart is available in the template under a variable determined by the [cartVariable](../config-settings.md#cartvariable), as well as special `paymentForm` and `paymentFormErrors` variables. | [Standard behavior](/4.x/dev/controller-actions.md#during-a-post-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable), as well as special `paymentForm` and `paymentFormErrors` properties.
 
 </span>
 
-#### With JSON Request Header
-
-<span class="croker-table">
-
-State | Output
------ | ------
-<check-mark/> | JSON object with a `success` key with a value of `true`, the cart on the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting, the redirect value (if applicable) on the `redirect` key, and (if applicable) the `transactionId` and `transactionHash` of the related transaction.
-<x-mark/> | JSON object with an error on its `error` key, and the current cart on the key defined by the [cartVariable](../config-settings.md#cartvariable) config setting. Any payment errors will be listed in an array on the `paymentFormErrors` key.
+::: tip
+Both the cart _and_ payment form models may have errors. Be sure and check all returned variables when a payment fails—the top-level `errors` key in JSON responses will only include errors from the payment form.
+:::
 
 </span>
 
@@ -304,35 +274,21 @@ Processes customer’s return from an off-site payment.
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `commerceTransactionHash` | Required transaction hash used to verify the [off-site payment](../extend/payment-gateway-types.md#off-site-payment) being completed.
 
 #### Response
 
-The action’s output depends on whether the payment completed successfully and the request included an `Accept: application/json` header.
+The action’s output depends on whether the payment completed successfully and the `Accept` header.
 
 #### Standard Request
 
 <span class="croker-table">
 
-State | Output
------ | ------
-<check-mark/> | Redirect response to the order’s `returnUrl`.
-<x-mark/> | Redirect response to the order’s `cancelUrl`, with a payment error set on the flash `notice` key.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); redirection defaults to the order’s `returnUrl`. | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); special `url` property set to the order’s `returnUrl`.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); redirection defaults to the order’s `cancelUrl`. | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); special `url` property set to the order’s `cancelUrl`.
 
 </span>
-
-#### With JSON Request Header
-
-<span class="croker-table">
-
-State | Output
------ | ------
-<check-mark/> | JSON response with the order’s `returnUrl` set on a `url` key.
-<x-mark/> | JSON response with the order’s `cancelUrl` set on a `url` key.
-
-</span>
-
