@@ -23,10 +23,10 @@ An “action request” is one that explicitly declares the controller and actio
 This `action` parameter is different from the `<form action="...">` attribute:
 
 - The `action` _param_ should be used within a URL query string (`?action=...`) for `GET` requests, or in the body of a `POST` request.
-- The _form attribute_ should only be used when you want a form to submit to a different path than the user is already on. When an `action` param is _not_ present in the request, you can use an “action path” like `action="/actions/users/login"`. This attribute has no effect if a redirect is issued in response to the request!
+- The _form attribute_ should only be used when you want to control where a user is sent in [failure scenarios](#failure). When an `action` param is _not_ present in the request, you can use an “action path” like `action="/actions/users/login"`. This attribute has no effect if a redirect is issued in response to the request!
 :::
 
-Craft also supports routing to specific actions using a path (beginning with the <config4:actionTrigger> setting), or by creating an [alias in `routes.php`](../routing.md#advanced-routing-with-url-rules).
+Craft also supports routing to specific actions using a path (beginning with the <config4:actionTrigger> setting), or by creating an [rule in `routes.php`](../routing.md#advanced-routing-with-url-rules).
 
 ### HTTP Verbs
 
@@ -213,9 +213,9 @@ When sending a JSON payload in the body of a request, you must use an action pat
 
 ### Models and Validation
 
-A lot of the data creation and manipulation we’ll cover in the examples below revolves around <yii2:yii\base\Model>s. Craft uses models to store and validate all kinds of things—including every type of [element](../elements.md) you’re already familiar with!
+Most of the data creation and manipulation actions we’ll cover revolve around <yii2:yii\base\Model>s. Craft uses models to store and validate all kinds of things—including every type of [element](../elements.md) you’re already familiar with!
 
-If you encounter errors when creating or saving something, it will usually be passed back to your template as a special variable like `entry` or `user`, and a [flash](#flashes) will be set. Every model has a `.getErrors()` method that returns a list of messages for any attribute (or custom field) that did not validate.
+If you encounter [errors](#failure) when creating or saving something, it will usually be passed back to your template as a special variable like `entry` or `user`, and a [flash](#flashes) will be set. Every model has a `.getErrors()` method that returns a list of messages for any attribute (or custom field) that did not validate.
 
 While abbreviated, this “user profile” form contains all the patterns required to display contextual validation errors:
 
@@ -306,27 +306,107 @@ Flashes are temporary messages Craft stores in your session, typically under key
 
 Action requests are largely consistent in their behavior—exceptions will be noted in each of the [available actions](#available-actions)’ **Response** sections.
 
+Let’s look at some typical success and failure states and how they differ.
+
 ### Success
 
-<Todo notes="Complete table" />
+#### After a GET Request
 
-Method | `Accepts` | Notes
--------------- | ------ | ----------- | ------------------
-<badge vertical="baseline" type="verb">POST</badge> | `text/html` | ?
-<badge vertical="baseline" type="verb">POST</badge> | `application/json` | ?
-<badge vertical="baseline" type="verb">GET</badge> | `text/html` | ?
-<badge vertical="baseline" type="verb">GET</badge> | `application/json` | ?
+Craft’s response to a GET request varies based on whether it included an `Accept: application/json` header—and the substance of that response will differ greatly from action to action.
+
+#### After a POST Request
+
+Successful POST requests will often culminate in a [flash](#flashes) being set (under the `notice` key) and a 300-level redirection.
+
+Some routes make this redirection configurable (<config4:passwordSuccessPath> or <config4:activateAccountSuccessPath>, for instance)—but you can always override the default by sending a hashed `redirect` param with your request.
+
+::: tip
+The [`redirectInput()`](./functions.md#redirectinput) function takes the guesswork out of rendering this input.
+:::
+
+```twig{5-6}
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('users/send-password-reset-email') }}
+
+  {# Redirect to a page with further instructions: #}
+  {{ redirectInput('help/account-recovery') }}
+
+  {# The above is equivalent to: #}
+  <input
+    type="hidden"
+    name="redirect"
+    value="{{ 'help/account-recovery' | hash }}">
+
+  <input type="email" name="loginName" required>
+
+  <button>Reset Password</button>
+</form>
+```
+
+The `redirect` param accepts an “object template,” which is evaluated just before it’s issued, and can reference properties of the element or record you were working with:
+
+```twig
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('entries/save-entry') }}
+
+  {# Redirect the user to the public page: #}
+  {{ redirectInput('community-posts/{uid}') }}
+
+  {# ...entry options... #}
+
+  <input type="text" name="title">
+
+  <button>Post + View</button>
+</form>
+```
+
+::: tip
+Inspecting the HTML output, you’ll see your template exactly as provided. Why wasn’t it rendered? The “template” will be securely submitted along with your POST request and be rendered _after_ the entry is saved—that’s why we’re able to use properties (like `{uid}`, in the example) whose values aren’t yet known.
+:::
 
 ### Failure
 
-<Todo notes="Complete table" />
+<Todo note="Simplify actions, below">
 
-Method | `Accepts` | Notes
--------------- | ------ | ----------- | ------------------
-<badge vertical="baseline" type="verb">POST</badge> | `text/html` | ?
-<badge vertical="baseline" type="verb">POST</badge> | `application/json` | ?
-<badge vertical="baseline" type="verb">GET</badge> | `text/html` | ?
-<badge vertical="baseline" type="verb">GET</badge> | `application/json` | ?
+#### During a GET Request
+
+A GET request will typically only fail if an exception is thrown in the process of generating a response. The criteria for that failure depends on the action, but can also be circumstantial—like a lost database connection.
+
+If the request included an `Accept: application/json` header, Craft will send an `error` key in the JSON response, or a complete stack trace when <config4:devMode> is on.
+
+Otherwise, Craft displays a standard [error view](../routing.md#error-templates).
+
+#### During a POST Request
+
+POST requests can fail for the same reasons a GET request might—but because they are often responsible for mutating data, you’ll also be contending with [validation](#models-and-validation) errors.
+
+::: tip
+We’ll use the term “model” here for technical reasons—but [elements](../elements.md) are models, too!
+:::
+
+In all but rare, unrecoverable cases, Craft sets an `error` [flash](#flashes) describing the issue, and carries on serving the page at the original path (either the page the request came from, or whatever was in the originating `<form action="...">` attribute). By virtue of being part of the same request that populated and validated a model, Craft is able to pass it all the way through to the rendered template—making it possible to repopulate inputs and display errors contextually.
+
+For requests that include an `Accept: application/json` header, Craft will instead build a JSON object with an `errors` key set to a list of the model’s errors (indexed by attribute or field), an array representation of the model, and a `modelName` key that points to it for consistent lookup:
+
+```json
+{
+  "errors": {
+    "email": "...",
+    /* ... */
+  },
+  "modelName": "user",
+  "user": {
+    "email": "@craftcms",
+    /* ... */
+  }
+}
+```
+
+::: tip
+The value of `modelName` in a JSON response is the same as the variable name Craft uses for the model when rendering a template response. We’ll call this out in each action, below!
+:::
 
 ## Available Actions
 
@@ -552,9 +632,7 @@ State   | Standard | Ajax
 
 ### <badge vertical="baseline" type="verb">POST</badge> `users/set-password`
 
-Sets a new password on a user account.
-
-If the user is pending, their account will be activated as well.
+Sets a new password on a user account. If the user is pending, their account will be activated as well.
 
 #### Supported Params
 
@@ -652,7 +730,7 @@ The response will differ for guests and logged-in users.
 
 State   | Ajax
 ------- | ----
-<check-mark/> | A JSON string containing at least `isGuest` and `timeout` keys, plus a `csrfTokenName` and `csrfTokenValue` (when CSRF protection is enabled), and the current user’s `id`, `uid`, `username`, and `email` (if logged in).
+<check-mark/> | A JSON string containing at least `isGuest` and `timeout` keys, plus a `csrfTokenName` <Since ver="4.3" feature="The csrfTokenName value" /> and `csrfTokenValue` (when CSRF protection is enabled), and the current user’s `id`, `uid`, `username`, and `email` (if logged in).
 <x-mark/> | 400 status code, with an error message.
 
 </span>

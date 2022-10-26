@@ -2,9 +2,10 @@
 sidebarDepth: 2
 ---
 
-<Todo notes="Finish migrating to combined tables" />
-
 # Controller Actions
+
+<Todo notes="Finish migrating to combined tables" />
+<Todo notes="Revise response sections now that success/failure states are centrally documented" />
 
 Commerce exposes a number of common resources to your storefront via an HTTP API.
 
