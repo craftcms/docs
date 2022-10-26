@@ -165,7 +165,7 @@ Since
 
 </div>
 
-Whether the [Commerce Tab](customers.md#customer-info-tab) should be shown when viewing users in the control panel.
+Whether the [Commerce Tab](customers.md#user-customer-info-tab) should be shown when viewing users in the control panel.
 
 
 
@@ -274,6 +274,28 @@ Defined by
 </div>
 
 Whether the user’s primary shipping and billing addresses should be set automatically on new carts.
+
+
+
+### `autoSetPaymentSource`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [Settings::$autoSetPaymentSource](commerce4:craft\commerce\models\Settings::$autoSetPaymentSource)
+
+Since
+:  4.2
+
+</div>
+
+Whether the user's primary payment source should be set automatically on new carts.
 
 
 

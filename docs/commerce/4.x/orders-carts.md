@@ -775,59 +775,68 @@ Order queries support the following parameters:
 
 <!-- textlint-disable -->
 
-| Param                                     | Description
-| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
-| [andRelatedTo](#andrelatedto)             | Narrows the query results to only orders that are related to certain other elements.
-| [asArray](#asarray)                       | Causes the query to return matching orders as arrays of data, rather than [Order](commerce4:craft\commerce\elements\Order) objects.
-| [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [customer](#customer)                     | Narrows the query results based on the customer’s user account.
-| [customerId](#customerid)                 | Narrows the query results based on the customer, per their user ID.
-| [dateAuthorized](#dateauthorized)         | Narrows the query results based on the orders’ authorized dates.
-| [dateCreated](#datecreated)               | Narrows the query results based on the orders’ creation dates.
-| [dateOrdered](#dateordered)               | Narrows the query results based on the orders’ completion dates.
-| [datePaid](#datepaid)                     | Narrows the query results based on the orders’ paid dates.
-| [dateUpdated](#dateupdated)               | Narrows the query results based on the orders’ last-updated dates.
-| [email](#email)                           | Narrows the query results based on the customers’ email addresses.
-| [expiryDate](#expirydate)                 | Narrows the query results based on the orders’ expiry dates.
-| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [gateway](#gateway)                       | Narrows the query results based on the gateway.
-| [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
-| [hasLineItems](#haslineitems)             | Narrows the query results to only orders that have line items.
-| [hasPurchasables](#haspurchasables)       | Narrows the query results to only orders that have certain purchasables.
-| [hasTransactions](#hastransactions)       | Narrows the query results to only carts that have at least one transaction.
-| [id](#id)                                 |
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
-| [isCompleted](#iscompleted)               | Narrows the query results to only orders that are completed.
-| [isPaid](#ispaid)                         | Narrows the query results to only orders that are paid.
-| [isUnpaid](#isunpaid)                     | Narrows the query results to only orders that are not paid.
-| [limit](#limit)                           | Determines the number of orders that should be returned.
-| [number](#number)                         | Narrows the query results based on the order number.
-| [offset](#offset)                         | Determines how many orders should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
-| [orderLanguage](#orderlanguage)           | Narrows the query results based on the order language, per the language string provided.
-| [orderSiteId](#ordersiteid)               | Narrows the query results based on the order language, per the language string provided.
-| [orderStatus](#orderstatus)               | Narrows the query results based on the order statuses.
-| [orderStatusId](#orderstatusid)           | Narrows the query results based on the order statuses, per their IDs.
-| [origin](#origin)                         | Narrows the query results based on the origin.
-| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [reference](#reference)                   | Narrows the query results based on the order reference.
-| [relatedTo](#relatedto)                   | Narrows the query results to only orders that are related to certain other elements.
-| [search](#search)                         | Narrows the query results to only orders that match a search query.
-| [shortNumber](#shortnumber)               | Narrows the query results based on the order short number.
-| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the orders’ IDs in the `elements_sites` table.
-| [trashed](#trashed)                       | Narrows the query results to only orders that have been soft-deleted.
-| [uid](#uid)                               | Narrows the query results based on the orders’ UIDs.
-| [with](#with)                             | Causes the query to return matching orders eager-loaded with related elements.
-| [withAddresses](#withaddresses)           | Eager loads the the shipping and billing addressees on the resulting orders.
-| [withAdjustments](#withadjustments)       | Eager loads the order adjustments on the resulting orders.
-| [withAll](#withall)                       | Eager loads all relational data (addresses, adjustents, customers, line items, transactions) for the resulting orders.
-| [withCustomer](#withcustomer)             | Eager loads the user on the resulting orders.
-| [withLineItems](#withlineitems)           | Eager loads the line items on the resulting orders.
-| [withTransactions](#withtransactions)     | Eager loads the transactions on the resulting orders.
+| Param                                         | Description
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [afterPopulate](#afterpopulate)               | Performs any post-population processing on elements.
+| [andRelatedTo](#andrelatedto)                 | Narrows the query results to only orders that are related to certain other elements.
+| [asArray](#asarray)                           | Causes the query to return matching orders as arrays of data, rather than [Order](commerce4:craft\commerce\elements\Order) objects.
+| [cache](#cache)                               | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [customer](#customer)                         | Narrows the query results based on the customer’s user account.
+| [customerId](#customerid)                     | Narrows the query results based on the customer, per their user ID.
+| [dateAuthorized](#dateauthorized)             | Narrows the query results based on the orders’ authorized dates.
+| [dateCreated](#datecreated)                   | Narrows the query results based on the orders’ creation dates.
+| [dateOrdered](#dateordered)                   | Narrows the query results based on the orders’ completion dates.
+| [datePaid](#datepaid)                         | Narrows the query results based on the orders’ paid dates.
+| [dateUpdated](#dateupdated)                   | Narrows the query results based on the orders’ last-updated dates.
+| [email](#email)                               | Narrows the query results based on the customers’ email addresses.
+| [expiryDate](#expirydate)                     | Narrows the query results based on the orders’ expiry dates.
+| [fixedOrder](#fixedorder)                     | Causes the query results to be returned in the order specified by [id](#id).
+| [gateway](#gateway)                           | Narrows the query results based on the gateway.
+| [gatewayId](#gatewayid)                       | Narrows the query results based on the gateway, per its ID.
+| [hasLineItems](#haslineitems)                 | Narrows the query results to only orders that have line items.
+| [hasPurchasables](#haspurchasables)           | Narrows the query results to only orders that have certain purchasables.
+| [hasTransactions](#hastransactions)           | Narrows the query results to only carts that have at least one transaction.
+| [id](#id)                                     |
+| [ignorePlaceholders](#ignoreplaceholders)     | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse)                       | Causes the query results to be returned in reverse order.
+| [isCompleted](#iscompleted)                   | Narrows the query results to only orders that are completed.
+| [isPaid](#ispaid)                             | Narrows the query results to only orders that are paid.
+| [isUnpaid](#isunpaid)                         | Narrows the query results to only orders that are not paid.
+| [itemSubtotal](#itemsubtotal)                 | Narrows the query results based on the order's item subtotal.
+| [itemTotal](#itemtotal)                       | Narrows the query results based on the order's item total.
+| [limit](#limit)                               | Determines the number of orders that should be returned.
+| [number](#number)                             | Narrows the query results based on the order number.
+| [offset](#offset)                             | Determines how many orders should be skipped in the results.
+| [orderBy](#orderby)                           | Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
+| [orderLanguage](#orderlanguage)               | Narrows the query results based on the order language, per the language string provided.
+| [orderSiteId](#ordersiteid)                   | Narrows the query results based on the order language, per the language string provided.
+| [orderStatus](#orderstatus)                   | Narrows the query results based on the order statuses.
+| [orderStatusId](#orderstatusid)               | Narrows the query results based on the order statuses, per their IDs.
+| [origin](#origin)                             | Narrows the query results based on the origin.
+| [preferSites](#prefersites)                   | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)           | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [reference](#reference)                       | Narrows the query results based on the order reference.
+| [relatedTo](#relatedto)                       | Narrows the query results to only orders that are related to certain other elements.
+| [search](#search)                             | Narrows the query results to only orders that match a search query.
+| [shippingMethodHandle](#shippingmethodhandle) | Narrows the query results based on the shipping method handle.
+| [shortNumber](#shortnumber)                   | Narrows the query results based on the order short number.
+| [siteSettingsId](#sitesettingsid)             | Narrows the query results based on the orders’ IDs in the `elements_sites` table.
+| [total](#total)                               | Narrows the query results based on the total.
+| [totalDiscount](#totaldiscount)               | Narrows the query results based on the total discount.
+| [totalPaid](#totalpaid)                       | Narrows the query results based on the total paid amount.
+| [totalPrice](#totalprice)                     | Narrows the query results based on the total price.
+| [totalQty](#totalqty)                         | Narrows the query results based on the total qty of items.
+| [totalTax](#totaltax)                         | Narrows the query results based on the total tax.
+| [trashed](#trashed)                           | Narrows the query results to only orders that have been soft-deleted.
+| [uid](#uid)                                   | Narrows the query results based on the orders’ UIDs.
+| [with](#with)                                 | Causes the query to return matching orders eager-loaded with related elements.
+| [withAddresses](#withaddresses)               | Eager loads the the shipping and billing addressees on the resulting orders.
+| [withAdjustments](#withadjustments)           | Eager loads the order adjustments on the resulting orders.
+| [withAll](#withall)                           | Eager loads all relational data (addresses, adjustents, customers, line items, transactions) for the resulting orders.
+| [withCustomer](#withcustomer)                 | Eager loads the user on the resulting orders.
+| [withLineItems](#withlineitems)               | Eager loads the line items on the resulting orders.
+| [withTransactions](#withtransactions)         | Eager loads the transactions on the resulting orders.
 
 
 <!-- textlint-enable -->
@@ -1032,8 +1041,9 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | `'>= 2018-04-01'` | that were created on or after 2018-04-01.
-| `'< 2018-05-01'` | that were created before 2018-05-01
+| `'< 2018-05-01'` | that were created before 2018-05-01.
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were created between 2018-04-01 and 2018-05-01.
+| `now`/`today`/`tomorrow`/`yesterday` | that were created at midnight of the specified relative date.
 
 
 
@@ -1141,8 +1151,9 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | `'>= 2018-04-01'` | that were updated on or after 2018-04-01.
-| `'< 2018-05-01'` | that were updated before 2018-05-01
+| `'< 2018-05-01'` | that were updated before 2018-05-01.
 | `['and', '>= 2018-04-04', '< 2018-05-01']` | that were updated between 2018-04-01 and 2018-05-01.
+| `now`/`today`/`tomorrow`/`yesterday` | that were updated at midnight of the specified relative date.
 
 
 
@@ -1470,6 +1481,36 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `itemSubtotal`
+
+Narrows the query results based on the order's item subtotal.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `100` | with an item subtotal of 0.
+| `'< 1000000'` | with an item subtotal of less than ,000,000.
+| `['>= 10', '< 100']` | with an item subtotal of between  and 0.
+
+
+
+
+#### `itemTotal`
+
+Narrows the query results based on the order's item total.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `100` | with an item total of 0.
+| `'< 1000000'` | with an item total of less than ,000,000.
+| `['>= 10', '< 100']` | with an item total of between  and 0.
+
+
+
+
 #### `limit`
 
 Determines the number of orders that should be returned.
@@ -1783,7 +1824,13 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| `'xxxx'` | with a matching order reference
+| `'Foo'` | with a reference of `Foo`.
+| `'Foo*'` | with a reference that begins with `Foo`.
+| `'*Foo'` | with a reference that ends with `Foo`.
+| `'*Foo*'` | with a reference that contains `Foo`.
+| `'not *Foo*'` | with a reference that doesn’t contain `Foo`.
+| `['*Foo*', '*Bar*']` | with a reference that contains `Foo` or `Bar`.
+| `['not', '*Foo*', '*Bar*']` | with a reference that doesn’t contain `Foo` or `Bar`.
 
 
 
@@ -1866,6 +1913,39 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `shippingMethodHandle`
+
+Narrows the query results based on the shipping method handle.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `'foo'` | with a shipping method with a handle of `foo`.
+| `'not foo'` | not with a shipping method with a handle of `foo`.
+| `['foo', 'bar']` | with a shipping method with a handle of `foo` or `bar`.
+| `['not', 'foo', 'bar']` | not with a shipping method with a handle of `foo` or `bar`.
+| a `\craft\commerce\elements\db\ShippingMethod` object | with a shipping method represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch collection shipping method orders #}
+{% set orders = craft.orders()
+  .shippingMethodHandle('collection')
+  .all() %}
+```
+
+```php
+// Fetch collection shipping method orders
+$orders = \craft\commerce\elements\Order::find()
+    ->shippingMethodHandle('collection')
+    ->all();
+```
+:::
+
+
 #### `shortNumber`
 
 Narrows the query results based on the order short number.
@@ -1929,6 +2009,90 @@ $order = \craft\commerce\elements\Order::find()
     ->one();
 ```
 :::
+
+
+#### `total`
+
+Narrows the query results based on the total.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `10` | with a total price of .
+| `['and', 10, 20]` | an order with a total of  or .
+
+
+
+
+#### `totalDiscount`
+
+Narrows the query results based on the total discount.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `10` | with a total discount of 10.
+| `[10, 20]` | an order with a total discount of 10 or 20.
+
+
+
+
+#### `totalPaid`
+
+Narrows the query results based on the total paid amount.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `10` | with a total paid amount of .
+| `['and', 10, 20]` | an order with a total paid amount of  or .
+
+
+
+
+#### `totalPrice`
+
+Narrows the query results based on the total price.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `10` | with a total price of .
+| `['and', 10, 20]` | an order with a total price of  or .
+
+
+
+
+#### `totalQty`
+
+Narrows the query results based on the total qty of items.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `10` | with a total qty of 10.
+| `[10, 20]` | an order with a total qty of 10 or 20.
+
+
+
+
+#### `totalTax`
+
+Narrows the query results based on the total tax.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `10` | with a total tax of 10.
+| `[10, 20]` | an order with a total tax of 10 or 20.
+
+
 
 
 #### `trashed`
