@@ -310,15 +310,17 @@ Let’s look at some typical success and failure states and how they differ.
 
 ### Success
 
+Successful responses are mostly handled via the <craft4:craft\web\Controller::asModelSuccess()> or [asSuccess()](craft4:craft\web\Controller::asSuccess()) methods.
+
 #### After a GET Request
 
-Craft’s response to a GET request varies based on whether it included an `Accept: application/json` header—and the substance of that response will differ greatly from action to action.
+Craft’s response to a GET request varies based on whether it included an `Accept: application/json` header—and the substance of the response will differ greatly from action to action.
 
 #### After a POST Request
 
 Successful POST requests will often culminate in a [flash](#flashes) being set (under the `notice` key) and a 300-level redirection.
 
-Some routes make this redirection configurable (<config4:passwordSuccessPath> or <config4:activateAccountSuccessPath>, for instance)—but you can always override the default by sending a hashed `redirect` param with your request.
+Some routes make this redirection configurable (<config4:passwordSuccessPath> or <config4:activateAccountSuccessPath>, for instance)—but sending a hashed `redirect` param with your request will always take precedence.
 
 ::: tip
 The [`redirectInput()`](./functions.md#redirectinput) function takes the guesswork out of rendering this input.
@@ -366,17 +368,21 @@ The `redirect` param accepts an “object template,” which is evaluated just b
 Inspecting the HTML output, you’ll see your template exactly as provided. Why wasn’t it rendered? The “template” will be securely submitted along with your POST request and be rendered _after_ the entry is saved—that’s why we’re able to use properties (like `{uid}`, in the example) whose values aren’t yet known.
 :::
 
+For JSON responses, redirection does’t make as much sense—so Craft will include the resolved `redirect` value for your client to navigate programmatically (say, via `window.location = resp.redirect`).
+
+In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response). Additional action-specific properties are also returned at the top level.
+
 ### Failure
 
-<Todo note="Simplify actions, below">
+Failed responses are mostly handled via the <craft4:craft\web\Controller::asModelFailure()> or [asFailure()](craft4:craft\web\Controller::asFailure()) methods.
+
+<Todo note="Simplify action documentation, below" />
 
 #### During a GET Request
 
 A GET request will typically only fail if an exception is thrown in the process of generating a response. The criteria for that failure depends on the action, but can also be circumstantial—like a lost database connection.
 
-If the request included an `Accept: application/json` header, Craft will send an `error` key in the JSON response, or a complete stack trace when <config4:devMode> is on.
-
-Otherwise, Craft displays a standard [error view](../routing.md#error-templates).
+If the request included an `Accept: application/json` header, Craft will send a `message` key in the JSON response, or a complete stack trace when <config4:devMode> is on. Otherwise, Craft displays a standard [error view](../routing.md#error-templates).
 
 #### During a POST Request
 
@@ -386,11 +392,11 @@ POST requests can fail for the same reasons a GET request might—but because th
 We’ll use the term “model” here for technical reasons—but [elements](../elements.md) are models, too!
 :::
 
-In all but rare, unrecoverable cases, Craft sets an `error` [flash](#flashes) describing the issue, and carries on serving the page at the original path (either the page the request came from, or whatever was in the originating `<form action="...">` attribute). By virtue of being part of the same request that populated and validated a model, Craft is able to pass it all the way through to the rendered template—making it possible to repopulate inputs and display errors contextually.
+In all but rare, unrecoverable cases, Craft sets an `error` [flash](#flashes) describing the issue, and carries on serving the page at the original path (either the page the request came from, or whatever was in the originating `<form action="...">` attribute). By virtue of being part of the same request that populated and validated a model, Craft is able to pass it all the way through to the rendered template—making it possible to repopulate inputs and display errors, contextually. See a complete example of how to handle this in the [models and validation](#models-and-validation) section.
 
-For requests that include an `Accept: application/json` header, Craft will instead build a JSON object with an `errors` key set to a list of the model’s errors (indexed by attribute or field), an array representation of the model, and a `modelName` key that points to it for consistent lookup:
+For requests that include an `Accept: application/json` header, Craft will instead build a JSON object with an `errors` key set to a list of the model’s errors (indexed by attribute or field), a `message` key, an array representation of the model, and a `modelName` key with the location of the model data in the payload:
 
-```json
+```json{6}
 {
   "errors": {
     "email": "...",
