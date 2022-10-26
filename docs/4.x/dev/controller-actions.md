@@ -302,6 +302,31 @@ Flashes are temporary messages Craft stores in your session, typically under key
 {% endif %}
 ```
 
+## Responses
+
+Action requests are largely consistent in their behavior—exceptions will be noted in each of the [available actions](#available-actions)’ **Response** sections.
+
+### Success
+
+<Todo notes="Complete table" />
+
+Method | `Accepts` | Notes
+-------------- | ------ | ----------- | ------------------
+<badge vertical="baseline" type="verb">POST</badge> | `text/html` | ?
+<badge vertical="baseline" type="verb">POST</badge> | `application/json` | ?
+<badge vertical="baseline" type="verb">GET</badge> | `text/html` | ?
+<badge vertical="baseline" type="verb">GET</badge> | `application/json` | ?
+
+### Failure
+
+<Todo notes="Complete table" />
+
+Method | `Accepts` | Notes
+-------------- | ------ | ----------- | ------------------
+<badge vertical="baseline" type="verb">POST</badge> | `text/html` | ?
+<badge vertical="baseline" type="verb">POST</badge> | `application/json` | ?
+<badge vertical="baseline" type="verb">GET</badge> | `text/html` | ?
+<badge vertical="baseline" type="verb">GET</badge> | `application/json` | ?
 
 ## Available Actions
 
@@ -324,8 +349,10 @@ In each of the following examples, you’ll find a list of **Supported Params** 
 
 **Supported Params** can be ecoded in the query string, submitted with form inputs, or sent as properties of a [JSON payload](#ajax).
 
+<a name="global-params" title="Parameters respected for all POST requests"></a>
+
 ::: tip
-All POST actions support a few additional parameters, except when using Ajax:
+All POST actions support a few additional parameters, except when using an `Accepts: application/json` header:
 - `redirect`: A [hashed](./filters.md#hash) URL or path that Craft will send the user to after a successful request (i.e. a user is registered or an entry is saved).
 - `successMessage`: Overrides the default flash notice for the action.
 - `failMessage`: Overrides the default flash error for the action.
@@ -378,7 +405,7 @@ The action’s output depends on whether the entry saved successfully and the re
 State   | Standard | Ajax
 ------- | -------- | ----
 <check-mark/> | 302 redirect response per the hashed `redirect` param. | 200 JSON response with `success`, `id`, `title`, `slug`, `authorUsername`, `dateCreated`, `dateUpdated`, and `postDate` keys.
-<x-mark/> | None; the request will be routed per the URI. The entry will be available as `entry` (or whatever `entryVariable` was set to) in the resolved template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getFirstError()](yii2:yii\base\Model::getFirstError()), etc. | 400 JSON response with an `errors` key set to the result of [getErrors()](yii2:yii\base\Model::getErrors()).
+<x-mark/> | None; the request will be routed per the request URI. Entry will be available in the template as `entry` (or whatever the `entryParam` was set to), following the [models and validation](#models-and-validation) pattern. | 400 JSON response with an `errors` key.
 
 </span>
 
@@ -456,7 +483,7 @@ The output depends on whether the user save action was successful and the reques
 State   | Standard | Ajax
 ------- | -------- | ----
 <check-mark/> | 302 redirect response per the hashed `redirect` param, or the <config4:activateAccountSuccessPath> config setting if email verification is not required. | 200 JSON response with `id` and `csrfTokenValue` keys.
-<x-mark/> | None; the request will be routed per the URI. A `user` variable will be passed to the resulting template. The template can access validation errors via [getErrors()](yii2:yii\base\Model::getErrors()), [getFirstError()](yii2:yii\base\Model::getFirstError()), etc. | 400 JSON response with an `errors` key.
+<x-mark/> | None; the request will be routed per the URI. User will be available in the template as `user`, following the [models and validation](#models-and-validation) pattern. | 400 JSON response with an `errors` key.
 
 </span>
 
