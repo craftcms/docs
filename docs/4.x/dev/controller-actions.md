@@ -104,7 +104,7 @@ For requests initiated by an HTML `<form>`, use the `csrfInput()` [Twig helper](
 ```twig{2}
 <form method="post">
     {{ csrfInput() }}
-    {{ actionInput('entries/save-entry) }}
+    {{ actionInput('entries/save-entry') }}
 
     {# ... #}
 </form>
