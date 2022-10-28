@@ -103,7 +103,7 @@ The specific properties and fields supported when updating an order’s `shippin
 <form method="post">
   {# ... #}
 
-  <input type="text" name="shippingAddress[firstName]" value="{{ cart.shippingAddress.firstName }}">
+  <input type="text" name="shippingAddress[fullName]" value="{{ cart.shippingAddress.fullName }}">
 </form>
 ```
 
@@ -136,7 +136,7 @@ Customers—especially guests—will probably need to enter an address at checko
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
 
-  {{ input('text', 'shippingAddress[firstName]', shippingAddress.fullName) }}
+  {{ input('text', 'shippingAddress[fullName]', shippingAddress.fullName) }}
 
   <select name="shippingAddress[countryCode]">
     {% for code, name in craft.commerce.getStore().getStore().getCountriesList() %}
