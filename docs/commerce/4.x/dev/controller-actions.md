@@ -87,7 +87,11 @@ State | `application/json`
 
 ### <badge vertical="baseline" type="verb">POST</badge> `cart/update-cart`
 
-Updates the cart by [adding](../orders-carts.md#adding-items-to-a-cart) or [updating](../orders-carts.md#working-with-line-items) line items, or setting other cart attributes.
+Updates the cart by [adding](../orders-carts.md#adding-items-to-a-cart) or [updating](../orders-carts.md#working-with-line-items) line items, and setting addresses and other cart attributes.
+
+::: tip
+Read more about [working with Addresses](../addresses.md) in Commerce.
+:::
 
 #### Supported Params
 
