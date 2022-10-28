@@ -43,7 +43,9 @@ All `POST` requests are made through forms or [Ajax](#ajax), and require an `act
     {{ actionInput('users/send-password-reset-email') }}
 
     <label for="loginName">Username or email</label>
-    <input type="text" name="loginName" id="loginName">
+    {{ input('text', 'loginName', null, {
+        id: 'loginName',
+    }) }}
 
     <button>Reset Password</button>
 </form>
@@ -70,21 +72,21 @@ Flashes are _not_ set when using [Ajax](#ajax). Look for confirmation and errors
 ```twig Form
 {# Pass any element to this (as a Twig partial) to get a CP edit link: #}
 <form>
-    {{ actionInput('elements/redirect') }}
-    {{ hiddenInput('elementId', object.id) }}
+  {{ actionInput('elements/redirect') }}
+  {{ hiddenInput('elementId', object.id) }}
 
-    <button>Edit</button>
+  <button>Edit</button>
 </form>
 ```
 ```js Ajax
 // Get info about the current session (guests) and user (if logged in):
 fetch('/actions/users/session-info', {
-    headers: {
-        'Accept': 'application/json',
-    },
+  headers: {
+    'Accept': 'application/json',
+  },
 })
-    .then(r => r.json())
-    .then(console.log);
+  .then(r => r.json())
+  .then(console.log);
 // -> { isGuest: true, timeout: 0, csrfTokenValue: '...' }
 ```
 :::
@@ -103,10 +105,10 @@ For requests initiated by an HTML `<form>`, use the `csrfInput()` [Twig helper](
 
 ```twig{2}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('entries/save-entry') }}
+  {{ csrfInput() }}
+  {{ actionInput('entries/save-entry') }}
 
-    {# ... #}
+  {# ... #}
 </form>
 ```
 
@@ -136,41 +138,39 @@ Header | Notes
 `Accept` | Set to `application/json` to receive a JSON response (when available).
 `X-Requested-With` | Set to `XMLHttpRequest` if your templates rely on `craft.app.request.isAjax`.
 `X-CSRF-Token` | Send a valid CSRF token (for POST requests) if none is provided in the request body under the key determined by <config4:csrfTokenName>.
-`Content-Type` | Set to `application/json` if the [request’s body](guide:runtime-requests#request-parameters) is a serialized JSON payload (as opposed to `FormData`).
+`Content-Type` | Set to `application/json` if the request’s body is a serialized [JSON payload](#sending-json) (as opposed to `FormData`).
 
-A CSRF token is still required for Ajax requests using the `POST` method. You can ensure a session is started (for guests) by preflighting a request to the `users/session-info` action:
+A CSRF token is still required for Ajax requests using the `POST` method. You can ensure a session is started (for guests) by preflighting a request to the [`users/session-info` action](#get-userssession-info):
 
 ```js
 // Helper for fetching a CSRF token:
 const getSessionInfo = function() {
-    return fetch('/actions/users/session-info', {
-        headers: {
-            'Accept': 'application/json',
-        },
-    })
-        .then(r => r.json());
+  return fetch('/actions/users/session-info', {
+    headers: {
+      'Accept': 'application/json',
+    },
+  })
+    .then(r => r.json());
 };
 
 // Session info is passed to the chained handler:
 getSessionInfo()
-    .then(session => {
-        const params = new FormData();
+  .then(session => {
+    const params = new FormData();
 
-        // Read the User’s ID from the session data (assuming they’re logged in):
-        params.append('userId', session.id);
-        params.append('fullName', 'Tony Tiger');
+    // Read the User’s ID from the session data (assuming they’re logged in):
+    params.append('userId', session.id);
+    params.append('fullName', 'Tony Tiger');
 
-        return fetch('/actions/users/save-user', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'X-CSRF-Token': session.csrfTokenValue,
-                'X-Requested-With': 'XMLHttpRequest',
-                // If `params` is a JSON-encoded payload,
-                // also set `Content-Type`!
-            },
-            body: params,
-        });
+    return fetch('/actions/users/save-user', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-CSRF-Token': session.csrfTokenValue,
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: params,
+    });
     })
     .then(r => r.json())
     .then(console.log);
@@ -178,34 +178,63 @@ getSessionInfo()
 
 This example assumes you have no preexisting HTML from the server, as though it were part of a [headless](config4:headlessMode) application. If you are working on a hybrid front-end (and sprinkling interactivity into primarily server-rendered pages), you could eliminate the first request by stashing the user ID and CSRF token in the document’s `<head>` (or on another relevant element) and reading it with JavaScript:
 
-```twig
+```twig{5,8,14}
 <button
-    id="update-name"
-    data-user-id="{{ currentUser.id }}"
-    data-csrf-token-value="{{ craft.app.request.getCsrfToken() }}"
-    data-csrf-token-name="{{ craft.app.config.general.csrfTokenName }}">Edit Name</button>
+  id="update-name"
+  data-user-id="{{ currentUser.id }}"
+  data-csrf-token-value="{{ craft.app.request.getCsrfToken() }}"
+  data-csrf-token-name="{{ craft.app.config.general.csrfTokenName }}">Edit Name</button>
 
 <script>
-    const $button = document.getElementById('update-name');
+  const $button = document.getElementById('update-name');
 
-    $button.addEventListener('click', function(e) {
-        const params = new FormData();
+  $button.addEventListener('click', function(e) {
+    const params = new FormData();
 
-        params.append('userId', $button.dataset.userId);
-        params.append($button.dataset.csrfTokenName, $button.dataset.csrfTokenValue);
-        params.append('fullName', prompt('New name:'));
+    params.append('userId', $button.dataset.userId);
+    params.append($button.dataset.csrfTokenName, $button.dataset.csrfTokenValue);
+    params.append('fullName', prompt('New name:'));
 
-        fetch('/actions/users/save-user', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'X-Requested-With': 'XMLHttpRequest',
-            },
-            body: params,
-        });
-    });
+    fetch('/actions/users/save-user', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: params,
+    })
+      .then(r => r.json())
+      .then(console.log);
+  });
 </script>
 ```
+
+#### Sending JSON
+
+If you prefer to work with a JSON payload for the body, you must include [the appropriate `Content-Type` header](yii2:yii\web\Request::parsers). The equivalent `users/save-user` request would look like this:
+
+```js{13,15}
+// ...
+const params = {
+  userId: $button.dataset.userId,
+  fullName: prompt('New name:'),
+};
+
+fetch('/actions/users/save-user', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'X-CSRF-Token': $button.dataset.csrfTokenValue,
+    'X-Requested-With': 'XMLHttpRequest',
+  },
+  body: JSON.stringify(params),
+})
+  .then(r => r.json())
+  .then(console.log);
+```
+
+Files cannot be uploaded when using `Content-Type: application/json`.
 
 ::: warning
 When sending a JSON payload in the body of a request, you must use an action path (`/actions/users/save-user`, as in the example above), or provide the action in a query parameter (`/index.php?action=users/save-user`)—the action will not be properly picked up as a property of the decoded payload.
@@ -227,60 +256,60 @@ While abbreviated, this “user profile” form contains all the patterns requir
 {% requireLogin %}
 
 {% block content %}
-    {# Display the user’s saved name: #}
-    <h1>Hello, {{ currentUser.fullName }}</h1>
+  {# Display the user’s saved name: #}
+  <h1>Hello, {{ currentUser.fullName }}</h1>
 
-    {# Normalize the `user` variable, so we can use it in the form regardless of whether or not it was rendered following a submission attempt: #}
-    {% set user = user ?? currentUser %}
+  {# Normalize the `user` variable, so we can use it in the form regardless of whether or not it was rendered following a submission attempt: #}
+  {% set user = user ?? currentUser %}
 
-    <form method="post">
-        {{ csrfInput() }}
-        {{ actionInput('users/save-user') }}
-        {{ hiddenInput('userId', user.id) }}
+  <form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('users/save-user') }}
+    {{ hiddenInput('userId', user.id) }}
 
-        <label for="fullName">Full Name</label>
+    <label for="fullName">Full Name</label>
 
-        {{ input('text', 'fullName', user.fullName, {
-            id: 'fullName',
-            aria: {
-                invalid: user.hasErrors('fullName'),
-                errormessage: user.hasErrors('fullName') ? 'fullName-errors' : null,
-            },
-        }) }}
+    {{ input('text', 'fullName', user.fullName, {
+      id: 'fullName',
+      aria: {
+        invalid: user.hasErrors('fullName'),
+        errormessage: user.hasErrors('fullName') ? 'fullName-errors' : null,
+      },
+    }) }}
 
-        {% if user.hasErrors('fullName') %}
-            <ul id="fullName-errors">
-                {% for error in user.getErrors('fullName') %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+    {% if user.hasErrors('fullName') %}
+      <ul id="fullName-errors">
+        {% for error in user.getErrors('fullName') %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
-        {# ...other fields and attributes... #}
+    {# ...other fields and attributes... #}
 
-        <button>Save</button>
-    </form>
+    <button>Save</button>
+  </form>
 {% endblock %}
 ```
 ```twig _layouts/default.twig
 <!DOCTYPE html>
 <html lang="{{ currentSite.language }}">
-    <head>
-        <meta charset="UTF-8">
-        <title>{{ siteName }}</title>
-    </head>
-    <body>
-        {# Output flashes in a global space: #}
-        {% set flashes = craft.app.session.getAllFlashes(true) %}
+  <head>
+      <meta charset="UTF-8">
+      <title>{{ siteName }}</title>
+  </head>
+  <body>
+    {# Output flashes in a global space: #}
+    {% set flashes = craft.app.session.getAllFlashes(true) %}
 
-        {% if flashes | length %}
-            {% for type, flash in flashes %}
-                <p class="{{ type }}" role="alert">{{ flash }}</p>
-            {% endfor %}
-        {% endif %}
+    {% if flashes | length %}
+      {% for level, flash in flashes %}
+        <p class="{{ level }}" role="alert">{{ flash }}</p>
+      {% endfor %}
+    {% endif %}
 
-        {% block content null %}
-    </body>
+    {% block content null %}
+  </body>
 </html>
 ```
 :::
@@ -296,9 +325,10 @@ Flashes are temporary messages Craft stores in your session, typically under key
 {% set flashes = craft.app.session.getAllFlashes(true) %}
 
 {% if flashes | length %}
-    {% for type, flash in flashes %}
-        <p class="{{ type }}">{{ flash }}</p>
-    {% endfor %}
+  {% for level, flash in flashes %}
+    {# Use the level (most often `notice` or `error`) to customize styles: #}
+    <p class="{{ level }}">{{ flash }}</p>
+  {% endfor %}
 {% endif %}
 ```
 
@@ -340,7 +370,9 @@ The [`redirectInput()`](./functions.md#redirectinput) function takes the guesswo
     name="redirect"
     value="{{ 'help/account-recovery' | hash }}">
 
-  <input type="email" name="loginName" required>
+  {{ input('email', 'loginName', null, {
+    required: true,
+  }) }}
 
   <button>Reset Password</button>
 </form>
@@ -358,7 +390,7 @@ The `redirect` param accepts an “object template,” which is evaluated just b
 
   {# ...entry options... #}
 
-  <input type="text" name="title">
+  {{ input('text', 'title') }}
 
   <button>Post + View</button>
 </form>
@@ -370,7 +402,7 @@ Inspecting the HTML output, you’ll see your template exactly as provided. Why 
 
 For JSON responses, redirection does’t make as much sense—so Craft will include the resolved `redirect` value for your client to navigate programmatically (say, via `window.location = resp.redirect`).
 
-In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response). Additional action-specific properties are also returned at the top level.
+In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response)—either a specific message from Craft, or one provided in the request via the [globally-supported `successMessage` param](#global-params). Additional action-specific properties are also returned at the top level of the response object.
 
 ### Failure
 
@@ -394,7 +426,7 @@ We’ll use the term “model” here for technical reasons—but [elements](../
 
 In all but rare, unrecoverable cases, Craft sets an `error` [flash](#flashes) describing the issue, and carries on serving the page at the original path (either the page the request came from, or whatever was in the originating `<form action="...">` attribute). By virtue of being part of the same request that populated and validated a model, Craft is able to pass it all the way through to the rendered template—making it possible to repopulate inputs and display errors, contextually. See a complete example of how to handle this in the [models and validation](#models-and-validation) section.
 
-For requests that include an `Accept: application/json` header, Craft will instead build a JSON object with an `errors` key set to a list of the model’s errors (indexed by attribute or field), a `message` key, an array representation of the model, and a `modelName` key with the location of the model data in the payload:
+For requests that include an `Accept: application/json` header, Craft will instead build a JSON object with an `errors` key set to a list of the model’s errors (indexed by attribute or field), a `message` key, an array representation of the model, and a `modelName` key with the location of the model data in the payload. The exact message will be specific to the failure mode, and can be overridden using the [globally-supported `failMessage` param](#global-params).
 
 ```json{6}
 {
@@ -425,7 +457,7 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [users/save-user](#post-users-save-user) | Creates or updates a user account.
 <badge vertical="baseline" type="verb">POST</badge> [users/upload-user-photo](#post-users-upload-user-photo) | Sets a user’s photo.
 <badge vertical="baseline" type="verb">POST</badge> [users/send-password-reset-email](#post-users-send-password-reset-email) | Sends a password reset email.
-<badge vertical="baseline" type="verb">POST</badge> [users/set-password](#post-users-set-password) | Sets a new password on a user account.
+<badge vertical="baseline" type="verb">GET/POST</badge> [users/set-password](#get-post-users-set-password) | Sets a new password on a user account.
 <badge vertical="baseline" type="verb">POST</badge> [users/save-address](#post-users-save-address) | Create or update an [address](../addresses.md) element.
 <badge vertical="baseline" type="verb">POST</badge> [users/delete-address](#post-users-delete-address) | Delete an address element.
 <badge vertical="baseline" type="verb">GET</badge> [users/session-info](#get-users-session-info) | Retrieve information about the current session.
@@ -433,13 +465,13 @@ Action | Description
 
 In each of the following examples, you’ll find a list of **Supported Params** (the values you can send as <badge vertical="baseline" type="verb">GET</badge> query params or in the <badge vertical="baseline" type="verb">POST</badge> body) and information about the possible **Response** conditions.
 
-**Supported Params** can be encoded in the query string, submitted with form inputs, or sent as properties of a [JSON payload](#ajax).
+**Supported Params** can be encoded in the query string, submitted with form inputs, or sent as properties in a [JSON payload](#ajax).
 
 <a name="global-params" title="Parameters respected for all POST requests"></a>
 
 ::: tip
-All POST actions support a few additional parameters, except when using an `Accepts: application/json` header:
-- `redirect`: A [hashed](./filters.md#hash) URL or path that Craft will send the user to after a successful request (i.e. a user is registered or an entry is saved).
+All POST actions honor a few additional parameters, except when using an `Accepts: application/json` header:
+- `redirect`: A [hashed](./filters.md#hash) URL or path that Craft will send the user to after a [successful request](#after-a-post-request) (i.e. a user is registered or an entry is saved).
 - `successMessage`: Overrides the default flash notice for the action.
 - `failMessage`: Overrides the default flash error for the action.
 :::
@@ -460,38 +492,44 @@ Similarly, if you are outputting user-submitted content anywhere on site, take s
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `authorId` | The ID of the user account that should be set as the entry author. (Defaults to the entry’s current author, or the logged-in user.)
-`enabledForSite` | Whether the entry should be enabled for the current site (`1`/`0`), or an array of site IDs that the entry should be enabled for. (Defaults to the `enabled` param.)
+`canonicalId` | ID of the 
+`enabledForSite` | Whether the entry should be enabled for the entry’s `siteId` (`1`/`0`), or an array of site IDs that the entry should be enabled for. (Defaults to the `enabled` param.)
 `enabled` | Whether the entry should be enabled (`1`/`0`). (Defaults to enabled.)
 `entryId` | Fallback if `sourceId` isn’t passed, for backwards compatibility.
 `entryVariable` | The [hashed](./filters.md#hash) name of the variable that should reference the entry, if a validation error occurs. (Defaults to `entry`.)
 `expiryDate` | The expiry date for the entry. (Defaults to the current expiry date, or `null`.)
-`fieldsLocation` | The name of the param that holds any custom field values. (Defaults to `fields`.)
-`fields[]` | An array of new custom field values, indexed by field handles. (The param name can be customized via `fieldsLocation`.) Only fields that are included in this array will be updated.
+`fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
+`fields[...]` | [Custom field](#custom-fields) values.
 `parentId` | The ID of the parent entry, if it belongs to a structure section.
 `postDate` | The post date for the entry. (Defaults to the current post date, or the current time.)
+`provisional` | Updates the current user’s provisional draft (in the CP, this correlates to an auto-save).
 `revisionNotes` | Notes that should be stored on the new entry revision.
 `sectionId` | The ID of the section the entry will be created in. (Only for new entries. User must have appropriate permissions.)
 `siteId` | The ID of the site to save the entry in.
 `slug` | The entry slug. (Defaults to the current slug, or an auto-generated slug.)
 `sourceId` | The ID of the entry to save, if updating an existing entry.
 `title` | The entry title. (Defaults to the current entry title.)
-`typeId` | The entry type ID to save the entry as. (Defaults to the current entry type.)
+`typeId` | The entry type ID to save the entry as. (Defaults to the current entry type for existing entries, or the first configured type for new ones.)
+
+#### Permissions
+
+Requests to `entries/save-entry` must by made by a logged-in user with the appropriate permissions. Permissions are dependent upon the site, section, and the original author (for existing entries).
+
+It is not currently possible to allow anonymous access without [a plugin](https://plugins.craftcms.com/guest-entries?craft4).
 
 #### Response
 
-The action’s output depends on whether the entry saved successfully and the request included an `Accept: application/json` header.
+The action’s output depends on whether the entry saved successfully and the `Accept` header.
 
 <span class="croker-table">
 
-State   | Standard | Ajax
-------- | -------- | ----
-<check-mark/> | 302 redirect response per the hashed `redirect` param. | 200 JSON response with `success`, `id`, `title`, `slug`, `authorUsername`, `dateCreated`, `dateUpdated`, and `postDate` keys.
-<x-mark/> | None; the request will be routed per the request URI. Entry will be available in the template as `entry` (or whatever the `entryParam` was set to), following the [models and validation](#models-and-validation) pattern. | 400 JSON response with an `errors` key.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request); entry available under an `entry` key in the response object.
+<x-mark/> | [Standard behavior](#after-a-post-request); entry available under an `entry` variable, in the template. | [Standard behavior](#after-a-post-request).
 
 </span>
 
@@ -506,8 +544,6 @@ See the [Front-End User Accounts](kb:front-end-user-accounts#login-form) guide f
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `loginName` | The username or email of the user to login.
@@ -516,15 +552,20 @@ Param | Description
 
 #### Response
 
-The output of the action depends on whether the login was successful and the request included an `Accept: application/json` header.
+The output of the action depends on whether the login was successful and the `Accept` header.
 
-State   | Standard | Ajax
-------- | -------- | ----
-<check-mark/> | 302 redirect response per the hashed `redirect` param, or the user session’s return URL. | 200 JSON response with `returnUrl` and `csrfTokenValue` keys.
-<x-mark/> | None; the request will be routed per the URI. `loginName`, `rememberMe`, `errorCode`, and `errorMessage` variables will be passed to the resulting template. | 400 JSON response with `errorCode` and `message` keys.
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request); additional `returnUrl` and `csrfTokenValue` properties are included in the response object.
+<x-mark/> | [Standard behavior](#during-a-post-request); additional `loginName`, `rememberMe`, `errorCode`, and `errorMessage` variables will be available in the template. | [Standard behavior](#during-a-post-request); additional `loginName`, `rememberMe`, `errorCode`, and `errorMessage` properties are included in the response object.
 
 </span>
 
+::: tip
+The `errorCode` corresponds to one of the [`craft\elements\User::AUTH_*` constants](craft4:craft\elements\User#constants).
+:::
 
 ### <badge vertical="baseline" type="verb">POST</badge> `users/save-user`
 
@@ -535,20 +576,18 @@ See the [Front-End User Accounts](kb:front-end-user-accounts#registration-form) 
 :::
 
 ::: warning
-Note that _all_ custom fields can updated by users. For this reason, you should not assume that custom fields are protected from modification simply because they are omitted from the form. 
+Note that _all_ custom fields can updated by users. For this reason, you should not assume that custom fields are protected from modification simply because they are omitted from the form.
 :::
 
 #### Supported Params
-
-The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
 `admin` | Whether the user should be saved as an admin (`1`/`0`). Only assignable if the logged-in user is an admin.
 `currentPassword` | The user’s current password, which is required if `email` or `newPassword` are sent.
 `email` | The user’s email address. (Only checked if registering a new user, updating the logged-in user, or the logged-in user is allowed to administrate users.)
-`fieldsLocation` | The name of the param that holds any custom field values. (Defaults to `fields`.)
-`fields[]` | An array of new custom field values, indexed by field handles. (The param name can be customized via `fieldsLocation`.) Only fields that are included in this array will be updated.
+`fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
+`fields[...]` | [Custom field](#custom-fields) values.
 `firstName` | The user’s first name.
 `lastName` | The user’s last name.
 `newPassword` | The user’s new password, if updating the logged-in user’s account. (If registering a new user, send `password`.)
@@ -558,18 +597,26 @@ Param | Description
 `sendVerificationEmail` | Whether a verification email should be sent before accepting the new `email` (`1`/`0`). (Only used if email verification is enabled, and the logged-in user is allowed to opt out of sending it.)
 `userId` | The ID of the user to save, if updating an existing user.
 `userVariable` | The hashed name of the variable that should reference the user, if a validation error occurs. (Defaults to `user`.)
-`username` | The user’s username. (Only checked if the <config4:useEmailAsUsername> config setting is disabled.)
+`username` | The user’s username. (Only checked if the <config4:useEmailAsUsername> config setting is `false`.)
+
+#### Permissions
+
+Special permissions are required to allow users to administrate or update other users. A user can always update their own account.
+
+::: danger
+Granting administrative permissions to front-end users opens your site up to permissions escalation and significant abuse.
+:::
 
 #### Response
 
-The output depends on whether the user save action was successful and the request included an `Accept: application/json` header.
+The output depends on whether the user save action was successful and the `Accept` header.
 
 <span class="croker-table">
 
-State   | Standard | Ajax
-------- | -------- | ----
-<check-mark/> | 302 redirect response per the hashed `redirect` param, or the <config4:activateAccountSuccessPath> config setting if email verification is not required. | 200 JSON response with `id` and `csrfTokenValue` keys.
-<x-mark/> | None; the request will be routed per the URI. User will be available in the template as `user`, following the [models and validation](#models-and-validation) pattern. | 400 JSON response with an `errors` key.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](#after-a-post-request); default redirection uses the <config4:activateAccountSuccessPath> config setting, if email verification is not required. | [Standard behavior](#after-a-post-request); additional `id` and `csrfTokenValue` keys.
+<x-mark label="Success" /> | [Standard behavior](#during-a-post-request); user will be available in the template under a variable determined by the `userVariable` param, or `user` by default. | [Standard behavior](#during-a-post-request).
 
 </span>
 
@@ -584,12 +631,14 @@ You can update a user’s other properties and fields at the same time as upload
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `userId` | ID of the user. Required, pass `{{ currentUser.id }}` to change a user’s own photo.
 `photo` | Uploaded image. Use `<input type="file">`.
+
+::: warning
+Files cannot be uploaded using `Content-Type: application/json`.
+:::
 
 #### Response
 
@@ -597,10 +646,10 @@ The output depends on whether the upload was successful. Only JSON is returned, 
 
 <span class="croker-table">
 
-State   | Ajax
-------- | ----
-<check-mark/> | 200 JSON response with `html` and `photoId` <Since ver="4.3" feature="The photoId response property" /> properties.
-<x-mark/> | 400 JSON response with a `message` key.
+State | `application/json`
+----- | ------------------
+<check-mark label="Success" /> | [Standard behavior](#after-a-post-request); `html` and `photoId` <Since ver="4.3" feature="The photoId response property" /> properties. `html` is only useful in CP contexts.
+<x-mark label="Failure" /> | [Standard behavior](#during-a-post-request); additional `error` key is available in the response object, with the exception message.
 
 </span>
 
@@ -615,8 +664,6 @@ See the [Front-End User Accounts](kb:front-end-user-accounts#reset-password-form
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
 `loginName` | The username or email of the user to send a password reset email for.
@@ -624,53 +671,75 @@ Param | Description
 
 #### Response
 
-The output of the action depends on whether the reset password email was sent successfully, and whether the request included an `Accept: application/json` header.
+The output of the action depends on whether the user exists, the reset password email was sent successfully, and the `Accept` header.
 
 <span class="croker-table">
 
-State   | Standard | Ajax
-------- | -------- | ----
-<check-mark/> | 302 redirect response per the hashed `redirect` param. | 200 JSON response.
-<x-mark/> | None; the request will be routed per the URI. `errors` and `loginName` variables will be passed to the resulting template. | 400 JSON response with an `error` key.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request).
+<x-mark label="Failure" /> | [Standard behavior](#during-a-post-request); additional `errors` and `loginName` variables are passed to the template. | [Standard behavior](#during-a-post-request); additional `errors` and `loginName` keys are available in the response object.
 
 </span>
 
+::: tip
+The `errors` variable may include multiple discrete failure messages, but the standard `message` variable will still be an accurate summary.
+:::
 
-### <badge vertical="baseline" type="verb">POST</badge> `users/set-password`
+### <badge vertical="baseline" type="verb">GET/POST</badge> `users/set-password`
 
-Sets a new password on a user account. If the user is pending, their account will be activated as well.
+A <badge vertical="baseline" type="verb">GET</badge> request displays a form allowing a user to set a new password on their account, and <badge vertical="baseline" type="verb">POST</badge> sets a new password on a user account. If the user is [pending](../user-management.md), their account will be activated.
+
+::: tip
+This action is responsible for rendering the route defined by the <config4:setPasswordPath> setting.
+:::
 
 #### Supported Params
 
-The following params can be sent with the request:
-
 Param | Description
 ----- | -----------
-`code` | The user’s verification code.
-`id` | The user’s UUID.
-`newPassword` | The user’s new password.
+`code` | <badge vertical="baseline" type="verb">GET/POST</badge> The user’s verification code. Craft will provide this in URLs generated from the control panel, or when a link is sent via email.
+`id` | <badge vertical="baseline" type="verb">GET/POST</badge> The user’s UUID.
+`newPassword` | <badge vertical="baseline" type="verb">POST</badge> The user’s new password.
+
+::: tip
+`code` and `id` are required for both <badge vertical="baseline" type="verb">GET</badge> and <badge vertical="baseline" type="verb">POST</badge> requests; users may click a link from an email that includes both as query params—it’s your responsibility to pass these to Craft as hidden fields (along with `newPassword`) in a subsequent form submission.
+
+See the [Front-End User Accounts](kb:front-end-user-accounts#set-password-form) article for an example of how to set up this form.
+:::
 
 #### Response
 
-The output of the action depends on whether the password was updated successfully and the request included an `Accept: application/json` header.
+The output of the action depends on the request method, whether the password was updated successfully, and the `Accept` header.
+
+For <badge vertical="baseline" type="verb">GET</badge> requests:
 
 <span class="croker-table">
 
-State   | Standard | Ajax
-------- | -------- | ----
-<check-mark/> | 302 redirect response depending on the <config4:autoLoginAfterAccountActivation> and <config4:setPasswordSuccessPath> config settings, and whether the user has access to the control panel. | 200 JSON response with a `csrfTokenValue` key.
-<x-mark/> | None; the request will be routed per the URI. `errors` , `code`, `id`, and `newUser` variables will be passed to the resulting template. | 400 JSON response.
+State | `text/html`
+----- | -----------
+<check-mark label="Success" /> | [Standard behavior](#after-a-get-request); template determined by <config4:setPasswordPath> is rendered with `id` and `code` variables available.
+<x-mark label="Failure" /> | [Standard behavior](#after-a-get-request); exception message will point to the issue—commonly, a missing or invalid token.
+
+</span>
+
+For <badge vertical="baseline" type="verb">POST</badge> requests:
+
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](#after-a-post-request); redirection depends on the <config4:autoLoginAfterAccountActivation> and <config4:setPasswordSuccessPath> config settings, and whether the user has access to the control panel. | [Standard behavior](#after-a-post-request); additional `csrfTokenName` key will be available in the response object.
+<x-mark label="Failure" /> | [Standard behavior](#during-a-post-request); `errors` , `code`, `id`, and `newUser` variables will be passed to the resulting template. | [Standard behavior](#during-a-post-request).
 
 </span>
 
 
 ### <badge vertical="baseline" type="verb">POST</badge> `users/save-address`
 
-Saves or updates an [address](../addresses.md) element against the current User’s account.
+Saves or updates an [address](../addresses.md) element against the current user’s account.
 
 #### Supported Params
-
-The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
@@ -683,21 +752,25 @@ Param | Description
 `organization` | Additional line for an organization or business name.
 `organizationTaxId` | Tax/VAT ID.
 `latitude` and `longitude` | GPS coordinates for the address. Not automatically populated or validated.
+`fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
+`fields[...]` | [Custom field](#custom-fields) values.
 
 ::: warning
+**This list is incomplete!**
+
 The remaining params depend upon the submitted `countryCode`—refer to the [`commerceguys/addressing` library](https://github.com/commerceguys/addressing/blob/master/src/AddressFormat/AddressField.php#L15-L25) for a comprehensive list, or [learn more about managing addresses](../addresses.md#managing-addresses) in Craft.
 :::
 
 #### Response
 
-The output of the action depends on whether the address was saved successfully and the request included an `Accept: application/json` header.
+The output of the action depends on whether the address was saved successfully and the `Accept` header.
 
 <span class="croker-table">
 
-State   | Standard | Ajax
-------- | -------- | ----
-<check-mark/> | 302 redirect response per the hashed `redirect` param. | 200 JSON response.
-<x-mark/> | None; the request will be routed per the URI. A flash is set, and `errors` and `address` variables will be passed to the resulting template. | 400 JSON response with `message` and `errors` keys.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request); address available under the `address` property in the response object.
+<x-mark label="Failure" /> | [Standard behavior](#during-a-post-request); additional `address` variable will be passed to the resulting template. | [Standard behavior](#during-a-post-request); additional `address` property will be available in the response object.
 
 </span>
 
@@ -716,28 +789,28 @@ Param | Description
 
 <span class="croker-table">
 
-State   | Standard | Ajax
-------- | -------- | ----
-<check-mark/> | 302 redirect response per the hashed `redirect` param. | 200 JSON response.
-<x-mark/> | None; the request will be routed per the URI. A flash is set, and an `address` variable will be passed to the resulting template. | 400 JSON response with `message` and `errors` keys.
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark label="Success" /> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request); additional `address` property will be available in the response object.
+<x-mark label="Failure" /> | [Standard behavior](#during-a-post-request). | [Standard behavior](#during-a-post-request).
 
 </span>
 
 
 ### <badge vertical="baseline" type="verb">GET</badge> `users/session-info`
 
-Retrieves information about the current session. Data is returned as JSON, and is only intended for consumption over Ajax via JavaScript.
+Retrieves information about the current session. Data is returned as JSON, and is only intended for consumption via [Ajax](#ajax).
 
 #### Response
 
-The response will differ for guests and logged-in users.
+Only JSON responses are sent, but its content will differ for guests and logged-in users.
 
 <span class="croker-table">
 
-State   | Ajax
-------- | ----
-<check-mark/> | A JSON string containing at least `isGuest` and `timeout` keys, plus a `csrfTokenName` <Since ver="4.3" feature="The csrfTokenName value" /> and `csrfTokenValue` (when CSRF protection is enabled), and the current user’s `id`, `uid`, `username`, and `email` (if logged in).
-<x-mark/> | 400 status code, with an error message.
+State | `application/json`
+----- | ------------------
+<check-mark label="Success" /> | [Standard behavior](#after-a-get-request); response object will contain at least `isGuest` and `timeout` keys, plus a `csrfTokenName` <Since ver="4.3" feature="The csrfTokenName value" /> and `csrfTokenValue` (when CSRF protection is enabled), and the current user’s `id`, `uid`, `username`, and `email` (if logged in).
+<x-mark label="Failure" /> | [Standard behavior](#during-a-get-request).
 
 </span>
 
@@ -751,12 +824,44 @@ The response will be successful (but empty) in all but “exceptional” situati
 
 <span class="croker-table">
 
-State   | Any
-------- | ---
+State | Any
+----- | ---
 <check-mark/> | An empty document with a 200 status code.
-<x-mark/> | 400- or 500-level status, with an error message or stack trace (in `devMode`, or when the current user has enabled the “show full exception views” preference).
+<x-mark/> | 400- or 500-level status, with an error message or stack trace (in `devMode`, or when the current user has enabled the “show full exception views” preference enabled).
 
 </span>
+
+## Custom Fields
+
+Actions that create or update elements (like [`entries/save-entry`](#post-entriessave-entry) and [`users/save-address`](#post-userssave-address)) support setting [custom field](../fields.md) values. Only fields that are included in a request will be updated.
+
+Fields should be submitted under a `fields` key, using their handle:
+
+```twig{5}
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('entries/save-entry') }}
+
+  {{ input('text', 'fields[myCustomFieldHandle]') }}
+
+  <button>Save Entry</button>
+</form>
+```
+
+In the event you need to re-key the custom field data in the request, you can send a `fieldsLocation` param:
+
+```twig{4,7}
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('entries/save-entry') }}
+  {{ hiddenInput('fieldsLocation', 'f')}}
+
+  {# Don’t forget to update all your input names! #}
+  {{ input('text', 'f[myCustomFieldHandle]') }}
+
+  <button>Save Entry</button>
+</form>
+```
 
 ## Plugins + Custom Actions
 
