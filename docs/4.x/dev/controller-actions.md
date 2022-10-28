@@ -70,7 +70,7 @@ Flashes are _not_ set when using [Ajax](#ajax). Look for confirmation and errors
 <a href="{{ logoutUrl }}">Log Out</a>
 ```
 ```twig Form
-{# Pass any element to this (as a Twig partial) to get a CP edit link: #}
+{# Pass any element to this (as a Twig partial) to get a control panel edit link: #}
 <form>
   {{ actionInput('elements/redirect') }}
   {{ hiddenInput('elementId', object.id) }}
@@ -505,7 +505,7 @@ Param | Description
 `fields[...]` | [Custom field](#custom-fields) values.
 `parentId` | The ID of the parent entry, if it belongs to a structure section.
 `postDate` | The post date for the entry. (Defaults to the current post date, or the current time.)
-`provisional` | Updates the current user’s provisional draft (in the CP, this correlates to an auto-save).
+`provisional` | Updates the current user’s provisional draft (in the control panel, this correlates to an auto-save).
 `revisionNotes` | Notes that should be stored on the new entry revision.
 `sectionId` | The ID of the section the entry will be created in. (Only for new entries. User must have appropriate permissions.)
 `siteId` | The ID of the site to save the entry in.
@@ -648,7 +648,7 @@ The output depends on whether the upload was successful. Only JSON is returned, 
 
 State | `application/json`
 ----- | ------------------
-<check-mark label="Success" /> | [Standard behavior](#after-a-post-request); `html` and `photoId` <Since ver="4.3" feature="The photoId response property" /> properties. `html` is only useful in CP contexts.
+<check-mark label="Success" /> | [Standard behavior](#after-a-post-request); `html` and `photoId` <Since ver="4.3" feature="The photoId response property" /> properties. `html` is only useful in control panel contexts.
 <x-mark label="Failure" /> | [Standard behavior](#during-a-post-request); additional `error` key is available in the response object, with the exception message.
 
 </span>
