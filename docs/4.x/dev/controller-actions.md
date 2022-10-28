@@ -433,7 +433,7 @@ Action | Description
 
 In each of the following examples, you’ll find a list of **Supported Params** (the values you can send as <badge vertical="baseline" type="verb">GET</badge> query params or in the <badge vertical="baseline" type="verb">POST</badge> body) and information about the possible **Response** conditions.
 
-**Supported Params** can be ecoded in the query string, submitted with form inputs, or sent as properties of a [JSON payload](#ajax).
+**Supported Params** can be encoded in the query string, submitted with form inputs, or sent as properties of a [JSON payload](#ajax).
 
 <a name="global-params" title="Parameters respected for all POST requests"></a>
 
