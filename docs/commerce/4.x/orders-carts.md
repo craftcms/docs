@@ -803,8 +803,8 @@ Order queries support the following parameters:
 | [isCompleted](#iscompleted)                   | Narrows the query results to only orders that are completed.
 | [isPaid](#ispaid)                             | Narrows the query results to only orders that are paid.
 | [isUnpaid](#isunpaid)                         | Narrows the query results to only orders that are not paid.
-| [itemSubtotal](#itemsubtotal)                 | Narrows the query results based on the order's item subtotal.
-| [itemTotal](#itemtotal)                       | Narrows the query results based on the order's item total.
+| [itemSubtotal](#itemsubtotal)                 | Narrows the query results based on the order’s item subtotal.
+| [itemTotal](#itemtotal)                       | Narrows the query results based on the order’s item total.
 | [limit](#limit)                               | Determines the number of orders that should be returned.
 | [number](#number)                             | Narrows the query results based on the order number.
 | [offset](#offset)                             | Determines how many orders should be skipped in the results.
@@ -946,14 +946,14 @@ Possible values include:
 
 ::: code
 ```twig
-{# Fetch the current user's orders #}
+{# Fetch the current user’s orders #}
 {% set orders = craft.orders()
   .customer(currentUser)
   .all() %}
 ```
 
 ```php
-// Fetch the current user's orders
+// Fetch the current user’s orders
 $user = Craft::$app->user->getIdentity();
 $orders = \craft\commerce\elements\Order::find()
     ->customer($user)
@@ -979,14 +979,14 @@ Possible values include:
 
 ::: code
 ```twig
-{# Fetch the current user's orders #}
+{# Fetch the current user’s orders #}
 {% set orders = craft.orders()
   .customerId(currentUser.id)
   .all() %}
 ```
 
 ```php
-// Fetch the current user's orders
+// Fetch the current user’s orders
 $user = Craft::$app->user->getIdentity();
 $orders = \craft\commerce\elements\Order::find()
     ->customerId($user->id)
@@ -1483,7 +1483,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `itemSubtotal`
 
-Narrows the query results based on the order's item subtotal.
+Narrows the query results based on the order’s item subtotal.
 
 Possible values include:
 
@@ -1498,7 +1498,7 @@ Possible values include:
 
 #### `itemTotal`
 
-Narrows the query results based on the order's item total.
+Narrows the query results based on the order’s item total.
 
 Possible values include:
 
