@@ -130,7 +130,7 @@ Commerce provides two options if you don’t want to require full payment from a
 
 ### Checkout Without Payment
 
-Once the [allowCheckoutWithoutPayment](config-settings.md#allowcheckoutwithoutpayment) setting is enabled, the customer and submit a post request to the [`commerce/cart/complete`](./dev/controller-actions.md#post-cart-complete) controller action to complete the order without any payment.
+Once the [allowCheckoutWithoutPayment](config-settings.md#allowcheckoutwithoutpayment) setting is enabled, the customer can submit a post request to the [`commerce/cart/complete`](./dev/controller-actions.md#post-cart-complete) controller action to complete the order without any payment.
 
 ```twig
 <form method="post">

@@ -103,7 +103,7 @@ The specific properties and fields supported when updating an order’s `shippin
 <form method="post">
   {# ... #}
 
-  <input type="text" name="shippingAddress[fullName]" value="{{ cart.shippingAddress.fullName }}">
+  {{ input('text', 'shippingAddress[fullName]', cart.shippingAddress.fullName) }}
 </form>
 ```
 

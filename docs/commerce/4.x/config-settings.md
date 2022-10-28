@@ -295,7 +295,7 @@ Since
 
 </div>
 
-Whether the user's primary payment source should be set automatically on new carts.
+Whether the user’s primary payment source should be set automatically on new carts.
 
 
 
