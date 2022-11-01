@@ -246,7 +246,7 @@ Attribute values are HTML-encoded automatically:
 ```
 :::
 
-## `boolean` <Since ver="4.3" feature="This Twig filter" />
+## `boolean` <Since ver="4.3.0" feature="This Twig filter" />
 
 Coerces the passed value to a boolean using PHP’s [`boolval()`](https://www.php.net/manual/en/function.boolval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
@@ -490,7 +490,7 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 {# Result: ['bar', 'baz'] #}
 ```
 
-## `float` <Since ver="4.3" feature="This Twig filter" />
+## `float` <Since ver="4.3.0" feature="This Twig filter" />
 
 Coerces the passed value to a float using PHP’s [`floatval()`](https://www.php.net/manual/en/function.floatval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
@@ -579,7 +579,7 @@ Returns the index of a passed-in value within an array, or the position of a pas
 {% endif %}
 ```
 
-## `integer` <Since ver="4.3" feature="This Twig filter" />
+## `integer` <Since ver="4.3.0" feature="This Twig filter" />
 
 Coerces the passed value to a integer using PHP’s [`intval()`](https://www.php.net/manual/en/function.intval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
@@ -1150,7 +1150,7 @@ Returns a string formatted in “snake_case”.
 {# Output: foo_bar #}
 ```
 
-## `string` <Since ver="4.3" feature="This Twig filter" />
+## `string` <Since ver="4.3.0" feature="This Twig filter" />
 
 Coerces the passed value to a string using PHP’s [`strval()`](https://www.php.net/manual/en/function.strval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 

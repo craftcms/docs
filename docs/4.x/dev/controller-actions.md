@@ -648,7 +648,7 @@ The output depends on whether the upload was successful. Only JSON is returned, 
 
 State | `application/json`
 ----- | ------------------
-<check-mark label="Success" /> | [Standard behavior](#after-a-post-request); `html` and `photoId` <Since ver="4.3" feature="The photoId response property" /> properties. `html` is only useful in control panel contexts.
+<check-mark label="Success" /> | [Standard behavior](#after-a-post-request); `html` and `photoId` <Since ver="4.3.0" feature="The photoId response property" /> properties. `html` is only useful in control panel contexts.
 <x-mark label="Failure" /> | [Standard behavior](#during-a-post-request); additional `error` key is available in the response object, with the exception message.
 
 </span>
@@ -809,7 +809,7 @@ Only JSON responses are sent, but its content will differ for guests and logged-
 
 State | `application/json`
 ----- | ------------------
-<check-mark label="Success" /> | [Standard behavior](#after-a-get-request); response object will contain at least `isGuest` and `timeout` keys, plus a `csrfTokenName` <Since ver="4.3" feature="The csrfTokenName value" /> and `csrfTokenValue` (when CSRF protection is enabled), and the current user’s `id`, `uid`, `username`, and `email` (if logged in).
+<check-mark label="Success" /> | [Standard behavior](#after-a-get-request); response object will contain at least `isGuest` and `timeout` keys, plus a `csrfTokenName` <Since ver="4.3.0" feature="The csrfTokenName value" /> and `csrfTokenValue` (when CSRF protection is enabled), and the current user’s `id`, `uid`, `username`, and `email` (if logged in).
 <x-mark label="Failure" /> | [Standard behavior](#during-a-get-request).
 
 </span>

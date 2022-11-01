@@ -146,7 +146,7 @@ Prints a block’s output.
 
 This works identically to Twig’s core [`block`](https://twig.symfony.com/doc/3.x/functions/block.html) function.
 
-## `canCreateDrafts` <Since ver="4.3" feature="This Twig function" />
+## `canCreateDrafts` <Since ver="4.3.0" feature="This Twig function" />
 
 Checks whether the current user (or a specific user, when provided) can create drafts from the passed element.
 
@@ -156,7 +156,7 @@ Checks whether the current user (or a specific user, when provided) can create d
 {% endif %}
 ```
 
-## `canDelete` <Since ver="4.3" feature="This Twig function" />
+## `canDelete` <Since ver="4.3.0" feature="This Twig function" />
 
 Checks whether the current user (or a specific user, when provided) can delete the passed element.
 
@@ -166,7 +166,7 @@ Checks whether the current user (or a specific user, when provided) can delete t
 {% endif %}
 ```
 
-## `canDeleteForSite` <Since ver="4.3" feature="This Twig function" />
+## `canDeleteForSite` <Since ver="4.3.0" feature="This Twig function" />
 
 Checks whether the current user (or a specific user, when provided) can delete the passed element from the site it was loaded in.
 
@@ -176,7 +176,7 @@ Checks whether the current user (or a specific user, when provided) can delete t
 {% endif %}
 ```
 
-## `canDuplicate` <Since ver="4.3" feature="This Twig function" />
+## `canDuplicate` <Since ver="4.3.0" feature="This Twig function" />
 
 Checks whether the current user (or a specific user, when provided) can duplicate the passed element.
 
@@ -186,7 +186,7 @@ Checks whether the current user (or a specific user, when provided) can duplicat
 {% endif %}
 ```
 
-## `canSave` <Since ver="4.3" feature="This Twig function" />
+## `canSave` <Since ver="4.3.0" feature="This Twig function" />
 
 Checks whether the current user (or a specific user, when provided) can save the passed element.
 
@@ -196,7 +196,7 @@ Checks whether the current user (or a specific user, when provided) can save the
 {% endif %}
 ```
 
-## `canView` <Since ver="4.3" feature="This Twig function" />
+## `canView` <Since ver="4.3.0" feature="This Twig function" />
 
 Checks whether the current user (or a specific user, when provided) can view the passed element within the control panel.
 
