@@ -21,13 +21,13 @@ If you are going with the Craft License, don’t forget to change the `license` 
 
 ## Registering your Plugin
 
-To register your plugin, first make sure it’s published to a public GitHub repository. Then create a Craft ID account at [id.craftcms.com](https://id.craftcms.com), and connect it to your GitHub account.
+To register your plugin, first make sure it’s published to a public GitHub repository. Then create a Craft Console account at [console.craftcms.com](https://console.craftcms.com), and connect it to your GitHub account.
 
 ::: warning
 If your plugins are published to a GitHub organization account, make sure that the organization is checked when authenticating your GitHub account.
 :::
 
-From your Craft ID account, you’ll need to first go to “Account Settings”, make sure “Enable plugin developer features” is checked under your username, and choose “Save”.
+From your Craft Console account, you’ll need to first go to “Account Settings”, make sure “Enable plugin developer features” is checked under your username, and choose “Save”.
 
 Once plugin developer features are enabled, add your plugin by going to Plugins → “Add a plugin”, and choose the “Select” button next to your plugin’s repository. You will then be able to edit its description, screenshots, and other details.
 
@@ -109,4 +109,4 @@ If you need to transfer ownership of your plugin to another developer, follow th
 1. Visit your plugin’s GitHub repository and click on its **Settings** tab.
 2. Scroll down to the bottom and press the **Transfer** button within the **Danger Zone** section, and submit the transfer form.
 3. The new developer will likely want to [change the package name](#changing-the-package-name) at this point. Once they’ve done so, remember to mark the old package name as abandoned.
-4. Have the new developer contact [support@craftcms.com](mailto:support@craftcms.com) to notify Pixel & Tonic of the change, so we can transfer the plugin to their Craft ID account and update its repository URL and package name.
+4. Have the new developer contact [support@craftcms.com](mailto:support@craftcms.com) to notify Pixel & Tonic of the change, so we can transfer the plugin to their Craft Console account and update its repository URL and package name.
