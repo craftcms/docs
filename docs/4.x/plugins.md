@@ -44,11 +44,11 @@ If you purchase a plugin license separately from a Craft install or need to upda
 
 ## Managing Plugin Licenses
 
-You can manage all your plugin licenses from your [Craft ID](https://id.craftcms.com/) account, under **Licenses** → **Plugins**
+You can manage all your plugin licenses from your [Craft Console](https://console.craftcms.com/) account, under **Licenses** → **Plugins**
 
-If you don’t have a Craft ID account yet, you can create one by going to [id.craftcms.com/register](https://id.craftcms.com/register).
+If you don’t have a Craft Console account yet, you can create one by going to [console.craftcms.com/register](https://console.craftcms.com/register).
 
-Any plugin licenses purchased with the same email address as your Craft ID account will automatically be added to your account.
+Any plugin licenses purchased with the same email address as your Craft Console account will automatically be added to your account.
 
 If you have a plugin license that isn’t showing up, visit **Licenses** → **Claim License**. You can enter its license key manually, or if you know the email address that was used for purchase, you can enter it in the **Claim licenses by email address** section. After verifying ownership of the email address, any unclaimed licenses associated with that email address will be added to your account.
 
@@ -60,7 +60,7 @@ If you were to create a `MY_PLUGIN_KEY` environment variable, for example, you c
 
 ## Transferring Plugin Licenses
 
-To transfer a plugin license to someone else’s Craft ID account, log into your Craft ID account, choose the license under **Licenses** → **Plugins**, and choose the **Release License** to release it from your account. Another person will then be able to claim the license for themself from the **Licenses** → **Claim License** page of their Craft ID account.
+To transfer a plugin license to someone else’s Craft Console account, log into your Craft Console account, choose the license under **Licenses** → **Plugins**, and choose the **Release License** to release it from your account. Another person will then be able to claim the license for themself from the **Licenses** → **Claim License** page of their Craft Console account.
 
 ## Commercial Plugin Licensing
 
