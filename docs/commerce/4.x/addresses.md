@@ -116,7 +116,7 @@ Logged-in users can directly [manage their addresses](/4.x/addresses.md#managing
 - Similarly, sending individual field values for an order’s shipping or billing address (regardless of how it was originally populated) will only update the order address, and breaks any association to the user’s address book via `sourceShippingAddressId` or `sourceBillingAddressId`.
 
 ::: tip
-If you want to make it clear that your customer has selected a preexisting address, compare `order.sourceShippingAddressId` or `order.sourceBillingAddressId` with the IDs of the addresses in their address book. We have an [example of this](#select-an-existing-address), below.
+If you want to make it clear that your customer has selected a preexisting address, compare `order.sourceShippingAddressId` or `order.sourceBillingAddressId` with the IDs of the addresses in their address book. We have an [example of this](#auto-fill-from-address-book), below.
 :::
 
 ### Cart Address Examples
