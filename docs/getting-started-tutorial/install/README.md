@@ -31,7 +31,7 @@ ddev composer update
 ddev craft install
 ```
 
-Answer the questions prompted by the `ddev craft install` command, and leave `Site URL` set to the default value (`https://tutorial.ddev.site`).
+Answer the questions prompted by the `ddev craft install` command, and leave `Site URL` set to the default value (`https://tutorial.ddev.site`)—unless you chose something other than `tutorial` when creating your project folder.
 
 Once the command has finished, Craft will be fully installed. You can verify by running the following command, which will load <https://tutorial.ddev.site/> in a new browser window:
 
