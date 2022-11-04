@@ -216,7 +216,7 @@ An address on the cart may be updated in-place by passing individual address pro
 ```
 
 ::: warning
-Updates to an order address filled from the customer’s address book will _not_ propagate back to the source, and 
+Any field(s) updated on an order address filled from the customer’s address book will _not_ propagate back to the source, and will break the association to it. Sending `shippingAddressId` and `billingAddressId` are only intended to populate an order address with existing information—not keep them synchronized.
 :::
 
 ### Estimate Cart Addresses
