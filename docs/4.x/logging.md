@@ -32,6 +32,34 @@ All other messages follow the same format:
 
 Session and environment variables are printed after the last log line for the request, preceded by a `Request context:` message.
 
+### What Gets Logged?
+
+The types of messages you’ll find in a log file depend on the current environment, allowed logging level(s), installed plugins, and a host of other factors.
+
+#### Levels
+
+Log volume generally increases as level (or “severity”) decreases—there are _a ton_ of debugging messages emitted in development environments, but when only warnings and errors are logged in a live environment, you may go long periods of time without a single message.
+
+Levels are a great way to summarize the substance of logs:
+
+- **Error:** Something happened that interfered with Craft’s expected behavior. Usually logged in the process of handling an exception.
+- **Warning:** Craft encountered an unusual (but recoverable) circumstance. Warnings often point to abuse, misuse, or misconfiguration.
+- **Info:** Messages emitted during normal operation. Oftentimes, these messages will correspond to things like failed validation, and include specifics that aren’t otherwise communicated to users.
+- **Debug:** Extraneous data that is likely only useful when actively investigating an issue with a feature or plugin.
+- **Profiling:** Normally excluded from logs. Profiling data is available to help identify low-level performance issues, like template rendering or database queries.
+
+#### Exceptions
+
+Craft will also log uncaught exceptions. Exceptions can occur for all sorts of reasons, and will often use a specific class to reflect the nature of the issue. Those that extend <yii2:yii\base\UserException> are considered safe to display to a user, and will render this default view (or one matching your <config4:errorTemplatePrefix>):
+
+![Default presentation of a 404 HTTP Exception](./images/exception-404.png)
+
+For security, other exceptions are hidden from the front-end, and only available by examining logs. When <config4:devMode> is _on_, a stack trace will be output just after the exception’s message; otherwise, the stack trace is encoded as JSON and appended to the log message.
+
+::: tip
+You can see a stack trace for any log message by increasing the `traceLevel` in your [log configuration](#trace-level).
+:::
+
 ### Logs in Different Environments
 
 What you see in your log files depends on the environment.
@@ -233,6 +261,27 @@ The available options for each type of `Target` will differ, and may include thi
 ### `stdout` and `stderr`
 
 Craft redirects all log output from Monolog targets to `stdout` and `stderr` when [`CRAFT_STREAM_LOG`](./config/README.md#craft-stream-log) is set to `true`. This is common in load-balanced environments and servers with ephemeral filesystems, where log output is aggregated from multiple sources, or the sources themselves are not directly accessible.
+
+### Trace Level
+
+To see exception-like traces for _all_ logs, set the log component’s [`traceLevel` property](guide:runtime-logging#trace-level):
+
+```php
+<?php
+# config/app.php
+return [
+    'components' => [
+        'log' => [
+            // Include this many levels of the call stack:
+            'traceLevel' => 5,
+        ],
+    ],
+];
+```
+
+::: warning
+Keep in mind that non-zero `traceLevel` values can incur a performance hit as the system accumulates debugging data!
+:::
 
 ## Logging Your Own Events
 
