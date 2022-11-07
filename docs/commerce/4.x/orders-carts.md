@@ -1483,7 +1483,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `itemSubtotal`
 
-Narrows the query results based on the order's item subtotal.
+Narrows the query results based on the order’s item subtotal.
 
 Possible values include:
 
@@ -1498,7 +1498,7 @@ Possible values include:
 
 #### `itemTotal`
 
-Narrows the query results based on the order's item total.
+Narrows the query results based on the order’s item total.
 
 Possible values include:
 
