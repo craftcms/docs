@@ -176,7 +176,7 @@ return [
                         'weight' => 1,
                     ],
                 ],
-                'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',;
+                'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
             ];
 
             return Craft::createObject($config);
