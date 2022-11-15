@@ -120,23 +120,24 @@ The migration process will take care of volume migrations for you, but there are
 
 ### Logging
 
-Logs in Craft 4 now use [Monolog](https://github.com/Seldaek/monolog), which comes with some behavior changes.
+The [logging system](./logging.md) in Craft 4 has undergone some significant changes.
 
 - 404s are no longer logged by default. You can customize this in `config/app.php` via `components.log.monologTargetConfig.except`:
     ```php
     'components' => [
         'log' => [
             'monologTargetConfig' => [
+                // Override exclusions:
                 'except' => [
                     \yii\i18n\PhpMessageSource::class . ':*',
-                    // *Do* log 404s (commented for illustration)
+                    // This pattern is a default, commented out here for illustration:
                     // \yii\web\HttpException::class . ':404',
-                ]
-            ]
-        ]
+                ],
+            ],
+        ],
     ],
     ```
-- Query logging and query profiling are no longer enabled by default when `devMode` is set to `false`. These can be manually adjusted by setting <yii2:yii\db\Connection::$enableLogging> and <yii2:yii\db\Connection::$enableProfiling> from `config/app.php`:
+- Query logging and query profiling are no longer enabled by default when `devMode` is on. These can be manually adjusted by setting <yii2:yii\db\Connection::$enableLogging> and <yii2:yii\db\Connection::$enableProfiling> from `config/app.php`:
   ```php
   return [
     'components' => [
