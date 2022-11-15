@@ -211,6 +211,10 @@ If you want to find elements related to a source element through a [Matrix](matr
     .all() %}
 ```
 
+::: warning
+Only use the parent Matrix field handle and the relational field handle: `matrixFieldHandle.relationalFieldHandle`.
+:::
+
 #### Passing Multiple Relation Criteria
 
 There might be times when you need to factor multiple types of relations into the mix. For example, outputting all of the current user’s favorite drinks that include espresso:
