@@ -137,16 +137,18 @@ Then, within your main plugin class, set the `$hasCpSettings` property to `true`
 
 namespace mynamespace;
 
+use craft\base\Model;
+
 class Plugin extends \craft\base\Plugin
 {
     public bool $hasCpSettings = true;
 
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
         return new \mynamespace\models\Settings();
     }
 
-    protected function settingsHtml()
+    protected function settingsHtml(): ?string
     {
         return \Craft::$app->getView()->renderTemplate(
             'my-plugin-handle/settings',
@@ -169,7 +171,7 @@ If a plugin needs more control over its settings page(s), it can override its `g
 It can choose to render its own template, rather than being confined to Craft’s `settings/plugins/_settings` layout template:
 
 ```php
-public function getSettingsResponse()
+public function getSettingsResponse(): mixed
 {
     return \Craft::$app
         ->controller
@@ -180,7 +182,7 @@ public function getSettingsResponse()
 It can redirect the request to a completely different URL, too:
 
 ```php
-public function getSettingsResponse()
+public function getSettingsResponse(): mixed
 {
     $url = \craft\helpers\UrlHelper::cpUrl('my-plugin-handle/settings');
 
