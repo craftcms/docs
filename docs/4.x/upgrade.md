@@ -518,6 +518,42 @@ return [
 
 <a name="plugins"></a>
 
-## Plugins and Modules
+### Forms + Actions
+
+#### `users/save-user`
+
+When registering or updating users, passing a `fullName` param is preferred to `firstName` and `lastName`, as the former ensures values are saved exactly as provided. Users now store names in a single field, and will [parse them back out](https://github.com/theiconic/name-parser) into first and last names for backwards-compatibility.
+
+::: code
+```twig Craft 3
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('users/save-user') }}
+
+  {# Separate first and last name inputs: #}
+  {{ input('text', 'firstName', user.firstName) }}
+  {{ input('text', 'lastName', user.lastName) }}
+
+  {# ... #}
+</form>
+```
+```twig Craft 4
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('users/save-user') }}
+
+  {# Consolidated full name input: #}
+  {{ input('text', 'fullName', user.fullName) }}
+
+  {# ... #}
+</form>
+```
+:::
+
+::: tip
+Read more about the [`users/save-user` controller action](./dev/controller-actions.md#post-userssave-user).
+:::
+
+### Plugins and Modules
 
 Plugin authors (and module maintainers) should refer to our guide on [updating Plugins for Craft 4](extend/updating-plugins.md).
