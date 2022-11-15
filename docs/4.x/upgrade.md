@@ -148,7 +148,7 @@ The [logging system](./logging.md) in Craft 4 has undergone some significant cha
     ],
   ];
   ```
-- When [CRAFT_STREAM_LOG](./config/#craft-stream-log) is set to `true`, file logging will **not** be enabled.
+- When [CRAFT_STREAM_LOG](./config/#craft-stream-log) is set to `true`, file logging will be completely disabled.
 
 ::: tip
 See <craft4:craft\log\MonologTarget> for a look at Craft’s default log configuration.
