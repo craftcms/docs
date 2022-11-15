@@ -282,11 +282,48 @@ Twig 3’s operators (`in`, `<`, `>`, `<=`, `>=`, `==`, `!=`) are more strict co
 
 ### Elements
 
-Craft elements now clone custom array and object field values before returning them.
+#### Custom Field Data
+
+Craft elements now clone array and object field values before returning them.
 
 This means that every time you call a field handle like `element.myCustomField`, you’ll get a fresh copy of that field’s value. As a result, you may no longer need to use `clone()` to avoid inadvertently changing data or element queries used elsewhere.
 
-The change in behavior has the potential to break templates relying on Craft 3’s behavior, so be sure to check any templates or custom code that modifies and re-uses custom field values.
+The change in behavior has the potential to break templates relying on Craft 3’s behavior, so be sure to check any templates or custom code that modifies and re-uses custom field values:
+
+::: code
+```twig Craft 3
+{# Field values are mutated in-place... #}
+{% set importantPosts = entry.relatedNews
+  .type('breakingNews')
+  .orderBy('dateUpdated DESC')
+  .all() %}
+{# -> Expected results. #}
+
+{# ...so subsequent uses of the field are tainted: #}
+{% set allUpdates = entry.relatedNews
+  .orderBy('title ASC')
+  .all() %}
+{# -> Still filtered by `breakingNews`! #}
+```
+```twig Craft 4
+{# Field values are cloned automatically... #}
+{% set importantPosts = entry.relatedNews
+  .type('breakingNews')
+  .orderBy('dateUpdated DESC')
+  .all() %}
+{# -> Expected results. #}
+
+{# ...so subsequent uses return a fresh query: #}
+{% set allUpdates = entry.relatedNews
+  .orderBy('title ASC')
+  .all() %}
+{# -> No `type` constraint! #}
+```
+:::
+
+::: tip
+If you _do_ need to operate on the same value multiple times, you can store it in a temporary variable—the cloning only happens when accessing the field data directly from an element.
+:::
 
 ### Query Params
 
