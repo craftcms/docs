@@ -325,7 +325,7 @@ The change in behavior has the potential to break templates relying on Craft 3â€
 If you _do_ need to operate on the same value multiple times, you can store it in a temporary variableâ€”the cloning only happens when accessing the field data directly from an element.
 :::
 
-### Query Params
+#### Query Params
 
 Some element query params have been removed:
 
