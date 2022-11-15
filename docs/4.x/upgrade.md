@@ -373,10 +373,10 @@ User queries now return _all_ users by default in Craft 4, instead of only activ
 ```
 ```php
 // Craft 3 returned all *active* users by default
-$activeUsers = Craft::$app->getUsers()->all();
+$activeUsers = User::find()->all();
 
 // Craft 4 returns *all* users by default; specify status for the same behavior
-$activeUsers = Craft::$app->getUsers()
+$activeUsers = User::find()
   ->status('active')
   ->all();
 ```
