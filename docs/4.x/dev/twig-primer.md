@@ -230,7 +230,7 @@ Refer to the [Tests](tests.md) page for a full list of filters available to your
 
 ## Types of values
 
-There are six types of values you’ll be working with in Twig:
+There are six types of [literal](https://twig.symfony.com/doc/3.x/templates.html#literals) values that have specific syntaxes or features in Twig, as well as the special `null` type.
 
 - [Strings](#strings)
 - [Numbers](#numbers)
@@ -240,6 +240,21 @@ There are six types of values you’ll be working with in Twig:
 - [Arrow functions](#arrow-functions)
 
 Let’s take a look at each of them in detail.
+
+::: tip
+Craft exposes many other types of data to templates that don’t fit squarely into these groups—if you encounter an error and aren’t sure how to work with a value, try passing it to the `dump()` function to print some debugging information about it:
+
+```twig
+{{ now }} {# -> Error! #}
+{{ dump(now) }} {# ->  object(DateTime) ...  #}
+```
+
+In this case, the [`now` variable](./global-variables.md#now) was a [`DateTime` object](https://www.php.net/manual/en/class.datetime.php). Each object or “class” will have different properties and methods you can use—but it may take some independent research to figure out what they are:
+
+```twig
+{{ now.format('Y') }} {# -> 2022 #}
+```
+:::
 
 ### Strings
 
@@ -383,9 +398,9 @@ You can also access hash values directly by their keys, using either dot or arra
 
 ### Arrow functions
 
-Some [functions](#functions) and [filters](#filters) let you pass an **arrow function** as an argument. Arrow functions are compact functions that you define right in your template, which return a single value.
+Some [functions](#functions) and [filters](#filters) let you pass an **arrow function** as an argument. Arrow functions are compact, single-statement functions that you define in-line.
 
-For example, Craft’s [group](filters.md#group) filter will group all of the items in an array, based on the result of an arrow function you pass in:
+For example, Craft’s [group](filters.md#group) filter accepts an arrow function, which is executed once for each item in an array to determine the key it will be grouped by.
 
 ```twig{9}
 {% set groceryList = [
@@ -460,10 +475,8 @@ You can also include nested `{% elseif %}` tags (before the `{% else %}` tag, if
 ```
 
 ::: tip
-If you want to switch between different parts of your template depending on the value of something, [switch](tags.md#switch) tags provide a simpler syntax than multiple `{% if %}` and `{% elseif %}` tags each comparing the same value over and over again.
+If you want to switch between different parts of your template depending on the value of something, Craft’s [switch](tags.md#switch) tags provide a simpler syntax than multiple `{% if %}` and `{% elseif %}` tags each comparing the same value over and over again.
 :::
-
-
 
 ## DRY templating
 
