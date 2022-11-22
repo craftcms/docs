@@ -196,3 +196,7 @@ Throughout the control panel, you will find groups of checkboxes or other focusa
 The <Icon kind="move" /> move icon indicates that something can be dragged into a new position—like an element in a [structure](./elements.md#structures), a [Matrix Block](./matrix-fields.md), or a [table row](./table-fields.md).
 
 In some situations, dragging can be combined with [group selections](#group-selections)!
+
+### Search
+
+Craft has a powerful [search](./searching.md) system that complements the [condition builder](./elements.md#filters-and-columns) on every element index.
