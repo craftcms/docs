@@ -2,13 +2,17 @@
 
 You can fetch [elements](./elements.md) (entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
 
+Suppose you’ve already created a [section](./entries.md#sections) for news posts and configured a URL scheme. Craft will automatically load the corresponding element when its URL is requested, and pass it to the template under an `entry` variable. This is convenient, but it’s rare that a page only refers to a single piece of content—what if we want to show a list of other recent posts, in a sidebar? Element queries are Craft’s way of loading elements anywhere you need them.
+
+Element queries can be hyper-specific (like loading a [global set](./globals.md) by its handle) or relaxed (like a list of recently-updated [entries](./entries.md)).
+
 Working with element queries consists of three steps:
 
-1. **Create the element query.** You do this by calling a “factory function” that is named after the element type you are going to fetch. For example, if you want to fetch entries, you’d call `craft.entries()`, which returns a new [entry query](entries.md#querying-entries).
+1. **Create the element query.** Calling the “factory function” corresponding to the [element type](#element-types) you want to fetch. For entries, this is `craft.entries()`; for categories, `craft.categories()`.
 2. **Set some parameters.** By default, element queries will be configured to return all elements of the specified type. You can narrow that down to just the elements you care about by setting _parameters_ on the query.
-3. **Execute the query.** Once you’ve specified the query parameters, you’re ready for Craft to fetch the elements and give you the results. You do that by calling `.all()` or `.one()`, depending on whether you need multiple elements, or just one.
+3. **Execute the query.** Use a [query execution method](#executing-element-queries) to run the query and return results.
 
-Here’s what a typical element query might look like:
+Here’s what a this process looks like, in practice:
 
 ::: code
 ```twig
