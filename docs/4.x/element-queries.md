@@ -26,9 +26,9 @@ use craft\elements\Entry;
 
 // Create an entry query and set some parameters on it
 $entryQuery = Entry::find()
-  ->section('news')
-  ->orderBy('postDate DESC')
-  ->limit(10);
+    ->section('news')
+    ->orderBy('postDate DESC')
+    ->limit(10);
 
 // Execute the query and get the results
 $entries = $entryQuery->all();
@@ -143,9 +143,9 @@ Most of the time, you just want to get the elements that you’re querying for. 
 use craft\elements\Entry;
 
 $entries = Entry::find()
-  ->section('news')
-  ->limit(10)
-  ->all();
+    ->section('news')
+    ->limit(10)
+    ->all();
 ```
 :::
 
@@ -174,16 +174,16 @@ Posted in: {{ categoriesDescription }}
 use craft\elements\Entry;
 
 $entries = Entry::find()
-  ->section('news')
-  ->with(['category'])
-  ->limit(10)
-  ->collect();
+    ->section('news')
+    ->with(['category'])
+    ->limit(10)
+    ->collect();
 
 $categoriesDescription = $entries
-  ->pluck('category')
-  ->collapse()
-  ->pluck('title')
-  ->join(', ', ' and ');
+    ->pluck('category')
+    ->collapse()
+    ->pluck('title')
+    ->join(', ', ' and ');
 ```
 :::
 
