@@ -12,7 +12,7 @@ The control panel is one of Craft’s greatest strengths. Developers and content
 - Invite users and work collaboratively;
 - Find, install, and configure first- and third-party plugins;
 
-We believe these features should be available to _everyone_, so the control panel’s [accessibility](https://craftcms.com/accessibility) is continually evaluated and improved.
+We are working to make these features available to _everyone_ as part of our established [accessibility remediation process](https://craftcms.com/accessibility/accessibility-conformance-report).
 
 <BrowserShot url="https://my-craft-project.ddev.site/admin" :link="false" caption="The Craft control panel viewed in a fresh installation.">
 <img src="./images/control-panel-dashboard.png" alt="Craft dashboard">
