@@ -70,7 +70,11 @@ After logging in, control panel users are directed to their **dashboard**. Each 
 - **Recent Entries:** Display a list of recently-posted entries from one or more sections.
 - **Updates:** Keep tabs on Craft and plugin updates.
 
-Widgets can be rearranged and resized based on the user’s needs, and will be available to them wherever they log in. Plugins can register new widgets, so it's a 
+Widgets can be rearranged, resized, and customized based on the user’s needs, and will be available to them wherever they log in.
+
+::: tip
+Plugins can [register their own widgets](./extend/widget-types.md)!
+:::
 
 ### Utilities
 
@@ -91,7 +95,7 @@ All Craft installations will include these utilities:
 - **Find and Replace:** Search for (and replace) a string across all element content.
 - **Migrations:** View (and apply) pending migrations, or view a history of all previously-run content migrations.
 
-Plugins may register their own utilities, with a corresponding permission for each.
+Plugins can [register utilities](./extend/utility-types.md), and Craft will give each one a corresponding permission.
 
 ::: danger
 Access to utilities should be granted only to trusted users, especially the innocuous _System Messages_ pane. Messages can include arbitrary Twig code, which effectively gives the author access to the entire Craft API—including the ability to modify their own permissions.
