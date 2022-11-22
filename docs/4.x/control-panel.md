@@ -7,9 +7,9 @@ sidebarDepth: 2
 The control panel is one of Craft’s greatest strengths. Developers and content authors appreciate its smart design and powerful feature set:
 
 - Locate and edit content quickly and confidently;
+- Design a schema that makes sense for your site or application;
 - Customize views into deep and complex data;
 - Invite users and work collaboratively;
-- Design a schema that makes sense for your site or application;
 - Find, install, and configure first- and third-party plugins;
 
 We believe these features should be available to _everyone_, so the control panel’s [accessibility](https://craftcms.com/accessibility) is continually evaluated and improved.
@@ -54,19 +54,23 @@ Section | Description
 [Plugin Store](#plugin-store) | Browse, install, and purchase Craft and plugin licenses from the official store.
 …and more! | Some plugins provide their own control panel screens; others may only have a pane in the [Settings](#settings) section.
 
+#### Announcements
+
+Keep an eye on the _global header_ for a <Icon kind="gift" /> gift icon—Craft and any installed plugins may send notifications about new features to all control panel users, when updates are applied.
+
 ### Dashboard
 
 After logging in, control panel users are directed to their **dashboard**. Each user manages their own dashboard, which is comprised of _widgets_. Craft comes with a few widgets:
 
 - **Support:** Get official support from the Craft team.
 - **Feed:** Scrape an external RSS feed.
-- **Drafts:** Viewing your unpublished drafts.
+- **Drafts:** Viewing your unpublished entry drafts.
 - **New Users:** Visualize new registrations.
 - **Quick Post:** Provide a simplified [entry](./entries.md) form for publishing new content with one click.
 - **Recent Entries:** Display a list of recently-posted entries from one or more sections.
 - **Updates:** Keep tabs on Craft and plugin updates.
 
-Widgets can be rearranged and resized based on the user’s needs, and will be available to them wherever they log in.
+Widgets can be rearranged and resized based on the user’s needs, and will be available to them wherever they log in. Plugins can register new widgets, so it's a 
 
 ### Utilities
 
