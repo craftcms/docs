@@ -1,6 +1,6 @@
 # Element Queries
 
-You can fetch elements (entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
+You can fetch [elements](./elements.md) (entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
 
 Working with element queries consists of three steps:
 
@@ -327,7 +327,9 @@ Custom field column names will be automatically resolved when using `select()`. 
 
 ### Conditions
 
+::: warning
 Exercise caution when using these methods directly—some will completely overwrite the existing query conditions and cause unpredictable results.
+:::
 
 - [where()](yii2:yii\db\QueryTrait::where())
 - [andWhere()](yii2:yii\db\QueryTrait::andWhere())
@@ -358,3 +360,20 @@ When customizing an element query, you can call [getRawSql()](craft4:craft\db\Qu
 ```twig
 {{ dump(query.getRawSql()) }}
 ```
+:::
+
+## Headless Applications
+
+Craft can act as a headless content back-end for your static or client-rendered website. There are two main ways of making content available to applications that exist outside Craft’s built-in Twig templating layer:
+
+### Element API
+
+The first-party [Element API](https://plugins.craftcms.com/element-api) allows you to map _endpoints_ to element queries with a combination of static and dynamic criteria and serve JSON-serialized results.
+
+### GraphQL <Badge type="edition" vertical="middle" title="The GraphQL API is a feature of Craft Pro">Pro</Badge>
+
+Craft Pro includes a [GraphQL API](./graphql.md) with configurable schemas.
+
+::: warning
+For security reasons, not all query builder features are available via GraphQL. Some advanced queries may need to be executed separately and combined by the client.
+:::
