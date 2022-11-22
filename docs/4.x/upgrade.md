@@ -91,7 +91,7 @@ You can now set your own config settings—as opposed to those Craft supports—
 
 Volumes have changed a bit in Craft 4.
 
-In Craft 3, Volumes were for storing custom files and defining their associated field layouts. In Craft 4, the field layouts work exactly the same but URLs and storage settings are moved to a new concept called a “Filesystem”.
+In Craft 3, volumes were for storing custom files and defining their associated field layouts. In Craft 4, the field layouts work exactly the same but URLs and storage settings are moved to a new concept called a [Filesystem](./assets.md#filesystems).
 
 Craft 4 Volume settings:
 
