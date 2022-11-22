@@ -74,6 +74,20 @@ Similarly, they can customize what columns appear in the table (and how the resu
 Use the **View** menu to switch back into structure mode for an index.
 :::
 
+### Actions
+
+Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="gear" /> icon in the footer (like _Delete_).
+
+Actions will appear 
+
+### Exporters
+
+Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button in the index footer displays all options, including any exporters registered by custom modules and plugins.
+
+### Modals + Contexts
+
+A streamlined version of indexes are used when adding elements to a [relational](./relations.md) field via a modal. Depending on the field’s configuration: sources may be hidden; the footer and actions are not available; [slideouts](./control-panel.md#slideouts) cannot be summoned (except to create a new element, in-context); and pagination is disabled in favor of scrolling. Internally, Craft refers to these variations as “contexts,” which [plugins](./extend/element-types.md#sources) have an opportunity to modify.
+
 ## Properties and Methods
 
 All elements share a few characteristics that make them familiar to work with in your templates. Each [element type](#types) will supplement these lists with their own properties and methods.
