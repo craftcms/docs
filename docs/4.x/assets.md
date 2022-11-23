@@ -2,9 +2,6 @@
 
 Craft lets you manage media and document files (“assets”) just like entries and other content types. Assets can live anywhere—a directory on the web server, or a remote storage service like Amazon S3.
 
-<Todo notes="Where does this belong?" />
-Volumes aren’t directly concerned with _how_ a file is stored... -> Filesystems?
-
 ## Volumes
 
 Assets are organized into **volumes**, each of which sits on top of a [filesystem](#filesystems) and carries its own permissions and [content](#asset-custom-fields) options. Volumes are configured from **Settings** → **Assets**.
