@@ -15,17 +15,17 @@ In the control panel, you’ll encounter the eight _element types_ common to all
 - [**Users**](users.md) are accounts for human beings with email addresses and permissions, organized into customizable groups.
 - [**Addresses**](addresses.md) are physical addresses that can be attached to users.
 
-Choosing the appropriate element type for your content model is essential—but don’t be afraid to mix, match, and combine them. Plugins (and custom modules) can provide [custom element types](./extend/element-types.md), giving developers and authors a consistent experience to all their content.
+Choosing the appropriate element type for your content model is essential—but don’t be afraid to mix, match, and combine them. Plugins (and custom modules) can provide [custom element types](./extend/element-types.md), giving developers and authors a familiar experience across all their content.
 
 ## Common Features
 
 Some features are available to most or all elements:
 
-- Control panel edit interfaces, including [indexes](#indexes) and slide-outs;
+- Control panel interfaces, including forms, [indexes](#indexes), and [slide-outs](./control-panel.md#slideouts);
 - [Custom fields](./fields.md) and field layouts;
 - URLs and routing;
 - Localization via [sites](./sites.md);
-- Sophisticated [permissions](./user-management.md#permissions) scheme;
+- Sophisticated [permissions](./user-management.md#permissions);
 - [Element queries](./element-queries.md) with advanced sorting and filtering capabilities;
 - Bi-directional [relationships](./relations.md);
 - Automatic indexing for [search](./searching.md);
@@ -34,11 +34,11 @@ Other features are specific to a type—like Assets’ tie to files, or Entries�
 
 ## Indexes
 
-You’ll access most elements via an element index. Indexes allow you to browse, sort, and [search](./searching.md) for elements in a paginated table-like view.
+You’ll access most elements via their element index. Indexes allow you to browse, sort, and [search](./searching.md) for elements in a paginated, table-like view.
 
 ### Sources
 
-Indexes are broken down into **sources**. Sources can be permanent fixtures of an element type (like the **Admin** source for users), dynamically added based on its configuration (like sources for each user group), or defined by a set of custom rules.
+Indexes are broken down into **sources**. Sources can be permanent fixtures of an element type (like the **Admin** source for users), dynamically added based on its configuration (like those for user groups), or defined by a set of custom rules.
 
 Each source also controls what columns are visible in the index, and its default sorting.
 
@@ -68,7 +68,7 @@ Similarly, they can customize what columns appear in the table (and how the resu
 
 ### Structures
 
-[Entries](./entries.md) (using the _Structure_ type) and [Categories](./categories.md) support a hierarchical view mode on their indexes. Elements in structures track their relative position among siblings, and can be easily relocated by dragging-and-dropping <Icon kind="move" /> their row in an index. Reordering is still possible, even when the structure is limited to a single level.
+[Entries](./entries.md) (using the _Structure_ section type) and [Categories](./categories.md) support a hierarchical view mode on their indexes. Elements in structures track their relative position among siblings, and can be easily relocated by dragging-and-dropping <Icon kind="move" /> their row in an index. Reordering is still possible, even when the structure is limited to a single level.
 
 ::: tip
 Use the **View** menu to switch back into structure mode for an index.
@@ -76,17 +76,17 @@ Use the **View** menu to switch back into structure mode for an index.
 
 ### Actions
 
-Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="gear" /> icon in the footer (like _Delete_).
+Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="settings" /> icon in the footer (like _Delete_).
 
-Actions will appear 
+Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
 
 ### Exporters
 
-Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button in the index footer displays all options, including any exporters registered by custom modules and plugins.
+Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button in the index footer displays all options, including any [custom exporters](./extend/element-exporter-types.md) registered by modules and plugins.
 
 ### Modals + Contexts
 
-A streamlined version of indexes are used when adding elements to a [relational](./relations.md) field via a modal. Depending on the field’s configuration: sources may be hidden; the footer and actions are not available; [slideouts](./control-panel.md#slideouts) cannot be summoned (except to create a new element, in-context); and pagination is disabled in favor of scrolling. Internally, Craft refers to these variations as “contexts,” which [plugins](./extend/element-types.md#sources) have an opportunity to modify.
+A streamlined version of indexes are used when adding elements to a [relational](./relations.md) field via a modal. Depending on the field’s configuration, Craft may hide sources or actions, and disable [slideouts](./control-panel.md#slideouts) (except to create a new element, in-context) and pagination (in favor of scrolling). Internally, Craft refers to these variations as “contexts,” which [plugins](./extend/element-types.md#sources) have an opportunity to modify.
 
 ## Properties and Methods
 
@@ -123,7 +123,7 @@ Property | Type | Notes
 Methods also return values, but may accept or require arguments.
 
 ::: tip
-Any method beginning with `get` can be used like [properties](#properties) by down-casing the first letter. For example, `{{ entry.getLink() }}` can also be accessed as `{{ entry.link }}`
+Any method beginning with `get` can be used like a [property](#properties) by removing the prefix and down-casing the first letter. For example, `{{ entry.getLink() }}` can also be accessed as `{{ entry.link }}`
 :::
 
 Method | Notes
