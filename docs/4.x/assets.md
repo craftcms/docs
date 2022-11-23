@@ -26,7 +26,7 @@ All filesystems support the following options:
 ::: tip
 A filesystem’s **Base URL** can be set to an environment variable, or begin with an alias. [Read more](./config/README.md#control-panel-settings) about special configuration values.
 
-In the screenshot above, we’re using a `@cdn` alias so that the URL can be updated across multiple filesystems with a single change.
+In the screenshot above, we’re using a `@cdn` [alias](./config/README.md#aliases) so that the URL can be updated across multiple filesystems with a single change.
 :::
 
 ### Local Filesystems
