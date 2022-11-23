@@ -588,8 +588,9 @@ Param | Description
 `email` | The user’s email address. (Only checked if registering a new user, updating the logged-in user, or the logged-in user is allowed to administrate users.)
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
 `fields[...]` | [Custom field](#custom-fields) values.
-`firstName` | The user’s first name.
-`lastName` | The user’s last name.
+`fullName` | The user’s full name. Preferred to discrete `firstName` and `lastName` params.
+`firstName` | The user’s first name. `fullName` is preferred.
+`lastName` | The user’s last name. `fullName` is preferred.
 `newPassword` | The user’s new password, if updating the logged-in user’s account. (If registering a new user, send `password`.)
 `passwordResetRequired` | Whether the user must reset their password before logging in again (`1`/`0`). Only assignable if the logged-in user is an admin.
 `password` | The user’s password, when registering a new user. (Has no effect if <config4:deferPublicRegistrationPassword> is `true`. To change the current user’s password, send `newPassword`.)

@@ -137,6 +137,7 @@ module.exports = {
           collapsable: false,
           children: [
             "directory-structure",
+            "control-panel",
             "elements",
             "fields",
             "relations",

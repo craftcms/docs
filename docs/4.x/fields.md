@@ -1,47 +1,54 @@
 # Custom Fields
 
-All of the content on your site will get entered into fields.
+On their own, [elements](./elements.md) only provide a scaffold for your content—the content itself will be stored in *fields*.
 
-Fields are defined globally from **Settings** → **Fields**. They are organized into Field Groups for convenience, but Field Groups have very little relevance anywhere else in the system.
+Fields are defined in **Settings** → **Fields**, and are organized into _Field Groups_ for convenience. [Field layouts](#field-layouts) and [conditions](#field-conditions) determine where and when your fields should appear for content authors.
 
-All fields share a few common settings:
+All fields share a few settings:
 
-- **Group** – The field group that the field should be shown in
-- **Name** – How the field will be referenced throughout the control panel
-- **Handle** – How the field will be referenced from your templates
-- **Instructions** – Instruction text to guide the authors
-- **Field Type** – What type of field it is
+- **Group** – The field group that the field is filed into;
+- **Name** – How the field will be labeled throughout the control panel;
+- **Handle** – How the field will be referenced from your templates;
+- **Instructions** – Instruction text to guide authors;
+- **Field Type** – What [type](#field-types) of field it is;
 
 
 <BrowserShot url="https://my-project.tld/admin/settings/fields/new" :link="false" :max-height="500">
 <img src="./images/fields-field-settings.png">
 </BrowserShot>
 
+::: tip
+A field’s _name_ and _instructions_ can be overridden when adding it to a [layout](#field-layouts).
+:::
+
 ## Field Types
 
-Choosing a field type determines what the field’s input UI is going to look like, what type of data it can store, and how you’ll be able to interact with that data from your templates.
+Choosing a field type determines what the field’s input UI is going to look like, how it stores data, and how you’ll interact with that data in your templates.
 
 Craft comes with the following built-in field types:
 
-- [Assets](assets-fields.md)
-- [Categories](categories-fields.md)
-- [Checkboxes](checkboxes-fields.md)
-- [Color](color-fields.md)
-- [Date](date-time-fields.md)
-- [Dropdown](dropdown-fields.md)
-- [Email](email-fields.md)
-- [Entries](entries-fields.md)
-- [Lightswitch](lightswitch-fields.md)
-- [Matrix](matrix-fields.md)
-- [Multi-select](multi-select-fields.md)
-- [Number](number-fields.md)
-- [Plain Text](plain-text-fields.md)
-- [Radio Buttons](radio-buttons-fields.md)
-- [Table](table-fields.md)
-- [Tags](tags-fields.md)
-- [Time](time-fields.md)
-- [URL](url-fields.md)
-- [Users](users-fields.md)
+Type | Description
+---- | -----------
+[Assets](assets-fields.md) | Attach asset elements.
+[Categories](categories-fields.md) | Attach category elements.
+[Checkboxes](checkboxes-fields.md) | Select any number of values from a list.
+[Color](color-fields.md) | Choose a color with the browser’s color picker UI.
+[Date](date-time-fields.md) | Choose a date and/or time, as well as a timezone.
+[Dropdown](dropdown-fields.md) | Choose one value from a list.
+[Email](email-fields.md) | Validate text input as an email address.
+[Entries](entries-fields.md) | Attach entry elements.
+[Lightswitch](lightswitch-fields.md) | Toggle a binary option.
+[Matrix](matrix-fields.md) | Repeat nested sets of fields.
+[Money](money-fields.md) | Input a numeric value and choose a currency.
+[Multi-select](multi-select-fields.md) | Select any number of values from a list (same as checkboxes, but a different UI).
+[Number](number-fields.md) | Input a numeric value.
+[Plain Text](plain-text-fields.md) | Input arbitrary text.
+[Radio Buttons](radio-buttons-fields.md) | Choose one value from a list.
+[Table](table-fields.md) | Add rows of similar data.
+[Tags](tags-fields.md) | Attach tag elements, or create new ones on-the-fly.
+[Time](time-fields.md) | Set a time of day, without a date or timezone.
+[URL](url-fields.md) | Validate text as a URL/URI.
+[Users](users-fields.md) | Attach user elements.
 
 ## Translation Methods
 
@@ -65,14 +72,14 @@ If the translation key format returns an empty string (`''`), the field will not
 
 Once you’ve created your fields, you can display them in your edit forms by adding them to “field layouts”.
 
-Everything in Craft that has content associated with it will provide a field layout for selecting fields:
+Everything in Craft that has content associated with it will expose a configurable field layout:
 
 - [Entries](entries.md) use the field layout defined by their entry type in **Settings** → **Sections** → **Edit Entry Types** → [entry type name] → **Field Layout**.
 - [Global sets](globals.md) each get their own field layout, defined in **Settings** → **Globals** → [global set name] → **Field Layout**.
 - [Assets](assets.md) use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
 - [Categories](categories.md) use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
 - [Tags](tags.md) use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
-- [Users](users.md) all share a single field layout defined in **Settings** → **Users** → **User Fields**.
+- [Users](users.md) share a single field layout defined in **Settings** → **Users** → **User Fields**.
 - [Addresses](addresses.md) also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
 
 The field layout editor works the same way regardless of which content type you’re looking at:
