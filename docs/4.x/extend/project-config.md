@@ -247,7 +247,7 @@ Craft never forces Project Config changes to be applied. Code defensively and ma
 
 ## Rebuilding Project Config Data
 
-If your plugin is storing data in both the project config and elsewhere in the database, you should listen to <craft4:craft\services\ProjectConfig::EVENT_REBUILD> (added in Craft 3.1.20) to aid Craft in rebuilding the project config based on database-stored data, when the `php craft project-config/rebuild` command is run.
+If your plugin is storing data in both the project config and elsewhere in the database, you should listen to <craft4:craft\services\ProjectConfig::EVENT_REBUILD> to aid Craft in rebuilding the project config based on database-stored data, when the `php craft project-config/rebuild` command is run.
 
 ```php
 use craft\events\RebuildConfigEvent;

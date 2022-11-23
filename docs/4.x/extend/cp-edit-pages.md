@@ -109,7 +109,7 @@ public function actionSave(): ?Response
     $this->requirePermission('edit-events');
 
     $eventId = $this->request->getBodyParam('eventId');
-    
+
     if ($eventId) {
         $event = MyPlugin::getInstance()->events->getEventById($eventId);
         if (!$event) {
@@ -118,12 +118,12 @@ public function actionSave(): ?Response
     } else {
         $event = new Event();
     }
-    
+
     // Populate the event with the form data
     $event->name = $this->request->getBodyParam('name');
     $event->startDate = DateTimeHelper::toDateTime($this->request->getBodyParam('startDate'));
     $event->endDate = DateTimeHelper::toDateTime($this->request->getBodyParam('endDate'));
-    
+
     // Try to save it
     if (!MyPlugin::getInstance()->events->saveEvent($event)) {
         if ($this->request->acceptsJson) {
@@ -138,11 +138,11 @@ public function actionSave(): ?Response
         ]);
         return null;
     }
-    
+
     if ($this->request->acceptsJson) {
         return $this->asJson(['success' => true]);
     }
-    
+
     $this->setSuccessFlash(Craft::t('plugin-handle', 'Event saved.'));
     $this->redirectToPostedUrl($event);
 }

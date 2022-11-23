@@ -105,7 +105,7 @@ class MyRecord extends ActiveRecord
         behaviors as softDeleteBehaviors;
     }
 
-    public function behaviors()
+    public function behaviors(): array
     {
         $behaviors = $this->softDeleteBehaviors();
         $behaviors['myBehavior'] = MyBehavior::class;

@@ -31,9 +31,6 @@ use craft\mail\Message;
 
 class MyJob extends \craft\queue\BaseJob
 {
-    /**
-     * @inheritdoc
-     */
     public function execute($queue): void
     {
         $message = new Message();
@@ -45,9 +42,6 @@ class MyJob extends \craft\queue\BaseJob
         Craft::$app->getMailer()->send($message);
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function defaultDescription(): string
     {
         return Craft::t('app', 'Sending a worthless email');
