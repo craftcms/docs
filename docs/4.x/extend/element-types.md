@@ -126,7 +126,7 @@ Install the plugin now, so your database table will be created.
 You will also need to add an `afterSave()` method to your element class, which is responsible for keeping your element table updated when elements are saved. The `afterSave()` method is a part of the standard element saving [control flow](services.md#interface-oriented-methods).
 
 ```php
-public function afterSave(bool $isNew)
+public function afterSave(bool $isNew): void
 {
     if ($isNew) {
         \Craft::$app->db->createCommand()
@@ -183,14 +183,14 @@ class ProductQuery extends ElementQuery
     public $price;
     public $currency;
 
-    public function price($value)
+    public function price($value): self
     {
         $this->price = $value;
 
         return $this;
     }
 
-    public function currency($value)
+    public function currency($value): self
     {
         $this->currency = $value;
 
@@ -528,7 +528,7 @@ public static function statuses(): array
 Next add a <craft4:craft\base\ElementInterface::getStatus()> method that returns the current status of an element:
 
 ```php
-public function getStatus()
+public function getStatus(): ?string
 {
     if ($this->fooIsTrue) {
         return 'foo';
@@ -541,7 +541,7 @@ public function getStatus()
 Finally, override the <craft4:craft\elements\db\ElementQuery::statusCondition()> method on your [element query class](#element-query-class):
 
 ```php
-protected function statusCondition(string $status)
+protected function statusCondition(string $status): mixed
 {
     switch ($status) {
         case 'foo':
@@ -726,7 +726,7 @@ use craft\helpers\UrlHelper;
 
 // ...
 
-public function getThumbUrl(int $size)
+public function getThumbUrl(int $size): ?string
 {
     return UrlHelper::resourceUrl("product-images/{$this->id}/{$size}");
 }
@@ -752,7 +752,7 @@ When an element is being saved, its `getUriFormat()` method will be called to fi
 So if you want your elements to get their own URLs, you must implement this method and have it return a string that can be parsed with <craft4:craft\web\View::renderObjectTemplate()> (e.g. `products/{slug}`). Usually this should be a user-defined string, rather than something hard-coded.
 
 ```php
-public function getUriFormat()
+public function getUriFormat(): ?string
 {
     return $this->getType()->uriFormat;
 }
@@ -763,7 +763,7 @@ Whenever an element’s URL is requested, Craft will instantiate the element and
 Internally, <craft4:craft\base\Element::getRoute()> will call a protected `route()` method, which is what you should override in your element class:
 
 ```php
-protected function route()
+protected function route(): array|string|null
 {
     return [
         'templates/render', [
@@ -878,7 +878,7 @@ $success = Craft::$app->elements->saveElement($product);
 Once you’ve set up an edit page for your element type, you can add a [getCpEditUrl()](craft4:craft\base\ElementInterface::getCpEditUrl()) method to your element class, which will communicate your elements’ edit page URLs within the control panel.
 
 ```php
-public function getCpEditUrl()
+public function getCpEditUrl(): ?string
 {
     return 'plugin-handle/products/'.$this->id;
 }
@@ -927,7 +927,7 @@ class Products extends BaseRelationField
 If you want your elements to support reference tags (e.g. `{product:100}`), add a static `refHandle()` method to your element class that returns a unique handle that should be used for its reference tags.
 
 ```php
-public static function refHandle()
+public static function refHandle(): ?string
 {
     return 'product';
 }
@@ -967,7 +967,7 @@ use craft\helpers\ArrayHelper;
 
 // ...
 
-public static function eagerLoadingMap(array $sourceElements, string $handle)
+public static function eagerLoadingMap(array $sourceElements, string $handle): array|null|false
 {
     if ($handle === 'author') {
         // get the source element IDs
@@ -994,7 +994,7 @@ This function takes an of already-queried elements (the “source” elements), 
 If you need to override where eager-loaded elements are stored, add a `setEagerLoadedElements()` method to your element class as well:
 
 ```php
-public function setEagerLoadedElements(string $handle, array $elements)
+public function setEagerLoadedElements(string $handle, array $elements): void
 {
     if ($handle === 'author') {
         $author = $elements[0] ?? null;

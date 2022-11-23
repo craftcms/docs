@@ -500,7 +500,7 @@ use mynamespace\helpers\Gql as GqlHelper;
 
 class Widget extends \craft\gql\base\ElementResolver
 {
-    public static function prepareQuery($source, array $arguments, $fieldName = null)
+    public static function prepareQuery($source, array $arguments, $fieldName = null): mixed
     {
         if ($source === null) {
             // If this is the beginning of a resolver chain, start fresh
@@ -770,7 +770,7 @@ class BarTheFoo extends Directive
         return 'fooTheBar';
     }
 
-    public static function apply($source, $value, array $arguments, ResolveInfo $resolveInfo)
+    public static function apply($source, $value, array $arguments, ResolveInfo $resolveInfo): mixed
     {
         return str_replace('foo', 'bar', (string)$value);
     }

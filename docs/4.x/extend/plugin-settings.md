@@ -20,7 +20,7 @@ class Settings extends Model
     public $foo = 'defaultFooValue';
     public $bar = 'defaultBarValue';
 
-    public function rules()
+    public function defineRules(): array
     {
         return [
             [['foo', 'bar'], 'required'],
@@ -38,7 +38,7 @@ namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
 {
-    protected function createSettingsModel()
+    protected function createSettingsModel(): ?Model
     {
         return new \mynamespace\models\Settings();
     }

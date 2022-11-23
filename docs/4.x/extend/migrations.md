@@ -131,12 +131,12 @@ use craft\db\Migration;
 
 class Install extends Migration
 {
-    public function safeUp()
+    public function safeUp(): bool
     {
         // ...
     }
 
-    public function safeDown()
+    public function safeDown(): bool
     {
         // ...
     }
@@ -160,7 +160,7 @@ It is _not_ a plugin’s responsibility to manage its row in the `plugins` datab
 If you want to add things to the [project config](project-config.md) on install, either directly or via your plugin’s API, be sure to only do that if the incoming project config YAML doesn’t already have a record of your plugin.
 
 ```php
-public function safeUp()
+public function safeUp(): bool
 {
     // ...
 
@@ -176,12 +176,12 @@ That’s because there’s a chance that your plugin is being installed as part 
 The reverse could be useful if you need to make changes when your plugin is uninstalled:
 
 ```php{6-14}
-public function safeUp()
+public function safeUp(): bool
 {
     // ...
 }
 
-public function safeDown()
+public function safeDown(): bool
 {
     // ...
 
