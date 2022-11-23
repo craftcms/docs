@@ -200,7 +200,7 @@ You could achieve the same result as the example above using the `andRelatedTo` 
 ```
 
 ::: warning
-These examples _may_ return the recipe you’re currently viewing. Exclude a specific element from results with the `id` param: `.id(['not', entry.id])`
+These examples _may_ return the recipe you’re currently viewing. Exclude a specific element from results with the `id` param: `.id(['not', entry.id])`.
 :::
 
 ## Complex Relationships
@@ -313,12 +313,12 @@ If you want to find elements related to a source element through a [Matrix](matr
     .section('recipes')
     .relatedTo({
         targetElement: ingredient,
-        field: 'process'
+        field: 'steps'
     })
     .all() %}
 ```
 
-In this example, we’ve changed our schema a bit: ingredients are now attached to blocks in a `process` Matrix field, so we can tie instructions and quantities or volume to each one. We still have access to all the same relational query capabilities!
+In this example, we’ve changed our schema a bit: ingredients are now attached to blocks in a `steps` Matrix field, so we can tie instructions and quantities or volume to each one. We still have access to all the same relational query capabilities!
 
 If that Matrix field has more than one relational field and you want to target a specific one, you can specify the block type field’s handle using a dot notation:
 
@@ -327,11 +327,11 @@ If that Matrix field has more than one relational field and you want to target a
     .section('recipes')
     .relatedTo({
         targetElement: ingredient,
-        field: 'process.ingredient'
+        field: 'steps.ingredient'
     })
     .all() %}
 ```
 
 ::: warning
-This notation only uses the Matrix field’s handle and the child block’s relational field handle: `matrixFieldHandle.relationalFieldHandle`. The block type handle isn’t necessary, like it is when [eager-loading](./dev/eager-loading-elements.md).
+This notation only uses the main Matrix field’s handle and the block’s relational field handle: `matrixFieldHandle.relationalFieldHandle`. The block type handle is _not_ used here, as it is when [eager-loading](./dev/eager-loading-elements.md).
 :::
