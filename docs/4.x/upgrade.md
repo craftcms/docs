@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # Upgrading from Craft 3
 
 The smoothest way to upgrade to Craft 4 is to start with a [fully-updated Craft 3 project](/3.x/updating.md).
@@ -62,13 +66,15 @@ The [Craft starter project](https://github.com/craftcms/craft) is kept up-to-dat
 
 Incorporating updated entry script(s) into your project may also involve changing the required version of [DotEnv](https://github.com/vlucas/phpdotenv) in `composer.json` to match the starter project.
 
-## Configuration
+## Breaking Changes and Deprecations
+
+### Configuration
 
 Depending on when your project was first created (or when you last updated your [entry scripts](#entry-script)), you may need to review [how your environment is set](./config/README.md#multi-environment-configs).
 
 Craft 4 looks for an environment variable (or PHP constant) named `CRAFT_ENVIRONMENT`. Use of the `ENVIRONMENT` variable is no longer recommended, as it relies on an older entry script to assign the constant.
 
-### Config Settings
+#### Config Settings
 
 Some config settings have been removed in Craft 4:
 
@@ -87,11 +93,11 @@ Leaving legacy settings in `general.php` will throw an error.
 You can now set your own config settings—as opposed to those Craft supports—from `config/custom.php`. Any of your [custom config settings](./config/README.md#custom-settings) will be accessible via `Craft::$app->config->custom->myCustomSetting`, or `{{ craft.app.config.custom.myCustomSetting }}`.
 :::
 
-### Volumes
+#### Volumes
 
 Volumes have changed a bit in Craft 4.
 
-In Craft 3, Volumes were for storing custom files and defining their associated field layouts. In Craft 4, the field layouts work exactly the same but URLs and storage settings are moved to a new concept called a “Filesystem”.
+In Craft 3, volumes were for storing custom files and defining their associated field layouts. In Craft 4, the field layouts work exactly the same but URLs and storage settings are moved to a new concept called a [Filesystem](./assets.md#filesystems).
 
 Craft 4 Volume settings:
 
@@ -112,25 +118,26 @@ The migration process will take care of volume migrations for you, but there are
 1. `volumes.php` files are no longer supported—so you’ll need to use filesystems accordingly if you’re swapping storage methods in different environments.
 2. Any filesystems without public URLs should designate a transform filesystem in order to have control panel thumbnails. Craft used to store generated thumbnails separately for the control panel—but it will now create them alongside your assets just like front-end transforms.
 
-## Logging
+### Logging
 
-Logs in Craft 4 now use [Monolog](https://github.com/Seldaek/monolog), which comes with some behavior changes.
+The [logging system](./logging.md) in Craft 4 has undergone some significant changes.
 
 - 404s are no longer logged by default. You can customize this in `config/app.php` via `components.log.monologTargetConfig.except`:
     ```php
     'components' => [
         'log' => [
             'monologTargetConfig' => [
+                // Override exclusions:
                 'except' => [
                     \yii\i18n\PhpMessageSource::class . ':*',
-                    // *Do* log 404s (commented for illustration)
+                    // This pattern is a default, commented out here for illustration:
                     // \yii\web\HttpException::class . ':404',
-                ]
-            ]
-        ]
+                ],
+            ],
+        ],
     ],
     ```
-- Query logging and query profiling are no longer enabled by default when `devMode` is set to `false`. These can be manually adjusted by setting <yii2:yii\db\Connection::$enableLogging> and <yii2:yii\db\Connection::$enableProfiling> from `config/app.php`:
+- Query logging and query profiling are no longer enabled by default when `devMode` is on. These can be manually adjusted by setting <yii2:yii\db\Connection::$enableLogging> and <yii2:yii\db\Connection::$enableProfiling> from `config/app.php`:
   ```php
   return [
     'components' => [
@@ -141,7 +148,7 @@ Logs in Craft 4 now use [Monolog](https://github.com/Seldaek/monolog), which com
     ],
   ];
   ```
-- When [CRAFT_STREAM_LOG](./config/#craft-stream-log) is set to `true`, file logging will **not** be enabled.
+- When [CRAFT_STREAM_LOG](./config/#craft-stream-log) is set to `true`, file logging will be completely disabled.
 
 ::: tip
 See <craft4:craft\log\MonologTarget> for a look at Craft’s default log configuration.
@@ -165,7 +172,7 @@ The following PHP methods have been removed:
 | `\craft\helpers\App::getDefaultLogTargets()` | Add additional log targets via `components.log.targets`.  |
 | `\craft\helpers\App::logConfig`              | Define your own log component using [yii\log\Dispatcher](yii2:yii\log\Dispatcher). |
 
-## PHP Constants
+### PHP Constants
 
 Some PHP constants have been deprecated in Craft 4, and will no longer work in Craft 5:
 
@@ -174,7 +181,9 @@ Some PHP constants have been deprecated in Craft 4, and will no longer work in C
 | `CRAFT_SITE_URL` | Environment-specific site URLs can be defined [via environment variables](https://craftcms.com/knowledge-base/preparing-for-craft-4#replace-siteName-and-siteUrl-config-settings).
 | `CRAFT_LOCALE`   | `CRAFT_SITE`
 
-## Template Tags
+### Templating
+
+#### Tags
 
 [Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG) has removed some template tags:
 
@@ -199,7 +208,7 @@ Twig 3 also removed support for the `if` param in `{% for %}` tags, but you can 
 
 The `{% cache %}` tag now stores any external references from `{% css %}` and `{% js %}` tags now, in addition to any inline content.
 
-## Template Functions
+#### Functions
 
 Some template functions have been removed completely:
 
@@ -234,7 +243,7 @@ Some template functions have been removed completely:
 
 <!-- textlint-enable -->
 
-## Template Variables
+#### Variables
 
 | Old Template Variable     | What to do instead
 | ------------------------- | ---------------------------------------------
@@ -267,19 +276,56 @@ You can use [dodecastudio/craft-feedreader](https://github.com/dodecastudio/craf
 ```
 :::
 
-## Template Operators
+#### Operators
 
 Twig 3’s operators (`in`, `<`, `>`, `<=`, `>=`, `==`, `!=`) are more strict comparing strings to integers and floats. Make sure this doesn’t have any unintended consequences!
 
-## Elements
+### Elements
 
-Craft elements now clone custom array and object field values before returning them.
+#### Custom Field Data
+
+Craft elements now clone array and object field values before returning them.
 
 This means that every time you call a field handle like `element.myCustomField`, you’ll get a fresh copy of that field’s value. As a result, you may no longer need to use `clone()` to avoid inadvertently changing data or element queries used elsewhere.
 
-The change in behavior has the potential to break templates relying on Craft 3’s behavior, so be sure to check any templates or custom code that modifies and re-uses custom field values.
+The change in behavior has the potential to break templates relying on Craft 3’s behavior, so be sure to check any templates or custom code that modifies and re-uses custom field values:
 
-### Query Params
+::: code
+```twig Craft 3
+{# Field values are mutated in-place... #}
+{% set importantPosts = entry.relatedNews
+  .type('breakingNews')
+  .orderBy('dateUpdated DESC')
+  .all() %}
+{# -> Expected results. #}
+
+{# ...so subsequent uses of the field are tainted: #}
+{% set allUpdates = entry.relatedNews
+  .orderBy('title ASC')
+  .all() %}
+{# -> Still filtered by `breakingNews`! #}
+```
+```twig Craft 4
+{# Field values are cloned automatically... #}
+{% set importantPosts = entry.relatedNews
+  .type('breakingNews')
+  .orderBy('dateUpdated DESC')
+  .all() %}
+{# -> Expected results. #}
+
+{# ...so subsequent uses return a fresh query: #}
+{% set allUpdates = entry.relatedNews
+  .orderBy('title ASC')
+  .all() %}
+{# -> No `type` constraint! #}
+```
+:::
+
+::: tip
+If you _do_ need to operate on the same value multiple times, you can store it in a temporary variable—the cloning only happens when accessing the field data directly from an element.
+:::
+
+#### Query Params
 
 Some element query params have been removed:
 
@@ -300,7 +346,7 @@ Some element query params have been renamed in Craft 4. The old params have been
 | ------------ | ------------------------ | ----------------------------
 | all          | `anyStatus`              | `status(null)`
 
-### Query Methods
+#### Query Methods
 
 Some element query methods have been removed in Craft 4.
 
@@ -311,7 +357,7 @@ Some element query methods have been removed in Craft 4.
 | `last()`        | `inReverse().one()`
 | `total()`       | `count()`
 
-### User Queries
+#### User Queries
 
 User queries now return _all_ users by default in Craft 4, instead of only active users. Any user queries relying on this default behavior may need to be updated:
 
@@ -327,20 +373,20 @@ User queries now return _all_ users by default in Craft 4, instead of only activ
 ```
 ```php
 // Craft 3 returned all *active* users by default
-$activeUsers = Craft::$app->getUsers()->all();
+$activeUsers = User::find()->all();
 
 // Craft 4 returns *all* users by default; specify status for the same behavior
-$activeUsers = Craft::$app->getUsers()
+$activeUsers = User::find()
   ->status('active')
   ->all();
 ```
 :::
 
-## Collections
+### Collections
 
 Craft 4 adds the [Collections](https://packagist.org/packages/illuminate/collections) package, which offers a more convenient and consistent way of working with arrays and collections of things.
 
-Element queries, for example, now include a `collect()` method that returns query results as one of these collections instead of an array:
+Element queries now include a `collect()` method that returns query results as one of these collections instead of an array:
 
 ::: code
 ```twig
@@ -405,20 +451,20 @@ Use the `|length` filter or the collection’s `.count()` method instead:
 {% endif %}
 ```
 
-## GraphQL
+### GraphQL
 
 | GraphQL Argument | What to do instead
 | ---------------- | --------------------
 | `immediately`    | all GraphQL transforms are now processed immediately
 | `enabledForSite` | `status`
 
-## Console Commands
+### Console Commands
 
 | Old Command | What to do instead
 | ----------- | ------------------
-| `--type` option for `migrate/*` commmands | `--track` or `--plugin` option
+| `--type` option for `migrate/*` commands | `--track` or `--plugin` option
 
-## Alternative Text Fields
+### Alternative Text Fields
 
 Craft 4’s Assets have the option of including a native `alt` field for alternative text. You can use this to query assets with or without alternative text, and Craft will use it generating image tags both in the control panel and on the front end.
 
@@ -445,7 +491,7 @@ Don’t forget to update your templates and GraphQL queries!
 `alt` is now a reserved word for Asset Volume field layouts. If you have an existing, custom `alt` field, you’ll need to change it.
 :::
 
-## User Permissions
+### User Permissions
 
 A few user permissions have been removed in Craft 4:
 
@@ -453,7 +499,7 @@ A few user permissions have been removed in Craft 4:
 - `customizeSources` had made it possible for authorized users to customize element sources. Only admins can customize element sources now, and only from an environment that allows admin changes.
 - `publishPeerEntryDrafts:<uid>` permissions wouldn’t have stopped users from viewing, copying, and saving draft content themselves.
 
-## Queue Drivers
+### Queue Drivers
 
 If you’re overriding Craft’s `queue` component in `config/app.php`, you may want to override the [`proxyQueue`](craft4:craft\queue\Queue::$proxyQueue) property of Craft’s built-in queue driver, instead. This way, you’ll regain visibility into the queue’s state from the control panel.
 
@@ -472,6 +518,42 @@ return [
 
 <a name="plugins"></a>
 
-## Plugins and Modules
+### Forms + Actions
+
+#### `users/save-user`
+
+When registering or updating users, passing a `fullName` param is preferred to `firstName` and `lastName`, as the former ensures values are saved exactly as provided. Users now store names in a single field, and will [parse them back out](https://github.com/theiconic/name-parser) into first and last names for backwards-compatibility.
+
+::: code
+```twig Craft 3
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('users/save-user') }}
+
+  {# Separate first and last name inputs: #}
+  {{ input('text', 'firstName', user.firstName) }}
+  {{ input('text', 'lastName', user.lastName) }}
+
+  {# ... #}
+</form>
+```
+```twig Craft 4
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('users/save-user') }}
+
+  {# Consolidated full name input: #}
+  {{ input('text', 'fullName', user.fullName) }}
+
+  {# ... #}
+</form>
+```
+:::
+
+::: tip
+Read more about the [`users/save-user` controller action](./dev/controller-actions.md#post-userssave-user).
+:::
+
+### Plugins and Modules
 
 Plugin authors (and module maintainers) should refer to our guide on [updating Plugins for Craft 4](extend/updating-plugins.md).

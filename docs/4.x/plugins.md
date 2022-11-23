@@ -8,7 +8,7 @@ If you’re looking for documentation on plugin _development_, check out [Extend
 
 ## The Plugin Store
 
-Craft’s control panel features a Plugin Store where you can browse through hundreds of free and commercial plugins, install them with a single click, and purchase licenses.
+Craft’s [control panel](./control-panel.md) features a Plugin Store where you can browse through hundreds of free and commercial plugins, install them with a single click, and purchase licenses.
 
 ::: tip
 If you’ve disallowed admin changes in production, you will only be able to install plugins from the control panel in your local development environment.
@@ -21,6 +21,8 @@ To access the Plugin Store from the control panel, click **Plugin Store** from t
 Choose any plugin to learn more about its features, pricing, documentation, version history, and see screenshots of it in action.
 
 ![Plugin Store plugin detail page](./images/plugin-store-plugin.png)
+
+The Plugin Store will only show plugins that are compatible with the version of Craft you are viewing it from. If you would like to view plugins for _any_ Craft version, visit [plugins.craftcms.com](https://plugins.craftcms.com).
 
 ## Installing Free Plugins
 

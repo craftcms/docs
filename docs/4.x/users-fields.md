@@ -26,7 +26,7 @@ Clicking the “Add a user” button will bring up a modal window where you can 
 
 ### Inline User Editing
 
-When you double-click on a related user, a HUD will appear where you can edit the user’s custom fields.
+When you double-click on a related user, a [slideout](./control-panel.md#slideouts) will appear where you can edit the user’s custom fields.
 
 ## Development
 

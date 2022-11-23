@@ -18,6 +18,11 @@
           :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }"
         >
           <slot></slot>
+          <div class="points" v-if="poi.length">
+            <div
+              class="point" v-for="(point, i) in poi" :key="i"
+              :style="`left: ${point[0]}%; top: ${point[1]}%;`" v-text="i + 1"></div>
+          </div>
         </div>
       </div>
       <figcaption class="caption" v-if="caption">{{ caption }}</figcaption>
@@ -101,6 +106,32 @@
   font-size: 0.9em;
   color: #637599;
 }
+
+/* Points of Interest */
+
+.points {
+  left: 0;
+  height: 100%;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.point {
+  background-color: var(--craft-red);
+  border-radius: 100%;
+  color: theme("colors.white");
+  font-weight: bold;
+  font-size: 14px;
+  height: 24px;
+  line-height: 24px;
+  margin-left: -12px;
+  margin-top: -12px;
+  position: absolute;
+  text-align: center;
+  width: 24px;
+}
 </style>
 
 <script>
@@ -133,7 +164,12 @@ export default {
     maxHeight: {
       type: Number,
       required: false
-    }
+    },
+    poi: {
+      type: Array,
+      required: false,
+      default: () => [],
+    },
   },
   methods: {
     getDisplayUrl(url) {

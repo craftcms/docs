@@ -1,14 +1,18 @@
 # Tags
 
-You can create folksonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Tags.
+You can create folksonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Tags. Tags are another type of [element](./elements.md).
 
 ## Tag Groups
 
 Before you can create tags, you must create Tag Groups to contain them.
 
-To create a new tag group, go to Settings → Tags and click New Tag Group.
+To create a new tag group, go to **Settings** → **Tags** and click **New Tag Group**.
 
 Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don’t need to assign any fields to the Tag Group Field Layout in order to use the group.
+
+::: tip
+There is no centralized editing view for tags (like there is for other element types), so fields you attach will only be editable via a [slideout](./control-panel.md#slideouts), after a tag has been created and assigned to a tag field.
+:::
 
 ## Assigning Tags
 
@@ -18,7 +22,7 @@ Each Tags field is connected to a single tag group. Whatever you attach the fiel
 
 ## Querying Tags
 
-You can fetch tags in your templates or PHP code using **tag queries**.
+You can fetch tags in your templates or PHP code using a tag query.
 
 ::: code
 ```twig
