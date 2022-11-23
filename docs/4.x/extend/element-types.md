@@ -337,7 +337,7 @@ Your service can then save the field layout by passing it to <craft4:craft\servi
 Craft::$app->fields->saveLayout($fieldLayout);
 ```
 
-Or, if the layout is being used by a component that’s stored in the [project config](project-config.md), you can add the field layout to the component’s config, and save it alongside your component.
+Or, if the layout is being used by a configurable component stored in [project config](project-config.md) (as entry types and category groups are), you can add the field layout to its config, and save it alongside your component.
 
 ```php
 use craft\db\Table;
@@ -406,7 +406,7 @@ You can set that up however you want. Just make sure you’re passing the right 
 
 #### Associating Elements to their Field Layouts
 
-Elements’ `getFieldLayout()` method is responsible for returning the field layout that is associated with the current element (if there is one). By default, it will check a `$fieldLayoutId` property on the element. If set, it will return the field layout with the same ID. Therefore it’s recommended that you set the `$fieldLayoutId` property on your elements when saving them.
+Elements’ `getFieldLayout()` method is responsible for returning its associated field layout (if there is one). By default, it will check a `$fieldLayoutId` property on the element. If set, it will return the field layout with the same ID. Therefore it’s recommended that you set the `$fieldLayoutId` property on your elements when saving them.
 
 ```php
 // ...
@@ -414,7 +414,7 @@ $product->fieldLayoutId = $productType->fieldLayoutId;
 \Craft::$app->elements->saveElement($product);
 ```
 
-If the `$fieldLayoutId` property is set, <craft4:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched down the road.
+If the `$fieldLayoutId` property is set, <craft4:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched, down the road.
 
 Alternatively, you can override the `getFieldLayout()` method, and fetch/return the field layout yourself. This might be preferable if your element type only has a single field layout (like user accounts).
 
