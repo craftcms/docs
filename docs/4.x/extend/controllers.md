@@ -19,7 +19,7 @@ Craft controllers should extend <craft4:craft\web\Controller>, which offers a fe
   automatically be formatted as JSON, with an `error` key.
 - It provides several helper methods that ease development.
 
-If you’re writing a custom module and not a plugin, make sure your module’s [$controllerNamespace](https://www.yiiframework.com/doc/api/2.0/yii-base-application#$controllerNamespace-detail) property sets the right namespace for your controllers.
+If you’re writing a custom module and not a plugin, its base class’s [$controllerNamespace](https://www.yiiframework.com/doc/api/2.0/yii-base-application#$controllerNamespace-detail) property must set the right namespace for your controllers.
 
 ## Request Validation Methods
 

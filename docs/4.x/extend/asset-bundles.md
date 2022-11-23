@@ -67,6 +67,8 @@ class FooBundle extends AssetBundle
 `@mynamespace` is a placeholder for your plugin’s auto-generated [Yii alias], which will be based on your plugin’s root namespace. It represents the path to your plugin’s `src/` directory.
 :::
 
+Asset bundles can share a `sourcePath`. If you anticipate registering many bundles, it may be worthwhile to put them in an `assetbundles/` subdirectory within your plugin’s `src/` folder—just don’t forget to update your namespaces!
+
 ### Registering the Asset Bundle
 
 With that in place, all that is left is to register the asset bundle wherever its JS/CSS files are needed.
