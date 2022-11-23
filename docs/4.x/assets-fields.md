@@ -70,7 +70,7 @@ You can also upload assets by dragging files directly onto the assets field or m
 
 ### Inline Asset Editing
 
-When you double-click on a related asset, a HUD will appear where you can edit the asset’s title and custom fields, and launch the Image Editor (if it’s an image).
+Double-click on a related asset to edit it in a [slideout](./control-panel.md#slideouts).
 
 ::: tip
 You can choose which custom fields should be available for your assets from **Settings** → **Assets** → **[Volume Name]** → **Field Layout**.

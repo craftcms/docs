@@ -33,7 +33,7 @@ By default you won’t be able to create multiple tags that are too similar in n
 
 ### Inline Tag Editing
 
-When you double-click on a related tag, a HUD will appear where you can edit the tag’s title and custom fields.
+When you double-click on a related tag, a [slideout](./control-panel.md#slideouts) will appear where you can edit the tag’s title and custom fields.
 
 ## Development
 
