@@ -300,7 +300,7 @@ What if our recipes live on an international grocer’s website and are localize
 {# -> Recipes that share regionally-appropriate proteins, *or* that can be adapted. #}
 ```
 
-Here, we're allowing Craft to look up substitutions defined in any site, which might imply a recipe can be adapted.
+Here, we’re allowing Craft to look up substitutions defined in any site, which might imply a recipe can be adapted.
 
 ## Relations via Matrix
 
