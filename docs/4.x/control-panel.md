@@ -26,15 +26,29 @@ If this is your first time using Craft, it might feel a little bit empty—don�
 
 The appearance and organization of the control panel can differ based on what types of content you’ve set up, your permissions, user preferences, and the environment—but the general structure will always be the same.
 
+<BrowserShot
+    url="https://my-craft-project.ddev.site/admin/settings"
+    :poi="[
+        [13, 10],
+        [60, 3],
+        [40, 11],
+        [55, 40],
+        [79, 21],
+    ]"
+    :link="false"
+    caption="An entry edit screen in the control panel.">
+<img src="./images/control-panel-tour-screen.png" alt="A representative screen from the Craft control panel">
+</BrowserShot>
+
 Let’s take a quick spin around a typical control panel “screen:”
-- On the left edge is the _main navigation_. At the top of this bar, your system name and icon are displayed. Below, each [main section](#main-sections) of the control panel is linked, and the current one is highlighted.
-- At the top, the _global header_ contains breadcrumbs (when working with nested content or settings) and the user menu.
+- On the left edge is the _main navigation_ <Poi label="1" />. At the top of this bar, your system name and icon are displayed. Below, each [main section](#main-sections) of the control panel is linked, and the current one is highlighted.
+- At the top, the _global header_ <Poi label="2" /> contains breadcrumbs (when working with nested content or settings) and the user menu.
 - The current screen’s _main container_ takes up the remainder of the horizontal space, and will scroll if the content is tall enough. Within this region, you’ll find some combination of the following features:
-    - A _header_, displaying a title and controls for the current screen;
-    - A _sub-menu_ at the left edge, listing siblings of the current screen;
-    - A _content container_ for the screen’s primary content (usually set off from the background on a lighter color);
-    - _Tabs_, splitting the screen’s content or settings into logical groups;
-    - A _details_ pane at the right edge, with metadata and controls specific to the type of content being viewed;
+    - A _header_ <Poi label="3" />, displaying a title and controls for the current screen;
+    - A _sub-menu_ at the left edge (not pictured), listing siblings of the current screen;
+    - A _content container_ <Poi label="4" /> for the screen’s primary content (usually set off from the background on a lighter color);
+    - _Tabs_, splitting the screen’s content or settings into logical groups (not pictured);
+    - A _details_ <Poi label="5" /> pane at the right edge, with metadata and controls specific to the type of content being viewed;
 
 #### Main Sections
 
