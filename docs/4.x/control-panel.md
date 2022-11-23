@@ -146,7 +146,7 @@ Group | Description
 
 #### Content
 
-Combined with [sites](./sites.md), the **Content** section is how you design your schema.
+Combined with [sites](./sites.md), the **Content** section is where you design your schema.
 
 Group | Description
 ----- | -----------
