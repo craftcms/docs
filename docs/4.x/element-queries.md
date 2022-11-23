@@ -12,6 +12,10 @@ Working with element queries consists of three steps:
 2. **Set some parameters.** By default, element queries will be configured to return all elements of the specified type. You can narrow that down to just the elements you care about by setting _parameters_ on the query.
 3. **Execute the query.** Use a [query execution method](#executing-element-queries) to run the query and return results.
 
+::: tip
+[Relational fields](./relations.md) also return element queries, which you can treat the same as step #1, above.
+:::
+
 Here’s what a this process looks like, in practice:
 
 ::: code
