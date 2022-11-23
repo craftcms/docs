@@ -1,34 +1,48 @@
 # Assets
 
-You can manage your project’s media and document files (“assets”) in Craft just like entries and other content types.
+Craft lets you manage media and document files (“assets”) just like entries and other content types. Assets can live anywhere—a directory on the web server, or a remote storage service like Amazon S3.
 
 ## Volumes
 
-All of your assets live in “volumes”. Volumes are storage containers. A volume can be a directory on the web server, or a remote storage service like Amazon S3.
+Assets are organized into **volumes**, each of which sits on top of a [filesystem](#filesystems) and carries its own permissions and [content](#asset-custom-fields) options. Volumes are configured from **Settings** → **Assets**.
 
-You can manage your project’s volumes from **Settings** → **Assets**.
+When setting up a volume, you will be asked to create its underlying filesystem, as well.
 
-All volumes let you choose whether the assets within them should have public URLs, and if so, what their **base URL** should be.
+<BrowserShot url="https://my-craft-project.ddev.site/admin/assets/volumes/new" :link="false" caption="You can create a filesystem without leaving the volume screen.">
+<img src="./images/assets-new-volume-fs.png" alt="Screenshot of the volume settings screen in Craft with a slide-out for filesystem settings">
+</BrowserShot>
+
+Volumes can store their [transforms](#image-transforms) alongside the original images, or in a separate filesystem altogether. This is useful for private volumes or filesystems that still benefit from having previews available in the control panel.
+
+## Filesystems
+
+Filesystems decouple asset management (organization, permissions, and content) from the minutiae of actually storing and serving files.
+
+All filesystems support the following options:
+
+- **Files in this filesystem have public URLs**: Whether Craft should bother to generate URLs for the assets.
+- **Base URL**: The public URL to files in this filesystem.
 
 ::: tip
-Volumes’ base URLs can be set to an environment variable, or begin with an alias. [Read more](config/#control-panel-settings) about special configuration values.
+A filesystem’s **Base URL** can be set to an environment variable, or begin with an alias. [Read more](./config/README.md#control-panel-settings) about special configuration values.
+
+In the screenshot above, we’re using a `@cdn` [alias](./config/README.md#aliases) so that the URL can be updated across multiple filesystems with a single change.
 :::
 
-### Local Volumes
+### Local Filesystems
 
-Out of the box, you can create one type of volume, “Local”. Local volumes represent a directory on the local web server.
-
-Local volumes have one setting: **File System Path**. Use this setting to define the path to the volume’s root directory on the server.
+Out of the box, the only type of filesystem Craft supports is a “Local” directory, on the same server. Local filesystems have one additional setting:
+- **Base Path**: Set the filesystem’s root directory on the server. This must be within your web root in order for public URLs to work.
 
 ::: tip
-Local volumes’ file system path can be set to an environment variable, or begin with an alias. [Read more](config/#control-panel-settings) about special configuration values.
+The **Base Path** can be set to an environment variable or begin with an alias, just like the **Base URL**. Declaring both a `@web` and `@webroot` alias can simplify the process of configuring local filesystems.
 :::
 
-Note that Craft/PHP must be able to write to the directory you created.
+Craft/PHP must be able to write to any directories you use for a local filesystem.
 
 ### Remote Volumes
 
-If you would prefer to store your assets on a remote storage service like Amazon S3, you can install a plugin that provides the integration.
+If you would prefer to store your assets on a remote storage service like Amazon S3, you can install a plugin that provides the appropriate filesystem adapter.
 
 - [Amazon S3](https://github.com/craftcms/aws-s3) (first party)
 - [Google Cloud Storage](https://github.com/craftcms/google-cloud) (first party)
@@ -36,25 +50,28 @@ If you would prefer to store your assets on a remote storage service like Amazon
 - [DigitalOcean Spaces](https://github.com/vaersaagod/dospaces) (Værsågod)
 - [fortrabbit Object Storage](https://github.com/fortrabbit/craft-object-storage) (fortrabbit)
 
+The settings for each type of filesystem will differ based on the provider, and may involve secrets. We recommend using [special config values](./config/README.md#control-panel-settings) to store and use these, securely.
+
+
 ## Asset Custom Fields
 
-Each of your volumes has a field layout, where you can set the [fields](fields.md) that will be available to assets within that volume. You can edit a volume’s field layout by clicking the **Field Layout** tab when editing the volume.
-
-Any fields you select here will be visible in the asset editor HUD that opens up when you double-click on an asset (either on the [Assets page](#assets-page) or from [Assets fields](assets-fields.md)).
+Each volume has its own [field layout](./fields.md#field-layouts), configured on its setting screen under the **Field Layout** tab.
 
 ## Assets Page
 
-When you create your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
+After creating your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
 
-From this page, you can do the following:
+In addition to the normal actions available in [element indexes](./elements.md#indexes), asset indexes support:
 
-- Upload new files
-- Rename files
-- Edit files’ titles and filenames
-- Launch the Image Editor for a selected image
-- Manage subfolders
-- Move files to a different volume or subfolder (via drag and drop)
-- Delete files
+- Uploading new files using the **Upload files** toolbar button or by dragging files from your desktop;
+- Creating and organizing [folders](#managing-subfolders) within a volume;
+- Transferring a file from one volume to another by dragging-and-dropping it from the element index into a folder in the sources sidebar;
+
+Special [element actions](./elements.md#actions) are also available for single assets:
+
+- Rename an existing file;
+- Replace a file with a new one;
+- Open the [image editor](#image-editor) (images only);
 
 ### Managing Subfolders
 

@@ -1,7 +1,8 @@
 # Searching
 
-Craft CMS includes a system-wide search service used for finding elements via keyword search.\
-This powers the search experience throughout the Craft control panel, and you can use it to add search functionality to your site’s front end.
+Craft CMS includes a system-wide search index used for finding elements via keywords.
+
+This powers the search experience throughout the Craft control panel, but you can leverage it in your site’s front end.
 
 Control panel users can search for elements anywhere this bar is available:
 
@@ -111,6 +112,18 @@ $images = \craft\elements\Asset::find()
     ->search('kind:image')
     ->all();
 ```
+:::
+
+::: tip
+Querying elements by specific attribute or field values is more efficient when using dedicated methods. The above is equivalent to:
+
+```twig
+{% set images = craft.assets()
+  .kind('image')
+  .all() %}
+```
+
+This can still be combined with keyword search, and will often support more explicit and flexible [arguments](./assets.md#kind).
 :::
 
 If you were to search for Users with email addresses ending in `@craftcms.com`, it would look like this in the control panel:

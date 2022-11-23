@@ -1,22 +1,147 @@
 # Elements
 
-A fundamentally important and unique aspect of Craft CMS is the concept of elements.
+An _element_ is the most basic unit of content in Craft. Elements provide smart management, routing, and querying interfaces for users and developers.
 
-An element is the most basic unit of content.
+## Types
 
-Since this is a web-based content management system, often an element will include a unique URL. It may involve text, imagery, important relationships to other content, even variations by language or site or drafts that aren’t ready to be published.
-
-In the control panel, you’ll encounter the element *types* Craft makes available:
+In the control panel, you’ll encounter the eight _element types_ common to all Craft installations:
 
 - [**Assets**](assets.md) store files that are uploaded to a volume.
 - [**Categories**](categories.md) are taxonomies that resemble folder structures and can be nested.
-- [**Entries**](entries.md) are posts that can have drafts, revisions, and live previews. They can exist as one-offs called “Singles”, ordered by date in “Sections” or visually sorted as “Structures”.
+- [**Entries**](entries.md) are records that can have drafts, revisions, and live previews. They can exist as one-offs called “Singles,” ordered by one or more attributes in “Channels,” or organized hierarchically as “Structures.”
 - [**Global Sets**](globals.md) are floating bits of content that aren’t tied to any particular page or other piece of content, ideal for bits of information you might want to show on every page of your site.
-- [**Matrix Blocks**](matrix-blocks.md) are powerful, easily combined and reordered groupings of content that can be used within the other element types.
+- [**Matrix Blocks**](matrix-blocks.md) are powerful, repeating groupings of content that belong to other element types via a field.
 - [**Tags**](tags.md) are flat taxonomies optimized for quick input and re-use.
 - [**Users**](users.md) are accounts for human beings with email addresses and permissions, organized into customizable groups.
 - [**Addresses**](addresses.md) are physical addresses that can be attached to users.
 
-There’s no limit to how many element types you use or how you combine them. You can use third-party plugins or write your own to include additional element types.
+Choosing the appropriate element type for your content model is essential—but don’t be afraid to mix, match, and combine them. Plugins (and custom modules) can provide [custom element types](./extend/element-types.md), giving developers and authors a consistent experience to all their content.
 
-While each element type is unique in some way, it’s important to know that **all** elements are made up of their own [custom fields](fields.md) that determine exactly what content should be collected and stored.
+## Common Features
+
+Some features are available to most or all elements:
+
+- Control panel edit interfaces, including [indexes](#indexes) and slide-outs;
+- [Custom fields](./fields.md) and field layouts;
+- URLs and routing;
+- Localization via [sites](./sites.md);
+- Sophisticated [permissions](./user-management.md#permissions) scheme;
+- [Element queries](./element-queries.md) with advanced sorting and filtering capabilities;
+- Bi-directional [relationships](./relations.md);
+- Automatic indexing for [search](./searching.md);
+
+Other features are specific to a type—like Assets’ tie to files, or Entries’ drafts and revisions system.
+
+## Indexes
+
+You’ll access most elements via an element index. Indexes allow you to browse, sort, and [search](./searching.md) for elements in a paginated table-like view.
+
+### Sources
+
+Indexes are broken down into **sources**. Sources can be permanent fixtures of an element type (like the **Admin** source for users), dynamically added based on its configuration (like sources for each user group), or defined by a set of custom rules.
+
+Each source also controls what columns are visible in the index, and its default sorting.
+
+<BrowserShot url="https://my-craft-project.ddev.site/categories/species" :link="false" caption="Customizing element sources.">
+<img src="./images/element-index-customize-sources.png" alt="Customizing element sources">
+</BrowserShot>
+
+::: tip
+Custom sources are stored in [Project Config](./project-config.md). The interface for conditions that involve specific elements (like an author) may appear differently than the equivalent [filter](#filters-and-columns), because the ID may not be stable between environments.
+
+Instead of an element select field, you’ll see an [autosuggest input](./project-config.md#secrets-and-the-environment).
+:::
+
+### Filters and Columns
+
+As a complement to custom sources, any user with access to an element index can temporarily filter results using the condition builder interface:
+
+<BrowserShot url="https://my-craft-project.ddev.site/categories/species" :link="false" caption="Using the condition builder to narrow results.">
+<img src="./images/element-index-condition-builder.png" alt="Craft’s condition builder">
+</BrowserShot>
+
+Similarly, they can customize what columns appear in the table (and how the results are ordered) with the **View** menu:
+
+<BrowserShot url="https://my-craft-project.ddev.site/categories/species" :link="false">
+<img src="./images/element-index-view-options.png" alt="Customizing element index columns and sorting">
+</BrowserShot>
+
+### Structures
+
+[Entries](./entries.md) (using the _Structure_ type) and [Categories](./categories.md) support a hierarchical view mode on their indexes. Elements in structures track their relative position among siblings, and can be easily relocated by dragging-and-dropping <Icon kind="move" /> their row in an index. Reordering is still possible, even when the structure is limited to a single level.
+
+::: tip
+Use the **View** menu to switch back into structure mode for an index.
+:::
+
+### Actions
+
+Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="gear" /> icon in the footer (like _Delete_).
+
+Actions will appear 
+
+### Exporters
+
+Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button in the index footer displays all options, including any exporters registered by custom modules and plugins.
+
+### Modals + Contexts
+
+A streamlined version of indexes are used when adding elements to a [relational](./relations.md) field via a modal. Depending on the field’s configuration: sources may be hidden; the footer and actions are not available; [slideouts](./control-panel.md#slideouts) cannot be summoned (except to create a new element, in-context); and pagination is disabled in favor of scrolling. Internally, Craft refers to these variations as “contexts,” which [plugins](./extend/element-types.md#sources) have an opportunity to modify.
+
+## Properties and Methods
+
+All elements share a few characteristics that make them familiar to work with in your templates. Each [element type](#types) will supplement these lists with their own properties and methods.
+
+::: warning
+This is not an exhaustive list! If you’re curious, consult the <craft4:craft\base\Element> and <craft4:craft\base\ElementTrait> class reference for a complete picture of what data is available inside elements and how it can be used.
+:::
+
+### Properties
+
+Properties give you access to values, and do not accept arguments.
+
+Property | Type | Notes
+-------- | ---- | -----
+`archived` | `bool|null` | Whether the element is soft-deleted, or “trashed.”
+`dateCreated` | `DateTime` | Date the element was originally created.
+`dateDeleted` | `DateTime|null` | Date the element was soft-deleted or `null` if not.
+`dateUpdated` | `DateTime` | Date the element was last updated.
+`enabled` | `bool` | Whether the element is enabled (globally).
+`id` | `int` | ID of the element.
+`level` | `int|null` | Depth of the element in a structure. _Structures only._
+`parentId` | `int|null` | ID of the parent element. _Structures only._
+`searchScore` | `int` | Score relative to other results when returned from an [element query](element-queries.md) using the [`search` param](searching.md).
+`siteId` | `int` | ID of the <craft4:craft\models\Site> the element was loaded in.
+`slug` | `string|null` | _Only for elements with slugs._
+`title` | `string|null` | _Only for elements with titles._
+`trashed` | `bool` | Whether or not the element has been soft-deleted.
+`uid` | `string|null` | A UUIDv4 string uniquely identifying this element.
+`uri` | `string|null` | Resolved URI or path for the site the element was loaded in. _Only for elements with URLs._
+
+### Methods
+
+Methods also return values, but may accept or require arguments.
+
+::: tip
+Any method beginning with `get` can be used like [properties](#properties) by down-casing the first letter. For example, `{{ entry.getLink() }}` can also be accessed as `{{ entry.link }}`
+:::
+
+Method | Notes
+------ | -----
+`getAncestors(dist)` | Returns up to `dist` parents of the element, or all parents when omitted. _Structures only._
+`getChildren()` | Returns immediate children of the element. _Structures only._
+`getCpEditUrl()` | Gets a URL to the Craft control panel.
+`getDescendants(dist)` | Returns descendants of the element, down to `dist` levels below this one, or all descendants, when omitted. _Structures only._
+`getHasDescendants()` | Build an HTML anchor tag with its front-end URL and title. _Elements with URLs only._
+`getLink()` | Build an HTML anchor tag with its front-end URL and title. _Elements with URLs only._
+`getNext(criteria)` | Load the “next” element relative to this one, given a set of criteria.
+`getNextSibling()` | Load the next sibling of this element, within a structure. _Structures only._
+`getEnabledForSite(siteId)` | Whether the element is enabled in the provided site, or the site it was loaded in if no ID is provided.
+`getParent()` | Returns the element’s parent. _Structures only._
+`getPrev(criteria)` | Load the previous element relative to this one, given a set of criteria.
+`getPrevSibling()` | Load the previous sibling of this element, within a structure. _Structures only._
+`getRef()` | Builds the part of a [reference tag](reference-tags.md) unique to the element.
+`getSiblings()` | Load siblings within the element’s structure. _Structures only._
+`getSite()` | Returns the <craft4:craft\models\Site> the element was loaded for.
+`getStatus()` | 
+`getUrl()` | Builds a complete front-end URL based on the element’s URI.

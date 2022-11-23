@@ -1,14 +1,18 @@
 # Element Queries
 
-You can fetch elements (entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
+You can fetch [elements](./elements.md) (entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
+
+Suppose you’ve already created a [section](./entries.md#sections) for news posts and configured a URL scheme. Craft will automatically load the corresponding element when its URL is requested, and pass it to the template under an `entry` variable. This is convenient, but it’s rare that a page only refers to a single piece of content—what if we want to show a list of other recent posts, in a sidebar? Element queries are Craft’s way of loading elements anywhere you need them.
+
+Element queries can be hyper-specific (like loading a [global set](./globals.md) by its handle) or relaxed (like a list of recently-updated [entries](./entries.md)).
 
 Working with element queries consists of three steps:
 
-1. **Create the element query.** You do this by calling a “factory function” that is named after the element type you are going to fetch. For example, if you want to fetch entries, you’d call `craft.entries()`, which returns a new [entry query](entries.md#querying-entries).
-2. **Set some parameters.** By default, element queries will be configured to return all elements of the specified type. You can narrow that down to just the elements you care about by setting parameters on the query.
-3. **Execute the query.** Once you’ve specified the query parameters, you’re ready for Craft to fetch the elements and give you the results. You do that by calling `.all()` or `.one()`, depending on whether you need multiple elements, or just one.
+1. **Create the element query.** Calling the “factory function” corresponding to the [element type](#element-types) you want to fetch. For entries, this is `craft.entries()`; for categories, `craft.categories()`.
+2. **Set some parameters.** By default, element queries will be configured to return all elements of the specified type. You can narrow that down to just the elements you care about by setting _parameters_ on the query.
+3. **Execute the query.** Use a [query execution method](#executing-element-queries) to run the query and return results.
 
-Here’s what a typical element query might look like:
+Here’s what a this process looks like, in practice:
 
 ::: code
 ```twig
@@ -35,19 +39,94 @@ $entries = $entryQuery->all();
 ```
 :::
 
-Each type of element has its own function for creating element queries, and they each have their own parameters you can set. See the individual element query pages for more details on working with them:
+## Types + Parameters
 
-- [Asset Queries](assets.md#querying-assets)
-- [Category Queries](categories.md#querying-categories)
-- [Entry Queries](entries.md#querying-entries)
-- [Global Set Queries](globals.md#querying-globals)
-- [Matrix Block Queries](matrix-blocks.md#querying-matrix-blocks)
-- [Tag Queries](tags.md#querying-tags)
-- [User Queries](users.md#querying-users)
+Each type of element has its own function for creating element queries, and they each have their own parameters you can set.
+
+### Element Types
+
+See the query reference section of each element type for more details on working with them:
+
+[Asset Queries](assets.md#querying-assets)
+:     {% set assetQuery = craft.assets() %}
+
+[Category Queries](categories.md#querying-categories)
+:     {% set categoryQuery = craft.categories() %}
+
+[Entry Queries](entries.md#querying-entries)
+:     {% set entryQuery = craft.entries() %}
+
+[Global Set Queries](globals.md#querying-globals)
+:     {% set globalQuery = craft.globals() %}
+
+[Matrix Block Queries](matrix-blocks.md#querying-matrix-blocks)
+:     {% set matrixBlockQuery = craft.matrixBlocks() %}
+
+[Tag Queries](tags.md#querying-tags)
+:     {% set tagQuery = craft.tags() %}
+
+[User Queries](users.md#querying-users)
+:     {% set userQuery = craft.users() %}
+
+### Parameters
+
+Parameters are set using methods after creating an element query, or by passing in key-value pairs to the factory function:
+
+```twig
+{% set images = craft.assets()
+  .kind('image')
+  .all() %}
+
+{# ...or... #}
+
+{% set images = craft.assets({
+  kind: 'image',
+}).all() %}
+
+{# ...or if you’re fancy, set some parameters conditionally: #}
+
+{% set imagesQuery = craft.assets() %}
+
+{% if craft.app.request.getParam('onlyImages') %}
+  {# Effectively the same as chaining query methods: #}
+  {% do imagesQuery.kind('image') %}
+{% endif %}
+
+{% set images = imagesQuery.all() %}
+```
 
 ::: tip
-Most custom fields support element query parameters as well, named after the field handles. See each field type’s documentation for examples.
+Query methods (except for those that [execute](#executing-element-queries) a query) modify some internal properties and return the query itself, allowing you to chained more methods together—just like Craft’s [fluent config](./config/README.md#style-map-vs-fluent) syntax!
 :::
+
+All element queries support a standard set of methods (like `.id()`, `.title()`, and [`.search()`](./searching.md)). These are documented alongside the [element type-specific](#element-types) parameters (like `.kind()` in the example above).
+
+Typically, parameters make a query more specific, but setting a single parameter more than once will replace the previous constraint.
+
+#### Querying with Custom Fields
+
+In addition to native query parameters, Craft automatically injects a methods for each of your [custom fields](./fields.md).
+
+For example, if we wanted to find entries in a _Cars_ section with a specific paint color stored in a [dropdown](./dropdown-fields.md) field, we could perform this query:
+
+```twig
+{% set silverCars = craft.entries()
+  .section('cars')
+  .paintColor('silver')
+  .all() %}
+```
+
+Custom field parameters can be combined for advanced filtering—in this example, we’re also applying a pair of constraints to a [date](./date-time-fields.md) field:
+
+```twig
+{% set silverCars = craft.entries()
+  .section('cars')
+  .paintColor(['silver', 'gold'])
+  .modelYear('>= 1990', '<= 2000')
+  .all() %}
+```
+
+See each [field type](./fields.md#field-types)’s documentation for what kinds of values you can use.
 
 ## Executing Element Queries
 
@@ -72,6 +151,48 @@ $entries = Entry::find()
     ->limit(10)
     ->all();
 ```
+:::
+
+### `collect()`
+
+Calling `.collect()` to execute a query will perform the same database call as `.all()`, but the results are wrapped in a [collection](https://laravel.com/docs/9.x/collections).
+
+Collections can simplify some common array manipulation and filtering tasks that are otherwise awkward in the template:
+
+::: code
+```twig
+{% set entries = craft.entries()
+  .section('news')
+  .with(['category'])
+  .limit(10)
+  .collect() %}
+
+{% set categoriesDescription = entries
+  .pluck('category')
+  .collapse()
+  .pluck('title')
+  .join(', ', ' and ') %}
+Posted in: {{ categoriesDescription }}
+```
+```php
+use craft\elements\Entry;
+
+$entries = Entry::find()
+    ->section('news')
+    ->with(['category'])
+    ->limit(10)
+    ->collect();
+
+$categoriesDescription = $entries
+    ->pluck('category')
+    ->collapse()
+    ->pluck('title')
+    ->join(', ', ' and ');
+```
+:::
+
+::: tip
+You can also call `.all()` and wrap the results in a collection yourself, with the [`collect()` Twig function](./dev/functions.md#collect).
 :::
 
 ### `one()`
@@ -210,7 +331,9 @@ Custom field column names will be automatically resolved when using `select()`. 
 
 ### Conditions
 
+::: warning
 Exercise caution when using these methods directly—some will completely overwrite the existing query conditions and cause unpredictable results.
+:::
 
 - [where()](yii2:yii\db\QueryTrait::where())
 - [andWhere()](yii2:yii\db\QueryTrait::andWhere())
@@ -241,3 +364,20 @@ When customizing an element query, you can call [getRawSql()](craft4:craft\db\Qu
 ```twig
 {{ dump(query.getRawSql()) }}
 ```
+:::
+
+## Headless Applications
+
+Craft can act as a headless content back-end for your static or client-rendered website. There are two main ways of making content available to applications that exist outside Craft’s built-in Twig templating layer:
+
+### Element API
+
+The first-party [Element API](https://plugins.craftcms.com/element-api) allows you to map _endpoints_ to element queries with a combination of static and dynamic criteria and serve JSON-serialized results.
+
+### GraphQL <Badge type="edition" vertical="middle" title="The GraphQL API is a feature of Craft Pro">Pro</Badge>
+
+Craft Pro includes a [GraphQL API](./graphql.md) with configurable schemas.
+
+::: warning
+For security reasons, not all query builder features are available via GraphQL. Some advanced queries may need to be executed separately and combined by the client.
+:::
