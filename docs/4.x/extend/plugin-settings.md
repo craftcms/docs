@@ -132,7 +132,7 @@ To give your plugin a settings page, create a `templates/` directory within your
 
 Then, within your main plugin class, set the `$hasCpSettings` property to `true`, and define a `settingsHtml()` method that returns your new rendered template:
 
-```php
+```php{9,16-22}
 <?php
 
 namespace mynamespace;

@@ -176,7 +176,6 @@ namespace mynamespace\elements\db;
 use craft\db\Query;
 use craft\elements\db\ElementQuery;
 use craft\helpers\Db;
-use mynamespace\elements\Product;
 
 class ProductQuery extends ElementQuery
 {
@@ -320,7 +319,7 @@ If you want your element type to support custom fields, you will also need to cr
 
 {{ forms.fieldLayoutDesignerField({
   fieldLayout: craft.app.fields.getLayoutByType(
-    'ns\\prefix\\elements\\MyElementType'
+    'mynamespace\\elements\\Product'
   ),
 }) }}
 ```
@@ -329,7 +328,7 @@ Place that within a `<form>` that posts to one of your plugin’s controllers. T
 
 ```php
 $fieldLayout = Craft::$app->getFields()->assembleLayoutFromPost();
-$fieldLayout->type = MyElementType::class;
+$fieldLayout->type = Product::class;
 ```
 
 Your service can then save the field layout by passing it to <craft4:craft\services\Fields::saveLayout()>:
@@ -1019,7 +1018,7 @@ use yii\base\Event;
 Event::on(
     Gc::class,
     Gc::EVENT_RUN,
-    function (Event $event) {
+    function(Event $event) {
         // Delete `elements` table rows without peers in the custom `my_element` table
         Craft::$app->getGc()->deletePartialElements(
             MyElement::class,
