@@ -12,14 +12,16 @@ Craft has a powerful engine for relating elements to one another with five relat
 - [Tags Fields](tags-fields.md)
 - [Users Fields](users-fields.md)
 
-Just like the other field types, you can add these to your [section](entries.md#sections), [user](users.md), [asset](assets.md), [category group](categories.md), [tag group](tags.md), and [global sets](globals.md)’ field layouts. Relational fields can also be added to [Matrix blocks](#related-via-matrix).
+Just like the other field type, relational fields can be added to any [field layout](./fields.md#field-layouts), including those within [Matrix blocks](#related-via-matrix).
+
+_Unlike_ other field types, though, relational fields store their data in a dedicated `relations` table (instead of the `content` table), and track the element, field, and site where the relationship was defined, the element that the relationship points to, and the order the related elements were arranged.
 
 ## Terminology
 
 Each relationship consists of two elements we call the *source* and *target*:
 
 - The <dfn>source</dfn> has the relational field where other elements are chosen.
-- The <dfn>target</dfn> element is the one selected by the source.
+- The <dfn>target</dfn> is the one selected by the source.
 
 Suppose we have a database of _Recipes_ (represented as a [channel](./entries.md#channels)) and we want to allow visitors to browse other recipes that share an ingredient. To-date, ingredients have been stored as plain text along with the instructions, and users have relied on search to discover other recipes.
 
@@ -29,16 +31,17 @@ Let’s leverage Craft’s relations system to improve this “schema” and use
 2. Create a new [Entries field](./entries-fields.md), with the name “Ingredients.”
 3. Limit the **Sources** option to “Ingredients” only.
 4. Leave the **Limit** field blank so we can choose however many ingredients each recipe needs.
-5. Add your new field to your _Recipes_ channel’s field layout.
+5. Add this new field to the _Recipes_ channel’s field layout.
 
 Now, we can attach _Ingredients_ to each _Recipe_ entry via the new _Ingredients_ relation field. Each selected ingredient defines a new relationship, with the recipe as the _source_ and the ingredient as the _target_.
 
-## Templating
-
-Now that we have a relationship defined, let’s look at how to use the data.
-
 <a id="getting-target-elements-via-the-source-element" title="Section “Getting Target Elements via the Source Element” has been renamed."></a>
-### Using Relational Fields
+
+## Using Relational Data
+
+Relationships are primarily used within [element queries](./element-queries.md), either via a relational field on an element you already have a reference to, or the [`relatedTo()` query parameter](#the-relatedto-parameter).
+
+### Custom Fields
 
 _Ingredients_ attached to a _Recipe_ can be accessed using the relational field’s handle. Unlike most fields (which return their stored value), relational fields return an [element query](./element-queries.md), ready to fetch the attached elements in the order they were selected.
 
@@ -112,9 +115,11 @@ Any of the following can be used when setting up a relational query:
   - The string `and`, to return relations matching _all_ conditions rather than _any_;
   - The string `or`, to return relations that match _any_ conditions (default behavior, can be omitted);
 
+::: tip
 Chaining multiple `relatedTo` parameters on the same element query will overwrite earlier ones. Use [`andRelatedTo`](#the-andrelatedto-parameter) to append relational constraints.
+:::
 
-#### The `andRelatedTo` Parameter
+### The `andRelatedTo` Parameter
 
 Use the `andRelatedTo` parameter to join multiple sets of relational criteria together with an `and` operator. It accepts the same arguments as `relatedTo`, and can be supplied any number of times.
 
@@ -122,7 +127,7 @@ Use the `andRelatedTo` parameter to join multiple sets of relational criteria to
 There is one limitation, here: multiple `relatedTo` criteria using `or` *and* `and` operators cannot be combined.
 :::
 
-### Simple Relationships
+## Simple Relationships
 
 The most basic relational query involves passing a single element or element ID. Here, we’re looking up other recipes that use the current one’s main protein:
 
@@ -164,7 +169,7 @@ Passing `and` at the beginning of an array returns results relating to *all* of 
 
 This is equivalent to `.relatedTo(['and', beef, pork])`, if you already had variables for `beef` and `pork`.
 
-### Compound Criteria
+## Compound Criteria
 
 Let’s look at how we might combine multiple relational criteria:
 
@@ -198,15 +203,13 @@ You could achieve the same result as the example above using the `andRelatedTo` 
 These examples _may_ return the recipe you’re currently viewing. Exclude a specific element from results with the `id` param: `.id(['not', entry.id])`
 :::
 
-
-
-### Complex Relationships
+## Complex Relationships
 
 All the `relatedTo` examples we’ve looked at assume that the only place we’re defining relationships between recipes and ingredients is the _ingredients_ field. What if there were a second field that provided “substitutions,” or “pairs with” and “clashes with” that might interfere with our recommendations?
 
 Craft lets you be specific about the location and direction of relationships when using relational params in your queries. The following options can be passed to `relatedTo` and `andRelatedTo` as a [hash](dev/twig-primer.md#hashes):
 
-#### Sources and Targets
+### Sources and Targets
 
 Property
 :  One of `element`, `sourceElement`, or `targetElement`
@@ -228,10 +231,10 @@ One way of thinking about the difference between `sourceElement` and `targetElem
     sourceElement: recipe,
   })
   .all() %}
-{# -> Equivalent to `recipe.ingredients.all()` #}
+{# -> Equivalent to `recipe.ingredients.all()`, from our very first example! #}
 ```
 
-#### Fields
+### Fields
 
 Property
 :  `field` (Optional)
@@ -258,7 +261,7 @@ Suppose we wanted to recommend recipes that use the current one’s alternate pr
 
 By being explicit about the field we want the relation to use, we can show the user recipes that don’t rely on substitutions to meet their dietary needs.
 
-#### Sites
+### Sites
 
 Property
 :  `sourceSite` (Optional, defaults to main query’s site)
@@ -299,7 +302,7 @@ What if our recipes live on an international grocer’s website and are localize
 
 Here, we're allowing Craft to look up substitutions defined in any site, which might imply a recipe can be adapted.
 
-### Relations via Matrix
+## Relations via Matrix
 
 Relational fields on Matrix blocks are used the same way they would be on any other element type.
 
