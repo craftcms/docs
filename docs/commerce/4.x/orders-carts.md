@@ -803,8 +803,8 @@ Order queries support the following parameters:
 | [isCompleted](#iscompleted)                   | Narrows the query results to only orders that are completed.
 | [isPaid](#ispaid)                             | Narrows the query results to only orders that are paid.
 | [isUnpaid](#isunpaid)                         | Narrows the query results to only orders that are not paid.
-| [itemSubtotal](#itemsubtotal)                 | Narrows the query results based on the order's item subtotal.
-| [itemTotal](#itemtotal)                       | Narrows the query results based on the order's item total.
+| [itemSubtotal](#itemsubtotal)                 | Narrows the query results based on the order’s item subtotal.
+| [itemTotal](#itemtotal)                       | Narrows the query results based on the order’s item total.
 | [limit](#limit)                               | Determines the number of orders that should be returned.
 | [number](#number)                             | Narrows the query results based on the order number.
 | [offset](#offset)                             | Determines how many orders should be skipped in the results.
