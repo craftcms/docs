@@ -12,9 +12,9 @@ Craft has a powerful engine for relating elements to one another with five relat
 - [Tags Fields](tags-fields.md)
 - [Users Fields](users-fields.md)
 
-Just like the other field type, relational fields can be added to any [field layout](./fields.md#field-layouts), including those within [Matrix blocks](#related-via-matrix).
+Just like other field types, relational fields can be added to any [field layout](./fields.md#field-layouts), including those within [Matrix blocks](#related-via-matrix).
 
-_Unlike_ other field types, though, relational fields store their data in a dedicated `relations` table (instead of the `content` table), and track the element, field, and site where the relationship was defined, the element that the relationship points to, and the order the related elements were arranged.
+_Unlike_ other field types, though, relational fields store their data in a dedicated `relations` table (instead of the `content` table), and track the element, field, and site where the relationship was defined, the element that the relationship points to, and the order in which the related elements were arranged.
 
 ## Terminology
 
