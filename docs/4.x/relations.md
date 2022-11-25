@@ -16,12 +16,14 @@ Just like other field types, relational fields can be added to any [field layout
 
 _Unlike_ other field types, though, relational fields store their data in a dedicated `relations` table (instead of the `content` table), and track the element, field, and site where the relationship was defined, the element that the relationship points to, and the order in which the related elements were arranged.
 
-## Terminology
+### Terminology
 
 Each relationship consists of two elements we call the *source* and *target*:
 
 - The <dfn>source</dfn> has the relational field where other elements are chosen.
 - The <dfn>target</dfn> is the one selected by the source.
+
+## Illustrating Relations
 
 Suppose we have a database of _Recipes_ (represented as a [channel](./entries.md#channels)) and we want to allow visitors to browse other recipes that share an ingredient. To-date, ingredients have been stored as plain text along with the instructions, and users have relied on search to discover other recipes.
 
