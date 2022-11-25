@@ -74,15 +74,16 @@ Because `entry.ingredients` is an element query, you can set additional constrai
 {# Narrow the query to only “Vegetables”: %}
 {% set veggies = entry.ingredients.foodGroup('vegetable').all() %}
 
+<h3>Vegetables</h3>
+
 {% if veggies|length %}
-  <h3>Vegetables</h3>
   <ul>
     {% for veggie in veggies %}
       <li>{{ veggie.title }}</li>
     {% endfor %}
   </ul>
 {% else %}
-  <p>
+  <p>This recipe has no vegetables!</p>
 {% endif %}
 ```
 
