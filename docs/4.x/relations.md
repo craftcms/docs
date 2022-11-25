@@ -206,7 +206,7 @@ These examples _may_ return the recipe you’re currently viewing. Exclude a spe
 
 ## Complex Relationships
 
-All the `relatedTo` examples we’ve looked at assume that the only place we’re defining relationships between recipes and ingredients is the _ingredients_ field. What if there were a second field that provided “substitutions,” or “pairs with” and “clashes with” that might interfere with our recommendations?
+All the `relatedTo` examples we’ve looked at assume that the only place we’re defining relationships between recipes and ingredients is the _ingredients_ field. What if there were other fields on recipes that described “substitutions,” or “pairs with” and “clashes with” that might muddy our related recipes? What if an ingredient had a “featured seasonal recipe” field?
 
 Craft lets you be specific about the location and direction of relationships when using relational params in your queries. The following options can be passed to `relatedTo` and `andRelatedTo` as a [hash](dev/twig-primer.md#hashes):
 
