@@ -451,6 +451,10 @@ Craft’s extended DateTime class has been removed in Craft 3. Here’s a list o
 
 <!-- textlint-enable -->
 
+::: warning
+Be sure and review any URI formats and system messages that use dates! The same adjustments will be required for them to work correctly—in the case of URIs, you may see silent failures that manifest in missing URL segments after an element is re-saved.
+:::
+
 ## Currency Formatting
 
 The `|currency` filter now maps to <craft3:craft\i18n\Formatter::asCurrency()>. It still works the same, but the `stripZeroCents` argument has been renamed to `stripZeros`, and pushed back a couple notches, so you will need to update your templates if you were setting that argument.
