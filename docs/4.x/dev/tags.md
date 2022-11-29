@@ -529,11 +529,7 @@ This tag makes it easy to paginate query results across multiple pages.
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
-Paginated URLs will be identical to the first page’s URL, except that “/p_X_” will be appended to the end (where _X_ is the page number), e.g. `http://my-project.tld/news/p2`.
-
-::: tip
-You can use the <config4:pageTrigger> config setting to customize what comes before the actual page number in your URLs. For example you could set it to `'page/'`, and your paginated URLs would start looking like `http://my-project.tld/news/page/2`.
-:::
+Complete reference for the `paginate` tag and the related `pageInfo` objects is available on the [element queries](../element-queries.md#pagination) page.
 
 ::: warning
 Only a single `{% paginate %}` tag should be used per request.
