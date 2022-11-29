@@ -941,6 +941,9 @@ Possible values include:
 | - | -
 | `1` | with a customer with a user account ID of 1.
 | a [User](https://docs.craftcms.com/api/v3/craft-elements-user.html) object | with a customer with a user account represented by the object.
+| `'not 1'` | not the user account with an ID 1.
+| `[1, 2]` | with an user account ID of 1 or 2.
+| `['not', 1, 2]` | not with a user account ID of 1 or 2.
 
 
 
