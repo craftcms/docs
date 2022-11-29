@@ -4414,6 +4414,18 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\controllers\\RelationalFieldsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\controllers\\RelationalFieldsController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\controllers\\RoutesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
@@ -26693,6 +26705,12 @@
     },
     {
         "class": "craft\\fields\\BaseOptionsField",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
+    },
+    {
+        "class": "craft\\fields\\BaseOptionsField",
         "name": "EVENT_BEFORE_ELEMENT_SAVE",
         "type": "craft\\events\\FieldElementEvent",
         "desc": "The event that is triggered before the element is saved."
@@ -27101,6 +27119,12 @@
     },
     {
         "class": "craft\\fields\\Checkboxes",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
+    },
+    {
+        "class": "craft\\fields\\Checkboxes",
         "name": "EVENT_BEFORE_ELEMENT_SAVE",
         "type": "craft\\events\\FieldElementEvent",
         "desc": "The event that is triggered before the element is saved."
@@ -27494,6 +27518,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\Dropdown",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
     },
     {
         "class": "craft\\fields\\Dropdown",
@@ -28433,6 +28463,12 @@
     },
     {
         "class": "craft\\fields\\MultiSelect",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
+    },
+    {
+        "class": "craft\\fields\\MultiSelect",
         "name": "EVENT_BEFORE_ELEMENT_SAVE",
         "type": "craft\\events\\FieldElementEvent",
         "desc": "The event that is triggered before the element is saved."
@@ -28826,6 +28862,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\RadioButtons",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
     },
     {
         "class": "craft\\fields\\RadioButtons",
@@ -36465,6 +36507,18 @@
         "name": "EVENT_AUTHORIZE_DELETE_FOR_SITE",
         "type": "craft\\events\\AuthorizationCheckEvent",
         "desc": "The event that is triggered when determining whether a user is authorized to delete an element for its current site."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_BEFORE_DELETE_FOR_SITE",
+        "type": "craft\\events\\ElementEvent",
+        "desc": "The event that is triggered before deleting an element for a single site."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_AFTER_DELETE_FOR_SITE",
+        "type": "craft\\events\\ElementEvent",
+        "desc": "The event that is triggered after deleting an element for a single site."
     },
     {
         "class": "craft\\services\\Fields",
