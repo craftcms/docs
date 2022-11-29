@@ -325,7 +325,7 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 You can customize how the date is presented by passing a custom date format, just like Twig’s core [`date`](https://twig.symfony.com/doc/3.x/filters/date.html) filter:
 
 ```twig
-{{ 'now'|date('m/d/Y') }}
+{{ now|date('m/d/Y') }}
 {# Output: 12/20/1990 #}
 ```
 
