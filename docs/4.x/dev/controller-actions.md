@@ -39,15 +39,15 @@ All `POST` requests are made through forms or [Ajax](#ajax), and require an `act
 ```twig{3-4}
 {# Let your users request a password reset: #}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('users/send-password-reset-email') }}
+  {{ csrfInput() }}
+  {{ actionInput('users/send-password-reset-email') }}
 
-    <label for="loginName">Username or email</label>
-    {{ input('text', 'loginName', null, {
-        id: 'loginName',
-    }) }}
+  <label for="loginName">Username or email</label>
+  {{ input('text', 'loginName', null, {
+    id: 'loginName',
+  }) }}
 
-    <button>Reset Password</button>
+  <button>Reset Password</button>
 </form>
 ```
 
@@ -70,7 +70,7 @@ Flashes are _not_ set when using [Ajax](#ajax). Look for confirmation and errors
 <a href="{{ logoutUrl }}">Log Out</a>
 ```
 ```twig Form
-{# Pass any element to this (as a Twig partial) to get a control panel edit link: #}
+{# Pass any element to this (say, as a Twig partial) to get a control panel edit button: #}
 <form>
   {{ actionInput('elements/redirect') }}
   {{ hiddenInput('elementId', object.id) }}
@@ -213,7 +213,7 @@ This example assumes you have no preexisting HTML from the server, as though it 
 
 If you prefer to work with a JSON payload for the body, you must include [the appropriate `Content-Type` header](yii2:yii\web\Request::parsers). The equivalent `users/save-user` request would look like this:
 
-```js{13,15}
+```js{11,15}
 // ...
 const params = {
   userId: $button.dataset.userId,
@@ -237,7 +237,7 @@ fetch('/actions/users/save-user', {
 Files cannot be uploaded when using `Content-Type: application/json`.
 
 ::: warning
-When sending a JSON payload in the body of a request, you must use an action path (`/actions/users/save-user`, as in the example above), or provide the action in a query parameter (`/index.php?action=users/save-user`)—the action will not be properly picked up as a property of the decoded payload.
+When sending a JSON payload in the body of a request, you _must_ use an action path (`/actions/users/save-user`, as in the example above), or provide the action in a query parameter (`/index.php?action=users/save-user`)—the action will _not_ be properly picked up as a property of the decoded payload.
 :::
 
 ### Models and Validation
