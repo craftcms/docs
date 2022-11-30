@@ -253,13 +253,15 @@ Behind the scenes, <craft4:craft\elements\db\ElementQuery> creates two <craft4:c
 
 The reason for this separation is performance. It allows MySQL/PostgreSQL to figure out exactly which element rows should be fetched before it has to worry about which columns to select, etc., avoiding the need to run expensive condition operations on temporary tables.
 
-### Template Function
+### Querying for Elements in Templates
 
-If you want to make it possible for templates to query for your elements, you can create a new template function that returns a new element query. (See [Extending Twig](extending-twig.md) for more details.)
+If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](guide:concept-behaviors).
+
+Your behavior should look like this:
 
 ```php
 <?php
-namespace mynamespace;
+namespace mynamespace\twig\variables;
 
 use mynamespace\elements\Product;
 use mynamespace\elements\db\ProductQuery;
@@ -267,19 +269,39 @@ use Craft;
 use yii\base\Behavior;
 
 /**
- * Adds a `craft.products()` function to the templates (like `craft.entries()`)
+ * The class name isn't important, but we've used something that describes
+ * how it is applied, rather than what it does.
+ * 
+ * You are only apt to need a single behavior, even if your plugin or module
+ * provides multiple element types.
  */
 class CraftVariableBehavior extends Behavior
 {
-    public function products($criteria = null): ProductQuery
+    public function products(array $criteria = []): ProductQuery
     {
-        $query = Product::find();
-        if ($criteria) {
-            Craft::configure($query, $criteria);
-        }
-        return $query;
+        // Create a query via your element type, and apply any passed criteria:
+        return Craft::configure(Product::find(), $criteria);
     }
 }
+```
+
+To attach the behavior, return to your main class’s `init()` method and listen for the `CraftVariable::EVENT_DEFINE_BEHAVIORS` event:
+
+```php
+use yii\base\Event;
+use craft\events\DefineBehaviorsEvent;
+use craft\web\twig\variables\CraftVariable;
+use mynamespace\twig\variables\CraftVariableBehavior;
+
+Event::on(
+    CraftVariable::class,
+    CraftVariable::EVENT_DEFINE_BEHAVIORS,
+    function(DefineBehaviorsEvent $e) {
+        $e->sender->attachBehaviors([
+            CraftVariableBehavior::class,
+        ]);
+    }
+);
 ```
 
 ## Element Content
