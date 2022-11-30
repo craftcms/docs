@@ -320,15 +320,15 @@ As a result of the rows being plain values, regular element methods and properti
 
 ## Pagination
 
-Craft provides the [`{% paginate %}` tag](./dev/tags.md#paginate) to simplify the process of splitting results into pages and navigating them with a stable URL scheme based on your <config4:pageTrigger> setting.
+Craft provides the [`{% paginate %}` tag](./dev/tags.md#paginate) to simplify the process of splitting results into pages with a stable URL scheme based on the <config4:pageTrigger> setting.
 
-The `paginate` tag accepts an element query, and sets its `offset` param based on the current “page.” The number of results per page is determined by the query’s `limit` param, and defaults to 100.
+The `paginate` tag accepts an element query, sets its `offset` param based on the current page, and executes it. The number of results per page is determined by the query’s `limit` param, or defaults to 100.
 
 ```twig
 {# Prepare your query, but don’t execute it: #}
 {% set newsQuery = craft.entries()
   .section('news')
-  .orderBy('postDate desc') %}
+  .orderBy('postDate DESC') %}
 
 {# Paginate the query into a `posts` variable: #}
 {% paginate newsQuery as posts, pageInfo %}
@@ -350,7 +350,7 @@ Results from a [search](#search) query are perfectly fine to paginate.
 
 ### Navigating Pages
 
-In our example, the `pageInfo` variable (a [Paginate](craft4:craft\src\web\twig\variables\Paginate) instance) has a number of properties and methods to help you work with paginated results. The variable can be named anything you like, so long as references to it are updated.
+In our example, the `pageInfo` variable (a [Paginate](craft4:craft\web\twig\variables\Paginate) instance) has a number of properties and methods to help you work with paginated results. The variable can be named anything you like, so long as references to it are updated.
 
 `first`
 : Number of the first element on the _current_ page. For example, on the second page of 10 results, `first` would be `11`.
@@ -461,7 +461,7 @@ Notice how our loop uses the keys (`p`) _and_ values (`url`) from the returned a
 
 ## Search
 
-See the main article on Craft’s [search](./searching.md) system for information about the supported syntaxes for plain-text search.
+See the main article on Craft’s [search](./searching.md) system to learn about the supported syntaxes for plain-text search.
 
 ## Performance and Optimization
 
@@ -566,7 +566,7 @@ In these cases, you may need to use <craft4:craft\helpers\ElementHelper::fieldCo
 
 #### Lean Selections
 
-Combining a narrower [selection](#selections) with the `toArray()` method can significantly reduce the amount of memory a query requires.
+Combining a narrower [selection](#selections) with an execution method that returns results as an array (or explicitly calling `toArray()` while preparing a query) can significantly reduce the amount of memory a query requires.
 
 ::: code
 ```twig Slow
@@ -607,7 +607,7 @@ Not all attributes can be fetched this way—element URLs, for instance, are bui
 
 ## Advanced Element Queries
 
-Element queries are specialized [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder) under the hood, so they support most of the same methods provided by <craft4:craft\db\Query>.
+Element queries are specialized [query builders](guide:db-query-builder) under the hood, so they support most of the same methods provided by <craft4:craft\db\Query>.
 
 ### Selections
 
