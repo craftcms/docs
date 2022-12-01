@@ -1,8 +1,8 @@
 # Element Types
 
-Element types define the different types of content that can be managed in Craft.
+Elements underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#types) with your own, from a plugin or module.
 
-Craft comes with eight built-in element types:
+As you implement common element features like [titles](#titles), [sources](#sources), or [statuses](#statuses), the native element classes will be an invaluable resource—for basic usage
 
 - <craft4:craft\elements\Address>
 - <craft4:craft\elements\Asset>
@@ -27,7 +27,7 @@ As a convenience, you can extend <craft4:craft\base\Element>, which provides a b
 
 Create an `elements/` directory within your plugin’s source directory, and create a PHP class file within it, named after the class name you want to give your element type (e.g. `Product.php`).
 
-Define the class within the file, and give a display name and some public properties for any custom attributes your elements will have.
+Define the class within the file, and give it a display name and some public properties for any custom attributes your elements will have.
 
 ```php
 <?php
@@ -56,12 +56,12 @@ class Product extends Element
     /**
      * @var int Price
      */
-    public $price = 0;
+    public int $price = 0;
 
     /**
      * @var string Currency code
      */
-    public $currency;
+    public string $currency;
 
     // ...
 }
@@ -93,20 +93,19 @@ Create an [install migration](migrations.md#plugin-install-migrations) (if you d
 
 ```php
 if (!$this->db->tableExists('{{%products}}')) {
-    // create the products table
+    // Create the Products table:
     $this->createTable('{{%products}}', [
-        'id' => $this->integer()->notNull(),
+        'id' => $this->primaryKey(),
         'price' => $this->integer()->notNull(),
         'currency' => $this->char(3)->notNull(),
         'dateCreated' => $this->dateTime()->notNull(),
         'dateUpdated' => $this->dateTime()->notNull(),
         'uid' => $this->uid(),
-        'PRIMARY KEY(id)',
     ]);
 
-    // give it a foreign key to the elements table
+    // Give it a foreign key to the elements table
     $this->addForeignKey(
-        $this->db->getForeignKeyName(),
+        null,
         '{{%products}}',
         'id',
         '{{%elements}}',
@@ -121,7 +120,7 @@ if (!$this->db->tableExists('{{%products}}')) {
 If you’re adding this as an update to an existing plugin, you will need to create a new normal migration as well, and copy the same code into it.
 :::
 
-Install the plugin now, so your database table will be created.
+Install your plugin (or run `php migrate/up`) to create the database table.
 
 You will also need to add an `afterSave()` method to your element class, which is responsible for keeping your element table updated when elements are saved. The `afterSave()` method is a part of the standard element saving [control flow](services.md#interface-oriented-methods).
 
