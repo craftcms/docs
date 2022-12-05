@@ -85,8 +85,8 @@ fetch('/actions/users/session-info', {
     'Accept': 'application/json',
   },
 })
-  .then(r => r.json())
-  .then(console.log);
+.then(response => response.json())
+.then(result => console.log(result));
 // -> { isGuest: true, timeout: 0, csrfTokenValue: '...' }
 ```
 :::
@@ -150,7 +150,7 @@ const getSessionInfo = function() {
       'Accept': 'application/json',
     },
   })
-    .then(r => r.json());
+  .then(response => response.json());
 };
 
 // Session info is passed to the chained handler:
@@ -170,10 +170,10 @@ getSessionInfo()
         'X-Requested-With': 'XMLHttpRequest',
       },
       body: params,
-    });
     })
-    .then(r => r.json())
-    .then(console.log);
+    .then(response => response.json())
+    .then(result => console.log(result));
+  });
 ```
 
 This example assumes you have no preexisting HTML from the server, as though it were part of a [headless](config4:headlessMode) application. If you are working on a hybrid front-end (and sprinkling interactivity into primarily server-rendered pages), you could eliminate the first request by stashing the user ID and CSRF token in the document’s `<head>` (or on another relevant element) and reading it with JavaScript:
@@ -203,8 +203,8 @@ This example assumes you have no preexisting HTML from the server, as though it 
       },
       body: params,
     })
-      .then(r => r.json())
-      .then(console.log);
+    .then(response => response.json())
+    .then(result => console.log(result));
   });
 </script>
 ```
@@ -230,8 +230,8 @@ fetch('/actions/users/save-user', {
   },
   body: JSON.stringify(params),
 })
-  .then(r => r.json())
-  .then(console.log);
+.then(response => response.json())
+.then(result => console.log(result));
 ```
 
 Files cannot be uploaded when using `Content-Type: application/json`.
