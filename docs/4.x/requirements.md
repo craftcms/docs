@@ -1,7 +1,7 @@
 # Requirements
 
 ::: tip
-You can use the [Craft Server Check](https://github.com/craftcms/server-check) script to quickly find out if your server meets Craft’s requirements.
+You can use the official [server check](https://github.com/craftcms/server-check) script to quickly find out if your server meets Craft’s requirements.
 :::
 
 <columns>
@@ -13,6 +13,7 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 - MySQL 5.7.8+ with InnoDB, MariaDB 10.2.7+, or PostgreSQL 10+
 - 256MB+ memory allocated to PHP
 - 200MB+ free disk space
+- Composer 2.0+
 
 </column>
 <column>
@@ -23,7 +24,6 @@ You can use the [Craft Server Check](https://github.com/craftcms/server-check) s
 - MySQL 5.7.8+ with InnoDB, MariaDB 10.5+, or PostgreSQL 10+
 - 512MB+ of memory allocated to PHP
 - 200MB+ of free disk space
-- [Composer 2.0+](installation.md#downloading-with-composer) if installing Craft via Composer
 
 </column>
 </columns>

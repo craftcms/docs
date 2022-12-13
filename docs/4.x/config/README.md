@@ -453,7 +453,7 @@ If these settings need to be changed frequently, edited by a control panel user,
 
 ## PHP Constants
 
-You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
+You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in `bootstrap.php`—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
 ::: tip
 Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
