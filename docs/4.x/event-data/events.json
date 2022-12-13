@@ -37241,6 +37241,30 @@
         "desc": "The event that is triggered after a user is assigned to the default user group."
     },
     {
+        "class": "craft\\services\\Users",
+        "name": "EVENT_BEFORE_SAVE_USER_PHOTO",
+        "type": "craft\\services\\UserSavePhotoEvent",
+        "desc": "The event that is triggered before a user photo is saved."
+    },
+    {
+        "class": "craft\\services\\Users",
+        "name": "EVENT_AFTER_SAVE_USER_PHOTO",
+        "type": "craft\\services\\UserSavePhotoEvent",
+        "desc": "The event that is triggered after a user photo is saved."
+    },
+    {
+        "class": "craft\\services\\Users",
+        "name": "EVENT_BEFORE_DELETE_USER_PHOTO",
+        "type": "craft\\events\\UserPhotoEvent",
+        "desc": "The event that is triggered before a user photo is deleted."
+    },
+    {
+        "class": "craft\\services\\Users",
+        "name": "EVENT_AFTER_DELETE_USER_PHOTO",
+        "type": "craft\\events\\UserPhotoEvent",
+        "desc": "The event that is triggered after a user photo is deleted."
+    },
+    {
         "class": "craft\\services\\Utilities",
         "name": "EVENT_REGISTER_UTILITY_TYPES",
         "type": "craft\\events\\RegisterComponentTypesEvent",
