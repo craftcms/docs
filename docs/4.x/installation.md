@@ -6,9 +6,7 @@ sidebarDepth: 2
 
 The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, and [upgrade](./upgrade.md).
 
-For the purposes of outlining the installation and [setup](#setup) processes, the bulk of these instructions are platform-agnostic. The only prerequisite (beyond working in an environment that meets Craft’s own [requirements](./requirements.md)) is a basic understanding of Unix-style command line interfaces.
-
-Craft _can_ be installed directly on a remote host (provided you have SSH access), but 
+For the purposes of outlining the installation and [setup](#setup) processes, these instructions will focus solely on [DDEV](https://ddev.readthedocs.io/en/stable/). The only prerequisite is a basic understanding of Unix-style command line interfaces.
 
 ::: tip
 Getting bogged down? That’s OK! The [Tutorial](../getting-started-tutorial/README.md) is a comprehensive guide geared toward first-time Craft users—but it’s a great resource for anyone who wants to get set up with a fast, reliable local development environment.
@@ -16,41 +14,11 @@ Getting bogged down? That’s OK! The [Tutorial](../getting-started-tutorial/REA
 
 Downloading or installing Craft by any means binds you to its [license](https://craftcms.com/license).
 
-## New Projects
-
-The easiest way to start a Craft project is with Composer’s [`create-project` command](https://getcomposer.org/doc/03-cli.md#create-project), which will run in any environment that meets Craft’s requirements:
-
-```bash
-composer create-project craftcms/craft my-craft-project
-```
-
-This command takes care of:
-
-1. Creating the `my-craft-project/` directory;
-1. Downloading and extracting the latest release of the starter project;
-1. Installing project dependencies;
-1. Populating a basic `.env` configuration file;
-1. Launching the Craft [setup wizard](#setup);
-
-During setup, you will configure a [database connection](#database), choose a [site name and URL](#site-settings), and create your first [user](#your-first-user).
-
-::: tip
-Check out the [troubleshooting](#troubleshooting) section if you have difficulty with the setup process.
-:::
-
-Once setup is complete, you can boot up the built-in PHP server:
-
-```bash
-php craft serve
-```
-
-The server uses port `8080` unless you pass a `--port` flag.
-
-### DDEV Quick-Start
+## Quick-Start
 
 [DDEV](https://ddev.readthedocs.io/en/stable/) simplifies the creation and management of an entire Craft development environment—without touching any other software on your host machine.
 
-With DDEV [installed](https://ddev.readthedocs.io/en/latest/users/install/ddev-installation/):
+[Install DDEV](https://ddev.readthedocs.io/en/latest/users/install/ddev-installation/), then run these commands:
 
 ```bash
 # Create a project directory and move into it:
@@ -60,20 +28,30 @@ cd my-craft-project/
 # Create DDEV configuration files:
 ddev config --project-type=craftcms
 
-# Initialize the project from our starter repo (see note):
+# Initialize the project from our starter repo:
 ddev composer create -y --no-scripts --no-install craftcms/craft
 
-# Boot up your development environment:
+# Boot up the development environment:
 ddev start
 
-# Install packages:
+# Install Composer packages:
 ddev composer update
-
-# Run the Craft CMS installer (use all defaults):
-ddev craft install
 ```
 
-When the installation has finished, run `ddev launch admin` to open your browser and sign in.
+At this point, you have a complete Craft codebase and a running development environment. You can continue with [setup](#setup) via the CLI, or in a [browser](#gui):
+
+::: code
+```bash CLI
+# Run interactive setup:
+ddev craft install
+```
+```bash GUI
+# Open a browser to the install wizard:
+ddev launch admin/install
+```
+:::
+
+Continue reading for a complete list of…
 
 ::: tip
 The additional flags passed to `create-project` (or [`ddev composer create`](https://ddev.readthedocs.io/en/latest/users/basics/developer-tools/#composer) in this case) defer some automated steps until the DDEV container is running and it has a chance to inject default configuration values into the `.env` file.
