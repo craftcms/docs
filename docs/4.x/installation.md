@@ -27,7 +27,7 @@ Downloading or installing Craft by any means binds you to its [license](https://
     ddev config --project-type=craftcms
     ```
 
-1. Initialize the project from our [starter package](https://github.com/craftcms/craft):
+1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft):
 
     ```bash
     ddev composer create -y --no-scripts --no-install craftcms/craft
@@ -51,23 +51,25 @@ Downloading or installing Craft by any means binds you to its [license](https://
     ddev craft install
     ```
 
-That’s it! Run `ddev launch admin` to open the [control panel](./control-panel.md) and sign with the username and password you just created.
+    ::: tip
+    Our [First-Time Setup](kb:first-time-setup) guide in the Knowledge Base has more information about what to expect during setup.
+    :::
 
-::: tip
-Forgot to record your password? You can set a new one by running:
+Congratulations! You now have a fully-functional Craft application installed and configured. Run `ddev launch` to view the starter project’s welcome screen:
 
-```bash
-ddev craft users/set-password 1
-```
-:::
+<BrowserShot url="https://my-craft-project.ddev.site/" :link="false">
+<img src="./images/welcome.png" alt="A new Craft installation’s welcome screen" />
+</BrowserShot>
 
 ## Next Steps
+
+Ready to dive in? Sign in to the [control panel](./control-panel.md) by clicking **Go to your control panel** from the welcome screen, or running `ddev launch admin`. The username and password you provided during [setup](kb:first-time-setup) were used to create the first admin user.
 
 You’re welcome to explore things at your own pace—but here are some great starting points:
 
 - Get familiar with the [directory structure](./directory-structure.md) that was created during installation;
 - Review [configuration](./config/README.md) methods and options;
-- Learn about Craft’s main content tools: [elements](./elements.md) and [custom fields](./fields.md);
+- Explore Craft’s main content tools: [elements](./elements.md) and [custom fields](./fields.md);
 - Discover [plugins](./plugins.md) to add features or integrate with other services;
 - Find help and inspiration within our vibrant [community](https://craftcms.com/community)!
 
@@ -84,6 +86,8 @@ Craft’s own footprint is relatively light, but it’s important to choose a pl
 ### Deployment
 
 There is no one-size-fits-all deployment strategy for a Craft project, but we’ve collected our most salient advice in the [Deployment Best Practices](kb:deployment-best-practices) Knowledge Base article.
+
+Regardless of your target infrastructure, it’s important to define a workflow for yourself and your collaborators. That process begins
 
 ### Troubleshooting
 
