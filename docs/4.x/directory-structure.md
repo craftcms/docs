@@ -92,4 +92,4 @@ This is a command line executable used to execute Craft’s [console commands](c
 
 ### `.ddev/`
 
-If you followed the [installation](./installation.md) guide, DDEV will have left a `.ddev/` directory in the root of your project. This is safe to keep in version control—DDEV may modify it from time to time.
+If you followed the [installation](./installation.md) guide, DDEV will have left a `.ddev/` directory in the root of your project. This is safe to keep in version control—DDEV may make changes to it from time to time, but a separate `.gitignore` file exists within it to ensure only necessary files are tracked.
