@@ -87,7 +87,7 @@ Craft’s own footprint is relatively light, but it’s important to choose a pl
 
 There is no one-size-fits-all deployment strategy for a Craft project, but we’ve collected our most salient advice in the [Deployment Best Practices](kb:deployment-best-practices) Knowledge Base article.
 
-Regardless of your target infrastructure, it’s important to define a workflow for yourself and your collaborators. That process begins
+Regardless of your target infrastructure, it’s important to define a workflow for yourself and your collaborators. Starting a project from a local environment sets a precedent for the flow of code and configuration; while it is _possible_ to scaffold a project directly on a remote host, maintaining a single source of truth for the site will become difficult with changes being made in multiple places, by multiple parties, or without a means of testing those changes in isolation.
 
 ### Troubleshooting
 
