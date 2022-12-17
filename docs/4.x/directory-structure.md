@@ -1,6 +1,6 @@
 # Directory Structure
 
-When you download a fresh copy of Craft 4, your project will have the following folders and files in it:
+A fresh Craft 4 [installation](./installation.md) will have the following folders and files in it.
 
 ### `config/`
 
@@ -74,6 +74,10 @@ This is your [PHP dotenv](https://github.com/vlucas/phpdotenv) `.env` file templ
 
 Tells Git which files it should exclude when committing changes. At minimum, this should ignore `.env` and Composer’s `vendor/` directory.
 
+### `bootstrap.php`
+
+The [starter project](https://github.com/craftcms/craft) consolidates important bootstrapping logic (like defining path [constants](./config/README.md#php-constants) and loading environment variables from the [`.env`](#env) file) into this file. Both the HTTP and console entry scripts (`web/index.php` and [`craft`](#craft), respectively) include this file—but each goes on to instantiate a different [type of application](https://www.yiiframework.com/doc/guide/2.0/en/structure-entry-scripts) suited for that request context.
+
 ### `composer.json`
 
 The starting point `composer.json` file that should be used for all Craft projects. See the [Composer documentation](https://getcomposer.org/doc/04-schema.md) for details on what can go in here.
@@ -84,4 +88,8 @@ This is a Composer file that tells Composer exactly which dependencies and versi
 
 ### `craft`
 
-This is a command line executable used to execute Craft’s [console commands](console-commands.md).
+This is a command line executable used to execute Craft’s [console commands](console-commands.md). Its structure is similar to [`web/index.php`](#web-index-php), insofar as it 
+
+### `.ddev/`
+
+If you followed the [installation](./installation.md) guide, DDEV will have left a `.ddev/` directory in the root of your project. This is safe to keep in version control—DDEV may make changes to it from time to time, but a separate `.gitignore` file exists within it to ensure only necessary files are tracked.

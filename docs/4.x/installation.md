@@ -1,228 +1,94 @@
 # Installation
 
-## Step 1: Download Craft
-
-Craft can be downloaded with [Composer](#downloading-with-composer) or by [manually downloading](#downloading-an-archive-file-manually) a zip or tar.gz archive. The end result will be the same, so go with whichever route you feel more comfortable with.
-
-### Downloading with Composer
+The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, and [upgrade](./upgrade.md). All you’ll need to follow along is a unix-style command prompt.
 
 ::: tip
-You should be running Composer 1.3.0 or later. You can find out your installed version of Composer by running `composer -V` from your terminal. If that outputs something lower than 1.3.0, run `composer self-update` to update your Composer installation.
+If at any point you feel stuck, the [Tutorial](../getting-started-tutorial/README.md) is a comprehensive guide for _anyone_ who wants to get set up with a fast, reliable local development environment.
 :::
 
-To create a new Craft project, run this command (substituting `path/to/my-project` with the path where Composer should create the project):
+Downloading or installing Craft by any means binds you to its [license](https://craftcms.com/license).
 
-```bash
-composer create-project craftcms/craft path/to/my-project
-```
+## Quick-Start
 
-Composer will take a few minutes to load everything. Once it’s done you’ll see a success message:
+[DDEV](https://ddev.readthedocs.io/en/stable/) is a Docker-based PHP development environment that streamlines the creation and management of resources required by a Craft project.
 
-![The success message shown after loading Craft with Composer](./images/installation-command-line.png)
+[Install DDEV](https://ddev.readthedocs.io/en/latest/users/install/ddev-installation/), then follow these steps:
 
-### Downloading an Archive File Manually
+1. Create a project directory and move into it:
 
-Download the archive format you prefer to work with:
+    ```bash
+    mkdir my-craft-project
+    cd my-craft-project/
+    ```
 
-- [zip](https://craftcms.com/latest-v4.zip)
-- [tar.gz](https://craftcms.com/latest-v4.tar.gz)
+1. Create DDEV configuration files:
 
-Extract the archive wherever you want your new Craft project to live.
+    ```bash
+    ddev config --project-type=craftcms
+    ```
 
-::: tip
-If you’re on macOS, be careful not to lose the hidden files in there (`.env`, `.env.example`, `.gitignore`, and `web/.htaccess`). You can press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> to toggle hidden file visibility in Finder.
-:::
+1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft):
 
-### Directory Structure
+    ```bash
+    ddev composer create -y --no-scripts --no-install craftcms/craft
+    ```
 
-Once Craft’s files are in place, your project directory should have a directory structure like this:
+1. Boot up the development environment:
 
-```treeview
-my-project/
-├── config/
-│   └── ...
-├── modules/
-│   └── ...
-├── storage/
-│   └── ...
-├── templates/
-│   └── ...
-├── vendor/
-│   └── ...
-├── web/
-│   └── ...
-├── .env
-├── .env.example
-├── .gitignore
-├── composer.json
-├── composer.lock
-└── craft
-```
+    ```bash
+    ddev start
+    ```
 
-::: tip
-The `web/` folder represents your site’s web root, and it can be renamed to whatever you want (`www/`, `public/`, `public_html/`, etc.).
-:::
+1. Install the latest dependencies:
 
-::: tip
-See [Moving Craft’s Files Below the Web Root](https://craftcms.com/knowledge-base/moving-craft-files) if your hosting setup does not allow Craft’s files to exist outside the web root.
-:::
+    ```bash
+    ddev composer update
+    ```
 
-See the [Directory Structure](directory-structure.md) page to learn what these folders and files are for and how you can customize them.
+1. Start the Craft setup wizard, and accept all defaults (in `[square brackets]`):
 
-## Step 2: Set the File Permissions
+    ```bash
+    ddev craft install
+    ```
 
-::: tip
-If you used Composer to download Craft, you can probably safely skip this step.
-:::
+    ::: tip
+    Our [First-Time Setup](kb:first-time-setup) guide in the Knowledge Base has more information about what to expect during setup.
+    :::
 
-For Craft to run properly, PHP needs to be able to write to the following places:
+Congratulations! You now have a fully-functional Craft application installed and configured. Run `ddev launch` to view the starter project’s welcome screen:
 
-- `.env`
-- `composer.json`
-- `composer.lock`
-- `config/license.key`
-- `config/project/*`
-- `storage/*`
-- `vendor/*`
-- `web/cpresources/*`
-
-The exact permissions you should be setting depends on the relationship between the system user that runs PHP and whoever owns the folders and files.
-
-- If they’re the same user, use `744`.
-- If they’re in the same group, use `774`.
-- If you’re not sure and enjoy life on the edge, use `777`.
-
-::: warning HEY IIS FANS
-Make sure your site’s AppPool account has write permissions to these folders and files.
-:::
-
-## Step 3: Set a Security Key
-
-::: tip
-If you used Composer to download Craft, you can probably safely skip this step.
-:::
-
-Each Craft project should have a unique security key, which is shared between each of the environments that the project is installed on.
-
-You can generate and assign the key [manually](#set-the-key-manually), or have Craft do it for you with a [terminal command](#set-the-key-from-your-terminal).
-
-### Set the Key Manually
-
-First generate a cryptographically secure key, ideally using a password generator like [1Password](https://1password.com/password-generator/). (There’s no length limit.)
-
-Then open up your `.env` file (you may need to use an app like [Transmit](https://panic.com/transmit/) to do this if you’re running macOS), and find this line:
-
-    CRAFT_SECURITY_KEY=""
-
-Paste your security key inside the quotes and save the file.
-
-### Set the Key from Your Terminal
-
-In your terminal, go to your project’s root directory and run the following command:
-
-```bash
-php craft setup/security-key
-```
-
-## Step 4: Create a Database
-
-Next up, you need to create a database for your Craft project. Craft 4 supports both MySQL 5.7.8+ and PostgreSQL PostgreSQL 10+.
-
-If you’re given a choice, we recommend the following database settings in most cases:
-
-- **MySQL**
-
-  - Default Character Set: `utf8`
-  - Default Collation: `utf8_unicode_ci`
-
-- **PostgreSQL**
-  - Character Set: `UTF8`
-
-## Step 5: Set up the Web Server
-
-Create a new web server to host your Craft project. Its document root (or “web root”) should point to your `web/` directory (or whatever you’ve renamed it to).
-
-You’ll also need to update your system’s `hosts` file so requests to your chosen hostname (e.g. `my-project.tld`) should be routed locally.
-
-- **macOS/Linux/Unix**: `/etc/hosts`
-- **Windows**: `\Windows\System32\drivers\etc\hosts`
-
-::: tip
-Some local development tools such as [DDEV](https://ddev.com/) will update your `hosts` file automatically for you.
-:::
-
-You can test whether you set everything up correctly by pointing your web browser to `https://<Hostname>/index.php?p=admin/install` (substituting `<Hostname>` with your web server’s hostname). If Craft’s Setup Wizard is shown, the hostname is correctly resolving to your Craft installation.
-
-::: tip
-We recommend using the `.test` TLD for local development, and specifically **not** `.local` on macOS since [conflicts with Bonjour can lead to performance issues](https://help.rm.com/technicalarticle.asp?cref=tec3015691).
-:::
-
-## Step 6: Run the Setup Wizard
-
-Finally, it’s time to run Craft’s Setup Wizard from either your [terminal](#terminal-setup) or your [web browser](#web-browser-setup).
-
-::: tip
-If you used `composer create-project` earlier and chose to continue setup there, you can head straight to `https://my-project.tld/admin`.
-:::
-
-### Terminal Setup
-
-In your terminal, go to your project’s root directory and run the following command to kick off the Setup Wizard:
-
-```bash
-php craft setup
-```
-
-The command will ask a few questions about your database connection and kick off Craft’s installer. Once it’s done, you should be able to access your new Craft site from your web browser.
-
-### Web Browser Setup
-
-In your web browser, go to `https://my-project.tld/index.php?p=admin/install` (substituting `my-project.tld` with your web server’s hostname). If you’ve done everything right so far, you should be greeted by Craft’s Setup Wizard:
-
-<BrowserShot url="https://my-project.tld/admin/install" :link="false">
-<img src="./images/installation-step-0.png" alt="Craft Installation Screen">
+<BrowserShot url="https://my-craft-project.ddev.site/" :link="false">
+<img src="./images/welcome.png" alt="A new Craft installation’s welcome screen" />
 </BrowserShot>
 
-The first step of the installer is to accept the [license agreement](https://craftcms.com/license). Scroll down through the agreement (reading it all, of course) and press **Got it** to accept:
+## Next Steps
 
-<BrowserShot url="https://my-project.tld/admin/install" :link="false">
-<img src="./images/installation-step-1.png" alt="Craft Installation License Agreement">
-</BrowserShot>
+Ready to dive in? Sign in to the [control panel](./control-panel.md) by clicking **Go to your control panel** from the welcome screen, or running `ddev launch admin`. The username and password you provided during [setup](kb:first-time-setup) were used to create the first admin user.
 
-The second step is to enter your database connection information:
+You’re welcome to explore things at your own pace—but here are some great starting points:
 
-::: tip
-If the Setup Wizard skips this step, it’s because Craft is already able to connect to your database.
-:::
+- Get familiar with the [directory structure](./directory-structure.md) that was created during installation;
+- Review [configuration](./config/README.md) methods and options;
+- Explore Craft’s main content tools: [elements](./elements.md) and [custom fields](./fields.md);
+- Discover [plugins](./plugins.md) to add features or integrate with other services;
+- Find help and inspiration within our vibrant [community](https://craftcms.com/community)!
 
-<BrowserShot url="https://my-project.tld/admin/install" :link="false">
-<img src="./images/installation-step-2.png" alt="Craft Installation Database Connection Information">
-</BrowserShot>
+## Further Reading
 
-The third step is to create an admin account. Don’t be one of _those people_—be sure to pick a strong password:
+### Alternative Installation Methods
 
-<BrowserShot url="https://my-project.tld/admin/install" :link="false">
-<img src="./images/installation-step-3.png" alt="Craft Installation Create User Account">
-</BrowserShot>
+See [Using the Starter Project](kb:using-the-starter-project) or [Setting up a Craft Project from Scratch](kb:setting-up-a-craft-project-from-scratch) in the Knowledge Base for platform-agnostic installation instructions.
 
-The final step is to define your System Name, Base URL, and Language:
+### Hosting
 
-<BrowserShot url="https://my-project.tld/admin/install" :link="false">
-<img src="./images/installation-step-4.png" alt="Craft Installation System Settings">
-</BrowserShot>
+Craft’s own footprint is relatively light, but it’s important to choose a platform that matches your traffic, storage, and redundancy needs. We maintain a [list of Craft-friendly providers](https://craftcms.com/hosting) for projects of varying scale.
 
-Press **Finish up** to complete the setup process. A few seconds later, you should have a working Craft install!
+### Deployment
 
-If it was successful, Craft will redirect your browser to the control panel:
+There is no one-size-fits-all deployment strategy for a Craft project, but we’ve collected our most salient advice in the [Deployment Best Practices](kb:deployment-best-practices) Knowledge Base article.
 
-<BrowserShot url="https://my-project.tld/admin/dashboard" :link="false">
-<img src="./images/installation-step-5.png" alt="Craft Installation Complete">
-</BrowserShot>
+Regardless of your target infrastructure, it’s important to define a workflow for yourself and your collaborators. Starting a project from a local environment sets a precedent for the flow of code and configuration; while it is _possible_ to scaffold a project directly on a remote host, maintaining a single source of truth for the site will become difficult with changes being made in multiple places, by multiple parties, or without a means of testing those changes in isolation.
 
-Congratulations, you’ve installed Craft!
+### Troubleshooting
 
-Now build something incredible.
-
-## Troubleshooting
-
-See the [Troubleshooting a Failed Craft Installation](https://craftcms.com/knowledge-base/troubleshooting-failed-installation) Knowledge Base article if something went wrong along the way.
+See the [Troubleshooting a Failed Craft Installation](kb:troubleshooting-failed-installation) Knowledge Base article for a number of common installation hang-ups.
