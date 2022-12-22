@@ -12,7 +12,7 @@ Downloading or installing Craft by any means binds you to its [license](https://
 
 [DDEV](https://ddev.readthedocs.io/en/stable/) is a Docker-based PHP development environment that streamlines the creation and management of resources required by a Craft project.
 
-[Install DDEV](https://ddev.readthedocs.io/en/latest/users/install/ddev-installation/), then follow these steps:
+[Install or update DDEV](https://ddev.readthedocs.io/en/stable/users/install/), then follow these steps:
 
 1. Create a project directory and move into it:
 
@@ -24,25 +24,13 @@ Downloading or installing Craft by any means binds you to its [license](https://
 1. Create DDEV configuration files:
 
     ```bash
-    ddev config --project-type=craftcms
+    ddev config --project-type=craftcms --docroot=web --create-docroot
     ```
 
 1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft):
 
     ```bash
-    ddev composer create -y --no-scripts --no-install craftcms/craft
-    ```
-
-1. Boot up the development environment:
-
-    ```bash
-    ddev start
-    ```
-
-1. Install the latest dependencies:
-
-    ```bash
-    ddev composer update
+    ddev composer create -y --no-scripts craftcms/craft
     ```
 
 1. Start the Craft setup wizard, and accept all defaults (in `[square brackets]`):
