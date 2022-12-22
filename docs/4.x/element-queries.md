@@ -331,7 +331,7 @@ The `paginate` tag accepts an element query, sets its `offset` param based on th
   .orderBy('postDate DESC') %}
 
 {# Paginate the query into a `posts` variable: #}
-{% paginate newsQuery as posts, pageInfo %}
+{% paginate newsQuery as pageInfo, posts %}
 
 {# Use the `posts` variable just like you would any other result set: #}
 {% for post in posts %}
