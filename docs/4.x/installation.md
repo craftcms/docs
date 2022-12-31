@@ -33,7 +33,7 @@ Downloading or installing Craft by any means binds you to its [license](https://
     ddev composer create -y --no-scripts craftcms/craft
     ```
 
-1. Start the Craft setup wizard, and accept all defaults (in `[square brackets]`):
+1. Run the Craft setup wizard, and accept all defaults (in `[square brackets]`):
 
     ```bash
     ddev craft install

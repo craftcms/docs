@@ -15,19 +15,13 @@ cd tutorial
 Then run the following commands to configure a new DDEV project there:
 
 ```sh
-# configure a new DDEV project
-ddev config --project-type=craftcms
+# Create DDEV configuration files
+ddev config --project-type=craftcms --docroot=web --create-docroot
 
-# download the craftcms/craft starter project files
-ddev composer create -y --no-scripts --no-install craftcms/craft
+# Scaffold the project from the official starter project
+ddev composer create -y --no-scripts craftcms/craft
 
-# start the web server
-ddev start
-
-# install the Composer dependencies
-ddev composer update
-
-# run the Craft CMS installer
+# Run the Craft setup wizard
 ddev craft install
 ```
 
