@@ -1,6 +1,6 @@
 # Install Craft CMS
 
-At this point you should have [DDEV](https://ddev.com/) 1.21.2+ installed, and know how to run console commands. Now it’s time to install Craft CMS.
+At this point you should have [DDEV](https://ddev.com/) 1.21.4+ installed, and know how to run console commands. Now it’s time to install Craft CMS.
 
 The first step is to create a folder to contain the tutorial project, called `tutorial`. You can create it alongside your other development projects, wherever you prefer to store them.
 

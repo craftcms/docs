@@ -23,7 +23,7 @@ Craft works with each of these and more, so if you already have a preferred stac
 Instructions for installing DDEV are available in the [DDEV documentation](https://ddev.readthedocs.io/en/stable/).
 
 ::: tip
-DDEV 1.21.2 added official support for Craft CMS, so make sure you’re running 1.21.2 or later. You can check which version you’re currently running with the following command:
+Make sure you’re running DDEV 1.21.4 or later. You can check which version you’re currently running with the following command:
 
 ```sh
 ddev -v
