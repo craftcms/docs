@@ -81,7 +81,7 @@ Users | `username`<br>`firstname`<br>`lastname`<br>`fullname` (firstname + lastn
 Tags | `title`
 
 ::: warning
-Searching is a great way to quickly query content broadly across elements, but the most precise way to query field attributes is through that field type’s [query parameter](element-queries.md#executing-element-queries).
+Searching is a great way to quickly find content by keywords—but the most reliable way to directly query against attributes and custom fields is via the element type’s [query parameters](element-queries.md#types--parameters).
 :::
 
 ### Element-Specific Attribute Search Examples
