@@ -10730,6 +10730,84 @@
     },
     {
         "class": "craft\\elements\\Entry",
+        "name": "EVENT_DEFINE_PARENT_SELECTION_CRITERIA",
+        "type": "craft\\events\\ElementCriteriaEvent",
+        "desc": "The event that is triggered when defining the parent selection criteria.",
+        "filters": {
+            "draft": {
+                "label": "Element is a draft",
+                "conditionsPhp": "ElementHelper::isDraft($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "provisional": {
+                "label": "Element is a provisional draft",
+                "conditionsPhp": "ElementHelper::rootElement($event->sender)->isProvisionalDraft",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            },
+            "revision": {
+                "label": "Element is a revision",
+                "conditionsPhp": "ElementHelper::isRevision($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "provisional",
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Entry",
         "name": "EVENT_REGISTER_SOURCES",
         "type": "craft\\events\\RegisterElementSourcesEvent",
         "desc": "The event that is triggered when registering the available sources for the element type.",
