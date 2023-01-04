@@ -77,7 +77,8 @@ use craft\events\RegisterComponentTypesEvent;
 use craft\services\Elements;
 use yii\base\Event;
 
-Event::on(Elements::class,
+Event::on(
+    Elements::class,
     Elements::EVENT_REGISTER_ELEMENT_TYPES,
     function(RegisterComponentTypesEvent $event) {
         $event->types[] = Product::class;
