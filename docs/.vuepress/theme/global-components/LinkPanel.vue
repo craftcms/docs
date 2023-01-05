@@ -5,11 +5,17 @@
         <img :src="icon" class="no-zoom" alt />
       </div>
 
-      <span class="title">{{ title }}</span>
+      <span class="title">
+        {{ title }}
+      </span>
       <span class="subtitle">{{ subtitle }}</span>
 
-      <div v-if="repo" class="repo-icon">
-        <Octocat />
+      <div class="flags">
+        <div v-if="repo" class="repo-icon">
+          <Octocat />
+        </div>
+
+        <span v-if="currentVersion" v-text="currentVersion" class="version"></span>
       </div>
     </RouterLink>
     <a
@@ -24,11 +30,16 @@
         <img :src="icon" class="no-zoom" alt />
       </div>
 
-      <span class="title">{{ title }}</span>
+      <span class="title">
+        {{ title }}
+      </span>
       <span class="subtitle">{{ subtitle }}</span>
 
-      <div v-if="repo" class="repo-icon">
-        <Octocat />
+      <div class="flags">
+        <div v-if="repo" class="repo-icon">
+          <Octocat />
+        </div>
+        <span v-if="currentVersion" v-text="currentVersion" class="version"></span>
       </div>
     </a>
   </div>
@@ -36,11 +47,11 @@
 
 <style lang="postcss">
 .link-panel-wrapper {
-  @apply block relative py-1;
+  @apply block mb-4;
 }
 
 .link-panel {
-  @apply rounded border block w-full p-4;
+  @apply rounded border block w-full p-4 relative;
   transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   .title {
@@ -51,16 +62,25 @@
     @apply text-sm text-slate block leading-tight;
   }
 
-  .repo-icon {
-    @apply absolute;
+  .flags {
+    @apply absolute flex flex-row-reverse;
+
     top: 0.9rem;
     right: 0.9rem;
+  }
+
+  .repo-icon {
+    @apply ml-2;
+  }
+
+  .version {
+    @apply text-xs text-light-slate font-mono ml-2;
   }
 
   &:hover {
     @apply no-underline !important;
     box-shadow: 0 0 36px rgba(74, 124, 246, 0.1);
-    transform: translateY(-4px) translateZ(0);
+    transform: translateY(-3px) translateZ(0);
   }
 
   &.has-icon {
@@ -77,14 +97,12 @@
 
 @screen sm {
   .link-panel-wrapper {
-    @apply w-1/2 mx-2 py-0;
+    @apply w-1/2 px-2 py-0;
   }
 }
 
 @screen md {
-  .link-panel-wrapper {
-    @apply w-1/3 mx-2 py-0;
-  }
+  .link-panel-wrapper {}
 }
 
 </style>
@@ -94,7 +112,7 @@ import { isExternal, isMailto, isTel, ensureExt } from "../util";
 import Octocat from "../icons/Octocat";
 
 export default {
-  props: ["icon", "title", "link", "subtitle", "repo"],
+  props: ["icon", "title", "link", "subtitle", "repo", "currentVersion"],
   components: {
     Octocat,
   },
