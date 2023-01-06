@@ -18,10 +18,12 @@
           :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }"
         >
           <slot></slot>
-          <div class="points" v-if="poi.length">
+          <div class="points" v-if="poi">
             <div
-              class="point" v-for="(point, i) in poi" :key="i"
-              :style="`left: ${point[0]}%; top: ${point[1]}%;`" v-text="i + 1"></div>
+              class="point"
+              :class="{ 'point--active': activePoi === `${id}:${name}` }"
+              :style="`left: ${point[0]}%; top: ${point[1]}%;`"
+              v-for="(point, name, i) in poi" :key="name">{{ i + 1 }}</div>
           </div>
         </div>
       </div>
@@ -128,15 +130,28 @@
   line-height: 24px;
   margin-left: -12px;
   margin-top: -12px;
+  pointer-events: all;
   position: absolute;
   text-align: center;
   width: 24px;
 }
+
+.point--active {
+  background-color: theme("colors.blue");
+}
 </style>
 
 <script>
+import { v4 as uuidv4 } from 'uuid';
+
 export default {
   props: {
+    // Unique ID for the screenshot, so we might reference it elsewhere
+    id: {
+      type: String,
+      required: false,
+      default: () => uuidv4(),
+    },
     // URL to be shown in address bar
     url: {
       type: String,
@@ -166,10 +181,17 @@ export default {
       required: false
     },
     poi: {
-      type: Array,
+      type: Object,
       required: false,
-      default: () => [],
+      default: () => {},
     },
+  },
+  computed: {
+    activePoi: {
+      get() {
+        return this.$store.state.activePoiId;
+      }
+    }
   },
   methods: {
     getDisplayUrl(url) {

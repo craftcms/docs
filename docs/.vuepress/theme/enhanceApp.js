@@ -174,12 +174,17 @@ export default ({ Vue, options, router, siteData }) => {
 
     store: new Vuex.Store({
       state: {
-        codeLanguage: null
+        codeLanguage: null,
+        activePoiId: null,
       },
       mutations: {
         changeCodeLanguage(state, language) {
           state.codeLanguage = language;
           setStorage("codeLanguage", language, base);
+        },
+        activatePoi(state, id) {
+          state.activePoiId = id;
+          console.log(`New POI activated: ${state.activePoiId}`);
         }
       }
     })
