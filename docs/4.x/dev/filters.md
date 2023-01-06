@@ -1070,13 +1070,20 @@ Runs the given text through HTML Purifier.
 {{ user.bio|purify }}
 ```
 
-You can specify a custom HTML Purifier config file as well:
+You can specify a custom [HTML Purifier config](http://htmlpurifier.org/live/configdoc/plain.html) file as well:
 
 ```twig
 {{ user.bio|purify('user_bio') }}
 ```
 
-That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`.
+That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`. For example, to allow anchors and paragraph elements only, with [nofollow](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#attr-nofollow) set on all the anchors:
+
+```json
+{
+  "HTML.AllowedElements": "p, a",
+  "HTML.Nofollow": true,
+}
+```
 
 ## `push`
 
