@@ -117,6 +117,8 @@ The best places to look for help, inspiration, and news.
             icon-size="large"
         />
     </div>
+</div>
+<div class="mt-6 sm:flex sm:flex-wrap">
     <div class="py-1 sm:w-1/2 sm:py-0">
         <IconLink title="Community"
             subtitle="Find us online, or in-person."
@@ -154,6 +156,14 @@ The best places to look for help, inspiration, and news.
             subtitle="The official Craft Twitter feed."
             link="https://twitter.com/craftcms"
             icon="/docs/icons/icon-twitter.svg"
+            icon-size="large"
+        />
+    </div>
+    <div class="py-1 sm:w-1/2 sm:py-0">
+        <IconLink title="Mastodon"
+            subtitle="The official Craft Mastodon feed."
+            link="https://mastodon.social/@CraftCMS"
+            icon="/docs/icons/icon-mastodon.svg"
             icon-size="large"
         />
     </div>
