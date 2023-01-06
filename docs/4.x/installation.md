@@ -10,7 +10,7 @@ Downloading or installing Craft by any means binds you to its [license](https://
 
 ## Quick-Start
 
-[DDEV](https://ddev.readthedocs.io/en/stable/) is a Docker-based PHP development environment that streamlines the creation and management of resources required by a Craft project.
+[DDEV](https://ddev.readthedocs.io/en/stable/) is a Docker-based PHP development environment that streamlines the creation and management of resources required by a Craft project. We strongly recommend using DDEV for new Craft projects, but offer [alternate installation methods](#alternative-installation-methods) for anyone with a preexisting or preferred workflow.
 
 [Install or update DDEV](https://ddev.readthedocs.io/en/stable/users/install/), then follow these steps:
 
@@ -65,7 +65,11 @@ You’re welcome to explore things at your own pace—but here are some great st
 
 ### Alternative Installation Methods
 
-See [Using the Starter Project](kb:using-the-starter-project) or [Setting up a Craft Project from Scratch](kb:setting-up-a-craft-project-from-scratch) in the Knowledge Base for platform-agnostic installation instructions.
+Depending on your experience and preferred development environment, you may find one of these platform-agnostic installation processes more comfortable:
+
+- For most environments meeting Craft’s requirements, see [Using the Starter Project](kb:using-the-starter-project).
+- Especially adventurous users may want to read about [Setting up a Craft Project from Scratch](kb:setting-up-a-craft-project-from-scratch).
+- If you are unable to start a project locally—or are constrained by a hosting service—you can directly [download](https://craftcms.com/latest.zip) the latest Craft release as a ready-made starter project.
 
 ### Hosting
 
