@@ -3,6 +3,7 @@
         class="inline-poi"
         :class="{ active: isActive }"
         :title="description"
+        aria-hidden="true"
         @click="activatePoi()">{{ label }}</span>
 </template>
 

@@ -2,8 +2,8 @@
   <component
     class="browser-shot"
     :is="link ? 'a' : 'div'"
-    :href="link ? url : ''"
-    target="_blank"
+    :href="link ? url : null"
+    :target="link ? '_blank' : null"
     rel="noopener"
   >
     <figure class="browser-shot-wrapper">
