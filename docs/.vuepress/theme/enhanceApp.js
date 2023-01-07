@@ -184,7 +184,6 @@ export default ({ Vue, options, router, siteData }) => {
         },
         activatePoi(state, id) {
           state.activePoiId = id;
-          console.log(`New POI activated: ${state.activePoiId}`);
         }
       }
     })

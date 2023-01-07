@@ -12,12 +12,14 @@
         <div class="address-bar">
           <div class="address">{{ getDisplayUrl(url) }}</div>
         </div>
-        <div
-          class="image"
-          :class="{ 'limit-height': maxHeight }"
-          :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }"
-        >
-          <slot></slot>
+        <div class="viewport">
+          <div
+            class="image"
+            :class="{ 'limit-height': maxHeight }"
+            :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }"
+          >
+            <slot></slot>
+          </div>
           <div class="points" v-if="poi">
             <div
               class="point"
@@ -81,9 +83,12 @@
   text-decoration: none !important;
 }
 
+.browser-shot .viewport {
+  position: relative;
+}
+
 .browser-shot .image {
   margin: 0;
-  position: relative;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   overflow: hidden;
@@ -130,14 +135,15 @@
   line-height: 24px;
   margin-left: -12px;
   margin-top: -12px;
-  pointer-events: all;
   position: absolute;
   text-align: center;
+  transition: transform 0.5s cubic-bezier(0, 2, 1, 1);
   width: 24px;
 }
 
 .point--active {
   background-color: theme("colors.blue");
+  transform: scale(1.25);
 }
 </style>
 

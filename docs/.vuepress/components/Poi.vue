@@ -2,6 +2,7 @@
     <span
         class="inline-poi"
         :class="{ active: isActive }"
+        :title="description"
         @click="activatePoi()">{{ label }}</span>
 </template>
 
@@ -23,6 +24,10 @@ export default {
         label: {
             type: String,
             required: true,
+        },
+        description: {
+            type: String,
+            required: false,
         },
     },
     computed: {
