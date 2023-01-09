@@ -45,7 +45,7 @@ $categories = \craft\commerce\Plugin::getInstance()
 ```
 :::
 
-This returns an array of [TaxCategory](commerce4:craft\commerce\models\TaxCategory) models. You can use these to work with basic details like the category’s ID, name, and description, as well as related [product types](products-variants.md) and [tax rates](#tax-rates):
+This returns an array of [TaxCategory](commerce4:craft\commerce\models\TaxCategory) models. You can use these to work with basic details like the category’s ID, name, and description, as well as related [product types](products-variants.md#product-types) and [tax rates](#tax-rates):
 
 ```twig
 {% for categories as taxCategory %}
