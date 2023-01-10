@@ -86,7 +86,7 @@ The database user you tell Craft to connect with must have the following privile
 
 ## Control Panel Browser Requirements
 
-Craft’s control panel requires a browser that [supports JavaScript modules](https://caniuse.com/#feat=es6-module-dynamic-import).
+Craft’s [control panel](./control-panel.md) requires a browser that [supports JavaScript modules](https://caniuse.com/#feat=es6-module-dynamic-import).
 
 #### Windows and macOS
 
@@ -101,5 +101,5 @@ Craft’s control panel requires a browser that [supports JavaScript modules](ht
 - Android: Chrome 81+ or Firefox 68+
 
 ::: tip
-Craft’s control panel browser requirements have nothing to do with your actual website. If you’re a glutton for punishment and want your website to look flawless on IE 6, that’s your choice.
+Craft’s _control panel_ browser requirements are independent from those of your site’s front-end. Ultimately, Craft is only concerned with delivering [hypermedia](https://en.wikipedia.org/wiki/Hypermedia)—how you choose to enhance that with Javascript and CSS is entirely up to you!
 :::
