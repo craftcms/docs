@@ -10,7 +10,9 @@ In more ways than not, our recommendations for hosting and deploying a Craft web
 
 Let’s look at how to apply these principles and set up stress-free deployments.
 
-## Workflow Advice
+## Workflow
+
+Our first stop is some general advice on managing a Craft project.
 
 ### Source Control
 
@@ -18,9 +20,9 @@ No matter how you work—or who you work with—the single most important thing 
 
 A centralized repository for your code (on Github, Gitlab, BitBucket, or elsewhere) also means that getting new code onto a server is dramatically simplified.
 
-### Versions + Project Config
+### Updates + Project Config
 
-
+Like the installation process, updating Craft is also different from
 
 ## Selecting a Host
 
@@ -30,19 +32,56 @@ Craft will work on virtually any hosting platform that meets its [requirements](
 Check out our list of [hosting partners](https://craftcms.com/hosting), and the [introduction to hosting](kb:hosting-craft-101) Knowledge Base article if this is your first time launching a Craft project.
 :::
 
+<columns>
+<column>
+
 ### Recommendations
 
 - Choose a host that offers dedicated resources. This is sometimes referred to as a “virtual private server,” and will often include specific system information when selecting a service plan, like the number of CPU cores, RAM, and disk space allocated to your project.
 - For unmanaged hosting, consider using a provisioning tool like [Laravel Forge](https://forge.laravel.com/), [ServerPilot](https://serverpilot.io/), or [Ploi](https://ploi.io/).
 
+</column>
+<column>
+
 ### Red Flags
 
 - “Shared” hosting may be the most affordable option, but 
-- Lack of SSH access (or FTP-only hosts) means you will be unable to run [console commands](./console-commands.md), and significantly limits your [deployment](#deployment) options.
+- Lack of SSH access (i.e. FTP-only hosts) means you will be unable to run [console commands](./console-commands.md), and significantly limits your [deployment](#deployment) options.
+
+</column>
+</columns>
+
+### Advanced Options
+
+Craft plays well with non-traditional infrastructure. Let’s look at some examples of how you might take advantage of different platforms.
+
+#### Remote Databases
+
+Your database does not need to be on the same machine that serves web requests. If your provider offers hosted or “managed” databases, consider how your [database settings](./config/db.md) may differ—in most cases, the only difference is what hostname (or [`server`](./config/db.md#server)) you tell Craft to connect to.
+
+::: tip
+Keep in mind that using a remote database can contribute to long load times, as Craft has to make network requests for each database call. Be sure and profile
+:::
+
+A remote database is one prerequisite for [scaling](#scalability) your server horizontally.
+
+#### Scalability
+
+Craft is capable of (and can benefit from) both vertical and horizontal scaling. Giving your server more compute power and RAM, tuning the HTTP server, and offloading the database and other services 
+
+#### “Platform as a Service”
+
+Proprietary and open source cloud computing solutions are both options for hosting a Craft application. Services like [Heroku](https://heroku.com/) and the Digital Ocean [App Platform](https://www.digitalocean.com/products/app-platform) are designed to reduce your devops burden by 
 
 ## Deployment
 
-The variety of requirements
+::: tip
+Be sure and read our Deployment Best Practices article. What follows will be some 
+:::
+
+### Typical Process
+
+### Platform Specifics
 
 ## Common Pitfalls
 
