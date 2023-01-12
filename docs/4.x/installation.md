@@ -1,6 +1,6 @@
 # Installation
 
-The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, and [upgrade](./upgrade.md).
+The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](./deployment.md).
 
 This [quick-start](#quick-start) guide focuses on _local development_, but we will look at [hosting and deployment](./deployment.md) in a moment.
 
@@ -12,10 +12,12 @@ Downloading or installing Craft by any means binds you to its [license](https://
 
 ## Quick-Start
 
-Your journey with Craft begins on your local machine, with [DDEV](https://ddev.readthedocs.io/en/stable/). DDEV is a Docker-based PHP development environment that streamlines the creation and management of resources required by a Craft project.
+Your journey with Craft begins on your local machine, using [DDEV](https://ddev.readthedocs.io/en/stable/). DDEV is a Docker-based PHP development environment that streamlines the creation and management of resources required by a Craft project.
+
+This may sound unusual if you’re coming from other PHP-based CMS products—
 
 ::: tip
-We [strongly recommend](#why-ddev) DDEV for new Craft projects, but offer [alternate installation methods](#alternative-installation-methods) for anyone with a preexisting environment or preferred workflow that meets its [requirements](./requirements.md).
+While we [strongly recommend](#why-ddev) DDEV for new Craft projects, [alternate installation methods](#alternative-installation-methods) are available for anyone with a preexisting environment or preferred workflow that meets its [requirements](./requirements.md).
 :::
 
 [Install or update DDEV](https://ddev.readthedocs.io/en/stable/users/install/), then follow these steps:
@@ -76,6 +78,11 @@ You’re welcome to explore things at your own pace—but here are some great st
 
 Done for the day? [`ddev stop`](https://ddev.readthedocs.io/en/stable/users/basics/commands/#stop) will spin down any containers for the project and free up system resources. [`ddev start`](https://ddev.readthedocs.io/en/stable/users/basics/commands/#start) boots everything back up, right where you left off.
 
+### Workflow + Collaboration
+
+You may have noticed that Craft’s [installation](./installation.md) instructions differ from many other PHP-based CMS products. We encourage starting with a local development environment (rather than a remote host) as a means of  of a defined workflow—whatever it may be—to the reliability and longevity of a website.
+
+
 ::: tip
 To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./console-commands.html#db-backup). Have them clone the project and run:
 
@@ -93,15 +100,19 @@ DDEV is our recommended development environment because it isolates software req
 
 The environment for each project is [defined as YAML files](https://ddev.readthedocs.io/en/stable/users/configuration/config/), meaning `ddev start` is usually the only thing required to start working on a project on a new machine—or with a collaborator.
 
-The Docker requirement is not taken lightly! We believe that this one-time installation is much more sustainable for new and returning Craft developers than managing a bare-metal development environment, especially when—inevitably—
+The Docker requirement is not taken lightly! We believe that this one-time installation is much more sustainable for new and returning Craft developers than managing a bare-metal development environment—locally or on a remote server.
 
 ### Alternative Installation Methods
 
 Depending on your experience and preferred development environment, you may find one of these platform-agnostic installation processes more comfortable:
 
-- For most environments meeting Craft’s requirements, see [Using the Starter Project](kb:using-the-starter-project).
+- For most environments meeting Craft’s requirements, see [Using the Starter Project](kb:using-the-starter-project) to get started with Composer.
 - Especially adventurous users may want to read about [Setting up a Craft Project from Scratch](kb:setting-up-a-craft-project-from-scratch).
 - If you are unable to start a project locally—or are constrained by a hosting service—you can directly [download](https://craftcms.com/latest.zip) the latest Craft release as a ready-made starter project.
+
+::: warning
+Pre-built starter project ZIPs should only be used for evaluating Craft in limited circumstances.
+:::
 
 ### Hosting
 
