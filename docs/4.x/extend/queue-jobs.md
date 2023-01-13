@@ -26,13 +26,11 @@ This example class sends an email:
 
 namespace modules\jobs;
 
+use Craft;
 use craft\mail\Message;
 
 class MyJob extends \craft\queue\BaseJob
 {
-    /**
-     * @inheritdoc
-     */
     public function execute($queue): void
     {
         $message = new Message();
@@ -41,20 +39,12 @@ class MyJob extends \craft\queue\BaseJob
         $message->setSubject('Oh Hai');
         $message->setTextBody('Hello from the queue system! 👋');
 
-        try {
-            \Craft::$app->getMailer()->send($message);
-        } catch (\Throwable $e) {
-            // Don’t let an exception block the queue
-            \Craft::warning("Something went wrong: {$e->getMessage()}", __METHOD__);
-        }
+        Craft::$app->getMailer()->send($message);
     }
 
-    /**
-     * @inheritdoc
-     */
     protected function defaultDescription(): string
     {
-        return \Craft::t('app', 'Sending a worthless email');
+        return Craft::t('app', 'Sending a worthless email');
     }
 }
 ```
@@ -63,7 +53,7 @@ class MyJob extends \craft\queue\BaseJob
 
 If your job involves multiple steps, you might want to report its progress while it’s executing.
 
-You can do this with BaseJob’s [`setProgress()`](craft4:craft\queue\BaseJob::setProgress()) method, whose arguments are
+You can do this with BaseJob’s [`setProgress()`](craft4:craft\queue\BaseJob::setProgress()) method, whose arguments are:
 
 - the queue instance
 - a number between 0 and 1 representing the percent complete
@@ -85,7 +75,7 @@ public function execute($queue): void
         $this->setProgress(
             $queue,
             $i / $totalUsers,
-            \Craft::t('app', '{step, number} of {total, number}', [
+            Craft::t('app', '{step, number} of {total, number}', [
                 'step' => $i + 1,
                 'total' => $totalUsers,
             ])
@@ -97,15 +87,31 @@ public function execute($queue): void
         $message->setSubject('Oh Hai');
         $message->setTextBody('Hello from the queue system! 👋');
 
+        // Swallow exceptions from the mailer:
         try {
-            \Craft::$app->getMailer()->send($message);
+            Craft::$app->getMailer()->send($message);
         } catch (\Throwable $e) {
-            // Don’t let an exception block the queue
-            \Craft::warning("Something went wrong: {$e->getMessage()}", __METHOD__);
+            Craft::warning("Something went wrong: {$e->getMessage()}", __METHOD__);
         }
     }
 }
 ```
+
+### Dealing with Failed Jobs
+
+In our first example, exceptions from the mailer can bubble out of our job—but in the second example, we’re to ensuring the job is not halted prematurely.
+
+This decision is up to you: if the work in a job is nonessential (or will be done again later, like <craf4:craft\queue\jobs\GeneratePendingTransforms>), you can catch and log errors and let the job end nominally; if the work is critical (like synchronizing something to an external API), it may be better to let the exception bubble out of `execute()`.
+
+The queue wraps every job in its own `try` block, and will flag any jobs that generate exceptions as failed. The exception message that caused the failure will be recorded along with the job. Failed jobs can be retried from the control panel or with the `php craft queue/retry [id]` command.
+
+#### Retryable Jobs
+
+The queue will automatically retry failed jobs that implement the [`RetryableJobInterface`](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.0/en/retryable#retryablejobinterface). A job will only be retried after its `ttr` has passed—even if it didn’t use up the allowed time, and will be marked as failed once `canRetry()` returns false.
+
+::: warning
+Returning `true` from `canRetry()` can pollute your queue with jobs that may never succeed. Failed jobs are not necessarily bad! Exceptions can be used to track failures in code that runs unattended.
+:::
 
 ## Adding Your Job to the Queue
 

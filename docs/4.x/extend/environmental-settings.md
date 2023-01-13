@@ -37,7 +37,7 @@ use craft\behaviors\EnvAttributeParserBehavior;
 
 class MyModel extends Model
 {
-    public function behaviors()
+    public function behaviors(): array
     {
         return [
             'parser' => [
@@ -47,7 +47,7 @@ class MyModel extends Model
         ];
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             ['secretKey', 'required'],

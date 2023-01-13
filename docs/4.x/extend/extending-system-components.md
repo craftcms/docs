@@ -60,13 +60,12 @@ class FinanceableProductBehavior extends Behavior
     const FINANCE_MINIMUM_DEPOSIT_PERCENTAGE = 10;
     const FINANCE_MAXIMUM_DURATION_MONTHS = 24;
 
-    public function isFinanceable()
+    public function isFinanceable(): bool
     {
         return $this->owner->defaultPrice >= self::FINANCE_MINIMUM_ELIGIBLE_PRICE;
     }
 
-
-    public function getFinancePriceFrom()
+    public function getFinancePriceFrom(): float
     {
         $price = $this->owner->defaultPrice;
 
@@ -80,7 +79,6 @@ class FinanceableProductBehavior extends Behavior
     }
 
     // ...
-
 }
 ```
 

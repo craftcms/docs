@@ -176,7 +176,7 @@ return [
                         'weight' => 1,
                     ],
                 ],
-                'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',;
+                'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
             ];
 
             return Craft::createObject($config);
@@ -264,6 +264,36 @@ return [
     ],
 ];
 ```
+
+The `db` component is just Craft’s _default_ database connection—but your application can connect to _multiple_ databases by creating additional components.
+
+For example, if you need to read some data from a legacy database as part of a migration, you could define a `legacydb` component with its own connection settings. Then, any <craft4:craft\db\Query> execution methods can be called using the alternate component:
+
+::: code
+```php app.php
+use craft\helpers\App;
+
+return [
+    'components' => [
+        'legacydb' => [
+            'server' => App::env('LEGACY_DB_SERVER'),
+            // ...
+        ],
+    ],
+];
+```
+```php Example Query
+use Craft;
+use craft\db\Query;
+
+$connection = Craft::$app->get('legacydb');
+
+$legacyPosts = (new Query)
+    ->select(['title', 'body', 'post_date'])
+    ->from(['posts'])
+    ->all($connection);
+```
+:::
 
 ### Log
 

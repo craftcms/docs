@@ -302,10 +302,11 @@ $entry->setAuthor($newAuthor);
 App components should have their own getter functions, which call the app component getter method [get()](yii2:yii\di\ServiceLocator::get()) directly:
 
 ```php
-/**
- * @return Entries
- */
-public function getEntries()
+use craft\services\Entries;
+
+// ...
+
+public function getEntries(): Entries
 {
     return $this->get('entries');
 }

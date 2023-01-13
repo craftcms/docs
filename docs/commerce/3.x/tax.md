@@ -48,7 +48,7 @@ $categories = \craft\commerce\Plugin::getInstance()
 This returns an array of [TaxCategory](commerce3:craft\commerce\models\TaxCategory) models. You can use these to work with basic details like the category’s ID, name, and description, as well as related [product types](products-variants.md) and [tax rates](#tax-rates):
 
 ```twig
-{% foreach categories as taxCategory %}
+{% for categories as taxCategory %}
   {# @var taxCategory craft\commerce\models\TaxCategory #}
   {{ taxCategory.id }}
   {{ taxCategory.name }}
@@ -56,7 +56,7 @@ This returns an array of [TaxCategory](commerce3:craft\commerce\models\TaxCatego
   {{ taxCategory.default }}
   {{ taxCategory.productTypes }}
   {{ taxCategory.taxRates }}
-{% endforeach %}
+{% endfor %}
 ```
 
 You can fetch the tax categories for a specific product type using its ID:
@@ -158,7 +158,7 @@ $rates = \craft\commerce\Plugin::getInstance()
 This returns an array of [TaxRate](commerce3:craft\commerce\models\TaxRate) models. You can use these to work with basic details like the rate’s ID, name, code, and rate, as well as related tax zones and categories:
 
 ```twig
-{% foreach rates as taxRate %}
+{% for rates as taxRate %}
   {# @var taxRate craft\commerce\models\TaxRate #}
   {{ taxRate.id }}
   {{ taxRate.name }}
@@ -169,7 +169,7 @@ This returns an array of [TaxRate](commerce3:craft\commerce\models\TaxRate) mode
   {{ taxRate.getTaxZone() }}
   {{ taxRate.getTaxCategory() }}
   {{ taxRate.getIsEverywhere() }}
-{% endforeach %}
+{% endfor %}
 ```
 
 You can also fetch tax rates for a specific tax zone by providing a zone object or ID:
@@ -268,7 +268,7 @@ $zones = \craft\commerce\Plugin::getInstance()
 This returns an array of [TaxAddressZone](commerce3:craft\commerce\models\TaxAddressZone) models. You can use these to work with basic details like the zone’s ID, name, and description and the geographic conditions you’ve established for it:
 
 ```twig
-{% foreach zones as taxZone %}
+{% for zones as taxZone %}
   {# @var taxZone craft\commerce\models\TaxAddressZone #}
   {{ taxZone.id }}
   {{ taxZone.name }}
@@ -277,7 +277,7 @@ This returns an array of [TaxAddressZone](commerce3:craft\commerce\models\TaxAdd
   {{ taxZone.dateUpdated }}
   {{ taxZone.default }}
   {{ taxZone.getCondition() }}
-{% endforeach %}
+{% endfor %}
 ```
 
 In some cases you may need to get a single, specific tax zone by its ID:

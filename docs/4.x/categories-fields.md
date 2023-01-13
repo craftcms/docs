@@ -49,7 +49,7 @@ When you select a nested category, all the ancestors leading up to that category
 
 ### Inline Category Editing
 
-When you double-click on a related category, a HUD will appear where you can edit the category’s title and custom fields.
+Double-click on a related category to edit it in a [slideout](./control-panel.md#slideouts).
 
 ## Development
 

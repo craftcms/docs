@@ -77,7 +77,8 @@ use craft\events\RegisterComponentTypesEvent;
 use craft\services\Elements;
 use yii\base\Event;
 
-Event::on(Elements::class,
+Event::on(
+    Elements::class,
     Elements::EVENT_REGISTER_ELEMENT_TYPES,
     function(RegisterComponentTypesEvent $event) {
         $event->types[] = Product::class;
@@ -126,7 +127,7 @@ Install the plugin now, so your database table will be created.
 You will also need to add an `afterSave()` method to your element class, which is responsible for keeping your element table updated when elements are saved. The `afterSave()` method is a part of the standard element saving [control flow](services.md#interface-oriented-methods).
 
 ```php
-public function afterSave(bool $isNew)
+public function afterSave(bool $isNew): void
 {
     if ($isNew) {
         \Craft::$app->db->createCommand()
@@ -176,21 +177,20 @@ namespace mynamespace\elements\db;
 use craft\db\Query;
 use craft\elements\db\ElementQuery;
 use craft\helpers\Db;
-use mynamespace\elements\Product;
 
 class ProductQuery extends ElementQuery
 {
     public $price;
     public $currency;
 
-    public function price($value)
+    public function price($value): self
     {
         $this->price = $value;
 
         return $this;
     }
 
-    public function currency($value)
+    public function currency($value): self
     {
         $this->currency = $value;
 
@@ -254,13 +254,15 @@ Behind the scenes, <craft4:craft\elements\db\ElementQuery> creates two <craft4:c
 
 The reason for this separation is performance. It allows MySQL/PostgreSQL to figure out exactly which element rows should be fetched before it has to worry about which columns to select, etc., avoiding the need to run expensive condition operations on temporary tables.
 
-### Template Function
+### Querying for Elements in Templates
 
-If you want to make it possible for templates to query for your elements, you can create a new template function that returns a new element query. (See [Extending Twig](extending-twig.md) for more details.)
+If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](guide:concept-behaviors).
+
+Your behavior should look like this:
 
 ```php
 <?php
-namespace mynamespace;
+namespace mynamespace\twig\variables;
 
 use mynamespace\elements\Product;
 use mynamespace\elements\db\ProductQuery;
@@ -268,19 +270,39 @@ use Craft;
 use yii\base\Behavior;
 
 /**
- * Adds a `craft.products()` function to the templates (like `craft.entries()`)
+ * The class name isn't important, but we've used something that describes
+ * how it is applied, rather than what it does.
+ * 
+ * You are only apt to need a single behavior, even if your plugin or module
+ * provides multiple element types.
  */
 class CraftVariableBehavior extends Behavior
 {
-    public function products($criteria = null): ProductQuery
+    public function products(array $criteria = []): ProductQuery
     {
-        $query = Product::find();
-        if ($criteria) {
-            Craft::configure($query, $criteria);
-        }
-        return $query;
+        // Create a query via your element type, and apply any passed criteria:
+        return Craft::configure(Product::find(), $criteria);
     }
 }
+```
+
+To attach the behavior, return to your main class’s `init()` method and listen for the `CraftVariable::EVENT_DEFINE_BEHAVIORS` event:
+
+```php
+use yii\base\Event;
+use craft\events\DefineBehaviorsEvent;
+use craft\web\twig\variables\CraftVariable;
+use mynamespace\twig\variables\CraftVariableBehavior;
+
+Event::on(
+    CraftVariable::class,
+    CraftVariable::EVENT_DEFINE_BEHAVIORS,
+    function(DefineBehaviorsEvent $e) {
+        $e->sender->attachBehaviors([
+            CraftVariableBehavior::class,
+        ]);
+    }
+);
 ```
 
 ## Element Content
@@ -320,7 +342,7 @@ If you want your element type to support custom fields, you will also need to cr
 
 {{ forms.fieldLayoutDesignerField({
   fieldLayout: craft.app.fields.getLayoutByType(
-    'ns\\prefix\\elements\\MyElementType'
+    'mynamespace\\elements\\Product'
   ),
 }) }}
 ```
@@ -329,7 +351,7 @@ Place that within a `<form>` that posts to one of your plugin’s controllers. T
 
 ```php
 $fieldLayout = Craft::$app->getFields()->assembleLayoutFromPost();
-$fieldLayout->type = MyElementType::class;
+$fieldLayout->type = Product::class;
 ```
 
 Your service can then save the field layout by passing it to <craft4:craft\services\Fields::saveLayout()>:
@@ -338,7 +360,7 @@ Your service can then save the field layout by passing it to <craft4:craft\servi
 Craft::$app->fields->saveLayout($fieldLayout);
 ```
 
-Or, if the layout is being used by a component that’s stored in the [project config](project-config.md), you can add the field layout to the component’s config, and save it alongside your component.
+Or, if the layout is being used by a configurable component stored in [project config](project-config.md) (as entry types and category groups are), you can add the field layout to its config, and save it alongside your component.
 
 ```php
 use craft\db\Table;
@@ -407,7 +429,7 @@ You can set that up however you want. Just make sure you’re passing the right 
 
 #### Associating Elements to their Field Layouts
 
-Elements’ `getFieldLayout()` method is responsible for returning the field layout that is associated with the current element (if there is one). By default, it will check a `$fieldLayoutId` property on the element. If set, it will return the field layout with the same ID. Therefore it’s recommended that you set the `$fieldLayoutId` property on your elements when saving them.
+Elements’ `getFieldLayout()` method is responsible for returning its associated field layout (if there is one). By default, it will check a `$fieldLayoutId` property on the element. If set, it will return the field layout with the same ID. Therefore it’s recommended that you set the `$fieldLayoutId` property on your elements when saving them.
 
 ```php
 // ...
@@ -415,7 +437,7 @@ $product->fieldLayoutId = $productType->fieldLayoutId;
 \Craft::$app->elements->saveElement($product);
 ```
 
-If the `$fieldLayoutId` property is set, <craft4:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched down the road.
+If the `$fieldLayoutId` property is set, <craft4:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched, down the road.
 
 Alternatively, you can override the `getFieldLayout()` method, and fetch/return the field layout yourself. This might be preferable if your element type only has a single field layout (like user accounts).
 
@@ -528,7 +550,7 @@ public static function statuses(): array
 Next add a <craft4:craft\base\ElementInterface::getStatus()> method that returns the current status of an element:
 
 ```php
-public function getStatus()
+public function getStatus(): ?string
 {
     if ($this->fooIsTrue) {
         return 'foo';
@@ -541,7 +563,7 @@ public function getStatus()
 Finally, override the <craft4:craft\elements\db\ElementQuery::statusCondition()> method on your [element query class](#element-query-class):
 
 ```php
-protected function statusCondition(string $status)
+protected function statusCondition(string $status): mixed
 {
     switch ($status) {
         case 'foo':
@@ -726,7 +748,7 @@ use craft\helpers\UrlHelper;
 
 // ...
 
-public function getThumbUrl(int $size)
+public function getThumbUrl(int $size): ?string
 {
     return UrlHelper::resourceUrl("product-images/{$this->id}/{$size}");
 }
@@ -752,7 +774,7 @@ When an element is being saved, its `getUriFormat()` method will be called to fi
 So if you want your elements to get their own URLs, you must implement this method and have it return a string that can be parsed with <craft4:craft\web\View::renderObjectTemplate()> (e.g. `products/{slug}`). Usually this should be a user-defined string, rather than something hard-coded.
 
 ```php
-public function getUriFormat()
+public function getUriFormat(): ?string
 {
     return $this->getType()->uriFormat;
 }
@@ -763,7 +785,7 @@ Whenever an element’s URL is requested, Craft will instantiate the element and
 Internally, <craft4:craft\base\Element::getRoute()> will call a protected `route()` method, which is what you should override in your element class:
 
 ```php
-protected function route()
+protected function route(): array|string|null
 {
     return [
         'templates/render', [
@@ -878,7 +900,7 @@ $success = Craft::$app->elements->saveElement($product);
 Once you’ve set up an edit page for your element type, you can add a [getCpEditUrl()](craft4:craft\base\ElementInterface::getCpEditUrl()) method to your element class, which will communicate your elements’ edit page URLs within the control panel.
 
 ```php
-public function getCpEditUrl()
+public function getCpEditUrl(): ?string
 {
     return 'plugin-handle/products/'.$this->id;
 }
@@ -927,7 +949,7 @@ class Products extends BaseRelationField
 If you want your elements to support reference tags (e.g. `{product:100}`), add a static `refHandle()` method to your element class that returns a unique handle that should be used for its reference tags.
 
 ```php
-public static function refHandle()
+public static function refHandle(): ?string
 {
     return 'product';
 }
@@ -967,7 +989,7 @@ use craft\helpers\ArrayHelper;
 
 // ...
 
-public static function eagerLoadingMap(array $sourceElements, string $handle)
+public static function eagerLoadingMap(array $sourceElements, string $handle): array|null|false
 {
     if ($handle === 'author') {
         // get the source element IDs
@@ -994,7 +1016,7 @@ This function takes an of already-queried elements (the “source” elements), 
 If you need to override where eager-loaded elements are stored, add a `setEagerLoadedElements()` method to your element class as well:
 
 ```php
-public function setEagerLoadedElements(string $handle, array $elements)
+public function setEagerLoadedElements(string $handle, array $elements): void
 {
     if ($handle === 'author') {
         $author = $elements[0] ?? null;
@@ -1019,7 +1041,7 @@ use yii\base\Event;
 Event::on(
     Gc::class,
     Gc::EVENT_RUN,
-    function (Event $event) {
+    function(Event $event) {
         // Delete `elements` table rows without peers in the custom `my_element` table
         Craft::$app->getGc()->deletePartialElements(
             MyElement::class,

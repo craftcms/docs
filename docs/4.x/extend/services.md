@@ -121,7 +121,7 @@ Here’s a complete code example of what that looks like:
 public function saveRecipe(Recipe $recipe, $runValidation = true)
 {
     $isNewRecipe = !$recipe->id;
-    
+
     // Fire a 'beforeSaveRecipe' event
     $this->trigger(self::EVENT_BEFORE_SAVE_RECIPE, new RecipeEvent([
         'recipe' => $recipe,

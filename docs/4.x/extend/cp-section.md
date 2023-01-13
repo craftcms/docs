@@ -82,7 +82,7 @@ You can alternatively set a `hasCpSection` value in `composer.json` as noted in 
 You can modify aspects of the plugin’s control panel nav item by overriding its [getCpNavItem()](craft4:craft\base\PluginInterface::getCpNavItem()) method:
 
 ```php
-public function getCpNavItem()
+public function getCpNavItem(): ?array
 {
     $item = parent::getCpNavItem();
     $item['badgeCount'] = 5;

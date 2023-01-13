@@ -44,7 +44,7 @@ If your field type does any processing from [afterElementSave()](<craft4:craft\b
 You can tell whether field content has changed by calling [isFieldDirty()](<craft4:craft\base\ElementInterface::isFieldDirty()>) on the element.
 
 ```php
-public function afterElementSave(ElementInterface $element, bool $isNew)
+public function afterElementSave(ElementInterface $element, bool $isNew): void
 {
     if ($element->isFieldDirty()) {
         // logic for handling saved element
@@ -62,13 +62,13 @@ The field type’s [getContentColumnType()](craft4:craft\base\Field::getContentC
 
 ::: code
 ```php Single Column
-public function getContentColumnType()
+public function getContentColumnType(): array|string
 {
     return \yii\db\Schema::TYPE_STRING;
 }
 ```
 ```php Multiple Columns
-public function getContentColumnType()
+public function getContentColumnType(): array|string
 {
     return [
         'comment' => \yii\db\Schema::TYPE_STRING,

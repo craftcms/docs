@@ -118,6 +118,14 @@ Allows you to clear various Craft caches.
 
 Clear all caches.
 
+<h4 id="clear-caches-all-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="clear-caches-asset">
     <a href="#clear-caches-asset" class="header-anchor">#</a>
     <code>clear-caches/asset</code>
@@ -125,6 +133,14 @@ Clear all caches.
 
 
 Clears Asset caches.
+
+<h4 id="clear-caches-asset-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="clear-caches-asset-indexing-data">
     <a href="#clear-caches-asset-indexing-data" class="header-anchor">#</a>
@@ -134,6 +150,14 @@ Clears Asset caches.
 
 Clears Asset indexing data.
 
+<h4 id="clear-caches-asset-indexing-data-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="clear-caches-compiled-classes">
     <a href="#clear-caches-compiled-classes" class="header-anchor">#</a>
     <code>clear-caches/compiled-classes</code>
@@ -141,6 +165,14 @@ Clears Asset indexing data.
 
 
 Clears compiled classes.
+
+<h4 id="clear-caches-compiled-classes-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
@@ -150,6 +182,14 @@ Clears compiled classes.
 
 Clears compiled templates.
 
+<h4 id="clear-caches-compiled-templates-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="clear-caches-cp-resources">
     <a href="#clear-caches-cp-resources" class="header-anchor">#</a>
     <code>clear-caches/cp-resources</code>
@@ -157,6 +197,14 @@ Clears compiled templates.
 
 
 Clears control panel resources.
+
+<h4 id="clear-caches-cp-resources-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="clear-caches-data">
     <a href="#clear-caches-data" class="header-anchor">#</a>
@@ -166,6 +214,14 @@ Clears control panel resources.
 
 Clears data caches.
 
+<h4 id="clear-caches-data-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="clear-caches-index">
     <a href="#clear-caches-index" class="header-anchor">#</a>
     <code>clear-caches</code>
@@ -173,6 +229,14 @@ Clears data caches.
 
 
 Lists the caches that can be cleared.
+
+<h4 id="clear-caches-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="clear-caches-temp-files">
     <a href="#clear-caches-temp-files" class="header-anchor">#</a>
@@ -182,6 +246,14 @@ Lists the caches that can be cleared.
 
 Clears temporary files.
 
+<h4 id="clear-caches-temp-files-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="clear-caches-transform-indexes">
     <a href="#clear-caches-transform-indexes" class="header-anchor">#</a>
     <code>clear-caches/transform-indexes</code>
@@ -189,6 +261,14 @@ Clears temporary files.
 
 
 Clears the Asset transform index.
+
+<h4 id="clear-caches-transform-indexes-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 ## `clear-deprecations`
 
@@ -200,6 +280,14 @@ Clears the Asset transform index.
 
 
 Clears all deprecation warnings.
+
+<h4 id="clear-deprecations-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 ## `db`
 
@@ -242,6 +330,10 @@ Can be any of the following:
 : Whether to overwrite an existing backup file, if a specific file path is given.
 
 
+--isolated
+: 
+
+
 
 <h3 id="db-convert-charset">
     <a href="#db-convert-charset" class="header-anchor">#</a>
@@ -268,6 +360,14 @@ collation
 
 
 
+<h4 id="db-convert-charset-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="db-drop-all-tables">
     <a href="#db-drop-all-tables" class="header-anchor">#</a>
     <code>db/drop-all-tables</code>
@@ -280,6 +380,14 @@ Example:
 ```
 php craft db/drop-all-tables
 ```
+
+<h4 id="db-drop-all-tables-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="db-restore">
     <a href="#db-restore" class="header-anchor">#</a>
@@ -306,6 +414,10 @@ path
 
 --drop-all-tables
 : Whether to drop all preexisting tables in the database prior to restoring the backup.
+
+
+--isolated
+: 
 
 
 
@@ -335,6 +447,10 @@ id
 : Whether the element should be hard-deleted.
 
 
+--isolated
+: 
+
+
 
 <h3 id="elements-restore">
     <a href="#elements-restore" class="header-anchor">#</a>
@@ -348,6 +464,14 @@ Restores an element by its ID.
 
 id
 :  The element ID to restore.
+
+
+
+<h4 id="elements-restore-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
 
 
 
@@ -455,6 +579,10 @@ the ones that were deleted long enough ago to be ready for hard-deletion
 per the `softDeleteDuration` config setting.
 
 
+--isolated
+: 
+
+
 
 ## `graphql`
 
@@ -486,6 +614,10 @@ schemaUid
 : Expiry date
 
 
+--isolated
+: 
+
+
 
 <h3 id="graphql-dump-schema">
     <a href="#graphql-dump-schema" class="header-anchor">#</a>
@@ -510,6 +642,10 @@ Dumps a given GraphQL schema to a file.
 : Whether full schema should be printed or dumped.
 
 
+--isolated
+: 
+
+
 
 <h3 id="graphql-list-schemas">
     <a href="#graphql-list-schemas" class="header-anchor">#</a>
@@ -518,6 +654,14 @@ Dumps a given GraphQL schema to a file.
 
 
 Lists all GraphQL schemas.
+
+<h4 id="graphql-list-schemas-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="graphql-print-schema">
     <a href="#graphql-print-schema" class="header-anchor">#</a>
@@ -540,6 +684,10 @@ Prints a given GraphQL schema.
 
 --full-schema
 : Whether full schema should be printed or dumped.
+
+
+--isolated
+: 
 
 
 
@@ -695,6 +843,10 @@ Re-indexes assets across all volumes.
 : Whether to delete all the asset records that have their files missing.
 
 
+--isolated
+: 
+
+
 
 <h3 id="index-assets-cleanup">
     <a href="#index-assets-cleanup" class="header-anchor">#</a>
@@ -717,6 +869,10 @@ Removes all CLI indexing sessions.
 
 --delete-missing-assets
 : Whether to delete all the asset records that have their files missing.
+
+
+--isolated
+: 
 
 
 
@@ -754,6 +910,10 @@ startAt
 : Whether to delete all the asset records that have their files missing.
 
 
+--isolated
+: 
+
+
 
 ## `install`
 
@@ -766,6 +926,14 @@ Craft CMS CLI installer.
 
 
 Checks whether Craft is already installed.
+
+<h4 id="install-check-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="install-craft">
     <a href="#install-craft" class="header-anchor">#</a>
@@ -802,6 +970,10 @@ Runs the install migration.
 : The default language for the first site to create during install.
 
 
+--isolated
+: 
+
+
 
 ## `invalidate-tags`
 
@@ -815,6 +987,14 @@ Allows you to invalidate cache tags.
 
 Invalidates all cache tags.
 
+<h4 id="invalidate-tags-all-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="invalidate-tags-graphql">
     <a href="#invalidate-tags-graphql" class="header-anchor">#</a>
     <code>invalidate-tags/graphql</code>
@@ -822,6 +1002,14 @@ Invalidates all cache tags.
 
 
 Invalidates all GraphQL query cache tags.
+
+<h4 id="invalidate-tags-graphql-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="invalidate-tags-index">
     <a href="#invalidate-tags-index" class="header-anchor">#</a>
@@ -831,6 +1019,14 @@ Invalidates all GraphQL query cache tags.
 
 Lists the cache tags that can be invalidated.
 
+<h4 id="invalidate-tags-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="invalidate-tags-template">
     <a href="#invalidate-tags-template" class="header-anchor">#</a>
     <code>invalidate-tags/template</code>
@@ -838,6 +1034,14 @@ Lists the cache tags that can be invalidated.
 
 
 Invalidates all template cache tags.
+
+<h4 id="invalidate-tags-template-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 ## `mailer`
 
@@ -855,6 +1059,10 @@ Tests sending an email with the current mailer settings.
 
 --to
 : Email address that should receive the test message.
+
+
+--isolated
+: 
 
 
 
@@ -879,6 +1087,10 @@ Runs all pending Craft, plugin, and content migrations.
 
 --no-backup
 : Skip backing up the database.
+
+
+--isolated
+: 
 
 
 
@@ -965,6 +1177,10 @@ limit
 : The handle of the plugin to use during migration operations, or the plugin itself.
 
 
+--isolated
+: 
+
+
 
 <h3 id="migrate-history">
     <a href="#migrate-history" class="header-anchor">#</a>
@@ -1001,6 +1217,10 @@ If `all`, the whole migration history will be displayed.
 
 --plugin, -p
 : The handle of the plugin to use during migration operations, or the plugin itself.
+
+
+--isolated
+: 
 
 
 
@@ -1043,6 +1263,10 @@ version
 : The handle of the plugin to use during migration operations, or the plugin itself.
 
 
+--isolated
+: 
+
+
 
 <h3 id="migrate-new">
     <a href="#migrate-new" class="header-anchor">#</a>
@@ -1081,6 +1305,10 @@ If `all`, then every available new migration will be displayed.
 : The handle of the plugin to use during migration operations, or the plugin itself.
 
 
+--isolated
+: 
+
+
 
 <h3 id="migrate-redo">
     <a href="#migrate-redo" class="header-anchor">#</a>
@@ -1116,6 +1344,10 @@ limit
 
 --plugin, -p
 : The handle of the plugin to use during migration operations, or the plugin itself.
+
+
+--isolated
+: 
 
 
 
@@ -1159,6 +1391,10 @@ version
 : The handle of the plugin to use during migration operations, or the plugin itself.
 
 
+--isolated
+: 
+
+
 
 <h3 id="migrate-up">
     <a href="#migrate-up" class="header-anchor">#</a>
@@ -1193,6 +1429,10 @@ will be applied.
 
 --plugin, -p
 : The handle of the plugin to use during migration operations, or the plugin itself.
+
+
+--isolated
+: 
 
 
 
@@ -1232,6 +1472,10 @@ restrictions—meant for temporary use during the deployment process.
     ```
 
 
+--isolated
+: 
+
+
 
 ## `on`
 
@@ -1249,6 +1493,14 @@ Example:
 $ php craft on
 The system is now online.
 ```
+
+<h4 id="on-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 ## `plugin`
 
@@ -1283,7 +1535,19 @@ Choose a plugin handle to disable: ckeditor
 <h4 id="plugin-disable-parameters" class="command-subheading">Parameters</h4>
 
 handle
-:  The plugin handle.
+:  The plugin handle (omitted if --all provided).
+
+
+
+<h4 id="plugin-disable-options" class="command-subheading">Options</h4>
+
+
+--all
+: Whether the action should be run for all Composer-installed plugins.
+
+
+--isolated
+: 
 
 
 
@@ -1314,7 +1578,19 @@ Choose a plugin handle to enable: ckeditor
 <h4 id="plugin-enable-parameters" class="command-subheading">Parameters</h4>
 
 handle
-:  The plugin handle.
+:  The plugin handle (omitted if --all provided).
+
+
+
+<h4 id="plugin-enable-options" class="command-subheading">Options</h4>
+
+
+--all
+: Whether the action should be run for all Composer-installed plugins.
+
+
+--isolated
+: 
 
 
 
@@ -1348,7 +1624,19 @@ Choose a plugin handle to install: ckeditor
 <h4 id="plugin-install-parameters" class="command-subheading">Parameters</h4>
 
 handle
-:  The plugin handle.
+:  The plugin handle (omitted if --all provided).
+
+
+
+<h4 id="plugin-install-options" class="command-subheading">Options</h4>
+
+
+--all
+: Whether the action should be run for all Composer-installed plugins.
+
+
+--isolated
+: 
 
 
 
@@ -1371,6 +1659,14 @@ $ php craft plugin/list
     Craft Commerce  commerce       craftcms/commerce       4.0.0    Yes        Yes
     Gatsby Helper   gatsby-helper  craftcms/gatsby-helper  2.0.0    Yes        Yes
 ```
+
+
+<h4 id="plugin-list-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
 
 
 <h3 id="plugin-uninstall">
@@ -1403,7 +1699,7 @@ Choose a plugin handle to uninstall: ckeditor
 <h4 id="plugin-uninstall-parameters" class="command-subheading">Parameters</h4>
 
 handle
-:  The plugin handle.
+:  The plugin handle (omitted if --all provided).
 
 
 
@@ -1412,6 +1708,14 @@ handle
 
 --force
 : Whether the plugin uninstallation should be forced.
+
+
+--all
+: Whether the action should be run for all Composer-installed plugins.
+
+
+--isolated
+: 
 
 
 
@@ -1434,6 +1738,10 @@ Applies project config file changes.
 : Whether every entry change should be force-applied.
 
 
+--isolated
+: 
+
+
 
 <h3 id="project-config-diff">
     <a href="#project-config-diff" class="header-anchor">#</a>
@@ -1448,6 +1756,10 @@ Outputs a diff of the pending project config YAML changes.
 
 --invert
 : Whether to treat the loaded project config as the source of truth, instead of the YAML files.
+
+
+--isolated
+: 
 
 
 
@@ -1483,6 +1795,10 @@ Can be any of the following:
 : Whether to overwrite an existing export file, if a specific file path is given.
 
 
+--isolated
+: 
+
+
 
 <h3 id="project-config-get">
     <a href="#project-config-get" class="header-anchor">#</a>
@@ -1511,6 +1827,10 @@ path
 : Whether to pull values from the project config YAML files instead of the loaded config.
 
 
+--isolated
+: 
+
+
 
 <h3 id="project-config-rebuild">
     <a href="#project-config-rebuild" class="header-anchor">#</a>
@@ -1519,6 +1839,14 @@ path
 
 
 Rebuilds the project config.
+
+<h4 id="project-config-rebuild-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="project-config-remove">
     <a href="#project-config-remove" class="header-anchor">#</a>
@@ -1537,6 +1865,14 @@ php craft project-config/set system.edition pro
 
 path
 :  The config item path
+
+
+
+<h4 id="project-config-remove-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
 
 
 
@@ -1578,6 +1914,10 @@ value
 : Whether the `dateModified` value should be updated
 
 
+--isolated
+: 
+
+
 
 <h3 id="project-config-touch">
     <a href="#project-config-touch" class="header-anchor">#</a>
@@ -1587,6 +1927,14 @@ value
 
 Updates the `dateModified` value in `config/project/project.yaml`, attempting to resolve a Git conflict for it.
 
+<h4 id="project-config-touch-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="project-config-write">
     <a href="#project-config-write" class="header-anchor">#</a>
     <code>project-config/write</code>
@@ -1594,6 +1942,14 @@ Updates the `dateModified` value in `config/project/project.yaml`, attempting to
 
 
 Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
+
+<h4 id="project-config-write-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 ## `queue`
 
@@ -1632,6 +1988,10 @@ pid
 will be printed.
 
 
+--isolated
+: 
+
+
 
 <h3 id="queue-info">
     <a href="#queue-info" class="header-anchor">#</a>
@@ -1640,6 +2000,14 @@ will be printed.
 
 
 Info about queue status.
+
+<h4 id="queue-info-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="queue-listen">
     <a href="#queue-listen" class="header-anchor">#</a>
@@ -1673,6 +2041,10 @@ will be printed.
 If it is undefined, PHP_BINARY will be used.
 
 
+--isolated
+: 
+
+
 
 <h3 id="queue-release">
     <a href="#queue-release" class="header-anchor">#</a>
@@ -1695,6 +2067,14 @@ job
 
 
 
+<h4 id="queue-release-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="queue-retry">
     <a href="#queue-retry" class="header-anchor">#</a>
     <code>queue/retry</code>
@@ -1707,6 +2087,14 @@ Re-adds failed job(s) to the queue.
 
 job
 :  The job ID that should be retried, or `all` to retry all failed jobs.
+
+
+
+<h4 id="queue-retry-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
 
 
 
@@ -1733,6 +2121,10 @@ will be printed.
 --php-binary
 : path to php interpreter that uses to run child processes.
 If it is undefined, PHP_BINARY will be used.
+
+
+--isolated
+: 
 
 
 
@@ -1810,6 +2202,10 @@ Re-saves assets.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--isolated
+: 
+
+
 
 <h3 id="resave-categories">
     <a href="#resave-categories" class="header-anchor">#</a>
@@ -1879,6 +2275,10 @@ Re-saves categories.
 
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+--isolated
+: 
 
 
 
@@ -1968,6 +2368,10 @@ Re-saves entries.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--isolated
+: 
+
+
 
 <h3 id="resave-matrix-blocks">
     <a href="#resave-matrix-blocks" class="header-anchor">#</a>
@@ -2045,6 +2449,10 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--isolated
+: 
+
+
 
 <h3 id="resave-tags">
     <a href="#resave-tags" class="header-anchor">#</a>
@@ -2114,6 +2522,10 @@ Re-saves tags.
 
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+--isolated
+: 
 
 
 
@@ -2187,6 +2599,10 @@ Re-saves users.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--isolated
+: 
+
+
 
 ## `serve`
 
@@ -2213,13 +2629,16 @@ address
 : path or [path alias](https://craftcms.com/docs/4.x/config/#aliases) of the directory to serve.
 
 
+--router, -r
+: 
+
+
 --port, -p
 : port to serve on.
 
 
---router, -r
-: path or [path alias](guide:concept-aliases) to router script.
-See https://www.php.net/manual/en/features.commandline.webserver.php
+--isolated
+: 
 
 
 
@@ -2234,6 +2653,14 @@ Craft CMS setup installer.
 
 
 Generates a new application ID and saves it in the `.env` file.
+
+<h4 id="setup-app-id-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="setup-db">
     <a href="#setup-db" class="header-anchor">#</a>
@@ -2279,6 +2706,10 @@ Alias for [setup/db-creds](#setup-db-creds).
 be no more than 5 characters, and must be all lowercase.
 
 
+--isolated
+: 
+
+
 
 <h3 id="setup-db-cache-table">
     <a href="#setup-db-cache-table" class="header-anchor">#</a>
@@ -2287,6 +2718,14 @@ be no more than 5 characters, and must be all lowercase.
 
 
 Creates a database table for storing DB caches.
+
+<h4 id="setup-db-cache-table-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="setup-db-creds">
     <a href="#setup-db-creds" class="header-anchor">#</a>
@@ -2332,6 +2771,10 @@ Stores new DB connection settings to the `.env` file.
 be no more than 5 characters, and must be all lowercase.
 
 
+--isolated
+: 
+
+
 
 <h3 id="setup-index">
     <a href="#setup-index" class="header-anchor">#</a>
@@ -2344,6 +2787,14 @@ Sets up all the things.
 This is an interactive wrapper for the `setup/app-id`, `setup/security-key`, `setup/db-creds`,
 and `install` commands, each of which support being run non-interactively.
 
+<h4 id="setup-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="setup-keys">
     <a href="#setup-keys" class="header-anchor">#</a>
     <code>setup/keys</code>
@@ -2351,6 +2802,14 @@ and `install` commands, each of which support being run non-interactively.
 
 
 Generates an application ID and security key (if they don’t exist), and saves them in the `.env` file.
+
+<h4 id="setup-keys-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="setup-php-session-table">
     <a href="#setup-php-session-table" class="header-anchor">#</a>
@@ -2360,6 +2819,14 @@ Generates an application ID and security key (if they don’t exist), and saves 
 
 Creates a database table for storing PHP session information.
 
+<h4 id="setup-php-session-table-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="setup-security-key">
     <a href="#setup-security-key" class="header-anchor">#</a>
     <code>setup/security-key</code>
@@ -2368,6 +2835,14 @@ Creates a database table for storing PHP session information.
 
 Generates a new security key and saves it in the `.env` file.
 
+<h4 id="setup-security-key-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="setup-welcome">
     <a href="#setup-welcome" class="header-anchor">#</a>
     <code>setup/welcome</code>
@@ -2375,6 +2850,14 @@ Generates a new security key and saves it in the `.env` file.
 
 
 Called from the `post-create-project-cmd` Composer hook.
+
+<h4 id="setup-welcome-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 ## `shell`
 
@@ -2446,6 +2929,14 @@ dst
 
 
 
+<h4 id="tests-setup-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 ## `up`
 
 
@@ -2464,6 +2955,10 @@ Runs pending migrations and applies pending project config changes.
 : Whether to perform the action even if a mutex lock could not be acquired.
 
 
+--isolated
+: 
+
+
 
 ## `update`
 
@@ -2477,6 +2972,14 @@ Updates Craft and plugins.
 
 Installs dependencies based on the current `composer.json` & `composer.lock`.
 
+<h4 id="update-composer-install-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="update-info">
     <a href="#update-info" class="header-anchor">#</a>
     <code>update/info</code>
@@ -2484,6 +2987,14 @@ Installs dependencies based on the current `composer.json` & `composer.lock`.
 
 
 Displays info about available updates.
+
+<h4 id="update-info-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="update-update">
     <a href="#update-update" class="header-anchor">#</a>
@@ -2517,6 +3028,10 @@ version using the syntax `<handle>:<version>`.
 : Run new database migrations after completing the update
 
 
+--isolated
+: 
+
+
 
 ## `users`
 
@@ -2534,6 +3049,14 @@ Generates an activation URL for a pending user.
 
 user
 :  The ID, username, or email address of the user account.
+
+
+
+<h4 id="users-activation-url-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
 
 
 
@@ -2572,6 +3095,10 @@ Creates a user.
 : The group IDs to assign the user to the created user to.
 
 
+--isolated
+: 
+
+
 
 <h3 id="users-delete">
     <a href="#users-delete" class="header-anchor">#</a>
@@ -2603,6 +3130,10 @@ user
 : Whether the user should be hard-deleted immediately, instead of soft-deleted.
 
 
+--isolated
+: 
+
+
 
 <h3 id="users-impersonate">
     <a href="#users-impersonate" class="header-anchor">#</a>
@@ -2619,6 +3150,14 @@ user
 
 
 
+<h4 id="users-impersonate-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="users-list-admins">
     <a href="#users-list-admins" class="header-anchor">#</a>
     <code>users/list-admins</code>
@@ -2627,6 +3166,14 @@ user
 
 Lists admin users.
 
+<h4 id="users-list-admins-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 <h3 id="users-logout-all">
     <a href="#users-logout-all" class="header-anchor">#</a>
     <code>users/logout-all</code>
@@ -2634,6 +3181,14 @@ Lists admin users.
 
 
 Logs all users out of the system.
+
+<h4 id="users-logout-all-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 <h3 id="users-password-reset-url">
     <a href="#users-password-reset-url" class="header-anchor">#</a>
@@ -2647,6 +3202,14 @@ Generates a password reset URL for a user.
 
 user
 :  The ID, username, or email address of the user account.
+
+
+
+<h4 id="users-password-reset-url-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
 
 
 
@@ -2672,6 +3235,10 @@ user
 : The user’s new password.
 
 
+--isolated
+: 
+
+
 
 ## `utils/ascii-filenames`
 
@@ -2684,6 +3251,14 @@ user
 
 Converts all non-ASCII asset filenames to ASCII.
 
+<h4 id="utils-ascii-filenames-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 ## `utils/fix-element-uids`
 
 
@@ -2695,6 +3270,14 @@ Converts all non-ASCII asset filenames to ASCII.
 
 Ensures all elements UIDs are unique.
 
+<h4 id="utils-fix-element-uids-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 ## `utils/fix-field-layout-uids`
 
 
@@ -2705,6 +3288,14 @@ Ensures all elements UIDs are unique.
 
 
 Fixes any duplicate UUIDs found within field layout components in the project config.
+
+<h4 id="utils-fix-field-layout-uids-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
 
 ## `utils/prune-provisional-drafts`
 
@@ -2722,6 +3313,10 @@ Prunes provisional drafts for elements that have more than one per user.
 
 --dry-run
 : Whether this is a dry run.
+
+
+--isolated
+: 
 
 
 
@@ -2751,6 +3346,10 @@ Prunes excess element revisions.
 : Whether this is a dry run.
 
 
+--isolated
+: 
+
+
 
 ## `utils/repair`
 
@@ -2778,6 +3377,10 @@ handle
 : Whether to only do a dry run of the repair process.
 
 
+--isolated
+: 
+
+
 
 <h3 id="utils-repair-project-config">
     <a href="#utils-repair-project-config" class="header-anchor">#</a>
@@ -2792,6 +3395,10 @@ Repairs double-packed associative arrays in the project config.
 
 --dry-run
 : Whether to only do a dry run of the repair process.
+
+
+--isolated
+: 
 
 
 
@@ -2817,6 +3424,10 @@ handle
 : Whether to only do a dry run of the repair process.
 
 
+--isolated
+: 
+
+
 
 ## `utils/update-usernames`
 
@@ -2828,5 +3439,11 @@ handle
 
 
 Updates all users’ usernames to ensure they match their email address.
+
+<h4 id="utils-update-usernames-index-options" class="command-subheading">Options</h4>
+
+
+--isolated
+:
 
 <!-- END COMMANDS -->

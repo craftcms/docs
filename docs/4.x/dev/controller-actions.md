@@ -39,15 +39,15 @@ All `POST` requests are made through forms or [Ajax](#ajax), and require an `act
 ```twig{3-4}
 {# Let your users request a password reset: #}
 <form method="post">
-    {{ csrfInput() }}
-    {{ actionInput('users/send-password-reset-email') }}
+  {{ csrfInput() }}
+  {{ actionInput('users/send-password-reset-email') }}
 
-    <label for="loginName">Username or email</label>
-    {{ input('text', 'loginName', null, {
-        id: 'loginName',
-    }) }}
+  <label for="loginName">Username or email</label>
+  {{ input('text', 'loginName', null, {
+    id: 'loginName',
+  }) }}
 
-    <button>Reset Password</button>
+  <button>Reset Password</button>
 </form>
 ```
 
@@ -70,7 +70,7 @@ Flashes are _not_ set when using [Ajax](#ajax). Look for confirmation and errors
 <a href="{{ logoutUrl }}">Log Out</a>
 ```
 ```twig Form
-{# Pass any element to this (as a Twig partial) to get a control panel edit link: #}
+{# Pass any element to this (say, as a Twig partial) to get a control panel edit button: #}
 <form>
   {{ actionInput('elements/redirect') }}
   {{ hiddenInput('elementId', object.id) }}
@@ -85,8 +85,8 @@ fetch('/actions/users/session-info', {
     'Accept': 'application/json',
   },
 })
-  .then(r => r.json())
-  .then(console.log);
+.then(response => response.json())
+.then(result => console.log(result));
 // -> { isGuest: true, timeout: 0, csrfTokenValue: '...' }
 ```
 :::
@@ -150,7 +150,7 @@ const getSessionInfo = function() {
       'Accept': 'application/json',
     },
   })
-    .then(r => r.json());
+  .then(response => response.json());
 };
 
 // Session info is passed to the chained handler:
@@ -170,10 +170,10 @@ getSessionInfo()
         'X-Requested-With': 'XMLHttpRequest',
       },
       body: params,
-    });
     })
-    .then(r => r.json())
-    .then(console.log);
+    .then(response => response.json())
+    .then(result => console.log(result));
+  });
 ```
 
 This example assumes you have no preexisting HTML from the server, as though it were part of a [headless](config4:headlessMode) application. If you are working on a hybrid front-end (and sprinkling interactivity into primarily server-rendered pages), you could eliminate the first request by stashing the user ID and CSRF token in the document’s `<head>` (or on another relevant element) and reading it with JavaScript:
@@ -203,8 +203,8 @@ This example assumes you have no preexisting HTML from the server, as though it 
       },
       body: params,
     })
-      .then(r => r.json())
-      .then(console.log);
+    .then(response => response.json())
+    .then(result => console.log(result));
   });
 </script>
 ```
@@ -213,7 +213,7 @@ This example assumes you have no preexisting HTML from the server, as though it 
 
 If you prefer to work with a JSON payload for the body, you must include [the appropriate `Content-Type` header](yii2:yii\web\Request::parsers). The equivalent `users/save-user` request would look like this:
 
-```js{13,15}
+```js{11,15}
 // ...
 const params = {
   userId: $button.dataset.userId,
@@ -230,14 +230,14 @@ fetch('/actions/users/save-user', {
   },
   body: JSON.stringify(params),
 })
-  .then(r => r.json())
-  .then(console.log);
+.then(response => response.json())
+.then(result => console.log(result));
 ```
 
 Files cannot be uploaded when using `Content-Type: application/json`.
 
 ::: warning
-When sending a JSON payload in the body of a request, you must use an action path (`/actions/users/save-user`, as in the example above), or provide the action in a query parameter (`/index.php?action=users/save-user`)—the action will not be properly picked up as a property of the decoded payload.
+When sending a JSON payload in the body of a request, you _must_ use an action path (`/actions/users/save-user`, as in the example above), or provide the action in a query parameter (`/index.php?action=users/save-user`)—the action will _not_ be properly picked up as a property of the decoded payload.
 :::
 
 ### Models and Validation
@@ -588,8 +588,9 @@ Param | Description
 `email` | The user’s email address. (Only checked if registering a new user, updating the logged-in user, or the logged-in user is allowed to administrate users.)
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
 `fields[...]` | [Custom field](#custom-fields) values.
-`firstName` | The user’s first name.
-`lastName` | The user’s last name.
+`fullName` | The user’s full name. Preferred to discrete `firstName` and `lastName` params.
+`firstName` | The user’s first name. `fullName` is preferred.
+`lastName` | The user’s last name. `fullName` is preferred.
 `newPassword` | The user’s new password, if updating the logged-in user’s account. (If registering a new user, send `password`.)
 `passwordResetRequired` | Whether the user must reset their password before logging in again (`1`/`0`). Only assignable if the logged-in user is an admin.
 `password` | The user’s password, when registering a new user. (Has no effect if <config4:deferPublicRegistrationPassword> is `true`. To change the current user’s password, send `newPassword`.)

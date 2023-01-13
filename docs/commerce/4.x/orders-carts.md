@@ -941,19 +941,22 @@ Possible values include:
 | - | -
 | `1` | with a customer with a user account ID of 1.
 | a [User](https://docs.craftcms.com/api/v3/craft-elements-user.html) object | with a customer with a user account represented by the object.
+| `'not 1'` | not the user account with an ID 1.
+| `[1, 2]` | with an user account ID of 1 or 2.
+| `['not', 1, 2]` | not with a user account ID of 1 or 2.
 
 
 
 ::: code
 ```twig
-{# Fetch the current user’s orders #}
+{# Fetch the current user's orders #}
 {% set orders = craft.orders()
   .customer(currentUser)
   .all() %}
 ```
 
 ```php
-// Fetch the current user’s orders
+// Fetch the current user's orders
 $user = Craft::$app->user->getIdentity();
 $orders = \craft\commerce\elements\Order::find()
     ->customer($user)
@@ -979,14 +982,14 @@ Possible values include:
 
 ::: code
 ```twig
-{# Fetch the current user’s orders #}
+{# Fetch the current user's orders #}
 {% set orders = craft.orders()
   .customerId(currentUser.id)
   .all() %}
 ```
 
 ```php
-// Fetch the current user’s orders
+// Fetch the current user's orders
 $user = Craft::$app->user->getIdentity();
 $orders = \craft\commerce\elements\Order::find()
     ->customerId($user->id)

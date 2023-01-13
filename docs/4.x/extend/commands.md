@@ -68,7 +68,8 @@ use craft\console\Controller;
 use craft\console\controllers\ResaveController;
 use yii\base\Event;
 
-Event::on(ResaveController::class,
+Event::on(
+    ResaveController::class,
     Controller::EVENT_DEFINE_ACTIONS,
     function(DefineConsoleActionsEvent $event) {
         $event->actions['products'] = [

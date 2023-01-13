@@ -47,7 +47,7 @@ class MyCustomExporter extends ElementExporter
         return 'My Exporter';
     }
 
-    public function export(ElementQueryInterface $query): array
+    public function export(ElementQueryInterface $query): mixed
     {
         $results = [];
 
