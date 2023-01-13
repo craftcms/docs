@@ -101,5 +101,5 @@ Craft’s [control panel](./control-panel.md) requires a browser that [supports 
 - Android: Chrome 81+ or Firefox 68+
 
 ::: tip
-Craft’s _control panel_ browser requirements are independent from those of your site’s front-end. Ultimately, Craft is only concerned with delivering [hypermedia](https://en.wikipedia.org/wiki/Hypermedia)—how you choose to enhance that with Javascript and CSS is entirely up to you!
+Craft’s _control panel_ browser requirements are independent from those of your site’s front-end. Ultimately, Craft is only concerned with delivering [hypermedia](https://en.wikipedia.org/wiki/Hypermedia)—how you choose to enhance that with JavaScript and CSS is entirely up to you!
 :::

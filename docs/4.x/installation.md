@@ -2,7 +2,7 @@
 
 The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](./deployment.md).
 
-This [quick-start](#quick-start) guide focuses on _local development_, but we will look at [hosting and deployment](./deployment.md) in a moment.
+This [quick-start](#quick-start) guide focuses solely on setting up a local Craft development environment.
 
 ::: tip
 If at any point you feel stuck, the [Tutorial](../getting-started-tutorial/README.md) is a comprehensive guide for _anyone_ who wants to get set up with a fast, reliable development environment.
@@ -13,8 +13,6 @@ Downloading or installing Craft by any means binds you to its [license](https://
 ## Quick-Start
 
 Your journey with Craft begins on your local machine, using [DDEV](https://ddev.readthedocs.io/en/stable/). DDEV is a Docker-based PHP development environment that streamlines the creation and management of resources required by a Craft project.
-
-This may sound unusual if you’re coming from other PHP-based CMS products—
 
 ::: tip
 While we [strongly recommend](#why-ddev) DDEV for new Craft projects, [alternate installation methods](#alternative-installation-methods) are available for anyone with a preexisting environment or preferred workflow that meets its [requirements](./requirements.md).
@@ -80,8 +78,9 @@ Done for the day? [`ddev stop`](https://ddev.readthedocs.io/en/stable/users/basi
 
 ### Workflow + Collaboration
 
-You may have noticed that Craft’s [installation](./installation.md) instructions differ from many other PHP-based CMS products. We encourage starting with a local development environment (rather than a remote host) as a means of  of a defined workflow—whatever it may be—to the reliability and longevity of a website.
+We encourage starting with a local development environment (rather than a remote host) as a means of  of a defined workflow—whatever it may be—to the reliability and longevity of a website.
 
+<See path="./deployment.md#workflow" label="Defining a Workflow" />
 
 ::: tip
 To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./console-commands.html#db-backup). Have them clone the project and run:
@@ -108,7 +107,7 @@ Depending on your experience and preferred development environment, you may find
 
 - For most environments meeting Craft’s requirements, see [Using the Starter Project](kb:using-the-starter-project) to get started with Composer.
 - Especially adventurous users may want to read about [Setting up a Craft Project from Scratch](kb:setting-up-a-craft-project-from-scratch).
-- If you are unable to start a project locally—or are constrained by a hosting service—you can directly [download](https://craftcms.com/latest.zip) the latest Craft release as a ready-made starter project.
+- If you are unable to start a project locally—or are constrained by a hosting service—you can directly [download](https://craftcms.com/latest.zip) the latest Craft release as a blank starter project.
 
 ::: warning
 Pre-built starter project ZIPs should only be used for evaluating Craft in limited circumstances.
@@ -116,9 +115,13 @@ Pre-built starter project ZIPs should only be used for evaluating Craft in limit
 
 ### Hosting
 
+<See path="./deployment.md" label="Selecting a Host" description="Know your options when looking for a good hosting solution." />
+
 Craft’s own footprint is relatively light, but it’s important to choose a platform that matches your traffic, storage, and redundancy needs. We maintain a [list of Craft-friendly providers](https://craftcms.com/hosting) for projects of varying scale.
 
 ### Deployment
+
+<See path="./deployment.md" />
 
 There is no one-size-fits-all deployment strategy for a Craft project, but we’ve collected our most salient advice in the [Deployment Best Practices](kb:deployment-best-practices) Knowledge Base article.
 

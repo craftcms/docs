@@ -1,5 +1,5 @@
 ---
-description: Recommendations for hosting and deploying a Craft application
+description: Recommendations for hosting and deploying a Craft application.
 sidebarDepth: 2
 ---
 
@@ -9,7 +9,7 @@ In more cases than not, our recommendations for hosting and deploying a Craft we
 
 ## Workflow
 
-Our goal here is to define processes that reduce the likelihood of mistakes making it onto a live website, and to use systems that help recover if/when they do.
+Our goal here is to define processes that reduce the likelihood of mistakes making it onto a live website, and to adopt systems that help recover [if/when they do](#common-pitfalls).
 
 ### Source Control
 
@@ -137,7 +137,7 @@ Compiling your application may happen any number of places: locally; directly on
 
 #### Release
 
-This phase is only concerned with replacing the running website with the new build. In some cases, the _build_ and _release_ phases may partially or completely overlap; in others, a release might mean rerouting traffic to an entirely new container!
+This phase is only concerned with replacing the running website with the new build. In some cases, the _build_ and _release_ phases may partially or completely overlap; in others, a release could involve rerouting traffic to an entirely new container!
 
 ::: tip
 This is also a great time to [clear caches](./console-commands.md#clear-caches)—cached data and templates may be incompatible with the new build.
@@ -148,7 +148,7 @@ This is also a great time to [clear caches](./console-commands.md#clear-caches)�
 The final step in any successful deployment should be running migrations. Craft can apply database migrations and project config changes in a single command:
 
 ```bash
-craft up --interactive=0
+php craft up --interactive=0
 ```
 
 Before any pending migrations are applied, Craft will capture a database backup.
@@ -161,7 +161,7 @@ With a generic deployment framework in place, we’re ready to get into a few co
 
 Let’s assume you’ve cloned your project onto a host, and configured it to serve requests directly out of the `web/` directory.
 
-Within the project directory, a deployment might look like this:
+Within the project directory, a simple Git-based deployment might look like this:
 
 ```bash
 # Fetch new code:
@@ -179,10 +179,10 @@ npm install && npm run build
 
 Here, the build and release steps are basically combined: updates are integrated directly into the live codebase. For many sites, this is a totally viable process!
 
-If you ever needed to roll back after a broken deploy, just check out an earlier commit, run `composer install` (and the `npm` commands, if necessary), and—if Craft had run migrations—restore the automatic database backup from `storage/backups/`.
+If you ever need to roll back after a broken deploy, just check out an earlier commit, run `composer install` (and the `npm` commands, if necessary), and—if Craft had run migrations—restore the automatic database backup from `storage/backups/`.
 
 ::: warning
-Take care to not expose your `.git` directory to the web!
+Take care to not expose your `.git` directory (or other private files) to the web!
 :::
 
 #### Atomic Deployment
@@ -243,6 +243,10 @@ After a deployment, the working directory will look like this:
 └── shared/
 ```
 
+::: tip
+Don’t want to bother with Git, Node, or Composer on your server? The entire “build” step of an atomic deployment can be done elsewhere, then uploaded to the `releases/` directory all at once.
+:::
+
 There are a few more pieces to this puzzle, though:
 
 - How do we actually serve our new deployment?
@@ -251,7 +255,7 @@ There are a few more pieces to this puzzle, though:
 
 The first is straightforward: your HTTP server’s web root must be updated to`/var/www/current/web/`, taking advantage of the stable [symbolic link](https://en.wikipedia.org/wiki/Symbolic_link) created by the last step in the deployment script. This is a _one-time change_ to the server’s configuration—subsequent deploys will just replace the `current` symlink!
 
-Persistent files will also leverage symbolic links. For each file or directory you want to keep between deployments, add a line just before the final `current` link is created. For the sake of clarity, we’ll also define a new variable pointing to the `shared/` directory we created earlier:
+We can also address persistent files with symbolic links. For each file or directory you want to keep between deployments, add a line just before the final `current` link is created. For the sake of clarity, we’ll also define a new variable pointing to the `shared/` directory we created earlier:
 
 ```bash
 # ...
@@ -268,15 +272,17 @@ ln -sf $RELEASE $CURRENT
 
 Before this will work, you’ll have to move the “shared” files out of `craft-project/` and into the `shared/` directory. The sub-paths within `shared/` don’t have to be identical, but they should make sense to you and must agree with the script:
 
-```treeview{6,8,11,13}
+```treeview{6,8,13,15}
 /var/www/
 ├── craft-project/
 ├── current → /var/www/releases/2023-01-01--123456/
 ├── releases/
 │   ├── 2023-01-01--123456/
 │   │   ├── .env → /var/www/shared/.env
-│   │   └── web/
-│   │       └── uploads/ → /var/www/shared/web/uploads/
+│   │   ├── web/
+│   │   │   ├── uploads/ → /var/www/shared/web/uploads/
+│   │   │   └── ...
+│   │   └── ...
 │   └── ...
 └── shared/
     ├── .env
@@ -284,12 +290,6 @@ Before this will work, you’ll have to move the “shared” files out of `craf
         └── uploads/
             └── ...
 ```
-
-This is just a blueprint for an “atomic” deployment—there are countless ways to improve upon it for a given site or server. Tools like [Deployer](https://deployer.org/) (a PHP package, itself) allow you to adopt the process, but store 
-
-::: tip
-Don’t want to bother with Git, Node, or Composer on your server? The entire “build” step of an atomic deployment can be done elsewhere, then uploaded to the `releases/` directory all at once.
-:::
 
 Lastly, migrations and project config may still take a moment to apply—it’s up to you to determine how much downtime your project can tolerate! The only thing different from the simple deployment is the `craft` executable path:
 
@@ -302,16 +302,18 @@ php $RELEASE/craft up --interactive=0
 
 With an atomic deployment, rollbacks are trivial—the symlink can just be replaced with a previous release, because they’re left exactly as-is.
 
+This is just a blueprint for an “atomic” deployment—there are countless ways to improve upon it for a given site or server. Tools like [Deployer](https://deployer.org/) (a PHP package, itself) provide an abstraction for deployment that is more similar to configuration than scripting, and services like [Laravel Envoyer](https://envoyer.io) roll everything into a neat, hosted solution.
+
 #### Fully-Integrated Platform
 
-On a PaaS product like Heroku, you are often responsible only for connecting a repository—the platform figures out what steps are required to build the application and the underlying server “image.” In these cases, the presence of `composer.json` is often enough to indicate that `composer install` is necessary, and that the image should include a PHP runtime.
+On PaaS products like Heroku, you are often only responsible for connecting a repository—the platform figures out what steps are required to build the application and the underlying server “image.” In these cases, the presence of `composer.json` is often enough to indicate that the image needs a PHP runtime and that `composer install` must be run to gather dependencies.
 
-This paradigm also turns the “release” phase on its head: instead of deploying a _bundle of code_, the _entire server image_ (or images, if scaled horizontally) is cycled into the pool of resources and new requests are routed to it—effectively eliminating downtime.
+This paradigm also turns the “release” phase on its head: instead of deploying a bundle of _code_, the _entire server image_ (or images, if scaled horizontally) is cycled into the pool of resources and new requests are routed to it—effectively eliminating downtime.
 
 Heroku is just an example of this model, pioneered by Kubernetes and other infrastructure orchestration technologies.
 
 ::: tip
-Adopting this sort of infrastructure can be a little disorienting! An [ephemeral filesystem](./config/README.md#craft_ephemeral), so you will need to adjust the way you set environment variables (in lieu of `.env`), use the cache, and handle sessions. Some of these options are discussed in [advanced application configuration](./config/app.md).
+Adopting all or parts of the [twelve-factor app](https://12factor.net/) paradigm can be a little disorienting. In particular, an [ephemeral filesystem](./config/README.md#craft_ephemeral) means you will need to adjust the way environment variables are set (in lieu of `.env`), how the cache works, and how sessions are stored. Some of these options are discussed in [advanced application configuration](./config/app.md).
 :::
 
 ## Common Pitfalls
@@ -320,16 +322,11 @@ Sometimes, bad things do happen—despite all our preparation. Here are some com
 
 ### Backups
 
-Draft a recovery plan and test it regularly.
-
-::: warning
-Backups that exist only on the machine that is being backed up aren’t really backups! Make sure backups that are part of your recovery plan are copied to at least one other off-site location.
-:::
+Draft a recovery plan and test it regularly. Backups that exist only on the machine that is being backed up aren’t really backups! Make sure backups that are part of your recovery plan are copied to at least one other off-site location.
 
 ### Admin Changes
 
 <config4:allowAdminChanges> should be disabled in all but development environments. If administrators are allowed to make project config changes directly on a live website without oversight, their changes may be reverted the next time you deploy.
-
 
 ### Dev Mode
 
