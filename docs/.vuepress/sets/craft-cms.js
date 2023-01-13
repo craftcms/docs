@@ -124,7 +124,7 @@ module.exports = {
         {
           title: "Installing & Updating",
           collapsable: false,
-          children: ["requirements", "installation", "updating", "upgrade"]
+          children: ["requirements", "installation", "updating", "deployment", "upgrade"]
         },
         {
           title: "Configuration",
