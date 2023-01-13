@@ -112,4 +112,4 @@ Sometimes, there are significant changes to be aware of—even in minor versions
 
 The most common changes that fits this criteria are deprecated features. Notices will be accompanied by instructions for updating your code to work with the new APIs. Any features that are subsequently removed in a major release will also be noted in the new version’s upgrade guide.
 
-Deprecation warnings will affect plugin developers more frequently than regular users—but it's still a good idea to keep your eye on the **Deprecation Warnings** utility.
+Deprecation warnings will affect plugin developers more frequently than regular users—but it’s still a good idea to keep your eye on the **Deprecation Warnings** utility.
