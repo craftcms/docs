@@ -105,7 +105,7 @@ class Extension extends AbstractExtension implements GlobalsInterface
     {
         // Keys are variable names!
         return [
-            'myModule' => MyModule::getInstance(),
+            'myPlugin' => MyPlugin::getInstance(),
         ];
     }
 }
@@ -114,7 +114,7 @@ class Extension extends AbstractExtension implements GlobalsInterface
 Here, we’ve set a variable (`myVariable`) to our plugin’s singleton instance. This means that any services you’ve defined will be accessible in all Twig templates:
 
 ```twig
-{{ myModule.myServiceName.myServiceMethod() }}
+{{ myPlugin.myServiceName.myServiceMethod() }}
 ```
 
 Avoid defining global variables that are ambiguous (like `plugin` or `elements`), apt to be frequently overwritten (like `entry` or `block`), or conflict with [built-in globals](../dev/global-variables.md).
