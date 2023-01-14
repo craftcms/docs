@@ -14,7 +14,7 @@ module.exports = {
         children: [""]
       },
       {
-        title: "0. Set Up Your Environment",
+        title: "Set Up Your Environment",
         collapsable: true,
         children: [
           "environment/",
@@ -24,7 +24,7 @@ module.exports = {
         ]
       },
       {
-        title: "1. Install Craft CMS",
+        title: "Install Craft CMS",
         collapsable: true,
         children: [
           "install/",
@@ -32,7 +32,7 @@ module.exports = {
         ]
       },
       {
-        title: "2. Build Your Content",
+        title: "Build Your Content",
         collapsable: true,
         children: [
           "configure/",
@@ -45,7 +45,7 @@ module.exports = {
         ]
       },
       {
-        title: "3. Build Your Front End",
+        title: "Build Your Front End",
         collapsable: true,
         children: [
           "build/",
