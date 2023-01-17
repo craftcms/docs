@@ -10,11 +10,11 @@ As you’re building your store, you’ll most likely need to fetch two differen
 
 ## Fetching Countries
 
-You can fetch countries within the configured Commerce markets, shipping zones, and tax zones, or more broadly from the Craft CMS address respository.
+You can fetch countries within the configured Commerce markets, shipping zones, and tax zones, or more broadly from the Craft CMS address repository.
 
 ### Store Market Countries
 
-The [store model](commerce4:craft\commerce\models\Store)’s `getCountriesList()` method returns a key-value array of countries in the store’s configured market. The key will be the country’s two-character ISO code and the value will be its name:
+The [store model](commerce4:craft\commerce\models\Store)’s `getCountriesList()` method returns a key-value array of countries in the store’s configured [market](./upgrading.md#countries-and-states). The key will be the country’s two-character ISO code and the value will be its name:
 
 ::: code
 ```twig
