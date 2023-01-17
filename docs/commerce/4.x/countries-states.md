@@ -10,11 +10,11 @@ As you’re building your store, you’ll most likely need to fetch two differen
 
 ## Fetching Countries
 
-You can fetch countries within the configured Commerce markets, shipping zones, and tax zones, or more broadly from the Craft CMS address respository.
+You can fetch countries within the configured Commerce markets, shipping zones, and tax zones, or more broadly from the Craft CMS address repository.
 
 ### Store Market Countries
 
-The [store model](commerce4:craft\commerce\models\Store)’s `getCountriesList()` method returns a key-value array of countries in the store’s configured market. The key will be the country’s two-character ISO code and the value will be its name:
+The [store model](commerce4:craft\commerce\models\Store)’s `getCountriesList()` method returns a key-value array of countries in the store’s configured [market](./upgrading.md#countries-and-states). The key will be the country’s two-character ISO code and the value will be its name:
 
 ::: code
 ```twig
@@ -55,11 +55,11 @@ If you need to get information for a single country, you can pass its two-charac
 ```
 ```php
 /** @var CommerceGuys\Addressing\Country\Country $country **/
-$country = Craft::$app->getAddresses()->countryRepository->get('US') %}
+$country = Craft::$app->getAddresses()->countryRepository->get('US');
 ```
 :::
 
-The resulting [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) object includes additional code, labeling, and locale information.
+The resulting [Country](repo:commerceguys/addressing/blob/master/src/Country/Country.php) object includes additional code, labeling, and locale information.
 
 ### All Countries
 
@@ -75,7 +75,7 @@ You can fetch a list of _all_ countries from Craft’s address repository:
 </select>
 ```
 ```php
-$countries = Craft::$app->getAddresses()->countryRepository->getList() %}
+$countries = Craft::$app->getAddresses()->countryRepository->getList();
 foreach ($countries as $code => $name) {
     // $code
     // $name
@@ -84,7 +84,7 @@ foreach ($countries as $code => $name) {
 :::
 
 ::: tip
-Use `getAll()` rather than `getList()` to get back an array of [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) objects.
+Use `getAll()` rather than `getList()` to get back an array of [Country](repo:commerceguys/addressing/blob/master/src/Country/Country.php) objects.
 :::
 
 ## Fetching States
@@ -138,11 +138,11 @@ You can fetch a single state’s data, represented by a _subdivision_, by provid
 ```
 ```php
 /** @var CommerceGuys\Addressing\Subdivision\Subdivision $state **/
-$state = Craft::$app->getAddresses()->subdivisionRepository->get('OR', ['US']) %}
+$state = Craft::$app->getAddresses()->subdivisionRepository->get('OR', ['US']);
 ```
 :::
 
-The resulting [Subdivision](https://github.com/commerceguys/addressing/blob/master/src/Subdivision/Subdivision.php) object includes additional code, labeling, and postal code information as well as the ability to access relevant parents and children.
+The resulting [Subdivision](repo:commerceguys/addressing/blob/master/src/Subdivision/Subdivision.php) object includes additional code, labeling, and postal code information as well as the ability to access relevant parents and children.
 
 ### All Administrative Areas
 
