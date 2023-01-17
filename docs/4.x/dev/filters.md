@@ -651,7 +651,7 @@ Lowercases the first character of a string.
 
 Returns the length of a string or array, or the result count of a query.
 
-If used on anything besides a query, Twig’s built-in [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter logic will be used.
+If used on anything besides a query, Twig’s built-in [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter logic will be used. <Since ver="4.2.0" feature="Automatic handling of query objects" />
 
 ## `literal`
 
