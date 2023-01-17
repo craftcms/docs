@@ -55,7 +55,7 @@ If you need to get information for a single country, you can pass its two-charac
 ```
 ```php
 /** @var CommerceGuys\Addressing\Country\Country $country **/
-$country = Craft::$app->getAddresses()->countryRepository->get('US') %}
+$country = Craft::$app->getAddresses()->countryRepository->get('US');
 ```
 :::
 
@@ -75,7 +75,7 @@ You can fetch a list of _all_ countries from Craft’s address repository:
 </select>
 ```
 ```php
-$countries = Craft::$app->getAddresses()->countryRepository->getList() %}
+$countries = Craft::$app->getAddresses()->countryRepository->getList();
 foreach ($countries as $code => $name) {
     // $code
     // $name
@@ -138,7 +138,7 @@ You can fetch a single state’s data, represented by a _subdivision_, by provid
 ```
 ```php
 /** @var CommerceGuys\Addressing\Subdivision\Subdivision $state **/
-$state = Craft::$app->getAddresses()->subdivisionRepository->get('OR', ['US']) %}
+$state = Craft::$app->getAddresses()->subdivisionRepository->get('OR', ['US']);
 ```
 :::
 
