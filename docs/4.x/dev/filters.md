@@ -1070,7 +1070,7 @@ Runs the given text through [HTML Purifier](http://htmlpurifier.org).
 {{ user.bio|purify }}
 ```
 
-To load predefined rules from a file in `config/htmlpurifier/`, pass its file name as an argument (without `.json`):
+To load predefined rules from a file in `config/htmlpurifier/`, pass its filename as an argument (without `.json`):
 
 ```twig
 {{ user.bio|purify('user-profile') }}
