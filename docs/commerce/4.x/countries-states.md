@@ -59,7 +59,7 @@ $country = Craft::$app->getAddresses()->countryRepository->get('US');
 ```
 :::
 
-The resulting [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) object includes additional code, labeling, and locale information.
+The resulting [Country](repo:commerceguys/addressing/blob/master/src/Country/Country.php) object includes additional code, labeling, and locale information.
 
 ### All Countries
 
@@ -84,7 +84,7 @@ foreach ($countries as $code => $name) {
 :::
 
 ::: tip
-Use `getAll()` rather than `getList()` to get back an array of [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) objects.
+Use `getAll()` rather than `getList()` to get back an array of [Country](repo:commerceguys/addressing/blob/master/src/Country/Country.php) objects.
 :::
 
 ## Fetching States
@@ -142,7 +142,7 @@ $state = Craft::$app->getAddresses()->subdivisionRepository->get('OR', ['US']);
 ```
 :::
 
-The resulting [Subdivision](https://github.com/commerceguys/addressing/blob/master/src/Subdivision/Subdivision.php) object includes additional code, labeling, and postal code information as well as the ability to access relevant parents and children.
+The resulting [Subdivision](repo:commerceguys/addressing/blob/master/src/Subdivision/Subdivision.php) object includes additional code, labeling, and postal code information as well as the ability to access relevant parents and children.
 
 ### All Administrative Areas
 
