@@ -1064,26 +1064,28 @@ If you want to replace an existing element of the same type, pass `'replace'` as
 
 ## `purify`
 
-Runs the given text through HTML Purifier.
+Runs the given text through [HTML Purifier](http://htmlpurifier.org).
 
 ```twig
 {{ user.bio|purify }}
 ```
 
-You can specify a custom [HTML Purifier config](http://htmlpurifier.org/live/configdoc/plain.html) file as well:
+To load predefined rules from a file in `config/htmlpurifier/`, pass its file name as an argument (without `.json`):
 
 ```twig
-{{ user.bio|purify('user_bio') }}
+{{ user.bio|purify('user-profile') }}
 ```
 
-That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`. For example, to allow anchors and paragraph elements only, with [nofollow](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#attr-nofollow) set on all the anchors:
+Define config on-the-fly by passing an object:
 
-```json
-{
-  "HTML.AllowedElements": "p, a",
-  "HTML.Nofollow": true,
-}
+```twig
+{{ user.bio|purify({
+  'HTML.AllowedElements': 'p, a',
+  'HTML.Nofollow': true,
+}) }}
 ```
+
+See the [configuration docs](../config/README.md#html-purifier) for more information on using HTML Purifier.
 
 ## `push`
 
