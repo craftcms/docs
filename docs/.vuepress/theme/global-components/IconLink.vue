@@ -11,14 +11,10 @@
       </div>
       <div class="text">
         <span class="leading-none text-lg font-medium block mb-1">
-          {{
-          title
-          }}
+          {{ title }}
         </span>
         <span class="text-sm text-slate block leading-tight">
-          {{
-          subtitle
-          }}
+          {{ subtitle }}
         </span>
       </div>
     </RouterLink>
@@ -35,14 +31,10 @@
       </div>
       <div class="text">
         <span class="leading-none text-lg font-medium block mb-1">
-          {{
-          title
-          }}
+          {{ title }}
         </span>
         <span class="text-sm text-slate block leading-tight">
-          {{
-          subtitle
-          }}
+          {{ subtitle }}
         </span>
       </div>
     </a>

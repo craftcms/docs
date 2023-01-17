@@ -7,7 +7,7 @@ A fresh Craft 4 [installation](./installation.md) will have the following folder
 Holds all of your Craft and plugin [configuration files](config/README.md), as well as your `license.key` file.
 
 ::: tip
-You can customize the name and location of this folder by setting the [CRAFT_CONFIG_PATH](config/README.md#craft-config-path) PHP constant.
+You can customize the name and location of this folder by setting the [CRAFT_CONFIG_PATH](config/README.md#craft-config-path) PHP constant in your [entry script](./config/README.md#entry-script).
 :::
 
 ### `modules/`
@@ -35,7 +35,7 @@ For the curious, here are the types of things you will find in `storage/runtime/
   - `validation.key` – A randomly-generated, cryptographically secure key that is used for hashing and validating data between requests.
 
 ::: tip
-You can customize the name and location of this folder by setting the [CRAFT_STORAGE_PATH](config/README.md#craft-storage-path) PHP constant in `web/index.php`.
+You can customize the name and location of this folder by setting the [CRAFT_STORAGE_PATH](config/README.md#craft-storage-path) PHP constant in your [entry script](./config/README.md#entry-script).
 :::
 
 ### `templates/`
@@ -43,15 +43,15 @@ You can customize the name and location of this folder by setting the [CRAFT_STO
 Your front-end Twig templates go in here. Any local site assets, such as images, CSS, and JS that should be statically served, should live in the [web](directory-structure.md#web) folder.
 
 ::: tip
-You can customize the name and location of this folder by setting the [CRAFT_TEMPLATES_PATH](config/README.md#craft-templates-path) PHP constant in `web/index.php`.
+You can customize the name and location of this folder by setting the [CRAFT_TEMPLATES_PATH](config/README.md#craft-templates-path) PHP constant in your [entry script](./config/README.md#entry-script).
 :::
 
 ### `vendor/`
 
-This is where all of your Composer dependencies go, including Craft itself, and any plugins you’ve installed via Composer.
+This is where all of your Composer dependencies go—including Craft and any plugins you’ve installed. This directory should _not_ be tracked in version control. Instead, commit [`composer.lock`](#composerlock), and use [`composer install`](https://getcomposer.org/doc/03-cli.md#install-i) to rebuild it.
 
 ::: tip
-You can customize the name and location of this folder by changing the [CRAFT_VENDOR_PATH](config/README.md#craft-vendor-path) PHP constant in `web/index.php`.
+You can customize the name and location of this folder by changing the [CRAFT_VENDOR_PATH](config/README.md#craft-vendor-path) PHP constant in your [entry script](./config/README.md#entry-script). If you choose to relocate it, make sure you update your `.gitignore` file to continue excluding it from version control.
 :::
 
 ### `web/`
@@ -59,7 +59,7 @@ You can customize the name and location of this folder by changing the [CRAFT_VE
 This directory represents your server’s web root. The public `index.php` file lives here and this is where any of the local site images, CSS, and JS that is statically served should live.
 
 ::: tip
-You can customize the name and location of this folder. If you move it so it’s no longer living alongside the other Craft folders, make sure to update the [CRAFT_BASE_PATH](config/README.md#craft-vendor-path) PHP constant in `<Webroot>/index.php`.
+You can customize the name and location of this folder. If you move it so it’s no longer living alongside the other Craft folders, make sure to update the [CRAFT_BASE_PATH](config/README.md#craft-vendor-path) PHP constant in your [entry script](./config/README.md#entry-script).
 :::
 
 ### `.env`
@@ -76,7 +76,7 @@ Tells Git which files it should exclude when committing changes. At minimum, thi
 
 ### `bootstrap.php`
 
-The [starter project](https://github.com/craftcms/craft) consolidates important bootstrapping logic (like defining path [constants](./config/README.md#php-constants) and loading environment variables from the [`.env`](#env) file) into this file. Both the HTTP and console entry scripts (`web/index.php` and [`craft`](#craft), respectively) include this file—but each goes on to instantiate a different [type of application](https://www.yiiframework.com/doc/guide/2.0/en/structure-entry-scripts) suited for that request context.
+The [starter project](depo:craftcms/craft) consolidates important bootstrapping logic (like defining path [constants](./config/README.md#php-constants) and loading environment variables from the [`.env`](#env) file) into this file. Both the HTTP and console entry scripts (`web/index.php` and [`craft`](#craft), respectively) include this file—but each goes on to instantiate a different [type of application](guide:structure-entry-scripts) suited for that request context.
 
 ### `composer.json`
 
@@ -88,7 +88,7 @@ This is a Composer file that tells Composer exactly which dependencies and versi
 
 ### `craft`
 
-This is a command line executable used to execute Craft’s [console commands](console-commands.md). Its structure is similar to [`web/index.php`](#web-index-php), insofar as it 
+This is a command line executable used to execute Craft’s [console commands](console-commands.md). Its structure is similar to `web/index.php`, insofar as it is responsible for bootstrapping the appropriate Craft application—but instead of a <craft4:craft\web\Application>, it creates a <craft4:craft\console\Application>.
 
 ### `.ddev/`
 

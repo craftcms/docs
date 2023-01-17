@@ -2,8 +2,8 @@
   <component
     class="browser-shot"
     :is="link ? 'a' : 'div'"
-    :href="link ? url : ''"
-    target="_blank"
+    :href="link ? url : null"
+    :target="link ? '_blank' : null"
     rel="noopener"
   >
     <figure class="browser-shot-wrapper">
@@ -12,16 +12,20 @@
         <div class="address-bar">
           <div class="address">{{ getDisplayUrl(url) }}</div>
         </div>
-        <div
-          class="image"
-          :class="{ 'limit-height': maxHeight }"
-          :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }"
-        >
-          <slot></slot>
-          <div class="points" v-if="poi.length">
+        <div class="viewport">
+          <div
+            class="image"
+            :class="{ 'limit-height': maxHeight }"
+            :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }"
+          >
+            <slot></slot>
+          </div>
+          <div class="points" v-if="poi">
             <div
-              class="point" v-for="(point, i) in poi" :key="i"
-              :style="`left: ${point[0]}%; top: ${point[1]}%;`" v-text="i + 1"></div>
+              class="point"
+              :class="{ 'point--active': activePoi === `${id}:${name}` }"
+              :style="`left: ${point[0]}%; top: ${point[1]}%;`"
+              v-for="(point, name, i) in poi" :key="name">{{ i + 1 }}</div>
           </div>
         </div>
       </div>
@@ -79,9 +83,12 @@
   text-decoration: none !important;
 }
 
+.browser-shot .viewport {
+  position: relative;
+}
+
 .browser-shot .image {
   margin: 0;
-  position: relative;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   overflow: hidden;
@@ -130,13 +137,27 @@
   margin-top: -12px;
   position: absolute;
   text-align: center;
+  transition: transform 0.5s cubic-bezier(0, 2, 1, 1);
   width: 24px;
+}
+
+.point--active {
+  background-color: theme("colors.blue");
+  transform: scale(1.25);
 }
 </style>
 
 <script>
+import { v4 as uuidv4 } from 'uuid';
+
 export default {
   props: {
+    // Unique ID for the screenshot, so we might reference it elsewhere
+    id: {
+      type: String,
+      required: false,
+      default: () => uuidv4(),
+    },
     // URL to be shown in address bar
     url: {
       type: String,
@@ -166,10 +187,17 @@ export default {
       required: false
     },
     poi: {
-      type: Array,
+      type: Object,
       required: false,
-      default: () => [],
+      default: () => {},
     },
+  },
+  computed: {
+    activePoi: {
+      get() {
+        return this.$store.state.activePoiId;
+      }
+    }
   },
   methods: {
     getDisplayUrl(url) {

@@ -23,4 +23,5 @@ module.exports = {
   'config3': { base: '/3.x/config/config-settings.md#', format: 'config' },
   'config2': { base: '/2.x/config-settings.md#', format: 'config' },
   'kb': { base: 'https://craftcms.com/knowledge-base/', format: 'generic' },
+  'repo': { base: 'https://github.com/', format: 'generic' },
 };
