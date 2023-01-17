@@ -62,7 +62,7 @@ Some platforms (especially those with ephemeral filesystems) provide a GUI for m
 
 ### Entry Script
 
-Craft will also respond to a handful of specific [PHP constants](#php-constants), as long as they are set prior to bootstrapping the application in your entry script.
+Craft will also respond to a handful of specific [PHP constants](#php-constants), as long as they are set prior to bootstrapping the application in your entry script. The [starter project](repo:craftcms/craft) shares a `bootstrap.php` file between `web/index.php` and the `craft` executable to consolidate the definition of constants.
 
 ## Setting and Resolving Options
 
@@ -451,9 +451,29 @@ $client->post('/donations', [
 If these settings need to be changed frequently, edited by a control panel user, or don’t depend on the environment, they may be a better fit for a [Global Set](../globals.md).
 :::
 
+#### HTML Purifier
+
+JSON files containing valid [HTML Purifier configuration](https://htmlpurifier.org/live/configdoc/plain.html) can be added to `config/htmlpurifier/`.
+
+When creating a [Redactor](https://plugins.craftcms.com/redactor/) or [CKEditor](https://plugins.craftcms.com/ckeditor/) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](../dev/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
+
+A simple config that scrubs everything but paragraph and anchor tags would look like this:
+
+```json
+{
+  "HTML.AllowedElements": "p, a",
+}
+```
+
+For security, any keys _not_ set will use their [defaults](https://github.com/ezyang/htmlpurifier/blob/master/plugins/phorum/config.default.php).
+
+::: tip
+Note that HTML Purifier expresses many options with dot notation, like `HTML.AllowedElements`. These are the literal keys, not an indication that keys should be nested!
+:::
+
 ## PHP Constants
 
-You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
+You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in `bootstrap.php`—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
 ::: tip
 Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.

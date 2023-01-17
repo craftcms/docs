@@ -649,7 +649,7 @@ Lowercases the first character of a string.
 
 ## `length`
 
-Returns the length of a string or array, or the result count of a query.
+Returns the length of a string or array, or a query’s result [count](../element-queries.md#count). <Since ver="4.2.0" feature="Automatic counting of query objects" />
 
 If used on anything besides a query, Twig’s built-in [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter logic will be used.
 
@@ -1064,19 +1064,28 @@ If you want to replace an existing element of the same type, pass `'replace'` as
 
 ## `purify`
 
-Runs the given text through HTML Purifier.
+Runs the given text through [HTML Purifier](http://htmlpurifier.org).
 
 ```twig
 {{ user.bio|purify }}
 ```
 
-You can specify a custom HTML Purifier config file as well:
+To load predefined rules from a file in `config/htmlpurifier/`, pass its filename as an argument (without `.json`):
 
 ```twig
-{{ user.bio|purify('user_bio') }}
+{{ user.bio|purify('user-profile') }}
 ```
 
-That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`.
+Define config on-the-fly by passing an object:
+
+```twig
+{{ user.bio|purify({
+  'HTML.AllowedElements': 'p, a',
+  'HTML.Nofollow': true,
+}) }}
+```
+
+See the [configuration docs](../config/README.md#html-purifier) for more information on using HTML Purifier.
 
 ## `push`
 

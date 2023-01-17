@@ -1535,11 +1535,15 @@ Choose a plugin handle to disable: ckeditor
 <h4 id="plugin-disable-parameters" class="command-subheading">Parameters</h4>
 
 handle
-:  The plugin handle.
+:  The plugin handle (omitted if --all provided).
 
 
 
 <h4 id="plugin-disable-options" class="command-subheading">Options</h4>
+
+
+--all
+: Whether the action should be run for all Composer-installed plugins.
 
 
 --isolated
@@ -1574,11 +1578,15 @@ Choose a plugin handle to enable: ckeditor
 <h4 id="plugin-enable-parameters" class="command-subheading">Parameters</h4>
 
 handle
-:  The plugin handle.
+:  The plugin handle (omitted if --all provided).
 
 
 
 <h4 id="plugin-enable-options" class="command-subheading">Options</h4>
+
+
+--all
+: Whether the action should be run for all Composer-installed plugins.
 
 
 --isolated
@@ -1616,11 +1624,15 @@ Choose a plugin handle to install: ckeditor
 <h4 id="plugin-install-parameters" class="command-subheading">Parameters</h4>
 
 handle
-:  The plugin handle.
+:  The plugin handle (omitted if --all provided).
 
 
 
 <h4 id="plugin-install-options" class="command-subheading">Options</h4>
+
+
+--all
+: Whether the action should be run for all Composer-installed plugins.
 
 
 --isolated
@@ -1687,7 +1699,7 @@ Choose a plugin handle to uninstall: ckeditor
 <h4 id="plugin-uninstall-parameters" class="command-subheading">Parameters</h4>
 
 handle
-:  The plugin handle.
+:  The plugin handle (omitted if --all provided).
 
 
 
@@ -1696,6 +1708,10 @@ handle
 
 --force
 : Whether the plugin uninstallation should be forced.
+
+
+--all
+: Whether the action should be run for all Composer-installed plugins.
 
 
 --isolated

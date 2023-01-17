@@ -42,12 +42,19 @@ If you leave **Quality** blank, Craft will use the quality set by your <config4:
 
 **Image Format** can be set to the following values:
 
-- jpg
-- png
-- gif
-- webp
+- `jpg`
+- `png`
+- `gif`
+- `webp` (when supported by ImageMagick)
+- `avif` (when supported by ImageMagick)
 
-If you leave **Image Format** blank, Craft will use the original image’s format if it’s [web-safe](craft4:craft\helpers\Image::webSafeFormats()). Otherwise Craft will try to figure out the best-suited image format for the job. If it can’t determine that (probably because ImageMagick isn’t installed), it will go with .jpg.
+If you leave **Image Format** blank, Craft will use the original image’s format if it’s [web-safe](craft4:craft\helpers\Image::webSafeFormats()). Otherwise Craft will try to figure out the best-suited image format for the job. If it can’t determine that (often because ImageMagick isn’t installed), it will go with `.jpg`.
+
+::: tip
+The <config4:transformGifs> setting allows you to completely disable transformation of GIF images. Animated GIFs often consume significant resources to resize, and rarely produce well-optimized output.
+
+You do not need to update templates for this setting to work—Craft will just ignore the transform and return a URL to the original image.
+:::
 
 ### Applying Named Transforms to Images
 

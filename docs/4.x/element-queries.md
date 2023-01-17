@@ -331,7 +331,7 @@ The `paginate` tag accepts an element query, sets its `offset` param based on th
   .orderBy('postDate DESC') %}
 
 {# Paginate the query into a `posts` variable: #}
-{% paginate newsQuery as posts, pageInfo %}
+{% paginate newsQuery as pageInfo, posts %}
 
 {# Use the `posts` variable just like you would any other result set: #}
 {% for post in posts %}
@@ -526,6 +526,10 @@ In this example, we just need the number of active users:
 :::
 
 In addition to the memory footprint of the optimized query being many orders of magnitude smaller, we’re also avoiding a huge amount of data transfer between the PHP process and database server!
+
+::: tip
+Using the [`length`](./dev/filters.md#length) filter on a query (before it’s been run) will automatically call its [`count()`](#count) execution method to prevent inadvertent performance issues. Other situations in which queries are treated as arrays may not be optimized in the same way.
+:::
 
 #### Arithmetic Operations
 

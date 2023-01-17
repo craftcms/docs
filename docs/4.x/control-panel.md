@@ -27,28 +27,29 @@ If this is your first time using Craft, it might feel a little bit empty—don�
 The appearance and organization of the control panel can differ based on what types of content you’ve set up, your permissions, user preferences, and the environment—but the general structure will always be the same.
 
 <BrowserShot
-    url="https://my-craft-project.ddev.site/admin/settings"
-    :poi="[
-        [13, 10],
-        [60, 3],
-        [40, 11],
-        [55, 40],
-        [79, 21],
-    ]"
+    url="https://my-craft-project.ddev.site/admin/entries/exhibits/38"
+    id="tour"
+    :poi="{
+        navigation: [13, 10],
+        globalHeader: [60, 3],
+        header: [40, 11],
+        content: [55, 40],
+        details: [79, 21],
+    }"
     :link="false"
     caption="An entry edit screen in the control panel.">
 <img src="./images/control-panel-tour-screen.png" alt="A representative screen from the Craft control panel">
 </BrowserShot>
 
 Let’s take a quick spin around a typical control panel “screen:”
-- On the left edge is the _main navigation_ <Poi label="1" />. At the top of this bar, your system name and icon are displayed. Below, each [main section](#main-sections) of the control panel is linked, and the current one is highlighted.
-- At the top, the _global header_ <Poi label="2" /> contains breadcrumbs (when working with nested content or settings) and the user menu.
+- On the left edge is the _main navigation_ <Poi label="1" target="tour" id="navigation" />. At the top of this bar, your system name and icon are displayed. Below, each [main section](#main-sections) of the control panel you have access to is linked, and the current one is highlighted.
+- At the top, the _global header_ <Poi label="2" target="tour" id="globalHeader" /> contains breadcrumbs (when working with nested content or settings) and the user menu.
 - The current screen’s _main container_ takes up the remainder of the horizontal space, and will scroll if the content is tall enough. Within this region, you’ll find some combination of the following features:
-    - A _header_ <Poi label="3" />, displaying a title and controls for the current screen;
+    - A _header_ <Poi label="3" target="tour" id="header" />, displaying a title and controls for the current screen;
     - A _sub-menu_ at the left edge (not pictured), listing siblings of the current screen;
-    - A _content container_ <Poi label="4" /> for the screen’s primary content (usually set off from the background on a lighter color);
+    - A _content container_ <Poi label="4" target="tour" id="content" /> for the screen’s primary content (usually set off from the background on a lighter color);
     - _Tabs_, splitting the screen’s content or settings into logical groups (not pictured);
-    - A _details_ <Poi label="5" /> pane at the right edge, with metadata and controls specific to the type of content being viewed;
+    - A _details_ <Poi label="5" target="tour" id="details" /> pane at the right edge, with metadata and controls specific to the type of content being viewed;
 
 #### Main Sections
 
@@ -127,11 +128,20 @@ Don’t see **Settings** in the main navigation? Make sure you have admin privil
 We recommend that this is enabled only in development environments.
 :::
 
-<BrowserShot url="https://my-craft-project.ddev.site/admin/settings" :link="false" caption="The settings screen in Craft.">
+<BrowserShot
+    url="https://my-craft-project.ddev.site/admin/settings"
+    :link="false"
+    caption="The settings screen in Craft."
+    id="settings"
+    :poi="{
+        system: [80, 24],
+        content: [80, 46],
+        media: [80, 68],
+    }">
 <img src="./images/control-panel-settings.png" alt="Craft settings screen">
 </BrowserShot>
 
-#### System
+#### System <Poi label="1" target="settings" id="system" />
 
 System settings govern low-level Craft behaviors that often influence how other content and media features are used.
 
@@ -144,7 +154,7 @@ Group | Description
 **Email** | Configure how Craft sends email.
 **Plugins** | Manage available [plugins](./plugins.md).
 
-#### Content
+#### Content <Poi label="2" target="settings" id="content" />
 
 Combined with [sites](./sites.md), the **Content** section is where you design your schema.
 
@@ -156,7 +166,7 @@ Group | Description
 **Categories** | Define complex taxonomies with [category groups](./categories.md#category-groups).
 **Tags** | Define simple taxonomies with [tag groups](./tags.md#tag-groups).
 
-#### Media
+#### Media <Poi label="3" target="settings" id="media" />
 
 Decide how you want to store and organize uploaded files.
 
