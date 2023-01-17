@@ -527,6 +527,10 @@ In this example, we just need the number of active users:
 
 In addition to the memory footprint of the optimized query being many orders of magnitude smaller, we’re also avoiding a huge amount of data transfer between the PHP process and database server!
 
+::: tip
+Using the [`length`](./dev/filters.md#length) filter on a query (before it’s been run) will automatically call its [`count()`](#count) execution method to prevent inadvertent performance issues. Other situations in which queries are treated as arrays may not be optimized in the same way.
+:::
+
 #### Arithmetic Operations
 
 Counting isn’t the only operation that the database can do for you! What if we wanted to find the minimum and maximum values for a given field?
