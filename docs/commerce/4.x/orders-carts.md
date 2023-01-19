@@ -776,7 +776,7 @@ Order queries support the following parameters:
 <!-- textlint-disable -->
 
 | Param                                         | Description
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)               | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)                 | Narrows the query results to only orders that are related to certain other elements.
 | [asArray](#asarray)                           | Causes the query to return matching orders as arrays of data, rather than [Order](commerce4:craft\commerce\elements\Order) objects.
@@ -798,7 +798,7 @@ Order queries support the following parameters:
 | [hasPurchasables](#haspurchasables)           | Narrows the query results to only orders that have certain purchasables.
 | [hasTransactions](#hastransactions)           | Narrows the query results to only carts that have at least one transaction.
 | [id](#id)                                     |
-| [ignorePlaceholders](#ignoreplaceholders)     | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [ignorePlaceholders](#ignoreplaceholders)     | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by setPlaceholderElement.
 | [inReverse](#inreverse)                       | Causes the query results to be returned in reverse order.
 | [isCompleted](#iscompleted)                   | Narrows the query results to only orders that are completed.
 | [isPaid](#ispaid)                             | Narrows the query results to only orders that are paid.
@@ -814,7 +814,7 @@ Order queries support the following parameters:
 | [orderStatus](#orderstatus)                   | Narrows the query results based on the order statuses.
 | [orderStatusId](#orderstatusid)               | Narrows the query results based on the order statuses, per their IDs.
 | [origin](#origin)                             | Narrows the query results based on the origin.
-| [preferSites](#prefersites)                   | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [preferSites](#prefersites)                   | If unique is set, this determines which site should be selected when querying multi-site elements.
 | [prepareSubquery](#preparesubquery)           | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [reference](#reference)                       | Narrows the query results based on the order reference.
 | [relatedTo](#relatedto)                       | Narrows the query results to only orders that are related to certain other elements.
@@ -940,7 +940,7 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | `1` | with a customer with a user account ID of 1.
-| a [User](https://docs.craftcms.com/api/v3/craft-elements-user.html) object | with a customer with a user account represented by the object.
+| a `craft\elements\User` object | with a customer with a user account represented by the object.
 | `'not 1'` | not the user account with an ID 1.
 | `[1, 2]` | with an user account ID of 1 or 2.
 | `['not', 1, 2]` | not with a user account ID of 1 or 2.
@@ -1379,7 +1379,7 @@ $orders = \craft\commerce\elements\Order::find()
 #### `ignorePlaceholders`
 
 Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by setPlaceholderElement.
 
 
 
@@ -1777,7 +1777,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `preferSites`
 
-If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+If unique is set, this determines which site should be selected when querying multi-site elements.
 
 
 
