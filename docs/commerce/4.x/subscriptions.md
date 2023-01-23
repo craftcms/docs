@@ -105,7 +105,7 @@ Subscription queries support the following parameters:
 <!-- textlint-disable -->
 
 | Param                                     | Description
-| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only subscriptions that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce4:craft\commerce\elements\Subscription) objects.
@@ -120,7 +120,7 @@ Subscription queries support the following parameters:
 | [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
 | [hasStarted](#hasstarted)                 | Narrows the query results to only subscriptions that have started.
 | [id](#id)                                 | Narrows the query results based on the subscriptions’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by setPlaceholderElement.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [isCanceled](#iscanceled)                 | Narrows the query results to only subscriptions that are canceled.
 | [isExpired](#isexpired)                   | Narrows the query results to only subscriptions that have expired.
@@ -133,7 +133,7 @@ Subscription queries support the following parameters:
 | [orderId](#orderid)                       | Narrows the query results based on the order, per its ID.
 | [plan](#plan)                             | Narrows the query results based on the subscription plan.
 | [planId](#planid)                         | Narrows the query results based on the subscription plans’ IDs.
-| [preferSites](#prefersites)               | If unique is set, this determines which site should be selected when querying multi-site elements.
+| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [reference](#reference)                   | Narrows the query results based on the reference.
 | [relatedTo](#relatedto)                   | Narrows the query results to only subscriptions that are related to certain other elements.
@@ -535,7 +535,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder
-elements that were set by setPlaceholderElement.
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -831,7 +831,7 @@ Possible values include:
 
 #### `preferSites`
 
-If unique is set, this determines which site should be selected when querying multi-site elements.
+If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
@@ -1075,7 +1075,7 @@ Possible values include:
 | - | -
 | `'foo'` | for a user account with a username of `foo`
 | `['foo', 'bar']` | for user accounts with a username of `foo` or `bar`.
-| a `craft\elements\User` object | for a user account represented by the object.
+| a [User](https://docs.craftcms.com/api/v4/craft-elements-user.html) object | for a user account represented by the object.
 
 
 

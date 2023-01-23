@@ -220,7 +220,7 @@ Product queries support the following parameters:
 <!-- textlint-disable -->
 
 | Param                                                 | Description
-| ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#product-after)                               | Narrows the query results to only products that were posted on or after a certain date.
 | [afterPopulate](#product-afterpopulate)               | Performs any post-population processing on elements.
 | [andRelatedTo](#product-andrelatedto)                 | Narrows the query results to only products that are related to certain other elements.
@@ -241,7 +241,7 @@ Product queries support the following parameters:
 | [fixedOrder](#product-fixedorder)                     | Causes the query results to be returned in the order specified by [id](#product-id).
 | [hasVariant](#product-hasvariant)                     | Narrows the query results to only products that have certain variants.
 | [id](#product-id)                                     | Narrows the query results based on the products’ IDs.
-| [ignorePlaceholders](#product-ignoreplaceholders)     | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by setPlaceholderElement.
+| [ignorePlaceholders](#product-ignoreplaceholders)     | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#product-inreverse)                       | Causes the query results to be returned in reverse order.
 | [limit](#product-limit)                               | Determines the number of products that should be returned.
 | [offset](#product-offset)                             | Determines how many products should be skipped in the results.
@@ -839,7 +839,7 @@ This can be combined with [fixedOrder](#product-fixedorder) if you want the resu
 <h4 id="product-ignoreplaceholders"><a href="#product-ignoreplaceholders" class="header-anchor">#</a> <code>ignorePlaceholders</code></h4>
 
 Causes the query to return matching products as they are stored in the database, ignoring matching placeholder
-elements that were set by setPlaceholderElement.
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -1100,7 +1100,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a `craft\models\Site` object | from the site represented by the object.
+| a [craft\models\Site](https://docs.craftcms.com/api/v4/craft-models-site.html) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -1691,7 +1691,7 @@ Variant queries support the following parameters:
 <!-- textlint-disable -->
 
 | Param                                             | Description
-| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+| ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#variant-afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#variant-andrelatedto)             | Narrows the query results to only variants that are related to certain other elements.
 | [asArray](#variant-asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](commerce4:craft\commerce\elements\Variant) objects.
@@ -1706,7 +1706,7 @@ Variant queries support the following parameters:
 | [hasUnlimitedStock](#variant-hasunlimitedstock)   | Narrows the query results to only variants that have been set to unlimited stock.
 | [height](#variant-height)                         | Narrows the query results based on the variants’ height dimension.
 | [id](#variant-id)                                 | Narrows the query results based on the variants’ IDs.
-| [ignorePlaceholders](#variant-ignoreplaceholders) | Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder elements that were set by setPlaceholderElement.
+| [ignorePlaceholders](#variant-ignoreplaceholders) | Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#variant-inreverse)                   | Causes the query results to be returned in reverse order.
 | [isDefault](#variant-isdefault)                   | Narrows the query results to only default variants.
 | [length](#variant-length)                         | Narrows the query results based on the variants’ length dimension.
@@ -2052,7 +2052,7 @@ This can be combined with [fixedOrder](#variant-fixedorder) if you want the resu
 <h4 id="variant-ignoreplaceholders"><a href="#variant-ignoreplaceholders" class="header-anchor">#</a> <code>ignorePlaceholders</code></h4>
 
 Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder
-elements that were set by setPlaceholderElement.
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -2387,7 +2387,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a `craft\models\Site` object | from the site represented by the object.
+| a [craft\models\Site](https://docs.craftcms.com/api/v4/craft-models-site.html) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
