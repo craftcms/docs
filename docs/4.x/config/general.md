@@ -877,7 +877,7 @@ This can be set to a URL (`http://localhost`) or a URL plus a port (`http://loca
 
 ::: code
 ```php Static Config
-->httpProxy('<http://localhost')>
+->httpProxy('http://localhost')
 ```
 ```shell Environment Override
 CRAFT_HTTP_PROXY=http://localhost
