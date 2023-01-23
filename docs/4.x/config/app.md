@@ -115,6 +115,7 @@ return [
         'cache' => function() {
             $config = [
                 'class' => craft\cache\DbCache::class,
+                'defaultDuration' => Craft::$app->config->general->cacheDuration,
             ];
 
             return Craft::createObject($config);
@@ -140,7 +141,8 @@ return [
             $config = [
                 'class' => yii\caching\ApcCache::class,
                 'useApcu' => true,
-                'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
+                'keyPrefix' => Craft::$app->id,
+                'defaultDuration' => Craft::$app->config->general->cacheDuration,
             ];
 
             return Craft::createObject($config);
@@ -176,7 +178,8 @@ return [
                         'weight' => 1,
                     ],
                 ],
-                'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
+                'keyPrefix' => Craft::$app->id,
+                'defaultDuration' => Craft::$app->config->general->cacheDuration,
             ];
 
             return Craft::createObject($config);
@@ -201,8 +204,9 @@ return [
         'cache' => function() {
             $config = [
                 'class' => yii\redis\Cache::class,
-                'defaultDuration' => 86400,
-                'keyPrefix' => App::env('CRAFT_APP_ID') ?: 'CraftCMS',
+                'keyPrefix' => Craft::$app->id,
+                'defaultDuration' => Craft::$app->config->general->cacheDuration,
+
                 // Full Redis connection details:
                 'redis' => [
                     'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
