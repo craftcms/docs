@@ -369,8 +369,8 @@ public function actionSave() {
     }
 
     return $this->asModelSuccess(
-        $asset,
-        Craft::t('app', 'Asset saved.'),
+        $myElement,
+        Craft::t('app', 'Element saved.'),
         data: [
             'id' => $myElement->id,
             'title' => $myElement->title,
