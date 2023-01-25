@@ -107,7 +107,7 @@ Global set queries support the following parameters:
 <!-- textlint-disable -->
 
 | Param                                     | Description
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only global sets that are related to certain other elements.
 | [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
@@ -119,7 +119,7 @@ Global set queries support the following parameters:
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [handle](#handle)                         | Narrows the query results based on the global sets’ handles.
 | [id](#id)                                 | Narrows the query results based on the global sets’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by setPlaceholderElement.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [limit](#limit)                           | Determines the number of global sets that should be returned.
 | [offset](#offset)                         | Determines how many global sets should be skipped in the results.
@@ -435,7 +435,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder
-elements that were set by setPlaceholderElement.
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 
 

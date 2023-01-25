@@ -294,7 +294,7 @@ Entry queries support the following parameters:
 <!-- textlint-disable -->
 
 | Param                                     | Description
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#after)                           | Narrows the query results to only entries that were posted on or after a certain date.
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [ancestorDist](#ancestordist)             | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
@@ -320,7 +320,7 @@ Entry queries support the following parameters:
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants in their structure.
 | [id](#id)                                 | Narrows the query results based on the entries’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by setPlaceholderElement.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [leaves](#leaves)                         | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
 | [level](#level)                           | Narrows the query results based on the entries’ level within the structure.
@@ -1109,7 +1109,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder
-elements that were set by setPlaceholderElement.
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 
 

@@ -163,7 +163,7 @@ Asset queries support the following parameters:
 <!-- textlint-disable -->
 
 | Param                                     | Description
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only assets that are related to certain other elements.
 | [anyStatus](#anystatus)                   | Removes element filters based on their statuses.
@@ -179,7 +179,7 @@ Asset queries support the following parameters:
 | [folderPath](#folderpath)                 | Narrows the query results based on the folders the assets belong to, per the folders’ paths.
 | [height](#height)                         | Narrows the query results based on the assets’ image heights.
 | [id](#id)                                 | Narrows the query results based on the assets’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by setPlaceholderElement.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [includeSubfolders](#includesubfolders)   | Broadens the query results to include assets from any of the subfolders of the folder specified by [folderId](#folderid).
 | [kind](#kind)                             | Narrows the query results based on the assets’ file kinds.
@@ -644,7 +644,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder
-elements that were set by setPlaceholderElement.
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 
 

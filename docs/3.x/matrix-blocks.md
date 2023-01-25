@@ -65,7 +65,7 @@ Matrix block queries support the following parameters:
 <!-- textlint-disable -->
 
 | Param                                       | Description
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the Matrix blocks’ owners are drafts.
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.
@@ -80,7 +80,7 @@ Matrix block queries support the following parameters:
 | [fieldId](#fieldid)                         | Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.
 | [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
 | [id](#id)                                   | Narrows the query results based on the Matrix blocks’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by setPlaceholderElement.
+| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
 | [limit](#limit)                             | Determines the number of Matrix blocks that should be returned.
 | [offset](#offset)                           | Determines how many Matrix blocks should be skipped in the results.
@@ -462,7 +462,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder
-elements that were set by setPlaceholderElement.
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
 
 
 

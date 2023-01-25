@@ -226,7 +226,7 @@ The default length of time Craft will store data, RSS feed, and template caches.
 
 If set to `0`, data and RSS feed caches will be stored indefinitely; template caches will be stored for one year.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -734,7 +734,7 @@ List of headers where proxies store the real client IP.
 
 See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) for more details.
 
-If not set, the default $ipHeaders value will be used.
+If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v3/craft-web-request.html#ipheaders) value will be used.
 
 
 
@@ -1391,7 +1391,7 @@ Defined by
 
 The URI that users without access to the control panel should be redirected to after activating their account.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1509,7 +1509,7 @@ Defined by
 The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account
 passwords. Note that this only affects front-end site requests.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1534,7 +1534,7 @@ This can be set to `false` to disable front-end login.
 
 Note that this config setting is ignored when <config3:headlessMode> is enabled.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1559,7 +1559,7 @@ This can be set to `false` to disable front-end logout.
 
 Note that this config setting is ignored when <config3:headlessMode> is enabled.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1670,7 +1670,7 @@ The path users should be redirected to after logging into the control panel.
 This setting will also come into effect if a user visits the control panel’s login page (`/admin/login`) or the control panel’s
 root URL (`/admin`) when they are already logged in.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1694,7 +1694,7 @@ The path users should be redirected to after logging in from the front-end site.
 This setting will also come into effect if the user visits the login page (as specified by the <config3:loginPath> config setting) when
 they are already logged in.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1715,7 +1715,7 @@ Defined by
 
 The path that users should be redirected to after logging out from the front-end site.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1738,7 +1738,7 @@ The URI or URL that Craft should use for Set Password forms on the front end.
 
 Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: tip
 You might also want to set <config3:invalidUserTokenPath> in case a user clicks on an expired password reset link.
@@ -1766,7 +1766,7 @@ Since
 
 The URI to the page where users can request to change their password.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
 
@@ -1794,7 +1794,7 @@ Defined by
 
 The URI Craft should redirect users to after setting their password from the front end.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1905,7 +1905,7 @@ The URI or URL that Craft should use for email verification links on the front e
 
 Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1929,7 +1929,7 @@ Since
 
 The URI that users without access to the control panel should be redirected to after verifying a new email address.
 
-See localizedValue for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1973,7 +1973,7 @@ The amount of time Craft will remember a username and pre-populate it on the con
 
 Set to `0` to disable this feature altogether.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1996,7 +1996,7 @@ The amount of time a user stays logged if “Remember Me” is checked on the lo
 
 Set to `0` to disable the “Remember Me” feature altogether.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2057,7 +2057,7 @@ The amount of time before a user will get logged out due to inactivity.
 
 Set to `0` if you want users to stay logged in as long as their browser is open rather than a predetermined amount of time.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2111,7 +2111,7 @@ failed login attempts.
 
 Set to `0` to keep the account locked indefinitely, requiring an admin to manually unlock the account.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2151,7 +2151,7 @@ Defined by
 
 The default amount of time tokens can be used before expiring.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2197,7 +2197,7 @@ The amount of time a user’s elevated session will last, which is required for 
 
 Set to `0` to disable elevated session support.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2280,7 +2280,7 @@ Defined by
 
 The amount of time to track invalid login attempts for a user, for determining if Craft should lock an account.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2346,7 +2346,7 @@ Since
 
 The amount of time content preview tokens can be used before expiring.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2546,7 +2546,7 @@ Defined by
 
 The amount of time a user verification code can be used before expiring.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2770,7 +2770,7 @@ Defined by
 
 The maximum upload file size allowed.
 
-See sizeInBytes for a list of supported value types.
+See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) for a list of supported value types.
 
 
 
@@ -3228,7 +3228,7 @@ Whether Craft should cache GraphQL queries.
 If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is automatically invalidated any time
 an element is saved, the site structure is updated, or a GraphQL schema is saved.
 
-This setting will have no effect if a plugin is using the EVENT_BEFORE_EXECUTE_GQL_QUERY event to provide its own
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#event-before-execute-gql-query) event to provide its own
 caching logic and setting the `result` property.
 
 
@@ -3407,7 +3407,7 @@ Any content assigned to a pending user will be deleted as well when the given ti
 
 Set to `0` to disable this feature.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: tip
 Users will only be purged when [garbage collection](https://craftcms.com/docs/3.x/gc.html) is run.
@@ -3437,7 +3437,7 @@ The amount of time to wait before Craft purges stale user sessions from the sess
 
 Set to `0` to disable this feature.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -3463,7 +3463,7 @@ The amount of time to wait before Craft purges unpublished drafts that were neve
 
 Set to `0` to disable this feature.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -3489,7 +3489,7 @@ The amount of time before a soft-deleted item will be up for hard-deletion by ga
 
 Set to `0` if you don’t ever want to delete soft-deleted items.
 
-See durationInSeconds for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
