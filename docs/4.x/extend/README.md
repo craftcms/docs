@@ -62,7 +62,7 @@ If the thing you want to build would benefit from any of these features (or you�
 
 ### Design + Approach
 
-Extensions naturally invite technical debt—for maintainers _and_ users. This isn't necessarily a bad thing, though! The most common manifestation is some additional friction during major version upgrades. Craft itself has enough abstractions in place to protect most developers from significant API changes (for example, Twig templates are largely compatible back to Craft 2), but as you get deeper into Craft’s API, you will need to pay special attention to deprecation notices and our dedicated [upgrade guides](./updating-plugins.md).
+Extensions naturally invite technical debt—for maintainers _and_ users. This isn’t necessarily a bad thing, though! The most common manifestation is some additional friction during major version upgrades. Craft itself has enough abstractions in place to protect most developers from significant API changes (for example, Twig templates are largely compatible back to Craft 2), but as you get deeper into Craft’s API, you will need to pay special attention to deprecation notices and our dedicated [upgrade guides](./updating-plugins.md).
 
 One of the most important things to consider as you set out is how you will communicate to others (your teammates, a client’s future development partners, or even your future self) where a project’s special features come from. It could be documentation or training—or nothing at all, if the scope of the extension is limited!
 
@@ -126,7 +126,7 @@ The “right” development tools can make or break your initial experience buil
 
 #### IDE
 
-Any time you’re working with PHP, [PHPStorm](https://www.jetbrains.com/phpstorm/) (or [VS Code](https://code.visualstudio.com) with the [Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) extension) will provide valuable insight into your (and Craft’s) code.
+Any time you’re working with PHP, [PhpStorm](https://www.jetbrains.com/phpstorm/) (or [VS Code](https://code.visualstudio.com) with the [Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) extension) will provide valuable insight into your (and Craft’s) code.
 
 #### DDEV
 

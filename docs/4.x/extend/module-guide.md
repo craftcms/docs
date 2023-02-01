@@ -94,7 +94,7 @@ Replace `foo` with your module’s actual namespace, and `'@foo'` with an [alias
 
 Most initialization logic belongs in your module’s `init()` method.
 
-However, there are some situations where this doesn’t guarantee a certain part of the application is ready (another plugin, for instance). Conversely, a module that isn't bootstrapped at the beginning of a request may have `init()` called too late to listen to <craft4:craft\web\Application::EVENT_INIT>, and would never be notified that the app is indeed ready.
+However, there are some situations where this doesn’t guarantee a certain part of the application is ready (another plugin, for instance). Conversely, a module that isn’t bootstrapped at the beginning of a request may have `init()` called too late to listen to <craft4:craft\web\Application::EVENT_INIT>, and would never be notified that the app is indeed ready.
 
 In those cases, it’s best to register a callback via <craft4:craft\base\ApplicationTrait::onInit()>:
 
