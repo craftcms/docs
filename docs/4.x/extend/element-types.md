@@ -5,7 +5,7 @@
 
 Elements underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#types) with your own, from a plugin or module.
 
-As you implement common element features like [titles](#titles), [sources](#sources), or [statuses](#statuses), the native element classes will be an invaluable resource—both as templates for basic functionality and evidence for the .
+As you implement common element features like [titles](#titles), [sources](#sources), or [statuses](#statuses), the native element classes will be an invaluable resource—both as templates for basic functionality and evidence of the flexibility of elements.
 
 - <craft4:craft\elements\Address>
 - <craft4:craft\elements\Asset>
@@ -24,11 +24,17 @@ If your plugin needs to provide a new content type, architecting it as an elemen
 
 ### Element Class
 
-Element types are defined by classes which implement <craft4:craft\base\ElementInterface> and <craft4:craft\base\ElementTrait>. The class will serve both as a source of information about your element type (using static methods), and as a model that elements of its type will be instantiated with. As a convenience, you can extend <craft4:craft\base\Element>, which provides a barebones element type implementation.
+Element types are defined by classes which implement <craft4:craft\base\ElementInterface> and use <craft4:craft\base\ElementTrait>. The class will serve both as a source of information about your element type (using static methods), and as a model that elements of its type will be instantiated with. As a convenience, you can extend <craft4:craft\base\Element>, which provides a barebones element type implementation.
 
 Your element class should be created in an `elements/` directory within your plugin’s source directory, and—per autoloading convention—be named the same as the file. Our examples will be based on a new “product” element, so the element class (`mynamespace\elements\Product`) will live in `src/elements/Product.php`.
 
-<Todo notes="Add `make` commands." />
+::: tip
+Use the [generator](./generator.md) to scaffold an element type from the command line!
+
+```bash
+php craft make element-type
+```
+:::
 
 To start, we’ll give the class a handful of public properties and define two static methods that help the control panel render labels.
 
