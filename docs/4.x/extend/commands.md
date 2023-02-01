@@ -128,6 +128,31 @@ php craft acme/greet/developer --who="Marvin"
 # -> Hello, Marvin!
 ```
 
+### Arguments
+
+Actions can declare arguments that will be processed from the command’s input. Arguments are separated by spaces, and the values are processed according to their declared types:
+
+```php
+public function actionDeveloper(string $emotion, ?int $days = null): int
+{
+    $who = $this->who ?? 'world';
+
+    if ($days >= 500) {
+        $this->stderr("Sorry, I don’t remember you, {$who}!", Console::FG_YELLOW);
+
+        return ExitCode::TEMPFAIL;
+    }
+
+    $this->stdout("Hello, {$who}! I am {$emotion} to see you!", Console::FG_GREEN);
+
+    return ExitCode::OK;
+}
+```
+
+::: tip
+Read more about passing [arguments](guide:tutorial-console#arguments) to console commands.
+:::
+
 ### Help Text
 
 To assist CLI users, Yii automatically parses docblocks from your controller’s action methods (as well as any public properties matching options you’ve registered) and displays them when running `php craft help`.
@@ -163,7 +188,7 @@ Event::on(
             'options' => ['type'],
             'helpSummary' => 'Re-saves products.',
             'action' => function($params): int {
-                // @var ResaveController $controller
+                /** @var ResaveController $controller */
                 $controller = Craft::$app->controller;
                 $query = Product::find();
                 if ($controller->type) {
