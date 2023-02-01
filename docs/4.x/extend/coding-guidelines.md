@@ -87,7 +87,6 @@ Follow PSR-12 and PSR-1 standards, with the following recommendations:
 
 - Auto-loading must conform to [PSR-4](https://www.php-fig.org/psr/psr-4/), wherein a class’s file location can be inferred by its fully qualified name, given a known base namespace mapped to a base path.
 - Namespaces should be all-lowercase.
-- Class names should be `PascalCase` (See PSR-1 chapter [1](https://www.php-fig.org/psr/psr-1/#1-overview)).
 - Only first-party code should use the `craft\` and `pixelandtonic\` namespace roots. Third party plugins should use a namespace root that refers to the vendor name and plugin name (e.g. `acme\myplugin\`).
 
 ## Method Names
