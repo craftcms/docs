@@ -8,7 +8,7 @@ sidebarDepth: 2
 
 Yii’s [application structure](guide:structure-overview) informs much of Craft’s internal organization. You may already be familiar with some [core components](guide:structure-application-components) if you’ve made changes to the [application config](../config/app.md).
 
-A Craft extension (often referred to as [modules](#modules) or [plugins](#plugins)) can be as lean as a single class, or as complex as an embedded MVC-style application. Either way, Craft’s entire API is at your finger tips.
+A Craft extension (often referred to as a [module](#modules) or [plugin](#plugins)) can be as lean as a single class, or as complex as an embedded MVC-style application. Either way, Craft’s entire API is at your finger tips.
 
 <See path="./generator.md" description="Jump right in by generating your first plugin or module!" />
 
