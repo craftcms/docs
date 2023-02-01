@@ -28,10 +28,6 @@ my-project/
 └── ...
 ```
 
-::: warning
-Modules generated with [pluginfactory.io](https://pluginfactory.io/) are only compatible with Craft 3. You may need to apply some of PHP 8’s type declarations to make its output compatible with Craft 4.
-:::
-
 ## Set up class autoloading
 
 Next up, you need to tell Composer how to find your module’s classes by setting the [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) field in your project’s `composer.json` file. For example, if your module’s namespace is `foo`, and it’s located at `modules/foo/`, this is what you should add:
