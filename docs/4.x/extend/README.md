@@ -106,6 +106,20 @@ Here are a few activities (in no particular order) that can help you get oriente
 
 You will likely face some combination of the above challenges as you get started.
 
+## Resources
+
+Keep these learning tools in mind, as you get started!
+
+- [**Generator**](./generator.md): Let Craft generate and wire up boilerplate components.
+- [**Coding Guidelines**](./coding-guidelines.md): Keeping your code organized will make source-diving feel more familiar.
+- [**Class Reference**](class-ref): Comprehensive documentation for Craft’s source code, automatically generated with every release.
+- [**Craft Source**](repo:craftcms/cms): Dive into Craft’s source code.
+- [**Issues + Discussions**](repo:craftcms/cms): Join the conversation about Craft’s future.
+
+::: tip
+All of our [first-party plugins](https://github.com/search?q=topic%3Acraft-plugin+org%3Acraftcms&type=Repositories&ref=advsearch&l=&l=) are published on GitHub as learning resources. Please be aware that use of a plugin is still subject to its license.
+:::
+
 ### Tools
 
 The “right” development tools can make or break your initial experience building an extension. These are only recommendations, though—the only requirement is that you are comfortable enough with your development environment to debug or troubleshoot you way out of a 
@@ -130,20 +144,6 @@ If your journey with Craft so far has not involved [Composer](https://getcompose
 In the course of extending Craft, you will _never_ need to modify files that live in the `vendor/` directory. Changes to source files will be lost any time Composer installs or updates packages.
 
 This documentation does not cover altering Craft’s source code, even with the intention of submitting a pull request.
-:::
-
-## Resources
-
-Keep these learning tools in mind, as you get started!
-
-- [**Generator**](./generator.md): Let Craft generate and wire up boilerplate components.
-- [**Coding Guidelines**](./coding-guidelines.md): Keeping your code organized will make source-diving feel more familiar.
-- [**Class Reference**](class-ref): Comprehensive documentation for Craft’s source code, automatically generated with every release.
-- [**Craft Source**](repo:craftcms/cms): Dive into Craft’s source code.
-- [**Issues + Discussions**](repo:craftcms/cms): Join the conversation about Craft’s future.
-
-::: tip
-All of our [first-party plugins](https://github.com/search?q=topic%3Acraft-plugin+org%3Acraftcms&type=Repositories&ref=advsearch&l=&l=) are published on GitHub as learning resources. Please be aware that use of a plugin is still subject to its license.
 :::
 
 [class-ref]: https://docs.craftcms.com/api/v4/
