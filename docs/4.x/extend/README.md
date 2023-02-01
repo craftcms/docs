@@ -36,7 +36,7 @@ Most customizations come in the form of a **module** or a **plugin**.
 
 #### Modules
 
-Modules are a great way to tightly couple extra functionality with the parent application—say, business logic that is specific to a single website or project.
+**Modules** are a great way to tightly couple extra functionality with the parent application—say, business logic that is specific to a single website or project.
 
 Initially, this may afford you a greater sense of freedom when designing your extension:
 
@@ -56,7 +56,7 @@ While you will miss _some_ convenience features provided by [plugins](#plugins),
 - They get their own config file and [settings](./plugin-settings.md) page within the control panel, and are automatically registered with [project config](./project-config.md);
 - They can be enabled/disabled by an admin, without running any Composer commands;
 
-If the thing you want to build would benefit from any of these features (or you’re unsure whether it might), make it a plugin. Unsure? Plugins can live as [part of a project](./plugin-guide.md#path-repository), just like modules.
+If the thing you want to build would benefit from any of these features (or you’re unsure whether it might), make it a plugin. Just like modules, plugins can live as [part of a project](./plugin-guide.md#path-repository).
 
 <See path="./plugin-guide.md" description="Learn about the Craft plugin ecosystem." />
 
@@ -66,7 +66,7 @@ Extensions naturally invite technical debt—for maintainers _and_ users. This i
 
 One of the most important things to consider as you set out is how you will communicate to others (your teammates, a client’s future development partners, or even your future self) where a project’s special features come from. It could be documentation or training—or nothing at all, if the scope of the extension is limited!
 
-Craft automatically handles this for [plugins](#plugins)—from the control panel, you can see what’s currently installed and [temporarily disable](config4:disabledPlugins) one (or all) to track down problems. Registered [modules](#modules) are also disclosed in the control panel—but without understanding how they’re organized, auto-loaded, bootstrapped, or otherwise factored into the logic of your application, their purpose and specific effects may be unclear.
+Craft automatically handles this for [plugins](#plugins)—from the control panel, you can see what’s currently installed and [temporarily disable](config4:disabledPlugins) one (or all) to track down problems. Registered [modules](#modules) are also disclosed in the control panel… but without understanding how they’re organized, auto-loaded, bootstrapped, or otherwise factored into the logic of your application, their purpose and specific effects may be unclear.
 
 #### Extension Loci
 
@@ -95,24 +95,28 @@ These fixtures can be combined to create advanced front-end and control panel in
 
 ### First Steps
 
-While [Generator](./generator.md) has dramatically simplified the process of initializing a new extension, it’s still a good idea to get a sense for what you can do with the tools you already know.
+While the [Generator](./generator.md) has dramatically simplified the process of initializing a new extension, it’s still a good idea to get a sense for what you can do with the tools you already know.
 
 Here are a few activities (in no particular order) that can help you get oriented with the Craft API, without treading into completely new territory:
 
-1. In a Twig template, use the [`{% dd %}` tag](../dev/tags.md#dd) to output a value or variable to the browser. _What kinds of values do you see?_
-1. Dive in to the `vendor/craftcms/cms/` directory and look for a familiar-sounding class. _Can you find the corresponding documentation in the [class reference][class-ref]?_
-1. Look at the list of [common services](../dev/global-variables.md#common-services) that are available on the [`craft.app` variable](../dev/global-variables.md#craft-app) in any template. _Can you determine what other services are accessible in the same way?_
-1. Install one of the [recommended editors](#ide) and open up a config file. Move your cursor over one of the [`use` statements](repo:craftcms/craft/blob/main/config/general.php#L11-L12) at the top to get information about the classes. _Can you figure out how to open the file that the class is defined in?_
-
-You will likely face some combination of the above challenges as you get started.
+1. In a Twig template, use the [`{% dd %}` tag](../dev/tags.md#dd) to output a value or variable to the browser.  
+  _What kinds of values do you see?_
+1. Dive in to the `vendor/craftcms/cms/` directory and look for a familiar-sounding class.  
+  _Can you find the corresponding documentation in the [class reference][class-ref]?_
+1. Look at the list of [common services](../dev/global-variables.md#common-services) that are available on the [`craft.app` variable](../dev/global-variables.md#craft-app) in any template.  
+  _Can you determine what other services are accessible in the same way?_
+1. Install one of the [recommended editors](#ide) and open up a config file. Move your cursor over one of the [`use` statements](repo:craftcms/craft/blob/main/config/general.php#L11-L12) at the top to get information about the classes.  
+  _Can you figure out how to open the file that the class is defined in?_
 
 ## Resources
 
 Keep these learning tools in mind, as you get started!
 
+### Links
+
 - [**Generator**](./generator.md): Let Craft generate and wire up boilerplate components.
-- [**Coding Guidelines**](./coding-guidelines.md): Keeping your code organized will make source-diving feel more familiar.
-- [**Class Reference**](class-ref): Comprehensive documentation for Craft’s source code, automatically generated with every release.
+- [**Coding Guidelines**](./coding-guidelines.md): Keeping your own code organized will make source-diving less daunting.
+- [**Class Reference**][class-ref]: Comprehensive documentation for Craft’s source code, automatically generated with every release.
 - [**Craft Source**](repo:craftcms/cms): Dive into Craft’s source code.
 - [**Issues + Discussions**](repo:craftcms/cms): Join the conversation about Craft’s future.
 
@@ -122,7 +126,7 @@ All of our [first-party plugins](https://github.com/search?q=topic%3Acraft-plugi
 
 ### Tools
 
-The “right” development tools can make or break your initial experience building an extension. These are only recommendations, though—the only requirement is that you are comfortable enough with your development environment to debug or troubleshoot you way out of a 
+The “right” development tools can make or break your initial experience building an extension. These are only recommendations, though—the only requirement is that you are comfortable enough PHP and your development environment to debug or troubleshoot unexpected errors, as they emerge.
 
 #### IDE
 
@@ -138,7 +142,7 @@ DDEV comes [pre-configured with xdebug](https://ddev.readthedocs.io/en/stable/us
 
 #### Composer
 
-If your journey with Craft so far has not involved [Composer](https://getcomposer.org), 
+If your journey with Craft so far has not involved [Composer](https://getcomposer.org), certain concepts (like namespacing and auto-loading) may present additional difficulty. Consider reviewing our article on using the [starter project](kb:using-the-starter-project), and try running [updates](../updating.md#composer) or installing a plugin with Composer.
 
 ::: danger
 In the course of extending Craft, you will _never_ need to modify files that live in the `vendor/` directory. Changes to source files will be lost any time Composer installs or updates packages.
