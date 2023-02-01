@@ -6,7 +6,7 @@ Once you’ve indicated your plugin will have settings by enabling `hasCpSetting
 
 This “settings model” is responsible for storing and validating the setting values.
 
-Settings models are just like any other [model](https://www.yiiframework.com/doc/guide/2.0/en/structure-models). To create it, create a `models/` directory within your plugin’s source directory, and create a `Settings.php` file within it:
+Settings models are just like any other [model](guide:structure-models). To create it, create a `models/` directory within your plugin’s source directory, and create a `Settings.php` file within it:
 
 ```php
 <?php
