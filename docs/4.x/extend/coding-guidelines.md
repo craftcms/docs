@@ -2,16 +2,16 @@
 
 Do your best to follow these guidelines when writing code for Craft and Craft plugins.
 
-::: tip Tools
-Interested in automating code quality checks? We maintain a few configurations to ensure Craft and all first-party extensions conform to the guidelines laid out in this document:
+## Tooling
 
-- [`craftcms/phpstorm-settings`](repo:craftcms/phpstorm-settings): Style and inspection profiles for PhpStorm.
+We maintain a few configurations to ensure Craft and all first-party extensions conform to the recommendations laid out in this document.
+
 - [`craftcms/ecs`](repo:craftcms/ecs): “Easy Coding Standards,” with automatic patching.
 - [`craftcms/phpstan`](repo:craftcms/phpstan): Prevent bugs with static analysis.
 - [`craftcms/rector`](repo:craftcms/rector): Rector rule sets for upgrading plugins between major Craft versions.
+- [`craftcms/phpstorm-settings`](repo:craftcms/phpstorm-settings): Style and inspection profiles for PhpStorm.
 
-Use of these tools is not a requirement for inclusion in the Plugin Store, but understanding their value may help as you get started with your own extensions!
-:::
+Use of these tools is not a requirement for inclusion in the Plugin Store, but understanding their value may help you manage a growing extension! [Contributions](repo:craftcms/cms/pulls) to Craft itself _will_ be checked against these standards.
 
 ## Code Style
 
@@ -19,7 +19,9 @@ Unless otherwise noted, we target PHP-FIG’s [PSR-12](https://www.php-fig.org/p
 
 Our [ECS config](repo:craftcms/ecs) also enforces these rules:
 
-- When split into multiple lines, trailing commas must be present after the last array element or argument.
+- A trailing comma _must_ be present after the last element in an array and the last argument of a method definition, when split onto multiple lines.
+- The opening parenthesis in an anonymous function declaration _must not_ be surrounded by spaces.
+- Constants _must_ have a visibility declaration (PSR-12 chapter [4.3](https://www.php-fig.org/psr/psr-12/#43-properties-and-constants) makes them a condition of support, and all Craft 4-compatible code requires PHP 8.0.1 or greater).
 
 We tend to follow these “soft” rules, as well:
 
