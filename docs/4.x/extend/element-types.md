@@ -1,8 +1,11 @@
 # Element Types
 
-Element types define the different types of content that can be managed in Craft.
+<Todo notes="Include `ExpirableElementInterface`" />
+<Todo notes="Mention `canSave()` and other permissions methods" />
 
-Craft comes with eight built-in element types:
+Elements underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#types) with your own, from a plugin or module.
+
+As you implement common element features like [titles](#titles), [sources](#sources), or [statuses](#statuses), the native element classes will be an invaluable resource—both as templates for basic functionality and evidence of the flexibility of elements.
 
 - <craft4:craft\elements\Address>
 - <craft4:craft\elements\Asset>
@@ -21,13 +24,19 @@ If your plugin needs to provide a new content type, architecting it as an elemen
 
 ### Element Class
 
-Element types are defined by classes which implement <craft4:craft\base\ElementInterface> and <craft4:craft\base\ElementTrait>. The class will serve both as a way to communicate various things about your element type (with static methods), and as a model that elements of its type will be instantiated with.
+Element types are defined by classes which implement <craft4:craft\base\ElementInterface> and use <craft4:craft\base\ElementTrait>. The class will serve both as a source of information about your element type (using static methods), and as a model that elements of its type will be instantiated with. As a convenience, you can extend <craft4:craft\base\Element>, which provides a barebones element type implementation.
 
-As a convenience, you can extend <craft4:craft\base\Element>, which provides a base element type implementation.
+Your element class should be created in an `elements/` directory within your plugin’s source directory, and—per autoloading convention—be named the same as the file. Our examples will be based on a new “product” element, so the element class (`mynamespace\elements\Product`) will live in `src/elements/Product.php`.
 
-Create an `elements/` directory within your plugin’s source directory, and create a PHP class file within it, named after the class name you want to give your element type (e.g. `Product.php`).
+::: tip
+Use the [generator](./generator.md) to scaffold an element type from the command line!
 
-Define the class within the file, and give a display name and some public properties for any custom attributes your elements will have.
+```bash
+php craft make element-type
+```
+:::
+
+To start, we’ll give the class a handful of public properties and define two static methods that help the control panel render labels.
 
 ```php
 <?php
@@ -37,35 +46,26 @@ use craft\base\Element;
 
 class Product extends Element
 {
-    /**
-     * @inheritdoc
-     */
     public static function displayName(): string
     {
         return 'Product';
     }
 
-    /**
-     * @inheritdoc
-     */
     public static function pluralDisplayName(): string
     {
         return 'Products';
     }
 
-    /**
-     * @var int Price
-     */
-    public $price = 0;
-
-    /**
-     * @var string Currency code
-     */
-    public $currency;
+    public int $price = 0;
+    public string $currency;
 
     // ...
 }
 ```
+
+::: tip
+The `lowerDisplayName()` and `pluralLowerDisplayName()` can also be explicitly defined, if you find that Craft doesn’t get them quite right.
+:::
 
 ### Registration
 
@@ -86,45 +86,54 @@ Event::on(
 );
 ```
 
-### Database Table
+This is not a requirement for all element types, but provides automatic support for things like relational [condition rules](./conditions.md) and [reference tags](../reference-tags.md).
 
-There will be things your elements need to store about themselves that don’t fit into the columns in the `elements` database table. So you’ll need to create a new table to hold that info.
+### Persisting Data
 
-Create an [install migration](migrations.md#plugin-install-migrations) (if you don’t already have one), and add this to its `safeUp()` method:
+Part of what gives custom elements their power is the ability to store additional attributes in a predictable way—without depending on [custom fields](#custom-fields) or [content](#content). [Entries](../entries.md), for instance, have a post date (`postDate`), expiry date (`expiryDate`), and an author ID (`authorId`); [assets](../assets.md) track the underlying file’s extension and what volume and folder they belong to.
+
+While elements automatically get support for storing relations, custom field data, titles, slugs and URIs, , it’s your plugin’s responsibility to create and maintain an appropriate database schema for persisting its native attributes. For our product element type, we’ll need a new table with at least `price` and `currency` columns.
+
+We’re going to set up the mechanisms of persistence now, and will cover [accepting data](#edit-page) later.
+
+#### Migrations
+
+Create an new [migration](migrations.md), and add this to its `safeUp()` method:
 
 ```php
-if (!$this->db->tableExists('{{%products}}')) {
-    // create the products table
-    $this->createTable('{{%products}}', [
-        'id' => $this->integer()->notNull(),
-        'price' => $this->integer()->notNull(),
-        'currency' => $this->char(3)->notNull(),
-        'dateCreated' => $this->dateTime()->notNull(),
-        'dateUpdated' => $this->dateTime()->notNull(),
-        'uid' => $this->uid(),
-        'PRIMARY KEY(id)',
-    ]);
+// Create the Products table:
+$this->createTable('{{%products}}', [
+    'id' => $this->primaryKey(),
+    'price' => $this->integer()->notNull(),
+    'currency' => $this->char(3)->notNull(),
+    'dateCreated' => $this->dateTime()->notNull(),
+    'dateUpdated' => $this->dateTime()->notNull(),
+    'uid' => $this->uid(),
+]);
 
-    // give it a foreign key to the elements table
-    $this->addForeignKey(
-        $this->db->getForeignKeyName(),
-        '{{%products}}',
-        'id',
-        '{{%elements}}',
-        'id',
-        'CASCADE',
-        null
-    );
-}
+// Give it a foreign key to the elements table:
+$this->addForeignKey(
+    null,
+    '{{%products}}',
+    'id',
+    '{{%elements}}',
+    'id',
+    'CASCADE',
+    null
+);
 ```
 
+Note that we’ve also specified `id`, `dateCreated`, `dateUpdated`, and `uid` “audit” columns (used by Craft’s [`insert`](craft4:craft\db\Command::insert()), [`upsert`](craft4:craft\db\Command::upsert()), and [`update`](craft4:craft\db\Command::update()) commands)—as well as a foreign key to tie our records back to the source `elements` table. A foreign key ensures records are not orphaned when the underlying element is [hard-deleted](./soft-deletes.md).
+
 ::: tip
-If you’re adding this as an update to an existing plugin, you will need to create a new normal migration as well, and copy the same code into it.
+Plugins should always keep their [install migration](./migrations.md#plugin-install-migrations) up to date. If this is your plugin’s first migration, it can live solely in `Install.php`; otherwise, the same code will need to be present in both a regular migration _and_ the install migration.
 :::
 
-Install the plugin now, so your database table will be created.
+Install your plugin (or run `php migrate/up`) to create the database table.
 
-You will also need to add an `afterSave()` method to your element class, which is responsible for keeping your element table updated when elements are saved. The `afterSave()` method is a part of the standard element saving [control flow](services.md#interface-oriented-methods).
+#### Save Hooks
+
+The presence of attributes alone doesn’t give Craft enough information to persist them, automatically. You will need to implement this logic in an `afterSave()` method on your element class, which is called as part of the standard element saving [control flow](services.md#interface-oriented-methods).
 
 ```php
 public function afterSave(bool $isNew): void
@@ -151,30 +160,29 @@ public function afterSave(bool $isNew): void
 ```
 
 ::: tip
-`afterSave()` gets called by <craft4:craft\services\Elements::saveElement()>, after the main element rows in the `elements`, `elements_sites`, and `content` tables have been saved, and the element has been assigned an `id` and `uid` (if new).
+`afterSave()` gets called by <craft4:craft\services\Elements::saveElement()>, after the main element rows in the `elements`, `elements_sites`, and `content` tables have been saved, and the element has been assigned an `id` and `uid` (if new). Craft encapsulates the entire element saving operation in a [transaction](guide:db-dao#performing-transactions), so any modifications you make in `afterSave()` will automatically be rolled back in the event of a failure.
 :::
+
+Every element save emits [`EVENT_BEFORE_SAVE_ELEMENT`](craft4:craft\services\Elements::EVENT_BEFORE_SAVE_ELEMENT) and [`EVENT_AFTER_SAVE_ELEMENT`](craft4:craft\services\Elements::EVENT_AFTER_SAVE_ELEMENT) events, but you are free to create and emit your own (say, based on certain type of change like an increase or decrease in price) in the `afterSave()` method.
+
+Keep in mind that a “save” can happen in a number of circumstances (like the creation of a draft or revision), and doesn’t always mean that changes are being applied to the canonical version of an element.
 
 ### Element Query Class
 
-All element types need a corresponding element query class. Element query classes are an extension of [query builders](https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder), tuned for fetching elements.
+All element types need a corresponding [element query](../element-queries.md) class. Element query classes are an extension of [query builders](guide:db-query-builder), tuned for fetching elements. They have three responsibilities:
 
-All element query classes should extend <craft4:craft\elements\db\ElementQuery>, which provides the base functionality.
+- Provide public properties and setter methods for capturing custom criteria parameters;
+- Join in the custom element table and select the appropriate columns within it;
+- Synthesize custom parameters into conditions on the query;
 
-They have three responsibilities:
+Refer to Craft’s own element query classes for examples, in `vendor/craftcms/cms/src/elements/db/`.
 
-- Provide public properties and setter methods for capturing custom criteria parameters
-- Join in the custom element table and select the appropriate columns within it
-- Apply the custom criteria parameters as conditions on the query
-
-You can refer to Craft’s own element query classes for examples. They are located in `vendor/craftcms/cms/src/elements/db/`.
-
-To give your plugin an element query, create a `db/` directory within your `elements/` directory, and create a PHP class file within it, named after the class name you want to give your element query (e.g. `ProductQuery.php`).
+Extend <craft4:craft\elements\db\ElementQuery> in a new `elements/db/ProductQuery.php` file:
 
 ```php
 <?php
 namespace mynamespace\elements\db;
 
-use craft\db\Query;
 use craft\elements\db\ElementQuery;
 use craft\helpers\Db;
 
@@ -199,10 +207,10 @@ class ProductQuery extends ElementQuery
 
     protected function beforePrepare(): bool
     {
-        // join in the products table
+        // JOIN our `products` table:
         $this->joinElementTable('products');
 
-        // select the price and currency columns
+        // SELECT the `price` and `currency` columns:
         $this->query->select([
             'products.price',
             'products.currency',
@@ -221,17 +229,19 @@ class ProductQuery extends ElementQuery
 }
 ```
 
-With the element query class in place, the last step is to tie it into your element type. Add the following method to your element class:
+The lack of type declarations for the `price` and `currency` properties (or their corresponding setter method arguments) on the element query class is intentional—we want to accept any values compatible with `Db::parseParam()`. We’ll cover some more examples of [param normalization](#normalizing-query-params) in a moment.
+
+Back in your element class, implement the `find()` method and return a new instance of your query class:
 
 ```php
-use craft\elements\db\ElementQueryInterface;
+use craft\base\Element;
 use mynamespace\elements\db\ProductQuery;
 
 // ...
 
-class Product
+class Product extends Element
 {
-    public static function find(): ElementQueryInterface
+    public static function find(): ProductQuery
     {
         return new ProductQuery(static::class);
     }
@@ -254,15 +264,67 @@ Behind the scenes, <craft4:craft\elements\db\ElementQuery> creates two <craft4:c
 
 The reason for this separation is performance. It allows MySQL/PostgreSQL to figure out exactly which element rows should be fetched before it has to worry about which columns to select, etc., avoiding the need to run expensive condition operations on temporary tables.
 
+#### Normalizing Query Params
+
+Your query class is responsible for synthesizing and normalizing its params in the `beforePrepare()` method and applying them as <craft4:craft\db\Query::where()>-compatible conditions. Oftentimes, this is only a matter of processing params with the appropriate helper methods:
+
+- [`Db::parseParam()`](craft4:craft\helpers\Db::parseParam()): Type-agnostic.
+- [`Db::parseDateParam()`](craft4:craft\helpers\Db::parseDateParam()): Normalizes `DateTime` values.
+- [`Db::parseBooleanParam()`](craft4:craft\helpers\Db::parseBooleanParam()): Normalizes boolean values and provides a means for dealing with `null` values in the database.
+- [`Db::parseNumericParam()`](craft4:craft\helpers\Db::parseNumericParam()): Rejects non-numeric values.
+- [`Db::parseMoneyParam()`](craft4:craft\helpers\Db::parseMoneyParam()): Process conditions including currency-like values into storage-safe integers;
+
+This may also mean reconciling conflicting params, or expanding short-hand params into real column-based conditions.
+
+Query params don’t have to match column names, nor do all column names have to be represented as query params. For instance, if our element also tracked `stock`, and our table included a `stock` column, we _could_ provide a query parameter of the same name—but we could also make it simpler for developers using our element type to query for “available” products, like this:
+
+```php
+class ProductQuery extends ElementQuery
+{
+    public $stock;
+    public bool $isAvailable;
+
+    // ...
+
+    public function isAvailable(null|bool $value): self
+    {
+        $this->isAvailable = $value;
+
+        return $this;
+    }
+
+    public function beforePrepare(): bool
+    {
+        // ...
+
+        if ($this->isAvailable !== null) {
+            if ($this->isAvailable) {
+                $this->subQuery->andWhere(Db::parseParam('products.stock', '>', 0));
+            } else {
+                $this->subQuery->andWhere(Db::parseParam('products.stock', '<=', 0));
+            }
+        }
+
+        return parent::beforePrepare();
+    }
+}
+```
+
+Other criteria may contribute to the definition of “available,” or create situations where an impossible set of conditions are applied (like “available” products with a stock of less than 0). It’s up to you whether you allow contradictions, silently resolve them, or throw an exception.
+
+::: warning
+When modifying your query, it’s recommended that new params are applied with `andWhere()` instead of `where()`, as the latter will clear _any_ existing conditions, including those that Craft uses to handle soft-deleted and disabled elements.
+:::
+
 ### Querying for Elements in Templates
 
-If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](guide:concept-behaviors).
+If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](guide:concept-behaviors) to it.
 
-Your behavior should look like this:
+Your behavior class (in a new file at `variables/CraftVariableBehavior.php`) should look like this:
 
 ```php
 <?php
-namespace mynamespace\twig\variables;
+namespace mynamespace\variables;
 
 use mynamespace\elements\Product;
 use mynamespace\elements\db\ProductQuery;
@@ -292,7 +354,7 @@ To attach the behavior, return to your main class’s `init()` method and listen
 use yii\base\Event;
 use craft\events\DefineBehaviorsEvent;
 use craft\web\twig\variables\CraftVariable;
-use mynamespace\twig\variables\CraftVariableBehavior;
+use mynamespace\variables\CraftVariableBehavior;
 
 Event::on(
     CraftVariable::class,
@@ -305,9 +367,9 @@ Event::on(
 );
 ```
 
-## Element Content
+## Content
 
-If your elements should get their own rows in the `content` table, either because they should have [titles](#titles) or [custom fields](#custom-fields), add a static `hasContent()` method to your element class:
+If your elements should get their own rows in the `content` table—either because they need [titles](#titles) or [custom fields](#custom-fields)—add a static `hasContent()` method to your element class:
 
 ```php
 public static function hasContent(): bool
@@ -328,14 +390,14 @@ public static function hasTitles(): bool
 ```
 
 ::: tip
-Don’t forget to include a title field in your field layout!
+Don’t forget to include a title field in your [field layout](#managing-field-layouts)!
 :::
 
 ### Custom Fields
 
-#### Managing Field Layouts
+Element types that support content (or provide [field layout elements](#field-layout-elements)) need to define a field layout. Field layouts are stored in the database, but can be reflected in (and controlled by) [Project Config](./project-config.md), as well.
 
-If you want your element type to support custom fields, you will also need to create a page somewhere within the control panel for managing your element type’s field layout. The `_includes/forms.twig` template provides a `fieldLayoutDesignerField` macro, which will output a field layout designer:
+This process begins by providing administrators a place to manage the field layout—usually as part of your plugin’s [settings](./plugin-settings.md) screen. Craft provides a `fieldLayoutDesignerField` macro via `_includes/forms.twig`, which will output a field layout designer and register all the necessary scripts:
 
 ```twig
 {% import '_includes/forms.twig' as forms %}
@@ -347,18 +409,69 @@ If you want your element type to support custom fields, you will also need to cr
 }) }}
 ```
 
-Place that within a `<form>` that posts to one of your plugin’s controllers. The controller can assemble the field layout from the POST data like this:
+Place that within a `<form>` that posts to one of your plugin’s [controllers](./controllers.md). Craft provides a convenience method for collecting field layout data from a POST request:
 
 ```php
 $fieldLayout = Craft::$app->getFields()->assembleLayoutFromPost();
 $fieldLayout->type = Product::class;
 ```
 
-Your service can then save the field layout by passing it to <craft4:craft\services\Fields::saveLayout()>:
+The controller (or a [service](./services.md)) can save the field layout by passing it to <craft4:craft\services\Fields::saveLayout()>:
 
 ```php
 Craft::$app->fields->saveLayout($fieldLayout);
 ```
+
+#### Using Project Config
+
+One of the benefits of field layouts is that they can be tracked in [project config](project-config.md). Instead of directly saving a field layout to the database, you can validate and write the layout into a known key:
+
+```php
+// mynamespace\controllers\SettingsController
+
+use Craft;
+use craft\helpers\ArrayHelper;
+use craft\helpers\StringHelper;
+use craft\web\Controller;
+
+// ...
+class SettingsController extends Controller
+{
+    public function actionSave()
+    {
+        // Check if a layout already exists in config:
+        if ($currentLayout = Craft::$app->getProjectConfig()->get('myplugin.product.fieldlayout')) {
+            $uid = ArrayHelper::firstKey($currentLayout);
+        } else {
+            // Nope! We need a new UID:
+            $uid = StringHelper::UUID();
+        }
+
+        Craft::$app->getProjectConfig()->set($key, [
+            $uid => $layout->getConfig(),
+        ]);
+
+        return $this->asModelSuccess(Craft::t('myplugin', 'Field layout saved.'), $layout);
+    }
+}
+```
+
+#### Single Field Layouts
+
+For element types that only require a single field layout, you can look them up with just the class name—its ID is irrelevant:
+
+```php
+public function getFieldLayout()
+{
+    return \Craft::$app->fields->getLayoutByType(self::class);
+}
+```
+
+#### Multiple Field Layouts
+
+In Craft, some element types define multiple field layouts: entry field layouts are defined for each entry type; asset field layouts are defined for each asset volume, etc. Plugins can provide the same functionality, so long as they’re able to reliably match an element with a layout.
+
+Looking at entries again, each element keeps track of its entry type, and in turn, a field layout.
 
 Or, if the layout is being used by a configurable component stored in [project config](project-config.md) (as entry types and category groups are), you can add the field layout to its config, and save it alongside your component.
 
@@ -391,6 +504,8 @@ public function saveComponent($myComponent)
 
 public function handleChangedComponent(ConfigEvent $event)
 {
+    $data = $event->newValue;
+
     // ...
 
     if (!empty($data['fieldLayouts'])) {
@@ -423,10 +538,6 @@ public function handleDeletedComponent(ConfigEvent $event)
 }
 ```
 
-Rather than only having one field layout for your entire element type, you can also manage multiple field layouts, if needed. For example, entry field layouts are defined for each entry type; asset field layouts are defined for each asset volume, etc.
-
-You can set that up however you want. Just make sure you’re passing the right field layout into the `fieldLayout` key when rendering the field layout designer.
-
 #### Associating Elements to their Field Layouts
 
 Elements’ `getFieldLayout()` method is responsible for returning its associated field layout (if there is one). By default, it will check a `$fieldLayoutId` property on the element. If set, it will return the field layout with the same ID. Therefore it’s recommended that you set the `$fieldLayoutId` property on your elements when saving them.
@@ -439,38 +550,35 @@ $product->fieldLayoutId = $productType->fieldLayoutId;
 
 If the `$fieldLayoutId` property is set, <craft4:craft\services\Elements::saveElement()> will store it in the `elements.fieldLayoutId` column in the database, and your elements will be re-populated with the values when they are fetched, down the road.
 
-Alternatively, you can override the `getFieldLayout()` method, and fetch/return the field layout yourself. This might be preferable if your element type only has a single field layout (like user accounts).
+Alternatively, you can override the `getFieldLayout()` method, and fetch/return the field layout yourself. This might be preferable if your element type only has a single field layout (like user accounts):
 
-```php
-public function getFieldLayout()
-{
-    return \Craft::$app->fields->getLayoutByType(Product::class);
-}
-```
+
+The returned layout can be determined by other factors
 
 See [Edit Page](#edit-page) to learn how to create an edit page for your elements, based on their field layout.
 
-#### Saving Custom Field Values
+
+### Saving Custom Field Values
 
 When saving values on a custom field, you may use the [`setFieldValue()`](craft4:craft\base\ElementInterface::setFieldValue()) and [`setFieldValues()`](craft4:craft\base\ElementInterface::setFieldValues()) methods or directly access the field handle as a property on the element object.
 In this example, we’re setting and saving custom field values for an [Entry](craft4:craft\elements\Entry) element:
 
 ::: code
 ```php Single Value
-// field handle
+// Direct assignment:
 $entry->myCustomField = 'foo';
 
-// method
+// Via helper method:
 $entry->setFieldValue('myCustomField', 'foo');
 
 \Craft::$app->elements->saveElement($entry);
 ```
 ```php Multiple Values
-// field handle
+// Direct assignment:
 $entry->myCustomField = 'foo';
 $entry->myOtherCustomField = 'bar';
 
-// method
+// Via bulk method:
 $entry->setFieldValues([
     'myCustomField' => 'foo',
     'myOtherCustomField' => 'bar',
@@ -480,13 +588,9 @@ $entry->setFieldValues([
 ```
 :::
 
-::: warning
-Prior to Craft 3.7.21, it was only safe to set field values with the `setFieldValue()` and `setFieldValues()` methods to ensure values were normalized and marked as dirty for [delta saves](field-types.md#supporting-delta-saves).
-:::
-
 #### Validating Required Custom Fields
 
-Required custom fields are only enforced when the element is saved using the `live` validation scenario. To make sure required custom fields are validated, set the scenario before calling `saveElement()`:
+Required custom fields are only enforced when the element is saved using the `live` [validation scenario](guide:structure-models#scenarios). Set the scenario before calling `saveElement()`:
 
 ```php
 $element->setScenario(\craft\base\Element::SCENARIO_LIVE);

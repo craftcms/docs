@@ -3,7 +3,7 @@ module.exports = {
   "my-base64-data": { title: "Replace this with your base64-encoded string." },
   "my-field-handle": { title: "Replace this with your kebab-case field handle." },
   "my-machine": { title: "Replace with the name of your machine, using only letters, numbers, underscores, and hyphens." },
-  "my-plugin-handle": { title: "Replace this with your kebab-case plugin handle." },
+  "my-plugin-handle": { title: "Replace this with your kebab-case plugin handle or module ID." },
   "my-project.tld": { title: "Replace with your site’s hostname." },
   "myAssetsField": { title: "Replace with your Assets field handle." },
   "myEntriesField": { title: "Replace with your Entries field handle." },

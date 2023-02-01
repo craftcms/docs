@@ -42,10 +42,6 @@ To create a plugin, create a new directory for it somewhere on your computer. A 
 
 The name of your plugin directory doesn’t matter. Just choose something that is easy to identify.
 
-::: tip
-Use [pluginfactory.io](https://pluginfactory.io/) to create your plugin’s scaffolding with just a few clicks.
-:::
-
 ## composer.json
 
 Create a `composer.json` file at the root of your plugin directory, and use this template as a starting point:
