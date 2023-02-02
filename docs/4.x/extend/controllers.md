@@ -70,13 +70,12 @@ curl -X POST https://my-project.tld/actions/my-plugin-handle/widgets/new
 
 Each URL segment follows [Yii’s conventions](guide:structure-controllers) and is lower-kebab-cased:
 
-- 
 - Plugin handle (`my-plugin-handle`, from [composer.json](plugin-guide.md#composer-json)) or Module ID (`my-module`, from [config/app.php](module-guide.md#update-the-application-config))
 - Controller `SuperWidgetController` becomes `super-widget`
 - Action `SuperWidgetController::actionReticulateWidget()` becomes `reticulate-widget`
 
 ::: tip
-The “Action Trigger” here can be customized with the <config4:actionTrigger> config setting. This setting has no effect on the `action` _query_ or _body parameter_, though.
+The “Action Trigger” is the only exception to this rule, and can be customized with the <config4:actionTrigger> config setting. This setting has no effect on the `action` _query_ or _body parameter_, though.
 :::
 
 ### Custom Routes
