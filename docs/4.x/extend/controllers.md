@@ -55,7 +55,7 @@ public function actionFoo()
 There are several ways to access your controller action in a request.
 
 ::: tip
-Our main article on [using controller actions](../controller-actions.md) lives in the main documentation. Everything that applies to built-in controllers holds true for those provided by a plugin.
+More information on [using controller actions](../dev/controller-actions.md) lives in the main documentation. Everything that applies to built-in controllers holds true for those provided by a plugin.
 :::
 
 ### The `actions/<action-path>` Route
