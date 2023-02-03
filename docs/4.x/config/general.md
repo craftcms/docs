@@ -2132,6 +2132,13 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 CRAFT_OMIT_SCRIPT_NAME_IN_URLS=1
 ```
 :::
+```
+
+::: tip
+Even when this is set to `true`, the script name could still be included in some action URLs.
+If you want to ensure that `index.php` is fully omitted from **all** generated URLs, set the <config4:pathParam>
+config setting to `null`.
+:::
 
 
 
