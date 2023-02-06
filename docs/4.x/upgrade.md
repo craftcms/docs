@@ -183,16 +183,20 @@ Some PHP constants have been deprecated in Craft 4, and will no longer work in C
 
 ### Templating
 
+Craft 4 comes with [Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG), meaning some [tags](#tags), [functions](#functions), [global variables](#variables), and [operators](#operators) have changed. You may also need to review templates for the following:
+
+- Due to changes in <craft4:craft\elements\db\ElementQuery>, the special [`loop` variable](https://twig.symfony.com/doc/3.x/tags/for.html#the-loop-variable) in `{% for %}` tags may be missing some properties when using an element query, directly. Call a [query execution method](./element-queries.md#executing-element-queries) like `.all()` or `.collect()` to ensure you are dealing with an array or object that implements the `Countable` interface.
+
 #### Tags
 
-[Twig 3](https://github.com/twigphp/Twig/blob/3.x/CHANGELOG) has removed some template tags:
+The following template tags have been removed:
 
 | Old Tag           | What to do instead
 | ----------------- | ------------------------
 | `{% spaceless %}` | `{% apply spaceless %}`
 | `{% filter %}`    | `{% apply %}`
 
-Twig 3 also removed support for the `if` param in `{% for %}` tags, but you can use `|filter` instead:
+The `if` param in `{% for %}` tags has also been removed, but `|filter` can be used in its place:
 
 ```twig
 {# Craft 3 #}
@@ -245,6 +249,8 @@ Some template functions have been removed completely:
 
 #### Variables
 
+Certain services were exposed via the `craft` variable in Twig (an instance of <craft4:craft\web\twig\CraftVariable>) for greater compatibility with Craft 2 templates, but those have been removed in favor of accessing them via the `craft.app` variable:
+
 | Old Template Variable     | What to do instead
 | ------------------------- | ---------------------------------------------
 | `craft.categoryGroups`    | `craft.app.categories`
@@ -267,6 +273,7 @@ Some template functions have been removed completely:
 
 ::: tip Reading Feeds?
 You can use [dodecastudio/craft-feedreader](https://github.com/dodecastudio/craft-feedreader) as a drop-in replacement for Craft’s removed feed service:
+
 ```twig
 {# Craft 3 #}
 {% set feed = craft.app.feeds.getFeed('https://craftcms.com/blog.rss') %}
