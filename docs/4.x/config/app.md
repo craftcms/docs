@@ -464,16 +464,23 @@ You can configure a custom mutex driver by configuring the `mutex` component’s
 // Use mutex driver provided by yii2-redis
 return [
     'components' => [
-        'mutex' => [
-            'mutex' => [
-                'class' => yii\redis\Mutex::class,
-                'redis' => [
-                    'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
-                    'port' => 6379,
-                    'password' => App::env('REDIS_PASSWORD') ?: null,
+        'mutex' => function() {
+            $config = [
+                'mutex' => [
+                    'class' => yii\redis\Mutex::class,
+                    'redis' => [
+                        'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
+                        'port' => 6379,
+                        'password' => App::env('REDIS_PASSWORD') ?: null,
+                        // set the max duration to 15 minutes for console requests
+                        'expire' => Craft::$app->request->isConsoleRequest ? 900 : 30,
+                    ],
                 ],
-            ],
-        ],
+            ];
+
+            // Return the initialized component:
+            return Craft::createObject($config);
+        },
     ],
 ];
 ```
