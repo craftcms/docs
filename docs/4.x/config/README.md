@@ -358,7 +358,7 @@ Your [database connection settings](db.md) are set via the `config/db.php` file,
 
 ### URL Rules
 
-You can define custom [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
+You can define custom [URL rules](guide:runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
 
 <!-- These anchors make sure anyone landing here from an old link is taken to the new Application Configuration heading! -->
 <a name="cache-component"></a>
