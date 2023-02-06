@@ -466,6 +466,7 @@ return [
     'components' => [
         'mutex' => function() {
             $config = [
+                'class' => craft\mutex\Mutex::class,
                 'mutex' => [
                     'class' => yii\redis\Mutex::class,
                     // set the max duration to 15 minutes for console requests
