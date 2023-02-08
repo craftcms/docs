@@ -1990,7 +1990,7 @@ control panel due to URI conflicts with actual folders/files in your main web ro
 ->cpTrigger(null)
 ```
 ```shell Environment Override
-CRAFT_CP_TRIGGER=null
+CRAFT_CP_TRIGGER=
 ```
 :::
 
@@ -2212,7 +2212,7 @@ RewriteRule (.+) index.php [QSA,L]
 ->pathParam(null)
 ```
 ```shell Environment Override
-CRAFT_PATH_PARAM=null
+CRAFT_PATH_PARAM=
 ```
 :::
 
@@ -2633,7 +2633,7 @@ The name of the PHP session cookie.
 ->phpSessionName(null)
 ```
 ```shell Environment Override
-CRAFT_PHP_SESSION_NAME=null
+CRAFT_PHP_SESSION_NAME=
 ```
 :::
 
