@@ -28,10 +28,6 @@ my-project/
 └── ...
 ```
 
-::: warning
-Modules generated with [pluginfactory.io](https://pluginfactory.io/) are only compatible with Craft 3. You may need to apply some of PHP 8’s type declarations to make its output compatible with Craft 4.
-:::
-
 ## Set up class autoloading
 
 Next up, you need to tell Composer how to find your module’s classes by setting the [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) field in your project’s `composer.json` file. For example, if your module’s namespace is `foo`, and it’s located at `modules/foo/`, this is what you should add:
@@ -54,26 +50,6 @@ composer dump-autoload -a
 ```
 
 That will tell Composer to update its class autoloader script based on your new `autoload` mapping.
-
-## Update the application config
-
-You can add your module to your project’s [application configuration](../config/#application-configuration) by listing it in the [modules](yii2:yii\base\Module::modules) and [bootstrap](yii2:yii\base\Application::bootstrap) arrays. For example, if your module ID is `foo` and its Module class name is `foo\Module`, this is what you should add to `config/app.php`:
-
-```php
-return [
-    // ...
-    'modules' => [
-        'foo' => foo\Module::class,
-    ],
-    'bootstrap' => [
-        'foo',
-    ],
-];
-```
-
-::: tip
-If your module doesn’t need to get loaded on every request, you can remove its ID from the `bootstrap` array.
-:::
 
 ## The Module class
 
@@ -108,8 +84,59 @@ class Module extends \yii\base\Module
 }
 ```
 
-Replace `foo` with your module’s actual namespace, and `'@foo'` with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases) name based on your actual namespace (with any `\`s converted to `/`s).
+Replace `foo` with your module’s actual namespace, and `'@foo'` with an [alias](guide:concept-aliases) name based on your actual namespace (with any `\`s converted to `/`s).
+
+### Initialization
+
+Most initialization logic belongs in your module’s `init()` method.
+
+However, there are some situations where this doesn’t guarantee a certain part of the application is ready (another plugin, for instance). Conversely, a module that isn’t bootstrapped at the beginning of a request may have `init()` called too late to listen to <craft4:craft\web\Application::EVENT_INIT>, and would never be notified that the app is indeed ready.
+
+In those cases, it’s best to register a callback via <craft4:craft\base\ApplicationTrait::onInit()>:
+
+```php
+<?php
+namespace foo;
+
+use Craft;
+
+class Module extends \yii\base\Module
+{
+    public function init()
+    {
+        // ...
+
+        // Defer most setup tasks until Craft is fully initialized:
+        Craft::$app->onInit(function() {
+            // ...
+        });
+    }
+}
+```
+
+If Craft has already fully initialized, the callback will be invoked immediately.
+
+### Update the application config
+
+You can add your module to your project’s [application configuration](../config/#application-configuration) by listing it in the [modules](yii2:yii\base\Module::modules) and [bootstrap](yii2:yii\base\Application::bootstrap) arrays. For example, if your module ID is `foo` and its Module class name is `foo\Module`, this is what you should add to `config/app.php`:
+
+```php{4,7}
+return [
+    // ...
+    'modules' => [
+        'foo' => foo\Module::class,
+    ],
+    'bootstrap' => [
+        'foo',
+    ],
+];
+```
+
+::: tip
+If your module doesn’t need to get loaded on every request, you can remove its ID from the `bootstrap` array. If you end up using any event listeners in your module’s `init()` method, it should be loaded on every request.
+:::
+
 
 ## Further Reading
 
-To learn more about modules, see the [Yii documentation](https://www.yiiframework.com/doc/guide/2.0/en/structure-modules).
+To learn more about modules, see the [Yii documentation](guide:structure-modules).

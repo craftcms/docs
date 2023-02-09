@@ -72,7 +72,6 @@ Filter | Description
 [round](https://twig.symfony.com/doc/2.x/filters/round.html) | Rounds a number.
 [rss](#rss) | Converts a date to RSS date format.
 [slice](https://twig.symfony.com/doc/2.x/filters/slice.html) | Extracts a slice of a string or array.
-[slug](https://twig.symfony.com/doc/3.x/filters/slug.html) | Transforms a given string into another string that only includes safe ASCII characters.
 [snake](#snake) | Formats a string into “snake_case”.
 [sort](https://twig.symfony.com/doc/2.x/filters/sort.html) | Sorts an array.
 [spaceless](https://twig.symfony.com/doc/2.x/filters/spaceless.html) | Removes whitespace between HTML tags.
@@ -996,13 +995,20 @@ Runs the given text through HTML Purifier.
 {{ user.bio|purify }}
 ```
 
-You can specify a custom HTML Purifier config file as well:
+You can specify a custom [HTML Purifier config](http://htmlpurifier.org/live/configdoc/plain.html) file as well:
 
 ```twig
 {{ user.bio|purify('user_bio') }}
 ```
 
-That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`.
+That will configure HTML Purifier based on the settings defined by `config/htmlpurifier/user_bio.json`. For example, to allow anchors and paragraph elements only, with [nofollow](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/rel#attr-nofollow) set on all the anchors:
+
+```json
+{
+  "HTML.AllowedElements": "p, a",
+  "HTML.Nofollow": true,
+}
+```
 
 ## `push`
 

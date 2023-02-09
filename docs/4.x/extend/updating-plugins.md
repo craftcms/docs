@@ -369,8 +369,8 @@ public function actionSave() {
     }
 
     return $this->asModelSuccess(
-        $asset,
-        Craft::t('app', 'Asset saved.'),
+        $myElement,
+        Craft::t('app', 'Element saved.'),
         data: [
             'id' => $myElement->id,
             'title' => $myElement->title,
@@ -518,8 +518,7 @@ The following events have been moved or renamed:
 | Old                                                                                                                                | Renamed to
 | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------
 | [Assets::EVENT_GET_ASSET_THUMB_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_THUMB_URL)                                       | [Assets::EVENT_DEFINE_THUMB_URL](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_URL)
-| [Assets::EVENT_GET_ASSET_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_URL)                                                   | [Assets::EVENT_DEFINE_ASSET_URL](craft4:craft\services\Assets::EVENT_DEFINE_ASSET_URL)
-| [Assets::EVENT_GET_THUMB_PATH](craft3:craft\services\Assets::EVENT_GET_THUMB_PATH)                                                 | [Assets::EVENT_DEFINE_THUMB_PATH](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_PATH)
+| [Assets::EVENT_GET_ASSET_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_URL)                                                   | [Asset::EVENT_DEFINE_URL](craft4:craft\elements\Asset::EVENT_DEFINE_URL)
 | [AssetTransforms::CONFIG_TRANSFORM_KEY](craft3:craft\services\AssetTransforms::CONFIG_TRANSFORM_KEY)                               | [ProjectConfig::PATH_IMAGE_TRANSFORMS](craft4:craft\services\ProjectConfig::PATH_IMAGE_TRANSFORMS)
 | [AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM)     | [ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM)
 | [AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM)       | [ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM)
@@ -541,6 +540,7 @@ The following events have been moved or renamed:
 
 | Old                                                                                                                                | What to do instead
 | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------
+| [Assets::EVENT_GET_THUMB_PATH](craft3:craft\services\Assets::EVENT_GET_THUMB_PATH)                                                 | [Assets::EVENT_DEFINE_THUMB_URL](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_URL)
 | [AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS](craft3:craft\services\AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS)             | Transforms are now invalidated, but no event is triggered _after_ that happens.
 | [Element::EVENT_DEFINE_IS_DELETABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_DELETABLE)                                         | [Element::EVENT_AUTHORIZE_DELETE](craft4:craft\base\Element::EVENT_AUTHORIZE_DELETE)
 | [Element::EVENT_DEFINE_IS_EDITABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_EDITABLE)                                           | [Element::EVENT_AUTHORIZE_VIEW](craft4:craft\base\Element::EVENT_AUTHORIZE_VIEW) and [Element::EVENT_AUTHORIZE_SAVE](craft4:craft\base\Element::EVENT_AUTHORIZE_SAVE)

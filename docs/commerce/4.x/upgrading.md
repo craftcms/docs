@@ -71,7 +71,7 @@ You can fetch that list of available countries via the new [Store](commerce4:cra
 {% set countries = craft.commerce.countries.allEnabledCountriesAsList %}
 
 {# Craft 4 #}
-{% set countries = craft.commerce.getStore().store.getCountriesList() %}
+{% set countries = craft.commerce.getStore().getStore().getCountriesList() %}
 ```
 ```php
 // Craft 3

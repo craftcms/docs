@@ -1316,6 +1316,7 @@ This is the interface implemented by all assets.
 | `srcset`| `String` | Returns a `srcset` attribute value based on the given widths or x-descriptors.
 | `url`| `String` | The full URL of the asset. This field accepts the same fields as the `transform` directive.
 | `mimeType`| `String` | The file’s MIME type, if it can be determined.
+| `format`| `String` | Returns the file’s format.
 | `path`| `String!` | The asset’s path in the volume.
 | `dateModified`| `DateTime` | The date the asset file was last modified.
 | `prev`| `AssetInterface` | Returns the previous element relative to this one, from a given set of criteria.
@@ -1497,6 +1498,8 @@ This is the interface implemented by all categories.
 | `groupId`| `Int!` | The ID of the group that contains the category.
 | `groupHandle`| `String!` | The handle of the group that contains the category.
 | `children`| `[CategoryInterface!]!` | The category’s children.
+| `descendants`| `[CategoryInterface!]!` | The category’s descendants, if the section is a structure. Accepts the same arguments as the `entries` query.
+| `ancestors`| `[CategoryInterface!]!` | The category’s ancestors, if the section is a structure. Accepts the same arguments as the `entries` query.
 | `parent`| `CategoryInterface` | The category’s parent.
 | `url`| `String` | The element’s full URL
 | `localized`| `[CategoryInterface!]!` | The same element in other locales.

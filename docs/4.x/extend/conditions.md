@@ -6,22 +6,22 @@ The Craft CMS condition builder is a powerful tool that helps content editors an
 
 There are several places you can find the condition builder in action:
 
-- Craft’s conditional field layouts, which make it possible to display specific tabs or fields only when precise criteria are met
-- Craft’s Smart Sources, which are optional element index sources customized to display whatever elements meet the criteria you set
-- Craft’s search field filters
-- Craft Commerce’s promotion and shipping rules
+- Conditional field layouts, which make it possible to display specific tabs or fields only when precise criteria are met;
+- Custom [sources](../elements.md#sources), which are optional element index sources customized to display whatever elements meet the criteria you set;
+- Search field filters;
+- Craft Commerce’s promotion and shipping rules;
 
 ## Architecture
 
 A condition is a group of one or more condition rules that, when combined, can perform a collective task like modifying an element query or matching an element. The rules are available for a control panel user to configure, should they decide to utilize a condition wherever you’ve made it available.
 
-The “condition builder” is the Htmx-powered UI framework the control panel user interacts with in their browser.
+The “condition builder” is the [Htmx](https://htmx.org/)-powered UI framework the control panel user interacts with in their browser.
 
-Custom fields may define condition rule types to be pulled into element conditions. (Most included field types take advantage of this and offer examples.)
+Custom fields may define condition rule types to be pulled into element conditions. Most built-in field types take advantage of this and a great source of examples.
 
-Element types can register their own conditions and condition rules for attribute types.
+Element types also have an opportunity to register their own conditions and condition rules for native attribute types.
 
-At a high level, a condition rule doesn’t know anything about how it will be used. A base condition class does most of the work to stitch things together and define UI. This base condition class is extended by most of Craft’s included conditions, and all of these pieces are integral parts of the condition builder framework.
+At a high level, a condition rule doesn’t know anything about how it will be used. The <craft4:craft\base\conditions\BaseCondition> class does most of the work to stitch things together and construct the appropriate UI. This base condition class is extended by most of Craft’s included conditions, and all of these pieces are integral parts of the condition builder framework.
 
 ## Condition Builder Framework
 
@@ -31,20 +31,20 @@ Conditions need to implement [ConditionInterface](craft4:craft\base\conditions\C
 
 Condition rules must implement [ConditionRuleInterface](craft4:craft\base\conditions\ConditionRuleInterface). You’ll find a generic [BaseConditionRule](craft4:craft\base\conditions\BaseConditionRule) implementation along with a handful of base condition rules in `base/conditions/` that are geared for common rule formats.
 
-A condition builder’s HTML can be generated via `$condition->getBuilderHtml()`, which supports a few builder-specific options:
+The HTML representation of a condition builder can be generated with `$condition->getBuilderHtml()`, which supports a few builder-specific options:
 
-- `mainTag` – The container tag type (`form` by default)
-- `id` – The container ID
-- `sortable` – Whether the rules should be user-sortable (`true` by default)
-- `singleUseTypes` – Whether rules can only be used once within the condition
-- `projectConfigTypes` – Whether to limit the available rules to those which can be stored in the project config (needed for custom sources)
+- `mainTag` – The container tag type (`form`, by default);
+- `id` – The HTML container’s `id` attribute;
+- `sortable` – Whether the rules should be user-sortable (`true` by default);
+- `singleUseTypes` – Whether rules can only be used once within the condition;
+- `projectConfigTypes` – Whether to limit the available rules to those which can be stored in the project config (needed for custom sources);
 
 ### Element Query Conditions
 
-Element types can provide their own custom condition classes which extend [ElementCondition](craft4:craft\elements\conditions\ElementCondition). Doing so will give them a chance to include additional element type-specific rules, by overriding [conditionRuleTypes()](craft4:craft\elements\conditions\ElementCondition::conditionRuleTypes()) (see [EntryCondition](craft4:\craft\elements\conditions\entries\EntryCondition) for an example).
+[Element types](./element-types.md) can provide their own custom condition classes which extend [ElementCondition](craft4:craft\elements\conditions\ElementCondition). Doing so will give them a chance to include additional element type-specific rules, by overriding [conditionRuleTypes()](craft4:craft\elements\conditions\ElementCondition::conditionRuleTypes()) (see [EntryCondition](craft4:craft\elements\conditions\entries\EntryCondition) for an example).
 
-The element type can return an instance of it from its static `createCondition()` method.
+The element type should return an instance of its custom condition class from a static `createCondition()` method.
 
 ### Field Condition Rules
 
-Field types can provide a rule type which implements [FieldConditionRuleInterface](craft4:\craft\fields\conditions\FieldConditionRuleInterface) and uses [FieldConditionRuleTrait](craft4:craft\fields\conditions\FieldConditionRuleTrait).
+[Field types](./field-types.md) can provide a rule type which implements [FieldConditionRuleInterface](craft4:\craft\fields\conditions\FieldConditionRuleInterface) and uses [FieldConditionRuleTrait](craft4:craft\fields\conditions\FieldConditionRuleTrait).

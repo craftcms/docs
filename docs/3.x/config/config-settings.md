@@ -1590,6 +1590,12 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule (.+) /index.php?p= [QSA,L]
 ```
 
+::: tip
+Even when this is set to `true`, the script name could still be included in some action URLs.
+If you want to ensure that `index.php` is fully omitted from **all** generated URLs, set the <config3:pathParam>
+config setting to `null`.
+:::
+
 
 
 ### `pageTrigger`

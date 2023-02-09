@@ -49,6 +49,7 @@ See the [Console Commands](extend/commands.md) page in the _Extending Craft_ sec
 
 While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
+<!-- textlint-disable -->
 <!-- BEGIN COMMANDS -->
 
 ## `cache`
@@ -468,6 +469,32 @@ id
 
 
 <h4 id="elements-restore-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
+## `exec`
+
+
+<h3 id="exec-exec">
+    <a href="#exec-exec" class="header-anchor">#</a>
+    <code>exec/exec</code>
+</h3>
+
+
+Executes a PHP statement and outputs the result.
+
+<h4 id="exec-exec-parameters" class="command-subheading">Parameters</h4>
+
+command
+: 
+
+
+
+<h4 id="exec-exec-options" class="command-subheading">Options</h4>
 
 
 --isolated
@@ -1736,6 +1763,10 @@ Applies project config file changes.
 
 --force
 : Whether every entry change should be force-applied.
+
+
+--quiet
+: Whether to reduce the command output.
 
 
 --isolated
@@ -3240,6 +3271,29 @@ user
 
 
 
+<h3 id="users-unlock">
+    <a href="#users-unlock" class="header-anchor">#</a>
+    <code>users/unlock</code>
+</h3>
+
+
+Unlocks a user's account.
+
+<h4 id="users-unlock-parameters" class="command-subheading">Parameters</h4>
+
+user
+:  The ID, username, or email address of the user account.
+
+
+
+<h4 id="users-unlock-options" class="command-subheading">Options</h4>
+
+
+--isolated
+: 
+
+
+
 ## `utils/ascii-filenames`
 
 
@@ -3447,3 +3501,5 @@ Updates all users’ usernames to ensure they match their email address.
 :
 
 <!-- END COMMANDS -->
+
+<!-- textlint-enable -->

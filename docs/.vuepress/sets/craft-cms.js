@@ -19,7 +19,11 @@ module.exports = {
         {
           title: "Extending Craft",
           collapsable: false,
-          children: [["", "Introduction"], "coding-guidelines"]
+          children: [
+            ["", "Introduction"],
+            "coding-guidelines",
+            "generator",
+          ]
         },
         {
           title: "Module Development",
