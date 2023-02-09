@@ -71,7 +71,7 @@ Information on [using controller actions](../dev/controller-actions.md) lives in
 
 Passing an [`action` param](../dev/controller-actions.md#making-requests) in a <badge vertical="baseline" type="verb">GET</badge> request’s query string or a <badge vertical="baseline" type="verb">POST</badge> request’s body lets you tell Craft exactly what controller and action you want to run.
 
-The most common way to do this is with an HTML form, but it’s also possible via [AJAX](../dev/controller-actions.md#ajax):
+The most common way to do this is with an HTML form, but it’s also possible via [Ajax](../dev/controller-actions.md#ajax):
 
 ```twig{3}
 <form method="POST">
