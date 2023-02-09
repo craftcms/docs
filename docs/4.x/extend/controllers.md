@@ -345,11 +345,11 @@ The lower-level <craft4:craft\web\Controller::asSuccess()> and <craft4:craft\web
 Actions can also return entire files, rather than HTML or JSON:
 
 ```php
-return $this->getResponse()->sendFile(Craft::getAlias('@storage/path/to/temp-file.pdf'), 'Your Invoice.pdf', );
+return $this->response->sendFile(Craft::getAlias('@storage/path/to/temp-file.pdf'), 'Your Invoice.pdf', );
 
 // ...or...
 
-return $this->getResponse()->sendContentAsFile($csv, 'report.csv');
+return $this->response->sendContentAsFile($csv, 'report.csv');
 ```
 
 ::: tip
