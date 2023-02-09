@@ -124,10 +124,10 @@ public function handleDeletedProductType(ConfigEvent $event)
 At this point, if product types were to be added or removed from the project config manually, those changes should be syncing with the database, and any `afterSaveProductType`, `beforeApplyProductTypeDelete`, and `afterDeleteProductType` event listeners will be triggered.
 
 ::: tip
-If your component config references another component config, you can ensure that the other config changes are processed first by calling [ProjectConfig::processConfigChanges()](craft4:craft\services\ProjectConfig::processConfigChanges()) within your handler method.
+If your component config references another component config, you can ensure that the other config changes are processed first by calling [ProjectConfig::processConfigChanges()](craft4:craft\services\ProjectConfig::processConfigChanges()) (or one of the [ProjectConfig](craft4:craft\helpers\ProjectConfig) helper’s shortcut methods) within your handler.
 
 ```php
-Craft::$app->projectConfig->processConfigChanges('productTypeGroups');
+Craft::$app->getProjectConfig()->processConfigChanges('productTypeGroups');
 ```
 :::
 
@@ -157,14 +157,6 @@ public function saveProductType($productType)
         $productType->uid = Db::uidById('{{%plugin_producttypes}}', $productType->id);
     }
 
-    // Fire a 'beforeSaveProductType' event?
-    if ($this->hasEventHandlers('beforeSaveProductType')) {
-        $this->trigger('beforeSaveProductType', new ProductTypeEvent([
-            'productType' => $productType,
-            'isNew' => $isNew,
-        ]));
-    }
-
     // Make sure it validates
     if (!$productType->validate()) {
         return false;
@@ -187,18 +179,17 @@ public function saveProductType($productType)
 
 public function deleteProductType($productType)
 {
-    // Fire a 'beforeDeleteProductType' event?
-    if ($this->hasEventHandlers('beforeDeleteProductType')) {
-        $this->trigger('beforeDeleteProductType', new ProductTypeEvent([
-            'productType' => $productType,
-        ]));
-    }
-
-    // Remove it from the project config
     $path = "myplugin.productTypes.{$productType->uid}";
+
     Craft::$app->getProjectConfig()->remove($path);
 }
 ```
+
+::: tip
+Plugins can be made extensible themselves by adopting an [interface-oriented](./services.md#interface-oriented-methods) control flow, as opposed to the [class-oriented](./services.md#class-oriented-methods) control flow demonstrated above.
+
+This may involve adding your own [Event](yii2:yii\base\Event)s, or defining a class `interface` that other developers can adopt. [Gateways](/commerce/4.x/gateways.md) are an example of this, in Commerce.
+:::
 
 ## Project Config Migrations
 
