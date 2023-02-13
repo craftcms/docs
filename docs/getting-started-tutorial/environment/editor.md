@@ -2,21 +2,26 @@
 
 The files Craft installs on your computer are all stored in plain text.
 
-One benefit of plain text files is they’re extremely portable. You don’t need any special software to open and edit them, so anyone working with your site’s code could use their favorite application. We’ll start editing a few of these files to configure our site, and others later to customize what it looks like.
+One benefit of plain text files (as opposed to, say, an application or “binary”) is their portability. They can be easily downloaded, stored, edited, and version-controlled—and applications to help with these tasks are widely available.
 
-While you could get away with using TextEdit.app, Notepad, or Text Editor, it’s a good idea to use a code editor because it’ll make things easier later on. Code editors...
+::: tip
+“Plain text” here is an umbrella term, covering files containing any number number of languages. In the course of working with Craft, you might edit PHP scripts, stylesheets, HTML and Twig templates, or JavaScript files—but they're all ultimately just _text_ that targets a different interpreter.
+:::
 
-- make it easy to work with multiple files
-- add color coding and helpful tools depending on the file type you’re working with
-- handle invisible characters like spaces and returns carefully, which can cause annoying problems across operating systems
-- usually include convenient features and plugins for, as you might expect, working with code
+Any program that can open text files will allow you to complete this tutorial, but a specific subset of text editors will make your journey significantly easier. An editor intended for working with code will…
 
-An excellent, popular code editor is [Visual Studio Code](https://code.visualstudio.com/), which is available for free on macOS, Windows, and Linux.
+- …allow you to open multiple files at the same time;
+- …show you the structure of a project folder;
+- …add “syntax highlighting” to files containing code;
+- …handle invisible characters like spaces and newlines carefully, which _can_ cause annoying problems across operating systems;
+- include other specialized features (or plugins) for dealing with code like built-in reference manuals and auto-completion;
+
+A popular, cross-platform code editor is [Visual Studio Code](https://code.visualstudio.com/).
 
 ![](../images/vs-code-highlighting.png)
 
-Some PHP developers prefer [PhpStorm](https://www.jetbrains.com/phpstorm/), a more complex and specialized commercial Integrated Development Environment (IDE) specifically geared toward PHP development.
+Some Craft developers prefer [PhpStorm](https://www.jetbrains.com/phpstorm/), a _commercial_ Integrated Development Environment or “IDE,” geared toward PHP development.
 
 ![](../images/phpstorm-highlighting.png)
 
-There are plenty of other options you could use, just know the rest of our steps and screenshots in this tutorial will assume you’re using VS Code.
+There are plenty of other options available—just know the rest of our steps and screenshots in this tutorial will assume you’re using Visual Studio Code.

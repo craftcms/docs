@@ -10,7 +10,7 @@ module.exports = {
     "/": [
       {
         title: "Introduction",
-        collapsable: true,
+        collapsable: false,
         children: [""]
       },
       {
@@ -19,8 +19,8 @@ module.exports = {
         children: [
           "environment/",
           "environment/terminal",
-          "environment/editor",
-          "environment/stack"
+          "environment/stack",
+          "environment/editor"
         ]
       },
       {
