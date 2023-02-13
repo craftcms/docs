@@ -461,7 +461,28 @@ Notice how our loop uses the keys (`p`) _and_ values (`url`) from the returned a
 
 ## Search
 
-See the main article on Craft’s [search](./searching.md) system to learn about the supported syntaxes for plain-text search.
+Craft gives you access to its [search](./searching.md) index from any element query. Use the `search` param to narrow results by keywords:
+
+::: code
+```twig{5}
+{% set q = craft.app.request.getQueryParam('search') %}
+
+{% set results = craft.entries
+  .section('news')
+  .search(q)
+  .all() %}
+```
+```php{5}
+$q = Craft::$app->getRequest()->getQueryParam('search');
+
+$results = Entry::find()
+    ->section('news')
+    ->search($q)
+    ->all();
+```
+:::
+
+<See path="./searching.md" description="Learn about the supported syntaxes for plain-text search." />
 
 ## Performance and Optimization
 
