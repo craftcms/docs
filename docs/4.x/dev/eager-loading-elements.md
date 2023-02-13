@@ -45,6 +45,10 @@ This template code will only cost 3 queries: one to fetch the entries, one to de
 
 ## Accessing Eager-Loaded Elements
 
+::: tip
+Eager-loaded elements are now stored as [Collections](https://packagist.org/packages/illuminate/collections), meaning they can be used just like element queries. <Since ver="4.3.0" feature="Eager loaded collections" />
+:::
+
 Accessing eager-loaded elements works a little differently than accessing lazy-loaded elements.
 
 Take a look at how we assigned the `image` variable in our examples, before and after applying the `with` param:
