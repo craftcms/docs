@@ -903,7 +903,7 @@ Craft makes editing elements frictionless by providing turn-key edit screens as 
 To give your elements dedicated edit pages, you must define a route that agrees with their `getCpEditUrl()` method. Collocate this rule with the one that defines your [index](#element-index):
 
 ```php
-$event->rules['products/<elementId:\\d+>'] = 'elements/edit';
+$event->rules['products/<elementId:\d+>'] = 'elements/edit';
 ```
 
 Craft takes care of assembling the actual edit template, through the unified [`elements/edit`](craft4:craft\web\controllers\Elements::actionEdit()) controller action.
