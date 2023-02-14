@@ -1352,6 +1352,7 @@ This is the interface implemented by all entries.
 | `isDraft`| `Boolean` | Returns whether this is a draft.
 | `isRevision`| `Boolean` | Returns whether this is a revision.
 | `revisionId`| `Int` | The revision ID (from the `revisions` table).
+| `revisionNotes`| `String` | The revision notes (from the `revisions` table).
 | `draftId`| `Int` | The draft ID (from the `drafts` table).
 | `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
 | `draftName`| `String` | The name of the draft.
