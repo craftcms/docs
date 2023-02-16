@@ -358,7 +358,7 @@ Your [database connection settings](db.md) are set via the `config/db.php` file,
 
 ### URL Rules
 
-You can define custom [URL rules](https://www.yiiframework.com/doc/guide/2.0/en/runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
+You can define custom [URL rules](guide:runtime-routing#url-rules) in `config/routes.php`. See [Routing](../routing.md) for more details.
 
 <!-- These anchors make sure anyone landing here from an old link is taken to the new Application Configuration heading! -->
 <a name="cache-component"></a>
@@ -449,6 +449,26 @@ $client->post('/donations', [
 
 ::: tip
 If these settings need to be changed frequently, edited by a control panel user, or don’t depend on the environment, they may be a better fit for a [Global Set](../globals.md).
+:::
+
+#### HTML Purifier
+
+JSON files containing valid [HTML Purifier configuration](https://htmlpurifier.org/live/configdoc/plain.html) can be added to `config/htmlpurifier/`.
+
+When creating a [Redactor](https://plugins.craftcms.com/redactor/) or [CKEditor](https://plugins.craftcms.com/ckeditor/) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](../dev/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
+
+A simple config that scrubs everything but paragraph and anchor tags would look like this:
+
+```json
+{
+  "HTML.AllowedElements": "p, a",
+}
+```
+
+For security, any keys _not_ set will use their [defaults](https://github.com/ezyang/htmlpurifier/blob/master/plugins/phorum/config.default.php).
+
+::: tip
+Note that HTML Purifier expresses many options with dot notation, like `HTML.AllowedElements`. These are the literal keys, not an indication that keys should be nested!
 :::
 
 ## PHP Constants

@@ -91,6 +91,46 @@ If you need to call a service method directly from your primary plugin class, yo
 $this->foo->bar()
 ```
 
+### Component Getters
+
+Components set via `setComponents()` are ultimately resolved via Yii’s [service locator](yii2:yii\di\ServiceLocator::__get()), which is why it’s possible to access them as “magic” properties.
+
+This opaque access can break some IDE’s ability to infer the correct class, so it can be helpful to provide hints in your main plugin or module class:
+
+- Use [phpDocumentor](https://www.phpdoc.org/) tags to describe these virtual properties: `@property Foo $foo`;
+- Add your own getter methods, with the correct return types;
+
+Together, this might mean your class looks like this:
+
+```php
+namespace mynamespace;
+
+use craft\base\Plugin;
+use mynamespace\services\Foo;
+
+/**
+ * My Plugin Class
+ * 
+ * @property Foo $foo
+ */
+class MyPlugin extends BasePlugin
+{
+    public function init()
+    {
+        // ...
+
+        $this->setComponents([
+            'foo' => Foo::class,
+        ]);
+    }
+
+    public function getFoo(): Foo
+    {
+        return $this->get('foo');
+    }
+}
+```
+
 ## Model Operation Methods
 
 Many service methods perform some sort of operation for a given model, such as a CRUD operation.

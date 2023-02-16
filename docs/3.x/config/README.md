@@ -168,7 +168,14 @@ Once that’s done, you can set your `cache` application component to use <craft
 <?php
 return [
     'components' => [
-        'cache' => craft\cache\DbCache::class,
+        'cache' => function() {
+            $config = [
+                'class' => craft\cache\DbCache::class,
+                'defaultDuration' => Craft::$app->config->general->cacheDuration,
+            ];
+
+            return Craft::createObject($config);
+        },
     ],
 ];
 ```
@@ -186,11 +193,16 @@ use craft\helpers\App;
 
 return [
     'components' => [
-        'cache' => [
-            'class' => yii\caching\ApcCache::class,
-            'useApcu' => true,
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
-        ],
+        'cache' => function() {
+            $config = [
+                'class' => yii\caching\ApcCache::class,
+                'useApcu' => true,
+                'keyPrefix' => Craft::$app->id,
+                'defaultDuration' => Craft::$app->config->general->cacheDuration,
+            ];
+
+            return Craft::createObject($config);
+        },
     ],
 ];
 ```
@@ -205,25 +217,30 @@ use craft\helpers\App;
 
 return [
     'components' => [
-        'cache' => [
-            'class' => yii\caching\MemCache::class,
-            'useMemcached' => true,
-            'username' => App::env('MEMCACHED_USERNAME'),
-            'password' => App::env('MEMCACHED_PASSWORD'),
-            'defaultDuration' => 86400,
-            'servers' => [
-                [
-                    'host' => 'localhost',
-                    'persistent' => true,
-                    'port' => 11211,
-                    'retryInterval' => 15,
-                    'status' => true,
-                    'timeout' => 15,
-                    'weight' => 1,
+        'cache' => function() {
+            $config = [
+                'class' => yii\caching\MemCache::class,
+                'useMemcached' => true,
+                'username' => App::env('MEMCACHED_USERNAME'),
+                'password' => App::env('MEMCACHED_PASSWORD'),
+                'defaultDuration' => 86400,
+                'servers' => [
+                    [
+                        'host' => 'localhost',
+                        'persistent' => true,
+                        'port' => 11211,
+                        'retryInterval' => 15,
+                        'status' => true,
+                        'timeout' => 15,
+                        'weight' => 1,
+                    ],
                 ],
-            ],
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
-        ],
+                'keyPrefix' => Craft::$app->id,
+                'defaultDuration' => Craft::$app->config->general->cacheDuration,
+            ];
+
+            return Craft::createObject($config);
+        },
     ],
 ];
 ```
@@ -245,11 +262,15 @@ return [
             'port' => 6379,
             'password' => App::env('REDIS_PASSWORD') ?: null,
         ],
-        'cache' => [
-            'class' => yii\redis\Cache::class,
-            'defaultDuration' => 86400,
-            'keyPrefix' => App::env('APP_ID') ?: 'CraftCMS',
-        ],
+        'cache' => function() {
+            $config = [
+                'class' => yii\redis\Cache::class,
+                'keyPrefix' => Craft::$app->id,
+                'defaultDuration' => Craft::$app->config->general->cacheDuration,
+            ];
+
+            return Craft::createObject($config);
+        },
     ],
 ];
 ```

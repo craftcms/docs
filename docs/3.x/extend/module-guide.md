@@ -24,10 +24,6 @@ my-project/
 └── ...
 ```
 
-::: tip
-Use [pluginfactory.io](https://pluginfactory.io/) to create your module’s scaffolding with just a few clicks.
-:::
-
 ## Set up class autoloading
 
 Next up, you need to tell Composer how to find your module’s classes by setting the [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) field in your project’s `composer.json` file. For example, if your module’s namespace is `foo`, and it’s located at `modules/foo/`, this is what you should add:

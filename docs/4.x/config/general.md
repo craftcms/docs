@@ -1990,7 +1990,7 @@ control panel due to URI conflicts with actual folders/files in your main web ro
 ->cpTrigger(null)
 ```
 ```shell Environment Override
-CRAFT_CP_TRIGGER=null
+CRAFT_CP_TRIGGER=
 ```
 :::
 
@@ -2133,6 +2133,12 @@ CRAFT_OMIT_SCRIPT_NAME_IN_URLS=1
 ```
 :::
 
+::: tip
+Even when this is set to `true`, the script name could still be included in some action URLs.
+If you want to ensure that `index.php` is fully omitted from **all** generated URLs, set the <config4:pathParam>
+config setting to `null`.
+:::
+
 
 
 ### `pageTrigger`
@@ -2205,7 +2211,7 @@ RewriteRule (.+) index.php [QSA,L]
 ->pathParam(null)
 ```
 ```shell Environment Override
-CRAFT_PATH_PARAM=null
+CRAFT_PATH_PARAM=
 ```
 :::
 
@@ -2626,7 +2632,7 @@ The name of the PHP session cookie.
 ->phpSessionName(null)
 ```
 ```shell Environment Override
-CRAFT_PHP_SESSION_NAME=null
+CRAFT_PHP_SESSION_NAME=
 ```
 :::
 

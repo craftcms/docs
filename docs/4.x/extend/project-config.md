@@ -4,7 +4,7 @@ If your plugin has any configurable components that store settings outside of yo
 
 ## Is Project Config Support Right for You?
 
-Before adding project config support to your component, consider the tradeoff: components that are managed by the project config [should](../project-config.md#production-changes-reverted) only be editable by admins on development environments.
+Before adding project config support to your component, consider the tradeoff: components that are managed by the project config [should](../project-config.md#production-changes-reverted) only be editable by administrators in development environments.
 
 Ask yourself:
 
@@ -12,16 +12,16 @@ Ask yourself:
 - Does it depend on anything that can be managed by non-admins?
 - Would it be cumbersome to admins’ workflows if the component could only be edited in development environments?
 
-If the answer to any of those is “yes” (now or in the foreseeable future), then it’s not a good candidate for project config support.
+If the answer to any of those is “yes” (now or in the foreseeable future), then it’s likely _not_ a good candidate for project config support. See the [scope](../project-config.md#scope) section of the main project config docs for examples of what Craft 
 
 ## Implementing Project Config Support
 
 To add project config support to a plugin, the service’s CRUD code will need to be shifted around a bit.
 
-- CRUD methods should update the Project Config, rather than changing things in the database directly.
-- Database changes should only happen as a result of changes to the Project Config.
+- CRUD methods should update the project config, rather than changing things in the database directly.
+- Database changes should only happen as a result of changes to the project config.
 
-Let’s take a look at how that might work for saving product types in Craft Commerce.
+Let’s take a look at how this might work for saving product types in Craft Commerce.
 
 ### Step 1: Listen for Config Changes
 
@@ -35,10 +35,10 @@ public function init()
 {
     parent::init();
 
-    Craft::$app->projectConfig
-        ->onAdd('productTypes.{uid}', [$this->productTypes, 'handleChangedProductType'])
-        ->onUpdate('productTypes.{uid}', [$this->productTypes, 'handleChangedProductType'])
-        ->onRemove('productTypes.{uid}', [$this->productTypes, 'handleDeletedProductType']);
+    Craft::$app->getProjectConfig()
+        ->onAdd('myplugin.productTypes.{uid}', [$this->productTypes, 'handleChangedProductType'])
+        ->onUpdate('myplugin.productTypes.{uid}', [$this->productTypes, 'handleChangedProductType'])
+        ->onRemove('myplugin.productTypes.{uid}', [$this->productTypes, 'handleDeletedProductType']);
 }
 ```
 
@@ -63,35 +63,26 @@ public function handleChangedProductType(ConfigEvent $event)
     $uid = $event->tokenMatches[0];
 
     // Does this product type exist?
-    $id = (new Query())
-        ->select(['id'])
-        ->from('{{%producttypes}}')
-        ->where(['uid' => $uid])
-        ->scalar();
-
+    $id = Db::idByUid('{{%plugin_producttypes}}', $uid);
     $isNew = empty($id);
 
-    // Insert or update its row
+    // Insert or update its row, accordingly:
     if ($isNew) {
-        Craft::$app->db->createCommand()
-            ->insert('{{%producttypes}}', [
-                'name' => $event->newValue['name'],
-                // ...
-            ])
-            ->execute();
+        Db::insert('{{%plugin_producttypes}}', [
+            'name' => $event->newValue['name'],
+            // ...
+        ]);
     } else {
-        Craft::$app->db->createCommand()
-            ->update('{{%producttypes}}', [
-                'name' => $event->newValue['name'],
-                // ...
-            ], ['id' => $id])
-            ->execute();
+        Db::update('{{%plugin_producttypes}}', [
+            'name' => $event->newValue['name'],
+            // ...
+        ], ['id' => $id]);
     }
 
     // Fire an 'afterSaveProductType' event?
     if ($this->hasEventHandlers('afterSaveProductType')) {
         $productType = $this->getProductTypeByUid($uid);
-        $this->trigger('afterSaveProductType', new ProducTypeEvent([
+        $this->trigger('afterSaveProductType', new ProductTypeEvent([
             'productType' => $productType,
             'isNew' => $isNew,
         ]));
@@ -113,19 +104,17 @@ public function handleDeletedProductType(ConfigEvent $event)
 
     // Fire a 'beforeApplyProductTypeDelete' event?
     if ($this->hasEventHandlers('beforeApplyProductTypeDelete')) {
-        $this->trigger('beforeApplyProductTypeDelete', new ProducTypeEvent([
+        $this->trigger('beforeApplyProductTypeDelete', new ProductTypeEvent([
             'productType' => $productType,
         ]));
     }
 
-    // Delete its row
-    Craft::$app->db->createCommand()
-        ->delete('{{%producttypes}}', ['id' => $productType->id])
-        ->execute();
+    // Delete its row:
+    Db::delete('{{%plugin_producttypes}}', ['id' => $productType->id]);
 
     // Fire an 'afterDeleteProductType' event?
     if ($this->hasEventHandlers('afterDeleteProductType')) {
-        $this->trigger('afterDeleteProductType', new ProducTypeEvent([
+        $this->trigger('afterDeleteProductType', new ProductTypeEvent([
             'productType' => $productType,
         ]));
     }
@@ -135,10 +124,10 @@ public function handleDeletedProductType(ConfigEvent $event)
 At this point, if product types were to be added or removed from the project config manually, those changes should be syncing with the database, and any `afterSaveProductType`, `beforeApplyProductTypeDelete`, and `afterDeleteProductType` event listeners will be triggered.
 
 ::: tip
-If your component config references another component config, you can ensure that the other config changes are processed first by calling [ProjectConfig::processConfigChanges()](craft4:craft\services\ProjectConfig::processConfigChanges()) within your handler method.
+If your component config references another component config, you can ensure that the other config changes are processed first by calling [ProjectConfig::processConfigChanges()](craft4:craft\services\ProjectConfig::processConfigChanges()) (or one of the [ProjectConfig](craft4:craft\helpers\ProjectConfig) helper’s shortcut methods) within your handler.
 
 ```php
-Craft::$app->projectConfig->processConfigChanges('productTypeGroups');
+Craft::$app->getProjectConfig()->processConfigChanges('productTypeGroups');
 ```
 :::
 
@@ -165,15 +154,7 @@ public function saveProductType($productType)
     if ($isNew) {
         $productType->uid = StringHelper::UUID();
     } else if (!$productType->uid) {
-        $productType->uid = Db::uidById('{{%producttypes}}', $productType->id);
-    }
-
-    // Fire a 'beforeSaveProductType' event?
-    if ($this->hasEventHandlers('beforeSaveProductType')) {
-        $this->trigger('beforeSaveProductType', new ProductTypeEvent([
-            'productType' => $productType,
-            'isNew' => $isNew,
-        ]));
+        $productType->uid = Db::uidById('{{%plugin_producttypes}}', $productType->id);
     }
 
     // Make sure it validates
@@ -182,16 +163,15 @@ public function saveProductType($productType)
     }
 
     // Save it to the project config
-    $path = "product-types.{$productType->uid}";
-    Craft::$app->projectConfig->set($path, [
+    $path = "myplugin.productTypes.{$productType->uid}";
+    Craft::$app->getProjectConfig()->set($path, [
         'name' => $productType->name,
         // ...
     ]);
 
-    // Now set the ID on the product type in case the
-    // caller needs to know it
+    // Now set the ID on the product type in case the caller expects it to exist after being saved:
     if ($isNew) {
-        $productType->id = Db::idByUid('{{%producttypes}}', $productType->uid);
+        $productType->id = Db::idByUid('{{%plugin_producttypes}}', $productType->uid);
     }
 
     return true;
@@ -199,18 +179,17 @@ public function saveProductType($productType)
 
 public function deleteProductType($productType)
 {
-    // Fire a 'beforeDeleteProductType' event?
-    if ($this->hasEventHandlers('beforeDeleteProductType')) {
-        $this->trigger('beforeDeleteProductType', new ProductTypeEvent([
-            'productType' => $productType,
-        ]));
-    }
+    $path = "myplugin.productTypes.{$productType->uid}";
 
-    // Remove it from the project config
-    $path = "product-types.{$productType->uid}";
-    Craft::$app->projectConfig->remove($path);
+    Craft::$app->getProjectConfig()->remove($path);
 }
 ```
+
+::: tip
+Plugins can be made extensible themselves by adopting an [interface-oriented](./services.md#interface-oriented-methods) control flow, as opposed to the [class-oriented](./services.md#class-oriented-methods) control flow demonstrated above.
+
+This may involve adding your own [Event](yii2:yii\base\Event)s, or defining a class `interface` that other developers can adopt. [Gateways](/commerce/4.x/gateways.md) are an example of this, in Commerce.
+:::
 
 ## Project Config Migrations
 
