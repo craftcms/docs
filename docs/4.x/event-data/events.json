@@ -3520,6 +3520,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\ExecController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -3791,6 +3809,24 @@
     },
     {
         "class": "craft\\console\\controllers\\RestoreController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\console\\controllers\\SectionsController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\SectionsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\SectionsController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."

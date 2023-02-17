@@ -476,6 +476,107 @@ id
 
 
 
+## `entrify`
+
+Converts categories, tags, and global sets to entries.
+
+<h3 id="entrify-categories">
+    <a href="#entrify-categories" class="header-anchor">#</a>
+    <code>entrify/categories</code>
+</h3>
+
+
+Converts categories to entries.
+
+<h4 id="entrify-categories-parameters" class="command-subheading">Parameters</h4>
+
+categoryGroup
+:  The category group handle
+
+
+
+<h4 id="entrify-categories-options" class="command-subheading">Options</h4>
+
+
+--section
+: The section handle that entries should be saved in
+
+
+--entry-type
+: The entry type handle that entries should have
+
+
+--author
+: The author username or email that entries should have
+
+
+--isolated
+: 
+
+
+
+<h3 id="entrify-global-set">
+    <a href="#entrify-global-set" class="header-anchor">#</a>
+    <code>entrify/global-set</code>
+</h3>
+
+
+Converts a global set to a Single section.
+
+<h4 id="entrify-global-set-parameters" class="command-subheading">Parameters</h4>
+
+globalSet
+:  The global set handle
+
+
+
+<h4 id="entrify-global-set-options" class="command-subheading">Options</h4>
+
+
+--section
+: The section handle that entries should be saved in
+
+
+--isolated
+: 
+
+
+
+<h3 id="entrify-tags">
+    <a href="#entrify-tags" class="header-anchor">#</a>
+    <code>entrify/tags</code>
+</h3>
+
+
+Converts tags to entries.
+
+<h4 id="entrify-tags-parameters" class="command-subheading">Parameters</h4>
+
+tagGroup
+:  The tag group handle
+
+
+
+<h4 id="entrify-tags-options" class="command-subheading">Options</h4>
+
+
+--section
+: The section handle that entries should be saved in
+
+
+--entry-type
+: The entry type handle that entries should have
+
+
+--author
+: The author username or email that entries should have
+
+
+--isolated
+: 
+
+
+
 ## `exec`
 
 
@@ -2628,6 +2729,61 @@ Re-saves users.
 
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+--isolated
+: 
+
+
+
+## `sections`
+
+Manages sections.
+
+<h3 id="sections-create">
+    <a href="#sections-create" class="header-anchor">#</a>
+    <code>sections/create</code>
+</h3>
+
+
+Creates a section.
+
+<h4 id="sections-create-options" class="command-subheading">Options</h4>
+
+
+--from-category-group
+: The category group handle to model the section from.
+
+
+--from-tag-group
+: The tag group handle to model the section from.
+
+
+--from-global-set
+: The global set handle to model the section from.
+
+
+--isolated
+: 
+
+
+
+<h3 id="sections-delete">
+    <a href="#sections-delete" class="header-anchor">#</a>
+    <code>sections/delete</code>
+</h3>
+
+
+Deletes a section.
+
+<h4 id="sections-delete-parameters" class="command-subheading">Parameters</h4>
+
+handle
+:  The section handle
+
+
+
+<h4 id="sections-delete-options" class="command-subheading">Options</h4>
 
 
 --isolated
