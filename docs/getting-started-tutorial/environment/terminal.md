@@ -1,6 +1,6 @@
 # Get to know your terminal
 
-Every operating system comes with a text-based command line interface (CLI) for issuing commands. This provides a powerful way to accomplish things that the graphical user interface may not expose.
+Every operating system comes with a text-based _command line interface_ (CLI) for issuing commands. This provides a powerful way to accomplish things that the _graphical_ user interface (GUI) may not expose.
 
 Already know your way around a terminal? Skip ahead to [setup](stack.md)!
 
