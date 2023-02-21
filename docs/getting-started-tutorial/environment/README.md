@@ -1,4 +1,4 @@
-# Local development
+# Local Development
 
 Craft is a first and foremost a _web application_, meaning it’s used primarily from a browser over <abbr title="Hypertext Transfer Protocol">HTTP</abbr>.
 
@@ -6,6 +6,6 @@ Setting up a web server (and some related tools) on your own computer will allow
 
 The next few pages will get you familiar with:
 
-- The terminal application built into your operating system;
-- Your options for a text editor;
-- The components of a local web server;
+- The [terminal](./terminal.md) application built into your operating system;
+- Your options for a [text editor](./editor.md);
+- The components of a [local web server](./stack.md);
