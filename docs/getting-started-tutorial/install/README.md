@@ -1,10 +1,12 @@
 # Install Craft CMS
 
-At this point you should have [DDEV](https://ddev.com/) 1.21.4+ installed, and know how to run console commands. Now it’s time to install Craft CMS.
+At this point you should have your [local development stack](../environment/stack.md) set up, and know how to run [console commands](../environment/terminal.md). Now it’s time to install Craft CMS.
 
-The first step is to create a folder to contain the tutorial project, called `tutorial`. You can create it alongside your other development projects, wherever you prefer to store them.
+## Project Folder
 
-In your terminal, run the following commands to create and go to your `tutorial` folder:
+The first step is to create a folder named `tutorial` for us to work in. If you have a place you normally keep development projects, create it alongside those—if not, your desktop or home folder is fine, for now!
+
+In your terminal, run the following commands to create and move into your project folder:
 
 ```sh
 cd /path/to/dev/folder
