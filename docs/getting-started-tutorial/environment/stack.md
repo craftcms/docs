@@ -1,4 +1,4 @@
-# Set up a development stack
+# Set up a Development Stack
 
 “Stack” is shorthand for the software required to run Craft.
 

@@ -10,7 +10,7 @@ module.exports = {
     "/": [
       {
         title: "Introduction",
-        collapsable: false,
+        collapsable: true,
         children: [""]
       },
       {
@@ -24,24 +24,23 @@ module.exports = {
         ]
       },
       {
-        title: "Install Craft CMS",
+        title: "Install Craft",
         collapsable: true,
         children: [
           "install/",
-          "install/files"
+          "install/files",
+          "install/control-panel"
         ]
       },
       {
-        title: "Build Your Content",
+        title: "Define a Content Model",
         collapsable: true,
         children: [
           "configure/",
-          "configure/control-panel",
-          "configure/modeling",
           "configure/section",
+          "configure/editing",
           "configure/globals",
-          "configure/single",
-          "configure/editing"
+          "configure/single"
         ]
       },
       {

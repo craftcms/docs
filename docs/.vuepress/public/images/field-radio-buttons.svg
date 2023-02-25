@@ -1,1 +1,17 @@
-<svg fill="none" height="200" viewBox="0 0 400 200" width="400" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h400v200h-400z" fill="#e5edf6"/><rect fill="#fff" height="47.811" rx="23.905" width="47.811" x="99" y="42"/><rect fill="#637599" fill-opacity=".24" height="30.075" rx="9" width="129.552" x="171.488" y="50.483"/><rect fill="#637599" fill-opacity=".24" height="30.075" rx="9" width="101.791" x="171.488" y="118.343"/><rect fill="#fff" height="47.811" rx="23.905" width="47.811" x="99" y="109.861"/><rect fill="#637599" height="34" rx="17" width="34" x="106" y="49"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <g id="a" data-name="Background">
+    <path d="m0,0h400v200H0V0Z" fill="#e5edf6"/>
+  </g>
+  <g id="b" data-name="Art">
+    <g>
+      <rect x="160" y="55" width="120" height="30" rx="6" ry="6" fill="#c6d0e0"/>
+      <rect x="100" y="50" width="40" height="40" rx="19.9996" ry="19.9996" fill="#fff"/>
+      <path d="m120,60h0c5.5228,0,10,4.4772,10,10h0c0,5.5228-4.4772,10-10,10h0c-5.5228,0-10-4.4772-10-10h0c0-5.5228,4.4772-10,10-10Z" fill="#637599"/>
+    </g>
+    <g>
+      <rect x="160" y="115" width="140" height="30" rx="6" ry="6" fill="#c6d0e0"/>
+      <rect x="100" y="110" width="40" height="40" rx="19.9996" ry="19.9996" fill="#fff"/>
+    </g>
+  </g>
+</svg>

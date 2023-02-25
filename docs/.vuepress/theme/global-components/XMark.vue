@@ -6,6 +6,10 @@
     focusable="false"
     :width="width"
     :height="height"
+    :style="{
+      display: inline ? 'inline-block' : 'block',
+      verticalAlign: inline ? 'middle' : null,
+    }"
     viewBox="0 0 352 512"
     fill="#6b7280"
   >
@@ -28,6 +32,10 @@ export default {
     height: {
       type: Number,
       default: 18
+    },
+    inline: {
+      type: Boolean,
+      default: false
     }
   }
 };

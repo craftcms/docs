@@ -1,4 +1,4 @@
-# Get to know your terminal
+# Get to Know Your Terminal
 
 Every operating system comes with a text-based _command line interface_ (CLI) for issuing commands. This provides a powerful way to accomplish things that the _graphical_ user interface (GUI) may not expose.
 

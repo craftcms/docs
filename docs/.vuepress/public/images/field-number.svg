@@ -1,1 +1,16 @@
-<svg fill="none" height="200" viewBox="0 0 400 200" width="400" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h400v200h-400z" fill="#e5edf6"/><path d="m114 69h172v62h-172z" fill="#fff"/><rect fill="#637599" fill-opacity=".24" height="30" rx="9" width="112" x="133" y="85"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <g id="a" data-name="Background">
+    <path d="m0,0h400v200H0V0Z" fill="#e5edf6"/>
+  </g>
+  <g id="b" data-name="Art">
+    <rect x="60" y="69" width="280" height="62" rx="6" ry="6" fill="#fff"/>
+    <rect x="76" y="85" width="20" height="30" rx="6" ry="6" fill="#c6d0e0"/>
+    <rect x="106" y="85" width="20" height="30" rx="6" ry="6" fill="#c6d0e0"/>
+    <rect x="136" y="85" width="20" height="30" rx="6" ry="6" fill="#c6d0e0"/>
+    <rect x="166" y="85" width="20" height="30" rx="6" ry="6" fill="#c6d0e0"/>
+    <rect x="218" y="85" width="20" height="30" rx="6" ry="6" fill="#c6d0e0"/>
+    <rect x="248" y="85" width="20" height="30" rx="6" ry="6" fill="#c6d0e0"/>
+    <path d="m198.8359,108.2734c0-1.6904,1.4727-3.1357,3.1904-3.1357,1.6904,0,3.1357,1.4453,3.1357,3.1357,0,1.7178-1.4453,3.1631-3.1357,3.1631-1.7178,0-3.1904-1.4453-3.1904-3.1631Z" fill="#c6d0e0"/>
+  </g>
+</svg>

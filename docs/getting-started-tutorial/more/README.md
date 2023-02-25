@@ -17,6 +17,8 @@ To get a better sense of how Craft can support your next project’s unique requ
 - Add a new section to the site like portfolios, press releases, or recipes.
 - Add multiple [sites](/4.x/sites.md) to your installation that cross-promote content or offer it [in different languages](/4.x/sites.md#setting-up-a-localized-site).
 - Add a [Structure section](/4.x/entries.md#sections) to the site for creating nested bundles of specialized content.
+- Upgrade to [Craft Pro](kb:upgrading-to-craft-pro) and learn about [user accounts](/4.x/users.md)
+- Create multiple user groups and experiment with [permissions](/4.x/user-management.md) and field layout conditions.
 - Create a store using [Craft Commerce](https://craftcms.com/commerce).
 - Optimize template performance with [caching](/4.x/dev/tags.md#cache) and [eager loading](/4.x/dev/eager-loading-elements.md).
 

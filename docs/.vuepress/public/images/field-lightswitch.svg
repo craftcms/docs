@@ -1,1 +1,10 @@
-<svg fill="none" height="200" viewBox="0 0 400 200" width="400" xmlns="http://www.w3.org/2000/svg"><path d="m0 0h400v200h-400z" fill="#e5edf6"/><rect fill="#637599" height="62" rx="31" width="120" x="140" y="69"/><circle cx="229" cy="100" fill="#fff" r="27"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <g id="a" data-name="Background">
+    <path d="m0,0h400v200H0V0Z" fill="#e5edf6"/>
+  </g>
+  <g id="b" data-name="Art">
+    <path d="m171,69h58c17.1208,0,31,13.8792,31,31h0c0,17.1208-13.8792,31-31,31h-58c-17.1208,0-31-13.8792-31-31h0c0-17.1208,13.8792-31,31-31Z" fill="#637599"/>
+    <circle cx="229" cy="100" r="27" fill="#fff"/>
+  </g>
+</svg>

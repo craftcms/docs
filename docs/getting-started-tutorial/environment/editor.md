@@ -1,4 +1,4 @@
-# Choose a code editor
+# Choose a Code Editor
 
 The files Craft installs on your computer are all stored in plain text.
 

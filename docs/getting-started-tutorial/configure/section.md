@@ -1,184 +1,310 @@
-# Create the blog
+# Your First Section
 
-The first thing we’ll do is create a new Section for our blog posts.
+Our first order of business is to create a _section_ for our blog posts.
 
-## Create a section
+## Creating a Section
 
-1. In the control panel, choose **Settings** from the main navigation.
-2. Choose **Sections** from the “Content” options.
-3. Choose **+ New section**.
-4. Enter “Blog” for this new section’s name. Notice the lowercase handle and Entry URI Format are created for you. The handle is what you’ll use referring to this section in your templates and GraphQL queries, and the URI is where you’ll eventually see your blog post on the public site.
-5. Enter `blog/_entry` for the **Template** setting. We’ll create that template later on.
-6. Leave the rest of the default settings as they are and choose **Save**.
-
-<BrowserShot url="https://tutorial.ddev.site/admin/settings/sections/new" :link="false" caption="Settings for the new blog section.">
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/sections/new"
+    id="newSection"
+    :poi="{
+        name: [35, 22, 'A'],
+        handle: [35, 45, 'B'],
+        template: [55, 40, 'C'],
+        uri: [40, 11, 'D'],
+        type: [79, 21, 'E'],
+    }"
+    :link="false"
+    caption="Settings for the new blog section.">
 <img src="../images/new-section.png" alt="Screenshot of new section fields" />
 </BrowserShot>
 
-You’ll see a new **Entries** menu item in the sidebar navigation. Choose that, then **New Entry** → **Blog**.
+1. In the control panel, choose **Settings** from the main navigation.
+1. Choose **Sections** from the “Content” row.
+1. Choose **+ New section**.
+1. Enter “Blog” in the _Name_ <Poi label="A" target="newSection" id="name" /> field.
+1. Leave the rest of the default settings as they are.
+1. Click **Save and edit entry types**.
 
-We can create a new blog post now, but all it would have is a **Title** field:
+::: tip
+Craft will automatically generate values for the _Handle_ <Poi label="B" target="newSection" id="handle" />, _Template_ <Poi label="C" target="newSection" id="uri" />, and _Entry URI Format_ <Poi label="D" target="newSection" id="uri" /> fields. These will come into play in a moment!
+:::
 
-<BrowserShot url="https://tutorial.ddev.site/entries/blog6?draftId=5&fresh=1" :link="false" caption="The new blog post entry doesn’t yet have any custom fields.">
-<img src="../images/empty-new-entry.png" alt="Screenshot of new blog post entry with only a title" />
-</BrowserShot>
+You’ll be dropped into the **Entry Types** tab of your new section’s edit screen, and should see one entry type, named “Default.” We’ll come back to this screen once we’ve created some fields.
 
-Let’s create some fields to store blog post content!
+## Supporting Features
 
-## Create blog fields
+We’ve addressed the first item in our inventory by creating a section for blog posts… but the content model we decided on requires some other supporting features.
 
-Now we’ll create some fields for storing content and add them to the blog entry type’s field layout.
+Let’s walk through creating each of those components:
 
-Here’s what we’ll set up for our blog posts:
-
-- A Volume for storing images used for post content.
-- A Plain Text field to be used for a post summary.
-- An Assets field for a feature image.
-- A Categories field for post taxonomy.
-- A Matrix field for flexible post content.
+- A _volume_ for storing images.
+- An _assets field_ to attach a primary image.
+- A _plain text field_ for post summaries.
+- A _categories field_ to organize posts.
+- A _matrix field_ for posts’ main content.
 
 ### Create an Asset Volume
 
 First, let’s create a place to upload the files we’ll use for our feature and post images.
 
-Craft uses the concept of Assets to describe uploaded files. Assets consist of the files themselves and any other fields we’d like to attach to them. All Assets are stored in folders referred to as Volumes. These can be in your filesystem or different cloud storage providers—see the documentation on [Volumes](/3.x/assets.md#volumes) for more about those options.
+Assets are organized into _volumes_, which sit on top of a _filesystem_. Filesystems are how Craft talks to different storage providers, while keeping the user interface consistent. For now, we’ll be using your local hard drive—but it could be a remote service like Amazon S3 or Google Cloud Storage.
+
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/assets/volumes/new"
+    id="newVolume"
+    :poi="{
+        volumeName: [30, 25, 'A'],
+        volumeHandle: [30, 35, 'B'],
+        volumeFsMenu: [30, 55, 'C'],
+        fsName: [70, 8, 'D'],
+        fsHandle: [65, 18, 'E'],
+        fsHasPublicUrls: [75, 28, 'F'],
+        fsBaseUrl: [75, 40, 'G'],
+        fsBasePath: [70, 72, 'H'],
+    }"
+    :link="false"
+    caption="Creating an asset volume and filesystem.">
+<img src="../images/new-asset-volume.png" alt="Screenshot of the asset volume creation screen in Craft’s control panel" />
+</BrowserShot>
 
 We’ll create a local Asset Volume within the web root for blog post images:
 
 1. In the control panel, navigate to **Settings** → **Assets**.
-2. Choose **+ New volume**.
-3. Enter the name “Blog” and set the following:
-   - **Assets in this volume have public URLs**: on/enabled
-   - **Base URL**: `@web/assets/blog`
-   - **File System Path**: `@webroot/assets/blog`
-4. Save the Asset Volume.
+1. Click **+ New volume**.
+1. Enter “Images” in the **Name** field <Poi label="A" target="newVolume" id="volumeName" />.
+1. Click the **Asset Filesystem** menu <Poi label="C" target="newVolume" id="volumeFsMenu" /> and select **Create a new filesystem…**
 
-Craft will create that folder and let you upload and manage its Assets from the control panel.
+    Within the slideout that opens, provide these settings:
 
-::: tip
-`@web` and `@webroot` are [aliases](/3.x/config/#aliases) Craft includes by default, pointing to the base site URL and document root file path respectively.
-:::
+    - **Name** <Poi label="D" target="newVolume" id="fsName" />: “Hard Disk”
+    - **Files in this filesystem have public URLs** <Poi label="F" target="newVolume" id="fsName" />: On/Enabled
+    - **Base URL** <Poi label="G" target="newVolume" id="fsBaseUrl" />: `@web/uploads/images`
+    - **File System Path** <Poi label="H" target="newVolume" id="fsBasePath" />: `@webroot/uploads/images`
 
-<BrowserShot url="https://tutorial.ddev.site/admin/settings/assets/volumes/new" :link="false" caption="Settings for the new blog volume.">
-<img src="../images/new-asset-volume.png" alt="Screenshot of settings for the new asset volume" />
-</BrowserShot>
+    Save the filesystem, and ensure it has populated the **Asset Filesystem** <Poi label="C" target="newVolume" id="volumeFsMenu" /> menu.
+
+1. Save the Asset Volume.
 
 ::: tip
-If you’d rather store your Assets on a cloud service like Amazon S3, you could install the [Amazon S3 plugin](https://plugins.craftcms.com/aws-s3) to select and configure that Volume Type instead.
+The `@web` and `@webroot` “[aliases](/4.x/config/README.md#aliases)” are automatically defined by Craft, and point to the base site URL and document root (`web/` in your project folder), respectively.
 :::
 
 ### Create a Category Group
 
-Now create a Category Group we can use for blog post categories:
+The second resource we need to create is a group for our blog’s _categories_.
 
-1. Navigate to **Settings** and choose **Categories**.
-2. Choose **+ New category group**.
-3. Enter the name **Blog Categories** and limit **Max Levels** to `1`.
-4. For **Category URI Format**, enter `blog/category/{slug}` and set the **Template** to `blog/_category`.
-5. Save the Category Group.
-
-<BrowserShot url="https://tutorial.ddev.site/admin/settings/categories/new" :link="false" caption="Settings for the new blog category group.">
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/categories/new"
+    id="newCategoryGroup"
+    :poi="{
+        name: [53, 23, 'A'],
+        handle: [51, 35, 'B'],
+        levels: [32, 45, 'C'],
+        uri: [45, 80, 'D'],
+        template: [75, 80, 'E'],
+        save: [90, 11, 'F'],
+    }"
+    :link="false"
+    caption="Settings for a new blog category group.">
 <img src="../images/new-category-group.png" alt="Screenshot of new category group fields" />
 </BrowserShot>
 
-### Install the Redactor plugin for rich text fields
+1. Navigate to **Settings** and choose **Categories**.
+1. Choose **+ New category group**.
+1. In the **Name** <Poi label="A" target="newCategoryGroup" id="name" /> field, enter “Topics”.
+1. In the **Max Levels** <Poi label="C" target="newCategoryGroup" id="levels" /> field, enter `1`.
+1. Set the **Category URI Format** <Poi label="D" target="newCategoryGroup" id="uri" /> to `blog/topic/{slug}`.
+1. Set the **Template** <Poi label="E" target="newCategoryGroup" id="template" /> to `blog/_topic`.
+1. Save <Poi label="F" target="newCategoryGroup" id="save" /> the Category Group.
 
-You’ll probably want a rich text editor (WYSIWYG) for editing the main text of your blog posts. For this, we’ll install the first-party [Redactor](https://plugins.craftcms.com/redactor) plugin. You can do this through the control panel or from the terminal.
+## Custom Fields
 
-Let’s be adventurous and use console commands:
+Now that we’ve set up all the underlying resources (the section, an asset volume, and a category group), let’s create the fields for our blog posts.
 
-1. From your terminal, run `ddev composer require craftcms/redactor`. Composer will download the plugin and add it to your project.
-2. Now run `ddev php craft plugin/install redactor`.
-
-::: tip
-You can install Craft and Craft plugins from the browser like we did earlier **or** using terminal commands like we did here. 😎
-:::
-
-That’s it! The Redactor plugin is installed and ready to use in our site.
-
-<BrowserShot url="https://tutorial.ddev.site/admin/settings/plugins" :link="false" caption="Redactor now appears in the list of installed plugins, where it can be disabled or uninstalled.">
-<img src="../images/redactor-plugin.png" alt="Screenshot of plugins list showing Redactor installed" />
-</BrowserShot>
-
-### Create individual fields
-
-Next, let’s create the individual fields for our blog posts. With Craft, we explicitly create and configure each custom field we want to use so we can arrange them in field layouts.
+Custom fields are reusable, so we’ll define them in a global space, then add them to the field layouts where they’re needed. The first thing we’ll do is create a _field group_ to keep our fields organized.
 
 1. Navigate to **Settings** → **Fields**.
-2. Choose **+ New group** to create a new field group with the name “Blog Post Fields”. Save the group.
-3. Create a Plain Text “Summary” field. Choose **New Field** and enter the following:
-   - **Name**: `Summary`
-   - **Default Instructions**: `Enter a brief, one or two sentence post summary.` (This helps the content editor know what to do!)
-   - **Allow line breaks**: on/enabled
-   - **Initial Rows**: `1`
-   
-   Save the field.
-4. Create an Assets “Feature Image” field. Choose **New Field** again and enter the following:
-   - **Name**: `Feature Image`
-   - **Field Type**: Assets
-   - **Restrict uploads to a single folder?**: checked
-   - **Default Asset Location**: Blog
-   - **Restrict allowed file types?**: checked
-      - Select **Image** to ensure content editors can only select files that are images
-   - **Limit**: `1`
+2. Choose **+ New group** in the sidebar, and give it a name like “Blog.”
 
-   Save the field.
+The following fields will all be created within this new _Blog_ field group. Clicking **+ New Field** while viewing a group will automatically select it—but you can always move a field between groups using the **Group** option on its edit screen.
 
-5. Create a Categories field named “Post Categories”. Again choose **New Field** and enter: 
-   - **Name**: `Post Categories`
-   - **Field Type**: Categories
-   - **Source**: Blog Categories (selected by default, because we just created it in the last step).
+### Summary
 
-   Save the field.
-6. Create a Matrix field named “Post Content”. Choose **New Field** one more time and enter:
-   - **Name**: `Post Content`
-   - **Field Type**: Matrix
+The post summary will be entered in a _plain text_ field.
 
-   We’ll use the **Configuration** area to add two block types, each being its own group of sub-fields:
-   
-   1. First add a text block an author can use to enter rich text.\
-      Choose **+ New block type**, enter `Text` for its **Name**, and choose **Create**. For this block’s first field, enter:
-      - **Name**: `Text`
-      - **This field is required**: checked (Every text block should have at least *some* text.)
-      - **Field Type**: Redactor
-   2. Add one more block for images.\
-      Choose **+ New block type** again, enter `Image` for its name, and enter:
-      - **Name**: `Image`
-      - **This field is required**: checked (Every image block should have an image.)
-      - **Field Type**: Assets
-      - **Restrict uploads to a single folder?**: checked
-      - **Restrict allowed file types?**: checked
-         - Select **Image** to ensure content editors can only select files that are images
-   
-   Save the field.
+1. Click **+ New Field**;
+1. Enter “Summary” into the **Name** field;
+1. Enter “Summaries should be one or two sentences.” in the **Default Instructions** field to give authors a hint about the field’s intended usage.
+1. Enable **Allow line breaks**;
+1. Set the revealed **Initial Rows** field to `1`;
+1. Save the field.
 
-<BrowserShot url="https://tutorial.ddev.site/admin/settings/fields/2" :link="false" caption="Our complete group of new fields.">
-<img src="../images/new-blog-fields.png" alt="Screenshot of complete Blog Post Fields group" />
+### Feature Image
+
+Posts’ primary images will be added to an _asset_ field.
+
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/fields/new"
+    id="newAssetField"
+    :poi="{
+        name: [3, 13.5, 'A'],
+        handle: [3, 17.25, 'B'],
+        type: [3, 27, 'C'],
+        restrict: [3, 29, 'D'],
+        location: [3, 33.3, 'E'],
+        allowSubfolders: [3, 36.2, 'F'],
+        defaultLocation: [3, 39.6, 'G'],
+        allowedTypes: [3, 53.5, 'H'],
+        maxRelations: [3, 75.7, 'I'],
+    }"
+    :link="false"
+    :maxHeight="600"
+    caption="Settings for a new asset field.">
+<img src="../images/new-asset-field.png" alt="Screenshot of new asset field settings" />
 </BrowserShot>
 
-## Add fields to the blog field layout
+1. Click **+ New Field**;
+1. Enter “Feature Image” into the **Name** <Poi label="A" target="newAssetField" id="name" /> field;
+1. Select _Assets_ from the **Field Type** <Poi label="C" target="newAssetField" id="type" /> menu—the rest of the page will be updated with options specific to asset fields;
+1. Tick **Restrict assets to a single location?** <Poi label="D" target="newAssetField" id="restrict" />;
+1. Select the _Images_ volume from the revealed **Asset Location** <Poi label="E" target="newAssetField" id="location" /> menu;
+1. Tick **Allow subfolders** <Poi label="F" target="newAssetField" id="allowSubfolders" />;
+1. Leave both path inputs (<Poi label="E" target="newAssetField" id="location" /> + <Poi label="G" target="newAssetField" id="defaultLocation" />) empty;
+1. Tick **Restrict allowed file types** <Poi label="H" target="newAssetField" id="allowedTypes" />, then tick **Image** from the revealed options;
+1. Set **Max Relations** <Poi label="I" target="newAssetField" id="maxRelations" /> to `1`;
+1. Save the field.
 
-Now we have everything we need to collect content for our blog posts. If you were to create a new entry right now, however, you’d still only see that Title field again.
+### Categories/Topics
 
-It’s time to *use* our custom fields by creating a blog section Field Layout:
+Our _topics_ field only needs a couple of options:
 
-1. Navigate to **Settings** → **Sections**.
-2. Choose **Edit entry types (1)**, and then choose the **Blog** entry type that was added for you.
-3. At the bottom of this view you’ll see the field layout designer. Choose **+ New Tab**.
-4. Select the gear icon to the right of the new tab, choose **Rename**, and give this tab a more descriptive label like `Post Content`.
-5. Drag each of the fields we created earlier to this tab, in whatever order you’d like.
-6. Since every blog post should have some kind of content, choose the gear icon to the right of the “Post Content” field and make sure it’s required.
-7. Enter `Headline` for **Title Field Label**.
-8. Save the field layout.
+1. Click **+ New Field**;
+1. Enter “Post Categories” into the **Name** field;
+1. Choose “Categories” from the **Field Type** menu—the rest of the page will be updated with options specific to categories fields;
+1. Choose “Topics” from the **Source** menu (it will probably be selected, already);
+1. Save the field.
 
-<BrowserShot url="https://tutorial.ddev.site/admin/settings/sections/1/entrytypes/1" :link="false" caption="Completed blog entry type field layout.">
-<img src="../images/blog-field-layout.png" alt="Screenshot of complete blog field layout" />
+### Post Content
+
+Matrix fields are inherently a bit more complex than other field types, because they contain _nested_ fields. The process of creating those nested fields should feel pretty familiar, though!
+
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/fields/new"
+    id="newMatrixField"
+    :poi="{
+        name: [3, 13.8, 'A'],
+        handle: [3, 18.25, 'B'],
+        type: [3, 30, 'C'],
+        config: [5, 45, 'D'],
+        fieldSettings: [65, 36.2, 'E'],
+    }"
+    :link="false"
+    :maxHeight="600"
+    caption="Configuring a new matrix field with multiple block types.">
+<img src="../images/new-matrix-field.png" alt="Screenshot of matrix field settings" />
 </BrowserShot>
 
-That **Title Field Label** is a simple way to relabel the title—which *every* entry has—to something more descriptive for content editors. This can be especially important later if each entry represents something like a service, a physical object, or a person.
+1. Click **+ New Field**;
+1. Enter “Post Content” in the **Name** <Poi label="A" target="newMatrixField" id="name" /> field;
+1. Choose “Matrix” from the **Field Type** <Poi label="C" target="newMatrixField" id="type" /> menu—the rest of the page will be updated with options specific to matrix fields;
+1. Within the **Configuration** <Poi label="D" target="newMatrixField" id="config" /> space, use the **+ New block type**  button to create two _block types_:
 
-Once you’ve added fields to the blog section’s field layout, return to **Entries** and create a new blog entry. Now you’ll see each of the fields you created and you’re ready to publish some content!
+    #### Text Block
 
-<BrowserShot url="https://tutorial.ddev.site/admin/entries/blog/7?draftId=6&fresh=1" :link="false" caption="A new blog post entry now includes our custom fields.">
-<img src="../images/new-entry-with-fields.png" alt="Screenshot of new entry screen with our custom fields" />
+    The first block will be used for text. When prompted for a _block type_ **Name**, enter “Text.”
+
+    1. In the **Fields** column of the configuration pane, click **+ New field**;
+    1. In the **Field Settings** <Poi label="D" target="newMatrixField" id="config" /> column, enter these values…
+        - **Name**: “Text”
+        - **Field Type**: Plain Text
+        - **This field is required**: Checked
+        - **Allow line breaks**: Checked
+        - **Initial Rows**: `12`
+
+    #### Image Block
+
+    The second block will be used for attaching images.
+
+    1. Back in the **Fields** column of the configuration pane, click **+ New field**.
+    1. In the **Field Settings** <Poi label="D" target="newMatrixField" id="config" /> column…
+        - Set the **Name** field to “Image”;
+        - Choose “Assets” from the **Field Type** menu;
+        - Tick **This field is required**;
+        - Copy the remainder of the settings from the [Feature Image](#feature-image) field we created a moment ago;
+
+1. Save the field.
+
+With that, our fields are ready to be added to a _field layout_!
+
+<Block label="Optional Step">
+
+#### Install the Redactor plugin for rich text fields
+
+If you would prefer to compose the text of your blog posts using a _rich text_ editor (sometimes called a <abbr title="What You See Is What You Get">WYSIWYG</abbr>), the first-party [Redactor](https://plugins.craftcms.com/redactor) can be substituted for the plain text field we created inside our matrix field’s _Text_ block.
+
+Plugins can be installed from the control panel (click **Plugin Store** in the main navigation and search for “Redactor”), or via the command line:
+
+1. Run `ddev composer require craftcms/redactor` to add the package to your project;
+1. Install the plugin by running `ddev php craft plugin/install redactor`;
+
+Once installed, you’ll need to update your field’s settings:
+
+1. Navigate to the _Post Content_ matrix field’s settings, then the _Text_ block type, then the _Text_ field;
+1. Switch the **Field Type** to _Redactor_;
+1. Save the field;
+
+That’s it! Plain text fields can be migrated to Redactor without losing data—but some field types are _not_ compatible with one another! Craft puts a ⚠️ next to any options in the **Field Type** menu that can’t be automatically converted.
+
+</Block>
+
+## Building a Field Layout
+
+Craft’s assumption is that you will eventually have a variety of content types, and that each will use a subset of your fields. To connect our blog entries to the fields they need, we’ll create a _field layout_.
+
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/sections/1/entrytypes/1"
+    id="fieldLayout"
+    :poi="{
+        name: [18.5, 18.5, 'A'],
+        contentTab: [39, 55, 'B'],
+        uiElements: [95, 41, 'C'],
+    }"
+    :link="false"
+    caption="Post entry type field layout, prior to configuration.">
+<img src="../images/blog-field-layout.png" alt="Screenshot of bare blog field layout" />
 </BrowserShot>
+
+Field layouts for entries are managed via _entry types_.
+
+1. Navigate to **Settings** → **Sections**;
+1. Choose **Edit entry types** in the _Blog_ row, and then choose the _Default_ entry type that was created along with the section;
+1. Take the opportunity to give this entry type a more useful **Name** <Poi label="A" target="fieldLayout" id="name" /> like “Post,” and ensure the **Handle** is updated;
+5. Drag each of the fields we created earlier to the _Content_ <Poi label="B" target="fieldLayout" id="contentTab" /> tab in whatever order makes sense to you.
+8. Save the entry type.
+
+<Block label="Optional Step">
+
+#### Advanced Field Layout Customizations
+
+The **UI Elements** <Poi label="C" target="fieldLayout" id="uiElements" /> tab in the right sidebar contains a few tools that can help spruce up field layouts. This one is relatively simple, but as you create richer authoring experiences.
+
+Here are a few other features of field layouts worth experimenting with:
+
+- **Widths**: By default, fields occupy the full width of the element editor. Use the column selector UI next to the <Icon kind="settings" /> to set the field as 1/4, 1/2, 3/4, or full-width.
+- **Line breaks**: If a row isn't full, you can force a field into the next row with a line break field layout element.
+- **Field labels**: Click the <Icon kind="settings" /> to open a slideout and update a field’s **Label**. This is particularly useful for the **Title** field: say you were creating employee profiles, and needed a place for their names and _position_ titles—the built-in **Title** field would make more sense being called “Full Name.”
+- **Required fields**: Also within a field’s setting slideout is an option to mark a field as **Required**.
+- **Field conditions** and : Fields can be conditionally included in layouts by setting up condition rules, within the settings slideout.
+
+</Block>
+
+## Create a Post
+
+Return to **Entries** in the main navigation, and click **+ New entry** to create your first blog post. Check it out—all our fields are here, in a gorgeous editing interface!
+
+<BrowserShot url="https://tutorial.ddev.site/admin/entries/blog/2?draftId=1&fresh=1" :link="false" caption="A fresh blog post entry, populated with custom fields.">
+<img src="../images/new-entry-empty.png" alt="Screenshot of new entry screen" />
+</BrowserShot>
+
+Feel free to play with the content editor a bit

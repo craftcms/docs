@@ -1,32 +1,53 @@
-# Edit entries
+# Creating + Editing Entries
 
-Now that we’ve set up sections and fields, we can focus on editing content.
+Our blog is starting to take shape!
 
-## Add a blog entry
+## Add a Blog Post
 
-Navigate to **Entries** and create a new blog entry. Fill in each field.
+If you haven’t already, navigate to **Entries** and click **+ New entry** to create your first post. Here’s what it’ll look like with a bit of content added:
 
-<BrowserShot url="https://tutorial.ddev.site/admin/entries/blog/9?draftId=7&fresh=1" :link="false" caption="A complete new blog post ready to be saved.">
-<img src="../images/new-entry.png" alt="Screenshot of blog post entry with fields filled in" />
+<BrowserShot url="https://tutorial.ddev.site/admin/entries/blog/2?draftId=1&fresh=1" :link="false" caption="A complete blog post, ready to be saved.">
+<img src="../images/new-entry-with-content.png" alt="Screenshot of blog post entry with fields filled in" />
 </BrowserShot>
 
-## Check out some editing features
+## Explore Editing Features
 
-While adding content should be intuitive, there are a few things you might want to know about:
+Working with content in Craft is usually pretty intuitive—after all, _you_ just designed the authoring experience! Here are a few things to look out for, as you get started:
 
-### Edits are automatically saved while you work.
+### Auto-saving
 
-Craft saves your work as you go, but you always decide when to _publish_. Edits on an already-published entry automatically start a new draft, and you can always see the save status and even leave notes in the versions menu. This menu will also let you see previous drafts and versions, which can be handy:
+![](../images/draft-autosave.png)
 
-![](../images/draft-autosave.png =500x)
+From the moment you arrive on an edit screen, Craft begins autosaving your changes as a _provisional draft_. You always get to decide when those changes are applied, though.
 
-### Double-click a related asset or category to edit it in place.
+Edits on an already-published entry automatically start a new _draft_, and you can always see the save status and even leave notes in the versions menu. This menu will also let you see previous drafts and versions, which can be handy:
 
-Here, the default Title has been cleaned up so it’s more presentable:
+![](../images/unsaved-changes.png)
 
-![](../images/edit-asset.png =400x)
+If you would like to turn your edits into a _draft_ so other users can review them, click **Create draft** instead of **Save**.
 
-When you do this, you’re editing that asset or category so any changes will carry over if you re-use it somewhere else. (Navigate to **Assets** and observe the update there as well, for example.)
+### Slideouts
+
+Double-click any attached element (like the asset <Poi label="A" target="editAsset" id="source" />  in our **Featured Image** field) to edit it in a _slideout_. Here, we’ve taken the opportunity to clean up the uploaded image’s **Title** <Poi label="B" target="editAsset" id="title" />:
+
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/entries/blog/2?draftId=1&fresh=1"
+    id="editAsset"
+    :poi="{
+        source: [31, 42, 'A'],
+        title: [65, 14, 'B'],
+        sidebar: [96.3, 9, 'C'],
+    }"
+    :link="false"
+    caption="Editing an asset in a slideout.">
+<img src="../images/edit-asset-slideout.png" alt="Screenshot of an asset slideout editor" />
+</BrowserShot>
+
+Click the sidebar button <Poi label="C" target="editAsset" id="sidebar" /> to view and edit additional details.
+
+::: warning
+Edits made in this way affect the original element, which means those changes will be visible anywhere else it’s used.
+:::
 
 ### Matrix is pretty cool.
 
