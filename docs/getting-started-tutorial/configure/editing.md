@@ -1,6 +1,6 @@
 # Creating + Editing Entries
 
-Our blog is starting to take shape!
+Our blog is starting to take shape! Let’s pause for a moment and look at the editing tools we’ve set up, from the perspective of a content author.
 
 ## Add a Blog Post
 
@@ -26,6 +26,16 @@ Edits on an already-published entry automatically start a new _draft_, and you c
 
 If you would like to turn your edits into a _draft_ so other users can review them, click **Create draft** instead of **Save**.
 
+### Assets
+
+Assets can be attached or uploaded in a variety of ways:
+
+1. From a fresh entry page, click the **+ Add an Asset** button, then **Upload Files** in the modal;
+1. Drag a file from your computer onto the field;
+1. Visit the **Assets** screen of the control panel and click **Upload Files**;
+
+This last method is a great way to seed your project with an asset library.
+
 ### Slideouts
 
 Double-click any attached element (like the asset <Poi label="A" target="editAsset" id="source" />  in our **Featured Image** field) to edit it in a _slideout_. Here, we’ve taken the opportunity to clean up the uploaded image’s **Title** <Poi label="B" target="editAsset" id="title" />:
@@ -43,10 +53,10 @@ Double-click any attached element (like the asset <Poi label="A" target="editAss
 <img src="../images/edit-asset-slideout.png" alt="Screenshot of an asset slideout editor" />
 </BrowserShot>
 
-Click the sidebar button <Poi label="C" target="editAsset" id="sidebar" /> to view and edit additional details.
+Click the sidebar button <Poi label="C" target="editAsset" id="sidebar" /> to view and edit additional details (like the asset’s filename), or click **Save** to save your changes and close the slideout.
 
 ::: warning
-Edits made in this way affect the original element, which means those changes will be visible anywhere else it’s used.
+Edits made in this way affect the element anywhere else it’s used. For example: if you also attached the asset to a block in the **Post Content** field with the intention of outputting its title as a caption or credit in _both_ places it’s used, updating its title in _either_ place (or via the top-level **Assets** section of the control panel) affects _all_ instances.
 :::
 
 ### Matrix
