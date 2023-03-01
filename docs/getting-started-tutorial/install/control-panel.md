@@ -61,7 +61,7 @@ Craft’s edition (Solo) and current version number <Poi label="3" id="edition" 
 The main navigation <Poi label="4" id="navigation" target="dashboard" /> appears in the sidebar. If your browser is narrow, you may have to use the “hamburger” icon in the upper-left corner to expand the main navigation.
 
 ::: tip
-If the control panel looks a little empty, right now, don’t worry: this is by design! Craft is a blank slate—new projects don’t presuppose anything about your content model. You will designing all of your own content tools.
+If the control panel looks a little empty right now, don’t worry: this is by design! Craft is a blank slate—new projects don’t presuppose anything about your content model. You will designing all of your own content tools.
 :::
 
 ## Utilities
@@ -92,8 +92,14 @@ Check the Settings screen any time you install a new plugin! It may add its own 
 
 ## Plugin Store
 
-Craft’s **Plugin Store** offers free and paid plugins that add functionality to your project.
+Craft’s **Plugin Store** offers free and paid plugins that add functionality to your project. You’ll have an opportunity to install a plugin later in the tutorial!
 
 <BrowserShot url="https://tutorial.ddev.site/admin/plugin-store" :link="false" caption="The Craft CMS Plugin Store.">
 <img src="../images/plugin-store.png" alt="Screenshot of Craft’s Plugin Store, viewed from the control panel" />
 </BrowserShot>
+
+::: tip
+You can also access the [Plugin Store](https://plugins.craftcms.com/) from outside the control panel.
+:::
+
+With the main control panel sections covered, let’s start unpacking Craft’s content modeling tools!
