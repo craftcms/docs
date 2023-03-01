@@ -57,6 +57,31 @@ Some shared hosting environments will disable certain common PHP methods and con
 - [proc_*](http://php.net/manual/en/ref.exec.php) methods must be enabled in order to utilize the Plugin Store and send emails.
 - [ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) must be enabled for the [default, web-based queue runner](config4:runQueueAutomatically) to operate.
 
+## Permissions
+
+For Craft to run properly, PHP needs to be able to write to the following files and folders:
+
+- `.env`
+- `composer.json`
+- `composer.lock`
+- `config/license.key`
+- `config/project/*`
+- `storage/*`
+- `vendor/*`
+- `web/cpresources/*`
+
+The exact permissions depend on the relationship between the system user that PHP runs under and whoever owns the folders and files:
+
+- If they’re the same user, use `744` (`rwxr--r--`).
+- If they’re in the same group, use `774` (`rwxrwxr--`).
+- If neither of the above options describe your setup, something may have been misconfigured. Consider reaching out to your system administrator for support.
+
+Specifics may vary from platform to platform or host to host! Consult your development or hosting environment’s documentation for more information.
+
+::: danger
+**Never** set permissions to `777` in a shared environment or on a live site, and **never** run your HTTP server (or PHP) as `root`.
+:::
+
 ## Required Database User Privileges
 
 The database user you tell Craft to connect with must have the following privileges:
