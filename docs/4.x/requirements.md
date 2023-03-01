@@ -86,6 +86,9 @@ Specifics may vary from platform to platform or host to host! Consult your devel
 
 The database user you tell Craft to connect with must have the following privileges:
 
+<columns>
+<column>
+
 #### MySQL/MariaDB
 
 - `SELECT`
@@ -99,6 +102,10 @@ The database user you tell Craft to connect with must have the following privile
 - `REFERENCES`
 - `LOCK TABLES`
 
+</column>
+
+<column>
+
 #### PostgreSQL
 
 - `SELECT`
@@ -108,6 +115,9 @@ The database user you tell Craft to connect with must have the following privile
 - `DELETE`
 - `REFERENCES`
 - `CONNECT`
+
+</column>
+</columns>
 
 ## Control Panel Browser Requirements
 
