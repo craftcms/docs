@@ -8,11 +8,11 @@ Our first order of business is to create a _section_ for our blog posts.
     url="https://tutorial.ddev.site/admin/settings/sections/new"
     id="newSection"
     :poi="{
-        name: [35, 22, 'A'],
-        handle: [35, 45, 'B'],
-        template: [55, 40, 'C'],
-        uri: [40, 11, 'D'],
-        type: [79, 21, 'E'],
+        name: [35, 24, 'A'],
+        handle: [35, 38, 'B'],
+        type: [35, 62, 'C'],
+        uri: [45, 80, 'D'],
+        template: [70, 80, 'E'],
     }"
     :link="false"
     caption="Settings for the new blog section.">
@@ -22,27 +22,27 @@ Our first order of business is to create a _section_ for our blog posts.
 1. In the control panel, choose **Settings** from the main navigation.
 1. Choose **Sections** from the “Content” row.
 1. Choose **+ New section**.
-1. Enter “Blog” in the _Name_ <Poi label="A" target="newSection" id="name" /> field.
-1. Leave the rest of the default settings as they are.
+1. Enter “Blog” in the **Name** <Poi label="A" target="newSection" id="name" /> field.
+1. Leave the rest of the default settings as they are, ensuring **Section Type** <Poi label="C" target="newSection" id="type" /> is set to **Channel**.
 1. Click **Save and edit entry types**.
 
 ::: tip
-Craft will automatically generate values for the _Handle_ <Poi label="B" target="newSection" id="handle" />, _Template_ <Poi label="C" target="newSection" id="uri" />, and _Entry URI Format_ <Poi label="D" target="newSection" id="uri" /> fields. These will come into play in a moment!
+Craft will automatically generate values for the **Handle** <Poi label="B" target="newSection" id="handle" />, **Entry URI Format** <Poi label="D" target="newSection" id="uri" />, and **Template** <Poi label="E" target="newSection" id="template" /> fields. These will come into play in a moment!
 :::
 
 You’ll be dropped into the **Entry Types** tab of your new section’s edit screen, and should see one entry type, named “Default.” We’ll come back to this screen once we’ve created some fields.
 
 ## Supporting Features
 
-We’ve addressed the first item in our inventory by creating a section for blog posts… but the content model we decided on requires some other supporting features.
+We’ve addressed the first item in our content model inventory by creating a section for blog posts… but the content model we decided on requires some other supporting features.
 
 Let’s walk through creating each of those components:
 
-- A _volume_ for storing images.
-- An _assets field_ to attach a primary image.
-- A _plain text field_ for post summaries.
-- A _categories field_ to organize posts.
-- A _matrix field_ for posts’ main content.
+- A _volume_ for storing images;
+- An _assets field_ to attach a primary image;
+- A _plain text field_ for post summaries;
+- A _categories field_ to organize posts;
+- A _matrix field_ for posts’ main content;
 
 ### Create an Asset Volume
 
