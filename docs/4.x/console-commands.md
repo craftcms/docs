@@ -1,11 +1,12 @@
 ---
 keywords: cli
 ---
+
 # Console Commands
 
 While most of your interaction with Craft happens in a browser, a number of important tools are available via command line interface (CLI) actions that are run in a terminal.
 
-This can be useful for automating tasks with `cron`, running actions in a [deployment process](https://craftcms.com/knowledge-base/deployment-best-practices), working with Craft via SSH, and running resource-intensive tasks that might otherwise be constrained by the limits of your web server.
+This can be useful for automating tasks with `cron`, running actions in a [deployment process](kb:deployment-best-practices), working with Craft via SSH, and running resource-intensive tasks that might otherwise be constrained by the limits of your web server.
 
 The Craft console application (`craft`) lives in the root of your project and requires PHP to run.
 

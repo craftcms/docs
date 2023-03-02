@@ -1,31 +1,32 @@
 # Categories Fields
 
+<div class="version-warning">
+
+Categories are being phased out in favor of [Structure sections](./entries.md#structures). The corresponding [entries field](./entries-fields.md) now has a _maintain hierarchy_ setting <Since ver="4.4" feature="maintain hierarchy setting" /> that mimics categories fields.
+
+Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
+
+</div>
+
 Categories fields allow you to relate [categories](categories.md) to other elements.
 
 ## Settings
 
 Categories fields have the following settings:
 
-- **Source** – Which category group (or other category index source) the field should be able to relate categories from.
-- **Branch Limit** – The maximum number of category tree branches that can be related with the field at once. (Default is no limit.)
+- **Source** — Which category group (or other category index source) the field should be able to relate categories from.
+- **Maintain Hierarchy** — Should the selected categories’ order and hierarchy be preserved?
 
-  For example, if you have the following category group:
+  When **enabled**, the following options become available:
 
-  ```
-  Food
-  ├── Fruit
-  │   ├── Apples
-  │   ├── Bananas
-  │   └── Oranges
-  └── Vegetables
-      ├── Brussels sprouts
-      ├── Carrots
-      └── Celery
-  ```
+  - **Branch Limit** — How many distinct “branches” of the category tree can be selected?
 
-  …and Branch Limit was set to `1`, you would be able to relate Fruit, Vegetables, or one of their descendants, but no more than that.
+  When **disabled**, these options are available:
 
-- **Selection Label** – The label that should be used on the field’s selection button.
+  - **Min Relations** — The minimum number of categories that must be selected when the field is marked as “required” in a field layout. (Default is no minimum.)
+  - **Max Relations** — The maximum number of categories that can be selected. (Default is no maximum.)
+
+- **Selection Label** — The label that should be used on the field’s selection button.
 
 ### Multi-Site Settings
 
