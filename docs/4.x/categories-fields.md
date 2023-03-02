@@ -180,20 +180,21 @@ You can set [parameters](categories.md#parameters) on the category query as well
 
 ::: code
 ```twig
-{% set relatedCategories = clone(entry.myFieldHandle)
+{% set relatedCategories = entry.myFieldHandle
   .leaves()
   .all() %}
 ```
 ```php
-$myField = clone $entry->myFieldHandle;
-$relatedAssets = $myField
+$relatedAssets = $entry->myFieldHandle
     ->leaves()
     ->all();
 ```
 :::
 
 ::: tip
-It’s always a good idea to clone the category query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+<Todo text="Extract this into a snippet." />
+
+In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
 
 ### Saving Categories Fields
