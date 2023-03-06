@@ -22,16 +22,16 @@ Named transforms are created from the [control panel](./control-panel.md) by nav
 Every transform has the following settings:
 
 Name
-:   A user-facing name or label for the transform.
+:   A user-facing name or label for the transform. This is mostly for your reference, but it _may_ be exposed to content authors when using [Redactor](plugin:redactor).
 
 Handle
-:   A template-facing handle, used when accessing transforms in Twig or via GraphQL.
+:   A template-facing handle, used when accessing transforms in Twig or via GraphQL. _Changing this may require updates to your templates!_
 
 Mode
 :   Specifies how the transform is handled:
 
-    - [**Crop**](#crop-fit) (Default) — Crops the image to the specified width and height.
-    - [**Fit**](#crop-fit) — Scales the image so that it is as big as possible with all dimensions fitting within the specified widthand height.
+    - [**Crop**](#crop) (Default) — Crops the image to the specified width and height.
+    - [**Fit**](#fit) — Scales the image so that it is as big as possible with all dimensions fitting within the specified widthand height.
     - [**Letterbox**](#letterbox) — Stretches the image to the specified width and height.
     - [**Stretch**](#stretch) — Stretches the image to the specified width and height.
 
@@ -65,8 +65,8 @@ Image Format
     You do not need to update templates for this setting to work—Craft will just ignore the transform and return a URL to the original image.
     :::
 
-::: tip
-Some modes may behave the same, when using only one of the **Width** and **Height** settings. When left blank, that dimension will be set to whatever maintains the image’s aspect ratio.
+::: warning
+Some modes may behave the same when using only one of the **Width** and **Height** settings. Typically, an unset dimension means the image’s aspect ratio is maintained.
 
 Suppose we have a source image that is 600 pixels wide and 400 pixels tall. Applying a **Stretch** transform that only declares a **Width** of 60 pixels would produce an image 40 pixels tall.
 :::
@@ -121,8 +121,7 @@ To output an image with your named transform applied, pass its handle into your 
 ```twig
 <img src="{{ asset.getUrl('thumb') }}"
   width="{{ asset.getWidth('thumb') }}"
-  height="{{ asset.getHeight('thumb') }}"
->
+  height="{{ asset.getHeight('thumb') }}">
 ```
 
 You can also apply the transform on the asset so any relevant properties are automatically manipulated by default. This example would output the same result as the example above:
@@ -131,8 +130,7 @@ You can also apply the transform on the asset so any relevant properties are aut
 {% do asset.setTransform('thumb') %}
 <img src="{{ asset.url }}"
   width="{{ asset.width }}"
-  height="{{ asset.height }}"
->
+  height="{{ asset.height }}">
 ```
 
 ## Defining Transforms in your Templates
@@ -150,6 +148,10 @@ First, you create a hash that defines the transform’s parameters:
   position: 'top-center'
 } %}
 ```
+
+::: tip
+See a list of all the [possible keys and values](#possible-values) for this object.
+:::
 
 Then pass that hash into your asset’s `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
@@ -175,10 +177,10 @@ It would look similar using `setTransform()` like we did in the previous section
 All the same settings available to [named transforms](#defining-transforms-from-the-control-panel) are available to template-defined transforms.
 
 - The `mode` property can be set to either `'crop'`, `'fit'`, `'letterbox'`, or `'stretch'`.
-    - If `mode` is set to `'crop'`, you can pass a `position` property, set to either `'top-left'`, `'top-center'`, `'top-right'`, `'center-left'`, `'center-center'`, `'center-right'`, `'bottom-left'`, `'bottom-center'`, or `'bottom-right'`.
-- `width` and `height` can be set to integers or omitted.
+- `width` and `height` can be set to integers, or omitted.
 - `quality` can be set to a number between 0 and 100, or omitted.
 - `format` can be set to `'jpg'`, `'gif'`, `'png'`, `'webp'`, `'avif'`, or omitted.
+- A `position` property (set to one of the [valid values](#crop) listed above) is supported when `mode` is set to `'crop'` or `'letterbox'`. The behavior is different for each [type of transform](#transform-modes).
 
 ### Overriding Named Transforms
 
@@ -187,7 +189,7 @@ Should you need to break from a named transform in a few places, you can specify
 ```twig{2-3}
 {% do asset.setTransform({
   transform: 'thumb',
-  quality: 1
+  quality: 100,
 }) %}
 
 <img
@@ -207,7 +209,7 @@ You can override settings like this with the `getUrl()` method, too:
 }) }}">
 ```
 
-This would use the named `'thumb'` transform’s settings, but always generate a .webp file.
+This would use the named `'thumb'` transform’s settings, but always generate a `.webp` file.
 
 ### Generating `srcset` Sizes
 
