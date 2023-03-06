@@ -87,7 +87,7 @@ See [Environmental Configuration](config/#control-panel-settings) for more infor
 Project Config simplifies collaboration on big features by letting you share version-controlled settings and schema changes with others just as easily as [deploying](./deployment.md) them. Multiple contributors’ changes can even be cleanly merged together.
 
 :::tip
-Merge conflicts _can_ still happen (when two contributors modify the same setting), but resolving them is rarely more difficult than a template or stylesheet—you’ll just have to run `php project-config/touch` and then `php project-config/apply` to ensure the final result is applied.
+Merge conflicts _can_ still happen (when two contributors modify the same setting), but resolving them is rarely more difficult than a template or stylesheet—you’ll just have to run `php craft project-config/touch` and then `php craft project-config/apply` to ensure the final result is applied.
 :::
 
 Any time you integrate new code into an environment (say, while developing locally, or deploying to a server), run `craft up` to apply pending migrations and project config changes.
