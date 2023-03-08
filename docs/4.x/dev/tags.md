@@ -10,6 +10,7 @@ Tag | Description
 [cache](#cache) | Caches a portion of your template.
 [css](#css) | Registers a `<style>` tag on the page.
 [dd](#dd) | Dump and die.
+[dump](#dump) | Quietly dump a variable to the Yii debug toolbar.
 [deprecated](https://twig.symfony.com/doc/3.x/tags/deprecated.html) | Triggers a PHP deprecation error.
 [do](https://twig.symfony.com/doc/3.x/tags/do.html) | Does.
 [embed](https://twig.symfony.com/doc/3.x/tags/embed.html) | Embeds another template.
@@ -235,6 +236,30 @@ This tag will dump a variable out to the browser and then end the request. (`dd`
 {% set entry = craft.entries().id(entryId).one() %}
 {% dd entry %}
 ```
+
+## `dump`
+
+Unlike [`dd`](#dd) (which halts execution), `{% dump %}` quietly logs the current context (or a provided variable) to the Yii debug toolbar, in a special **Dumps** tab. You can use the tag any number of times during a request, and Craft will keep track of the template path and line number that produced the output. For example, this template…
+
+```twig{3}
+{# templates/_blog/post #}
+
+{% dump entry %}
+
+{# ... #}
+```
+
+…would log a <craft4:craft\elements\Entry> object tagged `templates/_blog/post:3` to the debug toolbar. If you’re not sure what variables you have access to in a given template, you can use the tag _without_ a variable to dump everything:
+
+```twig
+{% dump %}
+```
+
+In this scenario, keys of the dumped array are variable names, and the values represent the [data types](./twig-primer.md#types-of-values). Expand complex types to view nested properties by clicking any value with a signature like `craft\elements\Category {#123 ▶}`.
+
+::: tip
+To enable the debug toolbar, visit your user profile in the [control panel](../control-panel.md) and check **Show the debug toolbar on the front end** within the **Preferences** tab.
+:::
 
 ## `exit`
 

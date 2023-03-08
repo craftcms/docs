@@ -200,19 +200,21 @@ You can set [parameters](matrix-blocks.md#parameters) on the Matrix block query 
 
 ::: code
 ```twig
-{% set blocks = clone(entry.myFieldHandle)
+{% set blocks = entry.myFieldHandle
   .type('text')
   .all() %}
 ```
 ```php
-$blocks = (clone $entry->myFieldHandle)
+$blocks = $entry->myFieldHandle
     ->type('text')
     ->all();
 ```
 :::
 
 ::: tip
-It’s always a good idea to clone the Matrix query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+<Todo text="Extract this into a snippet." />
+
+In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
 
 ### Saving Matrix Fields
@@ -239,7 +241,7 @@ If you want all existing blocks to persist in the same order they are currently 
 
 ```twig
 {% if entry is defined %}
-  {% for blockId in clone(entry.myFieldHandle).anyStatus().ids() %}
+  {% for blockId in entry.myFieldHandle.anyStatus().ids() %}
     {{ hiddenInput('fields[myFieldHandle][sortOrder][]', blockId) }}
   {% endfor %}
 {% endif %}
