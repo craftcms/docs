@@ -10,6 +10,8 @@ Filter | Description
 [ascii](#ascii) | Converts a string to ASCII characters.
 [atom](#atom) | Converts a date to an ISO-8601 timestamp.
 [attr](#attr) | Modifies an HTML tag’s attributes.
+[base64_decode](#base64-decode) | Decodes a Base64 string.
+[base64_encode](#base64-encode) | Encodes a string as Base64.
 [batch](https://twig.symfony.com/doc/3.x/filters/batch.html) | Batches items in an array.
 [boolean](#boolean) | Coerces the passed value to a boolean.
 [camel](#camel) | Formats a string into camelCase.
@@ -245,7 +247,35 @@ Attribute values are HTML-encoded automatically:
 ```
 :::
 
-## `boolean` <Since ver="4.3.0" feature="This Twig filter" />
+## `base64_decode` <Since ver="4.4.0" feature="The base64_decode Twig filter" />
+
+Decodes a Base64-encoded string. The encoded value can come from anywhere, as Base64 is widely supported and its input and output is consistent across implementations.
+
+```twig
+{{ 'Q3JhZnQgQ01T' | base64_decode }}
+{# -> Craft CMS #}
+```
+
+::: tip
+Javascript uses the [`btoa()`](https://developer.mozilla.org/en-US/docs/Web/API/btoa) function to encode values as Base64, and [`atob()`](https://developer.mozilla.org/en-US/docs/Web/API/atob) to decode them.
+:::
+
+## `base64_encode` <Since ver="4.4.0" feature="The base64_encode Twig filter" />
+
+Encodes a value as Base64. Base64 can be useful for making unpredictable strings or data URL-safe.
+
+```twig
+{{ 'Craft CMS' | base64_encode }}
+{# -> Q3JhZnQgQ01T #}
+```
+
+If you intend to use the value in a stylesheet or URI, consider the [`dataUrl()` function](./functions.md#dataurl), instead.
+
+::: danger
+Encoding is _not_ the same as encryption! The result may appear random, but is completely reversible. Read more about the principles and applications of [Base64](https://en.wikipedia.org/wiki/Base64) if you are unsure whether it is appropriate!
+:::
+
+## `boolean` <Since ver="4.3.0" feature="The boolean Twig filter" />
 
 Coerces the passed value to a boolean using PHP’s [`boolval()`](https://www.php.net/manual/en/function.boolval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
