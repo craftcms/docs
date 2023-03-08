@@ -113,6 +113,38 @@ The queue will automatically retry failed jobs that implement the [`RetryableJob
 Returning `true` from `canRetry()` can pollute your queue with jobs that may never succeed. Failed jobs are not necessarily bad! Exceptions can be used to track failures in code that runs unattended.
 :::
 
+### Batched Jobs <Since ver="4.4.0" feature="Batched jobs" />
+
+In situations where there is simply too much work to do in a single request (or within PHP’s memory limit), consider extending <craft4:craft\queue\BaseBatchedJob>.
+
+Batched jobs’ `execute()` method is handled for you. Instead, you must define two new methods:
+
+- `loadData()` — Returns a class extending <craft4:craft\base\Batchable>, like <craft4:craft\db\QueryBatcher>. Data is not necessarily loaded at this point, but a means of fetching data in “slices” must be.
+- `processItem($item)` — Your logic for handling a single item in each batch.
+
+::: tip
+<craft4:craft\db\QueryBatcher> can be passed any <craft4:craft\db\Query> subclass, including element queries. Use it to wrap queries returned from `loadData()`:
+
+```php
+use craft\db\QueryBatcher;
+use craft\elements\Asset;
+
+$query = Asset::find()
+    ->volume('whitepapers')
+    ->orderBy('id ASC');
+
+return new QueryBatcher($query);
+```
+
+Also note that we’re explicitly ordering by `id`—this can help avoid skipped or double-processed items across batches when the underlying data changes (including changes made _within a job_)!
+:::
+
+Batched jobs can also define a default `$batchSize` that is appropriate for the workload. The batch size is not a guaranteed value, but a target when Craft spawns the next job—it will keep track of memory usage and _may_ stop short, scheduling the next batch to resume where it left off.
+
+::: warning
+Batched jobs **must** be pushed using <craft4:craft\helpers\Queue::push()>, or `delay` and `ttr` settings may be lost for subsequent batches.
+:::
+
 ## Adding Your Job to the Queue
 
 Once you’ve created your job, you can add it to the queue:
