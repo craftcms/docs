@@ -2,7 +2,7 @@
 
 <div class="version-warning">
 
-Categories are being phased out in favor of [Structure sections](./entries.md#structures). The corresponding [entries field](./entries-fields.md) now has a _maintain hierarchy_ setting <Since ver="4.4" feature="maintain hierarchy setting" /> that mimics categories fields.
+Categories are being phased out in favor of [Structure sections](./entries.md#structures). The corresponding [entries field](./entries-fields.md) now has a _maintain hierarchy_ setting <Since ver="4.4.0" feature="maintain hierarchy setting" /> that mimics categories fields.
 
 Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
 
