@@ -1162,6 +1162,44 @@ CRAFT_PHP_MAX_MEMORY_LIMIT=512M
 
 
 
+### `preloadSingles`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$preloadSingles](craft4:craft\config\GeneralConfig::$preloadSingles)
+
+Since
+:  4.4.0
+
+</div>
+
+Whether Single section entries should be preloaded for Twig templates.
+
+When enabled, Craft will make an educated guess on which Singles should be preloaded for each template based on
+the variable names that are referenced.
+
+::: warning
+You will need to clear your compiled templates from the Caches utility before this setting will take effect.
+:::
+
+::: code
+```php Static Config
+->preloadSingles()
+```
+```shell Environment Override
+CRAFT_PRELOAD_SINGLES=true
+```
+:::
+
+
+
 ### `previewIframeResizerOptions`
 
 <div class="compact">
@@ -3711,7 +3749,7 @@ Defined by
 
 </div>
 
-The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
+The string to use to separate words when uploading assets. If set to `false`, spaces will be left alone.
 
 ::: code
 ```php Static Config
@@ -4244,7 +4282,7 @@ Since
 
 </div>
 
-Whether images should be upscaled if the provided transform size is larger than the image.
+Whether image transforms should allow upscaling by default, for images that are smaller than the transform dimensions.
 
 ::: code
 ```php Static Config

@@ -347,6 +347,7 @@ Entry queries support the following parameters:
 | [revisionId](#revisionid)                 | Narrows the query results based on the entries’ revision’s ID (from the `revisions` table).
 | [revisionOf](#revisionof)                 | Narrows the query results to only revisions of a given entry.
 | [revisions](#revisions)                   | Narrows the query results to only revision entries.
+| [savable](#savable)                       | Sets the [savable](https://docs.craftcms.com/api/v3/craft-elements-db-entryquery.html#savable) property.
 | [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
 | [search](#search)                         | Narrows the query results to only entries that match a search query.
 | [section](#section)                       | Narrows the query results based on the sections the entries belong to.
@@ -1649,6 +1650,15 @@ $entries = \craft\elements\Entry::find()
     ->one();
 ```
 :::
+
+
+#### `savable`
+
+Sets the [savable](https://docs.craftcms.com/api/v3/craft-elements-db-entryquery.html#savable) property.
+
+
+
+
 
 
 #### `savedDraftsOnly`
