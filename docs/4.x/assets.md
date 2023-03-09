@@ -52,10 +52,35 @@ If you would prefer to store your assets on a remote storage service like Amazon
 
 The settings for each type of filesystem will differ based on the provider, and may involve secrets. We recommend using [special config values](./config/README.md#control-panel-settings) to store and use these, securely.
 
-
 ## Asset Custom Fields
 
 Each volume has its own [field layout](./fields.md#field-layouts), configured on its setting screen under the **Field Layout** tab.
+
+### `alt` Text
+
+Asset field layouts can include the native **Alternative Text** <Poi label="1" target="assetFieldLayout" id="altText" /> field layout element:
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/assets/volumes/1"
+  :link="false"
+  id="assetFieldLayout"
+  :poi="{
+    altText: [90, 32.5],
+  }">
+<img src="./images/assets-field-layout.png" />
+</BrowserShot>
+
+Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](./fields.md) value (or combination of values). When _unavailable_, images will use the asset’s `title` attribute, which is typically generated from the filename on upload.
+
+We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier.
+
+::: tip
+Do you have existing `alt` text stored in a different field? You can migrate it to the native attribute with the [`resave/assets` command](./console-commands.md#resave):
+
+```bash
+php craft resave/assets --set alt --to myAltTextField --if-empty
+```
+:::
 
 ## Assets Page
 
