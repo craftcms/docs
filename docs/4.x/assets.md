@@ -84,31 +84,56 @@ php craft resave/assets --set alt --to myAltTextField --if-empty
 
 ## Assets Page
 
-After creating your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
+After creating your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files and subfolders in the main content area.
 
 In addition to the normal actions available in [element indexes](./elements.md#indexes), asset indexes support:
 
 - Uploading new files using the **Upload files** toolbar button or by dragging files from your desktop;
 - Creating and organizing [folders](#managing-subfolders) within a volume;
-- Transferring a file from one volume to another by dragging-and-dropping it from the element index into a folder in the sources sidebar;
+- Transferring a file from one volume to another by dragging-and-dropping it from the element index into a folder in the sources sidebar (or using the **Move…** element action);
 
 Special [element actions](./elements.md#actions) are also available for single assets:
 
 - Rename an existing file;
 - Replace a file with a new one;
 - Open the [image editor](#image-editor) (images only);
+- Preview a file;
+- Copy a public URL to a file;
+- Copy a reference tag to a file;
+- Move the selected assets to a new volume and/or folder;
 
 ### Managing Subfolders
 
-You can create a subfolder in one of your volumes by right-clicking the volume in the left sidebar, and choosing **New subfolder**.
+::: tip
+Asset and folder management was [greatly enhanced](https://craftcms.com/blog/craft-4-4-released) in Craft 4.4. Earlier versions only support drag-and-drop file management, and folders were created and deleted via the sources sidebar.
+:::
 
-Once you’ve created a subfolder, you can start dragging files into it.
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/assets/uploads"
+  :link="false"
+  id="assetIndex"
+  :poi="{
+    breadcrumbs: [42, 21],
+    folder: [57, 34],
+    dragging: [46, 42],
+    actions: [67, 94],
+  }">
+<img src="./images/assets-index.png" alt="Asset element index showing subfolder creation and drag-and-drop interface for organizing files" />
+</BrowserShot>
 
-You can create a nested subfolder within a subfolder by right-clicking the subfolder in the left sidebar, and again choosing **New subfolder**.
+Volumes are initialized with only a root folder, indicated by a “home” icon in the breadcrumbs. Subfolders can be created by clicking the caret <Poi label="1" target="assetIndex" id="breadcrumbs" /> next to the current folder.
 
-You can rename a subfolder by right-clicking on the subfolder in the left sidebar and choosing **Rename folder**.
+The new subfolder will appear in-line <Poi label="2" target="assetIndex" id="folder" /> with the assets in the current folder. Assets and folders can be moved in a few different ways:
 
-You can delete a subfolder (and all assets within it) by right-clicking on the subfolder in the left sidebar and choosing **Delete folder**.
+- Drag-and-drop <Poi label="3" target="assetIndex" id="dragging" /> one or more assets onto a folder in the table or thumbnail view _or_ onto a breadcrumb <Poi label="1" target="assetIndex" id="breadcrumbs" /> segment;
+- Select assets with the checkboxes in each row, choose **Move…** from the actions <Poi label="4" target="assetIndex" id="actions" /> menu, and pick a destination folder;
+- An entire folder can also be moved using the caret next to its breadcrumb;
+
+The first method is a great way to quickly move assets into a parent directory, or back to the volume’s root folder.
+
+::: tip
+You can automatically organize assets when they are uploaded via an [assets field](./assets-fields.md) with the **Restrict assets to a single location** setting.
+:::
 
 ## Updating Asset Indexes
 
