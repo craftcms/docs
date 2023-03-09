@@ -3520,6 +3520,42 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\console\\controllers\\ExecController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\ExecController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\ExecController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\FixtureController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
@@ -3773,6 +3809,24 @@
     },
     {
         "class": "craft\\console\\controllers\\RestoreController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\console\\controllers\\SectionsController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\SectionsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\SectionsController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -4409,6 +4463,18 @@
     },
     {
         "class": "craft\\controllers\\RedirectController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\RelationalFieldsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\controllers\\RelationalFieldsController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -10643,6 +10709,84 @@
         "name": "EVENT_DEFINE_ENTRY_TYPES",
         "type": "craft\\events\\DefineEntryTypesEvent",
         "desc": "The event that is triggered when defining the available entry types for the entry",
+        "filters": {
+            "draft": {
+                "label": "Element is a draft",
+                "conditionsPhp": "ElementHelper::isDraft($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "provisional": {
+                "label": "Element is a provisional draft",
+                "conditionsPhp": "ElementHelper::rootElement($event->sender)->isProvisionalDraft",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            },
+            "revision": {
+                "label": "Element is a revision",
+                "conditionsPhp": "ElementHelper::isRevision($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "provisional",
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Entry",
+        "name": "EVENT_DEFINE_PARENT_SELECTION_CRITERIA",
+        "type": "craft\\events\\ElementCriteriaEvent",
+        "desc": "The event that is triggered when defining the parent selection criteria.",
         "filters": {
             "draft": {
                 "label": "Element is a draft",
@@ -22366,6 +22510,54 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\actions\\NewChild",
         "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
         "type": "craft\\events\\DefineValueEvent",
@@ -23878,6 +24070,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\conditions\\assets\\SavableConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\SavableConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\SavableConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\SavableConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\SavableConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\SavableConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\SavableConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\conditions\\assets\\UploaderConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -23915,6 +24149,48 @@
     },
     {
         "class": "craft\\elements\\conditions\\assets\\UploaderConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\ViewableConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\ViewableConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\ViewableConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\ViewableConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\ViewableConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\ViewableConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\assets\\ViewableConditionRule",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -24352,6 +24628,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\conditions\\entries\\SavableConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\SavableConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\SavableConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\SavableConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\SavableConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\SavableConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\SavableConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\conditions\\entries\\SectionConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -24431,6 +24749,48 @@
     },
     {
         "class": "craft\\elements\\conditions\\entries\\TypeConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\ViewableConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\ViewableConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\ViewableConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\ViewableConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\ViewableConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\ViewableConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\ViewableConditionRule",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -26525,6 +26885,12 @@
     },
     {
         "class": "craft\\fields\\BaseOptionsField",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
+    },
+    {
+        "class": "craft\\fields\\BaseOptionsField",
         "name": "EVENT_BEFORE_ELEMENT_SAVE",
         "type": "craft\\events\\FieldElementEvent",
         "desc": "The event that is triggered before the element is saved."
@@ -26933,6 +27299,12 @@
     },
     {
         "class": "craft\\fields\\Checkboxes",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
+    },
+    {
+        "class": "craft\\fields\\Checkboxes",
         "name": "EVENT_BEFORE_ELEMENT_SAVE",
         "type": "craft\\events\\FieldElementEvent",
         "desc": "The event that is triggered before the element is saved."
@@ -27326,6 +27698,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\Dropdown",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
     },
     {
         "class": "craft\\fields\\Dropdown",
@@ -28265,6 +28643,12 @@
     },
     {
         "class": "craft\\fields\\MultiSelect",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
+    },
+    {
+        "class": "craft\\fields\\MultiSelect",
         "name": "EVENT_BEFORE_ELEMENT_SAVE",
         "type": "craft\\events\\FieldElementEvent",
         "desc": "The event that is triggered before the element is saved."
@@ -28658,6 +29042,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\RadioButtons",
+        "name": "EVENT_DEFINE_OPTIONS",
+        "type": "craft\\events\\DefineInputOptionsEvent",
+        "desc": "Event triggered when defining the options for the field's input."
     },
     {
         "class": "craft\\fields\\RadioButtons",
@@ -30506,6 +30896,48 @@
         "name": "EVENT_MISSING_TRANSLATION",
         "type": "yii\\i18n\\MissingTranslationEvent",
         "desc": "an event that is triggered when a message translation is not found."
+    },
+    {
+        "class": "craft\\imagetransforms\\FallbackTransformer",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\imagetransforms\\FallbackTransformer",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\imagetransforms\\FallbackTransformer",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\imagetransforms\\FallbackTransformer",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\imagetransforms\\FallbackTransformer",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\imagetransforms\\FallbackTransformer",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\imagetransforms\\FallbackTransformer",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
     },
     {
         "class": "craft\\imagetransforms\\ImageTransformer",
@@ -36299,6 +36731,18 @@
         "desc": "The event that is triggered when determining whether a user is authorized to delete an element for its current site."
     },
     {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_BEFORE_DELETE_FOR_SITE",
+        "type": "craft\\events\\ElementEvent",
+        "desc": "The event that is triggered before deleting an element for a single site."
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_AFTER_DELETE_FOR_SITE",
+        "type": "craft\\events\\ElementEvent",
+        "desc": "The event that is triggered after deleting an element for a single site."
+    },
+    {
         "class": "craft\\services\\Fields",
         "name": "EVENT_REGISTER_FIELD_TYPES",
         "type": "craft\\events\\RegisterComponentTypesEvent",
@@ -37019,6 +37463,30 @@
         "desc": "The event that is triggered after a user is assigned to the default user group."
     },
     {
+        "class": "craft\\services\\Users",
+        "name": "EVENT_BEFORE_SAVE_USER_PHOTO",
+        "type": "craft\\services\\UserSavePhotoEvent",
+        "desc": "The event that is triggered before a user photo is saved."
+    },
+    {
+        "class": "craft\\services\\Users",
+        "name": "EVENT_AFTER_SAVE_USER_PHOTO",
+        "type": "craft\\services\\UserSavePhotoEvent",
+        "desc": "The event that is triggered after a user photo is saved."
+    },
+    {
+        "class": "craft\\services\\Users",
+        "name": "EVENT_BEFORE_DELETE_USER_PHOTO",
+        "type": "craft\\events\\UserPhotoEvent",
+        "desc": "The event that is triggered before a user photo is deleted."
+    },
+    {
+        "class": "craft\\services\\Users",
+        "name": "EVENT_AFTER_DELETE_USER_PHOTO",
+        "type": "craft\\events\\UserPhotoEvent",
+        "desc": "The event that is triggered after a user photo is deleted."
+    },
+    {
         "class": "craft\\services\\Utilities",
         "name": "EVENT_REGISTER_UTILITY_TYPES",
         "type": "craft\\events\\RegisterComponentTypesEvent",
@@ -37028,19 +37496,19 @@
         "class": "craft\\services\\Volumes",
         "name": "EVENT_BEFORE_SAVE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered before an Asset volume is saved."
+        "desc": "The event that is triggered before a volume is saved."
     },
     {
         "class": "craft\\services\\Volumes",
         "name": "EVENT_AFTER_SAVE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered after an Asset volume is saved."
+        "desc": "The event that is triggered after a volume is saved."
     },
     {
         "class": "craft\\services\\Volumes",
         "name": "EVENT_BEFORE_DELETE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered before an Asset volume is deleted."
+        "desc": "The event that is triggered before a volume is deleted."
     },
     {
         "class": "craft\\services\\Volumes",
@@ -37052,7 +37520,13 @@
         "class": "craft\\services\\Volumes",
         "name": "EVENT_AFTER_DELETE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered after a Asset volume is deleted."
+        "desc": "The event that is triggered after a volume is deleted."
+    },
+    {
+        "class": "craft\\utilities\\AssetIndexes",
+        "name": "EVENT_LIST_VOLUMES",
+        "type": "craft\\events\\ListVolumesEvent",
+        "desc": "The event that is triggered when listing the available volumes to index."
     },
     {
         "class": "craft\\utilities\\AssetIndexes",
