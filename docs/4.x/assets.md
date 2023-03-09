@@ -74,6 +74,8 @@ Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive
 
 We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier.
 
+**Alternative Text** is also displayed as a “transcript” beneath video previews, in the control panel.
+
 ::: tip
 Do you have existing `alt` text stored in a different field? You can migrate it to the native attribute with the [`resave/assets` command](./console-commands.md#resave):
 
