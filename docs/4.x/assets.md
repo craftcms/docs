@@ -70,7 +70,7 @@ Asset field layouts can include the native **Alternative Text** <Poi label="1" t
 <img src="./images/assets-field-layout.png" />
 </BrowserShot>
 
-Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](./fields.md) value (or combination of values). When _unavailable_, images will use the asset’s `title` attribute, which is typically generated from the filename on upload.
+Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](./fields.md) values, attributes, or combination thereof.
 
 We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier.
 
