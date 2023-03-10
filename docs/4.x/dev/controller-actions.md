@@ -872,7 +872,7 @@ Other types may require multiple inputs or specific naming conventions.
 
 #### Date + Time
 
-Entries’ native `postDate` and `expiryDate` properties can be handled in the same way [date/time fields](../date-time-fields.md#saving-date-fields) are; but instead of passing their values under a `fields` key, you'll send them as top-level keys in a POST request:
+Entries’ native `postDate` and `expiryDate` properties can be handled in the same way [date/time fields](../date-time-fields.md#saving-date-fields) are; but instead of passing their values under a `fields` key, you’ll send them as top-level keys in a POST request:
 
 ::: code
 ```twig Unified
