@@ -136,7 +136,7 @@ Consider these tips for creating special URIs:
 - An empty URI means the entry does not get a route and will not have a public URL—unless you define one manually via `routes.php`;
 - Any Twig statement can be used to output values in a URI template—including ones that query for other elements,  e.g. `{{ craft.entries().section('mySingle').one().slug }}/news`;
 - [Aliases](./config/README.md#aliases-and-environment-variables) can be evaluated with the [`alias()` function](./dev/functions.md#alias): `{{ alias('@basePressUri') }}/news`, `{{ alias('@mySectionUri') }}`.
-- The [null coalescing operator](https://twig.symfony.com/doc/3.x/templates.html#other-operators) (`??`) can silently swallow undefined variable errors (like `parent.uri`, above);
+- The [null-coalescing operator](https://twig.symfony.com/doc/3.x/templates.html#other-operators) (`??`) can silently swallow undefined variable errors (like `parent.uri`, above);
 :::
 
 ### Preview Targets
