@@ -461,17 +461,52 @@ Notice how our loop uses the keys (`p`) _and_ values (`url`) from the returned a
 
 ## Search
 
-See the main article on Craft’s [search](./searching.md) system to learn about the supported syntaxes for plain-text search.
+Craft gives you access to its [search](./searching.md) index from any element query. Use the `search` param to narrow results by keywords:
+
+::: code
+```twig{5}
+{% set q = craft.app.request.getQueryParam('search') %}
+
+{% set results = craft.entries
+  .section('news')
+  .search(q)
+  .all() %}
+```
+```php{5}
+$q = Craft::$app->getRequest()->getQueryParam('search');
+
+$results = Entry::find()
+    ->section('news')
+    ->search($q)
+    ->all();
+```
+:::
+
+<See path="./searching.md" description="Learn about the supported syntaxes for plain-text search." />
 
 ## Performance and Optimization
 
-When you start working with lots of data, 
+When you start working with lots of data, it’s important to consider how queries affect your pages’ load time. While the [`{% cache %}` tag](./dev/tags.md#cache) can be used strategically to avoid major slowdowns, it’s only one of many tools at your disposal.
+
+::: tip
+Turn on the **Debug Toolbar** in your user’s preferences to profile your memory usage and database query counts.
+:::
 
 ### Eager Loading
 
-Displaying a list of elements and one or more _related_ elements can lead to an “[N+1](https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping)” problem, wherein each item triggers an additional query.
+Displaying a list of elements and one or more elements related to each of them (say, blog posts and their categories) can lead to an “[N+1](https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping)” problem, wherein each result from the main query triggers an additional query.
 
-Eager loading is 
+[Eager loading](./dev/eager-loading-elements.md) is a means of pre-fetching those related elements in bulk, often eliminating all but one additional query. Auditing your templates for these problems can be tricky, but you may be able to narrow down what you’re looking for with these common bottlenecks:
+
+- [Nested](./dev/eager-loading-elements.md#eager-loading-nested-sets-of-elements) `{% for %}` loops;
+- Accessing or outputting data from Matrix blocks owned by multiple elements;
+- Getting information about an entry’s author, within a loop;
+- Using multiple [asset transforms](./dev/eager-loading-elements.md#eager-loading-image-transform-indexes);
+- Using relational fields (either with `.all()`, `.one()`, or `|first`) within a loop;
+
+::: tip
+Not all of these situations will require (or benefit from) eager-loading—the goal is only to consider which of your projects’ features _may_ be candidates.
+:::
 
 ### Caching Element Queries
 

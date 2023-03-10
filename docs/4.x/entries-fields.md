@@ -6,17 +6,30 @@ Entries fields allow you to relate [entries](entries.md) to other elements.
 
 Entries fields have the following settings:
 
-- **Sources** – Which sections (or other entry index sources) the field should be able to relate entries from.
-- **Selectable Entries Condition** – Rules that determine which entries should be available for selection.
-- **Min Relations** – The minimum number of entries that can be related with the field at once. (Default is no limit.)
-- **Max Relations** – The maximum number of entries that can be related with the field at once. (Default is no limit.)
-- **Selection Label** – The label that should be used on the field’s selection button.
+- **Sources** — Which sections (or other entry index sources) the field should be able to relate entries from.
+- **Selectable Entries Condition** — Rules that determine which entries should be available for selection.
+- **Maintain Hierarchy** — When selecting from a _structure_ section, should the entries’ order and hierarchy be preserved?
+
+  ::: tip
+  This option is available only when the selected sources are all structures.
+  :::
+
+  When **enabled**, the following options become available:
+
+  - **Branch Limit** — How many distinct “branches” of a structure can be selected?
+
+  When **disabled**, these options are available:
+
+  - **Min Relations** — The minimum number of entries that must be selected when the field is marked as “required” in a field layout. (Default is no minimum.)
+  - **Max Relations** — The maximum number of entries that can be selected. (Default is no maximum.)
+
+- **Selection Label** — The label that should be used on the field’s selection button.
 
 ### Advanced Settings
 
-Additional settings are included under an “Advanced” toggle.
+Additional settings are available under the **Advanced** toggle:
 
-- **Allow self relations** – Whether the entry with the field should be allowed to relate to itself.
+- **Allow self relations** — Whether the current entry (with this field) should be allowed to select itself as a relation.
 
 ### Multi-Site Settings
 
@@ -148,28 +161,30 @@ if ($entry->myFieldHandle->exists()) {
 ```
 :::
 
-You can set [parameters](entries.md#parameters) on the entry query as well. For example, to only fetch entries in the `news` section, set the [section](entries.md#section) param:
+You can set [parameters](entries.md#parameters) on the entry query as well. For example, to narrow the related entries to those in a `news` section, set the [section](entries.md#section) param:
 
 ::: code
 ```twig
-{% set relatedEntries = clone(entry.myFieldHandle)
+{% set relatedEntries = entry.myFieldHandle
   .section('news')
   .all() %}
 ```
 ```php
-$relatedEntries = (clone $entry->myFieldHandle)
+$relatedEntries = $entry->myFieldHandle
     ->section('news')
     ->all();
 ```
 :::
 
 ::: tip
-It’s always a good idea to clone the entry query using the [clone()](./dev/functions.md#clone) function before adjusting its parameters, so the parameters don’t have unexpected consequences later on in your template.
+<Todo text="Extract this into a snippet." />
+
+In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
 
 ### Saving Entries Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain an Entries field, you will need to submit your field value as a list of entry IDs, in the order you want them to be related.
+If you have front-end form for saving an element, that needs to contain an Entries field, you will need to submit your field value as a list of entry IDs, in the order you want them to be related.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 

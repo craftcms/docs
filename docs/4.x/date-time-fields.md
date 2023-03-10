@@ -151,10 +151,6 @@ If you want the user to be able to select a time as well, use a `datetime-local`
 <input type="datetime-local" name="fields[myFieldHandle]" value="{{ currentValue }}">
 ```
 
-::: tip
-The [HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) polyfill can be used to implement `date` and `datetime-local` inputs [while we wait](https://caniuse.com/#feat=input-datetime) for better browser support.
-:::
-
 #### Customizing the Timezone
 
 By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you can post dates in a different timezone by changing the input name to `fields[myFieldHandle][datetime]` and adding a hidden input named `fields[myFieldHandle][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):

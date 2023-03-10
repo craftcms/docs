@@ -64,15 +64,18 @@ If you’re using MySQL, we recommend running [`php craft db/convert-charset`](c
 
 The [Craft starter project](https://github.com/craftcms/craft) is kept up-to-date with new Craft features, and provides official recommendations for your entry scripts (`index.php` and the `craft` CLI executable), configuration structure, etc. It’s a good idea to look this over as a means of keeping your upgraded projects as similar as possible to fresh ones. Be mindful of any customizations you’ve made to the scripts, over time—this is where you would have set any [additional PHP constants](./config/README.md#php-constants).
 
-Incorporating updated entry script(s) into your project may also involve changing the required version of [DotEnv](https://github.com/vlucas/phpdotenv) in `composer.json` to match the starter project.
+Incorporating updated entry script(s) into your project may also involve:
+
+- Changing the required version of [DotEnv](https://github.com/vlucas/phpdotenv) in `composer.json` to match the starter project;
+- Reviewing [how your environment is determined](./config/README.md#multi-environment-configs);
+
+Craft 3 projects would [automatically assign](https://github.com/craftcms/craft/blob/1.1.7/bootstrap.php#L22) the special `CRAFT_ENVIRONMENT` constant to the value of an environment variable named `ENVIRONMENT`—but the Craft 4 starter kit requires that you directly set `CRAFT_ENVIRONMENT` from your `.env` file.
 
 ## Breaking Changes and Deprecations
 
+Features deprecated in Craft 3 may have been fully removed or replaced in Craft 4, and new deprecations have been flagged in Craft 4
+
 ### Configuration
-
-Depending on when your project was first created (or when you last updated your [entry scripts](#entry-script)), you may need to review [how your environment is set](./config/README.md#multi-environment-configs).
-
-Craft 4 looks for an environment variable (or PHP constant) named `CRAFT_ENVIRONMENT`. Use of the `ENVIRONMENT` variable is no longer recommended, as it relies on an older entry script to assign the constant.
 
 #### Config Settings
 

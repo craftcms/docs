@@ -52,6 +52,14 @@
   @apply block w-full mt-2 px-5 py-4 rounded border border-yellow-300;
 
   background-image: repeating-linear-gradient(-45deg, transparent 0px, var(--sidebar-bg-color) 0px, var(--sidebar-bg-color) 4px, transparent 4px, transparent 8px);
+
+  p:first-child {
+    margin-top: 0;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 </style>
 

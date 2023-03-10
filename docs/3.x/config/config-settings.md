@@ -2755,7 +2755,7 @@ Defined by
 
 </div>
 
-The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
+The string to use to separate words when uploading assets. If set to `false`, spaces will be left alone.
 
 
 

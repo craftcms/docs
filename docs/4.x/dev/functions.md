@@ -25,7 +25,7 @@ Function | Description
 [cycle](https://twig.symfony.com/doc/3.x/functions/cycle.html) | Cycles on an array of values.
 [dataUrl](#dataurl) | Outputs an asset or file as a base64-encoded data URL.
 [date](#date) | Creates a date.
-[dump](https://twig.symfony.com/doc/3.x/functions/dump.html) | Dumps information about a variable.
+[dump](#dump) | Dumps information about a variable.
 [endBody](#endbody) | Outputs scripts and styles that were registered for the “end body” position.
 [expression](#expression) | Creates a database expression object.
 [failMessageInput](#failmessageinput) | Outputs a hidden `failMessage` input.
@@ -337,7 +337,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ## `dataUrl`
 
-Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft4:craft\elements\Asset> object or a file path (optionally using an [alias](../config/#aliases)).
+Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft4:craft\elements\Asset> object or a file path (optionally using an [alias](../config/README.md#aliases)).
 
 ```twig
 {# Asset object `myLogoAsset` #}
@@ -386,6 +386,18 @@ Craft additionally supports passing a `date`/`time` array:
 {% if now > date(myDate) %}
   {# today is past January 15, 2021 #}
 {% endif %}
+```
+
+## `dump`
+
+Overrides Twig’s default [`dump()`](https://twig.symfony.com/doc/3.x/functions/dump.html) function  with one that is available in all contexts <Since ver="4.4.0" feature="The dump() Twig function" /> (not just when the Twig environment is in “debug” mode), and produces consistent output with the [`{% dd %}` tag](./tags.md#dd).
+
+```twig
+{% set news = craft.entries()
+  .section('news')
+  .all() %}
+
+{{ dump(news|column('title')) }}
 ```
 
 ## `endBody`

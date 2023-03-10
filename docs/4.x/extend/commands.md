@@ -201,4 +201,30 @@ Event::on(
 );
 ```
 
+## Output Helpers
+
+Internally, Craft keeps console feedback consistent with a suite of helper methods <Since ver="4.0.0" feature="Console command formatting tools" /> provided by <craft4:craft\console\ControllerTrait>.
+
+- **Success** — Output a message with a ✅ icon: `$this->success('Done!');`
+- **Failure** — Output a message prefixed with an `X`: `$this->success('Something went wrong.');`
+- **Tips** — Output a message with a 💡 icon: `$this->tip('Try this, next!');`
+- **Warning** — Output a message with a ⚠️ icon: `$this->warning('Check your input and try again.');`
+- **Generic “Note”** — Output a message with a custom icon or prefix: `$this->note('Eat your vegetables!', '🥬 ');`
+
+The above methods run the `$note` argument through <craft4:craft\console\ControllerTrait::markdownToAnsi()>, which provides some basic formatting for long messages. All methods write to `stdout`—use `$this->stderr()` if you need to target a particular output stream.
+
+You can also format messages directly, using <yii2:yii\console\Controller::stdout()>. Additional <craft4:craft\helpers\Console> constants can be passed after the first argument (the message itself) to decorate the text output:
+
+```php
+use craft\helpers\Console;
+
+$this->stdout(
+    'This message will be bold and vibrant!',
+    Console::FG_RED,
+    Console::BG_YELLOW,
+    Console::BOLD,
+    // ...
+);
+```
+
 [yii]: https://www.yiiframework.com/doc/guide/2.0/en/tutorial-console#create-command

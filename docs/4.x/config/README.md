@@ -529,7 +529,7 @@ Path to your project’s [`.env` file](../directory-structure.md#env), including
 The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays.
 
 ::: warning
-Prior to Craft 4, `craftcms/craft` projects allowed this fall back to the default `production` value, for security. Now, the starter kit comes with three `.env` examples, each of which explicitly sets a `CRAFT_ENVIRONMENT`.
+Prior to Craft 4, `craftcms/craft` starter projects allowed this fall back to the default `production` value, for security. Now, the starter kit comes with three `.env` examples, each of which explicitly sets a `CRAFT_ENVIRONMENT`.
 :::
 
 ### `CRAFT_EPHEMERAL`
