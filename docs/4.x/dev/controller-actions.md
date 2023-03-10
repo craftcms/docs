@@ -864,6 +864,41 @@ In the event you need to re-key the custom field data in the request, you can se
 </form>
 ```
 
+### Field + Data Types
+
+Fields (and attributes) that use [scalar](https://www.php.net/manual/en/function.is-scalar.php) values like numbers, text, or booleans will work as expected with a single input.
+
+Other types may require multiple inputs or specific naming conventions.
+
+#### Date + Time
+
+Entries’ native `postDate` and `expiryDate` properties can be handled in the same way [date/time fields](../date-time-fields.md#saving-date-fields) are; but instead of passing their values under a `fields` key, you'll send them as top-level keys in a POST request:
+
+::: code
+```twig Unified
+{{ input('datetime-local', 'postDate', entry.postDate|atom) }}
+```
+```twig Discrete Inputs
+{{ input('date', 'postDate[date]', entry.postDate.format('Y-m-d')) }}
+{{ input('time', 'postDate[time]', entry.postDate.format('G:i')) }}
+```
+:::
+
+Both of these options will POST valid data that Craft can reconstruct into a PHP DateTime object.
+
+::: tip
+Some date properties (like `dateUpdated` and `dateCreated`) may be determined by Craft, and are not editable.
+:::
+
+#### Relations
+
+Assets, categories, entries, and tags can be associated to a [relational](../relations.md) field by passing an array of IDs. For more information and examples, see the relevant field type documentation:
+
+- [Assets fields](../assets-fields.md#saving-assets-fields)
+- [Entries fields](../entries-fields.md#saving-entries-fields)
+- [Categories fields](../categories-fields.md#saving-categories-fields)
+- [Tags fields](../tags-fields.md#saving-tags-fields)
+
 ## Plugins + Custom Actions
 
 Many plugins expose functionality via their own controllers and actions. Their accepted parameters and response types are entirely up to the author, but the [fundamentals](#making-requests) will be the same. Consult the appropriate documentation for specifics!
