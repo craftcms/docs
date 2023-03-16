@@ -174,7 +174,7 @@ It would look similar using `setTransform()` like we did in the previous section
 
 ### Possible Values
 
-All the same settings available to [named transforms](#defining-transforms-from-the-control-panel) are available to template-defined transforms.
+All the same settings available to [named transforms](#named-transforms) are available to template-defined transforms and transforms requested via [GraphQL](#graphql).
 
 - The `mode` property can be set to either `'crop'`, `'fit'`, `'letterbox'`, or `'stretch'`.
 - `width` and `height` can be set to integers, or omitted.
@@ -239,3 +239,76 @@ Don’t forget to configure the corresponding `sizes` attribute, as well—Craft
 ::: tip
 You can also provide relative image sizes when eager-loading asset transforms. See [`AssetQuery::withTransforms()`](craft4:craft\elements\db\AssetQuery::withTransforms()) in the class reference for an example.
 :::
+
+## GraphQL
+
+When requesting asset data via the [GraphQL](./graphql.md) API, you can get named and ad-hoc transforms with the `@transform` directive.
+
+Like we’ve seen in the template-defined transforms, the GraphQL API allows you to retrieve individual properties as though they were tied to a transform…
+
+::: code
+```graphql Query
+query Thumbnails {
+  assets(volume: "images") {
+    title
+    alt
+    url @transform(width: 640, mode: "fit")
+    width
+    height
+  }
+}
+```
+```json Data
+{
+  "data": {
+    "assets": [
+      {
+        "title": "Warm Springs",
+        "alt": "Snow-dusted plateau.",
+        "url": "https://tutorial-two.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/8/warm-springs.jpg",
+        "width": 6000,
+        "height": 4000
+      },
+      {
+        "title": "Highway 26",
+        "alt": "Winter scene near Warm Springs, Oregon",
+        "url": "https://tutorial-two.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/3/highway-26.jpg",
+        "width": 6000,
+        "height": 4000
+      }
+    ]
+  }
+}
+```
+:::
+
+…or set a transform on the entire asset object:
+
+::: code
+```graphql Query
+query Gallery {
+  assets(volume: "images") @transform("fullscreen") {
+    title
+    alt
+    url
+    width
+    height
+  }
+}
+```
+```json Data
+{
+  "data": {
+    "asset": {
+      "title": "Warm Springs",
+      "alt": "Highway 26, south of Warm Springs, Oregon",
+      "url": "https://tutorial-two.ddev.site/uploads/images/_fullScreen/8/warm-springs.jpg",
+      "width": 2560,
+      "height": 1707
+    }
+  }
+}
+```
+:::
+
+Note that in the first example, the `height` and `width` values are for the _original_ image, whereas in the second example, they reflect the _transformed_ dimensions.
