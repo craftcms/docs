@@ -6,7 +6,8 @@ To get a better sense of how Craft can support your next project’s unique requ
 
 ## Beginner: _Explore the Demo_
 
-- Expose blog post author details. (Hint: use [`dd`](/4.x/dev/tags.md#dd) on `entry.author` to see what’s there, or consult the [User element API documentation](craft4:craft\elements\User).)
+- Expose blog post author details.  
+  **Hint:** add [`{% dump entry.author %}`](/4.x/dev/tags.md#dump) anywhere you have access to an `entry` to see what’s there—or consult the [User element API documentation](craft4:craft\elements\User).)
 - Customize the homepage (`index.twig`) to match your site.
 - Add more posts and integrate [pagination](/4.x/dev/tags.md#paginate) in your templates.
 - Add an RSS feed using the example [in the documentation](kb:rss-and-atom-feeds).

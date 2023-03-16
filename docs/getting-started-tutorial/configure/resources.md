@@ -1,8 +1,14 @@
-# Your First Section
+# Creating Resources
 
-Our first order of business is to create a _section_ for our blog posts.
+Before we can add content and use it in our site’s front-end, we need to define the management tools for it. This process is done entirely within the control panel—no coding is required to create new content types!
+
+::: tip
+Our content outline included an _About_ page and a place to keep global site information—we’ll circle back and work on those after we see the blog through.
+:::
 
 ## Creating a Section
+
+Our first order of business is to create a _section_ for our blog posts.
 
 <BrowserShot
     url="https://tutorial.ddev.site/admin/settings/sections/new"

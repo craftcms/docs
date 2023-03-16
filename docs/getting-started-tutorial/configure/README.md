@@ -92,7 +92,7 @@ There are loads more field types available in the official [Plugin Store](https:
 
 ## Modeling a Blog Post
 
-Consider what comprises a blog post:
+As our first exercise in content modeling, let’s consider what comprises a blog post:
 
 - Title/Headline
 - Author

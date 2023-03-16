@@ -1,96 +1,87 @@
-# Working with Twig
+# Twig Basics
 
-[Twig](https://twig.symfony.com/doc/3.x/templates.html) templates are plain text files that use special syntax to render Craft CMS content for the web browser.
+[Twig](https://twig.symfony.com/doc/3.x/) templates are plain text files that use special syntax to control Craft’s HTML output. When rendered, portions of a Twig file are inserted, replaced, omitted, or repeated, based on special instructions sprinkled throughout the HTML.
 
 ::: tip
-If you’ve used Twig in other projects that’ll be useful here. Craft adds its own layer of functionality to standard Twig.
+If you’ve used Twig in other projects, that knowledge will be useful here. Craft adds a number of features to Twig, but the core principles (and syntax) are totally portable.
 :::
 
 ## Why Twig?
 
-Creating Twig templates isn’t all that different from working with HTML, CSS, or JavaScript. In fact, you can write an entire Twig template without even using Twig!
+Our goal in this section is to combine static HTML with dynamic content. Twig is a simple—yet powerful—language that allows us to translate the data we’ve defined in Craft into a blob of HTML that can then be sent back to a browser and displayed for a user.
 
-If you’ve never built any part of a site before that’s okay, but it might help to familiarize yourself with fundamental [HTML, CSS, and JavaScript](https://developer.mozilla.org/en-US/docs/Web/Guide/Introduction_to_Web_development).
-
-The idea is that you build whatever normal parts you need for a web page and Twig provides super powers for rendering dynamic content wherever you need it.
-
-In technical terms, Twig gets compiled behind the scenes. This means you can use templates however you’d like without having to worry about performance.
-
-Its syntax is clean and easy to learn, and it doesn’t allow PHP tags that often lead to messy or confusing templates. Twig is also a popular templating language beyond Craft CMS—so even though Craft adds unique functionality, learning Twig can be useful for other projects.
+The beauty of a template language is that a single template can be rendered many times with different data. Our main task will be to create a Twig template for our blog posts that 
 
 ::: tip
-Starting with your own static project? You can drag your existing `.html` files to the `templates/` directory and have a great starting point for adding bits of Twig.
+Any HTML document is also a valid Twig file, so if you have experience writing HTML _without_ a template language, you’re in a great position to start building with Craft.
+
+If not, check out the [Getting Started with HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started) article on _Mozilla Developer Network_.
 :::
 
-## Where front end files live
+## Your First Template
 
-Our work ahead will focus on the `templates/` and `web/` directories, and you can copy and paste sample code as we go without needing anything else.
-
-::: tip
-The sample code is here if you want to grab everything before we get started: [github.com/craftcms/tutorial-project](https://github.com/craftcms/tutorial-project)
-:::
-
-Anything that uses dynamic content should live in your `templates/` directory.
-
-Static HTML, CSS, JavaScript and images—including the cat photo we used earlier—can (and should) all go in your `web/` directory.
-
-How you organize either directory is up to you!
-
-We’ve chosen to use `web/assets/` for our Craft volumes we’ll manage in the control panel, so it’s best to keep non-user-editable files out of that directory just for clarity.
-
-## Template files
-
-A template file is plain text you can work with in your code editor.
-
-Each time we add a template, that means we’ll create a new text file in the `templates/` directory, and its filename will end in `.twig` or `.html`. The file extension doesn’t matter in our filesystem, but you may remember we _didn’t_ include a file extension configuring our Craft CMS sections earlier.
-
-When you provide Craft CMS with a value of `blog/_entry`, for example, it will automatically look for `templates/blog/_entry.twig` and `templates/blog/_entry.html`.
-
-::: tip
-There’s no “correct” file extension for templates, but `.twig` will be better for automatic syntax highlighting in editors like VS Code.
-:::
-
-## Mini demo: Twig vs. HTML
-
-For a quick illustration of what we’ll be doing, create two files: 
-
-1. `templates/twig-hello.twig`
-2. `web/html-hello.html`
-
-Next, add the exact same contents to each one:
+In VS Code, you should have `templates/index.twig` open. Let’s clear out that file (press <kbd>Command/Control + A</kbd>, then <kbd>Backspace</kbd>, or use the **Selection** menu) and replace it with this:
 
 ```twig
-Hi! This site’s name is {{ siteName }}.
+{{ siteName }}
 ```
-
-Without any setup in Craft CMS, you can go directly to `https://tutorial.ddev.site/twig-hello` and `https://tutorial.ddev.site/html-hello.html` to see each one in your browser. Try it!
-
-The Twig version gets parsed and displays the name of your site, with a clean URL that doesn’t require a file extension.
-
-The static HTML shows the placeholder Twig variable because it’s not parsed, and it requires `.html` in the filename because it maps directly to a static file.
-
-This is the difference between a Twig template and static HTML. We’ll create a series of Twig templates to display our content expanding upon this concept.
 
 ## Syntax highlighting
 
-Let’s take a moment and configure our code editor to make life easier.
+So far, `index.twig` has been an impenetrable wall of white text.
 
-VS Code has a built-in extension marketplace for installing add-ons that improve working with different kinds of code. There’s a whole universe of customization, but the following extensions will be useful here:
+VS Code has a built-in extension marketplace for installing add-ons that improve the experience of working with different languages or technologies. There’s a whole universe of customization available , but the following extensions will be useful here:
 
-- **Twig**
-- **Twig Language 2**
-- **Tailwind CSS IntelliSense**
+- **Twig Language 2** by _mblode_;
+- **Tailwind CSS IntelliSense** by _Tailwind Labs_ (we’ll get to this, later);
+
+![VS Code with its extension marketplace open](../images/vs-code-extension-pane.png)
 
 Open the **Extensions** panel in VS Code, search for each one, and choose **Install**.
 
-You’ll need to restart the app so they can all take effect.
-
-![](../images/vs-code-extension-pane.png)
-
-Once the extensions are installed, your Twig templates will get helpful syntax highlighting to make code more readable and autocomplete tips. Here’s a before and after comparison:
-
-![](../images/vs-code-extensions.png)
-
 ::: tip
-You’ll be able to copy and paste everything in the section that follows, but we have [an introduction to templating](/3.x/dev/twig-primer.md) if you’d like to learn how to work with it!
+You may need to restart or “reload” VS Code to give the extensions a chance to properly initialize.
 :::
+
+Our simple `index.html` file may not look much different, but once we drop some more code into it, you’ll start to appreciate the value of syntax highlighting!
+
+## Twig Fundamentals
+
+There are only a few things we figure you’ll want to know up-front about Twig’s syntax. You will be able to copy-and-paste everything else in the tutorial, but being able to pick out important bits and pieces will allow you to start tinkering on-the-fly.
+
+<See path="/4.x/dev/twig-primer.md" description="Curious about all of Twig’s features? Check out our templating guide in the main documentation." />
+
+Replace the contents of `templates/index.twig` with this:
+
+```twig
+{# This is a comment! It won’t appear in the HTML output. #}
+
+{# Here’s some text, dynamically inserted into an HTML tag: #}
+<h1>{{ siteName }}</h1>
+
+{# What about a dynamic value? #}
+<p>Today is {{ now | date }}!</p>
+
+{# This is a variable, and it’s being set to a list (or “array”) of colors: #}
+{% set colors = ['red', 'green', 'blue'] %}
+
+{# How many colors are in the list? #}
+<p>The following list should contain {{ colors | length }} color(s).</p>
+
+{# This is a loop that outputs those items, but sorts them first: #}
+<ul>
+  {% for color in colors | sort %}
+    {# Let’s stylize each item using some inline CSS: #}
+    <li style="color: {{ color }}">
+      {# The color is capitalized for display: #}
+      {{ color | title }}
+    </li>
+  {% endfor %}
+</ul>
+```
+
+For now, this code can serve as a quick-reference guide for Twig syntax. Read down through the template, and see if you can guess roughly what it’ll look like!
+
+<BrowserShot url="https://tutorial.ddev.site/" :link="false">
+<img src="../images/twig-index-reference.png" alt="Sample template, loaded in a browser." />
+</BrowserShot>

@@ -37,10 +37,8 @@ module.exports = {
         collapsable: true,
         children: [
           "configure/",
-          "configure/section",
-          "configure/editing",
-          "configure/globals",
-          "configure/single"
+          "configure/resources",
+          "configure/editing"
         ]
       },
       {
@@ -51,14 +49,18 @@ module.exports = {
           "build/routing",
           "build/twig",
           "build/templates",
-          "build/preview",
-          "build/graphql"
+          "build/preview"
         ]
       },
       {
         title: "Next Steps",
         collapsable: true,
-        children: ["more/"]
+        children: [
+          "more/",
+          "more/globals",
+          "more/single",
+          "more/graphql"
+        ]
       }
     ]
   }

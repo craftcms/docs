@@ -1,4 +1,4 @@
-# Creating + Editing Entries
+# Authoring Content
 
 Our blog is starting to take shape! Let’s pause for a moment and look at the editing tools we’ve set up, from the perspective of a content author.
 

@@ -36,7 +36,6 @@ craft/
 It’s important that you maintain this folder structure for the rest of the tutorial. You are welcome to add whatever you like to it, but renaming anything may require config changes that the tutorial doesn’t cover.
 :::
 
-
 Let’s take a look at each top-level item:
 
 This file/folder… | Contains…

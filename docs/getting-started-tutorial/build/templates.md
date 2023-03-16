@@ -1,22 +1,22 @@
-# Create templates
+# Site Templates
 
-Let’s build some templates and start our Twig-powered front end!
+It’s time to bring together everything we’ve learned and create some templates that display data from the content model we set up in Craft.
 
-## Create a layout
+## Create a Layout
 
-Start by creating a layout template at `templates/_layout.twig`.
+A layout is sort of like a wrapper that goes around the main content of a page, but is still a Twig template. In most cases, a layout will be responsible for outputting a header, site navigation, or a footer—but it can also contain invisible metadata in the `head` of every document that uses it.
 
-We’re going to follow [DRY methodology](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), which stands for Don’t Repeat Yourself. The idea is to write code once and re-use it as much as possible without duplicating things. That makes your site’s code easier to understand and maintain over time.
+Create a layout template at `templates/_layout.twig` by right-clicking the `templates/` folder in VS Code’s file browser, then selecting **New File…**.
 
-The layout is important for this because it will be the base our other templates _extend_.
+::: tip
+The underscore (`_`) at the beginning of `_layout.twig` means the template is “private.” Unlike `index.twig`, you will _not_ be able to view the template by visiting `https://tutorial.ddev.site/_layout`.
 
-The underscore (`_`) at the beginning of `_layout.twig` means the template is private. 
+Use an underscore any time a template doesn’t need to be rendered on its own. You can also prefix a subfolder of your `templates/` directory with an underscore to hide _everything_ inside it.
+:::
 
-Unlike the quick example we started with, you _cannot_ view the template by visiting `https://tutorial.ddev.site/_layout`. We can use those underscores when it makes sense. In this case the layout is only a shell and we never want it to appear on its own, so a private template is perfect.
+Copy the following into the new layout file you just created:
 
-Copy the following into the `templates/_layout.twig` file you created:
-
-```twig
+```twig{2,5,6,7,11-12}
 <!DOCTYPE html>
 <html lang="{{ craft.app.language }}">
   <head>
@@ -25,121 +25,104 @@ Copy the following into the `templates/_layout.twig` file you created:
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="/styles.css" rel="stylesheet">
   </head>
-  <body class="ltr">
-    <div class="container mx-auto px-4">
-      {% block content %}
-      {% endblock %}
-    </div>
+  <body>
+    {% block content %}
+      {# Nothing here, yet! #}
+    {% endblock %}
   </body>
 </html>
 ```
 
-This is barebones HTML that will be the foundation of every page on the site.
+This is the skeleton of a basic webpage, but it has no content! A layout’s main job is to reduce boilerplate in your templates; here, we’ve defined a few things we want on _every_ page of the site:
 
-HTML uses tags, or markup, as a structured way to organize and describe content. You may immediately recognize Craft’s `siteName` tag in this line:
+- The language content is presented in (on the `<html>` tag);
+- The name of our site, in the `<title>` tag (you may recognize this from `index.html`);
+- A `<meta>` tag defining how we want the page to be sized on small-screened devices;
+- A reference to a stylesheet;
 
-```twig
-<title>{{ siteName }}</title>
-```
+The last thing to note is the use of the `{% block %}` tag to define a region where our content will go. Craft doesn’t know anything about `_layout.twig` yet, so we’ll have to tell it when we want to use this layout, and what we want to go that `content` block.
 
-`title` is a standard HTML tag that tells the browser how to label the page’s window or tab. Whatever’s wrapped in the `title` tag, which means whatever’s between the opening `<title>` and closing `</title>`, is what’s displayed.
+## Create a Post Template
 
-`siteName` is a Twig tag Craft CMS provides for outputting our site name.
+Now that we have a _layout_ template, let’s use it for our individual blog post pages.
 
-We’ll blend HTML and Twig in our templates to display content we manage in the control panel.
+Create `templates/blog/_entry.twig` and paste this code to it:
 
-Now download a copy of the example styles into `web/styles.css`: <https://raw.githubusercontent.com/craftcms/tutorial-project/main/web/styles.css>
+```twig{2,5-7}
+{# You can omit the `.twig` when referencing another template: #}
+{% extends '_layout' %}
 
-This static style sheet will offer some basic styling for our templates.
-
-The layout template sets the page’s language to match Craft’s and adds `meta` details that tell browsers how to interpret text and how the page fits into different browser windows.
-
-A crucial part of the template is the `content` block:
-
-```twig
+{# Provide something to the `content` block in `_layout.twig`: #}
 {% block content %}
+  <h1>Some day, I’ll be a blog post!</h1>
 {% endblock %}
 ```
 
-Whenever you see `{{` `}}` or `{%` `%}` you know you’re looking at Twig tags.
-
-In this case, we’re establishing the beginning and end of a block named `content`. The `content` part could be anything we want, but we’ll use this block for page content. There’s nothing inside right now because the layout template provides a structure other child templates will fill in.
-
-```twig
-{% block content %}
-  {# other templates will put stuff here, inside the content block #}
-{% endblock %}
-```
-
-## Create a detail page
-
-Now that we have a layout template, let’s use it for our blog post detail pages.
-
-Create `templates/blog/_entry.twig` and add the following to it:
-
-```twig
-{% extends "_layout.twig" %}
-
-{% block content %}
-  <h1 class="text-4xl text-black font-display my-4">I’m a blog post!</h1>
-{% endblock %}
-```
-
-The first line _extends_ the layout template, meaning it will use that as a starting point and let us further customize or override whatever we want. We’re now providing our own content, within the `content` block, to appear on the page.
-
-![](../images/extend.png =550x)
+The first highlighted line connects our post template with the layout template, using the `{% extends %}` tag.
 
 Now that the blog section’s template is ready, you can visit the URL for a published post:
 
-<BrowserShot url="https://tutorial.ddev.site/blog/my-first-post" :link="false" caption="">
-<img src="../images/entry-static.png" alt="Screenshot of empty page with generic title" />
+<BrowserShot url="https://tutorial.ddev.site/blog/my-trip-to-bend" :link="false" caption="">
+<img src="../images/entry-static.png" alt="Screenshot of an unstyled page with generic heading" />
 </BrowserShot>
 
-::: tip
-Throughout these examples you’ll see `class` parameters with values like `text-4xl text-black font-display my-4`. These are Tailwind CSS [utility classes](https://tailwindcss.com/docs/utility-first) that style elements on the page. You can just copy and paste them for now, or check out the [Tailwind CSS documentation](https://tailwindcss.com/) if you insist on having a side quest.
-:::
+### Add Dynamic Data
 
-Clearly we don’t want to display the same title on every page, so let’s change that.
+Hard-coding our post’s title isn’t very practical, so let’s make a couple of changes and bring in some data from the current post.
 
-For any detail page template, Craft CMS provides a special `entry` variable we can use to access that entry’s content. Let’s display the `title` and `postDate` properties in the template:
+We know now that any time an element (like our blog post entries) matches a request path, Craft will render the template defined in its settings. In this case, the entry belongs to a section that declared `blog/_entry` as its **Template**—which is why we had to add this one in a particular spot.
 
-```twig{4,6}
-{% extends "_layout.twig" %}
+But how do we actually get the content for that post? Craft makes the matched entry available in our template under a special `entry` variable:
+
+```twig{5,8-11}
+{% extends '_layout' %}
 
 {% block content %}
-  <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
+  {# Access a property using “dot” notation: #}
+  <h1>{{ entry.title }}</h1>
 
-  <time class="text-sm block pb-4" datetime="{{ entry.postDate | date('Y-m-d') }}">{{ entry.postDate | date('d M Y') }}</time>
+  {# Format dates with a “filter”: #}
+  <time datetime="{{ entry.postDate | date('Y-m-d') }}">
+    {{ entry.postDate | date('d M Y') }}
+  </time>
 {% endblock %}
 ```
 
 Now it’s looking better!
 
-<BrowserShot url="https://tutorial.ddev.site/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/my-trip-to-bend" :link="false" caption="">
 <img src="../images/entry-dynamic.png" alt="Screenshot of detail page with dynamic title and entry date" />
 </BrowserShot>
 
-Notice how we’re using the [`|date` Twig filter](/3.x/dev/filters.md#date) to specify formats for the `entry.postDate` value. This is a typical example of using a filter to modify something in Twig; a value you want to modify or transform is followed by a pipe (`|`), the name of the filter, and sometimes settings specific to that filter. You can see all Craft’s available [filters](/3.x/dev/filters.md) to get a better idea of what you can do with them.
+Note that we’re using the [`|date` Twig filter](/4.x/dev/filters.md#date) to specify formats for the `entry.postDate` value. This is a typical example of using a filter to modify something in Twig; a value you want to modify or transform is followed by a pipe (`|`) and the name of the filter, then sometimes settings specific to that filter. You can see all Craft’s available [filters](/4.x/dev/filters.md) to get a better idea of what you can do with them.
 
 Let’s display the “Feature Image” next, using the `featureImage` handle we created with that custom field:
 
-```twig{8-12}
-{% extends "_layout.twig" %}
+```twig{4,16-18}
+{% extends '_layout' %}
+
+{# Load the attached image: #}
+{% set featureImage = entry.featureImage.one() %}
 
 {% block content %}
-  <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
+  {# Access a property using “dot” notation: #}
+  <h1>{{ entry.title }}</h1>
 
-  <time class="text-sm block pb-4" datetime="{{ entry.postDate | date('Y-m-d') }}">{{ entry.postDate | date('d M Y') }}</time>
+  {# Format dates with a “filter”: #}
+  <time datetime="{{ entry.postDate | date('Y-m-d') }}">
+    {{ entry.postDate | date('d M Y') }}
+  </time>
 
-  {% if entry.featureImage|length %}
-    {% for image in entry.featureImage.all() %}
-      <img src="{{ image.url }}" alt="{{ image.title }}" />
-    {% endfor %}
+  {# Output the image, if one was found: #}
+  {% if featureImage %}
+    {{ featureImage.getImg() }}
   {% endif %}
 {% endblock %}
 ```
 
-This first uses an [`if` conditional statement](https://twig.symfony.com/doc/3.x/tags/if.html) to see if there’s an image saved for this field. The “Assets” field we used can have one or many images depending on how we configure it, so the statement uses the [`|length` Twig filter](/3.x/dev/filters.md#length) to count the number of items—where `0` will be `false` and anything else will be `true`.
+At the top of the template, a new `set` tag loads the first attached image. We check at the end of the template whether an image is indeed available, then let Craft generate an HTML `<img>` tag with the right attributes.
+
+This first uses an [`if` conditional statement](https://twig.symfony.com/doc/3.x/tags/if.html) to see if there’s an image saved for this field. The “Assets” field we used can have one or many images depending on how we configure it, so the statement uses the [`|length` Twig filter](/4.x/dev/filters.md#length) to count the number of items—where `0` will be `false` and anything else will be `true`.
 
 If the statement is `true`, meaning we have at least one feature image, we use `entry.featureImage.all()` to get the set, then a `for` loop to display each one using the `image` variable. (We limited the field settings earlier so a content author can only provide one, but if we raised that limit later _every_ image would be shown here without any template changes!)
 
@@ -150,7 +133,7 @@ For each asset, we output a `img` HTML tag which tells the browser to display an
 
 We should now see the image after refreshing the page:
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="">
+<BrowserShot url="https://tutorial.test/blog/my-trip-to-bend" :link="false" caption="">
 <img src="../images/entry-with-image.png" alt="Screenshot of detail page with dynamic image added" />
 </BrowserShot>
 
@@ -187,7 +170,7 @@ We’ll use Twig to create an object called `featureImage` with the settings we 
 
 You can now refresh the front end and see your transformed asset:
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
+<BrowserShot url="https://tutorial.test/blog/my-trip-to-bend" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
 <img src="../images/image-resized.png" alt="Screenshot of detail page with auto-sized image" />
 </BrowserShot>
 
@@ -239,7 +222,7 @@ Matrix content is stored in whatever blocks we’ve defined. To display that con
 
 The Matrix content will now be included on the page:
 
-<BrowserShot url="https://tutorial.test/blog/my-first-post" :link="false" caption="Detail page with post content added." :max-height="600">
+<BrowserShot url="https://tutorial.test/blog/my-trip-to-bend" :link="false" caption="Detail page with post content added." :max-height="600">
 <img src="../images/matrix-content.png" alt="Screenshot of detail page with post content" />
 </BrowserShot>
 
