@@ -47,7 +47,7 @@ Allow Upscaling
 :   Whether or not Craft is allowed to scale an image beyond its original dimensions. Affects the maximum **Width** and **Height** for **Fit**, **Crop**, and **Stretch** output, and the matting strategy for **Letterbox** transforms.
 
 Quality
-:   Sets a quality or compression ratio for the transformed image, depending on the format of the target image.
+:   Sets a quality or compression ratio for the transformed image, depending on the format of the target image. When left blank, the quality will be determined by the <config4:defaultImageQuality> config setting.
 
 Image Format
 :   Format for the transformed image.
@@ -178,7 +178,7 @@ All the same settings available to [named transforms](#defining-transforms-from-
 
 - The `mode` property can be set to either `'crop'`, `'fit'`, `'letterbox'`, or `'stretch'`.
 - `width` and `height` can be set to integers, or omitted.
-- `quality` can be set to a number between 0 and 100, or omitted.
+- `quality` can be set to a number between 0 and 100, or omitted to use the <config4:defaultImageQuality> setting.
 - `format` can be set to `'jpg'`, `'gif'`, `'png'`, `'webp'`, `'avif'`, or omitted.
 - A `position` property (set to one of the [valid values](#crop) listed above) is supported when `mode` is set to `'crop'` or `'letterbox'`. The behavior is different for each [type of transform](#transform-modes).
 
