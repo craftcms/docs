@@ -1662,10 +1662,11 @@ for the system user running the web server.
 
 You may provide your own command optionally using several tokens Craft will swap out at runtime:
 
-- `{path}` - the target backup file path
+- `{file}` - the target backup file path
 - `{port}` - the current database port
 - `{server}` - the current database hostname
 - `{user}` - the user to connect to the database
+- `{password}` - the user’s password
 - `{database}` - the current database name
 - `{schema}` - the current database schema (if any)
 
