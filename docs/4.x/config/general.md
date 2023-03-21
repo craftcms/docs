@@ -610,7 +610,7 @@ Array of plugin handles that should be disabled, regardless of what the project 
 This can also be set to `'*'` to disable **all** plugins.
 
 ```php
-->disabledPlugins'('*')
+->disabledPlugins('*')
 ```
 
 ::: warning
