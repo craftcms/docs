@@ -17,7 +17,7 @@ A condition is a group of one or more condition rules that, when combined, can p
 
 The “condition builder” is the [Htmx](https://htmx.org/)-powered UI framework the control panel user interacts with in their browser.
 
-Custom fields may define condition rule types to be pulled into element conditions. Most built-in field types take advantage of this and a great source of examples.
+Custom fields may define condition rule types to be pulled into element conditions. Most built-in field types take advantage of this and are a great source of examples.
 
 Element types also have an opportunity to register their own conditions and condition rules for native attribute types.
 
