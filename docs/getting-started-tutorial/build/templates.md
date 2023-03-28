@@ -120,9 +120,9 @@ Let’s display the “Feature Image” next, using the `featureImage` handle we
 {% endblock %}
 ```
 
-At the top of the template, a new `set` tag loads the first attached image. We check at the end of the template whether an image is indeed available, then let Craft generate an HTML `<img>` tag with the right attributes.
+At the top of the template, a new `set` tag loads the first image attached to the **Feature Image** field. We check at the end of the template whether an image is indeed available, using an [`if` conditional statement](https://twig.symfony.com/doc/3.x/tags/if.html). `featureImage.getImg()` is a method then let Craft generate an HTML `<img>` tag with the right attributes.
 
-This first uses an [`if` conditional statement](https://twig.symfony.com/doc/3.x/tags/if.html) to see if there’s an image saved for this field. The “Assets” field we used can have one or many images depending on how we configure it, so the statement uses the [`|length` Twig filter](/4.x/dev/filters.md#length) to count the number of items—where `0` will be `false` and anything else will be `true`.
+This is also the first time we’re using an [`if` conditional statement](https://twig.symfony.com/doc/3.x/tags/if.html) to see if there’s an image saved for this field. The “Assets” field we used can have one or many images depending on how we configure it, so the statement uses the [`|length` Twig filter](/4.x/dev/filters.md#length) to count the number of items—where `0` will be `false` and anything else will be `true`.
 
 If the statement is `true`, meaning we have at least one feature image, we use `entry.featureImage.all()` to get the set, then a `for` loop to display each one using the `image` variable. (We limited the field settings earlier so a content author can only provide one, but if we raised that limit later _every_ image would be shown here without any template changes!)
 
