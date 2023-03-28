@@ -107,7 +107,7 @@ The specific properties and fields supported when updating an order’s `shippin
   {{ input('text', 'shippingAddress[fullName]', cart.shippingAddress.fullName) }}
 
   {# Custom fields (note the `[fields]` prefix): #}
-  {{ input('checkbox', 'shippingAddress[fields][isResidentialAddress]')}}
+  {{ input('checkbox', 'shippingAddress[fields][isResidentialAddress]') }}
 </form>
 ```
 
