@@ -335,7 +335,7 @@ The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 ```
 
 ::: tip
-The tag calls <craft4:craft\web\View::registerHtml()> under the hood, which can also be accessed via the global `view` variable.
+The tag calls <craft4:craft\web\View::registerHtml()> under the hood, which can also be accessed via the [global `view` variable](./global-variables.md#view).
 
 ```twig
 {% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
@@ -368,10 +368,10 @@ By default, `at endBody` will be used.
 The `{% js %}` tag can be used to register a JavaScript file or a JavaScript code block.
 
 ```twig
-{# Register a JS file #}
+{# Register a JS file: #}
 {% js "/assets/js/script.js" %}
 
-{# Register a JS code block #}
+{# Register a JS code block: #}
 {% js %}
   _gaq.push([
     "_trackEvent",
@@ -390,6 +390,37 @@ To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft4:
 {% do view.registerJsFile(myJsFile) %}
 ```
 :::
+
+If a duplicate URL or JavaScript block is registered, Craft will only output it once. Blocks are registered with a key derived from the `md5` hash of its contents, after stripping whitespace from its start and end, and ensuring it is terminated by a semicolon.
+
+Suppose one of your entries relied on a carousel library for slideshows managed via a Matrix field—some entries may have _no_ slideshows, but others may have _multiple_:
+
+```twig
+{% for block in entry.myMatrixField.all() %}
+  {% switch block.type %}
+    {% case 'text' %}
+      {{ block.text|md }}
+    {% case 'slideshow' %}
+      {# 1. Include carousel library: #}
+      {% js 'https://cdn.jsdelivr.net/npm/package/file' %}
+
+      {# 2. Initialize this carousel instance: #}
+      {% js %}
+        Carousel.init('#carousel-{{ block.uid | e('js') }}')
+      {% endjs %}
+
+      {# 3. Output carousel markup: #}
+      <div id="carousel-{{ block.uid }}">
+        {% for image in block.images.all() %}
+          {{ image.getImg() }}
+        {% endfor %}
+      </div>
+    {% default %}
+      <p>Unknown block type!</p>
+{% endfor %}
+```
+
+Rendering this template would result in the library (1) being output _once_ (because the URL is the same each time), but each initialization block (2) being output individually (because it includes a unique `id` target for the current carousel). If no `slideshow` blocks were rendered, no scripts would be output—but you could still register the same script elsewhere on your site without fear of it being included twice.
 
 ### Parameters
 
