@@ -85,3 +85,5 @@ For now, this code can serve as a quick-reference guide for Twig syntax. Read do
 <BrowserShot url="https://tutorial.ddev.site/" :link="false">
 <img src="../images/twig-index-reference.png" alt="Sample template, loaded in a browser." />
 </BrowserShot>
+
+### Glossary
