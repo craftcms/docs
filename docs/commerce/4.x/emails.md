@@ -112,15 +112,6 @@ This field takes plain text as well as Twig values. Two special variables are av
 
 This allows you to have full design flexibility.
 
-::: warning
-Craft [global set variables](https://docs.craftcms.com/api/v3/craft-web-twig-variables-globals.html) are not automatically loaded into your email templates. To access global set variables, first load them into your template:
-
-```twig
-{% set globalSetName = craft.globals.getSetByHandle('globalSetName') %}
-{{ globalSetName.customFieldName }}
-```
-:::
-
 ### Plain Text Email Template Path
 
 The path to a plain text template in your site’s `templates/` folder.
