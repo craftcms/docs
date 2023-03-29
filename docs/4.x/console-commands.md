@@ -48,7 +48,7 @@ You can also run `php craft help <command-name>` to learn more about a command a
 See the [Console Commands](extend/commands.md) page in the _Extending Craft_ section to learn about adding your own console commands.
 :::
 
-While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
+The complete list of available commands will include those from any plugins or custom modules you’ve added to your project. The list below represents just those that are present by default in all Craft installations.
 
 ### Global Options
 
