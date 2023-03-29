@@ -270,7 +270,7 @@ Certain services were exposed via the `craft` variable in Twig (an instance of <
 | `craft.request`           | `craft.app.request`
 | `craft.sections`          | `craft.app.sections`
 | `craft.session`           | `craft.app.session`
-| `craft.systemSettings`    | `craft.app.systemSettings`
+| `craft.systemSettings`    | System settings are stored in [Project Config](./project-config.md) <Since ver="3.1.0" feature="System settings in project config" />. Use `craft.app.projectConfig.get('...')` to access settings by their keys in `config/project/project.yml`. If a value you need is set to an alias or environment variable, pass it to the [`parseEnv()` function](./dev/functions.md#parseenv).
 | `craft.userGroups`        | `craft.app.userGroups`
 | `craft.userPermissions`   | `craft.app.userPermissions`
 
