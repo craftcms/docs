@@ -111,6 +111,8 @@ The specific properties and fields supported when updating an order’s `shippin
 </form>
 ```
 
+For more information on address management, continue reading—or see the main Craft documentation for [Address elements](/4.x/addresses.md).
+
 #### Address Ownership
 
 Logged-in users can directly [manage their addresses](/4.x/addresses.md#managing-addresses) via the front-end, and pick from them during checkout. However, addresses are only ever “owned” by one element—let’s look at some examples of how Commerce handles this:
