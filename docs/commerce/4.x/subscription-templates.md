@@ -76,6 +76,8 @@ To cancel a subscription you can use the following template. It assumes the `sub
 
 If you wish to set cancellation parameters, it is strongly recommended to make use of [subscription events](extend/events.md#beforecancelsubscription) instead of POST data.
 
+To cancel a subscription the subscriber must have the [Manage Subscriptions](store-management.md#manage-subscriptions) permission. You can assign this permission to the user group.
+
 ## Switching the subscription plan
 
 To switch a subscription plan you can use the following template. It assumes that `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/switch` form action:
@@ -99,6 +101,9 @@ To switch a subscription plan you can use the following template. It assumes tha
 
 If you wish to set parameters for switching the subscription plan, it is strongly recommended to make use of [subscription events](extend/events.md#beforeswitchsubscriptionplan) instead of POST data.
 
+To switch a subscription the subscriber must have the [Manage Subscriptions](store-management.md#manage-subscriptions) permission. You can assign this permission to the user group.
+
+
 ## Reactivating a canceled subscription
 
 To reactivate a subscription plan you can use the following template. It assumes the `subscription` variable is available and set to an instance of `craft\commerce\elements\Subscription`, and posts to the `commerce/subscriptions/reactivate` form action.
@@ -118,3 +123,5 @@ To reactivate a subscription plan you can use the following template. It assumes
 ::: warning
 Not all canceled subscriptions might be available for reactivation, so make sure to check for that using `subscription.canReactivate()`.
 :::
+
+To reactivate a subscription the subscriber must have the [Manage Subscriptions](store-management.md#manage-subscriptions) permission. You can assign this permission to the user group.

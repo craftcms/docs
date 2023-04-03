@@ -482,6 +482,7 @@ Some permissions have changed in Commerce 4:
     - `commerce-createDiscounts`
     - `commerce-deleteDiscounts`
 - `commerce-manageCustomers` has been replaced by Craft’s standard user management permissions.
+- `commerce-manageSubscriptions` is now required for all subscription customers in order to cancel, switch, or reactivate a subscription.
 
 ## Payment Gateways
 

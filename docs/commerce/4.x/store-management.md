@@ -82,7 +82,7 @@ Whether the user can delete discounts.
 
 ### Manage subscriptions
 
-Whether the user can see subscriptions, refresh subscription payments, and cancel subscriptions.
+Whether the user can see subscriptions, refresh subscription payments, and cancel subscriptions. This permission is required for subscription customers in order to change, cancel, or reactivate their subscription.
 
 ### Manage shipping <badge text="Pro" type="edition" vertical="middle" title="Commerce Pro only" />
 
