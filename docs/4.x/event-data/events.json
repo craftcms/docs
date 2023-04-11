@@ -6992,6 +6992,49 @@
     },
     {
         "class": "craft\\elements\\Asset",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineAssetUrlEvent",
+        "desc": "The event that is triggered before defining the asset’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Asset",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineAssetUrlEvent",
         "desc": "The event that is triggered when defining the asset’s URL.",
@@ -8156,49 +8199,6 @@
         "name": "EVENT_DEFINE_KEYWORDS",
         "type": "craft\\events\\DefineAttributeKeywordsEvent",
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
-        "filters": {
-            "duplicating": {
-                "label": "Element is being duplicated to a new element",
-                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
-                "excludes": [
-                    "isNew",
-                    "resaving",
-                    "revision"
-                ]
-            },
-            "enabled": {
-                "label": "Element is enabled",
-                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
-            },
-            "firstSave": {
-                "label": "Element is being saved for the first time",
-                "conditionsPhp": "$event->sender->firstSave",
-                "excludes": [
-                    "isNew",
-                    "draft",
-                    "provisional",
-                    "revision",
-                    "resaving"
-                ]
-            },
-            "propagating": {
-                "label": "Element is being propagated",
-                "conditionsPhp": "$event->sender->propagating"
-            },
-            "resaving": {
-                "label": "Element is being bulk-resaved",
-                "conditionsPhp": "$event->sender->resaving",
-                "excludes": [
-                    "firstSave"
-                ]
-            }
-        }
-    },
-    {
-        "class": "craft\\elements\\Asset",
-        "name": "EVENT_BEFORE_DEFINE_URL",
-        "type": "craft\\events\\DefineUrlEvent",
-        "desc": "The event that is triggered before defining the element’s URL.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",

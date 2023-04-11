@@ -1924,7 +1924,7 @@ Re-saves assets.
 
 
 --site
-: The site handle to save elements from.
+: The site handle to fetch elements from.
 
 
 --status
@@ -1995,7 +1995,7 @@ Re-saves categories.
 
 
 --site
-: The site handle to save elements from.
+: The site handle to fetch elements from.
 
 
 --status
@@ -2078,7 +2078,13 @@ Re-saves entries.
 
 
 --site
-: The site handle to save elements from.
+: The site handle to fetch elements from.
+
+
+--propagate-to
+: The site handle to propagate entries to.
+    
+    When this is set, the entry will *only* be saved for this site.
 
 
 --status
@@ -2111,6 +2117,10 @@ Re-saves entries.
 
 --set
 : An attribute name that should be set for each of the elements. The value will be determined by --to.
+
+
+--set-enabled-for-site
+: The site-enabled status that should be set on the entry, for the site it’s initially being saved/propagated to.
 
 
 --to
@@ -2155,7 +2165,7 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 
 
 --site
-: The site handle to save elements from.
+: The site handle to fetch elements from.
 
 
 --status
@@ -2230,7 +2240,7 @@ Re-saves tags.
 
 
 --site
-: The site handle to save elements from.
+: The site handle to fetch elements from.
 
 
 --status
@@ -2301,7 +2311,7 @@ Re-saves users.
 
 
 --site
-: The site handle to save elements from.
+: The site handle to fetch elements from.
 
 
 --status
