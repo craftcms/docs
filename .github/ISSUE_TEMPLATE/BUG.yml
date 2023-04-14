@@ -17,8 +17,8 @@ body:
       label: Description
       description: Please provide any other details that would be helpful for us to replicate the issue.
       value: |
-        ## Description
+        ### Details
 
-        ## Steps to reproduce
+        ### Steps to reproduce
 
         1.
