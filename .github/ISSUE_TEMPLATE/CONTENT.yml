@@ -2,17 +2,16 @@ name: Error or Omission
 description: Let us know about inaccurate or missing information.
 title: "[Content]: "
 labels: ["content"]
-assignees:
 body:
   - type: dropdown
     id: product
-    options:
-      - Craft CMS
-      - Commerce
-      - Other/Multiple/Not Sure
     attributes:
       label: Product
       description: Which section of the documentation are you having trouble with?
+      options:
+        - Craft CMS
+        - Commerce
+        - Other/Multiple/Not Sure
   - type: markdown
     attributes:
       value: |
