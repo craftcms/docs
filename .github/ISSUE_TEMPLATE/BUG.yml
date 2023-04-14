@@ -4,13 +4,10 @@ title: "[Bug]: "
 labels: ["bug"]
 body:
   - type: input
-    validations:
-      required: true
     attributes:
       label: Page URL
       description: Where did the problem occur?
       placeholder: https://craftcms.com/docs/…
-      value: ""
   - type: input
     attributes:
       label: Client
