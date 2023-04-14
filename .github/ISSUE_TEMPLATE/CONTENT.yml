@@ -16,7 +16,8 @@ body:
   - type: markdown
     attributes:
       label: Description
+      description: If you encountered an incorrect or broken example, let us know where you found it. If you couldn’t find information about a topic—or the existing information didn’t answer your question—leave a brief description of what you were looking for.
       value: |
-        Thanks for taking the time to report a problem with the documentation!
+        ## Description
 
-        If you encountered an incorrect or broken example, let us know where you found it. If you couldn’t find information about a topic—or the existing information didn’t answer your question—leave a brief description of what you were looking for.
+        Please provide as much detail as possible about the location of the issue and/or the problem you were trying to solve!
