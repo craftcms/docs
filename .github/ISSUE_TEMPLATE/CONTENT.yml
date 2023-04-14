@@ -10,8 +10,12 @@ body:
       - Craft CMS
       - Commerce
       - Other/Multiple/Not Sure
+    attributes:
+      label: Product
+      description: Which section of the documentation are you having trouble with?
   - type: markdown
     attributes:
+      label: Description
       value: |
         Thanks for taking the time to report a problem with the documentation!
 
