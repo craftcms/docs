@@ -13,6 +13,7 @@ body:
     attributes:
       label: Product
       description: Which section of the documentation are you having trouble with?
+      value:
   - type: markdown
     attributes:
       label: Description

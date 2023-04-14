@@ -10,12 +10,14 @@ body:
       label: Page URL
       description: Where did the problem occur?
       placeholder: https://craftcms.com/docs/…
+      value: ""
   - type: input
     attributes:
       label: Client
       description: What device, operating system, and browser are you using?
+      value: ""
   - type: markdown
     attributes:
       label: Description
       description: Please provide any other details that would be helpful for us to replicate the issue.
-      value:
+      value: ""
