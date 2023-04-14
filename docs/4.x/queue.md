@@ -81,7 +81,7 @@ A “daemonized” queue runner can be registered with most unix-based systems s
 php craft queue/listen --verbose
 ```
 
-Whereas `queue/listen` runs only until the queue is empty, `queue/listen` continually polls the database for new jobs, exiting only when terminated.
+Whereas `queue/run` runs only until the queue is empty, `queue/listen` continually polls the database for new jobs, exiting only when terminated.
 
 The `--verbose` flag tells Craft to write some basic information about the queue’s state to `stdout`. Running this from the command line (locally, or via SSH on a remote server) will output a message when the worker successfully initializes, and a message each time a job starts and finishes.
 
