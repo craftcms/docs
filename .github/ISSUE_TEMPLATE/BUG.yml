@@ -1,5 +1,5 @@
 name: Bug
-description: Having trouble viewing the documentation?
+description: Having trouble viewing the documentation? Report a bug.
 title: "[Bug]: "
 labels: ["bug"]
 body:
@@ -16,3 +16,9 @@ body:
     attributes:
       label: Description
       description: Please provide any other details that would be helpful for us to replicate the issue.
+      value: |
+        ## Description
+
+        ## Steps to reproduce
+
+        1.
