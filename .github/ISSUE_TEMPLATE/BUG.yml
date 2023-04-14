@@ -14,10 +14,10 @@ body:
       description: What device, operating system, and browser are you using?
   - type: markdown
     attributes:
-      label: Description
-      description: Please provide any other details that would be helpful for us to replicate the issue.
       value: |
         ## Description
+
+        Please provide any other details that would be helpful for us to replicate the issue.
 
         ## Steps to reproduce
 
