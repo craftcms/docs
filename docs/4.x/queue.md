@@ -18,6 +18,15 @@ Users with the **Queue Manager** [permission](user-management.md#permissions) ca
 
 Each message in the queue is called a **job**. Jobs have a type (corresponding to the kind of work that will happen when it is executed) and often include additional data that helps define their scope—sometimes to a specific element (like when updating the [search](searching.md) index) or a set of elements (like when resaving entries after a section’s settings have changed).
 
+Jobs will enter and clear the queue naturally, as you use Craft. In the unlikely event a job fails, it will remain visible in the Queue Manager until it is retried or released. You can view more information about a failed job by clicking its description in the table.
+
+<BrowserShot
+    url="https://my-craft-project.ddev.site/admin/utilities/queue-manager/884"
+    :link="false"
+    caption="Viewing a job in the queue manager utility.">
+<img src="./images/queue-manager.png" alt="Viewing a job in the queue manager utility" />
+</BrowserShot>
+
 ::: tip
 Plugins can take advantage of the queue by providing custom [job types](extend/queue-jobs.md)!
 
