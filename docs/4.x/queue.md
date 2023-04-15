@@ -28,7 +28,7 @@ Plugins can take advantage of the queue by providing custom [job types](extend/q
 
 New jobs enter the queue in a **waiting** state. Once a runner picks up the job, it will be marked as **reserved** and Craft will attempt to execute it. Depending on the type of job, it may be allowed a certain number of “attempts” (temporary failures) or an overall “TTR” (time to reserve). If a job exhausts its attempts or runs out of time, it will be marked as **failed**.
 
-Failed jobs can be retried from the control panel. While additional _attempts_ are made automatically after a failure, _retries_ must be triggered manually.
+Failed jobs can be retried from the control panel, or with the [CLI](console-commands.md#queue-release). While additional _attempts_ are made automatically after a failure, _retries_ must be triggered manually.
 
 In addition to a status, jobs also have **description** and a **progress** value, both of which may be updated throughout its life. Jobs that handle large datasets typically report progress after each item processed (like when resaving elements), or are sliced into smaller batches.
 
@@ -75,7 +75,7 @@ If your site frequently generates many “expensive” tasks (like transforming 
 
 #### Daemon
 
-A “daemonized” queue runner can be registered with most unix-based systems so that the queue operates like other system services—MySQL or Redis, for example. Configuration will depend largely on your operating system’s bundled service manager (likely `systemd` or `supervisor`), but should follow a similar structure, and will ultimately use the long-running `queue/listen` command:
+A “daemonized” queue runner can be registered with most unix-based systems so that the queue operates like other system services—MySQL or Redis, for example. Configuration will depend on the service manager your platform uses (likely `systemd` or `supervisor`), but should follow a similar structure, and will ultimately use the long-running `queue/listen` command:
 
 ```bash
 php craft queue/listen --verbose
@@ -178,6 +178,12 @@ sudo systemctl restart "craft-queue-worker@*"
 ```
 
 This is possible due to the `@` symbol at the end of our service unit file’s name. Note that the bash “range” syntax (`{1..4}`) is _not_ surrounded by quotes, but the “glob” patterns (`*`) _are_. This is critical for the system to be able to expand and map the commands to the appropriate service instances(s).
+:::
+
+These setup instructions ensure your service is started whenever the host machine is rebooted, but it’s important to check your work! If your host allows, consider manually rebooting your machine and verifying that the queue is active.
+
+::: warning
+When configuring and testing a daemonized queue runner, disable <config4:runQueueAutomatically>. Leaving this on may give the false impression that the queue is working as intended, despite it actually being run over HTTP.
 :::
 
 #### Workers
