@@ -452,7 +452,8 @@ Event::on(
             'min' => 0,
             // ...see the `TextField` definition for more options!
         ];
-    });
+    }
+);
 ```
 
 `mandatory` here means that the layout element _must_ be present in the field layout, not that a value is required. Take a look at the existing [field layout element types](repo:craftcms/cms/tree/main/src/fieldlayoutelements) to see which makes the most sense for your attribute.
@@ -568,7 +569,8 @@ Event::on(
     UrlManager::EVENT_REGISTER_CP_URL_RULES,
     function (RegisterUrlRulesEvent $event) {
         $event->rules['products'] = ['template' => 'my-plugin/products/_index.twig'];
-    });
+    }
+);
 ```
 
 ### Sources
