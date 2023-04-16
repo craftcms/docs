@@ -97,7 +97,7 @@ We’re going to set up the mechanisms of persistence now, and will cover [accep
 
 ### Migrations
 
-Create an new [migration](migrations.md), and add this to its `safeUp()` method:
+Create a new [migration](migrations.md), and add this to its `safeUp()` method:
 
 ```php
 // Create the Products table:
