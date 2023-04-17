@@ -319,7 +319,7 @@ Event::on(UsersController::class, UsersController::EVENT_REGISTER_USER_ACTIONS, 
             'action' => 'baconater/send-bacon'
         ];
     }
-});
+);
 ```
 :::
 
