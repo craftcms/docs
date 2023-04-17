@@ -1690,7 +1690,7 @@ Removes a project config value.
 
 Example:
 ```
-php craft project-config/set system.edition pro
+php craft project-config/remove system.edition pro
 ```
 
 <h4 id="project-config-remove-parameters" class="command-subheading">Parameters</h4>
