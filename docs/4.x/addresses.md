@@ -1302,16 +1302,16 @@ use craft\elements\Address;
 use craft\events\DefineRulesEvent;
 
 Event::on(
-  Address::class,
-  Model::EVENT_DEFINE_RULES,
-  function(DefineRulesEvent $event) {
-    $event->rules[] = [
-      ['fullName'],
-      'match',
-      'pattern' => '/droid|bot/i',
-      'message' => Craft::t('site', 'Robots are not allowed.'),
-    ];
-  }
+    Address::class,
+    Model::EVENT_DEFINE_RULES,
+    function(DefineRulesEvent $event) {
+        $event->rules[] = [
+            ['fullName'],
+            'match',
+            'pattern' => '/droid|bot/i',
+            'message' => Craft::t('site', 'Robots are not allowed.'),
+        ];
+    }
 );
 ```
 
