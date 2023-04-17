@@ -312,12 +312,16 @@ use craft\controllers\UsersController;
 use craft\events\RegisterUserActionsEvent;
 use yii\base\Event;
 
-Event::on(UsersController::class, UsersController::EVENT_REGISTER_USER_ACTIONS, function(RegisterUserActionsEvent $event) {
-    if ($event->user->isCurrent) {
-        $event->miscActions[] = [
-            'label' => \Craft::t('plugin-handle', 'Send Bacon'),
-            'action' => 'baconater/send-bacon'
-        ];
+Event::on(
+    UsersController::class,
+    UsersController::EVENT_REGISTER_USER_ACTIONS,
+    function(RegisterUserActionsEvent $event) {
+        if ($event->user->isCurrent) {
+            $event->miscActions[] = [
+                'label' => \Craft::t('plugin-handle', 'Send Bacon'),
+                'action' => 'baconater/send-bacon'
+            ];
+        }
     }
 );
 ```
