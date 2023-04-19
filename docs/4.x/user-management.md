@@ -61,8 +61,8 @@ The permissions Craft comes with are:
 | ↳&nbsp; Save entries | `saveEntries:[SectionUID]`
 | ↳&nbsp; Delete entries | `deleteEntries:[SectionUID]`
 | ↳&nbsp; View other users’ entries | `viewPeerEntries:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerEntries:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerEntries:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ entries | `savePeerEntries:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ entries | `deletePeerEntries:[SectionUID]`
 | ↳&nbsp;View other users’ drafts | `viewPeerEntryDrafts:[SectionUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerEntryDrafts:[SectionUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerEntryDrafts:[SectionUID]`
