@@ -89,6 +89,40 @@ Once you’ve decided on a version, follow these steps:
 
 4. Push your latest commits and your new version tag to GitHub. At this point the Plugin Store should automatically get notified about the release, and will start recording it. If all goes well, it will show up in the Plugin Store within a minute or two.
 
+### Automating GitHub Releases
+
+You can automate creating new [GitHub releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) for your plugin versions by giving your plugin a new GitHub action.
+
+To do that, add a `.github/workflows/create-release.yml` file with the following contents:
+
+```yaml
+name: Create Release
+run-name: Create release for ${{ github.event.client_payload.version }}
+
+on:
+  repository_dispatch:
+    types:
+      - craftcms/new-release
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: ncipollo/release-action@v1
+        with:
+          body: ${{ github.event.client_payload.notes }}
+          makeLatest: ${{ github.event.client_payload.latest }}
+          name: ${{ github.event.client_payload.version }}
+          prerelease: ${{ github.event.client_payload.prerelease }}
+          tag: ${{ github.event.client_payload.tag }}
+```
+
+Commit it to your plugin repo’s **primary branch**.
+
+That’s it! Going forward, whenever the Plugin Store is notified about new version tags, a new release will be created for the tag, with release notes extracted from `CHANGELOG.md`.  
+
 ## Changing the GitHub Repository URL
 
 You can change your plugin’s GitHub repository URL at any time. After you’ve done so, you will need to contact [support@craftcms.com](mailto:support@craftcms.com) to notify Pixel & Tonic of the change, so we can update your plugin’s listing with the new URL. Until the listing has been updated, new release tags won’t be picked up automatically by the Plugin Store.
