@@ -93,7 +93,7 @@ Once you’ve decided on a version, follow these steps:
 
 You can automate creating new [GitHub releases](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases) for your plugin versions by giving your plugin a new GitHub action.
 
-To do that, add a `.github/workflows/create-release.yml` file with the following contents:
+To do that, add a `.github/workflows/create-release.yml` file on the plugin repository’s **default branch**, with the following contents:
 
 ```yaml
 name: Create Release
@@ -118,8 +118,6 @@ jobs:
           prerelease: ${{ github.event.client_payload.prerelease }}
           tag: ${{ github.event.client_payload.tag }}
 ```
-
-Commit it to your plugin repo’s **primary branch**.
 
 That’s it! Going forward, whenever the Plugin Store is notified about new version tags, a new release will be created for the tag, with release notes extracted from `CHANGELOG.md`.
 
