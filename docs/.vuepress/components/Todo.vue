@@ -1,6 +1,4 @@
-<template>
-    <div class="todo" :text="notes"></div>
-</template>
+<template></template>
 
 <script>
 export default {
