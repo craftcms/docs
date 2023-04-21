@@ -67,6 +67,13 @@ Password Reset
 When outputting user-provided values (like a username, email, or [address](addresses.md)), always use the [escape](https://twig.symfony.com/doc/3.x/filters/escape.html) filter. You can see the shorter version (`|e`) in use in the template, above.
 :::
 
+Keep in mind that users may have different amounts of profile data populated when they register or reset their password. Include default or alternate text when the desired text may not be available:
+
+```twig
+{# Output a comma before the user’s name, or jump right to a punctuation mark: #}
+Hello{{ user.fullName is not empty ? ", #{user.fullName}" : null }}!
+```
+
 #### URLs
 
 You may output element URLs just as you would in a front-end template. However, if you are linking to an arbitrary path, use the appropriate URL helper function, in Twig:
