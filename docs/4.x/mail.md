@@ -128,6 +128,12 @@ Craft uses a single configuration for its [mailer component](craft4:craft\mail\M
 <img src="./images/mail-settings.png" alt="Craft email settings">
 </BrowserShot>
 
+After making changes to your configuration, click **Test** at the bottom of the screen. Craft will attempt to send a message with the new settings; if you see a confirmation, apply the settings by clicking **Save**. Mail settings are stored in [project config](project-config.md).
+
+::: warning
+Craft only knows as much about delivery as the current [transport](#transport-adapters) can provide. For example, an adapter that calls a third-party HTTP API considers a send “successful” if the request completed nominally; therefore, a test may appear successful at first blush, but be undeliverable for an unrelated reason.
+:::
+
 ### System Address <Poi target="mail-settings" id="systemAddress" label="1" />
 
 All email will appear to be sent “from” this address. You may also set a **Reply-To Address** <Poi target="mail-settings" id="replyToAddress" label="2" /> if the system address is not a real or monitored inbox.
