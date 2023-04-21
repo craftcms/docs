@@ -41,7 +41,7 @@ If you were not expecting this email, just ignore it.
 
 #### Variables
 
-Each system message is provided some special, context-specific variables, in addition to those available in normal Twig environments.
+Each system message (and subject line) is provided some special, context-specific variables, in addition to those available in normal Twig environments.
 
 All Messages
 : These variables are available across all system messages:
