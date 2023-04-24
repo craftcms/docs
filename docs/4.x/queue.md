@@ -2,15 +2,15 @@
 
 The **queue** is Craft’s way of delegating certain long-running tasks to an asynchronous background process.
 
-In most cases, these tasks are either too time-consuming, resource-intensive, or error-prone to handle as part of the normal HTTP request-response cycle, without significant impacts on responsiveness and user experience in the [control panel](control-panel.md).
+In most cases, these tasks are either too time-consuming, resource-intensive, or error-prone to handle during a normal HTTP request-response cycle, without significant impacts on responsiveness and user experience in the [control panel](control-panel.md) or front-end.
 
 Here are a few of the things Craft uses the queue for:
 
 - Updating search indexes;
-- Executing a **Find and Replace** operation across all site content (started via Utilities);
 - Resaving elements in bulk;
 - Generating image transforms;
 - Propagating elements between sites;
+- Executing a **Find and Replace** operation across all site content (started via Utilities);
 
 Users with the **Queue Manager** [permission](user-management.md#permissions) can view information about the queue from the [Utilities](control-panel.md#utilities) section of the control panel. The status of any currently-running job (or the last failed job) will also be displayed at the bottom of the main navigation.
 
@@ -43,15 +43,15 @@ In addition to a status, jobs also have **description** and a **progress** value
 
 ## Queue Runners
 
-The queue can be run via HTTP or the CLI.
+By default, the queue is run automatically over [HTTP](#http). For more control, you can use Craft’s CLI via [CRON](#cron)—or even as a [daemonized service](#daemon).
 
 ::: tip
-Advanced configuration of the queue (including non-standard drivers and proxies) is possible via [application config](config/app.md#queue).
+Advanced configuration of the queue (including alternate [drivers](repo:yiisoft/yii2-queue/tree/master/docs/guide#queue-drivers) and proxies) is possible via [application config](config/app.md#queue).
 :::
 
 ### HTTP
 
-At the end of every site request, Craft checks whether the queue contains waiting jobs. If it does, a JavaScript snippet is injected into the page, triggering a second request from the client that kicks off a non-blocking background process.
+At the end of every site request, Craft checks whether the queue contains waiting jobs. If it does, a JavaScript snippet is injected into the page, triggering a second request from the client that kicks off a non-blocking background process. This is skipped for [Ajax requests](dev/controller-actions.md#ajax), and responses that produced something other than HTML.
 
 ::: tip
 This behavior is enabled by default, but can be turned off by setting <config4:runQueueAutomatically> to `false`. If you elect to disable the automatic queue runner, you must configure an alternative.
