@@ -240,3 +240,21 @@ php craft queue/listen --verbose
 ## Troubleshooting
 
 See the knowledge base article on [Resolving Failed Queue Jobs](kb:resolving-failed-queue-jobs) for a list of common queue problems.
+
+### Logging
+
+Any time a job `echo`s text or calls a logger method, that output is sent to a special `queue` log target in addition to the current request type (`web` or `console`). Messages originating from the queue are also given a special `[queue.LEVEL]` tag to make them easier to filter out when aggregated. Read more about these behaviors in the [logging](logging.md) section.
+
+::: tip
+Daemonized workers’ output may also be captured in your system’s logs, which can be viewed using the [`journalctl` command](https://www.freedesktop.org/software/systemd/man/journalctl.html):
+
+```bash
+journalctl -u craft-queue-worker.service
+```
+
+`supervisor` users also have access to a [dedicated logs viewer](http://supervisord.org/running.html#supervisorctl-actions):
+
+```bash
+supervisorctl tail craft-queue-worker
+```
+:::
