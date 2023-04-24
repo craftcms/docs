@@ -125,7 +125,8 @@ Event::on(
         $event->rules['widgets/edit/<id:\d+>'] = 'my-plugin/widgets/edit';
 
         // ...
-    });
+    }
+);
 ```
 
 Here, the key represents the user-facing “path” (what will appear in the address bar of their browser), and the value is an [action path](#action-paths).

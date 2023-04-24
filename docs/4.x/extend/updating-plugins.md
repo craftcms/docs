@@ -171,7 +171,7 @@ use mynamespace\elements\MyElement;
 Event::on(
     FieldLayout::class,
     FieldLayout::EVENT_DEFINE_NATIVE_FIELDS,
-    static function(DefineFieldLayoutFieldsEvent $event) {
+    function(DefineFieldLayoutFieldsEvent $event) {
         /** @var FieldLayout $fieldLayout */
         $fieldLayout = $event->sender;
 

@@ -1134,7 +1134,7 @@ Event::on(
     function(RegisterGqlArgumentHandlersEvent $event) {
         $event->handlers["argumentName"] = RelatedWidgets::class;
     }
-});
+);
 ```
 
 ### Complexity Values

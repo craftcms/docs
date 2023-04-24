@@ -1,0 +1,24 @@
+name: Bug
+description: Having trouble viewing the documentation? Report a bug.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: input
+    attributes:
+      label: Page URL
+      description: Where did the problem occur?
+      placeholder: https://craftcms.com/docs/…
+  - type: input
+    attributes:
+      label: Client
+      description: What device, operating system, and browser are you using?
+  - type: textarea
+    attributes:
+      label: Description
+      description: Please provide any other details that would be helpful for us to replicate the issue.
+      value: |
+        ### Details
+
+        ### Steps to reproduce
+
+        1.
