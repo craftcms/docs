@@ -224,6 +224,19 @@ Here, `-n 10` just signals that the process should be a _lower_ priority than th
 Do not run the queue as root!
 :::
 
+## Local Development
+
+If you’ve turned off <config4:runQueueAutomatically> for your live infrastructure, the queue will also be disabled in your local environment. You can [override](config/README.md#environment-overrides) the general config setting by declaring `CRAFT_RUN_QUEUE_AUTOMATICALLY=true` in your `.env`, or use the [CLI](#cli) as you would in a [daemon](#daemon):
+
+::: code
+```bash DDEV
+ddev craft queue/listen --verbose
+```
+```bash Other
+php craft queue/listen --verbose
+```
+:::
+
 ## Troubleshooting
 
 See the knowledge base article on [Resolving Failed Queue Jobs](kb:resolving-failed-queue-jobs) for a list of common queue problems.
