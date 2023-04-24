@@ -180,7 +180,7 @@ Otherwise, this is a regular Twig environment, so all the filters, functions, gl
 
 ### Transport Adapters <Poi target="mail-settings" id="transportAdapter" label="4" />
 
-Three adapters are provided with Craft, with more installable from the [Plugin Store](https://plugins.craftcms.com/categories/mailer-adapters?craft4). You can switch adapters at any time, without worrying about plugin compatibility—each adapter exposes a [Transport](https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport) class that conforms to 
+Three adapters are provided with Craft, with more installable from the [Plugin Store](https://plugins.craftcms.com/categories/mailer-adapters?craft4). You can switch adapters at any time—each adapter exposes a [Transport](https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport) class that conforms to a consistent interface, allowing Craft and plugins to send email without worrying about the underlying implementation or service.
 
 ::: tip
 For the most reliable delivery, consider using one of the third-party transactional email service integrations, like [Amazon SES](https://plugins.craftcms.com/amazon-ses?craft4), [Mailgun](https://plugins.craftcms.com/mailgun?craft4), [Postmark](https://plugins.craftcms.com/postmark?craft4), or [Sendgrid](https://plugins.craftcms.com/sendgrid?craft4). These adapters all communicate with an API over HTTP instead of SMTP, and ultimately use their own, trusted origin to send email. In some situations, this is essential, as some <abbr title="Internet Service Provider">ISP</abbr>s and network maintainers will throttle or completely block outbound SMTP traffic.
