@@ -63,6 +63,10 @@ For control panel requests, the JavaScript bundle included on every page perform
 
 All Craft features will work as expected with the default queue configuration.
 
+::: warning
+The following options are configured outside of Craft, and are only recommended for users with some unix systems administration experience. Check with your host to see if they offer native tools for managing services and CRON tasks.
+:::
+
 Projects that rely on the queue for time-sensitive or critical features (like sending [order status emails](../commerce/4.x/emails.md) in Commerce) can take advantage of Craft’s [CLI](console-commands.md#queue) for more flexibility over when and where the queue is run:
 
 ```bash
@@ -211,7 +215,7 @@ To ensure web requests are prioritized, the unix program `nice` can help the ker
 /usr/bin/nice -n 10 /usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 ```
 
-Here, `-n 10` just signals that the process should be a _lower_ priority than the default (`0`). Negative values (_increased_ priority) are not allowed, and `19` is the lowest valid priority.
+Here, `-n 10` just signals that the process should be a _lower_ priority than the default (`0`). Negative values (_increased_ priority) are not allowed, and `19` is the lowest valid priority. `nice` can also be used in a CRON task, by swapping the `queue/listen` action for `queue/run` as in previous examples.
 
 ::: danger
 Do not run the queue as root!
