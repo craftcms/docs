@@ -210,9 +210,9 @@ This paradigm can be bizarre at first, but it’s similar in many ways to load-b
 
 #### Performance Considerations
 
-Running the queue on the same machine that serves HTTP requests can sometimes cause bottlenecks. Furthermore, the CLI does not abide by the same [resource](config4:phpMaxMemoryLimit) or [time](https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time) limits as web requests, meaning it can degrade or interrupt service for much longer.
+Running the queue on the same machine that serves HTTP requests can (in extreme cases) cause bottlenecks. The CLI does not abide by the same [resource](config4:phpMaxMemoryLimit) or [time](https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time) limits as web requests, meaning it can degrade or interrupt service for much longer.
 
-To ensure web requests are prioritized, the unix program `nice` can help the kernel schedule workloads on your server’s CPU(s). Replace the queue command in your [daemon](#daemon) (or [CRON](#cron) task) with this:
+To ensure web requests are prioritized, the unix program `nice` can help the kernel schedule workloads on your server’s CPU(s). Replace the queue command in your [daemon](#daemon) with this:
 
 ```bash
 /usr/bin/nice -n 10 /usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
