@@ -81,8 +81,11 @@ The `queue/run` action is suitable for manual or scheduled invocation. For examp
 
 ```
 */5 * * * * /usr/bin/env php /var/www/craft queue/run
-# (Note the absolute paths!)
 ```
+
+::: tip
+Note that we’re using an absolute path to the Craft installation. CRON’s “working directory” will likely be different than your user’s home directory or your web root!
+:::
 
 If your site frequently generates many “expensive” tasks (like transforming images or resaving entries) or tasks that communicate with other web services, make sure your CRON intervals don’t end up overlapping. Just like web requests, running many concurrent jobs in different processes can cause them all to slow down—but even if intervals _do_ overlap, Craft will never execute reserved jobs in more than one place.
 
