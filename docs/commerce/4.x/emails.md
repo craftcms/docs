@@ -17,7 +17,7 @@ Before setting up emails for Craft Commerce, ensure that your Craft CMS installa
 You can set up your email gateway in the control panel by navigating to **Settings** → **Email**.
 
 ::: tip
-Commerce emails are sent in Craft queue jobs, so sending may be delayed depending on how your queue is configured to run. See the [runQueueAutomatically](/4.x/config/config-settings.md#runqueueautomatically) config setting and notes.
+Commerce emails are sent in Craft queue jobs, so sending may be delayed depending on how your queue is configured to run. See the <config4:runQueueAutomatically> config setting and notes.
 :::
 
 By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in **Settings** → **Email Settings** in the control panel. If you’d like to override this and provide your own from name/address, navigate to **Commerce** → **System Settings** → **General Settings** and enter your own “Status Email Address” and “From Name”.
