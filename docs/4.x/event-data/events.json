@@ -33307,6 +33307,12 @@
     },
     {
         "class": "craft\\queue\\Queue",
+        "name": "EVENT_AFTER_EXEC_AND_RELEASE",
+        "type": "yii\\queue\\ExecEvent",
+        "desc": "The event that is triggered after a job is executed and released."
+    },
+    {
+        "class": "craft\\queue\\Queue",
         "name": "EVENT_WORKER_START",
         "type": "yii\\queue\\cli\\WorkerEvent",
         "desc": "that is triggered when the worker is started."
@@ -37479,25 +37485,25 @@
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_BEFORE_CREATE_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered before a revision is created."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_AFTER_CREATE_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered after a revision is created."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_BEFORE_REVERT_TO_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered before an element is reverted to a revision."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_AFTER_REVERT_TO_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered after an element is reverted to a revision."
     },
     {

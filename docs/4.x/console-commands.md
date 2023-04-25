@@ -1657,6 +1657,8 @@ Example:
 php craft project-config/get system.edition
 ```
 
+The “path” syntax used here may be composed of directory and filenames (within your `config/project` folder), YAML object keys (including UUIDs for many Craft resources), and integers (referencing numerically-indexed arrays), joined by a dot (`.`): `path.to.nested.array.0.property`.
+
 <h4 id="project-config-get-parameters" class="command-subheading">Parameters</h4>
 
 path
@@ -1690,8 +1692,14 @@ Removes a project config value.
 
 Example:
 ```
-php craft project-config/set system.edition pro
+php craft project-config/remove some.nested.key
 ```
+
+::: danger
+This should only be used when the equivalent change is not possible through the control panel or other Craft APIs. By directly modifying project config values, you are bypassing all validation and can easily destabilize configuration.
+:::
+
+As with [set](#project-config-set), removing values only updates the root `dateModified` key when using the [`--update-timestamp` flag](#project-config-set-options). If you do not include this flag, you must run `project-config/touch` before changes will be detected or applied in other environments!
 
 <h4 id="project-config-remove-parameters" class="command-subheading">Parameters</h4>
 
@@ -1710,8 +1718,16 @@ Sets a project config value.
 
 Example:
 ```
-php craft project-config/set system.edition pro
+php craft project-config/set some.nested.key
 ```
+
+See [get](#project-config-get) for the accepted key formats.
+
+::: danger
+This should only be used when the equivalent change is not possible through the control panel or other Craft APIs. By directly modifying project config values, you are bypassing all validation and can easily destabilize configuration.
+:::
+
+Values are updated in the database *and* in your local YAML files, but the root `dateModified` project config property is only touched when using the [`--update-timestamp` flag](#project-config-set-options). If you do not update the timestamp along with the value, the change may not be detected or applied in other environments!
 
 <h4 id="project-config-set-parameters" class="command-subheading">Parameters</h4>
 
@@ -2082,7 +2098,7 @@ Re-saves entries.
 
 
 --propagate-to
-: The site handle to propagate entries to.
+: Comma-separated site handles to propagate entries to.
     
     When this is set, the entry will *only* be saved for this site.
 
