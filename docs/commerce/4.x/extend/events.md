@@ -32,7 +32,7 @@ Event::on(
 
         // Add every custom field to the snapshot
         if (($fieldLayout = $variant->getFieldLayout()) !== null) {
-            foreach ($fieldLayout->getFields() as $field) {
+            foreach ($fieldLayout->getCustomFields() as $field) {
                 $fields[] = $field->handle;
             }
         }
@@ -93,7 +93,7 @@ Event::on(
 
         // Add every custom field to the snapshot
         if (($fieldLayout = $product->getFieldLayout()) !== null) {
-            foreach ($fieldLayout->getFields() as $field) {
+            foreach ($fieldLayout->getCustomFields() as $field) {
                 $fields[] = $field->handle;
             }
         }
