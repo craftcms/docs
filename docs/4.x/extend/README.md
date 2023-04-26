@@ -34,6 +34,10 @@ Not all extensions must be conceived as portable or publishable! In fact, the mo
 
 Most customizations come in the form of a **module** or a **plugin**.
 
+::: tip
+Private plugins <Since ver="4.4.0" feature="Private plugins" /> combine the best of both worlds. If this is your first time writing an extension, we recommend using the [Generator](generator.md) to scaffold a private plugin.
+:::
+
 #### Modules
 
 **Modules** are a great way to tightly couple extra functionality with the parent application—say, business logic that is specific to a single website or project.
@@ -62,13 +66,13 @@ If the thing you want to build would benefit from any of these features (or you�
 
 ### Design + Approach
 
-Extensions naturally invite technical debt—for maintainers _and_ users. This isn’t necessarily a bad thing, though! The most common manifestation is some additional friction during major version upgrades. Craft itself has enough abstractions in place to protect most developers from significant API changes (for example, Twig templates are largely compatible back to Craft 2), but as you get deeper into Craft’s API, you will need to pay special attention to deprecation notices and our dedicated [upgrade guides](./updating-plugins.md).
+Extensions naturally invite technical debt—for maintainers _and_ users. This isn’t necessarily a bad thing, though! The most common manifestation is some additional friction during major version upgrades. Craft itself has enough abstractions in place to protect most developers from significant API changes (for example, Twig templates are largely compatible back to Craft 2), but as you get deeper into Craft’s API, you will need to pay special attention to deprecation notices and our dedicated [plugin upgrade guides](./updating-plugins.md).
 
 One of the most important things to consider as you set out is how you will communicate to others (your teammates, a client’s future development partners, or even your future self) where a project’s special features come from. It could be documentation or training—or nothing at all, if the scope of the extension is limited!
 
 Craft automatically handles this for [plugins](#plugins)—from the control panel, you can see what’s currently installed and [temporarily disable](config4:disabledPlugins) one (or all) to track down problems. Registered [modules](#modules) are also disclosed in the control panel… but without understanding how they’re organized, auto-loaded, bootstrapped, or otherwise factored into the logic of your application, their purpose and specific effects may be unclear.
 
-#### Extension Loci
+#### Extension Points
 
 An extension usually leverages one or more of these concepts:
 
@@ -76,13 +80,13 @@ Controllers
 : Provide new endpoints for [web](./controllers.md) or [console](./commands.md) requests.
 
 Events
-: React to, prevent, or modify default behaviors by listening to [events](./events.md).
+: React to, prevent, or modify default behaviors by listening to [events](./events.md) or attaching [hooks](./template-hooks.md).
 
-Novel Component Types
+Component Types
 : Create new kinds of existing components like [element exporters](./element-exporter-types.md) or [background jobs](./queue-jobs.md).
 
 Services
-: Add, modify, or replace components accessed via `Craft::$app` or an instance of your own extension.
+: Add, modify, or replace components accessible via `Craft::$app` or as part of your own extension.
 
 Templates
 : Expose functionality to [Twig](./extending-twig.md) via built-in language features like functions and filters—or add your own!
