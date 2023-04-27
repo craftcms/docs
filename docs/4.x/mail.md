@@ -221,14 +221,6 @@ This adapter only requires a “command,” and defaults to `/usr/sbin/sendmail 
 
 ### Development + Testing
 
-In development environments, you can ensure all outbound email is sent to a single address with the <config4:testToEmailAddress> setting:
-
-::: code
-```php General Config
-```
-```bash .env
-CRAFT_TEST_TO_EMAIL_ADDRESS=hello@pixelandtonic.com
-```
-:::
+In development environments, you can ensure all outbound email is sent to a single address with the <config4:testToEmailAddress> setting.
 
 Alternatively, the entire [mailer component](config/app.md#mailer) can be replaced via application config, should you want to use an entirely different [transport](#transport-adapters) for local development.
