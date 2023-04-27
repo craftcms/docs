@@ -209,7 +209,7 @@ See our [Search Form](https://craftcms.com/knowledge-base/search-form) article f
 
 When using the `search` param, each returned element will be have its [`searchScore`](#scoring-algorithm) attribute populated with a value representing how well the query matched.
 
-Passing user input to the `score` param is generally safe, but may allow discovery or enumeration of otherwise hidden field values. For instance, a savvy user might supply a query like `myPrivateNotesField:"*"` to test whether a field exists or has a specific value. _Carefully auditing which if your fields are [indexed](#configuring-custom-fields-for-search) will help prevent unwanted disclosure._
+Passing user input to the `search` param is generally safe, but may allow discovery or enumeration of otherwise hidden field values. For instance, a savvy user might supply a query like `myPrivateNotesField:"*"` to test whether a field exists or has a specific value. _Carefully auditing which if your fields are [indexed](#configuring-custom-fields-for-search) will help prevent unwanted disclosure._
 
 ### Ordering Results by Score
 
