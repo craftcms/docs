@@ -38,6 +38,10 @@ export default {
         @apply relative rounded border block no-underline w-full p-4 pl-12 text-current;
 
         border: 1px solid var(--border-color);
+
+        &:not(:last-child) {
+            @apply mb-4;
+        }
     }
 
     .link:hover {
