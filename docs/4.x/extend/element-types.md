@@ -315,7 +315,7 @@ When modifying your query, new params should be applied with `andWhere()` instea
 
 ### Querying for Elements in Templates
 
-If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](guide:concept-behaviors) to it.
+If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](behaviors.md) to it.
 
 Your behavior class (in a new file at `variables/CraftVariableBehavior.php`) should look like this:
 
