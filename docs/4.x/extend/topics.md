@@ -73,4 +73,4 @@ Extend built-in data types, define new ones, and consolidate logic.
 
 Start learning about how to create new views in the [control panel](../control-panel.md).
 
-<See path="cp-sections.md" />
+<See path="cp-section.md" />
