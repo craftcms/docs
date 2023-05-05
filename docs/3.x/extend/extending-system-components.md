@@ -1,3 +1,7 @@
+---
+updatedVersion: 4.x/extend/recipes
+---
+
 # Extending System Components
 
 ## Custom Validation Rules

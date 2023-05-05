@@ -1,5 +1,6 @@
 ---
 sidebarDepth: 2
+description: Respond to HTTP requests by connecting them with back-end services.
 ---
 
 # Controllers

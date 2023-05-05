@@ -23,6 +23,7 @@ module.exports = {
             ["", "Introduction"],
             "coding-guidelines",
             "generator",
+            "recipes"
           ]
         },
         {
@@ -56,13 +57,12 @@ module.exports = {
           title: "System Components",
           collapsable: false,
           children: [
-            "widget-types",
-            "field-types",
-            "utility-types",
             "element-types",
             "element-action-types",
-            "element-exporter-types"
+            "element-exporter-types",
+            "field-types",
             "filesystem-types",
+            "widget-types"
           ]
         },
         {
@@ -73,6 +73,7 @@ module.exports = {
             "migrations",
             "user-permissions",
             "translation-categories",
+            "utilities",
             "asset-bundles",
             "services",
             "controllers",
@@ -83,8 +84,7 @@ module.exports = {
             "template-hooks",
             "soft-deletes",
             "queue-jobs",
-            "environmental-settings",
-            "extending-system-components"
+            "environmental-settings"
           ]
         }
       ],
