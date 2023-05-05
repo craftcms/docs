@@ -1,5 +1,5 @@
 ---
-description: Utilities are special, non-content pages in the control panel, often providing access to back-office features or debugging data.
+description: Utilities are special, non-content pages in the control panel, that provide access to back-office features or debugging data.
 ---
 
 # Utilities
