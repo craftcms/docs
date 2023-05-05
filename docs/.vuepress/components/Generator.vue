@@ -100,11 +100,18 @@ export default {
     }
 
     .bolt {
-        @apply w-4 mr-4;
+        @apply w-6 mr-4 p-1;
+        border-radius: 2px;
+        transition: 0.1s linear background-color;
+
+        &:hover {
+            background-color: var(--bg-color);
+        }
     }
 
     .icon {
         fill: var(--craft-red);
+
     }
 
     .command {
