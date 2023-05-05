@@ -20847,6 +20847,12 @@
     },
     {
         "class": "craft\\commerce\\services\\Customers",
+        "name": "EVENT_UPDATE_PRIMARY_PAYMENT_SOURCE",
+        "type": "craft\\commerce\\services\\RegisterElementSourcesEvent",
+        "desc": "The event that is triggered when a primary payment method is saved."
+    },
+    {
+        "class": "craft\\commerce\\services\\Customers",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
