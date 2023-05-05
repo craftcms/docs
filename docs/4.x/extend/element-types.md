@@ -32,9 +32,7 @@ Your element class should live in the `elements/` directory of your plugin’s s
 ::: tip
 Use the [generator](./generator.md) to scaffold an element type from the command line!
 
-```bash
-php craft make element-type
-```
+<p><Generator component="element-type" plugin="my-plugin" /></p>
 :::
 
 To start, we’ll give the class a handful of public properties and define two static methods that help the control panel render labels.
