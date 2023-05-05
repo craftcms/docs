@@ -328,7 +328,7 @@ export default {
     let latestVersionActive = this.$activeVersion === latestVersion;
 
     if (latestVersionActive) {
-      // If we’re on the lastest version, add a canonical tag
+      // If we’re on the latest version, add a canonical tag
       this.$ssrContext.userHeadTags += `\n    <link rel="canonical" href="${
         baseUrl + this.$page.path
       }">`;
