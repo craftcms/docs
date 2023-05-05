@@ -1,3 +1,7 @@
+---
+updatedVersion: 4.x/extend/utilities
+---
+
 # Utility Types
 
 Plugins can provide custom utility types for the Utilities section by creating a class that implements <craft3:craft\base\UtilityInterface>.
