@@ -47,6 +47,7 @@
 /docs/4.x/extend/extending-system-components.html /docs/4.x/extend/recipes.html
 /docs/4.x/extend/utility-types.html /docs/4.x/extend/utilities.html
 /docs/4.x/extend/volume-types.html /docs/4.x/extend/filesystem-types.html
+/docs/4.x/extend/element-action-types.html /docs/4.x/extend/element-actions.html
 
 # 2.x plugin index is empty—forward to introduction
 /docs/2.x/plugins /docs/2.x/plugins/introduction.html

@@ -58,33 +58,33 @@ module.exports = {
           collapsable: false,
           children: [
             "element-types",
-            "element-action-types",
             "element-exporter-types",
             "field-types",
             "filesystem-types",
-            "widget-types"
+            "widget-types",
           ]
         },
         {
           title: "More",
           collapsable: false,
           children: [
-            "events",
-            "migrations",
-            "user-permissions",
-            "translation-categories",
-            "utilities",
             "asset-bundles",
-            "services",
-            "controllers",
             "commands",
-            "template-roots",
+            "controllers",
+            "element-actions",
+            "environmental-settings",
+            "events",
             "extending-twig",
             "graphql",
-            "template-hooks",
-            "soft-deletes",
+            "migrations",
             "queue-jobs",
-            "environmental-settings"
+            "services",
+            "soft-deletes",
+            "template-hooks",
+            "template-roots",
+            "translation-categories",
+            "user-permissions",
+            "utilities",
           ]
         }
       ],
