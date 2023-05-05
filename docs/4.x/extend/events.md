@@ -175,7 +175,7 @@ class TrackChanges extends Component
 ```
 
 ::: warning
-This is a much less common pattern for dealing with built-in components, and will usually involve an initial [class-level](#class-level-events) event handler to discover objects as they're created, anyway.
+This is a much less common pattern for dealing with built-in components, and will usually involve an initial [class-level](#class-level-events) event handler to discover objects as they’re created, anyway.
 
 In most cases, it’s best to set a class-level listener and check in your handler whether the event (or its sender) is relevant. If you know every instance of a class will require an event, you can also attach them via [behaviors](behaviors.md#events).
 :::

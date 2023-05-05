@@ -64,7 +64,7 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
-Both options give you access to the [element source](element-types.md#sources) being rendered, so that actions can be conditionally added—for `defineActions()`, it's passed as an argument; when registering them via an event, the event object has a `source` attribute.
+Both options give you access to the [element source](element-types.md#sources) being rendered, so that actions can be conditionally added—for `defineActions()`, it’s passed as an argument; when registering them via an event, the event object has a `source` attribute.
 
 ## Handling Actions
 

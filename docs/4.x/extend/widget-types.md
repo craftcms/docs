@@ -60,11 +60,11 @@ public function getBodyHtml(): ?string
 }
 ```
 
-### Javascript + CSS
+### JavaScript + CSS
 
-If the widget depends on Javascript or CSS, you must register the appropriate [asset bundles](asset-bundles.md) from this method, as well.
+If the widget depends on JavaScript or CSS, you must register the appropriate [asset bundles](asset-bundles.md) from this method, as well.
 
-Each widget is rendered inside a HTML element with an `id` attribute like `widget1`, `widget2`, `widget42`, and so on, where the number is the widget’s `id` in the database. To tie Javascript logic to each instance of your widget, consider separating its implementation from initialization:
+Each widget is rendered inside a HTML element with an `id` attribute like `widget1`, `widget2`, `widget42`, and so on, where the number is the widget’s `id` in the database. To tie JavaScript logic to each instance of your widget, consider separating its implementation from initialization:
 
 ::: code
 ```js Asset Bundle
@@ -85,7 +85,7 @@ Craft::$app->getView()->registerJs("new Craft.MyWidget({$this->id});");
 ```
 :::
 
-Here, we’ve parameterized the `Craft.MyWidget` Javascript object so it can be instantiated multiple times, each with a unique `id` argument. The `init()` function takes care of building the complete HTML ID, looking it up in the DOM, and storing it on that instance.
+Here, we’ve parameterized the `Craft.MyWidget` JavaScript object so it can be instantiated multiple times, each with a unique `id` argument. The `init()` function takes care of building the complete HTML ID, looking it up in the DOM, and storing it on that instance.
 
 ## Settings
 
