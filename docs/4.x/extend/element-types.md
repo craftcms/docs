@@ -1,3 +1,7 @@
+---
+description: Add native-feeling content types to empower content authors and administrators.
+---
+
 # Element Types
 
 [Elements](../elements.md) underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#types) with your own, from a plugin or module.
@@ -424,7 +428,7 @@ public function getFieldLayout()
 ```
 
 ::: tip
-Read about managing [multiple field layouts](#variations--multiple-field-layouts), or storing [field layouts in project config](#project-config).
+Read about managing [multiple field layouts](#variations-multiple-field-layouts), or storing [field layouts in project config](#project-config).
 :::
 
 #### Native Layout Elements
