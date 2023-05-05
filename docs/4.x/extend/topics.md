@@ -12,7 +12,7 @@ This page collects some common extension vectors along that continuum.
 ::: tip
 Pardon the mess! We just launched this page, and plan to collect more resources here as they are updated with the [generator](generator.md) in mind.
 
-Questions? Feedback? Use the links at the bottom of this page to let us know what’s on your mind.
+Questions? Feedback? Use the links at the bottom of any page to let us know what’s on your mind.
 :::
 
 ## Monitoring and Changing Behavior
