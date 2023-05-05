@@ -7,7 +7,7 @@ sidebarDepth: 2
 
 Craft is both a fully-featured content management system _and_ a powerful web application framework. Extensions allow you to build on top of its smart abstractions, or create completely new features that live alongside the main application.
 
-Here, we’ll cover some common extension vectors along this continuum. Each section includes a self-contained example, or links out to an existing sub-page.
+This page collects some common extension vectors along that continuum.
 
 ::: tip
 Pardon the mess! We just launched this page, and plan to collect more resources here as they are updated with the [generator](generator.md) in mind.
