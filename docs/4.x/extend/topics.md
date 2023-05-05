@@ -3,7 +3,7 @@ description: Ideas and inspiration for customizing Craft.
 sidebarDepth: 2
 ---
 
-# Recipes
+# Topics
 
 Craft is both a fully-featured content management system _and_ a powerful web application framework. Extensions allow you to build on top of its smart abstractions, or create completely new features that live alongside the main application.
 
@@ -38,17 +38,39 @@ Craft’s most powerful features like elements and custom fields are built on in
 <See path="filesystem-types.md" />
 <See path="widget-types.md" />
 
-### More
+### Miscellany
 
-<See path="behaviors.md" />
+Other high-impact places to dive in.
+
 <See path="utilities.md" />
 
 ## Working with Data
 
-<Generator component="controller" plugin="my-plugin" />
+Getting data from users and processing it safely.
 
 ### Controllers
 
+Learn about requests, routing, responses, and Craft’s robust authorization and permissions systems.
+
 <See path="controllers.md" />
+<See path="user-permissions.md" />
 
 ### Models + Records
+
+Extend built-in data types, define new ones, and consolidate logic.
+
+<See path="behaviors.md" />
+<See path="services.md" />
+<See path="soft-deletes.md" />
+
+## The Control Panel
+
+Start learning about how to create new views in the [control panel](../control-panel.md).
+
+<See path="cp-sections.md" />
+
+::: tip
+This page is still under development! More resources will be collected here as they are updated to work with the [generator](generator.md).
+
+Questions? Feedback? Use the links at the bottom of this page to let us know what’s on your mind.
+:::

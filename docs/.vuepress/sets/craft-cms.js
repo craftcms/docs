@@ -23,7 +23,7 @@ module.exports = {
             ["", "Introduction"],
             "coding-guidelines",
             "generator",
-            "recipes"
+            "topics"
           ]
         },
         {

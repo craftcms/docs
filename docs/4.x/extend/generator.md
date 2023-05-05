@@ -42,10 +42,10 @@ Keep an eye out for these special Generator command call-outs, throughout the do
 ::: warning
 There’s no two ways about it: this section is extremely confusing. It’s intended only for developers with complete or near-complete plugins that provide their own extension points.
 
-If you’re new here, consider skipping to [Recipes](recipes.md)!
+If you’re new here, consider skipping to our [topics](topics.md) overview!
 :::
 
-Generator can even generate _generators_ for your plugin! Any plugin that itself exposes [points of extension](recipes.md) may benefit from bundling a generator:
+Generator can even generate _generators_ for your plugin! Any plugin that itself exposes [points of extension](topics.md) may benefit from bundling a generator:
 
 <Generator component="generator" plugin="my-plugin" />
 
