@@ -92,12 +92,12 @@ Templates
 : Expose functionality to [Twig](./extending-twig.md) via built-in language features like functions and filters—or add your own!
 
 ::: tip
-This is not an exhaustive list! Check the sidebar for more info on what aspects of Craft are extensible, or take a spin through the [Recipes](recipes.md) page for some more ideas.
+This is not an exhaustive list! Check the sidebar for more info on what aspects of Craft are extensible, or take a spin through the [topics](topics.md) page for some more ideas.
 :::
 
 These fixtures can be combined to create advanced front-end and control panel interfaces, communicate with external services, improve developer experience… or build virtually any other web- or console-based functionality.
 
-<See path="recipes.md" />
+<See path="topics.md" />
 
 ### First Steps
 
