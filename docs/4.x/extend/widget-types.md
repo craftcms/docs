@@ -1,3 +1,7 @@
+---
+description: Create customizable, heads-up resources for control panel users.
+---
+
 # Widget Types
 
 Plugins can provide custom widget types for the [control panel dashboard](../control-panel.md#dashboard) by creating a class that implements <craft4:craft\base\WidgetInterface> and <craft4:craft\base\WidgetTrait>. The class will serve both as a way to communicate various things about your widget type (with static methods), and as a model that widgets of its type will be instantiated with.
