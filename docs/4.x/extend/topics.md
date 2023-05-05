@@ -7,7 +7,13 @@ sidebarDepth: 2
 
 Craft is both a fully-featured content management system _and_ a powerful web application framework. Extensions allow you to build on top of its smart abstractions, or create completely new features that live alongside the main application.
 
-This page covers some common extension vectors along this continuum. Each section includes a self-contained example, or links out to an existing sub-page.
+Here, we’ll cover some common extension vectors along this continuum. Each section includes a self-contained example, or links out to an existing sub-page.
+
+::: tip
+Pardon the mess! We just launched this page, and plan to collect more resources here as they are updated with the [generator](generator.md) in mind.
+
+Questions? Feedback? Use the links at the bottom of this page to let us know what’s on your mind.
+:::
 
 ## Monitoring and Changing Behavior
 
@@ -68,9 +74,3 @@ Extend built-in data types, define new ones, and consolidate logic.
 Start learning about how to create new views in the [control panel](../control-panel.md).
 
 <See path="cp-sections.md" />
-
-::: tip
-This page is still under development! More resources will be collected here as they are updated to work with the [generator](generator.md).
-
-Questions? Feedback? Use the links at the bottom of this page to let us know what’s on your mind.
-:::
