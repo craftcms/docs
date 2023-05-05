@@ -1,5 +1,5 @@
 <template>
-    <RouterLink :to="targetPage" class="link">
+    <RouterLink :to="{ path: targetPage.path, hash: hash ? `#${hash}` : null }" class="link">
         <div class="arrow" aria-hidden="true">&rarr;</div>
         <div class="title">{{ label || targetPage.title }}</div>
         <div class="description" v-if="description || targetPage.frontmatter.description">{{ description || targetPage.frontmatter.description }}</div>
@@ -14,6 +14,10 @@ export default {
         path: {
             type: String,
             required: true,
+        },
+        hash: {
+            type: String,
+            required: false,
         },
         label: {
             type: String,
