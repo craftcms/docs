@@ -58,11 +58,11 @@ module.exports = {
           children: [
             "widget-types",
             "field-types",
-            "volume-types",
             "utility-types",
             "element-types",
             "element-action-types",
             "element-exporter-types"
+            "filesystem-types",
           ]
         },
         {
