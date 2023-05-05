@@ -27,6 +27,8 @@ Plugin name
     Your plugin’s name _must not_ begin with “Craft” or an include an [edition](plugin-editions.md)-sounding word like “Lite”, “Plus”, or “Pro”.
     :::
 
+### Private Plugins
+
 A plugin can be made “private” <Since ver="4.4.0" feature="Private plugins" /> by prefixing its handle with an underscore (like `_my-private-plugin`). Private plugins have all the same features as regular plugins, but are excluded from license verification (and are ineligible for listing on the [Plugin Store](plugin-store.md)); you can even publish a private plugin to GitHub or Packagist and share it between multiple projects, taking advantage of features like [migration tracks](migrations.md).
 
 Private plugins can be scaffolded with the [Generator](generator.md). <Since ver="1.3.0" repo="craftcms/generator" />
@@ -35,6 +37,8 @@ Private plugins can be scaffolded with the [Generator](generator.md). <Since ver
 
 ::: tip
 If this is your first time setting up a plugin, consider using the [Generator](generator.md)—it will prompt you for all of the required information, and leave you with a nicely-organized workspace.
+
+<p><Generator component="plugin" /></p>
 :::
 
 To create a plugin, create a new directory for it somewhere on your computer. A common approach is to store them in a `~/dev/` folder alongside your Craft projects:

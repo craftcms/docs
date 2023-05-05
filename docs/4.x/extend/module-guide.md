@@ -19,6 +19,8 @@ As an alternative to modules, private [plugins](plugin-guide.md) <Since ver="4.4
 
 ::: tip
 If this is your first time setting up a module, consider using the [Generator](generator.md)—it will prompt you for all of the required information, and leave you with a nicely-organized workspace.
+
+<p><Generator component="module" /></p>
 :::
 
 To create a module, create a new directory for it somewhere within your Craft project, such as `modules/<ModuleID>/`. For example, if your [module ID](#preparation) is `foo`, you might set it up like this:
