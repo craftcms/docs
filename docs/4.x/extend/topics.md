@@ -54,9 +54,9 @@ Other high-impact places to dive in.
 
 Getting data from users and processing it safely.
 
-### Controllers
+### Controllers + Routing
 
-Learn about requests, routing, responses, and Craft’s robust authorization and permissions systems.
+Learn about requests, routing, URL rules, responses, and Craft’s robust authorization and permissions systems.
 
 <See path="controllers.md" />
 <See path="user-permissions.md" />
