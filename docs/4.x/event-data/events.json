@@ -37918,7 +37918,7 @@
         "class": "craft\\services\\Utilities",
         "name": "EVENT_REGISTER_UTILITY_TYPES",
         "type": "craft\\events\\RegisterComponentTypesEvent",
-        "desc": "The event that is triggered when registering utility types."
+        "desc": "The event that is triggered when registering utilities."
     },
     {
         "class": "craft\\services\\Volumes",
