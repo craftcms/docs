@@ -139,19 +139,17 @@ The presence of attributes alone doesn’t give Craft enough information to pers
 ```php
 use craft\helpers\Db;
 
-public function afterSave(bool $isNew): void
+// ...
+
+public function afterSave(bool $isNew)
 {
-    if ($isNew) {
-        Db::insert('{{%plugin_products}}', [
+    if (!$this->propagating) {
+        Db::upsert('{{%products}}', [
             'id' => $this->id,
+        ], [
             'price' => $this->price,
             'currency' => $this->currency,
         ]);
-    } else {
-        Db::update('{{%plugin_products}}', [
-            'price' => $this->price,
-            'currency' => $this->currency,
-        ], ['id' => $this->id]);
     }
 
     parent::afterSave($isNew);

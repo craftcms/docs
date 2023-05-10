@@ -119,23 +119,19 @@ Install the plugin now, so your database table will be created.
 You will also need to add an `afterSave()` method to your element class, which is responsible for keeping your element table updated when elements are saved. The `afterSave()` method is a part of the standard element saving [control flow](services.md#interface-oriented-methods).
 
 ```php
+use craft\helpers\Db;
+
+// ...
+
 public function afterSave(bool $isNew)
 {
-    if ($isNew) {
-        \Craft::$app->db->createCommand()
-            ->insert('{{%products}}', [
-                'id' => $this->id,
-                'price' => $this->price,
-                'currency' => $this->currency,
-            ])
-            ->execute();
-    } else {
-        \Craft::$app->db->createCommand()
-            ->update('{{%products}}', [
-                'price' => $this->price,
-                'currency' => $this->currency,
-            ], ['id' => $this->id])
-            ->execute();
+    if (!$this->propagating) {
+        Db::upsert('{{%products}}', [
+            'id' => $this->id,
+        ], [
+            'price' => $this->price,
+            'currency' => $this->currency,
+        ]);
     }
 
     parent::afterSave($isNew);
