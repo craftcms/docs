@@ -1305,7 +1305,7 @@ CRAFT_RUN_QUEUE_AUTOMATICALLY=false
 <div class="compact">
 
 Allowed types
-:  
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -1318,7 +1318,7 @@ Since
 
 </div>
 
-
+The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
 
 

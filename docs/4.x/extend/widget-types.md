@@ -12,7 +12,7 @@ Each user controls what widgets are on their dashboard, and may have multiple in
 
 Scaffold a widget type with the [generator](generator.md):
 
-<Generator component="widget" plugin="my-plugin" />
+<Generator component="widget-type" plugin="my-plugin" />
 
 If you would prefer to write a widget class from scratch, it should extend <craft4:craft\base\Widget>. Refer to Craft’s own widget classes (located in `vendor/craftcms/cms/src/widgets/`, or the `craft\widgets` namespace) for examples.
 
