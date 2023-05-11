@@ -11,7 +11,6 @@ Ask yourself:
 - Can this component be managed by non-admins?
 - Does it depend on anything that can be managed by non-admins?
 - Would it be cumbersome to admins’ workflows if the component could only be edited in development environments?
-- Is your public API’s functionality hampered by 
 
 If the answer to any of those is **yes** (now or in the foreseeable future), then it’s likely _not_ a good candidate for project config support. See the [scope](../project-config.md#scope) section of the main project config docs for examples of what Craft itself tracks in project config.
 
