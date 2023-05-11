@@ -28,7 +28,7 @@ To add project config support to a plugin, some of your existing <abbr title="Cr
 - The model is passed to a service;
 - The service copies properties from the model onto a corresponding `ActiveRecord` class, then saves it (or directly writes data to a table via `Db::upsert()` or an equivalent);
 
-Instead, we're going to split this into two parts, and connect them via project config “events.” Our new workflow will look like this:
+Instead, we’re going to split this into two parts, and connect them via project config “events.” Our new workflow will look like this:
 
 ### Express Changes
 
@@ -160,13 +160,13 @@ We are able to implement this with just two methods, because the process for cre
 
 At this point, if product types were added or removed from project config _manually_ (say, by creating the corresponding YAML files in your `config/project/` directory, then running `php craft project-config/apply`), those changes would be synchronized with the database, and any `afterSaveProductType`, `beforeApplyProductTypeDelete`, and `afterDeleteProductType` event listeners would be triggered.
 
-If you'd like to test what we’ve implemented so far, you can set project config data via the command line:
+If you’d like to test what we’ve implemented so far, you can set project config data via the command line:
 
 ```bash
 php craft project-config/set myPlugin.productTypes.689fcbe5-9433-4fb0-bc88-d89fdd9bb2df.name "Widgets"
 ```
 
-We don't generally recommend this as a means of manipulating project config, but it _is_ a great way to test changes in an isolated way.
+We don’t generally recommend this as a means of manipulating project config, but it _is_ a great way to test changes in an isolated way.
 
 #### Component Dependencies
 
