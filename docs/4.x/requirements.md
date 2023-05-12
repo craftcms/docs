@@ -47,7 +47,7 @@ You can use the official [server check](https://github.com/craftcms/server-check
 - [Zip](http://php.net/manual/en/book.zip.php)
 - [DOM](http://php.net/manual/en/book.dom.php)
 
-We recommend ImageMagick for expanded image handling options.
+We recommend ImageMagick over GD for expanded image handling options.
 
 ## Optional PHP Methods and Configurations
 
