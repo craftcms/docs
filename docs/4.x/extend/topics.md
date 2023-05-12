@@ -70,6 +70,32 @@ Extend built-in data types, define new ones, and consolidate logic.
 <See path="services.md" />
 <See path="soft-deletes.md" />
 
+### Caching
+
+Sometimes, it can be expensive to repeatedly generate a dataset, or to block requests while waiting for a [third-party API](#using-external-services). Craft exposes a configurable [cache component](guide:caching-data) that can store temporary data in a consistent way:
+
+```php
+use Craft;
+
+$params = [
+    'productId' => 1234,
+];
+
+$key = 'my-plugin:' . md5(json_encode($params));
+
+$value = Craft::$app->getCache()->getOrSet($key, function() {
+    // Fetch remote data...
+
+    return $data;
+}, $duration);
+```
+
+Data returned from this method will be cached with `$key` for `$duration`—or, if `$key` was set within that duration, the data will be returned immediately.
+
+::: tip
+All database queries have a [cache()](yii2:yii\db\Query::cache()) method, as well.
+:::
+
 ## The Control Panel
 
 Start learning about how to create new views in the [control panel](../control-panel.md).
