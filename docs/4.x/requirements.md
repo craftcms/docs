@@ -70,7 +70,7 @@ For Craft to run properly, PHP needs to be able to write to the following files 
 - `vendor/*`
 - `web/cpresources/*`
 
-The exact permissions depend on the relationship between the system user that PHP runs under and whoever owns the folders and files:
+The exact permissions depend on the relationship between the system user that PHP runs as and the owner of the folders and files:
 
 - If they’re the same user, use `744` (`rwxr--r--`).
 - If they’re in the same group, use `774` (`rwxrwxr--`).
