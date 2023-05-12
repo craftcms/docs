@@ -51,7 +51,7 @@ We recommend ImageMagick over GD for expanded image handling options.
 
 ## Optional PHP Methods and Configurations
 
-Some shared hosting environments will disable certain common PHP methods and configurations that affect Craft features.
+Some shared hosting environments disable certain common PHP methods and configurations that affect Craft features.
 
 - [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) must be enabled for updating and installing plugins from the Plugin Store.
 - [proc_*](http://php.net/manual/en/ref.exec.php) methods must be enabled in order to utilize the Plugin Store and send emails.
