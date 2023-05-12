@@ -21,7 +21,7 @@ You can use the official [server check](https://github.com/craftcms/server-check
 ## Recommended System Specs
 
 - PHP 8.1+
-- MySQL 5.7.8+ with InnoDB, MariaDB 10.5+, or PostgreSQL 10+
+- MySQL 5.7.8+ with InnoDB, or PostgreSQL 10+
 - 512MB+ of memory allocated to PHP
 - 200MB+ of free disk space
 
