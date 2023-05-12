@@ -43,6 +43,7 @@ Craft’s most powerful features like elements and custom fields are built on in
 <See path="field-types.md" />
 <See path="filesystem-types.md" />
 <See path="widget-types.md" />
+<See path="queue-jobs.md" />
 
 ### Miscellany
 
