@@ -1,3 +1,7 @@
+---
+description: Offloading work to a background process can improve the experience and reliability of your plugin’s functionality.
+---
+
 # Queue Jobs
 
 Craft uses a queue for processing background tasks like updating indexes, propagating entries, and pruning revisions. You can write simple queue job classes to register your asynchronous queue tasks.
