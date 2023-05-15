@@ -89,7 +89,7 @@ A remote database is one prerequisite for [scaling](#scalability) your server ho
 
 #### Scalability
 
-Craft is benefits from both vertical and horizontal scaling. Giving your server more compute power and RAM, tuning the HTTP server, and [offloading the database](#remote-databases) and other services (vertical scaling) can bring immediate performance improvements. [Distributing load](kb:configuring-load-balanced-environments) across multiple web servers (horizontal scaling) is also viable, thanks to Craft’s support for centralized [cache](./config/app.md#cache) and [session](./config/app.md#session) storage.
+Craft benefits from both vertical and horizontal scaling. Giving your server more compute power and RAM, tuning the HTTP server, and [offloading the database](#remote-databases) and other services (vertical scaling) can bring immediate performance improvements. [Distributing load](kb:configuring-load-balanced-environments) across multiple web servers (horizontal scaling) is also viable, thanks to Craft’s support for centralized [cache](./config/app.md#cache) and [session](./config/app.md#session) storage.
 
 If your site demands global distribution (and can’t be cached at the edge), you may be able to take advantage of read/write splitting, replication, and other [advanced database configuration](./config/app.md#database) options to improve performance across regions.
 

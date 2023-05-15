@@ -171,7 +171,7 @@ use mynamespace\elements\MyElement;
 Event::on(
     FieldLayout::class,
     FieldLayout::EVENT_DEFINE_NATIVE_FIELDS,
-    static function(DefineFieldLayoutFieldsEvent $event) {
+    function(DefineFieldLayoutFieldsEvent $event) {
         /** @var FieldLayout $fieldLayout */
         $fieldLayout = $event->sender;
 
@@ -564,7 +564,7 @@ The following events have been moved or renamed:
 
 ## Filesystems
 
-In Craft 4, volumes have been simplified to represent a place where uploaded files can go. Each volume is represented by a single [craft\models\Volume](craft4:craft\models\Volume) class. File operations have been decoupled into a new concept called “Filesystems” ([#10367](https://github.com/craftcms/cms/pull/10367)).
+In Craft 4, volumes have been simplified to represent a place where uploaded files can go. Each volume is represented by a single [craft\models\Volume](craft4:craft\models\Volume) class. File operations have been decoupled into a new concept called [Filesystems](filesystem-types.md) ([#10367](https://github.com/craftcms/cms/pull/10367)).
 
 ![Screenshot of a Craft 4 Volume’s settings that includes the new Filesystem dropdown field.](../images/volume.png)
 

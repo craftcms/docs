@@ -610,7 +610,7 @@ Array of plugin handles that should be disabled, regardless of what the project 
 This can also be set to `'*'` to disable **all** plugins.
 
 ```php
-->disabledPlugins'('*')
+->disabledPlugins('*')
 ```
 
 ::: warning
@@ -1305,7 +1305,7 @@ CRAFT_RUN_QUEUE_AUTOMATICALLY=false
 <div class="compact">
 
 Allowed types
-:  
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -1318,7 +1318,7 @@ Since
 
 </div>
 
-
+The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
 
 
@@ -1660,12 +1660,13 @@ The shell command that Craft should execute to create a database backup.
 When set to `null` (default), Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable
 for the system user running the web server.
 
-You may provide your own command optionally using several tokens Craft will swap out at runtime:
+You may provide your own command, which can include several tokens Craft will substitute at runtime:
 
-- `{path}` - the target backup file path
+- `{file}` - the target backup file path
 - `{port}` - the current database port
 - `{server}` - the current database hostname
-- `{user}` - the user to connect to the database
+- `{user}` - user that was used to connect to the database
+- `{password}` - password for the specified `{user}`
 - `{database}` - the current database name
 - `{schema}` - the current database schema (if any)
 

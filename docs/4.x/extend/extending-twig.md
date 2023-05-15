@@ -6,7 +6,7 @@ Craft provides two ways for plugins to extend its Twig templating environment.
 
 The global `craft` template variable is an instance of <craft4:craft\web\twig\variables\CraftVariable>. When a template references `craft.entries` or `craft.entries()`, it’s calling [CraftVariable::entries()](craft4:craft\web\twig\variables\CraftVariable::entries()) behind the scenes, for example.
 
-The `CraftVariable` instance can be extended by plugins with [behaviors](./extending-system-components.md#behaviors) and [services](./services.md). Choosing the right approach depends on what you’re trying to add to it.
+The `CraftVariable` instance can be extended by plugins with [behaviors](behaviors.md) and [services](./services.md). Choosing the right approach depends on what you’re trying to add to it.
 
 - Use a **behavior** to add custom properties or methods directly onto the `craft` variable (e.g. `craft.foo()`).
 - Use a **service** to add a sub-object to the `craft` variable, which can be accessed with a custom property name, called the service’s “ID”. (e.g. `craft.foo.*`).

@@ -1079,7 +1079,7 @@ We can instantiate and use that just like the postal label formatter:
 
 ## Managing Addresses
 
-Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](./dev/controller-actions.md).
+Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](./dev/controller-actions.md#users-save-address).
 
 Craft doesn’t automatically give Addresses their own URLs, though—so it’s up to you to define a [routing scheme](./routing.md#advanced-routing-with-url-rules) for them via `routes.php`. We’ll cover each of these three routes in the following sections:
 
@@ -1302,16 +1302,16 @@ use craft\elements\Address;
 use craft\events\DefineRulesEvent;
 
 Event::on(
-  Address::class,
-  Model::EVENT_DEFINE_RULES,
-  function(DefineRulesEvent $event) {
-    $event->rules[] = [
-      ['fullName'],
-      'match',
-      'pattern' => '/droid|bot/i',
-      'message' => Craft::t('site', 'Robots are not allowed.'),
-    ];
-  }
+    Address::class,
+    Model::EVENT_DEFINE_RULES,
+    function(DefineRulesEvent $event) {
+        $event->rules[] = [
+            ['fullName'],
+            'match',
+            'pattern' => '/droid|bot/i',
+            'message' => Craft::t('site', 'Robots are not allowed.'),
+        ];
+    }
 );
 ```
 

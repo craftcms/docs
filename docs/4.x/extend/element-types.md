@@ -1,3 +1,7 @@
+---
+description: Add native-feeling content types to empower content authors and administrators.
+---
+
 # Element Types
 
 [Elements](../elements.md) underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#types) with your own, from a plugin or module.
@@ -28,9 +32,7 @@ Your element class should live in the `elements/` directory of your plugin’s s
 ::: tip
 Use the [generator](./generator.md) to scaffold an element type from the command line!
 
-```bash
-php craft make element-type
-```
+<p><Generator component="element-type" plugin="my-plugin" /></p>
 :::
 
 To start, we’ll give the class a handful of public properties and define two static methods that help the control panel render labels.
@@ -97,7 +99,7 @@ We’re going to set up the mechanisms of persistence now, and will cover [accep
 
 ### Migrations
 
-Create an new [migration](migrations.md), and add this to its `safeUp()` method:
+Create a new [migration](migrations.md), and add this to its `safeUp()` method:
 
 ```php
 // Create the Products table:
@@ -137,19 +139,17 @@ The presence of attributes alone doesn’t give Craft enough information to pers
 ```php
 use craft\helpers\Db;
 
-public function afterSave(bool $isNew): void
+// ...
+
+public function afterSave(bool $isNew)
 {
-    if ($isNew) {
-        Db::insert('{{%plugin_products}}', [
+    if (!$this->propagating) {
+        Db::upsert('{{%products}}', [
             'id' => $this->id,
+        ], [
             'price' => $this->price,
             'currency' => $this->currency,
         ]);
-    } else {
-        Db::update('{{%plugin_products}}', [
-            'price' => $this->price,
-            'currency' => $this->currency,
-        ], ['id' => $this->id]);
     }
 
     parent::afterSave($isNew);
@@ -315,7 +315,7 @@ When modifying your query, new params should be applied with `andWhere()` instea
 
 ### Querying for Elements in Templates
 
-If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](guide:concept-behaviors) to it.
+If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](behaviors.md) to it.
 
 Your behavior class (in a new file at `variables/CraftVariableBehavior.php`) should look like this:
 
@@ -424,7 +424,7 @@ public function getFieldLayout()
 ```
 
 ::: tip
-Read about managing [multiple field layouts](#variations--multiple-field-layouts), or storing [field layouts in project config](#project-config).
+Read about managing [multiple field layouts](#variations-multiple-field-layouts), or storing [field layouts in project config](#project-config).
 :::
 
 #### Native Layout Elements
@@ -452,7 +452,8 @@ Event::on(
             'min' => 0,
             // ...see the `TextField` definition for more options!
         ];
-    });
+    }
+);
 ```
 
 `mandatory` here means that the layout element _must_ be present in the field layout, not that a value is required. Take a look at the existing [field layout element types](repo:craftcms/cms/tree/main/src/fieldlayoutelements) to see which makes the most sense for your attribute.
@@ -568,7 +569,8 @@ Event::on(
     UrlManager::EVENT_REGISTER_CP_URL_RULES,
     function (RegisterUrlRulesEvent $event) {
         $event->rules['products'] = ['template' => 'my-plugin/products/_index.twig'];
-    });
+    }
+);
 ```
 
 ### Sources
@@ -1033,7 +1035,7 @@ class Products extends BaseRelationField
         return \Craft::t('plugin-handle', 'Products');
     }
 
-    protected static function elementType(): string
+    public static function elementType(): string
     {
         return Product::class;
     }

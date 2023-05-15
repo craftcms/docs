@@ -1,5 +1,6 @@
 ---
 sidebarDepth: 2
+description: Respond to HTTP requests by connecting them with back-end services.
 ---
 
 # Controllers
@@ -50,7 +51,7 @@ use craft\web\Controller;
 
 class WidgetsController extends Controller
 {
-    protected $allowAnonymous = true;
+    protected array|bool|int $allowAnonymous = true;
 
     public function actionEcho()
     {
@@ -125,7 +126,8 @@ Event::on(
         $event->rules['widgets/edit/<id:\d+>'] = 'my-plugin/widgets/edit';
 
         // ...
-    });
+    }
+);
 ```
 
 Here, the key represents the user-facing “path” (what will appear in the address bar of their browser), and the value is an [action path](#action-paths).

@@ -1,3 +1,7 @@
+---
+updatedVersion: 4.x/extend/filesystem-types
+---
+
 # Volume Types
 
 Plugins can provide custom asset volume types by creating a class that implements <craft3:craft\base\VolumeInterface> and <craft3:craft\base\VolumeTrait>. The class will serve both as a way to communicate various things about your volume type (with static methods), and as a model that volumes of its type will be instantiated with.

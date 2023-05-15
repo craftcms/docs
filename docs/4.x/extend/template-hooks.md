@@ -1,3 +1,7 @@
+---
+description: Inspect template data and modify output with hooks.
+---
+
 # Template Hooks
 
 Craft templates can give modules and plugins an opportunity to hook into them using [hook](../dev/tags.md#hook) tags.
@@ -10,7 +14,7 @@ Craft templates can give modules and plugins an opportunity to hook into them us
 Plugins and modules can register methods to be called by template hooks using <craft4:craft\web\View::hook()>.
 
 ```php
-Craft::$app->view->hook('my-custom-hook-name', function(array &$context) {
+Craft::$app->getView()->hook('my-custom-hook-name', function(array &$context) {
     // Modify template *context*
     $context['foo'] = 'bar';
 
@@ -33,7 +37,7 @@ Pay close attention to what you intend to modify; some hooks are provided for mo
 
 | Hook                         | Description & Template
 | ---------------------------- | -------------------------------------------------------------------
-| `cp.elements.element`        | Base element template.<br><small>[_elements/element.twig](https://github.com/craftcms/cms/blob/main/src/templates/_elements/element.twig)</small>
+| `cp.elements.element`        | Base “element” template, used for rendering relational tiles.<br><small>[_elements/element.twig](https://github.com/craftcms/cms/blob/main/src/templates/_elements/element.twig)</small>
 | `cp.layouts.base`            | Before `doctype` declaration in base template.<br><small>[_layouts/base.twig](https://github.com/craftcms/cms/blob/main/src/templates/_layouts/base.twig)</small>
 | `cp.globals.edit`            | Before global set detail view’s template blocks.<br><small>[globals/_edit.twig](https://github.com/craftcms/cms/blob/main/src/templates/globals/_edit.twig)</small>
 | `cp.globals.edit.content`    | After global set detail view’s main content.<br><small>[globals/_edit.twig](https://github.com/craftcms/cms/blob/main/src/templates/globals/_edit.twig)</small>

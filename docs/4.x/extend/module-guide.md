@@ -2,22 +2,28 @@
 
 ## Preparation
 
-Before you begin working on a module, you need to decide on a couple things:
+Two characteristics must be decided before you begin work on a module:
 
 Namespace
-: The root namespace that your module’s classes will live in. (See the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloading specification for details.) Note that this should *not* begin with `craft\`; use something that identifies you (the developer), or the project.
+: The root namespace that your module’s classes will live in. Note that this should *not* begin with `craft\`; use something that identifies you (the developer), or the project.
+: See the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloading specification for details.
 
 Module ID
 : Something that uniquely identifies the module within your project. IDs must begin with a letter and contain only lowercase letters, numbers, and dashes, and should be `kebab-cased`.
-: The module ID will become the first segment in [controller action](./controllers.md) paths.
+: The module ID will become the first segment in [controller action](./controllers.md) paths. Avoid names that will conflict with Craft’s core [controllers](repo:craftcms/cms/tree/develop/src/controllers) or the handles of any installed plugins (e.g. `app` would conflict with <craft4:craft\controllers\AppController>, and `commerce` would collide with [Commerce](../../commerce/4.x/README.md)).
 
-::: warning
-When choosing a module ID, avoid names that will conflict with Craft’s core [controllers](https://github.com/craftcms/cms/tree/develop/src/controllers) (e.g. `app` would conflict with `AppController.php`), as well as any installed plugin handles.
+
+As an alternative to modules, private [plugins](plugin-guide.md) <Since ver="4.4.0" feature="Private plugins" /> provide all the functionality of a regular plugin, but are intended to be tracked as part of a project rather than distributed.
+
+## Scaffolding
+
+::: tip
+If this is your first time setting up a module, consider using the [Generator](generator.md)—it will prompt you for all of the required information, and leave you with a nicely-organized workspace.
+
+<p><Generator component="module" /></p>
 :::
 
-## Set up the basic file structure
-
-To create a module, create a new directory for it somewhere within your Craft project, such as `modules/<ModuleID>/`. For example, if your module ID is `foo`, you might set it up like this:
+To create a module, create a new directory for it somewhere within your Craft project, such as `modules/<ModuleID>/`. For example, if your [module ID](#preparation) is `foo`, you might set it up like this:
 
 ```treeview
 my-project/

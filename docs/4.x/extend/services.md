@@ -1,19 +1,25 @@
+---
+description: Services are the clearinghouse for your plugin’s critical operations.
+---
+
 # Services
 
-## What are Services?
-
-Services are [singleton](https://en.wikipedia.org/wiki/Singleton_pattern) classes that get attached to your primary plugin class as [components](https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components) (e.g. `MyPlugin::getInstance()->serviceName`).
+Services are [singleton](https://en.wikipedia.org/wiki/Singleton_pattern) classes that get attached to your primary plugin class as [components](guide:structure-application-components).
 
 They have two jobs:
 
 - They contain most of your plugin’s business logic.
-- They define your plugin’s API, which your plugin (and other plugins) can access.
+- They define your plugin’s API, which it (and other plugins) can access.
 
-For example, Craft’s field management code is located in <craft4:craft\services\Fields>, which is available at `Craft::$app->fields`. It has a `getFieldByHandle()` method that returns a field model by its handle. If that’s something you want to do, you can call `Craft::$app->fields->getFieldByHandle('my-field-handle')`.
+For example, Craft’s field management code is located in <craft4:craft\services\Fields>, which is available at `Craft::$app->getFields()`. It has a `getFieldByHandle()` method that returns a field model by its handle. If that’s something you want to do, you can call `Craft::$app->getFields()->getFieldByHandle('my-field-handle')`.
 
-## Creating a Service
+## Service Class
 
-To create a service class for your plugin, create a `services/` subdirectory within your plugin’s `src/` directory, and create a file within it named after the class name you want to give your service. If you want to name your service class `Foo` then name the file `Foo.php`.
+Create a service class using the [generator](generator.md):
+
+<Generator component="service" plugin="my-plugin" />
+
+If you would prefer to start from scratch, create a `services/` subdirectory within your plugin’s `src/` directory, and a file within it named the same as the class itself. If you want to name your service class `Foo` then name the file `Foo.php`.
 
 Open the file in your text editor and use this template as its starting point:
 
@@ -139,7 +145,7 @@ There are two common types of model operation methods in Craft:
 
 1. Methods that accept a *specific model class* (e.g. <craft4:craft\services\Categories::saveGroup()>, which saves a category group represented by the given <craft4:craft\models\CategoryGroup> model). We call these **class-oriented methods**.
 
-2. Methods that accept any class so long as it implements an *interface* (e.g. <craft4:craft\services\Fields::deleteField()>, which deletes a field represented by the given <craft4:craft\base\FieldInterface> instance, regardless of its actual class). We call these **interface-oriented methods**.
+2. Methods that accept any class so long as it implements an *interface* (e.g. <craft4:craft\services\Fields::deleteField()>, which deletes a field represented by the given model that implements <craft4:craft\base\FieldInterface>, regardless of its actual class). We call these **interface-oriented methods**.
 
 Both types of methods should follow the same general control flow, with one difference: interface-oriented methods should trigger callback methods on the model before and after the action is performed, giving the model a chance to run its own custom logic.
 

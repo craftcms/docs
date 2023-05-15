@@ -1462,6 +1462,49 @@
     },
     {
         "class": "craft\\base\\Element",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\base\\Element",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -6038,6 +6081,49 @@
     },
     {
         "class": "craft\\elements\\Address",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Address",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -6866,6 +6952,49 @@
         "name": "EVENT_AFTER_GENERATE_TRANSFORM",
         "type": "craft\\events\\GenerateTransformEvent",
         "desc": "The event that is triggered after a transform is generated for an asset.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Asset",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineAssetUrlEvent",
+        "desc": "The event that is triggered before defining the asset’s URL.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -9967,6 +10096,49 @@
     },
     {
         "class": "craft\\elements\\Category",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Category",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -12968,6 +13140,84 @@
     },
     {
         "class": "craft\\elements\\Entry",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "draft": {
+                "label": "Element is a draft",
+                "conditionsPhp": "ElementHelper::isDraft($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "provisional": {
+                "label": "Element is a provisional draft",
+                "conditionsPhp": "ElementHelper::rootElement($event->sender)->isProvisionalDraft",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            },
+            "revision": {
+                "label": "Element is a revision",
+                "conditionsPhp": "ElementHelper::isRevision($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "provisional",
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Entry",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -15463,6 +15713,49 @@
     },
     {
         "class": "craft\\elements\\GlobalSet",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\GlobalSet",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -17363,6 +17656,49 @@
     },
     {
         "class": "craft\\elements\\MatrixBlock",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\MatrixBlock",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -19223,6 +19559,49 @@
         "name": "EVENT_DEFINE_KEYWORDS",
         "type": "craft\\events\\DefineAttributeKeywordsEvent",
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Tag",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -21252,6 +21631,49 @@
         "name": "EVENT_DEFINE_KEYWORDS",
         "type": "craft\\events\\DefineAttributeKeywordsEvent",
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\User",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -32885,6 +33307,12 @@
     },
     {
         "class": "craft\\queue\\Queue",
+        "name": "EVENT_AFTER_EXEC_AND_RELEASE",
+        "type": "yii\\queue\\ExecEvent",
+        "desc": "The event that is triggered after a job is executed and released."
+    },
+    {
+        "class": "craft\\queue\\Queue",
         "name": "EVENT_WORKER_START",
         "type": "yii\\queue\\cli\\WorkerEvent",
         "desc": "that is triggered when the worker is started."
@@ -37057,25 +37485,25 @@
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_BEFORE_CREATE_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered before a revision is created."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_AFTER_CREATE_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered after a revision is created."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_BEFORE_REVERT_TO_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered before an element is reverted to a revision."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_AFTER_REVERT_TO_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered after an element is reverted to a revision."
     },
     {
@@ -37490,7 +37918,7 @@
         "class": "craft\\services\\Utilities",
         "name": "EVENT_REGISTER_UTILITY_TYPES",
         "type": "craft\\events\\RegisterComponentTypesEvent",
-        "desc": "The event that is triggered when registering utility types."
+        "desc": "The event that is triggered when registering utilities."
     },
     {
         "class": "craft\\services\\Volumes",

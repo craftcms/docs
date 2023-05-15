@@ -235,7 +235,8 @@ If you have an element form (such as an [entry form](kb:entry-form)) that needs 
 {
   "sortOrder": [
     321,
-    654
+    654,
+    "new:1"
   ],
   "blocks": {
     "321": {

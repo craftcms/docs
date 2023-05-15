@@ -8,7 +8,7 @@ sidebarDepth: 2
 
 Yii’s [application structure](guide:structure-overview) informs much of Craft’s internal organization. You may already be familiar with some [core components](guide:structure-application-components) if you’ve made changes to the [application config](../config/app.md).
 
-A Craft extension (often referred to as a [module](#modules) or [plugin](#plugins)) can be as lean as a single class, or as complex as an embedded MVC-style application. Either way, Craft’s entire API is at your finger tips.
+A Craft extension (often referred to as a [module](#modules) or [plugin](#plugins)) can be as lean as a single class, or as complex as an embedded <abbr title="Model, View, Controller">MVC</abbr>-style application. Either way, Craft’s entire API is at your finger tips.
 
 <See path="./generator.md" description="Jump right in by generating your first plugin or module!" />
 
@@ -33,6 +33,10 @@ Not all extensions must be conceived as portable or publishable! In fact, the mo
 ### Types of Extensions
 
 Most customizations come in the form of a **module** or a **plugin**.
+
+::: tip
+Private plugins <Since ver="4.4.0" feature="Private plugins" /> combine the best of both worlds. If this is your first time writing an extension, we recommend using the [Generator](generator.md) to scaffold a private plugin.
+:::
 
 #### Modules
 
@@ -62,13 +66,13 @@ If the thing you want to build would benefit from any of these features (or you�
 
 ### Design + Approach
 
-Extensions naturally invite technical debt—for maintainers _and_ users. This isn’t necessarily a bad thing, though! The most common manifestation is some additional friction during major version upgrades. Craft itself has enough abstractions in place to protect most developers from significant API changes (for example, Twig templates are largely compatible back to Craft 2), but as you get deeper into Craft’s API, you will need to pay special attention to deprecation notices and our dedicated [upgrade guides](./updating-plugins.md).
+Extensions naturally invite technical debt—for maintainers _and_ users. This isn’t necessarily a bad thing, though! The most common manifestation is some additional friction during major version upgrades. Craft itself has enough abstractions in place to protect most developers from significant API changes (for example, Twig templates are largely compatible back to Craft 2), but as you get deeper into Craft’s API, you will need to pay special attention to deprecation notices and our dedicated [plugin upgrade guides](./updating-plugins.md).
 
 One of the most important things to consider as you set out is how you will communicate to others (your teammates, a client’s future development partners, or even your future self) where a project’s special features come from. It could be documentation or training—or nothing at all, if the scope of the extension is limited!
 
 Craft automatically handles this for [plugins](#plugins)—from the control panel, you can see what’s currently installed and [temporarily disable](config4:disabledPlugins) one (or all) to track down problems. Registered [modules](#modules) are also disclosed in the control panel… but without understanding how they’re organized, auto-loaded, bootstrapped, or otherwise factored into the logic of your application, their purpose and specific effects may be unclear.
 
-#### Extension Loci
+#### Extension Points
 
 An extension usually leverages one or more of these concepts:
 
@@ -76,22 +80,24 @@ Controllers
 : Provide new endpoints for [web](./controllers.md) or [console](./commands.md) requests.
 
 Events
-: React to, prevent, or modify default behaviors by listening to [events](./events.md).
+: React to, prevent, or modify default behaviors by listening to [events](./events.md) or attaching [hooks](./template-hooks.md).
 
-Novel Component Types
+Component Types
 : Create new kinds of existing components like [element exporters](./element-exporter-types.md) or [background jobs](./queue-jobs.md).
 
 Services
-: Add, modify, or replace components accessed via `Craft::$app` or an instance of your own extension.
+: Add, modify, or replace components accessible via `Craft::$app` or as part of your own extension.
 
 Templates
 : Expose functionality to [Twig](./extending-twig.md) via built-in language features like functions and filters—or add your own!
 
 ::: tip
-This is not an exhaustive list! Check the sidebar for more info on what aspects of Craft are extensible.
+This is not an exhaustive list! Check the sidebar for more info on what aspects of Craft are extensible, or take a spin through the [topics](topics.md) page for some more ideas.
 :::
 
 These fixtures can be combined to create advanced front-end and control panel interfaces, communicate with external services, improve developer experience… or build virtually any other web- or console-based functionality.
+
+<See path="topics.md" />
 
 ### First Steps
 

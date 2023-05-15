@@ -23,6 +23,7 @@ module.exports = {
             ["", "Introduction"],
             "coding-guidelines",
             "generator",
+            "topics"
           ]
         },
         {
@@ -56,35 +57,34 @@ module.exports = {
           title: "System Components",
           collapsable: false,
           children: [
-            "widget-types",
-            "field-types",
-            "volume-types",
-            "utility-types",
             "element-types",
-            "element-action-types",
-            "element-exporter-types"
+            "element-exporter-types",
+            "field-types",
+            "filesystem-types",
+            "widget-types",
           ]
         },
         {
           title: "More",
           collapsable: false,
           children: [
-            "events",
-            "migrations",
-            "user-permissions",
-            "translation-categories",
             "asset-bundles",
-            "services",
-            "controllers",
             "commands",
-            "template-roots",
+            "controllers",
+            "element-actions",
+            "environmental-settings",
+            "events",
             "extending-twig",
             "graphql",
-            "template-hooks",
-            "soft-deletes",
+            "migrations",
             "queue-jobs",
-            "environmental-settings",
-            "extending-system-components"
+            "services",
+            "soft-deletes",
+            "template-hooks",
+            "template-roots",
+            "translation-categories",
+            "user-permissions",
+            "utilities",
           ]
         }
       ],
@@ -151,7 +151,7 @@ module.exports = {
             "project-config",
             "plugins"
           ],
-          toggleChildren: ["searching", "logging", "reference-tags", "gc"]
+          toggleChildren: ["searching", "logging", "queue", "mail", "reference-tags", "gc"]
         },
         {
           title: "Element Types",

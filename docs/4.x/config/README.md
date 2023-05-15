@@ -411,6 +411,10 @@ return [
 
 The options defined here will be passed into new `GuzzleHttp\Client` instances. See [Guzzle’s documentation](http://docs.guzzlephp.org/en/latest/) for a list of available options.
 
+::: tip
+To use a proxy for _all_ requests, set an [httpProxy](config4:httpProxy) in general config. This will get merged with the Guzzle configuration, and passed to the front-end for use by JavaScript, in the [control panel](../control-panel.md). Setting a proxy only in Guzzle’s config will not affect Ajax requests!
+:::
+
 ### Custom Settings
 
 Settings defined in a `config/custom.php` file don’t map to or affect any built-in Craft features, but can useful to centralize data, flags, or secrets that otherwise don’t have a place to live.

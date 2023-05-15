@@ -21,7 +21,7 @@ You can use the official [server check](https://github.com/craftcms/server-check
 ## Recommended System Specs
 
 - PHP 8.1+
-- MySQL 5.7.8+ with InnoDB, MariaDB 10.5+, or PostgreSQL 10+
+- MySQL 5.7.8+ with InnoDB, or PostgreSQL 10+
 - 512MB+ of memory allocated to PHP
 - 200MB+ of free disk space
 
@@ -47,11 +47,11 @@ You can use the official [server check](https://github.com/craftcms/server-check
 - [Zip](http://php.net/manual/en/book.zip.php)
 - [DOM](http://php.net/manual/en/book.dom.php)
 
-We recommend ImageMagick for expanded image handling options.
+We recommend ImageMagick over GD for expanded image handling options.
 
 ## Optional PHP Methods and Configurations
 
-Some shared hosting environments will disable certain common PHP methods and configurations that affect Craft features.
+Some shared hosting environments disable certain common PHP methods and configurations that affect Craft features.
 
 - [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) must be enabled for updating and installing plugins from the Plugin Store.
 - [proc_*](http://php.net/manual/en/ref.exec.php) methods must be enabled in order to utilize the Plugin Store and send emails.
@@ -70,7 +70,7 @@ For Craft to run properly, PHP needs to be able to write to the following files 
 - `vendor/*`
 - `web/cpresources/*`
 
-The exact permissions depend on the relationship between the system user that PHP runs under and whoever owns the folders and files:
+The exact permissions depend on the relationship between the system user that PHP runs as and the owner of the folders and files:
 
 - If they’re the same user, use `744` (`rwxr--r--`).
 - If they’re in the same group, use `774` (`rwxrwxr--`).
