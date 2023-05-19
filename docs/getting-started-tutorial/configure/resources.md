@@ -126,9 +126,11 @@ The second resource we need to create is a group for our blog’s _categories_.
 
 ## Custom Fields
 
-Now that we’ve set up all the underlying resources (the section, an asset volume, and a category group), let’s create the fields for our blog posts.
+Now that we’ve set up all the underlying resources (a section, an asset volume, and a category group), let’s create the fields for our blog posts.
 
-Custom fields are reusable, so we’ll define them in a global space, then add them to the field layouts where they’re needed. The first thing we’ll do is create a _field group_ to keep our fields organized.
+Custom fields are reusable, so we’ll define them in a global space, then add them to the field layouts where they’re needed. Each of the resources we’ve created so far can have their own field layouts.
+
+The first thing we’ll do is create a _field group_ to keep our fields organized.
 
 1. Navigate to **Settings** → **Fields**.
 2. Choose **+ New group** in the sidebar, and give it a name like “Blog.”
@@ -286,19 +288,21 @@ Field layouts for entries are managed via _entry types_.
 1. Navigate to **Settings** → **Sections**;
 1. Choose **Edit entry types** in the _Blog_ row, and then choose the _Default_ entry type that was created along with the section;
 1. Take the opportunity to give this entry type a more useful **Name** <Poi label="A" target="fieldLayout" id="name" /> like “Post,” and ensure the **Handle** is updated;
-5. Drag each of the fields we created earlier to the _Content_ <Poi label="B" target="fieldLayout" id="contentTab" /> tab in whatever order makes sense to you.
-8. Save the entry type.
+1. Drag each of the fields we created earlier to the _Content_ <Poi label="B" target="fieldLayout" id="contentTab" /> tab in whatever order makes sense to you.
+1. Save the entry type.
+
+All the fields nested within your Matrix field will come along with it, so they won’t appear in the field layout designer!
 
 <Block label="Optional Step">
 
 #### Advanced Field Layout Customizations
 
-The **UI Elements** <Poi label="C" target="fieldLayout" id="uiElements" /> tab in the right sidebar contains a few tools that can help spruce up field layouts. This one is relatively simple, but as you create richer authoring experiences.
+The **UI Elements** <Poi label="C" target="fieldLayout" id="uiElements" /> tab in the right sidebar contains a few tools that can help spruce up field layouts. This one is relatively simple, but as you create richer authoring experiences, having ways to split up fields, add instructions, or output arbitrary HTML can make a profound difference to its usability.
 
 Here are a few other features of field layouts worth experimenting with:
 
 - **Widths**: By default, fields occupy the full width of the element editor. Use the column selector UI next to the <Icon kind="settings" /> to set the field as 1/4, 1/2, 3/4, or full-width.
-- **Line breaks**: If a row isn't full, you can force a field into the next row with a line break field layout element.
+- **Line breaks**: If a row isn't full, you can force a field onto the next row with a line break field layout element.
 - **Field labels**: Click the <Icon kind="settings" /> to open a slideout and update a field’s **Label**. This is particularly useful for the **Title** field: say you were creating employee profiles, and needed a place for their names and _position_ titles—the built-in **Title** field would make more sense being called “Full Name.”
 - **Required fields**: Also within a field’s setting slideout is an option to mark a field as **Required**.
 - **Field conditions** and : Fields can be conditionally included in layouts by setting up condition rules, within the settings slideout.
@@ -313,4 +317,4 @@ Return to **Entries** in the main navigation, and click **+ New entry** to creat
 <img src="../images/new-entry-empty.png" alt="Screenshot of new entry screen" />
 </BrowserShot>
 
-Feel free to play with the content editor a bit
+Feel free to play with the content editor on your own—then check back in so we can go over a couple features you’ll need to be aware of before building out the front-end.

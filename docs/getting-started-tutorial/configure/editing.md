@@ -30,8 +30,8 @@ If you would like to turn your edits into a _draft_ so other users can review th
 
 Assets can be attached or uploaded in a variety of ways:
 
-1. From a fresh entry page, click the **+ Add an Asset** button, then **Upload Files** in the modal;
-1. Drag a file from your computer onto the field;
+1. From an entry page, click the **+ Add an Asset** button, then **Upload Files** in the modal;
+1. Drag a file from a folder on your computer into the browser and drop it on the field;
 1. Visit the **Assets** screen of the control panel and click **Upload Files**;
 
 This last method is a great way to seed your project with an asset library.
@@ -61,21 +61,21 @@ Edits made in this way affect the element anywhere else it’s used. For example
 
 ### Matrix
 
-You can grab the handle <Icon kind="move" /> in the upper-right corner of any matrix block to re-order them. Each block has a <Icon kind="settings" /> menu just to the left of its handle containing options to move, delete, or disable the block, as well as insert new blocks between existing ones:
+You can grab the handle <Icon kind="move" /> in the upper-right corner of any matrix block to re-order them. Each block has a <Icon kind="settings" /> menu (just to the left of its handle) containing options to move, delete, or disable the block, as well as insert new blocks between existing ones:
 
 ![](../images/matrix-menu.png)
 
 ### Publishing
 
-Craft will generate slugs based on the entry’s title. Based on the _Blog_ section’s **URI Format** (`blog/{slug}`), the slug ends up as part of the entry’s public URL. The slug can be edited at the top of the sidebar
+For new entries, Craft will generate slugs based on the entry’s title. Our _Blog_ section’s **URI Format** (`blog/{slug}`) incorporates that slug, meaning it will appear as part of the entry’s public URL. If you wish to edit the slug manually, it appears at the top of the sidebar.
 
-You can set **Post Date** to a future date/time to have it appear then, and optionally add an **Expiry Date** to have it disappear later. You can always flip _Enabled_ off and know the post will be hidden publicly, regardless of other settings.
+You can set an entry’s **Post Date** to be in the future to prevent it from being available on the front-end, and optionally add an **Expiry Date** to have it disappear, later. You can always turn off the **Enabled** switch to be certain the post will be hidden publicly, regardless of other settings.
 
 ![](../images/entry-meta.png)
 
 ### Previewing
 
-Choosing **View** from the header opens the entry in a new tab—even if it isn’t enabled. In this case, Craft generates get a private, temporary—but sharable—URL.
+Choosing **View** from the header opens the entry in a new tab—even if it isn’t enabled. In this case, Craft generates get a private, temporary (but sharable) URL.
 
 If you were to click this button right now, you’d get something that looks like this:
 
@@ -83,4 +83,4 @@ If you were to click this button right now, you’d get something that looks lik
 <img src="../images/error-404.png" alt="HTTP 404 error screen" />
 </BrowserShot>
 
-This looks scarier than it is. In fact, it tells us _exactly_ what the problem is: we haven’t created the template our blog posts are expecting. Let’s fix this.
+This looks scarier than it is. In fact, it tells us _exactly_ what the problem is: we haven’t created the template that our blog posts are expecting. Let’s fix this.

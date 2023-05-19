@@ -15,7 +15,7 @@ In this section, we will:
 Craft provides a number of distinct building blocks, each appropriate for different kinds of content. Let’s take a quick look at a few of them that will be particularly useful in building a blog.
 
 ::: tip
-We use the umbrella term “elements” to describe the variety of content types Craft comes with. Plugins can provide their own element types, as well!
+We use the term _elements_ to collectively describe the variety of content types Craft comes with. Plugins can provide their own element types, as well!
 :::
 
 ### Entries
@@ -104,7 +104,7 @@ As our first exercise in content modeling, let’s consider what comprises a blo
 
 From the element types and fields we’ve learned about so far, we might map these features into Craft concepts, like this:
 
-- Blog posts will be **entries**, with native support for:
+- Blog posts will be **entries**, which natively support:
     - **Titles**;
     - **Post Dates**;
     - **Authors**;

@@ -1,3 +1,7 @@
+---
+description: Discover objects and data available to you in any Twig context.
+---
+
 # Global Variables
 
 The following [global variables](https://twig.symfony.com/doc/3.x/templates.html#global-variables) are available to Twig templates in Craft:

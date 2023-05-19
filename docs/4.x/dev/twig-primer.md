@@ -1,5 +1,6 @@
 ---
 keywords: Twig Primer
+description: Learn about Craft’s template engine, Twig.
 ---
 # Introduction to Templating
 

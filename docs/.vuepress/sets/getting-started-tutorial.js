@@ -48,7 +48,8 @@ module.exports = {
           "build/",
           "build/routing",
           "build/twig",
-          "build/templates",
+          "build/blog-templates",
+          "build/extra-templates",
           "build/preview"
         ]
       },

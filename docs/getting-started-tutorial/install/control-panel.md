@@ -8,12 +8,13 @@ You should have three project windows up, at this point:
 
 ## Signing In
 
-You can sign in to the control panel in two ways:
+You can reach the control panel in a few ways:
 
-- Add `/admin` to tutorial project’s URL in your browser.
-- Enter `ddev launch admin` in your terminal to open a second browser.
+- Add `/admin` to tutorial project’s URL in your browser;
+- Enter `ddev launch admin` in your terminal to open a second browser;
+- Click the **Go to your control panel &rarr;** link from the [welcome screen](./README.md#setup);
 
-Either way, you will be greeted with a login screen that protects the control panel:
+Because this is the first time accessing the control panel, you will be greeted with a login screen:
 
 <BrowserShot url="https://tutorial.ddev.site/admin/login" :link="false" caption="Craft’s login screen.">
 <img src="../images/login.png" alt="Screenshot of Craft’s login screen" />
@@ -25,10 +26,10 @@ Enter the username and password you provided during installation, then click **S
 Forgot to write down your credentials? No problem—just run this command in your terminal:
 
 ```sh
-ddev craft users/set-password 1
+ddev craft users/set-password me@domain.com
 ```
 
-`1` will always be the ID of the user created during installation.
+`me@domain.com` should be the email or username you provided during setup. If you lost track of both of those values, try `1`—that will always be the ID of the first user.
 :::
 
 ## Dashboard
@@ -38,7 +39,7 @@ ddev craft users/set-password 1
     id="dashboard"
     :poi="{
         widgets: [35, 40],
-        account: [93, 2],
+        account: [93, 4],
         edition: [65, 90],
         navigation: [13, 20],
     }"
@@ -58,10 +59,10 @@ In the upper right corner, the account menu <Poi label="2" id="account" target="
 
 Craft’s edition (Solo) and current version number <Poi label="3" id="edition" target="dashboard" /> appear at the bottom.
 
-The main navigation <Poi label="4" id="navigation" target="dashboard" /> appears in the sidebar. If your browser is narrow, you may have to use the “hamburger” icon in the upper-left corner to expand the main navigation.
+The main navigation <Poi label="4" id="navigation" target="dashboard" /> appears in the sidebar. If your browser is narrow, you may need to use the “hamburger” icon in the upper-left corner to expand the main navigation.
 
 ::: tip
-If the control panel looks a little empty right now, don’t worry: this is by design! Craft is a blank slate—new projects don’t presuppose anything about your content model. You will designing all of your own content tools.
+If the control panel looks a little empty right now, don’t worry; this is by design! Craft is a blank slate—new projects don’t presuppose anything about your content model. You will designing all of your own content tools.
 :::
 
 ## Utilities
