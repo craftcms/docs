@@ -58,7 +58,7 @@ Filter | Description
 [merge](#merge) | Merges an array with another one.
 [money](#money) | Outputs a value from a Money object.
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
-[namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[namespace](#namespace-or-ns) | Namespaces input names and other HTML attributes, as well as CSS selectors.
 [namespaceAttributes](#namespaceattributes) | Namespaces `id` and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
