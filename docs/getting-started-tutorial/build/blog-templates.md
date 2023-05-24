@@ -196,9 +196,9 @@ Just below the post title and `<time>` element, let’s add a new `<ul>` or “u
 </time>
 
 {% if topics | length %}
-  <ul>
+  <ul class="topics">
     {% for topic in topics %}
-      <li>{{ topic.getLink() }}</ul>
+      <li>{{ topic.getLink() }}</li>
     {% endfor %}
   </ul>
 {% endif %}
@@ -218,7 +218,7 @@ Within the topics loop, we output an `<li>` element and use the category’s `.g
 Clicking any of the links to a topic will result in a similar error to the one we encountered prior to creating the post template. We’ll implement category pages at the same time as the blog landing page, because they’ll share a great deal of logic.
 
 ::: tip
-If you pasted this into `templates/blog/_entry.twig` and the indentation got messed up, select the new lines and press <kbd>Tab</kbd> to bump it in. Go too far? <kbd>Shift + Tab</kbd> will _out_dent it again. <kbd>Command/Control + ]</kbd> and <kbd>Command/Control + [</kbd> can do the same thing.
+If you pasted this into `templates/blog/_entry.twig` and the indentation got messed up, select the new lines and press <kbd>Tab</kbd> to bump it in. Go too far? <kbd>Shift + Tab</kbd> will outdent it again. <kbd>Command/Control + ]</kbd> and <kbd>Command/Control + [</kbd> can do the same thing.
 :::
 
 #### Post Content
@@ -238,11 +238,9 @@ After the line that declares our `topics` variable, add a new `set` tag:
 {% set postContent = entry.postContent.all() %}
 ```
 
-With the content loaded into a `postContent` variable, we can start outputting data for each block. Below the closing `</ul>` of our topics list, add a new `for` loop:
+With the content loaded into a `postContent` variable, we can start outputting data for each block. Below the topics list, add a new `for` loop:
 
-```twig{4,6,9,14,19,24}
-{# This should appear just below the last line of the topics `for` loop! }
-
+```twig{2,4,7,12,17,22}
 <div class="post-content">
   {% for contentBlock in postContent %}
     {# Memoize the block type’s handle so we can use it later: #}
@@ -283,7 +281,7 @@ Looking at the highlighted lines in this block of code…
 - An `else` tag is used to provide some debugging information for us—but it will only show up if we’ve gotten our block type handles mixed up;
 - A final `else` tag actually belongs to the main `for` loop, and allows us to output a message when there are no blocks to display;
 
-This is right about where the complexity of field data peaks, for modest websites—so don’t worry if it’s a bit overwhelming! We’ve still got a few more things to implement, and will be returning to 
+This is right about where the complexity of field data peaks, for modest websites—so don’t worry if it’s a bit overwhelming! We’ve still got a few more things to implement, and will return to most of these concepts a couple of times before sending you on your way.
 
 <Block label="Extra Credit">
 
@@ -294,7 +292,7 @@ Back in the control panel:
 1. Visit **Settings** &rarr; **Fields** &rarr; **Post Content**;
 1. Click **New Block Type**;
 1. Name it _Quote_, and give it a handle of `quote`;
-1. Add a field named _Quote_ (also with a handle of `quote`), and mark it as **Required**;
+1. Add a **Plain Text** field named _Quote_ (also with a handle of `quote`), and mark it as **Required**;
 1. Save the field;
 
 At this point, return to one of your blog entries’s edit screens, and add a **Quote** block to the **Post Content** matrix field. Reload that post’s page in the front-end, and you should see something like this:
@@ -304,13 +302,13 @@ At this point, return to one of your blog entries’s edit screens, and add a **
 In `templates/blog/_entry.twig`, add a new `elseif` comparison tag in the content block loop that tests against the new block type’s handle (`quote`):
 
 ```twig{2-5}
-{# ... #}
+  {# ... #}
 {% elseif blockType == 'quote' %}
   <div class="content-block quote">
     <blockquote>{{ contentBlock.quote | md }}</blockquote>
   </div>
 {% else %} {# This `else` tag is what outputs our “unsupported” message! #}
-{# ... #}
+  {# ... #}
 ```
 
 This process can be repeated _ad infinitum_ for however many block types you want!
@@ -330,7 +328,7 @@ Our blog’s landing page will live at `https://tutorial.ddev.site/blog`, and di
 
 Create a new template at `templates/blog/index.twig`, with the following content:
 
-```twig{3,8,9,11-13,19}
+```twig{3,8,9,12-14,20,22}
 {% extends '_layout' %}
 
 {% set posts = craft.entries().section('blog').all() %}
@@ -348,7 +346,7 @@ Create a new template at `templates/blog/index.twig`, with the following content
 
       <h2>{{ post.title }}</h2>
 
-      <time datetime="{{ entry.postDate | atom }}">{{ entry.postDate | date }}</time>
+      <time datetime="{{ post.postDate | atom }}">{{ post.postDate | date }}</time>
 
       {{ post.summary | md }}
 
@@ -358,223 +356,106 @@ Create a new template at `templates/blog/index.twig`, with the following content
 {% endblock %}
 ```
 
-Our entry detail page came with an automatically-available `entry` variable, but here we’ve fetched all the entries in the `blog` section and put them in a variable called posts:
+Notice that this template makes no reference to an `entry` variable. This is because it won’t be rendered based on an element’s URI format—Craft is just matching its name when it sees a request to `/blog`.
 
-```twig
-{% set posts = craft.entries().section('blog').all() %}
-```
+That doesn’t mean we can’t access our content, though! The first highlighted line uses what’s called an _element query_. Element queries are different from the automatically-injected `entry` variable: instead of containing a _specific_ entry object, they define some _criteria_ for loading one or more entries from the database.
 
-The technical term for what we’re doing is [querying entries](/3.x/entries.md#querying-entries). Once these content elements are stored in Craft CMS, there are lots of options and parameters you can use to query exactly the content you need wherever you happen to need it.
+Element queries are designed to be written and read in relatively plain language. Let’s break this one down:
 
-Now create `templates/_includes/listing.twig`. We’ll use this for listing blog entries on this index page and re-use it again shortly for the category page:
+1. `craft` is a global variable that collects a number of functions and features;
+1. `.entries()` creates a new element query with specific functionality for fetching entries;
+1. `.section()` configures the query to select only entries from the passed section(s);
+1. `.all()` executes the query and returns _all_ matching entries;
 
-```twig
-<div class="post-list my-10 flex">
-{% for post in posts %}
-  <a href="{{ post.url }}" class="flex shadow-lg rounded items-center justify-center overflow-hidden">
-    {% if post.featureImage|length %}
-      {% set image = post.featureImage.one() %}
-      <div class="w-1/4">
-        <img src="{{ image.getUrl({ width: 300, height: 300}) }}"
-          alt="{{ image.title }}"
-          class="block"
-        />
-      </div>
-    {% endif %}
-    <span class="title w-3/4 p-4">{{ post.title }}</span>
-  </a>
-{% endfor %}
-</div>
-```
-
-The image transform is similar to what we did earlier, except we used `.one()` instead of `.all()` since we only want one image. This also passes an object with `width` and `height` directly to `image.getUrl()` instead of first assigning that object to a variable.
-
-Here’s what the result looks like:
-
-<BrowserShot url="https://tutorial.ddev.site/blog/" :link="false" caption="">
-<img src="../images/listing.png" alt="Screenshot of listing page" />
-</BrowserShot>
-
-In this template we’ve chosen to display a square thumbnail of the “Feature Image” along with the post title. Some of these images may crop weirdly into squares, but we can use focal points to have some control over how they’re cropped!
-
-Transformed images will automatically be cropped from the center, but a content editor may also adjust this by setting a [focal point](/3.x/assets.md#focal-points) in the control panel:
-
-1. In the control panel, navigate to the image either using the **Assets** menu item or **Entries** and choosing the relevant blog post.
-2. Double-click the asset and choose **Edit** from the top-right corner of the preview modal to launch the image editor.
-3. Choose **Focal Point** and drag the focal point target to an important area of the image.
-4. Choose **Save**.
-
-![Setting a focal point on an asset](../images/focal-point.png)
-
-Back on the front end, refresh the listing page and you’ll see the re-cropped thumbnail:
-
-<BrowserShot url="https://tutorial.test/blog/" :link="false" caption="Listing page with adjusted thumbnail focal point.">
-<img src="../images/listing-with-custom-focal-point.png" alt="Screenshot of listing page where post thumbnail is cropped toward focal point of image" />
-</BrowserShot>
+Most element queries will have steps 1 and 4 in common, but steps 2 and 3 are specific to our need to fetch _entries_ in a particular _section_. We’ll have a chance to use some more element query features in the next step!
 
 ### Topic Pages
 
-Create `templates/blog/_category.twig` and add the following:
+Now that our blog index displays a list of posts, let’s implement the topic index pages. Much of the display logic will remain consistent between them, so this template will look pretty familiar.
 
-```twig
-{% extends "_layout.twig" %}
+Create `templates/blog/_topic.twig` (the path we defined when setting up the **Category Group**) and add the following:
 
-{% set posts = craft.entries().section('blog').relatedTo(category).all() %}
+```twig{3,5}
+{% extends '_layout' %}
+
+{% set posts = craft.entries().section('blog').topics(category).all() %}
 
 {% block content %}
+  <h1>Topic: {{ category.title }}</h1>
 
-  <h1 class="text-4xl text-black font-display my-4">
-    Blog Posts in “{{ category.title }}”
-  </h1>
+  {% for post in posts %}
+    {% set image = post.featureImage.one() %}
 
-  {% include "_includes/listing.twig" with { posts: posts } only %}
+    <article>
+      {% if image %}
+        {{ image.getImg() }}
+      {% endif %}
+
+      <h2>{{ post.title }}</h2>
+
+      <time datetime="{{ post.postDate | atom }}">{{ post.postDate | date }}</time>
+
+      {{ post.summary | md }}
+
+      <a href="{{ post.url }}">Continue Reading</a>
+    </article>
+  {% endfor %}
 {% endblock %}
 ```
 
-In the same way that entry detail pages came automatically loaded with an `entry` variable, category pages come with a special `category` variable. We’re using that here to limit only to posts in the selected category using the [`relatedTo` query parameter](/3.x/entries.md#relatedto):
+From the blog index, click through to one of your posts, then click the topic link at the top. You should land on a topic index page:
 
-```twig
-{% set posts = craft.entries().section('blog').relatedTo(category).all() %}
-```
-
-Our post category listings, which you can navigate to by choosing any of a blog post’s tags, should be working now:
-
-<BrowserShot url="https://tutorial.ddev.site/blog/category/ramblings" :link="false" caption="Listing page for posts in the `Ramblings` category.">
-<img src="../images/listing-category.png" alt="Screenshot of listing page limited by category" />
+<BrowserShot url="https://tutorial.test/blog/topics/road-trips" :link="false" caption="">
+<img src="../images/twig-category-index.png" alt="Screenshot of topic page" />
 </BrowserShot>
 
+Like the blog index, we get a list of posts that each link out to their individual pages.
 
-## Miscellany
+_Unlike_ the blog index, our topic template automatically has access to a `category` variable. This is because every topic page is backed by a category element, just like our individual post pages. It’s still up to us, though, to decide what other data should be displayed—and to fetch it with element queries.
 
-### Global Footer
-
-We used a global set to store a blurb for the bottom of every page on the site. Since we want that to appear everywhere, let’s add it to `_layout.twig` along with a copyright line:
-
-```twig{15-18}
-<!DOCTYPE html>
-<html lang="{{ craft.app.language }}">
-  <head>
-    <meta charset="utf-8"/>
-    <title>{{ siteName }}</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="/styles.css" rel="stylesheet">
-  </head>
-  <body class="ltr">
-    <div class="container mx-auto px-4">
-      {% block content %}
-      {% endblock %}
-    </div>
-    <footer class="container mx-auto p-4 text-sm">
-      {{ siteInformation.siteDescription|markdown }}
-      <p>&copy; {{ now | date('Y') }}, built with <a class="text-blue-600" href="https://craftcms.com">Craft CMS</a></p>
-    </footer>
-  </body>
-</html>
-```
-
-The “Site Description” field is Plain Text without any formatting, and just for fun we can use Craft’s [`markdown` filter](/3.x/dev/filters.md#markdown) to output it in a paragaph tag (`<p></p>`) and support [Markdown syntax](https://daringfireball.net/projects/markdown/).
-
-### Navigation
-
-Getting around is pretty awkward right now. Let’s add some navigation.
-
-Create `templates/_includes/nav.twig` and add the following to it:
+We’ve used the `category` variable in a new entry element query, near the top of the template:
 
 ```twig
-<nav class="container mx-auto py-4 px-4" role="navigation" aria-label="Main">
-  {% set firstSegment = craft.app.request.getSegment(1) %}
-  <ul class="flex">
-    <li class="mr-6">
-      <a class="text-blue-600 {{ firstSegment == '' ? 'border-b border-blue-400' }}" href="{{ siteUrl }}">Home</a>
-    </li>
-    <li class="mr-6">
-      <a class="text-blue-600 {{ firstSegment == 'blog' ? 'border-b border-blue-400' }}" href="{{ url('blog') }}">Blog</a>
-    </li>
-    <li class="mr-6">
-      <a class="text-blue-600 {{ firstSegment == 'about' ? 'border-b border-blue-400' }}" href="{{ url('about') }}">About</a>
-    </li>
-  </ul>
-</nav>
+{% set posts = craft.entries().section('blog').topics(category).all() %}
 ```
 
-Now let’s include that in `templates/_layout.twig`:
+When we set up the **Topics** field, Craft added a corresponding `topics()` method to all element queries that we can use to filter results by category. Craft’s understanding of our content model is also why we can access the attached categories via `entry.topics` in our individual post template! This functionality is present for _all_ custom fields—but the kinds of values they return (or expect) will differ based on the type of field.
 
-```twig{10}
-<!DOCTYPE html>
-<html lang="{{ craft.app.language }}">
-  <head>
-    <meta charset="utf-8"/>
-    <title>{{ siteName }}</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <link href="/styles.css" rel="stylesheet">
-  </head>
-  <body class="ltr">
-    {% include "_includes/nav.twig" %}
-    <div class="container mx-auto px-4">
-      {% block content %}
-      {% endblock %}
-    </div>
-    <footer class="container mx-auto mt-8 p-4 text-sm opacity-50">
-      {{ siteInformation.siteDescription|markdown }}
-      <p>&copy; {{ now | date('Y') }}, built with <a class="text-blue-600" href="https://craftcms.com">Craft CMS</a></p>
-    </footer>
-  </body>
-</html>
-```
+## Summary
 
-<BrowserShot url="https://tutorial.ddev.site/blog" :link="false" caption="Blog listing with navigation." :max-height="600">
-<img src="../images/navigation.png" alt="Screenshot of blog listing with new top navigation" />
-</BrowserShot>
+Let’s take a moment to review some key takeaways from our first few templates.
+
+### Twig Features
+
+Our templates included examples of working with…
+
+- Tags: `set`, `if`, `for`, etc;
+- Filters: `date`, `length`, `md`, etc;
+- Variables: `entry`, `category`, `craft`, and others that we created;
+
+…as well as a number of other language constructs that allowed us to access Craft features:
+
+- Custom fields (`entry.featureImage`, `contentBlock.text`, or `post.summary`);
+- Element queries (like `craft.entries()`);
+- Asset/category/entry methods (like `getImg()` and `getLink()`);
 
 ::: tip
-Using [`craft.app`](https://craftcms.com/docs/3.x/dev/global-variables.html#craft-app) gives us complete access to everything Craft offers, but it’s sort of advanced mode so you shouldn’t need to rely on it often. We’re using it here to get the first segment of the URL and use that to style our navigation accordingly.
+Psst! There’s one more big Twig feature that we’ll look at in the [optimizations](../more/optimization.md) section.
 :::
 
-## Styling
+### Routing
 
-Craft has no opinions about how you style your front-end. This section covers some basic, broadly-applicable, framework-agnostic solutions for getting 
+We used three key routing tools:
 
-### Adding a Stylesheet
+1. Directly-accessible static files (`styles.css`);
+1. Rendered templates (`blog/index.twig`);
+1. Content-driven element URIs (`blog/_entry.twig` and `blog/_topic.twig`);
 
-### Dynamic CSS
+### Data
 
+We saw a number of different ways to gather and display data from Craft:
 
-
-## Optimization
-
-### Asset Transforms
-
-[Transforms](/4.x/image-transforms.md) let you set some constraints for an image and have have Craft resize or crop it, automatically. Let’s revisit our gigantic blog images and apply some transforms.
-
-We’ll use Twig to create a hash of settings, named `featureImage`, then pass those settings to `featureImage.getUrl()`:
-
-```twig{3-8,17}
-{% extends "_layout.twig" %}
-
-{% set featureImage = {
-  mode: 'crop',
-  width: 900,
-  height: 600,
-  quality: 90
-} %}
-
-{% block content %}
-  <h1 class="text-4xl text-black font-display my-4">{{ entry.title }}</h1>
-
-  <time class="text-sm block pb-4" datetime="{{ entry.postDate | date('Y-m-d') }}">{{ entry.postDate | date('d M Y') }}</time>
-
-  {% if entry.featureImage|length %}
-    {% for image in entry.featureImage.all() %}
-      <img src="{{ image.getUrl(featureImage) }}" alt="{{ image.title }}" />
-    {% endfor %}
-  {% endif %}
-{% endblock %}
-```
-
-You can now refresh the front end and see your transformed asset:
-
-<BrowserShot url="https://tutorial.test/blog/my-trip-to-bend" :link="false" caption="Automatically-resized image, cropped at 900×600px.">
-<img src="../images/image-resized.png" alt="Screenshot of detail page with auto-sized image" />
-</BrowserShot>
-
-### Includes
+1. Via global variables (`now`, `siteName`, etc.);
+1. Via properties on magic template variables (`entry` and `category`);
+1. Looping over results of a query that used _fixed_ criteria (blog index);
+1. Looping over results of a query that used _dynamic_ criteria (topic index);

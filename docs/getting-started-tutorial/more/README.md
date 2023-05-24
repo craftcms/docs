@@ -8,14 +8,14 @@ To get a better sense of how Craft can support your next project’s unique requ
 
 - Expose blog post author details.  
   **Hint:** add [`{% dump entry.author %}`](/4.x/dev/tags.md#dump) anywhere you have access to an `entry` to see what’s there—or consult the [User element API documentation](craft4:craft\elements\User).)
-- Customize the homepage (`index.twig`) to match your site.
+- Customize the homepage (`templates/index.twig`) to match your site.
 - Add more posts and integrate [pagination](/4.x/dev/tags.md#paginate) in your templates.
 - Add an RSS feed using the example [in the documentation](kb:rss-and-atom-feeds).
 - Use the [Contact Form plugin](https://plugins.craftcms.com/contact-form) to add a form to your site.
 
 ## Intermediate: _Go Deeper with Craft_
 
-- Add a new section to the site like portfolios, press releases, or recipes.
+- Add a new section to the site like _Galleries_ or _Reviews_.
 - Add multiple [sites](/4.x/sites.md) to your installation that cross-promote content or offer it [in different languages](/4.x/sites.md#setting-up-a-localized-site).
 - Add a [Structure section](/4.x/entries.md#sections) to the site for creating nested bundles of specialized content.
 - Upgrade to [Craft Pro](kb:upgrading-to-craft-pro) and learn about [user accounts](/4.x/users.md)

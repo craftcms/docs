@@ -136,6 +136,10 @@ The content of our `for` loop outputs an HTML “list item” tag, interpolating
 
 <See path="/4.x/dev/tags.md" description="Explore other tags available in Twig." />
 
+#### Variables
+
+Any time you reference a value by name (like `now` or `color`), you’re using a **variable**. Variables can contain a ton of different kinds of data, like text, numbers, or dates—or arrays and objects that are collections of other values. There are some rules about how, when, and where you can use each type of data, but we’ll takes those in stride.
+
 #### Filters
 
 Eventually, you’ll encounter some data that you need to transform a bit before it gets output. We use a pipe (`|`) character to signify a value getting passed through a **filter**. Take this line from our example:

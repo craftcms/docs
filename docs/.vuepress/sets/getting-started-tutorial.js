@@ -50,6 +50,7 @@ module.exports = {
           "build/twig",
           "build/blog-templates",
           "build/extra-templates",
+          "build/styles",
           "build/preview"
         ]
       },
@@ -58,8 +59,7 @@ module.exports = {
         collapsable: true,
         children: [
           "more/",
-          "more/globals",
-          "more/single",
+          "more/optimization",
           "more/graphql"
         ]
       }

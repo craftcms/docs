@@ -36,9 +36,15 @@ Assets can be attached or uploaded in a variety of ways:
 
 This last method is a great way to seed your project with an asset library.
 
+### Categories
+
+Our _Topics_ field is backed by categories, which are managed similarly to assets—this is because they are both types of elements.
+
+Categories are attached by clicking **+ Add a category**, then selecting an existing category or clicking **Add a Topics category**.
+
 ### Slideouts
 
-Double-click any attached element (like the asset <Poi label="A" target="editAsset" id="source" />  in our **Featured Image** field) to edit it in a _slideout_. Here, we’ve taken the opportunity to clean up the uploaded image’s **Title** <Poi label="B" target="editAsset" id="title" />:
+Double-click any attached element (like the asset <Poi label="A" target="editAsset" id="source" />  in our **Featured Image** field, or the category in our **Topics** field) to edit it in a _slideout_. Here, we’ve taken the opportunity to clean up the uploaded image’s **Title** <Poi label="B" target="editAsset" id="title" />:
 
 <BrowserShot
     url="https://tutorial.ddev.site/admin/entries/blog/2?draftId=1&fresh=1"
