@@ -69,7 +69,11 @@ Create `templates/blog/_entry.twig` and paste this code to it:
 {% endblock %}
 ```
 
-The first highlighted line connects our post template with the layout template, using the `{% extends %}` tag.
+The first highlighted line connects our post template with the layout template, using the `{% extends %}` tag. The second highlight defines a `{% block ... %}`, the content of which will be output in the corresponding region of `_layout.twig`.
+
+::: tip
+When using layouts, all output must be within `block` tag pairs—but you may have as many `block` tags as you wish!
+:::
 
 Now that the blog section’s template is ready, you can visit the URL for a published post:
 
