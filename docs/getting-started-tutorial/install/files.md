@@ -5,7 +5,7 @@ Let’s get your new `tutorial/` folder opened in a code editor. For now, we’l
 1. Open **Visual Studio Code**;
 2. From the **File** menu, select **Open Folder…**;
 3. Navigate to your project folder in the file browser;
-4. Click **Open** when the project folder is selected, or you've just moved into it (with nothing else selected);
+4. Click **Open** when the project folder is selected, or you’ve just moved into it (with nothing else selected);
 
 You should see something like this:
 
