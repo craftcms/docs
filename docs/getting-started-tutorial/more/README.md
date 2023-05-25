@@ -18,15 +18,15 @@ To get a better sense of how Craft can support your next project’s unique requ
 - Add a new section to the site like _Galleries_ or _Reviews_;
 - Add multiple [sites](/4.x/sites.md) to your installation that cross-promote content or offer it [in different languages](/4.x/sites.md#setting-up-a-localized-site);
 - Add a [Structure section](/4.x/entries.md#sections) to the site for creating nested bundles of specialized content;
-- Upgrade to [Craft Pro](kb:upgrading-to-craft-pro) and learn about [user accounts](/4.x/users.md);
-- Create multiple user groups and experiment with [permissions](/4.x/user-management.md) and field layout conditions;
-- Create a store using [Craft Commerce](https://craftcms.com/commerce);
-- Optimize template performance with [caching](/4.x/dev/tags.md#cache) and [eager loading](/4.x/dev/eager-loading-elements.md);
+- Upgrade to [Craft Pro](kb:upgrading-to-craft-pro) and learn about [user accounts](/4.x/users.md) and front-end authentication;
+- Create multiple user groups and experiment with [permissions](/4.x/user-management.md);
+- Set up new [element sources](/4.x/elements.md#indexes) or advanced [field layouts](/4.x/fields.md#field-layouts) with the condition builder;
 
 ## Advanced: _Extend Craft_
 
-- [Build a custom plugin or module](/4.x/extend/) using your own business logic.
-- Familiarize yourself with [Yii](https://www.yiiframework.com/doc/guide/2.0/en), the framework that Craft is built on.
+- Create a store and start selling products with [Craft Commerce](https://craftcms.com/commerce);
+- Familiarize yourself with [Yii](https://www.yiiframework.com/doc/guide/2.0/en), the framework that Craft is built on;
+- [Build a custom plugin or module](/4.x/extend/) using your own business logic;
 
 ## Additional Resources
 
