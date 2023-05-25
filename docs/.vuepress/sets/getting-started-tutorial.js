@@ -51,7 +51,8 @@ module.exports = {
           "build/blog-templates",
           "build/extra-templates",
           "build/styles",
-          "build/preview"
+          "build/preview",
+          "build/optimization"
         ]
       },
       {
@@ -59,7 +60,6 @@ module.exports = {
         collapsable: true,
         children: [
           "more/",
-          "more/optimization",
           "more/graphql"
         ]
       }

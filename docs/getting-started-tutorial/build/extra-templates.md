@@ -4,15 +4,15 @@ sidebarDepth: 2
 
 # Extra Templates
 
-Now that we’ve scaffolded our blog templates, let’s turn to some supporting features.
+Now that we’ve scaffolded our blog templates, we can turn to some supporting features.
 
-## “About” Page
+## About Page
 
 Our original content model included “About” page, which we’ll set up as another section.
 
 ### Fields
 
-We’ll start by creating some fields for the page. We need a place to put a paragraph or two of text, and way to upload a profile photo.
+Let’s by creating some fields for the page. We need a place to put a paragraph or two of text, and way to upload a profile photo.
 
 #### Bio
 
@@ -120,7 +120,7 @@ Back in `templates/_layout.twig`, make these updates:
   </head>
   <body>
     <header>
-      <a href="{{ siteUrl }}">{{ siteName }}</a>
+      <a class="home" href="{{ siteUrl }}">{{ siteName }}</a>
     </header>
     <main>
       {% block content %}
@@ -129,7 +129,7 @@ Back in `templates/_layout.twig`, make these updates:
     </main>
     <footer>
       <div class="copyright">&copy;{{ now | date('Y') }} {{ siteName }}</div>
-      <div class="colophon">Built with <a href="https://craftcms.com/">Craft CMS</a></div>
+      <div class="colophon">Built with <a href="https://craftcms.com/" target="_blank">Craft CMS</a></div>
     </footer>
   </body>
 </html>
@@ -196,12 +196,14 @@ A new **Globals** item should appear in the main navigation. Click that, and add
 
 Back in `templates/_layout.twig`, let’s output that blurb in the footer:
 
-```twig
+```twig{2-4}
 <footer>
   <div class="description">
     {{ siteInfo.description | md }}
   </div>
   <div class="copyright">&copy;{{ now | date('Y') }} {{ siteName }}</div>
-  <div class="colophon">Built with <a href="https://craftcms.com/">Craft CMS</a></div>
+  <div class="colophon">Built with <a href="https://craftcms.com/" target="_blank">Craft CMS</a></div>
 </footer>
 ```
+
+Let’s put HTML aside for a moment and get some styles applied!

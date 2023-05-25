@@ -6,6 +6,12 @@ sidebarDepth: 2
 
 It’s time to bring together everything we’ve learned and create some templates that display data from the blog we set up in Craft.
 
+::: tip
+In the next few sections, you’ll see prompts to “refresh your browser” or “reload the page.” Changes to templates aren’t automatically broadcasted to browsers, but requesting the page again will reflect them.
+
+You can reload a page by pressing <kbd>Control/Command + R</kbd>, <kbd>F5</kbd> (Windows only), or clicking the circular arrow icon in your browser’s toolbar.
+:::
+
 ## Layout
 
 A **layout** is Twig’s solution for reusable page wrappers. Layouts have all the same features of a regular template. This makes them a perfect place for a global header, navigation, or a footer—but it can also define invisible metadata in the `head` of every page that uses it.
@@ -128,7 +134,9 @@ Let’s output the image we attached via the “Feature Image” asset field. Th
 
   {# Output the image, if one was found: #}
   {% if featureImage %}
-    {{ featureImage.getImg() }}
+    <div class="feature-image">
+      {{ featureImage.getImg() }}
+    </div>
   {% endif %}
 {% endblock %}
 ```
@@ -163,11 +171,15 @@ If you would prefer to build the image element yourself, you can get the individ
 
 Refresh the page to see your changes:
 
-<BrowserShot url="https://tutorial.test/blog/my-trip-to-bend" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/my-trip-to-bend" :link="false" caption="">
 <img src="../images/twig-entry-with-image.png" alt="Screenshot of post page with feature image added" />
 </BrowserShot>
 
 Our sample image was pretty big, so it's spilling off the page. This isn’t ideal, but it can be fixed with a bit of CSS—or with _transforms_. We’ll get to both of these solutions in a moment.
+
+::: tip
+If the lack of styles makes it difficult to evaluate whether you are staying on track, jump ahead to the [styling](../build/styles.md#project-css) section, grab the CSS, and drop it in `web/styles.css`.
+:::
 
 #### Topics
 
@@ -211,7 +223,7 @@ This introduces two control tags:
 
 Within the topics loop, we output an `<li>` element and use the category’s `.getLink()` method to generate an anchor tag (`<a>`) pointing to its URL. This is akin to the `.getImg()` method we used on the asset attached via our `featureImage` field.
 
-<BrowserShot url="https://tutorial.test/blog/my-trip-to-bend" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/my-trip-to-bend" :link="false" caption="">
 <img src="../images/twig-entry-with-categories.png" alt="Screenshot of detail page with topics added" />
 </BrowserShot>
 
@@ -341,7 +353,9 @@ Create a new template at `templates/blog/index.twig`, with the following content
 
     <article>
       {% if image %}
-        {{ image.getImg() }}
+        <div class="thumbnail">
+          {{ image.getImg() }}
+        </div>
       {% endif %}
 
       <h2>{{ post.title }}</h2>
@@ -388,7 +402,9 @@ Create `templates/blog/_topic.twig` (the path we defined when setting up the **C
 
     <article>
       {% if image %}
-        {{ image.getImg() }}
+        <div class="thumbnail">
+          {{ image.getImg() }}
+        </div>
       {% endif %}
 
       <h2>{{ post.title }}</h2>
@@ -405,7 +421,7 @@ Create `templates/blog/_topic.twig` (the path we defined when setting up the **C
 
 From the blog index, click through to one of your posts, then click the topic link at the top. You should land on a topic index page:
 
-<BrowserShot url="https://tutorial.test/blog/topics/road-trips" :link="false" caption="">
+<BrowserShot url="https://tutorial.ddev.site/blog/topics/road-trips" :link="false" caption="">
 <img src="../images/twig-category-index.png" alt="Screenshot of topic page" />
 </BrowserShot>
 
