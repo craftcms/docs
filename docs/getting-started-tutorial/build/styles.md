@@ -2,7 +2,7 @@
 
 Craft has no opinions about how you style your front-end. This section covers some basic, broadly-applicable, framework-agnostic solutions for integrating CSS into your project. You’ll find champions of virtually every popular paradigm in our [community](https://craftcms.com/community)—from vanilla CSS to Tailwind to CSS-in-JS!
 
-## Adding a Stylesheet
+## Adding a Style Sheet
 
 When we first created `_layout.twig`, it included this line:
 
@@ -17,7 +17,7 @@ This is equivalent to using a plain `<link>` tag, but it takes care of generatin
 ```
 
 ::: tip
-The same tag can be used _anywhere_ in Twig, meaning each template (say, for the individual post pages) can request that a stylesheet be added to the final document’s `<head>`:
+The same tag can be used _anywhere_ in Twig, meaning each template (say, for the individual post pages) can request that a style sheet be added to the final document’s `<head>`:
 
 ```twig
 {% do craft.app.view.registerCssFile('@web/post.css') %}
@@ -40,7 +40,7 @@ The blog index should now look something like this:
 
 ### Navigation
 
-The example stylesheet above includes a couple of rules that help make the global navigation more useful:
+The example style sheet above includes a couple of rules that help make the global navigation more useful:
 
 ```css
 nav a {
@@ -119,7 +119,7 @@ Rules that affect only one block type might look like this:
 ```
 
 ::: tip
-These aren’t included in the stylesheet, but they can be added just after the other post-specific styles.
+These aren’t included in the style sheet, but they can be added just after the other post-specific styles.
 :::
 
 ### Advanced Styles and Customization

@@ -28,15 +28,15 @@ Don’t worry about constructing these URLs—like entries, Craft knows what an 
 
 Everything in the `web/` folder is publicly accessible—we usually refer to this as the “web root,” thus the `@webroot` alias, above!
 
-This is both a powerful feature of HTTP servers, and something to be aware of as you add files to your project. The webroot (or a subfolder therein) is a _good_ place for things like…
+This is both a powerful feature of HTTP servers, and something to be aware of as you add files to your project. The web root (or a subfolder therein) is a _good_ place for things like…
 
-- Stylesheets (CSS files);
+- Style sheets (CSS files);
 - JavaScript and other libraries;
 - Static images, icons, and other non-managed graphics;
 - Webfonts;
 - Uploaded assets that should be public;
 
-The webroot is a _bad_ place to store these kinds of things:
+The web root is a _bad_ place to store these kinds of things:
 
 - A `.env` file;
 - Database backups;
@@ -47,7 +47,7 @@ The webroot is a _bad_ place to store these kinds of things:
 Even though we are working in a private development environment, being mindful of where you are creating and storing files is essential when going live with a web project.
 :::
 
-Let’s create a file in the webroot. In VS code, right-click on the `web/` folder in the sidebar, select **New File…**, and type `styles.css` into the prompt. Press <kbd>Enter</kbd> to confirm the filename and create the file. VS Code will open the file and move your cursor into it—add a single line, for now:
+Let’s create a file in the web root. In VS code, right-click on the `web/` folder in the sidebar, select **New File…**, and type `styles.css` into the prompt. Press <kbd>Enter</kbd> to confirm the filename and create the file. VS Code will open the file and move your cursor into it—add a single line, for now:
 
 ```css
 /* Hello, world! */

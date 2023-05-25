@@ -27,7 +27,7 @@ A “command” is simply a piece of text that is interpreted and executed by th
 ::: danger
 The terminal is extremely powerful. Only run commands from sources you trust!
 
-If you are inclined to copy-and-paste commands into your terminal, keep an eye on your selection. It’s easy to inadvertently copy extra characters that can confuse the terminal. While getting started, it's a good idea to 
+If you are inclined to copy-and-paste commands into your terminal, keep an eye on your selection—it’s easy to inadvertently copy extra characters that can confuse the terminal.
 :::
 
 Let’s run your first command. Type `whoami` into your terminal, and press <kbd>Enter</kbd>:
@@ -120,6 +120,6 @@ This series of commands is a common pattern when navigating your filesystem is t
 1. List files with `ls` (`dir` on Windows);
 1. Navigate to a new folder with `cd folder-name`;
 
-When changing folders with `cd`, you often only need to type the first couple of characters in a directory name, then press <kbd>Tab</kbd> to _auto-complete_ it. The terminal will only auto-complete up to a point that there is ambiguity. For example, in a directory with folders named `project-a`, `project-b`, and `practice`, you could type `cd pro` and press <kbd>Tab</kbd> to auto-complete up to `cd project-`—then just type the last character for the directory you want.
+When changing folders with `cd`, you often only need to type the first couple of characters in a directory name, then press <kbd>Tab</kbd> to _autocomplete_ it. The terminal will only autocomplete up to a point that there is ambiguity. For example, in a directory with folders named `project-a`, `project-b`, and `practice`, you could type `cd pro` and press <kbd>Tab</kbd> to autocomplete up to `cd project-`—then just type the last character for the directory you want.
 
 Now that we’ve poked around a bit, it’s time to pick a place to stash your project.

@@ -175,7 +175,7 @@ Refresh the page to see your changes:
 <img src="../images/twig-entry-with-image.png" alt="Screenshot of post page with feature image added" />
 </BrowserShot>
 
-Our sample image was pretty big, so it's spilling off the page. This isn’t ideal, but it can be fixed with a bit of CSS—or with _transforms_. We’ll get to both of these solutions in a moment.
+Our sample image was pretty big, so it’s spilling off the page. This isn’t ideal, but it can be fixed with a bit of CSS—or with _transforms_. We’ll get to both of these solutions in a moment.
 
 ::: tip
 If the lack of styles makes it difficult to evaluate whether you are staying on track, jump ahead to the [styling](../build/styles.md#project-css) section, grab the CSS, and drop it in `web/styles.css`.

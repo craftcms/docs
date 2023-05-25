@@ -302,7 +302,7 @@ The **UI Elements** <Poi label="C" target="fieldLayout" id="uiElements" /> tab i
 Here are a few other features of field layouts worth experimenting with:
 
 - **Widths**: By default, fields occupy the full width of the element editor. Use the column selector UI next to the <Icon kind="settings" /> to set the field as 1/4, 1/2, 3/4, or full-width.
-- **Line breaks**: If a row isn't full, you can force a field onto the next row with a line break field layout element.
+- **Line breaks**: If a row isn’t full, you can force a field onto the next row with a line break field layout element.
 - **Field labels**: Click the <Icon kind="settings" /> to open a slideout and update a field’s **Label**. This is particularly useful for the **Title** field: say you were creating employee profiles, and needed a place for their names and _position_ titles—the built-in **Title** field would make more sense being called “Full Name.”
 - **Required fields**: Also within a field’s setting slideout is an option to mark a field as **Required**.
 - **Field conditions** and : Fields can be conditionally included in layouts by setting up condition rules, within the settings slideout.
