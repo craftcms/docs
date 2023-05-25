@@ -176,6 +176,6 @@ The main difference is that functions don’t always take or manipulate input; o
 
 #### Operators
 
-Our example template doesn’t include any **operators**, but 
+Our example template only includes one **operator** (the filter or “pipe” symbol), but Twig supports all kinds [math and logic expressions](https://twig.symfony.com/doc/3.x/templates.html#expressions).
 
 Now that we have a bit of context for Twig’s role in our project, let’s create the templates required to display our blog.
