@@ -781,6 +781,10 @@ Causes the query results to be returned in the order specified by [id](#product-
 
 
 
+::: tip
+If no IDs were passed to [id](#product-id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -1007,8 +1011,8 @@ If [unique](#product-unique) is set, this determines which site should be select
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
@@ -1947,6 +1951,10 @@ Causes the query results to be returned in the order specified by [id](#variant-
 
 
 
+::: tip
+If no IDs were passed to [id](#variant-id), setting this to `true` will result in an empty result set.
+:::
+
 
 
 ::: code
@@ -2261,8 +2269,8 @@ If [unique](#variant-unique) is set, this determines which site should be select
 
 
 For example, if element “Foo” exists in Site A and Site B, and element “Bar” exists in Site B and Site C,
-and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site C, and Bar will be returned
-for Site B.
+and this is set to `['c', 'b', 'a']`, then Foo will be returned for Site B, and Bar will be returned
+for Site C.
 
 If this isn’t set, then preference goes to the current site.
 
