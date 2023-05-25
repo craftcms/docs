@@ -167,7 +167,7 @@ Posts’ primary images will be added to an _asset_ field.
         maxRelations: [3, 75.7, 'I'],
     }"
     :link="false"
-    :maxHeight="600"
+    :max-height="600"
     caption="Settings for a new asset field.">
 <img src="../images/new-asset-field.png" alt="Screenshot of new asset field settings" />
 </BrowserShot>
@@ -208,7 +208,7 @@ Matrix fields are inherently a bit more complex than other field types, because 
         fieldSettings: [65, 36.2, 'E'],
     }"
     :link="false"
-    :maxHeight="600"
+    :max-height="600"
     caption="Configuring a new matrix field with multiple block types.">
 <img src="../images/new-matrix-field.png" alt="Screenshot of matrix field settings" />
 </BrowserShot>
