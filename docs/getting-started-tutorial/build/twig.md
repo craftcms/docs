@@ -167,11 +167,9 @@ Whenever this page is loaded, Craft evaluates your template and substitutes thes
 <See path="/4.x/dev/filters.md" description="View a list of filters available in Craft’s Twig environment." />
 
 ::: tip
-Twig also supports **functions**, which have a lot in common with filters:
+Twig also supports **functions**, which have a lot in common with filters. The main difference is that functions don’t always take or manipulate input; one way of looking at the relationship between functions and filters is that filters _always_ have at least one argument (the value before the `|`).
 
-{{ url() }}
-
-The main difference is that functions don’t always take or manipulate input; one way of looking at the relationship between functions and filters is that filters _always_ have at least one argument (the value before the `|`).
+Functions are often responsible for fetching or generating a value (like `getenv('ENV_VAR_NAME')`), whereas filters are used to treat an incoming value (like `entry.textField | markdown`).
 :::
 
 #### Operators
