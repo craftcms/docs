@@ -73,7 +73,9 @@ We’ve actually seen this in action from the moment we first logged in to the c
 
 Entries in that section (_Blog_) have a **URI Format** of `blog/{slug}`. `{slug}` is a special placeholder, representing an entry’s _Slug_ value. When entries are created and updated, Craft evaluates this “template” and stores the result—for example, if a post named “My Trip to Bend” had a slug of `my-trip-to-bend`, it would be assigned a URI of `blog/my-trip-to-bend`.
 
-Accessing `https://tutorial.ddev.site/blog/my-trip-to-bend` doesn’t match any files in our web root, so the HTTP server hands the request off to Craft. When that happens, Craft compares the path (`/blog/my-trip-to-bend`) to known URIs. Any request that _doesn’t_ match a known element URI is then tested against a few other special cases.
+Accessing `https://tutorial.ddev.site/blog/my-trip-to-bend` doesn’t match any files in our web root, so the HTTP server hands the request off to Craft. When that happens, Craft compares the path (`/blog/my-trip-to-bend`) to known URIs. (This is where our error occurred—Craft found our blog post and proceeded to load the template we defined in its settings… but it didn’t exist!)
+
+Any request that _doesn’t_ match a known element URI is then tested against a few other special cases.
 
 ::: details More about URIs
 URIs _must_ be unique in Craft, meaning that each post in the _Blog_ section must have a different slug. Craft will let you know when a slug would cause a collision like this.
@@ -87,7 +89,7 @@ Altogether, this means that Craft sites are extremely portable. If you change th
 
 There’s one more routing feature we’ll use to build our blog, and it combines aspects of the two we’ve looked at, so far.
 
-When you first launched your new Craft installation in a browser, you saw the _welcome screen_—without having set up any content types. On it, this sentence gives us a hint about what we’re looking at:
+When you first launched your new Craft installation in a browser, you saw the _welcome screen_—without having set up any content types. On it, this sentence gives us a hint about what we’re seeing:
 
 > You’re looking at the `index.twig` template file located in your `templates/` folder.
 
