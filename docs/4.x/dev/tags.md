@@ -1,3 +1,7 @@
+---
+description: Twig tags give your templates advanced logical capabilities.
+---
+
 # Tags
 
 The following [tags](https://twig.symfony.com/doc/3.x/templates.html#control-structure) are available to Twig templates in Craft:

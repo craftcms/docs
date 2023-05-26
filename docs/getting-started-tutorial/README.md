@@ -1,50 +1,26 @@
 ---
 preheading: Tutorial
-description: Craft CMS getting started tutorial.
+description: Getting started with Craft CMS.
 ---
 
 # Welcome to Craft CMS!
 
-This tutorial will guide you through installing Craft CMS and creating a demo blog. While it assumes you’re technically-inclined, you don’t need web development experience to follow along. You can also skip any parts you’re already familiar with.
+This tutorial is intended for new Craft users who want to learn how to…
+
+- …set up a local development environment;
+- …scaffold a basic Craft project;
+- …and build a simple simple blog!
+
+The lessons are geared toward the technically-inclined, but web development experience is _not_ required to follow along.
 
 ::: tip
-If you get stuck, [join us on Discord](https://craftcms.com/discord) where friendly people might be able help out.
+If you get stuck, [join us on Discord](https://craftcms.com/discord)! We all want your first experience with Craft to be as smooth as possible.
 :::
 
 ## Why Craft CMS?
 
-Craft CMS is a content management system for building bespoke web projects.
+Craft is a flexible, user-friendly <abbr title="Content management system">CMS</abbr> for creating custom digital experiences on the web—and beyond.
 
-There are lots of options when it comes to choosing a CMS, and Craft CMS is a blank slate that puts your content first. It provides a flexible, tailored experience for developers and content authors.
+You have a _ton_ of options when it comes to choosing a CMS. Craft is uniquely equipped to deliver high-quality, content-driven experiences to your clients and their audiences, in large part due to its blank-slate approach to content modeling.
 
-We’ll build an example blog since that’s a common use for a CMS, but the tutorial will introduce you to building blocks you can use for building _any_ kind of content. (This is where Craft CMS shines!)
-
-## What We’re Going to Do
-
-We’re going to get Craft CMS running in a local environment and create a simple blog from scratch. All you’ll need is yourself, your computer, and a healthy sense of adventure.
-
-
-### Table of Contents
-
-0. [**Set Up Your Environment**](environment/)
-    - [Local development](environment/)
-    - [Get to know your terminal](environment/terminal.md)
-    - [Choose a code editor](environment/editor.md)
-    - [Set up a development stack](environment/stack.md)
-1. [**Install Craft CMS**](install/)
-    - [Project File Structure](install/files.md)
-2. [**Build Your Content**](configure/)
-    - [Building Your Content](configure/)
-    - [Control panel tour](configure/control-panel.md)
-    - [Content in Craft CMS](configure/modeling.md)
-    - [Create the blog](configure/section.md)
-    - [Configure globals](configure/globals.md)
-    - [Create an about page](configure/single.md)
-    - [Edit entries](configure/editing.md)
-3. [**Build Your Front End**](build/)
-    - [Front End Options](build/)
-    - [Dynamic routing](build/routing.md)
-    - [Working with Twig](build/twig.md)
-    - [Create templates](build/templates.md)
-    - [Edit with live preview](build/preview.md)
-    - [Fetch content with GraphQL](build/graphql.md)
+To demonstrate Craft’s agility, we’ll build a basic blog—and in doing so, touch a number of powerful tools that let you design, build, and manage _any_ kind of content.

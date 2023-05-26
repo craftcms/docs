@@ -14,52 +14,54 @@ module.exports = {
         children: [""]
       },
       {
-        title: "0. Set Up Your Environment",
+        title: "Set Up Your Environment",
         collapsable: true,
         children: [
           "environment/",
           "environment/terminal",
-          "environment/editor",
-          "environment/stack"
+          "environment/stack",
+          "environment/editor"
         ]
       },
       {
-        title: "1. Install Craft CMS",
+        title: "Install Craft",
         collapsable: true,
         children: [
           "install/",
-          "install/files"
+          "install/files",
+          "install/control-panel"
         ]
       },
       {
-        title: "2. Build Your Content",
+        title: "Define a Content Model",
         collapsable: true,
         children: [
           "configure/",
-          "configure/control-panel",
-          "configure/modeling",
-          "configure/section",
-          "configure/globals",
-          "configure/single",
+          "configure/resources",
           "configure/editing"
         ]
       },
       {
-        title: "3. Build Your Front End",
+        title: "Build Your Front End",
         collapsable: true,
         children: [
           "build/",
           "build/routing",
           "build/twig",
-          "build/templates",
+          "build/blog-templates",
+          "build/extra-templates",
+          "build/styles",
           "build/preview",
-          "build/graphql"
+          "build/optimization"
         ]
       },
       {
         title: "Next Steps",
         collapsable: true,
-        children: ["more/"]
+        children: [
+          "more/",
+          "more/graphql"
+        ]
       }
     ]
   }

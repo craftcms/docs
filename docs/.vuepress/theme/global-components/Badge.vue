@@ -54,6 +54,8 @@ export default {
     background-color: #e7c000;
   }
 
+  /* Custom Badge Types */
+
   &.verb {
     @apply uppercase bg-transparent tracking-widest leading-none h-auto font-mono;
     font-size: smaller;

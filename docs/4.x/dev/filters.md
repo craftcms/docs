@@ -1,3 +1,7 @@
+---
+description: Fluidly manipulate data in your templates.
+---
+
 # Filters
 
 The following [filters](https://twig.symfony.com/doc/3.x/templates.html#filters) are available to Twig templates in Craft:

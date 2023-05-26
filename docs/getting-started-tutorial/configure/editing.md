@@ -1,63 +1,92 @@
-# Edit entries
+# Authoring Content
 
-Now that we’ve set up sections and fields, we can focus on editing content.
+Our blog is starting to take shape! Let’s pause for a moment and look at the editing tools we’ve set up, from the perspective of a content author.
 
-## Add a blog entry
+## Add a Blog Post
 
-Navigate to **Entries** and create a new blog entry. Fill in each field.
+If you haven’t already, navigate to **Entries** and click **+ New entry** to create your first post. Here’s what it’ll look like with a bit of content added:
 
-<BrowserShot url="https://tutorial.ddev.site/admin/entries/blog/9?draftId=7&fresh=1" :link="false" caption="A complete new blog post ready to be saved.">
-<img src="../images/new-entry.png" alt="Screenshot of blog post entry with fields filled in" />
+<BrowserShot url="https://tutorial.ddev.site/admin/entries/blog/2?draftId=1&fresh=1" :link="false" caption="A complete blog post, ready to be saved.">
+<img src="../images/new-entry-with-content.png" alt="Screenshot of blog post entry with fields filled in" />
 </BrowserShot>
 
-## Check out some editing features
+## Explore Editing Features
 
-While adding content should be intuitive, there are a few things you might want to know about:
+Working with content in Craft is usually pretty intuitive—after all, _you_ just designed the authoring experience! Here are a few things to look out for, as you get started:
 
-### Edits are automatically saved while you work.
+### Auto-saving
 
-Craft saves your work as you go, but you always decide when to _publish_. Edits on an already-published entry automatically start a new draft, and you can always see the save status and even leave notes in the versions menu. This menu will also let you see previous drafts and versions, which can be handy:
+![](../images/draft-autosave.png)
 
-![](../images/draft-autosave.png =500x)
+From the moment you arrive on an edit screen, Craft begins autosaving your changes as a _provisional draft_. You always get to decide when those changes are applied, though.
 
-### Double-click a related asset or category to edit it in place.
+Edits on an already-published entry automatically start a new _draft_, and you can always see the save status and even leave notes in the versions menu. This menu will also let you see previous drafts and versions, which can be handy:
 
-Here, the default Title has been cleaned up so it’s more presentable:
+![](../images/unsaved-changes.png)
 
-![](../images/edit-asset.png =400x)
+If you would like to turn your edits into a _draft_ so other users can review them, click **Create draft** instead of **Save**.
 
-When you do this, you’re editing that asset or category so any changes will carry over if you re-use it somewhere else. (Navigate to **Assets** and observe the update there as well, for example.)
+### Assets
 
-### Matrix is pretty cool.
+Assets can be attached or uploaded in a variety of ways:
 
-You can grab the handles next to Matrix blocks to re-order them, and each block has a menu just to the left of that handle you can use to collapse, disable or delete the block. You can also use this as a convenient place to insert new blocks:
+1. From an entry page, click the **+ Add an Asset** button, then **Upload Files** in the modal;
+1. Drag a file from a folder on your computer into the browser and drop it on the field;
+1. Visit the **Assets** screen of the control panel and click **Upload Files**;
 
-![](../images/matrix-menu.png =800x)
+This last method is a great way to seed your project with an asset library.
 
-### You can fine-tune details for how and when your post is displayed.
+### Categories
 
-Craft will set a slug for you by default, and it’ll be used in the post URL once published. You can set **Post Date** to a future date/time to have it appear then, and optionally add an **Expiry Date** to have it disappear later. You can always flip _Enabled_ off and know the post will be hidden publicly, regardless of other settings.
+Our _Topics_ field is backed by categories, which are managed similarly to assets—this is because they are both types of elements.
 
-![](../images/post-meta.png =450x)
+Categories are attached by clicking **+ Add a category**, then selecting an existing category or clicking **Add a Topics category**.
 
-### You can share drafts privately.
+### Slideouts
 
-Choosing **Share** at the top of the entry will always give you a URL for viewing the content you’re looking at. If it’s unpublished content, the URL will include an `x-craft-preview` token that can be used for a limited time [determined by your settings](/3.x/config/config-settings.md#defaulttokenduration).
+Double-click any attached element (like the asset <Poi label="A" target="editAsset" id="source" />  in our **Featured Image** field, or the category in our **Topics** field) to edit it in a _slideout_. Here, we’ve taken the opportunity to clean up the uploaded image’s **Title** <Poi label="B" target="editAsset" id="title" />:
 
-## Add about content
-
-Navigate to **Entries**, select **Singles**, and choose **About**.
-
-You’ll notice this is similar to editing a blog post entry, except that the slug is fixed and there are no post or expiry date fields. This is because the single isn’t one post in a series, but a single post meant to live at a specific URL.
-
-Go ahead and add some content and publish it when you’re ready!
-
-## Linking to pages
-
-Once you’ve saved an entry, you can use the globe icon from the Entries listing to jump to its public URL. The result foreshadows what’s next:
-
-<BrowserShot url="https://tutorial.ddev.site/blog/my-first-post" :link="false" caption="The front end is missing.">
-<img src="../images/404.png" alt="Screenshot of public post URL 404" />
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/entries/blog/2?draftId=1&fresh=1"
+    id="editAsset"
+    :poi="{
+        source: [31, 42, 'A'],
+        title: [65, 14, 'B'],
+        sidebar: [96.3, 9, 'C'],
+    }"
+    :link="false"
+    caption="Editing an asset in a slideout.">
+<img src="../images/edit-asset-slideout.png" alt="Screenshot of an asset slideout editor" />
 </BrowserShot>
 
-This is not an acceptable way to display a blog post. Let’s continue to the next section and build a front end!
+Click the sidebar button <Poi label="C" target="editAsset" id="sidebar" /> to view and edit additional details (like the asset’s filename), or click **Save** to save your changes and close the slideout.
+
+::: warning
+Edits made in this way affect the element anywhere else it’s used. For example: if you also attached the asset to a block in the **Post Content** field with the intention of outputting its title as a caption or credit in _both_ places it’s used, updating its title in _either_ place (or via the top-level **Assets** section of the control panel) affects _all_ instances.
+:::
+
+### Matrix
+
+You can grab the handle <Icon kind="move" /> in the upper-right corner of any matrix block to re-order them. Each block has a <Icon kind="settings" /> menu (just to the left of its handle) containing options to move, delete, or disable the block, as well as insert new blocks between existing ones:
+
+![](../images/matrix-menu.png)
+
+### Publishing
+
+For new entries, Craft will generate slugs based on the entry’s title. Our _Blog_ section’s **URI Format** (`blog/{slug}`) incorporates that slug, meaning it will appear as part of the entry’s public URL. If you wish to edit the slug manually, it appears at the top of the sidebar.
+
+You can set an entry’s **Post Date** to be in the future to prevent it from being available on the front-end, and optionally add an **Expiry Date** to have it disappear, later. You can always turn off the **Enabled** switch to be certain the post will be hidden publicly, regardless of other settings.
+
+![](../images/entry-meta.png)
+
+### Previewing
+
+Choosing **View** from the header opens the entry in a new tab—even if it isn’t enabled. In this case, Craft generates get a private, temporary (but sharable) URL.
+
+If you were to click this button right now, you’d get something that looks like this:
+
+<BrowserShot url="https://tutorial.ddev.site/blog/my-trip-to-bend" :link="false">
+<img src="../images/error-404.png" alt="HTTP 404 error screen" />
+</BrowserShot>
+
+This looks scarier than it is. In fact, it tells us _exactly_ what the problem is: we haven’t created the template that our blog posts are expecting. Let’s fix this.

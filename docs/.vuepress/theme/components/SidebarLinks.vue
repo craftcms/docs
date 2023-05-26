@@ -6,7 +6,7 @@
         :class="'group-' + i"
         :item="item"
         :open="i === openGroupIndex"
-        :collapsable="item.collapsable || item.collapsible"
+        :collapsible="item.collapsable || item.collapsible"
         :sidebar-depth="sidebarDepth"
         :depth="depth"
         :fixed-heading="fixedHeading"

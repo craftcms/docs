@@ -1,48 +1,56 @@
 # Project File Structure
 
-Let’s open the new `tutorial/` folder in a code editor and take a look.
+Let’s get your new `tutorial/` folder opened in a code editor. For now, we’ll assume you’re using Visual Studio Code:
 
-If you’re on a Mac, drag the folder you’ve just created onto the Visual Studio Code icon.
+1. Open **Visual Studio Code**;
+2. From the **File** menu, select **Open Folder…**;
+3. Navigate to your project folder in the file browser;
+4. Click **Open** when the project folder is selected, or you’ve just moved into it (with nothing else selected);
 
-If you’re on Windows or Linux, open VS Code and choose **File**, **Open Folder...**, and select the folder with your new Craft CMS files.
+You should see something like this:
 
 ![](../images/vs-code.png)
 
-Let’s take a look at the files Composer just created:
+In the sidebar, you can see all the files created during installation:
 
 ```treeview
 craft/
 ├── .ddev/
 ├── config/
-├── modules/
 ├── storage/
 ├── templates/
 ├── vendor/
 ├── web/
 ├── .env
-├── .env.example
+├── .env.example.dev
+├── .env.example.production
+├── .env.example.staging
 ├── .gitignore
+├── bootstrap.php
 ├── composer.json
 ├── composer.lock
 └── craft
 ```
 
-It’s important to maintain this folder structure. You can add stuff to it, but if you want to rename anything here you may need to change some settings.
+::: tip
+It’s important that you maintain this folder structure for the rest of the tutorial. You are welcome to add whatever you like to it, but renaming anything may require config changes that the tutorial doesn’t cover.
+:::
 
 Let’s take a look at each top-level item:
 
-- **`.ddev/`** contains DDEV configuration and runtime files. The only file in here you’re likely to ever care about is `config.yaml`.
-- **`config/`** contains `.php` and `.yaml` configuration files, and `license.key` after installation.
-- **`modules/`** is for custom PHP you might want to add for your site. (We’ll be ignoring that.)
-- **`storage/`** is where Craft keeps its temporary files.
-- **`templates/`** is where we’ll write template code to dynamically display content. (Unless you’d like to use Craft headlessly, but we’ll come back to that.)
-- **`vendor/`** is where Composer stores all the project packages we covered earlier.
-- **`web/`** is the document root covered [earlier](../environment/stack.md), where your web server needs to send its requests. We’ll also put site pieces like images, CSS, and JavaScript in this folder.
-- **`.env`** is a special file with constants that tell Craft how to connect to its database.
-- **`.env.example`** is an example of `.env`’s format for others to use setting up _their_ environments.
-- **`.gitignore`** is another special file for telling Git, if it’s used, not to care about certain files.
-- **`composer.json`** is the file Composer uses to know what packages it *should* install.
-- **`composer.lock`** is Composer’s own detailed record of what’s *actually* installed.
-- **`craft`** is Craft’s command line executable.
+This file/folder… | Contains…
+--- | ---
+`.ddev/` | …DDEV configuration and runtime files. The only file in here you’re likely to ever care about is `config.yaml`.
+`config/` | …`.php` and `.yaml` configuration files, and a `license.key` after installation.
+`storage/` | …temporary files like caches and logs.
+`templates/` | …Twig and HTML files for rendering dynamically display content, unless you’d like to use Craft in “headless” mode—but we’ll come back to that!
+`vendor/` | …PHP dependencies, managed by Composer.
+`web/` | …publicly-accessible files. This is commonly referred to as the “document root,” which we specified when setting up DDEV. It’s a great place to keep CSS and JavaScript files for your site’s front-end.
+`.env` | …configuration and other secrets.
+`.env.example.*` | …sensible default environment variables for different environments.
+`.gitignore` | …instructions for Git that determine which files and folders are ignored.
+`composer.json` | …dependencies and other criteria that tells Composer what should be installed.
+`composer.lock` | …the authoritative list of packages and versions that Composer will actually install.
+`craft` | …the entry-point for Craft’s command-line interface.
 
-It’s okay if you’ve never used Git or if any of these pieces isn’t clear; we’ll be using them shortly!
+Don’t worry if the purpose of these files remains unclear—we’ll be looking at the important ones in the next section.
