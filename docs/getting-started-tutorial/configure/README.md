@@ -35,7 +35,7 @@ Singles
 : **Example**: Homepage, a blog landing page, featured case studies, or an “About” page.
 
 Structures
-: Structures support the same features as channels, but add the ability to nest entries within other entries—and to define their order in relation to one another. The hierarchical nature of structures makes them a good candidate for complex bundles of information, or in situations where the order of pages is important.
+: Structures support the same features as channels, but add the ability to nest entries within other entries—and to define their order in relation to one another. The hierarchical nature of structures makes them a good candidate for complex bundles of information, or for situations where the order of pages is important.
 
 : **Example**: Reference libraries, sequential tutorials, multi-page case studies.
 
