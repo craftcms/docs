@@ -22,7 +22,7 @@ We use the term _elements_ to collectively describe the variety of content types
 
 Entries are the most versatile type of element. Every entry belongs to a _section_, which determines how administrators will use them. Entries have titles, authors, post dates, and expiry dates.
 
-Sections come in three flavors: [Channels](#channels), [Singles](#singles), and [Structures](#structures). These section types share many features like field layouts, template mappings, customizable URL patterns, localized content, and more.
+Sections come in three flavors: **Channels**, **Singles**, and **Structures**. These section types share many features like field layouts, template mappings, customizable URL patterns, localization, and more.
 
 Channels
 : A channel is typically used to syndicate many entries with a similar composition, sorted by one or more of their built-in attributes or custom fields. Channels can have multiple _entry types_ to further distinguish, filter, or sort entries. Each entry type is given its own field layout.
