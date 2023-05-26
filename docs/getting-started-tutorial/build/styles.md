@@ -28,7 +28,7 @@ The same tag can be used _anywhere_ in Twig, meaning each template (say, for the
 
 Let’s get some baseline styles into the project so we can visualize the structure of our HTML a bit better.
 
-Grab the contents of [this file](repo:craftcms/tutorial-project/blob/main/web/web/styles.css) from the tutorial project repository on GitHub and paste them into `web/styles.css`.
+Grab the contents of [this file](repo:craftcms/tutorial-project/blob/main/web/styles.css) from the tutorial project repository on GitHub and paste them into the `web/styles.css` file we created at the beginning of the tutorial.
 
 The blog index should now look something like this:
 
@@ -53,7 +53,7 @@ nav a:hover {
 }
 ```
 
-The first rule sets a default color (`var(--color-muted)`) for links in the `nav` element. The second one combines a `:hover` “pseudo-selector” and an `.active` class selector that applies a darker color (`var(--color-base)`). Our HTML doesn’t add this class, though! Let’s see what it takes to wire this up, in `_layout.twig`:
+The first rule sets a default color (`var(--color-muted)`) for links in the `nav` element. The second one combines a `:hover` “pseudo-selector” and an `.active` class selector that applies a darker color (`var(--color-base)`) under certain conditions. Our HTML doesn’t add this class, though! Let’s see what it takes to wire this up, in `_layout.twig`:
 
 ```twig{2,7,10}
 {# Get the first segment of the current URI: #}
@@ -132,7 +132,7 @@ In addition to setting flags based on your _content_, you have access to a bevy 
 
 - Introduce variation with randomization, with the `random()` and `shuffle()` functions;
 - Step through values with the `cycle()` function, inside a loop;
-- Use `now` and date comparisons to 
+- Use `now` and date comparisons to display different content based on the time of day;
 - Let administrators select values in a global set (or on particular entry, category, asset, etc.) to customize the site or page’s appearance;
 
 #### Interpolating CSS
@@ -145,10 +145,11 @@ While Twig’s primary target is HTML, you are welcome to output variables into 
 
   <style>
     body {
+      background-color: {{ theme.backgroundColor | e('css') }};
       color: {{ theme.textColor | e('css') }};
     }
   </style>
 </head>
 ```
 
-This presumes `theme` is the handle of a global set that contains a **Color** field.
+This presumes `theme` is the handle of a global set that contains two **Color** fields named _Background Color_ and _Text Color_.

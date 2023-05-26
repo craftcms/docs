@@ -14,7 +14,7 @@ You can reload a page by pressing <kbd>Control/Command + R</kbd>, <kbd>F5</kbd> 
 
 ## Layout
 
-A **layout** is Twig’s solution for reusable page wrappers. Layouts have all the same features of a regular template. This makes them a perfect place for a global header, navigation, or a footer—but it can also define invisible metadata in the `head` of every page that uses it.
+A **layout** is Twig’s solution for reusable page wrappers. Layouts have all the same features of a regular template. This makes them a perfect place for a global header, navigation, or a footer—as well as invisible metadata in the `head` of every page that uses one.
 
 Right-click the `templates/` folder in VS Code’s file browser, then click **New File…**, and name it `_layout.twig`.
 
@@ -26,7 +26,7 @@ Use an underscore any time a template doesn’t need to be accessible on its own
 
 Copy the following into the `_layout.twig` file you just created:
 
-```twig{2,5,6,7,11-12}
+```twig{2,5,6,8,11-13}
 <!DOCTYPE html>
 <html lang="{{ craft.app.language }}">
   <head>
@@ -122,7 +122,7 @@ If you were to go back into the control panel and create some more posts, you co
 
 Let’s output the image we attached via the “Feature Image” asset field. That field had a handle of `featureImage`, so it will be available on the `entry` variable as `entry.featureImage`, just like the title was:
 
-```twig{4,15-17}
+```twig{4,15-19}
 {% extends '_layout' %}
 
 {# Load the attached image: #}
@@ -148,9 +148,9 @@ Let’s output the image we attached via the “Feature Image” asset field. Th
 At the top of the template, notice the new `set` tag. This loads and stores the first image attached to our **Feature Image** field. We check at the end of the template whether an image is indeed available (say, in case someone deleted the asset), using an [`if` tag](https://twig.symfony.com/doc/3.x/tags/if.html).
 
 ::: warning
-You may have noticed the `.one()` at the end of the line that sets `featureImage`. Craft automatically loads the `entry` for this template, but leaves the rest up to you—`entry.featureImage` is actually a pre-configured _query_ that will fetch asset(s) we attached to the field. We are using `.one()` to tell Craft that we want just the first attached asset.
+Craft automatically loads the `entry` for this template, but leaves the rest up to you—`entry.featureImage` is actually a pre-configured _query_ that will fetch asset(s) we attached to the field. We are using `.one()` to tell Craft that we want just the first attached asset.
 
-We’ll use a similar query when outputting the post topic and content Matrix field!
+We’ll use a similar query when outputting the post topics and content Matrix field!
 :::
 
 We’ve used a convenient feature of the asset object returned by the custom field to generate a complete `<img />` tag:
@@ -187,7 +187,7 @@ If the lack of styles makes it difficult to evaluate whether you are staying on 
 
 #### Topics
 
-Let’s add some more metadata to the top of our post. Our content model included a category field called Topics, which we can access in a really similar way to the feature image!
+Let’s add some more metadata to the top of our post. Our content model included a category field called **Topics**, which we can access in a really similar way to the feature image!
 
 Just below the existing `set` tag, add another one to fetch the attached categories:
 
@@ -198,7 +198,7 @@ Just below the existing `set` tag, add another one to fetch the attached categor
 {% set topics = entry.topics.all() %}
 ```
 
-Because we’re allowing authors to attach multiple topics to a post, we’ve used `.all()` to fetch _all_ of them, instead of just the first. This is important, because we will treat `topics` (plural) a little bit differently from `featureImage` (singular).
+Because we’re allowing authors to attach multiple topics to a post, we’ve used `.all()` to fetch _all_ of them, instead of just _one_. This is important, because we will treat `topics` (plural) a little bit differently from `featureImage` (singular).
 
 ::: tip
 Our annual conference [DotAll](https://dotall.com/) is named after this method!
@@ -327,13 +327,17 @@ In `templates/blog/_entry.twig`, add a new `elseif` comparison tag in the conten
   {# ... #}
 ```
 
-This process can be repeated _ad infinitum_ for however many block types you want!
+This process can be repeated for however many block types you want!
 
 </Block>
 
+::: tip
+Did you install CKEditor when creating the **Post Content** field? You can do without the `| md` filter when outputting `contentBlock.text`.
+:::
+
 ## Listing Posts
 
-We’ve set up individual pages for our posts, but there’s no way to discover them from the front-end! We’ll address this with two new templates:
+We’ve set up individual pages for our posts, but there’s no way to discover them from the front-end. We’ll address this with two new templates:
 
 1. A [blog index](#blog-index) page for all posts;
 1. A [topic index](#topic-pages) template that filters posts by category;
@@ -374,7 +378,7 @@ Create a new template at `templates/blog/index.twig`, with the following content
 {% endblock %}
 ```
 
-Notice that this template makes no reference to an `entry` variable. This is because it won’t be rendered based on an element’s URI format—Craft is just matching its name when it sees a request to `/blog`.
+Notice that this template makes no reference to an `entry` variable. This is because it won’t be rendered based on an element’s URI format—Craft is just matching the request to `/blog` with a template.
 
 That doesn’t mean we can’t access our content, though! The first highlighted line uses what’s called an _element query_. Element queries are different from the automatically-injected `entry` variable: instead of containing a _specific_ entry object, they define some _criteria_ for loading one or more entries from the database.
 

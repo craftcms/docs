@@ -40,7 +40,7 @@ In place of that block of code in `templates/blog/_index.twig`, `include` the ne
 {% include 'blog/_feed' %}
 ```
 
-By default, Twig exposes all variables in the current “context” to `include`d templates, so `posts` is available as though the partial was right there, in-line.
+By default, Twig exposes all variables in the current “context” to included templates, so `posts` is available as though the partial was right there, in-line.
 
 ::: tip
 Some people prefer to pass variables _explicitly_ so that they know exactly what will and won’t be accessible within a template:
@@ -66,7 +66,7 @@ https://tutorial-two.ddev.site/uploads/images/highway-26.jpg
 
 This points to the unmodified, original file—exactly as it was uploaded. Craft always keeps these around, but we can ask for an optimized version via [transforms](/4.x/image-transforms.md).
 
-Transforms are defined directly in your templates, or in the control panel. Each transform has a _mode_, which determines what other options are required. For our blog index, the most important qualities are the final _width_ of the image (about 640px), and that important subjects aren’t cropped out.
+Transforms are defined directly in your templates, or in the control panel. Each transform has a _mode_, which determines what other options are required. For our blog index, the most important qualities are the final _width_ of the image (about 640px, or double that for high-resolution displays), and that important subjects aren’t cropped out.
 
 Let’s add these constraints to the template:
 
@@ -84,7 +84,7 @@ Let’s add these constraints to the template:
 </BrowserShot>
 
 ::: tip
-Refreshing the blog index, you may notice a delay before the images are displayed again—that’s to be expected, as Craft only generates a transform when it’s requested.
+Refreshing the blog index, you may notice a delay before the images are displayed again—that’s to be expected, as Craft only generates a transform when it’s requested for the first time.
 :::
 
 This one change reduced our page’s total size to 310KB—or by 99%!
@@ -143,7 +143,7 @@ Open the _About_ page in the control panel, then double-click the attached asset
 <img src="../images/focal-point-open.png" alt="Screenshot of the image editor in the Craft control panel" />
 </BrowserShot>
 
-In the image editor, click <Poi label="1" target="focal-point" id="button" /> **Focal Point** and drag the <Poi label="1" target="focal-point" id="handle" /> control that appears to the desired position:
+In the image editor, click <Poi label="1" target="focal-point" id="button" /> **Focal Point** and drag the <Poi label="2" target="focal-point" id="handle" /> control that appears to the desired position:
 
 <BrowserShot
   id="focal-point"
@@ -165,9 +165,9 @@ Click **Save** to confirm the new focal point, and return to the _About_ page in
 
 ## Eager Loading
 
-Our blog’s indexes show a list of posts, each of which includes an image. We perform one query for the list of posts, then _each time we output a post_, we perform _another+ query to get the asset attached via its **Feature Image** field.
+Our blog’s indexes show a list of posts, each of which includes an image. We perform one query for the list of posts, then _each time we output a post_, we perform _another_ query to get the asset attached via its **Feature Image** field.
 
-This is what’s called an “N+1” problem: the number of queries required to load the content is proportional to the amount of content—and that could be _a lot_—supposing we had 50 posts, it would take 51 queries to display the blog feed; if we also wanted to display topics for each post in the feed, it would be _101_ queries!
+This is what’s called an “N+1” problem: the number of queries required to load the content is proportional to the amount of content—and that could be _a lot_. If we had 50 posts, it would take 51 queries to display the blog feed; if we also wanted to display topics for each post in the feed, it would be _101_ queries!
 
 Craft addresses this with a feature called _eager loading_, which allows us to declare in the main query what nested elements we are apt to need, for every result:
 
@@ -188,24 +188,9 @@ Only relational fields (**Assets**, **Entries**, **Categories**, and **Tags**) n
 
 ### Transforms
 
-When we defined image transforms for posts’ featured images on the blog index, we inadvertently triggered an additional query for each post, _on top of_ the asset query. Fortunately, eager loading is supported for transforms, as well:
+When we defined image transforms for posts’ featured images on the blog index, we inadvertently triggered an additional query for each post, _on top of_ the asset query. Fortunately, eager loading is supported for transforms (named _and_ unnamed), as well:
 
 ::: code
-```twig{3-12} Ad-Hoc
-{% set posts = craft.entries()
-  .section('blog')
-  .with([
-    [
-      'featureImage',
-      {
-        withTransforms: [
-          { width: 1200 },
-        ],
-      },
-    ],
-  ])
-  .all() %}
-```
 ```twig{3-5} Named
 {% set posts = craft.entries()
   .section('blog')
@@ -214,5 +199,21 @@ When we defined image transforms for posts’ featured images on the blog index,
   ])
   .all() %}
 ```
+```twig{3-12} Ad-Hoc
+{% set posts = craft.entries()
+  .section('blog')
+  .with([
+    [
+      'featureImage',
+      {
+        withTransforms: [
+          { mode: 'fit', width: 1200 },
+        ],
+      },
+    ],
+  ])
+  .all() %}
+```
+:::
 
 While eager-loading can provide _some_ performance benefits here, maintaining transform options between queries and usage can become difficult. This is a great reason to consolidate transforms in the control panel!

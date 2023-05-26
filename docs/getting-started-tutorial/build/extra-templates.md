@@ -142,7 +142,7 @@ This small change gives our content a dedicated region, and separates it from an
 The new `<header>` region is a great place to put a globally-available menu. Just below the anchor tag (`<a>`), add a new `<nav>` element:
 
 ```twig{3}
-<a href="{{ siteUrl }}">{{ siteName }}</a>
+<a class="home" href="{{ siteUrl }}">{{ siteName }}</a>
 
 <nav>
   <ul>
@@ -194,7 +194,7 @@ A new **Globals** item should appear in the main navigation. Click that, and add
 <img src="../images/globals.png" alt="Screenshot of the Craft control panel showing a global set edit screen" />
 </BrowserShot>
 
-Back in `templates/_layout.twig`, let’s output that blurb in the footer:
+Back in `templates/_layout.twig`, output that blurb in the footer:
 
 ```twig{2-4}
 <footer>

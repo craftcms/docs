@@ -1,6 +1,6 @@
 # Where to Go From Here
 
-Craft CMS is a powerful tool for modeling and managing content as you need it. We’ve focused on some of Craft’s core features that let us scaffold a simple website—but there’s plenty more to explore.
+Craft CMS is a powerful tool for modeling and managing content, the way _you_ want to. We’ve focused on some of Craft’s core features that let us scaffold a simple website—but there’s plenty more to explore.
 
 To get a better sense of how Craft can support your next project’s unique requirements, consider tackling one of these exercises:
 
@@ -8,9 +8,9 @@ To get a better sense of how Craft can support your next project’s unique requ
 
 - Expose blog post author details.  
   **Hint:** add [`{% dump entry.author %}`](/4.x/dev/tags.md#dump) anywhere you have access to an `entry` to see what’s there—or consult the [User element API documentation](craft4:craft\elements\User);
-- Customize the homepage (`templates/index.twig`) to match your site;
-- Add more posts and integrate [pagination](/4.x/dev/tags.md#paginate) in your templates;
-- Add an RSS feed using the example [in the documentation](kb:rss-and-atom-feeds);
+- Update the homepage (`templates/index.twig`) to match the rest of the site;
+- Add more posts and implement [pagination](/4.x/dev/tags.md#paginate) on the index pages;
+- Add an RSS feed using the example [in the knowledge base](kb:rss-and-atom-feeds);
 - Use the [Contact Form plugin](https://plugins.craftcms.com/contact-form) to add a form to your site;
 
 ## Intermediate: _Go Deeper with Craft_
