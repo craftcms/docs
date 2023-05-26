@@ -20,9 +20,9 @@ For a more in-depth introduction to your computer’s command line, the [Ubuntu 
 
 ### Run a command
 
-Once you’ve launched your terminal, you’ll be greeted by an empty “prompt.”
+Once you’ve launched your terminal, you’ll be greeted by an empty _prompt_.
 
-A “command” is simply a piece of text that is interpreted and executed by the system. Commands often include the names of programs, references to files and folders, flags, and other “arguments.” Throughout the tutorial, we’ll ask you to “run” commands—that just means you’ll type the text into your terminal and press <kbd>Return</kbd> or <kbd>Enter</kbd>. If a number of commands should be run in series, they may appear in a single snippet.
+A _command_ is simply a piece of text that is interpreted and executed by the system. Commands often include the names of programs, references to files and folders, flags, and other _arguments_. Throughout the tutorial, we’ll ask you to “run” commands—that just means you’ll type the text into your terminal and press <kbd>Return</kbd> or <kbd>Enter</kbd>. If a number of commands should be run in series, they may appear in a single snippet.
 
 ::: danger
 The terminal is extremely powerful. Only run commands from sources you trust!
