@@ -193,6 +193,12 @@ Our _topics_ field only needs a couple of options:
 1. Choose “Topics” from the **Source** menu (it will probably be selected, already);
 1. Save the field.
 
+::: tip
+Previously, we only created the category _group_. This step creates a _field_ that will allow us to select from the pool of content. Craft separates these concerns so that you may establish relationships to and from elements in different parts of your site, without needing to duplicate content.
+
+For example, if we later added a _Galleries_ section, you could create and assign another categories field to its field layout, but still have access to the same pool of topics!
+:::
+
 ### Post Content
 
 Matrix fields are inherently a bit more complex than other field types, because they contain _nested_ fields. The process of creating those nested fields should feel pretty familiar, though!
