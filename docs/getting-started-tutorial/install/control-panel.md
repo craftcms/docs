@@ -52,7 +52,7 @@ Upon signing in, you will be sent to your **Dashboard**, a space you can customi
 
 - **Recent Entries**: Empty, as we haven’t created any content yet.
 - **Craft Support**: Find help in the community, or get official support.
-- **Updates**: Check for Craft and plugins
+- **Updates**: Check for Craft and plugin updates.
 - **Feed**: An RSS widget, set to display the latest posts from the official Craft blog.
 
 In the upper right corner, the account menu <Poi label="2" id="account" target="dashboard" /> gives you access to your user’s settings, and a link to sign out.
