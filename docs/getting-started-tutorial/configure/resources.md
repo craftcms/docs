@@ -174,9 +174,9 @@ Posts’ primary images will be added to an _asset_ field.
 
 1. Click **+ New Field**;
 1. Enter “Feature Image” into the **Name** <Poi label="A" target="newAssetField" id="name" /> field;
-1. Select _Assets_ from the **Field Type** <Poi label="C" target="newAssetField" id="type" /> menu—the rest of the page will be updated with options specific to asset fields;
+1. Select **Assets** from the **Field Type** <Poi label="C" target="newAssetField" id="type" /> menu—the rest of the page will be updated with options specific to asset fields;
 1. Tick **Restrict assets to a single location?** <Poi label="D" target="newAssetField" id="restrict" />;
-1. Select the _Images_ volume from the revealed **Asset Location** <Poi label="E" target="newAssetField" id="location" /> menu;
+1. Select the **Images** volume from the revealed **Asset Location** <Poi label="E" target="newAssetField" id="location" /> menu;
 1. Tick **Allow subfolders** <Poi label="F" target="newAssetField" id="allowSubfolders" />;
 1. Leave both path inputs (<Poi label="E" target="newAssetField" id="location" /> + <Poi label="G" target="newAssetField" id="defaultLocation" />) empty;
 1. Tick **Restrict allowed file types** <Poi label="H" target="newAssetField" id="allowedTypes" />, then tick **Image** from the revealed options;
