@@ -122,7 +122,7 @@ The second resource we need to create is a group for our blog’s _categories_.
 1. In the **Max Levels** <Poi label="C" target="newCategoryGroup" id="levels" /> field, enter `1`.
 1. Set the **Category URI Format** <Poi label="D" target="newCategoryGroup" id="uri" /> to `blog/topic/{slug}`.
 1. Set the **Template** <Poi label="E" target="newCategoryGroup" id="template" /> to `blog/_topic`.
-1. Save <Poi label="F" target="newCategoryGroup" id="save" /> the Category Group.
+1. **Save** <Poi label="F" target="newCategoryGroup" id="save" /> the category group.
 
 ## Custom Fields
 
