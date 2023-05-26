@@ -149,12 +149,12 @@ Today is {{ now | date }}!
 ```
 
 ::: tip
-This gets a little heady, but bear with us
+This gets a little heady, so bear with us!
 :::
 
-`now` is a global variable containing a PHP `DateTime` object set to—you guessed it—the current date and time, in the system’s timezone. Dates and times don’t really have a concrete textual representation—in addition to not knowing which parts of a date are important for users, the specifics of formatting can differ nationally, culturally, linguistically, or just stylistically!
+`now` is a global variable containing a PHP `DateTime` object set to—you guessed it—the current date and time, in the system’s timezone. Dates and times don’t really have a concrete textual representation—in addition to not knowing which parts of a date are important in a given context, the specifics of formatting can differ nationally, culturally, linguistically, or just stylistically!
 
-If we were to output the `now` variable as-is, Craft would throw an error; for this reason, Craft provides the `date` filter to convert abstract `DateTime` objects into a human-readable values. By default, it uses the site’s language to determine a localized format for the date’s month, day, and year.
+If we were to output the `now` variable as-is (removing `| date`), Craft would throw an error; for this reason, Craft provides the `date` filter to convert abstract `DateTime` objects into a human-readable values. By default, it uses the site’s language to determine a localized format for the date’s month, day, and year.
 
 Try updating that line to show the current _time_, then refresh your browser:
 
