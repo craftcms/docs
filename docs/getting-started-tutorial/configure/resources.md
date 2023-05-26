@@ -253,22 +253,23 @@ With that, our fields are ready to be added to a _field layout_!
 
 <Block label="Optional Step">
 
-#### Install the Redactor plugin for rich text fields
+#### Install the CKEditor plugin for rich text fields
 
-If you would prefer to compose the text of your blog posts using a _rich text_ editor (sometimes called a <abbr title="What You See Is What You Get">WYSIWYG</abbr>), the first-party [Redactor](https://plugins.craftcms.com/redactor) can be substituted for the plain text field we created inside our matrix field’s _Text_ block.
+If you would prefer to compose the text of your blog posts using a _rich text_ editor (sometimes called a <abbr title="What You See Is What You Get">WYSIWYG</abbr>), the first-party [CKEditor](https://plugins.craftcms.com/ckeditor) can be substituted for the plain text field we created inside our matrix field’s _Text_ block.
 
-Plugins can be installed from the control panel (click **Plugin Store** in the main navigation and search for “Redactor”), or via the command line:
+Plugins can be installed from the control panel (click **Plugin Store** in the main navigation and search for “CKEditor”), or via the command line:
 
-1. Run `ddev composer require craftcms/redactor` to add the package to your project;
-1. Install the plugin by running `ddev php craft plugin/install redactor`;
+1. Run `ddev composer require craftcms/ckeditor -w` to add the package to your project;
+1. Install the plugin by running `ddev php craft plugin/install ckeditor`;
 
 Once installed, you’ll need to update your field’s settings:
 
 1. Navigate to the _Post Content_ matrix field’s settings, then the _Text_ block type, then the _Text_ field;
-1. Switch the **Field Type** to _Redactor_;
+1. Switch the **Field Type** to **CKEditor**;
+1. Define a reusable configuration;
 1. Save the field;
 
-That’s it! Plain text fields can be migrated to Redactor without losing data—but some field types are _not_ compatible with one another! Craft puts a ⚠️ next to any options in the **Field Type** menu that can’t be automatically converted.
+That’s it! Plain text fields can be migrated to CKEditor without losing data—but some field types are _not_ compatible with one another! Craft puts a ⚠️ next to any options in the **Field Type** menu that can’t be automatically converted.
 
 </Block>
 
