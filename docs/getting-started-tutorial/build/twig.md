@@ -138,7 +138,7 @@ The content of our `for` loop outputs an HTML “list item” tag, interpolating
 
 #### Variables
 
-Any time you reference a value by name (like `now` or `color`), you’re using a **variable**. Variables can contain a ton of different kinds of data, like text, numbers, or dates—or arrays and objects that are collections of other values. There are some rules about how, when, and where you can use each type of data, but we’ll takes those in stride.
+Any time you reference a value by name (like `now` or `color`), you’re using a **variable**. Variables can contain a ton of different kinds of data, like text, numbers, or dates—or arrays and objects that are collections of other values. There are some rules about how, when, and where you can use each type of data, but we’ll take those in stride.
 
 #### Filters
 
