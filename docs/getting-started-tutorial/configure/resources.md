@@ -84,16 +84,16 @@ We’ll create a local Asset Volume within the web root for blog post images:
     Within the slideout that opens, provide these settings:
 
     - **Name** <Poi label="D" target="newVolume" id="fsName" />: “Hard Disk”
-    - **Files in this filesystem have public URLs** <Poi label="F" target="newVolume" id="fsName" />: On/Enabled
+    - **Files in this filesystem have public URLs** <Poi label="F" target="newVolume" id="fsHasPublicUrls" />: On/Enabled
     - **Base URL** <Poi label="G" target="newVolume" id="fsBaseUrl" />: `@web/uploads/images`
-    - **File System Path** <Poi label="H" target="newVolume" id="fsBasePath" />: `@webroot/uploads/images`
+    - **Base Path** <Poi label="H" target="newVolume" id="fsBasePath" />: `@webroot/uploads/images`
 
     Save the filesystem, and ensure it has populated the **Asset Filesystem** <Poi label="C" target="newVolume" id="volumeFsMenu" /> menu.
 
 1. Save the Asset Volume.
 
 ::: tip
-The `@web` and `@webroot` “[aliases](/4.x/config/README.md#aliases)” are automatically defined by Craft, and point to the base site URL and document root (`web/` in your project folder), respectively.
+The `@web` and `@webroot` [_aliases_](/4.x/config/README.md#aliases) are automatically defined by Craft, and point to the base site URL and document root (`web/` in your project folder), respectively.
 :::
 
 ### Create a Category Group
