@@ -16,7 +16,7 @@ Working with element queries consists of three steps:
 [Relational fields](./relations.md) also return element queries, which you can treat the same as step #1, above.
 :::
 
-Here’s what a this process looks like, in practice:
+Here’s what this process looks like, in practice:
 
 ::: code
 ```twig
@@ -109,7 +109,7 @@ Typically, parameters make a query more specific, but setting a single parameter
 
 #### Querying with Custom Fields
 
-In addition to native query parameters, Craft automatically injects a methods for each of your [custom fields](./fields.md).
+In addition to native query parameters, Craft automatically injects methods for each of your [custom fields](./fields.md).
 
 For example, if we wanted to find entries in a _Cars_ section with a specific paint color stored in a [dropdown](./dropdown-fields.md) field, we could perform this query:
 
