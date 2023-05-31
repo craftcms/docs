@@ -32,6 +32,8 @@ Instead, we’re going to split this into two parts, and connect them via projec
 
 ### Express Changes
 
+The first step involves taking input and telling the system what changes ought to be made.
+
 - A controller populates a model with request data;
 - The model is passed to a service;
 - The service [writes the model’s config data](#step-3-push-config-changes) to project config;
