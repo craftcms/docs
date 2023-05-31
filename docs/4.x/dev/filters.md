@@ -124,7 +124,7 @@ Applies formatting to an [Address](../addresses.md#address-formatter).
 #}
 ```
 
-This calls [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()), so you can optionally provide an array of options and even your own [formatter](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php).
+This calls [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()), so you can optionally provide an array of `options` and even your own [`formatter`](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php).
 
 ## `append`
 
@@ -171,6 +171,12 @@ Converts a date to an ISO-8601 timestamp (e.g. `2019-01-29T10:00:00-08:00`), whi
 
 ```twig
 {{ entry.postDate|atom }}
+```
+
+Pass `false` to prevent the date from being converted to the system’s timezone:
+
+```twig
+{{ entry.customDateFieldWithTimezone|atom(false) }}
 ```
 
 ## `attr`
@@ -355,43 +361,58 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 {# Output: Dec 20, 1990 #}
 ```
 
-You can customize how the date is presented by passing a custom date format, just like Twig’s core [`date`](https://twig.symfony.com/doc/3.x/filters/date.html) filter:
+#### Arguments
 
-```twig
-{{ now|date('m/d/Y') }}
-{# Output: 12/20/1990 #}
-```
+`format`
 
-Craft also provides some special format keywords that will output locale-specific date formats:
+:   You can customize how the date is presented by passing a [custom date format](https://www.php.net/manual/en/datetime.format.php), just like Twig’s core [`date`](https://twig.symfony.com/doc/3.x/filters/date.html) filter:
 
-| Format               | Example                     |
-| -------------------- | --------------------------- |
-| `short`              | 12/20/1990                  |
-| `medium` _(default)_ | Dec 20, 1990                |
-| `long`               | December 20, 1990           |
-| `full`               | Thursday, December 20, 1990 |
+    ```twig
+    {{ now|date('m/d/Y') }}
+    {# Output: 12/20/1990 #}
+    ```
 
-```twig
-{{ entry.postDate|date('short') }}
-{# Output: 12/20/1990 #}
-```
+    Craft also provides some special format keywords that will output locale-specific date formats:
 
-The current application locale will be used by default. If you want to format the date for a different locale, use the `locale` argument:
+    | Format               | Example                     |
+    | -------------------- | --------------------------- |
+    | `short`              | 12/20/1990                  |
+    | `medium` _(default)_ | Dec 20, 1990                |
+    | `long`               | December 20, 1990           |
+    | `full`               | Thursday, December 20, 1990 |
 
-```twig
-{{ entry.postDate|date('short', locale='en-GB') }}
-{# Output: 20/12/1990 #}
-```
+    ```twig
+    {{ entry.postDate|date('short') }}
+    {# Output: 12/20/1990 #}
+    ```
 
-You can customize the timezone the time is output in, using the `timezone` param:
+`locale`
 
-```twig
-{{ entry.postDate|date('short', timezone='UTC') }}
-{# Output: 12/21/1990 #}
-```
+:   The current application locale will be used by default. If you want to format the date for a different locale, use the `locale` argument:
+
+    ```twig
+    {{ entry.postDate|date('short', locale='en-GB') }}
+    {# Output: 20/12/1990 #}
+    ```
+
+`timezone`
+
+:   You can customize the timezone the time is output in, using the `timezone` param:
+
+    ```twig
+    {{ entry.postDate|date('Y-m-d H:i', timezone='UTC') }}
+    {# Output: 12/21/1990 20:00 #}
+    ```
+
+    Pass `false` to prevent the date from being converted to the system’s timezone:
+
+    ```twig
+    {{ entry.customDateFieldWithTimezone|date('Y-m-d H:i', timezone=false) }}
+    {# Output: 1990-12-21 04:00 #}
+    ```
 
 ::: tip
-If the value passed to the date filter is `null`, it will return the current date by default.
+Applying the filter to a `null` value uses the current date. If this is the desired behavior, consider explicitly passing the [`now` variable](global-variables.md#now): `now|date`.
 :::
 
 ## `datetime`
@@ -403,35 +424,53 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 {# Output: Dec 20, 1990, 5:00:00 PM #}
 ```
 
-Craft provides some special format keywords that will output locale-specific date and time formats:
+#### Arguments
 
-```twig
-{{ entry.postDate|datetime('short') }}
-{# Output: 9/26/2018, 5:00 PM #}
-```
+`format`
+:   Craft provides some special format keywords that will output locale-specific date and time formats:
 
-Possible `format` values are:
+    ```twig
+    {{ entry.postDate|datetime('short') }}
+    {# Output: 12/20/1990, 5:00 PM #}
+    ```
 
-| Format               | Example                                        |
-| -------------------- | ---------------------------------------------- |
-| `short`              | 12/20/1990, 5:00 PM                            |
-| `medium` _(default)_ | Dec 20, 1990, 5:00:00 PM                       |
-| `long`               | December 20, 1990 at 5:00:00 PM PDT            |
-| `full`               | Thursday, December 20, 1990 at 5:00:00 PM PDT |
+    Possible `format` values (in addition to any valid [PHP date format](https://www.php.net/manual/en/datetime.format.php)) are:
 
-The current application locale will be used by default. If you want to format the date and time for a different locale, use the `locale` argument:
+    | Format               | Example                                        |
+    | -------------------- | ---------------------------------------------- |
+    | `short`              | 12/20/1990, 5:00 PM                            |
+    | `medium` _(default)_ | Dec 20, 1990, 5:00:00 PM                       |
+    | `long`               | December 20, 1990 at 5:00:00 PM PDT            |
+    | `full`               | Thursday, December 20, 1990 at 5:00:00 PM PDT  |
 
-```twig
-{{ entry.postDate|datetime('short', locale='en-GB') }}
-{# Output: 20/12/1990, 17:00 #}
-```
+`locale`
 
-You can customize the timezone the time is output in, using the `timezone` param:
+:   The current application locale will be used by default. If you want to format the date and time for a different locale, use the `locale` argument:
 
-```twig
-{{ entry.postDate|datetime('short', timezone='UTC') }}
-{# Output: 12/21/1990, 12:00 AM #}
-```
+    ```twig
+    {{ entry.postDate|datetime('short', locale='en-GB') }}
+    {# Output: 20/12/1990, 17:00 #}
+    ```
+
+`timezone`
+
+:   You can customize the timezone the time is output in, using the `timezone` param:
+
+    ```twig
+    {{ entry.postDate|datetime('short', timezone='UTC') }}
+    {# Output: 12/21/1990, 12:00 AM #}
+    ```
+
+    Pass `false` to prevent the date from being converted to the system’s timezone:
+
+    ```twig
+    {{ entry.customDateFieldWithTimezone|date('short', timezone=false) }}
+    {# Output: 12/21/1990, 1:00 AM #}
+    ```
+
+::: tip
+Applying the filter to a `null` value uses the current date. If this is the desired behavior, consider explicitly passing the [`now` variable](global-variables.md#now): `now|date`.
+:::
 
 ## `diff`
 
@@ -548,22 +587,41 @@ Groups items in an array by a the results of an arrow function.
 
 ## `hash`
 
-Prefixes the given string with a keyed-hash message authentication code (HMAC), for securely passing data in forms that should not be tampered with.
+Prefixes the given string with a keyed-hash message authentication code (HMAC), for passing data in plain view (i.e. via front-end forms) that must not be tampered with.
 
 ```twig
-<input type="hidden" name="foo" value="{{ 'bar'|hash }}">
+{{ hiddenInput('foo', 'bar'|hash) }}
 ```
 
 PHP scripts can validate the value via [Security::validateData()](yii2:yii\base\Security::validateData()):
 
 ```php
-$foo = Craft::$app->request->getBodyParam('foo');
-$foo = Craft::$app->security->validateData($foo);
+$foo = Craft::$app->getRequest()->getBodyParam('foo');
+$foo = Craft::$app->getSecurity()->validateData($foo);
 
 if ($foo !== false) {
-    // data is valid
+    // $foo is valid!
 }
 ```
+
+::: danger
+**Do not hash sensitive data.** Hashed values are tamper-proof, but still expose the original value!
+:::
+
+[Request::getValidatedBodyParam()](craft4:craft\web\Request::getValidatedBodyParam()) can also perform this comparison in a controller, automatically throwing an error when it finds a missing or invalid value:
+
+```php
+public function actionSubmitData()
+{
+    $foo = Craft::$app->getRequest()->getValidatedBodyParam('foo');
+
+    // $foo is valid!
+}
+```
+
+::: warning
+Hashing data uses your app’s [`securityKey` config setting](config4:securityKey), by default. If this setting changes between generating and validating a hash, it will fail!
+:::
 
 ## `httpdate`
 
@@ -574,12 +632,17 @@ Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/ht
 {# Output: Expires: Thu, 08 Apr 2021 13:00:00 GMT #}
 ```
 
-You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+#### Arguments
 
-```twig
-{% header "Expires: " ~ expiry|httpdate('CET') %}
-{# Output: Expires: Thu, 08 Apr 2021 21:00:00 GMT #}
-```
+`timezone`
+:   You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+
+    ```twig
+    {% header 'Expires: ' ~ expiry|httpdate('CET') %}
+    {# Result: Expires: Thu, 08 Apr 2021 21:00:00 GMT #}
+    ```
+
+    Pass `false` to use the date’s existing timezone as the basis (prior to conversion to GMT).
 
 ## `id`
 
@@ -1181,7 +1244,21 @@ Outputs a date in the format required for RSS feeds (`D, d M Y H:i:s O`).
 
 ```twig
 {{ entry.postDate|rss }}
+{# Expires: Wed, 31 May 2023 12:23:09 -0700 #}
 ```
+
+#### Arguments
+
+`timezone`
+
+:   You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+
+    ```twig
+    {% header 'Expires: ' ~ expiry|httpdate('CET') %}
+    {# Expires: Thu, 08 Apr 2021 21:00:00 +0000 #}
+    ```
+
+    Pass `false` to use the date’s existing timezone as the basis (prior to conversion to GMT).
 
 ## `snake`
 
