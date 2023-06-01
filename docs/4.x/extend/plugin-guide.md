@@ -24,7 +24,7 @@ Plugin name
     Example: `composer require acme/craft-thinginator`, not `composer require acme/craft-super-advanced-thinginator-by-acme`.
 
     ::: warning
-    Your plugin’s name _must not_ begin with “Craft” or an include an [edition](plugin-editions.md)-sounding word like “Lite”, “Plus”, or “Pro”.
+    Your plugin’s name _must not_ begin with “Craft”, or include an [edition](plugin-editions.md)-sounding word like “Lite”, “Plus”, or “Pro”.
     :::
 
 ### Private Plugins
