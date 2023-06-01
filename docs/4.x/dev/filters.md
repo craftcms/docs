@@ -1313,12 +1313,26 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Formats a date as a human-readable timestamp, via <craft4:craft\i18n\Formatter::asTimestamp()>.
+Outputs a date with <craft4:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible. Dates with the same day return only the time, using the provided `format`; dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`).
 
 ```twig
 {{ now|timestamp }}
-{# Output: 9:00:00 AM #}
+{# Output: 16:25 #}
+
+{{ now|date_modify('-4 days')|timestamp}}
+{# Output: Friday #}
+
+{{ now|date_modify('-2 months')|timestamp('php:F j, Y')}}
+{# Output: 'March 29, 2023' #}
 ```
+
+#### Arguments
+
+    Omit this if you wish to use relative language like “today” or “yesterday.” This has no effect when the filter would return a relative date expression or the name of a weekday.
+
+`withPreposition`
+
+:   Pass `true` to include `at` or `on` prepositions when outputting the timestamp (when appropriate). These values are localized based on the current site’s language. Defaults to `false`.
 
 ## `translate` or `t`
 
@@ -1339,10 +1353,6 @@ See [Static Message Translations](../sites.md#static-message-translations) for a
 :::
 
 ## `truncate`
-
-::: tip
-The `truncate` filter was added in Craft 3.5.10.
-:::
 
 Truncates a string to a given length, while ensuring that it does not split words.
 
