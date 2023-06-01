@@ -119,11 +119,12 @@ if ($entry->myFieldHandle) {
 ```
 :::
 
-Craft and Twig provide several Twig filters for manipulating dates, which you can use depending on your needs:
+Craft and Twig provide several Twig filters for manipulating and outputting dates, which you can use depending on your needs:
 
 - [date](dev/filters.md#date)
 - [time](dev/filters.md#time)
 - [datetime](dev/filters.md#datetime)
+- [duration](dev/filters.md#duration)
 - [timestamp](dev/filters.md#timestamp)
 - [atom](dev/filters.md#atom)
 - [rss](dev/filters.md#rss)

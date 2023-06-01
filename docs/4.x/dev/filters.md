@@ -1313,26 +1313,23 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Outputs a date with <craft4:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible. Dates with the same day return only the time, using the provided `format`; dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`).
+Outputs a date with <craft4:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible. Dates with the same day return only the time, using the provided `format`; dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`). Anything longer ago than that 
 
 ```twig
 {{ now|timestamp }}
 {# Output: 16:25 #}
 
-{{ now|date_modify('-4 days')|timestamp}}
+{{ now|date_modify('-1 day')|timestamp }}
+{# Output: Yesterday #}
+
+{{ now|date_modify('-4 days')|timestamp }}
 {# Output: Friday #}
 
-{{ now|date_modify('-2 months')|timestamp('php:F j, Y')}}
-{# Output: 'March 29, 2023' #}
+{{ now|date_modify('-2 months')|timestamp(withPreposition=true) }}
+{# Output: 'on March 29, 2023' #}
 ```
 
 #### Arguments
-
-`format`
-
-:   Used to customize the appearance of the timestamp. Special arguments supported by the [`date`](#date), [`datetime`](#datetime), and [`time`](#time) filters are also valid here, but **custom formats must be prefixed with `php:`**.
-
-    Omit this if you wish to use relative language like “today” or “yesterday.” This has no effect when the filter would return a relative date expression or the name of a weekday.
 
 `withPreposition`
 
