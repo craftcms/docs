@@ -1328,6 +1328,10 @@ Outputs a date with <craft4:craft\i18n\Formatter::asTimestamp()>, using plain-la
 
 #### Arguments
 
+`format`
+
+:   Used to customize the appearance of the timestamp. Special arguments supported by the [`date`](#date), [`datetime`](#datetime), and [`time`](#time) filters are also valid here, but **custom formats must be prefixed with `php:`**.
+
     Omit this if you wish to use relative language like “today” or “yesterday.” This has no effect when the filter would return a relative date expression or the name of a weekday.
 
 `withPreposition`
