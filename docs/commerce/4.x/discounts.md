@@ -36,7 +36,7 @@ Only _promotable_ purchasables may have discounts and sales applied. This means 
 
 ### Categories
 
-The **Categories** lightswitch is also on by default, bug you can switch it off to select zero or more product categories that should qualify for the discount. Just like the purchasables switch above, you should be sure to designate categories if the **All categories** lightswitch is disabled—otherwise it won’t be possible for any items to match the discount.
+The **Categories** lightswitch is also on by default, but you can switch it off to select zero or more product categories that should qualify for the discount. Just like the purchasables switch above, you should be sure to designate categories if the **All categories** lightswitch is disabled—otherwise it won’t be possible for any items to match the discount.
 
 ### Advanced
 
