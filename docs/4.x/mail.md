@@ -190,10 +190,12 @@ These services often require non-invasive adjustments to your DNS records for pr
 
 #### Gmail
 
-Sends via an existing Google Gmail account. You must [enable IMAP access](https://support.google.com/mail/answer/7126229?hl=en&sjid=17115267742999947161-NA) in order to access a Gmail account over SMTP.
+Sends via an existing Google Gmail account. You must [enable IMAP access](https://support.google.com/mail/answer/7126229) in order to access a Gmail account over SMTP.
 
 ::: danger
-This adapter requires your Google account password. If it is your only option, consider using an account that would not pose a security risk to you or your clients, should the password be compromised.
+This adapter requires credentials for your Google account. If it is your only option, consider using an account that would not pose a security risk to you or your clients, should the password be compromised.
+
+_As of May, 2022, Google has phased out most support for “[less-secure apps](https://support.google.com/accounts/answer/6010255),” in favor of [App Passwords](https://support.google.com/accounts/answer/185833)._
 :::
 
 #### SMTP
