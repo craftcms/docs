@@ -234,7 +234,7 @@ Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()
 
 ## `dd`
 
-This tag will dump a variable out to the browser and then end the request. (`dd` stands for “Dump-and-Die”.)
+Outputs a variable to the browser and ends the request. (`dd` is short for “Dump-and-Die”)
 
 ```twig
 {% set entry = craft.entries().id(entryId).one() %}
