@@ -107,6 +107,7 @@ Address queries support the following parameters:
 | [asArray](#asarray)                       | Causes the query to return matching addresses as arrays of data, rather than [Address](craft4:craft\elements\Address) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                       |
 | [countryCode](#countrycode)               | Narrows the query results based on the country the assets belong to.
 | [dateCreated](#datecreated)               | Narrows the query results based on the addresses’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the addresses’ last-updated dates.
@@ -247,6 +248,15 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 
