@@ -1211,7 +1211,7 @@ Removes a class (or classes) from the given HTML tag.
 
 ## `replace`
 
-Replaces parts of a string with other things.
+Match and replace parts of a string.
 
 When a mapping array is passed, this works identically to Twig’s core [`replace`](https://twig.symfony.com/doc/3.x/filters/replace.html) filter:
 
@@ -1236,6 +1236,15 @@ You can also use a regular expression to search for matches by starting and endi
 
 ```twig
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
+```
+
+Regular expressions can also be used as keys <Since ver="4.5.0" feature="Regular expressions as keys" /> when passing an array:
+
+```twig
+{{ tag.title|lower|replace({
+  '/^the\\s/': '',
+  '/[^\\w]+/': '-',
+}) }}
 ```
 
 ## `rss`
