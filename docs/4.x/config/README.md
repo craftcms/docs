@@ -480,7 +480,7 @@ Note that HTML Purifier expresses many options with dot notation, like `HTML.All
 You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in `bootstrap.php`—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
 ::: tip
-Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
+Constants you set directly in `web/index.php` will only be defined for _web_ requests, while any you set in the `craft` executable will only be defined for _console_ requests.
 :::
 
 The following options can _only_ be set by PHP constants, but general and database configuration settings can also be set via constants matching the same pattern defined in [environment overrides](#environment-overrides).
