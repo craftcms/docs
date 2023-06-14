@@ -54,7 +54,7 @@ These values can be referenced in your config files by calling [App::env()](craf
 
 Craft doesn’t require your variables to follow any kind of naming convention, but it will automatically discover [some specific environment variables](#environment-overrides) for general and database settings.
 
-The `.env` file is the only place where secrets should be stored. Avoid checking it in to version control!
+For most installations, the `.env` file is the only place where secrets should be stored. Avoid checking it in to version control!
 
 ::: tip
 Some platforms (especially those with ephemeral filesystems) provide a GUI for managing environment variables in lieu of using a `.env` file, and will automatically inject them when the server or process starts. `App::env()` is still the recommended method for retrieving environment variables set in this way.
@@ -63,6 +63,20 @@ Some platforms (especially those with ephemeral filesystems) provide a GUI for m
 ### Entry Script
 
 Craft will also respond to a handful of specific [PHP constants](#php-constants), as long as they are set prior to bootstrapping the application in your entry script. The [starter project](repo:craftcms/craft) shares a `bootstrap.php` file between `web/index.php` and the `craft` executable to consolidate the definition of constants.
+
+### Secrets
+
+You can store sensitive values that won’t leak into the process’s environment in a special “secrets” file. <Since ver="4.5.0" feature="Secrets file" /> The path to this file is determined by the `CRAFT_SECRETS_PATH` environment variable. When defined, Craft will attempt to include a file at that path (presumed to be a PHP script that `return`s an associative array), and checks it prior to resolving any environment variable or constant with <craft4:craft\helpers\App::env()>.
+
+```php
+return [
+    'SUPER_SECRET_KEY' => '...',
+];
+```
+
+::: warning
+This is only recommended in situations where environment variable exfiltration is among the last attack surfaces. If your server supports any form of login (say, via SSH), this is _not_ a practical security measure!
+:::
 
 ## Setting and Resolving Options
 
