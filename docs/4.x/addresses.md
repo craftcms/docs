@@ -990,7 +990,7 @@ You can also pass your own formatter to the `|address` filter. The addressing li
 #}
 ```
 
-You can also write a custom formatter that implements [FormatterInterface](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php). We might extend the default formatter, for example, to add a `hide_countries` option that avoids printing the names of specified countries:
+You can also write a custom formatter that implements [FormatterInterface](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php). We could extend the default formatter, for example, to add a `hide_countries` option that avoids printing the names of specified countries:
 
 ```php
 <?php
