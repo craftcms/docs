@@ -1004,56 +1004,58 @@ use craft\helpers\Html;
 
 class OptionalCountryFormatter extends DefaultFormatter
 {
-  /**
-   * @inheritdoc
-   */
-  protected $defaultOptions = [
-    'locale' => 'en',
-    'html' => true,
-    'html_tag' => 'p',
-    'html_attributes' => ['translate' => 'no'],
-    'hide_countries' => [],
-  ];
+    /**
+     * @inheritdoc
+     */
+    protected $defaultOptions = [
+        'locale' => 'en',
+        'html' => true,
+        'html_tag' => 'p',
+        'html_attributes' => ['translate' => 'no'],
+        'hide_countries' => [],
+    ];
 
-  /**
-   * @inheritdoc
-   */
-  public function format(AddressInterface $address, array $options = []): string
-  {
-    $this->validateOptions($options);
-    $options = array_replace($this->defaultOptions, $options);
-    $countryCode = $address->getCountryCode();
-    $addressFormat = $this->addressFormatRepository->get($countryCode);
+    /**
+     * @inheritdoc
+     */
+    public function format(AddressInterface $address, array $options = []): string
+    {
+        $this->validateOptions($options);
+        $options = array_replace($this->defaultOptions, $options);
+        $countryCode = $address->getCountryCode();
+        $addressFormat = $this->addressFormatRepository->get($countryCode);
 
-    if (!in_array($countryCode, $options['hide_countries'])) {
-      if (Locale::matchCandidates($addressFormat->getLocale(), $address->getLocale())) {
-        $formatString = '%country' . "\n" . $addressFormat->getLocalFormat();
-      } else {
-        $formatString = $addressFormat->getFormat() . "\n" . '%country';
-      }
-    } else {
-      // If this is in our `hide_countries` list, omit the country
-      $formatString = $addressFormat->getFormat();
+        if (!in_array($countryCode, $options['hide_countries'])) {
+            if (Locale::matchCandidates($addressFormat->getLocale(), $address->getLocale())) {
+                $formatString = '%country' . "\n" . $addressFormat->getLocalFormat();
+            } else {
+                $formatString = $addressFormat->getFormat() . "\n" . '%country';
+            }
+        } else {
+            // If this is in our `hide_countries` list, omit the country
+            $formatString = $addressFormat->getFormat();
+        }
+
+        $view = $this->buildView($address, $addressFormat, $options);
+        $view = $this->renderView($view);
+        $replacements = [];
+
+        foreach ($view as $key => $element) {
+            $replacements['%' . $key] = $element;
+        }
+
+        $output = strtr($formatString, $replacements);
+        $output = $this->cleanupOutput($output);
+
+        if (!empty($options['html'])) {
+            $output = nl2br($output, false);
+
+            // Add the HTML wrapper element with Craft’s HTML helper:
+            $output = Html::tag($options['html_tag'], $output, $options['html_attributes']);
+        }
+
+        return $output;
     }
-
-    $view = $this->buildView($address, $addressFormat, $options);
-    $view = $this->renderView($view);
-    $replacements = [];
-    foreach ($view as $key => $element) {
-      $replacements['%' . $key] = $element;
-    }
-    $output = strtr($formatString, $replacements);
-    $output = $this->cleanupOutput($output);
-
-    if (!empty($options['html'])) {
-      $output = nl2br($output, false);
-
-      // Add the HTML wrapper element with Craft’s HTML helper:
-      $output = Html::tag($options['html_tag'], $output, $options['html_attributes']);
-    }
-
-    return $output;
-  }
 }
 ```
 
