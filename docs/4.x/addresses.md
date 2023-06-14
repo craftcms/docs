@@ -1079,6 +1079,29 @@ We can instantiate and use that just like the postal label formatter:
 #}
 ```
 
+To replace the default formatter <Since ver="4.5.0" feature="Default address formatter" />, add the following to your [application configuration](config/app.md):
+
+```php
+return [
+    // ...
+    'components' => [
+        // ...
+        'addresses' => [
+            'class' => \craft\services\Addresses::class,
+            'formatter' => new \mynamespace\OptionalCountryFormatter(
+                new \CommerceGuys\Addressing\AddressFormat\AddressFormatRepository(),
+                new \CommerceGuys\Addressing\Country\CountryRepository(),
+                new \CommerceGuys\Addressing\Subdivision\SubdivisionRepository()
+            )
+        ],
+    ],
+];
+```
+
+::: warning
+The default formatter is used in the control panel as well as your templates, so make sure it includes all the information required for administrators to act on users’ information!
+:::
+
 ## Managing Addresses
 
 Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](./dev/controller-actions.md#users-save-address).
