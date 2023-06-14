@@ -279,7 +279,7 @@ This tag will prevent the rest of the template from executing, and end the reque
 
 ### Parameters
 
-The `{% exit %}` tag supports the following parameter:
+The `{% exit %}` tag supports the following parameters:
 
 #### Status
 
@@ -288,6 +288,16 @@ If you choose to set the HTTP status code that should be included with the respo
 ::: tip
 `{% exit %}` throws an [HttpException](yii2:yii\web\HttpException) with the appropriate status code, so with <config4:devMode> enabled a full error report and stack trace will be shown instead of an error template.
 :::
+
+#### Message
+
+The second parameter is passed to the [error template](../routing.md#error-templates) as the `message` variable:
+
+```twig
+{% if not currentUser.isInGroup('powerUsers') ?? false %}
+  {% exit 403 'You must be a power user to access this page!' %}
+{% endif %}
+```
 
 ## `header`
 
