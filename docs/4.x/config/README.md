@@ -235,7 +235,7 @@ use craft\helpers\App;
 
 return [
     'aliases' => [
-        '@web' => App::env('DEFAULT_SITE_URL'),
+        '@web' => App::env('PRIMARY_SITE_URL'),
         '@shared' => App::env('SHARED_PATH'),
         '@uploads' => '@shared/uploads',
         '@assets' => '@web/uploads',
