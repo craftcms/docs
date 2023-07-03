@@ -28664,8 +28664,8 @@
     {
         "class": "craft\\fields\\Matrix",
         "name": "EVENT_SET_FIELD_BLOCK_TYPES",
-        "type": "craft\\fields\\SectionEvent",
-        "desc": "The event that is triggered before a section is saved."
+        "type": "craft\\events\\BlockTypesEvent",
+        "desc": "The event that is triggered when setting the field’s block types"
     },
     {
         "class": "craft\\fields\\Matrix",
