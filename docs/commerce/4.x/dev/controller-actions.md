@@ -46,6 +46,9 @@ Param | Description
 `forceSave` | Optionally set to `true` to force saving the cart.
 `number` | Optional order number for a specific, existing cart.
 `registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
+`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order.
+`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order.
+`saveAddressesOnOrderComplete` | Whether to save the shipping & billing address to the customer’s address book when the cart is completed and turned into an order.
 
 #### Response
 
@@ -117,6 +120,9 @@ Param | Description
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
 `purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs.
 `registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
+`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order.
+`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order.
+`saveAddressesOnOrderComplete` | Whether to save the shipping & billing address to the customer’s address book when the cart is completed and turned into an order.
 `shippingAddress[]` | Shipping address attributes. (See [Addresses](../addresses.md)).
 `shippingAddressId` | ID of an existing address to use as the shipping address.
 `shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address and ignore `shippingAddress` and `shippingAddressId`.

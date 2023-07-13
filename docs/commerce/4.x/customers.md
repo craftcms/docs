@@ -48,6 +48,17 @@ You can also offer the option to initiate registration _at_ checkout by sending 
 
 If a customer chooses to register an account upon order completion, an activation link is sent to the email on file.
 
-::: tip
-The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Create an account” checkbox at the payment stage.
-:::
+```twig
+{% set cart = craft.commerce.carts.cart %}
+
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+
+  {{ input('checbox', 'registerUserOnOrderComplete', 1, {checked: cart.registerUserOnOrderComplete}) }}
+
+  {# ... #}
+
+  <button>Save cart</button>
+</form>
+```
