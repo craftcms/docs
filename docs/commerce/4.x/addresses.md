@@ -101,7 +101,8 @@ The specific properties and fields supported when updating an order’s `shippin
 
 ```twig
 <form method="post">
-  {# ... #}
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
 
   {# Native `fullName` field: #}
   {{ input('text', 'shippingAddress[fullName]', cart.shippingAddress.fullName) }}
