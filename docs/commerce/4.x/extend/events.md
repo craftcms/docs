@@ -1854,3 +1854,23 @@ Event::on(
     }
 );
 ```
+
+### `modifyPurchasablesTableQuery`
+
+The event that is triggered retrieving the list of purchasables for the add a line item feature on the order edit page.
+
+This example adds a condition to the query to only return purchasables with a SKU that contains `foo`
+
+```php
+use craft\commerce\controllers\OrdersController;
+use craft\commerce\events\ModifyPurchasablesTableQueryEvent;
+
+Event::on(
+    OrdersController::class,
+    OrdersController::EVENT_MODIFY_PURCHASABLES_TABLE_QUERY,
+    function(ModifyPurchasablesTableQueryEvent $event) {
+        $likeOperator = Craft::$app->getDb()->getIsPgsql() ? 'ILIKE' : 'LIKE';
+        $event->query->andWhere([$likeOperator, 'sku', 'foo']);
+    }
+);
+```
