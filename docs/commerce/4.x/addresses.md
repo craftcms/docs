@@ -164,11 +164,9 @@ Customers—especially guests—will probably need to enter an address at checko
 If your request also includes a non-empty `shippingAddressId` or `billingAddressId param, the corresponding individual address fields are ignored and Commerce attempts to fill from an [existing address](#auto-fill-from-address-book).
 :::
 
-#### Saving addresses on order completion
+#### Save Addresses when Completing an Order <Since ver="4.3.0" repo="craftcms/commerce" feature="Saving addresses at checkout" product="Commerce" />
 
-If the checkout allows and the customer has decided to, it is possible to save the billing, shipping, or both addresses to the customer’s address book after order completion.
-
-This can be achieved by using the `saveBillingAddressOnOrderComplete` and/or `saveShhippingAddressOnOrderComplete` parameters when updating the cart.
+Your customers can save the billing and/or shipping addresses on their cart to their address book when they check out. These options are stored as `saveBillingAddressOnOrderComplete` and `saveShippingAddressOnOrderComplete` on the cart or <commerce4:craft\commerce\elements\Order> object. You may send corresponding values any time you update the customer’s cart:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -176,12 +174,12 @@ This can be achieved by using the `saveBillingAddressOnOrderComplete` and/or `sa
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
-  
+
   {% if currentUser %}
     {% if cart.billingAddressId and not cart.sourceBillingAddressId %} 
       {{ input('checkbox', 'saveBillingAddressOnOrderComplete', 1, {checked: cart.saveBillingAddressOnOrderComplete}) }}
     {% endif %}
-    
+
     {% if cart.shippingAddressId and not cart.sourceShippingAddressId %} 
       {{ input('checkbox', 'saveShippingAddressOnOrderComplete', 1, {checked: cart.saveShippingAddressOnOrderComplete}) }}
     {% endif %}

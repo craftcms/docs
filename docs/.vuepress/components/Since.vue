@@ -2,7 +2,7 @@
     <a
       class="since" 
       :href="releaseUrl"
-      :title="`${feature} was first available in version ${ver} of Craft.`"
+      :title="`${feature} was first available in version ${ver} of ${product}.`"
       target="_blank">
         {{ ver }}<span class="plus">+</span>
       </a>
@@ -16,6 +16,10 @@ export default {
   components: {},
   props: {
     ver: String,
+    product: {
+      type: String,
+      default: 'Craft',
+    },
     useChangelog: {
       type: Boolean,
       default: true,

@@ -117,9 +117,9 @@ Param | Description
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
 `purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs.
 `registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
-`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order.
-`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order.
-`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order.
+`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
+`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
+`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
 `shippingAddress[]` | Shipping address attributes. (See [Addresses](../addresses.md)).
 `shippingAddressId` | ID of an existing address to use as the shipping address.
 `shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address and ignore `shippingAddress` and `shippingAddressId`.
@@ -252,9 +252,9 @@ Param | Description
 `paymentSourceId` | The ID for a payment source that should be used for payment.
 `registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
 `savePaymentSource` | Whether to save card information as a payment source. (Gateway must support payment sources.)
-`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order.
-`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order.
-`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order.
+`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
+`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
+`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
 
 #### Response
 
