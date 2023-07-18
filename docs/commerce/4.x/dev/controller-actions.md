@@ -46,9 +46,6 @@ Param | Description
 `forceSave` | Optionally set to `true` to force saving the cart.
 `number` | Optional order number for a specific, existing cart.
 `registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
-`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order.
-`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order.
-`saveAddressesOnOrderComplete` | Whether to save the shipping & billing address to the customer’s address book when the cart is completed and turned into an order.
 
 #### Response
 
@@ -255,6 +252,9 @@ Param | Description
 `paymentSourceId` | The ID for a payment source that should be used for payment.
 `registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
 `savePaymentSource` | Whether to save card information as a payment source. (Gateway must support payment sources.)
+`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order.
+`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order.
+`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order.
 
 #### Response
 
