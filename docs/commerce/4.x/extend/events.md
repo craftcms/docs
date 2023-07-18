@@ -1810,7 +1810,7 @@ Event::on(
 If the purchasable becomes unavailable after being added to the cart, an [order notice](../orders-carts.md#order-notices) will be added to the order informing the customer.
 :::
 
-#### `modifyPurchasablesTableQuery`
+#### `modifyPurchasablesTableQuery` <Since ver="4.3.0" repo="craftcms/commerce" feature="This event" />
 
 The event that is triggered retrieving the list of purchasables for the add a line item feature on the order edit page.
 

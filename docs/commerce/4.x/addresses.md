@@ -165,6 +165,56 @@ Customers—especially guests—will probably need to enter an address at checko
 If your request also includes a non-empty `shippingAddressId` or `billingAddressId param, the corresponding individual address fields are ignored and Commerce attempts to fill from an [existing address](#auto-fill-from-address-book).
 :::
 
+#### Save Addresses when Completing an Order <Since ver="4.3.0" repo="craftcms/commerce" feature="Saving addresses at checkout" product="Commerce" />
+
+Your customers can save the billing and/or shipping addresses on their cart to their address book when they check out. These options are stored as `saveBillingAddressOnOrderComplete` and `saveShippingAddressOnOrderComplete` on the cart or <commerce4:craft\commerce\elements\Order> object. You may send corresponding values any time you update the customer’s cart:
+
+```twig
+{% set cart = craft.commerce.carts.cart %}
+
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+
+  {% if currentUser %}
+    {% if cart.billingAddressId and not cart.sourceBillingAddressId %} 
+      {{ input('checkbox', 'saveBillingAddressOnOrderComplete', 1, {checked: cart.saveBillingAddressOnOrderComplete}) }}
+    {% endif %}
+
+    {% if cart.shippingAddressId and not cart.sourceShippingAddressId %} 
+      {{ input('checkbox', 'saveShippingAddressOnOrderComplete', 1, {checked: cart.saveShippingAddressOnOrderComplete}) }}
+    {% endif %}
+  {% endif %}
+
+  {# ... #}
+
+  <button>Save Cart</button>
+</form>
+```
+
+It is also possible to set both addresses to save by using the `saveAddressesOnOrderComplete` parameter.
+
+```twig
+{% set cart = craft.commerce.carts.cart %}
+
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+
+  {% if currentUser and ((cart.billingAddressId and not cart.sourceBillingAddressId) or (cart.shippingAddressId and not cart.sourceShippingAddressId)) %}
+    {{ input('checkbox', 'saveAddressesOnOrderComplete', 1, {checked: cart.saveBillingAddressOnOrderComplete and cart.saveShippingAddressOnOrderComplete}) }}
+  {% endif %}
+
+  {# ... #}
+
+  <button>Save Cart</button>
+</form>
+```
+
+::: tip
+The save address properties are only appropriate for logged-in users that have created addresses directly on the cart. Setting these options to `true` if the user selected an address from their address book has no effect.
+:::
+
 #### Auto-fill from Address Book
 
 You can allow your customers to populate order addresses with a previously-saved one by sending a `shippingAddressId` and/or `billingAddressId` param when updating the cart.
