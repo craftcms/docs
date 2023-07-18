@@ -221,7 +221,7 @@ Disabling this will also disable Live Preview.
 
 ::: code
 ```php Static Config
-'autosaveDrafts' => false,
+->autosaveDrafts(false)
 ```
 ```shell Environment Override
 CRAFT_AUTOSAVE_DRAFTS=false
@@ -2058,7 +2058,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ::: code
 ```php Static Config
 // 1 day
-'invalidUserTokenPath' => 'nope',
+->invalidUserTokenPath('nope')
 ```
 ```shell Environment Override
 # 1 day
@@ -2821,7 +2821,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 3 hours
-'userSessionDuration' => 10800,
+->userSessionDuration(10800)
 ```
 ```shell Environment Override
 # 3 hours
@@ -2953,7 +2953,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // One week
-'defaultTokenDuration' => 604800,
+->defaultTokenDuration(604800)
 ```
 ```shell Environment Override
 # One week
@@ -3138,7 +3138,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 1 day
-'invalidLoginWindowDuration' => 86400,
+->invalidLoginWindowDuration(86400)
 ```
 ```shell Environment Override
 # 1 day
@@ -3235,7 +3235,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 1 hour
-'previewTokenDuration' => 3600,
+->previewTokenDuration(3600)
 ```
 ```shell Environment Override
 # 1 hour
@@ -3525,7 +3525,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 1 hour
-'verificationCodeDuration' => 3600,
+->verificationCodeDuration(3600)
 ```
 ```shell Environment Override
 # 1 hour
@@ -3654,9 +3654,9 @@ The file extensions Craft should allow when a user is uploading files.
 
 ```php Static Config
 // Nothing bug GIFs!
-'allowedFileExtensions' => [
+->allowedFileExtensions([
     'gif',
-],
+])
 ```
 
 
@@ -3785,7 +3785,7 @@ See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3
 ::: code
 ```php Static Config
 // 25MB
-'maxUploadFileSize' => 26214400,
+->maxUploadFileSize(26214400)
 ```
 ```shell Environment Override
 # 25MB
@@ -4669,7 +4669,7 @@ Users will only be purged when [garbage collection](https://craftcms.com/docs/4.
 ::: code
 ```php Static Config
 // 2 weeks
-'purgePendingUsersDuration' => 1209600,
+->purgePendingUsersDuration(1209600)
 ```
 ```shell Environment Override
 # 2 weeks
@@ -4706,7 +4706,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 1 week
-'purgeStaleUserSessionDuration' => 604800,
+->purgeStaleUserSessionDuration(604800)
 ```
 ```shell Environment Override
 # 1 week
@@ -4810,7 +4810,7 @@ Any additional last name prefixes that should be supported by the name parser.
 
 ::: code
 ```php Static Config
-'extraLastNamePrefixes' => ['Dal', 'Van Der'],
+->extraLastNamePrefixes(['Dal', 'Van Der'])
 ```
 ```shell Environment Override
 CRAFT_EXTRA_LAST_NAME_PREFIXES="Dal,Van Der"
@@ -4841,7 +4841,7 @@ Any additional name salutations that should be supported by the name parser.
 
 ::: code
 ```php Static Config
-'extraNameSalutations' => ['Lady', 'Sire'],
+->extraNameSalutations(['Lady', 'Sire'])
 ```
 ```shell Environment Override
 CRAFT_EXTRA_NAME_SALUTATIONS=Lady,Sire
@@ -4872,7 +4872,7 @@ Any additional name suffixes that should be supported by the name parser.
 
 ::: code
 ```php Static Config
-'extraNameSuffixes' => ['CCNA', 'OBE'],
+->extraNameSuffixes(['CCNA', 'OBE'])
 ```
 ```shell Environment Override
 CRAFT_EXTRA_NAME_SUFFIXES=CCNA,OBE

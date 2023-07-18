@@ -137,7 +137,7 @@ For example, if we were building a blog with dedicated “Topic” (category) pa
   .relatedTo({
     targetElement: category,
     field: 'topics',
-  )}
+  })
   .all() %}
 ```
 
