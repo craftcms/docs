@@ -119,7 +119,7 @@ Param | Description
 `registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
 `saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order.
 `saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order.
-`saveAddressesOnOrderComplete` | Whether to save the shipping & billing address to the customer’s address book when the cart is completed and turned into an order.
+`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order.
 `shippingAddress[]` | Shipping address attributes. (See [Addresses](../addresses.md)).
 `shippingAddressId` | ID of an existing address to use as the shipping address.
 `shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address and ignore `shippingAddress` and `shippingAddressId`.
