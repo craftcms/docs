@@ -272,6 +272,8 @@ An address on the cart may be updated in-place by passing individual address pro
 </form>
 ```
 
+You may also send `firstName` and `lastName` properties, separately. <Since ver="4.3.0" feature="Sending discrete first and last name params" product="Commerce" />
+
 ::: warning
 Any field(s) updated on an order address filled from the customer’s address book will _not_ propagate back to the source, and will break the association to it. Sending `shippingAddressId` and `billingAddressId` are only intended to populate an order address with existing information—not keep them synchronized.
 :::
