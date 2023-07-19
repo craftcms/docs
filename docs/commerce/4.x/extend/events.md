@@ -1,26 +1,16 @@
----
-sidebarDepth: 2
----
-
 # Events
 
-Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can [register event listeners](/4.x/extend/events.md), typically in their `init()` methods, to modify Commerce’s behavior.
+Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can [register event listeners](https://craftcms.com/knowledge-base/custom-module-events), typically in their `init()` methods, to modify Commerce’s behavior.
 
 ## Event Code Generator
 
-Select an event for details and a code snippet, or check out the sections below for some use cases. See Craft’s [Events](/4.x/extend/events.md) page for more information about working with events.
+Select an event for details and a code snippet. See Craft’s [Events](/4.x/extend/events.md) page for Craft and Yii events.
 
 <event-browser source="commerce-4" />
 
-## Common Events + Workflows
+## Variant Events
 
-The following sections highlight a few of the events emitted by Commerce classes. It is not exhaustive—meaning you may need to enlist the help of one or more [development tools](/4.x/extend/README.md#tools) to aid in [discovering the “right” event](/4.x/extend/events.md#discovering-events)!
-
-### Product + Variant Events
-
-[Products and variants](../products-variants.md) are [elements](/4.x/extend/element-types.md), so all the standard lifecycle events (for elements and their associated query classes) apply here.
-
-#### `beforeCaptureVariantSnapshot`
+### `beforeCaptureVariantSnapshot`
 
 The event that is triggered before a variant’s field data is captured, which makes it possible to customize which fields are included in the snapshot. Custom fields are not included by default.
 
@@ -37,7 +27,7 @@ Event::on(
     function(CustomizeVariantSnapshotFieldsEvent $event) {
         // @var Variant $variant
         $variant = $event->variant;
-        // @var string[]|null $fields
+        // @var array|null $fields
         $fields = $event->fields;
 
         // Add every custom field to the snapshot
@@ -56,7 +46,7 @@ Event::on(
 Add with care! A huge amount of custom fields/data will increase your database size.
 :::
 
-#### `afterCaptureVariantSnapshot`
+### `afterCaptureVariantSnapshot`
 
 The event that is triggered after a variant’s field data is captured. This makes it possible to customize, extend, or redact the data to be persisted on the variant instance.
 
@@ -80,7 +70,7 @@ Event::on(
 );
 ```
 
-#### `beforeCaptureProductSnapshot`
+### `beforeCaptureProductSnapshot`
 
 The event that is triggered before a product’s field data is captured. This makes it possible to customize which fields are included in the snapshot. Custom fields are not included by default.
 
@@ -117,7 +107,7 @@ Event::on(
 Add with care! A huge amount of custom fields/data will increase your database size.
 :::
 
-#### `afterCaptureProductSnapshot`
+### `afterCaptureProductSnapshot`
 
 The event that is triggered after a product’s field data is captured, which can be used to customize, extend, or redact the data to be persisted on the product instance.
 
@@ -142,9 +132,9 @@ Event::on(
 );
 ```
 
-### Sale Events
+## Sale Events
 
-#### `beforeMatchPurchasableSale`
+### `beforeMatchPurchasableSale`
 
 The event that is triggered before Commerce attempts to match a sale to a purchasable.
 
@@ -175,7 +165,7 @@ Event::on(
 );
 ```
 
-#### `beforeSaveSale`
+### `beforeSaveSale`
 
 The event that is triggered before a sale is saved.
 
@@ -198,7 +188,7 @@ Event::on(
 );
 ```
 
-#### `afterSaveSale`
+### `afterSaveSale`
 
 The event that is triggered after a sale is saved.
 
@@ -221,7 +211,7 @@ Event::on(
 );
 ```
 
-#### `afterDeleteSale`
+### `afterDeleteSale`
 
 The event that is triggered after a sale is deleted.
 
@@ -245,9 +235,9 @@ Event::on(
 
 ```
 
-### Order Events
+## Order Events
 
-#### `beforeAddLineItemToOrder`
+### `beforeAddLineItemToOrder`
 
 The event that is triggered before a new line item has been added to the order.
 
@@ -272,7 +262,7 @@ Event::on(
 );
 ```
 
-#### `afterAddLineItemToOrder`
+### `afterAddLineItemToOrder`
 
 The event that is triggered after a line item has been added to an order.
 
@@ -294,7 +284,7 @@ Event::on(
     }
 );
 ```
-#### `afterApplyAddLineItemToOrder`
+### `afterApplyAddLineItemToOrder`
 
 The event that is triggered after a line item has been added to an order.
 
@@ -316,7 +306,7 @@ Event::on(
 );
 ```
 
-#### `afterRemoveLineItemToOrder`
+### `afterRemoveLineItemToOrder`
 
 The event that is triggered after a line item has been removed from an order.
 
@@ -339,7 +329,7 @@ Event::on(
 );
 ```
 
-#### `afterApplyRemoveLineItemFromOrder`
+### `afterApplyRemoveLineItemFromOrder`
 
 The event that is triggered after a line item has been removed from an order.
 
@@ -361,7 +351,7 @@ Event::on(
 );
 ```
 
-#### `beforeCompleteOrder`
+### `beforeCompleteOrder`
 
 The event that is triggered before an order is completed.
 
@@ -380,7 +370,7 @@ Event::on(
 );
 ```
 
-#### `afterCompleteOrder`
+### `afterCompleteOrder`
 
 The event that is triggered after an order is completed.
 
@@ -399,7 +389,7 @@ Event::on(
 );
 ```
 
-#### `afterOrderAuthorized`
+### `afterOrderAuthorized`
 
 This event is raised after an order is authorized in full and completed.
 
@@ -420,7 +410,7 @@ Event::on(
 );
 ```
 
-#### `afterOrderPaid`
+### `afterOrderPaid`
 
 The event that is triggered after an order is paid and completed.
 
@@ -439,7 +429,43 @@ Event::on(
 );
 ```
 
-#### `orderStatusChange`
+### `registerOrderAdjusters`
+
+The event that is triggered for registration of additional adjusters.
+
+```php
+use craft\events\RegisterComponentTypesEvent;
+use craft\commerce\services\OrderAdjustments;
+use yii\base\Event;
+
+Event::on(
+    OrderAdjustments::class,
+    OrderAdjustments::EVENT_REGISTER_ORDER_ADJUSTERS,
+    function(RegisterComponentTypesEvent $event) {
+        $event->types[] = MyAdjuster::class;
+    }
+);
+```
+
+### `registerDiscountAdjusters`
+
+The event that is triggered for registration of additional discount adjusters.
+
+```php
+use craft\events\RegisterComponentTypesEvent;
+use craft\commerce\services\OrderAdjustments;
+use yii\base\Event;
+
+Event::on(
+    OrderAdjustments::class,
+    OrderAdjustments::EVENT_REGISTER_DISCOUNT_ADJUSTERS,
+    function(RegisterComponentTypesEvent $event) {
+        $event->types[] = MyAdjuster::class;
+    }
+);
+```
+
+### `orderStatusChange`
 
 The event that is triggered when an order status is changed.
 
@@ -465,7 +491,7 @@ Event::on(
 );
 ```
 
-#### `defaultOrderStatus`
+### `defaultOrderStatus`
 
 The event that is triggered when a default order status is being fetched.
 
@@ -493,25 +519,7 @@ Event::on(
 );
 ```
 
-#### `registerOrderAdjusters`
-
-The event that is triggered for registration of additional adjusters.
-
-```php
-use craft\events\RegisterComponentTypesEvent;
-use craft\commerce\services\OrderAdjustments;
-use yii\base\Event;
-
-Event::on(
-    OrderAdjustments::class,
-    OrderAdjustments::EVENT_REGISTER_ORDER_ADJUSTERS,
-    function(RegisterComponentTypesEvent $event) {
-        $event->types[] = MyAdjuster::class;
-    }
-);
-```
-
-#### `modifyCartInfo`
+### `modifyCartInfo`
 
 The event that’s triggered when a cart is returned as an array for Ajax cart update requests.
 
@@ -531,9 +539,9 @@ Event::on(
 );
 ```
 
-### Discount Events
+## Discount Events
 
-#### `afterDiscountAdjustmentsCreated`
+### `afterDiscountAdjustmentsCreated`
 
 The event that is triggered after a discount has matched the order and before it returns its adjustments.
 
@@ -562,7 +570,7 @@ Event::on(
 );
 ```
 
-#### `beforeSaveDiscount`
+### `beforeSaveDiscount`
 
 The event that is triggered before a discount is saved.
 
@@ -587,7 +595,7 @@ Event::on(
 );
 ```
 
-#### `afterSaveDiscount`
+### `afterSaveDiscount`
 
 The event that is triggered after a discount is saved.
 
@@ -612,7 +620,7 @@ Event::on(
 );
 ```
 
-#### `afterDeleteDiscount`
+### `afterDeleteDiscount`
 
 The event that is triggered after a discount is deleted.
 
@@ -635,7 +643,7 @@ Event::on(
 );
 ```
 
-#### `discountMatchesLineItem`
+### `discountMatchesLineItem`
 
 The event that is triggered when a line item is matched with a discount.
 
@@ -665,7 +673,7 @@ Event::on(
 );
 ```
 
-#### `discountMatchesOrder`
+### `discountMatchesOrder`
 
 The event that is triggered when an order is matched with a discount.
 
@@ -693,9 +701,9 @@ Event::on(
 );
 ```
 
-### Line Item Events
+## Line Item Events
 
-#### `beforeSaveLineItem`
+### `beforeSaveLineItem`
 
 The event that is triggered before a line item is saved.
 
@@ -720,7 +728,7 @@ Event::on(
 );
 ```
 
-#### `afterSaveLineItem`
+### `afterSaveLineItem`
 
 The event that is triggeredd after a line item is saved.
 
@@ -745,7 +753,7 @@ Event::on(
 );
 ```
 
-#### `populateLineItem`
+### `populateLineItem`
 
 The event that is triggered as a line item is being populated from a purchasable.
 
@@ -776,7 +784,7 @@ Event::on(
 Don’t forget to set `salePrice` accordingly since it’s the amount that gets added to the cart.
 :::
 
-#### `createLineItem`
+### `createLineItem`
 
 The event that is triggered after a line item has been created from a purchasable.
 
@@ -801,7 +809,7 @@ Event::on(
 );
 ```
 
-#### `defaultLineItemStatus`
+### `defaultLineItemStatus`
 
 The event that is triggered when getting a default status for a line item.
 
@@ -831,9 +839,9 @@ Event::on(
 );
 ```
 
-### Payment Events
+## Payment Events
 
-#### `registerGatewayTypes`
+### `registerGatewayTypes`
 
 The event that is triggered for the registration of additional gateways.
 
@@ -853,7 +861,7 @@ Event::on(
 );
 ```
 
-#### `afterPaymentTransaction`
+### `afterPaymentTransaction`
 
 The event that is triggered after a payment transaction is made.
 
@@ -877,7 +885,7 @@ Event::on(
 );
 ```
 
-#### `beforeCaptureTransaction`
+### `beforeCaptureTransaction`
 
 The event that is triggered before a payment transaction is captured.
 
@@ -900,7 +908,7 @@ Event::on(
 );
 ```
 
-#### `afterCaptureTransaction`
+### `afterCaptureTransaction`
 
 The event that is triggered after a payment transaction is captured.
 
@@ -923,7 +931,7 @@ Event::on(
 );
 ```
 
-#### `beforeRefundTransaction`
+### `beforeRefundTransaction`
 
 The event that is triggered before a transaction is refunded.
 
@@ -945,7 +953,7 @@ Event::on(
 );
 ```
 
-#### `afterRefundTransaction`
+### `afterRefundTransaction`
 
 The event that is triggered after a transaction is refunded.
 
@@ -967,7 +975,7 @@ Event::on(
 );
 ```
 
-#### `beforeProcessPaymentEvent`
+### `beforeProcessPaymentEvent`
 
 The event that is triggered before a payment is processed.
 
@@ -1001,7 +1009,7 @@ Event::on(
 );
 ```
 
-#### `afterProcessPaymentEvent`
+### `afterProcessPaymentEvent`
 
 The event that is triggered after a payment is processed.
 
@@ -1033,7 +1041,7 @@ Event::on(
 );
 ```
 
-#### `deletePaymentSource`
+### `deletePaymentSource`
 
 The event that is triggered when a payment source is deleted.
 
@@ -1056,7 +1064,7 @@ Event::on(
 );
 ```
 
-#### `beforeSavePaymentSource`
+### `beforeSavePaymentSource`
 
 The event that is triggered before a payment source is added.
 
@@ -1078,7 +1086,7 @@ Event::on(
 );
 ```
 
-#### `afterSavePaymentSource`
+### `afterSavePaymentSource`
 
 The event that is triggered after a payment source is added.
 
@@ -1101,7 +1109,7 @@ Event::on(
 );
 ```
 
-#### `afterSaveTransaction`
+### `afterSaveTransaction`
 
 The event that is triggered after a transaction has been saved.
 
@@ -1124,7 +1132,7 @@ Event::on(
 );
 ```
 
-#### `afterCreateTransaction`
+### `afterCreateTransaction`
 
 The event that is triggered after a transaction has been created.
 
@@ -1147,9 +1155,9 @@ Event::on(
 );
 ```
 
-### Subscription Events
+## Subscription Events
 
-#### `afterExpireSubscription`
+### `afterExpireSubscription`
 
 The event that is triggered after a subscription has expired.
 
@@ -1172,7 +1180,7 @@ Event::on(
 );
 ```
 
-#### `beforeCreateSubscription`
+### `beforeCreateSubscription`
 
 The event that is triggered before a subscription is created.
 
@@ -1203,7 +1211,7 @@ Event::on(
 );
 ```
 
-#### `afterCreateSubscription`
+### `afterCreateSubscription`
 
 The event that is triggered after a subscription is created.
 
@@ -1235,7 +1243,7 @@ Event::on(
 Since a subscription may be suspended at creation due to payment issues, you may want to check subscription properties like `hasStarted` or `isSuspended` before taking further action.
 :::
 
-#### `beforeReactivateSubscription`
+### `beforeReactivateSubscription`
 
 The event that is triggered before a subscription gets reactivated.
 
@@ -1260,7 +1268,7 @@ Event::on(
 );
 ```
 
-#### `afterReactivateSubscription`
+### `afterReactivateSubscription`
 
 The event that is triggered after a subscription gets reactivated.
 
@@ -1283,7 +1291,7 @@ Event::on(
 );
 ```
 
-#### `beforeSwitchSubscriptionPlan`
+### `beforeSwitchSubscriptionPlan`
 
 The event that is triggered before a subscription is switched to a different plan.
 
@@ -1316,7 +1324,7 @@ Event::on(
 );
 ```
 
-#### `afterSwitchSubscriptionPlan`
+### `afterSwitchSubscriptionPlan`
 
 The event that is triggered after a subscription gets switched to a different plan.
 
@@ -1347,7 +1355,7 @@ Event::on(
 );
 ```
 
-#### `beforeCancelSubscription`
+### `beforeCancelSubscription`
 
 The event that is triggered before a subscription is canceled.
 
@@ -1375,7 +1383,7 @@ Event::on(
 );
 ```
 
-#### `afterCancelSubscription`
+### `afterCancelSubscription`
 
 The event that is triggered after a subscription gets canceled.
 
@@ -1401,7 +1409,7 @@ Event::on(
 );
 ```
 
-#### `beforeUpdateSubscription`
+### `beforeUpdateSubscription`
 
 The event that is triggered before a subscription gets updated. Typically this event is fired when subscription data is updated on the gateway.
 
@@ -1423,7 +1431,7 @@ Event::on(
 );
 ```
 
-#### `receiveSubscriptionPayment`
+### `receiveSubscriptionPayment`
 
 The event that is triggered when a subscription payment is received.
 
@@ -1452,9 +1460,9 @@ Event::on(
 );
 ```
 
-### Mail Events
+## Other Events
 
-#### `beforeSendEmail`
+### `beforeSendEmail`
 
 The event that is triggered before an email is sent out.
 
@@ -1489,7 +1497,7 @@ Event::on(
 );
 ```
 
-#### `afterSendEmail`
+### `afterSendEmail`
 
 The event that is triggered after an email has been sent out.
 
@@ -1521,7 +1529,7 @@ Event::on(
 );
 ```
 
-#### `beforeSaveEmail`
+### `beforeSaveEmail`
 
 The event that is triggered before an email is saved.
 
@@ -1545,7 +1553,7 @@ Event::on(
 );
 ```
 
-#### `afterSaveEmail`
+### `afterSaveEmail`
 
 The event that is triggered after an email is saved.
 
@@ -1569,7 +1577,7 @@ Event::on(
 );
 ```
 
-#### `beforeDeleteEmail`
+### `beforeDeleteEmail`
 
 The event that is triggered before an email is deleted.
 
@@ -1591,7 +1599,7 @@ Event::on(
 );
 ```
 
-#### `afterDeleteEmail`
+### `afterDeleteEmail`
 
 The event that is triggered after an email is deleted.
 
@@ -1613,9 +1621,7 @@ Event::on(
 );
 ```
 
-### PDF Events
-
-#### `beforeRenderPdf`
+### `beforeRenderPdf`
 
 The event that is triggered before an order’s PDF is rendered.
 
@@ -1630,14 +1636,14 @@ Event handlers can customize PDF rendering by modifying several properties on th
 | `pdf`       | `null` by default, can optionally be used to supply your own PDF string rather than the one Commerce would generate |
 
 ```php
-use craft\commerce\events\PdfRenderEvent;
+use craft\commerce\events\PdfEvent;
 use craft\commerce\services\Pdfs;
 use yii\base\Event;
 
 Event::on(
     Pdfs::class,
     Pdfs::EVENT_BEFORE_RENDER_PDF,
-    function(PdfRenderEvent $event) {
+    function(PdfEvent $event) {
         // Modify `$event->order`, `$event->option`, `$event->template`,
         // and `$event->variables` to customize what gets rendered into a PDF;
         // or render your own PDF and set its string on `$event->pdf`
@@ -1650,32 +1656,32 @@ Event::on(
 If you provide your own PDF string, Commerce will skip its own rendering and [`afterRenderPdf`](#afterrenderpdf) will not be triggered.
 :::
 
-#### `afterRenderPdf`
+### `afterRenderPdf`
 
 The event that is triggered after an order’s PDF has been rendered by Commerce.
 
 Event handlers can override Commerce’s PDF generation by setting the `pdf` property on the event to a custom-rendered PDF string. The event properties will be the same as those from `beforeRenderPdf`, but `pdf` will contain a rendered PDF string and is the only one for which setting a value will make any difference for the resulting PDF output.
 
 ```php
-use craft\commerce\events\PdfRenderEvent;
+use craft\commerce\events\PdfEvent;
 use craft\commerce\services\Pdfs;
 use yii\base\Event;
 
 Event::on(
     Pdfs::class,
     Pdfs::EVENT_AFTER_RENDER_PDF,
-    function(PdfRenderEvent $event) {
+    function(PdfEvent $event) {
         // Add a watermark to the PDF or forward it to the accounting department
         // ...
     }
 );
 ```
-#### `beforeSavePdf`
+### `beforeSavePdf`
 
-The event that is triggered before a PDF’s configuration is saved.
+The event that is triggered before a PDF is saved.
 
 ```php
-use craft\commerce\events\PdfEvent;
+use craft\commerce\events\PdfSaveEvent;
 use craft\commerce\services\Pdfs;
 use craft\commerce\models\Pdf;
 use yii\base\Event;
@@ -1683,7 +1689,7 @@ use yii\base\Event;
 Event::on(
     Pdfs::class,
     Pdfs::EVENT_BEFORE_SAVE_PDF,
-    function(PdfEvent $event) {
+    function(PdfSaveEvent $event) {
         // @var Pdf $pdf
         $pdf = $event->pdf;
         // @var bool $isNew
@@ -1693,12 +1699,12 @@ Event::on(
 );
 ```
 
-#### `afterSavePdf`
+### `afterSavePdf`
 
-The event that is triggered after a PDF’s configuration is saved.
+The event that is triggered after a PDF is saved.
 
 ```php
-use craft\commerce\events\PdfEvent;
+use craft\commerce\events\PdfSaveEvent;
 use craft\commerce\services\Pdfs;
 use craft\commerce\models\Pdf;
 use yii\base\Event;
@@ -1706,7 +1712,7 @@ use yii\base\Event;
 Event::on(
     Pdfs::class,
     Pdfs::EVENT_AFTER_SAVE_PDF,
-    function(PdfEvent $event) {
+    function(PdfSaveEvent $event) {
         // @var Pdf $pdf
         $pdf = $event->pdf;
         // @var bool $isNew
@@ -1716,9 +1722,7 @@ Event::on(
 );
 ```
 
-### Product Types
-
-#### `beforeSaveProductType`
+### `beforeSaveProductType`
 
 The event that is triggered before a product type is saved.
 
@@ -1741,7 +1745,7 @@ Event::on(
 );
 ```
 
-#### `afterSaveProductType`
+### `afterSaveProductType`
 
 The event that is triggered after a product type has been saved.
 
@@ -1764,9 +1768,7 @@ Event::on(
 );
 ```
 
-### Purchasables
-
-#### `registerPurchasableElementTypes`
+### `registerPurchasableElementTypes`
 
 The event that is triggered for registration of additional purchasables.
 
@@ -1786,7 +1788,27 @@ Event::on(
 );
 ```
 
-#### `purchasableAvailable`
+### `registerAvailableShippingMethods`
+
+The event that is triggered for registration of additional shipping methods.
+
+This example adds an instance of `MyShippingMethod` to the event object’s `shippingMethods` array:
+
+```php
+use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
+use craft\commerce\services\ShippingMethods;
+use yii\base\Event;
+
+Event::on(
+    ShippingMethods::class,
+    ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS,
+    function(RegisterAvailableShippingMethodsEvent $event) {
+        $event->shippingMethods[] = MyShippingMethod::class;
+    }
+);
+```
+
+### `purchasableAvailable`
 
 The event that’s triggered when determining whether a purchasable should be available for a given current user and cart.
 
@@ -1849,28 +1871,6 @@ Event::on(
             // Prevent users in group ID 1 from being able to ship this purchasable
             $event->isShippable = $event->is && !$user->isInGroup(1);
         }
-    }
-);
-```
-
-### Shipping
-
-#### `registerAvailableShippingMethods`
-
-The event that is triggered for registration of additional shipping methods.
-
-This example adds an instance of `MyShippingMethod` to the event object’s `shippingMethods` array:
-
-```php
-use craft\commerce\events\RegisterAvailableShippingMethodsEvent;
-use craft\commerce\services\ShippingMethods;
-use yii\base\Event;
-
-Event::on(
-    ShippingMethods::class,
-    ShippingMethods::EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS,
-    function(RegisterAvailableShippingMethodsEvent $event) {
-        $event->shippingMethods[] = MyShippingMethod::class;
     }
 );
 ```

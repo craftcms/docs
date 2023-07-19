@@ -146,10 +146,6 @@ Any time you’re working with PHP, [PhpStorm](https://www.jetbrains.com/phpstor
 
 DDEV comes [pre-configured with xdebug](https://ddev.readthedocs.io/en/stable/users/debugging-profiling/step-debugging/), and can be connected to your IDE of choice to support breakpoints and step-debugging.
 
-#### Debug Toolbar
-
-Yii’s built-in [debug toolbar](repo:yiisoft/yii2-debug) is invaluable, especially while troubleshooting database queries, [events](events.md), and other performance issues.
-
 #### Composer
 
 If your journey with Craft so far has not involved [Composer](https://getcomposer.org), certain concepts (like namespacing and auto-loading) may present additional difficulty. Consider reviewing our article on using the [starter project](kb:using-the-starter-project), and try running [updates](../updating.md#composer) or installing a plugin with Composer.
