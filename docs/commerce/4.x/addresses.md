@@ -212,7 +212,7 @@ It is also possible to set both addresses to save by using the `saveAddressesOnO
 ```
 
 ::: tip
-The save address properties are only appropriate for logged-in users that have created addresses directly on the cart. Setting these options to `true` if the user selected an address from their address book has no effect.
+The `saveAddress*` properties are only applicable to logged-in users who created addresses directly on the cart. Setting these options to `true` if the user selected an address from their [address book](#auto-fill-from-address-book) has no effect.
 :::
 
 #### Auto-fill from Address Book
