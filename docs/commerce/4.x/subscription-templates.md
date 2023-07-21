@@ -29,7 +29,7 @@ This example creates a form for each available plan, posting the selection to th
 
     {% set paymentSources = craft.commerce.
       getPaymentSources().
-      getAllGatewayPaymentSourcesByUserId(
+      getAllGatewayPaymentSourcesByCustomerId(
         plan.getGateway().id,
         currentUser.id ?? null
       )
