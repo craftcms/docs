@@ -7,6 +7,8 @@ Variants are added to a _cart_ that can be completed to become an _order_. Carts
 
 When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce4:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
 
+Typically, a cart is completed in response to a customer [making a payment](./making-payments.md)—or by satisfying other requirements you’ve defined through [configuration](./config-settings.md) or an [extension](./extend/README.md).
+
 ## Carts
 
 As a customer or store manager is building a cart, the goal is to maintain an up-to-date list of items with their relevant costs, discounts, and promotions. For this reason, the cart will be recalculated each time a change is made.
