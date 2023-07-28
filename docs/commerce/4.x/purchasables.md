@@ -6,7 +6,7 @@ The core of anything sold with Commerce is a purchasable, a custom [element type
 
 Every purchasable is destined to become a line item, which happens when the purchasable is added to a cart. This is an important shift where the purchasable describing an item’s content and available options becomes a line item in an order.
 
-When a line item is populated from a purchasable, a JSON shapshot is saved on that line item. The snapshot provides a permanent reference to whatever the purchasable looked like in that moment, regardless of how products or variations change over time. In other words, the details in the snapshot will persist regardless of any store changes during or after the checkout process.
+When a line item is populated from a purchasable, a JSON snapshot is saved on that line item. The snapshot provides a permanent reference to whatever the purchasable looked like in that moment, regardless of how products or variations change over time. In other words, the details in the snapshot will persist regardless of any store changes during or after the checkout process.
 
 <toggle-tip title="Example Snapshot">
 

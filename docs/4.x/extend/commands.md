@@ -206,7 +206,7 @@ Event::on(
 Internally, Craft keeps console feedback consistent with a suite of helper methods <Since ver="4.0.0" feature="Console command formatting tools" /> provided by <craft4:craft\console\ControllerTrait>.
 
 - **Success** — Output a message with a ✅ icon: `$this->success('Done!');`
-- **Failure** — Output a message prefixed with an `X`: `$this->success('Something went wrong.');`
+- **Failure** — Output a message prefixed with an `X`: `$this->failure('Something went wrong.');`
 - **Tips** — Output a message with a 💡 icon: `$this->tip('Try this, next!');`
 - **Warning** — Output a message with a ⚠️ icon: `$this->warning('Check your input and try again.');`
 - **Generic “Note”** — Output a message with a custom icon or prefix: `$this->note('Eat your vegetables!', '🥬 ');`

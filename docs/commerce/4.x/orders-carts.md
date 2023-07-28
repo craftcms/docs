@@ -13,9 +13,9 @@ As a customer or store manager is building a cart, the goal is to maintain an up
 
 Once a cart is completed, however, it becomes an [order](#orders) that represents choices explicitly finalized by whoever completed the cart. The order’s behavior changes slightly at this point: the customer will no longer be able to make edits, and changes made by a store manager will not automatically trigger [recalculation](#recalculating-orders).
 
-Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last hour, and _inactive_ carts older than an hour that are likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](config-settings.md#activeCartDuration) setting.)
+Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last hour, and _inactive_ carts older than an hour that are likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](config-settings.md#activecartduration) setting.)
 
-Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](config-settings.md#purgeInactiveCarts) and [`purgeInactiveCartsDuration`](config-settings.md#purgeInactiveCartsDuration) settings.
+Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](config-settings.md#purgeinactivecarts) and [`purgeInactiveCartsDuration`](config-settings.md#purgeinactivecartsduration) settings.
 
 Let’s go over a few common actions you may want to perform on a cart:
 
@@ -265,7 +265,7 @@ The `note` parameter is not part of a line item’s uniqueness; it will always b
 
 Each line item includes several totals:
 
-- **lineItem.subtotal** is the sum of the line item’s `qty` and `salePrice`.
+- **lineItem.subtotal** is the product of the line item’s `qty` and `salePrice`.
 - **lineItem.adjustmentsTotal** is the sum of each of the line item’s adjustment `amount` values.
 - **lineItem.total** is the sum of the line item’s `subtotal` and `adjustmentsTotal`.
 
@@ -281,7 +281,7 @@ Each method will store any errors in the session’s error flash data (`craft.ap
 If the desired cart belongs to a user, that user must be logged in to load it into a browser cookie.
 :::
 
-The [`loadCartRedirectUrl`](config-settings.md#loadCartRedirectUrl) setting determines where the customer will be sent by default after the cart’s loaded.
+The [`loadCartRedirectUrl`](config-settings.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart’s loaded.
 
 #### Loading a Cart with a URL
 

@@ -113,6 +113,7 @@ Global set queries support the following parameters:
 | [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft4:craft\elements\GlobalSet) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                       |
 | [dateCreated](#datecreated)               | Narrows the query results based on the global sets’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the global sets’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
@@ -222,6 +223,15 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 

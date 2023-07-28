@@ -321,6 +321,7 @@ Entry queries support the following parameters:
 | [before](#before)                         | Narrows the query results to only entries that were posted before a certain date.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                       |
 | [dateCreated](#datecreated)               | Narrows the query results based on the entries’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the entries’ last-updated dates.
 | [descendantDist](#descendantdist)         | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [descendantOf](#descendantof).
@@ -693,6 +694,15 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 
