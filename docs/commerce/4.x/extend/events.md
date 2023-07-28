@@ -1814,7 +1814,7 @@ If the purchasable becomes unavailable after being added to the cart, an [order 
 
 The event that is triggered retrieving the list of purchasables for the add a line item feature on the order edit page.
 
-This example adds a condition to the query to only return purchasables with a SKU that contains `foo`
+This example adds a condition to the query to only return purchasables with a SKU that contains `foo`:
 
 ```php
 use craft\commerce\controllers\OrdersController;
