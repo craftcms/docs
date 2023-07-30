@@ -710,7 +710,7 @@ $popularAuthors = craft\elements\Entry::find()
 Craft prepares two queries when fetching elements (a main query and a “subquery”) and applies `JOIN`s to both, so that you can use the tables for filtering _and_ for selections. Read more about the architecture of element queries in the [extension documentation](./extend/element-types.md#element-query-class).
 
 ::: warning
-Adding columns to your selection from other tables may cause errors when populating elements, as they will not have a corresponding class property. Call `asArray()` to return your results as a plain associative array, or consider [attaching a `Behavior`](./extend/extending-system-components.md#behaviors).
+Adding columns to your selection from other tables may cause errors when populating elements, as they will not have a corresponding class property. Call `asArray()` to return your results as a plain associative array, or consider [attaching a `Behavior`](./extend/behaviors.md).
 :::
 
 ### Conditions
