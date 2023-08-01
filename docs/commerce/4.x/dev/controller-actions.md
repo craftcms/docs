@@ -17,12 +17,13 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [cart/complete](#post-cart-complete) | Completes an order without payment.
 <badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
 <badge vertical="baseline" type="verb">GET/POST</badge> [cart/load-cart](#get-post-cart-load-cart) | Loads a cookie for the given cart.
+<badge vertical="baseline" type="verb">POST</badge> [cart/forget-cart](#get-post-cart-forget-cart) | Loads a cookie for the given cart.
 <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Manage a customer’s current [cart](../orders-carts.md).
-<badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
 <badge vertical="baseline" type="verb">GET</badge> [payments/complete-payment](#get-payments-complete-payment) | Processes customer’s return from an off-site payment.
 <badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
+<badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 
 [Address management](/4.x/addresses.md/#managing-addresses) actions are part of the main Craft documentation. Commerce also allows address information to be set directly on a cart via <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart).
 
@@ -162,25 +163,44 @@ State | `text/html` | `application/json`
 
 </span>
 
-### <badge vertical="baseline" type="verb">GET</badge> `downloads/pdf`
+### <badge vertical="baseline" type="verb">POST</badge> `cart/forget-cart` <Since ver="4.3.0" product="craftcms/commerce" feature="Forgetting carts" />
 
-Generates and sends an order [PDF](../pdfs.md) as a file.
+Detaches a cart from the current customer’s session. Read more about [managing carts](../orders-carts.md#loading-and-forgetting-carts).
+
+This action has no arguments and responses are only sent as `text/html`.
+
+#### Response
+
+<span class="croker-table">
+
+State | `text/html`
+--- | ---
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
+
+### <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
+
+Returns the [current cart](../orders-carts.md#fetching-a-cart) as JSON. A new cart cookie will be generated if one doesn’t already exist.
+
+The request must include `Accept: application/json` in its headers.
 
 #### Supported Params
 
 Param | Description
 ----- | -----------
-`number` | Required order number.
-`option` | Optional string value that’s passed to the PDF template.
-`pdfHandle` | Handle of a configured PDF to be rendered.
+`number` | Optional order number for a specific, existing cart.
+`forceSave` | Optionally set to `true` to force saving the cart.
 
 #### Response
 
-State | Output
------ | ------
-<check-mark label="Success" /> | File response with the rendered PDF and an `application/pdf` MIME type.
-<x-mark label="Failure" /> | Exceptions will be rendered with the normal [error template](/4.x/routing.md#error-templates).
+<span class="croker-table">
 
+State | `application/json`
+----- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+
+</span>
 
 ### <badge vertical="baseline" type="verb">POST</badge> `payment-sources/add`
 
@@ -299,3 +319,22 @@ State | `text/html` | `application/json`
 <x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); redirection defaults to the order’s `cancelUrl`. | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); special `url` property set to the order’s `cancelUrl`.
 
 </span>
+
+### <badge vertical="baseline" type="verb">GET</badge> `downloads/pdf`
+
+Generates and sends an order [PDF](../pdfs.md) as a file.
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`number` | Required order number.
+`option` | Optional string value that’s passed to the PDF template.
+`pdfHandle` | Handle of a configured PDF to be rendered.
+
+#### Response
+
+State | Output
+----- | ------
+<check-mark label="Success" /> | File response with the rendered PDF and an `application/pdf` MIME type.
+<x-mark label="Failure" /> | Exceptions will be rendered with the normal [error template](/4.x/routing.md#error-templates).
