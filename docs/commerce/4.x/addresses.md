@@ -382,7 +382,7 @@ To add support for setting default addresses, add this code to the [new address]
 ```
 
 ::: tip
-`checkbox` inputs only send a value when checked. In order to support _un_-setting a primary billing or shipping address, you must include the hidden input _before_ the visible checkbox, in the DOM. This ensures that the falsey `0` value is sent when the checkbox is unchecked, differentiating it from simply not sending a value at all (omitting `isPrimaryShipping` or `isPrimaryBilling` entirely makes no changes to the user’s current settings).
+`checkbox` inputs only send a value when checked. In order to support _un_-setting a primary billing or shipping address, you must include the hidden input _before_ the visible checkbox, in the DOM. This ensures that the falsy `0` value is sent when the checkbox is unchecked, differentiating it from simply not sending a value at all (omitting `isPrimaryShipping` or `isPrimaryBilling` entirely makes no changes to the user’s current settings).
 :::
 
 Similarly, you can send `makePrimaryBillingAddress` or `makePrimaryShippingAddress` params along with any `cart/update-cart` request to set an address attached to the cart as the customer’s primary billing or shipping address. Only addresses that retain their `sourceBillingAddressId` or `sourceShippingAddressId` can be configured this way.
