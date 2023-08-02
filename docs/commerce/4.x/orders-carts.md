@@ -415,7 +415,7 @@ You could then loop over the line items in those older carts and allow the custo
 </form>
 ```
 
-### Forgetting a Cart <Since ver="4.3.0" product="craftcms/commerce" feature="The ability to forget a cart" />
+### Forgetting a Cart <Since ver="4.3.0" product="Commerce" repo="craftcms/commerce" feature="The ability to forget a cart" />
 
 A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart. If the customer logs out, their cart will automatically be forgotten.
 

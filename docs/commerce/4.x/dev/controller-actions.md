@@ -163,7 +163,7 @@ State | `text/html` | `application/json`
 
 </span>
 
-### <badge vertical="baseline" type="verb">POST</badge> `cart/forget-cart` <Since ver="4.3.0" product="craftcms/commerce" feature="Forgetting carts" />
+### <badge vertical="baseline" type="verb">POST</badge> `cart/forget-cart` <Since ver="4.3.0" product="Commerce" repo="craftcms/commerce" feature="Forgetting carts" />
 
 Detaches a cart from the current customer’s session. Read more about [managing carts](../orders-carts.md#loading-and-forgetting-carts).
 
