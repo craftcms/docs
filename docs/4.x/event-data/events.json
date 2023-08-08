@@ -25700,7 +25700,7 @@
     {
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25742,7 +25742,7 @@
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25784,7 +25784,7 @@
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25826,7 +25826,7 @@
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25868,7 +25868,7 @@
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25910,7 +25910,7 @@
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25952,7 +25952,7 @@
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25994,7 +25994,7 @@
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -26036,7 +26036,7 @@
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
