@@ -42,6 +42,10 @@ The address field layout has additional native (but optional) fields for a handf
 
 For compatibility and localization, core address components (aside from the Country Code) can’t be separated from one another in the field layout.
 
+### Config Options
+
+You may set a default country for new addresses via the <config4:defaultCountryCode> setting. <Since ver="4.5.0" feature="Setting a default country code for addresses" />
+
 ## Querying Addresses
 
 You can fetch addresses in your templates or PHP code using an [AddressQuery](craft4:craft\elements\db\AddressQuery).
