@@ -22,7 +22,7 @@ Table fields have the following settings:
 :   Define the default row and column values for new instances of the field.
 
 **Static Rows**
-:   Choose whether rows can be managed by the author, or if the table should be locked to only what is defined in **Default Values**. Use the **Row Heading** column type to create fixed labels.
+:   Choose whether rows can be managed by the author, or if the table should include only the rows defined in **Default Values**. Use the **Row Heading** column type to create read-only labels for each row, and clear all **Column Heading** fields to remove the table’s header.
 
 **Min Rows**
 :   The _minimum_ number of rows allowed.
@@ -37,7 +37,7 @@ Table fields’ appearance and available controls depends on their configuration
 - **New elements** show the rows as defined by the **Default Values** setting.
 - **Existing elements** will display an empty table. (An “existing element” is one that was created prior to the field being added to its field layout.)
 
-Fields that use the **Static Rows** setting will _always_ display the rows defined in the field’s settings, but the values of each cell will still be determined by the stored data (or the defaults, for fresh elements).
+Fields that use the **Static Rows** setting will _always_ display the rows defined in the field’s settings, but the values of each cell will still be determined by the stored data—or the defaults, for fresh elements. **Row Heading** columns are never editable.
 
 ::: tip
 The appearance of a table field in an element editor will be identical to the table shown in the **Default Values** setting.
