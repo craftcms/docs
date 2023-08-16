@@ -1,24 +1,24 @@
 # Entries
 
-Entries hold the content that you want to display on your web pages. Each entry has an Author, a Post Date, an Expiration Date (if desired), a status (enabled or disabled), and of course, content.
+Entries are the primary container for content you want to display on your web pages. Each entry has _Title_, _Author_, a _Post Date_, an _Expiration Date_ (if desired), a _Status_ (enabled or disabled), and—like other [element types](elements.md)—flexible content defined via [custom fields](fields.md). Also like other elements, entries can have their own [URLs](#entry-uri-formats), or be fetched from anywhere via [element queries](#querying-entries).
 
 You can also create drafts of entries that live alongside the current live version of the entry.
 
-Typically each entry will have a stake in its own primary URL on your site, though Craft can fetch any entry from anywhere if your template needs it.
+Entries are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft4:craft\elements\Entry>.
 
 ## Sections
 
 Before you can create entries, you must create Sections to contain them. In each Section you can define the following:
 
-- Whether entries in the section have URLs
-- What the entries’ URLs should look like
-- Which template should get loaded if an entry’s URL is requested
-- What types of entries should be available in the section, and which fields each of those entry types should have
+- Whether entries in the section have URLs;
+- What the entries’ URLs should look like;
+- Which template should get loaded if an entry’s URL is requested;
+- What types of entries should be available in the section, and which fields each of those [entry types](#entry-types) should have;
 
-If you’re using Craft with multiple sites then you can also define in your Section:
+If your project has multiple [sites](sites.md), your Section can define these additional settings:
 
-- Which sites’ entries in the section should target
-- Which sites are enabled by default for new entries
+- Which sites entries in the section should target;
+- Which sites are enabled by default when creating new entries;
 
 To create a new section, go to **Settings** → **Sections** and choose **New Section**.
 
@@ -226,9 +226,9 @@ Conditionals are also fair game. There’s no shortcut syntax for those, so if y
 
 ## Editing Entries
 
-If you have at least one section, there will be an **Entries** menu item in the primary control panel navigation. Clicking on it will take you to the entry index. From there you can navigate to the entry you wish to edit, or create a new one.
+If you have at least one section, there will be an **Entries** menu item in the primary control panel navigation. Clicking on it will take you to the entry [index](elements.md#indexes). From there, you can navigate to the entry you wish to edit, or create a new one.
 
-You can perform the following actions from the Edit Entry page:
+Depending on your section’s settings, can perform some or all of the following actions from any entry’s edit screen:
 
 - Choose the entry type (if there’s at least two to choose from)
 - Edit the entry’s title
