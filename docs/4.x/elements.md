@@ -1,6 +1,6 @@
 # Elements
 
-An _element_ is the most basic unit of content in Craft. Elements provide smart management, routing, and querying interfaces for users and developers.
+An _element_ is the most basic unit of content in Craft. Elements provide smart management, routing, and querying interfaces for users and developers. Each [type](#types) of element has some unique capabilities, but they’re all built on top of a set of [common features](#common-features).
 
 ## Types
 
@@ -8,8 +8,8 @@ In the control panel, you’ll encounter the eight _element types_ common to all
 
 - [**Assets**](assets.md) store files that are uploaded to a volume.
 - [**Categories**](categories.md) are taxonomies that resemble folder structures and can be nested.
-- [**Entries**](entries.md) are records that can have drafts, revisions, and live previews. They can exist as one-offs called “Singles,” ordered by one or more attributes in “Channels,” or organized hierarchically as “Structures.”
-- [**Global Sets**](globals.md) are floating bits of content that aren’t tied to any particular page or other piece of content, ideal for bits of information you might want to show on every page of your site.
+- [**Entries**](entries.md) are records that can have drafts, revisions, and live previews. They can exist as one-offs called _singles_, as _channels_ ordered by one or more attributes, or as hierarchical _structures_.
+- [**Global Sets**](globals.md) are floating bits of content that aren’t tied to any particular page, but you may want to access anywhere.
 - [**Matrix Blocks**](matrix-blocks.md) are powerful, repeating groupings of content that belong to other element types via a field.
 - [**Tags**](tags.md) are flat taxonomies optimized for quick input and re-use.
 - [**Users**](users.md) are accounts for human beings with email addresses and permissions, organized into customizable groups.
