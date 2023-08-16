@@ -426,9 +426,9 @@ You can customize the settings passed to Guzzle when initializing these requests
 ```php
 return [
     'headers' => ['Foo' => 'Bar'],
-    'query'   => ['testing' => '123'],
-    'auth'    => ['username', 'password'],
-    'proxy'   => 'https://myproxy:1234',
+    'query' => ['testing' => '123'],
+    'auth' => ['username', 'password'],
+    'proxy' => 'https://myproxy:1234',
 ];
 ```
 
