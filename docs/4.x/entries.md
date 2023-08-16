@@ -315,7 +315,7 @@ Your drafts may be visible to (and editable by) other users! While an auto-saved
 
 While Craft’s auto-saving behavior creates a provisional draft from the canonical entry, edits to an existing, explicitly-saved draft are saved directly to that draft—in other words, Craft doesn’t create drafts for another draft!
 
-When your edits are ready to be published, press **Apply draft**. Craft merges 
+When your edits are ready to be published, press **Apply draft** to merge the changes into the canonical entry.
 
 ### Revisions
 
