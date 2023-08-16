@@ -10,7 +10,10 @@ Assets are organized into **volumes**, each of which sits on top of a [filesyste
 
 When setting up a volume, you will be asked to create its underlying filesystem, as well.
 
-<BrowserShot url="https://my-craft-project.ddev.site/admin/assets/volumes/new" :link="false" caption="You can create a filesystem without leaving the volume screen.">
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/assets/volumes/new"
+  :link="false"
+  caption="You can create a filesystem without leaving the volume screen.">
 <img src="./images/assets-new-volume-fs.png" alt="Screenshot of the volume settings screen in Craft with a slide-out for filesystem settings">
 </BrowserShot>
 
