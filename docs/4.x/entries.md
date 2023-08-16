@@ -166,7 +166,46 @@ The targets will also be available within **Preview**.
 
 #### Previewing Decoupled Front Ends
 
-If your site’s front end lives outside of Craft, for example as a Vue or React app, you can still support previewing drafts and revisions with **Preview** or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever your <config4:tokenParam> config setting is set to). If it’s in the URL, then you will need to pass that same token in the Craft API request that loads the page content. This token will cause the API request to respond with the correct content based on what’s actually being previewed.
+If your site’s front end lives outside of Craft (e.g. as a Vue or React app), you can still support previewing drafts and revisions with **Preview** or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever the <config4:tokenParam> setting is). If it’s in the URL, then you will need to pass that same token in the request that loads the page content. This token will cause the API request to respond with the correct content based on what the token was created to preview.
+
+<Block label="Nuxt Example">
+
+Whether you are using the Element API plugin or the built-in [GraphQL](graphql.md) API, Craft automatically injects preview elements whenever they match the query being executed.
+
+To illustrate, suppose you were building a [Nuxt](https://nuxt.com/) application, and you used the [file-based routing scheme](https://nuxt.com/docs/getting-started/routing) to render blog posts: you would create `pages/blog/[slug].vue`, then define a preview target in Craft with a similar path, like `@nuxt/blog/{slug}`.
+
+```vue
+<script setup>
+const route = useRoute();
+
+// Construct a GraphQL fragment using the route param:
+const query = `{
+  entry(slug: "${route.params.slug}") {
+    title
+    description
+  }
+}`;
+
+// Fetch the incoming token:
+const token = route.query.token;
+
+// Build the URL, with `query` and `token` params:
+const { data: gql } = await useFetch('https://my-project.ddev.site/api', {
+  params: { query, token },
+});
+</script>
+
+<template>
+  <article>
+    <h1>{{ gql.data.entry.title }}</h1>
+    <code>{{ gql.data.entry.uid }}</code>
+  </article>
+</template>
+```
+
+This assumes you have defined a [GraphQL API route](graphql.md#setting-up-your-api-endpoint) of `api`, and that the previewed entry will reliably have (at least) a slug set. When the `token` param is omitted, Nuxt ignores it and the GraphQL API will respond as though it were any other request for an entry with the given slug.
+
+</Block>
 
 You can pass the token via either a query string parameter named after your <config4:tokenParam> config setting, or an `X-Craft-Token` header.
 
