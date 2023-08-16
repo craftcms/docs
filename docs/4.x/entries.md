@@ -2,7 +2,7 @@
 
 Entries are the primary container for content you want to display on your web pages. Each entry has _Title_, _Author_, a _Post Date_, an _Expiration Date_ (if desired), a _Status_ (enabled or disabled), and—like other [element types](elements.md)—flexible content defined via [custom fields](fields.md). Also like other elements, entries can have their own [URLs](#entry-uri-formats), or be fetched from anywhere via [element queries](#querying-entries).
 
-You can also create drafts of entries that live alongside the current live version of the entry.
+Content authors also get access to a powerful [drafts and revisions](#editing-entries) system, allowing them to stage different versions of content and preview it alongside the current live entry.
 
 Entries are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft4:craft\elements\Entry>.
 
@@ -230,22 +230,96 @@ If you have at least one section, there will be an **Entries** menu item in the 
 
 Depending on your section’s settings, can perform some or all of the following actions from any entry’s edit screen:
 
-- Choose the entry type (if there’s at least two to choose from)
-- Edit the entry’s title
-- Edit the entry’s slug
-- Edit the entry’s custom field content
-- Choose the entry’s author (Pro edition only)
-- Choose the entry’s parent (if it’s within a Structure section)
-- Set the entry’s Post Date (when it will be considered published)
-- Set the entry’s Expiration Date (optional)
-- Choose whether the entry is enabled or not
-- Save changes to the entry
-- Save a new draft of the entry
-- Publish a draft
-- View past versions of the entry
+- Choose the entry type (if there is more than one to choose from);
+- Edit the entry’s **Title**, **Slug**, and [custom field](fields.md) values;
+- Choose the entry’s **Author** (Pro edition only);
+- Choose the entry’s **Parent** (if it’s within a [Structure](#structures) section);
+- Set the entry’s **Post Date** (when it will be considered published);
+- Set the entry’s **Expiration Date** (optional);
+- Choose whether the entry is **Enabled** or not (globally, and/or per-site);
+- Save changes to the entry;
+- Save a new [draft](#drafts) of the entry;
+- View [revisions](#revisions) of the entry;
+- Apply changes from a derivative (draft or revision);
 
 ::: tip
-If you leave the Post Date blank, Craft will automatically set it the first time an entry is saved as enabled.
+If you leave the **Post Date** blank, Craft will automatically set it the first time an entry is saved as enabled.
+:::
+
+### Entry Creation
+
+As soon as you click **New entry**, Craft creates an empty entry, and redirects you to its edit screen. This gives the system a place to auto-save your edits—effectively a new entry represented only as a [draft](#drafts). Internally, this is called a “fresh” entry.
+
+Once you add some content to a fresh entry (or explicitly choose **Save draft** from the **Create entry** menu), Craft marks the draft as having been saved, and will expose it in element indexes when using the **All** or **Draft** status options.
+
+::: tip
+Stray drafts (those that were created but never edited or explicitly saved) are automatically [garbage-collected](gc.md), respecting the <config4:purgeUnsavedDraftsDuration> setting.
+:::
+
+The entry editing lifecycle is designed to provide authors clear, actionable information about the state of their content, and to prevent unintended loss. Let’s look more closely at a few supporting features.
+
+### Drafts
+
+As soon as you alter a field on an entry, Craft auto-saves the changes as a _provisional draft_.
+
+![Screenshot of an entry with unsaved changes](./images/entries-edit-provisional.png)
+
+Subsequent edits are also saved to your provisional draft, and made available any time you view that entry in the control panel. Each user gets their own provisional draft, so your changes are private.
+
+Pressing the **Save** button applies changes from a provisional draft to its _canonical_ entry, and creates a _revision_ (if its section supports revisions).
+
+If you aren’t ready to publish your changes, you can instead press **Create a Draft** to save your work as a new _draft_. You may have as many regular drafts as you wish—and those drafts can have their own name and notes to help you track what you’re working on. The name of your current draft (if any) is shown at the top of the edit screen in the [revision](#revisions) menu.
+
+::: warning
+Your drafts may be visible to (and editable by) other users! While an auto-saved _provisional_ draft is always private, the visibility of _saved_ drafts is governed by users’ [permissions for the entry’s section](user-management.md#permissions).
+:::
+
+While Craft’s auto-saving behavior creates a provisional draft from the canonical entry, edits to an existing, explicitly-saved draft are saved directly to that draft—in other words, Craft doesn’t create drafts for another draft!
+
+When your edits are ready to be published, press **Apply draft**. Craft merges 
+
+### Revisions
+
+Any time you apply a draft (provisional or otherwise) to the canonical entry, Craft creates a _revision_. Revisions track which fields and attributes changed each time the canonical entry is updated, and provide a means to revert to previous versions of an entry. Drafts and revisions both have a `creator` property that stores what user initiated the update separately from the “author.”
+
+::: tip
+The revision menu only displays the ten most recent revisions. Older revisions are available via the **View all revisions &rarr;** link at the bottom of the menu.
+
+Any time a revision is created, Craft pushes a job into the [queue](queue.md) to ensure the oldest one(s) are pruned (if there are more revisions than allowed by the <config4:maxRevisions> setting).
+:::
+
+#### Discovering Revisions
+
+You can [find](#querying-entries) drafts and revisions of a specific entry using the [revisionOf()](#revisionof) and [draftOf()](#draftof) query params.
+
+### Trash
+
+All [elements](elements.md) support _soft-deletion_. When you delete an entry, its `dateDeleted` property is set to the current time, and Craft excludes it from results—unless the [`trashed` query param](#trashed) is used. Similarly, when restoring a deleted entry, its `dateDeleted` is set to `null`.
+
+::: warning
+Entries remain in the “trashed” state until they are manually hard-deleted from the control panel or their `dateDeleted` is longer ago than the <config4:softDeleteDuration> setting when [garbage collection](gc.md) runs.
+
+**The trash should not be used to temporarily remove content from your site.** Restoring trashed entries is only intended as a means to recover inadvertently-deleted content—instead, use the global or site-specific **Enabled** settings. Entries can remain disabled indefinitely.
+:::
+
+### Activity <Since ver="4.5.0" feature="Element editing activity indicators" />
+
+Craft keeps track of user activity on entries, and will push presence pips and notifications to anyone working with drafts of the same entry.
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/entries/blog/247"
+  :link="false"
+  caption="Other users editing the same entry will appear in the page header. TJ has corrected the page title in a draft.">
+<img src="./images/entries-edit-activity.png" alt="Screenshot of the entry edit screen with other active users">
+</BrowserShot>
+
+Notifications will appear in the bottom-left corner along with other flashes, and prompt you to reload the entry if it has changed since you opened it. This can play out in a couple ways:
+
+- If another user applied a draft to the canonical entry while you were working on a provisional draft, Craft will merge all non-conflicting edits into your provisional draft. In situations where you both made changes to a field, Craft keeps your changes.
+- If only the other user made a change, the page simply refreshes to show the new canonical entry content.
+
+::: tip
+Automatic merging of changes from canonical entries is nondestructive, and non-optional. Merging occurs just before an entry’s edit screen is viewed.
 :::
 
 ## Querying Entries
