@@ -66,6 +66,8 @@ Similarly, they can customize what columns appear in the table (and how the resu
 <img src="./images/element-index-view-options.png" alt="Customizing element index columns and sorting">
 </BrowserShot>
 
+If every field layout that would be used by an element in a source defines the same label override for a field, that label will appear in the column’s header. <Since ver="4.5.0" feature="Column header overrides on element indexes" /> When a consensus cannot be reached, the original field’s label is used. This most commonly applies when a source is limited to a single entry type, asset volume, category group, or other property that also defines field layouts.
+
 ### Structures
 
 [Entries](./entries.md) (using the _Structure_ section type) and [Categories](./categories.md) support a hierarchical view mode on their indexes. Elements in structures track their relative position among siblings, and can be easily relocated by dragging-and-dropping <Icon kind="move" /> their row in an index. Reordering is still possible, even when the structure is limited to a single level.
