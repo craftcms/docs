@@ -251,11 +251,20 @@ return [
     'aliases' => [
         '@web' => App::env('PRIMARY_SITE_URL'),
         '@shared' => App::env('SHARED_PATH'),
-        '@uploads' => '@shared/uploads',
+        '@uploads' => '@shared/web/uploads',
         '@assets' => '@web/uploads',
     ],
 ];
 ```
+
+Assuming `PRIMARY_SITE_URL` is defined as `https://my-project.ddev.site` and `SHARED_PATH` is `/var/www/releases/123/shared`, these aliases would evaluate to:
+
+- `@web`: `https://my-project.ddev.site`
+- `@shared`: `/var/www/releases/123/shared`
+- `@uploads`: `/var/www/releases/123/shared/web/uploads`
+- `@assets`: `https://my-project.ddev.site/uploads`
+
+Recursive aliases are preferred to basic string interpolation, because they are evaluated at the time of _use_ rather than _definition_. Aliases are only resolved at the beginning of a string.
 
 ### Environment Overrides
 
@@ -299,12 +308,12 @@ Whenever you see this UI, you can provide a valid alias or environment variable 
 - **General Settings:** System Name, Status, and Time Zone;
 - **Sites:** Base URLs;
 - **Sections:** Preview Target URIs;
-- **Asset Volumes:** Base URL, File System Path (Local only);
+- **Asset Filesystems:** Base URL, File System Path (Local only);
 - **Email:** System Email Address, Sender Name, Email Template path, SMTP credentials;
 
 Focusing one of these fields will immediately suggest some values. Type `$` followed by an environment variable’s name or `@` followed by an alias to narrow the suggestions and find your placeholder.
 
-Aliases have the extra benefit of allowing extra path segments, so `@web/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to define a specific `@uploads` alias and use that in the control panel, instead.
+Aliases have the extra benefit of allowing extra path segments, so `@web/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific `@uploads` alias](#aliases) and use that in the control panel, instead.
 
 ::: tip
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
