@@ -327,9 +327,9 @@ The revision menu only displays the ten most recent revisions. Older revisions a
 Any time a revision is created, Craft pushes a job into the [queue](queue.md) to ensure the oldest one(s) are pruned (if there are more revisions than allowed by the <config4:maxRevisions> setting).
 :::
 
-#### Discovering Revisions
+#### Querying for Revisions
 
-You can [find](#querying-entries) drafts and revisions of a specific entry using the [revisionOf()](#revisionof) and [draftOf()](#draftof) query params.
+You can [find](#querying-entries) drafts and revisions of a specific entry using the [draftOf()](#draftof) and [revisionOf()](#revisionof) query params.
 
 ### Trash
 
