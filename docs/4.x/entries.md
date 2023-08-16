@@ -153,8 +153,8 @@ Create additional preview targets for any other areas the entry might show up, s
 
 Preview target **URL Formats** support slightly different features than for **URI Formats**:
 
-- If you want to include the entry’s ID or UID in a preview target URL, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the draft’s;
-- You can use [environment variables and aliases](./config/README.md#aliases-and-environment-variables) in the preview target URL. These _do not_ get wrapped in curly braces on their own (e.g. `$NEWS_INDEX`), but aliases may be part of a larger  URI (e.g.`@headlessUrl/news/{slug}`);
+- If you want to include the entry’s ID or UID in a preview target URL, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the [draft](#drafts)’s;
+- You can use [environment variables and aliases](./config/README.md#control-panel-settings) in the preview target URL. These _do not_ get wrapped in curly braces on their own, as they are not part of the object template. Aliases may be part of a longer URI (e.g.`@headlessUrl/news/{slug}`), but environment variables can only be used on their own (e.g. `$NEWS_INDEX`);
 
 When an author is editing an entry from a section with custom preview targets, the **View** button will be replaced with a menu that lists the **Primary entry page** (if the section has an Entry URI Format), plus the names of each preview target.
 
