@@ -268,7 +268,7 @@ Recursive aliases are preferred to basic string interpolation, because they are 
 
 ### Environment Overrides
 
-Craft allows some settings to be defined directly from environment variables or PHP constants using the special `CRAFT_` prefix.
+Craft allows some settings to be defined directly from environment variables, PHP constants, or secrets using the special `CRAFT_` prefix.
 
 Add the prefix to any [general config](config-settings.md) (`CRAFT_`) or [database connection settings](db.md) (`CRAFT_DB_`) in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). For example:
 
