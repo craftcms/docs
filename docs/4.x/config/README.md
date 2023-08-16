@@ -75,7 +75,7 @@ return [
 ```
 
 ::: warning
-This is only recommended in situations where environment variable exfiltration is among the last attack surfaces. If your server supports any form of login (say, via SSH), this is _not_ a practical security measure!
+This is only recommended in situations where environment variable exfiltration is among the last attack surfaces. If your server supports any form of remote access (say, via SSH), this is _not_ a practical security measure!
 :::
 
 ## Setting and Resolving Options
