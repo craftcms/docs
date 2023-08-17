@@ -268,14 +268,14 @@ query Thumbnails {
       {
         "title": "Warm Springs",
         "alt": "Snow-dusted plateau.",
-        "url": "https://tutorial-two.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/8/warm-springs.jpg",
+        "url": "https://my-project.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/8/warm-springs.jpg",
         "width": 6000,
         "height": 4000
       },
       {
         "title": "Highway 26",
         "alt": "Winter scene near Warm Springs, Oregon",
-        "url": "https://tutorial-two.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/3/highway-26.jpg",
+        "url": "https://my-project.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/3/highway-26.jpg",
         "width": 6000,
         "height": 4000
       }
@@ -305,7 +305,7 @@ query Gallery {
     "asset": {
       "title": "Warm Springs",
       "alt": "Highway 26, south of Warm Springs, Oregon",
-      "url": "https://tutorial-two.ddev.site/uploads/images/_fullScreen/8/warm-springs.jpg",
+      "url": "https://my-project.ddev.site/uploads/images/_fullScreen/8/warm-springs.jpg",
       "width": 2560,
       "height": 1707
     }
