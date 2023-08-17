@@ -49,6 +49,9 @@ Allow Upscaling
 Quality
 :   Sets a quality or compression ratio for the transformed image, depending on the format of the target image. When left blank, the quality will be determined by the <config4:defaultImageQuality> config setting.
 
+Interlacing
+:   Specify an [interlacing](https://en.wikipedia.org/wiki/Interlacing_(bitmaps)) strategy for the pixels in raster images.
+
 Image Format
 :   Format for the transformed image.
 
