@@ -1,16 +1,30 @@
 # Globals
 
-Globals store content that is available globally throughout your templates. They’re a convenient way to make non-Entry content easily editable via the control panel.
+Globals store content that is available globally throughout your templates but is not tied to any one URL.
 
-Craft organizes globals into global sets. Each global set has its own [field layout](fields.md#field-layouts) using any of the existing fields or new fields.
+Craft organizes globals into global sets. Each global set has its own [field layout](fields.md#field-layouts) and can use any of the built-in or plugin-provided custom fields.
 
-To create a Global Set, go to **Settings** → **Globals**.
+To create a global get, go to **Settings** → **Globals**.
 
 If you have at least one Global Set, Craft will add a new “Globals” item to the main control panel navigation. Clicking this will take you to a page that lists all your global sets in a sidebar, as well as all of the fields associated with the selected global set in the main content area.
 
 ::: tip
 Unlike [entries](entries.md#entries), global sets don’t have the Live Preview feature, since they aren’t associated with any one particular URL.
 :::
+
+<Block label="Migrating to Singles">
+
+With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
+
+As part of that process, we introduced some console commands that can automate the conversion of categories, tags, and global sets to entries:
+
+```bash
+php craft entrify/global-set myGlobalSetHandle
+```
+
+You will be given an opportunity to migrate the global set into a new or existing [single](entries.md#singles). The **Title** field (and **Status** controls <Since ver="4.5.0" feature="Entry status control visibility setting" />) for the single’s new entry type will be disabled, to maintain parity with the legacy globals interface.
+
+</Block>
 
 ## Global Sets in Templates
 
