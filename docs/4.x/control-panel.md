@@ -217,7 +217,7 @@ Always check combo-box menus for more shortcuts.
 
 #### Group Selections
 
-Throughout the control panel, you will find groups of checkboxes or other focusable controls in a list of items. Ticking one checkbox, then holding <kbd>Shift</kbd> and clicking a second one will tick all the intermediate ones, as well. Element indexes are a great place to try this out—but it will also work on Matrix Blocks and
+Throughout the control panel, you will find groups of checkboxes or other focusable controls in a list of items. Ticking one checkbox, then holding <kbd>Shift</kbd> and clicking a second one will tick all the intermediate ones, as well. Element indexes are a great place to try this out—but it will also work on Matrix Blocks.
 
 ### Drag-and-Drop
 
