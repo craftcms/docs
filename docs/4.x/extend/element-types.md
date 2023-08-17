@@ -603,7 +603,7 @@ protected static function defineSources(string $context = null): array
             'criteria' => [
                 'currency' => 'usd',
             ],
-            // 
+            // Define a default sort attribute and direction:
             'defaultSort' => ['price', 'desc'],
         ],
     ];
@@ -619,6 +619,52 @@ The returned array can also be built dynamically. For example, [entries](../entr
 
 Consider hiding sources that the current user would not be able to access, based on their [permissions](#permissions).
 :::
+
+<Block label="Criteria vs. Conditions">
+
+You may combine the opaque `criteria` source option with the more transparent `defaultFilter`. <Since ver="4.5.0" feature="Default filters on sources" /> Default filters are constructed as [conditions](conditions.md), and allow users to tweak them after a source is loaded:
+
+```php
+use craft\elements\Entry;
+use craft\elements\conditions\DateUpdatedConditionRule;
+
+// ...
+
+$condition = Entry::createCondition();
+$condition->setConditionRules([
+    new DateUpdatedConditionRule([
+        'attributes' => [
+            // Keep in mind, these are just defaults!
+            // Users will be able to update them via the filter/condition UI.
+            'rangeType' => DateRange::TYPE_AFTER,
+            'periodValue' => 7,
+            'periodType' => DateRange::PERIOD_DAYS_AGO,
+        ],
+    ]),
+]);
+
+// ...
+
+return [
+    // ...
+    [
+        'key' => 'recent-edits',
+        'label' => 'Recently Edited',
+        'criteria' => [],
+        'defaultFilter' => $condition,
+        'defaultSort' => ['dateUpdated', 'desc'],
+    ],
+];
+```
+
+The applied conditions are _additive_, so:
+
+- Condition rules that get [exclusive control](craft4:craft\elements\conditions\ElementConditionRuleInterface::getExclusiveQueryParams()) will not be available to users when already present in the source’s `criteria`;
+- Users may not expand the visible results beyond what is defined in the source’s `criteria`;
+
+Default filters can also be used when registering sources via <craft4:craft\base\Element::EVENT_REGISTER_SOURCES>.
+
+</Block>
 
 ### Table Attributes
 
