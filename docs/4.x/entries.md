@@ -92,13 +92,15 @@ To create a new custom source, go to **Entries** → **Customize (<icon kind="se
 
 ### Entry URI Formats
 
-Channel and Structure sections can choose whether their entries should be assigned URLs in the system by filling in the **Entry URI Format** setting. Singles have a “URI” setting, but it is typically defined statically or omitted (if it doesn’t need its own URL).
+<Todo text="Another bunch of object template stuff that needs consolidation..." />
+
+Channel and structure sections can choose whether their entries should be assigned URLs in the system by filling in the **Entry URI Format** setting. Singles have a “URI” setting, but it is typically defined statically or omitted (if it doesn’t need its own URL).
 
 When Craft matches a request to an entry, its section’s designated **Template** is rendered. That template is automatically provided an `entry` variable, set to the resolved <craft4:craft\elements\Entry> object, and ready to output any of its attributes or custom field data.
 
-Entry URI Formats are tiny Twig templates, which get evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system.
+Entry URI Formats are tiny Twig templates, which get evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](routing.md) a request.
 
-The entry being saved is available to that **object template**—just like its main template—so something like this is possible:
+The entry being saved is available to that _object template_—just like its main template—so something like this is possible:
 
 ```twig
 blog/authors/{{ object.author.username }}/{{ object.slug }}
@@ -109,6 +111,12 @@ A shortcut syntax is also available if you are accessing simple properties on th
 ```twig
 blog/authors/{author.username}/{slug}
 ```
+
+::: tip
+There are some more tips for using object templates in the [title formatting](#dynamic-entry-titles) section.
+:::
+
+#### Hierarchical URIs
 
 Structure sections may benefit from nested paths, for child entries:
 
@@ -217,26 +225,33 @@ For live preview, you should also consider [enabling iFrame Resizer](config4:use
 
 ## Entry Types
 
-Both Channel and Structure sections let you define multiple types of entries using Entry Types.
+Both Channel and Structure sections let you define multiple “types” of entries using _entry types_. Singles only have one entry type
 
-You can manage your sections’ Entry Types by choosing **Edit Entry Types** link beside the section’s name in **Settings** → **Sections**. That’ll take you to the section’s entry type index. Choosing on an entry type’s name takes you to its settings page:
+You can manage your sections’ entry types by choosing **Edit Entry Types** link beside the section’s name in **Settings** → **Sections**. That’ll take you to the section’s entry type index. Choosing on an entry type’s name takes you to its settings page:
 
-![Entry Type Edit Settings](./images/sections-and-entries-entry-types.png)
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/sections/1/entry-types/1"
+  :link="false"
+  caption="Editing an entry type in the control panel.">
+  <img src="./images/sections-and-entries-entry-types.png" alt="Screenshot of entry type settings">
+</BrowserShot>
 
 Entry types have the following settings:
 
 - **Name** — The entry type’s name;
 - **Handle** — The entry type’s template-facing handle;
 - **Show the Title field?** — Whether a Title field is displayed for entries of this type, or the title should be [dynamically defined](#dynamic-entry-titles) from other properties via an object template;
+- **Title Translation Method** — Control how titles are [translated](#translation-settings) across sites and site groups.
+- **Slug Translation Method** — Control how slugs are [translated](#translation-settings) across sites and site groups.
 - **Title Field Label** — What the Title field label should be;
 
 ### Dynamic Entry Titles
 
-If you want your entries to have auto-generated titles (rather than requiring authors to enter them manually), you can uncheck the **Show the Title field?** checkbox. When you do, a new **Title Format** setting will appear, where you can define how the auto-generated titles are generated.
+If you want your entries’s titles to be auto-generated from a template (rather than requiring authors to enter them manually), you can uncheck the **Show the Title field?** checkbox. When you do, a new **Title Format** setting will appear.
 
-The Title Format is a full-blown Twig template (just like the **Entry URI Format** and preview target **URL Format** we looked, above), and it will get parsed whenever your entries are saved.
+The **Title Format** is a [Twig](./dev/twig-primer.md) template (just like the **Entry URI Format** and preview target **URL Format** we looked, above), and gets evaluated whenever entries with this type are saved.
 
-The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft4:craft\elements\Entry#public-properties) in two ways:
+The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft4:craft\elements\Entry#public-properties) and custom fields in two ways:
 
 1. normal Twig syntax: `{{ object.property }}`
 2. shortcut Twig syntax: `{property}`
@@ -248,22 +263,35 @@ If Craft finds any of these in your **Title Format**, it will replace the `{` wi
 You can use Twig filters in both syntaxes:
 
 ```twig
-{{ object.postDate|date('M j, Y') }}
-{postDate|date('M j, Y')}
+{# Long: #}
+Coupons (Valid through {{ object.expiryDate|date('M j, Y') }})
+
+{# Short: #}
+Coupons (Valid through {expiryDate|date('M j, Y')})
 ```
 
 Craft’s [global variables](dev/global-variables.md) are available to these templates as well:
 
 ```twig
-{{ now|date('Y-m-d') }}
-{{ currentUser.username }}
+Current Coupons (Last updated {{ now|date('Y-m-d') }})
+Current Coupons (Last updated by {{ currentUser.username }})
 ```
 
-Conditionals are also fair game. There’s no shortcut syntax for those, so if you want to use a conditional on one of the entry’s properties, you will need to reference it with the `object` variable:
+Logic is also supported, but there’s no syntactic sugar for control tags—any conditions in an object template require that you reference properties explicitly, with the `object` variable:
 
 ```twig
-{% if object.postDate %}{postDate|date('M j, Y')}{% else %}{{ now|date('M j, Y') }}{% endif %}
+{# Control tags: #}
+{% if object.expiryDate %}{expiryDate|date('M j, Y')}{% else %}{{ now|date('M j, Y') }}{% endif %}
+
+{# Ternary operator: #}
+{{ (object.expiryDate ?: now)|date('M j, Y') }}
 ```
+
+### Translation Settings
+
+Most localization behavior is determined by [section](#sections) and [field](fields.md) settings, but the translation of titles and slugs is governed by entry types.
+
+The available translation methods are covered in the [custom fields documentation](fields.md#translation-methods).
 
 ## Editing Entries
 
