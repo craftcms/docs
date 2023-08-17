@@ -42,6 +42,8 @@ Like [globals](./globals.md), singles don’t have an editable **Author**, **Pos
 
 ::: tip
 Singles have all the functionality of [globals](./globals.md), and can even be pre-loaded into global Twig variables with the <config4:preloadSingles> <Since ver="4.4.0" feature="Preloading singles entries" /> config setting.
+
+A single’s **Status** controls can be hidden with the **Show the Status field** setting in its sole **Entry Type**. <Since ver="4.5.0" feature="Hiding status fields for singles" />
 :::
 
 #### Channels
