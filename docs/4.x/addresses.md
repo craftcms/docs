@@ -859,7 +859,7 @@ This returns an array of [Country](https://github.com/commerceguys/addressing/bl
 #}
 ```
 
-Similarly, a repository of [subdivisions](https://github.com/commerceguys/addressing/blob/master/src/Subdivision/Subdivision.php) are available, hierarchically—with up to three levels, depending on how a given country is organized: _Administrative Area_ → _Locality_ → _Dependent Locality_.
+Similarly, a repository of subdivisions are available, hierarchically—with up to three levels, depending on how a given country is organized: _Administrative Area_ → _Locality_ → _Dependent Locality_.
 
 Expanding upon our previous example, we could output a nicely organized list of “administrative areas,” like this:
 
@@ -880,10 +880,12 @@ Expanding upon our previous example, we could output a nicely organized list of 
 </select>
 ```
 
-Either repository’s `getList()` method is a shortcut that returns only key-value pairs, suitable for our examples—it also accepts.
+Either repository’s `getList()` method is a shortcut that returns only key-value pairs, suitable for our examples—it also accepts an array of “parent” groups (beginning with country code) to narrow the subdivisions.
+
+You may supplement the subdivision data provided by the [upstream repository](https://github.com/commerceguys/addressing) by listening to the <craft4:craft\services\Addresses::EVENT_DEFINE_ADDRESS_SUBDIVISIONS> event in a plugin or module. Similarly, deeper customization of the required [fields](#fields-and-formatting) (and those fields’ [labels](#attribute-labels)) may require modifying the defaults via the [EVENT_DEFINE_USED_SUBDIVISION_FIELDS](craft4:craft\services\Addresses::EVENT_DEFINE_USED_SUBDIVISION_FIELDS) or [EVENT_DEFINE_FIELD_LABEL](craft4:craft\services\Addresses::EVENT_DEFINE_FIELD_LABEL) events. <Since ver="4.5.0" feature="Customizing address subdivision handling" />
 
 ::: tip
-Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and formatting!
+Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and [formatting](#fields-and-formatting!
 :::
 
 ## Fields and Formatting
