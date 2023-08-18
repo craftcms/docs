@@ -75,9 +75,9 @@ Asset field layouts can include the native **Alternative Text** <Poi label="1" t
 <img src="./images/assets-field-layout.png" />
 </BrowserShot>
 
-Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](./fields.md) values, attributes, or combination thereof.
+Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](./fields.md) values, attributes, or combination thereof. 
 
-We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier.
+We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier. The WCAG [advises against](https://www.w3.org/TR/2015/REC-ATAG20-20150924/Overview.html#gl_b23) automatically repairing alt text with “generic [or] irrelevant strings,” including the name of the file (which asset titles are generated from), so Craft omits the `alt` attribute when using `asset.getImg()` if no explicit text is available.
 
 **Alternative Text** is also displayed as a “transcript” beneath video previews, in the control panel.
 
@@ -210,7 +210,7 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 {# Display the thumbnail list #}
 <ul>
   {% for image in images %}
-    <li><img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"></li>
+    <li><img src="{{ image.getUrl('thumb') }}" alt="{{ image.alt }}"></li>
   {% endfor %}
 </ul>
 ```
