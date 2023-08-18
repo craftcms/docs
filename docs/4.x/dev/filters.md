@@ -167,7 +167,7 @@ By default, the current site’s language will be used when choosing ASCII chara
 
 ## `atom`
 
-Converts a date to an ISO-8601 timestamp (e.g. `2019-01-29T10:00:00-08:00`), which should be used for Atom feeds, among other things.
+Converts a date to an ISO-8601 timestamp (e.g. `2038-01-19T03:14:07+00:00`), which should be used for Atom feeds, among other things.
 
 ```twig
 {{ entry.postDate|atom }}
@@ -358,7 +358,7 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
 ```twig
 {{ entry.postDate|date }}
-{# Output: Dec 20, 1990 #}
+{# Output: Jan 19, 2038 #}
 ```
 
 #### Arguments
@@ -368,22 +368,22 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 :   You can customize how the date is presented by passing a [custom date format](https://www.php.net/manual/en/datetime.format.php), just like Twig’s core [`date`](https://twig.symfony.com/doc/3.x/filters/date.html) filter:
 
     ```twig
-    {{ now|date('m/d/Y') }}
-    {# Output: 12/20/1990 #}
+    {{ now|date('n/d/Y') }}
+    {# Output: 1/19/2038 #}
     ```
 
     Craft also provides some special format keywords that will output locale-specific date formats:
 
-    | Format               | Example                     |
-    | -------------------- | --------------------------- |
-    | `short`              | 12/20/1990                  |
-    | `medium` _(default)_ | Dec 20, 1990                |
-    | `long`               | December 20, 1990           |
-    | `full`               | Thursday, December 20, 1990 |
+    | Format               | Example                   |
+    | -------------------- | ------------------------- |
+    | `short`              | 1/19/2038                 |
+    | `medium` _(default)_ | Jan 19, 2038              |
+    | `long`               | January 19, 2038          |
+    | `full`               | Tuesday, January 19, 2038 |
 
     ```twig
     {{ entry.postDate|date('short') }}
-    {# Output: 12/20/1990 #}
+    {# Output: 1/19/2038 #}
     ```
 
 `locale`
@@ -392,7 +392,7 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
     ```twig
     {{ entry.postDate|date('short', locale='en-GB') }}
-    {# Output: 20/12/1990 #}
+    {# Output: 19/1/2038 #}
     ```
 
 `timezone`
@@ -401,14 +401,14 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
     ```twig
     {{ entry.postDate|date('Y-m-d H:i', timezone='UTC') }}
-    {# Output: 12/21/1990 20:00 #}
+    {# Output: 2038-01-19 03:14 #}
     ```
 
     Pass `false` to prevent the date from being converted to the system’s timezone:
 
     ```twig
     {{ entry.customDateFieldWithTimezone|date('Y-m-d H:i', timezone=false) }}
-    {# Output: 1990-12-21 04:00 #}
+    {# Output: 2038-01-18 19:14 #}
     ```
 
 ::: tip
@@ -421,7 +421,7 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
 ```twig
 {{ entry.postDate|datetime }}
-{# Output: Dec 20, 1990, 5:00:00 PM #}
+{# Output: Jan 19, 2038, 5:00:00 PM #}
 ```
 
 #### Arguments
@@ -431,17 +431,17 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
     ```twig
     {{ entry.postDate|datetime('short') }}
-    {# Output: 12/20/1990, 5:00 PM #}
+    {# Output: 1/19/2038, 5:00 PM #}
     ```
 
     Possible `format` values (in addition to any valid [PHP date format](https://www.php.net/manual/en/datetime.format.php)) are:
 
-    | Format               | Example                                        |
-    | -------------------- | ---------------------------------------------- |
-    | `short`              | 12/20/1990, 5:00 PM                            |
-    | `medium` _(default)_ | Dec 20, 1990, 5:00:00 PM                       |
-    | `long`               | December 20, 1990 at 5:00:00 PM PDT            |
-    | `full`               | Thursday, December 20, 1990 at 5:00:00 PM PDT  |
+    | Format               | Example                                     |
+    | -------------------- | ------------------------------------------- |
+    | `short`              | 1/19/2038, 3:14 AM                          |
+    | `medium` _(default)_ | Jan 19, 2038, 3:14:07 AM                    |
+    | `long`               | January 19, 2038 at 3:14:07 AM UTC          |
+    | `full`               | Tuesday, January 19, 2038 at 3:14:07 AM UTC |
 
 `locale`
 
@@ -449,7 +449,7 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
     ```twig
     {{ entry.postDate|datetime('short', locale='en-GB') }}
-    {# Output: 20/12/1990, 17:00 #}
+    {# Output: 19/01/2038, 3:14 #}
     ```
 
 `timezone`
@@ -458,14 +458,14 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
     ```twig
     {{ entry.postDate|datetime('short', timezone='UTC') }}
-    {# Output: 12/21/1990, 12:00 AM #}
+    {# Output: 1/19/2038, 3:14 AM #}
     ```
 
     Pass `false` to prevent the date from being converted to the system’s timezone:
 
     ```twig
     {{ entry.customDateFieldWithTimezone|date('short', timezone=false) }}
-    {# Output: 12/21/1990, 1:00 AM #}
+    {# Output: 1/18/2038, 7:14 PM #}
     ```
 
 ::: tip
@@ -1279,23 +1279,23 @@ Outputs the time of day for a timestamp or [DateTime](http://php.net/manual/en/c
 
 ```twig
 {{ entry.postDate|time }}
-{# Output: 10:00:00 AM #}
+{# Output: 3:14:07 AM #}
 ```
 
 Craft provides some special format keywords that will output locale-specific time formats:
 
 ```twig
 {{ entry.postDate|time('short') }}
-{# Output: 10:00 AM #}
+{# Output: 3:14 AM #}
 ```
 
 Possible `format` values are:
 
 | Format               | Example        |
-| -------------------- | -------------- |
-| `short`              | 5:00 PM        |
-| `medium` _(default)_ | 5:00:00 PM     |
-| `long`               | 5:00:00 PM PDT |
+| -------------------- |----------------|
+| `short`              | 3:14 AM        |
+| `medium` _(default)_ | 3:14:07 AM     |
+| `long`               | 3:14:07 AM UTC |
 
 The current application locale will be used by default. If you want to format the date and time for a different locale, use the `locale` argument:
 
