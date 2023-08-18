@@ -200,6 +200,29 @@ Event::on(
 
 Return values from handlers are ignored—instead, Craft expects that the handler modifies properties on the event object (or its sender). You may explicitly declare a `void` return type on handlers as a means to identify misuse within your own plugin, but the signature is not enforced.
 
+### Cloning Handlers
+
+Instance-level event handlers are _not_ copied to new instances when using PHP’s `clone()`. If you want to guarantee that your handlers survive this process, create a [behavior](behaviors.md#events) and attach that—behaviors _do_ get copied thanks to <craft4:craft\base\CloneFixTrait>, and any event handlers declared by <yii2:yii\base\Behavior::events()> are re-installed.
+
+Instead of maintaining a behavior for a single handler, you can use the built-in <craft4:craft\behaviors\EventBehavior> <Since ver="4.5.0" feature="EventBehavior proxy for cloned objects" /> as a proxy for registering handlers:
+
+```php
+use craft\behaviors\EventBehavior;
+use craft\elements\db\ElementQuery;
+use craft\elements\Entry;
+use craft\events\CancelableEvent;
+
+$query = Entry::find();
+
+$query->attachBehavior('myBehavior', new EventBehavior([
+    ElementQuery::EVENT_AFTER_PREPARE => function(CancelableEvent $event, ElementQuery $query) {
+        // ...
+    },
+], true));
+```
+
+The second argument to the `EventBehavior` constructor tells the behavior to mimic <craft4:craft\base\Event::once()> and will only invoke your handler once. All handlers are treated the same way, but you may mix one-time and continuous handlers by attaching multiple `EventBehavior` instances.
+
 ## Event Code Generator
 
 Select an event for more detail and a code snippet.
