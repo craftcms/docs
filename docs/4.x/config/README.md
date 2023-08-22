@@ -214,6 +214,10 @@ Make sure your key(s) are sufficiently unique! Craft reads your array of config 
 If the environment cannot be determined, your server’s hostname will be used.
 :::
 
+::: warning
+Do not combine fluent and multi-environment config in the same file. Merging fluent config models causes all previously-set values to be overwritten.
+:::
+
 ### Aliases
 
 Some settings and functions in Craft support [Yii aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases), which are most often used as placeholders for file system paths and URLs.
