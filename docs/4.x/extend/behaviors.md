@@ -93,9 +93,25 @@ $entry->detachBehavior('post');
 
 ### Events
 
-Behaviors can automatically bind [events](events.md) to their owners by defining an `events()` method and returning a map of event names (as keys) to methods (as values). This is a great way to collocate event handlers and functionality when they are already tightly coupled.
+Behaviors can automatically bind [events](events.md) to their owners by defining an `events()` method and returning a map of event names (as keys) to methods (as values). This is a great way to collocate event handlers and functionality when they are already tightly coupled:
 
-Read more about this feature in the [Yii guide](guide:concept-behaviors#handling-component-events).
+```php
+public function events()
+{
+    return [
+        Entry::EVENT_SET_ROUTE => [$this, 'defineRoute'],
+    ];
+}
+
+public function defineRoute(SetElementRouteEvent $event)
+{
+    $event->route = '...';
+}
+```
+
+Handlers registered in this way will only receive events emitted by the owner. If you need to respond to events on _all_ instances of a class, you will need to attach your behavior to every instance, or use a [class-level event listener](events.md#class-level-events).
+
+Read more about behaviors in the [Yii guide](guide:concept-behaviors#handling-component-events).
 
 ## Usage
 
