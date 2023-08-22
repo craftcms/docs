@@ -66,7 +66,7 @@ Craft will also respond to a handful of specific [PHP constants](#php-constants)
 
 ### Secrets
 
-You can store sensitive values that won’t leak into the process’s environment in a special “secrets” file. <Since ver="4.5.0" feature="Secrets file" /> The path to this file is determined by the `CRAFT_SECRETS_PATH` environment variable. When defined, Craft will attempt to include a file at that path (presumed to be a PHP script that `return`s an associative array), and checks it prior to resolving any environment variable or constant with <craft4:craft\helpers\App::env()>.
+You can store sensitive values that won’t leak into the process’s environment in a special “secrets” file. <Since ver="4.5.0" feature="Secrets file" /> The path to this file is determined by the [`CRAFT_SECRETS_PATH` environment variable or constant](#craft_secrets_path). When defined, Craft will attempt to include a file at that path (presumed to be a PHP script that `return`s an associative array), and checks it prior to resolving any environment variable or constant with <craft4:craft\helpers\App::env()>.
 
 ```php
 return [
@@ -75,6 +75,8 @@ return [
 ```
 
 ::: warning
+Even though secrets aren’t automatically loaded into the environment on every request, they can still be accessed via application helpers, Twig templates (like system messages), other PHP scripts, or anyone with direct filesystem access.
+
 This is only recommended in situations where environment variable exfiltration is among the last attack surfaces. If your server supports any form of remote access (say, via SSH), this is _not_ a practical security measure!
 :::
 
@@ -587,6 +589,15 @@ Can be set to `false` to prevent Craft from setting PHP’s [log_errors](https:/
 ```php
 // Don’t send PHP error logs to storage/logs/phperrors.log
 define('CRAFT_LOG_PHP_ERRORS', false);
+```
+
+### `CRAFT_SECRETS_PATH`
+
+The path to a [secrets](#secrets) file, whose values are _not_ loaded into the environment.
+
+```php
+// Check the `secrets.php` file next to this script for sensitive values:
+define('CRAFT_SITE', dirname(__DIR__) . 'secrets.php');
 ```
 
 ### `CRAFT_SITE`
