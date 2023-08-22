@@ -126,7 +126,7 @@ We alluded to “magic” methods, earlier—these are special PHP features that
 ::: warning
 Yii also uses `__get()` (and another magic method, `__set()`) to create “virtual” public properties. For example, a class may have a private `$_data` property, then implement `getData()` and `setData()` methods; it’s possible, then, to access `$model->data` or set `$model->data = 'value'` without there being a property
 
-However: Yii will always attempt to resolve native `getMyCustomProperty()` and `setMyCustomProperty()` methods before looking for a `myCustomProperty` property on any attached behaviors. Special care should be taken when naming behavior properties so that there is no ambiguity about where the 
+However: Yii will always attempt to resolve native `getMyCustomProperty()` and `setMyCustomProperty()` methods before looking for a `myCustomProperty` property on any attached behaviors. Special care should be taken when naming behavior properties so as to avoid conflicts or ambiguity when attached to a parent class. Should this be unavoidable, you can directly access a behavior via `$class->getBehavior('behaviorName')`.
 
 Consider accessing properties and calling methods of behaviors you own via their registered [names](#naming), rather than magic methods.
 :::
