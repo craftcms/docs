@@ -4,18 +4,20 @@ Craft provides two ways for plugins to extend its Twig templating environment.
 
 ## Extend the Global `craft` Variable
 
-The global `craft` template variable is an instance of <craft4:craft\web\twig\variables\CraftVariable>. When a template references `craft.entries` or `craft.entries()`, it’s calling [CraftVariable::entries()](craft4:craft\web\twig\variables\CraftVariable::entries()) behind the scenes, for example.
+The [global `craft` template variable](../dev/global-variables.md#craft-2) is an instance of <craft4:craft\web\twig\variables\CraftVariable>. Methods and properties of that class are available in Twig via dot notation—for example, when a template uses `craft.entries` (or `craft.entries()`), Twig calls [CraftVariable::entries()](craft4:craft\web\twig\variables\CraftVariable::entries()) behind the scenes.
 
-The `CraftVariable` instance can be extended by plugins with [behaviors](behaviors.md) and [services](./services.md). Choosing the right approach depends on what you’re trying to add to it.
+That `CraftVariable` instance can be extended by plugins with [behaviors](behaviors.md) and [services](./services.md). Choosing the right approach depends on what you’re trying to add to it.
 
 - Use a **behavior** to add custom properties or methods directly onto the `craft` variable (e.g. `craft.foo()`).
 - Use a **service** to add a sub-object to the `craft` variable, which can be accessed with a custom property name, called the service’s “ID”. (e.g. `craft.foo.*`).
 
 You can attach your behavior or service to the `CraftVariable` instance by registering an [EVENT_INIT](craft4:craft\web\twig\variables\CraftVariable::EVENT_INIT) event handler from your plugin’s `init()` method:
 
-```php
+```php{18-20,23}
 use craft\web\twig\variables\CraftVariable;
 use yii\base\Event;
+use mynamespace\myplugin\behaviors\MyBehavior;
+use mynamespace\myplugin\services\MyService;
 
 public function init()
 {
@@ -40,7 +42,11 @@ public function init()
 }
 ```
 
-## Register a Twig Extension
+::: tip
+On their own, [behaviors](behaviors.md#attachment) are typically attached in response to the dedicated `EVENT_DEFINE_BEHAVIORS` event.
+:::
+
+## Create a Twig Extension
 
 New features can be added to Twig by creating a [Twig extension](https://twig.symfony.com/doc/3.x/advanced.html#creating-an-extension).
 
@@ -89,7 +95,7 @@ Filters, functions, and tests are mostly equivalent in their capabilities, but a
 
 You do not need to define methods that your extension has no use for—except when explicitly implementing the `GlobalsInterface` to inject global variables:
 
-```php {4,8}
+```php {5,8}
 namespace mynamespace\myplugin\twig;
 
 use Craft;
@@ -111,13 +117,17 @@ class Extension extends AbstractExtension implements GlobalsInterface
 }
 ```
 
-Here, we’ve set a variable (`myVariable`) to our plugin’s singleton instance. This means that any services you’ve defined will be accessible in all Twig templates:
+Here, we’ve set a variable (`myVariable`) to our plugin’s singleton instance. This means that any [services](services.md) you’ve defined will be accessible in all Twig templates:
 
 ```twig
 {{ myPlugin.myServiceName.myServiceMethod() }}
 ```
 
+::: warning
 Avoid defining global variables that are ambiguous (like `plugin` or `elements`), apt to be frequently overwritten (like `entry` or `block`), or conflict with [built-in globals](../dev/global-variables.md).
+:::
+
+### Registering the Extension
 
 Register your Twig extension in your plugin or module’s `init()` method by calling <craft4:craft\web\View::registerTwigExtension()>:
 
