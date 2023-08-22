@@ -885,7 +885,7 @@ Either repository’s `getList()` method is a shortcut that returns only key-val
 You may supplement the subdivision data provided by the [upstream repository](https://github.com/commerceguys/addressing) by listening to the <craft4:craft\services\Addresses::EVENT_DEFINE_ADDRESS_SUBDIVISIONS> event in a plugin or module. Similarly, deeper customization of the required [fields](#fields-and-formatting) (and those fields’ [labels](#attribute-labels)) may require modifying the defaults via the [EVENT_DEFINE_USED_SUBDIVISION_FIELDS](craft4:craft\services\Addresses::EVENT_DEFINE_USED_SUBDIVISION_FIELDS) or [EVENT_DEFINE_FIELD_LABEL](craft4:craft\services\Addresses::EVENT_DEFINE_FIELD_LABEL) events. <Since ver="4.5.0" feature="Customizing address subdivision handling" />
 
 ::: tip
-Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and [formatting](#fields-and-formatting!
+Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and [formatting](#fields-and-formatting)!
 :::
 
 ## Fields and Formatting
