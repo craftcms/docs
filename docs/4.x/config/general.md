@@ -329,6 +329,39 @@ For example, you can give the control panel a custom favicon (etc.) like this:
 
 
 
+### `defaultCountryCode`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)
+
+Default value
+:  `'US'`
+
+Defined by
+:  [GeneralConfig::$defaultCountryCode](craft4:craft\config\GeneralConfig::$defaultCountryCode)
+
+Since
+:  4.5.0
+
+</div>
+
+The two-letter country code that addresses will be set to by default.
+
+See <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2> for a list of acceptable country codes.
+
+::: code
+```php Static Config
+->defaultCountryCode('GB')
+```
+```shell Environment Override
+CRAFT_DEFAULT_COUNTRY_CODE=GB
+```
+:::
+
+
+
 ### `defaultCpLanguage`
 
 <div class="compact">
