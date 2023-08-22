@@ -77,6 +77,10 @@ Event::on(
 
 Here, we’re only bothering to attach the behavior to entry elements that belong to the `blog` section.
 
+::: tip
+This event registration signature is consistent across any class that emits the `EVENT_DEFINE_BEHAVIORS` event.
+:::
+
 ### Naming
 
 A name is not _required_ when attaching a behavior, but can become important if its methods or properties collide with those defined by the owner or another behavior. In the example above, we’re attaching the `Post` behavior as `post`, which will allow us to access it explicitly, in the future:
