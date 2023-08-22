@@ -69,6 +69,7 @@ module.exports = {
           collapsable: false,
           children: [
             "asset-bundles",
+            "behaviors",
             "commands",
             "controllers",
             "element-actions",
