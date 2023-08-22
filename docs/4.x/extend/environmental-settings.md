@@ -86,3 +86,38 @@ If your setting is for a URL or file system path, you should also set `suggestAl
   suggestAliases: true
 }) }}
 ```
+
+### Limiting Values
+
+When a setting has a limited number of valid values (and isn’t open-ended), the `forms.selectizeField()` helper can help users discover appropriate environmental values:
+
+```twig{11}
+{{ forms.selectizeField({
+  label: 'Region'|t('my-plugin'),
+  instructions: 'The region this resource is located in.'|t('my-plugin'),
+  id: 'region',
+  name: 'region',
+  options: [
+    { label: 'Asia Pacific (Hong Kong)', value: 'ap-east-1' },
+    { label: 'Europe (Milan)', value: 'eu-south-1' },
+    { label: 'US West (N. California)', value: 'us-west-1' },
+  ],
+  includeEnvVars: true,
+  value: model.region,
+  errors: model.getErrors('region')
+}) }}
+```
+
+For boolean settings, a similar `forms.booleanMenuField()` is available:
+
+```twig
+{{ forms.booleanMenuField({
+  label: "Use authentication"|t('my-plugin'),
+  id: 'useAuthentication',
+  name: 'useAuthentication',
+  includeEnvVars: true,
+  value: model.useAuthentication,
+}) }}
+```
+
+Boolean fields only list environment variables that contain values satisfying PHP’s underlying [boolean filters](https://www.php.net/manual/en/filter.filters.validate.php).
