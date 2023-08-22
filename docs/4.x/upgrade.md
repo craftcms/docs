@@ -392,6 +392,22 @@ $activeUsers = User::find()
 ```
 :::
 
+#### Reserved Field Names
+
+[User] field layouts can no longer contain fields with the following handles <Since ver="4.5.0" feature="Additional reserved field handles in user field layouts" />, as they conflict with native properties or methods:
+
+- `active`
+- `addresses`
+- `admin`
+- `email`
+- `friendlyName`
+- `locked`
+- `name`
+- `password`
+- `pending`
+- `suspended`
+- `username`
+
 ### Collections
 
 Craft 4 adds the [Collections](https://packagist.org/packages/illuminate/collections) package, which offers a more convenient and consistent way of working with arrays and collections of things.
