@@ -558,7 +558,7 @@ The output of the action depends on whether the login was successful and the `Ac
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark/> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request); additional `returnUrl` and `csrfTokenValue` properties are included in the response object.
+<check-mark/> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request); additional `returnUrl`,  `csrfTokenValue`, and `user` <Since ver="4.5.0" feature="Serialized user model in JSON login responses" /> properties are included in the response object.
 <x-mark/> | [Standard behavior](#during-a-post-request); additional `loginName`, `rememberMe`, `errorCode`, and `errorMessage` variables will be available in the template. | [Standard behavior](#during-a-post-request); additional `loginName`, `rememberMe`, `errorCode`, and `errorMessage` properties are included in the response object.
 
 </span>

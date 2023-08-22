@@ -48,7 +48,7 @@
 .browser-shot-content {
   display: block;
   position: relative;
-  box-shadow: 0 0 48px rgba(74, 124, 246, 0.1);
+  box-shadow: 0 12px 48px rgba(74, 124, 246, 0.15);
   background: transparent;
   border-radius: 6px;
 }

@@ -49,6 +49,9 @@ Allow Upscaling
 Quality
 :   Sets a quality or compression ratio for the transformed image, depending on the format of the target image. When left blank, the quality will be determined by the <config4:defaultImageQuality> config setting.
 
+Interlacing
+:   Specify an [interlacing](https://en.wikipedia.org/wiki/Interlacing_(bitmaps)) strategy for the pixels in raster images.
+
 Image Format
 :   Format for the transformed image.
 
@@ -265,14 +268,14 @@ query Thumbnails {
       {
         "title": "Warm Springs",
         "alt": "Snow-dusted plateau.",
-        "url": "https://tutorial-two.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/8/warm-springs.jpg",
+        "url": "https://my-project.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/8/warm-springs.jpg",
         "width": 6000,
         "height": 4000
       },
       {
         "title": "Highway 26",
         "alt": "Winter scene near Warm Springs, Oregon",
-        "url": "https://tutorial-two.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/3/highway-26.jpg",
+        "url": "https://my-project.ddev.site/uploads/images/_640xAUTO_fit_center-center_none/3/highway-26.jpg",
         "width": 6000,
         "height": 4000
       }
@@ -302,7 +305,7 @@ query Gallery {
     "asset": {
       "title": "Warm Springs",
       "alt": "Highway 26, south of Warm Springs, Oregon",
-      "url": "https://tutorial-two.ddev.site/uploads/images/_fullScreen/8/warm-springs.jpg",
+      "url": "https://my-project.ddev.site/uploads/images/_fullScreen/8/warm-springs.jpg",
       "width": 2560,
       "height": 1707
     }

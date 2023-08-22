@@ -450,11 +450,15 @@ Rounds a number down.
 
 ## `getenv`
 
-Returns the value of an environment variable.
+Returns the value of an environment variable, using <craft4:craft\helpers\App::env()>.
 
 ```twig
 {{ getenv('MAPS_API_KEY') }}
 ```
+
+::: danger
+Take care to not leak sensitive environment variables into your HTML!
+:::
 
 ## `gql`
 

@@ -92,13 +92,13 @@ The field layout editor works the same way regardless of which content type you�
 
 ### Tabs
 
-Every layout starts with a “Content” tab at the top. You can click the tab’s gear icon (<icon kind="settings" />) and choose **Settings** to rename it, and use the **+ New Tab** button to add more tabs to your layout. Drag and drop those tabs into whatever order you prefer, where the first will be displayed for the content editor by default.
+Every layout starts with a “Content” tab at the top. Add more tabs with the **New Tab** button, or update an existing tab by clicking its gear icon (<icon kind="settings" />) and selecting **Settings**. Drag and drop those tabs into whatever order you prefer—the first tab is selected by default when editing an entry.
 
 ::: tip
-If the field layout has only one tab, its fields will be displayed in the editor without the tab itself—so its name will not be displayed until more tabs are added.
+If the field layout has only one tab (or only one tab is visible due to applied conditions), its fields will be displayed in the editor without the tab itself—so its name will not be visible until more tabs are added.
 :::
 
-A tab’s settings include its name and optional conditions that determine when it should be displayed:
+A tab’s settings include its name and optional conditions that determine when it will be displayed for editors:
 
 ![Screenshot of field layout editor with “Content” tab settings open in a slideout: Name, Current User Condition, and Entry Condition](./images/field-layout-tab-settings.png)
 

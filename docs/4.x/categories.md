@@ -1,14 +1,22 @@
 # Categories
 
-<div class="version-warning">
+Craft supports user-managed, hierarchical taxonomies for content via **categories**.
 
-Categories are being phased out in favor of [Structure sections](./entries.md#structures). New projects should implement taxonomies as entries.
+Categories are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft4:craft\elements\Category>.
+
+<Block label="Migrating to Structures">
+
+With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
+
+As part of that process, we introduced a [console command](console-commands.md#entrify-categories) that can automate the conversion of categories to [structure sections](entries.md#structures):
+
+```bash
+php craft entrify/categories myCategoryGroupHandle
+```
 
 Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
 
-</div>
-
-Create user-definable taxonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) with categories.
+</Block>
 
 ## Category Groups
 

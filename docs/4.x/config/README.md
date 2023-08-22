@@ -50,11 +50,11 @@ CRAFT_ENVIRONMENT=dev
 # ...and comments!
 ```
 
-These values can be referenced in your config files by calling [App::env()](craft4:craft\helpers\App::env()), or using them directly in a [control panel setting](#aliases-and-environment-variables). Use of `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631).
+These values can be referenced in your config files by calling [App::env()](craft4:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The [equivalent Twig function](../dev/functions.md) uses `App::env()`, and is therefore fine to use in templates.
 
 Craft doesn’t require your variables to follow any kind of naming convention, but it will automatically discover [some specific environment variables](#environment-overrides) for general and database settings.
 
-The `.env` file is the only place where secrets should be stored. Avoid checking it in to version control!
+For most installations, the `.env` file is the only place where secrets should be stored. Avoid checking it in to version control!
 
 ::: tip
 Some platforms (especially those with ephemeral filesystems) provide a GUI for managing environment variables in lieu of using a `.env` file, and will automatically inject them when the server or process starts. `App::env()` is still the recommended method for retrieving environment variables set in this way.
@@ -63,6 +63,22 @@ Some platforms (especially those with ephemeral filesystems) provide a GUI for m
 ### Entry Script
 
 Craft will also respond to a handful of specific [PHP constants](#php-constants), as long as they are set prior to bootstrapping the application in your entry script. The [starter project](repo:craftcms/craft) shares a `bootstrap.php` file between `web/index.php` and the `craft` executable to consolidate the definition of constants.
+
+### Secrets
+
+You can store sensitive values that won’t leak into the process’s environment in a special “secrets” file. <Since ver="4.5.0" feature="Secrets file" /> The path to this file is determined by the [`CRAFT_SECRETS_PATH` environment variable or constant](#craft_secrets_path). When defined, Craft will attempt to include a file at that path (presumed to be a PHP script that `return`s an associative array), and checks it prior to resolving any environment variable or constant with <craft4:craft\helpers\App::env()>.
+
+```php
+return [
+    'SUPER_SECRET_KEY' => '...',
+];
+```
+
+::: warning
+Even though secrets aren’t automatically loaded into the environment on every request, they can still be accessed via application helpers, Twig templates (like system messages), other PHP scripts, or anyone with direct filesystem access.
+
+This is only recommended in situations where environment variable exfiltration is among the last attack surfaces. If your server supports any form of remote access (say, via SSH), this is _not_ a practical security measure!
+:::
 
 ## Setting and Resolving Options
 
@@ -200,6 +216,10 @@ Make sure your key(s) are sufficiently unique! Craft reads your array of config 
 If the environment cannot be determined, your server’s hostname will be used.
 :::
 
+::: warning
+Do not combine fluent and multi-environment config in the same file. Merging fluent config models causes all previously-set values to be overwritten.
+:::
+
 ### Aliases
 
 Some settings and functions in Craft support [Yii aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases), which are most often used as placeholders for file system paths and URLs.
@@ -237,15 +257,24 @@ return [
     'aliases' => [
         '@web' => App::env('PRIMARY_SITE_URL'),
         '@shared' => App::env('SHARED_PATH'),
-        '@uploads' => '@shared/uploads',
+        '@uploads' => '@shared/web/uploads',
         '@assets' => '@web/uploads',
     ],
 ];
 ```
 
+Assuming `PRIMARY_SITE_URL` is defined as `https://my-project.ddev.site` and `SHARED_PATH` is `/var/www/releases/123/shared`, these aliases would evaluate to:
+
+- `@web`: `https://my-project.ddev.site`
+- `@shared`: `/var/www/releases/123/shared`
+- `@uploads`: `/var/www/releases/123/shared/web/uploads`
+- `@assets`: `https://my-project.ddev.site/uploads`
+
+Recursive aliases are preferred to basic string interpolation, because they are evaluated at the time of _use_ rather than _definition_. Aliases are only resolved at the beginning of a string.
+
 ### Environment Overrides
 
-Craft allows some settings to be defined directly from environment variables or PHP constants using the special `CRAFT_` prefix.
+Craft allows some settings to be defined directly from environment variables, PHP constants, or secrets using the special `CRAFT_` prefix.
 
 Add the prefix to any [general config](config-settings.md) (`CRAFT_`) or [database connection settings](db.md) (`CRAFT_DB_`) in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). For example:
 
@@ -285,12 +314,12 @@ Whenever you see this UI, you can provide a valid alias or environment variable 
 - **General Settings:** System Name, Status, and Time Zone;
 - **Sites:** Base URLs;
 - **Sections:** Preview Target URIs;
-- **Asset Volumes:** Base URL, File System Path (Local only);
+- **Asset Filesystems:** Base URL, File System Path (Local only);
 - **Email:** System Email Address, Sender Name, Email Template path, SMTP credentials;
 
 Focusing one of these fields will immediately suggest some values. Type `$` followed by an environment variable’s name or `@` followed by an alias to narrow the suggestions and find your placeholder.
 
-Aliases have the extra benefit of allowing extra path segments, so `@web/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to define a specific `@uploads` alias and use that in the control panel, instead.
+Aliases have the extra benefit of allowing extra path segments, so `@web/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific `@uploads` alias](#aliases) and use that in the control panel, instead.
 
 ::: tip
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
@@ -403,9 +432,9 @@ You can customize the settings passed to Guzzle when initializing these requests
 ```php
 return [
     'headers' => ['Foo' => 'Bar'],
-    'query'   => ['testing' => '123'],
-    'auth'    => ['username', 'password'],
-    'proxy'   => 'https://myproxy:1234',
+    'query' => ['testing' => '123'],
+    'auth' => ['username', 'password'],
+    'proxy' => 'https://myproxy:1234',
 ];
 ```
 
@@ -477,13 +506,13 @@ Note that HTML Purifier expresses many options with dot notation, like `HTML.All
 
 ## PHP Constants
 
-You can define certain PHP constants that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in `bootstrap.php`—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
+Some customization is handled via special variables (PHP constants or environment vars) that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in `bootstrap.php`—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
+
+By virtue of accessing these via <craft4:craft\helpers\App::env()>, Craft will honor values defined by your environment under the same names. The majority of these settings are tied specifically to the structure of your project directory, though, and generally do not need to change between environments.
 
 ::: tip
-Constants you set in `web/index.php` will be used for web-based requests, while any you set in your root `craft` file will be used for console requests.
+Constants you set directly in `web/index.php` will only be defined for _web_ requests, while any you set in the `craft` executable will only be defined for _console_ requests.
 :::
-
-The following options can _only_ be set by PHP constants, but general and database configuration settings can also be set via constants matching the same pattern defined in [environment overrides](#environment-overrides).
 
 ### `CRAFT_BASE_PATH`
 
@@ -560,6 +589,15 @@ Can be set to `false` to prevent Craft from setting PHP’s [log_errors](https:/
 ```php
 // Don’t send PHP error logs to storage/logs/phperrors.log
 define('CRAFT_LOG_PHP_ERRORS', false);
+```
+
+### `CRAFT_SECRETS_PATH`
+
+The path to a [secrets](#secrets) file, whose values are _not_ loaded into the environment.
+
+```php
+// Check the `secrets.php` file next to this script for sensitive values:
+define('CRAFT_SITE', dirname(__DIR__) . 'secrets.php');
 ```
 
 ### `CRAFT_SITE`

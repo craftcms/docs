@@ -6,7 +6,7 @@ Each user has an email address and username by default, as well as optional fiel
 
 There are also preferences for localization, accessibility, and debugging that may be relevant depending on how you build your site and whether you grant the user access to the control panel.
 
-Users can be part of groups you create that [fine-tune permissions](user-management.md).
+What a user can do is determined by which [groups](user-management.md#user-groups) they belong to, and what individual [permissions](user-management.md#permissions) they have been granted.
 
 ### Active and Inactive Users
 

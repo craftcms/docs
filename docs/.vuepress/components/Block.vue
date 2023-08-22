@@ -28,12 +28,12 @@ export default {
 }
 
 .label {
-    @apply uppercase bg-transparent tracking-wide leading-none h-auto font-mono;
-    font-size: smaller;
+    @apply uppercase bg-transparent tracking-wider leading-none h-auto font-mono;
+    font-size: 0.8em;
     border-color: currentColor;
     border-radius: 3px;
     border-width: 1px;
-    opacity: 0.5;
+    opacity: 0.4;
     padding: 4px 8px 3px;
 }
 </style>

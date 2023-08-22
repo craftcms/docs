@@ -1,15 +1,15 @@
 # Elements
 
-An _element_ is the most basic unit of content in Craft. Elements provide smart management, routing, and querying interfaces for users and developers.
+An _element_ is the most basic unit of content in Craft. Elements provide smart management, routing, and querying interfaces for users and developers. Each [type](#element-types) of element has some unique capabilities, but they’re all built on top of a set of [common features](#common-features).
 
-## Types
+## Element Types
 
 In the control panel, you’ll encounter the eight _element types_ common to all Craft installations:
 
 - [**Assets**](assets.md) store files that are uploaded to a volume.
 - [**Categories**](categories.md) are taxonomies that resemble folder structures and can be nested.
-- [**Entries**](entries.md) are records that can have drafts, revisions, and live previews. They can exist as one-offs called “Singles,” ordered by one or more attributes in “Channels,” or organized hierarchically as “Structures.”
-- [**Global Sets**](globals.md) are floating bits of content that aren’t tied to any particular page or other piece of content, ideal for bits of information you might want to show on every page of your site.
+- [**Entries**](entries.md) are records that can have drafts, revisions, and live previews. They can exist as one-offs called _singles_, as _channels_ ordered by one or more attributes, or as hierarchical _structures_.
+- [**Global Sets**](globals.md) are floating bits of content that aren’t tied to any particular page, but you may want to access anywhere.
 - [**Matrix Blocks**](matrix-blocks.md) are powerful, repeating groupings of content that belong to other element types via a field.
 - [**Tags**](tags.md) are flat taxonomies optimized for quick input and re-use.
 - [**Users**](users.md) are accounts for human beings with email addresses and permissions, organized into customizable groups.
@@ -66,6 +66,8 @@ Similarly, they can customize what columns appear in the table (and how the resu
 <img src="./images/element-index-view-options.png" alt="Customizing element index columns and sorting">
 </BrowserShot>
 
+If every field layout that would be used by an element in a source defines the same label override for a field, that label will appear in the column’s header. <Since ver="4.5.0" feature="Column header overrides on element indexes" /> When a consensus cannot be reached, the original field’s label is used. This most commonly applies when a source is limited to a single entry type, asset volume, category group, or other property that also defines field layouts.
+
 ### Structures
 
 [Entries](./entries.md) (using the _Structure_ section type) and [Categories](./categories.md) support a hierarchical view mode on their indexes. Elements in structures track their relative position among siblings, and can be easily relocated by dragging-and-dropping <Icon kind="move" /> their row in an index. Reordering is still possible, even when the structure is limited to a single level.
@@ -90,7 +92,7 @@ A streamlined version of indexes are used when adding elements to a [relational]
 
 ## Properties and Methods
 
-All elements share a few characteristics that make them familiar to work with in your templates. Each [element type](#types) will supplement these lists with their own properties and methods.
+All elements share a few characteristics that make them familiar to work with in your templates. Each [element type](#element-types) will supplement these lists with their own properties and methods.
 
 ::: warning
 This is not an exhaustive list! If you’re curious, consult the <craft4:craft\base\Element> and <craft4:craft\base\ElementTrait> class reference for a complete picture of what data is available inside elements and how it can be used.
