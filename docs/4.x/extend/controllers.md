@@ -5,7 +5,7 @@ description: Respond to HTTP requests by connecting them with back-end services.
 
 # Controllers
 
-Plugins and modules can provide custom [controllers][yii] to Craft installations.
+Plugins and modules can provide custom [controllers][yii] to Craft installations. They can also extend built-in controllers via [behaviors](behaviors.md).
 
 ::: tip
 For the most part, Craft controllers behave the same as they do in Yii, so everything in the [Yii documentation][yii] still applies—this page is concerned primarily with additional features that _are_ Craft-specific.
