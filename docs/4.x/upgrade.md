@@ -396,8 +396,8 @@ $activeUsers = User::find()
 
 The following field handles are no longer allowed due to conflicts with native properties or methods:
 
-- 'isNewForSite'
-- `isProvisionalDraft'
+- `isNewForSite`
+- `isProvisionalDraft`
 - `newSiteIds`
 
 In addition, [User] field layouts can no longer contain fields with the following handles <Since ver="4.5.0" feature="Additional reserved field handles in user field layouts" />:
