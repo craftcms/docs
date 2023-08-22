@@ -4104,6 +4104,12 @@
     },
     {
         "class": "craft\\controllers\\AddressesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AddressesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4116,6 +4122,12 @@
     },
     {
         "class": "craft\\controllers\\AppController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AppController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4128,6 +4140,12 @@
     },
     {
         "class": "craft\\controllers\\AssetIndexesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AssetIndexesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4140,6 +4158,12 @@
     },
     {
         "class": "craft\\controllers\\AssetSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AssetSettingsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4152,6 +4176,12 @@
     },
     {
         "class": "craft\\controllers\\AssetsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AssetsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4164,6 +4194,12 @@
     },
     {
         "class": "craft\\controllers\\BaseElementsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\BaseElementsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4176,6 +4212,12 @@
     },
     {
         "class": "craft\\controllers\\BaseEntriesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\BaseEntriesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4185,6 +4227,12 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\BaseUpdaterController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
     },
     {
         "class": "craft\\controllers\\BaseUpdaterController",
@@ -4206,6 +4254,12 @@
     },
     {
         "class": "craft\\controllers\\CategoriesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\CategoriesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4218,6 +4272,12 @@
     },
     {
         "class": "craft\\controllers\\ChartsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ChartsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4230,6 +4290,12 @@
     },
     {
         "class": "craft\\controllers\\ConditionsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ConditionsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4242,6 +4308,12 @@
     },
     {
         "class": "craft\\controllers\\ConfigSyncController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ConfigSyncController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4254,6 +4326,12 @@
     },
     {
         "class": "craft\\controllers\\DashboardController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\DashboardController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4266,6 +4344,12 @@
     },
     {
         "class": "craft\\controllers\\ElementIndexSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ElementIndexSettingsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4278,6 +4362,12 @@
     },
     {
         "class": "craft\\controllers\\ElementIndexesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ElementIndexesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4287,6 +4377,12 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\ElementSelectorModalsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
     },
     {
         "class": "craft\\controllers\\ElementSelectorModalsController",
@@ -4308,6 +4404,12 @@
     },
     {
         "class": "craft\\controllers\\ElementsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ElementsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4320,6 +4422,12 @@
     },
     {
         "class": "craft\\controllers\\EntriesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\EntriesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4332,6 +4440,12 @@
     },
     {
         "class": "craft\\controllers\\FieldsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\FieldsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4344,6 +4458,12 @@
     },
     {
         "class": "craft\\controllers\\FsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\FsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4356,6 +4476,12 @@
     },
     {
         "class": "craft\\controllers\\GlobalsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\GlobalsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4368,6 +4494,12 @@
     },
     {
         "class": "craft\\controllers\\GraphqlController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\GraphqlController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4380,6 +4512,12 @@
     },
     {
         "class": "craft\\controllers\\ImageTransformsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ImageTransformsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4392,6 +4530,12 @@
     },
     {
         "class": "craft\\controllers\\InstallController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\InstallController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4404,6 +4548,12 @@
     },
     {
         "class": "craft\\controllers\\LivePreviewController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\LivePreviewController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4416,6 +4566,12 @@
     },
     {
         "class": "craft\\controllers\\NotFoundController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\NotFoundController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4428,6 +4584,12 @@
     },
     {
         "class": "craft\\controllers\\PluginStoreController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\PluginStoreController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4440,6 +4602,12 @@
     },
     {
         "class": "craft\\controllers\\PluginsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\PluginsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4452,6 +4620,12 @@
     },
     {
         "class": "craft\\controllers\\PreviewController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\PreviewController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4464,6 +4638,12 @@
     },
     {
         "class": "craft\\controllers\\ProjectConfigController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ProjectConfigController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4476,6 +4656,12 @@
     },
     {
         "class": "craft\\controllers\\QueueController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\QueueController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4488,6 +4674,12 @@
     },
     {
         "class": "craft\\controllers\\RebrandController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\RebrandController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4500,6 +4692,12 @@
     },
     {
         "class": "craft\\controllers\\RedirectController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\RedirectController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4512,6 +4710,12 @@
     },
     {
         "class": "craft\\controllers\\RelationalFieldsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\RelationalFieldsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4524,6 +4728,12 @@
     },
     {
         "class": "craft\\controllers\\RoutesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\RoutesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4536,6 +4746,12 @@
     },
     {
         "class": "craft\\controllers\\SectionsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SectionsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4548,6 +4764,12 @@
     },
     {
         "class": "craft\\controllers\\SitesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SitesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4560,6 +4782,12 @@
     },
     {
         "class": "craft\\controllers\\StructuresController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\StructuresController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4572,6 +4800,12 @@
     },
     {
         "class": "craft\\controllers\\SystemMessagesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SystemMessagesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4584,6 +4818,12 @@
     },
     {
         "class": "craft\\controllers\\SystemSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SystemSettingsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4596,6 +4836,12 @@
     },
     {
         "class": "craft\\controllers\\TagsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\TagsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4608,6 +4854,12 @@
     },
     {
         "class": "craft\\controllers\\TemplatesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\TemplatesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4620,6 +4872,12 @@
     },
     {
         "class": "craft\\controllers\\UpdaterController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\UpdaterController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4629,6 +4887,12 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\UserSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
     },
     {
         "class": "craft\\controllers\\UserSettingsController",
@@ -4692,6 +4956,12 @@
     },
     {
         "class": "craft\\controllers\\UsersController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\UsersController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4704,6 +4974,12 @@
     },
     {
         "class": "craft\\controllers\\UtilitiesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\UtilitiesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4716,6 +4992,12 @@
     },
     {
         "class": "craft\\controllers\\VolumesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\VolumesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4728,6 +5010,12 @@
     },
     {
         "class": "craft\\controllers\\pluginstore\\InstallController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\pluginstore\\InstallController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4737,6 +5025,12 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\pluginstore\\RemoveController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
     },
     {
         "class": "craft\\controllers\\pluginstore\\RemoveController",
@@ -25711,6 +26005,12 @@
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
@@ -25753,6 +26053,12 @@
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
@@ -25795,6 +26101,12 @@
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
@@ -25837,6 +26149,12 @@
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
@@ -25879,6 +26197,12 @@
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
@@ -25921,6 +26245,12 @@
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
@@ -25963,6 +26293,12 @@
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
@@ -26005,6 +26341,12 @@
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
         "desc": "The event that is triggered after an element is populated."
@@ -26044,6 +26386,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\UserQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
@@ -36541,6 +36889,12 @@
         "desc": "The event that is triggered when defining the label of an address field for a given country code."
     },
     {
+        "class": "craft\\services\\Addresses",
+        "name": "EVENT_DEFINE_ADDRESS_SUBDIVISIONS",
+        "type": "craft\\events\\DefineAddressSubdivisionsEvent",
+        "desc": "The event that is triggered when defining subdivisions options for an address field for a given country code, and optionally administrativeArea and locality."
+    },
+    {
         "class": "craft\\services\\Assets",
         "name": "EVENT_BEFORE_REPLACE_ASSET",
         "type": "craft\\events\\ReplaceAssetEvent",
@@ -37694,6 +38048,18 @@
     },
     {
         "class": "craft\\services\\Structures",
+        "name": "EVENT_BEFORE_INSERT_ELEMENT",
+        "type": "craft\\events\\MoveElementEvent",
+        "desc": "The event that is triggered before an element is inserted into a structure."
+    },
+    {
+        "class": "craft\\services\\Structures",
+        "name": "EVENT_AFTER_INSERT_ELEMENT",
+        "type": "craft\\events\\MoveElementEvent",
+        "desc": "The event that is triggered after an element is inserted into a structure."
+    },
+    {
+        "class": "craft\\services\\Structures",
         "name": "EVENT_BEFORE_MOVE_ELEMENT",
         "type": "craft\\events\\MoveElementEvent",
         "desc": "The event that is triggered before an element is moved."
@@ -38552,6 +38918,12 @@
     },
     {
         "class": "craft\\web\\Controller",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\web\\Controller",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -38645,6 +39017,12 @@
         "name": "EVENT_AFTER_RENDER_PAGE_TEMPLATE",
         "type": "craft\\events\\TemplateEvent",
         "desc": "The event that is triggered after a page template gets rendered"
+    },
+    {
+        "class": "craft\\web\\View",
+        "name": "EVENT_AFTER_REGISTER_ASSET_BUNDLE",
+        "type": "craft\\events\\AssetBundleEvent",
+        "desc": "The event that is triggered after an asset bundle is registered"
     },
     {
         "class": "craft\\web\\View",

@@ -2463,6 +2463,14 @@ Craft CMS setup installer.
 
 Generates a new application ID and saves it in the `.env` file.
 
+<h3 id="setup-cloud">
+    <a href="#setup-cloud" class="header-anchor">#</a>
+    <code>setup/cloud</code>
+</h3>
+
+
+Prepares the Craft install to be deployed to Craft Cloud.
+
 <h3 id="setup-db">
     <a href="#setup-db" class="header-anchor">#</a>
     <code>setup/db</code>
@@ -2579,6 +2587,14 @@ and `install` commands, each of which support being run non-interactively.
 
 
 Generates an application ID and security key (if they don’t exist), and saves them in the `.env` file.
+
+<h3 id="setup-message-tables">
+    <a href="#setup-message-tables" class="header-anchor">#</a>
+    <code>setup/message-tables</code>
+</h3>
+
+
+Creates database tables for storing message translations. (EXPERIMENTAL!)
 
 <h3 id="setup-php-session-table">
     <a href="#setup-php-session-table" class="header-anchor">#</a>

@@ -1459,7 +1459,6 @@ This is the interface implemented by all users.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
-| `photo`| `AssetInterface` | The user’s photo.
 | `friendlyName`| `String` | The user’s first name or username.
 | `fullName`| `String` | The user’s full name.
 | `name`| `String!` | The user’s full name or username.
@@ -1556,7 +1555,6 @@ This is the interface implemented by all addresses.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
-| `photo`| `AssetInterface` | The user’s photo.
 | `fullName`| `String` | The full name on the address.
 | `firstName`| `String` | The first name on the address.
 | `lastName`| `String` | The last name on the address.
