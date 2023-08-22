@@ -102,7 +102,7 @@ A <craft4:craft\web\twig\variables\CraftVariable> object, which provides access 
 
 #### `craft.app`
 
-A reference to the main <craft4:craft\web\Application> instance (the thing you get when you type `Craft::$app` in PHP code) is also available to templates via `craft.app`.
+A reference to the main <craft4:craft\web\Application> instance (the same object you get when accessing `Craft::$app` in PHP) is also available to templates via `craft.app`.
 
 ::: warning
 Accessing things via `craft.app` is considered advanced. There are more security implications than other Twig-specific variables and functions, and your templates will be more susceptible to breaking changes between major Craft versions.
@@ -119,6 +119,8 @@ Some of the services commonly used in templates:
 - `craft.app.sites` – [Sites](craft4:craft\services\Sites) service for getting [site](../sites.md) details
 
 ::: tip
+Keep in mind that Twig templates _can_ be rendered from web requests, the CLI, and within queue jobs—so there are situations in which certain features may no be available (like the “[current user](#currentuser),” or information about the request).
+
 The specific services (or “components”) available via `craft.app` correspond to the keys defined in Craft’s [`app.php`](repo:craftcms/cms/blob/develop/src/config/app.php), [`app.web.php`](repo:craftcms/cms/blob/develop/src/config/app.web.php), and your project’s [equivalent config files](../config/app.md).
 :::
 
