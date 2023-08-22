@@ -16,7 +16,7 @@ In this example, we’re going to give a subset of entries (within a “Posts”
 
 ## Behavior Class
 
-A behavior is a special type of class that extends <yii2:yii\base\Behavior>, and defines methods or properties that you wish to make available on any class it is eventually attached to.
+A behavior is a special type of class that extends <yii2:yii\base\Behavior>, and defines methods or properties that you wish to make available on any object it is eventually attached to.
 
 ```php
 namespace mynamespace\myplugin\behaviors;
