@@ -10,7 +10,9 @@ description: Behaviors enable plugins to decorate built-in classes with native-f
 A behavior’s methods and properties are not actually defined on the owner, but accessed as part of Yii’s magic <yii2:yii\base\Component::__get()> and <yii2:yii\base\Component::__call()> implementations. We’ll follow this logic in the [usage](#usage) section, below.
 :::
 
-Every class that extends <craft4:craft\base\Model> (in effect, virtually all core system components and data objects) automatically emits [events](events.md) that make it easy to attach custom behaviors at runtime. In this example, we’re going to give a subset of entries (within a “Posts” section) a special `getAuthorUrl()` method to standardize how we link to author indexes in our site’s front-end.
+Every class that extends <craft4:craft\base\Model> (in effect, virtually all core system components and data objects) automatically emits [events](events.md) that make it easy to attach custom behaviors at runtime. Some classes that _don’t_ inherit from `craft\base\Model` follow a similar pattern (like <craft4:craft\web\Controller> <Since ver="4.5.0" feature="Attaching behaviors to controllers" />) and emit an `EVENT_DEFINE_BEHAVIORS` event.
+
+In this example, we’re going to give a subset of entries (within a “Posts” section) a special `getAuthorUrl()` method to standardize how we link to author indexes in our site’s front-end.
 
 ## Behavior Class
 
