@@ -16,13 +16,15 @@ Unlike [entries](entries.md#entries), global sets don’t have the Live Preview 
 
 With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
 
-As part of that process, we introduced some [console commands](console-commands.md#entrify) that can automate the conversion of categories, tags, and global sets to entries:
+As part of that process, we introduced a [console command](console-commands.md#entrify-global-set) that can automate the conversion of global sets to entries:
 
 ```bash
 php craft entrify/global-set myGlobalSetHandle
 ```
 
 You will be given an opportunity to migrate the global set into a new or existing [single](entries.md#singles). The **Title** field (and **Status** controls <Since ver="4.5.0" feature="Entry status control visibility setting" />) for the single’s new entry type will be disabled, to maintain parity with the legacy globals interface.
+
+Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
 
 </Block>
 

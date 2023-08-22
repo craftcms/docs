@@ -4,7 +4,7 @@ description: Add native-feeling content types to empower content authors and adm
 
 # Element Types
 
-[Elements](../elements.md) underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#types) with your own, from a plugin or module.
+[Elements](../elements.md) underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#element-types) with your own, from a plugin or module.
 
 As you implement common element features like [titles](#titles), [sources](#sources), or [statuses](#statuses), the built-in element classes will be an invaluable resource—both as templates for basic functionality and evidence of the flexibility of elements:
 

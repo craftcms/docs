@@ -2,6 +2,24 @@
 
 You can create folksonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Tags. Tags are another type of [element](./elements.md).
 
+<Block label="Migrating to Channels">
+
+With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
+
+::: warning
+A comparable [tags field](tags-fields.md) UI has not yet been introduced for entries. If you or your clients value this authoring experience, it is safe to continue using tags!
+:::
+
+As part of that process, we introduced a [console command](console-commands.md#entrify-categories) that can automate the conversion of tags to [channel sections](entries.md#channels):
+
+```bash
+php craft entrify/tags myTagGroupHandle
+```
+
+Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
+
+</Block>
+
 ## Tag Groups
 
 Before you can create tags, you must create Tag Groups to contain them.
