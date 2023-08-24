@@ -508,7 +508,7 @@ Note that HTML Purifier expresses many options with dot notation, like `HTML.All
 
 Some customization is handled via special variables (PHP constants or environment vars) that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in `bootstrap.php`—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
-By virtue of accessing these via <craft4:craft\helpers\App::env()>, Craft will honor values defined by your environment under the same names. The majority of these settings are tied specifically to the structure of your project directory, though, and generally do not need to change between environments.
+By virtue of accessing these via <craft4:craft\helpers\App::env()>, Craft also honors values defined by your environment under the same names or keys. The majority of these settings are tied specifically to the structure of your project directory, though, and generally do not need to change between environments.
 
 ::: tip
 Constants you set directly in `web/index.php` will only be defined for _web_ requests, while any you set in the `craft` executable will only be defined for _console_ requests.
@@ -581,6 +581,10 @@ define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
 ### `CRAFT_LICENSE_KEY_PATH`
 
 The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../directory-structure.md#config) folder by default.)
+
+### `CRAFT_LOG_ALLOW_LINE_BREAKS`
+
+Adjusts the default [log target config](../logging.md#monolog) to allow or disallow multi-line log statements.
 
 ### `CRAFT_LOG_PHP_ERRORS`
 
