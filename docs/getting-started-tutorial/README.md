@@ -9,7 +9,7 @@ This tutorial is intended for new Craft users who want to learn how to…
 
 - …set up a local development environment;
 - …scaffold a basic Craft project;
-- …and build a simple simple blog!
+- …and build a simple blog!
 
 The lessons are geared toward the technically-inclined, but web development experience is _not_ required to follow along.
 
