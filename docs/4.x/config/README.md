@@ -504,9 +504,11 @@ For security, any keys _not_ set will use their [defaults](https://github.com/ez
 Note that HTML Purifier expresses many options with dot notation, like `HTML.AllowedElements`. These are the literal keys, not an indication that keys should be nested!
 :::
 
-## PHP Constants
+<a id="php-constants"></a>
 
-Some customization is handled via special variables (PHP constants or environment vars) that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in `bootstrap.php`—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
+## Bootstrap Config
+
+Some customization is handled via special variables (set as PHP constants or environment vars) that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in `bootstrap.php`—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
 By virtue of accessing these via <craft4:craft\helpers\App::env()>, Craft also honors values defined by your environment under the same names or keys. The majority of these settings are tied specifically to the structure of your project directory, though, and generally do not need to change between environments.
 
