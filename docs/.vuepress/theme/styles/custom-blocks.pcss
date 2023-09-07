@@ -21,7 +21,6 @@
   &.warning,
   &.danger {
     padding-left: 3.75rem;
-    border-bottom: 1px solid #e5edfd;
 
     &:before {
       content: "";
@@ -31,11 +30,17 @@
       background: transparent url("/docs/icons/icon-tip.svg") no-repeat 0 0;
       background-size: contain;
     }
+
+    .since {
+      background-color: var(--bg-color);
+    }
   }
+
+  &.tip {}
 
   &.warning {
     border: 1px solid rgba(178, 148, 0, 0.25);
-    border-bottom: 1px solid rgba(178, 148, 0, 0.4);
+
     &:before {
       background: transparent url("/docs/icons/icon-warning.svg") no-repeat 0 0;
     }
@@ -43,7 +48,6 @@
 
   &.danger {
     border: 1px solid rgba(229, 66, 43, 0.25);
-    border-bottom: 1px solid rgba(229, 66, 43, 0.45);
 
     .custom-block-title {
       color: rgba(229, 66, 43, 1);

@@ -1,3 +1,7 @@
+---
+description: Fluidly manipulate data in your templates.
+---
+
 # Filters
 
 The following [filters](https://twig.symfony.com/doc/3.x/templates.html#filters) are available to Twig templates in Craft:
@@ -10,6 +14,8 @@ Filter | Description
 [ascii](#ascii) | Converts a string to ASCII characters.
 [atom](#atom) | Converts a date to an ISO-8601 timestamp.
 [attr](#attr) | Modifies an HTML tag’s attributes.
+[base64_decode](#base64-decode) | Decodes a base64 string.
+[base64_encode](#base64-encode) | Encodes a string as base64.
 [batch](https://twig.symfony.com/doc/3.x/filters/batch.html) | Batches items in an array.
 [boolean](#boolean) | Coerces the passed value to a boolean.
 [camel](#camel) | Formats a string into camelCase.
@@ -56,7 +62,7 @@ Filter | Description
 [merge](#merge) | Merges an array with another one.
 [money](#money) | Outputs a value from a Money object.
 [multisort](#multisort) | Sorts an array by one or more keys within its sub-arrays.
-[namespace](#namespace) | Namespaces input names and other HTML attributes, as well as CSS selectors.
+[namespace](#namespace-or-ns) | Namespaces input names and other HTML attributes, as well as CSS selectors.
 [namespaceAttributes](#namespaceattributes) | Namespaces `id` and other HTML attributes, as well as CSS selectors.
 [namespaceInputId](#namespaceinputid) | Namespaces an element ID.
 [namespaceInputName](#namespaceinputname) | Namespaces an input name.
@@ -118,7 +124,7 @@ Applies formatting to an [Address](../addresses.md#address-formatter).
 #}
 ```
 
-This calls [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()), so you can optionally provide an array of options and even your own [formatter](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php).
+This calls [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()), so you can optionally provide an array of `options` and even your own [`formatter`](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php).
 
 ## `append`
 
@@ -161,10 +167,16 @@ By default, the current site’s language will be used when choosing ASCII chara
 
 ## `atom`
 
-Converts a date to an ISO-8601 timestamp (e.g. `2019-01-29T10:00:00-08:00`), which should be used for Atom feeds, among other things.
+Converts a date to an ISO-8601 timestamp (e.g. `2038-01-19T03:14:07+00:00`), which should be used for Atom feeds, among other things.
 
 ```twig
 {{ entry.postDate|atom }}
+```
+
+Pass `false` to prevent the date from being converted to the system’s timezone:
+
+```twig
+{{ entry.customDateFieldWithTimezone|atom(false) }}
 ```
 
 ## `attr`
@@ -245,7 +257,35 @@ Attribute values are HTML-encoded automatically:
 ```
 :::
 
-## `boolean` <Since ver="4.3.0" feature="This Twig filter" />
+## `base64_decode` <Since ver="4.4.0" feature="The base64_decode Twig filter" />
+
+Decodes a base64-encoded string. The encoded value can come from anywhere, as base64 is widely supported and its input and output is consistent across implementations.
+
+```twig
+{{ 'Q3JhZnQgQ01T' | base64_decode }}
+{# -> Craft CMS #}
+```
+
+::: tip
+JavaScript uses the [`btoa()`](https://developer.mozilla.org/en-US/docs/Web/API/btoa) function to encode values as base64, and [`atob()`](https://developer.mozilla.org/en-US/docs/Web/API/atob) to decode them.
+:::
+
+## `base64_encode` <Since ver="4.4.0" feature="The base64_encode Twig filter" />
+
+Encodes a value as base64. Base64 can be useful for making unpredictable strings or data URL-safe.
+
+```twig
+{{ 'Craft CMS' | base64_encode }}
+{# -> Q3JhZnQgQ01T #}
+```
+
+If you intend to use the value in a style sheet or URI, consider the [`dataUrl()` function](./functions.md#dataurl), instead.
+
+::: danger
+Encoding is _not_ the same as encryption! The result may appear random, but is completely reversible. Read more about the principles and applications of [base64](https://en.wikipedia.org/wiki/Base64) if you are unsure whether it is appropriate!
+:::
+
+## `boolean` <Since ver="4.3.0" feature="The boolean Twig filter" />
 
 Coerces the passed value to a boolean using PHP’s [`boolval()`](https://www.php.net/manual/en/function.boolval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
@@ -318,46 +358,61 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
 ```twig
 {{ entry.postDate|date }}
-{# Output: Dec 20, 1990 #}
+{# Output: Jan 19, 2038 #}
 ```
 
-You can customize how the date is presented by passing a custom date format, just like Twig’s core [`date`](https://twig.symfony.com/doc/3.x/filters/date.html) filter:
+#### Arguments
 
-```twig
-{{ now|date('m/d/Y') }}
-{# Output: 12/20/1990 #}
-```
+`format`
 
-Craft also provides some special format keywords that will output locale-specific date formats:
+:   You can customize how the date is presented by passing a [custom date format](https://www.php.net/manual/en/datetime.format.php), just like Twig’s core [`date`](https://twig.symfony.com/doc/3.x/filters/date.html) filter:
 
-| Format               | Example                     |
-| -------------------- | --------------------------- |
-| `short`              | 12/20/1990                  |
-| `medium` _(default)_ | Dec 20, 1990                |
-| `long`               | December 20, 1990           |
-| `full`               | Thursday, December 20, 1990 |
+    ```twig
+    {{ now|date('n/d/Y') }}
+    {# Output: 1/19/2038 #}
+    ```
 
-```twig
-{{ entry.postDate|date('short') }}
-{# Output: 12/20/1990 #}
-```
+    Craft also provides some special format keywords that will output locale-specific date formats:
 
-The current application locale will be used by default. If you want to format the date for a different locale, use the `locale` argument:
+    | Format               | Example                   |
+    | -------------------- | ------------------------- |
+    | `short`              | 1/19/2038                 |
+    | `medium` _(default)_ | Jan 19, 2038              |
+    | `long`               | January 19, 2038          |
+    | `full`               | Tuesday, January 19, 2038 |
 
-```twig
-{{ entry.postDate|date('short', locale='en-GB') }}
-{# Output: 20/12/1990 #}
-```
+    ```twig
+    {{ entry.postDate|date('short') }}
+    {# Output: 1/19/2038 #}
+    ```
 
-You can customize the timezone the time is output in, using the `timezone` param:
+`locale`
 
-```twig
-{{ entry.postDate|date('short', timezone='UTC') }}
-{# Output: 12/21/1990 #}
-```
+:   The current application locale will be used by default. If you want to format the date for a different locale, use the `locale` argument:
+
+    ```twig
+    {{ entry.postDate|date('short', locale='en-GB') }}
+    {# Output: 19/1/2038 #}
+    ```
+
+`timezone`
+
+:   You can customize the timezone the time is output in, using the `timezone` param:
+
+    ```twig
+    {{ entry.postDate|date('Y-m-d H:i', timezone='UTC') }}
+    {# Output: 2038-01-19 03:14 #}
+    ```
+
+    Pass `false` to prevent the date from being converted to the system’s timezone:
+
+    ```twig
+    {{ entry.customDateFieldWithTimezone|date('Y-m-d H:i', timezone=false) }}
+    {# Output: 2038-01-18 19:14 #}
+    ```
 
 ::: tip
-If the value passed to the date filter is `null`, it will return the current date by default.
+Applying the filter to a `null` value uses the current date. If this is the desired behavior, consider explicitly passing the [`now` variable](global-variables.md#now): `now|date`.
 :::
 
 ## `datetime`
@@ -366,38 +421,56 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
 
 ```twig
 {{ entry.postDate|datetime }}
-{# Output: Dec 20, 1990, 5:00:00 PM #}
+{# Output: Jan 19, 2038, 5:00:00 PM #}
 ```
 
-Craft provides some special format keywords that will output locale-specific date and time formats:
+#### Arguments
 
-```twig
-{{ entry.postDate|datetime('short') }}
-{# Output: 9/26/2018, 5:00 PM #}
-```
+`format`
+:   Craft provides some special format keywords that will output locale-specific date and time formats:
 
-Possible `format` values are:
+    ```twig
+    {{ entry.postDate|datetime('short') }}
+    {# Output: 1/19/2038, 5:00 PM #}
+    ```
 
-| Format               | Example                                        |
-| -------------------- | ---------------------------------------------- |
-| `short`              | 12/20/1990, 5:00 PM                            |
-| `medium` _(default)_ | Dec 20, 1990, 5:00:00 PM                       |
-| `long`               | December 20, 1990 at 5:00:00 PM PDT            |
-| `full`               | Thursday, December 20, 1990 at 5:00:00 PM PDT |
+    Possible `format` values (in addition to any valid [PHP date format](https://www.php.net/manual/en/datetime.format.php)) are:
 
-The current application locale will be used by default. If you want to format the date and time for a different locale, use the `locale` argument:
+    | Format               | Example                                     |
+    | -------------------- | ------------------------------------------- |
+    | `short`              | 1/19/2038, 3:14 AM                          |
+    | `medium` _(default)_ | Jan 19, 2038, 3:14:07 AM                    |
+    | `long`               | January 19, 2038 at 3:14:07 AM UTC          |
+    | `full`               | Tuesday, January 19, 2038 at 3:14:07 AM UTC |
 
-```twig
-{{ entry.postDate|datetime('short', locale='en-GB') }}
-{# Output: 20/12/1990, 17:00 #}
-```
+`locale`
 
-You can customize the timezone the time is output in, using the `timezone` param:
+:   The current application locale will be used by default. If you want to format the date and time for a different locale, use the `locale` argument:
 
-```twig
-{{ entry.postDate|datetime('short', timezone='UTC') }}
-{# Output: 12/21/1990, 12:00 AM #}
-```
+    ```twig
+    {{ entry.postDate|datetime('short', locale='en-GB') }}
+    {# Output: 19/01/2038, 3:14 #}
+    ```
+
+`timezone`
+
+:   You can customize the timezone the time is output in, using the `timezone` param:
+
+    ```twig
+    {{ entry.postDate|datetime('short', timezone='UTC') }}
+    {# Output: 1/19/2038, 3:14 AM #}
+    ```
+
+    Pass `false` to prevent the date from being converted to the system’s timezone:
+
+    ```twig
+    {{ entry.customDateFieldWithTimezone|date('short', timezone=false) }}
+    {# Output: 1/18/2038, 7:14 PM #}
+    ```
+
+::: tip
+Applying the filter to a `null` value uses the current date. If this is the desired behavior, consider explicitly passing the [`now` variable](global-variables.md#now): `now|date`.
+:::
 
 ## `diff`
 
@@ -514,22 +587,41 @@ Groups items in an array by a the results of an arrow function.
 
 ## `hash`
 
-Prefixes the given string with a keyed-hash message authentication code (HMAC), for securely passing data in forms that should not be tampered with.
+Prefixes the given string with a keyed-hash message authentication code (HMAC), for passing data in plain view (i.e. via front-end forms) that must not be tampered with.
 
 ```twig
-<input type="hidden" name="foo" value="{{ 'bar'|hash }}">
+{{ hiddenInput('foo', 'bar'|hash) }}
 ```
 
 PHP scripts can validate the value via [Security::validateData()](yii2:yii\base\Security::validateData()):
 
 ```php
-$foo = Craft::$app->request->getBodyParam('foo');
-$foo = Craft::$app->security->validateData($foo);
+$foo = Craft::$app->getRequest()->getBodyParam('foo');
+$foo = Craft::$app->getSecurity()->validateData($foo);
 
 if ($foo !== false) {
-    // data is valid
+    // $foo is valid!
 }
 ```
+
+::: danger
+**Do not hash sensitive data.** Hashed values are tamper-proof, but still expose the original value!
+:::
+
+[Request::getValidatedBodyParam()](craft4:craft\web\Request::getValidatedBodyParam()) can also perform this comparison in a controller, automatically throwing an error when it finds a missing or invalid value:
+
+```php
+public function actionSubmitData()
+{
+    $foo = Craft::$app->getRequest()->getValidatedBodyParam('foo');
+
+    // $foo is valid!
+}
+```
+
+::: warning
+Hashing data uses your app’s [`securityKey` config setting](config4:securityKey), by default. If this setting changes between generating and validating a hash, it will fail!
+:::
 
 ## `httpdate`
 
@@ -540,12 +632,17 @@ Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/ht
 {# Output: Expires: Thu, 08 Apr 2021 13:00:00 GMT #}
 ```
 
-You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+#### Arguments
 
-```twig
-{% header "Expires: " ~ expiry|httpdate('CET') %}
-{# Output: Expires: Thu, 08 Apr 2021 21:00:00 GMT #}
-```
+`timezone`
+:   You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+
+    ```twig
+    {% header 'Expires: ' ~ expiry|httpdate('CET') %}
+    {# Result: Expires: Thu, 08 Apr 2021 21:00:00 GMT #}
+    ```
+
+    Pass `false` to use the date’s existing timezone as the basis (prior to conversion to GMT).
 
 ## `id`
 
@@ -1114,7 +1211,7 @@ Removes a class (or classes) from the given HTML tag.
 
 ## `replace`
 
-Replaces parts of a string with other things.
+Match and replace parts of a string.
 
 When a mapping array is passed, this works identically to Twig’s core [`replace`](https://twig.symfony.com/doc/3.x/filters/replace.html) filter:
 
@@ -1141,13 +1238,36 @@ You can also use a regular expression to search for matches by starting and endi
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
 ```
 
+Regular expressions can also be used as keys <Since ver="4.5.0" feature="Regular expressions as keys" /> when passing an array:
+
+```twig
+{{ tag.title|lower|replace({
+  '/^the\\s/': '',
+  '/[^\\w]+/': '-',
+}) }}
+```
+
 ## `rss`
 
 Outputs a date in the format required for RSS feeds (`D, d M Y H:i:s O`).
 
 ```twig
 {{ entry.postDate|rss }}
+{# Expires: Wed, 31 May 2023 12:23:09 -0700 #}
 ```
+
+#### Arguments
+
+`timezone`
+
+:   You can use the `timezone` param to specify the date’s timezone for conversion to GMT:
+
+    ```twig
+    {% header 'Expires: ' ~ expiry|httpdate('CET') %}
+    {# Expires: Thu, 08 Apr 2021 21:00:00 +0000 #}
+    ```
+
+    Pass `false` to use the date’s existing timezone as the basis (prior to conversion to GMT).
 
 ## `snake`
 
@@ -1168,23 +1288,23 @@ Outputs the time of day for a timestamp or [DateTime](http://php.net/manual/en/c
 
 ```twig
 {{ entry.postDate|time }}
-{# Output: 10:00:00 AM #}
+{# Output: 3:14:07 AM #}
 ```
 
 Craft provides some special format keywords that will output locale-specific time formats:
 
 ```twig
 {{ entry.postDate|time('short') }}
-{# Output: 10:00 AM #}
+{# Output: 3:14 AM #}
 ```
 
 Possible `format` values are:
 
 | Format               | Example        |
-| -------------------- | -------------- |
-| `short`              | 5:00 PM        |
-| `medium` _(default)_ | 5:00:00 PM     |
-| `long`               | 5:00:00 PM PDT |
+| -------------------- |----------------|
+| `short`              | 3:14 AM        |
+| `medium` _(default)_ | 3:14:07 AM     |
+| `long`               | 3:14:07 AM UTC |
 
 The current application locale will be used by default. If you want to format the date and time for a different locale, use the `locale` argument:
 
@@ -1202,12 +1322,27 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Formats a date as a human-readable timestamp, via <craft4:craft\i18n\Formatter::asTimestamp()>.
+Outputs a date with <craft4:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible. Dates with the same day return only the time, using the provided `format`; dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`). Anything longer ago than that 
 
 ```twig
 {{ now|timestamp }}
-{# Output: 9:00:00 AM #}
+{# Output: 16:25 #}
+
+{{ now|date_modify('-1 day')|timestamp }}
+{# Output: Yesterday #}
+
+{{ now|date_modify('-4 days')|timestamp }}
+{# Output: Friday #}
+
+{{ now|date_modify('-2 months')|timestamp(withPreposition=true) }}
+{# Output: 'on March 29, 2023' #}
 ```
+
+#### Arguments
+
+`withPreposition`
+
+:   Pass `true` to include `at` or `on` prepositions when outputting the timestamp (when appropriate). These values are localized based on the current site’s language. Defaults to `false`.
 
 ## `translate` or `t`
 
@@ -1228,10 +1363,6 @@ See [Static Message Translations](../sites.md#static-message-translations) for a
 :::
 
 ## `truncate`
-
-::: tip
-The `truncate` filter was added in Craft 3.5.10.
-:::
 
 Truncates a string to a given length, while ensuring that it does not split words.
 

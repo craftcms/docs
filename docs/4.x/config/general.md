@@ -221,7 +221,7 @@ Disabling this will also disable Live Preview.
 
 ::: code
 ```php Static Config
-'autosaveDrafts' => false,
+->autosaveDrafts(false)
 ```
 ```shell Environment Override
 CRAFT_AUTOSAVE_DRAFTS=false
@@ -326,6 +326,39 @@ For example, you can give the control panel a custom favicon (etc.) like this:
     ['link', ['rel' => 'mask-icon', 'href' => '/icons/mask-icon.svg', 'color' => '#663399']],
 ])
 ```
+
+
+
+### `defaultCountryCode`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)
+
+Default value
+:  `'US'`
+
+Defined by
+:  [GeneralConfig::$defaultCountryCode](craft4:craft\config\GeneralConfig::$defaultCountryCode)
+
+Since
+:  4.5.0
+
+</div>
+
+The two-letter country code that addresses will be set to by default.
+
+See <https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2> for a list of acceptable country codes.
+
+::: code
+```php Static Config
+->defaultCountryCode('GB')
+```
+```shell Environment Override
+CRAFT_DEFAULT_COUNTRY_CODE=GB
+```
+:::
 
 
 
@@ -610,7 +643,7 @@ Array of plugin handles that should be disabled, regardless of what the project 
 This can also be set to `'*'` to disable **all** plugins.
 
 ```php
-->disabledPlugins'('*')
+->disabledPlugins('*')
 ```
 
 ::: warning
@@ -1162,6 +1195,44 @@ CRAFT_PHP_MAX_MEMORY_LIMIT=512M
 
 
 
+### `preloadSingles`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$preloadSingles](craft4:craft\config\GeneralConfig::$preloadSingles)
+
+Since
+:  4.4.0
+
+</div>
+
+Whether Single section entries should be preloaded for Twig templates.
+
+When enabled, Craft will make an educated guess on which Singles should be preloaded for each template based on
+the variable names that are referenced.
+
+::: warning
+You will need to clear your compiled templates from the Caches utility before this setting will take effect.
+:::
+
+::: code
+```php Static Config
+->preloadSingles()
+```
+```shell Environment Override
+CRAFT_PRELOAD_SINGLES=true
+```
+:::
+
+
+
 ### `previewIframeResizerOptions`
 
 <div class="compact">
@@ -1267,7 +1338,7 @@ CRAFT_RUN_QUEUE_AUTOMATICALLY=false
 <div class="compact">
 
 Allowed types
-:  
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
 
 Default value
 :  `null`
@@ -1280,7 +1351,7 @@ Since
 
 </div>
 
-
+The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
 
 
 
@@ -1622,12 +1693,13 @@ The shell command that Craft should execute to create a database backup.
 When set to `null` (default), Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable
 for the system user running the web server.
 
-You may provide your own command optionally using several tokens Craft will swap out at runtime:
+You may provide your own command, which can include several tokens Craft will substitute at runtime:
 
-- `{path}` - the target backup file path
+- `{file}` - the target backup file path
 - `{port}` - the current database port
 - `{server}` - the current database hostname
-- `{user}` - the user to connect to the database
+- `{user}` - user that was used to connect to the database
+- `{password}` - password for the specified `{user}`
 - `{database}` - the current database name
 - `{schema}` - the current database schema (if any)
 
@@ -2019,7 +2091,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 ::: code
 ```php Static Config
 // 1 day
-'invalidUserTokenPath' => 'nope',
+->invalidUserTokenPath('nope')
 ```
 ```shell Environment Override
 # 1 day
@@ -2782,7 +2854,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 3 hours
-'userSessionDuration' => 10800,
+->userSessionDuration(10800)
 ```
 ```shell Environment Override
 # 3 hours
@@ -2914,7 +2986,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // One week
-'defaultTokenDuration' => 604800,
+->defaultTokenDuration(604800)
 ```
 ```shell Environment Override
 # One week
@@ -3099,7 +3171,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 1 day
-'invalidLoginWindowDuration' => 86400,
+->invalidLoginWindowDuration(86400)
 ```
 ```shell Environment Override
 # 1 day
@@ -3196,7 +3268,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 1 hour
-'previewTokenDuration' => 3600,
+->previewTokenDuration(3600)
 ```
 ```shell Environment Override
 # 1 hour
@@ -3486,7 +3558,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 1 hour
-'verificationCodeDuration' => 3600,
+->verificationCodeDuration(3600)
 ```
 ```shell Environment Override
 # 1 hour
@@ -3615,9 +3687,9 @@ The file extensions Craft should allow when a user is uploading files.
 
 ```php Static Config
 // Nothing bug GIFs!
-'allowedFileExtensions' => [
+->allowedFileExtensions([
     'gif',
-],
+])
 ```
 
 
@@ -3711,7 +3783,7 @@ Defined by
 
 </div>
 
-The string to use to separate words when uploading Assets. If set to `false`, spaces will be left alone.
+The string to use to separate words when uploading assets. If set to `false`, spaces will be left alone.
 
 ::: code
 ```php Static Config
@@ -3746,7 +3818,7 @@ See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3
 ::: code
 ```php Static Config
 // 25MB
-'maxUploadFileSize' => 26214400,
+->maxUploadFileSize(26214400)
 ```
 ```shell Environment Override
 # 25MB
@@ -4244,7 +4316,7 @@ Since
 
 </div>
 
-Whether images should be upscaled if the provided transform size is larger than the image.
+Whether image transforms should allow upscaling by default, for images that are smaller than the transform dimensions.
 
 ::: code
 ```php Static Config
@@ -4630,7 +4702,7 @@ Users will only be purged when [garbage collection](https://craftcms.com/docs/4.
 ::: code
 ```php Static Config
 // 2 weeks
-'purgePendingUsersDuration' => 1209600,
+->purgePendingUsersDuration(1209600)
 ```
 ```shell Environment Override
 # 2 weeks
@@ -4667,7 +4739,7 @@ See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/
 ::: code
 ```php Static Config
 // 1 week
-'purgeStaleUserSessionDuration' => 604800,
+->purgeStaleUserSessionDuration(604800)
 ```
 ```shell Environment Override
 # 1 week
@@ -4771,7 +4843,7 @@ Any additional last name prefixes that should be supported by the name parser.
 
 ::: code
 ```php Static Config
-'extraLastNamePrefixes' => ['Dal', 'Van Der'],
+->extraLastNamePrefixes(['Dal', 'Van Der'])
 ```
 ```shell Environment Override
 CRAFT_EXTRA_LAST_NAME_PREFIXES="Dal,Van Der"
@@ -4802,7 +4874,7 @@ Any additional name salutations that should be supported by the name parser.
 
 ::: code
 ```php Static Config
-'extraNameSalutations' => ['Lady', 'Sire'],
+->extraNameSalutations(['Lady', 'Sire'])
 ```
 ```shell Environment Override
 CRAFT_EXTRA_NAME_SALUTATIONS=Lady,Sire
@@ -4833,7 +4905,7 @@ Any additional name suffixes that should be supported by the name parser.
 
 ::: code
 ```php Static Config
-'extraNameSuffixes' => ['CCNA', 'OBE'],
+->extraNameSuffixes(['CCNA', 'OBE'])
 ```
 ```shell Environment Override
 CRAFT_EXTRA_NAME_SUFFIXES=CCNA,OBE

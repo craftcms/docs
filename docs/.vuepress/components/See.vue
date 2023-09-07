@@ -1,5 +1,5 @@
 <template>
-    <RouterLink :to="targetPage" class="link">
+    <RouterLink :to="{ path: targetPage.path, hash: hash ? `#${hash}` : null }" class="link">
         <div class="arrow" aria-hidden="true">&rarr;</div>
         <div class="title">{{ label || targetPage.title }}</div>
         <div class="description" v-if="description || targetPage.frontmatter.description">{{ description || targetPage.frontmatter.description }}</div>
@@ -14,6 +14,10 @@ export default {
         path: {
             type: String,
             required: true,
+        },
+        hash: {
+            type: String,
+            required: false,
         },
         label: {
             type: String,
@@ -38,6 +42,10 @@ export default {
         @apply relative rounded border block no-underline w-full p-4 pl-12 text-current;
 
         border: 1px solid var(--border-color);
+
+        &:not(:last-child) {
+            @apply mb-4;
+        }
     }
 
     .link:hover {

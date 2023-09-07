@@ -3,7 +3,7 @@
     class="sidebar-group mt-4"
     :class="[
       {
-        collapsable,
+        collapsible,
         'is-sub-group': depth !== 0,
       },
       `depth-${depth}`,
@@ -20,22 +20,30 @@
       @click.native="$emit('toggle')"
     >
       <span>{{ item.title }}</span>
-      <span v-if="collapsable" class="arrow" :class="open ? 'down' : 'right'" />
+      <span v-if="collapsible" class="arrow" :class="open ? 'down' : 'right'" />
     </RouterLink>
 
-    <p
-      v-else
+    <button
+      v-else-if="collapsible"
       class="sidebar-heading"
       :class="{ open }"
       @click="$emit('toggle')"
     >
       <span>{{ fixedHeading || item.title }}</span>
-      <span v-if="collapsable" class="arrow" :class="open ? 'down' : 'right'" />
+      <span class="arrow" :class="open ? 'down' : 'right'" />
+    </button>
+
+    <p
+      v-else
+      class="sidebar-heading"
+      :class="{ open }"
+    >
+      <span>{{ fixedHeading || item.title }}</span>
     </p>
 
     <DropdownTransition>
       <SidebarLinks
-        v-if="open || !collapsable"
+        v-if="open || !collapsible"
         class="sidebar-group-items"
         :items="item.children"
         :sidebar-depth="item.sidebarDepth || sidebarDepth"
@@ -59,7 +67,7 @@ export default {
   props: [
     "item",
     "open",
-    "collapsable",
+    "collapsible",
     "depth",
     "sidebarDepth",
     "fixedHeading",
@@ -80,7 +88,7 @@ export default {
     @apply mt-0;
   }
 
-  &:not(.collapsable) {
+  &:not(.collapsible) {
     .sidebar-heading:not(.clickable) {
       @apply cursor-auto;
       color: inherit;
@@ -112,6 +120,7 @@ export default {
 
 .sidebar-heading {
   @apply px-4 cursor-pointer font-bold m-0 box-border w-full;
+  text-align: left;
   transition: color 0.15s ease;
 
   &.open,

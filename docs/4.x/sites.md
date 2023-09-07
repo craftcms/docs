@@ -249,7 +249,7 @@ echo Craft::t('site', 'Contact us');
 
 Once you’ve prepped a message for translations, you need to supply the actual translation.
 
-To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create massages for (`site.php` for project messages, `app.php` to overwrite Craft’s control panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
+To do that, create a new folder in your project’s base directory called `translations/`, and within that, create a new folder named after the target language’s ID. Within that, create a file named after the translation category you want to create messages for (`site.php` for project messages, `app.php` to overwrite Craft’s control panel messages, or `<plugin-handle>.php` to overwrite a plugin’s messages).
 
 For example, if you want to translate your project’s messages into German, this is what your project’s directory structure should look like:
 

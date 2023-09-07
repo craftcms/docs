@@ -12,20 +12,19 @@
         <div class="address-bar">
           <div class="address">{{ getDisplayUrl(url) }}</div>
         </div>
-        <div class="viewport">
-          <div
-            class="image"
-            :class="{ 'limit-height': maxHeight }"
-            :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }"
-          >
+        <div
+          class="viewport"
+          :class="{ 'limit-height': maxHeight }"
+          :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }">
+          <div class="image">
             <slot></slot>
-          </div>
-          <div class="points" v-if="poi">
-            <div
-              class="point"
-              :class="{ 'point--active': activePoi === `${id}:${name}` }"
-              :style="`left: ${point[0]}%; top: ${point[1]}%;`"
-              v-for="(point, name, i) in poi" :key="name">{{ i + 1 }}</div>
+            <div class="points" v-if="poi">
+              <div
+                class="point"
+                :class="{ 'point--active': activePoi === `${id}:${name}` }"
+                :style="`left: ${point[0]}%; top: ${point[1]}%;`"
+                v-for="(point, name, i) in poi" :key="name">{{ point[2] || (i + 1) }}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,7 +48,7 @@
 .browser-shot-content {
   display: block;
   position: relative;
-  box-shadow: 0 0 48px rgba(74, 124, 246, 0.1);
+  box-shadow: 0 12px 48px rgba(74, 124, 246, 0.15);
   background: transparent;
   border-radius: 6px;
 }
@@ -87,17 +86,18 @@
   position: relative;
 }
 
+.browser-shot .viewport.limit-height {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 .browser-shot .image {
   margin: 0;
   border-bottom-right-radius: 6px;
   border-bottom-left-radius: 6px;
   overflow: hidden;
   background-color: transparent;
-}
-
-.browser-shot .image.limit-height {
-  overflow-x: hidden;
-  overflow-y: auto;
+  position: relative;
 }
 
 .browser-shot .image img {

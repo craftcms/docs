@@ -1,0 +1,20 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Website
+    url: https://craftcms.com/
+    about: Our official website
+  - name: Documentation
+    url: https://docs.craftcms.com/
+    about: Documentation for all our products
+  - name: Knowledge Base
+    url: https://craftcms.com/knowledge-base
+    about: Guides for Craft users and developers
+  - name: Developer Support Services
+    url: https://craftcms.com/support-services
+    about: Priority developer support from Craft team
+  - name: Discord
+    url: https://craftcms.com/discord
+    about: Join the community
+  - name: Stack Exchange
+    url: http://craftcms.stackexchange.com/
+    about: Get help and help others

@@ -256,7 +256,7 @@ If you’re unable to query a private schema because of a “missing authorizati
 
 ```twig
 {{ craft.app.getRequest().getHeaders().has('authorization')
-  ? 'auth token present ✓' :
+  ? 'auth token present ✓'
   : 'auth token missing!' }}
 ```
 
@@ -1288,14 +1288,14 @@ This is the interface implemented by all assets.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
 | `uri`| `String` | The element’s URI.
-| `enabled`| `Boolean` | Whether the element is enabled or not.
-| `archived`| `Boolean` | Whether the element is archived or not.
+| `enabled`| `Boolean` | Whether the element is enabled.
+| `archived`| `Boolean` | Whether the element is archived.
 | `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
-| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
@@ -1333,14 +1333,14 @@ This is the interface implemented by all entries.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
 | `uri`| `String` | The element’s URI.
-| `enabled`| `Boolean` | Whether the element is enabled or not.
-| `archived`| `Boolean` | Whether the element is archived or not.
+| `enabled`| `Boolean` | Whether the element is enabled.
+| `archived`| `Boolean` | Whether the element is archived.
 | `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
-| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
@@ -1382,6 +1382,7 @@ This is the interface implemented by all entries.
 | `localized`| `[EntryInterface!]!` | The same element in other locales.
 | `prev`| `EntryInterface` | Returns the previous element relative to this one, from a given set of criteria.
 | `next`| `EntryInterface` | Returns the next element relative to this one, from a given set of criteria.
+| `enabledForSite`| `Boolean` | Whether the element is enabled for the site.
 
 
 ### The `GlobalSetInterface` interface
@@ -1394,14 +1395,14 @@ This is the interface implemented by all global sets.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
 | `uri`| `String` | The element’s URI.
-| `enabled`| `Boolean` | Whether the element is enabled or not.
-| `archived`| `Boolean` | Whether the element is archived or not.
+| `enabled`| `Boolean` | Whether the element is enabled.
+| `archived`| `Boolean` | Whether the element is archived.
 | `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
-| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
@@ -1419,14 +1420,14 @@ This is the interface implemented by all matrix blocks.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
 | `uri`| `String` | The element’s URI.
-| `enabled`| `Boolean` | Whether the element is enabled or not.
-| `archived`| `Boolean` | Whether the element is archived or not.
+| `enabled`| `Boolean` | Whether the element is enabled.
+| `archived`| `Boolean` | Whether the element is archived.
 | `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
-| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
@@ -1447,14 +1448,14 @@ This is the interface implemented by all users.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
 | `uri`| `String` | The element’s URI.
-| `enabled`| `Boolean` | Whether the element is enabled or not.
-| `archived`| `Boolean` | Whether the element is archived or not.
+| `enabled`| `Boolean` | Whether the element is enabled.
+| `archived`| `Boolean` | Whether the element is archived.
 | `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
-| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
@@ -1480,14 +1481,14 @@ This is the interface implemented by all categories.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
 | `uri`| `String` | The element’s URI.
-| `enabled`| `Boolean` | Whether the element is enabled or not.
-| `archived`| `Boolean` | Whether the element is archived or not.
+| `enabled`| `Boolean` | Whether the element is enabled.
+| `archived`| `Boolean` | Whether the element is archived.
 | `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
-| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
@@ -1518,14 +1519,14 @@ This is the interface implemented by all tags.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
 | `uri`| `String` | The element’s URI.
-| `enabled`| `Boolean` | Whether the element is enabled or not.
-| `archived`| `Boolean` | Whether the element is archived or not.
+| `enabled`| `Boolean` | Whether the element is enabled.
+| `archived`| `Boolean` | Whether the element is archived.
 | `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
-| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
@@ -1543,14 +1544,14 @@ This is the interface implemented by all addresses.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
 | `uri`| `String` | The element’s URI.
-| `enabled`| `Boolean` | Whether the element is enabled or not.
-| `archived`| `Boolean` | Whether the element is archived or not.
+| `enabled`| `Boolean` | Whether the element is enabled.
+| `archived`| `Boolean` | Whether the element is archived.
 | `siteHandle`| `String` | The handle of the site the element is associated with.
 | `siteId`| `Int` | The ID of the site the element is associated with.
 | `siteSettingsId`| `ID` | The unique identifier for an element-site relation.
 | `language`| `String` | The language of the site element is associated with.
 | `searchScore`| `Int` | The element’s search score, if the `search` parameter was used when querying for the element.
-| `trashed`| `Boolean` | Whether the element has been soft-deleted or not.
+| `trashed`| `Boolean` | Whether the element has been soft-deleted.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.

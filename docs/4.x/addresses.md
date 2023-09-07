@@ -18,7 +18,7 @@ Plugins are also able to use addresses to store their own location data.
 
 ## Setup <badge text="Pro" type="edition" vertical="middle">Pro</badge>
 
-The Address management interface can be added to the User field layout by navigating to  **Settings** → **Users** -> **User Fields**.
+The address management interface can be added to the User field layout by navigating to  **Settings** → **Users** -> **User Fields**.
 
 ![Screenshot of User Fields’ Field Layout editor, with an empty layout and an available Addresses field under Native Fields in the sidebar](./images/user-fields.png)
 
@@ -41,6 +41,10 @@ Back in **User Settings**, the **Address Fields** editor lets you manage the fie
 The address field layout has additional native (but optional) fields for a handful of useful attributes. Addresses—just like other element types—support custom fields for anything else you might need to store.
 
 For compatibility and localization, core address components (aside from the Country Code) can’t be separated from one another in the field layout.
+
+### Config Options
+
+You may set a default country for new addresses via the <config4:defaultCountryCode> setting. <Since ver="4.5.0" feature="Setting a default country code for addresses" />
 
 ## Querying Addresses
 
@@ -107,6 +111,7 @@ Address queries support the following parameters:
 | [asArray](#asarray)                       | Causes the query to return matching addresses as arrays of data, rather than [Address](craft4:craft\elements\Address) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                       |
 | [countryCode](#countrycode)               | Narrows the query results based on the country the assets belong to.
 | [dateCreated](#datecreated)               | Narrows the query results based on the addresses’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the addresses’ last-updated dates.
@@ -247,6 +252,15 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 
@@ -845,7 +859,7 @@ This returns an array of [Country](https://github.com/commerceguys/addressing/bl
 #}
 ```
 
-Similarly, a repository of [subdivisions](https://github.com/commerceguys/addressing/blob/master/src/Subdivision/Subdivision.php) are available, hierarchically—with up to three levels, depending on how a given country is organized: _Administrative Area_ → _Locality_ → _Dependent Locality_.
+Similarly, a repository of subdivisions are available, hierarchically—with up to three levels, depending on how a given country is organized: _Administrative Area_ → _Locality_ → _Dependent Locality_.
 
 Expanding upon our previous example, we could output a nicely organized list of “administrative areas,” like this:
 
@@ -866,10 +880,12 @@ Expanding upon our previous example, we could output a nicely organized list of 
 </select>
 ```
 
-Either repository’s `getList()` method is a shortcut that returns only key-value pairs, suitable for our examples—it also accepts.
+Either repository’s `getList()` method is a shortcut that returns only key-value pairs, suitable for our examples—it also accepts an array of “parent” groups (beginning with country code) to narrow the subdivisions.
+
+You may supplement the subdivision data provided by the [upstream repository](https://github.com/commerceguys/addressing) by listening to the <craft4:craft\services\Addresses::EVENT_DEFINE_ADDRESS_SUBDIVISIONS> event in a plugin or module. Similarly, deeper customization of the required [fields](#fields-and-formatting) (and those fields’ [labels](#attribute-labels)) may require modifying the defaults via the [EVENT_DEFINE_USED_SUBDIVISION_FIELDS](craft4:craft\services\Addresses::EVENT_DEFINE_USED_SUBDIVISION_FIELDS) or [EVENT_DEFINE_FIELD_LABEL](craft4:craft\services\Addresses::EVENT_DEFINE_FIELD_LABEL) events. <Since ver="4.5.0" feature="Customizing address subdivision handling" />
 
 ::: tip
-Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and formatting!
+Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and [formatting](#fields-and-formatting)!
 :::
 
 ## Fields and Formatting
@@ -990,7 +1006,7 @@ You can also pass your own formatter to the `|address` filter. The addressing li
 #}
 ```
 
-You can also write a custom formatter that implements [FormatterInterface](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php). We might extend the default formatter, for example, to add a `hide_countries` option that avoids printing the names of specified countries:
+You can also write a custom formatter that implements [FormatterInterface](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php). We could extend the default formatter, for example, to add a `hide_countries` option that avoids printing the names of specified countries:
 
 ```php
 <?php
@@ -1004,56 +1020,58 @@ use craft\helpers\Html;
 
 class OptionalCountryFormatter extends DefaultFormatter
 {
-  /**
-   * @inheritdoc
-   */
-  protected $defaultOptions = [
-    'locale' => 'en',
-    'html' => true,
-    'html_tag' => 'p',
-    'html_attributes' => ['translate' => 'no'],
-    'hide_countries' => [],
-  ];
+    /**
+     * @inheritdoc
+     */
+    protected $defaultOptions = [
+        'locale' => 'en',
+        'html' => true,
+        'html_tag' => 'p',
+        'html_attributes' => ['translate' => 'no'],
+        'hide_countries' => [],
+    ];
 
-  /**
-   * @inheritdoc
-   */
-  public function format(AddressInterface $address, array $options = []): string
-  {
-    $this->validateOptions($options);
-    $options = array_replace($this->defaultOptions, $options);
-    $countryCode = $address->getCountryCode();
-    $addressFormat = $this->addressFormatRepository->get($countryCode);
+    /**
+     * @inheritdoc
+     */
+    public function format(AddressInterface $address, array $options = []): string
+    {
+        $this->validateOptions($options);
+        $options = array_replace($this->defaultOptions, $options);
+        $countryCode = $address->getCountryCode();
+        $addressFormat = $this->addressFormatRepository->get($countryCode);
 
-    if (!in_array($countryCode, $options['hide_countries'])) {
-      if (Locale::matchCandidates($addressFormat->getLocale(), $address->getLocale())) {
-        $formatString = '%country' . "\n" . $addressFormat->getLocalFormat();
-      } else {
-        $formatString = $addressFormat->getFormat() . "\n" . '%country';
-      }
-    } else {
-      // If this is in our `hide_countries` list, omit the country
-      $formatString = $addressFormat->getFormat();
+        if (!in_array($countryCode, $options['hide_countries'])) {
+            if (Locale::matchCandidates($addressFormat->getLocale(), $address->getLocale())) {
+                $formatString = '%country' . "\n" . $addressFormat->getLocalFormat();
+            } else {
+                $formatString = $addressFormat->getFormat() . "\n" . '%country';
+            }
+        } else {
+            // If this is in our `hide_countries` list, omit the country
+            $formatString = $addressFormat->getFormat();
+        }
+
+        $view = $this->buildView($address, $addressFormat, $options);
+        $view = $this->renderView($view);
+        $replacements = [];
+
+        foreach ($view as $key => $element) {
+            $replacements['%' . $key] = $element;
+        }
+
+        $output = strtr($formatString, $replacements);
+        $output = $this->cleanupOutput($output);
+
+        if (!empty($options['html'])) {
+            $output = nl2br($output, false);
+
+            // Add the HTML wrapper element with Craft’s HTML helper:
+            $output = Html::tag($options['html_tag'], $output, $options['html_attributes']);
+        }
+
+        return $output;
     }
-
-    $view = $this->buildView($address, $addressFormat, $options);
-    $view = $this->renderView($view);
-    $replacements = [];
-    foreach ($view as $key => $element) {
-      $replacements['%' . $key] = $element;
-    }
-    $output = strtr($formatString, $replacements);
-    $output = $this->cleanupOutput($output);
-
-    if (!empty($options['html'])) {
-      $output = nl2br($output, false);
-
-      // Add the HTML wrapper element with Craft’s HTML helper:
-      $output = Html::tag($options['html_tag'], $output, $options['html_attributes']);
-    }
-
-    return $output;
-  }
 }
 ```
 
@@ -1077,9 +1095,32 @@ We can instantiate and use that just like the postal label formatter:
 #}
 ```
 
+To replace the default formatter <Since ver="4.5.0" feature="Default address formatter" />, add the following to your [application configuration](config/app.md):
+
+```php
+return [
+    // ...
+    'components' => [
+        // ...
+        'addresses' => [
+            'class' => \craft\services\Addresses::class,
+            'formatter' => new \mynamespace\OptionalCountryFormatter(
+                new \CommerceGuys\Addressing\AddressFormat\AddressFormatRepository(),
+                new \CommerceGuys\Addressing\Country\CountryRepository(),
+                new \CommerceGuys\Addressing\Subdivision\SubdivisionRepository()
+            )
+        ],
+    ],
+];
+```
+
+::: warning
+The default formatter is used in the control panel as well as your templates, so make sure it includes all the information required for administrators to act on users’ information!
+:::
+
 ## Managing Addresses
 
-Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](./dev/controller-actions.md).
+Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](./dev/controller-actions.md#users-save-address).
 
 Craft doesn’t automatically give Addresses their own URLs, though—so it’s up to you to define a [routing scheme](./routing.md#advanced-routing-with-url-rules) for them via `routes.php`. We’ll cover each of these three routes in the following sections:
 
@@ -1237,13 +1278,13 @@ The code for new addresses will end up being reused for [existing addresses](#ex
 #### Guide
 
 1. We pass an <craft4:craft\elements\Address> to the form partial—either from an `address` variable that is available to the template after an attempted submission (say, due to validation errors), or a new one instantiated with the [`create()` function](./dev/functions.md#create).
-2. Whether we’re creating a new Address or editing an existing one (this partial handles both), the request should be sent to the `users/save-address` action.
+2. Whether we’re creating a new address or editing an existing one (this partial handles both), the request should be sent to the `users/save-address` action.
 3. Addresses that have been previously saved will have an `id`, so we need to send that back to apply updates to the correct Address.
-4. The [`redirectInput()` function](./dev/functions.md#redirectinput) accepts an “object template,” which can include properties of the thing we’re working with. The template won’t be evaluated when it appears in the form—instead, Craft will render it using the Address object after it’s been successfully saved. In this case, we’ll be taken to the [edit screen](#existing-addresses) for the newly-saved address.
-5. Which fields are output is up to you. If you want to capture input for custom fields, it should be nested under the `fields` key: `<input type="text" name="fields[myCustomFieldHandle]" value="...">`
+4. The [`redirectInput()` function](./dev/functions.md#redirectinput) accepts an “object template,” which can include properties of the thing we’re working with. The template won’t be evaluated when it appears in the form—instead, Craft will render it using the address element _after_ it’s been successfully saved. In this case, we’ll be taken to the [edit screen](#existing-addresses) for the newly-saved address.
+5. Which fields are output is up to you—but be aware that the selected `countryCode` may influence what additional address fields are required. If you want to capture input for [custom fields](fields.md), it should be nested under the `fields` key, as it is for entries and other element types: `<input type="text" name="fields[myCustomFieldHandle]" value="...">`
 
 ::: tip
-See the [complete list of parameters](./dev/controller-actions.md#post-users-save-address) that can be sent 
+See the [complete list of parameters](./dev/controller-actions.md#post-users-save-address) that can be sent to the `users/save-address` action.
 :::
 
 ### Existing Addresses
@@ -1302,16 +1343,16 @@ use craft\elements\Address;
 use craft\events\DefineRulesEvent;
 
 Event::on(
-  Address::class,
-  Model::EVENT_DEFINE_RULES,
-  function(DefineRulesEvent $event) {
-    $event->rules[] = [
-      ['fullName'],
-      'match',
-      'pattern' => '/droid|bot/i',
-      'message' => Craft::t('site', 'Robots are not allowed.'),
-    ];
-  }
+    Address::class,
+    Model::EVENT_DEFINE_RULES,
+    function(DefineRulesEvent $event) {
+        $event->rules[] = [
+            ['fullName'],
+            'match',
+            'pattern' => '/droid|bot/i',
+            'message' => Craft::t('site', 'Robots are not allowed.'),
+        ];
+    }
 );
 ```
 

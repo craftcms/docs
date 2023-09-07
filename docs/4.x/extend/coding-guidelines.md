@@ -268,7 +268,7 @@ See [Controllers](./controllers.md#handling-requests) for more information on wr
 - For consistency, use:
   - `['col' => $values]`  instead of `['in', 'col', $values]`
   - `['col' => $value]`  instead of `['=', 'col', $value]`
-  - `['like', 'col', 'value']`  instead of `['like', 'col', '%value%', false]`
+  - `['like', 'col', 'value']` instead of `['like', 'col', '%value%', false]`
     *(unless the `%` is only needed on one side of `value`)*
 - If searching for `NULL`, use the `['col' => null]` syntax.
 - If searching for `NOT NULL`, use the `['not', ['col' => null]]` syntax.

@@ -1,6 +1,10 @@
+---
+description: Add native-feeling content types to empower content authors and administrators.
+---
+
 # Element Types
 
-[Elements](../elements.md) underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#types) with your own, from a plugin or module.
+[Elements](../elements.md) underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#element-types) with your own, from a plugin or module.
 
 As you implement common element features like [titles](#titles), [sources](#sources), or [statuses](#statuses), the built-in element classes will be an invaluable resource—both as templates for basic functionality and evidence of the flexibility of elements:
 
@@ -28,9 +32,7 @@ Your element class should live in the `elements/` directory of your plugin’s s
 ::: tip
 Use the [generator](./generator.md) to scaffold an element type from the command line!
 
-```bash
-php craft make element-type
-```
+<p><Generator component="element-type" plugin="my-plugin" /></p>
 :::
 
 To start, we’ll give the class a handful of public properties and define two static methods that help the control panel render labels.
@@ -54,7 +56,7 @@ class Product extends Element
     }
 
     public int $price = 0;
-    public string $currency;
+    public ?string $currency = null;
 
     // ...
 }
@@ -97,7 +99,7 @@ We’re going to set up the mechanisms of persistence now, and will cover [accep
 
 ### Migrations
 
-Create an new [migration](migrations.md), and add this to its `safeUp()` method:
+Create a new [migration](migrations.md), and add this to its `safeUp()` method:
 
 ```php
 // Create the Products table:
@@ -128,7 +130,7 @@ Note that we’ve also specified `id`, `dateCreated`, `dateUpdated`, and `uid` �
 Plugins should always keep their [install migration](./migrations.md#plugin-install-migrations) up to date. If this is your plugin’s first migration, it can live solely in `Install.php`; otherwise, equivalent code will also need to be added via a regular migration.
 :::
 
-Install your plugin (or run `php migrate/up`) to create the database table.
+Install your plugin (or run `php craft migrate/up --plugin=my-plugin`) to create the database table.
 
 ### Save Hooks
 
@@ -137,19 +139,17 @@ The presence of attributes alone doesn’t give Craft enough information to pers
 ```php
 use craft\helpers\Db;
 
-public function afterSave(bool $isNew): void
+// ...
+
+public function afterSave(bool $isNew)
 {
-    if ($isNew) {
-        Db::insert('{{%plugin_products}}', [
+    if (!$this->propagating) {
+        Db::upsert('{{%products}}', [
             'id' => $this->id,
+        ], [
             'price' => $this->price,
             'currency' => $this->currency,
         ]);
-    } else {
-        Db::update('{{%plugin_products}}', [
-            'price' => $this->price,
-            'currency' => $this->currency,
-        ], ['id' => $this->id]);
     }
 
     parent::afterSave($isNew);
@@ -315,7 +315,7 @@ When modifying your query, new params should be applied with `andWhere()` instea
 
 ### Querying for Elements in Templates
 
-If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](guide:concept-behaviors) to it.
+If your element type is useful to developers in Twig, you’ll want to expose an element query factory function. For consistency, we’ll look at how to add a method like `craft.entries()` or `craft.categories()` to the global `craft` variable (an instance of [CraftVariable](craft4:craft\web\twig\variables\CraftVariable)) by attaching a [behavior](behaviors.md) to it.
 
 Your behavior class (in a new file at `variables/CraftVariableBehavior.php`) should look like this:
 
@@ -424,7 +424,7 @@ public function getFieldLayout()
 ```
 
 ::: tip
-Read about managing [multiple field layouts](#variations--multiple-field-layouts), or storing [field layouts in project config](#project-config).
+Read about managing [multiple field layouts](#variations-multiple-field-layouts), or storing [field layouts in project config](#project-config).
 :::
 
 #### Native Layout Elements
@@ -452,7 +452,8 @@ Event::on(
             'min' => 0,
             // ...see the `TextField` definition for more options!
         ];
-    });
+    }
+);
 ```
 
 `mandatory` here means that the layout element _must_ be present in the field layout, not that a value is required. Take a look at the existing [field layout element types](repo:craftcms/cms/tree/main/src/fieldlayoutelements) to see which makes the most sense for your attribute.
@@ -568,7 +569,8 @@ Event::on(
     UrlManager::EVENT_REGISTER_CP_URL_RULES,
     function (RegisterUrlRulesEvent $event) {
         $event->rules['products'] = ['template' => 'my-plugin/products/_index.twig'];
-    });
+    }
+);
 ```
 
 ### Sources
@@ -601,7 +603,7 @@ protected static function defineSources(string $context = null): array
             'criteria' => [
                 'currency' => 'usd',
             ],
-            // 
+            // Define a default sort attribute and direction:
             'defaultSort' => ['price', 'desc'],
         ],
     ];
@@ -617,6 +619,52 @@ The returned array can also be built dynamically. For example, [entries](../entr
 
 Consider hiding sources that the current user would not be able to access, based on their [permissions](#permissions).
 :::
+
+<Block label="Criteria vs. Conditions">
+
+You may combine the opaque `criteria` source option with the more transparent `defaultFilter`. <Since ver="4.5.0" feature="Default filters on sources" /> Default filters are constructed as [conditions](conditions.md), and allow users to tweak them after a source is loaded:
+
+```php
+use craft\elements\Entry;
+use craft\elements\conditions\DateUpdatedConditionRule;
+
+// ...
+
+$condition = Entry::createCondition();
+$condition->setConditionRules([
+    new DateUpdatedConditionRule([
+        'attributes' => [
+            // Keep in mind, these are just defaults!
+            // Users will be able to update them via the filter/condition UI.
+            'rangeType' => DateRange::TYPE_AFTER,
+            'periodValue' => 7,
+            'periodType' => DateRange::PERIOD_DAYS_AGO,
+        ],
+    ]),
+]);
+
+// ...
+
+return [
+    // ...
+    [
+        'key' => 'recent-edits',
+        'label' => 'Recently Edited',
+        'criteria' => [],
+        'defaultFilter' => $condition,
+        'defaultSort' => ['dateUpdated', 'desc'],
+    ],
+];
+```
+
+The applied conditions are _additive_, so:
+
+- Condition rules that get [exclusive control](craft4:craft\elements\conditions\ElementConditionRuleInterface::getExclusiveQueryParams()) will not be available to users when already present in the source’s `criteria`;
+- Users may not expand the visible results beyond what is defined in the source’s `criteria`;
+
+Default filters can also be used when registering sources via <craft4:craft\base\Element::EVENT_REGISTER_SOURCES>.
+
+</Block>
 
 ### Table Attributes
 
@@ -1033,7 +1081,7 @@ class Products extends BaseRelationField
         return \Craft::t('plugin-handle', 'Products');
     }
 
-    protected static function elementType(): string
+    public static function elementType(): string
     {
         return Product::class;
     }

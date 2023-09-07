@@ -64,15 +64,18 @@ If you’re using MySQL, we recommend running [`php craft db/convert-charset`](c
 
 The [Craft starter project](https://github.com/craftcms/craft) is kept up-to-date with new Craft features, and provides official recommendations for your entry scripts (`index.php` and the `craft` CLI executable), configuration structure, etc. It’s a good idea to look this over as a means of keeping your upgraded projects as similar as possible to fresh ones. Be mindful of any customizations you’ve made to the scripts, over time—this is where you would have set any [additional PHP constants](./config/README.md#php-constants).
 
-Incorporating updated entry script(s) into your project may also involve changing the required version of [DotEnv](https://github.com/vlucas/phpdotenv) in `composer.json` to match the starter project.
+Incorporating updated entry script(s) into your project may also involve:
+
+- Changing the required version of [DotEnv](https://github.com/vlucas/phpdotenv) in `composer.json` to match the starter project;
+- Reviewing [how your environment is determined](./config/README.md#multi-environment-configs);
+
+Craft 3 projects would [automatically assign](https://github.com/craftcms/craft/blob/1.1.7/bootstrap.php#L22) the special `CRAFT_ENVIRONMENT` constant to the value of an environment variable named `ENVIRONMENT`—but the Craft 4 starter kit requires that you directly set `CRAFT_ENVIRONMENT` from your `.env` file.
 
 ## Breaking Changes and Deprecations
 
+Features deprecated in Craft 3 may have been fully removed or replaced in Craft 4, and new deprecations have been flagged in Craft 4
+
 ### Configuration
-
-Depending on when your project was first created (or when you last updated your [entry scripts](#entry-script)), you may need to review [how your environment is set](./config/README.md#multi-environment-configs).
-
-Craft 4 looks for an environment variable (or PHP constant) named `CRAFT_ENVIRONMENT`. Use of the `ENVIRONMENT` variable is no longer recommended, as it relies on an older entry script to assign the constant.
 
 #### Config Settings
 
@@ -267,7 +270,7 @@ Certain services were exposed via the `craft` variable in Twig (an instance of <
 | `craft.request`           | `craft.app.request`
 | `craft.sections`          | `craft.app.sections`
 | `craft.session`           | `craft.app.session`
-| `craft.systemSettings`    | `craft.app.systemSettings`
+| `craft.systemSettings`    | System settings are stored in [Project Config](./project-config.md) <Since ver="3.1.0" feature="System settings in project config" />. Use `craft.app.projectConfig.get('...')` to access settings by their keys in `config/project/project.yml`. If a value you need is set to an alias or environment variable, pass it to the [`parseEnv()` function](./dev/functions.md#parseenv).
 | `craft.userGroups`        | `craft.app.userGroups`
 | `craft.userPermissions`   | `craft.app.userPermissions`
 
@@ -388,6 +391,28 @@ $activeUsers = User::find()
   ->all();
 ```
 :::
+
+#### Reserved Field Names
+
+The following field handles are no longer allowed due to conflicts with native properties or methods:
+
+- `isNewForSite`
+- `isProvisionalDraft`
+- `newSiteIds`
+
+In addition, [User] field layouts can no longer contain fields with the following handles <Since ver="4.5.0" feature="Additional reserved field handles in user field layouts" />:
+
+- `active`
+- `addresses`
+- `admin`
+- `email`
+- `friendlyName`
+- `locked`
+- `name`
+- `password`
+- `pending`
+- `suspended`
+- `username`
 
 ### Collections
 

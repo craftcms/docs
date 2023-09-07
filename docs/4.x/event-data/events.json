@@ -1462,6 +1462,49 @@
     },
     {
         "class": "craft\\base\\Element",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\base\\Element",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -3520,6 +3563,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\EntrifyController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\ExecController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -3796,6 +3857,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\SectionsController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\SectionsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\SectionsController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\ServeController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
@@ -4025,6 +4104,12 @@
     },
     {
         "class": "craft\\controllers\\AddressesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AddressesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4037,6 +4122,12 @@
     },
     {
         "class": "craft\\controllers\\AppController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AppController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4049,6 +4140,12 @@
     },
     {
         "class": "craft\\controllers\\AssetIndexesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AssetIndexesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4061,6 +4158,12 @@
     },
     {
         "class": "craft\\controllers\\AssetSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AssetSettingsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4073,6 +4176,12 @@
     },
     {
         "class": "craft\\controllers\\AssetsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\AssetsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4085,6 +4194,12 @@
     },
     {
         "class": "craft\\controllers\\BaseElementsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\BaseElementsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4097,6 +4212,12 @@
     },
     {
         "class": "craft\\controllers\\BaseEntriesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\BaseEntriesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4106,6 +4227,12 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\BaseUpdaterController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
     },
     {
         "class": "craft\\controllers\\BaseUpdaterController",
@@ -4127,6 +4254,12 @@
     },
     {
         "class": "craft\\controllers\\CategoriesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\CategoriesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4139,6 +4272,12 @@
     },
     {
         "class": "craft\\controllers\\ChartsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ChartsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4151,6 +4290,12 @@
     },
     {
         "class": "craft\\controllers\\ConditionsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ConditionsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4163,6 +4308,12 @@
     },
     {
         "class": "craft\\controllers\\ConfigSyncController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ConfigSyncController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4175,6 +4326,12 @@
     },
     {
         "class": "craft\\controllers\\DashboardController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\DashboardController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4187,6 +4344,12 @@
     },
     {
         "class": "craft\\controllers\\ElementIndexSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ElementIndexSettingsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4199,6 +4362,12 @@
     },
     {
         "class": "craft\\controllers\\ElementIndexesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ElementIndexesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4208,6 +4377,12 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\ElementSelectorModalsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
     },
     {
         "class": "craft\\controllers\\ElementSelectorModalsController",
@@ -4229,6 +4404,12 @@
     },
     {
         "class": "craft\\controllers\\ElementsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ElementsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4241,6 +4422,12 @@
     },
     {
         "class": "craft\\controllers\\EntriesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\EntriesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4253,6 +4440,12 @@
     },
     {
         "class": "craft\\controllers\\FieldsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\FieldsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4265,6 +4458,12 @@
     },
     {
         "class": "craft\\controllers\\FsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\FsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4277,6 +4476,12 @@
     },
     {
         "class": "craft\\controllers\\GlobalsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\GlobalsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4289,6 +4494,12 @@
     },
     {
         "class": "craft\\controllers\\GraphqlController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\GraphqlController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4301,6 +4512,12 @@
     },
     {
         "class": "craft\\controllers\\ImageTransformsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ImageTransformsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4313,6 +4530,12 @@
     },
     {
         "class": "craft\\controllers\\InstallController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\InstallController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4325,6 +4548,12 @@
     },
     {
         "class": "craft\\controllers\\LivePreviewController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\LivePreviewController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4337,6 +4566,12 @@
     },
     {
         "class": "craft\\controllers\\NotFoundController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\NotFoundController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4349,6 +4584,12 @@
     },
     {
         "class": "craft\\controllers\\PluginStoreController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\PluginStoreController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4361,6 +4602,12 @@
     },
     {
         "class": "craft\\controllers\\PluginsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\PluginsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4373,6 +4620,12 @@
     },
     {
         "class": "craft\\controllers\\PreviewController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\PreviewController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4385,6 +4638,12 @@
     },
     {
         "class": "craft\\controllers\\ProjectConfigController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\ProjectConfigController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4397,6 +4656,12 @@
     },
     {
         "class": "craft\\controllers\\QueueController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\QueueController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4409,6 +4674,12 @@
     },
     {
         "class": "craft\\controllers\\RebrandController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\RebrandController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4421,6 +4692,12 @@
     },
     {
         "class": "craft\\controllers\\RedirectController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\RedirectController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4433,6 +4710,12 @@
     },
     {
         "class": "craft\\controllers\\RelationalFieldsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\RelationalFieldsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4445,6 +4728,12 @@
     },
     {
         "class": "craft\\controllers\\RoutesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\RoutesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4457,6 +4746,12 @@
     },
     {
         "class": "craft\\controllers\\SectionsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SectionsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4469,6 +4764,12 @@
     },
     {
         "class": "craft\\controllers\\SitesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SitesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4481,6 +4782,12 @@
     },
     {
         "class": "craft\\controllers\\StructuresController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\StructuresController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4493,6 +4800,12 @@
     },
     {
         "class": "craft\\controllers\\SystemMessagesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SystemMessagesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4505,6 +4818,12 @@
     },
     {
         "class": "craft\\controllers\\SystemSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SystemSettingsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4517,6 +4836,12 @@
     },
     {
         "class": "craft\\controllers\\TagsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\TagsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4529,6 +4854,12 @@
     },
     {
         "class": "craft\\controllers\\TemplatesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\TemplatesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4541,6 +4872,12 @@
     },
     {
         "class": "craft\\controllers\\UpdaterController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\UpdaterController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4550,6 +4887,12 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\UserSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
     },
     {
         "class": "craft\\controllers\\UserSettingsController",
@@ -4613,6 +4956,12 @@
     },
     {
         "class": "craft\\controllers\\UsersController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\UsersController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4625,6 +4974,12 @@
     },
     {
         "class": "craft\\controllers\\UtilitiesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\UtilitiesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4637,6 +4992,12 @@
     },
     {
         "class": "craft\\controllers\\VolumesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\VolumesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4649,6 +5010,12 @@
     },
     {
         "class": "craft\\controllers\\pluginstore\\InstallController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\pluginstore\\InstallController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -4658,6 +5025,12 @@
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\pluginstore\\RemoveController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
     },
     {
         "class": "craft\\controllers\\pluginstore\\RemoveController",
@@ -6002,6 +6375,49 @@
     },
     {
         "class": "craft\\elements\\Address",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Address",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -6830,6 +7246,49 @@
         "name": "EVENT_AFTER_GENERATE_TRANSFORM",
         "type": "craft\\events\\GenerateTransformEvent",
         "desc": "The event that is triggered after a transform is generated for an asset.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Asset",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineAssetUrlEvent",
+        "desc": "The event that is triggered before defining the asset’s URL.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -9931,6 +10390,49 @@
     },
     {
         "class": "craft\\elements\\Category",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Category",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -12932,6 +13434,84 @@
     },
     {
         "class": "craft\\elements\\Entry",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "draft": {
+                "label": "Element is a draft",
+                "conditionsPhp": "ElementHelper::isDraft($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "provisional": {
+                "label": "Element is a provisional draft",
+                "conditionsPhp": "ElementHelper::rootElement($event->sender)->isProvisionalDraft",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            },
+            "revision": {
+                "label": "Element is a revision",
+                "conditionsPhp": "ElementHelper::isRevision($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "provisional",
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Entry",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -15427,6 +16007,49 @@
     },
     {
         "class": "craft\\elements\\GlobalSet",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\GlobalSet",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -17327,6 +17950,49 @@
     },
     {
         "class": "craft\\elements\\MatrixBlock",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\MatrixBlock",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -19187,6 +19853,49 @@
         "name": "EVENT_DEFINE_KEYWORDS",
         "type": "craft\\events\\DefineAttributeKeywordsEvent",
         "desc": "The event that is triggered when defining the search keywords for an element attribute.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Tag",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -21256,6 +21965,49 @@
     },
     {
         "class": "craft\\elements\\User",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\User",
         "name": "EVENT_DEFINE_URL",
         "type": "craft\\events\\DefineUrlEvent",
         "desc": "The event that is triggered when defining the element’s URL.",
@@ -25236,13 +25988,13 @@
     {
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25250,6 +26002,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\AddressQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
@@ -25278,13 +26036,13 @@
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25292,6 +26050,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\AssetQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
@@ -25320,13 +26084,13 @@
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25334,6 +26098,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\CategoryQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
@@ -25362,13 +26132,13 @@
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25376,6 +26146,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\ElementQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
@@ -25404,13 +26180,13 @@
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25418,6 +26194,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\EntryQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
@@ -25446,13 +26228,13 @@
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25460,6 +26242,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\GlobalSetQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
@@ -25488,13 +26276,13 @@
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25502,6 +26290,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\MatrixBlockQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
@@ -25530,13 +26324,13 @@
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25544,6 +26338,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\TagQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
@@ -25572,13 +26372,13 @@
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -25586,6 +26386,12 @@
         "name": "EVENT_DEFINE_CACHE_TAGS",
         "type": "craft\\events\\DefineValueEvent",
         "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\elements\\db\\UserQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
@@ -28206,8 +29012,8 @@
     {
         "class": "craft\\fields\\Matrix",
         "name": "EVENT_SET_FIELD_BLOCK_TYPES",
-        "type": "craft\\fields\\SectionEvent",
-        "desc": "The event that is triggered before a section is saved."
+        "type": "craft\\events\\BlockTypesEvent",
+        "desc": "The event that is triggered when setting the field’s block types"
     },
     {
         "class": "craft\\fields\\Matrix",
@@ -32849,6 +33655,12 @@
     },
     {
         "class": "craft\\queue\\Queue",
+        "name": "EVENT_AFTER_EXEC_AND_RELEASE",
+        "type": "yii\\queue\\ExecEvent",
+        "desc": "The event that is triggered after a job is executed and released."
+    },
+    {
+        "class": "craft\\queue\\Queue",
         "name": "EVENT_WORKER_START",
         "type": "yii\\queue\\cli\\WorkerEvent",
         "desc": "that is triggered when the worker is started."
@@ -36077,6 +36889,12 @@
         "desc": "The event that is triggered when defining the label of an address field for a given country code."
     },
     {
+        "class": "craft\\services\\Addresses",
+        "name": "EVENT_DEFINE_ADDRESS_SUBDIVISIONS",
+        "type": "craft\\events\\DefineAddressSubdivisionsEvent",
+        "desc": "The event that is triggered when defining subdivisions options for an address field for a given country code, and optionally administrativeArea and locality."
+    },
+    {
         "class": "craft\\services\\Assets",
         "name": "EVENT_BEFORE_REPLACE_ASSET",
         "type": "craft\\events\\ReplaceAssetEvent",
@@ -37021,25 +37839,25 @@
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_BEFORE_CREATE_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered before a revision is created."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_AFTER_CREATE_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered after a revision is created."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_BEFORE_REVERT_TO_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered before an element is reverted to a revision."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_AFTER_REVERT_TO_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered after an element is reverted to a revision."
     },
     {
@@ -37227,6 +38045,18 @@
         "name": "EVENT_AFTER_DELETE_SITE",
         "type": "craft\\events\\DeleteSiteEvent",
         "desc": "The event that is triggered after a site is deleted."
+    },
+    {
+        "class": "craft\\services\\Structures",
+        "name": "EVENT_BEFORE_INSERT_ELEMENT",
+        "type": "craft\\events\\MoveElementEvent",
+        "desc": "The event that is triggered before an element is inserted into a structure."
+    },
+    {
+        "class": "craft\\services\\Structures",
+        "name": "EVENT_AFTER_INSERT_ELEMENT",
+        "type": "craft\\events\\MoveElementEvent",
+        "desc": "The event that is triggered after an element is inserted into a structure."
     },
     {
         "class": "craft\\services\\Structures",
@@ -37454,25 +38284,25 @@
         "class": "craft\\services\\Utilities",
         "name": "EVENT_REGISTER_UTILITY_TYPES",
         "type": "craft\\events\\RegisterComponentTypesEvent",
-        "desc": "The event that is triggered when registering utility types."
+        "desc": "The event that is triggered when registering utilities."
     },
     {
         "class": "craft\\services\\Volumes",
         "name": "EVENT_BEFORE_SAVE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered before an Asset volume is saved."
+        "desc": "The event that is triggered before a volume is saved."
     },
     {
         "class": "craft\\services\\Volumes",
         "name": "EVENT_AFTER_SAVE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered after an Asset volume is saved."
+        "desc": "The event that is triggered after a volume is saved."
     },
     {
         "class": "craft\\services\\Volumes",
         "name": "EVENT_BEFORE_DELETE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered before an Asset volume is deleted."
+        "desc": "The event that is triggered before a volume is deleted."
     },
     {
         "class": "craft\\services\\Volumes",
@@ -37484,7 +38314,7 @@
         "class": "craft\\services\\Volumes",
         "name": "EVENT_AFTER_DELETE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered after a Asset volume is deleted."
+        "desc": "The event that is triggered after a volume is deleted."
     },
     {
         "class": "craft\\utilities\\AssetIndexes",
@@ -38088,6 +38918,12 @@
     },
     {
         "class": "craft\\web\\Controller",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\web\\Controller",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
@@ -38181,6 +39017,12 @@
         "name": "EVENT_AFTER_RENDER_PAGE_TEMPLATE",
         "type": "craft\\events\\TemplateEvent",
         "desc": "The event that is triggered after a page template gets rendered"
+    },
+    {
+        "class": "craft\\web\\View",
+        "name": "EVENT_AFTER_REGISTER_ASSET_BUNDLE",
+        "type": "craft\\events\\AssetBundleEvent",
+        "desc": "The event that is triggered after an asset bundle is registered"
     },
     {
         "class": "craft\\web\\View",

@@ -61,8 +61,8 @@ The permissions Craft comes with are:
 | ↳&nbsp; Save entries | `saveEntries:[SectionUID]`
 | ↳&nbsp; Delete entries | `deleteEntries:[SectionUID]`
 | ↳&nbsp; View other users’ entries | `viewPeerEntries:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerEntries:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerEntries:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ entries | `savePeerEntries:[SectionUID]`
+| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ entries | `deletePeerEntries:[SectionUID]`
 | ↳&nbsp;View other users’ drafts | `viewPeerEntryDrafts:[SectionUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerEntryDrafts:[SectionUID]`
 | &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerEntryDrafts:[SectionUID]`
@@ -156,4 +156,4 @@ Craft Pro has the option of allowing public user registration, which is disabled
 
 To enable public registration, go to **Settings** → **Users** → **Settings**, and check **Allow public registration**. With that checked, you will also have the ability to choose a default user group to which Craft will assign the publicly-registered users.
 
-Once you set up your site to allow public user registration, the last step is to create a [user registration form](https://craftcms.com/knowledge-base/front-end-user-accounts#registration-form) on your site’s front end. For a full list of params a user can set during registration (or when updating their account, later on), read about the [`users/save-user` controller action](./dev/controller-actions.md#post-userssave-user).
+Once you set up your site to allow public user registration, the last step is to create a [user registration form](kb:front-end-user-accounts#registration-form) on your site’s front end. For a full list of params a user can set during registration (or when updating their account, later on), read about the [`users/save-user` controller action](./dev/controller-actions.md#post-users-save-user).

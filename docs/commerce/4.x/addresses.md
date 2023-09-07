@@ -97,15 +97,22 @@ Commerce doesn’t require an order to have a shipping address, but providing on
 
 #### Address Fields
 
-The specific properties and fields supported when updating an order’s `shippingAddress` or `billingAddress` in this way are determined by the [Address](craft4:craft\elements\Address) element, regional differences based on the provided `countryCode`, and any custom fields assigned to it.
+The specific properties and fields supported when updating an order’s `shippingAddress` or `billingAddress` in this way are determined by the [Address](craft4:craft\elements\Address) element, regional differences based on the provided `countryCode`, and any [custom fields](/4.x/fields.md) assigned to it.
 
 ```twig
 <form method="post">
-  {# ... #}
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
 
+  {# Native `fullName` field: #}
   {{ input('text', 'shippingAddress[fullName]', cart.shippingAddress.fullName) }}
+
+  {# Custom fields (note the `[fields]` prefix): #}
+  {{ input('checkbox', 'shippingAddress[fields][isResidentialAddress]') }}
 </form>
 ```
+
+For more information on address management, continue reading—or see the main Craft documentation for [Address elements](/4.x/addresses.md).
 
 #### Address Ownership
 

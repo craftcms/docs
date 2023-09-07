@@ -2,6 +2,10 @@
 
 Modules and plugins can add new edit pages to the control panel, for editing models or [elements](./element-types.md).
 
+::: tip
+Looking to support full-page interfaces _and_ slideouts? Check out the new [control panel screens](./controllers.md#control-panel-screens) API.
+:::
+
 First, decide on the URL patterns that the edit page should be accessed by, such as `my-plugin/events/new` when creating a new event, and `my-plugin/events/X` for editing an existing one.
 
 Register two URL rules via <craft4:craft\web\UrlManager::EVENT_REGISTER_CP_URL_RULES> from your module/plugin’s `init()` method:

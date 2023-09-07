@@ -6,7 +6,7 @@ Each user has an email address and username by default, as well as optional fiel
 
 There are also preferences for localization, accessibility, and debugging that may be relevant depending on how you build your site and whether you grant the user access to the control panel.
 
-Users can be part of groups you create that [fine-tune permissions](user-management.md).
+What a user can do is determined by which [groups](user-management.md#user-groups) they belong to, and what individual [permissions](user-management.md#permissions) they have been granted.
 
 ### Active and Inactive Users
 
@@ -95,6 +95,7 @@ User queries support the following parameters:
 | [cache](#cache)                           | Enables query cache for this Query.
 | [can](#can)                               | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                       |
 | [dateCreated](#datecreated)               | Narrows the query results based on the users’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the users’ last-updated dates.
 | [email](#email)                           | Narrows the query results based on the users’ email addresses.
@@ -305,6 +306,15 @@ $users = \craft\elements\User::find()
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 

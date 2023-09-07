@@ -11601,13 +11601,13 @@
     {
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -11631,13 +11631,13 @@
     {
         "class": "craft\\commerce\\elements\\db\\OrderQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\commerce\\elements\\db\\OrderQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -11661,13 +11661,13 @@
     {
         "class": "craft\\commerce\\elements\\db\\ProductQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\commerce\\elements\\db\\ProductQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -11691,13 +11691,13 @@
     {
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -11721,13 +11721,13 @@
     {
         "class": "craft\\commerce\\elements\\db\\VariantQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\commerce\\elements\\db\\VariantQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {

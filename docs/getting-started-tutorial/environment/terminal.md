@@ -1,72 +1,125 @@
-# Get to know your terminal
+# Get to Know Your Terminal
 
-Every operating system comes with a text-based command line interface (CLI) for inputting commands. This provides a powerful way of doing lots of things beyond the graphical user interface you already know.
+Every operating system comes with a text-based _command line interface_ (CLI) for issuing commands. This provides a powerful way to accomplish things that the _graphical_ user interface (GUI) may not expose.
 
-::: tip
-If you’ve time traveled from the past, your operating system may _only_ have a command line interface. Our GUIs are going to blow your mind.
-:::
+Already know your way around a terminal? Skip ahead to [setup](stack.md)!
 
 ### Find your OS terminal
 
-![](../images/os-terminal.png)
+![Examples of terminal applications for macOS, Windows, and Linux](../images/os-terminal.png)
 
-- On macOS, the default console is [Terminal.app](https://support.apple.com/guide/terminal/welcome/mac).
+- On macOS, the default console is [Terminal](https://support.apple.com/guide/terminal/welcome/mac).
 - On Windows, the default console is called [Command Prompt](https://www.lifewire.com/command-prompt-2625840).
 - On Ubuntu Linux, the default console is called [Terminal](https://ubuntu.com/tutorials/command-line-for-beginners).
 
-There are other apps like [Hyper](https://hyper.is/) (cross-platform) and [iTerm2](https://www.iterm2.com/) (Mac), but your system’s terminal will work fine!
+There are other apps like [Hyper](https://hyper.is/) (cross-platform) and [iTerm2](https://www.iterm2.com/) (Mac), but your system’s terminal will work fine! Most mobile operating systems (Android, iOS) do not expose a console application, for security reasons.
+
+::: tip
+For a more in-depth introduction to your computer’s command line, the [Ubuntu guide](https://ubuntu.com/tutorials/command-line-for-beginners) (also linked above) is a great resource.
+:::
 
 ### Run a command
 
-Once you’ve launched your terminal, you’ll be greeted by an empty prompt that’s ready for input.
+Once you’ve launched your terminal, you’ll be greeted by an empty _prompt_.
 
-Later on we’ll refer to “running” commands, in a format that looks like this:
+A _command_ is simply a piece of text that is interpreted and executed by the system. Commands often include the names of programs, references to files and folders, flags, and other _arguments_. Throughout the tutorial, we’ll ask you to “run” commands—that just means you’ll type the text into your terminal and press <kbd>Return</kbd> or <kbd>Enter</kbd>. If a number of commands should be run in series, they may appear in a single snippet.
+
+::: danger
+The terminal is extremely powerful. Only run commands from sources you trust!
+
+If you are inclined to copy-and-paste commands into your terminal, keep an eye on your selection—it’s easy to inadvertently copy extra characters that can confuse the terminal.
+:::
+
+Let’s run your first command. Type `whoami` into your terminal, and press <kbd>Enter</kbd>:
 
 ```bash
-echo "hello world"
+whoami
+# -> oli
 ```
 
-In this example, you would copy+paste or type `echo "hello world"` exactly as you see it above, then hit <kbd>return</kbd> or <kbd>enter</kbd> to execute the command. The result, or output, will be printed and you’ll be returned to the empty prompt.
+You should see your username printed to the terminal!
 
-The `echo` console command just repeats back whatever you pass to it. Here’s what you’d see after running that command:
-
-```bash
-echo "hello world"
-hello world
-```
-
-Try it! Copy and paste `echo "hello world"` into your terminal and hit <kbd>return</kbd> or <kbd>enter</kbd>. If your console says “hello world” back, you know everything you need to run a terminal command!
+::: tip
+The line beginning with a `#` is just an example of the expected output. Unless your name is Oli, you’ll probably see something else!
+:::
 
 ### Navigate directories
 
-We’ll eventually want to run commands alongside your site’s code, so you’ll need to know how to get there.
+We’ll eventually want to run commands alongside your site’s code, so you’ll need to know how to move around your computer’s filesystem.
 
-Every time you use the console, your commands will be executed from a specific directory on your system even when they’re not doing anything to files. This context is called the _working directory_. You can change the working directory, much like you would using a file browser, using terminal commands.
+Commands are run in the “working directory.” To find out what your working directory is, run…
 
-To output the current working directory:
-
-- Run `pwd` on Mac or Linux.
-- Run `cd` on Windows.
-
-This will print the current path you’re working in.
-
-::: tip
-The `pwd` command stands for “print working directory”, and `cd` stands for “change directory”. Commands like this are shortened so they’re quicker to type.
+::: code
+```bash macOS / Linux
+pwd
+```
+```batch Windows
+cd
+```
 :::
 
-To list files in the current directory:
+::: tip
+Some commands will differ between platforms. Whenever they do, the code snippet will include tabs, like the one above.
+:::
 
-- Run `ls` on Mac or Linux.
-- Run `dir` on Windows.
+Do you recognize the name of the folder? Let’s check its contents, just to be sure:
 
-To move _up_ one directory, run `cd ..` on any platform.
+::: code
+```bash macOS / Linux
+ls
+```
+```batch Windows
+dir
+```
+:::
 
-To move _down_ into a specific directory, like `Documents`, use `cd Documents` on any platform.
+You should see a list of files and folders. Most terminal applications launch with your “home” folder as the working directory.
 
-To start at the topmost directory on your disk, use `cd /` on any platform.
+::: tip
+Some terminals display the current folder in the text of the prompt. On macOS and Linux, your home folder is usually displayed as a tilde (`~`), so it may not be obvious.
+:::
 
-To start from your user directory, use `cd ~` on Mac or Linux and `cd %HOMEPATH%` on Windows.
+You can change the working directory with the `cd` command, followed by a _relative_ or _absolute_ path. Try out a few of these:
 
-You can always use these commands to see where you’re at or move to a different folder on your machine.
+::: code
+```bash macOS / Linux
+cd ..
+pwd
 
-Once you’re able to pick a folder and navigate to it, you’re all set!
+cd /Applications
+pwd
+
+cd ~/Desktop
+pwd
+
+cd ~
+pwd
+```
+```batch Windows
+cd ..
+cd
+
+cd C:\Windows
+cd
+
+cd %HOMEPATH%/Desktop
+cd
+
+cd %HOMEPATH%
+cd
+```
+:::
+
+::: tip
+On most systems, pressing the <kbd>Up</kbd> arrow will show you previously-run commands. Pressing <kbd>Up</kbd> multiple times goes farther into your history. At any point, you can press <kbd>Enter</kbd> to execute the command, or the <kbd>Left</kbd> and <kbd>Right</kbd> arrows to modify the command.
+:::
+
+This series of commands is a common pattern when navigating your filesystem is to:
+
+1. Figure out where you are with `pwd`;
+1. List files with `ls` (`dir` on Windows);
+1. Navigate to a new folder with `cd folder-name`;
+
+When changing folders with `cd`, you often only need to type the first couple of characters in a directory name, then press <kbd>Tab</kbd> to _autocomplete_ it. The terminal will only autocomplete up to a point that there is ambiguity. For example, in a directory with folders named `project-a`, `project-b`, and `practice`, you could type `cd pro` and press <kbd>Tab</kbd> to autocomplete up to `cd project-`—then just type the last character for the directory you want.
+
+Now that we’ve poked around a bit, it’s time to pick a place to stash your project.

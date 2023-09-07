@@ -8,6 +8,10 @@ For example if a plugin’s handle is `foo` and it has a `templates/bar.twig` te
 
 Modules can have templates too, but they will need to manually define a [template root](template-roots.md) before they are accessible.
 
+::: tip
+Looking to support full-page interfaces _and_ slideouts? Check out the new [control panel screens](./controllers.md#control-panel-screens) API.
+:::
+
 ## Page Templates
 
 To add a new full page to the control panel, create a template that extends the [_layouts/cp.twig](https://github.com/craftcms/cms/blob/main/src/templates/_layouts/cp.twig) template.

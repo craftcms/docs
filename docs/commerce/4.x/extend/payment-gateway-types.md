@@ -168,7 +168,7 @@ Register your custom gateway type using the [`registerGatewayTypes`](events.md#r
 
 ```php
 use craft\events\RegisterComponentTypesEvent;
-use craft\commerce\services\Purchasables;
+use craft\commerce\services\Gateways;
 use yii\base\Event;
 
 Event::on(

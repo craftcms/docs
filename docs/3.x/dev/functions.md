@@ -120,7 +120,7 @@ Generates a list of HTML attributes based on the given [hash](twig-primer.md#has
 Attribute values are HTML-encoded automatically:
 ```twig
 <div {{ attr({ title: 'Greetings & Salutations' }) }}></div>
-{# Output: <input type="submit" value="Greetings &amp; Salutations"> #}
+{# Output: <div title="Greetings &amp; Salutations"> #}
 ```
 :::
 

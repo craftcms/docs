@@ -742,7 +742,9 @@ namespace mynamespace\gql\directives;
 
 use craft\gql\base\Directive;
 use craft\gql\GqlEntityRegistry;
+use GraphQL\Language\DirectiveLocation;
 use GraphQL\Type\Definition\Directive as GqlDirective;
+use GraphQL\Type\Definition\ResolveInfo;
 
 class BarTheFoo extends Directive
 {
@@ -1134,7 +1136,7 @@ Event::on(
     function(RegisterGqlArgumentHandlersEvent $event) {
         $event->handlers["argumentName"] = RelatedWidgets::class;
     }
-});
+);
 ```
 
 ### Complexity Values

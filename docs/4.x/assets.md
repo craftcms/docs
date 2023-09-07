@@ -2,13 +2,18 @@
 
 Craft lets you manage media and document files (“assets”) just like entries and other content types. Assets can live anywhere—a directory on the web server, or a remote storage service like Amazon S3.
 
+Assets are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft4:craft\elements\Asset>.
+
 ## Volumes
 
 Assets are organized into **volumes**, each of which sits on top of a [filesystem](#filesystems) and carries its own permissions and [content](#asset-custom-fields) options. Volumes are configured from **Settings** → **Assets**.
 
 When setting up a volume, you will be asked to create its underlying filesystem, as well.
 
-<BrowserShot url="https://my-craft-project.ddev.site/admin/assets/volumes/new" :link="false" caption="You can create a filesystem without leaving the volume screen.">
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/assets/volumes/new"
+  :link="false"
+  caption="You can create a filesystem without leaving the volume screen.">
 <img src="./images/assets-new-volume-fs.png" alt="Screenshot of the volume settings screen in Craft with a slide-out for filesystem settings">
 </BrowserShot>
 
@@ -52,38 +57,90 @@ If you would prefer to store your assets on a remote storage service like Amazon
 
 The settings for each type of filesystem will differ based on the provider, and may involve secrets. We recommend using [special config values](./config/README.md#control-panel-settings) to store and use these, securely.
 
-
 ## Asset Custom Fields
 
 Each volume has its own [field layout](./fields.md#field-layouts), configured on its setting screen under the **Field Layout** tab.
 
+### `alt` Text
+
+Asset field layouts can include the native **Alternative Text** <Poi label="1" target="assetFieldLayout" id="altText" /> field layout element:
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/assets/volumes/1"
+  :link="false"
+  id="assetFieldLayout"
+  :poi="{
+    altText: [90, 32.5],
+  }">
+<img src="./images/assets-field-layout.png" />
+</BrowserShot>
+
+Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](./fields.md) values, attributes, or combination thereof. 
+
+We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier. The WCAG [advises against](https://www.w3.org/TR/2015/REC-ATAG20-20150924/Overview.html#gl_b23) automatically repairing alt text with “generic [or] irrelevant strings,” including the name of the file (which asset titles are generated from), so Craft omits the `alt` attribute when using `asset.getImg()` if no explicit text is available.
+
+**Alternative Text** is also displayed as a “transcript” beneath video previews, in the control panel.
+
+::: tip
+Do you have existing `alt` text stored in a different field? You can migrate it to the native attribute with the [`resave/assets` command](./console-commands.md#resave):
+
+```bash
+php craft resave/assets --set alt --to myAltTextField --if-empty
+```
+:::
+
 ## Assets Page
 
-After creating your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files in the main content area.
+After creating your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files and subfolders in the main content area.
 
 In addition to the normal actions available in [element indexes](./elements.md#indexes), asset indexes support:
 
 - Uploading new files using the **Upload files** toolbar button or by dragging files from your desktop;
 - Creating and organizing [folders](#managing-subfolders) within a volume;
-- Transferring a file from one volume to another by dragging-and-dropping it from the element index into a folder in the sources sidebar;
+- Transferring a file from one volume to another by dragging-and-dropping it from the element index into a folder in the sources sidebar (or using the **Move…** element action);
 
 Special [element actions](./elements.md#actions) are also available for single assets:
 
 - Rename an existing file;
 - Replace a file with a new one;
 - Open the [image editor](#image-editor) (images only);
+- Preview a file;
+- Copy a public URL to a file;
+- Copy a reference tag to a file;
+- Move the selected assets to a new volume and/or folder;
 
 ### Managing Subfolders
 
-You can create a subfolder in one of your volumes by right-clicking the volume in the left sidebar, and choosing **New subfolder**.
+::: tip
+Asset and folder management was [greatly enhanced](https://craftcms.com/blog/craft-4-4-released) in Craft 4.4. Earlier versions only support drag-and-drop file management, and folders were created and deleted via the sources sidebar.
+:::
 
-Once you’ve created a subfolder, you can start dragging files into it.
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/assets/uploads"
+  :link="false"
+  id="assetIndex"
+  :poi="{
+    breadcrumbs: [42, 21],
+    folder: [57, 34],
+    dragging: [46, 42],
+    actions: [67, 94],
+  }">
+<img src="./images/assets-index.png" alt="Asset element index showing subfolder creation and drag-and-drop interface for organizing files" />
+</BrowserShot>
 
-You can create a nested subfolder within a subfolder by right-clicking the subfolder in the left sidebar, and again choosing **New subfolder**.
+Volumes are initialized with only a root folder, indicated by a “home” icon in the breadcrumbs. Subfolders can be created by clicking the caret <Poi label="1" target="assetIndex" id="breadcrumbs" /> next to the current folder.
 
-You can rename a subfolder by right-clicking on the subfolder in the left sidebar and choosing **Rename folder**.
+The new subfolder will appear in-line <Poi label="2" target="assetIndex" id="folder" /> with the assets in the current folder. Assets and folders can be moved in a few different ways:
 
-You can delete a subfolder (and all assets within it) by right-clicking on the subfolder in the left sidebar and choosing **Delete folder**.
+- Drag-and-drop <Poi label="3" target="assetIndex" id="dragging" /> one or more assets onto a folder in the table or thumbnail view _or_ onto a breadcrumb <Poi label="1" target="assetIndex" id="breadcrumbs" /> segment;
+- Select assets with the checkboxes in each row, choose **Move…** from the actions <Poi label="4" target="assetIndex" id="actions" /> menu, and pick a destination folder;
+- An entire folder can also be moved using the caret next to its breadcrumb;
+
+The first method is a great way to quickly move assets into a parent directory, or back to the volume’s root folder.
+
+::: tip
+You can automatically organize assets when they are uploaded via an [assets field](./assets-fields.md) with the **Restrict assets to a single location** setting.
+:::
 
 ## Updating Asset Indexes
 
@@ -153,7 +210,7 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 {# Display the thumbnail list #}
 <ul>
   {% for image in images %}
-    <li><img src="{{ image.getUrl('thumb') }}" alt="{{ image.title }}"></li>
+    <li><img src="{{ image.getUrl('thumb') }}" alt="{{ image.alt }}"></li>
   {% endfor %}
 </ul>
 ```
@@ -186,6 +243,7 @@ Asset queries support the following parameters:
 | [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](craft4:craft\elements\Asset) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                       |
 | [dateCreated](#datecreated)               | Narrows the query results based on the assets’ creation dates.
 | [dateModified](#datemodified)             | Narrows the query results based on the assets’ files’ last-modified dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the assets’ last-updated dates.
@@ -206,6 +264,7 @@ Asset queries support the following parameters:
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.
+| [savable](#savable)                       | Sets the [savable](https://docs.craftcms.com/api/v3/craft-elements-db-assetquery.html#savable) property.
 | [search](#search)                         | Narrows the query results to only assets that match a search query.
 | [site](#site)                             | Determines which site(s) the assets should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the assets should be queried in, per the site’s ID.
@@ -309,6 +368,15 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 
@@ -905,6 +973,15 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
+
+
+#### `savable`
+
+Sets the [savable](https://docs.craftcms.com/api/v3/craft-elements-db-assetquery.html#savable) property.
+
+
+
+
 
 
 #### `search`

@@ -256,7 +256,7 @@ If you’re unable to query a private schema because of a “missing authorizati
 
 ```twig
 {{ craft.app.getRequest().getHeaders().has('authorization')
-  ? 'auth token present ✓' :
+  ? 'auth token present ✓'
   : 'auth token missing!' }}
 ```
 

@@ -2,6 +2,24 @@
 
 You can create folksonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Tags. Tags are another type of [element](./elements.md).
 
+<Block label="Migrating to Channels">
+
+With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
+
+::: warning
+A comparable [tags field](tags-fields.md) UI has not yet been introduced for entries. If you or your clients value this authoring experience, it is safe to continue using tags!
+:::
+
+As part of that process, we introduced a [console command](console-commands.md#entrify-categories) that can automate the conversion of tags to [channel sections](entries.md#channels):
+
+```bash
+php craft entrify/tags myTagGroupHandle
+```
+
+Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
+
+</Block>
+
 ## Tag Groups
 
 Before you can create tags, you must create Tag Groups to contain them.
@@ -83,6 +101,7 @@ Tag queries support the following parameters:
 | [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](craft4:craft\elements\Tag) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                       |
 | [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
@@ -195,6 +214,15 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 

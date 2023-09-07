@@ -1,3 +1,7 @@
+---
+description: Make destructive actions reversible with soft-deletion.
+---
+
 # Soft Deletes
 
 Modules and plugins can add soft delete support to their components by following this guide.

@@ -11,7 +11,7 @@ related:
 
 Controllers are Craft’s way of talking to the outside world. Pretty much everything you do with Craft is part of a request that involves a [controller action](guide:structure-controllers)—from updating settings to rendering an entry.
 
-Most controllers and actions are carefully locked down with [permissions](../user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../user-management.md#public-registration) or [cart management](/docs/commerce/4.x/orders-carts.md).
+Most controllers and actions are carefully locked down with [permissions](../user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../user-management.md#public-registration) or [cart management](/commerce/4.x/orders-carts.md).
 
 To get a sense for the kind of things you can do, jump to the [available actions](#available-actions).
 
@@ -495,7 +495,7 @@ Similarly, if you are outputting user-submitted content anywhere on site, take s
 Param | Description
 ----- | -----------
 `authorId` | The ID of the user account that should be set as the entry author. (Defaults to the entry’s current author, or the logged-in user.)
-`canonicalId` | ID of the 
+`canonicalId` | Canonical (non-draft, non-revision) entry ID to update.
 `enabledForSite` | Whether the entry should be enabled for the entry’s `siteId` (`1`/`0`), or an array of site IDs that the entry should be enabled for. (Defaults to the `enabled` param.)
 `enabled` | Whether the entry should be enabled (`1`/`0`). (Defaults to enabled.)
 `entryId` | Fallback if `sourceId` isn’t passed, for backwards compatibility.
@@ -510,7 +510,7 @@ Param | Description
 `sectionId` | The ID of the section the entry will be created in. (Only for new entries. User must have appropriate permissions.)
 `siteId` | The ID of the site to save the entry in.
 `slug` | The entry slug. (Defaults to the current slug, or an auto-generated slug.)
-`sourceId` | The ID of the entry to save, if updating an existing entry.
+`sourceId` | The ID of the entry to save, if updating an existing entry (including drafts and revisions).
 `title` | The entry title. (Defaults to the current entry title.)
 `typeId` | The entry type ID to save the entry as. (Defaults to the current entry type for existing entries, or the first configured type for new ones.)
 
@@ -558,7 +558,7 @@ The output of the action depends on whether the login was successful and the `Ac
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark/> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request); additional `returnUrl` and `csrfTokenValue` properties are included in the response object.
+<check-mark/> | [Standard behavior](#after-a-post-request). | [Standard behavior](#after-a-post-request); additional `returnUrl`,  `csrfTokenValue`, and `user` <Since ver="4.5.0" feature="Serialized user model in JSON login responses" /> properties are included in the response object.
 <x-mark/> | [Standard behavior](#during-a-post-request); additional `loginName`, `rememberMe`, `errorCode`, and `errorMessage` variables will be available in the template. | [Standard behavior](#during-a-post-request); additional `loginName`, `rememberMe`, `errorCode`, and `errorMessage` properties are included in the response object.
 
 </span>
@@ -863,6 +863,41 @@ In the event you need to re-key the custom field data in the request, you can se
   <button>Save Entry</button>
 </form>
 ```
+
+### Field + Data Types
+
+Fields (and attributes) that use [scalar](https://www.php.net/manual/en/function.is-scalar.php) values like numbers, text, or booleans will work as expected with a single input.
+
+Other types may require multiple inputs or specific naming conventions.
+
+#### Date + Time
+
+Entries’ native `postDate` and `expiryDate` properties can be handled in the same way [date/time fields](../date-time-fields.md#saving-date-fields) are; but instead of passing their values under a `fields` key, you’ll send them as top-level keys in a POST request:
+
+::: code
+```twig Unified
+{{ input('datetime-local', 'postDate', entry.postDate|atom) }}
+```
+```twig Discrete Inputs
+{{ input('date', 'postDate[date]', entry.postDate.format('Y-m-d')) }}
+{{ input('time', 'postDate[time]', entry.postDate.format('G:i')) }}
+```
+:::
+
+Both of these options will POST valid data that Craft can reconstruct into a PHP DateTime object.
+
+::: tip
+Some date properties (like `dateUpdated` and `dateCreated`) may be determined by Craft, and are not editable.
+:::
+
+#### Relations
+
+Assets, categories, entries, and tags can be associated to a [relational](../relations.md) field by passing an array of IDs. For more information and examples, see the relevant field type documentation:
+
+- [Assets fields](../assets-fields.md#saving-assets-fields)
+- [Entries fields](../entries-fields.md#saving-entries-fields)
+- [Categories fields](../categories-fields.md#saving-categories-fields)
+- [Tags fields](../tags-fields.md#saving-tags-fields)
 
 ## Plugins + Custom Actions
 

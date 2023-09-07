@@ -1,3 +1,7 @@
+---
+description: Craft’s powerful content features are driven by custom fields.
+---
+
 # Custom Fields
 
 On their own, [elements](./elements.md) only provide a scaffold for your content—the content itself will be stored in *fields*.
@@ -70,17 +74,17 @@ If the translation key format returns an empty string (`''`), the field will not
 
 ## Field Layouts
 
-Once you’ve created your fields, you can display them in your edit forms by adding them to “field layouts”.
+Once you’ve created your fields, you can display them in your edit forms by adding them to “field layouts.”
 
 Everything in Craft that has content associated with it will expose a configurable field layout:
 
-- [Entries](entries.md) use the field layout defined by their entry type in **Settings** → **Sections** → **Edit Entry Types** → [entry type name] → **Field Layout**.
-- [Global sets](globals.md) each get their own field layout, defined in **Settings** → **Globals** → [global set name] → **Field Layout**.
-- [Assets](assets.md) use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
-- [Categories](categories.md) use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
-- [Tags](tags.md) use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
-- [Users](users.md) share a single field layout defined in **Settings** → **Users** → **User Fields**.
-- [Addresses](addresses.md) also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
+- **[Entries](entries.md)** use the field layout defined by their entry type in **Settings** → **Sections** → **Edit Entry Types** → [entry type name] → **Field Layout**.
+- **[Global sets](globals.md)** each get their own field layout, defined in **Settings** → **Globals** → [global set name] → **Field Layout**.
+- **[Assets](assets.md)** use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
+- **[Categories](categories.md)** use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
+- **[Tags](tags.md)** use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
+- **[Users](users.md)** share a single field layout defined in **Settings** → **Users** → **User Fields**.
+- **[Addresses](addresses.md)** also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
 
 The field layout editor works the same way regardless of which content type you’re looking at:
 
@@ -88,13 +92,13 @@ The field layout editor works the same way regardless of which content type you�
 
 ### Tabs
 
-Every layout starts with a “Content” tab at the top. You can click the tab’s gear icon (<icon kind="settings" />) and choose **Settings** to rename it, and use the **+ New Tab** button to add more tabs to your layout. Drag and drop those tabs into whatever order you prefer, where the first will be displayed for the content editor by default.
+Every layout starts with a “Content” tab at the top. Add more tabs with the **New Tab** button, or update an existing tab by clicking its gear icon (<icon kind="settings" />) and selecting **Settings**. Drag and drop those tabs into whatever order you prefer—the first tab is selected by default when editing an entry.
 
 ::: tip
-If the field layout has only one tab, its fields will be displayed in the editor without the tab itself—so its name will not be displayed until more tabs are added.
+If the field layout has only one tab (or only one tab is visible due to applied conditions), its fields will be displayed in the editor without the tab itself—so its name will not be visible until more tabs are added.
 :::
 
-A tab’s settings include its name and optional conditions that determine when it should be displayed:
+A tab’s settings include its name and optional conditions that determine when it will be displayed for editors:
 
 ![Screenshot of field layout editor with “Content” tab settings open in a slideout: Name, Current User Condition, and Entry Condition](./images/field-layout-tab-settings.png)
 

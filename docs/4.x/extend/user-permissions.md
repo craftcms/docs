@@ -1,3 +1,7 @@
+---
+description: Register a customizable permissions scheme for your plugin’s features.
+---
+
 # User Permissions
 
 Modules and plugins can register new [user permissions](../user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft4:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:

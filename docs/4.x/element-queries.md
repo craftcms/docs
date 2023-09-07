@@ -16,7 +16,7 @@ Working with element queries consists of three steps:
 [Relational fields](./relations.md) also return element queries, which you can treat the same as step #1, above.
 :::
 
-Here’s what a this process looks like, in practice:
+Here’s what this process looks like, in practice:
 
 ::: code
 ```twig
@@ -109,7 +109,7 @@ Typically, parameters make a query more specific, but setting a single parameter
 
 #### Querying with Custom Fields
 
-In addition to native query parameters, Craft automatically injects a methods for each of your [custom fields](./fields.md).
+In addition to native query parameters, Craft automatically injects methods for each of your [custom fields](./fields.md).
 
 For example, if we wanted to find entries in a _Cars_ section with a specific paint color stored in a [dropdown](./dropdown-fields.md) field, we could perform this query:
 
@@ -142,7 +142,7 @@ Craft also makes it easy to display the results of an element query across multi
 
 ### `all()`
 
-The most common way to fetch a list of results is with the `all()` method, which executes the query and populates the appropriate element models.
+The most common way to fetch a list of results is with the `all()` method, which executes the query and returns an array of populated [element](./elements.md) models. The resulting elements will _always_ be of the type that the query started with—assets come back from asset queries, categories from category queries, and so on.
 
 ::: code
 ```twig
@@ -162,12 +162,12 @@ $entries = Entry::find()
 :::
 
 ::: tip
-Declaring a `limit` _and_ executing a query with `all()` may seem like a contradiction, but this is a totally valid query; it will return _any_ records matching the current criteria, without applying any further limits.
+Declaring a `limit()` _and_ executing a query with `all()` may seem like a contradiction, but this is a totally valid query! `all()` doesn’t override the `limit()`; rather, it returns _all_ results that meet the current criteria—one of which just happens to be a cap on the number of allowed results.
 :::
 
 ### `collect()`
 
-Calling `.collect()` to execute a query will perform the same database call as `.all()`, but the results are wrapped in a [collection](https://laravel.com/docs/9.x/collections).
+Calling `.collect()` to execute a query will perform the same database call as `.all()`, but the results are wrapped in a [collection][collection].
 
 Collections can simplify some common array manipulation and filtering tasks that are otherwise awkward in the template:
 
@@ -196,9 +196,13 @@ $entries = Entry::find()
     ->collect();
 
 $categoriesDescription = $entries
+    // Collate all the attached categories:
     ->pluck('category')
+    // Flatten those into a single array:
     ->collapse()
+    // Grab just the titles:
     ->pluck('title')
+    // Turn them into a comma-separated list:
     ->join(', ', ' and ');
 ```
 :::
@@ -209,7 +213,7 @@ You can also call `.all()` and wrap the results in a collection yourself, with t
 
 ### `one()`
 
-If you only need a single element, call `one()` instead of `all()`. It will either return the element or `null` if no matching element exists.
+If you only need a single element, call `one()` instead of [`all()`](#all). It will either a populated element model or `null` if no matching element exists.
 
 ::: code
 ```twig
@@ -251,7 +255,7 @@ $exists = Entry::find()
 
 ### `count()`
 
-If you want to know how many elements match your element query, you can call `count()`.
+If you want to know how many elements match an element query, call `count()`.
 
 ::: code
 ```twig
@@ -274,7 +278,7 @@ The `limit` and `offset` parameters will be ignored when you call `count()`.
 
 ### `ids()`
 
-If you just want a list of matching element IDs, you can call `ids()`.
+If you just want a list of matching element IDs, you can call `ids()`. This returns an array of integers.
 
 ::: code
 ```twig
@@ -316,7 +320,7 @@ $entries = Entry::find()
 ```
 :::
 
-As a result of the rows being plain values, regular element methods and properties are not available!
+An array of scalar values is returned, the type of which depends on the column. Elements are _not_ populated when using `column()`, so methods and properties you may be accustomed to using after other queries will not be available.
 
 ## Pagination
 
@@ -646,57 +650,138 @@ Not all attributes can be fetched this way—element URLs, for instance, are bui
 
 ## Advanced Element Queries
 
-Element queries are specialized [query builders](guide:db-query-builder) under the hood, so they support most of the same methods provided by <craft4:craft\db\Query>.
+Element queries are specialized [query builders](guide:db-query-builder) under the hood, so they support most of the same methods provided by <craft4:craft\db\Query>. The most common methods appear below—argument lists are non-exhaustive, and are only provided to differentiate them.
+
+::: tip
+You may call <craft4:craft\db\Query::asArray()> to skip populating element models with results and return matching rows’ data as an associative array. Altering [selections](#selections) in particular can make elements behave erratically, as they may be missing critical pieces of information.
+:::
 
 ### Selections
 
-- [select()](yii2:yii\db\Query::select())
-- [addSelect()](yii2:yii\db\Query::addSelect())
-- [distinct()](yii2:yii\db\Query::distinct())
-- [groupBy()](yii2:yii\db\Query::groupBy())
-- [limit()](yii2:yii\db\Query::limit())
-- [offset()](yii2:yii\db\Query::offset())
+Selections modify what columns and rows are returned.
+
+[select()](yii2:yii\db\Query::select())
+: Define a list of columns to `SELECT`.
+
+[addSelect()](yii2:yii\db\Query::addSelect())
+: Add columns to the existing selection.
+
+[distinct()](yii2:yii\db\Query::distinct())
+: Return only rows that have a unique combination of values in the provided column(s).
+
+[groupBy($columns)](yii2:yii\db\Query::groupBy())
+: Combine or flatten database rows based on the value of one or more columns. Often used in combination with aggregate [selections](#selections) like `SUM(columnName)`.
+
+[limit($n)](yii2:yii\db\Query::limit())
+: Set a maximum number of results that can be returned.
+
+[offset($n)](yii2:yii\db\Query::offset())
+: Skip the specified number of matching rows.
 
 Custom field column names will be automatically resolved when using `select()`. <Since ver="4.3.0" feature="Column aliases when using advanced SQL methods" /> In earlier versions, you may find that some field’s database columns include a random suffix and will require translating the field handle with <craft4:craft\helpers\ElementHelper::fieldColumnFromField()>.
 
 ### Joins
 
-- [innerJoin()](yii2:yii\db\Query::innerJoin())
-- [leftJoin()](yii2:yii\db\Query::leftJoin())
-- [rightJoin()](yii2:yii\db\Query::rightJoin())
+In most cases, Craft automatically `JOIN`s the appropriate tables so that your elements are populated with the correct data. However, additional `JOIN`s can be useful in [plugin development](./extend/README.md) or for doing deeper analysis of your content.
+
+[innerJoin($table, $condition)](yii2:yii\db\Query::innerJoin())
+: Adds an `INNER JOIN` clause for the target table, using the provided condition.
+
+[leftJoin($table, $condition)](yii2:yii\db\Query::leftJoin())
+: Adds a `LEFT JOIN` clause for the target table, using the provided condition.
+
+[rightJoin($table, $condition)](yii2:yii\db\Query::rightJoin())
+: Adds a `RIGHT JOIN` clause for the target table, using the provided condition.
+
+`JOIN` conditions are generally expected to be in this format:
+
+```php{7}
+$popularAuthors = craft\elements\Entry::find()
+  ->select([
+    'users.fullName as name',
+    'COUNT(*) as postCount',
+  ])
+  ->groupBy('entries.authorId')
+  ->leftJoin('{{%users}}', '[[entries.authorId]] = [[users.id]]')
+  ->asArray()
+  ->all();
+```
+
+Craft prepares two queries when fetching elements (a main query and a “subquery”) and applies `JOIN`s to both, so that you can use the tables for filtering _and_ for selections. Read more about the architecture of element queries in the [extension documentation](./extend/element-types.md#element-query-class).
+
+::: warning
+Adding columns to your selection from other tables may cause errors when populating elements, as they will not have a corresponding class property. Call `asArray()` to return your results as a plain associative array, or consider [attaching a `Behavior`](./extend/behaviors.md).
+:::
 
 ### Conditions
 
 ::: warning
-Exercise caution when using these methods directly—some will completely overwrite the existing query conditions and cause unpredictable results.
+Exercise caution when using these methods directly—some will completely overwrite the existing query conditions and cause unpredictable results like allowing drafts, revisions, or elements from other sites to leak into the result set.
 
-Specific [element type queries](#element-types) and [custom field methods](#querying-with-custom-fields) often provide a more approachable and reliable API for working with the database.
+Specific [element type queries](#element-types) and [custom field methods](#querying-with-custom-fields) often provide a more approachable and reliable API for working with the database, and will modify the query in non-destructive ways.
 :::
 
-- [where()](yii2:yii\db\QueryTrait::where())
-- [andWhere()](yii2:yii\db\QueryTrait::andWhere())
-- [orWhere()](yii2:yii\db\QueryTrait::orWhere())
-- [filterWhere()](yii2:yii\db\QueryTrait::filterWhere())
-- [andFilterWhere()](yii2:yii\db\QueryTrait::andFilterWhere())
-- [orFilterWhere()](yii2:yii\db\QueryTrait::orFilterWhere())
+[where()](yii2:yii\db\QueryTrait::where())
+: Directly set the query’s `WHERE` clause. See the warning, above.
+
+[andWhere()](yii2:yii\db\QueryTrait::andWhere())
+: Add expressions to the `WHERE` clause. Useful if the provided [element type-specific query methods](#element-types) can’t achieve an advanced condition required by your site or application.
+
+[orWhere()](yii2:yii\db\QueryTrait::orWhere())
+: Starts a new `WHERE` clause.
+
+[filterWhere()](yii2:yii\db\QueryTrait::filterWhere())
+: Same as `where()`, but ignores `null` values in the passed conditions.
+
+[andFilterWhere()](yii2:yii\db\QueryTrait::andFilterWhere())
+: Same as `andWhere()`, but ignores `null` values in the passed conditions.
+
+[orFilterWhere()](yii2:yii\db\QueryTrait::orFilterWhere())
+: Same as `orWhere()`, but ignores `null` values in the passed conditions.
+
 
 ### Query Execution
 
 Some of these methods are discussed in the [Executing Element Queries](#executing-element-queries) section.
 
-- [all()](yii2:yii\db\Query::all())
-- [collect()](craft4:craft\db\Query::collect())
-- [one()](yii2:yii\db\Query::one())
-- [nth()](craft4:craft\db\Query::nth())
-- [exists()](yii2:yii\db\Query::exists())
-- [count()](yii2:yii\db\Query::count())
-- [column()](yii2:yii\db\Query::column())
-- [scalar()](yii2:yii\db\Query::scalar())
-- [sum()](yii2:yii\db\Query::sum())
-- [average()](yii2:yii\db\Query::average())
-- [min()](yii2:yii\db\Query::min())
-- [max()](yii2:yii\db\Query::max())
-- [pairs()](craft4:craft\db\Query::pairs())
+[all()](yii2:yii\db\Query::all()) — `craft\base\Element[]`
+: Array of populated element models.
+
+[collect()](craft4:craft\db\Query::collect()) — `Illuminate\Support\Collection`
+: Same as `all()`, but wrapped in a Laravel [Collection][collection].
+
+[one()](yii2:yii\db\Query::one()) — `craft\base\Element|null`
+: Element model or `null` if none match the criteria.
+
+[nth($n)](craft4:craft\db\Query::nth()) — `craft\base\Element|null`
+: Element model or `null` if one doesn’t exist at the specified offset.
+
+[exists()](yii2:yii\db\Query::exists()) — `boolean`
+: Whether or not there are matching results.
+
+[count()](yii2:yii\db\Query::count()) — `int`
+: The number of results that would be returned.
+
+[column()](yii2:yii\db\Query::column()) — `array`
+: Array of scalar values from the first selected column.
+
+[scalar()](yii2:yii\db\Query::scalar()) — `int|float|string|boolean`
+: A single, scalar value, from the first selected column of the matching row.
+
+[sum($column)](yii2:yii\db\Query::sum()) — `int|float`
+: Total of values in `$column` across all matching results
+
+[average($column)](yii2:yii\db\Query::average()) — `int|float`
+: Average of all `$column` values matching results
+
+[min($column)](yii2:yii\db\Query::min()) — `int|float`
+: Minimum value in `$column` among matching results
+
+[max($column)](yii2:yii\db\Query::max()) — `int|float`
+: Maximum value in `$column` among matching results
+
+[pairs()](craft4:craft\db\Query::pairs()) — `array`
+: The first selected column becomes the returned array’s keys, and the second, its values. Duplicate keys are overwritten, so the array may not have the same number of elements as matched the query.
 
 ::: tip
 When customizing an element query, you can call [getRawSql()](craft4:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
@@ -716,8 +801,10 @@ The first-party [Element API](https://plugins.craftcms.com/element-api) allows y
 
 ### GraphQL <Badge type="edition" vertical="middle" title="The GraphQL API is a feature of Craft Pro">Pro</Badge>
 
-Craft Pro includes a [GraphQL API](./graphql.md) with configurable schemas.
+Craft Pro includes a [GraphQL API](./graphql.md) with configurable schemas. Many of the same element query basics apply when accessing elements via GraphQL.
 
 ::: warning
 For security reasons, not all query builder features are available via GraphQL. Some advanced queries may need to be executed separately and combined by the client.
 :::
+
+[collection]: https://laravel.com/docs/9.x/collections

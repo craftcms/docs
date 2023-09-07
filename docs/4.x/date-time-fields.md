@@ -32,6 +32,8 @@ Possible values include:
 | `['and', '>= 2018-04-01', '< 2018-05-01']` | that have a date selected between 2018-04-01 and 2018-05-01.
 | `['or', '< 2018-04-01', '> 2018-05-01']` | that have a date selected before 2018-04-01 or after 2018-05-01.
 
+Date values are always assumed to be in the system timezone, which is set in **Settings** &rarr; **General**.
+
 ::: code
 ```twig
 {# Fetch entries with a selected date in the next month #}
@@ -117,15 +119,26 @@ if ($entry->myFieldHandle) {
 ```
 :::
 
-Craft and Twig provide several Twig filters for manipulating dates, which you can use depending on your needs:
+Craft and Twig provide several Twig filters for manipulating and outputting dates, which you can use depending on your needs:
 
 - [date](dev/filters.md#date)
 - [time](dev/filters.md#time)
 - [datetime](dev/filters.md#datetime)
+- [duration](dev/filters.md#duration)
 - [timestamp](dev/filters.md#timestamp)
 - [atom](dev/filters.md#atom)
 - [rss](dev/filters.md#rss)
 - [date_modify](https://twig.symfony.com/doc/3.x/filters/date_modify.html)
+
+#### Timezones
+
+Craft treats all dates as though they are in the system’s timezone, except when one is set explicitly for a date field.
+
+The returned `DateTime` object’s timezone will be set, accordingly. If you wish to display the date in a _different_ timezone than it was defined, use the `timezone` argument supported by Craft’s [date](dev/filters.md#date), [datetime](dev/filters.md#datetime) and [time](dev/filters.md#time) Twig filters.
+
+::: tip
+This flexibility is only a feature of date fields, and native element properties (like entries’ _post date_) are always stored in the system timezone.
+:::
 
 ### Saving Date Fields
 
@@ -150,10 +163,6 @@ If you want the user to be able to select a time as well, use a `datetime-local`
 
 <input type="datetime-local" name="fields[myFieldHandle]" value="{{ currentValue }}">
 ```
-
-::: tip
-The [HTML5Forms.js](https://github.com/zoltan-dulac/html5Forms.js) polyfill can be used to implement `date` and `datetime-local` inputs [while we wait](https://caniuse.com/#feat=input-datetime) for better browser support.
-:::
 
 #### Customizing the Timezone
 
@@ -186,7 +195,7 @@ Or you can let users decide which timezone the date should be posted in:
 <select name="fields[myFieldHandle][timezone]">
   <option value="UTC" selected>UTC</option>
   <option value="America/Los_Angeles">Pacific Time</option>
-  <!-- ... -->
+  {# ... #}
 </select>
 ```
 
@@ -208,3 +217,5 @@ Time format: <code>{{ craft.app.locale.getTimeFormat('short', 'php') }}</code>
 
 Then refer to PHP’s [date()](http://php.net/manual/en/function.date.php) function docs to see what each of the format letters mean.
 :::
+
+This strategy can by combined with [timezone customization](#customizing-the-timezone).

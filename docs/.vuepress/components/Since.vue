@@ -9,13 +9,21 @@
 </template>
 
 <script>
-const GITHUB_BLOB_URL = "https://github.com/craftcms/cms/blob";
+const GITHUB_URL = "https://github.com";
 const GITHUB_CHANGELOG_FILENAME = "CHANGELOG.md";
 
 export default {
   components: {},
   props: {
     ver: String,
+    useChangelog: {
+      type: Boolean,
+      default: true,
+    },
+    repo: {
+      type: String,
+      default: 'craftcms/cms',
+    },
     feature: {
       type: String,
       default: 'This feature',
@@ -23,8 +31,12 @@ export default {
   },
   computed: {
     releaseUrl() {
-      // Keep in mind that this doesn't validate the incoming version number. Check your references for dead URLs!
-      return `${GITHUB_BLOB_URL}/${this.ver}/${GITHUB_CHANGELOG_FILENAME}`;
+      // We started supporting GitHub releases in 4.4.6 and 3.8.7. This doesn't validate the incoming version number. Check your references for dead URLs!
+      if (this.useChangelog) {
+        return `${GITHUB_URL}/${this.repo}/blob/${this.ver}/${GITHUB_CHANGELOG_FILENAME}`;
+      }
+
+      return `${GITHUB_URL}/${this.repo}/releases/tag/${this.ver}`;
     },
   },
 };

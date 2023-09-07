@@ -1,3 +1,7 @@
+---
+updatedVersion: 4.x/extend/element-actions.md
+---
+
 # Element Action Types
 
 Plugins can provide custom action types for element index pages by creating a class that implements <craft3:craft\base\ElementActionInterface>. The class will serve both as a way to communicate various things about your action type (with static methods), and as a model that actions of its type will be instantiated with.
