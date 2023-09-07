@@ -56,7 +56,7 @@ class Product extends Element
     }
 
     public int $price = 0;
-    public string $currency;
+    public ?string $currency = null;
 
     // ...
 }
