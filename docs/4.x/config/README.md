@@ -636,3 +636,11 @@ The path to the `translations/` folder. (It is assumed to live within the base d
 ### `CRAFT_VENDOR_PATH`
 
 The path to the [vendor/](../directory-structure.md#vendor) folder. (It is assumed to live 4 directories up from the bootstrap script by default.)
+
+### `CRAFT_WEB_URL`
+
+Automatically sets the `@web` [alias](#aliases). Platforms (like [DDEV](../installation.md)) can set this to ensure Craft is pre-configured with the correct public URL.
+
+### `CRAFT_WEB_ROOT`
+
+Automatically sets the `@webroot` [alias](#aliases), like [`CRAFT_WEB_URL`](#craft-web-url).
