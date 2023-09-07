@@ -56,7 +56,7 @@ class Product extends Element
     }
 
     public int $price = 0;
-    public string $currency;
+    public ?string $currency = null;
 
     // ...
 }
@@ -130,7 +130,7 @@ Note that we’ve also specified `id`, `dateCreated`, `dateUpdated`, and `uid` �
 Plugins should always keep their [install migration](./migrations.md#plugin-install-migrations) up to date. If this is your plugin’s first migration, it can live solely in `Install.php`; otherwise, equivalent code will also need to be added via a regular migration.
 :::
 
-Install your plugin (or run `php migrate/up`) to create the database table.
+Install your plugin (or run `php craft migrate/up --plugin=my-plugin`) to create the database table.
 
 ### Save Hooks
 
