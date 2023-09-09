@@ -195,7 +195,7 @@ Just below the existing `set` tag, add another one to fetch the attached categor
 {% set featureImage = entry.featureImage.one() %}
 
 {# Load attached topics: #}
-{% set topics = entry.topics.all() %}
+{% set topics = entry.postCategories.all() %}
 ```
 
 Because we’re allowing authors to attach multiple topics to a post, we’ve used `.all()` to fetch _all_ of them, instead of just _one_. This is important, because we will treat `topics` (plural) a little bit differently from `featureImage` (singular).
