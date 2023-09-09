@@ -400,7 +400,7 @@ Create `templates/blog/_topic.twig` (the path we defined when setting up the **C
 ```twig{3,5}
 {% extends '_layout' %}
 
-{% set posts = craft.entries().section('blog').topics(category).all() %}
+{% set posts = craft.entries().section('blog').postCategories(category).all() %}
 
 {% block content %}
   <h1>Topic: {{ category.title }}</h1>
