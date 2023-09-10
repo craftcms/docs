@@ -181,7 +181,7 @@ In the control panel, navigate to **Settings** &rarr; **Fields**, then follow th
     - **Allow line breaks**: Enabled
 1. Click **Save** or press <kbd>Ctrl/Command + S</kbd>;
 
-With the field created, navigate to **Settings** &rarr; **Global Sets**:
+With the field created, navigate to **Settings** &rarr; **Globals**:
 
 1. Click **+ New global set**;
 1. Name the set _Site Info_ and use `siteInfo` for the handle;
