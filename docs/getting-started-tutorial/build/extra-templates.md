@@ -56,7 +56,9 @@ Continuing in the control panel…
 1. Click **Save and edit entry types** or press <kbd>Ctrl/Command + S</kbd>;
 1. Select the auto-generated entry type (it should also be named _About_);
 1. Drag fields from the **About** group into the field layout in whatever order you prefer;
-1. Click **Save** press <kbd>Ctrl/Command + S</kbd>;
+1. Click **Save and Edit Entry Types**. 
+1. Drag and drop our new **Bio** and **Profile Photo** fields into the field layout.
+1. Click **Save**.
 
 With that, our new page is configured! Let’s head over to **Entries** &rarr; **Singles**, then click **About** to add some content.
 
