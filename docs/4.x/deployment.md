@@ -161,7 +161,7 @@ With a generic deployment framework in place, we’re ready to get into a few co
 
 Let’s assume you’ve cloned your project onto a host, and configured it to serve requests directly out of the `web/` directory.
 
-Within the project directory, a simple Git-based deployment might look like this:
+Within the project's root directory, a simple Git-based deployment might look like this:
 
 ```bash
 # Fetch new code:
