@@ -568,7 +568,7 @@ Coerces the passed value to a float using PHP’s [`floatval()`](https://www.php
 
 ## `group`
 
-Groups items in an array by a the results of an arrow function.
+Groups items in an array by the results of an arrow function.
 
 ```twig
 {% set allEntries = craft.entries().section('blog').all() %}
