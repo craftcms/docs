@@ -88,7 +88,7 @@ $countries = \craft\commerce\Plugin::getInstance()
 :::
 
 ::: tip
-You can get the _entire_ list of countries, and not just those you’ve chosen, with `craft.getAddresses().countryRepository.getAll()`.
+You can get the _entire_ list of countries, and not just those you’ve chosen, with `craft.app.getAddresses().countryRepository.getAll()`.
 :::
 
 States can no longer be enabled or disabled for selection in dropdown lists, but you can use the new **Order Address Condition** to limit them instead. This example is configured to only allow orders from Western Australia:
