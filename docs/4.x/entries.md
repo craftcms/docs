@@ -823,7 +823,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `cache`
 
-Enables query cache for this Query.
+Enables query cache for this Query. See [Caching Element Queries](https://craftcms.com/docs/4.x/element-queries.html#caching-element-queries) for more information.
 
 
 
