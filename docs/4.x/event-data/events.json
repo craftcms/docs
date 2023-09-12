@@ -38246,6 +38246,12 @@
     },
     {
         "class": "craft\\services\\Users",
+        "name": "EVENT_DEFINE_DEFAULT_USER_GROUPS",
+        "type": "craft\\events\\DefineUserGroupsEvent",
+        "desc": "The event that is triggered when defining the default user groups to assign to a publicly-registered user."
+    },
+    {
+        "class": "craft\\services\\Users",
         "name": "EVENT_BEFORE_ASSIGN_USER_TO_DEFAULT_GROUP",
         "type": "craft\\events\\UserAssignGroupEvent",
         "desc": "The event that is triggered before a user is assigned to the default user group."
