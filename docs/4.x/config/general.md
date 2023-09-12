@@ -220,9 +220,6 @@ Disabling this will also disable Live Preview.
 :::
 
 ::: code
-```php Static Config
-->autosaveDrafts(false)
-```
 ```shell Environment Override
 CRAFT_AUTOSAVE_DRAFTS=false
 ```
