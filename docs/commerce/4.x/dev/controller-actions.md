@@ -25,6 +25,9 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
 <badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 <badge vertical="baseline" type="verb">POST</badge> [subscriptions/subscribe](#post-subscriptions-subscribe) | Starts a new subscription.
+<badge vertical="baseline" type="verb">POST</badge> [subscriptions/cancel](#post-subscriptions-cancel) | Cancels an active subscription.
+<badge vertical="baseline" type="verb">POST</badge> [subscriptions/switch](#post-subscriptions-switch) | Switch an active subscription’s plan.
+<badge vertical="baseline" type="verb">POST</badge> [subscriptions/reactivate](#post-subscriptions-reactivate) | Reactivates a canceled subscription.
 
 [Address management](/4.x/addresses.md/#managing-addresses) actions are part of the main Craft documentation. Commerce also allows address information to be set directly on a cart via <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart).
 
@@ -310,8 +313,6 @@ Param | Description
 
 The action’s output depends on whether the payment completed successfully and the `Accept` header.
 
-#### Standard Request
-
 <span class="croker-table">
 
 State | `text/html` | `application/json`
@@ -344,6 +345,10 @@ State | Output
 
 Starts a new subscription with the current customer’s default payment source. Learn more about supporting [Subscriptions](../subscriptions.md).
 
+::: warning
+We recommend using normal HTML forms and a `text/html` content type for this action, as the gateway _may_ require redirection to resolve billing issues when a subscription cannot be started. This workflow can be problematic when using `application/json` over Ajax.
+:::
+
 #### Supported Params
 
 Param | Description
@@ -351,7 +356,7 @@ Param | Description
 `planUid` | **Required.** UID of the Commerce plan the customer wants to subscribe to.
 `fields[...]` | Subscription custom field values, indexed by their handles.
 `fieldsLocation` | Allows relocation of the default `fields` key for custom field data (see above).
-`*` | **Conditionally required.** Each [gateway](../payment-gateways.md) that supports subscriptions may determine additional properties that must set on its <commerce4:craft\commerce\models\SubscriptionForm>.
+`*` | **Conditionally required.** Each [gateway](../payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SubscriptionForm> subclass.
 
 ::: warning
 `planUid` and all gateway-specific properties must be [hashed](/4.x/dev/filters.md#hash) to prevent tampering.
@@ -359,7 +364,94 @@ Param | Description
 
 #### Response
 
-State | Output
------ | ------
-<check-mark label="Success" /> | File response with the rendered PDF and an `application/pdf` MIME type.
-<x-mark label="Failure" /> | Most subscription failures will be presented as a succinct error message. Specific issues are logged, but may not be disclosed to the customer.
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); the Subscription model is available under the `subscription` key.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). Most subscription failures will be presented as a succinct error message. Specific issues are logged, but may not be disclosed to the customer. The user may be redirected to the [`updateBillingDetailsUrl` setting](../config-settings.md#updatebillingdetailsurl) to resolve billing issues. | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
+
+### <badge vertical="baseline" type="verb">POST</badge> `subscriptions/cancel`
+
+Cancels an active subscription.
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`subscriptionUid` | **Required.** UID of the subscription to cancel. Must be [hashed](/4.x/dev/filters.md#hash).
+`*` | **Conditionally required.** Each [gateway](../payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\CancelSubscriptionForm> subclass.
+
+#### Response
+
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); the Subscription model is available under the `subscription` key.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
+
+### <badge vertical="baseline" type="verb">POST</badge> `subscriptions/switch`
+
+Switch the plan on an active subscription.
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`subscriptionUid` | **Required.** UID of the subscription getting updated. Must be [hashed](/4.x/dev/filters.md#hash).
+`planUid` | **Required.** UID of the plan to switch to. Must be [hashed](/4.x/dev/filters.md#hash).
+`*` | **Conditionally required.** Each [gateway](../payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SwitchPlansForm> subclass.
+
+#### Response
+
+The request may fail if the new and old plans are not compatible. This is determined by the gateway, so be sure and consult its documentation and platform limitations.
+
+You can check whether two plans are compatible in Twig, to narrow the options displayed to your customers:
+
+```twig
+{% set currentPlan = subscription.getPlan() %}
+{% set gateway = currentPlan.getGateway() %}
+{% set allPlans = craft.commerce.plans.getPlansByGatewayId(gateway.id) %}
+{% set switchablePlans = allPlans|filter((p) => p.canSwitchFrom(currentPlan)) %}
+
+<select name="planUid">
+  {% for plan in switchablePlans %}
+    <option value="{{ plan.uid|hash }}">{{ plan.name }}</option>
+  {% endfor %}
+</select>
+```
+
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); the Subscription model is available under the `subscription` key.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
+
+### <badge vertical="baseline" type="verb">POST</badge> `subscriptions/reactivate`
+
+Reactivates a canceled subscription. Only subscriptions that haven’t expired yet can be reactivated—a subscription may be canceled
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`subscriptionUid` | **Required.** UID of the subscription to reactivate. Must be [hashed](/4.x/dev/filters.md#hash).
+
+#### Response
+
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); the Subscription model is available under the `subscription` key.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
