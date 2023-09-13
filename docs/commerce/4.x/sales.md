@@ -8,6 +8,12 @@ An item in the store would typically be listed by its sale price. If no sales ap
 
 Sales are ordered in the control panel, and the system always runs through each sale in order when determining the `salePrice` of the purchasable.
 
+## Matching Items
+
+Controls that determine what purchasables match a sale are identical to those for [discounts](discounts.md).
+
+<See path="discounts.md" hash="discount-matching-items" label="Discount Matching Rules" description="Learn about matching behaviors shared between sales and discounts." />
+
 ## Conditions
 
 When creating a sale, you can set a number of conditions to be evaluated when determining if the sale should be applied to the purchasable. All conditions must match to have the sale applied. Leaving a condition empty ignores that condition.
@@ -27,30 +33,6 @@ When the sale stops being applied to matching products.
 ### User Group
 
 Whether the cart’s customer belongs to one of the matching user groups.
-
-### Variant
-
-Whether the purchasable being matched is one of the selected variants.
-
-### Category
-
-Whether the purchasable being matched is related to the selected category.
-
-For example, you might have a category of products in the “Womens Sport” department category, and this allows you to put all products in that category on sale.
-
-For variants, the category can be related to either the product or the variant to match this condition.
-
-Each custom purchasable can decide to determine how it considers the selected category.
-
-### Category Relationship Type
-
-This field specifies the type of relationship must exist between the purchasable and category in order for the condition to be met. There are three options available “Source”, “Target” and “Both”:
-
-- **Source**: the relational field exists on the product/purchasable.
-- **Target**: the category has a product/variant relational field.
-- **Both**: the relationship can be either **Source** or **Target**
-
-For more information on how this works, see [Relations Terminology](/4.x/relations.md#terminology).
 
 ### Other Purchasables
 
