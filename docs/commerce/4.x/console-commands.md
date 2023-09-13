@@ -3,41 +3,50 @@ keywords: cli
 ---
 # Console Commands
 
-Commerce adds console commands that can be run in your terminal.
+Commerce supplements Craft’s own [console commands](/4.x/console-commands.md) with a few utilities that can help you manage your storefront’s data.
 
-See Craft’s [Console Commands](/4.x/console-commands.md) page for more about using console commands.
+## `commerce/example-templates`
 
-## example-templates
-
-Customizes and copies example templates into your project’s template folder.
+Copies the example templates that Commerce ships with into your project’s template folder.
 
 ```
 $ php craft commerce/example-templates
 A folder will be copied to your templates directory.
 Choose folder name: [shop] myshop
-Use CDN link to resources (tailwind)? (yes|no) [yes]: yes
-Base Tailwind CSS color: [gray,red,yellow,green,blue,indigo,purple,pink,?]: green
-Attempting to copy example templates ... 
 Copying ...
 Done!
 ```
 
-## reset-data
+Pass the `--overwrite` flag if you'd like to squash an existing folder of the same name.
+
+## `commerce/reset-data`
 
 Cleanses Commerce data without uninstalling the plugin or removing store configuration. This can be useful for removing test data after finishing initial project development.
 
 Deletes all orders, subscriptions, payment sources, customers, addresses and resets discount usages.
 
 ```
-php craft commerce/reset-data
+$ php craft commerce/reset-data
 ```
 
-## upgrade
+## `commerce/transfer-user-data` <Since product="commerce" ver="4.3.0" feature="The customer data transfer command" />
 
-Support command for the Commerce 3 → Commerce 4 upgrade process, meant to be run _after_ upgrading to Commerce 4.
+Transfers customer data from one user to another. You will be prompted for the username or email of the source and destination users.
 
 ```
-php craft commerce/upgrade
+$ php craft commerce/transfer-user-data
+```
+
+::: warning
+Updates are performed via low-level database queries, so element events are not emitted and plugins are not given an opportunity to alter this behavior. This also serves to speed up the process of saving large amounts of data.
+:::
+
+## `commerce/upgrade`
+
+Support command for the Commerce 3 → Commerce 4 upgrade process; meant to be run _after_ upgrading to Commerce 4.
+
+```
+$ php craft commerce/upgrade
 ```
 
 It goes through several steps to ensure the best-possible migration:
