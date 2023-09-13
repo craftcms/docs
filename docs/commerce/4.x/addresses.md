@@ -197,7 +197,7 @@ Your customers can save the billing and/or shipping addresses on their cart to t
 
 This example guards against saving an existing address, indicated by the presence of a `cart.sourceBillingAddressId` or `cart.sourceShippingAddressId`.
 
-You may also possible to save both addresses at once, by using the `saveAddressesOnOrderComplete` parameter.
+Both properties can be set at once with the `saveAddressesOnOrderComplete` parameter, but you are still responsible for deriving UI state from the underlying address-specific properties:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -218,6 +218,8 @@ You may also possible to save both addresses at once, by using the `saveAddresse
 
 ::: tip
 The `saveAddress*` properties are only applicable to logged-in users who created addresses directly on the cart. Setting these options to `true` if the user selected an address from their [address book](#auto-fill-from-address-book) has no effect.
+
+Guests’ addresses are automatically saved to their customer account when [registering at checkout](customers.md#registration-at-checkout). <Since product="commerce" ver="4.3.0" feature="Auto-saving guest address when registering at checkout" />
 :::
 
 #### Auto-fill from Address Book
