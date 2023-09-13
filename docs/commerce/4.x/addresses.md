@@ -217,7 +217,7 @@ Both properties can be set at once with the `saveAddressesOnOrderComplete` param
 ```
 
 ::: tip
-The `saveAddress*` properties are only applicable to logged-in users who created addresses directly on the cart. Setting these options to `true` if the user selected an address from their [address book](#auto-fill-from-address-book) has no effect.
+The `saveAddress*` properties are only applicable to customers who created addresses directly on the cart. Setting these options to `true` if a _registered_ customer selected an address from their [address book](#auto-fill-from-address-book) has no effect.
 
 Guests’ addresses are automatically saved to their customer account when [registering at checkout](customers.md#registration-at-checkout). <Since product="commerce" ver="4.3.0" feature="Auto-saving guest address when registering at checkout" />
 :::
@@ -388,3 +388,5 @@ To add support for setting default addresses, add this code to the [new address]
 :::
 
 Similarly, you can send `makePrimaryBillingAddress` or `makePrimaryShippingAddress` params along with any `cart/update-cart` request to set an address attached to the cart as the customer’s primary billing or shipping address. Only addresses that retain their `sourceBillingAddressId` or `sourceShippingAddressId` can be configured this way.
+
+### Address Synchronization
