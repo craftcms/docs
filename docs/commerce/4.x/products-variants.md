@@ -251,11 +251,15 @@ Product queries support the following parameters:
 | [prepareSubquery](#product-preparesubquery)           | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#product-relatedto)                       | Narrows the query results to only products that are related to certain other elements.
 | [search](#product-search)                             | Narrows the query results to only products that match a search query.
+| [shippingCategory](#product-shippingcategory)         | Narrows the query results based on the products’ shipping category.
+| [shippingCategoryId](#product-shippingcategoryid)     | Narrows the query results based on the products’ shipping categories, per the shipping categories’ IDs.
 | [site](#product-site)                                 | Determines which site(s) the products should be queried in.
 | [siteId](#product-siteid)                             | Determines which site(s) the products should be queried in, per the site’s ID.
 | [siteSettingsId](#product-sitesettingsid)             | Narrows the query results based on the products’ IDs in the `elements_sites` table.
 | [slug](#product-slug)                                 | Narrows the query results based on the products’ slugs.
 | [status](#product-status)                             | Narrows the query results based on the products’ statuses.
+| [taxCategory](#product-taxcategory)                   | Narrows the query results based on the products’ tax category.
+| [taxCategoryId](#product-taxcategoryid)               | Narrows the query results based on the products’ tax categories, per the tax categories’ IDs.
 | [title](#product-title)                               | Narrows the query results based on the products’ titles.
 | [trashed](#product-trashed)                           | Narrows the query results to only products that have been soft-deleted.
 | [type](#product-type)                                 | Narrows the query results based on the products’ types.
@@ -1085,6 +1089,71 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
+<h4 id="product-shippingcategory"><a href="#product-shippingcategory" class="header-anchor">#</a> <code>shippingCategory</code></h4>
+
+Narrows the query results based on the products’ shipping category.
+
+Possible values include:
+
+| Value | Fetches products…
+| - | -
+| `'foo'` | of a shipping category with a handle of `foo`.
+| `'not foo'` | not of a shipping category with a handle of `foo`.
+| `['foo', 'bar']` | of a shipping category with a handle of `foo` or `bar`.
+| `['not', 'foo', 'bar']` | not of a shipping category with a handle of `foo` or `bar`.
+| an [ShippingCategory](commerce4:craft\commerce\models\ShippingCategory) object | of a shipping category represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch products with a Foo shipping category #}
+{% set products = craft.products()
+  .shippingCategory('foo')
+  .all() %}
+```
+
+```php
+// Fetch products with a Foo shipping category
+$products = \craft\commerce\elements\Product::find()
+    ->shippingCategory('foo')
+    ->all();
+```
+:::
+
+
+<h4 id="product-shippingcategoryid"><a href="#product-shippingcategoryid" class="header-anchor">#</a> <code>shippingCategoryId</code></h4>
+
+Narrows the query results based on the products’ shipping categories, per the shipping categories’ IDs.
+
+Possible values include:
+
+| Value | Fetches products…
+| - | -
+| `1` | of a shipping category with an ID of 1.
+| `'not 1'` | not of a shipping category with an ID of 1.
+| `[1, 2]` | of a shipping category with an ID of 1 or 2.
+| `['not', 1, 2]` | not of a shipping category with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch products of the shipping category with an ID of 1 #}
+{% set products = craft.products()
+  .shippingCategoryId(1)
+  .all() %}
+```
+
+```php
+// Fetch products of the shipping category with an ID of 1
+$products = \craft\commerce\elements\Product::find()
+    ->shippingCategoryId(1)
+    ->all();
+```
+:::
+
+
 <h4 id="product-site"><a href="#product-site" class="header-anchor">#</a> <code>site</code></h4>
 
 Determines which site(s) the products should be queried in.
@@ -1268,6 +1337,71 @@ Possible values include:
 // Fetch disabled products
 $products = \craft\commerce\elements\Product::find()
     ->status('disabled')
+    ->all();
+```
+:::
+
+
+<h4 id="product-taxcategory"><a href="#product-taxcategory" class="header-anchor">#</a> <code>taxCategory</code></h4>
+
+Narrows the query results based on the products’ tax category.
+
+Possible values include:
+
+| Value | Fetches products…
+| - | -
+| `'foo'` | of a tax category with a handle of `foo`.
+| `'not foo'` | not of a tax category with a handle of `foo`.
+| `['foo', 'bar']` | of a tax category with a handle of `foo` or `bar`.
+| `['not', 'foo', 'bar']` | not of a tax category with a handle of `foo` or `bar`.
+| an [ShippingCategory](commerce4:craft\commerce\models\ShippingCategory) object | of a tax category represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch products with a Foo tax category #}
+{% set products = craft.products()
+  .taxCategory('foo')
+  .all() %}
+```
+
+```php
+// Fetch products with a Foo tax category
+$products = \craft\commerce\elements\Product::find()
+    ->taxCategory('foo')
+    ->all();
+```
+:::
+
+
+<h4 id="product-taxcategoryid"><a href="#product-taxcategoryid" class="header-anchor">#</a> <code>taxCategoryId</code></h4>
+
+Narrows the query results based on the products’ tax categories, per the tax categories’ IDs.
+
+Possible values include:
+
+| Value | Fetches products…
+| - | -
+| `1` | of a tax category with an ID of 1.
+| `'not 1'` | not of a tax category with an ID of 1.
+| `[1, 2]` | of a tax category with an ID of 1 or 2.
+| `['not', 1, 2]` | not of a tax category with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch products of the tax category with an ID of 1 #}
+{% set products = craft.products()
+  .taxCategoryId(1)
+  .all() %}
+```
+
+```php
+// Fetch products of the tax category with an ID of 1
+$products = \craft\commerce\elements\Product::find()
+    ->taxCategoryId(1)
     ->all();
 ```
 :::
