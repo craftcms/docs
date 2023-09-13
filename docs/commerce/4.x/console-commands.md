@@ -17,7 +17,7 @@ Copying ...
 Done!
 ```
 
-Pass the `--overwrite` flag if you'd like to squash an existing folder of the same name.
+Pass the `--overwrite` flag if you’d like to squash an existing folder of the same name.
 
 ## `commerce/reset-data`
 
