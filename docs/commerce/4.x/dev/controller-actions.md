@@ -24,6 +24,7 @@ Action | Description
 <badge vertical="baseline" type="verb">GET</badge> [payments/complete-payment](#get-payments-complete-payment) | Processes customer’s return from an off-site payment.
 <badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
 <badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
+<badge vertical="baseline" type="verb">POST</badge> [subscriptions/subscribe](#post-subscriptions-subscribe) | Starts a new subscription.
 
 [Address management](/4.x/addresses.md/#managing-addresses) actions are part of the main Craft documentation. Commerce also allows address information to be set directly on a cart via <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart).
 
@@ -338,3 +339,27 @@ State | Output
 ----- | ------
 <check-mark label="Success" /> | File response with the rendered PDF and an `application/pdf` MIME type.
 <x-mark label="Failure" /> | Exceptions will be rendered with the normal [error template](/4.x/routing.md#error-templates).
+
+### <badge vertical="baseline" type="verb">POST</badge> `subscriptions/subscribe`
+
+Starts a new subscription with the current customer’s default payment source. Learn more about supporting [Subscriptions](../subscriptions.md).
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`planUid` | **Required.** UID of the Commerce plan the customer wants to subscribe to.
+`fields[...]` | Subscription custom field values, indexed by their handles.
+`fieldsLocation` | Allows relocation of the default `fields` key for custom field data (see above).
+`*` | **Conditionally required.** Each [gateway](../payment-gateways.md) that supports subscriptions may determine additional properties that must set on its <commerce4:craft\commerce\models\SubscriptionForm>.
+
+::: warning
+`planUid` and all gateway-specific properties must be [hashed](/4.x/dev/filters.md#hash) to prevent tampering.
+:::
+
+#### Response
+
+State | Output
+----- | ------
+<check-mark label="Success" /> | File response with the rendered PDF and an `application/pdf` MIME type.
+<x-mark label="Failure" /> | Most subscription failures will be presented as a succinct error message. Specific issues are logged, but may not be disclosed to the customer.
