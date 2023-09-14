@@ -42,7 +42,7 @@ Oftentimes, it makes more sense to make discounts available based on categories 
 
 Let’s assume your store is organized into departments that are defined by a [category group](/4.x/categories.md) or [entry section](/4.x/entries.md). On each product (or variant), administrators select one or more of those departments via a category or entry custom fields.
 
-In the **Matching Items** tab, enabling **Only match purchasables related to…** will reveal two element selection fields (one for categories and one for entries), as well as an [Advanced](#advanced) drawer, which allows you to specify the [direction](/4.x/relations.md#sources-and-targets) of the relationship. If you enable the relational criteria and don't select any categories or entries
+In the **Matching Items** tab, enabling **Only match purchasables related to…** will reveal two element selection fields (one for categories and one for entries), as well as an [Advanced](#advanced) drawer, which allows you to specify the [direction](/4.x/relations.md#sources-and-targets) of the relationship. If you enable the relational criteria and don’t select any categories or entries
 
 ::: tip
 The **Categories** field will only be displayed if you have a category group configured; similarly, the **Entries** field will only be displayed if you’ve configured a section.
