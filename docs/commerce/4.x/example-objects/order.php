@@ -35,6 +35,8 @@ array (
   'shippingMethodName' => 'Free Shipping',
   'customerId' => '3',
   'registerUserOnOrderComplete' => NULL,
+  'saveBillingAddressOnOrderComplete' => NULL,
+  'saveShippingAddressOnOrderComplete' => NULL,
   'paymentSourceId' => NULL,
   'storedTotalPrice' => '30.0000',
   'storedTotalPaid' => '30.0000',
