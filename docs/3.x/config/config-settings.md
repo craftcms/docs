@@ -3299,7 +3299,7 @@ Since
 
 </div>
 
-The maximum allowed GraphQL queries that can be executed in a single batched request. Set to `0` to allew any number of queries.
+The maximum allowed GraphQL queries that can be executed in a single batched request. Set to `0` to allow any number of queries.
 
 
 
