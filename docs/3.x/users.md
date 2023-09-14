@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Users
 
 Users are Craft’s representation of people.

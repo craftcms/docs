@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Subscription Queries
 
 You can fetch subscriptions in your templates or PHP code using **subscription queries**.

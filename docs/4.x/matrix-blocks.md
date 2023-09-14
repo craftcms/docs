@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Matrix Blocks
 
 If you’ve ever worked with a hairball of content and markup managed in an increasingly-fragile WYSIWYG field, you’re probably going to like Matrix blocks.

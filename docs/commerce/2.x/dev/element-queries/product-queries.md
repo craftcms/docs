@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Product Queries
 
 You can fetch products in your templates or PHP code using **product queries**.

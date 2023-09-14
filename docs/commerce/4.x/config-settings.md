@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Config Settings
 
 In addition to the settings in **Commerce** → **Settings**, the config items below can be saved in a `config/commerce.php` file using the same format as [Craft’s general config settings](/4.x/config/config-settings.md).

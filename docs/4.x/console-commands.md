@@ -1,5 +1,6 @@
 ---
 keywords: cli
+containsGeneratedContent: yes
 ---
 
 # Console Commands

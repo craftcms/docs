@@ -1,5 +1,6 @@
 ---
 sidebarDepth: 2
+containsGeneratedContent: yes
 ---
 # Orders & Carts
 

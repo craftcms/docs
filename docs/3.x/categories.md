@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Categories
 
 You can create taxonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Categories.

@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # General Settings
 
 This group of settings affects a wide variety of Craft’s features and behaviors. If you are uncertain about whether something is configurable or not, refer to the categories in the table of contents.

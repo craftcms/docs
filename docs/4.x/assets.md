@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Assets
 
 Craft lets you manage media and document files (“assets”) just like entries and other content types. Assets can live anywhere—a directory on the web server, or a remote storage service like Amazon S3.

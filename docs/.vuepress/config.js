@@ -65,8 +65,8 @@ module.exports = {
     },
     feedback: {
       helpful: "Was this page helpful?",
-      thanks: "Thanks for your feedback.",
-      more: "Give More Feedback →"
+      thanks: "Thanks for your feedback!",
+      more: "Report an Issue →"
     }
   },
   markdown: {

@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Subscriptions
 
 Subscriptions are handled by gateways. A payment gateway must handle subscription plan support in order to establish a Commerce subscription for a user.

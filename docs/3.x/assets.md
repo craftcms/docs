@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Assets
 
 You can manage your project’s media and document files (“assets”) in Craft just like entries and other content types.

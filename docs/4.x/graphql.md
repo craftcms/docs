@@ -1,5 +1,6 @@
 ---
 keywords: headless
+containsGeneratedContent: yes
 ---
 
 # GraphQL API <badge type="edition" vertical="middle" title="GraphQL is only available in Craft Pro">Pro</badge>
