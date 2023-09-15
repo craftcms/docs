@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Globals
 
 Globals store content that is available globally throughout your templates but is not tied to any one URL.

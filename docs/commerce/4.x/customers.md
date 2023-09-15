@@ -27,10 +27,6 @@ If you’d like to be able to see and manage customer addresses from the control
 
 A customer with saved login information is considered a [credentialed](/4.x/users.md#active-and-inactive-users) user. Conversely, customers who check out as guests are set up as inactive users.
 
-### Guest Checkout
-
-If someone visits the store and checks out as a guest, a new inactive user is created and related to the order—and any future orders using the same email address will be consolidated under that user.
-
 ### User Checkout <badge text="Pro" type="edition" vertical="middle">Pro</badge>
 
 Logged in customers are bound to their cart the moment it is created.
@@ -42,12 +38,29 @@ Setting | Result
 <config4:useEmailAsUsername> | Only requires an email address to register; can be pre-filled if the customer already set an email on their cart (as this creates an inactive user, behind the scenes).
 <config4:deferPublicRegistrationPassword> | A password is set only after activating their account (typically only used in combination with [email verification](/4.x/user-management.md#public-registration)).
 
+### Guest Checkout
+
+If someone visits the store and checks out as a guest, a new inactive user is created and related to the order—and any future orders using the same email address will be consolidated under that user.
+
 #### Registration at Checkout
 
 You can also offer the option to initiate registration _at_ checkout by sending the `registerUserOnOrderComplete` param when [updating a cart](./dev/controller-actions.md#post-cart-update-cart) or [submitting payment](./dev/controller-actions.md#post-payments-pay).
 
 If a customer chooses to register an account upon order completion, an activation link is sent to the email on file.
 
-::: tip
-The Commerce [example templates](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/checkout/payment.twig) display a “Create an account” checkbox at the payment stage.
-:::
+```twig
+{% set cart = craft.commerce.carts.cart %}
+
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+
+  {{ input('checbox', 'registerUserOnOrderComplete', 1, {checked: cart.registerUserOnOrderComplete}) }}
+
+  {# ... #}
+
+  <button>Save cart</button>
+</form>
+```
+
+When registering at checkout, the order’s billing and shipping [addresses](addresses.md) are automatically saved to the new accounts for future use. <Since product="commerce" ver="4.3.0" feature="Auto-saving guest address when registering at checkout" />

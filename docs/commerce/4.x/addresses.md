@@ -56,7 +56,7 @@ That `getStore().getStore()` is not a typo! We’re getting the <commerce4:craft
 
 ### Fetching Cart Addresses
 
-Once you have [a cart object](orders-carts.md#fetching-a-cart), you can access the attached addresses via `cart.shippingAddress` and `cart.billingAddress`:
+Once you have a [cart object](orders-carts.md#fetching-a-cart), you can access the attached addresses via `cart.shippingAddress` and `cart.billingAddress`:
 
 ```twig
 {% if cart.shippingAddress %}
@@ -72,28 +72,31 @@ Once you have [a cart object](orders-carts.md#fetching-a-cart), you can access t
 
 It’s important to code defensively, here! If the customer hasn’t set an address yet, you’ll get back `null`—otherwise, it’ll be an [Address](craft4:craft\elements\Address) object.
 
-::: tip
-You don’t need to add your own logic to handle `shippingAddressSameAsBilling` or `billingAddressSameAsShipping`; Commerce will return the correct address taking those options into account.
-:::
-
 ### Updating Cart Addresses
 
-Any post to the `commerce/cart/update-cart` action can include parameters for modifying shipping and billing address information in two formats:
+Any time you submit data to the `commerce/cart/update-cart` action, you can include parameters for modifying shipping and billing addresses:
 
-1. A `shippingAddress` and/or `billingAddress` array with details to be added (guests and logged-in users)
-2. A `shippingAddressId` and/or `billingAddressId` parameter for choosing an existing address by ID (logged-in users only)
+1. Send `shippingAddress` and/or `billingAddress` arrays with new values (guests and logged-in users);
+2. `shippingAddressId` and/or `billingAddressId` parameters for [choosing an existing address](#address-book) by ID (logged-in users only);
+3. A `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` parameter to [copy address information](#synchronizing-shipping-and-billing-addresses) in one direction or another;
+
+The full list of supported parameters can be found in the [controller actions](./dev/controller-actions.md#post-cart-update-cart) documentation.
 
 #### Synchronizing Shipping and Billing Addresses
 
 With either approach, you can leverage the `shippingAddressSameAsBilling` or `billingAddressSameAsShipping` parameters to synchronize addresses and avoid having to send the same information twice.
 
-If you provide a `shippingAddress` or `shippingAddressId`, for example, and the order’s billing address should be identical, you can simply pass a non-empty value under `billingAddressSameAsShipping` rather than supplying the same `billingAddress` or `billingAddressId`.
+If you provide a `shippingAddress` or `shippingAddressId` and the order’s billing address should be identical, you can simply send a non-empty `billingAddressSameAsShipping` param rather than supplying the same `billingAddress` or `billingAddressId`.
 
-If you provide `shippingAddress` fields *and* `shippingAddressId`, the latter takes precedence.
+If you provide `shippingAddress` fields *and* a `shippingAddressId`, the latter takes precedence.
 
 ::: warning
-Commerce doesn’t require an order to have a shipping address, but providing one is important for the tax and shipping engine to calculate more accurate options and costs.
+Customize what address information is required at checkout with the [`requireBillingAddressAtCheckout`](config-settings.md#requirebillingaddressatcheckout) and [`requireShippingAddressAtCheckout`](config-settings.md#requireshippingaddressatcheckout) config settings.
+
+The tax and shipping engines require address information to generate accurate options and costs.
 :::
+
+Use the `cart.hasMatchingAddresses()` method to confirm to customers that their addresses match. Read more about how Commerce handles changes to addresses in the [address book](#auto-fill-from-address-book) section.
 
 #### Address Fields
 
@@ -118,7 +121,7 @@ For more information on address management, continue reading—or see the main C
 
 Logged-in users can directly [manage their addresses](/4.x/addresses.md#managing-addresses) via the front-end, and pick from them during checkout. However, addresses are only ever “owned” by one element—let’s look at some examples of how Commerce handles this:
 
-- When an address is selected by updating a cart with a `shippingAddressId` or `billingAddressId`, the order keeps track of where the address came from via `sourceShippingAddressId` and `sourceBillingAddressId` properties, but _clones_ the actual address element. This means that `shippingAddressId` and `sourceShippingAddressId` will never be the same!
+- When an address is selected by updating a cart with a `shippingAddressId` or `billingAddressId`, the order keeps track of where the address came from via `sourceShippingAddressId` and `sourceBillingAddressId` properties, but _clones_ the actual address element. This means that `shippingAddressId` and `sourceShippingAddressId` will _never_ be the same—even if they were filled from the same source address!
 - Addresses provided by sending individual fields under the `shippingAddress[...]` and `billingAddress[...]` keys are created and owned by the order.
 - Similarly, sending individual field values for an order’s shipping or billing address (regardless of how it was originally populated) will only update the order address, and breaks any association to the user’s address book via `sourceShippingAddressId` or `sourceBillingAddressId`.
 
@@ -165,9 +168,63 @@ Customers—especially guests—will probably need to enter an address at checko
 If your request also includes a non-empty `shippingAddressId` or `billingAddressId param, the corresponding individual address fields are ignored and Commerce attempts to fill from an [existing address](#auto-fill-from-address-book).
 :::
 
+#### Save Addresses when Completing an Order <Since ver="4.3.0" repo="craftcms/commerce" feature="Saving addresses at checkout" product="Commerce" />
+
+Your customers can save the billing and/or shipping addresses on their cart to their address book when they check out. These options are stored as `saveBillingAddressOnOrderComplete` and `saveShippingAddressOnOrderComplete` on the cart or <commerce4:craft\commerce\elements\Order> object. You may send corresponding values any time you update the customer’s cart:
+
+```twig
+{% set cart = craft.commerce.carts.cart %}
+
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+
+  {# ... #}
+
+  {% if currentUser %}
+    {% if cart.billingAddressId and not cart.sourceBillingAddressId %} 
+      {{ input('checkbox', 'saveBillingAddressOnOrderComplete', 1, { checked: cart.saveBillingAddressOnOrderComplete }) }}
+    {% endif %}
+
+    {% if cart.shippingAddressId and not cart.sourceShippingAddressId %} 
+      {{ input('checkbox', 'saveShippingAddressOnOrderComplete', 1, { checked: cart.saveShippingAddressOnOrderComplete }) }}
+    {% endif %}
+  {% endif %}
+
+  <button>Save Cart</button>
+</form>
+```
+
+This example guards against saving an existing address, indicated by the presence of a `cart.sourceBillingAddressId` or `cart.sourceShippingAddressId`.
+
+Both properties can be set at once with the `saveAddressesOnOrderComplete` parameter, but you are still responsible for deriving UI state from the underlying address-specific properties:
+
+```twig
+{% set cart = craft.commerce.carts.cart %}
+
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('commerce/cart/update-cart') }}
+
+  {% if currentUser and ((cart.billingAddressId and not cart.sourceBillingAddressId) or (cart.shippingAddressId and not cart.sourceShippingAddressId)) %}
+    {{ input('checkbox', 'saveAddressesOnOrderComplete', 1, {checked: cart.saveBillingAddressOnOrderComplete and cart.saveShippingAddressOnOrderComplete}) }}
+  {% endif %}
+
+  {# ... #}
+
+  <button>Save Cart</button>
+</form>
+```
+
+::: tip
+The `saveAddress*` properties are only applicable to customers who created addresses directly on the cart. Setting these options to `true` if a _registered_ customer selected an address from their [address book](#auto-fill-from-address-book) has no effect.
+
+Guests’ addresses are automatically saved to their customer account when [registering at checkout](customers.md#registration-at-checkout). <Since product="commerce" ver="4.3.0" feature="Auto-saving guest address when registering at checkout" />
+:::
+
 #### Auto-fill from Address Book
 
-You can allow your customers to populate order addresses with a previously-saved one by sending a `shippingAddressId` and/or `billingAddressId` param when updating the cart.
+You can let your customers populate their cart addresses with a previously-saved one by sending a `shippingAddressId` and/or `billingAddressId` param when updating the cart.
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -199,7 +256,7 @@ You can allow your customers to populate order addresses with a previously-saved
 </form>
 ```
 
-You may need to create custom routes to allow customers to [manage these addresses](/4.x/addresses.md#managing-addresses), or introduce logic in the browser to hide and show new address forms based on the type(s) of addresses you need.
+You may need to create custom routes to allow logged-in customers to [manage these addresses](/4.x/addresses.md#managing-addresses), or introduce logic in the template or browser to hide and show new address forms based on the type(s) of addresses you need.
 
 #### Update an Existing Address
 
@@ -222,8 +279,12 @@ An address on the cart may be updated in-place by passing individual address pro
 </form>
 ```
 
+You may also send `firstName` and `lastName` properties, separately. <Since ver="4.3.0" feature="Sending discrete first and last name params" product="Commerce" repo="craftcms/commerce" />
+
 ::: warning
-Any field(s) updated on an order address filled from the customer’s address book will _not_ propagate back to the source, and will break the association to it. Sending `shippingAddressId` and `billingAddressId` are only intended to populate an order address with existing information—not keep them synchronized.
+Changes to an address in the customer’s address book (via the [`users/save-address` action](/4.x/dev/controller-actions.md#users-save-address)) are copied to any carts it is attached to.
+
+_However_, any field(s) updated on an order address that was originally populated from the customer’s address book will _not_ propagate back to the source, and will break the association to it. Sending `shippingAddressId` and `billingAddressId` are only intended to populate an order address with existing information, and to track where it originally came from—not bind them in both directions.
 :::
 
 ### Estimate Cart Addresses
@@ -295,6 +356,37 @@ A full example of this can be seen in the [example templates](example-templates.
 
 ## Address Book
 
-When logged in, your customers can manage their addresses independently of the cart. Refer to the main [addresses documentation](/4.x/addresses.md) for more information and examples.
+When logged in, your customers can manage their addresses independently of a cart. Refer to the main [addresses documentation](/4.x/addresses.md) and to this page’s section on [auto-filling addresses](#auto-fill-from-address-book) for more information and examples.
+
+### Primary Billing + Shipping Addresses
 
 In addition to the [natively supported](/4.x/dev/controller-actions.md#post-users-save-address) params, Commerce will look for `isPrimaryShipping` and `isPrimaryBilling`. These values determine which addresses get attached to a fresh cart when the [autoSetNewCartAddresses](./config-settings.md#autosetnewcartaddresses) option is enabled.
+
+To add support for setting default addresses, add this code to the [new address](/4.x/addresses.md#new-addresses) and/or [existing addresses](/4.x/addresses.md#existing-addresses) forms:
+
+```twig
+{# Make primary shipping address? #}
+{{ hiddenInput('isPrimaryShipping', 0) }}
+<label>
+  {{ input('checkbox', 'isPrimaryShipping', 1, {
+    checked: address.isPrimaryShipping
+  }) }}
+  Set as primary shipping address
+</label>
+
+{{ hiddenInput('isPrimaryBilling', 0) }}
+<label>
+  {{ input('checkbox', 'isPrimaryBilling', 1, {
+    checked: address.isPrimaryBilling
+  }) }}
+  Set as primary billing address
+</label>
+```
+
+::: tip
+`checkbox` inputs only send a value when checked. In order to support _un_-setting a primary billing or shipping address, you must include the hidden input _before_ the visible checkbox, in the DOM. This ensures that the falsy `0` value is sent when the checkbox is unchecked, differentiating it from simply not sending a value at all (omitting `isPrimaryShipping` or `isPrimaryBilling` entirely makes no changes to the user’s current settings).
+:::
+
+Similarly, you can send `makePrimaryBillingAddress` or `makePrimaryShippingAddress` params along with any `cart/update-cart` request to set an address attached to the cart as the customer’s primary billing or shipping address. Only addresses that retain their `sourceBillingAddressId` or `sourceShippingAddressId` can be configured this way.
+
+### Address Synchronization

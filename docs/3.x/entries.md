@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Entries
 
 Entries hold the content that you want to display on your web pages. Each entry has an Author, a Post Date, an Expiration Date (if desired), a status (enabled or disabled), and of course, content.

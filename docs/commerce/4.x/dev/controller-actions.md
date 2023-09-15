@@ -17,12 +17,17 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [cart/complete](#post-cart-complete) | Completes an order without payment.
 <badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
 <badge vertical="baseline" type="verb">GET/POST</badge> [cart/load-cart](#get-post-cart-load-cart) | Loads a cookie for the given cart.
+<badge vertical="baseline" type="verb">POST</badge> [cart/forget-cart](#get-post-cart-forget-cart) | Loads a cookie for the given cart.
 <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Manage a customer’s current [cart](../orders-carts.md).
-<badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
 <badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
 <badge vertical="baseline" type="verb">GET</badge> [payments/complete-payment](#get-payments-complete-payment) | Processes customer’s return from an off-site payment.
 <badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
+<badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
+<badge vertical="baseline" type="verb">POST</badge> [subscriptions/subscribe](#post-subscriptions-subscribe) | Starts a new subscription.
+<badge vertical="baseline" type="verb">POST</badge> [subscriptions/cancel](#post-subscriptions-cancel) | Cancels an active subscription.
+<badge vertical="baseline" type="verb">POST</badge> [subscriptions/switch](#post-subscriptions-switch) | Switch an active subscription’s plan.
+<badge vertical="baseline" type="verb">POST</badge> [subscriptions/reactivate](#post-subscriptions-reactivate) | Reactivates a canceled subscription.
 
 [Address management](/4.x/addresses.md/#managing-addresses) actions are part of the main Craft documentation. Commerce also allows address information to be set directly on a cart via <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart).
 
@@ -117,6 +122,9 @@ Param | Description
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
 `purchasables[]` | Array of one or more purchasables to be [added to the cart](../orders-carts.md#adding-a-multiple-items). Each must include an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs.
 `registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
+`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
+`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
+`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order. Unlike `saveBillingAddressOnOrderComplete` and `saveShippingAddressOnOrderComplete`, this is _not_ stored on the order itself—it just allows customers to set both at the same time. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
 `shippingAddress[]` | Shipping address attributes. (See [Addresses](../addresses.md)).
 `shippingAddressId` | ID of an existing address to use as the shipping address.
 `shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address and ignore `shippingAddress` and `shippingAddressId`.
@@ -159,25 +167,44 @@ State | `text/html` | `application/json`
 
 </span>
 
-### <badge vertical="baseline" type="verb">GET</badge> `downloads/pdf`
+### <badge vertical="baseline" type="verb">POST</badge> `cart/forget-cart` <Since ver="4.3.0" product="Commerce" repo="craftcms/commerce" feature="Forgetting carts" />
 
-Generates and sends an order [PDF](../pdfs.md) as a file.
+Detaches a cart from the current customer’s session. Read more about [managing carts](../orders-carts.md#loading-and-forgetting-carts).
+
+This action has no arguments and responses are only sent as `text/html`.
+
+#### Response
+
+<span class="croker-table">
+
+State | `text/html`
+--- | ---
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
+
+### <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
+
+Returns the [current cart](../orders-carts.md#fetching-a-cart) as JSON. A new cart cookie will be generated if one doesn’t already exist.
+
+The request must include `Accept: application/json` in its headers.
 
 #### Supported Params
 
 Param | Description
 ----- | -----------
-`number` | Required order number.
-`option` | Optional string value that’s passed to the PDF template.
-`pdfHandle` | Handle of a configured PDF to be rendered.
+`number` | Optional order number for a specific, existing cart.
+`forceSave` | Optionally set to `true` to force saving the cart.
 
 #### Response
 
-State | Output
------ | ------
-<check-mark label="Success" /> | File response with the rendered PDF and an `application/pdf` MIME type.
-<x-mark label="Failure" /> | Exceptions will be rendered with the normal [error template](/4.x/routing.md#error-templates).
+<span class="croker-table">
 
+State | `application/json`
+----- | ------------------
+<check-mark label="Success" /> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); cart data is available under a key determined by the [cartVariable](../config-settings.md#cartvariable) config setting.
+
+</span>
 
 ### <badge vertical="baseline" type="verb">POST</badge> `payment-sources/add`
 
@@ -249,6 +276,9 @@ Param | Description
 `paymentSourceId` | The ID for a payment source that should be used for payment.
 `registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
 `savePaymentSource` | Whether to save card information as a payment source. (Gateway must support payment sources.)
+`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
+`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
+`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order. <Since ver="4.3.0" repo="craftcms/commerce" feature="This param" product="Commerce" />
 
 #### Response
 
@@ -283,13 +313,145 @@ Param | Description
 
 The action’s output depends on whether the payment completed successfully and the `Accept` header.
 
-#### Standard Request
-
 <span class="croker-table">
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
 <check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); redirection defaults to the order’s `returnUrl`. | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); special `url` property set to the order’s `returnUrl`.
 <x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); redirection defaults to the order’s `cancelUrl`. | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); special `url` property set to the order’s `cancelUrl`.
+
+</span>
+
+### <badge vertical="baseline" type="verb">GET</badge> `downloads/pdf`
+
+Generates and sends an order [PDF](../pdfs.md) as a file.
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`number` | Required order number.
+`option` | Optional string value that’s passed to the PDF template.
+`pdfHandle` | Handle of a configured PDF to be rendered.
+
+#### Response
+
+State | Output
+----- | ------
+<check-mark label="Success" /> | File response with the rendered PDF and an `application/pdf` MIME type.
+<x-mark label="Failure" /> | Exceptions will be rendered with the normal [error template](/4.x/routing.md#error-templates).
+
+### <badge vertical="baseline" type="verb">POST</badge> `subscriptions/subscribe`
+
+Starts a new subscription with the current customer’s default payment source. Learn more about supporting [Subscriptions](../subscriptions.md).
+
+::: warning
+We recommend using normal HTML forms and a `text/html` content type for this action, as the gateway _may_ require redirection to resolve billing issues when a subscription cannot be started. This workflow can be problematic when using `application/json` over Ajax.
+:::
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`planUid` | **Required.** UID of the Commerce plan the customer wants to subscribe to.
+`fields[...]` | Subscription custom field values, indexed by their handles.
+`fieldsLocation` | Allows relocation of the default `fields` key for custom field data (see above).
+`*` | **Conditionally required.** Each [gateway](../payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SubscriptionForm> subclass.
+
+::: warning
+`planUid` and all gateway-specific properties must be [hashed](/4.x/dev/filters.md#hash) to prevent tampering.
+:::
+
+#### Response
+
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); the Subscription model is available under the `subscription` key.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). Most subscription failures will be presented as a succinct error message. Specific issues are logged, but may not be disclosed to the customer. The user may be redirected to the [`updateBillingDetailsUrl` setting](../config-settings.md#updatebillingdetailsurl) to resolve billing issues. | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
+
+### <badge vertical="baseline" type="verb">POST</badge> `subscriptions/cancel`
+
+Cancels an active subscription.
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`subscriptionUid` | **Required.** UID of the subscription to cancel. Must be [hashed](/4.x/dev/filters.md#hash).
+`*` | **Conditionally required.** Each [gateway](../payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\CancelSubscriptionForm> subclass.
+
+#### Response
+
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); the Subscription model is available under the `subscription` key.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
+
+### <badge vertical="baseline" type="verb">POST</badge> `subscriptions/switch`
+
+Switch the plan on an active subscription.
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`subscriptionUid` | **Required.** UID of the subscription getting updated. Must be [hashed](/4.x/dev/filters.md#hash).
+`planUid` | **Required.** UID of the plan to switch to. Must be [hashed](/4.x/dev/filters.md#hash).
+`*` | **Conditionally required.** Each [gateway](../payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SwitchPlansForm> subclass.
+
+#### Response
+
+The request may fail if the new and old plans are not compatible. This is determined by the gateway, so be sure and consult its documentation and platform limitations.
+
+You can check whether two plans are compatible in Twig, to narrow the options displayed to your customers:
+
+```twig
+{% set currentPlan = subscription.getPlan() %}
+{% set gateway = currentPlan.getGateway() %}
+{% set allPlans = craft.commerce.plans.getPlansByGatewayId(gateway.id) %}
+{% set switchablePlans = allPlans|filter((p) => p.canSwitchFrom(currentPlan)) %}
+
+<select name="planUid">
+  {% for plan in switchablePlans %}
+    <option value="{{ plan.uid|hash }}">{{ plan.name }}</option>
+  {% endfor %}
+</select>
+```
+
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); the Subscription model is available under the `subscription` key.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
+
+</span>
+
+### <badge vertical="baseline" type="verb">POST</badge> `subscriptions/reactivate`
+
+Reactivates a canceled subscription. Only subscriptions that haven’t expired yet can be reactivated—a subscription may be canceled
+
+#### Supported Params
+
+Param | Description
+----- | -----------
+`subscriptionUid` | **Required.** UID of the subscription to reactivate. Must be [hashed](/4.x/dev/filters.md#hash).
+
+#### Response
+
+<span class="croker-table">
+
+State | `text/html` | `application/json`
+----- | ----------- | ------------------
+<check-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request); the Subscription model is available under the `subscription` key.
+<x-mark/> | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request). | [Standard behavior](/4.x/dev/controller-actions.md#after-a-get-request).
 
 </span>

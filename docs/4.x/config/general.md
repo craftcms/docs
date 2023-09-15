@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # General Settings
 
 This group of settings affects a wide variety of Craft’s features and behaviors. If you are uncertain about whether something is configurable or not, refer to the categories in the table of contents.
@@ -220,9 +224,6 @@ Disabling this will also disable Live Preview.
 :::
 
 ::: code
-```php Static Config
-->autosaveDrafts(false)
-```
 ```shell Environment Override
 CRAFT_AUTOSAVE_DRAFTS=false
 ```
@@ -4527,6 +4528,37 @@ CRAFT_GQL_TYPE_PREFIX=craft_
 
 
 
+### `maxGraphqlBatchSize`
+
+<div class="compact">
+
+Allowed types
+:  [integer](https://php.net/language.types.integer)
+
+Default value
+:  `0`
+
+Defined by
+:  [GeneralConfig::$maxGraphqlBatchSize](craft4:craft\config\GeneralConfig::$maxGraphqlBatchSize)
+
+Since
+:  4.5.5
+
+</div>
+
+The maximum allowed GraphQL queries that can be executed in a single batched request. Set to `0` to allow any number of queries.
+
+::: code
+```php Static Config
+->maxGraphqlBatchSize(5)
+```
+```shell Environment Override
+CRAFT_MAX_GRAPHQL_BATCH_SIZE=5
+```
+:::
+
+
+
 ### `maxGraphqlComplexity`
 
 <div class="compact">
@@ -4540,9 +4572,21 @@ Default value
 Defined by
 :  [GeneralConfig::$maxGraphqlComplexity](craft4:craft\config\GeneralConfig::$maxGraphqlComplexity)
 
+Since
+:  3.6.0
+
 </div>
 
 The maximum allowed complexity a GraphQL query is allowed to have. Set to `0` to allow any complexity.
+
+::: code
+```php Static Config
+->maxGraphqlComplexity(500)
+```
+```shell Environment Override
+CRAFT_MAX_GRAPHQL_COMPLEXITY=500
+```
+:::
 
 
 

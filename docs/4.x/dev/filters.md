@@ -1224,7 +1224,7 @@ When a mapping array is passed, this works identically to Twig’s core [`replac
 }) }}
 ```
 
-Or you can replace one thing at a time:
+To replace one string at a time, pass the string you want to replace as the first argument, and the replacement as the second argument:
 
 ```twig
 {% set str = 'Hello, NAME' %}
@@ -1238,13 +1238,22 @@ You can also use a regular expression to search for matches by starting and endi
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
 ```
 
-Regular expressions can also be used as keys <Since ver="4.5.0" feature="Regular expressions as keys" /> when passing an array:
+When passing an array, its keys can be regular expressions <Since ver="4.5.0" feature="Regular expressions as keys" />:
 
 ```twig
 {{ tag.title|lower|replace({
   '/^the\\s/': '',
   '/[^\\w]+/': '-',
 }) }}
+```
+
+To treat patterns as literal strings (when using positional arguments _or_ a map), pass `false` to the `regex` argument <Since ver="4.5.4" feature="The ability to disable regex evaluation" />:
+
+```twig{4}
+{{ tag.title|lower|replace({
+  '/you/i': 'y’all',
+  '/-_-/': '(^_^)',
+}, regex=false) }}
 ```
 
 ## `rss`

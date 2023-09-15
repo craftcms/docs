@@ -4,20 +4,28 @@ If you want to make your plugin available in the in-app Plugin Store, and on [pl
 
 ## Choose a License
 
-All plugins in the Plugin Store must have one of two licenses:
+All plugins in the Plugin Store must select a software license.
 
-- **[MIT](https://opensource.org/licenses/MIT)** – Use this if you aren’t planning on ever charging for your plugin, and you’re OK with other people pretty much doing whatever they want with your code, as long as they give credit back to you. ([Example](https://github.com/craftcms/element-api/blob/v2/LICENSE.md))
-- **[Craft](https://craftcms.github.io/license/)** – Use this if you are planning on charging for your plugin, and want to prevent people from using your code without paying up. ([Example](https://github.com/craftcms/cms/blob/develop/LICENSE.md))
+Commercial plugins are recommended to use the [Craft license](https://raw.githubusercontent.com/craftcms/license/master/index.md).
 
-Create a `LICENSE.md` file at the root of your plugin’s repository, and paste in the license text, beginning with a copyright notice.
+To use the Craft license:
 
-```
-Copyright © <YourName>
-```
+1. Copy the license text into a `LICENSE.md` file at the root of your repository, and replace `[YOUR_NAME_HERE]` with your personal/organization name.
+2. Set the `license` value in `composer.json` to `"proprietary"`.
 
-::: tip
-If you are going with the Craft License, don’t forget to change the `license` value in your `composer.json` file from `MIT` to `proprietary`.
-:::
+The following open source licenses are also allowed:
+
+- [Apache-2.0](https://raw.githubusercontent.com/licenses/license-templates/master/templates/apache.txt)
+- [GPL-2.0](https://raw.githubusercontent.com/licenses/license-templates/master/templates/gpl2.txt)
+- [GPL-3.0](https://raw.githubusercontent.com/licenses/license-templates/master/templates/gpl3.txt)
+- [MIT](https://raw.githubusercontent.com/licenses/license-templates/master/templates/mit.txt)
+
+The MIT license is generally recommended, unless you have a good reason to use something else.
+
+To use an open source license:
+
+1. Copy the license text into a `LICENSE.txt` file at the root of your repository, prefixed with a copyright notice (e.g. `Copyright (c) Pixel & Tonic, Inc.`).
+2. Set the `license` value in `composer.json` to the appropriate [license name](https://getcomposer.org/doc/04-schema.md#license).
 
 ## Registering your Plugin
 

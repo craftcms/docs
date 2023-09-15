@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Order Queries
 
 You can fetch orders in your templates or PHP code using **order queries**.

@@ -1,165 +1,105 @@
 <template>
   <div class="content-wrapper">
-    <div class="flex w-full items-center">
-      <div class="w-3/5">
-        <div
-          v-if="this.$page.frontmatter.helpfulVotes !== false"
-          class="vote"
-          :class="{ voted: hasVoted }"
-        >
-          <div class="pane options">
-            <h4 class="heading block">
-              {{
-              hasVoted
-              ? this.$themeConfig.feedback.thanks
-              : this.$themeConfig.feedback.helpful
-              }}
-            </h4>
-            <div class="vote-buttons inline-block">
-              <button
-                aria-label="Yes"
-                class="option yes"
-                :class="{ chosen: hasVoted && vote === true }"
-                @click="handleFeedback(true)"
-              >
-                <ThumbUp />
-              </button>
-              <button
-                aria-label="No"
-                class="option no"
-                :class="{ chosen: hasVoted && vote === false }"
-                @click="handleFeedback(false)"
-              >
-                <ThumbDown />
-              </button>
-            </div>
-            <a
-              v-if="vote === false"
-              class="more-feedback"
-              :href="getIssueUrl()"
-              target="_blank"
-              rel="noopener"
-            >{{ this.$themeConfig.feedback.more }}</a>
-          </div>
+    <div class="feedback">
+      <div
+        v-if="this.$page.frontmatter.helpfulVotes !== false"
+        class="vote flex flex-col w-full items-center"
+        :class="{ voted: hasVoted }">
+
+        <h4>{{ hasVoted ? this.$themeConfig.feedback.thanks : this.$themeConfig.feedback.helpful }}</h4>
+
+        <div class="flex w-full justify-center my-4">
+          <button
+            aria-label="Yes"
+            class="vote-button yes"
+            :class="{ 'chosen': hasVoted && vote === true }"
+            :disabled="hasVoted"
+            @click="handleFeedback(true)">
+            <ThumbUp />
+          </button>
+          <button
+            aria-label="No"
+            class="vote-button no"
+            :class="{ 'chosen': hasVoted && vote === false }"
+            :disabled="hasVoted"
+            @click="handleFeedback(false)">
+            <ThumbDown />
+          </button>
         </div>
+
+        <a
+          v-if="vote === false"
+          :href="getIssueUrl()"
+          target="_blank"
+          rel="noopener">{{ this.$themeConfig.feedback.more }}</a>
       </div>
-      <div class="footer-links">
-        <p>
-          <PageEdit />
-        </p>
-        <p>
-          <a href="https://craftcms.com/contact" target="_blank" rel="noopener">
-            <span class="right-footer-icon">
-              <Envelope />
-            </span>
-            contact us
-          </a>
-        </p>
-        <p>
-          <a href="https://craftcms.com/" target="_blank" rel="noopener">
-            <span class="right-footer-icon">
-              <Reply />
-            </span>
-            back to craftcms.com
-          </a>
-        </p>
-        <div class="switch-wrapper block xl:hidden">
-          <ColorModeSwitch v-on="$listeners" :on="isDark" />
-        </div>
-      </div>
+    </div>
+
+    <ul class="footer-links w-full flex justify-center flex-wrap mt-6">
+      <li class="mx-2">
+        <a href="https://craftcms.com/" target="_blank" rel="noopener">
+          <span class="right-footer-icon">
+            <Reply />
+          </span>
+          craftcms.com
+        </a>
+      </li>
+      <li class="mx-2">
+        <a href="https://craftcms.com/contact" target="_blank" rel="noopener">
+          <span class="right-footer-icon">
+            <Envelope />
+          </span>
+          Contact Us
+        </a>
+      </li>
+      <li v-if="!this.$page.frontmatter.containsGeneratedContent" class="mx-2">
+        <PageEdit />
+      </li>
+    </ul>
+
+    <div v-if="this.$page.frontmatter.containsGeneratedContent" class="text-sm opacity-75 text-center my-4">
+      Parts of this page are generated or assembled by automations. While we greatly appreciate contributions to the documentation, <a :href="getIssueUrl()" target="_blank" rel="noopener">reporting automated content issues</a> will allow us to fix them at the source!
+    </div>
+
+    <div class="w-full flex justify-center xl:hidden">
+      <ColorModeSwitch v-on="$listeners" :on="isDark" />
     </div>
   </div>
 </template>
 
 <style lang="postcss">
-.vote {
-  @apply block relative;
+.vote-button {
+  @apply relative inline-block overflow-hidden px-5 py-2;
+  @apply bg-transparent rounded;
+  @apply cursor-pointer;
+  @apply fill-current text-center mx-2;
+  @apply border text-blue;
+  border-color: var(--border-color);
 
-  h4 {
-    @apply mx-0 my-0 py-0 select-none leading-none;
-    -webkit-font-smoothing: antialiased;
+  &::before {
+    @apply absolute z-0 top-0 left-0 bottom-0;
+    content: " ";
+    background: transparent;
   }
 
-  .vote-buttons {
-    @apply mt-3 select-none;
+  &:focus {
+    @apply outline-none;
   }
 
-  .pane {
-    @apply block;
-    transition: top 0.75s cubic-bezier(0.86, 0, 0.07, 1),
-      opacity 0.5s cubic-bezier(0.86, 0, 0.07, 1);
-    top: 0;
-
-    &.options {
-      top: 0;
-
-      svg {
-        @apply block relative;
-      }
-    }
-
-    &.thanks {
-      @apply opacity-0;
-      top: 5rem;
-    }
+  &:hover {
+    @apply border-blue;
   }
 
-  &.voted {
-    .option {
-      @apply text-slate opacity-25 border-slate pointer-events-none;
-
-      &.chosen {
-        @apply opacity-100;
-      }
-    }
+  &:disabled {
+    @apply opacity-25 pointer-events-none;
   }
 
-  .option {
-    @apply relative inline-block overflow-hidden px-5 py-2;
-    @apply bg-transparent rounded;
-    @apply cursor-pointer;
-    @apply fill-current text-center mr-3;
-    @apply border text-blue;
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    border-color: var(--border-color);
-
-    &::before {
-      @apply absolute z-0 top-0 left-0 bottom-0;
-      content: " ";
-      background: transparent;
-      transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-
-    &:focus {
-      @apply outline-none;
-    }
-
-    &:active {
-      transform: scale(0.97);
-    }
-
-    &:hover {
-      @apply border-blue;
-      svg {
-        @apply opacity-100;
-      }
-    }
-
-    svg {
-      @apply opacity-75;
-      transition: opacity 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-    }
+  &.chosen {
+    @apply opacity-100;
   }
-}
-
-.more-feedback {
-  @apply relative;
-  top: -1px;
 }
 
 .footer-links {
-  @apply w-2/5 text-sm text-right;
-
   a:hover .right-footer-icon {
     @apply opacity-100;
   }
@@ -167,20 +107,6 @@
   .right-footer-icon {
     @apply inline-block relative mr-1 text-light-slate opacity-25;
     top: 2px;
-  }
-
-  .switch-wrapper {
-    @apply relative;
-    right: -2px;
-    top: -0.575rem;
-  }
-
-  .edit-link {
-    @apply inline-block;
-  }
-
-  .page-edit {
-    @apply py-0 overflow-auto mt-6;
   }
 }
 </style>
@@ -267,9 +193,7 @@ export default {
       this.hasVoted = this.vote !== null;
     },
     getIssueUrl() {
-      return encodeURI(
-        `https://github.com/${this.$themeConfig.docsRepo}/issues/new?title=Improve “${this.$page.title}”&body=I have a suggestion for https://craftcms.com/docs${this.$route.fullPath}:\n`
-      );
+      return 'https://github.com/craftcms/docs/issues/new/choose';
     },
   },
   watch: {

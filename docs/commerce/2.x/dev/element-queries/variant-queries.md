@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Variant Queries
 
 You can fetch variants in your templates or PHP code using **variant queries**.

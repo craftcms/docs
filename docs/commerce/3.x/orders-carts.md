@@ -1,6 +1,8 @@
 ---
 sidebarDepth: 2
+containsGeneratedContent: yes
 ---
+
 # Orders & Carts
 
 Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.

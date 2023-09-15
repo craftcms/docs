@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Categories
 
 Craft supports user-managed, hierarchical taxonomies for content via **categories**.

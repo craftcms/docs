@@ -1,11 +1,14 @@
 ---
 sidebarDepth: 2
+containsGeneratedContent: yes
 ---
 # Orders & Carts
 
 Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
 
 When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce4:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
+
+Typically, a cart is completed in response to a customer [making a payment](./making-payments.md)—or by satisfying other requirements you’ve defined through [configuration](./config-settings.md) or an [extension](./extend/README.md).
 
 ## Carts
 
@@ -24,7 +27,7 @@ Let’s go over a few common actions you may want to perform on a cart:
 - [Working with Line Items](#working-with-line-items)
 - [Loading a Cart](#loading-a-cart)
 - [Using Custom Fields](#storing-data-in-custom-fields)
-- [Forgetting a Cart](#forgetting-a-cart)
+- [Forgetting](#forget-a-cart) and [loading](#load-a-cart) carts
 
 More topics are covered in separate pages:
 
@@ -269,9 +272,13 @@ Each line item includes several totals:
 - **lineItem.adjustmentsTotal** is the sum of each of the line item’s adjustment `amount` values.
 - **lineItem.total** is the sum of the line item’s `subtotal` and `adjustmentsTotal`.
 
-### Loading a Cart
+### Loading and Forgetting Carts
 
-Commerce provides a `commerce/cart/load-cart` endpoint for loading an existing cart into a cookie for the current customer.
+“Loading” and “forgetting” are a pair of actions that affect what cart is associated with the customer’s session.
+
+#### Load a Cart
+
+Commerce provides a [`commerce/cart/load-cart`](dev/controller-actions.md#get-post-cart-load-cart) endpoint for loading an existing cart into a cookie for the current customer.
 
 You can have the user interact with the endpoint by either [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form). Either way, the cart number is required.
 
@@ -281,7 +288,7 @@ Each method will store any errors in the session’s error flash data (`craft.ap
 If the desired cart belongs to a user, that user must be logged in to load it into a browser cookie.
 :::
 
-The [`loadCartRedirectUrl`](config-settings.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart’s loaded.
+The [`loadCartRedirectUrl`](config-settings.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart has been loaded.
 
 #### Loading a Cart with a URL
 
@@ -336,13 +343,13 @@ This is a simplified version of [`shop/cart/load.twig`](https://github.com/craft
 
 #### Restoring Previous Cart Contents
 
-If the customer’s a registered user they may want to continue shopping from another browser or computer. If that customer has an empty cart—as they would by default—and they log into the site, any previous cart will automatically be loaded.
+If the customer is a registered user, they may want to continue shopping from another browser or computer. If they have an empty cart on the second device (as they would by default) and they log in, their most recently-created cart will automatically be loaded.
 
 ::: tip
-If a customer is a guest with a cart and they create an account, that cart will be maintained after logging in.
+When a guest with an active cart creates an account, that cart will be remain active after logging in.
 :::
 
-You can allow a customer to see previously-loaded carts:
+You can allow a logged-in customer to see their previously used carts:
 
 ::: code
 ```twig
@@ -386,7 +393,7 @@ if ($currentUser) {
 ```
 :::
 
-You could then loop over the line items in those older carts and allow the customer to add them to the current order:
+You could then loop over the line items in those older carts and allow the customer to add them to their current cart:
 
 ```twig
 <h2>Previous Cart Items</h2>
@@ -399,15 +406,40 @@ You could then loop over the line items in those older carts and allow the custo
     {% for lineItem in oldCart.lineItems %}
       {{ lineItem.description }}
       <label>
-        {{ input('checkbox', 'purchasables[][id]', lineItem.getPurchasable().id) }}
+        {{ input('checkbox', 'purchasables[][id]', lineItem.purchasableId) }}
         Add to cart
       </label>
     {% endfor %}
   {% endfor %}
 
-  <button>Update Cart</button>
+  <button>Add Items</button>
 </form>
 ```
+
+### Forgetting a Cart <Since ver="4.3.0" product="Commerce" repo="craftcms/commerce" feature="The ability to forget a cart" />
+
+A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart. If the customer logs out, their cart will automatically be forgotten.
+
+Removing all the items from a cart doesn’t mean that the cart is forgotten, though—sometimes, fully detaching a cart from the session is preferable to emptying it. To remove a cart from the customer’s session (without logging out or clearing the items), make a `POST` request to the [`cart/forget-cart` action](dev/controller-actions.md#post-cart-forget-cart). A cart number is _not_ required—Commerce can only detach the customer’s current cart.
+
+The next time the customer makes a request to the [`update-cart` action](dev/controller-actions.md#post-cart-update-cart), they will be given a new cart
+
+::: tip
+In previous versions, you can call the `forgetCart()` method manually to remove the current cart cookie. The cart itself will not be deleted—just disassociated with the customer’s session until it’s loaded again by some other means.
+
+::: code
+```twig
+{# Forget the cart in the current session. #}
+{{ craft.commerce.carts.forgetCart() }}
+```
+```php
+use craft\commerce\Plugin as Commerce;
+
+// Forget the cart in the current session.
+Commerce::getInstance()->getCarts()->forgetCart();
+```
+:::
+:::
 
 ### Storing Data in Custom Fields
 
@@ -435,27 +467,6 @@ You can update custom fields on a cart by posting data to the [`commerce/cart/up
   <button>Update Cart</button>
 </form>
 ```
-
-### Forgetting a Cart
-
-A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart.
-
-If the customer logs out, their cart will automatically be forgotten.
-
-You can call the `forgetCart()` method manually to remove the current cart cookie. The cart itself will not be deleted, but disassociated with any sessions until it’s loaded again.
-
-::: code
-```twig
-{# Forget the cart in the current session. #}
-{{ craft.commerce.carts.forgetCart() }}
-```
-```php
-use craft\commerce\Plugin as Commerce;
-
-// Forget the cart in the current session.
-Commerce::getInstance()->getCarts()->forgetCart();
-```
-:::
 
 ## Orders
 

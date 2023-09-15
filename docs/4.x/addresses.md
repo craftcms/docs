@@ -4,6 +4,7 @@ related:
     label: Using addresses in Craft Commerce
   - uri: /4.x/dev/controller-actions.md
     label: Controller actions reference
+containsGeneratedContent: yes
 ---
 
 # Addresses

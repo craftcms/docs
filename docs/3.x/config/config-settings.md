@@ -3281,6 +3281,28 @@ Prefix to use for all type names returned by GraphQL.
 
 
 
+### `maxGraphqlBatchSize`
+
+<div class="compact">
+
+Allowed types
+:  [integer](https://php.net/language.types.integer)
+
+Default value
+:  `0`
+
+Defined by
+:  [GeneralConfig::$maxGraphqlBatchSize](craft3:craft\config\GeneralConfig::$maxGraphqlBatchSize)
+
+Since
+:  3.9.3
+
+</div>
+
+The maximum allowed GraphQL queries that can be executed in a single batched request. Set to `0` to allow any number of queries.
+
+
+
 ### `maxGraphqlComplexity`
 
 <div class="compact">

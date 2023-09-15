@@ -1,3 +1,7 @@
+---
+containsGeneratedContent: yes
+---
+
 # Entries
 
 Entries are the primary container for content you want to display on your web pages. Each entry has _Title_, _Author_, a _Post Date_, an _Expiration Date_ (if desired), a _Status_ (enabled or disabled), and—like other [element types](elements.md)—flexible content defined via [custom fields](fields.md). Also like other elements, entries can have their own [URLs](#entry-uri-formats), or be fetched from anywhere via [element queries](#querying-entries).
