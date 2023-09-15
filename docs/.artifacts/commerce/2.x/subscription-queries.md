@@ -1,102 +1,42 @@
----
-containsGeneratedContent: yes
----
-
-# Subscription Queries
-
-You can fetch subscriptions in your templates or PHP code using **subscription queries**.
-
-::: code
-```twig
-{# Create a new subscription query #}
-{% set mySubscriptionQuery = craft.subscriptions() %}
-```
-```php
-// Create a new subscription query
-$mySubscriptionQuery = \craft\commerce\elements\Subscription::find();
-```
-:::
-
-Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/3.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Subscription](commerce3:craft\commerce\elements\Subscription) objects will be returned.
-
-::: tip
-See [Element Queries](https://craftcms.com/docs/3.x/element-queries.html) in the Craft docs to learn about how element queries work.
-:::
-
-## Example
-
-We can display all of the current user’s subscriptions by doing the following:
-
-1. Create a subscription query with `craft.subscriptions()`.
-2. Set the [user](#user) parameter on it.
-3. Fetch the subscriptions with `.all()`.
-4. Loop through the subscriptions using a [for](https://twig.symfony.com/doc/2.x/tags/for.html) tag to output their HTML.
-
-```twig
-{# Make sure someone is logged in #}
-{% requireLogin %}
-
-{# Create a subscription query with the 'user' parameter #}
-{% set mySubscriptionQuery = craft.subscriptions()
-  .user(currentUser) %}
-
-{# Fetch the subscriptions #}
-{% set subscriptions = mySubscriptionQuery.all() %}
-
-{# Display the subscriptions #}
-{% for subscription in subscriptions %}
-  <article>
-    <h1><a href="{{ subscription.url }}">{{ subscription.title }}</a></h1>
-    {{ subscription.summary }}
-    <a href="{{ subscription.url }}">Learn more</a>
-  </article>
-{% endfor %}
-```
-
-## Parameters
-
-Subscription queries support the following parameters:
+<!-- This file is generated in an automated workflow based on Craft source files. Changes to it will be overwritten the next time the docs are built. -->
 
 <!-- BEGIN PARAMS -->
 
-| Param                                     | Description
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [anyStatus](#anystatus)                   | Clears out the [status](#status) and [enabledForSite()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-enabledforsite) parameters.
-| [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce3:craft\commerce\elements\Subscription) objects.
-| [clearCachedResult](#clearcachedresult)   | Clears the cached result.
-| [dateCanceled](#datecanceled)             | Narrows the query results based on the subscriptions’ cancellation date.
-| [dateCreated](#datecreated)               | Narrows the query results based on the subscriptions’ creation dates.
-| [dateExpired](#dateexpired)               | Narrows the query results based on the subscriptions’ expiration date.
-| [dateSuspended](#datesuspended)           | Narrows the query results based on the subscriptions’ suspension date.
-| [dateUpdated](#dateupdated)               | Narrows the query results based on the subscriptions’ last-updated dates.
-| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
-| [hasStarted](#hasstarted)                 | Narrows the query results to only subscriptions that have started.
-| [id](#id)                                 | Narrows the query results based on the subscriptions’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
-| [isCanceled](#iscanceled)                 | Narrows the query results to only subscriptions that are canceled.
-| [isExpired](#isexpired)                   | Narrows the query results to only subscriptions that have expired.
-| [isSuspended](#issuspended)               | Narrows the query results to only subscriptions that are suspended.
-| [limit](#limit)                           | Determines the number of subscriptions that should be returned.
-| [nextPaymentDate](#nextpaymentdate)       | Narrows the query results based on the subscriptions’ next payment dates.
-| [offset](#offset)                         | Determines how many subscriptions should be skipped in the results.
-| [onTrial](#ontrial)                       | Narrows the query results to only subscriptions that are on trial.
-| [orderBy](#orderby)                       | Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
-| [orderId](#orderid)                       | Narrows the query results based on the order, per its ID.
-| [plan](#plan)                             | Narrows the query results based on the subscription plan.
-| [planId](#planid)                         | Narrows the query results based on the subscription plans’ IDs.
-| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [reference](#reference)                   | Narrows the query results based on the reference.
-| [relatedTo](#relatedto)                   | Narrows the query results to only subscriptions that are related to certain other elements.
-| [search](#search)                         | Narrows the query results to only subscriptions that match a search query.
-| [status](#status)                         | Narrows the query results based on the subscriptions’ statuses.
-| [trashed](#trashed)                       | Narrows the query results to only subscriptions that have been soft-deleted.
-| [trialDays](#trialdays)                   | Narrows the query results based on the number of trial days.
-| [uid](#uid)                               | Narrows the query results based on the subscriptions’ UIDs.
-| [user](#user)                             | Narrows the query results based on the subscriptions’ user accounts.
-| [userId](#userid)                         | Narrows the query results based on the subscriptions’ user accounts’ IDs.
-| [with](#with)                             | Causes the query to return matching subscriptions eager-loaded with related elements.
+- [anyStatus](#anystatus)
+- [asArray](#asarray)
+- [dateCanceled](#datecanceled)
+- [dateCreated](#datecreated)
+- [dateExpired](#dateexpired)
+- [dateSuspended](#datesuspended)
+- [dateUpdated](#dateupdated)
+- [fixedOrder](#fixedorder)
+- [gatewayId](#gatewayid)
+- [hasStarted](#hasstarted)
+- [id](#id)
+- [ignorePlaceholders](#ignoreplaceholders)
+- [inReverse](#inreverse)
+- [isCanceled](#iscanceled)
+- [isExpired](#isexpired)
+- [isSuspended](#issuspended)
+- [limit](#limit)
+- [nextPaymentDate](#nextpaymentdate)
+- [offset](#offset)
+- [onTrial](#ontrial)
+- [orderBy](#orderby)
+- [orderId](#orderid)
+- [plan](#plan)
+- [planId](#planid)
+- [preferSites](#prefersites)
+- [reference](#reference)
+- [relatedTo](#relatedto)
+- [search](#search)
+- [status](#status)
+- [trashed](#trashed)
+- [trialDays](#trialdays)
+- [uid](#uid)
+- [user](#user)
+- [userId](#userid)
+- [with](#with)
 
 ### `anyStatus`
 
@@ -125,7 +65,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 ### `asArray`
 
-Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce3:craft\commerce\elements\Subscription) objects.
+Causes the query to return matching subscriptions as arrays of data, rather than `\craft\commerce\elements\Subscription` objects.
 
 
 
@@ -146,15 +86,6 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
-
-
-### `clearCachedResult`
-
-Clears the cached result.
-
-
-
-
 
 
 ### `dateCanceled`
@@ -657,7 +588,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 ### `orderBy`
 
-Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
+Determines the order that the subscriptions should be returned in.
 
 
 
@@ -665,14 +596,14 @@ Determines the order that the subscriptions should be returned in. (If empty, de
 ```twig
 {# Fetch all subscriptions in order of date created #}
 {% set subscriptions = craft.subscriptions()
-    .orderBy('dateCreated ASC')
+    .orderBy('dateCreated asc')
     .all() %}
 ```
 
 ```php
 // Fetch all subscriptions in order of date created
 $subscriptions = \craft\commerce\elements\Subscription::find()
-    ->orderBy('dateCreated ASC')
+    ->orderBy('dateCreated asc')
     ->all();
 ```
 :::
@@ -704,7 +635,7 @@ Possible values include:
 | - | -
 | `'foo'` | for a plan with a handle of `foo`.
 | `['foo', 'bar']` | for plans with a handle of `foo` or `bar`.
-| a [Plan](commerce3:craft\commerce\base\Plan) object | for a plan represented by the object.
+| a [Plan](commerce2:craft\commerce\base\Plan) object | for a plan represented by the object.
 
 
 
