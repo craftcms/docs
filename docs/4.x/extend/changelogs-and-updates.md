@@ -4,6 +4,10 @@ When you [publish](plugin-store.md) your plugin in the Plugin Store, you will be
 
 If this is set to a valid changelog path, the Plugin Store will re-download your changelog on each release. Those release notes will then be displayed for your plugin on the page at **Utilities** → **Updates**.
 
+::: tip
+You can see the changelog for CraftCMS itself as an example of good practice, which is found on our [GitHub repository](https://github.com/craftcms/cms/blob/develop/CHANGELOG.md).
+:::
+
 ## Setting Up a Changelog
 
 Create a `CHANGELOG.md` file at the root of your plugin’s repo, where you can start documenting release notes for your plugin. Use something like this as a starting point:
