@@ -1,84 +1,103 @@
 # Payment Gateways
 
-Craft Commerce payments gateways are provided by Craft CMS plugins.
+As a self-hosted e-commerce solution, Commerce handles payments differently from popular software-as-a-service products—instead of providing a fixed list of payment processors, we designed flexible gateway and transaction APIs that let 
 
-To create a payment gateway you must install the appropriate plugin, navigate to **Commerce** → **Settings** → **Gateways**, and add configuration for that gateway. For more detailed instructions, see each plugin’s `README.md` file.
+To capture live payments, you must install a [payment gateway plugin](#first-party-gateway-plugins). Commerce comes with two [built-in gateways](#built-in-gateways), but they are intended primarily for testing.
 
-Payment gateways generally fit in one of two categories:
+In the control panel, navigate to **Commerce** → **Settings** → **Gateways**, and click **+ New gateway**. Each gateway requires different settings—for more detailed instructions, see the plugin’s documentation. Many payment processors require third-party accounts, and provide credentials for communicating with their infrastructure that must be added to the gateway’s configuration.
 
-- External or _offsite_ gateways.
-- Merchant-hosted or _onsite_ gateways.
+::: tip
+When providing secrets in the control panel, we recommend using the special [environment variable syntax](/4.x/config/README.md#control-panel-settings) to prevent them leaking into project config.
+:::
 
-Merchant-hosted gateways collect the customer’s credit card details directly on your site, but have much stricter requirements such as an SSL certificate for your server. You will also be subject to much more rigorous security requirements under the PCI DSS (Payment Card Industry Data Security Standard). These security requirements are your responsibility, but some gateways allow payment card tokenization.
+Payment gateways (and the specific methods they support) generally use one of two payment flows:
+
+- **External or _offsite_ gateways:** The customer is redirected to a payment portal hosted by the processor, and is returned to your site once a payment is completed. Your site never sees information about the customer’s payment method—instead, the gateway receives and validates a temporary token, and signals to Commerce that the transaction was successful.
+- **Merchant-hosted or _onsite_ gateways:** Payment details are sent directly to your store, and the gateway forwards them to the payment processor. These implementations have _much_ higher risk profiles and are subject to rigorous security requirements under the PCI DSS (Payment Card Industry Data Security Standard).
+
+Most gateways available for Commerce use a [tokenization](https://squareup.com/us/en/the-bottom-line/managing-your-finances/what-does-tokenization-actually-mean) process in the customer’s browser that (at a technical level) has a great deal in common with an _offsite_ gateway, while preserving the smooth checkout experience of an _onsite_ gateway.
 
 ## First-Party Gateway Plugins
 
-| Plugin                                                                   | Gateways                                | Remarks                                                            | 3D Secure Support   |
-| ------------------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------ | ------------------- |
-| [Stripe](https://plugins.craftcms.com/commerce-stripe)                   | Stripe                                  | Uses Stripe SDK; only first-party gateway to support subscriptions | Yes                 |
-| [PayPal Checkout](https://plugins.craftcms.com/commerce-paypal-checkout) | PayPal Checkout                         |                                                                    | Yes                 |
-| [Sage Pay](https://plugins.craftcms.com/commerce-sagepay)                | SagePay Direct; SagePay Server          |                                                                    | Yes                 |
-| [MultiSafepay](https://plugins.craftcms.com/commerce-multisafepay)       | MultiSafePay REST                       | Does not support authorize charges                                 | Yes                 |
-| [Worldpay](https://plugins.craftcms.com/commerce-worldpay)               | Worldpay JSON                           |                                                                    | No                  |
-| [eWay](https://plugins.craftcms.com/commerce-eway)                       | eWAY Rapid                              | Supports storing payment information                               | Yes                 |
-| [Mollie](https://plugins.craftcms.com/commerce-mollie)                   | Mollie                                  | Does not support authorize charges                                 | Yes                 |
-| [PayPal](https://plugins.craftcms.com/commerce-paypal) _deprecated_      | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information                   | Only PayPal Express |
+| Plugin | Gateways | Remarks | 3D Secure Support |
+| --- | --- | --- | --- |
+| [Stripe](https://plugins.craftcms.com/commerce-stripe) | Stripe | Uses Stripe’s Payment Intents API; only first-party gateway to support subscriptions | Yes |
+| [PayPal Checkout](https://plugins.craftcms.com/commerce-paypal-checkout) | PayPal Checkout | | Yes |
+| [Sage Pay](https://plugins.craftcms.com/commerce-sagepay) | SagePay Direct; SagePay Server | | Yes |
+| [MultiSafepay](https://plugins.craftcms.com/commerce-multisafepay) | MultiSafePay REST | Does not support authorize charges | Yes |
+| [Worldpay](https://plugins.craftcms.com/commerce-worldpay) | Worldpay JSON | | No |
+| [eWay](https://plugins.craftcms.com/commerce-eway) | eWAY Rapid | Supports storing payment information | Yes |
+| [Mollie](https://plugins.craftcms.com/commerce-mollie) | Mollie | Does not support authorize charges | Yes |
+| [PayPal](https://plugins.craftcms.com/commerce-paypal) _deprecated_ | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information | Only PayPal Express |
 
-## Dummy Gateway
+Additional third-party gateways can be found in the [Plugin Store](https://plugins.craftcms.com/categories/ecommerce?craft4).
 
-After installation, Craft Commerce will install some demo products and a basic config along with a Dummy payment gateway for testing.
+Before using a plugin-provided gateway, consult the its readme for specifics. Gateways themselves do not implement the logic to process payments against financial institutions, and therefore have external dependencies and fees.
 
-This dummy gateway driver is only for testing with placeholder credit card numbers. A valid card number ending in an even digit will get a successful response. If the last digit is an odd number, the driver will return a generic failure response:
+## Built-in Gateways
+
+### Dummy Gateway
+
+The _Dummy_ gateway is only for testing with placeholder credit card numbers. A “valid” card number (passing a simple [Luhn](https://en.wikipedia.org/wiki/Luhn_algorithm) check) ending in an _even_ digit will simulate a successful payment. If the last digit is _odd_, the gateway will treat it as a failed payment:
 
 Example Card Number | Dummy Gateway Response
 ------------------- | ----------------------
-4242424242424242  | <span class="text-green"> <check-mark class="inline" /> Success</span>
-4444333322221111  | <span class="text-red"> <x-mark class="inline" /> Failure</span>
+4242424242424242 | <span class="text-green"> <check-mark class="inline" /> Success</span>
+4444333322221111 | <span class="text-red"> <x-mark class="inline" /> Failure</span>
 
-## Manual Gateway
+::: danger
+**Do not** use real credit card information when testing, as it may be captured as plain text in logs or caches.
+:::
 
-The manual payment gateway is a special gateway that does not communicate with any third party.
+### Manual Gateway
 
-You should use the manual payment gateway to accept checks or bank deposits: it simply authorizes all payments allowing the order to proceed. Once the payment is received, the payment can be manually marked as captured in the control panel.
+The _Manual_ payment gateway does not communicate with any third party, nor accept any additional data during checkout.
 
-## Other Gateway Specifics
+You should use the Manual payment gateway to accept checks, bank deposits, or other offline payment: it “authorizes” all payments, allowing the order to be submitted into the default order status. Once the payment is received, the payment can be manually marked as “captured” in the control panel by an administrator.
 
-Before using a plugin-provided gateway, consult the plugin’s readme for specifics pertaining to the gateway.
+Multiple manual gateways can be created to track different kinds of offline payments, like _Cash_ or _Check_. Each gateway can also be made available to customers only when their order total is zero—perfect for things like free sample packs or event tickets.
 
 ## Adding Gateways
 
-Additional payment gateways can be added to Commerce with relatively little work. The [first-party gateway plugins](#first-party-gateway-plugins), with the exception of Stripe, use the [Omnipay payment library](https://github.com/craftcms/commerce-omnipay) and can be used as point of reference when creating your own.
+Additional payment gateways can be added to Commerce with relatively little work. All our [first-party gateway plugins](#first-party-gateway-plugins) (with the exception of Stripe) use the [Omnipay library](https://github.com/craftcms/commerce-omnipay) and can be used as a point of reference when creating your own.
 
-See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-gateway-types.md) page to learn about building your own gateway plugin or module.
+See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-gateway-types.md) page to learn about building your own gateway in a plugin or module.
 
 ## Storing Config Outside of the Database
 
 When you’re configuring gateways in the Craft control panel, we recommend using [environment variables](/4.x/config/#control-panel-settings) so environment-specific settings and sensitive API keys don’t end up in the database or project config.
 
-If you must override gateway settings, you can still do that using a standard config file for your gateway plugin (i.e. `config/commerce-stripe.php`)—but be aware that you’ll only be able to provide one set of settings for that gateway.
+Gateways may expose options via their plugin settings file (i.e. `config/commerce-stripe.php`), but they will apply to _all_ instances of that gateway.
 
 ## Payment Sources
 
-Craft Commerce supports storing payment sources for select gateways. Storing a payment source allows for a more streamlined shopping experience for your customers.
+Some gateways support storing and reusing payment sources for a more streamlined customer experience. This is typically a limitation of the payment processor’s API—Commerce itself makes the functionality available to all gateway plugins.
 
 The following [first-party provided gateways](#first-party-gateway-plugins) support payment sources:
 
 - Stripe
-- PayPal REST
+- PayPal REST (Deprecated)
 - eWAY Rapid
 
 ## 3D Secure Payments
 
-3D Secure payments add another authentication step for payments. If a payment has been completed using 3D Secure authentication, the liability for fraudulent charges is shifted from the merchant to the card issuer.
-Support for this feature depends on the gateway used and its settings.
+3D Secure is an important authentication step for customers in many markets. If a payment has been completed using 3D Secure authentication, the liability for fraudulent charges is shifted from the merchant to the card issuer. Support for this feature depends on the gateway used and its settings.
+
+Transactions that require additional offsite authorization (indicated by the processor) are typically marked as a “Redirect,” and get completed or captured after the customer is returned to the store. Each gateway handles this in a way that is specific to the payment processor’s 
+
+::: tip
+If you see payments stuck in “Redirect” status, it may be because the customer never completed an authorization challenge. Gateways can report completed-but-failed challenges back to Commerce, so that the customer may retry.
+:::
+
+Gateways that support 3D Secure (or other asynchronous verification processes, like installment plans) may require webhooks to be configured for payments to work as expected.
 
 ## Partial Refunds
 
-All [first-party provided gateways](#first-party-gateway-plugins) support partial refunds as of Commerce 2.0.
+All [first-party provided gateways](#first-party-gateway-plugins) support partial refunds. You may only issue refunds to the original payment method used in a transaction, and up to the amount paid in that transaction. If [multiple payments](making-payments.md#checkout-with-partial-payment) were made, you must refund them separately.
 
 ## Templating
 
-### craft.commerce.gateways.getAllCustomerEnabledGateways
+### craft.commerce.gateways.getAllCustomerEnabledGateways()
 
 Returns all payment gateways available to the customer.
 
