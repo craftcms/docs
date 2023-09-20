@@ -1,6 +1,6 @@
 # Payment Gateways
 
-As a self-hosted e-commerce solution, Commerce handles payments differently from popular software-as-a-service products—instead of providing a fixed list of payment processors, we designed flexible gateway and transaction APIs that let 
+As a self-hosted ecommerce solution, Commerce handles payments differently from popular software-as-a-service products—instead of providing a fixed list of payment processors, we designed flexible gateway and transaction APIs that let 
 
 To capture live payments, you must install a [payment gateway plugin](#first-party-gateway-plugins). Commerce comes with two [built-in gateways](#built-in-gateways), but they are intended primarily for testing.
 
