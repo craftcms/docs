@@ -69,7 +69,7 @@ namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
 {
-    public $hasCpSection = true;
+    public bool $hasCpSection = true;
 
     // ...
 }
