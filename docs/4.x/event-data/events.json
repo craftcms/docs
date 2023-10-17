@@ -37532,6 +37532,12 @@
     },
     {
         "class": "craft\\services\\Fields",
+        "name": "EVENT_DEFINE_COMPATIBLE_FIELD_TYPES",
+        "type": "craft\\events\\DefineCompatibleFieldTypesEvent",
+        "desc": "The event that is triggered when defining the compatible field types for a field."
+    },
+    {
+        "class": "craft\\services\\Fields",
         "name": "EVENT_BEFORE_SAVE_FIELD_GROUP",
         "type": "craft\\events\\FieldGroupEvent",
         "desc": "The event that is triggered before a field group is saved."
