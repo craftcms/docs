@@ -115,6 +115,7 @@ Subscription queries support the following parameters:
 | [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce4:craft\commerce\elements\Subscription) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                       |
 | [dateCanceled](#datecanceled)             | Narrows the query results based on the subscriptions’ cancellation date.
 | [dateCreated](#datecreated)               | Narrows the query results based on the subscriptions’ creation dates.
 | [dateExpired](#dateexpired)               | Narrows the query results based on the subscriptions’ expiration date.
@@ -238,6 +239,15 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 

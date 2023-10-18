@@ -793,6 +793,7 @@ Order queries support the following parameters:
 | [asArray](#asarray)                           | Causes the query to return matching orders as arrays of data, rather than [Order](commerce4:craft\commerce\elements\Order) objects.
 | [cache](#cache)                               | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                           |
 | [customer](#customer)                         | Narrows the query results based on the customer’s user account.
 | [customerId](#customerid)                     | Narrows the query results based on the customer, per their user ID.
 | [dateAuthorized](#dateauthorized)             | Narrows the query results based on the orders’ authorized dates.
@@ -936,6 +937,15 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+#### `collect`
+
+
 
 
 

@@ -231,6 +231,7 @@ Product queries support the following parameters:
 | [before](#product-before)                             | Narrows the query results to only products that were posted before a certain date.
 | [cache](#product-cache)                               | Enables query cache for this Query.
 | [clearCachedResult](#product-clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#product-collect)                           |
 | [dateCreated](#product-datecreated)                   | Narrows the query results based on the products’ creation dates.
 | [dateUpdated](#product-dateupdated)                   | Narrows the query results based on the products’ last-updated dates.
 | [defaultHeight](#product-defaultheight)               | Narrows the query results based on the products’ default variant height dimension IDs.
@@ -449,6 +450,15 @@ Enables query cache for this Query.
 <h4 id="product-clearcachedresult"><a href="#product-clearcachedresult" class="header-anchor">#</a> <code>clearCachedResult</code></h4>
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+<h4 id="product-collect"><a href="#product-collect" class="header-anchor">#</a> <code>collect</code></h4>
+
+
 
 
 
@@ -1833,6 +1843,7 @@ Variant queries support the following parameters:
 | [asArray](#variant-asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](commerce4:craft\commerce\elements\Variant) objects.
 | [cache](#variant-cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#variant-clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#variant-collect)                       |
 | [dateCreated](#variant-datecreated)               | Narrows the query results based on the variants’ creation dates.
 | [dateUpdated](#variant-dateupdated)               | Narrows the query results based on the variants’ last-updated dates.
 | [fixedOrder](#variant-fixedorder)                 | Causes the query results to be returned in the order specified by [id](#variant-id).
@@ -1960,6 +1971,15 @@ Enables query cache for this Query.
 <h4 id="variant-clearcachedresult"><a href="#variant-clearcachedresult" class="header-anchor">#</a> <code>clearCachedResult</code></h4>
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+
+
+
+
+
+
+<h4 id="variant-collect"><a href="#variant-collect" class="header-anchor">#</a> <code>collect</code></h4>
+
+
 
 
 
