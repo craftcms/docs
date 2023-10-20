@@ -2784,6 +2784,10 @@ Runs pending migrations and applies pending project config changes.
 <h4 id="up-index-options" class="command-subheading">Options</h4>
 
 
+--no-backup
+: Skip backing up the database.
+
+
 --force
 : Whether to perform the action even if a mutex lock could not be acquired.
 
