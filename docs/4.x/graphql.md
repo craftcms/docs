@@ -177,7 +177,7 @@ You can manage your schemas in the control panel at **GraphQL** → **Schemas**.
 
 ### Using the GraphiQL IDE
 
-The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the control panel from **GraphQL** → **Explore**.
+The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the control panel from **GraphQL** → **GraphiQL**.
 
 ![The built-in GraphiQL IDE](./images/graphiql.png)
 
