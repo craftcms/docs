@@ -144,7 +144,7 @@ use craft\helpers\Db;
 public function afterSave(bool $isNew)
 {
     if (!$this->propagating) {
-        Db::upsert('{{%products}}', [
+        Db::upsert('{{%plugin_products}}', [
             'id' => $this->id,
         ], [
             'price' => $this->price,
