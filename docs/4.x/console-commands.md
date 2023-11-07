@@ -303,6 +303,21 @@ Example:
 php craft db/drop-all-tables
 ```
 
+<h3 id="db-drop-table-prefix">
+    <a href="#db-drop-table-prefix" class="header-anchor">#</a>
+    <code>db/drop-table-prefix</code>
+</h3>
+
+
+Drops the database table prefix from all tables.
+
+<h4 id="db-drop-table-prefix-parameters" class="command-subheading">Parameters</h4>
+
+prefix
+:  The current table prefix. If omitted, the prefix will be detected automatically.
+
+
+
 <h3 id="db-restore">
     <a href="#db-restore" class="header-anchor">#</a>
     <code>db/restore</code>
