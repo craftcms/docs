@@ -101,7 +101,7 @@ Proprietary and open source cloud computing solutions are both options for hosti
 
 ## Deployment
 
-Broadly, we’re defining _deployment_ as the process of publishing code changes to a live website.
+Broadly, we’re defining _deployment_ as the process of publishing code changes to a live website. For the following examples, we’ll assume your project uses the standard [directory structure](directory-structure.md).
 
 ::: tip
 Be sure and read our [Deployment Best Practices](kb:deployment-best-practices) article for some high-level recommendations. What follows is intended for technical users who are tasked with extending their workflow to a web server.
@@ -161,7 +161,7 @@ With a generic deployment framework in place, we’re ready to get into a few co
 
 Let’s assume you’ve cloned your project onto a host, and configured it to serve requests directly out of the `web/` directory.
 
-Within the project directory, a simple Git-based deployment might look like this:
+Within the project’s root directory, a simple Git-based deployment might look like this:
 
 ```bash
 # Fetch new code:
