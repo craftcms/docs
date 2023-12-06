@@ -71,4 +71,4 @@ All commands support the following options:
 : Force a nominal exit code (`0`), even if an exception occurred. Useful when inconsequential failures would otherwise block chained commands in automated environments.
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/4.x/console-commands.md)!!!
+!!!include(docs/.artifacts/cms/4.x/console-commands.md)!!!

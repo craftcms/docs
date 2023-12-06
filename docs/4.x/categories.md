@@ -160,4 +160,4 @@ For example, if we were building a blog with dedicated “Topic” (category) pa
 Category queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/4.x/categories.md)!!!
+!!!include(docs/.artifacts/cms/4.x/categories.md)!!!

@@ -93,4 +93,4 @@ We can display a list of the tags in a “Blog Tags” tag group by doing the fo
 Tag queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/4.x/tags.md)!!!
+!!!include(docs/.artifacts/cms/4.x/tags.md)!!!

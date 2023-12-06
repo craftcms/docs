@@ -63,4 +63,4 @@ In order for the returned Matrix block(s) to be populated with their custom fiel
 Matrix block queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/3.x/matrix-blocks.md)!!!
+!!!include(docs/.artifacts/cms/3.x/matrix-blocks.md)!!!

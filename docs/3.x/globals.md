@@ -105,4 +105,4 @@ All global sets are already available as global variables to Twig templates. So 
 Global set queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/3.x/globals.md)!!!
+!!!include(docs/.artifacts/cms/3.x/globals.md)!!!

@@ -50,4 +50,4 @@ We recommend this environment variable approach for two reasons:
 Here’s the full list of database connection settings that Craft supports:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/3.x/config-db.md)!!!
+!!!include(docs/.artifacts/cms/3.x/config-db.md)!!!

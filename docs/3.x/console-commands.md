@@ -50,4 +50,4 @@ See the [Console Commands](extend/commands.md) page in the _Extending Craft_ sec
 While the complete list of available commands will include those from any plugins or custom modules you’ve added to your project, the following are Craft’s default console commands:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/3.x/console-commands.md)!!!
+!!!include(docs/.artifacts/3.x/cms/console-commands.md)!!!

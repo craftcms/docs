@@ -25,4 +25,4 @@ There are a number of [ways to provide configuration](./README.md). This file us
 :::
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/4.x/config-general.md)!!!
+!!!include(docs/.artifacts/4.x/cms/config-general.md)!!!

@@ -342,8 +342,8 @@
 
 <script>
 import { VueAutosuggest } from "vue-autosuggest";
-import Craft3EventData from "../../../.artifacts/3.x/events.json";
-import Craft4EventData from "../../../.artifacts/4.x/events.json";
+import Craft3EventData from "../../../.artifacts/cms/3.x/events.json";
+import Craft4EventData from "../../../.artifacts/cms/4.x/events.json";
 import Commerce3EventData from "../../../.artifacts/commerce/3.x/events.json";
 import Commerce4EventData from "../../../.artifacts/commerce/4.x/events.json";
 import copy from "copy-to-clipboard";

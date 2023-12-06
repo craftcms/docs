@@ -57,4 +57,4 @@ Finer-grain control of Craft’s database connection is possible by configuring 
 ## Supported Settings
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/4.x/config-db.md)!!!
+!!!include(docs/.artifacts/cms/4.x/config-db.md)!!!

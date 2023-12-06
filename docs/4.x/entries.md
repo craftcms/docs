@@ -449,4 +449,4 @@ We can display the 10 most recent entries in a “Blog” section by doing the f
 Entry queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/4.x/entries.md)!!!
+!!!include(docs/.artifacts/cms/4.x/entries.md)!!!

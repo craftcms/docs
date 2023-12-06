@@ -83,4 +83,4 @@ We can display a list of the users in an “Authors” user group by doing the f
 User queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/4.x/users.md)!!!
+!!!include(docs/.artifacts/cms/4.x/users.md)!!!

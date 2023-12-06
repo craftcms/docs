@@ -99,7 +99,7 @@ Protect your users’ personal information by carefully auditing queries and dis
 Address queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/4.x/addresses.md)!!!
+!!!include(docs/.artifacts/cms/4.x/addresses.md)!!!
 
 ## Address Repository
 
