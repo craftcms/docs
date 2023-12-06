@@ -78,7 +78,7 @@ Done for the day? [`ddev stop`](https://ddev.readthedocs.io/en/stable/users/basi
 
 ### Workflow + Collaboration
 
-We encourage starting with a local development environment (rather than a remote host) as a means of  of a defined workflow—whatever it may be—to the reliability and longevity of a website.
+We encourage starting with a local development environment (rather than a remote host) fosters a workflow that will support the reliability and longevity of a website.
 
 <See path="./deployment.md#workflow" label="Defining a Workflow" />
 

@@ -12,22 +12,22 @@ We recommend reviewing the main Craft documentation on [working with controller 
 
 ## Available Actions
 
-Action | Description
------- | -----------
-<badge vertical="baseline" type="verb">POST</badge> [cart/complete](#post-cart-complete) | Completes an order without payment.
-<badge vertical="baseline" type="verb">GET</badge> [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
-<badge vertical="baseline" type="verb">GET/POST</badge> [cart/load-cart](#get-post-cart-load-cart) | Loads a cookie for the given cart.
-<badge vertical="baseline" type="verb">POST</badge> [cart/forget-cart](#get-post-cart-forget-cart) | Loads a cookie for the given cart.
-<badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart) | Manage a customer’s current [cart](../orders-carts.md).
-<badge vertical="baseline" type="verb">POST</badge> [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
-<badge vertical="baseline" type="verb">POST</badge> [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
-<badge vertical="baseline" type="verb">GET</badge> [payments/complete-payment](#get-payments-complete-payment) | Processes customer’s return from an off-site payment.
-<badge vertical="baseline" type="verb">POST</badge> [payments/pay](#post-payments-pay) | Makes a payment on an order.
-<badge vertical="baseline" type="verb">GET</badge> [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
-<badge vertical="baseline" type="verb">POST</badge> [subscriptions/subscribe](#post-subscriptions-subscribe) | Starts a new subscription.
-<badge vertical="baseline" type="verb">POST</badge> [subscriptions/cancel](#post-subscriptions-cancel) | Cancels an active subscription.
-<badge vertical="baseline" type="verb">POST</badge> [subscriptions/switch](#post-subscriptions-switch) | Switch an active subscription’s plan.
-<badge vertical="baseline" type="verb">POST</badge> [subscriptions/reactivate](#post-subscriptions-reactivate) | Reactivates a canceled subscription.
+Methods | Action | Description
+--- | --- | ---
+<badge vertical="baseline" type="verb">POST</badge> | [cart/complete](#post-cart-complete) | Completes an order without payment.
+<badge vertical="baseline" type="verb">GET</badge> | [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
+<badge vertical="baseline" type="verb">GET/POST</badge> | [cart/load-cart](#get-post-cart-load-cart) | Loads a cookie for the given cart.
+<badge vertical="baseline" type="verb">POST</badge> | [cart/forget-cart](#get-post-cart-forget-cart) | Removes a cookie for the current cart. <Since ver="4.3.0" product="Commerce" repo="craftcms/commerce" feature="Forgetting carts" />
+<badge vertical="baseline" type="verb">POST</badge> | [cart/update-cart](#post-cart-update-cart) | Manage a customer’s current [cart](../orders-carts.md).
+<badge vertical="baseline" type="verb">POST</badge> | [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
+<badge vertical="baseline" type="verb">POST</badge> | [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
+<badge vertical="baseline" type="verb">GET</badge> | [payments/complete-payment](#get-payments-complete-payment) | Processes customer’s return from an off-site payment.
+<badge vertical="baseline" type="verb">POST</badge> | [payments/pay](#post-payments-pay) | Makes a payment on an order.
+<badge vertical="baseline" type="verb">GET</badge> | [downloads/pdf](#get-downloads-pdf) | Returns an order PDF as a file.
+<badge vertical="baseline" type="verb">POST</badge> | [subscriptions/subscribe](#post-subscriptions-subscribe) | Starts a new subscription.
+<badge vertical="baseline" type="verb">POST</badge> | [subscriptions/cancel](#post-subscriptions-cancel) | Cancels an active subscription.
+<badge vertical="baseline" type="verb">POST</badge> | [subscriptions/switch](#post-subscriptions-switch) | Switch an active subscription’s plan.
+<badge vertical="baseline" type="verb">POST</badge> | [subscriptions/reactivate](#post-subscriptions-reactivate) | Reactivates a canceled subscription.
 
 [Address management](/4.x/addresses.md/#managing-addresses) actions are part of the main Craft documentation. Commerce also allows address information to be set directly on a cart via <badge vertical="baseline" type="verb">POST</badge> [cart/update-cart](#post-cart-update-cart).
 
@@ -208,15 +208,16 @@ State | `application/json`
 
 ### <badge vertical="baseline" type="verb">POST</badge> `payment-sources/add`
 
-Creates a new payment source.
+Creates a new payment source for the current customer.
 
 #### Supported Params
 
 Param | Description
 ----- | -----------
-`*` | All body parameters will be provided directly to the gateway’s [payment form](../payment-form-models.md) model.
+`*` | All body parameters will be provided directly to the gateway’s payment form model.
 `description` | Description for the payment source.
 `gatewayId` | ID of the new payment source’s gateway, which must support payment sources.
+`isPrimaryPaymentSource` | Send a non-empty value to make this the customer’s primary payment source.
 
 #### Response
 
@@ -232,7 +233,7 @@ State | `text/html` | `application/json`
 </span>
 
 ::: warning
-Note that successful requests will return the [payment _source_](../saving-payment-sources.md) that was created; failures will bounce back the [payment _form_](../payment-form-models.md) with errors.
+Note that the models available in success and failure states are different!
 :::
 
 ### <badge vertical="baseline" type="verb">POST</badge> `payment-sources/delete`
@@ -271,7 +272,7 @@ Param | Description
 `email` | Email address of the person responsible for payment, which must match the email address on the order. Required if the order being paid is not the active cart.
 `gatewayId` | The payment gateway ID to be used for payment.
 `number` | The order number payment should be applied to. When ommitted, payment is applied to the current cart.
-`paymentAmount` | Hashed payment amount, expressed in the cart’s `paymentCurrency`, available only if [partial payments](../making-payments.md#checkout-with-partial-payment) are allowed.
+`paymentAmount` | Hashed payment amount, expressed in the cart’s `paymentCurrency`. Available only if [partial payments](../making-payments.md#checkout-with-partial-payment) are allowed.
 `paymentCurrency` | ISO code of a configured [payment currency](../payment-currencies.md) to be used for the payment.
 `paymentSourceId` | The ID for a payment source that should be used for payment.
 `registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
