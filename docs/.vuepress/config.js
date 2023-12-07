@@ -86,7 +86,8 @@ module.exports = {
       md.use(require("./theme/util/replace-anchor-prefixes").replacePrefixes)
         .use(require("./theme/markup"))
         .use(require("markdown-it-deflist"))
-        .use(require("markdown-it-imsize"));
+        .use(require("markdown-it-imsize"))
+        .use(require("markdown-it-include"));
     }
   },
   postcss: {
