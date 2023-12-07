@@ -234,6 +234,21 @@ Example:
 php craft db/drop-all-tables
 ```
 
+<h3 id="db-drop-table-prefix">
+    <a href="#db-drop-table-prefix" class="header-anchor">#</a>
+    <code>db/drop-table-prefix</code>
+</h3>
+
+
+Drops the database table prefix from all tables.
+
+<h4 id="db-drop-table-prefix-parameters" class="command-subheading">Parameters</h4>
+
+prefix
+:  The current table prefix. If omitted, the prefix will be detected automatically.
+
+
+
 <h3 id="db-restore">
     <a href="#db-restore" class="header-anchor">#</a>
     <code>db/restore</code>
@@ -1848,6 +1863,81 @@ If it is undefined, PHP_BINARY will be used.
 
 Allows you to bulk-save elements.
 
+<h3 id="resave-addresses">
+    <a href="#resave-addresses" class="header-anchor">#</a>
+    <code>resave/addresses</code>
+</h3>
+
+
+Re-saves user addresses.
+
+<h4 id="resave-addresses-options" class="command-subheading">Options</h4>
+
+
+--queue
+: Whether the elements should be resaved via a queue job.
+
+
+--element-id
+: The ID(s) of the elements to resave.
+
+
+--uid
+: The UUID(s) of the elements to resave.
+
+
+--site
+: The site handle to fetch elements from.
+
+
+--status
+: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.
+
+
+--offset
+: The number of elements to skip.
+
+
+--limit
+: The number of elements to resave.
+
+
+--update-search-index
+: Whether to update the search indexes for the resaved elements.
+
+
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
+--owner-id
+: Comma-separated list of owner element IDs.
+
+
+--country-code
+: Comma-separated list of country codes.
+
+
+--set
+: An attribute name that should be set for each of the elements. The value will be determined by --to.
+
+
+--to
+: The value that should be set on the --set attribute.
+    
+    The following value types are supported:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
+    - An empty value: `--to :empty:`
+
+
+--if-empty
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+
 <h3 id="resave-assets">
     <a href="#resave-assets" class="header-anchor">#</a>
     <code>resave/assets</code>
@@ -2142,6 +2232,10 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 
 --field
 : The field handle to save Matrix blocks for.
+
+
+--owner-id
+: Comma-separated list of owner element IDs.
 
 
 --set
@@ -2634,6 +2728,10 @@ dst
 Runs pending migrations and applies pending project config changes.
 
 <h4 id="up-index-options" class="command-subheading">Options</h4>
+
+
+--no-backup
+: Skip backing up the database.
 
 
 --force
