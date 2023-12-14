@@ -10,7 +10,7 @@ We have a host of other ideas for [next steps](../more/README.md) if you would p
 
 When building the blog and topic index pages, there was a lot of repeated code involved with outputting the post previews. Twig’s `include` tag can help us reduce that repetition by extracting it into a separate template, and referencing it in both places.
 
-We’ll start by taking the entire `for` loop from `templates/blog/_index.twig` and moving it to a new file, `templates/blog/_feed.twig`:
+We’ll start by taking the entire `for` loop from `templates/blog/index.twig` and moving it to a new file, `templates/blog/_feed.twig`:
 
 ```twig
 {% for post in posts %}
@@ -34,7 +34,7 @@ We’ll start by taking the entire `for` loop from `templates/blog/_index.twig` 
 {% endfor %}
 ```
 
-In place of that block of code in `templates/blog/_index.twig`, `include` the new template (then make the same change to `templates/blog/_topic.twig`):
+In place of that block of code in `templates/blog/index.twig`, `include` the new template (then make the same change to `templates/blog/_topic.twig`):
 
 ```twig
 {% include 'blog/_feed' %}
