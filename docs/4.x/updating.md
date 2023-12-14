@@ -78,7 +78,7 @@ If you have used the Craft CLI in the past, `composer update` may do nothing!
 Open `composer.json`, and look at the packages under the `require` key—if you see exact version numbers, Composer will never update those packages.
 :::
 
-Keep in mind that manually altering constraints _can_ lead to an irreconcilable set of packages—Composer will let you know about this before updating the lockfile. Generally speaking, the “major-version” constraints set automatically when using `composer require` should continue to work, while protecting your project from 
+Keep in mind that manually altering constraints _can_ lead to an irreconcilable set of packages—Composer will let you know about this before updating the lockfile. Generally speaking, the “major-version” constraints set automatically when using `composer require` should continue to work, while protecting your project from breaking changes in dependencies.
 
 ## Workflow
 
