@@ -173,7 +173,7 @@ Posts’ primary images will be added to an _asset_ field.
 </BrowserShot>
 
 1. Click **+ New Field**;
-1. Enter “Feature Image” into the **Name** <Poi label="A" target="newAssetField" id="name" /> field;
+1. Enter “Feature Image” into the **Name** <Poi label="A" target="newAssetField" id="name" /> field (and note that Craft automatically generates a **Handle** of `featureImage`);
 1. Select **Assets** from the **Field Type** <Poi label="C" target="newAssetField" id="type" /> menu—the rest of the page will be updated with options specific to asset fields;
 1. Tick **Restrict assets to a single location?** <Poi label="D" target="newAssetField" id="restrict" />;
 1. Select the **Images** volume from the revealed **Asset Location** <Poi label="E" target="newAssetField" id="location" /> menu;
@@ -188,7 +188,7 @@ Posts’ primary images will be added to an _asset_ field.
 Our _topics_ field only needs a couple of options:
 
 1. Click **+ New Field**;
-1. Enter “Post Categories” into the **Name** field;
+1. Enter “Post Categories” into the **Name** field (and note that Craft automatically generates a **Handle** of `postCategories`);
 1. Choose “Categories” from the **Field Type** menu—the rest of the page will be updated with options specific to categories fields;
 1. Choose “Topics” from the **Source** menu (it will probably be selected, already);
 1. Save the field.
@@ -220,7 +220,7 @@ Matrix fields are inherently a bit more complex than other field types, because 
 </BrowserShot>
 
 1. Click **+ New Field**;
-1. Enter “Post Content” in the **Name** <Poi label="A" target="newMatrixField" id="name" /> field;
+1. Enter “Post Content” in the **Name** <Poi label="A" target="newMatrixField" id="name" /> field (and note that Craft automatically generates a **Handle** of `postContent`);
 1. Choose “Matrix” from the **Field Type** <Poi label="C" target="newMatrixField" id="type" /> menu—the rest of the page will be updated with options specific to matrix fields;
 1. Within the **Configuration** <Poi label="D" target="newMatrixField" id="config" /> space, use the **+ New block type**  button to create two _block types_:
 
