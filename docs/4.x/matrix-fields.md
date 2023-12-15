@@ -7,8 +7,8 @@ Matrix fields allow you to create multiple blocks of content within a single fie
 Matrix fields have the following settings:
 
 - **Configuration** – This is where you configure which block types should be available to your Matrix field, and which sub-fields each of those block types should have.
-- **Min Blocks** – The minimum number of blocks that can be created within the field. (Default is no limit.)
-- **Max Blocks** – The maximum number of blocks that can be created within the field. (Default is no limit.)
+- **Min Blocks** – The _minimum_ number of blocks that can be created within the field. (Default is no lower limit.)
+- **Max Blocks** – The _maximum_ number of blocks that can be created within the field. (Default is no upper limit.)
 
 ## The Field
 
@@ -370,7 +370,7 @@ Instead, we’ll try three values:
 
 1. Attempt to use the field value as an element query (load the blocks fresh, assuming there are no pending changes hanging in-memory);
 1. Accept the value, verbatim (assuming Craft has left the in-memory blocks attached, and they _don’t_ need to be queried);
-1. Default to an empty array (this fallback ensures)
+1. Default to an empty array (this ensures whatever uses the `blocks` variable later on can safely assume it’s an array);
 
 ```twig
 {% set blocks = entry.myFieldHandle.all() ?? entry.myFieldHandle ?? [] %}
