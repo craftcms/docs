@@ -32,7 +32,6 @@ For the curious, here are the types of things you will find in `storage/runtime/
   - `compiled_classes/` – Stores some dynamically-defined PHP classes.
   - `compiled_templates/` – Stores compiled Twig templates.
   - `temp/` – Stores temp files.
-  - `validation.key` – A randomly-generated, cryptographically secure key that is used for hashing and validating data between requests.
 
 ::: tip
 You can customize the name and location of this folder by setting the [CRAFT_STORAGE_PATH](config/README.md#craft-storage-path) PHP constant in your [entry script](./config/README.md#entry-script).
