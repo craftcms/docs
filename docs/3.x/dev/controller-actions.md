@@ -34,7 +34,7 @@ The following params can be sent with the request:
 
 Param | Description
 ----- | -----------
-`authorId` | The ID of the user account that should be set as the entry author. (Defaults to the entry’s current author, or the logged-in user.)
+`author` | The ID of the user account that should be set as the entry author. (Defaults to the entry’s current author, or the logged-in user.)
 `enabledForSite` | Whether the entry should be enabled for the current site (`1`/`0`), or an array of site IDs that the entry should be enabled for. (Defaults to the `enabled` param.)
 `enabled` | Whether the entry should be enabled (`1`/`0`). (Defaults to enabled.)
 `entryId` | Fallback if `sourceId` isn’t passed, for backwards compatibility.
