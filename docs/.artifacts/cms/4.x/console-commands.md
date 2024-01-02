@@ -779,22 +779,6 @@ Re-indexes assets across all volumes.
 
 Removes all CLI indexing sessions.
 
-<h4 id="index-assets-cleanup-options" class="command-subheading">Options</h4>
-
-
---cache-remote-images
-: Whether remote-stored images should be locally cached in the process.
-
-
---create-missing-assets
-: Whether to auto-create new asset records when missing.
-
-
---delete-missing-assets
-: Whether to delete all the asset records that have their files missing.
-
-
-
 <h3 id="index-assets-one">
     <a href="#index-assets-one" class="header-anchor">#</a>
     <code>index-assets/one</code>
