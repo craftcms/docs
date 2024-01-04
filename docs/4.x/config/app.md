@@ -452,13 +452,13 @@ If your queue driver supplies its own worker, set the <config4:runQueueAutomatic
 
 ### Mutex
 
-Craft uses a file-based mutex (or "mutual exclusivity") driver by default, which should be switched to a different driver in [load-balanced environments](https://craftcms.com/knowledge-base/configuring-load-balanced-environments#mutex-locks).
+Craft uses the database for mutex (or “mutually exclusive”) locks <Since ver="4.6.0" feature="The database mutex driver" />, which means it will work natively in [load-balanced environments](kb:configuring-load-balanced-environments#mutex-locks).
 
-::: tip
-A [NullMutex](craft4:craft\mutex\NullMutex) driver is used when Dev Mode is enabled, since mutex drivers aren’t necessary for local development and we’ve seen issues with mutex in some Windows and Linux filesystems.
+::: warning
+Prior to 4.6, enabling `devMode` would automatically switch from the default `FileMutex` driver to a special `NullMutex` driver to help avoid some virtualization bugs. Now, `NullMutex` is only used when a database connection is not available (i.e. prior to installation).
 :::
 
-You can configure a custom mutex driver by configuring the `mutex` component’s nested `$mutex` property:
+You can configure a custom mutex driver by overriding the `mutex` component’s nested `$mutex` property:
 
 ```php
 // Use mutex driver provided by yii2-redis
@@ -487,7 +487,7 @@ return [
 ```
 
 ::: warning
-Pay careful attention to the structure, here—we’re only modifying the existing component’s `mutex` _property_ and leaving the rest of its config as-is.
+Pay careful attention to the structure of the configuration object: we’re only modifying the existing `mutex` component’s nested _driver_ property and leaving the rest of its config as-is. The mutex _component_ should always be an instance of <craft4:craft\mutex\Mutex>,
 :::
 
 ## Modules
