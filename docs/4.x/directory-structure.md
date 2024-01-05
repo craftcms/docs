@@ -85,14 +85,15 @@ Configuration
 
 ### `.gitignore`
 
-Purpose
-: This file tells Git which files it should exclude when committing changes. At minimum, it should contain entries for `.env` and Composer’s `vendor/` directory.
+This file tells Git which files it should exclude when committing changes. At minimum, it should contain entries for `.env` and Composer’s `vendor/` directory.
 
-  Check out our [Hosting & Deployment](./deployment.md#be-aware-of-artifacts) article for a list of other things you’ll want to exclude.
+Check out our [Hosting & Deployment](./deployment.md#be-aware-of-artifacts) article for a list of other things you’ll want to exclude.
 
 ### `bootstrap.php`
 
 The [starter project](depo:craftcms/craft) consolidates important bootstrapping logic (like defining path [constants](./config/README.md#php-constants) that determine the above directories’ locations, and loading environment variables from a [`.env`](#env) file) into this file. Both the HTTP and console entry scripts (`web/index.php` and [`craft`](#craft), respectively) include this file—but each goes on to instantiate a different [type of application](guide:structure-entry-scripts) suited for that request context.
+
+This file’s location only matters to your entry scripts, so it is not “configurable” like other paths are. If you make changes to the layout of your project directory, be sure and update the references to `bootstrap.php` in `index.php` and the CLI entry point.
 
 ### `composer.json`
 
