@@ -34,7 +34,7 @@ For the curious, here are the types of things you will find in `storage/runtime/
   - `temp/` – Stores temp files.
 
 ::: tip
-You can customize the name and location of this folder by setting the [CRAFT_STORAGE_PATH](config/README.md#craft-storage-path) PHP constant in your [entry script](./config/README.md#entry-script).
+You can customize the name and location of this folder by setting the [CRAFT_STORAGE_PATH](./config/README.md#craft-storage-path) variable as an [environment override](./config/README.md#environment-overrides).
 :::
 
 ### `templates/`
