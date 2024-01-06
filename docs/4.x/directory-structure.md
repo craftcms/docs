@@ -117,25 +117,25 @@ Depending on the age and structure of your Craft project (as well as the tools u
 
 If you (or another maintainer) followed the [installation](./installation.md) instructions or [Getting Started Tutorial](/getting-started-tutorial/README.md), DDEV will have left a `.ddev/` directory in the root of your project. This is safe to keep in version control—DDEV may make changes to it from time to time, but a separate `.gitignore` file exists within it to ensure only necessary files are tracked.
 
-### `public/`
+### `migrations/`
 
-Older projects may have carried over a Craft 2 convention of naming their public web directory `public/`. There is no functional difference between these folder names, but most Craft resources will refer to it as `web/`.
+Projects that use [content migrations](./extend/migrations.md) will typically use this directory, but it is customizable with the [`CRAFT_CONTENT_MIGRATIONS_PATH`](./config/README.md#craft-content-migrations-path) variable.
 
 ### `modules/`
 
 For a time, the starter project came with a pre-initialized [custom module](./extend/module-guide.md) in the `modules/` directory. This is typically harmless, but it cannot be removed without also modifying your project’s `config/app.php` file.
 
-### `translations/`
+### `public/`
 
-Multi-site projects often make use of [static translations](./sites.md#static-message-translations), which are stored in this directory, indexed by their language code. Customize this location with the [`CRAFT_TRANSLATIONS_PATH`](./config/README.md#craft-translations-path) variable.
-
-### `migrations/`
-
-Projects that use [content migrations](./extend/migrations.md) will typically use this directory, but it is customizable with the [`CRAFT_CONTENT_MIGRATIONS_PATH`](./config/README.md#craft-content-migrations-path) variable.
+Older projects may have carried over a Craft 2 convention of naming their public web directory `public/`. There is no functional difference between these folder names, but most Craft resources will refer to it as `web/`.
 
 ### `tests/`
 
 When using [tests](./testing/README.md) to validate application changes, you are apt to have a dedicated `tests/` directory.
+
+### `translations/`
+
+Multi-site projects often make use of [static translations](./sites.md#static-message-translations), which are stored in this directory, indexed by their language code. Customize this location with the [`CRAFT_TRANSLATIONS_PATH`](./config/README.md#craft-translations-path) variable.
 
 ### `package.json`
 
@@ -143,13 +143,13 @@ Projects that use Node will typically contain `package.json` and `package-lock.j
 
 Oftentimes, a Node “build step” will output files that are then loaded by a user’s browser—those should be written to the web root so they can be directly requested via HTTP.
 
-### Docker Files
-
-A `Dockerfile` or `docker-compose.yml` in your project root suggests that it is intended to be run in [Docker](https://www.docker.com/), a containerized development environment. DDEV users will typically _not_ see these files, as they’re abstracted by configuration stored in the [`.ddev/` directory](#ddev).
-
 ### `craft.bat`
 
 A Windows-specific command line entry point or “batch file.”
+
+### Docker Files
+
+A `Dockerfile` or `docker-compose.yml` in your project root suggests that it is intended to be run in [Docker](https://www.docker.com/), a containerized development environment. DDEV users will typically _not_ see these files, as they’re abstracted by configuration stored in the [`.ddev/` directory](#ddev).
 
 ### IDE Configuration
 
