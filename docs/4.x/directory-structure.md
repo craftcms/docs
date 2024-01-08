@@ -139,9 +139,9 @@ Multi-site projects often make use of [static translations](./sites.md#static-me
 
 ### `package.json`
 
-Projects that use Node will typically contain `package.json` and `package-lock.json` files, as well as a `node_modules/` directory. Craft does not interact with these files, but they often contain information about how the front-end of your site works.
+Projects that use Node.js will typically contain `package.json` and `package-lock.json` files, as well as a `node_modules/` directory. Craft does not interact with these files, but they often contain information about how the front-end of your site works.
 
-Oftentimes, a Node “build step” will output files that are then loaded by a user’s browser—those should be written to the web root so they can be directly requested via HTTP.
+Oftentimes, a Node.js “build step” will output files that are then loaded by a user’s browser—those should be written to the web root so they can be directly requested via HTTP.
 
 ### `craft.bat`
 
@@ -153,4 +153,4 @@ A `Dockerfile` or `docker-compose.yml` in your project root suggests that it is 
 
 ### IDE Configuration
 
-Some editors write configuration to a file or folder within your project—for example, PHPStorm will create a `.idea/` directory; Visual Studio Code uses `.vscode/`. Coordinate with your team about which tools are valuable to your process, and commit anything that supports it.
+Some editors write configuration to a file or folder within your project—for example, PhpStorm will create a `.idea/` directory; Visual Studio Code uses `.vscode/`. Coordinate with your team about which tools are valuable to your process, and commit anything that supports it.
