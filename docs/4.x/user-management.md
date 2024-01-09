@@ -97,10 +97,9 @@ The permissions Craft comes with are:
 | ↳&nbsp; Find and Replace | `utility:find-replace`
 | ↳&nbsp; Migrations | `utility:migrations`
 
-You may not see all of these options, initially—only ones that are relevant based on the current content schema will be displayed. For example, everything under _View categories_ will be hidden until you have at least one category group.
+You may not see all of these options, initially—only ones that are relevant based on the current content schema will be displayed. For example, everything under _View categories_ will be hidden until you have at least one [category group](categories.md#category-groups).
 
 Plugins may register their own permissions, which can appear in a top-level group, under _Access the control panel_, or within _Utilities_.
-
 
 ::: tip
 See the _Extending Craft_ [User Permissions](extend/user-permissions.md) page to learn how to register custom permissions from your module or plugin.

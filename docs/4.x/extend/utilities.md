@@ -64,7 +64,7 @@ You may also implement static `toolbarHtml()` and `footerHtml()` methods to inje
 
 Each utility automatically gets its own [permission](user-permissions.md). Craft checks these permissions before displaying a utility in the sidebar, and when the utility’s URL is requested.
 
-However, those permissions do _not_ have any bearing on what functionality might be accessible to a user via other means. For example, if your utility displayed a form to authorized users and allowed them to download a specialized report of some kind, the [controller](controllers.md) or action that ultimately generates the report must also check the appropriate permissions.
+However, those permissions do _not_ have any bearing on what functionality might be accessible to a user via other means. For example, if your utility displayed a form to authorized users and allowed them to download a specialized report of some kind, the [controller](controllers.md) or action that ultimately generates the report must also check the appropriate permissions. In general, those permissions should be discrete: an administrator would grant users access to the utility _and_ a _Modify Widgets_ permission that your plugin explicitly defines (and checks in the appropriate controller action).
 
 ## Registering your Utility
 
