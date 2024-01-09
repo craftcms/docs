@@ -25,9 +25,9 @@ Considering how much damage an admin can do, we strongly advise caution when cre
 
 If you have Craft Pro, you can create User Groups to help organize your site’s user accounts, as well as batch-set permissions on them.
 
-To create a new User Group, go to **Settings** → **Users** and press **+ New user group**. You can give your group a Name and Handle, plus any permissions you want every user within the group to have.
+To create a new User Group, go to **Settings** → **Users** and press **+ New user group**. You can give your group a **Name** and **Handle**, plus any **Permissions** you want every user within the group to have.
 
-After you create your groups, you can assign users to groups by going into their account settings and choosing the Permissions tab.
+After you create your groups, you can assign users to groups by going into their account settings and choosing the **Permissions** tab.
 
 ## Permissions
 
@@ -97,10 +97,9 @@ The permissions Craft comes with are:
 | ↳&nbsp; Find and Replace | `utility:find-replace`
 | ↳&nbsp; Migrations | `utility:migrations`
 
-You may not see all of these options, initially—only ones that are relevant based on the current content schema will be displayed. For example, everything under _View categories_ will be hidden until you have at least one category group.
+You may not see all of these options, initially—only ones that are relevant based on the current content schema will be displayed. For example, everything under _View categories_ will be hidden until you have at least one [category group](categories.md#category-groups).
 
 Plugins may register their own permissions, which can appear in a top-level group, under _Access the control panel_, or within _Utilities_.
-
 
 ::: tip
 See the _Extending Craft_ [User Permissions](extend/user-permissions.md) page to learn how to register custom permissions from your module or plugin.
