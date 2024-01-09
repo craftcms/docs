@@ -273,13 +273,19 @@ You can configure any [custom field](./fields.md) to make its content available 
 
 ![Searchable Checkbox](./images/searchable-checkbox.png)
 
-Indexes are only updated once an element with the field is saved, though. If you have a large amount of content and users (admin or otherwise) rely heavily on search, consider [resaving the elements](#rebuilding-your-search-indexes) to populate the index.
+Indexes are only updated once an element with the field is saved. If you have a large amount of content and users (admin or otherwise) rely heavily on search, consider [resaving the elements](#rebuilding-your-search-indexes) to populate the index.
 
 ::: tip
 For Matrix fields, the top-level **Use this field’s values as search keywords** setting determines whether _any_ sub-fields will factor into results for the parent—individual fields must also opt-in to indexing for any keywords to be bubbled up.
 
 For relational fields like [Assets](./assets-fields.md), [Categories](./categories-fields.md), and [Entries](./entries-fields.md), the setting determines whether titles of related elements should factor into search results.
 :::
+
+## Indexing Criteria
+
+Any time an indexable attribute or field on an element is updated (as indicated by Craft’s change-tracking feature, which powers drafts and revisions), an “Updating search indexes” job is pushed into the queue. <Since ver="4.6.0" description="A more restrictive set of criteria for indexing elements was implemented in {product} {ver}." /> Prior versions generate an indexing job whenever an element with _any_ searchable attributes or fields is saved, regardless of whether or not those specific attributes changed.
+
+The [eligible properties](#searching-for-specific-element-attributes) differ for each element type, the field layout a given element uses, and which of the underlying fields are flagged as searchable.
 
 ## Rebuilding Your Search Indexes
 

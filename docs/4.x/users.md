@@ -30,7 +30,7 @@ You can’t create an inactive user from the control panel, but you can deactiva
 
 ### Addresses
 
-Users each have an address book. [Addresses](./addresses.md) can be managed on behalf of a User via the control panel, or [by the user themselves](./dev/controller-actions.md#post-users-save-address).
+Users each have an address book. [Addresses](./addresses.md) can be managed on behalf of a user via the control panel, or [by the user themselves](./dev/controller-actions.md#post-users-save-address).
 
 ## Querying Users
 

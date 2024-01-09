@@ -16,7 +16,6 @@ All fields share a few settings:
 - **Instructions** – Instruction text to guide authors;
 - **Field Type** – What [type](#field-types) of field it is;
 
-
 <BrowserShot url="https://my-project.tld/admin/settings/fields/new" :link="false" :max-height="500">
 <img src="./images/fields-field-settings.png">
 </BrowserShot>
@@ -37,6 +36,7 @@ Type | Description
 [Categories](categories-fields.md) | Attach category elements.
 [Checkboxes](checkboxes-fields.md) | Select any number of values from a list.
 [Color](color-fields.md) | Choose a color with the browser’s color picker UI.
+[Countries](country-fields.md) | Select from a list of countries available in [address](addresses.md) elements.
 [Date](date-time-fields.md) | Choose a date and/or time, as well as a timezone.
 [Dropdown](dropdown-fields.md) | Choose one value from a list.
 [Email](email-fields.md) | Validate text input as an email address.

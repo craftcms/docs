@@ -1,4 +1,5 @@
 ---
+description: Craft has a powerful and secure HTTP API for interacting with accounts, content, and other features from your front-end.
 sidebarDepth: 2
 related:
   - uri: https://craftcms.com/knowledge-base/front-end-user-accounts

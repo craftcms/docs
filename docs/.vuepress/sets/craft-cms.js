@@ -176,6 +176,7 @@ module.exports = {
             "categories-fields",
             "checkboxes-fields",
             "color-fields",
+            "country-fields",
             "date-time-fields",
             "dropdown-fields",
             "email-fields",
