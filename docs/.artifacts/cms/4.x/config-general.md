@@ -640,6 +640,40 @@ CRAFT_DISABLED_PLUGINS=redactor,webhooks
 
 
 
+### `disabledUtilities`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)[]
+
+Default value
+:  `[]`
+
+Defined by
+:  [GeneralConfig::$disabledUtilities](craft4:craft\config\GeneralConfig::$disabledUtilities)
+
+Since
+:  4.6.0
+
+</div>
+
+Array of utility IDs that should be disabled.
+
+::: code
+```php Static Config
+ ->disabledUtilities([
+     'updates',
+     'find-replace',
+ ])
+```
+```shell Environment Override
+CRAFT_DISABLED_UTILITIES=updates,find-replace
+```
+:::
+
+
+
 ### `disallowRobots`
 
 <div class="compact">
@@ -4927,6 +4961,37 @@ Any additional name suffixes that should be supported by the name parser.
 ```
 ```shell Environment Override
 CRAFT_EXTRA_NAME_SUFFIXES=CCNA,OBE
+```
+:::
+
+
+
+### `showFirstAndLastNameFields`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$showFirstAndLastNameFields](craft4:craft\config\GeneralConfig::$showFirstAndLastNameFields)
+
+Since
+:  4.6.0
+
+</div>
+
+Whether “First Name” and “Last Name” fields should be shown in place of “Full Name” fields.
+
+::: code
+```php Static Config
+->showFirstAndLastNameFields()
+```
+```shell Environment Override
+CRAFT_SHOW_FIRST_AND_LAST_NAME_FIELDS=true
 ```
 :::
 
