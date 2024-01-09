@@ -25,9 +25,9 @@ Considering how much damage an admin can do, we strongly advise caution when cre
 
 If you have Craft Pro, you can create User Groups to help organize your site’s user accounts, as well as batch-set permissions on them.
 
-To create a new User Group, go to **Settings** → **Users** and press **+ New user group**. You can give your group a Name and Handle, plus any permissions you want every user within the group to have.
+To create a new User Group, go to **Settings** → **Users** and press **+ New user group**. You can give your group a **Name** and **Handle**, plus any **Permissions** you want every user within the group to have.
 
-After you create your groups, you can assign users to groups by going into their account settings and choosing the Permissions tab.
+After you create your groups, you can assign users to groups by going into their account settings and choosing the **Permissions** tab.
 
 ## Permissions
 
