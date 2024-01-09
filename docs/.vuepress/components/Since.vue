@@ -2,7 +2,7 @@
     <a
       class="since" 
       :href="releaseUrl"
-      :title="`${feature} was first available in version ${ver} of ${product}.`"
+      :title="parsedDescription"
       target="_blank">
         {{ ver }}<span class="plus">+</span>
       </a>
@@ -32,6 +32,10 @@ export default {
       type: String,
       default: 'This feature',
     },
+    description: {
+      type: String,
+      default:  '{feature} was first available in version {ver} of {product}.',
+    }
   },
   computed: {
     releaseUrl() {
@@ -42,6 +46,12 @@ export default {
 
       return `${GITHUB_URL}/${this.repo}/releases/tag/${this.ver}`;
     },
+    parsedDescription() {
+      return this.description
+        .replace('{feature}', this.feature)
+        .replace('{ver}', this.ver)
+        .replace('{product}', this.product);
+    }
   },
 };
 </script>
