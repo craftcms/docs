@@ -118,6 +118,10 @@ Access to utilities should be granted only to trusted users, especially the inno
 Keep in mind that any user marked as an “Admin” implicitly has access to _all_ utilities.
 :::
 
+#### Disabling Utilities
+
+You can disable a utility for all users with the [`disabledUtilities` config setting](config4:disabledUtilities). <Since ver="4.6.0" feature="Disabling utilities" /> Refer to the <craft4:craft\base\Utility> subclasses’ `id()` method for the handles of specific utilities—including those provided by plugins.
+
 ### Settings
 
 The **Settings** screen is where you’ll configure the system and design your content model. Settings complement [configuration](./config/README.md) are typically stored in [Project Config](./project-config.md) so that you can easily deploy them to other environments.
