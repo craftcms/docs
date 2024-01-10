@@ -28338,6 +28338,138 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_BEFORE_ELEMENT_SAVE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is saved."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_ELEMENT_SAVE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is saved."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_ELEMENT_PROPAGATE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is fully saved and propagated to other sites."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_BEFORE_ELEMENT_DELETE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is deleted."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_ELEMENT_DELETE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is deleted."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_BEFORE_ELEMENT_RESTORE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is restored."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_ELEMENT_RESTORE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is restored."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_DEFINE_KEYWORDS",
+        "type": "craft\\events\\DefineFieldKeywordsEvent",
+        "desc": "The event that is triggered when defining the field’s search keywords for an element."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_DEFINE_INPUT_HTML",
+        "type": "craft\\events\\DefineFieldHtmlEvent",
+        "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_BEFORE_SAVE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the component is saved."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_SAVE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered after the component is saved."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the component is deleted."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_BEFORE_APPLY_DELETE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the delete is applied to the database."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the component is deleted."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\fields\\Date",
         "name": "EVENT_BEFORE_ELEMENT_SAVE",
         "type": "craft\\events\\FieldElementEvent",
@@ -30619,6 +30751,48 @@
     },
     {
         "class": "craft\\fields\\Users",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\conditions\\CountryFieldConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\conditions\\CountryFieldConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\conditions\\CountryFieldConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\conditions\\CountryFieldConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\conditions\\CountryFieldConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\conditions\\CountryFieldConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\conditions\\CountryFieldConditionRule",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -37305,6 +37479,12 @@
                 ]
             }
         }
+    },
+    {
+        "class": "craft\\services\\Elements",
+        "name": "EVENT_SET_ELEMENT_URI",
+        "type": "craft\\events\\ElementEvent",
+        "desc": "The event that is triggered when setting a unique URI on an element."
     },
     {
         "class": "craft\\services\\Elements",

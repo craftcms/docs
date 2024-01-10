@@ -770,6 +770,10 @@ Re-indexes assets across all volumes.
 : Whether to delete all the asset records that have their files missing.
 
 
+--delete-empty-folders
+: Whether empty folders should be deleted.
+
+
 
 <h3 id="index-assets-cleanup">
     <a href="#index-assets-cleanup" class="header-anchor">#</a>
@@ -811,6 +815,10 @@ startAt
 
 --delete-missing-assets
 : Whether to delete all the asset records that have their files missing.
+
+
+--delete-empty-folders
+: Whether empty folders should be deleted.
 
 
 
@@ -2397,6 +2405,30 @@ Manages sections.
 Creates a section.
 
 <h4 id="sections-create-options" class="command-subheading">Options</h4>
+
+
+--name
+: The section name.
+
+
+--handle
+: The section handle.
+
+
+--type
+: The section type (single, channel, or structure).
+
+
+--no-versioning
+: Whether to disable versioning for the section.
+
+
+--uri-format
+: The entry URI format to set for each site.
+
+
+--template
+: The template to load when an entry’s URL is requested.
 
 
 --from-category-group
