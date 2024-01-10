@@ -780,15 +780,17 @@ the [Apple Extended Keyboard II] [1].
 This filter supports two arguments:
 - `flavor` — Choose the “flavor” of Markdown the parser will use. Must be one of:
   - `'original'` (Default)
-  - `'gfm'`(GitHub-Flavored Markdown)
+  - `'gfm'`([GitHub-Flavored Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax))
   - `'gfm-comment'` (GitHub-Flavored Markdown with newlines converted to `<br>`s)
-  - `'extra'` (Markdown Extra)
+  - `'extra'` ([Markdown Extra](https://michelf.ca/projects/php-markdown/extra/))
   - `'pre-escape'` (Same as `'original'` but forces the `encode` argument to `true`)
 - `inlineOnly` — Determines whether to only parse inline elements, omitting any `<p>` tags (defaults to `false`)
 - `encode` — Equivalent to pre-processing the input string with Twig’s [`escape` or `e` filter](https://twig.symfony.com/doc/3.x/filters/escape.html), i.e: `{{ content|e|md }}`. _Only the `original` and `pre-escape` flavors are allowed when encoding is enabled._
 
 ::: danger
-**Do not output user-submitted content with this filter**, unless it is first passed through the [`escape` or `e` filter](https://twig.symfony.com/doc/3.x/filters/escape.html), or the `escape` argument is set to `true`! The resulting markup is “trusted” by the Twig environment (as though it were putput with the `|raw` filter), and can result in [XSS vulnerabilities](https://owasp.org/www-community/attacks/xss/).
+**Do not output user-submitted content with this filter.** The resulting markup is “trusted” by the Twig environment (as though it were output with the `|raw` filter), and can result in [XSS vulnerabilities](https://owasp.org/www-community/attacks/xss/).
+
+To protect your site or app, first pass the text through the [`escape` or `e` filter](https://twig.symfony.com/doc/3.x/filters/escape.html), or set the `escape` argument to `true`.
 :::
 
 ## `merge`
