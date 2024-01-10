@@ -2442,6 +2442,21 @@ user
 
 
 
+<h3 id="users-unlock">
+    <a href="#users-unlock" class="header-anchor">#</a>
+    <code>users/unlock</code>
+</h3>
+
+
+Unlocks a user's account.
+
+<h4 id="users-unlock-parameters" class="command-subheading">Parameters</h4>
+
+user
+:  The ID, username, or email address of the user account.
+
+
+
 ## `utils/ascii-filenames`
 
 
@@ -2495,6 +2510,10 @@ Prunes provisional drafts for elements that have more than one per user.
 Prunes excess element revisions.
 
 <h4 id="utils-prune-revisions-index-options" class="command-subheading">Options</h4>
+
+
+--section
+: The section handle(s) to prune revisions from. Can be set to multiple comma-separated sections.
 
 
 --max-revisions

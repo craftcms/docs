@@ -2589,6 +2589,12 @@
         "desc": "The event that is triggered before handling an exception."
     },
     {
+        "class": "craft\\console\\ErrorHandler",
+        "name": "EVENT_SHUTDOWN",
+        "type": "yii\\base\\Event",
+        "desc": "an event that is triggered when the handler is called by shutdown function via `handleFatalError()`."
+    },
+    {
         "class": "craft\\console\\controllers\\BackupController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -17181,6 +17187,54 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveAssets",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\actions\\NewChild",
         "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
         "type": "craft\\events\\DefineValueEvent",
@@ -17711,13 +17765,13 @@
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -17741,13 +17795,13 @@
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -17771,13 +17825,13 @@
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -17801,13 +17855,13 @@
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -17831,13 +17885,13 @@
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -17861,13 +17915,13 @@
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -17891,13 +17945,13 @@
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -17921,13 +17975,13 @@
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_BEFORE_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_AFTER_PREPARE",
-        "type": "craft\\elements\\db\\Event",
+        "type": "craft\\events\\CancelableEvent",
         "desc": "An event that is triggered at the end of preparing an element query for the query builder."
     },
     {
@@ -19517,8 +19571,8 @@
     {
         "class": "craft\\fields\\Matrix",
         "name": "EVENT_SET_FIELD_BLOCK_TYPES",
-        "type": "craft\\fields\\SectionEvent",
-        "desc": "The event that is triggered before a section is saved."
+        "type": "craft\\events\\BlockTypesEvent",
+        "desc": "The event that is triggered when setting the field’s block types"
     },
     {
         "class": "craft\\fields\\Matrix",
@@ -31195,7 +31249,7 @@
         "class": "craft\\services\\AssetTransforms",
         "name": "EVENT_GENERATE_TRANSFORM",
         "type": "craft\\events\\GenerateTransformEvent",
-        "desc": "The event that is triggered when a transform is being generated for an Asset."
+        "desc": "The event that is triggered when a transform is being generated for an asset."
     },
     {
         "class": "craft\\services\\AssetTransforms",
@@ -31231,13 +31285,13 @@
         "class": "craft\\services\\Assets",
         "name": "EVENT_GET_ASSET_URL",
         "type": "craft\\events\\GetAssetUrlEvent",
-        "desc": "The event that is triggered when a transform is being generated for an Asset."
+        "desc": "The event that is triggered when a transform is being generated for an asset."
     },
     {
         "class": "craft\\services\\Assets",
         "name": "EVENT_GET_ASSET_THUMB_URL",
         "type": "craft\\events\\GetAssetThumbUrlEvent",
-        "desc": "The event that is triggered when a thumbnail is being generated for an Asset."
+        "desc": "The event that is triggered when a thumbnail is being generated for an asset."
     },
     {
         "class": "craft\\services\\Assets",
@@ -32142,25 +32196,25 @@
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_BEFORE_CREATE_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered before a revision is created."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_AFTER_CREATE_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered after a revision is created."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_BEFORE_REVERT_TO_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered before an element is reverted to a revision."
     },
     {
         "class": "craft\\services\\Revisions",
         "name": "EVENT_AFTER_REVERT_TO_REVISION",
-        "type": "craft\\services\\DraftEvent",
+        "type": "craft\\events\\RevisionEvent",
         "desc": "The event that is triggered after an element is reverted to a revision."
     },
     {
@@ -32539,19 +32593,19 @@
         "class": "craft\\services\\Volumes",
         "name": "EVENT_BEFORE_SAVE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered before an Asset volume is saved."
+        "desc": "The event that is triggered before a volume is saved."
     },
     {
         "class": "craft\\services\\Volumes",
         "name": "EVENT_AFTER_SAVE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered after an Asset volume is saved."
+        "desc": "The event that is triggered after a volume is saved."
     },
     {
         "class": "craft\\services\\Volumes",
         "name": "EVENT_BEFORE_DELETE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered before an Asset volume is deleted."
+        "desc": "The event that is triggered before a volume is deleted."
     },
     {
         "class": "craft\\services\\Volumes",
@@ -32563,7 +32617,7 @@
         "class": "craft\\services\\Volumes",
         "name": "EVENT_AFTER_DELETE_VOLUME",
         "type": "craft\\events\\VolumeEvent",
-        "desc": "The event that is triggered after a Asset volume is deleted."
+        "desc": "The event that is triggered after a volume is deleted."
     },
     {
         "class": "craft\\utilities\\AssetIndexes",
@@ -33412,6 +33466,12 @@
         "desc": "The event that is triggered before handling an exception."
     },
     {
+        "class": "craft\\web\\ErrorHandler",
+        "name": "EVENT_SHUTDOWN",
+        "type": "yii\\base\\Event",
+        "desc": "an event that is triggered when the handler is called by shutdown function via `handleFatalError()`."
+    },
+    {
         "class": "craft\\web\\Response",
         "name": "EVENT_BEFORE_SEND",
         "type": "yii\\base\\Event",
@@ -34220,6 +34280,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "yii\\base\\ErrorHandler",
+        "name": "EVENT_SHUTDOWN",
+        "type": "yii\\base\\Event",
+        "desc": "an event that is triggered when the handler is called by shutdown function via `handleFatalError()`."
     },
     {
         "class": "yii\\base\\Model",
