@@ -778,12 +778,22 @@ the [Apple Extended Keyboard II] [1].
 ```
 
 This filter supports two arguments:
-- `flavor` can be `'original'` (default value), `'gfm'`(GitHub-Flavored Markdown), `'gfm-comment'` (GFM with newlines converted to `<br>`s), or `'extra'` (Markdown Extra)
-- `inlineOnly` determines whether to only parse inline elements, omitting any `<p>` tags (defaults to `false`)
+- `flavor` — Choose the “flavor” of Markdown the parser will use. Must be one of:
+  - `'original'` (Default)
+  - `'gfm'`(GitHub-Flavored Markdown)
+  - `'gfm-comment'` (GitHub-Flavored Markdown with newlines converted to `<br>`s)
+  - `'extra'` (Markdown Extra)
+  - `'pre-escape'` (Same as `'original'` but forces the `encode` argument to `true`)
+- `inlineOnly` — Determines whether to only parse inline elements, omitting any `<p>` tags (defaults to `false`)
+- `encode` — Equivalent to pre-processing the input string with Twig’s [`escape` or `e` filter](https://twig.symfony.com/doc/3.x/filters/escape.html), i.e: `{{ content|e|md }}`. _Only the `original` and `pre-escape` flavors are allowed when encoding is enabled._
+
+::: danger
+**Do not output user-submitted content with this filter**, unless it is first passed through the [`escape` or `e` filter](https://twig.symfony.com/doc/3.x/filters/escape.html), or the `escape` argument is set to `true`! The resulting markup is “trusted” by the Twig environment (as though it were putput with the `|raw` filter), and can result in [XSS vulnerabilities](https://owasp.org/www-community/attacks/xss/).
+:::
 
 ## `merge`
 
-Merges an array with another one.
+Merges the passed array with another one.
 
 This has the same behavior as [Twig’s merge filter](https://twig.symfony.com/doc/3.x/filters/merge.html) which uses PHP’s [array_merge()](https://www.php.net/manual/en/function.array-merge.php) under the hood:
 
