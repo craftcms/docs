@@ -24,31 +24,47 @@ For more on coupon code setup and templating, see the [coupon codes](coupon-code
 
 ## Discount Matching Items
 
-Each discount’s **Matching Items** tab provides options for limiting what store items qualify for the discount. By default, all purchasables and categories may qualify for the discount.
+Each discount’s **Matching Items** tab provides options for limiting what store items qualify for the discount. By default, _all purchasables_ qualify for the discount.
 
 ### Purchasables
 
-The **All purchsables** lightswitch is on by default, but you can switch it off to select zero or more **Product Variant** relationships. Be careful with this, because switching off **All purchasables** and not selecting any variants will result in no variants qualifying for the discount!
+You can restrict a discount to specific purchasables by enabling the **Only match certain purchasables…** option, and selecting one or more via the revealed element picker(s). Each registered purchasable type will display its own selection field—but by default, this is only variants.
+
+If this is enabled and no purchasables are selected, the discount will never match.
 
 ::: tip
-Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
+Only variants belonging to _promotable_ products may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
 :::
 
-### Categories
+### Relationships
 
-The **Categories** lightswitch is also on by default, but you can switch it off to select zero or more product categories that should qualify for the discount. Just like the purchasables switch above, you should be sure to designate categories if the **All categories** lightswitch is disabled—otherwise it won’t be possible for any items to match the discount.
+Oftentimes, it makes more sense to make discounts available based on categories or other taxonomies than on specific products.
 
-### Advanced
+Let’s assume your store is organized into departments that are defined by a [category group](/4.x/categories.md) or [entry section](/4.x/entries.md). On each product (or variant), administrators select one or more of those departments via a category or entry custom fields.
 
-You can click the “Advanced” toggle to display a **Categories Relationship Type** field that determines how related purchasables and categories should behave matching items. Options:
-
-- **Either (Default)** – the relationship field is on the purchasable or the category
-- **Source** – the category relationship field is on the purchasable
-- **Target** – the purchasable relationship field is on the category
+In the **Matching Items** tab, enabling **Only match purchasables related to…** will reveal two element selection fields (one for categories and one for entries), as well as an [Advanced](#advanced) drawer, which allows you to specify the [direction](/4.x/relations.md#sources-and-targets) of the relationship. If you enable the relational criteria and don’t select any categories or entries
 
 ::: tip
-This behavior is consistent with all Craft’s relationships; see the [Terminology](/4.x/relations.html#terminology) section on the Relations page.
+The **Categories** field will only be displayed if you have a category group configured; similarly, the **Entries** field will only be displayed if you’ve configured a section.
 :::
+
+#### Advanced
+
+The “Advanced” drawer contains the **Relationship Type** field that determines how related purchasables should behave when matching items.
+
+- **Either way (Default)**: the relational field can be on the purchasable _or_ the category/entry (the purchasable may be the source _or_ target of the relationship);
+- **The purchasable defines the relationship**: the relational field is defined on the _purchasable_, and you select categories or entries from it (the purchasable is the _source_ of the relationship);
+- **The purchasable is related by another element**: the relational field is defined on the category/entry, and you select purchasables from it (the purchasable is the _target_ of the relationship);
+
+::: tip
+This behavior is consistent with all Craft’s relationships; see the [Terminology](/4.x/relations.html#terminology) section on the Relations page for more information on sources and targets.
+:::
+
+To illustrate, suppose the “departments” we mentioned earlier each represent a landing page. Those pages (managed as entries in Craft) are also be used to organize products, through an [entries field](/4.x/entries-field.md) in the product type’s field layout. As products are added and edited, administrators place them in departments by selecting those entries as relations. In this scenario, both the **Either way** and **The purchasable defines the relationship** settings would allow the discount to match a department entry selected in its purchasable-matching rules.
+
+Now, if you were to add a “Featured Products” field to the department landing pages and select a few products, the third **The purchasable is related by another element** relationship type setting would match.
+
+This combination of settings can provide powerful matching criteria all on their own. You can even define back-end-only taxonomies (without content or URLs) for the express purpose of managing pricing rules.
 
 ## Discount Conditions Rules
 

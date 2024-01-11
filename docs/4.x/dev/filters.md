@@ -568,7 +568,7 @@ Coerces the passed value to a float using PHP’s [`floatval()`](https://www.php
 
 ## `group`
 
-Groups items in an array by a the results of an arrow function.
+Groups items in an array by the results of an arrow function.
 
 ```twig
 {% set allEntries = craft.entries().section('blog').all() %}
@@ -778,12 +778,24 @@ the [Apple Extended Keyboard II] [1].
 ```
 
 This filter supports two arguments:
-- `flavor` can be `'original'` (default value), `'gfm'`(GitHub-Flavored Markdown), `'gfm-comment'` (GFM with newlines converted to `<br>`s), or `'extra'` (Markdown Extra)
-- `inlineOnly` determines whether to only parse inline elements, omitting any `<p>` tags (defaults to `false`)
+- `flavor` — Choose the “flavor” of Markdown the parser will use. Must be one of:
+  - `'original'` (Default)
+  - `'gfm'`([GitHub-Flavored Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax))
+  - `'gfm-comment'` (GitHub-Flavored Markdown with newlines converted to `<br>`s)
+  - `'extra'` ([Markdown Extra](https://michelf.ca/projects/php-markdown/extra/))
+  - `'pre-escape'` (Same as `'original'` but forces the `encode` argument to `true`)
+- `inlineOnly` — Determines whether to only parse inline elements, omitting any `<p>` tags (defaults to `false`)
+- `encode` — Equivalent to pre-processing the input string with Twig’s [`escape` or `e` filter](https://twig.symfony.com/doc/3.x/filters/escape.html), i.e: `{{ content|e|md }}`. _Only the `original` and `pre-escape` flavors are allowed when encoding is enabled._
+
+::: danger
+**Do not output user-submitted content with this filter.** The resulting markup is “trusted” by the Twig environment (as though it were output with the `|raw` filter), and can result in [XSS vulnerabilities](https://owasp.org/www-community/attacks/xss/).
+
+To protect your site or app, first pass the text through the [`escape` or `e` filter](https://twig.symfony.com/doc/3.x/filters/escape.html), or set the `escape` argument to `true`.
+:::
 
 ## `merge`
 
-Merges an array with another one.
+Merges the passed array with another one.
 
 This has the same behavior as [Twig’s merge filter](https://twig.symfony.com/doc/3.x/filters/merge.html) which uses PHP’s [array_merge()](https://www.php.net/manual/en/function.array-merge.php) under the hood:
 
@@ -1224,7 +1236,7 @@ When a mapping array is passed, this works identically to Twig’s core [`replac
 }) }}
 ```
 
-Or you can replace one thing at a time:
+To replace one string at a time, pass the string you want to replace as the first argument, and the replacement as the second argument:
 
 ```twig
 {% set str = 'Hello, NAME' %}
@@ -1238,13 +1250,22 @@ You can also use a regular expression to search for matches by starting and endi
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
 ```
 
-Regular expressions can also be used as keys <Since ver="4.5.0" feature="Regular expressions as keys" /> when passing an array:
+When passing an array, its keys can be regular expressions <Since ver="4.5.0" feature="Regular expressions as keys" />:
 
 ```twig
 {{ tag.title|lower|replace({
   '/^the\\s/': '',
   '/[^\\w]+/': '-',
 }) }}
+```
+
+To treat patterns as literal strings (when using positional arguments _or_ a map), pass `false` to the `regex` argument <Since ver="4.5.4" feature="The ability to disable regex evaluation" />:
+
+```twig{4}
+{{ tag.title|lower|replace({
+  '/you/i': 'y’all',
+  '/-_-/': '(^_^)',
+}, regex=false) }}
 ```
 
 ## `rss`

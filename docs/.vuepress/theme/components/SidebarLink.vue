@@ -60,6 +60,12 @@ export default {
 };
 
 function renderLink(h, to, text, active, level) {
+  const hashPosition = to.indexOf('#');
+  const path = to.substring(0, hashPosition > 0 ? hashPosition : to.length);
+  const segments = path.split('/');
+  const lastSegment = segments[segments.length - 1];
+  const handle = lastSegment.replace('.html', '');
+
   const component = {
     props: {
       to,
@@ -69,6 +75,8 @@ function renderLink(h, to, text, active, level) {
     class: {
       active,
       "sidebar-link": true,
+      // Include a “slug” identifier when this isn't a jump link:
+      [`slug-${handle || 'root'}`]: hashPosition < 0,
     },
   };
 

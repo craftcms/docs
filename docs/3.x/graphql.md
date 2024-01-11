@@ -1,5 +1,6 @@
 ---
 keywords: headless
+containsGeneratedContent: yes
 ---
 
 # GraphQL API <badge type="edition" vertical="middle" title="GraphQL is only available in Craft Pro">Pro</badge>
@@ -1220,6 +1221,7 @@ This is the interface implemented by all entries.
 | `isDraft`| `Boolean` | Returns whether this is a draft.
 | `isRevision`| `Boolean` | Returns whether this is a revision.
 | `revisionId`| `Int` | The revision ID (from the `revisions` table).
+| `revisionNotes`| `String` | The revision notes (from the `revisions` table).
 | `draftId`| `Int` | The draft ID (from the `drafts` table).
 | `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
 | `isUnsavedDraft`| `Boolean` | Returns whether this is an unpublished draft. **This field is deprecated.** `isUnpublishedDraft` should be used instead.

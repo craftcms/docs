@@ -76,10 +76,10 @@ Assets are organized into _volumes_, which sit on top of a _filesystem_. Filesys
 
 We’ll create a local Asset Volume within the web root for blog post images:
 
-1. In the control panel, navigate to **Settings** → **Assets**.
-1. Click **+ New volume**.
-1. Enter “Images” in the **Name** field <Poi label="A" target="newVolume" id="volumeName" />.
-1. Click the **Asset Filesystem** menu <Poi label="C" target="newVolume" id="volumeFsMenu" /> and select **Create a new filesystem…**
+1. In the control panel, navigate to **Settings** → **Assets**;
+1. Click **+ New volume**;
+1. Enter “Images” in the **Name** field <Poi label="A" target="newVolume" id="volumeName" />;
+1. Click the **Asset Filesystem** menu <Poi label="C" target="newVolume" id="volumeFsMenu" /> and select **Create a new filesystem…**;
 
     Within the slideout that opens, provide these settings:
 
@@ -116,12 +116,12 @@ The second resource we need to create is a group for our blog’s _categories_.
 <img src="../images/new-category-group.png" alt="Screenshot of new category group fields" />
 </BrowserShot>
 
-1. Navigate to **Settings** and choose **Categories**.
-1. Choose **+ New category group**.
-1. In the **Name** <Poi label="A" target="newCategoryGroup" id="name" /> field, enter “Topics”.
-1. In the **Max Levels** <Poi label="C" target="newCategoryGroup" id="levels" /> field, enter `1`.
-1. Set the **Category URI Format** <Poi label="D" target="newCategoryGroup" id="uri" /> to `blog/topic/{slug}`.
-1. Set the **Template** <Poi label="E" target="newCategoryGroup" id="template" /> to `blog/_topic`.
+1. Navigate to **Settings** and choose **Categories**;
+1. Choose **+ New category group**;
+1. In the **Name** <Poi label="A" target="newCategoryGroup" id="name" /> field, enter “Topics”;
+1. In the **Max Levels** <Poi label="C" target="newCategoryGroup" id="levels" /> field, enter `1`;
+1. Set the **Category URI Format** <Poi label="D" target="newCategoryGroup" id="uri" /> to `blog/topic/{slug}`;
+1. Set the **Template** <Poi label="E" target="newCategoryGroup" id="template" /> to `blog/_topic`;
 1. **Save** <Poi label="F" target="newCategoryGroup" id="save" /> the category group.
 
 ## Custom Fields
@@ -143,7 +143,7 @@ The post summary will be entered in a _plain text_ field.
 
 1. Click **+ New Field**;
 1. Enter “Summary” into the **Name** field;
-1. Enter “Summaries should be one or two sentences.” in the **Default Instructions** field to give authors a hint about the field’s intended usage.
+1. Enter “Summaries should be one or two sentences.” in the **Default Instructions** field to give authors a hint about the field’s intended usage;
 1. Enable **Allow line breaks**;
 1. Set the revealed **Initial Rows** field to `1`;
 1. Save the field.
@@ -173,7 +173,7 @@ Posts’ primary images will be added to an _asset_ field.
 </BrowserShot>
 
 1. Click **+ New Field**;
-1. Enter “Feature Image” into the **Name** <Poi label="A" target="newAssetField" id="name" /> field;
+1. Enter “Feature Image” into the **Name** <Poi label="A" target="newAssetField" id="name" /> field (and note that Craft automatically generates a **Handle** of `featureImage`);
 1. Select **Assets** from the **Field Type** <Poi label="C" target="newAssetField" id="type" /> menu—the rest of the page will be updated with options specific to asset fields;
 1. Tick **Restrict assets to a single location?** <Poi label="D" target="newAssetField" id="restrict" />;
 1. Select the **Images** volume from the revealed **Asset Location** <Poi label="E" target="newAssetField" id="location" /> menu;
@@ -188,7 +188,7 @@ Posts’ primary images will be added to an _asset_ field.
 Our _topics_ field only needs a couple of options:
 
 1. Click **+ New Field**;
-1. Enter “Post Categories” into the **Name** field;
+1. Enter “Post Categories” into the **Name** field (and note that Craft automatically generates a **Handle** of `postCategories`);
 1. Choose “Categories” from the **Field Type** menu—the rest of the page will be updated with options specific to categories fields;
 1. Choose “Topics” from the **Source** menu (it will probably be selected, already);
 1. Save the field.
@@ -220,7 +220,7 @@ Matrix fields are inherently a bit more complex than other field types, because 
 </BrowserShot>
 
 1. Click **+ New Field**;
-1. Enter “Post Content” in the **Name** <Poi label="A" target="newMatrixField" id="name" /> field;
+1. Enter “Post Content” in the **Name** <Poi label="A" target="newMatrixField" id="name" /> field (and note that Craft automatically generates a **Handle** of `postContent`);
 1. Choose “Matrix” from the **Field Type** <Poi label="C" target="newMatrixField" id="type" /> menu—the rest of the page will be updated with options specific to matrix fields;
 1. Within the **Configuration** <Poi label="D" target="newMatrixField" id="config" /> space, use the **+ New block type**  button to create two _block types_:
 

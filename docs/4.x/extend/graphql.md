@@ -380,13 +380,14 @@ Event::on(
 
 ### Modifying Type Fields
 
-Craft’s <craft4:craft\gql\TypeManager> includes a `defineGqlTypeFields` event you can use to add, remove or modify fields on any GraphQL type.
+Attach a handler to <craft4:craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS> to add, remove or modify fields on any GraphQL type.
 
 Below we’re removing IDs throughout the schema in favor of UIDs, and adding an `authorEmail` field to the entry interface:
 
 ```php
-use craft\events\DefineGqlTypeFields;
+use craft\events\DefineGqlTypeFieldsEvent;
 use craft\gql\TypeManager;
+use GraphQL\Type\Definition\Type;
 use yii\base\Event;
 
 Event::on(

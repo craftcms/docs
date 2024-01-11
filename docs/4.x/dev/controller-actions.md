@@ -1,4 +1,5 @@
 ---
+description: Craft has a powerful and secure HTTP API for interacting with accounts, content, and other features from your front-end.
 sidebarDepth: 2
 related:
   - uri: https://craftcms.com/knowledge-base/front-end-user-accounts
@@ -494,11 +495,11 @@ Similarly, if you are outputting user-submitted content anywhere on site, take s
 
 Param | Description
 ----- | -----------
-`authorId` | The ID of the user account that should be set as the entry author. (Defaults to the entry’s current author, or the logged-in user.)
-`canonicalId` | Canonical (non-draft, non-revision) entry ID to update.
+`author` | The ID of the user account that should be set as the entry author. (Defaults to the entry’s current author, or the logged-in user.)
+`canonicalId` | The ID of the entry to save, if updating an existing entry.
 `enabledForSite` | Whether the entry should be enabled for the entry’s `siteId` (`1`/`0`), or an array of site IDs that the entry should be enabled for. (Defaults to the `enabled` param.)
 `enabled` | Whether the entry should be enabled (`1`/`0`). (Defaults to enabled.)
-`entryId` | Fallback if `sourceId` isn’t passed, for backwards compatibility.
+`entryId` | Fallback if `canonicalId` isn’t passed, for backwards compatibility.
 `entryVariable` | The [hashed](./filters.md#hash) name of the variable that should reference the entry, if a validation error occurs. (Defaults to `entry`.)
 `expiryDate` | The expiry date for the entry. (Defaults to the current expiry date, or `null`.)
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
@@ -510,7 +511,7 @@ Param | Description
 `sectionId` | The ID of the section the entry will be created in. (Only for new entries. User must have appropriate permissions.)
 `siteId` | The ID of the site to save the entry in.
 `slug` | The entry slug. (Defaults to the current slug, or an auto-generated slug.)
-`sourceId` | The ID of the entry to save, if updating an existing entry (including drafts and revisions).
+`sourceId` | Fallback if `canonicalId` isn’t passed, for backwards compatibility.
 `title` | The entry title. (Defaults to the current entry title.)
 `typeId` | The entry type ID to save the entry as. (Defaults to the current entry type for existing entries, or the first configured type for new ones.)
 

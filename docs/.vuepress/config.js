@@ -65,8 +65,8 @@ module.exports = {
     },
     feedback: {
       helpful: "Was this page helpful?",
-      thanks: "Thanks for your feedback.",
-      more: "Give More Feedback →"
+      thanks: "Thanks for your feedback!",
+      more: "Report an Issue →"
     }
   },
   markdown: {
@@ -86,7 +86,8 @@ module.exports = {
       md.use(require("./theme/util/replace-anchor-prefixes").replacePrefixes)
         .use(require("./theme/markup"))
         .use(require("markdown-it-deflist"))
-        .use(require("markdown-it-imsize"));
+        .use(require("markdown-it-imsize"))
+        .use(require("markdown-it-include"));
     }
   },
   postcss: {

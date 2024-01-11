@@ -1,5 +1,6 @@
 ---
 keywords: headless
+containsGeneratedContent: yes
 ---
 
 # GraphQL API <badge type="edition" vertical="middle" title="GraphQL is only available in Craft Pro">Pro</badge>
@@ -176,7 +177,7 @@ You can manage your schemas in the control panel at **GraphQL** → **Schemas**.
 
 ### Using the GraphiQL IDE
 
-The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the control panel from **GraphQL** → **Explore**.
+The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the control panel from **GraphQL** → **GraphiQL**.
 
 ![The built-in GraphiQL IDE](./images/graphiql.png)
 
@@ -1459,6 +1460,7 @@ This is the interface implemented by all users.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
+| `photo`| `AssetInterface` | The user’s photo.
 | `friendlyName`| `String` | The user’s first name or username.
 | `fullName`| `String` | The user’s full name.
 | `name`| `String!` | The user’s full name or username.

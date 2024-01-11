@@ -1,19 +1,12 @@
 <template>
-  <div class="edit-link">
-    <span v-if="lastUpdated" class="last-updated">
-      <span class="prefix">{{ lastUpdatedText }}:</span>
-      <span class="time">{{ lastUpdated }}</span>
-    </span>
-    <a
-      :href="editLink"
-      v-if="editLink"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {{ editLinkText }}
-      <OutboundLink />
-    </a>
-  </div>
+  <a
+    :href="editLink"
+    v-if="editLink"
+    target="_blank"
+    rel="noopener noreferrer">
+    Edit this Page
+    <OutboundLink />
+  </a>
 </template>
 
 <script>
@@ -24,20 +17,6 @@ export default {
   name: "PageEdit",
 
   computed: {
-    lastUpdated() {
-      return this.$page.lastUpdated;
-    },
-
-    lastUpdatedText() {
-      if (typeof this.$themeLocaleConfig.lastUpdated === "string") {
-        return this.$themeLocaleConfig.lastUpdated;
-      }
-      if (typeof this.$site.themeConfig.lastUpdated === "string") {
-        return this.$site.themeConfig.lastUpdated;
-      }
-      return "last Updated";
-    },
-
     editLink() {
       const showEditLink = isNil(this.$page.frontmatter.editLink)
         ? this.$site.themeConfig.editLinks
@@ -61,14 +40,6 @@ export default {
       }
       return null;
     },
-
-    editLinkText() {
-      return (
-        this.$themeLocaleConfig.editLinkText ||
-        this.$site.themeConfig.editLinkText ||
-        `edit this page`
-      );
-    }
   },
 
   methods: {
@@ -87,18 +58,3 @@ export default {
   }
 };
 </script>
-
-<style lang="postcss">
-.last-updated {
-  @apply float-right text-sm;
-
-  .prefix {
-    @apply font-medium;
-  }
-
-  .time {
-    @apply font-normal;
-    color: #aaa;
-  }
-}
-</style>

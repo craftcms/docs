@@ -120,7 +120,7 @@ If you were to go back into the control panel and create some more posts, you co
 
 #### Feature Image
 
-Let’s output the image we attached via the “Feature Image” asset field. That field had a handle of `featureImage`, so it will be available on the `entry` variable as `entry.featureImage`, just like the title was:
+Let’s output the image we attached via [the “Feature Image” asset field](../configure/resources.md#feature-image). That field had a handle of `featureImage`, so it will be available on the `entry` variable as `entry.featureImage`, just like the title was:
 
 ```twig{4,15-19}
 {% extends '_layout' %}
@@ -187,7 +187,7 @@ If the lack of styles makes it difficult to evaluate whether you are staying on 
 
 #### Topics
 
-Let’s add some more metadata to the top of our post. Our content model included a category field called **Topics**, which we can access in a really similar way to the feature image!
+Let’s add some more metadata to the top of our post. Our content model included a [category field](../configure/resources.md#categoriestopics) called **Topics**, which we can access in a really similar way to the feature image!
 
 Just below the existing `set` tag, add another one to fetch the attached categories:
 
@@ -195,7 +195,7 @@ Just below the existing `set` tag, add another one to fetch the attached categor
 {% set featureImage = entry.featureImage.one() %}
 
 {# Load attached topics: #}
-{% set topics = entry.topics.all() %}
+{% set topics = entry.postCategories.all() %}
 ```
 
 Because we’re allowing authors to attach multiple topics to a post, we’ve used `.all()` to fetch _all_ of them, instead of just _one_. This is important, because we will treat `topics` (plural) a little bit differently from `featureImage` (singular).
@@ -239,7 +239,7 @@ If you pasted this into `templates/blog/_entry.twig` and the indentation got mes
 
 #### Post Content
 
-Let’s output the post content stored in our Matrix field. This process starts in a familiar way:
+Let’s output the [post content](../configure/resources.md#post-content) stored in our Matrix field. This process starts in a familiar way:
 
 1. Load matrix blocks via the `postContent` field handle and store them in a variable;
 1. Loop over those blocks with a `{% for %}` tag;

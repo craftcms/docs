@@ -103,11 +103,11 @@ public function execute($queue): void
 
 ### Dealing with Failed Jobs
 
-In our first example, exceptions from the mailer can bubble out of our job—but in the second example, we’re to ensuring the job is not halted prematurely.
+In our first example, exceptions from the mailer can bubble out of our job—but in the second example, we catch those errors so the job is not halted prematurely.
 
 This decision is up to you: if the work in a job is nonessential (or will be done again later, like <craft4:craft\queue\jobs\GeneratePendingTransforms>), you can catch and log errors and let the job end nominally; if the work is critical (like synchronizing something to an external API), it may be better to let the exception bubble out of `execute()`.
 
-The queue wraps every job in its own `try` block, and will flag any jobs that generate exceptions as failed. The exception message that caused the failure will be recorded along with the job. Failed jobs can be retried from the control panel or with the `php craft queue/retry [id]` command.
+The queue wraps every job in its own `try` block, and will mark any jobs that throw exceptions as _failed_. The exception message that caused the failure will be recorded along with the job. Failed jobs can be retried from the control panel or with the `php craft queue/retry [id]` command.
 
 #### Retryable Jobs
 

@@ -2,7 +2,7 @@
 
 The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](./deployment.md).
 
-This [quick-start](#quick-start) guide focuses solely on setting up a local Craft development environment.
+This [quick-start](#quick-start) guide focuses solely on setting up a local Craft development environment. If you’re ready to launch, jump to the [hosting](#hosting) or [deployment](#deployment) section.
 
 ::: tip
 If at any point you feel stuck, the [Tutorial](../getting-started-tutorial/README.md) is a comprehensive guide for _anyone_ who wants to get set up with a fast, reliable development environment.
@@ -78,7 +78,7 @@ Done for the day? [`ddev stop`](https://ddev.readthedocs.io/en/stable/users/basi
 
 ### Workflow + Collaboration
 
-We encourage starting with a local development environment (rather than a remote host) as a means of  of a defined workflow—whatever it may be—to the reliability and longevity of a website.
+We believe that starting with a local development environment (rather than directly on a remote server) fosters a workflow that will support the reliability and longevity of your project.
 
 <See path="./deployment.md#workflow" label="Defining a Workflow" />
 

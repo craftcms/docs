@@ -405,7 +405,7 @@ public function actionEdit(?int $id = null, ?Widget $widget = null)
     $widgets = MyPlugin::getInstance()->getWidgets();
 
     // Do we have an incoming Widget ID from the route?
-    if ($widgetId !== null) {
+    if ($id !== null) {
         // Was a Widget model passed back via route params? It should take priority:
         if ($widget === null) {
             // Nope, let’s look it up:
@@ -473,16 +473,16 @@ public function actionSave()
     if (!$widgets->saveWidget($widget)) {
         // Hand the model back to the original route:
         return $this->asModelFailure(
-            $widget,
+            $widget, // Model, passed back under the key, below...
             Craft::t('my-plugin', 'Something went wrong!'), // Flash message
             'widget', // Route param key
         );
     }
 
     return $this->asModelSuccess(
-        $widget,
+        $widget, // Model (included in JSON responses)
         Craft::t('my-plugin', 'Widget saved.'), // Flash message
-        'widget', // Route param key
+        'widget', // Key the model will be under (in JSON responses)
         'my-plugin/widgets/{id}', // Redirect “object template”
     );
 }

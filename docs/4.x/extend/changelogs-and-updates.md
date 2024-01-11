@@ -2,7 +2,11 @@
 
 When you [publish](plugin-store.md) your plugin in the Plugin Store, you will be able to specify a path to your plugin’s changelog within the repository.
 
-If this is set to a valid changelog path, the Plugin Store will re-download your changelog on each release. Those release notes will then be displayed for your plugin on the page at **Utilities** → **Updates**.
+If this is set to a valid changelog path, the Plugin Store will re-download your changelog on each release. Those release notes will then be displayed on its Plugin Store page, as well as the **Utilities** → **Updates** screen of any project it is installed in.
+
+::: tip
+Refer to [Craft’s own changelog](https://github.com/craftcms/cms/blob/develop/CHANGELOG.md) as an example of syntax and best practices.
+:::
 
 ## Setting Up a Changelog
 
@@ -39,22 +43,22 @@ All content that follows a version heading (up to the next H2) will be treated a
 
 When writing release notes, we recommend that you follow the guidelines at [keepachangelog.com](https://keepachangelog.com/), but all forms of [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) are allowed. The only thing that is *not* allowed is actual HTML code, which will be escaped.
 
-### Notes, Warnings, and Tips
+### Alerts
 
-You can include important notes, warnings, and tips in your release notes using this syntax:
+You can include notes and warnings in your release notes using [GitHub’s alert syntax](https://github.com/orgs/community/discussions/16925):
 
 ```markdown
-> **Note**
-> An important note.
+> [!NOTE]  
+> Highlights information that users should take into account, even when skimming.
 
-> **Warning**
-> A word of warning.
+> [!IMPORTANT]  
+> Crucial information necessary for users to succeed.
 
-> **Tip**
-> A helpful tip.
+> [!WARNING]  
+> Critical content demanding immediate user attention due to potential risks.
 ```
 
-These notes will each be styled appropriately within the plugin’s changelog in the Plugin Store and within the Updates utility. The Updates utility will also auto-expand any updates that contain a note.
+These alerts will each be styled appropriately within the plugin’s changelog in the Plugin Store and within the Updates utility. Updates which contain alerts will automatically be expanded in the Updates utility.
 
 ### Links
 
