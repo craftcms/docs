@@ -31,7 +31,7 @@ Learn about the foundation of the Craft platform.
     <LinkPanel
         title="Craft Cloud"
         subtitle="Our scalable hosting platform."
-        link="https://craft.cloud"
+        link="https://craftcms.com/cloud"
         icon="/docs/icons/icon-cloud.svg"
         currentVersion="Beta" />
 </div>
