@@ -28,6 +28,12 @@ Learn about the foundation of the Craft platform.
         link="/commerce/4.x/"
         icon="/docs/icons/commerce.svg"
         currentVersion="4.x" />
+    <LinkPanel
+        title="Craft Cloud"
+        subtitle="Our scalable hosting platform."
+        link="https://craft.cloud"
+        icon="/docs/icons/icon-cloud.svg"
+        currentVersion="Beta" />
 </div>
 
 #### Plugins + Tools
