@@ -140,14 +140,19 @@ The [logging system](./logging.md) in Craft 4 has undergone some significant cha
         ],
     ],
     ```
-- Query logging and query profiling are no longer enabled by default when `devMode` is on. These can be manually adjusted by setting <yii2:yii\db\Connection::$enableLogging> and <yii2:yii\db\Connection::$enableProfiling> from `config/app.php`:
+- Query logging and query profiling are no longer enabled by default, except when Dev Mode is on. These can be manually adjusted by setting <yii2:yii\db\Connection::$enableLogging> and <yii2:yii\db\Connection::$enableProfiling> from `config/app.php`:
   ```php
   return [
     'components' => [
-      'db' => [
-        'enableLogging' => true,
-        'enableProfiling' => true,
-      ],
+      'db' => function() {
+        $config = craft\helpers\App::dbConfig();
+
+        // Always enable DB logging and profiling
+        $config['enableLogging'] => true;
+        $config['enableProfiling'] => true;
+
+        return Craft::createObject($config);
+      },
     ],
   ];
   ```
