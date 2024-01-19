@@ -5,6 +5,7 @@ module.exports = {
   icon: "/docs/icons/craft.svg",
   baseDir: "",
   versions: [
+    ["5.x", { label: "5.x", stabilityFlag: 'beta' }],
     ["4.x", { label: "4.x" }],
     ["3.x", { label: "3.x" }],
     ["2.x", { label: "2.x", isEol: true }]
@@ -14,6 +15,144 @@ module.exports = {
   searchPlaceholder: "Search the Craft docs (Press “/” to focus)",
   primarySet: true,
   sidebar: {
+    "5.x": {
+      // Sections here are greedily-matched, so the more specific ones must come first:
+      "/reference/": [
+        {
+          title: "Reference",
+          collapsable: false,
+          children: [
+            ["", "Index"],
+          ],
+        },
+        {
+          title: "Twig",
+          collapsable: false,
+          children: [
+            "twig/filters",
+            "twig/functions",
+            "twig/global-variables",
+            "twig/tags",
+            "twig/tests"
+          ],
+        },
+        {
+          title: "Configuration",
+          collapsable: false,
+          children: [
+            "config/general",
+            "config/db",
+            "config/app",
+            "config/bootstrap",
+          ],
+        },
+        {
+          title: "CLI",
+          collapsable: false,
+          children: [
+            "cli",
+          ],
+        },
+        {
+          title: "Element Types",
+          collapsable: true,
+          children: [
+            "element-types/addresses",
+            "element-types/assets",
+            "element-types/categories",
+            "element-types/entries",
+            "element-types/globals",
+            "element-types/tags",
+            "element-types/users",
+          ],
+        },
+        {
+          title: "Field Types",
+          collapsable: true,
+          children: [
+            "field-types/addresses",
+            "field-types/assets",
+            "field-types/categories",
+            "field-types/checkboxes",
+            "field-types/color",
+            "field-types/country",
+            "field-types/date-time",
+            "field-types/dropdown",
+            "field-types/email",
+            "field-types/entries",
+            "field-types/lightswitch",
+            "field-types/matrix",
+            "field-types/money",
+            "field-types/multi-select",
+            "field-types/number",
+            "field-types/plain-text",
+            "field-types/radio-buttons",
+            "field-types/table",
+            "field-types/tags",
+            "field-types/time",
+            "field-types/url",
+            "field-types/users",
+          ],
+        },
+      ],
+      "/": [
+        {
+          title: "Welcome to Craft",
+          collapsable: false,
+          children: ["", "coc"]
+        },
+        {
+          title: "Getting Started",
+          collapsable: false,
+          children: [
+            // All top-level pages:
+            "requirements",
+            "install",
+            "update",
+            "deploy",
+            "upgrade",
+            "configure",
+          ]
+        },
+        {
+          title: "System",
+          collapsable: false,
+          children: [
+            "system/directory-structure",
+            "system/control-panel",
+            "system/user-management",
+            "system/elements",
+            "system/fields",
+            "system/relations",
+            "system/sites",
+            "system/searching",
+            "system/project-config",
+            "system/plugins",
+            "system/cli",
+            "system/routing", // Development?
+          ],
+          toggleChildren: [
+            "system/reference-tags",
+            "system/logging",
+            "system/queue",
+            "system/mail",
+            "system/gc"
+          ]
+        },
+        {
+          title: "Front-End Development",
+          collapsable: false,
+          children: [
+            "development/templates",
+            "development/element-queries",
+            "development/image-transforms",
+            "development/eager-loading",
+            "development/forms",
+            "development/graphql",
+          ]
+        },
+      ],
+    },
     "4.x": {
       "/extend/": [
         {
@@ -612,6 +751,56 @@ module.exports = {
     }
   },
   sidebarExtra: {
+    "5.x": {
+      "/reference/": [
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/api/v5/"
+        },
+        {
+          title: "Back to Craft Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/5.x/"
+        },
+      ],
+      "/extend/": [
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/api/v5/",
+        },
+        {
+          title: "Back to Craft Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/5.x/",
+        },
+      ],
+      "/testing/": [
+        {
+          title: "Back to Craft Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/5.x/",
+        },
+      ],
+      "/": [
+        {
+          title: "Reference",
+          icon: "/docs/icons/icon-book.svg",
+          link: "/5.x/reference/",
+        },
+        {
+          title: "Extending Craft",
+          icon: "/docs/icons/icon-book.svg",
+          link: "/5.x/extend/"
+        },
+        {
+          title: "Testing Craft",
+          icon: "/docs/icons/icon-flask.svg",
+          link: "/5.x/testing/",
+        },
+      ],
+    },
     "4.x": {
       "/extend/": [
         {

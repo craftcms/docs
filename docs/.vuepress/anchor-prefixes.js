@@ -24,5 +24,6 @@ module.exports = {
   'config2': { base: '/2.x/config-settings.md#', format: 'config' },
   'kb': { base: 'https://craftcms.com/knowledge-base/', format: 'generic' },
   'repo': { base: 'https://github.com/', format: 'generic' },
-  'plugin': { base: 'https://plugins.craftcms.com/', format: 'generic', }
+  'plugin': { base: 'https://plugins.craftcms.com/', format: 'generic', },
+  '@': { base: '/', format: 'set-local' },
 };

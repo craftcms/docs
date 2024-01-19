@@ -42,9 +42,9 @@
 
       <div v-if="relatedItems.length" class="see-also p-4 border-t">
         <h4 class="font-bold mb-4">See Also</h4>
-        <ul class="list-disc pl-5">
+        <ul class="see-also-items">
           {{ /* For raw HTML items, just output the content; URIs that appear to be external resources use an explicit label; Internal URIs will include the label of the referenced page: */ }}
-          <li v-for="(item, index) in relatedItems" :key="index">
+          <li class="see-also-item" v-for="(item, index) in relatedItems" :key="index">
             <div v-if="item.html" v-html="item.html">{{ /* This content may have multiple links within it! */ }}</div>
             <a
               v-else-if="item.external"
@@ -69,7 +69,7 @@
   }
 
   .paging-arrow {
-    color: #718096;
+    color: theme("colors.light-slate");
   }
 }
 
@@ -80,6 +80,24 @@
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+.see-also-items {}
+
+.see-also-item {
+  padding-left: 1em;
+  position: relative;
+
+  &::before {
+    background: theme("colors.light-slate");
+    content: '';
+    display: block;
+    height: 1px;
+    left: 0;
+    position: absolute;
+    top: 0.65em;
+    width: 0.5em;
   }
 }
 </style>

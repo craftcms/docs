@@ -28,7 +28,8 @@ module.exports = {
           }\n`,
         after: () => "</details>\n"
       }
-    ]
+    ],
+    [require("./plugins/craft.js")],
   ],
   shouldPrefetch: () => false,
   head: require("./head"),
@@ -83,7 +84,7 @@ module.exports = {
       // provide our own highlight.js to customize Prism setup
       md.options.highlight = require("./theme/highlight");
       // add markdown extensions
-      md.use(require("./theme/util/replace-anchor-prefixes").replacePrefixes)
+      md
         .use(require("./theme/markup"))
         .use(require("markdown-it-deflist"))
         .use(require("markdown-it-imsize"))

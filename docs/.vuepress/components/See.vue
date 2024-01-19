@@ -39,7 +39,7 @@ export default {
 
 <style lang="postcss" scoped>
     .link {
-        @apply relative rounded border block no-underline w-full p-4 pl-12 text-current;
+        @apply relative rounded border block no-underline w-full my-4 p-4 pl-12 text-current;
 
         border: 1px solid var(--border-color);
 
@@ -53,15 +53,21 @@ export default {
     }
 
     .arrow {
-        @apply absolute top-0 left-0 mt-4 ml-4 text-gray-500;
+        @apply absolute text-gray-500;
+        left: 1.15em;
+        top: 1.15em;
     }
 
     .link:hover .arrow {
-        @apply text-white;
+        color: var(--text-color);
     }
 
     .title {
         @apply text-lg font-medium text-blue;
+    }
+
+    .link:hover .title {
+        color: var(--heading-color);
     }
 
     .description {
