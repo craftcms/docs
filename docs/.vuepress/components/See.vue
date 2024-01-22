@@ -53,9 +53,7 @@ export default {
     }
 
     .arrow {
-        @apply absolute text-gray-500;
-        left: 1.15em;
-        top: 1.15em;
+        @apply absolute text-gray-500 top-0 left-0 mt-4 ml-4;
     }
 
     .link:hover .arrow {
