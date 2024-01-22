@@ -4,24 +4,24 @@ An _element_ is the most basic unit of content in Craft. Elements provide smart 
 
 ## Element Types
 
-In the control panel, you’ll encounter the eight _element types_ common to all Craft installations:
+In the control panel, you’ll encounter the seven _element types_ common to all Craft installations:
 
-- [**Assets**](../reference/element-types/assets.md) store files that are uploaded to a volume.
-- [**Categories**](../reference/element-types/categories.md) are taxonomies that resemble folder structures and can be nested.
-- [**Entries**](../reference/element-types/entries.md) are records that can have drafts, revisions, and live previews. They can exist as one-offs called _singles_, as _channels_ ordered by one or more attributes, or as hierarchical _structures_.
-- [**Global Sets**](../reference/element-types/globals.md) are floating bits of content that aren’t tied to any particular page, but you may want to access anywhere.
-- [**Tags**](../reference/element-types/tags.md) are flat taxonomies optimized for quick input and re-use.
-- [**Users**](../reference/element-types/users.md) are accounts for human beings with email addresses and permissions, organized into customizable groups.
-- [**Addresses**](../reference/element-types/addresses.md) are physical addresses that can be attached to users.
+- [**Addresses**](../reference/element-types/addresses.md) — Attach physical locations to other elements.
+- [**Assets**](../reference/element-types/assets.md) — Upload files and store rich metadata.
+- [**Categories**](../reference/element-types/categories.md) — Design nestable taxonomies.
+- [**Entries**](../reference/element-types/entries.md) — Model anything with flexible and nestable content containers.
+- [**Global Sets**](../reference/element-types/globals.md) — Manage universally-accessible data.
+- [**Tags**](../reference/element-types/tags.md) — Grow a _folksonomy_ alongside your content.
+- [**Users**](../reference/element-types/users.md) — Represent people with powerful identity and access tools.
 
-Choosing the appropriate element type for your content model is essential—but don’t be afraid to mix, match, and combine them. Plugins (and custom modules) can provide [custom element types](./extend/element-types.md), giving developers and authors a familiar experience across all their content.
+Choosing the appropriate element type for your content model is essential—but don’t be afraid to mix, match, and combine them. Plugins (and custom modules) can provide [custom element types](../extend/element-types.md), giving developers and authors a consistent experience across all their content.
 
 ## Common Features
 
-Some features are available to most or all elements:
+Some features are available to all or most element types:
 
 - Control panel interfaces, including forms, [indexes](#indexes), and [slide-outs](./control-panel.md#slideouts);
-- [Custom fields](./fields.md) and field layouts;
+- [Custom fields](./fields.md) and field layouts with advanced condition rules;
 - URLs and [routing](./routing.md);
 - Localization via [sites](./sites.md);
 - Sophisticated [permissions](./user-management.md#permissions);
@@ -29,7 +29,7 @@ Some features are available to most or all elements:
 - Bi-directional [relationships](./relations.md);
 - Automatic indexing for [search](./searching.md);
 
-Other features are specific to a type—like Assets’ tie to files, or Entries’ drafts and revisions system.
+Other features are specific to a type—like Assets’ tie to files, or Entries’ nesting capability.
 
 ## Indexes
 

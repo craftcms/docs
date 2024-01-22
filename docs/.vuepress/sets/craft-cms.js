@@ -786,7 +786,7 @@ module.exports = {
       "/": [
         {
           title: "Reference",
-          icon: "/docs/icons/icon-book.svg",
+          icon: "/docs/icons/icon-tutorial.svg",
           link: "/5.x/reference/",
         },
         {

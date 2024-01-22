@@ -8,15 +8,15 @@ The smoothest way to upgrade to Craft 5 is to start with a [fully-updated Craft 
 
 ## Preparing for the Upgrade
 
-Let’s take a moment to audit the current state of your site, and make sure:
+Let’s take a moment to audit and prepare your project.
 
-- your **live site** is running the [latest version](repo:craftcms/cms/releases) of Craft 4'
-- you have the most recent Craft 4-compatible version of all plugins installed, and you’ve verified that Craft 5-compatible versions are available;
-- there are no [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-5#fix-deprecation-warnings) to be fixed;
-- all your environments meet Craft 5’s [minimum requirements](requirements.md);
-- you’ve reviewed the changes in Craft 5 further down this page and understand what work may lie ahead, post-upgrade;
+- Your **live site** must be running the [latest version](repo:craftcms/cms/releases) of Craft 4;
+- The most recent Craft 4-compatible versions of all plugins are installed, and Craft 5-compatible versions are available;
+- Your project is free of [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-5#fix-deprecation-warnings) after thorough testing on the latest version of Craft 4;
+- All your environments meet Craft 5’s [minimum requirements](requirements.md) (the latest version of Craft 4 supports all the same );
+- You’ve reviewed the breaking changes in Craft 5 further down this page and understand that additional work and testing may lie ahead, post-upgrade;
 
-Once you’ve completed everything above, you’re ready to start the upgrade process.
+Once you’ve completed everything above, you’re ready to start the upgrade process!
 
 ::: tip
 If your project uses custom plugins or modules, we have an additional [extension upgrade guide](extend/updating-plugins.md).
@@ -53,8 +53,9 @@ ddev start
 1. Run `composer update`.
 1. Make any required changes to your [configuration](#configuration).
 1. Run `php craft migrate/all`.
+1. Review the [platform-specific](#optional-conditional-steps) steps, below.
 
-Your site is now running Craft 4! If you began this process with no deprecation warnings, you’re nearly done.
+Your site is now running Craft 5! If you began this process with no deprecation warnings, you’re nearly done.
 
 ::: warning
 Thoroughly review the list of changes on this page, making note of any features you use in templates or modules. Only a fraction of your site’s code is actually evaluated during an upgrade, so it’s your responsibility to check templates and modules for consistency. You may also need to follow any plugin-specific upgrade guides, like [Upgrading to Commerce 4](/commerce/4.x/upgrading.md).
@@ -62,9 +63,9 @@ Thoroughly review the list of changes on this page, making note of any features 
 
 Once you’ve verified everything’s in order, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory (along with any template, configuration, or module files that required updates) and deploy those changes normally in each additional environment.
 
-### Optional Steps
+### Platform-Specific Steps
 
-These steps aren’t _required_ to use Craft 4, but it’s the perfect time to do some housekeeping.
+Additional steps may be required for projects that use specific technologies.
 
 #### MySQL Character Sets
 
@@ -90,7 +91,11 @@ This setting only affects rendering of templates in the front-end; the control p
 
 #### Volumes & Filesystems
 
-Multiple asset volumes can now share a filesystem.
+Multiple [asset volumes](reference/element-types/assets.md) can now share a filesystem! However, they must be carefully arranged such that each volume has a unique and non-overlapping base path.
+
+::: warning
+When selecting a filesystem, options that would result in a collision between two volumes are not shown. This means that you may need to adjust multiple volumes’ configuration in order to consolidate them into a single filesystem.
+:::
 
 ### Templates
 
