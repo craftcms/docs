@@ -24,7 +24,7 @@ If your project uses custom plugins or modules, we have an additional [extension
 
 ## Performing the Upgrade
 
-Like [any other update](update.md), it’s essential that you have a safe place to test the upgrade prior to rolling it out.
+Like [any other update](update.md), it’s essential that you have a safe place to test the upgrade prior to rolling it out to a live website.
 
 These steps assume you have a local development environment that meets Craft 5’s [requirements](requirements.md), and that any changes made [in preparation for the upgrade](#preparing-for-the-upgrade) have been deployed to your live site.
 
