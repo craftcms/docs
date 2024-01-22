@@ -51,7 +51,7 @@ Advanced configuration of the queue (including alternate [drivers](repo:yiisoft/
 
 ### HTTP
 
-At the end of every site request, Craft checks whether the queue contains waiting jobs. If it does, a JavaScript snippet is injected into the page, triggering a second request from the client that kicks off a non-blocking background process. This is skipped for [Ajax requests](dev/controller-actions.md#ajax), and responses that produced something other than HTML.
+At the end of every site request, Craft checks whether the queue contains waiting jobs. If it does, a JavaScript snippet is injected into the page, triggering a second request from the client that kicks off a non-blocking background process. This is skipped for [Ajax requests](../reference/controllers/controller-actions.md#ajax), and responses that produced something other than HTML.
 
 ::: tip
 This behavior is enabled by default, but can be turned off by setting <config4:runQueueAutomatically> to `false`. If you elect to disable the automatic queue runner, you must configure an alternative.

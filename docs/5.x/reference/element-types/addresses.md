@@ -2,7 +2,7 @@
 related:
   - uri: /commerce/4.x/addresses.md
     label: Using addresses in Craft Commerce
-  - uri: /4.x/dev/controller-actions.md
+  - uri: ../controllers/controller-actions.md # Temporary!
     label: Controller actions reference
 containsGeneratedContent: yes
 ---

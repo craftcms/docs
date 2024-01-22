@@ -39,7 +39,7 @@ To create a new category group, go to **Settings** → **Categories** and click 
 
 Each category group has its own _field layout_, which allows you to customize the data that’s associated with each category in the group. By default, every category will have a **Title** field (the category name). Any available field type can be added to a category group’s field layout.
 
-<See path="./fields" />
+<See path="../../system/fields.md" />
 
 ## Creating and Editing Categories
 
@@ -95,7 +95,7 @@ $myCategoryQuery = \craft\elements\Category::find();
 
 Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Category](craft4:craft\elements\Category) objects will be returned.
 
-<See path="./element-queries" description="Learn more about element queries." />
+<See path="../../development/element-queries" description="Learn more about element queries." />
 
 ### Example
 
@@ -153,7 +153,7 @@ For example, if we were building a blog with dedicated “Topic” (category) pa
   .all() %}
 ```
 
-<See path="./relations" description="Read about querying with relational fields." />
+<See path="../../system/relations.md" description="Read about querying with relational fields." />
 
 ### Parameters
 

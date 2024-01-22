@@ -226,7 +226,7 @@ Matrix blocks can be loaded with their owners using the special [`.with()` query
 ### Saving Matrix Fields
 
 ::: warning
-Working with Matrix blocks is significantly more complex than other field types. The `form` examples that follow assume some familiarity with [how Craft routes and handles requests](./dev/controller-actions.md), as well as a willingness to adapt and extend the provided HTML to suit your needs.
+Working with Matrix blocks is significantly more complex than other field types. The `form` examples that follow assume some familiarity with [how Craft routes and handles requests](../controllers/controller-actions.md), as well as a willingness to adapt and extend the provided HTML to suit your needs.
 :::
 
 If you have an element form (such as an [entry form](kb:entry-form)) that needs to contain a Matrix field, you will need to submit your Matrix field’s data in a specific structure. We’re using JSON for the sake of its simple syntax, but the following examples will show you how to build a similarly-structured request with normal form elements:
@@ -362,7 +362,7 @@ However: as long as the data you ultimately POST to Craft conforms to the schema
 
 #### Validation Errors
 
-Should you encounter [validation](./dev/controller-actions.md#models-and-validation) issues within a Matrix field, Craft will set a [flash](./dev/controller-actions.md#flashes) and add errors to the main element (under the Matrix field’s handle)—as well as on each block with problems.
+Should you encounter [validation](../controllers/controller-actions.md#models-and-validation) issues within a Matrix field, Craft will set a [flash](../controllers/controller-actions.md#flashes) and add errors to the main element (under the Matrix field’s handle)—as well as on each block with problems.
 
 In these cases, it’s important to handle the Matrix block data appropriately—the blocks will be available directly on the main element as an array, and do not need to be fetched. In fact, trying to re-load the blocks from the database would mean you are working with the last-persisted state, rather than the blocks populated from the most recent request!
 
