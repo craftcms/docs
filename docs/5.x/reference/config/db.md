@@ -1,6 +1,7 @@
 ---
 containsGeneratedContent: yes
 sidebarLevel: 3
+description: Craft supports a wide array of connection settings for MySQL and Postgres databases.
 related:
   - uri: ../../configure.md
     label: Configuring Craft
