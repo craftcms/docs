@@ -3011,6 +3011,17 @@ Ensures all elements UIDs are unique.
 
 Fixes any duplicate UUIDs found within field layout components in the project config.
 
+## `utils/prune-orphaned-matrix-blocks`
+
+
+<h3 id="utils-prune-orphaned-matrix-blocks-index">
+    <a href="#utils-prune-orphaned-matrix-blocks-index" class="header-anchor">#</a>
+    <code>utils/prune-orphaned-matrix-blocks</code>
+</h3>
+
+
+Prunes orphaned matrix blocks for each site.
+
 ## `utils/prune-provisional-drafts`
 
 
