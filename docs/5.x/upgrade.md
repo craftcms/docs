@@ -44,6 +44,7 @@ ddev start
 1. Make sure you don’t have any pending or active jobs in your queue.
 1. Run `php craft project-config/rebuild` and allow any new background tasks to complete.
 1. Capture a database backup of your _local_ environment, just in case things go sideways.
+1. Note your current **Temp Uploads Location** setting in **Settings** &rarr; **Assets** &rarr; **Settings**.
 1. Edit your project’s `composer.json` to require `"craftcms/cms": "^5.0.0"` and Craft-5-compatible plugins, all at once.
     ::: tip
     You’ll need to manually edit each plugin version in `composer.json`. If any plugins are still in beta, you may need to change your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings.
@@ -138,6 +139,27 @@ During the upgrade, Craft will automatically migrate all your Matrix field conte
 #### Consolidating Fields
 
 <Todo notes="This hasn't been implemented yet—but likely a console command?" />
+## Assets
+
+### Reusable Filesystems
+
+<Todo notes="Describe filesystem reuse policies, link to assets reference" />
+
+### Temporary Filesystem
+
+The new <config5:tempAssetUploadFs> general config setting has replaced the **Temp Uploads Location** setting in the **Settings** &rarr; **Assets** &rarr; **Settings** screen. If you noted a custom asset volume in the upgrade process, you will need to follow these steps to set up a distinct filesystem for temporary uploads. Otherwise, Craft will use the legacy behavior and fall back on an instance of <craft5:craft\fs\Temp>, which puts temporary uploads in a folder in your local [`storage/` directory](system/directory-structure.md).
+
+::: tip
+Load-balanced or ephemeral environments that rely on a centralized storage solution should define a temporary upload filesystem using the steps below.
+:::
+
+The location of temporary uploads is now defined by way of a _filesystem_ instead of a _volume_:
+
+1. Create a new filesystem by visiting **Settings** &rarr; **Filesystems**, giving it an appropriate **Name** and **Handle** (users will not see this, so something like “Temporary” or “Scratch” is fine).
+1. Set the **Base Path** to agree with the old volume, keeping in mind that previously, its subpath and its filesystem’s base path were combined.
+1. Add the handle you chose to your [general config](reference/config/general.md#tempassetuploadfs) file or define a `CRAFT_TEMP_ASSET_UPLOAD_FS` [environment override](configure.md#environment-overrides).
+
+A filesystem designated by your `tempAssetUploadFs` setting cannot be reused for volumes or image transforms, so it will not appear in filesystem selection menus. If you elect to define the temporary uploads filesystem handle via an _environment variable_, be sure and add it to your other environments as well!
 
 ## Plugins and Modules
 
