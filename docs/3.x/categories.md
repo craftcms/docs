@@ -125,3 +125,6 @@ To maintain the exact order you see in the control panel, add `orderBy('lft ASC'
 ### Parameters
 
 Category queries support the following parameters:
+
+<!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
+!!!include(docs/.artifacts/cms/3.x/categories.md)!!!
