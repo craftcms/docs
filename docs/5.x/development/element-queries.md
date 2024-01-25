@@ -1,19 +1,19 @@
 # Element Queries
 
-You can fetch [elements](../system/elements.md) (entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
+You can fetch [elements](../system/elements.md) (like entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
 
-Suppose you’ve already created a [section](../reference/element-types/entries.md#sections) for news posts and configured a URL scheme. Craft will automatically load the corresponding element when its URL is requested, and pass it to the template under an `entry` variable. This is convenient, but it’s rare that a page only refers to a single piece of content—what if we want to show a list of other recent posts, in a sidebar? Element queries are Craft’s way of loading elements anywhere you need them.
+Suppose you’ve already created a [section](../reference/element-types/entries.md#sections) for news posts and configured a URL scheme. Craft automatically loads the corresponding entry element when its URL is requested, and exposes it to the template under an `entry` variable. This is convenient—but it’s rare that a page only refers to a _single_ piece of content! What if we want to show a list of other recent posts, in a sidebar? Element queries are Craft’s way of loading elements anywhere you need them.
 
-Element queries can be hyper-specific (like loading a [global set](../reference/element-types/globals.md) by its handle) or relaxed (like a list of recently-updated [entries](../reference/element-types/entries.md)).
+Element queries can be hyper-specific (like loading a single [global set](../reference/element-types/globals.md) by its handle) or relaxed (like a list of recently-updated [entries](../reference/element-types/entries.md)).
 
 Working with element queries consists of three steps:
 
 1. **Create the element query.** Calling the “factory function” corresponding to the [element type](#element-types) you want to fetch. For entries, this is `craft.entries()`; for categories, `craft.categories()`.
-2. **Set some parameters.** By default, element queries will be configured to return all elements of the specified type. You can narrow that down to just the elements you care about by setting _parameters_ on the query.
+2. **Set some parameters.** By default, element queries will be configured to return _all_ elements of a given type. You can narrow that down to just the elements you care about by setting [parameters](#types-parameters) on the query.
 3. **Execute the query.** Use a [query execution method](#executing-element-queries) to run the query and return results.
 
 ::: tip
-[Relational fields](./relations.md) also return element queries, which you can treat the same as step #1, above.
+[Relational fields](../system/relations.md) also return element queries (except when [eager-loaded](./eager-loading.md)), which you can treat the same as the result of step #1, above.
 :::
 
 Here’s what this process looks like, in practice:
@@ -21,52 +21,76 @@ Here’s what this process looks like, in practice:
 ::: code
 ```twig
 {# Create an entry query and set some parameters on it #}
-{% set entryQuery = craft.entries()
+{% set postsQuery = craft.entries()
   .section('news')
   .orderBy('postDate DESC')
   .limit(10) %}
 
 {# Execute the query and get the results #}
-{% set entries = entryQuery.all() %}
+{% set posts = postsQuery.all() %}
 ```
 ```php
 use craft\elements\Entry;
 
 // Create an entry query and set some parameters on it
-$entryQuery = Entry::find()
+$postsQuery = Entry::find()
     ->section('news')
     ->orderBy('postDate DESC')
     ->limit(10);
 
 // Execute the query and get the results
-$entries = $entryQuery->all();
+$posts = $postsQuery->all();
+```
+:::
+
+You can eliminate the intermediate variable and flatten this into a single statement by chaining the [execution method](#executing-element-queries) on the end:
+
+::: code
+```twig
+{% set posts = craft.entries()
+  .section('news')
+  .orderBy('postDate DESC')
+  .limit(10)
+  .all() %}
+```
+```php
+use craft\elements\Entry;
+
+$posts = Entry::find()
+    ->section('news')
+    ->orderBy('postDate DESC')
+    ->limit(10)
+    ->all();
 ```
 :::
 
 ## Types + Parameters
 
-Each type of element has its own function for creating element queries, and they each have their own parameters you can set.
+Each type of element has its own function for creating element queries, and they each have their own parameters you can set. All element types expose parameters for their [custom fields](#querying-with-custom-fields).
 
 ### Element Types
 
-See the query reference section of each element type for more details on working with them:
+See the query reference section of each [element type](../system/elements.md) for more details on working with them:
 
-[Asset Queries](../reference/element-types/assets.md#querying-assets)
+[Address Queries](../reference/element-types/addresses.md#querying-addresses) &rarr;
+:     {% set addressQuery = craft.addresses() %}
+
+[Asset Queries](../reference/element-types/assets.md#querying-assets) &rarr;
 :     {% set assetQuery = craft.assets() %}
 
-[Category Queries](../reference/element-types/categories.md#querying-categories)
+[Category Queries](../reference/element-types/categories.md#querying-categories) &rarr;
 :     {% set categoryQuery = craft.categories() %}
 
-[Entry Queries](../reference/element-types/entries.md#querying-entries)
+[Entry Queries](../reference/element-types/entries.md#querying-entries) &rarr;
 :     {% set entryQuery = craft.entries() %}
 
-[Global Set Queries](../reference/element-types/globals.md#querying-globals)
+[Global Set Queries](../reference/element-types/globals.md#querying-globals) &rarr;
 :     {% set globalQuery = craft.globals() %}
 
-[Tag Queries](../reference/element-types/tags.md#querying-tags)
+[Tag Queries](../reference/element-types/tags.md#querying-tags) &rarr;
 :     {% set tagQuery = craft.tags() %}
 
-[User Queries](../reference/element-types/users.md#querying-users)
+[User Queries](../reference/element-types/users.md#querying-users) &rarr;
 :     {% set userQuery = craft.users() %}
 
 ### Parameters
@@ -86,23 +110,23 @@ Parameters are set using methods after creating an element query, or by passing 
 
 {# ...or if you’re fancy, set some parameters conditionally: #}
 
-{% set imagesQuery = craft.assets() %}
+{% set assetsQuery = craft.assets() %}
 
 {% if craft.app.request.getParam('onlyImages') %}
   {# Effectively the same as chaining query methods: #}
-  {% do imagesQuery.kind('image') %}
+  {% do assetsQuery.kind('image') %}
 {% endif %}
 
-{% set images = imagesQuery.all() %}
+{% set images = assetsQuery.all() %}
 ```
 
 ::: tip
 Query methods (except for those that [execute](#executing-element-queries) a query) modify some internal properties and return the query itself, allowing you to chained more methods together—just like Craft’s [fluent config](./config/README.md#style-map-vs-fluent) syntax!
 :::
 
-All element queries support a standard set of methods (like `.id()`, `.title()`, and [`.search()`](./searching.md)). These are documented alongside the [element type-specific](#element-types) parameters (like `.kind()` in the example above).
+All element queries support a standard set of methods (like `.id()`, `.title()`, and [`.search()`](../system/searching.md)). These are documented alongside the [element type-specific](#element-types) parameters (like `.kind()` in the example above).
 
-Typically, parameters make a query more specific, but setting a single parameter more than once will replace the previous constraint.
+Typically, parameters make a query more specific—but setting a single parameter more than once will replace the previous constraint. Similarly, setting a parameter to `null` can _broaden_ a query by removing an existing constraint.
 
 #### Querying with Custom Fields
 
@@ -128,6 +152,34 @@ Custom field parameters can be combined for advanced filtering—in this example
 ```
 
 See each [field type](./fields.md#field-types)’s documentation for what kinds of values you can use.
+
+### Reusing Queries
+
+Sometimes, you might want to run a number of similar queries. Take this case, where we want to show some information about upcoming events at a library:
+
+```twig
+{# Assuming we're on a page for a specific branch: #}
+{% set upcomingEvents = craft.entries()
+  .section('events')
+  .dateStart(">= #{now|atom}")
+  .branch(entry) %}
+
+{% set weekEvents = clone(eventsQuery)
+  .dateEnd("< #{now|modify('+1 week')|atom}") %}
+Events in the next week: {{ weekEvents.count() }}
+
+{% set monthEvents = clone(eventsQuery)
+  .dateEnd("< #{now|modify('+1 month')|atom}") %}
+Events in the next month: {{ monthEvents.count() }}
+```
+
+The [`clone()` function](../reference/twig/functions.md#clone) is used to copy a base query, before setting additional parameters. Parameters set on the base query (like `dateStart()`, above) will affect all subsequent queries, unless explicitly unset.
+
+::: tip
+Note that we are only executing the `weekEvents` and `monthEvents` query! Cloning an executed query will just copy the results.
+:::
+
+This behavior is automatic when accessing a 
 
 ## Executing Element Queries
 
@@ -159,14 +211,14 @@ $entries = Entry::find()
 :::
 
 ::: tip
-Declaring a `limit()` _and_ executing a query with `all()` may seem like a contradiction, but this is a totally valid query! `all()` doesn’t override the `limit()`; rather, it returns _all_ results that meet the current criteria—one of which just happens to be a cap on the number of allowed results.
+Declaring a `limit()` _and_ executing a query with `all()` may seem like a contradiction, but this is a totally valid query! `all()` doesn’t override the `limit()`; rather, it returns _all_ results that meet the current criteria—one of which just happens to be a cap on the number of allowed results. Regardless of the number of results, `.all()` always returns an array—even if it’s empty.
 :::
 
 ### `collect()`
 
-Calling `.collect()` to execute a query will perform the same database call as `.all()`, but the results are wrapped in a [collection][collection].
+Calling `.collect()` to execute a query will perform the same database call as `.all()`, but the results are wrapped in a [Collection](./collections.md).
 
-Collections can simplify some common array manipulation and filtering tasks that are otherwise awkward in the template:
+Collections can simplify some common array manipulation and filtering tasks that are otherwise awkward in the template or query builder:
 
 ::: code
 ```twig
@@ -204,8 +256,12 @@ $categoriesDescription = $entries
 ```
 :::
 
+You can also call `.all()` and wrap the results in a collection yourself, with the [`collect()` Twig function](../reference/twig/functions.md#collect).
+
 ::: tip
-You can also call `.all()` and wrap the results in a collection yourself, with the [`collect()` Twig function](./dev/functions.md#collect).
+Review some of the [optimization tips](#performance-and-optimization) to see if built-in query methods can accomplish what you need.
+
+For example, loading and populating hundreds of element models into a collection solely to calculate an average field value may not be necessary; the database is highly optimized for tasks like this!
 :::
 
 ### `one()`
@@ -321,7 +377,7 @@ An array of scalar values is returned, the type of which depends on the column. 
 
 ## Pagination
 
-Craft provides the [`{% paginate %}` tag](./dev/tags.md#paginate) to simplify the process of splitting results into pages with a stable URL scheme based on the <config4:pageTrigger> setting.
+Craft provides the [`{% paginate %}` tag](../reference/twig/tags.md#paginate) to simplify the process of splitting results into pages with a stable URL scheme based on the <config4:pageTrigger> setting.
 
 The `paginate` tag accepts an element query, sets its `offset` param based on the current page, and executes it. The number of results per page is determined by the query’s `limit` param, or defaults to 100.
 
@@ -435,7 +491,7 @@ We could improve this for screen readers by including specific page numbers in t
 ```
 
 ::: tip
-We’re using the [`tag()` Twig function](./dev/functions.md#tag) to make this a little more readable, but its output is equivalent to a normal anchor element.
+We’re using the [`tag()` Twig function](../reference/twig/functions.md#tag) to make this a little more readable, but its output is equivalent to a normal anchor element.
 :::
 
 More advanced pagination links are also possible with `getDynamicRangeUrls()`:
@@ -487,7 +543,7 @@ $results = Entry::find()
 
 ## Performance and Optimization
 
-When you start working with lots of data, it’s important to consider how queries affect your pages’ load time. While the [`{% cache %}` tag](./dev/tags.md#cache) can be used strategically to avoid major slowdowns, it’s only one of many tools at your disposal.
+When you start working with lots of data, it’s important to consider how queries affect your pages’ load time. While the [`{% cache %}` tag](../reference/twig/tags.md#cache) can be used strategically to avoid major slowdowns, it’s only one of many tools at your disposal.
 
 ::: tip
 Turn on the **Debug Toolbar** in your user’s preferences to profile your memory usage and database query counts.
@@ -495,19 +551,9 @@ Turn on the **Debug Toolbar** in your user’s preferences to profile your memor
 
 ### Eager Loading
 
-Displaying a list of elements and one or more elements related to each of them (say, blog posts and their categories) can lead to an “[N+1](https://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem-in-orm-object-relational-mapping)” problem, wherein each result from the main query triggers an additional query.
+Displaying a list of elements and one or more elements related to each of them (say, blog posts and any tags or categories it has) can lead to an “N+1” problem, wherein each result from the main query triggers an additional query. Craft addresses this with [eager-loading](eager-loading.md).
 
-[Eager loading](./dev/eager-loading-elements.md) is a means of pre-fetching those related elements in bulk, often eliminating all but one additional query. Auditing your templates for these problems can be tricky, but you may be able to narrow down what you’re looking for with these common bottlenecks:
-
-- [Nested](./dev/eager-loading-elements.md#eager-loading-nested-sets-of-elements) `{% for %}` loops;
-- Accessing or outputting data from Matrix blocks owned by multiple elements;
-- Getting information about an entry’s author, within a loop;
-- Using multiple [asset transforms](./dev/eager-loading-elements.md#eager-loading-image-transform-indexes);
-- Using relational fields (either with `.all()`, `.one()`, or `|first`) within a loop;
-
-::: tip
-Not all of these situations will require (or benefit from) eager-loading—the goal is only to consider which of your projects’ features _may_ be candidates.
-:::
+<See path="eager-loading.md" description="Eager-loading is a means of pre-fetching nested or related elements in bulk." />
 
 ### Caching Element Queries
 
@@ -532,7 +578,7 @@ $entries = Entry::find()
 ```
 :::
 
-This cache is separate from fragments cached via [{% cache %} template tags](./dev/tags.md#cache), and will only match subsequent queries that have all the same parameters. Caching a query does not guarantee better [performance](#performance-and-optimization), but it can be used strategically—say, to memoize a scalar query result inside a loop (like the total number of entries in a list of categories).
+This cache is separate from fragments cached via [{% cache %} template tags](../reference/twig/tags.md#cache), and will only match subsequent queries that have all the same parameters. Caching a query does not guarantee better [performance](#performance-and-optimization), but it can be used strategically—say, to memoize a scalar query result inside a loop (like the total number of entries in a list of categories).
 
 The `cache()` method accepts a `duration` argument, and defaults to your <config4:cacheDuration>.
 
@@ -564,7 +610,7 @@ In this example, we just need the number of active users:
 In addition to the memory footprint of the optimized query being many orders of magnitude smaller, we’re also avoiding a huge amount of data transfer between the PHP process and database server!
 
 ::: tip
-Using the [`length`](reference/twig/filters.md#length) filter on a query (before it’s been run) will automatically call its [`count()`](#count) execution method to prevent inadvertent performance issues. Other situations in which queries are treated as arrays may not be optimized in the same way.
+Using the [`length`](../reference/twig/filters.md#length) filter on a query (before it’s been run) will automatically call its [`count()`](#count) execution method to prevent inadvertent performance issues. Other situations in which queries are treated as arrays may not be optimized in the same way.
 :::
 
 #### Arithmetic Operations
@@ -599,9 +645,7 @@ Counting isn’t the only operation that the database can do for you! What if we
 `scalar()` is just an [execution method](#executing-element-queries) that returns the first column from the first result—it will always produce a simple, “[scalar](https://www.php.net/manual/en/function.is-scalar.php)” value.
 
 ::: warning
-While `select()` and `orderBy()` accept field handles and ambiguous columns, some SQL functions and expressions (like `MIN()` or `SUM()`) do not.
-
-In these cases, you may need to use <craft4:craft\helpers\ElementHelper::fieldColumnFromField()> in combination with <craft4:craft\services\Fields::getFieldByHandle()> to translate a field handle to a content table column name.
+While `select()` and `orderBy()` accept field handles and ambiguous columns, some SQL functions and expressions (like `MIN()` or `SUM()`) may not.
 :::
 
 #### Lean Selections
@@ -675,8 +719,6 @@ Selections modify what columns and rows are returned.
 [offset($n)](yii2:yii\db\Query::offset())
 : Skip the specified number of matching rows.
 
-Custom field column names will be automatically resolved when using `select()`. <Since ver="4.3.0" feature="Column aliases when using advanced SQL methods" /> In earlier versions, you may find that some field’s database columns include a random suffix and will require translating the field handle with <craft4:craft\helpers\ElementHelper::fieldColumnFromField()>.
-
 ### Joins
 
 In most cases, Craft automatically `JOIN`s the appropriate tables so that your elements are populated with the correct data. However, additional `JOIN`s can be useful in [plugin development](./extend/README.md) or for doing deeper analysis of your content.
@@ -745,7 +787,7 @@ Some of these methods are discussed in the [Executing Element Queries](#executin
 : Array of populated element models.
 
 [collect()](craft4:craft\db\Query::collect()) — `Illuminate\Support\Collection`
-: Same as `all()`, but wrapped in a Laravel [Collection][collection].
+: Same as `all()`, but wrapped in a [Collection](./collections.md).
 
 [one()](yii2:yii\db\Query::one()) — `craft\base\Element|null`
 : Element model or `null` if none match the criteria.
@@ -803,5 +845,3 @@ Craft Pro includes a [GraphQL API](./graphql.md) with configurable schemas. Many
 ::: warning
 For security reasons, not all query builder features are available via GraphQL. Some advanced queries may need to be executed separately and combined by the client.
 :::
-
-[collection]: https://laravel.com/docs/9.x/collections
