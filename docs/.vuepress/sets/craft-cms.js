@@ -145,8 +145,8 @@ module.exports = {
           children: [
             "development/templates",
             "development/element-queries",
-            "development/image-transforms",
             "development/eager-loading",
+            "development/image-transforms",
             "development/forms",
             "development/graphql",
           ]
