@@ -1,5 +1,5 @@
 ---
-description: Craft requires PHP 8.2 and MySQL 5.7.8 or Postgres 11, and is tested 
+description: Craft requires PHP 8.2 and MySQL 8.0.17 or Postgres 13.
 ---
 
 # Requirements
@@ -16,7 +16,7 @@ You can use the official [server check](https://github.com/craftcms/server-check
 ## Minimum System Specs
 
 - PHP 8.2+
-- MySQL 5.7.8+ with InnoDB, MariaDB 10.2.7+, or PostgreSQL 10+ <Todo notes="Get final MySQL version requirement" />
+- MySQL 8.0.17+ using InnoDB, MariaDB 10.4.6+, or PostgreSQL 13+
 - 256MB+ memory allocated to PHP
 - 200MB+ free disk space
 - Composer 2.0+
@@ -26,8 +26,8 @@ You can use the official [server check](https://github.com/craftcms/server-check
 
 ## Recommended System Specs
 
-- PHP 8.1+
-- MySQL 8.0+ with InnoDB, or PostgreSQL 16+
+- PHP 8.2+
+- MySQL 8.0.36+ using InnoDB, or PostgreSQL 16+
 - 512MB+ of memory allocated to PHP
 
 </column>
