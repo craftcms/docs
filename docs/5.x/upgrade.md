@@ -88,7 +88,7 @@ The following settings have been changed.
 
 The `defaultTemplateExtensions` config setting now lists `twig` before `html`, by default. This means that projects with templates that share a name (i.e. `widget.twig` and `widget.html`, _in the same directory_) may behave differently in Craft 5. Audit your `templates/` directory for any overlap to ensure consistent rendering. If all your templates use one extension or another, no action is required!
 
-This setting only affects rendering of templates in the front-end; the control panel will always use `.twig` files before `.html`.
+This setting only affects rendering of templates in the front-end; the control panel will _always_ use `.twig` files before `.html`.
 
 #### Volumes & Filesystems
 
@@ -139,6 +139,47 @@ During the upgrade, Craft will automatically migrate all your Matrix field conte
 #### Consolidating Fields
 
 <Todo notes="This hasn't been implemented yet—but likely a console command?" />
+
+### Eager-Loading
+
+[Eager-loading](development/eager-loading.md) has been dramatically simplified for most sites. You no longer need to tell Craft which relational fields to load via the `.with()` query method—instead, call `.eagerly()` on the primary query to set up automatic detection of nested queries:
+
+::: code
+```twig Before
+{% set articles = craft
+    .entries()
+    .section('blog')
+    .with([
+        ['featureImage'],
+    ])
+    .all() %}
+
+{% for article in article %}
+  {% set image = article.featureImage|first %}
+  {% if image %}
+    {{ image.getImg() }}
+  {% endif %}
+{% endfor %}
+```
+```twig After
+{% set articles = craft
+    .entries()
+    .section('blog')
+    .all() %}
+
+{% for article in article %}
+  {% set image = article.featureImage.eagerly().one() %}
+
+  {# Testing whether there was a result is still a good idea: #}
+  {% if image %}
+    {{ image.getImg() }}
+  {% endif %}
+{% endfor %}
+```
+:::
+
+<See path="development/eager-loading.md" />
+
 ## Assets
 
 ### Reusable Filesystems
@@ -163,4 +204,4 @@ A filesystem designated by your `tempAssetUploadFs` setting cannot be reused for
 
 ## Plugins and Modules
 
-Plugin authors (and module maintainers) should refer to our guide on [updating Plugins for Craft 4](extend/updating-plugins.md).
+Plugin authors (and module maintainers) should refer to our guide on [updating Plugins for Craft 5](extend/updating-plugins.md).
