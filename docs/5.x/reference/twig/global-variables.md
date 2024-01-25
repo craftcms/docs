@@ -52,11 +52,11 @@ Variable | Description
 [view](#view) | The app’s `view` component.
 [yesterday](#yesterday) | Midnight, yesterday.
 [Global set variables](#global-set-variables) | Variables for each of the global sets.
-[Single variables](#singles) | Variables for each [single section](../entries.md#singles) entry. <Since ver="4.4.0" feature="Global variables for single entries" />
+[Single variables](#singles) | Variables for each [single section](../element-types/entries.md#singles) entry.
 
-### `_globals` <Since ver="4.5.0" feature="The _globals Twig variable" />
+### `_globals`
 
-An empty [Collection](https://laravel.com/docs/10.x/collections) object. You may set and get values with the corresponding methods:
+An empty [Collection](../../development/collections.md) object. You may set and get values with the corresponding methods:
 
 ```twig
 {% do _globals.set('theme', 'dark') %}
@@ -73,7 +73,7 @@ An empty [Collection](https://laravel.com/docs/10.x/collections) object. You may
 {# -> '#F00' #}
 ```
 
-The `_globals` variable has all the native [Collection methods](https://laravel.com/docs/10.x/collections), as well as a few that Craft provides (via [macros](https://laravel.com/docs/10.x/collections#method-macro))—including the `set()` method used in the example above, which adds support for setting multiple Collection keys at once.
+The `_globals` variable has all the native [collection methods](../../development/collections.md#methods), as well as a few that Craft provides (via [macros](https://laravel.com/docs/10.x/collections#method-macro))—including the `set()` method used in the example above, which adds support for setting multiple Collection keys at once.
 
 ::: tip
 Note that we’re using Twig’s `do` tag to _set_ values. You can _get_ values in any kind of Twig expression—like an output statement or a `set` tag.

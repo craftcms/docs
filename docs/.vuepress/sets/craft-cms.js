@@ -149,6 +149,7 @@ module.exports = {
             "development/image-transforms",
             "development/forms",
             "development/graphql",
+            "development/collections",
           ]
         },
       ],

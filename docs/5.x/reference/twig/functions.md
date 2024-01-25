@@ -235,7 +235,7 @@ Clones a given object.
 
 ## `collect`
 
-Returns a new [collection](https://laravel.com/docs/9.x/collections).
+Returns a new [collection](../../development/collections.md).
 
 ```twig
 {% set collection = collect(['a', 'b', 'c']) %}
