@@ -34,7 +34,7 @@ You can use the official [server check](https://github.com/craftcms/server-check
 </columns>
 
 ::: warning
-Due to its diverging parity with MySQL, MariaDB is _not_ recommended for sites with many users or a large volume of content.
+Due to its diverging parity with MySQL, we no longer recommend MariaDB for sites with many users or a large volume of content.
 :::
 
 ## Required PHP Extensions
