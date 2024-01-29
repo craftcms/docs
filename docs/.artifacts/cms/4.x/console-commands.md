@@ -3020,7 +3020,7 @@ Fixes any duplicate UUIDs found within field layout components in the project co
 </h3>
 
 
-Prunes orphaned matrix blocks for each site.
+Prunes orphaned Matrix blocks for each site.
 
 ## `utils/prune-provisional-drafts`
 
