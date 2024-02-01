@@ -142,7 +142,7 @@ During the upgrade, Craft will automatically migrate all your Matrix field conte
 
 ### Eager-Loading
 
-[Eager-loading](development/eager-loading.md) has been dramatically simplified for most sites. You no longer need to tell Craft which relational fields to load via the `.with()` query method—instead, call `.eagerly()` on the primary query to set up automatic detection of nested queries:
+[Eager-loading](development/eager-loading.md) has been dramatically simplified for most sites. You no longer need to tell Craft which relational fields to load via the `.with()` query method—instead, call `.eagerly()` on any query that _may_ result in an N+1 problem to automatically eager-loading:
 
 ::: code
 ```twig Before
@@ -178,7 +178,31 @@ During the upgrade, Craft will automatically migrate all your Matrix field conte
 ```
 :::
 
-<See path="development/eager-loading.md" />
+This feature does have _some_ limitations, though. While it will work for all elements connected via a [relational](system/relations.md) or Matrix field, you will still need to explicitly eager-load native attributes like entries’ `author` (and now `authors`, _plural_) or assets’ `uploader`. Craft can only detect eager-loading opportunities when the original attribute or value is an element query. The two strategies can be safely combined, though:
+
+```twig
+{% set articles = craft
+    .entries()
+    .section('blog')
+    .with([
+      ['author'],
+    ])
+    .all() %}
+
+{% for article in article %}
+  {# Lazily-eager-loaded relation: #}
+  {% set image = article.featureImage.eagerly().one() %}
+
+  {% if image %}
+    {{ image.getImg() }}
+  {% endif %}
+
+  {# Explicitly eager-loaded element: #}
+  <span>{{ entry.author.fullName }}</span>
+{% endfor %}
+```
+
+<See path="development/eager-loading.md" description="Read more about opportunities to optimize your templates with automatic and manual eager-loading." />
 
 ## Assets
 
