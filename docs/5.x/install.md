@@ -1,6 +1,6 @@
 # Installation
 
-The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](./deployment.md).
+The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](deploy.md).
 
 This [quick-start](#quick-start) guide focuses solely on setting up a local Craft development environment. If you’re ready to launch, jump to the [hosting](#hosting) or [deployment](#deployment) section.
 
@@ -80,7 +80,7 @@ Done for the day? [`ddev stop`](https://ddev.readthedocs.io/en/stable/users/basi
 
 We believe that starting with a local development environment (rather than directly on a remote server) fosters a workflow that will support the reliability and longevity of your project.
 
-<See path="./deployment.md#workflow" label="Defining a Workflow" />
+<See path="deploy.md#workflow" label="Defining a Workflow" />
 
 ::: tip
 To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./console-commands.html#db-backup). Have them clone the project and run:
@@ -115,13 +115,13 @@ Pre-built starter project ZIPs should only be used for evaluating Craft in limit
 
 ### Hosting
 
-<See path="./deployment.md" label="Selecting a Host" description="Know your options when looking for a good hosting solution." />
+<See path="deploy.md" hash="selecting-a-host" label="Selecting a Host" description="Know your options when looking for a good hosting solution." />
 
 Craft’s own footprint is relatively light, but it’s important to choose a platform that matches your traffic, storage, and redundancy needs. We maintain a [list of Craft-friendly providers](https://craftcms.com/hosting) for projects of varying scale.
 
 ### Deployment
 
-<See path="./deployment.md" />
+<See path="deploy.md" />
 
 There is no one-size-fits-all deployment strategy for a Craft project, but we’ve collected our most salient advice in the [Deployment Best Practices](kb:deployment-best-practices) Knowledge Base article.
 
