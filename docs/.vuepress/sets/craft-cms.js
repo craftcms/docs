@@ -27,7 +27,7 @@ module.exports = {
         },
         {
           title: "Element Types",
-          collapsable: true,
+          collapsable: false,
           children: [
             "element-types/addresses",
             "element-types/assets",
@@ -79,7 +79,7 @@ module.exports = {
         },
         {
           title: "Twig",
-          collapsable: false,
+          collapsable: true,
           children: [
             "twig/filters",
             "twig/functions",
