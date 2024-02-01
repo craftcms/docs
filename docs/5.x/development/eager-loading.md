@@ -212,7 +212,7 @@ It’s also possible to load _nested_ sets of elements, using this syntax:
 
 ## Defining Custom Parameters on Eager-Loaded Elements
 
-You can define custom criteria parameters that will get applied as elements are being eager-loaded, by replacing its key with an array that has two values: the key, and a [hash](twig-primer.md#hashes) that defines the criteria parameters that should be applied.
+You can define custom criteria parameters that will get applied as elements are being eager-loaded, by replacing its key with an array that has two values: the key, and a [hash](twig.md#hashes) that defines the criteria parameters that should be applied.
 
 ```twig
 {% set entries = craft.entries()
@@ -271,7 +271,7 @@ This problem can be solved with the `withTransforms` asset criteria parameter:
   .all() %}
 ```
 
-Note that each transform definition you want to eager-load can either be a string (the handle of a transform defined in Settings → Assets → Image Transforms) or a [hash](twig-primer.md#hashes) that defines the transform properties.
+Note that each transform definition you want to eager-load can either be a string (the handle of a transform defined in Settings → Assets → Image Transforms) or a [hash](twig.md#hashes) that defines the transform properties.
 
 Using the `withTransforms` param has no effect on how you’d access image transforms further down in the template.
 

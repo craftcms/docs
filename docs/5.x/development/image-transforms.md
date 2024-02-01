@@ -164,7 +164,7 @@ Then pass that hash into your asset’s `getUrl()`, `getWidth()`, and `getHeight
   height="{{ asset.getHeight(thumb) }}">
 ```
 
-Notice in this example there are no quotes around “`thumb`” like there were in our earlier examples. That’s because before we were passing a [string](dev/twig-primer.md#strings) set to reference a control-panel-defined transform by its handle, whereas this example passes a [variable](dev/twig-primer.md#variables) containing the `thumb` options hash we created in the template.
+Notice in this example there are no quotes around “`thumb`” like there were in our earlier examples. That’s because before we were passing a [string](twig.md#strings) set to reference a control-panel-defined transform by its handle, whereas this example passes a [variable](twig.md#variables) containing the `thumb` options hash we created in the template.
 
 It would look similar using `setTransform()` like we did in the previous section:
 

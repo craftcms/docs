@@ -25,7 +25,7 @@ Running a multi-site installation? You can customize system messages on a per-si
 
 The body of each system message is evaluated as a Twig template, then parsed as [Markdown](https://daringfireball.net/projects/markdown/). Subject lines may also include Twig.
 
-<See path="./dev/twig-primer.md" description="Get to know Twig, Craft’s template engine." />
+<See path="../development/twig.md" description="Get to know Twig, Craft’s template engine." />
 
 The default templates include some basic output tags that take advantage of the [variables](#variables) Craft provides:
 

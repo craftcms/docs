@@ -111,10 +111,10 @@ Any of the following can be used when setting up a relational query:
 
 - A single **element object**: <craft4:craft\elements\Asset>, <craft4:craft\elements\Category>, <craft4:craft\elements\Entry>, <craft4:craft\elements\User>, or <craft4:craft\elements\Tag>
 - A single **element ID**
-- A [**hash**](dev/twig-primer.md#hashes) with properties describing specific constraints on the relationship:
+- A [**hash**](../development/twig.md#hashes) with properties describing specific constraints on the relationship:
   - Required: `element`, `sourceElement`, or `targetElement`
   - Optional: `field` and `sourceSite`
-- An [**array**](dev/twig-primer.md#arrays) of the above options, with an optional operator in the first position:
+- An [**array**](../development/twig.md#arrays) of the above options, with an optional operator in the first position:
   - The string `and`, to return relations matching _all_ conditions rather than _any_;
   - The string `or`, to return relations that match _any_ conditions (default behavior, can be omitted);
 
@@ -210,7 +210,7 @@ These examples _may_ return the recipe you’re currently viewing. Exclude a spe
 
 All the `relatedTo` examples we’ve looked at assume that the only place we’re defining relationships between recipes and ingredients is the _ingredients_ field. What if there were other fields on recipes that described “substitutions,” or “pairs with” and “clashes with” that might muddy our related recipes? What if an ingredient had a “featured seasonal recipe” field?
 
-Craft lets you be specific about the location and direction of relationships when using relational params in your queries. The following options can be passed to `relatedTo` and `andRelatedTo` as a [hash](dev/twig-primer.md#hashes):
+Craft lets you be specific about the location and direction of relationships when using relational params in your queries. The following options can be passed to `relatedTo` and `andRelatedTo` as a [hash](../development/twig.md#hashes):
 
 ### Sources and Targets
 

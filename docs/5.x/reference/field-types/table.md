@@ -102,7 +102,7 @@ In each example above, the custom column handle can also be accessed by a key na
 This is also how Craft stores the data, under the hood—which makes it possible to rename and rearrange columns without misplacing their values!
 :::
 
-Table field data evaluates cleanly as a boolean, but you can explicitly check whether one [has any data](dev/twig-primer.md#emptiness) by using the [`is empty` test](https://twig.symfony.com/doc/3.x/tests/empty.html) or the [`length` filter](https://twig.symfony.com/doc/3.x/filters/length.html):
+Table field data evaluates cleanly as a boolean, but you can explicitly check whether one [has any data](../../development/twig.md.md#emptiness) by using the [`is empty` test](https://twig.symfony.com/doc/3.x/tests/empty.html) or the [`length` filter](https://twig.symfony.com/doc/3.x/filters/length.html):
 
 ```twig
 {# Basic conditional: #}
