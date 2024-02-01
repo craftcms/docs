@@ -132,6 +132,7 @@ module.exports = {
             "system/routing", // Development?
           ],
           toggleChildren: [
+            "system/object-templates",
             "system/reference-tags",
             "system/logging",
             "system/queue",

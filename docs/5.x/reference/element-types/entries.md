@@ -96,29 +96,11 @@ To create a new custom source, go to **Entries** → **Customize (<icon kind="se
 
 ### Entry URI Formats
 
-<Todo text="Another bunch of object template stuff that needs consolidation..." />
-
 Channel and structure sections can choose whether their entries should be assigned URLs in the system by filling in the **Entry URI Format** setting. Singles have a “URI” setting, but it is typically defined statically or omitted (if it doesn’t need its own URL).
 
+The entry URI formats is an [object template](../../system/object-templates.md), which gets evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](../../system/routing.md) a request.
+
 When Craft matches a request to an entry, its section’s designated **Template** is rendered. That template is automatically provided an `entry` variable, set to the resolved <craft4:craft\elements\Entry> object, and ready to output any of its attributes or custom field data.
-
-Entry URI Formats are tiny Twig templates, which get evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](../../system/routing.md) a request.
-
-The entry being saved is available to that _object template_—just like its main template—so something like this is possible:
-
-```twig
-blog/authors/{{ object.author.username }}/{{ object.slug }}
-```
-
-A shortcut syntax is also available if you are accessing simple properties on the `object` variable:
-
-```twig
-blog/authors/{author.username}/{slug}
-```
-
-::: tip
-There are some more tips for using object templates in the [title formatting](#dynamic-entry-titles) section.
-:::
 
 #### Hierarchical URIs
 
@@ -168,7 +150,7 @@ Create additional preview targets for any other areas the entry might show up, s
 Preview target **URL Formats** support slightly different features than for **URI Formats**:
 
 - If you want to include the entry’s ID or UID in a preview target URL, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the [draft](#drafts)’s;
-- You can use [environment variables and aliases](../../configure.mdmd#control-panel-settings) in the preview target URL. These _do not_ get wrapped in curly braces on their own, as they are not part of the object template. Aliases may be part of a longer URI (e.g.`@headlessUrl/news/{slug}`), but environment variables can only be used on their own (e.g. `$NEWS_INDEX`);
+- You can use [environment variables and aliases](../../configure.mdmd#control-panel-settings) in the preview target URL. These _do not_ get wrapped in curly braces on their own, as they are not part of the [object template](../../system/object-templates.md). Aliases may be part of a longer URI (e.g.`@headlessUrl/news/{slug}`), but environment variables can only be used on their own (e.g. `$NEWS_INDEX`);
 
 When an author is editing an entry from a section with custom preview targets, the **View** button will be replaced with a menu that lists the **Primary entry page** (if the section has an Entry URI Format), plus the names of each preview target.
 
