@@ -1,6 +1,9 @@
 ---
 containsGeneratedContent: yes
 description: Model, compose, and publish content exactly the way you want.
+related:
+  - uri: ../../system/elements.md
+    label: Introduction to Elements
 ---
 
 # Entries

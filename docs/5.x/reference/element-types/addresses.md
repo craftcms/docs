@@ -1,5 +1,7 @@
 ---
 related:
+  - uri: ../../system/elements.md
+    label: Introduction to Elements
   - uri: /commerce/4.x/addresses.md
     label: Using addresses in Craft Commerce
   - uri: ../controllers/controller-actions.md # Temporary!

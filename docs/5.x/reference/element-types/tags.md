@@ -1,5 +1,8 @@
 ---
 containsGeneratedContent: yes
+related:
+  - uri: ../../system/elements.md
+    label: Introduction to Elements
 ---
 
 # Tags
