@@ -1,14 +1,57 @@
 ---
 containsGeneratedContent: yes
+description: Model, compose, and publish content exactly the way you want.
 ---
 
 # Entries
 
-Entries are the primary container for content you want to display on your web pages. Each entry has _Title_, _Author_, a _Post Date_, an _Expiration Date_ (if desired), a _Status_ (enabled or disabled), and—like other [element types](../../system/elements.md)—flexible content defined via [custom fields](../../system/fields.md). Also like other elements, entries can have their own [URLs](#entry-uri-formats), or be fetched from anywhere via [element queries](#querying-entries).
+Entries are flexible content containers that—unlike [addresses](addresses.md), [assets](assets.md), or [categories](categories.md)—have no primary or implied function. They are entirely agnostic building blocks, used to model whatever kind of content or data your project needs.
 
-Content authors also get access to a powerful [drafts and revisions](#editing-entries) system, allowing them to stage different versions of content and preview it alongside the current live entry.
+All entries support some key features like **Authors**, a **Post Date** and **Expiration Date**, **Statuses**, and content defined via  [field layouts](../../system/fields.md). Additional features and properties are determined via [entry types](#entry-types), or the [sections](#sections) and [Matrix fields](../field-types/matrix.md) they’re used in.
 
-Entries are one of Craft’s built-in [element types](../../system/elements.md), and are represented throughout the application as instances of <craft4:craft\elements\Entry>.
+Authors can use the [drafts and revisions](#editing-entries) system to stage different versions of content and preview it before going live.
+
+## Entry Types
+
+Craft uses _entry types_ to define atomic units of content, which are then exposed to editors via [sections](#sections) and [Matrix fields](../field-types/matrix.md).
+
+<Block label="Global Entry Types">
+
+Entry types became a global resource in Craft 5. This means you can define a type of content once, then use it in multiple sections, as a nested block in a Matrix field, or some combination of the two.
+
+As a result, some settings have moved around!
+
+</Block>
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/sections/1/entry-types/1"
+  :link="false"
+  caption="Editing an entry type in the control panel.">
+  <img src="../../images/sections-and-entries-entry-types.png" alt="Screenshot of entry type settings">
+</BrowserShot>
+
+Entry types have the following settings:
+
+- **Name** — Used throughout the control panel as a UI label.
+- **Handle** — Uniquely identifies entries of this type in [templates](../../development/templates.md) and [queries](../../development/element-queries.md).
+- **Icon** and **Color** — Choose a symbol and color to subtly distinguish entries of this type throughout the control panel.
+- **Show the Title field** — Entry titles can be set by the author or [dynamically defined](#dynamic-entry-titles) from other properties via an [object template](../../system/object-templates.md).
+  - **Title Translation Method** — In multi-site projects, choose how titles are localized.
+- **Show the Slug field** — As with titles, slugs can be manually or automatically generated.
+  - **Slug Translation Method** — In multi-site projects, choose how slugs are localized.
+- **Show the Status field** — Manually set each entry’s status, or allow it to be dictated by its usage.
+
+### Dynamic Entry Titles
+
+If you want your entries’ titles to be auto-generated from a template (rather than requiring authors to enter them manually), you can uncheck the **Show the Title field?** checkbox. When you do, a new **Title Format** setting will appear.
+
+The **Title Format** is an [object template](../../system/object-templates.md) (just like the **Entry URI Format** and preview target **URL Format** we looked, above), and gets evaluated whenever entries with this type are saved.
+
+### Translation Settings
+
+Most localization behavior is determined by [section](#sections) and [field](fields.md) settings, but the translation of titles and slugs is governed by entry types.
+
+The available translation methods are covered in the [custom fields documentation](../../system/fields.md#translation-methods).
 
 ## Sections
 
@@ -208,76 +251,6 @@ You can pass the token via either a query string parameter named after your <con
 ::: tip
 For live preview, you should also consider [enabling iFrame Resizer](config4:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
 :::
-
-## Entry Types
-
-Both Channel and Structure sections let you define multiple “types” of entries using _entry types_. Singles only have one entry type
-
-You can manage your sections’ entry types by choosing **Edit Entry Types** link beside the section’s name in **Settings** → **Sections**. That’ll take you to the section’s entry type index. Choosing on an entry type’s name takes you to its settings page:
-
-<BrowserShot
-  url="https://my-craft-project.ddev.site/admin/settings/sections/1/entry-types/1"
-  :link="false"
-  caption="Editing an entry type in the control panel.">
-  <img src="../../images/sections-and-entries-entry-types.png" alt="Screenshot of entry type settings">
-</BrowserShot>
-
-Entry types have the following settings:
-
-- **Name** — The entry type’s name;
-- **Handle** — The entry type’s template-facing handle;
-- **Show the Title field?** — Whether a Title field is displayed for entries of this type, or the title should be [dynamically defined](#dynamic-entry-titles) from other properties via an object template;
-- **Title Translation Method** — Control how titles are [translated](#translation-settings) across sites and site groups.
-- **Slug Translation Method** — Control how slugs are [translated](#translation-settings) across sites and site groups.
-- **Title Field Label** — What the Title field label should be;
-
-### Dynamic Entry Titles
-
-If you want your entries’s titles to be auto-generated from a template (rather than requiring authors to enter them manually), you can uncheck the **Show the Title field?** checkbox. When you do, a new **Title Format** setting will appear.
-
-The **Title Format** is a [Twig](../../development/twig.md) template (just like the **Entry URI Format** and preview target **URL Format** we looked, above), and gets evaluated whenever entries with this type are saved.
-
-The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft4:craft\elements\Entry#public-properties) and custom fields in two ways:
-
-1. normal Twig syntax: `{{ object.property }}`
-2. shortcut Twig syntax: `{property}`
-
-<Todo text="Object templates need to be consolidated." />
-
-If Craft finds any of these in your **Title Format**, it will replace the `{` with `{{object.` and the `}` with `}}`, before passing the template off to Twig for parsing.
-
-You can use Twig filters in both syntaxes:
-
-```twig
-{# Long: #}
-Coupons (Valid through {{ object.expiryDate|date('M j, Y') }})
-
-{# Short: #}
-Coupons (Valid through {expiryDate|date('M j, Y')})
-```
-
-Craft’s [global variables](../twig/global-variables.md) are available to these templates as well:
-
-```twig
-Current Coupons (Last updated {{ now|date('Y-m-d') }})
-Current Coupons (Last updated by {{ currentUser.username }})
-```
-
-Logic is also supported, but there’s no syntactic sugar for control tags—any conditions in an object template require that you reference properties explicitly, with the `object` variable:
-
-```twig
-{# Control tags: #}
-{% if object.expiryDate %}{expiryDate|date('M j, Y')}{% else %}{{ now|date('M j, Y') }}{% endif %}
-
-{# Ternary operator: #}
-{{ (object.expiryDate ?: now)|date('M j, Y') }}
-```
-
-### Translation Settings
-
-Most localization behavior is determined by [section](#sections) and [field](fields.md) settings, but the translation of titles and slugs is governed by entry types.
-
-The available translation methods are covered in the [custom fields documentation](../../system/fields.md#translation-methods).
 
 ## Editing Entries
 

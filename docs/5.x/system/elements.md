@@ -28,12 +28,17 @@ Some features are available to all or most element types:
 - [Element queries](../development/element-queries.md) with advanced sorting and filtering capabilities;
 - Bi-directional [relationships](./relations.md);
 - Automatic indexing for [search](./searching.md);
+- Statuses for managing visibility of content;
 
 Other features are specific to a type—like Assets’ tie to files, or Entries’ nesting capability.
 
 ## Indexes
 
 You’ll access most elements via their element index. Indexes allow you to browse, sort, and [search](./searching.md) for elements in a paginated, table-like view.
+
+::: tip
+[Matrix fields](../reference/field-types/matrix.md) also have an element index **View Mode**.
+:::
 
 ### Sources
 
@@ -80,6 +85,12 @@ Use the **View** menu to switch back into structure mode for an index.
 Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="settings" /> icon in the footer (like _Delete_).
 
 Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
+
+### In-line Editing
+
+Click **Edit** at the bottom of any element index to switch into an in-line editor. Click **Save** to update any rows that changed, or **Cancel** to return to the read-only mode.
+
+Not all fields are editable in-line, and some may have simplified controls or interfaces. This is best used when the index’s default [columns](#filters-and-columns) include scalar values like text, numbers, and dates.
 
 ### Exporters
 
