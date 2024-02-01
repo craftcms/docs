@@ -26,34 +26,6 @@ module.exports = {
           ],
         },
         {
-          title: "Twig",
-          collapsable: false,
-          children: [
-            "twig/filters",
-            "twig/functions",
-            "twig/global-variables",
-            "twig/tags",
-            "twig/tests"
-          ],
-        },
-        {
-          title: "Configuration",
-          collapsable: false,
-          children: [
-            "config/general",
-            "config/db",
-            "config/app",
-            "config/bootstrap",
-          ],
-        },
-        {
-          title: "CLI",
-          collapsable: false,
-          children: [
-            "cli",
-          ],
-        },
-        {
           title: "Element Types",
           collapsable: true,
           children: [
@@ -93,6 +65,34 @@ module.exports = {
             "field-types/time",
             "field-types/url",
             "field-types/users",
+          ],
+        },
+        {
+          title: "Configuration",
+          collapsable: false,
+          children: [
+            "config/general",
+            "config/db",
+            "config/app",
+            "config/bootstrap",
+          ],
+        },
+        {
+          title: "Twig",
+          collapsable: false,
+          children: [
+            "twig/filters",
+            "twig/functions",
+            "twig/global-variables",
+            "twig/tags",
+            "twig/tests"
+          ],
+        },
+        {
+          title: "CLI",
+          collapsable: false,
+          children: [
+            "cli",
           ],
         },
       ],
