@@ -26,7 +26,7 @@ export default {
         },
         path: {
             type: String,
-            required: true,
+            required: false,
         },
         hash: {
             type: String,
