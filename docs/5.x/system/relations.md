@@ -218,7 +218,7 @@ Property
 :  One of `element`, `sourceElement`, or `targetElement`
 
 Accepts
-:  Element ID, element, [element query](element-queries.md), or an array thereof
+:  Element ID, element, [element query](../development/element-queries.md), or an array thereof
 
 Description
 :  - Use `element` to get results on either end of a relational field (source _or_ target);
