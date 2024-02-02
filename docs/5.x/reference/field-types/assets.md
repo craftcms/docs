@@ -49,17 +49,17 @@ Subfolder paths defined by the **Upload Location** and **Default Upload Location
 Any properties supported by the source element (the element that has the Assets field) can be used here.
 
 ::: tip
-If you want to include the entry’s ID or UID in a dynamic subfolder path, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the revision / draft’s.
+If you want to include the entry’s ID or UID in a dynamic subfolder path, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the those of a draft or revision.
 :::
 
 ::: tip
-If you are creating the Assets field within a [Matrix field](matrix-fields.md), the source element is going to be the Matrix block, _not_ the element that the Matrix field is being created on.
+If an Assets field is used on an [entry type](../element-types/entries.md#entry-types) within a [Matrix field](matrix.md), the source element is going to be the nested entry, _not_ the element that the entry belongs to.
 
-So if your Matrix field is attached to an entry, and you want to output the entry ID in your dynamic subfolder path, use `owner.id` rather than `id`.
+In this case, if you wanted to incorporate the main element’s ID in a dynamic subfolder path, you would use `owner.id` instead of just `id`. Combined with the above, this would mean `owner.canonicalId`.
 :::
 
 ::: warning
-If the rendered subfolder path ends up blank, or contains a leading or trailing forward slash (e.g. `foo/`) or an empty segment (e.g. `foo//bar`), Craft will interpret that as a sign that a variable in the subfolder template couldn’t be resolved successfully, and the path will be considered invalid. If you are intentionally outputting a blank segment, output `:ignore:`. For example, if you want to output the first selected category, or nothing if there isn’t one, do this:
+If the rendered subfolder path ends up blank, contains a leading or trailing forward slash (e.g. `foo/`), or an empty segment (e.g. `foo//bar`), Craft will interpret that as a sign that a variable in the subfolder template couldn’t be resolved successfully, and the path will be considered invalid. If you are intentionally outputting a blank segment, output `:ignore:`. For example, if you want to output the first selected category, or nothing if there isn’t one, do this:
 
 ```twig
 {{ categoriesFieldHandle.one().slug ?? ':ignore:' }}
@@ -73,15 +73,15 @@ Assets fields list all the currently-related assets, with a button to select new
 Choosing **Add an asset** will bring up a modal window where you can find and select additional assets, as well as upload new ones.
 
 ::: tip
-You can also upload assets by dragging files directly onto the assets field or modal window.
+You can also upload assets by dragging files directly onto the assets field, or into the modal window.
 :::
 
 ### Inline Asset Editing
 
-Double-click on a related asset to edit it in a [slideout](./control-panel.md#slideouts).
+Double-click on a related asset to edit it in a [slideout](../../system/control-panel.md#slideouts).
 
 ::: tip
-You can choose which custom fields should be available for your assets from **Settings** → **Assets** → **[Volume Name]** → **Field Layout**.
+You can choose which custom fields should be available for assets in each volume from **Settings** → **Assets** → **[Volume Name]** → **Field Layout**.
 :::
 
 ## Development

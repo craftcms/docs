@@ -213,19 +213,19 @@ While slideouts support most element edit screen features, you may find that it�
 
 #### Saving
 
-Any time you are on a screen dominated by a single editable record or form, <kbd>Command</kbd>+<kbd>S</kbd> will save it and keep you on the page. In most places the save shortcut is supported, <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> will save the current record and set you up to create another.
+Any time you are on a screen (or slideout) that represents a single editable record or form, <kbd>Command</kbd>+<kbd>S</kbd> will save it and keep you on the page. In most places the save shortcut is supported, <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd> will save the current record and set you up to create another.
 
 ::: tip
-Always check combo-box menus for more shortcuts.
+Always check “combo-box” menus (the fly-out arrow next to a red button) for more shortcuts!
 :::
 
 #### Group Selections
 
-Throughout the control panel, you will find groups of checkboxes or other focusable controls in a list of items. Ticking one checkbox, then holding <kbd>Shift</kbd> and clicking a second one will tick all the intermediate ones, as well. Element indexes are a great place to try this out—but it will also work on Matrix Blocks.
+Throughout the control panel, you will find groups of checkboxes or other focusable controls in a list of items. Ticking one checkbox, then holding <kbd>Shift</kbd> and clicking a second one will tick all the intermediate ones, as well. Element indexes are a great place to try this out—but it will also work on nested entries within [Matrix](../reference/field-types/matrix.md) fields.
 
 ### Drag-and-Drop
 
-The <Icon kind="move" /> move icon indicates that something can be dragged into a new position—like an element in a [structure](./elements.md#structures), a [Matrix Block](./matrix-fields.md), or a [table row](./table-fields.md).
+The <Icon kind="move" /> move icon indicates that something can be dragged into a new position—like an element in a [structure](./elements.md#structures) or relational field, a nested entry in a [Matrix field](../reference/field-types/matrix.md), or a [table row](../reference/field-types/table.md).
 
 In some situations, dragging can be combined with [group selections](#group-selections)!
 

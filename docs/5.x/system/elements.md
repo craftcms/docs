@@ -8,7 +8,7 @@ In the control panel, you’ll encounter the seven _element types_ common to all
 
 - [**Addresses**](../reference/element-types/addresses.md) — Attach physical locations to other elements.
 - [**Assets**](../reference/element-types/assets.md) — Upload files and store rich metadata.
-- [**Categories**](../reference/element-types/categories.md) — Design nestable taxonomies.
+- [**Categories**](../reference/element-types/categories.md) — Design hierarchical or ordered taxonomies.
 - [**Entries**](../reference/element-types/entries.md) — Model anything with flexible and nestable content containers.
 - [**Global Sets**](../reference/element-types/globals.md) — Manage universally-accessible data.
 - [**Tags**](../reference/element-types/tags.md) — Grow a _folksonomy_ alongside your content.
@@ -18,11 +18,11 @@ Choosing the appropriate element type for your content model is essential—but 
 
 ## Common Features
 
-Some features are available to all or most element types:
+Some features are available to all (or most) element types:
 
-- Control panel interfaces, including forms, [indexes](#indexes), and [slide-outs](./control-panel.md#slideouts);
-- [Custom fields](./fields.md) and field layouts with advanced condition rules;
-- URLs and [routing](./routing.md);
+- Control panel interfaces, including forms, [indexes](#indexes), [slide-outs](./control-panel.md#slideouts), and [chips and cards](#chips-cards);
+- [Custom fields](./fields.md) and field layouts with advanced condition rules for storing content;
+- Slugs, URIs, URLs, and automatic [routing](./routing.md);
 - Localization via [sites](./sites.md);
 - Sophisticated [permissions](./user-management.md#permissions);
 - [Element queries](../development/element-queries.md) with advanced sorting and filtering capabilities;
@@ -34,15 +34,15 @@ Other features are specific to a type—like Assets’ tie to files, or Entries�
 
 ## Indexes
 
-You’ll access most elements via their element index. Indexes allow you to browse, sort, and [search](./searching.md) for elements in a paginated, table-like view.
+You’ll access most elements via their element index. Indexes allow you to browse, sort, filter, and [search](./searching.md) for elements in a paginated, table-like view.
 
 ::: tip
-[Matrix fields](../reference/field-types/matrix.md) also have an element index **View Mode**.
+[Matrix fields](../reference/field-types/matrix.md) also have a compact element index **View Mode**.
 :::
 
 ### Sources
 
-Indexes are broken down into **sources**. Sources can be permanent fixtures of an element type (like the **Admin** source for users), dynamically added based on its configuration (like those for user groups), or defined by a set of custom rules.
+Indexes are broken down into **sources**. Sources can be permanent fixtures of an element type (like the **Admin** source for [users](../reference/element-types/users.md)), dynamically added based on configuration (like those for user groups), or defined by an admin using custom _condition rules_.
 
 Each source also controls what columns are visible in the index, and its default sorting.
 
@@ -77,7 +77,7 @@ If every field layout that would be used by an element in a source defines the s
 [Entries](../reference/element-types/entries.md) (using the _Structure_ section type) and [Categories](../reference/element-types/categories.md) support a hierarchical view mode on their indexes. Elements in structures track their relative position among siblings, and can be easily relocated by dragging-and-dropping <Icon kind="move" /> their row in an index. Reordering is still possible, even when the structure is limited to a single level.
 
 ::: tip
-Use the **View** menu to switch back into structure mode for an index.
+Use the **View** menu to switch back into structure mode on an index.
 :::
 
 ### Actions
@@ -96,13 +96,19 @@ Not all fields are editable in-line, and some may have simplified controls or in
 
 Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button in the index footer displays all options, including any [custom exporters](../extend/element-exporter-types.md) registered by modules and plugins.
 
-### Modals + Contexts
+### Modals & Contexts
 
 A streamlined version of indexes are used when adding elements to a [relational](./relations.md) field via a modal. Depending on the field’s configuration, Craft may hide sources or actions, and disable [slideouts](./control-panel.md#slideouts) (except to create a new element, in-context) and pagination (in favor of scrolling). Internally, Craft refers to these variations as “contexts,” which [plugins](../extend/element-types.md#sources) have an opportunity to modify.
 
+### Chips & Cards
+
+Throughout the control panel, you’ll encounter references to elements in a number of different contexts, like element indexes, [Matrix](../reference/field-types/matrix.md) fields, and other [relational](relations.md) fields. Element _cards_ are a new way to display nested or related elements. They share the core features of element _chips_ (like quick-actions and ordering controls), but provide an additional layer of customization via the element’s [field layout](fields.md#field-layouts).
+
+Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by the field layout; additional features like colorization and icons are supported by entries.
+
 ## Properties and Methods
 
-<Todo notes="Move to elements reference." />
+<Todo notes="Move to elements reference?" />
 
 All elements share a few characteristics that make them familiar to work with in your templates. Each [element type](#element-types) will supplement these lists with their own properties and methods.
 
@@ -129,8 +135,8 @@ Property | Type | Notes
 `slug` | `string|null` | _Only for elements with slugs._
 `title` | `string|null` | _Only for elements with titles._
 `trashed` | `bool` | Whether or not the element has been soft-deleted.
-`uid` | `string|null` | A UUIDv4 string uniquely identifying this element.
-`uri` | `string|null` | Resolved URI or path for the site the element was loaded in. _Only for elements with URLs._
+`uid` | `string|null` | A UUIDv4 string that uniquely identifies this element.
+`uri` | `string|null` | Rendered URI or path for the site the element was loaded in. _Only for elements with URLs._
 
 ### Methods
 

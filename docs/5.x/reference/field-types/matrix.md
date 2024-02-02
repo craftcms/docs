@@ -1,14 +1,44 @@
 # Matrix Fields
 
-Matrix fields allow you to manage nested entries in a fluid way.
+Matrix fields allow you to manage nested [entries](../element-types/entries.md) in a fluid way.
+
+::: tip
+In Craft 5, _Matrix blocks_ were converted to _entries_. [Fields](../../system/fields.md) that were previously owned by a particular block type are now managed in (and assigned from) a global pool. You are now able to design [entry types](../element-types/entries.md#entry-types) that exist as standalone content objects (in a section), _or_ as nested entries (in a Matrix field)!
+:::
 
 ## Settings
 
 Matrix fields have the following settings:
 
-- **Configuration** – This is where you configure which block types should be available to your Matrix field, and which sub-fields each of those block types should have.
-- **Min Blocks** – The _minimum_ number of blocks that can be created within the field. (Default is no lower limit.)
-- **Max Blocks** – The _maximum_ number of blocks that can be created within the field. (Default is no upper limit.)
+#### Entry Types
+
+Select from existing, globally-defined [entry types](../element-types/entries.md#entry-types), or create a new one on-the-fly.
+
+#### Propagation Method
+
+Choose how nested entries are propagated to other sites. This applies only to _new_ nested entries—changes to _existing_ nested entries are propagated on a per-field basis.
+
+#### Site Settings <Badge text="New!" />
+
+Nested entries can have their own URIs and templates.
+
+#### Min Entries
+
+The _minimum_ number of entries that can be created within the field. (Default is no lower limit.)
+
+#### Max Entries
+
+The _maximum_ number of entries that can be created within the field. (Default is no upper limit.)
+
+#### View Mode <Badge text="New!" />
+
+Choose how the nested elements are represented within the field:
+
+  - **As cards**: Read-only [element cards](../../system/elements.md#chips-cards) that surface nested field data.
+  - **As inline-editable blocks**: Manage nested entries as though they were part of the parent form. In prior version of Craft, this was the only display option.
+  - **As an element index**: A simplified [element index](../../system/elements.md#indexes) with sorting, searching, and filtering controls.
+  
+    When using the element index view mode, you can also allow authors to toggle between a card view and standard table view. Enabling the table view reveals controls for the columns that will be displayed, by default.
 
 ## The Field
 
