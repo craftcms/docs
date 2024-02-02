@@ -1,3 +1,11 @@
+---
+related:
+  - uri: ../element-types/categories.md
+    label: Category Elements
+  - uri: ../../system/relations.md
+    label: Using Relationships
+---
+
 # Categories Fields
 
 <div class="version-warning">

@@ -1,3 +1,11 @@
+---
+related:
+  - uri: ../element-types/tags.md
+    label: Tag Elements
+  - uri: ../../system/relations.md
+    label: Using Relationships
+---
+
 # Tags Fields
 
 Tags fields allow you relate [tags](tags.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.

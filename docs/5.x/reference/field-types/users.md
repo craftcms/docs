@@ -1,3 +1,14 @@
+---
+related:
+  - uri: ../element-types/users.md
+    label: User Elements
+  - uri: ../../system/relations.md
+    label: Using Relationships
+  - uri: ../../system/user-management.md
+    label: Managing Users + Permissions
+---
+
+
 # Users Fields
 
 Users fields type allow you relate [users](users.md) to other elements.

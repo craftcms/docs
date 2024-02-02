@@ -1,6 +1,14 @@
+---
+related:
+  - uri: ../element-types/addresses.md
+    label: Address Elements
+  - uri: ../../system/relations.md
+    label: Using Relationships
+---
+
 # Assets Fields
 
-Assets fields allow you to relate [assets](assets.md) to other elements.
+Assets fields allow you to upload and relate [assets](assets.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
 
 ## Settings
 

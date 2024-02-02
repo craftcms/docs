@@ -1,6 +1,15 @@
+---
+related:
+  - uri: ../element-types/entries.md
+    label: Entry Elements
+  - uri: ../../system/relations.md
+    label: Using Relationships
+---
+
 # Entries Fields
 
-Entries fields allow you to relate [entries](entries.md) to other elements.
+Entries fields allow you to relate [entries](entries.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
+
 
 ## Settings
 
