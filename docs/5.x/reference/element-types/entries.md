@@ -20,9 +20,9 @@ Craft uses _entry types_ to define atomic units of content, which are then expos
 
 <Block label="Global Entry Types">
 
-Entry types became a global resource in Craft 5. This means you can define a type of content once, then use it in multiple sections, as a nested block in a Matrix field, or some combination of the two.
+Entry types became a global resource in Craft 5. This means you can define a content type _once_, then use it in multiple sections, as a nested block in a Matrix field, or some combination of the two. As a result, some settings have moved around!
 
-As a result, some settings have moved around!
+Most importantly, you’ll manage entry types in the **Settings** &rarr; **Entry Types** screen—or create them on-the-fly when working on a section or Matrix field.
 
 </Block>
 
