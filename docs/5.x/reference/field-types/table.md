@@ -12,10 +12,10 @@ Table fields have the following settings:
     - **Column Heading** — The name that will appear in the head of the table.
     - **Handle** — How you’ll refer to this column from your templates.
     - **Width** — The width for this column specified in either pixels or a percentage.
-    - **Type** — The field or content type for the column. Choose from: Checkbox, Color, Date, Dropdown, Email, Lightswitch, Multi-line text, Number, Single-line text, Time, or URL. An additional Row Heading column type provides a non-editable area for labels, and is most useful in combination with the **Static Rows** option.
+    - **Type** — The field or content type for the column. Choose from: Checkbox, Color, Date, Dropdown, Email, Lightswitch, Multi-line text, Number, Single-line text, Time, or URL. An additional _Row Heading_ column type provides a non-editable area for labels, and is most useful in combination with the **Static Rows** option.
 
       ::: tip
-      Not all field types are available as table columns due to UI and storage constraints. If you need the full array of custom field types, consider using a [Matrix field](matrix-fields.md) instead.
+      Not all field types are available as table columns due to UI and storage constraints. If you need the full array of custom field types, consider using nested entries via a [Matrix field](matrix.md), instead.
       :::
 
 **Default Values**
@@ -50,7 +50,7 @@ The appearance of a table field in an element editor will be identical to the ta
 Due to the way Table field data is stored (a blob of JSON), [element queries](../../development/element-queries.md) can be challenging to construct. Internally, Craft stores each row with keys that are stable across changes to [project config](../../system/project-config.md), and won’t agree with the handles you’ve defined in 
 
 ::: tip
-If you anticipate needing to query by sub-fields, consider using a [Matrix](matrix-fields.md) field, instead. As a native element type, matrix blocks support the full array of element query params that 
+If you anticipate needing to query by sub-fields, consider using nested entries via the [Matrix](matrix.md) field, instead. As a native element type, entries support the full array of element query params required to narrow results by specific fields’ values.
 :::
 
 ### Working with Table Field Data
