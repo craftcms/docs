@@ -91,7 +91,7 @@ Unlike the other section types, singles only ever have _one_ entry associated wi
 Like [globals](./globals.md), singles don’t have an editable **Author**, **Post Date**, or **Expiration Date**.
 
 ::: tip
-Singles have all the functionality of [globals](./globals.md), and can even be pre-loaded into global Twig variables with the <config4:preloadSingles>.
+Singles have all the functionality of [globals](./globals.md), and can even be pre-loaded into global Twig variables with the <config4:preloadSingles> config setting.
 
 A single’s **Status** controls can be hidden with the **Show the Status field** setting in its sole **Entry Type**.
 :::
