@@ -47,7 +47,7 @@ The appearance of a table field in an element editor will be identical to the ta
 
 ### Querying Elements with Table Fields
 
-Due to the way Table field data is stored (a blob of JSON), [element queries](element-queries.md) can be challenging to construct. Internally, Craft stores each row with keys that are stable across changes to [project config](project-config.md), and won’t agree with the handles you’ve defined in 
+Due to the way Table field data is stored (a blob of JSON), [element queries](../../development/element-queries.md) can be challenging to construct. Internally, Craft stores each row with keys that are stable across changes to [project config](../../system/project-config.md), and won’t agree with the handles you’ve defined in 
 
 ::: tip
 If you anticipate needing to query by sub-fields, consider using a [Matrix](matrix-fields.md) field, instead. As a native element type, matrix blocks support the full array of element query params that 

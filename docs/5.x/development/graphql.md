@@ -1614,10 +1614,10 @@ While mutations are mostly straightforward, there are a few important cases to c
 
 ### Matrix Fields in Mutations
 
-GraphQL’s limited input types can be challenging with complex [Matrix fields](matrix-fields.md).
+GraphQL’s limited input types can be challenging with complex [Matrix fields](../reference/field-types/matrix.md).
 
 ::: tip
-We recommend reading [how to save matrix field data in entry forms](matrix-fields.md#saving-matrix-fields-in-entry-forms) first if you’ve not saved Matrix field form data.
+We recommend reading [how to save matrix field data in entry forms](../reference/field-types/matrix.md#saving-matrix-fields-in-entry-forms) first if you’ve not saved Matrix field form data.
 :::
 
 Matrix input types generally have the following structure:

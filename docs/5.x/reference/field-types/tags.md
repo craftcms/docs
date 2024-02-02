@@ -1,6 +1,6 @@
 # Tags Fields
 
-Tags fields allow you relate [tags](tags.md) to other elements.
+Tags fields allow you relate [tags](tags.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
 
 ## Settings
 
