@@ -10,6 +10,9 @@ related:
 
 Entries fields allow you to relate [entries](entries.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
 
+::: tip
+If you would like to manage a set of _nested_ entries within another element, consider using the [Matrix field](matrix.md).
+:::
 
 ## Settings
 

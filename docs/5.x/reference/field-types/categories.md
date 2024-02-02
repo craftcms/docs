@@ -16,7 +16,7 @@ Read more about this [transition](https://craftcms.com/blog/entrification) on ou
 
 </div>
 
-Categories fields allow you to relate [categories](categories.md) to other elements.
+Categories fields allow you to relate [categories](categories.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
 
 ## Settings
 
