@@ -171,7 +171,7 @@ Multi-instance fields behave as though they were entirely different fields, in a
 </article>
 ```
 
-This example uses the same “Attribution” field as `photoCredit` _and_ `byline`, each storing its own content. Similarly, you can target one instance of field with [element queries](../development/element-queries.md), just as you'd expect:
+This example uses the same “Attribution” field as `photoCredit` _and_ `byline`, each storing its own content. Similarly, you can target one instance of field with [element queries](../development/element-queries.md), just as you’d expect:
 
 ```twig{4}
 {% set postsMissingImageAttribution = craft.entries()
