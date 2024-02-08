@@ -40,7 +40,7 @@ While we [strongly recommend](#why-ddev) DDEV for new Craft projects, [alternate
     ```
 
     ::: tip
-    This step refers to a beta version of Craft. If you want to install a stable release, refer to the [instructions for Craft 4](/4.x/install.md)!
+    This step refers to a beta version of Craft. If you want to install a stable release, refer to the [instructions for Craft 4](/4.x/installation.md)!
     :::
 
 1. Run the Craft setup wizard, and accept all defaults (in `[square brackets]`):
