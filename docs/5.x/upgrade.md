@@ -102,11 +102,15 @@ When selecting a filesystem, options that would result in a collision between tw
 
 #### Variables
 
-With the elimination of Matrix Blocks as a discrete element type, we have removed the associated element query factory function from <craft5:craft\web\twig\CraftVariable>.
+With the elimination of Matrix blocks as a discrete element type, we have removed the associated element query factory function from <craft5:craft\web\twig\CraftVariable>.
 
 | Old | New |
 | --- | --- |
 | `craft.matrixBlocks()` | `craft.entries()` |
+
+::: tip
+See the section on [Matrix fields](#matrix-fields) for more information about these changes.
+:::
 
 ## Elements & Content
 
@@ -172,10 +176,14 @@ During the upgrade, Craft will automatically migrate all your Matrix field conte
 ```
 :::
 
-Those fields are then assigned to new [entry types](./reference/element-types/entries.md#entry-types) that replace your existing Matrix blocks
+Those fields are then assigned to new [entry types](./reference/element-types/entries.md#entry-types) that replace your existing Matrix blocks. Entry type handles
+
+Queries for nested entries will be largely the same—equivalent methods have been added to <craft5:craft\elements\db\EntryQuery> to enable familiar usage. The `.owner()` method still accepts a list of elements that the results must be owned by, and the `field()` and `fieldId()` methods narrow the results by specific fields.
 
 ::: warning
-Working with Matrix fields in the front-end has changed significantly.
+Values passed to the `type()` method are apt to require updates, as the migrated entry types may receive new handles. For example, a Matrix field that contained a block type with the handle `gallery` might conflict with an existing section; in that event, the new entry type for that block would get the handle `gallery1` (or potentially `gallery2`, `gallery3`, and so on, if multiple similar Matrix fields are being migrated).
+
+Visit **Settings** &rarr; **Entry Types** to check if any handles appear to have collided in this way, then review and update templates as necessary.
 :::
 
 #### Consolidating Fields
