@@ -12,7 +12,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
 1. **Is it an action request?**
 
-    [Action requests](../reference/controllers/controller-actions.md) either have a URL that begins with `actions/` (or whatever your <config4:actionTrigger> config setting is set to), or an `action` parameter in the POST body or query string. Every request Craft handles is ultimately routed to a controller action, but explicit action requests take precedence and guarantee that essential features are always accessible. If you look at your browser’s _Network_ tab while using the control panel, you’ll see a lot of action requests.
+    [Action requests](../reference/controller-actions.md) either have a URL that begins with `actions/` (or whatever your <config4:actionTrigger> config setting is set to), or an `action` parameter in the POST body or query string. Every request Craft handles is ultimately routed to a controller action, but explicit action requests take precedence and guarantee that essential features are always accessible. If you look at your browser’s _Network_ tab while using the control panel, you’ll see a lot of action requests.
 
 2. **Is it an element request?**
 

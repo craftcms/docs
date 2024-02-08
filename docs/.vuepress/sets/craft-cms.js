@@ -89,6 +89,13 @@ module.exports = {
           ],
         },
         {
+          title: "Controller Actions",
+          collapsable: false,
+          children: [
+            "controller-actions",
+          ],
+        },
+        {
           title: "CLI",
           collapsable: false,
           children: [

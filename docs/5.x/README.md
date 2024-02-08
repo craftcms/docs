@@ -25,7 +25,7 @@ The documentation has been rearranged a bit for this release, in order to better
 - High-level concepts are more visible in the [**System**](system/README.md) section;
 - **Reference** materials have been given a [dedicated space](./reference/README.md), including [element types](./system/elements.md), [fields](./system/fields.md), [console commands](./reference/cli.md), controllers, Twig features, an configuration.
 - Some pages geared toward front-end development have been moved into the Development section, including lots of new information on [eager-loading](./development/eager-loading.md) and [collections](./development/collections.md);
-- Information about using [forms](./development/forms.md) has been split into a dedicated page, while specific [controller actions](./reference/controller-actions/README.md) remain in the **Reference** section. 
+- Information about using [forms](./development/forms.md) has been split into a dedicated page, while specific [controller actions](./reference/controller-actions.md) remain in the **Reference** section. 
 
 </Block>
 

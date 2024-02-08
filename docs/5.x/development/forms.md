@@ -1,7 +1,7 @@
 ---
 description: Exchange data with Craft over HTTP.
 related:
-  - uri: ../reference/controller-actions/README.md
+  - uri: ../reference/controller-actions.md
     label: Controller Action Reference
   - uri: graphql.md
     label: Using Craft’s GraphQL API
@@ -15,7 +15,17 @@ Any time you want to submit or get information to Craft, it’s part of the [req
 
 ## Making Requests
 
-An “action request” is one that explicitly declares the controller and action to use, via an `action` query or body param.
+Most of your interactions with Craft so far have likely been over HTTP. Let’s take a look at how Craft determines what to do when it receives a request.
+
+### Params
+
+This page will make frequent references to _query_ and _body_ params. These are named values sent with a request, either encoded after a `?` in the URL, or within the “body” of a request. Query params are used in [GET](#get) and [POST](#post) requests, but body params are only used in POST requests.
+
+Craft uses a handful of params to properly route a request, but may expect others based on what it thinks the user is requesting. For example, most requests use an [action](#actions) param, but a [login request](../reference/controller-actions.md#post-userslogin) also requires a `username` and `password` param.
+
+### Actions
+
+An “action request” is one that explicitly declares the [controller and action](../reference/controller-actions.md) to use, via an `action` query or body param.
 
 ::: tip
 This `action` parameter is different from the `<form action="...">` attribute:

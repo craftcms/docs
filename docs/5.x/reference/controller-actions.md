@@ -2,6 +2,8 @@
 description: Craft has a powerful and secure HTTP API for interacting with accounts, content, and other features from your front-end.
 sidebarDepth: 2
 related:
+  - uri: ../development/forms.md
+    label: Working with Forms in Craft
   - uri: https://craftcms.com/knowledge-base/front-end-user-accounts
     label: Supporting Public Registration
   - uri: https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers
@@ -15,6 +17,8 @@ Controllers are Craft’s way of talking to the outside world. Pretty much every
 Most controllers and actions are carefully locked down with [permissions](../../system/user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../../system/user-management.md#public-registration) or [cart management](/commerce/4.x/orders-carts.md).
 
 The following list of controller actions is non-exhaustive, but covers common patterns like [logging in](#post-userslogin), [creating entries](#post-entriessave-entry), and [managing an address book](#post-userssave-address).
+
+<See path="../development/forms.md" label="Using Forms" description="Start here to learn about sending data to Craft." />
 
 ## Available Actions
 

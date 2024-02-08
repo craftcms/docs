@@ -5,7 +5,7 @@ related:
     label: Introduction to Elements
   - uri: /commerce/4.x/addresses.md
     label: Using addresses in Craft Commerce
-  - uri: ../controller-actions/README.md # Temporary!
+  - uri: ../controller-actions.md
     label: Controller Actions Reference
   - uri: ../field-types/addresses.md
     label: Addresses Fields
