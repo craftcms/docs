@@ -4,6 +4,8 @@ description: Model, compose, and publish content exactly the way you want.
 related:
   - uri: ../../system/elements.md
     label: Introduction to Elements
+  - uri: ../field-types/entries.md
+    label: Entries Fields
 ---
 
 # Entries

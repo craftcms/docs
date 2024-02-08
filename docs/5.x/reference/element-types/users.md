@@ -3,6 +3,10 @@ containsGeneratedContent: yes
 related:
   - uri: ../../system/elements.md
     label: Introduction to Elements
+  - uri: ../../system/user-management.md
+    label: Managing Users
+  - uri: ../field-types/users.md
+    label: Users Fields
 ---
 
 # Users

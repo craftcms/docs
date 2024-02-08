@@ -3,6 +3,8 @@ containsGeneratedContent: yes
 related:
   - uri: ../../system/elements.md
     label: Introduction to Elements
+  - uri: ../field-types/assets.md
+    label: Assets Fields
 ---
 
 # Assets

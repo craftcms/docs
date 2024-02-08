@@ -6,6 +6,8 @@ related:
     label: Using addresses in Craft Commerce
   - uri: ../controllers/controller-actions.md # Temporary!
     label: Controller actions reference
+  - uri: ../field-types/addresses.md
+    label: Addresses Fields
 containsGeneratedContent: yes
 ---
 
