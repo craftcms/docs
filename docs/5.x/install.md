@@ -30,14 +30,18 @@ While we [strongly recommend](#why-ddev) DDEV for new Craft projects, [alternate
 1. Create DDEV configuration files:
 
     ```bash
-    ddev config --project-type=craftcms --docroot=web --create-docroot
+    ddev config --project-type=craftcms --docroot=web --create-docroot --php-version=8.2 --database=mysql:8.0
     ```
 
 1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft):
 
     ```bash
-    ddev composer create -y --no-scripts craftcms/craft
+    ddev composer create -y --no-scripts craftcms/craft@5.0.0-beta.1
     ```
+
+    ::: tip
+    This step refers to a beta version of Craft. If you want to install a stable release, refer to the [instructions for Craft 4](/4.x/install.md)!
+    :::
 
 1. Run the Craft setup wizard, and accept all defaults (in `[square brackets]`):
 
