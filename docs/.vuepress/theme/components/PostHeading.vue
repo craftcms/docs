@@ -12,7 +12,7 @@
     <div
       v-else-if="$activeVersionInfo && $activeVersionInfo.stabilityFlag === 'beta'"
       class="version-warning">
-      You are viewing documentation for an unreleased version of {{ $activeSet.setTitle }}.
+      You are viewing documentation for an unreleased version of {{ $activeSet.setTitle }}. Please be aware that some pages, screenshots, and technical reference may still reflect older versions.
     </div>
     <div
       v-else-if="isSearchReferral && suggestedPath"
