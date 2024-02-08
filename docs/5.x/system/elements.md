@@ -1,3 +1,24 @@
+---
+description: Explore Craft’s massively flexible atomic unit of content.
+related:
+  - uri: ../reference/element-types/addresses.md
+    label: Address Elements
+  - uri: ../reference/element-types/assets.md
+    label: Asset Elements
+  - uri: ../reference/element-types/categories.md
+    label: Category Elements
+  - uri: ../reference/element-types/entries.md
+    label: Entry Elements
+  - uri: ../reference/element-types/globals.md
+    label: Global Set Elements
+  - uri: ../reference/element-types/tags.md
+    label: Tag Elements
+  - uri: ../reference/element-types/users.md
+    label: User Elements
+  - uri: relations.md
+    label: Working with Relationships
+---
+
 # Elements
 
 An _element_ is the most basic unit of content in Craft. Elements provide smart management, routing, and querying interfaces for users and developers. Each [type](#element-types) of element has some unique capabilities, but they’re all built on top of a set of [common features](#common-features).

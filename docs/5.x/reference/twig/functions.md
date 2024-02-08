@@ -1,3 +1,7 @@
+---
+description: Process and generate data or markup.
+---
+
 # Functions
 
 The following [functions](https://twig.symfony.com/doc/3.x/templates.html#functions) are available to Twig templates in Craft:

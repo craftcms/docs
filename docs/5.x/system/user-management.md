@@ -195,7 +195,7 @@ Public user registration is disabled by default, but can be turned on in any Cra
 
 To enable public registration, go to **Settings** → **Users** → **Settings**, and check **Allow public registration**. With that checked, you will also have the ability to choose a **Default User Group** that publicly-registered users will be automatically added to.
 
-Once you set up your site to allow public user registration, the last step is to create a front-end [user registration form](kb:front-end-user-accounts#registration-form). For a full list of params a user can set during registration (or when updating their account, later on), read about the [`users/save-user` controller action](../reference/controllers/controller-actions.md#post-users-save-user).
+Once you set up your site to allow public user registration, the last step is to create a front-end [user registration form](kb:front-end-user-accounts#registration-form). For a full list of params a user can set during registration (or when updating their account, later on), read about the [`users/save-user` controller action](../reference/controller-actions/README.md#post-users-save-user).
 
 ::: tip
 By default, Craft puts new users in a [pending](#pending) state and allows them to activate their own accounts via email. You can instead select **Deactivate users by default** to place a moderation buffer between public registration and eventual access.

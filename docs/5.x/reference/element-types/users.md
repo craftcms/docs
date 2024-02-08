@@ -1,4 +1,5 @@
 ---
+description: Manage and personalize access to your platform.
 containsGeneratedContent: yes
 related:
   - uri: ../../system/elements.md

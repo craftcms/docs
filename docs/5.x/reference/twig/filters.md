@@ -1,5 +1,5 @@
 ---
-description: Fluidly manipulate data in your templates.
+description: Fluidly manipulate and decorate values in your templates.
 related:
   - uri: ../../development/templates.md
     label: Introduction to Templating

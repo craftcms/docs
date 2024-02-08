@@ -1,11 +1,12 @@
 ---
+description: Store flexible, globally-aware location information.
 related:
   - uri: ../../system/elements.md
     label: Introduction to Elements
   - uri: /commerce/4.x/addresses.md
     label: Using addresses in Craft Commerce
-  - uri: ../controllers/controller-actions.md # Temporary!
-    label: Controller actions reference
+  - uri: ../controller-actions/README.md # Temporary!
+    label: Controller Actions Reference
   - uri: ../field-types/addresses.md
     label: Addresses Fields
 containsGeneratedContent: yes

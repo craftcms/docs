@@ -1,4 +1,5 @@
 ---
+description: Create user-managed, hierarchical taxonomies for your content.
 containsGeneratedContent: yes
 related:
   - uri: ../../system/elements.md

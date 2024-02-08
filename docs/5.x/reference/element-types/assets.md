@@ -1,4 +1,5 @@
 ---
+description: Store files and rich metadata, together—then reuse them throughout the system.
 containsGeneratedContent: yes
 related:
   - uri: ../../system/elements.md

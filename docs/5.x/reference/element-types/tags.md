@@ -1,4 +1,5 @@
 ---
+description: Define flat “folksonomies” to organize content, as it grows.
 containsGeneratedContent: yes
 related:
   - uri: ../../system/elements.md

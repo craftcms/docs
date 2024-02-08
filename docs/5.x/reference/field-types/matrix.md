@@ -52,9 +52,9 @@ Traditionally, Matrix fields have used the **As inline-editable blocks** view mo
 
 ![An empty Matrix field’s block types](../../images/fields-matrix-inline-empty.png)
 
-A new entry of the chosen type will be created at the end of the 
+A new entry of the chosen type will be appended to the list:
 
-![A newly-added Quote block](../../images/matrix-field-new-block.png)
+![A newly-added Quote block](../../images/fields-matrix-inline-new.png)
 
 You can add as many blocks to your Matrix field as you’d like—or at least as many as the field’s **Min Blocks** and **Max Blocks** settings allow.
 
@@ -271,7 +271,7 @@ This section has not been adapted for Craft 5. Working with Matrix field data ha
 :::
 
 ::: warning
-Working with nested entries is significantly more complex than other field types. The `form` examples that follow assume some familiarity with [how Craft routes and handles requests](../controllers/controller-actions.md), as well as a willingness to adapt and extend the provided HTML to suit your needs.
+Working with nested entries is significantly more complex than other field types. The `form` examples that follow assume some familiarity with [how Craft routes and handles requests](../controller-actions/README.md), as well as a willingness to adapt and extend the provided HTML to suit your needs.
 :::
 
 If you have an element form (such as an [entry form](kb:entry-form)) that needs to manage content within a Matrix field, you will need to submit your Matrix field’s data in a specific structure. We’re using JSON for the sake of its simple syntax, but the following examples will show you how to build a similarly-structured request with normal form elements:
@@ -407,7 +407,7 @@ However: as long as the data you ultimately POST to Craft conforms to the schema
 
 #### Validation Errors
 
-Should you encounter [validation](../controllers/controller-actions.md#models-and-validation) issues within a Matrix field, Craft will set a [flash](../controllers/controller-actions.md#flashes) and add errors to the main element (under the Matrix field’s handle)—as well as on each block with problems.
+Should you encounter [validation](../controller-actions/README.md#models-and-validation) issues within a Matrix field, Craft will set a [flash](../controller-actions/README.md#flashes) and add errors to the main element (under the Matrix field’s handle)—as well as on each block with problems.
 
 In these cases, it’s important to handle the Matrix block data appropriately—the blocks will be available directly on the main element as an array, and do not need to be fetched. In fact, trying to re-load the blocks from the database would mean you are working with the last-persisted state, rather than the blocks populated from the most recent request!
 

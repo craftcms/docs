@@ -55,7 +55,7 @@ You can query for elements based on a country field’s value in a familiar way:
 
 ### Front-end Forms
 
-Update the value of a country field on an element by submitting a two-letter country code to the [`entries/save-entry` action](../controllers/controller-actions.md#post-entries-save-entry). Supposing we are in a template used by the “Letters” section from the previous example, our form might look something like this:
+Update the value of a country field on an element by submitting a two-letter country code to the [`entries/save-entry` action](../controller-actions/README.md#post-entries-save-entry). Supposing we are in a template used by the “Letters” section from the previous example, our form might look something like this:
 
 ```twig
 {% set countries = craft.app.addresses.getCountryRepository().getAll() %}
@@ -81,4 +81,4 @@ Update the value of a country field on an element by submitting a two-letter cou
 </form>
 ```
 
-<See path="../controllers/controller-actions.md" description="Read more about using forms to submit data to Craft controllers." />
+<See path="../controller-actions/README.md" description="Read more about using forms to submit data to Craft controllers." />

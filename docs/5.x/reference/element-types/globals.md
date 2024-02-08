@@ -1,4 +1,5 @@
 ---
+description: Make important content available anywhere.
 containsGeneratedContent: yes
 related:
   - uri: ../../system/elements.md
