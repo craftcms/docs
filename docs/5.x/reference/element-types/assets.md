@@ -17,7 +17,7 @@ Assets are one of Craft’s built-in [element types](elements.md), and are repre
 
 Assets are organized into **volumes**, each of which sits on top of a [filesystem](#filesystems) and carries its own permissions and [content](#asset-custom-fields) options. Volumes are configured from **Settings** → **Assets**.
 
-When setting up a volume, you will be asked to create its underlying filesystem, as well.
+When setting up a volume, you will be asked to choose or create its underlying filesystem.
 
 <BrowserShot
   url="https://my-craft-project.ddev.site/admin/assets/volumes/new"
@@ -38,10 +38,12 @@ All filesystems support the following options:
 - **Base URL**: The public URL to files in this filesystem.
 
 ::: tip
-A filesystem’s **Base URL** can be set to an environment variable, or begin with an alias. [Read more](./config/README.md#control-panel-settings) about special configuration values.
+A filesystem’s **Base URL** can be set to an environment variable, or begin with an alias. [Read more](../../configure.md#control-panel-settings) about special configuration values.
 
-In the screenshot above, we’re using a `@cdn` [alias](./config/README.md#aliases) so that the URL can be updated across multiple filesystems with a single change.
+In the screenshot above, we’re using a `@cdn` [alias](../../configure.md#aliases) so that the URL can be updated across multiple filesystems with a single change.
 :::
+
+Multiple volumes can share a single filesystem, so long as they each have a unique and non-overlapping **Base Path**. If another volume is already mounted at the top level of a filesystem, it won’t be available for selection.
 
 ### Local Filesystems
 
@@ -68,7 +70,7 @@ The settings for each type of filesystem will differ based on the provider, and 
 
 ## Asset Custom Fields
 
-Each volume has its own [field layout](./fields.md#field-layouts), configured on its setting screen under the **Field Layout** tab.
+Each volume has its own [field layout](../../system/fields.md#field-layouts), configured on its setting screen under the **Field Layout** tab.
 
 ### `alt` Text
 
@@ -84,14 +86,14 @@ Asset field layouts can include the native **Alternative Text** <Poi label="1" t
 <img src="../../images/assets-field-layout.png" />
 </BrowserShot>
 
-Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](./fields.md) values, attributes, or combination thereof. 
+Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](../../system/fields.md) values, attributes, or combination thereof. 
 
 We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier. The WCAG [advises against](https://www.w3.org/TR/2015/REC-ATAG20-20150924/Overview.html#gl_b23) automatically repairing alt text with “generic [or] irrelevant strings,” including the name of the file (which asset titles are generated from), so Craft omits the `alt` attribute when using `asset.getImg()` if no explicit text is available.
 
 **Alternative Text** is also displayed as a “transcript” beneath video previews, in the control panel.
 
 ::: tip
-Do you have existing `alt` text stored in a different field? You can migrate it to the native attribute with the [`resave/assets` command](./console-commands.md#resave):
+Do you have existing `alt` text stored in a different field? You can migrate it to the native attribute with the [`resave/assets` command](../cli.md#resave):
 
 ```bash
 php craft resave/assets --set alt --to myAltTextField --if-empty
@@ -102,13 +104,13 @@ php craft resave/assets --set alt --to myAltTextField --if-empty
 
 After creating your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files and subfolders in the main content area.
 
-In addition to the normal actions available in [element indexes](./elements.md#indexes), asset indexes support:
+In addition to the normal actions available in [element indexes](../../system/elements.md#indexes), asset indexes support:
 
 - Uploading new files using the **Upload files** toolbar button or by dragging files from your desktop;
 - Creating and organizing [folders](#managing-subfolders) within a volume;
 - Transferring a file from one volume to another by dragging-and-dropping it from the element index into a folder in the sources sidebar (or using the **Move…** element action);
 
-Special [element actions](./elements.md#actions) are also available for single assets:
+Special [element actions](../../system/elements.md#actions) are also available for single assets:
 
 - Rename an existing file;
 - Replace a file with a new one;
@@ -119,10 +121,6 @@ Special [element actions](./elements.md#actions) are also available for single a
 - Move the selected assets to a new volume and/or folder;
 
 ### Managing Subfolders
-
-::: tip
-Asset and folder management was [greatly enhanced](https://craftcms.com/blog/craft-4-4-released) in Craft 4.4. Earlier versions only support drag-and-drop file management, and folders were created and deleted via the sources sidebar.
-:::
 
 <BrowserShot
   url="https://my-craft-project.ddev.site/admin/assets/uploads"
@@ -148,28 +146,28 @@ The new subfolder will appear in-line <Poi label="2" target="assetIndex" id="fol
 The first method is a great way to quickly move assets into a parent directory, or back to the volume’s root folder.
 
 ::: tip
-You can automatically organize assets when they are uploaded via an [assets field](./assets-fields.md) with the **Restrict assets to a single location** setting.
+You can automatically organize assets when they are uploaded via an [assets field](../field-types/assets.md) with the **Restrict assets to a single location** setting.
 :::
 
 ## Updating Asset Indexes
 
 If any files are ever added, modified, or deleted outside of Craft (such as over FTP), you’ll need to tell Craft to update its indexes for the volume. You can do that from **Utilities** → **Asset Indexes**.
 
-You will have the option to cache remote images. If you don’t have any remote volumes (Amazon S3, etc.), you can safely ignore it. Enabling the setting will cause the indexing process to take longer to complete, but it will improve the speed of [image transform](image-transforms.md) generation.
+You will have the option to cache remote images. If you don’t have any remote volumes (Amazon S3, etc.), you can safely ignore it. Enabling the setting will cause the indexing process to take longer to complete, but it will improve the speed of [image transform](../../development/image-transforms.md) generation.
 
 ## Image Transforms
 
-Craft provides a way to perform a variety of image transformations to your assets. See [Image Transforms](image-transforms.md) for more information.
+Craft provides a way to perform a variety of image transformations to your assets. See [Image Transforms](../../development/image-transforms.md) for more information.
 
 ## Image Editor
 
 Craft provides a built-in Image Editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose a focal point on them.
 
-To launch the Image Editor, double-click an image (either on the Assets page or from an [Assets field](assets-fields.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (<icon kind="settings" />).
+To launch the Image Editor, double-click an image (either on the Assets page or from an [Assets field](../field-types/assets.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (<icon kind="settings" />).
 
 ### Focal Points
 
-Set focal points on your images so Craft knows which part of the image to prioritize when determining how to crop your images for [image transforms](image-transforms.md). Focal points take precedence over the transform’s Crop Position setting.
+Set focal points on your images so Craft knows which part of the image to prioritize when determining how to crop your images for [image transforms](../../development/image-transforms.md). Focal points take precedence over the transform’s Crop Position setting.
 
 To set a focal point, open the Image Editor and click on the Focal Point button. A circular icon will appear in the center of your image. Drag it to wherever you want the image’s focal point to be.
 
@@ -192,10 +190,10 @@ $myAssetQuery = \craft\elements\Asset::find();
 ```
 :::
 
-Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Asset](craft4:craft\elements\Asset) objects will be returned.
+Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Asset](craft4:craft\elements\Asset) objects will be returned.
 
 ::: tip
-See [Element Queries](element-queries.md) to learn about how element queries work.
+See [Element Queries](../../development/element-queries.md) to learn about how element queries work.
 :::
 
 ### Example
@@ -228,10 +226,10 @@ We can display a list of thumbnails for images in a “Photos” volume by doing
 When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have “Assets in this volume have public URLs” enabled and a “Base URL” setting. Otherwise, the result will always be empty.
 :::
 
-You can cache-bust asset URLs automatically by enabling the [revAssetUrls](config4:revAssetUrls) config setting, or handle them individually by using Craft’s [`url()` function](dev/functions.md#url) to append a query parameter with the last-modified timestamp:
+You can cache-bust asset URLs automatically by enabling the [revAssetUrls](config4:revAssetUrls) config setting, or handle them individually by using Craft’s [`url()` function](../twig/functions.md#url) to append a query parameter with the last-modified timestamp:
 
 ```twig
-<img src="{{ url(image.getUrl('thumb'), {v: image.dateModified.timestamp}) }}">
+<img src="{{ url(image.getUrl('thumb'), { v: image.dateModified.timestamp }) }}">
 {# <img src="https://my-project.tld/images/_thumb/bar.jpg?v=1614374621"> #}
 ```
 

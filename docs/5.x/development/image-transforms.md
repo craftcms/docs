@@ -159,7 +159,8 @@ See a list of all the [possible keys and values](#possible-values) for this obje
 Then pass that hash into your asset’s `getUrl()`, `getWidth()`, and `getHeight()` functions:
 
 ```twig
-<img src="{{ asset.getUrl(thumb) }}"
+<img
+  src="{{ asset.getUrl(thumb) }}"
   width="{{ asset.getWidth(thumb) }}"
   height="{{ asset.getHeight(thumb) }}">
 ```
@@ -170,7 +171,8 @@ It would look similar using `setTransform()` like we did in the previous section
 
 ```twig
 {% do asset.setTransform(thumb) %}
-<img src="{{ asset.url }}"
+<img
+  src="{{ asset.url }}"
   width="{{ asset.width }}"
   height="{{ asset.height }}">
 ```
