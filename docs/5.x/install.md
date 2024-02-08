@@ -30,13 +30,13 @@ While we [strongly recommend](#why-ddev) DDEV for new Craft projects, [alternate
 1. Create DDEV configuration files:
 
     ```bash
-    ddev config --project-type=craftcms --docroot=web --create-docroot --php-version=8.2 --database=mysql:8.0
+    ddev config --project-type=craftcms --docroot=web --create-docroot --php-version=8.2
     ```
 
 1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft):
 
     ```bash
-    ddev composer create -y --no-scripts craftcms/craft@5.0.0-beta.1
+    ddev composer create -y --no-scripts craftcms/craft=5.0.x-dev
     ```
 
     ::: tip
