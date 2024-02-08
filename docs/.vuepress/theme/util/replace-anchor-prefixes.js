@@ -1,10 +1,10 @@
 const dictionary = require("../../anchor-prefixes");
 const placeholders = Object.keys(dictionary);
 
-function replacePrefixes(md) {
+function replacePrefixes(md, ctx) {
   // expand custom prefix into full URL
   md.normalizeLink = url => {
-    return replacePrefix(url);
+    return replacePrefix(url, ctx);
   }
 
   // remove custom prefix from link text
@@ -20,8 +20,9 @@ function replacePrefixes(md) {
 /**
  * Replace any of our special prefixes within links.
  * @param {*} link href value
+ * @param {AppContext} ctx Vue AppContext
  */
-function replacePrefix(link) {
+function replacePrefix(link, ctx) {
   link = decodeURIComponent(link);
 
   // do we have a protocol or prefix?
@@ -47,52 +48,73 @@ function replacePrefix(link) {
   // get relevant settings from `anchor-prefixes.js`
   const prefixSettings = dictionary[inUse[0]];
 
-  if (prefixSettings.hasOwnProperty("format")) {
-    // get class name, subject, whether it’s a method, and hash
-    const ref = parseReference(link);
-
-    if (ref && prefixSettings.format === "internal") {
-      let url = `${prefixSettings.base}${slugifyClassName(ref.className)}.html`;
-      let hash = ref.hash;
-
-      if (ref.subject) {
-        hash = "";
-        if (ref.isMethod) {
-          hash = "method-";
-        } else if (!ref.subject.match(/^EVENT_/)) {
-          // used to start with `property-`, but more recent yii2-apidoc dropped it
-        }
-
-        hash += ref.subject.replace(/_/g, "-").toLowerCase();
-      }
-
-      return url + (hash ? `#${hash}` : "");
-    } else if (ref && prefixSettings.format === "yii") {
-      // v1 does not lowercase class name, and it strips `()` from method names
-      let isVersion1 = prefixSettings.base.includes("1.1");
-      let url = isVersion1
-        ? `${prefixSettings.base}${ref.className}`
-        : `${prefixSettings.base}${slugifyClassName(ref.className)}`;
-      let hash = ref.hash;
-
-      if (ref.subject) {
-        let parens = isVersion1 ? '' : '()';
-        hash =
-          (ref.isMethod ? `${ref.subject}${parens}` : `\$${ref.subject}`) + "-detail";
-      }
-
-      return url + (hash ? `#${hash}` : "");
-    } else if (prefixSettings.format === "config") {
-      m = link.match(/^config[2|3|4]:(.+)/);
-      let setting = m[1].toLowerCase();
-
-      if (m) {
-        return `${prefixSettings.base}${setting}`;
-      }
-    } else if (prefixSettings.format === "generic") {
-      return link.replace(`${prefix}:`, prefixSettings.base);
-    }
+  if (!prefixSettings.hasOwnProperty("format")) {
+    // Nothing we can do without a format:
+    return link;
   }
+
+  // Get class name, subject, whether it’s a method, and hash:
+  const ref = parseReference(link);
+
+  if (ref && prefixSettings.format === "internal") {
+    let url = `${prefixSettings.base}${slugifyClassName(ref.className)}.html`;
+    let hash = ref.hash;
+
+    if (ref.subject) {
+      hash = "";
+      if (ref.isMethod) {
+        hash = "method-";
+      } else if (!ref.subject.match(/^EVENT_/)) {
+        // used to start with `property-`, but more recent yii2-apidoc dropped it
+      }
+
+      hash += ref.subject.replace(/_/g, "-").toLowerCase();
+    }
+
+    return url + (hash ? `#${hash}` : "");
+  }
+
+  if (ref && prefixSettings.format === "yii") {
+    // v1 does not lowercase class name, and it strips `()` from method names
+    let isVersion1 = prefixSettings.base.includes("1.1");
+    let url = isVersion1
+      ? `${prefixSettings.base}${ref.className}`
+      : `${prefixSettings.base}${slugifyClassName(ref.className)}`;
+    let hash = ref.hash;
+
+    if (ref.subject) {
+      let parens = isVersion1 ? '' : '()';
+      hash =
+        (ref.isMethod ? `${ref.subject}${parens}` : `\$${ref.subject}`) + "-detail";
+    }
+
+    return url + (hash ? `#${hash}` : "");
+  }
+
+  if (prefixSettings.format === "set-local") {
+    // Can we get the current version/site in this context?
+    console.warn("Unsupported anchor prefix!");
+
+    return link;
+  }
+
+  if (prefixSettings.format === "config") {
+    m = link.match(/^config[2|3|4]:(.+)/);
+    let setting = m[1].toLowerCase();
+
+    if (!m) {
+      return link;
+    }
+
+    return `${prefixSettings.base}${setting}`;
+  }
+
+  if (prefixSettings.format === "generic") {
+    return link.replace(`${prefix}:`, prefixSettings.base);
+  }
+
+  // No hit?
+  console.warn("Unrecognized or unhandled anchor prefix!");
 
   return link;
 }

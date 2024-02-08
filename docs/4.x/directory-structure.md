@@ -1,6 +1,6 @@
 # Directory Structure
 
-A fresh Craft 4 [installation](./installation.md) will have the following folders and files in it. Existing projects may have [additional files](#other-common-files) in the root.
+A fresh Craft [installation](../install.md) will have the following [folders](#folders) and [files](#files) in it. Existing projects may have [additional files](#other-common-files) in the root.
 
 ## Customizing Paths
 

@@ -1,8 +1,17 @@
 <template>
-    <RouterLink :to="{ path: targetPage.path, hash: hash ? `#${hash}` : null }" class="link">
-        <div class="arrow" aria-hidden="true">&rarr;</div>
-        <div class="title">{{ label || targetPage.title }}</div>
-        <div class="description" v-if="description || targetPage.frontmatter.description">{{ description || targetPage.frontmatter.description }}</div>
+    <a v-if="url" :href="url" target="_blank" rel="noopener" class="see see--outbound">
+        <div class="see-title">
+            {{ label || targetPage.title }}
+            <span class="see-arrow" aria-hidden="true">&rarr;</span>
+        </div>
+        <div class="see-description" v-if="description || targetPage.frontmatter.description">{{ description || targetPage.frontmatter.description }}</div>
+    </a>
+    <RouterLink v-else :to="{ path: targetPage.path, hash: hash ? `#${hash}` : null }" class="see see--internal">
+        <div class="see-title">
+            {{ label || targetPage.title }}
+            <span class="see-arrow" aria-hidden="true">&rarr;</span>
+        </div>
+        <div class="see-description" v-if="description || targetPage.frontmatter.description">{{ description || targetPage.frontmatter.description }}</div>
     </RouterLink>
 </template>
 
@@ -11,9 +20,13 @@ import { resolvePage } from "../theme/util";
 
 export default {
     props: {
+        url: {
+            type: String,
+            required: false,
+        },
         path: {
             type: String,
-            required: true,
+            required: false,
         },
         hash: {
             type: String,
@@ -38,8 +51,8 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-    .link {
-        @apply relative rounded border block no-underline w-full p-4 pl-12 text-current;
+    .see {
+        @apply relative rounded border block no-underline w-full my-4 p-4 text-current;
 
         border: 1px solid var(--border-color);
 
@@ -48,23 +61,32 @@ export default {
         }
     }
 
-    .link:hover {
+    .see:hover {
         @apply no-underline;
     }
 
-    .arrow {
-        @apply absolute top-0 left-0 mt-4 ml-4 text-gray-500;
+    .see-arrow {
+        @apply text-gray-500 ml-2;
     }
 
-    .link:hover .arrow {
-        @apply text-white;
+    .see--outbound .see-arrow {
+        transform: rotate(-45deg);
+        transform-origin: center center;
     }
 
-    .title {
+    .see:hover .see-arrow {
+        color: var(--text-color);
+    }
+
+    .see-title {
         @apply text-lg font-medium text-blue;
     }
 
-    .description {
+    .see:hover .see-title {
+        color: var(--heading-color);
+    }
+
+    .see-description {
         @apply text-sm text-gray-500 mt-1;
     }
 </style>

@@ -18,7 +18,7 @@ You can learn all about it at [craftcms.com](https://craftcms.com).
 
 ## Tech Specs
 
-Craft is a self-hosted PHP application, built on [Yii 2](https://www.yiiframework.com/). It can connect to MySQL and PostgreSQL [databases](config/db.md) for content storage. Templating is powered by [Twig](https://twig.symfony.com).
+Craft is a self-hosted PHP application, built on [Yii 2](https://www.yiiframework.com/). It can connect to MySQL and PostgreSQL [databases](config/db.md) for content storage. Server-side rendering is powered by [Twig](https://twig.symfony.com), and headless applications have access to content via a [GraphQL API](graphql.md).
 
 ## Diving In
 

@@ -1,0 +1,114 @@
+# Dropdown Fields
+
+Dropdown fields give you a dropdown input.
+
+## Settings
+
+Dropdown fields have the following settings:
+
+- **Dropdown Options** — Define the label and value for each option that will be displayed in the menu.
+
+::: tip
+If you change the underlying value of an option that is used by existing entries, Craft will select the designated default option the next time one of those elements is edited. <Since ver="4.5.0" feature="Automatic selection of dropdown defaults" />
+
+Consider using the appropriate [`resave/*` console commands](console-commands.md#resave) to migrate existing data to your new value:
+
+```bash
+php craft resave/entries --section mySection --set myDropdownField --to "={{ object.myDropdownField.value == 'oldValue' ? 'newValue' : object.myDropdownField.value }}"
+```
+:::
+
+## Development
+
+### Querying Elements with Dropdown Fields
+
+When [querying for elements](element-queries.md) that have a Dropdown field, you can filter the results based on the Dropdown field data using a query param named after your field’s handle.
+
+Possible values include:
+
+| Value | Fetches elements…
+| - | -
+| `'foo'` | with a `foo` option selected.
+| `'not foo'` | without a `foo` option selected.
+| `['foo', 'bar']` | with either a `foo` or `bar` option selected.
+| `['not', 'foo', 'bar']` | without either a `foo` or `bar` option selected.
+
+::: code
+```twig
+{# Fetch entries with the 'foo' option selected #}
+{% set entries = craft.entries()
+  .myFieldHandle('foo')
+  .all() %}
+```
+```php
+// Fetch entries with the 'foo' option selected
+$entries = \craft\elements\Entry::find()
+    ->myFieldHandle('foo')
+    ->all();
+```
+:::
+
+### Working with Dropdown Field Data
+
+If you have an element with a Dropdown field in your template, you can access its data using your Dropdown field’s handle:
+
+::: code
+```twig
+{% set value = entry.myFieldHandle %}
+```
+```php
+$value = $entry->myFieldHandle;
+```
+:::
+
+That will give you a <craft4:craft\fields\data\SingleOptionFieldData> object that contains the field data.
+
+To show the selected option, output it as a string, or output the [value](craft4:craft\fields\data\SingleOptionFieldData::$value) property:
+
+```twig
+{{ entry.myFieldHandle }} or {{ entry.myFieldHandle.value }}
+```
+
+To see if an option is selected, use the [value](craft4:craft\fields\data\SingleOptionFieldData::$value) property:
+
+```twig
+{% if entry.myFieldHandle.value %}
+```
+
+To show the selected option’s label, output the [label](craft4:craft\fields\data\SingleOptionFieldData::$label) property:
+
+```twig
+{{ entry.myFieldHandle.label }}
+```
+
+To loop through all of the available options, iterate over the [options](craft4:craft\fields\data\SingleOptionFieldData::getOptions()) property:
+
+```twig
+{% for option in entry.myFieldHandle.options %}
+  Label:    {{ option.label }}
+  Value:    {{ option }} or {{ option.value }}
+  Selected: {{ option.selected ? 'Yes' : 'No' }}
+{% endfor %}
+```
+
+### Saving Dropdown Fields
+
+If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Dropdown field, you can use this template as a starting point:
+
+```twig
+{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
+
+<select name="fields[myFieldHandle]">
+  {% for option in field.options %}
+    {% set selected = entry is defined
+      ? entry.myFieldHandle.value == option.value
+      : option.default %}
+
+    <option value="{{ option.value }}"
+      {% if selected %}selected{% endif %}
+    >
+      {{ option.label }}
+    </option>
+  {% endfor %}
+</select>
+```

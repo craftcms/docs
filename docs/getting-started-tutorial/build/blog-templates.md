@@ -187,7 +187,7 @@ If the lack of styles makes it difficult to evaluate whether you are staying on 
 
 #### Topics
 
-Let’s add some more metadata to the top of our post. Our content model included a [category field](../configure/resources.md#categoriestopics) called **Topics**, which we can access in a really similar way to the feature image!
+Let’s add some more metadata to the top of our post. Our content model included a [category field](../configure/resources.md#categoriestopics) called **Post Categories**, which we can access in a really similar way to the feature image!
 
 Just below the existing `set` tag, add another one to fetch the attached categories:
 
@@ -248,7 +248,7 @@ Let’s output the [post content](../configure/resources.md#post-content) stored
 After the line that declares our `topics` variable, add a new `set` tag:
 
 ```twig{3-4}
-{% set topics = entry.topics.all() %}
+{% set topics = entry.postCategories.all() %}
 
 {# Load content blocks: #}
 {% set postContent = entry.postContent.all() %}
@@ -400,7 +400,7 @@ Create `templates/blog/_topic.twig` (the path we defined when setting up the **C
 ```twig{3,5}
 {% extends '_layout' %}
 
-{% set posts = craft.entries().section('blog').topics(category).all() %}
+{% set posts = craft.entries().section('blog').postCategories(category).all() %}
 
 {% block content %}
   <h1>Topic: {{ category.title }}</h1>
@@ -440,10 +440,10 @@ _Unlike_ the blog index, our topic template automatically has access to a `categ
 We’ve used the `category` variable in a new entry element query, near the top of the template:
 
 ```twig
-{% set posts = craft.entries().section('blog').topics(category).all() %}
+{% set posts = craft.entries().section('blog').postCategories(category).all() %}
 ```
 
-When we set up the **Topics** field, Craft added a corresponding `topics()` method to all element queries that we can use to filter results by category. Craft’s understanding of our content model is also why we can access the attached categories via `entry.topics` in our individual post template! This functionality is present for _all_ custom fields—but the kinds of values they return (or expect) will differ based on the type of field.
+When we set up the **Post Categories** field, Craft added a corresponding `postCategories()` method to all element queries that we can use to filter results by category. Craft’s understanding of our content model is also why we can access the attached categories via `entry.postCategories` in our individual post template! This functionality is present for _all_ custom fields—but the kinds of values they return (or expect) will differ based on the type of field.
 
 ## Summary
 

@@ -10,7 +10,7 @@ export default function resolveRelated($page, $site) {
 
   // Ok, there are related items—let's fill in some info about each:
   return related.map((r) => {
-    const rp = resolvePage($site.pages, r.uri);
+    const rp = resolvePage($site.pages, r.uri, $page.path);
 
     return {
       label: r.label || rp.title,

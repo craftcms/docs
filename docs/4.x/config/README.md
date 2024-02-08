@@ -62,7 +62,7 @@ Some platforms (especially those with ephemeral filesystems) provide a GUI for m
 
 ### Entry Script
 
-Craft will also respond to a handful of specific [PHP constants](#php-constants), as long as they are set prior to bootstrapping the application in your entry script. The [starter project](repo:craftcms/craft) shares a `bootstrap.php` file between `web/index.php` and the `craft` executable to consolidate the definition of constants.
+Craft will also respond to a handful of [specific environment variables or PHP constants](#bootstrap-config), as long as they are set prior to bootstrapping the application in your entry script. The [starter project](repo:craftcms/craft) shares a `bootstrap.php` file between `web/index.php` and the `craft` executable to consolidate the definition of constants.
 
 ### Secrets
 

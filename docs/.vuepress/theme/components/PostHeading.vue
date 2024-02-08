@@ -10,6 +10,11 @@
       This document is for a version of {{ $activeSet.setTitle }} that is no longer supported. Please refer to the <RouterLink :to="suggestedPath">latest version →</RouterLink>
     </div>
     <div
+      v-else-if="$activeVersionInfo && $activeVersionInfo.stabilityFlag === 'beta'"
+      class="version-warning">
+      You are viewing documentation for an unreleased version of {{ $activeSet.setTitle }}.
+    </div>
+    <div
       v-else-if="isSearchReferral && suggestedPath"
       class="version-warning"
     >
