@@ -171,7 +171,7 @@ Multi-instance fields behave as though they were entirely different fields, in a
 </article>
 ```
 
-This example uses the same “Attribution” field as `photoCredit` _and_ `byline`, each storing its own content. Similarly, you can target one instance of field with [element queries](../development/element-queries.md), just as you’d expect:
+This example uses the same “Attribution” field as `photoCredit` _and_ `byline`, each storing its own content. You can target one instance of field with [element queries](../development/element-queries.md), just as you’d expect:
 
 ```twig{4}
 {% set postsMissingImageAttribution = craft.entries()
@@ -180,6 +180,18 @@ This example uses the same “Attribution” field as `photoCredit` _and_ `bylin
   .photoCredit(':empty:')
   .count() %}
 ```
+
+Conversely, adding one field to multiple layouts using the same handle (either the base field’s handle, or by renaming each of them the same way) allows you to query across all instances. Craft quietly queries against each of the unique field layout keys.
+
+```twig
+{% set products = craft.entries()
+  .section('products')
+  .manufacturer('ACME%')
+  .all() %}
+{# -> Products made by ACME Labs and ACME Inc. across multiple product “types” #}
+```
+
+This example assumes you have multiple [entry types](../reference/element-types/entries.md#entry-types) in a “Products” section, each using a centrally-defined, generic “Product Details” field—but with the name changed to “Manufacturer” and handle changed to `manufacturer`.
 
 ### Conditions
 

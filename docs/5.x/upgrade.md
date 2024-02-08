@@ -120,8 +120,44 @@ Content is stored as a JSON blob, and is dynamically indexed by the database in 
 
 #### Advanced Queries
 
-<Todo notes="Explain that you don't need special column names any more." />
-<Todo notes="Clarify how field reuse affects queries" />
+When using custom fields in advanced `where()` conditions, you no longer need to assemble a column prefix/suffix. Instead, Craft can generate the appropriate expression to locate values in the JSON content column:
+
+::: code
+```twig{10} Twig
+{# Locate the field layout element that would save to the desired column: #}
+{% set entryType = craft.app.entries.getEntryTypeByHandle('post') %}
+{% set fieldLayout = entryType.getFieldLayout() %}
+{% set sourceField = fieldLayout.getFieldByHandle('source') %}
+
+{% set entriesFromPhysicalMedia = craft.entries()
+  .section('news')
+  .andWhere([
+    'like',
+    sourceField.getValueSql(),
+    ['print', 'paper', 'press']
+  ])
+  .all() %}
+```
+```php{12} PHP
+use Craft;
+use craft\elements\Entry;
+
+$entryType = Craft::$app->getEntries()->getEntryTypeByHandle('post');
+$fieldLayout = $entryType->getFieldLayout();
+$sourceField = $fieldLayout->getFieldByHandle('source');
+
+$entriesFromPhysicalMedia = Entry::find()
+  ->section('news')
+  ->andWhere([
+    'like',
+    $sourceField->getValueSql(),
+    ['print', 'paper', 'press'],
+  ])
+  ->all();
+```
+:::
+
+While this may appear more convoluted, initially, it ensures that you are querying for the correct instance of a [multi-instance field](), each of which will store their content under a different key in their respective field layouts.
 
 ### Matrix Fields
 
@@ -136,9 +172,15 @@ During the upgrade, Craft will automatically migrate all your Matrix field conte
 ```
 :::
 
+Those fields are then assigned to new [entry types](./reference/element-types/entries.md#entry-types) that replace your existing Matrix blocks
+
+::: warning
+Working with Matrix fields in the front-end has changed significantly.
+:::
+
 #### Consolidating Fields
 
-<Todo notes="This hasn't been implemented yet—but likely a console command?" />
+We plan to introduce a console command to handle merging similar fields, after the upgrade. There is no harm in running your project with extra fields during the beta period.
 
 ### Eager-Loading
 
