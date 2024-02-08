@@ -24,7 +24,7 @@ All fields share a few settings:
 </BrowserShot>
 
 ::: tip
-A field’s _name_ and _instructions_ can be overridden when adding it to a [layout](#field-layouts).
+A field’s _name_ and _instructions_ can be overridden when adding it to a [layout](#field-layouts).  When a field supports [multiple instances](#multi-instance-fields) per layout, you can also override its _handle_.
 :::
 
 ## Field Types
@@ -75,7 +75,7 @@ If you choose “Custom…”, a “Translation Key Format” setting will appea
 
 For example, if a field’s translation key format were `{site.handle[0:2]}`, then new field values would be copied over to any other sites where the first two characters of the site handle matches the first two characters of the original site’s handle. Looking at this from the opposite direction: any site that produces a _unique_ translation key for a field will have its value isolated from other sites.
 
-If the translation key format returns an empty string (`''`), the field will not indicate that it’s available for translation. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per site from _only_ the `blog` section—otherwise it would not be available for translation in any other context.
+If the translation key format returns an empty string (`''`), the field will not indicate that it’s available for translation. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per-site from _only_ the `blog` section—otherwise it would not be available for translation in any other context.
 
 ::: tip
 Keep in mind that fields can be assigned to multiple element types. Accessing invalid properties of the current element (like `section` on an asset) may cause the key to end up blank (and therefore not translated)

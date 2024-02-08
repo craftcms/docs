@@ -22,7 +22,7 @@ Craft uses _entry types_ to define atomic units of content, which are then expos
 
 <Block label="Global Entry Types">
 
-Entry types became a global resource in Craft 5. This means you can define a content type _once_, then use it in multiple sections, as a nested block in a Matrix field, or some combination of the two. As a result, some settings have moved around!
+Entry types became a global resource in Craft 5. This means you can define a content type _once_, then use it in multiple sections, as a [nested](#nested-entries) block in a Matrix field, or some combination of the two. As a result, some settings have moved around!
 
 Most importantly, you’ll manage entry types in the **Settings** &rarr; **Entry Types** screen—or create them on-the-fly when working on a section or Matrix field.
 
@@ -45,6 +45,7 @@ Entry types have the following settings:
 - **Show the Slug field** — As with titles, slugs can be manually or automatically generated.
   - **Slug Translation Method** — In multi-site projects, choose how slugs are localized.
 - **Show the Status field** — Manually set each entry’s status, or allow it to be dictated by its usage.
+- **Field Layout** — Add and arrange [custom fields](../../system/fields.md) to suit your content model.
 
 ### Dynamic Entry Titles
 
@@ -60,12 +61,13 @@ The available translation methods are covered in the [custom fields documentatio
 
 ## Sections
 
-Before you can create entries, you must create Sections to contain them. In each Section you can define the following:
+Sections organize and expose entry types for content authors. In each Section you can define the following:
 
 - Whether entries in the section have URLs;
 - What the entries’ URLs should look like;
 - Which template should get loaded if an entry’s URL is requested;
-- What types of entries should be available in the section, and which fields each of those [entry types](#entry-types) should have;
+- What [entry types](#entry-types) are available in the section;
+- How many authors can be associated with each entry;
 
 If your project has multiple [sites](../../system/sites.md), your Section can define these additional settings:
 
@@ -88,14 +90,12 @@ Singles are used for one-off pages or content objects that have unique requireme
 - …an _About Us_ page;
 - …a _Contact Us_ page;
 
-Unlike the other section types, singles only ever have _one_ entry associated with them, meaning their URIs can be static (like `contact-us`) rather than parameterized (like `news/{slug}`).
-
-Like [globals](./globals.md), singles don’t have an editable **Author**, **Post Date**, or **Expiration Date**.
+Unlike the other section types, singles only ever have _one_ entry associated with them, meaning their URIs can be static (like `contact-us`) rather than templatized (like `news/{slug}`).
 
 ::: tip
-Singles have all the functionality of [globals](./globals.md), and can even be pre-loaded into global Twig variables with the <config4:preloadSingles> config setting.
+Singles have all the functionality of [globals](./globals.md), and can even be pre-loaded into global Twig variables with the <config4:preloadSingles> config setting. As such, singles don’t have an editable **Author**, **Post Date**, or **Expiration Date**.
 
-A single’s **Status** controls can be hidden with the **Show the Status field** setting in its sole **Entry Type**.
+A single’s **Status** controls can be hidden with the **Show the Status field** setting in its selected **Entry Type**.
 :::
 
 #### Channels
@@ -109,11 +109,11 @@ Channels are used for lists or streams of similar content, such as…
 - …recipes;
 - …reviews;
 
-Entries in channels are intended to be queried and displayed ordered by one or more of their attributes or [custom fields](../../system/fields.md)—or explicitly attached to other elements via [entries fields](../field-types/entries.md). Channels are also a simple way to maintain a flat taxonomy, standing in for [tags](./tags.md) or [categories](./categories.md).
+Entries in channels are intended to be queried and displayed ordered by one or more of their attributes or [custom fields](../../system/fields.md). Channels are also a simple way to maintain a flat taxonomy, standing in for [tags](./tags.md) or [categories](./categories.md).
 
 #### Structures
 
-Structures are an extension of channels that support explicit, hierarchical ordering.
+Structures are an extension of channels that support explicit, hierarchical organization.
 
 ![Illustration of Entries layout with a “Galleries” structure selected, showing nested building and gallery entries with drag-and-drop handles](../../images/entry-types-structures.png)
 
@@ -134,19 +134,25 @@ Just like channels, entries in structures can be assigned [types](#entry-types).
 Structures can also make use of the **Maintain Hierarchy** setting on entries fields.
 :::
 
+Entries belonging to a structure are discrete from [nested entries](#nested-entries) in [Matrix](../field-types/matrix.md) fields. Structure entries can be freely moved around in their hierarchy (receiving new “parent” elements in the process), whereas nested entries are always owned by the element they were created within.
+
 #### Custom Sources
 
-Content authors can add their own special element sources based on existing Singles, Channels, and Structures by creating custom sources. Each custom source lists all entries by default, and can be filtered to only those that meet customized **Entry Criteria**.
+Special element sources based on existing Singles, Channels, and Structures by creating _custom sources_. Each custom source lists all entries by default, but can be filtered to only those that meet the specified **Entry Criteria**.
 
-To create a new custom source, go to **Entries** → **Customize (<icon kind="settings" />)**, and from the bottom-left “+” menu choose **New custom source**:
+To create a new custom source, go to **Entries** → **Customize Sources** (under the three dots in the sources sidebar), and from the bottom-left “+” menu choose **New custom source**:
 
-![Screenshot of a modal window with fields for a new custom source: Label, Entry Criteria, and Table Columns](../../images/custom-source.png)
+![Screenshot of a modal window with fields for a new custom source: Label, Condition Builder, and Table Columns](../../images/custom-source.png)
+
+::: warning
+This same interface is available in the search bar of any [element index](../../system/elements.md#indexes), but the condition builder interface will differ in subtle ways, as custom sources are stored in Project Config.
+:::
 
 ### Entry URI Formats
 
 Channel and structure sections can choose whether their entries should be assigned URLs in the system by filling in the **Entry URI Format** setting. Singles have a “URI” setting, but it is typically defined statically or omitted (if it doesn’t need its own URL).
 
-The entry URI formats is an [object template](../../system/object-templates.md), which gets evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](../../system/routing.md) a request.
+The entry URI format is an [object template](../../system/object-templates.md), which gets evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](../../system/routing.md) a request.
 
 When Craft matches a request to an entry, its section’s designated **Template** is rendered. That template is automatically provided an `entry` variable, set to the resolved <craft4:craft\elements\Entry> object, and ready to output any of its attributes or custom field data.
 
@@ -176,12 +182,19 @@ With the above Entry URI Format, a top-level entry’s URI would be `earth/south
 
 ::: tip
 Consider these tips for creating special URIs:
+
 - A URI that evaluates to `__home__` (and nothing more) will be available at your site’s base path;
 - An empty URI means the entry does not get a route and will not have a public URL—unless you define one manually via `routes.php`;
 - Any Twig statement can be used to output values in a URI template—including ones that query for other elements,  e.g. `{{ craft.entries().section('mySingle').one().slug }}/news`;
 - [Aliases](../../configure.md#aliases-and-environment-variables) can be evaluated with the [`alias()` function](../twig/functions.md#alias): `{{ alias('@basePressUri') }}/news`, `{{ alias('@mySectionUri') }}`.
 - The [null-coalescing operator](https://twig.symfony.com/doc/3.x/templates.html#other-operators) (`??`) can silently swallow undefined variable errors (like `parent.uri`, above);
 :::
+
+#### Nested Entry URLs
+
+[Nested entries](#nested-entries) in Matrix fields can also be configured to have URLs—but the settings are part of the field, not a section.
+
+A single entry type may have URLs in some contexts, and not in others!
 
 ### Preview Targets
 
@@ -257,6 +270,10 @@ You can pass the token via either a query string parameter named after your <con
 For live preview, you should also consider [enabling iFrame Resizer](config4:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
 :::
 
+## Nested Entries
+
+Entries also power the [Matrix](../field-types/matrix.md) field, which means your [entry types](#entry-types) can represent entire pages, or the building blocks thereof. How you implement your content model and authoring experience is entirely up to you!
+
 ## Editing Entries
 
 If you have at least one section, there will be an **Entries** menu item in the primary control panel navigation. Clicking on it will take you to the entry [index](../../system/elements.md#indexes). From there, you can navigate to the entry you wish to edit, or create a new one.
@@ -265,7 +282,7 @@ Depending on your section’s settings, can perform some or all of the following
 
 - Choose the entry type (if there is more than one to choose from);
 - Edit the entry’s **Title**, **Slug**, and [custom field](../../system/fields.md) values;
-- Choose the entry’s **Author** (Pro edition only);
+- Choose the entry’s **Authors** (Pro edition only);
 - Choose the entry’s **Parent** (if it’s within a [Structure](#structures) section);
 - Set the entry’s **Post Date** (when it will be considered published);
 - Set the entry’s **Expiration Date** (optional);

@@ -74,17 +74,15 @@ If every field layout that would be used by an element in a source defines the s
 
 ### Structures
 
-[Entries](../reference/element-types/entries.md) (using the _Structure_ section type) and [Categories](../reference/element-types/categories.md) support a hierarchical view mode on their indexes. Elements in structures track their relative position among siblings, and can be easily relocated by dragging-and-dropping <Icon kind="move" /> their row in an index. Reordering is still possible, even when the structure is limited to a single level.
+[Entries](../reference/element-types/entries.md) in _Structure_ sections and [Categories](../reference/element-types/categories.md) support a hierarchical view mode on their indexes. Elements in structures track their relative position among siblings, and can be easily relocated by dragging-and-dropping <Icon kind="move" /> their row in an [element index](#indexes). Reordering is still possible, even when the structure is limited to a single level.
 
 ::: tip
-Use the **View** menu to switch back into structure mode on an index.
+Use the **View** controls to switch back into structure mode on an index if you had previously sorted it by another attribute.
 :::
 
 ### Actions
 
-Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="settings" /> icon in the footer (like _Delete_).
-
-Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
+Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="settings" /> icon in the footer (like _Delete_). Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
 
 ### In-line Editing
 
@@ -105,6 +103,47 @@ A streamlined version of indexes are used when adding elements to a [relational]
 Throughout the control panel, you’ll encounter references to elements in a number of different contexts, like element indexes, [Matrix](../reference/field-types/matrix.md) fields, and other [relational](relations.md) fields. Element _cards_ are a new way to display nested or related elements. They share the core features of element _chips_ (like quick-actions and ordering controls), but provide an additional layer of customization via the element’s [field layout](fields.md#field-layouts).
 
 Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by the field layout; additional features like colorization and icons are supported by entries.
+
+## Rendering Elements
+
+Every element has a `render()` method, which you can call from a template to get an HTML representation of the object.
+
+::: tip
+This is mostly a convenience feature, not the primary means by which you are apt to output an element or its content.
+
+The [CKEditor plugin](plugin:ckeditor) makes use of this feature to convert each nested entry from a placeholder to a rich, personalized block—while remaining exactly where the author placed it in the editor.
+:::
+
+Without any configuration, this will typically be its _title_ (if the element type uses titles), or it’s element type and ID. This default behavior is handled by the element’s magic `__toString()` method, meaning `{{ element.render() }}` and `{{ element }}` are functionally equivalent.
+
+However, the output of `element.render()` can be customized by placing a template in your <config5:partialTemplatesPath> that follows a specific naming convention. The full path to each element’s template is comprised of:
+
+- The element’s type or `refHandle`: Typically its lower-cased, singular name—`entry` or `address`, for instance. The `refHandle` is the same as is used for [reference tags](reference-tags.md), elsewhere in the system.
+- The field layout provider’s handle: Differs based on the type of element and how its field layout is configured. For assets, it would be the volume’s handle; for entries, its entry type handle; for global sets, the set handle.
+
+As an example, if you wanted to customize the output of an asset in a volume with the handle `images`, you would create a template with this path:
+
+```
+_partials/asset/images.twig
+```
+
+If some property of the asset (like its extension, or the user group its uploader is in) should affect its template, you can put whatever logic you need into the template and render something different:
+
+```twig
+<figure>
+  {{ asset.getImg() }}
+
+  <figcaption>
+    {{ asset.title }}
+
+    {% if asset.uploader.can('accessCp') %}
+      <a href="{{ asset.getCpEditUrl() }}">Edit</a>
+    {% endif %}
+  </figcaption>
+</figure>
+```
+
+Each template is passed the element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
 
 ## Properties and Methods
 
@@ -163,5 +202,5 @@ Method | Notes
 `getRef()` | Builds the part of a [reference tag](reference-tags.md) unique to the element.
 `getSiblings()` | Load siblings within the element’s structure. _Structures only._
 `getSite()` | Returns the <craft4:craft\models\Site> the element was loaded for.
-`getStatus()` | 
+`getStatus()` | Returns a plain-text representation of the element’s status, which may be synthesized from a number of other attributes.
 `getUrl()` | Builds a complete front-end URL based on the element’s URI.

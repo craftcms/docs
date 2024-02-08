@@ -1,9 +1,9 @@
 # Matrix Fields
 
-Matrix fields allow you to manage nested [entries](../element-types/entries.md) in a fluid way.
+Matrix fields allow you to manage nested [entries](../element-types/entries.md) in a fluid way. Entries created within a Matrix field are “owned” by the element that field is attached to, and can represent anything from a slide in a gallery to an entire resources section, each record having its own URL.
 
 ::: tip
-In Craft 5, _Matrix blocks_ were converted to _entries_. [Fields](../../system/fields.md) that were previously owned by a particular block type are now managed in (and assigned from) a global pool. You are now able to design [entry types](../element-types/entries.md#entry-types) that exist as standalone content objects (in a section), _or_ as nested entries (in a Matrix field)!
+During the Craft 5 upgrade process, _Matrix blocks_ were converted to _entries_. [Fields](../../system/fields.md) that were previously owned by a particular “block type” are now managed in (and assigned from) a global pool. You are now able to design [entry types](../element-types/entries.md#entry-types) that exist as standalone content objects (in a section), _or_ as nested entries (in a Matrix field)!
 :::
 
 ## Settings
@@ -22,6 +22,10 @@ Choose how nested entries are propagated to other sites. This applies only to _n
 
 Nested entries can have their own URIs and templates.
 
+::: tip
+Incorporate the owner’s URI in a nested element by using `{owner.uri}` in its **URI Format** [object template](../../system/object-templates.md)!
+:::
+
 #### Min Entries
 
 The _minimum_ number of entries that can be created within the field. (Default is no lower limit.)
@@ -32,147 +36,133 @@ The _maximum_ number of entries that can be created within the field. (Default i
 
 #### View Mode <Badge text="New!" />
 
-Choose how the nested elements are represented within the field:
+Choose how the nested elements are represented within the [field UI](#the-field):
 
   - **As cards**: Read-only [element cards](../../system/elements.md#chips-cards) that surface nested field data.
-  - **As inline-editable blocks**: Manage nested entries as though they were part of the parent form. In prior version of Craft, this was the only display option.
+  - **As inline-editable blocks**: Manage nested entries as though they were part of the parent form. In prior versions of Craft, this was the only display option for Matrix fields.
   - **As an element index**: A simplified [element index](../../system/elements.md#indexes) with sorting, searching, and filtering controls.
-  
+
     When using the element index view mode, you can also allow authors to toggle between a card view and standard table view. Enabling the table view reveals controls for the columns that will be displayed, by default.
 
 ## The Field
 
-On a fresh entry, Matrix fields will just show a group of buttons – one for each of the Block Types you created in the field’s settings:
+The interface of a Matrix field depends on its selected [view mode](#view-mode). 
 
-![An empty Matrix field’s block types](../../images/matrix-field-blocks.png)
+Traditionally, Matrix fields have used the **As inline-editable blocks** view mode, which makes the nested entries appear as though they are a repeating or modular region the main entry’s form. An empty Matrix field shows a single button, which will either immediately create a new nested entry (if there is only a single available entry type), or present a menu of entry types to select from:
 
-When you click on one of those buttons, a new block will be created. The Block Type’s name will be shown in the block’s title bar, and each of the Block Type’s fields will be present within the body of the block:
+![An empty Matrix field’s block types](../../images/fields-matrix-inline-empty.png)
+
+A new entry of the chosen type will be created at the end of the 
 
 ![A newly-added Quote block](../../images/matrix-field-new-block.png)
 
-You can add as many blocks to your Matrix field as you’d like—or at least as many as the field’s Min Blocks and Max Blocks settings allow.
+You can add as many blocks to your Matrix field as you’d like—or at least as many as the field’s **Min Blocks** and **Max Blocks** settings allow.
 
-Each block has a settings menu that reveals additional things you can do with the block:
+Each block has a menu that provides access to additional controls:
 
 ![A Matrix block’s action menu](../../images/matrix-block-action-menu.png)
 
-If multiple blocks are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of those selected.
+::: tip
+If multiple blocks are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of them.
 
-You can collapse Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
+You can collapse inline Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
 
 Blocks can also be reordered by dragging the “Move” icon (<icon kind="move" />) at the end of the block’s title bar. If multiple blocks are selected, all the selected blocks will be going along for the ride.
 
 You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>A</kbd>, or selecting a range of blocks starting with the first and then <kbd>Shift</kbd>-clicking the last.
+:::
+
+The **As cards** view mode provides many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips--cards). Double-click any card to edit its content, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
+
+Finally, the **As an element index** view mode behaves just like a normal element index—except it only ever shows the entries owned by that field. This mode is perfect for large data sets that may span multiple pages, need to be sorted by nested fields, or that would otherwise be unwieldy as blocks or cards.
+
+## Nesting Matrix Fields
+
+A Matrix field can include an entry type that has another Matrix field (or the same Matrix field) in its field layout. Those Matrix fields can use the same view mode, or different view modes, depending on how they’re composed. Take care when designing your authoring experience to avoid confusing, infinitely-recursive data structures.
 
 ## Development
 
 ### Querying Elements with Matrix Fields
 
-When [querying for elements](element-queries.md) that have a Matrix field, you can filter the results based on the Matrix field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Matrix field, you can filter the results based on the Matrix field data using a query param named after your field’s handle.
 
 Possible values include:
 
-| Value                   | Fetches elements…                                                         |
-| ----------------------- | ------------------------------------------------------------------------- |
-| `':empty:'`             | that don’t have any Matrix blocks.                                        |
-| `':notempty:'`          | that have at least one Matrix block.                                      |
-| `100`                   | that have a Matrix block with an ID of 100.                               |
-| `[100, 200]`            | that have Matrix blocks with IDs of 100 or 200.                           |
-| a [MatrixBlock](craft4:craft\elements\MatrixBlock) object | that have the Matrix block.             |
-| an array of [MatrixBlock](craft4:craft\elements\MatrixBlock) objects | that have the Matrix blocks. |
+| Value | Fetches elements… |
+| --- | --- |
+| `':empty:'` | that don’t have any Matrix blocks. |
+| `':notempty:'` | that have at least one Matrix block. |
 
 ::: code
 ```twig
-{# Fetch entries with a Matrix block #}
+{# Fetch entries whose Matrix field `myFieldHandle` has at least one nested entry: #}
 {% set entries = craft.entries()
   .myFieldHandle(':notempty:')
   .all() %}
 ```
 ```php
-// Fetch entries with a Matrix block
+// Fetch entries whose Matrix field `myFieldHandle` has at least one nested entry:
 $entries = \craft\elements\Entry::find()
     ->myFieldHandle(':notempty:')
     ->all();
 ```
 :::
 
-::: code
-```twig
-{# Fetch entries with Matrix block ID 100 or 200 #}
-{% set entries = craft.entries()
-  .myFieldHandle([100, 200])
-  .all() %}
-```
-```php
-// Fetch entries with a Matrix block
-$entries = \craft\elements\Entry::find()
-    ->myFieldHandle([100, 200])
-    ->all();
-```
+::: tip
+If you have a reference to a nested entry, you can get the owner element via `entry.owner`.
 :::
 
 ### Working with Matrix Field Data
 
-If you have an element with a Matrix field in your template, you can access its blocks using your Matrix field’s handle:
+If you have an element with a Matrix field in your [template](../../development/templates.md), you can access its nested entries via the field’s handle:
 
-::: code
 ```twig
-{% set query = entry.myFieldHandle %}
+{% set nestedElements = entry.myFieldHandle %}
 ```
-```php
-$query = $entry->myFieldHandle;
-```
-:::
 
-That will give you a [Matrix block query](matrix-blocks.md#querying-matrix-blocks), prepped to output all the enabled blocks for the given field.
+That will give you an [Entry query](../element-types/entries.md#querying-entries), ready to load all the nested entries for a given field.
 
-To loop through all the blocks, call [all()](<craft4:craft\db\Query::all()>) and loop over the results:
+To fetch the nested elements, call one of the [query execution methods](../../development/element-queries.md#executing-element-queries), or use it in a loop:
 
-::: code
 ```twig
-{% set blocks = entry.myFieldHandle.all() %}
-{% if blocks|length %}
+{% set nestedEntries = entry.myFieldHandle.all() %}
+
+{% if nestedEntries|length %}
   <ul>
-    {% for block in blocks %}
+    {% for nestedEntry in nestedEntries %}
       {# ... #}
     {% endfor %}
   </ul>
 {% endif %}
 ```
-```php
-$blocks = $entry->myFieldHandle->all();
-if (count($blocks)) {
-    foreach ($blocks as $block) {
-        // ...
-    }
-}
-```
-:::
 
-All the code you put within the for-loop will be repeated for each Matrix block in the field. The current block will get set to that `block` variable we’ve defined, and it will be a <craft4:craft\elements\MatrixBlock> model.
+All the code you put within the for-loop will be repeated for each nested entry. The current entry will get set to that `nestedEntry` variable we’ve defined, and it will be another <craft4:craft\elements\Entry> model.
 
-Here’s an example of what the template might look like for a Matrix field with four block types (Heading, Text, Image, and Quote). We can determine the current block type’s handle by checking `block.type` (<craft4:craft\elements\MatrixBlock::getType()>).
+Here’s an example of what the template might look like for a Matrix field that has four entry types (Heading, Text, Image, and Quote). We can handle each entry type separately by checking its `handle`:
 
 ```twig
-{% for block in entry.myFieldHandle.all() %}
-  {% if block.type == "heading" %}
-    <h3>{{ block.heading }}</h3>
-  {% elseif block.type == "text" %}
-    {{ block.text|markdown }}
-  {% elseif block.type == "image" %}
-    {% set image = block.image.one() %}
+{% for nestedEntry in entry.myFieldHandle.all() %}
+  {# Grab the entry type’s handle for comparison: #}
+  {% set typeHandle = nestedEntry.type.handle %}
+
+  {% if typeHandle == 'heading' %}
+    <h3>{{ nestedEntry.heading }}</h3>
+  {% elseif typeHandle == 'text' %}
+    {{ nestedEntry.text|markdown }}
+  {% elseif typeHandle == 'image' %}
+    {% set image = nestedEntry.image.one() %}
+
     {% if image %}
-        <img src="{{ image.getUrl('thumb') }}" 
-          width="{{ image.getWidth('thumb') }}" 
-          height="{{ image.getHeight('thumb') }}" 
-          alt="{{ image.title }}"
-        >
+      {{ image.getImg('thumb') }}
     {% endif %}
-  {% elseif block.type == "quote" %}
+  {% elseif typeHandle == 'quote' %}
     <blockquote>
-      <p>{{ block.quote }}</p>
-      <cite>– {{ block.cite }}</cite>
+      <p>{{ nestedEntry.quote }}</p>
+      <cite>– {{ nestedEntry.cite }}</cite>
     </blockquote>
+  {% else %}
+    {# Uh oh! This entry type isn’t support yet... #}
+    <p>You can output something here to remind yourself to handle additional cases!</p>
   {% endif %}
 {% endfor %}
 ```
@@ -181,18 +171,20 @@ Here’s an example of what the template might look like for a Matrix field with
 This code can be simplified using the [switch](dev/tags.md#switch) tag.
 :::
 
-If you only want the first block, call [one()](<craft4:craft\db\Query::one()>) instead of `all()`, and make sure it returned something:
+#### Other Query Methods
+
+If you only want the first nested entry, call [one()](<craft4:craft\db\Query::one()>) instead of `all()`, and make sure it returned something:
 
 ::: code
 ```twig
-{% set block = entry.myFieldHandle.one() %}
-{% if block %}
+{% set firstNestedEntry = entry.myFieldHandle.one() %}
+{% if firstNestedEntry %}
   {# ... #}
 {% endif %}
 ```
 ```php
-$block = $entry->myFieldHandle->one();
-if ($block) {
+$firstNestedEntry = $entry->myFieldHandle->one();
+if ($firstNestedEntry) {
     // ...
 }
 ```
@@ -203,63 +195,86 @@ If you only want to know the total number of blocks, call [count()](<craft4:craf
 ::: code
 ```twig
 {% set total = entry.myFieldHandle.count() %}
-<p>Total blocks: <strong>{{ total }}</strong></p>
+<p>Total nested entries: <strong>{{ total }}</strong></p>
 ```
 ```php
 $total = $entry->myFieldHandle->count();
-// Total blocks: $total
 ```
 :::
 
-If you just need to check if blocks exist (but don’t need to fetch them), you can call [exists()](<craft4:craft\db\Query::exists()>):
+If you just need to check if there are nested entries added to a field (but don’t need to actually load them), call [exists()](<craft4:craft\db\Query::exists()>):
 
 ::: code
 ```twig
 {% if entry.myFieldHandle.exists() %}
-  <p>There are blocks!</p>
+  <p>Here be nested content!</p>
 {% endif %}
 ```
 ```php
 if ($entry->myFieldHandle->exists()) {
-    // There are blocks!
+    // There’s at least one nested entry!
 }
 ```
 
 Read more about [query execution methods](./element-queries.md#executing-element-queries) on the element query page.
 :::
 
-You can set [parameters](matrix-blocks.md#parameters) on the Matrix block query as well. For example, to only fetch blocks of type `text`, set the [type](matrix-blocks.md#type) param:
+You can set [parameters](matrix-blocks.md#parameters) on the query, as well. For example, to only fetch nested entries that use a specific entry type, set the [type](../element-types/entries.md#type) param:
 
 ::: code
 ```twig
-{% set blocks = entry.myFieldHandle
+{% set nestedTextEntries = entry.myFieldHandle
   .type('text')
   .all() %}
 ```
 ```php
-$blocks = $entry->myFieldHandle
+$nestedTextEntries = $entry->myFieldHandle
     ->type('text')
     ->all();
 ```
 :::
 
-::: tip
-<Todo text="Extract this into a snippet." />
-
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
-:::
-
 #### Eager Loading
 
-Matrix blocks can be loaded with their owners using the special [`.with()` query method](./dev/eager-loading-elements.md). Eager-loading can greatly improve performance if you need to output one or more blocks within a list of other elements—like generating summaries from the first block of content in a list of blog posts.
+Nested entries can be [eager-loaded](../../development/eager-loading.md) with their owners using the special `.with()` query method. Eager-loading can greatly improve performance if you need to output one or more blocks within a list of other elements—like generating summaries from the first block of content in a list of blog posts.
+
+The new `.eagerly()` method simplifies this in situations where you need to output or act on nested entry information within a query for their owners. Take this list of recipes, for example:
+
+```twig
+{% set latestRecipes = craft.entries()
+  .section('recipes')
+  .orderBy('postDate DESC')
+  .limit(5)
+  .all() %}
+
+{% for recipe in latestRecipes %}
+  <article>
+    <h2>{{ recipe.title }}</h2>
+
+    {{ recipe.summary|md }}
+
+    <div>
+      {{ recipe.estimatedTotalTime }}
+      —
+      {{ recipe.steps.eagerly().count() }} Step(s)
+      —
+      {{ recipe.difficulty }}
+    </div>
+  </article>
+{% endfor %}
+```
 
 ### Saving Matrix Fields
 
-::: warning
-Working with Matrix blocks is significantly more complex than other field types. The `form` examples that follow assume some familiarity with [how Craft routes and handles requests](../controllers/controller-actions.md), as well as a willingness to adapt and extend the provided HTML to suit your needs.
+::: danger
+This section has not been adapted for Craft 5. Working with Matrix field data has changed dramatically.
 :::
 
-If you have an element form (such as an [entry form](kb:entry-form)) that needs to contain a Matrix field, you will need to submit your Matrix field’s data in a specific structure. We’re using JSON for the sake of its simple syntax, but the following examples will show you how to build a similarly-structured request with normal form elements:
+::: warning
+Working with nested entries is significantly more complex than other field types. The `form` examples that follow assume some familiarity with [how Craft routes and handles requests](../controllers/controller-actions.md), as well as a willingness to adapt and extend the provided HTML to suit your needs.
+:::
+
+If you have an element form (such as an [entry form](kb:entry-form)) that needs to manage content within a Matrix field, you will need to submit your Matrix field’s data in a specific structure. We’re using JSON for the sake of its simple syntax, but the following examples will show you how to build a similarly-structured request with normal form elements:
 
 ```json
 {
@@ -302,16 +317,16 @@ If you have an element form (such as an [entry form](kb:entry-form)) that needs 
 }
 ```
 
-#### Block Order
+#### Entry Order
 
-`sortOrder` should be submitted as an array of all the block IDs you wish to persist (as well as any new block identifiers), in the order they should be saved.
+`sortOrder` should be submitted as an array of all the entry IDs you wish to persist (as well as any new entry identifiers), in the order they should be saved.
 
-If you want all existing blocks to persist in the same order they are currently in, then use this template to define your `sortOrder` array:
+If you want all existing entries to persist in the same order they are currently in, then use this template to define your `sortOrder` array:
 
 ```twig
 {% if entry is defined %}
-  {% for blockId in entry.myFieldHandle.anyStatus().ids() %}
-    {{ hiddenInput('fields[myFieldHandle][sortOrder][]', blockId) }}
+  {% for nestedEntryId in entry.myFieldHandle.anyStatus().ids() %}
+    {{ hiddenInput('fields[myFieldHandle][sortOrder][]', nestedEntryId) }}
   {% endfor %}
 {% endif %}
 ```
@@ -320,9 +335,9 @@ If you want all existing blocks to persist in the same order they are currently 
 The `sortOrder` input elements do _not_ need to be adjacent in the DOM or as POST params—you are free to distribute and collocate them with each block’s data, if you wish.
 :::
 
-#### Block Data
+#### Entry Data
 
-All of your block data should be nested under a `blocks` key, and indexed by their IDs. Each block must submit its `type` (using the desired block type’s handle) and custom field data nested under a `fields` key.
+All of your entry data should be nested under a `entries` key, and indexed by their IDs. Each block must submit its `type` (using the desired block type’s handle) and custom field data nested under a `fields` key.
 
 Here’s how you can output form fields for existing blocks, for a Matrix field with two block types (`text` and `image`):
 
