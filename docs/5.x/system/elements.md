@@ -145,6 +145,27 @@ If some property of the asset (like its extension, or the user group its uploade
 
 Each template is passed the element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
 
+::: tip
+You can also render lists of elements by calling the `render()` method on an [element query](../development/element-queries.md).
+:::
+
+### Eager-Loading
+
+When accessing related content within an element partial, use the `.eagerly()` method to [automatically eager-load](../development/eager-loading.md#magic-eager-loading) elements for other partials that might be rendered in sequence.
+
+```twig{2}
+{# _parials/entry/post.twig #}
+{% set headerImage = entry.headerImage.eagerly().one() %}
+
+{% if headerImage %}
+  {{ headerImage.getImg() }}
+{% endif %}
+
+<h3>{{ entry.title }}</h3>
+
+{# ... #}
+```
+
 ## Properties and Methods
 
 <Todo notes="Move to elements reference?" />
