@@ -24,7 +24,7 @@
 | [hasAlt](#hasalt)                         | Narrows the query results based on whether the assets have alternative text.
 | [height](#height)                         | Narrows the query results based on the assets’ image heights.
 | [id](#id)                                 | Narrows the query results based on the assets’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [includeSubfolders](#includesubfolders)   | Broadens the query results to include assets from any of the subfolders of the folder specified by [folderId](#folderid).
 | [kind](#kind)                             | Narrows the query results based on the assets’ file kinds.
@@ -34,7 +34,7 @@
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.
-| [savable](#savable)                       | Sets the [savable](https://docs.craftcms.com/api/v3/craft-elements-db-assetquery.html#savable) property.
+| [savable](#savable)                       | Sets the [savable](https://docs.craftcms.com/api/v4/craft-elements-db-assetquery.html#savable) property.
 | [search](#search)                         | Narrows the query results to only assets that match a search query.
 | [site](#site)                             | Determines which site(s) the assets should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the assets should be queried in, per the site’s ID.
@@ -487,7 +487,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -747,7 +747,7 @@ $assets = \craft\elements\Asset::find()
 
 #### `savable`
 
-Sets the [savable](https://docs.craftcms.com/api/v3/craft-elements-db-assetquery.html#savable) property.
+Sets the [savable](https://docs.craftcms.com/api/v4/craft-elements-db-assetquery.html#savable) property.
 
 
 
