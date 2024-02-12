@@ -4,17 +4,17 @@ sidebarDepth: 2
 
 # Relations
 
-Craft has a powerful engine for relating elements to one another with five relational field types:
+Craft has a powerful engine for relating elements to one another with five [relational field types](#custom-fields). Just like other field types, relational fields can be added to any [field layout](./fields.md#field-layouts), including those within [nested entries](#relations-via-matrix).
 
-- [Assets Fields](assets-fields.md)
-- [Categories Fields](categories-fields.md)
-- [Entries Fields](entries-fields.md)
-- [Tags Fields](tags-fields.md)
-- [Users Fields](users-fields.md)
+_Unlike_ other field types, relational fields store their data in a dedicated `relations` table. In that table, Craft tracks:
 
-Just like other field types, relational fields can be added to any [field layout](./fields.md#field-layouts), including those within [Matrix blocks](#related-via-matrix).
+- The element that is the **source** of the relationship;
+- Which **field** a relationship uses;
+- The **site** a relationship was defined;
+- The element that is the **target** of the relationship;
+- The **order** in which the related elements are arranged;
 
-_Unlike_ other field types, though, relational fields store their data in a dedicated `relations` table (instead of the `content` table), and track the element, field, and site where the relationship was defined, the element that the relationship points to, and the order in which the related elements were arranged.
+This allows you to design fast and powerful [queries](#the-relatedto-parameter) for related content, and to [optimize loading](../development/eager-loading.md) of nested and related resources.
 
 ### Terminology
 
@@ -47,8 +47,18 @@ Relationships are primarily used within [element queries](./element-queries.md),
 
 _Ingredients_ attached to a _Recipe_ can be accessed using the relational field’s handle. Unlike most fields (which return their stored value), relational fields return an [element query](./element-queries.md), ready to fetch the attached elements in the order they were selected.
 
+Craft has X built-in relational fields, each pointing to a different [element type](./elements.md#element-types):
+
+- [Assets](../reference/field-types/assets.md)
+- [Categories](../reference/field-types/categories.md)
+- [Entries](../reference/field-types/entries.md)
+- [Tags](../reference/field-types/tags.md)
+- [Users](../reference/field-types/users.md)
+
+Addresses and global sets don't have relational fields, in the traditional sense.
+
 ::: tip
-[Eager-loading](./dev/eager-loading-elements.md) related elements _does_ make them available directly on the source element! Don’t worry about this just yet—let’s get comfortable with the default behavior, first.
+[Eager-loading](../development/eager-loading.md) related elements _does_ make them available directly on the source element! Don’t worry about this just yet—let’s get comfortable with the default behavior, first.
 :::
 
 To output the list of ingredients for a recipe on the recipe’s page, you could do this (assuming the relational field handle is `ingredients`):
@@ -307,9 +317,9 @@ Here, we’re allowing Craft to look up substitutions defined in any site, which
 
 ## Relations via Matrix
 
-Relational fields on Matrix blocks are used the same way they would be on any other element type.
+Relational fields on nested entries within Matrix fields are used the same way they would be on any other element type.
 
-If you want to find elements related to a source element through a [Matrix](matrix-fields.md) field, pass the Matrix field’s handle to the `field` parameter:
+If you want to find elements related to a source element through a [Matrix](matrix.md) field, pass the Matrix field’s handle to the `field` parameter:
 
 ```twig{5}
 {% set relatedRecipes = craft.entries()
