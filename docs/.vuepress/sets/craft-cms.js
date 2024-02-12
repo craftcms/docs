@@ -103,6 +103,80 @@ module.exports = {
           ],
         },
       ],
+      "/extend/": [
+        {
+          title: "Extending Craft",
+          collapsable: false,
+          children: [
+            ["", "Introduction"],
+            "coding-guidelines",
+            "generator",
+            "topics"
+          ]
+        },
+        {
+          title: "Module Development",
+          collapsable: false,
+          children: ["module-guide"]
+        },
+        {
+          title: "Plugin Development",
+          collapsable: false,
+          children: [
+            "plugin-guide",
+            "updating-plugins",
+            "plugin-settings",
+            "project-config",
+            "changelogs-and-updates",
+            "plugin-editions",
+            "plugin-store"
+          ]
+        },
+        {
+          title: "Extending the Control Panel",
+          collapsable: false,
+          children: [
+            "cp-section",
+            "cp-templates",
+            "cp-edit-pages"
+          ]
+        },
+        {
+          title: "System Components",
+          collapsable: false,
+          children: [
+            "element-types",
+            "element-exporter-types",
+            "field-types",
+            "filesystem-types",
+            "widget-types",
+          ]
+        },
+        {
+          title: "More",
+          collapsable: false,
+          children: [
+            "asset-bundles",
+            "behaviors",
+            "commands",
+            "controllers",
+            "element-actions",
+            "environmental-settings",
+            "events",
+            "extending-twig",
+            "graphql",
+            "migrations",
+            "queue-jobs",
+            "services",
+            "soft-deletes",
+            "template-hooks",
+            "template-roots",
+            "translation-categories",
+            "user-permissions",
+            "utilities",
+          ]
+        }
+      ],
       "/": [
         {
           title: "Welcome to Craft",
