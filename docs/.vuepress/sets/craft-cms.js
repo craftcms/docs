@@ -40,7 +40,7 @@ module.exports = {
         },
         {
           title: "Field Types",
-          collapsable: true,
+          collapsable: false,
           children: [
             "field-types/addresses",
             "field-types/assets",
@@ -79,7 +79,7 @@ module.exports = {
         },
         {
           title: "Twig",
-          collapsable: true,
+          collapsable: false,
           children: [
             "twig/filters",
             "twig/functions",
