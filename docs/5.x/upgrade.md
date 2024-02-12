@@ -13,7 +13,7 @@ Let’s take a moment to audit and prepare your project.
 - Your **live site** must be running the [latest version](repo:craftcms/cms/releases) of Craft 4;
 - The most recent Craft 4-compatible versions of all plugins are installed, and Craft 5-compatible versions are available;
 - Your project is free of [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-5#fix-deprecation-warnings) after thorough testing on the latest version of Craft 4;
-- All your environments meet Craft 5’s [minimum requirements](requirements.md) (the latest version of Craft 4 supports all the same );
+- All your environments meet Craft 5’s [minimum requirements](requirements.md) (the latest version of Craft 4 will run in any environment that meets Craft 5’s requirements, so it’s safe to update PHP and your database ahead of the 5.x upgrade);
 - You’ve reviewed the breaking changes in Craft 5 further down this page and understand that additional work and testing may lie ahead, post-upgrade;
 
 Once you’ve completed everything above, you’re ready to start the upgrade process!
