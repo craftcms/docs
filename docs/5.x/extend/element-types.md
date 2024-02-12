@@ -4,22 +4,11 @@ description: Add native-feeling content types to empower content authors and adm
 
 # Element Types
 
-[Elements](../elements.md) underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../elements.md#element-types) with your own, from a plugin or module.
+[Elements](../system/elements.md) underpin Craft’s flexible and extensible content modeling features. You can supplement Craft’s eight [built-in element types](../system/elements.md#element-types) with your own, from a plugin or module.
 
-As you implement common element features like [titles](#titles), [sources](#sources), or [statuses](#statuses), the built-in element classes will be an invaluable resource—both as templates for basic functionality and evidence of the flexibility of elements:
+As you implement common element features like [titles](#titles), [sources](#sources), or [statuses](#statuses), the built-in element classes will be an invaluable resource—both as templates for basic functionality and evidence of the flexibility of elements.
 
-Class Reference | Documentation
---------------- | -------------
-<craft4:craft\elements\Address> | [Addresses](../addresses.md)
-<craft4:craft\elements\Asset> | [Assets](../assets.md)
-<craft4:craft\elements\Category> | [Categories](../categories.md)
-<craft4:craft\elements\Entry> | [Entries](../entries.md)
-<craft4:craft\elements\GlobalSet> | [Globals](../globals.md)
-<craft4:craft\elements\MatrixBlock> | [Matrix Blocks](../matrix-blocks.md)
-<craft4:craft\elements\Tag> | [Tags](../tags.md)
-<craft4:craft\elements\User> | [Users](../users.md)
-
-If your plugin provides a new content-driven resource, it should be implemented as an element type.
+If your plugin provides a new content-driven resource, it should be implemented as an element type!
 
 ## Getting Started
 
