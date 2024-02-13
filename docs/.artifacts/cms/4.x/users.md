@@ -28,14 +28,14 @@
 | [groupId](#groupid)                       | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | [hasPhoto](#hasphoto)                     | Narrows the query results to only users that have (or don’t have) a user photo.
 | [id](#id)                                 | Narrows the query results based on the users’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching users as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching users as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [lastLoginDate](#lastlogindate)           | Narrows the query results based on the users’ last login dates.
 | [lastName](#lastname)                     | Narrows the query results based on the users’ last names.
 | [limit](#limit)                           | Determines the number of users that should be returned.
 | [offset](#offset)                         | Determines how many users should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
-| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only users that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only users that match a search query.
@@ -576,7 +576,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching users as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -749,7 +749,7 @@ $users = \craft\elements\User::find()
 
 #### `preferSites`
 
-If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 

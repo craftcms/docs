@@ -20,14 +20,14 @@
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the addresses’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [id](#id)                                 | Narrows the query results based on the addresses’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [limit](#limit)                           | Determines the number of addresses that should be returned.
 | [offset](#offset)                         | Determines how many addresses should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC`.)
 | [owner](#owner)                           | Sets the [ownerId](#ownerid) parameter based on a given owner element.
 | [ownerId](#ownerid)                       | Narrows the query results based on the addresses’ owner elements, per their IDs.
-| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only addresses that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only addresses that match a search query.
@@ -354,7 +354,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
 
 
@@ -514,7 +514,7 @@ $addresses = \craft\elements\Address::find()
 
 #### `preferSites`
 
-If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 

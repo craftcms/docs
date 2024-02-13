@@ -20,7 +20,7 @@
 | [group](#group)                           | Narrows the query results based on the tag groups the tags belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 | [id](#id)                                 | Narrows the query results based on the tags’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [limit](#limit)                           | Determines the number of tags that should be returned.
 | [offset](#offset)                         | Determines how many tags should be skipped in the results.
@@ -358,7 +358,7 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
 
 
