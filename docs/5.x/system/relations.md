@@ -55,7 +55,7 @@ Craft has X built-in relational fields, each pointing to a different [element ty
 - [Tags](../reference/field-types/tags.md)
 - [Users](../reference/field-types/users.md)
 
-Addresses and global sets don't have relational fields, in the traditional sense.
+Addresses and global sets don’t have relational fields, in the traditional sense.
 
 ::: tip
 [Eager-loading](../development/eager-loading.md) related elements _does_ make them available directly on the source element! Don’t worry about this just yet—let’s get comfortable with the default behavior, first.
