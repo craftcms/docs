@@ -1,32 +1,41 @@
 ---
 description: Optimize your templates with smart eager-loading.
+related:
+  - uri: ../system/elements.md
+    label: Introduction to Elements
+  - uri: element-queries.md
+    label: Querying Elements
 ---
 
 # Eager-Loading Elements
 
-When you are working with a list of elements and need to access other elements they point to, you may start to notice some performance problems. Craft 5 provides a 
+When you are working with a list of elements and need to access their nested or related elements, _eager-loading_ can help optimize your [element queries](element-queries.md).
 
 <Block label="The N+1 Problem">
 
-Let’s look at a [template](templates.md) that loops through a list of news articles (entries), and displays an image (asset) attached to each one.
+Let’s look at a [template](templates.md) that loops through a list of news posts (entries), and displays an image (asset) attached to each one.
 
 ```twig
-{% set articles = craft.entries()
+{% set posts = craft.entries()
   .section('news')
   .all() %}
 
-{% for article in articles %}
-  {# Get the related asset, if there is one #}
-  {% set image = article.assetsField.one() %}
-  {% if image %}
-    <img src="{{ image.url }}" alt="{{ image.title }}">
-  {% endif %}
+{% for post in posts %}
+  <article>
+    {% set image = post.featureImage.one() %}
+
+    {% if image %}
+      {{ image.getImg() }}
+    {% endif %}
+
+    {# ... #}
+  </article>
 {% endfor %}
 ```
 
 In addition to the main query for the entry elements, an additional query is executed for _each_ article to find the attached asset. The number of queries will be _N_ (the number of entries) _+ 1_ (the initial entries query). If there are 50 entries, this innocent-looking template will cost the page 51 queries!
 
-If we were to then display the name of the user who uploaded each image (i.e. `asset.uploader.fullName`) or a list of categories for each entry (i.e. `article.topics.all()`), we would introduce a _2N+1_ query, whereby each entry in the initial query would trigger _two_ additional queries, for a total of 101.
+If we were to then display the name of the user who uploaded each image (i.e. `image.uploader.fullName`) or a list of categories for each entry (i.e. `post.topics.all()`), we would introduce a _2N+1_ query, whereby each entry in the initial query would trigger _two_ additional queries, for a minimum of 101. Supposing each query takes a couple of milliseconds, this can quickly add up to 250–500ms _just waiting for data_.
 
 </Block>
 
@@ -52,16 +61,15 @@ The exact patterns here may differ template-to-template, and don’t always invo
 Not all of these situations will require (or benefit from) eager-loading—the goal is only to consider which of your projects’ features _may_ be candidates.
 :::
 
-## Magic Eager-Loading
+## Lazy Eager-Loading <Badge text="New!" />
 
-Element queries in Craft 5 have a new `.eagerly()` query param that automatically detects and optimizes nested queries from relational fields. As a result, most projects will _not_ need to use custom eager-loading maps via the [`.with()` method](#the-with-query-param) for custom fields.
+Element queries in Craft 5 have a new `.eagerly()` query param that simplifies eager-loading of relational fields. Most projects can replace custom eager-loading maps (via the [`.with()` method](#the-with-query-param)) with a call to `.eagerly()` on down-stream element queries.
 
 ::: code
-```twig
+```twig{3-6} Using .with()
 {% set posts = craft.entries()
-  .section('posts')
+  .section('news')
   .with([
-    ['author'],
     ['featureImage', { withTransforms: ['large'] }],
     ['topics'],
   ])
@@ -77,38 +85,46 @@ Element queries in Craft 5 have a new `.eagerly()` query param that automaticall
       {{ image.getImg('large') }}
     {% endif %}
 
+    {{ post.summary|md }}
+
     <ul>
-      {% for topic in topics %}
+      {% for topic in post.topics %}
         <li>{{ topic.getLink() }}</li>
       {% endfor %}
     </ul>
   </article>
 {% endfor %}
 ```
-```twig
-{% set cars = craft.entries()
-  .section('cars')
+```twig{6,18} Using .eagerly()
+{% set posts = craft.entries()
+  .section('news')
   .all() %}
 
-{% for car in cars %}
-  {% set manufacturer = car.manufacturer.eagerly().one() %}
-  {% set bodyStyle = car.bodyStyle.eagerly().one() %}
+{% for post in posts %}
+  {% set image = post.featureImage.eagerly().one() %}
 
   <article>
-    <h2>{{ car.title }}</h2>
-    <h3>{{ manufacturer.title }}</h3>
+    <h2>{{ post.title }}</h2>
 
-    <p>Origin: {{ manufacturer.countryCode }}</p>
+    {% if image %}
+      {{ image.getImg('large') }}
+    {% endif %}
 
-    {% set pioneer = bodyStyle.pioneer.eagerly().one() %}
+    {{ post.summary|md }}
 
-    <p>The {{ bodyStyle.title }} was pioneered by the {{ pioneer.title }} in {{ pioneer.postDate|date('Y') }}.</p>
+    <ul>
+      {% for topic in post.topics.eagerly().all() %}
+        <li>{{ topic.getLink() }}</li>
+      {% endfor %}
+    </ul>
   </article>
 {% endfor %}
 ```
 :::
 
-Lazily eager-loaded relations are used just as though they _weren’t_. In fact, it’s by using standard element query methods that Craft is able to detect subsequent access to nested elements! This means your templates can continue using `.one()`, `.all()`, or filters like `|first` on any relational field that uses `.eagerly()`.
+In this example, our primary query (for entries in the _News_ section) no longer needs to be concerned about what nested or related queries _might_ be used—instead, each query that stems from an entry returned by the primary query should use `.eagerly()` to let Craft know that there is an opportunity to fetch a set of elements _as though they had been eager-loaded_, up-front. The main difference between this strategy and `.with()` is that—as the name “lazy” suggests—nested and related elements aren’t loaded until Craft actually evaluates logic that needs them; templates (like [element partials](../system/elements.md#rendering-elements)) can request additional relational data without impacting the upstream query, while avoiding optimistic-but-unnecessary up-front queries.
+
+After calling `.eagerly()`, lazily eager-loaded relations are used just like normal relational field values. This means your templates can continue chaining `.one()`, `.all()`, or applying filters like `|first` to get results.
 
 ::: warning
 [Native attributes](#eligible-fields-and-attributes) currently do not support lazy eager-loading due to the way their
@@ -161,64 +177,103 @@ However, when the assets _are_ eager-loaded, `entry.assetsField` gets overwritte
 
 ## Eager-Loading Multiple Sets of Elements
 
-If you have multiple sets of elements you wish to eager-load off of the top list of elements, just add additional values to your `with` parameter.
+If you have multiple sets of elements you wish to eager-load via the primary query, add those field handles to your `.with()` parameter:
 
-```twig
-{% set entries = craft.entries
+```twig{4-5}
+{% set posts = craft.entries
   .section('news')
   .with([
-    'assetsField',
-    'matrixField'
+    'topics',
+    'featureImage',
   ])
   .all() %}
 
-{% for entry in entries %}
-  {# Get the eager-loaded asset, if there is one #}
-  {% set image = entry.assetsField[0] ?? null %}
-  {% if image %}
-    <img src="{{ image.url }}" alt="{{ image.title }}">
-  {% endif %}
-
-  {# Loop through any eager-loaded Matrix blocks #}
-  {% for block in entry.matrixField %}
-    {{ block.textField }}
-  {% endfor %}
+{% for post in posts %}
+  <article>
+    {# Use the eager-loaded elements normally: #}
+    {% for topic in post.topics %}
+      {{ topic.getLink() }}
+    {% endfor %}
+  </article>
 {% endfor %}
 ```
+
+[Lazy eager-loading](#lazy-eager-loading) works the same for any number of eager-loaded fields. Each query that stems from an element in the primary query should use `.eagerly()` to signal that it will be used similarly in later iterations of a loop.
 
 ## Eager-Loading Nested Sets of Elements
 
-It’s also possible to load _nested_ sets of elements, using this syntax:
+It’s also possible to optimize loading of elements nested two or more levels deep, using a special syntax. Suppose the topics in our news feed from previous examples each had a thumbnail or icon:
 
-```twig
-{% set entries = craft.entries()
+```twig{4,17-18}
+{% set posts = craft.entries()
   .section('news')
   .with([
-    'entriesField.assetsField'
+    'topics.thumbnail',
   ])
   .all() %}
 
-{% for entry in entries %}
-  {# Loop through any eager-loaded sub-entries #}
-  {% for relatedEntry in entry.entriesField %}
-    {# Get the eager-loaded asset, if there is one #}
-    {% set image = relatedEntry.assetsField[0] ?? null %}
-    {% if image %}
-      <img src="{{ image.url }}" alt="{{ image.title }}">
-    {% endif %}
-  {% endfor %}
+{# Main loop: #}
+{% for post in posts %}
+  <article>
+    <h2>{{ post.title }}</h2>
+
+    {# ... #}
+
+    {# Nested topics loop: #}
+    <ul>
+      {% for topic in post.topics %}
+        {% set icon = topic.thumbnail|first %}
+
+        <li>
+          <a href="{{ topic.url }}">
+            {% if icon %}
+              {{ icon.getImg() }}
+            {% endif %}
+            <span>{{ topic.title }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </article>
 {% endfor %}
 ```
 
+A dot (`.`) in the eager-loading map indicates that another set of elements on the eager-loaded results _also_ needs to be loaded. Craft expands this notation into a multi-stage eager-loading “plan” and fetches each layer of elements in a batch. Each segment of an eager-loading path will be a field handle.
+
+The same optimization is possible with [lazy eager-loading](#lazy-eager-loading)—the `.with()` param can be omitted from the main query, and `.eagerly()` can be added to all the nested queries:
+
+```twig{10-11}
+{% set posts = craft.entries()
+  .section('news')
+  .all() %}
+
+{% for post in posts %}
+  <article>
+    {# ... #}
+
+    <ul>
+      {% for topic in post.topics.eagerly().all() %}
+        {% set icon = topic.thumbnail.eagerly().one() %}
+
+        {# ... #}
+      {% endfor %}
+    </ul>
+  </article>
+```
+
+::: tip
+Elements that are the target of multiple relations (as you might expect with a set of categories or tags) are only loaded once per batch. For example, if we were displaying a list of 100 news articles that were each assigned one of 10 categories, eager-loading the categories would never fetch more than 10 elements—Craft assigns the returned categories to _all_ the articles they were related to.
+:::
+
 ## Defining Custom Parameters on Eager-Loaded Elements
 
-You can define custom criteria parameters that will get applied as elements are being eager-loaded, by replacing its key with an array that has two values: the key, and a [hash](twig.md#hashes) that defines the criteria parameters that should be applied.
+You can define custom parameters that will get applied as elements are being eager-loaded, by replacing its handle with an array that has two values: the handle, and a [hash](twig.md#hashes) that defines the parameters that should be applied.
 
 ```twig
 {% set entries = craft.entries()
   .section('news')
   .with([
-    ['assetsField', { kind: 'image' }]
+    ['assetsField', { kind: 'image' }],
   ])
   .all() %}
 ```
@@ -229,32 +284,45 @@ When eager-loading nested sets of elements, you can apply parameters at any leve
 {% set entries = craft.entries()
   .section('news')
   .with([
-    ['entriesField', { authorId: 5 }],
-    ['entriesField.assetsField', { kind: 'image' }]
+    ['featureImage', { dateUploaded: ">= #{now|date_modify('-1 month')}" }],
+    ['authors', { group: 'staff' }],
+    ['topic.thumbnail', { kind: 'image' }],
   ])
   .all() %}
 ```
 
-## Eager-Loading Elements Related to Matrix Blocks
+The accepted parameters correspond to the kind of element that each relationship uses—this example uses the [asset query](../reference/element-types/assets.md#querying-assets)’s `dateUploaded` and `kind` params, and the [user query](../reference/element-types/users.md#querying-users)’s `group` param.
 
-The syntax for eager-loading relations from Matrix blocks is a little different than other contexts. You need to prefix your relational field’s handle with the block type’s handle:
-
-```twig
-{% set blocks = entry.matrixField
-  .with(['blockType:assetsField'])
-  .all() %}
-```
-
-The reason for this is that Matrix fields can have multiple sub-fields that each share the same handle, as long as they’re in different block types. By requiring the block type handle as part of the eager-loading key, Matrix can be confident that it is eager-loading the right set of elements.
-
-This applies if the Matrix blocks themselves are being eager-loaded, too.
+::: tip
+You can also provide nested `with` directives via these hashes. Here’s an example where we’re loading each topic’s `thumbnail` and `sectionEditor`, as well as all their `descendants` (presuming that our topic category group is a multi-level structure):
 
 ```twig
 {% set entries = craft.entries()
   .section('news')
-  .with(['matrixField.blockType:assetsField'])
+  .with([
+    ['topic', {
+      with: [
+        ['thumbnail', { kind: image }],
+        ['descendants'],
+        ['sectionEditor'],
+      ]
+    }]
+  ])
   .all() %}
 ```
+
+The equivalent “flat” eager-loading map would look like this—note the repetition:
+
+```twig
+[
+  ['topic.thumbnail', { kind: 'image' }],
+  ['topic.descendants'],
+  ['topic.sectionEditor'],
+]
+```
+
+Ultimately, Craft normalizes both maps to something more like the first example, then loads each “layer” in sequence—the topics have to be loaded before anything attached to them!
+:::
 
 ## Eager-Loading Image Transforms
 
@@ -317,12 +385,14 @@ Assets
 :   - Uploader: `uploader`
 
 Entries
-:   - First author: `author`
-:   - Authors: `authors`
+:   - First selected author: `author`
+    - All authors: `authors`
 
 Users
 :   - Addresses: `addresses`
     - Profile photo: `photo`
+
+Fields and attributes that don’t use element queries (or don’t ultimately resolve to one or more elements) are generally not eager-loadable—and trying to eager-load them may result in an error.
 
 ::: tip
 Some elements may also expose query methods that optimize the loading of associated _non-element_ records (like [asset transforms](#eager-loading-image-transforms)), but their interfaces are not part of the core element-only eager-loading system.
