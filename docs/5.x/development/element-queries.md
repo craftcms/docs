@@ -551,9 +551,9 @@ Turn on the **Debug Toolbar** in your user’s preferences to profile your memor
 
 ### Eager Loading
 
-Displaying a list of elements and one or more elements related to each of them (say, blog posts and any tags or categories it has) can lead to an “N+1” problem, wherein each result from the main query triggers an additional query. Craft addresses this with [eager-loading](eager-loading.md).
+Displaying a list of elements and one or more elements related to each of them (say, blog posts and any tags or categories attached to them) can lead to an “N+1” problem, wherein each result from the main query triggers an additional query. Craft addresses this with [eager-loading](eager-loading.md).
 
-<See path="eager-loading.md" description="Eager-loading is a means of pre-fetching nested or related elements in bulk." />
+<See path="eager-loading.md" description="Eager-loading is a means of fetching nested or related elements in bulk." />
 
 ### Caching Element Queries
 
