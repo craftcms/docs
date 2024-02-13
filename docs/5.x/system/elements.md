@@ -172,7 +172,7 @@ You can also render lists of elements by calling the `render()` method on an [el
 
 ### Eager-Loading
 
-When accessing related content within an element partial, use the `.eagerly()` method to [automatically eager-load](../development/eager-loading.md#magic-eager-loading) elements for other partials that might be rendered in sequence.
+When accessing related or nested content within an element partial, use the `.eagerly()` method to [eager-load](../development/eager-loading.md#magic-eager-loading) elements for other partials that might be rendered in sequence.
 
 ```twig{2}
 {# _parials/entry/post.twig #}
