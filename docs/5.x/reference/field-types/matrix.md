@@ -1,3 +1,11 @@
+---
+related:
+  - uri: ../../development/element-queries.md
+    label: Introduction to Elements
+  - uri: ../element-types/entries.md
+    label: Entries
+---
+
 # Matrix Fields
 
 Matrix fields allow you to manage nested [entries](../element-types/entries.md) in a fluid way. Entries created within a Matrix field are “owned” by the element that field is attached to, and can represent anything from a slide in a gallery to an entire resources section, each record having its own URL.
@@ -136,9 +144,9 @@ To fetch the nested elements, call one of the [query execution methods](../../de
 {% endif %}
 ```
 
-All the code you put within the for-loop will be repeated for each nested entry. The current entry will get set to that `nestedEntry` variable we’ve defined, and it will be another <craft4:craft\elements\Entry> model.
+All the code you put inside the `for`-loop will be repeated for each nested entry. Each time, `nestedEntry` will be a <craft4:craft\elements\Entry> model populated with that nested entry’s content.
 
-Here’s an example of what the template might look like for a Matrix field that has four entry types (Heading, Text, Image, and Quote). We can handle each entry type separately by checking its `handle`:
+Here’s an example of what the template might look like for a Matrix field that has four entry types (_Heading_, _Text_, _Image_, and _Quote_). We can treat each entry type separately by checking its `handle`:
 
 ```twig
 {% for nestedEntry in entry.myFieldHandle.all() %}
@@ -168,7 +176,7 @@ Here’s an example of what the template might look like for a Matrix field that
 ```
 
 ::: tip
-This code can be simplified using the [switch](dev/tags.md#switch) tag.
+This code can be simplified using the [switch](../twig/tags.md#switch) tag.
 :::
 
 #### Other Query Methods
@@ -215,11 +223,13 @@ if ($entry->myFieldHandle->exists()) {
     // There’s at least one nested entry!
 }
 ```
+:::
 
+::: tip
 Read more about [query execution methods](./element-queries.md#executing-element-queries) on the element query page.
 :::
 
-You can set [parameters](matrix-blocks.md#parameters) on the query, as well. For example, to only fetch nested entries that use a specific entry type, set the [type](../element-types/entries.md#type) param:
+You can set [parameters](../element-types/entries.md#parameters) on the query, as well. For example, to only fetch nested entries that use a specific entry type, set the [type](../element-types/entries.md#type) param:
 
 ::: code
 ```twig
@@ -435,9 +445,3 @@ Temporary identifiers on new blocks do _not_ need to stay the same between reque
   {# ... #}
 {% endfor %}
 ```
-
-## See Also
-
-- [Matrix Block Queries](matrix-blocks.md#querying-matrix-blocks)
-- [Element Queries](element-queries.md)
-- <craft4:craft\elements\MatrixBlock>
