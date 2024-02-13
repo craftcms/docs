@@ -4,7 +4,7 @@ description: Utilities are special, non-content pages in the control panel, that
 
 # Utilities
 
-Plugins can provide new utilities for the control panel’s **Utilities** section by creating a class that implements <craft4:craft\base\UtilityInterface>. A utility is typically where 
+Plugins can provide new utilities for the [control panel](../system/control-panel.md)’s **Utilities** section by creating a class that implements <craft4:craft\base\UtilityInterface> or extends <craf4:craft\base\Utility>. A utility is typically used to surface information and controls for administrative features that aren’t tied to specific [elements](../system/elements.md). Each registered utility gets its own [permissions](#permissions).
 
 ## Utility Class
 
@@ -43,7 +43,14 @@ class MyUtility extends Utility
     {
         $view = Craft::$app->getView();
 
-        return $view->renderTemplate('_utilities/my-utility.twig');
+        // Gather data to pass to the template...
+        $params = [
+            'myOptions' => [
+                // ...
+            ],
+        ];
+
+        return $view->renderTemplate('_my-plugin/utilities/my-utility.twig', $params);
     }
 }
 ```
@@ -60,6 +67,33 @@ If your utility relies on any JavaScript or CSS, be sure and register the releva
 
 You may also implement static `toolbarHtml()` and `footerHtml()` methods to inject actions and metadata.
 
+### Badges
+
+The static [`badgeCount()`](craft4:craft\base\UtilityInterface::badgeCount()) method can be used to surface an integer in its **Utilities** screen navigation item. Craft displays the total badge counts of all registered utilities (accessible to the current user) in the main control panel menu. See the [Updates](craft4:craft\utilities\Updates), [Migrations](craft4:craft\utilities\Migrations), and [Deprecation Warnings](craft4:craft\utilities\DeprecationErrors) classes for some examples of how badges are used.
+
+::: warning
+Badge counts are calculated on every control panel request. Be mindful of your users’ experience, and cache any expensive arithmetic or database queries!
+
+It’s also important to display a number that reflects items that are actionable for the current user. Suppose you wanted to list “stale” entries (things that hadn’t been edited in the last month)—showing a user a count across all sections (even if they didn’t have teh correct [permissions](#permissions)) might continue to display a badge, even when their backlog was cleared!
+
+```php
+public static function badgeCount(): int
+{
+    $user = Craft::$app->getUser()->getIdentity();
+
+    // Check the cache before querying, or set the cache for the default `cacheDuration`:
+    return Craft::$app->getCache()->getOrSet("my-plugin:utility-badge-count:{$user->uid}", function() {
+        return Entry::find()
+            ->dateUpdated("<= {$now->modify('-1 month')->format(DateTime::ATOM)}")
+            ->savable()
+            ->count();
+    });
+}
+```
+
+Utilities are always rendered in the context of control panel user session.
+:::
+
 ## Permissions
 
 Each utility automatically gets its own [permission](user-permissions.md). Craft checks these permissions before displaying a utility in the sidebar, and when the utility’s URL is requested.
@@ -68,7 +102,7 @@ However, those permissions do _not_ have any bearing on what functionality might
 
 ## Registering your Utility
 
-Once you have created your utility class, you will need to register it with the Utilities service, so Craft will know about it when populating the list of available utility types:
+Once you have created your utility class, you will need to register it with the [Utilities](craft4:craft\services\Utilities) service, so Craft will know about it when populating the list of available utility types:
 
 ```php
 <?php
@@ -97,3 +131,7 @@ class Plugin extends BasePlugin
     // ...
 }
 ```
+
+::: tip
+Registering your utility doesn’t mean it will automatically appear for users! You must also grant the appropriate [permissions](#permissions).
+:::
