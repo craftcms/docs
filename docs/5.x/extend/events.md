@@ -274,7 +274,7 @@ This process is the same for any class that extends <craft4:craft\base\Model>—
 
 ### Saving Entries
 
-While every element in Craft CMS has a common set of events your custom code can subscribe to, the entry-saving workflow is one of the most common and complex.
+While every element in Craft has a common set of events your custom code can subscribe to, the entry-saving workflow is one of the most common and complex.
 
 ::: tip
 See [Handling Entry Saves](kb:handling-entry-saves) for more on entry-specific concepts.
@@ -286,6 +286,40 @@ Generally, entries progress through the following order of operations:
 2. Validation that triggers `EVENT_BEFORE_VALIDATE` and `EVENT_AFTER_VALIDATE`.
 3. Saving for the initial site that triggers `EVENT_AFTER_SAVE`.
 4. Propagating non-translatable changes to the entry’s other sites, which repeats steps 1-3 for each site before triggering `EVENT_AFTER_PROPAGATE`.
+
+This process is actually a bit more abstract than this, because it covers _all_ element types. The events above live on the <craft4:craft\base\Element> class, but are inherited by other element types, meaning you can listen to only the subset of element lifecycle events you care about.
+
+#### Bulk Operations
+
+Craft 5 encapsulates operations that affect one or more elements in a special event, <craft5:craft\services\Elements::EVENT_AFTER_BULK_OP>. In cases where you need to act on the final result of a save that may involve multiple elements, consider using this in conjunction with the new element query method <craft5:craft\elements\db\ElementQuery::inBulkOp()>:
+
+```php
+use craft\elements\Entry;
+use craft\events\BulkOpEvent;
+use craft\services\Elements;
+use yii\base\Event;
+
+Event::on(Elements::class, Elements::EVENT_AFTER_BULK_OP, function(BulkOpEvent $event) {
+    // Fetch all the entries that were affected
+    $entries = Entry::find()
+        ->inBulkOp($event->key)
+        ->status(null)
+        ->all();
+    // ...
+});
+```
+
+If your plugin performs many sequential element saves, you can explicitly start and end a bulk operation via the elements service:
+
+```php
+$key = Craft::$app->getElements()->beginBulkOp();
+
+// ... save or delete elements ...
+
+Craft::$app->getElements()->endBulkOp($key);
+```
+
+The `$key` will be attached to the emitted <craft5:craft\events\BulkOpEvent> so that other code can get a list of elements involved! After the operation is complete (and any handlers have been called), the key will be cleaned up. It is your responsibility to save element IDs elsewhere if you need to do asynchronous processing on elements that were part of a bulk operation!
 
 ### Adding and Modifying Search Keywords
 
