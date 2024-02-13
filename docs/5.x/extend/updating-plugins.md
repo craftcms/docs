@@ -1,6 +1,12 @@
-# Updating Plugins for Craft 4
+---
+related:
+  - uri: https://github.com/craftcms/rector
+    label: Rector Library
+---
 
-While [the changelog](https://github.com/craftcms/cms/blob/main/CHANGELOG.md) is the most comprehensive list of changes, this guide provides high-level overview and organizes changes by category.
+# Updating Plugins for Craft 5
+
+While [the changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md) is the most comprehensive list of changes, this guide provides high-level overview and organizes changes by category.
 
 ::: tip
 If you think something is missing, please [create an issue](https://github.com/craftcms/docs/issues/new).
@@ -58,24 +64,31 @@ If you decide to use PHPStan and/or ECS, we recommend doing it in the following 
 
 ## Rector
 
-Craft’s [Rector](https://github.com/craftcms/rector) rules can save you time by adding required type declarations throughout your code. It’s important to do things in the right order so you can run Rector once and be on your way.
+Craft’s [Rector](https://github.com/craftcms/rector) rules can save you time by adding type declarations and replacing or renaming properties and methods throughout your code. It’s important to do things in the right order so you can run Rector _once_, then perform manual updates.
 
-1. Start with your plugin running with Craft 3.7.35 or later. (No Craft 4 in `composer.json` yet!)
-2. Run the following commands:
+1. Start with your plugin running on the latest version of Craft 4.
+1. Install Rector according to the readme.  
+    Our rule-sets are not “versioned” in the traditional sense; instead, each major version is kept in a separate file.
+
     ```
     composer config minimum-stability dev
     ```
+
     ```
     composer config prefer-stable true
     ```
+
     ```
     composer require craftcms/rector:dev-main --dev
     ```
+
     ```
-    vendor/bin/rector process src --config vendor/craftcms/rector/sets/craft-cms-40.php
+    vendor/bin/rector process src --config vendor/craftcms/rector/sets/craft-cms-50.php
     ```
-    Your code should have type declarations added throughout that are compatible with Craft 4; it’s normal if things are now broken in Craft 3.
-3. Update your `composer.json` requirement to `"craftcms/cms": "^4.0.0-alpha"` and run `composer update`.
+
+    Your code should have type declarations added throughout that are compatible with Craft 5, but it may no longer work with Craft 4.
+
+3. Update your `composer.json` requirement to `"craftcms/cms": "^5.0.0-beta.1"` and run `composer update`.
 
 Most of the busywork is now done so you can continue addressing the breaking changes on the rest of this page.
 
