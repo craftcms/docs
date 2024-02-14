@@ -45,7 +45,17 @@ ddev start
 1. Run `php craft project-config/rebuild` and allow any new background tasks to complete.
 1. Capture a database backup of your _local_ environment, just in case things go sideways.
 1. Note your current **Temp Uploads Location** setting in **Settings** &rarr; **Assets** &rarr; **Settings**.
+1. Add your database’s current character set and collation to `.env`. If you have always used Craft’s defaults, this will be:
+
+    ```bash
+    CRAFT_DB_CHARSET="utf8mb3"
+    CRAFT_DB_COLLATION="utf8mb3_general_ci"
+    ```
+
+    If you _have_ changed the character set or collation, make sure your settings agree with [these recommendations](#database-character-set-and-collation).
+
 1. Edit your project’s `composer.json` to require `"craftcms/cms": "^5.0.0"` and Craft-5-compatible plugins, all at once.
+
     ::: tip
     You’ll need to manually edit each plugin version in `composer.json`. If any plugins are still in beta, you may need to change your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings.
     :::
@@ -53,8 +63,8 @@ ddev start
     You may also need to add `"php": "8.2"` to your [platform](https://getcomposer.org/doc/06-config.md#platform) requirements, or remove it altogether.
 1. Run `composer update`.
 1. Make any required changes to your [configuration](#configuration).
-1. Run `php craft migrate/all`.
-1. Review the [platform-specific](#optional-conditional-steps) steps, below.
+1. Run `php craft up`.
+1. Remove your database character set and collation settings from `.env` (and `db.php`—even if you didn’t modify it during the upgrade), then run `php craft db/convert-charset`.
 
 Your site is now running Craft 5! If you began this process with no deprecation warnings, you’re nearly done.
 
@@ -63,14 +73,6 @@ Thoroughly review the list of changes on this page, making note of any features 
 :::
 
 Once you’ve verified everything’s in order, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory (along with any template, configuration, or module files that required updates) and deploy those changes normally in each additional environment.
-
-### Platform-Specific Steps
-
-Additional steps may be required for projects that use specific technologies.
-
-#### MySQL Character Sets
-
-If you’re using MySQL, we recommend running [`php craft db/convert-charset`](console-commands.md#db-convert-charset) along with the upgrade process to ensure optimal database performance.
 
 ## Breaking Changes and Deprecations
 
@@ -84,9 +86,26 @@ This list focuses on high-traffic, user-facing features. Review the [complete ch
 
 The following settings have been changed.
 
+#### Database Character Set and Collation
+
+Craft 5 requires MySQL 8.0, which has deprecated the use of `utf8` as an alias for the `utf8mb3` character set. A future version [is expected to switch this alias to `utf8mb4`](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb3.html), so we are proactively adopting the unambiguous `utf8mb4` character set and `utf8mb4_0900_ai_ci` collation for new tables.
+
+Custom collation settings that do not use an explicit byte-length suffix (i.e. `utf8_general_ci`) may be incompatible with the new handling of `utf8`. For example, a Craft 4 project that uses the `utf8_unicode_ci` _collation_ (set via the `CRAFT_DB_COLLATION` environment variable or `collation` key in `db.php`) but has not explicitly set the corresponding _character set_ will encounter an “incompatible collation” error during the upgrade.
+
+To avoid this, add your database’s current character set and collation to your `.env` file, ensuring they both include the byte-length suffix:
+
+```bash
+CRAFT_DB_CHARACTER_SET="utf8mb3"
+CRAFT_DB_COLLATION="utf8mb3_general_ci"
+```
+
+::: tip
+Even if you have never manually configured a character set or collation for a project, we still recommend running `php craft db/convert-charset` after the upgrade.
+:::
+
 #### Template Priority
 
-The `defaultTemplateExtensions` config setting now lists `twig` before `html`, by default. This means that projects with templates that share a name (i.e. `widget.twig` and `widget.html`, _in the same directory_) may behave differently in Craft 5. Audit your `templates/` directory for any overlap to ensure consistent rendering. If all your templates use one extension or another, no action is required!
+The <config5:defaultTemplateExtensions> config setting now lists `twig` before `html`, by default. This means that projects with templates that share a name (i.e. `widget.twig` and `widget.html`, _in the same directory_) may behave differently in Craft 5. Audit your `templates/` directory for any overlap to ensure consistent rendering. If all your templates use one extension or another, no action is required!
 
 This setting only affects rendering of templates in the front-end; the control panel will _always_ use `.twig` files before `.html`.
 
