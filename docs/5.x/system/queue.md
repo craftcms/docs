@@ -46,7 +46,7 @@ In addition to a status, jobs also have **description** and a **progress** value
 By default, the queue is run automatically over [HTTP](#http). For more control, you can use Craft’s CLI via [CRON](#cron)—or even as a [daemonized service](#daemon).
 
 ::: tip
-Advanced configuration of the queue (including alternate [drivers](repo:yiisoft/yii2-queue/tree/master/docs/guide#queue-drivers) and proxies) is possible via [application config](config/app.md#queue).
+Advanced configuration of the queue (including alternate [drivers](repo:yiisoft/yii2-queue/tree/master/docs/guide#queue-drivers) and proxies) is possible via [application config](../reference/config/app.md#queue).
 :::
 
 ### HTTP
@@ -236,6 +236,38 @@ ddev craft queue/listen --verbose
 php craft queue/listen --verbose
 ```
 :::
+
+## Custom Queues
+
+::: warning
+This section discusses features that are only relevant to projects that use a [custom module](../extend/module-guide.md) or [private plugin](../extend/plugin-guide.md#private-plugins).
+:::
+
+You can set up additional queues via [application configuration](../configure.md#application-configuration), but _only jobs in the default `queue` component will be observable from the control panel_.
+
+Each queue must be defined under a separate `id`:
+
+```php
+return [
+    // ...
+    'bootstrap' => [
+        'sluggishQueue',
+    ],
+    'components' => [
+        'sluggishQueue' => [
+            'class' => craft\queue\Queue::class,
+        ],
+    ],
+];
+```
+
+Craft doesn’t know about this queue, so it will never push jobs into it. Secondary queues are only practical when you have implemented a [custom job](../extend/queue-jobs.md) that would otherwise interfere with the processing of your main queue. While [multiple runners](#daemon) can help avoid situations where one long-running (but not necessarily time-sensitive) job blocks many other quick (but vital) jobs, the only way to ensure tasks run in completely separate “channels” is to configure multiple queues, and push your custom job into a non-default queue.
+
+Custom queues can be managed from the CLI using their kebab-cased component `id`:
+
+```bash
+php craft sluggish-queue/listen --verbose
+```
 
 ## Troubleshooting
 
