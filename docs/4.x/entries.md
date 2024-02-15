@@ -96,29 +96,11 @@ To create a new custom source, go to **Entries** → **Customize (<icon kind="se
 
 ### Entry URI Formats
 
-<Todo text="Another bunch of object template stuff that needs consolidation..." />
-
 Channel and structure sections can choose whether their entries should be assigned URLs in the system by filling in the **Entry URI Format** setting. Singles have a “URI” setting, but it is typically defined statically or omitted (if it doesn’t need its own URL).
 
 When Craft matches a request to an entry, its section’s designated **Template** is rendered. That template is automatically provided an `entry` variable, set to the resolved <craft4:craft\elements\Entry> object, and ready to output any of its attributes or custom field data.
 
-Entry URI Formats are tiny Twig templates, which get evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](routing.md) a request.
-
-The entry being saved is available to that _object template_—just like its main template—so something like this is possible:
-
-```twig
-blog/authors/{{ object.author.username }}/{{ object.slug }}
-```
-
-A shortcut syntax is also available if you are accessing simple properties on the `object` variable:
-
-```twig
-blog/authors/{author.username}/{slug}
-```
-
-::: tip
-There are some more tips for using object templates in the [title formatting](#dynamic-entry-titles) section.
-:::
+Entry URI Formats are [object templates](object-templates.md), which get evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](routing.md) a request.
 
 #### Hierarchical URIs
 
@@ -168,7 +150,7 @@ Create additional preview targets for any other areas the entry might show up, s
 Preview target **URL Formats** support slightly different features than for **URI Formats**:
 
 - If you want to include the entry’s ID or UID in a preview target URL, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the [draft](#drafts)’s;
-- You can use [environment variables and aliases](./config/README.md#control-panel-settings) in the preview target URL. These _do not_ get wrapped in curly braces on their own, as they are not part of the object template. Aliases may be part of a longer URI (e.g.`@headlessUrl/news/{slug}`), but environment variables can only be used on their own (e.g. `$NEWS_INDEX`);
+- You can use [environment variables and aliases](./config/README.md#control-panel-settings) in the preview target URL. These _do not_ get wrapped in curly braces on their own, as they are not part of the [object template](object-templates.md). Aliases may be part of a longer URI (e.g.`@headlessUrl/news/{slug}`), but environment variables can only be used on their own (e.g. `$NEWS_INDEX`);
 
 When an author is editing an entry from a section with custom preview targets, the **View** button will be replaced with a menu that lists the **Primary entry page** (if the section has an Entry URI Format), plus the names of each preview target.
 
@@ -244,7 +226,7 @@ Entry types have the following settings:
 
 - **Name** — The entry type’s name;
 - **Handle** — The entry type’s template-facing handle;
-- **Show the Title field?** — Whether a Title field is displayed for entries of this type, or the title should be [dynamically defined](#dynamic-entry-titles) from other properties via an object template;
+- **Show the Title field?** — Whether a Title field is displayed for entries of this type, or the title should be [dynamically defined](#dynamic-entry-titles) from other properties via an [object template](object-templates.md);
 - **Title Translation Method** — Control how titles are [translated](#translation-settings) across sites and site groups.
 - **Slug Translation Method** — Control how slugs are [translated](#translation-settings) across sites and site groups.
 - **Title Field Label** — What the Title field label should be;
@@ -253,43 +235,7 @@ Entry types have the following settings:
 
 If you want your entries’s titles to be auto-generated from a template (rather than requiring authors to enter them manually), you can uncheck the **Show the Title field?** checkbox. When you do, a new **Title Format** setting will appear.
 
-The **Title Format** is a [Twig](./dev/twig-primer.md) template (just like the **Entry URI Format** and preview target **URL Format** we looked, above), and gets evaluated whenever entries with this type are saved.
-
-The entry is passed to this template as a variable named `object`. You can reference the entry’s [properties](craft4:craft\elements\Entry#public-properties) and custom fields in two ways:
-
-1. normal Twig syntax: `{{ object.property }}`
-2. shortcut Twig syntax: `{property}`
-
-<Todo text="Object templates need to be consolidated." />
-
-If Craft finds any of these in your **Title Format**, it will replace the `{` with `{{object.` and the `}` with `}}`, before passing the template off to Twig for parsing.
-
-You can use Twig filters in both syntaxes:
-
-```twig
-{# Long: #}
-Coupons (Valid through {{ object.expiryDate|date('M j, Y') }})
-
-{# Short: #}
-Coupons (Valid through {expiryDate|date('M j, Y')})
-```
-
-Craft’s [global variables](dev/global-variables.md) are available to these templates as well:
-
-```twig
-Current Coupons (Last updated {{ now|date('Y-m-d') }})
-Current Coupons (Last updated by {{ currentUser.username }})
-```
-
-Logic is also supported, but there’s no syntactic sugar for control tags—any conditions in an object template require that you reference properties explicitly, with the `object` variable:
-
-```twig
-{# Control tags: #}
-{% if object.expiryDate %}{expiryDate|date('M j, Y')}{% else %}{{ now|date('M j, Y') }}{% endif %}
-
-{# Ternary operator: #}
-{{ (object.expiryDate ?: now)|date('M j, Y') }}
-```
+The **Title Format** is an [object template](object-templates.md) (just like the **Entry URI Format** and preview target **URL Format** we looked, above), and gets evaluated whenever entries with this type are saved.
 
 ### Translation Settings
 

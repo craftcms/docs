@@ -379,7 +379,7 @@ The [`redirectInput()`](./functions.md#redirectinput) function takes the guesswo
 </form>
 ```
 
-The `redirect` param accepts an “object template,” which is evaluated just before it’s issued, and can reference properties of the element or record you were working with:
+The `redirect` param accepts an [object template](../object-templates.md), which is evaluated just before it’s issued, and can reference properties of the element or record you were working with:
 
 ```twig
 <form method="post">

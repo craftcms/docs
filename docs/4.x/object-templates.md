@@ -1,15 +1,15 @@
 # Object Templates
 
-Craft uses single-line [Twig](../development/twig.md) “templates” in a number of places throughout the control panel to generate values from data that is only known at runtime. These templates are most often stored in [Project Config](project-config.md), but the resulting values are typically part of a record stored in the database, or only used temporarily.
+Craft uses single-line [Twig](dev/twig-primer.md) “templates” in a number of places throughout the control panel to generate values from data that is only known at runtime. These templates are most often stored in [Project Config](project-config.md), but the resulting values are typically part of a record stored in the database, or only used temporarily.
 
 Some examples of object templates in use are:
 
 - [Element](elements.md) title and slug formats;
-- [Asset field](../reference/field-types/assets.md) default upload paths;
-- [Section](../reference/element-types/entries.md#sections) and [category group](../reference/element-types/categories.md#category-groups) URI formats;
-- Values sent to controllers via a [`redirectInput()`](../reference/twig/functions.md) function;
-- The [`group()` filter](../reference/twig/filters.md) in Twig;
-- Console controllers that [re-save elements](../reference/cli.md#resave);
+- [Asset field](assets-fields.md) default upload paths;
+- [Section](entries.md#sections) and [category group](categories.md#category-groups) URI formats;
+- Values sent to controllers via a [`redirectInput()`](dev/functions.md) function;
+- The [`group()` filter](dev/filters.md) in Twig;
+- Console controllers that [re-save elements](console-commands.md#resave);
 - Translation keys for fields;
 - Some condition rules stored in Project Config;
 
@@ -23,28 +23,28 @@ Like system messages, object templates grant access to the full suite of Craft A
 
 Craft typically renders object templates in response to specific actions, like an element being saved. This is important for performance reasons, especially when building URIs: the system can’t generate thousands or millions of URIs on-the-fly for the purposes of matching against the current request! Instead, Craft evaluates a template and stores the resulting string, which can be scanned quickly by the database.
 
-Consequently, it’s possible for those values to become stale. If the dynamic attributes in a URI template belong exclusively to the object it was rendered for, it should always be up-to-date—but if it includes attributes or variables from _other_ sources (like the [environment](../configure.md#env) or another element), Craft isn’t always able to invalidate those cached values. There are two features in place, though, to help avoid common problems with URIs:
+Consequently, it’s possible for those values to become stale. If the dynamic attributes in a URI template belong exclusively to the object it was rendered for, it should always be up-to-date—but if it includes attributes or variables from _other_ sources (like the [environment](config/README.md#env) or another element), Craft isn’t always able to invalidate those cached values. There are two features in place, though, to help avoid common problems with URIs:
 
-- Whenever an entry in a [structure](../reference/element-types/entries.md#structures) are saved, the slugs and URIs of its descendants are recursively re-rendered. This helps hierarchical URIs stay in sync with their parent element(s).
+- Whenever an entry in a [structure](entries.md#structures) are saved, the slugs and URIs of its descendants are recursively re-rendered. This helps hierarchical URIs stay in sync with their parent element(s).
 - If a component is updated via project config in a way that _could_ change URIs of the elements it governs, Craft re-saves those elements. An example of this would be the URI format for a category group in a given site; only elements in sites that 
 
 ::: tip
-Craft’s [`resave/*` commands](../reference/cli.md#resave) can be run on an entire section, category group, or other slice of your elements to re-render their URIs, if you believe a change has caused them to become stale. You must run this command in each environment the change is made!
+Craft’s [`resave/*` commands](console-commands.md#resave) can be run on an entire section, category group, or other slice of your elements to re-render their URIs, if you believe a change has caused them to become stale. You must run this command in each environment the change is made!
 :::
 
 Most templates (like redirects after a form submission or default asset field upload paths) aren’t affected by this, because it’s always possible to efficiently resolve their values at runtime.
 
 ## Objects & Variables
 
-Every object template is rendered in the context of a primary model. In the same way that an entry’s template (as determined by a [section](../reference/element-types/entries.md#sections)’s settings) automatically receives an `entry` variable, object templates expose an `object` variable.
+Every object template is rendered in the context of a primary model. In the same way that an entry’s template (as determined by a [section](entries.md#sections)’s settings) automatically receives an `entry` variable, object templates expose an `object` variable.
 
-This agnostic variable name is important, because the context a template is rendered in may differ between uses! For example, [asset fields](../reference/field-types/assets.md) allow you to customize where files are uploaded… but the path is evaluated using the element that field is attached to. A single field configured with the path `header-images/{slug}` might be attached to an entry, category, _and_ tag, and would otherwise have an unpredictable variable naming convention.
+This agnostic variable name is important, because the context a template is rendered in may differ between uses! For example, [asset fields](assets-fields.md) allow you to customize where files are uploaded… but the path is evaluated using the element that field is attached to. A single field configured with the path `header-images/{slug}` might be attached to an entry, category, _and_ tag, and would otherwise have an unpredictable variable naming convention.
 
 In most cases, you don’t even need to include the primary object’s variable name in the template at all, thanks to the concise attribute access [syntax](#syntax)!
 
 ### Other Features
 
-Because this is a fully-fledged Twig environment, you also get access to all the [global variables](../reference/twig/global-variables.md) and Twig language features you’d expect:
+Because this is a fully-fledged Twig environment, you also get access to all the [global variables](dev/global-variables.md) and Twig language features you’d expect:
 
 ```twig
 Current Coupons (Last updated {{ now|date('Y-m-d') }})
@@ -63,7 +63,7 @@ This is also important to keep in mind for
 
 ## Syntax
 
-Regular [Twig templates](../development/twig.md) evaluate content in pairs of output tags (`{{ ... }}`) and control blocks (`{% ... %}`). Object templates extend this syntax to make referencing attributes of the passed object more concise. For example, outputting an entry’s `slug` attribute would look like this in a normal Twig template:
+Regular [Twig templates](dev/twig-primer.md) evaluate content in pairs of output tags (`{{ ... }}`) and control blocks (`{% ... %}`). Object templates extend this syntax to make referencing attributes of the passed object more concise. For example, outputting an entry’s `slug` attribute would look like this in a normal Twig template:
 
 ```twig
 {{ entry.slug }}
@@ -140,11 +140,11 @@ While the first template _feels_ more dynamic and provides greater control, it w
 
 Take care when including other templates. Template paths should _always_ come from a trusted source!
 
-In the same spirit, you should never render _nested_ object templates with the [`renderObjectTemplate()` Twig function](../reference/twig/functions.md#renderobjecttemplate), especially when the input comes from an untrusted user.
+In the same spirit, you should never render _nested_ object templates with the [`renderObjectTemplate()` Twig function](dev/functions.md#renderobjecttemplate), especially when the input comes from an untrusted user.
 
 ### Hashing
 
-When using the [`redirectInput()` function](../reference/twig/functions.md#redirectinput), the provided object template will appear verbatim in the rendered HTML, but prepended with a secure hash. This mechanism allows you to lazily evaluate a template based on some input, without having the template itself be dictated by user input.
+When using the [`redirectInput()` function](dev/functions.md#redirectinput), the provided object template will appear verbatim in the rendered HTML, but prepended with a secure hash. This mechanism allows you to lazily evaluate a template based on some input, without having the template itself be dictated by user input.
 
 ::: danger
 Do not incorporate user input into the string passed to `redirectInput()`! The object template should always come from a trusted source.
@@ -163,4 +163,3 @@ You may use information about the request to switch behavior, though:
 ```twig
 {{ redirectInput(currentUser.isInGroup('supporters') ? 'account/receipts' : 'tip/thanks') }}
 ```
-

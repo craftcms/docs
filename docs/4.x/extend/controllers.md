@@ -490,7 +490,7 @@ public function actionSave()
 
 This implementation of `actionSave()` doesn’t require route params to be bound to arguments—instead, it just looks for a POSTed `id` value, and attempts to load the corresponding `Widget`. Without an ID in the request, it just instantiates a new `Widget` model.
 
-In the last return statement, you’ll notice a [redirection](#redirection) object template, which is rendered after a widget is successfully saved—the format matches our original “edit” URL rule, meaning the user will be dropped at their newly created or updated `Widget` edit screen.
+In the last return statement, you’ll notice a [redirection](#redirection) [object template](../object-templates.md), which is rendered after a widget is successfully saved—the format matches our original “edit” URL rule, meaning the user will be dropped at their newly created or updated `Widget` edit screen.
 
 ::: tip
 Read more about the `asModelSuccess()` and `asModelFailure()` [response factory methods](#models-and-validation).
@@ -523,7 +523,7 @@ The final piece of this puzzle is the `<form>` we use to display and update a `W
 </form>
 ```
 
-Notice that we aren’t setting an [`action` _attribute_](../dev/controller-actions.md#making-requests) on the form! This means that if the widget is _isn’t_ saved successfully, the request will fall through to the same route the user submitted the form from (in this case, mapped to the `my-plugin/widgets/edit` action), allowing them to pick back up with the model intact. If it _was_ successful, Craft will [redirect](#sending-responses) to the rendered object template (fourth argument to `asModelSuccess()` at the end of `actionSave()`).
+Notice that we aren’t setting an [`action` _attribute_](../dev/controller-actions.md#making-requests) on the form! This means that if the widget is _isn’t_ saved successfully, the request will fall through to the same route the user submitted the form from (in this case, mapped to the `my-plugin/widgets/edit` action), allowing them to pick back up with the model intact. If it _was_ successful, Craft will [redirect](#sending-responses) to the rendered [object template](../object-templates.md) (fourth argument to `asModelSuccess()` at the end of `actionSave()`).
 
 ::: tip
 You may still define an `action` attribute on your form when it exists at a different path from the primary editing page. The “Quick Post” dashboard widget is representative of this pattern—a minimal form is presented in one context, but errors are displayed elsewhere, after submission.

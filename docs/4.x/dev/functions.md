@@ -633,7 +633,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ## `renderObjectTemplate`
 
-Renders an object template, which is a micro Twig template used to generate a single value, such as a URI, for an object represented by an `object` variable.
+Renders an [object template](../object-templates.md), which is a micro Twig template used to generate a single value, such as a URI, for an object represented by an `object` variable.
 
 ```twig
 {% set entry = craft.entries().one() %}
