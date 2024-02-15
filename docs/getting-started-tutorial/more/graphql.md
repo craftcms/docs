@@ -46,7 +46,7 @@ Once upgraded, a new **GraphQL** item will appear in the main navigation menu. L
 Clear out the comments in the query editor and try running a simple query:
 
 ```graphql
-{ user }
+{ ping }
 ```
 
 You’ll see `pong` in the response pane, signaling that everything’s ready to go:
