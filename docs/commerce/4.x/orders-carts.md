@@ -2,6 +2,7 @@
 sidebarDepth: 2
 containsGeneratedContent: yes
 ---
+
 # Orders & Carts
 
 Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
@@ -25,9 +26,8 @@ Let’s go over a few common actions you may want to perform on a cart:
 - [Fetching a Cart](#fetching-a-cart)
 - [Adding Items to a Cart](#adding-items-to-a-cart)
 - [Working with Line Items](#working-with-line-items)
-- [Loading a Cart](#loading-a-cart)
 - [Using Custom Fields](#storing-data-in-custom-fields)
-- [Forgetting](#forget-a-cart) and [loading](#load-a-cart) carts
+- [Loading](#load-a-cart) and [forgetting](#forgetting-a-cart) carts
 
 More topics are covered in separate pages:
 
