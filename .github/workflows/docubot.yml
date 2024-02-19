@@ -1,0 +1,127 @@
+name: Docubot
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - "feature/gh-actions-docubot"
+
+env:
+  DB_DRIVER: mysql
+  DB_SERVER: 127.0.0.1
+  DB_DATABASE: mysql
+  DB_USER: root
+  DB_PASSWORD: root
+  APP_CONFIG: |
+    <?php
+    return [
+        'modules' => [
+            'docubot' => \craft\docubot\Module::class,
+        ],
+        'bootstrap' => [
+            'docubot'
+        ],
+    ];
+
+jobs:
+  craft3:
+    name: Build v3 GQL Docs + Event JSON + Console Commands
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: mysql
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Check out Craft
+        uses: actions/checkout@v3
+        with:
+          repository: 'craftcms/cms'
+          path: 'cms'
+          ref: 'main' # TODO: parameterize
+
+      - name: Check out docs
+        uses: actions/checkout@v3
+        with:
+          repository: 'craftcms/docs'
+          path: 'docs'
+          ref: 'main'
+
+      - name: Check out Docubot
+        uses: actions/checkout@v3
+        with:
+          repository: 'craftcms/docubot'
+          path: 'docubot'
+          ref: 'main'
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Check out demo site
+        uses: actions/checkout@v3
+        with:
+          repository: 'craftcms/starter-blog'
+          path: 'site'
+          ref: 'main'
+
+      - name: Prepare PHP
+        uses: shivammathur/setup-php@2.5.0
+        with:
+          php-version: 8.1
+          extensions: mbstring, intl, gd, imagick, zip, dom, pdo_mysql, fileinfo
+          ini-values: post_max_size=256M
+
+      - name: Prepare Craft
+        run: |
+          composer config repositories.craftcms/docubot path ../docubot/
+          composer config repositories.craftcms/cms path ../cms/
+          composer require craftcms/docubot:dev-main
+          composer require --dev yiisoft/yii2-shell
+          echo "$APP_CONFIG" > config/app.php
+          rm -f composer.lock
+        working-directory: site
+
+      - name: Install Composer dependencies
+        run: composer install
+        working-directory: site
+
+      - name: Install Craft
+        run: php craft install/craft --username=admin --password=password --email=test@craftcms.com --site-name=Craft Blog --site-url=$DEFAULT_SITE_URL --interactive=0
+        working-directory: site
+
+      - name: Generate GraphQL docs
+        run: php craft docubot/gql/generate --targetFile=$GITHUB_WORKSPACE/docs/docs/3.x/graphql.md
+        working-directory: site
+
+      - name: Generate Console Command reference
+        run: php craft docubot/commands --targetFile=$GITHUB_WORKSPACE/docs/docs/3.x/console-commands.md --overrides=$GITHUB_WORKSPACE/docubot/src/content/commands/craft/3.0/
+        working-directory: site
+
+      - name: Generate JSON blob for Events reference page
+        run: php craft docubot/event-dumper $GITHUB_WORKSPACE/docs/docs/3.x/event-data/events.json
+        working-directory: site
+
+      - name: Store Craft revision reference
+        run: |
+          echo 'CRAFT_REV<<EOF' >> $GITHUB_ENV
+          echo $(git rev-parse --short HEAD) >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+        working-directory: cms
+
+      - name: Commit updates
+        run: |
+          git config user.name shinybrad
+          git config user.email brad+shinybrad@pixelandtonic.com
+          if ! git diff --quiet
+          then
+            git add --all
+            git commit -a -m "cms@${{ env.CRAFT_REV }}"
+            git push https://${GH_TOKEN}@github.com/craftcms/docs.git
+          else
+            echo "No changes to commit."
+          fi
+        working-directory: docs
