@@ -184,23 +184,22 @@ While this may appear more convoluted, initially, it ensures that you are queryi
 
 ### Matrix Fields
 
-During the upgrade, Craft will automatically migrate all your Matrix field content to entries. In doing so, new globally-accessible fields will be created with this format:
+During the upgrade, Craft will automatically migrate all your Matrix field content to entries. In doing so, new globally-accessible fields will be created with a unique name:
 
-::: code
-``` Name
+```
 {Matrix Field Name} - {Block Type Name} - {Field Name}
 ```
-``` Handle
-{matrixFieldHandle}_{blockTypeHandle}_{fieldHandle}
-```
+
+These fields are then assigned to new [entry types](./reference/element-types/entries.md#entry-types) that replace your existing Matrix block types.
+
+::: tip
+Field labels and handles are retained, within their field layouts—even if they collide with other fields in the [global space](./system/fields.md#multi-instance-fields)!
 :::
 
-Those fields are then assigned to new [entry types](./reference/element-types/entries.md#entry-types) that replace your existing Matrix blocks. Entry type handles
-
-Queries for nested entries will be largely the same—equivalent methods have been added to <craft5:craft\elements\db\EntryQuery> to enable familiar usage. The `.owner()` method still accepts a list of elements that the results must be owned by, and the `field()` and `fieldId()` methods narrow the results by specific fields.
+Queries for nested entries will be largely the same—equivalent methods have been added to <craft5:craft\elements\db\EntryQuery> to enable familiar usage. The `.owner()` method still accepts a list of elements that the results must be owned by, and the `field()` and `fieldId()` methods narrow the results by those belonging to specific fields.
 
 ::: warning
-Values passed to the `type()` method are apt to require updates, as the migrated entry types may receive new handles. For example, a Matrix field that contained a block type with the handle `gallery` might conflict with an existing section; in that event, the new entry type for that block would get the handle `gallery1` (or potentially `gallery2`, `gallery3`, and so on, if multiple similar Matrix fields are being migrated).
+Values passed to the `type()` method of [entry queries](./reference/element-types/entries.md#querying-entries) may require updates, as migrated entry types _can_ receive new handles. For example, a Matrix field that contained a block type with the handle `gallery` might conflict with a preexisting entry type belonging to a section; in that event, the new entry type for that block would get the handle `gallery1` (or potentially `gallery2`, `gallery3`, and so on, if multiple similar Matrix fields are being migrated).
 
 Visit **Settings** &rarr; **Entry Types** to check if any handles appear to have collided in this way, then review and update templates as necessary.
 :::
