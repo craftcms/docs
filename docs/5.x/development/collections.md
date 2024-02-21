@@ -1,6 +1,6 @@
 # Collections
 
-[Collections](https://laravel.com/docs/collections) come from the [Laravel](https://laravel.com/) ecosystem, and provide a fluid way of working with array-like data.
+[Collections](https://laravel.com/docs/10.x/collections) come from the [Laravel](https://laravel.com/) ecosystem, and provide a fluid way of working with array-like data.
 
 You can create a `Collection` anywhere:
 
@@ -28,12 +28,26 @@ Collections can be used in most situations that an array would be:
 
 ## Methods
 
-[Dozens of convenience methods](https://laravel.com/docs/collections#available-methods) are available on every collection to simplify cumbersome or error-prone operations.
+[Dozens of convenience methods](https://laravel.com/docs/10.x/collections#available-methods) are available on every collection to simplify cumbersome or error-prone operations.
 
-These methods can be chained together
+These methods can be chained together to process data in an elegant way. Take this average review score logic:
+
+```twig
+{% set recentReviews = craft.entries()
+  .section('reviews')
+  .relatedTo({
+    targetElement: product,
+  })
+  .postDate(">= #{now|date_modify('-1 month')}")
+  .collect() %}
+
+{{ recentReviews.pluck('rating').average() }}
+```
+
+Not all Collection methods return another Collection! In this example, [`.pluck()`](https://laravel.com/docs/10.x/collections#method-pluck) _does_ (containing just the `rating` field values), but [`.average()`](https://laravel.com/docs/10.x/collections#method-average) _doesn’t_ (instead returning a [float](https://www.php.net/manual/en/language.types.float.php)). As Collections are intended for working with lists, methods that return scalar values can only be used at the “end” of a chain.
 
 ::: tip
-Some common array-manipulation features are already implemented in Craft as Twig [filters](../reference/twig/filters.md) or [functions](../reference/twig/functions.md), but equivalent methods are usually available via Collections.
+Some common array-manipulation features are already implemented in Craft as Twig [filters](../reference/twig/filters.md) or [functions](../reference/twig/functions.md), but equivalent methods are usually available via Collections. Their supported arguments and signatures may differ slightly, so consult the documentation if you are combining or switching between features.
 
 One common problem, however, is that Twig’s default configuration does not parse anonymous functions or “closures” in every expression context. The [`nystudio107/craft-closure` package](repo:nystudio107/craft-closure/) provides a shim to work around this limitation.
 :::
@@ -47,3 +61,7 @@ Use the [`.collect()` query execution method](./element-queries.md#query-executi
 {% set posts = craft.entries().section('news').collect() %}
 {% set posts = collect(craft.entries().section('news').all()) %}
 ```
+
+### Eager-Loading
+
+[Eager-loaded elements](eager-loading.md) are stored in a special type of Collection that behaves a bit like an element query—you can safely call `.all()` on any relational field without worrying about whether it was eager-loaded or not, or use `.with()` to eager-load another set of nested elements.
