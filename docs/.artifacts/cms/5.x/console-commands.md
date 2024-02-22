@@ -10,7 +10,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 
 ## `cache`
 
-Allows you to flush caches.
+Allows you to flush cache.
 
 <h3 id="cache-flush">
     <a href="#cache-flush" class="header-anchor">#</a>
@@ -20,11 +20,11 @@ Allows you to flush caches.
 
 Flushes given cache components.
 
-Example:
+For example,
 
-```sh
-# flushes caches by ID: “first”, “second”, “third”
-php craft cache/flush first second third
+```
+# flushes caches specified by their id: "first", "second", "third"
+yii cache/flush first second third
 ```
 
 <h3 id="cache-flush-all">
@@ -43,15 +43,15 @@ Flushes all caches registered in the system.
 
 Clears DB schema cache for a given connection component.
 
-```sh
-php craft cache/flush-schema
-# identical to `php craft cache/flush-schema db`
+```
+# clears cache schema specified by component id: "db"
+yii cache/flush-schema db
 ```
 
 <h4 id="cache-flush-schema-parameters" class="command-subheading">Parameters</h4>
 
-componentId
-: ID of the connection component. (Defaults to `db`.)
+db
+:  id connection component
 
 
 
@@ -62,6 +62,17 @@ componentId
 
 
 Lists the caches that can be flushed.
+
+## `ckeditor/convert`
+
+
+<h3 id="ckeditor-convert-redactor">
+    <a href="#ckeditor-convert-redactor" class="header-anchor">#</a>
+    <code>ckeditor/convert/redactor</code>
+</h3>
+
+
+Converts Redactor fields to CKEditor
 
 ## `clear-caches`
 
@@ -81,7 +92,7 @@ Clear all caches.
 </h3>
 
 
-Clears Asset caches.
+Clears the caches.
 
 <h3 id="clear-caches-asset-indexing-data">
     <a href="#clear-caches-asset-indexing-data" class="header-anchor">#</a>
@@ -89,7 +100,7 @@ Clears Asset caches.
 </h3>
 
 
-Clears Asset indexing data.
+Clears the caches.
 
 <h3 id="clear-caches-compiled-classes">
     <a href="#clear-caches-compiled-classes" class="header-anchor">#</a>
@@ -97,7 +108,7 @@ Clears Asset indexing data.
 </h3>
 
 
-Clears compiled classes.
+Clears the caches.
 
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
@@ -105,7 +116,7 @@ Clears compiled classes.
 </h3>
 
 
-Clears compiled templates.
+Clears the caches.
 
 <h3 id="clear-caches-cp-resources">
     <a href="#clear-caches-cp-resources" class="header-anchor">#</a>
@@ -113,7 +124,7 @@ Clears compiled templates.
 </h3>
 
 
-Clears control panel resources.
+Clears the caches.
 
 <h3 id="clear-caches-data">
     <a href="#clear-caches-data" class="header-anchor">#</a>
@@ -121,7 +132,7 @@ Clears control panel resources.
 </h3>
 
 
-Clears data caches.
+Clears the caches.
 
 <h3 id="clear-caches-index">
     <a href="#clear-caches-index" class="header-anchor">#</a>
@@ -137,7 +148,7 @@ Lists the caches that can be cleared.
 </h3>
 
 
-Clears temporary files.
+Clears the caches.
 
 <h3 id="clear-caches-transform-indexes">
     <a href="#clear-caches-transform-indexes" class="header-anchor">#</a>
@@ -145,7 +156,15 @@ Clears temporary files.
 </h3>
 
 
-Clears the Asset transform index.
+Clears the caches.
+
+<h3 id="clear-caches-twigpack-manifest-cache">
+    <a href="#clear-caches-twigpack-manifest-cache" class="header-anchor">#</a>
+    <code>clear-caches/twigpack-manifest-cache</code>
+</h3>
+
+
+Clears the caches.
 
 ## `clear-deprecations`
 
@@ -442,35 +461,37 @@ Allows you to manage test fixtures.
 
 Loads the specified fixture data.
 
-Example:
+For example,
 
-```sh
-# load User fixture data (any existing fixture data will be removed first)
-php craft fixture/load "User"
+```
+# load the fixture data specified by User and UserProfile.
+# any existing fixture data will be removed first
+yii fixture/load "User, UserProfile"
 
 # load all available fixtures found under 'tests\unit\fixtures'
-php craft fixture/load "*"
+yii fixture/load "*"
 
-# load all fixtures except User
-php craft fixture/load "*, -User"
+# load all fixtures except User and UserProfile
+yii fixture/load "*, -User, -UserProfile"
 ```
 
 <h4 id="fixture-load-parameters" class="command-subheading">Parameters</h4>
 
 fixturesInput
-: Array of fixtures to load.
+: 
 
 
 
 <h4 id="fixture-load-options" class="command-subheading">Options</h4>
 
 
---global-fixtures, -g
-: Array of global fixtures that should be applied when loading and unloading. Set to `InitDbFixture` by default, which disables and enables integrity check so your data can be safely loaded.
-
-
 --namespace, -n
-: Namespace to search for fixtures. Defaults to `tests\unit\fixtures`.
+: default namespace to search fixtures in
+
+
+--global-fixtures, -g
+: global fixtures that should be applied when loading and unloading. By default it is set to `InitDbFixture`
+that disables and enables integrity check, so your data can be safely loaded.
 
 
 
@@ -482,35 +503,36 @@ fixturesInput
 
 Unloads the specified fixtures.
 
-Example:
+For example,
 
-```sh
-# unload User fixture data
-php craft fixture/load "User"
+```
+# unload the fixture data specified by User and UserProfile.
+yii fixture/unload "User, UserProfile"
 
 # unload all fixtures found under 'tests\unit\fixtures'
-php craft fixture/load "*"
+yii fixture/unload "*"
 
-# unload all fixtures except User
-php craft fixture/load "*, -User"
+# unload all fixtures except User and UserProfile
+yii fixture/unload "*, -User, -UserProfile"
 ```
 
 <h4 id="fixture-unload-parameters" class="command-subheading">Parameters</h4>
 
 fixturesInput
-: Array of fixtures to unload.
+: 
 
 
 
 <h4 id="fixture-unload-options" class="command-subheading">Options</h4>
 
 
---global-fixtures, -g
-: Array of global fixtures that should be applied when loading and unloading. Set to `InitDbFixture` by default, which disables and enables integrity check so your data can be safely loaded.
-
-
 --namespace, -n
-: Namespace to search for fixtures. Defaults to `tests\unit\fixtures`.
+: default namespace to search fixtures in
+
+
+--global-fixtures, -g
+: global fixtures that should be applied when loading and unloading. By default it is set to `InitDbFixture`
+that disables and enables integrity check, so your data can be safely loaded.
 
 
 
@@ -635,64 +657,6 @@ Provides help information about console commands.
 Displays available commands or the detailed information
 about a particular command.
 
-Example:
-
-```
-$ php craft help db/backup
-
-DESCRIPTION
-
-Creates a new database backup.
-
-Example:
-php craft db/backup ./my-backups/
-
-
-USAGE
-
-craft db/backup [path] [...options...]
-
-- path: string
-  The path the database backup should be created at.
-  Can be any of the following:
-
-  - A full file path
-  - A folder path (backup will be saved in there with a dynamically-generated name)
-  - A filename (backup will be saved in the working directory with the given name)
-  - Blank (backup will be saved to the `storage/backups/` folder with a dynamically-generated name)
-
-
-OPTIONS
-
---appconfig: string
-  custom application configuration file path.
-  If not set, default application configuration is used.
-
---color: boolean, 0 or 1
-  whether to enable ANSI color in the output.
-  If not set, ANSI color will only be enabled for terminals that support it.
-
---help, -h: boolean, 0 or 1 (defaults to 0)
-  whether to display help information about current command.
-
---interactive: boolean, 0 or 1 (defaults to 1)
-  whether to run the command interactively.
-
---overwrite: boolean, 0 or 1 (defaults to 0)
-  Whether to overwrite an existing backup file, if a specific file path is given.
-
---silent-exit-on-exception: boolean, 0 or 1
-  if true - script finish with `ExitCode::OK` in case of exception.
-  false - `ExitCode::UNSPECIFIED_ERROR`.
-  Default: `YII_ENV_TEST`
-
---zip: boolean, 0 or 1 (defaults to 0)
-  Whether the backup should be saved as a zip file.
-
-$
-```
-
-
 <h4 id="help-index-parameters" class="command-subheading">Parameters</h4>
 
 command
@@ -715,7 +679,8 @@ If not provided, all available commands will be displayed.
 </h3>
 
 
-Lists all available controllers and actions in machine-readable format.
+List all available controllers and actions in machine readable format.
+This is used for shell completion.
 
 <h3 id="help-list-action-options">
     <a href="#help-list-action-options" class="header-anchor">#</a>
@@ -723,12 +688,13 @@ Lists all available controllers and actions in machine-readable format.
 </h3>
 
 
-List all available options for `action` in machine-readable format.
+List all available options for the $action in machine readable format.
+This is used for shell completion.
 
 <h4 id="help-list-action-options-parameters" class="command-subheading">Parameters</h4>
 
 action
-: Route to action.
+:  route to action
 
 
 
@@ -738,12 +704,12 @@ action
 </h3>
 
 
-Displays usage information for `action`.
+Displays usage information for $action.
 
 <h4 id="help-usage-parameters" class="command-subheading">Parameters</h4>
 
 action
-: Route to action.
+:  route to action
 
 
 
@@ -884,7 +850,7 @@ Allows you to invalidate cache tags.
 </h3>
 
 
-Invalidates all cache tags.
+Clear all caches.
 
 <h3 id="invalidate-tags-graphql">
     <a href="#invalidate-tags-graphql" class="header-anchor">#</a>
@@ -892,7 +858,7 @@ Invalidates all cache tags.
 </h3>
 
 
-Invalidates all GraphQL query cache tags.
+Invalidates caches with the configured tag.
 
 <h3 id="invalidate-tags-index">
     <a href="#invalidate-tags-index" class="header-anchor">#</a>
@@ -900,7 +866,7 @@ Invalidates all GraphQL query cache tags.
 </h3>
 
 
-Lists the cache tags that can be invalidated.
+Lists the caches that can be cleared.
 
 <h3 id="invalidate-tags-template">
     <a href="#invalidate-tags-template" class="header-anchor">#</a>
@@ -908,7 +874,7 @@ Lists the cache tags that can be invalidated.
 </h3>
 
 
-Invalidates all template cache tags.
+Invalidates caches with the configured tag.
 
 ## `mailer`
 
@@ -996,7 +962,9 @@ letters, digits, and underscores.
 
 
 --template-file
-: The template file for generating new migrations. This can be either a path alias (e.g. `@app/migrations/template.php`) or a file path. Defaults to `vendor/craftcms/cms/src/updates/migration.php.template`.
+: the template file for generating new migrations.
+This can be either a [path alias](guide:concept-aliases) (e.g. "@app/migrations/template.php")
+or a file path.
 
 
 
@@ -1006,20 +974,21 @@ letters, digits, and underscores.
 </h3>
 
 
-Downgrades Craft by reverting old migrations.
+Downgrades the application by reverting old migrations.
 
-Example:
+For example,
 
-```sh
-php craft migrate/down      # revert last migration
-php craft migrate/down 3    # revert last three migrations
-php craft migrate/down all  # revert all migrations
+```
+yii migrate/down     # revert the last migration
+yii migrate/down 3   # revert the last 3 migrations
+yii migrate/down all # revert all migrations
 ```
 
 <h4 id="migrate-down-parameters" class="command-subheading">Parameters</h4>
 
 limit
-: The number of migrations to be reverted. Defaults to `1`, meaning the last applied migration will be reverted. When value is `all`, all migrations will be reverted.
+:  the number of migrations to be reverted. Defaults to 1,
+meaning the last applied migration will be reverted. When value is "all", all migrations will be reverted.
 
 
 
@@ -1043,21 +1012,22 @@ limit
 </h3>
 
 
-Shows the list of migrations that have been applied so far.
+Displays the migration history.
 
-Example:
+This command will show the list of migrations that have been applied
+so far. For example,
 
-```sh
-php craft migrate/history      # displays the last ten migrations
-php craft migrate/history 5    # displays the last five migrations
-php craft migrate/history all  # displays the entire migration history
+```
+yii migrate/history     # showing the last 10 migrations
+yii migrate/history 5   # showing the last 5 migrations
+yii migrate/history all # showing the whole history
 ```
 
 <h4 id="migrate-history-parameters" class="command-subheading">Parameters</h4>
 
 limit
-: The maximum number of migrations to be displayed. (Defaults to `10`.)  
-If `all`, the whole migration history will be displayed.
+:  the maximum number of migrations to be displayed.
+If it is "all", the whole migration history will be displayed.
 
 
 
@@ -1085,19 +1055,20 @@ Modifies the migration history to the specified version.
 
 No actual migration will be performed.
 
-```sh
-php craft migrate/mark 101129_185401                          # using timestamp
-php craft migrate/mark m101129_185401_create_user_table       # using name
-php craft migrate/mark app\migrations\M101129185401CreateUser # using namespace name
-php craft migrate/mark m000000_000000_base                    # reset entire history
+```
+yii migrate/mark 101129_185401                        # using timestamp
+yii migrate/mark m101129_185401_create_user_table     # using full name
+yii migrate/mark app\migrations\M101129185401CreateUser # using full namespace name
+yii migrate/mark m000000_000000_base # reset the complete migration history
 ```
 
 <h4 id="migrate-mark-parameters" class="command-subheading">Parameters</h4>
 
 version
-: The version at which the migration history should be marked, which can be either the timestamp or the full name of the migration.
-    
-    Specify `m000000_000000_base` to set the migration history to a state where no migration has been applied.
+:  the version at which the migration history should be marked.
+This can be either the timestamp or the full name of the migration.
+You may specify the name `m000000_000000_base` to set the migration history to a
+state where no migration has been applied.
 
 
 
@@ -1121,21 +1092,22 @@ version
 </h3>
 
 
-Shows any new migrations that have not been applied.
+Displays the un-applied new migrations.
 
-Example:
+This command will show the new migrations that have not been applied.
+For example,
 
-```sh
-php craft migrate/new     # displays the first 10 new migrations
-php craft migrate/new 5   # displays the first 5 new migrations
-php craft migrate/new all # displays all new migrations
+```
+yii migrate/new     # showing the first 10 new migrations
+yii migrate/new 5   # showing the first 5 new migrations
+yii migrate/new all # showing all new migrations
 ```
 
 <h4 id="migrate-new-parameters" class="command-subheading">Parameters</h4>
 
 limit
-: The maximum number of new migrations to be displayed. (Defaults to `10`.)  
-If `all`, then every available new migration will be displayed.
+:  the maximum number of new migrations to be displayed.
+If it is `all`, all available new migrations will be displayed.
 
 
 
@@ -1159,20 +1131,22 @@ If `all`, then every available new migration will be displayed.
 </h3>
 
 
-Reapplies previous migrations by first reverting them and then applying them again.
+Redoes the last few migrations.
 
-Example:
+This command will first revert the specified migrations, and then apply
+them again. For example,
 
-```sh
-php craft migrate/redo     # redo the last applied migration
-php craft migrate/redo 3   # redo the last three applied migrations
-php craft migrate/redo all # redo all migrations
+```
+yii migrate/redo     # redo the last applied migration
+yii migrate/redo 3   # redo the last 3 applied migrations
+yii migrate/redo all # redo all migrations
 ```
 
 <h4 id="migrate-redo-parameters" class="command-subheading">Parameters</h4>
 
 limit
-: The number of migrations to be redone. Defaults to `1`, meaning the last applied migration will be redone. When `all`, every migration will be redone.
+:  the number of migrations to be redone. Defaults to 1,
+meaning the last applied migration will be redone. When equals "all", all migrations will be redone.
 
 
 
@@ -1196,24 +1170,30 @@ limit
 </h3>
 
 
-Upgrades or downgrades until the specified version.
+Upgrades or downgrades till the specified version.
 
-You can downgrade versions to a past apply time by providing a UNIX timestamp or a [strtotime()](https://www.php.net/manual/en/function.strtotime.php)-parseable value. All versions applied after that specified time will then be reverted.
+Can also downgrade versions to the certain apply time in the past by providing
+a UNIX timestamp or a string parseable by the strtotime() function. This means
+that all the versions applied after the specified certain time would be reverted.
 
-Example:
+This command will first revert the specified migrations, and then apply
+them again. For example,
 
-```sh
-php craft migrate/to 101129_185401                          # migration timestamp
-php craft migrate/to m101129_185401_create_user_table       # full name
-php craft migrate/to 1392853618                             # UNIX timestamp
-php craft migrate/to "2022-02-02 02:02:02"                  # strtotime()-parseable
-php craft migrate/to app\migrations\M101129185401CreateUser # full namespace name
+```
+yii migrate/to 101129_185401                          # using timestamp
+yii migrate/to m101129_185401_create_user_table       # using full name
+yii migrate/to 1392853618                             # using UNIX timestamp
+yii migrate/to "2014-02-15 13:00:50"                  # using strtotime() parseable string
+yii migrate/to app\migrations\M101129185401CreateUser # using full namespace name
 ```
 
 <h4 id="migrate-to-parameters" class="command-subheading">Parameters</h4>
 
 version
-: Either the version name or a past time value to be migrated to. This can be a timestamp, the full name of the migration, a UNIX timestamp, or a string value that can be parsed by [strotime()](https://www.php.net/manual/en/function.strtotime.php).
+:  either the version name or the certain time value in the past
+that the application should be migrated to. This can be either the timestamp,
+the full name of the migration, the UNIX timestamp, or the parseable datetime
+string.
 
 
 
@@ -1333,24 +1313,6 @@ Manages plugins.
 
 Disables a plugin.
 
-```
-$ php craft plugin/disable
-
-The following plugins are enabled:
-
-    Handle         Name            Version
-    -------------  --------------  -------
-    apple-news     Apple News      3.0.0
-    ckeditor       CKEditor        2.0.0
-    commerce       Craft Commerce  4.0.0
-    gatsby-helper  Gatsby Helper   2.0.0
-
-Choose a plugin handle to disable: ckeditor
-*** disabling ckeditor
-*** disabled ckeditor successfully (time: 0.003s)
-```
-
-
 <h4 id="plugin-disable-parameters" class="command-subheading">Parameters</h4>
 
 handle
@@ -1373,22 +1335,6 @@ handle
 
 
 Enables a plugin.
-
-```
-$ php craft plugin/enable
-
-The following plugins are disabled:
-
-    Handle      Name        Version
-    ----------  ----------  -------
-    apple-news  Apple News  3.0.0
-    ckeditor    CKEditor    2.0.0
-
-Choose a plugin handle to enable: ckeditor
-*** enabling ckeditor
-*** enabled ckeditor successfully (time: 0.004s)
-```
-
 
 <h4 id="plugin-enable-parameters" class="command-subheading">Parameters</h4>
 
@@ -1413,25 +1359,6 @@ handle
 
 Installs a plugin.
 
-```
-$ php craft plugin/install
-
-The following uninstalled plugins are present:
-
-    Handle         Name            Version
-    -------------  --------------  -------
-    anchors        Anchors         3.0.0
-    apple-news     Apple News      3.0.0
-    ckeditor       CKEditor        2.0.0
-    commerce       Craft Commerce  4.0.0
-    gatsby-helper  Gatsby Helper   2.0.0
-
-Choose a plugin handle to install: ckeditor
-*** installing ckeditor
-*** installed ckeditor successfully (time: 0.496s)
-```
-
-
 <h4 id="plugin-install-parameters" class="command-subheading">Parameters</h4>
 
 handle
@@ -1455,19 +1382,6 @@ handle
 
 Lists all plugins.
 
-```
-$ php craft plugin/list
-
-    Name            Handle         Package Name            Version  Installed  Enabled
-    --------------  -------------  ----------------------  -------  ---------  -------
-    Anchors         anchors        craftcms/anchors        3.0.0    Yes        Yes
-    Apple News      apple-news     craftcms/apple-news     3.0.0    Yes        Yes
-    CKEditor        ckeditor       craftcms/ckeditor       2.0.0    Yes        Yes
-    Craft Commerce  commerce       craftcms/commerce       4.0.0    Yes        Yes
-    Gatsby Helper   gatsby-helper  craftcms/gatsby-helper  2.0.0    Yes        Yes
-```
-
-
 <h3 id="plugin-uninstall">
     <a href="#plugin-uninstall" class="header-anchor">#</a>
     <code>plugin/uninstall</code>
@@ -1475,25 +1389,6 @@ $ php craft plugin/list
 
 
 Uninstalls a plugin.
-
-```
-$ php craft plugin/uninstall
-
-The following plugins plugins are installed and enabled:
-
-    Handle         Name            Version
-    -------------  --------------  -------
-    anchors        Anchors         3.0.0
-    apple-news     Apple News      3.0.0
-    ckeditor       CKEditor        2.0.0
-    commerce       Craft Commerce  4.0.0
-    gatsby-helper  Gatsby Helper   2.0.0
-
-Choose a plugin handle to uninstall: ckeditor
-*** uninstalling ckeditor
-*** uninstalled ckeditor successfully (time: 0.496s)
-```
-
 
 <h4 id="plugin-uninstall-parameters" class="command-subheading">Parameters</h4>
 
@@ -1820,7 +1715,7 @@ job
 </h3>
 
 
-Re-adds failed job(s) to the queue.
+Re-adds a failed job(s) to the queue.
 
 <h4 id="queue-retry-parameters" class="command-subheading">Parameters</h4>
 
@@ -1838,6 +1733,10 @@ job
 Runs all jobs in the queue.
 
 <h4 id="queue-run-options" class="command-subheading">Options</h4>
+
+
+--job-id
+: The job ID to run
 
 
 --verbose, -v
@@ -2149,85 +2048,8 @@ Re-saves entries.
 : The type handle(s) of the elements to resave.
 
 
---set
-: An attribute name that should be set for each of the elements. The value will be determined by --to.
-
-
---set-enabled-for-site
-: The site-enabled status that should be set on the entry, for the site it’s initially being saved/propagated to.
-
-
---to
-: The value that should be set on the --set attribute.
-    
-    The following value types are supported:
-    - An attribute name: `--to myCustomField`
-    - An object template: `--to "={myCustomField|lower}"`
-    - A raw value: `--to "=foo bar"`
-    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
-    - An empty value: `--to :empty:`
-
-
---if-empty
-: Whether the `--set` attribute should only be set if it doesn’t have a value.
-
-
-
-<h3 id="resave-matrix-blocks">
-    <a href="#resave-matrix-blocks" class="header-anchor">#</a>
-    <code>resave/matrix-blocks</code>
-</h3>
-
-
-Re-saves Matrix blocks.
-
-You must supply the `--field` or `--element-id` argument for this to work properly.
-
-<h4 id="resave-matrix-blocks-options" class="command-subheading">Options</h4>
-
-
---queue
-: Whether the elements should be resaved via a queue job.
-
-
---element-id
-: The ID(s) of the elements to resave.
-
-
---uid
-: The UUID(s) of the elements to resave.
-
-
---site
-: The site handle to fetch elements from.
-
-
---status
-: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.
-
-
---offset
-: The number of elements to skip.
-
-
---limit
-: The number of elements to resave.
-
-
---update-search-index
-: Whether to update the search indexes for the resaved elements.
-
-
---touch
-: Whether to update the `dateUpdated` timestamp for the elements.
-
-
---type
-: The type handle(s) of the elements to resave.
-
-
 --field
-: The field handle to save Matrix blocks for.
+: The field handle to save nested entries for.
 
 
 --owner-id
@@ -2236,6 +2058,10 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 
 --set
 : An attribute name that should be set for each of the elements. The value will be determined by --to.
+
+
+--set-enabled-for-site
+: The site-enabled status that should be set on the entry, for the site it’s initially being saved/propagated to.
 
 
 --to
@@ -2425,6 +2251,10 @@ Creates a section.
 
 --no-versioning
 : Whether to disable versioning for the section.
+
+
+--entry-types
+: Comma-separated list of entry type handles to assign to the section.
 
 
 --uri-format
@@ -2675,45 +2505,13 @@ Called from the `post-create-project-cmd` Composer hook.
 </h3>
 
 
-Runs an interactive shell.
-
-::: tip
-This command requires the [`yiisoft/yii2-shell`](https://github.com/yiisoft/yii2-shell) package, which you may need to add to your project:
-
-```
-composer require --dev yiisoft/yii2-shell
-```
-:::
-
-```
-$ php craft shell
-
-Psy Shell v0.10.12 (PHP 8.0.3 — cli) by Justin Hileman
->>> help
-  help       Show a list of commands. Type `help [foo]` for information about [foo].      Aliases: ?
-  ls         List local, instance or class variables, methods and constants.              Aliases: dir
-  dump       Dump an object or primitive.
-  doc        Read the documentation for an object, class, constant, method or property.   Aliases: rtfm, m
-  show       Show the code for an object, class, constant, method or property.
-  wtf        Show the backtrace of the most recent exception.                             Aliases: last-ex
-  whereami   Show where you are in the code.
-  throw-up   Throw an exception or error out of the Psy Shell.
-  timeit     Profiles with a timer.
-  trace      Show the current call stack.
-  buffer     Show (or clear) the contents of the code input buffer.                       Aliases: buf
-  clear      Clear the Psy Shell screen.
-  edit       Open an external editor. Afterwards, get produced code in input buffer.
-  sudo       Evaluate PHP code, bypassing visibility restrictions.
-  history    Show the Psy Shell history.                                                  Aliases: hist
-  exit       End the current session and return to caller.                                Aliases: quit, q
-```
-
+Runs interactive shell
 
 <h4 id="shell-index-options" class="command-subheading">Options</h4>
 
 
 --include
-: Include file(s) before starting tinker shell.
+: include file(s) before starting tinker shell
 
 
 
@@ -2752,10 +2550,6 @@ Runs pending migrations and applies pending project config changes.
 
 --no-backup
 : Skip backing up the database.
-
-
---force
-: Whether to perform the action even if a mutex lock could not be acquired.
 
 
 
@@ -3014,6 +2808,17 @@ Ensures all elements UIDs are unique.
 
 
 Fixes any duplicate UUIDs found within field layout components in the project config.
+
+## `utils/prune-orphaned-entries`
+
+
+<h3 id="utils-prune-orphaned-entries-index">
+    <a href="#utils-prune-orphaned-entries-index" class="header-anchor">#</a>
+    <code>utils/prune-orphaned-entries</code>
+</h3>
+
+
+Prunes orphaned entries for each site.
 
 ## `utils/prune-provisional-drafts`
 
