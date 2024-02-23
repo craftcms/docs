@@ -20,11 +20,12 @@ Default value
     'alwaysShowFocusRings' => false,
     'useShapes' => false,
     'underlineLinks' => false,
+    'disableAutofocus' => false,
     'notificationDuration' => 5000,
 ]`
 
 Defined by
-:  [GeneralConfig::$accessibilityDefaults](craft4:craft\config\GeneralConfig::$accessibilityDefaults)
+:  [GeneralConfig::$accessibilityDefaults](craft5:craft\config\GeneralConfig::$accessibilityDefaults)
 
 Since
 :  3.6.4
@@ -60,7 +61,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$allowAdminChanges](craft4:craft\config\GeneralConfig::$allowAdminChanges)
+:  [GeneralConfig::$allowAdminChanges](craft5:craft\config\GeneralConfig::$allowAdminChanges)
 
 Since
 :  3.1.0
@@ -101,7 +102,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$allowSimilarTags](craft4:craft\config\GeneralConfig::$allowSimilarTags)
+:  [GeneralConfig::$allowSimilarTags](craft5:craft\config\GeneralConfig::$allowSimilarTags)
 
 </div>
 
@@ -129,7 +130,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$allowUpdates](craft4:craft\config\GeneralConfig::$allowUpdates)
+:  [GeneralConfig::$allowUpdates](craft5:craft\config\GeneralConfig::$allowUpdates)
 
 </div>
 
@@ -159,7 +160,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$autoLoginAfterAccountActivation](craft4:craft\config\GeneralConfig::$autoLoginAfterAccountActivation)
+:  [GeneralConfig::$autoLoginAfterAccountActivation](craft5:craft\config\GeneralConfig::$autoLoginAfterAccountActivation)
 
 </div>
 
@@ -187,7 +188,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$autosaveDrafts](craft4:craft\config\GeneralConfig::$autosaveDrafts)
+:  [GeneralConfig::$autosaveDrafts](craft5:craft\config\GeneralConfig::$autosaveDrafts)
 
 Since
 :  3.5.6
@@ -220,7 +221,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$backupOnUpdate](craft4:craft\config\GeneralConfig::$backupOnUpdate)
+:  [GeneralConfig::$backupOnUpdate](craft5:craft\config\GeneralConfig::$backupOnUpdate)
 
 </div>
 
@@ -248,7 +249,7 @@ Default value
 :  `86400` (1 day)
 
 Defined by
-:  [GeneralConfig::$cacheDuration](craft4:craft\config\GeneralConfig::$cacheDuration)
+:  [GeneralConfig::$cacheDuration](craft5:craft\config\GeneralConfig::$cacheDuration)
 
 </div>
 
@@ -256,7 +257,7 @@ The default length of time Craft will store data, RSS feed, and template caches.
 
 If set to `0`, data and RSS feed caches will be stored indefinitely; template caches will be stored for one year.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -280,7 +281,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$cpHeadTags](craft4:craft\config\GeneralConfig::$cpHeadTags)
+:  [GeneralConfig::$cpHeadTags](craft5:craft\config\GeneralConfig::$cpHeadTags)
 
 Since
 :  3.5.0
@@ -319,7 +320,7 @@ Default value
 :  `'US'`
 
 Defined by
-:  [GeneralConfig::$defaultCountryCode](craft4:craft\config\GeneralConfig::$defaultCountryCode)
+:  [GeneralConfig::$defaultCountryCode](craft5:craft\config\GeneralConfig::$defaultCountryCode)
 
 Since
 :  4.5.0
@@ -352,7 +353,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$defaultCpLanguage](craft4:craft\config\GeneralConfig::$defaultCpLanguage)
+:  [GeneralConfig::$defaultCpLanguage](craft5:craft\config\GeneralConfig::$defaultCpLanguage)
 
 </div>
 
@@ -380,7 +381,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$defaultCpLocale](craft4:craft\config\GeneralConfig::$defaultCpLocale)
+:  [GeneralConfig::$defaultCpLocale](craft5:craft\config\GeneralConfig::$defaultCpLocale)
 
 Since
 :  3.5.0
@@ -414,7 +415,7 @@ Default value
 :  `0775`
 
 Defined by
-:  [GeneralConfig::$defaultDirMode](craft4:craft\config\GeneralConfig::$defaultDirMode)
+:  [GeneralConfig::$defaultDirMode](craft5:craft\config\GeneralConfig::$defaultDirMode)
 
 </div>
 
@@ -444,7 +445,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$defaultFileMode](craft4:craft\config\GeneralConfig::$defaultFileMode)
+:  [GeneralConfig::$defaultFileMode](craft5:craft\config\GeneralConfig::$defaultFileMode)
 
 </div>
 
@@ -474,7 +475,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$defaultSearchTermOptions](craft4:craft\config\GeneralConfig::$defaultSearchTermOptions)
+:  [GeneralConfig::$defaultSearchTermOptions](craft5:craft\config\GeneralConfig::$defaultSearchTermOptions)
 
 </div>
 
@@ -505,12 +506,12 @@ Allowed types
 
 Default value
 :  `[
-    'html',
     'twig',
+    'html',
 ]`
 
 Defined by
-:  [GeneralConfig::$defaultTemplateExtensions](craft4:craft\config\GeneralConfig::$defaultTemplateExtensions)
+:  [GeneralConfig::$defaultTemplateExtensions](craft5:craft\config\GeneralConfig::$defaultTemplateExtensions)
 
 </div>
 
@@ -518,10 +519,10 @@ The template file extensions Craft will look for when matching a template path t
 
 ::: code
 ```php Static Config
-->defaultTemplateExtensions(['html', 'twig', 'txt'])
+->defaultTemplateExtensions(['twig', 'html', 'txt'])
 ```
 ```shell Environment Override
-CRAFT_DEFAULT_TEMPLATE_EXTENSIONS=html,twig,txt
+CRAFT_DEFAULT_TEMPLATE_EXTENSIONS=twig,html,txt
 ```
 :::
 
@@ -538,7 +539,7 @@ Default value
 :  `1` (Monday)
 
 Defined by
-:  [GeneralConfig::$defaultWeekStartDay](craft4:craft\config\GeneralConfig::$defaultWeekStartDay)
+:  [GeneralConfig::$defaultWeekStartDay](craft5:craft\config\GeneralConfig::$defaultWeekStartDay)
 
 </div>
 
@@ -576,7 +577,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$devMode](craft4:craft\config\GeneralConfig::$devMode)
+:  [GeneralConfig::$devMode](craft5:craft\config\GeneralConfig::$devMode)
 
 </div>
 
@@ -604,7 +605,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$disabledPlugins](craft4:craft\config\GeneralConfig::$disabledPlugins)
+:  [GeneralConfig::$disabledPlugins](craft5:craft\config\GeneralConfig::$disabledPlugins)
 
 Since
 :  3.1.9
@@ -655,7 +656,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$disabledUtilities](craft4:craft\config\GeneralConfig::$disabledUtilities)
+:  [GeneralConfig::$disabledUtilities](craft5:craft\config\GeneralConfig::$disabledUtilities)
 
 Since
 :  4.6.0
@@ -689,7 +690,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$disallowRobots](craft4:craft\config\GeneralConfig::$disallowRobots)
+:  [GeneralConfig::$disallowRobots](craft5:craft\config\GeneralConfig::$disallowRobots)
 
 Since
 :  3.5.10
@@ -725,7 +726,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$enableTemplateCaching](craft4:craft\config\GeneralConfig::$enableTemplateCaching)
+:  [GeneralConfig::$enableTemplateCaching](craft5:craft\config\GeneralConfig::$enableTemplateCaching)
 
 </div>
 
@@ -753,7 +754,7 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$errorTemplatePrefix](craft4:craft\config\GeneralConfig::$errorTemplatePrefix)
+:  [GeneralConfig::$errorTemplatePrefix](craft5:craft\config\GeneralConfig::$errorTemplatePrefix)
 
 </div>
 
@@ -783,7 +784,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$extraAllowedFileExtensions](craft4:craft\config\GeneralConfig::$extraAllowedFileExtensions)
+:  [GeneralConfig::$extraAllowedFileExtensions](craft5:craft\config\GeneralConfig::$extraAllowedFileExtensions)
 
 </div>
 
@@ -811,7 +812,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$extraAppLocales](craft4:craft\config\GeneralConfig::$extraAppLocales)
+:  [GeneralConfig::$extraAppLocales](craft5:craft\config\GeneralConfig::$extraAppLocales)
 
 Since
 :  3.0.24
@@ -842,7 +843,7 @@ Default value
 :  `GeneralConfig::CAMEL_CASE`
 
 Defined by
-:  [GeneralConfig::$handleCasing](craft4:craft\config\GeneralConfig::$handleCasing)
+:  [GeneralConfig::$handleCasing](craft5:craft\config\GeneralConfig::$handleCasing)
 
 Since
 :  3.6.0
@@ -864,7 +865,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$headlessMode](craft4:craft\config\GeneralConfig::$headlessMode)
+:  [GeneralConfig::$headlessMode](craft5:craft\config\GeneralConfig::$headlessMode)
 
 Since
 :  3.3.0
@@ -910,7 +911,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$httpProxy](craft4:craft\config\GeneralConfig::$httpProxy)
+:  [GeneralConfig::$httpProxy](craft5:craft\config\GeneralConfig::$httpProxy)
 
 Since
 :  3.7.0
@@ -945,7 +946,7 @@ Default value
 ]`
 
 Defined by
-:  [GeneralConfig::$indexTemplateFilenames](craft4:craft\config\GeneralConfig::$indexTemplateFilenames)
+:  [GeneralConfig::$indexTemplateFilenames](craft5:craft\config\GeneralConfig::$indexTemplateFilenames)
 
 </div>
 
@@ -974,7 +975,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$ipHeaders](craft4:craft\config\GeneralConfig::$ipHeaders)
+:  [GeneralConfig::$ipHeaders](craft5:craft\config\GeneralConfig::$ipHeaders)
 
 </div>
 
@@ -982,7 +983,7 @@ List of headers where proxies store the real client IP.
 
 See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) for more details.
 
-If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v4/craft-web-request.html#ipheaders) value will be used.
+If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v5/craft-web-request.html#ipheaders) value will be used.
 
 ::: code
 ```php Static Config
@@ -1006,7 +1007,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$isSystemLive](craft4:craft\config\GeneralConfig::$isSystemLive)
+:  [GeneralConfig::$isSystemLive](craft5:craft\config\GeneralConfig::$isSystemLive)
 
 </div>
 
@@ -1035,7 +1036,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$limitAutoSlugsToAscii](craft4:craft\config\GeneralConfig::$limitAutoSlugsToAscii)
+:  [GeneralConfig::$limitAutoSlugsToAscii](craft5:craft\config\GeneralConfig::$limitAutoSlugsToAscii)
 
 </div>
 
@@ -1056,6 +1057,34 @@ CRAFT_LIMIT_AUTO_SLUGS_TO_ASCII=1
 
 
 
+### `localeAliases`
+
+<div class="compact">
+
+Allowed types
+:  [array](https://php.net/language.types.array)
+
+Default value
+:  `[]`
+
+Defined by
+:  [GeneralConfig::$localeAliases](craft5:craft\config\GeneralConfig::$localeAliases)
+
+Since
+:  5.0.0
+
+</div>
+
+Custom locale aliases, which will be included when fetching all known locales.
+
+Each locale alias should be defined as an array with the following keys:
+
+- `id`: The alias locale ID
+- `aliasOf`: The original locale ID
+- `displayName`: The locale alias’s display name _(optional)_
+
+
+
 ### `maxBackups`
 
 <div class="compact">
@@ -1067,7 +1096,7 @@ Default value
 :  `20`
 
 Defined by
-:  [GeneralConfig::$maxBackups](craft4:craft\config\GeneralConfig::$maxBackups)
+:  [GeneralConfig::$maxBackups](craft5:craft\config\GeneralConfig::$maxBackups)
 
 </div>
 
@@ -1096,7 +1125,7 @@ Default value
 :  `50`
 
 Defined by
-:  [GeneralConfig::$maxRevisions](craft4:craft\config\GeneralConfig::$maxRevisions)
+:  [GeneralConfig::$maxRevisions](craft5:craft\config\GeneralConfig::$maxRevisions)
 
 Since
 :  3.2.0
@@ -1129,7 +1158,7 @@ Default value
 :  `100`
 
 Defined by
-:  [GeneralConfig::$maxSlugIncrement](craft4:craft\config\GeneralConfig::$maxSlugIncrement)
+:  [GeneralConfig::$maxSlugIncrement](craft5:craft\config\GeneralConfig::$maxSlugIncrement)
 
 </div>
 
@@ -1146,6 +1175,50 @@ CRAFT_MAX_SLUG_INCREMENT=10
 
 
 
+### `partialTemplatesPath`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)
+
+Default value
+:  `'_partials'`
+
+Defined by
+:  [GeneralConfig::$partialTemplatesPath](craft5:craft\config\GeneralConfig::$partialTemplatesPath)
+
+Since
+:  5.0.0
+
+</div>
+
+The path within the `templates` folder where element partial templates will live.
+
+Partial templates are used to render elements when calling [craft\elements\db\ElementQuery::render()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-render),
+[craft\elements\ElementCollection::render()](https://docs.craftcms.com/api/v5/craft-elements-elementcollection.html#method-render), or [craft\base\Element::render()](https://docs.craftcms.com/api/v5/craft-base-element.html#method-render).
+
+For example, you could render all the entries within a Matrix field like so:
+
+```twig
+{{ entry.myMatrixField.render() }}
+```
+
+The full path to a partial template will also include the element type handle (e.g. `asset` or `entry`) and the
+field layout provider’s handle (e.g. the volume handle or entry type handle). For an entry of type `article`,
+that would be: `_partials/entry/article.twig`.
+
+::: code
+```php Static Config
+->partialTemplatesPath('_cp/partials')
+```
+```shell Environment Override
+CRAFT_PARTIAL_TEMPLATES_PATH=_cp/partials
+```
+:::
+
+
+
 ### `permissionsPolicyHeader`
 
 <div class="compact">
@@ -1157,7 +1230,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$permissionsPolicyHeader](craft4:craft\config\GeneralConfig::$permissionsPolicyHeader)
+:  [GeneralConfig::$permissionsPolicyHeader](craft5:craft\config\GeneralConfig::$permissionsPolicyHeader)
 
 Since
 :  3.6.14
@@ -1188,7 +1261,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$phpMaxMemoryLimit](craft4:craft\config\GeneralConfig::$phpMaxMemoryLimit)
+:  [GeneralConfig::$phpMaxMemoryLimit](craft5:craft\config\GeneralConfig::$phpMaxMemoryLimit)
 
 </div>
 
@@ -1219,7 +1292,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$preloadSingles](craft4:craft\config\GeneralConfig::$preloadSingles)
+:  [GeneralConfig::$preloadSingles](craft5:craft\config\GeneralConfig::$preloadSingles)
 
 Since
 :  4.4.0
@@ -1257,7 +1330,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$previewIframeResizerOptions](craft4:craft\config\GeneralConfig::$previewIframeResizerOptions)
+:  [GeneralConfig::$previewIframeResizerOptions](craft5:craft\config\GeneralConfig::$previewIframeResizerOptions)
 
 Since
 :  3.5.0
@@ -1285,7 +1358,7 @@ Default value
 :  `'_'`
 
 Defined by
-:  [GeneralConfig::$privateTemplateTrigger](craft4:craft\config\GeneralConfig::$privateTemplateTrigger)
+:  [GeneralConfig::$privateTemplateTrigger](craft5:craft\config\GeneralConfig::$privateTemplateTrigger)
 
 </div>
 
@@ -1316,7 +1389,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$runQueueAutomatically](craft4:craft\config\GeneralConfig::$runQueueAutomatically)
+:  [GeneralConfig::$runQueueAutomatically](craft5:craft\config\GeneralConfig::$runQueueAutomatically)
 
 </div>
 
@@ -1357,7 +1430,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$sameSiteCookieValue](craft4:craft\config\GeneralConfig::$sameSiteCookieValue)
+:  [GeneralConfig::$sameSiteCookieValue](craft5:craft\config\GeneralConfig::$sameSiteCookieValue)
 
 Since
 :  3.1.33
@@ -1379,7 +1452,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$sendContentLengthHeader](craft4:craft\config\GeneralConfig::$sendContentLengthHeader)
+:  [GeneralConfig::$sendContentLengthHeader](craft5:craft\config\GeneralConfig::$sendContentLengthHeader)
 
 Since
 :  3.7.3
@@ -1410,7 +1483,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$sendPoweredByHeader](craft4:craft\config\GeneralConfig::$sendPoweredByHeader)
+:  [GeneralConfig::$sendPoweredByHeader](craft5:craft\config\GeneralConfig::$sendPoweredByHeader)
 
 </div>
 
@@ -1439,7 +1512,7 @@ Default value
 :  `'-'`
 
 Defined by
-:  [GeneralConfig::$slugWordSeparator](craft4:craft\config\GeneralConfig::$slugWordSeparator)
+:  [GeneralConfig::$slugWordSeparator](craft5:craft\config\GeneralConfig::$slugWordSeparator)
 
 </div>
 
@@ -1467,7 +1540,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$testToEmailAddress](craft4:craft\config\GeneralConfig::$testToEmailAddress)
+:  [GeneralConfig::$testToEmailAddress](craft5:craft\config\GeneralConfig::$testToEmailAddress)
 
 </div>
 
@@ -1499,7 +1572,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$timezone](craft4:craft\config\GeneralConfig::$timezone)
+:  [GeneralConfig::$timezone](craft5:craft\config\GeneralConfig::$timezone)
 
 </div>
 
@@ -1529,7 +1602,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$translationDebugOutput](craft4:craft\config\GeneralConfig::$translationDebugOutput)
+:  [GeneralConfig::$translationDebugOutput](craft5:craft\config\GeneralConfig::$translationDebugOutput)
 
 </div>
 
@@ -1558,7 +1631,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$useEmailAsUsername](craft4:craft\config\GeneralConfig::$useEmailAsUsername)
+:  [GeneralConfig::$useEmailAsUsername](craft5:craft\config\GeneralConfig::$useEmailAsUsername)
 
 </div>
 
@@ -1592,7 +1665,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$useFileLocks](craft4:craft\config\GeneralConfig::$useFileLocks)
+:  [GeneralConfig::$useFileLocks](craft5:craft\config\GeneralConfig::$useFileLocks)
 
 </div>
 
@@ -1624,7 +1697,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$useIframeResizer](craft4:craft\config\GeneralConfig::$useIframeResizer)
+:  [GeneralConfig::$useIframeResizer](craft5:craft\config\GeneralConfig::$useIframeResizer)
 
 Since
 :  3.5.5
@@ -1672,7 +1745,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$aliases](craft4:craft\config\GeneralConfig::$aliases)
+:  [GeneralConfig::$aliases](craft5:craft\config\GeneralConfig::$aliases)
 
 </div>
 
@@ -1697,7 +1770,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$backupCommand](craft4:craft\config\GeneralConfig::$backupCommand)
+:  [GeneralConfig::$backupCommand](craft5:craft\config\GeneralConfig::$backupCommand)
 
 </div>
 
@@ -1740,7 +1813,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$buildId](craft4:craft\config\GeneralConfig::$buildId)
+:  [GeneralConfig::$buildId](craft5:craft\config\GeneralConfig::$buildId)
 
 Since
 :  4.0.0
@@ -1773,7 +1846,7 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$defaultCookieDomain](craft4:craft\config\GeneralConfig::$defaultCookieDomain)
+:  [GeneralConfig::$defaultCookieDomain](craft5:craft\config\GeneralConfig::$defaultCookieDomain)
 
 </div>
 
@@ -1803,7 +1876,7 @@ Default value
 :  `'@webroot/cpresources'`
 
 Defined by
-:  [GeneralConfig::$resourceBasePath](craft4:craft\config\GeneralConfig::$resourceBasePath)
+:  [GeneralConfig::$resourceBasePath](craft5:craft\config\GeneralConfig::$resourceBasePath)
 
 </div>
 
@@ -1831,7 +1904,7 @@ Default value
 :  `'@web/cpresources'`
 
 Defined by
-:  [GeneralConfig::$resourceBaseUrl](craft4:craft\config\GeneralConfig::$resourceBaseUrl)
+:  [GeneralConfig::$resourceBaseUrl](craft5:craft\config\GeneralConfig::$resourceBaseUrl)
 
 </div>
 
@@ -1859,7 +1932,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$restoreCommand](craft4:craft\config\GeneralConfig::$restoreCommand)
+:  [GeneralConfig::$restoreCommand](craft5:craft\config\GeneralConfig::$restoreCommand)
 
 </div>
 
@@ -1902,7 +1975,7 @@ Default value
 :  `'actions'`
 
 Defined by
-:  [GeneralConfig::$actionTrigger](craft4:craft\config\GeneralConfig::$actionTrigger)
+:  [GeneralConfig::$actionTrigger](craft5:craft\config\GeneralConfig::$actionTrigger)
 
 </div>
 
@@ -1930,13 +2003,13 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$activateAccountSuccessPath](craft4:craft\config\GeneralConfig::$activateAccountSuccessPath)
+:  [GeneralConfig::$activateAccountSuccessPath](craft5:craft\config\GeneralConfig::$activateAccountSuccessPath)
 
 </div>
 
 The URI that users without access to the control panel should be redirected to after activating their account.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -1960,7 +2033,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$addTrailingSlashesToUrls](craft4:craft\config\GeneralConfig::$addTrailingSlashesToUrls)
+:  [GeneralConfig::$addTrailingSlashesToUrls](craft5:craft\config\GeneralConfig::$addTrailingSlashesToUrls)
 
 </div>
 
@@ -1988,7 +2061,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$allowUppercaseInSlug](craft4:craft\config\GeneralConfig::$allowUppercaseInSlug)
+:  [GeneralConfig::$allowUppercaseInSlug](craft5:craft\config\GeneralConfig::$allowUppercaseInSlug)
 
 </div>
 
@@ -2016,7 +2089,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$baseCpUrl](craft4:craft\config\GeneralConfig::$baseCpUrl)
+:  [GeneralConfig::$baseCpUrl](craft5:craft\config\GeneralConfig::$baseCpUrl)
 
 </div>
 
@@ -2050,7 +2123,7 @@ Default value
 :  `'admin'`
 
 Defined by
-:  [GeneralConfig::$cpTrigger](craft4:craft\config\GeneralConfig::$cpTrigger)
+:  [GeneralConfig::$cpTrigger](craft5:craft\config\GeneralConfig::$cpTrigger)
 
 </div>
 
@@ -2092,14 +2165,14 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$invalidUserTokenPath](craft4:craft\config\GeneralConfig::$invalidUserTokenPath)
+:  [GeneralConfig::$invalidUserTokenPath](craft5:craft\config\GeneralConfig::$invalidUserTokenPath)
 
 </div>
 
 The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account
 passwords. Note that this only affects front-end site requests.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2125,7 +2198,7 @@ Default value
 :  `'login'`
 
 Defined by
-:  [GeneralConfig::$loginPath](craft4:craft\config\GeneralConfig::$loginPath)
+:  [GeneralConfig::$loginPath](craft5:craft\config\GeneralConfig::$loginPath)
 
 </div>
 
@@ -2135,7 +2208,7 @@ This can be set to `false` to disable front-end login.
 
 Note that this config setting is ignored when <config4:headlessMode> is enabled.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2159,7 +2232,7 @@ Default value
 :  `'logout'`
 
 Defined by
-:  [GeneralConfig::$logoutPath](craft4:craft\config\GeneralConfig::$logoutPath)
+:  [GeneralConfig::$logoutPath](craft5:craft\config\GeneralConfig::$logoutPath)
 
 </div>
 
@@ -2169,7 +2242,7 @@ This can be set to `false` to disable front-end logout.
 
 Note that this config setting is ignored when <config4:headlessMode> is enabled.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2193,7 +2266,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$omitScriptNameInUrls](craft4:craft\config\GeneralConfig::$omitScriptNameInUrls)
+:  [GeneralConfig::$omitScriptNameInUrls](craft5:craft\config\GeneralConfig::$omitScriptNameInUrls)
 
 </div>
 
@@ -2237,7 +2310,7 @@ Default value
 :  `'p'`
 
 Defined by
-:  [GeneralConfig::$pageTrigger](craft4:craft\config\GeneralConfig::$pageTrigger)
+:  [GeneralConfig::$pageTrigger](craft5:craft\config\GeneralConfig::$pageTrigger)
 
 </div>
 
@@ -2278,7 +2351,7 @@ Default value
 :  `'p'`
 
 Defined by
-:  [GeneralConfig::$pathParam](craft4:craft\config\GeneralConfig::$pathParam)
+:  [GeneralConfig::$pathParam](craft5:craft\config\GeneralConfig::$pathParam)
 
 </div>
 
@@ -2313,7 +2386,7 @@ Default value
 :  `'dashboard'`
 
 Defined by
-:  [GeneralConfig::$postCpLoginRedirect](craft4:craft\config\GeneralConfig::$postCpLoginRedirect)
+:  [GeneralConfig::$postCpLoginRedirect](craft5:craft\config\GeneralConfig::$postCpLoginRedirect)
 
 </div>
 
@@ -2322,7 +2395,7 @@ The path users should be redirected to after logging into the control panel.
 This setting will also come into effect if a user visits the control panel’s login page (`/admin/login`) or the control panel’s
 root URL (`/admin`) when they are already logged in.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2346,7 +2419,7 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$postLoginRedirect](craft4:craft\config\GeneralConfig::$postLoginRedirect)
+:  [GeneralConfig::$postLoginRedirect](craft5:craft\config\GeneralConfig::$postLoginRedirect)
 
 </div>
 
@@ -2355,7 +2428,7 @@ The path users should be redirected to after logging in from the front-end site.
 This setting will also come into effect if the user visits the login page (as specified by the <config4:loginPath> config setting) when
 they are already logged in.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2379,13 +2452,13 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$postLogoutRedirect](craft4:craft\config\GeneralConfig::$postLogoutRedirect)
+:  [GeneralConfig::$postLogoutRedirect](craft5:craft\config\GeneralConfig::$postLogoutRedirect)
 
 </div>
 
 The path that users should be redirected to after logging out from the front-end site.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2409,7 +2482,7 @@ Default value
 :  `'setpassword'`
 
 Defined by
-:  [GeneralConfig::$setPasswordPath](craft4:craft\config\GeneralConfig::$setPasswordPath)
+:  [GeneralConfig::$setPasswordPath](craft5:craft\config\GeneralConfig::$setPasswordPath)
 
 </div>
 
@@ -2417,7 +2490,7 @@ The URI or URL that Craft should use for Set Password forms on the front end.
 
 This setting is ignored when <config4:headlessMode> is enabled, unless it’s set to an absolute URL.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: tip
 You might also want to set <config4:invalidUserTokenPath> in case a user clicks on an expired password reset link.
@@ -2445,7 +2518,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$setPasswordRequestPath](craft4:craft\config\GeneralConfig::$setPasswordRequestPath)
+:  [GeneralConfig::$setPasswordRequestPath](craft5:craft\config\GeneralConfig::$setPasswordRequestPath)
 
 Since
 :  3.5.14
@@ -2454,7 +2527,7 @@ Since
 
 The URI to the page where users can request to change their password.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
 
@@ -2485,13 +2558,13 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$setPasswordSuccessPath](craft4:craft\config\GeneralConfig::$setPasswordSuccessPath)
+:  [GeneralConfig::$setPasswordSuccessPath](craft5:craft\config\GeneralConfig::$setPasswordSuccessPath)
 
 </div>
 
 The URI Craft should redirect users to after setting their password from the front end.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2515,7 +2588,7 @@ Default value
 :  `'siteToken'`
 
 Defined by
-:  [GeneralConfig::$siteToken](craft4:craft\config\GeneralConfig::$siteToken)
+:  [GeneralConfig::$siteToken](craft5:craft\config\GeneralConfig::$siteToken)
 
 Since
 :  3.5.0
@@ -2546,7 +2619,7 @@ Default value
 :  `'token'`
 
 Defined by
-:  [GeneralConfig::$tokenParam](craft4:craft\config\GeneralConfig::$tokenParam)
+:  [GeneralConfig::$tokenParam](craft5:craft\config\GeneralConfig::$tokenParam)
 
 </div>
 
@@ -2574,7 +2647,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$usePathInfo](craft4:craft\config\GeneralConfig::$usePathInfo)
+:  [GeneralConfig::$usePathInfo](craft5:craft\config\GeneralConfig::$usePathInfo)
 
 </div>
 
@@ -2604,7 +2677,7 @@ Default value
 :  `'auto'`
 
 Defined by
-:  [GeneralConfig::$useSslOnTokenizedUrls](craft4:craft\config\GeneralConfig::$useSslOnTokenizedUrls)
+:  [GeneralConfig::$useSslOnTokenizedUrls](craft5:craft\config\GeneralConfig::$useSslOnTokenizedUrls)
 
 </div>
 
@@ -2636,7 +2709,7 @@ Default value
 :  `'verifyemail'`
 
 Defined by
-:  [GeneralConfig::$verifyEmailPath](craft4:craft\config\GeneralConfig::$verifyEmailPath)
+:  [GeneralConfig::$verifyEmailPath](craft5:craft\config\GeneralConfig::$verifyEmailPath)
 
 Since
 :  3.4.0
@@ -2647,7 +2720,7 @@ The URI or URL that Craft should use for email verification links on the front e
 
 This setting is ignored when <config4:headlessMode> is enabled, unless it’s set to an absolute URL.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2671,7 +2744,7 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$verifyEmailSuccessPath](craft4:craft\config\GeneralConfig::$verifyEmailSuccessPath)
+:  [GeneralConfig::$verifyEmailSuccessPath](craft5:craft\config\GeneralConfig::$verifyEmailSuccessPath)
 
 Since
 :  3.1.20
@@ -2680,7 +2753,7 @@ Since
 
 The URI that users without access to the control panel should be redirected to after verifying a new email address.
 
-See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2706,7 +2779,7 @@ Default value
 :  `'CraftSessionId'`
 
 Defined by
-:  [GeneralConfig::$phpSessionName](craft4:craft\config\GeneralConfig::$phpSessionName)
+:  [GeneralConfig::$phpSessionName](craft5:craft\config\GeneralConfig::$phpSessionName)
 
 </div>
 
@@ -2734,7 +2807,7 @@ Default value
 :  `31536000` (1 year)
 
 Defined by
-:  [GeneralConfig::$rememberUsernameDuration](craft4:craft\config\GeneralConfig::$rememberUsernameDuration)
+:  [GeneralConfig::$rememberUsernameDuration](craft5:craft\config\GeneralConfig::$rememberUsernameDuration)
 
 </div>
 
@@ -2742,7 +2815,7 @@ The amount of time Craft will remember a username and pre-populate it on the con
 
 Set to `0` to disable this feature altogether.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2766,7 +2839,7 @@ Default value
 :  `1209600` (14 days)
 
 Defined by
-:  [GeneralConfig::$rememberedUserSessionDuration](craft4:craft\config\GeneralConfig::$rememberedUserSessionDuration)
+:  [GeneralConfig::$rememberedUserSessionDuration](craft5:craft\config\GeneralConfig::$rememberedUserSessionDuration)
 
 </div>
 
@@ -2774,7 +2847,7 @@ The amount of time a user stays logged if “Remember Me” is checked on the lo
 
 Set to `0` to disable the “Remember Me” feature altogether.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2798,7 +2871,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$requireMatchingUserAgentForSession](craft4:craft\config\GeneralConfig::$requireMatchingUserAgentForSession)
+:  [GeneralConfig::$requireMatchingUserAgentForSession](craft5:craft\config\GeneralConfig::$requireMatchingUserAgentForSession)
 
 </div>
 
@@ -2826,7 +2899,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$requireUserAgentAndIpForSession](craft4:craft\config\GeneralConfig::$requireUserAgentAndIpForSession)
+:  [GeneralConfig::$requireUserAgentAndIpForSession](craft5:craft\config\GeneralConfig::$requireUserAgentAndIpForSession)
 
 </div>
 
@@ -2854,7 +2927,7 @@ Default value
 :  `3600` (1 hour)
 
 Defined by
-:  [GeneralConfig::$userSessionDuration](craft4:craft\config\GeneralConfig::$userSessionDuration)
+:  [GeneralConfig::$userSessionDuration](craft5:craft\config\GeneralConfig::$userSessionDuration)
 
 </div>
 
@@ -2862,7 +2935,7 @@ The amount of time before a user will get logged out due to inactivity.
 
 Set to `0` if you want users to stay logged in as long as their browser is open rather than a predetermined amount of time.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2890,7 +2963,7 @@ Default value
 :  `13`
 
 Defined by
-:  [GeneralConfig::$blowfishHashCost](craft4:craft\config\GeneralConfig::$blowfishHashCost)
+:  [GeneralConfig::$blowfishHashCost](craft5:craft\config\GeneralConfig::$blowfishHashCost)
 
 </div>
 
@@ -2927,7 +3000,7 @@ Default value
 :  `300` (5 minutes)
 
 Defined by
-:  [GeneralConfig::$cooldownDuration](craft4:craft\config\GeneralConfig::$cooldownDuration)
+:  [GeneralConfig::$cooldownDuration](craft5:craft\config\GeneralConfig::$cooldownDuration)
 
 </div>
 
@@ -2936,7 +3009,7 @@ failed login attempts.
 
 Set to `0` to keep the account locked indefinitely, requiring an admin to manually unlock the account.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -2960,7 +3033,7 @@ Default value
 :  `'CRAFT_CSRF_TOKEN'`
 
 Defined by
-:  [GeneralConfig::$csrfTokenName](craft4:craft\config\GeneralConfig::$csrfTokenName)
+:  [GeneralConfig::$csrfTokenName](craft5:craft\config\GeneralConfig::$csrfTokenName)
 
 </div>
 
@@ -2988,13 +3061,13 @@ Default value
 :  `86400` (1 day)
 
 Defined by
-:  [GeneralConfig::$defaultTokenDuration](craft4:craft\config\GeneralConfig::$defaultTokenDuration)
+:  [GeneralConfig::$defaultTokenDuration](craft5:craft\config\GeneralConfig::$defaultTokenDuration)
 
 </div>
 
 The default amount of time tokens can be used before expiring.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -3020,7 +3093,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$deferPublicRegistrationPassword](craft4:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
+:  [GeneralConfig::$deferPublicRegistrationPassword](craft5:craft\config\GeneralConfig::$deferPublicRegistrationPassword)
 
 </div>
 
@@ -3052,7 +3125,7 @@ Default value
 :  `300` (5 minutes)
 
 Defined by
-:  [GeneralConfig::$elevatedSessionDuration](craft4:craft\config\GeneralConfig::$elevatedSessionDuration)
+:  [GeneralConfig::$elevatedSessionDuration](craft5:craft\config\GeneralConfig::$elevatedSessionDuration)
 
 </div>
 
@@ -3060,7 +3133,7 @@ The amount of time a user’s elevated session will last, which is required for 
 
 Set to `0` to disable elevated session support.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -3084,7 +3157,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$enableBasicHttpAuth](craft4:craft\config\GeneralConfig::$enableBasicHttpAuth)
+:  [GeneralConfig::$enableBasicHttpAuth](craft5:craft\config\GeneralConfig::$enableBasicHttpAuth)
 
 Since
 :  3.5.0
@@ -3115,7 +3188,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$enableCsrfCookie](craft4:craft\config\GeneralConfig::$enableCsrfCookie)
+:  [GeneralConfig::$enableCsrfCookie](craft5:craft\config\GeneralConfig::$enableCsrfCookie)
 
 </div>
 
@@ -3145,7 +3218,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$enableCsrfProtection](craft4:craft\config\GeneralConfig::$enableCsrfProtection)
+:  [GeneralConfig::$enableCsrfProtection](craft5:craft\config\GeneralConfig::$enableCsrfProtection)
 
 </div>
 
@@ -3173,13 +3246,13 @@ Default value
 :  `3600` (1 hour)
 
 Defined by
-:  [GeneralConfig::$invalidLoginWindowDuration](craft4:craft\config\GeneralConfig::$invalidLoginWindowDuration)
+:  [GeneralConfig::$invalidLoginWindowDuration](craft5:craft\config\GeneralConfig::$invalidLoginWindowDuration)
 
 </div>
 
 The amount of time to track invalid login attempts for a user, for determining if Craft should lock an account.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -3205,7 +3278,7 @@ Default value
 :  `5`
 
 Defined by
-:  [GeneralConfig::$maxInvalidLogins](craft4:craft\config\GeneralConfig::$maxInvalidLogins)
+:  [GeneralConfig::$maxInvalidLogins](craft5:craft\config\GeneralConfig::$maxInvalidLogins)
 
 </div>
 
@@ -3233,7 +3306,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$preventUserEnumeration](craft4:craft\config\GeneralConfig::$preventUserEnumeration)
+:  [GeneralConfig::$preventUserEnumeration](craft5:craft\config\GeneralConfig::$preventUserEnumeration)
 
 </div>
 
@@ -3265,7 +3338,7 @@ Default value
 :  `null` (1 day)
 
 Defined by
-:  [GeneralConfig::$previewTokenDuration](craft4:craft\config\GeneralConfig::$previewTokenDuration)
+:  [GeneralConfig::$previewTokenDuration](craft5:craft\config\GeneralConfig::$previewTokenDuration)
 
 Since
 :  3.7.0
@@ -3276,7 +3349,7 @@ The amount of time content preview tokens can be used before expiring.
 
 Defaults to <config4:defaultTokenDuration> value.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -3302,7 +3375,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$sanitizeCpImageUploads](craft4:craft\config\GeneralConfig::$sanitizeCpImageUploads)
+:  [GeneralConfig::$sanitizeCpImageUploads](craft5:craft\config\GeneralConfig::$sanitizeCpImageUploads)
 
 Since
 :  3.6.0
@@ -3333,7 +3406,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$sanitizeSvgUploads](craft4:craft\config\GeneralConfig::$sanitizeSvgUploads)
+:  [GeneralConfig::$sanitizeSvgUploads](craft5:craft\config\GeneralConfig::$sanitizeSvgUploads)
 
 </div>
 
@@ -3363,7 +3436,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$secureHeaders](craft4:craft\config\GeneralConfig::$secureHeaders)
+:  [GeneralConfig::$secureHeaders](craft5:craft\config\GeneralConfig::$secureHeaders)
 
 </div>
 
@@ -3402,7 +3475,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$secureProtocolHeaders](craft4:craft\config\GeneralConfig::$secureProtocolHeaders)
+:  [GeneralConfig::$secureProtocolHeaders](craft5:craft\config\GeneralConfig::$secureProtocolHeaders)
 
 </div>
 
@@ -3439,11 +3512,11 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$securityKey](craft4:craft\config\GeneralConfig::$securityKey)
+:  [GeneralConfig::$securityKey](craft5:craft\config\GeneralConfig::$securityKey)
 
 </div>
 
-A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft4:craft\services\Security).
+A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft5:craft\services\Security).
 
 This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
 
@@ -3464,7 +3537,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$storeUserIps](craft4:craft\config\GeneralConfig::$storeUserIps)
+:  [GeneralConfig::$storeUserIps](craft5:craft\config\GeneralConfig::$storeUserIps)
 
 Since
 :  3.1.0
@@ -3497,7 +3570,7 @@ Default value
 ]`
 
 Defined by
-:  [GeneralConfig::$trustedHosts](craft4:craft\config\GeneralConfig::$trustedHosts)
+:  [GeneralConfig::$trustedHosts](craft5:craft\config\GeneralConfig::$trustedHosts)
 
 </div>
 
@@ -3529,7 +3602,7 @@ Default value
 :  `'auto'`
 
 Defined by
-:  [GeneralConfig::$useSecureCookies](craft4:craft\config\GeneralConfig::$useSecureCookies)
+:  [GeneralConfig::$useSecureCookies](craft5:craft\config\GeneralConfig::$useSecureCookies)
 
 </div>
 
@@ -3560,13 +3633,13 @@ Default value
 :  `86400` (1 day)
 
 Defined by
-:  [GeneralConfig::$verificationCodeDuration](craft4:craft\config\GeneralConfig::$verificationCodeDuration)
+:  [GeneralConfig::$verificationCodeDuration](craft5:craft\config\GeneralConfig::$verificationCodeDuration)
 
 </div>
 
 The amount of time a user verification code can be used before expiring.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -3692,7 +3765,7 @@ Default value
 ]`
 
 Defined by
-:  [GeneralConfig::$allowedFileExtensions](craft4:craft\config\GeneralConfig::$allowedFileExtensions)
+:  [GeneralConfig::$allowedFileExtensions](craft5:craft\config\GeneralConfig::$allowedFileExtensions)
 
 </div>
 
@@ -3718,7 +3791,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$convertFilenamesToAscii](craft4:craft\config\GeneralConfig::$convertFilenamesToAscii)
+:  [GeneralConfig::$convertFilenamesToAscii](craft5:craft\config\GeneralConfig::$convertFilenamesToAscii)
 
 </div>
 
@@ -3750,7 +3823,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$extraFileKinds](craft4:craft\config\GeneralConfig::$extraFileKinds)
+:  [GeneralConfig::$extraFileKinds](craft5:craft\config\GeneralConfig::$extraFileKinds)
 
 Since
 :  3.0.37
@@ -3792,7 +3865,7 @@ Default value
 :  `'-'`
 
 Defined by
-:  [GeneralConfig::$filenameWordSeparator](craft4:craft\config\GeneralConfig::$filenameWordSeparator)
+:  [GeneralConfig::$filenameWordSeparator](craft5:craft\config\GeneralConfig::$filenameWordSeparator)
 
 </div>
 
@@ -3820,13 +3893,13 @@ Default value
 :  `16777216` (16MB)
 
 Defined by
-:  [GeneralConfig::$maxUploadFileSize](craft4:craft\config\GeneralConfig::$maxUploadFileSize)
+:  [GeneralConfig::$maxUploadFileSize](craft5:craft\config\GeneralConfig::$maxUploadFileSize)
 
 </div>
 
 The maximum upload file size allowed.
 
-See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-sizeinbytes) for a list of supported value types.
+See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-sizeinbytes) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -3852,7 +3925,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$revAssetUrls](craft4:craft\config\GeneralConfig::$revAssetUrls)
+:  [GeneralConfig::$revAssetUrls](craft5:craft\config\GeneralConfig::$revAssetUrls)
 
 Since
 :  3.7.0
@@ -3872,6 +3945,38 @@ CRAFT_REV_ASSET_URLS=1
 
 
 
+### `tempAssetUploadFs`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$tempAssetUploadFs](craft5:craft\config\GeneralConfig::$tempAssetUploadFs)
+
+Since
+:  5.0.0
+
+</div>
+
+The handle of the filesystem that should be used for storing temporary asset uploads. A local temp folder will
+be used by default.
+
+::: code
+```php Static Config
+->tempAssetUploadFs('$TEMP_ASSET_UPLOADS_FS')
+```
+```shell Environment Override
+CRAFT_TEMP_ASSET_UPLOAD_FS=tempAssetUploads
+```
+:::
+
+
+
 ## Image Handling
 
 ### `brokenImagePath`
@@ -3885,7 +3990,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$brokenImagePath](craft4:craft\config\GeneralConfig::$brokenImagePath)
+:  [GeneralConfig::$brokenImagePath](craft5:craft\config\GeneralConfig::$brokenImagePath)
 
 Since
 :  3.5.0
@@ -3919,7 +4024,7 @@ Default value
 :  `82`
 
 Defined by
-:  [GeneralConfig::$defaultImageQuality](craft4:craft\config\GeneralConfig::$defaultImageQuality)
+:  [GeneralConfig::$defaultImageQuality](craft5:craft\config\GeneralConfig::$defaultImageQuality)
 
 </div>
 
@@ -3948,7 +4053,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$generateTransformsBeforePageLoad](craft4:craft\config\GeneralConfig::$generateTransformsBeforePageLoad)
+:  [GeneralConfig::$generateTransformsBeforePageLoad](craft5:craft\config\GeneralConfig::$generateTransformsBeforePageLoad)
 
 </div>
 
@@ -3976,7 +4081,7 @@ Default value
 :  `GeneralConfig::IMAGE_DRIVER_AUTO`
 
 Defined by
-:  [GeneralConfig::$imageDriver](craft4:craft\config\GeneralConfig::$imageDriver)
+:  [GeneralConfig::$imageDriver](craft5:craft\config\GeneralConfig::$imageDriver)
 
 </div>
 
@@ -4015,7 +4120,7 @@ Default value
 ]`
 
 Defined by
-:  [GeneralConfig::$imageEditorRatios](craft4:craft\config\GeneralConfig::$imageEditorRatios)
+:  [GeneralConfig::$imageEditorRatios](craft5:craft\config\GeneralConfig::$imageEditorRatios)
 
 </div>
 
@@ -4045,7 +4150,7 @@ Default value
 :  `2000`
 
 Defined by
-:  [GeneralConfig::$maxCachedCloudImageSize](craft4:craft\config\GeneralConfig::$maxCachedCloudImageSize)
+:  [GeneralConfig::$maxCachedCloudImageSize](craft5:craft\config\GeneralConfig::$maxCachedCloudImageSize)
 
 </div>
 
@@ -4073,7 +4178,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$optimizeImageFilesize](craft4:craft\config\GeneralConfig::$optimizeImageFilesize)
+:  [GeneralConfig::$optimizeImageFilesize](craft5:craft\config\GeneralConfig::$optimizeImageFilesize)
 
 </div>
 
@@ -4102,7 +4207,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$preserveCmykColorspace](craft4:craft\config\GeneralConfig::$preserveCmykColorspace)
+:  [GeneralConfig::$preserveCmykColorspace](craft5:craft\config\GeneralConfig::$preserveCmykColorspace)
 
 Since
 :  3.0.8
@@ -4136,7 +4241,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$preserveExifData](craft4:craft\config\GeneralConfig::$preserveExifData)
+:  [GeneralConfig::$preserveExifData](craft5:craft\config\GeneralConfig::$preserveExifData)
 
 </div>
 
@@ -4168,7 +4273,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$preserveImageColorProfiles](craft4:craft\config\GeneralConfig::$preserveImageColorProfiles)
+:  [GeneralConfig::$preserveImageColorProfiles](craft5:craft\config\GeneralConfig::$preserveImageColorProfiles)
 
 </div>
 
@@ -4199,7 +4304,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$rasterizeSvgThumbs](craft4:craft\config\GeneralConfig::$rasterizeSvgThumbs)
+:  [GeneralConfig::$rasterizeSvgThumbs](craft5:craft\config\GeneralConfig::$rasterizeSvgThumbs)
 
 Since
 :  3.6.0
@@ -4232,7 +4337,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$rotateImagesOnUploadByExifData](craft4:craft\config\GeneralConfig::$rotateImagesOnUploadByExifData)
+:  [GeneralConfig::$rotateImagesOnUploadByExifData](craft5:craft\config\GeneralConfig::$rotateImagesOnUploadByExifData)
 
 </div>
 
@@ -4260,7 +4365,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$transformGifs](craft4:craft\config\GeneralConfig::$transformGifs)
+:  [GeneralConfig::$transformGifs](craft5:craft\config\GeneralConfig::$transformGifs)
 
 Since
 :  3.0.7
@@ -4291,7 +4396,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$transformSvgs](craft4:craft\config\GeneralConfig::$transformSvgs)
+:  [GeneralConfig::$transformSvgs](craft5:craft\config\GeneralConfig::$transformSvgs)
 
 Since
 :  3.7.1
@@ -4322,7 +4427,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$upscaleImages](craft4:craft\config\GeneralConfig::$upscaleImages)
+:  [GeneralConfig::$upscaleImages](craft5:craft\config\GeneralConfig::$upscaleImages)
 
 Since
 :  3.4.0
@@ -4355,7 +4460,7 @@ Default value
 :  `null`
 
 Defined by
-:  [GeneralConfig::$allowedGraphqlOrigins](craft4:craft\config\GeneralConfig::$allowedGraphqlOrigins)
+:  [GeneralConfig::$allowedGraphqlOrigins](craft5:craft\config\GeneralConfig::$allowedGraphqlOrigins)
 
 Since
 :  3.5.0
@@ -4391,7 +4496,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$disableGraphqlTransformDirective](craft4:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
+:  [GeneralConfig::$disableGraphqlTransformDirective](craft5:craft\config\GeneralConfig::$disableGraphqlTransformDirective)
 
 Since
 :  3.6.0
@@ -4422,7 +4527,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$enableGql](craft4:craft\config\GeneralConfig::$enableGql)
+:  [GeneralConfig::$enableGql](craft5:craft\config\GeneralConfig::$enableGql)
 
 Since
 :  3.3.1
@@ -4455,7 +4560,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$enableGraphqlCaching](craft4:craft\config\GeneralConfig::$enableGraphqlCaching)
+:  [GeneralConfig::$enableGraphqlCaching](craft5:craft\config\GeneralConfig::$enableGraphqlCaching)
 
 Since
 :  3.3.12
@@ -4467,7 +4572,7 @@ Whether Craft should cache GraphQL queries.
 If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is automatically invalidated any time
 an element is saved, the site structure is updated, or a GraphQL schema is saved.
 
-This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v4/craft-services-gql.html#event-before-execute-gql-query) event to provide its own
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v5/craft-services-gql.html#event-before-execute-gql-query) event to provide its own
 caching logic and setting the `result` property.
 
 ::: code
@@ -4492,7 +4597,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$enableGraphqlIntrospection](craft4:craft\config\GeneralConfig::$enableGraphqlIntrospection)
+:  [GeneralConfig::$enableGraphqlIntrospection](craft5:craft\config\GeneralConfig::$enableGraphqlIntrospection)
 
 Since
 :  3.6.0
@@ -4523,7 +4628,7 @@ Default value
 :  `''`
 
 Defined by
-:  [GeneralConfig::$gqlTypePrefix](craft4:craft\config\GeneralConfig::$gqlTypePrefix)
+:  [GeneralConfig::$gqlTypePrefix](craft5:craft\config\GeneralConfig::$gqlTypePrefix)
 
 </div>
 
@@ -4551,7 +4656,7 @@ Default value
 :  `0`
 
 Defined by
-:  [GeneralConfig::$maxGraphqlBatchSize](craft4:craft\config\GeneralConfig::$maxGraphqlBatchSize)
+:  [GeneralConfig::$maxGraphqlBatchSize](craft5:craft\config\GeneralConfig::$maxGraphqlBatchSize)
 
 Since
 :  4.5.5
@@ -4582,7 +4687,7 @@ Default value
 :  `0`
 
 Defined by
-:  [GeneralConfig::$maxGraphqlComplexity](craft4:craft\config\GeneralConfig::$maxGraphqlComplexity)
+:  [GeneralConfig::$maxGraphqlComplexity](craft5:craft\config\GeneralConfig::$maxGraphqlComplexity)
 
 Since
 :  3.6.0
@@ -4613,7 +4718,7 @@ Default value
 :  `0`
 
 Defined by
-:  [GeneralConfig::$maxGraphqlDepth](craft4:craft\config\GeneralConfig::$maxGraphqlDepth)
+:  [GeneralConfig::$maxGraphqlDepth](craft5:craft\config\GeneralConfig::$maxGraphqlDepth)
 
 Since
 :  3.6.0
@@ -4644,7 +4749,7 @@ Default value
 :  `0`
 
 Defined by
-:  [GeneralConfig::$maxGraphqlResults](craft4:craft\config\GeneralConfig::$maxGraphqlResults)
+:  [GeneralConfig::$maxGraphqlResults](craft5:craft\config\GeneralConfig::$maxGraphqlResults)
 
 Since
 :  3.6.0
@@ -4675,7 +4780,7 @@ Default value
 :  `true`
 
 Defined by
-:  [GeneralConfig::$prefixGqlRootTypes](craft4:craft\config\GeneralConfig::$prefixGqlRootTypes)
+:  [GeneralConfig::$prefixGqlRootTypes](craft5:craft\config\GeneralConfig::$prefixGqlRootTypes)
 
 Since
 :  3.6.6
@@ -4706,7 +4811,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft4:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
+:  [GeneralConfig::$setGraphqlDatesToSystemTimeZone](craft5:craft\config\GeneralConfig::$setGraphqlDatesToSystemTimeZone)
 
 Since
 :  3.7.0
@@ -4739,7 +4844,7 @@ Default value
 :  `0`
 
 Defined by
-:  [GeneralConfig::$purgePendingUsersDuration](craft4:craft\config\GeneralConfig::$purgePendingUsersDuration)
+:  [GeneralConfig::$purgePendingUsersDuration](craft5:craft\config\GeneralConfig::$purgePendingUsersDuration)
 
 </div>
 
@@ -4749,7 +4854,7 @@ Any content assigned to a pending user will be deleted as well when the given ti
 
 Set to `0` to disable this feature.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: tip
 Users will only be purged when [garbage collection](https://craftcms.com/docs/4.x/gc.html) is run.
@@ -4779,7 +4884,7 @@ Default value
 :  `7776000` (90 days)
 
 Defined by
-:  [GeneralConfig::$purgeStaleUserSessionDuration](craft4:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
+:  [GeneralConfig::$purgeStaleUserSessionDuration](craft5:craft\config\GeneralConfig::$purgeStaleUserSessionDuration)
 
 Since
 :  3.3.0
@@ -4790,7 +4895,7 @@ The amount of time to wait before Craft purges stale user sessions from the sess
 
 Set to `0` to disable this feature.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -4816,7 +4921,7 @@ Default value
 :  `2592000` (30 days)
 
 Defined by
-:  [GeneralConfig::$purgeUnsavedDraftsDuration](craft4:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
+:  [GeneralConfig::$purgeUnsavedDraftsDuration](craft5:craft\config\GeneralConfig::$purgeUnsavedDraftsDuration)
 
 Since
 :  3.2.0
@@ -4827,7 +4932,7 @@ The amount of time to wait before Craft purges unpublished drafts that were neve
 
 Set to `0` to disable this feature.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -4851,7 +4956,7 @@ Default value
 :  `2592000` (30 days)
 
 Defined by
-:  [GeneralConfig::$softDeleteDuration](craft4:craft\config\GeneralConfig::$softDeleteDuration)
+:  [GeneralConfig::$softDeleteDuration](craft5:craft\config\GeneralConfig::$softDeleteDuration)
 
 Since
 :  3.1.0
@@ -4862,7 +4967,7 @@ The amount of time before a soft-deleted item will be up for hard-deletion by ga
 
 Set to `0` if you don’t ever want to delete soft-deleted items.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: code
 ```php Static Config
@@ -4888,7 +4993,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$extraLastNamePrefixes](craft4:craft\config\GeneralConfig::$extraLastNamePrefixes)
+:  [GeneralConfig::$extraLastNamePrefixes](craft5:craft\config\GeneralConfig::$extraLastNamePrefixes)
 
 Since
 :  4.3.0
@@ -4919,7 +5024,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$extraNameSalutations](craft4:craft\config\GeneralConfig::$extraNameSalutations)
+:  [GeneralConfig::$extraNameSalutations](craft5:craft\config\GeneralConfig::$extraNameSalutations)
 
 Since
 :  4.3.0
@@ -4950,7 +5055,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [GeneralConfig::$extraNameSuffixes](craft4:craft\config\GeneralConfig::$extraNameSuffixes)
+:  [GeneralConfig::$extraNameSuffixes](craft5:craft\config\GeneralConfig::$extraNameSuffixes)
 
 Since
 :  4.3.0
@@ -4981,7 +5086,7 @@ Default value
 :  `false`
 
 Defined by
-:  [GeneralConfig::$showFirstAndLastNameFields](craft4:craft\config\GeneralConfig::$showFirstAndLastNameFields)
+:  [GeneralConfig::$showFirstAndLastNameFields](craft5:craft\config\GeneralConfig::$showFirstAndLastNameFields)
 
 Since
 :  4.6.0

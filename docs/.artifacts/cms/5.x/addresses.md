@@ -10,67 +10,194 @@ This auto-generated reference material has not yet been updated for Craft 5!
 
 <!-- textlint-disable -->
 
-| Param                                     | Description
-| ----------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [administrativeArea](#administrativearea) | Narrows the query results based on the administrative area the assets belong to.
-| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
-| [andRelatedTo](#andrelatedto)             | Narrows the query results to only addresses that are related to certain other elements.
-| [asArray](#asarray)                       | Causes the query to return matching addresses as arrays of data, rather than [Address](craft4:craft\elements\Address) objects.
-| [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                       |
-| [countryCode](#countrycode)               | Narrows the query results based on the country the assets belong to.
-| [dateCreated](#datecreated)               | Narrows the query results based on the addresses’ creation dates.
-| [dateUpdated](#dateupdated)               | Narrows the query results based on the addresses’ last-updated dates.
-| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [id](#id)                                 | Narrows the query results based on the addresses’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
-| [limit](#limit)                           | Determines the number of addresses that should be returned.
-| [offset](#offset)                         | Determines how many addresses should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC`.)
-| [owner](#owner)                           | Sets the [ownerId](#ownerid) parameter based on a given owner element.
-| [ownerId](#ownerid)                       | Narrows the query results based on the addresses’ owner elements, per their IDs.
-| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [relatedTo](#relatedto)                   | Narrows the query results to only addresses that are related to certain other elements.
-| [search](#search)                         | Narrows the query results to only addresses that match a search query.
-| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
-| [trashed](#trashed)                       | Narrows the query results to only addresses that have been soft-deleted.
-| [uid](#uid)                               | Narrows the query results based on the addresses’ UIDs.
-| [with](#with)                             | Causes the query to return matching addresses eager-loaded with related elements.
+| Param                                       | Description
+| ------------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [ElementCollection](#elementcollection)     | <Address> collect($db = null)
+| [addressLine1](#addressline1)               | Narrows the query results based on the first address line the addresses have.
+| [addressLine2](#addressline2)               | Narrows the query results based on the second address line the addresses have.
+| [addressLine3](#addressline3)               | Narrows the query results based on the third address line the addresses have.
+| [administrativeArea](#administrativearea)   | Narrows the query results based on the administrative areas the addresses belongs to.
+| [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
+| [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the addresses’ owners are drafts.
+| [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the addresses’ owners are revisions.
+| [andRelatedTo](#andrelatedto)               | Narrows the query results to only addresses that are related to certain other elements.
+| [asArray](#asarray)                         | Causes the query to return matching addresses as arrays of data, rather than [Address](craft5:craft\elements\Address) objects.
+| [cache](#cache)                             | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                         |
+| [countryCode](#countrycode)                 | Narrows the query results based on the country the addresses belong to.
+| [dateCreated](#datecreated)                 | Narrows the query results based on the addresses’ creation dates.
+| [dateUpdated](#dateupdated)                 | Narrows the query results based on the addresses’ last-updated dates.
+| [dependentLocality](#dependentlocality)     | Narrows the query results based on the dependent locality the addresses belong to.
+| [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [field](#field)                             | Narrows the query results based on the field the addresses are contained by.
+| [fieldId](#fieldid)                         | Narrows the query results based on the field the addresses are contained by, per the fields’ IDs.
+| [firstName](#firstname)                     | Narrows the query results based on the first name the addresses have.
+| [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
+| [fullName](#fullname)                       | Narrows the query results based on the full name the addresses have.
+| [id](#id)                                   | Narrows the query results based on the addresses’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                       | Narrows the query results to only addresses that were involved in a bulk element operation.
+| [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
+| [lastName](#lastname)                       | Narrows the query results based on the last name the addresses have.
+| [limit](#limit)                             | Determines the number of addresses that should be returned.
+| [locality](#locality)                       | Narrows the query results based on the locality the addresses belong to.
+| [offset](#offset)                           | Determines how many addresses should be skipped in the results.
+| [orderBy](#orderby)                         | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [organization](#organization)               | Narrows the query results based on the organization the addresses have.
+| [organizationTaxId](#organizationtaxid)     | Narrows the query results based on the tax ID the addresses have.
+| [owner](#owner)                             | Sets the [ownerId](#ownerid) parameter based on a given owner element.
+| [ownerId](#ownerid)                         | Narrows the query results based on the addresses’ owner elements, per their IDs.
+| [postalCode](#postalcode)                   | Narrows the query results based on the postal code the addresses belong to.
+| [preferSites](#prefersites)                 | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [primaryOwner](#primaryowner)               | Sets the [primaryOwnerId](#primaryownerid) and [siteId()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-siteid) parameters based on a given element.
+| [primaryOwnerId](#primaryownerid)           | Narrows the query results based on the primary owner element of the addresses, per the owners’ IDs.
+| [relatedTo](#relatedto)                     | Narrows the query results to only addresses that are related to certain other elements.
+| [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
+| [search](#search)                           | Narrows the query results to only addresses that match a search query.
+| [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
+| [sortingCode](#sortingcode)                 | Narrows the query results based on the sorting code the addresses have.
+| [trashed](#trashed)                         | Narrows the query results to only addresses that have been soft-deleted.
+| [uid](#uid)                                 | Narrows the query results based on the addresses’ UIDs.
+| [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                               | Causes the query to return matching addresses eager-loaded with related elements.
 
 
 <!-- textlint-enable -->
 
 
-#### `administrativeArea`
+#### `ElementCollection`
 
-Narrows the query results based on the administrative area the assets belong to.
+<Address> collect($db = null)
+
+
+
+
+
+
+#### `addressLine1`
+
+Narrows the query results based on the first address line the addresses have.
 
 Possible values include:
 
 | Value | Fetches addresses…
 | - | -
-| `'AU'` | with a administrativeArea of `AU`.
-| `'not US'` | not in a administrativeArea of `US`.
-| `['AU', 'US']` | in a administrativeArea of `AU` or `US`.
-| `['not', 'AU', 'US']` | not in a administrativeArea of `AU` or `US`.
+| `'23 Craft st'` | with a addressLine1 of `23 Craft st`.
+| `'*23*'` | with a addressLine1 containing `23`.
+| `'23*'` | with a addressLine1 beginning with `23`.
 
 
 
 ::: code
 ```twig
-{# Fetch addresses in the AU #}
+{# Fetch addresses at 23 Craft st #}
 {% set addresses = craft.addresses()
-  .administrativeArea('AU')
+  .addressLine1('23 Craft st')
   .all() %}
 ```
 
 ```php
-// Fetch addresses in the AU
+// Fetch addresses at 23 Craft st
 $addresses = \craft\elements\Address::find()
-    ->administrativeArea('AU')
+    ->addressLine1('23 Craft st')
+    ->all();
+```
+:::
+
+
+#### `addressLine2`
+
+Narrows the query results based on the second address line the addresses have.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'Apt 5B'` | with an addressLine2 of `Apt 5B`.
+| `'*5B*'` | with an addressLine2 containing `5B`.
+| `'5B*'` | with an addressLine2 beginning with `5B`.
+
+
+
+::: code
+```twig
+{# Fetch addresses at Apt 5B #}
+{% set addresses = craft.addresses()
+  .addressLine2('Apt 5B')
+  .all() %}
+```
+
+```php
+// Fetch addresses at Apt 5B
+$addresses = \craft\elements\Address::find()
+    ->addressLine2('Apt 5B')
+    ->all();
+```
+:::
+
+
+#### `addressLine3`
+
+Narrows the query results based on the third address line the addresses have.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'Suite 212'` | with an addressLine3 of `Suite 212`.
+| `'*Suite*'` | with an addressLine3 containing `Suite`.
+| `'Suite*'` | with an addressLine3 beginning with `Suite`.
+
+
+
+::: code
+```twig
+{# Fetch addresses at Suite 212 #}
+{% set addresses = craft.addresses()
+  .addressLine3('Suite 212')
+  .all() %}
+```
+
+```php
+// Fetch addresses at Suite 212
+$addresses = \craft\elements\Address::find()
+    ->addressLine3('Suite 212')
+    ->all();
+```
+:::
+
+
+#### `administrativeArea`
+
+Narrows the query results based on the administrative areas the addresses belongs to.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'WA'` | with a administrative area of `WA`.
+| `'not WA'` | not in a administrative area of `WA`.
+| `['WA', 'SA']` | in a administrative area of `WA` or `SA`.
+| `['not', 'WA', 'SA']` | not in a administrative area of `WA` or `SA`.
+
+
+
+::: code
+```twig
+{# Fetch addresses in Western Australia #}
+{% set addresses = craft.addresses()
+  .administrativeArea('WA')
+  .all() %}
+```
+
+```php
+// Fetch addresses in Western Australia
+$addresses = \craft\elements\Address::find()
+    ->administrativeArea('WA')
     ->all();
 ```
 :::
@@ -85,6 +212,34 @@ Performs any post-population processing on elements.
 
 
 
+
+
+
+
+#### `allowOwnerDrafts`
+
+Narrows the query results based on whether the addresses’ owners are drafts.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `true` | which can belong to a draft.
+| `false` | which cannot belong to a draft.
+
+
+
+
+#### `allowOwnerRevisions`
+
+Narrows the query results based on whether the addresses’ owners are revisions.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `true` | which can belong to a revision.
+| `false` | which cannot belong to a revision.
 
 
 
@@ -120,7 +275,7 @@ $addresses = \craft\elements\Address::find()
 
 #### `asArray`
 
-Causes the query to return matching addresses as arrays of data, rather than [Address](craft4:craft\elements\Address) objects.
+Causes the query to return matching addresses as arrays of data, rather than [Address](craft5:craft\elements\Address) objects.
 
 
 
@@ -176,7 +331,7 @@ Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#ca
 
 #### `countryCode`
 
-Narrows the query results based on the country the assets belong to.
+Narrows the query results based on the country the addresses belong to.
 
 Possible values include:
 
@@ -191,14 +346,14 @@ Possible values include:
 
 ::: code
 ```twig
-{# Fetch addresses in the AU #}
+{# Fetch Australian addresses #}
 {% set addresses = craft.addresses()
   .countryCode('AU')
   .all() %}
 ```
 
 ```php
-// Fetch addresses in the AU
+// Fetch Australian addresses
 $addresses = \craft\elements\Address::find()
     ->countryCode('AU')
     ->all();
@@ -284,6 +439,145 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
+#### `dependentLocality`
+
+Narrows the query results based on the dependent locality the addresses belong to.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'Darlington'` | with a dependentLocality of `Darlington`.
+| `'*Darling*'` | with a dependentLocality containing `Darling`.
+| `'Dar*'` | with a dependentLocality beginning with `Dar`.
+
+
+
+::: code
+```twig
+{# Fetch addresses in Darlington #}
+{% set addresses = craft.addresses()
+  .dependentLocality('Darlington')
+  .all() %}
+```
+
+```php
+// Fetch addresses in Darlington
+$addresses = \craft\elements\Address::find()
+    ->dependentLocality('Darlington')
+    ->all();
+```
+:::
+
+
+#### `eagerly`
+
+Causes the query to be used to eager-load results for the query’s source element
+and any other elements in its collection.
+
+
+
+
+
+
+
+
+
+
+#### `field`
+
+Narrows the query results based on the field the addresses are contained by.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'foo'` | in a field with a handle of `foo`.
+| `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
+| an `\craft\elements\db\craft\fields\Addresses` object | in a field represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch addresses in the Foo field #}
+{% set addresses = craft.addresses()
+  .field('foo')
+  .all() %}
+```
+
+```php
+// Fetch addresses in the Foo field
+$addresses = \craft\elements\Address::find()
+    ->field('foo')
+    ->all();
+```
+:::
+
+
+#### `fieldId`
+
+Narrows the query results based on the field the addresses are contained by, per the fields’ IDs.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `1` | in a field with an ID of 1.
+| `'not 1'` | not in a field with an ID of 1.
+| `[1, 2]` | in a field with an ID of 1 or 2.
+| `['not', 1, 2]` | not in a field with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch addresses in the field with an ID of 1 #}
+{% set addresses = craft.addresses()
+  .fieldId(1)
+  .all() %}
+```
+
+```php
+// Fetch addresses in the field with an ID of 1
+$addresses = \craft\elements\Address::find()
+    ->fieldId(1)
+    ->all();
+```
+:::
+
+
+#### `firstName`
+
+Narrows the query results based on the first name the addresses have.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'John'` | with a firstName of `John`.
+| `'*Joh*'` | with a firstName containing `Joh`.
+| `'Joh*'` | with a firstName beginning with `Joh`.
+
+
+
+::: code
+```twig
+{# Fetch addresses with first name John #}
+{% set addresses = craft.addresses()
+  .firstName('John')
+  .all() %}
+```
+
+```php
+// Fetch addresses with first name John
+$addresses = \craft\elements\Address::find()
+    ->firstName('John')
+    ->all();
+```
+:::
+
+
 #### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
@@ -310,6 +604,37 @@ If no IDs were passed to [id](#id), setting this to `true` will result in an emp
 $addresses = \craft\elements\Address::find()
     ->id([1, 2, 3, 4, 5])
     ->fixedOrder()
+    ->all();
+```
+:::
+
+
+#### `fullName`
+
+Narrows the query results based on the full name the addresses have.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'John Doe'` | with a fullName of `John Doe`.
+| `'*Doe*'` | with a fullName containing `Doe`.
+| `'John*'` | with a fullName beginning with `John`.
+
+
+
+::: code
+```twig
+{# Fetch addresses for John Doe #}
+{% set addresses = craft.addresses()
+  .fullName('John Doe')
+  .all() %}
+```
+
+```php
+// Fetch addresses for John Doe
+$addresses = \craft\elements\Address::find()
+    ->fullName('John Doe')
     ->all();
 ```
 :::
@@ -358,7 +683,20 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
+#### `inBulkOp`
+
+Narrows the query results to only addresses that were involved in a bulk element operation.
 
 
 
@@ -394,6 +732,37 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
+#### `lastName`
+
+Narrows the query results based on the last name the addresses have.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'Doe'` | with a lastName of `Doe`.
+| `'*Do*'` | with a lastName containing `Do`.
+| `'Do*'` | with a lastName beginning with `Do`.
+
+
+
+::: code
+```twig
+{# Fetch addresses with last name Doe #}
+{% set addresses = craft.addresses()
+  .lastName('Doe')
+  .all() %}
+```
+
+```php
+// Fetch addresses with last name Doe
+$addresses = \craft\elements\Address::find()
+    ->lastName('Doe')
+    ->all();
+```
+:::
+
+
 #### `limit`
 
 Determines the number of addresses that should be returned.
@@ -412,6 +781,37 @@ Determines the number of addresses that should be returned.
 // Fetch up to 10 addresses
 $addresses = \craft\elements\Address::find()
     ->limit(10)
+    ->all();
+```
+:::
+
+
+#### `locality`
+
+Narrows the query results based on the locality the addresses belong to.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'Perth'` | with a locality of `Perth`.
+| `'*Perth*'` | with a locality containing `Perth`.
+| `'Ner*'` | with a locality beginning with `Per`.
+
+
+
+::: code
+```twig
+{# Fetch addresses in Perth #}
+{% set addresses = craft.addresses()
+  .locality('Perth')
+  .all() %}
+```
+
+```php
+// Fetch addresses in Perth
+$addresses = \craft\elements\Address::find()
+    ->locality('Perth')
     ->all();
 ```
 :::
@@ -458,6 +858,68 @@ Determines the order that the addresses should be returned in. (If empty, defaul
 // Fetch all addresses in order of date created
 $addresses = \craft\elements\Address::find()
     ->orderBy('dateCreated ASC')
+    ->all();
+```
+:::
+
+
+#### `organization`
+
+Narrows the query results based on the organization the addresses have.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'Pixel & Tonic'` | with an organization of `Pixel & Tonic`.
+| `'*Pixel*'` | with an organization containing `Pixel`.
+| `'Pixel*'` | with an organization beginning with `Pixel`.
+
+
+
+::: code
+```twig
+{# Fetch addresses for Pixel & Tonic #}
+{% set addresses = craft.addresses()
+  .organization('Pixel & Tonic')
+  .all() %}
+```
+
+```php
+// Fetch addresses for Pixel & Tonic
+$addresses = \craft\elements\Address::find()
+    ->organization('Pixel & Tonic')
+    ->all();
+```
+:::
+
+
+#### `organizationTaxId`
+
+Narrows the query results based on the tax ID the addresses have.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'123-456-789'` | with an organizationTaxId of `123-456-789`.
+| `'*456*'` | with an organizationTaxId containing `456`.
+| `'123*'` | with an organizationTaxId beginning with `123`.
+
+
+
+::: code
+```twig
+{# Fetch addresses with tax ID 123-456-789 #}
+{% set addresses = craft.addresses()
+  .organizationTaxId('123-456-789')
+  .all() %}
+```
+
+```php
+// Fetch addresses with tax ID 123-456-789
+$addresses = \craft\elements\Address::find()
+    ->organizationTaxId('123-456-789')
     ->all();
 ```
 :::
@@ -516,9 +978,40 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
+#### `postalCode`
+
+Narrows the query results based on the postal code the addresses belong to.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'10001'` | with a postalCode of `10001`.
+| `'*001*'` | with a postalCode containing `001`.
+| `'100*'` | with a postalCode beginning with `100`.
+
+
+
+::: code
+```twig
+{# Fetch addresses with postal code 10001 #}
+{% set addresses = craft.addresses()
+  .postalCode('10001')
+  .all() %}
+```
+
+```php
+// Fetch addresses with postal code 10001
+$addresses = \craft\elements\Address::find()
+    ->postalCode('10001')
+    ->all();
+```
+:::
+
+
 #### `preferSites`
 
-If [unique()](https://docs.craftcms.com/api/v3/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
@@ -551,6 +1044,19 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
+#### `prepForEagerLoading`
+
+Prepares the query for lazy eager loading.
+
+
+
+
+
+
+
+
+
+
 #### `prepareSubquery`
 
 Prepares the element query and returns its subquery (which determines what elements will be returned).
@@ -558,6 +1064,61 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 
+
+
+#### `primaryOwner`
+
+Sets the [primaryOwnerId](#primaryownerid) and [siteId()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-siteid) parameters based on a given element.
+
+
+
+::: code
+```twig
+{# Fetch addresses created for this entry #}
+{% set addresses = craft.addresses()
+  .primaryOwner(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch addresses created for this entry
+$addresses = \craft\elements\Address::find()
+    ->primaryOwner($myEntry)
+    ->all();
+```
+:::
+
+
+#### `primaryOwnerId`
+
+Narrows the query results based on the primary owner element of the addresses, per the owners’ IDs.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `1` | created for an element with an ID of 1.
+| `'not 1'` | not created for an element with an ID of 1.
+| `[1, 2]` | created for an element with an ID of 1 or 2.
+| `['not', 1, 2]` | not created for an element with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch addresses created for an element with an ID of 1 #}
+{% set addresses = craft.addresses()
+  .primaryOwnerId(1)
+  .all() %}
+```
+
+```php
+// Fetch addresses created for an element with an ID of 1
+$addresses = \craft\elements\Address::find()
+    ->primaryOwnerId(1)
+    ->all();
+```
+:::
 
 
 #### `relatedTo`
@@ -585,6 +1146,15 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `render`
+
+Executes the query and renders the resulting elements using their partial templates.
+
+If no partial template exists for an element, its string representation will be output instead.
+
+
 
 
 #### `search`
@@ -654,6 +1224,37 @@ $address = \craft\elements\Address::find()
 :::
 
 
+#### `sortingCode`
+
+Narrows the query results based on the sorting code the addresses have.
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'ABCD'` | with a sortingCode of `ABCD`.
+| `'*BC*'` | with a sortingCode containing `BC`.
+| `'AB*'` | with a sortingCode beginning with `AB`.
+
+
+
+::: code
+```twig
+{# Fetch addresses with sorting code ABCD #}
+{% set addresses = craft.addresses()
+  .sortingCode('ABCD')
+  .all() %}
+```
+
+```php
+// Fetch addresses with sorting code ABCD
+$addresses = \craft\elements\Address::find()
+    ->sortingCode('ABCD')
+    ->all();
+```
+:::
+
+
 #### `trashed`
 
 Narrows the query results to only addresses that have been soft-deleted.
@@ -702,6 +1303,32 @@ $address = \craft\elements\Address::find()
     ->one();
 ```
 :::
+
+
+#### `wasCountEagerLoaded`
+
+Returns whether the query result count was already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
+
+
+#### `wasEagerLoaded`
+
+Returns whether the query results were already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
 
 
 #### `with`

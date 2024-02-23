@@ -10,75 +10,99 @@ This auto-generated reference material has not yet been updated for Craft 5!
 
 <!-- textlint-disable -->
 
-| Param                                     | Description
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [after](#after)                           | Narrows the query results to only entries that were posted on or after a certain date.
-| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
-| [ancestorDist](#ancestordist)             | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
-| [ancestorOf](#ancestorof)                 | Narrows the query results to only entries that are ancestors of another entry in its structure.
-| [andRelatedTo](#andrelatedto)             | Narrows the query results to only entries that are related to certain other elements.
-| [asArray](#asarray)                       | Causes the query to return matching entries as arrays of data, rather than [Entry](craft4:craft\elements\Entry) objects.
-| [authorGroup](#authorgroup)               | Narrows the query results based on the user group the entries’ authors belong to.
-| [authorGroupId](#authorgroupid)           | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
-| [authorId](#authorid)                     | Narrows the query results based on the entries’ authors.
-| [before](#before)                         | Narrows the query results to only entries that were posted before a certain date.
-| [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                       |
-| [dateCreated](#datecreated)               | Narrows the query results based on the entries’ creation dates.
-| [dateUpdated](#dateupdated)               | Narrows the query results based on the entries’ last-updated dates.
-| [descendantDist](#descendantdist)         | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [descendantOf](#descendantof).
-| [descendantOf](#descendantof)             | Narrows the query results to only entries that are descendants of another entry in its structure.
-| [draftCreator](#draftcreator)             | Narrows the query results to only drafts created by a given user.
-| [draftId](#draftid)                       | Narrows the query results based on the entries’ draft’s ID (from the `drafts` table).
-| [draftOf](#draftof)                       | Narrows the query results to only drafts of a given entry.
-| [drafts](#drafts)                         | Narrows the query results to only drafts entries.
-| [expiryDate](#expirydate)                 | Narrows the query results based on the entries’ expiry dates.
-| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants in their structure.
-| [id](#id)                                 | Narrows the query results based on the entries’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
-| [leaves](#leaves)                         | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
-| [level](#level)                           | Narrows the query results based on the entries’ level within the structure.
-| [limit](#limit)                           | Determines the number of entries that should be returned.
-| [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry in its structure.
-| [offset](#offset)                         | Determines how many entries should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
-| [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry in its structure.
-| [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry in its structure.
-| [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.
-| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the entry that comes immediately before another entry in its structure.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
-| [relatedTo](#relatedto)                   | Narrows the query results to only entries that are related to certain other elements.
-| [revisionCreator](#revisioncreator)       | Narrows the query results to only revisions created by a given user.
-| [revisionId](#revisionid)                 | Narrows the query results based on the entries’ revision’s ID (from the `revisions` table).
-| [revisionOf](#revisionof)                 | Narrows the query results to only revisions of a given entry.
-| [revisions](#revisions)                   | Narrows the query results to only revision entries.
-| [savable](#savable)                       | Sets the [savable](https://docs.craftcms.com/api/v3/craft-elements-db-entryquery.html#savable) property.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
-| [search](#search)                         | Narrows the query results to only entries that match a search query.
-| [section](#section)                       | Narrows the query results based on the sections the entries belong to.
-| [sectionId](#sectionid)                   | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
-| [siblingOf](#siblingof)                   | Narrows the query results to only entries that are siblings of another entry in its structure.
-| [site](#site)                             | Determines which site(s) the entries should be queried in.
-| [siteId](#siteid)                         | Determines which site(s) the entries should be queried in, per the site’s ID.
-| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the entries’ IDs in the `elements_sites` table.
-| [slug](#slug)                             | Narrows the query results based on the entries’ slugs.
-| [status](#status)                         | Narrows the query results based on the entries’ statuses.
-| [title](#title)                           | Narrows the query results based on the entries’ titles.
-| [trashed](#trashed)                       | Narrows the query results to only entries that have been soft-deleted.
-| [type](#type)                             | Narrows the query results based on the entries’ entry types.
-| [typeId](#typeid)                         | Narrows the query results based on the entries’ entry types, per the types’ IDs.
-| [uid](#uid)                               | Narrows the query results based on the entries’ UIDs.
-| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
-| [uri](#uri)                               | Narrows the query results based on the entries’ URIs.
-| [with](#with)                             | Causes the query to return matching entries eager-loaded with related elements.
+| Param                                       | Description
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [ElementCollection](#elementcollection)     | <Entry> collect($db = null)
+| [after](#after)                             | Narrows the query results to only entries that were posted on or after a certain date.
+| [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
+| [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the entries’ owners are drafts.
+| [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the entries’ owners are revisions.
+| [ancestorDist](#ancestordist)               | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
+| [ancestorOf](#ancestorof)                   | Narrows the query results to only entries that are ancestors of another entry in its structure.
+| [andRelatedTo](#andrelatedto)               | Narrows the query results to only entries that are related to certain other elements.
+| [asArray](#asarray)                         | Causes the query to return matching entries as arrays of data, rather than [Entry](craft5:craft\elements\Entry) objects.
+| [authorGroup](#authorgroup)                 | Narrows the query results based on the user group the entries’ authors belong to.
+| [authorGroupId](#authorgroupid)             | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
+| [authorId](#authorid)                       | Narrows the query results based on the entries’ author ID(s).
+| [before](#before)                           | Narrows the query results to only entries that were posted before a certain date.
+| [cache](#cache)                             | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [collect](#collect)                         |
+| [dateCreated](#datecreated)                 | Narrows the query results based on the entries’ creation dates.
+| [dateUpdated](#dateupdated)                 | Narrows the query results based on the entries’ last-updated dates.
+| [descendantDist](#descendantdist)           | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [descendantOf](#descendantof).
+| [descendantOf](#descendantof)               | Narrows the query results to only entries that are descendants of another entry in its structure.
+| [draftCreator](#draftcreator)               | Narrows the query results to only drafts created by a given user.
+| [draftId](#draftid)                         | Narrows the query results based on the entries’ draft’s ID (from the `drafts` table).
+| [draftOf](#draftof)                         | Narrows the query results to only drafts of a given entry.
+| [drafts](#drafts)                           | Narrows the query results to only drafts entries.
+| [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [expiryDate](#expirydate)                   | Narrows the query results based on the entries’ expiry dates.
+| [field](#field)                             | Narrows the query results based on the field the entries are contained by.
+| [fieldId](#fieldid)                         | Narrows the query results based on the field the entries are contained by, per the fields’ IDs.
+| [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
+| [hasDescendants](#hasdescendants)           | Narrows the query results based on whether the entries have any descendants in their structure.
+| [id](#id)                                   | Narrows the query results based on the entries’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                       | Narrows the query results to only entries that were involved in a bulk element operation.
+| [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
+| [leaves](#leaves)                           | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
+| [level](#level)                             | Narrows the query results based on the entries’ level within the structure.
+| [limit](#limit)                             | Determines the number of entries that should be returned.
+| [nextSiblingOf](#nextsiblingof)             | Narrows the query results to only the entry that comes immediately after another entry in its structure.
+| [offset](#offset)                           | Determines how many entries should be skipped in the results.
+| [orderBy](#orderby)                         | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+| [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
+| [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the entries, per the owners’ IDs.
+| [positionedAfter](#positionedafter)         | Narrows the query results to only entries that are positioned after another entry in its structure.
+| [positionedBefore](#positionedbefore)       | Narrows the query results to only entries that are positioned before another entry in its structure.
+| [postDate](#postdate)                       | Narrows the query results based on the entries’ post dates.
+| [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [prevSiblingOf](#prevsiblingof)             | Narrows the query results to only the entry that comes immediately before another entry in its structure.
+| [primaryOwner](#primaryowner)               | Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
+| [primaryOwnerId](#primaryownerid)           | Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
+| [provisionalDrafts](#provisionaldrafts)     | Narrows the query results to only provisional drafts.
+| [relatedTo](#relatedto)                     | Narrows the query results to only entries that are related to certain other elements.
+| [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
+| [revisionCreator](#revisioncreator)         | Narrows the query results to only revisions created by a given user.
+| [revisionId](#revisionid)                   | Narrows the query results based on the entries’ revision’s ID (from the `revisions` table).
+| [revisionOf](#revisionof)                   | Narrows the query results to only revisions of a given entry.
+| [revisions](#revisions)                     | Narrows the query results to only revision entries.
+| [savable](#savable)                         | Sets the [savable](https://docs.craftcms.com/api/v5/craft-elements-db-entryquery.html#savable) property.
+| [savedDraftsOnly](#saveddraftsonly)         | Narrows the query results to only unpublished drafts which have been saved after initial creation.
+| [search](#search)                           | Narrows the query results to only entries that match a search query.
+| [section](#section)                         | Narrows the query results based on the sections the entries belong to.
+| [sectionId](#sectionid)                     | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
+| [siblingOf](#siblingof)                     | Narrows the query results to only entries that are siblings of another entry in its structure.
+| [site](#site)                               | Determines which site(s) the entries should be queried in.
+| [siteId](#siteid)                           | Determines which site(s) the entries should be queried in, per the site’s ID.
+| [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the entries’ IDs in the `elements_sites` table.
+| [slug](#slug)                               | Narrows the query results based on the entries’ slugs.
+| [status](#status)                           | Narrows the query results based on the entries’ statuses.
+| [title](#title)                             | Narrows the query results based on the entries’ titles.
+| [trashed](#trashed)                         | Narrows the query results to only entries that have been soft-deleted.
+| [type](#type)                               | Narrows the query results based on the entries’ entry types.
+| [typeId](#typeid)                           | Narrows the query results based on the entries’ entry types, per the types’ IDs.
+| [uid](#uid)                                 | Narrows the query results based on the entries’ UIDs.
+| [unique](#unique)                           | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#uri)                                 | Narrows the query results based on the entries’ URIs.
+| [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                               | Causes the query to return matching entries eager-loaded with related elements.
 
 
 <!-- textlint-enable -->
+
+
+#### `ElementCollection`
+
+<Entry> collect($db = null)
+
+
+
+
 
 
 #### `after`
@@ -129,6 +153,34 @@ Performs any post-population processing on elements.
 
 
 
+#### `allowOwnerDrafts`
+
+Narrows the query results based on whether the entries’ owners are drafts.
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `true` | which can belong to a draft.
+| `false` | which cannot belong to a draft.
+
+
+
+
+#### `allowOwnerRevisions`
+
+Narrows the query results based on whether the entries’ owners are revisions.
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `true` | which can belong to a revision.
+| `false` | which cannot belong to a revision.
+
+
+
+
 #### `ancestorDist`
 
 Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
@@ -167,7 +219,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | above the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | above the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | above the entry represented by the object.
 
 
 
@@ -225,7 +277,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `asArray`
 
-Causes the query to return matching entries as arrays of data, rather than [Entry](craft4:craft\elements\Entry) objects.
+Causes the query to return matching entries as arrays of data, rather than [Entry](craft5:craft\elements\Entry) objects.
 
 
 
@@ -260,8 +312,8 @@ Possible values include:
 | `'not foo'` | not with an author in a group with a handle of `foo`.
 | `['foo', 'bar']` | with an author in a group with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not with an author in a group with a handle of `foo` or `bar`.
-| a [UserGroup](craft4:craft\models\UserGroup) object | with an author in a group represented by the object.
-| an array of [UserGroup](craft4:craft\models\UserGroup) objects | with an author in a group represented by the objects.
+| a [UserGroup](craft5:craft\models\UserGroup) object | with an author in a group represented by the object.
+| an array of [UserGroup](craft5:craft\models\UserGroup) objects | with an author in a group represented by the objects.
 
 
 
@@ -316,7 +368,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `authorId`
 
-Narrows the query results based on the entries’ authors.
+Narrows the query results based on the entries’ author ID(s).
 
 Possible values include:
 
@@ -325,6 +377,7 @@ Possible values include:
 | `1` | with an author with an ID of 1.
 | `'not 1'` | not with an author with an ID of 1.
 | `[1, 2]` | with an author with an ID of 1 or 2.
+| `['and', 1, 2]` |  with authors with IDs of 1 and 2.
 | `['not', 1, 2]` | not with an author with an ID of 1 or 2.
 
 
@@ -528,7 +581,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | below the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | below the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | below the entry represented by the object.
 
 
 
@@ -566,7 +619,7 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a [craft\elements\User](craft4:craft\elements\User) object | created by the user represented by the object.
+| a [craft\elements\User](craft5:craft\elements\User) object | created by the user represented by the object.
 
 
 
@@ -629,7 +682,7 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | for the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | for the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | for the entry represented by the object.
 | `'*'` | for any entry
 | `false` | that aren’t associated with a published entry
 
@@ -679,6 +732,20 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `eagerly`
+
+Causes the query to be used to eager-load results for the query’s source element
+and any other elements in its collection.
+
+
+
+
+
+
+
+
+
+
 #### `expiryDate`
 
 Narrows the query results based on the entries’ expiry dates.
@@ -712,6 +779,69 @@ $nextMonth = (new \DateTime('first day of next month'))->format(\DateTime::ATOM)
 
 $entries = \craft\elements\Entry::find()
     ->expiryDate("< {$nextMonth}")
+    ->all();
+```
+:::
+
+
+#### `field`
+
+Narrows the query results based on the field the entries are contained by.
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `'foo'` | in a field with a handle of `foo`.
+| `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
+| a `\craft\elements\db\craft\fields\Matrix` object | in a field represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch entries in the Foo field #}
+{% set entries = craft.entries()
+  .field('foo')
+  .all() %}
+```
+
+```php
+// Fetch entries in the Foo field
+$entries = \craft\elements\Entry::find()
+    ->field('foo')
+    ->all();
+```
+:::
+
+
+#### `fieldId`
+
+Narrows the query results based on the field the entries are contained by, per the fields’ IDs.
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `1` | in a field with an ID of 1.
+| `'not 1'` | not in a field with an ID of 1.
+| `[1, 2]` | in a field with an ID of 1 or 2.
+| `['not', 1, 2]` | not in a field with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch entries in the field with an ID of 1 #}
+{% set entries = craft.entries()
+  .fieldId(1)
+  .all() %}
+```
+
+```php
+// Fetch entries in the field with an ID of 1
+$entries = \craft\elements\Entry::find()
+    ->fieldId(1)
     ->all();
 ```
 :::
@@ -818,7 +948,20 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
+#### `inBulkOp`
+
+Narrows the query results to only entries that were involved in a bulk element operation.
 
 
 
@@ -894,7 +1037,8 @@ Possible values include:
 | `1` | with a level of 1.
 | `'not 1'` | not with a level of 1.
 | `'>= 3'` | with a level greater than or equal to 3.
-| `[1, 2]` | with a level of 1 or 2
+| `[1, 2]` | with a level of 1 or 2.
+| `[null, 1]` | without a level, or a level of 1.
 | `['not', 1, 2]` | not with level of 1 or 2.
 
 
@@ -950,7 +1094,7 @@ Possible values include:
 | Value | Fetches the entry…
 | - | -
 | `1` | after the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | after the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | after the entry represented by the object.
 
 
 
@@ -1017,6 +1161,61 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `owner`
+
+Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
+
+
+
+::: code
+```twig
+{# Fetch entries created for this entry #}
+{% set entries = craft.entries()
+  .owner(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch entries created for this entry
+$entries = \craft\elements\Entry::find()
+    ->owner($myEntry)
+    ->all();
+```
+:::
+
+
+#### `ownerId`
+
+Narrows the query results based on the owner element of the entries, per the owners’ IDs.
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `1` | created for an element with an ID of 1.
+| `'not 1'` | not created for an element with an ID of 1.
+| `[1, 2]` | created for an element with an ID of 1 or 2.
+| `['not', 1, 2]` | not created for an element with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch entries created for an element with an ID of 1 #}
+{% set entries = craft.entries()
+  .ownerId(1)
+  .all() %}
+```
+
+```php
+// Fetch entries created for an element with an ID of 1
+$entries = \craft\elements\Entry::find()
+    ->ownerId(1)
+    ->all();
+```
+:::
+
+
 #### `positionedAfter`
 
 Narrows the query results to only entries that are positioned after another entry in its structure.
@@ -1028,7 +1227,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | after the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | after the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | after the entry represented by the object.
 
 
 
@@ -1060,7 +1259,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | before the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | before the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | before the entry represented by the object.
 
 
 
@@ -1154,6 +1353,19 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `prepForEagerLoading`
+
+Prepares the query for lazy eager loading.
+
+
+
+
+
+
+
+
+
+
 #### `prepareSubquery`
 
 Prepares the element query and returns its subquery (which determines what elements will be returned).
@@ -1174,7 +1386,7 @@ Possible values include:
 | Value | Fetches the entry…
 | - | -
 | `1` | before the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | before the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | before the entry represented by the object.
 
 
 
@@ -1191,6 +1403,61 @@ Possible values include:
 $entry = \craft\elements\Entry::find()
     ->prevSiblingOf($myEntry)
     ->one();
+```
+:::
+
+
+#### `primaryOwner`
+
+Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
+
+
+
+::: code
+```twig
+{# Fetch entries created for this entry #}
+{% set entries = craft.entries()
+  .primaryOwner(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch entries created for this entry
+$entries = \craft\elements\Entry::find()
+    ->primaryOwner($myEntry)
+    ->all();
+```
+:::
+
+
+#### `primaryOwnerId`
+
+Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `1` | created for an element with an ID of 1.
+| `'not 1'` | not created for an element with an ID of 1.
+| `[1, 2]` | created for an element with an ID of 1 or 2.
+| `['not', 1, 2]` | not created for an element with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch entries created for an element with an ID of 1 #}
+{% set entries = craft.entries()
+  .primaryOwnerId(1)
+  .all() %}
+```
+
+```php
+// Fetch entries created for an element with an ID of 1
+$entries = \craft\elements\Entry::find()
+    ->primaryOwnerId(1)
+    ->all();
 ```
 :::
 
@@ -1249,6 +1516,15 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `render`
+
+Executes the query and renders the resulting elements using their partial templates.
+
+If no partial template exists for an element, its string representation will be output instead.
+
+
+
+
 #### `revisionCreator`
 
 Narrows the query results to only revisions created by a given user.
@@ -1260,7 +1536,7 @@ Possible values include:
 | Value | Fetches revisions…
 | - | -
 | `1` | created by the user with an ID of 1.
-| a [craft\elements\User](craft4:craft\elements\User) object | created by the user represented by the object.
+| a [craft\elements\User](craft5:craft\elements\User) object | created by the user represented by the object.
 
 
 
@@ -1323,7 +1599,7 @@ Possible values include:
 | Value | Fetches revisions…
 | - | -
 | `1` | for the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | for the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | for the entry represented by the object.
 
 
 
@@ -1373,7 +1649,7 @@ $entries = \craft\elements\Entry::find()
 
 #### `savable`
 
-Sets the [savable](https://docs.craftcms.com/api/v3/craft-elements-db-entryquery.html#savable) property.
+Sets the [savable](https://docs.craftcms.com/api/v5/craft-elements-db-entryquery.html#savable) property.
 
 
 
@@ -1452,7 +1728,7 @@ Possible values include:
 | `'not foo'` | not in a section with a handle of `foo`.
 | `['foo', 'bar']` | in a section with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a section with a handle of `foo` or `bar`.
-| a [Section](craft4:craft\models\Section) object | in a section represented by the object.
+| a [Section](craft5:craft\models\Section) object | in a section represented by the object.
 
 
 
@@ -1516,7 +1792,7 @@ Possible values include:
 | Value | Fetches entries…
 | - | -
 | `1` | beside the entry with an ID of 1.
-| a [Entry](craft4:craft\elements\Entry) object | beside the entry represented by the object.
+| a [Entry](craft5:craft\elements\Entry) object | beside the entry represented by the object.
 
 
 
@@ -1552,7 +1828,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](craft4:craft\models\Site) object | from the site represented by the object.
+| a [craft\models\Site](craft5:craft\models\Site) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -1800,7 +2076,7 @@ Possible values include:
 | `'not foo'` | not of a type with a handle of `foo`.
 | `['foo', 'bar']` | of a type with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not of a type with a handle of `foo` or `bar`.
-| an [EntryType](craft4:craft\models\EntryType) object | of a type represented by the object.
+| an [EntryType](craft5:craft\models\EntryType) object | of a type represented by the object.
 
 
 
@@ -1951,6 +2227,32 @@ $entry = \craft\elements\Entry::find()
     ->one();
 ```
 :::
+
+
+#### `wasCountEagerLoaded`
+
+Returns whether the query result count was already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
+
+
+#### `wasEagerLoaded`
+
+Returns whether the query results were already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
 
 
 #### `with`

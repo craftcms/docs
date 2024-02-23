@@ -17,7 +17,7 @@ Default value
 :  `[]`
 
 Defined by
-:  [DbConfig::$attributes](craft4:craft\config\DbConfig::$attributes)
+:  [DbConfig::$attributes](craft5:craft\config\DbConfig::$attributes)
 
 </div>
 
@@ -48,11 +48,11 @@ Default value
 :  `'utf8'`
 
 Defined by
-:  [DbConfig::$charset](craft4:craft\config\DbConfig::$charset)
+:  [DbConfig::$charset](craft5:craft\config\DbConfig::$charset)
 
 </div>
 
-The charset to use when creating tables.
+The character set to use when creating tables.
 
 ::: tip
 You can change the character set and collation across all existing database tables using this terminal command:
@@ -62,12 +62,19 @@ php craft db/convert-charset
 ```
 :::
 
+::: warning
+If you set this to something besides `utf8` or `utf8mb4` for MySQL, you **must** also set the [collation()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-collation)
+setting to a compatible collation name.
+:::
+
 ::: code
 ```php Static Config
-->charset('utf8mb4')
+->charset('utf8mb3')
+->collation('utf8mb3_general_ci')
 ```
 ```shell Environment Override
-CRAFT_DB_CHARSET=utf8mb4
+CRAFT_DB_CHARSET=utf8mb3
+CRAFT_DB_COLLATION=utf8mb3_general_ci
 ```
 :::
 
@@ -84,21 +91,19 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$collation](craft4:craft\config\DbConfig::$collation)
+:  [DbConfig::$collation](craft5:craft\config\DbConfig::$collation)
 
 Since
 :  3.6.4
 
 </div>
 
-The collation to use when creating tables.
+The collation to use when creating tables. (MySQL only.)
 
-This is only used by MySQL. If null, the [charset’s](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#charset) default collation will be used.
+If null, the following collation will be used by default:
 
-| Charset   | Default collation    |
-| --------- | -------------------- |
-| `utf8`    | `utf8_general_ci`    |
-| `utf8mb4` | `utf8mb4_0900_ai_ci` |
+- **MySQL 8.0+**: `utf8mb4_0900_ai_ci`
+- **Older MySQL versions and MariaDB**: `utf8mb4_unicode_ci`
 
 ::: tip
 You can change the character set and collation across all existing database tables using this terminal command:
@@ -110,10 +115,12 @@ php craft db/convert-charset
 
 ::: code
 ```php Static Config
-->collation('utf8mb4_0900_ai_ci')
+->charset('utf8mb3')
+->collation('utf8mb3_general_ci')
 ```
 ```shell Environment Override
-CRAFT_DB_COLLATION=utf8mb4_0900_ai_ci
+CRAFT_DB_CHARSET=utf8mb3
+CRAFT_DB_COLLATION=utf8mb3_general_ci
 ```
 :::
 
@@ -130,7 +137,7 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$database](craft4:craft\config\DbConfig::$database)
+:  [DbConfig::$database](craft5:craft\config\DbConfig::$database)
 
 </div>
 
@@ -158,7 +165,7 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$driver](craft4:craft\config\DbConfig::$driver)
+:  [DbConfig::$driver](craft5:craft\config\DbConfig::$driver)
 
 </div>
 
@@ -186,7 +193,7 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$dsn](craft4:craft\config\DbConfig::$dsn)
+:  [DbConfig::$dsn](craft5:craft\config\DbConfig::$dsn)
 
 </div>
 
@@ -220,7 +227,7 @@ Default value
 :  `''`
 
 Defined by
-:  [DbConfig::$password](craft4:craft\config\DbConfig::$password)
+:  [DbConfig::$password](craft5:craft\config\DbConfig::$password)
 
 </div>
 
@@ -248,7 +255,7 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$port](craft4:craft\config\DbConfig::$port)
+:  [DbConfig::$port](craft5:craft\config\DbConfig::$port)
 
 </div>
 
@@ -276,7 +283,7 @@ Default value
 :  `'public'`
 
 Defined by
-:  [DbConfig::$schema](craft4:craft\config\DbConfig::$schema)
+:  [DbConfig::$schema](craft5:craft\config\DbConfig::$schema)
 
 </div>
 
@@ -284,7 +291,7 @@ The schema that Postgres is configured to use by default (PostgreSQL only).
 
 ::: tip
 To force Craft to use the specified schema regardless of PostgreSQL’s `search_path` setting, you must enable
-the [setSchemaOnConnect()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-setschemaonconnect) setting.
+the [setSchemaOnConnect()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-setschemaonconnect) setting.
 :::
 
 ::: code
@@ -309,7 +316,7 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$server](craft4:craft\config\DbConfig::$server)
+:  [DbConfig::$server](craft5:craft\config\DbConfig::$server)
 
 </div>
 
@@ -337,14 +344,14 @@ Default value
 :  `false`
 
 Defined by
-:  [DbConfig::$setSchemaOnConnect](craft4:craft\config\DbConfig::$setSchemaOnConnect)
+:  [DbConfig::$setSchemaOnConnect](craft5:craft\config\DbConfig::$setSchemaOnConnect)
 
 Since
 :  3.7.27
 
 </div>
 
-Whether the [schema()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-schema) should be explicitly used for database queries (PostgreSQL only).
+Whether the [schema()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-schema) should be explicitly used for database queries (PostgreSQL only).
 
 ::: warning
 This will cause an extra `SET search_path` SQL query to be executed per database connection. Ideally,
@@ -373,7 +380,7 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$tablePrefix](craft4:craft\config\DbConfig::$tablePrefix)
+:  [DbConfig::$tablePrefix](craft5:craft\config\DbConfig::$tablePrefix)
 
 </div>
 
@@ -402,7 +409,7 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$unixSocket](craft4:craft\config\DbConfig::$unixSocket)
+:  [DbConfig::$unixSocket](craft5:craft\config\DbConfig::$unixSocket)
 
 </div>
 
@@ -431,13 +438,13 @@ Default value
 :  `null`
 
 Defined by
-:  [DbConfig::$url](craft4:craft\config\DbConfig::$url)
+:  [DbConfig::$url](craft5:craft\config\DbConfig::$url)
 
 </div>
 
 The database connection URL, if one was provided by your hosting environment.
 
-If this is set, the values for [driver()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-driver), [user()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-user), [database()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-database), [server()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-server), [port()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-port), and [database()](https://docs.craftcms.com/api/v3/craft-config-dbconfig.html#method-database) will be extracted from it.
+If this is set, the values for [driver()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-driver), [user()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-user), [database()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-database), [server()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-server), [port()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-port), and [database()](https://docs.craftcms.com/api/v5/craft-config-dbconfig.html#method-database) will be extracted from it.
 
 ::: code
 ```php Static Config
@@ -461,7 +468,7 @@ Default value
 :  `false`
 
 Defined by
-:  [DbConfig::$useUnbufferedConnections](craft4:craft\config\DbConfig::$useUnbufferedConnections)
+:  [DbConfig::$useUnbufferedConnections](craft5:craft\config\DbConfig::$useUnbufferedConnections)
 
 Since
 :  3.7.0
@@ -499,7 +506,7 @@ Default value
 :  `'root'`
 
 Defined by
-:  [DbConfig::$user](craft4:craft\config\DbConfig::$user)
+:  [DbConfig::$user](craft5:craft\config\DbConfig::$user)
 
 </div>
 
