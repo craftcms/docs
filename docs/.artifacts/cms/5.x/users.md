@@ -23,7 +23,6 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [cache](#cache)                             | Enables query cache for this Query.
 | [can](#can)                                 | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                         |
 | [dateCreated](#datecreated)                 | Narrows the query results based on the users’ creation dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the users’ last-updated dates.
 | [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
@@ -258,15 +257,6 @@ $users = \craft\elements\User::find()
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-
-
-
-
-
-
-#### `collect`
-
-
 
 
 

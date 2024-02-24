@@ -18,7 +18,6 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [asArray](#asarray)                         | Causes the query to return matching tags as arrays of data, rather than [Tag](craft5:craft\elements\Tag) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                         |
 | [dateCreated](#datecreated)                 | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the tags’ last-updated dates.
 | [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
@@ -146,15 +145,6 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-
-
-
-
-
-
-#### `collect`
-
-
 
 
 

@@ -18,7 +18,6 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [asArray](#asarray)                         | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft5:craft\elements\GlobalSet) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                         |
 | [dateCreated](#datecreated)                 | Narrows the query results based on the global sets’ creation dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the global sets’ last-updated dates.
 | [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
@@ -143,15 +142,6 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-
-
-
-
-
-
-#### `collect`
-
-
 
 
 

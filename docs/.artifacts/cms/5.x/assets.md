@@ -18,7 +18,6 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [asArray](#asarray)                         | Causes the query to return matching assets as arrays of data, rather than [Asset](craft5:craft\elements\Asset) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                         |
 | [dateCreated](#datecreated)                 | Narrows the query results based on the assets’ creation dates.
 | [dateModified](#datemodified)               | Narrows the query results based on the assets’ files’ last-modified dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the assets’ last-updated dates.
@@ -158,15 +157,6 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-
-
-
-
-
-
-#### `collect`
-
-
 
 
 
