@@ -282,7 +282,7 @@ Depending on your section’s settings, can perform some or all of the following
 
 - Choose the entry type (if there is more than one to choose from);
 - Edit the entry’s **Title**, **Slug**, and [custom field](../../system/fields.md) values;
-- Choose the entry’s **Authors** (Pro edition only);
+- Choose the entry’s **Authors** <Badge type="edition" vertical="middle" title="Entries can only have authors in Craft Pro">Pro</Badge>;
 - Choose the entry’s **Parent** (if it’s within a [Structure](#structures) section);
 - Set the entry’s **Post Date** (when it will be considered published);
 - Set the entry’s **Expiration Date** (optional);

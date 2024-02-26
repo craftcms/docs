@@ -3,15 +3,13 @@ keywords: headless
 containsGeneratedContent: yes
 ---
 
-# GraphQL API <badge type="edition" vertical="middle" title="GraphQL is only available in Craft Pro">Pro</badge>
+# GraphQL API
 
-Craft Pro provides a [GraphQL](https://graphql.org) API you can use to work with your content in separate applications like single-page apps (SPAs) and static site generators.
+Craft provides a [GraphQL](https://graphql.org) API you can use to work with your content in separate applications like single-page apps (SPAs) and static site generators.
 
 ## Getting Started
 
-Make sure you’re running Craft Pro and [the `enableGql` setting](config4:enableGql) is not set to `false`.
-
-Because GraphQL is self-documenting, you can jump right into Craft’s included [GraphiQL IDE](#using-the-graphiql-ide) from the control panel and interactively build and execute queries. Querying from the control panel gives you full access to data that’s available, unlike queries from the outside that require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
+GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel gives you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
 ## Examples
 

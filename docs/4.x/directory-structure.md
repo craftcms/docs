@@ -29,7 +29,7 @@ Purpose
 
   - `backups/` — Stores database backups that get created when you update Craft, or capture a backup via the control panel utility or [CLI](./console-commands.md#db-backup).
   - `logs/` — Stores Craft’s [logs](./logging.md) and PHP error logs.
-  - `rebrand/` — Stores the custom Login Page Logo and Site Icon files, if you’ve uploaded them.
+  - `rebrand/` — Stores the custom Login Page Logo and Site Icon files, if you’ve uploaded them. <badge type="edition" vertical="middle" title="Craft Pro only">Pro</badge>
   - `runtime/` — Pretty much everything in here is there for caching and logging purposes. Nothing that Craft couldn’t live without, if the folder happened to get deleted.
 
   For the curious, here are the types of things you will find in `storage/runtime/` (though this is not a comprehensive list):

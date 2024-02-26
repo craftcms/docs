@@ -791,7 +791,7 @@ You can place this tag anywhere in your template, including within a conditional
 
 ## `requireEdition`
 
-Requires Craft’s edition to be equal to or better than what’s specified.
+Requires Craft’s active edition to be equal to or “greater” than what’s specified. This is generally only useful to plugin developers who need to expose features only when a plugin is installed in a site running one edition or another.
 
 If the Craft edition does not meet the requirement, the visitor will get a 404 response.
 
