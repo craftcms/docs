@@ -1,9 +1,5 @@
 <!-- This file is generated in an automated workflow based on Craft source files. Changes to it will be overwritten the next time the docs are built. -->
 
-::: danger
-This auto-generated reference material has not yet been updated for Craft 5!
-:::
-
 <!-- BEGIN SETTINGS -->
 
 ### `attributes`
