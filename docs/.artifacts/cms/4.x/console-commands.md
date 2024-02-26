@@ -1836,6 +1836,10 @@ Runs all jobs in the queue.
 <h4 id="queue-run-options" class="command-subheading">Options</h4>
 
 
+--job-id
+: The job ID to run
+
+
 --verbose, -v
 : verbose mode of a job execute. If enabled, execute result of each job
 will be printed.
@@ -2793,6 +2797,13 @@ version using the syntax `<handle>:<version>`.
 
 
 <h4 id="update-update-options" class="command-subheading">Options</h4>
+
+
+--with-expired
+: Whether to update expired licenses.
+    
+    NOTE: This will result in “License purchase required” messages in the control panel on public domains,
+    until the licenses have been renewed.
 
 
 --force, -f

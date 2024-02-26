@@ -38036,6 +38036,12 @@
     },
     {
         "class": "craft\\services\\ProjectConfig",
+        "name": "EVENT_AFTER_WRITE_YAML_FILES",
+        "type": "craft\\services\\Event",
+        "desc": "The event that is triggered after the YAML files have been written out."
+    },
+    {
+        "class": "craft\\services\\ProjectConfig",
         "name": "EVENT_REBUILD",
         "type": "craft\\events\\RebuildConfigEvent",
         "desc": "The event that is triggered when the project config is being rebuilt."
