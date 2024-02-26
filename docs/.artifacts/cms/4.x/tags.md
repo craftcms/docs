@@ -13,7 +13,6 @@
 | [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](craft4:craft\elements\Tag) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                       |
 | [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
@@ -126,15 +125,6 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-
-
-
-
-
-
-#### `collect`
-
-
 
 
 

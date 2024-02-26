@@ -15,7 +15,6 @@
 | [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft4:craft\elements\MatrixBlock) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                         |
 | [dateCreated](#datecreated)                 | Narrows the query results based on the Matrix blocks’ creation dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the Matrix blocks’ last-updated dates.
 | [field](#field)                             | Narrows the query results based on the field the Matrix blocks belong to.
@@ -161,15 +160,6 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-
-
-
-
-
-
-#### `collect`
-
-
 
 
 

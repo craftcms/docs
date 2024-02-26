@@ -15,7 +15,6 @@
 | [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](craft4:craft\elements\Category) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [collect](#collect)                       |
 | [dateCreated](#datecreated)               | Narrows the query results based on the categories’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the categories’ last-updated dates.
 | [descendantDist](#descendantdist)         | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
@@ -205,15 +204,6 @@ Enables query cache for this Query.
 #### `clearCachedResult`
 
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-
-
-
-
-
-
-#### `collect`
-
-
 
 
 
@@ -605,7 +595,8 @@ Possible values include:
 | `1` | with a level of 1.
 | `'not 1'` | not with a level of 1.
 | `'>= 3'` | with a level greater than or equal to 3.
-| `[1, 2]` | with a level of 1 or 2
+| `[1, 2]` | with a level of 1 or 2.
+| `[null, 1]` | without a level, or a level of 1.
 | `['not', 1, 2]` | not with level of 1 or 2.
 
 
