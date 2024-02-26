@@ -6,17 +6,24 @@ Before installing Craft Commerce, make sure your web server meets Commerce’s [
 
 ## Plugin Store
 
-Log into the control panel, navigate to **Plugin Store** and search for “Commerce”. Choose **Craft Commerce**, and from there you can choose **Add to Cart** or **Try** for either edition.
+Log into the control panel, navigate to **Plugin Store** and search for “Commerce.” Choose **Craft Commerce**, then click **Try**, or copy the install command.
 
 ## Composer
 
-Ensure that you have Composer [installed correctly](/4.x/installation.md#downloading-with-composer), then run the following terminal commands from within your Craft 4 project:
+To install via the CLI, run the following commands in an existing Craft 4 project:
 
 ```bash
 composer require -w craftcms/commerce
 php craft plugin/install commerce
 ```
 
+If you are using DDEV, these shortcuts ensure the commands are run inside the appropriate container:
+
+```bash
+ddev composer require -w craftcms/commerce
+ddev craft plugin/install commerce
+```
+
 ::: tip
-You may also want to copy the included [example templates](example-templates.md) into your project as a starting point, especially if you’re new to Commerce.
+New to Commerce? Consider copying the included [example templates](example-templates.md) into your project as a starting point!
 :::

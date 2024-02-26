@@ -3,7 +3,7 @@
 Craft Commerce includes a shipping system for adding shipping costs to a cart.
 
 ::: warning
-[Shipping features differ](#edition-differences) depending on your edition of Craft Commerce.
+Prior to version 4.5, [shipping features differ](#edition-differences) between Commerce editions.
 :::
 
 You can add any number of [shipping methods](#shipping-methods) to your store, where each one’s purpose is to supply relevant *shipping options* for an order at checkout.
@@ -172,6 +172,12 @@ Yet another store may place more importance on providing a **broad range of deli
 It’s best to identify whatever aspect of the store’s shipping is most complex or specific, and plan around that concern with whatever features need to support it.
 
 ## Edition Differences
+
+<Block label="Commerce Edition Changes">
+
+With the release of Commerce 4.5, Lite and Pro editions have been merged. This section discusses differences in earlier versions of the plugin.
+
+</Block>
 
 In the Lite edition of Craft Commerce only two fixed shipping costs can be configured:
 

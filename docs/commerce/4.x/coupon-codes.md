@@ -1,4 +1,6 @@
-# Coupon Codes <badge type="edition" vertical="middle" title="Discounts are only available in Commerce Pro">Pro</badge>
+# Coupon Codes
+
+!!!include(docs/.artifacts/commerce/4.x/shared/edition-changes.md)!!!
 
 Coupon codes are unique strings customers may enter for an order to receive a [discount](discounts.md).
 

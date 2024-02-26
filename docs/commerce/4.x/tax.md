@@ -3,7 +3,7 @@
 Commerce represents taxes for an order using tax categories, tax rates, and tax zones. Each can be configured from the control panel via **Commerce** → **Tax**.
 
 ::: warning
-Tax features differ depending on your [edition](editions.md) of Craft Commerce.
+Prior to version 4.5, tax features differ between Commerce editions.
 :::
 
 You can model common sales tax policies—like those typical in U.S. retail and European Value Added Tax (VAT)—but those aren’t the _only_ types of tax rules that you can model in Commerce. With an understanding of Commerce’s basic taxation concepts you should be able to model the tax rules of your country or jurisdiction.

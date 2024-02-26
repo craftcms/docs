@@ -146,9 +146,9 @@ You can use the [`purchasableAvailable`](extend/events.md#purchasableavailable) 
 :::
 
 ::: warning
-Commerce Lite is limited to a single line in the cart.\
-If a customer adds a new item, it replaces whatever was already in the cart.\
-If multiple items are added in a request, only the last one gets added to the cart.
+Commerce Lite is limited to a single item in the cart. If a customer adds a new item, it replaces whatever was already in the cart. If multiple items are added in a request, only the last one gets added to the cart.
+
+_The limitation was removed in Commerce 4.5, when the Lite and Pro editions were combined. Lite licenses were upgraded, so existing projects can be upgraded to 4.5.0 to unlock all its features._
 :::
 
 ### Working with Line Items
@@ -551,7 +551,7 @@ An order is usually created on the front end as a customer [adds items](#adding-
 To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its [sales](sales.md) and adjustments.
 
 ::: warning
-You must be using [Commerce Pro](editions.md) and have “Edit Orders” permission to create orders from the control panel.
+Prior to Commerce 4.5, creating orders via the control panel was limited to the [Pro](editions.md) edition.
 :::
 
 To complete the order, press **Mark as completed**.

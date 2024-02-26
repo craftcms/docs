@@ -1,4 +1,6 @@
-# Discounts <badge type="edition" vertical="middle" title="Discounts are only available in Commerce Pro">Pro</badge>
+# Discounts
+
+!!!include(docs/.artifacts/commerce/4.x/shared/edition-changes.md)!!!
 
 Discounts are deductions that can be applied either to line items or the order as a whole.
 

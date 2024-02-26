@@ -27,7 +27,11 @@ If you’d like to be able to see and manage customer addresses from the control
 
 A customer with saved login information is considered a [credentialed](/4.x/users.md#active-and-inactive-users) user. Conversely, customers who check out as guests are set up as inactive users.
 
-### User Checkout <badge text="Pro" type="edition" vertical="middle">Pro</badge>
+### User Checkout
+
+::: warning
+Prior to version 4.5, some customer registration features were only only available in Commerce Pro.
+:::
 
 Logged in customers are bound to their cart the moment it is created.
 
