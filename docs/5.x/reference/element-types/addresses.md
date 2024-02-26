@@ -22,7 +22,7 @@ For sites supporting [public registration](../../system/user-management.md#publi
 Plugins are also able to use addresses to store their own location data.
 :::
 
-## Setup <badge text="Pro" type="edition" vertical="middle">Pro</badge>
+## Setup
 
 The address management interface can be added to the User field layout by navigating to  **Settings** → **Users** -> **User Fields**.
 

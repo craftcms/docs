@@ -5,7 +5,7 @@ keywords: permissions
 
 [Users](../reference/element-types/users.md) in Craft represent humans in the system. These may be member accounts, or records that represent people in general.
 
-The first user account is created during [installation](installation.md). If you stick with the Solo edition, this is the only account you will be able to create. If you need more (or you want to support [public registration](#public-registration)) you can upgrade to the Pro edition, which offers additional user accounts.
+The first user account is created during [installation](../install.md). If you stick with the **Solo** edition, this is the only account you will be able to create. If you need more (or you want to support [public registration](#public-registration)) you can upgrade to the **Pro** edition, which offers additional user accounts.
 
 ## Statuses
 

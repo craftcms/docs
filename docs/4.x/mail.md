@@ -1,17 +1,17 @@
 # Email
 
-Craft sends email in response to some user actions, like account activation, email verification, password resets, and testing [email settings](#settings).
+Craft sends email in response to some user actions, like account activation, email verification, password resets, and testing [email settings](#settings). All Craft editions are capable of sending emails, but [system messages](#system-messages) are only customizable in **Pro**.
 
 Plugins may send email under other circumstances, either by registering a global [system message](#system-messages), or using [their own management tools](#other-messages).
 
-## System Messages
+## System Messages <badge type="edition" vertical="middle" text="Pro" title="Craft Pro only" />
 
 You can view and edit the built-in (and plugin-provided) email messages by navigating to **Utilities** &rarr; **System Messages**.
 
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/utilities/system-messages"
     :link="false"
-    caption="Viewing system messages in the utilities section of the control panel.">
+    caption="Viewing system messages in the utilities section of the control panel. Customizing system messages is limited to Craft Pro.">
 <img src="./images/system-messages.png" alt="System messages">
 </BrowserShot>
 
@@ -180,10 +180,10 @@ Otherwise, this is a regular Twig environment, so all the filters, functions, gl
 
 ### Transport Adapters <Poi target="mail-settings" id="transportAdapter" label="4" />
 
-Three adapters are provided with Craft, with more installable from the [Plugin Store](https://plugins.craftcms.com/categories/mailer-adapters?craft4). You can switch adapters at any time—each adapter exposes a [Transport](https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport) class that conforms to a consistent interface, allowing Craft and plugins to send email without worrying about the underlying implementation or service.
+Three adapters are provided with Craft, with more installable from the [Plugin Store](plugin:categories/mailer-adapters?craft4). You can switch adapters at any time—each adapter exposes a [Transport](https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport) class that conforms to a consistent interface, allowing Craft and plugins to send email without worrying about the underlying implementation or service.
 
 ::: tip
-For the most reliable delivery, consider using one of the third-party transactional email service integrations, like [Amazon SES](https://plugins.craftcms.com/amazon-ses?craft4), [Mailgun](https://plugins.craftcms.com/mailgun?craft4), [Postmark](https://plugins.craftcms.com/postmark?craft4), or [Sendgrid](https://plugins.craftcms.com/sendgrid?craft4). These adapters all communicate with an API over HTTP instead of SMTP, and ultimately use their own, trusted origin to send email. In some situations, this is essential, as some <abbr title="Internet Service Provider">ISP</abbr>s and network maintainers will throttle or completely block outbound SMTP traffic.
+For the most reliable delivery, consider using one of the third-party transactional email service integrations, like [Amazon SES](plugin:amazon-ses?craft4), [Mailgun](plugin:mailgun?craft4), [Postmark](plugin:postmark?craft4), or [Sendgrid](plugin:sendgrid?craft4). These adapters all communicate with an API over HTTP instead of SMTP, and ultimately use their own, trusted origin to send email. In some situations, this is essential, as some <abbr title="Internet Service Provider">ISP</abbr>s and network maintainers will throttle or completely block outbound SMTP traffic.
 
 These services often require non-invasive adjustments to your DNS records for proof-of-ownership and security.
 :::

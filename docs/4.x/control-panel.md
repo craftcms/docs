@@ -63,7 +63,7 @@ Section | Description
 [Categories](./categories.md) | Create and edit Category elements.
 [Globals](./globals.md) | Manage Globals.
 [Users](./users.md) | <Badge type="edition" vertical="middle" title="Only available in Craft Pro">Pro</Badge> Create and edit User elements.
-[GraphQL](./graphql.md) | <Badge type="edition" vertical="middle" title="Only available in Craft Pro">Pro</Badge> Configure GraphQL schemas, create tokens, and access the built-in playground.
+[GraphQL](./graphql.md) | Configure GraphQL schemas, create tokens, and access the built-in playground.
 [Utilities](#utilities) | Get system info and perform a variety of upkeep actions.
 [Settings](#settings) | Configure Craft’s system settings and content model.
 [Plugin Store](#plugin-store) | Browse, install, and purchase Craft and plugin licenses from the official store.

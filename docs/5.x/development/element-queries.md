@@ -838,9 +838,9 @@ Craft can act as a headless content back-end for your static or client-rendered 
 
 The first-party [Element API](https://plugins.craftcms.com/element-api) allows you to map _endpoints_ to element queries with a combination of static and dynamic criteria and serve JSON-serialized results.
 
-### GraphQL <Badge type="edition" vertical="middle" title="The GraphQL API is a feature of Craft Pro">Pro</Badge>
+### GraphQL
 
-Craft Pro includes a [GraphQL API](./graphql.md) with configurable schemas. Many of the same element query basics apply when accessing elements via GraphQL.
+Craft includes a [GraphQL API](./graphql.md) with configurable schemas. Many of the same element query basics apply when accessing elements via GraphQL.
 
 ::: warning
 For security reasons, not all query builder features are available via GraphQL. Some advanced queries may need to be executed separately and combined by the client.

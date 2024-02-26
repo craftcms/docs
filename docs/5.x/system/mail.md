@@ -1,17 +1,17 @@
 # Email
 
-Craft sends email in response to some user actions, like account activation, email verification, password resets, and testing [email settings](#settings).
+Craft sends email in response to some user actions, like account activation, email verification, password resets, and testing [email settings](#settings). All Craft editions are capable of sending emails, but system messages are only customizable in **Pro**.
 
 Plugins may send email under other circumstances, either by registering a global [system message](#system-messages), or using [their own management tools](#other-messages).
 
-## System Messages
+## System Messages <badge type="edition" vertical="middle" text="Pro" title="Craft Pro only" />
 
 You can view and edit the built-in (and plugin-provided) email messages by navigating to **Utilities** &rarr; **System Messages**.
 
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/utilities/system-messages"
     :link="false"
-    caption="Viewing system messages in the utilities section of the control panel.">
+    caption="Viewing system messages in the utilities section of the control panel.  Customizing system messages is limited to Craft Pro.">
 <img src="../images/system-messages.png" alt="System messages">
 </BrowserShot>
 
@@ -209,7 +209,7 @@ MAILHOG_SMTP_HOSTNAME="127.0.0.1"
 MAILHOG_SMTP_PORT="1025"
 ```
 
-You can use these in the adapter configuration by [prefixing them with a dollar sign](config/README.md#control-panel-settings) (`$`).
+You can use these in the adapter configuration by [prefixing them with a dollar sign](../configure.md#control-panel-settings) (`$`).
 
 ::: tip
 The default port for SMTP has traditionally been `25`, but some networks completely block this traffic. Your SMTP server may support communication on an alternate port—usually `587`.
@@ -225,4 +225,4 @@ This adapter only requires a “command,” and defaults to `/usr/sbin/sendmail 
 
 In development environments, you can ensure all outbound email is sent to a single address with the <config4:testToEmailAddress> setting.
 
-Alternatively, the entire [mailer component](config/app.md#mailer) can be replaced via application config, should you want to use an entirely different [transport](#transport-adapters) for local development.
+Alternatively, the entire [mailer component](../reference/config/app.md#mailer) can be replaced via application config, should you want to use an entirely different [transport](#transport-adapters) for local development.
