@@ -2593,6 +2593,13 @@ version using the syntax `<handle>:<version>`.
 <h4 id="update-update-options" class="command-subheading">Options</h4>
 
 
+--with-expired
+: Whether to update expired licenses.
+    
+    NOTE: This will result in “License purchase required” messages in the control panel on public domains,
+    until the licenses have been renewed.
+
+
 --force, -f
 : Force the update if allowUpdates is disabled
 
