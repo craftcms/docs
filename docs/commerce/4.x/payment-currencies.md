@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/currencies'
+---
+
 # Payment Currencies
 
 Many customers feel more confident buying from a store that allows them to purchase items in the same currency as their credit card or bank account.

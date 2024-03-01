@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/reference/fields'
+---
+
 # Variants Fields
 
 Commerce Variants fields allow you to relate [product variants](products-variants.md#variants) to other elements.

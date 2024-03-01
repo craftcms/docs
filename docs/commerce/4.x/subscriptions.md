@@ -1,5 +1,6 @@
 ---
 containsGeneratedContent: yes
+updatedVersion: 'commerce/5.x/system/subscriptions'
 ---
 
 # Subscriptions

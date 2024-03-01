@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/line-item-statuses'
+---
+
 # Line Item Statuses
 
 Line item statuses are preset labels that can optionally be applied to an order’s line items.

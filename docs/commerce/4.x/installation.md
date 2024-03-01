@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/install'
+---
+
 # Installation
 
 ## Pre-Flight check

@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/shipping'
+---
+
 # Shipping
 
 Craft Commerce includes a shipping system for adding shipping costs to a cart.

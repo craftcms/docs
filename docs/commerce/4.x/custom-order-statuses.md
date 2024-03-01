@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/custom-order-statuses'
+---
+
 # Custom Order Statuses
 
 ## Overview

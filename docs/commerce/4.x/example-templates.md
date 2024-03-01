@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/development/example-templates'
+---
+
 # Example Templates
 
 Commerce includes example templates you can use for a reference, or as a starting point when building your store. They are continually updated to support the full range of Commerce features, out-of-the-box, including:

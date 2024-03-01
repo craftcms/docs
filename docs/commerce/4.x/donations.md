@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/donations'
+---
+
 # Donations
 
 Donations can be added to the cart using the [donation purchasable](commerce4:craft\commerce\elements\Donation). This is a separate element type from products and variants, and unlike a product the donation element does not belong to a “product type”.

@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/gateways'
+---
+
 # Payment Gateways
 
 As a self-hosted ecommerce solution, Commerce handles payments differently from popular software-as-a-service products—instead of providing a fixed list of payment processors, we designed flexible gateway and transaction APIs that let 

@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/customers'
+---
+
 # Customers
 
 Commerce leverages Craft’s native [User](/4.x/users.md) element to represent and track customers.

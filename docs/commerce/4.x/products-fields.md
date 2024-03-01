@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/reference/fields'
+---
+
 # Products Fields
 
 Commerce Products fields allow you to relate [products](products-variants.md#products) to other elements.

@@ -1,0 +1,7 @@
+# Inventory
+
+## Stock
+
+## Locations
+
+## Transfers

@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/upgrade'
+---
+
 # Editions
 
 <Block label="Commerce Edition Changes">

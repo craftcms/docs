@@ -5,6 +5,7 @@ module.exports = {
   icon: "/docs/icons/commerce.svg",
   baseDir: "commerce",
   versions: [
+    ["5.x", { label: "5.x", stabilityFlag: 'beta' }],
     ["4.x", { label: "4.x" }],
     ["3.x", { label: "3.x" }],
     ["2.x", { label: "2.x", isEol: true }],
@@ -15,6 +16,96 @@ module.exports = {
   searchPlaceholder: "Search the Commerce docs (Press “/” to focus)",
   primarySet: true,
   sidebar: {
+    "5.x": {
+      "/extend/": [
+        {
+          title: "Extending Commerce",
+          collapsable: false,
+          children: [["", "Introduction"], "events"]
+        },
+        {
+          title: "System Components",
+          collapsable: false,
+          children: [
+            "payment-gateway-types",
+            "purchasable-types",
+            "adjusters",
+            "shipping-methods"
+          ]
+        },
+        {
+          title: "More",
+          collapsable: false,
+          children: ["template-hooks", "tax-engines"]
+        }
+      ],
+      "/": [
+        {
+          title: "Getting Started",
+          collapsable: false,
+          children: [
+            ["", "Introduction"],
+            "requirements",
+            "install",
+            "update",
+            "upgrade",
+            "configure",
+          ],
+        },
+        {
+          title: "System Overview",
+          collapsable: false,
+          children: [
+            "system/stores",
+            "system/products-variants",
+            "system/purchasables",
+            "system/orders-carts",
+            "system/customers",
+            "system/addresses",
+            "system/donations",
+            "system/line-item-statuses",
+            "system/custom-order-statuses",
+            "system/emails",
+            "system/pdfs",
+            "system/gateways",
+            "system/subscriptions",
+            "system/pricing-rules",
+            "system/discounts",
+            "system/coupon-codes",
+            "system/sales",
+            "system/shipping",
+            "system/tax",
+            "system/currencies",
+            "system/transactions",
+          ],
+        },
+        {
+          title: "Reference",
+          collapsable: false,
+          children: [
+            "reference/config-settings",
+            "reference/fields",
+            "reference/permissions",
+            "reference/twig",
+            "reference/console-commands",
+            "reference/controller-actions",
+          ],
+        },
+        {
+          title: "Front End Development",
+          collapsable: false,
+          children: [
+            "development/example-templates",
+            "development/cart",
+            "development/checkout",
+            "development/making-payments",
+            "development/saving-payment-sources",
+            "development/address-management",
+            "development/subscription-templates",
+          ],
+        },
+      ]
+    },
     "4.x": {
       "/extend/": [
         {
