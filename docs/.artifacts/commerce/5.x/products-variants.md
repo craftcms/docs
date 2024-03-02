@@ -1455,6 +1455,10 @@ $products = \craft\commerce\elements\Product::find()
 
 ## Variants
 
+::: warning
+This section has not been updated for Commerce 5.x.
+:::
+
 A variant describes the individual properties of a product as an item that may be purchased.
 
 Those properties inclue a SKU, price, and dimensions. Even if a product doesn’t appear to have any variants in the control panel, it still uses one *default variant* behind the scenes.
@@ -1496,11 +1500,11 @@ If a product type has multiple variants enabled, the author can choose which one
 
 For a single-variant product, variant details are shown in a unified view with custom product fields:
 
-![Stylized illustration of a single-variant product edit page, with custom product fields in a single content pane and fields like SKU in the sidebar details](./images/single-variant.png)
+![Stylized illustration of a single-variant product edit page, with custom product fields in a single content pane and fields like SKU in the sidebar details](../images/single-variant.png)
 
 When a product supports multiple variants, the default variant will be identified in a **Variants** field where more variants can be added:
 
-![Stylized illustration of a multi-variant product edit page, with an additional “Variants” tab that has a Matrix-like editor for multiple variants each having their own fields like SKU](./images/multi-variant.png)
+![Stylized illustration of a multi-variant product edit page, with an additional “Variants” tab that has a Matrix-like editor for multiple variants each having their own fields like SKU](../images/multi-variant.png)
 
 ### Variant Stock
 
