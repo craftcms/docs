@@ -1,6 +1,6 @@
 # Discounts
 
-!!!include(docs/.artifacts/commerce/4.x/shared/edition-changes.md)!!!
+!!!include(docs/.artifacts/commerce/5.x/shared/edition-changes.md)!!!
 
 Discounts are deductions that can be applied either to line items or the order as a whole.
 

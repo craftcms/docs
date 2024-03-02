@@ -212,4 +212,4 @@ To fetch the same information with GraphQL, we could write a query like this:
 ```
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/commerce/4.x/products-variants.md)!!!
+!!!include(docs/.artifacts/commerce/5.x/products-variants.md)!!!

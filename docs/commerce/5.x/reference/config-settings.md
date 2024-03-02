@@ -42,4 +42,4 @@ You can access the Commerce [general settings model](commerce4:craft\commerce\mo
 Here’s the full list of Commerce config settings:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/commerce/4.x/config.md)!!!
+!!!include(docs/.artifacts/commerce/5.x/config.md)!!!

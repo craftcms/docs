@@ -1,6 +1,6 @@
 # Coupon Codes
 
-!!!include(docs/.artifacts/commerce/4.x/shared/edition-changes.md)!!!
+!!!include(docs/.artifacts/commerce/5.x/shared/edition-changes.md)!!!
 
 Coupon codes are unique strings customers may enter for an order to receive a [discount](discounts.md).
 
