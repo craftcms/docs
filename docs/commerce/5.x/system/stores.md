@@ -10,7 +10,7 @@ Commerce supports multiple stores, each of which is connected to one or more [si
 Projects upgraded from earlier versions of Commerce will have a single store set up, during the migration.
 :::
 
-Stores’ [configuration](#settings) lives in [project config](/5.x/system/project-config.md), but 
+Stores’ base [configuration](#settings) lives in [project config](/5.x/system/project-config.md), but many of the day-to-day managerial functions are available to any control panel user with the appropriate [permissions](../reference/permissions.md).
 
 ## Mapping Sites to Stores
 
