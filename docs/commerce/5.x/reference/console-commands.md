@@ -1,9 +1,18 @@
 ---
 keywords: cli
+related:
+  - uri: /5.x/system/cli.md
+    label: The Craft CLI
+  - uri: /5.x/reference/cli.md
+    label: All Craft console commands
 ---
 # Console Commands
 
-Commerce supplements Craft’s own [console commands](/4.x/console-commands.md) with a few utilities that can help you manage your storefront’s data.
+Commerce supplements Craft’s own [console commands](/5.x/reference/cli.md) with a few utilities that can help you manage your storefront’s data.
+
+These commands must be prefixed with `php craft …`, `ddev craft …`, or some variation thereof, depending on your development or hosting environment.
+
+<See path="/5.x/system/cli.md" label="Console Commands" description="Learn more about Craft’s command-line interface." />
 
 ## `commerce/example-templates`
 

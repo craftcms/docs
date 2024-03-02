@@ -186,10 +186,15 @@ If you are using any of these parameters in product queries, you may need to rep
 ```
 :::
 
+Variant queries’ `hasUnlimitedStock()` param has also been deprecated—use the new `inventoryTracked()` param, instead. Note that the meaning of the boolean param has inverted, as well: when querying for variants with unlimited or untracked inventory, `hasUnlimitedStock(true)` translates to `inventoryTracked(false)`.
+
+## Console Commands
+
+Commerce 5 adds one new [console command](reference/console-commands.md), to help keep catalog pricing up-to-date:
+
+`commerce/pricing-catalog/generate`
+:   Fully regenerates pricing data for all purchasables.
+
 ## API Changes
 
 To support multi-store functionality and the new pricing catalog, there are a number of breaking API changes. Review these and other deprecations in the [changelog](repo:craftcms/commerce/blob/5.0/CHANGELOG.md).
-
-## Controller Actions
-
-…?

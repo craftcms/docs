@@ -389,7 +389,7 @@ Your [database connection settings](reference/config/db.md) are set via the `con
 
 ### URL Rules
 
-You can define custom [URL rules](guide:runtime-routing#url-rules) in `config/routes.php`. See [Routing](routing.md) for more details.
+You can define custom [URL rules](guide:runtime-routing#url-rules) in `config/routes.php`. See [Routing](system/routing.md) for more details.
 
 ### Application Configuration
 

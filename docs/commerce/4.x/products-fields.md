@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/reference/fields'
+updatedVersion: 'commerce/5.x/reference/fields.md'
 ---
 
 # Products Fields
