@@ -14,31 +14,31 @@ Stores’ base [configuration](#settings) lives in [project config](/5.x/system/
 
 ## Mapping Sites to Stores
 
-Commerce assumes you have already configured sites and site groups so that routing and locales make sense for site visitors.
+Commerce assumes you have already configured [sites and site groups](/5.x/system/sites.md) so that routing and locales make sense for site visitors.
 
 ### Primary Store
 
-One store can be marked as primary. Creating a new site adds it to the primary store, by default.
+One store can be designated the _primary_ store. Creating a new site adds it to the primary store, by default.
 
-To change the primary store, visit a non-primary store’s edit screen in <Journey path="Commerce, System Settings, Stores" />, then tick **Make this the primary store**.
+To change the primary store, visit a non-primary store’s edit screen in <Journey path="Commerce, System Settings, Stores" />, then tick **Make this the primary store**. Changing the primary store does _not_ reassign sites to it that used the previous primary store.
 
 ### Templates
 
 In Twig, you can access stores in a few different ways:
 
-1. Use the [global `currentStore` variable](../reference/twig.md#currentstore):
+1. Use the [global `currentStore` variable](../reference/twig.md#currentstore) to get a reference to the store configured for the current site:
 
     ```twig
     {{ currentStore.name }}
     ```
 
-2. Use the current site’s `store` attribute:
+2. Use the current site’s `store` attribute (Commerce makes this available via a [behavior](/5.x/extend/behaviors.md)):
 
     ```twig
     {{ currentSite.name }} — {{ currentSite.store.name }}
     ```
 
-3. Use the `stores` service:
+3. Use the `stores` service to get a specific store by handle:
 
     ```twig
     {# Get the current store: #}
@@ -50,10 +50,10 @@ In Twig, you can access stores in a few different ways:
 
 ## Settings
 
-Stores maintain many of their own settings, but they can share configuration via [environment variables](/5.x/config/README.md#env).
+Stores maintain their own settings, but those settings can be kept in sync via [environment variables](/5.x/config/README.md#env).
 
 ::: tip
-The configured stores also impact how you manage many other aspects of a store, including [locations](inventory.md), [markets](#markets), [currencies](currencies.md), [pricing rules](pricing-rules.md), [shipping](shipping.md), and [tax](tax.md). Most features in the <Journey path="Commerce, Store Management" /> section are handled on a per-store basis.
+The configured stores also impact how you manage many other aspects of your ecommerce platform, including [locations](inventory.md), [markets](#markets), [currencies](currencies.md), [pricing rules](pricing-rules.md), [shipping](shipping.md), and [tax](tax.md). Most features in the <Journey path="Commerce, Store Management" /> section are handled on a per-store basis—look for the store switcher menu at the top of each screen!
 :::
 
 Auto Set New Cart Addresses
