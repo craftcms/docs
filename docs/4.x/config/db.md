@@ -47,11 +47,17 @@ return [
     'password' => App::env('MY_DB_PASSWORD'),
     'schema' => App::env('MY_DB_SCHEMA'),
     'tablePrefix' => App::env('MY_DB_TABLE_PREFIX'),
+    'attributes' => [
+        PDO::MYSQL_ATTR_SSL_CA => '/path/to/my.crt.pem'
+        // ...
+    ],
 ];
 ```
 
 ::: warning
 Finer-grain control of Craft’s database connection is possible by configuring the underlying [`db` application component](./app.md#database). This may be necessary if you have specific security requirements, or your app needs to connect to multiple databases.
+
+Note that if you need to supply custom PDO attributes to your primary database connection, you should do so via the `attributes` key in your `config/db.php` file, not from `config/app.php` while overriding the `db` component.
 :::
 
 ## Supported Settings
