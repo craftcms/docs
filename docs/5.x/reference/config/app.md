@@ -305,6 +305,10 @@ $legacyPosts = (new Query)
 ```
 :::
 
+::: warning
+Note that if you need to supply custom PDO attributes to your primary database connection (for example, setting up an SSL connection to your database), you should do so via the `attributes` key in your `config/db.php` file, not from `config/app.php` while overriding the `db` component.
+:::
+
 ### Log
 
 Check out the [guide on Logging](../logging.md#customizing-logs) for some detailed examples.
