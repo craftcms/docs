@@ -16,6 +16,10 @@ Stores’ base [configuration](#settings) lives in [project config](/5.x/system/
 
 Commerce assumes you have already configured [sites and site groups](/5.x/system/sites.md) so that routing and locales make sense for site visitors.
 
+[Products and variants](products-variants.md) are still edited in the context of a _site_, so translation and propagation settings on [custom fields](/5.x/system/fields.md) work the same as any other multi-site element.
+
+The availability of some options (like tax and shipping categories) depend on which site you are editing a product or variant in, and selections will be consistent across any other sites that use that store. A variant’s pricing is also determined per-store—but its inventory is tracked per [location](inventory.md).
+
 ### Primary Store
 
 One store can be designated the _primary_ store. Creating a new site adds it to the primary store, by default.

@@ -7,8 +7,8 @@ containsGeneratedContent: yes
 
 Your product catalog in Commerce is represented by a pair of [element types](/5.x/system/elements.md).
 
-- [Products](#products) are the top-level container for goods and content.
-- [Variants](#variants) represent individual [purchasable](purchasables.md) goods that are ultimately added to carts.
+- [**Products**](#products) are the top-level container for goods and content.
+- [**Variants**](#variants) represent individual [purchasables](purchasables.md) that are ultimately added to carts.
 
 Every _product_ must have one or more _variants_, and every _variant_ belongs to a single _product_.
 
@@ -89,7 +89,7 @@ Site Settings
 The second tab in a product type’s settings screen is strictly informational—it displays a list of **Shipping Categories** and **Tax Categories** (from the **Store Management** area) that can be selected from _variants_ of current product type.
 
 ::: tip
-Product types are defined globally, but shipping and tax categories are defined per-store.
+Product types are defined globally, but shipping and tax categories are defined per-store. If you have similarly-named categories in multiple stores, you may see them listed twice.
 :::
 
 #### Product Fields
@@ -213,6 +213,28 @@ To fetch the same information with GraphQL, we could write a query like this:
 
 ## Variants
 
-::: tip
-Hey, we’re still consolidating some resources into this section. Come back soon!
-:::
+Variants are [purchasables](purchasables.md), and they represent the individual items that customers will add to their carts as line items—even if a product type is limited to a single variant. A variant is where you’ll control pricing information, tax and shipping settings, inventory, dimensions, and so on.
+
+Commerce gives you a great deal of flexibility in designing your product catalog—but an important consideration early-on is how you want customers to discover goods in your store. Setting aside for a moment single-variant products, variants don’t get their own URLs, and are queried separately from products. Prematurely grouping items into products can make selection difficult for customers, while aggressively _separating_ variations of a single item into products can make differentiating products more difficult for customers.
+
+Consider these tradeoffs when building your catalog—and don’t forget that you have all of Craft’s content and relational tools at your disposal!
+
+### Prices
+
+Every variant has a _price_ and a _promotional price_. Both base prices are defined directly on the variant, but the final price shown to a customer may be determined by other [pricing rules](pricing-rules.md).
+
+Prices are defined for each [store](stores.md) a variant is available in.
+
+### Stock
+
+Commerce tracks inventory at the variant level.
+
+<See path="inventory.md" />
+
+### Tax & Shipping
+
+When creating a variant, you will select its **Tax** and **Shipping Category**.
+
+For a **Tax Category** to be selectable, it must be allowed for the product type that the variant belongs to.
+
+The **Shipping Category** follows similar rules, but the options are defined per-store.

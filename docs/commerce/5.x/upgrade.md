@@ -156,6 +156,17 @@ We expect minimal impact to front-end templates, for most projects. Single-store
 
 A new `currentStore` variable is available in all templates, containing a reference to the <commerce5:craft\commerce\models\Store> for the current _site_.
 
+### Properties & Methods
+
+Some properties and methods have been moved from products to variants (along with their corresponding [query](#queries) methods):
+
+- `craft\commerce\elements\Product::hasUnlimitedStock()` is deprecated. Check each variant’s `inventoryTracked` property, instead:
+    ```twig
+    {% set hasVariantWithUntrackedStock = product.variants.contains('inventoryTracked', true) %}
+    ```
+- `craft\commerce\elements\Variant::getProduct()` has been deprecated in favor of the nested element interface’s `getOwner()` method. `getProduct()` will continue to work throughout the 5.x lifecycle.
+- `craft\commerce\elements\Product::getVariants()` now returns a special type of [collection](/5.x/development/collections.md). See the `hasUnlimitedStock` replacement, above, for an example of how this can be used.
+
 ## Queries
 
 Some [product query](system/products-variants.md#querying-products) params have been moved to _variant_ queries to agree with their shift to the base <commerce5:craft\commerce\base\Purchasable> class, but their accepted arguments remain the same:
@@ -165,7 +176,7 @@ Some [product query](system/products-variants.md#querying-products) params have 
 - `taxCategory()`
 - `taxCategoryId()`
 
-If you are using any of these parameters in product queries, you may need to replace them with `hasVariant()`, and pass a variant query with those params.
+If you are using any of these parameters in product queries, you may need to replace them with `hasVariant()`, and pass a variant query with those params:
 
 ::: code
 ```twig{4} Old
@@ -186,7 +197,7 @@ If you are using any of these parameters in product queries, you may need to rep
 ```
 :::
 
-Variant queries’ `hasUnlimitedStock()` param has also been deprecated—use the new `inventoryTracked()` param, instead. Note that the meaning of the boolean param has inverted, as well: when querying for variants with unlimited or untracked inventory, `hasUnlimitedStock(true)` translates to `inventoryTracked(false)`.
+Variant queries’ `hasUnlimitedStock()` param (inherited from [PurchasableQuery](commerce5:craft\commerce\elements\Purchasable)) has also been deprecated—use the new `inventoryTracked()` param, instead. Note that the meaning of the boolean param has inverted, as well: when querying for variants with “unlimited” or _untracked_ inventory, `hasUnlimitedStock(true)` translates to `inventoryTracked(false)`.
 
 ## Console Commands
 

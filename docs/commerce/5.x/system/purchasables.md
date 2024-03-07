@@ -1,6 +1,8 @@
 # Purchasables
 
-The core of anything sold with Commerce is a purchasable, a custom [element type](/4.x/extend/element-types.md) that can be added to a cart.
+The core of anything sold with Commerce is a _purchasable_, a custom [element type](/4.x/extend/element-types.md) that can be added to a cart.
+
+Commerce ships with two types of purchasables: [variants](products-variants.md#variants) and [donations](donations.md). [Products](products-variants.md) are _not_ purchasables.
 
 ## Purchasables and Line Items
 
