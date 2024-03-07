@@ -41,7 +41,7 @@ Commerce tracks inventory with _locations_. Locations are defined globally, then
 
 To add a location, visit <Journey path="Commerce, Inventory, Locations" />, then click **New location**. Locations have a **Name**, **Handle**, and an address.
 
-When you check the stock of a purchasable, Commerce gets the total inventory across all locations associated with the store. Not all locations have to be associated with a store! If you need to track stock that you don't intend to 
+When you check the stock of a purchasable, Commerce gets the total inventory across all locations associated with the store. Not all locations have to be associated with a store! If you need to track stock that you don’t intend to 
 
 ## Levels
 
