@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/development/making-payments'
+---
+
 # Making Payments
 
 Commerce supports taking payments from the customer at checkout and by a store manager via the Craft control panel. Payments can be [required](#full-payment-at-checkout) for order completion, [deferred](#checkout-without-payment) until later, or made [in parts](#checkout-with-partial-payment), depending on your store’s configuration and [gateway](payment-gateways.md) support.

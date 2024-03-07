@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/upgrade'
+---
+
 # Upgrading to Commerce 4
 
 Commerce 4 brings the power of element types to customers and addresses and incorporates new Craft 4 features.

@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/coupon-codes'
+---
+
 # Coupon Codes
 
 !!!include(docs/.artifacts/commerce/4.x/shared/edition-changes.md)!!!

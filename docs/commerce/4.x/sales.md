@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/sales'
+---
+
 # Sales
 
 Sales allow a store manager with _Manage promotions_ permission to set up conditions for dynamic, promotional product discounts.

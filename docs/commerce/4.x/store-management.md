@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/reference/permissions'
+---
+
 # Store Management
 
 Craft Commerce adds user permissions you can customize in any of your [Craft CMS user groups](/4.x/user-management.md).

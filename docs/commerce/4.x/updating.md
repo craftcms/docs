@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/update'
+---
+
 # Updating Instructions
 
 Craft Commerce may be updated like any other update to [Craft or its plugins](/4.x/updating.md).

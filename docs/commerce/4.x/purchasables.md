@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/purchasables'
+---
+
 # Purchasables
 
 The core of anything sold with Commerce is a purchasable, a custom [element type](/4.x/extend/element-types.md) that can be added to a cart.

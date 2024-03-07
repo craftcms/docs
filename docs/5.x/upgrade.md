@@ -1,5 +1,6 @@
 ---
 sidebarDepth: 2
+description: Take a peek at what’s new in Craft 5.
 ---
 
 # Upgrading from Craft 4

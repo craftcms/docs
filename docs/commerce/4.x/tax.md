@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/tax'
+---
+
 # Tax
 
 Commerce represents taxes for an order using tax categories, tax rates, and tax zones. Each can be configured from the control panel via **Commerce** → **Tax**.

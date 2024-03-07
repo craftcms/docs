@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/transactions'
+---
+
 # Transactions
 
 A transaction is one distinct interaction between Commerce and a payment gateway as a completed order is being charged or refunded.

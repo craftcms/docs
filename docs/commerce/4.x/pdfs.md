@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/pdfs'
+---
+
 # PDFs
 
 Commerce includes the option to create any number of order PDFs that can be downloaded from the control panel or included in [status emails](#emails.md).

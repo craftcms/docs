@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/development/subscription-templates'
+---
+
 # Subscription Templates
 
 Once you’ve familiarized yourself with how [subscriptions](subscriptions.md) work and set up your subscription plans, you’re ready to write some subscription templates.

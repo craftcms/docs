@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/system/discounts'
+---
+
 # Discounts
 
 !!!include(docs/.artifacts/commerce/4.x/shared/edition-changes.md)!!!

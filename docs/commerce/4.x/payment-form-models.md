@@ -1,3 +1,7 @@
+---
+updatedVersion: 'commerce/5.x/development/making-payments'
+---
+
 # Payment Form Models
 
 The payment form model is a special model used to validate payment parameters and pass them on to a payment gateway in a way it expects.
