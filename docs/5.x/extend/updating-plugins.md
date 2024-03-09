@@ -4,6 +4,7 @@ related:
     label: Rector Library
   - uri: https://github.com/craftcms/phpstan
     label: PHPStan Configuration
+sidebarDepth: 2
 ---
 
 # Updating Plugins for Craft 5
@@ -108,25 +109,37 @@ The upgrade process for custom modules is very similar, except that you aren’t
 - [Rector](#rector) can be installed as a direct dependency of your project, and run against the entire `modules/` directory (or wherever your custom modules live).
 - [PHPStan](#phpstan) is also able to scan module directories.
 
-## Content
+---
+
+## New Features
+
+### Bulk Operations
+
+Whenever Craft saves an element, it starts tracking a _bulk save operation_. This allows plugins to act on the final state in a save that may involve multiple elements.
+
+<See path="events.md" hash="bulk-operations" label="Bulk Saving" description="Learn how to respond to multi-element saves." />
+
+## Changes
+
+### Content
 
 Craft 5 has a completely new content storage engine. Plugins that provide element types or field types may require some additional attention.
 
-### Elements
+#### Elements
 
 - Please use unified element editor
 - Content migration
 - Breadcrumbs
 - Actions
+- Chips and Cards (Link)
 
-### Fields
+#### Fields
 
 - Supporting multiple instances, criteria for what makes a reliable multi-instance field
 
+### Controller Actions
 
-## Controller Actions
-
-### Control Panel Screens
+#### Control Panel Screens
 
 In addition to full-page forms and slideouts, you can now send responses that target more compact _modals_.
 
@@ -134,40 +147,32 @@ In addition to full-page forms and slideouts, you can now send responses that ta
 $this->asCpModal()???
 ```
 
-## Services
-
-### Added
-
-### Removed
+### Services
 
 - After globalizing entry types, remaining Section-related functionality from `craft\services\Sections` has moved to `craft\services\Entries`.
 
-## Control Panel Templates
+### Control Panel Templates
 
 Craft now prefers `.twig` over `.html` when loading templates rendered in the control panel. Check your plugin for templates with the same names (aside from the extension) and ensure the correct one is being rendered. This behavior is not customizable by plugins or by the project’s developer.
 
-### Editable Tables
+#### Element Chips + Cards
 
-VueAdminTable, pagination, etc?
+- `elementChip()`
+- `elementCard()`
+- Actions
 
-## Events
+#### Editable Tables
 
-### Changed
+`VueAdminTable`, pagination, etc?
 
-### Deprecated
+### Events
 
 
-## Filesystems
+
+### Filesystems
 
 Asset volumes can now share filesystems, so long as their base paths don’t overlap. If you have any logic that assumes volumes and filesystems are mapped one-to-one, it will need to be updated to account for the possibility that multiple volumes may point to a single filesystem.
 
 You can always get the filesystem for a volume via `craft\models\Volume::getFs()`.
 
-## User Permissions
-
-### Changed Permissions
-
-
-## Templates
-
-- Element chips + cards
+### User Permissions
