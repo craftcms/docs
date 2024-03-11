@@ -110,6 +110,8 @@ Commit changes to your module at the same time as the rest of the Craft 5 upgrad
 
 ## New Features
 
+Let’s start by looking at a few completely new concepts in Craft 5. There are lots of new features associated with existing functionality (like [elements](#elements) and [fields](#field-types)), which we’ll get to in a moment.
+
 ### Bulk Operations
 
 Whenever Craft saves an element, it starts tracking a _bulk save operation_. This allows plugins to act on the final state in a save that _may_ involve multiple elements. If you rely on element save events, consider switching to bulk ops
@@ -118,7 +120,7 @@ Whenever Craft saves an element, it starts tracking a _bulk save operation_. Thi
 
 ### Enums
 
-PHP 8.1 introduced support for [enumeration classes](https://www.php.net/manual/en/language.types.enumerations.php), so we’ve taken the opportunity to extract some constants. See the `craft\enums` namespace for examples. A major version is the perfect time to adopt this in your own plugin.
+PHP 8.1 introduced support for [enumeration classes](https://www.php.net/manual/en/language.types.enumerations.php), so we’ve taken the opportunity to extract some constants. See the `craft\enums` namespace for examples.
 
 ::: tip
 You may define your plugin’s editions this way, but the base plugin class must still return the available edition handles via a static `editions()` method.
@@ -140,31 +142,133 @@ Craft’s internal Composer service remains unchanged. Plugins and other low-lev
 
 ## Changes
 
-### Content
+Craft 5 has a completely new content storage engine, and _a ton_ of new tools for creating rich content authoring experience. Plugins that provide element types or field types may require some additional attention.
 
-Craft 5 has a completely new content storage engine. Plugins that provide element types or field types may require some additional attention.
+### Elements
 
-#### Elements
+#### Content Migration
 
-- Content migration
-- Use unified element editor
-- Breadcrumbs
-- Actions
-- Chips and Cards (Link down)
+If your plugin provides a custom element type, you must include a migration that extends `craft\base\BaseContentRefactorMigration`. In this migration, you are responsible for telling Craft what existing field data (or content table columns) is relevant to a given element. For each field layout that your element type uses, call `$this->updateElements()` with a list of element IDs or a query prepared to fetch the relevant IDs.
 
-#### Fields
+For example, if your elements use a single field layout, your migration would contain only this:
 
-- Supporting multiple instances, criteria for what makes a reliable multi-instance field
+```php
+$this->updateElements(
+    (new Query())->from('{{%widgets}}'),
+    Craft::$app->getFields()->getLayoutByType(Widget::class),
+);
+```
+
+Craft will take care of applying the appropriate `SELECT` to your query. If your element’s custom table uses something other than `id` as its primary key (and `elements` table foreign key), you should pass a list of IDs instead of a query.
+
+When multiple field layouts are represented among your elements (as is the case with Commerce’s product type configuration), you must call `$this->updateElements()` for *each* of them:
+
+```php
+foreach (MyPlugin::getInstance()->getWidgetTypes()->getAllWidgetTypes() as $type) {
+    $this->updateElements(
+        (new Query())
+            ->from('{{%widgets}}')
+            ->where(['typeId' => $type->id]),
+        $type->getFieldLayout(),
+    );
+}
+```
+
+#### Extra Content Tables
+
+Element types that used a custom content table (like our own Matrix implementation did) should remove their `getContentTable()` and `getFieldColumnPrefix()` methods, and remove the `$contentTable` property from their associated `ElementQuery` subclass.
+
+The `hasContent()` method is no longer used, as there is no `content` table to conditionally join—“content” is always loaded from the `elements_sites` table along with the essential element record data.
+
+::: tip
+You should still maintain and `JOIN` any tables that contain your element type’s native properties!
+:::
+
+#### Chips & Cards
+
+Elements’ default representation in the control panel (and *only* representation, prior to 5.0) is now known as a “chip.” We’ve added a second display mode called “cards” that support some additional features.
+
+- `craft\helpers\Cp::elementHtml()` has been deprecated, and should be replaced with `craft\helpers\Cp::elementChipHtml($element, $config)`. Configuration of a chip is handled via a single `$config` array, the keys of which correspond to the legacy arguments’ names.
+- When generating a chip for an input, you must pass the full `name` attribute, including (or omitting) the `[]` suffix for single or multiple element inputs.
+- Chips no longer display a “remove” button. Use `craft\base\Element::EVENT_DEFINE_ACTION_MENU_ITEMS` to add items to the new “action menu.”
+- To modify output of an element chip rendered by an element type you don’t control, listen for the `craft\helpers\Cp::EVENT_DEFINE_ELEMENT_CHIP_HTML` event.
+- Use the new `elementChip()` Twig function to render a chip in your control panel templates.
+
+Both chips and cards support *thumbnails*.
+
+- Implement the static `hasThumbs()` method on your element and return `true` to support chip and card thumbnails.
+- The existing `getThumbHtml()` method is responsible for returning a custom or fixed thumbnail; you are free to omit this and allow thumbnails to be specified by users in your element type’s field layout. [Fields that implement the `ThumbableFieldInterface`](#presentation) are eligible for selection by the user.
+- Previewable fields (those implementing `PreviewableFieldInterface`) may also appear in your elements’ cards.
+- Use the new `elementCard()` Twig function to render a card in your control panel templates.
+- The new `craft\elements\NestedElementManager` class contains logic to render lists of nested element cards.
+
+#### Unified Element Editor
+
+Introduced in Craft 4, the [unified element editor](/4.x/extend/upgrade.md#unified-element-editor) powers full-screen forms as well as slideouts. If you haven’t already, we strongly recommend adopting the unified editor for custom elements.
+
+#### Field Layout Elements
+
+Native attributes for users (like **Email**, **Username**, and **Full Name**) and entries (like **Authors**) are now handled with field layout elements. To provide similar flexibility for your element types, consider moving native attributes out of the sidebar.
+
+#### Nested Elements
+
+> Coming soon!
+
+### Field Types
+
+Plugins that provide field types will need to make some adjustments to properly report their runtime and storage data types:
+
+- The `hasContentColumn()` method is no longer used.
+- Multi-column fields that returned an array of values from `getContentColumnType()` must rename the method to `dbType()` and make it `static`. The return value must remain unchanged.
+- Single-column fields should also switch from `getContentColumnType()` to `dbType()`.
+- Field types that previously returned `false` from `hasContentColumn()` must instead return `null` from the new `dbType()` method.
+- Historically, `valueType()` was used to render accurate type hints in the dynamically-generated `CustomFieldBehavior`; we have renamed this method to `phpType()`, for clarity.
+
+These changes also help support our new [field instance](../system/fields.md#multi-instance-fields) feature.
+
+#### Multi-Instance Fields
+
+Craft handles multi-instance fields for you, at the field layout level.
+
+You can explicitly opt out of multi-instance support by returning `false` from a static `isMultiInstance()` method. By default, Craft treats all field types as multi-instance unless its `dbType()` method returns `null`.
+
+::: tip
+We will provide a console command for users to merge field definitions that are made redundant by multi-instance support.
+:::
+
+#### Presentation
+
+Field types whose content is useful in [element cards](#element-chips-cards) should implement `PreviewableFieldInterface`. In addition to determining whether the field can be displayed in element indexes, previewable fields are now eligible for inclusion in element cards when building field layouts.
+
+::: tip
+Make sure you are returning relevant markup for each context your element appears in!
+:::
+
+Similarly, implementing the `ThumbableFieldInterface` and defining a `getThumbHtml()` method makes a field eligible for use as a [chip or card](#element-chips-cards)’s thumbnail.
+
+#### In-line Editing
+
+Making a field [editable in-line](../system/elements.md#in-line-editing) (in an element index) involves implementing `InlineEditableFieldInterface`, which itself extends `PreviewableFieldInterface`. Not all field types are good candidates for in-line editing—particularly those with complex interfaces, multiple inputs, or that manage long values.
+
+Craft’s `craft\base\Field` class provides baseline support for in-line editing to all subclasses, by recycling the normal `inputHtml()` output.
+
+#### Field Icons
+
+Choose one of the [built-in FontAwesome icons](https://fontawesome.com/search) to represent your field type by implementing the `icon()` method and returning a valid icon handle. These icons are used in the field type selection menu, and in field layout designers.
+
+### Project Config
+
+Changes to Project Config are now safe to make within migrations, even when `allowAdminChanges` is `false`.
+
+When running `php craft up`, Project Config changes originating from migrations are no longer written back out to YAML if there are other pending changes. Our assumption here is that the equivalent changes were already flushed to the YAML files in a different environment, and will be considered unchanged when Craft goes to apply them.
+
+::: tip
+This means it is no longer necessary (or advisable) to compare your plugin’s current and incoming schema versions!
+:::
 
 ### Controller Actions
 
-#### Control Panel Screens
-
-In addition to full-page forms and slideouts, you can now send responses that target more compact _modals_.
-
-```php
-$this->asCpModal()???
-```
+Actions that call `$this->requirePostRequest()` will now throw a `yii\web\MethodNotAllowedHttpException` with an HTTP status code of 405 if a method other than `POST` is used.
 
 ### Services
 
@@ -178,7 +282,10 @@ Craft now prefers `.twig` over `.html` when loading templates rendered in the co
 
 - `elementChip()`
 - `elementCard()`
-- Actions
+
+#### Element Actions
+
+#### Breadcrumbs
 
 #### Editable Tables
 
