@@ -11,7 +11,7 @@ sidebarDepth: 2
 
 Craft 5 brings some of the most significant author- and developer-experience improvements _ever_—and in a way that is minimally disruptive to plugins.
 
-The [changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md) is the most comprehensive and up-to-date list of added, altered, deprecated, and removed APIs. This guide focuses on high-level changes, organized by the features they impact.
+The [changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md) is the most comprehensive and up-to-date list of added, changed, deprecated, and removed APIs. This guide focuses on high-level changes, organized by the features they impact.
 
 ::: tip
 Report issues with the upgrade guide in our [`craftcms/docs` repo](https://github.com/craftcms/docs/issues/new), and issues with the upgrade itself in the [`craftcms/cms` repo](https://github.com/craftcms/cms/issues/new?labels=bug%2Ccraft5&projects=&template=BUG-REPORT-V5.yml&title=%5B5.x%5D%3A+).
@@ -27,16 +27,16 @@ Updating a plugin for Craft 5 starts with a fully-updated Craft 4 installation. 
 
 Once your environment is set up, this is what the process will look like:
 
-1. Run [PHPStan](#phpstan) to address any issues with the latest version of your plugin, in Craft 4.
+1. Run [PHPStan](#phpstan) to address any outstanding issues with the latest version of your plugin, in Craft 4.
 1. Make the recommended changes, commit the results, and tag a new release on the _current_ version.
-1. Run the Craft 5 [Rector ruleset](#rector).
+1. Run the Craft 5 [Rector ruleset](#rector) on your plugin.
 1. Update the `craftcms/cms` requirement in the root Craft project _and_ in your plugin’s `composer.json` to `^5.0.0-beta.1`, then run `composer update`.
 1. Run `php craft up` to perform the Craft upgrade.
 
-At this point, your project should be functional again! Go ahead and kick the tires—then come back here and review changes that may impact your plugin.
+At this point, your project _should_ be functional again! Go ahead and kick the tires—then come back here and review changes that may impact your plugin. If the project is still failing to bootstrap, it is likely due to incompatible API changes that Rector couldn’t address on its own.
 
 ::: tip
-The next few sections cover these steps (and some other procedural concerns). Skip down to [content](#content) if you’re ready to dig in.
+The next few sections cover these steps (and some other procedural concerns). Skip down to [new features](#new-features) if you’re ready to dig in.
 :::
 
 ### PHPStan
@@ -59,7 +59,7 @@ Large plugins may benefit from the `--memory-limit 1G` flag.
 
 Our [Rector](https://github.com/craftcms/rector) rule set for Craft 5 automates most signature changes, deprecations, and other one-for-one replacements in your codebase. With your plugin running in Craft 4, follow these steps:
 
-1. Install Rector.
+1. Install Rector:
 
     Rule-sets are not “versioned” in the traditional sense; instead, each major version is kept in a separate file. As such, its use depends on a couple of Composer settings:
 
@@ -86,17 +86,13 @@ Our [Rector](https://github.com/craftcms/rector) rule set for Craft 5 automates 
 
 ### Versioning
 
-It’s best to update an existing plugin for Craft 5 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path. This is the first Craft update that—for some plugins—may only require an incremental release.
-
-We anticipate most developers will choose to release a new major version of their plugin that requires Craft 5, though all Craft and the Plugin Store look at for compatibility is what’s required by `composer.json`.
-
-::: tip
-Craft 5 is the first major release that does not require breaking changes in all plugins. This means that plugins that don’t immediately use new features or APIs (and aren’t using any deprecated APIs) can tag a compatibility-only “point” release.
+Craft 5 is the first major release that may not require breaking changes for all plugins. This means that plugins that don’t immediately take advantage of new features or APIs (and aren’t affected by any currently-deprecated APIs) can tag a compatibility-only “point” release.
 
 If you are uncertain whether your plugin will use new features, we recommend tagging a new major version, and back-porting any features and bugfixes.
-:::
 
-You’ll need to explicitly state support for each major Craft version. Any `craftcms/cms` constraint beginning with `>=` will be treated as `^`. If a single version of your plugin supports Craft 4 _and_ 5, you’ll need to use an “or” constraint for your `craftcms/cms` requirement, like `^4.0|^5.0`.
+We anticipate most developers will choose to release a new major version of their plugin that requires Craft 5. However, Craft and the Plugin Store only look at what is required by `composer.json` to determine major-version compatibility.
+
+Either way, you must explicitly declare support for each major Craft version. If a single version of your plugin supports both Craft 4 _and_ 5, you’ll need to use an “or” constraint for your `craftcms/cms` requirement, like `^4.0|^5.0`. Any `craftcms/cms` constraint beginning with `>=` will be treated as `^`.
 
 ::: warning
 Keep in mind that all versions of PHP 7 are [end-of-life](https://www.php.net/supported-versions.php). Your plugin does _not_ need to support PHP 7 in order to be compatible with Craft 4.
@@ -106,8 +102,9 @@ Keep in mind that all versions of PHP 7 are [end-of-life](https://www.php.net/su
 
 The upgrade process for custom modules is very similar, except that you aren’t responsible for versioning.
 
-- [Rector](#rector) can be installed as a direct dependency of your project, and run against the entire `modules/` directory (or wherever your custom modules live).
-- [PHPStan](#phpstan) is also able to scan module directories.
+[Rector](#rector) and [PHPStan](#phpstan) can be installed as a direct dependency of your project, and run against the entire `modules/` directory (or wherever your custom modules live), or one module at a time.
+
+Commit changes to your module at the same time as the rest of the Craft 5 upgrade. We recommend tracking these changes in a separate branch.
 
 ---
 
@@ -115,9 +112,31 @@ The upgrade process for custom modules is very similar, except that you aren’t
 
 ### Bulk Operations
 
-Whenever Craft saves an element, it starts tracking a _bulk save operation_. This allows plugins to act on the final state in a save that may involve multiple elements.
+Whenever Craft saves an element, it starts tracking a _bulk save operation_. This allows plugins to act on the final state in a save that _may_ involve multiple elements. If you rely on element save events, consider switching to bulk ops
 
 <See path="events.md" hash="bulk-operations" label="Bulk Saving" description="Learn how to respond to multi-element saves." />
+
+### Enums
+
+PHP 8.1 introduced support for [enumeration classes](https://www.php.net/manual/en/language.types.enumerations.php), so we’ve taken the opportunity to extract some constants. See the `craft\enums` namespace for examples. A major version is the perfect time to adopt this in your own plugin.
+
+::: tip
+You may define your plugin’s editions this way, but the base plugin class must still return the available edition handles via a static `editions()` method.
+:::
+
+### Database Character Sets
+
+Craft now creates database tables using the `uft8mb4` character set (and `utf8mb4_0900_ai_ci` or `utf8mb4_unicode_ci` collation, on MySQL) by default. Developers are asked during the [upgrade process](../upgrade.md#database-character-set-and-collation) to convert existing tables with inconsistent encoding, so it will generally be safe to save emoji and other multibyte characters directly to the database.
+
+Calls to `craft\helpers\StringHelper::emojiToShortcodes($string)` and `craft\helpers\StringHelper::shortcodesToEmoji($string)` are no longer strictly necessary; if you are supporting Craft 4 and 5, consider calling `craft\db\Connection::getSupportsMb4()` to pack and unpack strings when saving and loading.
+
+### Composer
+
+A copy of `composer.phar` is included in `craftcms/cms`, so the `composer/composer` package has been dropped as a dependency.
+
+Craft’s internal Composer service remains unchanged. Plugins and other low-level extensions that use the Composer PHP API _directly_ must `require` it. This change does _not_ impact how your plugin is installed by an end-user!
+
+---
 
 ## Changes
 
@@ -127,11 +146,11 @@ Craft 5 has a completely new content storage engine. Plugins that provide elemen
 
 #### Elements
 
-- Please use unified element editor
 - Content migration
+- Use unified element editor
 - Breadcrumbs
 - Actions
-- Chips and Cards (Link)
+- Chips and Cards (Link down)
 
 #### Fields
 
