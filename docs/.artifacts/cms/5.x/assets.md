@@ -36,7 +36,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [kind](#kind)                               | Narrows the query results based on the assets’ file kinds.
 | [limit](#limit)                             | Determines the number of assets that should be returned.
 | [offset](#offset)                           | Determines how many assets should be skipped in the results.
-| [orderBy](#orderby)                         | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [orderBy](#orderby)                         | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
 | [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
@@ -690,7 +690,8 @@ $assets = \craft\elements\Asset::find()
 
 #### `orderBy`
 
-Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
+Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC,
+    elements.id`.)
 
 
 

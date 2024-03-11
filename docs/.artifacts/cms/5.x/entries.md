@@ -50,7 +50,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [limit](#limit)                             | Determines the number of entries that should be returned.
 | [nextSiblingOf](#nextsiblingof)             | Narrows the query results to only the entry that comes immediately after another entry in its structure.
 | [offset](#offset)                           | Determines how many entries should be skipped in the results.
-| [orderBy](#orderby)                         | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+| [orderBy](#orderby)                         | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 | [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the entries, per the owners’ IDs.
 | [positionedAfter](#positionedafter)         | Narrows the query results to only entries that are positioned after another entry in its structure.
@@ -1130,7 +1130,8 @@ $entries = \craft\elements\Entry::find()
 
 #### `orderBy`
 
-Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC,
+    elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 
 
 

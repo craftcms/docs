@@ -42,7 +42,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [limit](#limit)                             | Determines the number of addresses that should be returned.
 | [locality](#locality)                       | Narrows the query results based on the locality the addresses belong to.
 | [offset](#offset)                           | Determines how many addresses should be skipped in the results.
-| [orderBy](#orderby)                         | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [orderBy](#orderby)                         | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [organization](#organization)               | Narrows the query results based on the organization the addresses have.
 | [organizationTaxId](#organizationtaxid)     | Narrows the query results based on the tax ID the addresses have.
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) parameter based on a given owner element.
@@ -832,7 +832,8 @@ $addresses = \craft\elements\Address::find()
 
 #### `orderBy`
 
-Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC`.)
+Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC,
+    elements.id`.)
 
 
 
