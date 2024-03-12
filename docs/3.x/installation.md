@@ -13,7 +13,7 @@ You should be running Composer 1.3.0 or later. You can find out your installed v
 To create a new Craft project, run this command (substituting `path/to/my-project` with the path where Composer should create the project):
 
 ```bash
-composer create-project craftcms/craft=^1 path/to/my/project
+composer create-project craftcms/craft=^3 path/to/my/project
 ```
 
 Composer will take a few minutes to load everything. Once it’s done you’ll see a success message:
