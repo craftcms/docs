@@ -210,9 +210,87 @@ Introduced in Craft 4, the [unified element editor](/4.x/extend/upgrade.md#unifi
 
 Native attributes for users (like **Email**, **Username**, and **Full Name**) and entries (like **Authors**) are now handled with field layout elements. To provide similar flexibility for your element types, consider moving native attributes out of the sidebar.
 
+#### Element Actions
+
+Elements now have a dedicated “actions” menu that consolidates common functions like viewing and editing.
+
+::: tip
+Action menus are a separate concept from [element index actions](element-types.md#actions). Action menu items are only expected to operate on a single element at a time.
+:::
+
+- The schema of these action menu items must conform with the expectations of `craft\helpers\Cp::disclosureMenu()`.
+- `craft\base\Element` takes care of many element-type-agnostic actions. You may return additional “safe” actions from a `safeActionMenuItems()` method, and destructive actions from a `destructiveActionMenuItems()` method. Only safe items are displayed when rendering chips.
+- To add or alter actions for an element type you don’t own, listen for its `EVENT_DEFINE_ACTION_MENU_ITEMS` event. This is emitted a single time, and 
+- Action menu items that rely on Javascript should use a temporary unique ID to tie the final markup to scripts:
+
+    ```php
+    $alertId = sprintf('action-alert-title-%s', mt_rand());
+    $items[] = [
+        'type' => MenuItemType::Button,
+        'id' => $alertId,
+        'icon' => 'alert',
+        'label' => Craft::t('my-plugin', 'Show {type} title', [
+            'type' => static::lowerDisplayName(),
+        ]),
+    ];
+    
+    $view = Craft::$app->getView();
+    $view->registerJsWithVars(fn($id, $title) => <<<JS
+    $('#' + $id).on('click', () => {
+      alert($title);
+    });
+    JS, [$alertId, $this->title]);
+    ```
+
+See `craft\enums\MenuItemType` for the allowed `type` values, and `craft\helpers\Cp::disclosureMenu()` for information about the required properties for each. If no `type` is passed, Craft will automatically set it based on what combination of other properties are available.
+
+#### Breadcrumbs
+
+In addition to action menus, elements can provide custom [breadcrumbs for full-screen control panel views](#breadcrumbs-1) via the new `crumbs()` method:
+
+```php
+public function crumbs(): array
+{
+    $crumbs = [];
+    $type = $this->getWidgetType();
+
+    // Add root widgets source:
+    $crumbs[] = [
+      'label' => Craft::t('my-plugin', 'Widgets'),
+      'url' => 'widgets',
+    ];
+
+    // Gather other widget types and generate a disclosure-menu-compatible list:
+    $allTypes = Collection::make(Craft::$app->getEntries()->getEditableSections());
+    $typeOptions = $allTypes->map(fn(WidgetType $wt) => [
+        'label' => Craft::t('site', $wt->name),
+        'url' => "entries/$wt->handle",
+        // Is this the current type?
+        'selected' => $wt->id === $type->id,
+    ]);
+
+    // Add this widget type’s source, with a switcher for other widget type indexes:
+    $crumbs[] = [
+        // Note that we don’t need a top-level label or URL—Craft uses the `selected` menu item!
+        'menu' => [
+          'label' => Craft::t('my-plugin', 'Select widget type'),
+          'items' => $typeOptions,
+        ],
+    ];
+
+    return $crumbs;
+}
+```
+
+This example draws from our own use of breadcrumbs in entries—authors can navigate laterally to other sections from any entry’s edit screen.
+
+::: tip
+Nested elements automatically prepend their owner’s breadcrumbs.
+:::
+
 #### Nested Elements
 
-> Coming soon!
+_We’re still working on this section! Check out the [Matrix field’s implementation](repo:craftcms/cms/blob/5.0/src/fields/Matrix.php), if you’re curious how we’re using the new `craft\elements\NestedElementManager` class._
 
 ### Field Types
 
@@ -266,9 +344,32 @@ When running `php craft up`, Project Config changes originating from migrations 
 This means it is no longer necessary (or advisable) to compare your plugin’s current and incoming schema versions!
 :::
 
-### Controller Actions
+### Entrification
+
+Matrix blocks are now entries! The [entrification](https://craftcms.com/blog/entrification) process will conclude in Craft 6, so we recommend plugins begin offering a clean migration path for any features they provide exclusively to categories and tags.
+
+- If your plugin uses references to categories or tags, consider making the selectable targets *entries*. When Craft entrifies category and tag groups, the element IDs stay the same (even preserving foreign keys in the database)—so in many cases, this is only a matter of changing the element type of the selection UI and updating any validation rules on your models.
+- Changes to the sidebar or `meta` region of the element edit screen are often better suited as [field layout elements](#field-layout-elements). You can mark field layout elements as `mandatory` so that they will be included in field layouts even if the developer has not explicitly added them.
+- Plugins that reference Matrix block “types” should be updated to operate on entry types, instead.
+
+### Controllers
 
 Actions that call `$this->requirePostRequest()` will now throw a `yii\web\MethodNotAllowedHttpException` with an HTTP status code of 405 if a method other than `POST` is used.
+
+Controllers can define action menus for any CP screen they return, by calling `CpScreenResponseBehavior::actionMenuItems()`. `CpScreenResponseBehavior::contextMenuHtml()` and `CpScreenResponseBehavior::contextMenuTemplate()` are no longer used.
+
+#### Modals
+
+To complement our abstraction of control panel “screens” via `craft\web\CpScreenResponseBehavior`, Craft 5 adds `craft\web\CpModalResponseBehavior` for views that target more compact modals. Modals have a similar API as screens, but with reduced scope.
+
+Send a modal response using `$this->asCpModal()`:
+
+```php
+return $this->asCpModal()
+    ->action('my-plugin/emails/send')
+    ->contentTemplate('my-plugin/emails/transactional-body', $params)
+    ->submitButtonLabel(Craft::t('my-plugin', 'Send'));
+```
 
 ### Services
 
@@ -277,13 +378,6 @@ Actions that call `$this->requirePostRequest()` will now throw a `yii\web\Method
 ### Control Panel Templates
 
 Craft now prefers `.twig` over `.html` when loading templates rendered in the control panel. Check your plugin for templates with the same names (aside from the extension) and ensure the correct one is being rendered. This behavior is not customizable by plugins or by the project’s developer.
-
-#### Element Chips + Cards
-
-- `elementChip()`
-- `elementCard()`
-
-#### Element Actions
 
 #### Breadcrumbs
 
