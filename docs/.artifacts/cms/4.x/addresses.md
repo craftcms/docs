@@ -23,7 +23,7 @@
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [limit](#limit)                           | Determines the number of addresses that should be returned.
 | [offset](#offset)                         | Determines how many addresses should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [orderBy](#orderby)                       | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [owner](#owner)                           | Sets the [ownerId](#ownerid) parameter based on a given owner element.
 | [ownerId](#ownerid)                       | Narrows the query results based on the addresses’ owner elements, per their IDs.
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -428,7 +428,8 @@ $addresses = \craft\elements\Address::find()
 
 #### `orderBy`
 
-Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC`.)
+Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC,
+    elements.id`.)
 
 
 

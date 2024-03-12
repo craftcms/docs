@@ -29,7 +29,7 @@
 | [kind](#kind)                             | Narrows the query results based on the assets’ file kinds.
 | [limit](#limit)                           | Determines the number of assets that should be returned.
 | [offset](#offset)                         | Determines how many assets should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [orderBy](#orderby)                       | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.
@@ -643,7 +643,8 @@ $assets = \craft\elements\Asset::find()
 
 #### `orderBy`
 
-Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC`.)
+Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC,
+    elements.id`.)
 
 
 
