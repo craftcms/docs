@@ -412,13 +412,128 @@ Craft now prefers `.twig` over `.html` when loading templates rendered in the co
 
 #### Breadcrumbs
 
-#### Editable Tables
+We saw an example of how the new breadcrumbs system works, in the context of elements—but breadcrumbs are supported on any control panel screen.
 
-`VueAdminTable`, pagination, etc?
+In a controller, you can set and add breadcrumbs after building a response with the `asCpScreen()` method:
+
+```php
+return $this->asCpScreen()
+    ->title(Craft::t('my-plugin', 'Edit {type}', ['type' => $type->name]))
+    // ...
+    ->crumbs([
+        [
+            'menu' => [
+                'label' => Craft::t('my-plugin', 'Select settings screen'),
+                'items' => [
+                    [
+                        'label' => Craft::t('my-plugin', 'Widget Types'),
+                        'url' => 'settings/acme/widget-types',
+                        'selected' => true,
+                    ],
+                    [
+                        'label' => Craft::t('my-plugin', 'Security Clearances'),
+                        'url' => 'settings/acme/security',
+                    ],
+                    [
+                        'label' => Craft::t('my-plugin', 'Project Statuses'),
+                        'url' => 'settings/acme/statuses',
+                    ],
+                ],
+            ],
+        ],
+        [
+            'menu' => [
+              'label' => Craft::t('my-plugin', 'ACME Lab Settings'),
+              'url' => 'settings/acme',
+            ],
+        ]
+    ]);
+```
+
+The supported “schema” for crumbs is available on `craft\web\CpScreenResponseBehavior::crumbs()`. 
+
+::: warning
+Breadcrumbs are _not_ rendered for slideouts or modals. If you need an action or link to be available to slideouts as well, consider using `CpScreenResponseBehavior::actionMenuItems()`.
+:::
+
+#### Non-Element Tables
+
+`Craft.VueAdminTable` has received some significant updates. Instead of passing data directly to the component via Twig, you can set a `tableDataEndpoint` to fetch the data over Ajax:
+
+```js{14}
+new Craft.VueAdminTable({
+  buttons: [
+    {
+      label: Craft.t('my-plugins', 'New Project Status'),
+      href: Craft.getCpUrl('settings/acme/statuses/new'),
+      icon: 'plus',
+    }
+  ],
+  columns: statusColumns,
+  container: '#project-statuses-vue-admin-table',
+  emptyMessage: Craft.t('my-plugin', 'No statuses exist yet.'),
+  padded: true,
+  perPage: 10,
+  tableDataEndpoint: Craft.getActionUrl('acme/project-statuses'),
+  search: true,
+  searchPlaceholder: Craft.t('my-plugin', 'Search statuses')
+});
+```
+
+Your JSON response should include two keys: `pagination` and `data`. Each item in the `data` array must have keys that correspond to the `columns` declared when setting up the `VueAdminTable` instance:
+
+```php
+use craft\helpers\AdminTable;
+
+return $this->asSuccess(data: [
+    'pagination' => AdminTable::paginationLinks($page, $total, $limit),
+    'data' => [],
+]);
+```
+
+Column labels and content are largely up to you, but there are a couple of handy features that make tables feel consistent. In the constructor above, `statusColumns` would look something like this:
+
+```js
+const statusColumns = [
+  { name: '__slot:title', title: Craft.t('my-plugin', 'Status Label'), sortField: 'name' },
+  { name: 'description', title: Craft.t('my-plugin', 'Description') },
+  // ...
+];
+```
+
+`__slot:title` is a special designation for the first column, which combines multiple row attributes into a familiar link-with-status-pip representation of the record. Sending `title`, `url`, `icon`, `iconColor`, and `status` keys for each row will construct visually rich previews, a la the entry types screen:
+
+![VueAdminTable component example](../images/vue-admin-table.png "Example of a VueAdminTable component with URLs, icons, and icon colors defined in the response.")
+
+A `sortField` key in a column should correspond with a property that your controller understands; the component automatically appends `page`, `sort`, `per_page`, and `search` params, allowing the back-end to authoritatively sort, paginate, and filter results.
+
+::: tip
+“Search” for non-element records is not natively supported, so it’s up to you to decide how to honor a search phrase, in the database.
+
+[Client-side searching](https://github.com/craftcms/cms/pull/14126) is also supported.
+:::
 
 ### Events
 
+#### Utilities
 
+The `craft\services\Utilities::EVENT_REGISTER_UTILITY_TYPES` constant has been renamed `EVENT_REGISTER_UTILITIES` to agree with our other uses of “component types.” Plugins that register utilities will need to listen for this new event name.
+
+#### Element Indexes
+
+The event constant for customizing element table attribute output has been renamed from `craft\base\Element::EVENT_SET_TABLE_ATTRIBUTE_HTML` to `EVENT_DEFINE_ATTRIBUTE_HTML` to agree with other events that allow post-processing of HTML.
+
+#### Condition Builder
+
+The `craft\base\conditions\BaseCondition::EVENT_REGISTER_CONDITION_RULE_TYPES` constant has been renamed to `EVENT_REGISTER_CONDITION_RULES` to agree with our other users of “component types.”
+
+#### Mailer
+
+The event for registering mail transport adapters has been renamed from `craft\helpers\MailerHelper\EVENT_REGISTER_MAILER_TRANSPORT_TYPES` to `EVENT_REGISTER_MAILER_TRANSPORTS`.
+
+#### Users
+
+The user-specific `craft\controllers\UsersController::EVENT_REGISTER_USER_ACTIONS` has been removed. Use the generic `craft\base\Element::EVENT_DEFINE_ACTION_MENU_ITEMS`, instead. See [element actions](#element-actions) above, for more information.
 
 ### Filesystems
 
@@ -426,4 +541,14 @@ Asset volumes can now share filesystems, so long as their base paths don’t ove
 
 You can always get the filesystem for a volume via `craft\models\Volume::getFs()`.
 
-### User Permissions
+## Removed
+
+### Matrix Blocks
+
+Matrix blocks are now [nested entries](#nested-elements). As such, most of the supporting functionality has been removed or consolidated into either `craft\base\Element` or `craft\elements\Entry`. Familiar methods like `getOwner()` are defined by `craft\base\NestedElementInterface`, while `getType()` calls are naturally handled by the new entry elements.
+
+If you are using `craft\models\MatrixBlockType` in any type signatures, it should _probably_ be replaced by `craft\models\EntryType`. The APIs for these two models are not entirely compatible, so be aware that down-stream changes are likely necessary.
+
+### Field Groups
+
+By adding support for [multi-instance fields](#multi-instance-fields) and [searchable admin tables](), the need for field groups is diminished. Relevant methods on the `Fields` service (as well as field group events, the database table, and any foreign keys that pointed to it) have been removed.
