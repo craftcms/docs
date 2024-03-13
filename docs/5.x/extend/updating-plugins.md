@@ -112,6 +112,37 @@ Commit changes to your module at the same time as the rest of the Craft 5 upgrad
 
 Let’s start by looking at a few completely new concepts in Craft 5. There are lots of new features associated with existing functionality (like [elements](#elements) and [fields](#field-types)), which we’ll get to in a moment.
 
+### Authentication
+
+Multi-factor authentication is now available for control panel users. Craft ships with two `craft\auth\methods\AuthMethodInterface` implementations:
+
+- `craft\auth\methods\RecoveryCodes`: Generates, stores, and invalidates a series of 10 one-time-use codes.
+- `craft\auth\methods\TOTP`: Sets up and and validates time-based, one-time-use passwords.
+
+Both methods extend `craft\auth\methods\BaseAuthMethod`. Registered auth methods are always instantiated in the context of a single user:
+
+```php
+use craft\events\RegisterComponentTypesEvent;
+use craft\services\Auth;
+use yii\base\Event;
+
+Event::on(
+    Auth::class,
+    Auth::EVENT_REGISTER_METHODS,
+    function(RegisterComponentTypesEvent $e) {
+        $e->types[] = EmailVerification::class;
+    },
+);
+```
+
+Custom authorization methods are responsible for storing their own data and associating it with users—return `true` from `isActive()` once the user has completed any required setup so Craft knows to enforce it during login.
+
+If your `verify()` method returns `true`, the user will move on to their next configured auth method—but it’s your responsibility to call `craft\services\Auth::verify()` from a controller, passing in any context required to satisfy the method.
+
+::: tip
+See `AuthMethodInterface::getAuthFormHtml()` for complete info on procedural requirements!
+:::
+
 ### Bulk Operations
 
 Whenever Craft saves an element, it starts tracking a _bulk save operation_. This allows plugins to act on the final state in a save that _may_ involve multiple elements. If you rely on element save events, consider switching to bulk ops
@@ -242,7 +273,7 @@ Action menus are a separate concept from [element index actions](element-types.m
     JS, [$alertId, $this->title]);
     ```
 
-See `craft\enums\MenuItemType` for the allowed `type` values, and `craft\helpers\Cp::disclosureMenu()` for information about the required properties for each. If no `type` is passed, Craft will automatically set it based on what combination of other properties are available.
+See `craft\enums\MenuItemType` for the allowed `type` values, and `craft\helpers\Cp::menuItem()` for information about the required properties for each. If no `type` is passed, Craft will automatically set it based on what combination of other properties are available.
 
 #### Breadcrumbs
 
