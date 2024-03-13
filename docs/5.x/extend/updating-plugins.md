@@ -2,876 +2,553 @@
 related:
   - uri: https://github.com/craftcms/rector
     label: Rector Library
+  - uri: https://github.com/craftcms/phpstan
+    label: PHPStan Configuration
+sidebarDepth: 2
 ---
 
 # Updating Plugins for Craft 5
 
-While [the changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md) is the most comprehensive list of changes, this guide provides high-level overview and organizes changes by category.
+Craft 5 brings some of the most significant author- and developer-experience improvements _ever_—and in a way that is minimally disruptive to plugins.
+
+The [changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md) is the most comprehensive and up-to-date list of added, changed, deprecated, and removed APIs. This guide focuses on high-level changes, organized by the features they impact.
 
 ::: tip
-If you think something is missing, please [create an issue](https://github.com/craftcms/docs/issues/new).
+Report issues with the upgrade guide in our [`craftcms/docs` repo](https://github.com/craftcms/docs/issues/new), and issues with the upgrade itself in the [`craftcms/cms` repo](https://github.com/craftcms/cms/issues/new?labels=bug%2Ccraft5&projects=&template=BUG-REPORT-V5.yml&title=%5B5.x%5D%3A+).
 :::
 
-## High Level Notes
+## Overview
 
-The majority of work updating plugins for Craft 4 will be adding type declarations throughout the code. We’ve released a [Rector package](#rector) that can handle most of that work for you.
+Be sure and fully review this page (and the [changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md)) before getting started, taking note of features that are apt to impact your plugin.
 
-Custom volume types will need to be updated, as will anything deprecated in Craft 3 that’s been completely removed in Craft 4.
+## Process
 
-Some events, permissions, and controller actions have changed largely in support of new features you may want to take advantage of:
+Updating a plugin for Craft 5 starts with a fully-updated Craft 4 installation. See our guide on [loading your plugin into a Craft project](plugin-guide.md#loading-your-plugin-into-a-craft-project) to get up-and-running.
 
-- A [unified element editor](#unified-element-editor)
-- The condition builder, which is integral to conditional fields, custom sources, and dynamically-controlled relations
-- Inactive users, which allow user element types to be used more broadly
-- More flexible volumes with [Filesystems](#filesystems) and extensible asset transforms via [Image Transforms and Transformers](#image-transforms-and-transformers)
+Once your environment is set up, this is what the process will look like:
 
-### Plugin Store Considerations
+1. Run [PHPStan](#phpstan) to address any outstanding issues with the latest version of your plugin, in Craft 4.
+1. Make the recommended changes, commit the results, and tag a new release on the _current_ version.
+1. Run the Craft 5 [Rector ruleset](#rector) on your plugin.
+1. Update the `craftcms/cms` requirement in the root Craft project _and_ in your plugin’s `composer.json` to `^5.0.0-beta.1`, then run `composer update`.
+1. Run `php craft up` to perform the Craft upgrade.
 
-It’s best to update an existing plugin for Craft 4 rather than creating a new one with its own handle. A separate plugin complicates the developer experience, licensing, and migration path.
+At this point, your project _should_ be functional again! Go ahead and kick the tires—then come back here and review changes that may impact your plugin. If the project is still failing to bootstrap, it is likely due to incompatible API changes that Rector couldn’t address on its own.
 
-We anticipate most developers will choose to release a new major version of their plugin that requires Craft 4, though all Craft and the Plugin Store look at for compatibility is what’s required by `composer.json`.
+::: tip
+The next few sections cover these steps (and some other procedural concerns). Skip down to [new features](#new-features) if you’re ready to dig in.
+:::
 
-You’ll need to explicitly state support for each major Craft version. Any `craftcms/cms` constraint beginning with `>=` will be treated as `^`. If your plugin supports Craft 3 and 4, for example, you’ll need to set your `craftcms/cms` constraint to `^3.0|^4.0` rather than `>=3.0`.
+### PHPStan
 
-While it’s not required, we also recommend setting a `php` constraint to clarify expectations and carefully manage any breaking changes. A Craft 3 plugin with support for PHP 7 and PHP 8, for example, might look like this:
+We use [PHPStan](https://github.com/phpstan/phpstan) on Craft CMS, Craft Commerce, and most of our first-party plugins to continually audit code quality and consistency.
 
-```json
-  "require": {
-    "php": "^7.2.5|^8.0"
-  }
+While there’s no _requirement_ that you use PHPStan, we encourage all developers to join us—with the upgrade process being a perfect opportunity to integrate code quality tools into your workflow.
+
+Follow the instructions in our [PHPStan package](https://github.com/craftcms/phpstan) to add it as a development dependency of your plugin. You should end up with a `phpstan.neon` config file in your _plugin_ repository’s root; then go back to the Craft project root, and run:
+
+```bash
+vendor/bin/phpstan -c path/to/plugin/phpstan.neon
 ```
 
-If the Craft 4 version adds support for (not yet released) PHP 9, it would look like this:
+::: tip
+Large plugins may benefit from the `--memory-limit 1G` flag.
+:::
 
-```json
-  "require": {
-    "php": "^8.0.2|^9.0"
-  }
-```
+### Rector
 
-### Improving Code Quality
+Our [Rector](https://github.com/craftcms/rector) rule set for Craft 5 automates most signature changes, deprecations, and other one-for-one replacements in your codebase. With your plugin running in Craft 4, follow these steps:
 
-We’ve added [PHPStan](https://github.com/phpstan/phpstan) and [ECS](https://github.com/symplify/easy-coding-standard) configurations to Craft CMS, Craft Commerce, and a growing number of first-party plugins to improve our code quality and consistency.
+1. Install Rector:
 
-While there’s no requirement that you use these tools, we encourage all developers to join us—with this upgrade process being a timely opportunity to integrate code quality tools into your workflow.
-
-If you decide to use PHPStan and/or ECS, we recommend doing it in the following order:
-
-1. Run PHPStan on your existing Craft 3 codebase and apply the greatest level of fixes you’re comfortable with.
-2. Run Craft’s [Rector](#rector) rules to prep a bunch of your code for Craft 4.
-3. Update your `craftcms/cms` requirement to `^4.0.0` and run `composer update`.
-4. Run PHPStan again to identify issues and opportunities specifically related to Craft 4 changes.
-
-## Rector
-
-Craft’s [Rector](https://github.com/craftcms/rector) rules can save you time by adding type declarations and replacing or renaming properties and methods throughout your code. It’s important to do things in the right order so you can run Rector _once_, then perform manual updates.
-
-1. Start with your plugin running on the latest version of Craft 4.
-1. Install Rector according to the readme.  
-    Our rule-sets are not “versioned” in the traditional sense; instead, each major version is kept in a separate file.
+    Rule-sets are not “versioned” in the traditional sense; instead, each major version is kept in a separate file. As such, its use depends on a couple of Composer settings:
 
     ```
     composer config minimum-stability dev
-    ```
-
-    ```
     composer config prefer-stable true
     ```
+
+    Require the package, using the `dev-main` version constraint. The `main` branch will be cloned, and subsequent `composer update` commands will pull any changes.
 
     ```
     composer require craftcms/rector:dev-main --dev
     ```
 
+1. Run the Craft 5 ruleset:
+
     ```
-    vendor/bin/rector process src --config vendor/craftcms/rector/sets/craft-cms-50.php
+    vendor/bin/rector process my-local-plugin/src --config vendor/craftcms/rector/sets/craft-cms-50.php
     ```
 
-    Your code should have type declarations added throughout that are compatible with Craft 5, but it may no longer work with Craft 4.
+    ::: warning
+    Rector may make your plugin incompatible with Craft 4, which can prevent the system from initializing. This is fine! It’s safe to continue upgrading the project.
+    :::
 
-3. Update your `composer.json` requirement to `"craftcms/cms": "^5.0.0-beta.1"` and run `composer update`.
+### Versioning
 
-Most of the busywork is now done so you can continue addressing the breaking changes on the rest of this page.
+Craft 5 is the first major release that may not require breaking changes for all plugins. This means that plugins that don’t immediately take advantage of new features or APIs (and aren’t affected by any currently-deprecated APIs) can tag a compatibility-only “point” release.
 
-You can do the same thing with your custom modules by replacing `src` above with `modules`, or the path to wherever your custom modules live.
+If you are uncertain whether your plugin will use new features, we recommend tagging a new major version, and back-porting any features and bugfixes.
 
-::: tip
-[PhpStorm](https://www.jetbrains.com/phpstorm/) does a great job of identifying and offering to fix type issues—consider using it if you aren’t already!
-:::
+We anticipate most developers will choose to release a new major version of their plugin that requires Craft 5. However, Craft and the Plugin Store only look at what is required by `composer.json` to determine major-version compatibility.
 
-## Unified Element Editor
-
-Craft 4 [streamlines element editing machinery](https://github.com/craftcms/cms/pull/10467) to support a more rich, consistent authoring experience across all element types.
-
-If you have a plugin or module that implements custom element types and want to take advantage of these improvements, there are a handful of [new methods to extend](#new-element-methods):
-
-- [canView()](craft4:craft\base\ElementInterface::canView()) – Whether the given user is authorized to view the element.
-- [canSave()](craft4:craft\base\ElementInterface::canSave()) – Whether the given user is authorized to save the element.
-- [canDuplicate()](craft4:craft\base\ElementInterface::canDuplicate()) – Whether the given user is authorized to duplicate the element.
-- [canDelete()](craft4:craft\base\ElementInterface::canDelete()) – Whether the given user is authorized to delete the element.
-- [canDeleteForSite()](craft4:craft\base\ElementInterface::canDeleteForSite()) – Whether the given user is authorized to delete the element for its currently-loaded site only. (Requires that the element type supports a manual site propagation mode like entries have when their section is set to “Let each entry choose which sites it should be saved to”.)
-- [canCreateDrafts()](craft4:craft\base\ElementInterface::canCreateDrafts()) – Whether the given user is authorized to create drafts for the element.
-- [createAnother()](craft4:craft\base\ElementInterface::createAnother()) – Returns a new, unsaved element for “Save and add another” actions. (No need to worry about permissions here; canSave() will be in effect for it.)
-- [hasRevisions()](craft4:craft\base\ElementInterface::hasRevisions()) – Whether the element type is creating revisions for itself.
-- [getPostEditUrl()](craft4:craft\base\ElementInterface::getPostEditUrl()) – The URL that the browser should be redirected to after the element is saved.
-- [getAdditionalButtons()](craft4:craft\base\ElementInterface::getAdditionalButtons()) – HTML for any additional buttons that should be shown beside “Save”.
-- [prepareEditScreen()](craft4:craft\base\ElementInterface::prepareEditScreen()) – [Optional customization](https://github.com/craftcms/cms/discussions/10784) of the edit screen response.
-
-
-::: tip
-It’s best to rely on the new element authorization methods (`canView()`, `canSave()`, etc.) rather than checking permissions directly:
-```php
-// Good
-if (Craft::$app->getUser()->checkPermission('myplugin-manageMyElements')) {
-    // ...
-}
-
-// Better
-if ($myElement->canSave()) {
-    // ...
-}
-```
-:::
-
-You may need to evaluate any routes, controllers, templates, and permissions that support the editing process.
-
-While Craft 4’s changes touch a variety of element type pieces, the good news is that you’ll most likely be able to consolidate a fair amount of code.
-
-### Field Layouts
-
-Element editing has become more complex. A Craft 3 entry could already be edited on its own page, in a slideout, and included UI for handling drafts. With Craft 4, entry editing is more consistent via slideout or dedicated page—and other element types can more easily offer the same experience. There are also permissions and brand new conditional fields to manage.
-
-To help with this potential complexity, Craft 4 broadly puts more emphasis on field layouts than templates. It’s field layout logic, more than template logic, that determines what the content author interacts with.
-
-Craft 4 has removed its own element-specific controllers and templates in favor of re-usable ones that more easily support the nuanced editing experience—along with some convenient controls and cleaned-up permissions. All element types, including those added by third parties, can take advantage of these improvements.
-
-Any element type providing control panel editing UI may need to update it.
-
-#### Field Inputs
-
-If your element type already supported custom field layouts and behaved well with slideout UI in Craft 3, you may only need to update a few renamed [events](#events) and [permissions](#user-permissions).
-
-If your element type relies on [getEditorHtml()](craft4:craft\base\ElementInterface::getEditorHtml()), however, whether it’s because it has legacy UI or does its own thing entirely, you’ll need to migrate those pieces elsewhere since that method has been removed. Craft 3.7’s [getSidebarHtml()](craft4:craft\base\ElementInterface::getSidebarHtml()) and [getMetadata()](craft4:craft\base\ElementInterface::getMetadata()) are still available for tailoring what’s displayed in sidebar and metadata areas, but Craft will always give priority to any custom field layout when it exists.
+Either way, you must explicitly declare support for each major Craft version. If a single version of your plugin supports both Craft 4 _and_ 5, you’ll need to use an “or” constraint for your `craftcms/cms` requirement, like `^4.0|^5.0`. Any `craftcms/cms` constraint beginning with `>=` will be treated as `^`.
 
 ::: warning
-Each elements type’s `defineRules()` method needs to fully cover any inputs that could be posted via native field elements, `getSidebarHtml()`, and `getMetadata()`.
-
-This is because an additional security measure applies posted values using the element’s `setAttributes()` method, which only allows “safe” attributes (having validation rules) by default.
+Keep in mind that all versions of PHP 7 are [end-of-life](https://www.php.net/supported-versions.php). Your plugin does _not_ need to support PHP 7 in order to be compatible with Craft 4.
 :::
 
-Craft 4 introduces the concept of “native” fields, meaning ones offered or required by the element type. These are distinctly different from the custom fields added by users.
+### Custom Modules
 
-If your element type requires native fields to be available, or even _mandatory_, it’s best to include them in a field layout by implementing [getFieldLayout()]() for your element type and using [EVENT_DEFINE_NATIVE_FIELDS]()—which replaces [EVENT_DEFINE_STANDARD_FIELDS]()—to have them included.
+The upgrade process for custom modules is very similar, except that you aren’t responsible for versioning.
 
-A saved field layout can be returned from the `fields` service:
+[Rector](#rector) and [PHPStan](#phpstan) can be installed as a direct dependency of your project, and run against the entire `modules/` directory (or wherever your custom modules live), or one module at a time.
+
+Commit changes to your module at the same time as the rest of the Craft 5 upgrade. We recommend tracking these changes in a separate branch.
+
+---
+
+## New Features
+
+Let’s start by looking at a few completely new concepts in Craft 5. There are lots of new features associated with existing functionality (like [elements](#elements) and [fields](#field-types)), which we’ll get to in a moment.
+
+### Authentication
+
+Multi-factor authentication is now available for control panel users. Craft ships with two `craft\auth\methods\AuthMethodInterface` implementations:
+
+- `craft\auth\methods\RecoveryCodes`: Generates, stores, and invalidates a series of 10 one-time-use codes.
+- `craft\auth\methods\TOTP`: Sets up and and validates time-based, one-time-use passwords.
+
+Both methods extend `craft\auth\methods\BaseAuthMethod`. Registered auth methods are always instantiated in the context of a single user:
 
 ```php
-public function getFieldLayout(): ?\craft\models\FieldLayout
-{
-    return \Craft::$app->getFields()->getLayoutByType(MyElement::class);
-}
-```
-
-This example adds mandatory title and text fields that cannot be removed from `MyElement`’s field layout, even in the field layout designer:
-
-```php
-use craft\events\DefineFieldLayoutFieldsEvent;
-use craft\fieldlayoutelements\TextField;
-use craft\fieldlayoutelements\TitleField;
-use craft\models\FieldLayout;
+use craft\events\RegisterComponentTypesEvent;
+use craft\services\Auth;
 use yii\base\Event;
-use mynamespace\elements\MyElement;
 
 Event::on(
-    FieldLayout::class,
-    FieldLayout::EVENT_DEFINE_NATIVE_FIELDS,
-    function(DefineFieldLayoutFieldsEvent $event) {
-        /** @var FieldLayout $fieldLayout */
-        $fieldLayout = $event->sender;
-
-        if ($fieldLayout->type === MyElement::class) {
-            $event->fields[] = new TitleField([
-                'label' => 'My Title',
-                'mandatory' => true,
-                'instructions' => 'Enter a title.',
-            ]);
-            $event->fields[] = new TextField([
-                'label' => 'My Description'
-                'attribute' => 'description',
-                'mandatory' => true,
-                'instructions' => 'Enter a description.',
-            ]);
-        }
-    }
+    Auth::class,
+    Auth::EVENT_REGISTER_METHODS,
+    function(RegisterComponentTypesEvent $e) {
+        $e->types[] = EmailVerification::class;
+    },
 );
 ```
 
-If you don’t make the field layout designer available or support custom fields at all, you can create your field layout in memory instead:
+Custom authorization methods are responsible for storing their own data and associating it with users—return `true` from `isActive()` once the user has completed any required setup so Craft knows to enforce it during login.
 
-```php
-public function getFieldLayout(): ?\craft\models\FieldLayout
-{
-    $layoutElements = [
-        new TitleField([
-            'label' => 'My Title',
-            'mandatory' => true,
-            'instructions' => 'Enter a title.',
-        ]),
-        new TextField([
-            'label' => 'My Description',
-            'attribute' => 'description',
-            'mandatory' => true,
-            'instructions' => 'Enter a description.',
-        ])
-    ];
-
-    $fieldLayout = new FieldLayout();
-
-    $tab = new FieldLayoutTab();
-    $tab->name = 'Content';
-    $tab->setLayout($fieldLayout);
-    $tab->setElements($layoutElements);
-
-    $fieldLayout->setTabs([ $tab ]);
-
-    return $fieldLayout;
-}
-```
-
-#### Controllers
-
-Many of Craft’s element-specific controller actions and supporting templates have been removed.
-
-For example, `entries/edit-entry`, `categories/edit-category`, and `assets/edit-asset` each rely on the `elements/edit` action. Here’s the before-and-after for those routes, for example:
-
-```php
-// Craft 3
-'assets/edit/<assetId:\d+><filename:(?:-[^\/]*)?>' => 'assets/edit-asset',
-'categories/<groupHandle:{handle}>/new' => 'categories/edit-category',
-'entries/<section:{handle}>/<entryId:\d+><slug:(?:-[^\/]*)?>' => 'entries/edit-entry',
-
-// Craft 4
-'assets/edit/<elementId:\d+><filename:(?:-[^\/]*)?>' => 'elements/edit',
-'categories/<groupHandle:{handle}>/<elementId:\d+><slug:(?:-[^\/]*)?>' => 'elements/edit',
-'entries/<section:{handle}>/<elementId:\d+><slug:(?:-[^\/]*)?>' => 'elements/edit',
-```
+If your `verify()` method returns `true`, the user will move on to their next configured auth method—but it’s your responsibility to call `craft\services\Auth::verify()` from a controller, passing in any context required to satisfy the method.
 
 ::: tip
-Categories take advantage of this unified element editing improvement with their new draft support—so the [Category](craft4:craft\elements\Category) element is a good example to investigate.
+See `AuthMethodInterface::getAuthFormHtml()` for complete info on procedural requirements!
 :::
 
-See [Controller Actions](#controller-actions) for the complete list of changes, and notice how many of the newer actions are re-used across element types.
+### Bulk Operations
 
-## Controller Actions
+Whenever Craft saves an element, it starts tracking a _bulk save operation_. This allows plugins to act on the final state in a save that _may_ involve multiple elements. If you rely on element save events, consider switching to bulk ops
 
-A number of controller actions have been renamed or removed, largely to support the [unified element editor](#unified-element-editor) improvement. We’ve also improved how we create and respond to action requests, and adopting these changes will lead to cleaner (and less!) code.
+<See path="events.md" hash="bulk-operations" label="Bulk Saving" description="Learn how to respond to multi-element saves." />
 
-### Changed
+### Enums
 
-| Old                                       | What to do instead
-| ----------------------------------------- | ----------------------
-| `assets/edit-asset`                       | `elements/edit`
-| `assets/generate-thumb`                   | `assets/thumb`
-| `categories/delete-category`              | `elements/delete`
-| `categories/edit-category`                | `elements/edit`
-| `edit/by-id`                              | `elements/edit`
-| `edit/by-uid`                             | `elements/edit`
-| `entries/edit-entry`                      | `elements/edit`
-| `elements/get-editor-html`                | implement [getFieldLayout()](craft4:craft\base\ElementInterface::getFieldLayout())
-| `elements/save-element`                   | `elements/save`
-| `entries/delete-entry`                    | `elements/delete`
-| `entries/delete-for-site`                 | `elements/delete-for-site`
-| `entries/duplicate-entry`                 | `elements/duplicate`
-| `entry-revisions/create-draft`            | `elements/create`
-| `entry-revisions/delete-draft`            | `elements/delete-draft`
-| `entry-revisions/publish-draft`           | `elements/apply-draft`
-| `entry-revisions/revert-entry-to-version` | `elements/revert`
-| `entry-revisions/save-draft`              | `elements/save-draft`
-| `users/get-remaining-session-time`        | `users/session-info`
-
-### Controller Requests & Responses
-
-Craft 4 improves controller request and response handling to be much simpler and more uniform.
-
-#### Action Requests
-
-On the front end, we recommend replacing deprecated `Craft.postActionRequest()` calls with `Craft.sendActionRequest()`:
-
-```javascript
-// Craft 3
-Craft.postActionRequest('my-plugin/do-something', data, function(response, textStatus) {
-  if (textStatus === 'success') {
-    // ...
-  } else {
-    // Handle non-2xx responses ...
-  }
-});
-
-// Craft 4
-Craft.sendActionRequest('POST', 'my-plugin/do-something', {data})
-  .then((response) => {
-      // ...
-  })
-  .catch(({response}) => {
-      // Handle non-2xx responses ...
-  });
-```
-
-The `sendActionRequest()` method returns a Promise with a resolved value containing the [response](https://axios-http.com/docs/res_schema). Non-`200` responses can now be handled with a `catch()` handler.
-
-#### Controller Responses
-
-Controller actions can return new [asSuccess()](craft4:craft\web\Controller::asSuccess()) / [asModelSuccess()](craft4:craft\web\Controller::asModelSuccess()) or [asFailure()](craft4:craft\web\Controller::asFailure()) / [asModelFailure()](craft4:craft\web\Controller::asModelFailure()) functions that automatically handle…
-
-- checking whether the request accepts JSON and returning a JSON response accordingly
-- returning relevant HTTP status codes
-- returning an accompanying message in the JSON response or flash
-- returning relevant model data in the JSON response or route params
-- honoring a redirect provided via argument or request param
+PHP 8.1 introduced support for [enumeration classes](https://www.php.net/manual/en/language.types.enumerations.php), so we’ve taken the opportunity to extract some constants. See the `craft\enums` namespace for examples.
 
 ::: tip
-A JSON error response will now be returned with a `400` HTTP status in Craft 4.
+You may define your plugin’s editions this way, but the base plugin class must still return the available edition handles via a static `editions()` method.
 :::
 
-Using these new methods, most controller action methods can be shortened:
+### Database Character Sets
+
+Craft now creates database tables using the `uft8mb4` character set (and `utf8mb4_0900_ai_ci` or `utf8mb4_unicode_ci` collation, on MySQL) by default. Developers are asked during the [upgrade process](../upgrade.md#database-character-set-and-collation) to convert existing tables with inconsistent encoding, so it will generally be safe to save emoji and other multibyte characters directly to the database.
+
+Calls to `craft\helpers\StringHelper::emojiToShortcodes($string)` and `craft\helpers\StringHelper::shortcodesToEmoji($string)` are no longer strictly necessary; if you are supporting Craft 4 and 5, consider calling `craft\db\Connection::getSupportsMb4()` to pack and unpack strings when saving and loading.
+
+### Composer
+
+A copy of `composer.phar` is included in `craftcms/cms`, so the `composer/composer` package has been dropped as a dependency.
+
+Craft’s internal Composer service remains unchanged. Plugins and other low-level extensions that use the Composer PHP API _directly_ must `require` it. This change does _not_ impact how your plugin is installed by an end-user!
+
+---
+
+## Changes
+
+Craft 5 has a completely new content storage engine, and _a ton_ of new tools for creating rich content authoring experience. Plugins that provide element types or field types may require some additional attention.
+
+### Elements
+
+#### Content Migration
+
+If your plugin provides a custom element type, you must include a migration that extends `craft\base\BaseContentRefactorMigration`. In this migration, you are responsible for telling Craft what existing field data (or content table columns) is relevant to a given element. For each field layout that your element type uses, call `$this->updateElements()` with a list of element IDs or a query prepared to fetch the relevant IDs.
+
+For example, if your elements use a single field layout, your migration would contain only this:
 
 ```php
-// Craft 3
-public function actionSave() {
-    // ...
+$this->updateElements(
+    (new Query())->from('{{%widgets}}'),
+    Craft::$app->getFields()->getLayoutByType(Widget::class),
+);
+```
 
-    if (!Craft::$app->getElements()->saveElement($myElement)) {
-        if ($this->request->getAcceptsJson()) {
-            return $this->asJson([
-                'success' => false,
-                'errors' => $myElement->getErrors(),
-            ]);
-        }
+Craft will take care of applying the appropriate `SELECT` to your query. If your element’s custom table uses something other than `id` as its primary key (and `elements` table foreign key), you should pass a list of IDs instead of a query.
 
-        $this->setFailFlash(Craft::t('myPlugin', 'Couldn’t save element.'));
+When multiple field layouts are represented among your elements (as is the case with Commerce’s product type configuration), you must call `$this->updateElements()` for *each* of them:
 
-        Craft::$app->getUrlManager()->setRouteParams([
-            'myElement' => $myElement,
-        ]);
-
-        return null;
-    }
-
-    if ($this->request->getAcceptsJson()) {
-        return $this->asJson([
-            'success' => true,
-            'id' => $myElement->id,
-            'title' => $myElement->title,
-            'url' => $myElement->getUrl(),
-        ]);
-    }
-
-    $this->setSuccessFlash(Craft::t('myPlugin', 'Element saved.'));
-    return $this->redirectToPostedUrl($myElement);
-}
-
-// Craft 4
-public function actionSave() {
-    // ...
-
-    if (!Craft::$app->getElements()->saveElement($myElement)) {
-        return $this->asModelFailure(
-            $myElement,
-            Craft::t('myPlugin', 'Couldn’t save element.'),
-            'myElement'
-        );
-    }
-
-    return $this->asModelSuccess(
-        $myElement,
-        Craft::t('app', 'Element saved.'),
-        data: [
-            'id' => $myElement->id,
-            'title' => $myElement->title,
-            'url' => $myElement->getUrl(),
-        ],
+```php
+foreach (MyPlugin::getInstance()->getWidgetTypes()->getAllWidgetTypes() as $type) {
+    $this->updateElements(
+        (new Query())
+            ->from('{{%widgets}}')
+            ->where(['typeId' => $type->id]),
+        $type->getFieldLayout(),
     );
 }
 ```
 
-[asErrorJson()](craft3:craft\web\Controller::asErrorJson()) has been deprecated in Craft 4 and will be removed in Craft 5. Use [asFailure()](craft4:craft\web\Controller::asFailure()) instead:
+#### Extra Content Tables
 
-```php
-// Craft 3
-return $this->asErrorJson('Thing not found.');
+Element types that used a custom content table (like our own Matrix implementation did) should remove their `getContentTable()` and `getFieldColumnPrefix()` methods, and remove the `$contentTable` property from their associated `ElementQuery` subclass.
 
-// Craft 4
-return $this->asFailure('Thing not found.');
-```
-
-## Elements
-
-While the [unified element editor](#unified-element-editor) introduced some new methods, some others have been changed and removed.
-
-### Removed
-
-| Old                                                                                        | What to do instead
-| ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------
-| [Element::getFieldStatus()](craft3:craft\base\Element::getFieldStatus())                   | [Field::getStatus()](craft4:craft\base\Field::getStatus())
-| [Element::getHasFreshContent()](craft3:craft\base\Element::getHasFreshContent())           | [Element::getIsFresh()](craft4:craft\base\Element::getIsFresh())
-| [Element::getIsProvisionalDraft()](craft3:craft\base\Element::getIsProvisionalDraft())     | [Element::$isProvisionalDraft](https://docs.craftcms.com/api/v4/craft-base-elementtrait.html#public-properties)
-| [Element::getIsUnsavedDraft()](craft3:craft\base\Element::getIsUnsavedDraft())             | [Element::getIsUnpublishedDraft()](craft4:craft\base\Element::getIsUnpublishedDraft())
-| [Element::isDeletable()](craft3:craft\base\Element::isDeletable())                         | [Element::canDelete()](craft4:craft\base\Element::canDelete())
-| [Element::isEditable()](craft3:craft\base\Element::isEditable())                           | [Element::canView()](craft4:craft\base\Element::canView()) and [Element::canSave()](craft4:craft\base\Element::canSave())
-| [ElementInterface::getEditorHtml()](craft3:craft\base\ElementInterface::getEditorHtml())   | Element edit forms are now exclusively driven [by their field layout](#field-layouts).
-| [ElementInterface::getIsDeletable()](craft3:craft\base\ElementInterface::getIsDeletable()) | [ElementInterface::canDelete()](craft4:craft\base\ElementInterface::canDelete())
-| [ElementInterface::getIsEditable()](craft3:craft\base\ElementInterface::getIsEditable())   | [Element::canView()](craft4:craft\base\Element::canView()) and [Element::canSave()](craft4:craft\base\Element::canSave())
-| [Element::ATTR_STATUS_CONFLICTED](craft3:craft\base\Element::ATTR_STATUS_CONFLICTED)       | Incoming draft content is favored.
-
-## Services
-
-### Added
-
-- [craft\services\Addresses](craft4:craft\services\Addresses) for helping to manage new user addresses and their fields.
-- [craft\services\Conditions](craft4:craft\services\Conditions) for creating the new condition builder’s conditions and condition rules.
-- [craft\services\Fs](craft4:craft\services\Fs) for managing filesystems.
-- [craft\services\ImageTransforms](craft4:craft\services\ImageTransforms) for managing image transforms and transformers.
-
-### Removed
-
-The following core services have been removed:
-
-| Old                                                      | What to do instead
-| -------------------------------------------------------- | --------------------------------
-| [AssetTransforms](craft3:craft\services\AssetTransforms) | [ImageTransforms](craft4:craft\services\ImageTransforms)
-| [ElementIndexes](craft3:craft\services\ElementIndexes)   | [ElementSources](craft4:craft\services\ElementSources)
-| [EntryRevisions](craft3:craft\services\EntryRevisions)   | [Revisions](craft4:craft\services\Revisions)
-| [SystemSettings](craft3:craft\services\SystemSettings)   | [ProjectConfig](craft4:craft\services\ProjectConfig)
-
-## Control Panel Templates
-
-Control panel template updates have largely been in support of the [unified element editor](#unified-element-editor) experience and a variety of UI refinements.
-
-- All control panel templates end in `.twig` now. ([#9743](https://github.com/craftcms/cms/pull/9743))
-- The `forms/selectize` control panel template now supports `addOptionFn` and `addOptionLabel` params, which can be set to add new options to the list.
-- The `limitField` macro in the `_components/fieldtypes/elementfieldsettings` control panel template has been renamed to `limitFields`.
-- Added the `htmx.org` JavaScript library.
-- Removed the `assets/_edit` control panel template.
-- Removed the `categories/_edit` control panel template.
-- Removed the `entries/_edit` control panel template.
-- Removed the `_layouts/element` control panel template.
-
-### Editable Tables
-
-If your Craft 3 plugin was using Craft’s editable table (via `editableTableField()` or `editableTable`), you may need to explicitly set `allowAdd`, `allowDelete`, and `allowReorder` to `true` for it to behave the same in Craft 4:
-
-```twig
-{% import _includes/forms.twig' as forms %}
-
-{# Craft 3 #}
-{{ forms.editableTableField({
-  label: 'My Table Field',
-  name: 'myTable',
-  cols: myTableCols,
-  rows: myTableRows,
-}) }}
-
-{# Craft 4 #}
-{{ forms.editableTableField({
-  label: 'My Table Field',
-  name: 'myTable',
-  cols: myTableCols,
-  rows: myTableRows,
-  allowAdd: true,
-  allowReorder: true,
-  allowDelete: true,
-}) }}
-```
-
-### New Form Macros
-
-The control panel’s `_includes/forms` got a few new macros: `button`, `submitButton`, `fs`, and `fsField`.
-
-The `button` and `submitButton` macros can each take a `spinner` option that will include markup for a loading animation you can use for Ajax requests:
-
-```twig
-{% import '_includes/forms.twig' as forms %}
-
-{{ forms.button({
-  label: 'Save a Copy',
-  spinner: true,
-}) }}
-
-{# Output:
-<button type="button" class="btn">
-  <div class="label">Save a Copy</div>
-  <div class="spinner spinner-absolute"></div>
-</button>
-#}
-
-{{ forms.submitButton({
-  label: 'Save',
-  spinner: true,
-}) }}
-
-{# Output:
-<button type="submit" class="submit btn">
-  <div class="label">Save</div>
-  <div class="spinner spinner-absolute"></div>
-</button>
-#}
-```
-
-You can then use JavaScript to toggle a `loading` class on the button element as needed:
-
-![Animation of a submit button with its “Save a Copy” label that switches to a spinner when a loading class is added to the element](../images/loading-button.gif)
-
-## Events
-
-### Changed
-
-The [TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS](craft4:craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS) event is now triggered when resolving fields for a GraphQL type instead of when the type is first created.
-
-The following events have been moved or renamed:
-
-| Old                                                                                                                                | Renamed to
-| ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------
-| [Assets::EVENT_GET_ASSET_THUMB_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_THUMB_URL)                                       | [Assets::EVENT_DEFINE_THUMB_URL](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_URL)
-| [Assets::EVENT_GET_ASSET_URL](craft3:craft\services\Assets::EVENT_GET_ASSET_URL)                                                   | [Asset::EVENT_DEFINE_URL](craft4:craft\elements\Asset::EVENT_DEFINE_URL)
-| [AssetTransforms::CONFIG_TRANSFORM_KEY](craft3:craft\services\AssetTransforms::CONFIG_TRANSFORM_KEY)                               | [ProjectConfig::PATH_IMAGE_TRANSFORMS](craft4:craft\services\ProjectConfig::PATH_IMAGE_TRANSFORMS)
-| [AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_BEFORE_SAVE_ASSET_TRANSFORM)     | [ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_SAVE_IMAGE_TRANSFORM)
-| [AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_AFTER_SAVE_ASSET_TRANSFORM)       | [ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_AFTER_SAVE_IMAGE_TRANSFORM)
-| [AssetTransforms::EVENT_BEFORE_DELETE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_BEFORE_DELETE_ASSET_TRANSFORM) | [ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM)
-| [AssetTransforms::EVENT_AFTER_DELETE_ASSET_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_AFTER_DELETE_ASSET_TRANSFORM)   | [ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_BEFORE_DELETE_IMAGE_TRANSFORM)
-| [AssetTransforms::EVENT_GENERATE_TRANSFORM](craft3:craft\services\AssetTransforms::EVENT_GENERATE_TRANSFORM)                       | [ImageTransforms::EVENT_GENERATE_TRANSFORM](craft4:craft\services\ImageTransforms::EVENT_GENERATE_TRANSFORM)
-| [AssetTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE](craft3:craft\services\AssetTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE) | [ImageTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE](craft4:craft\services\ImageTransforms::EVENT_BEFORE_APPLY_TRANSFORM_DELETE)
-| [AssetTransforms::EVENT_BEFORE_DELETE_TRANSFORMS](craft3:craft\services\AssetTransforms::EVENT_BEFORE_DELETE_TRANSFORMS)           | [ImageTransforms::EVENT_BEFORE_INVALIDATE_ASSET_TRANSFORMS](craft4:craft\services\ImageTransforms::EVENT_BEFORE_INVALIDATE_ASSET_TRANSFORMS)
-| [ElementIndexes::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES](craft3:craft\services\ElementIndexes::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES) | [ElementSources::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES](craft4:craft\services\ElementSources::EVENT_DEFINE_SOURCE_TABLE_ATTRIBUTES)
-| [ElementIndexes::EVENT_DEFINE_SOURCE_SORT_OPTIONS](craft3:craft\services\ElementIndexes::EVENT_DEFINE_SOURCE_SORT_OPTIONS)         | [ElementSources::EVENT_DEFINE_SOURCE_SORT_OPTIONS](craft4:craft\services\ElementSources::EVENT_DEFINE_SOURCE_SORT_OPTIONS)
-
-### Deprecated
-
-| Old                                                                                                        | What to do instead
-| ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------
-| [FieldLayout::EVENT_DEFINE_STANDARD_FIELDS](craft3:craft\models\FieldLayout::EVENT_DEFINE_STANDARD_FIELDS) | [FieldLayout::EVENT_DEFINE_NATIVE_FIELDS](craft4:craft\models\FieldLayout::EVENT_DEFINE_NATIVE_FIELDS)
-
-### Removed
-
-| Old                                                                                                                                | What to do instead
-| ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------
-| [Assets::EVENT_GET_THUMB_PATH](craft3:craft\services\Assets::EVENT_GET_THUMB_PATH)                                                 | [Assets::EVENT_DEFINE_THUMB_URL](craft4:craft\services\Assets::EVENT_DEFINE_THUMB_URL)
-| [AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS](craft3:craft\services\AssetTransforms::EVENT_AFTER_DELETE_TRANSFORMS)             | Transforms are now invalidated, but no event is triggered _after_ that happens.
-| [Element::EVENT_DEFINE_IS_DELETABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_DELETABLE)                                         | [Element::EVENT_AUTHORIZE_DELETE](craft4:craft\base\Element::EVENT_AUTHORIZE_DELETE)
-| [Element::EVENT_DEFINE_IS_EDITABLE](craft3:craft\base\Element::EVENT_DEFINE_IS_EDITABLE)                                           | [Element::EVENT_AUTHORIZE_VIEW](craft4:craft\base\Element::EVENT_AUTHORIZE_VIEW) and [Element::EVENT_AUTHORIZE_SAVE](craft4:craft\base\Element::EVENT_AUTHORIZE_SAVE)
-| [Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_AFTER_MERGE_SOURCE_CHANGES)                         | [Elements::EVENT_AFTER_MERGE_CANONICAL_CHANGES](craft4:craft\services\Elements::EVENT_AFTER_MERGE_CANONICAL_CHANGES)
-| [Drafts::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_AFTER_PUBLISH_DRAFT)                                       |
-| [Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES](craft3:craft\services\Drafts::EVENT_BEFORE_MERGE_SOURCE_CHANGES)                       | [Elements::EVENT_BEFORE_MERGE_CANONICAL_CHANGES](craft4:craft\services\Elements::EVENT_BEFORE_MERGE_CANONICAL_CHANGES)
-| [Drafts::EVENT_BEFORE_PUBLISH_DRAFT](craft3:craft\services\Drafts::EVENT_BEFORE_PUBLISH_DRAFT)                                     |
-| [Gql::EVENT_REGISTER_GQL_PERMISSIONS](craft3:craft\services\Gql::EVENT_REGISTER_GQL_PERMISSIONS)                                   | [Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS](craft4:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS)
-| [TemplateCaches::EVENT_AFTER_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_AFTER_DELETE_CACHES)                       | Template caches have been invalidated since Craft 3.5.
-| [TemplateCaches::EVENT_BEFORE_DELETE_CACHES](craft3:craft\services\TemplateCaches::EVENT_BEFORE_DELETE_CACHES)                     | Template caches have been invalidated since Craft 3.5.
-| [Volumes::EVENT_REGISTER_VOLUME_TYPES)](craft3:craft\services\Volumes::EVENT_REGISTER_VOLUME_TYPES)                                | [Fs::EVENT_REGISTER_FILESYSTEM_TYPES](craft4:craft\services\Fs::EVENT_REGISTER_FILESYSTEM_TYPES)
-| [CraftVariable::EVENT_DEFINE_COMPONENTS](craft3:craft\web\twig\variables\CraftVariable::EVENT_DEFINE_COMPONENTS)                   | [CraftVariable::EVENT_INIT](craft4:craft\web\twig\variables\CraftVariable::EVENT_INIT)
-| [EntryRevisions::EVENT_BEFORE_SAVE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_SAVE_DRAFT)                           |
-| [EntryRevisions::EVENT_AFTER_SAVE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_SAVE_DRAFT)                             |
-| [EntryRevisions::EVENT_BEFORE_PUBLISH_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_PUBLISH_DRAFT)                     |
-| [EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_PUBLISH_DRAFT)                       |
-| [EntryRevisions::EVENT_BEFORE_DELETE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_BEFORE_DELETE_DRAFT)                       |
-| [EntryRevisions::EVENT_AFTER_DELETE_DRAFT](craft3:craft\services\EntryRevisions::EVENT_AFTER_DELETE_DRAFT)                         |
-| [EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_BEFORE_REVERT_ENTRY_TO_VERSION) | [Revisions::EVENT_BEFORE_REVERT_TO_REVISION](craft4:craft\services\Revisions::EVENT_BEFORE_REVERT_TO_REVISION)
-| [EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION](craft3:craft\services\EntryRevisions::EVENT_AFTER_REVERT_ENTRY_TO_VERSION)   | [Revisions::EVENT_AFTER_REVERT_TO_REVISION](craft4:craft\services\Revisions::EVENT_AFTER_REVERT_TO_REVISION)
-
-## Filesystems
-
-In Craft 4, volumes have been simplified to represent a place where uploaded files can go. Each volume is represented by a single [craft\models\Volume](craft4:craft\models\Volume) class. File operations have been decoupled into a new concept called [Filesystems](filesystem-types.md) ([#10367](https://github.com/craftcms/cms/pull/10367)).
-
-![Screenshot of a Craft 4 Volume’s settings that includes the new Filesystem dropdown field.](../images/volume.png)
-
-The volume’s former `type` has gone away, replaced instead by whatever filesystem it designates via [Volume::getFs()](craft4:\craft\models\Volume::getFs()).
-
-![Screenshot of a Craft 4 Filesystem’s settings, which include former volume type settings like Base Path, Base URL, and Filesystem Type.](../images/filesystem.png)
-
-A Craft install can have however many filesystems it needs, where each volume designates a single filesystem handle. Since that setting can be an environment variable, it becomes trivial to swap filesystems in different environments.
-
-Former volume types will need to be implemented as filesystem types, and most calls directly to a volume’s I/O operations will need to be made on the volume’s filesystem:
-
-```php
-// Craft 3
-$myVolumeHandle = $volume->handle;
-$volume->createDirectory('subfolder');
-
-// Craft 4
-$myVolumeHandle = $volume->handle;
-$volume->getFs()->createDirectory('subfolder');
-```
-
-Each volume has an additional transform filesystem which defaults to the filesystem used for that volume. This makes it possible for volumes without public URLs to designate another filesystem solely for image transforms—accessible via the volume’s [Volume::getTransformFs()](craft4:craft\models\Volume::getTransformFs()) method.
-
-### Migrating Asset Volumes to Filesystems
-
-If you need to migrate an asset volume type to a filesystem type, you can find migrated filesystems using the old volume type and provide a reference to the new filesystem class (`MyFs` here):
-
-```php
-<?php
-
-use mynamespace\migrations;
-
-use mynamespace\fs\MyFs;
-use Craft;
-use craft\db\Migration;
-use craft\services\ProjectConfig;
-
-class mXXXXXX_XXXXXX_update_fs_configs extends Migration
-{
-    public function safeUp(): bool
-    {
-        $projectConfig = Craft::$app->getProjectConfig();
-
-        // Don’t make the same changes twice
-        $schemaVersion = $projectConfig->get('plugins.pluginHandle.schemaVersion', true);
-        if (version_compare($schemaVersion, '2.0', '>=')) {
-            return true;
-        }
-
-        $fsConfigs = $projectConfig->get(ProjectConfig::PATH_FS) ?? [];
-        foreach ($fsConfigs as $uid => $config) {
-            if ($config['type'] === 'my\old\Volume') {
-                $config['type'] = MyFs::class;
-                $projectConfig->set(sprintf('%s.%s', ProjectConfig::PATH_FS, $uid), $config);
-            }
-        }
-
-        return true;
-    }
-
-    public function safeDown(): bool
-    {
-        echo "mXXXXXX_XXXXXX_update_fs_configs cannot be reverted.\n";
-        return false;
-    }
-}
-```
-
-## Image Transforms and Transformers
-
-Asset Transforms are now Image Transforms, which utilize the newly-added concept of “Image Transformers”. Existing image transform functionality and index management has been rolled into a default [ImageTransformer](craft4:craft\imagetransforms\ImageTransformer).
-
-Third parties can register new image transformers via the [EVENT_REGISTER_IMAGE_TRANSFORMERS](craft4:craft\services\ImageTransforms::EVENT_REGISTER_IMAGE_TRANSFORMERS) event.
-
-## Symfony Mailer
-
-Craft 4 uses [Symfony Mailer](https://symfony.com/doc/current/mailer.html) to send email.
-
-This shouldn’t require any changes to composing and sending messages, but any transport adapter’s `defineTransport()` method must now return either a transporter that implements [Symfony\Component\Mailer\Transport\TransportInterface](https://github.com/symfony/mailer/blob/6.0/Transport/TransportInterface.php), or an array that defines one.
-
-## User Permissions
-
-### Registering Permissions
-
-Registering permissions has changed slightly in Craft 4: the [RegisterUserPermissionsEvent](craft4:craft\events\RegisterUserPermissionsEvent)’s `permissions` array now requires individual items with `heading` and `permissions` keys:
-
-```php
-use yii\base\Event;
-use craft\events\RegisterUserPermissionsEvent;
-use craft\services\UserPermissions;
-
-// Craft 3
-Event::on(
-    UserPermissions::class,
-    UserPermissions::EVENT_REGISTER_PERMISSIONS,
-    function(RegisterUserPermissionsEvent $event) {
-        $event->permissions['My Heading'] = $permissions;
-    }
-);
-
-// Craft 4
-Event::on(
-    UserPermissions::class,
-    UserPermissions::EVENT_REGISTER_PERMISSIONS,
-    function(RegisterUserPermissionsEvent $event) {
-        $event->permissions[] = [
-            'heading' => 'My Heading',
-            'permissions' => $permissions,
-        ];
-    }
-);
-```
-
-### Changed Permissions
-
-A number of user permissions have been renamed in Craft 4:
-
-| Old                                   | New
-| ------------------------------------- | -------------------------
-| `createFoldersInVolume:<uid>`         | `createFolders:<uid>`
-| `deleteFilesAndFoldersInVolume:<uid>` | `deleteAssets:<uid>`
-| `deletePeerFilesInVolume:<uid>`       | `deletePeerAssets:<uid>`
-| `editEntries:<uid>`                   | `viewEntries:<uid>`
-| `editImagesInVolume:<uid>`            | `editImages:<uid>`
-| `editPeerEntries:<uid>`               | `viewPeerEntries:<uid>`
-| `editPeerFilesInVolume:<uid>`         | `savePeerAssets:<uid>`
-| `editPeerImagesInVolume:<uid>`        | `editPeerImages:<uid>`
-| `publishEntries:<uid>`                | `saveEntries:<uid>`<br>No longer differentiates between enabled and disabled entries. Users with `viewEntries:<uid>` permissions can still create drafts.
-| `publishPeerEntries:<uid>`            | `savePeerEntries:<uid>`<br>No longer differentiates between enabled and disabled entries. Users with `viewPeerEntries:<uid>` permissions can still create drafts.
-| `replaceFilesInVolume:<uid>`          | `replaceFiles:<uid>`
-| `replacePeerFilesInVolume:<uid>`      | `replacePeerFiles:<uid>`
-| `saveAssetInVolume:<uid>`             | `saveAssets:<uid>`
-| `viewPeerFilesInVolume:<uid>`         | `viewPeerAssets:<uid>`
-| `viewVolume:<uid>`                    | `viewAssets:<uid>`
-
-Some user permissions have been split into more granular alternatives:
-
-| Old                          | Split Into
-| ---------------------------- | -------------
-| `editCategories:<uid>`       | `viewCategories:<uid>`<br>`saveCategories:<uid>`<br>`deleteCategories:<uid>`<br>`viewPeerCategoryDrafts:<uid>`<br>`savePeerCategoryDrafts:<uid>`<br>`deletePeerCategoryDrafts:<uid>`
-| `editPeerEntryDrafts:<uid>`  | `viewPeerEntryDrafts:<uid>`<br>`savePeerEntryDrafts:<uid>`
-
-## Declaring DateTime Attributes
-
-The [dateTimeAttributes()](craft4:\craft\base\Model::datetimeAttributes()) method, used to designate a model’s attributes having [DateTime](https://www.php.net/manual/en/class.datetime.php) values for easier handling and storage, has been deprecated.
-
-Craft uses DateTime type declarations instead.
-
-A model in Craft 3 might have declared its own `$dateViewed` attribute like this:
-
-```php
-<?php
-
-class MyModel extends \yii\base\Model
-{
-    public $dateViewed;
-    
-    // ...
-
-    public function datetimeAttributes(): array
-    {
-        $attributes = parent::datetimeAttributes();
-        $attributes[] = 'dateViewed';
-        return $attributes;
-    }
-
-    // ...
-}
-```
-
-In Craft 4, *all* that’s needed is the `DateTime` type declaration:
-
-```php
-<?php
-
-class MyModel extends \yii\base\Model
-{
-    public ?DateTime $dateViewed;
-    
-    // ...
-}
-```
+The `hasContent()` method is no longer used, as there is no `content` table to conditionally join—“content” is always loaded from the `elements_sites` table along with the essential element record data.
 
 ::: tip
-Thanks to Craft 4’s [Typecast](craft4:craft\helpers\Typecast) helper, all arrays, floats, booleans, and strings are normalized correctly in addition to DateTime values.
+You should still maintain and `JOIN` any tables that contain your element type’s native properties!
 :::
 
-## Templates
+#### Chips & Cards
 
-### `View::renderTemplateMacro()` has been removed
+Elements’ default representation in the control panel (and *only* representation, prior to 5.0) is now known as a “chip.” We’ve added a second display mode called “cards” that support some additional features.
 
-With changes in Twig 3, the [View](craft4:craft\web\View) class has removed its `renderTemplateMacro()` method.
+- `craft\helpers\Cp::elementHtml()` has been deprecated, and should be replaced with `craft\helpers\Cp::elementChipHtml($element, $config)`. Configuration of a chip is handled via a single `$config` array, the keys of which correspond to the legacy arguments’ names.
+- When generating a chip for an input, you must pass the full `name` attribute, including (or omitting) the `[]` suffix for single or multiple element inputs.
+- Chips no longer display a “remove” button. Use `craft\base\Element::EVENT_DEFINE_ACTION_MENU_ITEMS` to add items to the new “action menu.”
+- To modify output of an element chip rendered by an element type you don’t control, listen for the `craft\helpers\Cp::EVENT_DEFINE_ELEMENT_CHIP_HTML` event.
+- Use the new `elementChip()` Twig function to render a chip in your control panel templates.
 
-<!-- textlint-disable terminology -->
-<!-- `Cp` is the name of the class here, so be cool textlint -->
+Both chips and cards support *thumbnails*.
 
-The [Cp](craft4:craft\helpers\Cp) helper includes methods for rendering Craft’s built-in form components you may be able to use (like [Cp::textFieldHtml()](craft4:craft\helpers\Cp::textFieldHtml()))—otherwise any macros will need to be moved to their own full templates.
+- Implement the static `hasThumbs()` method on your element and return `true` to support chip and card thumbnails.
+- The existing `getThumbHtml()` method is responsible for returning a custom or fixed thumbnail; you are free to omit this and allow thumbnails to be specified by users in your element type’s field layout. [Fields that implement the `ThumbableFieldInterface`](#presentation) are eligible for selection by the user.
+- Previewable fields (those implementing `PreviewableFieldInterface`) may also appear in your elements’ cards.
+- Use the new `elementCard()` Twig function to render a card in your control panel templates.
+- The new `craft\elements\NestedElementManager` class contains logic to render lists of nested element cards.
 
-<!-- textlint-enable terminology -->
+#### Unified Element Editor
 
-### Template Hooks
+Introduced in Craft 4, the [unified element editor](/4.x/extend/upgrade.md#unified-element-editor) powers full-screen forms as well as slideouts. If you haven’t already, we strongly recommend adopting the unified editor for custom elements.
 
-Element-specific [control panel template hooks](template-hooks.md#control-panel-template-hooks) have been removed:
+#### Field Layout Elements
 
-- `cp.assets.edit.content`
-- `cp.assets.edit.details`
-- `cp.assets.edit.meta`
-- `cp.assets.edit.settings`
-- `cp.assets.edit`
-- `cp.categories.edit.content`
-- `cp.categories.edit.details`
-- `cp.categories.edit.meta`
-- `cp.categories.edit.settings`
-- `cp.categories.edit`
-- `cp.elements.edit`
-- `cp.entries.edit.content`
-- `cp.entries.edit.details`
-- `cp.entries.edit.meta`
-- `cp.entries.edit.settings`
-- `cp.entries.edit`
+Native attributes for users (like **Email**, **Username**, and **Full Name**) and entries (like **Authors**) are now handled with field layout elements. To provide similar flexibility for your element types, consider moving native attributes out of the sidebar.
 
-With the new [unified element editor](#unified-element-editor), anything that needs to be included in the editor should be provided in a field layout.
+#### Element Actions
 
-If your plugin appended non-field content to a main content area, however, you can use Craft 4’s [ElementsController::EVENT_DEFINE_EDITOR_CONTENT](craft4:craft\controllers\ElementsController::EVENT_DEFINE_EDITOR_CONTENT) to check the event object’s `$element` property and optionally append markup to `$html`.
+Elements now have a dedicated “actions” menu that consolidates common functions like viewing and editing.
 
-## GraphQL
+::: tip
+Action menus are a separate concept from [element index actions](element-types.md#actions). Action menu items are only expected to operate on a single element at a time.
+:::
 
-[TypeManager::prepareFieldDefinitions()](craft4:craft\gql\TypeManager::prepareFieldDefinitions()) has been deprecated. Use [Gql::prepareFieldDefinitions()](craft4:craft\services\Gql::prepareFieldDefinitions()) instead:
+- The schema of these action menu items must conform with the expectations of `craft\helpers\Cp::disclosureMenu()`.
+- `craft\base\Element` takes care of many element-type-agnostic actions. You may return additional “safe” actions from a `safeActionMenuItems()` method, and destructive actions from a `destructiveActionMenuItems()` method. Only safe items are displayed when rendering chips.
+- To add or alter actions for an element type you don’t own, listen for its `EVENT_DEFINE_ACTION_MENU_ITEMS` event. This is emitted a single time, and 
+- Action menu items that rely on Javascript should use a temporary unique ID to tie the final markup to scripts:
 
-```php
-// Craft 3
-public static function getFieldDefinitions(): array
-{
-    return craft\gql\TypeManager::prepareFieldDefinitions([
-        // ...
-    ], self::getName());
-}
+    ```php
+    $alertId = sprintf('action-alert-title-%s', mt_rand());
+    $items[] = [
+        'type' => MenuItemType::Button,
+        'id' => $alertId,
+        'icon' => 'alert',
+        'label' => Craft::t('my-plugin', 'Show {type} title', [
+            'type' => static::lowerDisplayName(),
+        ]),
+    ];
+    
+    $view = Craft::$app->getView();
+    $view->registerJsWithVars(fn($id, $title) => <<<JS
+    $('#' + $id).on('click', () => {
+      alert($title);
+    });
+    JS, [$alertId, $this->title]);
+    ```
 
-// Craft 4
-public static function getFieldDefinitions(): array
-{
-    return Craft::$app->getGql()->prepareFieldDefinitions([
-        // ...
-    ], self::getName());
-}
-```
+See `craft\enums\MenuItemType` for the allowed `type` values, and `craft\helpers\Cp::menuItem()` for information about the required properties for each. If no `type` is passed, Craft will automatically set it based on what combination of other properties are available.
 
-### Defining Components
+#### Breadcrumbs
 
-Plugins can now define their components (like services) using a new static [config()](craft4:craft\base\PluginInterface::config()) method rather than [setComponents()](yii2:yii\di\ServiceLocator::setComponents()). This makes the plugin’s service extendable in the same way Craft’s main app config can be extended via `config/app`.
-
-To take advantage of this, you could move your existing component definition...
+In addition to action menus, elements can provide custom [breadcrumbs for full-screen control panel views](#breadcrumbs-1) via the new `crumbs()` method:
 
 ```php
-// Craft 3/4 `setComponents()`
-public function init(): void
+public function crumbs(): array
 {
-    // …
-    $this->setComponents([
-        'myComponent' => MyComponent::class
+    $crumbs = [];
+    $type = $this->getWidgetType();
+
+    // Add root widgets source:
+    $crumbs[] = [
+      'label' => Craft::t('my-plugin', 'Widgets'),
+      'url' => 'widgets',
+    ];
+
+    // Gather other widget types and generate a disclosure-menu-compatible list:
+    $allTypes = Collection::make(Craft::$app->getEntries()->getEditableSections());
+    $typeOptions = $allTypes->map(fn(WidgetType $wt) => [
+        'label' => Craft::t('site', $wt->name),
+        'url' => "entries/$wt->handle",
+        // Is this the current type?
+        'selected' => $wt->id === $type->id,
     ]);
-}
-```
 
-...to the new `config()` method:
-
-```php
-// Craft 4 `config()`
-public static function config(): array
-{
-    return [
-        'components' => [
-            'myComponent' => ['class' => MyComponent::class],
+    // Add this widget type’s source, with a switcher for other widget type indexes:
+    $crumbs[] = [
+        // Note that we don’t need a top-level label or URL—Craft uses the `selected` menu item!
+        'menu' => [
+          'label' => Craft::t('my-plugin', 'Select widget type'),
+          'items' => $typeOptions,
         ],
     ];
+
+    return $crumbs;
 }
 ```
 
-A project then has the option to customize the component from `config/app.php`:
+This example draws from our own use of breadcrumbs in entries—authors can navigate laterally to other sections from any entry’s edit screen.
+
+::: tip
+Nested elements automatically prepend their owner’s breadcrumbs.
+:::
+
+#### Nested Elements
+
+_We’re still working on this section! Check out the [Matrix field’s implementation](repo:craftcms/cms/blob/5.0/src/fields/Matrix.php), if you’re curious how we’re using the new `craft\elements\NestedElementManager` class._
+
+### Field Types
+
+Plugins that provide field types will need to make some adjustments to properly report their runtime and storage data types:
+
+- The `hasContentColumn()` method is no longer used.
+- Multi-column fields that returned an array of values from `getContentColumnType()` must rename the method to `dbType()` and make it `static`. The return value must remain unchanged.
+- Single-column fields should also switch from `getContentColumnType()` to `dbType()`.
+- Field types that previously returned `false` from `hasContentColumn()` must instead return `null` from the new `dbType()` method.
+- Historically, `valueType()` was used to render accurate type hints in the dynamically-generated `CustomFieldBehavior`; we have renamed this method to `phpType()`, for clarity.
+
+These changes also help support our new [field instance](../system/fields.md#multi-instance-fields) feature.
+
+#### Multi-Instance Fields
+
+Craft handles multi-instance fields for you, at the field layout level.
+
+You can explicitly opt out of multi-instance support by returning `false` from a static `isMultiInstance()` method. By default, Craft treats all field types as multi-instance unless its `dbType()` method returns `null`.
+
+::: tip
+We will provide a console command for users to merge field definitions that are made redundant by multi-instance support.
+:::
+
+#### Presentation
+
+Field types whose content is useful in [element cards](#element-chips-cards) should implement `PreviewableFieldInterface`. In addition to determining whether the field can be displayed in element indexes, previewable fields are now eligible for inclusion in element cards when building field layouts.
+
+::: tip
+Make sure you are returning relevant markup for each context your element appears in!
+:::
+
+Similarly, implementing the `ThumbableFieldInterface` and defining a `getThumbHtml()` method makes a field eligible for use as a [chip or card](#element-chips-cards)’s thumbnail.
+
+#### In-line Editing
+
+Making a field [editable in-line](../system/elements.md#in-line-editing) (in an element index) involves implementing `InlineEditableFieldInterface`, which itself extends `PreviewableFieldInterface`. Not all field types are good candidates for in-line editing—particularly those with complex interfaces, multiple inputs, or that manage long values.
+
+Craft’s `craft\base\Field` class provides baseline support for in-line editing to all subclasses, by recycling the normal `inputHtml()` output.
+
+#### Field Icons
+
+Choose one of the [built-in FontAwesome icons](https://fontawesome.com/search) to represent your field type by implementing the `icon()` method and returning a valid icon handle. These icons are used in the field type selection menu, and in field layout designers.
+
+### Project Config
+
+Changes to Project Config are now safe to make within migrations, even when `allowAdminChanges` is `false`.
+
+When running `php craft up`, Project Config changes originating from migrations are no longer written back out to YAML if there are other pending changes. Our assumption here is that the equivalent changes were already flushed to the YAML files in a different environment, and will be considered unchanged when Craft goes to apply them.
+
+::: tip
+This means it is no longer necessary (or advisable) to compare your plugin’s current and incoming schema versions!
+:::
+
+### Entrification
+
+Matrix blocks are now entries! The [entrification](https://craftcms.com/blog/entrification) process will conclude in Craft 6, so we recommend plugins begin offering a clean migration path for any features they provide exclusively to categories and tags.
+
+- If your plugin uses references to categories or tags, consider making the selectable targets *entries*. When Craft entrifies category and tag groups, the element IDs stay the same (even preserving foreign keys in the database)—so in many cases, this is only a matter of changing the element type of the selection UI and updating any validation rules on your models.
+- Changes to the sidebar or `meta` region of the element edit screen are often better suited as [field layout elements](#field-layout-elements). You can mark field layout elements as `mandatory` so that they will be included in field layouts even if the developer has not explicitly added them.
+- Plugins that reference Matrix block “types” should be updated to operate on entry types, instead.
+
+### Controllers
+
+Actions that call `$this->requirePostRequest()` will now throw a `yii\web\MethodNotAllowedHttpException` with an HTTP status code of 405 if a method other than `POST` is used.
+
+Controllers can define action menus for any CP screen they return, by calling `CpScreenResponseBehavior::actionMenuItems()`. `CpScreenResponseBehavior::contextMenuHtml()` and `CpScreenResponseBehavior::contextMenuTemplate()` are no longer used.
+
+#### Modals
+
+To complement our abstraction of control panel “screens” via `craft\web\CpScreenResponseBehavior`, Craft 5 adds `craft\web\CpModalResponseBehavior` for views that target more compact modals. Modals have a similar API as screens, but with reduced scope.
+
+Send a modal response using `$this->asCpModal()`:
 
 ```php
-return [
-    'components' => [
-        'plugins' => [
-            'pluginConfigs' => [
-                'my-plugin' => [
-                    'components' => [
-                        'myComponent' => [
-                            'myProperty' => 'foo',
-                        ],
+return $this->asCpModal()
+    ->action('my-plugin/emails/send')
+    ->contentTemplate('my-plugin/emails/transactional-body', $params)
+    ->submitButtonLabel(Craft::t('my-plugin', 'Send'));
+```
+
+### Services
+
+- After globalizing entry types, remaining Section-related functionality from `craft\services\Sections` has moved to `craft\services\Entries`.
+
+### Control Panel Templates
+
+Craft now prefers `.twig` over `.html` when loading templates rendered in the control panel. Check your plugin for templates with the same names (aside from the extension) and ensure the correct one is being rendered. This behavior is not customizable by plugins or by the project’s developer.
+
+#### Breadcrumbs
+
+We saw an example of how the new breadcrumbs system works, in the context of elements—but breadcrumbs are supported on any control panel screen.
+
+In a controller, you can set and add breadcrumbs after building a response with the `asCpScreen()` method:
+
+```php
+return $this->asCpScreen()
+    ->title(Craft::t('my-plugin', 'Edit {type}', ['type' => $type->name]))
+    // ...
+    ->crumbs([
+        [
+            'menu' => [
+                'label' => Craft::t('my-plugin', 'Select settings screen'),
+                'items' => [
+                    [
+                        'label' => Craft::t('my-plugin', 'Widget Types'),
+                        'url' => 'settings/acme/widget-types',
+                        'selected' => true,
+                    ],
+                    [
+                        'label' => Craft::t('my-plugin', 'Security Clearances'),
+                        'url' => 'settings/acme/security',
+                    ],
+                    [
+                        'label' => Craft::t('my-plugin', 'Project Statuses'),
+                        'url' => 'settings/acme/statuses',
                     ],
                 ],
             ],
         ],
-    ],
+        [
+            'menu' => [
+              'label' => Craft::t('my-plugin', 'ACME Lab Settings'),
+              'url' => 'settings/acme',
+            ],
+        ]
+    ]);
+```
+
+The supported “schema” for crumbs is available on `craft\web\CpScreenResponseBehavior::crumbs()`. 
+
+::: warning
+Breadcrumbs are _not_ rendered for slideouts or modals. If you need an action or link to be available to slideouts as well, consider using `CpScreenResponseBehavior::actionMenuItems()`.
+:::
+
+#### Non-Element Tables
+
+`Craft.VueAdminTable` has received some significant updates. Instead of passing data directly to the component via Twig, you can set a `tableDataEndpoint` to fetch the data over Ajax:
+
+```js{14}
+new Craft.VueAdminTable({
+  buttons: [
+    {
+      label: Craft.t('my-plugins', 'New Project Status'),
+      href: Craft.getCpUrl('settings/acme/statuses/new'),
+      icon: 'plus',
+    }
+  ],
+  columns: statusColumns,
+  container: '#project-statuses-vue-admin-table',
+  emptyMessage: Craft.t('my-plugin', 'No statuses exist yet.'),
+  padded: true,
+  perPage: 10,
+  tableDataEndpoint: Craft.getActionUrl('acme/project-statuses'),
+  search: true,
+  searchPlaceholder: Craft.t('my-plugin', 'Search statuses')
+});
+```
+
+Your JSON response should include two keys: `pagination` and `data`. Each item in the `data` array must have keys that correspond to the `columns` declared when setting up the `VueAdminTable` instance:
+
+```php
+use craft\helpers\AdminTable;
+
+return $this->asSuccess(data: [
+    'pagination' => AdminTable::paginationLinks($page, $total, $limit),
+    'data' => [],
+]);
+```
+
+Column labels and content are largely up to you, but there are a couple of handy features that make tables feel consistent. In the constructor above, `statusColumns` would look something like this:
+
+```js
+const statusColumns = [
+  { name: '__slot:title', title: Craft.t('my-plugin', 'Status Label'), sortField: 'name' },
+  { name: 'description', title: Craft.t('my-plugin', 'Description') },
+  // ...
 ];
 ```
+
+`__slot:title` is a special designation for the first column, which combines multiple row attributes into a familiar link-with-status-pip representation of the record. Sending `title`, `url`, `icon`, `iconColor`, and `status` keys for each row will construct visually rich previews, a la the entry types screen:
+
+![VueAdminTable component example](../images/vue-admin-table.png "Example of a VueAdminTable component with URLs, icons, and icon colors defined in the response.")
+
+A `sortField` key in a column should correspond with a property that your controller understands; the component automatically appends `page`, `sort`, `per_page`, and `search` params, allowing the back-end to authoritatively sort, paginate, and filter results.
+
+::: tip
+“Search” for non-element records is not natively supported, so it’s up to you to decide how to honor a search phrase, in the database.
+
+[Client-side searching](https://github.com/craftcms/cms/pull/14126) is also supported.
+:::
+
+### Events
+
+#### Utilities
+
+The `craft\services\Utilities::EVENT_REGISTER_UTILITY_TYPES` constant has been renamed `EVENT_REGISTER_UTILITIES` to agree with our other uses of “component types.” Plugins that register utilities will need to listen for this new event name.
+
+#### Element Indexes
+
+The event constant for customizing element table attribute output has been renamed from `craft\base\Element::EVENT_SET_TABLE_ATTRIBUTE_HTML` to `EVENT_DEFINE_ATTRIBUTE_HTML` to agree with other events that allow post-processing of HTML.
+
+#### Condition Builder
+
+The `craft\base\conditions\BaseCondition::EVENT_REGISTER_CONDITION_RULE_TYPES` constant has been renamed to `EVENT_REGISTER_CONDITION_RULES` to agree with our other users of “component types.”
+
+#### Mailer
+
+The event for registering mail transport adapters has been renamed from `craft\helpers\MailerHelper\EVENT_REGISTER_MAILER_TRANSPORT_TYPES` to `EVENT_REGISTER_MAILER_TRANSPORTS`.
+
+#### Users
+
+The user-specific `craft\controllers\UsersController::EVENT_REGISTER_USER_ACTIONS` has been removed. Use the generic `craft\base\Element::EVENT_DEFINE_ACTION_MENU_ITEMS`, instead. See [element actions](#element-actions) above, for more information.
+
+### Filesystems
+
+Asset volumes can now share filesystems, so long as their base paths don’t overlap. If you have any logic that assumes volumes and filesystems are mapped one-to-one, it will need to be updated to account for the possibility that multiple volumes may point to a single filesystem.
+
+You can always get the filesystem for a volume via `craft\models\Volume::getFs()`.
+
+## Removed
+
+### Matrix Blocks
+
+Matrix blocks are now [nested entries](#nested-elements). As such, most of the supporting functionality has been removed or consolidated into either `craft\base\Element` or `craft\elements\Entry`. Familiar methods like `getOwner()` are defined by `craft\base\NestedElementInterface`, while `getType()` calls are naturally handled by the new entry elements.
+
+If you are using `craft\models\MatrixBlockType` in any type signatures, it should _probably_ be replaced by `craft\models\EntryType`. The APIs for these two models are not entirely compatible, so be aware that down-stream changes are likely necessary.
+
+### Field Groups
+
+By adding support for [multi-instance fields](#multi-instance-fields) and [searchable admin tables](), the need for field groups is diminished. Relevant methods on the `Fields` service (as well as field group events, the database table, and any foreign keys that pointed to it) have been removed.

@@ -127,7 +127,7 @@ In this example, our primary query (for entries in the _News_ section) no longer
 After calling `.eagerly()`, lazily eager-loaded relations are used just like normal relational field values. This means your templates can continue chaining `.one()`, `.all()`, or applying filters like `|first` to get results.
 
 ::: warning
-[Native attributes](#eligible-fields-and-attributes) currently do not support lazy eager-loading due to the way their
+[Native attributes](#eligible-fields-and-attributes) currently do not support lazy eager-loading due to the way many of their values are accessed, but they can be eager loaded using `.with()`.
 :::
 
 ## The `.with()` Query Param
