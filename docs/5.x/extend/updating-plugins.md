@@ -161,7 +161,7 @@ You may define your plugin’s editions this way, but the base plugin class must
 
 Craft now creates database tables using the `uft8mb4` character set (and `utf8mb4_0900_ai_ci` or `utf8mb4_unicode_ci` collation, on MySQL) by default. Developers are asked during the [upgrade process](../upgrade.md#database-character-set-and-collation) to convert existing tables with inconsistent encoding, so it will generally be safe to save emoji and other multibyte characters directly to the database.
 
-Calls to `craft\helpers\StringHelper::emojiToShortcodes($string)` and `craft\helpers\StringHelper::shortcodesToEmoji($string)` are no longer strictly necessary; if you are supporting Craft 4 and 5, consider calling `craft\db\Connection::getSupportsMb4()` to pack and unpack strings when saving and loading.
+Calls to `craft\helpers\StringHelper::emojiToShortcodes($string)` and `craft\helpers\StringHelper::shortcodesToEmoji($string)` are no longer strictly necessary; if you are supporting Craft 4 and 5, consider calling `craft\db\Connection::getSupportsMb4()` to check whether you should pack and unpack strings on their way to and from the database.
 
 ### Composer
 
@@ -173,7 +173,7 @@ Craft’s internal Composer service remains unchanged. Plugins and other low-lev
 
 ## Changes
 
-Craft 5 has a completely new content storage engine, and _a ton_ of new tools for creating rich content authoring experience. Plugins that provide element types or field types may require some additional attention.
+Craft 5 has a completely new content storage engine, and _a ton_ of new tools for creating rich content authoring experiences. Plugins that provide element types or field types may require some additional attention.
 
 ### Elements
 
@@ -321,7 +321,7 @@ Nested elements automatically prepend their owner’s breadcrumbs.
 
 #### Nested Elements
 
-_We’re still working on this section! Check out the [Matrix field’s implementation](repo:craftcms/cms/blob/5.0/src/fields/Matrix.php), if you’re curious how we’re using the new `craft\elements\NestedElementManager` class._
+If you’re curious how we’re using the new `craft\elements\NestedElementManager` class, check out the [Matrix field’s implementation](repo:craftcms/cms/blob/5.0/src/fields/Matrix.php), or the [CKEditor field](repo:craftcms/ckeditor)’s use of `craft\base\ElementContainerFieldInterface`.
 
 ### Field Types
 
@@ -529,7 +529,7 @@ The `craft\base\conditions\BaseCondition::EVENT_REGISTER_CONDITION_RULE_TYPES` c
 
 #### Mailer
 
-The event for registering mail transport adapters has been renamed from `craft\helpers\MailerHelper\EVENT_REGISTER_MAILER_TRANSPORT_TYPES` to `EVENT_REGISTER_MAILER_TRANSPORTS`.
+The event for registering mail transport adapters has been renamed from `craft\helpers\MailerHelper::EVENT_REGISTER_MAILER_TRANSPORT_TYPES` to `EVENT_REGISTER_MAILER_TRANSPORTS`.
 
 #### Users
 
@@ -537,7 +537,7 @@ The user-specific `craft\controllers\UsersController::EVENT_REGISTER_USER_ACTION
 
 ### Filesystems
 
-Asset volumes can now share filesystems, so long as their base paths don’t overlap. If you have any logic that assumes volumes and filesystems are mapped one-to-one, it will need to be updated to account for the possibility that multiple volumes may point to a single filesystem.
+[Asset volumes can now share filesystems](../reference/element-types/assets.md#filesystems), so long as their base paths don’t overlap. If you have any logic that assumes volumes and filesystems are mapped one-to-one, it will need to be updated to account for the possibility that multiple volumes may point to a single filesystem.
 
 You can always get the filesystem for a volume via `craft\models\Volume::getFs()`.
 
@@ -551,4 +551,4 @@ If you are using `craft\models\MatrixBlockType` in any type signatures, it shoul
 
 ### Field Groups
 
-By adding support for [multi-instance fields](#multi-instance-fields) and [searchable admin tables](), the need for field groups is diminished. Relevant methods on the `Fields` service (as well as field group events, the database table, and any foreign keys that pointed to it) have been removed.
+By adding support for [multi-instance fields](#multi-instance-fields) and [searchable admin tables](#non-element-tables), the need for field groups is diminished. Relevant methods on the `Fields` service (as well as field group events, the database table, and any foreign keys that pointed to it) have been removed.
