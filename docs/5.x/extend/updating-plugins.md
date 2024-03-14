@@ -14,7 +14,7 @@ Craft 5 brings some of the most significant author- and developer-experience imp
 The [changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md) is the most comprehensive and up-to-date list of added, changed, deprecated, and removed APIs. This guide focuses on high-level changes, organized by the features they impact.
 
 ::: tip
-Report issues with the upgrade guide in our [`craftcms/docs` repo](https://github.com/craftcms/docs/issues/new), and issues with the upgrade itself in the [`craftcms/cms` repo](https://github.com/craftcms/cms/issues/new?labels=bug%2Ccraft5&projects=&template=BUG-REPORT-V5.yml&title=%5B5.x%5D%3A+).
+Report issues with the upgrade guide in our [`craftcms/docs` repository](https://github.com/craftcms/docs/issues/new), and issues with the upgrade itself in the [`craftcms/cms` repository](https://github.com/craftcms/cms/issues/new?labels=bug%2Ccraft5&projects=&template=BUG-REPORT-V5.yml&title=%5B5.x%5D%3A+).
 :::
 
 ## Overview
@@ -252,7 +252,7 @@ Action menus are a separate concept from [element index actions](element-types.m
 - The schema of these action menu items must conform with the expectations of `craft\helpers\Cp::disclosureMenu()`.
 - `craft\base\Element` takes care of many element-type-agnostic actions. You may return additional “safe” actions from a `safeActionMenuItems()` method, and destructive actions from a `destructiveActionMenuItems()` method. Only safe items are displayed when rendering chips.
 - To add or alter actions for an element type you don’t own, listen for its `EVENT_DEFINE_ACTION_MENU_ITEMS` event. This is emitted a single time, and 
-- Action menu items that rely on Javascript should use a temporary unique ID to tie the final markup to scripts:
+- Action menu items that rely on JavaScript should use a temporary unique ID to tie the final markup to scripts:
 
     ```php
     $alertId = sprintf('action-alert-title-%s', mt_rand());
@@ -387,7 +387,7 @@ Matrix blocks are now entries! The [entrification](https://craftcms.com/blog/ent
 
 Actions that call `$this->requirePostRequest()` will now throw a `yii\web\MethodNotAllowedHttpException` with an HTTP status code of 405 if a method other than `POST` is used.
 
-Controllers can define action menus for any CP screen they return, by calling `CpScreenResponseBehavior::actionMenuItems()`. `CpScreenResponseBehavior::contextMenuHtml()` and `CpScreenResponseBehavior::contextMenuTemplate()` are no longer used.
+Controllers can define action menus for any control panel screen they return, by calling `CpScreenResponseBehavior::actionMenuItems()`. `CpScreenResponseBehavior::contextMenuHtml()` and `CpScreenResponseBehavior::contextMenuTemplate()` are no longer used.
 
 #### Modals
 
