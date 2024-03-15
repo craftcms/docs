@@ -277,7 +277,7 @@ Decodes a base64-encoded string. The encoded value can come from anywhere, as ba
 JavaScript uses the [`btoa()`](https://developer.mozilla.org/en-US/docs/Web/API/btoa) function to encode values as base64, and [`atob()`](https://developer.mozilla.org/en-US/docs/Web/API/atob) to decode them.
 :::
 
-## `base64_encode` <Since ver="4.4.0" feature="The base64_encode Twig filter" />
+## `base64_encode`
 
 Encodes a value as base64. Base64 can be useful for making unpredictable strings or data URL-safe.
 
@@ -292,7 +292,7 @@ If you intend to use the value in a style sheet or URI, consider the [`dataUrl()
 Encoding is _not_ the same as encryption! The result may appear random, but is completely reversible. Read more about the principles and applications of [base64](https://en.wikipedia.org/wiki/Base64) if you are unsure whether it is appropriate!
 :::
 
-## `boolean` <Since ver="4.3.0" feature="The boolean Twig filter" />
+## `boolean`
 
 Coerces the passed value to a boolean using PHP’s [`boolval()`](https://www.php.net/manual/en/function.boolval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
