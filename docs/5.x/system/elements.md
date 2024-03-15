@@ -105,7 +105,7 @@ Use the **View** controls to switch back into structure mode on an index if you 
 
 Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="settings" /> icon in the footer (like _Delete_). Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
 
-### In-line Editing
+### In-line Editing <Badge text="New!" />
 
 Click **Edit** at the bottom of any element index to switch into an in-line editor. Click **Save** to update any rows that changed, or **Cancel** to return to the read-only mode.
 
@@ -119,13 +119,13 @@ Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button
 
 A streamlined version of indexes are used when adding elements to a [relational](./relations.md) field via a modal. Depending on the field’s configuration, Craft may hide sources or actions, and disable [slideouts](./control-panel.md#slideouts) (except to create a new element, in-context) and pagination (in favor of scrolling). Internally, Craft refers to these variations as “contexts,” which [plugins](../extend/element-types.md#sources) have an opportunity to modify.
 
-### Chips & Cards
+### Chips & Cards <Badge text="New!" />
 
 Throughout the control panel, you’ll encounter references to elements in a number of different contexts, like element indexes, [Matrix](../reference/field-types/matrix.md) fields, and other [relational](relations.md) fields. Element _cards_ are a new way to display nested or related elements. They share the core features of element _chips_ (like quick-actions and ordering controls), but provide an additional layer of customization via the element’s [field layout](fields.md#field-layouts).
 
 Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by the field layout; additional features like colorization and icons are supported by entries.
 
-## Rendering Elements
+## Rendering Elements <Badge text="New!" />
 
 Every element has a `render()` method, which you can call from a template to get an HTML representation of the object.
 
