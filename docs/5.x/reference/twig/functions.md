@@ -31,8 +31,10 @@ Function | Description
 [date](#date) | Creates a date.
 [dump](#dump) | Dumps information about a variable.
 [endBody](#endbody) | Outputs scripts and styles that were registered for the “end body” position.
+[entryType](#entrytype) | Gets an entry type definition by its handle.
 [expression](#expression) | Creates a database expression object.
 [failMessageInput](#failmessageinput) | Outputs a hidden `failMessage` input.
+[fieldValueSql](#fieldvaluesql) | Generates an SQL expression for accessing specific fields in elements’ JSON content column.
 [floor](#floor) | Rounds a number down.
 [getenv](#getenv) | Returns the value of an environment variable.
 [gql](#gql) | Executes a GraphQL query against the full schema.
@@ -408,13 +410,49 @@ Overrides Twig’s default [`dump()`](https://twig.symfony.com/doc/3.x/functions
 
 Outputs any scripts and styles that were registered for the “end body” position. It should be placed right before your `</body>` tag.
 
-```twig
-<body>
-  <h1>{{ page.name }}</h1>
-  {{ page.body }}
+```twig{9}
+<html>
+  <head>
+    {# ... #}
+  </head>
+  <body>
+    <h1>{{ page.name }}</h1>
+    {{ page.body }}
 
-  {{ endBody() }}
-</body>
+    {{ endBody() }}
+  </body>
+</html>
+```
+
+## `entryType`
+
+Get a reference to an entry type, by its handle:
+
+```twig{1}
+{% set type = entryType('post') %}
+
+{{ type.name }}
+```
+
+This is equivalent to using the entries service, directly:
+
+```twig{1}
+{% set type = craft.app.entries.getEntryTypeByHandle('post') %}
+
+{{ type.name }}
+```
+
+When creating entries in a [front-end form](../../development/forms.md), you can use the `entryType()` function to find the correct ID to submit (IDs can be unstable between environments, due to the way [project config](../../system/project-config.md#ids-uuids-and-handles) works):
+
+```twig
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('entries/save-entry') }}
+
+  {{ hiddenInput('typeId', entryType('post').id) }}
+
+  {# ... #}
+</form>
 ```
 
 ## `expression`
@@ -442,6 +480,44 @@ You can optionally set additional attributes on the tag by passing an `options` 
   id: 'fail-message-input'
 }) }}
 ```
+
+## `fieldValueSql`
+
+Generates a platform-specific SQL expression to extract a value from elements’ JSON content column.
+
+```twig
+{% set longestFilm = craft.entries()
+  .section('films')
+  .max(fieldValueSql(entryType('film'), 'runtimeMinutes')) %}
+```
+
+::: tip
+Craft automatically handles this for `orderBy()` and `select()` expressions, as well as when using field methods, directly:
+
+```twig
+{% set shortFilms = craft.entries()
+  .section('films')
+  .runtimeMinutes('<= 20')
+  .orderBy('runtimeMinutes DESC')
+  .all() %}
+```
+:::
+
+### Arguments
+
+- `provider` — An object that implements `craft\base\FieldLayoutProviderInterface`, like an [entry type](../element-types/entries.md#entry-types) or [asset volume](../element-types/assets.md#volumes)—basically anything that defines a field layout.
+    ```twig
+    {# Load a field layout provider: #}
+    {# set volume = craft.app.volumes.getVolumeByHandle('photos') %}
+    {% set longExposures = craft.assets()
+      .volume('photos')
+      .andWhere('between', (fieldValueSql(volume, 'shutterSpeed')), 0.17, 1)
+      .all() %}
+    ```
+
+    The provider can also be passed from an existing resource, like `entry.type`.
+
+- `fieldHandle` — The field’s handle in the given field layout. This may be different than the field’s global definition—especially if the field is present [multiple times](../../system/fields.md#multi-instance-fields) in the layout.
 
 ## `floor`
 
