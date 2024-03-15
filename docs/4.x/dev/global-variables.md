@@ -1,6 +1,6 @@
 ---
 description: Discover objects and data available to you in any Twig context.
-updatedVersion: 5.x/reference/twig/global-variables
+updatedVersion: 5.x/reference/twig/global-variables.md
 ---
 
 # Global Variables

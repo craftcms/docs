@@ -1,7 +1,7 @@
 ---
 keywords: Twig Primer
 description: Learn about Craft’s template engine, Twig.
-updatedVersion: 5.x/development/twig
+updatedVersion: 5.x/development/twig.md
 ---
 
 # Introduction to Templating

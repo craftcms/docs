@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/mail
+updatedVersion: 5.x/system/mail.md
 ---
 
 # Email

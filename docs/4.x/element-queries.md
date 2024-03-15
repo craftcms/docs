@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/development/element-queries
+updatedVersion: 5.x/development/element-queries.md
 ---
 
 # Element Queries

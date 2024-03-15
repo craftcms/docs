@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/object-templates
+updatedVersion: 5.x/system/object-templates.md
 ---
 
 # Object Templates

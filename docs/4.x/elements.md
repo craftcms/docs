@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/elements
+updatedVersion: 5.x/system/elements.md
 ---
 
 # Elements

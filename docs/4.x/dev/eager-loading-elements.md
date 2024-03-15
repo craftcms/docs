@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/development/eager-loading
+updatedVersion: 5.x/development/eager-loading.md
 ---
 
 # Eager-Loading Elements

@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/install.md
+---
+
 # Installation
 
 The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](./deployment.md).

@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/reference/twig/tests
+updatedVersion: 5.x/reference/twig/tests.md
 ---
 
 # Tests

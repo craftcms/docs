@@ -1,7 +1,7 @@
 ---
 keywords: headless
 containsGeneratedContent: yes
-updatedVersion: 5.x/development/graphql
+updatedVersion: 5.x/development/graphql.md
 ---
 
 # GraphQL API

@@ -1,6 +1,6 @@
 ---
 sidebarDepth: 2
-updatedVersion: 5.x/system/relations
+updatedVersion: 5.x/system/relations.md
 ---
 
 # Relations

@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/reference/twig/functions
+updatedVersion: 5.x/reference/twig/functions.md
 ---
 
 # Functions

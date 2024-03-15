@@ -1,6 +1,6 @@
 ---
 keywords: multi multisite multilingual translation
-updatedVersion: 5.x/system/sites
+updatedVersion: 5.x/system/sites.md
 ---
 
 # Sites & Localization

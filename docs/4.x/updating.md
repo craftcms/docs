@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/update
+updatedVersion: 5.x/update.md
 ---
 
 # Running Updates

@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/routing
+updatedVersion: 5.x/system/routing.md
 ---
 
 # Routing

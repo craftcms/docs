@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/directory-structure
+updatedVersion: 5.x/system/directory-structure.md
 ---
 
 # Directory Structure

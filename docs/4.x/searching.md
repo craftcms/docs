@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/searching
+updatedVersion: 5.x/system/searching.md
 ---
 
 # Searching

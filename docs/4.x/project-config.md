@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/project-config
+updatedVersion: 5.x/system/project-config.md
 ---
 
 # Project Config

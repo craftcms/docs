@@ -1,6 +1,6 @@
 ---
 description: Fluidly manipulate data in your templates.
-updatedVersion: 5.x/reference/twig/filters
+updatedVersion: 5.x/reference/twig/filters.md
 ---
 
 # Filters

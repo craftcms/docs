@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/reference-tags
+updatedVersion: 5.x/system/reference-tags.md
 ---
 
 # Reference Tags

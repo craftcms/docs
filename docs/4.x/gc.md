@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/gc
+updatedVersion: 5.x/system/gc.md
 ---
 
 # Garbage Collection

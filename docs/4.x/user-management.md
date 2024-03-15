@@ -1,6 +1,6 @@
 ---
 keywords: permissions
-updatedVersion: 5.x/system/user-management
+updatedVersion: 5.x/system/user-management.md
 ---
 
 # User Management

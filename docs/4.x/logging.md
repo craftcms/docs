@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/logging
+updatedVersion: 5.x/system/logging.md
 ---
 
 # Logging

@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/system/queue
+updatedVersion: 5.x/system/queue.md
 ---
 
 # Queue

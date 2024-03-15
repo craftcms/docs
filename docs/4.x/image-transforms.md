@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/development/image-transforms
+updatedVersion: 5.x/development/image-transforms.md
 ---
 
 # Image Transforms

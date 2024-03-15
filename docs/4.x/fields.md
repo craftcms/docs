@@ -1,6 +1,6 @@
 ---
 description: Craft’s powerful content features are driven by custom fields.
-updatedVersion: 5.x/system/fields
+updatedVersion: 5.x/system/fields.md
 ---
 
 # Custom Fields
