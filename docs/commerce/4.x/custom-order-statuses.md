@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/custom-order-statuses'
+updatedVersion: commerce/5.x/system/custom-order-statuses.md
 ---
 
 # Custom Order Statuses

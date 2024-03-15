@@ -1,6 +1,6 @@
 ---
 keywords: order status emails
-updatedVersion: 'commerce/5.x/system/emails'
+updatedVersion: commerce/5.x/system/emails.md
 ---
 # Emails
 

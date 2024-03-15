@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/install'
+updatedVersion: commerce/5.x/install.md
 ---
 
 # Installation

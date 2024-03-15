@@ -1,5 +1,5 @@
 ---
-updatedVersion: 4.x/extend/recipes
+updatedVersion: 4.x/extend/topics.md
 ---
 
 # Extending System Components

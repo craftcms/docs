@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/tax'
+updatedVersion: commerce/5.x/system/tax.md
 ---
 
 # Tax

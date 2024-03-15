@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/development/eager-loading
+---
+
 # Eager-Loading Elements
 
 If a template is looping through a list of elements, and each of those elements must display one or more sub-elements, there’s a good chance the page’s performance will suffer.

@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/users.md
+---
+
 # Users Fields
 
 Users fields type allow you relate [users](users.md) to other elements.

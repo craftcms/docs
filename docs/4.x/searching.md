@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/searching
+---
+
 # Searching
 
 Craft includes a system-wide search index used for finding elements via keywords. Search is supported wherever you see this field in the [control panel](./control-panel.md):

@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/matrix.md
+---
+
 # Money Fields
 
 Money fields give you a text input tailored for storing currency amounts.

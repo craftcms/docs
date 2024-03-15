@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/twig/functions
+---
+
 # Functions
 
 The following [functions](https://twig.symfony.com/doc/3.x/templates.html#functions) are available to Twig templates in Craft:

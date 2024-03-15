@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/plain-text.md
+---
+
 # Plain Text Fields
 
 Plain Text fields give you either a normal text input or a multi-line textarea, where plain text can be entered.

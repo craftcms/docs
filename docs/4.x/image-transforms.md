@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/development/image-transforms
+---
+
 # Image Transforms
 
 Instead of requiring content editors to upload images at a specific sizes, Craft lets you define “image transforms” for automatically manipulating images in predefined ways, or on-demand. Transforms are _non-destructive_, meaning they have no effect on the original uploaded image.

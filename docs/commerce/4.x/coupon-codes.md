@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/coupon-codes'
+updatedVersion: commerce/5.x/system/coupon-codes.md
 ---
 
 # Coupon Codes

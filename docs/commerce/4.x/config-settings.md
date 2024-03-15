@@ -1,6 +1,6 @@
 ---
 containsGeneratedContent: yes
-updatedVersion: 'commerce/5.x/reference/config-settings'
+updatedVersion: commerce/5.x/reference/config-settings.md
 ---
 
 # Config Settings

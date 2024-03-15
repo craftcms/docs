@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/project-config
+---
+
 # Project Config
 
 Craft tracks system settings in a centralized store called _Project Config_. Changes are recorded as YAML files in the `config/project/` folder, which can be version-controlled alongside your templates and other front-end resources.

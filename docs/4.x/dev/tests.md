@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/twig/tests
+---
+
 # Tests
 
 The following [tests](https://twig.symfony.com/doc/3.x/templates.html#test-operator) are available to Twig templates in Craft:

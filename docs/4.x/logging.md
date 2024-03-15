@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/logging
+---
+
 # Logging
 
 Craft’s application logs can help you confirm expected behavior and investigate issues. If you’ve ever encountered a cryptic error page on a live site and wondered what actually went wrong, the logs will have the complete story.

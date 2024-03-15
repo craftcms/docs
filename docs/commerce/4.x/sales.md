@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/sales'
+updatedVersion: commerce/5.x/system/sales.md
 ---
 
 # Sales

@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/reference-tags
+---
+
 # Reference Tags
 
 Reference tags can be used to create references to various elements in your site. They can be used in any textual fields, including Text cells within a Table field.

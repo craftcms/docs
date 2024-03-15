@@ -1,6 +1,6 @@
 ---
 containsGeneratedContent: yes
-updatedVersion: 'commerce/5.x/system/subscriptions'
+updatedVersion: commerce/5.x/system/subscriptions.md
 ---
 
 # Subscriptions

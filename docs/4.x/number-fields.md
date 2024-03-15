@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/number.md
+---
+
 # Number Fields
 
 Number fields give you a text input that accepts a numeric value.

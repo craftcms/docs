@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/gc
+---
+
 # Garbage Collection
 
 Craft occasionally runs a few garbage collection routines to remove stale data, including:

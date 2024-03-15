@@ -1,6 +1,6 @@
 ---
 keywords: cli
-updatedVersion: 'commerce/5.x/reference/console-commands'
+updatedVersion: commerce/5.x/reference/console-commands.md
 ---
 # Console Commands
 

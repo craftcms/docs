@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/queue
+---
+
 # Queue
 
 The **queue** is Craft’s way of delegating certain long-running tasks to an asynchronous background process.

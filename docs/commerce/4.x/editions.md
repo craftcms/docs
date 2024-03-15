@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/upgrade'
+updatedVersion: commerce/5.x/upgrade.md
 ---
 
 # Editions

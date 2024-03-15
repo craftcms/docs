@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/directory-structure
+---
+
 # Directory Structure
 
 A fresh Craft [installation](../install.md) will have the following [folders](#folders) and [files](#files) in it. Existing projects may have [additional files](#other-common-files) in the root.

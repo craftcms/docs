@@ -1,7 +1,7 @@
 ---
 sidebarDepth: 2
 containsGeneratedContent: yes
-updatedVersion: 'commerce/5.x/system/products-variants'
+updatedVersion: commerce/5.x/system/products-variants.md
 ---
 
 # Products & Variants

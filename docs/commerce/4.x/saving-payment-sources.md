@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/development/saving-payment-sources'
+updatedVersion: commerce/5.x/development/saving-payment-sources.md
 ---
 
 # Saving Payment Sources

@@ -1,5 +1,6 @@
 ---
 sidebarDepth: 2
+updatedVersion: 5.x/system/control-panel
 ---
 
 # Control Panel

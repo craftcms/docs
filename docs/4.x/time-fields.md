@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/time.md
+---
+
 # Time Fields
 
 Time fields provide a time picker input.

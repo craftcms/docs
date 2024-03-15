@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/categories.md
+---
+
 # Categories Fields
 
 <div class="version-warning">

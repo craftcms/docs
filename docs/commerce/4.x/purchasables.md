@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/purchasables'
+updatedVersion: commerce/5.x/system/purchasables.md
 ---
 
 # Purchasables

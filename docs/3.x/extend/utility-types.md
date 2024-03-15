@@ -1,5 +1,5 @@
 ---
-updatedVersion: 4.x/extend/utilities
+updatedVersion: 4.x/extend/utilities.md
 ---
 
 # Utility Types

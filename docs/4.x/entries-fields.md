@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/entries.md
+---
+
 # Entries Fields
 
 Entries fields allow you to relate [entries](entries.md) to other elements.

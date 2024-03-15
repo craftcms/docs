@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/email.md
+---
+
 # Email Fields
 
 Email fields give you a normal text input that requires a valid email address.

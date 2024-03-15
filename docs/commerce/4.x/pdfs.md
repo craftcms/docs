@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/pdfs'
+updatedVersion: commerce/5.x/system/pdfs.md
 ---
 
 # PDFs

@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/currencies'
+updatedVersion: commerce/5.x/system/currencies.md
 ---
 
 # Payment Currencies

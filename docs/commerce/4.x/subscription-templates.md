@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/development/subscription-templates'
+updatedVersion: commerce/5.x/development/subscription-templates.md
 ---
 
 # Subscription Templates

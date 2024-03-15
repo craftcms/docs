@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/mail
+---
+
 # Email
 
 Craft sends email in response to some user actions, like account activation, email verification, password resets, and testing [email settings](#settings). All Craft editions are capable of sending emails, but [system messages](#system-messages) are only customizable in **Pro**.

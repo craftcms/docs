@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/reference/twig'
+updatedVersion: commerce/5.x/reference/twig.md
 ---
 
 # Twig Filters

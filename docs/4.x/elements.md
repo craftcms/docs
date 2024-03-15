@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/elements
+---
+
 # Elements
 
 An _element_ is the most basic unit of content in Craft. Elements provide smart management, routing, and querying interfaces for users and developers. Each [type](#element-types) of element has some unique capabilities, but they’re all built on top of a set of [common features](#common-features).

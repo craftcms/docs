@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/gateways'
+updatedVersion: commerce/5.x/system/gateways.md
 ---
 
 # Payment Gateways

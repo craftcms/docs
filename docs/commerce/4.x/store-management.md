@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/reference/permissions'
+updatedVersion: commerce/5.x/reference/permissions.md
 ---
 
 # Store Management

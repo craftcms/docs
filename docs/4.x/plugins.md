@@ -1,4 +1,5 @@
 ---
+updatedVersion: 5.x/system/plugins
 related:
   - label: 'Craft Console'
     uri: 'https://console.craftcms.com'

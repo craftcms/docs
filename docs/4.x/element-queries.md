@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/development/element-queries
+---
+
 # Element Queries
 
 You can fetch [elements](./elements.md) (entries, categories, assets, etc.) in your templates or PHP code using **element queries**.

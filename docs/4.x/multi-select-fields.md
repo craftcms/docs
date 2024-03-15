@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/multi-select.md
+---
+
 # Multi-select Fields
 
 Multi-select fields give you an input where multiple items may be selected.

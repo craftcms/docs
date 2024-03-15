@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/routing
+---
+
 # Routing
 
 Routing is the process by which Craft directs incoming requests to specific content or functionality.

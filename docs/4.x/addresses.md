@@ -5,6 +5,7 @@ related:
   - uri: /4.x/dev/controller-actions.md
     label: Controller actions reference
 containsGeneratedContent: yes
+updatedVersion: 5.x/reference/element-types/addresses.md
 ---
 
 # Addresses

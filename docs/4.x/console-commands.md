@@ -1,6 +1,7 @@
 ---
 keywords: cli
 containsGeneratedContent: yes
+updatedVersion: 5.x/reference/cli.md
 ---
 
 # Console Commands

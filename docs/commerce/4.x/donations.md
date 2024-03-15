@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/donations'
+updatedVersion: commerce/5.x/system/donations.md
 ---
 
 # Donations

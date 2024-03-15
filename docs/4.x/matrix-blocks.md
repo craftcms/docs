@@ -1,5 +1,6 @@
 ---
 containsGeneratedContent: yes
+updatedVersion: 5.x/reference/field-types/matrix.md
 ---
 
 # Matrix Blocks

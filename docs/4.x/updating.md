@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/update
+---
+
 # Running Updates
 
 Craft has a smart system based on [Composer](https://getcomposer.org) that helps you keep your site and plugins up-to-date.

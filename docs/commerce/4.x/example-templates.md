@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/development/example-templates'
+updatedVersion: commerce/5.x/development/example-templates.md
 ---
 
 # Example Templates

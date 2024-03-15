@@ -1,5 +1,5 @@
 ---
-updatedVersion: 4.x/extend/filesystem-types
+updatedVersion: 4.x/extend/filesystem-types.md
 ---
 
 # Volume Types

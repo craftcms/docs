@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/update'
+updatedVersion: commerce/5.x/update.md
 ---
 
 # Updating Instructions

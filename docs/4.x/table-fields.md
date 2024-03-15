@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/table.md
+---
+
 # Table Fields
 
 Table fields give you a customizable table, where you can manage data or content in compact rows.

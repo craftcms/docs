@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/customers'
+updatedVersion: commerce/5.x/system/customers.md
 ---
 
 # Customers

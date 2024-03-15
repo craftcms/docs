@@ -1,6 +1,6 @@
 ---
 sidebarDepth: 2
-updatedVersion: 'commerce/5.x/system/addresses'
+updatedVersion: commerce/5.x/system/addresses.md
 ---
 
 # Addresses

@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/discounts'
+updatedVersion: commerce/5.x/system/discounts.md
 ---
 
 # Discounts

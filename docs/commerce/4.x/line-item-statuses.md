@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/line-item-statuses'
+updatedVersion: commerce/5.x/system/line-item-statuses.md
 ---
 
 # Line Item Statuses

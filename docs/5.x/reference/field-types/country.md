@@ -4,7 +4,7 @@ description: Select a country from the same database that powers address element
 
 # Country Fields
 
-The **Country** field <Since ver="4.6.0" feature="The Country field" /> allows authors to select from a the same list of countries made available via [address](addresses.md) elements. When viewed as part of a form in the [control panel](control-panel.md), countries’ names will be localized into the user’s preferred language.
+The **Country** field allows authors to select from a the same list of countries made available via [address](addresses.md) elements. When viewed as part of a form in the [control panel](control-panel.md), countries’ names will be localized into the user’s preferred language.
 
 ## Settings
 

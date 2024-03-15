@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/development/making-payments'
+updatedVersion: commerce/5.x/development/making-payments.md
 ---
 
 # Making Payments

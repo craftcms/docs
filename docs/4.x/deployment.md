@@ -1,6 +1,7 @@
 ---
 description: Recommendations for hosting and deploying a Craft application.
 sidebarDepth: 2
+updatedVersion: 5.x/deploy
 ---
 
 # Hosting & Deployment

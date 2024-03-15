@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/transactions'
+updatedVersion: commerce/5.x/system/transactions.md
 ---
 
 # Transactions

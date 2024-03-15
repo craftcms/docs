@@ -1,5 +1,5 @@
 ---
-updatedVersion: 'commerce/5.x/system/shipping'
+updatedVersion: commerce/5.x/system/shipping.md
 ---
 
 # Shipping

@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/addresses.md
+---
+
 # Assets Fields
 
 Assets fields allow you to relate [assets](assets.md) to other elements.

@@ -1,5 +1,6 @@
 ---
 description: Twig tags give your templates advanced logical capabilities.
+updatedVersion: 5.x/reference/twig/tags
 ---
 
 # Tags

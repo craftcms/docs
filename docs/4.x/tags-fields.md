@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/tags.md
+---
+
 # Tags Fields
 
 Tags fields allow you relate [tags](tags.md) to other elements.

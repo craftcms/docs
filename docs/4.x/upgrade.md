@@ -1,5 +1,6 @@
 ---
 sidebarDepth: 2
+updatedVersion: 5.x/upgrade
 ---
 
 # Upgrading from Craft 3

@@ -6,6 +6,7 @@ related:
     label: Supporting Public Registration
   - uri: https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers
     label: Yii Controllers Guide
+updatedVersion: 5.x/reference/controller-actions.md
 ---
 
 # Controller Actions

@@ -1,7 +1,7 @@
 ---
 sidebarDepth: 2
 containsGeneratedContent: yes
-updatedVersion: 'commerce/5.x/system/orders-carts'
+updatedVersion: commerce/5.x/system/orders-carts.md
 ---
 
 # Orders & Carts

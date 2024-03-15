@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/checkboxes.md
+---
+
 # Checkboxes Fields
 
 Checkboxes fields give you a group of checkboxes.

@@ -1,5 +1,6 @@
 ---
 description: Select a country from the same database that powers address elements.
+updatedVersion: 5.x/reference/field-types/country.md
 ---
 
 # Country Fields

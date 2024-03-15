@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/system/object-templates
+---
+
 # Object Templates
 
 Craft uses single-line [Twig](dev/twig-primer.md) “templates” in a number of places throughout the control panel to generate values from data that is only known at runtime. These templates are most often stored in [Project Config](project-config.md), but the resulting values are typically part of a record stored in the database, or only used temporarily.

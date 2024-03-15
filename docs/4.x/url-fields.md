@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/url.md
+---
+
 # URL Fields
 
 URL fields give you a normal text input that can be configured for entering web page URLs, telephone numbers, and email addresses.

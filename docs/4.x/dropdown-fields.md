@@ -1,3 +1,7 @@
+---
+updatedVersion: 5.x/reference/field-types/dropdown.md
+---
+
 # Dropdown Fields
 
 Dropdown fields give you a dropdown input.
