@@ -117,7 +117,7 @@ Filter | Description
 
 ## `address`
 
-Applies formatting to an [Address](../addresses.md#address-formatter).
+Applies formatting to an [Address](../element-types/addresses.md#address-formatter).
 
 ```twig
 {% set myAddress = currentUser.getAddresses()|first %}
