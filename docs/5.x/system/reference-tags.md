@@ -5,7 +5,7 @@ Reference tags can be used to create references to specific [elements](elements.
 A reference tag usually takes this form:
 
 ```twig
-{<Type>:<Identifier>:<Property>}
+{<Type>:<Identifier>(@<Site>):<Property>}
 ```
 
 Curly braces (`{}`) surround three segments, separated by colons (`:`):
@@ -22,13 +22,13 @@ Curly braces (`{}`) surround three segments, separated by colons (`:`):
     - Tags: `tag`
     - Users: `user`
 
-2.  `<Identifier>` – Either the element’s ID or a custom identifier supported by the element type.
+2.  `<Identifier>` – Either the element’s ID or a custom identifier supported by the element type:
 
-    Entries support the following custom identifier:
+    - Entries: `my-entry-slug`, or `mySection/my-entry-slug`
+    - Categories: `my-category-slug` or `myGroup/my-category-slug`
+    - Global sets: `setHandle`
 
-    - `sectionHandle/entry-slug`
-
-    Identifiers can also include the site ID, UUID, or handle that the element should be loaded from, using an `@<Site>` syntax.
+    Identifiers can also include the ID, UUID, or handle of a site that the element should be loaded from, using an `@<Site>` syntax.
 
 3.  `<Property>` _(optional)_ – The element property that the reference tag should return. If omitted, the element’s URL will be returned.
 
@@ -48,11 +48,11 @@ Curly braces (`{}`) surround three segments, separated by colons (`:`):
 
 The following are all valid reference tag formats:
 
-- `{asset:123:filename}` – returns the filename of an asset with the ID of `123` (via <craft4:craft\elements\Asset::getFilename()>).
-- `{entry:blog/whats-on-tap}` – returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.
-- `{entry:blog/whats-on-tap@en:intro}` – returns the value of an `intro` custom field on a `blog` section entry with the slug `whats-on-tap`, loaded from the site with the handle `en`.
-- `{craft\commerce\Variant:123:price}` – returns the price of a Commerce Variant object with the ID of `123`.
-- `{globalset:aGlobalSet:uid}` – returns the UID of a global set with the handle `aGlobalSet`.
+- `{asset:123:filename}` — returns the filename of an asset with the ID of `123` (via <craft4:craft\elements\Asset::getFilename()>).
+- `{entry:blog/whats-on-tap}` — returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.
+- `{entry:blog/whats-on-tap@en:intro}` — returns the value of an `intro` custom field on a `blog` section entry with the slug `whats-on-tap`, loaded from the site with the handle `en`.
+- `{craft\commerce\Variant:123:price}` — returns the price of a Commerce Variant object with the ID of `123`. Note that no formatting will be applied to the price!
+- `{globalset:siteInfo:description}` — returns the value of a `description` field on a global set with the handle `siteInfo`.
 
 ## Generating Tags
 
@@ -74,6 +74,16 @@ $parsed = Craft::$app->getElements()->parseRefs($text);
 
 Both functions take an optional `$siteId` param, which will determine what site the references are assumed to be in, if a tag doesn’t explicitly declare one.
 
-::: danger
-**Do not** pass untrusted user input through `parseRefs`! Reference tags allow access to arbitrary properties and can lead to [exfiltration](https://csrc.nist.gov/glossary/term/exfiltration) of private data.
-:::
+## Safety
+
+Any time you allow dynamic references to other resources, it’s important to acknowledge some risks.
+
+### Recursion
+
+Reference tags are parsed recursively—so supposing you had a field with a reference to itself (or any other multi-element cyclical reference), Craft would go back and forth, parsing them until it ran out of memory!
+
+### Untrusted Input
+
+**Do not** pass untrusted user input through `parseRefs`! Reference tags allow access to arbitrary properties and can lead to [exfiltration](https://csrc.nist.gov/glossary/term/exfiltration) of private data—as an example, an anonymous user could submit `{user:1:email}` to try and get admin user’s email address.
+
+This also applies to the [GraphQL directive](../development/graphql.md#the-parserefs-directive) of the same name.
