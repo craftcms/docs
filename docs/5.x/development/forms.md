@@ -13,6 +13,8 @@ If you’ve gotten familiar with Craft’s [control panel](../system/control-pan
 
 Any time you want to submit or get information to Craft, it’s part of the [request](#making-requests)-[response](#responses) lifecycle. This page covers the process of setting up HTML forms (and other types of requests like [Ajax](#ajax)!) to send and request data in a way that Craft understands.
 
+<See path="../reference/controller-actions.md" label="Controller Actions Reference" description="See a list of controller actions you can interact with via forms." />
+
 ## Making Requests
 
 Most of your interactions with Craft so far have likely been over HTTP. Let’s take a look at how Craft determines what to do when it receives a request.
