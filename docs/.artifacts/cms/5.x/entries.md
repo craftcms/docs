@@ -24,6 +24,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [authorGroup](#authorgroup)                 | Narrows the query results based on the user group the entries’ authors belong to.
 | [authorGroupId](#authorgroupid)             | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
 | [authorId](#authorid)                       | Narrows the query results based on the entries’ author ID(s).
+| [average](#average)                         | Returns the average of the specified column values.
 | [before](#before)                           | Narrows the query results to only entries that were posted before a certain date.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
@@ -48,6 +49,8 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [leaves](#leaves)                           | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
 | [level](#level)                             | Narrows the query results based on the entries’ level within the structure.
 | [limit](#limit)                             | Determines the number of entries that should be returned.
+| [max](#max)                                 | Returns the maximum of the specified column values.
+| [min](#min)                                 | Returns the minimum of the specified column values.
 | [nextSiblingOf](#nextsiblingof)             | Narrows the query results to only the entry that comes immediately after another entry in its structure.
 | [offset](#offset)                           | Determines how many entries should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
@@ -80,6 +83,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the entries’ IDs in the `elements_sites` table.
 | [slug](#slug)                               | Narrows the query results based on the entries’ slugs.
 | [status](#status)                           | Narrows the query results based on the entries’ statuses.
+| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [title](#title)                             | Narrows the query results based on the entries’ titles.
 | [trashed](#trashed)                         | Narrows the query results to only entries that have been soft-deleted.
 | [type](#type)                               | Narrows the query results based on the entries’ entry types.
@@ -396,6 +400,19 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `before`
@@ -1071,6 +1088,32 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `nextSiblingOf`
@@ -1991,6 +2034,19 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `title`

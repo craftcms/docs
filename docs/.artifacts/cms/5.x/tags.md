@@ -16,6 +16,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only tags that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching tags as arrays of data, rather than [Tag](craft5:craft\elements\Tag) objects.
+| [average](#average)                         | Returns the average of the specified column values.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)                 | Narrows the query results based on the tags’ creation dates.
@@ -29,6 +30,8 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [inBulkOp](#inbulkop)                       | Narrows the query results to only tags that were involved in a bulk element operation.
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
 | [limit](#limit)                             | Determines the number of tags that should be returned.
+| [max](#max)                                 | Returns the maximum of the specified column values.
+| [min](#min)                                 | Returns the minimum of the specified column values.
 | [offset](#offset)                           | Determines how many tags should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -40,6 +43,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [site](#site)                               | Determines which site(s) the tags should be queried in.
 | [siteId](#siteid)                           | Determines which site(s) the tags should be queried in, per the site’s ID.
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the tags’ IDs in the `elements_sites` table.
+| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [title](#title)                             | Narrows the query results based on the tags’ titles.
 | [trashed](#trashed)                         | Narrows the query results to only tags that have been soft-deleted.
 | [uid](#uid)                                 | Narrows the query results based on the tags’ UIDs.
@@ -127,6 +131,19 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -454,6 +471,32 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
+
+
 #### `offset`
 
 Determines how many tags should be skipped in the results.
@@ -736,6 +779,19 @@ $tag = \craft\elements\Tag::find()
     ->one();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `title`

@@ -18,6 +18,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [ancestorOf](#ancestorof)                   | Narrows the query results to only categories that are ancestors of another category in its structure.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only categories that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching categories as arrays of data, rather than [Category](craft5:craft\elements\Category) objects.
+| [average](#average)                         | Returns the average of the specified column values.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)                 | Narrows the query results based on the categories’ creation dates.
@@ -36,6 +37,8 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [leaves](#leaves)                           | Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
 | [level](#level)                             | Narrows the query results based on the categories’ level within the structure.
 | [limit](#limit)                             | Determines the number of categories that should be returned.
+| [max](#max)                                 | Returns the maximum of the specified column values.
+| [min](#min)                                 | Returns the minimum of the specified column values.
 | [nextSiblingOf](#nextsiblingof)             | Narrows the query results to only the category that comes immediately after another category in its structure.
 | [offset](#offset)                           | Determines how many categories should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
@@ -54,6 +57,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the categories’ IDs in the `elements_sites` table.
 | [slug](#slug)                               | Narrows the query results based on the categories’ slugs.
 | [status](#status)                           | Narrows the query results based on the categories’ statuses.
+| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [title](#title)                             | Narrows the query results based on the categories’ titles.
 | [trashed](#trashed)                         | Narrows the query results to only categories that have been soft-deleted.
 | [uid](#uid)                                 | Narrows the query results based on the categories’ UIDs.
@@ -206,6 +210,19 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -686,6 +703,32 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `nextSiblingOf`
@@ -1207,6 +1250,19 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `title`
