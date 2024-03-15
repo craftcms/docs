@@ -22,6 +22,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the addresses’ owners are revisions.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only addresses that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching addresses as arrays of data, rather than [Address](craft5:craft\elements\Address) objects.
+| [average](#average)                         | Returns the average of the specified column values.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [countryCode](#countrycode)                 | Narrows the query results based on the country the addresses belong to.
@@ -41,6 +42,8 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [lastName](#lastname)                       | Narrows the query results based on the last name the addresses have.
 | [limit](#limit)                             | Determines the number of addresses that should be returned.
 | [locality](#locality)                       | Narrows the query results based on the locality the addresses belong to.
+| [max](#max)                                 | Returns the maximum of the specified column values.
+| [min](#min)                                 | Returns the minimum of the specified column values.
 | [offset](#offset)                           | Determines how many addresses should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [organization](#organization)               | Narrows the query results based on the organization the addresses have.
@@ -58,6 +61,7 @@ This auto-generated reference material has not yet been updated for Craft 5!
 | [search](#search)                           | Narrows the query results to only addresses that match a search query.
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
 | [sortingCode](#sortingcode)                 | Narrows the query results based on the sorting code the addresses have.
+| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [trashed](#trashed)                         | Narrows the query results to only addresses that have been soft-deleted.
 | [uid](#uid)                                 | Narrows the query results based on the addresses’ UIDs.
 | [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
@@ -295,6 +299,19 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -807,6 +824,32 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
+
+
 #### `offset`
 
 Determines how many addresses should be skipped in the results.
@@ -1244,6 +1287,19 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `trashed`
