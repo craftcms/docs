@@ -31,6 +31,7 @@
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
 | [includeSubfolders](#includesubfolders)     | Broadens the query results to include assets from any of the subfolders of the folder specified by [folderId](#folderid).
 | [kind](#kind)                               | Narrows the query results based on the assets’ file kinds.
+| [language](#language)                       | Determines which site(s) the assets should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of assets that should be returned.
 | [max](#max)                                 | Returns the maximum of the specified column values.
 | [min](#min)                                 | Returns the minimum of the specified column values.
@@ -650,6 +651,44 @@ Possible values include:
 // Fetch all the images
 $assets = \craft\elements\Asset::find()
     ->kind('image')
+    ->all();
+```
+:::
+
+
+#### `language`
+
+Determines which site(s) the assets should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches assets…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch assets from English sites #}
+{% set assets = craft.assets()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch assets from English sites
+$assets = \craft\elements\Asset::find()
+    ->language('en')
     ->all();
 ```
 :::

@@ -35,6 +35,7 @@
 | [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
 | [inBulkOp](#inbulkop)                       | Narrows the query results to only addresses that were involved in a bulk element operation.
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
+| [language](#language)                       | Determines which site(s) the addresses should be queried in, based on their language.
 | [lastName](#lastname)                       | Narrows the query results based on the last name the addresses have.
 | [limit](#limit)                             | Determines the number of addresses that should be returned.
 | [locality](#locality)                       | Narrows the query results based on the locality the addresses belong to.
@@ -730,6 +731,44 @@ Causes the query results to be returned in reverse order.
 // Fetch addresses in reverse
 $addresses = \craft\elements\Address::find()
     ->inReverse()
+    ->all();
+```
+:::
+
+
+#### `language`
+
+Determines which site(s) the addresses should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch addresses from English sites #}
+{% set addresses = craft.addresses()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch addresses from English sites
+$addresses = \craft\elements\Address::find()
+    ->language('en')
     ->all();
 ```
 :::
