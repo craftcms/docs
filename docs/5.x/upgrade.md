@@ -89,11 +89,11 @@ The following settings have been changed.
 
 #### Database Character Set and Collation
 
-Craft 5 requires MySQL 8.0, which has deprecated the use of `utf8` as an alias for the `utf8mb3` character set. A future version [is expected to switch this alias to `utf8mb4`](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb3.html), so we are proactively adopting the unambiguous `utf8mb4` character set and `utf8mb4_0900_ai_ci` collation for new tables.
+MySQL 8.0 [deprecated the `utf8mb3` character set](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb3.html), as well as [the use of `utf8` as an alias for `utf8mb3`](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8.html). MySQL [recommends `utf8mb4`](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb4.html) instead, and it’s expected that `utf8` will become an alias for `utf8mb4` in MySQL 8.1.
 
-Custom collation settings that do not use an explicit byte-length suffix (i.e. `utf8_general_ci`) may be incompatible with the new handling of `utf8`. For example, a Craft 4 project that uses the `utf8_unicode_ci` _collation_ (set via the `CRAFT_DB_COLLATION` environment variable or `collation` key in `db.php`) but has not explicitly set the corresponding _character set_ will encounter an “incompatible collation” error during the upgrade.
+To ease that transition, Craft 5 is proactively treating `utf8` as `utf8mb4` for MySQL and MariaDB installs. Since that will be different from what most Craft installs are already using, you will need to start explicitly setting the charset and collation using the non-aliased names, to avoid a SQL error during the upgrade.
 
-To avoid this, add your database’s current character set and collation to your `.env` file, ensuring they both include the byte-length suffix:
+Ensure the following are set in your `.env` file:
 
 ```bash
 CRAFT_DB_CHARACTER_SET="utf8mb3"
@@ -101,7 +101,15 @@ CRAFT_DB_COLLATION="utf8mb3_general_ci"
 ```
 
 ::: tip
-Even if you have never manually configured a character set or collation for a project, we still recommend running `php craft db/convert-charset` after the upgrade.
+Once the upgrade is complete, you can convert your tables to `utf8mb4` by removing the `CRAFT_DB_CHARACTER_SET` and `CRAFT_DB_COLLATION` environment variables, or updating them to the appropriate values:
+
+```bash
+CRAFT_DB_CHARACTER_SET="utf8mb4"
+CRAFT_DB_COLLATION="utf8mb4_0900_ai_ci" # MySQL
+CRAFT_DB_COLLATION="utf8mb4_unicode_ci" # MariaDB
+```
+
+Then run `php craft db/convert-charset` to update all existing database tables.
 :::
 
 #### Template Priority
