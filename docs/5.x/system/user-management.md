@@ -1,5 +1,8 @@
 ---
 keywords: permissions
+related:
+  - uri: https://www.craftcms.com/knowledge-base/front-end-user-accounts
+    label: "Supporting front-end user accounts"
 ---
 
 # User Management
@@ -191,7 +194,7 @@ You can also require the logged-in user to have a specific permission to access 
 {% requirePermission 'accessCp' %}
 ```
 
-If the requirements are not met, Craft will send a 403 _Forbidden_ response with the site’s [error template](routing.md#error-templates). Logged-out visitors will be forwarded to the `loginPath`; after signing in, the user will be redirected to the original path—but may still encounter a _Forbidden_ error if their account doesn’t have the correct permissions.
+If the requirements are not met, Craft will send a 403 _Forbidden_ response with the site’s [error template](routing.md#error-templates). Logged-out visitors will be forwarded to the configured [loginPath](config5:loginPath); after signing in, the user will be redirected to the original path—but may still encounter a _Forbidden_ error if their account doesn’t have the correct permissions.
 
 ### Forms + Content
 
