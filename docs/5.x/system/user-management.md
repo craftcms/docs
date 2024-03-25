@@ -63,7 +63,7 @@ After you create your groups, you can assign users to groups by going into their
 
 ## Permissions
 
-Craft Pro allows you to set permissions on users and groups, such as the ability to access the control panel, edit content within certain sections, etc. You can apply these permissions directly to user accounts as well as to user groups. When you apply permissions to a user group, all users that belong to that group will inherit them.
+Craft Pro allows you to set permissions on users and groups, such as the ability to access the control panel, edit content within certain sections, etc. You can apply these permissions directly to user accounts as well as to [user groups](#user-groups). Permissions applied to a user group are inherited by all users belonging to it.
 
 ::: warning
 Make sure you trust users with access to settings that accept Twig code, like the **Settings** section and the **System Messages** utility. It’s possible to do malicious things in Craft via Twig, which is intended primarily for trusted admins and developers.
@@ -129,12 +129,12 @@ The permissions Craft comes with are:
 | ↳&nbsp; Find and Replace | `utility:find-replace`
 | ↳&nbsp; Migrations | `utility:migrations`
 
-You may not see all of these options, initially—only ones that are relevant based on the current content schema will be displayed. For example, everything under _View categories_ will be hidden until you have at least one [category group](categories.md#category-groups).
+You may not see all of these options, initially—only ones that are relevant based on the current content schema will be displayed. For example, everything under _View categories_ will be hidden until you have at least one [category group](../reference/element-types/categories.md#category-groups).
 
 Plugins may register their own permissions, which can appear in a top-level group, under _Access the control panel_, or within _Utilities_.
 
 ::: tip
-See the _Extending Craft_ [User Permissions](extend/user-permissions.md) page to learn how to register custom permissions from your module or plugin.
+See the _Extending Craft_ [User Permissions](../extend/user-permissions.md) page to learn how to register custom permissions from your module or plugin.
 :::
 
 ### Checking Permissions
