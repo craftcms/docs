@@ -173,6 +173,16 @@ This is not strictly necessary, but the `handle` of a given resource is often mu
 UUIDs and handles are safe to use like this because they’re tracked in [Project Config](project-config.md) and will be [consistent across environments](project-config.md#ids-uuids-and-handles), unlike IDs.
 :::
 
+If your site or app doesn’t rely on specific permissions to control access to certain resources, you can check whether the user belongs to a group, instead:
+
+```twig{3}
+{% requireLogin %}
+
+{% if currentUser.isInGroup('members') %}
+  <div class="banner">Thanks for your support!</div>
+{% endif %}
+```
+
 ### Requiring Permissions
 
 You can also require the logged-in user to have a specific permission to access an entire template:
@@ -187,7 +197,7 @@ If the requirements are not met, Craft will send a 403 _Forbidden_ response with
 
 When a user is given permissions to edit or create elements that meet certain criteria (say, entries in a specific section), they do _not_ need [control panel](control-panel.md) access to make updates.
 
-Forms that POST new data to actions like [`entries/save-entry`](../reference/controller-actions.md#post-entries-save-entry) (or the more generic `elements/save`), Craft makes sure the user has the appropriate permissions. This means that you can create streamlined content management tools for front-end users, without ever granting access to the control panel.
+When POSTing new data to actions like [`entries/save-entry`](../reference/controller-actions.md#post-entries-save-entry) (or the more generic `elements/save`), Craft makes sure the user has the appropriate permissions. This means that you can create secure, streamlined content management tools for users, without ever granting them access to the control panel!
 
 ### Querying by Permissions
 
