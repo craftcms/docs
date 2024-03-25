@@ -48,6 +48,9 @@ Here are some great ways to begin your journey with Craft:
             icon="/docs/icons/icon-tutorial.svg"
             iconSize="large" />
     </div>
+</div>
+
+<div class="sm:flex sm:flex-wrap">
     <div class="py-1 sm:w-1/2 sm:py-0">
         <IconLink
             title="System Tour"
@@ -69,6 +72,14 @@ Here are some great ways to begin your journey with Craft:
             title="Front-End Development"
             subtitle="Deliver your content to any screen."
             link="system/elements"
+            icon="/docs/icons/icon-generic-link.svg"
+            iconSize="large" />
+    </div>
+    <div class="py-1 sm:w-1/2 sm:py-0">
+        <IconLink
+            title="Configuration"
+            subtitle="Customize Craft to your heart’s content."
+            link="configure"
             icon="/docs/icons/icon-generic-link.svg"
             iconSize="large" />
     </div>
