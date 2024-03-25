@@ -99,7 +99,7 @@ function replacePrefix(link, ctx) {
   }
 
   if (prefixSettings.format === "config") {
-    m = link.match(/^config[2|3|4]:(.+)/);
+    m = link.match(/^config[2|3|4|5]:(.+)/);
     let setting = m[1].toLowerCase();
 
     if (!m) {
