@@ -152,19 +152,19 @@ Content is stored as a JSON blob, and is dynamically indexed by the database in 
 
 #### Advanced Queries
 
-When using custom fields in advanced `where()` conditions, you no longer need to assemble a column prefix/suffix. Instead, Craft can generate the appropriate expression to locate values in the JSON content column:
+When using custom fields in [advanced `where()` conditions](development/element-queries.md#advanced-element-queries), you no longer need to manually assemble a database column prefix/suffix. Instead, Craft can generate the appropriate expression to locate values in the JSON content column:
 
 ::: code
 ```twig{10} Twig
 {# Locate the field layout element that would save to the desired column: #}
 {% set entryType = craft.app.entries.getEntryTypeByHandle('post') %}
 {% set fieldLayout = entryType.getFieldLayout() %}
-{% set sourceField = fieldLayout.getFieldByHandle('source') %}
+{% set sourceField = fieldLayout.getFieldByHandle('sourceMedia') %}
 
 {% set entriesFromPhysicalMedia = craft.entries()
   .section('news')
   .andWhere([
-    'like',
+    'or like',
     sourceField.getValueSql(),
     ['print', 'paper', 'press']
   ])
@@ -176,12 +176,12 @@ use craft\elements\Entry;
 
 $entryType = Craft::$app->getEntries()->getEntryTypeByHandle('post');
 $fieldLayout = $entryType->getFieldLayout();
-$sourceField = $fieldLayout->getFieldByHandle('source');
+$sourceField = $fieldLayout->getFieldByHandle('sourceMedia');
 
 $entriesFromPhysicalMedia = Entry::find()
   ->section('news')
   ->andWhere([
-    'like',
+    'or like',
     $sourceField->getValueSql(),
     ['print', 'paper', 'press'],
   ])
@@ -189,7 +189,9 @@ $entriesFromPhysicalMedia = Entry::find()
 ```
 :::
 
-While this may appear more convoluted, initially, it ensures that you are querying for the correct instance of a [multi-instance field](), each of which will store their content under a different key in their respective field layouts.
+This ensures that you are querying for the correct instance of a [multi-instance field](system/fields.md#multi-instance-fields), each of which will store their content under a different UUID in their respective field layouts.
+
+Craft already knows how to query against the appropriate instance of a field when using its handle as a query method, so this is only necessary for complex or compound conditions.
 
 ### Matrix Fields
 
