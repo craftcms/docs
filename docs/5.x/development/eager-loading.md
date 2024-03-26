@@ -157,7 +157,7 @@ This template code will only cost three queries (one to fetch the entries, one t
 
 ## Accessing Eager-Loaded Elements
 
-Eager-loaded elements are returned as a [collections](collections.md)—or more specifically, an <craft5:craft\elements\ElementCollection>. This means that (in most cases) eager-loaded and non-eager-loaded elements can be treated in the same way.
+Eager-loaded elements are returned as a [collections](collections.md)—or more specifically, an <craft4:craft\elements\ElementCollection>. This means that (in most cases) eager-loaded and non-eager-loaded elements can be treated in the same way.
 
 There are some differences in the methods exposed by element queries and 
 

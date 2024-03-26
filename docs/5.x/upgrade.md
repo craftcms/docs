@@ -132,7 +132,7 @@ When selecting a filesystem, options that would result in a collision between tw
 
 #### Variables
 
-With the elimination of Matrix blocks as a discrete element type, we have removed the associated element query factory function from <craft5:craft\web\twig\CraftVariable>.
+With the elimination of Matrix blocks as a discrete element type, we have removed the associated element query factory function from <craft4:craft\web\twig\CraftVariable>.
 
 | Old | New |
 | --- | --- |
@@ -209,7 +209,7 @@ These fields are then assigned to new [entry types](./reference/element-types/en
 Field labels and handles are retained, within their field layouts—even if they collide with other fields in the [global space](./system/fields.md#multi-instance-fields)!
 :::
 
-Queries for nested entries will be largely the same—equivalent methods have been added to <craft5:craft\elements\db\EntryQuery> to enable familiar usage. The `.owner()` method still accepts a list of elements that the results must be owned by, and the `field()` and `fieldId()` methods narrow the results by those belonging to specific fields.
+Queries for nested entries will be largely the same—equivalent methods have been added to <craft4:craft\elements\db\EntryQuery> to enable familiar usage. The `.owner()` method still accepts a list of elements that the results must be owned by, and the `field()` and `fieldId()` methods narrow the results by those belonging to specific fields.
 
 ::: warning
 Values passed to the `type()` method of [entry queries](./reference/element-types/entries.md#querying-entries) may require updates, as migrated entry types _can_ receive new handles. For example, a Matrix field that contained a block type with the handle `gallery` might conflict with a preexisting entry type belonging to a section; in that event, the new entry type for that block would get the handle `gallery1` (or potentially `gallery2`, `gallery3`, and so on, if multiple similar Matrix fields are being migrated).
@@ -293,7 +293,7 @@ Filesystems can now be shared by multiple asset volumes, so long as each volume 
 
 ### Temporary Filesystem
 
-The new <config5:tempAssetUploadFs> general config setting has replaced the **Temp Uploads Location** setting in the **Settings** &rarr; **Assets** &rarr; **Settings** screen. If you noted a custom asset volume in the upgrade process, you will need to follow these steps to set up a distinct filesystem for temporary uploads. Otherwise, Craft will use the legacy behavior and fall back on an instance of <craft5:craft\fs\Temp>, which puts temporary uploads in a folder in your local [`storage/` directory](system/directory-structure.md).
+The new <config5:tempAssetUploadFs> general config setting has replaced the **Temp Uploads Location** setting in the **Settings** &rarr; **Assets** &rarr; **Settings** screen. If you noted a custom asset volume in the upgrade process, you will need to follow these steps to set up a distinct filesystem for temporary uploads. Otherwise, Craft will use the legacy behavior and fall back on an instance of <craft4:craft\fs\Temp>, which puts temporary uploads in a folder in your local [`storage/` directory](system/directory-structure.md).
 
 ::: tip
 Load-balanced or ephemeral environments that rely on a centralized storage solution should define a temporary upload filesystem using the steps below.
