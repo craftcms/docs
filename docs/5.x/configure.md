@@ -52,7 +52,7 @@ CRAFT_ENVIRONMENT=dev
 # ...and comments!
 ```
 
-These values can be referenced in your config files by calling [App::env()](craft4:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The [equivalent Twig function](../dev/functions.md) uses `App::env()`, and is therefore fine to use in templates.
+These values can be referenced in your config files by calling [App::env()](craft4:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The equivalent [`getenv()` Twig function](reference/twig/functions.md#getenv) uses `App::env()`, and is therefore fine to use in templates.
 
 Craft doesn’t require your variables to follow any kind of naming convention, but it will automatically discover [some specific environment variables](#environment-overrides) for general and database settings.
 
