@@ -1,5 +1,5 @@
 ---
-description: Official documentation for the Craft CMS 5 beta.
+description: Official documentation for Craft CMS 5.
 ---
 
 # About Craft CMS
@@ -16,16 +16,18 @@ People who use Craft love its…
 
 You can learn all about it at [craftcms.com](https://craftcms.com).
 
-<Block label="Craft 5 Beta">
+## Getting Started
 
 Ready to try out the latest version of Craft? Spin up a [new project](installation.md) or [upgrade](upgrade.md) an existing one.
+
+<Block label="Documentation Changes">
 
 The documentation has been rearranged a bit for this release, in order to better highlight the breadth of Craft’s features and consolidate technical material:
 
 - High-level concepts are more visible in the [**System**](system/README.md) section;
-- **Reference** materials have been given a [dedicated space](./reference/README.md), including [element types](./system/elements.md), [fields](./system/fields.md), [console commands](./reference/cli.md), controllers, Twig features, an configuration.
-- Some pages geared toward front-end development have been moved into the Development section, including lots of new information on [eager-loading](./development/eager-loading.md) and [collections](./development/collections.md);
-- Information about using [forms](./development/forms.md) has been split into a dedicated page, while specific [controller actions](./reference/controller-actions.md) remain in the **Reference** section. 
+- [**Reference**](reference/README.md) material has been given a dedicated space, including [element types](system/elements.md), [field types](system/fields.md), [console commands](reference/cli.md), controllers, Twig features, and [configuration](configure.md).
+- Some pages geared toward front-end development have been moved into the [**Development**](development/README.md) section, including lots of new information on [eager-loading](development/eager-loading.md) and [collections](development/collections.md);
+- Information about using [forms](development/forms.md) has been split into a dedicated page, while specific [controller actions](reference/controller-actions.md) remain in the **Reference** section. 
 
 </Block>
 

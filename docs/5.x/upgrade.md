@@ -14,7 +14,9 @@ Let’s take a moment to audit and prepare your project.
 - Your **live site** must be running the [latest version](repo:craftcms/cms/releases) of Craft 4;
 - The most recent Craft 4-compatible versions of all plugins are installed, and Craft 5-compatible versions are available;
 - Your project is free of [deprecation warnings](https://craftcms.com/knowledge-base/preparing-for-craft-5#fix-deprecation-warnings) after thorough testing on the latest version of Craft 4;
-- All your environments meet Craft 5’s [minimum requirements](requirements.md) (the latest version of Craft 4 will run in any environment that meets Craft 5’s requirements, so it’s safe to update PHP and your database ahead of the 5.x upgrade);
+- All your environments meet Craft 5’s [minimum requirements](requirements.md) (the latest version of Craft 4 will run in any environment that meets Craft 5’s requirements, so it’s safe to update PHP and your database ahead of the 5.x upgrade):
+    - PHP 8.2
+    - MySQL 8.0.17+ using InnoDB, MariaDB 10.4.6+, or PostgreSQL 13+
 - You’ve reviewed the breaking changes in Craft 5 further down this page and understand that additional work and testing may lie ahead, post-upgrade;
 
 Once you’ve completed everything above, you’re ready to start the upgrade process!
@@ -217,7 +219,7 @@ Visit **Settings** &rarr; **Entry Types** to check if any handles appear to have
 
 #### Consolidating Fields
 
-We plan to introduce a console command to handle merging similar fields, after the upgrade. There is no harm in running your project with extra fields during the beta period.
+We plan to introduce a console command to handle merging similar fields. There is no harm in running your project with extra fields for a time after upgrading.
 
 ### Eager-Loading
 

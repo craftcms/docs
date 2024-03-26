@@ -88,12 +88,12 @@ Once you’ve decided on a version, follow these steps:
 1. If your plugin has a [changelog](changelogs-and-updates.md), make sure the new version has a correctly-formatted heading, including the release date.
 
    ```markdown
-   ## 3.0.0 - 2018-03-31
+   ## 5.0.0 - 2018-03-31
    ```
 
 2. If your plugin’s `composer.json` file includes a `version` property, make sure that it is set to the new version number.
 
-3. Once everything is good to go and committed to Git, [create a tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) named after the version number, optionally beginning with `v` (e.g. `v3.0.0` or `v3.0.0-beta.1`). Prefixing the tag name with `release-` is also allowed (e.g. `release-3.0.0` or `release-v3.0.0`).
+3. Once everything is good to go and committed to Git, [create a tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) named after the version number, optionally beginning with `v` (e.g. `v5.0.0` or `v5.0.0-beta.1`). Prefixing the tag name with `release-` is also allowed (e.g. `release-5.0.0` or `release-v5.0.0`).
 
 4. Push your latest commits and your new version tag to GitHub. At this point the Plugin Store should automatically get notified about the release, and will start recording it. If all goes well, it will show up in the Plugin Store within a minute or two.
 
