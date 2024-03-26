@@ -850,11 +850,6 @@ module.exports = {
       ],
       "/extend/": [
         {
-          title: "Class Reference",
-          icon: "/docs/icons/craft-api.svg",
-          link: "https://docs.craftcms.com/api/v5/",
-        },
-        {
           title: "Back to Craft Docs",
           icon: "/docs/icons/icon-back.svg",
           link: "/5.x/",
