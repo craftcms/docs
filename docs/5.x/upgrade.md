@@ -223,7 +223,7 @@ We plan to introduce a console command to handle merging similar fields. There i
 
 ### Eager-Loading
 
-[Eager-loading](development/eager-loading.md) has been dramatically simplified for most sites. You no longer need to tell Craft which relational fields to load via the `.with()` query method—instead, call `.eagerly()` on any query that _may_ result in an N+1 problem to automatically eager-loading:
+[Eager-loading](development/eager-loading.md) has been dramatically simplified for most sites. You no longer need to tell Craft which relational fields to load via the `.with()` query method—instead, call `.eagerly()` on any query that _may_ result in an N+1 problem to automatically trigger eager-loading:
 
 ::: code
 ```twig Before
