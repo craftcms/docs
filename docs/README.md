@@ -19,9 +19,9 @@ Learn about the foundation of the Craft platform.
     <LinkPanel
         title="Craft CMS"
         subtitle="Flexible content management."
-        link="/4.x/"
+        link="/5.x/"
         icon="/docs/icons/craft.svg"
-        currentVersion="4.x" />
+        currentVersion="5.x" />
     <LinkPanel
         title="Craft Commerce"
         subtitle="Custom, extensible ecommerce."

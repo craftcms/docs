@@ -30,7 +30,7 @@ Once your environment is set up, this is what the process will look like:
 1. Run [PHPStan](#phpstan) to address any outstanding issues with the latest version of your plugin, in Craft 4.
 1. Make the recommended changes, commit the results, and tag a new release on the _current_ version.
 1. Run the Craft 5 [Rector ruleset](#rector) on your plugin.
-1. Update the `craftcms/cms` requirement in the root Craft project _and_ in your plugin’s `composer.json` to `^5.0.0-beta.1`, then run `composer update`.
+1. Update the `craftcms/cms` requirement in the root Craft project _and_ in your plugin’s `composer.json` to `^5.0.0`, then run `composer update`.
 1. Run `php craft up` to perform the Craft upgrade.
 
 At this point, your project _should_ be functional again! Go ahead and kick the tires—then come back here and review changes that may impact your plugin. If the project is still failing to bootstrap, it is likely due to incompatible API changes that Rector couldn’t address on its own.

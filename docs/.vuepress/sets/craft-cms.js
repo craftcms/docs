@@ -5,12 +5,12 @@ module.exports = {
   icon: "/docs/icons/craft.svg",
   baseDir: "",
   versions: [
-    ["5.x", { label: "5.x", stabilityFlag: 'beta' }],
+    ["5.x", { label: "5.x" }],
     ["4.x", { label: "4.x" }],
     ["3.x", { label: "3.x" }],
     ["2.x", { label: "2.x", isEol: true }]
   ],
-  defaultVersion: "4.x",
+  defaultVersion: "5.x",
   abandoned: false,
   searchPlaceholder: "Search the Craft docs (Press “/” to focus)",
   primarySet: true,
@@ -877,11 +877,6 @@ module.exports = {
           title: "Extending Craft",
           icon: "/docs/icons/icon-book.svg",
           link: "/5.x/extend/"
-        },
-        {
-          title: "Testing Craft",
-          icon: "/docs/icons/icon-flask.svg",
-          link: "/5.x/testing/",
         },
       ],
     },
