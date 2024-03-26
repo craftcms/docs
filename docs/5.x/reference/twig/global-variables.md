@@ -36,7 +36,7 @@ Additional variables provided by Craft.
 Variable | Description
 --- | ---
 [_globals](#globals) <Since ver="4.5.0" feature="The _globals Twig variable" /> | Get and set values on a globally-available store.
-[craft](#craft) | A <craft4:craft\web\twig\variables\CraftVariable> object.
+[craft](#craft) | A <craft5:craft\web\twig\variables\CraftVariable> object.
 [currentSite](#currentsite) | The requested site.
 [currentUser](#currentuser) | The currently logged-in user.
 [devMode](#devmode) | Whether Dev Mode is enabled.
@@ -98,11 +98,11 @@ View the current contents of the `_globals` variable by passing it to the [`dump
 
 ### `craft`
 
-A <craft4:craft\web\twig\variables\CraftVariable> object, which provides access points to various helper functions and objects for templates. Many plugins will attach functionality here.
+A <craft5:craft\web\twig\variables\CraftVariable> object, which provides access points to various helper functions and objects for templates. Many plugins will attach functionality here.
 
 #### `craft.app`
 
-A reference to the main <craft4:craft\web\Application> instance (the same object you get when accessing `Craft::$app` in PHP) is also available to templates via `craft.app`.
+A reference to the main <craft5:craft\web\Application> instance (the same object you get when accessing `Craft::$app` in PHP) is also available to templates via `craft.app`.
 
 ::: warning
 Accessing things via `craft.app` is considered advanced. There are more security implications than other Twig-specific variables and functions, and your templates will be more susceptible to breaking changes between major Craft versions.
@@ -110,13 +110,13 @@ Accessing things via `craft.app` is considered advanced. There are more security
 
 Some of the services commonly used in templates:
 
-- `craft.app.request` – [Request](craft4:craft\web\Request) object with information about the current HTTP request
-- `craft.app.session` – [Session](craft4:craft\web\Session) object useful for getting and setting flash messages
-- `craft.app.user` – [User](craft4:craft\web\User) object representing the logged-in human (when applicable)
-- `craft.app.config.general` – [GeneralConfig](craft4:craft\config\GeneralConfig) object of [General Config Settings](../config/config-settings.md)
-- `craft.app.fields` – [Fields](craft4:craft\services\Fields) service for accessing custom field details
-- `craft.app.sections` – [Sections](craft4:craft\services\Sections) service for working with sections and entry types
-- `craft.app.sites` – [Sites](craft4:craft\services\Sites) service for getting [site](../sites.md) details
+- `craft.app.request` – [Request](craft5:craft\web\Request) object with information about the current HTTP request
+- `craft.app.session` – [Session](craft5:craft\web\Session) object useful for getting and setting flash messages
+- `craft.app.user` – [User](craft5:craft\web\User) object representing the logged-in human (when applicable)
+- `craft.app.config.general` – [GeneralConfig](craft5:craft\config\GeneralConfig) object of [General Config Settings](../config/config-settings.md)
+- `craft.app.fields` – [Fields](craft5:craft\services\Fields) service for accessing custom field details
+- `craft.app.sections` – [Sections](craft5:craft\services\Sections) service for working with sections and entry types
+- `craft.app.sites` – [Sites](craft5:craft\services\Sites) service for getting [site](../sites.md) details
 
 ::: tip
 Keep in mind that Twig templates _can_ be rendered from web requests, the CLI, and within queue jobs—so there are situations in which certain features may no be available (like the “[current user](#currentuser),” or information about the request).
@@ -151,7 +151,7 @@ Here are some examples of these services being used in a template:
 
 ### `currentSite`
 
-The requested site, represented by a <craft4:craft\models\Site> object.
+The requested site, represented by a <craft5:craft\models\Site> object.
 
 ```twig
 {{ currentSite.name }}
@@ -171,7 +171,7 @@ You can access all of the sites in the same group as the current site via `curre
 
 ### `currentUser`
 
-The currently-logged-in user, represented by a <craft4:craft\elements\User> object, or `null` if no one is logged in.
+The currently-logged-in user, represented by a <craft5:craft\elements\User> object, or `null` if no one is logged in.
 
 ```twig
 {% if currentUser %}
@@ -261,7 +261,7 @@ A [DateTime](http://php.net/manual/en/class.datetime.php) object in the system�
 
 ### `view`
 
-A reference to the <craft4:craft\web\View> instance that is driving the template.
+A reference to the <craft5:craft\web\View> instance that is driving the template.
 
 ### `yesterday` <Since ver="4.3.0" feature="The yesterday global variable" />
 
@@ -273,11 +273,11 @@ Twig doesn’t distinguish between variables and constants, nor does it expose P
 
 Variable | Description
 -------- | -----------
-[POS_BEGIN](#pos-begin) | The [craft\web\View::POS_BEGIN](craft4:craft\web\View#constants) constant.
-[POS_END](#pos-end) | The [craft\web\View::POS_END](craft4:craft\web\View#constants) constant.
-[POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](craft4:craft\web\View#constants) constant.
-[POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](craft4:craft\web\View#constants) constant.
-[POS_READY](#pos-ready) | The [craft\web\View::POS_READY](craft4:craft\web\View#constants) constant.
+[POS_BEGIN](#pos-begin) | The [craft\web\View::POS_BEGIN](craft5:craft\web\View#constants) constant.
+[POS_END](#pos-end) | The [craft\web\View::POS_END](craft5:craft\web\View#constants) constant.
+[POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](craft5:craft\web\View#constants) constant.
+[POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](craft5:craft\web\View#constants) constant.
+[POS_READY](#pos-ready) | The [craft\web\View::POS_READY](craft5:craft\web\View#constants) constant.
 [SORT_ASC](#sort-asc) | The `SORT_ASC` PHP constant.
 [SORT_DESC](#sort-desc) | The `SORT_DESC` PHP constant.
 [SORT_FLAG_CASE](#sort-flag-case) | The `SORT_FLAG_CASE` PHP constant.
@@ -302,7 +302,7 @@ Other constants are accessible with the [`constant()` function](https://twig.sym
 
 ### `POS_BEGIN`
 
-Twig-facing copy of the [craft\web\View::POS_BEGIN](craft4:craft\web\View#constants) constant. Used in conjunction with the registration of JS and HTML fragments to place them at the _beginning_ of the `<body>` element in the rendered page:
+Twig-facing copy of the [craft\web\View::POS_BEGIN](craft5:craft\web\View#constants) constant. Used in conjunction with the registration of JS and HTML fragments to place them at the _beginning_ of the `<body>` element in the rendered page:
 
 ```twig
 {% set js %}
@@ -314,7 +314,7 @@ Twig-facing copy of the [craft\web\View::POS_BEGIN](craft4:craft\web\View#consta
 
 ### `POS_END`
 
-Twig-facing copy of the [craft\web\View::POS_END](craft4:craft\web\View#constants) constant. Used in conjunction with the registration of JS and HTML fragments to place them at the _end_ of the `<body>` element in the rendered page:
+Twig-facing copy of the [craft\web\View::POS_END](craft5:craft\web\View#constants) constant. Used in conjunction with the registration of JS and HTML fragments to place them at the _end_ of the `<body>` element in the rendered page:
 
 ```twig
 {% set js %}
@@ -326,7 +326,7 @@ Twig-facing copy of the [craft\web\View::POS_END](craft4:craft\web\View#constant
 
 ### `POS_HEAD`
 
-Twig-facing copy of the [craft\web\View::POS_HEAD](craft4:craft\web\View#constants) constant. Used in conjunction with the registration of JS and HTML fragments to place them at the end of the `<head>` element in the rendered page:
+Twig-facing copy of the [craft\web\View::POS_HEAD](craft5:craft\web\View#constants) constant. Used in conjunction with the registration of JS and HTML fragments to place them at the end of the `<head>` element in the rendered page:
 
 ```twig
 {% set js %}
@@ -338,7 +338,7 @@ Twig-facing copy of the [craft\web\View::POS_HEAD](craft4:craft\web\View#constan
 
 ### `POS_LOAD`
 
-Twig-facing copy of the [craft\web\View::POS_LOAD](craft4:craft\web\View#constants) constant. Used only for registering JS fragments, wrapping the code in a jQuery “load” handler:
+Twig-facing copy of the [craft\web\View::POS_LOAD](craft5:craft\web\View#constants) constant. Used only for registering JS fragments, wrapping the code in a jQuery “load” handler:
 
 ::: code
 ```twig Template
@@ -361,7 +361,7 @@ Using `POS_LOAD` with `view.registerJs()` causes Craft to include its own copy o
 
 ### `POS_READY`
 
-Twig-facing copy of the [craft\web\View::POS_READY](craft4:craft\web\View#constants) constant. Used in the same way as `POS_LOAD`, but passes the script body to jQuery’s [ready](https://api.jquery.com/ready/) handler:
+Twig-facing copy of the [craft\web\View::POS_READY](craft5:craft\web\View#constants) constant. Used in the same way as `POS_LOAD`, but passes the script body to jQuery’s [ready](https://api.jquery.com/ready/) handler:
 
 ```js
 jQuery(function ($) {
@@ -409,7 +409,7 @@ Craft makes some elements available to all templates.
 
 Each of your site’s [global sets](../globals.md) will be available to your templates as global variables, named the same as their handle.
 
-They will be represented as <craft4:craft\elements\GlobalSet> objects.
+They will be represented as <craft5:craft\elements\GlobalSet> objects.
 
 ```twig
 <p>{{ companyInfo.companyName }} was established in {{ companyInfo.yearEstablished }}.</p>

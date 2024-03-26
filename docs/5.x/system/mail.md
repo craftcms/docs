@@ -110,7 +110,7 @@ If you are unsure where an email is sent from (or how to edit it), check the sys
 
 ## Settings
 
-Craft uses a single configuration for its [mailer component](craft4:craft\mail\Mailer), on the assumption that all email should flow through a single [transport](#transport-adapters).
+Craft uses a single configuration for its [mailer component](craft5:craft\mail\Mailer), on the assumption that all email should flow through a single [transport](#transport-adapters).
 
 <Todo notes="Set a maxHeight once the tutorial work is merged." />
 

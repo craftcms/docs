@@ -4,7 +4,7 @@ description: Register a customizable permissions scheme for your plugin’s feat
 
 # User Permissions
 
-Modules and plugins can register new [user permissions](../user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft4:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
+Modules and plugins can register new [user permissions](../user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft5:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
 
 ```php
 use craft\events\RegisterUserPermissionsEvent;
@@ -51,7 +51,7 @@ Nesting is meant for UI only; if you wanted to reference `nestedPermissionName` 
 
 ## Requiring Permissions
 
-Controllers can require that the logged-in user has a permission by calling [requirePermission()](craft4:craft\web\Controller::requirePermission()).
+Controllers can require that the logged-in user has a permission by calling [requirePermission()](craft5:craft\web\Controller::requirePermission()).
 
 ```php
 public function actionStayUpLate()
@@ -71,7 +71,7 @@ Templates can also ensure that the user has a permission with the [requirePermis
 
 ## Checking Permissions
 
-You can check if the logged-in user has a permission by calling <craft4:craft\web\User::checkPermission()>:
+You can check if the logged-in user has a permission by calling <craft5:craft\web\User::checkPermission()>:
 
 ```php
 // See if they have the `stayUpLate` permission
@@ -80,7 +80,7 @@ if (Craft::$app->user->checkPermission('stayUpLate')) {
 }
 ```
 
-You can also see if any given user has a permission by calling <craft4:craft\elements\User::can()>:
+You can also see if any given user has a permission by calling <craft5:craft\elements\User::can()>:
 
 ```php
 /** @var \craft\elements\User $user */

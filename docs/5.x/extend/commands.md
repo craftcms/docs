@@ -3,7 +3,7 @@
 Plugins and modules can add additional [console commands](../console-commands.md)
 to Craft, which will be available via the `craft` executable in the terminal.
 
-Console commands are implemented very similarly to [controllers](controllers.md), except that they should live within a `console/controllers/` folder within your plugin or module’s base source folder, and they should extend <craft4:craft\console\Controller> (rather than <craft4:craft\web\Controller>).
+Console commands are implemented very similarly to [controllers](controllers.md), except that they should live within a `console/controllers/` folder within your plugin or module’s base source folder, and they should extend <craft5:craft\console\Controller> (rather than <craft5:craft\web\Controller>).
 
 ::: tip
 For the most part, writing console commands for Craft is identical to writing console commands for Yii, so be sure to read the [Yii documentation][yii] as a starting point.
@@ -170,9 +170,9 @@ php craft acme/greet --help
 
 ## Registering Custom Console Commands
 
-You can register custom console commands on Craft’s own controllers, or plugin-supplied controllers, so long as they extend <craft4:craft\console\Controller>. For example, plugins that supply custom element types can add their own actions to the [resave](craft4:craft\console\controllers\ResaveController) controller.
+You can register custom console commands on Craft’s own controllers, or plugin-supplied controllers, so long as they extend <craft5:craft\console\Controller>. For example, plugins that supply custom element types can add their own actions to the [resave](craft5:craft\console\controllers\ResaveController) controller.
 
-To do that, use the <craft4:craft\console\Controller::EVENT_DEFINE_ACTIONS> event.
+To do that, use the <craft5:craft\console\Controller::EVENT_DEFINE_ACTIONS> event.
 
 ```php
 use craft\events\DefineConsoleActionsEvent;
@@ -203,7 +203,7 @@ Event::on(
 
 ## Output Helpers
 
-Internally, Craft keeps console feedback consistent with a suite of helper methods <Since ver="4.0.0" feature="Console command formatting tools" /> provided by <craft4:craft\console\ControllerTrait>.
+Internally, Craft keeps console feedback consistent with a suite of helper methods <Since ver="4.0.0" feature="Console command formatting tools" /> provided by <craft5:craft\console\ControllerTrait>.
 
 - **Success** — Output a message with a ✅ icon: `$this->success('Done!');`
 - **Failure** — Output a message prefixed with an `X`: `$this->failure('Something went wrong.');`
@@ -211,9 +211,9 @@ Internally, Craft keeps console feedback consistent with a suite of helper metho
 - **Warning** — Output a message with a ⚠️ icon: `$this->warning('Check your input and try again.');`
 - **Generic “Note”** — Output a message with a custom icon or prefix: `$this->note('Eat your vegetables!', '🥬 ');`
 
-The above methods run the `$note` argument through <craft4:craft\console\ControllerTrait::markdownToAnsi()>, which provides some basic formatting for long messages. All methods write to `stdout`—use `$this->stderr()` if you need to target a particular output stream.
+The above methods run the `$note` argument through <craft5:craft\console\ControllerTrait::markdownToAnsi()>, which provides some basic formatting for long messages. All methods write to `stdout`—use `$this->stderr()` if you need to target a particular output stream.
 
-You can also format messages directly, using <yii2:yii\console\Controller::stdout()>. Additional <craft4:craft\helpers\Console> constants can be passed after the first argument (the message itself) to decorate the text output:
+You can also format messages directly, using <yii2:yii\console\Controller::stdout()>. Additional <craft5:craft\helpers\Console> constants can be passed after the first argument (the message itself) to decorate the text output:
 
 ```php
 use craft\helpers\Console;

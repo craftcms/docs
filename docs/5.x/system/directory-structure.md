@@ -109,7 +109,7 @@ This is a Composer-managed file that contains the _exact_ list of packages (and 
 
 ### `craft`
 
-This is a command line executable used to run Craft’s [console commands](console-commands.md). Its structure is similar to `web/index.php` (insofar as it is responsible for bootstrapping the appropriate Craft application), but instead of a <craft4:craft\web\Application>, it creates a <craft4:craft\console\Application> and handles the “request” with a different set of controllers.
+This is a command line executable used to run Craft’s [console commands](console-commands.md). Its structure is similar to `web/index.php` (insofar as it is responsible for bootstrapping the appropriate Craft application), but instead of a <craft5:craft\web\Application>, it creates a <craft5:craft\console\Application> and handles the “request” with a different set of controllers.
 
 ## Other Common Files
 

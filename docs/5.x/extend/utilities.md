@@ -4,7 +4,7 @@ description: Utilities are special, non-content pages in the control panel, that
 
 # Utilities
 
-Plugins can provide new utilities for the [control panel](../system/control-panel.md)’s **Utilities** section by creating a class that implements <craft4:craft\base\UtilityInterface> or extends <craf4:craft\base\Utility>. A utility is typically used to surface information and controls for administrative features that aren’t tied to specific [elements](../system/elements.md). Each registered utility gets its own [permissions](#permissions).
+Plugins can provide new utilities for the [control panel](../system/control-panel.md)’s **Utilities** section by creating a class that implements <craft5:craft\base\UtilityInterface> or extends <craf4:craft\base\Utility>. A utility is typically used to surface information and controls for administrative features that aren’t tied to specific [elements](../system/elements.md). Each registered utility gets its own [permissions](#permissions).
 
 ## Utility Class
 
@@ -14,7 +14,7 @@ Scaffold a utility with the [generator](generator.md):
 
 Answer the prompts, and generator will create the required class and register it via the appropriate [events](events.md).
 
-Alternatively, extending <craft4:craft\base\Utility> will provide all the non-essential methods—but you must still define those that identify your utility:
+Alternatively, extending <craft5:craft\base\Utility> will provide all the non-essential methods—but you must still define those that identify your utility:
 
 ```php
 namespace mynamespace;
@@ -69,7 +69,7 @@ You may also implement static `toolbarHtml()` and `footerHtml()` methods to inje
 
 ### Badges
 
-The static [`badgeCount()`](craft4:craft\base\UtilityInterface::badgeCount()) method can be used to surface an integer in its **Utilities** screen navigation item. Craft displays the total badge counts of all registered utilities (accessible to the current user) in the main control panel menu. See the [Updates](craft4:craft\utilities\Updates), [Migrations](craft4:craft\utilities\Migrations), and [Deprecation Warnings](craft4:craft\utilities\DeprecationErrors) classes for some examples of how badges are used.
+The static [`badgeCount()`](craft5:craft\base\UtilityInterface::badgeCount()) method can be used to surface an integer in its **Utilities** screen navigation item. Craft displays the total badge counts of all registered utilities (accessible to the current user) in the main control panel menu. See the [Updates](craft5:craft\utilities\Updates), [Migrations](craft5:craft\utilities\Migrations), and [Deprecation Warnings](craft5:craft\utilities\DeprecationErrors) classes for some examples of how badges are used.
 
 ::: warning
 Badge counts are calculated on every control panel request. Be mindful of your users’ experience, and cache any expensive arithmetic or database queries!
@@ -102,7 +102,7 @@ However, those permissions do _not_ have any bearing on what functionality might
 
 ## Registering your Utility
 
-Once you have created your utility class, you will need to register it with the [Utilities](craft4:craft\services\Utilities) service, so Craft will know about it when populating the list of available utility types:
+Once you have created your utility class, you will need to register it with the [Utilities](craft5:craft\services\Utilities) service, so Craft will know about it when populating the list of available utility types:
 
 ```php
 <?php

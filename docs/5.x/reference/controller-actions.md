@@ -138,7 +138,7 @@ State | `text/html` | `application/json`
 </span>
 
 ::: tip
-The `errorCode` corresponds to one of the [`craft\elements\User::AUTH_*` constants](craft4:craft\elements\User#constants).
+The `errorCode` corresponds to one of the [`craft\elements\User::AUTH_*` constants](craft5:craft\elements\User).
 :::
 
 ### <badge vertical="baseline" type="verb">POST</badge> `users/save-user`

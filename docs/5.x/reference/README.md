@@ -6,6 +6,4 @@ See the sidebar for a complete list of topics.
 
 ## Additional Resources
 
-<See url="https://docs.craftcms.com/craft/v4" label="Class Reference" description="View comprehensive class reference documentation generated from Craft’s source code." />
-
 <See url="https://github.com/craftcms/cms" label="Craft CMS Source" description="Browse Craft’s source code on GitHub." />

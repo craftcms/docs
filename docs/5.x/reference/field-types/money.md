@@ -25,7 +25,7 @@ When [querying for elements](element-queries.md) that have a Date field, you can
 When querying with a money field, provide amounts as you would naturally write them (`123.45`), _not_ in the currency’s minor unit (`12345`). Craft will automatically normalize the values when executing the query.
 :::
 
-Any value compatible with <craft4:craft\helpers\Db::parseMoneyParam()> can be passed as a query param:
+Any value compatible with <craft5:craft\helpers\Db::parseMoneyParam()> can be passed as a query param:
 
 | Value | Fetches elements…
 | - | -
@@ -40,7 +40,7 @@ All values are assumed to be in the field’s currency.
 
 ### Working with Money Field Data
 
-If you have an element with a Money field in your template, you can output its value using the [money](reference/twig/filters.md#money) filter, or <craft4:craft\helpers\MoneyHelper::toString()>.
+If you have an element with a Money field in your template, you can output its value using the [money](reference/twig/filters.md#money) filter, or <craft5:craft\helpers\MoneyHelper::toString()>.
 
 ::: code
 ```twig

@@ -595,7 +595,7 @@ This section treads into some heavier programming concepts, and makes reference 
 These objects are authoritatively documented in the [class reference](https://docs.craftcms.com/api/v4/). You will find references to methods and properties of common objects here in the main documentation, but to make the best use of them, some independent research may be required.
 :::
 
-So far, we’ve mostly looked at plain values—but Craft exposes a number of _objects_ to your templates, like elements (an <craft4:craft\elements\Entry> or <craft4:craft\elements\Asset> for instance) or services (accessible via [`craft.app`](global-variables.md#craft-app)).
+So far, we’ve mostly looked at plain values—but Craft exposes a number of _objects_ to your templates, like elements (an <craft5:craft\elements\Entry> or <craft5:craft\elements\Asset> for instance) or services (accessible via [`craft.app`](global-variables.md#craft-app)).
 
 When in doubt about the type of value you’re dealing with (or you encounter a [Twig error](#handling-errors) when attempting to use them), use the [`{% dump %}` tag](tags.md#dump) to output them to the debug toolbar.
 
@@ -669,7 +669,7 @@ Errors can come from a number of places throughout the system, but the most comm
 
 - **Syntax Error** (`Twig\Error\SyntaxError`): Something went wrong when compiling a template. You may have mismatched brackets, an invalid function or filter, or a variety of other problems with the template itself that prevent it from working as expected. The error will point to the line in your template where Twig believes the error originates.
 - **Runtime Error** (`Twig\Error\RuntimeError`): Oftentimes indicative of a missing variable or property, or another issue as the compiled template is being executed.
-- **Loader Error** (<craft4:craft\web\twig\TemplateLoaderException> or `Twig\Error\LoaderError`): A reference to template (say, when using the `include` tag) could not be resolved.
+- **Loader Error** (<craft5:craft\web\twig\TemplateLoaderException> or `Twig\Error\LoaderError`): A reference to template (say, when using the `include` tag) could not be resolved.
 
 You may see other errors throughout development—but they are typically the result of a lower-level issue like improper use of methods, database connectivity, or templates getting out of sync with [project config](../project-config.md).
 

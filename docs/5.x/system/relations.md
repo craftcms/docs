@@ -119,7 +119,7 @@ The `relatedTo` parameter on every [element query](./element-queries.md) allows 
 
 Any of the following can be used when setting up a relational query:
 
-- A single **element object**: <craft4:craft\elements\Asset>, <craft4:craft\elements\Category>, <craft4:craft\elements\Entry>, <craft4:craft\elements\User>, or <craft4:craft\elements\Tag>
+- A single **element object**: <craft5:craft\elements\Asset>, <craft5:craft\elements\Category>, <craft5:craft\elements\Entry>, <craft5:craft\elements\User>, or <craft5:craft\elements\Tag>
 - A single **element ID**
 - A [**hash**](../development/twig.md#hashes) with properties describing specific constraints on the relationship:
   - Required: `element`, `sourceElement`, or `targetElement`
@@ -280,7 +280,7 @@ Property
 :  `sourceSite` (Optional, defaults to main query’s site)
 
 Accepts
-:  [Site](craft4:craft\models\Site) object, site ID, or site handle.
+:  [Site](craft5:craft\models\Site) object, site ID, or site handle.
 
 Description
 :  Limits relationships to those defined from the supplied site(s).

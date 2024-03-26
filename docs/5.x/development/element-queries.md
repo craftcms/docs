@@ -407,7 +407,7 @@ Results from a [search](#search) query are perfectly fine to paginate.
 
 ### Navigating Pages
 
-In our example, the `pageInfo` variable (a [Paginate](craft4:craft\web\twig\variables\Paginate) instance) has a number of properties and methods to help you work with paginated results. The variable can be named anything you like, so long as references to it are updated.
+In our example, the `pageInfo` variable (a [Paginate](craft5:craft\web\twig\variables\Paginate) instance) has a number of properties and methods to help you work with paginated results. The variable can be named anything you like, so long as references to it are updated.
 
 `first`
 : Number of the first element on the _current_ page. For example, on the second page of 10 results, `first` would be `11`.
@@ -583,7 +583,7 @@ This cache is separate from fragments cached via [{% cache %} template tags](../
 The `cache()` method accepts a `duration` argument, and defaults to your <config4:cacheDuration>.
 
 ::: tip
-Craft registers an [ElementQueryTagDependency](craft4:craft\cache\ElementQueryTagDependency) for you by default, so cache dependencies and invalidation are handled automatically.
+Craft registers an [ElementQueryTagDependency](craft5:craft\cache\ElementQueryTagDependency) for you by default, so cache dependencies and invalidation are handled automatically.
 :::
 
 ### Large Result Sets
@@ -691,10 +691,10 @@ Not all attributes can be fetched this way—element URLs, for instance, are bui
 
 ## Advanced Element Queries
 
-Element queries are specialized [query builders](guide:db-query-builder) under the hood, so they support most of the same methods provided by <craft4:craft\db\Query>. The most common methods appear below—argument lists are non-exhaustive, and are only provided to differentiate them.
+Element queries are specialized [query builders](guide:db-query-builder) under the hood, so they support most of the same methods provided by <craft5:craft\db\Query>. The most common methods appear below—argument lists are non-exhaustive, and are only provided to differentiate them.
 
 ::: tip
-You may call <craft4:craft\db\Query::asArray()> to skip populating element models with results and return matching rows’ data as an associative array. Altering [selections](#selections) in particular can make elements behave erratically, as they may be missing critical pieces of information.
+You may call <craft5:craft\db\Query::asArray()> to skip populating element models with results and return matching rows’ data as an associative array. Altering [selections](#selections) in particular can make elements behave erratically, as they may be missing critical pieces of information.
 :::
 
 ### Selections
@@ -786,13 +786,13 @@ Some of these methods are discussed in the [Executing Element Queries](#executin
 [all()](yii2:yii\db\Query::all()) — `craft\base\Element[]`
 : Array of populated element models.
 
-[collect()](craft4:craft\db\Query::collect()) — `Illuminate\Support\Collection`
+[collect()](craft5:craft\db\Query::collect()) — `Illuminate\Support\Collection`
 : Same as `all()`, but wrapped in a [Collection](./collections.md).
 
 [one()](yii2:yii\db\Query::one()) — `craft\base\Element|null`
 : Element model or `null` if none match the criteria.
 
-[nth($n)](craft4:craft\db\Query::nth()) — `craft\base\Element|null`
+[nth($n)](craft5:craft\db\Query::nth()) — `craft\base\Element|null`
 : Element model or `null` if one doesn’t exist at the specified offset.
 
 [exists()](yii2:yii\db\Query::exists()) — `boolean`
@@ -819,11 +819,11 @@ Some of these methods are discussed in the [Executing Element Queries](#executin
 [max($column)](yii2:yii\db\Query::max()) — `int|float`
 : Maximum value in `$column` among matching results
 
-[pairs()](craft4:craft\db\Query::pairs()) — `array`
+[pairs()](craft5:craft\db\Query::pairs()) — `array`
 : The first selected column becomes the returned array’s keys, and the second, its values. Duplicate keys are overwritten, so the array may not have the same number of elements as matched the query.
 
 ::: tip
-When customizing an element query, you can call [getRawSql()](craft4:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
+When customizing an element query, you can call [getRawSql()](craft5:craft\db\Query::getRawSql()) to get the full SQL that is going to be executed by the query, so you have a better idea of what to modify.
 
 ```twig
 {{ dump(query.getRawSql()) }}

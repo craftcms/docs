@@ -66,7 +66,7 @@ src/gql/
 
 ## The Gql Service
 
-The <craft4:craft\services\Gql> class offers methods mostly for managing schemas and tokens and executing queries, so you won’t need to do much with it if you’re primarily exposing data to GraphQL. The Gql class does, however, define and trigger the events you’ll use to register any components you’d like to add to the system. (We’ll get to those in a moment.)
+The <craft5:craft\services\Gql> class offers methods mostly for managing schemas and tokens and executing queries, so you won’t need to do much with it if you’re primarily exposing data to GraphQL. The Gql class does, however, define and trigger the events you’ll use to register any components you’d like to add to the system. (We’ll get to those in a moment.)
 
 ### Modifying Queries Before or After Execution
 
@@ -121,7 +121,7 @@ A simple query to list `widgets` titles might look like this:
 }
 ```
 
-A <craft4:craft\gql\base\Query> class provides one or more query names, each describing a GraphQL type it will return, any arguments that can be used to tailor results, and pointing to a resolver that will be responsible for translating the GraphQL query into equivalent logic with Craft’s APIs.
+A <craft5:craft\gql\base\Query> class provides one or more query names, each describing a GraphQL type it will return, any arguments that can be used to tailor results, and pointing to a resolver that will be responsible for translating the GraphQL query into equivalent logic with Craft’s APIs.
 
 ### Example Query Class
 
@@ -159,7 +159,7 @@ class Widget extends \craft\gql\base\Query
 ```
 
 ::: tip
-The careful reader will notice a custom GqlHelper class above, which is a tiny extension of <craft4:craft\helpers\Gql> that makes it trivial to check whether entities are allowed by the schema:
+The careful reader will notice a custom GqlHelper class above, which is a tiny extension of <craft5:craft\helpers\Gql> that makes it trivial to check whether entities are allowed by the schema:
 
 ```php
 public static function canQueryWidgets(): bool
@@ -172,7 +172,7 @@ public static function canQueryWidgets(): bool
 
 ### Registering Queries
 
-You can register one or more query classes using the [registerGqlQueries](craft4:craft\services\Gql::EVENT_REGISTER_GQL_QUERIES) event and appending them to the `queries` array:
+You can register one or more query classes using the [registerGqlQueries](craft5:craft\services\Gql::EVENT_REGISTER_GQL_QUERIES) event and appending them to the `queries` array:
 
 ```php
 use craft\events\RegisterGqlQueriesEvent;
@@ -232,7 +232,7 @@ class Widget extends craft\gql\base\ElementArguments
 ```
 
 ::: tip
-This example extends <craft4:craft\gql\base\ElementArguments> in order to take advantage of common element arguments for free. It’s fine if you don’t have your own element type or even a class for arguments; you ultimately just need to provide an array of argument definitions for your queries if you want to use them.
+This example extends <craft5:craft\gql\base\ElementArguments> in order to take advantage of common element arguments for free. It’s fine if you don’t have your own element type or even a class for arguments; you ultimately just need to provide an array of argument definitions for your queries if you want to use them.
 :::
 
 ## Types
@@ -282,9 +282,9 @@ Everything has a `__typename`:
 
 Every available part of Craft’s content model, and every kind of data your custom plugin or module needs to expose via GraphQL, needs to be translated into an explicitly-named GraphQL type.
 
-Craft’s <craft4:craft\gql\GqlEntityRegistry> keeps track of these GraphQL types, and you’ll use it to add, fetch, and modify them.
+Craft’s <craft5:craft\gql\GqlEntityRegistry> keeps track of these GraphQL types, and you’ll use it to add, fetch, and modify them.
 
-When adding fields to a given type, you should run them through <craft4:craft\gql\TypeManager::prepareFieldDefinitions()>. This makes it possible for others to programmatically [modify type fields](#modifying-type-fields) you’re introducing.
+When adding fields to a given type, you should run them through <craft5:craft\gql\TypeManager::prepareFieldDefinitions()>. This makes it possible for others to programmatically [modify type fields](#modifying-type-fields) you’re introducing.
 
 ### Scalar Types
 
@@ -313,17 +313,17 @@ To specify a list of types, you must wrap the type with the `\GraphQL\Type\Defin
 
 In addition to simple generic scalar values like strings and integers, you’ll probably want to describe more specific, complex data.
 
-Craft includes several scalar input types like [DateTime](craft4:craft\gql\types\DateTime), [Number](craft4:craft\gql\types\Number), and [TableRow](craft4:craft\gql\types\TableRow).
+Craft includes several scalar input types like [DateTime](craft5:craft\gql\types\DateTime), [Number](craft5:craft\gql\types\Number), and [TableRow](craft5:craft\gql\types\TableRow).
 
 Craft also includes more complex, relational input objects:
 
-- [Asset](craft4:craft\gql\types\input\criteria\Asset)
-- [Category](craft4:craft\gql\types\input\criteria\Category)
-- [Entry](craft4:craft\gql\types\input\criteria\Entry)
-- [Tag](craft4:craft\gql\types\input\criteria\Tag)
-- [User](craft4:craft\gql\types\input\criteria\User)
-- [File](craft4:craft\gql\types\input\File)
-- [Matrix](craft4:craft\gql\types\input\Matrix)
+- [Asset](craft5:craft\gql\types\input\criteria\Asset)
+- [Category](craft5:craft\gql\types\input\criteria\Category)
+- [Entry](craft5:craft\gql\types\input\criteria\Entry)
+- [Tag](craft5:craft\gql\types\input\criteria\Tag)
+- [User](craft5:craft\gql\types\input\criteria\User)
+- [File](craft5:craft\gql\types\input\File)
+- [Matrix](craft5:craft\gql\types\input\Matrix)
 
 You can use any of these in your type definitions, i.e. `DateTime::getType()` or `Asset::getType()`.
 
@@ -335,7 +335,7 @@ You can use any of these in your type definitions, i.e. `DateTime::getType()` or
 
 A custom element like our Widget would probably best be described by two classes: an [interface](#interfaces) and a type class that implements it.
 
-The type class for the element is simple: it declares its interface—which we’ll get to in a moment—and otherwise leans on <craft4:craft\gql\types\elements\Element::resolve()>, which you could further customize in a more complex situation.
+The type class for the element is simple: it declares its interface—which we’ll get to in a moment—and otherwise leans on <craft5:craft\gql\types\elements\Element::resolve()>, which you could further customize in a more complex situation.
 
 ```php
 namespace mynamespace\gql\types\elements;
@@ -380,7 +380,7 @@ Event::on(
 
 ### Modifying Type Fields
 
-Attach a handler to <craft4:craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS> to add, remove or modify fields on any GraphQL type.
+Attach a handler to <craft5:craft\gql\TypeManager::EVENT_DEFINE_GQL_TYPE_FIELDS> to add, remove or modify fields on any GraphQL type.
 
 Below we’re removing IDs throughout the schema in favor of UIDs, and adding an `authorEmail` field to the entry interface:
 
@@ -420,15 +420,15 @@ Just like PHP interfaces, GraphQL interfaces are abstract types that describe th
 
 You don’t have to use interfaces, but they’re a nice way of formalizing the fields exposed by your type. Craft provides GraphQL interfaces for each included element type:
 
-- <craft4:craft\gql\interfaces\Element>
-- <craft4:craft\gql\interfaces\Structure>
-- <craft4:craft\gql\interfaces\elements\Asset>
-- <craft4:craft\gql\interfaces\elements\Category>
-- <craft4:craft\gql\interfaces\elements\Entry>
-- <craft4:craft\gql\interfaces\elements\GlobalSet>
-- <craft4:craft\gql\interfaces\elements\MatrixBlock>
-- <craft4:craft\gql\interfaces\elements\Tag>
-- <craft4:craft\gql\interfaces\elements\User>
+- <craft5:craft\gql\interfaces\Element>
+- <craft5:craft\gql\interfaces\Structure>
+- <craft5:craft\gql\interfaces\elements\Asset>
+- <craft5:craft\gql\interfaces\elements\Category>
+- <craft5:craft\gql\interfaces\elements\Entry>
+- <craft5:craft\gql\interfaces\elements\GlobalSet>
+- <craft5:craft\gql\interfaces\elements\MatrixBlock>
+- <craft5:craft\gql\interfaces\elements\Tag>
+- <craft5:craft\gql\interfaces\elements\User>
 
 ### Example Interface
 
@@ -491,7 +491,7 @@ You won’t see or interact with a resolver querying the GraphQL API because the
 
 ### Example Resolver Class
 
-This example resolver extends the base [ElementResolver](craft4:craft\gql\base\ElementResolver) and implements a single [prepareQuery()](craft4:craft\gql\base\ElementResolver::prepareQuery()) method whose job is to return an element query:
+This example resolver extends the base [ElementResolver](craft5:craft\gql\base\ElementResolver) and implements a single [prepareQuery()](craft5:craft\gql\base\ElementResolver::prepareQuery()) method whose job is to return an element query:
 
 ```php
 namespace mynamespace\gql\resolvers\elements;
@@ -537,7 +537,7 @@ class Widget extends \craft\gql\base\ElementResolver
 }
 ```
 
-If this wasn’t a custom element type, we’d need a class to extend <craft4:craft\gql\base\Resolver> instead, implementing a [resolve()](craft4:craft\gql\base\Resolver::resolve()) method to return the field’s value rather than translating it into an element query.
+If this wasn’t a custom element type, we’d need a class to extend <craft5:craft\gql\base\Resolver> instead, implementing a [resolve()](craft5:craft\gql\base\Resolver::resolve()) method to return the field’s value rather than translating it into an element query.
 
 The handling of `$source` here is important, because `prepareQuery()` may be called at different points in the request flow depending on exactly where `WidgetField` is accessed. `$source` will only have a `null` value if `WidgetField` is accessed at the top level of the query, and once populated `$fieldName` will either contain an array of `Widget` objects (if eager loading) or a prepped element query for returning `Widget` objects from the database.
 
@@ -560,17 +560,17 @@ For example:
 - An entry’s context is its entry type, and it has an additional section context: \
 `sections.[section UID]`, `entrytypes.[UID]`
 
-You can use your custom element’s <craft4:craft\base\Element::gqlScopesByContext()> method to declare its context-specific scopes. That’s exactly where Craft’s elements are defining those contexts in the list above:
+You can use your custom element’s <craft5:craft\base\Element::gqlScopesByContext()> method to declare its context-specific scopes. That’s exactly where Craft’s elements are defining those contexts in the list above:
 
-- <craft4:craft\elements\Asset::gqlScopesByContext()>
-- <craft4:craft\elements\Category::gqlScopesByContext()>
-- <craft4:craft\elements\Entry::gqlScopesByContext()>
-- <craft4:craft\elements\GlobalSet::gqlScopesByContext()>
-- <craft4:craft\elements\MatrixBlock::gqlScopesByContext()>
-- <craft4:craft\elements\Tag::gqlScopesByContext()>
-- <craft4:craft\elements\User::gqlScopesByContext()>
+- <craft5:craft\elements\Asset::gqlScopesByContext()>
+- <craft5:craft\elements\Category::gqlScopesByContext()>
+- <craft5:craft\elements\Entry::gqlScopesByContext()>
+- <craft5:craft\elements\GlobalSet::gqlScopesByContext()>
+- <craft5:craft\elements\MatrixBlock::gqlScopesByContext()>
+- <craft5:craft\elements\Tag::gqlScopesByContext()>
+- <craft5:craft\elements\User::gqlScopesByContext()>
 
-If you’ll benefit from using a generator, you will need to write a class that extends <craft4:craft\gql\base\Generator> and implements <craft4:craft\gql\base\GeneratorInterface> and <craft4:craft\gql\base\SingleGeneratorInterface>.
+If you’ll benefit from using a generator, you will need to write a class that extends <craft5:craft\gql\base\Generator> and implements <craft5:craft\gql\base\GeneratorInterface> and <craft5:craft\gql\base\SingleGeneratorInterface>.
 
 The base Generator provides a `getContentFields()` method that gets custom fields for a given context, while the interfaces require `generateTypes()` and `generateType()` respectively—responsible for registering types based on the provided context.
 
@@ -704,14 +704,14 @@ The term “context” here is deliberately vague because you’re the one that 
 
 Since Craft elements and field types are integral to the GraphQL API, their base classes include methods for describing their type names:
 
-- <craft4:craft\base\Element::getGqlTypeName()>
-- <craft4:craft\base\Element::gqlTypeNameByContext()>
-- <craft4:craft\base\Field::getContentGqlType()>
+- <craft5:craft\base\Element::getGqlTypeName()>
+- <craft5:craft\base\Element::gqlTypeNameByContext()>
+- <craft5:craft\base\Field::getContentGqlType()>
 
 These include sensible defaults since Craft can make some assumptions about how elements and fields will be used.
 
 ::: tip
-A field can also use <craft4:craft\base\Field::includeInGqlSchema()>—`true` by default—to determine whether it should appear in a given schema.
+A field can also use <craft5:craft\base\Field::includeInGqlSchema()>—`true` by default—to determine whether it should appear in a given schema.
 :::
 
 ## Directives
@@ -782,7 +782,7 @@ class BarTheFoo extends Directive
 
 ### Registering Directives
 
-You can register your directive by appending its class name to the `directives` array on the [registerGqlDirectives](craft4:craft\services\Gql::EVENT_REGISTER_GQL_DIRECTIVES) event object:
+You can register your directive by appending its class name to the `directives` array on the [registerGqlDirectives](craft5:craft\services\Gql::EVENT_REGISTER_GQL_DIRECTIVES) event object:
 
 ```php
 use mynamespace\gql\directives\BarTheFoo;
@@ -831,7 +831,7 @@ mutation NewWidget($title: String) {
 :::
 
 ::: tip
-Like the name-getting methods mentioned earlier, Craft’s base elements include a <craft4:craft\base\Element::gqlMutationNameByContext()> method for providing context-sensitive type names.
+Like the name-getting methods mentioned earlier, Craft’s base elements include a <craft5:craft\base\Element::gqlMutationNameByContext()> method for providing context-sensitive type names.
 :::
 
 ### Input Type Value Normalizers
@@ -946,7 +946,7 @@ class Widget extends ElementMutationResolver
 
 ### Registering Mutations
 
-You can register your mutation by including its definitions to the `mutations` array on the [registerGqlMutations](craft4:craft\services\Gql::EVENT_REGISTER_GQL_MUTATIONS) event object:
+You can register your mutation by including its definitions to the `mutations` array on the [registerGqlMutations](craft5:craft\services\Gql::EVENT_REGISTER_GQL_MUTATIONS) event object:
 
 
 ```php
@@ -1000,7 +1000,7 @@ You must honor whatever components you register; this is not done by default!
 
 #### Registering Schema Components
 
-The Gql service provides a [registerGqlSchemaComponents](craft4:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS) event you can use to append your own schema components to the event object’s `queries` and/or `mutations` arrays:
+The Gql service provides a [registerGqlSchemaComponents](craft5:craft\services\Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS) event you can use to append your own schema components to the event object’s `queries` and/or `mutations` arrays:
 
 ```php
 use craft\events\RegisterGqlSchemaComponentsEvent;
@@ -1059,7 +1059,7 @@ Event::on(
 
 ### Eager Loading
 
-If you’re adding relational fields that would benefit from eager loading, you’ll want to register those by adding them to the `fieldList` array on the [registerGqlEagerLoadableFields](craft4:craft\gql\ElementQueryConditionBuilder::EVENT_REGISTER_GQL_EAGERLOADABLE_FIELDS) event object.
+If you’re adding relational fields that would benefit from eager loading, you’ll want to register those by adding them to the `fieldList` array on the [registerGqlEagerLoadableFields](craft5:craft\gql\ElementQueryConditionBuilder::EVENT_REGISTER_GQL_EAGERLOADABLE_FIELDS) event object.
 
 ::: tip
 Any fields you add using Craft’s stock GraphQL types do _not_ need to be registered for eager loading.
@@ -1102,7 +1102,7 @@ Argument handlers are another Craft-specific concept. These are like the inverse
 
 #### Example Argument Handler Class
 
-This example class extends [RelationArgumentHandler](craft4:craft\gql\base\RelationArgumentHandler) to translate a `relatedToWidgets` argument into a query argument for our Widget IDs:
+This example class extends [RelationArgumentHandler](craft5:craft\gql\base\RelationArgumentHandler) to translate a `relatedToWidgets` argument into a query argument for our Widget IDs:
 
 ```php
 namespace mynamespace\gql\argumenthandlers;
@@ -1124,7 +1124,7 @@ class RelatedWidgets extends RelationArgumentHandler
 
 #### Registering Argument Handlers
 
-Add a listener for [defineGqlArgumentHandlers](craft4:craft\gql\ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS) and append any argument handler class names:
+Add a listener for [defineGqlArgumentHandlers](craft5:craft\gql\ArgumentManager::EVENT_DEFINE_GQL_ARGUMENT_HANDLERS) and append any argument handler class names:
 
 ```php
 use mynamespace\gql\argumenthandlers\RelatedWidgets;
@@ -1148,7 +1148,7 @@ The combined values are limited by Craft’s <config4:maxGraphqlComplexity> sett
 
 If you provide a field definition that involves relations or processor-intensive operations, you should specify a complexity score.
 
-The <craft4:craft\services\Gql> service has the following complexity constants:
+The <craft5:craft\services\Gql> service has the following complexity constants:
 
 | Constant                          | Value | Description |
 | --------------------------------- | --- | -----------
@@ -1158,12 +1158,12 @@ The <craft4:craft\services\Gql> service has the following complexity constants:
 | `GRAPHQL_COMPLEXITY_CPU_HEAVY`    | 200 | Complexity value for accessing a field that will likely trigger a CPU heavy operation.
 | `GRAPHQL_COMPLEXITY_NPLUS1`       | 500 | Complexity value for accessing a field that will trigger a query for every parent returned.
 
-The <craft4:craft\services\Gql> service also provides static methods to help calculate complexity values:
+The <craft5:craft\services\Gql> service also provides static methods to help calculate complexity values:
 
-- <craft4:craft\services\Gql::eagerLoadComplexity()>
-- <craft4:craft\services\Gql::singleQueryComplexity()>
-- <craft4:craft\services\Gql::relatedArgumentComplexity()>
-- <craft4:craft\services\Gql::nPlus1Complexity()>
+- <craft5:craft\services\Gql::eagerLoadComplexity()>
+- <craft5:craft\services\Gql::singleQueryComplexity()>
+- <craft5:craft\services\Gql::relatedArgumentComplexity()>
+- <craft5:craft\services\Gql::nPlus1Complexity()>
 
 Any field definition has the option of providing a `'complexity'` value in its array:
 

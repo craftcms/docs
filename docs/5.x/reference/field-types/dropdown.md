@@ -61,27 +61,27 @@ $value = $entry->myFieldHandle;
 ```
 :::
 
-That will give you a <craft4:craft\fields\data\SingleOptionFieldData> object that contains the field data.
+That will give you a <craft5:craft\fields\data\SingleOptionFieldData> object that contains the field data.
 
-To show the selected option, output it as a string, or output the [value](craft4:craft\fields\data\SingleOptionFieldData::$value) property:
+To show the selected option, output it as a string, or output the [value](craft5:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
 {{ entry.myFieldHandle }} or {{ entry.myFieldHandle.value }}
 ```
 
-To see if an option is selected, use the [value](craft4:craft\fields\data\SingleOptionFieldData::$value) property:
+To see if an option is selected, use the [value](craft5:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ```twig
 {% if entry.myFieldHandle.value %}
 ```
 
-To show the selected option’s label, output the [label](craft4:craft\fields\data\SingleOptionFieldData::$label) property:
+To show the selected option’s label, output the [label](craft5:craft\fields\data\SingleOptionFieldData::$label) property:
 
 ```twig
 {{ entry.myFieldHandle.label }}
 ```
 
-To loop through all of the available options, iterate over the [options](craft4:craft\fields\data\SingleOptionFieldData::getOptions()) property:
+To loop through all of the available options, iterate over the [options](craft5:craft\fields\data\SingleOptionFieldData::getOptions()) property:
 
 ```twig
 {% for option in entry.myFieldHandle.options %}

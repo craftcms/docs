@@ -92,7 +92,7 @@ return [
 
 ## Common Components
 
-We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components are initialized for each type of request—for example, Craft uses two different `request` component classes (<craft4:craft\web\Request> and <craft4:craft\console\Request>) to help smooth over some differences in Yii’s HTTP and CLI APIs.
+We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components are initialized for each type of request—for example, Craft uses two different `request` component classes (<craft5:craft\web\Request> and <craft5:craft\console\Request>) to help smooth over some differences in Yii’s HTTP and CLI APIs.
 
 ### Cache
 
@@ -112,7 +112,7 @@ To store data caches in the database, create a `cache` table as specified by <yi
 php craft setup/db-cache-table
 ```
 
-Once that’s done, you can set your `cache` application component to use <craft4:craft\cache\DbCache>.
+Once that’s done, you can set your `cache` application component to use <craft5:craft\cache\DbCache>.
 
 ```php
 <?php
@@ -131,7 +131,7 @@ return [
 ```
 
 ::: tip
-If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft4:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
+If you’ve already configured Craft to use <yii2:yii\caching\DbCache> rather than <craft5:craft\cache\DbCache>, you can safely switch to the latter if you remove your `cache` table’s `dateCreated`, `dateUpdated`, and `uid` columns.
 :::
 
 #### APC Example
@@ -277,7 +277,7 @@ return [
 
 The `db` component is just Craft’s _default_ database connection—but your application can connect to _multiple_ databases by creating additional components.
 
-For example, if you need to read some data from a legacy database as part of a migration, you could define a `legacydb` component with its own connection settings. Then, any <craft4:craft\db\Query> execution methods can be called using the alternate component:
+For example, if you need to read some data from a legacy database as part of a migration, you could define a `legacydb` component with its own connection settings. Then, any <craft5:craft\db\Query> execution methods can be called using the alternate component:
 
 ::: code
 ```php app.php
@@ -317,7 +317,7 @@ Check out the [guide on Logging](../logging.md#customizing-logs) for some detail
 
 In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
 
-The `session` component **must** have the <craft4:craft\behaviors\SessionBehavior> behavior attached to provide methods that the system relies on. When configuring the component from scratch, you must explicitly include it by setting an `as session` key to `craft\behaviors\SessionBehavior::class`, where `as session` is a [Yii shorthand](https://www.yiiframework.com/doc/guide/2.0/en/concept-configurations#configuration-format) for attaching behaviors via a configuration object.
+The `session` component **must** have the <craft5:craft\behaviors\SessionBehavior> behavior attached to provide methods that the system relies on. When configuring the component from scratch, you must explicitly include it by setting an `as session` key to `craft\behaviors\SessionBehavior::class`, where `as session` is a [Yii shorthand](https://www.yiiframework.com/doc/guide/2.0/en/concept-configurations#configuration-format) for attaching behaviors via a configuration object.
 
 ::: warning
 The `session` component should only be overridden from `app.web.php` so it gets defined for web requests, but not console requests.
@@ -427,9 +427,9 @@ Any changes you make to the Mailer component from `config/app.php` will not be r
 
 ### Queue
 
-Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default, Craft will use a [custom queue driver](craft4:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md).
+Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default, Craft will use a [custom queue driver](craft5:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md).
 
-Switching to a different driver by overriding Craft’s `queue` component from `config/app.php` will result in a loss of visibility into the queue’s state from the control panel. Instead of replacing the entire component, set your custom queue driver config on <craft4:craft\queue\Queue::$proxyQueue>:
+Switching to a different driver by overriding Craft’s `queue` component from `config/app.php` will result in a loss of visibility into the queue’s state from the control panel. Instead of replacing the entire component, set your custom queue driver config on <craft5:craft\queue\Queue::$proxyQueue>:
 
 ```php
 <?php
@@ -453,7 +453,7 @@ return [
 Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
 
 ::: warning
-Only drivers that implement <craft4:craft\queue\QueueInterface> will be visible within the control panel.
+Only drivers that implement <craft5:craft\queue\QueueInterface> will be visible within the control panel.
 :::
 
 ::: tip
@@ -497,7 +497,7 @@ return [
 The specific properties that you can (or must) use in the configuration object will differ based on the specified mutex class—check the driver’s documentation for instructions.
 
 ::: warning
-The primary mutex _component_ should always be an instance of <craft4:craft\mutex\Mutex>. We’re only modifying the existing `mutex` component’s nested _driver_ property and leaving the rest of its config as-is!
+The primary mutex _component_ should always be an instance of <craft5:craft\mutex\Mutex>. We’re only modifying the existing `mutex` component’s nested _driver_ property and leaving the rest of its config as-is!
 :::
 
 ## Modules

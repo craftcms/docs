@@ -343,7 +343,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ## `dataUrl`
 
-Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft4:craft\elements\Asset> object or a file path (optionally using an [alias](../config/README.md#aliases)).
+Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft5:craft\elements\Asset> object or a file path (optionally using an [alias](../config/README.md#aliases)).
 
 ```twig
 {# Asset object `myLogoAsset` #}
@@ -530,7 +530,7 @@ Rounds a number down.
 
 ## `getenv`
 
-Returns the value of an environment variable, using <craft4:craft\helpers\App::env()>.
+Returns the value of an environment variable, using <craft5:craft\helpers\App::env()>.
 
 ```twig
 {{ getenv('MAPS_API_KEY') }}
@@ -819,7 +819,7 @@ You can pass the following things into it:
   {{ svg('@webroot/icons/lemon.svg') }}
   ```
 
-- A <craft4:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
+- A <craft5:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
 
   ```twig
   {% set image = entry.myAssetsField.one() %}

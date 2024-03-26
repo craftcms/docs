@@ -144,7 +144,7 @@ To fetch the nested elements, call one of the [query execution methods](../../de
 {% endif %}
 ```
 
-All the code you put inside the `for`-loop will be repeated for each nested entry. Each time, `nestedEntry` will be a <craft4:craft\elements\Entry> model populated with that nested entry’s content.
+All the code you put inside the `for`-loop will be repeated for each nested entry. Each time, `nestedEntry` will be a <craft5:craft\elements\Entry> model populated with that nested entry’s content.
 
 Here’s an example of what the template might look like for a Matrix field that has four entry types (_Heading_, _Text_, _Image_, and _Quote_). We can treat each entry type separately by checking its `handle`:
 
@@ -181,7 +181,7 @@ This code can be simplified using the [switch](../twig/tags.md#switch) tag.
 
 #### Other Query Methods
 
-If you only want the first nested entry, call [one()](<craft4:craft\db\Query::one()>) instead of `all()`, and make sure it returned something:
+If you only want the first nested entry, call [one()](<craft5:craft\db\Query::one()>) instead of `all()`, and make sure it returned something:
 
 ::: code
 ```twig
@@ -198,7 +198,7 @@ if ($firstNestedEntry) {
 ```
 :::
 
-If you only want to know the total number of blocks, call [count()](<craft4:craft\db\Query::count()>).
+If you only want to know the total number of blocks, call [count()](<craft5:craft\db\Query::count()>).
 
 ::: code
 ```twig
@@ -210,7 +210,7 @@ $total = $entry->myFieldHandle->count();
 ```
 :::
 
-If you just need to check if there are nested entries added to a field (but don’t need to actually load them), call [exists()](<craft4:craft\db\Query::exists()>):
+If you just need to check if there are nested entries added to a field (but don’t need to actually load them), call [exists()](<craft5:craft\db\Query::exists()>):
 
 ::: code
 ```twig

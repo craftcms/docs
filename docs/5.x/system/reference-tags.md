@@ -34,13 +34,13 @@ Curly braces (`{}`) surround three segments, separated by colons (`:`):
 
     You can refer to the element types’ class references for a list of available properties:
 
-    - [craft\elements\Address](craft4:craft\elements\Entry#public-properties)
-    - [craft\elements\Asset](craft4:craft\elements\Asset#public-properties)
-    - [craft\elements\Category](craft4:craft\elements\Category#public-properties)
-    - [craft\elements\Entry](craft4:craft\elements\Entry#public-properties)
-    - [craft\elements\GlobalSet](craft4:craft\elements\GlobalSet#public-properties)
-    - [craft\elements\Tag](craft4:craft\elements\Tag#public-properties)
-    - [craft\elements\User](craft4:craft\elements\User#public-properties)
+    - [craft\elements\Address](craft5:craft\elements\Entry#public-properties)
+    - [craft\elements\Asset](craft5:craft\elements\Asset#public-properties)
+    - [craft\elements\Category](craft5:craft\elements\Category#public-properties)
+    - [craft\elements\Entry](craft5:craft\elements\Entry#public-properties)
+    - [craft\elements\GlobalSet](craft5:craft\elements\GlobalSet#public-properties)
+    - [craft\elements\Tag](craft5:craft\elements\Tag#public-properties)
+    - [craft\elements\User](craft5:craft\elements\User#public-properties)
 
     Custom field handles are also supported, for field types with values that can be represented as strings.
 
@@ -48,7 +48,7 @@ Curly braces (`{}`) surround three segments, separated by colons (`:`):
 
 The following are all valid reference tag formats:
 
-- `{asset:123:filename}` — returns the filename of an asset with the ID of `123` (via <craft4:craft\elements\Asset::getFilename()>).
+- `{asset:123:filename}` — returns the filename of an asset with the ID of `123` (via <craft5:craft\elements\Asset::getFilename()>).
 - `{entry:blog/whats-on-tap}` — returns the URL of an entry in a `blog` section with the slug `whats-on-tap`.
 - `{entry:blog/whats-on-tap@en:intro}` — returns the value of an `intro` custom field on a `blog` section entry with the slug `whats-on-tap`, loaded from the site with the handle `en`.
 - `{craft\commerce\Variant:123:price}` — returns the price of a Commerce Variant object with the ID of `123`. Note that no formatting will be applied to the price!
@@ -66,7 +66,7 @@ You can parse any string for reference tags in your templates using the [parseRe
 {{ entry.body|parseRefs|raw }}
 ```
 
-The equivalent function is available via <craft4:craft\services\Elements>:
+The equivalent function is available via <craft5:craft\services\Elements>:
 
 ```php
 $parsed = Craft::$app->getElements()->parseRefs($text);

@@ -15,10 +15,10 @@ For the most part, Craft controllers behave the same as they do in Yii, so every
 
 Controllers should live within the `controllers/` directory of your plugin or module’s base source folder, and must include the a `Controller` suffix in their class and filename.
 
-Craft controllers should extend <craft4:craft\web\Controller>, which offers a few advantages over its parent, <yii2:yii\web\Controller>:
+Craft controllers should extend <craft5:craft\web\Controller>, which offers a few advantages over its parent, <yii2:yii\web\Controller>:
 
 - You can decide when the controller should allow “anonymous” access by overriding
-  [$allowAnonymous](craft4:craft\web\Controller::$allowAnonymous). (An active user session is required by default.)
+  [$allowAnonymous](craft5:craft\web\Controller::$allowAnonymous). (An active user session is required by default.)
 - If an [exception](#exceptions) is thrown by a controller action and the request accepts a JSON response, the response will automatically be formatted as JSON, with an `error` key.
 - It provides several [helper methods](#request-validation-methods) that ease development.
 
@@ -40,7 +40,7 @@ An action is responsible for gathering information about the request and generat
 - HTTP headers;
 - Session data;
 
-Typically, actions return a <craft4:craft\web\Response> object—but they can also return `null` as a means of handing control back to Craft and [routing](#routing) to whatever _path_ was originally requested (ignoring the incoming [`action` param](#action-params)). As a convenience, <craft4:craft\web\Controller> includes a number of [request validation](#request-validation-methods) and [response](#sending-responses) factory methods.
+Typically, actions return a <craft5:craft\web\Response> object—but they can also return `null` as a means of handing control back to Craft and [routing](#routing) to whatever _path_ was originally requested (ignoring the incoming [`action` param](#action-params)). As a convenience, <craft5:craft\web\Controller> includes a number of [request validation](#request-validation-methods) and [response](#sending-responses) factory methods.
 
 A basic controller looks like this:
 
@@ -111,7 +111,7 @@ The **Action Trigger** is the only exception to this rule, and can be customized
 
 Many plugins that provide functionality via the control panel will want to register a bundle of sensible, human-readable routes.
 
-In your plugin’s `init()` method, listen for the <craft4:craft\web\UrlManager::EVENT_REGISTER_CP_URL_RULES> event:
+In your plugin’s `init()` method, listen for the <craft5:craft\web\UrlManager::EVENT_REGISTER_CP_URL_RULES> event:
 
 ```php
 use craft\web\UrlManager;
@@ -174,21 +174,21 @@ A controller action’s primary job is to handle an incoming web request and gen
 
 ### Request Validation Methods
 
-<craft4:craft\web\Controller> offers several methods you can call from within your actions, to validate the current request:
+<craft5:craft\web\Controller> offers several methods you can call from within your actions, to validate the current request:
 
 Method | Description
 ------ | -----------
-[requireLogin()](craft4:craft\web\Controller::requireLogin()) | Requires that a user is logged in.
-[requireGuest()](craft4:craft\web\Controller::requireGuest()) | Requires that the user is anonymous.
-[requireAdmin()](craft4:craft\web\Controller::requireAdmin()) | Requires that the user is logged in with an Admin account.
-[requirePermission()](craft4:craft\web\Controller::requirePermission()) | Requires that the user is logged in with an account that has a given permission.
-[requireAuthorization()](craft4:craft\web\Controller::requireAuthorization()) | Requires that the user has been granted authorization to do something (whether or not they are logged in).
-[requireElevatedSession()](craft4:craft\web\Controller::requireElevatedSession()) | Requires that the user has an elevated session.
-[requirePostRequest()](craft4:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
-[requireAcceptsJson()](craft4:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
-[requireToken()](craft4:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](craft4:craft\web\Request::getToken()).
-[requireCpRequest()](craft4:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config4:cpTrigger).
-[requireSiteRequest()](craft4:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config4:cpTrigger).
+[requireLogin()](craft5:craft\web\Controller::requireLogin()) | Requires that a user is logged in.
+[requireGuest()](craft5:craft\web\Controller::requireGuest()) | Requires that the user is anonymous.
+[requireAdmin()](craft5:craft\web\Controller::requireAdmin()) | Requires that the user is logged in with an Admin account.
+[requirePermission()](craft5:craft\web\Controller::requirePermission()) | Requires that the user is logged in with an account that has a given permission.
+[requireAuthorization()](craft5:craft\web\Controller::requireAuthorization()) | Requires that the user has been granted authorization to do something (whether or not they are logged in).
+[requireElevatedSession()](craft5:craft\web\Controller::requireElevatedSession()) | Requires that the user has an elevated session.
+[requirePostRequest()](craft5:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
+[requireAcceptsJson()](craft5:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
+[requireToken()](craft5:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](craft5:craft\web\Request::getToken()).
+[requireCpRequest()](craft5:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config4:cpTrigger).
+[requireSiteRequest()](craft5:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config4:cpTrigger).
 
 Generally speaking, these checks should occur at the _top_ of your action methods:
 
@@ -232,7 +232,7 @@ You may want to send different types of responses based on request conditions. A
 
 ### Rendering Templates
 
-Controller actions can render and return Twig templates using <craft4:craft\web\Controller::renderTemplate()>.
+Controller actions can render and return Twig templates using <craft5:craft\web\Controller::renderTemplate()>.
 
 ```php{11-15}
 use yii\web\Response;
@@ -253,20 +253,20 @@ public function actionFoo(): Response
 }
 ```
 
-<craft4:craft\web\Controller::renderTemplate()> calls <craft4:craft\web\View::renderPageTemplate()> internally, which ensures all registered assets are added to the rendered HTML—then it will set the `Content-Type` header on the response, based template’s extension, or `text/html` when a MIME type can’t be determined.
+<craft5:craft\web\Controller::renderTemplate()> calls <craft5:craft\web\View::renderPageTemplate()> internally, which ensures all registered assets are added to the rendered HTML—then it will set the `Content-Type` header on the response, based template’s extension, or `text/html` when a MIME type can’t be determined.
 
 #### Registering Assets
 
-To register an asset for inclusion in a rendered page, call one of the <craft4:craft\web\View> methods:
+To register an asset for inclusion in a rendered page, call one of the <craft5:craft\web\View> methods:
 
 Calling… | Registers…
 ------ | -----------
-[`registerJs()`](craft4:craft\web\View::registerJs()) | …a block of JavaScript code.
-[`registerJsFile()`](craft4:craft\web\View::registerJsFile()) | …a `<script>` tag, with the provided value as its `src` attribute.
-[`registerCss()`](craft4:craft\web\View::registerCss()) | …a block of CSS code.
-[`registerCssFile()`](craft4:craft\web\View::registerCssFile()) | …a `<link rel="stylesheet">` tag with the provided value as its `href` attribute.
-[`registerLinkTag()`](craft4:craft\web\View::registerLinkTag()) | …an arbitrary `<link>` tag.
-[`registerAssetBundle()`](craft4:craft\web\View::registerAssetBundle()) | …everything in the provided [asset bundle](./asset-bundles.md).
+[`registerJs()`](craft5:craft\web\View::registerJs()) | …a block of JavaScript code.
+[`registerJsFile()`](craft5:craft\web\View::registerJsFile()) | …a `<script>` tag, with the provided value as its `src` attribute.
+[`registerCss()`](craft5:craft\web\View::registerCss()) | …a block of CSS code.
+[`registerCssFile()`](craft5:craft\web\View::registerCssFile()) | …a `<link rel="stylesheet">` tag with the provided value as its `href` attribute.
+[`registerLinkTag()`](craft5:craft\web\View::registerLinkTag()) | …an arbitrary `<link>` tag.
+[`registerAssetBundle()`](craft5:craft\web\View::registerAssetBundle()) | …everything in the provided [asset bundle](./asset-bundles.md).
 
 ::: tip
 Some methods support passing one of the `View::POS_*` constants to determine where it is registered, or use an [asset bundle](./asset-bundles.md) to declare dependencies to ensure scripts are output in the correct order.
@@ -288,13 +288,13 @@ public function actionFoo(): Response
 }
 ```
 
-If your action is _only_ intended for use by clients expecting JSON, the request should include an `Accept` header, and the action should call <craft4:craft\web\Controller::requireAcceptsJson()>.
+If your action is _only_ intended for use by clients expecting JSON, the request should include an `Accept` header, and the action should call <craft5:craft\web\Controller::requireAcceptsJson()>.
 
-Alternatively, <craft4:craft\web\Controller::asSuccess()> and <craft4:craft\web\Controller::asFailure()> may be more appropriate, as they will automatically determine the best format for a response—and they keep the structure of the response consistent.
+Alternatively, <craft5:craft\web\Controller::asSuccess()> and <craft5:craft\web\Controller::asFailure()> may be more appropriate, as they will automatically determine the best format for a response—and they keep the structure of the response consistent.
 
 ### Redirection
 
-Controller actions can redirect the request using <craft4:craft\web\Controller::redirect()>.
+Controller actions can redirect the request using <craft5:craft\web\Controller::redirect()>.
 
 ```php
 use yii\web\Response;
@@ -305,7 +305,7 @@ public function actionFoo(): Response
 }
 ```
 
-Or, if the request may contain a hashed `redirect` param, you can redirect to that using <craft4:craft\web\Controller::redirectToPostedUrl()>.
+Or, if the request may contain a hashed `redirect` param, you can redirect to that using <craft5:craft\web\Controller::redirectToPostedUrl()>.
 
 ```php
 use yii\web\Response;
@@ -317,7 +317,7 @@ public function actionFoo(): Response
 }
 ```
 
-If the controller action is saving something, you may want to allow forms’ `redirect` params to include dynamic tokens such as `{id}`, which should be replaced with the object’s attribute values. To support that, pass the object into [redirectToPostedUrl()](craft4:craft\web\Controller::redirectToPostedUrl()).
+If the controller action is saving something, you may want to allow forms’ `redirect` params to include dynamic tokens such as `{id}`, which should be replaced with the object’s attribute values. To support that, pass the object into [redirectToPostedUrl()](craft5:craft\web\Controller::redirectToPostedUrl()).
 
 ```php
 use yii\web\Response;
@@ -334,12 +334,12 @@ public function actionFoo(): Response
 
 ### Success and Failure states
 
-For any requests that deal primarily with a single model, you can indicate success and failure states (say, saves or validation errors, respectively) with <craft4:craft\web\Controller::asModelSuccess()> and <craft4:craft\web\Controller::asModelFailure()>.
+For any requests that deal primarily with a single model, you can indicate success and failure states (say, saves or validation errors, respectively) with <craft5:craft\web\Controller::asModelSuccess()> and <craft5:craft\web\Controller::asModelFailure()>.
 
 These methods combine aspects of the options above, constructing a response based on the [`Accept` header](#returning-json), issuing a [redirect](#redirection), or setting flashes and route params. Check out the [model lifecycle](#model-lifecycle) section for an example of them in use.
 
 ::: tip
-The lower-level <craft4:craft\web\Controller::asSuccess()> and <craft4:craft\web\Controller::asFailure()> methods accomplish much the same thing, but don’t require a model.
+The lower-level <craft5:craft\web\Controller::asSuccess()> and <craft5:craft\web\Controller::asFailure()> methods accomplish much the same thing, but don’t require a model.
 :::
 
 ### Sending Files
@@ -355,12 +355,12 @@ return $this->response->sendContentAsFile($csv, 'report.csv');
 ```
 
 ::: tip
-Note that these methods are accessed via the <craft4:craft\web\Response> stub attached to the controller.
+Note that these methods are accessed via the <craft5:craft\web\Response> stub attached to the controller.
 :::
 
 ### Control Panel Screens
 
-When working with control panel views, you can construct a context-agnostic response by calling <craft4:craft\web\Controller::asCpScreen()>. In doing so, you allow Craft to format the response as a complete HTML document, or just the fragment required for a slide-out. The universal [element editor](./element-types.md#edit-screen) makes extensive use of this.
+When working with control panel views, you can construct a context-agnostic response by calling <craft5:craft\web\Controller::asCpScreen()>. In doing so, you allow Craft to format the response as a complete HTML document, or just the fragment required for a slide-out. The universal [element editor](./element-types.md#edit-screen) makes extensive use of this.
 
 To set up a response, call the `asCpScreen()` method from an action:
 
@@ -377,7 +377,7 @@ return $response;
 ```
 
 ::: tip
-See <craft4:craft\web\CpScreenResponseBehavior> for a complete list of methods used to prepare the response object. Keep in mind that some properties are only used one context or another, but that the response can (and should) be configured without needing to know which context is being targeted!
+See <craft5:craft\web\CpScreenResponseBehavior> for a complete list of methods used to prepare the response object. Keep in mind that some properties are only used one context or another, but that the response can (and should) be configured without needing to know which context is being targeted!
 :::
 
 ## Model Lifecycle

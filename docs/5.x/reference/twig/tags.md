@@ -253,7 +253,7 @@ Unlike [`dd`](#dd) (which halts execution), `{% dump %}` quietly logs the curren
 {# ... #}
 ```
 
-…would log a <craft4:craft\elements\Entry> object tagged `templates/_blog/post:3` to the debug toolbar. If you’re not sure what variables you have access to in a given template, you can use the tag _without_ a variable to dump everything:
+…would log a <craft5:craft\elements\Entry> object tagged `templates/_blog/post:3` to the debug toolbar. If you’re not sure what variables you have access to in a given template, you can use the tag _without_ a variable to dump everything:
 
 ```twig
 {% dump %}
@@ -349,7 +349,7 @@ The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 ```
 
 ::: tip
-The tag calls <craft4:craft\web\View::registerHtml()> under the hood, which can also be accessed via the [global `view` variable](./global-variables.md#view).
+The tag calls <craft5:craft\web\View::registerHtml()> under the hood, which can also be accessed via the [global `view` variable](./global-variables.md#view).
 
 ```twig
 {% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
@@ -398,7 +398,7 @@ The `{% js %}` tag can be used to register a JavaScript file or a JavaScript cod
 ::: tip
 To register a JavaScript file, the URL must begin with `https://` or `http://`, or end in `.js`.
 
-To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft4:craft\web\View::registerJsFile()) instead:
+To provide a *dynamic* filename reference, use [`view.registerJsFile()`](craft5:craft\web\View::registerJsFile()) instead:
 ```twig
 {% set myJsFile = "/assets/js/script.js" %}
 {% do view.registerJsFile(myJsFile) %}
@@ -523,7 +523,7 @@ That would result in:
 ```
 
 ::: tip
-This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <craft4:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
+This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <craft5:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
 :::
 
 ## `nav`
@@ -626,7 +626,7 @@ Next up you need to type “`as`”, followed by one or two variable names:
 
 Here’s what they get set to:
 
-- `pageInfo` gets set to a <craft4:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
+- `pageInfo` gets set to a <craft5:craft\web\twig\variables\Paginate> object, which provides info about the current page, and some helper methods for creating links to other pages. (See [below](#the-pageInfo-variable) for more info.)
 - `pageEntries` gets set to an array of the results (e.g. the elements) that belong to the current page.
 
 ::: tip

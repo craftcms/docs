@@ -17,7 +17,7 @@ Use the [generator] to create a filesystem class and register it with Craft:
 
 <Generator component="filesystem-type" plugin="my-plugin" />
 
-If you are inclined to implement the filesystem type from scratch, extend <craft4:craft\base\Fs>. There are a number of first-party examples to look at, as well:
+If you are inclined to implement the filesystem type from scratch, extend <craft5:craft\base\Fs>. There are a number of first-party examples to look at, as well:
 
 - [Amazon AWS S3](repo:craftcms/aws-s3)
 - [Google Cloud Storage](repo:craftcms/google-cloud )
@@ -61,7 +61,7 @@ The generator takes care of this for you!
 
 ## Implementation
 
-Filesystems are complex components, and their implementation is almost entirely dependent on the storage medium they target. Consider reviewing <craft4:craft\base\FsInterface>, as well as the built-in [Local](craft4:craft\fs\Local) filesystem for some ideas about their responsibilities.
+Filesystems are complex components, and their implementation is almost entirely dependent on the storage medium they target. Consider reviewing <craft5:craft\base\FsInterface>, as well as the built-in [Local](craft5:craft\fs\Local) filesystem for some ideas about their responsibilities.
 
 ### Flysystem
 
@@ -81,4 +81,4 @@ Use [auto-suggest inputs](environmental-settings.md#autosuggest-inputs) to make 
 
 Craft will take care of assigning settings fields into your filesystem class prior to validating or saving it, as long as your inputs’ `name`s match up with filesystem class properties. The entire return value from `getSettingsHtml()` is namespaced to avoid collisions with other filesystem type properties, and settings common to all filesystems (like their name and handle) are merged automatically.
 
-Filesystems are stored in [project config](project-config.md). Craft takes care of packing your class’s public properties into a serializable configuration object by virtue of extending from <craft4:craft\base\SavableComponent> and <craft4:craft\base\ConfigurableComponent>.
+Filesystems are stored in [project config](project-config.md). Craft takes care of packing your class’s public properties into a serializable configuration object by virtue of extending from <craft5:craft\base\SavableComponent> and <craft5:craft\base\ConfigurableComponent>.

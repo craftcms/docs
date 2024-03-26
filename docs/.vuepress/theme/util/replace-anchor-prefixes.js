@@ -91,6 +91,18 @@ function replacePrefix(link, ctx) {
     return url + (hash ? `#${hash}` : "");
   }
 
+  // Link to source code, directly.
+  // https://github.com/search?q=repo%3Acraftcms%2Fcms+path%3Asrc%2Fhelpers%2FApp.php+symbol%3AparseEnv&type=code
+  if (ref && prefixSettings.format === 'source') {
+    if (!ref.subject) {
+      // No subject? Jump directly to the file:
+      return `${prefixSettings.base}${prefixSettings.repo}blob/${prefixSettings.branch}/${pathifyClassName(ref.className, prefixSettings.ns, prefixSettings.sourceDir)}`;
+    }
+
+    // Ok, use the code navigation/search tool:
+    return `${prefixSettings.base}search?q=repo:${prefixSettings.repo}+path:${pathifyClassName(ref.className, prefixSettings.ns, prefixSettings.sourceDir)}+symbol:${ref.subject}`;
+  }
+
   if (prefixSettings.format === "set-local") {
     // Can we get the current version/site in this context?
     console.warn("Unsupported anchor prefix!");
@@ -148,6 +160,19 @@ function usesCustomPrefix(link) {
  */
 function slugifyClassName(className) {
   return className.replace(/\\/g, "-").toLowerCase();
+}
+
+/**
+ * Converts a class namespace to a folder path, in a similar fashion to PSR auto-loaders.
+ * @param string className Fully-qualified class name, as it is used in PHP.
+ * @param string namespace The part of the namespace located in `sourcePath`
+ * @param string sourcePath Where in the repo the autoloading map is anchored.
+ */
+function pathifyClassName(className, namespace, sourcePath) {
+  const localClassName = className.replace(`${namespace}\\`, '');
+  const pathLike = localClassName.replace(/\\/g, '/');
+
+  return `${sourcePath}${pathLike}.php`;
 }
 
 /**

@@ -10,7 +10,7 @@ Namespace
 
 Module ID
 : Something that uniquely identifies the module within your project. IDs must begin with a letter and contain only lowercase letters, numbers, and dashes, and should be `kebab-cased`.
-: The module ID will become the first segment in [controller action](./controllers.md) paths. Avoid names that will conflict with Craft’s core [controllers](repo:craftcms/cms/tree/develop/src/controllers) or the handles of any installed plugins (e.g. `app` would conflict with <craft4:craft\controllers\AppController>, and `commerce` would collide with [Commerce](../../commerce/4.x/README.md)).
+: The module ID will become the first segment in [controller action](./controllers.md) paths. Avoid names that will conflict with Craft’s core [controllers](repo:craftcms/cms/tree/develop/src/controllers) or the handles of any installed plugins (e.g. `app` would conflict with <craft5:craft\controllers\AppController>, and `commerce` would collide with [Commerce](../../commerce/4.x/README.md)).
 
 
 As an alternative to modules, private [plugins](plugin-guide.md) <Since ver="4.4.0" feature="Private plugins" /> provide all the functionality of a regular plugin, but are intended to be tracked as part of a project rather than distributed.
@@ -96,9 +96,9 @@ Replace `foo` with your module’s actual namespace, and `'@foo'` with an [alias
 
 Most initialization logic belongs in your module’s `init()` method.
 
-However, there are some situations where this doesn’t guarantee a certain part of the application is ready (another plugin, for instance). Conversely, a module that isn’t bootstrapped at the beginning of a request may have `init()` called too late to listen to <craft4:craft\web\Application::EVENT_INIT>, and would never be notified that the app is indeed ready.
+However, there are some situations where this doesn’t guarantee a certain part of the application is ready (another plugin, for instance). Conversely, a module that isn’t bootstrapped at the beginning of a request may have `init()` called too late to listen to <craft5:craft\web\Application::EVENT_INIT>, and would never be notified that the app is indeed ready.
 
-In those cases, it’s best to register a callback via <craft4:craft\base\ApplicationTrait::onInit()>:
+In those cases, it’s best to register a callback via <craft5:craft\base\ApplicationTrait::onInit()>:
 
 ```php
 <?php

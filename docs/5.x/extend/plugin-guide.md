@@ -147,7 +147,7 @@ class Plugin extends \craft\base\Plugin
 
 Most initialization logic belongs in your plugin’s `init()` method.
 
-However, there are some situations where this doesn’t guarantee a certain part of the application is ready (like another plugin)—or that something has initialized so early that you wouldn’t have an opportunity to listen for events in the first place. In those cases, it’s best to register a callback via <craft4:craft\base\ApplicationTrait::onInit()>, from your plugin’s `init()` method:
+However, there are some situations where this doesn’t guarantee a certain part of the application is ready (like another plugin)—or that something has initialized so early that you wouldn’t have an opportunity to listen for events in the first place. In those cases, it’s best to register a callback via <craft5:craft\base\ApplicationTrait::onInit()>, from your plugin’s `init()` method:
 
 ```php
 namespace mynamespace;

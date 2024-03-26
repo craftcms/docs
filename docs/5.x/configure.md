@@ -52,7 +52,7 @@ CRAFT_ENVIRONMENT=dev
 # ...and comments!
 ```
 
-These values can be referenced in your config files by calling [App::env()](craft4:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The equivalent [`getenv()` Twig function](reference/twig/functions.md#getenv) uses `App::env()`, and is therefore fine to use in templates.
+These values can be referenced in your config files by calling [App::env()](craft5:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The equivalent [`getenv()` Twig function](reference/twig/functions.md#getenv) uses `App::env()`, and is therefore fine to use in templates.
 
 Craft doesn’t require your variables to follow any kind of naming convention, but it will automatically discover [some specific environment variables](#environment-overrides) for general and database settings.
 
@@ -68,7 +68,7 @@ Craft will also respond to a handful of [specific environment variables or PHP c
 
 ### Secrets
 
-You can store sensitive values that won’t leak into the process’s environment in a special “secrets” file. <Since ver="4.5.0" feature="Secrets file" /> The path to this file is determined by the [`CRAFT_SECRETS_PATH` environment variable or constant](#craft_secrets_path). When defined, Craft will attempt to include a file at that path (presumed to be a PHP script that `return`s an associative array), and checks it prior to resolving any environment variable or constant with <craft4:craft\helpers\App::env()>.
+You can store sensitive values that won’t leak into the process’s environment in a special “secrets” file. <Since ver="4.5.0" feature="Secrets file" /> The path to this file is determined by the [`CRAFT_SECRETS_PATH` environment variable or constant](#craft_secrets_path). When defined, Craft will attempt to include a file at that path (presumed to be a PHP script that `return`s an associative array), and checks it prior to resolving any environment variable or constant with <craft5:craft\helpers\App::env()>.
 
 ```php
 return [
@@ -87,7 +87,7 @@ This is only recommended in situations where environment variable exfiltration i
 Each setting accepts specific [types and values](#types-and-values) (like an integer, interval expression string, or boolean), but Craft can resolve them in two ways:
 
 - **Statically:** A value is set explicitly in a config file, and is the same in all environments. Example: Customizing file types that can be uploaded.
-- **Dynamically:** Values are only known at runtime, or are set conditionally based on the current environment. Typically, this will involve a call to [App::env()](craft4:craft\helpers\App::env()) using the name of an environment variable that is expected to exist—or whose absence is significant. Example: Dev mode, database connection details, or a storage bucket URL.
+- **Dynamically:** Values are only known at runtime, or are set conditionally based on the current environment. Typically, this will involve a call to [App::env()](craft5:craft\helpers\App::env()) using the name of an environment variable that is expected to exist—or whose absence is significant. Example: Dev mode, database connection details, or a storage bucket URL.
 
 ### Priority
 
@@ -131,7 +131,7 @@ Fluent config is currently only available for _general_ and _database_ settings,
 
 Most config settings expect a [scalar](https://www.php.net/manual/en/function.is-scalar.php) value, and will generate exceptions if they are not (and can not be coerced to) a valid type.
 
-Normalization may occur on some values. For instance, any setting that expects a “file size” (like [`maxUploadFileSize`](config4:maxUploadFileSize)) will interpret a numeric value in bytes—but passing a string allows you to use other formats like `256M` or `1G` by virtue of Craft normalizing the value with [ConfigHelper::sizeInBytes()](craft4:craft\helpers\ConfigHelper::sizeInBytes()).
+Normalization may occur on some values. For instance, any setting that expects a “file size” (like [`maxUploadFileSize`](config4:maxUploadFileSize)) will interpret a numeric value in bytes—but passing a string allows you to use other formats like `256M` or `1G` by virtue of Craft normalizing the value with [ConfigHelper::sizeInBytes()](craft5:craft\helpers\ConfigHelper::sizeInBytes()).
 
 A few settings support complex types, like arrays and closures:
 
@@ -160,7 +160,7 @@ return GeneralConfig::create()
     });
 ```
 
-In this example, the function passed to `postLoginRedirect` will be called by [ConfigHelper::localizedValue()](craft4:craft\helpers\ConfigHelper::localizedValue()) with the current site’s handle, only *at the time the value needed*. This distinction is important, because Craft is not fully initialized when configuration files are *evaluated*, but will be by the time the application is ready to redirect a logged-in user.
+In this example, the function passed to `postLoginRedirect` will be called by [ConfigHelper::localizedValue()](craft5:craft\helpers\ConfigHelper::localizedValue()) with the current site’s handle, only *at the time the value needed*. This distinction is important, because Craft is not fully initialized when configuration files are *evaluated*, but will be by the time the application is ready to redirect a logged-in user.
 
 Keep in mind that while scalar values are automatically normalized during configuration, the return value of a function *is not*.
 
@@ -311,7 +311,7 @@ For this reason, Craft provides a way to bind system settings to dynamic aliases
 
 ![Craft’s autosuggest field, displaying a suitable match](images/site-base-url-setting.png)
 
-Whenever you see this UI, you can provide a valid alias or environment variable name, in addition to plain values. Craft will always store and display the raw, unparsed value, but uses [App::parseEnv()](craft4:craft\helpers\App::parseEnv()) when the value is consumed. Here are some examples of settings for which dynamic values are useful:
+Whenever you see this UI, you can provide a valid alias or environment variable name, in addition to plain values. Craft will always store and display the raw, unparsed value, but uses [App::parseEnv()](craft5:craft\helpers\App::parseEnv()) when the value is consumed. Here are some examples of settings for which dynamic values are useful:
 
 - **General Settings:** System Name, Status, and Time Zone;
 - **Sites:** Base URLs;
@@ -491,7 +491,7 @@ Note that HTML Purifier expresses many options with dot notation, like `HTML.All
 
 Some customization is handled via special variables (set as PHP constants or environment vars) that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in its `bootstrap.php` file—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
-By virtue of accessing these via <craft4:craft\helpers\App::env()>, Craft also honors values defined by your environment under the same names or keys. The majority of these settings are tied specifically to the structure of your project directory, though, and generally do not need to change between environments.
+By virtue of accessing these via <craft5:craft\helpers\App::env()>, Craft also honors values defined by your environment under the same names or keys. The majority of these settings are tied specifically to the structure of your project directory, though, and generally do not need to change between environments.
 
 ::: tip
 Constants you set directly in `web/index.php` will only be defined for _web_ requests, while any you set in the `craft` executable will only be defined for _console_ requests.

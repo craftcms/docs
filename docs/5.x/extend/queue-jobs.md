@@ -6,7 +6,7 @@ description: Offloading work to a background process can improve the experience 
 
 Craft uses a queue for processing background tasks like updating indexes, propagating entries, and pruning revisions. You can write simple queue job classes to register your asynchronous queue tasks.
 
-This feature relies on [Yii’s queue system](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.0/en/usage), to which Craft adds a [BaseJob](craft4:craft\queue\BaseJob) class for some perks:
+This feature relies on [Yii’s queue system](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.0/en/usage), to which Craft adds a [BaseJob](craft5:craft\queue\BaseJob) class for some perks:
 
 - The ability to set a fallback description for the job.
 - The ability to label and report task progress for a better user experience.
@@ -21,7 +21,7 @@ Similarly, failed queue jobs may pause the queue and require admin intervention.
 
 ## Writing a Job
 
-You can add your own queue job by first writing a class that extends <craft4:craft\queue\BaseJob> and implements `execute()`.
+You can add your own queue job by first writing a class that extends <craft5:craft\queue\BaseJob> and implements `execute()`.
 
 This example class sends an email:
 
@@ -57,7 +57,7 @@ class MyJob extends \craft\queue\BaseJob
 
 If your job involves multiple steps, you might want to report its progress while it’s executing.
 
-You can do this with BaseJob’s [`setProgress()`](craft4:craft\queue\BaseJob::setProgress()) method, whose arguments are:
+You can do this with BaseJob’s [`setProgress()`](craft5:craft\queue\BaseJob::setProgress()) method, whose arguments are:
 
 - the queue instance
 - a number between 0 and 1 representing the percent complete
@@ -105,7 +105,7 @@ public function execute($queue): void
 
 In our first example, exceptions from the mailer can bubble out of our job—but in the second example, we catch those errors so the job is not halted prematurely.
 
-This decision is up to you: if the work in a job is nonessential (or will be done again later, like <craft4:craft\queue\jobs\GeneratePendingTransforms>), you can catch and log errors and let the job end nominally; if the work is critical (like synchronizing something to an external API), it may be better to let the exception bubble out of `execute()`.
+This decision is up to you: if the work in a job is nonessential (or will be done again later, like <craft5:craft\queue\jobs\GeneratePendingTransforms>), you can catch and log errors and let the job end nominally; if the work is critical (like synchronizing something to an external API), it may be better to let the exception bubble out of `execute()`.
 
 The queue wraps every job in its own `try` block, and will mark any jobs that throw exceptions as _failed_. The exception message that caused the failure will be recorded along with the job. Failed jobs can be retried from the control panel or with the `php craft queue/retry [id]` command.
 
@@ -119,15 +119,15 @@ Returning `true` from `canRetry()` can pollute your queue with jobs that may nev
 
 ### Batched Jobs <Since ver="4.4.0" feature="Batched jobs" />
 
-In situations where there is simply too much work to do in a single request (or within PHP’s memory limit), consider extending <craft4:craft\queue\BaseBatchedJob>.
+In situations where there is simply too much work to do in a single request (or within PHP’s memory limit), consider extending <craft5:craft\queue\BaseBatchedJob>.
 
 Batched jobs’ `execute()` method is handled for you. Instead, you must define two new methods:
 
-- `loadData()` — Returns a class extending <craft4:craft\base\Batchable>, like <craft4:craft\db\QueryBatcher>. Data is not necessarily loaded at this point, but a means of fetching data in “slices” must be.
+- `loadData()` — Returns a class extending <craft5:craft\base\Batchable>, like <craft5:craft\db\QueryBatcher>. Data is not necessarily loaded at this point, but a means of fetching data in “slices” must be.
 - `processItem($item)` — Your logic for handling a single item in each batch.
 
 ::: tip
-<craft4:craft\db\QueryBatcher> can be passed any <craft4:craft\db\Query> subclass, including element queries. Use it to wrap queries returned from `loadData()`:
+<craft5:craft\db\QueryBatcher> can be passed any <craft5:craft\db\Query> subclass, including element queries. Use it to wrap queries returned from `loadData()`:
 
 ```php
 use craft\db\QueryBatcher;
@@ -146,7 +146,7 @@ Also note that we’re explicitly ordering by `id`—this can help avoid skipped
 Batched jobs can also define a default `$batchSize` that is appropriate for the workload. The batch size is not a guaranteed value, but a target when Craft spawns the next job—it will keep track of memory usage and _may_ stop short, scheduling the next batch to resume where it left off.
 
 ::: warning
-Batched jobs **must** be pushed using <craft4:craft\helpers\Queue::push()>, or `delay` and `ttr` settings may be lost for subsequent batches.
+Batched jobs **must** be pushed using <craft5:craft\helpers\Queue::push()>, or `delay` and `ttr` settings may be lost for subsequent batches.
 :::
 
 ## Adding Your Job to the Queue

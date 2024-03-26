@@ -4,7 +4,7 @@ description: Create customizable, heads-up resources for control panel users.
 
 # Widget Types
 
-Plugins can provide custom widget types for the [control panel dashboard](../control-panel.md#dashboard) by creating a class that implements <craft4:craft\base\WidgetInterface> and <craft4:craft\base\WidgetTrait>. The class will serve both as a way to communicate various things about your widget type (with static methods), and as a model that widgets of its type will be instantiated with.
+Plugins can provide custom widget types for the [control panel dashboard](../control-panel.md#dashboard) by creating a class that implements <craft5:craft\base\WidgetInterface> and <craft5:craft\base\WidgetTrait>. The class will serve both as a way to communicate various things about your widget type (with static methods), and as a model that widgets of its type will be instantiated with.
 
 Each user controls what widgets are on their dashboard, and may have multiple instances of a single widget type—meaning widget [settings](#settings) can give a single widget type a great deal of flexibility.
 
@@ -14,7 +14,7 @@ Scaffold a widget type with the [generator](generator.md):
 
 <Generator component="widget-type" plugin="my-plugin" />
 
-If you would prefer to write a widget class from scratch, it should extend <craft4:craft\base\Widget>. Refer to Craft’s own widget classes (located in `vendor/craftcms/cms/src/widgets/`, or the `craft\widgets` namespace) for examples.
+If you would prefer to write a widget class from scratch, it should extend <craft5:craft\base\Widget>. Refer to Craft’s own widget classes (located in `vendor/craftcms/cms/src/widgets/`, or the `craft\widgets` namespace) for examples.
 
 ## Registering Custom Widget Types
 
@@ -97,4 +97,4 @@ If you elect to _not_ implement `getSettingsHtml()`, your widget will display a 
 
 ### Validation
 
-As with other [Model](craft4:craft\base\Model)s, widgets can declare [validation rules](guide:tutorial-core-validators) by implementing a `defineRules()` method. Validation rules ensure your widget is always configured in a useful way.
+As with other [Model](craft5:craft\base\Model)s, widgets can declare [validation rules](guide:tutorial-core-validators) by implementing a `defineRules()` method. Validation rules ensure your widget is always configured in a useful way.

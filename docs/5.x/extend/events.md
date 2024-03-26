@@ -4,7 +4,7 @@ description: Explore the myriad events Craft emits for customizing the behavior 
 
 # Events
 
-Craft has all kinds of events you can use to customize how core features work, or connect built-in processes to new functionality. Events are a [Yii concept](guide:concept-events), and are used extensively throughout its architecture. In cases where Yii components are extended for internal use (like <craft4:craft\base\Model>), Craft provides additional events to expose a greater customization surface for developers.
+Craft has all kinds of events you can use to customize how core features work, or connect built-in processes to new functionality. Events are a [Yii concept](guide:concept-events), and are used extensively throughout its architecture. In cases where Yii components are extended for internal use (like <craft5:craft\base\Model>), Craft provides additional events to expose a greater customization surface for developers.
 
 ::: tip
 See [Using Events in a Custom Module](kb:custom-module-events) for an end-to-end tutorial on wiring up your first event handler in a module.
@@ -22,7 +22,7 @@ The class that emits an event is considered its **sender**. The sender is always
 
 ### Name
 
-Combined with the sender, an event’s **name** identifies what a given handler is listening for. Event names are unique among those on the same class. Typically, you will access event names via constants on the sender class (like <craft4:craft\services\Dashboard::EVENT_REGISTER_WIDGET_TYPES>), instead of using the underlying string (`registerWidgetTypes`). Using event constants also allows your IDE to give you suggestions for events, and provide feedback when referencing a non-existent one—they’re also part of our formal deprecation process, receiving docblock tags and [upgrade](updating-plugins.md#events) instructions.
+Combined with the sender, an event’s **name** identifies what a given handler is listening for. Event names are unique among those on the same class. Typically, you will access event names via constants on the sender class (like <craft5:craft\services\Dashboard::EVENT_REGISTER_WIDGET_TYPES>), instead of using the underlying string (`registerWidgetTypes`). Using event constants also allows your IDE to give you suggestions for events, and provide feedback when referencing a non-existent one—they’re also part of our formal deprecation process, receiving docblock tags and [upgrade](updating-plugins.md#events) instructions.
 
 ### Event Object
 
@@ -38,10 +38,10 @@ Plugins should generally avoid flagging events `handled` unless they expect to h
 
 #### Cancelable Events
 
-Craft extends the “handled” concept via <craft4:craft\events\CancelableEvent>. In addition to `handled`, handlers can set the event’s `isValid` property to `false` to signal that the sender should halt further processing. If you want to prevent other handlers from overriding your `isValid` setting, also set `handled` to `true`.
+Craft extends the “handled” concept via <craft5:craft\events\CancelableEvent>. In addition to `handled`, handlers can set the event’s `isValid` property to `false` to signal that the sender should halt further processing. If you want to prevent other handlers from overriding your `isValid` setting, also set `handled` to `true`.
 
 ::: tip
-The `isValid` property is not necessarily related to model validation. A handful of Yii events use an `isValid` property to mean a variety of things, but Craft standardizes the behavior via [CancelableEvent](craft4:craft\events\CancelableEvent), using it exclusively as a means to halt a built-in procedure (say, to prevent a user from being activated).
+The `isValid` property is not necessarily related to model validation. A handful of Yii events use an `isValid` property to mean a variety of things, but Craft standardizes the behavior via [CancelableEvent](craft5:craft\events\CancelableEvent), using it exclusively as a means to halt a built-in procedure (say, to prevent a user from being activated).
 
 Preventing something from happening in this way is _not_ equivalent to throwing an exception or attempting to end the request from a handler. If an event is cancelable, Craft expects to be able to react to its cancellation—including, potentially, releasing locks or rolling back database transactions.
 :::
@@ -71,25 +71,25 @@ Directly searching the Craft source is a great way to learn about Craft-specific
 
 ### Inherited Events
 
-Events provided by Craft (those defined on classes in the `craft\*` namespace) represent just the tip of the iceberg. Many classes inherit events from their parents, including classes defined by Yii—let’s use <craft4:craft\elements\Entry> as an example:
+Events provided by Craft (those defined on classes in the `craft\*` namespace) represent just the tip of the iceberg. Many classes inherit events from their parents, including classes defined by Yii—let’s use <craft5:craft\elements\Entry> as an example:
 
 1. Only two events exist directly on the `Entry` class:
-  - [`EVENT_DEFINE_ENTRY_TYPES`](craft4:craft\elements\Entry::EVENT_DEFINE_ENTRY_TYPES)
-  - [`EVENT_DEFINE_PARENT_SELECTION_CRITERIA`](craft4:craft\elements\Entry::EVENT_DEFINE_PARENT_SELECTION_CRITERIA)
-2. Its parent class, <craft4:craft\base\Element> defines 38 more:
-  - [`EVENT_REGISTER_SOURCES`](craft4:craft\base\Element::EVENT_REGISTER_SOURCES)
-  - [`EVENT_REGISTER_FIELD_LAYOUTS`](craft4:craft\base\Element::EVENT_REGISTER_FIELD_LAYOUTS)
+  - [`EVENT_DEFINE_ENTRY_TYPES`](craft5:craft\elements\Entry::EVENT_DEFINE_ENTRY_TYPES)
+  - [`EVENT_DEFINE_PARENT_SELECTION_CRITERIA`](craft5:craft\elements\Entry::EVENT_DEFINE_PARENT_SELECTION_CRITERIA)
+2. Its parent class, <craft5:craft\base\Element> defines 38 more:
+  - [`EVENT_REGISTER_SOURCES`](craft5:craft\base\Element::EVENT_REGISTER_SOURCES)
+  - [`EVENT_REGISTER_FIELD_LAYOUTS`](craft5:craft\base\Element::EVENT_REGISTER_FIELD_LAYOUTS)
   - …
-3. `Element` extends <craft4:craft\base\Component>, which doesn’t contribute any—but its parent class <craft4:craft\base\Model> defines five more:
-  - [`EVENT_INIT`](craft4:craft\base\Model::EVENT_INIT)
-  - [`EVENT_DEFINE_BEHAVIORS`](craft4:craft\base\Model::EVENT_DEFINE_BEHAVIORS)
+3. `Element` extends <craft5:craft\base\Component>, which doesn’t contribute any—but its parent class <craft5:craft\base\Model> defines five more:
+  - [`EVENT_INIT`](craft5:craft\base\Model::EVENT_INIT)
+  - [`EVENT_DEFINE_BEHAVIORS`](craft5:craft\base\Model::EVENT_DEFINE_BEHAVIORS)
   - …
 4. From here, we jump into <yii2:yii\base\Model>, which defines two more:
   - [`EVENT_BEFORE_VALIDATE`](yii2:yii\base\Model::EVENT_BEFORE_VALIDATE)
   - [`EVENT_AFTER_VALIDATE`](yii2:yii\base\Model::EVENT_AFTER_VALIDATE)
 5. The final two classes in the chain of inheritance (<yii2:yii\base\Component> and <yii2:yii\base\BaseObject>) don’t implement any events, themselves.
 
-This one class contains many more events (47, at the time of writing) than is immediately evident. This also represents only the events that would designate an _entry_ as its [sender](#sender)—entries (and elements or models) are passed to a variety of other services, which emit their own events. Another 33 events are emitted by <craft4:craft\services\Elements>, alone!
+This one class contains many more events (47, at the time of writing) than is immediately evident. This also represents only the events that would designate an _entry_ as its [sender](#sender)—entries (and elements or models) are passed to a variety of other services, which emit their own events. Another 33 events are emitted by <craft5:craft\services\Elements>, alone!
 
 ## Handling Events
 
@@ -126,7 +126,7 @@ Let’s look at the required arguments:
 2. The event name we want to register the handler for. This should _always_ be a class constant).
 3. The [handler](#handler-signature).
 
-Class-level events are almost always attached from a plugin’s `init()` method—but be aware that Craft’s bootstrapping process may trigger some events before handlers can be registered! We advise developers defer as much of their public plugins’ initialization as possible by wrapping it in a call to <craft4:craft\base\ApplicationTrait::onInit()>—this gives other extensions an opportunity to register handlers prior to them actually being triggered.
+Class-level events are almost always attached from a plugin’s `init()` method—but be aware that Craft’s bootstrapping process may trigger some events before handlers can be registered! We advise developers defer as much of their public plugins’ initialization as possible by wrapping it in a call to <craft5:craft\base\ApplicationTrait::onInit()>—this gives other extensions an opportunity to register handlers prior to them actually being triggered.
 
 ### Instance-Level Events
 
@@ -184,7 +184,7 @@ This listener makes use of the fourth `$data` argument, which allows you to capt
 
 ### Handler Signature
 
-Handlers must be a valid [callable](https://www.php.net/manual/en/language.types.callable.php), and should accept a single argument that matches the expected event type. Our examples so far have used either the generic <yii2:yii\base\Event>, or a type hint of <craft4:craft\events\UserEvent>.
+Handlers must be a valid [callable](https://www.php.net/manual/en/language.types.callable.php), and should accept a single argument that matches the expected event type. Our examples so far have used either the generic <yii2:yii\base\Event>, or a type hint of <craft5:craft\events\UserEvent>.
 
 In addition to closures, As of PHP 8.1, you may also use the native callable syntax. Our previous “welcome email” example would end up looking something like this:
 
@@ -202,9 +202,9 @@ Return values from handlers are ignored—instead, Craft expects that the handle
 
 ### Cloning Handlers
 
-Instance-level event handlers are _not_ copied to new instances when using PHP’s `clone()`. If you want to guarantee that your handlers survive this process, create a [behavior](behaviors.md#events) and attach that—behaviors _do_ get copied thanks to <craft4:craft\base\CloneFixTrait>, and any event handlers declared by <yii2:yii\base\Behavior::events()> are re-installed.
+Instance-level event handlers are _not_ copied to new instances when using PHP’s `clone()`. If you want to guarantee that your handlers survive this process, create a [behavior](behaviors.md#events) and attach that—behaviors _do_ get copied thanks to <craft5:craft\base\CloneFixTrait>, and any event handlers declared by <yii2:yii\base\Behavior::events()> are re-installed.
 
-Instead of maintaining a behavior for a single handler, you can use the built-in <craft4:craft\behaviors\EventBehavior> <Since ver="4.5.0" feature="EventBehavior proxy for cloned objects" /> as a proxy for registering handlers:
+Instead of maintaining a behavior for a single handler, you can use the built-in <craft5:craft\behaviors\EventBehavior> <Since ver="4.5.0" feature="EventBehavior proxy for cloned objects" /> as a proxy for registering handlers:
 
 ```php
 use craft\behaviors\EventBehavior;
@@ -221,7 +221,7 @@ $query->attachBehavior('myBehavior', new EventBehavior([
 ], true));
 ```
 
-The second argument to the `EventBehavior` constructor tells the behavior to mimic <craft4:craft\base\Event::once()> and will only invoke your handler once. All handlers are treated the same way, but you may mix one-time and continuous handlers by attaching multiple `EventBehavior` instances.
+The second argument to the `EventBehavior` constructor tells the behavior to mimic <craft5:craft\base\Event::once()> and will only invoke your handler once. All handlers are treated the same way, but you may mix one-time and continuous handlers by attaching multiple `EventBehavior` instances.
 
 ## Event Code Generator
 
@@ -233,7 +233,7 @@ Select an event for more detail and a code snippet.
 
 ### Adding Validation Rules
 
-Models in Craft (including [elements](element-types.md)) implement [validation rules](guide:tutorial-core-validators) via a `defineRules()` method. When any model is validated, its `rules()` method is called, which in turn calls `defineRules()`, then emits a <craft4:craft\events\DefineRulesEvent> with those rules set on a `rules` property.
+Models in Craft (including [elements](element-types.md)) implement [validation rules](guide:tutorial-core-validators) via a `defineRules()` method. When any model is validated, its `rules()` method is called, which in turn calls `defineRules()`, then emits a <craft5:craft\events\DefineRulesEvent> with those rules set on a `rules` property.
 
 A handler that registers additional rules would look something like this:
 
@@ -270,7 +270,7 @@ $e->rules[] = [
 Building your own [field type](field-types.md)? It should provide validation rules via `getElementValidationRules()`.
 :::
 
-This process is the same for any class that extends <craft4:craft\base\Model>—the `EVENT_DEFINE_RULES` event is available on any subclass!
+This process is the same for any class that extends <craft5:craft\base\Model>—the `EVENT_DEFINE_RULES` event is available on any subclass!
 
 ### Saving Entries
 
@@ -287,7 +287,7 @@ Generally, entries progress through the following order of operations:
 3. Saving for the initial site that triggers `EVENT_AFTER_SAVE`.
 4. Propagating non-translatable changes to the entry’s other sites, which repeats steps 1-3 for each site before triggering `EVENT_AFTER_PROPAGATE`.
 
-This process is actually a bit more abstract than this, because it covers _all_ element types. The events above live on the <craft4:craft\base\Element> class, but are inherited by other element types, meaning you can listen to only the subset of element lifecycle events you care about.
+This process is actually a bit more abstract than this, because it covers _all_ element types. The events above live on the <craft5:craft\base\Element> class, but are inherited by other element types, meaning you can listen to only the subset of element lifecycle events you care about.
 
 #### Bulk Operations
 
@@ -323,7 +323,7 @@ The `$key` will be attached to the emitted <craft5:craft\events\BulkOpEvent> so 
 
 ### Adding and Modifying Search Keywords
 
-If you’d like to extend system components to add your own searchable custom attributes, you can hook into the [`EVENT_REGISTER_SEARCHABLE_ATTRIBUTES`](craft4:craft\base\Element::EVENT_REGISTER_SEARCHABLE_ATTRIBUTES) event.
+If you’d like to extend system components to add your own searchable custom attributes, you can hook into the [`EVENT_REGISTER_SEARCHABLE_ATTRIBUTES`](craft5:craft\base\Element::EVENT_REGISTER_SEARCHABLE_ATTRIBUTES) event.
 
 Here, we’re making the `myCustomAttribute` property searchable for Commerce orders:
 
@@ -343,7 +343,7 @@ Event::on(
 );
 ```
 
-A “searchable attribute” doesn’t need to correspond to a real property, so long as you later handle the <craft4:craft\base\Element::EVENT_DEFINE_KEYWORDS> event:
+A “searchable attribute” doesn’t need to correspond to a real property, so long as you later handle the <craft5:craft\base\Element::EVENT_DEFINE_KEYWORDS> event:
 
 ```php
 
@@ -490,7 +490,7 @@ class MailingList extends Component
 }
 ```
 
-The event classes are relatively sparse—they only need to declare properties for the data we wish to send along with them. Note that we are extending <craft4:craft\events\CancelableEvent> for the “before” event!
+The event classes are relatively sparse—they only need to declare properties for the data we wish to send along with them. Note that we are extending <craft5:craft\events\CancelableEvent> for the “before” event!
 
 On the other hand, the service contains a bit of noisy boilerplate for the HTTP request, which isn’t essential to understand. The highlighted lines show where event code has been injected, and how we’re handling any side-effects. 
 

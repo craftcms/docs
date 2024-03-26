@@ -21,15 +21,15 @@ Custom fields may define condition rule types to be pulled into element conditio
 
 Element types also have an opportunity to register their own conditions and condition rules for native attribute types.
 
-At a high level, a condition rule doesn’t know anything about how it will be used. The <craft4:craft\base\conditions\BaseCondition> class does most of the work to stitch things together and construct the appropriate UI. This base condition class is extended by most of Craft’s included conditions, and all of these pieces are integral parts of the condition builder framework.
+At a high level, a condition rule doesn’t know anything about how it will be used. The <craft5:craft\base\conditions\BaseCondition> class does most of the work to stitch things together and construct the appropriate UI. This base condition class is extended by most of Craft’s included conditions, and all of these pieces are integral parts of the condition builder framework.
 
 ## Condition Builder Framework
 
 Developers can work with existing conditions or introduce new ones using the condition builder framework.
 
-Conditions need to implement [ConditionInterface](craft4:craft\base\conditions\ConditionInterface). A generic base implementation is provided by [BaseCondition](craft4:craft\base\conditions\BaseCondition).
+Conditions need to implement [ConditionInterface](craft5:craft\base\conditions\ConditionInterface). A generic base implementation is provided by [BaseCondition](craft5:craft\base\conditions\BaseCondition).
 
-Condition rules must implement [ConditionRuleInterface](craft4:craft\base\conditions\ConditionRuleInterface). You’ll find a generic [BaseConditionRule](craft4:craft\base\conditions\BaseConditionRule) implementation along with a handful of base condition rules in `base/conditions/` that are geared for common rule formats.
+Condition rules must implement [ConditionRuleInterface](craft5:craft\base\conditions\ConditionRuleInterface). You’ll find a generic [BaseConditionRule](craft5:craft\base\conditions\BaseConditionRule) implementation along with a handful of base condition rules in `base/conditions/` that are geared for common rule formats.
 
 The HTML representation of a condition builder can be generated with `$condition->getBuilderHtml()`, which supports a few builder-specific options:
 
@@ -41,10 +41,10 @@ The HTML representation of a condition builder can be generated with `$condition
 
 ### Element Query Conditions
 
-[Element types](./element-types.md) can provide their own custom condition classes which extend [ElementCondition](craft4:craft\elements\conditions\ElementCondition). Doing so will give them a chance to include additional element type-specific rules, by overriding [conditionRuleTypes()](craft4:craft\elements\conditions\ElementCondition::conditionRuleTypes()) (see [EntryCondition](craft4:craft\elements\conditions\entries\EntryCondition) for an example).
+[Element types](./element-types.md) can provide their own custom condition classes which extend [ElementCondition](craft5:craft\elements\conditions\ElementCondition). Doing so will give them a chance to include additional element type-specific rules, by overriding [conditionRuleTypes()](craft5:craft\elements\conditions\ElementCondition::conditionRuleTypes()) (see [EntryCondition](craft5:craft\elements\conditions\entries\EntryCondition) for an example).
 
 The element type should return an instance of its custom condition class from a static `createCondition()` method.
 
 ### Field Condition Rules
 
-[Field types](./field-types.md) can provide a rule type which implements [FieldConditionRuleInterface](craft4:\craft\fields\conditions\FieldConditionRuleInterface) and uses [FieldConditionRuleTrait](craft4:craft\fields\conditions\FieldConditionRuleTrait).
+[Field types](./field-types.md) can provide a rule type which implements [FieldConditionRuleInterface](craft4:\craft\fields\conditions\FieldConditionRuleInterface) and uses [FieldConditionRuleTrait](craft5:craft\fields\conditions\FieldConditionRuleTrait).

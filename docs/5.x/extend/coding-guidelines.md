@@ -213,7 +213,7 @@ return $bar;
 
 ### Return Types
 
-Controller actions that should complete the request must return either a string (implying a `text/html` content type) or a <craft4:craft\web\Response> object.
+Controller actions that should complete the request must return either a string (implying a `text/html` content type) or a <craft5:craft\web\Response> object.
 
 ```php
 // Bad:

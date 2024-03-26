@@ -305,7 +305,7 @@ You can modify both the indexing and scoring of results, programmatically.
 
 Craft generates keywords for element attributes and custom fields based on its understanding of their data types. Each [element](./elements.md) and [field](./fields.md) type also have an opportunity to customize keywords: Assets index their `filename`, `extension`, and `kind` attributes; [relational fields](./relations.md) load the attached elements and concatenate their titles.
 
-Keywords can come in virtually any form, because Craft [normalizes](craft4:craft\helpers\Search::normalizeKeywords()) them before adding them to the index. You can supplant or augment keywords (or index additional attributes—real or virtual) by listening to specific search events.
+Keywords can come in virtually any form, because Craft [normalizes](craft5:craft\helpers\Search::normalizeKeywords()) them before adding them to the index. You can supplant or augment keywords (or index additional attributes—real or virtual) by listening to specific search events.
 
 ::: danger
 Do not modify records in the `searchindex` table, directly. Rows are cleared and rebuilt every time an element is saved, so changes made outside of the normal indexing process will be lost.
@@ -313,7 +313,7 @@ Do not modify records in the `searchindex` table, directly. Rows are cleared and
 
 #### Different Keywords
 
-To replace keywords for an existing attribute or field (or prevent something from being indexed, entirely), listen for the <craft4:craft\services\Search::EVENT_BEFORE_INDEX_KEYWORDS> event:
+To replace keywords for an existing attribute or field (or prevent something from being indexed, entirely), listen for the <craft5:craft\services\Search::EVENT_BEFORE_INDEX_KEYWORDS> event:
 
 ```php
 use yii\base\Event;
@@ -352,7 +352,7 @@ At this point, `$e->keywords` is a space-separated list of terms, ready to be in
 
 #### Additional Attributes
 
-Adding searchable attributes is done via the <craft4:craft\base\Element::EVENT_REGISTER_SEARCHABLE_ATTRIBUTES> and <craft4:craft\base\Element::EVENT_DEFINE_KEYWORDS> events:
+Adding searchable attributes is done via the <craft5:craft\base\Element::EVENT_REGISTER_SEARCHABLE_ATTRIBUTES> and <craft5:craft\base\Element::EVENT_DEFINE_KEYWORDS> events:
 
 ```php
 use yii\base\Event;
@@ -393,7 +393,7 @@ Your custom search attributes don’t have to exist on an element to be indexed!
 
 ### Altering Scores
 
-To alter the [search score](#scoring-algorithm) assigned by Craft, listen for the <craft4:craft\services\Search::EVENT_AFTER_SEARCH> event [from a plugin or module](./extend/events.md):
+To alter the [search score](#scoring-algorithm) assigned by Craft, listen for the <craft5:craft\services\Search::EVENT_AFTER_SEARCH> event [from a plugin or module](./extend/events.md):
 
 ::: code
 ```php Basics

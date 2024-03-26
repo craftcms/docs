@@ -8,7 +8,7 @@ Looking to support full-page interfaces _and_ slideouts? Check out the new [cont
 
 First, decide on the URL patterns that the edit page should be accessed by, such as `my-plugin/events/new` when creating a new event, and `my-plugin/events/X` for editing an existing one.
 
-Register two URL rules via <craft4:craft\web\UrlManager::EVENT_REGISTER_CP_URL_RULES> from your module/plugin’s `init()` method:
+Register two URL rules via <craft5:craft\web\UrlManager::EVENT_REGISTER_CP_URL_RULES> from your module/plugin’s `init()` method:
 
 ```php
 use craft\events\RegisterUrlRulesEvent;
@@ -156,7 +156,7 @@ On the surface, these look like two distinct actions—one for showing the edit 
 
 But there’s one scenario where _both_ of these actions will get run, one after the other: when there are validation errors on save.
 
-If the `saveEvent()` method returns `false` (presumably due to validation errors), our `save` action registers the model as a _route param_ called `event`, by passing it to <craft4:craft\web\UrlManager::setRouteParams()>. Then the action will return `null`, which tells Craft it should continue [routing the request](../routing.md) as if it was never routed to our `save` action to begin with.
+If the `saveEvent()` method returns `false` (presumably due to validation errors), our `save` action registers the model as a _route param_ called `event`, by passing it to <craft5:craft\web\UrlManager::setRouteParams()>. Then the action will return `null`, which tells Craft it should continue [routing the request](../routing.md) as if it was never routed to our `save` action to begin with.
 
 The next stop in the routing will be our `edit` action, per the URL rules we’ve registered. This time, our (invalid) model will be passed to its `$event` argument, so the action won’t need to fetch/create an event based on the `$eventId`. It will pass the model to the edit template, complete with validation errors.
 

@@ -131,7 +131,7 @@ Applies formatting to an [Address](../element-types/addresses.md#address-formatt
 #}
 ```
 
-This calls [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()), so you can optionally provide an array of `options` and even your own [`formatter`](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php).
+This calls [Addresses::formatAddress()](craft5:craft\services\Addresses::formatAddress()), so you can optionally provide an array of `options` and even your own [`formatter`](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php).
 
 ## `append`
 
@@ -495,7 +495,7 @@ arrays passed into the filter.
 
 ## `duration`
 
-Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object or integer (number of seconds) through <craft4:craft\helpers\DateTimeHelper::humanDuration()> to output human-friendly duration text.
+Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object or integer (number of seconds) through <craft5:craft\helpers\DateTimeHelper::humanDuration()> to output human-friendly duration text.
 
 ```twig
 <p>Posted {{ entry.postDate.diff(now)|duration(false) }} ago.</p>
@@ -615,7 +615,7 @@ if ($foo !== false) {
 **Do not hash sensitive data.** Hashed values are tamper-proof, but still expose the original value!
 :::
 
-[Request::getValidatedBodyParam()](craft4:craft\web\Request::getValidatedBodyParam()) can also perform this comparison in a controller, automatically throwing an error when it finds a missing or invalid value:
+[Request::getValidatedBodyParam()](craft5:craft\web\Request::getValidatedBodyParam()) can also perform this comparison in a controller, automatically throwing an error when it finds a missing or invalid value:
 
 ```php
 public function actionSubmitData()
@@ -653,7 +653,7 @@ Converts a date to the HTTP format, used by [RFC 7231](https://tools.ietf.org/ht
 
 ## `id`
 
-Formats a string into something that will work well as an HTML input `id`, via <craft4:craft\web\View::formatInputId()>.
+Formats a string into something that will work well as an HTML input `id`, via <craft5:craft\web\View::formatInputId()>.
 
 ```twig
 {% set name = 'input[name]' %}
@@ -758,7 +758,7 @@ If used on anything besides a query, Twig’s built-in [length](https://twig.sym
 
 ## `literal`
 
-Runs a string through <craft4:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
+Runs a string through <craft5:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
 
 ```twig
 {% set titleParam = craft.app.request.getQueryParam('title') %}
@@ -830,7 +830,7 @@ If you want to make sure specific values are defined by default in an array, lik
 ```
 :::
 
-You can also provide an optional `recursive` argument that will use [ArrayHelper::merge()](craft4:craft\helpers\ArrayHelper::merge()) to merge nested arrays or hashes.
+You can also provide an optional `recursive` argument that will use [ArrayHelper::merge()](craft5:craft\helpers\ArrayHelper::merge()) to merge nested arrays or hashes.
 
 Without `recursive`:
 
@@ -1350,7 +1350,7 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Outputs a date with <craft4:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible. Dates with the same day return only the time, using the provided `format`; dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`). Anything longer ago than that 
+Outputs a date with <craft5:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible. Dates with the same day return only the time, using the provided `format`; dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`). Anything longer ago than that 
 
 ```twig
 {{ now|timestamp }}
@@ -1473,7 +1473,7 @@ Returns an array of all the values in a given array, but without any custom keys
 
 ## `where`
 
-Runs an array through <craft4:craft\helpers\ArrayHelper::where()>.
+Runs an array through <craft5:craft\helpers\ArrayHelper::where()>.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}

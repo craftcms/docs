@@ -83,8 +83,8 @@ Possible values include:
 | `[100, 200]` | that are related to an entry with an ID of 100 or 200.
 | `[':empty:', 100, 200]` | with no related entries, or related to an entry with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the entries with IDs of 100 and 200.
-| an [Entry](craft4:craft\elements\Entry) object | that are related to the entry.
-| an [EntryQuery](craft4:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.
+| an [Entry](craft5:craft\elements\Entry) object | that are related to the entry.
+| an [EntryQuery](craft5:craft\elements\db\EntryQuery) object | that are related to any of the resulting entries.
 
 ::: code
 ```twig
@@ -118,7 +118,7 @@ $query = $entry->myFieldHandle;
 
 That will give you an [entry query](entries.md#querying-entries), prepped to output all of the related entries for the given field.
 
-To loop through all the related entries, call [all()](craft4:craft\db\Query::all()) and then loop over the results:
+To loop through all the related entries, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
 
 ::: code
 ```twig
@@ -141,7 +141,7 @@ if (count($relatedEntries)) {
 ```
 :::
 
-If you only want the first related entry, call [one()](craft4:craft\db\Query::one()) instead, and then make sure it returned something:
+If you only want the first related entry, call [one()](craft5:craft\db\Query::one()) instead, and then make sure it returned something:
 
 ::: code
 ```twig
@@ -158,7 +158,7 @@ if ($rel) {
 ```
 :::
 
-If you’d like to check for related entries without fetching them, you can call [exists()](craft4:craft\db\Query::exists()):
+If you’d like to check for related entries without fetching them, you can call [exists()](craft5:craft\db\Query::exists()):
 
 ::: code
 ```twig
@@ -238,5 +238,5 @@ You could then make the checkbox list sortable, so users have control over the o
 ## See Also
 
 - [Entry Queries](entries.md#querying-entries)
-- <craft4:craft\elements\Entry>
+- <craft5:craft\elements\Entry>
 - [Relations](relations.md)

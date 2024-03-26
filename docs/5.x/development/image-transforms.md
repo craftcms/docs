@@ -55,7 +55,7 @@ Interlacing
 Image Format
 :   Format for the transformed image.
 
-    - Auto (same as source image, if [web-safe](craft4:craft\helpers\Image::webSafeFormats()), otherwise `jpg`)
+    - Auto (same as source image, if [web-safe](craft5:craft\helpers\Image::webSafeFormats()), otherwise `jpg`)
     - `jpg`
     - `png`
     - `gif`
@@ -119,7 +119,7 @@ As the name of this mode suggests, using a target height and width that are a di
 
 ## Applying Named Transforms to Images
 
-To output an image with your named transform applied, pass its handle into your asset’s [getImg()](craft4:craft\elements\Asset::getImg()), [getUrl()](craft4:craft\elements\Asset::getUrl()), [getWidth()](craft4:craft\elements\Asset::getWidth()), and [getHeight()](craft4:craft\elements\Asset::getHeight()) functions:
+To output an image with your named transform applied, pass its handle into your asset’s [getImg()](craft5:craft\elements\Asset::getImg()), [getUrl()](craft5:craft\elements\Asset::getUrl()), [getWidth()](craft5:craft\elements\Asset::getWidth()), and [getHeight()](craft5:craft\elements\Asset::getHeight()) functions:
 
 ```twig
 <img src="{{ asset.getUrl('thumb') }}"
@@ -220,7 +220,7 @@ This would use the named `'thumb'` transform’s settings, but always generate a
 
 Transforms are a great way to avoid serving unnecessarily-large images to your users—but there’s still room for optimization! Most browsers support the [`srcset`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset) attribute, which allows you to define a collection of images that are appropriate for a given device or viewport.
 
-Rather than creating an exhaustive list of named transforms or building up multiple config hashes in your templates, you can offload this work to Craft with the [`getSrcSet()`](craft4:craft\elements\Asset::getSrcSet()) method. Here’s an example that uses the [`tag` template function](dev/functions.md#tag) to render an image with a `srcset` attribute containing three variations based on a single transform:
+Rather than creating an exhaustive list of named transforms or building up multiple config hashes in your templates, you can offload this work to Craft with the [`getSrcSet()`](craft5:craft\elements\Asset::getSrcSet()) method. Here’s an example that uses the [`tag` template function](dev/functions.md#tag) to render an image with a `srcset` attribute containing three variations based on a single transform:
 
 ```twig
 {% do asset.setTransform({ width: 300, height: 300 }) %}
@@ -233,7 +233,7 @@ Rather than creating an exhaustive list of named transforms or building up multi
 }) }}
 ```
 
-This can be done even more succinctly by passing a second `sizes` argument to the [`getImg()`](craft4:craft\elements\Asset::getImg()) method:
+This can be done even more succinctly by passing a second `sizes` argument to the [`getImg()`](craft5:craft\elements\Asset::getImg()) method:
 
 ```twig
 {{ asset.getImg({ width: 300, height: 300 }, ['1.5x', '2x', '3x']) }}
@@ -242,7 +242,7 @@ This can be done even more succinctly by passing a second `sizes` argument to th
 Don’t forget to configure the corresponding `sizes` attribute, as well—Craft can manage the transforms and build a valid `srcset`, but it doesn’t know how the images are actually used in your front-end!
 
 ::: tip
-You can also provide relative image sizes when eager-loading asset transforms. See [`AssetQuery::withTransforms()`](craft4:craft\elements\db\AssetQuery::withTransforms()) in the class reference for an example.
+You can also provide relative image sizes when eager-loading asset transforms. See [`AssetQuery::withTransforms()`](craft5:craft\elements\db\AssetQuery::withTransforms()) in the class reference for an example.
 :::
 
 ## GraphQL

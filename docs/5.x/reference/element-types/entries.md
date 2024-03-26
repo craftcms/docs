@@ -154,7 +154,7 @@ Channel and structure sections can choose whether their entries should be assign
 
 The entry URI format is an [object template](../../system/object-templates.md), which gets evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](../../system/routing.md) a request.
 
-When Craft matches a request to an entry, its section’s designated **Template** is rendered. That template is automatically provided an `entry` variable, set to the resolved <craft4:craft\elements\Entry> object, and ready to output any of its attributes or custom field data.
+When Craft matches a request to an entry, its section’s designated **Template** is rendered. That template is automatically provided an `entry` variable, set to the resolved <craft5:craft\elements\Entry> object, and ready to output any of its attributes or custom field data.
 
 #### Hierarchical URIs
 
@@ -387,7 +387,7 @@ $myEntryQuery = \craft\elements\Entry::find();
 ```
 :::
 
-Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Entry](craft4:craft\elements\Entry) objects will be returned.
+Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Entry](craft5:craft\elements\Entry) objects will be returned.
 
 ::: tip
 See [Element Queries](../../development/element-queries.md) to learn about how element queries work.

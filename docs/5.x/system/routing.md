@@ -21,7 +21,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
     Whenever an element is saved, its URI is rendered and stored in the `elements_sites` database table.
 
     ::: tip
-    Modules and plugins can re-map an element’s route to a different controller using the [EVENT_SET_ROUTE](craft4:craft\base\Element::EVENT_SET_ROUTE) event.
+    Modules and plugins can re-map an element’s route to a different controller using the [EVENT_SET_ROUTE](craft5:craft\base\Element::EVENT_SET_ROUTE) event.
     :::
 
 3. **Does the URI match a route or URI rule?**

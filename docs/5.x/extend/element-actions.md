@@ -4,7 +4,7 @@ description: Give content managers access to extra features from element indexes
 
 # Element Actions
 
-Plugins can provide custom actions for element index pages by creating a class that implements <craft4:craft\base\ElementActionInterface>. Element actions can operate on single elements or multiple elements at the same time.
+Plugins can provide custom actions for element index pages by creating a class that implements <craft5:craft\base\ElementActionInterface>. Element actions can operate on single elements or multiple elements at the same time.
 
 ## Action Class
 
@@ -12,11 +12,11 @@ Use the [generator](generator.md) to scaffold your action class:
 
 <Generator component="element-action" plugin="my-plugin" />
 
-As a convenience, you can extend <craft4:craft\base\ElementAction>, which provides a base action type implementation. You can refer to Craft’s own element action classes (located in `vendor/craftcms/cms/src/elements/actions/`, or the `craft\elements\actions` namespace) for examples.
+As a convenience, you can extend <craft5:craft\base\ElementAction>, which provides a base action type implementation. You can refer to Craft’s own element action classes (located in `vendor/craftcms/cms/src/elements/actions/`, or the `craft\elements\actions` namespace) for examples.
 
 ### Parameterization
 
-Craft’s built-in element actions prioritize reusability over specificity. Take <craft4:craft\elements\actions\Delete>, for instance: it can be used with any element type, but entries and categories make use of its attributes to generate other actions like “Delete (with descendants)” (by setting the `withDescendants` attribute), or “Delete permanently” (with the `hard` attribute).
+Craft’s built-in element actions prioritize reusability over specificity. Take <craft5:craft\elements\actions\Delete>, for instance: it can be used with any element type, but entries and categories make use of its attributes to generate other actions like “Delete (with descendants)” (by setting the `withDescendants` attribute), or “Delete permanently” (with the `hard` attribute).
 
 ## Registering Element Actions
 
@@ -33,7 +33,7 @@ protected static function defineActions(string $source): array
 }
 ```
 
-If it should be available to an element type that is out of the plugin’s control, register it using the <craft4:craft\base\Element::EVENT_REGISTER_ACTIONS> event:
+If it should be available to an element type that is out of the plugin’s control, register it using the <craft5:craft\base\Element::EVENT_REGISTER_ACTIONS> event:
 
 ```php
 <?php
@@ -68,4 +68,4 @@ Both options give you access to the [element source](element-types.md#sources) b
 
 ## Handling Actions
 
-Craft runs all actions via <craft4:craft\controllers\ElementIndexesController::actionPerformAction()>. See the built-in actions for examples of how they handle interactions in the control panel, and for back-end implementations of `performAction()`.
+Craft runs all actions via <craft5:craft\controllers\ElementIndexesController::actionPerformAction()>. See the built-in actions for examples of how they handle interactions in the control panel, and for back-end implementations of `performAction()`.

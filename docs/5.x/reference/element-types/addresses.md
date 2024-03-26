@@ -54,7 +54,7 @@ You may set a default country for new addresses via the <config4:defaultCountryC
 
 ## Querying Addresses
 
-You can fetch addresses in your templates or PHP code using an [AddressQuery](craft4:craft\elements\db\AddressQuery).
+You can fetch addresses in your templates or PHP code using an [AddressQuery](craft5:craft\elements\db\AddressQuery).
 
 ::: code
 ```twig
@@ -108,7 +108,7 @@ Address queries support the following parameters:
 
 ## Address Repository
 
-The [commerceguys/addressing](https://github.com/commerceguys/addressing) library powers planet-friendly address handling and formatting, and its exhaustive repository of global address information is available to all Craft projects. If you need a list of countries, states, or provinces, for example, you can fetch them via Craft’s [Addresses](craft4:craft\services\Addresses) service, from Twig templates or PHP:
+The [commerceguys/addressing](https://github.com/commerceguys/addressing) library powers planet-friendly address handling and formatting, and its exhaustive repository of global address information is available to all Craft projects. If you need a list of countries, states, or provinces, for example, you can fetch them via Craft’s [Addresses](craft5:craft\services\Addresses) service, from Twig templates or PHP:
 
 ::: code
 ```twig
@@ -160,7 +160,7 @@ Expanding upon our previous example, we could output a nicely organized list of 
 
 Either repository’s `getList()` method is a shortcut that returns only key-value pairs, suitable for our examples—it also accepts an array of “parent” groups (beginning with country code) to narrow the subdivisions.
 
-You may supplement the subdivision data provided by the [upstream repository](https://github.com/commerceguys/addressing) by listening to the <craft4:craft\services\Addresses::EVENT_DEFINE_ADDRESS_SUBDIVISIONS> event in a plugin or module. Similarly, deeper customization of the required [fields](#fields-and-formatting) (and those fields’ [labels](#attribute-labels)) may require modifying the defaults via the [EVENT_DEFINE_USED_SUBDIVISION_FIELDS](craft4:craft\services\Addresses::EVENT_DEFINE_USED_SUBDIVISION_FIELDS) or [EVENT_DEFINE_FIELD_LABEL](craft4:craft\services\Addresses::EVENT_DEFINE_FIELD_LABEL) events.
+You may supplement the subdivision data provided by the [upstream repository](https://github.com/commerceguys/addressing) by listening to the <craft5:craft\services\Addresses::EVENT_DEFINE_ADDRESS_SUBDIVISIONS> event in a plugin or module. Similarly, deeper customization of the required [fields](#fields-and-formatting) (and those fields’ [labels](#attribute-labels)) may require modifying the defaults via the [EVENT_DEFINE_USED_SUBDIVISION_FIELDS](craft5:craft\services\Addresses::EVENT_DEFINE_USED_SUBDIVISION_FIELDS) or [EVENT_DEFINE_FIELD_LABEL](craft5:craft\services\Addresses::EVENT_DEFINE_FIELD_LABEL) events.
 
 ::: tip
 Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and [formatting](#fields-and-formatting)!
@@ -473,7 +473,7 @@ Let’s display the current user’s address book on their account “dashboard.
 
 #### Guide
 
-1. We’re using a <craft4:craft\elements\User> convenience method to load the current user’s saved addresses, but this is equivalent to our earlier [query example](#querying-addresses).
+1. We’re using a <craft5:craft\elements\User> convenience method to load the current user’s saved addresses, but this is equivalent to our earlier [query example](#querying-addresses).
 2. These URLs will need to match the pattern defined in `routes.php`. In our case, that means we need to interpolate the Address’s UID into the path.
 3. [Deleting an Address](../../development/forms.md#post-users-delete-address) requires a <badge vertical="baseline" type="verb">POST</badge> request, which—for the sake of simplicity—we’re handling with a regular HTML form.
 4. The [New Address](#new-addresses) route is static—there’s nothing to interpolate or parameterize.
@@ -555,7 +555,7 @@ The code for new addresses will end up being reused for [existing addresses](#ex
 
 #### Guide
 
-1. We pass an <craft4:craft\elements\Address> to the form partial—either from an `address` variable that is available to the template after an attempted submission (say, due to validation errors), or a new one instantiated with the [`create()` function](../twig/functions.md#create).
+1. We pass an <craft5:craft\elements\Address> to the form partial—either from an `address` variable that is available to the template after an attempted submission (say, due to validation errors), or a new one instantiated with the [`create()` function](../twig/functions.md#create).
 2. Whether we’re creating a new address or editing an existing one (this partial handles both), the request should be sent to the `users/save-address` action.
 3. Addresses that have been previously saved will have an `id`, so we need to send that back to apply updates to the correct Address.
 4. The [`redirectInput()` function](../twig/functions.md#redirectinput) accepts an [object template](../../system/object-templates.md), which can include properties of the thing we’re working with. The template won’t be evaluated when it appears in the form—instead, Craft will render it using the address element _after_ it’s been successfully saved. In this case, we’ll be taken to the [edit screen](#existing-addresses) for the newly-saved address.

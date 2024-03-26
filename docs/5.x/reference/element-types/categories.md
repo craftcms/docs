@@ -12,7 +12,7 @@ related:
 
 Craft supports user-managed, hierarchical taxonomies for content via **categories**.
 
-Categories are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft4:craft\elements\Category>.
+Categories are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Category>.
 
 <Block label="Migrating to Structures">
 
@@ -99,7 +99,7 @@ $myCategoryQuery = \craft\elements\Category::find();
 ```
 :::
 
-Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Category](craft4:craft\elements\Category) objects will be returned.
+Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Category](craft5:craft\elements\Category) objects will be returned.
 
 <See path="../../development/element-queries" description="Learn more about element queries." />
 

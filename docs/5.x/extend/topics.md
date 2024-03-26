@@ -134,7 +134,7 @@ $proxyConfig = Craft::$app->getConfig()->getGeneral()->httpProxy;
 
 ### Writing Files
 
-Any time your application needs to generate a temporary artifact, you can write it to a file with <craft4:craft\helpers\FileHelper>:
+Any time your application needs to generate a temporary artifact, you can write it to a file with <craft5:craft\helpers\FileHelper>:
 
 ```php
 use Craft;
@@ -152,7 +152,7 @@ FileHelper::writeToFile($path, $content);
 // Pass $path back to another part of the application...
 ```
 
-Notice that we’ve used <craft4:craft\services\Path::getTempPath()> to keep our files alongside other runtime data. This helps Craft clean up temporary data via the [Caches utility](../control-panel.md#utilities), or the [`clear-caches/temp-files` console command](../console-commands.md#clear-caches-temp-files).
+Notice that we’ve used <craft5:craft\services\Path::getTempPath()> to keep our files alongside other runtime data. This helps Craft clean up temporary data via the [Caches utility](../control-panel.md#utilities), or the [`clear-caches/temp-files` console command](../console-commands.md#clear-caches-temp-files).
 
 ::: tip
 [Logging](../logging.md) should always be done via Craft’s convenience methods, not written directly to disk.

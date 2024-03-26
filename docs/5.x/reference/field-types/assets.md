@@ -100,8 +100,8 @@ Possible values include:
 | `[100, 200]` | that are related to an asset with an ID of 100 or 200.
 | `[':empty:', 100, 200]` | with no related assets, or are related to an asset with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the assets with IDs of 100 and 200.
-| an [Asset](craft4:craft\elements\Asset) object | that are related to the asset.
-| an [AssetQuery](craft4:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.
+| an [Asset](craft5:craft\elements\Asset) object | that are related to the asset.
+| an [AssetQuery](craft5:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.
 
 ::: code
 ```twig
@@ -133,7 +133,7 @@ $query = $entry->myFieldHandle;
 
 That will give you an [asset query](assets.md#querying-assets), prepped to output all the related assets for the given field.
 
-To loop through all the related assets, call [all()](craft4:craft\db\Query::all()) and then loop over the results:
+To loop through all the related assets, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
 
 ::: code
 ```twig
@@ -161,7 +161,7 @@ if (count($relatedAssets)) {
 When using `asset.url` or `asset.getUrl()`, the asset’s source volume must have **Assets in this volume have public URLs** enabled and a **Base URL** setting. Otherwise, the result will always be empty.
 :::
 
-If you only want the first related asset, call [one()](craft4:craft\db\Query::one()) instead and make sure it returned something:
+If you only want the first related asset, call [one()](craft5:craft\db\Query::one()) instead and make sure it returned something:
 
 ::: code
 ```twig
@@ -178,7 +178,7 @@ if ($rel) {
 ```
 :::
 
-If you need to check for related assets without fetching them, you can call [exists()](craft4:craft\db\Query::exists()):
+If you need to check for related assets without fetching them, you can call [exists()](craft5:craft\db\Query::exists()):
 
 ::: code
 ```twig
@@ -305,5 +305,5 @@ You can do this by passing each of the related asset IDs in the field data array
 ## See Also
 
 - [Asset Queries](assets.md#querying-assets)
-- <craft4:craft\elements\Asset>
+- <craft5:craft\elements\Asset>
 - [Relations](relations.md)

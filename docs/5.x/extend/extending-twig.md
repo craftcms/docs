@@ -4,14 +4,14 @@ Craft provides two ways for plugins to extend its Twig templating environment.
 
 ## Extend the Global `craft` Variable
 
-The [global `craft` template variable](../dev/global-variables.md#craft-2) is an instance of <craft4:craft\web\twig\variables\CraftVariable>. Methods and properties of that class are available in Twig via dot notation—for example, when a template uses `craft.entries` (or `craft.entries()`), Twig calls [CraftVariable::entries()](craft4:craft\web\twig\variables\CraftVariable::entries()) behind the scenes.
+The [global `craft` template variable](../dev/global-variables.md#craft-2) is an instance of <craft5:craft\web\twig\variables\CraftVariable>. Methods and properties of that class are available in Twig via dot notation—for example, when a template uses `craft.entries` (or `craft.entries()`), Twig calls [CraftVariable::entries()](craft5:craft\web\twig\variables\CraftVariable::entries()) behind the scenes.
 
 That `CraftVariable` instance can be extended by plugins with [behaviors](behaviors.md) and [services](./services.md). Choosing the right approach depends on what you’re trying to add to it.
 
 - Use a **behavior** to add custom properties or methods directly onto the `craft` variable (e.g. `craft.foo()`).
 - Use a **service** to add a sub-object to the `craft` variable, which can be accessed with a custom property name, called the service’s “ID”. (e.g. `craft.foo.*`).
 
-You can attach your behavior or service to the `CraftVariable` instance by registering an [EVENT_INIT](craft4:craft\web\twig\variables\CraftVariable::EVENT_INIT) event handler from your plugin’s `init()` method:
+You can attach your behavior or service to the `CraftVariable` instance by registering an [EVENT_INIT](craft5:craft\web\twig\variables\CraftVariable::EVENT_INIT) event handler from your plugin’s `init()` method:
 
 ```php{18-20,23}
 use craft\web\twig\variables\CraftVariable;
@@ -129,7 +129,7 @@ Avoid defining global variables that are ambiguous (like `plugin` or `elements`)
 
 ### Registering the Extension
 
-Register your Twig extension in your plugin or module’s `init()` method by calling <craft4:craft\web\View::registerTwigExtension()>:
+Register your Twig extension in your plugin or module’s `init()` method by calling <craft5:craft\web\View::registerTwigExtension()>:
 
 ```php {7-8}
 public function init()

@@ -46,7 +46,7 @@ If you have a global set with the handle `companyInfo` and it has a field with t
 {{ companyInfo.yearEstablished }}
 ```
 
-For additional global set properties you can use besides your custom fields see <craft4:craft\elements\GlobalSet> for a full reference.
+For additional global set properties you can use besides your custom fields see <craft5:craft\elements\GlobalSet> for a full reference.
 
 ### Manually Loading Global Sets
 
@@ -61,7 +61,7 @@ $companyInfo = \Craft::$app->getGlobals()->getSetByHandle('companyInfo');
 ```
 :::
 
-More details are available in the [Globals service class documentation](craft4:craft\services\Globals).
+More details are available in the [Globals service class documentation](craft5:craft\services\Globals).
 
 ## Global Sets with Multiple Sites
 
@@ -88,7 +88,7 @@ $myGlobalSetQuery = \craft\elements\GlobalSet::find();
 ```
 :::
 
-Once you’ve created a global set query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [GlobalSet](craft4:craft\elements\GlobalSet) objects will be returned.
+Once you’ve created a global set query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [GlobalSet](craft5:craft\elements\GlobalSet) objects will be returned.
 
 ::: tip
 See [Element Queries](element-queries.md) to learn about how element queries work.

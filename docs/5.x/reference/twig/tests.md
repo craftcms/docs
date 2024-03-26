@@ -120,7 +120,7 @@ Returns whether an object is an integer via PHP’s [`is_int()`](https://www.php
 
 ## `missing`
 
-Returns whether a given object is an instance of <craft4:craft\base\MissingComponentInterface>, an interface used to represent components whose types are missing.
+Returns whether a given object is an instance of <craft5:craft\base\MissingComponentInterface>, an interface used to represent components whose types are missing.
 
 ```twig
 {% if field is missing %}

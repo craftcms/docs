@@ -11,7 +11,7 @@ Craft templates can give modules and plugins an opportunity to hook into them us
 {% hook 'my-custom-hook-name' %}
 ```
 
-Plugins and modules can register methods to be called by template hooks using <craft4:craft\web\View::hook()>.
+Plugins and modules can register methods to be called by template hooks using <craft5:craft\web\View::hook()>.
 
 ```php
 Craft::$app->getView()->hook('my-custom-hook-name', function(array &$context) {

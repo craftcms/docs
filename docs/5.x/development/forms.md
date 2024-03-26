@@ -350,7 +350,7 @@ Let’s look at some typical success and failure states and how they differ.
 
 ### Success
 
-Successful responses are mostly handled via the <craft4:craft\web\Controller::asModelSuccess()> or [asSuccess()](craft4:craft\web\Controller::asSuccess()) methods.
+Successful responses are mostly handled via the <craft5:craft\web\Controller::asModelSuccess()> or [asSuccess()](craft5:craft\web\Controller::asSuccess()) methods.
 
 #### After a GET Request
 
@@ -416,7 +416,7 @@ In addition to the `redirect` property, the response object will include a `mess
 
 ### Failure
 
-Failed responses are mostly handled via the <craft4:craft\web\Controller::asModelFailure()> or [asFailure()](craft4:craft\web\Controller::asFailure()) methods.
+Failed responses are mostly handled via the <craft5:craft\web\Controller::asModelFailure()> or [asFailure()](craft5:craft\web\Controller::asFailure()) methods.
 
 <Todo note="Simplify action documentation, below" />
 

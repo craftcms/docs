@@ -194,7 +194,7 @@ When accessing related or nested content within an element partial, use the `.ea
 All elements share a few characteristics that make them familiar to work with in your templates. Each [element type](#element-types) will supplement these lists with their own properties and methods.
 
 ::: warning
-This is not an exhaustive list! If you’re curious, consult the <craft4:craft\base\Element> and <craft4:craft\base\ElementTrait> class reference for a complete picture of what data is available inside elements and how it can be used.
+This is not an exhaustive list! If you’re curious, consult the <craft5:craft\base\Element> and <craft5:craft\base\ElementTrait> class reference for a complete picture of what data is available inside elements and how it can be used.
 :::
 
 ### Properties
@@ -212,7 +212,7 @@ Property | Type | Notes
 `level` | `int|null` | Depth of the element in a structure. _Structures only._
 `parentId` | `int|null` | ID of the parent element. _Structures only._
 `searchScore` | `int` | Score relative to other results when returned from an [element query](element-queries.md) using the [`search` param](searching.md).
-`siteId` | `int` | ID of the <craft4:craft\models\Site> the element was loaded in.
+`siteId` | `int` | ID of the <craft5:craft\models\Site> the element was loaded in.
 `slug` | `string|null` | _Only for elements with slugs._
 `title` | `string|null` | _Only for elements with titles._
 `trashed` | `bool` | Whether or not the element has been soft-deleted.
@@ -243,6 +243,6 @@ Method | Notes
 `getPrevSibling()` | Load the previous sibling of this element, within a structure. _Structures only._
 `getRef()` | Builds the part of a [reference tag](reference-tags.md) unique to the element.
 `getSiblings()` | Load siblings within the element’s structure. _Structures only._
-`getSite()` | Returns the <craft4:craft\models\Site> the element was loaded for.
+`getSite()` | Returns the <craft5:craft\models\Site> the element was loaded for.
 `getStatus()` | Returns a plain-text representation of the element’s status, which may be synthesized from a number of other attributes.
 `getUrl()` | Builds a complete front-end URL based on the element’s URI.

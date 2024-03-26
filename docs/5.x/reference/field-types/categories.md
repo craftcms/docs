@@ -76,8 +76,8 @@ Possible values include:
 | `[100, 200]` | that are related to a category with an ID of 100 or 200.
 | `[':empty:', 100, 200]` | with no related categories, or are related to a category with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the categories with IDs of 100 and 200.
-| a [Category](craft4:craft\elements\Category) object | that are related to the category.
-| a [CategoryQuery](craft4:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.
+| a [Category](craft5:craft\elements\Category) object | that are related to the category.
+| a [CategoryQuery](craft5:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.
 
 ::: code
 ```twig
@@ -109,7 +109,7 @@ $query = $entry->myFieldHandle;
 
 That will give you a [category query](categories.md#querying-categories), prepped to output all the related categories for the given field.
 
-To loop through all the related categories as a flat list, call [all()](craft4:craft\db\Query::all()) and then loop over the results:
+To loop through all the related categories as a flat list, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
 
 ::: code
 ```twig
@@ -152,7 +152,7 @@ Or you can show them as a hierarchical list with the [nav](dev/tags.md#nav) tag:
 {% endif %}
 ```
 
-If you only want the first related category, call [one()](craft4:craft\db\Query::one()) instead and make sure it returned something:
+If you only want the first related category, call [one()](craft5:craft\db\Query::one()) instead and make sure it returned something:
 
 ::: code
 ```twig
@@ -169,7 +169,7 @@ if ($rel) {
 ```
 :::
 
-If you need to check for related categories without fetching them, you can call [exists()](craft4:craft\db\Query::exists()):
+If you need to check for related categories without fetching them, you can call [exists()](craft5:craft\db\Query::exists()):
 
 ::: code
 ```twig
@@ -255,5 +255,5 @@ Note that it’s not possible to customize the order that categories will be rel
 ## See Also
 
 - [Category Queries](categories.md#querying-categories)
-- <craft4:craft\elements\Category>
+- <craft5:craft\elements\Category>
 - [Relations](relations.md)

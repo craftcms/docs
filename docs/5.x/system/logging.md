@@ -146,7 +146,7 @@ Craft does _not_ attempt to redact the message content itself. It is your respon
 
 ### Log Rotation
 
-Logs are grouped by date without any specific size limit. The number of files is limited to 5 by default, per <craft4:craft\log\MonologTarget::$maxFiles>.
+Logs are grouped by date without any specific size limit. The number of files is limited to 5 by default, per <craft5:craft\log\MonologTarget::$maxFiles>.
 
 For high-traffic environments, configuring [`logrotate`](https://linux.die.net/man/8/logrotate) or streaming your logs to [`stdout` and `stderr`](#stdout-and-stderr) is recommended.
 
@@ -248,7 +248,7 @@ return [
 Here, we’re defining two new targets:
 
 1. A simple <yii2:yii\log\FileTarget> that only includes messages with the `yii\web\HttpException:404` category. These are emitted by Yii, but excluded by Craft’s default targets.
-2. A custom <craft4:craft\log\MonologTarget> to siphon messages emitted by a custom module into a separate log file, and discards context info. Read about [logging your own events](#logging-your-own-events) to learn how to send a message here.
+2. A custom <craft5:craft\log\MonologTarget> to siphon messages emitted by a custom module into a separate log file, and discards context info. Read about [logging your own events](#logging-your-own-events) to learn how to send a message here.
 
 Our new targets don’t affect Craft’s normal logging behavior—the default targets are still configured. As a result, a single message may be dispatched to multiple targets; if you want to filter messages out of the default targets, you can use the `categories` and `except` properties within the [`monologTargetConfig`](#monolog), above. See the Yii documentation on [messaging filtering](guide:runtime-logging#message-filtering) for more information on how this works.
 
