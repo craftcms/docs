@@ -71,7 +71,7 @@ Searching for… | will find elements…
 `-body:*` | where the `body` field is empty.
 
 ::: tip
-Use the [`defaultSearchTermOptions`](config4:defaultSearchTermOptions) config setting to adjust default search behavior.
+Use the [`defaultSearchTermOptions`](config5:defaultSearchTermOptions) config setting to adjust default search behavior.
 :::
 
 ## Searching for Specific Element Attributes

@@ -326,11 +326,11 @@ Draft a recovery plan and test it regularly. Backups that exist only on the mach
 
 ### Admin Changes
 
-<config4:allowAdminChanges> should be disabled in all but development environments. If administrators are allowed to make project config changes directly on a live website without oversight, their changes may be reverted the next time you deploy.
+<config5:allowAdminChanges> should be disabled in all but development environments. If administrators are allowed to make project config changes directly on a live website without oversight, their changes may be reverted the next time you deploy.
 
 ### Dev Mode
 
-<config4:devMode> is an invaluable debugging tool for local development—but it’s a performance and security liability on a public-facing website. Keep it off by default, and enable it only via you local `.env` file, by adding `CRAFT_DEV_MODE=true`.
+<config5:devMode> is an invaluable debugging tool for local development—but it’s a performance and security liability on a public-facing website. Keep it off by default, and enable it only via you local `.env` file, by adding `CRAFT_DEV_MODE=true`.
 
 ::: tip
 Even when `devMode` is off, you can still get profiling data from the Yii debug toolbar by enabling it in your user’s preferences.

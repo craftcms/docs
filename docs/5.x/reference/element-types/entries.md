@@ -93,7 +93,7 @@ Singles are used for one-off pages or content objects that have unique requireme
 Unlike the other section types, singles only ever have _one_ entry associated with them, meaning their URIs can be static (like `contact-us`) rather than templatized (like `news/{slug}`).
 
 ::: tip
-Singles have all the functionality of [globals](./globals.md), and can even be pre-loaded into global Twig variables with the <config4:preloadSingles> config setting. As such, singles don’t have an editable **Author**, **Post Date**, or **Expiration Date**.
+Singles have all the functionality of [globals](./globals.md), and can even be pre-loaded into global Twig variables with the <config5:preloadSingles> config setting. As such, singles don’t have an editable **Author**, **Post Date**, or **Expiration Date**.
 
 A single’s **Status** controls can be hidden with the **Show the Status field** setting in its selected **Entry Type**.
 :::
@@ -217,13 +217,13 @@ When an author is editing an entry from a section with custom preview targets, t
 
 ![An entry’s View menu with 3 custom preview targets.](../../images/share-with-targets.png =394x)
 
-If you share a link from this menu that includes a preview token, it will expire by default after one day. You can customize this with the [defaultTokenDuration](config4:defaultTokenDuration) config setting.
+If you share a link from this menu that includes a preview token, it will expire by default after one day. You can customize this with the [defaultTokenDuration](config5:defaultTokenDuration) config setting.
 
 The targets will also be available within **Preview**.
 
 #### Previewing Decoupled Front Ends
 
-If your site’s front end lives outside of Craft (e.g. as a Vue or React app), you can still support previewing drafts and revisions with **Preview** or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever the <config4:tokenParam> setting is). If it’s in the URL, then you will need to pass that same token in the request that loads the page content. This token will cause the API request to respond with the correct content based on what the token was created to preview.
+If your site’s front end lives outside of Craft (e.g. as a Vue or React app), you can still support previewing drafts and revisions with **Preview** or **Share** buttons. To do that, your front end must check for the existence of a `token` query string parameter (or whatever the <config5:tokenParam> setting is). If it’s in the URL, then you will need to pass that same token in the request that loads the page content. This token will cause the API request to respond with the correct content based on what the token was created to preview.
 
 <Block label="Nuxt Example">
 
@@ -264,10 +264,10 @@ This assumes you have defined a [GraphQL API route](../../development/graphql.md
 
 </Block>
 
-You can pass the token via either a query string parameter named after your <config4:tokenParam> config setting, or an `X-Craft-Token` header.
+You can pass the token via either a query string parameter named after your <config5:tokenParam> config setting, or an `X-Craft-Token` header.
 
 ::: tip
-For live preview, you should also consider [enabling iFrame Resizer](config4:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
+For live preview, you should also consider [enabling iFrame Resizer](config5:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
 :::
 
 ## Nested Entries
@@ -303,7 +303,7 @@ As soon as you click **New entry**, Craft creates an empty entry, and redirects 
 Once you add some content to a fresh entry (or explicitly choose **Save draft** from the **Create entry** menu), Craft marks the draft as having been saved, and will expose it in element indexes when using the **All** or **Draft** status options.
 
 ::: tip
-Stray drafts (those that were created but never edited or explicitly saved) are automatically [garbage-collected](../../system/gc.md), respecting the <config4:purgeUnsavedDraftsDuration> setting.
+Stray drafts (those that were created but never edited or explicitly saved) are automatically [garbage-collected](../../system/gc.md), respecting the <config5:purgeUnsavedDraftsDuration> setting.
 :::
 
 The entry editing lifecycle is designed to provide authors clear, actionable information about the state of their content, and to prevent unintended loss. Let’s look more closely at a few supporting features.
@@ -335,7 +335,7 @@ Any time you apply a draft (provisional or otherwise) to the canonical entry, Cr
 ::: tip
 The revision menu only displays the ten most recent revisions. Older revisions are available via the **View all revisions &rarr;** link at the bottom of the menu.
 
-Any time a revision is created, Craft pushes a job into the [queue](../../system/queue.md) to ensure the oldest one(s) are pruned (if there are more revisions than allowed by the <config4:maxRevisions> setting).
+Any time a revision is created, Craft pushes a job into the [queue](../../system/queue.md) to ensure the oldest one(s) are pruned (if there are more revisions than allowed by the <config5:maxRevisions> setting).
 :::
 
 #### Querying for Revisions
@@ -347,7 +347,7 @@ You can [find](#querying-entries) drafts and revisions of a specific entry using
 All [elements](../../system/elements.md) support _soft-deletion_. When you delete an entry, its `dateDeleted` property is set to the current time, and Craft excludes it from results—unless the [`trashed` query param](#trashed) is used. Similarly, when restoring a deleted entry, its `dateDeleted` is set to `null`.
 
 ::: warning
-Entries remain in the “trashed” state until they are manually hard-deleted from the control panel or their `dateDeleted` is longer ago than the <config4:softDeleteDuration> setting when [garbage collection](../../system/gc.md) runs.
+Entries remain in the “trashed” state until they are manually hard-deleted from the control panel or their `dateDeleted` is longer ago than the <config5:softDeleteDuration> setting when [garbage collection](../../system/gc.md) runs.
 
 **The trash should not be used to temporarily remove content from your site.** Restoring trashed entries is only intended as a means to recover inadvertently-deleted content—instead, use the global or site-specific **Enabled** settings. Entries can remain disabled indefinitely.
 :::

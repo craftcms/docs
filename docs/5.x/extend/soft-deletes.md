@@ -41,7 +41,7 @@ $this->createIndex(null, '{{%mytablename}}', ['handle'], false);
 
 ## Hard-Delete Rows When Their Time Is Up
 
-Table rows that have been soft-deleted should only stick around as long as the <config4:softDeleteDuration> config setting wants them to, and then be hard-deleted.
+Table rows that have been soft-deleted should only stick around as long as the <config5:softDeleteDuration> config setting wants them to, and then be hard-deleted.
 
 Rather than check for stale rows on every request, we can make this a part of Craft’s [garbage collection](../gc.md) routines.
 
@@ -65,7 +65,7 @@ public function init()
 }
 ```
 
-[hardDelete()](craft5:craft\services\Gc::hardDelete()) method will delete any rows with a `dateDeleted` value set to a timestamp that’s older than the <config4:softDeleteDuration> config setting.
+[hardDelete()](craft5:craft\services\Gc::hardDelete()) method will delete any rows with a `dateDeleted` value set to a timestamp that’s older than the <config5:softDeleteDuration> config setting.
 
 ::: tip
 If you need to check multiple tables for stale rows, you can pass an array of table names into [hardDelete()](craft5:craft\services\Gc::hardDelete()) instead.

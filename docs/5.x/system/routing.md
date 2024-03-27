@@ -12,7 +12,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
 1. **Is it an action request?**
 
-    [Action requests](../reference/controller-actions.md) either have a URL that begins with `actions/` (or whatever your <config4:actionTrigger> config setting is set to), or an `action` parameter in the POST body or query string. Every request Craft handles is ultimately routed to a controller action, but explicit action requests take precedence and guarantee that essential features are always accessible. If you look at your browser’s _Network_ tab while using the control panel, you’ll see a lot of action requests.
+    [Action requests](../reference/controller-actions.md) either have a URL that begins with `actions/` (or whatever your <config5:actionTrigger> config setting is set to), or an `action` parameter in the POST body or query string. Every request Craft handles is ultimately routed to a controller action, but explicit action requests take precedence and guarantee that essential features are always accessible. If you look at your browser’s _Network_ tab while using the control panel, you’ll see a lot of action requests.
 
 2. **Is it an element request?**
 
@@ -43,7 +43,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 ::: warning
 If an exception is thrown at any point during a request, Craft will display an error page instead of the expected content.
 
-If [Dev Mode](config4:devMode) is enabled, an error report for the exception will be shown. Otherwise, an error will be returned using either your [custom error template](#error-templates) or Craft’s own default.
+If [Dev Mode](config5:devMode) is enabled, an error report for the exception will be shown. Otherwise, an error will be returned using either your [custom error template](#error-templates) or Craft’s own default.
 :::
 
 ## Dynamic Routes
@@ -94,7 +94,7 @@ When you point your browser to `https://my-project.tld/blog/archive/2018`, it wi
 ```
 
 ::: tip
-Routes automatically support [pagination](./dev/tags.md#paginate), so this one route covers other URIs like `/blog/archive/2018/page/2` (assuming your <config4:pageTrigger> was `page/`). If you wanted to break the archive into smaller logical chunks, you could use additional [tokens](#available-tokens) to collect results by month—or even by day!
+Routes automatically support [pagination](./dev/tags.md#paginate), so this one route covers other URIs like `/blog/archive/2018/page/2` (assuming your <config5:pageTrigger> was `page/`). If you wanted to break the archive into smaller logical chunks, you could use additional [tokens](#available-tokens) to collect results by month—or even by day!
 :::
 
 ### Available Tokens
@@ -243,7 +243,7 @@ When an error is encountered, Craft will look for a template in your `templates/
 3. A template named `error.twig`.
 
 ::: tip
-You can tell Craft to look for the error template in a nested template directory, using the <config4:errorTemplatePrefix> config setting.
+You can tell Craft to look for the error template in a nested template directory, using the <config5:errorTemplatePrefix> config setting.
 :::
 
 If Craft finds a matching error template, it will render it with the following variables:
@@ -255,5 +255,5 @@ If Craft finds a matching error template, it will render it with the following v
 - `statusCode` – error’s HTTP status code
 
 ::: tip
-Custom error templates are only used when [Dev Mode](config4:devMode) is **disabled**. When it’s enabled, an exception view will be rendered instead.
+Custom error templates are only used when [Dev Mode](config5:devMode) is **disabled**. When it’s enabled, an exception view will be rendered instead.
 :::

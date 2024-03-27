@@ -47,8 +47,8 @@ define('CRAFT_CP', true);
 
 If this isn’t defined, Craft will treat the request as a control panel request if either of these are true:
 
-- The <config4:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config4:cpTrigger> setting, if set).
-- The <config4:baseCpUrl> setting **is not** set, and the request URI begins with the <config4:cpTrigger> setting.
+- The <config5:baseCpUrl> setting **is** set, and the request URL begins with it (plus the <config5:cpTrigger> setting, if set).
+- The <config5:baseCpUrl> setting **is not** set, and the request URI begins with the <config5:cpTrigger> setting.
 
 ## `CRAFT_DOTENV_PATH`
 

@@ -15,7 +15,7 @@ This feature relies on [Yii’s queue system](https://www.yiiframework.com/exten
 
 An ideal queue job is something slow that the a user shouldn’t have to wait on while using a site’s front end or the control panel. Multi-step processes and actions that connect with third-party APIs can be ideal candidates for queueing.
 
-Critical tasks, however, should not necessarily be entrusted to the queue. A default Craft install will have <config4:runQueueAutomatically> enabled and be reliant on a control panel browser session to trigger the queue. This could result in queue processing delays for infrequently-accessed sites.
+Critical tasks, however, should not necessarily be entrusted to the queue. A default Craft install will have <config5:runQueueAutomatically> enabled and be reliant on a control panel browser session to trigger the queue. This could result in queue processing delays for infrequently-accessed sites.
 
 Similarly, failed queue jobs may pause the queue and require admin intervention. Both are worth considering as you’re contemplating whether or not to utilize a queue job for your plugin or custom module.
 

@@ -518,7 +518,7 @@ Twig has a few features that help you write more resilient templates. When you s
 {% endif %}
 ```
 
-This ensures that the `style` variable exists before we try and use it. Accessing an undefined variable or property when Craft’s Twig environment has [`strict_variables`](https://twig.symfony.com/doc/3.x/api.html#environment-options) enabled (set when [`devMode`](config4:devMode) is _on_) will result in an [error](#handling-errors). When `devMode` is _off_, Twig will suppress those errors and treat undefined values as `null`.
+This ensures that the `style` variable exists before we try and use it. Accessing an undefined variable or property when Craft’s Twig environment has [`strict_variables`](https://twig.symfony.com/doc/3.x/api.html#environment-options) enabled (set when [`devMode`](config5:devMode) is _on_) will result in an [error](#handling-errors). When `devMode` is _off_, Twig will suppress those errors and treat undefined values as `null`.
 
 Given this template…
 
@@ -673,7 +673,7 @@ Errors can come from a number of places throughout the system, but the most comm
 
 You may see other errors throughout development—but they are typically the result of a lower-level issue like improper use of methods, database connectivity, or templates getting out of sync with [project config](../project-config.md).
 
-With [devMode](config4:devMode) on, Craft will output a stack trace for any errors it encounters when rendering a template.
+With [devMode](config5:devMode) on, Craft will output a stack trace for any errors it encounters when rendering a template.
 
 <BrowserShot
   url="https://my-project.ddev.site/example"

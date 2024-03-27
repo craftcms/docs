@@ -47,7 +47,7 @@ Allow Upscaling
 :   Whether or not Craft is allowed to scale an image beyond its original dimensions. Affects the maximum **Width** and **Height** for **Fit**, **Crop**, and **Stretch** output, and the matting strategy for **Letterbox** transforms.
 
 Quality
-:   Sets a quality or compression ratio for the transformed image, depending on the format of the target image. When left blank, the quality will be determined by the <config4:defaultImageQuality> config setting.
+:   Sets a quality or compression ratio for the transformed image, depending on the format of the target image. When left blank, the quality will be determined by the <config5:defaultImageQuality> config setting.
 
 Interlacing
 :   Specify an [interlacing](https://en.wikipedia.org/wiki/Interlacing_(bitmaps)) strategy for the pixels in raster images.
@@ -63,7 +63,7 @@ Image Format
     - `avif` (when supported by ImageMagick)
 
     ::: tip
-    The <config4:transformGifs> setting allows you to completely disable transformation of GIF images. Animated GIFs often consume significant resources to resize, and rarely produce well-optimized output.
+    The <config5:transformGifs> setting allows you to completely disable transformation of GIF images. Animated GIFs often consume significant resources to resize, and rarely produce well-optimized output.
 
     You do not need to update templates for this setting to work—Craft will just ignore the transform and return a URL to the original image.
     :::
@@ -183,7 +183,7 @@ All the same settings available to [named transforms](#named-transforms) are ava
 
 - The `mode` property can be set to either `'crop'`, `'fit'`, `'letterbox'`, or `'stretch'`.
 - `width` and `height` can be set to integers, or omitted.
-- `quality` can be set to a number between 0 and 100, or omitted to use the <config4:defaultImageQuality> setting.
+- `quality` can be set to a number between 0 and 100, or omitted to use the <config5:defaultImageQuality> setting.
 - `format` can be set to `'jpg'`, `'gif'`, `'png'`, `'webp'`, `'avif'`, or omitted.
 - A `position` property (set to one of the [valid values](#crop) listed above) is supported when `mode` is set to `'crop'` or `'letterbox'`. The behavior is different for each [type of transform](#transform-modes).
 

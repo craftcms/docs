@@ -36,7 +36,7 @@ This `action` parameter is different from the `<form action="...">` attribute:
 - The _form attribute_ should only be used when you want to control where a user is sent in [failure scenarios](#failure). When an `action` param is _not_ present in the request, you can use an “action path” like `action="/actions/users/login"`. This attribute has no effect if a redirect is issued in response to the request!
 :::
 
-Craft also supports routing to specific actions using a path (beginning with the <config4:actionTrigger> setting), or by creating an [rule in `routes.php`](../routing.md#advanced-routing-with-url-rules).
+Craft also supports routing to specific actions using a path (beginning with the <config5:actionTrigger> setting), or by creating an [rule in `routes.php`](../routing.md#advanced-routing-with-url-rules).
 
 ### HTTP Verbs
 
@@ -102,7 +102,7 @@ fetch('/actions/users/session-info', {
 :::
 
 ::: tip
-You may notice that the `actionUrl()` function generates URLs with `index.php` visible, despite your <config4:omitScriptNameInUrls> setting. This is intended, as it guarantees compatibility with all environments, regardless of configuration.
+You may notice that the `actionUrl()` function generates URLs with `index.php` visible, despite your <config5:omitScriptNameInUrls> setting. This is intended, as it guarantees compatibility with all environments, regardless of configuration.
 
 If you need a cleaner URL, consider setting up a custom [route](../routing.md#advanced-routing-with-url-rules).
 :::
@@ -147,7 +147,7 @@ Header | Notes
 ------ | -----
 `Accept` | Set to `application/json` to receive a JSON response (when available).
 `X-Requested-With` | Set to `XMLHttpRequest` if your templates rely on `craft.app.request.isAjax`.
-`X-CSRF-Token` | Send a valid CSRF token (for POST requests) if none is provided in the request body under the key determined by <config4:csrfTokenName>.
+`X-CSRF-Token` | Send a valid CSRF token (for POST requests) if none is provided in the request body under the key determined by <config5:csrfTokenName>.
 `Content-Type` | Set to `application/json` if the request’s body is a serialized [JSON payload](#sending-json) (as opposed to `FormData`).
 
 A CSRF token is still required for Ajax requests using the `POST` method. You can ensure a session is started (for guests) by preflighting a request to the [`users/session-info` action](#get-userssession-info):
@@ -186,7 +186,7 @@ getSessionInfo()
   });
 ```
 
-This example assumes you have no preexisting HTML from the server, as though it were part of a [headless](config4:headlessMode) application. If you are working on a hybrid front-end (and sprinkling interactivity into primarily server-rendered pages), you could eliminate the first request by stashing the user ID and CSRF token in the document’s `<head>` (or on another relevant element) and reading it with JavaScript:
+This example assumes you have no preexisting HTML from the server, as though it were part of a [headless](config5:headlessMode) application. If you are working on a hybrid front-end (and sprinkling interactivity into primarily server-rendered pages), you could eliminate the first request by stashing the user ID and CSRF token in the document’s `<head>` (or on another relevant element) and reading it with JavaScript:
 
 ```twig{5,8,14}
 <button
@@ -360,7 +360,7 @@ Craft’s response to a GET request varies based on whether it included an `Acce
 
 Successful POST requests will often culminate in a [flash](#flashes) being set (under the `notice` key) and a 300-level redirection.
 
-Some routes make this redirection configurable (<config4:passwordSuccessPath> or <config4:activateAccountSuccessPath>, for instance)—but sending a hashed `redirect` param with your request will always take precedence.
+Some routes make this redirection configurable (<config5:passwordSuccessPath> or <config5:activateAccountSuccessPath>, for instance)—but sending a hashed `redirect` param with your request will always take precedence.
 
 ::: tip
 The [`redirectInput()`](./functions.md#redirectinput) function takes the guesswork out of rendering this input.
@@ -424,7 +424,7 @@ Failed responses are mostly handled via the <craft5:craft\web\Controller::asMode
 
 A GET request will typically only fail if an exception is thrown in the process of generating a response. The criteria for that failure depends on the action, but can also be circumstantial—like a lost database connection.
 
-If the request included an `Accept: application/json` header, Craft will send a `message` key in the JSON response, or a complete stack trace when <config4:devMode> is on. Otherwise, Craft displays a standard [error view](../routing.md#error-templates).
+If the request included an `Accept: application/json` header, Craft will send a `message` key in the JSON response, or a complete stack trace when <config5:devMode> is on. Otherwise, Craft displays a standard [error view](../routing.md#error-templates).
 
 #### During a POST Request
 

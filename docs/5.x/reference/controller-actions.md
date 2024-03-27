@@ -122,7 +122,7 @@ Param | Description
 ----- | -----------
 `loginName` | The username or email of the user to login.
 `password` | The user’s password.
-`rememberMe` | Whether to keep the user logged-in for an extended period of time per the <config4:rememberedUserSessionDuration> config setting (`1`/`0`).
+`rememberMe` | Whether to keep the user logged-in for an extended period of time per the <config5:rememberedUserSessionDuration> config setting (`1`/`0`).
 
 #### Response
 
@@ -167,12 +167,12 @@ Param | Description
 `lastName` | The user’s last name. `fullName` is preferred.
 `newPassword` | The user’s new password, if updating the logged-in user’s account. (If registering a new user, send `password`.)
 `passwordResetRequired` | Whether the user must reset their password before logging in again (`1`/`0`). Only assignable if the logged-in user is an admin.
-`password` | The user’s password, when registering a new user. (Has no effect if <config4:deferPublicRegistrationPassword> is `true`. To change the current user’s password, send `newPassword`.)
+`password` | The user’s password, when registering a new user. (Has no effect if <config5:deferPublicRegistrationPassword> is `true`. To change the current user’s password, send `newPassword`.)
 `photo` | An uploaded user photo. Use `<input type="file">`.
 `sendVerificationEmail` | Whether a verification email should be sent before accepting the new `email` (`1`/`0`). (Only used if email verification is enabled, and the logged-in user is allowed to opt out of sending it.)
 `userId` | The ID of the user to save, if updating an existing user.
 `userVariable` | The hashed name of the variable that should reference the user, if a validation error occurs. (Defaults to `user`.)
-`username` | The user’s username. (Only checked if the <config4:useEmailAsUsername> config setting is `false`.)
+`username` | The user’s username. (Only checked if the <config5:useEmailAsUsername> config setting is `false`.)
 
 #### Permissions
 
@@ -190,7 +190,7 @@ The output depends on whether the user save action was successful and the `Accep
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark label="Success" /> | [Standard behavior][success-after-post]; default redirection uses the <config4:activateAccountSuccessPath> config setting, if email verification is not required. | [Standard behavior][success-after-post]; additional `id` and `csrfTokenValue` keys.
+<check-mark label="Success" /> | [Standard behavior][success-after-post]; default redirection uses the <config5:activateAccountSuccessPath> config setting, if email verification is not required. | [Standard behavior][success-after-post]; additional `id` and `csrfTokenValue` keys.
 <x-mark label="Success" /> | [Standard behavior][failure-during-post]; user will be available in the template under a variable determined by the `userVariable` param, or `user` by default. | [Standard behavior][failure-during-post].
 
 </span>
@@ -266,7 +266,7 @@ The `errors` variable may include multiple discrete failure messages, but the st
 A <badge vertical="baseline" type="verb">GET</badge> request displays a form allowing a user to set a new password on their account, and <badge vertical="baseline" type="verb">POST</badge> sets a new password on a user account. If the user is [pending](../../system/user-management.md), their account will be activated.
 
 ::: tip
-This action is responsible for rendering the route defined by the <config4:setPasswordPath> setting.
+This action is responsible for rendering the route defined by the <config5:setPasswordPath> setting.
 :::
 
 #### Supported Params
@@ -293,7 +293,7 @@ For <badge vertical="baseline" type="verb">GET</badge> requests:
 
 State | `text/html`
 ----- | -----------
-<check-mark label="Success" /> | [Standard behavior][success-after-post]; template determined by <config4:setPasswordPath> is rendered with `id` and `code` variables available.
+<check-mark label="Success" /> | [Standard behavior][success-after-post]; template determined by <config5:setPasswordPath> is rendered with `id` and `code` variables available.
 <x-mark label="Failure" /> | [Standard behavior][failure-during-post]; exception message will point to the issue—commonly, a missing or invalid token.
 
 </span>
@@ -304,7 +304,7 @@ For <badge vertical="baseline" type="verb">POST</badge> requests:
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark label="Success" /> | [Standard behavior][success-after-post]; redirection depends on the <config4:autoLoginAfterAccountActivation> and <config4:setPasswordSuccessPath> config settings, and whether the user has access to the control panel. | [Standard behavior][success-after-post]; additional `csrfTokenName` key will be available in the response object.
+<check-mark label="Success" /> | [Standard behavior][success-after-post]; redirection depends on the <config5:autoLoginAfterAccountActivation> and <config5:setPasswordSuccessPath> config settings, and whether the user has access to the control panel. | [Standard behavior][success-after-post]; additional `csrfTokenName` key will be available in the response object.
 <x-mark label="Failure" /> | [Standard behavior][failure-during-post]; `errors` , `code`, `id`, and `newUser` variables will be passed to the resulting template. | [Standard behavior][failure-during-post].
 
 </span>

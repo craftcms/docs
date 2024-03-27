@@ -55,7 +55,7 @@ class MyUtility extends Utility
 }
 ```
 
-This utility would be accessible to any user with the correct [permission](#permissions) at `/admin/utilities/my-utility` (or whatever the site’s <config4:cpTrigger> is).
+This utility would be accessible to any user with the correct [permission](#permissions) at `/admin/utilities/my-utility` (or whatever the site’s <config5:cpTrigger> is).
 
 ::: tip
 Refer to Craft’s own utility classes (located in `vendor/craftcms/cms/src/utilities/`, or the `craft\utilities` namespace) for more complete examples.

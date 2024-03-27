@@ -54,7 +54,7 @@ Advanced configuration of the queue (including alternate [drivers](repo:yiisoft/
 At the end of every site request, Craft checks whether the queue contains waiting jobs. If it does, a JavaScript snippet is injected into the page, triggering a second request from the client that kicks off a non-blocking background process. This is skipped for [Ajax requests](../development/forms.md#ajax), and responses that produced something other than HTML.
 
 ::: tip
-This behavior is enabled by default, but can be turned off by setting <config4:runQueueAutomatically> to `false`. If you elect to disable the automatic queue runner, you must configure an alternative.
+This behavior is enabled by default, but can be turned off by setting <config5:runQueueAutomatically> to `false`. If you elect to disable the automatic queue runner, you must configure an alternative.
 :::
 
 For control panel requests, the JavaScript bundle included on every page performs a similar request—this is also how Craft is able to display the queue’s status in the sidebar!
@@ -199,7 +199,7 @@ This is possible due to the `@` symbol at the end of our service unit file’s n
 These setup instructions ensure your service is started whenever the host machine is rebooted, but it’s important to check your work! If your host allows, consider manually rebooting your machine and verifying that the queue is active.
 
 ::: warning
-When configuring and testing a daemonized queue runner, disable <config4:runQueueAutomatically>. Leaving this on may give the false impression that the queue is working as intended, despite it actually being run over HTTP.
+When configuring and testing a daemonized queue runner, disable <config5:runQueueAutomatically>. Leaving this on may give the false impression that the queue is working as intended, despite it actually being run over HTTP.
 :::
 
 #### Workers
@@ -210,7 +210,7 @@ This paradigm can be bizarre at first, but it’s similar in many ways to load-b
 
 #### Performance Considerations
 
-Running the queue on the same machine that serves HTTP requests can (in extreme cases) cause bottlenecks. The CLI does not abide by the same [resource](config4:phpMaxMemoryLimit) or [time](https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time) limits as web requests, meaning it can degrade or interrupt service for much longer.
+Running the queue on the same machine that serves HTTP requests can (in extreme cases) cause bottlenecks. The CLI does not abide by the same [resource](config5:phpMaxMemoryLimit) or [time](https://www.php.net/manual/en/info.configuration.php#ini.max-execution-time) limits as web requests, meaning it can degrade or interrupt service for much longer.
 
 To ensure web requests are prioritized, the unix program `nice` can help the kernel schedule workloads on your server’s CPU(s). Replace the queue command in your [daemon](#daemon) with this:
 
@@ -226,7 +226,7 @@ Do not run the queue as root!
 
 ## Local Development
 
-If you’ve turned off <config4:runQueueAutomatically> for your live infrastructure, the queue will also be disabled in your local environment. You can [override](config/README.md#environment-overrides) the general config setting by declaring `CRAFT_RUN_QUEUE_AUTOMATICALLY=true` in your `.env`, or use the [CLI](#cli) as you would in a [daemon](#daemon):
+If you’ve turned off <config5:runQueueAutomatically> for your live infrastructure, the queue will also be disabled in your local environment. You can [override](config/README.md#environment-overrides) the general config setting by declaring `CRAFT_RUN_QUEUE_AUTOMATICALLY=true` in your `.env`, or use the [CLI](#cli) as you would in a [daemon](#daemon):
 
 ::: code
 ```bash DDEV

@@ -70,7 +70,7 @@ Extensions naturally invite technical debt—for maintainers _and_ users. This i
 
 One of the most important things to consider as you set out is how you will communicate to others (your teammates, a client’s future development partners, or even your future self) where a project’s special features come from. It could be documentation or training—or nothing at all, if the scope of the extension is limited!
 
-Craft automatically handles this for [plugins](#plugins)—from the control panel, you can see what’s currently installed and [temporarily disable](config4:disabledPlugins) one (or all) to track down problems. Registered [modules](#modules) are also disclosed in the control panel… but without understanding how they’re organized, auto-loaded, bootstrapped, or otherwise factored into the logic of your application, their purpose and specific effects may be unclear.
+Craft automatically handles this for [plugins](#plugins)—from the control panel, you can see what’s currently installed and [temporarily disable](config5:disabledPlugins) one (or all) to track down problems. Registered [modules](#modules) are also disclosed in the control panel… but without understanding how they’re organized, auto-loaded, bootstrapped, or otherwise factored into the logic of your application, their purpose and specific effects may be unclear.
 
 #### Extension Points
 

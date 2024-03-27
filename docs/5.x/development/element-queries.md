@@ -377,7 +377,7 @@ An array of scalar values is returned, the type of which depends on the column. 
 
 ## Pagination
 
-Craft provides the [`{% paginate %}` tag](../reference/twig/tags.md#paginate) to simplify the process of splitting results into pages with a stable URL scheme based on the <config4:pageTrigger> setting.
+Craft provides the [`{% paginate %}` tag](../reference/twig/tags.md#paginate) to simplify the process of splitting results into pages with a stable URL scheme based on the <config5:pageTrigger> setting.
 
 The `paginate` tag accepts an element query, sets its `offset` param based on the current page, and executes it. The number of results per page is determined by the query’s `limit` param, or defaults to 100.
 
@@ -580,7 +580,7 @@ $entries = Entry::find()
 
 This cache is separate from fragments cached via [{% cache %} template tags](../reference/twig/tags.md#cache), and will only match subsequent queries that have all the same parameters. Caching a query does not guarantee better [performance](#performance-and-optimization), but it can be used strategically—say, to memoize a scalar query result inside a loop (like the total number of entries in a list of categories).
 
-The `cache()` method accepts a `duration` argument, and defaults to your <config4:cacheDuration>.
+The `cache()` method accepts a `duration` argument, and defaults to your <config5:cacheDuration>.
 
 ::: tip
 Craft registers an [ElementQueryTagDependency](craft5:craft\cache\ElementQueryTagDependency) for you by default, so cache dependencies and invalidation are handled automatically.

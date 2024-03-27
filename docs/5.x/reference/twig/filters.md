@@ -627,7 +627,7 @@ public function actionSubmitData()
 ```
 
 ::: warning
-Hashing data uses your app’s [`securityKey` config setting](config4:securityKey), by default. If this setting changes between generating and validating a hash, it will fail!
+Hashing data uses your app’s [`securityKey` config setting](config5:securityKey), by default. If this setting changes between generating and validating a hash, it will fail!
 :::
 
 ## `httpdate`

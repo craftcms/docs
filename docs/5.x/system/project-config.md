@@ -42,7 +42,7 @@ Plugins and Modules can store their own settings in Project Config, too. See [Su
 
 Project Config is always active, but you may need to adjust your workflow to get the most out of it.
 
-Use of Project Config often involves disabling the <config4:allowAdminChanges> option in all but development environments, which makes the **Settings** section of the control panel inaccessible—even for admin users. This guarantees settings are only changed under circumstances where their effects can be tested alongside any relevant templates or code.
+Use of Project Config often involves disabling the <config5:allowAdminChanges> option in all but development environments, which makes the **Settings** section of the control panel inaccessible—even for admin users. This guarantees settings are only changed under circumstances where their effects can be tested alongside any relevant templates or code.
 
 Suppose you are asked to add a new entry type to an existing section. The process is probably pretty familiar: make some updates via the control panel, adjust templates and styles, then push your code. But how does the new entry type definition actually make it to the live site?
 
@@ -103,7 +103,7 @@ If you had previously opted out or are upgrading from earlier than Craft 3.1, it
     - Import the database backup created in step #3;
     - Delete the contents of the `config/project/` folder;
     - Make a request to the control panel to trigger a regeneration of the YAML files in `config/project/`;
-5. Disable the <config4:allowAdminChanges> config setting on the primary environment (and all non-development environments, for that matter) to avoid [losing changes](#production-changes-reverted), going forward.
+5. Disable the <config5:allowAdminChanges> config setting on the primary environment (and all non-development environments, for that matter) to avoid [losing changes](#production-changes-reverted), going forward.
 
 It’s now safe to deploy changes in your `config/project/` folder to other environments!
 
@@ -123,7 +123,7 @@ When Craft tries to apply Project Config changes, it will first verify that the 
 
 Changes made to Project Config on production will likely be reverted the next time your site is deployed. Craft does not attempt to distinguish between explicit deletions and incidental removal of settings—if the incoming config has an “old” value (or omits the value entirely), Craft applies those changes.
 
-To prevent this, set <config4:allowAdminChanges> to `false` in `config/general.php`, or via an [environment override](./config/README.md#environment-overrides):
+To prevent this, set <config5:allowAdminChanges> to `false` in `config/general.php`, or via an [environment override](./config/README.md#environment-overrides):
 
 ```env
 CRAFT_ALLOW_ADMIN_CHANGES=false

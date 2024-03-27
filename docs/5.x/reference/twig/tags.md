@@ -131,7 +131,7 @@ The accepted duration units are:
 - `year`(`s`)
 - `week`(`s`)
 
-Tip: If this parameter is omitted, your <config4:cacheDuration> config setting will be used to define the default duration.
+Tip: If this parameter is omitted, your <config5:cacheDuration> config setting will be used to define the default duration.
 
 #### `until`
 
@@ -286,7 +286,7 @@ The `{% exit %}` tag supports the following parameters:
 If you choose to set the HTTP status code that should be included with the response, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist, Craft will fall back on its own template corresponding to the status code.
 
 ::: tip
-`{% exit %}` throws an [HttpException](yii2:yii\web\HttpException) with the appropriate status code, so with <config4:devMode> enabled a full error report and stack trace will be shown instead of an error template.
+`{% exit %}` throws an [HttpException](yii2:yii\web\HttpException) with the appropriate status code, so with <config5:devMode> enabled a full error report and stack trace will be shown instead of an error template.
 :::
 
 #### Message <Since ver="4.5.0" feature="Custom exit exception messages" />
@@ -779,7 +779,7 @@ You can optionally set flash messages that will show up for the user on the next
 
 ## `requireAdmin`
 
-This tag will ensure that an admin user is logged in. If the user is not logged in, they’ll be redirected to the Login page specified by your <config4:loginPath> config setting and returned to the original page after logging in as an admin.
+This tag will ensure that an admin user is logged in. If the user is not logged in, they’ll be redirected to the Login page specified by your <config5:loginPath> config setting and returned to the original page after logging in as an admin.
 
 A user that’s already logged in but *not* an admin will get a 403 response.
 
@@ -812,7 +812,7 @@ Example: `{% requireEdition CraftPro %}`.
 
 ## `requireGuest`
 
-This tag will ensure that the user is **not** logged in. If they’re already logged in, they’ll be redirected to the page specified by your <config4:postLoginRedirect> config setting.
+This tag will ensure that the user is **not** logged in. If they’re already logged in, they’ll be redirected to the page specified by your <config5:postLoginRedirect> config setting.
 
 ```twig
 {% requireGuest %}
@@ -830,7 +830,7 @@ This tag will ensure that the user is logged in. If they aren’t, they’ll be 
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the login enforcement will take place.
 
-The login page location is based on your <config4:loginPath> config setting. If you do not set <config4:loginPath>, it defaults to `login`. That will throw a `404` error if you have not handled the `/login` route with a custom template. To use the control panel’s login form, set it to `admin/login` or `[your cpTrigger]/login`.
+The login page location is based on your <config5:loginPath> config setting. If you do not set <config5:loginPath>, it defaults to `login`. That will throw a `404` error if you have not handled the `/login` route with a custom template. To use the control panel’s login form, set it to `admin/login` or `[your cpTrigger]/login`.
 
 ## `requirePermission`
 

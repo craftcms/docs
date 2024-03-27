@@ -181,7 +181,7 @@ The currently-logged-in user, represented by a <craft5:craft\elements\User> obje
 
 ### `devMode`
 
-Whether the <config4:devMode> config setting is currently enabled.
+Whether the <config5:devMode> config setting is currently enabled.
 
 ```twig
 {% if devMode %}
@@ -191,7 +191,7 @@ Whether the <config4:devMode> config setting is currently enabled.
 
 ### `loginUrl`
 
-The URL to your site’s login page, based on the <config4:loginPath> config setting.
+The URL to your site’s login page, based on the <config5:loginPath> config setting.
 
 ```twig
 {% if not currentUser %}
@@ -201,7 +201,7 @@ The URL to your site’s login page, based on the <config4:loginPath> config set
 
 ### `logoutUrl`
 
-The URL Craft uses to log users out, based on the <config4:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
+The URL Craft uses to log users out, based on the <config5:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
 
 ```twig
 {% if currentUser %}
@@ -219,7 +219,7 @@ Today is {{ now|date('M j, Y') }}.
 
 ### `setPasswordUrl`
 
-The URL to [`setPasswordRequestPath`](config4:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
+The URL to [`setPasswordRequestPath`](config5:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
 
 ```twig
 {% if setPasswordUrl %}
@@ -417,7 +417,7 @@ They will be represented as <craft5:craft\elements\GlobalSet> objects.
 
 ### Singles <Since ver="4.4.0" feature="auto-loaded singles" />
 
-Your [single](../entries.md#singles) section entries can also be loaded automatically by setting <config4:preloadSingles> to `true`.
+Your [single](../entries.md#singles) section entries can also be loaded automatically by setting <config5:preloadSingles> to `true`.
 
 ### Other Elements
 

@@ -50,7 +50,7 @@ For compatibility and localization, core address components (aside from the Coun
 
 ### Config Options
 
-You may set a default country for new addresses via the <config4:defaultCountryCode> setting.
+You may set a default country for new addresses via the <config5:defaultCountryCode> setting.
 
 ## Querying Addresses
 

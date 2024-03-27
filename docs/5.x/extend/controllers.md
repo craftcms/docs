@@ -104,7 +104,7 @@ Each URL segment follows [Yii’s conventions](guide:structure-controllers) and 
 - Action `WidgetsController::actionSave()` becomes `save`
 
 ::: tip
-The **Action Trigger** is the only exception to this rule, and can be customized with the <config4:actionTrigger> config setting. This setting has no effect on the [`action` param](#action-params).
+The **Action Trigger** is the only exception to this rule, and can be customized with the <config5:actionTrigger> config setting. This setting has no effect on the [`action` param](#action-params).
 :::
 
 ### Control Panel Routes
@@ -187,8 +187,8 @@ Method | Description
 [requirePostRequest()](craft5:craft\web\Controller::requirePostRequest()) | Requires that the request was sent as a POST request.
 [requireAcceptsJson()](craft5:craft\web\Controller::requireAcceptsJson()) | Requires that the request was sent with an `Accept: application/json` header.
 [requireToken()](craft5:craft\web\Controller::requireToken()) | Requires that the request was sent with a [token](craft5:craft\web\Request::getToken()).
-[requireCpRequest()](craft5:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config4:cpTrigger).
-[requireSiteRequest()](craft5:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config4:cpTrigger).
+[requireCpRequest()](craft5:craft\web\Controller::requireCpRequest()) | Requires that the request URI begins with the [control panel trigger](config5:cpTrigger).
+[requireSiteRequest()](craft5:craft\web\Controller::requireSiteRequest()) | Requires that the request URI doesn’t begin with the [control panel trigger](config5:cpTrigger).
 
 Generally speaking, these checks should occur at the _top_ of your action methods:
 

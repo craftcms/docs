@@ -457,7 +457,7 @@ Only drivers that implement <craft5:craft\queue\QueueInterface> will be visible 
 :::
 
 ::: tip
-If your queue driver supplies its own worker, set the <config4:runQueueAutomatically> config setting to `false` in `config/general.php`.
+If your queue driver supplies its own worker, set the <config5:runQueueAutomatically> config setting to `false` in `config/general.php`.
 :::
 
 ### Mutex

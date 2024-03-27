@@ -132,7 +132,7 @@ Fluent config is currently only available for _general_ and _database_ settings,
 
 Most config settings expect a [scalar](https://www.php.net/manual/en/function.is-scalar.php) value, and will generate exceptions if they are not (and can not be coerced to) a valid type.
 
-Normalization may occur on some values. For instance, any setting that expects a “file size” (like [`maxUploadFileSize`](config4:maxUploadFileSize)) will interpret a numeric value in bytes—but passing a string allows you to use other formats like `256M` or `1G` by virtue of Craft normalizing the value with [ConfigHelper::sizeInBytes()](craft5:craft\helpers\ConfigHelper::sizeInBytes()).
+Normalization may occur on some values. For instance, any setting that expects a “file size” (like [`maxUploadFileSize`](config5:maxUploadFileSize)) will interpret a numeric value in bytes—but passing a string allows you to use other formats like `256M` or `1G` by virtue of Craft normalizing the value with [ConfigHelper::sizeInBytes()](craft5:craft\helpers\ConfigHelper::sizeInBytes()).
 
 A few settings support complex types, like arrays and closures:
 
@@ -227,7 +227,7 @@ Do not combine fluent and multi-environment config in the same file. Merging flu
 
 Some settings and functions in Craft support [Yii aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases), which are most often used as placeholders for file system paths and URLs.
 
-Out of the box, Craft provides these aliases—but you can override them or provide new ones with the <config4:aliases> config setting:
+Out of the box, Craft provides these aliases—but you can override them or provide new ones with the <config5:aliases> config setting:
 
 | Alias | Description | Based On
 | ----- | ----------- | --------
@@ -281,9 +281,9 @@ Craft allows some settings to be defined directly from environment variables, PH
 
 Add the prefix to any [general config](config-settings.md) (`CRAFT_`) or [database connection settings](db.md) (`CRAFT_DB_`) in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). For example:
 
-- General: <config4:allowUpdates> &rarr; `CRAFT_ALLOW_UPDATES`
+- General: <config5:allowUpdates> &rarr; `CRAFT_ALLOW_UPDATES`
 - Database: [`port`](db.md#port) &rarr; `CRAFT_DB_PORT`
-- General: <config4:testToEmailAddress> &rarr; `CRAFT_TEST_TO_EMAIL_ADDRESS`
+- General: <config5:testToEmailAddress> &rarr; `CRAFT_TEST_TO_EMAIL_ADDRESS`
 
 ::: danger
 Any environment variable or constant names that match a known config setting (using the formula above) will have the [highest priority](#priority)! The `CRAFT_` prefix is intended to reduce the likelihood of collisions with other environment variables that a server or platform might inject—it’s actually _inadvisable_ to use this prefix when defining custom variables that aren’t intended to be used as overrides.
@@ -423,7 +423,7 @@ return [
 The options defined here will be passed into new `GuzzleHttp\Client` instances. See [Guzzle’s documentation](http://docs.guzzlephp.org/en/latest/) for a list of available options.
 
 ::: tip
-To use a proxy for _all_ requests, set an [httpProxy](config4:httpProxy) in general config. This will get merged with the Guzzle configuration, and passed to the front-end for use by JavaScript, in the [control panel](control-panel.md). Setting a proxy only in Guzzle’s config will not affect Ajax requests!
+To use a proxy for _all_ requests, set an [httpProxy](config5:httpProxy) in general config. This will get merged with the Guzzle configuration, and passed to the front-end for use by JavaScript, in the [control panel](control-panel.md). Setting a proxy only in Guzzle’s config will not affect Ajax requests!
 :::
 
 ### Custom Settings

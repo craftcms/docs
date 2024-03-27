@@ -97,7 +97,7 @@ Utilities expose bundles of miscellaneous functionality to users with the correc
 
 All Craft installations will include these utilities:
 
-- **Updates:** View Craft and plugin updates, and apply them (when <config4:allowAdminChanges> is on).
+- **Updates:** View Craft and plugin updates, and apply them (when <config5:allowAdminChanges> is on).
 - **System Report:** Get information about the Craft installation and server.
 - **Project Config:** View the state of [Project Config](./project-config.md).
 - **PHP Info:** Additional information about your server’s PHP installation.
@@ -120,14 +120,14 @@ Keep in mind that any user marked as an “Admin” implicitly has access to _al
 
 #### Disabling Utilities
 
-You can disable a utility for all users with the [`disabledUtilities` config setting](config4:disabledUtilities). <Since ver="4.6.0" feature="Disabling utilities" /> Refer to each [utility class](repo:craftcms/cms/tree/main/src/utilities)’s `id()` method for their handles—including those provided by plugins.
+You can disable a utility for all users with the [`disabledUtilities` config setting](config5:disabledUtilities). <Since ver="4.6.0" feature="Disabling utilities" /> Refer to each [utility class](repo:craftcms/cms/tree/main/src/utilities)’s `id()` method for their handles—including those provided by plugins.
 
 ### Settings
 
 The **Settings** screen is where you’ll configure the system and design your content model. Settings complement [configuration](./config/README.md) are typically stored in [Project Config](./project-config.md) so that you can easily deploy them to other environments.
 
 ::: tip
-Don’t see **Settings** in the main navigation? Make sure you have admin privileges, and that <config4:allowAdminChanges> is enabled.
+Don’t see **Settings** in the main navigation? Make sure you have admin privileges, and that <config5:allowAdminChanges> is enabled.
 
 We recommend that this is enabled only in development environments.
 :::

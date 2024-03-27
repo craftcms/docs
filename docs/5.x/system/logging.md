@@ -50,11 +50,11 @@ Levels are a great way to summarize the substance of logs:
 
 #### Exceptions
 
-Craft will also log uncaught exceptions. Exceptions can occur for all sorts of reasons, and will often use a specific class to reflect the nature of the issue. Those that extend <yii2:yii\base\UserException> are considered safe to display to a user, and will render this default view (or one matching your <config4:errorTemplatePrefix>):
+Craft will also log uncaught exceptions. Exceptions can occur for all sorts of reasons, and will often use a specific class to reflect the nature of the issue. Those that extend <yii2:yii\base\UserException> are considered safe to display to a user, and will render this default view (or one matching your <config5:errorTemplatePrefix>):
 
 ![Default presentation of a 404 HTTP Exception](../images/exception-404.png)
 
-For security, other exceptions are hidden from the front-end, and only available by examining logs. When <config4:devMode> is _on_, a stack trace will be output just after the exception’s message; otherwise, the stack trace is encoded as JSON and appended to the log message.
+For security, other exceptions are hidden from the front-end, and only available by examining logs. When <config5:devMode> is _on_, a stack trace will be output just after the exception’s message; otherwise, the stack trace is encoded as JSON and appended to the log message.
 
 ::: tip
 You can see a stack trace for any log message by increasing the `traceLevel` in your [log configuration](#trace-level).
@@ -64,7 +64,7 @@ You can see a stack trace for any log message by increasing the `traceLevel` in 
 
 What you see in your log files depends on the environment.
 
-When you’re working locally with <config4:devMode> enabled, logs are output in a verbose, multi-line format that’s human-readable. Any exceptions will include a stack trace.
+When you’re working locally with <config5:devMode> enabled, logs are output in a verbose, multi-line format that’s human-readable. Any exceptions will include a stack trace.
 
 ```
 [2022-04-15T17:00:11+00:00] web.INFO: Opening DB connection: pgsql:host=db;dbname=db;port=5432 {"trace":[],"memory":9646256,"category":"yii\\db\\Connection::open"}
@@ -76,7 +76,7 @@ $_POST = []
 […truncated] {"ip":"172.18.0.1"}
 ```
 
-When <config4:devMode> is off, log files are written in a machine-readable format that’s best for log aggregators. Each message will be represented on a single, longer line that includes context:
+When <config5:devMode> is off, log files are written in a machine-readable format that’s best for log aggregators. Each message will be represented on a single, longer line that includes context:
 
 ```
 [2022-04-15T16:57:54+00:00] web.WARNING: Some warning… {"trace":[],"memory":13579752,"category":"application"}
@@ -298,7 +298,7 @@ Convenience methods are available for different severity levels:
 - `Craft::error()` – most urgent level before an exception, used to indicate that something didn’t function properly
 
 ::: tip
-By default, Craft logs all levels when <config4:devMode> is enabled. Otherwise, anything lower than `warning` will be ignored.
+By default, Craft logs all levels when <config5:devMode> is enabled. Otherwise, anything lower than `warning` will be ignored.
 :::
 
 Logged messages should designate a message body, level, and optional category. Here, the we’re using the `custom-module` category, overriding the default of `application`:

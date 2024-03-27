@@ -86,7 +86,7 @@ You may output element URLs just as you would in a front-end template. However, 
 {{ cpUrl('myaccount')}}
 ```
 
-Using the agnostic `url()` function may generate incorrect URLs that reflect how an email was triggered rather than the kind of access the recipient has. For example, a user requesting a password reset link from the front-end will get the proper site URL, but the same email sent in response to an administrator’s action would be prefixed with the <config4:cpTrigger>.
+Using the agnostic `url()` function may generate incorrect URLs that reflect how an email was triggered rather than the kind of access the recipient has. For example, a user requesting a password reset link from the front-end will get the proper site URL, but the same email sent in response to an administrator’s action would be prefixed with the <config5:cpTrigger>.
 
 #### Language
 
@@ -223,6 +223,6 @@ This adapter only requires a “command,” and defaults to `/usr/sbin/sendmail 
 
 ### Development + Testing
 
-In development environments, you can ensure all outbound email is sent to a single address with the <config4:testToEmailAddress> setting.
+In development environments, you can ensure all outbound email is sent to a single address with the <config5:testToEmailAddress> setting.
 
 Alternatively, the entire [mailer component](../reference/config/app.md#mailer) can be replaced via application config, should you want to use an entirely different [transport](#transport-adapters) for local development.
