@@ -247,10 +247,6 @@ Out of the box, Craft provides these aliases—but you can override them or prov
 | `@web` | URL to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_URL](reference/config/bootstrap.md#craft-web-url)
 | `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_ROOT](reference/config/bootstrap.md#craft-web-root)
 
-::: tip
-To prevent a variety of security issues, we recommend explicitly setting the `@web` alias with a fully-qualified URL, either via a configuration file (see below) or [environment variable](#env).
-:::
-
 Aliases can be set to plain strings, or to the content of an environment variable. Keep in mind that **aliases are resolved recursively**, so you can define one based on another (including those whose values came from the environment):
 
 ```php
@@ -266,12 +262,16 @@ return [
 ];
 ```
 
-Assuming `PRIMARY_SITE_URL` is defined as `https://my-project.ddev.site` and `SHARED_PATH` is `/var/www/releases/123/shared`, these aliases would evaluate to:
+Assuming `PRIMARY_SITE_URL` is defined as `https://mydomain.com` and `SHARED_PATH` is `/var/www/releases/123/shared`, these aliases would evaluate to:
 
-- `@web`: `https://my-project.ddev.site`
+- `@web`: `https://mydomain.com`
 - `@shared`: `/var/www/releases/123/shared`
 - `@uploads`: `/var/www/releases/123/shared/web/uploads`
-- `@assets`: `https://my-project.ddev.site/uploads`
+- `@assets`: `https://mydomain.com/uploads`
+
+::: warning
+Setting `@web` can be problematic in multi-site installations that span multiple domains, or when accessing the control panel at a different domain from the front-end. In general, we recommend letting Craft determine this automatically, and using [environment variables](#control-panel-settings) to define the full base URI for each site.
+:::
 
 Recursive aliases are preferred to basic string interpolation, because they are evaluated at the time of _use_ rather than _definition_. Aliases are only resolved at the beginning of a string.
 
