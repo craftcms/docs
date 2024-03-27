@@ -320,12 +320,12 @@ Whenever you see this UI, you can provide a valid alias or environment variable 
 - **Asset Filesystems:** Base URL, File System Path (Local only);
 - **Email:** System Email Address, Sender Name, Email Template path, SMTP credentials;
 
-Focusing one of these fields will immediately suggest some values. Type `$` followed by an environment variable’s name or `@` followed by an alias to narrow the suggestions and find your placeholder.
+Focusing one of these fields will immediately suggest some values. Type `$` followed by an environment variable’s name, or `@` followed by an alias to narrow the suggestions and find your placeholder.
 
-Aliases have the extra benefit of allowing extra path segments, so `@web/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific `@uploads` alias](#aliases) and use that in the control panel, instead.
+Aliases have the extra benefit of allowing extra path segments, so `@web/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific alias](#aliases) (like `@uploads`) and use that in the control panel, instead. Environment variables _cannot_ be prepended to other values.
 
 ::: tip
-Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
+Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](extend/environmental-settings.md) to learn how.
 :::
 
 ### Templates and Modules
