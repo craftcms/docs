@@ -418,12 +418,14 @@ Read about managing [multiple field layouts](#variations-multiple-field-layouts)
 
 #### Native Layout Elements
 
-Native element properties (like our Product’s `price`) can be made editable via the [sidebar](#edit-screen), or as customizable field layout elements. Craft will automatically ensure a title element is added to your field layout, but you are responsible for adding any others:
+Native element properties (like our Product’s `price`) can be made editable via the [sidebar](#edit-screen), or as customizable field layout elements. Craft has some pre-packaged field layout elements (like <craft5:craft\fieldlayoutelements\TitleField>), but you are responsible for configuring others—either with the existing classes, or by implementing new layout elements:
 
 ```php
 use craft\models\FieldLayout;
 use craft\events\DefineFieldLayoutFieldsEvent;
 use craft\fieldlayoutelements\TextField;
+use craft\fieldlayoutelements\TitleField;
+use mynamespace\elements\Product;
 
 Event::on(
     FieldLayout::class,
@@ -432,7 +434,15 @@ Event::on(
         /** @var FieldLayout $fieldLayout */
         $fieldLayout = $event->sender;
 
-        // Add a mandatory `price` field to our field layout:
+        // We only want to provide these options to our product field layouts:
+        if ($fieldLayout->type !== Product::class) {
+            return;
+        }
+
+        // Add a title field:
+        $event->fields[] = TitleField::class;
+
+        // Add a customized "text" field for our `price` attribute:
         $event->fields[] = [
             'class' => TextField::class,
             'attribute' => 'price',
@@ -445,11 +455,15 @@ Event::on(
 );
 ```
 
-`mandatory` here means that the layout element _must_ be present in the field layout, not that a value is required. Take a look at the existing [field layout element types](repo:craftcms/cms/tree/main/src/fieldlayoutelements) to see which makes the most sense for your attribute.
+`mandatory` here means that the layout element _must_ be present in the field layout, not that a value is required. Even if a developer has not customized the field layout, Craft will ensure this layout element is added to the first tab. The `TitleField` layout element is mandatory by default, and assumes the title comes from a `title` attribute, so there’s nothing to customize!
+
+Take a look at the existing [field layout element types](repo:craftcms/cms/blob/5.x/src/fieldlayoutelements) to see which makes the most sense for your attribute. Field layout elements that exist only to provide feedback or information should extend <craft5:craft\fieldlayoutelements\BaseUiElement>.
 
 ::: tip
-Despite basing our `price` layout element on <craft5:craft\fieldlayoutelements\TextField>, the class is deceptively well-suited for customization. Here, we’ve begun to transform it into a `number` input.
+Despite basing our `price` layout element on <craft5:craft\fieldlayoutelements\TextField>, the class supports a wide variety of customizations. Here, we’ve begun to transform it into a `number` input.
 :::
+
+Custom fields are handled for you, automatically—they’ll appear just below your element type’s native field layout elements in the field layout designer sidebar.
 
 ### Saving Custom Field Values
 
