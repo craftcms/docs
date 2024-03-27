@@ -1,6 +1,7 @@
 ---
 title: Configuration
 description: Set up Craft to work with your team and infrastructure.
+sidebarDepth: 2
 related:
   - uri: https://nystudio107.com/blog/fluent-multi-environment-config-for-craft-cms-4
     label: Fluent multi-environment config for Craft CMS
@@ -230,21 +231,21 @@ Out of the box, Craft provides these aliases—but you can override them or prov
 
 | Alias | Description | Based On
 | ----- | ----------- | --------
-| `@app` | Path to Craft’s source code. | [CRAFT_VENDOR_PATH](#craftvendorpath)
-| `@config` | Path to your `config/` folder. | [CRAFT_BASE_PATH](#craftbasepath)
-| `@contentMigrations` | Path to your `migrations/` folder. | [CRAFT_BASE_PATH](#craftbasepath)
+| `@app` | Path to Craft’s source code. | [CRAFT_VENDOR_PATH](reference/config/bootstrap.md#craft-vendor-path)
+| `@config` | Path to your `config/` folder. | [CRAFT_BASE_PATH](reference/config/bootstrap.md#craft-base-path)
+| `@contentMigrations` | Path to your `migrations/` folder. | [CRAFT_BASE_PATH](reference/config/bootstrap.md#craft-base-path)
 | `@craft` | Path to Craft’s source code. | `@app`
-| `@dotenv` | Path to your [.env](../directory-structure.md#env) file. | [CRAFT_DOTENV_PATH](#craftdotenvpath)
+| `@dotenv` | Path to your [.env](../directory-structure.md#env) file. | [CRAFT_DOTENV_PATH](reference/config/bootstrap.md#craft-dotenv-path)
 | `@lib` | Path to extra libraries packaged with Craft. | `@app`
-| `@root` | The root project path. | [CRAFT_BASE_PATH](#craft-base-path)
+| `@root` | The root project path. | [CRAFT_BASE_PATH](reference/config/bootstrap.md#craft-base-path)
 | `@runtime` | Path to your `storage/runtime/` folder. | `@storage`
-| `@storage` | Path to your `storage/` folder. | [CRAFT_STORAGE_PATH](#craftstoragepath)
-| `@templates` | Path to your `templates/` folder. | [CRAFT_TEMPLATES_PATH](#crafttemplatespath)
-| `@tests` | Path to your `tests/` folder. | [CRAFT_TESTS_PATH](#crafttestspath)
-| `@translations` | Path to your `translations/` folder. | [CRAFT_TRANSLATIONS_PATH](#crafttranslationspath)
-| `@vendor` | Path to your `vendor/` folder. | [CRAFT_VENDOR_PATH](#craftvendorpath)
-| `@web` | URL to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_URL](#craftweburl)
-| `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_ROOT](#craftwebroot)
+| `@storage` | Path to your `storage/` folder. | [CRAFT_STORAGE_PATH](reference/config/bootstrap.md#craft-storage-path)
+| `@templates` | Path to your `templates/` folder. | [CRAFT_TEMPLATES_PATH](reference/config/bootstrap.md#craft-templates-path)
+| `@tests` | Path to your `tests/` folder. | [CRAFT_TESTS_PATH](reference/config/bootstrap.md#craft-tests-path)
+| `@translations` | Path to your `translations/` folder. | [CRAFT_TRANSLATIONS_PATH](reference/config/bootstrap.md#craft-translations-path)
+| `@vendor` | Path to your `vendor/` folder. | [CRAFT_VENDOR_PATH](reference/config/bootstrap.md#craft-vendor-path)
+| `@web` | URL to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_URL](reference/config/bootstrap.md#craft-web-url)
+| `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_ROOT](reference/config/bootstrap.md#craft-web-root)
 
 ::: tip
 To prevent a variety of security issues, we recommend explicitly setting the `@web` alias with a fully-qualified URL, either via a configuration file (see below) or [environment variable](#env).
