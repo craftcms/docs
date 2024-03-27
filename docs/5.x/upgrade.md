@@ -63,7 +63,7 @@ ddev start
     You’ll need to manually edit each plugin version in `composer.json`. If any plugins are still in beta, you may need to change your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings.
     :::
 
-    You may also need to add `"php": "8.2"` to your [platform](https://getcomposer.org/doc/06-config.md#platform) requirements, or remove it altogether.
+    While you’re at it, review your project’s [other dependencies](#entry-scripts)! You may also need to add `"php": "8.2"` to your [platform](https://getcomposer.org/doc/06-config.md#platform) requirements, or remove it altogether.
 1. Run `composer update`.
 1. Make any required changes to your [configuration](#configuration).
 1. Run `php craft up`.
@@ -72,10 +72,18 @@ ddev start
 Your site is now running Craft 5! If you began this process with no deprecation warnings, you’re nearly done.
 
 ::: warning
-Thoroughly review the list of changes on this page, making note of any features you use in templates or modules. Only a fraction of your site’s code is actually evaluated during an upgrade, so it’s your responsibility to check templates and modules for consistency. You may also need to follow any plugin-specific upgrade guides, like [Upgrading to Commerce 4](/commerce/4.x/upgrading.md).
+Thoroughly review the list of changes on this page, making note of any features you use in templates or modules. Only a fraction of your site’s code is actually evaluated during an upgrade, so it’s your responsibility to check templates and modules for consistency. You may also need to follow any plugin-specific upgrade guides.
 :::
 
 Once you’ve verified everything’s in order, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory (along with any template, configuration, or module files that required updates) and deploy those changes normally in each additional environment.
+
+### Cleanup + Optional Steps
+
+#### Entry Scripts
+
+Older projects may use versions of [`vlucas/phpdotenv`](repo:vlucas/phpdotenv) (the library that loads variables from your `.env` file) that depend on features deprecated in PHP 8.1. If you encounter errors during (or after) installation, change your `vlucas/phpdotenv` dependency in `composer.json` to `^5.6.0`, then run `composer update`.
+
+Along with this update, you’ll need to integrate changes from our [starter project](repo:craftcms/craft)’s `web/index.php` script and `craft` executable. If you have done any low-level customization of Craft via [bootstrap constants](configure.md#bootstrap-config), make sure those values are preserved in the appropriate file(s)—constants shared between the two files can be moved to the new [`bootstrap.php` file](repo:craftcms/craft/blob/5.x/bootstrap.php).
 
 ## Breaking Changes and Deprecations
 

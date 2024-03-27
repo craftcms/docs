@@ -494,7 +494,7 @@ Some customization is handled via special variables (set as PHP constants or env
 By virtue of accessing these via <craft5:craft\helpers\App::env()>, Craft also honors values defined by your environment under the same names or keys. The majority of these settings are tied specifically to the structure of your project directory, though, and generally do not need to change between environments.
 
 ::: tip
-Constants you set directly in `web/index.php` will only be defined for _web_ requests, while any you set in the `craft` executable will only be defined for _console_ requests.
+Constants you set directly in `web/index.php` will only be defined for _web_ requests, while any you set in the `craft` executable will only be defined for _console_ requests. Use `bootstrap.php` to define constants for _all_ requests.
 :::
 
 <See path="reference/config/bootstrap" label="Bootstrap Variable Reference" description="View a list of bootstrap variables that Craft uses." />
