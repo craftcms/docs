@@ -35,7 +35,7 @@ Additional variables provided by Craft.
 
 Variable | Description
 --- | ---
-[_globals](#globals) <Since ver="4.5.0" feature="The _globals Twig variable" /> | Get and set values on a globally-available store.
+[_globals](#globals) | Get and set values on a globally-available store.
 [craft](#craft) | A <craft5:craft\web\twig\variables\CraftVariable> object.
 [currentSite](#currentsite) | The requested site.
 [currentUser](#currentuser) | The currently logged-in user.
@@ -251,11 +251,11 @@ To generate a URL relative to the current site, use the [`siteUrl()` function](f
 
 The **System Name**, as defined in **Settings** → **General**.
 
-### `today` <Since ver="4.3.0" feature="The today global variable" />
+### `today`
 
 A [DateTime](http://php.net/manual/en/class.datetime.php) object in the system’s timezone, set to midnight (00:00 in 24-hour time, or 12:00AM in 12-hour) of the _current_ day.
 
-### `tomorrow` <Since ver="4.3.0" feature="The tomorrow global variable" />
+### `tomorrow`
 
 A [DateTime](http://php.net/manual/en/class.datetime.php) object in the system’s timezone, set to midnight (00:00 in 24-hour time, or 12:00AM in 12-hour) of the _next_ day.
 
@@ -263,7 +263,7 @@ A [DateTime](http://php.net/manual/en/class.datetime.php) object in the system�
 
 A reference to the <craft5:craft\web\View> instance that is driving the template.
 
-### `yesterday` <Since ver="4.3.0" feature="The yesterday global variable" />
+### `yesterday`
 
 A [DateTime](http://php.net/manual/en/class.datetime.php) object in the system’s timezone, set to midnight (00:00 in 24-hour time, or 12:00AM in 12-hour) of the _previous_ day.
 
@@ -415,7 +415,7 @@ They will be represented as <craft5:craft\elements\GlobalSet> objects.
 <p>{{ companyInfo.companyName }} was established in {{ companyInfo.yearEstablished }}.</p>
 ```
 
-### Singles <Since ver="4.4.0" feature="auto-loaded singles" />
+### Singles
 
 Your [single](../entries.md#singles) section entries can also be loaded automatically by setting <config5:preloadSingles> to `true`.
 

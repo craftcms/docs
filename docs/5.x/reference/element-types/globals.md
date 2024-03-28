@@ -30,7 +30,7 @@ As part of that process, we introduced a [console command](console-commands.md#e
 php craft entrify/global-set myGlobalSetHandle
 ```
 
-You will be given an opportunity to migrate the global set into a new or existing [single](entries.md#singles). The **Title** field (and **Status** controls <Since ver="4.5.0" feature="Entry status control visibility setting" />) for the single’s new entry type will be disabled, to maintain parity with the legacy globals interface.
+You will be given an opportunity to migrate the global set into a new or existing [single](entries.md#singles). The **Title** field (and **Status** controls) for the single’s new entry type will be disabled, to maintain parity with the legacy globals interface.
 
 Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
 

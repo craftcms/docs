@@ -4,7 +4,7 @@ The [Generator](repo:craftcms/generator) is a first-party tool for scaffolding m
 
 ## Installation
 
-New Craft projects <Since ver="4.3.5" feature="The Generator CLI" /> come with the Generator package installed and ready to use. If you started your project with a version of Craft earlier than 4.3.5, [update](../updating.md) and run:
+New Craft projects come with the Generator package installed and ready to use. If you started your project with a version of Craft earlier than 4.3.5, [update](../updating.md) and run:
 
 ```bash
 composer require craftcms/generator --dev

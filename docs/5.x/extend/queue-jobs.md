@@ -117,7 +117,7 @@ The queue will automatically retry failed jobs that implement the [`RetryableJob
 Returning `true` from `canRetry()` can pollute your queue with jobs that may never succeed. Failed jobs are not necessarily bad! Exceptions can be used to track failures in code that runs unattended.
 :::
 
-### Batched Jobs <Since ver="4.4.0" feature="Batched jobs" />
+### Batched Jobs
 
 In situations where there is simply too much work to do in a single request (or within PHP’s memory limit), consider extending <craft5:craft\queue\BaseBatchedJob>.
 

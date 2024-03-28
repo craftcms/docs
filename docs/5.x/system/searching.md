@@ -283,7 +283,7 @@ For relational fields like [Assets](./assets-fields.md), [Categories](./categori
 
 ## Indexing Criteria
 
-Any time an indexable attribute or field on an element is updated (as indicated by Craft’s change-tracking feature, which powers drafts and revisions), an “Updating search indexes” job is pushed into the queue. <Since ver="4.6.0" description="A more restrictive set of criteria for indexing elements was implemented in {product} {ver}." /> Prior versions generate an indexing job whenever an element with _any_ searchable attributes or fields is saved, regardless of whether or not those specific attributes changed.
+Any time an indexable attribute or field on an element is updated (as indicated by Craft’s change-tracking feature, which powers drafts and revisions), an “Updating search indexes” job is pushed into the queue. Prior versions generate an indexing job whenever an element with _any_ searchable attributes or fields is saved, regardless of whether or not those specific attributes changed.
 
 The [eligible properties](#searching-for-specific-element-attributes) differ for each element type, the field layout a given element uses, and which of the underlying fields are flagged as searchable.
 

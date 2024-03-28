@@ -69,7 +69,7 @@ Craft will also respond to a handful of [specific environment variables or PHP c
 
 ### Secrets
 
-You can store sensitive values that won’t leak into the process’s environment in a special “secrets” file. <Since ver="4.5.0" feature="Secrets file" /> The path to this file is determined by the [`CRAFT_SECRETS_PATH` environment variable or constant](#craft_secrets_path). When defined, Craft will attempt to include a file at that path (presumed to be a PHP script that `return`s an associative array), and checks it prior to resolving any environment variable or constant with <craft5:craft\helpers\App::env()>.
+You can store sensitive values that won’t leak into the process’s environment in a special “secrets” file. The path to this file is determined by the [`CRAFT_SECRETS_PATH` environment variable or constant](#craft_secrets_path). When defined, Craft will attempt to include a file at that path (presumed to be a PHP script that `return`s an associative array), and checks it prior to resolving any environment variable or constant with <craft5:craft\helpers\App::env()>.
 
 ```php
 return [
@@ -111,7 +111,7 @@ return [
 ];
 ```
 
-If you are interested in auto-completion and type hints from your editor, the equivalent "fluent" style declaration <Since ver="4.2.0" feature="Fluent config" /> would look like this:
+If you are interested in auto-completion and type hints from your editor, the equivalent "fluent" style declaration would look like this:
 
 ```php
 use craft\config\GeneralConfig;

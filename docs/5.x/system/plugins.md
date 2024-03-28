@@ -139,7 +139,7 @@ If you’ve tried a commercial plugin and are ready to purchase a license, you h
 This is a perfect time to set up an [organization](kb:craft-console-organizations) in Craft Console. Organizations simplify the process of approving license purchases and organizing keys.
 :::
 
-#### Reminders <Since ver="4.4.15" feature="Rich license reminders" />
+#### Reminders
 
 At the bottom of every page in the [control panel](control-panel.md), Craft provides a summary of the installed software, and will alert you if there are any unpaid licenses. This is _not_ an indication that you are in violation of licensing terms, or owe money—it’s just our way of letting you know what currently-active plugins you _will_ need to pay for when your site launches.
 

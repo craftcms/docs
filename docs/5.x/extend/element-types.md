@@ -625,7 +625,7 @@ Consider hiding sources that the current user would not be able to access, based
 
 <Block label="Criteria vs. Conditions">
 
-You may combine the opaque `criteria` source option with the more transparent `defaultFilter`. <Since ver="4.5.0" feature="Default filters on sources" /> Default filters are constructed as [conditions](conditions.md), and allow users to tweak them after a source is loaded:
+You may combine the opaque `criteria` source option with the more transparent `defaultFilter`. Default filters are constructed as [conditions](conditions.md), and allow users to tweak them after a source is loaded:
 
 ```php
 use craft\elements\Entry;

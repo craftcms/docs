@@ -203,7 +203,7 @@ Event::on(
 
 ## Output Helpers
 
-Internally, Craft keeps console feedback consistent with a suite of helper methods <Since ver="4.0.0" feature="Console command formatting tools" /> provided by <craft5:craft\console\ControllerTrait>.
+Internally, Craft keeps console feedback consistent with a suite of helper methods provided by <craft5:craft\console\ControllerTrait>.
 
 - **Success** — Output a message with a ✅ icon: `$this->success('Done!');`
 - **Failure** — Output a message prefixed with an `X`: `$this->failure('Something went wrong.');`

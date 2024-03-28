@@ -9,7 +9,7 @@ Dropdown fields have the following settings:
 - **Dropdown Options** — Define the label and value for each option that will be displayed in the menu.
 
 ::: tip
-If you change the underlying value of an option that is used by existing entries, Craft will select the designated default option the next time one of those elements is edited. <Since ver="4.5.0" feature="Automatic selection of dropdown defaults" />
+If you change the underlying value of an option that is used by existing entries, Craft will select the designated default option the next time one of those elements is edited.
 
 Consider using the appropriate [`resave/*` console commands](console-commands.md#resave) to migrate existing data to your new value:
 

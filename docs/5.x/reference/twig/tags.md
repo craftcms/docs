@@ -289,7 +289,7 @@ If you choose to set the HTTP status code that should be included with the respo
 `{% exit %}` throws an [HttpException](yii2:yii\web\HttpException) with the appropriate status code, so with <config5:devMode> enabled a full error report and stack trace will be shown instead of an error template.
 :::
 
-#### Message <Since ver="4.5.0" feature="Custom exit exception messages" />
+#### Message
 
 The second parameter is passed to the [error template](../routing.md#error-templates) as the `message` variable:
 

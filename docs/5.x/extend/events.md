@@ -204,7 +204,7 @@ Return values from handlers are ignored—instead, Craft expects that the handle
 
 Instance-level event handlers are _not_ copied to new instances when using PHP’s `clone()`. If you want to guarantee that your handlers survive this process, create a [behavior](behaviors.md#events) and attach that—behaviors _do_ get copied thanks to <craft5:craft\base\CloneFixTrait>, and any event handlers declared by <yii2:yii\base\Behavior::events()> are re-installed.
 
-Instead of maintaining a behavior for a single handler, you can use the built-in <craft5:craft\behaviors\EventBehavior> <Since ver="4.5.0" feature="EventBehavior proxy for cloned objects" /> as a proxy for registering handlers:
+Instead of maintaining a behavior for a single handler, you can use the built-in <craft5:craft\behaviors\EventBehavior> as a proxy for registering handlers:
 
 ```php
 use craft\behaviors\EventBehavior;

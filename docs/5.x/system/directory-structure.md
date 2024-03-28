@@ -69,7 +69,7 @@ Purpose
   You can generate a URL to a file in this folder with Twig’s [`siteUrl()` function](./dev/functions.md#siteurl).
 
 Customization
-: [`CRAFT_WEB_ROOT`](./config/README.md#craft-web-root) <Since ver="4.3.0" feature="Customizing the web root via environment override" /> — This is primarily used to set the [`@webroot` alias](./config/README.md#aliases).
+: [`CRAFT_WEB_ROOT`](./config/README.md#craft-web-root) — This is primarily used to set the [`@webroot` alias](./config/README.md#aliases).
 
 ## Files
 
@@ -83,7 +83,7 @@ Purpose
   These are `.env` file templates. Maintain one of them (with sensitive data removed) as a starting point for your actual `.env` file, so collaborators know what variables the project requires. When they set up the project, they can run `cp .env.example .env` to duplicate the file and fill out missing keys!
 
 Configuration
-: [`CRAFT_DOTENV_PATH`](./config/README.md#craft-dotenv-path) <Since ver="4.5.6" feature="Customizing the .env path" /> — This setting _was_ technically available in prior versions, but unreliable.
+: [`CRAFT_DOTENV_PATH`](./config/README.md#craft-dotenv-path) — This setting _was_ technically available in prior versions, but unreliable.
 
 ### `.gitignore`
 

@@ -264,7 +264,7 @@ Attribute values are HTML-encoded automatically:
 ```
 :::
 
-## `base64_decode` <Since ver="4.4.0" feature="The base64_decode Twig filter" />
+## `base64_decode`
 
 Decodes a base64-encoded string. The encoded value can come from anywhere, as base64 is widely supported and its input and output is consistent across implementations.
 
@@ -569,7 +569,7 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 {# Result: ['bar', 'baz'] #}
 ```
 
-## `float` <Since ver="4.3.0" feature="This Twig filter" />
+## `float`
 
 Coerces the passed value to a float using PHP’s [`floatval()`](https://www.php.net/manual/en/function.floatval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
@@ -682,7 +682,7 @@ Returns the index of a passed-in value within an array, or the position of a pas
 {% endif %}
 ```
 
-## `integer` <Since ver="4.3.0" feature="This Twig filter" />
+## `integer`
 
 Coerces the passed value to a integer using PHP’s [`intval()`](https://www.php.net/manual/en/function.intval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 
@@ -752,7 +752,7 @@ Lowercases the first character of a string.
 
 ## `length`
 
-Returns the length of a string or array, or a query’s result [count](../element-queries.md#count). <Since ver="4.2.0" feature="Automatic counting of query objects" />
+Returns the length of a string or array, or a query’s result [count](../element-queries.md#count).
 
 If used on anything besides a query, Twig’s built-in [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter logic will be used.
 
@@ -1257,7 +1257,7 @@ You can also use a regular expression to search for matches by starting and endi
 {{ tag.title|lower|replace('/[^\\w]+/', '-') }}
 ```
 
-When passing an array, its keys can be regular expressions <Since ver="4.5.0" feature="Regular expressions as keys" />:
+When passing an array, its keys can be regular expressions:
 
 ```twig
 {{ tag.title|lower|replace({
@@ -1266,7 +1266,7 @@ When passing an array, its keys can be regular expressions <Since ver="4.5.0" fe
 }) }}
 ```
 
-To treat patterns as literal strings (when using positional arguments _or_ a map), pass `false` to the `regex` argument <Since ver="4.5.4" feature="The ability to disable regex evaluation" />:
+To treat patterns as literal strings (when using positional arguments _or_ a map), pass `false` to the `regex` argument:
 
 ```twig{4}
 {{ tag.title|lower|replace({
@@ -1306,7 +1306,7 @@ Returns a string formatted in “snake_case”.
 {# Output: foo_bar #}
 ```
 
-## `string` <Since ver="4.3.0" feature="This Twig filter" />
+## `string`
 
 Coerces the passed value to a string using PHP’s [`strval()`](https://www.php.net/manual/en/function.strval.php) function. Useful when dealing with stronger typing in PHP 8 and Twig 3.x.
 

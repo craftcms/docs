@@ -35,7 +35,7 @@ Not all extensions must be conceived as portable or publishable! In fact, the mo
 Most customizations come in the form of a **module** or a **plugin**.
 
 ::: tip
-Private plugins <Since ver="4.4.0" feature="Private plugins" /> combine the best of both worlds. If this is your first time writing an extension, we recommend using the [Generator](generator.md) to scaffold a private plugin.
+Private plugins combine the best of both worlds. If this is your first time writing an extension, we recommend using the [Generator](generator.md) to scaffold a private plugin.
 :::
 
 #### Modules

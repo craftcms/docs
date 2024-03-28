@@ -13,7 +13,7 @@ Module ID
 : The module ID will become the first segment in [controller action](./controllers.md) paths. Avoid names that will conflict with Craft’s core [controllers](repo:craftcms/cms/tree/develop/src/controllers) or the handles of any installed plugins (e.g. `app` would conflict with <craft5:craft\controllers\AppController>, and `commerce` would collide with [Commerce](../../commerce/4.x/README.md)).
 
 
-As an alternative to modules, private [plugins](plugin-guide.md) <Since ver="4.4.0" feature="Private plugins" /> provide all the functionality of a regular plugin, but are intended to be tracked as part of a project rather than distributed.
+As an alternative to modules, private [plugins](plugin-guide.md) provide all the functionality of a regular plugin, but are intended to be tracked as part of a project rather than distributed.
 
 ## Scaffolding
 
