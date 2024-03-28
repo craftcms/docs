@@ -1,42 +1,41 @@
 ---
-keywords: multi multisite multilingual translation
+keywords: multi multisite multilingual translation localization
 ---
 
 # Sites & Localization
 
-A single Craft installation can be responsible for multiple websites.
+A single Craft installation can power any number of websites.
 
-You can define one or more sites at different domains, using a different set of templates, and different versions of entry content.
+Sites let you expand your presence to different domains, use unique [templates](#site-templates), and intelligently [localize content](#propagating-entries).
 
-Craft’s multi-site feature is for sites with the same publishing team. You manage the multi-site content at the entry level, with the ability to enable Sections you want included in a site.
+Craft’s multi-site feature is for sites with the same publishing team. You manage the multi-site content at the entry level, with the ability to enable sections you want included in a site.
 
 ::: warning
-Craft’s multi-site feature is not meant for managing multiple _installs_ that have no relationship to one another, but different sites where it’s vital that some users and content are shared among them.
+Craft’s multi-site feature is _not_ meant for managing multiple projects that have no relationship to one another. The Author experience is based on the assumption that some content is shared between them, and that users have some overlap in their capabilities or responsibilities.
 :::
+
+Craft has a soft cap on the number of sites, determined by the <config5:maxSites> setting. You can increase this at any time (it’s not a technical or license limitation), but we put it in place as a means of 
 
 ## Creating a Site
 
-Every Craft installation starts with one default site. The site name is what you defined at time of installation, and the handle is `default`.
+The first site is created when you install Craft, using the **Site Name** provided via the [setup GUI](kb:first-time-setup) or [CLI](../reference/cli.md#setup). Additional sites are created via <Journey path="Settings, Sites" />.
 
-You add additional sites using the Sites settings in **Settings** → **Sites**.
 
-Each site has the following attributes:
-
-- Group
-- Name
-- Handle
-- Language
-- Is Primary Site?
-- Base URL
-
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/sites/new"
+  caption="Creating a new site in the Craft control panel."
+  :link="false"
+  :max-height="500">
+  <img src="../images/site-new.png" alt="Creating a new site in the Craft control panel">
+</BrowserShot>
 
 ### Site Groups
 
-Site Groups allow you to organize your sites together by commonality, like language or site type.
+Site groups allow you to organize your sites together by commonality, like language or site type.
 
-Craft creates the first Site Group for you, named after the default site, and assigns the default site to that group.
+Craft creates the first site group for you (named after the site created during installation) and assigns the default site to that group.
 
-In addition to organization, Site Groups can be used in a section’s Propagation Method. By selecting **Save entries to other sites in the same group**, Craft will only propagate that section’s new entries to sites in the same group.
+In addition to organization, site groups can be used in conjunction with a section’s [**Propagation Method**](#propagating-entries), or in some fields’ **Translation Method** settings.
 
 You can access the current site’s group information using `currentSite.group`:
 
@@ -54,169 +53,155 @@ Base URL:         {{ currentSite.baseUrl }}
 Site Group Name:  {{ siteGroup.name }}
 ```
 
-
 ### Language
 
-Choosing the language for the site tells Craft the language to use when formatting dates, times, and numbers, and translating static messages.
+Choosing the language for the site determines how Craft formats dates, times, and numbers, and which [static message translations](#static-message-translations) are used, in the front-end.
 
-In your templates, you can also access the language setting via `craft.app.language`. You can use this in a conditional:
+In your templates, you can access the current site’s language setting via `craft.app.language`:
 
-```twig
-{% if craft.app.language == 'de' %}
-  <p>Guten Tag!</p>
-{% endif %}
+```twig{1}
+<html lang="{{ craft.app.language }}">
+  <head>
+    <title>{{ siteName }}</title>
+  </head>
+  <body>
+    {# ... #}
+  </body>
+</html>
 ```
 
-Or as a way to automatically include the proper template for each language:
-
-```twig
-{% include '_share/footer-' ~ craft.app.language ~ '.twig' %}
-```
-
-where your template name would be, for example, `_share/footer-de.twig`.
-
+::: tip
+The current language can be used to conditionally display certain parts of a page—or you can create [site-specific templates](#site-templates) in your `templates/` directory.
+:::
 
 ### Primary Site
 
-Craft sets the default site as the Primary site, meaning Craft will load it by default on the front end, if it is unable to determine which site to load. If you only have one site then you cannot disable it as the Primary site.
+Craft sets the default site (created during installation) as the **Primary** site, meaning Craft will load it by default on the front end, if it is unable to determine which site to load. If you only have one site then you cannot disable it as the Primary site.
 
-You can change the Primary site once you create additional sites. Craft will automatically toggle the current Primary site.
+You can change the primary site once you’ve created at least one other—Craft internally makes sure that only one site is marked as primary at any given time.
 
 ### Site URL
 
-Each site has a Base URL Craft uses to generate links to entries and other site content.
+Each site has a **Base URL** that determines how Craft routes and generates links.
 
-Multiple sites can share the same hostname, such as `https://craftcms.com/` and `https://craftcms.com/de/`, or they can have different hostnames, such as `https://craftcms.com/` and `https://de.craftcms.com/`.
+Multiple sites can share the same hostname and be distinguished by path (like `https://craftcms.com/` and `https://craftcms.com/de/`), or they can have different hostnames entirely (like `https://craftcms.com/` and `https://de.craftcms.com/`).
 
-If you want to create a site with a different hostname, you must configure your server to handle traffic for it. The hostname can either point to the same web root as your current site (e.g. `web/`), or you may want to give it its own separate web root. If you do the latter, make sure you copy your `.htaccess` and `index.php` files into the new web root.
-
-::: tip
-If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](https://craftcms.com/support/license-enforcement), you’ll want to pick one of the domains to access the Craft control panel from for _all_ sites.
-:::
+If you want to create a site with a different hostname, you must configure your server to handle traffic for it. The hostname can either point to the same web root as your current site, or its own web root (with unique `.htaccess` and/or entry script).
 
 ::: tip
-If your primary site’s Base URL includes a subdirectory (i.e. `https://foo.dev/bar/`), you should set the [baseCpUrl](config5:baseCpUrl) config setting.
+If you have multiple sites using different root domains like `https://site-a.com` and `https://site-b.com`, with the way Craft’s [license enforcements works](kb:how-craft-license-enforcement-works), you’ll want to pick one of the domains to access the Craft control panel from for _all_ sites.
+
+The domain you access the control panel from does _not_ affect what sites’ content you can edit!
 :::
 
-::: warning
-Careful using the `@web` alias to define your sites’ Base URLs.  
-You should explicitly override the alias to avoid introducing a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and to make sure Craft can reliably determine which site is being requested. See [Aliases](config/#aliases) for an example.
+::: tip
+If your primary site’s **Base URL** includes a subdirectory (i.e. `https://foo.dev/bar/`), you should set the [baseCpUrl](config5:baseCpUrl) config setting.
 :::
 
-## Propagating Entries Across All Enabled Sites
+### Site Templates
 
-In the settings for each Channel Section is an option to propagate entries in that section across all sites. This is enabled by default, and is the only option for Single sections.
+Whenever Craft loads a template, it looks in a subfolder of your `templates/` directory with the handle of the current site before trying the global space.
 
-When enabled, Craft will create the new entry in each site enabled for that section using the submitted content.
+For example, if our site was named _Labs_ (with the handle `labs`), we could create a `templates/labs/` directory with any templates we wanted to override in the “global” space. Suppose the primary site and this Labs mini-site shared most of their page structure, but Labs had a simplified header and footer: we could put `{% include '_partials/footer' %}` in a shared layout, and Craft would look in the current site’s template folder (`templates/labs/_partials/footer.twig`), _then_ fall back to the global space (`templates/_partials/footer.twig`).
 
-If you would like the section’s content to be separate then disable this option for that section.
+(In this example, the layout template itself could also be controlled on a per-site basis!)
+
+## Propagating Entries
+
+[Entries](../reference/element-types/entries.md) support advanced rules for propagating content to other sites. Each section has a **Site Settings** table, in which you choose the sites its entries can be published in, as well as what their URIs look like.
+
+_Channel_ and _Structure_ sections also include a **Propagation Method** setting, which determines how content is synchronized across sites, site groups, or languages when created or saved. _Single_ sections only contain one entry (and it’s automatically created when along with the section), so they don’t have propagation settings.
+
+Only save entries to the site they were created in
+:   Entries are created in a single site, and are not associated with content from other sites. Useful when creating similar content architectures for multiple otherwise unrelated sites—like a news feed for two unrelated products owned by a single company.
+
+    ::: warning
+    Keep in mind that entries created in this way cannot be added to other sites, later.
+    :::
+
+Save entries to other sites in the same site group
+:   Entries are created only in sites belonging to the same **Site Group**, and are not associated with content from sites in other groups. Useful in scenarios where similar content architectures are important across multiple otherwise unrelated sites that are then available in multiple languages—like program-specific event feeds for a recreation center that are translated in multiple languages.
+
+    Entries propagated in this way aren’t required to target different languages!
+
+Save entries to other sites with the same language
+:   Entries are created and managed in all sites that share a _language_. Useful in situations where the core content represented by an entry is only relevant in its original language, but might still be syndicated to other sites—like an archive of literary works or letters that might be a part of multiple digital museum collections.
+
+Save entries to all sites enabled for this section
+:   Entries are created and managed in all sites that are enabled in the **Site Settings** table.
+
+Let each entry choose which sites it should be saved to
+:   Leave these decisions up to each entry. Use the **Status** section in the sidebar to create the entry in another site:
+
+    ![Creating an entry in secondary sites](../images/entry-propagation-manual.png)
+
+    This option also allows entries to be deleted on a per-site basis (rather than just _disabled_).
+
+When an entry exists in multiple sites, its content can be translated using similar (but even more flexible) rules, [on a field-by-field basis](fields.md#translation-methods).
 
 ## Setting Up a New Site
 
-In this short guide we’ll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft installed and the default site setup and configured.
+In this section, we’ll walk through the steps of setting up a new site in Craft. This guide assumes you already have Craft [installed](../install.md) and the default site setup and configured.
 
-### Step 1: Create the Site in Settings
+### Step 1: Create the Site
 
-The first step is to create the new site in the Settings of your Craft installation.
+The first step is to create the new site in the **Settings** screen of your Craft installation.
 
-1. Go to **Settings** → **Sites** and press **New Site**.
-2. Use the dropdown menu to choose the group your site should belong to. The group selection won’t have any impact on your site’s functionality.
-3. Give your site a name. Craft uses the site name in the control panel, and you can also display it in your templates using `{{ siteName }}`.
-4. Based on the Site name, Craft will generate a Site Handle. You can edit the Handle if you’d like. You will use the Site Handle to refer to this site in the templates.
-5. Choose the language for this site (see above for more information on how you can use languages).
-6. If this site should be the Primary Site, toggle **Is Primary Site?** to enable it.
-7. Check the box for **This site has its own base URL** and put in the Base URL. For our example it’ll be `https://beta.craftcms.com`.
+1. Go to <Journey path="Settings, Sites" /> and press **New Site**.
+2. Use the dropdown menu to choose the group your site should belong to. Site groups are used to control how content is translated.
+3. Give your site a name. Craft uses the **Site Name** in the control panel, and makes it available in your [templates](../development/templates.md) as `{{ siteName }}`.
+4. Based on the **Site Name**, Craft will generate a **Site Handle**. You can use the handle to refer to this site in the templates (i.e. `craft.app.sites.getSiteByHandle('beta')`), but it has no bearing on front-end URLs. It may appear in control panel URLs.
+5. Choose the [language](#language) for this site.
+6. If this site should be the primary or “default” site, toggle **Is Primary Site?** to enable it. The primary site is loaded whenever Craft can’t match the URL to a known site.
+7. Check the box for **This site has its own base URL** and provide a **Base URL**.
 8. Save the new site.
 
-### Step 2: Create Template Directories
+::: warning
+Using `@web` in a site’s **Base URL** can cause unpredictable routing behavior and malformed URLs to non-default sites, or to the control panel—especially when those URLs don't share a domain.
 
-Create the template directories and templates for your new site.
+Instead, set each site’s **Base URL** to a unique environment variable (like `BASE_URL_PRIMARY` and `BASE_URL_LABS`), or to an explicit value.
+:::
 
-We recommend you have template directories named after the sites handles (e.g. `templates/default` and `templates/beta`). You store the site-specific templates in each site template directory.
+### Step 2 (Optional): Create Template Directories
 
-### Step 3: Update the Sections
+If you’d like to experiment with per-site [template overrides](#site-templates), create a new subdirectory within your `templates/` folder with the handle of your new site.
+
+### Step 3: Update Sections
 
 1. Go into each Section that you want to be available in the new site and enable the site using the Site Settings table.
-2. Define the Entry URI Format, Template, and Status for the new site in each Section.
-3. Choose whether you want to propagate the entries across all sites. If checked, entries in the section will be saved for all of the sites the section is enabled for. If unchecked, entries will only be saved in the site they were originally created in.
+2. Set the **Entry URI Format**, **Template**, and **Status** for the new site in each Section.
+3. Choose a [**Propagation Method**](#propagating-entries) that suits the section.
 
 ### Step 4: Define Translation Method of Fields
 
 By default, custom fields are set to store the same value across all sites. If any fields should have unique values across your sites, then you will need to edit their [Translation Method](fields.md#translation-methods) settings.
 
+::: tip
+Multi-instance fields share a **Translation Method** across all instances. If you need different rules for each instance, it may be better suited as two separate fields.
+:::
+
 ### Step 5: Test Your Settings
 
-Using new or existing entries, test that the Section, Field, and Translation Method settings work as you expect.
+Using new or existing entries, verify that the section, field, and translation method settings work as you expect. View the entry in the front-end to ensure your URLs and templates are loading correctly, as well!
 
-### Step 6: Check Your Asset Volumes Settings
+### Step 6: Check Your Asset Settings
 
-If you have any local asset volumes, you will need to make sure those assets are available from each of your sites.
+If you have any _Local_ asset filesystems, you will need to make sure they (and the files in each volume that depends on them) are available from each of your sites. Relative paths (like `uploads/images/`) or root-relative paths (like `/uploads/images/`) may only work coincidentally. Filesystems’ **Base URL** setting should use a stable, absolute URL like `https://craftcms.com/` (or a special alias or environment variable).
 
-- The File System Path settings should be relative (`uploads/images/`).
-- The URL settings should be relative (`/images`)
+::: tip
+Review your translation method for asset titles and `alt` text to make sure they’re relevant to users and authors!
+:::
 
 ### Step 7: Configure Your Web Server and DNS
 
-1. Configure your web server so the domain (e.g. `beta.craftcms.com`) points at the `web` directory. Craft will automatically detect which site the browser is requesting.
+1. Configure your web server so the domain (e.g. `labs.craftcms.com`) points at the `web/` directory. Craft will automatically detect which site is being requested.
 2. Update your DNS records so the domain points at the web server.
-
-## Setting Up a Localized Site
-
-This guide will walk you through all of the steps that are typically involved in setting up a localized site using Craft’s multi-site feature and translation support.
-
-### Step 1: Defining Your Sites and Languages
-
-The first step to creating localized site is to decide the languages you need to support. After that, create a new Site in Craft for each supported language.
-
-### Step 2: Update Your Sections
-
-After creating a new site for a language, enable the new site in each Section. In **Settings** → **Sections**, go into each section settings you want included in the localized site and enable the site in the Site Settings. Fill out the Entry URI Format (for Channel and Structure sections) or URI (for Single sections) to reflect how you want the URIs structured for that site.
-
-### Step 3: Define Your Translatable Fields
-
-In **Settings** → **Fields**, choose the fields you want to have translatable. Under **Translation Method**, choose **Translate for each language**.
-
-Craft will allow you to update this field’s content in each entry on a per-language basis.
-
-### Step 4: Update Your Templates
-
-If you have any templates that you only want to serve from a specific site, you can create a new subfolder in your templates folder, named after your site’s handle, and place the templates in there.
-
-For example, if you wanted to give your German site its own homepage template, you might set your templates folder up like this:
-
-```treeview
-templates/
-├── index.twig (default homepage template)
-└── de/
-    └── index.twig (German homepage template)
-```
-
-Use `craft.app.language` to toggle specific parts of your templates, depending on the language:
-
-```twig
-{% if craft.app.language == 'de' %}
-  <p>I like bread and beer.</p>
-{% endif %}
-```
-
-You can also take advantage of Craft’s [static translation](#static-message-translations) support for strings throughout your templates.
-
-```twig
-{{ "Welcome!"|t }}
-```
-
-### Step 5: Give your authors access to the sites
-
-As soon as you add an additional site to your Craft installation, Craft will start checking for site permissions whenever users try to edit content. By default, no users or groups have access to any site, so you need to assign them.
-
-When you edit a user group or a user account, you will find a new Sites permissions section, which lists all of your sites. Assign them where appropriate.
-
 
 ## Static Message Translations
 
-Most websites and apps will have some UI messages that are hard-coded into the templates or PHP files. These are called “static messages”, because they aren’t being dynamically defined by content in the CMS.
+Most websites and apps will have some UI messages that are hard-coded into the templates or PHP files. These are called “static messages” in Craft, because they aren’t being written by editors in the CMS as content.
 
-If you’re building a multilingual site or app, then these messages will need to be translatable just like your CMS-driven content.
+If you’re building a multilingual site or app, then these messages are apt to need to be translated, just like your CMS-driven content.
 
 To do that, Craft employs Yii’s [Message Translations](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-i18n#message-translation) feature, and pre-defines special translation categories:
 
@@ -226,7 +211,7 @@ To do that, Craft employs Yii’s [Message Translations](https://www.yiiframewor
 
 ### Prep Your Messages
 
-The first step is to run all of your static messages through the translator. If you’re working on a template, use the [translate](reference/twig/filters.md#translate-or-t) filter (`|t`). If you’re working in PHP code, use [Craft::t()](yii2:yii\BaseYii::t()).
+The first step is to run all of your static messages through the translator. If you’re working on a template, use the [translate](../reference/twig/filters.md#translate-or-t) filter (`|t`). If you’re working in PHP code, use [Craft::t()](yii2:yii\BaseYii::t()).
 
 ::: code
 ```twig
@@ -262,7 +247,7 @@ my-project/
         └── site.php
 ```
 
-Now open `site.php` in a text editor, and have it return an array that maps the source messages to their translated messages.
+Now open `site.php` in a text editor, and have it return an array that maps the _source messages_ to their _translated messages_:
 
 ```php
 <?php
@@ -272,7 +257,7 @@ return [
 ];
 ```
 
-Now, when Craft is processing the message translation for a German site, “Contact us” will be replaced with  “Kontaktiere uns”.
+When Craft is processing the message translation for a German site, “Contact us” will be replaced with “Kontaktiere uns”.
 
 ::: tip
 Craft uses `|t('site')` when showing your custom field names in the control panel, so you can use `site.php` translations for control panel users, too!
@@ -300,7 +285,7 @@ To replace the placeholder values with dynamic values when translating the messa
 ```
 ```php
 echo Craft::t('site', 'Welcome back, {name}', [
-    'name' => Craft::$app->user->identity->friendlyName,
+    'name' => Craft::$app->getUser()->getIdentity()->friendlyName,
 ]);
 ```
 :::

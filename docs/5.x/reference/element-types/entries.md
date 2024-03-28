@@ -61,7 +61,7 @@ The available translation methods are covered in the [custom fields documentatio
 
 ## Sections
 
-Sections organize and expose entry types for content authors. In each Section you can define the following:
+Sections organize and expose entry types for content authors. In each section you can define the following:
 
 - Whether entries in the section have URLs;
 - What the entries’ URLs should look like;
@@ -69,10 +69,10 @@ Sections organize and expose entry types for content authors. In each Section yo
 - What [entry types](#entry-types) are available in the section;
 - How many authors can be associated with each entry;
 
-If your project has multiple [sites](../../system/sites.md), your Section can define these additional settings:
+If your project has multiple [sites](../../system/sites.md), your section can define these additional settings:
 
 - Which sites entries in the section should target;
-- Which sites are enabled by default when creating new entries;
+- Which sites entries are created in, by default;
 
 To create a new section, go to **Settings** → **Sections** and choose **New Section**.
 
