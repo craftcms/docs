@@ -8,7 +8,6 @@
 
 | Param                                       | Description
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [ElementCollection](#elementcollection)     | <Category> collect($db = null)
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [ancestorDist](#ancestordist)               | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                   | Narrows the query results to only categories that are ancestors of another category in its structure.
@@ -66,15 +65,6 @@
 
 
 <!-- textlint-enable -->
-
-
-#### `ElementCollection`
-
-<Category> collect($db = null)
-
-
-
-
 
 
 #### `afterPopulate`

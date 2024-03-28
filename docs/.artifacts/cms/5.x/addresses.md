@@ -8,7 +8,6 @@
 
 | Param                                       | Description
 | ------------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [ElementCollection](#elementcollection)     | <Address> collect($db = null)
 | [addressLine1](#addressline1)               | Narrows the query results based on the first address line the addresses have.
 | [addressLine2](#addressline2)               | Narrows the query results based on the second address line the addresses have.
 | [addressLine3](#addressline3)               | Narrows the query results based on the third address line the addresses have.
@@ -67,15 +66,6 @@
 
 
 <!-- textlint-enable -->
-
-
-#### `ElementCollection`
-
-<Address> collect($db = null)
-
-
-
-
 
 
 #### `addressLine1`

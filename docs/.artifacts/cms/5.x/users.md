@@ -8,7 +8,6 @@
 
 | Param                                       | Description
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [ElementCollection](#elementcollection)     | <User> collect($db = null)
 | [admin](#admin)                             | Narrows the query results to only users that have admin accounts.
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only users that are related to certain other elements.
@@ -61,15 +60,6 @@
 
 
 <!-- textlint-enable -->
-
-
-#### `ElementCollection`
-
-<User> collect($db = null)
-
-
-
-
 
 
 #### `admin`

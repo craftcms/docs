@@ -8,7 +8,6 @@
 
 | Param                                       | Description
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [ElementCollection](#elementcollection)     | <Entry> collect($db = null)
 | [after](#after)                             | Narrows the query results to only entries that were posted on or after a certain date.
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the entries’ owners are drafts.
@@ -94,15 +93,6 @@
 
 
 <!-- textlint-enable -->
-
-
-#### `ElementCollection`
-
-<Entry> collect($db = null)
-
-
-
-
 
 
 #### `after`
