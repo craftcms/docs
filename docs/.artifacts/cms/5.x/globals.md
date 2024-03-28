@@ -8,7 +8,6 @@
 
 | Param                                       | Description
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [ElementCollection](#elementcollection)     | <GlobalSet> collect($db = null)
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only global sets that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft5:craft\elements\GlobalSet) objects.
@@ -49,15 +48,6 @@
 
 
 <!-- textlint-enable -->
-
-
-#### `ElementCollection`
-
-<GlobalSet> collect($db = null)
-
-
-
-
 
 
 #### `afterPopulate`

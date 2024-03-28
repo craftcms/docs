@@ -8,7 +8,6 @@
 
 | Param                                       | Description
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [ElementCollection](#elementcollection)     | <Tag> collect($db = null)
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only tags that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching tags as arrays of data, rather than [Tag](craft5:craft\elements\Tag) objects.
@@ -52,15 +51,6 @@
 
 
 <!-- textlint-enable -->
-
-
-#### `ElementCollection`
-
-<Tag> collect($db = null)
-
-
-
-
 
 
 #### `afterPopulate`

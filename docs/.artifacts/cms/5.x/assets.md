@@ -8,7 +8,6 @@
 
 | Param                                       | Description
 | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [ElementCollection](#elementcollection)     | <Asset> collect($db = null)
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only assets that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching assets as arrays of data, rather than [Asset](craft5:craft\elements\Asset) objects.
@@ -64,15 +63,6 @@
 
 
 <!-- textlint-enable -->
-
-
-#### `ElementCollection`
-
-<Asset> collect($db = null)
-
-
-
-
 
 
 #### `afterPopulate`
