@@ -243,7 +243,7 @@ We plan to introduce a console command to handle merging similar fields. There i
     ])
     .all() %}
 
-{% for article in article %}
+{% for article in articles %}
   {% set image = article.featureImage|first %}
   {% if image %}
     {{ image.getImg() }}
@@ -256,7 +256,7 @@ We plan to introduce a console command to handle merging similar fields. There i
     .section('blog')
     .all() %}
 
-{% for article in article %}
+{% for article in articles %}
   {% set image = article.featureImage.eagerly().one() %}
 
   {# Testing whether there was a result is still a good idea: #}
@@ -278,7 +278,7 @@ This feature does have _some_ limitations, though. While it will work for all el
     ])
     .all() %}
 
-{% for article in article %}
+{% for article in articles %}
   {# Lazily-eager-loaded relation: #}
   {% set image = article.featureImage.eagerly().one() %}
 
