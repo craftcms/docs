@@ -287,7 +287,7 @@ This feature does have _some_ limitations, though. While it will work for all el
   {% endif %}
 
   {# Explicitly eager-loaded element: #}
-  <span>{{ entry.author.fullName }}</span>
+  <span>{{ article.author.fullName }}</span>
 {% endfor %}
 ```
 
