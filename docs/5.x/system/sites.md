@@ -157,7 +157,7 @@ The first step is to create the new site in the **Settings** screen of your Craf
 8. Save the new site.
 
 ::: warning
-Using `@web` in a site’s **Base URL** can cause unpredictable routing behavior and malformed URLs to non-default sites, or to the control panel—especially when those URLs don't share a domain.
+Using `@web` in a site’s **Base URL** can cause unpredictable routing behavior and malformed URLs to non-default sites, or to the control panel—especially when those URLs don’t share a domain.
 
 Instead, set each site’s **Base URL** to a unique environment variable (like `BASE_URL_PRIMARY` and `BASE_URL_LABS`), or to an explicit value.
 :::
