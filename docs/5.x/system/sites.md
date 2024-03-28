@@ -14,8 +14,6 @@ Craft’s multi-site feature is for sites with the same publishing team. You man
 Craft’s multi-site feature is _not_ meant for managing multiple projects that have no relationship to one another. The Author experience is based on the assumption that some content is shared between them, and that users have some overlap in their capabilities or responsibilities.
 :::
 
-Craft has a soft cap on the number of sites, determined by the <config5:maxSites> setting. You can increase this at any time (it’s not a technical or license limitation), but we put it in place as a means of 
-
 ## Creating a Site
 
 The first site is created when you install Craft, using the **Site Name** provided via the [setup GUI](kb:first-time-setup) or [CLI](../reference/cli.md#setup). Additional sites are created via <Journey path="Settings, Sites" />.
@@ -288,6 +286,26 @@ echo Craft::t('site', 'Welcome back, {name}', [
     'name' => Craft::$app->getUser()->getIdentity()->friendlyName,
 ]);
 ```
+:::
+
+## Limitations
+
+Craft has a soft cap of 100 sites, determined by the `maxSites` property of the [Sites](craft5:craft\services\Sites) service. You can increase this at any time via your [application configuration](../configure.md#application-configuration) (it’s not a technical or license limitation), but we put it in place as a means of reminding users that sites are not _infinitely_ scalable!
+
+To increase the sites ceiling, add this to your `config/app.php` file:
+
+```php
+return [
+    'components' => [
+        'sites' => [
+            'maxSites' => 5000,
+        ],
+    ],
+];
+```
+
+::: warning
+While it’s _possible_ to run 5000 sites on a single Craft installation, we strongly discourage it. We have found that projects with more than a hundred sites are at significantly higher risk of author experience and performance issues, and are more difficult to maintain and troubleshoot.
 :::
 
 ## Further Reading
