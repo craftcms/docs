@@ -146,7 +146,7 @@ Also note that we’re explicitly ordering by `id`—this can help avoid skipped
 Batched jobs can also define a default `$batchSize` that is appropriate for the workload. The batch size is not a guaranteed value, but a target when Craft spawns the next job—it will keep track of memory usage and _may_ stop short, scheduling the next batch to resume where it left off.
 
 ::: warning
-Batched jobs **must** be pushed using <craft4:craft\helpers\Queue::push()>, or `delay` and `ttr` settings may be lost for subsequent batches.
+Batched jobs **must** be pushed using <craft4:craft\helpers\Queue::push()>, or `priority` and `ttr` settings may be lost for subsequent batches.
 :::
 
 ## Adding Your Job to the Queue
