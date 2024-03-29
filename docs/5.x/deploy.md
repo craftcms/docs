@@ -38,7 +38,7 @@ We’ll look at how these systems relate to a [typical deployment](#typical-proc
 In most cases, your live site’s content should be treated as authoritative: code and configuration flow up (deployment), and content flows back down (database backups).
 
 ::: tip
-Craft has a built-in backup tool, accessible from the **Utilities** screen of the control panel (for users with the correct permissions) or as a [console command](./console-commands.md#db-backup). There’s also a command for [restoring](./console-commands.md#db-restore) backups!
+Craft has a built-in backup tool, accessible from the **Utilities** screen of the control panel (for users with the correct permissions) or as a [console command](reference/cli.md#db-backup). There’s also a command for [restoring](reference/cli.md#db-restore) backups!
 :::
 
 It is not advisable to attempt merging database tables or otherwise combining local and live content—including completely squashing a live database with a development one. [Project Config](#system-updates--project-config) is Craft’s solution to diverging schema and content.
@@ -67,7 +67,7 @@ Check out our list of [hosting partners](https://craftcms.com/hosting), and the 
 ### Red Flags
 
 - “Shared” hosting may be the most affordable option, but often pits you against other tenants for resources on the same machine.
-- Lack of SSH access (i.e. FTP-only hosts) means you will be unable to run [console commands](./console-commands.md), and significantly limits your [deployment](#deployment) options.
+- Lack of SSH access (i.e. FTP-only hosts) means you will be unable to run [console commands](reference/cli.md), and significantly limits your [deployment](#deployment) options.
 - While convenient, the presence of cPanel is often a sign that the host is re-selling resources, without control over the actual hardware.
 
 </column>
@@ -140,7 +140,7 @@ Compiling your application may happen any number of places: locally; directly on
 This phase is only concerned with replacing the running website with the new build. In some cases, the _build_ and _release_ phases may partially or completely overlap; in others, a release could involve rerouting traffic to an entirely new container!
 
 ::: tip
-This is also a great time to [clear caches](./console-commands.md#clear-caches)—cached data and templates may be incompatible with the new build.
+This is also a great time to [clear caches](reference/cli.md#clear-caches)—cached data and templates may be incompatible with the new build.
 :::
 
 #### Migrate

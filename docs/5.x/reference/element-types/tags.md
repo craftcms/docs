@@ -20,7 +20,7 @@ With the release of Craft 4.4, we began consolidating features of [other element
 A comparable [tags field](tags-fields.md) UI has not yet been introduced for entries. If you or your clients value this authoring experience, it is safe to continue using tags!
 :::
 
-As part of that process, we introduced a [console command](console-commands.md#entrify-categories) that can automate the conversion of tags to [channel sections](entries.md#channels):
+As part of that process, we introduced a [console command](../cli.md#entrify-categories) that can automate the conversion of tags to [channel sections](entries.md#channels):
 
 ```bash
 php craft entrify/tags myTagGroupHandle

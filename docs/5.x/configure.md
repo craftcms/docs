@@ -173,7 +173,7 @@ Refer to a config property’s documentation for a full list of its supported ty
 
 Config files using the traditional map style can define configurations for each of your environments all in one place—called a “multi-environment config”. 
 
-To establish that your config file should be treated as a multi-environment config, it must have a `*` key which defines the base config that should be applied to each of your environments, followed by additional keys which will be matched against the [`CRAFT_ENVIRONMENT`](#craft-environment) environment variable or PHP constant.
+To establish that your config file should be treated as a multi-environment config, it must have a `*` key which defines the base config that should be applied to each of your environments, followed by additional keys which will be matched against the [`CRAFT_ENVIRONMENT`](reference/config/bootstrap.md#craft-environment) environment variable or PHP constant.
 
 When determining the exact configuration that should be used for a request, the base config and environment-specific config arrays will be merged together. If any config settings are defined by both arrays, the environment-specific config will take precedence.
 
@@ -225,7 +225,7 @@ Do not combine fluent and multi-environment config in the same file. Merging flu
 
 ### Aliases
 
-Some settings and functions in Craft support [Yii aliases](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases), which are most often used as placeholders for file system paths and URLs.
+Some settings and functions in Craft support [Yii aliases](guide:concept-aliases), which are most often used as placeholders for file system paths and URLs.
 
 Out of the box, Craft provides these aliases—but you can override them or provide new ones with the <config5:aliases> config setting:
 

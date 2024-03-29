@@ -37,7 +37,7 @@ Plugins can take advantage of the queue by providing custom [job types](extend/q
 
 New jobs enter the queue in a **waiting** state. Once a runner picks up the job, it will be marked as **reserved** and Craft will attempt to execute it. Depending on the type of job, it may be allowed a certain number of “attempts” (temporary failures) or an overall “TTR” (time to reserve). If a job exhausts its attempts or runs out of time, it will be marked as **failed**.
 
-Failed jobs can be retried from the control panel, or with the [CLI](console-commands.md#queue-release). While additional _attempts_ are made automatically after a failure, _retries_ must be triggered manually.
+Failed jobs can be retried from the control panel, or with the [CLI](../reference/cli.md#queue-release). While additional _attempts_ are made automatically after a failure, _retries_ must be triggered manually.
 
 In addition to a status, jobs also have **description** and a **progress** value, both of which may be updated throughout its life. Jobs that handle large datasets typically report progress after each item processed (like when resaving elements), or are sliced into smaller batches.
 
@@ -67,7 +67,7 @@ All Craft features will work as expected with the default queue configuration.
 The following options are configured outside of Craft, and are only recommended for users with some unix systems administration experience. Check with your host to see if they offer native tools for managing services and CRON tasks.
 :::
 
-Projects that rely on the queue for time-sensitive or critical features (like sending [order status emails](../commerce/4.x/emails.md) in Commerce) can take advantage of Craft’s [CLI](console-commands.md#queue) for more flexibility over when and where the queue is run:
+Projects that rely on the queue for time-sensitive or critical features (like sending [order status emails](../commerce/4.x/emails.md) in Commerce) can take advantage of Craft’s [CLI](../reference/cli.md#queue) for more flexibility over when and where the queue is run:
 
 ```bash
 php craft queue/run

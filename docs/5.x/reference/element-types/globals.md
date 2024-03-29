@@ -24,7 +24,7 @@ Unlike [entries](entries.md#entries), global sets don’t have the Live Preview 
 
 With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
 
-As part of that process, we introduced a [console command](console-commands.md#entrify-global-set) that can automate the conversion of global sets to entries:
+As part of that process, we introduced a [console command](../cli.md#entrify-global-set) that can automate the conversion of global sets to entries:
 
 ```bash
 php craft entrify/global-set myGlobalSetHandle

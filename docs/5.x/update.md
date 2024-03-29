@@ -26,7 +26,7 @@ After Craft successfully installs updates, it will run any new migrations.
 
 ### Craft CLI
 
-The [`update` console command](console-commands.md#update) can be used to update Craft and plugins.
+The [`update` console command](reference/cli.md#update) can be used to update Craft and plugins.
 
 To see available updates, go to your Craft project in your terminal and run this command:
 

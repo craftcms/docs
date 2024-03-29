@@ -70,8 +70,8 @@ You’re welcome to explore things at your own pace—but here are some great st
 - Get familiar with the [directory structure](./directory-structure.md) that was created during installation;
 - Review [configuration](./config/README.md) methods and options;
 - Explore Craft’s main content tools: [elements](./elements.md) and [custom fields](./fields.md);
-- Run a [console command](./console-commands.html) using `ddev craft ...` to explore the CLI;
-- Discover [plugins](./plugins.md) to add features or integrate with other services;
+- Run a [console command](reference/cli.md) using `ddev craft ...` to explore the CLI;
+- Discover [plugins](system/plugins.md) to add features or integrate with other services;
 - Find help and inspiration within our vibrant [community](https://craftcms.com/community)!
 
 Done for the day? [`ddev stop`](https://ddev.readthedocs.io/en/stable/users/basics/commands/#stop) will spin down any containers for the project and free up system resources. [`ddev start`](https://ddev.readthedocs.io/en/stable/users/basics/commands/#start) boots everything back up, right where you left off.
@@ -83,7 +83,7 @@ We believe that starting with a local development environment (rather than direc
 <See path="deploy.md#workflow" label="Defining a Workflow" />
 
 ::: tip
-To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./console-commands.html#db-backup). Have them clone the project and run:
+To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](reference/cli.md#db-backup). Have them clone the project and run:
 
 ```bash
 ddev start

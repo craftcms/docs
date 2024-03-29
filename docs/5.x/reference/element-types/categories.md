@@ -18,7 +18,7 @@ Categories are one of Craft’s built-in [element types](elements.md), and are r
 
 With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
 
-As part of that process, we introduced a [console command](console-commands.md#entrify-categories) that can automate the conversion of categories to [structure sections](entries.md#structures):
+As part of that process, we introduced a [console command](../cli.md#entrify-categories) that can automate the conversion of categories to [structure sections](entries.md#structures):
 
 ```bash
 php craft entrify/categories myCategoryGroupHandle

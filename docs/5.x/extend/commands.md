@@ -1,6 +1,6 @@
 # Console Commands
 
-Plugins and modules can add additional [console commands](../console-commands.md)
+Plugins and modules can add additional [console commands](../reference/cli.md)
 to Craft, which will be available via the `craft` executable in the terminal.
 
 Console commands are implemented very similarly to [controllers](controllers.md), except that they should live within a `console/controllers/` folder within your plugin or module’s base source folder, and they should extend <craft5:craft\console\Controller> (rather than <craft5:craft\web\Controller>).

@@ -11,7 +11,7 @@ Dropdown fields have the following settings:
 ::: tip
 If you change the underlying value of an option that is used by existing entries, Craft will select the designated default option the next time one of those elements is edited.
 
-Consider using the appropriate [`resave/*` console commands](console-commands.md#resave) to migrate existing data to your new value:
+Consider using the appropriate [`resave/*` console commands](../cli.md#resave) to migrate existing data to your new value:
 
 ```bash
 php craft resave/entries --section mySection --set myDropdownField --to "={{ object.myDropdownField.value == 'oldValue' ? 'newValue' : object.myDropdownField.value }}"

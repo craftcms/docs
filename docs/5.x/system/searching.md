@@ -289,7 +289,7 @@ The [eligible properties](#searching-for-specific-element-attributes) differ for
 
 ## Rebuilding Your Search Indexes
 
-Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect your search indexes are out of date, you can have Craft rebuild them by bulk-resaving entries with the [`resave/entries`](console-commands.md#resave) command and including the `--update-search-index` flag:
+Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect your search indexes are out of date, you can have Craft rebuild them by bulk-resaving entries with the [`resave/entries`](../reference/cli.md#resave) command and including the `--update-search-index` flag:
 
 ```bash
 php craft resave/entries --update-search-index

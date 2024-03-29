@@ -76,7 +76,7 @@ You may also install plugins with [Composer](https://getcomposer.org), by copyin
     composer require craftcms/commerce -w
     ```
 
-2. Use [Craft’s CLI](console-commands.md#plugin-install) to install the plugin by its **handle**, and run any migrations:
+2. Use [Craft’s CLI](../reference/cli.md#plugin-install) to install the plugin by its **handle**, and run any migrations:
 
     ```bash
     php craft plugin/install commerce
