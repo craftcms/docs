@@ -17,7 +17,7 @@ Named transforms are created from the [control panel](./control-panel.md) by nav
     :link="false"
     caption="Creating a new predefined asset transform in the control panel."
     id="settings"
-    maxHeight="600">
+    :maxHeight="600">
 <img src="./images/assets-transforms.png" alt="Asset transform edit screen">
 </BrowserShot>
 

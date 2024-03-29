@@ -112,11 +112,10 @@ If you are unsure where an email is sent from (or how to edit it), check the sys
 
 Craft uses a single configuration for its [mailer component](craft5:craft\mail\Mailer), on the assumption that all email should flow through a single [transport](#transport-adapters).
 
-<Todo notes="Set a maxHeight once the tutorial work is merged." />
-
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/settings/email"
     :link="false"
+    :maxHeight="800"
     id="mail-settings"
     :poi="{
         systemAddress: [28, 14],
