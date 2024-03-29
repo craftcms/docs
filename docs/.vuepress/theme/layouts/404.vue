@@ -5,7 +5,9 @@
 
       <blockquote>{{ getMsg() }}</blockquote>
 
-      <RouterLink to="/">Take me home</RouterLink> or <a :href="getIssueUrl()">report a broken link</a>.
+      <ClientOnly>
+        <RouterLink to="/">Take me home</RouterLink> or <a :href="getIssueUrl()">report a broken link</a>.
+      </ClientOnly>
     </div>
   </div>
 </template>
