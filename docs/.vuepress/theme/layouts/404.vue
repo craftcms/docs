@@ -5,9 +5,7 @@
 
       <blockquote>{{ getMsg() }}</blockquote>
 
-      <ClientOnly>
-        <RouterLink to="/">Take me home</RouterLink> or <a :href="getIssueUrl()">report a broken link</a>.
-      </ClientOnly>
+      <RouterLink to="/">Take me home</RouterLink> or <a :href="getIssueUrl()">report a broken link</a>.
     </div>
   </div>
 </template>
@@ -26,7 +24,13 @@ export default {
       return msgs[Math.floor(Math.random() * msgs.length)];
     },
     getIssueUrl () {
-      return `https://github.com/craftcms/docs/issues/new?template=BROKEN_LINK.yml&url=${window.location.href}`
+      const issueBaseUrl = 'https://github.com/craftcms/docs/issues/new';
+      // Not running on the client?
+      if (typeof window === 'undefined') {
+        return `${issueBaseUrl}?template=BROKEN_LINK.yml`;
+      }
+
+      return `${issueBaseUrl}?template=BROKEN_LINK.yml&url=${window.location.href}`
     },
   },
 };
