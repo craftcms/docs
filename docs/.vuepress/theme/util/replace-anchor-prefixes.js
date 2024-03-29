@@ -96,7 +96,7 @@ function replacePrefix(link, ctx) {
   if (ref && prefixSettings.format === 'source') {
     if (!ref.subject) {
       // No subject? Jump directly to the file:
-      return `${prefixSettings.base}${prefixSettings.repo}blob/${prefixSettings.branch}/${pathifyClassName(ref.className, prefixSettings.ns, prefixSettings.sourceDir)}`;
+      return `${prefixSettings.base}${prefixSettings.repo}/blob/${prefixSettings.branch}/${pathifyClassName(ref.className, prefixSettings.ns, prefixSettings.sourceDir)}`;
     }
 
     // Ok, use the code navigation/search tool:
