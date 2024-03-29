@@ -186,13 +186,23 @@ This listener makes use of the fourth `$data` argument, which allows you to capt
 
 Handlers must be a valid [callable](https://www.php.net/manual/en/language.types.callable.php), and should accept a single argument that matches the expected event type. Our examples so far have used either the generic <yii2:yii\base\Event>, or a type hint of <craft5:craft\events\UserEvent>.
 
-In addition to closures, As of PHP 8.1, you may also use the native callable syntax. Our previous “welcome email” example would end up looking something like this:
+Our previous “[welcome email](#class-level-events)” example could be rewritten to use an external method, like this:
 
 ```php
 Event::on(
     Users::class,
     Users::EVENT_AFTER_ACTIVATE_USER,
     [MyService::class, 'handleUserActivation']
+);
+```
+
+In addition to closures and callable expressions, you may also use the native [callable syntax](https://www.php.net/manual/en/functions.first_class_callable_syntax.php):
+
+```php{4}
+Event::on(
+    Users::class,
+    Users::EVENT_AFTER_ACTIVATE_USER,
+    MyPlugin::getInstance()->getMyService()->someMethod(...),
 );
 ```
 
@@ -270,7 +280,30 @@ $e->rules[] = [
 Building your own [field type](field-types.md)? It should provide validation rules via `getElementValidationRules()`.
 :::
 
-This process is the same for any class that extends <craft5:craft\base\Model>—the `EVENT_DEFINE_RULES` event is available on any subclass!
+This process is the same for any class that extends <craft5:craft\base\Model>—the `EVENT_DEFINE_RULES` event is available on any subclass! To add validation rules to an entry, you would swap out `craft\elements\User` for `craft\elements\Entry`:
+
+```php
+use yii\base\Event;
+use craft\elements\Entry;
+use craft\events\DefineRulesEvent;
+
+Event::on(
+    Entry::class,
+    Entry::EVENT_DEFINE_RULES,
+    function(DefineRulesEvent $e) {
+        // Disallow strings of digits that look like years:
+        $e->rules[] = [
+            ['slug'],
+            'match',
+            'pattern' => '/[0-9]{4}/',
+            'not' => true,
+            'message' => Craft::t('my-plugin', 'Slugs should not contain year-like values.'),
+        ];
+    }
+);
+```
+
+Custom fields on entries can be validated the same way, by prefixing the handle with `field:`.
 
 ### Saving Entries
 
