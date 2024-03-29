@@ -4,9 +4,14 @@ title: "[Broken Link]: "
 labels: ["content"]
 body:
   - type: input
+    id: url
     attributes:
       label: URL
       description: Location you attempted to access or where you expected a resource to be.
       placeholder: https://craftcms.com/docs/…
     validations:
       required: true
+  - type: textarea
+    attributes:
+      label: Additional Details
+      description: Anything else you want to add? Letting us know where you found the link would be helpful, as well! Keep in mind that we can't control third-party content—but we may be able to set up redirects to make sure community resources don’t result in dead-ends.

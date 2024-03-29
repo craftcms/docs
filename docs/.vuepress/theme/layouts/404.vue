@@ -24,7 +24,7 @@ export default {
       return msgs[Math.floor(Math.random() * msgs.length)];
     },
     getIssueUrl () {
-      return `https://github.com/craftcms/docs/issues/new/choose?template=BROKEN_LINK.yml&url=${window.location.href}`
+      return `https://github.com/craftcms/docs/issues/new?template=BROKEN_LINK.yml&url=${window.location.href}`
     },
   },
 };
