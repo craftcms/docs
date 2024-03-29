@@ -19,18 +19,19 @@ const msgs = [
 ];
 
 export default {
+  data: () => ({
+    currentUrl: null,
+  }),
+  mounted () {
+    // If we're running in the browser, assign the current URL:
+    this.currentUrl = window.location.href;
+  },
   methods: {
     getMsg () {
       return msgs[Math.floor(Math.random() * msgs.length)];
     },
     getIssueUrl () {
-      const issueBaseUrl = 'https://github.com/craftcms/docs/issues/new';
-      // Not running on the client?
-      if (typeof window === 'undefined') {
-        return `${issueBaseUrl}?template=BROKEN_LINK.yml`;
-      }
-
-      return `${issueBaseUrl}?template=BROKEN_LINK.yml&url=${window.location.href}`
+      return `https://github.com/craftcms/docs/issues/new?template=BROKEN_LINK.yml&url=${this.currentUrl}`
     },
   },
 };
