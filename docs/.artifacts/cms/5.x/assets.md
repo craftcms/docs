@@ -41,7 +41,7 @@
 | [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                     | Narrows the query results to only assets that are related to certain other elements.
 | [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
-| [savable](#savable)                         | Sets the [savable](https://docs.craftcms.com/api/v5/craft-elements-db-assetquery.html#savable) property.
+| [savable](#savable)                         | Sets the [savable](https://docs.craftcms.com/api/v5/craft-elements-db-assetquery.html#property-savable) property.
 | [search](#search)                           | Narrows the query results to only assets that match a search query.
 | [site](#site)                               | Determines which site(s) the assets should be queried in.
 | [siteId](#siteid)                           | Determines which site(s) the assets should be queried in, per the site’s ID.
@@ -875,7 +875,7 @@ If no partial template exists for an element, its string representation will be 
 
 #### `savable`
 
-Sets the [savable](https://docs.craftcms.com/api/v5/craft-elements-db-assetquery.html#savable) property.
+Sets the [savable](https://docs.craftcms.com/api/v5/craft-elements-db-assetquery.html#property-savable) property.
 
 
 

@@ -979,7 +979,7 @@ List of headers where proxies store the real client IP.
 
 See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) for more details.
 
-If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v5/craft-web-request.html#ipheaders) value will be used.
+If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v5/craft-web-request.html#property-ipheaders) value will be used.
 
 ::: code
 ```php Static Config
@@ -4568,7 +4568,7 @@ Whether Craft should cache GraphQL queries.
 If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is automatically invalidated any time
 an element is saved, the site structure is updated, or a GraphQL schema is saved.
 
-This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v5/craft-services-gql.html#event-before-execute-gql-query) event to provide its own
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v5/craft-services-gql.html#constant-event-before-execute-gql-query) event to provide its own
 caching logic and setting the `result` property.
 
 ::: code
