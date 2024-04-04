@@ -26,7 +26,7 @@ Rules can also be limited to a specific date range with its **Start Date** and *
 
 When a rule matches a purchasable, its **Action** is applied. An action takes the matched purchasable’s price or promotional price, performs the defined arithmetic, and places the result in the pricing catalog as the new price or promotional price.
 
-You can think of a pricing rule as having an independent _input_ and _output. The input can come from the purchasable’s price or promotional price, and the output can be directed to the purchasable’s price or promotional price.
+You can think of a pricing rule as having an independent _input_ and _output_. The input can come from the purchasable’s price or promotional price, and the output can be directed to the purchasable’s price or promotional price.
 
 The possible actions are:
 
