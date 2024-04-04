@@ -166,6 +166,20 @@ If some property of the asset (like its extension, or the user group its uploade
 
 Each template is passed the element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
 
+The `refHandle` includes `owner` and `field` properties. The `owner` property references the content that included the partial. The `field` property references the field included the partial.
+
+```twig
+<div>
+  <h1>{{ entry.title }}</h1>
+  <dl>
+    <dt>Owner</dt>
+    <dd>{{ entry.owner.title }}</dd>
+    <dt>Field</dt>
+    <dd>{{ entry.field.name }}</dd>
+  </dl>
+</div>
+```
+
 ::: tip
 You can also render lists of elements by calling the `render()` method on an [element query](../development/element-queries.md).
 :::
