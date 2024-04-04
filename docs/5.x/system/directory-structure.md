@@ -117,7 +117,7 @@ Depending on the age and structure of your Craft project (as well as the tools u
 
 ### `.ddev/`
 
-If you (or another maintainer) followed the [installation](./installation.md) instructions or [Getting Started Tutorial](/getting-started-tutorial/README.md), DDEV will have left a `.ddev/` directory in the root of your project. This is safe to keep in version control—DDEV may make changes to it from time to time, but a separate `.gitignore` file exists within it to ensure only necessary files are tracked.
+If you (or another maintainer) followed the [installation](../install.md) instructions or [Getting Started Tutorial](/getting-started-tutorial/README.md), DDEV will have left a `.ddev/` directory in the root of your project. This is safe to keep in version control—DDEV may make changes to it from time to time, but a separate `.gitignore` file exists within it to ensure only necessary files are tracked.
 
 ### `migrations/`
 

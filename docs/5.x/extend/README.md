@@ -140,7 +140,7 @@ Any time you’re working with PHP, [PhpStorm](https://www.jetbrains.com/phpstor
 
 #### DDEV
 
-[DDEV](https://ddev.readthedocs.io/en/stable/) is our recommended [local development tool](../installation.md). Everything you need to run Craft and build extensions is neatly packaged into a consistent, container-based environment.
+[DDEV](https://ddev.readthedocs.io/en/stable/) is our recommended [local development tool](../install.md). Everything you need to run Craft and build extensions is neatly packaged into a consistent, container-based environment.
 
 #### xdebug
 

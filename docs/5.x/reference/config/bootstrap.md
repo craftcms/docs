@@ -136,7 +136,7 @@ The path to the [vendor/](../../directory-structure.md#vendor) folder. (It is as
 
 ## `CRAFT_WEB_URL`
 
-Automatically sets the `@web` [alias](../../configure.md#aliases). Platforms (like [DDEV](installation.md)) can set this to ensure Craft is pre-configured with the correct public URL.
+Automatically sets the `@web` [alias](../../configure.md#aliases). Platforms (like [DDEV](../../install.md)) can set this to ensure Craft is pre-configured with the correct public URL.
 
 ## `CRAFT_WEB_ROOT`
 

@@ -18,7 +18,7 @@ You can learn all about it at [craftcms.com](https://craftcms.com).
 
 ## Getting Started
 
-Ready to try out the latest version of Craft? Spin up a [new project](installation.md) or [upgrade](upgrade.md) an existing one.
+Ready to try out the latest version of Craft? Spin up a [new project](install.md) or [upgrade](upgrade.md) an existing one.
 
 <Block label="Documentation Changes">
 

@@ -65,7 +65,7 @@ On the target machine or environment, _apply_ the pending changes in one of two 
 Craft will compare the `config/project/` folder with its already-loaded Project Config, and apply whatever changes it finds.
 
 ::: tip
-When [installing Craft](installation.md), any existing configuration in your `config/project/` directory will be applied automatically as long as its Craft and plugin versions match those being installed. This makes it possible to set up your own boilerplate projects!
+When [installing Craft](../install.md), any existing configuration in your `config/project/` directory will be applied automatically as long as its Craft and plugin versions match those being installed. This makes it possible to set up your own boilerplate projects!
 :::
 
 ## Secrets and the Environment

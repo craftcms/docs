@@ -49,8 +49,8 @@ Now when we try to access `http://my-project.tld/recipes/entry` Craft returns a 
 
 ## Template Localization
 
-If you’re running multiple sites with Craft, you can create site-specific subfolders in your `templates/` folder, which contain templates that will only be available to a specific site.
+If you’re running [multiple sites](../system/sites.md) with Craft, you can create site-specific subfolders in your `templates/` directory, with templates that will only be available to a specific site.
 
-For example, if you want to create a special template welcoming your German customers, but there’s no need for it on your English site, then you could save it in `templates/de/welcome.twig`. That template would be available from `http://example.de/welcome`.
+For example, if you want to create a special template welcoming your German customers (but there’s no need for it on your English site) then you could save it in `templates/de/welcome.twig`. That template would be available from `https://example.de/welcome`, assuming the German site’s base URL is `https://example.de` and its handle is `de`.
 
 Craft will look for localized templates _before_ it looks for templates in the normal location, so you can use them to override non-localized templates. See our [Localization Guide](../system/sites.md) for more details.

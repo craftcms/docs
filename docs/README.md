@@ -7,7 +7,7 @@ description: Official documentation for Craft CMS and Craft Commerce.
 
 # Documentation
 
-Welcome to the official Craft documentation hub! Here, you’ll find developer-centric information on implementing and extending [Craft CMS](/4.x/) and [Craft Commerce](/commerce/4.x/), as well as tools and tutorials to help you get started.
+Welcome to the official Craft documentation hub! Here, you’ll find developer-centric information on implementing and extending [Craft CMS](/5.x/) and [Craft Commerce](/commerce/4.x/), as well as tools and tutorials to help you get started.
 
 Our companion [Knowledge Base](https://craftcms.com/knowledge-base) is home to resources for all audiences, including common recipes, troubleshooting tips, and support articles.
 
