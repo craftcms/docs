@@ -24,7 +24,7 @@ return GeneralConfig::create()
 ```
 
 ::: tip
-There are a number of [ways to provide configuration](./README.md). This file uses the new “[fluent](./README.md#style-map-vs-fluent)” syntax, and contains references to [environment variables](./README.md#env) for settings that may change between environments.
+There are a number of [ways to provide configuration](../../configure.md). This file uses the new “[fluent](../../configure.md#style-map-vs-fluent)” syntax, and contains references to [environment variables](../../configure.md#env) for settings that may change between environments.
 :::
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
