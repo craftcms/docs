@@ -11,7 +11,7 @@ related:
 
 If you’ve gotten familiar with Craft’s [control panel](../system/control-panel.md), you might be wondering what kinds of things you can do from your site’s front-end. The answer is actually _quite a bit_!
 
-Any time you want to submit or get information to Craft, it’s part of the [request](#making-requests)-[response](#responses) lifecycle. This page covers the process of setting up HTML forms (and other types of requests like [Ajax](#ajax)!) to send and request data in a way that Craft understands.
+Any time you want to get information from (or send information _to_) Craft, it’s part of the [request](#making-requests)-[response](#responses) lifecycle. This page covers the process of setting up HTML forms (and other types of requests like [Ajax](#ajax)!) to send and receive data in a way that Craft understands.
 
 <See path="../reference/controller-actions.md" label="Controller Actions Reference" description="See a list of controller actions you can interact with via forms." />
 
@@ -418,7 +418,7 @@ In addition to the `redirect` property, the response object will include a `mess
 
 Failed responses are mostly handled via the <craft5:craft\web\Controller::asModelFailure()> or [asFailure()](craft5:craft\web\Controller::asFailure()) methods.
 
-<Todo note="Simplify action documentation, below" />
+<Todo notes="Simplify action documentation, below" />
 
 #### During a GET Request
 
