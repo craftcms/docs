@@ -177,7 +177,7 @@ URL rules that route to a template (`['template' => 'my/template/path']`) will p
 
 ### Accessing Named Parameters in your Controllers
 
-Named route parameters are automatically passed to matching [controller](./extend/controllers.md) action arguments.
+Named route parameters are automatically passed to matching controller action arguments.
 
 For example, this URL rule…
 
@@ -185,7 +185,7 @@ For example, this URL rule…
 'comment/<postId:\d+>' => 'my-module/blog/comment',
 ```
 
-…would match the numeric ID in the route to the `$id` argument of this custom controller action:
+…would match the numeric ID in the route to the `$id` argument of this [custom controller](../extend/controllers.md) action:
 
 ```php
 namespace modules\controllers;
