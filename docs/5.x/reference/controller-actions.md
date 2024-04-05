@@ -14,7 +14,7 @@ related:
 
 Controllers are Craft’s way of talking to the outside world. Pretty much everything you do with Craft is part of a request that involves a [controller action](guide:structure-controllers)—from updating settings to rendering an entry.
 
-Most controllers and actions are carefully locked down with [permissions](../../system/user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../../system/user-management.md#public-registration) or [cart management](/commerce/4.x/orders-carts.md).
+Most controllers and actions are carefully locked down with [permissions](../../system/user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../../system/user-management.md#public-registration) or [cart management](/commerce/5.x/system/orders-carts.md).
 
 The following list of controller actions is non-exhaustive, but covers common patterns like [logging in](#post-userslogin), [creating entries](#post-entriessave-entry), and [managing an address book](#post-userssave-address).
 
@@ -22,7 +22,7 @@ The following list of controller actions is non-exhaustive, but covers common pa
 
 ## Available Actions
 
-This is not a comprehensive list! We have selected a few actions to illustrate fundamentals that many projects can benefit from—and to get you prepared to explore the rest of Craft’s [HTTP API](https://github.com/craftcms/cms/tree/main/src/controllers).
+This is not a comprehensive list! We have selected a few actions to illustrate fundamentals that many projects can benefit from—and to get you prepared to explore the rest of Craft’s [HTTP API](craft5:craft\controllers\AddressesController).
 
 Action | Description
 ------ | -----------
