@@ -129,7 +129,7 @@ By default, none of your content is available outside of Craft via GraphQL. In o
 
 You’ll need to establish a route that provides a public endpoint for the GraphQL API.
 
-Create a [URL rule](routing.md#advanced-routing-with-url-rules) from `config/routes.php` that points to the `graphql/api` controller action. For example, the following URL rule would cause `/api` requests to route to the GraphQL API:
+Create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) from `config/routes.php` that points to the `graphql/api` controller action. For example, the following URL rule would cause `/api` requests to route to the GraphQL API:
 
 ```php
 return [
