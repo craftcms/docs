@@ -254,7 +254,7 @@ See [Controllers](./controllers.md#handling-requests) for more information on wr
 ## Exceptions
 
 - If an exception is likely to occur as a result of user error (and it may be displayed to them), use the <yii2:yii\base\UserException> class (or a subclass).
-- Only translate exception messages with <craft4:Craft::t()> if it’s a <yii2:yii\base\UserException>.
+- Only translate exception messages with <craft5:Craft::t()> if it’s a <yii2:yii\base\UserException>.
 
 ## DB Queries
 

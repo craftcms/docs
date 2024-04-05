@@ -47,4 +47,4 @@ The element type should return an instance of its custom condition class from a 
 
 ### Field Condition Rules
 
-[Field types](./field-types.md) can provide a rule type which implements [FieldConditionRuleInterface](craft4:\craft\fields\conditions\FieldConditionRuleInterface) and uses [FieldConditionRuleTrait](craft5:craft\fields\conditions\FieldConditionRuleTrait).
+[Field types](./field-types.md) can provide a rule type which implements [FieldConditionRuleInterface](craft5:\craft\fields\conditions\FieldConditionRuleInterface) and uses [FieldConditionRuleTrait](craft5:craft\fields\conditions\FieldConditionRuleTrait).
