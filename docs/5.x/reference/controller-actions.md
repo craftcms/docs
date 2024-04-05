@@ -39,7 +39,7 @@ Action | Description
 
 In each of the following examples, you’ll find a list of **Supported Params** (the values you can send as <badge vertical="baseline" type="verb">GET</badge> query params or in the <badge vertical="baseline" type="verb">POST</badge> body) and information about the possible **Response** conditions.
 
-**Supported Params** can be encoded in the query string, submitted with form inputs, or sent as properties in a [JSON payload](../../development/forms.md#ajax).
+**Supported Params** can be encoded in the query string, submitted with form inputs, or sent as properties in a [JSON payload](../development/forms.md#ajax).
 
 <a name="global-params" title="Parameters respected for all POST requests"></a>
 
@@ -76,7 +76,7 @@ Param | Description
 `entryVariable` | The [hashed](../twig/filters.md#hash) name of the variable that should reference the entry, if a validation error occurs. (Defaults to `entry`.)
 `expiryDate` | The expiry date for the entry. (Defaults to the current expiry date, or `null`.)
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
-`fields[...]` | [Custom field](../../development/forms.md#custom-fields) values.
+`fields[...]` | [Custom field](../development/forms.md#custom-fields) values.
 `parentId` | The ID of the parent entry, if it belongs to a structure section.
 `postDate` | The post date for the entry. (Defaults to the current post date, or the current time.)
 `provisional` | Updates the current user’s provisional draft (in the control panel, this correlates to an auto-save).
@@ -161,7 +161,7 @@ Param | Description
 `currentPassword` | The user’s current password, which is required if `email` or `newPassword` are sent.
 `email` | The user’s email address. (Only checked if registering a new user, updating the logged-in user, or the logged-in user is allowed to administrate users.)
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
-`fields[...]` | [Custom field](../../development/forms.md#custom-fields) values.
+`fields[...]` | [Custom field](../development/forms.md#custom-fields) values.
 `fullName` | The user’s full name. Preferred to discrete `firstName` and `lastName` params.
 `firstName` | The user’s first name. `fullName` is preferred.
 `lastName` | The user’s last name. `fullName` is preferred.
@@ -327,7 +327,7 @@ Param | Description
 `organization` | Additional line for an organization or business name.
 `organizationTaxId` | Tax/VAT ID.
 `latitude` and `longitude` | GPS coordinates for the address. Not automatically populated or validated.
-`fields[...]` | [Custom field](../../development/forms.md#custom-fields) values.
+`fields[...]` | [Custom field](../development/forms.md#custom-fields) values.
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
 
 ::: warning
@@ -374,7 +374,7 @@ State | `text/html` | `application/json`
 
 ### <badge vertical="baseline" type="verb">GET</badge> `users/session-info`
 
-Retrieves information about the current session. Data is returned as JSON, and is only intended for consumption via [Ajax](../../development/forms.md#ajax).
+Retrieves information about the current session. Data is returned as JSON, and is only intended for consumption via [Ajax](../development/forms.md#ajax).
 
 #### Response
 
@@ -408,7 +408,7 @@ State | Any
 
 ## Plugins + Custom Actions
 
-Many plugins expose functionality via their own controllers and actions. Their accepted parameters and response types are entirely up to the author, but the [fundamentals](../../development/forms.md#making-requests) will be the same. Consult the appropriate documentation for specifics!
+Many plugins expose functionality via their own controllers and actions. Their accepted parameters and response types are entirely up to the author, but the [fundamentals](../development/forms.md#making-requests) will be the same. Consult the appropriate documentation for specifics!
 
 Here are some examples in our own plugins:
 
@@ -418,7 +418,7 @@ Here are some examples in our own plugins:
 
 Custom modules can also provide actions via a [Controller](../extend/controllers.md).
 
-[success-after-post]: ../../development/forms.md#after-a-post-request
-[success-after-get]: ../../development/forms.md#after-a-get-request
-[failure-during-post]: ../../development/forms.md#during-a-post-request
-[failure-during-get]: ../../development/forms.md#during-a-get-request
+[success-after-post]: ../development/forms.md#after-a-post-request
+[success-after-get]: ../development/forms.md#after-a-get-request
+[failure-during-post]: ../development/forms.md#during-a-post-request
+[failure-during-get]: ../development/forms.md#during-a-get-request
