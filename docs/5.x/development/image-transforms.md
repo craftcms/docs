@@ -17,7 +17,7 @@ Named transforms are created from the [control panel](./control-panel.md) by nav
 <img src="../images/assets-transforms.png" alt="Asset transform edit screen">
 </BrowserShot>
 
-<Todo text="Add POI/waypoints to this screen" />
+<Todo notes="Add POI/waypoints to this screen" />
 
 Every transform has the following settings:
 

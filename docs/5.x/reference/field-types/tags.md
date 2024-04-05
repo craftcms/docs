@@ -166,7 +166,7 @@ $relatedTags = $entry->myFieldHandle
 :::
 
 ::: tip
-<Todo text="Extract this into a snippet." />
+<Todo notes="Extract this into a snippet." />
 
 In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
