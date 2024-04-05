@@ -7,9 +7,10 @@
  * - `yii2` and `yii1` for Yii docs
  * - `config` for Craft config settings
  * - `generic` for replacement of the supplied `base` only and no additional formatting
+ * - `source` for GitHub-hosted file references.
  */
 module.exports = {
-  'craft5': { base: 'https://github.com/', format: 'source', repo: 'craftcms/cms', branch: '5.x', sourceDir: 'src/', ns: 'craft' },
+  'craft5': { base: 'https://docs.craftcms.com/api/v5/', format: 'internal' },
   'craft4': { base: 'https://docs.craftcms.com/api/v4/', format: 'internal' },
   'craft3': { base: 'https://docs.craftcms.com/api/v3/', format: 'internal' },
   'craft2': { base: 'https://docs.craftcms.com/api/v2/', format: 'internal' },
@@ -27,5 +28,6 @@ module.exports = {
   'kb': { base: 'https://craftcms.com/knowledge-base/', format: 'generic' },
   'repo': { base: 'https://github.com/', format: 'generic' },
   'plugin': { base: 'https://plugins.craftcms.com/', format: 'generic', },
+  // This doesn't do anything, but I'd hoped we could implement a context-aware format:
   '@': { base: '/', format: 'set-local' },
 };
