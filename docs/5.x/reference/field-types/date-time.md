@@ -121,13 +121,13 @@ if ($entry->myFieldHandle) {
 
 Craft and Twig provide several Twig filters for manipulating and outputting dates, which you can use depending on your needs:
 
-- [date](reference/twig/filters.md#date)
-- [time](reference/twig/filters.md#time)
-- [datetime](reference/twig/filters.md#datetime)
-- [duration](reference/twig/filters.md#duration)
-- [timestamp](reference/twig/filters.md#timestamp)
-- [atom](reference/twig/filters.md#atom)
-- [rss](reference/twig/filters.md#rss)
+- [date](../twig/filters.md#date)
+- [time](../twig/filters.md#time)
+- [datetime](../twig/filters.md#datetime)
+- [duration](../twig/filters.md#duration)
+- [timestamp](../twig/filters.md#timestamp)
+- [atom](../twig/filters.md#atom)
+- [rss](../twig/filters.md#rss)
 - [date_modify](https://twig.symfony.com/doc/3.x/filters/date_modify.html)
 
 #### Timezones
