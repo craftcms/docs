@@ -89,7 +89,7 @@ Since
 
 The collation to use when creating tables.
 
-This is only used by MySQL. If null, the [charset’s](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#charset) default collation will be used.
+This is only used by MySQL. If null, the [charset’s](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#property-charset) default collation will be used.
 
 | Charset   | Default collation    |
 | --------- | -------------------- |

@@ -12,7 +12,7 @@ related:
 
 Craft can be configured to work in a way that makes sense for you, your team, and your infrastructure.
 
-Broadly, configuration refers to how Craft will behave in a particular environment. Most applications will only require [database connection information](./db.md) to work, but as you get familiar with more of Craft’s features, install plugins, or start using additional services, you may need to provide additional config.
+Broadly, configuration refers to how Craft will behave in a particular environment. Most applications will only require [database connection information](#database) to work, but as you get familiar with more of Craft’s features, install plugins, or start using additional services, you may need to provide additional config.
 
 We’ll start by looking at how Craft builds its config in a context-aware way, then get into some specific options. Keep in mind that—unlike most aspects of a Craft project—this will require some basic PHP knowledge.
 
