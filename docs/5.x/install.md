@@ -63,13 +63,13 @@ Congratulations! You now have a fully-functional Craft application installed and
 
 ## Next Steps
 
-Ready to dive in? Sign in to the [control panel](./control-panel.md) by clicking **Go to your control panel** <Poi label="1" target="welcome-screen" id="cp-link" /> from the welcome screen, or running `ddev launch admin`. The username and password you provided during [setup](kb:first-time-setup) were used to create the first admin user.
+Ready to dive in? Sign in to the [control panel](system/control-panel.md) by clicking **Go to your control panel** <Poi label="1" target="welcome-screen" id="cp-link" /> from the welcome screen, or running `ddev launch admin`. The username and password you provided during [setup](kb:first-time-setup) were used to create the first admin user.
 
 You’re welcome to explore things at your own pace—but here are some great starting points:
 
-- Get familiar with the [directory structure](./directory-structure.md) that was created during installation;
-- Review [configuration](./config/README.md) methods and options;
-- Explore Craft’s main content tools: [elements](./elements.md) and [custom fields](./fields.md);
+- Get familiar with the [directory structure](system/directory-structure.md) that was created during installation;
+- Review [configuration](configure.md) methods and options;
+- Explore Craft’s main content tools: [elements](system/elements.md) and [custom fields](system/fields.md);
 - Run a [console command](reference/cli.md) using `ddev craft ...` to explore the CLI;
 - Discover [plugins](system/plugins.md) to add features or integrate with other services;
 - Find help and inspiration within our vibrant [community](https://craftcms.com/community)!
