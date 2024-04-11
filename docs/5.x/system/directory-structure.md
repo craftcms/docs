@@ -89,7 +89,7 @@ Configuration
 
 This file tells Git which files it should exclude when committing changes. At minimum, it should contain entries for `.env` and Composer’s `vendor/` directory.
 
-Check out our [Hosting & Deployment](./deployment.md#be-aware-of-artifacts) article for a list of other things you’ll want to exclude.
+Check out our [Hosting & Deployment](../deploy.md#be-aware-of-artifacts) article for a list of other things you’ll want to exclude.
 
 ### `bootstrap.php`
 

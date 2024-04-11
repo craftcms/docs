@@ -17,7 +17,7 @@ If the answer to any of those is **yes** (now or in the foreseeable future), the
 Plugins do not need to track _everything_ in project config for it to be worthwhile managing one or two components this way. Incremental adoption is a totally valid and encouraged approach. You may even be able to implement project config in a minor release, with no disruption to your plugin’s service APIs. We do discourage opt-in/out support of project config (i.e. a plugin setting that enables or disables project config support for one or more of its features).
 
 ::: tip
-We also maintain some recommendations for effective use of project config in [teams and multi-environment systems](../deployment.md)—keep these in mind as you consider project config support.
+We also maintain some recommendations for effective use of project config in [teams and multi-environment systems](../deploy.md)—keep these in mind as you consider project config support.
 :::
 
 ## Project Config Theory

@@ -82,9 +82,9 @@ Keep in mind that manually altering constraints _can_ lead to an irreconcilable 
 
 ## Workflow
 
-Every time you [deploy](./deployment.md) your project, you should run `composer install` and `craft up` to bring that environment’s database into agreement with your packages and their expected schema version.
+Every time you [deploy](./deploy.md) your project, you should run `composer install` and `craft up` to bring that environment’s database into agreement with your packages and their expected schema version.
 
-The same applies when working with teammates! Any time you pull new code into a project, running `composer install` will guarantee you are working with the same set of packages as your collaborators. If you’re one for automation, you can even have Craft apply migrations and [project config](./projec-config.md) at the same time by adding a special hook to the `scripts` key in `composer.json`:
+The same applies when working with teammates! Any time you pull new code into a project, running `composer install` will guarantee you are working with the same set of packages as your collaborators. If you’re one for automation, you can even have Craft apply migrations and [project config](system/project-config.md) at the same time by adding a special hook to the `scripts` key in `composer.json`:
 
 ```json{9}
 {

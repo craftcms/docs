@@ -95,7 +95,7 @@ Navigate to `/about` (the _About_ section’s URI) in the front-end—you should
 </BrowserShot>
 
 ::: tip
-These big images really are a hassle! We’ll look at Craft’s built-in tools for transforming images in the [optimization](../more/optimization.md#asset-transforms) section.
+These big images really are a hassle! We’ll look at Craft’s built-in tools for transforming images in the [optimization](./optimization.md#asset-transforms) section.
 :::
 
 ## Global Features

@@ -25,7 +25,7 @@ A plugin is a software package that supplements or alters Craft’s internal fun
 Every plugin is a Composer package, meaning they must be “required” by a project’s `composer.json` file before being [installed](#installing-a-plugin). Only plugins required by a project will appear in the screen above—to find _new_ plugins, visit the [Plugin Store](#the-plugin-store)!
 
 ::: tip
-If you want to build your own plugin, check out [Extending Craft](extend/README.md).
+If you want to build your own plugin, check out [Extending Craft](../extend/README.md).
 :::
 
 ## The Plugin Store
@@ -33,7 +33,7 @@ If you want to build your own plugin, check out [Extending Craft](extend/README.
 Craft’s [control panel](./control-panel.md) features a [Plugin Store](https://plugins.craftcms.com) where you can discover hundreds of free and commercial plugins, install them with a single click, and purchase licenses.
 
 ::: tip
-If Craft is configured to [disallow admin changes](config5:allowAdminChanges) in the current environment, you won’t be able to install plugins. We recommend using a [local development environment](../install.md) to install and test plugins, then [deploy](deployment.md) them (and any associated [project config](project-config.md) changes) to your live site.
+If Craft is configured to [disallow admin changes](config5:allowAdminChanges) in the current environment, you won’t be able to install plugins. We recommend using a [local development environment](../install.md) to install and test plugins, then [deploy](../deploy.md) them (and any associated [project config](project-config.md) changes) to your live site.
 :::
 
 To access the Plugin Store from the control panel, click **Plugin Store** from the global navigation menu. From there, you can discover new plugins via categories and curated lists.

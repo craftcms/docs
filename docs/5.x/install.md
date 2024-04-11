@@ -1,6 +1,6 @@
 # Installation
 
-The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](deploy.md).
+The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](./deploy.md).
 
 This [quick-start](#quick-start) guide focuses solely on setting up a local Craft development environment. If you’re ready to launch, jump to the [hosting](#hosting) or [deployment](#deployment) section.
 
@@ -63,15 +63,15 @@ Congratulations! You now have a fully-functional Craft application installed and
 
 ## Next Steps
 
-Ready to dive in? Sign in to the [control panel](system/control-panel.md) by clicking **Go to your control panel** <Poi label="1" target="welcome-screen" id="cp-link" /> from the welcome screen, or running `ddev launch admin`. The username and password you provided during [setup](kb:first-time-setup) were used to create the first admin user.
+Ready to dive in? Sign in to the [control panel](./system/control-panel.md) by clicking **Go to your control panel** <Poi label="1" target="welcome-screen" id="cp-link" /> from the welcome screen, or running `ddev launch admin`. The username and password you provided during [setup](kb:first-time-setup) were used to create the first admin user.
 
 You’re welcome to explore things at your own pace—but here are some great starting points:
 
-- Get familiar with the [directory structure](system/directory-structure.md) that was created during installation;
+- Get familiar with the [directory structure](./system/directory-structure.md) that was created during installation;
 - Review [configuration](configure.md) methods and options;
-- Explore Craft’s main content tools: [elements](system/elements.md) and [custom fields](system/fields.md);
-- Run a [console command](reference/cli.md) using `ddev craft ...` to explore the CLI;
-- Discover [plugins](system/plugins.md) to add features or integrate with other services;
+- Explore Craft’s main content tools: [elements](./system/elements.md) and [custom fields](./system/fields.md);
+- Run a [console command](./reference/cli.md) using `ddev craft ...` to explore the CLI;
+- Discover [plugins](./system/plugins.md) to add features or integrate with other services;
 - Find help and inspiration within our vibrant [community](https://craftcms.com/community)!
 
 Done for the day? [`ddev stop`](https://ddev.readthedocs.io/en/stable/users/basics/commands/#stop) will spin down any containers for the project and free up system resources. [`ddev start`](https://ddev.readthedocs.io/en/stable/users/basics/commands/#start) boots everything back up, right where you left off.
@@ -83,7 +83,7 @@ We believe that starting with a local development environment (rather than direc
 <See path="deploy.md#workflow" label="Defining a Workflow" />
 
 ::: tip
-To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](reference/cli.md#db-backup). Have them clone the project and run:
+To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./reference/cli.md#db-backup). Have them clone the project and run:
 
 ```bash
 ddev start
@@ -95,7 +95,7 @@ ddev import-db path/to/backup.sql
 
 ### Why DDEV?
 
-DDEV is our recommended development environment because it isolates software required to run Craft from your local machine—and from your other projects. Each of your sites can be spun up with its own database and PHP version, without the need to manage or switch between specific software packages
+DDEV is our recommended development environment because it isolates software required to run Craft from your local machine—and from your other projects. Each of your sites can be spun up with its own database and PHP version, without the need to manage or switch between specific software packages.
 
 The environment for each project is [defined as YAML files](https://ddev.readthedocs.io/en/stable/users/configuration/config/), meaning `ddev start` is usually the only thing required to start working on a project on a new machine—or with a collaborator.
 
