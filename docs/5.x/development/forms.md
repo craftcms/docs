@@ -40,7 +40,7 @@ Craft also supports routing to specific actions using a path (beginning with the
 
 ### HTTP Verbs
 
-Each action usually responds to one [HTTP method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). Using an unsupported method will throw a <yii2:yii\web\BadRequestHttpException>, and show your [error template](../routing.md#error-templates) with a 400 `statusCode`—or send a JSON response with an `error` key.
+Each action usually responds to one [HTTP method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). Using an unsupported method will throw a <yii2:yii\web\BadRequestHttpException>, and show your [error template](../system/routing.md#error-templates) with a 400 `statusCode`—or send a JSON response with an `error` key.
 
 #### `POST`
 
@@ -424,7 +424,7 @@ Failed responses are mostly handled via the <craft5:craft\web\Controller::asMode
 
 A GET request will typically only fail if an exception is thrown in the process of generating a response. The criteria for that failure depends on the action, but can also be circumstantial—like a lost database connection.
 
-If the request included an `Accept: application/json` header, Craft will send a `message` key in the JSON response, or a complete stack trace when <config5:devMode> is on. Otherwise, Craft displays a standard [error view](../routing.md#error-templates).
+If the request included an `Accept: application/json` header, Craft will send a `message` key in the JSON response, or a complete stack trace when <config5:devMode> is on. Otherwise, Craft displays a standard [error view](../system/routing.md#error-templates).
 
 #### During a POST Request
 

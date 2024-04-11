@@ -291,7 +291,7 @@ If you choose to set the HTTP status code that should be included with the respo
 
 #### Message
 
-The second parameter is passed to the [error template](../routing.md#error-templates) as the `message` variable:
+The second parameter is passed to the [error template](../../system/routing.md#error-templates) as the `message` variable:
 
 ```twig
 {% if not currentUser.isInGroup('powerUsers') ?? false %}
