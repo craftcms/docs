@@ -25,7 +25,7 @@ Craft controllers should extend <craft5:craft\web\Controller>, which offers a fe
 If you’re working on a _module_, its base class’s [$controllerNamespace](yii2:yii\base\Application::$controllerNamespace) property must set the right namespace for your controllers. Plugins handle this for you, automatically.
 
 ::: tip
-The `$controllerNamespace` property is ultimately evaluated as a path [alias](../config/README.md#aliases) but it _should not_ include a leading `@`. You may encounter errors if the first segment of the “namespace” is not a valid alias—for example, `mymodule\\controllers` will only work if the `@mymodule` alias is already defined, and points to your module’s directory.
+The `$controllerNamespace` property is ultimately evaluated as a path [alias](../configure.md#aliases) but it _should not_ include a leading `@`. You may encounter errors if the first segment of the “namespace” is not a valid alias—for example, `mymodule\\controllers` will only work if the `@mymodule` alias is already defined, and points to your module’s directory.
 :::
 
 ## Actions
@@ -65,14 +65,14 @@ class WidgetsController extends Controller
 There are several ways to access your controller action in a request.
 
 ::: tip
-Information on [using controller actions](../dev/controller-actions.md) lives in the main documentation. Everything that applies to built-in controllers holds true for those provided by a plugin.
+Information on [using controller actions](../development/forms.md) lives in the main documentation. Everything that applies to built-in controllers holds true for those provided by a plugin.
 :::
 
 ### Action Params
 
-Passing an [`action` param](../dev/controller-actions.md#making-requests) in a <badge vertical="baseline" type="verb">GET</badge> request’s query string or a <badge vertical="baseline" type="verb">POST</badge> request’s body lets you tell Craft exactly what controller and action you want to run.
+Passing an [`action` param](../development/forms.md#making-requests) in a <badge vertical="baseline" type="verb">GET</badge> request’s query string or a <badge vertical="baseline" type="verb">POST</badge> request’s body lets you tell Craft exactly what controller and action you want to run.
 
-The most common way to do this is with an HTML form, but it’s also possible via [Ajax](../dev/controller-actions.md#ajax):
+The most common way to do this is with an HTML form, but it’s also possible via [Ajax](../development/forms.md#ajax):
 
 ```twig{3}
 <form method="POST">
@@ -85,7 +85,7 @@ The most common way to do this is with an HTML form, but it’s also possible vi
 </form>
 ```
 
-<See path="../dev/controller-actions.md#form-helpers" label="Form Helpers" description="Read more about building front-end forms." />
+<See path="../development/forms.md#form-helpers" label="Form Helpers" description="Read more about building front-end forms." />
 
 ### Action Paths
 
@@ -138,7 +138,7 @@ The second rule here defines a named parameter (`id`), which will be mapped to t
 
 ### Site Routes
 
-Plugins should generally avoid setting site URL rules. Instead, document common actions that developers may need, and encourage use of the [`actionInput()`](../dev/functions.md#actioninput) Twig function or [`routes.php`](../routing.md#advanced-routing-with-url-rules) to route requests:
+Plugins should generally avoid setting site URL rules. Instead, document common actions that developers may need, and encourage use of the [`actionInput()`](../reference/twig/functions.md#actioninput) Twig function or [`routes.php`](../system/routing.md#advanced-routing-with-url-rules) to route requests:
 
 ```php
 return [
@@ -208,7 +208,7 @@ Perform request validation in your controller’s `beforeAction()` method to enf
 
 ### CSRF
 
-Craft requires a valid [CSRF token](../dev/controller-actions.md#csrf) for any <badge vertical="baseline" type="verb">POST</badge> requests. This can be disabled for an entire controller by overriding its `$enableCsrfValidation` property, or just for a specific action:
+Craft requires a valid [CSRF token](../development/forms.md#csrf) for any <badge vertical="baseline" type="verb">POST</badge> requests. This can be disabled for an entire controller by overriding its `$enableCsrfValidation` property, or just for a specific action:
 
 ```php
 public function beforeAction($actionId): bool

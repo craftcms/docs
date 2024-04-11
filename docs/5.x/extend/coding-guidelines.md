@@ -258,7 +258,7 @@ See [Controllers](./controllers.md#handling-requests) for more information on wr
 
 ## DB Queries
 
-- Always wrap a table name with `{{%` and `}}` (e.g. `{{%entries}}`) so it’s properly quoted and the [table prefix](../config/db.md#tableprefix) gets inserted.
+- Always wrap a table name with `{{%` and `}}` (e.g. `{{%entries}}`) so it’s properly quoted and the [table prefix](../reference/config/db.md#tableprefix) gets inserted.
 - Use the `['col1', 'col2']` syntax with `select()` and `groupBy()` instead of `'col1, col2'` even if you’re only referencing a single column.
 - Use the `['{{%tablename}}']` syntax with `from()` instead of `'{{%tablename}}'`.
 - Use the `['col1' => SORT_ASC, 'col2' => SORT_DESC]` syntax with `orderBy()` instead of `'col1, col2 desc'`.

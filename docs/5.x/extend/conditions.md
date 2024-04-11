@@ -7,7 +7,7 @@ The Craft CMS condition builder is a powerful tool that helps content editors an
 There are several places you can find the condition builder in action:
 
 - Conditional field layouts, which make it possible to display specific tabs or fields only when precise criteria are met;
-- Custom [sources](../elements.md#sources), which are optional element index sources customized to display whatever elements meet the criteria you set;
+- Custom [sources](../system/elements.md#sources), which are optional element index sources customized to display whatever elements meet the criteria you set;
 - Search field filters;
 - Craft Commerce’s promotion and shipping rules;
 
