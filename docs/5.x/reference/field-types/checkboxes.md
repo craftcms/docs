@@ -14,7 +14,7 @@ Checkboxes fields have the following settings:
 
 ### Querying Elements with Checkboxes Fields
 
-When [querying for elements](element-queries.md) that have a Checkboxes field, you can filter the results based on the Checkboxes field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Checkboxes field, you can filter the results based on the Checkboxes field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -115,7 +115,7 @@ if ($entry->myFieldHandle->contains('foo')) {
 
 ### Saving Checkboxes Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Checkboxes field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Checkboxes field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

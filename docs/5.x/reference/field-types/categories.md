@@ -10,7 +10,7 @@ related:
 
 <div class="version-warning">
 
-Categories are being phased out in favor of [Structure sections](./entries.md#structures). The corresponding [entries field](../field-types/entries.md) has a _maintain hierarchy_ setting that mimics categories fields.
+Categories are being phased out in favor of [Structure sections](../element-types/entries.md#structures). The corresponding [entries field](entries.md) has a _maintain hierarchy_ setting that mimics categories fields.
 
 Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
 
@@ -60,13 +60,13 @@ When you select a nested category, all the ancestors leading up to that category
 
 ### Inline Category Editing
 
-Double-click on a related category to edit it in a [slideout](./control-panel.md#slideouts).
+Double-click on a related category to edit it in a [slideout](../../system/control-panel.md#slideouts).
 
 ## Development
 
 ### Querying Elements with Categories Fields
 
-When [querying for elements](element-queries.md) that have a Categories field, you can filter the results based on the Categories field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Categories field, you can filter the results based on the Categories field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -109,7 +109,7 @@ $query = $entry->myFieldHandle;
 ```
 :::
 
-That will give you a [category query](categories.md#querying-categories), prepped to output all the related categories for the given field.
+That will give you a [category query](../element-types/categories.md#querying-categories), prepped to output all the related categories for the given field.
 
 To loop through all the related categories as a flat list, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
 
@@ -134,7 +134,7 @@ if (count($relatedCategories)) {
 ```
 :::
 
-Or you can show them as a hierarchical list with the [nav](dev/tags.md#nav) tag:
+Or you can show them as a hierarchical list with the [nav](../twig/tags.md#nav) tag:
 
 ```twig
 {% set relatedCategories = entry.myFieldHandle.all() %}
@@ -186,7 +186,7 @@ if ($entry->myFieldHandle->exists()) {
 ```
 :::
 
-You can set [parameters](categories.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](categories.md#leaves) param:
+You can set [parameters](../element-types/categories.md#parameters) on the category query as well. For example, to only fetch the “leaves” (categories without any children), set the [leaves](../element-types/categories.md#leaves) param:
 
 ::: code
 ```twig
@@ -204,12 +204,12 @@ $relatedAssets = $entry->myFieldHandle
 ::: tip
 <Todo notes="Extract this into a snippet." />
 
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
+In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](../twig/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
 
 ### Saving Categories Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Categories field, you will need to submit your field value as a list of category IDs.
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Categories field, you will need to submit your field value as a list of category IDs.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 
@@ -256,6 +256,6 @@ Note that it’s not possible to customize the order that categories will be rel
 
 ## See Also
 
-- [Category Queries](categories.md#querying-categories)
+- [Category Queries](../element-types/categories.md#querying-categories)
 - <craft5:craft\elements\Category>
-- [Relations](relations.md)
+- [Relations](../../system/relations.md)

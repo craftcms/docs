@@ -24,7 +24,7 @@ php craft resave/entries --section mySection --set myDropdownField --to "={{ obj
 
 ### Querying Elements with Dropdown Fields
 
-When [querying for elements](element-queries.md) that have a Dropdown field, you can filter the results based on the Dropdown field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Dropdown field, you can filter the results based on the Dropdown field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -95,7 +95,7 @@ To loop through all of the available options, iterate over the [options](craft5:
 
 ### Saving Dropdown Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Dropdown field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Dropdown field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

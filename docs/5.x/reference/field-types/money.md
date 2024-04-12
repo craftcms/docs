@@ -21,7 +21,7 @@ Values are always stored in the database as an integer, in the currency’s base
 
 ### Querying Elements with Money Fields
 
-When [querying for elements](element-queries.md) that have a Date field, you can filter the results based on the Money field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Date field, you can filter the results based on the Money field data using a query param named after your field’s handle.
 
 ::: tip
 When querying with a money field, provide amounts as you would naturally write them (`123.45`), _not_ in the currency’s minor unit (`12345`). Craft will automatically normalize the values when executing the query.
@@ -42,7 +42,7 @@ All values are assumed to be in the field’s currency.
 
 ### Working with Money Field Data
 
-If you have an element with a Money field in your template, you can output its value using the [money](reference/twig/filters.md#money) filter, or <craft5:craft\helpers\MoneyHelper::toString()>.
+If you have an element with a Money field in your template, you can output its value using the [money](../twig/filters.md#money) filter, or <craft5:craft\helpers\MoneyHelper::toString()>.
 
 ::: code
 ```twig

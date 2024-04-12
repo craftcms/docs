@@ -43,13 +43,13 @@ By default you won’t be able to create multiple tags that are too similar in n
 
 ### Inline Tag Editing
 
-When you double-click on a related tag, a [slideout](./control-panel.md#slideouts) will appear where you can edit the tag’s title and custom fields.
+When you double-click on a related tag, a [slideout](../../system/control-panel.md#slideouts) will appear where you can edit the tag’s title and custom fields.
 
 ## Development
 
 ### Querying Elements with Tags Fields
 
-When [querying for elements](element-queries.md) that have a Tags field, you can filter the results based on the Tags field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Tags field, you can filter the results based on the Tags field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -92,7 +92,7 @@ $query = $entry->myFieldHandle;
 ```
 :::
 
-That will give you a [tag query](tags.md#querying-tags), prepped to output all the related tags for the given field.
+That will give you a [tag query](../element-types/tags.md#querying-tags), prepped to output all the related tags for the given field.
 
 To loop through all the related tags, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
 
@@ -152,7 +152,7 @@ if ($entry->myFieldHandle->exists()) {
 ```
 :::
 
-You can set [parameters](tags.md#parameters) on the tag query as well.
+You can set [parameters](../element-types/tags.md#parameters) on the tag query as well.
 
 ::: code
 ```twig
@@ -170,12 +170,12 @@ $relatedTags = $entry->myFieldHandle
 ::: tip
 <Todo notes="Extract this into a snippet." />
 
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
+In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](../twig/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
 
 ### Saving Tags Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Tags field, you will need to submit your field value as a list of tag IDs, in the order you want them to be related.
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Tags field, you will need to submit your field value as a list of tag IDs, in the order you want them to be related.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 
@@ -216,6 +216,6 @@ You could then make the checkbox list sortable, so users have control over the o
 
 ## See Also
 
-- [Tag Queries](tags.md#querying-tags)
+- [Tag Queries](../element-types/tags.md#querying-tags)
 - <craft5:craft\elements\Tag>
-- [Relations](relations.md)
+- [Relations](../../system/relations.md)

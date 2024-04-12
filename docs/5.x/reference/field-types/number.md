@@ -21,7 +21,7 @@ Number fields have the following settings:
 
 ### Querying Elements with Number Fields
 
-When [querying for elements](element-queries.md) that have a Number field, you can filter the results based on the Number field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Number field, you can filter the results based on the Number field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -61,7 +61,7 @@ $value = $entry->myFieldHandle;
 
 That will give you the number value for the field, or `null` if there is no value.
 
-To format the number with proper thousands separators (e.g. `,`), use the [number](reference/twig/filters.md#number) filter:
+To format the number with proper thousands separators (e.g. `,`), use the [number](../twig/filters.md#number) filter:
 
 ::: code
 ```twig
@@ -86,7 +86,7 @@ If the number will always be an integer, pass `decimals=0` to format the number 
 
 ### Saving Number Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Number field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Number field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

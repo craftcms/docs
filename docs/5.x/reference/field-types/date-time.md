@@ -58,7 +58,7 @@ $entries = \craft\elements\Entry::find()
 :::
 
 ::: tip
-The [atom](reference/twig/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
+The [atom](../twig/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
 :::
 
 Craft 3.7 added support for using `now` in date comparison strings:
@@ -87,7 +87,7 @@ $futureEntries = \craft\elements\Entry::find()
 :::
 
 ::: tip
-Don’t forget to consider or disable [template caching](tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config5:cacheDuration).
+Don’t forget to consider or disable [template caching](../twig/tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config5:cacheDuration).
 :::
 
 ### Working with Date Field Data
@@ -136,7 +136,7 @@ Craft and Twig provide several Twig filters for manipulating and outputting date
 
 Craft treats all dates as though they are in the system’s timezone, except when one is set explicitly for a date field.
 
-The returned `DateTime` object’s timezone will be set, accordingly. If you wish to display the date in a _different_ timezone than it was defined, use the `timezone` argument supported by Craft’s [date](reference/twig/filters.md#date), [datetime](reference/twig/filters.md#datetime) and [time](reference/twig/filters.md#time) Twig filters.
+The returned `DateTime` object’s timezone will be set, accordingly. If you wish to display the date in a _different_ timezone than it was defined, use the `timezone` argument supported by Craft’s [date](../twig/filters.md#date), [datetime](../twig/filters.md#datetime) and [time](../twig/filters.md#time) Twig filters.
 
 ::: tip
 This flexibility is only a feature of date fields, and native element properties (like entries’ _post date_) are always stored in the system timezone.

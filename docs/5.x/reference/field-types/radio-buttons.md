@@ -109,7 +109,7 @@ foreach ($entry->myFieldHandle->options as $option) {
 
 ### Saving Radio Buttons Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Radio Buttons field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Radio Buttons field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

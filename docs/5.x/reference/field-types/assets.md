@@ -90,7 +90,7 @@ You can choose which custom fields should be available for assets in each volume
 
 ### Querying Elements with Assets Fields
 
-When [querying for elements](element-queries.md) that have an Assets field, you can filter the results based on the Assets field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have an Assets field, you can filter the results based on the Assets field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -133,7 +133,7 @@ $query = $entry->myFieldHandle;
 ```
 :::
 
-That will give you an [asset query](assets.md#querying-assets), prepped to output all the related assets for the given field.
+That will give you an [asset query](../element-types/assets.md#querying-assets), prepped to output all the related assets for the given field.
 
 To loop through all the related assets, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
 
@@ -195,7 +195,7 @@ if ($entry->myFieldHandle->exists()) {
 ```
 :::
 
-You can set [parameters](assets.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](assets.md#kind) param:
+You can set [parameters](../element-types/assets.md#parameters) on the asset query as well. For example, to ensure that only images are returned, you can set the [kind](../element-types/assets.md#kind) param:
 
 ::: code
 ```twig
@@ -213,12 +213,12 @@ $relatedAssets = $entry->myFieldHandle
 ::: tip
 <Todo notes="Extract this into a snippet." />
 
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
+In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](../twig/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
 
 ### Saving Assets Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain an Assets field, you will need to submit your field value as a list of asset IDs in the order you want them to be related.
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain an Assets field, you will need to submit your field value as a list of asset IDs in the order you want them to be related.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 
@@ -306,6 +306,6 @@ You can do this by passing each of the related asset IDs in the field data array
 
 ## See Also
 
-- [Asset Queries](assets.md#querying-assets)
+- [Asset Queries](../element-types/assets.md#querying-assets)
 - <craft5:craft\elements\Asset>
-- [Relations](relations.md)
+- [Relations](../../system/relations.md)

@@ -73,7 +73,7 @@ When you double-click a related entry, a slideout will appear where you can edit
 
 ### Querying Elements with Entries Fields
 
-When [querying for elements](element-queries.md) that have an Entries field, you can filter the results based on the Entries field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have an Entries field, you can filter the results based on the Entries field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -118,7 +118,7 @@ $query = $entry->myFieldHandle;
 ```
 :::
 
-That will give you an [entry query](entries.md#querying-entries), prepped to output all of the related entries for the given field.
+That will give you an [entry query](../element-types/entries.md#querying-entries), prepped to output all of the related entries for the given field.
 
 To loop through all the related entries, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
 
@@ -175,7 +175,7 @@ if ($entry->myFieldHandle->exists()) {
 ```
 :::
 
-You can set [parameters](entries.md#parameters) on the entry query as well. For example, to narrow the related entries to those in a `news` section, set the [section](entries.md#section) param:
+You can set [parameters](../element-types/entries.md#parameters) on the entry query as well. For example, to narrow the related entries to those in a `news` section, set the [section](../element-types/entries.md#section) param:
 
 ::: code
 ```twig
@@ -193,7 +193,7 @@ $relatedEntries = $entry->myFieldHandle
 ::: tip
 <Todo notes="Extract this into a snippet." />
 
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
+In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](../twig/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
 
 ### Saving Entries Fields
@@ -239,6 +239,6 @@ You could then make the checkbox list sortable, so users have control over the o
 
 ## See Also
 
-- [Entry Queries](entries.md#querying-entries)
+- [Entry Queries](../element-types/entries.md#querying-entries)
 - <craft5:craft\elements\Entry>
-- [Relations](relations.md)
+- [Relations](../../system/relations.md)

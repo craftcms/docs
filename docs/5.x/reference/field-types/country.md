@@ -26,7 +26,7 @@ Craft stores the field’s value as a capitalized, two-letter country code.
 {% endif %}
 ```
 
-To get more information about the country, use the [address repository](addresses.md#address-repository) available via the address service:
+To get more information about the country, use the [address repository](../element-types/addresses.md#address-repository) available via the address service:
 
 ```twig
 {# Load all country data: #}

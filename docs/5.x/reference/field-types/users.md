@@ -39,13 +39,13 @@ Clicking the “Add a user” button will bring up a modal window where you can 
 
 ### Inline User Editing
 
-When you double-click on a related user, a [slideout](./control-panel.md#slideouts) will appear where you can edit the user’s custom fields.
+When you double-click on a related user, a [slideout](../../system/control-panel.md#slideouts) will appear where you can edit the user’s custom fields.
 
 ## Development
 
 ### Querying Elements with Users Fields
 
-When [querying for elements](element-queries.md) that have a Users field, you can filter the results based on the Users field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Users field, you can filter the results based on the Users field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -88,7 +88,7 @@ $query = $entry->myFieldHandle;
 ```
 :::
 
-That will give you a [user query](users.md#querying-users), prepped to output all the related users for the given field.
+That will give you a [user query](../element-types/users.md#querying-users), prepped to output all the related users for the given field.
 
 To loop through all the related users, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
 
@@ -147,7 +147,7 @@ if ($entry->myFieldHandle->exists()) {
 ```
 :::
 
-You can set [parameters](users.md#parameters) on the user query as well. For example, to only fetch users in the `authors` group, set the [groupId](users.md#groupid) param:
+You can set [parameters](../element-types/users.md#parameters) on the user query as well. For example, to only fetch users in the `authors` group, set the [groupId](../element-types/users.md#groupid) param:
 
 ::: code
 ```twig
@@ -165,12 +165,12 @@ $relatedUsers = $entry->myFieldHandle
 ::: tip
 <Todo notes="Extract this into a snippet." />
 
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](./dev/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
+In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](../twig/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
 :::
 
 ### Saving Users Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Users field, you will need to submit your field value as a list of user IDs, in the order you want them to be related.
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Users field, you will need to submit your field value as a list of user IDs, in the order you want them to be related.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 
@@ -211,7 +211,7 @@ You could then make the checkbox list sortable, so users have control over the o
 
 ## See Also
 
-- [User Queries](users.md#querying-users)
-- [Addresses](addresses.md)
+- [User Queries](../element-types/users.md#querying-users)
+- [Addresses](../element-types/addresses.md)
 - <craft5:craft\elements\User>
-- [Relations](relations.md)
+- [Relations](../../system/relations.md)

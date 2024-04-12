@@ -8,7 +8,7 @@ Lightswitch fields give you a simple toggle input for times when all you need is
 
 ### Querying Elements with Lightswitch Fields
 
-When [querying for elements](element-queries.md) that have a Lightswitch field, you can filter the results based on the Lightswitch field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Lightswitch field, you can filter the results based on the Lightswitch field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -63,7 +63,7 @@ If the element doesn’t have an explicit Lightswitch field value yet, the field
 
 ### Saving Lightswitch Fields
 
-If you have an element form, such as an [entry form](https://craftcms.com/knowledge-base/entry-form), that needs to contain a Lightswitch field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Lightswitch field, you can use this template as a starting point:
 
 ```twig
 {{ hiddenInput('fields[myFieldHandle]', '') }}
