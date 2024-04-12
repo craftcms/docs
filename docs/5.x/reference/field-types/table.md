@@ -2,6 +2,8 @@
 
 Table fields give you a customizable table, where you can manage data or content in compact rows.
 
+<!-- more -->
+
 ## Settings
 
 Table fields have the following settings:

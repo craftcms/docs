@@ -9,6 +9,8 @@ description: Learn about Twig, Craft’s template engine.
 
 [Twig](https://twig.symfony.com/) is a fast and powerful templating system, commonly used to power front-end views in content management systems like Craft, Drupal, and WordPress (via the [Timber](https://www.upstatement.com/timber/) plugin).
 
+<!-- more -->
+
 Let’s take a look at how it works.
 
 ## Types of Twig code

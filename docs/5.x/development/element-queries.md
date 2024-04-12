@@ -2,6 +2,8 @@
 
 You can fetch [elements](../system/elements.md) (like entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
 
+<!-- more -->
+
 Suppose you’ve already created a [section](../reference/element-types/entries.md#sections) for news posts and configured a URL scheme. Craft automatically loads the corresponding entry element when its URL is requested, and exposes it to the template under an `entry` variable. This is convenient—but it’s rare that a page only refers to a _single_ piece of content! What if we want to show a list of other recent posts, in a sidebar? Element queries are Craft’s way of loading elements anywhere you need them.
 
 Element queries can be hyper-specific (like loading a single [global set](../reference/element-types/globals.md) by its handle) or relaxed (like a list of recently-updated [entries](../reference/element-types/entries.md)).

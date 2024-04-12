@@ -2,6 +2,8 @@
 
 Dropdown fields give you a dropdown input.
 
+<!-- more -->
+
 ## Settings
 
 Dropdown fields have the following settings:

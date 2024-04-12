@@ -4,6 +4,8 @@ URL fields give you a normal text input that can be configured for entering web 
 
 While the field doesn’t apply strict validation to what’s entered, it will normalize the saved value so it can be used as an `href` value on the front end.
 
+<!-- more -->
+
 ## Settings
 
 URL fields have the following settings:

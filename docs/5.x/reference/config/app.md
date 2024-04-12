@@ -8,6 +8,8 @@ related:
 
 Craft’s entire [application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) can be customized via `config/app.php`. Any items returned by an `app.php` config file will get merged into the main application configuration array.
 
+<!-- more -->
+
 You can further customize the application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
 
 ::: warning

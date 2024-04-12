@@ -12,6 +12,8 @@ related:
 
 You can create folksonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Tags. Tags are another type of [element](./elements.md).
 
+<!-- more -->
+
 <Block label="Migrating to Channels">
 
 With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).

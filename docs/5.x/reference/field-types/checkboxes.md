@@ -2,6 +2,8 @@
 
 Checkboxes fields give you a group of checkboxes.
 
+<!-- more -->
+
 ## Settings
 
 Checkboxes fields have the following settings:

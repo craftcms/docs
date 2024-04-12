@@ -12,6 +12,8 @@ related:
 
 Craft lets you manage media and document files (“assets”) just like entries and other content types. Assets can live anywhere—a directory on the web server, or a remote storage service like Amazon S3.
 
+<!-- more -->
+
 Assets are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Asset>.
 
 ## Volumes

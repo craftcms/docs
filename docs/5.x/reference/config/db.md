@@ -13,6 +13,8 @@ related:
 
 Craft can connect to MySQL and Postgres databases.
 
+<!-- more -->
+
 Database connection settings may be set from a `config/db.php` file, but because they’re often entirely environment-specific, Craft supports assigning [directly from environment variables](../config#environment-overrides). In [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file will need to define these options:
 
 ```bash

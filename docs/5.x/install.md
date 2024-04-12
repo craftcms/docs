@@ -2,6 +2,8 @@
 
 The prevalence of modern, mature PHP development tools and infrastructure makes Craft easy to install, run, [upgrade](./upgrade.md), and [deploy](./deploy.md).
 
+<!-- more -->
+
 This [quick-start](#quick-start) guide focuses solely on setting up a local Craft development environment. If you’re ready to launch, jump to the [hosting](#hosting) or [deployment](#deployment) section.
 
 ::: tip

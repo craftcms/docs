@@ -2,6 +2,8 @@
 
 Time fields provide a time picker input.
 
+<!-- more -->
+
 ## Settings
 
 You can customize the minute increment and optionally choose minimum and maximum times that should be allowed.

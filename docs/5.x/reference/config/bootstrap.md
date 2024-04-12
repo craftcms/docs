@@ -9,6 +9,8 @@ related:
 
 These variables can be set via your environment or as PHP constants in your [entry scripts](../../configure.md#entry-script). Read more about how to use bootstrap variables on the [configuration](../../configure.md#bootstrap-config) page.
 
+<!-- more -->
+
 <See path="../../configure" label="Configuring Craft" description="Learn about all the ways to customize Craft." />
 
 ## `CRAFT_BASE_PATH`

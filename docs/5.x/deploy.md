@@ -7,6 +7,8 @@ sidebarDepth: 2
 
 In more cases than not, our recommendations for hosting and deploying a Craft website also describe effective processes for collaborating with teammates. Let’s start by reviewing some general advice on managing a Craft project.
 
+<!-- more -->
+
 ## Workflow
 
 Our goal here is to define processes that reduce the likelihood of mistakes making it onto a live website, and to adopt systems that help recover [if/when they do](#common-pitfalls).

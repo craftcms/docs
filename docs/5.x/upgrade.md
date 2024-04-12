@@ -7,6 +7,8 @@ description: Take a peek at what’s new in Craft 5.
 
 The smoothest way to upgrade to Craft 5 is to start with a [fully-updated Craft 4 project](/4.x/updating.md).
 
+<!-- more -->
+
 ## Preparing for the Upgrade
 
 Let’s take a moment to audit and prepare your project.

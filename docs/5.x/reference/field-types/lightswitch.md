@@ -2,6 +2,8 @@
 
 Lightswitch fields give you a simple toggle input for times when all you need is a “Yes” or “No” answer.
 
+<!-- more -->
+
 ## Development
 
 ### Querying Elements with Lightswitch Fields

@@ -2,6 +2,8 @@
 
 Date fields give you a date picker, and optionally a time picker as well.
 
+<!-- more -->
+
 You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
 
 ## Settings

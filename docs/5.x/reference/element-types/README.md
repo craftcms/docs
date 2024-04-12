@@ -2,6 +2,8 @@
 
 Use the sidebar to find information about a specific element type, or learn about [elements](../../system/elements.md) in the **System** section.
 
+<!-- more -->
+
 <See path="../../system/elements.md" label="Introduction to Elements" description="Read about elements, Craft’s content containers." />
 
 <hr>

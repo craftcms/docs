@@ -12,6 +12,8 @@ related:
 
 Craft supports user-managed, hierarchical taxonomies for content via **categories**.
 
+<!-- more -->
+
 Categories are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Category>.
 
 <Block label="Migrating to Structures">

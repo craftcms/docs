@@ -2,6 +2,8 @@
 
 Icon fields allow the user to pick from a curated list of [FontAwesome](https://fontawesome.com) icons that fit the control panel’s style. The field’s value can be used to decorate related or nested element chips and cards by enabling **Use this field’s values for element thumbnails** or **Include this field in element cards** when adding it to a field layout.
 
+<!-- more -->
+
 ## Development
 
 The saved value is suitable for use in the front-end with your own FontAwesome library, or Craft’s bundled subset.

@@ -2,6 +2,8 @@
 
 Multi-select fields give you an input where multiple items may be selected.
 
+<!-- more -->
+
 ## Settings
 
 Multi-select fields have the following settings:

@@ -2,6 +2,8 @@
 
 Craft has a smart system based on [Composer](https://getcomposer.org) that helps you keep your site and plugins up-to-date.
 
+<!-- more -->
+
 ## Using the Control Panel
 
 When an update is available, users with the permission to update Craft will see a badge in the [control panel](./control-panel.md) next to **Utilities** in the global navigation:

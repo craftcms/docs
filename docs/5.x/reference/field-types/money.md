@@ -2,6 +2,8 @@
 
 Money fields give you a text input tailored for storing currency amounts.
 
+<!-- more -->
+
 ## Settings
 
 Money fields have the following settings:

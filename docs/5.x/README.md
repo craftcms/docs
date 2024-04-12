@@ -6,6 +6,8 @@ description: Official documentation for Craft CMS 5.
 
 Craft is a flexible, user-friendly CMS for creating custom digital experiences on the web—and beyond.
 
+<!-- more -->
+
 People who use Craft love its…
 
 - …intuitive, user-friendly [control panel](system/control-panel.md) for content creation and administrative tasks;

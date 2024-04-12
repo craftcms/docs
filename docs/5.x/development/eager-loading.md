@@ -11,6 +11,8 @@ related:
 
 When you are working with a list of elements and need to access their nested or related elements, _eager-loading_ can help optimize your [element queries](element-queries.md).
 
+<!-- more -->
+
 <Block label="The N+1 Problem">
 
 Let’s look at a [template](templates.md) that loops through a list of news posts (entries), and displays an image (asset) attached to each one.

@@ -2,6 +2,8 @@
 
 Radio Buttons fields give you a group of radio buttons.
 
+<!-- more -->
+
 ## Settings
 
 Radio Buttons fields have the following settings:

@@ -10,6 +10,8 @@ related:
 
 Matrix fields allow you to manage nested [entries](../element-types/entries.md) in a fluid way. Entries created within a Matrix field are “owned” by the element that field is attached to, and can represent anything from a slide in a gallery to an entire resources section, each record having its own URL.
 
+<!-- more -->
+
 ::: tip
 During the Craft 5 upgrade process, _Matrix blocks_ were converted to _entries_. [Fields](../../system/fields.md) that were previously owned by a particular “block type” are now managed in (and assigned from) a global pool. You are now able to design [entry types](../element-types/entries.md#entry-types) that exist as standalone content objects (in a section), _or_ as nested entries (in a Matrix field)!
 :::

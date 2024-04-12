@@ -7,6 +7,8 @@ containsGeneratedContent: yes
 
 Craft provides a [GraphQL](https://graphql.org) API you can use to work with your content in separate applications like single-page apps (SPAs) and static site generators.
 
+<!-- more -->
+
 ## Getting Started
 
 GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel gives you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).

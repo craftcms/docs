@@ -2,6 +2,8 @@
 
 In Craft, you define your site’s HTML output with templates.
 
+<!-- more -->
+
 Templates are files that live within your `templates/` folder. The structure of this directory is completely up to you—but keeping it organized and in agreement with [project config](../system/project-config.md) settings is essential.
 
 Craft uses [Twig](https://twig.symfony.com/) to parse your templates. Twig is elegant, powerful, and blazing fast. If you’re new to Twig, be sure to read the [Twig Fundamentals](twig.md) page to familiarize yourself with its syntax.

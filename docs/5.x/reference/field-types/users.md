@@ -11,7 +11,9 @@ related:
 
 # Users Fields
 
-Users fields type allow you relate [users](users.md) to other elements.
+Users fields type allow you relate [users](../element-types/users.md) to other elements.
+
+<!-- more -->
 
 ## Settings
 

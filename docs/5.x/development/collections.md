@@ -2,6 +2,8 @@
 
 [Collections](https://laravel.com/docs/10.x/collections) come from the [Laravel](https://laravel.com/) ecosystem, and provide a fluid way of working with array-like data.
 
+<!-- more -->
+
 You can create a `Collection` anywhere:
 
 ::: code

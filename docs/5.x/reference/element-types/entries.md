@@ -12,6 +12,8 @@ related:
 
 Entries are flexible content containers that—unlike [addresses](addresses.md), [assets](assets.md), or [categories](categories.md)—have no primary or implied function. They are entirely agnostic building blocks, used to model whatever kind of content or data your project needs.
 
+<!-- more -->
+
 All entries support some key features like **Authors**, a **Post Date** and **Expiration Date**, **Statuses**, and content defined via  [field layouts](../../system/fields.md). Additional features and properties are determined via [entry types](#entry-types), or the [sections](#sections) and [Matrix fields](../field-types/matrix.md) they’re used in.
 
 Authors can use the [drafts and revisions](#editing-entries) system to stage different versions of content and preview it before going live.

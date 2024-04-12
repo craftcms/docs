@@ -2,6 +2,8 @@
 
 Email fields give you a normal text input that requires a valid email address.
 
+<!-- more -->
+
 ## Settings
 
 Email fields have the following settings:

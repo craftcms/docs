@@ -9,6 +9,8 @@ related:
 
 This group of settings affects a wide variety of Craft’s features and behaviors. If you are uncertain about whether something is configurable or not, refer to the categories in the table of contents.
 
+<!-- more -->
+
 General settings go in `config/general.php`. The config file that ships with [new Craft projects](https://github.com/craftcms/craft/blob/master/config/general.php) looks like this:
 
 ```php

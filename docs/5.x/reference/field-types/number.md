@@ -2,6 +2,8 @@
 
 Number fields give you a text input that accepts a numeric value.
 
+<!-- more -->
+
 ## Settings
 
 Number fields have the following settings:

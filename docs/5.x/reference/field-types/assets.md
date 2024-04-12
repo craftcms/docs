@@ -8,7 +8,9 @@ related:
 
 # Assets Fields
 
-Assets fields allow you to upload and relate [assets](assets.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
+Assets fields allow you to upload and relate [assets](../element-types/assets.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
+
+<!-- more -->
 
 ## Settings
 

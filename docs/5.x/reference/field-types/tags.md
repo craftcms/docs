@@ -8,7 +8,9 @@ related:
 
 # Tags Fields
 
-Tags fields allow you relate [tags](tags.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
+Tags fields allow you relate [tags](../element-types/tags.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
+
+<!-- more -->
 
 ## Settings
 

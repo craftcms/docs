@@ -16,6 +16,8 @@ containsGeneratedContent: yes
 
 Addresses are a type of [element](../../system/elements.md) you’ll most commonly encounter in conjunction with [Users](./users.md). [Querying addresses](#querying-addresses) and working with their [field data](#fields-and-formatting) is nearly identical to the experience working with any other element type.
 
+<!-- more -->
+
 For sites supporting [public registration](../../system/user-management.md#public-registration) (like a storefront built on [Craft Commerce](/commerce/4.x/)) users can manage their own [address book](#managing-addresses).
 
 ::: tip

@@ -10,6 +10,8 @@ related:
 
 Globals store content that is available globally throughout your templates but is not tied to any one URL.
 
+<!-- more -->
+
 Craft organizes globals into global sets. Each global set has its own [field layout](fields.md#field-layouts) and can use any of the built-in or plugin-provided custom fields.
 
 To create a global get, go to **Settings** → **Globals**.

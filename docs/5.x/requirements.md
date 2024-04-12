@@ -6,6 +6,8 @@ description: Craft requires PHP 8.2 and MySQL 8.0.17 or Postgres 13.
 
 Craft is a PHP application that uses a relational database for content storage. It will run on most modern hosting environments, and can be configured to take advantage of all kinds of advanced infrastructure.
 
+<!-- more -->
+
 ::: tip
 You can use the official [server check](https://github.com/craftcms/server-check) script to quickly find out if your server meets Craft’s requirements.
 :::
