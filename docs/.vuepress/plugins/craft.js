@@ -26,14 +26,14 @@ module.exports = function(options, ctx) {
             });
 
             await fs.writeFile(
-                path.resolve(ctx.outDir, 'sitemap.js'),
+                path.resolve(ctx.outDir, 'sitemap.json'),
                 JSON.stringify(manifest, null, 4),
                 function(err) {
                     if (err) {
                         throw err;
                     }
 
-                    console.log("Wrote sitemap.js!");
+                    console.log("Wrote sitemap.json!");
                 },
             );
         }
