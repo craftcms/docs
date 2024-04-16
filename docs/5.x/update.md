@@ -19,7 +19,7 @@ This section displays updates for Craft CMS and installed plugins, where each ve
 There may be an **Update** button next to each item and an **Update All** at the top of the screen, depending on your the <config5:allowUpdates> and <config5:allowAdminChanges> settings for your current environment. You can use those to initiate updates directly from the control panel.
 
 ::: tip
-Craft’s [changelog](repo:craftcms/cms/blob/main/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check the changelog and [any upgrade guides](#upgrade-guides) before updating.
+Craft’s [changelog](repo:craftcms/cms/blob/5.x/CHANGELOG.md) will warn you of any critical changes at the top of the release notes. While there aren’t usually any warnings, it’s always a good idea to check the changelog and [any upgrade guides](#upgrade-guides) before updating.
 :::
 
 After Craft successfully installs updates, it will run any new migrations.

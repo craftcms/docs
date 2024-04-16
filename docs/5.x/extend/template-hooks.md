@@ -18,7 +18,7 @@ Craft::$app->getView()->hook('my-custom-hook-name', function(array &$context) {
     // Modify template *context*
     $context['foo'] = 'bar';
 
-    // Return template *output*
+    // Return *output*
     return '<p>Hey!</p>';
 });
 ```
@@ -37,12 +37,8 @@ Pay close attention to what you intend to modify; some hooks are provided for mo
 
 | Hook                         | Description & Template
 | ---------------------------- | -------------------------------------------------------------------
-| `cp.elements.element`        | Base “element” template, used for rendering relational tiles.<br><small>[_elements/element.twig](https://github.com/craftcms/cms/blob/main/src/templates/_elements/element.twig)</small>
-| `cp.layouts.base`            | Before `doctype` declaration in base template.<br><small>[_layouts/base.twig](https://github.com/craftcms/cms/blob/main/src/templates/_layouts/base.twig)</small>
-| `cp.globals.edit`            | Before global set detail view’s template blocks.<br><small>[globals/_edit.twig](https://github.com/craftcms/cms/blob/main/src/templates/globals/_edit.twig)</small>
-| `cp.globals.edit.content`    | After global set detail view’s main content.<br><small>[globals/_edit.twig](https://github.com/craftcms/cms/blob/main/src/templates/globals/_edit.twig)</small>
-| `cp.users.edit`              | Before user detail view’s template blocks.<br><small>[users/_edit.twig](https://github.com/craftcms/cms/blob/main/src/templates/users/_edit.twig)</small>
-| `cp.users.edit.prefs`        | After fields in the user’s “Preferences” tab.<br><small>[users/_edit.twig](https://github.com/craftcms/cms/blob/main/src/templates/users/_edit.twig)</small>
-| `cp.users.edit.content`      | After user detail view’s main tabbed content.<br><small>[users/_edit.twig](https://github.com/craftcms/cms/blob/main/src/templates/users/_edit.twig)</small>
-| `cp.users.edit.details`      | After user detail view’s right sidebar details. <br><small>[users/_edit.twig](https://github.com/craftcms/cms/blob/main/src/templates/users/_edit.twig)</small>
-
+| `cp.elements.element`        | Base “element” template, used for rendering relational tiles.<br><small>[_elements/element.twig](repo:craftcms/cms/blob/5.x/src/templates/_elements/element.twig)</small>
+| `cp.layouts.base`            | Before `doctype` declaration in base template.<br><small>[_layouts/base.twig](repo:craftcms/cms/blob/5.x/src/templates/_layouts/base.twig)</small>
+| `cp.globals.edit`            | Before global set detail view’s template blocks.<br><small>[globals/_edit.twig](repo:craftcms/cms/blob/5.x/src/templates/globals/_edit.twig)</small>
+| `cp.globals.edit.content`    | After global set detail view’s main content.<br><small>[globals/_edit.twig](repo:craftcms/cms/blob/5.x/src/templates/globals/_edit.twig)</small>
+| `cp.users.edit.prefs`        | After fields in the user’s “Preferences” tab.<br><small>[users/_edit.twig](repo:craftcms/cms/blob/5.x/src/templates/users/_edit.twig)</small>

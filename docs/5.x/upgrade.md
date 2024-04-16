@@ -92,7 +92,7 @@ Along with this update, you’ll need to integrate changes from our [starter pro
 Features deprecated in Craft 4 may have been fully removed or replaced in Craft 4, and new deprecations have been flagged in Craft 5.
 
 ::: warning
-This list focuses on high-traffic, user-facing features. Review the [complete changelog](repo:craftcms/cms/blob/main/CHANGELOG.md) for information about changes to specific APIs, including class deprecations, method signatures, and so on.
+This list focuses on high-traffic, user-facing features. Review the [complete changelog](repo:craftcms/cms/blob/5.x/CHANGELOG.md) for information about changes to specific APIs, including class deprecations, method signatures, and so on.
 :::
 
 ### Configuration
