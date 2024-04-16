@@ -91,11 +91,11 @@ A remote database is one prerequisite for [scaling](#scalability) your server ho
 
 #### Scalability
 
-Craft benefits from both vertical and horizontal scaling. Giving your server more compute power and RAM, tuning the HTTP server, and [offloading the database](#remote-databases) and other services (vertical scaling) can bring immediate performance improvements. [Distributing load](kb:configuring-load-balanced-environments) across multiple web servers (horizontal scaling) is also viable, thanks to Craft’s support for centralized [cache](./config/app.md#cache) and [session](./config/app.md#session) storage.
+Craft benefits from both vertical and horizontal scaling. Giving your server more compute power and RAM, tuning the HTTP server, and [offloading the database](#remote-databases) and other services (vertical scaling) can bring immediate performance improvements. [Distributing load](kb:configuring-load-balanced-environments) across multiple web servers (horizontal scaling) is also viable, thanks to Craft’s support for centralized [cache](reference/config/app.md#cache) and [session](reference/config/app.md#session) storage.
 
-If your site demands global distribution (and can’t be cached at the edge), you may be able to take advantage of read/write splitting, replication, and other [advanced database configuration](./config/app.md#database) options to improve performance across regions.
+If your site demands global distribution (and can’t be cached at the edge), you may be able to take advantage of read/write splitting, replication, and other [advanced database configuration](reference/config/app.md#database) options to improve performance across regions.
 
-Choosing the right asset storage medium or [filesystem](./assets.md#filesystems) is another critical component of hosting—especially when it comes to durability and availability.
+Choosing the right asset storage medium or [filesystem](reference/element-types/assets.md#filesystems) is another critical component of hosting—especially when it comes to durability and availability.
 
 #### “Platform as a Service”
 
@@ -103,7 +103,7 @@ Proprietary and open source cloud computing solutions are both options for hosti
 
 ## Deployment
 
-Broadly, we’re defining _deployment_ as the process of publishing code changes to a live website. For the following examples, we’ll assume your project uses the standard [directory structure](directory-structure.md).
+Broadly, we’re defining _deployment_ as the process of publishing code changes to a live website. For the following examples, we’ll assume your project uses the standard [directory structure](system/directory-structure.md).
 
 ::: tip
 Be sure and read our [Deployment Best Practices](kb:deployment-best-practices) article for some high-level recommendations. What follows is intended for technical users who are tasked with extending their workflow to a web server.
@@ -189,7 +189,7 @@ Take care to not expose your `.git` directory (or other private files) to the we
 
 #### Atomic Deployment
 
-Let’s look at some ways we might improve upon this simple deployment scheme. Our main goal will be to separate each phase of the deployment, so that the live site spends as little time as possible in an intermediate or partially-built state.
+Let’s look at some ways we might improve upon this simple deployment scheme. Our main goal will be to separate each phase of the deployment, so that the live site spends as little time as possible in an intermediate or partially-updated state.
 
 The combination of `git pull` and `composer install` are the most problematic—but we should also make an effort to pre-build front-end resources. Instead of doing all this work directly in a live directory, let’s move it off to the side.
 
@@ -315,7 +315,7 @@ This paradigm also turns the “release” phase on its head: instead of deployi
 Heroku is just an example of this model, pioneered by Kubernetes and other infrastructure orchestration technologies.
 
 ::: tip
-Adopting all or parts of the [twelve-factor app](https://12factor.net/) paradigm can be a little disorienting. In particular, an [ephemeral filesystem](./config/README.md#craft_ephemeral) means you will need to adjust the way environment variables are set (in lieu of `.env`), how the cache works, and how sessions are stored. Some of these options are discussed in [advanced application configuration](./config/app.md).
+Adopting all or parts of the [twelve-factor app](https://12factor.net/) paradigm can be a little disorienting. In particular, an [ephemeral filesystem](reference/config/bootstrap.md#craft_ephemeral) means you will need to adjust the way environment variables are set (in lieu of `.env`), how the cache works, and how sessions are stored. Some of these options are discussed in [advanced application configuration](reference/config/app.md).
 :::
 
 ## Common Pitfalls
@@ -342,9 +342,9 @@ Even when `devMode` is off, you can still get profiling data from the Yii debug 
 
 Not everything that comprises a Craft site is (or should be) tracked in version control:
 
-- Assets uploaded to a local [filesystem](./assets.md#filesystems) via the [control panel](./control-panel.md);
-- Database backups (stored in [`storage/backups/`](./directory-structure.md#storage));
-- Secrets (usually [relegated to `.env`](./config/README.md#env));
+- Assets uploaded to a local [filesystem](reference/element-types/assets.md#filesystems) via the [control panel](system/control-panel.md);
+- Database backups (stored in [`storage/backups/`](system/directory-structure.md#storage));
+- Secrets (usually [relegated to `.env`](configure.md#env));
 - Caches and other temporary files;
 - Compiled CSS or JavaScript;
 

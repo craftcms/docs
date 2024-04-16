@@ -94,7 +94,7 @@ When you point your browser to `https://my-project.tld/blog/archive/2018`, it wi
 ```
 
 ::: tip
-Routes automatically support [pagination](./dev/tags.md#paginate), so this one route covers other URIs like `/blog/archive/2018/page/2` (assuming your <config5:pageTrigger> was `page/`). If you wanted to break the archive into smaller logical chunks, you could use additional [tokens](#available-tokens) to collect results by month—or even by day!
+Routes automatically support [pagination](../reference/twig/tags.md#paginate), so this one route covers other URIs like `/blog/archive/2018/page/2` (assuming your <config5:pageTrigger> was `page/`). If you wanted to break the archive into smaller logical chunks, you could use additional [tokens](#available-tokens) to collect results by month—or even by day!
 :::
 
 ### Available Tokens
@@ -218,7 +218,7 @@ class BlogController extends Controller
 }
 ```
 
-This rule only serves as an alias to the controller action, which will always be directly accessible via an [action request](../development/forms.md)—in this case by using the [`actionInput()`](./dev/functions.md#actioninput) function:
+This rule only serves as an alias to the controller action, which will always be directly accessible via an [action request](../development/forms.md)—in this case by using the [`actionInput()`](../reference/twig/functions.md#actioninput) function:
 
 ```twig
 <form method="post">

@@ -520,7 +520,7 @@ Some date properties (like `dateUpdated` and `dateCreated`) may be determined by
 
 Assets, categories, entries, and tags can be associated to a [relational](../relations.md) field by passing an array of IDs. For more information and examples, see the relevant field type documentation:
 
-- [Assets fields](../assets-fields.md#saving-assets-fields)
-- [Entries fields](../entries-fields.md#saving-entries-fields)
-- [Categories fields](../categories-fields.md#saving-categories-fields)
-- [Tags fields](../tags-fields.md#saving-tags-fields)
+- [Assets fields](../reference/field-types/assets.md#saving-assets-fields)
+- [Entries fields](../reference/field-types/entries.md#saving-entries-fields)
+- [Categories fields](../reference/field-types/categories.md#saving-categories-fields)
+- [Tags fields](../reference/field-types/tags.md#saving-tags-fields)

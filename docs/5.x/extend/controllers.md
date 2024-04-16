@@ -383,7 +383,7 @@ See <craft5:craft\web\CpScreenResponseBehavior> for a complete list of methods u
 ## Model Lifecycle
 
 ::: tip
-This section expands on concepts covered in [models and validation](../dev/controller-actions.md#models-and-validation), with a focus on the implementation of the underlying actions. Examples here will conform to the patterns discussed in that user-facing documentation.
+This section expands on concepts covered in [models and validation](../development/forms.md#models-and-validation), with a focus on the implementation of the underlying actions. Examples here will conform to the patterns discussed in that user-facing documentation.
 :::
 
 Craft extends [parameterized URL rules](#routes-with-params) to help maintain continuity while editing models. In cases where a validation error prevents a model from saving, you’ll want to provide the user an opportunity to view and correct issues.
@@ -523,7 +523,7 @@ The final piece of this puzzle is the `<form>` we use to display and update a `W
 </form>
 ```
 
-Notice that we aren’t setting an [`action` _attribute_](../dev/controller-actions.md#making-requests) on the form! This means that if the widget is _isn’t_ saved successfully, the request will fall through to the same route the user submitted the form from (in this case, mapped to the `my-plugin/widgets/edit` action), allowing them to pick back up with the model intact. If it _was_ successful, Craft will [redirect](#sending-responses) to the rendered object template (fourth argument to `asModelSuccess()` at the end of `actionSave()`).
+Notice that we aren’t setting an [`action` _attribute_](../development/forms.md#making-requests) on the form! This means that if the widget is _isn’t_ saved successfully, the request will fall through to the same route the user submitted the form from (in this case, mapped to the `my-plugin/widgets/edit` action), allowing them to pick back up with the model intact. If it _was_ successful, Craft will [redirect](#sending-responses) to the rendered object template (fourth argument to `asModelSuccess()` at the end of `actionSave()`).
 
 ::: tip
 You may still define an `action` attribute on your form when it exists at a different path from the primary editing page. The “Quick Post” dashboard widget is representative of this pattern—a minimal form is presented in one context, but errors are displayed elsewhere, after submission.

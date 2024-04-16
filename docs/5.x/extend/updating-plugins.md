@@ -235,7 +235,7 @@ Both chips and cards support *thumbnails*.
 
 #### Unified Element Editor
 
-Introduced in Craft 4, the [unified element editor](/4.x/extend/upgrade.md#unified-element-editor) powers full-screen forms as well as slideouts. If you haven’t already, we strongly recommend adopting the unified editor for custom elements.
+Introduced in Craft 4, the [unified element editor](/4.x/extend/updating-plugins.md#unified-element-editor) powers full-screen forms as well as slideouts. If you haven’t already, we strongly recommend adopting the unified editor for custom elements.
 
 #### Field Layout Elements
 

@@ -6,7 +6,7 @@ sidebarDepth: 2
 
 [Craft](../README.md) is a powerful and flexible content management system built on top of the popular PHP application framework [Yii](https://yiiframework.com/).
 
-Yii’s [application structure](guide:structure-overview) informs much of Craft’s internal organization. You may already be familiar with some [core components](guide:structure-application-components) if you’ve made changes to the [application config](../config/app.md).
+Yii’s [application structure](guide:structure-overview) informs much of Craft’s internal organization. You may already be familiar with some [core components](guide:structure-application-components) if you’ve made changes to the [application config](../reference/config/app.md).
 
 A Craft extension (often referred to as a [module](#modules) or [plugin](#plugins)) can be as lean as a single class, or as complex as an embedded <abbr title="Model, View, Controller">MVC</abbr>-style application. Either way, Craft’s entire API is at your finger tips.
 
@@ -44,7 +44,7 @@ Private plugins combine the best of both worlds. If this is your first time writ
 
 Initially, this may afford you a greater sense of freedom when designing your extension:
 
-- Instead of having intermediate [settings](./environmental-settings.md) layer for consumers, you might directly reference environment variables that you know will exist in your project;
+- Instead of having intermediate [settings](environmental-settings.md) layer for consumers, you might directly reference environment variables that you know will exist in your project;
 - Referencing specific field handles, sections, globals, or other resources is acceptable, because the module is versioned with the parent application’s project config;
 
 While you will miss _some_ convenience features provided by [plugins](#plugins), modules are equally capable in almost every way.
@@ -55,18 +55,18 @@ While you will miss _some_ convenience features provided by [plugins](#plugins),
 
 **Plugins** are a Craft-specific concept, so—unlike _modules_—you won’t find any mention of them in the Yii documentation. They can do everything modules can do (plugins are, in fact, modules), but are better suited for public distribution:
 
-- They can be installed/trialed/purchased from the Craft [Plugin Store](./plugin-store.md);
-- They can make [database changes](./migrations.md) when installed, updated, or uninstalled;
-- They get their own config file and [settings](./plugin-settings.md) page within the control panel, and are automatically registered with [project config](./project-config.md);
+- They can be installed/trialed/purchased from the Craft [Plugin Store](plugin-store.md);
+- They can make [database changes](migrations.md) when installed, updated, or uninstalled;
+- They get their own config file and [settings](plugin-settings.md) page within the control panel, and are automatically registered with [project config](project-config.md);
 - They can be enabled/disabled by an admin, without running any Composer commands;
 
-If the thing you want to build would benefit from any of these features (or you’re unsure whether it might), make it a plugin. Just like modules, plugins can live as [part of a project](./plugin-guide.md#path-repository).
+If the thing you want to build would benefit from any of these features (or you’re unsure whether it might), make it a plugin. Just like modules, plugins can live as [part of a project](plugin-guide.md#path-repository).
 
 <See path="./plugin-guide.md" description="Learn about the Craft plugin ecosystem." />
 
 ### Design + Approach
 
-Extensions naturally invite technical debt—for maintainers _and_ users. This isn’t necessarily a bad thing, though! The most common manifestation is some additional friction during major version upgrades. Craft itself has enough abstractions in place to protect most developers from significant API changes (for example, Twig templates are largely compatible back to Craft 2), but as you get deeper into Craft’s API, you will need to pay special attention to deprecation notices and our dedicated [plugin upgrade guides](./updating-plugins.md).
+Extensions naturally invite technical debt—for maintainers _and_ users. This isn’t necessarily a bad thing, though! The most common manifestation is some additional friction during major version upgrades. Craft itself has enough abstractions in place to protect most developers from significant API changes (for example, Twig templates are largely compatible back to Craft 2), but as you get deeper into Craft’s API, you will need to pay special attention to deprecation notices and our dedicated [plugin upgrade guides](updating-plugins.md).
 
 One of the most important things to consider as you set out is how you will communicate to others (your teammates, a client’s future development partners, or even your future self) where a project’s special features come from. It could be documentation or training—or nothing at all, if the scope of the extension is limited!
 
@@ -77,19 +77,19 @@ Craft automatically handles this for [plugins](#plugins)—from the control pane
 An extension usually leverages one or more of these concepts:
 
 Controllers
-: Provide new endpoints for [web](./controllers.md) or [console](./commands.md) requests.
+: Provide new endpoints for [web](controllers.md) or [console](commands.md) requests.
 
 Events
-: React to, prevent, or modify default behaviors by listening to [events](./events.md) or attaching [hooks](./template-hooks.md).
+: React to, prevent, or modify default behaviors by listening to [events](events.md) or attaching [hooks](template-hooks.md).
 
 Component Types
-: Create new kinds of existing components like [element exporters](./element-exporter-types.md) or [background jobs](./queue-jobs.md).
+: Create new kinds of existing components like [element exporters](element-exporter-types.md) or [background jobs](queue-jobs.md).
 
 Services
 : Add, modify, or replace components accessible via `Craft::$app` or as part of your own extension.
 
 Templates
-: Expose functionality to [Twig](./extending-twig.md) via built-in language features like functions and filters—or add your own!
+: Expose functionality to [Twig](extending-twig.md) via built-in language features like functions and filters—or add your own!
 
 ::: tip
 This is not an exhaustive list! Check the sidebar for more info on what aspects of Craft are extensible, or take a spin through the [topics](topics.md) page for some more ideas.
@@ -105,11 +105,11 @@ While the [Generator](./generator.md) has dramatically simplified the process of
 
 Here are a few activities (in no particular order) that can help you get oriented with the Craft API, without treading into completely new territory:
 
-1. In a Twig template, use the [`{% dd %}` tag](../dev/tags.md#dd) to output a value or variable to the browser.  
+1. In a Twig template, use the [`{% dd %}` tag](../reference/twig/tags.md#dd) to output a value or variable to the browser.  
   _What kinds of values do you see?_
 1. Dive in to the `vendor/craftcms/cms/` directory and look for a familiar-sounding class.  
   _Can you find the corresponding documentation in the [class reference][class-ref]?_
-1. Look at the list of [common services](../dev/global-variables.md#common-services) that are available on the [`craft.app` variable](../dev/global-variables.md#craft-app) in any template.  
+1. Look at the list of [common services](../reference/twig/global-variables.md#common-services) that are available on the [`craft.app` variable](../reference/twig/global-variables.md#craft-app) in any template.  
   _Can you determine what other services are accessible in the same way?_
 1. Install one of the [recommended editors](#ide) and open up a config file. Move your cursor over one of the [`use` statements](repo:craftcms/craft/blob/main/config/general.php#L11-L12) at the top to get information about the classes.  
   _Can you figure out how to open the file that the class is defined in?_
@@ -152,7 +152,7 @@ Yii’s built-in [debug toolbar](repo:yiisoft/yii2-debug) is invaluable, especia
 
 #### Composer
 
-If your journey with Craft so far has not involved [Composer](https://getcomposer.org), certain concepts (like namespacing and auto-loading) may present additional difficulty. Consider reviewing our article on using the [starter project](kb:using-the-starter-project), and try running [updates](../updating.md#composer) or installing a plugin with Composer.
+If your journey with Craft so far has not involved [Composer](https://getcomposer.org), certain concepts (like namespacing and auto-loading) may present additional difficulty. Consider reviewing our article on using the [starter project](kb:using-the-starter-project), and try running [updates](../update.md#composer) or installing a plugin with Composer.
 
 ::: danger
 In the course of extending Craft, you will _never_ need to modify files that live in the `vendor/` directory. Changes to source files will be lost any time Composer installs or updates packages.
@@ -160,4 +160,4 @@ In the course of extending Craft, you will _never_ need to modify files that liv
 This documentation does not cover altering Craft’s source code, even with the intention of submitting a pull request.
 :::
 
-[class-ref]: https://docs.craftcms.com/api/v4/
+[class-ref]: https://docs.craftcms.com/api/v5/

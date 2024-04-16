@@ -101,7 +101,7 @@ $myCategoryQuery = \craft\elements\Category::find();
 ```
 :::
 
-Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Category](craft5:craft\elements\Category) objects will be returned.
+Once you’ve created a category query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Category](craft5:craft\elements\Category) objects will be returned.
 
 <See path="../../development/element-queries" description="Learn more about element queries." />
 
@@ -112,7 +112,7 @@ We can display a navigation for all the categories in a category group called �
 1. Create a category query with `craft.categories()`.
 2. Set the [group](#group) parameter on it.
 3. Fetch the categories with `.all()`.
-4. Loop through the categories using a [nav](dev/tags.html#nav) tag to create the navigation HTML.
+4. Loop through the categories using a [nav](../twig/tags.md#nav) tag to create the navigation HTML.
 
 ```twig
 {# Create a category query with the 'group' parameter #}

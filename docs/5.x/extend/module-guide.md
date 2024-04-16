@@ -10,7 +10,7 @@ Namespace
 
 Module ID
 : Something that uniquely identifies the module within your project. IDs must begin with a letter and contain only lowercase letters, numbers, and dashes, and should be `kebab-cased`.
-: The module ID will become the first segment in [controller action](./controllers.md) paths. Avoid names that will conflict with Craft’s core [controllers](repo:craftcms/cms/tree/develop/src/controllers) or the handles of any installed plugins (e.g. `app` would conflict with <craft5:craft\controllers\AppController>, and `commerce` would collide with [Commerce](../../commerce/4.x/README.md)).
+: The module ID will become the first segment in [controller action](./controllers.md) paths. Avoid names that will conflict with Craft’s core [controllers](repo:craftcms/cms/tree/develop/src/controllers) or the handles of any installed plugins (e.g. `app` would conflict with <craft5:craft\controllers\AppController>, and `commerce` would collide with [Commerce](/commerce/5.x/README.md)).
 
 
 As an alternative to modules, private [plugins](plugin-guide.md) provide all the functionality of a regular plugin, but are intended to be tracked as part of a project rather than distributed.
@@ -124,7 +124,7 @@ If Craft has already fully initialized, the callback will be invoked immediately
 
 ### Update the application config
 
-You can add your module to your project’s [application configuration](../config/#application-configuration) by listing it in the [modules](yii2:yii\base\Module::modules) and [bootstrap](yii2:yii\base\Application::bootstrap) arrays. For example, if your module ID is `foo` and its Module class name is `foo\Module`, this is what you should add to `config/app.php`:
+You can add your module to your project’s [application configuration](../configure.md#application-configuration) by listing it in the [modules](yii2:yii\base\Module::modules) and [bootstrap](yii2:yii\base\Application::bootstrap) arrays. For example, if your module ID is `foo` and its Module class name is `foo\Module`, this is what you should add to `config/app.php`:
 
 ```php{4,7}
 return [
@@ -139,7 +139,7 @@ return [
 ```
 
 ::: tip
-If your module doesn’t need to get loaded on every request, you can remove its ID from the `bootstrap` array. If you end up using any event listeners in your module’s `init()` method, it should be loaded on every request.
+If your module doesn’t need to get loaded on _every_ request (say, because it only provides controllers), you can remove its ID from the `bootstrap` array, and lazily instantiate it via `foo\Module::getInstance()`. Keep in mind that event listeners in your module’s `init()` method are only attached once it is initialized, which can lead to “missed” events.
 :::
 
 

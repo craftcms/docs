@@ -27,7 +27,7 @@ Events are emitted throughout Craft’s request-response and model life cycles, 
 
 ### Hooks
 
-Hooks are similar to [events](#events), but designed specifically for manipulating the context or output of templates. In addition to hooks provided by Craft’s own [control panel templates](template-hooks.md#control-panel-template-hooks), plugins can fire their own hooks using the [`{% hook %}` tag](../dev/tags.twig#hook).
+Hooks are similar to [events](#events), but designed specifically for manipulating the context or output of templates. In addition to hooks provided by Craft’s own [control panel templates](template-hooks.md#control-panel-template-hooks), plugins can fire their own hooks using the [`{% hook %}` tag](../reference/twig/tags.md#hook).
 
 <See path="template-hooks.md" />
 

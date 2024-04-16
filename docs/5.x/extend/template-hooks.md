@@ -4,7 +4,7 @@ description: Inspect template data and modify output with hooks.
 
 # Template Hooks
 
-Craft templates can give modules and plugins an opportunity to hook into them using [hook](../dev/tags.md#hook) tags.
+Craft templates can give modules and plugins an opportunity to hook into them using [hook](../reference/twig/tags.md#hook tags).
 
 ```twig
 {# Give plugins a chance to make changes here #}

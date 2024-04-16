@@ -2,11 +2,13 @@
 
 !!!include(docs/.artifacts/commerce/5.x/shared/edition-changes.md)!!!
 
-Discounts are deductions that can be applied either to line items or the order as a whole.
+Discounts are adjustments that can match and apply to individual line items, or to an order as a whole Discounts are only calculated while items are in the cart.
 
-Discounts are only calculated while items are in the cart. [Sales](sales.md) are pricing rules that apply to products _before_ they’re added to the cart.
+::: warning
+If you need to manage how prices are displayed to customers _before_ an item is in their cart, use the new [catalog pricing rules](pricing-rules.md) system.
+:::
 
-You’ll need _Manage discounts_ permission to work with discounts in the control panel via **Commerce** → **Promotions** → **Discounts**.
+Users with the _Manage discounts_ permission can add and edit discounts in the control panel via <Journey path="Commerce, Promotions, Discounts" />.
 
 ## Discount Sort Order
 
@@ -30,43 +32,13 @@ Each discount’s **Matching Items** tab provides options for limiting what stor
 
 ### Purchasables
 
-You can restrict a discount to specific purchasables by enabling the **Only match certain purchasables…** option, and selecting one or more via the revealed element picker(s). Each registered purchasable type will display its own selection field—but by default, this is only variants.
+You can restrict a discount to specific purchasables by enabling the **Only match certain purchasables…** option, and selecting one or more via the revealed element picker(s). Each registered purchasable type will display its own selection field—but by default, this is only [variants](products-variants.md).
 
 If this is enabled and no purchasables are selected, the discount will never match.
 
 ::: tip
 Only variants belonging to _promotable_ products may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
 :::
-
-### Relationships
-
-Oftentimes, it makes more sense to make discounts available based on categories or other taxonomies than on specific products.
-
-Let’s assume your store is organized into departments that are defined by a [category group](/4.x/categories.md) or [entry section](/4.x/entries.md). On each product (or variant), administrators select one or more of those departments via a category or entry custom fields.
-
-In the **Matching Items** tab, enabling **Only match purchasables related to…** will reveal two element selection fields (one for categories and one for entries), as well as an [Advanced](#advanced) drawer, which allows you to specify the [direction](/4.x/relations.md#sources-and-targets) of the relationship. If you enable the relational criteria and don’t select any categories or entries
-
-::: tip
-The **Categories** field will only be displayed if you have a category group configured; similarly, the **Entries** field will only be displayed if you’ve configured a section.
-:::
-
-#### Advanced
-
-The “Advanced” drawer contains the **Relationship Type** field that determines how related purchasables should behave when matching items.
-
-- **Either way (Default)**: the relational field can be on the purchasable _or_ the category/entry (the purchasable may be the source _or_ target of the relationship);
-- **The purchasable defines the relationship**: the relational field is defined on the _purchasable_, and you select categories or entries from it (the purchasable is the _source_ of the relationship);
-- **The purchasable is related by another element**: the relational field is defined on the category/entry, and you select purchasables from it (the purchasable is the _target_ of the relationship);
-
-::: tip
-This behavior is consistent with all Craft’s relationships; see the [Terminology](/4.x/relations.html#terminology) section on the Relations page for more information on sources and targets.
-:::
-
-To illustrate, suppose the “departments” we mentioned earlier each represent a landing page. Those pages (managed as entries in Craft) are also be used to organize products, through an [entries field](/4.x/entries-field.md) in the product type’s field layout. As products are added and edited, administrators place them in departments by selecting those entries as relations. In this scenario, both the **Either way** and **The purchasable defines the relationship** settings would allow the discount to match a department entry selected in its purchasable-matching rules.
-
-Now, if you were to add a “Featured Products” field to the department landing pages and select a few products, the third **The purchasable is related by another element** relationship type setting would match.
-
-This combination of settings can provide powerful matching criteria all on their own. You can even define back-end-only taxonomies (without content or URLs) for the express purpose of managing pricing rules.
 
 ## Discount Conditions Rules
 

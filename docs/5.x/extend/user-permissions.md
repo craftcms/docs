@@ -63,7 +63,7 @@ public function actionStayUpLate()
 
 If the user doesn’t have that permission, then a 403 error will be returned.
 
-Templates can also ensure that the user has a permission with the [requirePermission](../dev/tags.md#requirepermission) tag:
+Templates can also ensure that the user has a permission with the [requirePermission](../reference/twig/tags.md#requirepermission) tag:
 
 ```twig
 {% requirePermission 'stayUpLate' %}

@@ -66,24 +66,24 @@ Configuration
 Purpose
 : This directory represents your server’s web root. The public `index.php` file lives here, alongside your static images, stylesheets, and JavaScript files.
 
-  You can generate a URL to a file in this folder with Twig’s [`siteUrl()` function](./dev/functions.md#siteurl).
+  You can generate a URL to a file in this folder with Twig’s [`siteUrl()` function](../reference/twig/functions.md#siteurl).
 
 Customization
-: [`CRAFT_WEB_ROOT`](./config/README.md#craft-web-root) — This is primarily used to set the [`@webroot` alias](./config/README.md#aliases).
+: [`CRAFT_WEB_ROOT`](../reference/config/bootstrap.md#craft-web-root) — This is primarily used to set the [`@webroot` alias](../configure.md#aliases).
 
 ## Files
 
 ### `.env`
 
 Purpose
-: This is your [PHP dotenv](https://github.com/vlucas/phpdotenv) `.env` configuration file. It defines sensitive or [environment-specific config](./config/README.md#env) values that don’t make sense to commit to version control.
+: This is your [PHP dotenv](https://github.com/vlucas/phpdotenv) `.env` configuration file. It defines sensitive or [environment-specific config](../configure.md#env) values that don’t make sense to commit to version control.
 
-  The [starter project](https://github.com/craftcms/craft) provides a few examples of configuration that is apt to change between environments—you’ll see a group of similarly-named files, like `.env.example.staging`.
+  The [starter project](repo:craftcms/craft) provides a few examples of configuration that is apt to change between environments—you’ll see a group of similarly-named files, like `.env.example.staging`.
 
   These are `.env` file templates. Maintain one of them (with sensitive data removed) as a starting point for your actual `.env` file, so collaborators know what variables the project requires. When they set up the project, they can run `cp .env.example .env` to duplicate the file and fill out missing keys!
 
 Configuration
-: [`CRAFT_DOTENV_PATH`](./config/README.md#craft-dotenv-path) — This setting _was_ technically available in prior versions, but unreliable.
+: [`CRAFT_DOTENV_PATH`](../reference/config/bootstrap.md#craft-dotenv-path) — This setting _was_ technically available in prior versions, but unreliable.
 
 ### `.gitignore`
 
@@ -93,13 +93,13 @@ Check out our [Hosting & Deployment](../deploy.md#be-aware-of-artifacts) article
 
 ### `bootstrap.php`
 
-The [starter project](depo:craftcms/craft) consolidates important bootstrapping logic (like defining path [constants](./config/README.md#php-constants) that determine the above directories’ locations, and loading environment variables from a [`.env`](#env) file) into this file. Both the HTTP and console entry scripts (`web/index.php` and [`craft`](#craft), respectively) include this file—but each goes on to instantiate a different [type of application](guide:structure-entry-scripts) suited for that request context.
+The [starter project](repo:craftcms/craft) consolidates important bootstrapping logic (like defining path [constants](../configure.md#bootstrap-config) that determine the above directories’ locations, and loading environment variables from a [`.env`](#env) file) into this file. Both the HTTP and console entry scripts (`web/index.php` and [`craft`](#craft), respectively) include this file—but each goes on to instantiate a different [type of application](guide:structure-entry-scripts) suited for that request context.
 
 This file’s location only matters to your entry scripts, so it is not “configurable” like other paths are. If you make changes to the layout of your project directory, be sure and update the references to `bootstrap.php` in `index.php` and the CLI entry point.
 
 ### `composer.json`
 
-Your project’s PHP dependencies are declared in this file. If you just started your project, the only two packages it will explicitly require are `craftcms/cms` (Craft’s core) and `vlucas/phpdotenv` (used in the entry scripts). Existing projects may contain more packages—say, if the it relies on Craft [plugins](./plugins.md) or includes other [custom functionality](./extend/README.md).
+Your project’s PHP dependencies are declared in this file. If you just started your project, the only two packages it will explicitly require are `craftcms/cms` (Craft’s core) and `vlucas/phpdotenv` (used in the entry scripts). Existing projects may contain more packages—say, if the it relies on Craft [plugins](plugins.md) or includes other [custom functionality](../extend/README.md).
 
 Craft uses Composer to update itself and install plugins. See the [Composer documentation](https://getcomposer.org/doc/04-schema.md) for details on how this file works.
 

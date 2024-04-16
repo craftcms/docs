@@ -281,7 +281,7 @@ Recursive aliases are preferred to basic string interpolation, because they are 
 
 Craft allows some settings to be defined directly from environment variables, PHP constants, or secrets using the special `CRAFT_` prefix.
 
-Add the prefix to any [general config](config-settings.md) (`CRAFT_`) or [database connection settings](db.md) (`CRAFT_DB_`) in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). For example:
+Add the prefix to any [general config](reference/config/general.md) (`CRAFT_`) or [database connection settings](reference/config/db.md) (`CRAFT_DB_`) in [screaming snake case](https://dev.to/fission/screaming-snake-case-43kj). For example:
 
 - General: <config5:allowUpdates> &rarr; `CRAFT_ALLOW_UPDATES`
 - Database: [`port`](db.md#port) &rarr; `CRAFT_DB_PORT`
@@ -308,7 +308,7 @@ However, Craft provides a powerful way to use dynamically-resolved config values
 
 ### Control Panel Settings
 
-Most values in the **Settings** area of Craft’s control panel are recorded in [Project config](../project-config.md). While this makes schema changes much easier to move between environments, it presents a challenge when something like a URL needs to change per-environment, or an API key leaks into YAML files.
+Most values in the **Settings** area of Craft’s control panel are recorded in [Project config](system/project-config.md). While this makes schema changes much easier to move between environments, it presents a challenge when something like a URL needs to change per-environment, or an API key leaks into YAML files.
 
 For this reason, Craft provides a way to bind system settings to dynamic aliases and environment variables.
 
@@ -425,7 +425,7 @@ return [
 The options defined here will be passed into new `GuzzleHttp\Client` instances. See [Guzzle’s documentation](http://docs.guzzlephp.org/en/latest/) for a list of available options.
 
 ::: tip
-To use a proxy for _all_ requests, set an [httpProxy](config5:httpProxy) in general config. This will get merged with the Guzzle configuration, and passed to the front-end for use by JavaScript, in the [control panel](control-panel.md). Setting a proxy only in Guzzle’s config will not affect Ajax requests!
+To use a proxy for _all_ requests, set an [httpProxy](config5:httpProxy) in general config. This will get merged with the Guzzle configuration, and passed to the front-end for use by JavaScript, in the [control panel](system/control-panel.md). Setting a proxy only in Guzzle’s config will not affect Ajax requests!
 :::
 
 ### Custom Settings
@@ -472,7 +472,7 @@ If these settings need to be changed frequently, edited by a control panel user,
 
 JSON files containing valid [HTML Purifier configuration](https://htmlpurifier.org/live/configdoc/plain.html) can be added to `config/htmlpurifier/`.
 
-When creating a [Redactor](https://plugins.craftcms.com/redactor/) or [CKEditor](https://plugins.craftcms.com/ckeditor/) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](reference/twig/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
+When creating a [Redactor](https://plugins.craftcms.com/redactor/) or [CKEditor](plugin:ckeditor) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](reference/twig/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
 
 A simple config that scrubs everything but paragraph and anchor tags would look like this:
 
@@ -492,7 +492,7 @@ Note that HTML Purifier expresses many options with dot notation, like `HTML.All
 
 ## Bootstrap Config
 
-Some customization is handled via special variables (set as PHP constants or environment vars) that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](https://github.com/craftcms/craft) does in its `bootstrap.php` file—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
+Some customization is handled via special variables (set as PHP constants or environment vars) that Craft will take into account as it boots up. Depending on your installation, you may keep these in `web/index.php` and the `craft` CLI entry points, or consolidate common values into a single `required` file, as the [starter project](repo:craftcms/craft) does in its `bootstrap.php` file—they’ll get picked up as long as they’re set prior to calling `$app->run()`.
 
 By virtue of accessing these via <craft5:craft\helpers\App::env()>, Craft also honors values defined by your environment under the same names or keys. The majority of these settings are tied specifically to the structure of your project directory, though, and generally do not need to change between environments.
 

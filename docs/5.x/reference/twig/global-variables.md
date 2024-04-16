@@ -102,7 +102,7 @@ A <craft5:craft\web\twig\variables\CraftVariable> object, which provides access 
 
 #### `craft.app`
 
-A reference to the main <craft5:craft\web\Application> instance (the same object you get when accessing `Craft::$app` in PHP) is also available to templates via `craft.app`.
+A reference to the main <craft5:craft\web\Application> or <craft5:craft\console\Application> instance (the same object you get when accessing `Craft::$app` in PHP) is also available to templates via `craft.app`.
 
 ::: warning
 Accessing things via `craft.app` is considered advanced. There are more security implications than other Twig-specific variables and functions, and your templates will be more susceptible to breaking changes between major Craft versions.

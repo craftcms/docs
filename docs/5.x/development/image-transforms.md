@@ -222,7 +222,7 @@ This would use the named `'thumb'` transform’s settings, but always generate a
 
 Transforms are a great way to avoid serving unnecessarily-large images to your users—but there’s still room for optimization! Most browsers support the [`srcset`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset) attribute, which allows you to define a collection of images that are appropriate for a given device or viewport.
 
-Rather than creating an exhaustive list of named transforms or building up multiple config hashes in your templates, you can offload this work to Craft with the [`getSrcSet()`](craft5:craft\elements\Asset::getSrcSet()) method. Here’s an example that uses the [`tag` template function](dev/functions.md#tag) to render an image with a `srcset` attribute containing three variations based on a single transform:
+Rather than creating an exhaustive list of named transforms or building up multiple config hashes in your templates, you can offload this work to Craft with the [`getSrcSet()`](craft5:craft\elements\Asset::getSrcSet()) method. Here’s an example that uses the [`tag` template function](../reference/twig/functions.md#tag) to render an image with a `srcset` attribute containing three variations based on a single transform:
 
 ```twig
 {% do asset.setTransform({ width: 300, height: 300 }) %}

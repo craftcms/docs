@@ -74,11 +74,11 @@ Event::on(
 );
 ```
 
-This is not a requirement for all element types, but provides automatic support for things like relational [condition rules](./conditions.md) and [reference tags](../reference-tags.md).
+This is not a requirement for all element types, but provides automatic support for things like relational [condition rules](./conditions.md) and [reference tags](../system/reference-tags.md).
 
 ## Working with the Database
 
-Part of what gives custom elements their power is the ability to store additional attributes in a predictable way—without depending on custom fields. [Entries](../entries.md), for instance, have a post date (`postDate`), expiry date (`expiryDate`), and an author ID (`authorId`); [assets](../assets.md) track the underlying file’s extension and what volume and folder they belong to.
+Part of what gives custom elements their power is the ability to store additional attributes in a predictable way—without depending on custom fields. [Entries](../reference/element-types/entries.md), for instance, have a post date (`postDate`), expiry date (`expiryDate`), and an author ID (`authorId`); [assets](../reference/element-types/assets.md) track the underlying file’s extension and what volume and folder they belong to.
 
 While elements automatically get support for storing relations, custom field data, titles, slugs and URIs, it’s your plugin’s responsibility to create and maintain an appropriate database schema for persisting its native attributes. For our product element type, we’ll need a new table with at least `price` and `currency` columns.
 
@@ -155,7 +155,7 @@ Keep in mind that a “save” can happen in a number of circumstances (like the
 
 ### Element Query Class
 
-All element types need a corresponding [element query](../element-queries.md) class. Element query classes are an extension of [query builders](guide:db-query-builder), tuned for fetching elements. They have three responsibilities:
+All element types need a corresponding [element query](../development/element-queries.md) class. Element query classes are an extension of [query builders](guide:db-query-builder), tuned for fetching elements. They have three responsibilities:
 
 - Provide public properties and setter methods for capturing custom criteria parameters;
 - Join in the custom element table and select the appropriate columns within it;
@@ -534,7 +534,7 @@ Elements that support multiple sites will have their `afterSave()` method called
 
 ## Element Index
 
-All that is required to support [element indexes](../elements.md#indexes) is a route that points to a template containing this:
+All that is required to support [element indexes](../system/elements.md#indexes) is a route that points to a template containing this:
 
 ```twig
 {% extends '_layouts/elementindex.twig' %}
@@ -618,7 +618,7 @@ When a source is selected, Craft will configure the element index’s query with
 Administrators are able to rearrange and customize columns of default sources, but cannot _remove_ them entirely. [Conditions](./conditions.md) can only be applied to new, custom sources. _Any_ user can temporarily create additive conditions via the search + filter bar on an element index.
 
 ::: tip
-The returned array can also be built dynamically. For example, [entries](../entries.md) define a source for each _section_, and [categories](../categories.md) define a source for each _category group_.
+The returned array can also be built dynamically. For example, [entries](../reference/element-types/entries.md) define a source for each _section_, and [categories](../reference/element-types/categories.md) define a source for each _category group_.
 
 Consider hiding sources that the current user would not be able to access, based on their [permissions](#permissions).
 :::
@@ -973,7 +973,7 @@ The areas of the element edit screen that require customization are typically ha
 
 #### Slideouts
 
-Craft uses the same methods that build element edit screens to generate responses that target [slideouts](../control-panel.md#slideouts).
+Craft uses the same methods that build element edit screens to generate responses that target [slideouts](../system/control-panel.md#slideouts).
 
 Elements are given an opportunity to customize control panel screen responses via the `prepareEditScreen()` method:
 
@@ -1208,7 +1208,7 @@ public function getExpiryDate(): ?DateTime
 
 ### Garbage Collection
 
-Element types should opt into [garbage collection](../gc.md) by hooking into the [Gc::EVENT_RUN](craft5:craft\services\Gc::EVENT_RUN) event and calling [Gc::deletePartialElements()](craft5:craft\services\Gc::deletePartialElements()):
+Element types should opt into [garbage collection](../system/gc.md) by hooking into the [Gc::EVENT_RUN](craft5:craft\services\Gc::EVENT_RUN) event and calling [Gc::deletePartialElements()](craft5:craft\services\Gc::deletePartialElements()):
 
 ```php
 use mynamespace\elements\Product;

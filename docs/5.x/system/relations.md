@@ -346,5 +346,5 @@ If that Matrix field has more than one relational field and you want to target a
 ```
 
 ::: warning
-This notation only uses the main Matrix field’s handle and the block’s relational field handle: `matrixFieldHandle.relationalFieldHandle`. The block type handle is _not_ used here, as it is when [eager-loading](./dev/eager-loading-elements.md).
+This notation only uses the main Matrix field’s handle and the block’s relational field handle: `matrixFieldHandle.relationalFieldHandle`. The block type handle is _not_ used here, as it is when [eager-loading](../development/eager-loading.md).
 :::

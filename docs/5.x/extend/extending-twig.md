@@ -4,9 +4,9 @@ Craft provides two ways for plugins to extend its Twig templating environment.
 
 ## Extend the Global `craft` Variable
 
-The [global `craft` template variable](../dev/global-variables.md#craft-2) is an instance of <craft5:craft\web\twig\variables\CraftVariable>. Methods and properties of that class are available in Twig via dot notation—for example, when a template uses `craft.entries` (or `craft.entries()`), Twig calls [CraftVariable::entries()](craft5:craft\web\twig\variables\CraftVariable::entries()) behind the scenes.
+The [global `craft` template variable](../reference/twig/global-variables.md#craft-2) is an instance of <craft5:craft\web\twig\variables\CraftVariable>. Methods and properties of that class are available in Twig via dot notation—for example, when a template uses `craft.entries` (or `craft.entries()`), Twig calls [CraftVariable::entries()](craft5:craft\web\twig\variables\CraftVariable::entries()) behind the scenes.
 
-That `CraftVariable` instance can be extended by plugins with [behaviors](behaviors.md) and [services](./services.md). Choosing the right approach depends on what you’re trying to add to it.
+That `CraftVariable` instance can be extended by plugins with [behaviors](behaviors.md) and [services](services.md). Choosing the right approach depends on what you’re trying to add to it.
 
 - Use a **behavior** to add custom properties or methods directly onto the `craft` variable (e.g. `craft.foo()`).
 - Use a **service** to add a sub-object to the `craft` variable, which can be accessed with a custom property name, called the service’s “ID”. (e.g. `craft.foo.*`).
@@ -124,7 +124,7 @@ Here, we’ve set a variable (`myVariable`) to our plugin’s singleton instance
 ```
 
 ::: warning
-Avoid defining global variables that are ambiguous (like `plugin` or `elements`), apt to be frequently overwritten (like `entry` or `block`), or conflict with [built-in globals](../dev/global-variables.md).
+Avoid defining global variables that are ambiguous (like `plugin` or `elements`), apt to be frequently overwritten (like `entry` or `block`), or conflict with [built-in globals](../reference/twig/global-variables.md).
 :::
 
 ### Registering the Extension
