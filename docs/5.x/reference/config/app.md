@@ -94,7 +94,7 @@ return [
 
 ## Common Components
 
-We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components are initialized for each type of request—for example, Craft uses two different `request` component classes (<craft5:craft\web\Request> and <craft5:craft\console\Request>) to help smooth over some differences in Yii’s HTTP and CLI APIs.
+We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](repo:craftcms/cms/blob/4.x/src/config/app.php), [app.web.php](repo:craftcms/cms/blob/4.x/src/config/app.web.php) and [app.console.php](repo:craftcms/cms/blob/4.x/src/config/app.console.php) when determining what components are initialized for each type of request—for example, Craft uses two different `request` component classes (<craft5:craft\web\Request> and <craft5:craft\console\Request>) to help smooth over some differences in Yii’s HTTP and CLI APIs.
 
 ### Cache
 
