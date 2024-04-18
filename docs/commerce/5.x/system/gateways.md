@@ -61,7 +61,7 @@ Multiple manual gateways can be created to track different kinds of offline paym
 
 Additional payment gateways can be added to Commerce with relatively little work. All our [first-party gateway plugins](#first-party-gateway-plugins) (with the exception of Stripe) use the [Omnipay library](https://github.com/craftcms/commerce-omnipay) and can be used as a point of reference when creating your own.
 
-See the _Extending Commerce_ section’s [Payment Gateway Types](extend/payment-gateway-types.md) page to learn about building your own gateway in a plugin or module.
+See the _Extending Commerce_ section’s [Payment Gateway Types](../extend/payment-gateway-types.md) page to learn about building your own gateway in a plugin or module.
 
 ## Storing Config Outside of the Database
 

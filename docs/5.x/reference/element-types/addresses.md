@@ -14,7 +14,7 @@ containsGeneratedContent: yes
 
 # Addresses
 
-Addresses are a type of [element](../../system/elements.md) you’ll most commonly encounter in conjunction with [Users](./users.md). [Querying addresses](#querying-addresses) and working with their [field data](#fields-and-formatting) is nearly identical to the experience working with any other element type.
+Addresses are a type of [element](../../system/elements.md) you’ll most commonly encounter in conjunction with [Users](users.md). [Querying addresses](#querying-addresses) and working with their [field data](#fields-and-formatting) is nearly identical to the experience working with any other element type.
 
 <!-- more -->
 
@@ -608,7 +608,7 @@ To edit an existing address, we’ll use the `addressUid` parameter from our rou
 
 Addresses are validated like any other type of element, but some of the rules are dependent upon its localized format.
 
-You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), but additional validation of any address properties requires a [custom plugin or module](/4.x/extend/).
+You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), but additional validation of any address properties requires a [custom plugin or module](../../extend/README.md).
 
 ::: tip
 Take a look at the [Using Events in a Custom Module](kb:custom-module-events) article for a dedicated primer on module setup and events.

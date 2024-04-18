@@ -10,7 +10,7 @@ Addresses are now a native part of Craft! We recommend reviewing the [main docum
 
 Commerce manages shipping and billing information using Craft’s <craft4:craft\elements\Address> element type.
 
-In the control panel, you’ll encounter addresses within the context of [orders](./orders-carts.md) and [users](/5.x/system/users.md). A [Store Location](#store-address) address may also be entered at **Commerce** → **Store Settings** → **Store** → **Store Location**.
+In the control panel, you’ll encounter addresses within the context of [orders](./orders-carts.md) and [users](/5.x/system/users.md). [Store locations](#store-addresses) may also be entered at **Commerce** → **Store Management** → **General** → **Store Location**.
 
 Customer’s addresses are managed from their user account, if you’ve [added the native Addresses field](/5.x/reference/element-types/addresses.md#setup) to Users’ field layout. Commerce also inserts a **Commerce Settings** field into the [address field layout](/5.x/reference/element-types/addresses.md#native-and-custom-fields)) with primary shipping and billing controls.
 
@@ -26,24 +26,40 @@ Every order may have a shipping and billing address, and customers with accounts
 
 - The ability to use [estimated addresses](#estimate-addresses) to calculate shipping and tax costs with minimal data entry before checkout.
 - Multiple ways of [updating cart addresses](#updating-cart-addresses) to avoid data re-entry.
-- Methods for working with the store’s [countries & states](countries-states.md) provided by Craft’s supporting [address repository](/5.x/reference/element-types/addresses.md#address-repository).
+- Methods for working with geographic regions provided by Craft’s supporting [address repository](/5.x/reference/element-types/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
-#### Store Address
+#### Store Addresses
 
-The store address (set via **Commerce** &rarr; **Store Settings** &rarr; **Store**) is available via the [Store service](commerce4:craft\commerce\services\Store):
+Each store’s primary address (set via **Commerce** &rarr; **System Settings** &rarr; **Stores**) is available via the global `currentStore` variable or the [`Stores` service](commerce5:craft\commerce\services\Stores):
 
 ::: code
 ```twig
 {% set storeAddress = craft.commerce
-  .getStore()
-  .getStore()
+  .getStores()
+  .getStoreByHandle('eu')
+  .getSettings()
+  .getLocationAddress() %}
+
+{# ...or... #}
+
+{% set storeAddress = currentStore
+  .getSettings()
   .getLocationAddress() %}
 ```
 ```php
 $storeAddress = \craft\commerce\Plugin::getInstance()
-    ->getStore()
-    ->getStore()
+    ->getStores()
+    ->getStoreByHandle('eu')
+    ->getSettings()
+    ->getLocationAddress();
+
+// ...or...
+
+$storeAddress = \craft\commerce\Plugin::getInstance()
+    ->getStores()
+    ->getCurrentStore()
+    ->getSettings()
     ->getLocationAddress();
 ```
 :::

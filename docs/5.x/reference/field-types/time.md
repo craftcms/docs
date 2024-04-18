@@ -10,7 +10,7 @@ You can customize the minute increment and optionally choose minimum and maximum
 
 ## Converting from a Date Field
 
-If you have an existing [Date](date-time-fields.md) field that you wish to convert to a Time field, you may need to update its existing values to compensate for the fact that Date fields store their values in UTC, whereas Time field values are timezone-less.
+If you have an existing [Date](date-time.md) field that you wish to convert to a Time field, you may need to update its existing values to compensate for the fact that Date fields store their values in UTC, whereas Time field values are timezone-less.
 
 For example, if your system timezone is set to `UTC-7 (PDT)`, and you have a Date field value whose time is set to 10:00 AM, its actual value in the database will be `17:00` (5:00 PM), because that’s what 10:00 AM PDT is in UTC.
 

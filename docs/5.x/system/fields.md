@@ -85,13 +85,13 @@ Keep in mind that fields can be assigned to multiple element types. Accessing in
 
 Everything in Craft that has content associated with it will expose a configurable _field layout_, to which you can add your fields:
 
-- **[Entries](entries.md)** use the field layout defined by their entry type in **Settings** → **Entry Types** → [entry type name] → **Field Layout**.
-- **[Global sets](globals.md)** each get their own field layout, defined in **Settings** → **Globals** → [global set name] → **Field Layout**.
-- **[Assets](assets.md)** use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
-- **[Categories](categories.md)** use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
-- **[Tags](tags.md)** use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
-- **[Users](users.md)** share a single field layout defined in **Settings** → **Users** → **User Fields**.
-- **[Addresses](addresses.md)** also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
+- **[Entries](../reference/element-types/entries.md)** use the field layout defined by their entry type in **Settings** → **Entry Types** → [entry type name] → **Field Layout**.
+- **[Global sets](../reference/element-types/globals.md)** each get their own field layout, defined in **Settings** → **Globals** → [global set name] → **Field Layout**.
+- **[Assets](../reference/element-types/assets.md)** use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
+- **[Categories](../reference/element-types/categories.md)** use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
+- **[Tags](../reference/element-types/tags.md)** use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
+- **[Users](../reference/element-types/users.md)** share a single field layout defined in **Settings** → **Users** → **User Fields**.
+- **[Addresses](../reference/element-types/addresses.md)** also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
 
 The field layout editor works the same way regardless of which content type you’re configuring:
 

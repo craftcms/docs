@@ -1,6 +1,6 @@
 # Extending GraphQL
 
-Developers can use Craft’s [GraphQL implementation](../graphql.md) to provide their own GraphQL data and access level for custom plugins and modules.
+Developers can use Craft’s [GraphQL implementation](../development/graphql.md) to provide their own GraphQL data and access level for custom plugins and modules.
 
 If you’ve created a custom element or field type, chances are you’ll want to make its data available via the GraphQL API.
 
@@ -70,7 +70,7 @@ The <craft5:craft\services\Gql> class offers methods mostly for managing schemas
 
 ### Modifying Queries Before or After Execution
 
-The Gql service includes events you can use to modfiy [queries](#queries) before and after they’re executed.
+The Gql service includes events you can use to modify [queries](#queries) before and after they’re executed.
 
 #### beforeExecuteGqlQuery
 
@@ -330,7 +330,7 @@ You can use any of these in your type definitions, i.e. `DateTime::getType()` or
 ### Example Element Type
 
 ::: tip
-“Element Type” in this context refers to the GraphQL type for our custom element, as opposed to Craft’s concept of [Element Types](./element-types.md) that are not GraphQL-specific.
+“Element Type” in this context refers to the GraphQL type for our custom element, as opposed to Craft’s concept of [Element Types](element-types.md) that are not GraphQL-specific.
 :::
 
 A custom element like our Widget would probably best be described by two classes: an [interface](#interfaces) and a type class that implements it.
@@ -562,11 +562,11 @@ For example:
 
 You can use your custom element’s <craft5:craft\base\Element::gqlScopesByContext()> method to declare its context-specific scopes. That’s exactly where Craft’s elements are defining those contexts in the list above:
 
+- <craft5:craft\elements\Address::gqlScopesByContext()>
 - <craft5:craft\elements\Asset::gqlScopesByContext()>
 - <craft5:craft\elements\Category::gqlScopesByContext()>
 - <craft5:craft\elements\Entry::gqlScopesByContext()>
 - <craft5:craft\elements\GlobalSet::gqlScopesByContext()>
-- <craft5:craft\elements\MatrixBlock::gqlScopesByContext()>
 - <craft5:craft\elements\Tag::gqlScopesByContext()>
 - <craft5:craft\elements\User::gqlScopesByContext()>
 

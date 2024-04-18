@@ -8,7 +8,7 @@ Transforms can be defined in the control panel or directly from your templates a
 
 ## Named Transforms
 
-Named transforms are created from the [control panel](./control-panel.md) by navigating to **Settings** → **Assets** → **Image Transforms** and press **New Transform**.
+Named transforms are created from the [control panel](../system/control-panel.md) by navigating to **Settings** → **Assets** → **Image Transforms** and press **New Transform**.
 
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/settings/assets/transforms/new"
@@ -33,7 +33,7 @@ Mode
 :   Specifies how the transform is handled:
 
     - [**Crop**](#crop) (Default) — Crops the image to the specified width and height.
-    - [**Fit**](#fit) — Scales the image so that it is as big as possible with all dimensions fitting within the specified widthand height.
+    - [**Fit**](#fit) — Scales the image so that it is as big as possible with all dimensions fitting within the specified width and height.
     - [**Letterbox**](#letterbox) — Stretches the image to the specified width and height.
     - [**Stretch**](#stretch) — Stretches the image to the specified width and height.
 
@@ -82,7 +82,7 @@ Additional settings are available for some transform modes.
 
 ### Crop
 
-When using the **Crop** mode, a **Default Focal Point** setting is revealed, allowing customization of which image area Craft should center the crop on when a [focal point](assets.md#focal-points) isn’t specified. Its options include:
+When using the **Crop** mode, a **Default Focal Point** setting is revealed, allowing customization of which image area Craft should center the crop on when a [focal point](../reference/element-types/assets.md#focal-points) isn’t specified. Its options include:
 
 - Top-Left
 - Top-Center
@@ -249,7 +249,7 @@ You can also provide relative image sizes when eager-loading asset transforms. S
 
 ## GraphQL
 
-When requesting asset data via the [GraphQL](./graphql.md) API, you can get named and ad-hoc transforms with the `@transform` directive.
+When requesting asset data via the [GraphQL](graphql.md) API, you can get named and ad-hoc transforms with the `@transform` directive.
 
 Like we’ve seen in the template-defined transforms, the GraphQL API allows you to retrieve individual properties as though they were tied to a transform…
 

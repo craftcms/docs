@@ -33,7 +33,7 @@ In the same way that Craft’s native element types each share a set of common a
 **Product Types** provide a way to distinguish classes of goods in your stores. Manage product types in the control panel from <Journey path="Commerce, System Settings, Product Types" />.
 
 ::: warning
-Despite their similarities to [entries](/5.x/reference/elements/entries.md#entry-types), a product’s type cannot be changed after it is created.
+Despite their similarities to [entries](/5.x/reference/element-types/entries.md#entry-types), a product’s type cannot be changed after it is created.
 :::
 
 ### Product Type Options

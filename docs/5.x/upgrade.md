@@ -142,7 +142,7 @@ When selecting a filesystem, options that would result in a collision between tw
 
 #### Variables
 
-With the elimination of Matrix blocks as a discrete element type, we have removed the associated element query factory function from <craft5:craft\web\twig\CraftVariable>.
+With the elimination of Matrix blocks as a discrete element type, we have removed the associated element query factory function from <craft5:craft\web\twig\variables\CraftVariable>.
 
 | Old | New |
 | --- | --- |

@@ -10,7 +10,7 @@ This workflow provides two main benefits:
 The overarching principle behind Project Config is to separate the management of content and settings. In doing so, it’s possible to establish a one-way flow for configuration, and to tie settings and schema to the rest of your project’s code.
 
 ::: tip
-Project Config is a discrete concept from [configuration](./config/README.md), but [often complements](#secrets-and-the-environment) it.
+Project Config is a discrete concept from [configuration](../configure.md), but [often complements](#secrets-and-the-environment) it.
 :::
 
 ## Scope
@@ -35,7 +35,7 @@ Broadly speaking, Project Config tracks things that are managed via the **Settin
 - User settings and user groups
 
 ::: tip
-Plugins and Modules can store their own settings in Project Config, too. See [Supporting Project Config](extend/project-config.md) to learn how.
+Plugins and Modules can store their own settings in Project Config, too. See [Supporting Project Config](../extend/project-config.md) to learn how.
 :::
 
 ## Usage
@@ -76,15 +76,15 @@ Some settings may require you to input sensitive information:
 - An API key for a third-party service
 - A secret access key in an AWS S3 filesystem
 
-Providing a secret verbatim will cause the value to leak into Project Config YAML files. To avoid this, Craft supports using [environment variables](./config/README.md#env) and [aliases](./config/README.md#aliases) to stand in for a sensitive or dynamic value. For example, providing `$MYSERVICE_API_KEY` would read the corresponding value (minus the `$`) from your `.env` file, at runtime. Similarly, values that begin with an `@` are resolved as aliases.
+Providing a secret verbatim will cause the value to leak into Project Config YAML files. To avoid this, Craft supports using [environment variables](../configure.md.md#env) and [aliases](../configure.md#aliases) to stand in for a sensitive or dynamic value. For example, providing `$MYSERVICE_API_KEY` would read the corresponding value (minus the `$`) from your `.env` file, at runtime. Similarly, values that begin with an `@` are resolved as aliases.
 
-![Craft’s autosuggest field, displaying a suitable match](images/site-base-url-setting.png)
+![Craft’s autosuggest field, displaying a suitable match](../images/site-base-url-setting.png)
 
-See [Environmental Configuration](config/#control-panel-settings) for more information.
+See [Environmental Configuration](../configure.md#control-panel-settings) for more information.
 
 ## Working with Others
 
-Project Config simplifies collaboration on big features by letting you share version-controlled settings and schema changes with others just as easily as [deploying](../deployment.md) them. Multiple contributors’ changes can even be cleanly merged together.
+Project Config simplifies collaboration on big features by letting you share version-controlled settings and schema changes with others just as easily as [deploying](../deploy.md) them. Multiple contributors’ changes can even be cleanly merged together.
 
 :::tip
 Merge conflicts _can_ still happen (when two contributors modify the same setting), but resolving them is rarely more difficult than a template or stylesheet—you’ll just have to run `php craft project-config/touch` and then `php craft project-config/apply` to ensure the final result is applied.
@@ -123,7 +123,7 @@ When Craft tries to apply Project Config changes, it will first verify that the 
 
 Changes made to Project Config on production will likely be reverted the next time your site is deployed. Craft does not attempt to distinguish between explicit deletions and incidental removal of settings—if the incoming config has an “old” value (or omits the value entirely), Craft applies those changes.
 
-To prevent this, set <config5:allowAdminChanges> to `false` in `config/general.php`, or via an [environment override](./config/README.md#environment-overrides):
+To prevent this, set <config5:allowAdminChanges> to `false` in `config/general.php`, or via an [environment override](../configure.md#environment-overrides):
 
 ```env
 CRAFT_ALLOW_ADMIN_CHANGES=false

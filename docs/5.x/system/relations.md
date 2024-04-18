@@ -25,12 +25,12 @@ Each relationship consists of two elements we call the *source* and *target*:
 
 ## Illustrating Relations
 
-Suppose we have a database of _Recipes_ (represented as a [channel](./entries.md#channels)) and we want to allow visitors to browse other recipes that share an ingredient. To-date, ingredients have been stored as plain text along with the instructions, and users have relied on search to discover other recipes.
+Suppose we have a database of _Recipes_ (represented as a [channel](../reference/element-types/entries.md#channels)) and we want to allow visitors to browse other recipes that share an ingredient. To-date, ingredients have been stored as plain text along with the instructions, and users have relied on search to discover other recipes.
 
 Let’s leverage Craft’s relations system to improve this “schema” and user experience:
 
 1. Create another channel for _Ingredients_.
-2. Create a new [Entries field](./entries-fields.md), with the name “Ingredients.”
+2. Create a new [Entries field](../reference/field-types/entries.md), with the name “Ingredients.”
 3. Limit the **Sources** option to “Ingredients” only.
 4. Leave the **Limit** field blank so we can choose however many ingredients each recipe needs.
 5. Add this new field to the _Recipes_ channel’s field layout.
@@ -41,13 +41,13 @@ Now, we can attach _Ingredients_ to each _Recipe_ entry via the new _Ingredients
 
 ## Using Relational Data
 
-Relationships are primarily used within [element queries](./element-queries.md), either via a relational field on an element you already have a reference to, or the [`relatedTo()` query parameter](#the-relatedto-parameter).
+Relationships are primarily used within [element queries](../development/element-queries.md), either via a relational field on an element you already have a reference to, or the [`relatedTo()` query parameter](#the-relatedto-parameter).
 
 ### Custom Fields
 
-_Ingredients_ attached to a _Recipe_ can be accessed using the relational field’s handle. Unlike most fields (which return their stored value), relational fields return an [element query](./element-queries.md), ready to fetch the attached elements in the order they were selected.
+_Ingredients_ attached to a _Recipe_ can be accessed using the relational field’s handle. Unlike most fields (which return their stored value), relational fields return an [element query](../development/element-queries.md), ready to fetch the attached elements in the order they were selected.
 
-Craft has X built-in relational fields, each pointing to a different [element type](./elements.md#element-types):
+Craft has X built-in relational fields, each pointing to a different [element type](elements.md#element-types):
 
 - [Assets](../reference/field-types/assets.md)
 - [Categories](../reference/field-types/categories.md)
@@ -99,7 +99,7 @@ Because `entry.ingredients` is an element query, you can set additional constrai
 {% endif %}
 ```
 
-This query will display ingredients attached to the current recipe that _also_ have their `foodGroup` field (perhaps a [Dropdown](./dropdown-fields.md)) set to `vegetable`. Here’s another example using the same schema—but a different [query execution method](./element-queries.md#executing-element-queries)—that lets us answer a question that some cooks might have:
+This query will display ingredients attached to the current recipe that _also_ have their `foodGroup` field (perhaps a [Dropdown](../reference/field-types/dropdown.md)) set to `vegetable`. Here’s another example using the same schema—but a different [query execution method](../development/element-queries.md#executing-element-queries)—that lets us answer a question that some cooks might have:
 
 ```twig
 {% set hasMeat = entry.ingredients.foodGroup(['meat', 'poultry']).exists() %}
@@ -115,7 +115,7 @@ Each relational field type will return a different type of element query. _Entri
 
 ### The `relatedTo` Parameter
 
-The `relatedTo` parameter on every [element query](./element-queries.md) allows you to narrow results based on their relationship to an element (or multiple elements).
+The `relatedTo` parameter on every [element query](../development/element-queries.md) allows you to narrow results based on their relationship to an element (or multiple elements).
 
 Any of the following can be used when setting up a relational query:
 
@@ -319,32 +319,18 @@ Here, we’re allowing Craft to look up substitutions defined in any site, which
 
 Relational fields on nested entries within Matrix fields are used the same way they would be on any other element type.
 
-If you want to find elements related to a source element through a [Matrix](matrix.md) field, pass the Matrix field’s handle to the `field` parameter:
+If you want to find elements related to a source element through a [Matrix](../reference/field-types/matrix.md) field, pass the Matrix field’s handle to the `field` parameter:
 
 ```twig{5}
 {% set relatedRecipes = craft.entries()
     .section('recipes')
     .relatedTo({
         targetElement: ingredient,
-        field: 'steps'
+        field: 'ingredients'
     })
     .all() %}
 ```
 
-In this example, we’ve changed our schema a bit: ingredients are now attached to blocks in a `steps` Matrix field, so we can tie instructions and quantities or volume to each one. We still have access to all the same relational query capabilities!
+In this example, we’ve changed our schema a bit: ingredients are now attached to nested entries in a `steps` Matrix field, so we can tie instructions and quantities or volume to each one. We still have access to all the same relational query capabilities!
 
-If that Matrix field has more than one relational field and you want to target a specific one, you can specify the block type field’s handle using a dot notation:
-
-```twig{5}
-{% set relatedRecipes = craft.entries()
-    .section('recipes')
-    .relatedTo({
-        targetElement: ingredient,
-        field: 'steps.ingredient'
-    })
-    .all() %}
-```
-
-::: warning
-This notation only uses the main Matrix field’s handle and the block’s relational field handle: `matrixFieldHandle.relationalFieldHandle`. The block type handle is _not_ used here, as it is when [eager-loading](../development/eager-loading.md).
-:::
+We’ve also specified a field handle, to ensure that the relationships are defined through the intended field; if nested entries have multiple relational fields, it’s possible to get “false positive” results!

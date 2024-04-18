@@ -193,5 +193,5 @@ Commerce adds email jobs to the queue with [high priority](/4.x/extend/queue-job
 When an email fails to send in response to a status change, its queue job will be marked as failed and include an appropriate message. Once you fix the cause of the sending failure, you can retry sending the email from the queue via **Utilities** → **Queue Manager**.
 
 ::: tip
-If a plugin suppresses an email (by listening to [`EVENT_BEFORE_SEND_MAIL`](extend/events.md#beforesendemail) and assigning `$event->isValid` to `false`), queue jobs will complete normally.
+If a plugin suppresses an email (by listening to [`EVENT_BEFORE_SEND_MAIL`](../extend/events.md#beforesendemail) and assigning `$event->isValid` to `false`), queue jobs will complete normally.
 :::

@@ -100,6 +100,6 @@ If you’d rather have your custom field type manage its own content in the data
 
 - Automatic creation, duplication, retrieval, and deletion of field content in the database.
 - Any core migrations or improvements that impact the `content` table.
-- Automatic support for [sites and localization](../sites.md).
+- Automatic support for [sites and localization](../system/sites.md).
 - Automatic inclusion of content fields in element queries and GraphQL.
 

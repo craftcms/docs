@@ -10,16 +10,16 @@ related:
 
 # Tags
 
-You can create folksonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Tags. Tags are another type of [element](./elements.md).
+You can create folksonomies for your [entries](entries.md), [users](users.md), and [assets](assets.md) using Tags. Tags are another type of [element](../../system/elements.md).
 
 <!-- more -->
 
 <Block label="Migrating to Channels">
 
-With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
+With the release of Craft 4.4, we began consolidating features of [other element types](../../system/elements.md) into [entries](entries.md).
 
 ::: warning
-A comparable [tags field](tags-fields.md) UI has not yet been introduced for entries. If you or your clients value this authoring experience, it is safe to continue using tags!
+A comparable [tags field](../field-types/tags.md) UI has not yet been introduced for entries. If you or your clients value this authoring experience, it is safe to continue using tags!
 :::
 
 As part of that process, we introduced a [console command](../cli.md#entrify-categories) that can automate the conversion of tags to [channel sections](entries.md#channels):
@@ -38,17 +38,17 @@ Before you can create tags, you must create Tag Groups to contain them.
 
 To create a new tag group, go to **Settings** → **Tags** and click **New Tag Group**.
 
-Each tag group holds a unique set of tags, and lets you define a custom set of [fields](fields.md) that should be available to tags within the group. However, you don’t need to assign any fields to the Tag Group Field Layout in order to use the group.
+Each tag group holds a unique set of tags, and lets you define a custom set of [fields](../../system/fields.md) that should be available to tags within the group. However, you don’t need to assign any fields to the Tag Group Field Layout in order to use the group.
 
 ::: tip
-There is no centralized editing view for tags (like there is for other element types), so fields you attach will only be editable via a [slideout](./control-panel.md#slideouts), after a tag has been created and assigned to a tag field.
+There is no centralized editing view for tags (like there is for other element types), so fields you attach will only be editable via a [slideout](../../system/control-panel.md#slideouts), after a tag has been created and assigned to a tag field.
 :::
 
 ## Assigning Tags
 
-To assign tags to things (like Entries), you must create a [Tags field](tags-fields.md) and add it to a Field Layout.
+To assign tags to things (like Entries), you must create a [Tags field](../field-types/tags.md) and add it to a Field Layout.
 
-Each Tags field is connected to a single tag group. Whatever you attach the field to (entries, assets, users, etc.) will be able to create new tags and create [relations](relations.md) to any of the tags within that group.
+Each Tags field is connected to a single tag group. Whatever you attach the field to (entries, assets, users, etc.) will be able to create new tags and create [relations](../../system/relations.md) to any of the tags within that group.
 
 ## Querying Tags
 
@@ -65,10 +65,10 @@ $myTagQuery = \craft\elements\Tag::find();
 ```
 :::
 
-Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [Tag](craft5:craft\elements\Tag) objects will be returned.
+Once you’ve created a tag query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Tag](craft5:craft\elements\Tag) objects will be returned.
 
 ::: tip
-See [Element Queries](element-queries.md) to learn about how element queries work.
+See [Element Queries](../../development/element-queries.md) to learn about how element queries work.
 :::
 
 ### Example

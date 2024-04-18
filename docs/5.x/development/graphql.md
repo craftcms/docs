@@ -87,7 +87,7 @@ We could use the `relatedToCategories` argument, for example, to narrow our prev
 ```
 
 ::: tip
-See [Relations](relations.md) for more on Craft’s relational field types.
+See [Relations](../system/relations.md) for more on Craft’s relational field types.
 :::
 
 ### Mutation
@@ -1841,7 +1841,7 @@ Either way you’ll use the `FileInput` GraphQL input type, which has the follow
 
 #### Saving an Entry
 
-To save an [entry](entries.md), use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Entry`:
+To save an [entry](../reference/element-types/entries.md), use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Entry`:
 
 <!-- BEGIN ENTRY MUTATION ARGS -->
 
@@ -1906,7 +1906,7 @@ You can delete an entry using the `deleteEntry` mutation, which requires the `id
 
 #### Saving an Asset
 
-To create or update an [asset](assets.md), use the volume-specific mutation which will have a name in the form of `save_<volumeHandle>_Asset`:
+To create or update an [asset](../reference/element-types/assets.md), use the volume-specific mutation which will have a name in the form of `save_<volumeHandle>_Asset`:
 
 <!-- BEGIN ASSET MUTATION ARGS -->
 
@@ -1930,7 +1930,7 @@ You can delete an asset using the `deleteAsset` mutation, which requires the `id
 
 #### Saving a Tag
 
-To create or update a [tag](tags.md), use the tag group-specific mutation which will have a name in the form of `save_<tagGroupHandle>_Tag`:
+To create or update a [tag](../reference/element-types/tags.md), use the tag group-specific mutation which will have a name in the form of `save_<tagGroupHandle>_Tag`:
 
 <!-- BEGIN TAG MUTATION ARGS -->
 
@@ -1952,7 +1952,7 @@ To delete a tag, use the `deleteTag` mutation which requires the `id` of the tag
 
 #### Saving a Category
 
-To create or update a [category](categories.md), use the category group-specific mutation which will have a name in the form of `save_<categoryGroupHandle>_Category`.
+To create or update a [category](../reference/element-types/categories.md), use the category group-specific mutation which will have a name in the form of `save_<categoryGroupHandle>_Category`.
 
 <!-- BEGIN CATEGORY MUTATION ARGS -->
 
@@ -1999,4 +1999,4 @@ It’s currently not possible to mutate users with Craft’s GraphQL API.
 
 ## Further Reading
 
-If you’re looking to add GraphQL support in your own plugin or module, see [Extending GraphQL](extend/graphql.md).
+If you’re looking to add GraphQL support in your own plugin or module, see [Extending GraphQL](../extend/graphql.md).

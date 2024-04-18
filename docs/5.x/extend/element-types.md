@@ -760,7 +760,7 @@ protected static function defineExporters(string $source): array
 
 ### Actions
 
-The [defineActions()](craft5:craft\base\Element::defineActions()) method determines which [actions](element-action-types.md) your element type supports on its index page:
+The [defineActions()](craft5:craft\base\Element::defineActions()) method determines which [actions](element-actions.md) your element type supports on its index page:
 
 ```php
 protected static function defineActions(string $source = null): array
@@ -957,7 +957,7 @@ To give your elements dedicated edit pages, you must define a route that agrees 
 $event->rules['products/<elementId:\d+>'] = 'elements/edit';
 ```
 
-Craft takes care of assembling the actual edit template, through the unified [`elements/edit`](craft5:craft\web\controllers\Elements::actionEdit()) controller action.
+Craft takes care of assembling the actual edit template, through the unified [`elements/edit`](craft5:craft\controllers\Elements::actionEdit()) controller action.
 
 ::: warning
 You can use your own controller to render element edit screens, but it becomes your responsibility to handle permissions, drafts, revisions, and auto-saving.

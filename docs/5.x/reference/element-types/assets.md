@@ -14,7 +14,7 @@ Craft lets you manage media and document files (“assets”) just like entries 
 
 <!-- more -->
 
-Assets are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Asset>.
+Assets are one of Craft’s built-in [element types](../../system/elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Asset>.
 
 ## Volumes
 
@@ -33,7 +33,7 @@ Volumes can store their [transforms](#image-transforms) alongside the original i
 
 ## Filesystems
 
-Filesystems decouple asset management (organization, permissions, and content) from the minutiae of actually storing and serving files.
+Filesystems decouple the minutiae of storing and serving actual files from asset management (organization, permissions, and content).
 
 All filesystems support the following options:
 
@@ -63,13 +63,12 @@ Craft/PHP must be able to write to any directories you use for a local filesyste
 
 If you would prefer to store your assets on a remote storage service like Amazon S3, you can install a plugin that provides the appropriate filesystem adapter.
 
-- [Amazon S3](https://github.com/craftcms/aws-s3) (first party)
-- [Google Cloud Storage](https://github.com/craftcms/google-cloud) (first party)
-- [Rackspace Cloud Files](https://github.com/craftcms/rackspace) (first party)
-- [DigitalOcean Spaces](https://github.com/vaersaagod/dospaces) (Værsågod)
-- [fortrabbit Object Storage](https://github.com/fortrabbit/craft-object-storage) (fortrabbit)
+- [Amazon S3](plugin:aws-s3) (first party)
+- [Google Cloud Storage](plugin:google-cloud) (first party)
+- [DigitalOcean Spaces](plugin:dospaces) (Værsågod)
+- [fortrabbit Object Storage](plugin:fortrabbit-object-storage) (fortrabbit)
 
-The settings for each type of filesystem will differ based on the provider, and may involve secrets. We recommend using [special config values](./config/README.md#control-panel-settings) to store and use these, securely.
+The settings for each type of filesystem will differ based on the provider, and may involve secrets. We recommend using [special config values](../../configure.md#control-panel-settings) to store and use these, securely.
 
 ## Asset Custom Fields
 
@@ -89,9 +88,9 @@ Asset field layouts can include the native **Alternative Text** <Poi label="1" t
 <img src="../../images/assets-field-layout.png" />
 </BrowserShot>
 
-Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](../../system/fields.md) values, attributes, or combination thereof. 
+A native `alt` attribute is provided to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](../../system/fields.md) values, attributes, or combination thereof. 
 
-We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier. The WCAG [advises against](https://www.w3.org/TR/2015/REC-ATAG20-20150924/Overview.html#gl_b23) automatically repairing alt text with “generic [or] irrelevant strings,” including the name of the file (which asset titles are generated from), so Craft omits the `alt` attribute when using `asset.getImg()` if no explicit text is available.
+We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier. The WCAG [advises against](https://www.w3.org/TR/2015/REC-ATAG20-20150924/Overview.html#gl_b23) automatically repairing alt text with “generic or irrelevant strings,” including the name of the file (which asset titles are generated from), so Craft omits the `alt` attribute when using `asset.getImg()` if no explicit text is available.
 
 **Alternative Text** is also displayed as a “transcript” beneath video previews, in the control panel.
 

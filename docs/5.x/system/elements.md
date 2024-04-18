@@ -41,21 +41,21 @@ Choosing the appropriate element type for your content model is essential—but 
 
 Some features are available to all (or most) element types:
 
-- Control panel interfaces, including forms, [indexes](#indexes), [slide-outs](./control-panel.md#slideouts), and [chips and cards](#chips-cards);
-- [Custom fields](./fields.md) and field layouts with advanced condition rules for storing content;
-- Slugs, URIs, URLs, and automatic [routing](./routing.md);
-- Localization via [sites](./sites.md);
-- Sophisticated [permissions](./user-management.md#permissions);
+- Control panel interfaces, including forms, [indexes](#indexes), [slide-outs](control-panel.md#slideouts), and [chips and cards](#chips-cards);
+- [Custom fields](fields.md) and field layouts with advanced condition rules for storing content;
+- Slugs, URIs, URLs, and automatic [routing](routing.md);
+- Localization via [sites](sites.md);
+- Sophisticated [permissions](user-management.md#permissions);
 - [Element queries](../development/element-queries.md) with advanced sorting and filtering capabilities;
-- Bi-directional [relationships](./relations.md);
-- Automatic indexing for [search](./searching.md);
+- Bi-directional [relationships](relations.md);
+- Automatic indexing for [search](searching.md);
 - Statuses for managing visibility of content;
 
 Other features are specific to a type—like Assets’ tie to files, or Entries’ nesting capability.
 
 ## Indexes
 
-You’ll access most elements via their element index. Indexes allow you to browse, sort, filter, and [search](./searching.md) for elements in a paginated, table-like view.
+You’ll access most elements via their element index. Indexes allow you to browse, sort, filter, and [search](searching.md) for elements in a paginated, table-like view.
 
 ::: tip
 [Matrix fields](../reference/field-types/matrix.md) also have a compact element index **View Mode**.
@@ -72,9 +72,9 @@ Each source also controls what columns are visible in the index, and its default
 </BrowserShot>
 
 ::: tip
-Custom sources are stored in [Project Config](./project-config.md). The interface for conditions that involve specific elements (like an author) may appear differently than the equivalent [filter](#filters-and-columns), because the ID may not be stable between environments.
+Custom sources are stored in [Project Config](project-config.md). The interface for conditions that involve specific elements (like an author) may appear differently than the equivalent [filter](#filters-and-columns), because the ID may not be stable between environments.
 
-Instead of an element select field, you’ll see an [autosuggest input](./project-config.md#secrets-and-the-environment).
+Instead of an element select field, you’ll see an [autosuggest input](project-config.md#secrets-and-the-environment).
 :::
 
 ### Filters and Columns
@@ -117,7 +117,7 @@ Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button
 
 ### Modals & Contexts
 
-A streamlined version of indexes are used when adding elements to a [relational](./relations.md) field via a modal. Depending on the field’s configuration, Craft may hide sources or actions, and disable [slideouts](./control-panel.md#slideouts) (except to create a new element, in-context) and pagination (in favor of scrolling). Internally, Craft refers to these variations as “contexts,” which [plugins](../extend/element-types.md#sources) have an opportunity to modify.
+A streamlined version of indexes are used when adding elements to a [relational](relations.md) field via a modal. Depending on the field’s configuration, Craft may hide sources or actions, and disable [slideouts](control-panel.md#slideouts) (except to create a new element, in-context) and pagination (in favor of scrolling). Internally, Craft refers to these variations as “contexts,” which [plugins](../extend/element-types.md#sources) have an opportunity to modify.
 
 ### Chips & Cards <Badge text="New!" />
 
@@ -211,7 +211,7 @@ Property | Type | Notes
 `id` | `int` | ID of the element.
 `level` | `int|null` | Depth of the element in a structure. _Structures only._
 `parentId` | `int|null` | ID of the parent element. _Structures only._
-`searchScore` | `int` | Score relative to other results when returned from an [element query](element-queries.md) using the [`search` param](searching.md).
+`searchScore` | `int` | Score relative to other results when returned from an [element query](../development/element-queries.md) using the [`search` param](searching.md).
 `siteId` | `int` | ID of the <craft5:craft\models\Site> the element was loaded in.
 `slug` | `string|null` | _Only for elements with slugs._
 `title` | `string|null` | _Only for elements with titles._

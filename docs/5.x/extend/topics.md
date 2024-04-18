@@ -118,7 +118,7 @@ $response = $client->post('/widgets', [
 ]);
 ```
 
-Creating HTTP clients this way ensures that all outgoing requests are configured the same way—Craft will apply project-specific settings from the [Guzzle config file](../config/README.md#guzzle), as well as a [global `httpProxy`](../config/general.md#httpproxy).
+Creating HTTP clients this way ensures that all outgoing requests are configured the same way—Craft will apply project-specific settings from the [Guzzle config file](../configure.md#guzzle), as well as a [global `httpProxy`](../reference/config/general.md#httpproxy).
 
 ::: warning
 Some third-party packages will use their own HTTP client. Whenever possible, provide the equivalent configuration to those adapters. Guzzle configuration (if any was provided) is available through the config service:
@@ -152,14 +152,14 @@ FileHelper::writeToFile($path, $content);
 // Pass $path back to another part of the application...
 ```
 
-Notice that we’ve used <craft5:craft\services\Path::getTempPath()> to keep our files alongside other runtime data. This helps Craft clean up temporary data via the [Caches utility](../control-panel.md#utilities), or the [`clear-caches/temp-files` console command](../reference/cli.md#clear-caches-temp-files).
+Notice that we’ve used <craft5:craft\services\Path::getTempPath()> to keep our files alongside other runtime data. This helps Craft clean up temporary data via the [Caches utility](../system/control-panel.md#utilities), or the [`clear-caches/temp-files` console command](../reference/cli.md#clear-caches-temp-files).
 
 ::: tip
-[Logging](../logging.md) should always be done via Craft’s convenience methods, not written directly to disk.
+[Logging](../system/logging.md) should always be done via Craft’s convenience methods, not written directly to disk.
 :::
 
 ## The Control Panel
 
-Start learning about how to create new views in the [control panel](../control-panel.md).
+Start learning about how to create new views in the [control panel](../system/control-panel.md).
 
 <See path="cp-section.md" />

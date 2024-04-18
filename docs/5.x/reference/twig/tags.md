@@ -195,7 +195,7 @@ There are also some cases where it’s _not_ a good idea to use them:
 - You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
 
 ::: tip
-The `{% cache %}` tag detects ungenerated [image transform](../image-transforms.md) URLs within it. When it finds any, it holds off caching the template until the next request so those temporary image URLs aren’t cached.
+The `{% cache %}` tag detects ungenerated [image transform](../../development/image-transforms.md) URLs within it. When it finds any, it holds off caching the template until the next request so those temporary image URLs aren’t cached.
 :::
 
 ## `css`
@@ -262,7 +262,7 @@ Unlike [`dd`](#dd) (which halts execution), `{% dump %}` quietly logs the curren
 In this scenario, keys of the dumped array are variable names, and the values represent the [data types](../../development/twig.md.md#types-of-values). Expand complex types to view nested properties by clicking any value with a signature like `craft\elements\Category {#123 ▶}`.
 
 ::: tip
-To enable the debug toolbar, visit your user profile in the [control panel](../control-panel.md) and check **Show the debug toolbar on the front end** within the **Preferences** tab.
+To enable the debug toolbar, visit your user profile in the [control panel](../../system/control-panel.md) and check **Show the debug toolbar on the front end** within the **Preferences** tab.
 :::
 
 ## `exit`
@@ -291,7 +291,7 @@ If you choose to set the HTTP status code that should be included with the respo
 
 #### Message
 
-The second parameter is passed to the [error template](../routing.md#error-templates) as the `message` variable:
+The second parameter is passed to the [error template](../../system/routing.md#error-templates) as the `message` variable:
 
 ```twig
 {% if not currentUser.isInGroup('powerUsers') ?? false %}
@@ -336,7 +336,7 @@ This tag gives plugins and modules an opportunity to hook into the template, to 
 {% hook 'my-custom-hook-name' %}
 ```
 
-See [Template Hooks](../extend/template-hooks.md) for details on plugins and modules can work with `{% hook %}` tags.
+See [Template Hooks](../../extend/template-hooks.md) for details on plugins and modules can work with `{% hook %}` tags.
 
 ## `html`
 
@@ -349,7 +349,7 @@ The `{% html %}` tag can be used to register arbitrary HTML code on the page.
 ```
 
 ::: tip
-The tag calls <craft5:craft\web\View::registerHtml()> under the hood, which can also be accessed via the [global `view` variable](./global-variables.md#view).
+The tag calls <craft5:craft\web\View::registerHtml()> under the hood, which can also be accessed via the [global `view` variable](global-variables.md#view).
 
 ```twig
 {% set para = '<p>This will be placed right before the <code>&lt;/body&gt;</code> tag.</p>' %}
@@ -528,7 +528,7 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 
 ## `nav`
 
-This tag helps create a hierarchical navigation menu for entries in a [Structure section](../entries.md#section-types) or a [Category Group](../categories.md).
+This tag helps create a hierarchical navigation menu for entries in a [Structure section](../element-types/entries.md#section-types) or a [Category Group](../element-types/categories.md).
 
 ```twig
 {% set entries = craft.entries().section('pages').all() %}
@@ -561,7 +561,7 @@ The first thing to follow “`{% nav`” is the variable name you’d like to us
 
 #### `in`
 
-Next you need to type the word “`in`”, followed by the array of entries the tag should loop through. This can be an array of elements, or an [element query](../element-queries.md).
+Next you need to type the word “`in`”, followed by the array of entries the tag should loop through. This can be an array of elements, or an [element query](../../development/element-queries.md).
 
 ::: warning
 The `{% nav %}` tag requires elements to be queried in a specific (hierarchical) order, so make sure you don’t override the `order` criteria parameter in conjunction with this tag.
@@ -599,7 +599,7 @@ This tag makes it easy to paginate query results across multiple pages.
 {% if pageInfo.nextUrl %}<a href="{{ pageInfo.nextUrl }}">Next Page</a>{% endif %}
 ```
 
-Complete reference for the `paginate` tag and the related `pageInfo` objects is available on the [element queries](../element-queries.md#pagination) page.
+Complete reference for the `paginate` tag and the related `pageInfo` objects is available on the [element queries](../../development/element-queries.md#pagination) page.
 
 ::: warning
 Only a single `{% paginate %}` tag should be used per request.
@@ -611,7 +611,7 @@ The `{% paginate %}` tag has the following parameters:
 
 #### Query
 
-The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](../element-queries.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
+The first thing you pass into the `{% paginate %}` tag is a query object (such as an [element query](../../development/element-queries.md)), which defines all of the results that should be paginated. Use the `limit` parameter to define how many results should show up per page (100 by default).
 
 ::: warning
 This parameter needs to be an actual query object, not an array of pre-fetched results. So don’t call `all()` on the query before passing it in.
@@ -842,7 +842,7 @@ This tag will ensure that the current user is logged in with an account that has
 
 The user can have the permission either directly or through one of their user groups. If they don’t have it, a 403 (Forbidden) error will be served.
 
-See the [Users](../users.md#permissions) page for a list of available permissions.
+<See path="../../system/user-management.md" hash="permissions" label="User Permissions" description="View a complete list of available permissions." />
 
 ## `script`
 

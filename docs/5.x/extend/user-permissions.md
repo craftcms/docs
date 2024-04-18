@@ -4,7 +4,7 @@ description: Register a customizable permissions scheme for your plugin’s feat
 
 # User Permissions
 
-Modules and plugins can register new [user permissions](../user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft5:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
+Modules and plugins can register new [user permissions](../system/user-management.md#permissions) to the system using the [EVENT_REGISTER_PERMISSIONS](craft5:craft\services\UserPermissions::EVENT_REGISTER_PERMISSIONS) event:
 
 ```php
 use craft\events\RegisterUserPermissionsEvent;

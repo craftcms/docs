@@ -4,7 +4,7 @@ updatedVersion: 5.x/system/directory-structure.md
 
 # Directory Structure
 
-A fresh Craft [installation](../install.md) will have the following [folders](#folders) and [files](#files) in it. Existing projects may have [additional files](#other-common-files) in the root.
+A fresh Craft [installation](../installation.md) will have the following [folders](#folders) and [files](#files) in it. Existing projects may have [additional files](#other-common-files) in the root.
 
 ## Customizing Paths
 

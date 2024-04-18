@@ -87,12 +87,12 @@ Users | `username`<br>`firstname`<br>`lastname`<br>`fullname` (firstname + lastn
 Tags | `title`
 
 ::: warning
-Searching is a great way to quickly find content by keywords—but the most reliable way to directly query against attributes and custom fields is via the element type’s [query parameters](element-queries.md#types--parameters).
+Searching is a great way to quickly find content by keywords—but the most reliable way to directly query against attributes and custom fields is via the element type’s [query parameters](../development/element-queries.md#types--parameters).
 :::
 
 ### Element-Specific Attribute Search Examples
 
-If you wanted to search only for [Assets](./assets.md) that are *images*, it would look like this in the control panel:
+If you wanted to search only for [Assets](../reference/element-types/assets.md) that are *images*, it would look like this in the control panel:
 
 ![Searching for image assets in the control panel](../images/search-assets-by-kind.png)
 
@@ -129,7 +129,7 @@ Querying elements by specific attribute or field values is more efficient when u
   .all() %}
 ```
 
-This can still be combined with keyword search, and will often support more explicit and flexible [arguments](./assets.md#kind).
+This can still be combined with keyword search, and will often support more explicit and flexible [arguments](../reference/element-types/assets.md#kind).
 :::
 
 If you were to search for Users with email addresses ending in `@craftcms.com`, it would look like this in the control panel:
@@ -160,7 +160,7 @@ $images = \craft\elements\User::find()
 ```
 :::
 
-As with the first example, this query could be simplified with the native [`.email()`](./users.md#email) query param:
+As with the first example, this query could be simplified with the native [`.email()`](../reference/element-types/users.md#email) query param:
 
 ```twig
 {% set team = craft.users()
@@ -204,7 +204,7 @@ $results = \craft\elements\Entry::find()
 :::
 
 ::: tip
-See our [Search Form](https://craftcms.com/knowledge-base/search-form) article for a complete example of listing dynamic search results.
+See our [Search Form](kb:search-form) article for a complete example of listing dynamic search results.
 :::
 
 When using the `search` param, each returned element will be have its [`searchScore`](#scoring-algorithm) attribute populated with a value representing how well the query matched.
@@ -269,7 +269,7 @@ This is an extreme example—but it shows how quickly exact or near-exact matche
 
 Each element type makes basic details, called _searchable attributes_, available as search keywords. It’s common to search for entries by title, for example, or for users matching a name or email address. (We just looked at these in the [Searching for Specific Element Attributes](#searching-for-specific-element-attributes) table.)
 
-You can configure any [custom field](./fields.md) to make its content available for search by enabling **Use this field’s values as search keywords**:
+You can configure any [custom field](fields.md) to make its content available for search by enabling **Use this field’s values as search keywords**:
 
 ![Searchable Checkbox](../images/searchable-checkbox.png)
 
@@ -278,7 +278,7 @@ Indexes are only updated once an element with the field is saved. If you have a 
 ::: tip
 For Matrix fields, the top-level **Use this field’s values as search keywords** setting determines whether _any_ sub-fields will factor into results for the parent—individual fields must also opt-in to indexing for any keywords to be bubbled up.
 
-For relational fields like [Assets](./assets-fields.md), [Categories](./categories-fields.md), and [Entries](./entries-fields.md), the setting determines whether titles of related elements should factor into search results.
+For relational fields like [Assets](../reference/field-types/assets.md), [Categories](../reference/field-types/categories.md), and [Entries](../reference/field-types/entries.md), the setting determines whether titles of related elements should factor into search results.
 :::
 
 ## Indexing Criteria
@@ -303,7 +303,7 @@ You can modify both the indexing and scoring of results, programmatically.
 
 ### Customizing the Index
 
-Craft generates keywords for element attributes and custom fields based on its understanding of their data types. Each [element](./elements.md) and [field](./fields.md) type also have an opportunity to customize keywords: Assets index their `filename`, `extension`, and `kind` attributes; [relational fields](./relations.md) load the attached elements and concatenate their titles.
+Craft generates keywords for element attributes and custom fields based on its understanding of their data types. Each [element](elements.md) and [field](fields.md) type also have an opportunity to customize keywords: Assets index their `filename`, `extension`, and `kind` attributes; [relational fields](relations.md) load the attached elements and concatenate their titles.
 
 Keywords can come in virtually any form, because Craft [normalizes](craft5:craft\helpers\Search::normalizeKeywords()) them before adding them to the index. You can supplant or augment keywords (or index additional attributes—real or virtual) by listening to specific search events.
 
@@ -393,7 +393,7 @@ Your custom search attributes don’t have to exist on an element to be indexed!
 
 ### Altering Scores
 
-To alter the [search score](#scoring-algorithm) assigned by Craft, listen for the <craft5:craft\services\Search::EVENT_AFTER_SEARCH> event [from a plugin or module](./extend/events.md):
+To alter the [search score](#scoring-algorithm) assigned by Craft, listen for the <craft5:craft\services\Search::EVENT_AFTER_SEARCH> event [from a plugin or module](../extend/events.md):
 
 ::: code
 ```php Basics
@@ -462,5 +462,5 @@ Event::on(
 :::
 
 ::: tip
-Keep in mind that element IDs may not be stable between environments, so you may need to look it up (with an [Element Query](./element-queries.md)) or store it as an environment variable!
+Keep in mind that element IDs may not be stable between environments, so you may need to look it up (with an [Element Query](../development/element-queries.md)) or store it as an environment variable!
 :::

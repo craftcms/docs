@@ -28,7 +28,7 @@ Jobs will enter and clear the queue naturally, as you use Craft. In the unlikely
 </BrowserShot>
 
 ::: tip
-Plugins can take advantage of the queue by providing custom [job types](extend/queue-jobs.md)!
+Plugins can take advantage of the queue by providing custom [job types](../extend/queue-jobs.md)!
 
 [Commerce](/commerce/5.x/README.md), for example, uses the queue to send order emails so that a customer’s checkout experience is not disrupted by esoteric mailer errors.
 :::
@@ -67,7 +67,7 @@ All Craft features will work as expected with the default queue configuration.
 The following options are configured outside of Craft, and are only recommended for users with some unix systems administration experience. Check with your host to see if they offer native tools for managing services and CRON tasks.
 :::
 
-Projects that rely on the queue for time-sensitive or critical features (like sending [order status emails](/commerce/5.x/emails.md) in Commerce) can take advantage of Craft’s [CLI](../reference/cli.md#queue) for more flexibility over when and where the queue is run:
+Projects that rely on the queue for time-sensitive or critical features (like sending [order status emails](/commerce/5.x/system/emails.md) in Commerce) can take advantage of Craft’s [CLI](../reference/cli.md#queue) for more flexibility over when and where the queue is run:
 
 ```bash
 php craft queue/run

@@ -286,7 +286,7 @@ Encodes a value as base64. Base64 can be useful for making unpredictable strings
 {# -> Q3JhZnQgQ01T #}
 ```
 
-If you intend to use the value in a style sheet or URI, consider the [`dataUrl()` function](./functions.md#dataurl), instead.
+If you intend to use the value in a style sheet or URI, consider the [`dataUrl()` function](functions.md#dataurl), instead.
 
 ::: danger
 Encoding is _not_ the same as encryption! The result may appear random, but is completely reversible. Read more about the principles and applications of [base64](https://en.wikipedia.org/wiki/Base64) if you are unsure whether it is appropriate!
@@ -752,7 +752,7 @@ Lowercases the first character of a string.
 
 ## `length`
 
-Returns the length of a string or array, or a query’s result [count](../element-queries.md#count).
+Returns the length of a string or array, or a query’s result [count](../../development/element-queries.md#count).
 
 If used on anything besides a query, Twig’s built-in [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter logic will be used.
 
@@ -1119,7 +1119,7 @@ Parses an HTML tag to find its attributes.
 
 ## `parseRefs`
 
-Parses a string for [reference tags](../reference-tags.md).
+Parses a string for [reference tags](../../system/reference-tags.md).
 
 ```twig
 {% set content %}
@@ -1200,7 +1200,7 @@ Define config on-the-fly by passing an object:
 }) }}
 ```
 
-See the [configuration docs](../config/README.md#html-purifier) for more information on using HTML Purifier.
+See the [configuration docs](../../configure.md#html-purifier) for more information on using HTML Purifier.
 
 ## `push`
 
@@ -1387,7 +1387,7 @@ If no category is specified, it will default to `site`.
 ```
 
 ::: tip
-See [Static Message Translations](../sites.md#static-message-translations) for a full explanation on how this works.
+See [Static Message Translations](../../system/sites.md#static-message-translations) for a full explanation on how this works.
 :::
 
 ## `truncate`

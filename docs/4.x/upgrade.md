@@ -257,7 +257,7 @@ Some template functions have been removed completely:
 
 #### Variables
 
-Certain services were exposed via the `craft` variable in Twig (an instance of <craft4:craft\web\twig\CraftVariable>) for greater compatibility with Craft 2 templates, but those have been removed in favor of accessing them via the `craft.app` variable:
+Certain services were exposed via the `craft` variable in Twig (an instance of <craft4:craft\web\twig\variables\CraftVariable>) for greater compatibility with Craft 2 templates, but those have been removed in favor of accessing them via the `craft.app` variable:
 
 | Old Template Variable     | What to do instead
 | ------------------------- | ---------------------------------------------

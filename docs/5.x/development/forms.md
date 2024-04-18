@@ -38,11 +38,11 @@ This `action` parameter is different from the `<form action="...">` attribute:
 - The _form attribute_ should only be used when you want to control where a user is sent in [failure scenarios](#failure). When an `action` param is _not_ present in the request, you can use an “action path” like `action="/actions/users/login"`. This attribute has no effect if a redirect is issued in response to the request!
 :::
 
-Craft also supports routing to specific actions using a path (beginning with the <config5:actionTrigger> setting), or by creating an [rule in `routes.php`](../routing.md#advanced-routing-with-url-rules).
+Craft also supports routing to specific actions using a path (beginning with the <config5:actionTrigger> setting), or by creating an [rule in `routes.php`](../system/routing.md#advanced-routing-with-url-rules).
 
 ### HTTP Verbs
 
-Each action usually responds to one [HTTP method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). Using an unsupported method will throw a <yii2:yii\web\BadRequestHttpException>, and show your [error template](../routing.md#error-templates) with a 400 `statusCode`—or send a JSON response with an `error` key.
+Each action usually responds to one [HTTP method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). Using an unsupported method will throw a <yii2:yii\web\BadRequestHttpException>, and show your [error template](../system/routing.md#error-templates) with a 400 `statusCode`—or send a JSON response with an `error` key.
 
 #### `POST`
 
@@ -106,7 +106,7 @@ fetch('/actions/users/session-info', {
 ::: tip
 You may notice that the `actionUrl()` function generates URLs with `index.php` visible, despite your <config5:omitScriptNameInUrls> setting. This is intended, as it guarantees compatibility with all environments, regardless of configuration.
 
-If you need a cleaner URL, consider setting up a custom [route](../routing.md#advanced-routing-with-url-rules).
+If you need a cleaner URL, consider setting up a custom [route](../system/routing.md#advanced-routing-with-url-rules).
 :::
 
 ### CSRF
@@ -132,14 +132,14 @@ Craft has a number of built-in Twig functions to make dealing with forms and inp
 
 Function | Notes
 -------- | -----
-[actionInput()](./functions.md#actioninput) | Generate a hidden HTML `<input>` element for controlling which action a `<form>` should route to.
-[actionUrl()](./functions.md#actionurl) | Generate an absolute URL to the specified action, with any extra params. <badge vertical="baseline" type="verb">GET</badge> only.
-[csrfInput()](./functions.md#csrfinput) | Generate a hidden HTML `<input>` required for CSRF protection.
-[failMessageInput()](./functions.md#failmessageinput) | Override error-condition flash messages. <badge vertical="baseline" type="verb">POST</badge> only, ignored for Ajax requests.
-[hiddenInput()](./functions.md#hiddeninput) | Lower-level helper for generating hidden HTML inputs.
-[input()](./functions.md#input) | Even finer-grained control over HTML `<input>` element creation.
-[redirectInput()](./functions.md#redirectinput) | Generates a hidden HTML `<input>` element to control redirection after successful requests. <badge vertical="baseline" type="verb">POST</badge> only, ignored for Ajax requests.
-[successMessageInput()](./functions.md#successmessageinput) | Override success-condition flash messages. <badge vertical="baseline" type="verb">POST</badge> only, ignored for Ajax requests.
+[actionInput()](../reference/twig/functions.md#actioninput) | Generate a hidden HTML `<input>` element for controlling which action a `<form>` should route to.
+[actionUrl()](../reference/twig/functions.md#actionurl) | Generate an absolute URL to the specified action, with any extra params. <badge vertical="baseline" type="verb">GET</badge> only.
+[csrfInput()](../reference/twig/functions.md#csrfinput) | Generate a hidden HTML `<input>` required for CSRF protection.
+[failMessageInput()](../reference/twig/functions.md#failmessageinput) | Override error-condition flash messages. <badge vertical="baseline" type="verb">POST</badge> only, ignored for Ajax requests.
+[hiddenInput()](../reference/twig/functions.md#hiddeninput) | Lower-level helper for generating hidden HTML inputs.
+[input()](../reference/twig/functions.md#input) | Even finer-grained control over HTML `<input>` element creation.
+[redirectInput()](../reference/twig/functions.md#redirectinput) | Generates a hidden HTML `<input>` element to control redirection after successful requests. <badge vertical="baseline" type="verb">POST</badge> only, ignored for Ajax requests.
+[successMessageInput()](../reference/twig/functions.md#successmessageinput) | Override success-condition flash messages. <badge vertical="baseline" type="verb">POST</badge> only, ignored for Ajax requests.
 
 ### Ajax
 
@@ -254,7 +254,7 @@ When sending a JSON payload in the body of a request, you _must_ use an action p
 
 ### Models and Validation
 
-Most of the data creation and manipulation actions we’ll cover revolve around <yii2:yii\base\Model>s. Craft uses models to store and validate all kinds of things—including every type of [element](../elements.md) you’re already familiar with!
+Most of the data creation and manipulation actions we’ll cover revolve around <yii2:yii\base\Model>s. Craft uses models to store and validate all kinds of things—including every type of [element](../system/elements.md) you’re already familiar with!
 
 If you encounter [errors](#failure) when creating or saving something, it will usually be passed back to your template as a special variable like `entry` or `user`, and a [flash](#flashes) will be set. Every model has a `.getErrors()` method that returns a list of messages for any attribute (or custom field) that did not validate.
 
@@ -346,7 +346,7 @@ Flashes are temporary messages Craft stores in your session, typically under key
 
 ## Responses
 
-Action requests are largely consistent in their behavior—exceptions will be noted in each of the [available actions](#available-actions)’ **Response** sections.
+Action requests are largely consistent in their behavior—exceptions will be noted in each of the [available actions](../reference/controller-actions.md#available-actions)’ **Response** sections.
 
 Let’s look at some typical success and failure states and how they differ.
 
@@ -365,7 +365,7 @@ Successful POST requests will often culminate in a [flash](#flashes) being set (
 Some routes make this redirection configurable (<config5:passwordSuccessPath> or <config5:activateAccountSuccessPath>, for instance)—but sending a hashed `redirect` param with your request will always take precedence.
 
 ::: tip
-The [`redirectInput()`](./functions.md#redirectinput) function takes the guesswork out of rendering this input.
+The [`redirectInput()`](../reference/twig/functions.md#redirectinput) function takes the guesswork out of rendering this input.
 :::
 
 ```twig{5-6}
@@ -390,7 +390,7 @@ The [`redirectInput()`](./functions.md#redirectinput) function takes the guesswo
 </form>
 ```
 
-The `redirect` param accepts an [object template](../../system/object-templates.md), which is evaluated just before it’s issued, and can reference properties of the element or record you were working with:
+The `redirect` param accepts an [object template](../system/object-templates.md), which is evaluated just before it’s issued, and can reference properties of the element or record you were working with:
 
 ```twig
 <form method="post">
@@ -414,7 +414,7 @@ Inspecting the HTML output, you’ll see your template exactly as provided. Why 
 
 For JSON responses, redirection does’t make as much sense—so Craft will include the resolved `redirect` value for your client to navigate programmatically (say, via `window.location = resp.redirect`).
 
-In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response)—either a specific message from Craft, or one provided in the request via the [globally-supported `successMessage` param](#global-params). Additional action-specific properties are also returned at the top level of the response object.
+In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response)—either a specific message from Craft, or one provided in the request via the [globally-supported `successMessage` param](../reference/controller-actions.md#global-params). Additional action-specific properties are also returned at the top level of the response object.
 
 ### Failure
 
@@ -426,19 +426,19 @@ Failed responses are mostly handled via the <craft5:craft\web\Controller::asMode
 
 A GET request will typically only fail if an exception is thrown in the process of generating a response. The criteria for that failure depends on the action, but can also be circumstantial—like a lost database connection.
 
-If the request included an `Accept: application/json` header, Craft will send a `message` key in the JSON response, or a complete stack trace when <config5:devMode> is on. Otherwise, Craft displays a standard [error view](../routing.md#error-templates).
+If the request included an `Accept: application/json` header, Craft will send a `message` key in the JSON response, or a complete stack trace when <config5:devMode> is on. Otherwise, Craft displays a standard [error view](../system/routing.md#error-templates).
 
 #### During a POST Request
 
 POST requests can fail for the same reasons a GET request might—but because they are often responsible for mutating data, you’ll also be contending with [validation](#models-and-validation) errors.
 
 ::: tip
-We’ll use the term “model” here for technical reasons—but [elements](../elements.md) are models, too!
+We’ll use the term “model” here for technical reasons—but [elements](../system/elements.md) are models, too!
 :::
 
 In all but rare, unrecoverable cases, Craft sets an `error` [flash](#flashes) describing the issue, and carries on serving the page at the original path (either the page the request came from, or whatever was in the originating `<form action="...">` attribute). By virtue of being part of the same request that populated and validated a model, Craft is able to pass it all the way through to the rendered template—making it possible to repopulate inputs and display errors, contextually. See a complete example of how to handle this in the [models and validation](#models-and-validation) section.
 
-For requests that include an `Accept: application/json` header, Craft will instead build a JSON object with an `errors` key set to a list of the model’s errors (indexed by attribute or field), a `message` key, an array representation of the model, and a `modelName` key with the location of the model data in the payload. The exact message will be specific to the failure mode, and can be overridden using the [globally-supported `failMessage` param](#global-params).
+For requests that include an `Accept: application/json` header, Craft will instead build a JSON object with an `errors` key set to a list of the model’s errors (indexed by attribute or field), a `message` key, an array representation of the model, and a `modelName` key with the location of the model data in the payload. The exact message will be specific to the failure mode, and can be overridden using the [globally-supported `failMessage` param](../reference/controller-actions.md#global-params).
 
 ```json{6}
 {
@@ -460,7 +460,7 @@ The value of `modelName` in a JSON response is the same as the variable name Cra
 
 ## Custom Fields
 
-Actions that create or update elements (like [`entries/save-entry`](#post-entriessave-entry) and [`users/save-address`](#post-userssave-address)) support setting [custom field](../fields.md) values. Only fields that are included in a request will be updated.
+Actions that create or update elements (like [`entries/save-entry`](../reference/controller-actions.md#post-entriessave-entry) and [`users/save-address`](#post-userssave-address)) support setting [custom field](../system/fields.md) values. Only fields that are included in a request will be updated.
 
 Fields should be submitted under a `fields` key, using their handle:
 
@@ -498,7 +498,7 @@ Other types may require multiple inputs or specific naming conventions.
 
 #### Date + Time
 
-Entries’ native `postDate` and `expiryDate` properties can be handled in the same way [date/time fields](../date-time-fields.md#saving-date-fields) are; but instead of passing their values under a `fields` key, you’ll send them as top-level keys in a POST request:
+Entries’ native `postDate` and `expiryDate` properties can be handled in the same way [date/time fields](../reference/field-types/date-time.md#saving-date-fields) are; but instead of passing their values under a `fields` key, you’ll send them as top-level keys in a POST request:
 
 ::: code
 ```twig Unified
@@ -518,7 +518,7 @@ Some date properties (like `dateUpdated` and `dateCreated`) may be determined by
 
 #### Relations
 
-Assets, categories, entries, and tags can be associated to a [relational](../relations.md) field by passing an array of IDs. For more information and examples, see the relevant field type documentation:
+Assets, categories, entries, and tags can be associated to a [relational](../system/relations.md) field by passing an array of IDs. For more information and examples, see the relevant field type documentation:
 
 - [Assets fields](../reference/field-types/assets.md#saving-assets-fields)
 - [Entries fields](../reference/field-types/entries.md#saving-entries-fields)

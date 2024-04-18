@@ -95,7 +95,7 @@ The `actionUrl()` function has the following arguments:
 
 ## `alias`
 
-Passes a string through [Craft::getAlias()](yii2:yii\BaseYii::getAlias()), which will check if the string begins with an [alias](https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases). (See [Configuration](../config/README.md#aliases) for more info.)
+Passes a string through [Craft::getAlias()](yii2:yii\BaseYii::getAlias()), which will check if the string begins with an [alias](guide:concept-aliases). (See [Configuration](../../configure.md#aliases) for more info.)
 
 ```twig
 <img src="{{ alias('@assetBaseUrl/images/logo.png') }}">
@@ -819,7 +819,7 @@ You can pass the following things into it:
   {{ svg('@webroot/icons/lemon.svg') }}
   ```
 
-- A <craft5:craft\elements\Asset> object, such as one pulled in from an [Assets field](../assets-fields.md).
+- A <craft5:craft\elements\Asset> object, such as one pulled in from an [Assets field](../field-types/assets.md).
 
   ```twig
   {% set image = entry.myAssetsField.one() %}

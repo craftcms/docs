@@ -24,9 +24,9 @@ Pushing your work to a centralized repository (GitHub, GitLab, Bitbucket, or els
 
 Craft uses Composer under the hood to install and [update](./updating.md) plugins and packages it depends on.
 
-Your [`composer.lock`](./directory-structure.md#composerlock) file defines the _exact_ set of packages that your project uses, so tracking it in version control is essential. The lockfile is updated any time you run system updates or install a new plugin, making it possible for Composer to reconstruct your entire [`vendor/`](./directory-structure.md#vendor) directory.
+Your [`composer.lock`](system/directory-structure.md#composerlock) file defines the _exact_ set of packages that your project uses, so tracking it in version control is essential. The lockfile is updated any time you run system updates or install a new plugin, making it possible for Composer to reconstruct your entire [`vendor/`](system/directory-structure.md#vendor) directory.
 
-In a similar manner, changes you make to your site’s settings and content model are tracked by [project config](./project-config.md) and written to YAML files in the `config/project/` directory. These files should also be committed to version control.
+In a similar manner, changes you make to your site’s settings and content model are tracked by [project config](system/project-config.md) and written to YAML files in the `config/project/` directory. These files should also be committed to version control.
 
 To stay on top of changes from your team, run these two commands _every time you pull new code_:
 
@@ -45,11 +45,11 @@ Craft has a built-in backup tool, accessible from the **Utilities** screen of th
 
 It is not advisable to attempt merging database tables or otherwise combining local and live content—including completely squashing a live database with a development one. [Project Config](#system-updates--project-config) is Craft’s solution to diverging schema and content.
 
-If you ever need to prepare content ahead of a deployment (say, if you’ve created a new [single](./entries.md#singles) and can’t risk users seeing a partially blank page), consider using a [content migration](./extend/migrations.md).
+If you ever need to prepare content ahead of a deployment (say, if you’ve created a new [single](reference/element-types/entries.md#singles) and can’t risk users seeing a partially blank page), consider using a [content migration](extend/migrations.md).
 
 ## Selecting a Host
 
-Craft will work on virtually any hosting platform that meets its [requirements](./requirements.md), but choosing one that matches your expectations for performance and reliability—and your appetite for devops—is key.
+Craft will work on virtually any hosting platform that meets its [requirements](requirements.md), but choosing one that matches your expectations for performance and reliability—and your appetite for devops—is key.
 
 ::: tip
 Check out our list of [hosting partners](https://craftcms.com/hosting), and the [introduction to hosting](kb:hosting-craft-101) Knowledge Base article if this is your first time launching a Craft project.
@@ -81,7 +81,7 @@ Craft plays well with non-traditional infrastructure. Let’s look at some examp
 
 #### Remote Databases
 
-Your database does not need to be on the same machine that serves web requests. If your provider offers hosted or “managed” databases, consider how your [database settings](./config/db.md) may differ—in most cases, the only difference is what hostname (or [`server`](./config/db.md#server)) you tell Craft to connect to.
+Your database does not need to be on the same machine that serves web requests. If your provider offers hosted or “managed” databases, consider how your [database settings](reference/config/db.md) may differ—in most cases, the only difference is what hostname (or [`server`](reference/config/db.md#server)) you tell Craft to connect to.
 
 ::: tip
 Keep in mind that introducing a network roundtrip for each database call can add up quickly. Profile requests with Yii’s debug toolbar to see how this impacts your load times!

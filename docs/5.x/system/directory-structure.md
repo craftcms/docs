@@ -9,7 +9,7 @@ You don’t need to be familiar with everything in the working directory to get 
 Craft’s default directory structure is intended to work for most projects and [hosting](../deploy.md) environments, but it is deeply customizable. Paths to many of the core files and folders can be changed by setting special [environment overrides](../configure.md#environment-overrides).
 
 ::: warning
-Many of these directories’ locations are defined relative to Craft’s _base path_. Manually setting the [`CRAFT_BASE_PATH`](../configure.md#craft_base_path) environment override without making the corresponding adjustments to the rest of your project’s structure (or explicitly setting other paths) can lead to a non-functional installation.
+Many of these directories’ locations are defined relative to Craft’s _base path_. Manually setting the [`CRAFT_BASE_PATH`](../reference/config/bootstrap.md#craft_base_path) environment override without making the corresponding adjustments to the rest of your project’s structure (or explicitly setting other paths) can lead to a non-functional installation.
 :::
 
 ## Folders
@@ -20,7 +20,7 @@ Purpose
 : Holds all of your project’s static [configuration](../configure.md#where-configuration-happens) files, as well as its `license.key` file. Your [`.env` file](#env), however, is typically located in the project root!
 
 Configuration
-: [`CRAFT_CONFIG_PATH`](../configure.md#craft-config-path)
+: [`CRAFT_CONFIG_PATH`](../reference/config/bootstrap.md#craft-config-path)
 
 ### `storage/`
 
@@ -30,28 +30,28 @@ Purpose
   Some of the folders you might find in the storage directory include:
 
   - `backups/` — Stores database backups that get created when you update Craft, or capture a backup via the control panel utility or [CLI](../reference/cli.md#db-backup).
-  - `logs/` — Stores Craft’s [logs](./logging.md) and PHP error logs.
+  - `logs/` — Stores Craft’s [logs](logging.md) and PHP error logs.
   - `rebrand/` — Stores the custom Login Page Logo and Site Icon files, if you’ve uploaded them. <badge type="edition" vertical="middle" title="Craft Pro only">Pro</badge>
   - `runtime/` — Pretty much everything in here is there for caching and logging purposes. Nothing that Craft couldn’t live without, if the folder happened to get deleted.
 
   For the curious, here are the types of things you will find in `storage/runtime/` (though this is not a comprehensive list):
 
   - `assets/` — Stores temporary uploads, image thumbnails, resized file icons, image editor scratch files, and copies of images stored on remote asset volumes (to save Craft an HTTP request when it needs the images to generate new thumbnails or transforms).
-  - `cache/` — Stores arbitrary data caches, when using the [`FileCache` driver](./config/app.md#cache).
+  - `cache/` — Stores arbitrary data caches, when using the [`FileCache` driver](../reference/config/app.md#cache).
   - `compiled_classes/` — Stores some dynamically-defined PHP classes.
   - `compiled_templates/` — Stores compiled Twig templates. This is _not_ your main [templates](#templates) folder!
   - `temp/` — Other temporary files. The names and contents of files in here do not obey any convention—the assumption should be that they will be deleted or overwritten between requests.
 
 Configuration
-: [`CRAFT_STORAGE_PATH`](./config/README.md#craft-storage-path) — This is useful when running on systems with an [ephemeral](./config/README.md#craft-ephemeral) or “read-only” filesystem (wherein the only place to write temporary files is a central `/tmp` directory).
+: [`CRAFT_STORAGE_PATH`](../reference/config/bootstrap.md#craft-storage-path) — This is useful when running on systems with an [ephemeral](../reference/config/bootstrap.md#craft-ephemeral) or “read-only” filesystem (wherein the only place to write temporary files is a central `/tmp` directory).
 
 ### `templates/`
 
 Purpose
-: Your front-end Twig templates go in here. Any local site assets, such as images, CSS, and JS that should be statically served, should live in the [web/](directory-structure.md#web) folder. The [Routing](./routing.md) page has an overview of how files in this folder are handled.
+: Your front-end Twig templates go in here. Any local site assets, such as images, CSS, and JS that should be statically served, should live in the [web/](directory-structure.md#web) folder. The [Routing](routing.md) page has an overview of how files in this folder are handled.
 
 Configuration
-: [`CRAFT_TEMPLATES_PATH`](./config/README.md#craft-templates-path) — Plugins may register additional _template roots_ that behave similarly, but are not affected by this setting and generally do not contain user-editable templates.
+: [`CRAFT_TEMPLATES_PATH`](../reference/config/bootstrap.md#craft-templates-path) — Plugins may register additional _template roots_ that behave similarly, but are not affected by this setting and generally do not contain user-editable templates.
 
 ### `vendor/`
 
@@ -59,7 +59,7 @@ Purpose
 : This is where all of your Composer dependencies go—including Craft and any plugins you’ve installed. This directory should _not_ be tracked in version control. Instead, commit [`composer.lock`](#composerlock), and use [`composer install`](https://getcomposer.org/doc/03-cli.md#install-i) to rebuild it.
 
 Configuration
-: [`CRAFT_VENDOR_PATH`](config/README.md#craft-vendor-path) — If you choose to relocate your `vendor/` directory, make sure you update your `.gitignore` file to continue excluding it from version control.
+: [`CRAFT_VENDOR_PATH`](../reference/config/bootstrap.md#craft-vendor-path) — If you choose to relocate your `vendor/` directory, make sure you update your `.gitignore` file to continue excluding it from version control.
 
 ### `web/`
 
@@ -121,11 +121,11 @@ If you (or another maintainer) followed the [installation](../install.md) instru
 
 ### `migrations/`
 
-Projects that use [content migrations](./extend/migrations.md) will typically use this directory, but it is customizable with the [`CRAFT_CONTENT_MIGRATIONS_PATH`](./config/README.md#craft-content-migrations-path) variable.
+Projects that use [content migrations](../extend/migrations.md) will typically use this directory, but it is customizable with the [`CRAFT_CONTENT_MIGRATIONS_PATH`](../reference/config/bootstrap.md#craft-content-migrations-path) variable.
 
 ### `modules/`
 
-For a time, the starter project came with a pre-initialized [custom module](./extend/module-guide.md) in the `modules/` directory. This is typically harmless, but it cannot be removed without also modifying your project’s `config/app.php` file.
+For a time, the starter project came with a pre-initialized [custom module](../extend/module-guide.md) in the `modules/` directory. This is typically harmless, but it cannot be removed without also modifying your project’s `config/app.php` file.
 
 ### `public/`
 
@@ -133,11 +133,15 @@ Older projects may have carried over a Craft 2 convention of naming their public
 
 ### `tests/`
 
-When using [tests](./testing/README.md) to validate application changes, you are apt to have a dedicated `tests/` directory.
+When using tests to validate application changes, you are apt to have a dedicated `tests/` directory.
+
+::: warning
+Documentation for automated testing of Craft 5 has not been published. The [Craft 4 testing](/4.x/testing/README.md) documentation is still available!
+:::
 
 ### `translations/`
 
-Multi-site projects often make use of [static translations](./sites.md#static-message-translations), which are stored in this directory, indexed by their language code. Customize this location with the [`CRAFT_TRANSLATIONS_PATH`](./config/README.md#craft-translations-path) variable.
+Multi-site projects often make use of [static translations](sites.md#static-message-translations), which are stored in this directory, indexed by their language code. Customize this location with the [`CRAFT_TRANSLATIONS_PATH`](../reference/config/bootstrap.md#craft-translations-path) variable.
 
 ### `package.json`
 

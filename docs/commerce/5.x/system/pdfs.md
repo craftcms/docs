@@ -99,4 +99,4 @@ Dompdf independently caches references to images and fonts when it finds them. T
 
 ## Customizing PDF Rendering
 
-Commerce ships with limited configuration options for Dompdf, but exposes [`beforeRenderPdf`](extend/events.md#beforerenderpdf) and [`afterRenderPdf`](extend/events.md#afterrenderpdf) events you can use to control over how PDFs are ultimately rendered. You can use them to customize Dompdf’s options and output or even skip Dompdf altogether and render PDFs however you’d prefer.
+Commerce ships with limited configuration options for Dompdf, but exposes [`beforeRenderPdf`](../extend/events.md#beforerenderpdf) and [`afterRenderPdf`](../extend/events.md#afterrenderpdf) events you can use to control over how PDFs are ultimately rendered. You can use them to customize Dompdf’s options and output or even skip Dompdf altogether and render PDFs however you’d prefer.

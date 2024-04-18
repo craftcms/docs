@@ -123,7 +123,7 @@ Parameters are set using methods after creating an element query, or by passing 
 ```
 
 ::: tip
-Query methods (except for those that [execute](#executing-element-queries) a query) modify some internal properties and return the query itself, allowing you to chained more methods together—just like Craft’s [fluent config](./config/README.md#style-map-vs-fluent) syntax!
+Query methods (except for those that [execute](#executing-element-queries) a query) modify some internal properties and return the query itself, allowing you to chained more methods together—just like Craft’s [fluent config](../configure.md#style-map-vs-fluent) syntax!
 :::
 
 All element queries support a standard set of methods (like `.id()`, `.title()`, and [`.search()`](../system/searching.md)). These are documented alongside the [element type-specific](#element-types) parameters (like `.kind()` in the example above).
@@ -132,9 +132,9 @@ Typically, parameters make a query more specific—but setting a single paramete
 
 #### Querying with Custom Fields
 
-In addition to native query parameters, Craft automatically injects methods for each of your [custom fields](./fields.md).
+In addition to native query parameters, Craft automatically injects methods for each of your [custom fields](../system/fields.md).
 
-For example, if we wanted to find entries in a _Cars_ section with a specific paint color stored in a [dropdown](./dropdown-fields.md) field, we could perform this query:
+For example, if we wanted to find entries in a _Cars_ section with a specific paint color stored in a [dropdown](../reference/field-types/dropdown.md) field, we could perform this query:
 
 ```twig
 {% set silverCars = craft.entries()
@@ -143,7 +143,7 @@ For example, if we wanted to find entries in a _Cars_ section with a specific pa
   .all() %}
 ```
 
-Custom field parameters can be combined for advanced filtering—in this example, we’re also applying a pair of constraints to a [date](./date-time-fields.md) field:
+Custom field parameters can be combined for advanced filtering—in this example, we’re also applying a pair of constraints to a [date](../reference/field-types/date-time.md) field:
 
 ```twig
 {% set silverCars = craft.entries()
@@ -153,7 +153,7 @@ Custom field parameters can be combined for advanced filtering—in this example
   .all() %}
 ```
 
-See each [field type](./fields.md#field-types)’s documentation for what kinds of values you can use.
+See each [field type](../system/fields.md#field-types)’s documentation for what kinds of values you can use.
 
 ### Reusing Queries
 
@@ -193,7 +193,7 @@ Craft also makes it easy to display the results of an element query across multi
 
 ### `all()`
 
-The most common way to fetch a list of results is with the `all()` method, which executes the query and returns an array of populated [element](./elements.md) models. The resulting elements will _always_ be of the type that the query started with—assets come back from asset queries, categories from category queries, and so on.
+The most common way to fetch a list of results is with the `all()` method, which executes the query and returns an array of populated [element](../system/elements.md) models. The resulting elements will _always_ be of the type that the query started with—assets come back from asset queries, categories from category queries, and so on.
 
 ::: code
 ```twig
@@ -218,7 +218,7 @@ Declaring a `limit()` _and_ executing a query with `all()` may seem like a contr
 
 ### `collect()`
 
-Calling `.collect()` to execute a query will perform the same database call as `.all()`, but the results are wrapped in a [Collection](./collections.md).
+Calling `.collect()` to execute a query will perform the same database call as `.all()`, but the results are wrapped in a [Collection](collections.md).
 
 Collections can simplify some common array manipulation and filtering tasks that are otherwise awkward in the template or query builder:
 
@@ -520,7 +520,7 @@ Notice how our loop uses the keys (`p`) _and_ values (`url`) from the returned a
 
 ## Search
 
-Craft gives you access to its [search](./searching.md) index from any element query. Use the `search` param to narrow results by keywords:
+Craft gives you access to its [search](../system/searching.md) index from any element query. Use the `search` param to narrow results by keywords:
 
 ::: code
 ```twig{5}
@@ -723,7 +723,7 @@ Selections modify what columns and rows are returned.
 
 ### Joins
 
-In most cases, Craft automatically `JOIN`s the appropriate tables so that your elements are populated with the correct data. However, additional `JOIN`s can be useful in [plugin development](./extend/README.md) or for doing deeper analysis of your content.
+In most cases, Craft automatically `JOIN`s the appropriate tables so that your elements are populated with the correct data. However, additional `JOIN`s can be useful in [plugin development](../extend/README.md) or for doing deeper analysis of your content.
 
 [innerJoin($table, $condition)](yii2:yii\db\Query::innerJoin())
 : Adds an `INNER JOIN` clause for the target table, using the provided condition.
@@ -748,10 +748,10 @@ $popularAuthors = craft\elements\Entry::find()
   ->all();
 ```
 
-Craft prepares two queries when fetching elements (a main query and a “subquery”) and applies `JOIN`s to both, so that you can use the tables for filtering _and_ for selections. Read more about the architecture of element queries in the [extension documentation](./extend/element-types.md#element-query-class).
+Craft prepares two queries when fetching elements (a main query and a “subquery”) and applies `JOIN`s to both, so that you can use the tables for filtering _and_ for selections. Read more about the architecture of element queries in the [extension documentation](../extend/element-types.md#element-query-class).
 
 ::: warning
-Adding columns to your selection from other tables may cause errors when populating elements, as they will not have a corresponding class property. Call `asArray()` to return your results as a plain associative array, or consider [attaching a `Behavior`](./extend/behaviors.md).
+Adding columns to your selection from other tables may cause errors when populating elements, as they will not have a corresponding class property. Call `asArray()` to return your results as a plain associative array, or consider [attaching a `Behavior`](../extend/behaviors.md).
 :::
 
 ### Conditions
@@ -838,11 +838,11 @@ Craft can act as a headless content back-end for your static or client-rendered 
 
 ### Element API
 
-The first-party [Element API](https://plugins.craftcms.com/element-api) allows you to map _endpoints_ to element queries with a combination of static and dynamic criteria and serve JSON-serialized results.
+The first-party [Element API](plugin:element-api) allows you to map _endpoints_ to element queries with a combination of static and dynamic criteria and serve JSON-serialized results.
 
 ### GraphQL
 
-Craft includes a [GraphQL API](./graphql.md) with configurable schemas. Many of the same element query basics apply when accessing elements via GraphQL.
+Craft includes a [GraphQL API](graphql.md) with configurable schemas. Many of the same element query basics apply when accessing elements via GraphQL.
 
 ::: warning
 For security reasons, not all query builder features are available via GraphQL. Some advanced queries may need to be executed separately and combined by the client.

@@ -103,4 +103,4 @@ We can display all of the current user’s subscriptions by doing the following:
 Subscription queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/commerce/4.x/subscriptions.md)!!!
+!!!include(docs/.artifacts/commerce/5.x/subscriptions.md)!!!

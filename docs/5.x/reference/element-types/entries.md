@@ -57,7 +57,7 @@ The **Title Format** is an [object template](../../system/object-templates.md) (
 
 ### Translation Settings
 
-Most localization behavior is determined by [section](#sections) and [field](fields.md) settings, but the translation of titles and slugs is governed by entry types.
+Most localization behavior is determined by [section](#sections) and [field](../../system/fields.md) settings, but the translation of titles and slugs is governed by entry types.
 
 The available translation methods are covered in the [custom fields documentation](../../system/fields.md#translation-methods).
 
@@ -95,7 +95,7 @@ Singles are used for one-off pages or content objects that have unique requireme
 Unlike the other section types, singles only ever have _one_ entry associated with them, meaning their URIs can be static (like `contact-us`) rather than templatized (like `news/{slug}`).
 
 ::: tip
-Singles have all the functionality of [globals](./globals.md), and can even be pre-loaded into global Twig variables with the <config5:preloadSingles> config setting. As such, singles don’t have an editable **Author**, **Post Date**, or **Expiration Date**.
+Singles have all the functionality of [globals](globals.md), and can even be pre-loaded into global Twig variables with the <config5:preloadSingles> config setting. As such, singles don’t have an editable **Author**, **Post Date**, or **Expiration Date**.
 
 A single’s **Status** controls can be hidden with the **Show the Status field** setting in its selected **Entry Type**.
 :::
@@ -111,7 +111,7 @@ Channels are used for lists or streams of similar content, such as…
 - …recipes;
 - …reviews;
 
-Entries in channels are intended to be queried and displayed ordered by one or more of their attributes or [custom fields](../../system/fields.md). Channels are also a simple way to maintain a flat taxonomy, standing in for [tags](./tags.md) or [categories](./categories.md).
+Entries in channels are intended to be queried and displayed ordered by one or more of their attributes or [custom fields](../../system/fields.md). Channels are also a simple way to maintain a flat taxonomy, standing in for [tags](tags.md) or [categories](categories.md).
 
 #### Structures
 

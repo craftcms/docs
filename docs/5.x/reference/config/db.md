@@ -15,7 +15,7 @@ Craft can connect to MySQL and Postgres databases.
 
 <!-- more -->
 
-Database connection settings may be set from a `config/db.php` file, but because they’re often entirely environment-specific, Craft supports assigning [directly from environment variables](../config#environment-overrides). In [a new Craft 4 project](https://github.com/craftcms/craft), your `.env` file will need to define these options:
+Database connection settings may be set from a `config/db.php` file, but because they’re often entirely environment-specific, Craft supports assigning [directly from environment variables](../../configure.md#environment-overrides). In [a new Craft 5 project](repo:craftcms/craft), your `.env` file will need to define these options:
 
 ```bash
 # Required variables:
@@ -40,7 +40,7 @@ We recommend this approach because it:
 2. Makes collaborating with other developers easier, as each developer can define their own settings from scratch, without overwriting someone else’s settings.
 
 ::: tip
-Environment overrides are covered in greater detail on the [configuration overview page](../config#environment-overrides).
+Environment overrides are covered in greater detail on the [configuration overview page](../../configure.md#environment-overrides).
 :::
 
 If you need to use your own environment variables in a config file (or connection details are provided via platform-specific keys), create `config/db.php` and return an explicit array of settings:
@@ -65,7 +65,7 @@ return [
 ```
 
 ::: warning
-Finer-grain control of Craft’s database connection is possible by configuring the underlying [`db` application component](./app.md#database). This may be necessary if you have specific security requirements, or your app needs to connect to multiple databases.
+Finer-grain control of Craft’s database connection is possible by configuring the underlying [`db` application component](app.md#database). This may be necessary if you have specific security requirements, or your app needs to connect to multiple databases.
 
 Note that if you need to supply custom PDO attributes to your primary database connection, you should do so via the `attributes` key in your `config/db.php` file, not from `config/app.php` while overriding the `db` component.
 :::

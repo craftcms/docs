@@ -315,4 +315,4 @@ It’s common to display tax information to a customer in the context of their c
 
 ## Further Reading
 
-See [Tax Engines](extend/tax-engines.md) if you’re interested in customizing the Commerce tax system.
+See [Tax Engines](../extend/tax-engines.md) if you’re interested in customizing the Commerce tax system.

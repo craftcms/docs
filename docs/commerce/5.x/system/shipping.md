@@ -195,7 +195,7 @@ In the Pro edition of Commerce, complex shipping rules including categories, zon
 Shipping methods and rules are at the core of the shipping engine in the Pro edition of Craft Commerce. The shipping rules use shipping categories, shipping zones, and additional order conditions to determine which shipping methods are available to the cart for customer selection.
 
 ::: tip
-See the [Shipping Methods](extend/shipping-methods.md) page in the _Extending Commerce_ section to learn how to write your own custom shipping method.
+See the [Shipping Methods](../extend/shipping-methods.md) page in the _Extending Commerce_ section to learn how to write your own custom shipping method.
 :::
 
 ## Templating

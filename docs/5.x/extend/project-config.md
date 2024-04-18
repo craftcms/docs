@@ -241,9 +241,9 @@ public function deleteProductType(ProductType $productType)
 ```
 
 ::: tip
-Plugins can be made extensible themselves by adopting an [interface-oriented](./services.md#interface-oriented-methods) control flow, as opposed to the [class-oriented](./services.md#class-oriented-methods) control flow demonstrated above.
+Plugins can be made extensible themselves by adopting an [interface-oriented](services.md#interface-oriented-methods) control flow, as opposed to the [class-oriented](services.md#class-oriented-methods) control flow demonstrated above.
 
-This may involve adding your own [events](events.md), or defining a class `interface` that other developers can adopt. [Gateways](/commerce/4.x/gateways.md) are an example of this, in Commerce.
+This may involve adding your own [events](events.md), or defining a class `interface` that other developers can adopt. [Gateways](/commerce/5.x/system/gateways.md) are an example of this, in Commerce.
 :::
 
 ### IDs and UIDs

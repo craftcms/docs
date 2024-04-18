@@ -42,21 +42,21 @@ Twig tags are wrapped in `{%` and `%}` delimiters, and are used to define the _l
 
 The syntax within the `{%` and `%}` delimiters varies from tag to tag, but they will always start with the same thing: the name of the tag.
 
-In their simplest form, the tag name might be all that’s required. Take Craft’s [requireLogin](tags.md#requirelogin) tag, for example:
+In their simplest form, the tag name might be all that’s required. Take Craft’s [requireLogin](../reference/twig/tags.md#requirelogin) tag, for example:
 
 ```twig
 {# A user must be logged in to visit this page #}
 {% requireLogin %}
 ```
 
-Other tags can accept parameters. In the case of Craft’s [exit](tags.md#exit) tag, you can optionally set the HTTP status code that should be sent to the browser in the response:
+Other tags can accept parameters. In the case of Craft’s [exit](../reference/twig/tags.md#exit) tag, you can optionally set the HTTP status code that should be sent to the browser in the response:
 
 ```twig
 {# This is not the page you are looking for #}
 {% exit 404 %}
 ```
 
-Some tags are meant to be used in pairs, such as the [js](tags.md#js) tag, which registers JavaScript code onto the page.
+Some tags are meant to be used in pairs, such as the [js](../reference/twig/tags.md#js) tag, which registers JavaScript code onto the page.
 
 ```twig
 {% js %}
@@ -74,7 +74,7 @@ Some tags can have nested tags _between_ the opening and closing tags:
 {% endif %}
 ```
 
-Refer to the [Tags](tags.md) page for a full list of tags available to your Craft templates.
+Refer to the [Tags](../reference/twig/tags.md) page for a full list of tags available to your Craft templates.
 
 ### Print Statements
 
@@ -128,14 +128,14 @@ Which would cause JavaScript to execute on the page, even though it wasn’t par
 
 There are two cases where print statements will output content directly, without auto-escaping it first:
 
-- When the content is deemed safe by the last tag or function that was called within the print statement (such as the [markdown](filters.md#markdown-or-md) filter).
+- When the content is deemed safe by the last tag or function that was called within the print statement (such as the [markdown](../reference/twig/filters.md#markdown-or-md) filter).
 - When you explicitly mark the content as safe using a [raw](https://twig.symfony.com/doc/3.x/filters/raw.html) filter.
 
 #### Manual escaping
 
 There are times where you may need to work with both trusted and untrusted content together. For example, let’s say you want to output user-supplied content as Markdown, but you want to ensure they haven’t put anything nefarious in there first.
 
-To do that, you could explicitly encode _all_ HTML within the user-supplied content using the [escape](https://twig.symfony.com/doc/3.x/filters/escape.html) filter, before passing it to the [markdown](filters.md#markdown-or-md) filter:
+To do that, you could explicitly encode _all_ HTML within the user-supplied content using the [escape](https://twig.symfony.com/doc/3.x/filters/escape.html) filter, before passing it to the [markdown](../reference/twig/filters.md#markdown-or-md) filter:
 
 ```twig
 {# Escape any HTML in the Body field, then format as Markdown #}
@@ -170,22 +170,22 @@ You can define variables using the [set](https://twig.symfony.com/doc/3.x/tags/s
 </html>
 ```
 
-Craft provides a few predefined variables that will be available in addition to the variables you define yourself. Refer to the [Global Variables](global-variables.md) page for a full list of global variables available to your Craft templates.
+Craft provides a few predefined variables that will be available in addition to the variables you define yourself. Refer to the [Global Variables](../reference/twig/global-variables.md) page for a full list of global variables available to your Craft templates.
 
 ## Functions
 
-There are several functions available to your Twig templates, which can do a wide variety of things. For example, Craft provides a [hiddenInput](functions.md#hiddeninput) function that can be used to generate the HTML for a hidden input:
+There are several functions available to your Twig templates, which can do a wide variety of things. For example, Craft provides a [hiddenInput](../reference/twig/functions.md#hiddeninput) function that can be used to generate the HTML for a hidden input:
 
 ```twig
 {{ hiddenInput('entryId', 100) }}
 {# Output: <input type="hidden" name="entryId" value="100"> #}
 ```
 
-Refer to the [Functions](functions.md) page for a full list of functions available to your Craft templates.
+Refer to the [Functions](../reference/twig/functions.md) page for a full list of functions available to your Craft templates.
 
 ## Filters
 
-Filters are like functions, but they use a pipe syntax (`|`), and they are always meant to manipulate a value of some sort. For example, Craft provides an [markdown](filters.md#markdown-or-md) filter, which converts [Markdown](https://daringfireball.net/projects/markdown/)-formatted text into HTML:
+Filters are like functions, but they use a pipe syntax (`|`), and they are always meant to manipulate a value of some sort. For example, Craft provides an [markdown](../reference/twig/filters.md#markdown-or-md) filter, which converts [Markdown](https://daringfireball.net/projects/markdown/)-formatted text into HTML:
 
 ```twig
 {% set text = "I **really** love Tom Petty." %}
@@ -211,7 +211,7 @@ Note that filters will only apply to the value that immediately precedes it. If 
 {# Output: 151 #}
 ```
 
-Refer to the [Filters](filters.md) page for a full list of filters available to your Craft templates.
+Refer to the [filters](../reference/twig/filters.md) page for a full list of filters available to your Craft templates.
 
 ## Tests
 
@@ -232,7 +232,7 @@ If you are looking for whether a test returns `false`, use the `is not` syntax:
 {% endif %}
 ```
 
-Refer to the [Tests](tests.md) page for a full list of filters available to your Craft templates.
+Refer to the [Tests](../reference/twig/tests.md) page for a full list of filters available to your Craft templates.
 
 ## Types of values
 
@@ -255,7 +255,7 @@ Craft exposes many other types of data to templates that don’t fit squarely in
 {{ dump(now) }} {# ->  object(DateTime) ...  #}
 ```
 
-In this case, the [`now` variable](./global-variables.md#now) was a [`DateTime` object](https://www.php.net/manual/en/class.datetime.php). Each object or “class” will have different properties and methods you can use—but it may take some independent research to figure out what they are:
+In this case, the [`now` variable](../reference/twig/global-variables.md#now) was a [`DateTime` object](https://www.php.net/manual/en/class.datetime.php). Each object or “class” will have different properties and methods you can use—but it may take some independent research to figure out what they are:
 
 ```twig
 {{ now.format('Y') }} {# -> 2022 #}
@@ -406,7 +406,7 @@ You can also access hash values directly by their keys, using either dot or arra
 
 Some [functions](#functions) and [filters](#filters) let you pass an **arrow function** as an argument. Arrow functions are compact, single-statement functions that you define in-line.
 
-For example, Craft’s [group](filters.md#group) filter accepts an arrow function, which is executed once for each item in an array to determine the key it will be grouped by.
+For example, Craft’s [group](../reference/twig/filters.md#group) filter accepts an arrow function, which is executed once for each item in an array to determine the key it will be grouped by.
 
 ```twig{9}
 {% set groceryList = [
@@ -501,7 +501,7 @@ You can also include intervening `{% elseif %}` tags (before the `{% else %}` ta
 ```
 
 ::: tip
-If you want to switch between different parts of your template depending on the value of something, Craft’s [switch](tags.md#switch) tags provide a simpler syntax than multiple `{% if %}` and `{% elseif %}` tags each comparing the same value over and over again.
+If you want to switch between different parts of your template depending on the value of something, Craft’s [switch](../reference/twig/tags.md#switch) tags provide a simpler syntax than multiple `{% if %}` and `{% elseif %}` tags each comparing the same value over and over again.
 :::
 
 ### Existence and Truthiness
@@ -597,9 +597,9 @@ This section treads into some heavier programming concepts, and makes reference 
 These objects are authoritatively documented in the [class reference](https://docs.craftcms.com/api/v4/). You will find references to methods and properties of common objects here in the main documentation, but to make the best use of them, some independent research may be required.
 :::
 
-So far, we’ve mostly looked at plain values—but Craft exposes a number of _objects_ to your templates, like elements (an <craft5:craft\elements\Entry> or <craft5:craft\elements\Asset> for instance) or services (accessible via [`craft.app`](global-variables.md#craft-app)).
+So far, we’ve mostly looked at plain values—but Craft exposes a number of _objects_ to your templates, like elements (an <craft5:craft\elements\Entry> or <craft5:craft\elements\Asset> for instance) or services (accessible via [`craft.app`](../reference/twig/global-variables.md#craft-app)).
 
-When in doubt about the type of value you’re dealing with (or you encounter a [Twig error](#handling-errors) when attempting to use them), use the [`{% dump %}` tag](tags.md#dump) to output them to the debug toolbar.
+When in doubt about the type of value you’re dealing with (or you encounter a [Twig error](#handling-errors) when attempting to use them), use the [`{% dump %}` tag](../reference/twig/tags.md#dump) to output them to the debug toolbar.
 
 ::: tip
 Using an undefined variable in the dump tag will still trigger an error. If this happens, dump the entire context by passing nothing to the tag.
@@ -623,7 +623,7 @@ The `not` operator takes the boolean equivalent of any value and flips it. It ca
 
 #### Identity
 
-Instead of a strict-equality operator (`===` in PHP and other languages), Twig has a `same as(...)` [test](tests.md) for comparing values and objects. Plain values with the same type (like numbers and strings) will work as expected, but objects (like elements) may _not_.
+Instead of a strict-equality operator (`===` in PHP and other languages), Twig has a `same as(...)` [test](../reference/twig/tests.md) for comparing values and objects. Plain values with the same type (like numbers and strings) will work as expected, but objects (like elements) may _not_.
 
 In an entry’s template, for example, comparing the automatically-injected `entry` with results from a second query is unreliable:
 
@@ -652,12 +652,12 @@ Instead of comparing entire objects, consider using unique, identifying properti
 ```
 
 ::: tip
-In this case, it might make more sense to exclude the original entry using [element query params](../element-queries.md).
+In this case, it might make more sense to exclude the original entry using [element query params](element-queries.md).
 :::
 
 ### Elements and Queries
 
-[Element queries](../element-queries.md) will always evaluate as “truthy” before they’re executed. In order to reliably test against the _results_, you must call a query execution method that agrees with your anticipated usage:
+[Element queries](element-queries.md) will always evaluate as “truthy” before they’re executed. In order to reliably test against the _results_, you must call a query execution method that agrees with your anticipated usage:
 
 - If you only care about whether one or more elements match the query, use `.exists()`;
 - If you only care about the _number_ of elements that would match the query, use `.count()`;
@@ -673,7 +673,7 @@ Errors can come from a number of places throughout the system, but the most comm
 - **Runtime Error** (`Twig\Error\RuntimeError`): Oftentimes indicative of a missing variable or property, or another issue as the compiled template is being executed.
 - **Loader Error** (<craft5:craft\web\twig\TemplateLoaderException> or `Twig\Error\LoaderError`): A reference to template (say, when using the `include` tag) could not be resolved.
 
-You may see other errors throughout development—but they are typically the result of a lower-level issue like improper use of methods, database connectivity, or templates getting out of sync with [project config](../project-config.md).
+You may see other errors throughout development—but they are typically the result of a lower-level issue like improper use of methods, database connectivity, or templates getting out of sync with [project config](../system/project-config.md).
 
 With [devMode](config5:devMode) on, Craft will output a stack trace for any errors it encounters when rendering a template.
 
@@ -729,7 +729,7 @@ This template is pretty worthless on its own, but it provides a framework for ne
 
 - It defines `head` and `body` **blocks**, which give nested templates a way to override the contents of the `<head>` and `<body>` elements.
 - It allows nested templates to define a `docTitle` variable, which will become the `<title>` value, and defaults to the site name if that’s not defined.
-- It gives nested templates the ability to set custom attributes on the `<body>` element, by defining a `bodyAttributes` hash. (We’re using the [attr](functions.md#attr) function to convert that hash into a list of HTML attributes.)
+- It gives nested templates the ability to set custom attributes on the `<body>` element, by defining a `bodyAttributes` hash. (We’re using the [attr](../reference/twig/functions.md#attr) function to convert that hash into a list of HTML attributes.)
 
 With that template in place, you can now create a `hello-world.twig` template in your `templates/` folder, which **extends** your `_html5.twig` template:
 
@@ -764,7 +764,7 @@ Note that when a template extends another template, it must define _all_ of its 
 ::: tip
 A layout can `extend` another layout, too! Suppose your site has two distinct areas, and they have markedly different navigation needs: content pages could directly extend `html5.twig`, while all the account/portal pages could extend an intermediate `dashboard.twig` that shows a toolbar with secondary navigation items.
 
-Craft’s [control panel](../control-panel.md) uses this exact strategy to provide a consistent experience throughout deeply-nested content and configuration pages.
+Craft’s [control panel](../system/control-panel.md) uses this exact strategy to provide a consistent experience throughout deeply-nested content and configuration pages.
 :::
 
 ### Includes

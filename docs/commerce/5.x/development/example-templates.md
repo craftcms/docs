@@ -4,13 +4,13 @@ Commerce includes example templates you can use for a reference, or as a startin
 
 - Cart management;
 - Complete checkout flow;
-- [Address management](/4.x/addresses.md#managing-addresses)
+- [Address management](/5.x/reference/element-types/addresses.md#managing-addresses)
 - Order history;
 - Subscription management;
 
 …and more!
 
-Use the [`commerce/example-templates` console command](console-commands.md#example-templates) to install the example templates into your project. Those templates are always available for reference, in `vendor/craftcms/commerce/example-templates/dist/`.
+Use the [`commerce/example-templates` console command](../reference/console-commands.md#example-templates) to install the example templates into your project. Those templates are always available for reference, in `vendor/craftcms/commerce/example-templates/dist/`.
 
 You can manually copy some or all of the templates into your project’s top level `templates/` folder:
 

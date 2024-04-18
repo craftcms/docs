@@ -54,7 +54,7 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 ## `CRAFT_DOTENV_PATH`
 
-Path to your project’s [`.env` file](directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craftbasepath).
+Path to your project’s [`.env` file](../../system/directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craftbasepath).
 
 ## `CRAFT_ENVIRONMENT`
 
@@ -79,11 +79,11 @@ define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
 
 ## `CRAFT_LICENSE_KEY_PATH`
 
-The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](directory-structure.md#config) folder by default.)
+The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../../directory-structure.md#config) folder by default.)
 
 ## `CRAFT_LOG_ALLOW_LINE_BREAKS`
 
-Adjusts the default [log target config](system/logging.md#monolog) to allow or disallow multi-line log statements.
+Adjusts the default [log target config](../../system/logging.md#monolog) to allow or disallow multi-line log statements.
 
 ## `CRAFT_LOG_PHP_ERRORS`
 

@@ -16,7 +16,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
 2. **Is it an element request?**
 
-    If the URI matches an [element](./elements.md)’s URI, Craft lets the element decide how to route the request. For example, if an [entry](../reference/element-types/entries.md)’s URI is requested, Craft will render the template specified in its section’s settings, automatically injecting an [`entry` variable](../reference/twig/global-variables.md#other-elements).
+    If the URI matches an [element](elements.md)’s URI, Craft lets the element decide how to route the request. For example, if an [entry](../reference/element-types/entries.md)’s URI is requested, Craft will render the template specified in its section’s settings, automatically injecting an [`entry` variable](../reference/twig/global-variables.md#other-elements).
 
     Whenever an element is saved, its URI is rendered and stored in the `elements_sites` database table.
 

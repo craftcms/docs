@@ -6,7 +6,7 @@ related:
 
 # Application Configuration
 
-Craft’s entire [application configuration](https://www.yiiframework.com/doc/guide/2.0/en/structure-applications#application-configurations) can be customized via `config/app.php`. Any items returned by an `app.php` config file will get merged into the main application configuration array.
+Craft’s entire [application configuration](guide:structure-applications#application-configurations) can be customized via `config/app.php`. Any items returned by an `app.php` config file will get merged into the main application configuration array.
 
 <!-- more -->
 
@@ -18,9 +18,9 @@ New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.p
 
 ## Approach
 
-What follows differs in nature from other configuration you’ve likely encountered, so far: [general](README.md) and [database](db.md) config is handled via curated, publicly-documented settings that Craft pulls from to adjust its bootstrapping or runtime behavior. Application config, on the other hand, directly modifies [components](guide:structure-application-components) of the Craft application—either by customizing them in-place, or swapping them out with new ones.
+What follows differs in nature from other configuration you’ve likely encountered, so far: [general](general.md) and [database](db.md) config is handled via curated, publicly-documented settings that Craft pulls from to adjust its bootstrapping or runtime behavior. Application config, on the other hand, directly modifies [components](guide:structure-application-components) of the Craft application—either by customizing them in-place, or swapping them out with new ones.
 
-Of course, this power comes with a greater risk of misconfiguration. Some components may also require a bit of independent research to discover available options; [configuring a component](https://www.yiiframework.com/doc/guide/2.0/en/concept-configurations) is in most cases simply defining properties the class initializes with, so some degree of comfort with source-diving and class reference will go a long way.
+Of course, this power comes with a greater risk of misconfiguration. Some components may also require a bit of independent research to discover available options; [configuring a component](guide:concept-configurations) is in most cases simply defining properties the class initializes with, so some degree of comfort with source-diving and class reference will go a long way.
 
 ::: tip
 Keep in mind that even when Craft doesn’t provide “defaults” explicitly in its own `app.php` config files (or config helper methods), the underlying component classes may have default property values—or even compute defaults based on other values.
@@ -94,14 +94,14 @@ return [
 
 ## Common Components
 
-We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](repo:craftcms/cms/blob/4.x/src/config/app.php), [app.web.php](repo:craftcms/cms/blob/4.x/src/config/app.web.php) and [app.console.php](repo:craftcms/cms/blob/4.x/src/config/app.console.php) when determining what components are initialized for each type of request—for example, Craft uses two different `request` component classes (<craft5:craft\web\Request> and <craft5:craft\console\Request>) to help smooth over some differences in Yii’s HTTP and CLI APIs.
+We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](repo:craftcms/cms/blob/5.x/src/config/app.php), [app.web.php](repo:craftcms/cms/blob/5.x/src/config/app.web.php) and [app.console.php](repo:craftcms/cms/blob/5.x/src/config/app.console.php) when determining what components are initialized for each type of request—for example, Craft uses two different `request` component classes (<craft5:craft\web\Request> and <craft5:craft\console\Request>) to help smooth over some differences in Yii’s HTTP and CLI APIs.
 
 ### Cache
 
-By default, Craft will store data caches on disk in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) layer by overriding the `cache` application component from `config/app.php`.
+By default, Craft will store data caches on disk in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](guide:caching-data#supported-cache-storage) layer by overriding the `cache` application component from `config/app.php`.
 
 ::: tip
-To help avoid key collisions when sharing non-standard cache drivers between multiple applications, set a unique application `id`. See the [Craft starter project](https://github.com/craftcms/craft/blob/main/config/app.php#L23) for an example of how this is configured, then run the following command to generate and append a `CRAFT_APP_ID` value to your `.env` file:
+To help avoid key collisions when sharing non-standard cache drivers between multiple applications, set a unique application `id`. See the [Craft starter project](https://github.com/craftcms/craft/blob/5.x/config/app.php#L26) for an example of how this is configured, then run the following command to generate and append a `CRAFT_APP_ID` value to your `.env` file:
 
     php craft setup/app-id
 :::
@@ -313,13 +313,13 @@ Note that if you need to supply custom PDO attributes to your primary database c
 
 ### Log
 
-Check out the [guide on Logging](../logging.md#customizing-logs) for some detailed examples.
+Check out the [guide on Logging](../../system/logging.md#customizing-logs) for some detailed examples.
 
 ### Session
 
 In a load-balanced environment, you may want to override the default `session` component to store PHP session data in a centralized location.
 
-The `session` component **must** have the <craft5:craft\behaviors\SessionBehavior> behavior attached to provide methods that the system relies on. When configuring the component from scratch, you must explicitly include it by setting an `as session` key to `craft\behaviors\SessionBehavior::class`, where `as session` is a [Yii shorthand](https://www.yiiframework.com/doc/guide/2.0/en/concept-configurations#configuration-format) for attaching behaviors via a configuration object.
+The `session` component **must** have the <craft5:craft\behaviors\SessionBehavior> behavior attached to provide methods that the system relies on. When configuring the component from scratch, you must explicitly include it by setting an `as session` key to `craft\behaviors\SessionBehavior::class`, where `as session` is a [Yii shorthand](guide:concept-configurations#configuration-format) for attaching behaviors via a configuration object.
 
 ::: warning
 The `session` component should only be overridden from `app.web.php` so it gets defined for web requests, but not console requests.
@@ -424,7 +424,7 @@ return [
 ```
 
 ::: tip
-Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing [email settings](../mail.md) from **Settings** → **Email**.
+Any changes you make to the Mailer component from `config/app.php` will not be reflected when testing [email settings](../../system/mail.md) from **Settings** → **Email**.
 :::
 
 ### Queue
@@ -504,7 +504,7 @@ The primary mutex _component_ should always be an instance of <craft5:craft\mute
 
 ## Modules
 
-You can register and bootstrap custom Yii modules into the application from `config/app.php` as well. See [How to Build a Module](../extend/module-guide.md) for more info.
+You can register and bootstrap custom Yii modules into the application from `config/app.php` as well. See [How to Build a Module](../../extend/module-guide.md) for more info.
 
 An empty Module is included in every starter project, and can be activated by adding its ID to the `bootstrap` key of `app.php`:
 

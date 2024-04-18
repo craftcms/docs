@@ -14,11 +14,11 @@ Craft supports user-managed, hierarchical taxonomies for content via **categorie
 
 <!-- more -->
 
-Categories are one of Craft’s built-in [element types](elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Category>.
+Categories are one of Craft’s built-in [element types](../../system/elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Category>.
 
 <Block label="Migrating to Structures">
 
-With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
+With the release of Craft 4.4, we began consolidating features of [other element types](../../system/elements.md) into [entries](entries.md).
 
 As part of that process, we introduced a [console command](../cli.md#entrify-categories) that can automate the conversion of categories to [structure sections](entries.md#structures):
 
@@ -39,7 +39,7 @@ Every category belongs to a _category group_, which defines…
 - …the maximum number of levels categories can be nested, within the group;
 - …the format of category URIs;
 - …which template should be rendered when a category’s URL is accessed;
-- …which [fields](fields.md) categories in the group should have;
+- …which [fields](../../system/fields.md) categories in the group should have;
 
 To create a new category group, go to **Settings** → **Categories** and click **New Category Group**.
 
@@ -66,7 +66,7 @@ When you’ve defined at least one category group, **Categories** will appear in
 <img src="../../images/categories-category-index.png" alt="Screenshot of the categories index, with “Categories” active in the main navigation, the “Flavors” category group selected, and a listing of category names in a nested hierarchy">
 </BrowserShot>
 
-Select the “Structure” <Poi label="2" target="categoryIndex" id="structure" /> sort option to view and manipulate the categories’ [hierarchy](./elements.md#structures). Double-click any element <Poi label="3" target="categoryIndex" id="statusIcon" /> to open a [slideout](./control-panel.md#slideouts).
+Select the “Structure” <Poi label="2" target="categoryIndex" id="structure" /> sort option to view and manipulate the categories’ [hierarchy](../../system/elements.md#structures). Double-click any element <Poi label="3" target="categoryIndex" id="statusIcon" /> to open a [slideout](../../system/control-panel.md#slideouts).
 
 You can also click a category’s title to visit its edit page just like an entry.
 
@@ -82,9 +82,9 @@ You can only nest categories up to the level specified in the **Max Level** fiel
 
 ## Assigning Categories
 
-To assign categories to things (entries, assets, users, etc.), you must first create a [Categories field](categories-fields.md).
+To assign categories to things (entries, assets, users, etc.), you must first create a [Categories field](../field-types/categories.md).
 
-Each Categories field is connected to a single category group. Whatever you attach the field to will store [relations](relations.md) to categories selected from that group.
+Each Categories field is connected to a single category group. Whatever you attach the field to will store [relations](../../system/relations.md) to categories selected from that group.
 
 ## Querying Categories
 
@@ -148,7 +148,7 @@ To maintain the exact order you see in the control panel, add `orderBy('lft ASC'
 
 ### Elements Related to a Category
 
-When you’ve attached a [categories field](./categories-fields.md) to another type of element, you can query for those elements when you have a reference to a category.
+When you’ve attached a [categories field](../field-types/categories.md) to another type of element, you can query for those elements when you have a reference to a category.
 
 For example, if we were building a blog with dedicated “Topic” (category) pages, we might build a query like this to look up posts:
 

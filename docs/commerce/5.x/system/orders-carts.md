@@ -9,7 +9,7 @@ Variants are added to a _cart_ that can be completed to become an _order_. Carts
 
 When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce4:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
 
-Typically, a cart is completed in response to a customer [making a payment](./making-payments.md)—or by satisfying other requirements you’ve defined through [configuration](./config-settings.md) or an [extension](./extend/README.md).
+Typically, a cart is completed in response to a customer [making a payment](../development/making-payments.md)—or by satisfying other requirements you’ve defined through [configuration](../reference/config-settings.md) or an [extension](../extend/README.md).
 
 ## Carts
 
@@ -17,9 +17,9 @@ As a customer or store manager is building a cart, the goal is to maintain an up
 
 Once a cart is completed, however, it becomes an [order](#orders) that represents choices explicitly finalized by whoever completed the cart. The order’s behavior changes slightly at this point: the customer will no longer be able to make edits, and changes made by a store manager will not automatically trigger [recalculation](#recalculating-orders).
 
-Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last hour, and _inactive_ carts older than an hour that are likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](config-settings.md#activecartduration) setting.)
+Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last hour, and _inactive_ carts older than an hour that are likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](../reference/config-settings.md#activecartduration) setting.)
 
-Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](config-settings.md#purgeinactivecarts) and [`purgeInactiveCartsDuration`](config-settings.md#purgeinactivecartsduration) settings.
+Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](../reference/config-settings.md#purgeinactivecarts) and [`purgeInactiveCartsDuration`](../reference/config-settings.md#purgeinactivecartsduration) settings.
 
 Let’s go over a few common actions you may want to perform on a cart:
 
@@ -62,12 +62,6 @@ fetch('/actions/commerce/cart/get-cart', {
 Either of the examples above will generate a new cart _cookie_ if none exists. However, Commerce will only create an order element when a change is made to the cart—this prevents runaway creation of empty carts for guests or bots who happen to request a page that displays some cart information like the current item quantity or total.
 
 To see what cart information you can use in your templates, take a look at the [Order](commerce4:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
-
-<toggle-tip title="Example Order">
-
-<<< @/docs/commerce/4.x/example-objects/order.php
-
-</toggle-tip>
 
 Once a cart’s completed and turned into an order, calling `craft.commerce.carts.cart` starts this process over.
 
@@ -142,13 +136,7 @@ You can add multiple purchasables to the cart in a single request using a `purch
 A unique index key is required to group the purchasable `id` with its `qty`, and in this example we’re using `{{ loop.index }}` as a convenient way to provide it.
 
 ::: tip
-You can use the [`purchasableAvailable`](extend/events.md#purchasableavailable) event to control whether a line item should be available to the current user and cart.
-:::
-
-::: warning
-Commerce Lite is limited to a single item in the cart. If a customer adds a new item, it replaces whatever was already in the cart. If multiple items are added in a request, only the last one gets added to the cart.
-
-_The limitation was removed in Commerce 4.5, when the Lite and Pro editions were combined. Lite licenses were upgraded, so existing projects can be upgraded to 4.5.0 to unlock all its features._
+You can use the [`purchasableAvailable`](../extend/events.md#purchasableavailable) event to control whether a line item should be available to the current user and cart.
 :::
 
 ### Working with Line Items
@@ -249,7 +237,7 @@ You can remove a line item by including a `remove` parameter in the request. Thi
 ```
 
 ::: tip
-The [example templates](example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig) for adding and updating items in a full checkout flow.
+The [example templates](../development/example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig) for adding and updating items in a full checkout flow.
 :::
 
 #### Options Uniqueness
@@ -278,7 +266,7 @@ Each line item includes several totals:
 
 #### Load a Cart
 
-Commerce provides a [`commerce/cart/load-cart`](dev/controller-actions.md#get-post-cart-load-cart) endpoint for loading an existing cart into a cookie for the current customer.
+Commerce provides a [`commerce/cart/load-cart`](../reference/controller-actions.md#get-post-cart-load-cart) endpoint for loading an existing cart into a cookie for the current customer.
 
 You can have the user interact with the endpoint by either [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form). Either way, the cart number is required.
 
@@ -288,7 +276,7 @@ Each method will store any errors in the session’s error flash data (`craft.ap
 If the desired cart belongs to a user, that user must be logged in to load it into a browser cookie.
 :::
 
-The [`loadCartRedirectUrl`](config-settings.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart has been loaded.
+The [`loadCartRedirectUrl`](../reference/config-settings.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart has been loaded.
 
 #### Loading a Cart with a URL
 
@@ -416,13 +404,13 @@ You could then loop over the line items in those older carts and allow the custo
 </form>
 ```
 
-### Forgetting a Cart <Since ver="4.3.0" product="Commerce" repo="craftcms/commerce" feature="The ability to forget a cart" />
+### Forgetting a Cart
 
 A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart. If the customer logs out, their cart will automatically be forgotten.
 
 Removing all the items from a cart doesn’t mean that the cart is forgotten, though—sometimes, fully detaching a cart from the session is preferable to emptying it. To remove a cart from the customer’s session (without logging out or clearing the items), make a `POST` request to the [`cart/forget-cart` action](dev/controller-actions.md#post-cart-forget-cart). A cart number is _not_ required—Commerce can only detach the customer’s current cart.
 
-The next time the customer makes a request to the [`update-cart` action](dev/controller-actions.md#post-cart-update-cart), they will be given a new cart
+The next time the customer makes a request to the [`update-cart` action](../reference/controller-actions.md#post-cart-update-cart), they will be given a new cart
 
 ::: tip
 In previous versions, you can call the `forgetCart()` method manually to remove the current cart cookie. The cart itself will not be deleted—just disassociated with the customer’s session until it’s loaded again by some other means.
@@ -443,15 +431,15 @@ Commerce::getInstance()->getCarts()->forgetCart();
 
 ### Storing Data in Custom Fields
 
-Like any other type of [element](/4.x/elements.md), orders can have custom fields associated with them via a field layout. To customize the fields available on carts and orders, visit **Commerce** &rarr; **System Settings** &rarr; **Order Fields**.
+Like any other type of [element](/5.x/system/elements.md), orders can have custom fields associated with them via a field layout. To customize the fields available on carts and orders, visit **Commerce** &rarr; **System Settings** &rarr; **Order Fields**.
 
 Custom fields are perfect for storing information about an order that falls outside [line item options or notes](orders-carts.md#line-item-options-and-notes).
 
 ::: tip
-Now that [Addresses](/4.x/addresses.md#setup) are stored as elements, they support custom fields, too!
+Now that [Addresses](/5.x/reference/element-types/addresses.md#setup) are stored as elements, they support custom fields, too!
 :::
 
-You can update custom fields on a cart by posting data to the [`commerce/cart/update-cart`](dev/controller-actions.md#post-cart-update-cart) action under a `fields` key:
+You can update custom fields on a cart by posting data to the [`commerce/cart/update-cart`](../reference/controller-actions.md#post-cart-update-cart) action under a `fields` key:
 
 ```twig
 <form method="post">
@@ -470,7 +458,7 @@ You can update custom fields on a cart by posting data to the [`commerce/cart/up
 
 ## Orders
 
-Orders are [Element Types](/4.x/extend/element-types.md) and can have custom fields associated with them. You can browse orders in the control panel by navigating to **Commerce** → **Orders**.
+Orders are [Element Types](/5.x/extend/element-types.md) and can have custom fields associated with them. You can browse orders in the control panel by navigating to **Commerce** → **Orders**.
 
 When a cart becomes an order, the following things happen:
 
@@ -481,7 +469,7 @@ When a cart becomes an order, the following things happen:
 
 Instead of being recalculated on each change like a cart, the order will only be recalculated if you [manually trigger recalculation](#recalculating-orders).
 
-Adjustments for discounts, shipping, and tax may be applied when an order is recalcuated. Each adjustment is related to its order, and can optionally relate to a specific line item.
+Adjustments for discounts, shipping, and tax may be applied when an order is recalculated. Each adjustment is related to its order, and can optionally relate to a specific line item.
 
 If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce4:craft\commerce\elements\Order> class reference for a complete list of available properties.
 
@@ -523,7 +511,7 @@ Output:
 2018-43
 ```
 
-In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](https://craftcms.com/docs/4.x/dev/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
+In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](/5.x/reference/twig/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
 
 The `seq()` function takes the following parameters:
 
@@ -550,10 +538,6 @@ An order is usually created on the front end as a customer [adds items](#adding-
 
 To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its [sales](sales.md) and adjustments.
 
-::: warning
-Prior to Commerce 4.5, creating orders via the control panel was limited to the [Pro](editions.md) edition.
-:::
-
 To complete the order, press **Mark as completed**.
 
 ### Editing Orders
@@ -572,7 +556,7 @@ Every order includes a few important totals:
 - **order.itemTotal** is the sum of the order’s [line item `total` amounts](#line-item-totals).
 - **order.adjustmentSubtotal** is the sum of the order’s adjustments.
 - **order.total** is the sum of the order’s `itemSubtotal` and `adjustmentsTotal`.
-- **order.totalPrice** is the total order price with a minimum enforced by the [minimumTotalPriceStrategy](config-settings.html#minimumtotalpricestrategy) setting.
+- **order.totalPrice** is the total order price with a minimum enforced by the [minimumTotalPriceStrategy](../reference/config-settings.html#minimumtotalpricestrategy) setting.
 
 ::: warning
 You’ll also find an `order.adjustmentsSubtotal` which is identical to `order.adjustmentsTotal`. It will be removed in Commerce 4.
@@ -740,10 +724,10 @@ $myOrderQuery = \craft\commerce\elements\Order::find();
 ```
 :::
 
-Once you’ve created an order query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](https://craftcms.com/docs/4.x/element-queries.html#executing-element-queries) by calling `.all()`. An array of [Order](commerce4:craft\commerce\elements\Order) objects will be returned.
+Once you’ve created an order query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](/5.x/development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Order](commerce4:craft\commerce\elements\Order) objects will be returned.
 
 ::: tip
-See [Element Queries](https://craftcms.com/docs/4.x/element-queries.html) in the Craft docs to learn about how element queries work.
+See [Element Queries](/5.x/development/element-queries.md) in the Craft docs to learn about how element queries work.
 :::
 
 ### Example
@@ -781,4 +765,4 @@ We can display an order with a given order number by doing the following:
 Order queries support the following parameters:
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/commerce/4.x/orders-carts.md)!!!
+!!!include(docs/.artifacts/commerce/5.x/orders-carts.md)!!!

@@ -224,7 +224,7 @@ This example provides a dropdown menu that allows the customer to choose half or
 A customer may return to make additional payments similarly to the [outstanding balance example](#paying-an-outstanding-balance), supplying a valid `paymentAmount` until the remaining balance is paid in full. The first partial payment or authorization, however, will complete the order—subsequent payments will not trigger a change in status.
 
 ::: tip
-You can use the [`paidInFull`](extend/events.md#paidinfull) event if you need to add any custom functionality when an order is paid in full.
+You can use the [`paidInFull`](../extend/events.md#paidinfull) event if you need to add any custom functionality when an order is paid in full.
 :::
 
 An order is considered “paid in full” as long as the total amount paid did at one point reach the order’s total—even if a payment is refunded.

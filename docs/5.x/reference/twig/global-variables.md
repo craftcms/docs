@@ -112,11 +112,10 @@ Some of the services commonly used in templates:
 
 - `craft.app.request` – [Request](craft5:craft\web\Request) object with information about the current HTTP request
 - `craft.app.session` – [Session](craft5:craft\web\Session) object useful for getting and setting flash messages
-- `craft.app.user` – [User](craft5:craft\web\User) object representing the logged-in human (when applicable)
-- `craft.app.config.general` – [GeneralConfig](craft5:craft\config\GeneralConfig) object of [General Config Settings](../config/config-settings.md)
+- `craft.app.user` – [User](craft5:craft\web\User) object for getting information about the client’s identity
+- `craft.app.config.general` – [GeneralConfig](craft5:craft\config\GeneralConfig) object of [General Config Settings](../config/general.md)
 - `craft.app.fields` – [Fields](craft5:craft\services\Fields) service for accessing custom field details
-- `craft.app.sections` – [Sections](craft5:craft\services\Sections) service for working with sections and entry types
-- `craft.app.sites` – [Sites](craft5:craft\services\Sites) service for getting [site](../sites.md) details
+- `craft.app.sites` – [Sites](craft5:craft\services\Sites) service for getting [site](../../system/sites.md) details
 
 ::: tip
 Keep in mind that Twig templates _can_ be rendered from web requests, the CLI, and within queue jobs—so there are situations in which certain features may no be available (like the “[current user](#currentuser),” or information about the request).
@@ -417,10 +416,10 @@ They will be represented as <craft5:craft\elements\GlobalSet> objects.
 
 ### Singles
 
-Your [single](../entries.md#singles) section entries can also be loaded automatically by setting <config5:preloadSingles> to `true`.
+Your [single](../element-types/entries.md#singles) section entries can also be loaded automatically by setting <config5:preloadSingles> to `true`.
 
 ### Other Elements
 
-When an element’s URI is requested, Craft automatically loads that element into the Twig environment before rendering the template defined in the [element type](../elements.md)’s settings.
+When an element’s URI is requested, Craft automatically loads that element into the Twig environment before rendering the template defined in the [element type](../../system/elements.md)’s settings.
 
-For [entries](../entries.md), the variable is always named `entry`; for [categories](../categories.md), `category`. Element types provided by plugins may obey other conventions!
+For [entries](../element-types/entries.md), the variable is always named `entry`; for [categories](../element-types/categories.md), `category`. Element types provided by plugins may obey other conventions!

@@ -122,4 +122,4 @@ This can be particularly helpful, for example, if you’re displaying a complete
 When building your front end and displaying line items, it’s best to reference purchasable information through `getPurchasable()`, relying the `snapshot` property either as a fallback or a source of truth when the purchasable is changed or deleted.
 :::
 
-To learn more about adding your own custom purchasables, see the [Purchasable Types](extend/purchasable-types.md) page.
+To learn more about adding your own custom purchasables, see the [Purchasable Types](../extend/purchasable-types.md) page.

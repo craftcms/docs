@@ -19,14 +19,14 @@ Broadly, configuration refers to how Craft will behave in a particular environme
 We’ll start by looking at how Craft builds its config in a context-aware way, then get into some specific options. Keep in mind that—unlike most aspects of a Craft project—this will require some basic PHP knowledge.
 
 ::: tip
-[Project config](../project-config.md) is a discrete concept, but was designed to integrate with the core config system. We’ll look at some examples in just a moment.
+[Project config](system/project-config.md) is a discrete concept, but was designed to integrate with the core config system. We’ll look at some examples in just a moment.
 :::
 
 ## Where Configuration Happens
 
 ### Config Files
 
-The most common way to customize your Craft project is by editing files in the [`config/` folder](../directory-structure.md). These files act as a canonical map of what customizations you’ve made to a project, and as a bridge between specific settings and [environment variables](#setting-and-resolving-options).
+The most common way to customize your Craft project is by editing files in the [`config/` folder](system/directory-structure.md). These files act as a canonical map of what customizations you’ve made to a project, and as a bridge between specific settings and [environment variables](#setting-and-resolving-options).
 
 | Concern | File(s) | Description
 | ------- | -------- | -----------
@@ -472,7 +472,7 @@ If these settings need to be changed frequently, edited by a control panel user,
 
 JSON files containing valid [HTML Purifier configuration](https://htmlpurifier.org/live/configdoc/plain.html) can be added to `config/htmlpurifier/`.
 
-When creating a [Redactor](https://plugins.craftcms.com/redactor/) or [CKEditor](plugin:ckeditor) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](reference/twig/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
+When creating a [Redactor](plugin:redactor) or [CKEditor](plugin:ckeditor) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](reference/twig/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
 
 A simple config that scrubs everything but paragraph and anchor tags would look like this:
 

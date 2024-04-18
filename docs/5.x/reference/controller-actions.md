@@ -14,7 +14,7 @@ related:
 
 Controllers are Craft’s way of talking to the outside world. Pretty much everything you do with Craft is part of a request that involves a [controller action](guide:structure-controllers)—from updating settings to rendering an entry.
 
-Most controllers and actions are carefully locked down with [permissions](../../system/user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../../system/user-management.md#public-registration) or [cart management](/commerce/5.x/system/orders-carts.md).
+Most controllers and actions are carefully locked down with [permissions](../system/user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../../system/user-management.md#public-registration) or [cart management](/commerce/5.x/system/orders-carts.md).
 
 The following list of controller actions is non-exhaustive, but covers common patterns like [logging in](#post-userslogin), [creating entries](#post-entriessave-entry), and [managing an address book](#post-userssave-address).
 
@@ -32,7 +32,7 @@ Action | Description
 <badge vertical="baseline" type="verb">POST</badge> [users/upload-user-photo](#post-users-upload-user-photo) | Sets a user’s photo.
 <badge vertical="baseline" type="verb">POST</badge> [users/send-password-reset-email](#post-users-send-password-reset-email) | Sends a password reset email.
 <badge vertical="baseline" type="verb">GET/POST</badge> [users/set-password](#get-post-users-set-password) | Sets a new password on a user account.
-<badge vertical="baseline" type="verb">POST</badge> [users/save-address](#post-users-save-address) | Create or update an [address](../element-types/addresses.md) element.
+<badge vertical="baseline" type="verb">POST</badge> [users/save-address](#post-users-save-address) | Create or update an [address](element-types/addresses.md) element.
 <badge vertical="baseline" type="verb">POST</badge> [users/delete-address](#post-users-delete-address) | Delete an address element.
 <badge vertical="baseline" type="verb">GET</badge> [users/session-info](#get-users-session-info) | Retrieve information about the current session.
 <badge vertical="baseline" type="verb">GET</badge> [app/health-check](#get-app-health-check) | Ping your app to make sure it’s up.
@@ -312,7 +312,7 @@ State | `text/html` | `application/json`
 
 ### <badge vertical="baseline" type="verb">POST</badge> `users/save-address`
 
-Saves or updates an [address](../element-types/addresses.md) element against the current user’s account.
+Saves or updates an [address](element-types/addresses.md) element against the current user’s account.
 
 #### Supported Params
 
@@ -333,7 +333,7 @@ Param | Description
 ::: warning
 **This list is incomplete!**
 
-The remaining params depend upon the submitted `countryCode`—refer to the [`commerceguys/addressing` library](https://github.com/commerceguys/addressing/blob/master/src/AddressFormat/AddressField.php#L15-L25) for a comprehensive list, or [learn more about managing addresses](../element-types/addresses.md#managing-addresses) in Craft.
+The remaining params depend upon the submitted `countryCode`—refer to the [`commerceguys/addressing` library](https://github.com/commerceguys/addressing/blob/master/src/AddressFormat/AddressField.php#L15-L25) for a comprehensive list, or [learn more about managing addresses](element-types/addresses.md#managing-addresses) in Craft.
 :::
 
 #### Response
