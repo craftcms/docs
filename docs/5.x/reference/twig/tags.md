@@ -259,7 +259,7 @@ Unlike [`dd`](#dd) (which halts execution), `{% dump %}` quietly logs the curren
 {% dump %}
 ```
 
-In this scenario, keys of the dumped array are variable names, and the values represent the [data types](../../development/twig.md.md#types-of-values). Expand complex types to view nested properties by clicking any value with a signature like `craft\elements\Category {#123 ▶}`.
+In this scenario, keys of the dumped array are variable names, and the values represent the [data types](../../development/twig.md#types-of-values). Expand complex types to view nested properties by clicking any value with a signature like `craft\elements\Category {#123 ▶}`.
 
 ::: tip
 To enable the debug toolbar, visit your user profile in the [control panel](../../system/control-panel.md) and check **Show the debug toolbar on the front end** within the **Preferences** tab.

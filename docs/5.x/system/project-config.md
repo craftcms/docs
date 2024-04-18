@@ -76,7 +76,7 @@ Some settings may require you to input sensitive information:
 - An API key for a third-party service
 - A secret access key in an AWS S3 filesystem
 
-Providing a secret verbatim will cause the value to leak into Project Config YAML files. To avoid this, Craft supports using [environment variables](../configure.md.md#env) and [aliases](../configure.md#aliases) to stand in for a sensitive or dynamic value. For example, providing `$MYSERVICE_API_KEY` would read the corresponding value (minus the `$`) from your `.env` file, at runtime. Similarly, values that begin with an `@` are resolved as aliases.
+Providing a secret verbatim will cause the value to leak into Project Config YAML files. To avoid this, Craft supports using [environment variables](../configure.md#env) and [aliases](../configure.md#aliases) to stand in for a sensitive or dynamic value. For example, providing `$MYSERVICE_API_KEY` would read the corresponding value (minus the `$`) from your `.env` file, at runtime. Similarly, values that begin with an `@` are resolved as aliases.
 
 ![Craft’s autosuggest field, displaying a suitable match](../images/site-base-url-setting.png)
 
