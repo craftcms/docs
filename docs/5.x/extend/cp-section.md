@@ -122,4 +122,4 @@ public function init()
 }
 ```
 
-These rules use the same format as those [defined in `routes.php`](../routing.md#advanced-routing-with-url-rules). Find additional examples of control panel and site routes in the routing section of the [controllers](controllers.md#routing) documentation.
+These rules use the same format as those [defined in `routes.php`](../system/routing.md#advanced-routing-with-url-rules). Find additional examples of control panel and site routes in the routing section of the [controllers](controllers.md#routing) documentation.
