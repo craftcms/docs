@@ -16,7 +16,7 @@ Create a `CHANGELOG.md` file at the root of your plugin’s repo, where you can 
 # Release Notes for <Plugin Name>
 ```
 
-Within the changelog, releases must be listed in **descending order** (newest-to-oldest). (When displaying available plugin updates, the Plugin Store will stop parsing a plugin’s changelog as soon as it finds a version that is older than or equal to the user’s installed version.)
+Within the changelog, releases must be listed in **descending order** (newest-to-oldest). When displaying available plugin updates, the Plugin Store will stop parsing a plugin’s changelog as soon as it finds a version that is older than or equal to the user’s installed version.
 
 ## Version Headings
 
@@ -32,16 +32,16 @@ There’s a little wiggle room on that:
 - A 4th version number is allowed (e.g. `1.2.3.4`).
 - Prerelease versions are allowed (e.g. `1.0.0-alpha.1`).
 - The version can start with `v` (e.g. `v1.2.3`).
-- The version can be hyperlinked (e.g. `[1.2.3]`).
-- Dates can use dots as separators, rather than hyphens (e.g. `2017.01.21`).
+- The version can be hyperlinked (e.g. `[2.0.0](https://domain.com/blog/whats-new-in-v2)`).
+- Dates can use dots as separators, rather than hyphens (e.g. `2024.04.18`).
 
-Any H2s that don’t follow this format will be ignored, including any content that follows them leading up to the next H2.
+Any level-two headers (`##`) that _don’t_ follow this format will be ignored, as will any content that follows them (until the next valid level-two heading).
 
 ## Release Notes
 
-All content that follows a version heading (up to the next H2) will be treated as the release notes for the update.
+All content that follows a version heading (up to the next version heading) will be treated as the release notes for the update.
 
-When writing release notes, we recommend that you follow the guidelines at [keepachangelog.com](https://keepachangelog.com/), but all forms of [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/#GitHub-flavored-markdown) are allowed. The only thing that is *not* allowed is actual HTML code, which will be escaped.
+When writing release notes, we recommend that you follow the guidelines at [keepachangelog.com](https://keepachangelog.com/), but all forms of [GitHub Flavored Markdown](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#GitHub-flavored-markdown) are allowed. The only thing that is *not* allowed is actual HTML—raw markup will be escaped.
 
 ### Alerts
 
@@ -77,6 +77,10 @@ If you have any reference-style links in your release notes, you will need to de
 [superFoo]: https://docs.my-plugin.tld/config#superFoo
 ```
 
+::: tip
+Relative URLs will not work. Your changelog may appear in multiple contexts—so even if a link resolves when viewing the changelog on GitHub, it may not work from a Craft installation or the Plugin Store!
+:::
+
 ## Critical Updates
 
 If an update contains a fix for a critical security vulnerability or other dangerous bug, you can alert your users about it by adding `[CRITICAL]` to the end of the version heading:
@@ -87,4 +91,4 @@ If an update contains a fix for a critical security vulnerability or other dange
 - Reverted change to `$potus` due to security vulnerabilities
 ```
 
-When Craft finds out that a critical update is available, it will post a message about it to the top of all control panel pages, and give the update special attention on the Utilities → Updates page.
+When Craft finds out that a critical update is available, it will post a message about it to the top of all control panel pages, and give the update special attention on the **Utilities** &rarr; **Updates** page.

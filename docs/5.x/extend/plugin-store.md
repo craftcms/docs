@@ -29,15 +29,13 @@ To use an open source license:
 
 ## Registering your Plugin
 
-To register your plugin, first make sure it’s published to a public GitHub repository. Then create a Craft Console account at [console.craftcms.com](https://console.craftcms.com), and connect it to your GitHub account.
+To register a plugin, it must be pushed to a public GitHub repository. Create a Craft Console account at [console.craftcms.com](https://console.craftcms.com) and connect it to your GitHub account. Then, [set up an organization](kb:craft-console-organizations) to represent you (or your business) in the Plugin Store; organizations also determine [how you get paid](#payouts).
 
 ::: warning
-If your plugins are published to a GitHub organization account, make sure that the organization is checked when authenticating your GitHub account.
+If your repository is owned by a GitHub organization, make sure that organization is checked when authenticating your GitHub account. If you don’t see the repository, try disconnecting the account and removing the authorization from GitHub, then reconnecting.
 :::
 
-From your Craft Console account, you’ll need to first go to “Account Settings”, make sure “Enable plugin developer features” is checked under your username, and choose “Save”.
-
-Once plugin developer features are enabled, add your plugin by going to Plugins → “Add a plugin”, and choose the “Select” button next to your plugin’s repository. You will then be able to edit its description, screenshots, and other details.
+In your Console organization, navigate to **Plugin Store** &rarr; **Plugins** &rarr; **Add a plugin**, then search for and select a repository. Some details will be pre-populated for you (based on information [provided in the root `composer.json` file](plugin-guide.md#composerjson)), but you can make any desired changes to its description, screenshots, and other details, before submitting.
 
 ### Choose a Price
 
@@ -45,17 +43,19 @@ If you wish to sell your plugin, choose a price point that makes sense. Here are
 
 | Price Range | Example Use Cases
 | ----------- | ------------------------------------------------------
-| $10-$29     | Lightweight “plug and play” utilities and integrations
-| $49-$99     | Complex field types and integrations
-| $149-$249   | Plugins that add significant new system functionality
-| $499-$999   | Major or highly niche applications
+| $10–$29     | Lightweight “plug and play” utilities and integrations
+| $49–$99     | Complex field types and integrations
+| $149–$249   | Plugins that add significant new system functionality
+| $499–$999   | Major or highly niche applications
 
-You will also be required to pick a Renewal Price, which is the annual fee the Plugin Store will charge customers who wish to continue installing new updates, after the first year. Pick a Renewal Price that is around 20-50% of the initial Price. For example, if you are charging $99 for your plugin, your Renewal Price should be between $19-$49.
+You will also be required to pick a **Renewal Price**, which is the annual fee the Plugin Store will charge customers who wish to continue installing new updates, after the first year. Pick a Renewal Price that is around 20–50% of the initial Price. For example, if you are charging $99 for your plugin, your Renewal Price should be between $19-$49.
 
-Pixel & Tonic takes a 20% processing fee on all plugin sales; be sure to factor that into your plugin pricing.
+Pixel & Tonic takes a 20% processing fee on all plugin sales; be sure and factor this into your plugin pricing.
 
 ::: warning
 If you initially submit your plugin as free, you will not be allowed to change it to commercial later. You can, however, give it a commercial [edition](plugin-editions.md) that offers extended functionality, as long as you don’t remove crucial functionality from the free edition.
+
+All plugins (and editions thereof) can be trialed in development and staging environments, prior to purchase.
 :::
 
 ### Declare Craft Version Support
@@ -64,16 +64,30 @@ Every plugin needs to explicitly require a minimum Craft CMS version in `compose
 
 ```json
 "require": {
-  "craftcms/cms": "^3.0.0"
+  "craftcms/cms": "^5.0.0"
 }
 ```
 
+This version can change between releases. As long as you’ve tagged a release declaring major-version compatibility, we will display that on its individual listing, and include it in that version’s catalog for browsing and searching.
+
+If your plugin is compatible with multiple major versions of Craft, we will honor version constraints that include the logical “or” operator (`||`), like `^4.8.1||^5.0.0`.
+
 ### Submit for Approval
 
-Once you’re ready to submit the plugin, click the “Submit for approval” button. Once your plugin is approved, it will become visible on [plugins.craftcms.com](https://plugins.craftcms.com/). It won’t necessarily be available in the in-app Plugin Store yet, though, unless your plugin already has at least one [release](#plugin-releases).
+When you’re ready to submit your plugin, click the “Submit for approval” button. Once your plugin is approved, it will become visible on [plugins.craftcms.com](https://plugins.craftcms.com/).
+
+You must [tag a release](#plugin-releases) before your plugin will appear in the Plugin Store within Craft’s [control panel](../system/control-panel.md#).
 
 ::: tip
-You might want to register your plugin with [Packagist](https://packagist.org/) in addition to the Plugin Store, so that people can install and update your plugin from the command line. But Packagist isn’t a requirement for the Plugin Store.
+Consider registering your plugin on [Packagist](https://packagist.org/) in addition to the Plugin Store, so that developers can install and update your plugin via Composer. Packagist is _not_ a requirement for listing in the Plugin Store, but it makes discovery and automation easier for your customers!
+:::
+
+### Payouts
+
+Plugin authors in the United States, Europe, Australia, and New Zealand are eligible for automatic payouts via our payment processor, [Stripe](https://stripe.com/). Vendors outside these markets are paid out via PayPal.
+
+::: warning
+If neither option is viable for your business, please send us an email before publishing your plugin!
 :::
 
 ## Plugin Releases
@@ -127,7 +141,7 @@ jobs:
           tag: ${{ github.event.client_payload.tag }}
 ```
 
-That’s it! Going forward, whenever the Plugin Store is notified about new version tags, a new release will be created for the tag, with release notes extracted from `CHANGELOG.md`.
+That’s it! Going forward, whenever the Plugin Store is notified about new version tags, a new release will be created for the tag, with release notes extracted from `CHANGELOG.md`—provided it follows the [recommended format](changelogs-and-updates.md).
 
 ## Changing the GitHub Repository URL
 
@@ -137,7 +151,7 @@ You can change your plugin’s GitHub repository URL at any time. After you’ve
 
 If you need to change your plugin’s Composer package name (the `name` property in `composer.json`), follow these steps:
 
-1. [Tag a new release](#plugin-releases) with the new package name, for _each_ of the major Craft versions your plugin has ever been compatible with. For example, if your plugin is listed in the [Craft 3 Plugin Store](https://plugins.craftcms.com/?craft3) and the [Craft 4 Plugin Store](https://plugins.craftcms.com/?craft4), you will need to tag new Craft 3 and Craft 4 versions of your plugin with the updated package name.
+1. [Tag a new release](#plugin-releases) with the new package name, for _each_ of the major Craft versions your plugin has ever been compatible with. For example, if your plugin is listed in the [Craft 4 Plugin Store](https://plugins.craftcms.com/?craft4) and the [Craft 5 Plugin Store](https://plugins.craftcms.com/?craft5), you will need to tag new Craft 4 and Craft 5 versions of your plugin with the updated package name.
 2. [Submit](https://packagist.org/packages/submit) your plugin as a **new** package on [Packagist](https://packagist.org/).
 3. If your plugin was already listed on Packagist with its old package name, mark the old package as abandoned, and list your new package name as the recommended replacement package.
 4. Contact [support@craftcms.com](mailto:support@craftcms.com) to notify Pixel & Tonic of the change, so we can update your plugin’s listing with the new package name.
