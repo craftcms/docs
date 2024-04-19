@@ -1,7 +1,7 @@
 # Saving Payment Sources
 
 ::: warning
-Payment sources can only be saved when the selected [payment gateway](payment-gateways.md) supports it.
+Payment sources can only be saved when the selected [payment gateway](../system/gateways.md) supports it.
 :::
 
 There are two ways to store the payment information for supported gateways:

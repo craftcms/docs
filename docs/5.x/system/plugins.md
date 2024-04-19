@@ -30,7 +30,7 @@ If you want to build your own plugin, check out [Extending Craft](../extend/READ
 
 ## The Plugin Store
 
-Craft’s [control panel](./control-panel.md) features a [Plugin Store](https://plugins.craftcms.com) where you can discover hundreds of free and commercial plugins, install them with a single click, and purchase licenses.
+Craft’s [control panel](control-panel.md) features a [Plugin Store](https://plugins.craftcms.com) where you can discover hundreds of free and commercial plugins, install them with a single click, and purchase licenses.
 
 ::: tip
 If Craft is configured to [disallow admin changes](config5:allowAdminChanges) in the current environment, you won’t be able to install plugins. We recommend using a [local development environment](../install.md) to install and test plugins, then [deploy](../deploy.md) them (and any associated [project config](project-config.md) changes) to your live site.
@@ -160,7 +160,7 @@ From the control panel Plugin Store, choose the cart icon <Icon kind="cart" /> i
 Once you’ve completed the checkout process, your plugin installation will automatically become licensed.
 
 ::: tip
-If you purchase a plugin license separately from a Craft install or need to update a license key, visit **Settings** → **Plugins** in the relevant site’s control panel. From that listing, you can enter a new key or [variable](config/README.md#control-panel-settings) for any commercial plugin.
+If you purchase a plugin license separately from a Craft install or need to update a license key, visit **Settings** → **Plugins** in the relevant site’s control panel. From that listing, you can enter a new key or [variable](../configure.md#control-panel-settings) for any commercial plugin.
 
 ![Changing a plugin license key](../images/changing-plugin-license-key.gif)
 :::
@@ -179,7 +179,7 @@ If you can’t find a plugin license, visit **Licenses** → **Claim License**. 
 
 ### Safeguarding Plugin License Keys
 
-By default, your plugin license key will be stored in the database and the [project config](project-config.md). If you wish, you may move that license key to a [PHP constant or environment variable](config/README.md#control-panel-settings) and set the key using the `$MY_PLUGIN_KEY` syntax.
+By default, your plugin license key will be stored in the database and the [project config](project-config.md). If you wish, you may move that license key to a [PHP constant or environment variable](../configure.md#control-panel-settings) and set the key using the `$MY_PLUGIN_KEY` syntax.
 
 Similarly, you can set Craft’s license key via the special `CRAFT_LICENSE_KEY` environment variable.
 

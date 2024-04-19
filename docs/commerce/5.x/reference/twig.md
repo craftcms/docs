@@ -2,7 +2,7 @@
 
 ## `commerceCurrency`
 
-This can be used as a drop-in replacement for [Craft’s `|currency` filter](/4.x/dev/filters.md#currency), but it offers additional parameters for control over formatting and conversion:
+This can be used as a drop-in replacement for [Craft’s `|currency` filter](/5.x/reference/twig/filters.md#currency), but it offers additional parameters for control over formatting and conversion:
 
 | Parameter    | Type   | Default | Required | Description                                                                                                                                      |
 | ------------ | ------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |

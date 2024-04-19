@@ -38,7 +38,7 @@ Deletes all orders, subscriptions, payment sources, customers, addresses and res
 $ php craft commerce/reset-data
 ```
 
-## `commerce/transfer-user-data` <Since product="commerce" ver="4.3.0" feature="The customer data transfer command" />
+## `commerce/transfer-user-data`
 
 Transfers customer data from one user to another. You will be prompted for the username or email of the source and destination users.
 

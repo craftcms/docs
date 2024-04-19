@@ -1,6 +1,6 @@
 # Purchasable Types
 
-Purchasables should be extended to add useful attributes like Commerce’s included [product variant](../products-variants.md#variants) and [donation](../donations.md) purchasables. [Plugins and modules](/4.x/extend/) can provide their own purchasables.
+Purchasables should be extended to add useful attributes like Commerce’s included [product variant](../products-variants.md#variants) and [donation](../system/donations.md) purchasables. [Plugins and modules](/5.x/extend/) can provide their own purchasables.
 
 ## Custom Purchasables
 
@@ -73,7 +73,7 @@ Should return `true` or `false` if the purchasable can be added to, or exist on,
 
 Base Purchasable defaults to `true` always.
 
-### `populateLineItem(Commerce_LineItemModel $lineItem)`
+### `populateLineItem(LineItem $lineItem)`
 
 Gives the purchasable the chance to change the `saleAmount` and `price` of the line item when it’s added to the cart or when the cart recalculates.
 
@@ -94,7 +94,7 @@ Defaults to the ID of the purchasable element, which would be sufficient for mos
 ## Purchasable deletion
 
 ::: tip
-Craft CMS includes [soft delete support](/4.x/extend/soft-deletes.md) for all element types, including purchasables. You might want to familiarize yourself with soft deletion before adding delete and restore capabilities for your purchasable element.
+Craft CMS includes [soft delete support](/5.x/extend/soft-deletes.md) for all element types, including purchasables. You might want to familiarize yourself with soft deletion before adding delete and restore capabilities for your purchasable element.
 :::
 
 When you inherit from `craft\commerce\base\Purchasable` and your element is saved, Commerce automatically updates the `commerce_purchasables` table with the purchasable’s `sku` so that all purchasables have a central location to check their `sku` uniqueness.

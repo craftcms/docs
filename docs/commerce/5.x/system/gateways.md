@@ -93,7 +93,7 @@ Gateways that support 3D Secure (or other asynchronous verification processes, l
 
 ## Partial Refunds
 
-All [first-party provided gateways](#first-party-gateway-plugins) support partial refunds. You may only issue refunds to the original payment method used in a transaction, and up to the amount paid in that transaction. If [multiple payments](making-payments.md#checkout-with-partial-payment) were made, you must refund them separately.
+All [first-party provided gateways](#first-party-gateway-plugins) support partial refunds. You may only issue refunds to the original payment method used in a transaction, and up to the amount paid in that transaction. If [multiple payments](../development/making-payments.md#checkout-with-partial-payment) were made, you must refund them separately.
 
 ## Templating
 

@@ -14,7 +14,7 @@ related:
 
 Controllers are Craft’s way of talking to the outside world. Pretty much everything you do with Craft is part of a request that involves a [controller action](guide:structure-controllers)—from updating settings to rendering an entry.
 
-Most controllers and actions are carefully locked down with [permissions](../system/user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../../system/user-management.md#public-registration) or [cart management](/commerce/5.x/system/orders-carts.md).
+Most controllers and actions are carefully locked down with [permissions](../system/user-management.md#permissions) to prevent malicious activity, but a select few are necessarily available to users and guests _without_ special permissions to support features like [public registration](../system/user-management.md#public-registration) or [cart management](/commerce/5.x/system/orders-carts.md).
 
 The following list of controller actions is non-exhaustive, but covers common patterns like [logging in](#post-userslogin), [creating entries](#post-entriessave-entry), and [managing an address book](#post-userssave-address).
 
@@ -45,7 +45,7 @@ In each of the following examples, you’ll find a list of **Supported Params** 
 
 ::: tip
 All POST actions honor a few additional parameters, except when using an `Accepts: application/json` header:
-- `redirect`: A [hashed](../twig/filters.md#hash) URL or path that Craft will send the user to after a [successful request][success-after-post] (i.e. a user is registered or an entry is saved).
+- `redirect`: A [hashed](twig/filters.md#hash) URL or path that Craft will send the user to after a [successful request][success-after-post] (i.e. a user is registered or an entry is saved).
 - `successMessage`: Overrides the default flash notice for the action.
 - `failMessage`: Overrides the default flash error for the action.
 :::
@@ -73,7 +73,7 @@ Param | Description
 `enabledForSite` | Whether the entry should be enabled for the entry’s `siteId` (`1`/`0`), or an array of site IDs that the entry should be enabled for. (Defaults to the `enabled` param.)
 `enabled` | Whether the entry should be enabled (`1`/`0`). (Defaults to enabled.)
 `entryId` | Fallback if `canonicalId` isn’t passed, for backwards compatibility.
-`entryVariable` | The [hashed](../twig/filters.md#hash) name of the variable that should reference the entry, if a validation error occurs. (Defaults to `entry`.)
+`entryVariable` | The [hashed](twig/filters.md#hash) name of the variable that should reference the entry, if a validation error occurs. (Defaults to `entry`.)
 `expiryDate` | The expiry date for the entry. (Defaults to the current expiry date, or `null`.)
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
 `fields[...]` | [Custom field](../development/forms.md#custom-fields) values.
@@ -143,7 +143,7 @@ The `errorCode` corresponds to one of the [`craft\elements\User::AUTH_*` constan
 
 ### <badge vertical="baseline" type="verb">POST</badge> `users/save-user`
 
-Registers a new [user account](../../system/user-management.md), or updates an existing one.
+Registers a new [user account](../system/user-management.md), or updates an existing one.
 
 ::: tip
 See the [Front-End User Accounts](kb:front-end-user-accounts#registration-form) guide for an example of working with this action.

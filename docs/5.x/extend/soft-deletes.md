@@ -43,7 +43,7 @@ $this->createIndex(null, '{{%mytablename}}', ['handle'], false);
 
 Table rows that have been soft-deleted should only stick around as long as the <config5:softDeleteDuration> config setting wants them to, and then be hard-deleted.
 
-Rather than check for stale rows on every request, we can make this a part of Craft’s [garbage collection](../gc.md) routines.
+Rather than check for stale rows on every request, we can make this a part of Craft’s [garbage collection](../system/gc.md) routines.
 
 <craft5:craft\services\Gc> will fire a `run` event each time that it is running. You can tap into that from your module/plugin’s `init()` method.
 

@@ -1,6 +1,6 @@
 # Payment Gateway Types
 
-You can add a [payment gateway](../payment-gateways.md) to Craft Commerce with a custom plugin or module that adds one or more Payment Gateway Types.
+You can add a [payment gateway](../system/gateways.md) to Craft Commerce with a custom plugin or module that adds one or more Payment Gateway Types.
 
 Similar to how a Craft Section may have one or more Entry Types, a payment gateway may provide as many Payment Gateway Types as it needs in order to support each way it can take payments.
 
@@ -182,4 +182,4 @@ Event::on(
 
 ## Exploring Further
 
-To see example gateways in the wild, see the list of [first-party gateway plugins](../payment-gateways.md#first-party-gateway-plugins) on the Payment Gateways page and additional gateways on the [Craft Plugin Store](https://plugins.craftcms.com/search?q=gateway).
+To see example gateways in the wild, see the list of [first-party gateway plugins](../system/gateways.md#first-party-gateway-plugins) on the Payment Gateways page and additional gateways on the [Craft Plugin Store](https://plugins.craftcms.com/search?q=gateway).

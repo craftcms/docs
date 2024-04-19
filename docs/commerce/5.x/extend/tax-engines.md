@@ -5,7 +5,7 @@ Craft Commerce supports the use of a single tax engine for determining how taxes
 The included tax engine lets you choose exactly which parts of the first-party tax system you’d like to use. This doesn’t just apply to calculation, but if and how you rely on the categories, zones, and rates used to calculate adjustments. The tax engine also specifies what parts of the included control panel tax UI—if any—are available to the store manager:
 
 ::: tip
-See the [Tax](../tax.md) page to understand how Commerce uses tax categories, zones, and rates.
+See the [Tax](../system/tax.md) page to understand how Commerce uses tax categories, zones, and rates.
 :::
 
 You can also add your own navigation items and views to the tax section.

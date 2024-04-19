@@ -79,7 +79,7 @@ define('CRAFT_LICENSE_KEY', craft\helpers\App::env('LICENSE_KEY'));
 
 ## `CRAFT_LICENSE_KEY_PATH`
 
-The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../../directory-structure.md#config) folder by default.)
+The path that Craft should store its license key file, including its filename. (It will be stored as `license.key` within your [config/](../../system/directory-structure.md#config) folder by default.)
 
 ## `CRAFT_LOG_ALLOW_LINE_BREAKS`
 
@@ -126,7 +126,7 @@ When set to `true`, Craft will send log output to `stderr` and `stdout`, instead
 
 ## `CRAFT_TEMPLATES_PATH`
 
-The path to the [templates/](../../directory-structure.md#templates) folder. (It is assumed to live within the base directory by default.)
+The path to the [templates/](../../system/directory-structure.md#templates) folder. (It is assumed to live within the base directory by default.)
 
 ## `CRAFT_TRANSLATIONS_PATH`
 
@@ -134,7 +134,7 @@ The path to the `translations/` folder. (It is assumed to live within the base d
 
 ## `CRAFT_VENDOR_PATH`
 
-The path to the [vendor/](../../directory-structure.md#vendor) folder. (It is assumed to live 4 directories up from the bootstrap script by default.)
+The path to the [vendor/](../../system/directory-structure.md#vendor) folder. (It is assumed to live 4 directories up from the bootstrap script by default.)
 
 ## `CRAFT_WEB_URL`
 

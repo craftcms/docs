@@ -49,9 +49,9 @@ Regardless of how you work, be sure to test your template by downloading an actu
 
 The following config settings can be used for customizing PDF output:
 
-- [pdfPaperOrientation](config-settings.md#pdfpaperorientation)
-- [pdfPaperSize](config-settings.md#pdfpapersize)
-- [pdfAllowRemoteImages](config-settings.md#pdfallowremoteimages)
+- [pdfPaperOrientation](../configure.md#pdfpaperorientation)
+- [pdfPaperSize](../configure.md#pdfpapersize)
+- [pdfAllowRemoteImages](../configure.md#pdfallowremoteimages)
 
 ### Templating Tips
 
@@ -84,7 +84,7 @@ If you’re seeing missing or incorrect characters (i.e. `�` or `□`) where y
 ```
 :::
 
-The [`pdfAllowRemoteImages`](config-settings.md#pdfallowremoteimages) setting is `false` by default, so any images in your templates must be provided with [data URLs](/4.x/dev/functions.md#dataurl):
+The [`pdfAllowRemoteImages`](../configure.md#pdfallowremoteimages) setting is `false` by default, so any images in your templates must be provided with [data URLs](/5.x/reference/twig/functions.md#dataurl):
 
 ```twig
 {# base64-encoded SVG image works when `pdfAllowRemoteImages` is `false` #}

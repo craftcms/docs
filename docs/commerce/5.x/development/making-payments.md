@@ -111,7 +111,7 @@ In this example, we’ll assume a customer has finished shopping, and that we kn
 Send a `gatewayId` param to the [`commerce/cart/update-cart` action](../reference/controller-actions.md#post-cart-update-cart) to select a gateway ahead of time.
 :::
 
-This template uses `cart.gateway.getPaymentFormHtml()` to render the form fields required by the payment gateway, posting them to the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action:
+This template uses `cart.gateway.getPaymentFormHtml()` to render the form fields required by the payment gateway, posting them to the [`commerce/payments/pay`](../reference/controller-actions.md#post-payments-pay) controller action:
 
 ```twig
 {# @var cart craft\commerce\elements\Order #}
@@ -141,7 +141,7 @@ Commerce provides a couple options if you don’t want to require full payment f
 
 1. Authorize a payment to be captured later by the store manager (not all gateways support authorize-only transactions);
 1. Configure your store to allow [checkout without payment](#checkout-without-payment);
-1. Use the built-in [Manual gateway](payment-gateways.md#manual-gateway) to track an offsite payment process;
+1. Use the built-in [Manual gateway](../system/gateways.md#manual-gateway) to track an offsite payment process;
 
 ::: tip
 The first-party Stripe gateway supports additional payment plans via third-party services, but their availability varies by region, customer creditworthiness, and other factors.
@@ -149,7 +149,7 @@ The first-party Stripe gateway supports additional payment plans via third-party
 
 ### Checkout Without Payment
 
-Once the [allowCheckoutWithoutPayment](config-settings.md#allowcheckoutwithoutpayment) setting is enabled, the customer can submit a POST request to the [`commerce/cart/complete`](./dev/controller-actions.md#post-cart-complete) controller action to complete the order without any payment.
+Once the [allowCheckoutWithoutPayment](../configure.md#allowcheckoutwithoutpayment) setting is enabled, the customer can submit a POST request to the [`commerce/cart/complete`](../reference/controller-actions.md#post-cart-complete) controller action to complete the order without any payment.
 
 ```twig
 <form method="post">
@@ -161,24 +161,24 @@ Once the [allowCheckoutWithoutPayment](config-settings.md#allowcheckoutwithoutpa
 </form>
 ```
 
-Like the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) action, the cart must have a valid email address and abide by the following store settings:
+Like the [`commerce/payments/pay`](../reference/controller-actions.md#post-payments-pay) action, the cart must have a valid email address and abide by the following store settings:
 
-- [allowEmptyCartOnCheckout](config-settings.md#allowemptycartoncheckout)
-- [requireShippingMethodSelectionAtCheckout](config-settings.md#requireshippingmethodselectionatcheckout)
-- [requireBillingAddressAtCheckout](config-settings.md#requirebillingaddressatcheckout)
-- [requireShippingAddressAtCheckout](config-settings.md#requireshippingaddressatcheckout)
+- [allowEmptyCartOnCheckout](../configure.md#allowemptycartoncheckout)
+- [requireShippingMethodSelectionAtCheckout](../configure.md#requireshippingmethodselectionatcheckout)
+- [requireBillingAddressAtCheckout](../configure.md#requirebillingaddressatcheckout)
+- [requireShippingAddressAtCheckout](../configure.md#requireshippingaddressatcheckout)
 
 ::: warning
 If you enable order completion without payment, completed orders will have the same status as any others. Don’t forget to make sure store managers are aware of the change and prepared to confirm payment before fulfilling orders!
 
-If you use these workflows, consider adding columns to the main Order [element indexes](/4.x/elements.md#indexes) for _Date Paid_ or _Amount Paid_ so that it is clear which orders need attention.
+If you use these workflows, consider adding columns to the main Order [element indexes](/5.x/system/elements.md#indexes) for _Date Paid_ or _Amount Paid_ so that it is clear which orders need attention.
 :::
 
 ### Checkout with Partial Payment
 
 A _partial_ payment is one that’s less than an order’s outstanding balance at any point in time.
 
-If you’d like to permit customers to check out with partial payments and the gateway supports them, you can enable the [allowPartialPaymentOnCheckout](config-settings.md#allowpartialpaymentoncheckout) setting to allow an additional hashed `paymentAmount` field when posting to the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action. If no `paymentAmount` field is submitted, the order’s outstanding balance will be used.
+If you’d like to permit customers to check out with partial payments and the gateway supports them, you can enable the [allowPartialPaymentOnCheckout](../configure.md#allowpartialpaymentoncheckout) setting to allow an additional hashed `paymentAmount` field when posting to the [`commerce/payments/pay`](../reference/controller-actions.md#post-payments-pay) controller action. If no `paymentAmount` field is submitted, the order’s outstanding balance will be used.
 
 ::: tip
 Multiple payments can still be made on an order when `allowPartialPaymentOnCheckout` is `false`, as long as each payment is equal to the outstanding balance at the time it was made.
@@ -231,7 +231,7 @@ An order is considered “paid in full” as long as the total amount paid did a
 
 ### Paying an Outstanding Balance
 
-You can allow a customer to pay the outstanding balance on a cart or order using the [`commerce/payments/pay`](./dev/controller-actions.html#post-payments-pay) controller action similarly to taking full payment at checkout, taking care to explicitly provide the order number whose outstanding balance should be paid.
+You can allow a customer to pay the outstanding balance on a cart or order using the [`commerce/payments/pay`](../reference/controller-actions.md#post-payments-pay) controller action similarly to taking full payment at checkout, taking care to explicitly provide the order number whose outstanding balance should be paid.
 
 ::: tip
 There’s a full example of this in the [example templates](example-templates.md) at [shop/checkout/pay-static.twig](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/checkout/pay-static.twig).

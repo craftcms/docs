@@ -426,7 +426,6 @@ You don’t have to use interfaces, but they’re a nice way of formalizing the 
 - <craft5:craft\gql\interfaces\elements\Category>
 - <craft5:craft\gql\interfaces\elements\Entry>
 - <craft5:craft\gql\interfaces\elements\GlobalSet>
-- <craft5:craft\gql\interfaces\elements\MatrixBlock>
 - <craft5:craft\gql\interfaces\elements\Tag>
 - <craft5:craft\gql\interfaces\elements\User>
 
@@ -720,7 +719,7 @@ Directives return types that can be used to transform result data in specified l
 
 They’re invoked after Craft has returned everything to satisfy the query, so they can only manipulate results—not influence what’s returned in the first place.
 
-The [`formatDateTime` directive](../graphql.md#the-formatdatetime-directive), for example, can be used to return any date in a specific format:
+The [`formatDateTime` directive](../development/graphql.md#the-formatdatetime-directive), for example, can be used to return any date in a specific format:
 
 ```graphql{3}
 {

@@ -138,7 +138,7 @@ The database user you tell Craft to connect with must have the following privile
 
 ## Control Panel Browser Requirements
 
-Craft’s [control panel](./control-panel.md) requires a browser that [supports JavaScript modules](https://caniuse.com/#feat=es6-module-dynamic-import).
+Craft’s [control panel](system/control-panel.md) requires a browser that [supports JavaScript modules](https://caniuse.com/#feat=es6-module-dynamic-import).
 
 #### Windows and macOS
 

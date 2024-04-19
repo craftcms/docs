@@ -237,7 +237,7 @@ Out of the box, Craft provides these aliases—but you can override them or prov
 | `@config` | Path to your `config/` folder. | [CRAFT_BASE_PATH](reference/config/bootstrap.md#craft-base-path)
 | `@contentMigrations` | Path to your `migrations/` folder. | [CRAFT_BASE_PATH](reference/config/bootstrap.md#craft-base-path)
 | `@craft` | Path to Craft’s source code. | `@app`
-| `@dotenv` | Path to your [.env](../directory-structure.md#env) file. | [CRAFT_DOTENV_PATH](reference/config/bootstrap.md#craft-dotenv-path)
+| `@dotenv` | Path to your [.env](system/directory-structure.md#env) file. | [CRAFT_DOTENV_PATH](reference/config/bootstrap.md#craft-dotenv-path)
 | `@lib` | Path to extra libraries packaged with Craft. | `@app`
 | `@root` | The root project path. | [CRAFT_BASE_PATH](reference/config/bootstrap.md#craft-base-path)
 | `@runtime` | Path to your `storage/runtime/` folder. | `@storage`

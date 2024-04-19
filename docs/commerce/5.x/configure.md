@@ -1,8 +1,6 @@
 # Configuring Commerce
 
-## Config Settings
-
-Commerce supports a number of [config settings](reference/config-settings.md). Like Craft’s config settings, you can override their default values in a `config/commerce.php` file.
+Commerce supports a number of [settings](#config-settings). Like Craft’s config settings, you can override their default values in a `config/commerce.php` file.
 
 ```php
 return [

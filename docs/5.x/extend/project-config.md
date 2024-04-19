@@ -1,10 +1,10 @@
 # Supporting Project Config
 
-If your plugin has any configurable components that store settings outside of your main [plugin settings](plugin-settings.md), they may be good candidates for [project config](../project-config.md) support.
+If your plugin has any configurable components that store settings outside of your main [plugin settings](plugin-settings.md), they may be good candidates for [project config](../system/project-config.md) support.
 
 ## Is Project Config Support Right for You?
 
-Before adding project config support to your component, consider the tradeoff: components that are managed by the project config [should](../project-config.md#production-changes-reverted) only be editable by administrators in development environments.
+Before adding project config support to your component, consider the tradeoff: components that are managed by the project config [should](../system/project-config.md#production-changes-reverted) only be editable by administrators in development environments.
 
 Ask yourself:
 
@@ -12,7 +12,7 @@ Ask yourself:
 - Does it depend on anything that can be managed by non-admins?
 - Would it be cumbersome to admins’ workflows if the component could only be edited in development environments?
 
-If the answer to any of those is **yes** (now or in the foreseeable future), then it’s likely _not_ a good candidate for project config support. See the [scope](../project-config.md#scope) section of the main project config docs for examples of what Craft itself tracks in project config.
+If the answer to any of those is **yes** (now or in the foreseeable future), then it’s likely _not_ a good candidate for project config support. See the [scope](../system/project-config.md#scope) section of the main project config docs for examples of what Craft itself tracks in project config.
 
 Plugins do not need to track _everything_ in project config for it to be worthwhile managing one or two components this way. Incremental adoption is a totally valid and encouraged approach. You may even be able to implement project config in a minor release, with no disruption to your plugin’s service APIs. We do discourage opt-in/out support of project config (i.e. a plugin setting that enables or disables project config support for one or more of its features).
 

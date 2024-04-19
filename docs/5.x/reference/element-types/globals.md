@@ -12,7 +12,7 @@ Globals store content that is available globally throughout your templates but i
 
 <!-- more -->
 
-Craft organizes globals into global sets. Each global set has its own [field layout](fields.md#field-layouts) and can use any of the built-in or plugin-provided custom fields.
+Craft organizes globals into global sets. Each global set has its own [field layout](../../system/fields.md#field-layouts) and can use any of the built-in or plugin-provided custom fields.
 
 To create a global get, go to **Settings** → **Globals**.
 
@@ -24,7 +24,7 @@ Unlike [entries](entries.md#entries), global sets don’t have the Live Preview 
 
 <Block label="Migrating to Singles">
 
-With the release of Craft 4.4, we began consolidating features of [other element types](elements.md) into [entries](entries.md).
+With the release of Craft 4.4, we began consolidating features of [other element types](../../system/elements.md) into [entries](entries.md).
 
 As part of that process, we introduced a [console command](../cli.md#entrify-global-set) that can automate the conversion of global sets to entries:
 
@@ -90,10 +90,10 @@ $myGlobalSetQuery = \craft\elements\GlobalSet::find();
 ```
 :::
 
-Once you’ve created a global set query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](element-queries.md#executing-element-queries) by calling `.all()`. An array of [GlobalSet](craft5:craft\elements\GlobalSet) objects will be returned.
+Once you’ve created a global set query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [GlobalSet](craft5:craft\elements\GlobalSet) objects will be returned.
 
 ::: tip
-See [Element Queries](element-queries.md) to learn about how element queries work.
+See [Element Queries](../../development/element-queries.md) to learn about how element queries work.
 :::
 
 ### Example

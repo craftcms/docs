@@ -28,7 +28,7 @@ A capture can only have one of two statuses: `success` or `failed`.
 
 ::: tip
 The authorize-capture pattern can be used outside credit card contexts.\
-The [manual payment gateway](payment-gateways.md#manual-gateway), for example, lets you accept an order with an authorize transaction and manually choose “capture” to indicate payment has been made.
+The [manual payment gateway](gateways.md#manual-gateway), for example, lets you accept an order with an authorize transaction and manually choose “capture” to indicate payment has been made.
 :::
 
 ### `purchase`

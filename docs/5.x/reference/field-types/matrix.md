@@ -228,7 +228,7 @@ if ($entry->myFieldHandle->exists()) {
 :::
 
 ::: tip
-Read more about [query execution methods](./element-queries.md#executing-element-queries) on the element query page.
+Read more about [query execution methods](../../development/element-queries.md#executing-element-queries) on the element query page.
 :::
 
 You can set [parameters](../element-types/entries.md#parameters) on the query, as well. For example, to only fetch nested entries that use a specific entry type, set the [type](../element-types/entries.md#type) param:

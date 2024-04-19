@@ -343,7 +343,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 
 ## `dataUrl`
 
-Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft5:craft\elements\Asset> object or a file path (optionally using an [alias](../config/README.md#aliases)).
+Outputs an asset or file as a base64-encoded [data URL](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URIs). You can pass it an <craft5:craft\elements\Asset> object or a file path (optionally using an [alias](../../configure.md#aliases)).
 
 ```twig
 {# Asset object `myLogoAsset` #}

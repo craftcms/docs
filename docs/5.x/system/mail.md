@@ -52,19 +52,19 @@ All Messages
 : - `language`: Language that the current message was defined for. This may agree with the site in use when the message was triggered, or the user’s preferred language.
 
 Account Activation
-: - `user`: The Craft [user](users.md) element a message is being sent to.
+: - `user`: The Craft [user](../reference/element-types/users.md) element a message is being sent to.
 : - `link`: A tokenized activation URL.
 
 Email Verification
-: - `user`: The Craft [user](users.md) element a message is being sent to.
+: - `user`: The Craft [user](../reference/element-types/users.md) element a message is being sent to.
 : - `link`: A tokenized verification URL.
 
 Password Reset
-: - `user`: The Craft [user](users.md) element a message is being sent to.
+: - `user`: The Craft [user](../reference/element-types/users.md) element a message is being sent to.
 : - `link`: A tokenized password reset URL.
 
 ::: warning
-When outputting user-provided values (like a username, email, or [address](addresses.md)), always use the [escape](https://twig.symfony.com/doc/3.x/filters/escape.html) filter. You can see the shorter version (`|e`) in use in the template, above.
+When outputting user-provided values (like a username, email, or [address](../reference/element-types/addresses.md)), always use the [escape](https://twig.symfony.com/doc/3.x/filters/escape.html) filter. You can see the shorter version (`|e`) in use in the template, above.
 :::
 
 Keep in mind that users may have different amounts of profile data populated when they register or reset their password. Include default or alternate text when the desired text may not be available:
@@ -90,7 +90,7 @@ Using the agnostic `url()` function may generate incorrect URLs that reflect how
 
 #### Language
 
-In addition to having site-specific messages, emails sent to a Craft user can use the [`t` filter](reference/twig/filters.md#translate-or-t) to localize strings based on their preferred language. Read more about [static translations](sites.md#static-message-translations) in the **Sites** documentation.
+In addition to having site-specific messages, emails sent to a Craft user can use the [`t` filter](../reference/twig/filters.md#translate-or-t) to localize strings based on their preferred language. Read more about [static translations](sites.md#static-message-translations) in the **Sites** documentation.
 
 ::: tip
 Plugins may register messages that are not sent to Craft users—in these cases (where we don’t know the recipient’s desired language), the current site’s language will be used.
@@ -102,7 +102,7 @@ Craft generates transforms for images used within emails prior to sending them. 
 
 ## Other Messages
 
-Plugins may create and send email messages outside of [system messages](#system-messages). For example, [Commerce](/commerce/4.x/README.md) provides a [user-configurable suite of messages](/commerce/4.x/emails.md) and status-based triggers, rather than defining messages in the global space. The mailer will use the **System Email**
+Plugins may create and send email messages outside of [system messages](#system-messages). For example, [Commerce](/commerce/5.x/README.md) provides a [user-configurable suite of messages](/commerce/5.x/system/emails.md) and status-based triggers, rather than defining messages in the global space. The mailer will use the **System Email**
 
 ::: tip
 If you are unsure where an email is sent from (or how to edit it), check the system messages utility, then consult the documentation for any installed plugins.

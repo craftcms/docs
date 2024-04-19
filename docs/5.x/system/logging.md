@@ -123,7 +123,7 @@ To prevent leaking secrets into logs, Craft automatically redacts sensitive-soun
 "CRAFT_DB_DATABASE":"db","CRAFT_DB_USER":"db","CRAFT_DB_PASSWORD":"•••••",
 ```
 
-These keywords are customizable via the `security` component’s `sensitiveKeywords` property in [config/app.php](repo:craftcms/cms/blob/4.x/src/config/app.php#L116-L130):
+These keywords are customizable via the `security` component’s `sensitiveKeywords` property in [config/app.php](repo:craftcms/cms/blob/5.x/src/config/app.php#L110-L122):
 
 ```php
 <?php
@@ -154,7 +154,7 @@ For high-traffic environments, configuring [`logrotate`](https://linux.die.net/m
 
 Craft gives you fine-grained control over how logs are formatted and where they end up.
 
-Configuration is handled via the `log` component, in `config/app.php`. If this is your first time dealing with `app.php`, we recommend reading a bit about [application configuration](./config/app.md).
+Configuration is handled via the `log` component, in `config/app.php`. If this is your first time dealing with `app.php`, we recommend reading a bit about [application configuration](../reference/config/app.md).
 
 ### Monolog
 

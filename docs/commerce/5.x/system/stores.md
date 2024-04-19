@@ -54,7 +54,7 @@ In Twig, you can access stores in a few different ways:
 
 ## Settings
 
-Stores maintain their own settings, but those settings can be kept in sync via [environment variables](/5.x/config/README.md#env).
+Stores maintain their own settings, but those settings can be kept in sync via [environment variables](/5.x/configure.md#env).
 
 ::: tip
 The configured stores also impact how you manage many other aspects of your ecommerce platform, including [locations](inventory.md), [markets](#markets), [currencies](currencies.md), [pricing rules](pricing-rules.md), [shipping](shipping.md), and [tax](tax.md). Most features in the <Journey path="Commerce, Store Management" /> section are handled on a per-store basis—look for the store switcher menu at the top of each screen!

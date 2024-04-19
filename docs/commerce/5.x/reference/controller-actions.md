@@ -17,7 +17,7 @@ Methods | Action | Description
 <badge vertical="baseline" type="verb">POST</badge> | [cart/complete](#post-cart-complete) | Completes an order without payment.
 <badge vertical="baseline" type="verb">GET</badge> | [cart/get-cart](#get-cart-get-cart) | Returns the current cart as JSON.
 <badge vertical="baseline" type="verb">GET/POST</badge> | [cart/load-cart](#get-post-cart-load-cart) | Loads a cookie for the given cart.
-<badge vertical="baseline" type="verb">POST</badge> | [cart/forget-cart](#get-post-cart-forget-cart) | Removes a cookie for the current cart. <Since ver="4.3.0" product="Commerce" repo="craftcms/commerce" feature="Forgetting carts" />
+<badge vertical="baseline" type="verb">POST</badge> | [cart/forget-cart](#get-post-cart-forget-cart) | Removes a cookie for the current cart.
 <badge vertical="baseline" type="verb">POST</badge> | [cart/update-cart](#post-cart-update-cart) | Manage a customer’s current [cart](../system/orders-carts.md).
 <badge vertical="baseline" type="verb">POST</badge> | [payment-sources/add](#post-payment-sources-add) | Creates a new payment source.
 <badge vertical="baseline" type="verb">POST</badge> | [payment-sources/delete](#post-payment-sources-delete) | Deletes a payment source.
@@ -33,14 +33,14 @@ Methods | Action | Description
 
 ### <badge vertical="baseline" type="verb">POST</badge> `cart/complete`
 
-You can let your customers complete an order without a payment transaction. The [allowCheckoutWithoutPayment](../reference/config-settings.md#allowcheckoutwithoutpayment) setting must be enabled or an HTTP exception will be thrown.
+You can let your customers complete an order without a payment transaction. The [allowCheckoutWithoutPayment](../configure.md#allowcheckoutwithoutpayment) setting must be enabled or an HTTP exception will be thrown.
 
 The cart must have an email address and honor the following settings:
 
-- [allowEmptyCartOnCheckout](../reference/config-settings.md#allowemptycartoncheckout)
-- [requireShippingMethodSelectionAtCheckout](../reference/config-settings.md#requireshippingmethodselectionatcheckout)
-- [requireBillingAddressAtCheckout](../reference/config-settings.md#requirebillingaddressatcheckout)
-- [requireShippingAddressAtCheckout](../reference/config-settings.md#requireshippingaddressatcheckout)
+- [allowEmptyCartOnCheckout](../configure.md#allowemptycartoncheckout)
+- [requireShippingMethodSelectionAtCheckout](../configure.md#requireshippingmethodselectionatcheckout)
+- [requireBillingAddressAtCheckout](../configure.md#requirebillingaddressatcheckout)
+- [requireShippingAddressAtCheckout](../configure.md#requireshippingaddressatcheckout)
 
 See the [Making Payments](../development/making-payments.md#checkout-without-payment) page for more on using this action.
 
@@ -60,8 +60,8 @@ The output of the action depends on whether the cart was completed successfully 
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark label="Success" /> | [Standard behavior][after-success]. | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../reference/config-settings.md#cartvariable) config setting.
-<x-mark label="Failure" /> | [Standard behavior][after-fauilure]; cart is available in the template under a variable determined by the [cartVariable](../reference/config-settings.md#cartvariable). | [Standard behavior][after-fauilure]; cart data is available under a key determined by the [cartVariable](../reference/config-settings.md#cartvariable) config setting.
+<check-mark label="Success" /> | [Standard behavior][after-success]. | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../configure.md#cartvariable) config setting.
+<x-mark label="Failure" /> | [Standard behavior][after-fauilure]; cart is available in the template under a variable determined by the [cartVariable](../configure.md#cartvariable). | [Standard behavior][after-fauilure]; cart data is available under a key determined by the [cartVariable](../configure.md#cartvariable) config setting.
 
 </span>
 
@@ -85,7 +85,7 @@ Param | Description
 
 State | `application/json`
 ----- | ------------------
-<check-mark label="Success" /> | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../reference/config-settings.md#cartvariable) config setting.
+<check-mark label="Success" /> | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../configure.md#cartvariable) config setting.
 
 </span>
 
@@ -117,7 +117,7 @@ Param | Description
 `gatewayId` | The payment gateway ID to be used when the cart is completed.
 `lineItems[]` | Array of one or more of the cart’s line items to update. Each must have an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
 `number` | Optional order number for specific, existing cart.
-`paymentCurrency` | ISO code of a configured [payment currency](../system/payment-currencies.md) to be used for the cart.
+`paymentCurrency` | ISO code of a configured [payment currency](../system/currencies.md) to be used for the cart.
 `paymentSourceId` | The ID for a payment source that should be used when the cart is completed.
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
 `purchasables[]` | Array of one or more purchasables to be [added to the cart](../system/orders-carts.md#adding-a-multiple-items). Each must include an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs.
@@ -138,8 +138,8 @@ The output of the action depends on whether the cart was updated successfully an
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark label="Success" /> | [Standard behavior][after-success]. | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../reference/config-settings.md#cartvariable) config setting.
-<x-mark label="Failure" /> | [Standard behavior][after-failure]. | [Standard behavior][after-failure]; cart data is available under a key determined by the [cartVariable](../reference/config-settings.md#cartvariable) config setting.
+<check-mark label="Success" /> | [Standard behavior][after-success]. | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../configure.md#cartvariable) config setting.
+<x-mark label="Failure" /> | [Standard behavior][after-failure]. | [Standard behavior][after-failure]; cart data is available under a key determined by the [cartVariable](../configure.md#cartvariable) config setting.
 
 </span>
 
@@ -162,8 +162,8 @@ The action’s output depends on whether the cart was loaded successfully and th
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark label="Success" /> | [Standard behavior][after-success]; <badge vertical="baseline" type="verb">GET</badge> requests are redirected to the [loadCartRedirectUrl](../reference/config-settings.md#loadcartredirecturl). | [Standard behavior][after-success].
-<x-mark label="Failure" /> | [Standard behavior][after-failure]; <badge vertical="baseline" type="verb">GET</badge> requests are redirected per the [loadCartRedirectUrl](../reference/config-settings.md#loadcartredirecturl). | [Standard behavior][after-failure].
+<check-mark label="Success" /> | [Standard behavior][after-success]; <badge vertical="baseline" type="verb">GET</badge> requests are redirected to the [loadCartRedirectUrl](../configure.md#loadcartredirecturl). | [Standard behavior][after-success].
+<x-mark label="Failure" /> | [Standard behavior][after-failure]; <badge vertical="baseline" type="verb">GET</badge> requests are redirected per the [loadCartRedirectUrl](../configure.md#loadcartredirecturl). | [Standard behavior][after-failure].
 
 </span>
 
@@ -202,7 +202,7 @@ Param | Description
 
 State | `application/json`
 ----- | ------------------
-<check-mark label="Success" /> | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../reference/config-settings.md#cartvariable) config setting.
+<check-mark label="Success" /> | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../configure.md#cartvariable) config setting.
 
 </span>
 
@@ -273,7 +273,7 @@ Param | Description
 `gatewayId` | The payment gateway ID to be used for payment.
 `number` | The order number payment should be applied to. When ommitted, payment is applied to the current cart.
 `paymentAmount` | Hashed payment amount, expressed in the cart’s `paymentCurrency`. Available only if [partial payments](../development/making-payments.md#checkout-with-partial-payment) are allowed.
-`paymentCurrency` | ISO code of a configured [payment currency](../system/payment-currencies.md) to be used for the payment.
+`paymentCurrency` | ISO code of a configured [payment currency](../system/currencies.md) to be used for the payment.
 `paymentSourceId` | The ID for a payment source that should be used for payment.
 `registerUserOnOrderComplete` | Whether the customer should have an account created on order completion.
 `savePaymentSource` | Whether to save card information as a payment source. (Gateway must support payment sources.)
@@ -289,8 +289,8 @@ The action’s output depends on whether payment was applied successfully and `A
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark label="Success" /> | [Standard behavior][after-success]; redirection defaults to the order’s `returnUrl`. | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../reference/config-settings.md#cartvariable), as well as special `paymentForm`, `transactionId`, and `transactionHash` properties.
-<x-mark label="Failure" /> | [Standard behavior][after-failure]; cart is available in the template under a variable determined by the [cartVariable](../reference/config-settings.md#cartvariable), as well as special `paymentForm` and `paymentFormErrors` variables. | [Standard behavior][after-failure]; cart data is available under a key determined by the [cartVariable](../reference/config-settings.md#cartvariable), as well as special `paymentForm` and `paymentFormErrors` properties.
+<check-mark label="Success" /> | [Standard behavior][after-success]; redirection defaults to the order’s `returnUrl`. | [Standard behavior][after-success]; cart data is available under a key determined by the [cartVariable](../configure.md#cartvariable), as well as special `paymentForm`, `transactionId`, and `transactionHash` properties.
+<x-mark label="Failure" /> | [Standard behavior][after-failure]; cart is available in the template under a variable determined by the [cartVariable](../configure.md#cartvariable), as well as special `paymentForm` and `paymentFormErrors` variables. | [Standard behavior][after-failure]; cart data is available under a key determined by the [cartVariable](../configure.md#cartvariable), as well as special `paymentForm` and `paymentFormErrors` properties.
 
 </span>
 
@@ -357,7 +357,7 @@ Param | Description
 `planUid` | **Required.** UID of the Commerce plan the customer wants to subscribe to.
 `fields[...]` | Subscription custom field values, indexed by their handles.
 `fieldsLocation` | Allows relocation of the default `fields` key for custom field data (see above).
-`*` | **Conditionally required.** Each [gateway](../system/payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SubscriptionForm> subclass.
+`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SubscriptionForm> subclass.
 
 ::: warning
 `planUid` and all gateway-specific properties must be [hashed][hash-filter] to prevent tampering.
@@ -370,7 +370,7 @@ Param | Description
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
 <check-mark/> | [Standard behavior][after-success]. | [Standard behavior][after-success]; the Subscription model is available under the `subscription` key.
-<x-mark/> | [Standard behavior][after-failure]. Most subscription failures will be presented as a succinct error message. Specific issues are logged, but may not be disclosed to the customer. The user may be redirected to the [`updateBillingDetailsUrl` setting](../reference/config-settings.md#updatebillingdetailsurl) to resolve billing issues. | [Standard behavior][after-failure].
+<x-mark/> | [Standard behavior][after-failure]. Most subscription failures will be presented as a succinct error message. Specific issues are logged, but may not be disclosed to the customer. The user may be redirected to the [`updateBillingDetailsUrl` setting](../configure.md#updatebillingdetailsurl) to resolve billing issues. | [Standard behavior][after-failure].
 
 </span>
 
@@ -383,7 +383,7 @@ Cancels an active subscription.
 Param | Description
 ----- | -----------
 `subscriptionUid` | **Required.** UID of the subscription to cancel. Must be [hashed][hash-filter].
-`*` | **Conditionally required.** Each [gateway](../system/payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\CancelSubscriptionForm> subclass.
+`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\CancelSubscriptionForm> subclass.
 
 #### Response
 
@@ -406,7 +406,7 @@ Param | Description
 ----- | -----------
 `subscriptionUid` | **Required.** UID of the subscription getting updated. Must be [hashed][hash-filter].
 `planUid` | **Required.** UID of the plan to switch to. Must be [hashed][hash-filter].
-`*` | **Conditionally required.** Each [gateway](../system/payment-gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SwitchPlansForm> subclass.
+`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SwitchPlansForm> subclass.
 
 #### Response
 

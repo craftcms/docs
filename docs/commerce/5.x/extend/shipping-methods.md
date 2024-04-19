@@ -2,7 +2,7 @@
 
 Craft Commerce provides several ways of adding shipping costs to the cart:
 
-1. **Using the [included shipping method and shipping rules engine](../shipping.md).**\
+1. **Using the [included shipping method and shipping rules engine](../system/shipping.md).**\
    Define your rules and prices based on individual product details and the cart as a whole. Costs may come from the overall order, weight, cost percentage, and per-item attributes. This engine is fairly powerful and can meet the needs of most small businesses with simple to moderately complex shipping needs.
 
 2. **Writing an order [adjuster](adjusters.md) class.**\
@@ -12,7 +12,7 @@ Craft Commerce provides several ways of adding shipping costs to the cart:
    You can still utilize the shipping engine in option 1 while adding functionality that presents more than one option to the customer, utilizes an external API, or uses your own custom pricing logic.
 
 ::: tip
-Before writing your own shipping adjuster or shipping method (option 2 or 3), make sure you’re comfortable [creating a plugin or module for Craft CMS](/4.x/extend/).
+Before writing your own shipping adjuster or shipping method (option 2 or 3), make sure you’re comfortable [creating a plugin or module for Craft CMS](/5.x/extend/).
 :::
 
 Since the best code is code you don’t have to write, it’s best to see if the included shipping system can be used to address the shipping needs of your store. Adding or modifying adjusters means introducing a minimal amount of custom PHP, while adding your own shipping method offers the greatest flexibility when the first two options are too limited. The most common reason for introducing a custom shipping method is to provide an integration with an external API for getting rates.

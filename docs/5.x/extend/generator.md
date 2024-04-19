@@ -4,7 +4,7 @@ The [Generator](repo:craftcms/generator) is a first-party tool for scaffolding m
 
 ## Installation
 
-New Craft projects come with the Generator package installed and ready to use. If you started your project with a version of Craft earlier than 4.3.5, [update](../updating.md) and run:
+New Craft projects come with the Generator package installed and ready to use. If you started your project with a version of Craft earlier than 4.3.5, [update](../update.md) and run:
 
 ```bash
 composer require craftcms/generator --dev
@@ -18,8 +18,8 @@ Generator’s API is accessible via the command line, under the `make` command:
 
 Without passing an argument, you will be presented with the command’s help text, and two primary options:
 
-1. `php craft make plugin`: Initialize and wire up a new [Plugin](./plugin-guide.md).
-1. `php craft make module`: Create a new [Module](./module-guide.md).
+1. `php craft make plugin`: Initialize and wire up a new [Plugin](plugin-guide.md).
+1. `php craft make module`: Create a new [Module](module-guide.md).
 
 Feel free to explore the generator API at your own pace. See the official readme for a list of [currently-supported components](repo:craftcms/generator#system-component-generation), or run `php craft make` to see what is supported by your installed version.
 
@@ -27,7 +27,7 @@ Subsequent commands should be run with either a `--module` or `--plugin` flag, u
 
 ## Updates
 
-To get the latest Generator functionality, run `composer update` in your project directory. Generator is not considered a plugin, and therefore will not appear in Craft’s built-in updater tool, nor will its presence be recorded in [project config](./project-config.md).
+To get the latest Generator functionality, run `composer update` in your project directory. Generator is not considered a plugin, and therefore will not appear in Craft’s built-in updater tool, nor will its presence be recorded in [project config](project-config.md).
 
 ### Documentation Changes
 

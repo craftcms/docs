@@ -6,7 +6,7 @@ description: Discover objects and data available to you in any Twig context.
 
 A number of [global variables](https://twig.symfony.com/doc/3.x/templates.html#global-variables) are available to Twig templates. Some come from Twig itself, and some are Craft-specific.
 
-Global variables are accessible in _every_ Twig template, including [system messages](../mail.md#system-messages) and [object templates](../../system/object-templates.md) used for element URIs.
+Global variables are accessible in _every_ Twig template, including [system messages](../../system/mail.md#system-messages) and [object templates](../../system/object-templates.md) used for element URIs.
 
 This page is split into four sections:
 
@@ -406,7 +406,7 @@ Craft makes some elements available to all templates.
 
 ### Global Sets
 
-Each of your site’s [global sets](../globals.md) will be available to your templates as global variables, named the same as their handle.
+Each of your site’s [global sets](../element-types/globals.md) will be available to your templates as global variables, named the same as their handle.
 
 They will be represented as <craft5:craft\elements\GlobalSet> objects.
 

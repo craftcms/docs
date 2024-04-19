@@ -25,5 +25,5 @@ ddev craft plugin/install commerce
 ```
 
 ::: tip
-New to Commerce? Consider copying the included [example templates](example-templates.md) into your project as a starting point!
+New to Commerce? Consider copying the included [example templates](development/example-templates.md) into your project as a starting point!
 :::

@@ -9,7 +9,7 @@ Variants are added to a _cart_ that can be completed to become an _order_. Carts
 
 When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce4:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
 
-Typically, a cart is completed in response to a customer [making a payment](../development/making-payments.md)—or by satisfying other requirements you’ve defined through [configuration](../reference/config-settings.md) or an [extension](../extend/README.md).
+Typically, a cart is completed in response to a customer [making a payment](../development/making-payments.md)—or by satisfying other requirements you’ve defined through [configuration](../configure.md) or an [extension](../extend/README.md).
 
 ## Carts
 
@@ -17,9 +17,9 @@ As a customer or store manager is building a cart, the goal is to maintain an up
 
 Once a cart is completed, however, it becomes an [order](#orders) that represents choices explicitly finalized by whoever completed the cart. The order’s behavior changes slightly at this point: the customer will no longer be able to make edits, and changes made by a store manager will not automatically trigger [recalculation](#recalculating-orders).
 
-Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last hour, and _inactive_ carts older than an hour that are likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](../reference/config-settings.md#activecartduration) setting.)
+Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last hour, and _inactive_ carts older than an hour that are likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](../configure.md#activecartduration) setting.)
 
-Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](../reference/config-settings.md#purgeinactivecarts) and [`purgeInactiveCartsDuration`](../reference/config-settings.md#purgeinactivecartsduration) settings.
+Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](../configure.md#purgeinactivecarts) and [`purgeInactiveCartsDuration`](../configure.md#purgeinactivecartsduration) settings.
 
 Let’s go over a few common actions you may want to perform on a cart:
 
@@ -112,7 +112,7 @@ We’re sneaking three new things in here as well:
 
 1. The `successMessage` parameter can be used to customize the default “Cart updated.” flash message.
 2. The `qty` parameter can be used to specify a quantity, which defaults to `1` if not supplied.
-3. Craft’s [`redirectInput`](/4.x/dev/functions.md#redirectinput) tag can be used to take the user to a specific URL after the cart is updated successfully. **If any part of the cart update action fails, the user will not be redirected.**
+3. Craft’s [`redirectInput`](/5.x/reference/twig/functions.md#redirectinput) tag can be used to take the user to a specific URL after the cart is updated successfully. **If any part of the cart update action fails, the user will not be redirected.**
 
 #### Adding Multiple Items
 
@@ -276,7 +276,7 @@ Each method will store any errors in the session’s error flash data (`craft.ap
 If the desired cart belongs to a user, that user must be logged in to load it into a browser cookie.
 :::
 
-The [`loadCartRedirectUrl`](../reference/config-settings.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart has been loaded.
+The [`loadCartRedirectUrl`](../configure.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart has been loaded.
 
 #### Loading a Cart with a URL
 
@@ -408,7 +408,7 @@ You could then loop over the line items in those older carts and allow the custo
 
 A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart. If the customer logs out, their cart will automatically be forgotten.
 
-Removing all the items from a cart doesn’t mean that the cart is forgotten, though—sometimes, fully detaching a cart from the session is preferable to emptying it. To remove a cart from the customer’s session (without logging out or clearing the items), make a `POST` request to the [`cart/forget-cart` action](dev/controller-actions.md#post-cart-forget-cart). A cart number is _not_ required—Commerce can only detach the customer’s current cart.
+Removing all the items from a cart doesn’t mean that the cart is forgotten, though—sometimes, fully detaching a cart from the session is preferable to emptying it. To remove a cart from the customer’s session (without logging out or clearing the items), make a `POST` request to the [`cart/forget-cart` action](../reference/controller-actions.md#post-cart-forget-cart). A cart number is _not_ required—Commerce can only detach the customer’s current cart.
 
 The next time the customer makes a request to the [`update-cart` action](../reference/controller-actions.md#post-cart-update-cart), they will be given a new cart
 
@@ -511,7 +511,7 @@ Output:
 2018-43
 ```
 
-In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](/5.x/reference/twig/functions.html#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
+In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](/5.x/reference/twig/functions.md#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
 
 The `seq()` function takes the following parameters:
 
@@ -556,7 +556,7 @@ Every order includes a few important totals:
 - **order.itemTotal** is the sum of the order’s [line item `total` amounts](#line-item-totals).
 - **order.adjustmentSubtotal** is the sum of the order’s adjustments.
 - **order.total** is the sum of the order’s `itemSubtotal` and `adjustmentsTotal`.
-- **order.totalPrice** is the total order price with a minimum enforced by the [minimumTotalPriceStrategy](../reference/config-settings.html#minimumtotalpricestrategy) setting.
+- **order.totalPrice** is the total order price with a minimum enforced by the [minimumTotalPriceStrategy](../configure.md#minimumtotalpricestrategy) setting.
 
 ::: warning
 You’ll also find an `order.adjustmentsSubtotal` which is identical to `order.adjustmentsTotal`. It will be removed in Commerce 4.

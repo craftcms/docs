@@ -4,21 +4,21 @@ sidebarDepth: 2
 
 # Events
 
-Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can [register event listeners](/4.x/extend/events.md), typically in their `init()` methods, to modify Commerce’s behavior.
+Craft Commerce provides a multitude of events for extending its functionality. Modules and plugins can [register event listeners](/5.x/extend/events.md), typically in their `init()` methods, to modify Commerce’s behavior.
 
 ## Event Code Generator
 
-Select an event for details and a code snippet, or check out the sections below for some use cases. See Craft’s [Events](/4.x/extend/events.md) page for more information about working with events.
+Select an event for details and a code snippet, or check out the sections below for some use cases. See Craft’s [Events](/5.x/extend/events.md) page for more information about working with events.
 
 <event-browser source="commerce-4" />
 
 ## Common Events + Workflows
 
-The following sections highlight a few of the events emitted by Commerce classes. It is not exhaustive—meaning you may need to enlist the help of one or more [development tools](/4.x/extend/README.md#tools) to aid in [discovering the “right” event](/4.x/extend/events.md#discovering-events)!
+The following sections highlight a few of the events emitted by Commerce classes. It is not exhaustive—meaning you may need to enlist the help of one or more [development tools](/5.x/extend/README.md#tools) to aid in [discovering the “right” event](/5.x/extend/events.md#discovering-events)!
 
 ### Product + Variant Events
 
-[Products and variants](../products-variants.md) are [elements](/4.x/extend/element-types.md), so all the standard lifecycle events (for elements and their associated query classes) apply here.
+[Products and variants](../system/products-variants.md) are [elements](/5.x/system/elements.md), so all the standard lifecycle events (for elements and their associated query classes) apply here.
 
 #### `beforeCaptureVariantSnapshot`
 
@@ -1807,10 +1807,10 @@ Event::on(
 ```
 
 ::: tip
-If the purchasable becomes unavailable after being added to the cart, an [order notice](../orders-carts.md#order-notices) will be added to the order informing the customer.
+If the purchasable becomes unavailable after being added to the cart, an [order notice](../system/orders-carts.md#order-notices) will be added to the order informing the customer.
 :::
 
-#### `modifyPurchasablesTableQuery` <Since ver="4.3.0" repo="craftcms/commerce" feature="This event" />
+#### `modifyPurchasablesTableQuery`
 
 The event that is triggered retrieving the list of purchasables for the add a line item feature on the order edit page.
 

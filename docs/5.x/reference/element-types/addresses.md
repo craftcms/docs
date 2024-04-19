@@ -18,7 +18,7 @@ Addresses are a type of [element](../../system/elements.md) you’ll most common
 
 <!-- more -->
 
-For sites supporting [public registration](../../system/user-management.md#public-registration) (like a storefront built on [Craft Commerce](/commerce/4.x/)) users can manage their own [address book](#managing-addresses).
+For sites supporting [public registration](../../system/user-management.md#public-registration) (like a storefront built on [Craft Commerce](/commerce/5.x/)) users can manage their own [address book](#managing-addresses).
 
 ::: tip
 Plugins are also able to use addresses to store their own location data.

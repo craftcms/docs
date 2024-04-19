@@ -104,7 +104,7 @@ Here are some great ways to begin your journey with Craft:
         <IconLink
             title="Extending Craft"
             subtitle="Add radical new functionality to your site or app."
-            link="extend/README.md"
+            link="extend"
             icon="/docs/icons/icon-flask.svg"
             iconSize="large" />
     </div>
