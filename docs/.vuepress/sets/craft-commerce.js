@@ -83,7 +83,6 @@ module.exports = {
           title: "Reference",
           collapsable: false,
           children: [
-            "reference/config-settings",
             "reference/fields",
             "reference/permissions",
             "reference/twig",
