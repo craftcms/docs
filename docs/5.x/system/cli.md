@@ -10,7 +10,7 @@ Craft’s [HTTP API](../development/forms.md) is complemented by its command-lin
 
 This can be useful for automating tasks with `cron`, running actions in a [deployment process](kb:deployment-best-practices), working with Craft via SSH, and running resource-intensive tasks that might otherwise be constrained by the limits of your web server. If you installed Craft using our [quick-start guide](../install.md), you’ve already
 
-The Craft CLI executable typically lives at the root of your project (as [a file named `craft`](./directory-structure.md#craft)) and requires a compatible PHP installation to run.
+The Craft CLI executable typically lives at the root of your project (as [a file named `craft`](directory-structure.md#craft)) and requires a compatible PHP installation to run. You can view a [list of available commands](../reference/cli.md) in the **Reference** section.
 
 ::: tip
 The version of PHP that handles HTTP requests may not be the same as the one that is available directly in your terminal.
@@ -47,6 +47,8 @@ To see the help of each command, enter:
 ```
 
 You can also run `php craft help <command-name>` to learn more about a command and whatever parameters and options it may accept.
+
+<See path="../reference/cli.md" label="Console Commands Reference" description="Explore Craft’s CLI API" />
 
 ::: tip
 See the [Console Commands](../extend/commands.md) page in the _Extending Craft_ section to learn about adding your own console commands.
