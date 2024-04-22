@@ -175,6 +175,7 @@ Some [product query](system/products-variants.md#querying-products) params have 
 - `shippingCategoryId()`
 - `taxCategory()`
 - `taxCategoryId()`
+- `availableForPurchase()`
 
 If you are using any of these parameters in product queries, you may need to replace them with `hasVariant()`, and pass a variant query with those params:
 
