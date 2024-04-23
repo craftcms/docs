@@ -38,7 +38,7 @@ While we [strongly recommend](#why-ddev) DDEV for new Craft projects, [alternate
 1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft):
 
     ```bash
-    ddev composer create -y --no-scripts "craftcms/craft"
+    ddev composer create --no-interaction --no-scripts "craftcms/craft"
     ```
 
 1. Run the Craft setup wizard, and accept all defaults (in `[square brackets]`):
