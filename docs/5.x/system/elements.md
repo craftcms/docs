@@ -132,7 +132,7 @@ Every element has a `render()` method, which you can call from a template to get
 ::: tip
 This is mostly a convenience feature, not the primary means by which you are apt to output an element or its content.
 
-The [CKEditor plugin](plugin:ckeditor) makes use of this feature to convert each nested entry from a placeholder to a rich, personalized block—while remaining exactly where the author placed it in the editor.
+The [CKEditor plugin](plugin:ckeditor) uses this method to convert each nested entry from a placeholder to a rich, personalized block—while remaining exactly where the author placed it in the editor.
 :::
 
 Without any configuration, this will typically be its _title_ (if the element type uses titles), or it’s element type and ID. This default behavior is handled by the element’s magic `__toString()` method, meaning `{{ element.render() }}` and `{{ element }}` are functionally equivalent.
@@ -164,11 +164,41 @@ If some property of the asset (like its extension, or the user group its uploade
 </figure>
 ```
 
-Each template is passed the element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
-
 ::: tip
 You can also render lists of elements by calling the `render()` method on an [element query](../development/element-queries.md).
 :::
+
+[Nested entries](../reference/element-types/entries.md#nested-entries) (like those in [Matrix](../reference/field-types/matrix.md) and [CKEditor](plugin:ckeditor) fields) include information about where they live in the system, via `owner` and `field` properties:
+
+```twig
+{# _partials/entry/ingredient.twig #}
+{% if entry.field and entry.field.handle == '' %}
+  {{ entry.typicalCalories }}
+{% endif %}
+```
+
+Because entries can be nested within fields on different element types (i.e. a CKEditor field on an entry or a Matrix field in a [global set](../reference/element-types/globals.md)), it’s important that your template consider discrepancies between properties on the owner. For instance, an entry that owns another entry will have a `type` property; a category that owns an entry has a `group` property. If an entry type is used both in a section _and_ as a nested entry, the `owner` and `field` properties will only be available in the latter context!
+
+### Parameters
+
+Each template is passed its element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
+
+When manually rendering an element partial (by calling `element.render()` or `.render()` on an [element collection](../development/collections.md#element-queries)), you have an opportunity to make additional variables available to the template:
+
+```twig
+{{ recipe.ingredients.render({
+  portionSize: currentUser.householdSize,
+}) }}
+```
+
+Keep in mind that partials can be rendered from multiple contexts, not all of which will provide these extra variables. Guard against missing parameters with the `|default()` filter:
+
+```twig
+{# _partials/entry/ingredient.twig #}
+{% set portionSize = portionSize|default(1) %}
+
+{{ entry.title }}: {{ entry.quantity * portionSize }} {{ entry.unit }}
+```
 
 ### Eager-Loading
 

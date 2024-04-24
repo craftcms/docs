@@ -56,14 +56,12 @@ One common problem, however, is that Twig’s default configuration does not par
 
 ## Element Queries
 
-Use the [`.collect()` query execution method](./element-queries.md#query-execution) (in place of `.all()`) to return elements as a `Collection`. You can also wrap an existing list of elements in a `Collection` with the same `collect()` function we used, earlier:
+Use the [`.collect()` query execution method](element-queries.md#query-execution) (in place of `.all()`) to return elements as a <craft5:craft\elements\ElementCollection>. You can also wrap an existing list of elements in a _regular_ `Collection` with the same `collect()` function we used, earlier:
 
 ```twig
-{# These produce the same results: #}
+{# These produce similar results: #}
 {% set posts = craft.entries().section('news').collect() %}
 {% set posts = collect(craft.entries().section('news').all()) %}
 ```
 
-### Eager-Loading
-
-[Eager-loaded elements](eager-loading.md) are stored in a special type of Collection that behaves a bit like an element query—you can safely call `.all()` on any relational field without worrying about whether it was eager-loaded or not, or use `.with()` to eager-load another set of nested elements.
+[Eager-loaded elements](eager-loading.md) are also wrapped in an `ElementCollection` that allows them to behave a bit like an element query, so you can safely call `.all()` on any relational field without worrying about whether it was eager-loaded or not—or use `.with()` to eager-load another set of nested elements!
