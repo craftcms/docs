@@ -357,7 +357,7 @@ A full example of this can be seen in the [example templates](example-templates.
 
 ## Address Book
 
-When logged in, your customers can manage their addresses independently of a cart. Refer to the main [addresses documentation](/4.x/addresses.md) and to this page’s section on [auto-filling addresses](#auto-fill-from-address-book) for more information and examples.
+When logged in, your customers can manage their addresses independently of a cart. Refer to the main [addresses documentation](/4.x/addresses.md#managing-addresses) and to this page’s section on [auto-filling addresses](#auto-fill-from-address-book) for more information and examples.
 
 ### Primary Billing + Shipping Addresses
 

@@ -105,23 +105,23 @@ Please review your tax and shipping zones. We encourage you to use standardized 
 
 ## Address Management
 
-Commerce’s `Address` models have been replaced by the new Craft-native [Address](/4.x/addresses.md) element.
+Commerce’s `Address` models have been replaced by the new Craft-native [Address](/4.x/addresses.md) element. This means that you will likely need to make changes to your [front-end templates](#address-template-changes). Adopting this new architecture makes it possible to…
 
-This will almost certainly require changes to your front-end templates, though it comes with several benefits:
+- …provide locale-specific address validation (see [Removing Commerce Address Validation](kb:removing-commerce-address-validation));
+- …intelligently format addresses for output on the web and in PDFs (and to customize those formatters);
+- …add custom fields, managed just like other element types (no more `custom1`, `custom2`, etc.);
 
-- locale-specific address validation (see [Removing Commerce Address Validation](kb:removing-commerce-address-validation))
-- better address formatting defaults
-- easier address format customization
-- custom address fields can be managed in field layouts—so no more need for `custom1`, `custom2`, etc.
-
-If store managers had been editing user addresses directly from their profile pages in the control panel, you’ll want to expose address details in the Users field layout via **Settings** → **Users** → **User Fields**.
+::: tip
+If store managers have historically referenced customer addresses via users’ “Customer Info” tab control panel, be sure and add **Addresses** field layout element by visiting **Settings** → **Users** → **User Fields**.
+:::
 
 ### Order Addresses
 
 Refer to the [addresses](./addresses.md) page for information on how to handle setting address information on orders in Commerce 4.
 
 ::: warning
-Addresses are no longer automatically added to a customer’s address book when an order is completed, and a user must be logged in to be able to [save an address to their address book](/4.x/addresses.md#managing-addresses). `makePrimaryBillingAddress` and `makePrimaryShippingAddress` will have no effect for guests.
+Addresses are no longer automatically added to a customer’s address book when an order is completed, and a user must be logged in to be able to [save an address to their address book](/4.x/addresses.md#managing-addresses). [`isPrimaryShipping` and 
+`isPrimaryBilling`](#saving-an-address) (previously `makePrimaryBillingAddress` and `makePrimaryShippingAddress`) will have no effect for guests.
 :::
 
 ### User Addresses
@@ -156,7 +156,7 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 
 ### Custom Address Fields and Formatting
 
-The concept of address lines has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
+The concept of address “lines” has gone away along with [DefineAddressLinesEvent](commerce3:craft\commerce\events\DefineAddressLinesEvent). Use Craft’s [Addresses::formatAddress()](craft4:craft\services\Addresses::formatAddress()) instead.
 
 ### Address `phone` Fields
 
@@ -170,15 +170,37 @@ Any front-end address forms must submit `fullName` instead of `firstName` and `l
 
 ### Address Template Changes
 
-The change in address format means you’ll need to update some references in your templates.
+The change in address architecture means you’ll need to update some references in your templates, both when accessing address properties and custom fields, and when sending data to Craft and Commerce.
+
+::: tip
+Most of the following Commerce 4 examples assume you are directly modifying an [address element](/4.x/addresses.md). When updating an address directly, native address properties are now sent at the “top” of the address payload, rather than nested under an `address` key.
+
+If you are working with addresses [on a cart](addresses.md#cart-addresses), Commerce 4 prefixes each parameter with either `shippingAddress` or `billingAddress` (depending on which you are applying changes to)—this means `fullName` would become `shippingAddress[fullName]`, and `fields[specialDeliveryNotes]` would become `shippingAddress[fields][specialDeliveryNotes]`.
+:::
+
+#### Street Lines
+
+`address1`, `address2`, and `address3` properties are now explicitly named `addressLine1`, `addressLine2`, and `addressLine3`, respectively.
+
+```twig
+{# Commerce 3 #}
+{# @var model craft\commerce\models\Address #}
+{{ input('text', 'address[address1]', address.address1 ?? '') }}
+
+{# Commerce 4 #}
+{# @var address craft\elements\Address #}
+{{ input('text', 'addressLine1', address.addressLine1 ?? '') }}
+```
+
+#### Business &rarr; Organization
 
 `businessName` and `businessTaxId` are now `organization` and `organizationTaxId`:
 
 ```twig
 {# Commerce 3 #}
 {# @var model craft\commerce\models\Address #}
-{{ input('text', modelName ~ '[businessName]', model.businessName ?? '') }}
-{{ input('text', modelName ~ '[businessTaxId]', model.businessTaxId ?? '') }}
+{{ input('text', 'address[businessName]', address.businessName ?? '') }}
+{{ input('text', 'address[businessTaxId]', address.businessTaxId ?? '') }}
 
 {# Commerce 4 #}
 {# @var address craft\elements\Address #}
@@ -186,14 +208,16 @@ The change in address format means you’ll need to update some references in yo
 {{ input('text', 'organizationTaxId', address.organizationTaxId ?? '') }}
 ```
 
-`stateId` and `stateValue` references can be replaced with `administrativeArea`. It expects a two-letter code if the state/province is in the list of subdivisions for the current country, or an arbitrary string for countries that don’t.
+#### States &rarr; Administrative Areas
+
+`stateId` and `stateValue` references can be replaced with `administrativeArea`. Addresses with a `countryCode` corresponding to a country that uses subdivision data require that `administrativeArea` be a valid two-letter code present in the list; otherwise, it can be set to an arbitrary string. For example, Canada has _provinces_, so `administrativeArea` must match one of `AB`, `BC`, `MB`, `NB`, and so on.
 
 ```twig
 {# Commerce 3 #}
 {% set states = craft.commerce.states.allEnabledStatesAsListGroupedByCountryId %}
 {% set options = (countryId and states[countryId] is defined ? states[countryId] : []) %}
 
-{% tag 'select' with { name: modelName ~ '[stateValue]' } %}
+{% tag 'select' with { name: 'address[stateValue]' } %}
   {% for key, option in options %}
     {# @var option \craft\commerce\models\State #}
     {% set optionValue = (stateId ?: '') %}
@@ -206,55 +230,69 @@ The change in address format means you’ll need to update some references in yo
 {% endtag %}
 
 {# Commerce 4 #}
-{% set administrativeAreas = craft.commerce.getAdministrativeAreasListByCountryCode() %}
+{% set administrativeAreas = craft.commerce
+  .getStore()
+  .getStore()
+  .getAdministrativeAreasListByCountryCode() %}
 
-{% tag 'select' with { name: 'administrativeArea' } %}
-  {% for key, option in administrativeAreas %}
-    {# @var address \craft\elements\Address #}
-    {% set selectedValue = address.administrativeArea ?? '' %}
-    {{ tag('option', {
-      value: key,
-      selected: key == selectedValue,
-      text: option
-    }) }}
+<select name="shippingAddress[administrativeArea]">
+  {% for countryCode, areas in administrativeAreas %}
+    <optgroup label="{{ countryCode }}">
+      {% for code, name in areas %}
+        {{ tag('option', {
+          value: code,
+          text: name,
+          selected: code == address.administrativeArea ?? false,
+        }) }}
+      {% endfor %}
+    </optgroup>
   {% endfor %}
-{% endtag %}
+</select>
 ```
+
+This example uses a shortcut method provided by Commerce 4’s <commerce4:craft\commerce\models\Store> instance to gather administrative areas, grouped by country code. This is well-suited for outputting a `<select>` menu with `<optgroup>` elements for each country.
+
+#### City &rarr; Locality
 
 `city` is now `locality`:
 
 ```twig
 {# Commerce 3 #}
 {# @var model craft\commerce\models\Address #}
-{{ input('text', modelName ~ '[city]', model.city ?? '') }}
+{{ input('text', 'address[city]', address.city ?? '') }}
 
 {# Commerce 4 #}
 {# @var address craft\elements\Address #}
 {{ input('text', 'locality', address.locality ?? '') }}
 ```
 
+#### ZIP Code &rarr; Postal Code
+
 `zipCode` is now `postalCode`:
 
 ```twig
 {# Commerce 3 #}
 {# @var model craft\commerce\models\Address #}
-{{ input('text', modelName ~ '[zipCode]', model.zipCode ?? '') }}
+{{ input('text', 'address[zipCode]', model.zipCode ?? '') }}
 
 {# Commerce 4 #}
 {# @var address craft\elements\Address #}
 {{ input('text', 'postalCode', address.postalCode ?? '') }}
 ```
 
-Any custom fields can be treated just like those on any other element type. For example, if you were previously using `custom1`, which was part of Commerce 3’s address model, your migration would’ve made it a custom field on the Commerce 4 address element:
+#### Custom Fields
+
+Custom fields can be treated just like those on any other element type. For example, if you were previously using `custom1` (a native property of Commerce 3’s `Address` model), the migration has converted it to a custom field attached to the Commerce 4 `Address` element:
 
 ```twig
 {# Commerce 3 #}
-{{ input('text', 'shippingAddress[address1]', order.shippingAddress.address1 ?? '') }}
-{{ input('text', 'shippingAddress[custom1]', order.shippingAddress.custom1 ?? '') }}
+{{ input('text', 'shippingAddress[address1]', address.address1 ?? '') }}
+{{ input('text', 'shippingAddress[custom1]', address.custom1 ?? '') }}
 
 {# Commerce 4 #}
-{{ input('text', 'shippingAddress[addressLine1]', order.shippingAddress.addressLine1 ?? '') }}
-{{ input('text', 'shippingAddress[fields][custom1]', order.shippingAddress.custom1 ?? '') }}
+{{ input('text', 'shippingAddress[addressLine1]', address.addressLine1 ?? '') }}
+{{ input('text', 'shippingAddress[fields][custom1]', address.custom1 ?? '') }}
+{{ input('text', 'shippingAddress[fields][specialDeliveryNotes]', address.custom1 ?? '') }}
 ```
 
 ## Front-End Form Requests and Responses
@@ -265,11 +303,11 @@ Check out the [example templates](example-templates.md)—they’re compatible w
 
 ### Saving an Address
 
-If you’re providing a way for customers to save their addresses on the front end, you’ll need to make a few adjustments:
+If you’re providing a way for customers to [save their addresses on the front end](/4.x/addresses.md#managing-addresses), you’ll need to make a few adjustments:
 
 - Address field names will need to be [updated](#address-template-changes), where any custom field names should follow the `fields[myFieldName]` format used by other element types.
-- If you’re saving an _existing_ address, as opposed to a new one, you’ll need to reference it via the `addressId` param instead of `id`.
-- The form action should be `users/save-address` rather than `commerce/customer-addresses/save`.
+- If you’re saving an _existing_ address (as opposed to creating a new one) you’ll need to send an `addressId` param instead of `id`.
+- The form action should be [`users/save-address`](/4.x/dev/controller-actions.md#post-users-save-address) rather than `commerce/customer-addresses/save`.
 - The (optional) `makePrimaryShippingAddress` and `makePrimaryBillingAddress` params are now `isPrimaryShipping` and `isPrimaryBilling`.
 
 ::: warning
