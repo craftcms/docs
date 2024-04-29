@@ -103,9 +103,9 @@ Possible values include:
 
 | Value | Fetches entries…
 | - | -
-| `'2018-04-01'` | that were posted after 2018-04-01.
-| a [DateTime](https://php.net/class.datetime) object | that were posted after the date represented by the object.
-| `now`/`today`/`tomorrow`/`yesterday` | that were posted after midnight of the specified relative date.
+| `'2018-04-01'` | that were posted on or after 2018-04-01.
+| a [DateTime](https://php.net/class.datetime) object | that were posted on or after the date represented by the object.
+| `now`/`today`/`tomorrow`/`yesterday` | that were posted on or after midnight of the specified relative date.
 
 
 
