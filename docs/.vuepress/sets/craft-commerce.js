@@ -69,6 +69,7 @@ module.exports = {
             "system/pdfs",
             "system/gateways",
             "system/subscriptions",
+            "system/inventory",
             "system/pricing-rules",
             "system/discounts",
             "system/coupon-codes",
