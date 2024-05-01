@@ -51,21 +51,11 @@ To support a variety of fulfillment and handling processes, Commerce provides mu
 - **Available** (`availableTotal`) — Total inventory available for purchase. When this reaches zero, the item is considered “out of stock” and will prevent orders from being completed.
 - **Committed** (`committedTotal`) — Inventory allocated to completed (but unfulfilled) orders.
 - **Reserved** (`reservedTotal`), **Damaged** (`damagedTotal`), **Safety** (`safetyTotal`), and **Quality Control** (`qualityControlTotal`) — Predefined designations that can be used to hold additional inventory that is _not_ available for purchase.
-- **Incoming** (`incomingTotal`) — Inventory that is expected to arrive via a [transfer](#transfers).
+- **Incoming** (`incomingTotal`) — Inventory that is expected to arrive via a transfer. (Coming soon!)
 - **Unavailable** (`unavailableTotal`) — Combined total of _quality control_, _safety_, _reserved_, and _damaged_.
 
 Some inventory levels cannot be directly manipulated: **Committed**, for instance, is used exclusively for holding inventory after an order is completed, but prior to fulfillment. **On Hand** is synthesized from multiple other totals, but _can_ be set—changes to it are actually applied to the **Available** inventory, allowing an employee counting inventory to update stock in the system without having to manually deduct committed or other non-available items.
 
-## Transfers
-
-::: warning
-This page describes unreleased features coming in the Commerce 5 beta. Please stay tuned for updates!
-:::
-
-When you need to move inventory from one location to another, consider using a _transfer_. Transfers encapsulate one or more changes to locations’ inventory, and can be drafted and executed by different users.
-
-Visit <Journey path="Commerce, Store Management, Inventory, Transfers" /> to set up a new transfer.
-
 ## Transactions
 
-Any time inventory is moved between locations (as part of a [transfer](#transfers)), directly altered, or changed in response to a completed order, Commerce logs this as an inventory transaction. Transactions can be viewed in the **History** tab of any inventory item.
+Any time inventory directly altered or changed in response to a completed order, Commerce logs this as an inventory transaction. Transactions can be viewed in the **History** tab of any inventory item.
