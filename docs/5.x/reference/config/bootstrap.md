@@ -54,7 +54,7 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 ## `CRAFT_DOTENV_PATH`
 
-Path to your project’s [`.env` file](../../system/directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craftbasepath).
+Path to your project’s [`.env` file](../../system/directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craft-base-path).
 
 ## `CRAFT_ENVIRONMENT`
 
@@ -96,7 +96,7 @@ define('CRAFT_LOG_PHP_ERRORS', false);
 
 ## `CRAFT_SECRETS_PATH`
 
-The path to a [secrets](#secrets) file, whose values are _not_ loaded into the environment.
+The path to a [secrets](../../configure.md#secrets) file, whose values are _not_ loaded into the environment.
 
 ```php
 // Check the `secrets.php` file next to this script for sensitive values:
