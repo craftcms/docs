@@ -111,7 +111,7 @@ Depending on your experience and preferred development environment, you may find
 
 - For most environments meeting Craft’s requirements, see [Using the Starter Project](kb:using-the-starter-project) to get started with Composer.
 - Especially adventurous users may want to read about [Setting up a Craft Project from Scratch](kb:setting-up-a-craft-project-from-scratch).
-- If you are unable to start a project locally—or are constrained by a hosting service—you can directly [download](https://craftcms.com/latest.zip) the latest Craft release as a blank starter project.
+- If you are unable to start a project locally—or are constrained by a hosting service—you can directly download the latest starter project from [GitHub releases](repo:craftcms/cms/releases).
 
 ::: warning
 Pre-built starter project ZIPs should only be used for evaluating Craft in limited circumstances.

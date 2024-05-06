@@ -22,12 +22,7 @@ Composer will take a few minutes to load everything. Once it’s done you’ll s
 
 ### Downloading an Archive File Manually
 
-Download the archive format you prefer to work with:
-
-- [zip](https://craftcms.com/latest-v3.zip)
-- [tar.gz](https://craftcms.com/latest-v3.tar.gz)
-
-Extract the archive wherever you want your new Craft project to live.
+A pre-built starter project can be downloaded from [GitHub releases](repo:craftcms/cms/releases). Extract the archive wherever you want your new Craft project to live.
 
 ::: tip
 If you’re on macOS, be careful not to lose the hidden files in there (`.env`, `.env.example`, `.gitignore`, and `web/.htaccess`). You can press <kbd>Command</kbd>+<kbd>Shift</kbd>+<kbd>.</kbd> to toggle hidden file visibility in Finder.
