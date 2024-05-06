@@ -1,6 +1,6 @@
 # Publishing to the Plugin Store
 
-If you want to make your plugin available in the in-app Plugin Store, and on [plugins.craftcms.com](https://plugins.craftcms.com/), follow this guide.
+If you want to make your plugin available in the in-app Plugin Store (and on [plugins.craftcms.com](https://plugins.craftcms.com/)) follow this guide.
 
 ## Choose a License
 
@@ -95,7 +95,7 @@ Once you’ve decided on a version, follow these steps:
 
 3. Once everything is good to go and committed to Git, [create a tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging) named after the version number, optionally beginning with `v` (e.g. `v3.0.0` or `v3.0.0-beta.1`). Prefixing the tag name with `release-` is also allowed (e.g. `release-3.0.0` or `release-v3.0.0`).
 
-4. Push your latest commits and your new version tag to GitHub. At this point the Plugin Store should automatically get notified about the release, and will start recording it. If all goes well, it will show up in the Plugin Store within a minute or two.
+4. Push your latest commits and your new version tag to GitHub. The Plugin Store will automatically be notified about the release, and will start recording it. Changes typically show up in the Plugin Store within a minute or two.
 
 ### Automating GitHub Releases
 
