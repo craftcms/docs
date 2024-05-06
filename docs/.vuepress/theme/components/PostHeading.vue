@@ -7,7 +7,7 @@
     <div
       v-else-if="$activeVersionInfo && $activeVersionInfo.isEol"
       class="version-warning">
-      This document is for a version of {{ $activeSet.setTitle }} that is no longer supported. Please refer to the <RouterLink :to="suggestedPath">latest version →</RouterLink>
+      This document is for a version of {{ $activeSet.setTitle }} that is no longer supported. Please refer to the <RouterLink tag="a" :to="suggestedPath">latest version →</RouterLink>
     </div>
     <div
       v-else-if="$activeVersionInfo && $activeVersionInfo.stabilityFlag === 'beta'"
@@ -19,7 +19,7 @@
       class="version-warning"
     >
       This document is for an older version of {{ $activeSet.setTitle }}.
-      <RouterLink :to="suggestedPath">View latest version →</RouterLink>
+      <RouterLink tag="a" :to="suggestedPath">View latest version →</RouterLink>
     </div>
     <div
       class="auto-toc block xl:hidden"
