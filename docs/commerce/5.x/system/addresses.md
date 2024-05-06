@@ -404,5 +404,3 @@ To add support for setting default addresses, add this code to the [new address]
 :::
 
 Similarly, you can send `makePrimaryBillingAddress` or `makePrimaryShippingAddress` params along with any `cart/update-cart` request to set an address attached to the cart as the customer’s primary billing or shipping address. Only addresses that retain their `sourceBillingAddressId` or `sourceShippingAddressId` can be configured this way.
-
-### Address Synchronization
