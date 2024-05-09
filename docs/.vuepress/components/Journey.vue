@@ -1,6 +1,7 @@
 <template>
     <ol class="journey">
         <li v-for="(segment, i) in segments" :key="i" class="step">
+            {{ ' ' }}
             <span class="step-label">{{ segment }}</span><span v-if="i < (segments.length - 1)" class="step-arrow" aria-hidden="true">&rarr;</span>
         </li>
     </ol>
@@ -41,7 +42,7 @@ export default {
 }
 
 .step-arrow {
-    margin: 0 4px;
+    margin: 0 2px 0 4px;
     opacity: 0.5;
 }
 </style>

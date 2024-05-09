@@ -70,7 +70,7 @@ export default {
     border-width: 1px;
     border-color: var(--text-color);
     color: var(--text-color);
-    padding: 1px 0.175rem 1px 0.25rem;
+    padding: 2px 3px 1px 4px;
   }
 
   & + & {

@@ -16,17 +16,81 @@ Users are Craft’s representation of people.
 
 <!-- more -->
 
-Each user has an email address and username by default, as well as optional fields for a name, photo, and password. Like other [elements](../../system/elements.md), users support custom fields by way of a [field layout](../../system/fields.md#field-layouts).
+Each user has an email address and username by default, as well as optional fields for a name and photo. Like other [elements](../../system/elements.md), users support custom fields by way of a [field layout](#custom-fields).
 
-There are also preferences for localization, accessibility, and debugging that may be relevant depending on how you build your site and whether you grant the user access to the control panel.
+<BrowserShot url="https://my-project.ddev.site/admin/users/myaccount" :link="false" caption="Custom fields can be added to the “Profile” screen.">
+<img src="../../images/users-profile.png" alt="Screenshot of the user profile edit screen" />
+</BrowserShot>
 
-What a user can do is determined by which [groups](../../system/user-management.md#user-groups) they belong to, and what individual [permissions](../../system/user-management.md#permissions) they have been granted.
+There are also **Preferences** for localization, accessibility, and debugging that may be relevant depending on how you build your site and whether you grant the user access to the control panel. Users’ capabilities are determined by which [groups](../../system/user-management.md#user-groups) they belong to, and what individual [permissions](../../system/user-management.md#permissions) they have been granted.
 
-<See path="../../system/user-management.md" hash="statuses" label="User Statuses" description="Learn about how a user’s status affects their capabilities." />
+<See path="../../system/user-management.md" label="User Management" description="Learn more about setting up secure multi-user experiences." />
+
+### Custom Fields
+
+All users share a [field layout](../../system/fields.md#field-layouts), which is managed via <Journey path="Settings, Users, User Profile Fields" />. Custom fields are added to the **Profile** tab of each user’s management screen, alongside native **Username**, **Email**, **Full Name**, and **Photo** fields.
+
+::: tip
+Relate users to other elements with the [users field](../field-types/users.md).
+:::
+
+### Photos
+
+Once you’ve configured an [asset volume](assets.md#volumes), you can designate it as your **User Photo Volume** by visiting <Journey path="Settings, Users, Settings" />. User photos are uploaded directly to their profiles, and cannot be picked from existing assets.
+
+The [asset element](assets.md) attached to a user is accessible via the `photo` property:
+
+```twig{1,6}
+{% set photo = user.photo %}
+
+<div class="profile">
+  {% if photo %}
+    <div class="photo">
+      {{ photo.getImg('thumbnail') }}
+    </div>
+  {% endif %}
+
+  <h3>{{ user.fullName }}</h3>
+
+  <code>{{ user.email }}</code>
+</div>
+```
+
+Here, `thumbnail` is a [predefined image transform](assets.md#image-transforms).
 
 ### Addresses
 
 Users each have an address book. [Addresses](addresses.md) can be managed on behalf of a user via the control panel, or [by the user themselves](addresses.md#managing-addresses).
+
+![Screenshot of address management UI on an individual user’s edit screen](../../images/users-addresses-tab.png)
+
+Access a user’s addresses via the `addresses` property:
+
+```twig{4}
+<h2>Address Book</h2>
+
+<ul>
+  {% for address in user.addresses %}
+    <li>{{ address|address }}</li>
+  {% endfor %}
+</ul>
+```
+
+### Authors
+
+[Entries](entries.md) can be assigned one or more users as their **Authors**.
+
+```twig
+<h2>{{ entry.title }}</h2>
+
+By {{ collect(entry.authors).pluck('fullName').join(', ', ', and ') }}
+
+{# ... #}
+```
+
+### URLs
+
+Unlike most other element types, users do _not_ have a “URI format” setting, and are not factored into routing.
 
 ## Querying Users
 
@@ -51,7 +115,7 @@ See [Element Queries](../../development/element-queries.md) to learn about how e
 
 ### Example
 
-We can display a list of the users in an “Authors” user group by doing the following:
+We can display a list of the users in a “Members” [user group](../../system/user-management.md#user-groups) by doing the following:
 
 1. Create a user query with `craft.users()`.
 2. Set the [group](#group) parameter on it.
@@ -61,15 +125,15 @@ We can display a list of the users in an “Authors” user group by doing the f
 ```twig
 {# Create a user query with the 'group' parameter #}
 {% set myUserQuery = craft.users()
-  .group('authors') %}
+  .group('members') %}
 
 {# Fetch the users #}
-{% set users = myUserQuery.all() %}
+{% set members = myUserQuery.all() %}
 
 {# Display the list #}
 <ul>
-  {% for user in users %}
-    <li><a href="{{ url('authors/'~user.username) }}">{{ user.name }}</a></li>
+  {% for user in members %}
+    <li>{{ user.fullName }} (Member since {{ user.dateCreated|date }})</li>
   {% endfor %}
 </ul>
 ```

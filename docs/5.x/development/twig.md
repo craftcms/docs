@@ -594,7 +594,7 @@ Keep in mind that the order Twig templates are rendered in can affect when and w
 ::: warning
 This section treads into some heavier programming concepts, and makes reference to a number of PHP classes belonging to Craft and Yii.
 
-These objects are authoritatively documented in the [class reference](https://docs.craftcms.com/api/v4/). You will find references to methods and properties of common objects here in the main documentation, but to make the best use of them, some independent research may be required.
+These objects are authoritatively documented in the [class reference](https://docs.craftcms.com/api/v5/). You will find references to methods and properties of common objects here in the main documentation, but to make the best use of them, some independent research may be required.
 :::
 
 So far, we’ve mostly looked at plain values—but Craft exposes a number of _objects_ to your templates, like elements (an <craft5:craft\elements\Entry> or <craft5:craft\elements\Asset> for instance) or services (accessible via [`craft.app`](../reference/twig/global-variables.md#craft-app)).

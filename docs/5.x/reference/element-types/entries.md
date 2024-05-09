@@ -274,7 +274,9 @@ For live preview, you should also consider [enabling iFrame Resizer](config5:use
 
 ## Nested Entries
 
-Entries also power the [Matrix](../field-types/matrix.md) field, which means your [entry types](#entry-types) can represent entire pages, or the building blocks thereof. How you implement your content model and authoring experience is entirely up to you!
+Entries also power the [Matrix](../field-types/matrix.md) and [CKEditor](plugin:ckeditor) fields, which means your [entry types](#entry-types) can represent entire pages, or the building blocks thereof. How you implement your content model and authoring experience is entirely up to you!
+
+Nested entries are an implementation of nested _elements_, a broader category of “owned” elements that also includes [addresses](addresses.md).
 
 ## Editing Entries
 

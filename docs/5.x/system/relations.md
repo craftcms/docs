@@ -47,7 +47,7 @@ Relationships are primarily used within [element queries](../development/element
 
 _Ingredients_ attached to a _Recipe_ can be accessed using the relational field’s handle. Unlike most fields (which return their stored value), relational fields return an [element query](../development/element-queries.md), ready to fetch the attached elements in the order they were selected.
 
-Craft has X built-in relational fields, each pointing to a different [element type](elements.md#element-types):
+Craft has five built-in relational fields, each of which establishes links to a different [element type](elements.md#element-types):
 
 - [Assets](../reference/field-types/assets.md)
 - [Categories](../reference/field-types/categories.md)
@@ -55,7 +55,7 @@ Craft has X built-in relational fields, each pointing to a different [element ty
 - [Tags](../reference/field-types/tags.md)
 - [Users](../reference/field-types/users.md)
 
-Addresses and global sets don’t have relational fields, in the traditional sense.
+Addresses and global sets don’t have relational fields, in the traditional sense—the former are managed as nested elements, and the latter exist as singleton elements
 
 ::: tip
 [Eager-loading](../development/eager-loading.md) related elements _does_ make them available directly on the source element! Don’t worry about this just yet—let’s get comfortable with the default behavior, first.

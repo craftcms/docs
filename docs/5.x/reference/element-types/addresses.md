@@ -26,23 +26,11 @@ Plugins are also able to use addresses to store their own location data.
 
 ## Setup
 
-The address management interface can be added to the User field layout by navigating to  **Settings** → **Users** -> **User Fields**.
+Address elements share a single field layout, which is managed in the control panel via <Journey path="Settings, Addresses" />.
 
-![Screenshot of User Fields’ Field Layout editor, with an empty layout and an available Addresses field under Native Fields in the sidebar](../../images/user-fields.png)
-
-Create a “Contact Information” tab and drag the **Addresses** field layout element into it to make the interface available on every user detail page.
-
-::: tip
-Clicking the <icon kind="settings" /> settings icon on the address field layout element opens additional settings for the address management UI, including tools for [displaying it conditionally](../../system/fields.md#field-layouts).
-:::
-
-Take a look at any User’s edit screen to get familiar with the interface:
-
-![Screenshot of My Account page with a “Contact Information” tab selected and the “Addresses” field heading with “+ Add an address” just underneath it](../../images/my-account-contact-information.png)
-
-Back in **User Settings**, the **Address Fields** editor lets you manage the fields that are part of each address. **Label**, **Country**, and **Address** are included by default, with several other native fields available:
-
-![Screenshot of Address Fields’ Field Layout editor, with an existing Content tab containing Label, Country, and Address fields](../../images/address-fields.png)
+<BrowserShot url="https://my-project.ddev.site/admin/settings/addresses" :link="false">
+<img src="../../images/address-field-layout.png" alt="Screenshot of the address element field layout" />
+</BrowserShot>
 
 ### Native and Custom Fields
 
@@ -70,7 +58,7 @@ $myAddressQuery = \craft\elements\Address::find();
 :::
 
 ::: tip
-Addresses are just elements, so everything you know about [Element Queries](../../development/element-queries.md) applies here!
+Addresses are just elements, so everything you know about [element queries](../../development/element-queries.md) applies here!
 :::
 
 ### Example
@@ -98,7 +86,7 @@ Let’s output a list of the logged-in user’s addresses:
 We’ll expand on this example in the [Managing Addresses](#managing-addresses) section.
 
 ::: warning
-Protect your users’ personal information by carefully auditing queries and displaying addresses only on pages that [require login](../twig/tags.md#requirelogin).
+Protect your users’ personal information by carefully auditing queries and displaying private addresses only on pages that [require login](../twig/tags.md#requirelogin).
 :::
 
 ### Parameters

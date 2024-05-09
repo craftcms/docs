@@ -190,6 +190,7 @@ module.exports = {
             // All top-level pages:
             "requirements",
             "install",
+            "editions",
             "update",
             "deploy",
             "upgrade",
