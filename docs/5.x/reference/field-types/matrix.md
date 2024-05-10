@@ -82,7 +82,7 @@ Blocks can also be reordered by dragging the “Move” icon (<icon kind="move" 
 You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>A</kbd>, or selecting a range of blocks starting with the first and then <kbd>Shift</kbd>-clicking the last.
 :::
 
-The **As cards** view mode provides many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips--cards). Double-click any card to edit its content, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
+The **As cards** view mode provides many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips-cards). Double-click any card to edit its content, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
 
 Finally, the **As an element index** view mode behaves just like a normal element index—except it only ever shows the entries owned by that field. This mode is perfect for large data sets that may span multiple pages, need to be sorted by nested fields, or that would otherwise be unwieldy as blocks or cards.
 
