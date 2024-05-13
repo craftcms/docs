@@ -6,51 +6,77 @@
 
 <!-- textlint-disable -->
 
-| Param                                     | Description
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
-| [andRelatedTo](#andrelatedto)             | Narrows the query results to only subscriptions that are related to certain other elements.
-| [asArray](#asarray)                       | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce4:craft\commerce\elements\Subscription) objects.
-| [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [dateCanceled](#datecanceled)             | Narrows the query results based on the subscriptions’ cancellation date.
-| [dateCreated](#datecreated)               | Narrows the query results based on the subscriptions’ creation dates.
-| [dateExpired](#dateexpired)               | Narrows the query results based on the subscriptions’ expiration date.
-| [dateSuspended](#datesuspended)           | Narrows the query results based on the subscriptions’ suspension date.
-| [dateUpdated](#dateupdated)               | Narrows the query results based on the subscriptions’ last-updated dates.
-| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [gatewayId](#gatewayid)                   | Narrows the query results based on the gateway, per its ID.
-| [hasStarted](#hasstarted)                 | Narrows the query results to only subscriptions that have started.
-| [id](#id)                                 | Narrows the query results based on the subscriptions’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
-| [isCanceled](#iscanceled)                 | Narrows the query results to only subscriptions that are canceled.
-| [isExpired](#isexpired)                   | Narrows the query results to only subscriptions that have expired.
-| [isSuspended](#issuspended)               | Narrows the query results to only subscriptions that are suspended.
-| [limit](#limit)                           | Determines the number of subscriptions that should be returned.
-| [nextPaymentDate](#nextpaymentdate)       | Narrows the query results based on the subscriptions’ next payment dates.
-| [offset](#offset)                         | Determines how many subscriptions should be skipped in the results.
-| [onTrial](#ontrial)                       | Narrows the query results to only subscriptions that are on trial.
-| [orderBy](#orderby)                       | Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
-| [orderId](#orderid)                       | Narrows the query results based on the order, per its ID.
-| [plan](#plan)                             | Narrows the query results based on the subscription plan.
-| [planId](#planid)                         | Narrows the query results based on the subscription plans’ IDs.
-| [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [reference](#reference)                   | Narrows the query results based on the reference.
-| [relatedTo](#relatedto)                   | Narrows the query results to only subscriptions that are related to certain other elements.
-| [search](#search)                         | Narrows the query results to only subscriptions that match a search query.
-| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the subscriptions’ IDs in the `elements_sites` table.
-| [status](#status)                         | Narrows the query results based on the subscriptions’ statuses.
-| [trashed](#trashed)                       | Narrows the query results to only subscriptions that have been soft-deleted.
-| [trialDays](#trialdays)                   | Narrows the query results based on the number of trial days.
-| [uid](#uid)                               | Narrows the query results based on the subscriptions’ UIDs.
-| [user](#user)                             | Narrows the query results based on the subscriptions’ user accounts.
-| [userId](#userid)                         | Narrows the query results based on the subscriptions’ user accounts’ IDs.
-| [with](#with)                             | Causes the query to return matching subscriptions eager-loaded with related elements.
+| Param                                       | Description
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addOrderBy](#addorderby)                   | Adds additional ORDER BY columns to the query.
+| [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
+| [andRelatedTo](#andrelatedto)               | Narrows the query results to only subscriptions that are related to certain other elements.
+| [asArray](#asarray)                         | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce5:craft\commerce\elements\Subscription) objects.
+| [average](#average)                         | Returns the average of the specified column values.
+| [cache](#cache)                             | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [dateCanceled](#datecanceled)               | Narrows the query results based on the subscriptions’ cancellation date.
+| [dateCreated](#datecreated)                 | Narrows the query results based on the subscriptions’ creation dates.
+| [dateExpired](#dateexpired)                 | Narrows the query results based on the subscriptions’ expiration date.
+| [dateSuspended](#datesuspended)             | Narrows the query results based on the subscriptions’ suspension date.
+| [dateUpdated](#dateupdated)                 | Narrows the query results based on the subscriptions’ last-updated dates.
+| [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [fields](#fields)                           | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+| [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
+| [gatewayId](#gatewayid)                     | Narrows the query results based on the gateway, per its ID.
+| [hasStarted](#hasstarted)                   | Narrows the query results to only subscriptions that have started.
+| [id](#id)                                   | Narrows the query results based on the subscriptions’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                       | Narrows the query results to only subscriptions that were involved in a bulk element operation.
+| [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
+| [isCanceled](#iscanceled)                   | Narrows the query results to only subscriptions that are canceled.
+| [isExpired](#isexpired)                     | Narrows the query results to only subscriptions that have expired.
+| [isSuspended](#issuspended)                 | Narrows the query results to only subscriptions that are suspended.
+| [language](#language)                       | Determines which site(s) the subscriptions should be queried in, based on their language.
+| [limit](#limit)                             | Determines the number of subscriptions that should be returned.
+| [max](#max)                                 | Returns the maximum of the specified column values.
+| [min](#min)                                 | Returns the minimum of the specified column values.
+| [nextPaymentDate](#nextpaymentdate)         | Narrows the query results based on the subscriptions’ next payment dates.
+| [offset](#offset)                           | Determines how many subscriptions should be skipped in the results.
+| [onTrial](#ontrial)                         | Narrows the query results to only subscriptions that are on trial.
+| [orderBy](#orderby)                         | Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [orderId](#orderid)                         | Narrows the query results based on the order, per its ID.
+| [plan](#plan)                               | Narrows the query results based on the subscription plan.
+| [planId](#planid)                           | Narrows the query results based on the subscription plans’ IDs.
+| [preferSites](#prefersites)                 | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [reference](#reference)                     | Narrows the query results based on the reference.
+| [relatedTo](#relatedto)                     | Narrows the query results to only subscriptions that are related to certain other elements.
+| [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
+| [search](#search)                           | Narrows the query results to only subscriptions that match a search query.
+| [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the subscriptions’ IDs in the `elements_sites` table.
+| [status](#status)                           | Narrows the query results based on the subscriptions’ statuses.
+| [sum](#sum)                                 | Returns the sum of the specified column values.
+| [trashed](#trashed)                         | Narrows the query results to only subscriptions that have been soft-deleted.
+| [trialDays](#trialdays)                     | Narrows the query results based on the number of trial days.
+| [uid](#uid)                                 | Narrows the query results based on the subscriptions’ UIDs.
+| [user](#user)                               | Narrows the query results based on the subscriptions’ user accounts.
+| [userId](#userid)                           | Narrows the query results based on the subscriptions’ user accounts’ IDs.
+| [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                               | Causes the query to return matching subscriptions eager-loaded with related elements.
 
 
 <!-- textlint-enable -->
+
+
+#### `addOrderBy`
+
+Adds additional ORDER BY columns to the query.
+
+
+
+
+
+
+
+
 
 
 #### `afterPopulate`
@@ -97,7 +123,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `asArray`
 
-Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce4:craft\commerce\elements\Subscription) objects.
+Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce5:craft\commerce\elements\Subscription) objects.
 
 
 
@@ -118,6 +144,19 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -324,6 +363,59 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
+#### `eagerly`
+
+Causes the query to be used to eager-load results for the query’s source element
+and any other elements in its collection.
+
+
+
+
+
+
+
+
+
+
+#### `fields`
+
+Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+
+A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
+This method should return an array of field names or field definitions.
+If the former, the field name will be treated as an object property name whose value will be used
+as the field value. If the latter, the array key should be the field name while the array value should be
+the corresponding field definition which can be either an object property name or a PHP callable
+returning the corresponding field value. The signature of the callable should be:
+
+```php
+function ($model, $field) {
+    // return field value
+}
+```
+
+For example, the following code declares four fields:
+
+- `email`: the field name is the same as the property name `email`;
+- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
+  values are obtained from the `first_name` and `last_name` properties;
+- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
+  and `last_name`.
+
+```php
+return [
+    'email',
+    'firstName' => 'first_name',
+    'lastName' => 'last_name',
+    'fullName' => function ($model) {
+        return $model->first_name . ' ' . $model->last_name;
+    },
+];
+```
+
+
+
+
 #### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
@@ -437,7 +529,20 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 #### `ignorePlaceholders`
 
 Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
+#### `inBulkOp`
+
+Narrows the query results to only subscriptions that were involved in a bulk element operation.
 
 
 
@@ -542,6 +647,44 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
+#### `language`
+
+Determines which site(s) the subscriptions should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches subscriptions…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch subscriptions from English sites #}
+{% set subscriptions = craft.subscriptions()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch subscriptions from English sites
+$subscriptions = \craft\commerce\elements\Subscription::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 #### `limit`
 
 Determines the number of subscriptions that should be returned.
@@ -563,6 +706,32 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `nextPaymentDate`
@@ -695,7 +864,7 @@ Possible values include:
 | - | -
 | `'foo'` | for a plan with a handle of `foo`.
 | `['foo', 'bar']` | for plans with a handle of `foo` or `bar`.
-| a [Plan](commerce4:craft\commerce\base\Plan) object | for a plan represented by the object.
+| a [Plan](commerce5:craft\commerce\base\Plan) object | for a plan represented by the object.
 
 
 
@@ -733,7 +902,7 @@ Possible values include:
 
 #### `preferSites`
 
-If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
@@ -764,6 +933,19 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
+
+
+#### `prepForEagerLoading`
+
+Prepares the query for lazy eager loading.
+
+
+
+
+
+
+
+
 
 
 #### `prepareSubquery`
@@ -809,6 +991,15 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
+
+
+#### `render`
+
+Executes the query and renders the resulting elements using their partial templates.
+
+If no partial template exists for an element, its string representation will be output instead.
+
+
 
 
 #### `search`
@@ -908,6 +1099,19 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
+
+
 #### `trashed`
 
 Narrows the query results to only subscriptions that have been soft-deleted.
@@ -977,7 +1181,7 @@ Possible values include:
 | - | -
 | `'foo'` | for a user account with a username of `foo`
 | `['foo', 'bar']` | for user accounts with a username of `foo` or `bar`.
-| a [User](https://docs.craftcms.com/api/v4/craft-elements-user.html) object | for a user account represented by the object.
+| a [User](https://docs.craftcms.com/api/v5/craft-elements-user.html) object | for a user account represented by the object.
 
 
 
@@ -1029,6 +1233,32 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
+
+
+#### `wasCountEagerLoaded`
+
+Returns whether the query result count was already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
+
+
+#### `wasEagerLoaded`
+
+Returns whether the query results were already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
 
 
 #### `with`

@@ -8,9 +8,11 @@
 
 | Param                                         | Description
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addOrderBy](#addorderby)                     | Adds additional ORDER BY columns to the query.
 | [afterPopulate](#afterpopulate)               | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)                 | Narrows the query results to only orders that are related to certain other elements.
-| [asArray](#asarray)                           | Causes the query to return matching orders as arrays of data, rather than [Order](commerce4:craft\commerce\elements\Order) objects.
+| [asArray](#asarray)                           | Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
+| [average](#average)                           | Returns the average of the specified column values.
 | [cache](#cache)                               | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [customer](#customer)                         | Narrows the query results based on the customer’s user account.
@@ -20,8 +22,10 @@
 | [dateOrdered](#dateordered)                   | Narrows the query results based on the orders’ completion dates.
 | [datePaid](#datepaid)                         | Narrows the query results based on the orders’ paid dates.
 | [dateUpdated](#dateupdated)                   | Narrows the query results based on the orders’ last-updated dates.
+| [eagerly](#eagerly)                           | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
 | [email](#email)                               | Narrows the query results based on the customers’ email addresses.
 | [expiryDate](#expirydate)                     | Narrows the query results based on the orders’ expiry dates.
+| [fields](#fields)                             | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
 | [fixedOrder](#fixedorder)                     | Causes the query results to be returned in the order specified by [id](#id).
 | [gateway](#gateway)                           | Narrows the query results based on the gateway.
 | [gatewayId](#gatewayid)                       | Narrows the query results based on the gateway, per its ID.
@@ -29,14 +33,18 @@
 | [hasPurchasables](#haspurchasables)           | Narrows the query results to only orders that have certain purchasables.
 | [hasTransactions](#hastransactions)           | Narrows the query results to only carts that have at least one transaction.
 | [id](#id)                                     |
-| [ignorePlaceholders](#ignoreplaceholders)     | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
+| [ignorePlaceholders](#ignoreplaceholders)     | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                         | Narrows the query results to only orders that were involved in a bulk element operation.
 | [inReverse](#inreverse)                       | Causes the query results to be returned in reverse order.
 | [isCompleted](#iscompleted)                   | Narrows the query results to only orders that are completed.
 | [isPaid](#ispaid)                             | Narrows the query results to only orders that are paid.
 | [isUnpaid](#isunpaid)                         | Narrows the query results to only orders that are not paid.
 | [itemSubtotal](#itemsubtotal)                 | Narrows the query results based on the order’s item subtotal.
 | [itemTotal](#itemtotal)                       | Narrows the query results based on the order’s item total.
+| [language](#language)                         | Determines which site(s) the orders should be queried in, based on their language.
 | [limit](#limit)                               | Determines the number of orders that should be returned.
+| [max](#max)                                   | Returns the maximum of the specified column values.
+| [min](#min)                                   | Returns the minimum of the specified column values.
 | [number](#number)                             | Narrows the query results based on the order number.
 | [offset](#offset)                             | Determines how many orders should be skipped in the results.
 | [orderBy](#orderby)                           | Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
@@ -45,32 +53,52 @@
 | [orderStatus](#orderstatus)                   | Narrows the query results based on the order statuses.
 | [orderStatusId](#orderstatusid)               | Narrows the query results based on the order statuses, per their IDs.
 | [origin](#origin)                             | Narrows the query results based on the origin.
-| [preferSites](#prefersites)                   | If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [preferSites](#prefersites)                   | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading)   | Prepares the query for lazy eager loading.
 | [prepareSubquery](#preparesubquery)           | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [reference](#reference)                       | Narrows the query results based on the order reference.
 | [relatedTo](#relatedto)                       | Narrows the query results to only orders that are related to certain other elements.
+| [render](#render)                             | Executes the query and renders the resulting elements using their partial templates.
 | [search](#search)                             | Narrows the query results to only orders that match a search query.
 | [shippingMethodHandle](#shippingmethodhandle) | Narrows the query results based on the shipping method handle.
 | [shortNumber](#shortnumber)                   | Narrows the query results based on the order short number.
 | [siteSettingsId](#sitesettingsid)             | Narrows the query results based on the orders’ IDs in the `elements_sites` table.
+| [storeId](#storeid)                           | Narrows the query results to only orders that are related to the given store.
+| [sum](#sum)                                   | Returns the sum of the specified column values.
 | [total](#total)                               | Narrows the query results based on the total.
 | [totalDiscount](#totaldiscount)               | Narrows the query results based on the total discount.
 | [totalPaid](#totalpaid)                       | Narrows the query results based on the total paid amount.
 | [totalPrice](#totalprice)                     | Narrows the query results based on the total price.
 | [totalQty](#totalqty)                         | Narrows the query results based on the total qty of items.
 | [totalTax](#totaltax)                         | Narrows the query results based on the total tax.
+| [totalWeight](#totalweight)                   | Narrows the query results based on the total weight of items.
 | [trashed](#trashed)                           | Narrows the query results to only orders that have been soft-deleted.
 | [uid](#uid)                                   | Narrows the query results based on the orders’ UIDs.
+| [wasCountEagerLoaded](#wascounteagerloaded)   | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)             | Returns whether the query results were already eager loaded by the query's source element.
 | [with](#with)                                 | Causes the query to return matching orders eager-loaded with related elements.
-| [withAddresses](#withaddresses)               | Eager loads the the shipping and billing addressees on the resulting orders.
+| [withAddresses](#withaddresses)               | Eager loads the shipping and billing addressees on the resulting orders.
 | [withAdjustments](#withadjustments)           | Eager loads the order adjustments on the resulting orders.
-| [withAll](#withall)                           | Eager loads all relational data (addresses, adjustents, customers, line items, transactions) for the resulting orders.
+| [withAll](#withall)                           | Eager loads all relational data (addresses, adjustments, customers, line items, transactions) for the resulting orders.
 | [withCustomer](#withcustomer)                 | Eager loads the user on the resulting orders.
 | [withLineItems](#withlineitems)               | Eager loads the line items on the resulting orders.
 | [withTransactions](#withtransactions)         | Eager loads the transactions on the resulting orders.
 
 
 <!-- textlint-enable -->
+
+
+#### `addOrderBy`
+
+Adds additional ORDER BY columns to the query.
+
+
+
+
+
+
+
+
 
 
 #### `afterPopulate`
@@ -117,7 +145,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `asArray`
 
-Causes the query to return matching orders as arrays of data, rather than [Order](commerce4:craft\commerce\elements\Order) objects.
+Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
 
 
 
@@ -138,6 +166,19 @@ $orders = \craft\commerce\elements\Order::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -171,7 +212,7 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | `1` | with a customer with a user account ID of 1.
-| a [User](https://docs.craftcms.com/api/v4/craft-elements-user.html) object | with a customer with a user account represented by the object.
+| a [User](https://docs.craftcms.com/api/v5/craft-elements-user.html) object | with a customer with a user account represented by the object.
 | `'not 1'` | not the user account with an ID 1.
 | `[1, 2]` | with an user account ID of 1 or 2.
 | `['not', 1, 2]` | not with a user account ID of 1 or 2.
@@ -412,6 +453,20 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `eagerly`
+
+Causes the query to be used to eager-load results for the query’s source element
+and any other elements in its collection.
+
+
+
+
+
+
+
+
+
+
 #### `email`
 
 Narrows the query results based on the customers’ email addresses.
@@ -478,6 +533,45 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `fields`
+
+Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+
+A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
+This method should return an array of field names or field definitions.
+If the former, the field name will be treated as an object property name whose value will be used
+as the field value. If the latter, the array key should be the field name while the array value should be
+the corresponding field definition which can be either an object property name or a PHP callable
+returning the corresponding field value. The signature of the callable should be:
+
+```php
+function ($model, $field) {
+    // return field value
+}
+```
+
+For example, the following code declares four fields:
+
+- `email`: the field name is the same as the property name `email`;
+- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
+  values are obtained from the `first_name` and `last_name` properties;
+- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
+  and `last_name`.
+
+```php
+return [
+    'email',
+    'firstName' => 'first_name',
+    'lastName' => 'last_name',
+    'fullName' => function ($model) {
+        return $model->first_name . ' ' . $model->last_name;
+    },
+];
+```
+
+
+
+
 #### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
@@ -517,7 +611,7 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| a [Gateway](commerce4:craft\commerce\base\Gateway) object | with a gateway represented by the object.
+| a [Gateway](commerce5:craft\commerce\base\Gateway) object | with a gateway represented by the object.
 
 
 
@@ -569,8 +663,8 @@ Possible values include:
 
 | Value | Fetches orders…
 | - | -
-| a [PurchasableInterface](commerce4:craft\commerce\base\PurchasableInterface) object | with a purchasable represented by the object.
-| an array of [PurchasableInterface](commerce4:craft\commerce\base\PurchasableInterface) objects | with all the purchasables represented by the objects.
+| a [PurchasableInterface](commerce5:craft\commerce\base\PurchasableInterface) object | with a purchasable represented by the object.
+| an array of [PurchasableInterface](commerce5:craft\commerce\base\PurchasableInterface) objects | with all the purchasables represented by the objects.
 
 
 
@@ -610,7 +704,20 @@ $orders = \craft\commerce\elements\Order::find()
 #### `ignorePlaceholders`
 
 Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
+#### `inBulkOp`
+
+Narrows the query results to only orders that were involved in a bulk element operation.
 
 
 
@@ -745,6 +852,44 @@ Possible values include:
 
 
 
+#### `language`
+
+Determines which site(s) the orders should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch orders from English sites #}
+{% set orders = craft.orders()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch orders from English sites
+$orders = \craft\commerce\elements\Order::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 #### `limit`
 
 Determines the number of orders that should be returned.
@@ -766,6 +911,32 @@ $orders = \craft\commerce\elements\Order::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `number`
@@ -921,7 +1092,7 @@ Possible values include:
 | `'not foo'` | not with an order status with a handle of `foo`.
 | `['foo', 'bar']` | with an order status with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not with an order status with a handle of `foo` or `bar`.
-| a [OrderStatus](commerce4:craft\commerce\models\OrderStatus) object | with an order status represented by the object.
+| a [OrderStatus](commerce5:craft\commerce\models\OrderStatus) object | with an order status represented by the object.
 
 
 
@@ -1008,7 +1179,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `preferSites`
 
-If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
 
@@ -1039,6 +1210,19 @@ $orders = \craft\commerce\elements\Order::find()
     ->all();
 ```
 :::
+
+
+#### `prepForEagerLoading`
+
+Prepares the query for lazy eager loading.
+
+
+
+
+
+
+
+
 
 
 #### `prepareSubquery`
@@ -1112,6 +1296,15 @@ $orders = \craft\commerce\elements\Order::find()
     ->all();
 ```
 :::
+
+
+#### `render`
+
+Executes the query and renders the resulting elements using their partial templates.
+
+If no partial template exists for an element, its string representation will be output instead.
+
+
 
 
 #### `search`
@@ -1245,6 +1438,32 @@ $order = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `storeId`
+
+Narrows the query results to only orders that are related to the given store.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `1` | with a `storeId` of `1`.
+
+
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
+
+
 #### `total`
 
 Narrows the query results based on the total.
@@ -1329,6 +1548,20 @@ Possible values include:
 
 
 
+#### `totalWeight`
+
+Narrows the query results based on the total weight of items.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `10` | with a total weight of 10.
+| `[10, 20]` | an order with a total weight of 10 or 20.
+
+
+
+
 #### `trashed`
 
 Narrows the query results to only orders that have been soft-deleted.
@@ -1379,6 +1612,32 @@ $order = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `wasCountEagerLoaded`
+
+Returns whether the query result count was already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
+
+
+#### `wasEagerLoaded`
+
+Returns whether the query results were already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
+
+
 #### `with`
 
 Causes the query to return matching orders eager-loaded with related elements.
@@ -1408,7 +1667,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `withAddresses`
 
-Eager loads the the shipping and billing addressees on the resulting orders.
+Eager loads the shipping and billing addressees on the resulting orders.
 
 Possible values include:
 
@@ -1434,11 +1693,11 @@ Possible values include:
 
 #### `withAll`
 
-Eager loads all relational data (addresses, adjustents, customers, line items, transactions) for the resulting orders.
+Eager loads all relational data (addresses, adjustments, customers, line items, transactions) for the resulting orders.
 
 Possible values include:
 
-| Value | Fetches addresses, adjustents, customers, line items, transactions
+| Value | Fetches addresses, adjustments, customers, line items, transactions
 | - | -
 | bool | `true` to eager-load, `false` to not eager load.
 

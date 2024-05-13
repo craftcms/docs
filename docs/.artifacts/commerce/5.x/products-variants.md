@@ -10,58 +10,79 @@ Product queries support the following parameters:
 
 <!-- textlint-disable -->
 
-| Param                                                 | Description
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [after](#product-after)                               | Narrows the query results to only products that were posted on or after a certain date.
-| [afterPopulate](#product-afterpopulate)               | Performs any post-population processing on elements.
-| [andRelatedTo](#product-andrelatedto)                 | Narrows the query results to only products that are related to certain other elements.
-| [asArray](#product-asarray)                           | Causes the query to return matching products as arrays of data, rather than [Product](commerce4:craft\commerce\elements\Product) objects.
-| [availableForPurchase](#product-availableforpurchase) | Narrows the query results to only products that are available for purchase.
-| [before](#product-before)                             | Narrows the query results to only products that were posted before a certain date.
-| [cache](#product-cache)                               | Enables query cache for this Query.
-| [clearCachedResult](#product-clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [dateCreated](#product-datecreated)                   | Narrows the query results based on the products’ creation dates.
-| [dateUpdated](#product-dateupdated)                   | Narrows the query results based on the products’ last-updated dates.
-| [defaultHeight](#product-defaultheight)               | Narrows the query results based on the products’ default variant height dimension IDs.
-| [defaultLength](#product-defaultlength)               | Narrows the query results based on the products’ default variant length dimension IDs.
-| [defaultPrice](#product-defaultprice)                 | Narrows the query results based on the products’ default variant price.
-| [defaultSku](#product-defaultsku)                     | Narrows the query results based on the default productvariants defaultSku
-| [defaultWeight](#product-defaultweight)               | Narrows the query results based on the products’ default variant weight dimension IDs.
-| [defaultWidth](#product-defaultwidth)                 | Narrows the query results based on the products’ default variant width dimension IDs.
-| [expiryDate](#product-expirydate)                     | Narrows the query results based on the products’ expiry dates.
-| [fixedOrder](#product-fixedorder)                     | Causes the query results to be returned in the order specified by [id](#product-id).
-| [hasVariant](#product-hasvariant)                     | Narrows the query results to only products that have certain variants.
-| [id](#product-id)                                     | Narrows the query results based on the products’ IDs.
-| [ignorePlaceholders](#product-ignoreplaceholders)     | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#product-inreverse)                       | Causes the query results to be returned in reverse order.
-| [limit](#product-limit)                               | Determines the number of products that should be returned.
-| [offset](#product-offset)                             | Determines how many products should be skipped in the results.
-| [orderBy](#product-orderby)                           | Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
-| [postDate](#product-postdate)                         | Narrows the query results based on the products’ post dates.
-| [preferSites](#product-prefersites)                   | If [unique](#product-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepareSubquery](#product-preparesubquery)           | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [relatedTo](#product-relatedto)                       | Narrows the query results to only products that are related to certain other elements.
-| [search](#product-search)                             | Narrows the query results to only products that match a search query.
-| [shippingCategory](#product-shippingcategory)         | Narrows the query results based on the products’ shipping category.
-| [shippingCategoryId](#product-shippingcategoryid)     | Narrows the query results based on the products’ shipping categories, per the shipping categories’ IDs.
-| [site](#product-site)                                 | Determines which site(s) the products should be queried in.
-| [siteId](#product-siteid)                             | Determines which site(s) the products should be queried in, per the site’s ID.
-| [siteSettingsId](#product-sitesettingsid)             | Narrows the query results based on the products’ IDs in the `elements_sites` table.
-| [slug](#product-slug)                                 | Narrows the query results based on the products’ slugs.
-| [status](#product-status)                             | Narrows the query results based on the products’ statuses.
-| [taxCategory](#product-taxcategory)                   | Narrows the query results based on the products’ tax category.
-| [taxCategoryId](#product-taxcategoryid)               | Narrows the query results based on the products’ tax categories, per the tax categories’ IDs.
-| [title](#product-title)                               | Narrows the query results based on the products’ titles.
-| [trashed](#product-trashed)                           | Narrows the query results to only products that have been soft-deleted.
-| [type](#product-type)                                 | Narrows the query results based on the products’ types.
-| [typeId](#product-typeid)                             | Narrows the query results based on the products’ types, per the types’ IDs.
-| [uid](#product-uid)                                   | Narrows the query results based on the products’ UIDs.
-| [unique](#product-unique)                             | Determines whether only elements with unique IDs should be returned by the query.
-| [uri](#product-uri)                                   | Narrows the query results based on the products’ URIs.
-| [with](#product-with)                                 | Causes the query to return matching products eager-loaded with related elements.
+| Param                                               | Description
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addOrderBy](#product-addorderby)                   | Adds additional ORDER BY columns to the query.
+| [after](#product-after)                             | Narrows the query results to only products that were posted on or after a certain date.
+| [afterPopulate](#product-afterpopulate)             | Performs any post-population processing on elements.
+| [andRelatedTo](#product-andrelatedto)               | Narrows the query results to only products that are related to certain other elements.
+| [asArray](#product-asarray)                         | Causes the query to return matching products as arrays of data, rather than [Product](commerce5:craft\commerce\elements\Product) objects.
+| [average](#product-average)                         | Returns the average of the specified column values.
+| [before](#product-before)                           | Narrows the query results to only products that were posted before a certain date.
+| [cache](#product-cache)                             | Enables query cache for this Query.
+| [clearCachedResult](#product-clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [dateCreated](#product-datecreated)                 | Narrows the query results based on the products’ creation dates.
+| [dateUpdated](#product-dateupdated)                 | Narrows the query results based on the products’ last-updated dates.
+| [defaultHeight](#product-defaultheight)             | Narrows the query results based on the products’ default variant height dimension IDs.
+| [defaultLength](#product-defaultlength)             | Narrows the query results based on the products’ default variant length dimension IDs.
+| [defaultPrice](#product-defaultprice)               | Narrows the query results based on the products’ default variant price.
+| [defaultSku](#product-defaultsku)                   | Narrows the query results based on the default productvariants defaultSku
+| [defaultWeight](#product-defaultweight)             | Narrows the query results based on the products’ default variant weight dimension IDs.
+| [defaultWidth](#product-defaultwidth)               | Narrows the query results based on the products’ default variant width dimension IDs.
+| [eagerly](#product-eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [expiryDate](#product-expirydate)                   | Narrows the query results based on the products’ expiry dates.
+| [fields](#product-fields)                           | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+| [fixedOrder](#product-fixedorder)                   | Causes the query results to be returned in the order specified by [id](#product-id).
+| [hasVariant](#product-hasvariant)                   | Narrows the query results to only products that have certain variants.
+| [id](#product-id)                                   | Narrows the query results based on the products’ IDs.
+| [ignorePlaceholders](#product-ignoreplaceholders)   | Causes the query to return matching products as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#product-inbulkop)                       | Narrows the query results to only products that were involved in a bulk element operation.
+| [inReverse](#product-inreverse)                     | Causes the query results to be returned in reverse order.
+| [language](#product-language)                       | Determines which site(s) the products should be queried in, based on their language.
+| [limit](#product-limit)                             | Determines the number of products that should be returned.
+| [max](#product-max)                                 | Returns the maximum of the specified column values.
+| [min](#product-min)                                 | Returns the minimum of the specified column values.
+| [offset](#product-offset)                           | Determines how many products should be skipped in the results.
+| [orderBy](#product-orderby)                         | Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
+| [postDate](#product-postdate)                       | Narrows the query results based on the products’ post dates.
+| [preferSites](#product-prefersites)                 | If [unique](#product-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#product-prepforeagerloading) | Prepares the query for lazy eager loading.
+| [prepareSubquery](#product-preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [relatedTo](#product-relatedto)                     | Narrows the query results to only products that are related to certain other elements.
+| [render](#product-render)                           | Executes the query and renders the resulting elements using their partial templates.
+| [search](#product-search)                           | Narrows the query results to only products that match a search query.
+| [site](#product-site)                               | Determines which site(s) the products should be queried in.
+| [siteId](#product-siteid)                           | Determines which site(s) the products should be queried in, per the site’s ID.
+| [siteSettingsId](#product-sitesettingsid)           | Narrows the query results based on the products’ IDs in the `elements_sites` table.
+| [slug](#product-slug)                               | Narrows the query results based on the products’ slugs.
+| [status](#product-status)                           | Narrows the query results based on the products’ statuses.
+| [sum](#product-sum)                                 | Returns the sum of the specified column values.
+| [title](#product-title)                             | Narrows the query results based on the products’ titles.
+| [trashed](#product-trashed)                         | Narrows the query results to only products that have been soft-deleted.
+| [type](#product-type)                               | Narrows the query results based on the products’ types.
+| [typeId](#product-typeid)                           | Narrows the query results based on the products’ types, per the types’ IDs.
+| [uid](#product-uid)                                 | Narrows the query results based on the products’ UIDs.
+| [unique](#product-unique)                           | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#product-uri)                                 | Narrows the query results based on the products’ URIs.
+| [wasCountEagerLoaded](#product-wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#product-waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#product-with)                               | Causes the query to return matching products eager-loaded with related elements.
 
 
 <!-- textlint-enable -->
+
+
+<h4 id="product-addorderby"><a href="#product-addorderby" class="header-anchor">#</a> <code>addOrderBy</code></h4>
+
+Adds additional ORDER BY columns to the query.
+
+
+
+
+
+
+
+
 
 
 <h4 id="product-after"><a href="#product-after" class="header-anchor">#</a> <code>after</code></h4>
@@ -142,7 +163,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-asarray"><a href="#product-asarray" class="header-anchor">#</a> <code>asArray</code></h4>
 
-Causes the query to return matching products as arrays of data, rather than [Product](commerce4:craft\commerce\elements\Product) objects.
+Causes the query to return matching products as arrays of data, rather than [Product](commerce5:craft\commerce\elements\Product) objects.
 
 
 
@@ -165,27 +186,17 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-<h4 id="product-availableforpurchase"><a href="#product-availableforpurchase" class="header-anchor">#</a> <code>availableForPurchase</code></h4>
+<h4 id="product-average"><a href="#product-average" class="header-anchor">#</a> <code>average</code></h4>
 
-Narrows the query results to only products that are available for purchase.
+Returns the average of the specified column values.
 
 
 
-::: code
-```twig
-{# Fetch products that are available for purchase #}
-{% set products = craft.products()
-  .availableForPurchase()
-  .all() %}
-```
 
-```php
-// Fetch products that are available for purchase
-$products = \craft\commerce\elements\Product::find()
-    ->availableForPurchase()
-    ->all();
-```
-:::
+
+
+
+
 
 
 <h4 id="product-before"><a href="#product-before" class="header-anchor">#</a> <code>before</code></h4>
@@ -512,6 +523,20 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
+<h4 id="product-eagerly"><a href="#product-eagerly" class="header-anchor">#</a> <code>eagerly</code></h4>
+
+Causes the query to be used to eager-load results for the query’s source element
+and any other elements in its collection.
+
+
+
+
+
+
+
+
+
+
 <h4 id="product-expirydate"><a href="#product-expirydate" class="header-anchor">#</a> <code>expiryDate</code></h4>
 
 Narrows the query results based on the products’ expiry dates.
@@ -545,6 +570,45 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
+
+
+<h4 id="product-fields"><a href="#product-fields" class="header-anchor">#</a> <code>fields</code></h4>
+
+Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+
+A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
+This method should return an array of field names or field definitions.
+If the former, the field name will be treated as an object property name whose value will be used
+as the field value. If the latter, the array key should be the field name while the array value should be
+the corresponding field definition which can be either an object property name or a PHP callable
+returning the corresponding field value. The signature of the callable should be:
+
+```php
+function ($model, $field) {
+    // return field value
+}
+```
+
+For example, the following code declares four fields:
+
+- `email`: the field name is the same as the property name `email`;
+- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
+  values are obtained from the `first_name` and `last_name` properties;
+- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
+  and `last_name`.
+
+```php
+return [
+    'email',
+    'firstName' => 'first_name',
+    'lastName' => 'last_name',
+    'fullName' => function ($model) {
+        return $model->first_name . ' ' . $model->last_name;
+    },
+];
+```
+
+
 
 
 <h4 id="product-fixedorder"><a href="#product-fixedorder" class="header-anchor">#</a> <code>fixedOrder</code></h4>
@@ -586,7 +650,7 @@ Possible values include:
 
 | Value | Fetches products…
 | - | -
-| a [VariantQuery](commerce4:craft\commerce\elements\db\VariantQuery) object | with variants that match the query.
+| a [VariantQuery](commerce5:craft\commerce\elements\db\VariantQuery) object | with variants that match the query.
 
 
 
@@ -634,7 +698,20 @@ This can be combined with [fixedOrder](#product-fixedorder) if you want the resu
 <h4 id="product-ignoreplaceholders"><a href="#product-ignoreplaceholders" class="header-anchor">#</a> <code>ignorePlaceholders</code></h4>
 
 Causes the query to return matching products as they are stored in the database, ignoring matching placeholder
-elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
+elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
+<h4 id="product-inbulkop"><a href="#product-inbulkop" class="header-anchor">#</a> <code>inBulkOp</code></h4>
+
+Narrows the query results to only products that were involved in a bulk element operation.
 
 
 
@@ -670,6 +747,44 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
+<h4 id="product-language"><a href="#product-language" class="header-anchor">#</a> <code>language</code></h4>
+
+Determines which site(s) the products should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches products…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique](#product-unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch products from English sites #}
+{% set products = craft.products()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch products from English sites
+$products = \craft\commerce\elements\Product::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 <h4 id="product-limit"><a href="#product-limit" class="header-anchor">#</a> <code>limit</code></h4>
 
 Determines the number of products that should be returned.
@@ -691,6 +806,32 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
+
+
+<h4 id="product-max"><a href="#product-max" class="header-anchor">#</a> <code>max</code></h4>
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+<h4 id="product-min"><a href="#product-min" class="header-anchor">#</a> <code>min</code></h4>
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 <h4 id="product-offset"><a href="#product-offset" class="header-anchor">#</a> <code>offset</code></h4>
@@ -811,6 +952,19 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
+<h4 id="product-prepforeagerloading"><a href="#product-prepforeagerloading" class="header-anchor">#</a> <code>prepForEagerLoading</code></h4>
+
+Prepares the query for lazy eager loading.
+
+
+
+
+
+
+
+
+
+
 <h4 id="product-preparesubquery"><a href="#product-preparesubquery" class="header-anchor">#</a> <code>prepareSubquery</code></h4>
 
 Prepares the element query and returns its subquery (which determines what elements will be returned).
@@ -847,6 +1001,15 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
+<h4 id="product-render"><a href="#product-render" class="header-anchor">#</a> <code>render</code></h4>
+
+Executes the query and renders the resulting elements using their partial templates.
+
+If no partial template exists for an element, its string representation will be output instead.
+
+
+
+
 <h4 id="product-search"><a href="#product-search" class="header-anchor">#</a> <code>search</code></h4>
 
 Narrows the query results to only products that match a search query.
@@ -880,71 +1043,6 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-<h4 id="product-shippingcategory"><a href="#product-shippingcategory" class="header-anchor">#</a> <code>shippingCategory</code></h4>
-
-Narrows the query results based on the products’ shipping category.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `'foo'` | of a shipping category with a handle of `foo`.
-| `'not foo'` | not of a shipping category with a handle of `foo`.
-| `['foo', 'bar']` | of a shipping category with a handle of `foo` or `bar`.
-| `['not', 'foo', 'bar']` | not of a shipping category with a handle of `foo` or `bar`.
-| an [ShippingCategory](commerce4:craft\commerce\models\ShippingCategory) object | of a shipping category represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch products with a Foo shipping category #}
-{% set products = craft.products()
-  .shippingCategory('foo')
-  .all() %}
-```
-
-```php
-// Fetch products with a Foo shipping category
-$products = \craft\commerce\elements\Product::find()
-    ->shippingCategory('foo')
-    ->all();
-```
-:::
-
-
-<h4 id="product-shippingcategoryid"><a href="#product-shippingcategoryid" class="header-anchor">#</a> <code>shippingCategoryId</code></h4>
-
-Narrows the query results based on the products’ shipping categories, per the shipping categories’ IDs.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `1` | of a shipping category with an ID of 1.
-| `'not 1'` | not of a shipping category with an ID of 1.
-| `[1, 2]` | of a shipping category with an ID of 1 or 2.
-| `['not', 1, 2]` | not of a shipping category with an ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch products of the shipping category with an ID of 1 #}
-{% set products = craft.products()
-  .shippingCategoryId(1)
-  .all() %}
-```
-
-```php
-// Fetch products of the shipping category with an ID of 1
-$products = \craft\commerce\elements\Product::find()
-    ->shippingCategoryId(1)
-    ->all();
-```
-:::
-
-
 <h4 id="product-site"><a href="#product-site" class="header-anchor">#</a> <code>site</code></h4>
 
 Determines which site(s) the products should be queried in.
@@ -960,7 +1058,7 @@ Possible values include:
 | `'foo'` | from the site with a handle of `foo`.
 | `['foo', 'bar']` | from a site with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a site with a handle of `foo` or `bar`.
-| a [craft\models\Site](https://docs.craftcms.com/api/v4/craft-models-site.html) object | from the site represented by the object.
+| a [craft\models\Site](https://docs.craftcms.com/api/v5/craft-models-site.html) object | from the site represented by the object.
 | `'*'` | from any site.
 
 ::: tip
@@ -1133,69 +1231,17 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-<h4 id="product-taxcategory"><a href="#product-taxcategory" class="header-anchor">#</a> <code>taxCategory</code></h4>
+<h4 id="product-sum"><a href="#product-sum" class="header-anchor">#</a> <code>sum</code></h4>
 
-Narrows the query results based on the products’ tax category.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `'foo'` | of a tax category with a handle of `foo`.
-| `'not foo'` | not of a tax category with a handle of `foo`.
-| `['foo', 'bar']` | of a tax category with a handle of `foo` or `bar`.
-| `['not', 'foo', 'bar']` | not of a tax category with a handle of `foo` or `bar`.
-| an [ShippingCategory](commerce4:craft\commerce\models\ShippingCategory) object | of a tax category represented by the object.
+Returns the sum of the specified column values.
 
 
 
-::: code
-```twig
-{# Fetch products with a Foo tax category #}
-{% set products = craft.products()
-  .taxCategory('foo')
-  .all() %}
-```
-
-```php
-// Fetch products with a Foo tax category
-$products = \craft\commerce\elements\Product::find()
-    ->taxCategory('foo')
-    ->all();
-```
-:::
-
-
-<h4 id="product-taxcategoryid"><a href="#product-taxcategoryid" class="header-anchor">#</a> <code>taxCategoryId</code></h4>
-
-Narrows the query results based on the products’ tax categories, per the tax categories’ IDs.
-
-Possible values include:
-
-| Value | Fetches products…
-| - | -
-| `1` | of a tax category with an ID of 1.
-| `'not 1'` | not of a tax category with an ID of 1.
-| `[1, 2]` | of a tax category with an ID of 1 or 2.
-| `['not', 1, 2]` | not of a tax category with an ID of 1 or 2.
 
 
 
-::: code
-```twig
-{# Fetch products of the tax category with an ID of 1 #}
-{% set products = craft.products()
-  .taxCategoryId(1)
-  .all() %}
-```
 
-```php
-// Fetch products of the tax category with an ID of 1
-$products = \craft\commerce\elements\Product::find()
-    ->taxCategoryId(1)
-    ->all();
-```
-:::
+
 
 
 <h4 id="product-title"><a href="#product-title" class="header-anchor">#</a> <code>title</code></h4>
@@ -1272,7 +1318,7 @@ Possible values include:
 | `'not foo'` | not of a type with a handle of `foo`.
 | `['foo', 'bar']` | of a type with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not of a type with a handle of `foo` or `bar`.
-| an [ProductType](commerce4:craft\commerce\models\ProductType) object | of a type represented by the object.
+| an [ProductType](commerce5:craft\commerce\models\ProductType) object | of a type represented by the object.
 
 
 
@@ -1421,6 +1467,32 @@ $product = \craft\commerce\elements\Product::find()
     ->one();
 ```
 :::
+
+
+<h4 id="product-wascounteagerloaded"><a href="#product-wascounteagerloaded" class="header-anchor">#</a> <code>wasCountEagerLoaded</code></h4>
+
+Returns whether the query result count was already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
+
+
+<h4 id="product-waseagerloaded"><a href="#product-waseagerloaded" class="header-anchor">#</a> <code>wasEagerLoaded</code></h4>
+
+Returns whether the query results were already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
 
 
 <h4 id="product-with"><a href="#product-with" class="header-anchor">#</a> <code>with</code></h4>
