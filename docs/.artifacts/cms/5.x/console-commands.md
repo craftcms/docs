@@ -59,6 +59,17 @@ db
 
 Lists the caches that can be flushed.
 
+## `ckeditor/convert`
+
+
+<h3 id="ckeditor-convert-redactor">
+    <a href="#ckeditor-convert-redactor" class="header-anchor">#</a>
+    <code>ckeditor/convert/redactor</code>
+</h3>
+
+
+Converts Redactor fields to CKEditor
+
 ## `clear-caches`
 
 Allows you to clear various Craft caches.
@@ -138,6 +149,14 @@ Clears the caches.
 <h3 id="clear-caches-transform-indexes">
     <a href="#clear-caches-transform-indexes" class="header-anchor">#</a>
     <code>clear-caches/transform-indexes</code>
+</h3>
+
+
+Clears the caches.
+
+<h3 id="clear-caches-twigpack-manifest-cache">
+    <a href="#clear-caches-twigpack-manifest-cache" class="header-anchor">#</a>
+    <code>clear-caches/twigpack-manifest-cache</code>
 </h3>
 
 
@@ -1809,6 +1828,10 @@ Re-saves user addresses.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-assets">
     <a href="#resave-assets" class="header-anchor">#</a>
@@ -1880,6 +1903,10 @@ Re-saves assets.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-categories">
     <a href="#resave-categories" class="header-anchor">#</a>
@@ -1949,6 +1976,10 @@ Re-saves categories.
 
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
 
 
 
@@ -2056,6 +2087,10 @@ Re-saves entries.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-tags">
     <a href="#resave-tags" class="header-anchor">#</a>
@@ -2127,6 +2162,10 @@ Re-saves tags.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-users">
     <a href="#resave-users" class="header-anchor">#</a>
@@ -2196,6 +2235,10 @@ Re-saves users.
 
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
 
 
 

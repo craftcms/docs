@@ -1382,6 +1382,8 @@ This is the interface implemented by all assets.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
+| `uploaderId`| `Int` | The ID of the user who first added this asset (if known).
+| `uploader`| `UserInterface` | The user who first added this asset (if known).
 | `alt`| `String` | Alternative text for the asset.
 | `volumeId`| `Int` | The ID of the volume that the asset belongs to.
 | `folderId`| `Int!` | The ID of the folder that the asset belongs to.
@@ -1438,6 +1440,10 @@ This is the interface implemented by all entries.
 | `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
+| `authorId`| `Int` | The primary entry author’s ID.
+| `author`| `[UserInterface]` | The primary entry author.
+| `authorIds`| `[Int]` | The entry authors’ IDs.
+| `authors`| `[UserInterface]` | The entry authors.
 | `draftCreator`| `UserInterface` | The creator of a given draft.
 | `drafts`| `[EntryInterface]` | The drafts for the entry.
 | `revisionCreator`| `UserInterface` | The creator of a given revision.
@@ -1514,6 +1520,7 @@ This is the interface implemented by all users.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
+| `photo`| `AssetInterface` | The user’s photo.
 | `friendlyName`| `String` | The user’s first name or username.
 | `fullName`| `String` | The user’s full name.
 | `name`| `String!` | The user’s full name or username.

@@ -5210,6 +5210,12 @@
     },
     {
         "class": "craft\\controllers\\UsersController",
+        "name": "EVENT_DEFINE_EDIT_SCREENS",
+        "type": "craft\\controllers\\DefineEditUserScreensEvent",
+        "desc": "The event that is triggered when defining the screens that should be shown for the user being edited."
+    },
+    {
+        "class": "craft\\controllers\\UsersController",
         "name": "EVENT_BEFORE_ASSIGN_GROUPS_AND_PERMISSIONS",
         "type": "craft\\events\\UserEvent",
         "desc": "The event that is triggered BEFORE user groups and permissions ARE assigned to the user getting saved"
