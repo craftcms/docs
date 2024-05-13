@@ -344,8 +344,10 @@
 import { VueAutosuggest } from "vue-autosuggest";
 import Craft3EventData from "../../../.artifacts/cms/3.x/events.json";
 import Craft4EventData from "../../../.artifacts/cms/4.x/events.json";
+import Craft5EventData from "../../../.artifacts/cms/5.x/events.json";
 import Commerce3EventData from "../../../.artifacts/commerce/3.x/events.json";
 import Commerce4EventData from "../../../.artifacts/commerce/4.x/events.json";
+import Commerce5EventData from "../../../.artifacts/commerce/5.x/events.json";
 import copy from "copy-to-clipboard";
 import CheckMark from "../global-components/CheckMark.vue";
 
@@ -379,11 +381,17 @@ export default {
       case "craft-4":
         this.eventData = Craft4EventData;
         break;
+      case "craft-5":
+        this.eventData = Craft5EventData;
+        break;
       case "commerce-3":
         this.eventData = Commerce3EventData;
         break;
       case "commerce-4":
         this.eventData = Commerce4EventData;
+        break;
+      case "commerce-5":
+        this.eventData = Commerce5EventData;
         break;
     }
 

@@ -237,7 +237,7 @@ The second argument to the `EventBehavior` constructor tells the behavior to mim
 
 Select an event for more detail and a code snippet.
 
-<event-browser source="craft-4" />
+<event-browser source="craft-5" />
 
 ## Common Event Flows
 

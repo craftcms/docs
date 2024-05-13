@@ -10,7 +10,7 @@ Craft Commerce provides a multitude of events for extending its functionality. M
 
 Select an event for details and a code snippet, or check out the sections below for some use cases. See Craft’s [Events](/5.x/extend/events.md) page for more information about working with events.
 
-<event-browser source="commerce-4" />
+<event-browser source="commerce-5" />
 
 ## Common Events + Workflows
 
