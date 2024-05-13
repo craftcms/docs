@@ -59,16 +59,22 @@ The **Base Path** can be set to an environment variable or begin with an alias, 
 
 Craft/PHP must be able to write to any directories you use for a local filesystem.
 
-### Remote Volumes
+<a id="remote-volumes"></a>
+
+### Remote Filesystems
 
 If you would prefer to store your assets on a remote storage service like Amazon S3, you can install a plugin that provides the appropriate filesystem adapter.
 
 - [Amazon S3](plugin:aws-s3) (first party)
 - [Google Cloud Storage](plugin:google-cloud) (first party)
+- [Microsoft Azure Blob Storage](plugin:azure-blob) (first party)
 - [DigitalOcean Spaces](plugin:dospaces) (Værsågod)
-- [fortrabbit Object Storage](plugin:fortrabbit-object-storage) (fortrabbit)
 
 The settings for each type of filesystem will differ based on the provider, and may involve secrets. We recommend using [special config values](../../configure.md#control-panel-settings) to store and use these, securely.
+
+::: tip
+Discover more remote storage options in the [Assets category](https://plugins.craftcms.com/categories/assets?craft5) of the Plugin Store!
+:::
 
 ## Asset Custom Fields
 
