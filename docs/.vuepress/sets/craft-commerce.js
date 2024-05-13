@@ -563,6 +563,32 @@ module.exports = {
     }
   },
   sidebarExtra: {
+    "5.x": {
+      "/extend/": [
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/commerce/api/v5/"
+        },
+        {
+          title: "Back to Commerce Docs",
+          icon: "/docs/icons/icon-back.svg",
+          link: "/commerce/5.x/"
+        }
+      ],
+      "/": [
+        {
+          title: "Extending Commerce",
+          icon: "/docs/icons/icon-book.svg",
+          link: "/commerce/5.x/extend/"
+        },
+        {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/commerce/api/v5/"
+        }
+      ]
+    },
     "4.x": {
       "/extend/": [
         {
