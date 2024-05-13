@@ -234,6 +234,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\base\\InventoryMovement",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\base\\InventoryMovement",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\base\\InventoryMovement",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\base\\InventoryMovement",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\base\\InventoryMovement",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\base\\InventoryMovement",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\base\\InventoryMovement",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\base\\Model",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -407,7 +449,7 @@
         "class": "craft\\commerce\\base\\Purchasable",
         "name": "EVENT_REGISTER_ACTIONS",
         "type": "craft\\events\\RegisterElementActionsEvent",
-        "desc": "The event that is triggered when registering the available actions for the element type.",
+        "desc": "The event that is triggered when registering the available bulk actions for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -835,9 +877,52 @@
     },
     {
         "class": "craft\\commerce\\base\\Purchasable",
-        "name": "EVENT_SET_TABLE_ATTRIBUTE_HTML",
-        "type": "craft\\events\\SetElementTableAttributeHtmlEvent",
-        "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
+        "name": "EVENT_DEFINE_ATTRIBUTE_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s HTML for table and card views.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\base\\Purchasable",
+        "name": "EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s inline input HTML.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -924,6 +1009,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\base\\Purchasable",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\base\\DefineMenuComponentEvent",
+        "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -2477,6 +2605,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\commerce\\console\\controllers\\PricingCatalogController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\commerce\\console\\controllers\\PricingCatalogController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\commerce\\console\\controllers\\PricingCatalogController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\commerce\\console\\controllers\\ResetDataController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -2508,24 +2654,6 @@
     },
     {
         "class": "craft\\commerce\\console\\controllers\\TransferCustomerDataController",
-        "name": "EVENT_AFTER_ACTION",
-        "type": "yii\\base\\ActionEvent",
-        "desc": "an event raised right after executing a controller action."
-    },
-    {
-        "class": "craft\\commerce\\console\\controllers\\UpgradeController",
-        "name": "EVENT_DEFINE_ACTIONS",
-        "type": "craft\\events\\DefineConsoleActionsEvent",
-        "desc": "The event that is triggered when defining custom actions for this controller."
-    },
-    {
-        "class": "craft\\commerce\\console\\controllers\\UpgradeController",
-        "name": "EVENT_BEFORE_ACTION",
-        "type": "yii\\base\\ActionEvent",
-        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
-    },
-    {
-        "class": "craft\\commerce\\console\\controllers\\UpgradeController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -2627,19 +2755,19 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
-        "class": "craft\\commerce\\controllers\\BaseStoreSettingsController",
+        "class": "craft\\commerce\\controllers\\BaseStoreManagementController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\controllers\\BaseStoreSettingsController",
+        "class": "craft\\commerce\\controllers\\BaseStoreManagementController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
     },
     {
-        "class": "craft\\commerce\\controllers\\BaseStoreSettingsController",
+        "class": "craft\\commerce\\controllers\\BaseStoreManagementController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -2682,6 +2810,42 @@
     },
     {
         "class": "craft\\commerce\\controllers\\CartController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\CatalogPricingController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\controllers\\CatalogPricingController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\CatalogPricingController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\CatalogPricingRulesController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\controllers\\CatalogPricingRulesController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\CatalogPricingRulesController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -2819,55 +2983,55 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
-        "class": "craft\\commerce\\controllers\\LineItemStatusesController",
+        "class": "craft\\commerce\\controllers\\InventoryController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\controllers\\LineItemStatusesController",
+        "class": "craft\\commerce\\controllers\\InventoryController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
     },
     {
-        "class": "craft\\commerce\\controllers\\LineItemStatusesController",
+        "class": "craft\\commerce\\controllers\\InventoryController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
     },
     {
-        "class": "craft\\commerce\\controllers\\LiteShippingController",
+        "class": "craft\\commerce\\controllers\\InventoryLocationsController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\controllers\\LiteShippingController",
+        "class": "craft\\commerce\\controllers\\InventoryLocationsController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
     },
     {
-        "class": "craft\\commerce\\controllers\\LiteShippingController",
+        "class": "craft\\commerce\\controllers\\InventoryLocationsController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
     },
     {
-        "class": "craft\\commerce\\controllers\\LiteTaxController",
+        "class": "craft\\commerce\\controllers\\LineItemStatusesController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\controllers\\LiteTaxController",
+        "class": "craft\\commerce\\controllers\\LineItemStatusesController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
     },
     {
-        "class": "craft\\commerce\\controllers\\LiteTaxController",
+        "class": "craft\\commerce\\controllers\\LineItemStatusesController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -3071,24 +3235,6 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
-        "class": "craft\\commerce\\controllers\\ProductsPreviewController",
-        "name": "EVENT_DEFINE_BEHAVIORS",
-        "type": "craft\\events\\DefineBehaviorsEvent",
-        "desc": "The event that is triggered when defining the class behaviors"
-    },
-    {
-        "class": "craft\\commerce\\controllers\\ProductsPreviewController",
-        "name": "EVENT_BEFORE_ACTION",
-        "type": "yii\\base\\ActionEvent",
-        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
-    },
-    {
-        "class": "craft\\commerce\\controllers\\ProductsPreviewController",
-        "name": "EVENT_AFTER_ACTION",
-        "type": "yii\\base\\ActionEvent",
-        "desc": "an event raised right after executing a controller action."
-    },
-    {
         "class": "craft\\commerce\\controllers\\PromotionsController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
@@ -3215,19 +3361,37 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
-        "class": "craft\\commerce\\controllers\\StoreController",
+        "class": "craft\\commerce\\controllers\\StoreManagementController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\controllers\\StoreController",
+        "class": "craft\\commerce\\controllers\\StoreManagementController",
         "name": "EVENT_BEFORE_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
     },
     {
-        "class": "craft\\commerce\\controllers\\StoreController",
+        "class": "craft\\commerce\\controllers\\StoreManagementController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\StoresController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\controllers\\StoresController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\StoresController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -3324,6 +3488,48 @@
     },
     {
         "class": "craft\\commerce\\controllers\\UserOrdersController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\UsersController",
+        "name": "EVENT_MODIFY_CART_INFO",
+        "type": "craft\\commerce\\controllers\\Event",
+        "desc": "The event that’s triggered when a cart is returned as an array for Ajax cart update requests."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\UsersController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\controllers\\UsersController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\UsersController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\VariantsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\controllers\\VariantsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\VariantsController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -3442,7 +3648,7 @@
         "class": "craft\\commerce\\elements\\Donation",
         "name": "EVENT_REGISTER_ACTIONS",
         "type": "craft\\events\\RegisterElementActionsEvent",
-        "desc": "The event that is triggered when registering the available actions for the element type.",
+        "desc": "The event that is triggered when registering the available bulk actions for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -3870,9 +4076,52 @@
     },
     {
         "class": "craft\\commerce\\elements\\Donation",
-        "name": "EVENT_SET_TABLE_ATTRIBUTE_HTML",
-        "type": "craft\\events\\SetElementTableAttributeHtmlEvent",
-        "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
+        "name": "EVENT_DEFINE_ATTRIBUTE_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s HTML for table and card views.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Donation",
+        "name": "EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s inline input HTML.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -3959,6 +4208,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Donation",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\base\\DefineMenuComponentEvent",
+        "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -5815,7 +6107,7 @@
         "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_REGISTER_ACTIONS",
         "type": "craft\\events\\RegisterElementActionsEvent",
-        "desc": "The event that is triggered when registering the available actions for the element type.",
+        "desc": "The event that is triggered when registering the available bulk actions for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -6243,9 +6535,52 @@
     },
     {
         "class": "craft\\commerce\\elements\\Order",
-        "name": "EVENT_SET_TABLE_ATTRIBUTE_HTML",
-        "type": "craft\\events\\SetElementTableAttributeHtmlEvent",
-        "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
+        "name": "EVENT_DEFINE_ATTRIBUTE_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s HTML for table and card views.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Order",
+        "name": "EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s inline input HTML.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -6332,6 +6667,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Order",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\base\\DefineMenuComponentEvent",
+        "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -7758,7 +8136,7 @@
         "class": "craft\\commerce\\elements\\Product",
         "name": "EVENT_REGISTER_ACTIONS",
         "type": "craft\\events\\RegisterElementActionsEvent",
-        "desc": "The event that is triggered when registering the available actions for the element type.",
+        "desc": "The event that is triggered when registering the available bulk actions for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -8186,9 +8564,52 @@
     },
     {
         "class": "craft\\commerce\\elements\\Product",
-        "name": "EVENT_SET_TABLE_ATTRIBUTE_HTML",
-        "type": "craft\\events\\SetElementTableAttributeHtmlEvent",
-        "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
+        "name": "EVENT_DEFINE_ATTRIBUTE_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s HTML for table and card views.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Product",
+        "name": "EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s inline input HTML.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -8275,6 +8696,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Product",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\base\\DefineMenuComponentEvent",
+        "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -9701,7 +10165,7 @@
         "class": "craft\\commerce\\elements\\Subscription",
         "name": "EVENT_REGISTER_ACTIONS",
         "type": "craft\\events\\RegisterElementActionsEvent",
-        "desc": "The event that is triggered when registering the available actions for the element type.",
+        "desc": "The event that is triggered when registering the available bulk actions for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -10129,9 +10593,52 @@
     },
     {
         "class": "craft\\commerce\\elements\\Subscription",
-        "name": "EVENT_SET_TABLE_ATTRIBUTE_HTML",
-        "type": "craft\\events\\SetElementTableAttributeHtmlEvent",
-        "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
+        "name": "EVENT_DEFINE_ATTRIBUTE_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s HTML for table and card views.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Subscription",
+        "name": "EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s inline input HTML.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -10218,6 +10725,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Subscription",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\base\\DefineMenuComponentEvent",
+        "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -11816,7 +12366,7 @@
         "class": "craft\\commerce\\elements\\Variant",
         "name": "EVENT_REGISTER_ACTIONS",
         "type": "craft\\events\\RegisterElementActionsEvent",
-        "desc": "The event that is triggered when registering the available actions for the element type.",
+        "desc": "The event that is triggered when registering the available bulk actions for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -12244,9 +12794,52 @@
     },
     {
         "class": "craft\\commerce\\elements\\Variant",
-        "name": "EVENT_SET_TABLE_ATTRIBUTE_HTML",
-        "type": "craft\\events\\SetElementTableAttributeHtmlEvent",
-        "desc": "The event that is triggered when defining the HTML to represent a table attribute.",
+        "name": "EVENT_DEFINE_ATTRIBUTE_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s HTML for table and card views.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Variant",
+        "name": "EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s inline input HTML.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -12333,6 +12926,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Variant",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\base\\DefineMenuComponentEvent",
+        "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -13862,6 +14498,54 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\actions\\SetDefaultVariant",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\commerce\\elements\\actions\\SetDefaultVariant",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\actions\\SetDefaultVariant",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\actions\\SetDefaultVariant",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\actions\\SetDefaultVariant",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\actions\\SetDefaultVariant",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\actions\\SetDefaultVariant",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\actions\\SetDefaultVariant",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\actions\\UpdateOrderStatus",
         "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
         "type": "craft\\events\\DefineValueEvent",
@@ -13911,9 +14595,9 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\addresses\\DiscountAddressCondition",
-        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
-        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
-        "desc": "The event that is triggered when defining the condition rule types."
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\addresses\\DiscountAddressCondition",
@@ -14001,9 +14685,9 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\addresses\\ZoneAddressCondition",
-        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
-        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
-        "desc": "The event that is triggered when defining the condition rule types."
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\addresses\\ZoneAddressCondition",
@@ -14043,15 +14727,63 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\addresses\\ZoneAddressCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\CatalogPricingRuleCustomerCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\CatalogPricingRuleCustomerCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\CatalogPricingRuleCustomerCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\CatalogPricingRuleCustomerCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\CatalogPricingRuleCustomerCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\CatalogPricingRuleCustomerCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\CatalogPricingRuleCustomerCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\CatalogPricingRuleCustomerCondition",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\customers\\DiscountCustomerCondition",
-        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
-        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
-        "desc": "The event that is triggered when defining the condition rule types."
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\customers\\DiscountCustomerCondition",
@@ -14307,9 +15039,9 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountOrderCondition",
-        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
-        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
-        "desc": "The event that is triggered when defining the condition rule types."
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountOrderCondition",
@@ -14349,6 +15081,48 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountOrderCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountedItemSubtotalConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountedItemSubtotalConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountedItemSubtotalConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountedItemSubtotalConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountedItemSubtotalConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountedItemSubtotalConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountedItemSubtotalConditionRule",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -14481,9 +15255,9 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\orders\\OrderCondition",
-        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
-        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
-        "desc": "The event that is triggered when defining the condition rule types."
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\orders\\OrderCondition",
@@ -14822,6 +15596,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingAddressZoneConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingAddressZoneConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingAddressZoneConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingAddressZoneConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingAddressZoneConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingAddressZoneConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingAddressZoneConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -14859,6 +15675,102 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodOrderCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodOrderCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodOrderCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodOrderCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodOrderCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodOrderCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodOrderCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingMethodOrderCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingRuleOrderCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingRuleOrderCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingRuleOrderCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingRuleOrderCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingRuleOrderCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingRuleOrderCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingRuleOrderCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\ShippingRuleOrderCondition",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -15116,10 +16028,52 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\TotalWeightConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\TotalWeightConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\TotalWeightConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\TotalWeightConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\TotalWeightConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\TotalWeightConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\TotalWeightConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
-        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
-        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
-        "desc": "The event that is triggered when defining the condition rule types."
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
@@ -15248,6 +16202,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantInventoryTrackedConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantInventoryTrackedConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantInventoryTrackedConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantInventoryTrackedConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantInventoryTrackedConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantInventoryTrackedConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantInventoryTrackedConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantPriceConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -15369,6 +16365,354 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\products\\ProductVariantStockConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCustomerConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCustomerConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCustomerConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCustomerConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCustomerConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCustomerConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingCustomerConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingPurchasableConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingPurchasableConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingPurchasableConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingPurchasableConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingPurchasableConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingPurchasableConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingPurchasableConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCategoryConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCategoryConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCategoryConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCategoryConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCategoryConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCategoryConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCategoryConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\CatalogPricingRulePurchasableCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableTypeConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableTypeConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableTypeConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableTypeConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableTypeConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableTypeConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\PurchasableTypeConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\SkuConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\SkuConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\SkuConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\SkuConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\SkuConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\SkuConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\purchasables\\SkuConditionRule",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -15417,9 +16761,9 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
-        "name": "EVENT_REGISTER_CONDITION_RULE_TYPES",
-        "type": "craft\\events\\RegisterConditionRuleTypesEvent",
-        "desc": "The event that is triggered when defining the condition rule types."
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\variants\\VariantCondition",
@@ -15608,6 +16952,54 @@
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
+        "class": "craft\\commerce\\elements\\db\\PurchasableQuery",
+        "name": "EVENT_BEFORE_PREPARE",
+        "type": "craft\\events\\CancelableEvent",
+        "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\PurchasableQuery",
+        "name": "EVENT_AFTER_PREPARE",
+        "type": "craft\\events\\CancelableEvent",
+        "desc": "An event that is triggered at the end of preparing an element query for the query builder."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\PurchasableQuery",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\PurchasableQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\PurchasableQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\PurchasableQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\PurchasableQuery",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the query's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\PurchasableQuery",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
         "name": "EVENT_BEFORE_PREPARE",
         "type": "craft\\events\\CancelableEvent",
@@ -15914,6 +17306,384 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -15951,6 +17721,48 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -16562,85 +18374,127 @@
         "desc": "The event that is triggered after the migration is reverted"
     },
     {
-        "class": "craft\\commerce\\models\\Coupon",
+        "class": "craft\\commerce\\models\\CatalogPricing",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
     },
     {
-        "class": "craft\\commerce\\models\\Coupon",
+        "class": "craft\\commerce\\models\\CatalogPricing",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\models\\Coupon",
+        "class": "craft\\commerce\\models\\CatalogPricing",
         "name": "EVENT_DEFINE_RULES",
         "type": "craft\\events\\DefineRulesEvent",
         "desc": "The event that is triggered when defining the model rules"
     },
     {
-        "class": "craft\\commerce\\models\\Coupon",
+        "class": "craft\\commerce\\models\\CatalogPricing",
         "name": "EVENT_DEFINE_FIELDS",
         "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
-        "class": "craft\\commerce\\models\\Coupon",
+        "class": "craft\\commerce\\models\\CatalogPricing",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
         "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
-        "class": "craft\\commerce\\models\\Coupon",
+        "class": "craft\\commerce\\models\\CatalogPricing",
         "name": "EVENT_BEFORE_VALIDATE",
         "type": "yii\\base\\ModelEvent",
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
     },
     {
-        "class": "craft\\commerce\\models\\Coupon",
+        "class": "craft\\commerce\\models\\CatalogPricing",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
     },
     {
-        "class": "craft\\commerce\\models\\Currency",
+        "class": "craft\\commerce\\models\\CatalogPricingRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
     },
     {
-        "class": "craft\\commerce\\models\\Currency",
+        "class": "craft\\commerce\\models\\CatalogPricingRule",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\models\\Currency",
+        "class": "craft\\commerce\\models\\CatalogPricingRule",
         "name": "EVENT_DEFINE_RULES",
         "type": "craft\\events\\DefineRulesEvent",
         "desc": "The event that is triggered when defining the model rules"
     },
     {
-        "class": "craft\\commerce\\models\\Currency",
+        "class": "craft\\commerce\\models\\CatalogPricingRule",
         "name": "EVENT_DEFINE_FIELDS",
         "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
-        "class": "craft\\commerce\\models\\Currency",
+        "class": "craft\\commerce\\models\\CatalogPricingRule",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
         "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
-        "class": "craft\\commerce\\models\\Currency",
+        "class": "craft\\commerce\\models\\CatalogPricingRule",
         "name": "EVENT_BEFORE_VALIDATE",
         "type": "yii\\base\\ModelEvent",
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
     },
     {
-        "class": "craft\\commerce\\models\\Currency",
+        "class": "craft\\commerce\\models\\CatalogPricingRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\Coupon",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\Coupon",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\Coupon",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\Coupon",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\Coupon",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\Coupon",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\Coupon",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -16730,6 +18584,216 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\models\\InventoryFulfillmentLevel",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryFulfillmentLevel",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryFulfillmentLevel",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryFulfillmentLevel",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryFulfillmentLevel",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryFulfillmentLevel",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryFulfillmentLevel",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryItem",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryItem",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryItem",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryItem",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryItem",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryItem",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryItem",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLevel",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLevel",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLevel",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLevel",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLevel",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLevel",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLevel",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLocation",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLocation",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLocation",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLocation",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLocation",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLocation",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryLocation",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryTransaction",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryTransaction",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryTransaction",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryTransaction",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryTransaction",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryTransaction",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\InventoryTransaction",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\models\\LineItem",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -16809,90 +18873,6 @@
     },
     {
         "class": "craft\\commerce\\models\\LineItemStatus",
-        "name": "EVENT_AFTER_VALIDATE",
-        "type": "yii\\base\\Event",
-        "desc": "an event raised at the end of `validate()`"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteShippingSettings",
-        "name": "EVENT_INIT",
-        "type": "yii\\base\\Event",
-        "desc": "The event that is triggered after the model's init cycle"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteShippingSettings",
-        "name": "EVENT_DEFINE_BEHAVIORS",
-        "type": "craft\\events\\DefineBehaviorsEvent",
-        "desc": "The event that is triggered when defining the class behaviors"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteShippingSettings",
-        "name": "EVENT_DEFINE_RULES",
-        "type": "craft\\events\\DefineRulesEvent",
-        "desc": "The event that is triggered when defining the model rules"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteShippingSettings",
-        "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineFieldsEvent",
-        "desc": "The event that is triggered when defining the arrayable fields"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteShippingSettings",
-        "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineFieldsEvent",
-        "desc": "The event that is triggered when defining the extra arrayable fields"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteShippingSettings",
-        "name": "EVENT_BEFORE_VALIDATE",
-        "type": "yii\\base\\ModelEvent",
-        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteShippingSettings",
-        "name": "EVENT_AFTER_VALIDATE",
-        "type": "yii\\base\\Event",
-        "desc": "an event raised at the end of `validate()`"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteTaxSettings",
-        "name": "EVENT_INIT",
-        "type": "yii\\base\\Event",
-        "desc": "The event that is triggered after the model's init cycle"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteTaxSettings",
-        "name": "EVENT_DEFINE_BEHAVIORS",
-        "type": "craft\\events\\DefineBehaviorsEvent",
-        "desc": "The event that is triggered when defining the class behaviors"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteTaxSettings",
-        "name": "EVENT_DEFINE_RULES",
-        "type": "craft\\events\\DefineRulesEvent",
-        "desc": "The event that is triggered when defining the model rules"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteTaxSettings",
-        "name": "EVENT_DEFINE_FIELDS",
-        "type": "craft\\events\\DefineFieldsEvent",
-        "desc": "The event that is triggered when defining the arrayable fields"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteTaxSettings",
-        "name": "EVENT_DEFINE_EXTRA_FIELDS",
-        "type": "craft\\events\\DefineFieldsEvent",
-        "desc": "The event that is triggered when defining the extra arrayable fields"
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteTaxSettings",
-        "name": "EVENT_BEFORE_VALIDATE",
-        "type": "yii\\base\\ModelEvent",
-        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
-    },
-    {
-        "class": "craft\\commerce\\models\\LiteTaxSettings",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -17276,6 +19256,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\models\\PurchasableStore",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\PurchasableStore",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\PurchasableStore",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\PurchasableStore",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\PurchasableStore",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\PurchasableStore",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\PurchasableStore",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\models\\Sale",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -17612,6 +19634,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\models\\SiteStore",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\SiteStore",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\SiteStore",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\SiteStore",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\SiteStore",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\SiteStore",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\SiteStore",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\models\\Store",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -17649,6 +19713,48 @@
     },
     {
         "class": "craft\\commerce\\models\\Store",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\StoreSettings",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\StoreSettings",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\StoreSettings",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\StoreSettings",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\StoreSettings",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\StoreSettings",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\StoreSettings",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -17817,6 +19923,342 @@
     },
     {
         "class": "craft\\commerce\\models\\Transaction",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\DeactivateInventoryLocation",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\DeactivateInventoryLocation",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\DeactivateInventoryLocation",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\DeactivateInventoryLocation",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\DeactivateInventoryLocation",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\DeactivateInventoryLocation",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\DeactivateInventoryLocation",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryCommittedMovement",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryCommittedMovement",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryCommittedMovement",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryCommittedMovement",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryCommittedMovement",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryCommittedMovement",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryCommittedMovement",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryFulfillMovement",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryFulfillMovement",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryFulfillMovement",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryFulfillMovement",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryFulfillMovement",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryFulfillMovement",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryFulfillMovement",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryLocationDeactivatedMovement",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryLocationDeactivatedMovement",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryLocationDeactivatedMovement",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryLocationDeactivatedMovement",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryLocationDeactivatedMovement",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryLocationDeactivatedMovement",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryLocationDeactivatedMovement",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryManualMovement",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryManualMovement",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryManualMovement",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryManualMovement",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryManualMovement",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryManualMovement",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryManualMovement",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryRestockMovement",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryRestockMovement",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryRestockMovement",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryRestockMovement",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryRestockMovement",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryRestockMovement",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryRestockMovement",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryTransferMovement",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryTransferMovement",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryTransferMovement",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryTransferMovement",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryTransferMovement",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryTransferMovement",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\InventoryTransferMovement",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevel",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevel",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevel",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevel",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevel",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevel",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevel",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -18200,6 +20642,222 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricing",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\CatalogPricingRuleUser",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\records\\Coupon",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
@@ -18915,6 +21573,150 @@
     },
     {
         "class": "craft\\commerce\\records\\Gateway",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryItem",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\InventoryLocation",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -20216,6 +23018,78 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\PurchasableStore",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\records\\Sale",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
@@ -20864,6 +23738,78 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\SiteStore",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\records\\Store",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
@@ -20931,6 +23877,78 @@
     },
     {
         "class": "craft\\commerce\\records\\Store",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\StoreSettings",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -21804,6 +24822,36 @@
         "name": "EVENT_REGISTER_AVAILABLE_SHIPPING_METHODS",
         "type": "craft\\commerce\\services\\RegisterShippingMethods",
         "desc": "The event that is triggered for registration of additional shipping methods."
+    },
+    {
+        "class": "craft\\commerce\\services\\Stores",
+        "name": "EVENT_BEFORE_DELETE_STORE",
+        "type": "craft\\commerce\\events\\DeleteStoreEvent",
+        "desc": "The event that is triggered before a site is deleted."
+    },
+    {
+        "class": "craft\\commerce\\services\\Stores",
+        "name": "EVENT_AFTER_DELETE_STORE",
+        "type": "craft\\commerce\\events\\DeleteStoreEvent",
+        "desc": "The event that is triggered after a store is deleted"
+    },
+    {
+        "class": "craft\\commerce\\services\\Stores",
+        "name": "EVENT_BEFORE_APPLY_STORE_DELETE",
+        "type": "craft\\commerce\\events\\DeleteStoreEvent",
+        "desc": "The event that is triggered before a store delete is applied to the database."
+    },
+    {
+        "class": "craft\\commerce\\services\\Stores",
+        "name": "EVENT_BEFORE_SAVE_STORE",
+        "type": "craft\\commerce\\events\\StoreEvent",
+        "desc": "The event that is triggered before a store is saved."
+    },
+    {
+        "class": "craft\\commerce\\services\\Stores",
+        "name": "EVENT_AFTER_SAVE_STORE",
+        "type": "craft\\commerce\\events\\StoreEvent",
+        "desc": "The event that is triggered after a store is saved."
     },
     {
         "class": "craft\\commerce\\services\\Subscriptions",
