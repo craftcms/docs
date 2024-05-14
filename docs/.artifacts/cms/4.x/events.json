@@ -38284,7 +38284,7 @@
         "class": "craft\\services\\SystemMessages",
         "name": "EVENT_REGISTER_MESSAGES",
         "type": "craft\\events\\RegisterEmailMessagesEvent",
-        "desc": "The event that is triggered when registering email messages."
+        "desc": "The event that is triggered when registering system messages."
     },
     {
         "class": "craft\\services\\Tags",
