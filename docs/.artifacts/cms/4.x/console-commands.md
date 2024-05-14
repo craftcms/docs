@@ -1933,6 +1933,10 @@ Re-saves user addresses.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-assets">
     <a href="#resave-assets" class="header-anchor">#</a>
@@ -2004,6 +2008,10 @@ Re-saves assets.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-categories">
     <a href="#resave-categories" class="header-anchor">#</a>
@@ -2073,6 +2081,10 @@ Re-saves categories.
 
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
 
 
 
@@ -2172,6 +2184,10 @@ Re-saves entries.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-matrix-blocks">
     <a href="#resave-matrix-blocks" class="header-anchor">#</a>
@@ -2253,6 +2269,10 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-tags">
     <a href="#resave-tags" class="header-anchor">#</a>
@@ -2324,6 +2344,10 @@ Re-saves tags.
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
 
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
 
 <h3 id="resave-users">
     <a href="#resave-users" class="header-anchor">#</a>
@@ -2393,6 +2417,10 @@ Re-saves users.
 
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
 
 
 

@@ -324,6 +324,7 @@ This query is used to query for assets.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -371,6 +372,7 @@ This query is used to return the number of assets.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -418,6 +420,7 @@ This query is used to query for a single asset.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -474,6 +477,7 @@ This query is used to query for entries.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -542,6 +546,7 @@ This query is used to return the number of entries.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -610,6 +615,7 @@ This query is used to query for a single entry.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -669,6 +675,7 @@ This query is used to query for global sets.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -704,6 +711,7 @@ This query is used to query for a single global set.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -739,6 +747,7 @@ This query is used to query for users.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -783,6 +792,7 @@ This query is used to return the number of users.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -827,6 +837,7 @@ This query is used to query for a single user.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -871,6 +882,7 @@ This query is used to query for tags.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -907,6 +919,7 @@ This query is used to return the number of tags.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -943,6 +956,7 @@ This query is used to query for a single tag.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -979,6 +993,7 @@ This query is used to query for categories.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -1029,6 +1044,7 @@ This query is used to return the number of categories.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -1079,6 +1095,7 @@ This query is used to query for a single category.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -1134,6 +1151,7 @@ This query is used to query for addresses.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -1176,6 +1194,7 @@ This query is used to return the number of addresses.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
@@ -1218,6 +1237,7 @@ This query is used to query for a single address.
 | `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
 | `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
 | `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
 | `limit`| `Int` | Sets the limit for paginated results.
 | `orderBy`| `String` | Sets the field the returned elements should be ordered by.
 | `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
