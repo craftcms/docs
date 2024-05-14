@@ -8,20 +8,26 @@
 
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addOrderBy](#addorderby)                 | Adds additional ORDER BY columns to the query.
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only tags that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](craft4:craft\elements\Tag) objects.
+| [average](#average)                       | Returns the average of the specified column values.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.
+| [fields](#fields)                         | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [group](#group)                           | Narrows the query results based on the tag groups the tags belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
 | [id](#id)                                 | Narrows the query results based on the tags’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [language](#language)                     | Determines which site(s) the tags should be queried in, based on their language.
 | [limit](#limit)                           | Determines the number of tags that should be returned.
+| [max](#max)                               | Returns the maximum of the specified column values.
+| [min](#min)                               | Returns the minimum of the specified column values.
 | [offset](#offset)                         | Determines how many tags should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -31,6 +37,7 @@
 | [site](#site)                             | Determines which site(s) the tags should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the tags should be queried in, per the site’s ID.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the tags’ IDs in the `elements_sites` table.
+| [sum](#sum)                               | Returns the sum of the specified column values.
 | [title](#title)                           | Narrows the query results based on the tags’ titles.
 | [trashed](#trashed)                       | Narrows the query results to only tags that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the tags’ UIDs.
@@ -40,6 +47,19 @@
 
 
 <!-- textlint-enable -->
+
+
+#### `addOrderBy`
+
+Adds additional ORDER BY columns to the query.
+
+
+
+
+
+
+
+
 
 
 #### `afterPopulate`
@@ -107,6 +127,19 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -207,6 +240,45 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
+
+
+#### `fields`
+
+Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+
+A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
+This method should return an array of field names or field definitions.
+If the former, the field name will be treated as an object property name whose value will be used
+as the field value. If the latter, the array key should be the field name while the array value should be
+the corresponding field definition which can be either an object property name or a PHP callable
+returning the corresponding field value. The signature of the callable should be:
+
+```php
+function ($model, $field) {
+    // return field value
+}
+```
+
+For example, the following code declares four fields:
+
+- `email`: the field name is the same as the property name `email`;
+- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
+  values are obtained from the `first_name` and `last_name` properties;
+- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
+  and `last_name`.
+
+```php
+return [
+    'email',
+    'firstName' => 'first_name',
+    'lastName' => 'last_name',
+    'fullName' => function ($model) {
+        return $model->first_name . ' ' . $model->last_name;
+    },
+];
+```
+
+
 
 
 #### `fixedOrder`
@@ -384,6 +456,44 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
+#### `language`
+
+Determines which site(s) the tags should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches tags…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch tags from English sites #}
+{% set tags = craft.tags()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch tags from English sites
+$tags = \craft\elements\Tag::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 #### `limit`
 
 Determines the number of tags that should be returned.
@@ -405,6 +515,32 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `offset`
@@ -667,6 +803,19 @@ $tag = \craft\elements\Tag::find()
     ->one();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `title`

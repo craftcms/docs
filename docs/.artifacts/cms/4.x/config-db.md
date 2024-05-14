@@ -19,18 +19,6 @@ Defined by
 
 An array of key-value pairs of PDO attributes to pass into the PDO constructor.
 
-For example, when using the [MySQL PDO driver](https://php.net/manual/en/ref.pdo-mysql.php), if you wanted to enable a SSL database connection
-(assuming [SSL is enabled in MySQL](https://dev.mysql.com/doc/mysql-secure-deployment-guide/5.7/en/secure-deployment-secure-connections.html) and `'user'` can connect via SSL,
-you’d set these:
-
-```php
-->attributes([
-    PDO::MYSQL_ATTR_SSL_KEY => '/path/to/my/client-key.pem',
-    PDO::MYSQL_ATTR_SSL_CERT => '/path/to/my/client-cert.pem',
-    PDO::MYSQL_ATTR_SSL_CA => '/path/to/my/ca-cert.pem',
-])
-```
-
 
 
 ### `charset`
@@ -49,23 +37,6 @@ Defined by
 </div>
 
 The charset to use when creating tables.
-
-::: tip
-You can change the character set and collation across all existing database tables using this terminal command:
-
-```bash
-php craft db/convert-charset
-```
-:::
-
-::: code
-```php Static Config
-->charset('utf8mb4')
-```
-```shell Environment Override
-CRAFT_DB_CHARSET=utf8mb4
-```
-:::
 
 
 
@@ -89,30 +60,6 @@ Since
 
 The collation to use when creating tables.
 
-This is only used by MySQL. If null, the [charset’s](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#property-charset) default collation will be used.
-
-| Charset   | Default collation    |
-| --------- | -------------------- |
-| `utf8`    | `utf8_general_ci`    |
-| `utf8mb4` | `utf8mb4_0900_ai_ci` |
-
-::: tip
-You can change the character set and collation across all existing database tables using this terminal command:
-
-```bash
-php craft db/convert-charset
-```
-:::
-
-::: code
-```php Static Config
-->collation('utf8mb4_0900_ai_ci')
-```
-```shell Environment Override
-CRAFT_DB_COLLATION=utf8mb4_0900_ai_ci
-```
-:::
-
 
 
 ### `database`
@@ -131,15 +78,6 @@ Defined by
 </div>
 
 The name of the database to select.
-
-::: code
-```php Static Config
-->database('mydatabase')
-```
-```shell Environment Override
-CRAFT_DB_DATABASE=mydatabase
-```
-:::
 
 
 
@@ -160,15 +98,6 @@ Defined by
 
 The database driver to use. Either `mysql` for MySQL or `pgsql` for PostgreSQL.
 
-::: code
-```php Static Config
-->driver('mysql')
-```
-```shell Environment Override
-CRAFT_DB_DRIVER=mysql
-```
-:::
-
 
 
 ### `dsn`
@@ -187,21 +116,6 @@ Defined by
 </div>
 
 The Data Source Name (“DSN”) that tells Craft how to connect to the database.
-
-DSNs should begin with a driver prefix (`mysql:` or `pgsql:`), followed by driver-specific parameters.
-For example, `mysql:host=127.0.0.1;port=3306;dbname=acme_corp`.
-
-- MySQL parameters: <https://php.net/manual/en/ref.pdo-mysql.connection.php>
-- PostgreSQL parameters: <https://php.net/manual/en/ref.pdo-pgsql.connection.php>
-
-::: code
-```php Static Config
-->dsn('mysql:host=127.0.0.1;port=3306;dbname=acme_corp')
-```
-```shell Environment Override
-CRAFT_DB_DSN=mysql:host=127.0.0.1;port=3306;dbname=acme_corp
-```
-:::
 
 
 
@@ -222,15 +136,6 @@ Defined by
 
 The database password to connect with.
 
-::: code
-```php Static Config
-->password('super-secret')
-```
-```shell Environment Override
-CRAFT_DB_PASSWORD=super-secret
-```
-:::
-
 
 
 ### `port`
@@ -249,15 +154,6 @@ Defined by
 </div>
 
 The database server port. Defaults to 3306 for MySQL and 5432 for PostgreSQL.
-
-::: code
-```php Static Config
-->port(3306)
-```
-```shell Environment Override
-CRAFT_DB_PORT=3306
-```
-:::
 
 
 
@@ -278,20 +174,6 @@ Defined by
 
 The schema that Postgres is configured to use by default (PostgreSQL only).
 
-::: tip
-To force Craft to use the specified schema regardless of PostgreSQL’s `search_path` setting, you must enable
-the [setSchemaOnConnect()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-setschemaonconnect) setting.
-:::
-
-::: code
-```php Static Config
-->schema('myschema,public')
-```
-```shell Environment Override
-CRAFT_DB_SCHEMA=myschema,public
-```
-:::
-
 
 
 ### `server`
@@ -310,15 +192,6 @@ Defined by
 </div>
 
 The database server name or IP address. Usually `localhost` or `127.0.0.1`.
-
-::: code
-```php Static Config
-->server('localhost')
-```
-```shell Environment Override
-CRAFT_DB_SERVER=localhost
-```
-:::
 
 
 
@@ -342,20 +215,6 @@ Since
 
 Whether the [schema()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-schema) should be explicitly used for database queries (PostgreSQL only).
 
-::: warning
-This will cause an extra `SET search_path` SQL query to be executed per database connection. Ideally,
-PostgreSQL’s `search_path` setting should be configured to prioritize the desired schema.
-:::
-
-::: code
-```php Static Config
-->setSchemaOnConnect(true)
-```
-```shell Environment Override
-CRAFT_DB_SET_SCHEMA_ON_CONNECT=true
-```
-:::
-
 
 
 ### `tablePrefix`
@@ -375,15 +234,6 @@ Defined by
 
 If you’re sharing Craft installs in a single database (MySQL) or a single database and using a shared schema (PostgreSQL),
 you can set a table prefix here to avoid per-install table naming conflicts. This can be no more than 5 characters, and must be all lowercase.
-
-::: code
-```php Static Config
-->tablePrefix('craft_')
-```
-```shell Environment Override
-CRAFT_DB_TABLE_PREFIX=craft_
-```
-:::
 
 
 
@@ -405,15 +255,6 @@ Defined by
 MySQL only. If this is set, the CLI connection string (used for yiic) will connect to the Unix socket instead of
 the server and port. If this is specified, then `server` and `port` settings are ignored.
 
-::: code
-```php Static Config
-->unixSocket('/Applications/MAMP/tmp/mysql/mysql.sock')
-```
-```shell Environment Override
-CRAFT_DB_UNIX_SOCKET=/Applications/MAMP/tmp/mysql/mysql.sock
-```
-:::
-
 
 
 ### `url`
@@ -432,17 +273,6 @@ Defined by
 </div>
 
 The database connection URL, if one was provided by your hosting environment.
-
-If this is set, the values for [driver()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-driver), [user()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-user), [database()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-database), [server()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-server), [port()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-port), and [database()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-database) will be extracted from it.
-
-::: code
-```php Static Config
-->url('jdbc:mysql://database.foo:3306/mydb')
-```
-```shell Environment Override
-CRAFT_DB_URL=jdbc:mysql://database.foo:3306/mydb
-```
-:::
 
 
 
@@ -466,22 +296,6 @@ Since
 
 Whether batched queries should be executed on a separate, unbuffered database connection.
 
-This setting only applies to MySQL. It can be enabled when working with high volume content, to prevent
-PHP from running out of memory when querying too much data at once. (See
-<https://www.yiiframework.com/doc/guide/2.0/en/db-query-builder#batch-query-mysql> for an explanation
-of MySQL’s batch query limitations.)
-
-For more on Craft batch queries, see <https://craftcms.com/knowledge-base/query-batching-batch-each>.
-
-::: code
-```php Static Config
-->useUnbufferedConnections(true)
-```
-```shell Environment Override
-CRAFT_DB_USE_UNBUFFERED_CONNECTIONS=true
-```
-:::
-
 
 
 ### `user`
@@ -500,15 +314,6 @@ Defined by
 </div>
 
 The database username to connect with.
-
-::: code
-```php Static Config
-->user('db')
-```
-```shell Environment Override
-CRAFT_DB_USER=db
-```
-:::
 
 
 

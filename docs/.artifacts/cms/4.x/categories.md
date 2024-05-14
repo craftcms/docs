@@ -8,17 +8,20 @@
 
 | Param                                     | Description
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addOrderBy](#addorderby)                 | Adds additional ORDER BY columns to the query.
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [ancestorDist](#ancestordist)             | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                 | Narrows the query results to only categories that are ancestors of another category in its structure.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only categories that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching categories as arrays of data, rather than [Category](craft4:craft\elements\Category) objects.
+| [average](#average)                       | Returns the average of the specified column values.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the categories’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the categories’ last-updated dates.
 | [descendantDist](#descendantdist)         | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
 | [descendantOf](#descendantof)             | Narrows the query results to only categories that are descendants of another category in its structure.
+| [fields](#fields)                         | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [group](#group)                           | Narrows the query results based on the category groups the categories belong to.
 | [groupId](#groupid)                       | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
@@ -26,9 +29,12 @@
 | [id](#id)                                 | Narrows the query results based on the categories’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching categories as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [language](#language)                     | Determines which site(s) the categories should be queried in, based on their language.
 | [leaves](#leaves)                         | Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
 | [level](#level)                           | Narrows the query results based on the categories’ level within the structure.
 | [limit](#limit)                           | Determines the number of categories that should be returned.
+| [max](#max)                               | Returns the maximum of the specified column values.
+| [min](#min)                               | Returns the minimum of the specified column values.
 | [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the category that comes immediately after another category in its structure.
 | [offset](#offset)                         | Determines how many categories should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
@@ -45,6 +51,7 @@
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the categories’ IDs in the `elements_sites` table.
 | [slug](#slug)                             | Narrows the query results based on the categories’ slugs.
 | [status](#status)                         | Narrows the query results based on the categories’ statuses.
+| [sum](#sum)                               | Returns the sum of the specified column values.
 | [title](#title)                           | Narrows the query results based on the categories’ titles.
 | [trashed](#trashed)                       | Narrows the query results to only categories that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the categories’ UIDs.
@@ -54,6 +61,19 @@
 
 
 <!-- textlint-enable -->
+
+
+#### `addOrderBy`
+
+Adds additional ORDER BY columns to the query.
+
+
+
+
+
+
+
+
 
 
 #### `afterPopulate`
@@ -186,6 +206,19 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -351,6 +384,45 @@ $categories = \craft\elements\Category::find()
 ::: tip
 This can be combined with [descendantDist](#descendantdist) if you want to limit how far away the descendant categories can be.
 :::
+
+
+#### `fields`
+
+Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+
+A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
+This method should return an array of field names or field definitions.
+If the former, the field name will be treated as an object property name whose value will be used
+as the field value. If the latter, the array key should be the field name while the array value should be
+the corresponding field definition which can be either an object property name or a PHP callable
+returning the corresponding field value. The signature of the callable should be:
+
+```php
+function ($model, $field) {
+    // return field value
+}
+```
+
+For example, the following code declares four fields:
+
+- `email`: the field name is the same as the property name `email`;
+- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
+  values are obtained from the `first_name` and `last_name` properties;
+- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
+  and `last_name`.
+
+```php
+return [
+    'email',
+    'firstName' => 'first_name',
+    'lastName' => 'last_name',
+    'fullName' => function ($model) {
+        return $model->first_name . ' ' . $model->last_name;
+    },
+];
+```
+
+
 
 
 #### `fixedOrder`
@@ -555,6 +627,44 @@ $categories = \craft\elements\Category::find()
 :::
 
 
+#### `language`
+
+Determines which site(s) the categories should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches categories…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch categories from English sites #}
+{% set categories = craft.categories()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch categories from English sites
+$categories = \craft\elements\Category::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 #### `leaves`
 
 Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
@@ -639,6 +749,32 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `nextSiblingOf`
@@ -1138,6 +1274,19 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `title`

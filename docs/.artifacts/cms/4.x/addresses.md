@@ -8,20 +8,26 @@
 
 | Param                                     | Description
 | ----------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addOrderBy](#addorderby)                 | Adds additional ORDER BY columns to the query.
 | [administrativeArea](#administrativearea) | Narrows the query results based on the administrative area the assets belong to.
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only addresses that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching addresses as arrays of data, rather than [Address](craft4:craft\elements\Address) objects.
+| [average](#average)                       | Returns the average of the specified column values.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [countryCode](#countrycode)               | Narrows the query results based on the country the assets belong to.
 | [dateCreated](#datecreated)               | Narrows the query results based on the addresses’ creation dates.
 | [dateUpdated](#dateupdated)               | Narrows the query results based on the addresses’ last-updated dates.
+| [fields](#fields)                         | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [id](#id)                                 | Narrows the query results based on the addresses’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [language](#language)                     | Determines which site(s) the addresses should be queried in, based on their language.
 | [limit](#limit)                           | Determines the number of addresses that should be returned.
+| [max](#max)                               | Returns the maximum of the specified column values.
+| [min](#min)                               | Returns the minimum of the specified column values.
 | [offset](#offset)                         | Determines how many addresses should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [owner](#owner)                           | Sets the [ownerId](#ownerid) parameter based on a given owner element.
@@ -31,12 +37,26 @@
 | [relatedTo](#relatedto)                   | Narrows the query results to only addresses that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only addresses that match a search query.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
+| [sum](#sum)                               | Returns the sum of the specified column values.
 | [trashed](#trashed)                       | Narrows the query results to only addresses that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the addresses’ UIDs.
 | [with](#with)                             | Causes the query to return matching addresses eager-loaded with related elements.
 
 
 <!-- textlint-enable -->
+
+
+#### `addOrderBy`
+
+Adds additional ORDER BY columns to the query.
+
+
+
+
+
+
+
+
 
 
 #### `administrativeArea`
@@ -136,6 +156,19 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -270,6 +303,45 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
+#### `fields`
+
+Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+
+A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
+This method should return an array of field names or field definitions.
+If the former, the field name will be treated as an object property name whose value will be used
+as the field value. If the latter, the array key should be the field name while the array value should be
+the corresponding field definition which can be either an object property name or a PHP callable
+returning the corresponding field value. The signature of the callable should be:
+
+```php
+function ($model, $field) {
+    // return field value
+}
+```
+
+For example, the following code declares four fields:
+
+- `email`: the field name is the same as the property name `email`;
+- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
+  values are obtained from the `first_name` and `last_name` properties;
+- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
+  and `last_name`.
+
+```php
+return [
+    'email',
+    'firstName' => 'first_name',
+    'lastName' => 'last_name',
+    'fullName' => function ($model) {
+        return $model->first_name . ' ' . $model->last_name;
+    },
+];
+```
+
+
+
+
 #### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
@@ -380,6 +452,44 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
+#### `language`
+
+Determines which site(s) the addresses should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches addresses…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch addresses from English sites #}
+{% set addresses = craft.addresses()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch addresses from English sites
+$addresses = \craft\elements\Address::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 #### `limit`
 
 Determines the number of addresses that should be returned.
@@ -401,6 +511,32 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `offset`
@@ -639,6 +775,19 @@ $address = \craft\elements\Address::find()
     ->one();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `trashed`

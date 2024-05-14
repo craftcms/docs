@@ -8,22 +8,28 @@
 
 | Param                                       | Description
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addOrderBy](#addorderby)                   | Adds additional ORDER BY columns to the query.
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the Matrix blocks’ owners are drafts.
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only Matrix blocks that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft4:craft\elements\MatrixBlock) objects.
+| [average](#average)                         | Returns the average of the specified column values.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)                 | Narrows the query results based on the Matrix blocks’ creation dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the Matrix blocks’ last-updated dates.
 | [field](#field)                             | Narrows the query results based on the field the Matrix blocks belong to.
 | [fieldId](#fieldid)                         | Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.
+| [fields](#fields)                           | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
 | [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
 | [id](#id)                                   | Narrows the query results based on the Matrix blocks’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
+| [language](#language)                       | Determines which site(s) the Matrix blocks should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of Matrix blocks that should be returned.
+| [max](#max)                                 | Returns the maximum of the specified column values.
+| [min](#min)                                 | Returns the minimum of the specified column values.
 | [offset](#offset)                           | Determines how many Matrix blocks should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the Matrix blocks should be returned in. (If empty, defaults to `sortOrder ASC`.)
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
@@ -38,6 +44,7 @@
 | [siteId](#siteid)                           | Determines which site(s) the Matrix blocks should be queried in, per the site’s ID.
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the Matrix blocks’ IDs in the `elements_sites` table.
 | [status](#status)                           | Narrows the query results based on the Matrix blocks’ statuses.
+| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [trashed](#trashed)                         | Narrows the query results to only Matrix blocks that have been soft-deleted.
 | [type](#type)                               | Narrows the query results based on the Matrix blocks’ block types.
 | [typeId](#typeid)                           | Narrows the query results based on the Matrix blocks’ block types, per the types’ IDs.
@@ -47,6 +54,19 @@
 
 
 <!-- textlint-enable -->
+
+
+#### `addOrderBy`
+
+Adds additional ORDER BY columns to the query.
+
+
+
+
+
+
+
+
 
 
 #### `afterPopulate`
@@ -142,6 +162,19 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -309,6 +342,45 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
+#### `fields`
+
+Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+
+A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
+This method should return an array of field names or field definitions.
+If the former, the field name will be treated as an object property name whose value will be used
+as the field value. If the latter, the array key should be the field name while the array value should be
+the corresponding field definition which can be either an object property name or a PHP callable
+returning the corresponding field value. The signature of the callable should be:
+
+```php
+function ($model, $field) {
+    // return field value
+}
+```
+
+For example, the following code declares four fields:
+
+- `email`: the field name is the same as the property name `email`;
+- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
+  values are obtained from the `first_name` and `last_name` properties;
+- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
+  and `last_name`.
+
+```php
+return [
+    'email',
+    'firstName' => 'first_name',
+    'lastName' => 'last_name',
+    'fullName' => function ($model) {
+        return $model->first_name . ' ' . $model->last_name;
+    },
+];
+```
+
+
+
+
 #### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
@@ -419,6 +491,44 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
+#### `language`
+
+Determines which site(s) the Matrix blocks should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches Matrix blocks…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch Matrix blocks from English sites #}
+{% set MatrixBlocks = craft.matrixBlocks()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch Matrix blocks from English sites
+$MatrixBlocks = \craft\elements\MatrixBlock::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 #### `limit`
 
 Determines the number of Matrix blocks that should be returned.
@@ -440,6 +550,32 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `offset`
@@ -845,6 +981,19 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `trashed`

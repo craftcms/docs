@@ -8,6 +8,7 @@
 
 | Param                                     | Description
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addOrderBy](#addorderby)                 | Adds additional ORDER BY columns to the query.
 | [after](#after)                           | Narrows the query results to only entries that were posted on or after a certain date.
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [ancestorDist](#ancestordist)             | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
@@ -17,6 +18,7 @@
 | [authorGroup](#authorgroup)               | Narrows the query results based on the user group the entries’ authors belong to.
 | [authorGroupId](#authorgroupid)           | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
 | [authorId](#authorid)                     | Narrows the query results based on the entries’ authors.
+| [average](#average)                       | Returns the average of the specified column values.
 | [before](#before)                         | Narrows the query results to only entries that were posted before a certain date.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
@@ -29,14 +31,18 @@
 | [draftOf](#draftof)                       | Narrows the query results to only drafts of a given entry.
 | [drafts](#drafts)                         | Narrows the query results to only drafts entries.
 | [expiryDate](#expirydate)                 | Narrows the query results based on the entries’ expiry dates.
+| [fields](#fields)                         | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
 | [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
 | [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants in their structure.
 | [id](#id)                                 | Narrows the query results based on the entries’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [language](#language)                     | Determines which site(s) the entries should be queried in, based on their language.
 | [leaves](#leaves)                         | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
 | [level](#level)                           | Narrows the query results based on the entries’ level within the structure.
 | [limit](#limit)                           | Determines the number of entries that should be returned.
+| [max](#max)                               | Returns the maximum of the specified column values.
+| [min](#min)                               | Returns the minimum of the specified column values.
 | [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry in its structure.
 | [offset](#offset)                         | Determines how many entries should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
@@ -63,6 +69,7 @@
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the entries’ IDs in the `elements_sites` table.
 | [slug](#slug)                             | Narrows the query results based on the entries’ slugs.
 | [status](#status)                         | Narrows the query results based on the entries’ statuses.
+| [sum](#sum)                               | Returns the sum of the specified column values.
 | [title](#title)                           | Narrows the query results based on the entries’ titles.
 | [trashed](#trashed)                       | Narrows the query results to only entries that have been soft-deleted.
 | [type](#type)                             | Narrows the query results based on the entries’ entry types.
@@ -76,6 +83,19 @@
 <!-- textlint-enable -->
 
 
+#### `addOrderBy`
+
+Adds additional ORDER BY columns to the query.
+
+
+
+
+
+
+
+
+
+
 #### `after`
 
 Narrows the query results to only entries that were posted on or after a certain date.
@@ -84,9 +104,9 @@ Possible values include:
 
 | Value | Fetches entries…
 | - | -
-| `'2018-04-01'` | that were posted after 2018-04-01.
-| a [DateTime](https://php.net/class.datetime) object | that were posted after the date represented by the object.
-| `now`/`today`/`tomorrow`/`yesterday` | that were posted after midnight of the specified relative date.
+| `'2018-04-01'` | that were posted on or after 2018-04-01.
+| a [DateTime](https://php.net/class.datetime) object | that were posted on or after the date represented by the object.
+| `now`/`today`/`tomorrow`/`yesterday` | that were posted on or after midnight of the specified relative date.
 
 
 
@@ -339,6 +359,19 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `before`
@@ -703,6 +736,45 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `fields`
+
+Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
+
+A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
+This method should return an array of field names or field definitions.
+If the former, the field name will be treated as an object property name whose value will be used
+as the field value. If the latter, the array key should be the field name while the array value should be
+the corresponding field definition which can be either an object property name or a PHP callable
+returning the corresponding field value. The signature of the callable should be:
+
+```php
+function ($model, $field) {
+    // return field value
+}
+```
+
+For example, the following code declares four fields:
+
+- `email`: the field name is the same as the property name `email`;
+- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
+  values are obtained from the `first_name` and `last_name` properties;
+- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
+  and `last_name`.
+
+```php
+return [
+    'email',
+    'firstName' => 'first_name',
+    'lastName' => 'last_name',
+    'fullName' => function ($model) {
+        return $model->first_name . ' ' . $model->last_name;
+    },
+];
+```
+
+
+
+
 #### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
@@ -840,6 +912,44 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `language`
+
+Determines which site(s) the entries should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique](#unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch entries from English sites #}
+{% set entries = craft.entries()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch entries from English sites
+$entries = \craft\elements\Entry::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 #### `leaves`
 
 Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
@@ -924,6 +1034,32 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `nextSiblingOf`
@@ -1712,6 +1848,19 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `title`
