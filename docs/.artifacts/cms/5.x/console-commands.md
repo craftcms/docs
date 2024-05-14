@@ -59,17 +59,6 @@ db
 
 Lists the caches that can be flushed.
 
-## `ckeditor/convert`
-
-
-<h3 id="ckeditor-convert-redactor">
-    <a href="#ckeditor-convert-redactor" class="header-anchor">#</a>
-    <code>ckeditor/convert/redactor</code>
-</h3>
-
-
-Converts Redactor fields to CKEditor
-
 ## `clear-caches`
 
 Allows you to clear various Craft caches.
