@@ -86,15 +86,17 @@ Additional settings are available for some transform modes.
 
 When using the **Crop** mode, a **Default Focal Point** setting is revealed, allowing customization of which image area Craft should center the crop on when a [focal point](assets.md#focal-points) isn’t specified. Its options include:
 
-- Top-Left
-- Top-Center
-- Top-Right
-- Center-Left
-- Center-Center
-- Center-Right
-- Bottom-Left
-- Bottom-Center
-- Bottom-Right
+Label | Handle
+--- | ---
+Top-Left | `top-left`
+Top-Center | `top-center`
+Top-Right | `top-right`
+Center-Left | `center-left`
+Center-Center | `center-center`
+Center-Right | `center-right`
+Bottom-Left | `bottom-left`
+Bottom-Center | `bottom-center`
+Bottom-Right | `bottom-right`
 
 When a focal point _is_ known for an image, Craft will attempt to keep that point as close to the center of the crop as possible.
 
@@ -142,9 +144,7 @@ You can also apply the transform on the asset so any relevant properties are aut
 
 ## Defining Transforms in your Templates
 
-You can also define transforms directly in your templates.
-
-First, you create a hash that defines the transform’s parameters:
+You can also define transforms directly in your templates by creating a hash with the desired parameters:
 
 ```twig
 {% set thumb = {
@@ -184,7 +184,7 @@ It would look similar using `setTransform()` like we did in the previous section
 All the same settings available to [named transforms](#named-transforms) are available to template-defined transforms and transforms requested via [GraphQL](#graphql).
 
 - The `mode` property can be set to either `'crop'`, `'fit'`, `'letterbox'`, or `'stretch'`.
-- `width` and `height` can be set to integers, or omitted.
+- `width` and `height` can each be set to an integer, or omitted.
 - `quality` can be set to a number between 0 and 100, or omitted to use the <config4:defaultImageQuality> setting.
 - `format` can be set to `'jpg'`, `'gif'`, `'png'`, `'webp'`, `'avif'`, or omitted.
 - A `position` property (set to one of the [valid values](#crop) listed above) is supported when `mode` is set to `'crop'` or `'letterbox'`. The behavior is different for each [type of transform](#transform-modes).
@@ -205,7 +205,7 @@ Should you need to break from a named transform in a few places, you can specify
   height="{{ asset.height }}">
 ```
 
-This would accomplish the same thing as the example before it, except `quality` would be maxed out at 100 rather than whatever’s set on the named `'thumb'` transform.
+This would accomplish the same thing as the example before it, except `quality` would be maxed out at 100 rather than whatever was set on the named `'thumb'` transform.
 
 You can override settings like this with the `getUrl()` method, too:
 
