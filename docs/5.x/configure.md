@@ -312,7 +312,7 @@ Most values in the **Settings** area of Craft’s control panel are recorded in 
 
 For this reason, Craft provides a way to bind system settings to dynamic aliases and environment variables.
 
-![Craft’s autosuggest field, displaying a suitable match](images/site-base-url-setting.png)
+![Craft’s autosuggest field, displaying a suitable match](./images/site-base-url-setting.png)
 
 Whenever you see this UI, you can provide a valid alias or environment variable name, in addition to plain values. Craft will always store and display the raw, unparsed value, but uses [App::parseEnv()](craft5:craft\helpers\App::parseEnv()) when the value is consumed. Here are some examples of settings for which dynamic values are useful:
 
