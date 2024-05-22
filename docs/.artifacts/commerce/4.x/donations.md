@@ -11,6 +11,7 @@
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only elements that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching elements as arrays of data, rather than ElementClass objects.
+| [average](#average)                       | Returns the average of the specified column values.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the elements’ creation dates.
@@ -19,15 +20,19 @@
 | [id](#id)                                 | Narrows the query results based on the elements’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching elements as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [language](#language)                     | Determines which site(s) the elements should be queried in, based on their language.
 | [limit](#limit)                           | Determines the number of elements that should be returned.
+| [max](#max)                               | Returns the maximum of the specified column values.
+| [min](#min)                               | Returns the minimum of the specified column values.
 | [offset](#offset)                         | Determines how many elements should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the elements should be returned in. (If empty, defaults to `dateCreated DESC`.)
+| [orderBy](#orderby)                       | Determines the order that the elements should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [relatedTo](#relatedto)                   | Narrows the query results to only elements that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only elements that match a search query.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the elements’ IDs in the `elements_sites` table.
 | [sku](#sku)                               | Narrows the query results based on the SKU.
+| [sum](#sum)                               | Returns the sum of the specified column values.
 | [trashed](#trashed)                       | Narrows the query results to only elements that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the elements’ UIDs.
 | [with](#with)                             | Causes the query to return matching elements eager-loaded with related elements.
@@ -101,6 +106,19 @@ $elements = ElementClass::find()
     ->all();
 ```
 :::
+
+
+#### `average`
+
+Returns the average of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `cache`
@@ -313,6 +331,44 @@ $elements = ElementClass::find()
 :::
 
 
+#### `language`
+
+Determines which site(s) the elements should be queried in, based on their language.
+
+
+
+Possible values include:
+
+| Value | Fetches elements…
+| - | -
+| `'en'` | from sites with a language of `en`.
+| `['en-GB', 'en-US']` | from sites with a language of `en-GB` or `en-US`.
+| `['not', 'en-GB', 'en-US']` | not in sites with a language of `en-GB` or `en-US`.
+
+::: tip
+Elements that belong to multiple sites will be returned multiple times by default. If you
+only want unique elements to be returned, use [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) in conjunction with this.
+:::
+
+
+
+::: code
+```twig
+{# Fetch elements from English sites #}
+{% set elements = craft.queryFunction()
+  .language('en')
+  .all() %}
+```
+
+```php
+// Fetch elements from English sites
+$elements = ElementClass::find()
+    ->language('en')
+    ->all();
+```
+:::
+
+
 #### `limit`
 
 Determines the number of elements that should be returned.
@@ -334,6 +390,32 @@ $elements = ElementClass::find()
     ->all();
 ```
 :::
+
+
+#### `max`
+
+Returns the maximum of the specified column values.
+
+
+
+
+
+
+
+
+
+
+#### `min`
+
+Returns the minimum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `offset`
@@ -361,7 +443,8 @@ $elements = ElementClass::find()
 
 #### `orderBy`
 
-Determines the order that the elements should be returned in. (If empty, defaults to `dateCreated DESC`.)
+Determines the order that the elements should be returned in. (If empty, defaults to `dateCreated DESC,
+    elements.id`.)
 
 
 
@@ -549,6 +632,19 @@ $element = ElementClass::find()
     ->one();
 ```
 :::
+
+
+#### `sum`
+
+Returns the sum of the specified column values.
+
+
+
+
+
+
+
+
 
 
 #### `trashed`
