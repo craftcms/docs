@@ -88,6 +88,7 @@
 | [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
 | [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
 | [with](#with)                               | Causes the query to return matching entries eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
@@ -674,7 +675,9 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | for the entry with an ID of 1.
+| `[1, 2]` | for the entries with an ID of 1 or 2.
 | a [Entry](craft5:craft\elements\Entry) object | for the entry represented by the object.
+| an array of [Entry](craft5:craft\elements\Entry) objects | for the entries represented by the objects.
 | `'*'` | for any entry
 | `false` | that aren’t associated with a published entry
 
@@ -1799,6 +1802,7 @@ Possible values include:
 | `['foo', 'bar']` | in a section with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a section with a handle of `foo` or `bar`.
 | a [Section](craft5:craft\models\Section) object | in a section represented by the object.
+| `'*'` | in any section.
 
 
 
@@ -2350,6 +2354,19 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `withCustomFields`
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 
