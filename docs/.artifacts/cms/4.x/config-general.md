@@ -1136,7 +1136,7 @@ Since
 
 </div>
 
-The output format that database backups should use (PostgreSQL only).
+The output format to pass to `pg_dump` when backing up the database.
 
 
 
