@@ -57,7 +57,6 @@
 | [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
 | [width](#width)                             | Narrows the query results based on the assets’ image widths.
 | [with](#with)                               | Causes the query to return matching assets eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
 | [withTransforms](#withtransforms)           | Causes the query to return matching assets eager-loaded with image transform indexes.
 
 
@@ -1367,19 +1366,6 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
-
-
-#### `withCustomFields`
-
-Sets whether custom fields should be factored into the query.
-
-
-
-
-
-
-
-
 
 
 #### `withTransforms`

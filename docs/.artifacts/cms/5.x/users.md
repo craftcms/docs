@@ -54,7 +54,6 @@
 | [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
 | [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
 | [with](#with)                               | Causes the query to return matching users eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
 | [withGroups](#withgroups)                   | Causes the query to return matching users eager-loaded with their user groups.
 
 
@@ -1207,19 +1206,6 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
-
-
-#### `withCustomFields`
-
-Sets whether custom fields should be factored into the query.
-
-
-
-
-
-
-
-
 
 
 #### `withGroups`
