@@ -12,7 +12,6 @@
 | [afterPopulate](#afterpopulate)               | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)                 | Narrows the query results to only orders that are related to certain other elements.
 | [asArray](#asarray)                           | Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
-| [average](#average)                           | Returns the average of the specified column values.
 | [cache](#cache)                               | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [customer](#customer)                         | Narrows the query results based on the customer’s user account.
@@ -43,8 +42,6 @@
 | [itemTotal](#itemtotal)                       | Narrows the query results based on the order’s item total.
 | [language](#language)                         | Determines which site(s) the orders should be queried in, based on their language.
 | [limit](#limit)                               | Determines the number of orders that should be returned.
-| [max](#max)                                   | Returns the maximum of the specified column values.
-| [min](#min)                                   | Returns the minimum of the specified column values.
 | [number](#number)                             | Narrows the query results based on the order number.
 | [offset](#offset)                             | Determines how many orders should be skipped in the results.
 | [orderBy](#orderby)                           | Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
@@ -64,7 +61,6 @@
 | [shortNumber](#shortnumber)                   | Narrows the query results based on the order short number.
 | [siteSettingsId](#sitesettingsid)             | Narrows the query results based on the orders’ IDs in the `elements_sites` table.
 | [storeId](#storeid)                           | Narrows the query results to only orders that are related to the given store.
-| [sum](#sum)                                   | Returns the sum of the specified column values.
 | [total](#total)                               | Narrows the query results based on the total.
 | [totalDiscount](#totaldiscount)               | Narrows the query results based on the total discount.
 | [totalPaid](#totalpaid)                       | Narrows the query results based on the total paid amount.
@@ -166,19 +162,6 @@ $orders = \craft\commerce\elements\Order::find()
     ->all();
 ```
 :::
-
-
-#### `average`
-
-Returns the average of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `cache`
@@ -913,32 +896,6 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
-#### `max`
-
-Returns the maximum of the specified column values.
-
-
-
-
-
-
-
-
-
-
-#### `min`
-
-Returns the minimum of the specified column values.
-
-
-
-
-
-
-
-
-
-
 #### `number`
 
 Narrows the query results based on the order number.
@@ -1447,19 +1404,6 @@ Possible values include:
 | Value | Fetches orders…
 | - | -
 | `1` | with a `storeId` of `1`.
-
-
-
-
-#### `sum`
-
-Returns the sum of the specified column values.
-
-
-
-
-
-
 
 
 

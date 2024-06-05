@@ -12,7 +12,6 @@
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only subscriptions that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce5:craft\commerce\elements\Subscription) objects.
-| [average](#average)                         | Returns the average of the specified column values.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCanceled](#datecanceled)               | Narrows the query results based on the subscriptions’ cancellation date.
@@ -34,8 +33,6 @@
 | [isSuspended](#issuspended)                 | Narrows the query results to only subscriptions that are suspended.
 | [language](#language)                       | Determines which site(s) the subscriptions should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of subscriptions that should be returned.
-| [max](#max)                                 | Returns the maximum of the specified column values.
-| [min](#min)                                 | Returns the minimum of the specified column values.
 | [nextPaymentDate](#nextpaymentdate)         | Narrows the query results based on the subscriptions’ next payment dates.
 | [offset](#offset)                           | Determines how many subscriptions should be skipped in the results.
 | [onTrial](#ontrial)                         | Narrows the query results to only subscriptions that are on trial.
@@ -52,7 +49,6 @@
 | [search](#search)                           | Narrows the query results to only subscriptions that match a search query.
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the subscriptions’ IDs in the `elements_sites` table.
 | [status](#status)                           | Narrows the query results based on the subscriptions’ statuses.
-| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [trashed](#trashed)                         | Narrows the query results to only subscriptions that have been soft-deleted.
 | [trialDays](#trialdays)                     | Narrows the query results based on the number of trial days.
 | [uid](#uid)                                 | Narrows the query results based on the subscriptions’ UIDs.
@@ -144,19 +140,6 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
-
-
-#### `average`
-
-Returns the average of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `cache`
@@ -708,32 +691,6 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
-#### `max`
-
-Returns the maximum of the specified column values.
-
-
-
-
-
-
-
-
-
-
-#### `min`
-
-Returns the minimum of the specified column values.
-
-
-
-
-
-
-
-
-
-
 #### `nextPaymentDate`
 
 Narrows the query results based on the subscriptions’ next payment dates.
@@ -1097,19 +1054,6 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
     ->all();
 ```
 :::
-
-
-#### `sum`
-
-Returns the sum of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `trashed`

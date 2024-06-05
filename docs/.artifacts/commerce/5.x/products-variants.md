@@ -17,7 +17,6 @@ Product queries support the following parameters:
 | [afterPopulate](#product-afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#product-andrelatedto)               | Narrows the query results to only products that are related to certain other elements.
 | [asArray](#product-asarray)                         | Causes the query to return matching products as arrays of data, rather than [Product](commerce5:craft\commerce\elements\Product) objects.
-| [average](#product-average)                         | Returns the average of the specified column values.
 | [before](#product-before)                           | Narrows the query results to only products that were posted before a certain date.
 | [cache](#product-cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#product-clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
@@ -40,8 +39,6 @@ Product queries support the following parameters:
 | [inReverse](#product-inreverse)                     | Causes the query results to be returned in reverse order.
 | [language](#product-language)                       | Determines which site(s) the products should be queried in, based on their language.
 | [limit](#product-limit)                             | Determines the number of products that should be returned.
-| [max](#product-max)                                 | Returns the maximum of the specified column values.
-| [min](#product-min)                                 | Returns the minimum of the specified column values.
 | [offset](#product-offset)                           | Determines how many products should be skipped in the results.
 | [orderBy](#product-orderby)                         | Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
 | [postDate](#product-postdate)                       | Narrows the query results based on the products’ post dates.
@@ -56,7 +53,6 @@ Product queries support the following parameters:
 | [siteSettingsId](#product-sitesettingsid)           | Narrows the query results based on the products’ IDs in the `elements_sites` table.
 | [slug](#product-slug)                               | Narrows the query results based on the products’ slugs.
 | [status](#product-status)                           | Narrows the query results based on the products’ statuses.
-| [sum](#product-sum)                                 | Returns the sum of the specified column values.
 | [title](#product-title)                             | Narrows the query results based on the products’ titles.
 | [trashed](#product-trashed)                         | Narrows the query results to only products that have been soft-deleted.
 | [type](#product-type)                               | Narrows the query results based on the products’ types.
@@ -184,19 +180,6 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
-
-
-<h4 id="product-average"><a href="#product-average" class="header-anchor">#</a> <code>average</code></h4>
-
-Returns the average of the specified column values.
-
-
-
-
-
-
-
-
 
 
 <h4 id="product-before"><a href="#product-before" class="header-anchor">#</a> <code>before</code></h4>
@@ -808,32 +791,6 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-<h4 id="product-max"><a href="#product-max" class="header-anchor">#</a> <code>max</code></h4>
-
-Returns the maximum of the specified column values.
-
-
-
-
-
-
-
-
-
-
-<h4 id="product-min"><a href="#product-min" class="header-anchor">#</a> <code>min</code></h4>
-
-Returns the minimum of the specified column values.
-
-
-
-
-
-
-
-
-
-
 <h4 id="product-offset"><a href="#product-offset" class="header-anchor">#</a> <code>offset</code></h4>
 
 Determines how many products should be skipped in the results.
@@ -1229,19 +1186,6 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
-
-
-<h4 id="product-sum"><a href="#product-sum" class="header-anchor">#</a> <code>sum</code></h4>
-
-Returns the sum of the specified column values.
-
-
-
-
-
-
-
-
 
 
 <h4 id="product-title"><a href="#product-title" class="header-anchor">#</a> <code>title</code></h4>
