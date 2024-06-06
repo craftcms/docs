@@ -26,6 +26,8 @@ If this is your first time using Craft, it might feel a little bit empty—don�
 
 The appearance and organization of the control panel can differ based on what types of content you’ve set up, your permissions, user preferences, and the environment—but the general structure will always be the same.
 
+Craft also has multiple [editions](../editions.md), some of which give you access to additional control panel features.
+
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/entries/exhibits/38"
     id="tour"
@@ -41,15 +43,17 @@ The appearance and organization of the control panel can differ based on what ty
 <img src="../images/control-panel-tour-screen.png" alt="A representative screen from the Craft control panel">
 </BrowserShot>
 
-Let’s take a quick spin around a typical control panel “screen:”
-- On the left edge is the _main navigation_ <Poi label="1" target="tour" id="navigation" />. At the top of this bar, your system name and icon are displayed. Below, each [main section](#main-sections) of the control panel you have access to is linked, and the current one is highlighted.
-- At the top, the _global header_ <Poi label="2" target="tour" id="globalHeader" /> contains breadcrumbs (when working with nested content or settings) and the user menu.
+Let’s take a quick spin around a typical control panel _screen_:
+- On the left edge is the _main navigation_ <Poi label="1" target="tour" id="navigation" />. At the top of this bar, your system name and icon are displayed. Below, each [main section](#main-sections) of the control panel you have access to is linked, and the current one is highlighted. Click the **Toggle sidebar** button to collapse it and make more room for the page content.
+- At the top, the _global header_ <Poi label="2" target="tour" id="globalHeader" /> contains breadcrumbs (when working with nested content or settings), actions for the current screen, and the user menu.
 - The current screen’s _main container_ takes up the remainder of the horizontal space, and will scroll if the content is tall enough. Within this region, you’ll find some combination of the following features:
     - A _header_ <Poi label="3" target="tour" id="header" />, displaying a title and controls for the current screen;
     - A _sub-menu_ at the left edge (not pictured), listing siblings of the current screen;
     - A _content container_ <Poi label="4" target="tour" id="content" /> for the screen’s primary content (usually set off from the background on a lighter color);
     - _Tabs_, splitting the screen’s content or settings into logical groups (not pictured);
     - A _details_ <Poi label="5" target="tour" id="details" /> pane at the right edge, with metadata and controls specific to the type of content being viewed;
+
+You will see these same page components crop up in other screens—and even in [slideouts](#slideouts)!
 
 #### Main Sections
 
@@ -58,15 +62,15 @@ You may not see (or need) all these sections in your _main navigation_. They’l
 Section | Description
 ------- | -----------
 [Dashboard](#dashboard) | Customizable landing page.
-[Assets](../reference/element-types/assets.md) | Create and edit Asset elements.
-[Entries](../reference/element-types/entries.md) | Create and edit Entry elements.
-[Categories](../reference/element-types/categories.md) | Create and edit Category elements.
-[Globals](../reference/element-types/globals.md) | Manage Globals.
-[Users](../reference/element-types/users.md) | <Badge type="edition" vertical="middle" title="Only available in Craft Pro">Pro</Badge> Create and edit User elements.
+[Assets](../reference/element-types/assets.md) | Create and edit asset elements.
+[Entries](../reference/element-types/entries.md) | Create and edit entry elements.
+[Categories](../reference/element-types/categories.md) | Create and edit category elements.
+[Globals](../reference/element-types/globals.md) | Edit content in global sets.
+[Users](../reference/element-types/users.md) | <Badge type="edition" vertical="middle" title="Available in Craft Team">Team</Badge><Badge type="edition" vertical="middle" title="Available in Craft Pro">Pro</Badge> View and moderate users.
 [GraphQL](../development/graphql.md) | Configure GraphQL schemas, create tokens, and access the built-in playground.
 [Utilities](#utilities) | Get system info and perform a variety of upkeep actions.
 [Settings](#settings) | Configure Craft’s system settings and content model.
-[Plugin Store](#plugin-store) | Browse, install, and purchase Craft and plugin licenses from the official store.
+[Plugin Store](#plugin-store) | Browse, install, and purchase Craft and plugin licenses from the official plugin store.
 …and more! | Some plugins provide their own control panel screens; others may only have a pane in the [Settings](#settings) section.
 
 #### Announcements
@@ -135,7 +139,7 @@ We recommend that this is enabled only in development environments.
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/settings"
     :link="false"
-    caption="The settings screen in Craft."
+    caption="The settings screen in Craft Pro. Some tiles may only be available in paid editions of Craft."
     id="settings"
     :poi="{
         system: [80, 24],
@@ -151,10 +155,11 @@ System settings govern low-level Craft behaviors that often influence how other 
 
 Group | Description
 ----- | -----------
-**General** | Turn your site on or off, set a timezone, and configure the login page and site icon.
+**General** | Turn your site on or off, set a timezone, and configure the login page and site icons.
 **Sites** | Define [Sites and Site Groups](sites.md) to organize and localize your content.
 **Routes** | Manage [dynamic routes](routing.md#dynamic-routes).
 **Users** | Set [registration policies](user-management.md#public-registration), define your [permissions structure](user-management.md#permissions) with [user groups](user-management.md#user-groups), and add [custom fields](fields.md) to users.
+**Addresses** | Set up the field layout used by [address](../reference/element-types/addresses.md) elements.
 **Email** | Configure how Craft sends [email](mail.md).
 **Plugins** | Manage available [plugins](plugins.md).
 
@@ -164,8 +169,9 @@ Combined with [sites](sites.md), the **Content** section is where you design you
 
 Group | Description
 ----- | -----------
+**Sections** | Manage entry [sections](../reference/element-types/entries.md#sections).
+**Entry types** | Manage entry [types](../reference/element-types/entries.md#entry-types), used by sections and Matrix fields.
 **Fields** | Create and organize [custom fields](fields.md) available to your elements.
-**Sections** | Manage entry [sections](../reference/element-types/entries.md#sections) and [types](../reference/element-types/entries.md#entry-types).
 **Globals** | Configure [globals](../reference/element-types/globals.md).
 **Categories** | Define complex taxonomies with [category groups](../reference/element-types/categories.md#category-groups).
 **Tags** | Define simple taxonomies with [tag groups](../reference/element-types/tags.md#tag-groups).
@@ -176,12 +182,12 @@ Decide how you want to store and organize uploaded files.
 
 Group | Description
 ----- | -----------
+**Assets** | Create volumes for organizing [assets](../reference/element-types/assets.md) and attach them to filesystems, and configure [image transforms](../reference/element-types/assets.md#image-transforms).
 **Filesystems** | Set up local or remote storage for an [asset volume](../reference/element-types/assets.md#filesystems).
-**Volumes** | Create buckets for organizing [assets](../reference/element-types/assets.md), and attach them to filesystems.
 
 #### Plugins
 
-Additional tiles may appear in this row when installing [plugins](plugins.md).
+Additional tiles may appear in a fourth group, after installing [plugins](plugins.md). Plugin settings are also accessible via the <Journey path="Settings, Plugins" /> screen.
 
 ### Plugin Store
 
@@ -195,7 +201,7 @@ The control panel has some cool tricks up its sleeve.
 
 Slideouts are used in a number of situations to simplify or contextualize an editing experience.
 
-Any time you see an _element_ attached to a [relational field](relations.md) or in an [index](elements.md#indexes), you can double-click it to summon a _slideout_:
+Any time you see an [element chip or card](elements.md#chips-cards) attached to a [relational field](relations.md) (or within a [Matrix](../reference/field-types/matrix.md) field), or in an [index](elements.md#indexes), you can double-click it to summon a _slideout_.
 
 <BrowserShot url="https://my-craft-project.ddev.site/admin/entries/habitats/1234-eagle-canyon" :link="false" caption="Slideouts can also be opened from other slideouts! In this example, double-clicking “Canopy Carnivores” opened the current one; double-clicking “Bald Eagle” would open another; and so on.">
 <img src="../images/control-panel-slideouts.png" alt="A slideout opened from an attached entry">
@@ -204,10 +210,18 @@ Any time you see an _element_ attached to a [relational field](relations.md) or 
 Slideouts also work for creating new elements on-the-fly from an [element browser](elements.md#modals-contexts).
 
 ::: tip
-There is one exception, here: slideouts cannot be opened if the user doesn’t have permission to edit the element—even if they were able to attach it to a relational field.
+There is one exception, here: slideouts cannot be opened if the user doesn’t have [permission](user-management.md#permissions) to edit the element—even if they were able to select it from a relational field.
 :::
 
-While slideouts support most element edit screen features, you may find that it’s more comfortable to open it in a new window—just click the icon in the upper-right corner. Features you’d normally find in the sidebar have been tucked into a secondary panel for slideouts; this can be toggled with the button next to the pop-out link.
+While slideouts support most element edit screen features, you may find that it’s more comfortable to open it in a new window—just click the icon in the upper-right corner, or use the [action menu](#action-menus). Features you’d normally find in the sidebar have been tucked into a secondary panel for slideouts; this can be toggled with the button next to the pop-out link.
+
+### Action Menus
+
+Wherever you see a small button with three dots (<Icon kind="ellipses" />) on a chip, card, or breadcrumb, it opens an _action menu_. These menus are typically divided into two or more sections, with one dedicated to “destructive” actions like deletion or removal.
+
+![A Matrix block’s action menu](../images/matrix-block-action-menu.png)
+
+Each [element type](elements.md#element-types) provides its own set of actions—some of which may be dependent on the current user’s [permissions](user-management.md#permissions), or the characteristics of the individual element (like what entry type it is, which section it belongs to, or what asset filesystem it uses).
 
 ### Keyboard Shortcuts
 
