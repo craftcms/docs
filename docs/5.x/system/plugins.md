@@ -25,7 +25,7 @@ A plugin is a software package that supplements or alters Craft’s internal fun
 Every plugin is a Composer package, meaning they must be “required” by a project’s `composer.json` file before being [installed](#installing-a-plugin). Only plugins required by a project will appear in the screen above—to find _new_ plugins, visit the [Plugin Store](#the-plugin-store)!
 
 ::: tip
-If you want to build your own plugin, check out [Extending Craft](../extend/README.md).
+If you want to build your own plugin, check out the [Extending Craft](../extend/README.md) section.
 :::
 
 ## The Plugin Store
@@ -82,7 +82,7 @@ You may also install plugins with [Composer](https://getcomposer.org), by copyin
     php craft plugin/install commerce
     ```
 
-    (A plugin’s **handle** is provided in the installation command, and appears as the last segment in its Plugin Store URL.)
+    (A plugin’s **handle** is provided in the installation command, and appears as the last segment in its Plugin Store URL. It may be different than the package name.)
 
 ## Uninstalling a Plugin
 
@@ -101,12 +101,14 @@ composer remove craftcms/commerce
 ::: danger
 Do not remove a plugin package with Composer _before_ uninstalling it from the control panel or with Craft’s CLI. Many plugins include special migrations that perform essential database cleanup, and that is only possible if the source code remains at the time it is uninstalled.
 
-This may require a multi-step deployment to ensure plugins are safely removed:
+This may require a multi-step [deployment](../deploy.md) to ensure plugins have an opportunity to properly clean up after themselves:
 
 1. Uninstall the plugin from the control panel or via the CLI;
 1. Commit and deploy the resulting project config changes;
 1. Remove the underlying package from `composer.json`;
 1. Commit and deploy your updated `composer.lock`;
+
+While there is no inherent danger in a plugin’s tables being orphaned, it can complicate re-installing that plugin, down the line.
 :::
 
 You can also uninstall a plugin with Craft’s CLI, using its handle:
@@ -161,8 +163,6 @@ Once you’ve completed the checkout process, your plugin installation will auto
 
 ::: tip
 If you purchase a plugin license separately from a Craft install or need to update a license key, visit **Settings** → **Plugins** in the relevant site’s control panel. From that listing, you can enter a new key or [variable](../configure.md#control-panel-settings) for any commercial plugin.
-
-![Changing a plugin license key](../images/changing-plugin-license-key.gif)
 :::
 
 ### Managing Plugin Licenses
