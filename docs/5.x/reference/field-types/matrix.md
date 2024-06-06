@@ -49,40 +49,46 @@ The _maximum_ number of entries that can be created within the field. (Default i
 Choose how the nested elements are represented within the [field UI](#the-field):
 
   - **As cards**: Read-only [element cards](../../system/elements.md#chips-cards) that surface nested field data.
-  - **As inline-editable blocks**: Manage nested entries as though they were part of the parent form. In prior versions of Craft, this was the only display option for Matrix fields.
+  - **As inline-editable blocks**: Manage nested entries as though they were part of the current element. In prior versions of Craft, this was the _only_ display option for Matrix fields.
   - **As an element index**: A simplified [element index](../../system/elements.md#indexes) with sorting, searching, and filtering controls.
 
     When using the element index view mode, you can also allow authors to toggle between a card view and standard table view. Enabling the table view reveals controls for the columns that will be displayed, by default.
+
+#### “New” Button Label
+
+By default, the button authors use to create nested entries will be labeled **New entry**. You can override this label with one that better suits the intended content.
 
 ## The Field
 
 The interface of a Matrix field depends on its selected [view mode](#view-mode). 
 
-Traditionally, Matrix fields have used the **As inline-editable blocks** view mode, which makes the nested entries appear as though they are a repeating or modular region the main entry’s form. An empty Matrix field shows a single button, which will either immediately create a new nested entry (if there is only a single available entry type), or present a menu of entry types to select from:
+Traditionally, Matrix fields have used the **As inline-editable blocks** view mode, which makes the nested entries appear as though they are a repeating or modular region the main element’s form. An empty Matrix field shows a single button, which will either immediately create a new nested entry (if there is only a single available entry type), or present a menu of entry types to select from:
 
-![An empty Matrix field’s block types](../../images/fields-matrix-inline-empty.png)
+![An empty Matrix field’s entry types](../../images/fields-matrix-inline-empty.png)
 
 A new entry of the chosen type will be appended to the list:
 
-![A newly-added Quote block](../../images/fields-matrix-inline-new.png)
+![A newly-added Quote entry](../../images/fields-matrix-inline-new.png)
 
-You can add as many blocks to your Matrix field as you’d like—or at least as many as the field’s **Min Blocks** and **Max Blocks** settings allow.
+You can add as many nested entries to your Matrix field as you’d like—or at least as many as the field’s **Min Entries** and **Max Entries** settings allow.
 
 Each block has a menu that provides access to additional controls:
 
-![A Matrix block’s action menu](../../images/matrix-block-action-menu.png)
+![A nested entry’s action menu](../../images/matrix-block-action-menu.png)
 
 ::: tip
-If multiple blocks are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of them.
+If multiple nested entries are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of them.
 
 You can collapse inline Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
 
-Blocks can also be reordered by dragging the “Move” icon (<icon kind="move" />) at the end of the block’s title bar. If multiple blocks are selected, all the selected blocks will be going along for the ride.
+Inline-blocks can also be reordered by dragging the “Move” icon (<icon kind="move" />) at the end of the block’s title bar. If multiple blocks are selected, all the selected blocks will be going along for the ride.
 
 You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>A</kbd>, or selecting a range of blocks starting with the first and then <kbd>Shift</kbd>-clicking the last.
 :::
 
-The **As cards** view mode provides many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips--cards). Double-click any card to edit its content, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
+The **As cards** [view mode](#view-mode) provides many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips-cards). Double-click any card to edit its content in a slideout, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
+
+![An newly-created nested entry, represented as a card](../../images/fields-matrix-cards-new.png)
 
 Finally, the **As an element index** view mode behaves just like a normal element index—except it only ever shows the entries owned by that field. This mode is perfect for large data sets that may span multiple pages, need to be sorted by nested fields, or that would otherwise be unwieldy as blocks or cards.
 
@@ -100,8 +106,8 @@ Possible values include:
 
 | Value | Fetches elements… |
 | --- | --- |
-| `':empty:'` | that don’t have any Matrix blocks. |
-| `':notempty:'` | that have at least one Matrix block. |
+| `':empty:'` | that don’t have any nested entries. |
+| `':notempty:'` | that have at least one nested entry. |
 
 ::: code
 ```twig
@@ -130,9 +136,7 @@ If you have an element with a Matrix field in your [template](../../development/
 {% set nestedElements = entry.myFieldHandle %}
 ```
 
-That will give you an [Entry query](../element-types/entries.md#querying-entries), ready to load all the nested entries for a given field.
-
-To fetch the nested elements, call one of the [query execution methods](../../development/element-queries.md#executing-element-queries), or use it in a loop:
+That will give you an [Entry query](../element-types/entries.md#querying-entries), ready to load all the nested entries for a given field. To fetch the nested elements, call one of the [query execution methods](../../development/element-queries.md#executing-element-queries), or use it in a loop:
 
 ```twig
 {% set nestedEntries = entry.myFieldHandle.all() %}
@@ -248,9 +252,9 @@ $nestedTextEntries = $entry->myFieldHandle
 
 #### Eager Loading
 
-Nested entries can be [eager-loaded](../../development/eager-loading.md) with their owners using the special `.with()` query method. Eager-loading can greatly improve performance if you need to output one or more blocks within a list of other elements—like generating summaries from the first block of content in a list of blog posts.
+Nested entries can be [eager-loaded](../../development/eager-loading.md) with their owners using the special `.with()` query method. Eager-loading can greatly improve performance if you need to output one or more nested entries within a list of other elements—like generating summaries of articles in list of blog posts from their first text blocks.
 
-The new `.eagerly()` method simplifies this in situations where you need to output or act on nested entry information within a query for their owners. Take this list of recipes, for example:
+The new `.eagerly()` method simplifies this in situations where you need to output or act on nested entry information within a query for their owners. Take this list of recipes, where `steps` is a Matrix field:
 
 ```twig
 {% set latestRecipes = craft.entries()
@@ -278,24 +282,18 @@ The new `.eagerly()` method simplifies this in situations where you need to outp
 
 ### Saving Matrix Fields
 
-::: danger
-This section has not been adapted for Craft 5. Working with Matrix field data has changed dramatically.
-:::
+Working with nested entries is significantly more complex than other field types. The examples that follow assume some familiarity with [routing](../../system/routing.md) and [forms](../../development/forms.md), as well as a willingness to adapt the provided HTML (or extend it with JavaScript) to suit your needs.
 
-::: warning
-Working with nested entries is significantly more complex than other field types. The `form` examples that follow assume some familiarity with [how Craft routes and handles requests](../controller-actions.md), as well as a willingness to adapt and extend the provided HTML to suit your needs.
-:::
+If you have an element form (such as an [entry form](kb:entry-form)) that needs to manage content within a Matrix field, that data must be sent in a specific structure. We’re using JSON for the sake of its simple syntax, but the following examples will show you how to build a similarly-structured request with normal HTML `form` elements:
 
-If you have an element form (such as an [entry form](kb:entry-form)) that needs to manage content within a Matrix field, you will need to submit your Matrix field’s data in a specific structure. We’re using JSON for the sake of its simple syntax, but the following examples will show you how to build a similarly-structured request with normal form elements:
-
-```json
+```json{2,7}
 {
   "sortOrder": [
     321,
     654,
     "new:1"
   ],
-  "blocks": {
+  "entries": {
     "321": {
       "type": "myFirstTypeHandle",
       "fields": {
@@ -329,6 +327,8 @@ If you have an element form (such as an [entry form](kb:entry-form)) that needs 
 }
 ```
 
+The sections beginning with highlighted lines are covered below.
+
 #### Entry Order
 
 `sortOrder` should be submitted as an array of all the entry IDs you wish to persist (as well as any new entry identifiers), in the order they should be saved.
@@ -344,106 +344,131 @@ If you want all existing entries to persist in the same order they are currently
 ```
 
 ::: tip
-The `sortOrder` input elements do _not_ need to be adjacent in the DOM or as POST params—you are free to distribute and collocate them with each block’s data, if you wish.
+The `sortOrder` input elements do _not_ need to be adjacent in the DOM—you are free to distribute and collocate them with each entry’s data, if you wish. Wherever they are, though, they must ultimately be POSTed to Craft in the structure above.
 :::
 
 #### Entry Data
 
-All of your entry data should be nested under a `entries` key, and indexed by their IDs. Each block must submit its `type` (using the desired block type’s handle) and custom field data nested under a `fields` key.
+All of your entry data should be nested under a `entries` key, indexed by their ID. Each nested entry must submit its `type` (using the desired entry type’s handle) and custom field data nested under a `fields` key.
 
-Here’s how you can output form fields for existing blocks, for a Matrix field with two block types (`text` and `image`):
+Here’s how you can output form fields for existing entries, for a Matrix field with two entry types (`text` and `image`):
 
 ```twig
-{% if entry is defined %}
-  {% for block in entry.myFieldHandle.all() %}
-    {# Prefix the block's input names with `fields[myFieldHandle][blocks][<BlockID>]` #}
-    {% namespace "fields[myFieldHandle][blocks][#{block.id}]" %}
-      {{ hiddenInput('type', block.type) }}
+{% for nestedEntry in entry.myFieldHandle.all() %}
+  {# Prefix the nested entry’s input names with `fields[myFieldHandle][entries][<NestedEntryId>]` #}
+  {% namespace "fields[myFieldHandle][entries][#{nestedEntry.id}]" %}
+    {{ hiddenInput('type', nestedEntry.type) }}
 
-      {% switch block.type %}
-        {% case 'text' %}
-          <textarea name="fields[myTextFieldHandle]">
-            {{- block.myTextFieldHandle|raw -}}
-          </textarea>
-        {% case 'image' %}
-          {% set images = block.myAssetFieldHandle.all() %}
-          {% if images|length %}
-            <ul>
-              {% for image in block.myAssetFieldHandle.all() %}
-                <li>
-                  {{ image.getImg({ width: 100, height: 100 }) }}
-                  {{ hiddenInput('fields[myAssetFieldHandle][]', image.id) }}
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-      {% endswitch %}
-    {% endnamespace %}
-  {% endfor %}
-{% endif %}
+    {% switch nestedEntry.type %}
+      {% case 'text' %}
+        {# Output fields relevant to the “Text” entry type: #}
+        <textarea name="fields[myTextFieldHandle]">
+          {{- nestedEntry.myTextFieldHandle|raw -}}
+        </textarea>
+      {% case 'image' %}
+        {% set images = nestedEntry.myAssetFieldHandle.all() %}
+        {% if images|length %}
+          <ul>
+            {% for image in nestedEntry.myAssetFieldHandle.all() %}
+              <li>
+                {{ image.getImg({ width: 100, height: 100 }) }}
+                {{ hiddenInput('fields[myAssetFieldHandle][]', image.id) }}
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+    {% endswitch %}
+  {% endnamespace %}
+{% endfor %}
 ```
 
 ::: tip
-Outputting form fields for existing blocks is completely optional. As long as the block IDs are listed in the `sortOrder` array, they will persist even if they are excluded from the form data.
+Outputting form fields for existing nested entries is completely optional. As long as those entries’ IDs are listed in the `sortOrder` array, they will persist even if their content was omitted from the form data.
 :::
 
-#### New Blocks
+Craft also accepts nested entries’ UUIDs under the `sortOrder` key, so long as the `entries` are indexed with UUIDs _prefixed by `uid:`_. The structure would then look like this:
 
-To _add_ a block in a front-end form, you’ll need a unique, temporary identifier for it, prefixed with `new:`.  Append that “ID” to the `sortOrder` array, and use it when constructing the block’s form inputs.
+```js{3-4,7,10}
+{
+  "sortOrder": [
+    "a86e9189-3bc8-4e87-ba52-58222b44c066",
+    "8e7f2123-e684-4075-8680-175c5e4ab215",
+  ],
+  "entries": {
+    "uid:a86e9189-3bc8-4e87-ba52-58222b44c066": {
+      // ...
+    },
+    "uid:8e7f2123-e684-4075-8680-175c5e4ab215": {
+      // ...
+    },
+  }
+}
+```
 
-For example, the first new block that is added to the form could have an “ID” of `new:1`, so its `type` input name would end up looking like this (ignoring for a moment any `namespace` tags):
+<a name="new-blocks"></a>
+
+#### New Entries
+
+To _add_ an entry from a front-end form, you’ll need a unique, temporary identifier for it, prefixed with `new:`.  Append that “ID” to the `sortOrder` array, and use it when constructing the entry’s form inputs.
+
+For example, the first new entry that is added to the form could have an “ID” of `new:1`, so its `type` input name would end up looking like this (ignoring for a moment any `namespace` tags):
 
 ```html
 <input type="hidden" name="fields[myFieldHandle][new:1][type]" value="text" />
 ```
 
-Then define the form inputs for any additional blocks that should be appended to the input.
+Then define the form inputs for any additional entries that should be appended to the input.
 
 ```twig
 {{ hiddenInput('fields[myFieldHandle][sortOrder][]', 'new:1') }}
 
-{# Prefix the block's input names with `fields[myFieldHandle][blocks][new:1]` #}
+{# Prefix the entry’s input names with `fields[myFieldHandle][blocks][new:1]` #}
 {% namespace "fields[myFieldHandle][blocks][new:1]" %}
+  {# This hidden `type` input will be expanded like the example above: #}
   {{ hiddenInput('type', 'text') }}
+
+  {# Custom fields still need the `fields` prefix: #}
   <textarea name="fields[myTextFieldHandle]"></textarea>
 {% endnamespace %}
 ```
 
-If you want to make the new block _optional_, you will need to give the user an opportunity to remove the inputs so they are not included in the request.
+If you want to make the new entry _optional_, you will need to give the user an opportunity to remove the inputs so they are not included in the request.
 
 ::: tip
-The flexibility of Matrix fields often demands some client-side JavaScript—appending blocks of different types, generating temporary IDs, rearranging blocks and updating sort order, etc. are all difficult problems to solve with plain HTML. Craft’s UI relies on a host of control panel-specific scripts and markup—and therefore is generally not usable in the front-end.
+The flexibility of Matrix fields often demands some client-side JavaScript—appending form fragments for different entry types, generating temporary IDs, rearranging entries and updating sort order, etc. are all difficult problems to solve with plain HTML. Craft’s UI relies on a host of control panel-specific scripts and markup—and therefore is generally not usable in the front-end.
 
 However: as long as the data you ultimately POST to Craft conforms to the schema above, it will work! If you have a preferred view library like Vue or React, you may be better prepared than you think—your task then shifts from dealing with manipulating DOM elements to transforming your components’ state into a [`FormData` object](https://developer.mozilla.org/en-US/docs/Web/API/FormData) with the right parameter names and values.
 :::
 
 #### Validation Errors
 
-Should you encounter [validation](../controller-actions.md#models-and-validation) issues within a Matrix field, Craft will set a [flash](../controller-actions.md#flashes) and add errors to the main element (under the Matrix field’s handle)—as well as on each block with problems.
+Should you encounter [validation](../../development/forms.md#models-and-validation) issues within a Matrix field, Craft will set a [flash](../../development/forms.md#flashes) and add errors to the main element (under the Matrix field’s handle)—as well as on each nested entry with problems.
 
-In these cases, it’s important to handle the Matrix block data appropriately—the blocks will be available directly on the main element as an array, and do not need to be fetched. In fact, trying to re-load the blocks from the database would mean you are working with the last-persisted state, rather than the blocks populated from the most recent request!
+In these cases, it’s important to handle the nested entry data appropriately—the entries will be available directly on the main element as an array, and do not need to be fetched. In fact, trying to re-load the entries from the database would mean you are working with the last-persisted state, rather than the entries populated from the most recent request!
 
 Instead, we’ll try three values:
 
-1. Attempt to use the field value as an element query (load the blocks fresh, assuming there are no pending changes hanging in-memory);
-1. Accept the value, verbatim (assuming Craft has left the in-memory blocks attached, and they _don’t_ need to be queried);
-1. Default to an empty array (this ensures whatever uses the `blocks` variable later on can safely assume it’s an array);
+1. Attempt to use the field value as an element query (load the entries fresh, assuming there are no pending changes hanging in-memory);
+1. Accept the value, verbatim (assuming Craft has left the in-memory entries attached, and they _don’t_ need to be queried);
+1. Default to an empty array (this ensures whatever uses the `nestedEntries` variable later on can safely assume it’s an array);
 
 ```twig
-{% set blocks = entry.myFieldHandle.all() ?? entry.myFieldHandle ?? [] %}
+{% set nestedEntries = entry.myFieldHandle.all() ?? entry.myFieldHandle ?? [] %}
 ```
 
 ::: tip
 The [null-coalescing operator](https://twig.symfony.com/doc/3.x/templates.html#other-operators) swallows errors that occur when attempting to access variables, properties, or methods that don’t exist.
 :::
 
-Temporary identifiers on new blocks do _not_ need to stay the same between requests (say, if you created two blocks but changed their order, then submitted and hit a validation error); you may output “new” blocks in the order Craft has provided them, re-keying those blocks:
+Temporary identifiers on new entries do _not_ need to stay the same between requests (say, if you created two entries but changed their order, then submitted and hit a validation error); you may output “new” entries in the order Craft has provided them, re-keying those entries:
 
 ```twig
-{% for block in blocks %}
-  {% set id = block.id ?? "new:#{loop.index}" %}
+{% for nestedEntry in nestedEntries %}
+  {% set id = nestedEntry.id ?? "new:#{loop.index}" %}
+
   {{ hiddenInput('sortOrder[]', id) }}
-  {{ hiddenInput("blocks[#{id}][type]", block.type.handle) }}
+  {{ hiddenInput("entries[#{id}][type]", nestedEntry.type.handle) }}
+
   {# ... #}
 {% endfor %}
 ```
