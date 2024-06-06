@@ -56,7 +56,7 @@ The Plugin Store will only show plugins that are compatible with the version of 
 
 ## Installing a Plugin
 
-Any compatible plugin can be installed by visiting its page in the control panel’s Plugin Store and clicking one of the **Try** or **Install** buttons in the sidebar.
+Any compatible plugin can be installed by visiting its page in the [control panel](control-panel.md)’s Plugin Store and clicking one of the **Try** or **Install** buttons in the sidebar.
 
 ### Via the Plugin Store
 
@@ -66,7 +66,7 @@ Plugins that require a paid license can be _trialed_ by choosing **Try** from th
 
 When you install a paid plugin, you will immediately be issued a license key—but you are not required to pay while evaluating plugins in a development environment.
 
-### Via the Composer
+### Via Composer
 
 You may also install plugins with [Composer](https://getcomposer.org), by copying and pasting the commands from the **Installation Instructions** toolbox on its page in the Plugin Store. The command is actually two steps (but combined into one for convenience):
 
@@ -89,7 +89,7 @@ You may also install plugins with [Composer](https://getcomposer.org), by copyin
 To uninstall a plugin, follow these steps:
 
 1. Navigate to **Settings** &rarr; **Plugins** in the control panel;
-1. Click the settings icon <Icon kind="settings" /> for the plugin you wish to remove;
+1. Click the actions icon (<Icon kind="ellipses" />) for the plugin you wish to remove;
 1. Select **Uninstall** from the dropdown menu;
 
 To completely scrub a plugin from your project, you must also remove the Composer dependency:
@@ -97,6 +97,8 @@ To completely scrub a plugin from your project, you must also remove the Compose
 ```bash
 composer remove craftcms/commerce
 ```
+
+If the plugin required configuration via code, you may also want to remove relevant files from your [`config/` directory](../system/directory-structure.md#config) and clean up variables in your `.env` file.
 
 ::: danger
 Do not remove a plugin package with Composer _before_ uninstalling it from the control panel or with Craft’s CLI. Many plugins include special migrations that perform essential database cleanup, and that is only possible if the source code remains at the time it is uninstalled.

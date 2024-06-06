@@ -84,6 +84,20 @@
       <path d="M9 11H3V16C3 17.1046 3.89543 18 5 18H9V11Z" fill="currentColor"></path>
       <path d="M11 18H15C16.1046 18 17 17.1046 17 16V11H11V18Z" fill="currentColor"></path>
     </svg>
+
+    <svg
+      v-if="kind == 'ellipses'"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <title>Ellipses</title>
+      <circle cx="4" cy="10" r="2" fill="currentColor" />
+      <circle cx="10" cy="10" r="2" fill="currentColor" />
+      <circle cx="16" cy="10" r="2" fill="currentColor" />
+    </svg>
   </div>
 </template>
 
