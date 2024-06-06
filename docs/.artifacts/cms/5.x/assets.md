@@ -12,7 +12,6 @@
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only assets that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching assets as arrays of data, rather than [Asset](craft5:craft\elements\Asset) objects.
-| [average](#average)                         | Returns the average of the specified column values.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)                 | Narrows the query results based on the assets’ creation dates.
@@ -34,8 +33,6 @@
 | [kind](#kind)                               | Narrows the query results based on the assets’ file kinds.
 | [language](#language)                       | Determines which site(s) the assets should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of assets that should be returned.
-| [max](#max)                                 | Returns the maximum of the specified column values.
-| [min](#min)                                 | Returns the minimum of the specified column values.
 | [offset](#offset)                           | Determines how many assets should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -49,7 +46,6 @@
 | [siteId](#siteid)                           | Determines which site(s) the assets should be queried in, per the site’s ID.
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the assets’ IDs in the `elements_sites` table.
 | [size](#size)                               | Narrows the query results based on the assets’ file sizes (in bytes).
-| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [title](#title)                             | Narrows the query results based on the assets’ titles.
 | [trashed](#trashed)                         | Narrows the query results to only assets that have been soft-deleted.
 | [uid](#uid)                                 | Narrows the query results based on the assets’ UIDs.
@@ -145,19 +141,6 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
-
-
-#### `average`
-
-Returns the average of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `cache`
@@ -761,32 +744,6 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-#### `max`
-
-Returns the maximum of the specified column values.
-
-
-
-
-
-
-
-
-
-
-#### `min`
-
-Returns the minimum of the specified column values.
-
-
-
-
-
-
-
-
-
-
 #### `offset`
 
 Determines how many assets should be skipped in the results.
@@ -1110,19 +1067,6 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
-
-
-#### `sum`
-
-Returns the sum of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `title`

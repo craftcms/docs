@@ -16,7 +16,6 @@
 | [assetUploaders](#assetuploaders)           | Narrows the query results to only users that have uploaded an asset.
 | [authorOf](#authorof)                       | Narrows the query results to users who are the author of the given entry.
 | [authors](#authors)                         | Narrows the query results to only users that are authors of an entry.
-| [average](#average)                         | Returns the average of the specified column values.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [can](#can)                                 | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
@@ -39,8 +38,6 @@
 | [lastLoginDate](#lastlogindate)             | Narrows the query results based on the users’ last login dates.
 | [lastName](#lastname)                       | Narrows the query results based on the users’ last names.
 | [limit](#limit)                             | Determines the number of users that should be returned.
-| [max](#max)                                 | Returns the maximum of the specified column values.
-| [min](#min)                                 | Returns the minimum of the specified column values.
 | [offset](#offset)                           | Determines how many users should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 | [preferSites](#prefersites)                 | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -51,7 +48,6 @@
 | [search](#search)                           | Narrows the query results to only users that match a search query.
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the users’ IDs in the `elements_sites` table.
 | [status](#status)                           | Narrows the query results based on the users’ statuses.
-| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [trashed](#trashed)                         | Narrows the query results to only users that have been soft-deleted.
 | [uid](#uid)                                 | Narrows the query results based on the users’ UIDs.
 | [username](#username)                       | Narrows the query results based on the users’ usernames.
@@ -220,19 +216,6 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
-
-
-#### `average`
-
-Returns the average of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `cache`
@@ -844,32 +827,6 @@ $users = \craft\elements\User::find()
 :::
 
 
-#### `max`
-
-Returns the maximum of the specified column values.
-
-
-
-
-
-
-
-
-
-
-#### `min`
-
-Returns the minimum of the specified column values.
-
-
-
-
-
-
-
-
-
-
 #### `offset`
 
 Determines how many users should be skipped in the results.
@@ -1110,19 +1067,6 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
-
-
-#### `sum`
-
-Returns the sum of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `trashed`

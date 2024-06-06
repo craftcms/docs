@@ -48,6 +48,8 @@ Since
 
 How long a cart should go without being updated before it’s considered inactive.
 
+See [craft\helpers\ConfigHelper::durationInSeconds()](craft4:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
+
 
 
 ### `cartVariable`
@@ -89,6 +91,8 @@ Since
 
 Default URL to be loaded after using the [load cart controller action](orders-carts.md#loading-a-cart).
 
+If `null` (default), Craft’s default [`siteUrl`](config4:siteUrl) will be used.
+
 
 
 ### `purgeInactiveCarts`
@@ -108,6 +112,10 @@ Defined by
 
 Whether inactive carts should automatically be deleted from the database during garbage collection.
 
+::: tip
+You can control how long a cart should go without being updated before it gets deleted [`purgeInactiveCartsDuration`](#purgeinactivecartsduration) setting.
+:::
+
 
 
 ### `purgeInactiveCartsDuration`
@@ -126,6 +134,8 @@ Defined by
 </div>
 
 Default length of time before inactive carts are purged. (Defaults to 90 days.)
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](craft4:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
 
 
 
@@ -149,6 +159,12 @@ Since
 
 Whether the search index for a cart should be updated when saving the cart via `commerce/cart/*` controller actions.
 
+May be set to `false` to reduce performance impact on high-traffic sites.
+
+::: warning
+Setting this to `false` will result in fewer index update queue jobs, but you’ll need to manually re-index orders to ensure up-to-date cart search results in the control panel.
+:::
+
 
 
 ### `validateCartCustomFieldsOnSubmission`
@@ -170,6 +186,8 @@ Since
 </div>
 
 Whether to validate custom fields when a cart is updated.
+
+Set to `true` to allow custom content fields to return validation errors when a cart is updated.
 
 
 
@@ -211,6 +229,10 @@ Defined by
 
 URL for a user to resolve billing issues with their subscription.
 
+::: tip
+The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/plans/update-billing-details.twig).
+:::
+
 
 
 ## Payments
@@ -232,6 +254,35 @@ Defined by
 
 The path to the template that should be used to perform POST requests to offsite payment gateways.
 
+The template must contain a form that posts to the URL supplied by the `actionUrl` variable and outputs all hidden inputs with
+the `inputs` variable.
+
+```twig
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Redirecting...</title>
+</head>
+<body onload="document.forms[0].submit();">
+<form action="{{ actionUrl }}" method="post">
+  <p>Redirecting to payment page...</p>
+  <p>
+    {{ inputs|raw }}
+    <button type="submit">Continue</button>
+  </p>
+</form>
+</body>
+</html>
+```
+
+::: tip
+Since this template is simply used for redirecting, it only appears for a few seconds, so we suggest making it load fast with minimal
+images and inline styles to reduce HTTP requests.
+:::
+
+If empty (default), each gateway will decide how to handle after-payment redirects.
+
 
 
 ### `paymentCurrency`
@@ -250,6 +301,8 @@ Defined by
 </div>
 
 ISO codes for supported payment currencies.
+
+See [Payment Currencies](payment-currencies.md).
 
 
 
@@ -272,6 +325,14 @@ Defined by
 
 Unit type for dimension measurements.
 
+Options:
+
+- `'mm'`
+- `'cm'`
+- `'m'`
+- `'ft'`
+- `'in'`
+
 
 
 ### `weightUnits`
@@ -290,6 +351,12 @@ Defined by
 </div>
 
 Units to be used for weight measurements.
+
+Options:
+
+- `'g'`
+- `'kg'`
+- `'lb'`
 
 
 

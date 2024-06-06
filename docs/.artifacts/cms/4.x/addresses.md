@@ -13,7 +13,6 @@
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only addresses that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching addresses as arrays of data, rather than [Address](craft4:craft\elements\Address) objects.
-| [average](#average)                       | Returns the average of the specified column values.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [countryCode](#countrycode)               | Narrows the query results based on the country the assets belong to.
@@ -26,8 +25,6 @@
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [language](#language)                     | Determines which site(s) the addresses should be queried in, based on their language.
 | [limit](#limit)                           | Determines the number of addresses that should be returned.
-| [max](#max)                               | Returns the maximum of the specified column values.
-| [min](#min)                               | Returns the minimum of the specified column values.
 | [offset](#offset)                         | Determines how many addresses should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [owner](#owner)                           | Sets the [ownerId](#ownerid) parameter based on a given owner element.
@@ -37,7 +34,6 @@
 | [relatedTo](#relatedto)                   | Narrows the query results to only addresses that are related to certain other elements.
 | [search](#search)                         | Narrows the query results to only addresses that match a search query.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
-| [sum](#sum)                               | Returns the sum of the specified column values.
 | [trashed](#trashed)                       | Narrows the query results to only addresses that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the addresses’ UIDs.
 | [with](#with)                             | Causes the query to return matching addresses eager-loaded with related elements.
@@ -156,19 +152,6 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
-
-
-#### `average`
-
-Returns the average of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `cache`
@@ -513,32 +496,6 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
-#### `max`
-
-Returns the maximum of the specified column values.
-
-
-
-
-
-
-
-
-
-
-#### `min`
-
-Returns the minimum of the specified column values.
-
-
-
-
-
-
-
-
-
-
 #### `offset`
 
 Determines how many addresses should be skipped in the results.
@@ -775,19 +732,6 @@ $address = \craft\elements\Address::find()
     ->one();
 ```
 :::
-
-
-#### `sum`
-
-Returns the sum of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `trashed`

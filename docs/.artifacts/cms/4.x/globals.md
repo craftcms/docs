@@ -12,7 +12,6 @@
 | [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only global sets that are related to certain other elements.
 | [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft4:craft\elements\GlobalSet) objects.
-| [average](#average)                       | Returns the average of the specified column values.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)               | Narrows the query results based on the global sets’ creation dates.
@@ -25,8 +24,6 @@
 | [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
 | [language](#language)                     | Determines which site(s) the global sets should be queried in, based on their language.
 | [limit](#limit)                           | Determines the number of global sets that should be returned.
-| [max](#max)                               | Returns the maximum of the specified column values.
-| [min](#min)                               | Returns the minimum of the specified column values.
 | [offset](#offset)                         | Determines how many global sets should be skipped in the results.
 | [orderBy](#orderby)                       | Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
 | [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -36,7 +33,6 @@
 | [site](#site)                             | Determines which site(s) the global sets should be queried in.
 | [siteId](#siteid)                         | Determines which site(s) the global sets should be queried in, per the site’s ID.
 | [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the global sets’ IDs in the `elements_sites` table.
-| [sum](#sum)                               | Returns the sum of the specified column values.
 | [trashed](#trashed)                       | Narrows the query results to only global sets that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the global sets’ UIDs.
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
@@ -124,19 +120,6 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
-
-
-#### `average`
-
-Returns the average of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `cache`
@@ -481,32 +464,6 @@ $globalSets = \craft\elements\GlobalSet::find()
 :::
 
 
-#### `max`
-
-Returns the maximum of the specified column values.
-
-
-
-
-
-
-
-
-
-
-#### `min`
-
-Returns the minimum of the specified column values.
-
-
-
-
-
-
-
-
-
-
 #### `offset`
 
 Determines how many global sets should be skipped in the results.
@@ -767,19 +724,6 @@ $globalSet = \craft\elements\GlobalSet::find()
     ->one();
 ```
 :::
-
-
-#### `sum`
-
-Returns the sum of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `trashed`

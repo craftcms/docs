@@ -14,7 +14,6 @@
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only Matrix blocks that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft4:craft\elements\MatrixBlock) objects.
-| [average](#average)                         | Returns the average of the specified column values.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 | [dateCreated](#datecreated)                 | Narrows the query results based on the Matrix blocks’ creation dates.
@@ -28,8 +27,6 @@
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
 | [language](#language)                       | Determines which site(s) the Matrix blocks should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of Matrix blocks that should be returned.
-| [max](#max)                                 | Returns the maximum of the specified column values.
-| [min](#min)                                 | Returns the minimum of the specified column values.
 | [offset](#offset)                           | Determines how many Matrix blocks should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the Matrix blocks should be returned in. (If empty, defaults to `sortOrder ASC`.)
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
@@ -44,7 +41,6 @@
 | [siteId](#siteid)                           | Determines which site(s) the Matrix blocks should be queried in, per the site’s ID.
 | [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the Matrix blocks’ IDs in the `elements_sites` table.
 | [status](#status)                           | Narrows the query results based on the Matrix blocks’ statuses.
-| [sum](#sum)                                 | Returns the sum of the specified column values.
 | [trashed](#trashed)                         | Narrows the query results to only Matrix blocks that have been soft-deleted.
 | [type](#type)                               | Narrows the query results based on the Matrix blocks’ block types.
 | [typeId](#typeid)                           | Narrows the query results based on the Matrix blocks’ block types, per the types’ IDs.
@@ -162,19 +158,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
-
-
-#### `average`
-
-Returns the average of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `cache`
@@ -550,32 +533,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
-
-
-#### `max`
-
-Returns the maximum of the specified column values.
-
-
-
-
-
-
-
-
-
-
-#### `min`
-
-Returns the minimum of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `offset`
@@ -981,19 +938,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
-
-
-#### `sum`
-
-Returns the sum of the specified column values.
-
-
-
-
-
-
-
-
 
 
 #### `trashed`
