@@ -475,7 +475,7 @@ return [
             $generalConfig = Craft::$app->getConfig()->getGeneral();
 
             $config = [
-                'class' => craft\mutex\File::class,
+                'class' => craft\mutex\Mutex::class,
                 // Alter just this nested property of the main mutex component:
                 'mutex' => [
                     'class' => yii\mutex\FileMutex::class,
