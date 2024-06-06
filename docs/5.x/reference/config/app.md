@@ -466,10 +466,6 @@ If your queue driver supplies its own worker, set the <config5:runQueueAutomatic
 
 Craft uses the database for mutex (or “mutually exclusive”) locks, which means it will work natively in [load-balanced environments](kb:configuring-load-balanced-environments#mutex-locks).
 
-::: warning
-Prior to 4.6, enabling `devMode` would automatically switch from the default `FileMutex` driver to a special `NullMutex` driver to help avoid some virtualization bugs. Now, `NullMutex` is only used when a database connection is not available (i.e. prior to installation).
-:::
-
 You can configure a custom mutex driver by overriding the `mutex` component’s nested `$mutex` property:
 
 ```php
