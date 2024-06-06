@@ -12,6 +12,7 @@
       "terms": [
         "Plugin Store",
         "Craft ID",
+        "Craft Console",
         ["(\\s)pdf", "PDF"],
         ["(\\s)png", "PNG"],
         ["(\\s)jpg", "JPG"],
