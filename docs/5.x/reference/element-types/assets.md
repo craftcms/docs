@@ -43,21 +43,22 @@ All filesystems support the following options:
 ::: tip
 A filesystem’s **Base URL** can be set to an environment variable, or begin with an alias. [Read more](../../configure.md#control-panel-settings) about special configuration values.
 
-In the screenshot above, we’re using a `@cdn` [alias](../../configure.md#aliases) so that the URL can be updated across multiple filesystems with a single change.
+In the screenshot above, we’re using a `@cdn` [alias](../../configure.md#aliases) so that the URL can be updated across multiple filesystems with a single change in our general config file—or even with an environment variable, if the alias gets _its_ value from one!
 :::
 
-Multiple volumes can share a single filesystem, so long as they each have a unique and non-overlapping **Base Path**. If another volume is already mounted at the top level of a filesystem, it won’t be available for selection.
+Multiple volumes can share a single filesystem, so long as they each have a unique and non-overlapping **Base Path**. If another volume is already mounted at the top level of a filesystem, that filesystem won’t be available for selection.
 
 ### Local Filesystems
 
-Out of the box, the only type of filesystem Craft supports is a “Local” directory, on the same server. Local filesystems have one additional setting:
-- **Base Path**: Set the filesystem’s root directory on the server. This must be within your web root in order for public URLs to work.
+Out of the box, the only type of filesystem Craft supports is a “Local” directory, which stores files on the same server that PHP is running. Local filesystems have one additional setting:
+
+- **Base Path**: Set the filesystem’s root directory on the server. This must be within your web root for public URLs to work, and Craft/PHP must be able to write to it.
 
 ::: tip
-The **Base Path** can be set to an environment variable or begin with an alias, just like the **Base URL**. Declaring both a `@web` and `@webroot` alias can simplify the process of configuring local filesystems.
-:::
+The **Base Path** can be set to an environment variable or begin with an alias, just like the **Base URL**.
 
-Craft/PHP must be able to write to any directories you use for a local filesystem.
+Avoid using the `@web` alias for Local filesystems’ **Base URL** unless you’ve set it to a fixed value across all sites. Otherwise, Craft may construct asset URLs that include that subpath and not properly map to the filesystem’s root.
+:::
 
 <a id="remote-volumes"></a>
 
