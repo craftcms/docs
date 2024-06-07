@@ -51,7 +51,7 @@ Tag | Description
 
 ## `cache`
 
-This tag will cache a portion of your template, which can improve performance for subsequent requests because they’ll have less work to do.
+This tag will cache the output from a portion of your template, which can improve performance for subsequent requests.
 
 ```twig
 {% cache %}
@@ -61,30 +61,25 @@ This tag will cache a portion of your template, which can improve performance fo
 {% endcache %}
 ```
 
-Since the cache tag is for caching output and not logic, avoid caching `{{ csrfInput() }}`, form fields, or parts of templates where dynamic output is expected.
+Since the cache tag is for caching _output_ and not _logic_, avoid caching `{{ csrfInput() }}`, form fields, or parts of templates where the markup is highly dynamic or personalized.
 
 By default, cached output will be kept by URL without regard for the query string.
 
-While carefully-placed `{% cache %}` tags can offer significant boosts to performance, it’s important to know how the cache tag’s parameters can be used to fine-tune its behavior.
+While carefully-placed `{% cache %}` tags can offer significant boosts to performance, it’s important to know how the cache tag’s parameters affect its behavior.
 
 ::: tip
-The `{% cache %}` tag captures code and styles registered with `{% js %}`, \
-`{% script %}` and `{% css %}` tags.
+The `{% cache %}` tag captures code and styles registered with `{% js %}`, `{% script %}` and `{% css %}` tags.
 
 External references from `{% js %}` and `{% css %}` tags will be stored as well.
 :::
 
-<small>
-Warning: If you’re suffering from abnormal page load times, you may be experiencing a suboptimal hosting environment. Please consult a specialist before trying <b>{% cache %}</b>. <b>{% cache %}</b> is not a substitute for fast database connections, efficient templates, or moderate query counts. Possible side effects include stale content, excessively long-running background tasks, stuck tasks, and in rare cases, death. Ask your hosting provider if <b>{% cache %}</b> is right for you.
-</small>
-
 ### Parameters
 
-The `{% cache %}` tag supports the following parameters:
+The `{% cache %}` tag provides multiple ways to define how long a fragment will be cached. Parameters can be combined to achieve the desired result:
 
 #### `globally`
 
-Caches the output globally (for the current site locale), rather than on a per-URL basis.
+Caches the output globally (for the current site), rather than on a per-URL basis.
 
 ```twig
 {% cache globally %}
@@ -132,7 +127,7 @@ The accepted duration units are defined by <craft5:craft\helpers\DateTimeHelper:
 - `year`(`s`)
 - `week`(`s`)
 
-Tip: If this parameter is omitted, your <config5:cacheDuration> config setting will be used to define the default duration.
+If this parameter is omitted, your <config5:cacheDuration> config setting will be used to define the default duration.
 
 #### `until`
 
@@ -165,7 +160,7 @@ Prevents the `{% cache %}` tag from activating if a certain condition is met.
 ```
 
 ::: tip
-You can only use [if](#if) **_or_** [unless](#unless) in a single `{% cache %}` tag.
+You can only use [if](#if) _or_ [unless](#unless) in a single `{% cache %}` tag.
 :::
 
 ### Cache Clearing
@@ -182,22 +177,25 @@ php craft invalidate-tags/template
 
 ### When to Use `{% cache %}` Tags
 
-You should use `{% cache %}` tags any time you’ve got a template that’s causing a lot of database queries, or you’re doing something very computationally expensive with Twig.
+You should use `{% cache %}` tags when a template requires many database queries, or you’re doing something very computationally expensive with Twig. Some examples include…
 
-Here are some examples of when to use them:
-
-- A big list of entries
-- A Matrix field loop, where some of the blocks have relational fields on them, adding their own additional database queries to the page
-- Whenever you’re pulling in data from another site
+- N+1 queries: Lists of elements or other records for which [eager-loading](../../development/eager-loading.md) is not possible.
+- Other complex queries: Sections of pages that involve expensive database queries or post-processing, like sums, averages, etc.
+- External data: Pulling in data from a remote source, like a JSON endpoint or RSS feed.
 
 There are also some cases where it’s _not_ a good idea to use them:
 
-- Don’t use them to cache static text; that will be more expensive than simply outputting the text.
-- You can’t use them outside of top-level `{% block %}` tags within a template that extends another.
+- Static text: retrieving text from the cache is slower than just outputting it.
+- Logic: anything outside a `{% block %}` tag can’t be cached. Variables set inside a `cache` tag won't be available to the surrounding template when the output is retrieved from the cache.
+- Shuffled content: If the order of items on a page should be randomized each time the page is loaded, don’t cache it.
+
+Depending on your project’s infrastructure and [cache configuration](../config/app.md#cache), it may take more time to read a value from the cache than it would to regenerate it. If the cache tag does not affect response times, profile your templates in the debug toolbar to find your bottleneck.
 
 ::: tip
-The `{% cache %}` tag detects ungenerated [image transform](../../development/image-transforms.md) URLs within it. When it finds any, it holds off caching the template until the next request so those temporary image URLs aren’t cached.
+The `{% cache %}` tag detects un-generated [image transform](../../development/image-transforms.md) URLs within it and holds off caching the template until the next request so those temporary image URLs aren’t cached.
 :::
+
+To cache scalar values that don’t benefit from the cache tag’s automatic invalidation, you can use Craft’s caching API directly via `craft.app.cache`.
 
 ## `css`
 
