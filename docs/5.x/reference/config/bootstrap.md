@@ -98,6 +98,19 @@ Can be set to `false` to prevent Craft from setting PHP’s [log_errors](https:/
 define('CRAFT_LOG_PHP_ERRORS', false);
 ```
 
+## `CRAFT_REBRAND_PATH`
+
+Override the path where the [control panel](../../system/control-panel.md)’s **Login Page Logo** and **Site Icon** are stored, when uploaded via <Journey path="Settings, General" />. By default, they live in Craft’s `storage/` directory, which is typically excluded from version control.
+
+```php
+// Use a top-level `rebrand/` directory for the site logo + icon:
+define('CRAFT_REBRAND_PATH', '@root/rebrand');
+```
+
+::: tip
+Unlike other `*_PATH` settings, `CRAFT_REBRAND_PATH`’s value can include an [alias or other environment variable](../../configure.md#aliases-and-environment-variables) because it is only resolved after the application is fully initialized.
+:::
+
 ## `CRAFT_SECRETS_PATH`
 
 The path to a [secrets](../../configure.md#secrets) file, whose values are _not_ loaded into the environment.
