@@ -559,6 +559,14 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 Path to your project’s [`.env` file](../directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craftbasepath).
 
+## `CRAFT_EDITION`
+
+Craft’s active edition is typically set via [project config](../project-config.md), but you can override it for testing with a valid edition (one of ).
+
+::: warning
+It is possible to enable Craft editions that are not allowed by your current license. This means that you may see warnings in the control panel on public domains.
+:::
+
 ### `CRAFT_ENVIRONMENT`
 
 The environment name that [multi-environment configs](../config/README.md#multi-environment-configs) can reference when defining their environment-specific config arrays.
