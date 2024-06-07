@@ -56,13 +56,17 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 Path to your project’s [`.env` file](../../system/directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craft-base-path).
 
+## `CRAFT_EDITION`
+
+Craft’s active edition is typically set via [project config](../../system/project-config.md), but you can override it for testing with a valid edition from <craft5:craft\enums\CmsEdition>.
+
+::: warning
+It is possible to enable Craft editions that are not allowed by your current license. This means that you may see warnings in the control panel on public domains.
+:::
+
 ## `CRAFT_ENVIRONMENT`
 
 The environment name that [multi-environment configs](../../configure.md#multi-environment-configs) can reference when defining their environment-specific config arrays.
-
-::: warning
-Prior to Craft 4, `craftcms/craft` starter projects allowed this fall back to the default `production` value, for security. Now, the starter kit comes with three `.env` examples, each of which explicitly sets a `CRAFT_ENVIRONMENT`.
-:::
 
 ## `CRAFT_EPHEMERAL`
 
