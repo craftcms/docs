@@ -118,7 +118,7 @@ The amount of time it should take for the cache to expire.
 {% cache for 3 weeks %}
 ```
 
-The accepted duration units are:
+The accepted duration units are defined by <craft5:craft\helpers\DateTimeHelper::RELATIVE_TIME_UNITS>:
 
 - `sec`(`s`)
 - `second`(`s`)
@@ -328,7 +328,7 @@ When neither an `in` or `on` clause are used in the tag, Craft instead calls <cr
 
 ## `header`
 
-This tag will set a new HTTP header on the response.
+This tag will set an HTTP header on the response.
 
 ```twig
 {# Tell the browser to cache this page for 30 days #}
@@ -346,13 +346,15 @@ Headers which contain dates must be formatted according to [RFC 7234](https://to
 ```
 :::
 
+Setting a header this way will override any previously-set value. Some headers are best set with dedicated features like the [`expires` tag](#expires), or internal cookie APIs ([`craft.app.response.cookies`](yii2:yii\web\Response::getCookies()))
+
 ### Parameters
 
 The `{% header %}` tag supports the following parameter:
 
 #### Header
 
-You specify the actual header that should be set by typing it as a string after the word `header`. This parameter is required.
+You specify the full header (including its name and value, separated by a `:`) that should be sent by typing it as a string after the word `header`. This parameter is required.
 
 ## `hook`
 
