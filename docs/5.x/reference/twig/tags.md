@@ -19,6 +19,7 @@ Tag | Description
 [do](https://twig.symfony.com/doc/3.x/tags/do.html) | Does.
 [embed](https://twig.symfony.com/doc/3.x/tags/embed.html) | Embeds another template.
 [exit](#exit) | Ends the request.
+[expires](#expires) | Set cache headers in a human-readable way.
 [extends](https://twig.symfony.com/doc/3.x/tags/extends.html) | Extends another template.
 [flush](https://twig.symfony.com/doc/3.x/tags/flush.html) | Flushes the output buffer.
 [for](https://twig.symfony.com/doc/3.x/tags/for.html) | Loops through an array.
@@ -298,6 +299,32 @@ The second parameter is passed to the [error template](../../system/routing.md#e
   {% exit 403 'You must be a power user to access this page!' %}
 {% endif %}
 ```
+
+## `expires`
+
+Control HTTP caching headers with a Twig-friendly date expression.
+
+### Parameters
+
+The `expires` tag accepts a single, optional expression beginning with either `in` or `on`.
+
+`in`
+:   Uses specified duration expression to set cache headers:
+
+    - `{% expires in 1 week %}`
+    - `{% expires in 2 hours %}`
+    - `{% expires in 4 days %}`
+
+    The allowed units are the same as those supported by the (unrelated) [`cache` tag](#cache).
+
+`on`
+:   Sets cache headers to a specific date.
+
+    - `{% expires on entry.expiryDate %}`
+    - `{% expires on now|date_modify('midnight next friday') %}`
+    - `{% expires on tomorrow %}`
+
+When neither an `in` or `on` clause are used in the tag, Craft instead calls <craft5:craft\web\Response::setNoCacheHeaders()>. Using the `expires` tag multiple times in a single request will only honor the _last_ call.
 
 ## `header`
 
