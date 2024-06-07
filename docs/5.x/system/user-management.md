@@ -94,7 +94,7 @@ The permissions Craft comes with are:
 | ↳&nbsp; Access <CodePlaceholder>Plugin Name</CodePlaceholder> | `accessPlugin-[PluginHandle]`
 | Edit users | `editUsers`
 | ↳&nbsp; Register users | `registerUsers`
-| ↳&nbsp; Moderate users | `moderateUsers`
+| ↳&nbsp; Moderate users <InfoHud>Moderation includes editing other users’ names, usernames, custom fields, and addresses.</InfoHud> | `moderateUsers`
 | ↳&nbsp; Administrate users <InfoHud>User administration includes changing emails, sending activation and password reset emails, setting passwords, and deactivating users. This permission can be used to elevate one’s own permissions by gaining access to other administrators’ accounts!</InfoHud> | `administrateUsers`
 | ↳&nbsp; Impersonate users <InfoHud>User impersonation allows one user to temporarily access the site as though they were another user with the same (or more restrictive) permissions.</InfoHud> | `impersonateUsers`
 | ↳&nbsp; Assign user permissions | `assignUserPermissions`
