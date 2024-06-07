@@ -18,7 +18,7 @@ You can also choose a minimum and maximum number of addresses that can be added 
 
 ## Development
 
-Like Matrix and [relational fields](../../system/relations.md#fields), address field data is provided as an [element query](../../development/element-queries.md) or [element collection](../../development/collections.md#element-queries).
+Like Matrix and [relational fields](../../system/relations.md#fields), address field data is provided as an [element query](../../development/element-queries.md) or [element collection](../../development/collections.md#element-collections).
 
 Typically, you will access addresses attached to an element via the field’s handle followed by a query execution method like `.all()`:
 

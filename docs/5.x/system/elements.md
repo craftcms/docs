@@ -183,7 +183,7 @@ Because entries can be nested within fields on different element types (i.e. a C
 
 Each template is passed its element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
 
-When manually rendering an element partial (by calling `element.render()` or `.render()` on an [element collection](../development/collections.md#element-queries)), you have an opportunity to make additional variables available to the template:
+When manually rendering an element partial (by calling `element.render()` or `.render()` on an [element collection](../development/collections.md#element-collections)), you have an opportunity to make additional variables available to the template:
 
 ```twig
 {{ recipe.ingredients.render({
