@@ -186,7 +186,7 @@ You should use `{% cache %}` tags when a template requires many database queries
 There are also some cases where it’s _not_ a good idea to use them:
 
 - Static text: retrieving text from the cache is slower than just outputting it.
-- Logic: anything outside a `{% block %}` tag can’t be cached. Variables set inside a `cache` tag won't be available to the surrounding template when the output is retrieved from the cache.
+- Logic: anything outside a `{% block %}` tag can’t be cached. Variables set inside a `cache` tag won’t be available to the surrounding template when the output is retrieved from the cache.
 - Shuffled content: If the order of items on a page should be randomized each time the page is loaded, don’t cache it.
 
 Depending on your project’s infrastructure and [cache configuration](../config/app.md#cache), it may take more time to read a value from the cache than it would to regenerate it. If the cache tag does not affect response times, profile your templates in the debug toolbar to find your bottleneck.
