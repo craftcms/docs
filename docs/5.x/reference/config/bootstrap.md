@@ -56,7 +56,7 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 Path to your project’s [`.env` file](../../system/directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craft-base-path).
 
-## `CRAFT_EDITION`
+## `CRAFT_EDITION` <Since ver="5.2.0" feature="The CRAFT_EDITION bootstrap variable" />
 
 Craft’s active edition is typically set via [project config](../../system/project-config.md), but you can override it for testing with a valid edition from <craft5:craft\enums\CmsEdition>.
 
@@ -98,7 +98,7 @@ Can be set to `false` to prevent Craft from setting PHP’s [log_errors](https:/
 define('CRAFT_LOG_PHP_ERRORS', false);
 ```
 
-## `CRAFT_REBRAND_PATH`
+## `CRAFT_REBRAND_PATH` <Since ver="5.2.0" feature="The CRAFT_REBRAND_PATH bootstrap variable" />
 
 Override the path where the [control panel](../../system/control-panel.md)’s **Login Page Logo** and **Site Icon** are stored, when uploaded via <Journey path="Settings, General" />. By default, they live in Craft’s `storage/` directory, which is typically excluded from version control.
 
