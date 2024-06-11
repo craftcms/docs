@@ -559,7 +559,7 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 Path to your project’s [`.env` file](../directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craftbasepath).
 
-## `CRAFT_EDITION`
+## `CRAFT_EDITION` <Since ver="4.10.0" feature="The CRAFT_EDITION bootstrap variable" />
 
 Craft’s active edition is typically set via [project config](../project-config.md), but you can override it for testing with a valid edition (one of ).
 
