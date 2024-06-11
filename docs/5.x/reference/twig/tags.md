@@ -298,7 +298,7 @@ The second parameter is passed to the [error template](../../system/routing.md#e
 {% endif %}
 ```
 
-## `expires`
+## `expires` <Since ver="5.2.0" feature="The “expires” Twig tag" />
 
 Control HTTP caching headers with a Twig-friendly date expression.
 
@@ -307,7 +307,7 @@ Control HTTP caching headers with a Twig-friendly date expression.
 The `expires` tag accepts a single, optional expression beginning with either `in` or `on`.
 
 `in`
-:   Uses specified duration expression to set cache headers:
+:   Uses a duration expression to set cache headers:
 
     - `{% expires in 1 week %}`
     - `{% expires in 2 hours %}`
@@ -316,7 +316,7 @@ The `expires` tag accepts a single, optional expression beginning with either `i
     The allowed units are the same as those supported by the (unrelated) [`cache` tag](#cache).
 
 `on`
-:   Sets cache headers to a specific date.
+:   Sets cache headers to a specific date:
 
     - `{% expires on entry.expiryDate %}`
     - `{% expires on now|date_modify('midnight next friday') %}`
