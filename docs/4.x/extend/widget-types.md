@@ -72,7 +72,7 @@ Each widget is rendered inside a HTML element with an `id` attribute like `widge
     Craft.MyWidget = Garnish.Base.extend({
         $widget: null,
         init: function(id) {
-            this.$widget = document.getElementById('#widget' + id);
+            this.$widget = document.getElementById('widget' + id);
 
             // ...
         },
