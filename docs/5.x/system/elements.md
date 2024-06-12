@@ -79,13 +79,13 @@ Instead of an element select field, you’ll see an [autosuggest input](project-
 
 ### Filters and Columns
 
-As a complement to custom sources, any user with access to an element index can temporarily filter results using the condition builder interface:
+As a complement to [search](searching.md) and [custom sources](#sources), any user with access to an element index can temporarily filter results using the condition builder interface:
 
 <BrowserShot url="https://my-craft-project.ddev.site/categories/species" :link="false" caption="Using the condition builder to narrow results.">
 <img src="../images/element-index-condition-builder.png" alt="Craft’s condition builder">
 </BrowserShot>
 
-Similarly, they can customize what columns appear in the table (and how the results are ordered) with the **View** menu:
+Similarly, they can customize which columns appear in the table (and how the results are ordered) with the **View** menu:
 
 <BrowserShot url="https://my-craft-project.ddev.site/categories/species" :link="false">
 <img src="../images/element-index-view-options.png" alt="Customizing element index columns and sorting">
@@ -121,9 +121,13 @@ A streamlined version of indexes are used when adding elements to a [relational]
 
 ### Chips & Cards <Badge text="New!" />
 
+<img src="../images/element-chips.png" alt="An element “chip” with a title, thumbnail, and label indicated it has been modified." />
+
 Throughout the control panel, you’ll encounter references to elements in a number of different contexts, like element indexes, [Matrix](../reference/field-types/matrix.md) fields, and other [relational](relations.md) fields. Element _cards_ are a new way to display nested or related elements. They share the core features of element _chips_ (like quick-actions and ordering controls), but provide an additional layer of customization via the element’s [field layout](fields.md#field-layouts).
 
-Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by the field layout; additional features like colorization and icons are supported by entries.
+Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by the field layout; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
+
+<img src="../images/element-cards.png" alt="Two element “cards” in the Craft control panel, show thumbnails, titles, and statuses." />
 
 ## Rendering Elements <Badge text="New!" />
 
@@ -183,7 +187,7 @@ Because entries can be nested within fields on different element types (i.e. a C
 
 Each template is passed its element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
 
-When manually rendering an element partial (by calling `element.render()` or `.render()` on an [element collection](../development/collections.md#element-queries)), you have an opportunity to make additional variables available to the template:
+When manually rendering an element partial (by calling `element.render()` or `.render()` on an [element collection](../development/collections.md#element-collections)), you have an opportunity to make additional variables available to the template:
 
 ```twig
 {{ recipe.ingredients.render({
@@ -221,7 +225,9 @@ When accessing related or nested content within an element partial, use the `.ea
 
 <Todo notes="Move to elements reference?" />
 
-All elements share a few characteristics that make them familiar to work with in your templates. Each [element type](#element-types) will supplement these lists with their own properties and methods.
+All elements share a few characteristics that make them familiar to work with in your [templates](../development/templates.md). Each [element type](#element-types) will supplement these lists with their own properties and methods.
+
+Additionally, [custom fields](fields.md) attached to an element are automatically made available as properties corresponding to their handles—so a field called “Post Summary” with a handle of `summary` would be accessed as `entry.summary` (if it were attached to an [entry type](../reference/element-types/entries.md#entry-types)’s field layout).
 
 ::: warning
 This is not an exhaustive list! If you’re curious, consult the <craft5:craft\base\Element> and <craft5:craft\base\ElementTrait> class reference for a complete picture of what data is available inside elements and how it can be used.
@@ -263,11 +269,12 @@ Method | Notes
 `getChildren()` | Returns immediate children of the element. _Structures only._
 `getCpEditUrl()` | Gets a URL to the Craft control panel.
 `getDescendants(dist)` | Returns descendants of the element, down to `dist` levels below this one, or all descendants, when omitted. _Structures only._
+`getEnabledForSite(siteId)` | Whether the element is enabled in the provided site, or the site it was loaded in if no ID is provided.
 `getHasDescendants()` | Build an HTML anchor tag with its front-end URL and title. _Elements with URLs only._
 `getLink()` | Build an HTML anchor tag with its front-end URL and title. _Elements with URLs only._
 `getNext(criteria)` | Load the “next” element relative to this one, given a set of criteria.
 `getNextSibling()` | Load the next sibling of this element, within a structure. _Structures only._
-`getEnabledForSite(siteId)` | Whether the element is enabled in the provided site, or the site it was loaded in if no ID is provided.
+`getOwner()` | Return the element that “owns” a [nested element](../reference/element-types/entries.md#nested-entries). _Nested elements only._
 `getParent()` | Returns the element’s parent. _Structures only._
 `getPrev(criteria)` | Load the previous element relative to this one, given a set of criteria.
 `getPrevSibling()` | Load the previous sibling of this element, within a structure. _Structures only._
@@ -276,3 +283,5 @@ Method | Notes
 `getSite()` | Returns the <craft5:craft\models\Site> the element was loaded for.
 `getStatus()` | Returns a plain-text representation of the element’s status, which may be synthesized from a number of other attributes.
 `getUrl()` | Builds a complete front-end URL based on the element’s URI.
+
+The full list of element properties and methods can be found in the [`craft\base\Element` class reference](craft5:craft\base\Element), or [individual element types](../reference/element-types/README.md).

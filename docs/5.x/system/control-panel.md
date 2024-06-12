@@ -217,7 +217,7 @@ While slideouts support most element edit screen features, you may find that it�
 
 ### Action Menus
 
-Wherever you see a small button with three dots (<Icon kind="ellipses" />) on a chip, card, or breadcrumb, it opens an _action menu_. These menus are typically divided into two or more sections, with one dedicated to “destructive” actions like deletion or removal.
+Wherever you see a small button with three dots (<Icon kind="ellipses" />) on a chip, card, or page header, it opens an _action menu_. These menus are typically divided into two or more sections, with one dedicated to “destructive” actions like deletion or removal.
 
 ![A Matrix block’s action menu](../images/matrix-block-action-menu.png)
 

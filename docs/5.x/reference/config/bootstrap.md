@@ -56,13 +56,17 @@ If this isn’t defined, Craft will treat the request as a control panel request
 
 Path to your project’s [`.env` file](../../system/directory-structure.md#env), including the filename. Defaults to `.env`, within [CRAFT_BASE_PATH](#craft-base-path).
 
+## `CRAFT_EDITION` <Since ver="5.2.0" feature="The CRAFT_EDITION bootstrap variable" />
+
+Craft’s active edition is typically set via [project config](../../system/project-config.md), but you can override it for testing with a valid edition from <craft5:craft\enums\CmsEdition>.
+
+::: warning
+It is possible to enable Craft editions that are not allowed by your current license. This means that you may see warnings in the control panel on public domains.
+:::
+
 ## `CRAFT_ENVIRONMENT`
 
 The environment name that [multi-environment configs](../../configure.md#multi-environment-configs) can reference when defining their environment-specific config arrays.
-
-::: warning
-Prior to Craft 4, `craftcms/craft` starter projects allowed this fall back to the default `production` value, for security. Now, the starter kit comes with three `.env` examples, each of which explicitly sets a `CRAFT_ENVIRONMENT`.
-:::
 
 ## `CRAFT_EPHEMERAL`
 
@@ -93,6 +97,19 @@ Can be set to `false` to prevent Craft from setting PHP’s [log_errors](https:/
 // Don’t send PHP error logs to storage/logs/phperrors.log
 define('CRAFT_LOG_PHP_ERRORS', false);
 ```
+
+## `CRAFT_REBRAND_PATH` <Since ver="5.2.0" feature="The CRAFT_REBRAND_PATH bootstrap variable" />
+
+Override the path where the [control panel](../../system/control-panel.md)’s **Login Page Logo** and **Site Icon** are stored, when uploaded via <Journey path="Settings, General" />. By default, they live in Craft’s `storage/` directory, which is typically excluded from version control.
+
+```php
+// Use a top-level `rebrand/` directory for the site logo + icon:
+define('CRAFT_REBRAND_PATH', '@root/rebrand');
+```
+
+::: tip
+Unlike other `*_PATH` settings, `CRAFT_REBRAND_PATH`’s value can include an [alias or other environment variable](../../configure.md#aliases-and-environment-variables) because it is only resolved after the application is fully initialized.
+:::
 
 ## `CRAFT_SECRETS_PATH`
 

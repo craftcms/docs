@@ -378,7 +378,7 @@ Automatic merging of changes from canonical entries is nondestructive, and non-o
 
 ## Querying Entries
 
-While an entry’s configured template will automatically make an `entry` variable available, you can fetch entries throughout your templates or PHP code using **entry queries**.
+When Craft receives a request matching an entry’s URI, it automatically makes an `entry` variable available. Everywhere else in your front-end (or PHP code), you can fetch entries using **entry queries**.
 
 ::: code
 ```twig
@@ -391,11 +391,13 @@ $myEntryQuery = \craft\elements\Entry::find();
 ```
 :::
 
-Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Entry](craft5:craft\elements\Entry) objects will be returned.
+Once you’ve created an entry query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.one()` or `.all()` to return a single [Entry](craft5:craft\elements\Entry) object or an array of them, respectively.
 
-::: tip
-See [Element Queries](../../development/element-queries.md) to learn about how element queries work.
+::: warning
+Nested entries _may_ show up unexpectedly in some entry queries—particularly those that don’t filter by `.section()`. If you want to return only entries _without_ owners, you can use `.section('*')`. <Since ver="5.2.0" feature="Querying for non-nested entries with the special “section wildcard”" />
 :::
+
+<See path="../../development/element-queries.md" label="Introduction to Element Queries" description="Learn more about how element queries work." />
 
 ### Example
 
