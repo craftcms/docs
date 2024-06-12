@@ -105,7 +105,7 @@ Each store has an [address](addresses.md) that represents its physical location.
 
 ```twig
 {% set store = order.store %}
-{{ store.settings.address|address }}
+{{ store.settings.locationAddress|address }}
 ```
 
 This address may also be used by plugins to calculate shipping or provide tax estimates.
