@@ -175,7 +175,7 @@ Craft has two types of schemas:
 1. A single **Public Schema** that defines which content should be available publicly.
 2. Any number of private schemas you create, each having its own secret **Access Token**.
 
-Any GraphQL API request without a token will use the Public Schema. Craft with otherwise use a valid token to determine the relevant schema.
+Any GraphQL API request without a token will use the Public Schema. Craft will otherwise use a valid token to determine the relevant schema.
 
 You can manage your schemas in the control panel at **GraphQL** → **Schemas**. In addition to defining the scope of each schema, you can also give them expiration dates, regenerate their tokens, and disable them.
 
