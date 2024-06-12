@@ -4,12 +4,10 @@ description: Filesystems are the foundation of Craft’s flexible asset manageme
 
 # Filesystem Types
 
-In Craft 4, asset storage has been split into two concepts:
+Asset storage is split into two concepts:
 
-- **Filesystems** establish relationships between Craft and storage media, like the local disk or a storage bucket.
-- **Volumes** organize assets into sources that make sense for a site’s content model, define fields available to assets, and bind those sources to filesystems.
-
-What would have been a volume type in Craft 3 is now a filesystem type.
+- **Filesystems** establish relationships between Craft and a storage medium, like the local disk or an object storage API. A plugin can provide one or more [filesystem types](#filesystem-class).
+- **Volumes** organize assets into sources that make sense for a site’s content model, define fields available to assets, and bind those sources to filesystems. All volumes are represented by the same class, and are not extensible.
 
 ## Filesystem Class
 
