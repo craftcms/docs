@@ -43,6 +43,7 @@
 | [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
 | [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
 | [with](#with)                               | Causes the query to return matching global sets eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
@@ -912,6 +913,19 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
+
+
+#### `withCustomFields`
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 
