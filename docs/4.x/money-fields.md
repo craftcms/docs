@@ -1,5 +1,5 @@
 ---
-updatedVersion: 5.x/reference/field-types/matrix.md
+updatedVersion: 5.x/reference/field-types/money.md
 ---
 
 # Money Fields
