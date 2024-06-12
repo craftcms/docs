@@ -21,7 +21,7 @@ Values are always stored in the database as an integer, in the currency’s base
 
 ### Querying Elements with Money Fields
 
-When [querying for elements](../../development/element-queries.md) that have a Date field, you can filter the results based on the Money field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Money field, you can filter the results based on the Money field data using a query param named after your field’s handle.
 
 ::: tip
 When querying with a money field, provide amounts as you would naturally write them (`123.45`), _not_ in the currency’s minor unit (`12345`). Craft will automatically normalize the values when executing the query.
