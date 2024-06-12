@@ -78,7 +78,7 @@ Let’s output a list of the logged-in user’s addresses:
 5. Output preformatted address details with the [`|address`](dev/filters.md#address) filter.
 
 ```twig
-{% requireLogin #}
+{% requireLogin %}
 
 {% set addresses = craft.addresses()
   .owner(currentUser)
