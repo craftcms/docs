@@ -125,7 +125,13 @@ mutation saveEntry($title: String, $slug: String) {
 
 ## Setting Up Your API Endpoint
 
-By default, none of your content is available outside of Craft via GraphQL. In order to send GraphQL queries to Craft, we need to establish an endpoint for receiving them and an appropriate set of permissions with a token.
+By default, none of your content is available outside of Craft via GraphQL. In order to send GraphQL queries to Craft, we need to enable a schema, and establish an endpoint for receiving queries and an appropriate set of permissions with a token.
+
+### Enable a GraphQL Schema
+
+You’ll need a queryable, enabled GraphQL schema.
+
+In the control panel at **GraphQL** → **Schemas**, edit the Public Schema: check "Query for elements", enable the schema, and save.
 
 ### Create a GraphQL Route
 
