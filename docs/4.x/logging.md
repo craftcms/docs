@@ -127,7 +127,7 @@ To prevent leaking secrets into logs, Craft automatically redacts sensitive-soun
 "CRAFT_DB_DATABASE":"db","CRAFT_DB_USER":"db","CRAFT_DB_PASSWORD":"•••••",
 ```
 
-These keywords are customizable via the `security` component’s `sensitiveKeywords` property in [config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php#L116-L127):
+These keywords are customizable via the `security` component’s `sensitiveKeywords` property in [config/app.php](https://github.com/craftcms/cms/blob/4.x/src/config/app.php):
 
 ```php
 <?php

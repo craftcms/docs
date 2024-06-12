@@ -86,14 +86,14 @@ return [
 
 ## Common Components
 
-We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](https://github.com/craftcms/cms/blob/main/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/main/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/main/src/config/app.console.php) when determining what components are initialized for each type of request—for example, Craft uses two different `request` component classes (<craft4:craft\web\Request> and <craft4:craft\console\Request>) to help smooth over some differences in Yii’s HTTP and CLI APIs.
+We’ll only cover a few commonly-customized components here. Refer to Craft’s own [src/config/app.php](https://github.com/craftcms/cms/blob/4.x/src/config/app.php), [app.web.php](https://github.com/craftcms/cms/blob/4.x/src/config/app.web.php) and [app.console.php](https://github.com/craftcms/cms/blob/4.x/src/config/app.console.php) when determining what components are initialized for each type of request—for example, Craft uses two different `request` component classes (<craft4:craft\web\Request> and <craft4:craft\console\Request>) to help smooth over some differences in Yii’s HTTP and CLI APIs.
 
 ### Cache
 
 By default, Craft will store data caches on disk in the `storage/runtime/cache/` folder. You can configure Craft to use alternative [cache storage](https://www.yiiframework.com/doc/guide/2.0/en/caching-data#supported-cache-storage) layer by overriding the `cache` application component from `config/app.php`.
 
 ::: tip
-To help avoid key collisions when sharing non-standard cache drivers between multiple applications, set a unique application `id`. See the [Craft starter project](https://github.com/craftcms/craft/blob/main/config/app.php#L23) for an example of how this is configured, then run the following command to generate and append a `CRAFT_APP_ID` value to your `.env` file:
+To help avoid key collisions when sharing non-standard cache drivers between multiple applications, set a unique application `id`. See the [Craft starter project](https://github.com/craftcms/craft/blob/4.x/config/app.php#L25) for an example of how this is configured, then run the following command to generate and append a `CRAFT_APP_ID` value to your `.env` file:
 
     php craft setup/app-id
 :::

@@ -111,7 +111,7 @@ Here are a few activities (in no particular order) that can help you get oriente
   _Can you find the corresponding documentation in the [class reference][class-ref]?_
 1. Look at the list of common services that are available on the [`craft.app` variable](../reference/twig/global-variables.md#craft-app) in any template.  
   _Can you determine what other services are accessible in the same way?_
-1. Install one of the [recommended editors](#ide) and open up a config file. Move your cursor over one of the [`use` statements](repo:craftcms/craft/blob/main/config/general.php#L11-L12) at the top to get information about the classes.  
+1. Install one of the [recommended editors](#ide) and open up a config file. Move your cursor over one of the [`use` statements](repo:craftcms/craft/blob/5.x/config/general.php#L11-L12) at the top to get information about the classes.  
   _Can you figure out how to open the file that the class is defined in?_
 
 ## Resources
