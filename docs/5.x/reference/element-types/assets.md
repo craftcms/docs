@@ -201,9 +201,7 @@ $myAssetQuery = \craft\elements\Asset::find();
 
 Once you’ve created an asset query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](../../development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Asset](craft5:craft\elements\Asset) objects will be returned.
 
-::: tip
-See [Element Queries](../../development/element-queries.md) to learn about how element queries work.
-:::
+<See path="../../development/element-queries.md" label="Introduction to Element Queries" description="Learn more about how element queries work." />
 
 ### Example
 

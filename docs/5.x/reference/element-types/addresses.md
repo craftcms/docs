@@ -57,9 +57,7 @@ $myAddressQuery = \craft\elements\Address::find();
 ```
 :::
 
-::: tip
-Addresses are just elements, so everything you know about [element queries](../../development/element-queries.md) applies here!
-:::
+<See path="../../development/element-queries.md" label="Introduction to Element Queries" description="Learn more about how element queries work." />
 
 ### Example
 

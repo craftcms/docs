@@ -198,9 +198,9 @@ Consider these tips for creating special URIs:
 
 A single entry type may have URLs in some contexts, and not in others!
 
-### Preview Targets
+### Preview Targets <Badge type="edition" vertical="middle" title="Preview Targets are configurable in Craft Team">Team</Badge> <Badge type="edition" vertical="middle" title="Preview Targets are configurable in Craft Pro">Pro</Badge>
 
-If you’re using Craft Pro, your section can have one or more **Preview Targets**, or URLs where your entries will show up on. This makes it possible for authors to preview entries as they are writing them in the control panel, or share a private URL with colleagues to view changes prior to publishing.
+Section can have one or more **Preview Targets**, or URLs where its entries are expected to be visible. This makes it possible for authors to preview entries as they are writing them in the control panel, or share a private URL with colleagues to view changes prior to publishing.
 
 Like entry URI formats, these preview target URLs are simple Twig templates that can contain entry properties and other dynamic values.
 
@@ -286,7 +286,7 @@ Depending on your section’s settings, can perform some or all of the following
 
 - Choose the entry type (if there is more than one to choose from);
 - Edit the entry’s **Title**, **Slug**, and [custom field](../../system/fields.md) values;
-- Choose the entry’s **Authors** <Badge type="edition" vertical="middle" title="Entries can only have authors in Craft Pro">Pro</Badge>;
+- Choose the entry’s **Authors** <Badge type="edition" vertical="middle" title="Authors are a feature of Craft Team">Team</Badge> <Badge type="edition" vertical="middle" title="Authors are a feature of Craft Pro">Pro</Badge>;
 - Choose the entry’s **Parent** (if it’s within a [Structure](#structures) section);
 - Set the entry’s **Post Date** (when it will be considered published);
 - Set the entry’s **Expiration Date** (optional);
