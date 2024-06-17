@@ -2041,6 +2041,10 @@ Re-saves entries.
 : The section handle(s) to save entries from. Can be set to multiple comma-separated sections.
 
 
+--all-sections
+: Whether all sections’ entries should be saved.
+
+
 --type
 : The type handle(s) of the elements to resave.
 
