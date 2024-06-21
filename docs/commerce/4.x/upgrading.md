@@ -33,7 +33,7 @@ Once you’ve completed these steps, you’re ready continue with the upgrade pr
 Once you’re running the latest version of Craft Commerce, you’ll need to update your templates and any custom code relevant to the topics detailed below.
 
 ::: warning
-The [`commerce/upgrade`](console-commands.md#upgrade) command must be run interactively. It will prompt you to designate or create fields and then migrate content to them.
+The [`commerce/upgrade`](console-commands.md#commerce-upgrade) command must be run interactively. It will prompt you to designate or create fields and then migrate content to them.
 
 You’ll need to run it again in production where you can _only_ designate target fields and migrate content—unless you temporarily disable <config4:allowAdminChanges> to create fields on the fly in that environment, in which case you’d need to pull your production database down locally afterward and run [`project-config/write`](../../4.x/console-commands.md#project-config-write).
 :::
