@@ -24,6 +24,10 @@ Before you begin, make sure that you have…
 
 Once you’ve completed these steps, you’re ready to begin the upgrade process.
 
+::: tip
+If you are coming from Commerce 3 in two stages, run the [Commerce 4 upgrade command](/commerce/4.x/upgrading.md#performing-the-upgrade) to migrate customer data _before_ continuing to Commerce 5!
+:::
+
 ## Performing the Upgrade
 
 The Commerce 5 happens at the same time you [upgrade to Craft 5](/5.x/upgrade.md). As you alter version constraints in `composer.json`, set `craftcms/commerce` to `^5.0.0-beta.1`.
