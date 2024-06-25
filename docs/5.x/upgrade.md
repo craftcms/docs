@@ -33,17 +33,21 @@ Like [any other update](update.md), it’s essential that you have a safe place 
 
 These steps assume you have a local development environment that meets Craft 5’s [requirements](requirements.md), and that any changes made [in preparation for the upgrade](#preparing-for-the-upgrade) have been deployed to your live site.
 
-::: tip
-[DDEV](https://ddev.com/) users should take this opportunity to update so that the `craftcms` project type reflects our latest recommendations.
+<Block label="Upgrading with DDEV">
 
-In an existing DDEV project, you can change the PHP or database version with the `config` command:
+[DDEV](https://ddev.com/) users should take this opportunity to [update](https://ddev.readthedocs.io/en/stable/users/install/ddev-upgrade/) so that the `craftcms` project type reflects our latest recommendations.
+
+In an existing DDEV project, you can change the PHP or database version with the `config` command…
 
 ```bash
 ddev config --php-version=8.2
 ddev config --database=mysql:8.0
 ddev start
 ```
-:::
+
+…or use `ddev config --update` to reapply project type defaults.
+
+</Block>
 
 1. Capture a fresh database backup from your live environment and import it.
 1. Make sure you don’t have any pending or active jobs in your queue.
