@@ -108,15 +108,15 @@ To ease that transition, Craft 5 is proactively treating `utf8` as `utf8mb4` for
 Ensure the following are set in your `.env` file:
 
 ```bash
-CRAFT_DB_CHARACTER_SET="utf8mb3"
+CRAFT_DB_CHARSET="utf8mb3"
 CRAFT_DB_COLLATION="utf8mb3_general_ci"
 ```
 
 ::: tip
-Once the upgrade is complete, you can convert your tables to `utf8mb4` by removing the `CRAFT_DB_CHARACTER_SET` and `CRAFT_DB_COLLATION` environment variables, or updating them to the appropriate values:
+Once the upgrade is complete, you can convert your tables to `utf8mb4` by removing the `CRAFT_DB_CHARSET` and `CRAFT_DB_COLLATION` environment variables, or updating them to the appropriate values:
 
 ```bash
-CRAFT_DB_CHARACTER_SET="utf8mb4"
+CRAFT_DB_CHARSET="utf8mb4"
 CRAFT_DB_COLLATION="utf8mb4_0900_ai_ci" # MySQL
 CRAFT_DB_COLLATION="utf8mb4_unicode_ci" # MariaDB
 ```
