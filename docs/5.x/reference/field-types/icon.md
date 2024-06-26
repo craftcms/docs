@@ -21,15 +21,3 @@ Change `fa-solid` to another style identifier to suit your site’s appearance!
 ### SVG + JS
 
 The same HTML will work with the recommendations in the [SVG + JS tutorial](https://fontawesome.com/docs/web/setup/host-yourself/svg-js).
-
-## Bundled Assets
-
-You can output Craft’s bundled SVG files with the [`svg()` Twig function](../twig/functions.md#svg):
-
-```twig
-{{ svg("@appicons/#{entry.myIconsField}.svg") }}
-```
-
-::: warning
-Only one the “solid” icon style is bundled with Craft.
-:::
