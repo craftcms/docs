@@ -1660,80 +1660,76 @@ While mutations are mostly straightforward, there are a few important cases to c
 
 ### Matrix Fields in Mutations
 
-GraphQL’s limited input types can be challenging with complex [Matrix fields](../reference/field-types/matrix.md).
+Connecting GraphQL’s input types to complex [Matrix fields](../reference/field-types/matrix.md) can be challenging.
 
 ::: tip
-We recommend reading [how to save matrix field data in entry forms](../reference/field-types/matrix.md#saving-matrix-fields-in-entry-forms) first if you’ve not saved Matrix field form data.
+We recommend studying how to [save Matrix field data in entry forms](../reference/field-types/matrix.md#saving-matrix-fields) before diving in to the equivalent GraphQL.
 :::
 
-Matrix input types generally have the following structure:
+Matrix input types have the following structure, and are always named `{fieldHandle}_MatrixInput`:
 
-| Field       | Description
-| ----------- | -----------
-| `sortOrder` | A list of all the block IDs, including any new blocks, in the order you’d like to persist after the mutation.
-| `blocks`    | A list of all the actual blocks. You can omit any blocks that aren’t modified, but they must be represented on the `sortOrder` field or they’ll be deleted.
+| Field | Description
+| --- | ---
+| `sortOrder` | A list of all the nested entry IDs, including any new entries, in the order you’d like to persist after the mutation.
+| `entries` | A list of all the actual entries. You can omit any entries that aren’t modified, but they must be represented on the `sortOrder` field or they’ll be deleted.
 
-An actual block input type will contain fields for all the possible block types for this field, however, the first non-empty block will be considered in the order that the block types are defined on the field.
-
-As an example, let’s pretend we have a Matrix field with a handle `ingredients`.
-
-The field has three block types: `spirit`, `mixer`, and `garnish`. Each block type has one or two fields:
+As an example, let’s pretend we have a Matrix field with a handle `ingredients`. The field has three entry types: `spirit`, `mixer`, and `garnish`. Each entry type has one or two fields:
 
 ```
-ingredients
-├── spirit
+ingredients (Matrix field)
+├── spirit (Entry type)
 │   ├── spiritName (Plain Text)
 │   └── ounces (Number)
-├── mixer
+├── mixer (Entry type)
 │   ├── mixerName (Plain Text)
 │   └── ounces (Number)
-└── garnish
+└── garnish (Entry type)
     └── garnishName (Plain Text)
 ```
 
-These are all the GraphQL input types Craft generates for this Matrix field:
+These are all the GraphQL “input types” Craft generates for this Matrix field:
 
 | Type Name | Type Description |
-| - | -
-| `ingredients_MatrixInput` | Input type for the Matrix field, containing `sortOrder` and `blocks`.
-| `ingredients_MatrixBlockContainerInput` | Input type that represents the block, in this case containing `spirit`, `mixer`, and `garnish`.
-| `ingredients_spirit_MatrixBlockInput` | Input type for the `spirit` block, containing `spiritName` and `ounces`.
-| `ingredients_mixer_MatrixBlockInput` | Input type for the `mixer` block, containing `mixerName` and `ounces`.
-| `ingredients_garnish_MatrixBlockInput` | Input type for the `garnish` block, containing `garnishName`.
+| --- | --- |
+| `ingredients_MatrixInput` | Input type for the Matrix field, containing `sortOrder` and `entries`.
+| `ingredients_MatrixEntryContainerInput` | Input type that represents the block, in this case containing `spirit`, `mixer`, and `garnish`.
+| `ingredients_spirit_MatrixEntryInput` | Input type for `spirit` entries, containing `spiritName` and `ounces` fields.
+| `ingredients_mixer_MatrixEntryInput` | Input type for `mixer` entries, containing `mixerName` and `ounces` fields.
+| `ingredients_garnish_MatrixEntryInput` | Input type for `garnish` entries, containing the `garnishName` field.
 
 Those input types would look like this in [GraphQL Schema Definition Language (SDL)](https://www.prisma.io/blog/graphql-sdl-schema-definition-language-6755bcb9ce51):
 
 ```graphql
 input ingredients_MatrixInput {
   sortOrder: [QueryArgument]!
-  blocks: [ingredients_MatrixBlockContainerInput]
+  entries: [ingredients_MatrixEntryContainerInput]
 }
 
-input ingredients_MatrixBlockContainerInput {
-  spirit: ingredients_spirit_MatrixBlockInput
-  mixer: ingredients_mixer_MatrixBlockInput
-  garnish: ingredients_garnish_MatrixBlockInput
+input ingredients_MatrixEntryContainerInput {
+  spirit: ingredients_spirit_MatrixEntryInput
+  mixer: ingredients_mixer_MatrixEntryInput
+  garnish: ingredients_garnish_MatrixEntryInput
 }
 
-input ingredients_spirit_MatrixBlockInput {
-  # ... common Matrix Block fields ...
+input ingredients_spirit_MatrixEntryInput {
+  # ... common entry fields ...
   spiritName: String
   ounces: Number
 }
 
-input ingredients_mixer_MatrixBlockInput {
-  # ... common Matrix Block fields ...
+input ingredients_mixer_MatrixEntryInput {
+  # ... common entry fields ...
   mixerName: String
   ounces: Number
 }
 
-input ingredients_garnish_MatrixBlockInput {
-  # ... common Matrix Block fields ...
+input ingredients_garnish_MatrixEntryInput {
+  # ... common entry fields ...
   garnishName: String
 }
 ```
 
-A mutation saving a new entry with multiple Matrix blocks might look like this:
+A mutation saving a new entry with multiple nested entries might look like this:
 
 ::: code
 ```graphql GraphQL
@@ -1741,14 +1737,14 @@ mutation saveEntry(
   $title: String,
   $slug: String,
   $authorId: ID,
-  $ingredients: [ingredients_MatrixBlockContainerInput],
+  $ingredients: [ingredients_MatrixEntryContainerInput],
   $sortOrder: [QueryArgument]
 ) {
-  save_cocktails_cocktails_Entry(
+  save_cocktails_cocktail_Entry(
     title: $title,
     slug: $slug,
     authorId: $authorId,
-    ingredients: { blocks: $ingredients, sortOrder: $sortOrder }
+    ingredients: { entries: $ingredients, sortOrder: $sortOrder }
   ) {
     title
     slug
@@ -1756,21 +1752,25 @@ mutation saveEntry(
     dateCreated @formatDateTime (format: "Y-m-d")
     ingredients {
       __typename
-        ...on MatrixBlockInterface {
-          id
-        }
-        ... on ingredients_spirit_BlockType {
-          spiritName
-          ounces
-        }
-        ... on ingredients_mixer_BlockType {
-          mixerName
-          ounces
-        }
-        ... on ingredients_garnish_BlockType {
-          garnishName
-        }
-     }
+
+      ...on EntryInterface {
+        id
+      }
+
+      ... on spirit_entry {
+        spiritName
+        ounces
+      }
+
+      ... on mixer_Entry {
+        mixerName
+        ounces
+      }
+
+      ... on garnish_Entry {
+        garnishName
+      }
+    }
   }
 }
 
@@ -1814,32 +1814,32 @@ mutation saveEntry(
 ```json JSON Response
 {
   "data": {
-    "save_cocktails_cocktails_Entry": {
+    "save_cocktails_cocktail_Entry": {
       "title": "Gin and Tonic",
       "slug": "gin-tonic",
       "authorId": 1,
       "dateCreated": "2021-03-04",
       "ingredients": [
         {
-          "__typename": "ingredients_spirit_BlockType",
+          "__typename": "spirit_Entry",
           "id": "9",
           "spiritName": "Gin",
           "ounces": 2
         },
         {
-          "__typename": "ingredients_mixer_BlockType",
+          "__typename": "mixer_Entry",
           "id": "10",
           "mixerName": "Tonic",
           "ounces": 4
         },
         {
-          "__typename": "ingredients_mixer_BlockType",
+          "__typename": "mixer_Entry",
           "id": "11",
           "mixerName": "Fresh Lime Juice",
           "ounces": 0.25
         },
         {
-          "__typename": "ingredients_garnish_BlockType",
+          "__typename": "garnish_Entry",
           "id": "12",
           "garnishName": "Lime Wedge or Twist"
         }
@@ -1850,17 +1850,11 @@ mutation saveEntry(
 ```
 :::
 
-What field on those objects would contain data would determine the final block type.
-
-::: warning
-If more than one of the block types are defined, only the block type that is listed first will be considered.
-:::
-
 ### Saving Files via Mutations
 
-You can provide files for Assets as either base64-encoded data, or a URL that Craft will download.
+You can provide files for assets as either base64-encoded data, or a URL that Craft will download.
 
-Either way you’ll use the `FileInput` GraphQL input type, which has the following fields:
+Either way, you’ll use the `FileInput` GraphQL input type, which has the following fields:
 
 | Field      | Description
 | ---------- | -----------
@@ -1872,7 +1866,11 @@ Either way you’ll use the `FileInput` GraphQL input type, which has the follow
 
 #### Saving an Entry
 
-To save an [entry](../reference/element-types/entries.md), use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Entry`:
+[Entries](../reference/element-types/entries.md) are created and updated with mutations named after the combination of the target section and entry type, like `save_{sectionHandle}_{typeHandle}_Entry`:
+
+::: tip
+See the section on [Matrix mutations](#matrix-fields-in-mutations) for more information about saving nested entries.
+:::
 
 <!-- BEGIN ENTRY MUTATION ARGS -->
 
@@ -1894,7 +1892,7 @@ To save an [entry](../reference/element-types/entries.md), use the entry type-sp
 The `id`, `uid` and `authorId` arguments do not exist for single entries. This is because single entries have no authors and are identified already by the exact mutation. In a similar fashion, there are additional arguments available for structured entries. For more information, refer to [mutating structure data](#mutating-structure-data).
 
 ::: tip
-After saving an entry, Craft runs queue jobs for updating revisions and search indexes. If you’re using Craft headlessly or infrequently accessing the control panel, consider disabling <config5:runQueueAutomatically> and [establishing an always-running daemon](https://nystudio107.com/blog/robust-queue-job-handling-in-craft-cms) to keep revisions and search indexes up to date.
+After saving an entry, Craft runs queue jobs for updating revisions and search indexes. If you’re using Craft headlessly or infrequently accessing the control panel, consider disabling <config5:runQueueAutomatically> and [establishing an always-running daemon](../system/queue.md#daemon) to keep revisions and search indexes up to date.
 :::
 
 #### Editing Existing Entries
@@ -1903,7 +1901,7 @@ You can modify existing entries by passing the populated `id` argument to your m
 
 #### Saving a Draft
 
-To save a draft for an entry, use the entry type-specific mutation which will have the name in the form of `save_<sectionHandle>_<entryTypeHandle>_Draft`:
+Entry _drafts_ are created and updated with mutations named after the combination of the target section and entry type, like `save_{sectionHandle}_{typeHandle}_Draft`:
 
 <!-- BEGIN DRAFT MUTATION ARGS -->
 
@@ -1925,9 +1923,43 @@ To save a draft for an entry, use the entry type-specific mutation which will ha
 
 #### Creating or Publishing a Draft
 
-You can use the `createDraft` mutation to save a new draft. It requires the `id` of the draft’s parent entry and returns the ID of the newly-saved draft.
+You can use the generic `createDraft` mutation to create a new draft. It requires the `id` of the draft’s canonical entry and returns the ID of the newly-saved draft:
 
-You can publishing a draft using the `publishDraft` mutation, which requires the `id` of the draft to be published and returns the ID of the updated parent entry.
+::: code
+```gql Query
+mutation MyNewDraft {
+  createDraft(id: 1234)
+}
+```
+```json Response
+{
+  "data": {
+    "createDraft": "5678"
+  }
+}
+```
+:::
+
+Additional (optional) arguments include a `name` for the draft, `notes`, a `creatorId` (if the draft should be created on behalf of a specific user), and a `provisional` flag. Provisional drafts (referred to in the control panel as auto-saved changes)
+
+_Applying_ a draft is handled in the same way, but with the `publishDraft` mutation. It requires the `id` of the draft to be published and returns the ID of the updated canonical entry:
+
+::: code
+```gql Query
+mutation PublishMyDraft {
+  publishDraft(id: 5678)
+}
+```
+```json Response
+{
+  "data": {
+    "publishDraft": "1234"
+  }
+}
+```
+:::
+
+Neither mutation accepts properties or custom field values—use the appropriate [entry mutation](#saving-an-entry) to update a draft after it has been created. To work with drafts, the [schema](#define-your-schemas) must allow creating and saving entries in the canonical entry’s section; unlike user permissions, schemas do not have discrete permissions for draft creation and canonical entry mutations.
 
 #### Deleting an Entry
 
