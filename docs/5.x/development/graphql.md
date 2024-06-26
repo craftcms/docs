@@ -13,6 +13,176 @@ Craft provides a [GraphQL](https://graphql.org) API you can use to work with you
 
 GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel gives you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
+::: tip
+You can also execute GraphQL queries from [Twig templates](templates.md) with the [`gql()` function](../reference/twig/functions.md#gql).
+:::
+
+### Setting Up Your API Endpoint
+
+By default, none of your content is publicly accessible via GraphQL—you must explicitly authorize resources by configuring one or more public or private [schemas](#define-your-schemas).
+
+#### Define Your Schemas
+
+With a GraphQL API endpoint defined, Craft determines what content should be available from it via **Schemas**. Access to schemas is in turn granted by [tokens](#generate-tokens).
+
+Craft has two types of schemas:
+
+1. A single _public_ schema that defines which content should be available to unauthenticated clients.
+2. Any number of _private_ schemas that permit querying and mutating specific types of elements.
+
+Manage your schemas in the control panel by navigating to <Journey path="GraphQL, Schemas" />.
+
+::: warning
+Schema customization is only possible with an admin account and <config5:allowAdminChanges> _on_.
+:::
+
+#### Generate Tokens
+
+A _token_ is required to use any non-public schema. Tokens use the standard “bearer” `Authorization` HTTP header:
+
+```http
+Authorization: Bearer {token}
+```
+
+Invalid tokens will produce a 400-level HTTP exception; requests _without_ a token default to the public schema, if it is enabled. More [examples](#examples) of token usage appear below!
+
+To create a token, visit <Journey path="GraphQL, Tokens" /> and click **New token**. Every token’s **Name** must be unique, but multiple tokens may be created for each schema. Craft handles generating the 32-character access token
+
+Because tokens are similar to [user groups](../system/user-management.md#user-groups) in the way they grant access to system resources, only admins are allowed to create and modify them. Tokens can also be created via the CLI, with the [`graphql/create-token` command](../reference/cli.md#graphql-create-token). To find a schema’s UUID (required by this command), run `graphql/list-schemas`.
+
+While [schemas](#define-your-schemas) are tracked in [project config](../system/project-config.md), tokens are only stored in the database.
+
+::: danger
+Carefully protect tokens for schemas that allow [mutations](#mutations)! These are effectively as dangerous as a user with the equivalent permissions.
+:::
+
+#### Create a GraphQL Route
+
+The GraphQL endpoint is always available via its [action path](../system/routing.md), at `/index.php?action=graphql/api`. If you would prefer to access the API via a more concise path, create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) in `config/routes.php` that maps to this `graphql/api` controller action—the following rule would make the GraphQL API available at `/api`:
+
+```php
+return [
+    'api' => 'graphql/api',
+    // ...
+];
+```
+
+::: tip
+Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config5:allowedGraphqlOrigins> setting.
+:::
+
+## Sending API Requests
+
+Assuming your project lives at `https://my-project.ddev.site` and your [route](#create-a-graphql-route) was configured like the example above, you can confirm it’s working by sending a `{ping}` query to it:
+
+```bash
+curl -H "Content-Type: application/graphql" -d '{ping}' https://my-project.ddev.site/api
+```
+
+If you get a `pong` in your response, your GraphQL API is up and running!
+
+```json
+{"data":{"ping":"pong"}}
+```
+
+::: tip
+The `ping` test is implicitly allowed by all _enabled_ schemas. It is not a guarantee that any particular content is actually available, but does perform authorization when a token is sent.
+:::
+
+### Using the GraphiQL IDE
+
+The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the control panel from <Journey path="GraphQL, GraphiQL" />.
+
+![The built-in GraphiQL IDE](../images/graphiql.png)
+
+::: tip
+The included GraphiQL IDE preselects a special “Full Schema” option for exploration. This schema is only available to logged-in administrators. Change the active schema from the dropdown menu:
+
+![GraphiQL’s Full Schema default](../images/graphiql-full-schema.png)
+:::
+
+### Using Another IDE
+
+Additional GraphQL IDEs are available as well:
+
+- [Insomnia](https://insomnia.rest/)
+- [GraphQL Playground](https://github.com/prisma/graphql-playground)
+- [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
+
+::: tip
+When you’re initially exploring the API, make sure <config5:devMode> is enabled so the IDE can be informed about the entire schema available to it.
+:::
+
+### Sending Requests Manually
+
+The GraphQL API can be queried in three ways:
+
+1. **A `GET` request** with the GraphQL query defined by a `query` parameter:
+  ```bash
+  curl \
+    --data-urlencode "query={ping}" \
+    http://my-project.tld/api
+  # or
+  curl http://my-project.tld/api?query=%7Bping%7D
+  ```
+2. **A `POST` request with an `application/json` content type** and the GraphQL query defined by a `query` key:
+  ```bash
+  curl \
+    -H "Content-Type: application/json" \
+    -d '{"query":"{ping}"}' \
+    http://my-project.tld/api
+  ```
+3. **A `POST` request with an `application/graphql` content type** and the GraphQL query defined by the raw request body:
+  ```bash
+  curl \
+    -H "Content-Type: application/graphql" \
+    -d '{ping}' \
+    http://my-project.tld/api
+  ```
+
+#### Specifying Variables
+
+If you need to specify any [variables](https://graphql.org/learn/queries/#variables) along with your query, then you must send request as a `POST` request with an `application/json` content type, and include a `variables` key in the JSON body alongside `query`.
+
+```bash
+curl \
+  -H "Content-Type: application/json" \
+  -d '{
+        "query": "query($id:[Int]) { entries(id: $id) { id, title } }",
+        "variables": { "id": [1, 2, 3] }
+      }' \
+  http://my-project.tld/api
+```
+
+#### Querying a Private Schema
+
+The Public Schema is used by default. To query against a different [schema](#define-your-schemas), pass its Access Token using an `Authorization` header.
+
+```bash
+curl \
+  -H "Authorization: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
+  -H "Content-Type: application/graphql" \
+  -d '{entries{id}}' \
+  http://my-project.tld/api
+```
+
+::: warning
+If you’re unable to query a private schema because of a “missing authorization header”, make sure Craft received it from the web server with a quick post to a test template:
+
+```twig
+{{ craft.app.getRequest().getHeaders().has('authorization')
+  ? 'auth token present ✓'
+  : 'auth token missing!' }}
+```
+
+Apache strips `Authorization` headers by default, which can be fixed by enabling [CGIPassAuth](https://httpd.apache.org/docs/2.4/en/mod/core.html#cgipassauth) or adding the following to your `.htaccess` file:
+
+```
+RewriteCond %{HTTP:Authorization} ^(.*)
+RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+```
+:::
+
 ## Examples
 
 ### Query
@@ -120,152 +290,6 @@ mutation saveEntry($title: String, $slug: String) {
     }
   }
 }
-```
-:::
-
-## Setting Up Your API Endpoint
-
-By default, none of your content is available outside of Craft via GraphQL. In order to send GraphQL queries to Craft, we need to establish an endpoint for receiving them and an appropriate set of permissions with a token.
-
-### Create a GraphQL Route
-
-You’ll need to establish a route that provides a public endpoint for the GraphQL API.
-
-Create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) from `config/routes.php` that points to the `graphql/api` controller action. For example, the following URL rule would cause `/api` requests to route to the GraphQL API:
-
-```php
-return [
-    'api' => 'graphql/api',
-    // ...
-];
-```
-
-::: tip
-Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config5:allowedGraphqlOrigins> setting.
-:::
-
-Pretending your endpoint is `http://my-project.tld/api`, you can verify that it’s configured correctly by sending a `{ping}` query to it:
-
-```bash
-curl -H "Content-Type: application/graphql" -d '{ping}' http://my-project.tld/api
-```
-
-If you get a `pong` in your response, your GraphQL API is up and running!
-
-```json
-{"data":{"ping":"pong"}}
-```
-
-::: tip
-The `ping` test works for any endpoint; content queries depend on your schema setup.
-:::
-
-### Define Your Schemas
-
-Once you’ve created a GraphQL API endpoint, you need to tell Craft which content should be available from it. You do that by defining a **Schema**.
-
-Craft has two types of schemas:
-
-1. A single **Public Schema** that defines which content should be available publicly.
-2. Any number of private schemas you create, each having its own secret **Access Token**.
-
-Any GraphQL API request without a token will use the Public Schema. Craft with otherwise use a valid token to determine the relevant schema.
-
-You can manage your schemas in the control panel at **GraphQL** → **Schemas**. In addition to defining the scope of each schema, you can also give them expiration dates, regenerate their tokens, and disable them.
-
-## Sending API Requests
-
-### Using the GraphiQL IDE
-
-The easiest way to start exploring your GraphQL API is with the built-in [GraphiQL](https://github.com/graphql/graphiql) IDE, which is available in the control panel from **GraphQL** → **GraphiQL**.
-
-![The built-in GraphiQL IDE](../images/graphiql.png)
-
-::: tip
-The included GraphiQL IDE preselects a special “Full Schema” option for optimal exploration. You can change the applied schema from its dropdown menu.
-
-![GraphiQL’s Full Schema default](../images/graphiql-full-schema.png)
-:::
-
-### Using Another IDE
-
-Additional GraphQL IDEs are available as well:
-
-- [Insomnia](https://insomnia.rest/)
-- [GraphQL Playground](https://github.com/prisma/graphql-playground)
-- [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
-
-::: tip
-When you’re initially exploring the API, make sure <config5:devMode> is enabled so the IDE can be informed about the entire schema available to it.
-:::
-
-### Sending Requests Manually
-
-The GraphQL API can be queried in three ways:
-
-1. **A `GET` request** with the GraphQL query defined by a `query` parameter:
-  ```bash
-  curl \
-    --data-urlencode "query={ping}" \
-    http://my-project.tld/api
-  # or
-  curl http://my-project.tld/api?query=%7Bping%7D
-  ```
-2. **A `POST` request with an `application/json` content type** and the GraphQL query defined by a `query` key:
-  ```bash
-  curl \
-    -H "Content-Type: application/json" \
-    -d '{"query":"{ping}"}' \
-    http://my-project.tld/api
-  ```
-3. **A `POST` request with an `application/graphql` content type** and the GraphQL query defined by the raw request body:
-  ```bash
-  curl \
-    -H "Content-Type: application/graphql" \
-    -d '{ping}' \
-    http://my-project.tld/api
-  ```
-
-#### Specifying Variables
-
-If you need to specify any [variables](https://graphql.org/learn/queries/#variables) along with your query, then you must send request as a `POST` request with an `application/json` content type, and include a `variables` key in the JSON body alongside `query`.
-
-```bash
-curl \
-  -H "Content-Type: application/json" \
-  -d '{
-        "query": "query($id:[Int]) { entries(id: $id) { id, title } }",
-        "variables": { "id": [1, 2, 3] }
-      }' \
-  http://my-project.tld/api
-```
-
-#### Querying a Private Schema
-
-The Public Schema is used by default. To query against a different [schema](#define-your-schemas), pass its Access Token using an `Authorization` header.
-
-```bash
-curl \
-  -H "Authorization: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
-  -H "Content-Type: application/graphql" \
-  -d '{entries{id}}' \
-  http://my-project.tld/api
-```
-
-::: warning
-If you’re unable to query a private schema because of a “missing authorization header”, make sure Craft received it from the web server with a quick post to a test template:
-
-```twig
-{{ craft.app.getRequest().getHeaders().has('authorization')
-  ? 'auth token present ✓'
-  : 'auth token missing!' }}
-```
-
-Apache strips `Authorization` headers by default, which can be fixed by enabling [CGIPassAuth](https://httpd.apache.org/docs/2.4/en/mod/core.html#cgipassauth) or adding the following to your `.htaccess` file:
-
-```
-RewriteCond %{HTTP:Authorization} ^(.*)
-RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 ```
 :::
 
