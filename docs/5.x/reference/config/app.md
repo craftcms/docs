@@ -402,13 +402,13 @@ return [
             // Get the default component config:
             $config = App::mailerConfig();
 
-            // Use Mailhog in dev mode:
+            // Use Mailpit in dev mode:
             if (Craft::$app->getConfig()->getGeneral()->devMode) {
                 $adapter = craft\helpers\MailerHelper::createTransportAdapter(
                     craft\mail\transportadapters\Smtp::class,
                     [
-                        'host' => App::env('MAILHOG_HOST'),
-                        'port' => App::env('MAILHOG_PORT'),
+                        'host' => App::env('MAIL_HOST'),
+                        'port' => App::env('MAIL_PORT'),
                     ]
                 );
 

@@ -205,14 +205,14 @@ _As of May, 2022, Google has phased out most support for “[less-secure apps](h
 
 A generic adapter for any SMTP connection. You must specify an SMTP host, but which remaining fields are required is dependent upon the server.
 
-Some third-party platforms offer SMTP integrations paths, and do not require a custom adapter! DDEV, for instance, gives you a [Mailhog](https://ddev.readthedocs.io/en/latest/users/usage/developer-tools/#email-capture-and-review-mailhog) instance for capturing and reviewing outbound email. When starting a project, DDEV will write two variables into your `.env` file:
+Some third-party platforms offer SMTP integrations paths, and do not require a custom adapter! DDEV, for instance, gives you a [Mailpit](https://ddev.readthedocs.io/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit) instance for capturing and reviewing outbound email. When starting a project, DDEV will write some variables prefixed with `MAILPIT_` into your `.env` file:
 
 ```bash
-MAILHOG_SMTP_HOSTNAME="127.0.0.1"
-MAILHOG_SMTP_PORT="1025"
+MAILPIT_SMTP_HOSTNAME="127.0.0.1"
+MAILPIT_SMTP_PORT="1025"
 ```
 
-You can use these in the adapter configuration by [prefixing them with a dollar sign](config/README.md#control-panel-settings) (`$`).
+You can use these in the adapter configuration by [prefixing them with a dollar sign](config/README.md#control-panel-settings) (`$`), or consume them via [application configuration](config/app.md#mailer).
 
 ::: tip
 The default port for SMTP has traditionally been `25`, but some networks completely block this traffic. Your SMTP server may support communication on an alternate port—usually `587`.
