@@ -315,7 +315,7 @@ You would like to charge 10% tax on all electronic items and 5% tax on everythin
 
 ## Templating
 
-It’s common to display tax information to a customer in the context of their cart, since applicable taxes may depend on order items and the shipping address. Check out the [cart](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig) in the Commerce [example templates](example-templates.md), which includes taxable totals.
+It’s common to display tax information to a customer in the context of their cart, since applicable taxes may depend on order items and the shipping address. Check out the [cart](https://github.com/craftcms/commerce/blob/4.x/example-templates/dist/shop/cart/index.twig) in the Commerce [example templates](example-templates.md), which includes taxable totals.
 
 ## Further Reading
 

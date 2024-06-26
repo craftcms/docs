@@ -82,7 +82,7 @@ axios.get('', {
 
 Either of the examples above will generate a new cart in the session if none exists. While it’s unlikely you would make this assignment more than once per page request, getting the cart more than once does not affect performance.
 
-To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
+To see what cart information you can use in your templates, take a look at the [Order](commerce3:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/3.x/example-templates/dist/shop/cart/index.twig).
 
 <toggle-tip title="Example Order">
 
@@ -270,7 +270,7 @@ You can remove a line item by including a `remove` parameter in the request. Thi
 ```
 
 ::: tip
-The [example templates](example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig) for adding and updating items in a full checkout flow.
+The [example templates](example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/3.x/example-templates/dist/shop/cart/index.twig) for adding and updating items in a full checkout flow.
 :::
 
 #### Options Uniqueness
@@ -577,7 +577,7 @@ This will set temporarily the order’s calculation mode to *Recalculate All* an
 
 ### Order Notices
 
-Notices are added to an order whenever it changes, whether it’s the customer saving the cart or a store manager recalculating from the control panel. Each notice is an [OrderNotice](https://github.com/craftcms/commerce/blob/main/src/models/OrderNotice.php) model describing what changed and could include the following:
+Notices are added to an order whenever it changes, whether it’s the customer saving the cart or a store manager recalculating from the control panel. Each notice is an [OrderNotice](https://github.com/craftcms/commerce/blob/3.x/src/models/OrderNotice.php) model describing what changed and could include the following:
 
 - A previously-valid coupon or shipping method was removed from the order.
 - A line item’s purchasable was no longer available so that line item was removed from the cart.

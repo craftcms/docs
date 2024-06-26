@@ -1,5 +1,9 @@
 # Sales
 
+::: warning
+New projects should use the more flexible [pricing rules engine](pricing-rules.md). Sales are only available to stores upgraded from Commerce 4.
+:::
+
 Sales allow a store manager with _Manage promotions_ permission to set up conditions for dynamic, promotional product discounts.
 
 A sale is different from a [discount](discounts.md) because it’s applied _before_ an item is added to the cart. A discount needs a cart; it’s applied when an item’s in the cart or to the cart as a whole (like a coupon code).

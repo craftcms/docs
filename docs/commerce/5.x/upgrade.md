@@ -214,3 +214,10 @@ Commerce 5 adds one new [console command](reference/console-commands.md), to hel
 ## API Changes
 
 To support multi-store functionality and the new pricing catalog, there are a number of breaking API changes. Review these and other deprecations in the [changelog](repo:craftcms/commerce/blob/5.0/CHANGELOG.md).
+
+### Hooks
+
+With the adoption of the universal element editor, some template hooks have been removed:
+
+- `cp.commerce.product.edit.content`
+- `cp.commerce.product.edit.details`
