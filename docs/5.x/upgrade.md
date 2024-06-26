@@ -156,6 +156,91 @@ With the elimination of Matrix blocks as a discrete element type, we have remove
 See the section on [Matrix fields](#matrix-fields) for more information about these changes.
 :::
 
+### GraphQL
+
+The reusability of entry types means that some GraphQL queries have changed.
+
+- GraphQL types corresponding to entry types no longer include their section names. In Craft 4, entries a section named “Ingredients” with the entry type “Ingredient” might have been represented in GraphQL as a type named `ingredients_ingredient_Entry`. That type would now be named `ingredient_Entry`.
+
+    Entries can still be queried by section using the corresponding query type (i.e. `ingredientsEntries`) or the `section` argument for the generic `entries` query:
+
+    ::: code
+    ```gql{2} Section Query
+    query MyIngredients {
+      ingredientsEntries {
+        ... on ingredient_Entry {
+          title
+        }
+      }
+    }
+    ```
+    ```gql{2} Generic Query
+    query MyIngredients {
+      entries(section: "ingredients") {
+        ... on ingredient_Entry {
+          title
+        }
+      }
+    }
+    ```
+    :::
+
+    The corresponding queries for entries nested within a Matrix field would look like this:
+
+    ::: code
+    ```gql{2} Field Query
+    query DifficultSteps {
+      stepsFieldEntries(difficulty: "hard") {
+        ... on step_Entry {
+          title
+          estimatedTime
+        }
+      }
+    }
+    ```
+    ```gql{2} Generic Query
+    query DifficultSteps {
+      entries(field: "steps", difficulty: "hard") {
+        ... on step_Entry {
+          title
+          estimatedTime
+        }
+      }
+    }
+    ```
+
+- The names of mutations targeting entries in a particular section remain unchanged, and still include the section and entry type handles, i.e: `save_ingredients_ingredient_Entry` and `save_ingredients_ingredient_Draft`.
+- Mutations directly targeting nested entries in Matrix fields will use a similar structure, but combining the field handle and entry type handle: `save_stepsField_step_Entry`.
+- When mutating a Matrix field value via GraphQL, the nested entries must be passed under an `entries` key instead of a `blocks` key:
+
+    ```gql{2,5}
+    mutation AddStep {
+      save_recipes_recipe_Entry(
+        title: "Yummy Bits and Bytes"
+        summary: "Chocolate chip cookies that are out of this world!"
+        steps: {
+          entries: [
+            {
+              step: {
+                difficulty: "hard",
+                instructions: "Preheat oven to 20,000,000°F",
+                estimatedTime: 120,
+                id: "new:1"
+              }
+            }
+            # ...
+          ],
+          sortOrder: [
+            "new-first"
+          ]
+        }
+      ) {
+        title
+        id
+      }
+    }
+    ```
+
 ## Elements & Content
 
 Craft 5 has an entirely new content storage architecture that underpins many other features.
