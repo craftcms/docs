@@ -8,11 +8,11 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
     It’s important to keep in mind that Craft doesn’t get involved for *every* request that touches your server—just those that go through your `index.php`.
 
-    The `.htaccess` file that [comes with Craft](https://github.com/craftcms/craft/blob/master/web/.htaccess) will silently send all requests that don’t match a directory or file on your web server via `index.php`. But if you point your browser directly at a file that *does* exist (such as an image, CSS, or JavaScript file), your web server will serve that file directly without loading Craft.
+    The `.htaccess` file that [comes with Craft](https://github.com/craftcms/craft/blob/master/web/.htaccess) will silently send all requests that don’t match a directory or file on your web server via `index.php`. If you point your browser directly at a file that *does* exist (such as an image, CSS, or JavaScript file), your web server will serve that file directly, without initializing Craft or PHP.
 
 1. **Is it an action request?**
 
-    [Action requests](../reference/controller-actions.md) either have a URL that begins with `actions/` (or whatever your <config5:actionTrigger> config setting is set to), or an `action` parameter in the POST body or query string. Every request Craft handles is ultimately routed to a controller action, but explicit action requests take precedence and guarantee that essential features are always accessible. If you look at your browser’s _Network_ tab while using the control panel, you’ll see a lot of action requests.
+    [Action requests](../reference/controller-actions.md) either have a path that begins with `/actions/` (or whatever your <config5:actionTrigger> config setting is set to), or an `action` parameter in the POST body or query string. Every request Craft handles is ultimately routed to a controller action, but explicit action requests take precedence and guarantee that essential features are always accessible. If you look at your browser’s _Network_ tab while using the control panel, you’ll see a lot of action requests, like `/index.php?action=users/session-info`.
 
 2. **Is it an element request?**
 
