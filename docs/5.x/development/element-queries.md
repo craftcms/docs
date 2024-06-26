@@ -166,11 +166,11 @@ Sometimes, you might want to run a number of similar queries. Take this case, wh
   .dateStart(">= #{now|atom}")
   .branch(entry) %}
 
-{% set weekEvents = clone(eventsQuery)
+{% set weekEvents = clone(upcomingEvents)
   .dateEnd("< #{now|modify('+1 week')|atom}") %}
 Events in the next week: {{ weekEvents.count() }}
 
-{% set monthEvents = clone(eventsQuery)
+{% set monthEvents = clone(upcomingEvents)
   .dateEnd("< #{now|modify('+1 month')|atom}") %}
 Events in the next month: {{ monthEvents.count() }}
 ```
@@ -178,10 +178,37 @@ Events in the next month: {{ monthEvents.count() }}
 The [`clone()` function](../reference/twig/functions.md#clone) is used to copy a base query, before setting additional parameters. Parameters set on the base query (like `dateStart()`, above) will affect all subsequent queries, unless explicitly unset.
 
 ::: tip
-Note that we are only executing the `weekEvents` and `monthEvents` query! Cloning an executed query will just copy the results.
+Note that we are only executing the `weekEvents` and `monthEvents` queries! Cloning an executed query will just copy the results.
 :::
 
-This behavior is automatic when accessing a 
+#### Relational Fields
+
+Any time you access a [relational field](../system/relations.md#fields) (specifically, one that hasn’t been [eager-loaded](eager-loading.md)), Craft automatically clones it:
+
+```twig
+{% set relatedDocuments = entry.attachments.type('document').all() %}
+{% set relatedArticles = entry.attachments.type('article').all() %}
+{% set recentAttachments = entry.attachments
+  .dateCreated(">= #{now|date_modify('-1 week')}")
+  .orderBy('dateCreated DESC')
+  .limit(5)
+  .all() %}
+```
+
+In this example, each time `entry.attachments` is accessed, it returns a fresh element query prepared to fetch the explicitly related elements, in the order they were defined in the control panel. Calling `.type('...')` on the first two queries will _not_ affect the third query. If instead you captured the query in an intermediate variable, each param would be applied in sequence on a single query:
+
+```twig
+{% set attachmentsQuery = entry.attachments %}
+{% set relatedDocuments = attachmentsQuery.type('document').all() %}
+{% set relatedArticles = attachmentsQuery.type('article').all() %}
+{% set recentAttachments = attachmentsQuery
+  .dateCreated(">= #{now|date_modify('-1 week')}")
+  .orderBy('dateCreated DESC')
+  .limit(5)
+  .all() %}
+```
+
+The first two sets of results here will contain the expected elements—`relatedDocuments` modifies the base query, and then `relatedArticles` overwrites the `type` param—but the third will retain the last-set `type` value and apply additional `dateCreated` and `orderBy` params. Instead of containing the latest five attachments of any type, it will only include the latest five _articles_.
 
 ## Executing Element Queries
 
