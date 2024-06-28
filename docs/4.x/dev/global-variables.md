@@ -122,7 +122,7 @@ Some of the services commonly used in templates:
 ::: tip
 Keep in mind that Twig templates _can_ be rendered from web requests, the CLI, and within queue jobs—so there are situations in which certain features may no be available (like the “[current user](#currentuser),” or information about the request).
 
-The specific services (or “components”) available via `craft.app` correspond to the keys defined in Craft’s [`app.php`](repo:craftcms/cms/blob/develop/src/config/app.php), [`app.web.php`](repo:craftcms/cms/blob/develop/src/config/app.web.php), and your project’s [equivalent config files](../config/app.md).
+The specific services (or “components”) available via `craft.app` correspond to the keys defined in Craft’s [`app.php`](repo:craftcms/cms/blob/4.x/src/config/app.php), [`app.web.php`](repo:craftcms/cms/blob/4.x/src/config/app.web.php), and your project’s [equivalent config files](../config/app.md).
 :::
 
 Here are some examples of these services being used in a template:
