@@ -274,6 +274,10 @@ Suppose we wanted to recommend recipes that use the current one’s alternate pr
 
 By being explicit about the field we want the relation to use, we can show the user recipes that don’t rely on substitutions to meet their dietary needs.
 
+::: warning
+The `field` param does not honor handles overridden in a field layout. Craft doesn’t know until elements are actually loaded which field layouts are relevant.
+:::
+
 ### Sites
 
 Property
