@@ -45,7 +45,7 @@ return [
 
 ### Closures
 
-Craft uses functions to dynamically define some components—see [`app.php`](https://github.com/craftcms/cms/blob/develop/src/config/app.php) and its `app.web.php` and `app.console.php` counterparts for a complete list in each context.
+Craft uses functions to dynamically define some components—see [`app.php`](https://github.com/craftcms/cms/blob/5.x/src/config/app.php) and its `app.web.php` and `app.console.php` counterparts for a complete list in each context.
 
 Components defined in this way should only be overridden with another function. The process will almost always look something like this:
 

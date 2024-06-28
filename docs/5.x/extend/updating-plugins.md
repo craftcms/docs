@@ -11,7 +11,7 @@ sidebarDepth: 2
 
 Craft 5 brings some of the most significant author- and developer-experience improvements _ever_—and in a way that is minimally disruptive to plugins.
 
-The [changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md) is the most comprehensive and up-to-date list of added, changed, deprecated, and removed APIs. This guide focuses on high-level changes, organized by the features they impact.
+The [changelog](https://github.com/craftcms/cms/blob/5.x/CHANGELOG.md) is the most comprehensive and up-to-date list of added, changed, deprecated, and removed APIs. This guide focuses on high-level changes, organized by the features they impact.
 
 ::: tip
 Report issues with the upgrade guide in our [`craftcms/docs` repository](https://github.com/craftcms/docs/issues/new), and issues with the upgrade itself in the [`craftcms/cms` repository](https://github.com/craftcms/cms/issues/new?labels=bug%2Ccraft5&projects=&template=BUG-REPORT-V5.yml&title=%5B5.x%5D%3A+).
@@ -19,7 +19,7 @@ Report issues with the upgrade guide in our [`craftcms/docs` repository](https:/
 
 ## Overview
 
-Be sure and fully review this page (and the [changelog](https://github.com/craftcms/cms/blob/5.0/CHANGELOG.md)) before getting started, taking note of features that are apt to impact your plugin.
+Be sure and fully review this page (and the [changelog](https://github.com/craftcms/cms/blob/5.x/CHANGELOG.md)) before getting started, taking note of features that are apt to impact your plugin.
 
 ## Process
 
@@ -321,7 +321,7 @@ Nested elements automatically prepend their owner’s breadcrumbs.
 
 #### Nested Elements
 
-If you’re curious how we’re using the new `craft\elements\NestedElementManager` class, check out the [Matrix field’s implementation](repo:craftcms/cms/blob/5.0/src/fields/Matrix.php), or the [CKEditor field](repo:craftcms/ckeditor)’s use of `craft\base\ElementContainerFieldInterface`.
+If you’re curious how we’re using the new `craft\elements\NestedElementManager` class, check out the [Matrix field’s implementation](repo:craftcms/cms/blob/5.x/src/fields/Matrix.php), or the [CKEditor field](repo:craftcms/ckeditor)’s use of `craft\base\ElementContainerFieldInterface`.
 
 ### Field Types
 
