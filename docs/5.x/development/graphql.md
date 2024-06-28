@@ -127,28 +127,28 @@ The GraphQL API can be queried in three ways:
   ```bash
   curl \
     --data-urlencode "query={ping}" \
-    http://my-project.tld/api
+    http://my-project.ddev.site/api
   # or
-  curl http://my-project.tld/api?query=%7Bping%7D
+  curl https://my-project.ddev.site/api?query=%7Bping%7D
   ```
 2. **A `POST` request with an `application/json` content type** and the GraphQL query defined by a `query` key:
   ```bash
   curl \
     -H "Content-Type: application/json" \
     -d '{"query":"{ping}"}' \
-    http://my-project.tld/api
+    https://my-project.ddev.site/api
   ```
 3. **A `POST` request with an `application/graphql` content type** and the GraphQL query defined by the raw request body:
   ```bash
   curl \
     -H "Content-Type: application/graphql" \
     -d '{ping}' \
-    http://my-project.tld/api
+    https://my-project.ddev.site/api
   ```
 
 #### Specifying Variables
 
-If you need to specify any [variables](https://graphql.org/learn/queries/#variables) along with your query, then you must send request as a `POST` request with an `application/json` content type, and include a `variables` key in the JSON body alongside `query`.
+If you need to specify any [variables](https://graphql.org/learn/queries/#variables) along with your query, then you must send request as a `POST` request with an `application/json` content type, and include a `variables` key in the JSON body alongside your `query`.
 
 ```bash
 curl \
@@ -157,28 +157,28 @@ curl \
         "query": "query($id:[Int]) { entries(id: $id) { id, title } }",
         "variables": { "id": [1, 2, 3] }
       }' \
-  http://my-project.tld/api
+  https://my-project.ddev.site/api
 ```
 
 #### Querying a Private Schema
 
-The Public Schema is used by default. To query against a different [schema](#define-your-schemas), pass its Access Token using an `Authorization` header.
+The **Public Schema** is used by default. To query against a different [schema](#define-your-schemas), pass a valid [token](#generate-tokens) under the `Authorization` header.
 
 ```bash
 curl \
   -H "Authorization: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/graphql" \
   -d '{entries{id}}' \
-  http://my-project.tld/api
+  https://my-project.ddev.site/api
 ```
 
 ::: warning
-If you’re unable to query a private schema because of a “missing authorization header”, make sure Craft received it from the web server with a quick post to a test template:
+If you’re unable to query a private schema because of a “missing authorization header,” make sure Craft received it from the web server with a quick post to a test template:
 
 ```twig
 {{ craft.app.getRequest().getHeaders().has('authorization')
-  ? 'auth token present ✓'
-  : 'auth token missing!' }}
+  ? 'auth header present ✓'
+  : 'auth header missing!' }}
 ```
 
 Apache strips `Authorization` headers by default, which can be fixed by enabling [CGIPassAuth](https://httpd.apache.org/docs/2.4/en/mod/core.html#cgipassauth) or adding the following to your `.htaccess` file:
@@ -204,7 +204,7 @@ Here’s what a [query](#query-reference) for two news entries might look like, 
     children {
       title
     }
-    ... on news_article_Entry {
+    ... on article_Entry {
       shortDescription
       featuredImage {
         url @transform (width: 300)
@@ -301,17 +301,72 @@ mutation saveEntry($title: String, $slug: String) {
 
 ## Caching
 
-Query results are cached by default to speed up subsequent queries, and you can disable that caching with the <config5:enableGraphQlCaching> setting.
+Query results are cached by default to speed up subsequent queries, but you can disable that caching with the <config5:enableGraphQlCaching> setting.
 
-The entire GraphQL cache is purged for any schema changes, otherwise Craft only purges caches based on content changes relevant to a given query. The more specific your query, the less likely its cache will be cleared when an entry is saved or deleted. For example:
+The entire GraphQL cache is purged for any schema changes. Like template caches, Craft selectively purges GraphQL query results when the underlying elements’ content changes. Keep in mind that multiple GraphQL queries can be sent and executed in the same request, but responses will be cached and invalidated as a whole.
 
-- If the query includes the `id` argument, its caches will only be cleared when that entry is saved or deleted.
-- If the query includes `type` or `typeId` arguments, its caches will only be cleared when entries of the same type are saved or deleted.
-- If the query includes `section` or `sectionId` arguments, its caches will only be cleared when entries in the same section are saved or deleted.
+While combining queries may reduce the number of round-trips to your server, it may significantly impact the number of requests that Craft can serve from the cache. Consider splitting queries into chunks
 
-## Interface Implementation
+## Types
 
-A defined type exists for each specific interface implementation. For example, if a “News” section has “Article” and “Editorial” entry types, in addition to the `EntryInterface` interface type, two additional types would be defined the GraphQL schema, if the token used allows it: `news_article_Entry` and `news_editorial_Entry` types.
+Use the **Explorer** pane in the [GraphiQL IDE](#using-the-graphiql-ide) to browse queries and mutations, and the **Documentation** pane to get information about specific types. The specific types available for introspection and querying are determined by the current [schema](#define-your-schemas).
+
+### Arguments
+
+[Arguments](https://graphql.org/learn/queries/#arguments) typically correlate to element query params and are used to narrow the results of a query.
+
+```gql{2}
+query BlogPosts {
+  newsEntries(orderBy: "postDate DESC") {
+    title
+    summary
+    postDate@formatDateTime(format: "F j, Y")
+  }
+}
+```
+
+### Inputs
+
+[Input types](https://graphql.org/graphql-js/mutations-and-input-types/) determine the allowed (and required) params
+
+### Elements
+
+Each element type provides dedicated query and mutation interfaces that expose unique properties. A generic query type is provided for each element type that allows you to build queries from scratch, similar to the `craft.entries()` or `craft.assets()` APIs available in Twig:
+
+::: code
+```gql{2} Entries
+query FeaturedResources {
+  entries(section: "documents", type: ["report", "dataset"], featured: true) {
+    title
+    url
+  }
+}
+```
+```gql{2} Assets
+query Images {
+  assets(volume: "uploads", kind: "image") {
+    filename
+    size
+  }
+}
+```
+:::
+
+Specific query types are available for some subsets of elements, like [sections](../reference/element-types/entries.md#sections). The _News_ section above would get a dedicated `newsEntries` query.
+
+[Mutations](#mutations) follow a similar pattern—to create or update an entry in our _News_ section, you would use the dedicated `save_news_post_Entry` mutation:
+
+```gql{2}
+mutation CreateContact {
+  save_contacts_person_Entry(
+    title: "Oli",
+    position: "Support Engineer",
+    timezone: "GMT"
+  ) {
+    id
+  }
+}
+```
 
 ## Query Reference
 

@@ -87,7 +87,7 @@ $futureEntries = \craft\elements\Entry::find()
 :::
 
 ::: tip
-Don’t forget to consider or disable [template caching](../twig/tags.md#cache) for requests that use `now` comparisons! You can pass a `x-craft-gql-cache: no-cache` header for GraphQL requests or set a relatively low [cache duration](config5:cacheDuration).
+Me mindful of [template caching](../twig/tags.md#cache) when comparing against the current time!
 :::
 
 ### Working with Date Field Data
