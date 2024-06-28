@@ -30,6 +30,8 @@ Craft has two types of schemas:
 1. A single _public_ schema that defines which content should be available to unauthenticated clients.
 2. Any number of _private_ schemas that permit querying and mutating specific types of elements.
 
+Administrators have access to a third “full” schema, for testing with the [GraphiQL IDE](#using-the-graphiql-ide).
+
 Manage your schemas in the control panel by navigating to <Journey path="GraphQL, Schemas" />.
 
 ::: warning
@@ -46,7 +48,7 @@ Authorization: Bearer {token}
 
 Invalid tokens will produce a 400-level HTTP exception; requests _without_ a token default to the public schema, if it is enabled. More [examples](#examples) of token usage appear below!
 
-To create a token, visit <Journey path="GraphQL, Tokens" /> and click **New token**. Every token’s **Name** must be unique, but multiple tokens may be created for each schema. Craft handles generating the 32-character access token
+To create a token, visit <Journey path="GraphQL, Tokens" /> and click **New token**. Every token’s **Name** must be unique, but multiple tokens may be created for each schema. Craft automatically generates a random 32-character access token, which can be copied from the **Authorization Header** section. Regenerate and save a token to revoke access to existing clients.
 
 Because tokens are similar to [user groups](../system/user-management.md#user-groups) in the way they grant access to system resources, only admins are allowed to create and modify them. Tokens can also be created via the CLI, with the [`graphql/create-token` command](../reference/cli.md#graphql-create-token). To find a schema’s UUID (required by this command), run `graphql/list-schemas`.
 
@@ -73,7 +75,9 @@ Craft sets an `access-control-allow-origin: *` header by default on GraphQL resp
 
 ## Sending API Requests
 
-Assuming your project lives at `https://my-project.ddev.site` and your [route](#create-a-graphql-route) was configured like the example above, you can confirm it’s working by sending a `{ping}` query to it:
+### CURL
+
+Assuming your project lives at `https://my-project.ddev.site` and your [route](#create-a-graphql-route) was configured like the example above, you can confirm the [public schema](#define-your-schemas) working by sending a `{ping}` query to it:
 
 ```bash
 curl -H "Content-Type: application/graphql" -d '{ping}' https://my-project.ddev.site/api
@@ -85,8 +89,10 @@ If you get a `pong` in your response, your GraphQL API is up and running!
 {"data":{"ping":"pong"}}
 ```
 
+If you get an error, make sure your [public schema](#define-your-schemas) is enabled, and try again.
+
 ::: tip
-The `ping` test is implicitly allowed by all _enabled_ schemas. It is not a guarantee that any particular content is actually available, but does perform authorization when a token is sent.
+The `ping` test is implicitly allowed by all _enabled_ schemas. It is not a guarantee that any particular content is actually available, but authorization is performed when a token is sent.
 :::
 
 ### Using the GraphiQL IDE
