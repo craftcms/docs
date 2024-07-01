@@ -77,7 +77,7 @@ Craft sets an `access-control-allow-origin: *` header by default on GraphQL resp
 
 ### CURL
 
-Assuming your project lives at `https://my-project.ddev.site` and your [route](#create-a-graphql-route) was configured like the example above, you can confirm the [public schema](#define-your-schemas) working by sending a `{ping}` query to it:
+Assuming your project lives at `https://my-project.ddev.site` and your [route](#create-a-graphql-route) was configured like the example above, you can confirm the [public schema](#define-your-schemas) is working by sending a `{ping}` query to it:
 
 ```bash
 curl -H "Content-Type: application/graphql" -d '{ping}' https://my-project.ddev.site/api
