@@ -27,12 +27,10 @@ With a GraphQL API endpoint defined, Craft determines what content should be ava
 
 Craft has two types of schemas:
 
-1. A single _public_ schema that defines which content should be available to unauthenticated clients.
+1. A single _public_ schema that defines which content should be available to unauthenticated clients. _The public schema is disabled by default._
 2. Any number of _private_ schemas that permit querying and mutating specific types of elements.
 
-Administrators have access to a third “full” schema, for testing with the [GraphiQL IDE](#using-the-graphiql-ide).
-
-Manage your schemas in the control panel by navigating to <Journey path="GraphQL, Schemas" />.
+Administrators have access to a third “full” schema, for testing with the [GraphiQL IDE](#using-the-graphiql-ide). Manage your schemas in the control panel by navigating to <Journey path="GraphQL, Schemas" />.
 
 ::: warning
 Schema customization is only possible with an admin account and <config5:allowAdminChanges> _on_.
@@ -77,7 +75,7 @@ Craft sets an `access-control-allow-origin: *` header by default on GraphQL resp
 
 ### CURL
 
-Assuming your project lives at `https://my-project.ddev.site` and your [route](#create-a-graphql-route) was configured like the example above, you can confirm the [public schema](#define-your-schemas) is working by sending a `{ping}` query to it:
+Assuming your project lives at `https://my-project.ddev.site` and your [route](#create-a-graphql-route) was configured like the example above, you can confirm the [public schema](#define-your-schemas) is working by sending a `{ping}` query to it via the command line:
 
 ```bash
 curl -H "Content-Type: application/graphql" -d '{ping}' https://my-project.ddev.site/api
