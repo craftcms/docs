@@ -388,7 +388,7 @@ This feature does have _some_ limitations, though. While it will work for all el
 
 ### Reusable Filesystems
 
-Filesystems can now be shared by multiple asset volumes, so long as each volume as a unique and non-overlapping base path. The [assets](./reference/element-types/assets.md) page has more information on this new behavior.
+Filesystems can now be shared by multiple asset volumes, so long as each volume has a unique and non-overlapping base path. The [assets](./reference/element-types/assets.md) page has more information on this new behavior.
 
 ### Temporary Filesystem
 
