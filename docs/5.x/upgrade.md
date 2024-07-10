@@ -5,7 +5,7 @@ description: Take a peek at what’s new in Craft 5.
 
 # Upgrading from Craft 4
 
-The smoothest way to upgrade to Craft 5 is to start with a [fully-updated Craft 4 project](/4.x/updating.md).
+The smoothest way to upgrade to Craft 5 is to start with a [fully-updated Craft 4 project](/4.x/updating.md). We recommend approaching the upgrade in three phases: [preparation](#preparing-for-the-upgrade), a [local upgrade](#performing-the-upgrade), and [rollout](#going-live) to live environments.
 
 <!-- more -->
 
@@ -54,14 +54,14 @@ ddev start
 1. Run `php craft project-config/rebuild` and allow any new background tasks to complete.
 1. Capture a database backup of your _local_ environment, just in case things go sideways.
 1. Note your current **Temp Uploads Location** setting in **Settings** &rarr; **Assets** &rarr; **Settings**.
-1. Add your database’s current character set and collation to `.env`. If you have always used Craft’s defaults, this will be:
+1. MySQL users: Add your database’s _current_ character set and collation to `.env`. If you have always used Craft’s defaults, this will be:
 
     ```bash
     CRAFT_DB_CHARSET="utf8mb3"
     CRAFT_DB_COLLATION="utf8mb3_general_ci"
     ```
 
-    If you _have_ changed the character set or collation, make sure your settings agree with [these recommendations](#database-character-set-and-collation).
+    Read more about this process in the [Database Character Set and Collation](#database-character-set-and-collation) section, below.
 
 1. Edit your project’s `composer.json` to require `"craftcms/cms": "^5.0.0"` and Craft-5-compatible plugins, all at once.
 
@@ -70,10 +70,11 @@ ddev start
     :::
 
     While you’re at it, review your project’s [other dependencies](#entry-scripts)! You may also need to add `"php": "8.2"` to your [platform](https://getcomposer.org/doc/06-config.md#platform) requirements, or remove it altogether.
+
 1. Run `composer update`.
 1. Make any required changes to your [configuration](#configuration).
 1. Run `php craft up`.
-1. Remove your database character set and collation settings from `.env` (and `db.php`—even if you didn’t modify it during the upgrade), then run `php craft db/convert-charset`.
+1. MySQL users: Remove your database character set and collation settings from `.env` (and `db.php`—even if you didn’t modify it during the upgrade), then run `php craft db/convert-charset`.
 
 Your site is now running Craft 5! If you began this process with no deprecation warnings, you’re nearly done.
 
@@ -81,15 +82,27 @@ Your site is now running Craft 5! If you began this process with no deprecation 
 Thoroughly review the list of changes on this page, making note of any features you use in templates or modules. Only a fraction of your site’s code is actually evaluated during an upgrade, so it’s your responsibility to check templates and modules for consistency. You may also need to follow any plugin-specific upgrade guides.
 :::
 
-Once you’ve verified everything’s in order, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory (along with any template, configuration, or module files that required updates) and deploy those changes normally in each additional environment.
+## Going Live
 
-### Cleanup + Optional Steps
+The Craft 5 upgrade can be run largely unattended during a routine deployment. Once you’ve performed the upgrade in your local environment and everything is working as expected, commit your updated `composer.json`, `composer.lock`, and `config/project/` directory, as well as any template, configuration, or module files that required updates.
+
+::: warning
+MySQL users must add the correct [character set and collation settings](#database-character-set-and-collation) to each remote environment for the duration of the upgrade.
+:::
+
+Deploy your changes to each environment, then run `php craft up`.
+
+If you added temporary character set or collation settings for the upgrade, remove them now, then run `php craft db/convert-charset` to apply Craft 5’s new defaults to all tables.
+
+Read more about this part of the upgrade in the [Database Character Set and Collation](#database-character-set-and-collation) section, below.
+
+## Cleanup + Optional Steps
 
 #### Entry Scripts
 
 Older projects may use versions of [`vlucas/phpdotenv`](repo:vlucas/phpdotenv) (the library that loads variables from your `.env` file) that depend on features deprecated in PHP 8.1. If you encounter errors during (or after) installation, change your `vlucas/phpdotenv` dependency in `composer.json` to `^5.6.0`, then run `composer update`.
 
-Along with this update, you’ll need to integrate changes from our [starter project](repo:craftcms/craft)’s `web/index.php` script and `craft` executable. If you have done any low-level customization of Craft via [bootstrap constants](configure.md#bootstrap-config), make sure those values are preserved in the appropriate file(s)—constants shared between the two files can be moved to the new [`bootstrap.php` file](repo:craftcms/craft/blob/5.x/bootstrap.php).
+Along with this update, you’ll need to integrate changes from our [starter project](repo:craftcms/craft)’s `web/index.php` script and `craft` executable. If you have done any low-level customization of Craft via [bootstrap constants](configure.md#bootstrap-config), make sure those values are preserved in the appropriate file(s)—constants shared between the two files can be moved to a common [`bootstrap.php` file](repo:craftcms/craft/blob/5.x/bootstrap.php).
 
 ## Breaking Changes and Deprecations
 
@@ -107,26 +120,33 @@ The following settings have been changed.
 
 MySQL 8.0 [deprecated the `utf8mb3` character set](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb3.html), as well as [the use of `utf8` as an alias for `utf8mb3`](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8.html). MySQL [recommends `utf8mb4`](https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-utf8mb4.html) instead, and it’s expected that `utf8` will become an alias for `utf8mb4` in MySQL 8.1.
 
-To ease that transition, Craft 5 is proactively treating `utf8` as `utf8mb4` for MySQL and MariaDB installs. Since that will be different from what most Craft installs are already using, you will need to start explicitly setting the charset and collation using the non-aliased names, to avoid a SQL error during the upgrade.
+To ease that transition, Craft 5 is proactively treating `utf8` as `utf8mb4` for MySQL and MariaDB installs.
 
-Ensure the following are set in your `.env` file:
+<Block label="During the Upgrade">
+
+Explicitly setting the character set and collation ensures compatibility of new tables _during_ the upgrade—afterwards, those settings can be scrubbed and the tables can be converted via Craft’s CLI. Here’s how this will look, in practice.
+
+If you have never customized character set or collation settings for your database connection, set these variables in your `.env` file during the upgrade:
 
 ```bash
 CRAFT_DB_CHARSET="utf8mb3"
 CRAFT_DB_COLLATION="utf8mb3_general_ci"
 ```
 
-::: tip
-Once the upgrade is complete, you can convert your tables to `utf8mb4` by removing the `CRAFT_DB_CHARSET` and `CRAFT_DB_COLLATION` environment variables, or updating them to the appropriate values:
+If you _are_ using these settings (either from `.env` or `db.php`), they can be left as-is, for now.
+
+Once the upgrade is complete in an environment, convert your tables to `utf8mb4` by _removing_ the `CRAFT_DB_CHARSET` and `CRAFT_DB_COLLATION` environment variables (and clearing any `charset` and `collation` settings from `db.php`)…
 
 ```bash
+# …or set them to Craft’s defaults…
 CRAFT_DB_CHARSET="utf8mb4"
 CRAFT_DB_COLLATION="utf8mb4_0900_ai_ci" # MySQL
 CRAFT_DB_COLLATION="utf8mb4_unicode_ci" # MariaDB
 ```
 
-Then run `php craft db/convert-charset` to update all existing database tables.
-:::
+…then running `php craft db/convert-charset`.
+
+</Block>
 
 #### Template Priority
 
