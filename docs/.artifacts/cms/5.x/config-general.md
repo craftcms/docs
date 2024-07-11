@@ -1429,7 +1429,7 @@ Defined by
 :  [GeneralConfig::$safeMode](craft5:craft\config\GeneralConfig::$safeMode)
 
 Since
-:  4.9.0
+:  5.1.0
 
 </div>
 
@@ -1845,7 +1845,7 @@ Defined by
 :  [GeneralConfig::$backupCommandFormat](craft5:craft\config\GeneralConfig::$backupCommandFormat)
 
 Since
-:  4.9.0
+:  5.1.0
 
 </div>
 
@@ -3022,7 +3022,7 @@ Defined by
 :  [GeneralConfig::$asyncCsrfInputs](craft5:craft\config\GeneralConfig::$asyncCsrfInputs)
 
 Since
-:  4.9.0
+:  5.1.0
 
 </div>
 
