@@ -48,7 +48,7 @@ Since
 
 How long a cart should go without being updated before it’s considered inactive.
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](craft4:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](craft5:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
 
 
 
@@ -89,9 +89,9 @@ Since
 
 </div>
 
-Default URL to be loaded after using the [load cart controller action](orders-carts.md#loading-a-cart).
+Default URL to be loaded after using the [load cart controller action](https://craftcms.com/docs/commerce/5.x/system/orders-carts.html#loading-a-cart).
 
-If `null` (default), Craft’s default [`siteUrl`](config4:siteUrl) will be used.
+If `null` (default), Craft’s default [`siteUrl`](config5:siteUrl) will be used.
 
 
 
@@ -135,7 +135,7 @@ Defined by
 
 Default length of time before inactive carts are purged. (Defaults to 90 days.)
 
-See [craft\helpers\ConfigHelper::durationInSeconds()](craft4:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
+See [craft\helpers\ConfigHelper::durationInSeconds()](craft5:craft\helpers\ConfigHelper::durationInSeconds()) for a list of supported value types.
 
 
 
@@ -230,7 +230,7 @@ Defined by
 URL for a user to resolve billing issues with their subscription.
 
 ::: tip
-The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/plans/update-billing-details.twig).
+The example templates include [a template for this page](https://github.com/craftcms/commerce/tree/5.x/example-templates/dist/shop/plans/update-billing-details.twig).
 :::
 
 
@@ -302,7 +302,7 @@ Defined by
 
 ISO codes for supported payment currencies.
 
-See [Payment Currencies](payment-currencies.md).
+See [Payment Currencies](https://craftcms.com/docs/commerce/5.x/system/payment-currencies.html).
 
 
 
