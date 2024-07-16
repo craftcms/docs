@@ -132,7 +132,7 @@ Defined by
 
 Whether Craft should allow system and plugin updates in the control panel, and plugin installation from the Plugin Store.
 
-This setting will automatically be disabled if <config4:allowAdminChanges> is disabled.
+This setting will automatically be disabled if <config5:allowAdminChanges> is disabled.
 
 ::: code
 ```php Static Config
@@ -387,7 +387,7 @@ Since
 The default locale the control panel should use for date/number formatting, for users who haven’t set
 a preferred language or formatting locale.
 
-If this is `null`, the <config4:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
+If this is `null`, the <config5:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
 
 ::: code
 ```php Static Config
@@ -784,7 +784,7 @@ Defined by
 
 </div>
 
-List of file extensions that will be merged into the <config4:allowedFileExtensions> config setting.
+List of file extensions that will be merged into the <config5:allowedFileExtensions> config setting.
 
 ::: code
 ```php Static Config
@@ -877,11 +877,11 @@ When this is enabled, the following changes will take place:
 - Front-end routing will skip checks for element and template requests.
 - Front-end responses will be JSON-formatted rather than HTML by default.
 - Twig will be configured to escape unsafe strings for JavaScript/JSON rather than HTML by default for front-end requests.
-- The <config4:loginPath>, <config4:logoutPath>, <config4:setPasswordPath>, and <config4:verifyEmailPath> settings will be ignored.
+- The <config5:loginPath>, <config5:logoutPath>, <config5:setPasswordPath>, and <config5:verifyEmailPath> settings will be ignored.
 
 ::: tip
 With Headless Mode enabled, users may only set passwords and verify email addresses via the control panel. Be sure to grant “Access the control
-panel” permission to all content editors and administrators. You’ll also need to set the <config4:baseCpUrl> config setting if the control
+panel” permission to all content editors and administrators. You’ll also need to set the <config5:baseCpUrl> config setting if the control
 panel is located on a different domain than your front end.
 :::
 
@@ -1747,7 +1747,7 @@ page as well for this to work. You can conditionally include it for only Live Pr
 `x-craft-live-preview` query string parameter.
 
 ::: tip
-You can customize the behavior of iFrame Resizer via the <config4:previewIframeResizerOptions> config setting.
+You can customize the behavior of iFrame Resizer via the <config5:previewIframeResizerOptions> config setting.
 :::
 
 ::: code
@@ -2154,7 +2154,7 @@ The base URL Craft should use when generating control panel URLs.
 It will be determined automatically if left blank.
 
 ::: tip
-The base control panel URL should **not** include the [control panel trigger word](config4:cpTrigger) (e.g. `/admin`).
+The base control panel URL should **not** include the [control panel trigger word](config5:cpTrigger) (e.g. `/admin`).
 :::
 
 ::: code
@@ -2187,14 +2187,14 @@ The URI segment Craft should look for when determining if the current request sh
 the front-end website.
 
 This can be set to `null` if you have a dedicated hostname for the control panel (e.g. `cms.my-project.tld`), or you are running Craft in
-[Headless Mode](config4:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root
+[Headless Mode](config5:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root
 directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
 
 ```php
 define('CRAFT_CP', true);
 ```
 
-Alternatively, you can set the <config4:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your
+Alternatively, you can set the <config5:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your
 control panel due to URI conflicts with actual folders/files in your main web root.
 
 (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
@@ -2262,7 +2262,7 @@ The URI Craft should use for user login on the front end.
 
 This can be set to `false` to disable front-end login.
 
-Note that this config setting is ignored when <config4:headlessMode> is enabled.
+Note that this config setting is ignored when <config5:headlessMode> is enabled.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2296,7 +2296,7 @@ The URI Craft should use for user logout on the front end.
 
 This can be set to `false` to disable front-end logout.
 
-Note that this config setting is ignored when <config4:headlessMode> is enabled.
+Note that this config setting is ignored when <config5:headlessMode> is enabled.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2349,7 +2349,7 @@ CRAFT_OMIT_SCRIPT_NAME_IN_URLS=1
 
 ::: tip
 Even when this is set to `true`, the script name could still be included in some action URLs.
-If you want to ensure that `index.php` is fully omitted from **all** generated URLs, set the <config4:pathParam>
+If you want to ensure that `index.php` is fully omitted from **all** generated URLs, set the <config5:pathParam>
 config setting to `null`.
 :::
 
@@ -2381,7 +2381,7 @@ Example Value | Example URI
 `?page` | `/news?page=5`
 
 ::: tip
-If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config4:pathParam> setting which defaults to `p`.
+If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config5:pathParam> setting which defaults to `p`.
 If your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
 :::
 
@@ -2481,7 +2481,7 @@ Defined by
 
 The path users should be redirected to after logging in from the front-end site.
 
-This setting will also come into effect if the user visits the login page (as specified by the <config4:loginPath> config setting) when
+This setting will also come into effect if the user visits the login page (as specified by the <config5:loginPath> config setting) when
 they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
@@ -2544,12 +2544,12 @@ Defined by
 
 The URI or URL that Craft should use for Set Password forms on the front end.
 
-This setting is ignored when <config4:headlessMode> is enabled, unless it’s set to an absolute URL.
+This setting is ignored when <config5:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: tip
-You might also want to set <config4:invalidUserTokenPath> in case a user clicks on an expired password reset link.
+You might also want to set <config5:invalidUserTokenPath> in case a user clicks on an expired password reset link.
 :::
 
 ::: code
@@ -2588,7 +2588,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
 
 ::: tip
-You’ll also need to set [setPasswordPath](config4:setPasswordPath), which determines the URI and template path for the Set Password form
+You’ll also need to set [setPasswordPath](config5:setPasswordPath), which determines the URI and template path for the Set Password form
 where the user resets their password after following the link in the Password Reset email.
 :::
 
@@ -2709,7 +2709,7 @@ Defined by
 
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
-This setting only takes effect if <config4:omitScriptNameInUrls> is set to `false`.
+This setting only takes effect if <config5:omitScriptNameInUrls> is set to `false`.
 
 ::: code
 ```php Static Config
@@ -2774,7 +2774,7 @@ Since
 
 The URI or URL that Craft should use for email verification links on the front end.
 
-This setting is ignored when <config4:headlessMode> is enabled, unless it’s set to an absolute URL.
+This setting is ignored when <config5:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -3124,7 +3124,7 @@ Defined by
 
 </div>
 
-The name of CSRF token used for CSRF validation if <config4:enableCsrfProtection> is set to `true`.
+The name of CSRF token used for CSRF validation if <config5:enableCsrfProtection> is set to `true`.
 
 ::: code
 ```php Static Config
@@ -3279,7 +3279,7 @@ Defined by
 
 </div>
 
-Whether to use a cookie to persist the CSRF token if <config4:enableCsrfProtection> is enabled. If false, the CSRF token will be
+Whether to use a cookie to persist the CSRF token if <config5:enableCsrfProtection> is enabled. If false, the CSRF token will be
 stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security,
 it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
 
@@ -3434,7 +3434,7 @@ Since
 
 The amount of time content preview tokens can be used before expiring.
 
-Defaults to <config4:defaultTokenDuration> value.
+Defaults to <config5:defaultTokenDuration> value.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
@@ -3936,7 +3936,7 @@ List of additional file kinds Craft should support. This array will get merged w
 
 ::: tip
 File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with
-the <config4:extraAllowedFileExtensions> config setting.
+the <config5:extraAllowedFileExtensions> config setting.
 :::
 
 
@@ -4400,7 +4400,7 @@ Since
 
 Whether SVG thumbnails should be rasterized.
 
-This will only work if ImageMagick is installed, and <config4:imageDriver> is set to either `auto` or `imagick`.
+This will only work if ImageMagick is installed, and <config5:imageDriver> is set to either `auto` or `imagick`.
 
 ::: code
 ```php Static Config
@@ -4874,7 +4874,7 @@ Since
 
 </div>
 
-Whether the <config4:gqlTypePrefix> config setting should have an impact on `query`, `mutation`, and `subscription` types.
+Whether the <config5:gqlTypePrefix> config setting should have an impact on `query`, `mutation`, and `subscription` types.
 
 ::: code
 ```php Static Config
