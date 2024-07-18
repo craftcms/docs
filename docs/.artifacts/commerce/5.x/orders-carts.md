@@ -76,6 +76,7 @@
 | [withAddresses](#withaddresses)               | Eager loads the shipping and billing addressees on the resulting orders.
 | [withAdjustments](#withadjustments)           | Eager loads the order adjustments on the resulting orders.
 | [withAll](#withall)                           | Eager loads all relational data (addresses, adjustments, customers, line items, transactions) for the resulting orders.
+| [withCustomFields](#withcustomfields)         | Sets whether custom fields should be factored into the query.
 | [withCustomer](#withcustomer)                 | Eager loads the user on the resulting orders.
 | [withLineItems](#withlineitems)               | Eager loads the line items on the resulting orders.
 | [withTransactions](#withtransactions)         | Eager loads the transactions on the resulting orders.
@@ -1644,6 +1645,19 @@ Possible values include:
 | Value | Fetches addresses, adjustments, customers, line items, transactions
 | - | -
 | bool | `true` to eager-load, `false` to not eager load.
+
+
+
+
+#### `withCustomFields`
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
 
 
 

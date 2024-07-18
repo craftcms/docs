@@ -63,6 +63,7 @@ Product queries support the following parameters:
 | [wasCountEagerLoaded](#product-wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
 | [wasEagerLoaded](#product-waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
 | [with](#product-with)                               | Causes the query to return matching products eager-loaded with related elements.
+| [withCustomFields](#product-withcustomfields)       | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
@@ -1464,6 +1465,19 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
+
+
+<h4 id="product-withcustomfields"><a href="#product-withcustomfields" class="header-anchor">#</a> <code>withCustomFields</code></h4>
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 
