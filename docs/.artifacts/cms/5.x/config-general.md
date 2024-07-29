@@ -3026,7 +3026,7 @@ Since
 
 </div>
 
-Whether CSRF values should be injected via JavaScript for greater cache-ability.
+Whether CSRF values should be injected via JavaScript for greater cache-ability. This setting can be overridden by passing an `async` option into the `csrfInput()` function.
 
 ::: code
 ```php Static Config
