@@ -344,6 +344,23 @@ Flashes are temporary messages Craft stores in your session, typically under key
 {% endif %}
 ```
 
+Most endpoints support customizing success and fail flashes:
+
+```twig{4,5}
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('entries/save-entry') }}
+  {{ successMessageInput('Your feedback has been logged!') }}
+  {{ failMessageInput('Something went wrong when submitting your message.') }}
+
+  {# ... #}
+
+  <textarea name="fields[reviewBody]"></textarea>
+
+  <button>Send</button>
+</form>
+```
+
 ## Responses
 
 Action requests are largely consistent in their behavior—exceptions will be noted in each of the [available actions](../reference/controller-actions.md#available-actions)’ **Response** sections.
