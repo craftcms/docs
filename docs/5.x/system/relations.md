@@ -55,7 +55,9 @@ Craft has five built-in relational fields, each of which establishes links to a 
 - [Tags](../reference/field-types/tags.md)
 - [Users](../reference/field-types/users.md)
 
-Addresses and global sets don’t have relational fields, in the traditional sense—the former are managed as nested elements, and the latter exist as singleton elements
+Additionally, the [link field](../reference/field-types/link.md) uses the relations system to store references to assets, categories, and entries.
+
+Addresses and global sets don’t have relational fields, in the traditional sense—the former are managed as nested elements, and the latter exist as static, singleton elements that can be queried by handle using the value of a dropdown field.
 
 ::: tip
 [Eager-loading](../development/eager-loading.md) related elements _does_ make them available directly on the source element! Don’t worry about this just yet—let’s get comfortable with the default behavior, first.
