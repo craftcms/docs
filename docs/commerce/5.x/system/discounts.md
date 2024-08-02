@@ -36,8 +36,8 @@ You can restrict a discount to specific purchasables by enabling the **Only matc
 
 If this is enabled and no purchasables are selected, the discount will never match.
 
-::: tip
-Only variants belonging to _promotable_ products may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
+::: warning
+Only variants marked as **Promotable** will match discount conditions (even when it is explicitly selected).
 :::
 
 ## Discount Conditions Rules
