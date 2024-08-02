@@ -697,19 +697,25 @@ This works similarly to the [raw](https://twig.symfony.com/doc/3.x/filters/raw.h
 
 ## `redirectInput`
 
-Shortcut for typing `<input type="hidden" name="redirect" value="{{ url|hash }}">`.
+Output an HTML input equivalent to `<input type="hidden" name="redirect" value="{{ url|hash }}">`, for use in [forms](../../development/forms.md) that POST data to Craft or a plugin.
 
 ```twig
 {{ redirectInput(url) }}
 ```
 
-You can optionally set additional attributes on the tag by passing an `options` argument.
+The URL is typically parsed as an object template, meaning dynamic redirects are possible, based on the data being manipulated.
+
+You can optionally set additional attributes on the resulting `input` tag by passing an `options` argument:
 
 ```twig
 {{ redirectInput(url, {
   id: 'redirect-input'
 }) }}
 ```
+
+::: warning
+Don’t include user-provided data in redirection URLs, directly (via interpolation in a template) or indirectly (rendered in an object template).
+:::
 
 ## `renderObjectTemplate`
 
