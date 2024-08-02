@@ -8,6 +8,10 @@ return [
 ];
 ```
 
+::: tip
+In Commerce 5, many global settings have become store-specific. See the [upgrade guide](upgrade.md#multi-store) for more information.
+:::
+
 ## Aliases
 
 Commerce adds these aliases on top of those [provided by Craft](/5.x/configure.md#aliases).
@@ -18,51 +22,41 @@ Commerce adds these aliases on top of those [provided by Craft](/5.x/configure.m
 
 ## Environmental Configuration
 
-Some Commerce settings should be defined on a [per-environment basis](/5.x/configure.md#multi-environment-config).
+Some Commerce settings can be defined on a [per-environment basis](/5.x/configure.md#control-panel-settings) using environment variables or aliases:
 
-- System Settings
-    - General Settings
-        - Email
-            - **Status Email Address**
-            - **From Name**
-        - Subscription Settings
+- **System Settings** &rarr;
+    - **General Settings** &rarr;
+        - **Subscription Settings** &rarr;
             - **Billing detail update URL**
-
-## PHP Constants
-
-### `COMMERCE_PAYMENT_CURRENCY`
-
-This constant can be used to lock a valid payment currency ISO code, which otherwise defaults to the primary currency.
+    - **Emails** &rarr;
+        - **Status Email Address** (Environment variables only)
+        - **From Name** (Environment variables only)
 
 ## Project Config
 
 Craft Commerce stores the following items in the Craft [project config](/5.x/system/project-config.md):
 
 - Commerce general settings
+- Stores
+- Order, product, variant, and subscription field layouts
+- Order statuses
+- Product types
 - Email settings
 - PDF settings
 - Gateways settings
-- Order field layout
-- Order Statuses
-- Product types
-- Fields and field groups
-- Subscription field layout
 
-Not _everything_ should be stored in the project config. Some items are considered content, which will change in production—meaning they’re not stored in the project config:
+Some items are considered “content” and can change in production, meaning they’re _not_ stored in project config:
 
-- Discount promotions
-- Sales promotions
+- Pricing rules
+- Discounts and sales
 - Shipping categories
 - Shipping zones
 - Shipping methods and rules
 - Subscription plans
-- Subscriptions elements
 - Tax categories
 - Tax zones
 - Tax rates
-- Order elements
-- Products & Variant elements
-
+- Order, product, variant, and subscription elements
 
 ## Config Settings
 
