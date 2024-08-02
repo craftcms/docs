@@ -102,7 +102,26 @@ Commerce now supports multiple storefronts, each with unique configuration.
 
 <See path="system/stores.md" />
 
-With this change, the singular `store` service has been deprecated. In its place, the `stores` service provides access to information about all the configured stores. Calls to `craft.commerce.store.store` should be replaced with the new global `currentStore` variable, or an explicit call via the new service:
+A number of settings have moved from the “global” space into the context of individual stores:
+
+- `autoSetNewCartAddresses`
+- `autoSetCartShippingMethodOption`
+- `autoSetPaymentSource`
+- `allowEmptyCartOnCheckout`
+- `allowCheckoutWithoutPayment`
+- `allowPartialPaymentOnCheckout`
+- `requireShippingAddressAtCheckout`
+- `requireBillingAddressAtCheckout`
+- `requireShippingMethodSelectionAtCheckout`
+- `useBillingAddressForTax`
+- `validateOrganizationTaxIdAsVatId`
+- `orderReferenceFormat`
+- `freeOrderPaymentStrategy`
+- `minimumTotalPriceStrategy`
+
+If you had previously used these in your `config/commerce.php` file, they will be ignored. During the upgrade, Commerce copies each setting onto the new default/primary store, and saves them in [project config](/5.x/system/project-config.md). To review or update these settings, visit <Journey path="Commerce, System Settings, Stores, Primary" />.
+
+The singular `store` service has been deprecated. In its place, the `stores` service provides access to information about all the configured stores. Calls to `craft.commerce.store.store` should be replaced with the new global `currentStore` variable, or an explicit call via the new service:
 
 ::: code
 ```twig Old
@@ -119,7 +138,7 @@ With this change, the singular `store` service has been deprecated. In its place
 ```
 :::
 
-Non-project config settings (like the order condition formula and [markets](system/stores.md#markets)) are now kept in a dedicated [StoreSettings](commerce5:craft\commerce\models\StoreSettings) model:
+Non-project config settings (like the order condition formula and [markets](system/stores.md#markets)) are now accessible via a dedicated [StoreSettings](commerce5:craft\commerce\models\StoreSettings) model:
 
 ```twig
 {% set allowedCountries = currentStore.settings.countryList %}
