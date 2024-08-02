@@ -1,114 +1,131 @@
 # Purchasables
 
-The core of anything sold with Commerce is a _purchasable_, a custom [element type](/4.x/extend/element-types.md) that can be added to a cart.
+The core of anything sold with Commerce is a _purchasable_, a type of [element](/5.x/system/elements.md) that can be added to a cart.
 
-Commerce ships with two types of purchasables: [variants](products-variants.md#variants) and [donations](donations.md). [Products](products-variants.md) are _not_ purchasables.
+Commerce ships with two types of purchasables: [variants](products-variants.md#variants) and [donations](donations.md). Somewhat counterintuitively, [products](products-variants.md) are _not_ purchasables!
 
-## Purchasables and Line Items
+## Line Items
 
-Every purchasable is destined to become a line item, which happens when the purchasable is added to a cart. This is an important shift where the purchasable describing an item’s content and available options becomes a line item in an order.
+When a customer adds a purchasable to their [cart](orders-carts.md), Commerce represents it as a _line item_.
 
-When a line item is populated from a purchasable, a JSON snapshot is saved on that line item. The snapshot provides a permanent reference to whatever the purchasable looked like in that moment, regardless of how products or variations change over time. In other words, the details in the snapshot will persist regardless of any store changes during or after the checkout process.
+Line items capture a reference to the purchasable and some vital properties like the price, dimensions, weight. They can also hold customer notes, private notes, and arbitrary _options_ data.
+
+::: tip
+Read about using line items in [cart](../development/cart.md) and [order](../development/orders.md) templates, in the _Development_ section.
+:::
+
+### Snapshots
+
+When a line item is populated from a purchasable, a JSON snapshot is saved on that line item. The snapshot provides a permanent record of whatever the purchasable looked like in that moment, regardless of how products or variations change over time. The snapshot will persist, regardless of any store changes after checkout.
 
 <toggle-tip title="Example Snapshot">
 
 ```json
 {
-  "productId": "29",
-  "isDefault": "1",
-  "sku": "ANT-001",
-  "price": 20,
-  "sortOrder": "1",
+  "isDefault": false,
+  "sortOrder": 1,
+  "deletedWithProduct": false,
   "width": null,
   "height": null,
   "length": null,
   "weight": null,
-  "stock": "0",
-  "hasUnlimitedStock": "1",
+  "freeShipping": false,
+  "promotable": false,
+  "availableForPurchase": true,
   "minQty": null,
   "maxQty": null,
-  "deletedWithProduct": false,
-  "id": "30",
+  "inventoryItemId": 1,
+  "inventoryTracked": false,
+  "eagerLoadInfo": null,
+  "id": 114,
   "tempId": null,
   "draftId": null,
   "revisionId": null,
-  "uid": "076305ef-17c5-4433-99de-bf5fb090f704",
-  "fieldLayoutId": null,
-  "contentId": "23",
-  "enabled": "1",
-  "archived": "0",
-  "siteId": "1",
-  "title": "A New Toga",
-  "slug": "ant-001",
+  "isProvisionalDraft": false,
+  "uid": "639a0373-cd9a-4d5b-9a48-860e4ebf355d",
+  "siteSettingsId": 119,
+  "fieldLayoutId": 12,
+  "enabled": true,
+  "archived": false,
+  "siteId": 2,
+  "title": "Advanced Unit",
+  "slug": "__temp_gpyrlszcdnezpempgaxfzzryspgsylgjnojs",
   "uri": null,
-  "dateCreated": "2020-06-29T09:12:02-07:00",
-  "dateUpdated": "2020-06-29T09:12:03-07:00",
+  "dateCreated": "2024-07-01T16:02:32-07:00",
+  "dateUpdated": "2024-07-10T09:23:04-07:00",
+  "dateLastMerged": null,
   "dateDeleted": null,
+  "deletedWithOwner": null,
   "trashed": false,
-  "propagateAll": false,
-  "newSiteIds": [],
-  "resaving": false,
-  "duplicateOf": null,
-  "previewing": false,
-  "hardDelete": false,
+  "isNewForSite": false,
+  "forceSave": false,
+  "fieldId": null,
+  "canonicalId": 114,
+  "cpEditUrl": "#",
+  "isDraft": false,
+  "isRevision": false,
+  "isUnpublishedDraft": false,
   "ref": null,
   "status": "enabled",
   "structureId": null,
-  "url": "https://foo.dev/shop/products/ant-001?variant=30",
+  "url": "https://my-project.ddev.site/widgets/thingamabob?variant=114",
   "isAvailable": true,
-  "isPromotable": true,
-  "shippingCategoryId": 1,
-  "taxCategoryId": 1,
-  "onSale": false,
-  "cpEditUrl": "#",
+  "isPromotable": false,
+  "price": 8.99,
+  "promotionalPrice": null,
+  "basePrice": 8.99,
+  "basePromotionalPrice": null,
+  "onPromotion": false,
+  "salePrice": 8.99,
+  "sku": "WIDGET-THINGY-ADVANCED",
+  "stock": 0,
   "product": {
-    "postDate": "2020-06-29T09:12:02-07:00",
+    "postDate": "2024-07-01T16:02:03-07:00",
     "expiryDate": null,
-    "typeId": "1",
-    "taxCategoryId": "1",
-    "shippingCategoryId": "1",
-    "promotable": "1",
-    "freeShipping": null,
-    "enabled": "1",
-    "availableForPurchase": true,
-    "defaultVariantId": "30",
-    "defaultSku": "ANT-001",
-    "defaultPrice": "20.0000",
-    "defaultHeight": "0.0000",
-    "defaultLength": "0.0000",
-    "defaultWidth": "0.0000",
-    "defaultWeight": "0.0000",
+    "typeId": 1,
+    "defaultVariantId": 142,
+    "defaultSku": "WIDGET-THINGY-BASIC",
+    "defaultHeight": null,
+    "defaultLength": null,
+    "defaultWidth": null,
+    "defaultWeight": null,
     "taxCategory": null,
     "name": null,
-    "id": "29",
+    "eagerLoadInfo": null,
+    "id": 113,
     "tempId": null,
     "draftId": null,
     "revisionId": null,
-    "uid": "71a2efe8-163f-4014-9ffc-b8272d469a7e",
-    "fieldLayoutId": null,
-    "contentId": "22",
-    "archived": "0",
-    "siteId": "1",
-    "title": "A New Toga",
-    "slug": "ant-001",
-    "uri": "shop/products/ant-001",
-    "dateCreated": "2020-06-29T09:12:02-07:00",
-    "dateUpdated": "2020-06-29T09:12:02-07:00",
+    "isProvisionalDraft": false,
+    "uid": "40cdabfe-c7ca-4a49-be20-f55be18531cd",
+    "siteSettingsId": 117,
+    "fieldLayoutId": 11,
+    "enabled": true,
+    "archived": false,
+    "siteId": 2,
+    "title": "Thingamabob",
+    "slug": "thingamabob",
+    "uri": "widgets/thingamabob",
+    "dateCreated": "2024-07-01T16:02:03-07:00",
+    "dateUpdated": "2024-07-10T09:23:28-07:00",
+    "dateLastMerged": null,
     "dateDeleted": null,
+    "deletedWithOwner": null,
     "trashed": false,
-    "propagateAll": false,
-    "newSiteIds": [],
-    "resaving": false,
-    "duplicateOf": null,
-    "previewing": false,
-    "hardDelete": false,
+    "isNewForSite": false,
+    "forceSave": false,
+    "canonicalId": 113,
+    "cpEditUrl": "https://my-project.ddev.site/admin/commerce/products/widgets/113-thingamabob",
+    "isDraft": false,
+    "isRevision": false,
+    "isUnpublishedDraft": false,
     "ref": null,
     "status": "live",
     "structureId": null,
-    "url": "https://foo.dev/shop/products/ant-001"
+    "url": "https://my-project.ddev.site/widgets/thingamabob"
   },
-  "description": "A New Toga",
-  "purchasableId": "30",
+  "description": "Thingamabob - Advanced Unit",
+  "purchasableId": 114,
   "options": [],
   "sales": []
 }
@@ -116,10 +133,19 @@ When a line item is populated from a purchasable, a JSON snapshot is saved on th
 
 </toggle-tip>
 
-This can be particularly helpful, for example, if you’re displaying a completed order’s line items in templates and `getPurchasable()` returns `null`. This would happen if the purchasable was deleted, in which case details could be used from the snapshot instead. (This only applies to completed orders, because if a purchasable is deleted _during checkout_ the related line item would be removed from the customer’s cart.)
+Snapshot data can be essential in cases where you need to [display a completed order](../development/orders.md)’s line items in a template but the product and variant have since been deleted. This only applies to completed orders, though—if a purchasable is deleted prior to checkout, any line items that refer to it are automatically removed from customers’ carts and [notices](orders-carts.md#order-notices) are attached with a description of what happened.
+
+When building your front end and displaying line items, it’s best to reference purchasable information retrieved via `lineItem.getPurchasable()`. The `snapshot` property is a plain array, and will not have many of the [variant](commerce5:craft\commerce\elements\Variant) and [product](commerce5:craft\commerce\elements\Product) methods you would expect, having dealt with them elsewhere in your templates:
+
+```twig
+{# Set a fallback for the purchasable info: #}
+{% set purchasable = lineItem.getPurchasable() ?? lineItem.snapshot %}
+```
+
+To avoid recursive references and other serialization issues, snapshots do _not_ automatically include custom field data for variants or products. You can customize what additional fields are stored in a snapshot via the [Variant::EVENT_BEFORE_CAPTURE_VARIANT_SNAPSHOT](commerce5:craft\commerce\elements\Variant::EVENT_BEFORE_CAPTURE_VARIANT_SNAPSHOT) event, or add arbitrary data in reponse to [Variant::EVENT_AFTER_CAPTURE_VARIANT_SNAPSHOT](commerce5:craft\commerce\elements\Variant::EVENT_AFTER_CAPTURE_VARIANT_SNAPSHOT). Similar events exist for product elements, as well.
+
+Snapshots are _not_ an authoritative source for pricing, stock, availability, or other values that can change—they are only intended to serve as way of identifying a purchasable to the customer (and administrators) after an order is completed.
 
 ::: tip
-When building your front end and displaying line items, it’s best to reference purchasable information through `getPurchasable()`, relying the `snapshot` property either as a fallback or a source of truth when the purchasable is changed or deleted.
-:::
-
 To learn more about adding your own custom purchasables, see the [Purchasable Types](../extend/purchasable-types.md) page.
+:::

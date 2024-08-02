@@ -5,473 +5,48 @@ containsGeneratedContent: yes
 
 # Orders & Carts
 
-Variants are added to a _cart_ that can be completed to become an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
+Variants are added to a _cart_, which is eventually completed, becoming an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
 
-When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce4:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
+When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce5:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
 
 Typically, a cart is completed in response to a customer [making a payment](../development/making-payments.md)—or by satisfying other requirements you’ve defined through [configuration](../configure.md) or an [extension](../extend/README.md).
 
 ## Carts
 
-As a customer or store manager is building a cart, the goal is to maintain an up-to-date list of items with their relevant costs, discounts, and promotions. For this reason, the cart will be recalculated each time a change is made.
+As a customer or store manager is building a cart, the goal is to maintain an up-to-date list of items with their relevant costs, discounts, promotions, and metadata. For this reason, the cart will be recalculated each time a change is made.
 
 Once a cart is completed, however, it becomes an [order](#orders) that represents choices explicitly finalized by whoever completed the cart. The order’s behavior changes slightly at this point: the customer will no longer be able to make edits, and changes made by a store manager will not automatically trigger [recalculation](#recalculating-orders).
 
-Carts and orders are both listed on the Orders index page in the control panel, where you can further limit your view to _active_ carts updated in the last hour, and _inactive_ carts older than an hour that are likely to be abandoned. (You can customize that time limit using the [`activeCartDuration`](../configure.md#activecartduration) setting.)
-
-Craft will automatically to purge (delete) abandoned carts after 90 days, and you can customize this behavior with the [`purgeInactiveCarts`](../configure.md#purgeinactivecarts) and [`purgeInactiveCartsDuration`](../configure.md#purgeinactivecartsduration) settings.
-
-Let’s go over a few common actions you may want to perform on a cart:
-
-- [Fetching a Cart](#fetching-a-cart)
-- [Adding Items to a Cart](#adding-items-to-a-cart)
-- [Working with Line Items](#working-with-line-items)
-- [Using Custom Fields](#storing-data-in-custom-fields)
-- [Loading](#load-a-cart) and [forgetting](#forgetting-a-cart) carts
-
-More topics are covered in separate pages:
-
-- [Addresses](addresses.md)
-- [cart.availableShippingMethodOptions](shipping.md#cart-availableshippingmethodoptions)
-
-### Fetching a Cart
-
-In your templates, you can get the current user’s cart like this:
-
-```twig
-{% set cart = craft.commerce.carts.cart %}
-
-{# Same thing: #}
-{% set cart = craft.commerce.getCarts().getCart() %}
-```
-
-The current cart is also available via Ajax:
-
-```js
-fetch('/actions/commerce/cart/get-cart', {
-  headers: {
-    'Accept': 'application/json',
-  },
-})
-  .then(r => r.json())
-  .then(console.log);
-
-// -> { cart: { ... } }
-```
-
-Either of the examples above will generate a new cart _cookie_ if none exists. However, Commerce will only create an order element when a change is made to the cart—this prevents runaway creation of empty carts for guests or bots who happen to request a page that displays some cart information like the current item quantity or total.
-
-To see what cart information you can use in your templates, take a look at the [Order](commerce4:craft\commerce\elements\Order) class reference. You can also see sample Twig in the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig).
-
-Once a cart’s completed and turned into an order, calling `craft.commerce.carts.cart` starts this process over.
-
-### Adding Items to a Cart
-
-You can add purchasables (like [a variant](products-variants.md#variants)) to the cart by submitting post requests to the `commerce/cart/update-cart` action. Items can be added one at a time or in an array.
-
-#### Adding a Single Item
-
-You can add a single item to a cart by submitting its `purchasableId`.
-
-This gets a product and creates a form that will add its default variant to the cart:
-
-```twig
-{% set product = craft.products().one() %}
-{% set variant = product.defaultVariant %}
-
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ hiddenInput('purchasableId', variant.id) }}
-  <button>Add to Cart</button>
-</form>
-```
-
-If the product has multiple variants, you could provide a dropdown menu to allow the customer to choose one of them:
-
-```twig{10-14}
-{% set product = craft.products().one() %}
-
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ redirectInput('shop/cart') }}
-  {{ successMessageInput('Added ' ~ product.title ~ ' to cart.') }}
-  {{ hiddenInput('qty', 1) }}
-
-  <select name="purchasableId">
-    {% for variant in product.variants %}
-      <option value="{{ variant.id }}">{{ variant.sku }}</option>
-    {% endfor %}
-  </select>
-  <button>Add to Cart</button>
-</form>
-```
-
-We’re sneaking three new things in here as well:
-
-1. The `successMessage` parameter can be used to customize the default “Cart updated.” flash message.
-2. The `qty` parameter can be used to specify a quantity, which defaults to `1` if not supplied.
-3. Craft’s [`redirectInput`](/5.x/reference/twig/functions.md#redirectinput) tag can be used to take the user to a specific URL after the cart is updated successfully. **If any part of the cart update action fails, the user will not be redirected.**
-
-#### Adding Multiple Items
-
-You can add multiple purchasables to the cart in a single request using a `purchasables` array instead of a single `purchasableId`. This form adds all a product’s variants to the cart at once:
-
-```twig{7-10}
-{% set product = craft.products().one() %}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ redirectInput('shop/cart') }}
-  {{ successMessageInput('Products added to the cart.') }}
-  {% for variant in product.variants %}
-     {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
-     {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
-  {% endfor %}
-  <button>Add all variants to cart</button>
-</form>
-```
-
-A unique index key is required to group the purchasable `id` with its `qty`, and in this example we’re using `{{ loop.index }}` as a convenient way to provide it.
-
 ::: tip
-You can use the [`purchasableAvailable`](../extend/events.md#purchasableavailable) event to control whether a line item should be available to the current user and cart.
+Carts and orders are managed per-[store](stores.md). A customer may have multiple active carts in different stores, each with discrete contents. The active cart depends on the current site and the mapping you’ve configured.
 :::
 
-### Working with Line Items
+Carts and orders are both listed on the **Orders** index page in the control panel, where you can further limit your view to _active_ carts (updated in the last hour), and _inactive_ carts (older than an hour). You can customize this time limit using the [`activeCartDuration`](../configure.md#activecartduration) setting.
 
-Whenever a purchasable is added to the cart, the purchasable becomes a [line item](#purchasables-and-line-items) in that cart. In the examples above we set the line item’s quantity with the `qty` parameter, but we also have `note` and `options` to work with.
+Craft automatically deletes inactive carts after 90 days. Disable purging with the [`purgeInactiveCarts`](../configure.md#purgeinactivecarts) setting, or fine-tune the delay with [`purgeInactiveCartsDuration`](../configure.md#purgeinactivecartsduration).
 
-#### Line Item Options and Notes
+Your customers’ experience of the cart and [checkout](../development/checkout.md) can be tailored to your project.
 
-An `options` parameter can be submitted with arbitrary data to include with that item. A `note` parameter can include a message from the customer.
+<See path="../development/cart.md" label="Using the cart in your templates" description="Dive into developing cart management experiences in Twig." />
 
-In this example, we’re providing the customer with an option to include a note, preset engraving message, and giftwrap option:
-
-::: code
-```twig Single Item
-{% set product = craft.products().one() %}
-{% set variant = product.defaultVariant %}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ hiddenInput('qty', 1) }}
-  <input type="text" name="note" value="">
-  <select name="options[engraving]">
-    <option value="happy-birthday">Happy Birthday</option>
-    <option value="good-riddance">Good Riddance</option>
-  </select>
-  <select name="options[giftwrap]">
-    <option value="yes">Yes Please</option>
-    <option value="no">No Thanks</option>
-  </select>
-  {{ hiddenInput('purchasableId', variant.id) }}
-  <button>Add to Cart</button>
-</form>
-```
-```twig Multiple Items
-{% set product = craft.products().one() %}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {% for variant in product.variants %}
-    {{ hiddenInput('purchasables[' ~ loop.index ~ '][id]', variant.id) }}
-    {{ hiddenInput('purchasables[' ~ loop.index ~ '][qty]', 1) }}
-    <input type="text" name="purchasables[{{ loop.index }}][note]" value="">
-    <select name="purchasables[{{ loop.index }}][options][engraving]">
-      <option value="happy-birthday">Happy Birthday</option>
-      <option value="good-riddance">Good Riddance</option>
-    </select>
-    <select name="purchasables[{{ loop.index }}][options][giftwrap]">
-      <option value="yes">Yes Please</option>
-      <option value="no">No Thanks</option>
-    </select>
-  {% endfor %}
-  <button>Add to Cart</button>
-</form>
-```
-:::
-
-::: warning
-Commerce does not validate the `options` and `note` parameters. If you’d like to limit user input, use front-end validation or use the [`Model::EVENT_DEFINE_RULES`](craft4:craft\base\Model::EVENT_DEFINE_RULES) event to add validation rules for the [`LineItem`](commerce4:craft\commerce\models\LineItem) model.
-:::
-
-The note and options will be visible on the order’s detail page in the control panel:
-
-![Line Item Option Review](../images/lineitem-options-review.png)
-
-#### Updating Line Items
-
-The `commerce/cart/update-cart` endpoint is for both adding *and updating* cart items.
-
-You can directly modify any line item’s `qty`, `note`, and `options` using that line item’s ID in a `lineItems` array. Here we’re exposing each line item’s quantity and note for the customer to edit:
-
-```twig{6,7}
-{% set cart = craft.commerce.carts.cart %}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {% for item in cart.lineItems %}
-    <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
-    <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
-  {% endfor %}
-  <button>Update Line Item</button>
-</form>
-```
-
-You can remove a line item by including a `remove` parameter in the request. This example adds a checkbox the customer can use to remove the line item from the cart:
-
-```twig{8}
-{% set cart = craft.commerce.carts.cart %}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {% for item in cart.lineItems %}
-    <input type="number" name="lineItems[{{ item.id }}][qty]" min="1" value="{{ item.qty }}">
-    <input type="text" name="lineItems[{{ item.id }}][note]" placeholder="My Note" value="{{ item.note }}">
-    <input type="checkbox" name="lineItems[{{ item.id }}][remove]" value="1"> Remove item<br>
-  {% endfor %}
-  <button>Update Line Item</button>
-</form>
-```
-
-::: tip
-The [example templates](../development/example-templates.md) include a [detailed cart template](https://github.com/craftcms/commerce/blob/main/example-templates/dist/shop/cart/index.twig) for adding and updating items in a full checkout flow.
-:::
-
-#### Options Uniqueness
-
-If a purchasable is posted that’s identical to one already in the cart, the relevant line item’s quantity will be incremented by the submitted `qty`.
-
-If you posted a purchasable or tried to update a line item with different `options` values, however, a new line item will be created instead. This behavior is consistent whether you’re updating one item at a time or multiple items in a single request.
-
-Each line item’s uniqueness is determined behind the scenes by an `optionsSignature` attribute, which is a hash of the line item’s options. You can think of each line item as being unique based on a combination of its `purchasableId` and `optionsSignature`.
-
-::: tip
-The `note` parameter is not part of a line item’s uniqueness; it will always be updated on a matching line item.
-:::
-
-#### Line Item Totals
-
-Each line item includes several totals:
-
-- **lineItem.subtotal** is the product of the line item’s `qty` and `salePrice`.
-- **lineItem.adjustmentsTotal** is the sum of each of the line item’s adjustment `amount` values.
-- **lineItem.total** is the sum of the line item’s `subtotal` and `adjustmentsTotal`.
-
-### Loading and Forgetting Carts
-
-“Loading” and “forgetting” are a pair of actions that affect what cart is associated with the customer’s session.
-
-#### Load a Cart
-
-Commerce provides a [`commerce/cart/load-cart`](../reference/controller-actions.md#get-post-cart-load-cart) endpoint for loading an existing cart into a cookie for the current customer.
-
-You can have the user interact with the endpoint by either [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form). Either way, the cart number is required.
-
-Each method will store any errors in the session’s error flash data (`craft.app.session.getFlash('error')`), and the cart being loaded can be active or inactive.
-
-::: tip
-If the desired cart belongs to a user, that user must be logged in to load it into a browser cookie.
-:::
-
-The [`loadCartRedirectUrl`](../configure.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart has been loaded.
-
-#### Loading a Cart with a URL
-
-Have the customer navigate to the `commerce/cart/load-cart` endpoint, including the `number` parameter in the URL.
-
-A quick way for a store manager to grab the URL is by navigating in the control panel to **Commerce** → **Orders**, selecting one item from **Active Carts** or **Inactive Carts**, and choosing **Share cart…** from the context menu:
-
-![Share cart context menu option](../images/share-cart.png)
-
-You can also do this from an order edit page by choosing the gear icon and then **Share cart…**.
-
-To do this programmatically, you’ll need to create an absolute URL for the endpoint and include a reference to the desired cart number.
-
-This example sets `loadCartUrl` to an absolute URL the customer can access to load their cart. Again we’re assuming a `cart` object already exists for the cart that should be loaded:
-
-::: code
-```twig
-{% set loadCartUrl = actionUrl(
-  'commerce/cart/load-cart',
-  { number: cart.number }
-) %}
-```
-
-```php
-$loadCartUrl = craft\helpers\UrlHelper::actionUrl(
-    'commerce/cart/load-cart',
-    ['number' => $cart->number]
-);
-```
-:::
-
-::: tip
-This URL can be presented to the user however you’d like. It’s particularly useful in an email that allows the customer to retrieve an abandoned cart.
-:::
-
-#### Loading a Cart with a Form
-
-Send a GET or POST action request with a `number` parameter referencing the cart you’d like to load. When posting the form data, you can include a specific redirect location like you can with any other Craft post data.
-
-This is a simplified version of [`shop/cart/load.twig`](https://github.com/craftcms/commerce/tree/main/example-templates/dist/shop/cart/load.twig) in the example templates, where a `cart` variable has already been set to the cart that should be loaded:
-
-```twig
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/load-cart') }}
-  {{ redirectInput('/shop/cart') }}
-
-  <input type="text" name="number" value="{{ cart.number }}">
-  <button>Submit</button>
-</form>
-```
-
-#### Restoring Previous Cart Contents
-
-If the customer is a registered user, they may want to continue shopping from another browser or computer. If they have an empty cart on the second device (as they would by default) and they log in, their most recently-created cart will automatically be loaded.
-
-::: tip
-When a guest with an active cart creates an account, that cart will be remain active after logging in.
-:::
-
-You can allow a logged-in customer to see their previously used carts:
-
-::: code
-```twig
-{% if currentUser %}
-  {% set currentCart = craft.commerce.carts.cart %}
-  {% if currentCart.id %}
-    {# Return all incomplete carts *except* the currently-loaded one #}
-    {% set oldCarts = craft.orders()
-      .isCompleted(false)
-      .id('not '~currentCart.id)
-      .user(currentUser)
-      .all() %}
-  {% else %}
-    {% set oldCarts = craft.orders()
-      .isCompleted(false)
-      .user(currentUser)
-      .all() %}
-  {% endif %}
-{% endif %}
-```
-```php
-use craft\commerce\Plugin as Commerce;
-use craft\commerce\elements\Order;
-
-$currentUser = Craft::$app->getUser()->getIdentity();
-
-if ($currentUser) {
-    $currentCart = Commerce::getInstance()->getCarts()->getCart();
-    if ($currentCart->id) {
-        // Return all incomplete carts *except* the currently-loaded one
-        $oldCarts = Order::findAll()
-            ->isCompleted(false)
-            ->id('not '.$currentCart->id)
-            ->user($currentUser);
-    } else {
-        $oldCarts = Order::findAll()
-            ->isCompleted(false)
-            ->user($currentUser);
-    }
-}
-```
-:::
-
-You could then loop over the line items in those older carts and allow the customer to add them to their current cart:
-
-```twig
-<h2>Previous Cart Items</h2>
-
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-
-  {% for oldCart in oldCarts %}
-    {% for lineItem in oldCart.lineItems %}
-      {{ lineItem.description }}
-      <label>
-        {{ input('checkbox', 'purchasables[][id]', lineItem.purchasableId) }}
-        Add to cart
-      </label>
-    {% endfor %}
-  {% endfor %}
-
-  <button>Add Items</button>
-</form>
-```
-
-### Forgetting a Cart
-
-A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart. If the customer logs out, their cart will automatically be forgotten.
-
-Removing all the items from a cart doesn’t mean that the cart is forgotten, though—sometimes, fully detaching a cart from the session is preferable to emptying it. To remove a cart from the customer’s session (without logging out or clearing the items), make a `POST` request to the [`cart/forget-cart` action](../reference/controller-actions.md#post-cart-forget-cart). A cart number is _not_ required—Commerce can only detach the customer’s current cart.
-
-The next time the customer makes a request to the [`update-cart` action](../reference/controller-actions.md#post-cart-update-cart), they will be given a new cart
-
-::: tip
-In previous versions, you can call the `forgetCart()` method manually to remove the current cart cookie. The cart itself will not be deleted—just disassociated with the customer’s session until it’s loaded again by some other means.
-
-::: code
-```twig
-{# Forget the cart in the current session. #}
-{{ craft.commerce.carts.forgetCart() }}
-```
-```php
-use craft\commerce\Plugin as Commerce;
-
-// Forget the cart in the current session.
-Commerce::getInstance()->getCarts()->forgetCart();
-```
-:::
-:::
-
-### Storing Data in Custom Fields
-
-Like any other type of [element](/5.x/system/elements.md), orders can have custom fields associated with them via a field layout. To customize the fields available on carts and orders, visit **Commerce** &rarr; **System Settings** &rarr; **Order Fields**.
-
-Custom fields are perfect for storing information about an order that falls outside [line item options or notes](orders-carts.md#line-item-options-and-notes).
-
-::: tip
-Now that [Addresses](/5.x/reference/element-types/addresses.md#setup) are stored as elements, they support custom fields, too!
-:::
-
-You can update custom fields on a cart by posting data to the [`commerce/cart/update-cart`](../reference/controller-actions.md#post-cart-update-cart) action under a `fields` key:
-
-```twig
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ redirectInput('shop/cart') }}
-
-  <label>
-    Gift Message
-    {{ input('text', 'fields[giftMessage]', cart.giftMessage) }}
-  </label>
-
-  <button>Update Cart</button>
-</form>
-```
+Use of carts and orders is deeply connected to other Commerce features like [addresses](addresses.md), [shipping](shipping.md), [tax](tax.md), and so on.
 
 ## Orders
 
-Orders are [Element Types](/5.x/extend/element-types.md) and can have custom fields associated with them. You can browse orders in the control panel by navigating to **Commerce** → **Orders**.
+An order is a type of [element](/5.x/extend/element-types.md) that underpins the shopping and checkout experience, in addition to supporting the wide array of content and query features. You can browse orders in the control panel by navigating to <Journey path="Commerce, Orders" />.
 
 When a cart becomes an order, the following things happen:
 
 1. The `dateOrdered` order attribute is set to the current date.
 2. The `isCompleted` order attribute is set to `true`.
 3. The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
-4. The order reference number is generated for the order, based on the “Order Reference Number Format” setting. (In the control panel: **Commerce** → **Settings** → **System Settings** → **General Settings**.)
+4. The order reference number is generated for the order, based on the [**Order Reference Number Format** setting](stores.md#settings) for the store it was placed in.
 
 Instead of being recalculated on each change like a cart, the order will only be recalculated if you [manually trigger recalculation](#recalculating-orders).
 
 Adjustments for discounts, shipping, and tax may be applied when an order is recalculated. Each adjustment is related to its order, and can optionally relate to a specific line item.
 
-If you’d like to jump straight to displaying order information in your templates, take a look at the the <commerce4:craft\commerce\elements\Order> class reference for a complete list of available properties.
+If you’d like to jump straight to displaying order information in your templates, check out the [cart](../development/cart.md) and [orders](../development/orders.md) development sections, then review the <commerce5:craft\commerce\elements\Order> class reference for a complete list of available methods and properties.
 
 ### Order Numbers
 
@@ -479,99 +54,114 @@ There are three ways to identify an order: by order number, short order number, 
 
 #### Order Number
 
-The order number is a hash generated when the cart cookie is first created. It exists even before the cart is saved in the database, and remains the same for the entire life of the order.
+The order number is a 32-character, alphanumeric hash generated when the cart cookie is first created. It exists even before the cart is saved in the database, and remains the same for the entire life of the order. Order numbers are _not_ sequential!
 
-This is different from the order reference number, which is only generated after the cart has been completed and becomes an order.
+```twig
+{{ order.number }}
+{# -> 706ffb9c4fa439977908f6a4ad0287af #}
+```
 
-We recommend using the order number when referencing the order in URLs or anytime the order is retrieved publicly.
+This is different from the [order reference number](#order-reference-number), which is only generated after a cart has been completed and becomes an order.
+
+::: tip
+Use the order number in situations where orders are displayed without authentication—like in a [route](/5.x/system/routing.md#advanced-routing-with-url-rules) segment for a template that displays order details after checkout. See the development page for [an example of a route and template](../development/orders.md#guest-orders) used to display guest orders.
+:::
 
 #### Short Order Number
 
-The short order number is the first seven characters of the order number. This is short enough to still be unique, and is a little friendlier to customers, although not as friendly as the order reference number.
-
-#### Order Reference Number
-
-The order reference number is generated on cart completion according to the **Order Reference Number Format** in **Commerce** → **Settings** → **System Settings** → **General Settings**.
-
-This number is usually best used as the customer-facing identifier of the order, but shouldn’t be used in URLs.
+The short order number is the first seven characters of the order number. This is short enough to still be (statistically) unique, but marginally easier for customers to process—although not as friendly as the [order reference number](#order-reference-number).
 
 ```twig
-{{ object.reference }}
+{{ order.shortNumber }}
+{# -> 706ffb9 #}
 ```
 
-The “Order Reference Number Format” is a mini Twig template that’s rendered when the order is completed. It can use order attributes along with Twig filters and functions. For example:
+#### Order Reference
+
+The _order reference_ is generated upon completing a cart using the store’s **Order Reference Number Format** in <Journey path="Commerce, System Settings, Stores" />. It is intended to be a customer-facing alternative to the 32-digit alphanumeric [order number](#order-number).
 
 ```twig
-{{ object.dateCompleted|date('Y') }}-{{ id }}
+{{ order.reference }}
+```
+
+The “Order Reference Number Format” is an [object template](/5.x/system/object-templates.md) that’s rendered when the order is completed. It can use order attributes along with Twig filters and functions. For example:
+
+```twig
+{{ dateCompleted|date('Y') }}-{{ id }}
 ```
 
 Output:
 
 ```
-2018-43
+2024-43
 ```
 
-In this example, `{{ id }}` refers to the order’s element ID, which is not sequential. If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](/5.x/reference/twig/functions.md#seq) Twig function, which generates a next unique number based on the `name` parameter passed to it.
+In this example, `{{ id }}` refers to the order’s element ID, which is not necessarily sequential (nor predictable in length). If you would rather generate a unique sequential number, a simple way would be to use Craft’s [seq()](/5.x/reference/twig/functions.md#seq) Twig function, which returns the next unique number based on the `name` parameter passed to it.
 
 The `seq()` function takes the following parameters:
 
 1. A key name. If this name is changed, a new sequence starting at one is started.
-2. An optional padding character length. For example if the next sequence number is `14` and the padding length is `8`, the generation number will be `00000014`
+2. An optional padding character length. For example if the next sequence number is `14` and the padding length is `8`, the output will always be at least that many characters: `00000014`. You can change the padding value without disrupting the sequence.
 
 For example:
 
 ```twig
-{{ object.dateCompleted|date('Y') }}-{{ seq(object.dateCompleted|date('Y'), 8) }}
+{{ dateCompleted|date('Y') }}-{{ seq(dateCompleted|date('Y'), 8) }}
 ```
 
-Ouput:
+Output:
 
 ```
-2018-00000023
+2024-00000023
 ```
 
-In this example we’ve used the year as the sequence name so we automatically get a new sequence, starting at `1`, when the next year arrives.
+In this example we’ve used the current year as the sequence name so we automatically get a new sequence, starting at `1`, when the next year arrives. You could use the `store`’s handle (like `seq("store-order-#{store.handle}")`) to keep sequences unique per-store, or a static key (like `seq('order-number')`) if you want _all_ orders to occupy the same sequential space.
+
+Sequences are global, so constructing keys that will not collide with others you may use in other fields or templates is essential to avoid gaps.
+
+::: tip
+Order references cannot be relied upon for sorting. Use `.orderBy('dateCompleted DESC')` if you wish to display orders in reverse-chronological order.
+:::
 
 ### Creating Orders
 
-An order is usually created on the front end as a customer [adds items](#adding-items-to-a-cart) to and completes a [cart](#carts). With Commerce Pro, An order may also be created in the control panel.
+An order is typically created when a customer [adds items](#adding-items-to-a-cart) to their [cart](#carts) and then [checks out](../development/checkout.md). Orders can also be created in the control panel by users with the “Manage Orders” [permission](../reference/permissions.md#manage-orders).
 
-To create a new order, navigate to **Commerce** → **Orders**, and choose **New Order**. This will create a new order that behaves like a cart. As [purchasables](purchasables.md) are added and removed from the order, it will automatically recalculate its [sales](sales.md) and adjustments.
+To create a new order, navigate to <Journey path="Commerce, Orders" />, and choose **New Order**. This will create a new order that behaves like a cart—as [purchasables](purchasables.md) are added to and removed from the order, it will automatically recalculate totals and apply matching discounts and other adjustments. Select a customer and populate the **Billing Address** and **Shipping Address** to ensure prices (including tax and shipping) can be calculated accurately.
 
 To complete the order, press **Mark as completed**.
 
 ### Editing Orders
 
-Orders can be edited in the control panel by visiting the order edit page and choosing **Edit**. You’ll enter edit mode where you can change values within the order.
+Completed orders can be edited in the control panel by visiting the order edit page and choosing **Edit**.
 
 While editing the order, it will refresh subtotals and totals and display any errors. It will _not_ automatically recalculate the order based on system rules like shipping, taxes, or promotions. Choose **Recalculate order** to have it fully recalculate including those system rules.
 
-Once you’re happy with your changes, choose **Update Order** to save it to the database.
+Once you’re happy with your changes, choose **Update Order** to save it to the database. Updating an order after it is completed does not automatically charge or refund the customer! You must take these actions explicitly via the **Transactions** tab.
 
 ### Order Totals
 
 Every order includes a few important totals:
 
-- **order.itemSubtotal** is the sum of the order’s [line item `subtotal` amounts](#line-item-totals).
-- **order.itemTotal** is the sum of the order’s [line item `total` amounts](#line-item-totals).
-- **order.adjustmentSubtotal** is the sum of the order’s adjustments.
+- **order.itemSubtotal** is the sum of the order’s line item `subtotal` amounts.
+- **order.itemTotal** is the sum of the order’s line item `total` amounts.
+- **order.adjustmentsTotal** is the sum of the order’s adjustments.
 - **order.total** is the sum of the order’s `itemSubtotal` and `adjustmentsTotal`.
 - **order.totalPrice** is the total order price with a minimum enforced by the [minimumTotalPriceStrategy](../configure.md#minimumtotalpricestrategy) setting.
 
-::: warning
-You’ll also find an `order.adjustmentsSubtotal` which is identical to `order.adjustmentsTotal`. It will be removed in Commerce 4.
+::: tip
+Note that `total` _can_ be negative!
 :::
 
 ### Recalculating Orders
 
-Let’s take a closer look at how carts and orders can be recalculated.
+Let’s take a closer look at how carts and orders are recalculated.
 
-A cart or order must always be in one of three calculation modes:
+A cart or order is always in one of three calculation modes:
 
-- **Recalculate All** is active for a cart, or an order which is not yet completed.\
-This mode refreshes each line item’s details from the related purchasable and re-applies all adjustments to the cart. In other words, it rebuilds and recalculates cart details based on information from purchasables and how Commerce is configured. This mode merges duplicate line items and removes any that are out of stock or whose purchasables were deleted.
+- **Recalculate All** — Active for incomplete carts and orders. This mode refreshes each line item’s details from the related purchasable and re-applies all adjustments to the cart. In other words, it rebuilds and recalculates cart details based on information from purchasables and how Commerce is configured. This mode merges duplicate line items and removes any that are out of stock or whose purchasables were deleted.
 - **Adjustments Only** doesn’t touch line items, but re-applies adjustments on the cart or order. This can only be set programmatically and is not available from the control panel.
-- **None** doesn’t change anything at all, and is active for an order (completed cart) so only manual edits or admin-initiated recalculation can modify order details.
+- **None** — Skips recalculation entirely; active only on completed orders. Only manual edits or admin-initiated recalculation can modify order details.
 
 Cart/order subtotals and totals are computed values that always reflect the sum of line items. A few examples are `totalPrice`, `itemTotal`, and `itemSubtotal`.
 
@@ -583,135 +173,31 @@ This will set temporarily the order’s calculation mode to *Recalculate All* an
 
 ### Order Notices
 
-Notices are added to an order whenever it changes, whether it’s the customer saving the cart or a store manager recalculating from the control panel. Each notice is an [OrderNotice](https://github.com/craftcms/commerce/blob/main/src/models/OrderNotice.php) model describing what changed and could include the following:
+Notices are added to carts and orders in circumstances where it or the store’s state results in unexpected changes:
 
-- A previously-valid coupon or shipping method was removed from the order.
-- A line item’s purchasable was no longer available so that line item was removed from the cart.
-- A line item’s sale price changed for some reason, like the sale no longer applied for example.
+- A previously-valid coupon or shipping method was removed from the order;
+- A line item’s purchasable was no longer available so that line item was removed from the cart;
+- A line item’s sale price changed for some reason, like a sale ending;
 
-The notice includes a human-friendly terms that can be exposed to the customer, and references to the order and attribute it’s describing.
+Each notice is an [OrderNotice](https://github.com/craftcms/commerce/blob/main/src/models/OrderNotice.php) model, containing a customer-facing description of what changed, and a corresponding <commerce5:craft\commerce\elements\Order> attribute.
 
-#### Accessing Order Notices
+<See path="../development/cart.md" hash="notices" label="Order Notices in Twig" description="Learn about how to display and dismiss notices in your storefront." />
 
-Notices are stored on the order and accessed with `getNotices()` and `getFirstNotice()` methods.
+### Statuses
 
-Each can take optional `type` and `attribute` parameters to limit results to a certain order attribute or kind of notice.
+When a cart is completed, it is assigned the default _order status_ for the [store](stores.md) it was placed in, and any relevant emails are sent via the [queue](/5.x/system/queue.md).
 
-A notice’s `type` will be one of the following:
+<See path="custom-order-statuses.md" label="Order Statuses" description="Design a custom order management workflow for your store." />
 
-- `lineItemSalePriceChanged`
-- `lineItemRemoved`
-- `shippingMethodChanged`
-- `invalidCouponRemoved`
-
-::: code
-```twig
-{# @var order craft\commerce\elements\Order #}
-
-{# Get a multi-dimensional array of notices by attribute key #}
-{% set notices = order.getNotices() %}
-
-{# Get an array of notice models for the `couponCode` attribute only #}
-{% set couponCodeNotices = order.getNotices(null, 'couponCode') %}
-
-{# Get the first notice only for the `couponCode` attribute #}
-{% set firstCouponCodeNotice = order.getFirstNotice(null, 'couponCode') %}
-
-{# Get an array of notice models for changed line item prices #}
-{% set priceChangeNotices = order.getNotices('lineItemSalePriceChanged') %}
-```
-```php
-// @var craft\commerce\elements\Order $order
-
-// Get a multi-dimensional array of notices by attribute key
-$notices = $order->getNotices();
-
-// Get an array of notice models for the `couponCode` attribute only
-$couponCodeNotices = $order->getNotices(null, 'couponCode');
-
-// Get the first notice only for the `couponCode` attribute
-$firstCouponCodeNotice = $order->getFirstNotice(null, 'couponCode');
-
-// Get an array of notice models for changed line item prices
-$priceChangeNotices = $order->getNotices('lineItemSalePriceChanged');
-```
-:::
-
-Each notice can be output as a string in a template:
-
-```twig
-{% set notice = order.getFirstNotice('salePrice') %}
-<p>{{ notice }}</p>
-{# result: <p>The price of x has changed</p> #}
-```
-
-#### Clearing Order Notices
-
-Notices remain on an order until they’re cleared. You can clear all notices by posting to the cart update form action, or call the order’s `clearNotices()` method to clear specific notices or all of them at once.
-
-This example clears all the notices on the cart:
-
-::: code
-```twig{5}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ successMessageInput('All notices dismissed') }}
-  {{ hiddenInput('clearNotices') }}
-  <button>Dismiss</button>
-</form>
-```
-```php{7}
-use craft\commerce\Plugin as Commerce;
-
-// Get the current cart
-$cart = Commerce::getInstance()->getCarts()->getCart();
-
-// Clear all notices
-$cart->clearNotices();
-```
-:::
-
-This only clears `couponCode` notices on the cart:
-
-::: code
-```twig
-{# Clear notices on the `couponCode` attribute #}
-{% do cart.clearNotices(null, 'couponCode') %}
-```
-```php{7}
-use craft\commerce\Plugin as Commerce;
-
-// Get the current cart
-$cart = Commerce::getInstance()->getCarts()->getCart();
-
-// Clear notices on the `couponCode` attribute
-$cart->clearNotices(null, 'couponCode');
-```
-:::
-
-The notices will be cleared from the cart object in memory. If you’d like the cleared notices to persist, you’ll need to save the cart:
-
-::: code
-```twig
-{# Save the cart #}
-{% do craft.app.elements.saveElement(cart) %}
-```
-```php
-// Save the cart
-Craft::$app->getElements()->saveElement($cart);
-```
-:::
-
-### Order Status Emails
+#### Status Emails
 
 If [status emails](emails.md) are set up for a newly-updated order status, messages will be sent when the updated order is saved.
 
-You can manually re-send an order status email at any time. Navigate to an order’s edit page, then select the desired email from the Send Email menu at the top of the page.
+You can manually re-send an order status email at any time. Navigate to an order’s edit screen, then select the desired email from the **Send Email** menu in the toolbar.
 
 ## Querying Orders
 
-You can fetch orders in your templates or PHP code using **order queries**.
+You can fetch carts and orders in your templates or PHP code using **order queries**.
 
 ::: code
 ```twig
@@ -724,15 +210,17 @@ $myOrderQuery = \craft\commerce\elements\Order::find();
 ```
 :::
 
-Once you’ve created an order query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](/5.x/development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Order](commerce4:craft\commerce\elements\Order) objects will be returned.
+Once you’ve created the query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](/5.x/development/element-queries.md#executing-element-queries) by calling `.one()` or `.all()` to return one or more order elements.
 
 ::: tip
 See [Element Queries](/5.x/development/element-queries.md) in the Craft docs to learn about how element queries work.
 :::
 
+The customer’s current cart is accessible in most Twig contexts via `craft.commerce.carts.cart`. In some situations (like [order status emails](emails.md)), an `order` variable will be automatically populated with the correct order. Ad-hoc queries are typically only necessary when displaying _inactive_ carts, a customer’s order history, or for generating custom reports.
+
 ### Example
 
-We can display an order with a given order number by doing the following:
+We can display an order with a given [order number](#order-number) by doing the following:
 
 1. Create an order query with `craft.orders()`.
 2. Set the [number](#number) parameter on it.

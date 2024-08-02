@@ -1,75 +1,97 @@
 # Custom Order Statuses
 
-## Overview
+When a cart becomes an order (in response to a customer completing a payment, or manual intervention by a store manager), it is assigned that store’s default _order status_. Any time an order is given a new status, the associated [status emails](#email) are sent to their designated recipients.
 
-When a customer completes a cart it becomes an order.
+::: tip
+The default order status can be overridden in a plugin or module with the [OrderStatus::EVENT_DEFAULT_ORDER_STATUS](commerce5:craft\commerce\services\OrderStatus::EVENT_DEFAULT_ORDER_STATUS) event.
+:::
 
-The only differences between an order and a cart is:
-
-- A cart has an empty `dateOrdered` attribute.
-- A cart has its `isCompleted` attribute set to `false`.
-- An order has a custom status set.
-
-When a customer completes their order, the `dateOrdered` is set to the current time and date and it gets a custom order status. The custom order status set depends on which order status you’ve established as the default.
-
-Custom order statuses can be managed from **Commerce** → **System Settings** → **Order Statuses** in the control panel. There you can choose the default order status for new orders.
+Custom order statuses are managed in the control panel for each store by navigating to <Journey path="Commerce, System Settings, Order Statuses" />. Status definitions are stored in [project config](/5.x/system/project-config.md) (along with stores, emails, and other system settings), and must be created and modified in a development environment, then deployed.
 
 ## Functionality
 
-Order statuses allow a store owner to track an order through the various stages of its lifecycle.
+Statuses allow store managers to design custom workflows for orders, on a per-store basis. Each order status gets its own [source](/5.x/system/elements.md#sources) in the orders element index, and custom sources can use order status as a filter condition.
 
-For example you may use default status of “Received”, set when the order is completed. Once you’ve packaged the order for shipment, you might update to “Packed” status. Or if you’re waiting to receive product stock you might use a “Pending Stock” status. When you’ve shipped the order you might set the status to “Completed”. Every year you might change all “Completed” orders to an “Archived” status.
+<Block label="Example Workflow">
 
-You can set up as many statuses as you want, with any meaning ascribed to them, and you can move your order between statuses freely.
+A store that sells physical goods might set up order statuses like this:
 
-This allows you to manage your orders and organise them easily.
+1. Orders are placed in the default status “Processing” when a customer checks out.
+2. Once an employee has packaged the order for shipment, its status could be updated to “Packed.” If there was a supply hiccup and the warehouse is waiting on inventory, they might temporarily assign it a “Pending Stock” status, instead.
+3. When the order has been picked up by the carrier, the order can be marked as “Shipped” or “Fulfilled.”
 
-Whenever you change the status of an order, the change from one status to another is recorded in an Order History record on the order. This allows you to see the history of the order over time.
+Statuses can also be used to flag or classify orders outside the typical workflow:
 
-In addition to setting a new status, you can record a message that gets stored with the status change. For example, you might place an order into a status called “Pending Stock”, and in the message write which product you’re waiting on. This is a good way to allow multiple store managers to better understand why a particular status was set on an order.
+- Customers who email with support questions or changes to their order could have them placed in a “Hold” status while a resolution is reached.
+- Similarly, if a customer requests a refund or replacement, the order could be moved into a “Remediated” status.
+- At the end of each quarter, you might change all “Completed” orders to an “Archived” status.
+
+</Block>
+
+You can set up as many statuses as you want, with any meaning ascribed to them, and you can move orders between statuses freely. Whenever you change the status of an order, Commerce creates a record with the new and old statuses, as well as an (optional) message. This history is available on any order’s edit screen in the **Order History** tab.
+
+Order statuses can also be changed programmatically from plugins and modules, in response to all kinds of events—like a webhook from a logistics provider.
 
 ## Changing the status of an order
 
 ### In the control panel
 
-An order’s status can be changed on the Edit Order Page in the control panel. Choosing “Update Order Status” will present you with a modal window that allows the selection of the new status and a message associated with the change. After choosing “Submit”, the order’s status will be updated and a new order history record will be created.
+An order’s status can be changed on the **Edit Order** screen in the control panel. Selecting a new status will reveal a space for a message and a **Suppress Emails** checkbox.
 
-You can change the status of multiple orders at the same time on the Order Index Page using the checkbox selection and then choosing “Update Order Status” from the action menu.
+You can change the status of multiple orders at the same time on the order element index using the checkbox selection and then choosing **Update Order Status** from the action menu. The same message will be applied to all orders modified this way.
 
 ### In code
 
+As a side-effect of saving an order with a new `orderStatusId`, Commerce will emit the appropriate status change events and create a corresponding order history record. Here’s an example of a [custom controller action](/5.x/extend/controllers.md) that is responsible for moving an order into a “Ready for Shipment” status:
+
 ```php
-$order = \craft\commerce\Plugin::getInstance()
-    ->getOrders()
-    ->getOrderById(ID);
-$order->orderStatusId = $orderStatus->id; // new status ID
-$order->message = $message; // new message
-$result = Craft::$app->getElements()->saveElement($order);
+use craft\commerce\Plugin as Commerce;
+use craft\commerce\elements\Order;
+// ...
+public function actionMarkReady(int $orderId)
+{
+    $orderStatus = Commerce::getInstance()->getOrderStatuses()->getOrderStatusByHandle('readyForShipment');
+
+    $order = Order::find()
+        ->id($orderId)
+        ->one();
+
+    // Assign new status ID:
+    $order->orderStatusId = $orderStatus->id;
+
+    // Provide a message:
+    $order->message = Craft::$app->getRequest()->getBodyParam('statusMessage');
+
+    // Save it:
+    if (!Craft::$app->getElements()->saveElement($order)) {
+        return $this->asModelFailure($order, Craft::t('site', 'Failed to update order status.'));
+    }
+
+    return $this->asModelSuccess($order, Craft::t('site', 'Order updated to {status}.', [
+        'status' => $orderStatus->name,
+    ]));
+}
 ```
 
-By updating `orderStatusId` and saving the order, the status change event will be triggered and a new order status history record will be created.
+::: warning
+Always check whether the user has the appropriate permissions to perform an action like this!
+:::
 
 ### Deleting an Order Status
 
-An order status associated with one or more orders cannot be deleted since it would result in incomplete records.
-
-If you’d like to delete an order status, first select all orders having that status in the control panel and change them to a different status. You’ll then be able to delete the order status once it’s no longer in use. (Technically, an order status will only be soft-deleted so each order’s history may be preserved.)
+If you do need to delete an order status (say, to avoid confusion about procedure), use the appropriate order [element index source](/5.x/system/elements.md#sources) to select all orders, and change them to a different status. You’ll then be able to delete the order status; Commerce retains the soft-deleted record (so that your orders’ status history remains intact), but it will not be assignable to other orders.
 
 ## Email
 
 In addition to using order statuses to manage your orders, you can choose emails that will be sent when an order moves into that status.
 
-See [Emails](emails.md).
+<See path="emails.md" label="Order Status Emails" description="Keep your customers up-to-date on their order’s status via automated emails." />
 
 ## Line Item Statuses
 
-Line item statuses are similar to order statuses except they’re for *internal* management of an order and do not trigger emails.
+Line item statuses are similar to order statuses except they’re for internal management of an order and cannot trigger emails.
 
-You can create a new line item status by navigating to **Commerce** → **System Settings** → **Line Item Statuses** and choosing **New line item status**.
-
-When creating a line item status you can optionally designate that status to be applied by default with the **New line items get this status by default** checkbox. When checked, the status is applied by default when an order is completed.
-
-If no line item status is designated as the default, line items have a `null` or “None” status.
+<See path="line-item-statuses.md" label="Line Item Statuses" description="Set up fine-grained fulfillment control." />
 
 ## Templating
 

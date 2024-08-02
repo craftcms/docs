@@ -65,7 +65,7 @@ Automatic SKU Format
     The SKU format is always evaluated in the context of a _variant_, so product attributes must be prefixed with `product`, like `{product.myCustomField}`.
     :::
 
-    Commerce requires that SKUs are unique across all variants in the system—including anything in the trash, so avoid using static or ambiguous values (like `PLACEHOLDER`) that are apt to collide when first saving a variant.
+    Commerce requires that SKUs are unique across all variants in the system—including anything in the trash—so avoid using static or ambiguous values (like `PLACEHOLDER`) that are apt to collide when first saving a variant.
 
 Order Description Format
 :   Identifies a variant in the cart. Like the SKU format, this is also an [object template](/5.x/system/object-templates.md), and gets rendered in the context of a variant. It can include tags that output properties, such as `{product.title}` or `{myVariantCustomField}`.
@@ -221,9 +221,9 @@ Consider these tradeoffs when building your catalog—and don’t forget that yo
 
 ### Prices
 
-Every variant has a _price_ and a _promotional price_. Both base prices are defined directly on the variant, but the final price shown to a customer may be determined by other [pricing rules](pricing-rules.md).
+Every variant has a _price_ and a _promotional price_. Both base prices are defined directly on the variant, in a store’s default currency—but the final price shown to a customer may be determined by [pricing rules](pricing-rules.md) and [currency conversion](currencies.md#conversion-and-formatting).
 
-Prices are defined for each [store](stores.md) a variant is available in.
+Prices are defined for each [store](stores.md) a variant is available in; in the control panel, however, you will manage those differences on a per-_site_ basis. If two sites point to the same store, you will see the same price and input currency when editing the variant in either.
 
 ### Stock
 

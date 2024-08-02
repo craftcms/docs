@@ -4,7 +4,7 @@ Customers with (and without!) accounts often want to see evidence of their purch
 
 ## Post-Checkout
 
-After a customer has paid for or otherwise completed an order, Commerce redirects them to the `returnUrl` memoized on the order. This is often set with the standard [`redirectInput()` function](/5.x/reference/twig/functions.md#redirectinput) when [making a payment](making-payments.md), but may not take effect until the customer returns after completing off-site authentication.
+After a customer has paid for or otherwise completed an order, Commerce redirects them to the `returnUrl` memoized on the order. This is often set with the standard [`redirectInput()` function](/5.x/reference/twig/functions.md#redirectinput) when [making a payment](making-payments.md), but may not take effect until the customer returns from completing off-site authentication.
 
 To send them to a dedicated order summary page, you can send a `redirect` param like this:
 
@@ -15,6 +15,7 @@ To send them to a dedicated order summary page, you can send a `redirect` param 
   {{ redirectInput('orders/{number}') }}
 
   {# ... #}
+
   <button>Pay</button>
 </form>
 ```
@@ -23,9 +24,9 @@ This [object template](/5.x/system/object-templates.md) is evaluated using the o
 
 ## Routing
 
-Routes are a native Craft feature, and can be configured via the control panel via <Journey path="Settings, Routes" /> or a [`config/routes.php` file](/5.x/system.routing.md#advanced-routing-with-url-rules).
+Routes are a native Craft feature, and can be configured via the control panel via <Journey path="Settings, Routes" />, or a [`config/routes.php` file](/5.x/system.routing.md#advanced-routing-with-url-rules).
 
-Commerce doesn’t automatically give Orders front-end URLs (like entries or categories), so it’s up to each project to define an access pattern that makes sense.
+Commerce doesn’t automatically give orders front-end URLs (like entries or categories support), so it’s up to each project to define an access pattern that makes sense.
 
 ### Guest Orders
 
@@ -38,10 +39,10 @@ return [
 ];
 ```
 
-Our object template included the order’s `number`, which is always 32 “hexadecimal” characters long (letters `a` through `f` and numbers `0` through `9`). This route matches that pattern, and passes the captured value to our template under a variable named `orderNumber`.
+Our object template included the [order `number`](../system/orders-carts.md#order-number), which is always 32 “hexadecimal” characters long (letters `a` through `f` and numbers `0` through `9`). This route matches that pattern, and passes the captured value to our template under a variable named `orderNumber`.
 
 ::: tip
-Keep in mind that your order _number_ is different than its _reference_. Commerce does not allow customization of the `number`, as it must be random and globally unique. However, many stores _do_ incorporate the order number (or part of it) in their reference format.
+Keep in mind that your order _number_ is different than its _reference_. Commerce does not allow customization of the `number`, as it must be random and globally unique. However, stores _can_ incorporate the order number (or part of it) in their reference format.
 :::
 
 Create the `_orders/receipt` template in your [templates directory](/5.x/system/directory-structure.md#templates), and add a simple output statement to prove that things are connected:
@@ -50,9 +51,13 @@ Create the `_orders/receipt` template in your [templates directory](/5.x/system/
 {{ orderNumber }}
 ```
 
-Find a valid order number in the control panel, and try loading the URL (`https://my-shop.ddev.site/orders/)
+Find a valid order number in the control panel by visiting <Journey path="Commerce, Orders" />, and try accessing the URL:
 
-To load an order with that number, we’ll use an [order query](../system/orders-carts.md#querying-orders). We only want to show _completed_ orders, so we’ll set an additional parameters on the query:
+```
+https://my-shop.ddev.site/orders/a3e2335afe45e00ecc933648a6511afa
+```
+
+You should see just the alphanumeric order number echoed back. To load an order with that number, we’ll use an [order query](../system/orders-carts.md#querying-orders). We only want to show _completed_ orders, so we’ll set an additional parameters on the query:
 
 ```twig{1-4}
 {% set order = craft.orders()
@@ -77,7 +82,7 @@ If you elect to use a more relaxed pattern for your routes, take care to not ina
 
 Customers will want to confirm some amount of information about their orders immediately after placing them—but it can be unsafe to leave personal information like emails, addresses, or even order contents out on the semi-public web, indefinitely.
 
-Consider setting up a policy with your team about how long order data is accessible, and consider redacting sensitive information after a period of time:
+Consider setting up a policy with your team about how long order data is accessible, and redact sensitive information after a period of time:
 
 ```twig
 {% set elapsed = order.dateOrdered.diff(now) %}
