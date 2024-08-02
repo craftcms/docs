@@ -148,6 +148,10 @@ Expanding upon our previous example, we could output a nicely organized list of 
 
 Either repository’s `getList()` method is a shortcut that returns only key-value pairs, suitable for our examples—it also accepts an array of “parent” groups (beginning with country code) to narrow the subdivisions.
 
+::: tip
+These designations are deliberately generic, and won’t generally be recognized by users. Check out the labels section for information on how to output localized or context-aware names for each level (i.e. _Provinces_ in Canada or _States_ and _Counties_ in the United States).
+:::
+
 You may supplement the subdivision data provided by the [upstream repository](https://github.com/commerceguys/addressing) by listening to the <craft5:craft\services\Addresses::EVENT_DEFINE_ADDRESS_SUBDIVISIONS> event in a plugin or module. Similarly, deeper customization of the required [fields](#fields-and-formatting) (and those fields’ [labels](#attribute-labels)) may require modifying the defaults via the [EVENT_DEFINE_USED_SUBDIVISION_FIELDS](craft5:craft\services\Addresses::EVENT_DEFINE_USED_SUBDIVISION_FIELDS) or [EVENT_DEFINE_FIELD_LABEL](craft5:craft\services\Addresses::EVENT_DEFINE_FIELD_LABEL) events.
 
 ::: tip
@@ -248,6 +252,16 @@ The default formatter includes the following options:
   Los Angeles, CA 92662
   Сполучені Штати
 #}
+```
+
+#### Country Names
+
+Only the two-letter “country code” is stored on addresses. To display the full country name (localized for the viewer), you must retrieve its definition from the [address repository](#address-repository):
+
+```twig
+{% set country = craft.app.getAddresses().getCountryRepository().get(address.countryCode) %}
+
+{{ country.name }}
 ```
 
 ### Customizing the Formatter
