@@ -132,23 +132,23 @@ Types of content that might benefit from being defined as a structure include…
 
 Just like channels, entries in structures can be assigned [types](#entry-types). Structures offer great flexibility in presentation—in particular, the ability to collect nested content on a parent page, or alter the appearance of pages based on their hierarchical “depth” within a bundle of content.
 
-::: tip
-Structures can also make use of the **Maintain Hierarchy** setting on entries fields.
-:::
+Structures have the following additional settings:
 
+Max Levels
+:   Decide how many levels deep authors can organize entries.
+
+Default Entry Placement
+:   Choose where new entries are placed in the structure. This setting applies when that entry has no parent entry (before or after other “root” entries), _and_ when a parent is selected (before or after other entries with the same parent), as well as when an entry is [moved](#moving-entries-between-sections) into the section. <Since ver="5.3.0" feature="Moving entries between sections" />
+
+Structures can also make use of the **Maintain Hierarchy** setting on [entries fields](../field-types/entries.md).
+
+::: tip
 Entries belonging to a structure are discrete from [nested entries](#nested-entries) in [Matrix](../field-types/matrix.md) fields. Structure entries can be freely moved around in their hierarchy (receiving new “parent” elements in the process), whereas nested entries are always owned by the element they were created within.
+:::
 
 #### Custom Sources
 
-Special element sources based on existing Singles, Channels, and Structures by creating _custom sources_. Each custom source lists all entries by default, but can be filtered to only those that meet the specified **Entry Criteria**.
-
-To create a new custom source, go to **Entries** → **Customize Sources** (under the three dots in the sources sidebar), and from the bottom-left “+” menu choose **New custom source**:
-
-![Screenshot of a modal window with fields for a new custom source: Label, Condition Builder, and Table Columns](../../images/custom-source.png)
-
-::: warning
-This same interface is available in the search bar of any [element index](../../system/elements.md#indexes), but the condition builder interface will differ in subtle ways, as custom sources are stored in Project Config.
-:::
+You can supplement the automatic [sources](../../system/elements.md#sources) presented in the entries [element index](../../system/elements.md#indexes) with _custom sources_. Each custom source lists all entries by default, but can be filtered to only those that meet the specified **Entry Criteria**.
 
 ### Entry URI Formats
 
@@ -272,11 +272,23 @@ You can pass the token via either a query string parameter named after your <con
 For live preview, you should also consider [enabling iFrame Resizer](config5:useIframeResizer) so that Craft can maintain the page scroll position between page loads.
 :::
 
+### Moving Entries Between Sections <Since ver="5.3.0" feature="Transferring entries between sections" />
+
+Entries in [channel](#channels) and [structure](#structures) sections cane be moved to other sections that support the same [entry type](#entry-types). Use the **Move to…** element action from any entry element index, then select the new section. If the action is disabled, the entry has no suitable targets—you may be able to change its entry type _in-situ_, reconcile any custom field changes, then move it to a compatible section.
+
+When moving an entry, it’s important to note these behaviors:
+
+- If the new section is a structure, the entry will be placed at the root, according to its **Default Entry Placement** setting.
+- Drafts and revisions will be moved along with the entry and remain accessible, but only drafts that use an entry type that is allowed in the new section can be restored—same as if an entry type were _removed_ from a section.
+- If the new section has a lower **Max authors** setting, author data will remain intact and produce a validation error when saved.
+- Authors who don’t have access to the new section will also be removed, the next time the entry is saved. Permissions are still checked based on the section, not authorship.
+- Singles will never appear as targets for moving an entry.
+
 ## Nested Entries
 
 Entries also power the [Matrix](../field-types/matrix.md) and [CKEditor](plugin:ckeditor) fields, which means your [entry types](#entry-types) can represent entire pages, or the building blocks thereof. How you implement your content model and authoring experience is entirely up to you!
 
-Nested entries are an implementation of nested _elements_, a broader category of “owned” elements that also includes [addresses](addresses.md).
+Nested entries are an implementation of nested _elements_, a broader category of “owned” elements that includes [addresses](addresses.md) and powers Commerce’s product and variant architecture.
 
 ## Editing Entries
 
