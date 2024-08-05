@@ -12,7 +12,7 @@ related:
 
 # Users
 
-Users are Craft’s representation of people.
+A user is a special type of element that represents a person.
 
 <!-- more -->
 
@@ -90,7 +90,7 @@ By {{ collect(entry.authors).pluck('fullName').join(', ', ', and ') }}
 
 ### URLs
 
-Unlike most other element types, users do _not_ have a “URI format” setting, and are not factored into routing.
+Unlike most other element types, users do _not_ have a “URI format” setting or support slugs, and are not factored into routing.
 
 ## Querying Users
 
