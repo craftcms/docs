@@ -89,14 +89,19 @@ Craft will figure out the best textual representation of the link—a selected e
 
 ### Relations
 
-When selecting an element in a link field, Craft adds the appropriate [relation](../../system/relations.md). This means that you can query for elements connected via link fields, just like other [relational fields](../../system/relations.md#custom-fields):
+When using an element in a link field, Craft makes the corresponding connections in its [relations](../../system/relations.md) system. This means that you can query for elements via link fields, just like other [relational fields](../../system/relations.md#custom-fields):
 
 ```twig
-{% set backreferences = craft.entries()
+{% set backlinks = craft.entries()
   .relatedTo({
-    targetElement: entry,
+    targetElement: post,
+    field: 'myLinkField',
   })
   .all() %}
 
-{# -> Returns entries connected to `entry` via any relational field! #}
+{# -> Returns other entries connected to the given `post` via a specific link field. #}
 ```
+
+::: warning
+It is not currently possible to [eager-load](../../development/eager-loading.md) link field relationships, as their element type is not known until the field data is loaded.
+:::
