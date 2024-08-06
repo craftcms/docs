@@ -408,6 +408,65 @@ tagGroup
 
 
 
+## `env`
+
+Sets or removes environment variables in the `.env` file.
+
+<h3 id="env-remove">
+    <a href="#env-remove" class="header-anchor">#</a>
+    <code>env/remove</code>
+</h3>
+
+
+Removes an environment variable from the `.env` file.
+
+    php craft env/remove CRAFT_DEV_MODE
+
+<h4 id="env-remove-parameters" class="command-subheading">Parameters</h4>
+
+name
+: 
+
+
+
+<h3 id="env-set">
+    <a href="#env-set" class="header-anchor">#</a>
+    <code>env/set</code>
+</h3>
+
+
+Sets an environment variable in the `.env` file.
+
+    php craft env/set CRAFT_DEV_MODE true
+
+<h4 id="env-set-parameters" class="command-subheading">Parameters</h4>
+
+name
+: 
+
+value
+: 
+
+
+
+<h3 id="env-show">
+    <a href="#env-show" class="header-anchor">#</a>
+    <code>env/show</code>
+</h3>
+
+
+Displays the value of an environment variable, or sets its value if $name contains `=`.
+
+    php craft env CRAFT_DEV_MODE
+    php craft env CRAFT_DEV_MODE=true
+
+<h4 id="env-show-parameters" class="command-subheading">Parameters</h4>
+
+name
+: 
+
+
+
 ## `exec`
 
 
