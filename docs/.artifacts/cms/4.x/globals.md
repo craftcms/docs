@@ -35,6 +35,7 @@
 | [uid](#uid)                               | Narrows the query results based on the global sets’ UIDs.
 | [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
 | [with](#with)                             | Causes the query to return matching global sets eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)     | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
@@ -777,6 +778,19 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
+
+
+#### `withCustomFields`
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 

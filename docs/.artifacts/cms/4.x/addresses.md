@@ -35,6 +35,7 @@
 | [trashed](#trashed)                       | Narrows the query results to only addresses that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the addresses’ UIDs.
 | [with](#with)                             | Causes the query to return matching addresses eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)     | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
@@ -755,6 +756,19 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `withCustomFields`
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 

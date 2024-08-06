@@ -45,6 +45,7 @@
 | [uid](#uid)                               | Narrows the query results based on the users’ UIDs.
 | [username](#username)                     | Narrows the query results based on the users’ usernames.
 | [with](#with)                             | Causes the query to return matching users eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)     | Sets whether custom fields should be factored into the query.
 | [withGroups](#withgroups)                 | Causes the query to return matching users eager-loaded with their user groups.
 
 
@@ -1061,6 +1062,19 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
+
+
+#### `withCustomFields`
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 #### `withGroups`

@@ -45,6 +45,7 @@
 | [uid](#uid)                                 | Narrows the query results based on the Matrix blocks’ UIDs.
 | [unique](#unique)                           | Determines whether only elements with unique IDs should be returned by the query.
 | [with](#with)                               | Causes the query to return matching Matrix blocks eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
@@ -1052,6 +1053,19 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
     ->all();
 ```
 :::
+
+
+#### `withCustomFields`
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 

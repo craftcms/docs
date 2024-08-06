@@ -49,6 +49,7 @@
 | [volumeId](#volumeid)                     | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
 | [width](#width)                           | Narrows the query results based on the assets’ image widths.
 | [with](#with)                             | Causes the query to return matching assets eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)     | Sets whether custom fields should be factored into the query.
 | [withTransforms](#withtransforms)         | Causes the query to return matching assets eager-loaded with image transform indexes.
 
 
@@ -1231,6 +1232,19 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
+
+
+#### `withCustomFields`
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 #### `withTransforms`
