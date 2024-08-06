@@ -97,12 +97,12 @@ Each setting accepts specific [types and values](#types-and-values) (like an int
 Craft takes the first discovered value, in this order:
 
 0. **Environment Overrides:** For general and database settings, Craft looks for special [environment variables](#environment-overrides) and [PHP constants](#php-constants).
-1. **Config Files:** Craft [evaluates and merges](#multi-environment-configs) PHP config files.
+1. **Config Files:** Craft evaluates and merges [multi-environment](#multi-environment-configs) and [application type](#application-types) PHP config files.
 2. **Defaults:** Every option has a default value, even if it’s `null`. You can find these defaults in the documentation for each setting.
 
-### Style: Map vs. Fluent
+### Style
 
-At its simplest, a config file returns a map of settings:
+At its simplest, a config file returns a key-value map of settings:
 
 ```php
 use craft\helpers\App;
@@ -113,7 +113,7 @@ return [
 ];
 ```
 
-If you are interested in auto-completion and type hints from your editor, the equivalent "fluent" style declaration would look like this:
+If you are interested in auto-completion and type hints from your editor, the equivalent “fluent” style declaration would look like this:
 
 ```php
 use craft\config\GeneralConfig;
@@ -124,10 +124,83 @@ return GeneralConfig::create()
     ->userSessionDuration('P1D');
 ```
 
-Each option becomes a method call, accepting the same values that you would provide in a config map. The modified configuration object is returned to allow chaining.
+Each option becomes a method call, accepting the same [values](#types-and-values) that you would provide in a config map. The configuration object is returned to allow chaining.
 
 ::: warning
-Fluent config is currently only available for _general_ and _database_ settings, and unsupported in plugins. When in doubt, use a config map!
+Fluent config is currently available for _general_ and _database_ settings, but unsupported in plugins, [custom](#custom-settings) config files, and [application config](#application-configuration). When in doubt, use a config map!
+:::
+
+Config files can also return a closure that accepts a single `$config` argument and returns a config object. <Since ver="5.3.0" feature="Closures in config files" />
+
+```php
+// config/general.php
+
+use craft\config\GeneralConfig;
+
+return function(GeneralConfig $config) {
+    return $config
+        ->aliases([
+            '@webroot' => dirname(__DIR__) . '/web',
+        ])
+        // ...
+    ;
+};
+```
+
+Craft will always pass an instance of <craft5:craft\config\GeneralConfig> or <craft5:craft\config\DbConfig> to a closure in the primary general or database config files, respectively—but [application type-specific files](#application-types) should accept whatever the _primary_ file returns:
+
+::: code
+```php general.php
+return [
+    'aliases' => [
+        '@webroot' => dirname(__DIR__) . '/web',
+    ],
+];
+```
+```php general.console.php
+return function(array $config) {
+    $config['aliases']['@web'] = App::env('CLI_WEB_URL');
+
+    return $config;
+};
+```
+:::
+
+There is no equivalent to `GeneralConfig` and `DbConfig` for [application](#application-configuration) or [custom](#custom-settings) config files. If you return an array from the primary file, there is limited value in using a closure in an application type-specific file.
+
+::: tip
+The `GeneralConfig` class has a special `addAlias()` method that allows you to merge additional aliases, when using closures _and_ fluent config.
+:::
+
+### Application Types <Since ver="5.3.0" feature="Application type-specific config files" />
+
+Craft has two primary application types—_web_ and _console_. Web requests are typically initiated by an HTTP server via `index.php`; console requests are initiated from the `craft` executable, on the command line.
+
+You can provide configuration that targets a specific application type by creating additional general, database, application, or custom configuration files with the appropriate suffix:
+
+<div class="croker-table">
+
+Category | File | Application Type
+--- | --- | ---
+[General](#general) | `general.php` | All
+&nbsp; | `general.web.php` | Web only
+&nbsp; | `general.console.php` | Console only
+[Database](#database) | `db.php` | All
+&nbsp; | `db.web.php` | Web only
+&nbsp; | `db.console.php` | Console only
+[Application](#application-configuration) | `app.php` | All
+&nbsp; | `app.web.php` | Web only
+&nbsp; | `app.console.php` | Console only
+[Custom](#custom-settings) | `custom.php` | All
+&nbsp; | `custom.web.php` | Web only
+&nbsp; | `custom.console.php` | Console only
+
+</div>
+
+The primary config file is always evaluated, but only one of the `web` or `console` files are merged on top of it, when present.
+
+::: tip
+See the previous section for some examples of how to combine application type-specific configuration and config styles. General and database config files support a [fluent](#style) config syntax, but application and custom config files do not.
 :::
 
 ### Types and Values

@@ -30,7 +30,7 @@ return GeneralConfig::create()
 A `general.php` config file is not mandatory; omitting it from your project (or including one but not explicitly configuring a setting) will use Craft’s defaults. The list below describes the default values for each setting.
 
 ::: tip
-There are a number of [ways to provide configuration](../../configure.md). This file uses the new “[fluent](../../configure.md#style-map-vs-fluent)” syntax, and contains references to [environment variables](../../configure.md#env) for settings that may change between environments.
+There are a number of [ways to provide configuration](../../configure.md). This file uses the new “[fluent](../../configure.md#style)” syntax, and contains references to [environment variables](../../configure.md#env) for settings that may change between environments.
 :::
 
 <!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
