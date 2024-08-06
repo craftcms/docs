@@ -117,7 +117,7 @@ The path to a [secrets](../../configure.md#secrets) file, whose values are _not_
 
 ```php
 // Check the `secrets.php` file next to this script for sensitive values:
-define('CRAFT_SITE', dirname(__DIR__) . 'secrets.php');
+define('CRAFT_SECRETS_PATH', dirname(__DIR__) . 'secrets.php');
 ```
 
 ## `CRAFT_SITE`
