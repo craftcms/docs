@@ -11,22 +11,6 @@ On their own, [elements](elements.md) only provide a scaffold for your content�
 
 Fields are managed in **Settings** → **Fields**, and can be created on-the-fly from a [field layout](#field-layouts) designer. Field layouts and [conditions](#field-conditions) determine where and when your fields should appear for content authors.
 
-All fields share a few settings:
-
-- **Group** – The field group that the field is filed into;
-- **Name** – How the field will be labeled throughout the control panel;
-- **Handle** – How the field will be referenced from your templates;
-- **Instructions** – Instruction text to guide authors;
-- **Field Type** – What [type](#field-types) of field it is;
-
-<BrowserShot url="https://my-project.tld/admin/settings/fields/new" :link="false" :max-height="500">
-<img src="../images/fields-field-settings.png">
-</BrowserShot>
-
-::: tip
-A field’s _name_ and _instructions_ can be overridden when adding it to a [layout](#field-layouts).  When a field supports [multiple instances](#multi-instance-fields) per layout, you can also override its _handle_.
-:::
-
 ## Field Types
 
 Choosing a field type determines what the field’s input UI is going to look like, how it stores data, and how you’ll interact with that data in your templates.
@@ -40,13 +24,14 @@ Type | Description
 [Categories](../reference/field-types/categories.md) | Relate [category](../reference/element-types/categories.md) elements.
 [Checkboxes](../reference/field-types/checkboxes.md) | Select any number of values from a list.
 [Color](../reference/field-types/color.md) | Choose a color with the browser’s color picker UI.
-[Country](../reference/field-types/country.md) | Select from a list of countries available in [address](../reference/field-types/addresses.md) elements.
+[Country](../reference/field-types/country.md) | Select from the list of countries available to [address](../reference/field-types/addresses.md) elements.
 [Date/Time](../reference/field-types/date-time.md) | Choose a date and/or time, as well as a timezone.
 [Dropdown](../reference/field-types/dropdown.md) | Choose one value from a list.
 [Email](../reference/field-types/email.md) | Validate text input as an email address.
 [Entries](../reference/field-types/entries.md) | Relate [entry](../reference/element-types/entries.md) elements.
 [Icon](../reference/field-types/icon.md) | Select from a palette of icons.
 [Lightswitch](../reference/field-types/lightswitch.md) | Toggle a binary option.
+[Link](../reference/field-types/link.md) | Point to resources on- or off-site.
 [Matrix](../reference/field-types/matrix.md) | Compose advanced content structures with nested entries.
 [Money](../reference/field-types/money.md) | Input a numeric value and choose a currency.
 [Multi-select](../reference/field-types/multi-select.md) | Select any number of values from a list (same as checkboxes, but a different UI).
@@ -56,10 +41,65 @@ Type | Description
 [Table](../reference/field-types/table.md) | Add rows of similar data.
 [Tags](../reference/field-types/tags.md) | Relate tag elements, or create new ones on-the-fly.
 [Time](../reference/field-types/time.md) | Set a time of day, without a date or timezone.
-[URL](../reference/field-types/url.md) | Validate text as a URL/URI.
 [Users](../reference/field-types/users.md) | Relate [user](../reference/element-types/users.md) elements.
 
-## Translation Methods
+## Field Settings
+
+<BrowserShot
+  url="https://my-project.tld/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Creating a field in the Craft control panel.">
+<img src="../images/fields-new.png" alt="Editing a field in the Craft control panel">
+</BrowserShot>
+
+Most field types share a few settings.
+
+Name
+:   The user-facing label for the field. This should identify the field reasonably well among other fields, and be descriptive enough for authors. _You can override this in a field layout._
+
+Handle
+:   A developer-facing identifier for the field, used to access or query by its value from code. _You can override this in a field layout._
+
+Default Instructions
+:   Text displayed to authors in the field layout. Basic Markdown formatting is supported. _You can override this in a field layout._
+
+Translation Method
+:   How Craft handles the field’s value for elements that exist in multiple [sites](sites.md). See [Translation Methods](#translation-methods) below for more information.
+
+::: tip
+A field’s _name_ and _instructions_ can be overridden when adding it to a [layout](#field-layouts).  When a field supports [multiple instances](#multi-instance-fields) per layout, you can also override its _handle_.
+:::
+
+### Handles
+
+Craft will auto-generate a **Handle** as you enter a **Name**, but you can adjust it however you see fit.
+
+::: warning
+Some handles are reserved so that custom fields don’t collide with native element attributes.
+:::
+
+Handles are used when accessing field data from code:
+
+```twig
+<div class="summary">
+  {# Display a plain text field: #}
+  <p>{{ entry.summaryShort }}</p>
+</div>
+```
+
+They’re also how you will [query by a field’s value](../development/element-queries.md#querying-with-custom-fields):
+
+```twig
+{# Filter by the value of a lightswitch field: #}
+{% set featuredPosts = craft.entries()
+  .isFeatured(true)
+  .all() %}
+```
+
+Refer to each field type’s documentation for information about what kinds of data it returns, and how to use it in your templates!
+
+### Translation Methods
 
 If you’re running a multi-site Craft installation, most of your fields will have a “Translation Method” setting (depending on their type).
 
@@ -71,14 +111,14 @@ Fields can have the following translation method:
 - **Translate for each language** – The field can have a different value for each unique language associated with your sites.
 - **Custom…** – The field can have different values based on a custom differentiator.
 
-If you choose “Custom…”, a “Translation Key Format” setting will appear below, where you can define an [object template](object-templates.md) that will help Craft which sites to copy the field value over to. When a new field value is saved, Craft will render this template for each site the element is configured in, and the field value will be copied to any site that produces a translation key matching the current site’s.
+If you choose “Custom…”, a **Translation Key Format** setting will appear below, where you can define an [object template](object-templates.md) that determines how Craft copies the field’s value to other sites. When an element that uses the field is saved, Craft renders this template for each site the element exists in, and copies the value to any that produce the same key.
 
 For example, if a field’s translation key format were `{site.handle[0:2]}`, then new field values would be copied over to any other sites where the first two characters of the site handle matches the first two characters of the original site’s handle. Looking at this from the opposite direction: any site that produces a _unique_ translation key for a field will have its value isolated from other sites.
 
-If the translation key format returns an empty string (`''`), the field will not indicate that it’s available for translation. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per-site from _only_ the `blog` section—otherwise it would not be available for translation in any other context.
+If the translation key format returns an empty string (`''`), the field will not appear as translatable, and its value will not be copied to any other sites. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per-site from _only_ the `blog` section—otherwise it would not be available for translation in any other context.
 
 ::: tip
-Keep in mind that fields can be assigned to multiple element types. Accessing invalid properties of the current element (like `section` on an asset) may cause the key to end up blank (and therefore not translated)
+Keep in mind that fields can be assigned to multiple element types. Accessing invalid properties of the current element (like `section` on an [asset](../reference/element-types/assets.md)) may cause the key to end up blank (and therefore not translated).
 :::
 
 ## Field Layouts
@@ -145,13 +185,11 @@ Some field layout elements’ settings are bubbled up to the layout designer, be
 - A photo icon means the field will be used as the thumbnail in element chips and cards.
 - A check mark means the field will appear in element cards.
 
-A field that’s required will have an asterisk (<icon kind="asterisk" />) beside the field’s name.
-
 ### Multi-Instance Fields <Badge text="New!" />
 
-Some fields can be added to a layout multiple times. Craft will automatically assign a new handle to fields that are used more than once in a layout. To customize a field’s handle for a given layout, click the settings <icon kind="gear" /> icon on the field layout element and change the **Handle** setting.
+Most fields can be added to a single layout multiple times. Craft will automatically assign a new handle to fields that are used more than once in a layout. To customize a field’s handle for a given layout, click the settings <icon kind="gear" /> icon on the field layout element and change the **Handle** setting.
 
-Multi-instance fields behave as though they were entirely different fields, in almost every situation: templates, element queries, condition builders, search, and so on… The field layout will retain a reference to the underlying field, so any settings updated for the base field will be reflected on each instance. For example, a [plain text](../reference/field-types/plain-text.md) field named **Attribution** could be used two (or more) times in a single entry type’s field layout: once for an article “Byline,” then again as “Photo Credit.” In a template, you would use those fields exactly like any other field:
+Multi-instance fields behave as though they were entirely different fields, in almost every situation: templates, element queries, condition builders, search, and so on. The field layout will retain a reference to the underlying field, so any settings updated for the base field will be reflected on each instance. For example, a [plain text](../reference/field-types/plain-text.md) field named “Attribution” could be used two (or more) times in a single entry type’s field layout: once for an article “Byline,” then again as “Photo Credit.” In a template, you would use those fields exactly like any other field:
 
 ```twig{7,12}
 {% set image = entry.image.one() %}
@@ -171,7 +209,7 @@ Multi-instance fields behave as though they were entirely different fields, in a
 </article>
 ```
 
-This example uses the same “Attribution” field as `photoCredit` _and_ `byline`, each storing its own content. You can target one instance of field with [element queries](../development/element-queries.md), just as you’d expect:
+This example uses the same “Attribution” field as `photoCredit` _and_ `byline`, each storing its own content. You can target one instance of a field with [element queries](../development/element-queries.md), just as you’d expect:
 
 ```twig{4}
 {% set postsMissingImageAttribution = craft.entries()
@@ -181,17 +219,17 @@ This example uses the same “Attribution” field as `photoCredit` _and_ `bylin
   .count() %}
 ```
 
-Conversely, adding one field to multiple layouts using the same handle (either the base field’s handle, or by renaming each of them the same way) allows you to query across all instances. Craft quietly queries against each of the unique field layout keys.
+Conversely, adding one field to multiple different layouts (using the same handle—either its original handle, or by renaming each of them the same way) allows you to query across all instances. Craft quietly reconciles those field handles and builds the query appropriately:
 
 ```twig
 {% set products = craft.entries()
   .section('products')
   .manufacturer('ACME%')
   .all() %}
-{# -> Products made by ACME Labs and ACME Inc. across multiple product “types” #}
+{# -> Products made by ACME Labs and ACME Inc. across multiple product “types” with similar field layouts #}
 ```
 
-This example assumes you have multiple [entry types](../reference/element-types/entries.md#entry-types) in a “Products” section, each using a centrally-defined, generic “Product Details” field—but with the name changed to “Manufacturer” and handle changed to `manufacturer`.
+This example assumes you have multiple [entry types](../reference/element-types/entries.md#entry-types) in a “Products” section, each using a centrally-defined, generic “Product Details” field—one instance of which per layout using the name “Manufacturer” and handle `manufacturer`.
 
 ### Conditions
 

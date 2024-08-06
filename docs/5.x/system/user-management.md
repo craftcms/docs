@@ -8,7 +8,7 @@ related:
 
 # User Management
 
-[Users](../reference/element-types/users.md) in Craft represent humans in the system. These may be control panel users, member accounts, or records that represent people in general. Users implicitly have the ability to create passwords and log in, but must be granted [permissions](#permissions) or added to [groups](#user-groups) to access the control panel or manage content.
+[Users](../reference/element-types/users.md) in Craft represent humans that have some relationship with your site or application. They may be control panel users, member accounts, or records that represent people in general. Users implicitly have the ability to create passwords and log in, but must be granted [permissions](#permissions) or added to [groups](#user-groups) to access the control panel or manage content.
 
 The first user account is created during [installation](../install.md). The number of additional users that can be created (and their capabilities) depends on your Craft [edition](../editions.md):
 
@@ -16,21 +16,41 @@ The first user account is created during [installation](../install.md). The numb
 - **Craft Team** <Badge text="New!" vertical="baseline" /> allows up to five users, and one [user group](#user-groups).
 - **Craft Pro** has no limitations on the number of registered users or groups, and supports [public registration](#public-registration).
 
+To create a new user, visit the **Users** control panel screen, then click **New user**. If you don’t see this item in the control panel navigation, your current user may not have the required [permission](#permissions) to register other users.
+
+<BrowserShot url="https://my-project.ddev.site/admin/users/123&fresh=1" :link="false" caption="Creating a new user in the Craft control panel.">
+<img src="../images/users-new.png" alt="Creating a new user in the Craft control panel" />
+</BrowserShot>
+
+Users must be identified with at least an **Email** and a **Username** (or just an email address if the [`useEmailAsUsername` config setting](config5:useEmailAsUsername) is enabled). Select **Create and set permissions** <Since ver="5.3.0" feature="The revised user creation flow" /> to validate the user and move on to group and [permissions](#permissions) assignment.
+
+::: tip
+If you need to capture some information about a person but don’t have their email address yet, you can select **Save as draft** from the fly-out menu in the toolbar and come back to the draft later.
+:::
+
+The permissions screen will include a **Save and send activation email** button <Since ver="5.3.0" feature="The revised user creation flow" /> if the user is still _Inactive_. Users can also be activated by…
+
+- …selecting **Send activation email** from the action menu <Icon kind="ellipses" /> in the toolbar;
+- …selecting **Copy activation URL** from the action menu <Icon kind="ellipses" /> and sending it manually;
+- …selecting **Activate account** without setting a password.
+
+If an account is manually activated by another user _without setting a password_, the user can request a password reset via a [front-end form](#public-registration), or the control panel login screen.
+
 ## Statuses
 
-Users may exist in the system in a number of states. A user is typically created in a **Pending** state (ready to be activated via an activation link), whether via [public registration](#public-registration) or by another user. Changes to a user’s status can happen implicitly (via activation, failed login attempts, etc.) or explicitly (suspension by a moderator), some requiring additional verification by email or an [elevated session](#elevated-sessions).
+Users may exist in the system in a number of states. A user is typically created in a **Pending** state (ready to be activated via an activation link), whether via [public registration](#public-registration) or by another user in the control panel. Changes to a user’s status can happen implicitly (via activation, failed login attempts, etc.) or explicitly (suspension by a moderator), some requiring additional verification by email or an [elevated session](#elevated-sessions).
 
 Active
 :   An **Active** user is able perform any task their permissions allow. Users are put in this state following account activation (either via an activation link or action taken by another user). However, an active account does not necessarily have a password—but once one is set (or the current password is reset), they _would_ be able to log in normally.
 
 Pending
-:   A user is typically created in **Pending** state. The only difference between a **Pending** and **Active** user is that they have never activated their account with an activation link, or had a user with the **Moderate users** permission activate it for them.
+:   Public registration creates users in the **Pending** state, unless the **Deactivate users by default** setting is enabled in user settings. The only difference between a **Pending** and **Active** user is that they have never activated their account with an activation link, or had a user with the **Moderate users** permission activate it for them.
 
 Suspended
 :   **Suspended** users have been manually locked out of the system by an user with the [_Moderate Users_ permission](#permissions). They will be unable to log in or reset their password.
 
 Inactive
-:   Users that have been explicitly deactivated are marked as **Inactive**. An inactive user cannot log in, reset their password, or reactivate their account.
+:   New users and users that have been explicitly deactivated are marked as **Inactive**. An inactive user cannot log in, reset their password, or reactivate their account.
 
 #### Special States
 
@@ -47,6 +67,26 @@ Locked
 Trashed
 :   Like other elements, users can be _soft-deleted_. A trashed user cannot log in or restore themselves, and the user may be garbage-collected after remaining trashed for the configured <config5:softDeleteDuration>.
 
+## Settings
+
+The behavior of Craft’s user registration and authentication system is governed by a handful of config settings, and a few options (managed via <Journey path="Settings, Users, Settings" />) stored in [project config](project-config.md).
+
+### Project Config
+
+- **User Photo Location**: Which volume user profile assets are stored in. Files are always uploaded directly to a profile, and cannot be selected from the existing asset library.
+- **Require two-step verification**: Choose which user groups (if any) are required to configure a two-step verification method to access the control panel. This has no effect on users who do not have control panel permissions.
+- **Verify email addresses**: A user must demonstrate they have access to an email address before they can activate their account, or change the email on an existing account.
+- **Allow public registration**: Whether or not users can register from the front-end.
+- **Validate custom fields on public registration**: When registering via the front-end, require a complete user profile (including any fields marked as **Required** in the user field layout).
+- **Deactivate users by default**: Place users in the **Inactive** state after registering, rather than sending an activation email. Another user with the **Moderate users** [permission](#permissions) must activate the user.
+- **Default User Group**: The [group](#user-groups) that publicly-registered users are added to, if any.
+
+In addition, the [users field layout](../reference/element-types/users.md#custom-fields) and [addresses field layout](../reference/element-types/addresses.md#setup) are stored in project config.
+
+### Config Files
+
+A combination of [user-specific](../reference/config/general.md#users), [session](../reference/config/general.md#session), and [security](../reference/config/general.md#security) settings are tracked via the [General](../reference/config/general.md) configuration file.
+
 ## Admin Accounts
 
 Admin users are special accounts that can do _everything_ within Craft, including some things that don’t have explicit permissions:
@@ -55,7 +95,7 @@ Admin users are special accounts that can do _everything_ within Craft, includin
 - Make other users admins (in editions that support multiple users);
 - Administrate other admins (in editions that support multiple users);
 
-The user you create during installation is an admin by default. Users in Craft <Badge type="edition" text="Team" vertical="middle" /> can either have permissions from the single [group](#groups), or be an admin.
+The user you create when installing Craft is an admin by default. Users in Craft <Badge type="edition" text="Team" vertical="middle" /> can either have permissions from the single [group](#user-groups), or be an admin.
 
 ::: warning
 Considering how much damage an admin can do, we strongly advise reserving this role for key members of your team or organization who cannot fulfill their responsibilities without it. Whenever possible, design a [permissions](#permissions) scheme that grants only the necessary capabilities.
@@ -73,14 +113,14 @@ To create a new User Group, go to **Settings** → **Users** and press **+ New u
 
 After you create your groups, you can assign users to groups by going into their account settings and choosing the **Permissions** tab. Permissions granted by groups are _additive_, so a user in multiple groups receives the combined permissions of those groups (as well has any permissions granted explicitly to that user). Removing a user from a group does not revoke permissions that are granted by another group they are a member of!
 
-Users in Craft <Badge type="edition" text="Team" vertical="middle" /> belong to a single user group, the permissions for which are managed via <Journey path="Settings, Users, User Permissions" />.
+Users in Craft <Badge type="edition" text="Team" vertical="middle" /> belong to a single “Team” user group, the permissions for which are managed via <Journey path="Settings, Users, User Permissions" />.
 
 ## Permissions <Badge type="edition" text="Team" /> <Badge type="edition" text="Pro" />
 
 Permissions govern what users can do—like access the control panel, edit content within certain sections, create and moderate other users, etc. You can assign these permissions directly to users, or via [user groups](#user-groups). Permissions applied to a user group are inherited by all users belonging to it.
 
 ::: warning
-Make sure you trust users with access to settings that accept [Twig](../development/twig.md) code, like **URI Formats** and the **System Messages** utility. It’s possible to do malicious things in Craft via Twig, which is intended primarily for trusted admins and developers.
+Make sure you trust users with access to settings that allow users to provide [Twig](../development/twig.md) code, like the **System Messages** utility. It’s possible to do malicious things via Twig (like permissions escalation), so these permissions are intended primarily for trusted admins and developers.
 :::
 
 The permissions Craft comes with are:
@@ -247,9 +287,11 @@ The control panel may require users to reauthorize to perform some actions, like
 
 An elevated session’s duration is governed by the <config5:elevatedSessionDuration> setting.
 
+<a name="public-registration"></a>
+
 ## Public Registration <badge type="edition" title="Craft Pro only">Pro</badge>
 
-Public user registration is disabled by default, but can be turned on by visiting **Settings** → **Users** → **Settings**, and checking **Allow public registration**. With that checked, you will also have the ability to choose a **Default User Group** that publicly-registered users are automatically added to.
+Public user registration is disabled by default, but can be turned on by visiting <Journey path="Settings, Users, Settings" />, and checking **Allow public registration**. With that checked, you will also have the ability to choose a **Default User Group** that publicly-registered users are automatically added to.
 
 Once you set up your site to allow public user registration, the last step is to create a front-end [user registration form](kb:front-end-user-accounts#registration-form). For a full list of params a user can set during registration (or when updating their account, later on), read about the [`users/save-user` controller action](../reference/controller-actions.md#post-users-save-user).
 

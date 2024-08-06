@@ -4,9 +4,13 @@ Icon fields allow the user to pick from a curated list of [FontAwesome](https://
 
 <!-- more -->
 
+## Settings
+
+To make FontAwesome Pro icons available, turn on the **Include Pro Icons** option. You may need to purchase a FontAwesome Pro license to use icons in your site’s front-end.
+
 ## Development
 
-The saved value is suitable for use in the front-end with your own FontAwesome library, or Craft’s bundled subset.
+The saved value is suitable for use in the front-end with your own FontAwesome library.
 
 ### Webfonts
 
@@ -17,6 +21,15 @@ Following the official [web fonts tutorial](https://fontawesome.com/docs/web/set
 ```
 
 Change `fa-solid` to another style identifier to suit your site’s appearance!
+
+If you added the FontAwesome files in `web/assets/fontawesome/*`, you would link to one or more style sheets like this:
+
+```twig
+{% css '/assets/fontawesome/fontawesome.css' %}
+{% css '/assets/fontawesome/solid.css' %}
+```
+
+You can add [`css` tags](../twig/tags.md#css) like this anywhere in your code and Craft will hoist them into the `<head>` of the document!
 
 ### SVG + JS
 

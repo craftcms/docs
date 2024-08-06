@@ -341,10 +341,6 @@ Craft handles multi-instance fields for you, at the field layout level.
 
 You can explicitly opt out of multi-instance support by returning `false` from a static `isMultiInstance()` method. By default, Craft treats all field types as multi-instance unless its `dbType()` method returns `null`.
 
-::: tip
-We will provide a console command for users to merge field definitions that are made redundant by multi-instance support.
-:::
-
 #### Presentation
 
 Field types whose content is useful in [element cards](#element-chips-cards) should implement `PreviewableFieldInterface`. In addition to determining whether the field can be displayed in element indexes, previewable fields are now eligible for inclusion in element cards when building field layouts.

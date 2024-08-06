@@ -96,7 +96,7 @@ Address queries support the following parameters:
 
 ## Address Repository
 
-The [commerceguys/addressing](https://github.com/commerceguys/addressing) library powers planet-friendly address handling and formatting, and its exhaustive repository of global address information is available to all Craft projects. If you need a list of countries, states, or provinces, for example, you can fetch them via Craft’s [Addresses](craft5:craft\services\Addresses) service, from Twig templates or PHP:
+The [commerceguys/addressing](repo:commerceguys/addressing) library powers planet-friendly address handling and formatting, and its exhaustive repository of global address information is available to all Craft projects. If you need a list of countries, states, or provinces, for example, you can fetch them via Craft’s [Addresses](craft5:craft\services\Addresses) service, from Twig templates or PHP:
 
 ::: code
 ```twig
@@ -107,7 +107,7 @@ $countries = Craft::$app->getAddresses()->getCountryRepository()->getAll();
 ```
 :::
 
-This returns an array of [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) objects, indexed by their two-letter code. You might use this to populate a drop-down menu:
+This returns an array of [Country](repo:commerceguys/addressing/blob/master/src/Country/Country.php) objects, indexed by their two-letter code. You might use this to populate a drop-down menu:
 
 ```twig
 <select name="myCountry">
@@ -256,7 +256,25 @@ The default formatter includes the following options:
 
 #### Country Names
 
-Only the two-letter “country code” is stored on addresses. To display the full country name (localized for the viewer), you must retrieve its definition from the [address repository](#address-repository):
+Only the two-letter “country code” is stored on addresses. To display the full country name (localized for the viewer), use the attached [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) model: <Since ver="5.3.0" feature="Address.getCountry()" />
+
+```twig
+{% set country = address.country %}
+
+{{ country.name }}
+```
+
+Via the `Country` object, you also have access to the following data:
+
+- `countryCode` — Same ISO 3166-1 alpha-2 code as was stored on `address.countryCode`.
+- `name` — Name of the country, localized for the current site.
+- `threeLetterCode` — ISO 3166-1 alpha-3 code for the country.
+- `numericalCode` — ISO ISO 3166-1 numeric codes.
+- `currencyCode` — ISO 4217 currency code (not the symbol).
+- `timezones` — A list of PHP timezone identifiers for the country. This is not necessarily specific to the address!
+- `locale` — How the country’s name was localized.
+
+In earlier versions of Craft, you must directly retrieve its definition from the [address repository](#address-repository):
 
 ```twig
 {% set country = craft.app.getAddresses().getCountryRepository().get(address.countryCode) %}
