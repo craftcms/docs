@@ -409,10 +409,6 @@ Values passed to the `type()` method of [entry queries](./reference/element-type
 Visit **Settings** &rarr; **Entry Types** to check if any handles appear to have collided in this way, then review and update templates as necessary.
 :::
 
-#### Consolidating Fields
-
-We plan to introduce a console command to handle merging similar fields. There is no harm in running your project with extra fields for a time after upgrading.
-
 ### Eager-Loading
 
 [Eager-loading](development/eager-loading.md) has been dramatically simplified for most sites. You no longer need to tell Craft which relational fields to load via the `.with()` query method—instead, call `.eagerly()` on any query that _may_ result in an N+1 problem to automatically trigger eager-loading:
