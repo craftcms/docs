@@ -85,7 +85,11 @@ Like elements, you can also render a complete anchor tag:
 {{ entry.myLinkFieldHandle.link }}
 ```
 
-Craft will figure out the best textual representation of the link—a selected element’s `title`, the URL (sans protocol), or the raw phone number, for example.
+Craft will figure out the best textual representation of the link—a selected element’s `title`, the URL (sans protocol), or the raw phone number, for example. That text—or `label`—can be retrieved via the `LinkData` model, in addition to the raw `value`:
+
+```twig
+<a href="{{ entry.myLinkFieldHandle.value }}">{{ entry.linkFieldHandle.label }}</a>
+```
 
 ### Relations
 
