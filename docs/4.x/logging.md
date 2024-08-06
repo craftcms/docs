@@ -295,14 +295,13 @@ You can log your own messages from a plugin or module.
 
 Convenience methods are available for different severity levels:
 
-- `Craft::trace()` – verbose, fine-grained annotations—sometimes temporary—used for support or debugging
 - `Craft::debug()` – non-essential information that can be used for debugging issues
 - `Craft::info()` – standard level for informative contextual details
 - `Craft::warning()` – messages that indicate something problematic or unexpected even though everything continues to work
 - `Craft::error()` – most urgent level before an exception, used to indicate that something didn’t function properly
 
 ::: tip
-By default, Craft logs all levels when <config4:devMode> is enabled. Otherwise, anything lower than `warning` will be ignored.
+By default, Craft logs levels `info` and up when <config4:devMode> is enabled. Otherwise, anything lower than `warning` will be ignored.
 :::
 
 Logged messages should designate a message body, level, and optional category. Here, the we’re using the `custom-module` category, overriding the default of `application`:
