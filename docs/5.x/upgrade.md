@@ -98,7 +98,80 @@ Read more about this part of the upgrade in the [Database Character Set and Coll
 
 ## Cleanup + Optional Steps
 
-#### Entry Scripts
+### Field and Entry Type Consolidation
+
+Craft 5.3 introduced three new commands for consolidating fields and entry types, post-upgrade:
+
+- `fields/auto-merge` — Automatically discovers functionally identical fields and merges their uses together.
+- `fields/merge` — Manually merge one field into another of the same type and update uses of the merged field.
+- `entry-types/merge` — Merge one entry type into another and update uses of the merged entry type.
+
+These tools are particularly useful on projects with many Matrix fields containing similar block types, or multiple sections with similar entry types. While the upgrade doesn’t result in _more_ fields or entry types and block types than existed previously, it can result in some ergonomic problems with the new content architecture!
+
+We recommend you approach consolidation in the following order, _after_ getting your project fully upgraded and deployed.
+
+::: warning
+In addition to updating project config, this process generates content migrations. You must commit these files to version control and run `craft up` in all other environments to apply the changes!
+:::
+
+#### Auto-merging Fields
+
+Your first step should be to try auto-merging field definitions:
+
+```bash
+ddev craft fields/auto-merge
+```
+
+Craft will audit your fields, and propose batches of merge candidates. To accept a merge, type `y` and press <kbd>Enter</kbd>, then choose the field you want to merge the duplicates into.
+
+The usage of any merged fields in field layouts and templates will remain the same after merging global field definitions. Any overridden names, handles, instructions, and so on will remain. One exception here is if a name or handle override is present but the same as the merged global field’s name: Craft clears the override so that it can be better kept in sync, moving forward.
+
+::: tip
+Don’t like how Craft grouped some of the fields? You can skip any proposed merge and come back to the command later—say, after [manually merging](#manually-merging-fields) a few of the fields. 
+:::
+
+#### Manually Merging Fields
+
+For any additional fields you wish to merge (or merge candidates you skipped in the previous step), run the `fields/merge` command as many times as necessary to consolidate them:
+
+```bash
+ddev craft fields/merge myFirstDropdownField mySecondDropdownField
+```
+
+To merge multiple fields together, choose the field you want to persist, and run the command multiple times, passing each redundant field as the first argument, and the target field as the second, i.e:
+
+```bash
+ddev craft fields/merge ctaDonate ctaAbout
+ddev craft fields/merge ctaStaff ctaAbout
+ddev craft fields/merge ctaFoundation ctaAbout
+```
+
+#### Merging Entry Types
+
+Once your field definitions have been consolidated, merging entry types is greatly simplified. Here’s how Craft handles fields during a merge:
+
+- Any field instances that map to the same custom field (and have the same handle) will be left alone in the persistent entry type.
+- Any single-instance fields that exist in both entry types (but with _different_ handles) will be left alone in the persistent entry type, and the command will note the handle change for fields of the outgoing entry type.
+- Any other fields in the outgoing entry type will be added to the persistent entry type under a “Merged Fields” tab. Any handle conflicts will be resolved by incrementing the handle of the merged field, and the handle change will be noted in the command’s output.
+
+There is no “automatic” equivalent for merging entry types—each merge must be run manually:
+
+```bash
+ddev craft entry-types/merge quote pullQuote
+```
+
+To merge entry types, Craft takes the following actions:
+
+1. The persistent entry type’s field layout is updated with any new fields from the outgoing entry type.
+1. Sections and fields that use the outgoing entry type are updated to use the persistent entry type, instead (if it wasn’t already available in that context).
+1. The outgoing entry type is removed.
+1. A content migration is generated an run, remapping entries of the outgoing entry type to the persistent one, and entries’ JSON content is updated with the correct layout element UUIDs.
+
+::: warning
+Merging is concerned only with custom fields. Other field layout elements (like tips, rules, breaks, or templates) are _not_ merged into the persisted entry type.
+:::
+
+### Entry Scripts
 
 Older projects may use versions of [`vlucas/phpdotenv`](repo:vlucas/phpdotenv) (the library that loads variables from your `.env` file) that depend on features deprecated in PHP 8.1. If you encounter errors during (or after) installation, change your `vlucas/phpdotenv` dependency in `composer.json` to `^5.6.0`, then run `composer update`.
 

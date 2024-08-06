@@ -187,9 +187,9 @@ Some field layout elements’ settings are bubbled up to the layout designer, be
 
 ### Multi-Instance Fields <Badge text="New!" />
 
-Some fields can be added to a layout multiple times. Craft will automatically assign a new handle to fields that are used more than once in a layout. To customize a field’s handle for a given layout, click the settings <icon kind="gear" /> icon on the field layout element and change the **Handle** setting.
+Most fields can be added to a single layout multiple times. Craft will automatically assign a new handle to fields that are used more than once in a layout. To customize a field’s handle for a given layout, click the settings <icon kind="gear" /> icon on the field layout element and change the **Handle** setting.
 
-Multi-instance fields behave as though they were entirely different fields, in almost every situation: templates, element queries, condition builders, search, and so on… The field layout will retain a reference to the underlying field, so any settings updated for the base field will be reflected on each instance. For example, a [plain text](../reference/field-types/plain-text.md) field named **Attribution** could be used two (or more) times in a single entry type’s field layout: once for an article “Byline,” then again as “Photo Credit.” In a template, you would use those fields exactly like any other field:
+Multi-instance fields behave as though they were entirely different fields, in almost every situation: templates, element queries, condition builders, search, and so on. The field layout will retain a reference to the underlying field, so any settings updated for the base field will be reflected on each instance. For example, a [plain text](../reference/field-types/plain-text.md) field named “Attribution” could be used two (or more) times in a single entry type’s field layout: once for an article “Byline,” then again as “Photo Credit.” In a template, you would use those fields exactly like any other field:
 
 ```twig{7,12}
 {% set image = entry.image.one() %}
@@ -209,7 +209,7 @@ Multi-instance fields behave as though they were entirely different fields, in a
 </article>
 ```
 
-This example uses the same “Attribution” field as `photoCredit` _and_ `byline`, each storing its own content. You can target one instance of field with [element queries](../development/element-queries.md), just as you’d expect:
+This example uses the same “Attribution” field as `photoCredit` _and_ `byline`, each storing its own content. You can target one instance of a field with [element queries](../development/element-queries.md), just as you’d expect:
 
 ```twig{4}
 {% set postsMissingImageAttribution = craft.entries()
@@ -219,17 +219,17 @@ This example uses the same “Attribution” field as `photoCredit` _and_ `bylin
   .count() %}
 ```
 
-Conversely, adding one field to multiple layouts using the same handle (either the base field’s handle, or by renaming each of them the same way) allows you to query across all instances. Craft quietly queries against each of the unique field layout keys.
+Conversely, adding one field to multiple different layouts (using the same handle—either its original handle, or by renaming each of them the same way) allows you to query across all instances. Craft quietly reconciles those field handles and builds the query appropriately:
 
 ```twig
 {% set products = craft.entries()
   .section('products')
   .manufacturer('ACME%')
   .all() %}
-{# -> Products made by ACME Labs and ACME Inc. across multiple product “types” #}
+{# -> Products made by ACME Labs and ACME Inc. across multiple product “types” with similar field layouts #}
 ```
 
-This example assumes you have multiple [entry types](../reference/element-types/entries.md#entry-types) in a “Products” section, each using a centrally-defined, generic “Product Details” field—but with the name changed to “Manufacturer” and handle changed to `manufacturer`.
+This example assumes you have multiple [entry types](../reference/element-types/entries.md#entry-types) in a “Products” section, each using a centrally-defined, generic “Product Details” field—one instance of which per layout using the name “Manufacturer” and handle `manufacturer`.
 
 ### Conditions
 
