@@ -109,7 +109,7 @@ Whether users should be allowed to create similarly-named tags.
 ->allowSimilarTags(true)
 ```
 ```shell Environment Override
-CRAFT_ALLOW_SIMILAR_TAGS=1
+CRAFT_ALLOW_SIMILAR_TAGS=true
 ```
 :::
 
@@ -705,7 +705,7 @@ This should be set to `true` for development and staging environments.
 ->disallowRobots(true)
 ```
 ```shell Environment Override
-CRAFT_DISALLOW_ROBOTS=1
+CRAFT_DISALLOW_ROBOTS=true
 ```
 :::
 
@@ -890,7 +890,7 @@ panel is located on a different domain than your front end.
 ->headlessMode(true)
 ```
 ```shell Environment Override
-CRAFT_HEADLESS_MODE=1
+CRAFT_HEADLESS_MODE=true
 ```
 :::
 
@@ -1047,7 +1047,7 @@ This only affects the JavaScript auto-generated slugs. Non-ASCII characters can 
 ->limitAutoSlugsToAscii(true)
 ```
 ```shell Environment Override
-CRAFT_LIMIT_AUTO_SLUGS_TO_ASCII=1
+CRAFT_LIMIT_AUTO_SLUGS_TO_ASCII=true
 ```
 :::
 
@@ -1231,9 +1231,12 @@ Defined by
 Since
 :  3.6.14
 
+Deprecated
+:  in 4.11.0. [[\craft\filters\Headers]] should be used instead.
+
 </div>
 
-The `Permissions-Policy` header that should be sent for web responses.
+The `Permissions-Policy` header that should be sent for site responses.
 
 ::: code
 ```php Static Config
@@ -1495,7 +1498,7 @@ Whether a `Content-Length` header should be sent with responses.
 ->sendContentLengthHeader(true)
 ```
 ```shell Environment Override
-CRAFT_SEND_CONTENT_LENGTH_HEADER=1
+CRAFT_SEND_CONTENT_LENGTH_HEADER=true
 ```
 :::
 
@@ -1643,7 +1646,7 @@ Whether translated messages should be wrapped in special characters to help find
 ->translationDebugOutput(true)
 ```
 ```shell Environment Override
-CRAFT_TRANSLATION_DEBUG_OUTPUT=1
+CRAFT_TRANSLATION_DEBUG_OUTPUT=true
 ```
 :::
 
@@ -1677,7 +1680,7 @@ php craft utils/update-usernames
 ->useEmailAsUsername(true)
 ```
 ```shell Environment Override
-CRAFT_USE_EMAIL_AS_USERNAME=1
+CRAFT_USE_EMAIL_AS_USERNAME=true
 ```
 :::
 
@@ -1755,7 +1758,7 @@ You can customize the behavior of iFrame Resizer via the <config5:previewIframeR
 ->useIframeResizer(true)
 ```
 ```shell Environment Override
-CRAFT_USE_IFRAME_RESIZER=1
+CRAFT_USE_IFRAME_RESIZER=true
 ```
 :::
 
@@ -1768,7 +1771,7 @@ CRAFT_USE_IFRAME_RESIZER=1
 <div class="compact">
 
 Allowed types
-:  [array](https://php.net/language.types.array)
+:  `array<string,string|null>`
 
 Default value
 :  `[]`
@@ -2100,7 +2103,7 @@ Whether auto-generated URLs should have trailing slashes.
 ->addTrailingSlashesToUrls(true)
 ```
 ```shell Environment Override
-CRAFT_ADD_TRAILING_SLASHES_TO_URLS=1
+CRAFT_ADD_TRAILING_SLASHES_TO_URLS=true
 ```
 :::
 
@@ -2128,7 +2131,7 @@ Whether uppercase letters should be allowed in slugs.
 ->allowUppercaseInSlug(true)
 ```
 ```shell Environment Override
-CRAFT_ALLOW_UPPERCASE_IN_SLUG=1
+CRAFT_ALLOW_UPPERCASE_IN_SLUG=true
 ```
 :::
 
@@ -2343,7 +2346,7 @@ RewriteRule (.+) /index.php?p= [QSA,L]
 ->omitScriptNameInUrls(true)
 ```
 ```shell Environment Override
-CRAFT_OMIT_SCRIPT_NAME_IN_URLS=1
+CRAFT_OMIT_SCRIPT_NAME_IN_URLS=true
 ```
 :::
 
@@ -2716,7 +2719,7 @@ This setting only takes effect if <config5:omitScriptNameInUrls> is set to `fals
 ->usePathInfo(true)
 ```
 ```shell Environment Override
-CRAFT_USE_PATH_INFO=1
+CRAFT_USE_PATH_INFO=true
 ```
 :::
 
@@ -2748,7 +2751,7 @@ If set to `false`, Craft will always use `http`. If set to `true`, then, Craft w
 ->useSslOnTokenizedUrls(true)
 ```
 ```shell Environment Override
-CRAFT_USE_SSL_ON_TOKENIZED_URLS=1
+CRAFT_USE_SSL_ON_TOKENIZED_URLS=true
 ```
 :::
 
@@ -3033,7 +3036,7 @@ Whether CSRF values should be injected via JavaScript for greater cache-ability.
 ->asyncCsrfInputs(true)
 ```
 ```shell Environment Override
-CRAFT_ASYNC_CSRF_INPUTS=1
+CRAFT_ASYNC_CSRF_INPUTS=true
 ```
 :::
 
@@ -3258,7 +3261,7 @@ Whether front-end web requests should support basic HTTP authentication.
 ->enableBasicHttpAuth(true)
 ```
 ```shell Environment Override
-CRAFT_ENABLE_BASIC_HTTP_AUTH=1
+CRAFT_ENABLE_BASIC_HTTP_AUTH=true
 ```
 :::
 
@@ -3408,7 +3411,7 @@ log in but allow for username/email enumeration based on the response.
 ->preventUserEnumeration(true)
 ```
 ```shell Environment Override
-CRAFT_PREVENT_USER_ENUMERATION=1
+CRAFT_PREVENT_USER_ENUMERATION=true
 ```
 :::
 
@@ -3638,7 +3641,7 @@ Whether user IP addresses should be stored/logged by the system.
 ->storeUserIps(true)
 ```
 ```shell Environment Override
-CRAFT_STORE_USER_IPS=1
+CRAFT_STORE_USER_IPS=true
 ```
 :::
 
@@ -3703,7 +3706,7 @@ is over `https://`. `true` will always set the flag, regardless of protocol and 
 ->useSecureCookies(true)
 ```
 ```shell Environment Override
-CRAFT_USE_SECURE_COOKIES=1
+CRAFT_USE_SECURE_COOKIES=true
 ```
 :::
 
@@ -4026,7 +4029,7 @@ Whether asset URLs should be revved so browsers don’t load cached versions whe
 ->revAssetUrls(true)
 ```
 ```shell Environment Override
-CRAFT_REV_ASSET_URLS=1
+CRAFT_REV_ASSET_URLS=true
 ```
 :::
 
@@ -4151,7 +4154,7 @@ Whether image transforms should be generated before page load.
 ->generateTransformsBeforePageLoad(true)
 ```
 ```shell Environment Override
-CRAFT_GENERATE_TRANSFORMS_BEFORE_PAGE_LOAD=1
+CRAFT_GENERATE_TRANSFORMS_BEFORE_PAGE_LOAD=true
 ```
 :::
 
@@ -4277,7 +4280,7 @@ ImageMagick is used.)
 ->optimizeImageFilesize(false)
 ```
 ```shell Environment Override
-CRAFT_OPTIMIZE_IMAGE_FILESIZE=1
+CRAFT_OPTIMIZE_IMAGE_FILESIZE=false
 ```
 :::
 
@@ -4311,7 +4314,7 @@ image color distortion. This will only have an effect if ImageMagick is in use.
 ->preserveCmykColorspace(true)
 ```
 ```shell Environment Override
-CRAFT_PRESERVE_CMYK_COLORSPACE=1
+CRAFT_PRESERVE_CMYK_COLORSPACE=true
 ```
 :::
 
@@ -4343,7 +4346,7 @@ This will only have effect if ImageMagick is in use.
 ->preserveExifData(true)
 ```
 ```shell Environment Override
-CRAFT_PRESERVE_EXIF_DATA=1
+CRAFT_PRESERVE_EXIF_DATA=true
 ```
 :::
 
@@ -4407,7 +4410,7 @@ This will only work if ImageMagick is installed, and <config5:imageDriver> is se
 ->rasterizeSvgThumbs(true)
 ```
 ```shell Environment Override
-CRAFT_RASTERIZE_SVG_THUMBS=1
+CRAFT_RASTERIZE_SVG_THUMBS=true
 ```
 :::
 
@@ -4552,6 +4555,9 @@ Defined by
 Since
 :  3.5.0
 
+Deprecated
+:  in 4.11.0. [[\craft\filters\Cors]] should be used instead.
+
 </div>
 
 The Ajax origins that should be allowed to access the GraphQL API, if enabled.
@@ -4597,7 +4603,7 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 ->disableGraphqlTransformDirective(true)
 ```
 ```shell Environment Override
-CRAFT_DISABLE_GRAPHQL_TRANSFORM_DIRECTIVE=1
+CRAFT_DISABLE_GRAPHQL_TRANSFORM_DIRECTIVE=true
 ```
 :::
 
@@ -4727,6 +4733,37 @@ Prefix to use for all type names returned by GraphQL.
 ```
 ```shell Environment Override
 CRAFT_GQL_TYPE_PREFIX=craft_
+```
+:::
+
+
+
+### `lazyGqlTypes`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$lazyGqlTypes](craft5:craft\config\GeneralConfig::$lazyGqlTypes)
+
+Since
+:  5.3.0
+
+</div>
+
+Whether GraphQL types should be generated lazily.
+
+::: code
+```php Static Config
+->lazyGqlTypes(true)
+```
+```shell Environment Override
+CRAFT_LAZY_GQL_TYPES=true
 ```
 :::
 
@@ -4912,7 +4949,7 @@ Whether dates returned by the GraphQL API should be set to the system time zone 
 ->setGraphqlDatesToSystemTimeZone(true)
 ```
 ```shell Environment Override
-CRAFT_SET_GRAPHQL_DATES_TO_SYSTEM_TIMEZONE=1
+CRAFT_SET_GRAPHQL_DATES_TO_SYSTEM_TIMEZONE=true
 ```
 :::
 
