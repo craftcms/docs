@@ -22,7 +22,7 @@ Following the official [web fonts tutorial](https://fontawesome.com/docs/web/set
 
 Change `fa-solid` to another style identifier to suit your site’s appearance!
 
-If you added the FontAwesome files in `web/assets/fontawesome/*`, you would link to one or more stylesheets like this:
+If you added the FontAwesome files in `web/assets/fontawesome/*`, you would link to one or more style sheets like this:
 
 ```twig
 {% css '/assets/fontawesome/fontawesome.css' %}
