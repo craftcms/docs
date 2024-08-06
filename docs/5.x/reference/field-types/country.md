@@ -26,7 +26,13 @@ Craft stores the field’s value as a capitalized, two-letter country code.
 {% endif %}
 ```
 
-To get more information about the country, use the [address repository](../element-types/addresses.md#address-repository) available via the address service:
+Craft actually returns a [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) object, which has a few [additional features](../element-types/addresses.md#country-names), including the complete name (localized for the current site): <Since ver="5.3.0" description="{product} {ver} changed the data type for Country fields." />
+
+```twig
+<h1>Mail from {{ entry.country.name }}</h1>
+```
+
+In earlier versions of Craft, use the [address repository](../element-types/addresses.md#address-repository) available via the address service to get a `Country` model:
 
 ```twig
 {# Load all country data: #}
@@ -45,15 +51,18 @@ The `country` variable in this example is an instance of  [`CommerceGuys\Address
 
 You can query for elements based on a country field’s value in a familiar way:
 
-```twig
-
+```twig{3-4}
 {% set letters = craft.entries
     .section('letters')
     .fromCountry('FR')
     .toCountry('GB')
-    .dateSent()
+    .orderBy('dateSent DESC')
     .all() %}
 ```
+
+::: warning
+Queries against country fields currently only support two-letter codes, not complete names or other country properties.
+:::
 
 ### Front-end Forms
 
