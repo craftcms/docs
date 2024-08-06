@@ -200,7 +200,7 @@ Category | File | Application Type
 The primary config file is always evaluated, but only one of the `web` or `console` files are merged on top of it, when present.
 
 ::: tip
-See the previous section for some examples of how to combine application type-specific configuration and config styles. General and database config files support a [fluent](#style) config syntax, but application and custom config files do not.
+See the previous section for some examples of how to combine application type-specific configuration and config styles. General and database config files support [fluent](#style) config, but application and custom config files do not.
 :::
 
 ### Types and Values
