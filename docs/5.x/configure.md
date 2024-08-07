@@ -166,7 +166,7 @@ return function(array $config) {
 ```
 :::
 
-There is no equivalent to `GeneralConfig` and `DbConfig` for [application](#application-configuration) or [custom](#custom-settings) config files. If you return an array from the primary file, there is limited value in using a closure in an application type-specific file.
+There is no equivalent to `GeneralConfig` and `DbConfig` for [application](#application-configuration). If you return an array from the primary file, there is limited value in using a closure in an application type-specific file.
 
 ::: tip
 The `GeneralConfig` class has a special `addAlias()` method that allows you to merge additional aliases, when using closures _and_ fluent config.
@@ -176,7 +176,7 @@ The `GeneralConfig` class has a special `addAlias()` method that allows you to m
 
 Craft has two primary application types—_web_ and _console_. Web requests are typically initiated by an HTTP server via `index.php`; console requests are initiated from the `craft` executable, on the command line.
 
-You can provide configuration that targets a specific application type by creating additional general, database, application, or custom configuration files with the appropriate suffix:
+You can provide configuration that targets a specific application type by creating additional general, database, or application configuration files with the appropriate suffix:
 
 <div class="croker-table">
 
@@ -191,16 +191,13 @@ Category | File | Application Type
 [Application](#application-configuration) | `app.php` | All
 &nbsp; | `app.web.php` | Web only
 &nbsp; | `app.console.php` | Console only
-[Custom](#custom-settings) | `custom.php` | All
-&nbsp; | `custom.web.php` | Web only
-&nbsp; | `custom.console.php` | Console only
 
 </div>
 
 The primary config file is always evaluated, but only one of the `web` or `console` files are merged on top of it, when present.
 
 ::: tip
-See the previous section for some examples of how to combine application type-specific configuration and config styles. General and database config files support [fluent](#style) config, but application and custom config files do not.
+See the previous section for some examples of how to combine application type-specific configuration and config styles.
 :::
 
 ### Types and Values
