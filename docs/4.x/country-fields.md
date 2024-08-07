@@ -12,7 +12,7 @@ The **Country** field <Since ver="4.6.0" feature="The Country field" /> allows a
 This field has no configurable options.
 
 ::: tip
-You can switch other text-based fields to use the Country field type. As long as your existing field’s values are valid two-letter country codes (or empty) and the existing field
+You can switch other text-based fields to use the country field type. As long as your existing field’s values are valid two-letter country codes (or empty), the data will be seamlessly enhanced with the country field’s richer return type.
 :::
 
 ## Development
@@ -25,7 +25,13 @@ Craft stores the field’s value as a capitalized, two-letter country code.
 {% endif %}
 ```
 
-To get more information about the country, use the [address repository](addresses.md#address-repository) available via the address service:
+Craft actually returns a [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) object, which has a few [additional features](addresses.md#country-names), including the complete name (localized for the current site): <Since ver="4.11.0" description="{product} {ver} changed the data type for Country fields." />
+
+```twig
+<h1>Mail from {{ entry.country.name }}</h1>
+```
+
+In earlier versions of Craft, use the [address repository](addresses.md#address-repository) available via the address service to get a `Country` model:
 
 ```twig
 {# Load all country data: #}

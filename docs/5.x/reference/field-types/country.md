@@ -13,7 +13,7 @@ The **Country** field allows authors to select from a the same list of countries
 This field has no configurable options.
 
 ::: tip
-You can switch other text-based fields to use the Country field type. As long as your existing field’s values are valid two-letter country codes (or empty) and the existing field
+You can switch other text-based fields to use the country field type. As long as your existing field’s values are valid two-letter country codes (or empty), the data will be seamlessly enhanced with the country field’s richer return type.
 :::
 
 ## Development

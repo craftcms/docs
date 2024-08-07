@@ -258,6 +258,34 @@ The default formatter includes the following options:
 #}
 ```
 
+#### Country Names
+
+Only the two-letter “country code” is stored on addresses. To display the full country name (localized for the viewer), use the attached [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) model: <Since ver="4.11.0" feature="Address.getCountry()" />
+
+```twig
+{% set country = address.country %}
+
+{{ country.name }}
+```
+
+Via the `Country` object, you also have access to the following data:
+
+- `countryCode` — Same ISO 3166-1 alpha-2 code as was stored on `address.countryCode`.
+- `name` — Name of the country, localized for the current site.
+- `threeLetterCode` — ISO 3166-1 alpha-3 code for the country.
+- `numericalCode` — ISO ISO 3166-1 numeric codes.
+- `currencyCode` — ISO 4217 currency code (not the symbol).
+- `timezones` — A list of PHP timezone identifiers for the country. This is not necessarily specific to the address!
+- `locale` — How the country’s name was localized.
+
+In earlier versions of Craft, you must directly retrieve its definition from the [address repository](#address-repository):
+
+```twig
+{% set country = craft.app.getAddresses().getCountryRepository().get(address.countryCode) %}
+
+{{ country.name }}
+```
+
 ### Customizing the Formatter
 
 You can also pass your own formatter to the `|address` filter. The addressing library includes [PostalLabelFormatter](https://github.com/commerceguys/addressing/blob/master/src/Formatter/PostalLabelFormatter.php) to make it easier to print shipping labels. Here, we can specify that formatter and set its additional `origin_country` option:
