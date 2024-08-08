@@ -181,7 +181,7 @@ The [`clone()` function](../reference/twig/functions.md#clone) is used to copy a
 Note that we are only executing the `weekEvents` and `monthEvents` queries! Cloning an executed query will just copy the results.
 :::
 
-#### Relational Fields
+### Relational Fields
 
 Any time you access a [relational field](../system/relations.md#fields) (specifically, one that hasn’t been [eager-loaded](eager-loading.md)), Craft automatically clones it:
 
