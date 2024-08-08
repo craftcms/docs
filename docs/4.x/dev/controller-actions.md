@@ -116,6 +116,12 @@ For requests initiated by an HTML `<form>`, use the `csrfInput()` [Twig helper](
 
 The process is slightly more complicated for [Ajax](#ajax) requests, but can be abstracted in a manner appropriate for your project.
 
+Any time a CSRF token is generated during a request, Craft sends no-cache headers to prevent tokens from leaking across sessions or becoming stale. <Since ver="4.11.0" description="We began sending automatic no-cache headers in {product} {ver}." />
+
+::: warning
+Tokens can still be captured within [`{% cache %}` tags](tags.md#cache), so be mindful of context when rendering forms—or pass the [`async` option](../reference/twig/functions.md#csrfinput) to `csrfInput()`!
+:::
+
 ### Form Helpers
 
 Craft has a number of built-in Twig functions to make dealing with forms and input easier.
@@ -210,6 +216,10 @@ This example assumes you have no preexisting HTML from the server, as though it 
   });
 </script>
 ```
+
+::: warning
+Note that by generating and outputting a CSRF token into HTML, the page can no longer be safely cached.
+:::
 
 #### Sending JSON
 
