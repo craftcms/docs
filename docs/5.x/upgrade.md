@@ -387,6 +387,31 @@ This ensures that you are querying for the correct instance of a [multi-instance
 
 Craft already knows how to query against the appropriate instance of a field when using its handle as a query method, so this is only necessary for complex or compound conditions.
 
+#### Case-Sensitivity
+
+MySQL users should review queries against [textual custom field values](development/element-queries.md#case-sensitivity) for consistency. The following query using a lower-case name will no longer match a capitalized value:
+
+```twig
+{% set entries = craft.entries()
+  .section('departments')
+  .deptHeadNameFirst('oli')
+  .all() %}
+```
+
+If you don’t have control over the query _value_ (say, it comes from a third-party feed), consider updating the query to use the new `caseInsensitive` option:
+
+```twig
+{% set entries = craft.entries()
+  .section('departments')
+  .deptHeadNameFirst({
+    value: 'oli',
+    caseInsensitive: true,
+  })
+  .all() %}
+```
+
+You may also want to review any [custom sources](system/elements.md#sources) that use condition rules targeting the [affected field types](development/element-queries.md#case-sensitivity).
+
 ### Matrix Fields
 
 During the upgrade, Craft will automatically migrate all your Matrix field content to entries. In doing so, new globally-accessible fields will be created with a unique name:

@@ -155,6 +155,22 @@ Custom field parameters can be combined for advanced filtering—in this example
 
 See each [field type](../system/fields.md#field-types)’s documentation for what kinds of values you can use.
 
+#### Case-Sensitivity
+
+Queries against textual fields ([Color](../reference/field-types/color.md), [Country](../reference/field-types/country.md), [Email](../reference/field-types/email.md), [Icon](../reference/field-types/icon.md), [Link](../reference/field-types/link.md), [Plain Text](../reference/field-types/plain-text.md), and [Table](../reference/field-types/table.md)) are case-sensitive, by default.
+
+To make a query case-_insensitive_, pass an object with the special `caseInsensitive` key:
+
+```twig{4-5}
+{% set cars = craft.entries()
+  .section('cars')
+  .brand({
+    value: 'bmw',
+    caseInsensitive: true,
+  })
+  .all() %}
+```
+
 ### Reusing Queries
 
 Sometimes, you might want to run a number of similar queries. Take this case, where we want to show some information about upcoming events at a library:
