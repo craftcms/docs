@@ -509,3 +509,63 @@ return [
     'bootstrap' => ['my-module'],
 ];
 ```
+
+## Requests + Responses <Since ver="4.11.0" feature="CORS and headers filters" />
+
+To set arbitrary headers on every site response, attach <craft4:craft\filters\Headers> to the root _web_ application, in `config/app.web.php`:
+
+```php
+return [
+    // Attach the headers filter to the application:
+    'as headersFilter' => [
+        'class' => \craft\filters\Headers::class,
+        'site' => ['siteA', 'siteB'],
+        'headers' => [
+            // Define pairs of headers:
+            'Permissions-Policy' => 'interest-cohort=()',
+            'X-Foo' => 'Bar',
+        ],
+    ],
+];
+```
+
+We also provide a [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)-specific filter (<craft4:craft\filters\Cors>) to manage server-side policies on a per-action basis:
+
+```php
+return [
+    // Attach the CORS filter to the application:
+    'as corsFilter' => [
+        'class' => \craft\filters\Cors::class,
+
+        // Scope to specific sites (optional):
+        'site' => ['siteA', 'siteB'],
+
+        // CORS defaults for all non-CP requests:
+        'cors' => [
+            'Origin' => [
+                'https://my-project.ddev.site',
+                'https://es.my-project.ddev.site',
+            ],
+            'Access-Control-Request-Method' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'HEAD', 'OPTIONS'],
+            'Access-Control-Request-Headers' => ['*'],
+            'Access-Control-Allow-Credentials' => true,
+            'Access-Control-Max-Age' => 86400,
+            'Access-Control-Expose-Headers' => [],
+        ],
+
+        // Controller/action-specific overrides (optional):
+        'actions' => [
+            'graphql/api' => [
+                'Origin' => ['*'],
+                'Access-Control-Allow-Credentials' => false,
+            ],
+        ],
+    ],
+];
+```
+
+With [Dev Mode](kb:what-dev-mode-does) on, some potentially dangerous CORS misconfigurations will trigger exceptions.
+
+::: warning
+Headers in action-specific overrides are _not_ merged with global headers—they are only applied if the header was already set, globally!
+:::
