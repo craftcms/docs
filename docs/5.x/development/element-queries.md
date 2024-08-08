@@ -171,6 +171,8 @@ To make a query case-_insensitive_, pass an object with the special `caseInsensi
   .all() %}
 ```
 
+[Dropdown](../reference/field-types/dropdown.md), [Radio](../reference/field-types/radio.md), [Checkboxes](../reference/field-types/checkboxes.md), and other fields whose only allowable values are determined by the field’s configuration are _always_ handled in a case-sensitive way.
+
 ### Reusing Queries
 
 Sometimes, you might want to run a number of similar queries. Take this case, where we want to show some information about upcoming events at a library:
