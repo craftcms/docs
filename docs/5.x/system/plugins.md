@@ -181,7 +181,7 @@ If you can’t find a plugin license, visit **Licenses** → **Claim License**. 
 
 ### Safeguarding Plugin License Keys
 
-By default, your plugin license key will be stored in the database and the [project config](project-config.md). If you wish, you may move that license key to a [PHP constant or environment variable](../configure.md#control-panel-settings) and set the key using the `$MY_PLUGIN_KEY` syntax.
+By default, your plugin license key will be stored in the database and [project config](project-config.md). If you wish, you may move that license key to a [PHP constant or environment variable](../configure.md#control-panel-settings) and set the key using the `$MY_PLUGIN_KEY` syntax.
 
 Similarly, you can set Craft’s license key via the special `CRAFT_LICENSE_KEY` environment variable.
 
