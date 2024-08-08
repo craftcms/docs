@@ -340,7 +340,7 @@ You can set additional attributes on the rendered tag by passing an `options` ar
 
 ```twig
 {{ csrfInput({
-  id: 'my-csrf-input'
+  id: 'my-csrf-input',
 }) }}
 ```
 

@@ -334,7 +334,7 @@ Renders a CSRF token `input` element for use in an HTML form. All sites that hav
 {{ csrfInput() }}
 ```
 ```html Output
-<input type="hidden" name="CRAFT_CSRF_TOKEN" value="MfVs9Nyp33VKpXH7S0eUZZxy74Dw25VUYHGti-8dHqNHbNAu-YS6nmEC5y3FMC9kHivsmhSSqbK5oKR2bwaCk_ojO3_jkQMRwi97vpsF6Bqxxbh9m_YJAAJtizY04tfvIRGDe7gBAWs2Oad0UaWJxpx_zfn8aaDjQbHGAJNNa-rPpoljTkiNPJnOadIJ8xGkpxC8S5sAw63KmSQd6Cu4GQvbN-lBq9PIiPxlA0D784lRfeo0KKhMq9T_6R1kgxnzAEwGLx7Y_yH2noCIxZRFX2Wy8Z8aDh7Tp2Z3pxtDif9g3SiC_Y5O-ZU_MGBZ6A5WhrbaFnexS90zNVwPQ8kYZtTqgM0ogKO_O-ysE8T1RMB1OIP-xbg1Ni7BX9C9LaproUHh0GyN">
+<input type="hidden" name="CRAFT_CSRF_TOKEN" value="MfVs9Nyp33VKpXH7S0eUZZxy74Dw25VUYHGti-(...)">
 ```
 :::
 
@@ -342,7 +342,7 @@ You can set additional attributes on the rendered tag by passing an `options` ar
 
 ```twig
 {{ csrfInput({
-  id: 'my-csrf-input'
+  id: 'my-csrf-input',
 }) }}
 ```
 
