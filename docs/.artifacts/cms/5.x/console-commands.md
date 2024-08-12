@@ -416,6 +416,86 @@ tagGroup
 
 
 
+## `entry-types`
+
+
+<h3 id="entry-types-merge">
+    <a href="#entry-types-merge" class="header-anchor">#</a>
+    <code>entry-types/merge</code>
+</h3>
+
+
+Merges two entry types.
+
+<h4 id="entry-types-merge-parameters" class="command-subheading">Parameters</h4>
+
+handleA
+: 
+
+handleB
+: 
+
+
+
+## `env`
+
+Sets or removes environment variables in the `.env` file.
+
+<h3 id="env-remove">
+    <a href="#env-remove" class="header-anchor">#</a>
+    <code>env/remove</code>
+</h3>
+
+
+Removes an environment variable from the `.env` file.
+
+    php craft env/remove CRAFT_DEV_MODE
+
+<h4 id="env-remove-parameters" class="command-subheading">Parameters</h4>
+
+name
+: 
+
+
+
+<h3 id="env-set">
+    <a href="#env-set" class="header-anchor">#</a>
+    <code>env/set</code>
+</h3>
+
+
+Sets an environment variable in the `.env` file.
+
+    php craft env/set CRAFT_DEV_MODE true
+
+<h4 id="env-set-parameters" class="command-subheading">Parameters</h4>
+
+name
+: 
+
+value
+: 
+
+
+
+<h3 id="env-show">
+    <a href="#env-show" class="header-anchor">#</a>
+    <code>env/show</code>
+</h3>
+
+
+Displays the value of an environment variable, or sets its value if $name contains `=`.
+
+    php craft env CRAFT_DEV_MODE
+    php craft env CRAFT_DEV_MODE=true
+
+<h4 id="env-show-parameters" class="command-subheading">Parameters</h4>
+
+name
+: 
+
+
+
 ## `exec`
 
 
@@ -430,6 +510,36 @@ Executes a PHP statement and outputs the result.
 <h4 id="exec-exec-parameters" class="command-subheading">Parameters</h4>
 
 command
+: 
+
+
+
+## `fields`
+
+Manages custom fields.
+
+<h3 id="fields-auto-merge">
+    <a href="#fields-auto-merge" class="header-anchor">#</a>
+    <code>fields/auto-merge</code>
+</h3>
+
+
+Finds fields with identical settings and merges them together.
+
+<h3 id="fields-merge">
+    <a href="#fields-merge" class="header-anchor">#</a>
+    <code>fields/merge</code>
+</h3>
+
+
+Merges two custom fields together.
+
+<h4 id="fields-merge-parameters" class="command-subheading">Parameters</h4>
+
+handleA
+: 
+
+handleB
 : 
 
 
