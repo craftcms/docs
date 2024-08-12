@@ -294,6 +294,258 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\auth\\sso\\BaseExternalProvider",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseExternalProvider",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseExternalProvider",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseExternalProvider",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseExternalProvider",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseExternalProvider",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseExternalProvider",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseProvider",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseProvider",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseProvider",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseProvider",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseProvider",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseProvider",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\auth\\sso\\BaseProvider",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\auth\\sso\\CraftProvider",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\auth\\sso\\CraftProvider",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\auth\\sso\\CraftProvider",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\auth\\sso\\CraftProvider",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\CraftProvider",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\CraftProvider",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\auth\\sso\\CraftProvider",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\ExplicitUserMapper",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\ExplicitUserMapper",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\ExplicitUserMapper",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\ExplicitUserMapper",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\ExplicitUserMapper",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\ExplicitUserMapper",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\ExplicitUserMapper",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\IdpAttributeUserMapper",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\IdpAttributeUserMapper",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\IdpAttributeUserMapper",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\IdpAttributeUserMapper",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\IdpAttributeUserMapper",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\IdpAttributeUserMapper",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\IdpAttributeUserMapper",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\TemplateValueUserMapper",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\TemplateValueUserMapper",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\TemplateValueUserMapper",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\TemplateValueUserMapper",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\TemplateValueUserMapper",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\TemplateValueUserMapper",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\auth\\sso\\mapper\\TemplateValueUserMapper",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\base\\AssetPreviewHandler",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -2600,6 +2852,18 @@
     },
     {
         "class": "craft\\base\\Field",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\base\\Field",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\base\\Field",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -2678,6 +2942,12 @@
     },
     {
         "class": "craft\\base\\FieldLayoutComponent",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\base\\FieldLayoutComponent",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -2717,6 +2987,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\base\\FieldLayoutElement",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
     },
     {
         "class": "craft\\base\\FieldLayoutElement",
@@ -3793,6 +4069,42 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\EntryTypesController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\EntryTypesController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\EntryTypesController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\console\\controllers\\EnvController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\EnvController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\EnvController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\ExecController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -3806,6 +4118,24 @@
     },
     {
         "class": "craft\\console\\controllers\\ExecController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\console\\controllers\\FieldsController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\FieldsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\FieldsController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -5060,6 +5390,24 @@
     },
     {
         "class": "craft\\controllers\\SitesController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\SsoController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\SsoController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\controllers\\SsoController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -22396,6 +22744,54 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\actions\\MoveToSection",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveToSection",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveToSection",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveToSection",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveToSection",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveToSection",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveToSection",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\actions\\MoveToSection",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\actions\\NewChild",
         "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
         "type": "craft\\events\\DefineValueEvent",
@@ -23099,6 +23495,48 @@
     },
     {
         "class": "craft\\elements\\conditions\\ElementCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\elements\\conditions\\HasDescendantsRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\HasDescendantsRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\HasDescendantsRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\HasDescendantsRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\HasDescendantsRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\HasDescendantsRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\HasDescendantsRule",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -26087,6 +26525,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\BaseField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\BaseField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26129,6 +26573,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\BaseNativeField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\BaseNativeField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26171,6 +26621,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\BaseUiElement",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\BaseUiElement",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26213,6 +26669,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\CustomField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\CustomField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26255,6 +26717,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\FullNameField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\FullNameField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26297,6 +26765,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\Heading",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Heading",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26339,6 +26813,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\HorizontalRule",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\HorizontalRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26381,6 +26861,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\Html",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Html",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26423,6 +26909,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\LineBreak",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\LineBreak",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26465,6 +26957,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\Template",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Template",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26507,6 +27005,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\TextField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\TextField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26549,6 +27053,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\TextareaField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\TextareaField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26591,6 +27101,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\Tip",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Tip",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26633,6 +27149,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\TitleField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\TitleField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26675,6 +27197,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\AddressField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\AddressField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26717,6 +27245,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\CountryCodeField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\CountryCodeField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26759,6 +27293,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\LabelField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\LabelField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26801,6 +27341,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\LatLongField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\LatLongField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26843,6 +27389,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\OrganizationField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\OrganizationField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26885,6 +27437,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\OrganizationTaxIdField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\OrganizationTaxIdField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26927,6 +27485,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\assets\\AltField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\assets\\AltField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -26969,6 +27533,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\assets\\AssetTitleField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\assets\\AssetTitleField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -27011,6 +27581,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\entries\\EntryTitleField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\entries\\EntryTitleField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -27053,6 +27629,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\EmailField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\EmailField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -27095,6 +27677,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\FullNameField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\FullNameField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -27137,6 +27725,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\PhotoField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\PhotoField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -27176,6 +27770,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\UsernameField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\UsernameField",
@@ -27272,6 +27872,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Addresses",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Addresses",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\Addresses",
@@ -27419,6 +28031,18 @@
     },
     {
         "class": "craft\\fields\\Assets",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Assets",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Assets",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -27554,6 +28178,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\BaseOptionsField",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\BaseOptionsField",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\BaseOptionsField",
@@ -27695,6 +28331,18 @@
     },
     {
         "class": "craft\\fields\\BaseRelationField",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\BaseRelationField",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\BaseRelationField",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -27830,6 +28478,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Categories",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Categories",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\Categories",
@@ -27971,6 +28631,18 @@
     },
     {
         "class": "craft\\fields\\Checkboxes",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Checkboxes",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Checkboxes",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -28103,6 +28775,18 @@
     },
     {
         "class": "craft\\fields\\Color",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Color",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Color",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -28235,6 +28919,18 @@
     },
     {
         "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Country",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Country",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -28364,6 +29060,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Date",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Date",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\Date",
@@ -28505,6 +29213,18 @@
     },
     {
         "class": "craft\\fields\\Dropdown",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Dropdown",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Dropdown",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -28634,6 +29354,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Email",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Email",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\Email",
@@ -28775,6 +29507,18 @@
     },
     {
         "class": "craft\\fields\\Entries",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Entries",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Entries",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -28907,6 +29651,18 @@
     },
     {
         "class": "craft\\fields\\Icon",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Icon",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Icon",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -29039,6 +29795,18 @@
     },
     {
         "class": "craft\\fields\\Lightswitch",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Lightswitch",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Lightswitch",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -29111,6 +29879,156 @@
     },
     {
         "class": "craft\\fields\\Lightswitch",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_REGISTER_LINK_TYPES",
+        "type": "craft\\events\\RegisterComponentTypesEvent",
+        "desc": "The event that is triggered when registering the link types for Link fields."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_BEFORE_ELEMENT_SAVE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is saved."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_AFTER_ELEMENT_SAVE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is saved."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_AFTER_ELEMENT_PROPAGATE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is fully saved and propagated to other sites."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_BEFORE_ELEMENT_DELETE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is deleted."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_AFTER_ELEMENT_DELETE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is deleted."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_BEFORE_ELEMENT_RESTORE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is restored."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_AFTER_ELEMENT_RESTORE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is restored."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_DEFINE_KEYWORDS",
+        "type": "craft\\events\\DefineFieldKeywordsEvent",
+        "desc": "The event that is triggered when defining the field’s search keywords for an element."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_DEFINE_INPUT_HTML",
+        "type": "craft\\events\\DefineFieldHtmlEvent",
+        "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_BEFORE_SAVE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the component is saved."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_AFTER_SAVE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered after the component is saved."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the component is deleted."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_BEFORE_APPLY_DELETE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the delete is applied to the database."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the component is deleted."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\Link",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\Link",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -29177,6 +30095,18 @@
     },
     {
         "class": "craft\\fields\\Matrix",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Matrix",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Matrix",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -29309,6 +30239,18 @@
     },
     {
         "class": "craft\\fields\\MissingField",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\MissingField",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\MissingField",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -29438,6 +30380,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Money",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Money",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\Money",
@@ -29579,6 +30533,18 @@
     },
     {
         "class": "craft\\fields\\MultiSelect",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\MultiSelect",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\MultiSelect",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -29711,6 +30677,18 @@
     },
     {
         "class": "craft\\fields\\Number",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Number",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Number",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -29840,6 +30818,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\PlainText",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\PlainText",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\PlainText",
@@ -29981,6 +30971,18 @@
     },
     {
         "class": "craft\\fields\\RadioButtons",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\RadioButtons",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\RadioButtons",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -30110,6 +31112,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Table",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Table",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\Table",
@@ -30251,6 +31265,18 @@
     },
     {
         "class": "craft\\fields\\Tags",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Tags",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Tags",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -30383,6 +31409,18 @@
     },
     {
         "class": "craft\\fields\\Time",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Time",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Time",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -30461,6 +31499,12 @@
     },
     {
         "class": "craft\\fields\\Url",
+        "name": "EVENT_REGISTER_LINK_TYPES",
+        "type": "craft\\events\\RegisterComponentTypesEvent",
+        "desc": "The event that is triggered when registering the link types for Link fields."
+    },
+    {
+        "class": "craft\\fields\\Url",
         "name": "EVENT_BEFORE_ELEMENT_SAVE",
         "type": "craft\\events\\FieldElementEvent",
         "desc": "The event that is triggered before the element is saved."
@@ -30512,6 +31556,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Url",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Url",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\fields\\Url",
@@ -30653,6 +31709,18 @@
     },
     {
         "class": "craft\\fields\\Users",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Users",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Users",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the component is saved."
@@ -31103,6 +32171,438 @@
     },
     {
         "class": "craft\\fields\\conditions\\TextFieldConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Asset",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Asset",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Asset",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Asset",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Asset",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Asset",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Asset",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Asset",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseElementLinkType",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseElementLinkType",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseElementLinkType",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseElementLinkType",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseElementLinkType",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseElementLinkType",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseElementLinkType",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseElementLinkType",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseLinkType",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseLinkType",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseLinkType",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseLinkType",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseLinkType",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseLinkType",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseLinkType",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseLinkType",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseTextLinkType",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseTextLinkType",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseTextLinkType",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseTextLinkType",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseTextLinkType",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseTextLinkType",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseTextLinkType",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\BaseTextLinkType",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Category",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Category",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Category",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Category",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Category",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Category",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Category",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Category",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Email",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Email",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Email",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Email",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Email",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Email",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Email",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Email",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Entry",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Entry",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Entry",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Entry",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Entry",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Entry",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Entry",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Entry",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Phone",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Phone",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Phone",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Phone",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Phone",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Phone",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Phone",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Phone",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Url",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Url",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Url",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Url",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Url",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Url",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Url",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\linktypes\\Url",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -32176,6 +33676,30 @@
         "desc": "The event that is triggered after the migration is reverted"
     },
     {
+        "class": "craft\\migrations\\BaseEntryTypeMergeMigration",
+        "name": "EVENT_AFTER_UP",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the migration is executed"
+    },
+    {
+        "class": "craft\\migrations\\BaseEntryTypeMergeMigration",
+        "name": "EVENT_AFTER_DOWN",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the migration is reverted"
+    },
+    {
+        "class": "craft\\migrations\\BaseFieldMergeMigration",
+        "name": "EVENT_AFTER_UP",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the migration is executed"
+    },
+    {
+        "class": "craft\\migrations\\BaseFieldMergeMigration",
+        "name": "EVENT_AFTER_DOWN",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the migration is reverted"
+    },
+    {
         "class": "craft\\migrations\\CreateDbCacheTable",
         "name": "EVENT_AFTER_UP",
         "type": "yii\\base\\Event",
@@ -32696,6 +34220,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\models\\FieldLayoutTab",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
     },
     {
         "class": "craft\\models\\FieldLayoutTab",
@@ -35681,6 +37211,78 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\records\\SsoIdentity",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\records\\Structure",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
@@ -37565,6 +39167,18 @@
         "desc": "The event that is triggered after an entry type is deleted."
     },
     {
+        "class": "craft\\services\\Entries",
+        "name": "EVENT_BEFORE_MOVE_TO_SECTION",
+        "type": "craft\\events\\MoveEntryEvent",
+        "desc": "The event that is triggered before an entry is move to a different section."
+    },
+    {
+        "class": "craft\\services\\Entries",
+        "name": "EVENT_AFTER_MOVE_TO_SECTION",
+        "type": "craft\\events\\MoveEntryEvent",
+        "desc": "The event that is triggered before an entry is move to a different section."
+    },
+    {
         "class": "craft\\services\\Fields",
         "name": "EVENT_REGISTER_FIELD_TYPES",
         "type": "craft\\events\\RegisterComponentTypesEvent",
@@ -38013,6 +39627,18 @@
         "name": "EVENT_AFTER_DELETE_SITE",
         "type": "craft\\events\\DeleteSiteEvent",
         "desc": "The event that is triggered after a site is deleted."
+    },
+    {
+        "class": "craft\\services\\Sso",
+        "name": "EVENT_POPULATE_USER_GROUPS",
+        "type": "craft\\services\\UserEvent",
+        "desc": "The event that is triggered when populating user groups from an SSO provider."
+    },
+    {
+        "class": "craft\\services\\Sso",
+        "name": "EVENT_POPULATE_USER",
+        "type": "craft\\services\\UserEvent",
+        "desc": "The event that is triggered when populating a user from an SSO provider."
     },
     {
         "class": "craft\\services\\Structures",
