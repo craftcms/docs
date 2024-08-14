@@ -20,6 +20,16 @@ Commerce assumes you have already configured [sites and site groups](/5.x/system
 
 The availability of some options (like tax and shipping categories) depend on which site you are editing a product or variant in, and selections will be consistent across any other sites that use that store. A variant’s pricing is also determined per-store—but its inventory is tracked per [location](inventory.md).
 
+### Creating a Store
+
+Your first store will be created automatically when you install Commerce. To create another store, visit <Journey path="Commerce, System Settings, Stores" /> and select **+ New store**.
+
+If you don’t see a **+New Store** button, your project may not satisfy one of the requirements:
+
+- You can only configure as many _stores_ as you have _sites_. Commerce does not support “detached” stores.
+- Upgraded projects that still use the [sales](sales.md) system are not eligible for multi-store functionality. Convert your sales into [pricing rules](pricing-rules.md) to create additional stores.
+- Commerce Pro supports a maximum of _five_ stores, but those stores can be associated with any number of sites.
+
 ### Primary Store
 
 One store can be designated the _primary_ store. Creating a new site adds it to the primary store, by default.

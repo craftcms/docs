@@ -2,13 +2,15 @@
 
 ::: warning
 New projects should use the more flexible [pricing rules engine](pricing-rules.md). Sales are only available to stores upgraded from Commerce 4.
+
+Use of sales also disables some [multi-store](stores.md) functionality.
 :::
 
 Sales allow a store manager with _Manage promotions_ permission to set up conditions for dynamic, promotional product discounts.
 
-A sale is different from a [discount](discounts.md) because it’s applied _before_ an item is added to the cart. A discount needs a cart; it’s applied when an item’s in the cart or to the cart as a whole (like a coupon code).
+A sale is different from a [discount](discounts.md) because it’s applied _before_ an item is added to the cart. A discount needs a cart—it’s applied when an item’s in the cart or to the cart as a whole (like a coupon code).
 
-An item in the store would typically be listed by its sale price. If no sales apply to a given product, its sale price would simply equal its regular price.
+Items in your store are typically listed by their _sale price_. If no sales apply to a purchasable, its sale price would simply equal its regular price.
 
 Sales are ordered in the control panel, and the system always runs through each sale in order when determining the `salePrice` of the purchasable.
 
