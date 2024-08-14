@@ -12,7 +12,6 @@ Product queries support the following parameters:
 
 | Param                                               | Description
 | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [addOrderBy](#product-addorderby)                   | Adds additional ORDER BY columns to the query.
 | [after](#product-after)                             | Narrows the query results to only products that were posted on or after a certain date.
 | [afterPopulate](#product-afterpopulate)             | Performs any post-population processing on elements.
 | [andRelatedTo](#product-andrelatedto)               | Narrows the query results to only products that are related to certain other elements.
@@ -30,7 +29,6 @@ Product queries support the following parameters:
 | [defaultWidth](#product-defaultwidth)               | Narrows the query results based on the products’ default variant width dimension IDs.
 | [eagerly](#product-eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
 | [expiryDate](#product-expirydate)                   | Narrows the query results based on the products’ expiry dates.
-| [fields](#product-fields)                           | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
 | [fixedOrder](#product-fixedorder)                   | Causes the query results to be returned in the order specified by [id](#product-id).
 | [hasVariant](#product-hasvariant)                   | Narrows the query results to only products that have certain variants.
 | [id](#product-id)                                   | Narrows the query results based on the products’ IDs.
@@ -67,19 +65,6 @@ Product queries support the following parameters:
 
 
 <!-- textlint-enable -->
-
-
-<h4 id="product-addorderby"><a href="#product-addorderby" class="header-anchor">#</a> <code>addOrderBy</code></h4>
-
-Adds additional ORDER BY columns to the query.
-
-
-
-
-
-
-
-
 
 
 <h4 id="product-after"><a href="#product-after" class="header-anchor">#</a> <code>after</code></h4>
@@ -554,45 +539,6 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
-
-
-<h4 id="product-fields"><a href="#product-fields" class="header-anchor">#</a> <code>fields</code></h4>
-
-Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
-
-A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
-This method should return an array of field names or field definitions.
-If the former, the field name will be treated as an object property name whose value will be used
-as the field value. If the latter, the array key should be the field name while the array value should be
-the corresponding field definition which can be either an object property name or a PHP callable
-returning the corresponding field value. The signature of the callable should be:
-
-```php
-function ($model, $field) {
-    // return field value
-}
-```
-
-For example, the following code declares four fields:
-
-- `email`: the field name is the same as the property name `email`;
-- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
-  values are obtained from the `first_name` and `last_name` properties;
-- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
-  and `last_name`.
-
-```php
-return [
-    'email',
-    'firstName' => 'first_name',
-    'lastName' => 'last_name',
-    'fullName' => function ($model) {
-        return $model->first_name . ' ' . $model->last_name;
-    },
-];
-```
-
-
 
 
 <h4 id="product-fixedorder"><a href="#product-fixedorder" class="header-anchor">#</a> <code>fixedOrder</code></h4>
