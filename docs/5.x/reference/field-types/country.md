@@ -26,7 +26,7 @@ Craft stores the field’s value as a capitalized, two-letter country code.
 {% endif %}
 ```
 
-Craft actually returns a [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) object, which has a few [additional features](../element-types/addresses.md#country-names), including the complete name (localized for the current site): <Since ver="5.3.0" description="{product} {ver} changed the data type for Country fields." />
+Craft actually returns a [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) object, which has a few [additional features](../element-types/addresses.md#country-names), including the complete name: <Since ver="5.3.0" description="{product} {ver} changed the data type for Country fields." />
 
 ```twig
 <h1>Mail from {{ entry.country.name }}</h1>
@@ -46,6 +46,21 @@ In earlier versions of Craft, use the [address repository](../element-types/addr
 ```
 
 The `country` variable in this example is an instance of  [`CommerceGuys\Addressing\Country\Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php).
+
+#### Localization
+
+To get the localized name of a country, you must re-fetch it from the address repository:
+
+```twig{2}
+{% set repo = craft.app.addresses.getCountryRepository() %}
+{% set country = repo.get(entry.country, currentSite.locale) %}
+
+{{ country.name }}
+{# -> In a site set to use US English (en-US): "United States" #}
+{# -> In a site set to use Swiss French (fr-CH): "États-Unis" #}
+```
+
+Note that outputting the country object directly (i.e. `{{ country }}`) will always return the two-letter country code, which is standard across locales.
 
 ### Querying by Country
 

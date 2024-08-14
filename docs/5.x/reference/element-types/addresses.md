@@ -149,7 +149,7 @@ Expanding upon our previous example, we could output a nicely organized list of 
 Either repository’s `getList()` method is a shortcut that returns only key-value pairs, suitable for our examples—it also accepts an array of “parent” groups (beginning with country code) to narrow the subdivisions.
 
 ::: tip
-These designations are deliberately generic, and won’t generally be recognized by users. Check out the labels section for information on how to output localized or context-aware names for each level (i.e. _Provinces_ in Canada or _States_ and _Counties_ in the United States).
+These designations are deliberately generic, and won’t generally be recognized by users. Check out the [labels](#attribute-labels) section for information on how to output localized or context-aware names for each level (i.e. _Provinces_ in Canada or _States_ and _Counties_ in the United States).
 :::
 
 You may supplement the subdivision data provided by the [upstream repository](https://github.com/commerceguys/addressing) by listening to the <craft5:craft\services\Addresses::EVENT_DEFINE_ADDRESS_SUBDIVISIONS> event in a plugin or module. Similarly, deeper customization of the required [fields](#fields-and-formatting) (and those fields’ [labels](#attribute-labels)) may require modifying the defaults via the [EVENT_DEFINE_USED_SUBDIVISION_FIELDS](craft5:craft\services\Addresses::EVENT_DEFINE_USED_SUBDIVISION_FIELDS) or [EVENT_DEFINE_FIELD_LABEL](craft5:craft\services\Addresses::EVENT_DEFINE_FIELD_LABEL) events.
@@ -256,7 +256,7 @@ The default formatter includes the following options:
 
 #### Country Names
 
-Only the two-letter “country code” is stored on addresses. To display the full country name (localized for the viewer), use the attached [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) model: <Since ver="5.3.0" feature="Address.getCountry()" />
+Only the two-letter “country code” is stored on addresses. To display the full country name, use the attached [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) model: <Since ver="5.3.0" feature="Address.getCountry()" />
 
 ```twig
 {% set country = address.country %}
@@ -280,6 +280,17 @@ In earlier versions of Craft, you must directly retrieve its definition from the
 {% set country = craft.app.getAddresses().getCountryRepository().get(address.countryCode) %}
 
 {{ country.name }}
+```
+
+To get the localized name of a country outside of a formatted address, you must re-fetch it from the address repository:
+
+```twig{2}
+{% set repo = craft.app.addresses.getCountryRepository() %}
+{% set country = repo.get(entry.country, currentSite.locale) %}
+
+{{ country.name }}
+{# -> In a site set to use US English (en-US): "United States" #}
+{# -> In a site set to use Swiss French (fr-CH): "États-Unis" #}
 ```
 
 ### Customizing the Formatter
@@ -413,7 +424,7 @@ return [
 ```
 
 ::: warning
-The default formatter is used in the control panel as well as your templates, so make sure it includes all the information required for administrators to act on users’ information!
+The default formatter is used in the control panel as well as your templates, so make sure it includes all the information required for administrators to act on users’ information! Complete address data is always be available when viewing or editing it in a slideout.
 :::
 
 ## Managing Addresses
