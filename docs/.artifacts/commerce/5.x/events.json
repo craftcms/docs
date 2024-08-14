@@ -17265,6 +17265,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\ProductTitleField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\ProductTitleField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17307,6 +17313,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17349,6 +17361,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17391,6 +17409,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17433,6 +17457,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17475,6 +17505,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17517,6 +17553,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17559,6 +17601,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17601,6 +17649,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17643,6 +17697,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17685,6 +17745,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17727,6 +17793,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17769,6 +17841,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\VariantTitleField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\VariantTitleField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
@@ -17808,6 +17886,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\VariantsField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\VariantsField",
@@ -17910,6 +17994,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\commerce\\fields\\Products",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\commerce\\fields\\Products",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\commerce\\fields\\Products",
@@ -18048,6 +18144,18 @@
         "name": "EVENT_DEFINE_INPUT_HTML",
         "type": "craft\\events\\DefineFieldHtmlEvent",
         "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\commerce\\fields\\Variants",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\commerce\\fields\\Variants",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
     },
     {
         "class": "craft\\commerce\\fields\\Variants",
