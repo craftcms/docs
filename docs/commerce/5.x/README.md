@@ -1,14 +1,15 @@
 ---
-description: Official documentation for Craft Commerce 4.
+description: Official documentation for Craft Commerce 5.
 ---
 
 # About Craft Commerce
 
-Craft Commerce is an amazingly powerful and flexible ecommerce platform for [Craft CMS](https://craftcms.com).
+Craft Commerce is the powerful and flexible first-party ecommerce platform for [Craft CMS](https://craftcms.com).
 
-Craft Commerce gives web developers an enjoyable platform to build hand-crafted ecommerce solutions, while also delivering an easy to use administration control panel for users. Using the power and flexibility of Craft CMS, designers and developers can build rich ecommerce experiences.
+- **Owners** appreciate Commerce’s easy-to-use administration interface, which is deeply integrated with Craft’s control panel.
+- **Customers** love the hand-crafted shopping and checkout experiences that Commerce makes possible.
+- **Developers** enjoy the freedom and speed with which they can deliver high-quality, outsize ecommerce solutions.
 
 ::: tip
-Do yourself a big favor and learn [Craft CMS](https://craftcms.com/) before embarking on a Craft Commerce project.
-Reading the [Craft CMS documentation](https://craftcms.com/docs/) first will also make it easier to understand the Craft Commerce documentation.
+Familiarity with [Craft CMS](https://craftcms.com/) is essential when embarking on a Craft Commerce project! Take a spin through the [Craft CMS documentation](https://craftcms.com/docs/) to get a sense for the blank-slate approach to content modeling
 :::
