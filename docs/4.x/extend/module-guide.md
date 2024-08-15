@@ -100,12 +100,11 @@ Replace `foo` with your module’s actual namespace, and `'@foo'` with an [alias
 
 Most initialization logic belongs in your module’s `init()` method.
 
-However, there are some situations where this doesn’t guarantee a certain part of the application is ready (another plugin, for instance). Conversely, a module that isn’t bootstrapped at the beginning of a request may have `init()` called too late to listen to <craft4:craft\web\Application::EVENT_INIT>, and would never be notified that the app is indeed ready.
+However, there are some situations where this doesn’t guarantee a certain part of the application is ready (another plugin, for instance). Conversely, a module that isn’t [bootstrapped](#update-the-application-config) at the beginning of a request may have `init()` called too late to listen to <craft5:craft\web\Application::EVENT_INIT>, and would never be notified that the app is indeed ready.
 
-In those cases, it’s best to register a callback via <craft4:craft\base\ApplicationTrait::onInit()>:
+In those cases, it’s best to register a callback via <craft5:craft\base\ApplicationTrait::onInit()>:
 
 ```php
-<?php
 namespace foo;
 
 use Craft;
@@ -124,7 +123,11 @@ class Module extends \yii\base\Module
 }
 ```
 
-If Craft has already fully initialized, the callback will be invoked immediately.
+::: tip
+If Craft has already fully initialized, your callback will be invoked immediately.
+:::
+
+In particular, avoid creating [element queries](../element-queries.md) or causing the [Twig environment](../dev/twig-primer.md) to be loaded from your `init()` method. Both can result in race conditions and incomplete initialization.
 
 ### Update the application config
 

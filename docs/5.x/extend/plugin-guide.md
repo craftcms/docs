@@ -133,7 +133,6 @@ The `src/Plugin.php` file is your plugin’s entry point for the system. It will
 Use this template as a starting point for your `Plugin.php` file:
 
 ```php
-<?php
 namespace mynamespace;
 
 class Plugin extends \craft\base\Plugin
@@ -149,9 +148,9 @@ class Plugin extends \craft\base\Plugin
 
 ### Initialization
 
-Most initialization logic belongs in your plugin’s `init()` method.
+Most initialization logic belongs in your plugin’s `init()` method. However, there are some situations in which parts of the application aren’t ready yet (like another plugin)—in particular, creating [element queries](../development/element-queries.md) or causing the [Twig environment](../development/twig.md) to be loaded prematurely can result in race conditions and incomplete initialization.
 
-However, there are some situations where this doesn’t guarantee a certain part of the application is ready (like another plugin)—or that something has initialized so early that you wouldn’t have an opportunity to listen for events in the first place. In those cases, it’s best to register a callback via <craft5:craft\base\ApplicationTrait::onInit()>, from your plugin’s `init()` method:
+In these cases, it’s best to register a callback via <craft5:craft\base\ApplicationTrait::onInit()>, from your plugin’s `init()` method:
 
 ```php
 namespace mynamespace;
@@ -164,7 +163,7 @@ class Plugin extends \craft\base\Plugin
     {
         // ...
 
-        // Defer most setup tasks until Craft is fully initialized:
+        // Defer some setup tasks until Craft is fully initialized:
         Craft::$app->onInit(function() {
             // ...
         });
@@ -174,7 +173,11 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
-If Craft has already fully initialized, the callback will be invoked immediately.
+::: tip
+If Craft has already fully initialized, your callback will be invoked immediately.
+:::
+
+Conversely, there are cases in which attaching [event listeners](events.md) in `onInit()` may be _too late_—by the time your callback is invoked, those events may have already happened.
 
 ## Loading your plugin into a Craft project
 
