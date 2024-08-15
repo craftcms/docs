@@ -1,5 +1,9 @@
 # How to Build a Plugin
 
+Plugins are typically designed and built as public packages, distributable via the first-party [Plugin Store](plugin-store.md). You can also create [private plugins](#private-plugins) in lieu of a [module](module-guide.md) when the full suite of features are desirable (i.e. control panel navigation, settings, and project config) but the added functionality is still project-specific.
+
+At a technical level, plugins are a type of [Yii module](guide:structure-modules) that are registered with Craft and initialized alongside the application, giving them an opportunity to supplement, change, or observe what the application does.
+
 ## Preparation
 
 Your first task is to decide on a few characteristics that will dictate how your plugin is [scaffolded](#scaffolding):
