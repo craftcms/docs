@@ -40,7 +40,9 @@ my-project/
 
 ## Set up class autoloading
 
-Next up, you need to tell Composer how to find your module’s classes by setting the [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) field in your project’s `composer.json` file. For example, if your module’s namespace is `foo`, and it’s located at `modules/foo/`, this is what you should add:
+Next up, you need to tell Composer how to find your module’s classes by setting the [`autoload`](https://getcomposer.org/doc/04-schema.md#autoload) field in your project’s `composer.json` file. Unlike a plugin, modules don’t need their own `composer.json` file.
+
+If your module’s namespace is `foo`, and it’s located at `modules/foo/`, this is what you should add:
 
 ```json
 {
@@ -68,7 +70,6 @@ The `Module.php` file is your module’s entry point for the system. Its `init()
 Use this template as a starting point for your `Module.php` file:
 
 ```php
-<?php
 namespace foo;
 
 use Craft;
