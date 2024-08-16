@@ -160,13 +160,32 @@ You can automatically organize assets when they are uploaded via an [assets fiel
 
 ## Updating Asset Indexes
 
-If any files are ever added, modified, or deleted outside of Craft (such as over FTP), you’ll need to tell Craft to update its indexes for the volume. You can do that from **Utilities** → **Asset Indexes**.
+If any files are ever added, modified, or deleted outside of Craft (such as over FTP), you’ll need to tell Craft to update its indexes for the volume. You can do that from <Journey path="Utilities, Asset Indexes" />, or using the [`index-assets` console commands](../cli.md#index-assets):
 
-You will have the option to cache remote images. If you don’t have any remote volumes (Amazon S3, etc.), you can safely ignore it. Enabling the setting will cause the indexing process to take longer to complete, but it will improve the speed of [image transform](../../development/image-transforms.md) generation.
+```bash
+# Re-index all volumes:
+php craft index-assets/all
+
+# Re-index a specific volume:
+php craft index-assets/one myVolumeHandle
+
+# See available options:
+php craft index-assets/one --help
+```
+
+Both tools provide the option to **Cache Remote Images**. If you don’t have any [remote filesystems](#remote-filesystems) (or the volume doesn’t contain any transformable files) you can safely ignore it.
+
+::: tip
+Enabling the setting will cause the indexing process to take longer to complete (and may consume a great deal of local disk space), but it can speed up subsequent [image transformations](../../development/image-transforms.md).
+
+This option will have limited utility on ephemeral filesystems, as any downloaded images will be erased the next time it is restarted.
+:::
+
+Indexing assets is also a quick way to import a preexisting directory of files with Craft: with a fresh [volume](#volumes), drop the files anywhere within its **Base Path**, then index it to create the corresponding asset elements.
 
 ## Image Transforms
 
-Craft provides a way to perform a variety of image transformations to your assets. See [Image Transforms](../../development/image-transforms.md) for more information.
+To help serve optimized images, Craft supports predefined (or “named”) and ad-hoc [image transformations](../../development/image-transforms.md).
 
 ## Image Editor
 
