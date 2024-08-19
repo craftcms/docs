@@ -464,7 +464,7 @@ Our templates included examples of working with…
 - Asset/category/entry methods (like `getImg()` and `getLink()`);
 
 ::: tip
-Psst! There’s one more big Twig feature that we’ll look at in the [optimizations](../more/optimization.md) section.
+Psst! There’s one more big Twig feature that we’ll look at in the [optimizations](optimization.md) section.
 :::
 
 ### Routing
