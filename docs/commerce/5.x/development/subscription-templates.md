@@ -1,6 +1,6 @@
 # Subscription Templates
 
-Once you’ve familiarized yourself with how [subscriptions](subscriptions.md) work and set up your subscription plans, you’re ready to write some subscription templates.
+Once you’ve familiarized yourself with how [subscriptions](../system/subscriptions.md) work and set up your subscription plans, you’re ready to write some subscription templates.
 
 Each gateway provides a default template for subscription actions. If you’d prefer to handle templating yourself, you’ll have to reference the gateway plugin’s documentation to see what parameters are available.
 
