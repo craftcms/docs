@@ -35,7 +35,7 @@ This example creates a form for each available plan, posting the selection to th
       )
     %}
 
-    {# If we don’t have a saved payment soruce, collect details for the gateway #}
+    {# If we don’t have a saved payment source, collect details for the gateway #}
     {% if not paymentSources|length %}
       <div class="paymentForm">
         {% namespace plan.getGateway().handle|commercePaymentFormNamespace %}
@@ -91,7 +91,7 @@ To switch a subscription plan you can use the following template. It assumes tha
 
     {{ plan.getGateway().getSwitchPlansFormHtml(subscription.plan, plan)|raw }}
 
-    <button class="button link">Switch</button>
+    <button>Switch</button>
   </form>
   <hr />
 {% endfor %}
@@ -116,5 +116,5 @@ To reactivate a subscription plan you can use the following template. It assumes
 ```
 
 ::: warning
-Not all canceled subscriptions might be available for reactivation, so make sure to check for that using `subscription.canReactivate()`.
+Not all canceled subscriptions can be reactivated—check if the subscription and gateway allow it by calling `subscription.canReactivate()`.
 :::
