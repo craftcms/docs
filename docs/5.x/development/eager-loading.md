@@ -78,7 +78,7 @@ Element queries in Craft 5 have a new `.eagerly()` query param that simplifies e
   .all() %}
 
 {% for post in posts %}
-  {% set image = post.featureImage|first %}
+  {% set image = post.featureImage.one() %}
 
   <article>
     <h2>{{ post.title }}</h2>
@@ -145,8 +145,7 @@ Here’s how to apply the `with` param to our example:
   .all() %}
 
 {% for entry in entries %}
-  {# Get the “first” (or only) eager-loaded asset: #}
-  {% set image = entry.assetsField|first %}
+  {% set image = entry.assetsField.one() %}
 
   {# Make sure we actually have an asset element: #}
   {% if image %}
@@ -160,22 +159,6 @@ This template code will only cost three queries (one to fetch the entries, one t
 ## Accessing Eager-Loaded Elements
 
 Eager-loaded elements are returned as a [collections](collections.md)—or more specifically, an <craft5:craft\elements\ElementCollection>. This means that (in most cases) eager-loaded and non-eager-loaded elements can be treated in the same way.
-
-There are some differences in the methods exposed by element queries and 
-
-Accessing eager-loaded elements works a little differently than regular elements, under certain circumstances. Take a look at how we assigned the `image` variable in our examples, before and after applying the `with` param:
-
-```twig
-{# Before: #}
-{% set image = entry.assetsField.one() %}
-
-{# After: #}
-{% set image = entry.assetsField|first %}
-```
-
-When the assets _aren’t_ eager-loaded, `entry.assetsField` gives you a preconfigured [asset query](../reference/element-types/assets.md#querying-assets) to return the related assets.
-
-However, when the assets _are_ eager-loaded, `entry.assetsField` gets overwritten with an array of the eager-loaded assets. So `one()`, `all()`, and other element query methods are not available. Instead you must stick to the standard array syntaxes. In our example, we’re grabbing the first asset with `entry.assetsField[0]`, and we’re using Twig’s _null-coalescing operator_ (`??`) to define a default value (`null`) in case there is no related asset.
 
 ## Eager-Loading Multiple Sets of Elements
 
@@ -224,7 +207,7 @@ It’s also possible to optimize loading of elements nested two or more levels d
     {# Nested topics loop: #}
     <ul>
       {% for topic in post.topics %}
-        {% set icon = topic.thumbnail|first %}
+        {% set icon = topic.thumbnail.one() %}
 
         <li>
           <a href="{{ topic.url }}">
