@@ -24832,13 +24832,13 @@
     {
         "class": "craft\\commerce\\services\\Pdfs",
         "name": "EVENT_BEFORE_RENDER_PDF",
-        "type": "craft\\commerce\\events\\PdfEvent",
+        "type": "craft\\commerce\\events\\PdfRenderEvent",
         "desc": "The event that is triggered before an order’s PDF is rendered."
     },
     {
         "class": "craft\\commerce\\services\\Pdfs",
         "name": "EVENT_AFTER_RENDER_PDF",
-        "type": "craft\\commerce\\events\\PdfEvent",
+        "type": "craft\\commerce\\events\\PdfRenderEvent",
         "desc": "The event that is triggered after an order’s PDF has been rendered."
     },
     {

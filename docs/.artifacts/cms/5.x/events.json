@@ -1368,7 +1368,7 @@
     {
         "class": "craft\\base\\Element",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -6535,7 +6535,7 @@
     {
         "class": "craft\\elements\\Address",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -8779,7 +8779,7 @@
     {
         "class": "craft\\elements\\Asset",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -10722,7 +10722,7 @@
     {
         "class": "craft\\elements\\Category",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -13467,7 +13467,7 @@
     {
         "class": "craft\\elements\\Entry",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "draft": {
@@ -16581,7 +16581,7 @@
     {
         "class": "craft\\elements\\GlobalSet",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -18628,7 +18628,7 @@
     {
         "class": "craft\\elements\\Tag",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -20829,7 +20829,7 @@
     {
         "class": "craft\\elements\\User",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
