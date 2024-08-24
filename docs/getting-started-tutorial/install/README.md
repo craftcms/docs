@@ -21,7 +21,7 @@ Then run the following commands to configure a new DDEV project there:
 1. Create DDEV configuration files:
 
     ```sh
-    ddev config --project-type=craftcms --docroot=web --create-docroot
+    ddev config --project-type=craftcms --docroot=web
     ```
 
 2. Scaffold the project from the official starter project:
