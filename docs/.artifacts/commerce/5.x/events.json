@@ -1050,7 +1050,7 @@
     {
         "class": "craft\\commerce\\base\\Purchasable",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -4249,7 +4249,7 @@
     {
         "class": "craft\\commerce\\elements\\Donation",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -6708,7 +6708,7 @@
     {
         "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -8737,7 +8737,7 @@
     {
         "class": "craft\\commerce\\elements\\Product",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -10766,7 +10766,7 @@
     {
         "class": "craft\\commerce\\elements\\Subscription",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -12967,7 +12967,7 @@
     {
         "class": "craft\\commerce\\elements\\Variant",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
