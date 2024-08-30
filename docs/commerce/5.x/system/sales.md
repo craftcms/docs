@@ -25,7 +25,7 @@ Controls that determine what purchasables match a sale are identical to those fo
 When creating a sale, you can set a number of conditions to be evaluated when determining if the sale should be applied to the purchasable. All conditions must match to have the sale applied. Leaving a condition empty ignores that condition.
 
 ::: tip
-Only _promotable_ purchasables may have discounts and sales applied. This means the **Promotable** switch must be enabled on the variant’s product in the control panel, which is the default for any new product.
+Only _promotable_ purchasables will match discount and sale conditions. The **Promotable** setting on each variant must be _on_ for it to be eligible.
 :::
 
 ### Start date

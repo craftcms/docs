@@ -1,34 +1,36 @@
 # Store Management
 
-Craft Commerce adds user permissions you can customize in any of your [Craft CMS user groups](/4.x/user-management.md).
+Commerce embraces Craft’s flexible [user groups and permissions structure](/5.x/system/user-management.md) and gives you fine-grained control over who can access and manage critical ecommerce data.
+
+::: tip
+User groups can also be leveraged in [catalog pricing rules](../system/pricing-rules.md) to grant customers access to special discounts.
+:::
 
 ## Store Managers
 
-While you have complete control over any user groups and permissions you establish for a Craft project, most projects tend to include two types of users: technical administrators and content editors.
+Throughout the documentation, we use the shorthand “store managers” for users who have been granted access to a subset of Commerce’s back-office features (like [product management](../system/products-variants.md), [pricing rules](../system/pricing-rules.md), and [inventory](../system/inventory.md), or handling [orders](../system/orders-carts.md))—but it is not a predefined or codified role! You are always in control of your users’ capabilities.
 
-Technical administrators are most often developers that use admin accounts for full system access, while content editors have control panel access use the control panel with more limited permissions to manage content without changing system configuration.
+The exact permissions you choose for these store managers will depend on the needs of your organization and site.
 
-Commerce stores typically involve another tier of control panel users we’ll refer to throughout the documentation as “Store Managers”. These are users that have permissions tailored for managing the operation of a store, working with products and orders and pricing. The role is more permissive than that of a content editor, without full admin access to settings that could interrupt the functionality of the store.
-
-The exact permissions you choose for “Store Managers” will depend on the needs of your organization and site.
+::: tip
+There may be some overlap between a store manager’s role and that of a regular content author—depending on your content model (specifically, how much content is directly attached to product and variant elements vs. entries), authors may need to be able to update products!
+:::
 
 ## Permissions
 
 The following Commerce permissions are available for Craft users and user groups.
-
-![Screenshot of Commerce user permissions, which cover products, orders, promotions, subscriptions, shipping, taxes, and store settings](../images/user-permissions.png)
 
 ### Access Craft Commerce
 
 Whether the user is able to access the Commerce section of the control panel.
 
 ::: tip
-Unlike the others, you’ll find it under Craft’s **Access the control panel** permission:
+Unlike other Commerce-specific permissions, this one is nested inside Craft’s **Access the control panel** permission. Any user that needs access to Commerce management tools must also be given access to the control panel—but you can design your roles such that those users don’t implicitly have control over other content types or plugins.
 
 ![Screenshot of General permissions with an “Access Craft Commerce” checkbox under “Access the control panel”](../images/general-permissions.png =375x375)
 :::
 
-### Manage products
+### Manage _Product Type Name_ products
 
 Whether the user can manage products, with each product type having its own create and delete permissions.
 

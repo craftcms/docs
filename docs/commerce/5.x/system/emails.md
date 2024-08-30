@@ -1,30 +1,29 @@
 ---
 keywords: order status emails
 ---
+
 # Emails
 
-Once you’re using [order statuses](custom-order-statuses.md#functionality) to manage your orders, you can optionally choose to send emails when an order moves into a particular status.
+Once you’ve defined a suite of [order statuses](custom-order-statuses.md#functionality), you can configure Commerce to send emails as orders move between them.
 
-For example, you might create an email called “Customer Order Confirmation” which emails a completed order summary to the customer. This would be linked to the default order status since we want it to trigger when the cart’s completed and becomes an order.
-
-Another email could be “Admin Order Notification”, also attached to the default order status. Instead of being sent to the customer, however, it could go to the store owner’s email address and include stock or packing information.
-
-The store manager can also send any email manually from an order’s edit page, whether that’s to re-send an email tied to a status change or to send an email that’s unrelated to any specific status at all.
-
-## Settings
-
-Before setting up emails for Craft Commerce, ensure that your Craft CMS installation is [properly configured for email delivery](https://craftcms.com/knowledge-base/why-doesnt-craft-send-emails#setting-up-email).
-You can set up your email gateway in the control panel by navigating to **Settings** → **Email**.
+Commerce’s email system is completely flexible—you choose when emails are sent, who they’re sent to, and what they contain. This can be disorienting at first, because there is no built-in notion of a receipt or shipping confirmation!
 
 ::: tip
-Commerce emails are sent in Craft queue jobs, so sending may be delayed depending on how your queue is configured to run. See the <config4:runQueueAutomatically> config setting and notes.
+Before setting up emails for Craft Commerce, ensure that your Craft installation has a [properly configured mail adapter](/5.x/system/mail.md).
+
+Commerce emails are sent via the [queue](/5.x/system/queue.md). To ensure prompt delivery, consider setting up a [dedicated queue runner](/5.x/system/queue.md#queue-runners)!
 :::
 
-By default, Commerce will send messages using Craft’s “System Email Address” and “Sender Name” found in **Settings** → **Email Settings** in the control panel. If you’d like to override this and provide your own from name/address, navigate to **Commerce** → **System Settings** → **General Settings** and enter your own “Status Email Address” and “From Name”.
+Let’s look at an example
+For example, you might create an email called “Customer Order Confirmation” which emails a completed order summary to the customer. This would be linked to the default order status since we want it to trigger when the cart’s completed and becomes an order.
+
+Another email could be “Admin Order Notification,” also attached to the default order status. Instead of being sent to the customer, however, it could go to the store owner’s email address and include stock or packing information.
+
+The store manager can also send any email manually from an order’s edit page—whether that’s to re-send an email from a previous status change, or to send an email that is otherwise not connected to order statuses.
 
 ## Creating an Email
 
-To create a new email, navigate to **Commerce** → **System Settings** → **Emails**, and choose **New Email**:
+Emails are managed per-store. To create a new email, navigate to <Journey path="Commerce, System Settings, Emails" />, and choose **New Email**, selecting the desired store:
 
 <toggle-tip>
 
@@ -32,20 +31,24 @@ To create a new email, navigate to **Commerce** → **System Settings** → **Em
 
 </toggle-tip>
 
-Emails have the following configuration settings:
+Emails have the following configuration settings. Unless otherwise noted, textual settings are treated as [object templates](/5.x/system/object-templates.md), and are provided two special variables:
+
+- `order` — the [Order object](commerce4:craft\commerce\elements\Order) that triggered the email;
+- `orderHistory` — the [OrderHistory object](commerce4:craft\commerce\models\OrderHistory) created as the order changed status, or `null` if the email was triggered manually;
+
+This allows you to customize the behavior of an email, without 
+
+::: tip
+Each email can only be triggered _once_ by a status change. If you need to send an email to multiple recipients, you can provide them as a comma-separated list in the [To field](#recipient).
+:::
 
 ### Name
 
-Enter the name of this email as it will be shown when managing it in the control panel.
+A label for the email, visible when managing it in the control panel. This is not displayed to customers.
 
 ### Email Subject
 
-The subject of the email, which can be plain text or use Twig to set dynamic values. Two special variables are available:
-
-- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
-
-`order` is the cart or order relevant to the notification. The “Email Subject” we enter, for example, might be:
+The “Subject” line of the email.
 
 ```twig
 Order #{{ order.id }} received.
@@ -55,22 +58,22 @@ Order #{{ order.id }} received.
 
 The “To” address or addresses for this email.
 
-If “Send to the customer” is selected, the email will only be sent to the order’s customer in the language (locale) that customer used placing the order. This affects the use of the `|t` filter in other email fields that support Twig.
+If “Send to the customer” is selected, the email will be sent to the order’s customer in the language (locale) that customer used placing the order. This affects the use of the `|t` filter in other email fields that support Twig.
 
-If “Send to custom recipient” is selected, an email address can be entered. The language of this email will be in the language of whatever user triggers the status change.
+If “Send to custom recipient” is selected, a comma-separated list of email addresses can be entered.
 
-Like the [Email Subject](#email-subject), this field takes plain text as well as Twig values. Two special variables are available:
+Like the [Email Subject](#email-subject), this field is an [object template](/5.x/system/object-templates.md). Two special variables are available:
 
-- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
+- `order` — the [Order object](commerce4:craft\commerce\elements\Order) that triggered the email;
+- `orderHistory` — the [OrderHistory object](commerce4:craft\commerce\models\OrderHistory) created as the order changed status, or `null` if the email was triggered manually;
 
-`order` is the cart or order relevant to the notification. The “Recipient” we enter, for example, might be:
+`order` is the cart or order relevant to the notification. To replicate the “Send to the customer” behavior, you might provide this:
 
 ```twig
 {{ order.email }}
 ```
 
-This would send the email to the customer that created this order.
+You may use a custom field in the [order field layout](../development/carts.md#custom-fields) that contains an email address, if the customer can designate 
 
 ### Reply-To Address
 
@@ -123,11 +126,19 @@ This works the same way as the “HTML Email Template Path”.
 
 Choose a PDF that will be attached to this email.
 
+## Email Language
+
+Under most circumstances, emails are sent in the language of the site the order was placed in. Commerce captures this at checkout, and it cannot be changed after the order is completed. As a result, emails triggered by orders from a single store _can_ be rendered in different languages, if that store is attached to multiple sites.
+
+::: tip
+Set up [static message translations](/5.x/system/sites.md#static-message-translations) if you need to localize parts of your emails.
+:::
+
 ## Selecting an Email
 
-To use the email you’ve created, visit **Commerce** → **System Settings** → **Order Status** and choose the Order Status that should send this email when it updates.
+To use an email you’ve configured, visit <Journey path="Commerce, System Settings, Order Status" /> and select the order status you want to trigger it.
 
-Select the email by name in the **Status Emails** field. You can select as many emails as you’d like for any given Order Status.
+Choose the email by name in the **Status Emails** field. You can select as many emails as you’d like.
 
 ![](../images/order-status-email-selection.png)
 
@@ -135,15 +146,17 @@ Once you choose **Save**, the designated emails will be sent when an order is as
 
 ## Suppressing Emails
 
-There may be cases where you don’t want an order status change to send an email.
+There may be cases where you don’t want an order status change to send an email. When updating an order’s status (from its edit screen, or an element index), you can select **Suppress emails** to prevent Commerce from sending any emails attached to the new status:
 
-Orders have a memory-only [suppressEmails](commerce4:craft\commerce\elements\Order::$suppressEmails) attribute you can set to `true` to avoid sending email for anything that happens in that request. This is what the “Suppress email” options set when changing status from the order listing or edit views.
+![Screenshot of the order edit screen sidebar, with a “Suppress emails” checkbox](../images/update-order-status.png)
 
-![Screenshot of order status edit modal with “Update Order Status” heading, a status dropdown, message field, and “Suppress emails” checkbox](../images/update-order-status.png)
+This setting is retained only for the duration of the request, so subsequent status changes must also set this flag.
 
-Any time an order status email is prepared, Commerce triggers a cancelable event. Set the event object’s `$isValid` proprty to `false` to prevent a status change email from being sent:
+<Block label="Programmatically Suppressing Emails">
 
-```php
+If you wish to conditionally suppress automatically-triggered emails, Commerce emits a [cancelable event](/5.x/extend/events.md#cancelable-events) any time it is preparing to send one. Set the event object’s `$isValid` property to `false` to prevent the email from being sent:
+
+```php{13}
 use craft\commerce\events\OrderStatusEmailsEvent;
 use craft\commerce\services\OrderStatuses;
 use yii\base\Event;
@@ -152,11 +165,40 @@ Event::on(
     OrderStatuses::class,
     OrderStatuses::EVENT_ORDER_STATUS_CHANGE_EMAILS,
     function (OrderStatusEmailsEvent $event) {
-        // Prevent sending an order status email
-        $event->isValid = false;
+        $newStatus = $event->orderHistory->getNewStatus();
+
+        // Prevent shipping notifications going out for orders without a shippable item:
+        if ($newStatus->handle === 'shipped' && !$order->hasShippableItems()) {
+            $event->isValid = false;
+        }
     }
 );
 ```
+
+This will suppress _all_ emails associated with the new status. To prevent _individual_ emails from being sent (regardless of how they were triggered), or to modify some aspect of the email before it is sent, you can use the <commerce5:craft\commerce\services\Emails::EVENT_BEFORE_SEND_MAIL> event:
+
+```php
+use craft\commerce\events\MailEvent;
+use craft\commerce\services\Emails;
+use craft\helpers\StringHelper;
+use yii\base\Event;
+
+Event::on(
+    Emails::class,
+    Emails::EVENT_BEFORE_SEND_MAIL,
+    function (MailEvent $event) {
+        $order = $event->order;
+        $email = $event->craftEmail;
+
+        // Add store administrator to any email sent regarding unpaid orders:
+        if ($order->getIsUnpaid()) {
+            $email->setBcc('help@pixelandtonic.com');
+        }
+    }
+);
+```
+
+</Block>
 
 ## Troubleshooting
 
