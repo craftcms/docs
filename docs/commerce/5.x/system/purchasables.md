@@ -1,8 +1,10 @@
 # Purchasables
 
-The core of anything sold with Commerce is a _purchasable_, a type of [element](/5.x/system/elements.md) that can be added to a cart.
+The core of anything sold with Commerce is a _purchasable_, a special type of [element](/5.x/system/elements.md) that conforms to an interface that guarantees it can be added to a cart.
 
 Commerce ships with two types of purchasables: [variants](products-variants.md#variants) and [donations](donations.md). Somewhat counterintuitively, [products](products-variants.md) are _not_ purchasables!
+
+Purchasables themselves 
 
 ## Line Items
 
@@ -10,9 +12,7 @@ When a customer adds a purchasable to their [cart](orders-carts.md), Commerce re
 
 Line items capture a reference to the purchasable and some vital properties like the price, dimensions, weight. They can also hold customer notes, private notes, and arbitrary _options_ data.
 
-::: tip
-Read about using line items in [cart](../development/cart.md) and [order](../development/orders.md) templates, in the _Development_ section.
-:::
+<See path="orders-carts.md" label="Line Items" description="Learn more about the features and capabilities of line items.">
 
 ### Snapshots
 

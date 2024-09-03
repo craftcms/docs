@@ -93,13 +93,15 @@ Craft includes a powerful [internationalization engine](guide:tutorial-i18n#plur
 
 ### Line Items
 
-A cart’s contents are represented by _line items_. Line items are populated from [purchasables](../system/purchasables.md) when they are added to the cart (out-of-the-box, this will almost always be a [variant](../system/products-variants.md)), and have a quantity, description, notes, a calculated subtotal, options, adjustments (like tax and shipping costs), and other metadata. Most importantly, though, the line item retains a reference to its purchasable so that it can be refreshed with the latest information from your store while the customer is shopping.
+A cart’s contents are represented by _line items_. Line items are typically populated from [purchasables](../system/purchasables.md) when they are added to the cart, but [custom line items](#custom-line-items) can also be created on-the-fly. <Since product="commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
 
-This section will cover displaying information about what is in a customer’s cart or completed order; to learn about working with an active cart, jump to [Managing Cart contents](#managing-cart-contents)!
+Out-of-the-box, line items  [variant](../system/products-variants.md), and have a quantity, description, notes, a calculated subtotal, options, adjustments (like tax and shipping costs), and other metadata. Most importantly, though, the line item retains a reference to its purchasable so that it can be refreshed with the latest information from your store while the customer is shopping.
 
 ::: tip
-Even in the event a product or variant is altered or deleted after a customer checks out, enough information is memoized on each line item to reconstruct what was purchased, and how much was paid.
+In the event a product or variant is altered or deleted after a customer checks out, enough information is memoized on each line item to reconstruct what was purchased, and how much was paid. Some of this is recorded directly on the line item (like [prices](#prices) and its [physical attributes](#physical-properties)), and some is stored as metadata (like [options](#line-item-options-and-notes) and [snapshots](../system/purchasables.md#snapshots)).
 :::
+
+To learn about working with an active cart, jump to [Managing Cart contents](#managing-cart-contents).
 
 Line items are always returned as an array, even if there is only a single item in the cart. Loop over them to display information about each one:
 
@@ -668,7 +670,7 @@ If the customer is a registered user, they may want to continue shopping from an
 When a guest with an active cart creates an account, that cart will be remain active after logging in.
 :::
 
-You can allow a logged-in customer to see their previously used carts:
+You can allow a logged-in customer to see their previous (incomplete) carts:
 
 ::: code
 ```twig
@@ -758,9 +760,11 @@ With that list of carts, you can build a form to switch between multiple carts:
 </form>
 ```
 
+While Commerce combines similar line items in the active cart, this simple form may list the same purchasable more than once.
+
 ### Forgetting a Cart
 
-A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart. If the customer logs out, Commerce gives them a new cart.
+A logged-in customer’s cart is stored in a cookie that persists across sessions, so they can close their browser and return to the store without losing their cart. If the customer logs out, Commerce assigns the “guest” a new cart.
 
 Removing all the items from a cart doesn’t mean that the cart is forgotten, though—sometimes, fully detaching a cart from the session is preferable to emptying it. To remove a cart from the customer’s session (without logging out or clearing the items), make a `POST` request to the [`cart/forget-cart` action](../reference/controller-actions.md#post-cart-forget-cart). A cart number is _not_ required—Commerce can only detach the customer’s current cart.
 

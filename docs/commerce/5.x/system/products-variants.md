@@ -105,7 +105,7 @@ Site Settings
     :::
 
 Propagation Method <Since product="commerce" ver="5.1.0" feature="Product element propagation" />
-:   Choose how new product elements are propagated across its supported sites.
+:   Choose how new product and variant elements are propagated across its supported sites.
 
 ::: tip
 When you create a new product type, don’t forget to give your store managers the appropriate [permissions](../reference/permissions.md)!
