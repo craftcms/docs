@@ -11,6 +11,7 @@
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [ancestorDist](#ancestordist)               | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                   | Narrows the query results to only categories that are ancestors of another category in its structure.
+| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only categories that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only categories that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching categories as arrays of data, rather than [Category](craft5:craft\elements\Category) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
@@ -33,6 +34,7 @@
 | [level](#level)                             | Narrows the query results based on the categories’ level within the structure.
 | [limit](#limit)                             | Determines the number of categories that should be returned.
 | [nextSiblingOf](#nextsiblingof)             | Narrows the query results to only the category that comes immediately after another category in its structure.
+| [notRelatedTo](#notrelatedto)               | Narrows the query results to only categories that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many categories should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
 | [positionedAfter](#positionedafter)         | Narrows the query results to only categories that are positioned after another category in its structure.
@@ -139,6 +141,35 @@ $categories = \craft\elements\Category::find()
 
 ::: tip
 This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor categories can be.
+:::
+
+
+#### `andNotRelatedTo`
+
+Narrows the query results to only categories that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all categories that are related to myCategoryA and not myCategoryB #}
+{% set categories = craft.categories()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all categories that are related to $myCategoryA and not $myCategoryB
+$categories = \craft\elements\Category::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
 :::
 
 
@@ -742,6 +773,33 @@ Possible values include:
 $category = \craft\elements\Category::find()
     ->nextSiblingOf($myCategory)
     ->one();
+```
+:::
+
+
+#### `notRelatedTo`
+
+Narrows the query results to only categories that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all categories that are related to myEntry #}
+{% set categories = craft.categories()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all categories that are related to $myEntry
+$categories = \craft\elements\Category::find()
+    ->notRelatedTo($myEntry)
+    ->all();
 ```
 :::
 

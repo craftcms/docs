@@ -9,6 +9,7 @@
 | Param                                       | Description
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only global sets that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only global sets that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft5:craft\elements\GlobalSet) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
@@ -24,6 +25,7 @@
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
 | [language](#language)                       | Determines which site(s) the global sets should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of global sets that should be returned.
+| [notRelatedTo](#notrelatedto)               | Narrows the query results to only global sets that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many global sets should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -58,6 +60,35 @@ Performs any post-population processing on elements.
 
 
 
+
+
+#### `andNotRelatedTo`
+
+Narrows the query results to only global sets that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all global sets that are related to myCategoryA and not myCategoryB #}
+{% set globalSets = craft.globalSets()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all global sets that are related to $myCategoryA and not $myCategoryB
+$globalSets = \craft\elements\GlobalSet::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
+:::
 
 
 #### `andRelatedTo`
@@ -439,6 +470,33 @@ Determines the number of global sets that should be returned.
 // Fetch up to 10 global sets
 $globalSets = \craft\elements\GlobalSet::find()
     ->limit(10)
+    ->all();
+```
+:::
+
+
+#### `notRelatedTo`
+
+Narrows the query results to only global sets that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all global sets that are related to myEntry #}
+{% set globalSets = craft.globalSets()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all global sets that are related to $myEntry
+$globalSets = \craft\elements\GlobalSet::find()
+    ->notRelatedTo($myEntry)
     ->all();
 ```
 :::

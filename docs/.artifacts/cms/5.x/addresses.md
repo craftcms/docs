@@ -15,6 +15,7 @@
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the addresses’ owners are drafts.
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the addresses’ owners are revisions.
+| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only addresses that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only addresses that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching addresses as arrays of data, rather than [Address](craft5:craft\elements\Address) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
@@ -37,6 +38,7 @@
 | [lastName](#lastname)                       | Narrows the query results based on the last name the addresses have.
 | [limit](#limit)                             | Determines the number of addresses that should be returned.
 | [locality](#locality)                       | Narrows the query results based on the locality the addresses belong to.
+| [notRelatedTo](#notrelatedto)               | Narrows the query results to only addresses that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many addresses should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [organization](#organization)               | Narrows the query results based on the organization the addresses have.
@@ -229,6 +231,35 @@ Possible values include:
 | `false` | which cannot belong to a revision.
 
 
+
+
+#### `andNotRelatedTo`
+
+Narrows the query results to only addresses that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all addresses that are related to myCategoryA and not myCategoryB #}
+{% set addresses = craft.addresses()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all addresses that are related to $myCategoryA and not $myCategoryB
+$addresses = \craft\elements\Address::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
+:::
 
 
 #### `andRelatedTo`
@@ -828,6 +859,33 @@ Possible values include:
 // Fetch addresses in Perth
 $addresses = \craft\elements\Address::find()
     ->locality('Perth')
+    ->all();
+```
+:::
+
+
+#### `notRelatedTo`
+
+Narrows the query results to only addresses that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all addresses that are related to myEntry #}
+{% set addresses = craft.addresses()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all addresses that are related to $myEntry
+$addresses = \craft\elements\Address::find()
+    ->notRelatedTo($myEntry)
     ->all();
 ```
 :::

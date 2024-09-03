@@ -10,6 +10,7 @@
 | ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                             | Narrows the query results to only users that have admin accounts.
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only users that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only users that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching users as arrays of data, rather than [User](craft5:craft\elements\User) objects.
 | [assetUploaders](#assetuploaders)           | Narrows the query results to only users that have uploaded an asset.
@@ -36,6 +37,7 @@
 | [lastLoginDate](#lastlogindate)             | Narrows the query results based on the users’ last login dates.
 | [lastName](#lastname)                       | Narrows the query results based on the users’ last names.
 | [limit](#limit)                             | Determines the number of users that should be returned.
+| [notRelatedTo](#notrelatedto)               | Narrows the query results to only users that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many users should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 | [preferSites](#prefersites)                 | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -93,6 +95,35 @@ Performs any post-population processing on elements.
 
 
 
+
+
+#### `andNotRelatedTo`
+
+Narrows the query results to only users that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all users that are related to myCategoryA and not myCategoryB #}
+{% set users = craft.users()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all users that are related to $myCategoryA and not $myCategoryB
+$users = \craft\elements\User::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
+:::
 
 
 #### `andRelatedTo`
@@ -769,6 +800,33 @@ Determines the number of users that should be returned.
 // Fetch up to 10 users
 $users = \craft\elements\User::find()
     ->limit(10)
+    ->all();
+```
+:::
+
+
+#### `notRelatedTo`
+
+Narrows the query results to only users that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all users that are related to myEntry #}
+{% set users = craft.users()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all users that are related to $myEntry
+$users = \craft\elements\User::find()
+    ->notRelatedTo($myEntry)
     ->all();
 ```
 :::

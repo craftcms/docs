@@ -14,6 +14,7 @@
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the entries’ owners are revisions.
 | [ancestorDist](#ancestordist)               | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                   | Narrows the query results to only entries that are ancestors of another entry in its structure.
+| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only entries that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only entries that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching entries as arrays of data, rather than [Entry](craft5:craft\elements\Entry) objects.
 | [authorGroup](#authorgroup)                 | Narrows the query results based on the user group the entries’ authors belong to.
@@ -45,6 +46,7 @@
 | [level](#level)                             | Narrows the query results based on the entries’ level within the structure.
 | [limit](#limit)                             | Determines the number of entries that should be returned.
 | [nextSiblingOf](#nextsiblingof)             | Narrows the query results to only the entry that comes immediately after another entry in its structure.
+| [notRelatedTo](#notrelatedto)               | Narrows the query results to only entries that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many entries should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 | [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
@@ -230,6 +232,35 @@ $entries = \craft\elements\Entry::find()
 
 ::: tip
 This can be combined with [ancestorDist](#ancestordist) if you want to limit how far away the ancestor entries can be.
+:::
+
+
+#### `andNotRelatedTo`
+
+Narrows the query results to only entries that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all entries that are related to myCategoryA and not myCategoryB #}
+{% set entries = craft.entries()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all entries that are related to $myCategoryA and not $myCategoryB
+$entries = \craft\elements\Entry::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
 :::
 
 
@@ -1129,6 +1160,33 @@ Possible values include:
 $entry = \craft\elements\Entry::find()
     ->nextSiblingOf($myEntry)
     ->one();
+```
+:::
+
+
+#### `notRelatedTo`
+
+Narrows the query results to only entries that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all entries that are related to myEntry #}
+{% set entries = craft.entries()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all entries that are related to $myEntry
+$entries = \craft\elements\Entry::find()
+    ->notRelatedTo($myEntry)
+    ->all();
 ```
 :::
 
