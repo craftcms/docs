@@ -140,15 +140,11 @@ To complete the order, press **Mark as completed**.
 
 #### Custom Line Items <Since product="commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
 
-In addition to selecting from the store’s available [purchasables](purchasables.md), store managers can create ad-hoc _custom line items_ to represent one-off fees, credits, or other order contents.
+In addition to selecting from the store’s available [purchasables](purchasables.md), store managers can create ad-hoc _custom line items_ to represent one-off fees or other order contents.
 
 Custom line items behave exactly the same as line items based on a purchasable, except that their `type` property is `custom`, and they do not track a `purchasableId`. Therefore, their other attributes are never be “refreshed” from a purchasable, they will never be “out of stock,” and they will not be part of the [pricing catalog](pricing-rules.md).
 
 Shipping, tax, and other adjustments _can_ still affect custom line items! Any rules and conditions that specify product types, relationships, or other qualities that depend on a preexisting purchasable will never match a custom line item.
-
-::: tip
-Custom line items can have a negative price, even before adjustments are applied. You can use this to arbitrarily reduce the cost of an order by a fixed amount, without setting up a dedicated discount.
-:::
 
 ### Editing Orders
 
