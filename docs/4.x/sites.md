@@ -99,11 +99,6 @@ If you have multiple sites using different root domains like `https://site-a.com
 If your primary site’s Base URL includes a subdirectory (i.e. `https://foo.dev/bar/`), you should set the [baseCpUrl](config4:baseCpUrl) config setting.
 :::
 
-::: warning
-Careful using the `@web` alias to define your sites’ Base URLs.  
-You should explicitly override the alias to avoid introducing a [cache poisoning](https://www.owasp.org/index.php/Cache_Poisoning) vulnerability, and to make sure Craft can reliably determine which site is being requested. See [Aliases](config/#aliases) for an example.
-:::
-
 ## Propagating Entries Across All Enabled Sites
 
 In the settings for each Channel Section is an option to propagate entries in that section across all sites. This is enabled by default, and is the only option for Single sections.

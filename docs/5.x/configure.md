@@ -326,24 +326,20 @@ use craft\helpers\App;
 
 return [
     'aliases' => [
-        '@web' => App::env('PRIMARY_SITE_URL'),
+        '@primaryUrl' => App::env('PRIMARY_SITE_URL'),
         '@shared' => App::env('SHARED_PATH'),
         '@uploads' => '@shared/web/uploads',
-        '@assets' => '@web/uploads',
+        '@assets' => '@primaryUrl/uploads',
     ],
 ];
 ```
 
 Assuming `PRIMARY_SITE_URL` is defined as `https://mydomain.com` and `SHARED_PATH` is `/var/www/releases/123/shared`, these aliases would evaluate to:
 
-- `@web`: `https://mydomain.com`
+- `@primaryUrl`: `https://mydomain.com`
 - `@shared`: `/var/www/releases/123/shared`
 - `@uploads`: `/var/www/releases/123/shared/web/uploads`
 - `@assets`: `https://mydomain.com/uploads`
-
-::: warning
-Setting `@web` can be problematic in multi-site installations that span multiple domains, or when accessing the control panel at a different domain from the front-end. In general, we recommend letting Craft determine this automatically, and using [environment variables](#control-panel-settings) to define the full base URI for each site.
-:::
 
 Recursive aliases are preferred to basic string interpolation, because they are evaluated at the time of _use_ rather than _definition_. Aliases are only resolved at the beginning of a string.
 
@@ -394,7 +390,7 @@ Whenever you see this UI, you can provide a valid alias or environment variable 
 
 Focusing one of these fields will immediately suggest some values. Type `$` followed by an environment variable’s name, or `@` followed by an alias to narrow the suggestions and find your placeholder.
 
-Aliases have the extra benefit of allowing extra path segments, so `@web/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific alias](#aliases) (like `@uploads`) and use that in the control panel, instead. Environment variables _cannot_ be prepended to other values.
+Aliases have the extra benefit of allowing extra path segments, so `@primaryUrl/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific alias](#aliases) (like `@uploads`) and use that in the control panel, instead. Environment variables _cannot_ be prepended to other values.
 
 ::: tip
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](extend/environmental-settings.md) to learn how.
