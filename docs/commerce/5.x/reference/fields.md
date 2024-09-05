@@ -63,3 +63,7 @@ See [Relations](/5.x/system/relations.md) for more info on the `relatedTo` param
 Variants fields behave almost identically to [products fields](#products-field), except they directly relate specific variant elements.
 
 Unlike the products field, however, you cannot create variants directly from the element selection modal—variants are always created within the context of a product, which we don’t have, in this view.
+
+## Link Field <Since product="commerce" ver="5.1.0" feature="Selecting product elements in Craft’s Link field" />
+
+When configuring Craft’s native [Link field](/5.x/reference/field-types/link.md), you can enable selection of Commerce products.

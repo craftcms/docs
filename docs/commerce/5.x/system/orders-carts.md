@@ -5,11 +5,16 @@ containsGeneratedContent: yes
 
 # Orders & Carts
 
-Variants are added to a _cart_, which is eventually completed, becoming an _order_. Carts and orders are both listed in the control panel under **Commerce** → **Orders**.
+Commerce uses a single [Order](commerce5:craft\commerce\elements\Order) element to represent both an in-progress [cart](#carts) and a completed [order](#orders). Whenever we use the terms “cart” and “order,” we’re talking about the same underlying object—but in two different states.
 
-When we use the terms “cart” and “order”, we’re always referring to an [Order](commerce5:craft\commerce\elements\Order) element; a cart is simply an order that hasn’t been completed—meaning its `isCompleted` property is `false` and its `dateCompleted` is `null`.
+The lifecycle of an order element looks something like this:
 
-Typically, a cart is completed in response to a customer [making a payment](../development/making-payments.md)—or by satisfying other requirements you’ve defined through [configuration](../configure.md) or an [extension](../extend/README.md).
+1. A customer visits your site and is assigned an [order number](#order-number);
+1. Items (purchasables) are added to the cart as _line items_;
+1. Additional information is collected to satisfy your [checkout](../development/checkout.md) requirements;
+1. Payment is submitted, completing the order;
+
+However, not _all_ carts will become orders in this way! Commerce also allows store managers to [create carts from the control panel](#creating-orders); checkout without payment (or with partial payment) is possible via configuration; carts can be [abandoned](#carts); or a cart can be manually completed via the control panel.
 
 ## Carts
 
@@ -18,7 +23,9 @@ As a customer or store manager is building a cart, the goal is to maintain an up
 Once a cart is completed, however, it becomes an [order](#orders) that represents choices explicitly finalized by whoever completed the cart. The order’s behavior changes slightly at this point: the customer will no longer be able to make edits, and changes made by a store manager will not automatically trigger [recalculation](#recalculating-orders).
 
 ::: tip
-Carts and orders are managed per-[store](stores.md). A customer may have multiple active carts in different stores, each with discrete contents. The active cart depends on the current site and the mapping you’ve configured.
+Carts and orders are managed per-[store](stores.md). A customer may have multiple active carts in different stores, each with discrete contents—the cart Commerce loads automatically for a customer depends on what site they’re viewing, in the front-end.
+
+Customers can also [switch between active carts](../development/cart.md#restoring-previous-cart-contents) for a given site.
 :::
 
 Carts and orders are both listed on the **Orders** index page in the control panel, where you can further limit your view to _active_ carts (updated in the last hour), and _inactive_ carts (older than an hour). You can customize this time limit using the [`activeCartDuration`](../configure.md#activecartduration) setting.
@@ -127,9 +134,17 @@ Order references cannot be relied upon for sorting. Use `.orderBy('dateCompleted
 
 An order is typically created when a customer [adds items](#adding-items-to-a-cart) to their [cart](#carts) and then [checks out](../development/checkout.md). Orders can also be created in the control panel by users with the “Manage Orders” [permission](../reference/permissions.md#manage-orders).
 
-To create a new order, navigate to <Journey path="Commerce, Orders" />, and choose **New Order**. This will create a new order that behaves like a cart—as [purchasables](purchasables.md) are added to and removed from the order, it will automatically recalculate totals and apply matching discounts and other adjustments. Select a customer and populate the **Billing Address** and **Shipping Address** to ensure prices (including tax and shipping) can be calculated accurately.
+To create a new order, navigate to <Journey path="Commerce, Orders" />, and choose **New Order**. This will create a new order that behaves like a cart—as line items are added to and removed from the order, it will automatically recalculate totals and apply matching discounts and other adjustments. Select a customer and populate the **Billing Address** and **Shipping Address** to ensure prices (including tax and shipping) can be calculated accurately.
 
 To complete the order, press **Mark as completed**.
+
+#### Custom Line Items <Since product="commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
+
+In addition to selecting from the store’s available [purchasables](purchasables.md), store managers can create ad-hoc _custom line items_ to represent one-off fees or other order contents.
+
+Custom line items behave exactly the same as line items based on a purchasable, except that their `type` property is `custom`, and they do not track a `purchasableId`. Therefore, their other attributes are never be “refreshed” from a purchasable, they will never be “out of stock,” and they will not be part of the [pricing catalog](pricing-rules.md).
+
+Shipping, tax, and other adjustments _can_ still affect custom line items! Any rules and conditions that specify product types, relationships, or other qualities that depend on a preexisting purchasable will never match a custom line item.
 
 ### Editing Orders
 

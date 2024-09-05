@@ -37,7 +37,7 @@ You can restrict a discount to specific purchasables by enabling the **Only matc
 If this is enabled and no purchasables are selected, the discount will never match.
 
 ::: warning
-Only variants marked as **Promotable** will match discount conditions (even when it is explicitly selected).
+Only variants marked as **Promotable** will match discount conditions (even if they are explicitly selected in one of the rules).
 :::
 
 ## Discount Conditions Rules

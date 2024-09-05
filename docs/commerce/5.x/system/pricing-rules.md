@@ -16,11 +16,27 @@ To create a pricing rule, visit <Journey path="Commerce, Store Management, Prici
 
 A pricing rule applies to any purchasable that satisfies its **Conditions**, but may can be scoped to a specific set of **Customers** (Craft [users](/5.x/reference/element-types/users.md)).
 
+Start Date
+:   Apply this rule _after_ the chosen date.
+
+End Date
+:   Apply this rule _before_ the chosen date.
+
+Match Product <Since product="commerce" ver="5.1.0" feature="Product matching" />
+:   Apply the rule only to purchasables belonging to products that match the provided conditions.
+
+Match Variant <Since product="commerce" ver="5.1.0" feature="Variant matching" />
+:   Apply the rule only to variants matching the provided condition.
+
+Match Purchasable
+:   Set conditions that apply to any type of purchasable, including those provided by plugins.
+
+Match Customers
+:   Make the rule available only to customers who match the provided conditions. Rules that include customer conditions are implicitly limited to registered users.
+
 ::: warning
 If no conditions are configured, the rule will match _all_ purchasables, and _all_ customers (whether or not they are logged in).
 :::
-
-Rules can also be limited to a specific date range with its **Start Date** and **End Date** options.
 
 ## Actions
 

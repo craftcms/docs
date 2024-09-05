@@ -36,7 +36,7 @@ Additional variables provided by Craft.
 Variable | Description
 --- | ---
 [_globals](#globals) | Get and set values on a globally-available store.
-[craft](#craft) | A <craft5:craft\web\twig\variables\CraftVariable> object.
+[craft](#craft-2) | A <craft5:craft\web\twig\variables\CraftVariable> object.
 [currentSite](#currentsite) | The requested site.
 [currentUser](#currentuser) | The currently logged-in user.
 [devMode](#devmode) | Whether Dev Mode is enabled.

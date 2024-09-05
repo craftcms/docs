@@ -169,9 +169,9 @@ Like the [`commerce/payments/pay`](../reference/controller-actions.md#post-payme
 - [requireShippingAddressAtCheckout](../configure.md#requireshippingaddressatcheckout)
 
 ::: warning
-If you enable order completion without payment, completed orders will have the same status as any others. Don’t forget to make sure store managers are aware of the change and prepared to confirm payment before fulfilling orders!
+If you enable order completion without payment, completed orders will have the same status as any others. Make sure store managers are aware of this subtle difference and are prepared to confirm payment before fulfilling orders!
 
-If you use these workflows, consider adding columns to the main Order [element indexes](/5.x/system/elements.md#indexes) for _Date Paid_ or _Amount Paid_ so that it is clear which orders need attention.
+If you use these workflows, consider adding columns to the main Order [element indexes](/5.x/system/elements.md#indexes) for _Date Paid_, _Paid Status_, or _Amount Paid_ so that it is clear which orders need attention.
 :::
 
 ### Checkout with Partial Payment
