@@ -9,6 +9,7 @@
 | Param                                       | Description
 | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only assets that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only assets that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching assets as arrays of data, rather than [Asset](craft5:craft\elements\Asset) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
@@ -31,6 +32,7 @@
 | [kind](#kind)                               | Narrows the query results based on the assets’ file kinds.
 | [language](#language)                       | Determines which site(s) the assets should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of assets that should be returned.
+| [notRelatedTo](#notrelatedto)               | Narrows the query results to only assets that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many assets should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -73,6 +75,35 @@ Performs any post-population processing on elements.
 
 
 
+
+
+#### `andNotRelatedTo`
+
+Narrows the query results to only assets that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all assets that are related to myCategoryA and not myCategoryB #}
+{% set assets = craft.assets()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all assets that are related to $myCategoryA and not $myCategoryB
+$assets = \craft\elements\Asset::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
+:::
 
 
 #### `andRelatedTo`
@@ -686,6 +717,33 @@ Determines the number of assets that should be returned.
 // Fetch up to 10 assets
 $assets = \craft\elements\Asset::find()
     ->limit(10)
+    ->all();
+```
+:::
+
+
+#### `notRelatedTo`
+
+Narrows the query results to only assets that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all assets that are related to myEntry #}
+{% set assets = craft.assets()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all assets that are related to $myEntry
+$assets = \craft\elements\Asset::find()
+    ->notRelatedTo($myEntry)
     ->all();
 ```
 :::

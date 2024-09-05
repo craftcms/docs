@@ -1050,7 +1050,7 @@
     {
         "class": "craft\\commerce\\base\\Purchasable",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -3469,6 +3469,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\commerce\\controllers\\TransfersController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\controllers\\TransfersController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\commerce\\controllers\\TransfersController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\commerce\\controllers\\UserOrdersController",
         "name": "EVENT_MODIFY_CART_INFO",
         "type": "craft\\commerce\\controllers\\Event",
@@ -4249,7 +4267,7 @@
     {
         "class": "craft\\commerce\\elements\\Donation",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -6019,6 +6037,92 @@
     },
     {
         "class": "craft\\commerce\\elements\\Order",
+        "name": "EVENT_BEFORE_LINE_ITEMS_REFRESHED",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered before line items are refreshed during recalculation of an order.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Order",
+        "name": "EVENT_AFTER_LINE_ITEMS_REFRESHED",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after line items are refreshed during recalculation of an order.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_REGISTER_SOURCES",
         "type": "craft\\events\\RegisterElementSourcesEvent",
         "desc": "The event that is triggered when registering the available sources for the element type.",
@@ -6708,7 +6812,7 @@
     {
         "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -8737,7 +8841,7 @@
     {
         "class": "craft\\commerce\\elements\\Product",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -10766,7 +10870,7 @@
     {
         "class": "craft\\commerce\\elements\\Subscription",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -12063,6 +12167,2035 @@
     },
     {
         "class": "craft\\commerce\\elements\\Subscription",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_SOURCES",
+        "type": "craft\\events\\RegisterElementSourcesEvent",
+        "desc": "The event that is triggered when registering the available sources for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_FIELD_LAYOUTS",
+        "type": "craft\\events\\RegisterElementFieldLayoutsEvent",
+        "desc": "The event that is triggered when registering all of the field layouts associated with elements from a given source.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_ACTIONS",
+        "type": "craft\\events\\RegisterElementActionsEvent",
+        "desc": "The event that is triggered when registering the available bulk actions for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_EXPORTERS",
+        "type": "craft\\events\\RegisterElementExportersEvent",
+        "desc": "The event that is triggered when registering the available exporters for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_SEARCHABLE_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementSearchableAttributesEvent",
+        "desc": "The event that is triggered when registering the searchable attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_SORT_OPTIONS",
+        "type": "craft\\events\\RegisterElementSortOptionsEvent",
+        "desc": "The event that is triggered when registering the sort options for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_TABLE_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementTableAttributesEvent",
+        "desc": "The event that is triggered when registering the table attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_DEFAULT_TABLE_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementTableAttributesEvent",
+        "desc": "The event that is triggered when registering the table attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_PREP_QUERY_FOR_TABLE_ATTRIBUTE",
+        "type": "craft\\events\\ElementIndexTableAttributeEvent",
+        "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_EAGER_LOADING_MAP",
+        "type": "craft\\events\\DefineEagerLoadingMapEvent",
+        "desc": "The event that is triggered when defining an eager-loading map.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_SET_EAGER_LOADED_ELEMENTS",
+        "type": "craft\\events\\SetEagerLoadedElementsEvent",
+        "desc": "The event that is triggered when setting eager-loaded elements.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_PREVIEW_TARGETS",
+        "type": "craft\\events\\RegisterPreviewTargetsEvent",
+        "desc": "The event that is triggered when registering the element’s preview targets.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_ATTRIBUTE_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s HTML for table and card views.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML",
+        "type": "craft\\events\\DefineAttributeHtmlEvent",
+        "desc": "The event that is triggered when defining an attribute’s inline input HTML.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_REGISTER_HTML_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementHtmlAttributesEvent",
+        "desc": "The event that is triggered when registering the HTML attributes that should be included in the element’s DOM representation in the control panel.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
+        "type": "craft\\events\\DefineHtmlEvent",
+        "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineMenuItemsEvent",
+        "desc": "The event that is triggered when defining action menu items..",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_SIDEBAR_HTML",
+        "type": "craft\\events\\DefineHtmlEvent",
+        "desc": "The event that is triggered when defining the HTML for the editor sidebar.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_META_FIELDS_HTML",
+        "type": "craft\\events\\DefineHtmlEvent",
+        "desc": "The event that is triggered when defining the HTML for meta fields within the editor sidebar.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_METADATA",
+        "type": "craft\\events\\DefineMetadataEvent",
+        "desc": "The event that is triggered when defining the element’s metadata info.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AUTHORIZE_VIEW",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to view the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AUTHORIZE_SAVE",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to save the element in its current state.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AUTHORIZE_CREATE_DRAFTS",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to create drafts for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AUTHORIZE_DUPLICATE",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to duplicate the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AUTHORIZE_DELETE",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to delete the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AUTHORIZE_DELETE_FOR_SITE",
+        "type": "craft\\events\\AuthorizationCheckEvent",
+        "desc": "The event that is triggered when determining whether a user is authorized to delete the element for its current site.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_SET_ROUTE",
+        "type": "craft\\events\\SetElementRouteEvent",
+        "desc": "The event that is triggered when defining the route that should be used when this element’s URL is requested.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the cache tags that should be cleared when this element is saved.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_KEYWORDS",
+        "type": "craft\\events\\DefineAttributeKeywordsEvent",
+        "desc": "The event that is triggered when defining the search keywords for an element attribute.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_BEFORE_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered before defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_URL",
+        "type": "craft\\events\\DefineUrlEvent",
+        "desc": "The event that is triggered when defining the element’s URL.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_BEFORE_SAVE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the element is saved.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AFTER_SAVE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered after the element is saved.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AFTER_PROPAGATE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the element is deleted.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the element is deleted.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_BEFORE_RESTORE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the element is restored.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AFTER_RESTORE",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the element is restored.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_BEFORE_MOVE_IN_STRUCTURE",
+        "type": "craft\\events\\ElementStructureEvent",
+        "desc": "The event that is triggered before the element is moved in a structure.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "isNew": {
+                "label": "Element is new",
+                "conditionsPhp": "$event->isNew"
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_AFTER_MOVE_IN_STRUCTURE",
+        "type": "craft\\events\\ElementStructureEvent",
+        "desc": "The event that is triggered after the element is moved in a structure.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "isNew": {
+                "label": "Element is new",
+                "conditionsPhp": "$event->isNew"
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`",
@@ -12967,7 +15100,7 @@
     {
         "class": "craft\\commerce\\elements\\Variant",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
-        "type": "craft\\base\\DefineMenuComponentEvent",
+        "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
         "filters": {
             "duplicating": {
@@ -16070,6 +18203,54 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\products\\CatalogPricingRuleProductCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\CatalogPricingRuleProductCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\CatalogPricingRuleProductCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\CatalogPricingRuleProductCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\CatalogPricingRuleProductCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\CatalogPricingRuleProductCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\CatalogPricingRuleProductCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\products\\CatalogPricingRuleProductCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\conditions\\products\\ProductCondition",
         "name": "EVENT_REGISTER_CONDITION_RULES",
         "type": "craft\\events\\RegisterConditionRulesEvent",
@@ -16718,6 +18899,54 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\transfers\\TransferCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\transfers\\TransferCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\transfers\\TransferCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\transfers\\TransferCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\transfers\\TransferCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\transfers\\TransferCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\transfers\\TransferCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\transfers\\TransferCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\conditions\\users\\DiscountGroupConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -16755,6 +18984,54 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\users\\DiscountGroupConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -17048,6 +19325,54 @@
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
+        "class": "craft\\commerce\\elements\\db\\TransferQuery",
+        "name": "EVENT_BEFORE_PREPARE",
+        "type": "craft\\events\\CancelableEvent",
+        "desc": "An event that is triggered at the beginning of preparing an element query for the query builder."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\TransferQuery",
+        "name": "EVENT_AFTER_PREPARE",
+        "type": "craft\\events\\CancelableEvent",
+        "desc": "An event that is triggered at the end of preparing an element query for the query builder."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\TransferQuery",
+        "name": "EVENT_DEFINE_CACHE_TAGS",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "An event that is triggered when defining the cache tags that should be associated with the query."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\TransferQuery",
+        "name": "EVENT_BEFORE_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered before an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\TransferQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENT",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\TransferQuery",
+        "name": "EVENT_AFTER_POPULATE_ELEMENTS",
+        "type": "craft\\events\\PopulateElementEvent",
+        "desc": "The event that is triggered after an element is populated."
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\TransferQuery",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the query's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\db\\TransferQuery",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
         "class": "craft\\commerce\\elements\\db\\VariantQuery",
         "name": "EVENT_BEFORE_PREPARE",
         "type": "craft\\events\\CancelableEvent",
@@ -17744,97 +20069,97 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_DEFINE_RULES",
         "type": "craft\\events\\DefineRulesEvent",
         "desc": "The event that is triggered when defining the model rules"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_DEFINE_FIELDS",
         "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
         "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_BEFORE_VALIDATE",
         "type": "yii\\base\\ModelEvent",
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_DEFINE_RULES",
         "type": "craft\\events\\DefineRulesEvent",
         "desc": "The event that is triggered when defining the model rules"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_DEFINE_FIELDS",
         "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the arrayable fields"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_DEFINE_EXTRA_FIELDS",
         "type": "craft\\events\\DefineFieldsEvent",
         "desc": "The event that is triggered when defining the extra arrayable fields"
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_BEFORE_VALIDATE",
         "type": "yii\\base\\ModelEvent",
         "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
     },
     {
-        "class": "craft\\commerce\\fieldlayoutelements\\UserCommerceField",
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -18465,6 +20790,54 @@
     },
     {
         "class": "craft\\commerce\\gateways\\MissingGateway",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\linktypes\\Product",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\commerce\\linktypes\\Product",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\linktypes\\Product",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\linktypes\\Product",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\linktypes\\Product",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\linktypes\\Product",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\linktypes\\Product",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\linktypes\\Product",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -20036,6 +22409,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\models\\TransferDetail",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\TransferDetail",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\TransferDetail",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\TransferDetail",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\TransferDetail",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\TransferDetail",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\TransferDetail",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\models\\inventory\\DeactivateInventoryLocation",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -20367,6 +22782,48 @@
     },
     {
         "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevel",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevelInTransfer",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevelInTransfer",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevelInTransfer",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevelInTransfer",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevelInTransfer",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevelInTransfer",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\models\\inventory\\UpdateInventoryLevelInTransfer",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -24417,6 +26874,150 @@
     },
     {
         "class": "craft\\commerce\\records\\Transaction",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\Transfer",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_INIT",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered when the record is initialized via `init()`."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_AFTER_FIND",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after the record is created and populated with query result."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_BEFORE_INSERT",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before inserting a record. You may set `ModelEvent::isValid` to be `false` to stop the insertion."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_AFTER_INSERT",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is inserted."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_BEFORE_UPDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before updating a record. You may set `ModelEvent::isValid` to be `false` to stop the update."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_AFTER_UPDATE",
+        "type": "yii\\db\\AfterSaveEvent",
+        "desc": "an event that is triggered after a record is updated."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event that is triggered before deleting a record. You may set `ModelEvent::isValid` to be `false` to stop the deletion."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is deleted."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_AFTER_REFRESH",
+        "type": "yii\\db\\Event",
+        "desc": "an event that is triggered after a record is refreshed."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\records\\TransferDetail",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"

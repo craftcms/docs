@@ -9,6 +9,7 @@
 | Param                                       | Description
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only tags that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only tags that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching tags as arrays of data, rather than [Tag](craft5:craft\elements\Tag) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
@@ -25,6 +26,7 @@
 | [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
 | [language](#language)                       | Determines which site(s) the tags should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of tags that should be returned.
+| [notRelatedTo](#notrelatedto)               | Narrows the query results to only tags that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many tags should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
 | [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -61,6 +63,35 @@ Performs any post-population processing on elements.
 
 
 
+
+
+#### `andNotRelatedTo`
+
+Narrows the query results to only tags that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all tags that are related to myCategoryA and not myCategoryB #}
+{% set tags = craft.tags()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all tags that are related to $myCategoryA and not $myCategoryB
+$tags = \craft\elements\Tag::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
+:::
 
 
 #### `andRelatedTo`
@@ -475,6 +506,33 @@ Determines the number of tags that should be returned.
 // Fetch up to 10 tags
 $tags = \craft\elements\Tag::find()
     ->limit(10)
+    ->all();
+```
+:::
+
+
+#### `notRelatedTo`
+
+Narrows the query results to only tags that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all tags that are related to myEntry #}
+{% set tags = craft.tags()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all tags that are related to $myEntry
+$tags = \craft\elements\Tag::find()
+    ->notRelatedTo($myEntry)
     ->all();
 ```
 :::

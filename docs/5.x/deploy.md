@@ -22,7 +22,7 @@ Pushing your work to a centralized repository (GitHub, GitLab, Bitbucket, or els
 
 ### System Updates + Project Config
 
-Craft uses Composer under the hood to install and [update](./updating.md) plugins and packages it depends on.
+Craft uses Composer under the hood to install and [update](./update.md) plugins and packages it depends on.
 
 Your [`composer.lock`](system/directory-structure.md#composerlock) file defines the _exact_ set of packages that your project uses, so tracking it in version control is essential. The lockfile is updated any time you run system updates or install a new plugin, making it possible for Composer to reconstruct your entire [`vendor/`](system/directory-structure.md#vendor) directory.
 
@@ -43,7 +43,7 @@ In most cases, your live site’s content should be treated as authoritative: co
 Craft has a built-in backup tool, accessible from the **Utilities** screen of the control panel (for users with the correct permissions) or as a [console command](reference/cli.md#db-backup). There’s also a command for [restoring](reference/cli.md#db-restore) backups!
 :::
 
-It is not advisable to attempt merging database tables or otherwise combining local and live content—including completely squashing a live database with a development one. [Project Config](#system-updates--project-config) is Craft’s solution to diverging schema and content.
+It is not advisable to attempt merging database tables or otherwise combining local and live content—including completely squashing a live database with a development one. [Project Config](#system-updates-project-config) is Craft’s solution to diverging schema and content.
 
 If you ever need to prepare content ahead of a deployment (say, if you’ve created a new [single](reference/element-types/entries.md#singles) and can’t risk users seeing a partially blank page), consider using a [content migration](extend/migrations.md).
 
