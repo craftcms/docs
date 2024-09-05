@@ -263,6 +263,32 @@ Every variant has a _price_ and a _promotional price_. Both base prices are defi
 
 Prices are defined for each [store](stores.md) a variant is available in; in the control panel, however, you will manage those differences on a per-_site_ basis. If two sites point to the same store, you will see the same price and input currency when editing the variant in either.
 
+#### Promotional Price
+
+When provided, a promotional price takes precedence over the base price in all calculations. This is also the case after Commerce evaluates pricing rules, but only when the promotional price ends up _less_ than the base price.
+
+In a template, you can test whether a product has a promotional price (and it is less than its base price):
+
+```twig{6-10}
+{% for variant in product.variants %}
+  <label class="option">
+    <input name="purchasableId" value="{{ variant.id }}" type="radio">
+    <span class="label">{{ purchasable.title }}</label>
+    <span class="price {{ variant.onPromotion ? 'price--has-promo' : null }}">
+      <span class="price__base">{{ variant.price|commerceCurrency }}</span>
+
+      {% if variant.onPromotion %}
+        <span class="price__promotional">{{ variant.promotionalPrice|commerceCurrency }}</span>
+      {% endif %}
+    </span>
+  </label>
+{% endfor %}
+```
+
+#### Sale Price
+
+If you only want to advertise a single price, let Commerce reconcile the base and promotional price by using `variant.salePrice`.
+
 ### Stock
 
 Commerce tracks inventory at the variant level, using **Inventory Items** that correspond to each unique SKU in the system.
