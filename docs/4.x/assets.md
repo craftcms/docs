@@ -45,7 +45,7 @@ Out of the box, the only type of filesystem Craft supports is a “Local” dire
 - **Base Path**: Set the filesystem’s root directory on the server. This must be within your web root in order for public URLs to work.
 
 ::: tip
-The **Base Path** can be set to an environment variable or begin with an alias, just like the **Base URL**
+The **Base Path** can be set to an environment variable or begin with an alias, just like the **Base URL**.
 :::
 
 Craft/PHP must be able to write to any directories you use for a local filesystem.

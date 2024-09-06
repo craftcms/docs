@@ -297,7 +297,7 @@ Some settings and functions in Craft support [Yii aliases](https://www.yiiframew
 Out of the box, Craft provides these aliases—but you can override them or provide new ones with the <config4:aliases> config setting:
 
 | Alias | Description | Based On
-| ----- | ----------- | --------
+| --- | --- | ---
 | `@app` | Path to Craft’s source code. | [CRAFT_VENDOR_PATH](#craftvendorpath)
 | `@config` | Path to your `config/` folder. | [CRAFT_BASE_PATH](#craftbasepath)
 | `@contentMigrations` | Path to your `migrations/` folder. | [CRAFT_BASE_PATH](#craftbasepath)
@@ -311,8 +311,8 @@ Out of the box, Craft provides these aliases—but you can override them or prov
 | `@tests` | Path to your `tests/` folder. | [CRAFT_TESTS_PATH](#crafttestspath)
 | `@translations` | Path to your `translations/` folder. | [CRAFT_TRANSLATIONS_PATH](#crafttranslationspath)
 | `@vendor` | Path to your `vendor/` folder. | [CRAFT_VENDOR_PATH](#craftvendorpath)
-| `@web` | URL to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_URL](#craftweburl)
-| `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_ROOT](#craftwebroot)
+| `@web` | URL to the folder that contains the `index.php` file that was loaded for the request. | [CRAFT_WEB_URL](#craftweburl)
+| `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request. | [CRAFT_WEB_ROOT](#craftwebroot)
 
 Aliases can be set to plain strings, or to the content of an environment variable. Keep in mind that **aliases are resolved recursively**, so you can define one based on another (including those whose values came from the environment):
 
