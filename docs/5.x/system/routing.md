@@ -8,7 +8,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
     It’s important to keep in mind that Craft doesn’t get involved for *every* request that touches your server—just those that go through your `index.php`.
 
-    The `.htaccess` file that [comes with Craft](https://github.com/craftcms/craft/blob/master/web/.htaccess) will silently send all requests that don’t match a directory or file on your web server via `index.php`. If you point your browser directly at a file that *does* exist (such as an image, CSS, or JavaScript file), your web server will serve that file directly, without initializing Craft or PHP.
+    The `.htaccess` file that [comes with Craft](https://github.com/craftcms/craft/blob/5.x/web/.htaccess) will silently send all requests that don’t match a directory or file on your web server via `index.php`. If you point your browser directly at a file that *does* exist (such as an image, CSS, or JavaScript file), your web server will serve that file directly, without initializing Craft or PHP.
 
 1. **Is it an action request?**
 
