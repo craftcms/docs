@@ -297,7 +297,7 @@ Some settings and functions in Craft support [Yii aliases](https://www.yiiframew
 Out of the box, Craft provides these aliases—but you can override them or provide new ones with the <config4:aliases> config setting:
 
 | Alias | Description | Based On
-| ----- | ----------- | --------
+| --- | --- | ---
 | `@app` | Path to Craft’s source code. | [CRAFT_VENDOR_PATH](#craftvendorpath)
 | `@config` | Path to your `config/` folder. | [CRAFT_BASE_PATH](#craftbasepath)
 | `@contentMigrations` | Path to your `migrations/` folder. | [CRAFT_BASE_PATH](#craftbasepath)
@@ -311,12 +311,8 @@ Out of the box, Craft provides these aliases—but you can override them or prov
 | `@tests` | Path to your `tests/` folder. | [CRAFT_TESTS_PATH](#crafttestspath)
 | `@translations` | Path to your `translations/` folder. | [CRAFT_TRANSLATIONS_PATH](#crafttranslationspath)
 | `@vendor` | Path to your `vendor/` folder. | [CRAFT_VENDOR_PATH](#craftvendorpath)
-| `@web` | URL to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_URL](#craftweburl)
-| `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request | [CRAFT_WEB_ROOT](#craftwebroot)
-
-::: tip
-To prevent a variety of security issues, we recommend explicitly setting the `@web` alias with a fully-qualified URL, either via a configuration file (see below) or [environment variable](#env).
-:::
+| `@web` | URL to the folder that contains the `index.php` file that was loaded for the request. | [CRAFT_WEB_URL](#craftweburl)
+| `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request. | [CRAFT_WEB_ROOT](#craftwebroot)
 
 Aliases can be set to plain strings, or to the content of an environment variable. Keep in mind that **aliases are resolved recursively**, so you can define one based on another (including those whose values came from the environment):
 
@@ -325,17 +321,17 @@ use craft\helpers\App;
 
 return [
     'aliases' => [
-        '@web' => App::env('PRIMARY_SITE_URL'),
+        '@primaryUrl' => App::env('PRIMARY_SITE_URL'),
         '@shared' => App::env('SHARED_PATH'),
         '@uploads' => '@shared/web/uploads',
-        '@assets' => '@web/uploads',
+        '@assets' => '@primaryUrl/uploads',
     ],
 ];
 ```
 
 Assuming `PRIMARY_SITE_URL` is defined as `https://my-project.ddev.site` and `SHARED_PATH` is `/var/www/releases/123/shared`, these aliases would evaluate to:
 
-- `@web`: `https://my-project.ddev.site`
+- `@primaryUrl`: `https://my-project.ddev.site`
 - `@shared`: `/var/www/releases/123/shared`
 - `@uploads`: `/var/www/releases/123/shared/web/uploads`
 - `@assets`: `https://my-project.ddev.site/uploads`
@@ -389,7 +385,7 @@ Whenever you see this UI, you can provide a valid alias or environment variable 
 
 Focusing one of these fields will immediately suggest some values. Type `$` followed by an environment variable’s name or `@` followed by an alias to narrow the suggestions and find your placeholder.
 
-Aliases have the extra benefit of allowing extra path segments, so `@web/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific `@uploads` alias](#aliases) and use that in the control panel, instead.
+Aliases have the extra benefit of allowing extra path segments, so `@primaryUrl/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific `@uploads` alias](#aliases) and use that in the control panel, instead.
 
 ::: tip
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
@@ -732,8 +728,8 @@ The path to the [vendor/](../directory-structure.md#vendor) folder. (It is assum
 
 ### `CRAFT_WEB_URL`
 
-Automatically sets the `@web` [alias](#aliases). Platforms (like [DDEV](../installation.md)) can set this to ensure Craft is pre-configured with the correct public URL.
+Automatically sets the `@web` [alias](#aliases).
 
 ### `CRAFT_WEB_ROOT`
 
-Automatically sets the `@webroot` [alias](#aliases), like [`CRAFT_WEB_URL`](#craft-web-url).
+Automatically sets the `@webroot` [alias](#aliases).

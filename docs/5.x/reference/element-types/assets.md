@@ -56,8 +56,6 @@ Out of the box, the only type of filesystem Craft supports is a “Local” dire
 
 ::: tip
 The **Base Path** can be set to an environment variable or begin with an alias, just like the **Base URL**.
-
-Avoid using the `@web` alias for Local filesystems’ **Base URL** unless you’ve set it to a fixed value across all sites. Otherwise, Craft may construct asset URLs that include that subpath and not properly map to the filesystem’s root.
 :::
 
 <a id="remote-volumes"></a>

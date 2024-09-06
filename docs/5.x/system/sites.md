@@ -154,12 +154,6 @@ The first step is to create the new site in the **Settings** screen of your Craf
 7. Check the box for **This site has its own base URL** and provide a **Base URL**.
 8. Save the new site.
 
-::: warning
-Using `@web` in a site’s **Base URL** can cause unpredictable routing behavior and malformed URLs to non-default sites, or to the control panel—especially when those URLs don’t share a domain.
-
-Instead, set each site’s **Base URL** to a unique environment variable (like `BASE_URL_PRIMARY` and `BASE_URL_LABS`), or to an explicit value.
-:::
-
 ### Step 2 (Optional): Create Template Directories
 
 If you’d like to experiment with per-site [template overrides](#site-templates), create a new subdirectory within your `templates/` folder with the handle of your new site.
