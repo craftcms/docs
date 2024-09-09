@@ -64,7 +64,7 @@ All pricing rules operate on the purchasable’s original price or original prom
 
 ## Conflicts
 
-More than one pricing rule can exist for a single purchasable. In the event of such an overlap, Commerce selects the _lowest_ calculated price that would apply. Prices and promotional prices are always kept separate, as are the prices for each store.
+More than one pricing rule can match a purchasable. In the event of such an overlap, Commerce selects the _lowest_ calculated price that would apply. Prices and promotional prices are always kept separate, as are the prices for each store.
 
 ## Debugging
 
@@ -92,3 +92,9 @@ Similarly, to check the price for a _guest_, you can pass `false`, explicitly:
 
 A guest would pay <del>{{ myVariant.price|commerceCurrency }}</del> {{ myVariant.promotionalPrice|commerceCurrency }}
 ```
+
+## Dynamic Pricing
+
+The pricing catalog and discounts both operate on preestablished criteria and actions. In situations where a price needs to be dynamically calculated (say, from customer input in the form of [custom fields](orders-carts.md#field-layout) or [line item options](../development/cart.md#line-item-options-and-notes)), Commerce gives you complete control over pricing and cart contents via its [events system](../extend/events.md).
+
+Read about [dynamically changing line item prices](kb:dynamically-customizing-line-item-prices) in the Knowledge Base.

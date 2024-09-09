@@ -16,6 +16,47 @@ The lifecycle of an order element looks something like this:
 
 However, not _all_ carts will become orders in this way! Commerce also allows store managers to [create carts from the control panel](#creating-orders); checkout without payment (or with partial payment) is possible via configuration; carts can be [abandoned](#carts); or a cart can be manually completed via the control panel.
 
+::: tip
+As a type of [element](/5.x/system/elements.md), orders use a familiar management interface, including sophisticated [permissions](../reference/permissions.md), [statuses](custom-order-statuses.md), and [custom fields](#field-layout).
+:::
+
+## Configuration
+
+The functionality of carts and orders is mostly consistent across Commerce projects, but there are a few ways you can customize them to suit your business needs.
+
+### Store Settings
+
+Each store has the following settings (accessible via <Journey path="Commerce, System Settings, Stores, Choose a Store, Settings tab" />):
+
+- **Auto Set New Cart Addresses**, **Auto Set Cart Shipping Method Option**, **Auto Set Payment Source** — Whether the respective information should be automatically attached to new carts, for logged-in customers.
+- **Allow Empty Cart On Checkout**, **Allow Checkout Without Payment**, **Allow Partial Payment On Checkout**, **Require Shipping Address At Checkout**, **Require Billing Address At Checkout**, **Require Shipping Method Selection At Checkout** — Choose what requirements a cart must meet to be completed by a customer.
+- **Free Order Payment Strategy** — Enable only when using a gateway that supports zero-total transactions.
+- **Minimum Total Price Strategy** — How Commerce handles potentially-negative order totals.
+- **Use Billing Address For Tax** — By default, Commerce uses the shipping address to calculate taxes. If your store sells only virtual/digital goods, enable this.
+- **Validate Business Tax ID as Vat ID** — Whether addresses’ **Organization Tax ID** field must be validated as a [VAT ID](https://taxation-customs.ec.europa.eu/vat-identification-numbers_en).
+
+A store’s settings only govern carts and orders created and completed within them.
+
+### Global Configuration
+
+Additional settings are available via the [global config file](../configure.md#config-settings):
+
+- `activeCartDuration` — How long carts are considered “active.”
+- `purgeInactiveCarts` — Whether inactive cart elements should be deleted during routine [garbage collection](/5.x/system/gc.md).
+- `purgeInactiveCartsDuration` — How long before an inactive cart is eligible for purging. This is the _total_ time since the last update to the cart, not in addition to the `activeCartDuration`.
+- `loadCartRedirectUrl` — Where a customer will be redirected after [loading a previous cart](../development/cart.md#loading-and-forgetting-carts) into their session.
+- `validateCartCustomFieldsOnSubmission` — Whether [custom fields](#field-layout) on a cart are validated whenever it is updated. _Enable with caution, as this can affect customers’ ability to add products to their cart without first submitting required field values._
+
+### Field Layout
+
+Orders have a dedicated field layout, which can be used to collect additional information from customers, or to hold information about fulfillment and other back-office processes.
+
+Visit <Journey path="Commerce, System Settings, Orders, Field Layout" /> to customize the order field layout.
+
+::: tip
+Add field and tab conditions to expose administrative tools to specific managers, or while an order is specific statuses!
+:::
+
 ## Carts
 
 As a customer or store manager is building a cart, the goal is to maintain an up-to-date list of items with their relevant costs, discounts, promotions, and metadata. For this reason, the cart will be recalculated each time a change is made.

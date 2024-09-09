@@ -20,11 +20,11 @@ To send them to a dedicated order summary page, you can send a `redirect` param 
 </form>
 ```
 
-This [object template](/5.x/system/object-templates.md) is evaluated using the order object itself—in this example, we’re using the `number` attribute, which is guaranteed to be unique. Commerce (nor Craft) doesn’t know how to handle a request to that URL, though, so it’s up to us to define a [route](#routing).
+This [object template](/5.x/system/object-templates.md) is evaluated using the completed order object itself—in this example, we’re using the `number` attribute, which is guaranteed to be unique. Commerce (nor Craft) doesn’t know how to handle a request to that URL, though, so it’s up to us to define a [route](#routing).
 
 ## Routing
 
-Routes are a native Craft feature, and can be configured via the control panel via <Journey path="Settings, Routes" />, or a [`config/routes.php` file](/5.x/system.routing.md#advanced-routing-with-url-rules).
+Routes are a native Craft feature, and can be configured in the control panel via <Journey path="Settings, Routes" />, or a [`config/routes.php` file](/5.x/system.routing.md#advanced-routing-with-url-rules).
 
 Commerce doesn’t automatically give orders front-end URLs (like entries or categories support), so it’s up to each project to define an access pattern that makes sense.
 
@@ -57,7 +57,9 @@ Find a valid order number in the control panel by visiting <Journey path="Commer
 https://my-shop.ddev.site/orders/a3e2335afe45e00ecc933648a6511afa
 ```
 
-You should see just the alphanumeric order number echoed back. To load an order with that number, we’ll use an [order query](../system/orders-carts.md#querying-orders). We only want to show _completed_ orders, so we’ll set an additional parameters on the query:
+You should see just the alphanumeric order number echoed back. If you change the last `a` to a `b`, Craft would still consider it a valid route—even though there (probably) isn't an order with that number!
+
+To load an order with that number, we’ll use an [order query](../system/orders-carts.md#querying-orders). We only want to show _completed_ orders, so we’ll set an additional parameters on the query:
 
 ```twig{1-4}
 {% set order = craft.orders()
@@ -71,6 +73,8 @@ You should see just the alphanumeric order number echoed back. To load an order 
 
 {{ order.dateOrdered|date }}
 ```
+
+Note that when we check whether an order came back and immediately `{% exit 404 %}` to 
 
 The substance of this “receipt” view is entirely up to you—orders contain [a huge amount of data](#order-data), including line items, adjustments, transactions, status history, notes, custom fields, and more.
 

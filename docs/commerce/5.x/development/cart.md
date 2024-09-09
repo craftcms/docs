@@ -120,10 +120,13 @@ You can get a line item’s source [purchasable](../system/purchasables.md) by c
 
 #### Prices
 
-In the example above, we used `item.price` to display the single-item price. Commerce actually tracks two prices for every purchasable: a _price_, and a _sale price_. Both prices are resolved via the [pricing catalog](../system/pricing-rules.md), but only the sale price is ever used to calculate totals and subtotals.
+In the example above, we used `item.price` to display the single-item price. Commerce actually tracks two prices for every line item: a _price_, and a _promotional price_. Both prices are resolved via the [pricing catalog](../system/pricing-rules.md), but only a synthesized “sale price” is ever used to calculate totals and subtotals.
 
 This gives you flexibility in how prices are structured and advertised, while preserving a tidy, predictable API:
 
+- **lineItem.price** is the base price as determined by any applicable catalog pricing rules.
+- **lineItem.promotionalPrice** is the promotional price as determined by any applicable catalog pricing rules.
+- **lineItem.salePrice** is the resolved single-quantity price for the item, and is always lower of `price` and `promotionalPrice`.
 - **lineItem.subtotal** is the product of the line item’s `qty` and `salePrice`.
 - **lineItem.adjustmentsTotal** is the sum of each of the line item’s adjustment `amount` values.
 - **lineItem.total** is the sum of the line item’s `subtotal` and `adjustmentsTotal`.
