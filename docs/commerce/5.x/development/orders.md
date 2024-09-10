@@ -57,7 +57,7 @@ Find a valid order number in the control panel by visiting <Journey path="Commer
 https://my-shop.ddev.site/orders/a3e2335afe45e00ecc933648a6511afa
 ```
 
-You should see just the alphanumeric order number echoed back. If you change the last `a` to a `b`, Craft would still consider it a valid route—even though there (probably) isn't an order with that number!
+You should see just the alphanumeric order number echoed back. If you change the last `a` to a `b`, Craft would still consider it a valid route—even though there (probably) isn’t an order with that number!
 
 To load an order with that number, we’ll use an [order query](../system/orders-carts.md#querying-orders). We only want to show _completed_ orders, so we’ll set an additional parameters on the query:
 
