@@ -1,4 +1,4 @@
-# Store Management
+# Permissions
 
 Commerce embraces Craft’s flexible [user groups and permissions structure](/5.x/system/user-management.md) and gives you fine-grained control over who can access and manage critical ecommerce data.
 
@@ -32,7 +32,7 @@ Unlike other Commerce-specific permissions, this one is nested inside Craft’s 
 
 ### Manage _Product Type Name_ products
 
-Whether the user can manage products, with each product type having its own create and delete permissions.
+Whether the user can manage products, with each product type having its own **Create** and **Delete** permissions.
 
 ### Manage orders
 
@@ -41,10 +41,6 @@ Whether the user can access and interact with orders.
 #### Edit orders
 
 Whether the user is allowed to create and edit orders in the control panel.
-
-::: warning
-This feature was limited to Commerce [Lite](editions.md) prior to version 4.5.
-:::
 
 #### Delete orders
 
@@ -58,59 +54,84 @@ Whether the user may click the “Capture” button on an authorized transaction
 
 Whether the user may click the “Refund” button on a successful payment.
 
-### Manage promotions
-
-Whether the user can manage promotions.
-
-#### Edit sales
-
-Whether the user can edit existing sales.
-
-#### Create sales
-
-Whether the user can create new sales.
-
-#### Delete sales
-
-Whether the user can delete sales.
-
-#### Edit discounts
-
-Whether the user can edit existing discounts.
-
-#### Create discounts
-
-Whether the user can create new discounts.
-
-#### Delete discounts
-
-Whether the user can delete discounts.
-
 ### Manage subscriptions
 
-Whether the user can see subscriptions, refresh subscription payments, and cancel subscriptions.
+Whether the user can see [subscriptions](../system/subscriptions.md), refresh subscription payments, and cancel subscriptions.
 
-### Manage shipping
+### Manage subscription plans
 
-Whether the user can create, edit, and delete the following:
+Create, update, and delete subscription plans.
+
+### Manage inventory stock levels
+
+Set and adjust [inventory levels](../system/inventory.md) for any purchasable.
+
+### Manage inventory locations
+
+Create, update, and delete inventory [locations](../system/inventory.md#locations).
+
+### Manage inventory transfers
+
+Draft, execute, and receive inventory [transfers](../system/inventory.md#transfers).
+
+### Manage store settings
+
+Enables access to settings within the **Store Management** screens, but doesn’t grant any specific permissions.
+
+#### Store general settings
+
+Edit store-specific options in <Journey path="Commerce, Store Management, Store, General" />, including the [store location](../system/addresses.md), markets, and available inventory locations.
+
+#### Payment currencies
+
+Add and remove payment currencies available to a store.
+
+#### Manage shipping
+
+Create, edit, and delete the following:
 
 - Shipping methods
 - Shipping rules
 - Shipping categories
 - Shipping zones
 
-::: warning
-This feature was limited to Commerce [Lite](editions.md) prior to version 4.5.
-:::
+#### Manage taxes
 
-### Manage taxes
+Create, edit, and delete tax rates, zones, and categories.
 
-Whether the user can create, edit, and delete tax zones and tax categories.
+#### Manage promotions
 
-::: warning
-This feature was limited to Commerce [Lite](editions.md) prior to version 4.5.
-:::
+Edit sales
+:   Whether the user can edit existing sales.
 
-### Manage store settings
+Create sales
+:   Whether the user can create new sales.
 
-Whether the user may change settings in Commerce’s **Store Settings** area, including the store [location address](addresses.md), payment currencies, and settings related to shipping, tax, and subscriptions.
+Delete sales
+:   Whether the user can delete sales.
+
+Edit catalog pricing rules
+:   Whether the user can edit existing catalog pricing rules.
+
+Create catalog pricing rules
+:   Whether the user can add new catalog pricing rules.
+
+Delete catalog pricing rules 
+:   Whether the user can delete existing catalog pricing rules.
+
+    ::: warning
+    Note that a user with the **Edit** permission can still disable a catalog pricing rule, which may have the same net effect for customers (except that it can be easily reverted, later).
+    :::
+
+Edit discounts
+:   Whether the user can edit existing discounts.
+
+Create discounts
+:   Whether the user can create new discounts.
+
+Delete discounts
+:   Whether the user can delete discounts.
+
+### Manage donation settings
+
+Edit the donation purchasable settings in <Journey path="Commerce, Donations" />.
