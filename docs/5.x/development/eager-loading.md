@@ -185,6 +185,24 @@ If you have multiple sets of elements you wish to eager-load via the primary que
 
 [Lazy eager-loading](#lazy-eager-loading) works the same for any number of eager-loaded fields. Each query that stems from an element in the primary query should use `.eagerly()` to signal that it will be used similarly in later iterations of a loop.
 
+If you need to conditionally add eager-loading criteria, use the `.andWith()` method:
+
+```twig
+{% set postsQuery = craft.entries()
+  .section('news')
+  .with(['topics']) %}
+
+{% if unfurlPosts %}
+  {% do postsQuery.andWith(['featureImage']) %}
+{% endif %}
+
+{% set posts = postsQuery.all() %}
+
+{# ... #}
+```
+
+Craft will merge your criteria into a single plan before executing the query.
+
 ## Eager-Loading Nested Sets of Elements
 
 It’s also possible to optimize loading of elements nested two or more levels deep, using a special syntax. Suppose the topics in our news feed from previous examples each had a thumbnail or icon:
