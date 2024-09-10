@@ -571,6 +571,11 @@ module.exports = {
           link: "https://docs.craftcms.com/commerce/api/v5/"
         },
         {
+          title: "Knowledge Base",
+          icon: "/docs/icons/icon-knowledge-base.svg",
+          link: "https://craftcms.com/knowledge-base/commerce",
+        },
+        {
           title: "Back to Commerce Docs",
           icon: "/docs/icons/icon-back.svg",
           link: "/commerce/5.x/"
@@ -578,15 +583,20 @@ module.exports = {
       ],
       "/": [
         {
+          title: "Class Reference",
+          icon: "/docs/icons/craft-api.svg",
+          link: "https://docs.craftcms.com/commerce/api/v5/"
+        },
+        {
+          title: "Knowledge Base",
+          icon: "/docs/icons/icon-knowledge-base.svg",
+          link: "https://craftcms.com/knowledge-base/commerce",
+        },
+        {
           title: "Extending Commerce",
           icon: "/docs/icons/icon-book.svg",
           link: "/commerce/5.x/extend/"
         },
-        {
-          title: "Class Reference",
-          icon: "/docs/icons/craft-api.svg",
-          link: "https://docs.craftcms.com/commerce/api/v5/"
-        }
       ]
     },
     "4.x": {

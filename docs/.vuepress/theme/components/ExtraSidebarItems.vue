@@ -15,7 +15,7 @@
         rel="noopener noreferrer"
         target="_blank"
       >
-        <span class="sidebar-extra-icon">
+        <span :class="['sidebar-extra-icon', item.iconSize || 'sidebar-extra-icon-sm']">
           <img :src="item.icon" />
         </span>
         <span class="sidebar-extra-title mr-1">{{ item.title }}</span>
@@ -42,6 +42,11 @@
 
 .sidebar-extra-icon {
   @apply inline-block w-4 h-4 mr-2;
+}
+
+.sidebar-extra-icon-sm img {
+  max-width: 0.7rem;
+  margin: 0 auto;
 }
 </style>
 
