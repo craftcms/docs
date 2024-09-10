@@ -130,6 +130,8 @@ Any of the following can be used when setting up a relational query:
   - The string `and`, to return relations matching _all_ conditions rather than _any_;
   - The string `or`, to return relations that match _any_ conditions (default behavior, can be omitted);
 
+See [complex relationships](#complex-relationships), below, for detailed information about the capabilities of hash and array syntaxes.
+
 ::: tip
 Chaining multiple `relatedTo` parameters on the same element query will overwrite earlier ones. Use [`andRelatedTo`](#the-andrelatedto-parameter) to append relational constraints.
 :::
