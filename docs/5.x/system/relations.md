@@ -142,6 +142,18 @@ Use the `andRelatedTo` parameter to join multiple sets of relational criteria to
 There is one limitation, here: multiple `relatedTo` criteria using `or` *and* `and` operators cannot be combined.
 :::
 
+### The `notRelatedTo` and `andNotRelatedTo` Parameters
+
+Find entries that _aren’t_ related to one or more elements with the `not*` relational query methods. This can be combined with the `relatedTo` parameter.
+
+```twig{3-4}
+{% set ketoRecipes = craft.entries()
+  .section('recipes')
+  .relatedTo(fish)
+  .notRelatedTo(gluten)
+  .all() %}
+```
+
 ## Simple Relationships
 
 The most basic relational query involves passing a single element or element ID. Here, we’re looking up other recipes that use the current one’s main protein:
