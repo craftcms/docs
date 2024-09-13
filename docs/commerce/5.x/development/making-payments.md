@@ -149,7 +149,7 @@ The first-party Stripe gateway supports additional payment plans via third-party
 
 ### Checkout Without Payment
 
-Once the [allowCheckoutWithoutPayment](../configure.md#allowcheckoutwithoutpayment) setting is enabled, the customer can submit a POST request to the [`commerce/cart/complete`](../reference/controller-actions.md#post-cart-complete) controller action to complete the order without any payment.
+If the **Allow Checkout Without Payment** [setting](../system/stores.md#settings) is enabled for a store, the customer can submit a POST request to the [`commerce/cart/complete`](../reference/controller-actions.md#post-cart-complete) controller action to complete the order without any payment.
 
 ```twig
 <form method="post">
@@ -161,27 +161,48 @@ Once the [allowCheckoutWithoutPayment](../configure.md#allowcheckoutwithoutpayme
 </form>
 ```
 
-Like the [`commerce/payments/pay`](../reference/controller-actions.md#post-payments-pay) action, the cart must have a valid email address and abide by the following store settings:
+Like the [`commerce/payments/pay`](../reference/controller-actions.md#post-payments-pay) action, the cart must have a valid email address and conform to the following [store settings](../system/stores.md#settings):
 
-- [allowEmptyCartOnCheckout](../configure.md#allowemptycartoncheckout)
-- [requireShippingMethodSelectionAtCheckout](../configure.md#requireshippingmethodselectionatcheckout)
-- [requireBillingAddressAtCheckout](../configure.md#requirebillingaddressatcheckout)
-- [requireShippingAddressAtCheckout](../configure.md#requireshippingaddressatcheckout)
+- **Allow Empty Cart On Checkout**
+- **Require Shipping Method Selection At Checkout**
+- **Require Billing Address At Checkout**
+- **Require Shipping Address At Checkout**
+
+You can check these settings in a template via the `currentStore` object:
+
+```twig
+{% if currentStore.allowCheckoutWithoutPayment %}
+  {# ... or any other tests against the store settings and current cart state ... #}
+
+  <form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/complete') }}
+
+    <button>Submit Quote Request</button>
+
+    <small>Once your order is finalized, we will request payment!</small>
+  </form>
+{% endif %}
+```
+
+As the example alludes, **Allow Checkout Without Payment** is typically most useful for businesses that collect “offline” payments via invoices, like wholesalers and distributors.
 
 ::: warning
 If you enable order completion without payment, completed orders will have the same status as any others. Make sure store managers are aware of this subtle difference and are prepared to confirm payment before fulfilling orders!
 
 If you use these workflows, consider adding columns to the main Order [element indexes](/5.x/system/elements.md#indexes) for _Date Paid_, _Paid Status_, or _Amount Paid_ so that it is clear which orders need attention.
+
+You can also programmatically divert orders completed without payment into a different default status via [events](../extend/events.md#defaultorderstatus)!
 :::
 
 ### Checkout with Partial Payment
 
 A _partial_ payment is one that’s less than an order’s outstanding balance at any point in time.
 
-If you’d like to permit customers to check out with partial payments and the gateway supports them, you can enable the [allowPartialPaymentOnCheckout](../configure.md#allowpartialpaymentoncheckout) setting to allow an additional hashed `paymentAmount` field when posting to the [`commerce/payments/pay`](../reference/controller-actions.md#post-payments-pay) controller action. If no `paymentAmount` field is submitted, the order’s outstanding balance will be used.
+If you’d like to permit customers to check out with partial payments and the gateway supports them, you can enable the **Allow Partial Payment On Checkout** [store setting](../system/stores.md#settings) to allow an additional hashed `paymentAmount` field when posting to the [`commerce/payments/pay`](../reference/controller-actions.md#post-payments-pay) controller action. If no `paymentAmount` field is submitted, the order’s outstanding balance will be used.
 
 ::: tip
-Multiple payments can still be made on an order when `allowPartialPaymentOnCheckout` is `false`, as long as each payment is equal to the outstanding balance at the time it was made.
+Multiple payments can still be made on an order when **Allow Partial Payment On Checkout** is _off_, as long as each payment is equal to the outstanding balance at the time it was made.
 :::
 
 The partial amount cannot be entered directly by the customer; for security, the field must contain a hashed value in the cart’s `paymentCurrency`.
@@ -224,7 +245,7 @@ This example provides a dropdown menu that allows the customer to choose half or
 A customer may return to make additional payments similarly to the [outstanding balance example](#paying-an-outstanding-balance), supplying a valid `paymentAmount` until the remaining balance is paid in full. The first partial payment or authorization, however, will complete the order—subsequent payments will not trigger a change in status.
 
 ::: tip
-You can use the [`paidInFull`](../extend/events.md#paidinfull) event if you need to add any custom functionality when an order is paid in full.
+You can use the [`Order::EVENT_AFTER_ORDER_PAID`](../extend/events.md#afterorderpaid) event if you need to add any custom functionality when an order is paid in full.
 :::
 
 An order is considered “paid in full” as long as the total amount paid did at one point reach the order’s total—even if a payment is refunded.

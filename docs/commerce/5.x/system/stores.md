@@ -91,7 +91,7 @@ Allow Partial Payment On Checkout
 Free Order Payment Strategy
 :   Force orders with a zero (or negative) total to use a gateway, or bypass payment and complete the order, directly.
 
-Minimum Total Price StrategyRequired
+Minimum Total Price Strategy
 :   Allow negative-total orders, or lock the minimum total to zero or the cost of [shipping](shipping.md).
 
 Require Shipping Address At Checkout

@@ -203,7 +203,7 @@ Every order includes a few important totals:
 - **order.itemTotal** is the sum of the order’s line item `total` amounts.
 - **order.adjustmentsTotal** is the sum of the order’s adjustments.
 - **order.total** is the sum of the order’s `itemSubtotal` and `adjustmentsTotal`.
-- **order.totalPrice** is the total order price with a minimum enforced by the [minimumTotalPriceStrategy](../configure.md#minimumtotalpricestrategy) setting.
+- **order.totalPrice** is the total order price with a minimum enforced by the **Minimum Total Price Strategy** [store setting](stores.md#settings).
 
 ::: tip
 Note that `total` _can_ be negative!

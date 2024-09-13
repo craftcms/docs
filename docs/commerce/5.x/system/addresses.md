@@ -107,7 +107,7 @@ If you provide a `shippingAddress` or `shippingAddressId` and the order’s bill
 If you provide `shippingAddress` fields *and* a `shippingAddressId`, the latter takes precedence.
 
 ::: warning
-Customize what address information is required at checkout with the [`requireBillingAddressAtCheckout`](../configure.md#requirebillingaddressatcheckout) and [`requireShippingAddressAtCheckout`](../configure.md#requireshippingaddressatcheckout) config settings.
+Customize what address information is required at checkout with the **Require Billing Address At Checkout** and **Require Shipping Address At Checkout** [store settings](stores.md#settings).
 
 The tax and shipping engines require address information to generate accurate options and costs.
 :::
@@ -376,9 +376,9 @@ When logged in, your customers can manage their addresses independently of a car
 
 ### Primary Billing + Shipping Addresses
 
-In addition to the [natively supported](/5.x/reference/controller-actions.md#post-users-save-address) params, Commerce will look for `isPrimaryShipping` and `isPrimaryBilling`. These values determine which addresses get attached to a fresh cart when the [autoSetNewCartAddresses](../configure.md#autosetnewcartaddresses) option is enabled.
+In addition to the [natively supported](/5.x/reference/controller-actions.md#post-users-save-address) address params, Commerce will look for `isPrimaryShipping` and `isPrimaryBilling`. These values determine which addresses get attached to a fresh cart when the **Auto Set New Cart Addresses** [store setting](../system/stores.md#settings) is enabled.
 
-To add support for setting default addresses, add this code to the [new address](/5.x/reference/element-types/addresses.md#new-addresses) and/or [existing addresses](/5.x/reference/element-types/addresses.md#existing-addresses) forms:
+To let your customers set a address, add this code to your [new address](/5.x/reference/element-types/addresses.md#new-addresses) and/or [existing addresses](/5.x/reference/element-types/addresses.md#existing-addresses) forms:
 
 ```twig
 {# Make primary shipping address? #}
@@ -403,4 +403,4 @@ To add support for setting default addresses, add this code to the [new address]
 `checkbox` inputs only send a value when checked. In order to support _un_-setting a primary billing or shipping address, you must include the hidden input _before_ the visible checkbox, in the DOM. This ensures that the falsy `0` value is sent when the checkbox is unchecked, differentiating it from simply not sending a value at all (omitting `isPrimaryShipping` or `isPrimaryBilling` entirely makes no changes to the user’s current settings).
 :::
 
-Similarly, you can send `makePrimaryBillingAddress` or `makePrimaryShippingAddress` params along with any `cart/update-cart` request to set an address attached to the cart as the customer’s primary billing or shipping address. Only addresses that retain their `sourceBillingAddressId` or `sourceShippingAddressId` can be configured this way.
+Send `makePrimaryBillingAddress` and/or `makePrimaryShippingAddress` params along with any `cart/update-cart` request to set an address attached to the cart as the customer’s primary billing or shipping address. Only addresses that retain their `sourceBillingAddressId` or `sourceShippingAddressId` can be configured this way—an address that has been modified from its source is not considered part of the customer’s [address book](/5.x/reference/element-types/addresses.md#managing-addresses).

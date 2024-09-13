@@ -422,7 +422,7 @@ Event::on(
 
 #### `afterOrderPaid`
 
-The event that is triggered after an order is paid and completed.
+The event that is triggered after an order is _fully_ paid and completed.
 
 ```php
 use craft\commerce\elements\Order;

@@ -33,16 +33,11 @@ Methods | Action | Description
 
 ### <badge vertical="baseline" type="verb">POST</badge> `cart/complete`
 
-You can let your customers complete an order without a payment transaction. The [allowCheckoutWithoutPayment](../configure.md#allowcheckoutwithoutpayment) setting must be enabled or an HTTP exception will be thrown.
+You can let your customers complete an order without a payment transaction. At a minimum, the **Allow Checkout Without Payment** [setting](../system/stores.md#settings) setting must be enabled for the cart’s store, or an HTTP exception will be thrown.
 
-The cart must have an email address and honor the following settings:
-
-- [allowEmptyCartOnCheckout](../configure.md#allowemptycartoncheckout)
-- [requireShippingMethodSelectionAtCheckout](../configure.md#requireshippingmethodselectionatcheckout)
-- [requireBillingAddressAtCheckout](../configure.md#requirebillingaddressatcheckout)
-- [requireShippingAddressAtCheckout](../configure.md#requireshippingaddressatcheckout)
-
-See the [Making Payments](../development/making-payments.md#checkout-without-payment) page for more on using this action.
+::: tip
+See the [Making Payments](../development/making-payments.md#checkout-without-payment) page for more information about this action’s requirements.
+:::
 
 #### Supported Params
 

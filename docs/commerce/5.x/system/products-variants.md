@@ -28,7 +28,7 @@ Products organize your goods into logical bundles of [variants](#variants). A pr
 
 In the same way that Craft’s native element types each share a set of common attributes, every Commerce product has a **Title**, **Slug**, **Post Date**, **Expiry Date**, and per-site status options.
 
-## Product Types
+### Product Types
 
 **Product Types** provide a way to distinguish classes of goods in your stores. Manage product types in the control panel from <Journey path="Commerce, System Settings, Product Types" />.
 
@@ -36,7 +36,7 @@ In the same way that Craft’s native element types each share a set of common a
 Despite their similarities to [entries](/5.x/reference/element-types/entries.md#entry-types), a product’s type cannot be changed after it is created.
 :::
 
-### Product Type Options
+#### Product Type Options
 
 Each product type has the following settings. Some product type settings govern the behavior of the variants nested within it!
 
@@ -203,7 +203,7 @@ Once you’ve created a product query, you can set [parameters](#product-query-p
 See [Element Queries](/5.x/development/element-queries.md) in the Craft docs to learn about how element queries work.
 :::
 
-### Example
+#### Example
 
 We can use Twig to display the ten most recently-added _Clothing_ products:
 
@@ -241,11 +241,31 @@ To fetch the same information with Craft’s [GraphQL API](/5.x/development/grap
 }
 ```
 
-### Eager-loading
+#### Eager-loading
 
 Products can be [eager-loaded](/5.x/development/eager-loading.md) using the handle of a [relational field](../reference/fields.md#products-field) attached to other elements, and you can eager-load other related elements just as you would with any other element query.
 
-You can also eager-load variants
+You can also eager-load variants (and any elements related to or nested within them) via their products using the special `variants` handle:
+
+```twig
+{% set products = craft.products()
+  .type('widgets')
+  .with([
+    ['variants.complianceStandards'],
+  ])
+  .all() %}
+
+<ul>
+  {% for product in products %}
+    <li>
+      <strong>{{ product.title }}</strong>
+      <span class="separator">—</span>
+      Options meeting:
+      {{ product.variants|map(v => v.complianceStandards)|flatten|join(', ') }}
+    </li>
+  {% endfor %}
+</ul>
+```
 
 !!!include(docs/.artifacts/commerce/5.x/product-query-params.md)!!!
 
@@ -432,4 +452,4 @@ Fetching the equivalent with GraphQL could look like this:
 }
 ```
 
-!!!include(docs/.artifacts/commerce/5.x/product-query-params.md)!!!
+!!!include(docs/.artifacts/commerce/5.x/variant-query-params.md)!!!
