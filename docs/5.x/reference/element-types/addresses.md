@@ -266,13 +266,13 @@ Only the two-letter “country code” is stored on addresses. To display the fu
 
 Via the `Country` object, you also have access to the following data:
 
-- `countryCode` — Same ISO 3166-1 alpha-2 code as was stored on `address.countryCode`.
+- `countryCode` — Same ISO 3166-1 alpha-2 code as was stored as `address.countryCode`.
 - `name` — Name of the country, localized for the current site.
 - `threeLetterCode` — ISO 3166-1 alpha-3 code for the country.
 - `numericalCode` — ISO ISO 3166-1 numeric codes.
 - `currencyCode` — ISO 4217 currency code (not the symbol).
 - `timezones` — A list of PHP timezone identifiers for the country. This is not necessarily specific to the address!
-- `locale` — How the country’s name was localized.
+- `locale` — The locale the country name is localized for. Defaults to the app’s current language, which might be a site’s language or a control panel user’s language preference. If you need to manually localize a country’s name, see below.
 
 In earlier versions of Craft, you must directly retrieve its definition from the [address repository](#address-repository):
 
