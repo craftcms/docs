@@ -1920,7 +1920,7 @@ mutation saveEntry(
 
 ### Saving Files via Mutations
 
-You can provide files for assets as either base64-encoded data, or a URL that Craft will download.
+You can provide files for assets as either `base64`-encoded data, or a URL that Craft will download.
 
 Either way, you’ll use the `FileInput` GraphQL input type, which has the following fields:
 
