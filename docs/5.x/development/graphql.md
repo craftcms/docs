@@ -408,11 +408,12 @@ This query is used to query for addresses.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -451,11 +452,12 @@ This query is used to return the number of addresses.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -494,11 +496,12 @@ This query is used to query for a single address.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -532,11 +535,12 @@ This query is used to query for assets.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -580,11 +584,12 @@ This query is used to return the number of assets.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -628,11 +633,12 @@ This query is used to query for a single asset.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -685,11 +691,12 @@ This query is used to query for entries.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -758,11 +765,12 @@ This query is used to return the number of entries.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -831,11 +839,12 @@ This query is used to query for a single entry.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -895,11 +904,12 @@ This query is used to query for global sets.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -931,11 +941,12 @@ This query is used to query for a single global set.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -967,11 +978,12 @@ This query is used to query for users.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1012,11 +1024,12 @@ This query is used to return the number of users.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1057,11 +1070,12 @@ This query is used to query for a single user.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1102,11 +1116,12 @@ This query is used to query for tags.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1139,11 +1154,12 @@ This query is used to return the number of tags.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1176,11 +1192,12 @@ This query is used to query for a single tag.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1213,11 +1230,12 @@ This query is used to query for categories.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1264,11 +1282,12 @@ This query is used to return the number of categories.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1315,11 +1334,12 @@ This query is used to query for a single category.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
-| `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
-| `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
-| `relatedToUsers`| `[UserCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
-| `relatedToCategories`| `[CategoryCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
-| `relatedToTags`| `[TagCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
 | `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
 | `ref`| `[String]` | Narrows the query results based on a reference string.
 | `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
@@ -1381,7 +1401,7 @@ Formats a money object to the desired format. It can be applied to any fields, b
 
 
 ### The `transform` directive
-Returns a URL for an [asset transform](https://craftcms.com/docs/5.x/development/image-transforms.html). Accepts the same arguments you would use for a transform in Craft.
+Returns a URL for an [asset transform](https://craftcms.com/docs/4.x/image-transforms.html). Accepts the same arguments you would use for a transform in Craft.
 | Argument | Type | Description
 | - | - | -
 | `handle`| `String` | The handle of the named transform to use.
