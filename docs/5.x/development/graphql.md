@@ -338,7 +338,7 @@ Some input types are only used for mutations:
 
 ### Elements
 
-Each element type provides dedicated query and mutation interfaces that expose unique properties. A generic query type is provided for each element type that allows you to build queries from scratch, similar to the `craft.entries()` or `craft.assets()` APIs available in Twig:
+Each element type provides dedicated query and mutation interfaces that expose unique properties based on the system’s configuration. An additional generic query type is provided for each element type that allows you to build queries from scratch, similar to the `craft.entries()` or `craft.assets()` APIs available in Twig:
 
 ::: code
 ```gql{2} Entries
@@ -1691,7 +1691,7 @@ This is the interface implemented by all tags.
 
 ## Mutations
 
-GraphQL mutations provide a way to modify data. The actual mutations will vary depending on the schema and what it allows. There are common mutations per GraphQL object type and additional type-specific mutations.
+GraphQL mutations provide a way to modify data. The actual mutations will vary depending on the [schema](#define-your-schemas) and what it allows. There are common mutations per GraphQL object type and additional type-specific mutations.
 
 Mutations take the data as arguments. In this example, we’re using the type-specific `save_news_article_Entry` to save a new entry. We’re providing a title and slug and formatting the `dateCreated` that’s populated automatically when the entry is saved:
 
@@ -1928,7 +1928,7 @@ Either way, you’ll use the `FileInput` GraphQL input type, which has the follo
 | ---------- | -----------
 | `url`      | URL of a file to be downloaded.
 | `fileData` | File contents in base64 format. If provided, takes precedence over `url`.
-| `filename` | Filename to use for the saved Asset. If omitted, Craft will create a filename.
+| `filename` | Filename to use for the saved asset. If omitted, Craft will create a filename.
 
 ### Mutating Entries
 
