@@ -325,7 +325,16 @@ query BlogPosts {
 
 ### Inputs
 
-[Input types](https://graphql.org/graphql-js/mutations-and-input-types/) determine the allowed (and required) params
+[Input types](https://graphql.org/graphql-js/mutations-and-input-types/) help determine the allowed (and required) params for queries. Most inputs consist of scalar types (i.e. `String` or `Int`), but some arguments accept compound “criteria” represented by special Craft-specific types:
+
+- **Query Argument** — A generic input type that describes a variety of common element query parameters. Frequently, this is used in conjunction with values that pass through <craft5:craft\helpers\Db::parseParam()>, which might accept a single scalar value, an array of scalar values (for an `OR`-style query), or an array with `not` in the first position.
+- **Relational Criteria** — See the [relations](#relations) section for a complete list of accepted parameters.
+
+Some input types are only used for mutations:
+
+- **Addresses** — Defines fields for nested [address](../reference/element-types/addresses.md) elements, which have a very particular schema.
+- **Matrix** — Defines fields for [nested entries](../reference/element-types/entries.md#nested-entries) within [Matrix](../reference/field-types/matrix.md) fields.
+- **File** — See the [uploading files](#saving-files-via-mutations) for more information about the `FileInput` input type. This is only used when creating new assets directly (via the `_file` argument), or when creating new assets via an [assets field](../reference/field-types/assets.md).
 
 ### Elements
 
