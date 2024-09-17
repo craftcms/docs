@@ -1728,6 +1728,10 @@ mutation saveEntry($title: String, $slug: String) {
 
 While mutations are mostly straightforward, there are a few important cases to consider.
 
+::: warning
+For security reasons, [users](../reference/element-types/users.md) cannot be created, updated, or deleted via GraphQL.
+:::
+
 ### Matrix Fields in Mutations
 
 Connecting GraphQL’s input types to complex [Matrix fields](../reference/field-types/matrix.md) can be challenging.
