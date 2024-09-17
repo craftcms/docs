@@ -264,6 +264,8 @@ We could use the `relatedToCategories` argument, for example, to narrow our prev
 See [Relations](../system/relations.md) for more on Craft’s relational field types.
 :::
 
+Advanced relational conditions are possible using the `relatedViaField` and `relatedViaSite` params. <Since ver="5.4.0" feature="Site- and field-specific relational criteria" />
+
 ### Mutation
 
 Here’s a [mutation](#mutations), where we’re using the GraphQL API to save a new entry:
