@@ -366,4 +366,4 @@ Deployments requiring careful timing, quick decision-making, manual intervention
 
 ### The Queue
 
-If you use a “daemonized” queue runner (based on `systemd` or `service`, for instance), it will need to be restarted to pick up the latest application code. CRON-driven queues load the application at each interval and do not need any special treatment.
+If you use a [daemonized queue runner](system/queue.md#daemon) (based on `systemd` or `service`, for instance), it will need to be restarted to pick up the latest application code. [CRON-driven queues](system/queue.md#cron) load the application at each interval and do not need any special treatment. If the path to your application’s `craft` executable changes on each deployment, consider setting up a reliable symlink, or make the appropriate changes to service configuration files or your `crontab`!
