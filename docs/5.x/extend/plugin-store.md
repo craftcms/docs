@@ -31,10 +31,6 @@ To use an open source license:
 
 To register a plugin, it must be pushed to a public GitHub repository. Create a Craft Console account at [console.craftcms.com](https://console.craftcms.com) and connect it to your GitHub account. Then, [set up an organization](kb:craft-console-organizations) to represent you (or your business) in the Plugin Store; organizations also determine [how you get paid](#payouts).
 
-::: warning
-If your repository is owned by a GitHub organization, make sure that organization is checked when authenticating your GitHub account. If you don’t see the repository, try disconnecting the account and removing the authorization from GitHub, then reconnecting.
-:::
-
 In your Console organization, navigate to **Plugin Store** &rarr; **Plugins** &rarr; **Add a plugin**, then search for and select a repository. Some details will be pre-populated for you (based on information [provided in the root `composer.json` file](plugin-guide.md#composerjson)), but you can make any desired changes to its description, screenshots, and other details, before submitting.
 
 ### Choose a Price
