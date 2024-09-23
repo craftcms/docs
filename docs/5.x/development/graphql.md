@@ -1401,7 +1401,7 @@ Formats a money object to the desired format. It can be applied to any fields, b
 
 
 ### The `transform` directive
-Returns a URL for an [asset transform](https://craftcms.com/docs/4.x/image-transforms.html). Accepts the same arguments you would use for a transform in Craft.
+Returns a URL for an [asset transform](https://craftcms.com/docs/5.x/development/image-transforms.html). Accepts the same arguments you would use for a transform in Craft.
 | Argument | Type | Description
 | - | - | -
 | `handle`| `String` | The handle of the named transform to use.

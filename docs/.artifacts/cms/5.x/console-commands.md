@@ -2438,7 +2438,7 @@ address
 
 
 --docroot, -t
-: path or [path alias](https://craftcms.com/docs/4.x/config/#aliases) of the directory to serve.
+: path or [path alias](https://craftcms.com/docs/5.x/configure.html#aliases) of the directory to serve.
 
 
 --router, -r
