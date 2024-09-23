@@ -14,8 +14,8 @@ The snippets on this page are simplified versions of concepts illustrated in our
 This page covers common patterns for working with carts in the front-end, prior to [checkout](checkout.md):
 
 - [Accessing the cart and its contents](#accessing-the-cart)
-- [Displaying a cart’s contents](../development/cart.md#displaying-cart-contents)
-- [Adding items to a cart](#adding-items-to-a-cart)
+- [Displaying a cart’s contents](#displaying-cart-contents)
+- [Adding items to a cart](#adding-items)
 - [Working with line items](#line-items)
 - [Using custom fields](#custom-fields)
 - [Loading](#load-a-cart) and [forgetting](#forgetting-a-cart) carts
