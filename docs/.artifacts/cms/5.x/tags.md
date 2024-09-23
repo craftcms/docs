@@ -13,7 +13,7 @@
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only tags that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching tags as arrays of data, rather than [Tag](craft5:craft\elements\Tag) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 | [dateCreated](#datecreated)                 | Narrows the query results based on the tags’ creation dates.
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the tags’ last-updated dates.
 | [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
@@ -71,7 +71,7 @@ Narrows the query results to only tags that are not related to certain other ele
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -100,7 +100,7 @@ Narrows the query results to only tags that are related to certain other element
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -163,7 +163,7 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
-Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 
 
 
@@ -517,7 +517,7 @@ Narrows the query results to only tags that are not related to certain other ele
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -647,7 +647,7 @@ Narrows the query results to only tags that are related to certain other element
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -683,7 +683,7 @@ Narrows the query results to only tags that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/5.x/system/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1014,7 +1014,7 @@ Causes the query to return matching tags eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/5.x/development/eager-loading.html) for a full explanation of how to work with this parameter.
 
 
 
