@@ -1151,14 +1151,14 @@ You may be able to create the source-target map without another database query, 
 If you need to override where eager-loaded elements are stored, add a `setEagerLoadedElements()` method to your element class as well:
 
 ```php
-public function setEagerLoadedElements(string $handle, array $elements): void
+public function setEagerLoadedElements(string $handle, array $elements, EagerLoadPlan $plan): void
 {
     // The handle can be anything, so long as it matches what is used in `eagerLoadingMap()`:
     if ($handle === 'author') {
         $author = $elements[0] ?? null;
         $this->setAuthor($author);
     } else {
-        parent::setEagerLoadedElements($handle, $elements);
+        parent::setEagerLoadedElements($handle, $elements, $plan);
     }
 }
 ```
