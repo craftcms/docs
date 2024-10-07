@@ -287,6 +287,28 @@ Any time an indexable attribute or field on an element is updated (as indicated 
 
 The [eligible properties](#searching-for-specific-element-attributes) differ for each element type, the field layout a given element uses, and which of the underlying fields are flagged as searchable.
 
+## Searching Nested Elements
+
+In Craft 5, [entry queries](../reference/element-types/entries.md#querying-entries) return nested elements, by default. To search only for entries that belong to a section (those that are not owned by another entry), apply the `.section()` param:
+
+```twig
+{% set results = craft.entries()
+  .section(['news', 'resources'])
+  .search(terms)
+  .orderBy('score')
+  .all() %}
+```
+
+If you want entries in any section, and would prefer to not maintain a list of specific sections (or _excluded_ sections, with `.section(['not', 'home', 'suppliers'])`) in your template, pass an asterisk <Since ver="5.2.0" feature="Querying for non-nested entries with the special “section wildcard”" /> (`*`):
+
+```twig{2}
+{% set results = craft.entries()
+  .section('*')
+  .search(terms)
+  .orderBy('score')
+  .all() %}
+```
+
 ## Rebuilding Your Search Indexes
 
 Craft does its best to keep its search indexes as up-to-date as possible, but there are a couple things that might render portions of them inaccurate. If you suspect your search indexes are out of date, you can have Craft rebuild them by bulk-resaving entries with the [`resave/entries`](../reference/cli.md#resave) command and including the `--update-search-index` flag:
