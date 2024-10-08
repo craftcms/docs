@@ -1,5 +1,5 @@
 ---
-description: Official documentation for Craft CMS 4.
+description: Official documentation for Craft CMS 4.x
 ---
 
 # About Craft CMS
