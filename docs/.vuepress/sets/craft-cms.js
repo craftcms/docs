@@ -182,7 +182,10 @@ module.exports = {
         {
           title: "Welcome to Craft",
           collapsable: false,
-          children: ["", "coc"]
+          children: [
+            ["", "About Craft CMS"],
+            "coc"
+          ]
         },
         {
           title: "Getting Started",
@@ -350,7 +353,10 @@ module.exports = {
         {
           title: "Introduction",
           collapsable: false,
-          children: ["", "coc"]
+          children: [
+            ["", "About Craft CMS"],
+            "coc"
+          ]
         },
         {
           title: "Installing & Updating",
@@ -552,7 +558,10 @@ module.exports = {
         {
           title: "Introduction",
           collapsable: false,
-          children: ["", "coc"]
+          children: [
+            ["", "About Craft CMS"],
+            "coc"
+          ]
         },
         {
           title: "Installing & Updating",
@@ -780,7 +789,10 @@ module.exports = {
         {
           title: "Introduction",
           collapsable: false,
-          children: ["", "code-of-conduct"]
+          children: [
+            ["", "About Craft CMS"],
+            "code-of-conduct"
+          ]
         },
         {
           title: "Installing & Updating",

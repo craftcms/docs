@@ -1,5 +1,6 @@
 ---
-description: Official documentation for Craft CMS 2.
+title: Craft CMS 2.x
+description: Official documentation for Craft CMS 2.x
 ---
 
 # About Craft CMS

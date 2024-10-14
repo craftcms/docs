@@ -133,7 +133,10 @@ module.exports = {
         {
           title: "Introduction",
           collapsable: false,
-          children: ["", "editions"]
+          children: [
+            ["", 'About Craft Commerce'],
+            "editions"
+          ]
         },
         {
           title: "Installing & Updating",
@@ -267,7 +270,10 @@ module.exports = {
         {
           title: "Introduction",
           collapsable: false,
-          children: ["", "editions"]
+          children: [
+            ["", 'About Craft Commerce'],
+            "editions"
+          ]
         },
         {
           title: "Installing & Updating",
@@ -379,7 +385,10 @@ module.exports = {
         {
           title: "Introduction",
           collapsable: false,
-          children: [["", "Introduction"], "editions"]
+          children: [
+            ["", "Introduction"],
+            "editions"
+          ]
         },
         {
           title: "Installing Craft Commerce",
@@ -468,7 +477,9 @@ module.exports = {
         {
           title: "Getting Started",
           collapsable: false,
-          children: [""]
+          children: [
+            ["", 'About Craft Commerce'],
+          ],
         },
         {
           title: "Installing and Updating",

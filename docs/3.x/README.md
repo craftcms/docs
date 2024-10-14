@@ -1,4 +1,5 @@
 ---
+title: Craft CMS 3.x
 description: Official documentation for Craft CMS 3.x
 ---
 
