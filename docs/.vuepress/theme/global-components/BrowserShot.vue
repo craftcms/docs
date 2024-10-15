@@ -1,6 +1,7 @@
 <template>
   <component
     class="browser-shot"
+    :id="id"
     :is="link ? 'a' : 'div'"
     :href="link ? url : null"
     :target="link ? '_blank' : null"

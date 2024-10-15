@@ -21,6 +21,6 @@ If you get stuck, [join us on Discord](https://craftcms.com/discord)! We all wan
 
 Craft is a flexible, user-friendly <abbr title="Content management system">CMS</abbr> for creating custom digital experiences on the web—and beyond.
 
-You have a _ton_ of options when it comes to choosing a CMS. Craft is uniquely equipped to deliver high-quality, content-driven experiences to your clients and their audiences, in large part due to its blank-slate approach to content modeling.
+You have a _ton_ of options when it comes to choosing a CMS. Craft is uniquely equipped to deliver high-quality, content-driven experiences to your clients and their audiences, in large part due to its blank-slate approach to content modeling and front-end development.
 
 To demonstrate Craft’s agility, we’ll build a basic blog—and in doing so, touch a number of powerful tools that let you design, build, and manage _any_ kind of content.

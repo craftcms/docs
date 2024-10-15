@@ -48,6 +48,10 @@ export default {
     methods: {
         activatePoi() {
             this.isActive = true;
+
+            const $browser = document.getElementById(this.target);
+
+            $browser.scrollIntoView({ behavior: 'smooth' });
         },
         deactivatePoi() {
             this.isActive = false;

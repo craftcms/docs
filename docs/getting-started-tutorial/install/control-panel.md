@@ -2,8 +2,8 @@
 
 You should have three project windows up, at this point:
 
-1. A terminal, which we used to install Craft and DDEV;
-1. An editor, with the project folder;
+1. A terminal, which we used to install DDEV and Craft;
+1. An editor, open to your project folder;
 1. A browser, with Craft’s default welcome page loaded;
 
 ## Signing In
@@ -45,7 +45,7 @@ ddev craft users/set-password me@domain.com
     }"
     :link="false"
     caption="The control panel without any content.">
-<img src="../images/empty-control-panel.png" alt="Screenshot of the Craft CMS control panel Dashboard" />
+<img src="../images/dashboard.png" alt="Screenshot of the Craft CMS control panel Dashboard" />
 </BrowserShot>
 
 Upon signing in, you will be sent to your **Dashboard**, a space you can customize with <Poi label="1" id="widgets" target="dashboard" /> widgets. Craft adds four widgets by default:
@@ -70,14 +70,14 @@ If the control panel looks a little empty right now, don’t worry; this is by d
 In the main navigation, click **Utilities**. By default, you’ll land on the **System Report** utility, which displays key details about your Craft installation and server:
 
 <BrowserShot url="https://tutorial.ddev.site/admin/utilities/system-report" :link="false" caption="The System Report utility lists important details about your installation.">
-<img src="../images/utilities.png" alt="Screenshot of the Craft CMS utilities section" />
+<img src="../images/system-report.png" alt="Screenshot of the Craft CMS utilities section, with the “System Report” pane active" />
 </BrowserShot>
 
 ::: tip
 If you used something other than DDEV to set up the project, you may want to take a moment and ensure everything under the **Requirements** heading has been satisfied! If you see a warning about a “`@web` alias,” it’s safe to ignore for now.
 :::
 
-Feel free to explore the other [built-in utilities](/4.x/control-panel.md#utilities) at your leisure. This is the only one we’ll highlight, for now.
+Feel free to explore the other [built-in utilities](/5.x/system/control-panel.md#utilities) at your leisure. This is the only one we’ll highlight, for now.
 
 ## Settings
 

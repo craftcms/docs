@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # Creating Resources
 
 Before we can add content and use it in our site’s front-end, we need to define the management tools for it. This process is done entirely within the control panel—no coding is required to create new content types!
@@ -6,49 +10,9 @@ Before we can add content and use it in our site’s front-end, we need to defin
 Our content outline included an _About_ page and a place to keep global site information—we’ll circle back and work on those after we see the blog through.
 :::
 
-## Creating a Section
-
-Our first order of business is to create a _section_ for our blog posts.
-
-<BrowserShot
-    url="https://tutorial.ddev.site/admin/settings/sections/new"
-    id="newSection"
-    :poi="{
-        name: [35, 24, 'A'],
-        handle: [35, 38, 'B'],
-        type: [35, 62, 'C'],
-        uri: [45, 80, 'D'],
-        template: [70, 80, 'E'],
-    }"
-    :link="false"
-    caption="Settings for the new blog section.">
-<img src="../images/new-section.png" alt="Screenshot of new section fields" />
-</BrowserShot>
-
-1. In the control panel, choose **Settings** from the main navigation.
-1. Choose **Sections** from the “Content” row.
-1. Choose **+ New section**.
-1. Enter “Blog” in the **Name** <Poi label="A" target="newSection" id="name" /> field.
-1. Leave the rest of the default settings as they are, ensuring **Section Type** <Poi label="C" target="newSection" id="type" /> is set to **Channel**.
-1. Click **Save and edit entry types**.
-
-::: tip
-Craft will automatically generate values for the **Handle** <Poi label="B" target="newSection" id="handle" />, **Entry URI Format** <Poi label="D" target="newSection" id="uri" />, and **Template** <Poi label="E" target="newSection" id="template" /> fields. These will come into play in a moment!
-:::
-
-You’ll be dropped into the **Entry Types** tab of your new section’s edit screen, and should see one entry type, named “Default.” We’ll come back to this screen once we’ve created some fields.
-
 ## Supporting Features
 
-We’ve addressed the first item in our content model inventory by creating a section for blog posts… but the content model we decided on requires some other supporting features.
-
-Let’s walk through creating each of those components:
-
-- A _volume_ for storing images;
-- An _assets field_ to attach a primary image;
-- A _plain text field_ for post summaries;
-- A _categories field_ to organize posts;
-- A _matrix field_ for posts’ main content;
+Our blog will primarily use entries to author content, but some of its features depend on other resources that it makes sense to configure ahead of time.
 
 ### Create an Asset Volume
 
@@ -60,23 +24,24 @@ Assets are organized into _volumes_, which sit on top of a _filesystem_. Filesys
     url="https://tutorial.ddev.site/admin/settings/assets/volumes/new"
     id="newVolume"
     :poi="{
-        volumeName: [30, 25, 'A'],
-        volumeHandle: [30, 35, 'B'],
-        volumeFsMenu: [30, 55, 'C'],
-        fsName: [70, 8, 'D'],
-        fsHandle: [65, 18, 'E'],
-        fsHasPublicUrls: [75, 28, 'F'],
-        fsBaseUrl: [75, 40, 'G'],
-        fsBasePath: [70, 72, 'H'],
+        volumeName: [30, 20, 'A'],
+        volumeHandle: [30, 28, 'B'],
+        volumeFsMenu: [35, 42, 'C'],
+        fsName: [60, 7, 'D'],
+        fsHandle: [60, 16, 'E'],
+        fsHasPublicUrls: [70, 35, 'F'],
+        fsBaseUrl: [60, 48, 'G'],
+        fsBasePath: [60, 64, 'H'],
+        volumeSubpath: [30, 56, 'I'],
     }"
     :link="false"
     caption="Creating an asset volume and filesystem.">
 <img src="../images/new-asset-volume.png" alt="Screenshot of the asset volume creation screen in Craft’s control panel" />
 </BrowserShot>
 
-We’ll create a local Asset Volume within the web root for blog post images:
+We’ll create a local asset volume within the web root for blog post images:
 
-1. In the control panel, navigate to **Settings** → **Assets**;
+1. In the control panel, navigate to <Journey path="Settings, Assets" />;
 1. Click **+ New volume**;
 1. Enter “Images” in the **Name** field <Poi label="A" target="newVolume" id="volumeName" />;
 1. Click the **Asset Filesystem** menu <Poi label="C" target="newVolume" id="volumeFsMenu" /> and select **Create a new filesystem…**;
@@ -85,15 +50,36 @@ We’ll create a local Asset Volume within the web root for blog post images:
 
     - **Name** <Poi label="D" target="newVolume" id="fsName" />: “Hard Disk”
     - **Files in this filesystem have public URLs** <Poi label="F" target="newVolume" id="fsHasPublicUrls" />: On/Enabled
-    - **Base URL** <Poi label="G" target="newVolume" id="fsBaseUrl" />: `@web/uploads/images`
-    - **Base Path** <Poi label="H" target="newVolume" id="fsBasePath" />: `@webroot/uploads/images`
+    - **Base URL** <Poi label="G" target="newVolume" id="fsBaseUrl" />: `@uploads`
+    - **Base Path** <Poi label="H" target="newVolume" id="fsBasePath" />: `@webroot/uploads`
 
     Save the filesystem, and ensure it has populated the **Asset Filesystem** <Poi label="C" target="newVolume" id="volumeFsMenu" /> menu.
 
+    ::: tip
+    We chose generic **Base URL** and **Base Path** here so that the filesystem can be reused later by multiple volumes—say, one for “Documents” that you want to keep separate from photographic media. The **Subpath** setting on the volume will ensure our images live within a specific folder of the filesystem!
+    :::
+
+1. Set the volume’s **Subpath** <Poi label="I" target="newVolume" id="volumeSubpath" /> to `images`;
 1. Save the Asset Volume.
 
+Switch back to your code editor, and open `config/general.php`. Near the end of the file, you’ll see the `@webroot` alias we just used when configuring the filesystem. This ensures we have a reliable means of referring to the `web/` directory of our project, from resources we configure elsewhere; we still need to define the `@uploads` alias, though!
+
+Add this to the array passed to `->aliases(...)`, then save the file:
+
+```php{5}
+return GeneralConfig::create()
+    // ...
+    ->aliases([
+        '@webroot' => dirname(__DIR__) . '/web',
+        '@uploads' => App::env('PRIMARY_SITE_URL') . '/uploads',
+    ])
+;
+```
+
+Here, we combine the value of the `PRIMARY_SITE_URL` environment variable (automatically provided by DDEV) with a path segment (`/uploads`)—this corresponds to the filesystem’s **Base Path**, when accessed via HTTP. In practical terms, we’re using predefined values to build consistent on-disk paths (like `/var/www/html/web/uploads/images`) and URLs (like `https://tutorial.ddev.site/uploads/images`) for every uploaded asset.
+
 ::: tip
-The `@web` and `@webroot` [_aliases_](/4.x/config/README.md#aliases) are automatically defined by Craft, and point to the base site URL and document root (`web/` in your project folder), respectively.
+You may have noticed that Craft suggests existing aliases and environment variables as you input these values via the control panel. If you want to double-check your settings after adding the alias, visit <Journey path="Settings, Filesystems, Hard Disk" />, then focus the **Base URL** field.
 :::
 
 ### Create a Category Group
@@ -104,19 +90,19 @@ The second resource we need to create is a group for our blog’s _categories_.
     url="https://tutorial.ddev.site/admin/settings/categories/new"
     id="newCategoryGroup"
     :poi="{
-        name: [53, 23, 'A'],
-        handle: [51, 35, 'B'],
-        levels: [32, 45, 'C'],
-        uri: [45, 80, 'D'],
-        template: [75, 80, 'E'],
-        save: [90, 11, 'F'],
+        name: [55, 23, 'A'],
+        handle: [53, 37, 'B'],
+        levels: [32, 52, 'C'],
+        uri: [45, 83, 'D'],
+        template: [75, 83, 'E'],
+        save: [89, 10.5, 'F'],
     }"
     :link="false"
-    caption="Settings for a new blog category group.">
-<img src="../images/new-category-group.png" alt="Screenshot of new category group fields" />
+    caption="Settings for a new “topics” category group.">
+<img src="../images/new-category-group.png" alt="Screenshot of the category group creation screen in the Craft control panel" />
 </BrowserShot>
 
-1. Navigate to **Settings** and choose **Categories**;
+1. Navigate to <Journey path="Settings, Categories";
 1. Choose **+ New category group**;
 1. In the **Name** <Poi label="A" target="newCategoryGroup" id="name" /> field, enter “Topics”;
 1. In the **Max Levels** <Poi label="C" target="newCategoryGroup" id="levels" /> field, enter `1`;
@@ -124,195 +110,295 @@ The second resource we need to create is a group for our blog’s _categories_.
 1. Set the **Template** <Poi label="E" target="newCategoryGroup" id="template" /> to `blog/_topic`;
 1. **Save** <Poi label="F" target="newCategoryGroup" id="save" /> the category group.
 
+## Creating a Section
+
+With some supporting resources created, it’s time to scaffold our blog’s _section_, _entry type_, and all its _custom fields_. Craft allows us to do this in a single screen, via nested slideouts—we’ll cover them in sequence!
+
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/sections/new"
+    id="newSection"
+    :poi="{
+        name: [50, 14, 'A'],
+        handle: [48, 23, 'B'],
+        type: [39, 37, 'C'],
+        uri: [45, 60, 'D'],
+        template: [75, 60, 'E'],
+        entryTypes: [32, 50, 'F'],
+    }"
+    :link="false"
+    caption="Settings for the new blog section.">
+<img src="../images/new-section.png" alt="Screenshot of new section fields" />
+</BrowserShot>
+
+1. In the control panel, choose **Settings** from the main navigation.
+1. Choose **Sections** from the “Content” row.
+1. Choose **+ New section**.
+1. Enter “Blog” in the **Name** <Poi label="A" target="newSection" id="name" /> field.
+1. Leave the rest of the default settings as they are, ensuring **Section Type** <Poi label="C" target="newSection" id="type" /> is set to **Channel**.
+
+::: tip
+Craft will automatically generate values for the **Handle** <Poi label="B" target="newSection" id="handle" />, **Entry URI Format** <Poi label="D" target="newSection" id="uri" />, and **Template** <Poi label="E" target="newSection" id="template" /> fields. These will come into play in a moment!
+:::
+
+Without leaving this screen, we can also create our first _entry type_. Click **+ Create** <Poi label="F" target="newSection" id="entryTypes" /> within the **Entry Types** field to open a slideout:
+
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/sections/new"
+    id="newEntryType"
+    :poi="{
+        name: [81, 5, 'A'],
+        icon: [65, 21, 'B'],
+        fld: [60, 52, 'C'],
+        newField: [94, 89, 'D'],
+    }"
+    :link="false"
+    caption="Creating a “Post” entry type for our new Blog section.">
+<img src="../images/new-entry-type.png" alt="Entry type editor slideout" />
+</BrowserShot>
+
+1. Enter “Post” in the entry type’s **Name** <Poi label="A" target="newEntryType" id="name" /> field;
+1. Pick an **Icon** <Poi label="B" target="newEntryType" id="icon" /> and **Color** (optional—we’ll have another opportunity to make better use of these settings, in a moment);
+
+At the bottom of the entry type creation slideout, you’ll find the **Field Layout** <Poi label="C" target="newEntryType" id="fld" /> designer.
+
 ## Custom Fields
 
-Now that we’ve set up all the underlying resources (a section, an asset volume, and a category group), let’s create the fields for our blog posts.
+To add a field to our new _Post_ entry type, click the **+ New field** <Poi label="D" target="newEntryType" id="newField" /> button in the sidebar of the **Field Layout**.
 
-Custom fields are reusable, so we’ll define them in a global space, then add them to the field layouts where they’re needed. Each of the resources we’ve created so far can have their own field layouts.
-
-The first thing we’ll do is create a _field group_ to keep our fields organized.
-
-1. Navigate to **Settings** → **Fields**.
-2. Choose **+ New group** in the sidebar, and give it a name like “Blog.”
-
-The following fields will all be created within this new _Blog_ field group. Clicking **+ New Field** while viewing a group will automatically select it—but you can always move a field between groups using the **Group** option on its edit screen.
+::: tip
+You may have noticed the field layout designer at the bottom of the asset volume and category group settings screens—every element type in Craft supports the content modeling tools we’re going to cover in this section!
+:::
 
 ### Summary
 
-The post summary will be entered in a _plain text_ field.
+The post summary will be entered in a _plain text_ field. We’re going to create a single, generic text field and reuse it in a few places.
 
-1. Click **+ New Field**;
-1. Enter “Summary” into the **Name** field;
-1. Enter “Summaries should be one or two sentences.” in the **Default Instructions** field to give authors a hint about the field’s intended usage;
-1. Enable **Allow line breaks**;
-1. Set the revealed **Initial Rows** field to `1`;
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/sections/new"
+    id="newTextField"
+    :poi="{
+        name: [81, 5, 'A'],
+        keywords: [75, 29, 'B'],
+        allowLineBreaks: [60, 74, 'C'],
+    }"
+    :link="false"
+    caption="Creating a plain text field in a slideout.">
+<img src="../images/new-plain-text-field.png" alt="Plain text field creation slideout" />
+</BrowserShot>
+
+1. Enter “Text” into the **Name** <Poi label="A" target="newTextField" id="name" /> field;
+1. Enable **Use this field’s value as search keywords** <Poi label="B" target="newTextField" id="keywords" />;
+1. Enable **Allow line breaks** <Poi label="C" target="newTextField" id="allowLineBreaks" />;
 1. Save the field.
+
+That’s all we need for now! The slideout will close, revealing the text field in the field layout designer sidebar. Drag that field into the _Content_ tab in the field layout.
+
+Our generic field is not very useful to editors, though—how would they know what to enter into a field labeled “Text?” Craft supports reuse of most field types, each instance of which can override the base field’s UI label (what authors see) and handle (how it’s accessed in templates and queries).
+
+On the field layout element you just dragged into the _Content_ tab, open the action menu <Icon kind="ellipses" /> and select **Settings**:
+
+![Setting overrides for a field layout element](../images/fld-field-overrides.png)
+
+In the slideout that appears, update the **Label** to “Summary” and the **Handle** to `summary`, then click **Apply** to save the overrides; you should see the new label and handle reflected in the field layout designer, as well as a pencil icon indicating that field instance has customizations.
+
+::: warning
+If you don’t see the pencil icon, make sure the changes were made in the **Settings** slideout, not the **Edit field** slideout.
+:::
 
 ### Feature Image
 
-Posts’ primary images will be added to an _asset_ field.
+Posts’ primary images will be added to an _asset_ field. This one will also be used in a few places, so we’re going to give it a relatively generic name and handle. Click **+ New Field** from the entry type’s field layout designer again to open a slideout:
 
 <BrowserShot
-    url="https://tutorial.ddev.site/admin/settings/fields/new"
-    id="newAssetField"
+    url="https://tutorial.ddev.site/admin/settings/sections/new"
+    id="newAssetsField"
     :poi="{
-        name: [3, 13.5, 'A'],
-        handle: [3, 17.25, 'B'],
-        type: [3, 27, 'C'],
-        restrict: [3, 29, 'D'],
-        location: [3, 33.3, 'E'],
-        allowSubfolders: [3, 36.2, 'F'],
-        defaultLocation: [3, 39.6, 'G'],
-        allowedTypes: [3, 53.5, 'H'],
-        maxRelations: [3, 75.7, 'I'],
+        name: [44.5, 3, 'A'],
+        handle: [44.5, 7, 'B'],
+        type: [44.5, 18, 'C'],
+        restrict: [44.5, 22, 'D'],
+        location: [44.5, 26, 'E'],
+        allowSubfolders: [44.5, 30, 'F'],
+        defaultLocation: [44.5, 34, 'G'],
+        allowedTypes: [44.5, 52, 'H'],
+        minMaxRelations: [44.5, 74, 'I'],
+        viewMode: [44.5, 80, 'J'],
     }"
     :link="false"
     :max-height="600"
     caption="Settings for a new asset field.">
-<img src="../images/new-asset-field.png" alt="Screenshot of new asset field settings" />
+<img src="../images/new-assets-field.png" alt="Screenshot of new asset field settings" />
 </BrowserShot>
 
-1. Click **+ New Field**;
-1. Enter “Feature Image” into the **Name** <Poi label="A" target="newAssetField" id="name" /> field (and note that Craft automatically generates a **Handle** of `featureImage`);
-1. Select **Assets** from the **Field Type** <Poi label="C" target="newAssetField" id="type" /> menu—the rest of the page will be updated with options specific to asset fields;
-1. Tick **Restrict assets to a single location?** <Poi label="D" target="newAssetField" id="restrict" />;
-1. Select the **Images** volume from the revealed **Asset Location** <Poi label="E" target="newAssetField" id="location" /> menu;
-1. Tick **Allow subfolders** <Poi label="F" target="newAssetField" id="allowSubfolders" />;
-1. Leave both path inputs (<Poi label="E" target="newAssetField" id="location" /> + <Poi label="G" target="newAssetField" id="defaultLocation" />) empty;
-1. Tick **Restrict allowed file types** <Poi label="H" target="newAssetField" id="allowedTypes" />, then tick **Image** from the revealed options;
-1. Set **Max Relations** <Poi label="I" target="newAssetField" id="maxRelations" /> to `1`;
+1. Enter “Image” into the **Name** <Poi label="A" target="newAssetsField" id="name" /> field (and note that Craft automatically generates a **Handle** <Poi label="B" target="newAssetsField" id="handle" /> of `image`);
+1. Select **Assets** from the **Field Type** <Poi label="C" target="newAssetsField" id="type" /> menu—the rest of the page will be updated with options specific to asset fields;
+1. Enable **Restrict assets to a single location?** <Poi label="D" target="newAssetsField" id="restrict" />;
+1. Select the **Images** volume from the revealed **Asset Location** <Poi label="E" target="newAssetsField" id="location" /> menu;
+1. Enable **Allow subfolders** <Poi label="F" target="newAssetsField" id="allowSubfolders" />;
+1. Leave both path inputs (<Poi label="E" target="newAssetsField" id="location" /> + <Poi label="G" target="newAssetsField" id="defaultLocation" />) empty;
+1. Enable **Restrict allowed file types** <Poi label="H" target="newAssetsField" id="allowedTypes" />, then tick **Image** from the revealed options;
+1. Set **Min** and **Max Relations** <Poi label="I" target="newAssetsField" id="maxRelations" /> to `1`;
+1. Use the **Large Thumbnails** option for the **View Mode** <Poi label="J" target="newAssetsField" id="viewMode" /> setting;
 1. Save the field.
+
+You’ll be dropped back at the entry type slideout. Add the new _Image_ field to the field layout, just as we did for the _Text_ field—then use the action menu <Icon kind="ellipses" /> to open its **Settings**:
+
+- Update the **Label** to “Feature Image”
+- Set the **Handle** to `featureImage`
+
+Apply those overrides, and verify that the pencil icon has appeared in the field layout element.
+
+::: tip
+From the action menu <Icon kind="ellipses" />, consider enabling **Use for element thumbnails** to use the _Feature Image_ field’s asset as a visual signpost when _Post_ entries are displayed in the control panel!
+:::
 
 ### Categories/Topics
 
-Our _topics_ field only needs a couple of options:
+Our _topics_ field is significantly simpler! Click **+ New field** again to get started:
 
-1. Click **+ New Field**;
-1. Enter “Post Categories” into the **Name** field (and note that Craft automatically generates a **Handle** of `postCategories`);
-1. Choose “Categories” from the **Field Type** menu—the rest of the page will be updated with options specific to categories fields;
-1. Choose “Topics” from the **Source** menu (it will probably be selected, already);
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/sections/new"
+    id="newCategoriesField"
+    :poi="{
+        name: [44.5, 5, 'A'],
+        handle: [44.5, 12, 'B'],
+        type: [44.5, 33, 'C'],
+        source: [44.5, 42, 'D'],
+    }"
+    :link="false"
+    caption="Settings for a new categories field.">
+<img src="../images/new-categories-field.png" alt="Screenshot of the categories field settings" />
+</BrowserShot>
+
+1. Enter “Post Categories” into the **Name** <Poi label="A" target="newCategoriesField" id="name" /> field (and note that Craft automatically generates a **Handle** <Poi label="B" target="newCategoriesField" id="handle" /> of `postCategories`);
+1. Choose “Categories” from the **Field Type** <Poi label="C" target="newCategoriesField" id="type" /> menu—the rest of the page will be updated with options specific to categories fields;
+1. Choose “Topics” from the **Source** <Poi label="D" target="newCategoriesField" id="source" /> menu (it will probably be selected, already);
 1. Save the field.
 
 ::: tip
-Previously, we only created the category _group_. This step creates a _field_ that will allow us to select from the pool of content. Craft separates these concerns so that you may establish relationships to and from elements in different parts of your site, without needing to duplicate content.
+Previously, we only created the category _group_. This step creates a _field_ that will allow us to select from the pool of content. Craft separates these concerns so that you may establish relationships between elements in different parts of your site, without needing to duplicate content on either end of the relationship.
 
-For example, if we later added a _Galleries_ section, you could create and assign another categories field to its field layout, but still have access to the same pool of topics!
+For example, if we later added a _Galleries_ section, you could assign this categories field (or create another one) to that volume’s field layout, while pulling from the same pool of topics!
 :::
+
+With the field created, drag it into the _Post_ entry type’s field layout. This one is specific enough to the context that we don’t need to override any instance settings!
 
 ### Post Content
 
-Matrix fields are inherently a bit more complex than other field types, because they contain _nested_ fields. The process of creating those nested fields should feel pretty familiar, though!
+Our posts’ content will be authored with Craft’s _Matrix_ field type. Matrix fields are inherently a bit more complex than other field types, because they manage _nested_ entries rather than “scalar” values like text or numbers. The good news is that the process of defining the entry types available within a Matrix field is identical to what we’ve done, so far!
+
+Back on our _Post_ entry type slideout, click **+ New field**:
 
 <BrowserShot
-    url="https://tutorial.ddev.site/admin/settings/fields/new"
+    url="https://tutorial.ddev.site/admin/settings/sections/new"
     id="newMatrixField"
     :poi="{
-        name: [3, 13.8, 'A'],
-        handle: [3, 18.25, 'B'],
-        type: [3, 30, 'C'],
-        config: [5, 45, 'D'],
-        fieldSettings: [65, 36.2, 'E'],
+        name: [44.5, 5, 'A'],
+        handle: [44.5, 13, 'B'],
+        search: [44.5, 28.5, 'C'],
+        type: [44.5, 35, 'D'],
+        entryTypes: [44.5, 45, 'E'],
+        siteSettings: [44.5, 56, 'F'],
+        minMaxEntries: [44.5, 68, 'G'],
+        viewMode: [44.5, 81, 'H'],
+        newButtonLabel: [44.5, 89, 'I'],
     }"
     :link="false"
-    :max-height="600"
-    caption="Configuring a new matrix field with multiple block types.">
-<img src="../images/new-matrix-field.png" alt="Screenshot of matrix field settings" />
+    caption="Configuring a new matrix field.">
+<img src="../images/new-matrix-field.png" alt="Screenshot of Matrix field settings" />
 </BrowserShot>
 
-1. Click **+ New Field**;
-1. Enter “Post Content” in the **Name** <Poi label="A" target="newMatrixField" id="name" /> field (and note that Craft automatically generates a **Handle** of `postContent`);
-1. Choose “Matrix” from the **Field Type** <Poi label="C" target="newMatrixField" id="type" /> menu—the rest of the page will be updated with options specific to matrix fields;
-1. Within the **Configuration** <Poi label="D" target="newMatrixField" id="config" /> space, use the **+ New block type**  button to create two _block types_:
+1. Enter “Post Content” in the **Name** <Poi label="A" target="newMatrixField" id="name" /> field (and note that Craft automatically generates a **Handle** <Poi label="B" target="newMatrixField" id="handle" /> of `postContent`);
+1. Enable **Use this field’s values as search keywords** <Poi label="C" target="newMatrixField" id="search" />;
+1. Choose “Matrix” from the **Field Type** <Poi label="D" target="newMatrixField" id="type" /> menu—the rest of the page will be updated with options specific to matrix fields;
+1. Leave the **Site Settings** <Poi label="F" target="newMatrixField" id="siteSettings" /> fields blank;
+1. Set the **Min Entries** <Poi label="G" target="newMatrixField" id="minMaxEntries" /> field to `1`, and leave **Max Entries** blank;
+1. Choose **As inline-editable blocks** from the **View Mode** <Poi label="H" target="newMatrixField" id="viewMode" /> menu;
+1. Type “Add block” into the **“New” Button Label** <Poi label="I" target="newMatrixField" id="newButtonLabel" /> field;
 
-    #### Text Block
+Now, return to the **Entry Types** <Poi label="E" target="newMatrixField" id="entryTypes" /> field we skipped—it’s time to define a couple of basic entry types that we’ll use in various combinations while composing content:
 
-    The first block will be used for text. When prompted for a _block type_ **Name**, enter “Text.”
+#### Text Block
 
-    1. In the **Fields** column of the configuration pane, click **+ New field**;
-    1. In the **Field Settings** <Poi label="D" target="newMatrixField" id="config" /> column, enter these values…
-        - **Name**: “Text”
-        - **Field Type**: Plain Text
-        - **This field is required**: Checked
-        - **Allow line breaks**: Checked
-        - **Initial Rows**: `12`
+The first block will be used for plain text. Click **+ Create** beneath the **Entry Types** heading in the Matrix field’s settings:
 
-    #### Image Block
+<BrowserShot
+    url="https://tutorial.ddev.site/admin/settings/sections/new"
+    id="newNestedEntryType"
+    :poi="{
+        name: [44.5, 5, 'A'],
+        icon: [44.5, 22, 'B'],
+        showTitles: [44.5, 31.5, 'C'],
+        showSlugs: [44.5, 45.5, 'D'],
+        fldAdd: [59, 71, 'E'],
+    }"
+    :link="false"
+    caption="Configuring a new entry type, nested within a Matrix field.">
+<img src="../images/new-nested-entry-type-text.png" alt="Screenshot showing a nested entry type creation slideout" />
+</BrowserShot>
 
-    The second block will be used for attaching images.
+Recall that we made a general-purpose text field for our posts’ _Summary_, earlier!
 
-    1. Back in the **Fields** column of the configuration pane, click **+ New field**.
-    1. In the **Field Settings** <Poi label="D" target="newMatrixField" id="config" /> column…
-        - Set the **Name** field to “Image”;
-        - Choose “Assets” from the **Field Type** menu;
-        - Tick **This field is required**;
-        - Copy the remainder of the settings from the [Feature Image](#feature-image) field we created a moment ago;
+1. Enter “Text” for the **Name** <Poi label="A" target="newNestedEntryType" id="name" /> and ensure the handle was automatically set to `text`;
+1. Pick an **Icon** and **Color** <Poi label="B" target="newNestedEntryType" id="icon" /> (optional—these can help authors identify the nested entry types);
+1. Turn off **Show the Title field** <Poi label="C" target="newNestedEntryType" id="showTitles" /> and **Show the Slug field** <Poi label="D" target="newNestedEntryType" id="showSlugs" />;
+1. Drag the _Text_ (`text`) field from the **Field Layout** designer sidebar into the _Content_ tab <Poi label="E" target="newNestedEntryType" id="fldAdd" />;
 
-1. Save the field.
+Click **Save** to create the entry type and attach it to the Matrix field. If you chose an icon and color for the entry type, you’ll see it reflected in the **Entry Types** selector!
 
-With that, our fields are ready to be added to a _field layout_!
+#### Image Block
 
-<Block label="Optional Step">
+The second block will be used for attaching images. Repeat the process above, but name the entry type “Image” (with a handle of `image`), and drag the _Image_ field into the **Field Layout**. Save the entry type to return to your Matrix field settings slideout. You should see two entry types connected to it:
+
+![Entry types connected to a Matrix field.](../images/new-matrix-field-entry-types.png)
+
+### Finalizing the Field Layout
+
+With the _Text_ and _Image_ entry types created, click **Save** on the Matrix field. You will be returned to the original _Post_ entry type slideout, with the _Post Content_ Matrix field isolated in its **Field Layout** sidebar.
+
+Drag that field into the _Content_ tab, then click **Save** to create the _Post_ entry type! You should now see the _Post_ entry type attached to the _Blog_ section’s **Entry Types**. One last **Save** on the _Blog_ section, and you’re done—what a journey!
+
+::: tip
+In the future, you can access all your entry types from <Journey path="Settings, Entry Types" /> and fields from <Journey path="Settings, Fields" />, directly.
+:::
+
+<Block label="Optional Steps">
 
 #### Install the CKEditor plugin for rich text fields
 
-If you would prefer to compose the text of your blog posts using a _rich text_ editor (sometimes called a <abbr title="What You See Is What You Get">WYSIWYG</abbr>), the first-party [CKEditor](https://plugins.craftcms.com/ckeditor) can be substituted for the plain text field we created inside our matrix field’s _Text_ block.
+If you would prefer to compose the text of your blog posts using a _rich text_ editor (sometimes called a <abbr title="What You See Is What You Get">WYSIWYG</abbr> editor), our first-party [CKEditor](https://plugins.craftcms.com/ckeditor) plugin can be substituted for most any plain text field.
 
-Plugins can be installed from the control panel (click **Plugin Store** in the main navigation and search for “CKEditor”), or via the command line:
+Plugins are installed from the control panel (click **Plugin Store** in the main navigation and search for “CKEditor”), or via the command line:
 
 1. Run `ddev composer require craftcms/ckeditor -w` to add the package to your project;
 1. Install the plugin by running `ddev php craft plugin/install ckeditor`;
 
-Once installed, you’ll need to update your field’s settings:
+Once installed, you’ll need to create a new field, and replace the field in our _Text_ entry type:
 
-1. Navigate to the _Post Content_ matrix field’s settings, then the _Text_ block type, then the _Text_ field;
-1. Switch the **Field Type** to **CKEditor**;
-1. Define a reusable configuration;
+1. Navigate to <Journey path="Settings, Entry Types" />, then select _Text_;
+1. Remove the _Text_ field from the field layout by dragging it into the sidebar, or using the action menu <Icon kind="ellipses" /> and selecting **Remove**;
+1. Click **+ New field** in the field layout designer sidebar;
+1. Give the field a **Name** and **Handle** that make sense, like “Rich Text” and `richText`, respectively;
+1. Define a [reusable configuration](https://github.com/craftcms/ckeditor?tab=readme-ov-file#configuration);
 1. Save the field;
+1. Drag the new _Rich Text_ field into your layout;
+1. Save the field layout;
 
 That’s it! Plain text fields can be migrated to CKEditor without losing data—but some field types are _not_ compatible with one another! Craft puts a ⚠️ next to any options in the **Field Type** menu that can’t be automatically converted.
 
-</Block>
-
-## Building a Field Layout
-
-Craft’s assumption is that you will eventually have a variety of content types, and that each will use a subset of your fields. To connect our blog entries to the fields they need, we’ll create a _field layout_.
-
-<BrowserShot
-    url="https://tutorial.ddev.site/admin/settings/sections/1/entrytypes/1"
-    id="fieldLayout"
-    :poi="{
-        name: [18.5, 18.5, 'A'],
-        contentTab: [39, 55, 'B'],
-        uiElements: [95, 41, 'C'],
-    }"
-    :link="false"
-    caption="Post entry type field layout, prior to configuration.">
-<img src="../images/blog-field-layout.png" alt="Screenshot of bare blog field layout" />
-</BrowserShot>
-
-Field layouts for entries are managed via _entry types_.
-
-1. Navigate to **Settings** → **Sections**;
-1. Choose **Edit entry types** in the _Blog_ row, and then choose the _Default_ entry type that was created along with the section;
-1. Take the opportunity to give this entry type a more useful **Name** <Poi label="A" target="fieldLayout" id="name" /> like “Post,” and ensure the **Handle** is updated;
-1. Drag each of the fields we created earlier to the _Content_ <Poi label="B" target="fieldLayout" id="contentTab" /> tab in whatever order makes sense to you.
-1. Save the entry type.
-
-All the fields nested within your Matrix field will come along with it, so they won’t appear in the field layout designer!
-
-<Block label="Optional Step">
+Switching the existing plain text field to CKEditor means that _all_ instances of that field would be updated. This may not be appropriate for our _Summary_ field (or additional uses, later in the tutorial), so we elected to treat it as a separate base field.
 
 #### Advanced Field Layout Customizations
 
-The **UI Elements** <Poi label="C" target="fieldLayout" id="uiElements" /> tab in the right sidebar contains a few tools that can help spruce up field layouts. This one is relatively simple, but as you create richer authoring experiences, having ways to split up fields, add instructions, or output arbitrary HTML can make a profound difference to its usability.
+The **UI Elements** tab in the right sidebar of every field layout designer contains a few tools that can help create richer authoring experiences. Craft comes with tools for splitting up fields, injecting additional instructions, rendering Twig templates, and more.
 
 Here are a few other features of field layouts worth experimenting with:
 
-- **Widths**: By default, fields occupy the full width of the element editor. Use the column selector UI next to the <Icon kind="settings" /> to set the field as 1/4, 1/2, 3/4, or full-width.
+- **Widths**: By default, fields occupy the full width of the element editor. Use the column selector UI next to the <Icon kind="ellipses" /> to set the field as 1/4, 1/2, 3/4, or full-width.
 - **Line breaks**: If a row isn’t full, you can force a field onto the next row with a line break field layout element.
-- **Field labels**: Click the <Icon kind="settings" /> to open a slideout and update a field’s **Label**. This is particularly useful for the **Title** field: say you were creating employee profiles, and needed a place for their names and _position_ titles—the built-in **Title** field would make more sense being called “Full Name.”
-- **Required fields**: Also within a field’s setting slideout is an option to mark a field as **Required**.
-- **Field conditions** and : Fields can be conditionally included in layouts by setting up condition rules, within the settings slideout.
+- **Field labels**: Click the <Icon kind="ellipses" /> to open a slideout and update a field’s **Label**. This is particularly useful for the **Title** field: say you were creating employee profiles, and needed a place for each person’s name and _position_—the built-in **Title** field would make more sense being called “Full Name,” while their position could be re-labeled “Position/Title” without creating confusion.
+- **Required fields**: Also within a field’s action menu is an option to mark a field as **Required**.
+- **Field conditions** and **User conditions**: Fields can be conditionally included in layouts by setting up condition rules, within the settings slideout. These conditions are evaluated dynamically, and can include rules based on other fields’ values!
 
 </Block>
 
