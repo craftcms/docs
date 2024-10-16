@@ -277,7 +277,7 @@ Our _topics_ field is significantly simpler! Click **+ New field** again to get 
 1. Save the field.
 
 ::: tip
-Previously, we only created the category _group_. This step creates a _field_ that will allow us to select from the pool of content. Craft separates these concerns so that you may establish relationships between elements in different parts of your site, without needing to duplicate content on either end of the relationship.
+Previously, we only created the category _group_. This step creates a _field_ that will allow us to select from that pool of content. Craft separates these concerns so that you may establish relationships between elements in different parts of your site, without needing to duplicate content on either end of the relationship.
 
 For example, if we later added a _Galleries_ section, you could assign this categories field (or create another one) to that volume’s field layout, while pulling from the same pool of topics!
 :::
