@@ -12,11 +12,11 @@ Our content outline included an _About_ page and a place to keep global site inf
 
 ## Supporting Features
 
-Our blog will primarily use entries to author content, but some of its features depend on other resources that it makes sense to configure ahead of time.
+Authors will primarily interact with entries as they create blog posts, but some of the features we’ve planned depend on other resources that make sense to configure ahead of time.
 
 ### Create an Asset Volume
 
-First, let’s create a place to upload the files we’ll use for our feature and post images.
+First, let’s create a place to upload the files for our feature and post images.
 
 Assets are organized into _volumes_, which sit on top of a _filesystem_. Filesystems are how Craft talks to different storage providers, while keeping the user interface consistent. For now, we’ll be using your local hard drive—but it could be a remote service like Amazon S3 or Google Cloud Storage.
 
@@ -39,7 +39,7 @@ Assets are organized into _volumes_, which sit on top of a _filesystem_. Filesys
 <img src="../images/new-asset-volume.png" alt="Screenshot of the asset volume creation screen in Craft’s control panel" />
 </BrowserShot>
 
-We’ll create a local asset volume within the web root for blog post images:
+We’ll create a local asset volume within the web root, so our images are accessible from a web browser:
 
 1. In the control panel, navigate to <Journey path="Settings, Assets" />;
 1. Click **+ New volume**;
@@ -56,7 +56,7 @@ We’ll create a local asset volume within the web root for blog post images:
     Save the filesystem, and ensure it has populated the **Asset Filesystem** <Poi label="C" target="newVolume" id="volumeFsMenu" /> menu.
 
     ::: tip
-    We chose generic **Base URL** and **Base Path** here so that the filesystem can be reused later by multiple volumes—say, one for “Documents” that you want to keep separate from photographic media. The **Subpath** setting on the volume will ensure our images live within a specific folder of the filesystem!
+    We chose a generic **Base URL** and **Base Path** here so that the filesystem can be reused later by multiple volumes—say, one for “Documents” that you want to keep separate from photographic media. The **Subpath** setting on the volume (see below) will ensure our images live within a specific folder of the filesystem!
     :::
 
 1. Set the volume’s **Subpath** <Poi label="I" target="newVolume" id="volumeSubpath" /> to `images`;
