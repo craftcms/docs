@@ -286,7 +286,7 @@ With the field created, drag it into the _Post_ entry type’s field layout. Thi
 
 ### Post Content
 
-Our posts’ content will be authored with Craft’s _Matrix_ field type. Matrix fields are inherently a bit more complex than other field types, because they manage _nested_ entries rather than “scalar” values like text or numbers. The good news is that the process of defining the entry types available within a Matrix field is identical to what we’ve done, so far!
+Our posts’ content will be authored with Craft’s _Matrix_ field type. Matrix fields are inherently a bit more complex than other field types, because they manage _nested_ entries rather than single, “scalar” values like text or numbers. The good news is that the process of defining the entry types available within a Matrix field is identical to what we’ve done, so far!
 
 Back on our _Post_ entry type slideout, click **+ New field**:
 
