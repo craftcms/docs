@@ -59,12 +59,12 @@ By default, the Craft CMS GraphiQL interface will use the full “schema” with
 
 To use GraphQL *externally* (without a privileged user session), you’ll need to do two things:
 
-1. [Establish a GraphQL API endpoint](/4.x/graphql.md#setting-up-your-api-endpoint) for querying externally.
-2. Either create your own private schema with a secret access token, or edit the public schema to enable querying content without an access token. (By default, the public schema leaves all content disabled.) See [Define Your Schemas](/4.x/graphql.md) in the GraphQL documentation.
+1. [Establish a GraphQL API endpoint](/5.x/development/graphql.md#setting-up-your-api-endpoint) for querying externally.
+2. Either create your own private schema (and an access token), or edit the public schema to enable querying content without an access token. (By default, the public schema leaves all content disabled.) See [Define Your Schemas](/5.x/development/graphql.md#define-your-schemas) in the GraphQL documentation.
 
 ## Optional: Enable Headless Mode
 
-If you want to query Craft CMS for content but handle your own routing, you can enable <config4:headlessMode>. This will optimize the installation to hide template settings and route management and return all front end responses as JSON.
+If you want to query Craft CMS for content but handle your own routing, you can enable <config5:headlessMode>. This will optimize the installation to hide template settings and route management and return all front end responses as JSON.
 
 To enable headless mode, add this to `config/general.php`:
 
@@ -80,7 +80,7 @@ return GeneralConfig::create()
 
 ## Twig examples as GraphQL queries
 
-Content can be fetched with GraphQL using the same parameters we’ve already used in Twig. Ultimately, Craft is still using [element queries](/4.x/element-queries.md) to decide how data should be loaded.
+Content can be fetched via GraphQL with the same parameters we’ve already used in Twig. Ultimately, Craft is still using [element queries](/5.x/development/element-queries.md) to decide what data should be loaded.
 
 Let’s retrace each step of the tutorial where we fetched content, seeing how the Twig example maps to a GraphQL query.
 
@@ -97,9 +97,9 @@ These aren’t available via the GraphQL API, but if you needed them you could s
 ::: code
 ```graphql Query
 {
-  globalSet(handle: "siteInformation") {
-    ... on siteInformation_GlobalSet {
-      siteDescription
+  globalSet(handle: "siteInfo") {
+    ... on siteInfo_GlobalSet {
+      description
     }
   }
 }
@@ -108,7 +108,7 @@ These aren’t available via the GraphQL API, but if you needed them you could s
 {
   "data": {
     "globalSet": {
-      "siteDescription": "Hello, world!"
+      "description": "Hello, world!"
     }
   }
 }
@@ -128,11 +128,11 @@ The blog post detail template displays an entire blog post with its full content
 - `entry.postContent`
   - `block.type`
   - `block.text`
-  - `block.image` Assets field
+  - `block.image`, an assets field
 - `entry.postCategories`
   - `title`
   - `url`
-- `siteInformation.siteDescription` processed by Markdown
+- `siteInfo.description`, processed by Markdown
 
 With the Twig setup, the web server provides its URL to Craft CMS, which uses its routing logic to fetch the entry and make it available as `entry` in the template.
 
@@ -140,25 +140,26 @@ We don’t have routing logic running GraphQL queries, so we’ll query on the k
 
 We also used `postDate` in two different formats, so we’re using the [GraphQL alias](https://graphql.org/learn/queries/#aliases) `postDateAlt` to return a second format for parity.
 
-```graphql
+::: code
+```graphql Query
 {
   entry(slug: "my-trip-to-bend") {
     title
     postDate @formatDateTime(format: "d M Y")
     postDateAlt: postDate @formatDateTime(format: "Y-m-d")
     url
-    ... on blog_blog_Entry {
+    ... on post_Entry {
       featureImage {
         title
         url
         sized: url @transform(width: 900, height: 600, quality: 90)
       }
       postContent {
-        ... on postContent_text_BlockType {
+        ... on text_Entry {
           typeHandle
           text
         }
-        ... on postContent_image_BlockType {
+        ... on image_Entry {
           typeHandle
           image {
             title
@@ -172,65 +173,67 @@ We also used `postDate` in two different formats, so we’re using the [GraphQL 
       }
     }
   }
-  globalSet(handle: ["siteInformation"]) {
-    ... on siteInformation_GlobalSet {
-      siteDescription @markdown
+  globalSet(handle: ["siteInfo"]) {
+    ... on siteInfo_GlobalSet {
+      description @markdown
     }
   }
 }
 ```
-
-You’ll notice that anything with its own field layout implements its own element interface, which is why properties consistent for all element types (`title`, `postDate`, `slug`, etc.) are readily available while custom fields must be queried in the context of a relevant element interface such as everything nested within `... on blog_blog_Entry {}`.
-
-The response should be something like this:
-
-```json
+```json Response
 {
   "data": {
     "entry": {
-      "title": "My first post",
-      "postDate": "20 Mar 2020",
-      "postDateAlt": "2020-03-20",
+      "title": "My Trip to Bend",
+      "postDate": "15 Oct 2024",
+      "postDateAlt": "2024-10-15",
       "url": "https://tutorial.ddev.site/blog/my-trip-to-bend",
       "featureImage": [
         {
-          "title": "Craft Image from Unsplash",
-          "url": "https://tutorial.ddev.site/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-          "sized": "https://tutorial.ddev.site/assets/blog/_900x600_crop_center-center_90_none/tim-gouw-rXBwosfgG-c-unsplash.jpg"
+          "title": "Highway 26",
+          "url": "https://tutorial.ddev.site/uploads/images/highway-26.JPG",
+          "sized": "https://tutorial.ddev.site/uploads/_900x600_crop_center-center_90_none/5/highway-26.jpg"
         }
       ],
       "postContent": [
         {
           "typeHandle": "text",
-          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+          "text": "Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Maecenas sed diam eget risus varius blandit sit amet non magna. Nullam quis risus eget urna mollis ornare vel eu leo."
         },
         {
           "typeHandle": "image",
           "image": [
             {
-              "title": "Little Drinks",
-              "url": "https://tutorial.ddev.site/assets/blog/rosie-kerr-Z0iBELYV8uk-unsplash.jpg"
+              "title": "Warm Springs",
+              "url": "https://tutorial.ddev.site/uploads/images/warm-springs.JPG"
             }
           ]
         },
         {
           "typeHandle": "text",
-          "text": "<p>Sed dignissim purus eget lectus bibendum blandit blandit id dui. Ut odio lectus, sodales quis convallis ac, tincidunt in nunc. Integer a est justo, pharetra iaculis turpis. Donec vehicula lorem eu sem condimentum at semper velit fermentum. Phasellus euismod quam vel felis aliquet fringilla. In volutpat diam id purus rutrum vestibulum. Praesent at purus risus, non tristique nibh.</p>\n"
+          "text": "Vestibulum id ligula porta felis euismod semper. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.\n\nCras mattis consectetur purus sit amet fermentum. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit."
         }
       ],
       "postCategories": [
         {
-          "title": "Ramblings",
-          "uri": "https://tutorial.ddev.site/blog/category/ramblings"
+          "title": "Trips",
+          "url": "https://tutorial.ddev.site/blog/topic/trips"
+        },
+        {
+          "title": "Oregon",
+          "url": "https://tutorial.ddev.site/blog/topic/oregon"
         }
       ]
     },
     "globalSet": {
-      "siteDescription": "<p>This is our tutorial site where we’ve built a blog from scratch with Craft CMS.</p>\n"
+      "description": "<p>Photos and stories from around the Pacific Northwest.</p>\n"
     }
   }
 }
 ```
+:::
+
+You’ll notice that anything with its own field layout implements its own element interface, which is why properties consistent for all element types (`title`, `postDate`, `slug`, etc.) are readily available while custom fields must be queried in the context of a relevant element interface—like everything nested within `... on post_Entry {}`.
 
 ### `blog/index`
 
@@ -238,12 +241,15 @@ The blog listing page displays a thumbnail icon and summary for every entry.
 
 This is fairly straightforward with GraphQL. We’ll expose the custom focal point as well in case the front end might make use of it:
 
-```graphql
+::: code
+```graphql Query
 {
   entries(section: "blog") {
     title
+    postDate @formatDateTime(format: "d M Y")
     url
-    ... on blog_blog_Entry {
+    ... on post_Entry {
+      summary
       featureImage {
         title
         url
@@ -254,22 +260,41 @@ This is fairly straightforward with GraphQL. We’ll expose the custom focal poi
   }
 }
 ```
-
-Result:
-
-```json
+```json Response
 {
   "data": {
     "entries": [
       {
-        "title": "My first post",
-        "url": "https://tutorial.ddev.site/blog/my-trip-to-bend",
+        "title": "Over the Mountain",
+        "postDate": "15 Oct 2024",
+        "url": "https://tutorial.ddev.site/blog/over-the-mountain",
+        "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "featureImage": [
           {
-            "title": "Craft Image from Unsplash",
-            "url": "https://tutorial.ddev.site/assets/blog/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-            "sized": "https://tutorial.ddev.site/assets/blog/_300x300_crop_center-center_none/tim-gouw-rXBwosfgG-c-unsplash.jpg",
-            "focalPoint": [0.2059, 0.6287]
+            "title": "Warm Springs",
+            "url": "https://tutorial.ddev.site/uploads/images/warm-springs.JPG",
+            "sized": "https://tutorial.ddev.site/uploads/_300x300_crop_center-center_none/7/warm-springs.jpg",
+            "focalPoint": [
+              0.5,
+              0.5
+            ]
+          }
+        ]
+      },
+      {
+        "title": "My Trip to Bend",
+        "postDate": "15 Oct 2024",
+        "url": "https://tutorial.ddev.site/blog/my-trip-to-bend",
+        "summary": "Sed posuere consectetur est at lobortis.",
+        "featureImage": [
+          {
+            "title": "Highway 26",
+            "url": "https://tutorial.ddev.site/uploads/images/highway-26.JPG",
+            "sized": "https://tutorial.ddev.site/uploads/_300x300_crop_center-center_none/5/highway-26.jpg",
+            "focalPoint": [
+              0.5,
+              0.5
+            ]
           }
         ]
       }
@@ -277,14 +302,16 @@ Result:
   }
 }
 ```
+:::
 
 ### `blog/_category`
 
 The blog category listing is the same as the listing layout above, limited to a specific category defined in the page URL.
 
-We’ll use the `relatedTo` query parameter, which requires IDs as its arguments. We can relate to the “Ramblings” category by its ID, which we can get with another GraphQL query or by visiting “Categories” and finding the numeric ID in the control panel URL.
+We’ll use the `relatedTo` query parameter, which requires IDs as its arguments. We can relate to the “Trips” category by its ID, which we can get with another GraphQL query or by visiting _Categories_ and finding the numeric ID in the control panel URL.
 
-```graphql
+::: code
+```graphql Query
 {
   categories {
     id
@@ -292,32 +319,40 @@ We’ll use the `relatedTo` query parameter, which requires IDs as its arguments
   }
 }
 ```
-
-```json
+```json{5-6} Response
 {
   "data": {
     "categories": [
       {
-        "id": "30",
-        "title": "Ramblings"
+        "id": "11",
+        "title": "Trips"
+      },
+      {
+        "id": "12",
+        "title": "Oregon"
+      },
+      {
+        "id": "22",
+        "title": "Summer"
       }
     ]
   }
 }
 ```
+:::
 
-If the ID for that category is `30`, the listing query could limit results by that relationship:
+If the ID for that category is `11`, the listing query could limit results by that relationship:
 
 ```graphql
 {
-  entries(section: "blog", relatedTo: 30) {
+  entries(section: "blog", relatedTo: 11) {
     title
     # ...
   }
 }
 ```
 
-Limiting on more than one category ID, like entries in category `30` or `40`, would be a matter of passing an array:
+Limiting on more than one category ID, like entries in category `11` _or_ `22`, would be a matter of passing an array:
 
 ```graphql
 {
@@ -328,74 +363,49 @@ Limiting on more than one category ID, like entries in category `30` or `40`, wo
 }
 ```
 
-For more on relationship querying, see the [Relations](/3.x/relations.md) page in the Craft CMS documentation.
+For more on querying using relationships, see the [Relations](/5.x/system/relations.md) page in the Craft CMS documentation.
 
 ### `_singles/about`
 
 The about page is a Single, which is sort of a section and an entry and can be queried either way; using the `section` or `slug` parameter with a value of `about`.
 
-- `entry.title`
-- `entry.aboutImage`
-- `entry.postContent`
-  - `block.type`
-  - `block.text`
-  - `block.image` Assets field
+- `entry.profileImage`
+- `entry.bio`
 
+::: code Query
 ```graphql
 {
   entry(section: "about") {
-    title
-    ... on about_about_Entry {
-      aboutImage {
+    ... on about_Entry {
+      profileImage {
         title
         url
       }
-      postContent {
-        ... on postContent_text_BlockType {
-          typeHandle
-          text
-        }
-        ... on postContent_image_BlockType {
-          typeHandle
-          image {
-            title
-            url
-          }
-        }
-      }
+      bio
     }
   }
 }
 ```
-
-Result:
-
-```json
+```json Response
 {
   "data": {
     "entry": {
-      "title": "About",
-      "aboutImage": [
+      "title": null,
+      "profileImage": [
         {
-          "title": "Floating in Space",
-          "url": "https://tutorial.ddev.site/assets/general/nasa-Yj1M5riCKk4-unsplash.jpg"
+          "title": "Lake Billy Chinook",
+          "url": "https://tutorial-five.ddev.site/uploads/images/lake-billy-chinook.jpeg"
         }
       ],
-      "postContent": [
-        {
-          "typeHandle": "text",
-          "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nibh quam, consequat et pellentesque non, malesuada vulputate risus. Donec et nisi sit amet nisi aliquam pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum hendrerit neque tincidunt massa tempus cursus dictum diam vulputate. Morbi aliquet, mi ut aliquam varius, nunc augue pellentesque felis, nec blandit sapien nunc vitae odio. Vivamus pretium metus sit amet urna iaculis id accumsan massa tincidunt. Maecenas posuere nibh id magna porta ullamcorper. Nunc tortor velit, tincidunt sit amet dapibus at, lacinia ac sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Proin feugiat iaculis sem ac blandit. Integer dignissim lacinia dolor eu elementum.</p>\n<p>Sed dignissim purus eget lectus bibendum blandit blandit id dui. Ut odio lectus, sodales quis convallis ac, tincidunt in nunc. Integer a est justo, pharetra iaculis turpis. Donec vehicula lorem eu sem condimentum at semper velit fermentum. Phasellus euismod quam vel felis aliquet fringilla. In volutpat diam id purus rutrum vestibulum. Praesent at purus risus, non tristique nibh.</p>\n<p>Quisque rutrum, dolor id viverra varius, odio libero dapibus augue, ac semper felis quam a dolor. Praesent sagittis quam et justo consequat luctus. Fusce posuere augue nec ipsum rhoncus id vestibulum libero consectetur. Etiam luctus ultricies neque, at viverra est tincidunt mollis. Nam sollicitudin sollicitudin gravida. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut non sem a tortor ultricies fringilla. Nam ac velit nulla, eu ullamcorper tellus. Donec interdum hendrerit nisi, et tempus dolor pulvinar at. Mauris lacinia sollicitudin est vitae rutrum. Nullam ullamcorper interdum bibendum.</p>"
-        }
-      ]
+      "bio": "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Aenean lacinia bibendum nulla sed consectetur. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n\nCurabitur blandit tempus porttitor. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Etiam porta sem malesuada magna mollis euismod."
     }
   }
 }
 ```
+:::
 
 ## Explore GraphQL further
 
 As with the Twig examples, we’re just scratching the surface of ways you can fetch content with Craft CMS.
 
-See the [GraphQL API](/3.x/graphql.md) section of the Craft CMS documentation to learn more about working with GraphQL.
-
-You may also want to check out our [blog starter project](https://github.com/craftcms/starter-blog) that includes an example Craft CMS + [Gatsby](https://www.gatsbyjs.org/) integration.
+See the [GraphQL API](/5.x/development/graphql.md) section of the Craft CMS documentation to learn more about working with GraphQL, or install the [Element API](plugin:element-api) plugin to start building custom JSON endpoints!

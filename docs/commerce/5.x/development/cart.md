@@ -61,7 +61,7 @@ This is generally not necessary, and can have significant performance impacts on
 
 To see what cart information you can use in your templates, take a look at the [Order](commerce5:craft\commerce\elements\Order) class reference. You can also refer to the example templates’ [`shop/cart/index.twig`](https://github.com/craftcms/commerce/blob/5.x/example-templates/dist/shop/cart/index.twig) file.
 
-Once a cart is completed and turned into an order, accessing the current cart via either method starts this process over.
+Once a cart is completed and becomes an order, accessing the current cart via either method starts this process over.
 
 ## Displaying Cart Contents
 
@@ -93,9 +93,9 @@ Craft includes a powerful [internationalization engine](guide:tutorial-i18n#plur
 
 ### Line Items
 
-A cart’s contents are represented by _line items_. Line items are typically populated from [purchasables](../system/purchasables.md) when they are added to the cart, but [custom line items](#custom-line-items) can also be created on-the-fly. <Since product="commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
+A cart’s contents are represented by _line items_. Line items are typically populated and refreshed from [purchasables](../system/purchasables.md) when they are added to the cart, but [custom line items](#custom-line-items) can also be created on-the-fly. <Since product="commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
 
-Out-of-the-box, line items  [variant](../system/products-variants.md), and have a quantity, description, notes, a calculated subtotal, options, adjustments (like tax and shipping costs), and other metadata. Most importantly, though, the line item retains a reference to its purchasable so that it can be refreshed with the latest information from your store while the customer is shopping.
+Out-of-the-box, most line items represent a [variant](../system/products-variants.md), and have a quantity, description, notes, a calculated subtotal, options, adjustments (like tax and shipping costs), and other metadata. Most importantly, though, the line item retains a reference to its purchasable so that it can be refreshed with the latest information from your store while the customer is shopping. [Donations](../system/donations.md) are also added to the cart as line items.
 
 ::: tip
 In the event a product or variant is altered or deleted after a customer checks out, enough information is memoized on each line item to reconstruct what was purchased, and how much was paid. Some of this is recorded directly on the line item (like [prices](#prices) and its [physical attributes](#physical-properties)), and some is stored as metadata (like [options](#line-item-options-and-notes) and [snapshots](../system/purchasables.md#snapshots)).
@@ -116,7 +116,9 @@ Line items are always returned as an array, even if there is only a single item 
 </ul>
 ```
 
-You can get a line item’s source [purchasable](../system/purchasables.md) by calling `item.purchasable`. Let’s take a closer look at some other data available via line items.
+You can get a line item’s source [purchasable](../system/purchasables.md) (most often a [variant](../system/products-variants.md#variants)) by calling `item.purchasable`, and the product a variant belongs to via `item.purchasable.product` or `item.purchasable.owner`.
+
+Let’s take a closer look at some other data available via line items.
 
 #### Prices
 

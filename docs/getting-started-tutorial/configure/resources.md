@@ -410,4 +410,8 @@ Return to **Entries** in the main navigation, and click **+ New entry** to creat
 <img src="../images/new-entry-empty.png" alt="Screenshot of new entry screen" />
 </BrowserShot>
 
+::: tip
+Anything missing? You can always go back to the _Post_ entry type to add, remove, or rearrange fields.
+:::
+
 Feel free to play with the content editor on your own—then check back in so we can go over a couple features you’ll need to be aware of before building out the front-end.

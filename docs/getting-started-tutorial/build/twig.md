@@ -8,19 +8,19 @@ If you’ve used Twig in other projects, that knowledge will be useful here. Cra
 
 ## Why Twig?
 
-Our goal in this section is to combine static HTML with dynamic content. Twig is a simple—yet powerful—language that allows us to translate the data we’ve defined in Craft into a blob of HTML that can then be sent back to a browser and displayed for a user.
+Our goal in this section is to intersperse static HTML with dynamic content. Twig is a simple—yet powerful—language that allows us to translate the data we’ve defined in Craft into a blob of HTML that can then be sent back to a browser and displayed for a user.
 
 The beauty of a template language is that a single template can be rendered many times with different data. Our main task will be to create a Twig template for our blog posts that demonstrates a combination of Craft and Twig concepts, as well as the benefits of reusability.
 
 ::: tip
-Any HTML document is also a valid Twig file, so if you have experience writing HTML _without_ a template language, you’re in a great position to start building with Craft.
+Any HTML document is also a valid Twig file, so if you have experience writing HTML _without_ a template language or CMS, you’re in a great position to start building with Craft.
 
 If not, check out the [Getting Started with HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Getting_started) article on _Mozilla Developer Network_.
 :::
 
 ## Your First Template
 
-In VS Code, you should have `templates/index.twig` open. Let’s clear out that file (press <kbd>Command/Control + A</kbd>, then <kbd>Backspace</kbd>, or use the **Selection** menu) and replace it with this:
+In VS Code, you should have `templates/index.twig` open. Let’s clear out that file (press <kbd>Command/Control + A</kbd>, then <kbd>Backspace</kbd>, or use the **Selection** menu to **Select All**) and replace it with this:
 
 ```twig
 Hello from {{ siteName }}!
@@ -52,7 +52,7 @@ Our simple `index.twig` file may not look much different, but once we drop some 
 
 There are only a few things you need to know up-front about Twig’s syntax. Everything that follows can be copy-and-pasted into your project, but being able to pick out important bits and pieces will allow you to start tinkering on-the-fly.
 
-<See path="/4.x/dev/twig-primer.md" description="Curious about all of Twig’s features? Check out our templating guide in the main documentation." />
+<See path="/5.x/development/twig.md" description="Curious about all of Twig’s features? Check out our templating guide in the main documentation." />
 
 Replace the contents of `templates/index.twig` with this:
 
@@ -93,7 +93,7 @@ For now, this code can serve as a quick-reference guide for Twig syntax. Read do
 
 Let’s take a closer look at some of the features in the template, above. You don’t need to memorize all this; feel free to skip to the next page if you’d prefer to learn about the concepts in-context!
 
-<See path="/4.x/dev/twig-primer.md" />
+<See path="/5.x/development/twig.md" />
 
 #### Comments
 
@@ -103,7 +103,7 @@ A Twig comment is surrounded by curly-braces and hashes:
 {# Watch out! #}
 ```
 
-Any text inside a comment is hidden when the template is rendered, meaning they’re a great place to stash notes to yourself. Most VS Code themes use a muted color for comments so that you can focus on the surrounding code.
+Any text inside a comment is discarded when the template is rendered, meaning they’re a great place to stash notes to yourself. Most VS Code themes use a muted color for comments so that you can focus on the surrounding code. You can still use HTML comments (`<!-- Like this! -->`), but they _will_ be output verbatim in the rendered HTML document.
 
 #### Output
 
@@ -115,11 +115,11 @@ Pairs of curly braces output the value of an expression:
 
 “Expressions” come in many forms, but the simplest is a _variable_. Craft provides a number of global variables (including `siteName`), and makes others available, contextually.
 
-<See path="/4.x/dev/global-variables.md" />
+<See path="/5.x/reference/twig/global-variables.md" />
 
 #### Control
 
-Control tags let you manipulate data or alter the path through your templates. In the example, we saw two uses of this:
+Control tags let you manipulate data or alter the logical path through your templates. In the example, we saw two uses of this:
 
 - `set`: Declares a new variable, which can be used elsewhere.
 - `for` / `endfor`: Repeats the enclosed template for each item in a list.
@@ -134,7 +134,7 @@ The content of our `for` loop outputs an HTML “list item” tag, interpolating
 
 …but rather than having to know how many times something needs to loop (and then write out the code for each one), we’re able to generalize the behavior.
 
-<See path="/4.x/dev/tags.md" description="Explore other tags available in Twig." />
+<See path="/5.x/reference/twig/tags.md" description="Explore other tags available in Twig." />
 
 #### Variables
 
@@ -164,7 +164,7 @@ It’s currently {{ now | time }}.
 
 Whenever this page is loaded, Craft evaluates your template and substitutes these processed values. There are dozens more filters available to you, but we won’t be able to cover them all in this tutorial.
 
-<See path="/4.x/dev/filters.md" description="View a list of filters available in Craft’s Twig environment." />
+<See path="/5.x/reference/twig/filters.md" description="View a list of filters available in Craft’s Twig environment." />
 
 ::: tip
 Twig also supports **functions**, which have a lot in common with filters. The main difference is that functions don’t always take or manipulate input; one way of looking at the relationship between functions and filters is that filters _always_ have at least one argument (the value before the `|`).

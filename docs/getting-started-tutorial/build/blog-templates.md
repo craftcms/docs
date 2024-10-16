@@ -72,7 +72,7 @@ Create `templates/blog/_entry.twig` and paste this code to it:
 The first highlighted line connects our post template with the layout template, using the `{% extends %}` tag. The second highlight defines a `{% block ... %}`, the content of which will be output in the corresponding region of `_layout.twig`.
 
 ::: tip
-When using layouts, all output must be within `block` tag pairs—but you may have as many `block` tags as you wish!
+When extending a layout, all output must be within `block` tag pairs—but you may have as many `block` tags as you wish!
 :::
 
 Now that the blog section’s template is ready, you can visit the URL for a published post:
@@ -120,7 +120,7 @@ If you were to go back into the control panel and create some more posts, you co
 
 #### Feature Image
 
-Let’s output the image we attached via [the “Feature Image” asset field](../configure/resources.md#feature-image). That field had a handle of `featureImage`, so it will be available on the `entry` variable as `entry.featureImage`, just like the title was:
+Let’s display the image we attached via [the “Feature Image” asset field](../configure/resources.md#feature-image). When we attached the assets field to the _Post_ field layout, we gave it a handle of `featureImage`—so it will be available on the `entry` variable as `entry.featureImage`, just like its title was:
 
 ```twig{4,15-19}
 {% extends '_layout' %}
@@ -170,6 +170,8 @@ If you would prefer to build the image element yourself, you can get the individ
   width="{{ featureImage.width }}"
   height="{{ featureImage.height }}" />
 ```
+
+Note the use of `featureImage.alt`! Craft automatically adds this attribute when building the tag itself—but it will be empty unless you add the **Alternative Text** field layout element to the volume’s field layout (and populate it with a description of the image).
 
 </Block>
 
@@ -241,9 +243,9 @@ If you pasted this into `templates/blog/_entry.twig` and the indentation got mes
 
 Let’s output the [post content](../configure/resources.md#post-content) stored in our Matrix field. This process starts in a familiar way:
 
-1. Load matrix blocks via the `postContent` field handle and store them in a variable;
-1. Loop over those blocks with a `{% for %}` tag;
-1. Render different content based on the blocks’ types, using an `{% if %}` tag;
+1. Load the nested entries via the `postContent` field handle and store them in a variable;
+1. Loop over those entries with a `{% for %}` tag;
+1. Render different content based on the entries’ types, using an `{% if %}` tag;
 
 After the line that declares our `topics` variable, add a new `set` tag:
 
@@ -254,7 +256,7 @@ After the line that declares our `topics` variable, add a new `set` tag:
 {% set postContent = entry.postContent.all() %}
 ```
 
-With the content loaded into a `postContent` variable, we can start outputting data for each block. Below the topics list, add a new `for` loop:
+With the content loaded into a `postContent` variable, we can start outputting data for each block. Below the topics list and feature image, add a new `for` loop:
 
 ```twig{2,4,7,12,17,22}
 <div class="post-content">
@@ -290,9 +292,9 @@ With the content loaded into a `postContent` variable, we can start outputting d
 
 Looking at the highlighted lines in this block of code…
 
-- Our `for` loop uses the `postContent` variable defined at the top of the template, and makes each block available in turn as `contentBlock`;
-- We capture the “type” of block in a variable named `blockType` so we can compare against it later;
-- The `if`, `elseif`, and `else` tags test the value of `blockType` each time through the loop and render different sections of the template;
+- Our `for` loop uses the `postContent` variable defined at the top of the template, and makes each nested entry available in turn as `contentBlock`;
+- We capture the “type” of entry in a variable named `blockType` so we can compare against it later;
+- The `if`, `elseif`, and `else` tags test the value of `blockType` each time through the loop and render different parts of the template;
 - “Image” blocks contain an asset field that can be used exactly the same way as the `featureImage` field is on the main entry;
 - An `else` tag is used to provide some debugging information for us—but it will only show up if we’ve gotten our block type handles mixed up;
 - A final `else` tag actually belongs to the main `for` loop, and allows us to output a message when there are no blocks to display;
@@ -305,11 +307,11 @@ How could we add a new _Quote_ block type?
 
 Back in the control panel:
 
-1. Visit **Settings** &rarr; **Fields** &rarr; **Post Content**;
-1. Click **New Block Type**;
-1. Name it _Quote_, and give it a handle of `quote`;
-1. Add a **Plain Text** field named _Quote_ (also with a handle of `quote`), and mark it as **Required**;
-1. Save the field;
+1. Visit <Journey path="Settings, Fields, Post Content" />;
+1. In the **Entry Types** selector, click **+ Create**;
+1. Name the new entry type “Quote”, and give it a handle of `quote`;
+1. Add our plain text field (_Text_) to its field layout, leaving the name and label as-is;
+1. Save the entry type;
 
 At this point, return to one of your blog entries’s edit screens, and add a **Quote** block to the **Post Content** matrix field. Reload that post’s page in the front-end, and you should see something like this:
 
@@ -321,9 +323,9 @@ In `templates/blog/_entry.twig`, add a new `elseif` comparison tag in the conten
   {# ... #}
 {% elseif blockType == 'quote' %}
   <div class="content-block quote">
-    <blockquote>{{ contentBlock.quote | md }}</blockquote>
+    <blockquote>{{ contentBlock.text | md }}</blockquote>
   </div>
-{% else %} {# This `else` tag is what outputs our “unsupported” message! #}
+{% else %} {# This `else` tag already exists, and is what outputs our “unsupported” message. #}
   {# ... #}
 ```
 
@@ -378,18 +380,24 @@ Create a new template at `templates/blog/index.twig`, with the following content
 {% endblock %}
 ```
 
+In your browser, navigate to `https://tutorial.ddev.site/blog`, and verify you see all the posts you created via the control panel!
+
 Notice that this template makes no reference to an `entry` variable. This is because it won’t be rendered based on an element’s URI format—Craft is just matching the request to `/blog` with a template.
 
-That doesn’t mean we can’t access our content, though! The first highlighted line uses what’s called an _element query_. Element queries are different from the automatically-injected `entry` variable: instead of containing a _specific_ entry object, they define some _criteria_ for loading one or more entries from the database.
+That doesn’t mean we can’t access our content, though! The first highlighted line uses what’s called an _element query_. Element queries are different from the automatically-injected `entry` variable: instead of containing a _specific_ entry object, they define some _parameters_ for loading one or more entries from the database.
 
 Element queries are designed to be written and read in relatively plain language. Let’s break this one down:
 
 1. `craft` is a global variable that collects a number of functions and features;
 1. `.entries()` creates a new element query with specific functionality for fetching entries;
-1. `.section()` configures the query to select only entries from the passed section(s);
+1. `.section()` configures that query to select only entries from the passed section(s);
 1. `.all()` executes the query and returns _all_ matching entries;
 
 Most element queries will have steps 1 and 4 in common, but steps 2 and 3 are specific to our need to fetch _entries_ in a particular _section_. We’ll have a chance to use some more element query features in the next step!
+
+::: tip
+Craft sorts entries by their `postDate` (newest to oldest), by default.
+:::
 
 ### Topic Pages
 
@@ -435,9 +443,9 @@ From the blog index, click through to one of your posts, then click the topic li
 
 Like the blog index, we get a list of posts that each link out to their individual pages.
 
-_Unlike_ the blog index, our topic template automatically has access to a `category` variable. This is because every topic page is backed by a category element, just like our individual post pages. It’s still up to us, though, to decide what other data should be displayed—and to fetch it with element queries.
+_Unlike_ the blog index, our topic template automatically has access to a `category` variable. This is because every topic page is backed by a category element, just like our post entries. It’s still up to us, though, to decide what other data should be displayed—and to fetch it with element queries.
 
-We’ve used the `category` variable in a new entry element query, near the top of the template:
+We’ve used the `category` variable in a new entry query, near the top of the template:
 
 ```twig
 {% set posts = craft.entries().section('blog').postCategories(category).all() %}

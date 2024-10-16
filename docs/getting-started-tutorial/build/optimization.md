@@ -51,7 +51,7 @@ Some people prefer to pass variables _explicitly_ so that they know exactly what
 } only %}
 ```
 
-The `only` at the end of the tag ensures that no other variables from the current template are leaked into the included template.
+The `only` at the end of the tag ensures that no other variables from the current template are leaked into the included template. Craft’s global variables (and our `siteInfo` global set) will still be available.
 :::
 
 ## Asset Transforms
@@ -61,10 +61,10 @@ Applying CSS to our front-end finally got the images under control… but we’r
 The asset URLs that Craft generates for the `<img>` tags via `image.getImg()` look like this:
 
 ```
-https://tutorial-two.ddev.site/uploads/images/highway-26.jpg
+https://tutorial.ddev.site/uploads/images/highway-26.jpg
 ```
 
-This points to the unmodified, original file—exactly as it was uploaded. Craft always keeps these around, but we can ask for an optimized version via [transforms](/4.x/image-transforms.md).
+This points to the unmodified, original file—exactly as it was uploaded. Craft always keeps these around, but we can ask for an optimized version via [transforms](/5.x/development/image-transforms.md).
 
 Transforms are defined directly in your templates, or in the control panel. Each transform has a _mode_, which determines what other options are required. For our blog index, the most important qualities are the final _width_ of the image (about 640px, or double that for high-resolution displays), and that important subjects aren’t cropped out.
 
@@ -87,13 +87,13 @@ Let’s add these constraints to the template:
 Refreshing the blog index, you may notice a delay before the images are displayed again—that’s to be expected, as Craft only generates a transform when it’s requested for the first time.
 :::
 
-This one change reduced our page’s total size to 310KB—or by 99%!
+According to the browser’s **Network** tab (or looking at the original and transformed files on-disk), this one change reduced our page’s total size to about 310KB—or by _99%_!
 
 ### Named Transforms
 
 Applying these settings to all pages (and remembering to synchronize any tweaks between them) can be cumbersome. Fortunately, we can centralize these definitions in the control panel, and refer to them by only a handle:
 
-1. Navigate to **Settings** &rarr; **Assets** &rarr; **Image Transforms**;
+1. Navigate to <Journey path="Settings, Assets, Image Transforms" />;
 1. Click **+ New image transform**;
 1. Provide these settings, leaving others at their defaults:
     - **Name**: Thumbnail;
@@ -103,7 +103,7 @@ Applying these settings to all pages (and remembering to synchronize any tweaks 
     - **Allow Upscaling**: Turn _off_;
 1. Click **Save**;
 
-Now we can reference this transform in our templates by its handle, rather than its specifics:
+Now we can reference this transform throughout our templates by its handle, rather than its specifics:
 
 ```twig
 <div class="thumbnail">
@@ -113,13 +113,13 @@ Now we can reference this transform in our templates by its handle, rather than 
 
 ### Focal Points
 
-On the _About_ page, we’ve cropped the **Profile Photo** image as a circle, which almost perfectly cut out the subject. Craft doesn’t know about the content of this image—or what kind of frame it will be displayed in—but we can give it some hints.
+On the _About_ page, we’ve cropped the **Profile Photo** image as a circle, which almost perfectly cut out the subject (in the lower third of the image). Craft doesn’t know about the content of our image—or what kind of frame it will be displayed in—but we can give it some hints.
 
 The first step will be to define a transform. This is a one-off treatment, so we won’t bother going through the control panel:
 
 ```twig
 <div class="photo">
-  {{ profilePhoto.getImg({
+  {{ profileImage.getImg({
     mode: 'crop',
     width: 360,
     height: 360,
@@ -129,7 +129,7 @@ The first step will be to define a transform. This is a one-off treatment, so we
 
 This brings another marked improvement to the size of our pages—from 8MB for a single image to just over 40KB… but our subject is still getting cropped out!
 
-Open the _About_ page in the control panel, then double-click the attached asset in the <Poi label="1" target="asset-slideout" id="field" /> **Profile Photo** field. In the slideout, open the metadata panel with the control in the upper-right corner, then click <Poi label="2" target="asset-slideout" id="controls" /> **Edit image** in the preview window:
+Open the _About_ page in the control panel, then double-click the attached asset in the <Poi label="1" target="asset-slideout" id="field" /> **Profile Image** field. In the slideout, open the metadata panel with the control in the upper-right corner, then click <Poi label="2" target="asset-slideout" id="controls" /> **Edit image** in the preview window:
 
 <BrowserShot
   id="asset-slideout"
@@ -137,7 +137,7 @@ Open the _About_ page in the control panel, then double-click the attached asset
   :link="false"
   :poi="{
     field: [30, 35],
-    controls: [95, 18],
+    controls: [96, 16],
   }"
   caption="Changing an asset’s focal point.">
 <img src="../images/focal-point-open.png" alt="Screenshot of the image editor in the Craft control panel" />
@@ -150,8 +150,8 @@ In the image editor, click <Poi label="1" target="focal-point" id="button" /> **
   url="https://tutorial-two.ddev.site/admin/admin/entries/about/46-about"
   :link="false"
   :poi="{
-    button: [28, 27],
-    handle: [83, 55],
+    button: [27, 27],
+    handle: [81, 66],
   }"
   caption="Changing an asset’s focal point.">
 <img src="../images/focal-point-set.png" alt="Screenshot of the image editor in the Craft control panel" />
@@ -163,13 +163,13 @@ Click **Save** to confirm the new focal point, and return to the _About_ page in
 <img src="../images/focal-point-crop.png" alt="Screenshot of avatar tastefully cropping subject" />
 </BrowserShot>
 
-## Eager Loading
+## Eager-Loading
 
 Our blog’s indexes show a list of posts, each of which includes an image. We perform one query for the list of posts, then _each time we output a post_, we perform _another_ query to get the asset attached via its **Feature Image** field.
 
 This is what’s called an “N+1” problem: the number of queries required to load the content is proportional to the amount of content—and that could be _a lot_. If we had 50 posts, it would take 51 queries to display the blog feed; if we also wanted to display topics for each post in the feed, it would be _101_ queries!
 
-Craft addresses this with a feature called _eager loading_, which allows us to declare in the main query what nested elements we are apt to need, for every result:
+Craft addresses this with a feature called _eager loading_, which allows us to declare in the main query (or the secondary queries, as we’ll see in a moment) what nested elements we are apt to need, for each result:
 
 ```twig{3-5}
 {% set posts = craft.entries()
@@ -185,6 +185,18 @@ Without any changes to our templates, Craft is able to fetch the posts, then gat
 ::: tip
 Only relational fields (**Assets**, **Entries**, **Categories**, and **Tags**) need to be eager-loaded—and not every scenario demands it! The best rule of thumb is to look out for nested `for` loops, or any time you use a relational field _inside_ a `for` loop.
 :::
+
+### Lazy Eager-Loading
+
+If you aren’t sure what data you need, ahead of time, you can defer eager-loading until those related or nested elements are actually needed. Instead of defining the eager-load requirements in both the blog index _and_ category templates, we can update the shared `blog/_feed.twig` template:
+
+```twig{2}
+{% for post in posts %}
+  {% set image = post.featureImage.eagerly().one() %}
+
+  {# ... #}
+{% endfor %}
+```
 
 ### Transforms
 
@@ -217,3 +229,18 @@ When we defined image transforms for posts’ featured images on the blog index,
 :::
 
 While eager-loading can provide _some_ performance benefits here, maintaining transform options between queries and usage can become difficult. This is a great reason to consolidate transforms in the control panel!
+
+The equivalent solution for lazily eager-loaded elements would look like this (again in `templates/blog/_feed.twig`):
+
+```twig{3-5}
+{% for post in posts %}
+  {% set image = post.featureImage
+    .withTransforms([
+      { mode: 'fit', width: 1200 },
+    ])
+    .eagerly()
+    .one() %}
+
+  {# ... #}
+{% endfor %}
+```

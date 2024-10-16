@@ -4,59 +4,32 @@ sidebarDepth: 2
 
 # Extra Templates
 
-Now that we’ve scaffolded our blog templates, we can turn to some supporting features.
+Now that we’ve scaffolded our core blog templates, we can turn to some ancillary features. If you have your own ideas, or want to continue tinkering with the _Blog_ section, go for it! This section is mostly an opportunity to practice using tools you’ve already seen.
 
 ## About Page
 
-Our original content model included “About” page, which we’ll set up as another section.
+Our original content plan included an “About” page, which we’ll set up as another section. Back in the control panel:
 
-### Fields
-
-Let’s by creating some fields for the page. We need a place to put a paragraph or two of text, and way to upload a profile photo.
-
-#### Bio
-
-1. In the control panel, navigate to **Settings** &rarr; **Fields**;
-1. Click **+ New group** in the sidebar, and name it _About_;
-1. Click **+ New field** in the upper-right corner;
-1. Provide these settings:
-    - **Name**: Bio
-    - **Handle**: `bio`
-    - **Field Type**: **Plain Text**
-    - **Allow line breaks**: **Enabled**
-    - **Initial rows**: `8`
-1. Click **Save** or press <kbd>Ctrl/Command + S</kbd>;
-
-#### Profile Photo
-
-Picking up where you left off (in the _About_ field group), follow these steps:
-
-1. Click **+ New field** in the upper-right corner;
-1. Provide these settings:
-    - **Name**: Profile Photo
-    - **Handle**: `profilePhoto`
-    - **Field Type**: **Assets**
-    - **Sources**: **Images** only
-    - **Max relations**: `1`
-    - **View mode**: **Large Thumbnails**
-1. Click **Save** or press <kbd>Ctrl/Command + S</kbd>;
-
-### Single Section
-
-Continuing in the control panel…
-
-1. Navigate to **Settings** &rarr; **Sections**;
+1. Navigate to <Journey path="Settings, Sections" />;
 1. Click **+ New section**;
 1. Provide these settings:
-    - **Name**: _About_
+    - **Name**: “About”
     - **Handle**: `about`
     - **Section Type**: **Single**
     - **URI**: `about`
     - **Template**: `_singles/about`
-1. Click **Save and edit entry types** or press <kbd>Ctrl/Command + S</kbd>;
-1. Select the auto-generated entry type (it should also be named _About_);
-1. Drag fields from the **About** group into the field layout in whatever order you prefer;
-1. Click **Save** press <kbd>Ctrl/Command + S</kbd>;
+1. In the **Entry Types** selector, click **+ Create**, and use these settings:
+    - **Name**: “About”
+    - **Handle**: `about`
+    - **Show the Title field**, **Show the Slug field**, and **Show the Status field**: Off
+1. Add the base _Image_ field to the _Content_ tab in the field layout designer, and apply these overrides:
+    - **Label**: “Profile Image”
+    - **Handle**: `profileImage`
+    - Optional: Enable the **Use for element thumbnails** in the field layout element’s action menu <Icon kind="ellipses" />;
+1. Add the base _Text_ field to the _Content_ tab in the field layout designer, with these overrides:
+    - **Label**: “Bio”
+    - **Handle**: `bio`
+1. **Save** the entry type and section;
 
 With that, our new page is configured! Let’s head over to **Entries** &rarr; **Singles**, then click **About** to add some content.
 
@@ -67,15 +40,15 @@ Create `templates/_singles/about.twig` (the **Template** path we used when setti
 ```twig
 {% extends '_layout' %}
 
-{% set profilePhoto = entry.profilePhoto.one() %}
+{% set profileImage = entry.profileImage.one() %}
 
 {% block content %}
   <h1>{{ entry.title }}</h1>
 
   <div class="about">
-    {% if profilePhoto %}
+    {% if profileImage %}
       <div class="photo">
-        {{ profilePhoto.getImg() }}
+        {{ profileImage.getImg() }}
       </div>
     {% endif %}
 
@@ -86,7 +59,7 @@ Create `templates/_singles/about.twig` (the **Template** path we used when setti
 {% endblock %}
 ```
 
-This template builds upon features we’ve already seen in other places—layouts, element queries, `if` tags, and filters. We’ve interspersed a bit of HTML so that we can come back and apply CSS, later.
+This template builds upon features we’ve already seen in other places—layouts, element queries, `if` tags, and filters. We’ve interspersed a few `class` attributes in the HTML so that we can come back and target it with CSS, later.
 
 Navigate to `/about` (the _About_ section’s URI) in the front-end—you should see our page’s `title` and the profile image we uploaded:
 
@@ -147,6 +120,9 @@ The new `<header>` region is a great place to put a globally-available menu. Jus
 <nav>
   <ul>
     <li>
+      <a href="{{ url('/') }}">Home</a>
+    </li>
+    <li>
       <a href="{{ url('blog') }}">Blog</a>
     </li>
     <li>
@@ -170,25 +146,17 @@ The updates above included a couple of items in the footer, but it’s worth tak
 
 Global sets are Craft’s way of storing a data that should be accessible _everywhere_ in our templates. They function almost exactly like the **Single** section we defined for the _About_ page, except that global sets don’t get their own URLs.
 
-In the control panel, navigate to **Settings** &rarr; **Fields**, then follow these steps:
-
-1. Click **+ New group** and name it _Global_;
-1. Click **+ New field**;
-1. Provide these field settings:
-    - **Name**: _Description_
-    - **Handle**: `description`
-    - **Field type**: **Plain Text**
-    - **Allow line breaks**: Enabled
-1. Click **Save** or press <kbd>Ctrl/Command + S</kbd>;
-
-With the field created, navigate to **Settings** &rarr; **Global Sets**:
+In the control panel, navigate to <Journey path="Settings, Globals" />, then follow these steps:
 
 1. Click **+ New global set**;
 1. Name the set _Site Info_ and use `siteInfo` for the handle;
-1. Click **+ New Tab** in the field layout designer, and name it _Settings_, _Content_, or something else generic (when there’s only a single tab, Craft will hide it—but it can’t be empty);
+1. Click **+ New Tab** in the field layout designer, and name it _Settings_, _Content_, or something else generic (when there’s only a single tab, Craft will hide the UI for it—but its name can’t be empty);
+1. Drag in the base _Text_ field, and override these settings:
+    - **Label**: “Description”
+    - **Handle**: `description`
 1. Click **Save** or press <kbd>Ctrl/Command + S</kbd>;
 
-A new **Globals** item should appear in the main navigation. Click that, and add a description:
+A new **Globals** item should appear in the main navigation. Click that, populate the **Description** field, and save it:
 
 <BrowserShot url="https://tutorial.ddev.site/admin/globals/siteInfo" :link="false">
 <img src="../images/globals.png" alt="Screenshot of the Craft control panel showing a global set edit screen" />
@@ -205,5 +173,7 @@ Back in `templates/_layout.twig`, output that blurb in the footer:
   <div class="colophon">Built with <a href="https://craftcms.com/" target="_blank">Craft CMS</a></div>
 </footer>
 ```
+
+Craft makes the `siteInfo` variable available on every page and in every template, so its fields are always within reach.
 
 Let’s put HTML aside for a moment and get some styles applied!
