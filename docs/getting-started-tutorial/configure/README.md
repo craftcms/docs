@@ -98,12 +98,12 @@ There are loads more field types available in the official [Plugin Store](https:
 
 ## Modeling a Blog Post
 
-As our first exercise in content modeling, let’s consider what comprises a blog post:
+As our first exercise in content modeling, let’s consider what features a blog post might have:
 
 - Title/Headline
 - Author
 - Post Date
-- Feature/Summary Image
+- Feature Image
 - Summary/Description
 - Categories
 - Content/Body
@@ -116,8 +116,8 @@ From the element types and fields we’ve learned about so far, we might map the
     - **Authors**;
 - Feature images will be uploaded as **assets**;
 - Summary text can live in a **Plain Text** field;
-- Categories can be handled with Craft’s element type of the same name (we’ll learn about this as we set it up—categories are very similar to entries);
-- Post content will be managed as nested, repeatable entries with a **Matrix** field;
+- Categories can be handled with Craft’s element type of the same name;
+- Post content will be managed as repeatable “blocks,” by way of entries nested inside a **Matrix** field;
 
 This process may seem arcane at first—once you’ve had a chance to see the tools in action, connecting them to your project goals will feel less mechanical and more creative.
 
