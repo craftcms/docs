@@ -53,7 +53,7 @@ Each global set has its own field layout, and can use any of your custom fields.
 
 ### Categories
 
-Categories are mostly obsolete in Craft (their functionality can be fully replicated with entries, thanks to Craft’s powerful relations engine), but exist in a separate space for semantic reasons. They provide a means of organizing other elements into user-defined, hierarchical taxonomies—while acting as content containers themselves!
+Categories are mostly obsolete in Craft, but provide a semantic alternative to entries. They are typically used to organize other elements into user-defined, hierarchical taxonomies—while also acting as content containers, as elements themselves!
 
 **Example**: Corporate structure, species, genres, locations.
 
