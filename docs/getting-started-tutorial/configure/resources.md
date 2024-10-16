@@ -203,7 +203,7 @@ On the field layout element you just dragged into the _Content_ tab, open the ac
 In the slideout that appears, update the **Label** to “Summary” and the **Handle** to `summary`, then click **Apply** to save the overrides; you should see the new label and handle reflected in the field layout designer, as well as a pencil icon indicating that field instance has customizations.
 
 ::: warning
-If you don’t see the pencil icon, make sure the changes were made in the **Settings** slideout, not the **Edit field** slideout.
+If you don’t see the pencil icon, make sure the changes were made in the **Settings** slideout, not the **Edit field** slideout—the former controls instance-level settings, and the latter re-opens the base field’s configuration.
 :::
 
 ### Feature Image
