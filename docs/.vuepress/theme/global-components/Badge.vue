@@ -62,7 +62,7 @@ export default {
     border-width: 1px;
     border-color: var(--border-color);
     color: var(--sidebar-link-color);
-    padding: 4px calc(5px - 0.1em) 4px 5px;
+    padding: 4px calc(4px - 0.1em) 4px 5px;
   }
 
   &.edition {
@@ -70,7 +70,7 @@ export default {
     border-width: 1px;
     border-color: var(--text-color);
     color: var(--text-color);
-    padding: 0.3em 0.4em 0.1em;
+    padding: 0.35em 0.3em 0.2em 0.4em;
   }
 
   & + & {
