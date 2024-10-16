@@ -5,7 +5,7 @@ Craft can also act as a “headless” CMS. This style of website or application
 Craft’s GraphQL API will feel familiar, now that you have experience with loading content in a Twig environment!
 
 ::: warning
-Building a front end this way is heavily reliant on experience with Javascript and other web technologies—there are also a _ton_ of options when it comes to frameworks and approaches! This guide will only explore GraphQL basics that are generally applicable.
+Building a front end this way is heavily reliant on experience with JavaScript and other web technologies—there are also a _ton_ of options when it comes to frameworks and approaches! This guide will only explore GraphQL basics that are generally applicable.
 :::
 
 ## Overview
