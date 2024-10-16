@@ -33,6 +33,7 @@ Assets are organized into _volumes_, which sit on top of a _filesystem_. Filesys
         fsBaseUrl: [60, 48, 'G'],
         fsBasePath: [60, 64, 'H'],
         volumeSubpath: [30, 56, 'I'],
+        transformSubpath: [33, 84, 'J'],
     }"
     :link="false"
     caption="Creating an asset volume and filesystem.">
@@ -46,7 +47,7 @@ We’ll create a local asset volume within the web root, so our images are acces
 1. Enter “Images” in the **Name** field <Poi label="A" target="newVolume" id="volumeName" />;
 1. Click the **Asset Filesystem** menu <Poi label="C" target="newVolume" id="volumeFsMenu" /> and select **Create a new filesystem…**;
 
-    Within the slideout that opens, provide these settings:
+    Within the filesystem creation slideout that opens, provide these settings:
 
     - **Name** <Poi label="D" target="newVolume" id="fsName" />: “Hard Disk”
     - **Files in this filesystem have public URLs** <Poi label="F" target="newVolume" id="fsHasPublicUrls" />: On/Enabled
@@ -59,7 +60,7 @@ We’ll create a local asset volume within the web root, so our images are acces
     We chose a generic **Base URL** and **Base Path** here so that the filesystem can be reused later by multiple volumes—say, one for “Documents” that you want to keep separate from photographic media. The **Subpath** setting on the volume (see below) will ensure our images live within a specific folder of the filesystem!
     :::
 
-1. Set the volume’s **Subpath** <Poi label="I" target="newVolume" id="volumeSubpath" /> to `images`;
+1. Set the volume’s **Subpath** <Poi label="I" target="newVolume" id="volumeSubpath" /> and **Transform subpath** <Poi label="J" target="newVolume" id="transformSubpath" /> both to `images`;
 1. Save the Asset Volume.
 
 Switch back to your code editor, and open `config/general.php`. Near the end of the file, you’ll see the `@webroot` alias we just used when configuring the filesystem. This ensures we have a reliable means of referring to the `web/` directory of our project, from resources we configure elsewhere; we still need to define the `@uploads` alias, though!
