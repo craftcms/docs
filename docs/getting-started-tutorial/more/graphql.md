@@ -1,39 +1,20 @@
 # Headless Mode + GraphQL
 
-You can also use Craft as a headless CMS, meaning your web server handles content management, but an outside application provides the public-facing front end. In this model, server-side Twig templates are not used—instead, you’ll use the built-in GraphQL API to fetch content and render it with whatever client-side view library you or your team is familiar with.
+Craft can also act as a “headless” CMS. This style of website or application is typically split into two halves: a back-end, which is responsible for managing content and exposing a developer-friendly API; and a decoupled front-end, that requests data over HTTP from the back-end and displays it to users. Instead of rendering Twig templates on the server, you’ll use the built-in GraphQL API to fetch content and render it with whatever client-side view library you or your team is familiar with.
 
-GraphQL support is limited to the Pro edition of Craft. If you’ve already modeled content and used it in Twig templates, the GraphQL API should feel familiar.
+Craft’s GraphQL API will feel familiar, now that you have experience with loading content in a Twig environment!
 
 ::: warning
-Building a front end this way requires more development experience than we’ve covered in this tutorial. We’ll only touch on GraphQL basics and recommend more resources.
+Building a front end this way is heavily reliant on experience with Javascript and other web technologies—there are also a _ton_ of options when it comes to frameworks and approaches! This guide will only explore GraphQL basics that are generally applicable.
 :::
 
 ## Overview
 
-GraphQL is a popular and expressive query language that works well with Craft’s flexible content modeling tools. In most cases, fetching content with GraphQL is analogous to using element queries in Twig—but instead of returning native element objects, the structure and substance of JSON output from the GraphQL is determined by the _client_ rather than the _server_.
+GraphQL is a popular and expressive query language that works well with Craft’s flexible content modeling tools. In most cases, fetching content with GraphQL is analogous to using element queries in Twig—but instead of returning native element objects, the structure and substance of JSON output from GraphQL is determined by the _client_ rather than the _server_. Craft would ordinarily return _all_ native and custom field data for an element, but GraphQL requires that you explicitly include each property.
 
 ## Configure GraphQL
 
-The GraphQL API requires Craft Pro. You can start a Pro trial locally and use it however long you need to evaluate Craft—payment is only required when you start using Craft Pro on a public-facing domain. It’s safe to downgrade any time, if you decide the Solo edition is enough for your needs!
-
-<BrowserShot
-  url="https://tutorial.ddev.site/admin/plugin-store/upgrade-craft"
-  :link="false"
-  :poi="{
-    soloBadge: [64, 95],
-    tryButton: [89, 72],
-  }"
-  caption="Upgrading from Solo to Pro.">
-<img src="../images/upgrade-pro.png" alt="Screenshot of plugin store upgrading to Craft Pro trial" />
-</BrowserShot>
-
-To upgrade your installation to Craft Pro:
-
-1. In the control panel, locate the **Solo** badge at the bottom of any screen and click **Upgrade to Craft Pro**;
-1. Choose **Try for free** within the <badge type="edition" vertical="middle">Pro</badge> panel of the **Upgrade Craft CMS** page;
-1. Refresh the page, or go back to the **Dashboard**;
-
-Once upgraded, a new **GraphQL** item will appear in the main navigation menu. Let’s open the GraphiQL explorer to browse the auto-generated schema and documentation, by clicking **GraphQL**, then **GraphiQL**.
+Let’s open the GraphiQL explorer to browse the auto-generated schema and documentation, by clicking **GraphQL**, then **GraphiQL**.
 
 <BrowserShot url="https://tutorial.ddev.site/admin/graphiql" :link="false" caption="The GraphiQL explorer.">
 <img src="../images/graphiql.png" alt="Screenshot of GraphiQL" />
@@ -55,7 +36,7 @@ You’ll see `pong` in the response pane, signaling that everything’s ready to
 <img src="../images/graphiql-ping.png" alt="Screenshot of GraphiQL with simple query and response" />
 </BrowserShot>
 
-By default, the Craft CMS GraphiQL interface will use the full “schema” without any restrictions—in other words, it has access to _all content_ through the GraphQL API, including mutations.
+By default, the Craft CMS GraphiQL interface will use the full “schema” without any restrictions—in other words, it has access to _all content_ through the GraphQL API, including mutations. You can switch schemas with the menu at the top of the screen.
 
 To use GraphQL *externally* (without a privileged user session), you’ll need to do two things:
 
@@ -64,7 +45,7 @@ To use GraphQL *externally* (without a privileged user session), you’ll need t
 
 ## Optional: Enable Headless Mode
 
-If you want to query Craft CMS for content but handle your own routing, you can enable <config5:headlessMode>. This will optimize the installation to hide template settings and route management and return all front end responses as JSON.
+If you want to query Craft for content but handle your own routing, you can enable <config5:headlessMode>. This optimizes the installation and UI, hiding template settings (like how we connected _Blog_ section entries to `templates/blog/_entry.twig`), disabling all routes except for the control panel, and returning JSON for all front-end requests.
 
 To enable headless mode, add this to `config/general.php`:
 
@@ -134,9 +115,7 @@ The blog post detail template displays an entire blog post with its full content
   - `url`
 - `siteInfo.description`, processed by Markdown
 
-With the Twig setup, the web server provides its URL to Craft CMS, which uses its routing logic to fetch the entry and make it available as `entry` in the template.
-
-We don’t have routing logic running GraphQL queries, so we’ll query on the known slug `my-trip-to-bend` for this example. Grab any slug from one of your test entries.
+When Craft is in charge of routing, it matches the requested URL against existing entries, then loads and exposes it as `entry` in the template. We don’t have that routing mechanism in the GraphiQL IDE, so we’re going to specify the known slug `my-trip-to-bend` for this example.
 
 We also used `postDate` in two different formats, so we’re using the [GraphQL alias](https://graphql.org/learn/queries/#aliases) `postDateAlt` to return a second format for parity.
 
