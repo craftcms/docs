@@ -16,7 +16,7 @@ cd tutorial
 
 ## Setup
 
-Then run the following commands to configure a new DDEV project there:
+Run the following commands to configure a new DDEV project in that folder:
 
 1. Create DDEV configuration files:
 
@@ -27,16 +27,10 @@ Then run the following commands to configure a new DDEV project there:
 2. Scaffold the project from the official starter project:
 
     ```sh
-    ddev composer create -y --no-scripts craftcms/craft
+    ddev composer create -y "craftcms/craft"
     ```
 
-3. Run the Craft setup wizard
-
-    ```sh
-    ddev craft install
-    ```
-
-    Answer the prompts, leaving `Site URL` set to the default value (`https://tutorial.ddev.site`)—unless you chose something other than `tutorial` when creating your [project folder](#project-folder).
+    The setup wizard will start automatically. Answer the prompts, leaving `Site URL` set to the default value (`https://tutorial.ddev.site`)—unless you chose something other than `tutorial` when creating your [project folder](#project-folder).
 
     ::: tip
     Remember the username and password you choose for your user account! We’ll need those in a moment.

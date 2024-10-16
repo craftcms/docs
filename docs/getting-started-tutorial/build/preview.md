@@ -6,4 +6,4 @@ Now that we have a full suite of templates (and enough CSS to make sense of our 
 <img src="../images/live-preview.png" alt="Screenshot of control panel editing a post with live preview: content on the left and a front end preview on the right" />
 </BrowserShot>
 
-As you make edits in the content pane, Craft auto-saves the changes and refreshes the front-end preview. You can save your changes at any time, knowing that what you see is exactly what will be published!
+As you make edits in the content pane, Craft auto-saves the changes to a provisional draft and refreshes the front-end preview. You can apply your changes at any time, knowing that what you see is exactly what will be published!

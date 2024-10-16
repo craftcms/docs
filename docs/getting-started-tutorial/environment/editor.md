@@ -1,6 +1,6 @@
 # Choose a Code Editor
 
-The files Craft installs on your computer are all stored in plain text.
+The files we’re about to install on your computer are all stored in plain text.
 
 One benefit of plain text files (as opposed to, say, an application or “binary”) is their portability. They can be easily downloaded, stored, edited, and version-controlled—and applications to help with these tasks are widely available.
 
