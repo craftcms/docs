@@ -16,7 +16,7 @@ cd tutorial
 
 ## Setup
 
-Then run the following commands to configure a new DDEV project there:
+Run the following commands to configure a new DDEV project in that folder:
 
 1. Create DDEV configuration files:
 

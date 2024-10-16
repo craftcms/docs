@@ -22,9 +22,10 @@ Setting up DDEV happens in two main steps, each of which includes some platform-
 That’s it! You now have everything you need to start building a Craft project—except Craft.
 
 ::: tip
-Before moving on, make sure you’re running DDEV 1.21.4 or later. You can check which version you’re currently running with the following command:
+Before moving on, make sure you’re running DDEV 1.23.4 or later. You can check which version you’re currently running with the following command:
 
 ```sh
 ddev -v
+# -> ddev version v1.23.4
 ```
 :::

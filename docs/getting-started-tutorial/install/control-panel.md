@@ -34,6 +34,8 @@ ddev craft users/set-password me@domain.com
 
 ## Dashboard
 
+Upon signing in, you will be sent to your **Dashboard**, a space you can customize with <Poi label="1" id="widgets" target="dashboard" /> widgets.
+
 <BrowserShot
     url="https://tutorial.ddev.site/admin/dashboard"
     id="dashboard"
@@ -48,7 +50,7 @@ ddev craft users/set-password me@domain.com
 <img src="../images/dashboard.png" alt="Screenshot of the Craft CMS control panel Dashboard" />
 </BrowserShot>
 
-Upon signing in, you will be sent to your **Dashboard**, a space you can customize with <Poi label="1" id="widgets" target="dashboard" /> widgets. Craft adds four widgets by default:
+Craft adds four widgets by default:
 
 - **Recent Entries**: Empty, as we haven’t created any content yet.
 - **Craft Support**: Find help in the community, or get official support.
