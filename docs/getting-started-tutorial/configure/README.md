@@ -2,7 +2,7 @@
 
 Now that we have a working Craft installation, it’s time to explore some of its powerful content modeling features.
 
-In this section, we will:
+In the next few sections, we will:
 
 1. Review Craft’s native content types;
 1. Create a space to author blog posts and add custom fields;
@@ -50,6 +50,12 @@ In situations where you need to manage some information that isn’t associated 
 Each global set has its own field layout, and can use any of your custom fields. Globals are always within reach in the control panel, under a main navigation item.
 
 **Example**: Navigation, sidebars, footer or header content, or non-critical “settings” you want controlled by a user (like an analytics ID).
+
+### Categories
+
+Categories are mostly obsolete in Craft (their functionality can be fully replicated with entries, thanks to Craft’s powerful relations engine), but exist in a separate space for semantic reasons. They provide a means of organizing other elements into user-defined, hierarchical taxonomies—while acting as content containers themselves!
+
+**Example**: Corporate structure, species, genres, locations.
 
 ### Assets
 
