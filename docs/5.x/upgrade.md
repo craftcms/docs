@@ -334,6 +334,54 @@ The reusability of entry types means that some GraphQL queries have changed.
     }
     ```
 
+### Field Types
+
+#### URL &rarr; Link <Since ver="5.3.0" feature="Link fields" />
+
+URL fields will be converted to [Link](reference/field-types/link.md) fields during the upgrade. Your templates _do not_ require any updates, but projects that use custom field values in PHP may need to update type hints or use a specific member of the new <craft5:craft\fields\data\LinkData> object:
+
+::: code
+```php Old
+use craft\base\Element;
+
+class MyHelper
+{
+    public static function getUrl(Element $element, string $fieldHandle): string
+    {
+        return $element->$fieldHandle;
+    }
+}
+```
+```php{6} New (Types)
+use craft\base\Element;
+use craft\fields\data\LinkData;
+
+class MyHelper
+{
+    public static function getUrl(Element $element, string $fieldHandle): LinkData
+    {
+        // The return type is now an object instead of a string!
+        return $element->$fieldHandle;
+    }
+}
+```
+```php{9} New (Member)
+use craft\base\Element;
+use craft\fields\data\LinkData;
+
+class MyHelper
+{
+    public static function getUrl(Element $element, string $fieldHandle): string
+    {
+        // The signature can stay the same if you return a specific property:
+        return $element->$fieldHandle->url;
+    }
+}
+```
+:::
+
+The new field type supports linking to elements, in addition to text-based URLs—[check out its options](reference/field-types/link.md#settings) to see if it can help simplify some of your authoring interfaces!
+
 ## Elements & Content
 
 Craft 5 has an entirely new content storage architecture that underpins many other features.
@@ -349,11 +397,13 @@ Content is stored as a JSON blob, and is dynamically indexed by the database in 
 When using custom fields in [advanced `where()` conditions](development/element-queries.md#advanced-element-queries), you no longer need to manually assemble a database column prefix/suffix. Instead, Craft can generate the appropriate expression to locate values in the JSON content column:
 
 ::: code
-```twig{10} Twig
+```twig{12} Twig
 {# Locate the field layout element that would save to the desired column: #}
 {% set entryType = craft.app.entries.getEntryTypeByHandle('post') %}
 {% set fieldLayout = entryType.getFieldLayout() %}
 {% set sourceField = fieldLayout.getFieldByHandle('sourceMedia') %}
+
+{# (Craft 5.2 introduced the `entryType('post')` shortcut function!) #}
 
 {% set entriesFromPhysicalMedia = craft.entries()
   .section('news')
@@ -432,6 +482,8 @@ Queries for nested entries will be largely the same—equivalent methods have be
 Values passed to the `type()` method of [entry queries](./reference/element-types/entries.md#querying-entries) may require updates, as migrated entry types _can_ receive new handles. For example, a Matrix field that contained a block type with the handle `gallery` might conflict with a preexisting entry type belonging to a section; in that event, the new entry type for that block would get the handle `gallery1` (or potentially `gallery2`, `gallery3`, and so on, if multiple similar Matrix fields are being migrated).
 
 Visit **Settings** &rarr; **Entry Types** to check if any handles appear to have collided in this way, then review and update templates as necessary.
+
+_Matrix block IDs were not stable in Craft 4, and will change as they are converted to entry types. If you maintain code that loads Matrix block definitions by hard-coded IDs, it will no longer work in Craft 5._
 :::
 
 ### Eager-Loading
