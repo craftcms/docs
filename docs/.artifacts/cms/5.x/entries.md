@@ -146,6 +146,8 @@ Performs any post-population processing on elements.
 
 Narrows the query results based on whether the entries’ owners are drafts.
 
+
+
 Possible values include:
 
 | Value | Fetches entries…
@@ -156,9 +158,13 @@ Possible values include:
 
 
 
+
+
 #### `allowOwnerRevisions`
 
 Narrows the query results based on whether the entries’ owners are revisions.
+
+
 
 Possible values include:
 
@@ -166,6 +172,8 @@ Possible values include:
 | - | -
 | `true` | which can belong to a revision.
 | `false` | which cannot belong to a revision.
+
+
 
 
 
@@ -799,6 +807,8 @@ $entries = \craft\elements\Entry::find()
 
 Narrows the query results based on the field the entries are contained by.
 
+
+
 Possible values include:
 
 | Value | Fetches entries…
@@ -829,6 +839,8 @@ $entries = \craft\elements\Entry::find()
 #### `fieldId`
 
 Narrows the query results based on the field the entries are contained by, per the fields’ IDs.
+
+
 
 Possible values include:
 
@@ -1244,6 +1256,8 @@ Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given e
 
 
 
+
+
 ::: code
 ```twig
 {# Fetch entries created for this entry #}
@@ -1264,6 +1278,8 @@ $entries = \craft\elements\Entry::find()
 #### `ownerId`
 
 Narrows the query results based on the owner element of the entries, per the owners’ IDs.
+
+
 
 Possible values include:
 
@@ -1488,6 +1504,8 @@ Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters base
 
 
 
+
+
 ::: code
 ```twig
 {# Fetch entries created for this entry #}
@@ -1508,6 +1526,8 @@ $entries = \craft\elements\Entry::find()
 #### `primaryOwnerId`
 
 Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
+
+
 
 Possible values include:
 
