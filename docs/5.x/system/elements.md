@@ -176,7 +176,7 @@ You can also render lists of elements by calling the `render()` method on an [el
 
 ```twig
 {# _partials/entry/ingredient.twig #}
-{% if entry.field and entry.field.handle == '' %}
+{% if entry.field and entry.field.handle == 'nutritionHighlights' %}
   {{ entry.typicalCalories }}
 {% endif %}
 ```
