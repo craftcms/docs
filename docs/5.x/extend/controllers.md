@@ -255,6 +255,10 @@ public function actionFoo(): Response
 
 <craft5:craft\web\Controller::renderTemplate()> calls <craft5:craft\web\View::renderPageTemplate()> internally, which ensures all registered assets are added to the rendered HTML—then it will set the `Content-Type` header on the response, based template’s extension, or `text/html` when a MIME type can’t be determined.
 
+::: tip
+Plugins automatically get a [template root](template-roots.md) that exposes templates in their `templates/` directory, but modules must explicitly register a template root.
+:::
+
 #### Registering Assets
 
 To register an asset for inclusion in a rendered page, call one of the <craft5:craft\web\View> methods:

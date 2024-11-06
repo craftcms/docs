@@ -2,9 +2,9 @@
 
 The control panel is built using Twig templates, so extending it with new pages should feel familiar if you’ve worked with Twig on the front end.
 
-Plugins can define templates within the `templates/` folder within their base source folder. Templates within there can be referenced using the plugin’s handle as the template path prefix.
+Plugins are automatically given a [template root](template-roots.md) that exposes files in their `templates/` folder. You can `include` or render these templates by prefixing their path with the plugin’s handle.
 
-For example if a plugin’s handle is `foo` and it has a `templates/bar.twig` template, that template could be accessed by going to `/admin/foo/bar`, or from Twig by including/extending `foo/bar` (or `foo/bar.twig`).
+For example, if a plugin’s handle is `foo` and it had a template at `templates/bar.twig`, you could access it by navigating to `/admin/foo/bar` in your browser (just like the front-end), or from another Twig context (or [controller action](controllers.md#rendering-templates)) as `foo/bar` (or `foo/bar.twig`).
 
 Modules can have templates too, but they will need to manually define a [template root](template-roots.md) before they are accessible.
 
