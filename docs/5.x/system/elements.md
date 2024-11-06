@@ -21,7 +21,7 @@ related:
 
 # Elements
 
-An _element_ is the most basic unit of content in Craft. Elements provide smart management, routing, and querying interfaces for users and developers. Each [type](#element-types) of element has some unique capabilities, but they’re all built on top of a set of [common features](#common-features).
+An _element_ is the most basic unit of [content](#content) in Craft. Elements provide smart management, routing, and querying interfaces for users and developers. Each [type](#element-types) of element has some unique capabilities, but they’re all built on top of a set of [common features](#common-features).
 
 ## Element Types
 
@@ -42,7 +42,7 @@ Choosing the appropriate element type for your content model is essential—but 
 Some features are available to all (or most) element types:
 
 - Control panel interfaces, including forms, [indexes](#indexes), [slide-outs](control-panel.md#slideouts), and [chips and cards](#chips-cards);
-- [Custom fields](fields.md) and field layouts with advanced condition rules for storing content;
+- [Custom fields](fields.md) and field layouts with advanced condition rules for storing [content](#content);
 - Slugs, URIs, URLs, and automatic [routing](routing.md);
 - Localization via [sites](sites.md);
 - Sophisticated [permissions](user-management.md#permissions);
@@ -52,6 +52,14 @@ Some features are available to all (or most) element types:
 - Statuses for managing visibility of content;
 
 Other features are specific to a type—like Assets’ tie to files, or Entries’ nesting capability.
+
+## Content
+
+In a fresh installation, element types are distinguished only by a handful of native features. The identity and utility of an element is often defined by the [custom fields](fields.md) attached to it via a [field layout](fields.md#field-layouts): elements and their custom field values are collectively referred to as _content_.
+
+Craft is adamantly agnostic about your content model, and comes with no predefined notion of what a “page” or “post” should be. Instead, it treats all your content as _data_, and provides the means to use it how you see fit—whether that’s as HTML accessible via public URLs, a private database, GraphQL for a decoupled or statically-generated front-end, or even a CSV to populate a printed document.
+
+Content can be a great deal more than text, too! Craft has a number of built-in [field types](../reference/field-types/README.md) that provide a highly-customizable authoring and developer experience.
 
 ## Indexes
 
@@ -91,7 +99,7 @@ Similarly, they can customize which columns appear in the table (and how the res
 <img src="../images/element-index-view-options.png" alt="Customizing element index columns and sorting">
 </BrowserShot>
 
-If every field layout that would be used by an element in a source defines the same label override for a field, that label will appear in the column’s header. When a consensus cannot be reached, the original field’s label is used. This most commonly applies when a source is limited to a single entry type, asset volume, category group, or other property that also defines field layouts.
+If every field layout that would be used by an element in a source defines the same label override for a field, that label will appear in the column’s header. When a consensus cannot be reached, the original field’s label is used. This most commonly applies when a source is limited to a single entry type, asset volume, category group, or other quality that also defines field layouts.
 
 ### Structures
 
@@ -128,6 +136,15 @@ Throughout the control panel, you’ll encounter references to elements in a num
 Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by the field layout; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
 
 <img src="../images/element-cards.png" alt="Two element “cards” in the Craft control panel, show thumbnails, titles, and statuses." />
+
+## Nested Elements
+
+Craft ships with two native _nested element_ implementations, which provide unique authoring or administrative experiences:
+
+- [**Matrix field**](../reference/field-types/matrix.md) — Create dynamic or repeatable content sections, or manage 
+- [**Addresses**](../reference/element-types/addresses.md) and [**Address fields**](../reference/field-types/addresses.md) — 
+
+While [relationships](relations.md) are supported by every element type, only addresses and entries are eligible for nesting. Plugins may use the nested element interface to provide other functionality, like Commerce’s product and variant system.
 
 ## Rendering Elements <Badge text="New!" />
 
@@ -246,6 +263,7 @@ Property | Type | Notes
 `enabled` | `bool` | Whether the element is enabled (globally).
 `id` | `int` | ID of the element.
 `level` | `int|null` | Depth of the element in a structure. _Structures only._
+`ownerId` | `int|null` | ID of the element that “owns” this element. _[Nested elements]() only._
 `parentId` | `int|null` | ID of the parent element. _Structures only._
 `searchScore` | `int` | Score relative to other results when returned from an [element query](../development/element-queries.md) using the [`search` param](searching.md).
 `siteId` | `int` | ID of the <craft5:craft\models\Site> the element was loaded in.
