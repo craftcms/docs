@@ -70,7 +70,7 @@ After an update is performed from the CLI, Craft will apply any relevant migrati
 
 `craft update` is mostly a wrapper around Composer—but you can use Composer directly for more control over the update process.
 
-The main behavioral difference is that `craft update` will always set _specific_ Craft and plugin versions (like `4.3.6` or `1.2.3`), whereas Composer allows you to use [version _constraints_](https://getcomposer.org/doc/articles/versions.md)  (like `^4.3.0` or `^1.0.0`) to define dependencies.
+The main behavioral difference is that `craft update` will always set _specific_ Craft and plugin versions (like `5.4.1` or `1.2.3`), whereas Composer allows you to use [version _constraints_](https://getcomposer.org/doc/articles/versions.md)  (like `^5.3.0` or `^1.0.0`) to define dependencies.
 
 When using version constraints, `composer.lock` will still make sure you get a stable set of packages from `composer install`. To update all your packages to the most recent versions allowed by their constraints, run `composer update`. Update a _single_ package by specifying it in the command: `composer update craftcms/craft`.
 
@@ -91,7 +91,7 @@ The same applies when working with teammates! Any time you pull new code into a 
 ```json{9}
 {
     "require": {
-        "craftcms/cms": "^4.0.0",
+        "craftcms/cms": "^5.0.0",
         "vlucas/phpdotenv": "^5.4.0"
         // ...
     },
@@ -112,6 +112,6 @@ When you buy a Craft Pro or plugin license, you are entitled to use that version
 
 Sometimes, there are significant changes to be aware of—even in minor versions. In these (rare) cases, we publish a guide in the [Knowledge Base](kb:development), and list it here.
 
-The most common changes that fits this criteria are deprecated features. Notices will be accompanied by instructions for updating your code to work with the new APIs. Any features that are subsequently removed in a major release will also be noted in the new version’s upgrade guide.
+The most common changes that fit this criteria are deprecations. Deprecation notices will be accompanied by instructions for updating your code to work with the new APIs. Any features that are subsequently removed in a major release will also be noted in the new version’s upgrade guide.
 
 Deprecation warnings will affect plugin developers more frequently than regular users—but it’s still a good idea to keep your eye on the **Deprecation Warnings** utility.
