@@ -134,12 +134,12 @@ Both chips and cards support thumbnails, but only cards allow additional custom 
 Every element has a `render()` method, which you can call from a template to get an HTML representation of the object.
 
 ::: tip
-This is mostly a convenience feature, not the primary means by which you are apt to output an element or its content.
+The [CKEditor plugin](plugin:ckeditor) uses the `.render()` method to [convert each nested entry](repo:craftcms/ckeditor#rendering-nested-entries-on-the-front-end) from a placeholder to a rich, personalized block—while remaining exactly where the author placed it in the editor.
 
-The [CKEditor plugin](plugin:ckeditor) uses this method to convert each nested entry from a placeholder to a rich, personalized block—while remaining exactly where the author placed it in the editor.
+This is not the _only_ way to output your elements’ content, though! Any time you have access to an element, you are free to use its attributes and field values, directly.
 :::
 
-Without any configuration, this will typically be its _title_ (if the element type uses titles), or it’s element type and ID. This default behavior is handled by the element’s magic `__toString()` method, meaning `{{ element.render() }}` and `{{ element }}` are functionally equivalent.
+Without any configuration, this will typically be the element’s _title_ (if the element type uses titles), or it’s element type and ID. This default behavior is handled by the element’s magic `__toString()` method, meaning `{{ element.render() }}` and `{{ element }}` are functionally equivalent.
 
 However, the output of `element.render()` can be customized by placing a template in your <config5:partialTemplatesPath> that follows a specific naming convention. The full path to each element’s template is comprised of:
 
