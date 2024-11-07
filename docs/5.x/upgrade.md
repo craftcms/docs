@@ -98,7 +98,7 @@ Read more about this part of the upgrade in the [Database Character Set and Coll
 
 ## Cleanup + Optional Steps
 
-### Field and Entry Type Consolidation
+### Field and Entry Type Consolidation <Since ver="5.3.0" feature="Field type and entry type consolidation commands" />
 
 Craft 5.3 introduced three new commands for consolidating fields and entry types, post-upgrade:
 
@@ -127,8 +127,10 @@ Craft will audit your fields, and propose batches of merge candidates. To accept
 The usage of any merged fields in field layouts and templates will remain the same after merging global field definitions. Any overridden names, handles, instructions, and so on will remain. One exception here is if a name or handle override is present but the same as the merged global field’s name: Craft clears the override so that it can be better kept in sync, moving forward.
 
 ::: tip
-Don’t like how Craft grouped some of the fields? You can skip any proposed merge and come back to the command later—say, after [manually merging](#manually-merging-fields) a few of the fields. 
+Don’t like how Craft grouped some of the fields? You can skip any proposed merge and come back to the command later—say, after [manually merging](#manually-merging-fields) a few of the fields.
 :::
+
+Merged fields’ search keywords are also combined, which may affect the quality of results when [searching by field handles](system/searching.md#multi-instance-fields).
 
 #### Manually Merging Fields
 

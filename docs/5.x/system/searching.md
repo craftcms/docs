@@ -267,7 +267,7 @@ This is an extreme example—but it shows how quickly exact or near-exact matche
 
 ## Configuring Custom Fields for Search
 
-Each element type makes basic details, called _searchable attributes_, available as search keywords. It’s common to search for entries by title, for example, or for users matching a name or email address. (We just looked at these in the [Searching for Specific Element Attributes](#searching-for-specific-element-attributes) table.)
+Each element type makes basic details, called _searchable attributes_, available as search keywords. It’s common to search for entries by title, for example, or for users by their name or email address. (We just looked at these in the [Searching for Specific Element Attributes](#searching-for-specific-element-attributes) table.)
 
 You can configure any [custom field](fields.md) to make its content available for search by enabling **Use this field’s values as search keywords**:
 
@@ -281,6 +281,17 @@ For Matrix fields, the top-level **Use this field’s values as search keywords*
 For relational fields like [Assets](../reference/field-types/assets.md), [Categories](../reference/field-types/categories.md), and [Entries](../reference/field-types/entries.md), the setting determines whether titles of related elements should factor into search results.
 :::
 
+### Multi-Instance Fields
+
+When a field is marked as searchable, keywords for _all_ instances of that field on an element are combined into a single index, and their handles are treated as aliases. For example, a  [plain text](../reference/field-types/plain-text.md) field added to a field layout multiple times (with, say, handles `summary` and `byline`), Craft does not distinguish which field instance the keywords came from—this means that [searching against specific element attributes](#searching-for-specific-element-attributes) may produce unexpected results:
+
+- Searching for `summary:daisy` may return entries that included the name _Daisy_ in the `byline`;
+- Searching for `byline:rose` may return entries that mention the flower _rose_ in their `summary`;
+
+::: tip
+If your application relies on distinct keywords, create individual fields.
+:::
+
 ## Indexing Criteria
 
 Any time an indexable attribute or field on an element is updated (as indicated by Craft’s change-tracking feature, which powers drafts and revisions), an “Updating search indexes” job is pushed into the queue. Prior versions generate an indexing job whenever an element with _any_ searchable attributes or fields is saved, regardless of whether or not those specific attributes changed.
@@ -289,7 +300,7 @@ The [eligible properties](#searching-for-specific-element-attributes) differ for
 
 ## Searching Nested Elements
 
-In Craft 5, [entry queries](../reference/element-types/entries.md#querying-entries) return nested elements, by default. To search only for entries that belong to a section (those that are not owned by another entry), apply the `.section()` param:
+In Craft 5, [entry queries](../reference/element-types/entries.md#querying-entries) return nested elements, by default. To search only for entries that belong to a section (those that are not owned by another entry), use the `.section()` param:
 
 ```twig
 {% set results = craft.entries()
@@ -299,7 +310,7 @@ In Craft 5, [entry queries](../reference/element-types/entries.md#querying-entri
   .all() %}
 ```
 
-If you want entries in any section, and would prefer to not maintain a list of specific sections (or _excluded_ sections, with `.section(['not', 'home', 'suppliers'])`) in your template, pass an asterisk <Since ver="5.2.0" feature="Querying for non-nested entries with the special “section wildcard”" /> (`*`):
+If you want entries in _any_ section, and would prefer to not maintain a list of specific sections (or _excluded_ sections, with `.section(['not', 'home', 'suppliers'])`) in your template, pass an asterisk <Since ver="5.2.0" feature="Querying for non-nested entries with the special “section wildcard”" /> (`*`):
 
 ```twig{2}
 {% set results = craft.entries()
