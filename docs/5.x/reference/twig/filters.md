@@ -44,6 +44,8 @@ Filter | Description
 [filesize](#filesize) | Formats a number of bytes into something else.
 [filter](#filter) | Filters the items in an array.
 [first](https://twig.symfony.com/doc/3.x/filters/first.html) | Returns the first character/item of a string/array.
+[firstWhere](#firstwhere) | Get the first item in an array that matches the provided predicate.
+[flatten](#flatten) | Recursively flatten a multi-dimensional array into a single level.
 [float](#float) | Coerces the passed value to a float.
 [format](https://twig.symfony.com/doc/3.x/filters/format.html) | Formats a string by replacing placeholders.
 [group](#group) | Groups items in an array.
@@ -568,6 +570,71 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 {% set filteredArray = array|filter(v => v[0] == 'b') %}
 {# Result: ['bar', 'baz'] #}
 ```
+
+## `firstWhere`
+
+Searches the incoming array for an element that matches the provided criteria.
+
+```twig
+{% set mountains = [
+  { name: 'Mount Hood', height: 11250, range: 'Cascade' },
+  { name: 'Mount Jefferson', height: 10495, range: 'Cascade' },
+  { name: 'South Sister', height: 10358, range: 'Cascade' },
+  { name: 'North Sister', height: 10085, range: 'Cascade' },
+  { name: 'Middle Sister', height: 10052, range: 'Cascade' },
+  { name: 'Sacajawea Peak', height: 9843, range: 'Wallowa' },
+  { name: 'Steens Mountain', height: 9738, range: null },
+  { name: 'Aneroid Mountain', height: 9707, range: 'Wallowa' },
+] %}
+
+{% set notInRange = mountains | firstWhere('range', null) %}
+{% set tallestUnder10kft = mountains | firstWhere(m => m.height < 10000) %}
+{% set tallestSister = mountains | firstWhere(m => m.name contains 'Sister') %}
+```
+
+When using a closure, complex comparisons are possible by returning a boolean, which is implicitly checked for “truthiness.” You can also compute a value in the closure for comparison against an explicitly-passed value.
+
+#### Arguments
+
+The signature of `firstWhere()` is the same as <craft5:craft\helpers\ArrayHelper::firstWhere()>, but the first argument comes from the filter’s input.
+
+`key`
+:   A key used to resolve a value from each item in the array, or a closure that returns a value for comparison.
+
+    When using a string, you can target a nested key within each item using “dot notation,” like `author.name`. See <craft5:craft\helpers\ArrayHelper::getValue()> for details.
+
+`value`
+:   The fixed value to compare against. Defaults to `true`.
+
+`strict`
+:   Whether the comparison should be performed with strict typing. Defaults to `false`.
+
+::: tip
+This filter is similar in functionality to the [collection](../../development/collections.md) method of the same name.
+:::
+
+## `flatten`
+
+Flattens an array into a single level, up to `depth` levels.
+
+```twig
+{% set songEmphasis = [
+  ['A', 'B', 'C', 'D'],
+  ['E', 'F', 'G'],
+  ['H', 'I', 'J', 'K', ['L', 'M', 'N', 'O', 'P']],
+  ['Q', 'R', 'S'],
+  ['T', 'U', 'V'],
+  [['W', 'X'], ['Y', 'Z']],
+] %}
+
+{% set alphabet = songEmphasis | flatten %}
+{# ->  ['A', 'B', 'C', 'D', 'E', ...] #}
+```
+
+#### Arguments
+
+:   `depth`
+    How many levels to flatten. There is no limit, by default.
 
 ## `float`
 
