@@ -5,7 +5,7 @@ description: Take a peek at what’s new in Craft 5.
 
 # Upgrading from Craft 4
 
-The smoothest way to upgrade to Craft 5 is to start with a [fully-updated Craft 4 project](/4.x/updating.md). We recommend approaching the upgrade in three phases: [preparation](#preparing-for-the-upgrade), a [local upgrade](#performing-the-upgrade), and [rollout](#going-live) to live environments.
+The smoothest way to upgrade to Craft 5 is to make sure your live site is already running the [latest version of Craft 4](/4.x/updating.md). We recommend approaching the upgrade in three phases: [preparation](#preparing-for-the-upgrade), a [local upgrade](#performing-the-upgrade), and [rollout](#going-live) to live environments.
 
 <!-- more -->
 
@@ -13,7 +13,7 @@ The smoothest way to upgrade to Craft 5 is to start with a [fully-updated Craft 
 
 Let’s take a moment to audit and prepare your project.
 
-- Your **live site** must be running the [latest version](repo:craftcms/cms/releases) of Craft 4;
+- Your **live site** must be running the [latest version](repo:craftcms/cms/releases) of Craft 4 (you cannot upgrade directly from Craft 3 to Craft 5);
 - The most recent Craft 4-compatible versions of all plugins are installed, and Craft 5-compatible versions are available;
 - Your project is free of deprecation warnings after thorough testing on the latest version of Craft 4;
 - All your environments meet Craft 5’s [minimum requirements](requirements.md) (the latest version of Craft 4 will run in any environment that meets Craft 5’s requirements, so it’s safe to update PHP and your database ahead of the 5.x upgrade):
