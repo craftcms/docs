@@ -400,18 +400,11 @@ When using custom fields in [advanced `where()` conditions](development/element-
 
 ::: code
 ```twig{12} Twig
-{# Locate the field layout element that would save to the desired column: #}
-{% set entryType = craft.app.entries.getEntryTypeByHandle('post') %}
-{% set fieldLayout = entryType.getFieldLayout() %}
-{% set sourceField = fieldLayout.getFieldByHandle('sourceMedia') %}
-
-{# (Craft 5.2 introduced the `entryType('post')` shortcut function!) #}
-
 {% set entriesFromPhysicalMedia = craft.entries()
   .section('news')
   .andWhere([
     'or like',
-    sourceField.getValueSql(),
+    fieldValueSql(entryType('post'), 'sourceMedia'),
     ['print', 'paper', 'press']
   ])
   .all() %}
@@ -437,7 +430,7 @@ $entriesFromPhysicalMedia = Entry::find()
 
 This ensures that you are querying for the correct instance of a [multi-instance field](system/fields.md#multi-instance-fields), each of which will store their content under a different UUID in their respective field layouts.
 
-Craft already knows how to query against the appropriate instance of a field when using its handle as a query method, so this is only necessary for complex or compound conditions.
+Craft already knows how to query against the appropriate instance of a field when using its handle as a query method, so this is only necessary for complex or compound conditions that make use of low-level query builder features.
 
 #### Case-Sensitivity
 

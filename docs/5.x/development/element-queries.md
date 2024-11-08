@@ -744,6 +744,132 @@ Element queries are specialized [query builders](guide:db-query-builder) under t
 You may call <craft5:craft\db\Query::asArray()> to skip populating element models with results and return matching rows’ data as an associative array. Altering [selections](#selections) in particular can make elements behave erratically, as they may be missing critical pieces of information.
 :::
 
+### Content and Custom Fields
+
+Most custom field values are stored in a single JSON column, keyed by their unique field instance UUID. Craft handles this automatically when using a field or field instance’s built-in query methods (i.e. `.myCustomDateField('<= 2025-11-05')`) by building the appropriate “JSON extraction” expression.
+
+However, Craft _does not_ intercept direct use of `.where()` and other [specialized condition](#conditions) methods, and cannot infer what is a plain column name versus a field or field instance handle. This means you are responsible for building equivalent field value expressions. Typically, this involves a field instance handle and a _field layout provider_ (like an entry type, asset volume, category group, or other component that manages a field layout):
+
+::: code
+```twig{1,7} Twig
+{% set valueSql = fieldValueSql(entryType('post'), 'sourceMedia') %}
+
+{% set entriesFromPhysicalMedia = craft.entries()
+  .section('news')
+  .andWhere([
+    'or like',
+    valueSql,
+    ['print', 'paper', 'press']
+  ])
+  .all() %}
+```
+```php PHP
+$entryType = Craft::$app->getEntries()->getEntryTypeByHandle('post');
+$fieldLayout = $entryType->getFieldLayout();
+$fieldInstance = $fieldLayout->getFieldByHandle('sourceMedia');
+
+$entriesFromPhysicalMedia = Entry::find()
+    ->section('news')
+    ->andWhere([
+      'or like',
+      $fieldInstance->getValueSql(),
+      ['print', 'paper', 'press'],
+    ])
+    ->all();
+```
+:::
+
+Each element type has a unique means of accessing the relevant field layout:
+
+Addresses
+:   ```twig
+    {% set fl = craft.app
+      .addresses
+      .getFieldLayout() %}
+    ```
+
+Assets
+:   Only one field layout exists across all addresses:
+
+    ```twig
+    {% set fl = craft.app
+      .volumes
+      .getVolumeByHandle('myAssetVolume')
+      .getFieldLayout() %}
+    ```
+
+Entries
+:   You can go via the `entries` service…
+    ```twig
+    {% set fl = craft.app
+      .entries
+      .getEntryTypeByHandle('myEntryType')
+      .getFieldLayout() %}
+    ```
+    …or use the [Twig helper](../reference/twig/functions.md#entrytype):
+    ```twig
+    {% set fl = entryType('myEntryType').getFieldLayout() %}
+    ```
+
+Categories
+:   ```twig
+    {% set fl = craft.app
+      .categories
+      .getGroupByHandle('myCategoryGroup')
+      .getFieldLayout() %}
+    ```
+
+Global Sets
+:   ```twig
+    {% set fl = craft.app
+      .globals
+      .getSetByHandle('myGlobalSet')
+      .getFieldLayout() %}
+    ```
+
+Tags
+:   ```twig
+    {% set fl = craft.app
+      .tags
+      .getTagGroupByHandle('myTagGroup')
+      .getFieldLayout() %}
+    ```
+
+Users
+:   All users share a single field layout:
+    ```twig
+    {% set fl = craft.app
+      .fields
+      .getLayoutByType('craft\\elements\\User') %}
+    ```
+
+Pass any of these `fl` variables to `fieldValueSql()` along with the desired field instance handle to build the required expression:
+
+```twig
+{% set valueSql = fieldValueSql(fl, 'sourceMedia') %}
+```
+
+### Fixed Ordering
+
+When using `.id()` to query for elements with a specific set of IDs, you can call `.fixedOrder()` to retain their positions. This alleviates some problems when [limiting](#selections) or [paginating](#pagination) sets of results that are in a prescribed order.
+
+```twig
+{% set someExternalApiResult = ['SKU-C', 'SKU-R', 'SKU-A', 'SKU-F', 'SKU-T', '...'] %}
+
+{# Pre-flight a query to get a SKU-to-ID map: #}
+{% set internalIdMatches = craft.entries()
+  .select(['id', 'sku'])
+  .indexBy('sku')
+  .asArray()
+  .all() %}
+
+{% Translate SKUs to internal IDs, and load the entries in that order: #}
+{% set orderedMatches = craft.entries()
+  .id(someExternalApiResult | map(sku => internalIdMatches[sku].id))
+  .fixedOrder()
+  .all() %}
+```
+
 ### Selections
 
 Selections modify what columns and rows are returned.
