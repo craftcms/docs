@@ -8,7 +8,7 @@ description: Many of Craft’s powerful content and administrative tools are als
 
 Craft’s [HTTP API](../development/forms.md) is complemented by its command-line interface or _CLI_, which exposes powerful back-office tools to your terminal. Both means of accessing Craft’s features are part of a broader [controller-action architecture](guide:structure-controllers).
 
-This can be useful for automating tasks with `cron`, running actions in a [deployment process](kb:deployment-best-practices), working with Craft via SSH, and running resource-intensive tasks that might otherwise be constrained by the limits of your web server. If you installed Craft using our [quick-start guide](../install.md), you’ve already
+This can be useful for automating tasks with `cron`, running actions in a [deployment process](kb:deployment-best-practices), working with Craft via SSH, and running resource-intensive tasks that might otherwise be constrained by the limits of your web server. If you installed Craft using our [quick-start guide](../install.md), you’ve already used the CLI!
 
 The Craft CLI executable typically lives at the root of your project (as [a file named `craft`](directory-structure.md#craft)) and requires a compatible PHP installation to run. You can view a [list of available commands](../reference/cli.md) in the **Reference** section.
 
