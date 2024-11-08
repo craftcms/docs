@@ -1568,8 +1568,8 @@ This can be useful to prevent typographic [widows and orphans](https://en.wikipe
 Returns an array without the specified item(s).
 
 ```twig
-{% set entries = craft.entries().section('articles').limit(3).find %}
-{% set firstEntry = entries[0] %}
+{% set entries = craft.entries().section('articles').limit(3).all() %}
+{% set firstEntry = entries|first %}
 {% set remainingEntries = entries|without(firstEntry) %}
 ```
 
