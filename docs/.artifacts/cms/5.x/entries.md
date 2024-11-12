@@ -10,8 +10,6 @@
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#after)                             | Narrows the query results to only entries that were posted on or after a certain date.
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
-| [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the entries’ owners are drafts.
-| [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the entries’ owners are revisions.
 | [ancestorDist](#ancestordist)               | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                   | Narrows the query results to only entries that are ancestors of another entry in its structure.
 | [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only entries that are not related to certain other elements.
@@ -33,8 +31,6 @@
 | [drafts](#drafts)                           | Narrows the query results to only drafts entries.
 | [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
 | [expiryDate](#expirydate)                   | Narrows the query results based on the entries’ expiry dates.
-| [field](#field)                             | Narrows the query results based on the field the entries are contained by.
-| [fieldId](#fieldid)                         | Narrows the query results based on the field the entries are contained by, per the fields’ IDs.
 | [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
 | [hasDescendants](#hasdescendants)           | Narrows the query results based on whether the entries have any descendants in their structure.
 | [id](#id)                                   | Narrows the query results based on the entries’ IDs.
@@ -49,8 +45,6 @@
 | [notRelatedTo](#notrelatedto)               | Narrows the query results to only entries that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many entries should be skipped in the results.
 | [orderBy](#orderby)                         | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
-| [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
-| [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the entries, per the owners’ IDs.
 | [positionedAfter](#positionedafter)         | Narrows the query results to only entries that are positioned after another entry in its structure.
 | [positionedBefore](#positionedbefore)       | Narrows the query results to only entries that are positioned before another entry in its structure.
 | [postDate](#postdate)                       | Narrows the query results based on the entries’ post dates.
@@ -58,8 +52,6 @@
 | [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
 | [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
 | [prevSiblingOf](#prevsiblingof)             | Narrows the query results to only the entry that comes immediately before another entry in its structure.
-| [primaryOwner](#primaryowner)               | Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
-| [primaryOwnerId](#primaryownerid)           | Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
 | [provisionalDrafts](#provisionaldrafts)     | Narrows the query results to only provisional drafts.
 | [relatedTo](#relatedto)                     | Narrows the query results to only entries that are related to certain other elements.
 | [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
@@ -136,42 +128,6 @@ Performs any post-population processing on elements.
 
 
 
-
-
-
-
-
-
-#### `allowOwnerDrafts`
-
-Narrows the query results based on whether the entries’ owners are drafts.
-
-
-
-Possible values include:
-
-| Value | Fetches entries…
-| - | -
-| `true` | which can belong to a draft.
-| `false` | which cannot belong to a draft.
-
-
-
-
-
-
-#### `allowOwnerRevisions`
-
-Narrows the query results based on whether the entries’ owners are revisions.
-
-
-
-Possible values include:
-
-| Value | Fetches entries…
-| - | -
-| `true` | which can belong to a revision.
-| `false` | which cannot belong to a revision.
 
 
 
@@ -803,73 +759,6 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
-#### `field`
-
-Narrows the query results based on the field the entries are contained by.
-
-
-
-Possible values include:
-
-| Value | Fetches entries…
-| - | -
-| `'foo'` | in a field with a handle of `foo`.
-| `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
-| a `\craft\elements\db\craft\fields\Matrix` object | in a field represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch entries in the Foo field #}
-{% set entries = craft.entries()
-  .field('foo')
-  .all() %}
-```
-
-```php
-// Fetch entries in the Foo field
-$entries = \craft\elements\Entry::find()
-    ->field('foo')
-    ->all();
-```
-:::
-
-
-#### `fieldId`
-
-Narrows the query results based on the field the entries are contained by, per the fields’ IDs.
-
-
-
-Possible values include:
-
-| Value | Fetches entries…
-| - | -
-| `1` | in a field with an ID of 1.
-| `'not 1'` | not in a field with an ID of 1.
-| `[1, 2]` | in a field with an ID of 1 or 2.
-| `['not', 1, 2]` | not in a field with an ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch entries in the field with an ID of 1 #}
-{% set entries = craft.entries()
-  .fieldId(1)
-  .all() %}
-```
-
-```php
-// Fetch entries in the field with an ID of 1
-$entries = \craft\elements\Entry::find()
-    ->fieldId(1)
-    ->all();
-```
-:::
-
-
 #### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
@@ -1250,63 +1139,6 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
-#### `owner`
-
-Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
-
-
-
-
-
-::: code
-```twig
-{# Fetch entries created for this entry #}
-{% set entries = craft.entries()
-  .owner(myEntry)
-  .all() %}
-```
-
-```php
-// Fetch entries created for this entry
-$entries = \craft\elements\Entry::find()
-    ->owner($myEntry)
-    ->all();
-```
-:::
-
-
-#### `ownerId`
-
-Narrows the query results based on the owner element of the entries, per the owners’ IDs.
-
-
-
-Possible values include:
-
-| Value | Fetches entries…
-| - | -
-| `1` | created for an element with an ID of 1.
-| `[1, 2]` | created for an element with an ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch entries created for an element with an ID of 1 #}
-{% set entries = craft.entries()
-  .ownerId(1)
-  .all() %}
-```
-
-```php
-// Fetch entries created for an element with an ID of 1
-$entries = \craft\elements\Entry::find()
-    ->ownerId(1)
-    ->all();
-```
-:::
-
-
 #### `positionedAfter`
 
 Narrows the query results to only entries that are positioned after another entry in its structure.
@@ -1494,63 +1326,6 @@ Possible values include:
 $entry = \craft\elements\Entry::find()
     ->prevSiblingOf($myEntry)
     ->one();
-```
-:::
-
-
-#### `primaryOwner`
-
-Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
-
-
-
-
-
-::: code
-```twig
-{# Fetch entries created for this entry #}
-{% set entries = craft.entries()
-  .primaryOwner(myEntry)
-  .all() %}
-```
-
-```php
-// Fetch entries created for this entry
-$entries = \craft\elements\Entry::find()
-    ->primaryOwner($myEntry)
-    ->all();
-```
-:::
-
-
-#### `primaryOwnerId`
-
-Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
-
-
-
-Possible values include:
-
-| Value | Fetches entries…
-| - | -
-| `1` | created for an element with an ID of 1.
-| `[1, 2]` | created for an element with an ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch entries created for an element with an ID of 1 #}
-{% set entries = craft.entries()
-  .primaryOwnerId(1)
-  .all() %}
-```
-
-```php
-// Fetch entries created for an element with an ID of 1
-$entries = \craft\elements\Entry::find()
-    ->primaryOwnerId(1)
-    ->all();
 ```
 :::
 

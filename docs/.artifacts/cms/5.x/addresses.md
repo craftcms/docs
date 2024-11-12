@@ -13,8 +13,6 @@
 | [addressLine3](#addressline3)               | Narrows the query results based on the third address line the addresses have.
 | [administrativeArea](#administrativearea)   | Narrows the query results based on the administrative areas the addresses belongs to.
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
-| [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the addresses’ owners are drafts.
-| [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the addresses’ owners are revisions.
 | [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only addresses that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only addresses that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching addresses as arrays of data, rather than [Address](craft5:craft\elements\Address) objects.
@@ -25,8 +23,6 @@
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the addresses’ last-updated dates.
 | [dependentLocality](#dependentlocality)     | Narrows the query results based on the dependent locality the addresses belong to.
 | [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
-| [field](#field)                             | Narrows the query results based on the field the addresses are contained by.
-| [fieldId](#fieldid)                         | Narrows the query results based on the field the addresses are contained by, per the fields’ IDs.
 | [firstName](#firstname)                     | Narrows the query results based on the first name the addresses have.
 | [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
 | [fullName](#fullname)                       | Narrows the query results based on the full name the addresses have.
@@ -43,14 +39,10 @@
 | [orderBy](#orderby)                         | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [organization](#organization)               | Narrows the query results based on the organization the addresses have.
 | [organizationTaxId](#organizationtaxid)     | Narrows the query results based on the tax ID the addresses have.
-| [owner](#owner)                             | Sets the [ownerId](#ownerid) and [siteId()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-siteid) parameters based on a given element.
-| [ownerId](#ownerid)                         | Narrows the query results based on the owner element of the addresses, per the owners’ IDs.
 | [postalCode](#postalcode)                   | Narrows the query results based on the postal code the addresses belong to.
 | [preferSites](#prefersites)                 | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
 | [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [primaryOwner](#primaryowner)               | Sets the [primaryOwnerId](#primaryownerid) and [siteId()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-siteid) parameters based on a given element.
-| [primaryOwnerId](#primaryownerid)           | Narrows the query results based on the primary owner element of the addresses, per the owners’ IDs.
 | [relatedTo](#relatedto)                     | Narrows the query results to only addresses that are related to certain other elements.
 | [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
 | [search](#search)                           | Narrows the query results to only addresses that match a search query.
@@ -199,42 +191,6 @@ Performs any post-population processing on elements.
 
 
 
-
-
-
-
-
-
-#### `allowOwnerDrafts`
-
-Narrows the query results based on whether the addresses’ owners are drafts.
-
-
-
-Possible values include:
-
-| Value | Fetches addresses…
-| - | -
-| `true` | which can belong to a draft.
-| `false` | which cannot belong to a draft.
-
-
-
-
-
-
-#### `allowOwnerRevisions`
-
-Narrows the query results based on whether the addresses’ owners are revisions.
-
-
-
-Possible values include:
-
-| Value | Fetches addresses…
-| - | -
-| `true` | which can belong to a revision.
-| `false` | which cannot belong to a revision.
 
 
 
@@ -499,73 +455,6 @@ and any other elements in its collection.
 
 
 
-
-
-#### `field`
-
-Narrows the query results based on the field the addresses are contained by.
-
-
-
-Possible values include:
-
-| Value | Fetches addresses…
-| - | -
-| `'foo'` | in a field with a handle of `foo`.
-| `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
-| a `\craft\elements\db\craft\fields\Matrix` object | in a field represented by the object.
-
-
-
-::: code
-```twig
-{# Fetch addresses in the Foo field #}
-{% set addresses = craft.addresses()
-  .field('foo')
-  .all() %}
-```
-
-```php
-// Fetch addresses in the Foo field
-$addresses = \craft\elements\Address::find()
-    ->field('foo')
-    ->all();
-```
-:::
-
-
-#### `fieldId`
-
-Narrows the query results based on the field the addresses are contained by, per the fields’ IDs.
-
-
-
-Possible values include:
-
-| Value | Fetches addresses…
-| - | -
-| `1` | in a field with an ID of 1.
-| `'not 1'` | not in a field with an ID of 1.
-| `[1, 2]` | in a field with an ID of 1 or 2.
-| `['not', 1, 2]` | not in a field with an ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch addresses in the field with an ID of 1 #}
-{% set addresses = craft.addresses()
-  .fieldId(1)
-  .all() %}
-```
-
-```php
-// Fetch addresses in the field with an ID of 1
-$addresses = \craft\elements\Address::find()
-    ->fieldId(1)
-    ->all();
-```
-:::
 
 
 #### `firstName`
@@ -1012,63 +901,6 @@ $addresses = \craft\elements\Address::find()
 :::
 
 
-#### `owner`
-
-Sets the [ownerId](#ownerid) and [siteId()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-siteid) parameters based on a given element.
-
-
-
-
-
-::: code
-```twig
-{# Fetch addresses created for this entry #}
-{% set addresses = craft.addresses()
-  .owner(myEntry)
-  .all() %}
-```
-
-```php
-// Fetch addresses created for this entry
-$addresses = \craft\elements\Address::find()
-    ->owner($myEntry)
-    ->all();
-```
-:::
-
-
-#### `ownerId`
-
-Narrows the query results based on the owner element of the addresses, per the owners’ IDs.
-
-
-
-Possible values include:
-
-| Value | Fetches addresses…
-| - | -
-| `1` | created for an element with an ID of 1.
-| `[1, 2]` | created for an element with an ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch addresses created for an element with an ID of 1 #}
-{% set addresses = craft.addresses()
-  .ownerId(1)
-  .all() %}
-```
-
-```php
-// Fetch addresses created for an element with an ID of 1
-$addresses = \craft\elements\Address::find()
-    ->ownerId(1)
-    ->all();
-```
-:::
-
-
 #### `postalCode`
 
 Narrows the query results based on the postal code the addresses belong to.
@@ -1155,63 +987,6 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 
-
-
-#### `primaryOwner`
-
-Sets the [primaryOwnerId](#primaryownerid) and [siteId()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-siteid) parameters based on a given element.
-
-
-
-
-
-::: code
-```twig
-{# Fetch addresses created for this entry #}
-{% set addresses = craft.addresses()
-  .primaryOwner(myEntry)
-  .all() %}
-```
-
-```php
-// Fetch addresses created for this entry
-$addresses = \craft\elements\Address::find()
-    ->primaryOwner($myEntry)
-    ->all();
-```
-:::
-
-
-#### `primaryOwnerId`
-
-Narrows the query results based on the primary owner element of the addresses, per the owners’ IDs.
-
-
-
-Possible values include:
-
-| Value | Fetches addresses…
-| - | -
-| `1` | created for an element with an ID of 1.
-| `[1, 2]` | created for an element with an ID of 1 or 2.
-
-
-
-::: code
-```twig
-{# Fetch addresses created for an element with an ID of 1 #}
-{% set addresses = craft.addresses()
-  .primaryOwnerId(1)
-  .all() %}
-```
-
-```php
-// Fetch addresses created for an element with an ID of 1
-$addresses = \craft\elements\Address::find()
-    ->primaryOwnerId(1)
-    ->all();
-```
-:::
 
 
 #### `relatedTo`

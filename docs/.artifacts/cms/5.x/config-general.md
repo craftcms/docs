@@ -3252,6 +3252,9 @@ Defined by
 Since
 :  3.5.0
 
+Deprecated
+:  in 4.13.0. [[\craft\filters\BasicHttpAuthLogin]] should be used instead.
+
 </div>
 
 Whether front-end web requests should support basic HTTP authentication.
