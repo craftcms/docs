@@ -3803,6 +3803,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\PcController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\PcController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\PcController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\PluginController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -24096,6 +24114,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\conditions\\LevelConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -37189,6 +37249,12 @@
         "desc": "The event that is triggered when defining subdivisions options for an address field for a given country code, and optionally administrativeArea and locality."
     },
     {
+        "class": "craft\\services\\Addresses",
+        "name": "EVENT_DEFINE_ADDRESS_COUNTRIES",
+        "type": "craft\\events\\DefineAddressCountriesEvent",
+        "desc": "The event that is triggered when defining country options for an address."
+    },
+    {
         "class": "craft\\services\\Assets",
         "name": "EVENT_BEFORE_REPLACE_ASSET",
         "type": "craft\\events\\ReplaceAssetEvent",
@@ -37871,6 +37937,12 @@
         "name": "EVENT_BEFORE_SAVE_FIELD",
         "type": "craft\\events\\FieldEvent",
         "desc": "The event that is triggered before a field is saved."
+    },
+    {
+        "class": "craft\\services\\Fields",
+        "name": "EVENT_BEFORE_APPLY_FIELD_SAVE",
+        "type": "craft\\events\\ApplyFieldSaveEvent",
+        "desc": "The event that is triggered before a field save is applied to the database."
     },
     {
         "class": "craft\\services\\Fields",
