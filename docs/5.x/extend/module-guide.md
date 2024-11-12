@@ -2,7 +2,7 @@
 
 Functionally, modules are every bit as capable as [plugins](plugin-guide.md), but they are best suited for project-specific extensions or customizations as opposed to public, distributable packages.
 
-At a technical level, modules (a [Yii concept](guide:structure-modules)) are registered with Craft and initialized alongside the application, giving them an opportunity to supplement, change, or observe what it does.
+At a technical level, modules (a [Yii concept](guide:structure-modules)) are registered with Craft and initialized alongside the application, giving them an opportunity to observe, supplement, and change what it does.
 
 ## Preparation
 
