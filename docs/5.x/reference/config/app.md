@@ -13,7 +13,7 @@ Craft’s entire [application configuration](guide:structure-applications#applic
 You can further customize the application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
 
 ::: warning
-New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.php` to set an app ID and [bootstrap an example Module](#modules). Most applications will _not_ require significant application config.
+New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.php` that exists solely to set an app ID, which affects how caches and sessions are stored. Most applications will _not_ require additional application config.
 :::
 
 ## Approach
