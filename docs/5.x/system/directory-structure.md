@@ -125,7 +125,7 @@ Projects that use [content migrations](../extend/migrations.md) will typically u
 
 ### `modules/`
 
-For a time, the starter project came with a pre-initialized [custom module](../extend/module-guide.md) in the `modules/` directory. This is typically harmless, but it cannot be removed without also modifying your project’s `config/app.php` file.
+For a time, our [starter project](repo:craftcms/craft) came with a pre-initialized [custom module](../extend/module-guide.md) in the `modules/` directory. This is typically harmless, but it cannot be removed without also modifying your project’s `config/app.php` file.
 
 ### `public/`
 
