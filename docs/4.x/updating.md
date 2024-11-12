@@ -74,7 +74,7 @@ After an update is performed from the CLI, Craft will apply any relevant migrati
 
 The main behavioral difference is that `craft update` will always set _specific_ Craft and plugin versions (like `4.3.6` or `1.2.3`), whereas Composer allows you to use [version _constraints_](https://getcomposer.org/doc/articles/versions.md)  (like `^4.3.0` or `^1.0.0`) to define dependencies.
 
-When using version constraints, `composer.lock` will still make sure you get a stable set of packages from `composer install`. To update all your packages to the most recent versions allowed by their constraints, run `composer update`. Update a _single_ package by specifying it in the command: `composer update craftcms/craft`.
+When using version constraints, `composer.lock` will still make sure you get a stable set of packages from `composer install`. To update all your packages to the most recent versions allowed by their constraints, run `composer update`. Update a _single_ package by specifying it in the command: `composer update craftcms/cms`.
 
 ::: tip
 If you have used the Craft CLI in the past, `composer update` may do nothing!
