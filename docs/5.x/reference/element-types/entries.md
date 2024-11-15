@@ -42,8 +42,8 @@ Entry types have the following settings:
 - **Name** — Used throughout the control panel as a UI label.
 - **Handle** — Uniquely identifies entries of this type in [templates](../../development/templates.md) and [queries](../../development/element-queries.md).
 - **Icon** and **Color** — Choose a symbol and color to subtly distinguish entries of this type throughout the control panel.
-- **Show the Title field** — Entry titles can be set by the author or [dynamically defined](#dynamic-entry-titles) from other properties via an [object template](../../system/object-templates.md).
-  - **Title Translation Method** — In multi-site projects, choose how titles are localized.
+- **Title Translation Method** — In multi-site projects, choose how titles are localized.
+- **Default Title Format** — Entry titles can be set by the author or [dynamically defined](#dynamic-entry-titles) from other values via an [object template](../../system/object-templates.md).
 - **Show the Slug field** — As with titles, slugs can be manually or automatically generated.
   - **Slug Translation Method** — In multi-site projects, choose how slugs are localized.
 - **Show the Status field** — Manually set each entry’s status, or allow it to be dictated by its usage.
@@ -51,9 +51,13 @@ Entry types have the following settings:
 
 ### Dynamic Entry Titles
 
-If you want your entries’ titles to be auto-generated from a template (rather than requiring authors to enter them manually), you can uncheck the **Show the Title field?** checkbox. When you do, a new **Title Format** setting will appear.
+The **Default Title Format** field accepts an [object template](../../system/object-templates.md) (just like the **Entry URI Format** and preview target **URL Format** we looked, above), and is evaluated whenever entries with this type are saved _without an explicitly-set title_. A title format may be rendered multiple times, depending on the selected **Title Translation Method**.
 
-The **Title Format** is an [object template](../../system/object-templates.md) (just like the **Entry URI Format** and preview target **URL Format** we looked, above), and gets evaluated whenever entries with this type are saved.
+If you want your entries’ titles to _always_ be generated from a template (and disallow authors from providing their own titles), remove the **Title** element from the [field layout](../../system/fields.md#field-layouts). <Since ver="5.5.0" feature="Default title formats and removable titles" />
+
+::: tip
+Prior to Craft 5.5.0, this behavior was governed by two settings (**Show the Title field** and **Show the Title field?**), with no intermediate “default” option.
+:::
 
 ### Translation Settings
 
