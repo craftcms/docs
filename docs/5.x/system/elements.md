@@ -111,7 +111,7 @@ Use the **View** controls to switch back into structure mode on an index if you 
 
 ### Actions
 
-Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="settings" /> icon in the footer (like _Delete_). Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
+Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="action" /> icon in the footer (like _Delete_). Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
 
 ### In-line Editing <Badge text="New!" />
 
@@ -133,9 +133,17 @@ A streamlined version of indexes are used when adding elements to a [relational]
 
 Throughout the control panel, you’ll encounter references to elements in a number of different contexts, like element indexes, [Matrix](../reference/field-types/matrix.md) fields, and other [relational](relations.md) fields. Element _cards_ are a new way to display nested or related elements. They share the core features of element _chips_ (like quick-actions and ordering controls), but provide an additional layer of customization via the element’s [field layout](fields.md#field-layouts).
 
-Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by the field layout; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
+Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by a combination of the field layout and customizable [card attributes](#custom-cart-attributes) <Since ver="5.5.0" feature="Customizable card attributes" />; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
 
 <img src="../images/element-cards.png" alt="Two element “cards” in the Craft control panel, show thumbnails, titles, and statuses." />
+
+#### Custom Card Attributes <Since ver="5.5.0" feature="Customizable card attributes" />
+
+The attributes and fields displayed on element cards is ultimately determined by the interface below each field layout designer:
+
+<img src="../images/element-card-attributes.png" alt="Element card attribute customization interface." />
+
+An element’s **Title** and **Status** are always visible, and the presence of a thumbnail is determined by the field layout itself (by selecting **Use for element thumbnails** in the field layout element’s <Icon kind="ellipses" /> action menu). Additional attributes _not_ present in the field layout can be enabled in the card customization interface; those that _are_ part of the field layout will indicate when they are enabled with an “eye” icon.
 
 ## Nested Elements
 
