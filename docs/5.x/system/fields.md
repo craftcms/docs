@@ -3,6 +3,7 @@ description: Craft’s powerful content features are driven by custom fields.
 related:
   - uri: elements.md
     label: Learn about Elements
+sidebarDepth: 2
 ---
 
 # Custom Fields
