@@ -3,7 +3,7 @@
 When you [publish](plugin-store.md) your plugin in the Plugin Store, its changelog is automatically scraped and displayed in a dedicated tab, as well as in Craft’s <Journey path="Utilities, Updates" /> screen wherever it is installed.
 
 ::: tip
-Refer to [Craft’s own changelog](https://github.com/craftcms/cms/4.x/develop/CHANGELOG.md) as an example of syntax and best practices.
+Refer to [Craft’s own changelog](https://github.com/craftcms/cms/blob/4.x/CHANGELOG.md) as an example of syntax and best practices.
 :::
 
 ## Setting Up a Changelog
