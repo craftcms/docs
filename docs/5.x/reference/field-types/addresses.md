@@ -12,7 +12,7 @@ Address fields are separate from users’ [address book](../element-types/users.
 
 ## Settings
 
-Address fields can be displayed to editors as [cards](../../system/elements.md#chips--cards) or in a full [element index](../../system/elements.md#indexes). Either way, individual addresses are always displayed as cards.
+Address fields can be displayed to editors as [cards](../../system/elements.md#chips-cards) or in a full [element index](../../system/elements.md#indexes). Either way, individual addresses are always displayed as cards.
 
 You can also choose a minimum and maximum number of addresses that can be added to the field for the owner element to validate.
 
