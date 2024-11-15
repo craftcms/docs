@@ -1,29 +1,40 @@
 # Radio Buttons Fields
 
-Radio Buttons fields give you a group of radio buttons.
+Radio Buttons fields give you a group of radio buttons, and allow the author to select a single value (or provide a custom one, when allowed).
 
 <!-- more -->
 
+![Screenshot of a radio buttons field interface in the Craft control panel](../../images/fields-radio-buttons-ui.png)
+
 ## Settings
 
-Radio Buttons fields have the following settings:
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new radio buttons field via the control panel.">
+<img src="../../images/fields-radio-buttons-settings.png" alt="Radio buttons field settings screen in the Craft control panel">
+</BrowserShot>
 
-- **Radio Button Options** – Define the radio buttons that will be available in the field. You even get to set the option values and labels separately, and choose which one should be selected by default.
+In addition to the standard field options, radio buttons fields have the following settings:
+
+- **Radio Button Options** — Define the options that will be available to authors. Each option contains a **Label** (shown to the author) and a **Value** (saved to the database), as well as a checkbox indicating whether it should be selected by default.
+- **Allow custom options** — Whether to provide an additional “other” option that allows authors to provide a custom value.
 
 ## Development
 
 ### Querying Elements with Radio Buttons Fields
 
-When [querying for elements](element-queries.md) that have a Radio Buttons field, you can filter the results based on the Radio Buttons field data using a query param named after your field’s handle.
+When [querying for elements](element-queries.md) that have a radio buttons field, you can filter the results using a query param named after your field’s handle.
 
 Possible values include:
 
 | Value | Fetches elements…
 | - | -
-| `'foo'` | with a `foo` option selected.
-| `'not foo'` | without a `foo` option selected.
-| `['foo', 'bar']` | with either a `foo` or `bar` option selected.
-| `['not', 'foo', 'bar']` | without either a `foo` or `bar` option selected.
+| `'foo'` | with the `foo` option selected (or a custom value of `foo`).
+| `'not foo'` | without the `foo` option selected (or a custom value of `foo`).
+| `['foo', 'bar']` | with either the `foo` or `bar` options selected (or a custom value of `foo`).
+| `['not', 'foo', 'bar']` | without either the `foo` or `bar` options selected (or a custom value of `foo`).
 
 ::: code
 ```twig
@@ -42,7 +53,7 @@ $entries = \craft\elements\Entry::find()
 
 ### Working with Radio Buttons Field Data
 
-If you have an element with a Radio Buttons field in your template, you can access its data using your Radio Buttons field’s handle:
+If you have an element with a radio buttons field in a template, you can access its data using the field’s handle:
 
 ::: code
 ```twig
@@ -53,63 +64,75 @@ $value = $entry->myFieldHandle;
 ```
 :::
 
-That will give you a <craft5:craft\fields\data\SingleOptionFieldData> object that contains the field data.
+That will give you a <craft5:craft\fields\data\SingleOptionFieldData> object that contains information about the selected value and available options.
 
-To show the selected option, output it as a string, or output the [value](craft5:craft\fields\data\SingleOptionFieldData::$value) property:
+Outputting the object casts it to a string, which is equivalent to directly accessing its [value](craft5:craft\fields\data\SingleOptionFieldData::$value) property:
 
 ::: code
 ```twig
 {{ entry.myFieldHandle }} or {{ entry.myFieldHandle.value }}
 ```
 ```php
-// $entry->myFieldHandle or $entry->myFieldHandle->value
+$entry->myFieldHandle; // -> craft\fields\data\SingleOptionFieldData
+$entry->myFieldHandle->value; // -> string
 ```
 :::
 
-To see if an option is selected, use the [value](craft5:craft\fields\data\SingleOptionFieldData::$value) property:
+To check if _any_ option is selected, you must test the [value](craft5:craft\fields\data\SingleOptionFieldData::$value) property, explicitly:
 
 ::: code
 ```twig
 {% if entry.myFieldHandle.value %}
+  {# Yep, a value was selected! #}
+{% endif %}
 ```
 ```php
 if ($entry->myFieldHandle->value) {
+  // Yep, a value was selected!
+}
 ```
 :::
 
-To show the selected option’s label, output the [label](craft5:craft\fields\data\SingleOptionFieldData::$label) property:
+To show the selected option’s _label_, use the [label](craft5:craft\fields\data\SingleOptionFieldData::$label) property:
 
 ::: code
 ```twig
 {{ entry.myFieldHandle.label }}
+{# "The selected option’s user-facing label!" #}
 ```
 ```php
-// $entry->myFieldHandle->label
+$entry->myFieldHandle->label; // -> "The selected option’s user-facing label!"
 ```
 :::
 
-To loop through all the available options, iterate over the [options](craft5:craft\fields\data\SingleOptionFieldData::getOptions()) property:
+::: warning
+If the author provided a custom value, no label will be available.
+:::
+
+To loop through all the available options, iterate over the [options](craft5:craft\fields\data\SingleOptionFieldData::getOptions()) property. The selected option’s `selected` property will be `true`.
 
 ::: code
 ```twig
 {% for option in entry.myFieldHandle.options %}
-  Label:    {{ option.label }}
-  Value:    {{ option }} or {{ option.value }}
+  Label: {{ option.label }}
+  Value: <code>{{ option.value }}</code>
   Selected: {{ option.selected ? 'Yes' : 'No' }}
 {% endfor %}
 ```
 ```php
 foreach ($entry->myFieldHandle->options as $option) {
-    // Label:    $option->label
-    // Value:    $option or $option->value
-    // Selected: $option->selected ? 'Yes' : 'No'
+    $option->label;
+    $option->value;
+    $option->selected ? 'Yes' : 'No';
 }
 ```
 :::
 
+If the author provides a “custom” value, no `option` will be marked as `selected`.
+
 ### Saving Radio Buttons Fields
 
-If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Radio Buttons field, you can use this template as a starting point:
+In an element or [entry form](kb:entry-form) that needs to save a value to a radio buttons field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
