@@ -21,7 +21,7 @@ related:
 
 # Elements
 
-An _element_ is the most basic unit of [content](#content) in Craft. Elements provide smart management, routing, and querying interfaces for users and developers. Each [type](#element-types) of element has some unique capabilities, but they’re all built on top of a set of [common features](#common-features).
+An _element_ is the most basic unit of [content](#fields-and-content) in Craft. Elements provide smart management, routing, and querying interfaces for users and developers. Each [type](#element-types) of element has some unique capabilities, but they’re all built on top of a set of [common features](#common-features).
 
 ## Element Types
 
@@ -42,7 +42,7 @@ Choosing the appropriate element type for your content model is essential—but 
 Some features are available to all (or most) element types:
 
 - Control panel interfaces, including forms, [indexes](#indexes), [slide-outs](control-panel.md#slideouts), and [chips and cards](#chips-cards);
-- [Custom fields](fields.md) and field layouts with advanced condition rules for storing [content](#content);
+- [Custom fields](fields.md) and field layouts with advanced condition rules for storing [content](#fields-and-content);
 - Slugs, URIs, URLs, and automatic [routing](routing.md);
 - Localization via [sites](sites.md);
 - Sophisticated [permissions](user-management.md#permissions);
@@ -53,7 +53,7 @@ Some features are available to all (or most) element types:
 
 Other features are specific to a type—like Assets’ tie to files, or Entries’ nesting capability.
 
-## Content
+## Fields and Content
 
 In a fresh installation, element types are distinguished only by a handful of native features. The identity and utility of an element is often defined by the [custom fields](fields.md) attached to it via a [field layout](fields.md#field-layouts): elements and their custom field values are collectively referred to as _content_.
 
@@ -154,19 +154,21 @@ Craft ships with two native _nested element_ implementations, which provide uniq
 
 While [relationships](relations.md) are supported by every element type, only addresses and entries are eligible for nesting. Plugins may use the nested element interface to provide other functionality, like Commerce’s product and variant system.
 
-## Rendering Elements <Badge text="New!" />
+<a name="rendering-elements"></a>
+
+## Element Partials <Badge text="New!" />
 
 Every element has a `render()` method, which you can call from a template to get an HTML representation of the object.
 
 ::: tip
 The [CKEditor plugin](plugin:ckeditor) uses the `.render()` method to [convert each nested entry](repo:craftcms/ckeditor#rendering-nested-entries-on-the-front-end) from a placeholder to a rich, personalized block—while remaining exactly where the author placed it in the editor.
 
-This is not the _only_ way to output your elements’ content, though! Any time you have access to an element, you are free to use its attributes and field values, directly.
+This is not the _only_ way to output your elements’ [content](#fields-and-content), though! Any time you have access to an element, you are free to use its attributes and field values, directly.
 :::
 
 Without any configuration, this will typically be the element’s _title_ (if the element type uses titles), or it’s element type and ID. This default behavior is handled by the element’s magic `__toString()` method, meaning `{{ element.render() }}` and `{{ element }}` are functionally equivalent.
 
-However, the output of `element.render()` can be customized by placing a template in your <config5:partialTemplatesPath> that follows a specific naming convention. The full path to each element’s template is comprised of:
+However, the output of `element.render()` can be customized by placing a template in your <config5:partialTemplatesPath> that follows a specific naming convention. The full path to each element’s partial template is comprised of:
 
 - The element’s type or `refHandle`: Typically its lower-cased, singular name—`entry` or `address`, for instance. The `refHandle` is the same as is used for [reference tags](reference-tags.md), elsewhere in the system.
 - The field layout provider’s handle: Differs based on the type of element and how its field layout is configured. For assets, it would be the volume’s handle; for entries, its entry type handle; for global sets, the set handle.
@@ -194,13 +196,15 @@ If some property of the asset (like its extension, or the user group its uploade
 ```
 
 ::: tip
-You can also render lists of elements by calling the `render()` method on an [element query](../development/element-queries.md).
+You can also render lists of elements by calling the `render()` method on an [element query](../development/element-queries.md) or [element collection](../development/collections.md#element-collections).
 :::
 
 [Nested entries](../reference/element-types/entries.md#nested-entries) (like those in [Matrix](../reference/field-types/matrix.md) and [CKEditor](plugin:ckeditor) fields) include information about where they live in the system, via `owner` and `field` properties:
 
 ```twig
 {# _partials/entry/ingredient.twig #}
+{{ entry.title }}
+
 {% if entry.field and entry.field.handle == 'nutritionHighlights' %}
   {{ entry.typicalCalories }}
 {% endif %}
@@ -208,9 +212,13 @@ You can also render lists of elements by calling the `render()` method on an [el
 
 Because entries can be nested within fields on different element types (i.e. a CKEditor field on an entry or a Matrix field in a [global set](../reference/element-types/globals.md)), it’s important that your template consider discrepancies between properties on the owner. For instance, an entry that owns another entry will have a `type` property; a category that owns an entry has a `group` property. If an entry type is used both in a section _and_ as a nested entry, the `owner` and `field` properties will only be available in the latter context!
 
+::: warning
+Users and addresses don’t have field layout providers, and therefore do not support element partials.
+:::
+
 ### Parameters
 
-Each template is passed its element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
+Each partial is passed its element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
 
 When manually rendering an element partial (by calling `element.render()` or `.render()` on an [element collection](../development/collections.md#element-collections)), you have an opportunity to make additional variables available to the template:
 
@@ -220,7 +228,7 @@ When manually rendering an element partial (by calling `element.render()` or `.r
 }) }}
 ```
 
-Keep in mind that partials can be rendered from multiple contexts, not all of which will provide these extra variables. Guard against missing parameters with the `|default()` filter:
+Keep in mind that partials can be rendered from multiple contexts, not all of which will provide these extra variables. Guard against missing parameters with the `|default()` filter or null-coalesce operator (`??`):
 
 ```twig
 {# _partials/entry/ingredient.twig #}
@@ -231,7 +239,7 @@ Keep in mind that partials can be rendered from multiple contexts, not all of wh
 
 ### Eager-Loading
 
-When accessing related or nested content within an element partial, use the `.eagerly()` method to [eager-load](../development/eager-loading.md#magic-eager-loading) elements for other partials that might be rendered in sequence.
+When accessing related or nested content within an element partial, use the `.eagerly()` method to [eager-load](../development/eager-loading.md#lazy-eager-loading) elements for other partials that might be rendered in sequence.
 
 ```twig{2}
 {# _parials/entry/post.twig #}
