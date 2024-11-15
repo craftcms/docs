@@ -10,7 +10,7 @@ sidebarDepth: 2
 
 On their own, [elements](elements.md) only provide a scaffold for your content—the content itself will be stored in *fields*.
 
-Fields are managed in **Settings** → **Fields**, and can be created on-the-fly from a [field layout](#field-layouts) designer. Field layouts and [conditions](#field-conditions) determine where and when your fields should appear for content authors.
+Fields are managed in **Settings** → **Fields**, and can be created on-the-fly from a [field layout](#field-layouts) designer. Field layouts and [conditions](#conditions) determine where and when your fields should appear for content authors.
 
 ## Field Types
 
@@ -181,10 +181,11 @@ Only one field can be used as an element’s thumbnail at a time.
 
 Some field layout elements’ settings are bubbled up to the layout designer, beside the field’s name:
 
-- An asterisk (<icon kind="asterisk" />) means the field is **Required**.
-- A diamond means that it has been assigned one or more user or element condition rules.
-- A photo icon means the field will be used as the thumbnail in element chips and cards.
-- A check mark means the field will appear in element cards.
+- An _asterisk_ (<icon kind="asterisk" />) means the field is **Required**.
+- A _diamond_ means that it has been assigned one or more user or element [condition rules](#conditions).
+- A _photo_ icon means the field will be used as the thumbnail in element [chips and cards](elements.md#chips-cards).
+- An _eye_ means the field will appear in element cards.
+- A _pencil_ icon indicates that the field contains overridden settings.
 
 ### Multi-Instance Fields <Badge text="New!" />
 
@@ -234,18 +235,25 @@ This example assumes you have multiple [entry types](../reference/element-types/
 
 ### Conditions
 
-Any fields that have condition rules on them are displayed with a caution strip:
+Any fields (or [tabs](#tabs)) that have a **Current User Condition** or **Element Condition** configured will display an orange rhombus.
 
-![Screenshot of two simplified fields: normal on the left, and conditional on the right with a skewed dashed internal border](../images/field-and-conditional-field.png)
+<img src="../images/field-layout-conditional.png" alt="A field layout element with conditions applied">
+
+Conditions determine when (and to whom) a field or tab is displayed and validated. You can create sophisticated editorial processes by exposing parts of the authoring interface only when specific criteria are met.
+
+::: warning
+Conditions are not intended as a complete substitute for [permissions](user-management.md#permissions)! It’s still important to configure sensible base permissions for your editors.
+:::
 
 ### UI Elements
 
-Switch to the **UI Elements** tab at the right edge of the screen (replacing the **Fields** browser) to add special field layout elements. Each of these 
+Switch to the **UI Elements** tab at the right edge of the screen (replacing the **Fields** browser) to add special field layout elements.
 
 - **Heading** — Create a label that splits up form inputs, within a tab.
 - **Tip** & **Warning** — Display a message with the corresponding urgency. Equivalent, except in visual design.
 - **Template** — Render a Twig template from your [`templates/` directory](directory-structure.md#templates). The template will receive the element being edited under an `element` variable.
 - **Horizontal Rule** — A thin divider line. Subsequent fields will start in a new row.
 - **Line Break** — An invisible element that ensures the next field is rendered in a new row.
+- **Markdown** — Renders a multi-line Markdown snippet.
 
-In addition to their own options, field layout UI elements share regular fields’ **Current User Condition** and **Element Condition** settings.
+In addition to their own options (accessible via their <Icon kind="ellipses" /> action menu), most field layout UI elements share regular fields’ [condition](#conditions) settings.
