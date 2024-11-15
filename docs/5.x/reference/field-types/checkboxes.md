@@ -1,29 +1,38 @@
 # Checkboxes Fields
 
-Checkboxes fields give you a group of checkboxes.
+Checkboxes fields give you a group of [checkbox](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox) inputs, and allow the author to select multiple values (or provide any number of custom values, when allowed).
 
 <!-- more -->
 
+![Screenshot of a checkboxes field interface in the Craft control panel](../../images/fields-checkboxes-ui.png)
+
 ## Settings
 
-Checkboxes fields have the following settings:
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new checkboxes field via the control panel.">
+<img src="../../images/fields-checkboxes-settings.png" alt="Checkboxes field settings screen in the Craft control panel">
+</BrowserShot>
 
-- **Checkbox Options** – Define the checkboxes that will be available in the field. You even get to set the option values and labels separately, and choose which ones should be checked by default.
+In addition to the standard field options, checkboxes fields have the following settings:
+
+- **Checkbox Options** – Define the options that will be available to authors. Each option contains a **Label** (shown to the author) and a **Value** (saved to the database), as well as a checkbox indicating whether it should be selected by default.
+- **Allow custom options** — Whether authors can provide “other” options, on-the-fly.
 
 ## Development
 
 ### Querying Elements with Checkboxes Fields
 
-When [querying for elements](../../development/element-queries.md) that have a Checkboxes field, you can filter the results based on the Checkboxes field data using a query param named after your field’s handle.
-
-Possible values include:
+When [querying for elements](../../development/element-queries.md) that have a checkboxes field, you can filter the results using a query param named after your field’s handle. Possible values include:
 
 | Value | Fetches elements…
 | - | -
-| `'foo'` | with a `foo` option checked.
-| `'not foo'` | without a `foo` option checked.
-| `['foo', 'bar']` | with `foo` or `bar` options selected.
-| `['and', 'foo', 'bar']` | with `foo` and `bar` options selected.
+| `'foo'` | with a `foo` option checked (or `foo` provided as a custom value).
+| `'not foo'` | without a `foo` option checked  (and without `foo` among custom values).
+| `['foo', 'bar']` | with `foo` _or_ `bar` options selected (or `foo` provided as a custom value).
+| `['and', 'foo', 'bar']` | with `foo` _and_ `bar` options selected (or among provided custom values).
 
 ::: code
 ```twig
@@ -42,7 +51,7 @@ $entries = \craft\elements\Entry::find()
 
 ### Working with Checkboxes Field Data
 
-If you have an element with a Checkboxes field in your template, you can access its data using your Checkboxes field’s handle:
+If you have an element with a checkboxes field in your template, you can access its data using the field’s handle:
 
 ::: code
 ```twig
@@ -53,9 +62,7 @@ $value = $entry->myFieldHandle %}
 ```
 :::
 
-That will give you a <craft5:craft\fields\data\MultiOptionsFieldData> object that contains the field data.
-
-To loop through all checked options, iterate over the field value:
+That will give you a <craft5:craft\fields\data\MultiOptionsFieldData> object that contains information about the selected values and the available options. This object can be used as an array; looping over it provides each selected option, in sequence:
 
 ::: code
 ```twig
@@ -91,52 +98,110 @@ foreach ($entry->myFieldHandle->options as $option) {
 ```
 :::
 
-To see if any options are checked, use the [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter or [count](https://www.php.net/manual/en/function.count.php) method:
+::: warning
+
+:::
+
+To see if any options are checked, use the [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter or [empty](https://twig.symfony.com/doc/3.x/tests/empty.html) test (or the [count](https://www.php.net/manual/en/function.count.php) method in PHP):
 
 ::: code
 ```twig
-{% if entry.myFieldHandle|length %}
+{% if entry.myCheckboxesFieldHandle | length %}
+  {# At least one option was selected! #}
+{% endif %}
+
+{% if entry.myCheckboxesFieldHandle is not empty %}
+  {# Equivalent, but note that we’ve inverted the condition! #}
+{% endif %}
 ```
 ```php
-if (count($entry->myFieldHandle)) {
+if (count($entry->myCheckboxesFieldHandle)) {
+    // At least one option was selected!
+}
+// PHP’s `empty()` function is more strict than the
+// Twig test, and may produce different results!
 ```
 :::
 
-To see if a particular option is checked, use [contains()](craft5:craft\fields\data\MultiOptionsFieldData::contains())
+To see if a specific option is checked, call [contains()](craft5:craft\fields\data\MultiOptionsFieldData::contains()) using the **Value** in question:
 
 ::: code
 ```twig
-{% if entry.myFieldHandle.contains('foo') %}
+{% if entry.myCheckboxesFieldHandle.contains('foo') %}
+  {# `foo` was selected! #}
+{% endif %}
 ```
 ```php
-if ($entry->myFieldHandle->contains('foo')) {
+if ($entry->myCheckboxesFieldHandle->contains('foo')) {
+    // `foo` was selected!
+}
 ```
 :::
+
+The `in` Twig test is equivalent:
+
+```twig
+{% if 'foo' in entry.myCheckboxesFieldHandle %}
+  {# `foo` was selected! #}
+{% endif %}
+```
+
+Custom values are also honored by both methods.
 
 ### Saving Checkboxes Fields
 
-If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Checkboxes field, you can use this template as a starting point:
+In an element or [entry form](kb:entry-form) that needs to save a value to a checkboxes field, you can use this template as a starting point:
 
 ```twig
-{% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
+{% set field = craft.app.fields.getFieldByHandle('myCheckboxesFieldHandle') %}
 
-{# Include a hidden input first so Craft knows to update the
+{# Include a hidden input first so Craft knows to clear the
    existing value, if no checkboxes are checked. #}
-{{ hiddenInput('fields[myFieldHandle]', '') }}
+{{ hiddenInput('fields[myCheckboxesFieldHandle]', '') }}
 
 <ul>
+  {# Display native options as checkboxes: #}
   {% for option in field.options %}
     {% set checked = entry is defined
-      ? entry.myFieldHandle.contains(option.value)
+      ? entry.myCheckboxesFieldHandle.contains(option.value)
       : option.default %}
 
-    <li><label>
-      <input type="checkbox"
-        name="fields[myFieldHandle][]"
-        value="{{ option.value }}"
-        {% if checked %}checked{% endif %}>
-      {{ option.label }}
-    </label></li>
+    <li>
+      <label>
+        <input
+          type="checkbox"
+          name="fields[myCheckboxesFieldHandle][]"
+          value="{{ option.value }}"
+          {% if checked %}checked{% endif %}>
+        {{ option.label }}
+      </label>
+    </li>
   {% endfor %}
+
+  {# Does this field allow custom options? #}
+  {% if field.customOptions %}
+    {# Loop over the *stored* values and output all the "invalid" ones as text fields: #}
+    {% for option in entry.myCheckboxesFieldHandle | filter(o => not o.valid) %}
+      <li>
+        <label>
+          <input
+            type="text"
+            name="fields[myCheckboxesFieldHandle][]"
+            value="{{ option.value }}">
+          {{ option.label }}
+        </label>
+      </li>
+    {% endfor %}
+
+    {# Provide one more input for new values: #}
+    <li>
+      <label>
+        Other:
+        <input
+          type="text"
+          name="fields[myCheckboxesFieldHandle][]">
+      </label>
+    </li>
+  {% endif %}
 </ul>
 ```
