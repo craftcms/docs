@@ -30,6 +30,7 @@ Function | Description
 [dataUrl](#dataurl) | Outputs an asset or file as a base64-encoded data URL.
 [date](#date) | Creates a date.
 [dump](#dump) | Dumps information about a variable.
+[encodeUrl](#encodeurl) | Encodes and unencoded components of a URL.
 [endBody](#endbody) | Outputs scripts and styles that were registered for the “end body” position.
 [entryType](#entrytype) | Gets an entry type definition by its handle.
 [expression](#expression) | Creates a database expression object.
@@ -421,6 +422,20 @@ Overrides Twig’s default [`dump()`](https://twig.symfony.com/doc/3.x/functions
   .all() %}
 
 {{ dump(news|column('title')) }}
+```
+
+## `encodeUrl`
+
+Ensures a URL contains only ASCII characters. The underlying <craft\helpers\UrlHelper::encodeUrl()> function is automatically called by Craft’s internal redirection logic. This is typically only required when using a URL in an HTTP header. Supposing we have a URL with accented characters like `https://my-project.ddev.site/pages/åbçdé`…
+
+```twig
+{# …unencoded output leads to garbled characters, and won’t resolve if requested: #}
+{% header "X-See-Also: #{entry.url}" %}
+{# -> https://my-project.ddev.site/Ã¥bÃ§dÃ©  #}
+
+{# …but encoding the output preserves the original accented characters: #}
+{% header "X-See-Also: #{encodeUrl(entry.url)}" %}
+{# -> https://my-project.ddev.site/%C3%A5b%C3%A7d%C3%A9 #}
 ```
 
 ## `endBody`
