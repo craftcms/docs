@@ -785,75 +785,82 @@ $entriesFromPhysicalMedia = Entry::find()
 ```
 :::
 
-Each element type has a unique means of accessing the relevant field layout:
-
-Addresses
-:   ```twig
-    {% set fl = craft.app
-      .addresses
-      .getFieldLayout() %}
-    ```
+Each element type has a unique means of accessing the relevant field layout provider:
 
 Assets
-:   Only one field layout exists across all addresses:
+:   Asset field layouts are provided by their volumes:
 
     ```twig
-    {% set fl = craft.app
+    {% set provider = craft.app
       .volumes
-      .getVolumeByHandle('myAssetVolume')
-      .getFieldLayout() %}
+      .getVolumeByHandle('myAssetVolume') %}
     ```
 
 Entries
-:   You can go via the `entries` service…
+:   You can get an entry type via the `entries` service…
     ```twig
-    {% set fl = craft.app
+    {% set provider = craft.app
       .entries
-      .getEntryTypeByHandle('myEntryType')
-      .getFieldLayout() %}
+      .getEntryTypeByHandle('myEntryType') %}
     ```
     …or use the [Twig helper](../reference/twig/functions.md#entrytype):
     ```twig
-    {% set fl = entryType('myEntryType').getFieldLayout() %}
+    {% set provider = entryType('myEntryType') %}
     ```
 
 Categories
-:   ```twig
-    {% set fl = craft.app
+:   Categories’ field layouts are defined by their _group_:
+    ```twig
+    {% set provider = craft.app
       .categories
-      .getGroupByHandle('myCategoryGroup')
-      .getFieldLayout() %}
+      .getGroupByHandle('myCategoryGroup') %}
     ```
 
 Global Sets
-:   ```twig
-    {% set fl = craft.app
+:   Global sets are unique, in that they provide their own field layouts:
+    ```twig
+    {% set provider = craft.app
       .globals
-      .getSetByHandle('myGlobalSet')
-      .getFieldLayout() %}
+      .getSetByHandle('myGlobalSet') %}
     ```
 
 Tags
-:   ```twig
-    {% set fl = craft.app
-      .tags
-      .getTagGroupByHandle('myTagGroup')
-      .getFieldLayout() %}
-    ```
-
-Users
-:   All users share a single field layout:
+:   Like categories, tags’ field layouts come from their _group_:
     ```twig
-    {% set fl = craft.app
-      .fields
-      .getLayoutByType('craft\\elements\\User') %}
+    {% set provider = craft.app
+      .tags
+      .getTagGroupByHandle('myTagGroup') %}
     ```
 
-Pass any of these `fl` variables to `fieldValueSql()` along with the desired field instance handle to build the required expression:
+Pass any of these `provider` variables to `fieldValueSql()` along with the desired field instance handle to build the required expression:
 
 ```twig
-{% set valueSql = fieldValueSql(fl, 'sourceMedia') %}
+{% set valueSql = fieldValueSql(provider, 'sourceMedia') %}
 ```
+
+Addresses and users do not have field layout providers. Instead, you can construct the correct expression via their field layouts, directly:
+
+Address
+:   Use the `addresses` service to load the single address field layout:
+    ```twig
+    {% set valueSql = craft.app
+      .addresses
+      .getFieldLayout()
+      .getFieldByHandle('myFieldHandle')
+      .getValueSql() %}
+    ```
+
+User
+:   There is no analogous API for the user field layout, but you can get it directly by its class name—it is guaranteed to be unique:
+    ```twig
+    {% set valueSql = craft.app
+      .fields
+      .getLayoutByType('craft\\elements\\User')
+      .getFieldByHandle('myFieldHandle')
+      .getValueSql() %}
+    ```
+
+If you have an address or user element in a variable, you can always call `element.getFieldLayout()`, then get the field layout element and value SQL. This can produce unexpected results for element types that support more than one field layout.
 
 ### Fixed Ordering
 
