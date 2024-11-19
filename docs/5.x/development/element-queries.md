@@ -586,7 +586,13 @@ $results = Entry::find()
 ```
 :::
 
-<See path="./searching.md" description="Learn about the supported syntaxes for plain-text search." />
+<See path="../system/search.md" description="Learn about the supported syntaxes for plain-text search." />
+
+The value passed to `.search()` can come from anywhere—user input via an HTML form (via `craft.app.request`), hard-coded terms, or from another field (like `entry.relatedSearchFilter`). While search is a great tool, it’s generally not appropriate for finding up elements with specific qualities—for example, you _can_ search for JPEG assets by calling `.search('extension:jpg')`, but using the dedicated [`.extension('jpg')` query method](../reference/element-types/assets.md#extension) will produce faster and more consistent results.
+
+::: warning
+Be aware that exposing records to search _can_ lead to [unintended disclosure or enumeration](../system/searching.md#development) of content that is not otherwise visible. For example, a query like `craft.entries.section('locations').search(q)` (where `q` is a term provided by a user with some understanding of your content model) could attempt to figure out which stores are managed by people with the last name “Smith” by sending a query like `managedBy:*smith*`.
+:::
 
 ## Performance and Optimization
 
