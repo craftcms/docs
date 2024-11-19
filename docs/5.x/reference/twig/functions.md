@@ -270,18 +270,7 @@ Passes through the behavior of the `Craft::configure()` method inherited from [`
 }).all() %}
 ```
 
-It can also be used instead of the [`merge`](https://twig.symfony.com/doc/3.x/filters/merge.html) filter:
-
-```twig
-{% set myObject = { one: 'Original' } %}
-{# With `merge`: #}
-{% set myObject = myObject | merge({ one: 'Overridden', two: 'New' }) %}
-
-{# With `configure`: #}
-{% do configure(myObject, { one: 'Overridden', two: 'New' }) %}
-```
-
-It could technically even be used to set a model or element’s attributes, even though that’s not a great idea since templates generally present content rather than modify it:
+`configure()` _can_ be used to set a model or element’s attributes—but we don’t generally recommend this, as templates are intended to present content rather than modify it:
 
 ```twig
 {% do configure(entry, { title: 'New Title' }) %}
