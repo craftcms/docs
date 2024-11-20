@@ -1,3 +1,9 @@
+---
+related:
+  - uri: link.md
+    label: Link fields
+---
+
 # Addresses Fields
 
 The **Addresses** field is similar to a [Matrix](matrix.md) field, but it manages nested [address elements](../element-types/addresses.md) instead of [entries](../element-types/entries.md). When you create an address it is “owned” by the element that field is attached to. Address fields are _not_ [relational fields](../../system/relations.md#custom-fields).

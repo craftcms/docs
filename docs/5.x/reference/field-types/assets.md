@@ -4,6 +4,8 @@ related:
     label: Address Elements
   - uri: ../../system/relations.md
     label: Using Relationships
+  - uri: link.md
+    label: Link fields
 ---
 
 # Assets Fields

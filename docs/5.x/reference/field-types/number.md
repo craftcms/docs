@@ -1,3 +1,12 @@
+---
+related:
+  - uri: range.md
+    label: Range fields
+  - uri: money.md
+    label: Money fields
+---
+
+
 # Number Fields
 
 Number fields give you a [number input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) that accepts a numeric value with specific bounds and granularity.

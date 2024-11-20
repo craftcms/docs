@@ -1,3 +1,9 @@
+---
+related:
+  - uri: radio-buttons.md
+    label: Radio button fields
+---
+
 # Dropdown Fields
 
 Dropdown fields give you a dropdown input.

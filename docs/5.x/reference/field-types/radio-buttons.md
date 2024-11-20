@@ -1,3 +1,9 @@
+---
+related:
+  - uri: dropdown.md
+    label: Dropdown fields
+---
+
 # Radio Buttons Fields
 
 Radio buttons fields give you a group of [radio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio) inputs, and allow the author to select a single value (or provide a custom one, when allowed).

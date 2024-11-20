@@ -4,6 +4,8 @@ related:
     label: Entry Elements
   - uri: ../../system/relations.md
     label: Using Relationships
+  - uri: link.md
+    label: Link fields
 ---
 
 # Entries Fields

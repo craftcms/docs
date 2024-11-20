@@ -1,6 +1,6 @@
 # Lightswitch Fields
 
-Lightswitch fields give you a simple toggle input for times when all you need is a “Yes” or “No” answer.
+Lightswitch fields give you a simple toggle input and store a boolean value.
 
 <!-- more -->
 
@@ -8,24 +8,24 @@ Lightswitch fields give you a simple toggle input for times when all you need is
 
 ### Querying Elements with Lightswitch Fields
 
-When [querying for elements](../../development/element-queries.md) that have a Lightswitch field, you can filter the results based on the Lightswitch field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a lightswitch field, you can filter the results based on the lightswitch field data using a query param named after your field’s handle.
 
 Possible values include:
 
 | Value | Fetches elements…
 | - | -
-| `true` or `':notempty:'` | with an enabled Lightswitch value.
-| `false` or `':empty:'` | with a disabled Lightswitch value.
+| `true` | with the switch _on_.
+| `false` | with the switch _off_.
 
 ::: code
 ```twig
-{# Fetch entries with the Lightswitch field enabled #}
+{# Fetch entries with the lightswitch field enabled #}
 {% set entries = craft.entries()
   .myFieldHandle(true)
   .all() %}
 ```
 ```php
-// Fetch entries with the Lightswitch field enabled
+// Fetch entries with the lightswitch field enabled
 $entries = \craft\elements\Entry::find()
     ->myFieldHandle(true)
     ->all();
@@ -33,12 +33,12 @@ $entries = \craft\elements\Entry::find()
 :::
 
 ::: tip
-Any elements that don’t have an explicit Lightswitch value set will be treated as if they have the default field value, per the field settings.
+Any elements that don’t have a value set for a lightswitch field will be treated as if they have the default field value, per the field’s settings.
 :::
 
 ### Working with Lightswitch Field Data
 
-If you have an element with a Lightswitch field in your template, you can access its data using your Lightswitch field’s handle:
+If you have an element with a lightswitch field in your template, you can access its value using the field’s handle:
 
 ::: code
 ```twig
@@ -57,13 +57,9 @@ if ($entry->myFieldHandle) {
 ```
 :::
 
-::: tip
-If the element doesn’t have an explicit Lightswitch field value yet, the field’s default value will be returned.
-:::
-
 ### Saving Lightswitch Fields
 
-If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Lightswitch field, you can use this template as a starting point:
+In an element or [entry form](kb:entry-form) that needs to save a value to a lightswitch field, you can use this template as a starting point:
 
 ```twig
 {{ hiddenInput('fields[myFieldHandle]', '') }}

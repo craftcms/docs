@@ -1,5 +1,8 @@
 ---
 description: Select a country from the same database that powers address elements.
+related:
+  - uri: addresses.md
+    label: Address fields
 ---
 
 # Country Fields

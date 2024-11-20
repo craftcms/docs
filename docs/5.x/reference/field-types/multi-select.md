@@ -1,3 +1,11 @@
+---
+related:
+  - uri: checkboxes.md
+    label: Checkboxes fields
+  - uri: radio-buttons.md
+    label: Radio buttons fields
+---
+
 # Multi-select Fields
 
 Multi-select fields give you an input where multiple items may be selected.
@@ -14,7 +22,7 @@ Multi-select fields have the following settings:
 
 ### Querying Elements with Multi-select Fields
 
-When [querying for elements](../../development/element-queries.md) that have a Multi-select field, you can filter the results based on the Multi-select field data using a query param named after your field’s handle.
+When [querying for elements](../../development/element-queries.md) that have a Multi-select field, you can filter the results based on the multi-select field data using a query param named after your field’s handle.
 
 Possible values include:
 
@@ -42,7 +50,7 @@ $entries = \craft\elements\Entry::find()
 
 ### Working with Multi-select Field Data
 
-If you have an element with a Multi-select field in your template, you can access its data using your Multi-select field’s handle:
+If you have an element with a multi-select field in your template, you can access its data using your multi-select field’s handle:
 
 ::: code
 ```twig
@@ -115,7 +123,7 @@ if ($entry->myFieldHandle->contains('foo') {
 
 ### Saving Multi-select Fields
 
-If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Multi-select field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a multi-select field, you can use this template as a starting point:
 
 ```twig
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}

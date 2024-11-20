@@ -1,3 +1,11 @@
+---
+related:
+  - uri: multi-select.md
+    label: Multi-select fields
+  - uri: radio-buttons.md
+    label: Radio buttons fields
+---
+
 # Checkboxes Fields
 
 Checkboxes fields give you a group of [checkbox](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox) inputs, and allow the author to select multiple values (or provide any number of custom values, when allowed).
@@ -19,7 +27,7 @@ Checkboxes fields give you a group of [checkbox](https://developer.mozilla.org/e
 In addition to the standard field options, checkboxes fields have the following settings:
 
 - **Checkbox Options** – Define the options that will be available to authors. Each option contains a **Label** (shown to the author) and a **Value** (saved to the database), as well as a checkbox indicating whether it should be selected by default.
-- **Allow custom options** — Whether authors can provide “other” options, on-the-fly.
+- **Allow custom options** <Since ver="5.5.0" feature="Custom options" /> — Whether authors can provide “other” options, on-the-fly.
 
 ## Development
 

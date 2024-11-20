@@ -1,3 +1,9 @@
+---
+related:
+  - uri: number.md
+    label: Number fields
+---
+
 # Money Fields
 
 Money fields give you a text input tailored for storing currency amounts.

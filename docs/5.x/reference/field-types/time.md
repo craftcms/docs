@@ -1,3 +1,9 @@
+---
+related:
+  - uri: date-time.md
+    label: Date + Time fields
+---
+
 # Time Fields
 
 Time fields provide a time picker input without a date component. When you [access a time field’s value](#development), Craft hydrates the stored “time” value (a string with the format `H:i`, in the system’s timezone) into a native PHP `DateTime` object.

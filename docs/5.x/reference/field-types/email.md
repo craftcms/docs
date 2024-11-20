@@ -1,3 +1,9 @@
+---
+related:
+  - uri: link.md
+    label: Link fields
+---
+
 # Email Fields
 
 Email fields give you a normal text input that requires a valid email address.
