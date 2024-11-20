@@ -1,21 +1,32 @@
 # Number Fields
 
-Number fields give you a text input that accepts a numeric value.
+Number fields give you a [number input](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) that accepts a numeric value with specific bounds and granularity.
 
 <!-- more -->
 
+![Screenshot of a number field interface in the Craft control panel](../../images/fields-number-ui.png)
+
 ## Settings
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new number field via the control panel.">
+  <img src="../../images/fields-number-settings.png" alt="Number field settings screen in the Craft control panel">
+</BrowserShot>
 
 Number fields have the following settings:
 
-- **Default Value** – The default value that should be applied for new elements.
-- **Min Value** – The lowest number that may be entered in the field
-- **Max Value** – The highest number that may be entered in the field.
-- **Decimal Points** – The maximum number of decimal points that may be entered in the field.
-- **Size** – The input’s `size` attribute.
-- **Prefix Text** – Text that should be displayed before the input.
-- **Suffix Text** – Text that should be displayed after the input.
-- **Preview Format** – How field values will be formatted within element indexes.
+- **Min Value** — The lowest number that may be entered in the field
+- **Max Value** — The highest number that may be entered in the field.
+- **Step Size** — The permitted granularity, mapped to the [`step`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number#step) attribute of the resulting input.
+- **Decimal Points** — The maximum number of decimal points that may be entered in the field.
+- **Size** — The input’s [`size` attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#size).
+- **Default Value** — The default value that should be applied for new elements.
+- **Prefix Text** — Text that should be displayed before the input.
+- **Suffix Text** — Text that should be displayed after the input.
+- **Preview Format** — How field values will be formatted within element indexes.
 
 ## Development
 
@@ -48,7 +59,7 @@ $entries = \craft\elements\Entry::find()
 
 ### Working with Number Field Data
 
-If you have an element with a Number field in your template, you can access its data using your Number field’s handle:
+If you have an element with a number field in your template, you can access its value using using the field’s handle:
 
 ::: code
 ```twig
@@ -86,19 +97,23 @@ If the number will always be an integer, pass `decimals=0` to format the number 
 
 ### Saving Number Fields
 
-If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a Number field, you can use this template as a starting point:
+If you have an element form, such as an [entry form](kb:entry-form), that needs to contain a number field, you can use this template as a starting point:
 
 ```twig
+{# Load the base field definition: #}
 {% set field = craft.app.fields.getFieldByHandle('myFieldHandle') %}
 
+{# Resolve a current or default value: #}
 {% set value = entry is defined
   ? entry.myFieldHandle
   : field.defaultValue %}
 
-<input type="number"
+{# Build the input: #}
+<input
+  type="number"
   name="fields[myFieldHandle]"
   min="{{ field.min }}"
   max="{{ field.max }}"
-  value="{{ value }}"
->
+  step="{{ field.step }}"
+  value="{{ value }}">
 ```
