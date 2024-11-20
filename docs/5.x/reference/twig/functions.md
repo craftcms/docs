@@ -415,7 +415,7 @@ Overrides Twig’s default [`dump()`](https://twig.symfony.com/doc/3.x/functions
 
 ## `encodeUrl`
 
-Ensures a URL contains only ASCII characters. The underlying <craft\helpers\UrlHelper::encodeUrl()> function is automatically called by Craft’s internal redirection logic. This is typically only required when using a URL in an HTTP header. Supposing we have a URL with accented characters like `https://my-project.ddev.site/pages/åbçdé`…
+Ensures a URL contains only ASCII characters. The underlying <craft5:craft\helpers\UrlHelper::encodeUrl()> function is automatically called by Craft’s internal redirection logic. This is typically only required when using a URL in an HTTP header. Supposing we have a URL with accented characters like `https://my-project.ddev.site/pages/åbçdé`…
 
 ```twig
 {# …unencoded output leads to garbled characters, and won’t resolve if requested: #}
