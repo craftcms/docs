@@ -9,10 +9,11 @@
 | Param                                         | Description
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)               | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)           | Narrows the query results to only orders that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)                 | Narrows the query results to only orders that are related to certain other elements.
 | [asArray](#asarray)                           | Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
 | [cache](#cache)                               | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [clearCachedResult](#clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 | [customer](#customer)                         | Narrows the query results based on the customer’s user account.
 | [customerId](#customerid)                     | Narrows the query results based on the customer, per their user ID.
 | [dateAuthorized](#dateauthorized)             | Narrows the query results based on the orders’ authorized dates.
@@ -40,6 +41,7 @@
 | [itemTotal](#itemtotal)                       | Narrows the query results based on the order’s item total.
 | [language](#language)                         | Determines which site(s) the orders should be queried in, based on their language.
 | [limit](#limit)                               | Determines the number of orders that should be returned.
+| [notRelatedTo](#notrelatedto)                 | Narrows the query results to only orders that are not related to certain other elements.
 | [number](#number)                             | Narrows the query results based on the order number.
 | [offset](#offset)                             | Determines how many orders should be skipped in the results.
 | [orderBy](#orderby)                           | Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
@@ -96,13 +98,42 @@ Performs any post-population processing on elements.
 
 
 
+#### `andNotRelatedTo`
+
+Narrows the query results to only orders that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all orders that are related to myCategoryA and not myCategoryB #}
+{% set orders = craft.orders()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all orders that are related to $myCategoryA and not $myCategoryB
+$orders = \craft\commerce\elements\Order::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
+
 #### `andRelatedTo`
 
 Narrows the query results to only orders that are related to certain other elements.
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -165,7 +196,7 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
-Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 
 
 
@@ -843,6 +874,33 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `notRelatedTo`
+
+Narrows the query results to only orders that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all orders that are related to myEntry #}
+{% set orders = craft.orders()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all orders that are related to $myEntry
+$orders = \craft\commerce\elements\Order::find()
+    ->notRelatedTo($myEntry)
+    ->all();
+```
+:::
+
+
 #### `number`
 
 Narrows the query results based on the order number.
@@ -1181,7 +1239,7 @@ Narrows the query results to only orders that are related to certain other eleme
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1217,7 +1275,7 @@ Narrows the query results to only orders that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/5.x/system/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1535,7 +1593,7 @@ Causes the query to return matching orders eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/5.x/development/eager-loading.html) for a full explanation of how to work with this parameter.
 
 
 
