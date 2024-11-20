@@ -35,6 +35,7 @@ Craft has over 20 built-in field types that help create tightly-tailored authori
 | [Number](number.md) | Store a numeric value. |
 | [Plain-Text](plain-text.md) | Basic input for any kind of textual value. |
 | [Radio-Buttons](radio-buttons.md) | Choose one option from a predefined list. Equivalent to the _Dropdown_ field. |
+| [Range](range.md) | Pick a number with a visual slider. |
 | [Table](table.md) | Store repeating rows of simple values. |
 | [Tags](tags.md) | Relate [tag](../element-types/tags.md) elements. |
 | [Time](time.md) | Choose a time _without_ a date. |
