@@ -1396,6 +1396,206 @@ $ php craft on
 The system is now online.
 ```
 
+## `pc`
+
+Alias of project-config.
+
+<h3 id="pc-apply">
+    <a href="#pc-apply" class="header-anchor">#</a>
+    <code>pc/apply</code>
+</h3>
+
+
+Applies project config file changes.
+
+<h4 id="pc-apply-options" class="command-subheading">Options</h4>
+
+
+--force
+: Whether every entry change should be force-applied.
+
+
+--quiet
+: Whether to reduce the command output.
+
+
+
+<h3 id="pc-diff">
+    <a href="#pc-diff" class="header-anchor">#</a>
+    <code>pc/diff</code>
+</h3>
+
+
+Outputs a diff of the pending project config YAML changes.
+
+<h4 id="pc-diff-options" class="command-subheading">Options</h4>
+
+
+--invert
+: Whether to treat the loaded project config as the source of truth, instead of the YAML files.
+
+
+
+<h3 id="pc-export">
+    <a href="#pc-export" class="header-anchor">#</a>
+    <code>pc/export</code>
+</h3>
+
+
+Exports the entire project config to a single file.
+
+<h4 id="pc-export-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The path the project config should be exported to.
+Can be any of the following:
+    
+    - A full file path
+    - A folder path (export will be saved in there with a dynamically-generated name)
+    - A filename (export will be saved in the working directory with the given name)
+    - Blank (export will be saved in the working directly with a dynamically-generated name)
+
+
+
+<h4 id="pc-export-options" class="command-subheading">Options</h4>
+
+
+--external
+: Whether to pull values from the project config YAML files instead of the loaded config.
+
+
+--overwrite
+: Whether to overwrite an existing export file, if a specific file path is given.
+
+
+
+<h3 id="pc-get">
+    <a href="#pc-get" class="header-anchor">#</a>
+    <code>pc/get</code>
+</h3>
+
+
+Outputs a project config value.
+
+Example:
+```
+php craft project-config/get system.edition
+```
+
+The “path” syntax used here may be composed of directory and filenames (within your `config/project` folder), YAML object keys (including UUIDs for many Craft resources), and integers (referencing numerically-indexed arrays), joined by a dot (`.`): `path.to.nested.array.0.property`.
+
+<h4 id="pc-get-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+
+
+<h4 id="pc-get-options" class="command-subheading">Options</h4>
+
+
+--external
+: Whether to pull values from the project config YAML files instead of the loaded config.
+
+
+
+<h3 id="pc-rebuild">
+    <a href="#pc-rebuild" class="header-anchor">#</a>
+    <code>pc/rebuild</code>
+</h3>
+
+
+Rebuilds the project config.
+
+<h3 id="pc-remove">
+    <a href="#pc-remove" class="header-anchor">#</a>
+    <code>pc/remove</code>
+</h3>
+
+
+Removes a project config value.
+
+Example:
+```
+php craft project-config/remove some.nested.key
+```
+
+::: danger
+This should only be used when the equivalent change is not possible through the control panel or other Craft APIs. By directly modifying project config values, you are bypassing all validation and can easily destabilize configuration.
+:::
+
+As with [set](#project-config-set), removing values only updates the root `dateModified` key when using the [`--update-timestamp` flag](#project-config-set-options). If you do not include this flag, you must run `project-config/touch` before changes will be detected or applied in other environments!
+
+<h4 id="pc-remove-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+
+
+<h3 id="pc-set">
+    <a href="#pc-set" class="header-anchor">#</a>
+    <code>pc/set</code>
+</h3>
+
+
+Sets a project config value.
+
+Example:
+```
+php craft project-config/set some.nested.key
+```
+
+See [get](#project-config-get) for the accepted key formats.
+
+::: danger
+This should only be used when the equivalent change is not possible through the control panel or other Craft APIs. By directly modifying project config values, you are bypassing all validation and can easily destabilize configuration.
+:::
+
+Values are updated in the database *and* in your local YAML files, but the root `dateModified` project config property is only touched when using the [`--update-timestamp` flag](#project-config-set-options). If you do not update the timestamp along with the value, the change may not be detected or applied in other environments!
+
+<h4 id="pc-set-parameters" class="command-subheading">Parameters</h4>
+
+path
+:  The config item path
+
+value
+:  The config item value as a valid YAML string
+
+
+
+<h4 id="pc-set-options" class="command-subheading">Options</h4>
+
+
+--force
+: Whether every entry change should be force-applied.
+
+
+--message
+: A message describing the changes.
+
+
+--update-timestamp
+: Whether the `dateModified` value should be updated
+
+
+
+<h3 id="pc-touch">
+    <a href="#pc-touch" class="header-anchor">#</a>
+    <code>pc/touch</code>
+</h3>
+
+
+Updates the `dateModified` value in `config/project/project.yaml`, attempting to resolve a Git conflict for it.
+
+<h3 id="pc-write">
+    <a href="#pc-write" class="header-anchor">#</a>
+    <code>pc/write</code>
+</h3>
+
+
+Writes out the currently-loaded project config as YAML files to the `config/project/` folder, discarding any pending YAML changes.
+
 ## `plugin`
 
 Manages plugins.
@@ -1908,6 +2108,85 @@ Re-saves user addresses.
 : Comma-separated list of country codes.
 
 
+--with-fields
+: Only resave elements that have custom fields with these global field handles.
+
+
+--set
+: An attribute name that should be set for each of the elements. The value will be determined by --to.
+
+
+--to
+: The value that should be set on the --set attribute.
+    
+    The following value types are supported:
+    - An attribute name: `--to myCustomField`
+    - An object template: `--to "={myCustomField|lower}"`
+    - A raw value: `--to "=foo bar"`
+    - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
+    - An empty value: `--to :empty:`
+
+
+--if-empty
+: Whether the `--set` attribute should only be set if it doesn’t have a value.
+
+
+--if-invalid
+: Whether the `--set` attribute should only be set if the current value doesn’t validate.
+
+
+
+<h3 id="resave-all">
+    <a href="#resave-all" class="header-anchor">#</a>
+    <code>resave/all</code>
+</h3>
+
+
+Runs all other `resave/*` commands.
+
+<h4 id="resave-all-options" class="command-subheading">Options</h4>
+
+
+--queue
+: Whether the elements should be resaved via a queue job.
+
+
+--element-id
+: The ID(s) of the elements to resave.
+
+
+--uid
+: The UUID(s) of the elements to resave.
+
+
+--site
+: The site handle to fetch elements from.
+
+
+--status
+: The status(es) of elements to resave. Can be set to multiple comma-separated statuses.
+
+
+--offset
+: The number of elements to skip.
+
+
+--limit
+: The number of elements to resave.
+
+
+--update-search-index
+: Whether to update the search indexes for the resaved elements.
+
+
+--touch
+: Whether to update the `dateUpdated` timestamp for the elements.
+
+
+--with-fields
+: Only resave elements that have custom fields with these global field handles.
+
+
 --set
 : An attribute name that should be set for each of the elements. The value will be determined by --to.
 
@@ -1983,6 +2262,10 @@ Re-saves assets.
 : The volume handle(s) to save assets from. Can be set to multiple comma-separated volumes.
 
 
+--with-fields
+: Only resave elements that have custom fields with these global field handles.
+
+
 --set
 : An attribute name that should be set for each of the elements. The value will be determined by --to.
 
@@ -2056,6 +2339,10 @@ Re-saves categories.
 
 --group
 : The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
+
+
+--with-fields
+: Only resave elements that have custom fields with these global field handles.
 
 
 --set
@@ -2167,6 +2454,10 @@ Re-saves entries.
 : Comma-separated list of owner element IDs.
 
 
+--with-fields
+: Only resave elements that have custom fields with these global field handles.
+
+
 --set
 : An attribute name that should be set for each of the elements. The value will be determined by --to.
 
@@ -2246,6 +2537,10 @@ Re-saves tags.
 : The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
 
 
+--with-fields
+: Only resave elements that have custom fields with these global field handles.
+
+
 --set
 : An attribute name that should be set for each of the elements. The value will be determined by --to.
 
@@ -2319,6 +2614,10 @@ Re-saves users.
 
 --group
 : The group handle(s) to save categories/tags/users from. Can be set to multiple comma-separated groups.
+
+
+--with-fields
+: Only resave elements that have custom fields with these global field handles.
 
 
 --set
@@ -2723,6 +3022,18 @@ version using the syntax `<handle>:<version>`.
     until the licenses have been renewed.
 
 
+--minor-only
+: Whether only minor updates should be applied.
+
+
+--patch-only
+: Whether only patch updates should be applied.
+
+
+--except
+: Plugin handles to exclude
+
+
 --force, -f
 : Force the update if allowUpdates is disabled
 
@@ -2862,6 +3173,21 @@ Logs all users out of the system.
 Generates a password reset URL for a user.
 
 <h4 id="users-password-reset-url-parameters" class="command-subheading">Parameters</h4>
+
+user
+:  The ID, username, or email address of the user account.
+
+
+
+<h3 id="users-remove-2fa">
+    <a href="#users-remove-2fa" class="header-anchor">#</a>
+    <code>users/remove-2fa</code>
+</h3>
+
+
+Removes user's two-step verification method(s)
+
+<h4 id="users-remove-2fa-parameters" class="command-subheading">Parameters</h4>
 
 user
 :  The ID, username, or email address of the user account.

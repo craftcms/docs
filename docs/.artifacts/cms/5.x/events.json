@@ -1066,6 +1066,92 @@
     },
     {
         "class": "craft\\base\\Element",
+        "name": "EVENT_REGISTER_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\base\\Element",
+        "name": "EVENT_REGISTER_DEFAULT_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\base\\Element",
         "name": "EVENT_DEFINE_EAGER_LOADING_MAP",
         "type": "craft\\events\\DefineEagerLoadingMapEvent",
         "desc": "The event that is triggered when defining an eager-loading map.",
@@ -4327,6 +4413,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\PcController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\PcController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\PcController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\PluginController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -6193,6 +6297,92 @@
         "name": "EVENT_PREP_QUERY_FOR_TABLE_ATTRIBUTE",
         "type": "craft\\events\\ElementIndexTableAttributeEvent",
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Address",
+        "name": "EVENT_REGISTER_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Address",
+        "name": "EVENT_REGISTER_DEFAULT_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -8477,6 +8667,92 @@
     },
     {
         "class": "craft\\elements\\Asset",
+        "name": "EVENT_REGISTER_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Asset",
+        "name": "EVENT_REGISTER_DEFAULT_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Asset",
         "name": "EVENT_DEFINE_EAGER_LOADING_MAP",
         "type": "craft\\events\\DefineEagerLoadingMapEvent",
         "desc": "The event that is triggered when defining an eager-loading map.",
@@ -10380,6 +10656,92 @@
         "name": "EVENT_PREP_QUERY_FOR_TABLE_ATTRIBUTE",
         "type": "craft\\events\\ElementIndexTableAttributeEvent",
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Category",
+        "name": "EVENT_REGISTER_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Category",
+        "name": "EVENT_REGISTER_DEFAULT_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -12920,6 +13282,162 @@
     },
     {
         "class": "craft\\elements\\Entry",
+        "name": "EVENT_REGISTER_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "draft": {
+                "label": "Element is a draft",
+                "conditionsPhp": "ElementHelper::isDraft($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "provisional": {
+                "label": "Element is a provisional draft",
+                "conditionsPhp": "ElementHelper::rootElement($event->sender)->isProvisionalDraft",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            },
+            "revision": {
+                "label": "Element is a revision",
+                "conditionsPhp": "ElementHelper::isRevision($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "provisional",
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Entry",
+        "name": "EVENT_REGISTER_DEFAULT_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "draft": {
+                "label": "Element is a draft",
+                "conditionsPhp": "ElementHelper::isDraft($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "provisional": {
+                "label": "Element is a provisional draft",
+                "conditionsPhp": "ElementHelper::rootElement($event->sender)->isProvisionalDraft",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            },
+            "revision": {
+                "label": "Element is a revision",
+                "conditionsPhp": "ElementHelper::isRevision($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "provisional",
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Entry",
         "name": "EVENT_DEFINE_EAGER_LOADING_MAP",
         "type": "craft\\events\\DefineEagerLoadingMapEvent",
         "desc": "The event that is triggered when defining an eager-loading map.",
@@ -16239,6 +16757,92 @@
         "name": "EVENT_PREP_QUERY_FOR_TABLE_ATTRIBUTE",
         "type": "craft\\events\\ElementIndexTableAttributeEvent",
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\GlobalSet",
+        "name": "EVENT_REGISTER_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\GlobalSet",
+        "name": "EVENT_REGISTER_DEFAULT_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -18286,6 +18890,92 @@
         "name": "EVENT_PREP_QUERY_FOR_TABLE_ATTRIBUTE",
         "type": "craft\\events\\ElementIndexTableAttributeEvent",
         "desc": "The event that is triggered when preparing an element query for an element index, for each attribute present in the table.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Tag",
+        "name": "EVENT_REGISTER_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Tag",
+        "name": "EVENT_REGISTER_DEFAULT_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -20527,6 +21217,92 @@
     },
     {
         "class": "craft\\elements\\User",
+        "name": "EVENT_REGISTER_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\User",
+        "name": "EVENT_REGISTER_DEFAULT_CARD_ATTRIBUTES",
+        "type": "craft\\events\\RegisterElementCardAttributesEvent",
+        "desc": "The event that is triggered when registering the card attributes for the element type.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\User",
         "name": "EVENT_DEFINE_EAGER_LOADING_MAP",
         "type": "craft\\events\\DefineEagerLoadingMapEvent",
         "desc": "The event that is triggered when defining an eager-loading map.",
@@ -23626,6 +24402,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\LanguageConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\conditions\\LevelConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -27035,6 +27853,54 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\LineBreak",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Markdown",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Markdown",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Markdown",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Markdown",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Markdown",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Markdown",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Markdown",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\Markdown",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -31139,6 +32005,150 @@
     },
     {
         "class": "craft\\fields\\RadioButtons",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_BEFORE_ELEMENT_SAVE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is saved."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_AFTER_ELEMENT_SAVE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is saved."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_AFTER_ELEMENT_PROPAGATE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is fully saved and propagated to other sites."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_BEFORE_ELEMENT_DELETE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is deleted."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_AFTER_ELEMENT_DELETE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is deleted."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_BEFORE_ELEMENT_RESTORE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered before the element is restored."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_AFTER_ELEMENT_RESTORE",
+        "type": "craft\\events\\FieldElementEvent",
+        "desc": "The event that is triggered after the element is restored."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_DEFINE_KEYWORDS",
+        "type": "craft\\events\\DefineFieldKeywordsEvent",
+        "desc": "The event that is triggered when defining the field’s search keywords for an element."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_DEFINE_INPUT_HTML",
+        "type": "craft\\events\\DefineFieldHtmlEvent",
+        "desc": "The event that is triggered when defining the field’s input HTML."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_AFTER_MERGE_INTO",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after the field has been merged into another."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_AFTER_MERGE_FROM",
+        "type": "craft\\events\\FieldEvent",
+        "desc": "The event that is triggered after another field has been merged into this one."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_BEFORE_SAVE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the component is saved."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_AFTER_SAVE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered after the component is saved."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_BEFORE_DELETE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the component is deleted."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_BEFORE_APPLY_DELETE",
+        "type": "craft\\events\\ModelEvent",
+        "desc": "The event that is triggered before the delete is applied to the database."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_AFTER_DELETE",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the component is deleted."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_DEFINE_SETTINGS_ATTRIBUTES",
+        "type": "craft\\events\\DefineValueEvent",
+        "desc": "The event that is triggered when defining the component’s settings attributes, as returned by `settingsAttributes()`."
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\Range",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\Range",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -38543,6 +39553,12 @@
         "desc": "The event that is triggered when defining subdivisions options for an address field for a given country code, and optionally administrativeArea and locality."
     },
     {
+        "class": "craft\\services\\Addresses",
+        "name": "EVENT_DEFINE_ADDRESS_COUNTRIES",
+        "type": "craft\\events\\DefineAddressCountriesEvent",
+        "desc": "The event that is triggered when defining country options for an address."
+    },
+    {
         "class": "craft\\services\\Assets",
         "name": "EVENT_BEFORE_REPLACE_ASSET",
         "type": "craft\\events\\ReplaceAssetEvent",
@@ -39285,6 +40301,12 @@
         "name": "EVENT_BEFORE_SAVE_FIELD",
         "type": "craft\\events\\FieldEvent",
         "desc": "The event that is triggered before a field is saved."
+    },
+    {
+        "class": "craft\\services\\Fields",
+        "name": "EVENT_BEFORE_APPLY_FIELD_SAVE",
+        "type": "craft\\events\\ApplyFieldSaveEvent",
+        "desc": "The event that is triggered before a field save is applied to the database."
     },
     {
         "class": "craft\\services\\Fields",
