@@ -61,6 +61,7 @@ module.exports = {
             "field-types/number",
             "field-types/plain-text",
             "field-types/radio-buttons",
+            "field-types/range",
             "field-types/table",
             "field-types/tags",
             "field-types/time",
