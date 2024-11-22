@@ -25,6 +25,7 @@ return GeneralConfig::create()
     ->aliases([
         '@webroot' => dirname(__DIR__) . '/web',
     ])
+;
 ```
 
 A `general.php` config file is not mandatory; omitting it from your project (or including one but not explicitly configuring a setting) will use Craft’s defaults. The list below describes the default values for each setting.
