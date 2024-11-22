@@ -9,10 +9,11 @@
 | Param                                       | Description
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only subscriptions that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only subscriptions that are related to certain other elements.
 | [asArray](#asarray)                         | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce5:craft\commerce\elements\Subscription) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 | [dateCanceled](#datecanceled)               | Narrows the query results based on the subscriptions’ cancellation date.
 | [dateCreated](#datecreated)                 | Narrows the query results based on the subscriptions’ creation dates.
 | [dateExpired](#dateexpired)                 | Narrows the query results based on the subscriptions’ expiration date.
@@ -32,6 +33,7 @@
 | [language](#language)                       | Determines which site(s) the subscriptions should be queried in, based on their language.
 | [limit](#limit)                             | Determines the number of subscriptions that should be returned.
 | [nextPaymentDate](#nextpaymentdate)         | Narrows the query results based on the subscriptions’ next payment dates.
+| [notRelatedTo](#notrelatedto)               | Narrows the query results to only subscriptions that are not related to certain other elements.
 | [offset](#offset)                           | Determines how many subscriptions should be skipped in the results.
 | [onTrial](#ontrial)                         | Narrows the query results to only subscriptions that are on trial.
 | [orderBy](#orderby)                         | Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
@@ -74,13 +76,42 @@ Performs any post-population processing on elements.
 
 
 
+#### `andNotRelatedTo`
+
+Narrows the query results to only subscriptions that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all subscriptions that are related to myCategoryA and not myCategoryB #}
+{% set subscriptions = craft.subscriptions()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all subscriptions that are related to $myCategoryA and not $myCategoryB
+$subscriptions = \craft\commerce\elements\Subscription::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
+
 #### `andRelatedTo`
 
 Narrows the query results to only subscriptions that are related to certain other elements.
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -143,7 +174,7 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
-Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 
 
 
@@ -673,6 +704,33 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
+#### `notRelatedTo`
+
+Narrows the query results to only subscriptions that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all subscriptions that are related to myEntry #}
+{% set subscriptions = craft.subscriptions()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all subscriptions that are related to $myEntry
+$subscriptions = \craft\commerce\elements\Subscription::find()
+    ->notRelatedTo($myEntry)
+    ->all();
+```
+:::
+
+
 #### `offset`
 
 Determines how many subscriptions should be skipped in the results.
@@ -876,7 +934,7 @@ Narrows the query results to only subscriptions that are related to certain othe
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -912,7 +970,7 @@ Narrows the query results to only subscriptions that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/5.x/system/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1158,7 +1216,7 @@ Causes the query to return matching subscriptions eager-loaded with related elem
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/5.x/development/eager-loading.html) for a full explanation of how to work with this parameter.
 
 
 
