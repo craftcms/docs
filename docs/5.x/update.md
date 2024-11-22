@@ -114,6 +114,10 @@ php craft update element-api:4.1.0
 
 After an update is performed from the CLI, Craft will apply any relevant migrations.
 
+::: tip
+Use the `--minor` or `--patch` flag when running `craft update` to update in finer increments. Pass `--except craft,plugin-name` to update all but the provided package(s).
+:::
+
 ### Composer
 
 `craft update` is mostly a wrapper around Composer—but you can use Composer directly for more control over the update process.
