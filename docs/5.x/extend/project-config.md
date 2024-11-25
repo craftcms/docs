@@ -188,7 +188,7 @@ While components can be connected in the database via their IDs, references in p
 
 ### Step 3: Push Config Changes
 
-Now that we have our handlers set up, it’s time to update our service methods so that they operate directly on the project config store, rather than the database. Items in the project config can be added or updated using <craft5:craft\services\ProjectConfig::set()>, and removed using [remove()](craft5:craft\services\ProjectConfig::remove()). _The keys you use when setting project config data must match your handlers from [step 1](#step-1-listen-for-config-changes), or they will not trigger, and you will be left with an inconsistent database state.
+Now that we have our handlers set up, it’s time to update our service methods so that they operate directly on the project config store, rather than the database. Items in the project config can be added or updated using <craft5:craft\services\ProjectConfig::set()>, and removed using [remove()](craft5:craft\services\ProjectConfig::remove()). _The keys you use when setting project config data must match your handlers from [step 1](#step-1-listen-for-config-changes), or they will not trigger, and you will be left with an inconsistent database state._
 
 ::: tip
 `ProjectConfig::set()` will sort all associative arrays by their keys, recursively. If you are storing an associative array where the order of the items is important (e.g. editable table data), then you must run the array through <craft5:craft\helpers\ProjectConfig::packAssociativeArray()> before passing it to `ProjectConfig::set()`.
@@ -347,7 +347,7 @@ Event::on(
 
 ## Validating Models
 
-Craft treats project config as the authority on system state, so config must be validated _before_ committing it to the store. Beyond some basic organizational features (like when a folder is created instead of a file), the project config map does not have a schema, and makes to attempt to validate the key-value pairs set on it.
+Craft treats project config as the authority on system state, so config must be validated _before_ committing it to the store. Beyond some basic organizational features (like when a folder is created instead of a file), the project config map does not have a schema, and makes no attempt to validate the key-value pairs set on it.
 
 Similarly, project config handlers can (and should) only care about how to bring the database’s state into agreement with that map. Unless your plugin emits [events](events.md) when a savable component is updated, you may not even need to populate a model!
 
