@@ -62,7 +62,7 @@ Craft doesn’t require your variables to follow any kind of naming convention, 
 For most installations, the `.env` file is the only place where secrets should be stored. Avoid checking it in to version control!
 
 ::: tip
-Some platforms (especially those with ephemeral filesystems) provide a GUI for managing environment variables in lieu of using a `.env` file, and will automatically inject them when the server or process starts. `App::env()` is still the recommended method for retrieving environment variables set in this way.
+Some platforms (especially those with ephemeral filesystems, like [Craft Cloud](https://craftcms.com/cloud)) provide a GUI for managing environment variables in lieu of using a `.env` file, and will automatically inject them when the server or process starts. `App::env()` is still the recommended method for retrieving environment variables set in this way.
 :::
 
 ### Entry Script
@@ -390,7 +390,7 @@ Whenever you see this UI, you can provide a valid alias or environment variable 
 
 Focusing one of these fields will immediately suggest some values. Type `$` followed by an environment variable’s name, or `@` followed by an alias to narrow the suggestions and find your placeholder.
 
-Aliases have the extra benefit of allowing extra path segments, so `@primaryUrl/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific alias](#aliases) (like `@uploads`) and use that in the control panel, instead. Environment variables _cannot_ be prepended to other values.
+You may combine aliases and environment variables with additional path segments, so `@primaryUrl/uploads` and `$PRIMARY_SITE_URL/de` are both perfectly valid settings. <Since ver="5.5.0" feature="Combining environment variables with other path segments in project config values" /> If a combination of alias and path is used frequently, though, it might make sense to [define a specific alias](#aliases) (like `@uploads`) and use that in the control panel, instead. Prior to Craft 5.5.0, this was only a feature of aliases; environment variables _could not_ be prepended to other values.
 
 ::: tip
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](extend/environmental-settings.md) to learn how.
