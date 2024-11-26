@@ -9,7 +9,7 @@ related:
 # Link Fields <Badge text="New!" />
 
 ::: tip
-The link field replaced the URL field in [Craft 5.3](github:craftcms/cms/releases/5.3.0). Your existing fields will be automatically enhanced with the new UI. If you want to take advantage of the new features (like linking to assets, categories, and entries), check out the field’s [settings](#settings) screen.
+The link field replaced the URL field in [Craft 5.3](github:craftcms/cms/releases/5.3.0). When you update, existing fields will be automatically enhanced with the new UI. If you want to take advantage of the new features (like linking to assets, categories, and entries), check out the field’s [settings](#settings) screen.
 :::
 
 Link fields provide a flexible way to link to on- and off-site resources, including assets, categories, entries, email addresses, phone numbers, or arbitrary URLs.
