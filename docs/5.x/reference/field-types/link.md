@@ -2,7 +2,6 @@
 related:
   - uri: ../../system/fields.md
     label: Learn about content and custom fields
-related:
   - uri: ../../system/relations.md
     label: Using relationships
 ---
