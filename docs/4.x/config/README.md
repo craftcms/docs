@@ -386,7 +386,7 @@ Whenever you see this UI, you can provide a valid alias or environment variable 
 
 Focusing one of these fields will immediately suggest some values. Type `$` followed by an environment variable’s name or `@` followed by an alias to narrow the suggestions and find your placeholder.
 
-Aliases have the extra benefit of allowing extra path segments, so `@primaryUrl/uploads` is a perfectly valid setting. If a combination of alias and path is used frequently, though, it might make sense to [define a specific `@uploads` alias](#aliases) and use that in the control panel, instead.
+You may combine aliases and environment variables with additional path segments, so `@primaryUrl/uploads` and `$PRIMARY_SITE_URL/de` are both perfectly valid settings. <Since ver="4.13.0" feature="Combining environment variables with other path segments in project config values" /> If a combination of alias and path is used frequently, though, it might make sense to [define a specific alias](#aliases) (like `@uploads`) and use that in the control panel, instead. Prior to Craft 5.5.0, this was only a feature of aliases; environment variables _could not_ be prepended to other values.
 
 ::: tip
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](../extend/environmental-settings.md) to learn how.
