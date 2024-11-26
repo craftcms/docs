@@ -145,6 +145,10 @@ The attributes and fields displayed on element cards is ultimately determined by
 
 An element’s **Title** and **Status** are always visible, and the presence of a thumbnail is determined by the field layout itself (by selecting **Use for element thumbnails** in the field layout element’s <Icon kind="ellipses" /> action menu). Additional attributes _not_ present in the field layout can be enabled in the card customization interface; those that _are_ part of the field layout will indicate when they are enabled with an “eye” icon.
 
+::: tip
+A card’s thumbnail can come from any field that implements <craft5:craft\base\ThumbableFieldInterface> (like [assets](../reference/field-types/assets.md) or [icon](../reference/field-types/icon.md) fields), or be “inherited” from another element via a [relational field](relations.md).
+:::
+
 ## Nested Elements
 
 Craft ships with two native _nested element_ implementations, which provide unique authoring or administrative experiences:
