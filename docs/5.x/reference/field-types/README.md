@@ -1,4 +1,5 @@
 ---
+description: "Craft has over 20 built-in field types that help create tightly-tailored authoring and developer experiences."
 related:
   - uri: ../../system/fields.md
     label: Fields and Content
