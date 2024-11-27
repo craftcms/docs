@@ -46,7 +46,7 @@ Sensitive credentials like your database’s password should be kept out of trac
 
 ### `.env`
 
-New [Craft projects](https://github.com/craftcms/craft) use [DotEnv](https://github.com/vlucas/phpdotenv) to load values into the environment from a `.env` file in the root of your project. A basic `.env` file contains pairs of keys and values:
+New [Craft projects](https://github.com/craftcms/craft) use [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) to load values into the environment from a `.env` file in the root of your project. A basic `.env` file contains pairs of keys and values:
 
 ```env
 CRAFT_APP_ID=my-project
@@ -63,6 +63,29 @@ For most installations, the `.env` file is the only place where secrets should b
 
 ::: tip
 Some platforms (especially those with ephemeral filesystems, like [Craft Cloud](https://craftcms.com/cloud)) provide a GUI for managing environment variables in lieu of using a `.env` file, and will automatically inject them when the server or process starts. `App::env()` is still the recommended method for retrieving environment variables set in this way.
+:::
+
+#### Nested Variables
+
+In your `.env` file, one variable can reference another:
+
+```bash
+BASE_HOSTNAME="acmelabs.com"
+PRIMARY_SITE_URL="https://${BASE_HOSTNAME}"
+GLOBAL_SITE_URL="https://global.${BASE_HOSTNAME}"
+```
+
+Depending on your infrastructure, this may also be possible at other points in process of loading environment variables. The example above works thanks to `vlucas/phpdotenv`; Docker (and therefore DDEV) share this general syntax, but not all variables are available at each step as the container boots up—so interpolation is best left until this last stage. Earlier layers may allow interpolation to be escaped so that it is only evaluated by a later one:
+
+```bash
+# Here, we escape the beginning interpolation token with a backslash (\):
+BASE_API_HOSTNAME="api.\${DDEV_HOSTNAME}"
+```
+
+Craft does not know or indicate when substitutions have occurred—it only sees the final, fully-resolved values.
+
+::: warning
+Variables with substitutions will only be written back into the environment when using one of the [mutable loaders](https://github.com/vlucas/phpdotenv?tab=readme-ov-file#immutability-and-repository-customization).
 :::
 
 ### Entry Script
