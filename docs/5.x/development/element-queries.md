@@ -698,7 +698,7 @@ Counting isn’t the only operation that the database can do for you! What if we
 `scalar()` is just an [execution method](#executing-element-queries) that returns the first column from the first result—it will always produce a simple, “[scalar](https://www.php.net/manual/en/function.is-scalar.php)” value.
 
 ::: warning
-While `select()` and `orderBy()` accept field handles and ambiguous columns, some SQL functions and expressions (like `MIN()` or `SUM()`) may not.
+While `select()` and `orderBy()` accept field handles and ambiguous columns, some SQL functions and expressions (like `MIN()` or `SUM()`) may not. In these cases, you will need to [build a valid expression](#content-and-custom-fields) for extracting the key(s) from the content JSON blob.
 :::
 
 #### Lean Selections
@@ -754,7 +754,7 @@ You may call <craft5:craft\db\Query::asArray()> to skip populating element model
 
 Most custom field values are stored in a single JSON column, keyed by their unique field instance UUID. Craft handles this automatically when using a field or field instance’s built-in query methods (i.e. `.myCustomDateField('<= 2025-11-05')`) by building the appropriate “JSON extraction” expression.
 
-However, Craft _does not_ intercept direct use of `.where()` and other [specialized condition](#conditions) methods, and cannot infer what is a plain column name versus a field or field instance handle. This means you are responsible for building equivalent field value expressions. Typically, this involves a field instance handle and a _field layout provider_ (like an entry type, asset volume, category group, or other component that manages a field layout):
+However, Craft _does not_ intercept direct use of `.where()` and other specialized [condition](#conditions) and [execution](#query-execution) methods, and cannot infer what is a plain column name versus a field or field instance handle. This means you are responsible for building equivalent field value expressions. Typically, this involves a field instance handle and a _field layout provider_ (like an entry type, asset volume, category group, or other component that manages a field layout):
 
 ::: code
 ```twig{1,7} Twig
@@ -887,17 +887,14 @@ When using `.id()` to query for elements with a specific set of IDs, you can cal
 
 Selections modify what columns and rows are returned.
 
-[select()](yii2:yii\db\Query::select())
-: Define a list of columns to `SELECT`.
-
-[addSelect()](yii2:yii\db\Query::addSelect())
-: Add columns to the existing selection.
+[select()](yii2:yii\db\Query::select()) and [addSelect()](yii2:yii\db\Query::addSelect())
+: Define a list of columns to `SELECT`, or add columns to an existing selection. Craft automatically resolves custom field handles based on the possible field layouts. <Since ver="5.5.0" feature="Automatic resolution of custom field handles in query selections" />
 
 [distinct()](yii2:yii\db\Query::distinct())
 : Return only rows that have a unique combination of values in the provided column(s).
 
 [groupBy($columns)](yii2:yii\db\Query::groupBy())
-: Combine or flatten database rows based on the value of one or more columns. Often used in combination with aggregate [selections](#selections) like `SUM(columnName)`.
+: Combine or flatten database rows based on the value of one or more columns. Often used in combination with aggregate selections or [execution methods](#query-execution) like `.sum(columnName)`. Note that this is _not_ equivalent to or compatible with the [`group` filter](../reference/twig/filters.md#group) in Twig, which operates on arrays, in-memory.
 
 [limit($n)](yii2:yii\db\Query::limit())
 : Set a maximum number of results that can be returned.
@@ -941,10 +938,12 @@ Adding columns to your selection from other tables may cause errors when populat
 ### Conditions
 
 ::: warning
-Exercise caution when using these methods directly—some will completely overwrite the existing query conditions and cause unpredictable results like allowing drafts, revisions, or elements from other sites to leak into the result set.
+Exercise caution when using these methods directly—some will completely overwrite the existing query conditions and cause unpredictable results like allowing drafts, revisions, pending and disabled entries, or elements from other sites to leak into the result set.
 
 Specific [element type queries](#element-types) and [custom field methods](#querying-with-custom-fields) often provide a more approachable and reliable API for working with the database, and will modify the query in non-destructive ways.
 :::
+
+The following methods will work on any “real” database columns, but may require building an [appropriate expression for custom field values](#content-and-custom-fields).
 
 [where()](yii2:yii\db\QueryTrait::where())
 : Directly set the query’s `WHERE` clause. See the warning, above.
