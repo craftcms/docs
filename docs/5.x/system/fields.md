@@ -14,35 +14,9 @@ Fields are managed in **Settings** → **Fields**, and can be created on-the-fly
 
 ## Field Types
 
-Choosing a field type determines what the field’s input UI is going to look like, how it stores data, and how you’ll interact with that data in your templates.
+Choosing a field type determines what the field’s input UI is going to look like, how it stores data, how you’ll use that data in [templates](../development/templates.md), and the ways that you can [query](../development/element-queries.md) against that data.
 
-Craft comes with the following built-in field types:
-
-Type | Description
----- | -----------
-[Addresses](../reference/field-types/addresses.md) | Manage nested [address](../reference/element-types/addresses.md) elements.
-[Assets](../reference/field-types/assets.md) | Relate [asset](../reference/element-types/assets.md) elements.
-[Categories](../reference/field-types/categories.md) | Relate [category](../reference/element-types/categories.md) elements.
-[Checkboxes](../reference/field-types/checkboxes.md) | Select any number of values from a list.
-[Color](../reference/field-types/color.md) | Choose a color with the browser’s color picker UI.
-[Country](../reference/field-types/country.md) | Select from the list of countries available to [address](../reference/field-types/addresses.md) elements.
-[Date/Time](../reference/field-types/date-time.md) | Choose a date and/or time, as well as a timezone.
-[Dropdown](../reference/field-types/dropdown.md) | Choose one value from a list.
-[Email](../reference/field-types/email.md) | Validate text input as an email address.
-[Entries](../reference/field-types/entries.md) | Relate [entry](../reference/element-types/entries.md) elements.
-[Icon](../reference/field-types/icon.md) | Select from a palette of icons.
-[Lightswitch](../reference/field-types/lightswitch.md) | Toggle a binary option.
-[Link](../reference/field-types/link.md) | Point to resources on- or off-site.
-[Matrix](../reference/field-types/matrix.md) | Compose advanced content structures with nested entries.
-[Money](../reference/field-types/money.md) | Input a numeric value and choose a currency.
-[Multi-select](../reference/field-types/multi-select.md) | Select any number of values from a list (same as checkboxes, but a different UI).
-[Number](../reference/field-types/number.md) | Input a numeric value.
-[Plain Text](../reference/field-types/plain-text.md) | Input arbitrary text.
-[Radio Buttons](../reference/field-types/radio-buttons.md) | Choose one value from a list.
-[Table](../reference/field-types/table.md) | Add rows of similar data.
-[Tags](../reference/field-types/tags.md) | Relate tag elements, or create new ones on-the-fly.
-[Time](../reference/field-types/time.md) | Set a time of day, without a date or timezone.
-[Users](../reference/field-types/users.md) | Relate [user](../reference/element-types/users.md) elements.
+<See path="../reference/field-types/" />
 
 ## Field Settings
 
