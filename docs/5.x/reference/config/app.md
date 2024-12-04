@@ -10,7 +10,7 @@ Craft’s entire [application configuration](guide:structure-applications#applic
 
 <!-- more -->
 
-You can further customize the application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
+You can further customize the application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`, respectively.
 
 ::: warning
 New [Craft projects](https://github.com/craftcms/craft) include a stub of `app.php` that exists solely to set an app ID, which affects how caches and sessions are stored. Most applications will _not_ require additional application config.
@@ -533,6 +533,8 @@ return [
 ];
 ```
 
+### CORS
+
 We also provide a [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)-specific filter (<craft5:craft\filters\Cors>) to manage server-side policies on a per-action basis:
 
 ```php
@@ -573,3 +575,93 @@ With [Dev Mode](kb:what-dev-mode-does) on, some potentially dangerous CORS misco
 ::: warning
 Headers in action-specific overrides are _not_ merged with global headers—they are only applied if the header was already set, globally!
 :::
+
+### Basic Authentication <Since ver="5.5.0" feature="Basic HTTP authentication" />
+
+While typically handled at the server level, Craft provides a couple of enhancements to basic [HTTP authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) that give you greater flexibility and control over who can see your site. This functionality is intended to replace the deprecated <config5:enableBasicHttpAuth> setting, and only affects _site_ requests—not control panel requests.
+
+Two [filters](guide:structure-filters) provide a neat management layer for HTTP authorization challenges:
+
+- **<craft5:craft\filters\BasicHttpAuthLogin>** — Use existing Craft user accounts to authorize access to one or more sites. Upon authorization, the client is automatically logged in to Craft, as well.
+- **<craft5:craft\filters\BasicHttpAuthStatic>** — Authorize with a single username and password, determined by the filter’s configuration. The client is not implicitly connected to a Craft user.
+
+Only one filter should be configured at a time, and it must be in the web-specific application config file, `config/app.web.php` (not `config/app.php`).
+
+::: tip
+If you are looking to protect some content behind front-end login, consider using the [`{% requireLogin %}`](../twig/tags.md#requirelogin) or [`{% requirePermission %}`](../twig/tags.md#requirepermission) tags in your templates.
+:::
+
+#### Common Features
+
+Like the specialized [header filters](#requests-responses) above, both authentication methods have a number of ways to target specific circumstances:
+
+```php
+use Craft;
+use craft\filters\BasicHttpAuthLogin;
+
+return [
+    'as requireBasicLogin' => [
+        'class' => BasicHttpAuthLogin::class,
+
+        // Test against arbitrary criteria (akin to validators):
+        'when' => fn() => Craft::$app->env !== 'production',
+
+        // Only apply to specific sites:
+        'site' => ['secretSite'],
+
+        // Make optional for some actions:
+        'optional' => ['queue/run'],
+    ],
+];
+```
+
+When the filter determines that a request requires authorization and credentials weren’t already supplied, it will issue a challenge “response.” This means that (in most clients) you can construct a URL like `https://username:password@my-project.ddev.site`, or send the `Authorization` header in the initial request to immediately begin an authenticated session.
+
+::: tip
+You may need to close or quit your browser to force it to “forget” valid or invalid credentials.
+:::
+
+#### Authorizing with User Accounts
+
+Authorizing against Craft user accounts gives you a way to simultaneously protect your front-end from prying eyes, and automatically log in users in a standards-compliant way.
+
+```php
+use craft\filters\BasicHttpAuthLogin;
+
+return [
+    'as requireBasicLogin' => BasicHttpAuthLogin::class,
+];
+```
+
+::: danger
+This is an inherently less secure means of logging in:
+
+- Two-step verification is skipped, for control panel users;
+- Credentials _may_ be sent in clear text, if the client does not explicitly use HTTPs, or the server is not configured to automatically redirect to a secure protocol;
+- A user may be logged in without CSRF validation;
+- Failed login attempts are not counted toward <config5:maxInvalidLogins> or <config5:cooldownDuration>;
+
+Only enable it in situations you are able to accept these risks—ideally, scoped to specific noncritical actions or environments.
+
+POST requests will typically still use CSRF protection.
+:::
+
+#### Authorizing with Static Credentials
+
+Static authentication requires a `username` and `password` be set in the filter’s configuration, as it is not implicitly connected to Craft users. Unlike [Apache](https://httpd.apache.org/docs/2.4/howto/auth.html) and [nginx](https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/) (or `BasicHttpAuthLogin`, above), this authorization method does _not_ permit multiple sets of credentials.
+
+```php
+use craft\filters\BasicHttpAuthStatic;
+
+return [
+    'as basicStaticWithConfig' => [
+        'class' => BasicHttpAuthStatic::class,
+        'username' => 'foo',
+        'password' => 'secret',
+    ],
+];
+```
+
+All clients use the same username and password—any relationship between these values and “real” users should be considered coincidental.
+
+If a credentials are not provided explicitly, Craft will use values from the `CRAFT_HTTP_BASIC_AUTH_USERNAME` and `CRAFT_HTTP_BASIC_AUTH_PASSWORD` environment variables. You can also retrieve them from another variable using <craft5:craft\helpers\App::env()>. If one or the other is absent after looking for fallbacks, Craft throws an <yii2:yii\base\InvalidConfigException>.
