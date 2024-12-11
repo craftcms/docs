@@ -148,7 +148,8 @@ This is the default behavior when using a link’s `link` property. Craft also a
   href: link.value,
   target: link.target,
   rel: link.target == '_blank' ? 'noopener noreferrer' : null,
-}, link.label) }}
+  text: link.label,
+}) }}
 
 {# ...produces output like... #}
 
