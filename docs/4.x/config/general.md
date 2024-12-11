@@ -1,4 +1,5 @@
 ---
+description: Learn about configuration options available via Craft’s general.php file.
 containsGeneratedContent: yes
 ---
 
