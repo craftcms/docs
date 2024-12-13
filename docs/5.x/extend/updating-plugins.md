@@ -23,7 +23,7 @@ Be sure and fully review this page (and the [changelog](https://github.com/craft
 
 ## Process
 
-Updating a plugin for Craft 5 starts with a fully-updated Craft 4 installation. See our guide on [loading your plugin into a Craft project](plugin-guide.md#loading-your-plugin-into-a-craft-project) to get up-and-running.
+Updating a plugin for Craft 5 starts with a fully-updated Craft 4 installation. See our guide on [loading your plugin into a Craft project](plugin-guide.md#loading-your-plugin-into-a-craft-project) to get an existing plugin up-and-running.
 
 Once your environment is set up, this is what the process will look like:
 
