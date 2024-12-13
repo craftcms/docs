@@ -13,7 +13,7 @@ For the most part, Craft controllers behave the same as they do in Yii, so every
 
 ## Creating a Controller
 
-Controllers should live within the `controllers/` directory of your plugin or module’s base source folder, and must include the a `Controller` suffix in their class and filename.
+Controllers should live within the `controllers/` directory of your plugin or module’s base source folder, and must include a `Controller` suffix in their class and filename (i.e. `LeadController` and `LeadController.php`).
 
 Craft controllers should extend <craft5:craft\web\Controller>, which offers a few advantages over its parent, <yii2:yii\web\Controller>:
 
@@ -62,7 +62,7 @@ class WidgetsController extends Controller
 
 ## Routing
 
-There are several ways to access your controller action in a request.
+There are several ways to access your controller action in a request, which you can use within your own control panel features, and in documentation of developer-facing features.
 
 ::: tip
 Information on [using controller actions](../development/forms.md) lives in the main documentation. Everything that applies to built-in controllers holds true for those provided by a plugin.
