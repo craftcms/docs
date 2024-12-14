@@ -100,7 +100,7 @@ Create a `composer.json` file at the root of your plugin directory, and use this
 }
 ```
 
-Replace:
+Review and replace the following values:
 
 - `package/name` with your package name.
 - `Developer Name` with your name, or the organization name that the plugin should be attributed to.
@@ -111,24 +111,22 @@ Replace:
 - `namespace\\prefix\\` with your namespace prefix. (Use double-backslashes because this is JSON, and note this must end with `\\`.)
 - `Plugin Name` with your plugin name.
 - `my-plugin-handle` with your plugin handle.
-- `MIT` with `proprietary` if you plan to use [Craft License](https://craftcms.github.io/license/) (see [Choose a License](plugin-store.md#choose-a-license) on the “Publishing to the Plugin Store” page).
+- `MIT` with `proprietary` if you plan to use [Craft License](https://craftcms.github.io/license/). Read more about [choosing a license](plugin-store.md#choose-a-license).
 
-In addition to `name` and `handle` (which are both required), there are a few other things you can include in that `extra` object:
+In addition to `name` and `handle` (both of which are required), there are a few other things you can include under the `extra` key:
 
-- `class` – The [Plugin class](#the-plugin-class) name. If not set, the installer will look for a `Plugin.php` file at each of the `autoload` path roots.
-- `description` – The plugin description. If not set, the main `description` property will be used.
-- `developer` – The developer name. If not set, the first author’s `name` will be used (via the `authors` property).
-- `developerUrl` – The developer URL. If not set, the `homepage` property will be used, or the first author’s `homepage` (via the `authors` property).
-- `developerEmail` – The support email. If not set, the `support.email` property will be used.
-- `documentationUrl` – The plugin’s documentation URL. If not set, the `support.docs` property will be used.
+- `class` — The [main plugin class](#the-plugin-class) name. If not set, the installer will look for a `Plugin.php` file at the root of each `autoload` path.
+- `description` — A brief description of your plugin’s purpose. If not set, the main `description` property will be used.
+- `developer` — The developer name. If not set, the first author’s `name` will be used (via the `authors` property).
+- `developerUrl` — The developer URL. If not set, the `homepage` property will be used, or the first author’s `homepage` (via the `authors` property).
+- `developerEmail` — The support email. If not set, the `support.email` property will be used.
+- `documentationUrl` — The plugin’s documentation URL. If not set, the `support.docs` property will be used.
 
-::: warning
-If you’re updating a Craft 2 plugin, make sure to remove the `composer/installers` dependency if it has one.
-:::
+Some of these values are displayed in the Craft control panel (in <Journey path="Settings, Plugins" />—[see below](#plugin-icons) for an example) and used to auto-populate a handful of fields when you begin the Plugin Store submission process. We encourage you to provide a more thorough description—or update its details any time thereafter—via [Craft Console](kb:what-is-craft-console)—descriptions and URLs are _not_ synchronized again.
 
 ## The Plugin Class
 
-The `src/Plugin.php` file is your plugin’s entry point for the system. It will get instantiated at the beginning of every request. Its `init()` method is the best place to register event listeners, and any other steps it needs to take to initialize itself.
+The `src/Plugin.php` file is your plugin’s entry point for the system. Craft instantiates a singleton of your plugin class at the beginning of every request, [invoking its `init()` method](#initialization). This is the best place to register [event listeners](events.md), and perform any other setup steps.
 
 Use this template as a starting point for your `Plugin.php` file:
 
@@ -146,6 +144,17 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
+::: warning
+Don’t move or rename this class or file after [publishing](plugin-store.md) a plugin. Craft stores references to its fully-resolved class name in configuration, and 
+:::
+
+### Automatic Defaults
+
+Plugins are automatically given a few key features to simplify setup and provide a consistent developer experience:
+
+- An [alias](../configure.md#aliases) is registered, corresponding to each autoloading namespace. If your plugin’s root namespace was `acmelabs\mousetrap`, Craft would create `@acmelabs\mousetrap`.
+- The plugin’s `controllerNamespace` is configured such that web requests are served by [controllers](controllers.md) in a `controllers/` directory adjacent to the main plugin file, and [console commands](commands.md) are resolved using classes in `console/controllers/`.
+
 ### Initialization
 
 Most initialization logic belongs in your plugin’s `init()` method. However, there are some situations in which parts of the application aren’t ready yet (like another plugin)—in particular, creating [element queries](../development/element-queries.md) or causing the [Twig environment](../development/twig.md) to be loaded prematurely can result in race conditions and incomplete initialization.
@@ -161,7 +170,10 @@ class Plugin extends \craft\base\Plugin
 {
     public function init(): void
     {
-        // ...
+        // Always let the parent init() method run, first:
+        parent::init();
+
+        // Set up critical components + features...
 
         // Defer some setup tasks until Craft is fully initialized:
         Craft::$app->onInit(function() {
@@ -179,13 +191,55 @@ If Craft has already fully initialized, your callback will be invoked immediatel
 
 Conversely, there are cases in which attaching [event listeners](events.md) in `onInit()` may be _too late_—by the time your callback is invoked, those events may have already happened.
 
+### Accessing your Plugin
+
+When you need a reference to your main plugin class (say, from a [controller](controllers.md) or [service](services.md)), use the static instance getter:
+
+```php
+use mynamespace\Plugin as MyPlugin;
+
+$pluginInstance = MyPlugin::getInstance();
+```
+
+Each time you call this, the same “singleton” will be returned, so anything you’ve memoized on the class (say, as private properties) will be preserved.
+
+::: warning
+You should never need to create additional instances of your plugin!
+:::
+
+### Components and Getters
+
+As your plugin’s capabilities grow, you may want to organize functionality into [services](services.md). Yii is able to resolve any services you configure via your plugin’s [setComponents()](yii2:yii\base\Component::setComponents()) method, but some [IDE](README.md#ide)s are aided by [`@property` docblock tags](https://docs.phpdoc.org/guide/references/phpdoc/tags/property.html) or explicit [component getters](services.md#component-getters).
+
 ## Loading your plugin into a Craft project
 
-To get Craft to see your plugin, you will need to install it as a Composer dependency of your Craft project. There are multiple ways to do that:
+When you scaffold a new plugin with the [generator](#scaffolding), Craft takes care of connecting the project’s `composer.json` to the new local directory using a [path repository](#path-repository). You are free to continue local development like this, indefinitely—but it’s important to understand how other developers might install your plugin, later!
+
+Once published, other developers can [install your plugin via Packagist](#packagist). These steps are identical for any plugin in the [Plugin Store](plugin-store.md).
+
+### Packagist
+
+If you’re ready to [publicly release](plugin-store.md) your plugin, register it as a new Composer package on [Packagist](https://packagist.org/). Other developers can install it like any other package, by passing its name to Composer’s `require` command:
+
+```bash
+# go to the project directory
+cd /path/to/my-project
+
+# require the plugin package
+composer require package/name
+```
+
+DDEV users have access to this shortcut when interacting with Composer:
+
+```bash
+ddev composer require package/name
+```
+
+<See path="plugin-store.md" label="Publishing to the Plugin Store" description="Get your plugin ready to publish in the official Plugin Store!" />
 
 ### Path Repository
 
-During development, the easiest way to work on your plugin is with a [path repository][path], which will tell Composer to symlink your plugin into the `vendor/` folder right alongside other dependencies.
+During development, the easiest way to work on your plugin is with a [path repository][path]. This allows Composer to _symbolically link_ your plugin into the `vendor/` folder, right alongside other dependencies.
 
 To set it up, open your Craft project’s `composer.json` file and make the following changes:
 
@@ -200,59 +254,52 @@ To set it up, open your Craft project’s `composer.json` file and make the foll
   "repositories": [
     {
       "type": "path",
-      "url": "../my-plugin"
+      "url": "./local/my-plugin"
     }
   ]
 }
 ```
 
+Set the `url` value to the absolute or relative path to your plugin’s source directory. The `./local/my-plugin` example above assumes that the plugin was cloned into a directory named `local/`, which exists alongside `composer.json`.
+
 ::: tip
-Set the `url` value to the absolute or relative path to your plugin’s source directory. (The `../my-plugin` example value assumes that the plugin lives in a folder alongside the project’s folder.)
+If you are using a containerized development environment like DDEV, Composer may not be able to see directories outside the current project! You can either clone another copy of the repository into the project, or configure a new mount by creating `./config/docker-compose.plugin-mount.yml`:
+
+```yml
+services:
+  web:
+    volumes:
+      - "$HOME/Developer/my-plugin:/home/shared/my-plugin"
+```
+
+This will be merged with DDEV’s main web container config; you can then replace the path repository’s `url` with the absolute path `/home/shared/my-plugin`.
 :::
 
-In your terminal, go to your Craft project and tell Composer to require your plugin. (Use the same package name you gave your plugin in its `composer.json` file.)
+In a terminal, go to your Craft project and require the plugin using the same package name you gave your plugin in its `composer.json` file:
 
 ```bash
-# go to the project directory
-cd /path/to/my-project
-
-# require the plugin package
 composer require package/name
 ```
 
-Composer’s installation log should indicate that the package was installed via a symlink:
+Composer’s output should show that the package was installed via a symlink:
 
 ```
-  - Installing package/name (X.Y.Z): Symlinking from ../my-plugin
+  - Installing package/name (X.Y.Z): Symlinking from ./local/my-plugin
 ```
 
 ::: warning
-One caveat of `path` Composer repositories is that Composer may ignore `path`-based dependencies when you run `composer update`. So any time you change anything in `composer.json`, such as your plugin’s dependency requirements or its plugin information, you might need to completely remove and re-require your plugin in your project for those changes to take effect.
+One caveat of `path` Composer repositories is that Composer may ignore `path`-based dependencies when you run `composer update`. So any time you change anything in a plugin’s `composer.json` (like its dependencies or [extras](#composer-json)), you may need to completely remove and re-require your plugin for those changes to take effect:
 
 ```bash
-# go to the project directory
-cd /path/to/my-project
-
-# remove the plugin package
+# Remove the plugin package from your project:
 composer remove package/name
 
-# re-require the plugin package
-composer require package/name
+# Re-require the plugin package, and allow updates to dependencies:
+composer require package/name -w
 ```
-
 :::
 
-### Packagist
-
-If you’re ready to publicly release your plugin, register it as a new Composer package on [Packagist](https://packagist.org/). Then you can install it like any other package, by just passing its package name to Composer’s `require` command.
-
-```bash
-# go to the project directory
-cd /path/to/my-project
-
-# require the plugin package
-composer require package/name
-```
+This same process can be used to fork, clone, and contribute to any open-source or source-available plugin!
 
 ## Plugin Icons
 
@@ -262,19 +309,10 @@ Plugins can provide an icon, which will be visible on the **Settings** → **Plu
 <img src="../images/plugin-index.png" alt="Screenshot of control panel Settings → Plugins">
 </BrowserShot>
 
-
 Plugin icons must be square SVG files, saved as `icon.svg` at the root of your plugin’s source directory (e.g `src/`).
 
 If your plugin has a [control panel section](cp-section.md), you can also give its global nav item a custom icon by saving an `icon-mask.svg` file in the root of your plugin’s source directory. Note that this icon cannot contain strokes, and will always be displayed in a solid color (respecting alpha transparency).
 
-[yii modules]: https://www.yiiframework.com/doc/guide/2.0/en/structure-modules
-[models]: https://www.yiiframework.com/doc/guide/2.0/en/structure-models
-[active record classes]: https://www.yiiframework.com/doc/guide/2.0/en/db-active-record
-[controllers]: https://www.yiiframework.com/doc/guide/2.0/en/structure-controllers
-[application components]: https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components
 [package name]: https://getcomposer.org/doc/04-schema.md#name
-[two hardest things]: https://twitter.com/codinghorror/status/506010907021828096
 [psr-4]: https://www.php-fig.org/psr/psr-4/
-[yii alias]: https://www.yiiframework.com/doc/guide/2.0/en/concept-aliases
-[component configs]: https://www.yiiframework.com/doc/guide/2.0/en/structure-application-components
 [path]: https://getcomposer.org/doc/05-repositories.md#path

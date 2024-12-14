@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # Console Commands
 
 Plugins and modules can add additional [console commands](../reference/cli.md)
@@ -11,10 +15,9 @@ For the most part, writing console commands for Craft is identical to writing co
 
 ## Module Setup
 
-If you are adding console commands to a custom module, make sure that your module class defines its root `controllerNamespace` for console requests:
+Plugins are [automatically configured](plugin-guide.md#automatic-defaults) to locate web and console controllers. Modules, on the other hand, must explicitly define their root `controllerNamespace` for both request types:
 
-```php{14,15}
-<?php
+```php{13-17}
 namespace acme;
 
 use Craft;
@@ -23,25 +26,25 @@ class Module extends \yii\base\Module
 {
     public function init()
     {
-        // Define a custom alias named after the namespace
+        // Define a custom alias named after the namespace:
         Craft::setAlias('@acme', __DIR__);
 
-        // Set the controllerNamespace based on whether this is a console or web request
+        // Set the controllerNamespace based on whether this is a console or web request:
         if (Craft::$app->getRequest()->getIsConsoleRequest()) {
             $this->controllerNamespace = 'acme\\console\\controllers';
         } else {
             $this->controllerNamespace = 'acme\\controllers';
         }
 
+        // Call init() *after* setting the `controllerNamespace` so Yii doesn’t try and set it:
         parent::init();
 
-        // Custom initialization code goes here...
+        // Additional custom initialization code goes here...
     }
 }
 ```
 
-You’ll also need to make sure your module is getting [bootstrapped](guide:runtime-bootstrapping)
-from `config/app.php` (or `config/app.console.php`):
+You’ll also need to make sure your module is getting [bootstrapped](guide:runtime-bootstrapping) on every request from `config/app.php` (or `config/app.console.php`):
 
 ```php{2}
 return [
@@ -59,8 +62,6 @@ Any classes within the folder corresponding to your [`controllerNamespace` setti
 Create `GreetController.php` in `modules/console/controllers/`, with this content:
 
 ```php
-<?php
-
 namespace modules\console\controllers;
 
 use craft\console\Controller;
@@ -112,7 +113,7 @@ class GreetController extends Controller
 
 ### Running Actions
 
-Supposing your module ID or plugin handle was `acme`, you would access your controller like this:
+Supposing your [module ID](module-guide.md#preparation) or plugin handle was `acme`, you would access your controller like this:
 
 ```bash
 # Run the "default action":
@@ -127,6 +128,14 @@ php craft acme/greet/developer
 php craft acme/greet/developer --who="Marvin"
 # -> Hello, Marvin!
 ```
+
+### Options
+
+In the example, we’ve declared a public class property, and set up a mapping for the single _action ID_. Any [option](guide:tutorial-console#options) can be set using bash’s familiar `--kebab-case-option-name` syntax.
+
+::: tip
+Use the [`optionAliases()` method](guide:tutorial-console#options-aliases) to define shorthand options like `-m`.
+:::
 
 ### Arguments
 

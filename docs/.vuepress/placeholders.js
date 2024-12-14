@@ -14,4 +14,5 @@ module.exports = {
   "mynamespace": { title: "Replace this with your actual namespace." },
   "mytablename": { title: "Replace this with your database table name, without any prefix." },
   "path/to/my-project": { title: "Replace this with your project path." },
+  "package/name": { title: "Replace this with the name of your published package." },
 };
