@@ -152,7 +152,7 @@ Don’t move or rename this class or file after [publishing](plugin-store.md) a 
 
 Plugins are automatically given a few key features to simplify setup and provide a consistent developer experience:
 
-- An [alias](../configure.md#aliases) is registered, corresponding to each autoloading namespace. If your plugin’s root namespace was `acmelabs\mousetrap`, Craft would create `@acmelabs\mousetrap`.
+- An [alias](../configure.md#aliases) is registered, corresponding to each autoloading namespace. If your plugin’s root namespace was `acmelabs\mousetrap`, Craft would create `@acmelabs/mousetrap`.
 - The plugin’s `controllerNamespace` is configured such that web requests are served by [controllers](controllers.md) in a `controllers/` directory adjacent to the main plugin file, and [console commands](commands.md) are resolved using classes in `console/controllers/`.
 
 ### Initialization
