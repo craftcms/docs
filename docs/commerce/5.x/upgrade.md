@@ -141,7 +141,7 @@ The singular `store` service has been deprecated. In its place, the `stores` ser
 Non-project config settings (like the order condition formula and [markets](system/stores.md#markets)) are now accessible via a dedicated [StoreSettings](commerce5:craft\commerce\models\StoreSettings) model:
 
 ```twig
-{% set allowedCountries = currentStore.settings.countryList %}
+{% set allowedCountries = currentStore.settings.countriesList %}
 
 {% if cart.shippingAddress.countryCode not in countries|keys %}
   <p>Sorry, we don’t fulfill orders to or from {{ countries[cart.shippingAddress.countryCode].name }}!</p>
