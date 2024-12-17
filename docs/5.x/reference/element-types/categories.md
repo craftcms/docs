@@ -155,10 +155,11 @@ We can display a navigation for all the categories in a _Flavors_ category group
 </ul>
 ```
 
-Keep in mind that this only holds value for category groups with multiple hierarchical levels. If you were working with a “flat” taxonomy, the template above can use a `{% for %}` tag in lieu of Craft’s `{% nav %}` tag.
+Keep in mind that this only holds value for category groups with multiple hierarchical levels. If you were working with a “flat” taxonomy, the template above should use a regular `{% for %}` tag in lieu of Craft’s `{% nav %}` tag.
 
 ::: tip
 To maintain the exact order you see in the control panel, add `orderBy('lft ASC')` to your query:
+
 ```twig
 {% set myCategoryQuery = craft.categories()
   .group('flavors')
