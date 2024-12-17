@@ -156,11 +156,31 @@ You can supplement the automatic [sources](../../system/elements.md#sources) pre
 
 ### Entry URI Formats
 
-Channel and structure sections can choose whether their entries should be assigned URLs in the system by filling in the **Entry URI Format** setting. Singles have a “URI” setting, but it is typically defined statically or omitted (if it doesn’t need its own URL).
+Channel and structure sections can choose whether their entries should be given URLs in the system by filling in the **Entry URI Format** setting. Singles also have this setting, but it is typically a static path or omitted (if it doesn’t need its own URL, like a [global set](globals.md)).
 
 The entry URI format is an [object template](../../system/object-templates.md), which gets evaluated each time an entry in the section is saved. The result is saved as the entry’s **URI** in the system, and is used to generate URLs (i.e. via `entry.url`) and when Craft is determining how to [route](../../system/routing.md) a request.
 
 When Craft matches a request to an entry, its section’s designated **Template** is rendered. That template is automatically provided an `entry` variable, set to the resolved <craft5:craft\elements\Entry> object, and ready to output any of its attributes or custom field data.
+
+#### URI Recipes
+
+Consider these tips for creating special URIs:
+
+- A URI that evaluates to `__home__` (and nothing more) will be available at your site’s base path;
+- An empty URI means the entry does not get a route and will not have a public URL—unless you define one manually via `routes.php`;
+- Any Twig statement can be used to output values in a URI template—including ones that query for other elements, e.g. `{{ craft.entries().section('mySingle').one().slug }}/news` (see note below);
+- [Aliases](../../configure.md#aliases-and-environment-variables) can be evaluated with the [`alias()` function](../twig/functions.md#alias): `{{ alias('@basePressUri') }}/news`, `{{ alias('@mySectionUri') }}`.
+- The [null-coalescing operator](https://twig.symfony.com/doc/3.x/templates.html#other-operators) (`??`) can silently swallow undefined variable errors (like `parent.uri`, above);
+
+::: warning
+Elements accessed via the current `object` (like authors or relational fields) will be loaded in the appropriate site, but _new_ element queries (like the example above that uses `craft.entries()`), must explicitly use `.site()` to avoid loading elements in the default site:
+
+```
+{craft.entries().section('mySingle').site(object.siteId).one().slug}
+```
+
+The current element’s site ID can always be accessed via `object.siteId`.
+:::
 
 #### Hierarchical URIs
 
@@ -186,21 +206,15 @@ The above template could also be expressed with this syntax:
 
 With the above Entry URI Format, a top-level entry’s URI would be `earth/south-america`, with a nested entry having `earth/south-america/chile`.
 
-::: tip
-Consider these tips for creating special URIs:
-
-- A URI that evaluates to `__home__` (and nothing more) will be available at your site’s base path;
-- An empty URI means the entry does not get a route and will not have a public URL—unless you define one manually via `routes.php`;
-- Any Twig statement can be used to output values in a URI template—including ones that query for other elements,  e.g. `{{ craft.entries().section('mySingle').one().slug }}/news`;
-- [Aliases](../../configure.md#aliases-and-environment-variables) can be evaluated with the [`alias()` function](../twig/functions.md#alias): `{{ alias('@basePressUri') }}/news`, `{{ alias('@mySectionUri') }}`.
-- The [null-coalescing operator](https://twig.symfony.com/doc/3.x/templates.html#other-operators) (`??`) can silently swallow undefined variable errors (like `parent.uri`, above);
-:::
-
 #### Nested Entry URLs
 
-[Nested entries](#nested-entries) in Matrix fields can also be configured to have URLs—but the settings are part of the field, not a section.
+[Nested entries](#nested-entries) in [Matrix fields](../field-types/matrix.md) can also be configured to have URLs—but the settings are part of the field, not a section. As a result, entries of a given [type](#entry-types) may have URLs in some contexts, and not in others!
 
-A single entry type may have URLs in some contexts, and not in others!
+In a nested entry’s URI format, you can access the _owner_’s attributes using `{owner.someAttribute}`:
+
+```
+{owner.uri}/steps/{slug}
+```
 
 ### Preview Targets <Badge type="edition" vertical="middle" title="Preview Targets are configurable in Craft Team">Team</Badge> <Badge type="edition" vertical="middle" title="Preview Targets are configurable in Craft Pro">Pro</Badge>
 

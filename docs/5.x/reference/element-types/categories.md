@@ -35,17 +35,17 @@ Read more about this [transition](https://craftcms.com/blog/entrification) on ou
 Every category belongs to a _category group_, which defines…
 
 - …a name;
-- …a handle (used when referencing the group in queries and templates);
+- …a handle (used when referencing the group in [queries](#querying-categories) and templates);
 - …the maximum number of levels categories can be nested, within the group;
-- …the format of category URIs;
-- …which template should be rendered when a category’s URL is accessed;
+- …the format of category URIs used for [routing](#routing-and-templates);
+- …which [template](#routing-and-templates) should be rendered when a category’s URL is accessed;
 - …which [fields](../../system/fields.md) categories in the group should have;
 
-To create a new category group, go to **Settings** → **Categories** and click **New Category Group**.
+To create a new category group, go to <Journey path="Settings, Categories" /> and click **New Category Group**.
 
 ## Category Field Layout
 
-Each category group has its own _field layout_, which allows you to customize the data that’s associated with each category in the group. By default, every category will have a **Title** field (the category name). Any available field type can be added to a category group’s field layout.
+Each category group has its own _field layout_, which allows you to customize the data that’s associated with each category in the group. By default, categories only have a **Title** and **Slug**, but you can add as many other [custom fields](../../system/fields.md) as necessary to satisfy your content architecture.
 
 <See path="../../system/fields.md" />
 
@@ -74,17 +74,35 @@ When you create a category, you have the following options:
 
 - Fill out the category fields (if you didn’t define any, the only field available will be **Title**)
 - Edit the slug (it’s automatically populated based on the title).
-- Choose a Parent category. The new category will have a hierarchical relationship with its parent. This is helpful for creating taxonomies with multiple levels. You also have the option of creating a new category while assigning the Parent.
+- Choose a **Parent** category. The new category will have a hierarchical relationship with its parent. This is helpful for creating taxonomies with multiple levels. You also have the option of creating a new category while assigning the Parent.
 
 ::: tip
-You can only nest categories up to the level specified in the **Max Level** field Category Group settings. If it’s empty, the nesting level is unlimited.
+You can only nest categories up to the level specified in the **Max Level** field Category Group settings. By default, there is no limit to how deeply-nested categories can be.
 :::
 
 ## Assigning Categories
 
-To assign categories to things (entries, assets, users, etc.), you must first create a [Categories field](../field-types/categories.md).
+To assign categories to things (entries, assets, users, etc.), you must first create a [categories field](../field-types/categories.md).
 
 Each Categories field is connected to a single category group. Whatever you attach the field to will store [relations](../../system/relations.md) to categories selected from that group.
+
+## Routing and Templates
+
+Category groups’ **URI Format** setting is equivalent to that of [entries](entries.md), so any of the [object template](../../system/object-templates.md) strategies discussed in [this section](entries.md#entry-uri-formats) apply to categories, as well.
+
+When a category’s URL is requested, Craft renders the template defined by its group, and makes a special `category` variable available. Supposing a _Flavors_ category group had a **URI Format** of `flavors/{slug}` and was configured to use `_categories/flavors.twig` as its **Template**:
+
+```twig
+{{ category.title }}
+{# -> "Sour Aromatics" #}
+
+{{ category.ancestors.collect()
+  .select('title')
+  .join(' / ') }}
+{# -> "Sour & Fermented / Sour" #}
+```
+
+Custom fields attached to the group’s field layout are also available via the `category` variable.
 
 ## Querying Categories
 
@@ -107,17 +125,17 @@ Once you’ve created a category query, you can set [parameters](#parameters) on
 
 ### Example
 
-We can display a navigation for all the categories in a category group called “Topics” by doing the following:
+We can display a navigation for all the categories in a _Flavors_ category group by doing the following:
 
 1. Create a category query with `craft.categories()`.
-2. Set the [group](#group) parameter on it.
+2. Set the [group](#group) parameter on it using its handle.
 3. Fetch the categories with `.all()`.
 4. Loop through the categories using a [nav](../twig/tags.md#nav) tag to create the navigation HTML.
 
 ```twig
 {# Create a category query with the 'group' parameter #}
 {% set myCategoryQuery = craft.categories()
-  .group('topics') %}
+  .group('flavors') %}
 
 {# Fetch the categories #}
 {% set categories = myCategoryQuery.all() %}
@@ -137,11 +155,13 @@ We can display a navigation for all the categories in a category group called �
 </ul>
 ```
 
+Keep in mind that this only holds value for category groups with multiple hierarchical levels. If you were working with a “flat” taxonomy, the template above can use a `{% for %}` tag in lieu of Craft’s `{% nav %}` tag.
+
 ::: tip
 To maintain the exact order you see in the control panel, add `orderBy('lft ASC')` to your query:
 ```twig
 {% set myCategoryQuery = craft.categories()
-  .group('topics')
+  .group('flavors')
   .orderBy('lft ASC') %}
 ```
 :::
@@ -150,18 +170,32 @@ To maintain the exact order you see in the control panel, add `orderBy('lft ASC'
 
 When you’ve attached a [categories field](../field-types/categories.md) to another type of element, you can query for those elements when you have a reference to a category.
 
-For example, if we were building a blog with dedicated “Topic” (category) pages, we might build a query like this to look up posts:
+For example, if we were building a “Tasting Notes” database with dedicated _Flavor_ (category) pages, we might build a query like this to look up records:
 
 ```twig
-{% set posts = craft.entries()
+{% set records = craft.entries()
   .relatedTo({
     targetElement: category,
-    field: 'topics',
+    field: 'flavors',
   })
   .all() %}
 ```
 
+::: tip
+Here, `flavors` also happens to be the handle of the relational field. _You do not need to follow any kind of convention when naming relational fields_; the groups available for selection in a given categories field are explicitly defined on that field.
+:::
+
 <See path="../../system/relations.md" description="Read about querying with relational fields." />
+
+You can also use the field’s query method to set up the relational constraint, automatically:
+
+```twig
+{% set records = craft.entries()
+  .flavors(category)
+  .all() %}
+```
+
+In both cases, we’re assuming the `category` variable comes from Craft, when loading an individual category’s [template](#routing-and-templates).
 
 ### Parameters
 
