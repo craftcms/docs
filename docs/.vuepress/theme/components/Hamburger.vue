@@ -1,9 +1,12 @@
 <template>
-  <button @click="handleClick" class="nav-hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+  <div>
+    <span id="nav-hamburger-label" class="sr-only" aria-hidden="true">Menu</span>
+    <button @click="handleClick" class="nav-hamburger" aria-labelledby="nav-hamburger-label">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
 </template>
 
 <style lang="postcss">
