@@ -558,7 +558,10 @@ This tag works identically to the [namespace](filters.md#namespace) filter, exce
 This tag helps create a hierarchical navigation menu for entries in a [Structure section](../element-types/entries.md#section-types) or a [Category Group](../element-types/categories.md).
 
 ```twig
-{% set entries = craft.entries().section('pages').all() %}
+{% set entries = craft.entries()
+  .section('pages')
+  .orderBy('lft ASC')
+  .all() %}
 
 <ul id="nav">
   {% nav entry in entries %}
@@ -573,6 +576,13 @@ This tag helps create a hierarchical navigation menu for entries in a [Structure
   {% endnav %}
 </ul>
 ```
+
+Note that we are doing two things to ensure the entire tree of pages is displayed correctly:
+
+- The query fetches _all_ elements: we grab everything in the structure in a single, flat array.
+- Ordering by `lft ASC`: this ensures that the pages are properly sorted, such that every child appears after its parent.
+
+Craft then takes this one-dimensional array of elements and evaluates the opening and closing template content (fragments on either side of `{% children %}`, within `{% ifchildren %}`) a number of times appropriate to each item’s `level` relative to the last item.
 
 ::: tip
 The `{% nav %}` tag should _only_ be used in times when you want to show elements in a hierarchical list. If you want to show elements in a flat list, use a [for](https://twig.symfony.com/doc/tags/for.html) tag instead.
