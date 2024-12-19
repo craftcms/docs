@@ -8,7 +8,6 @@
 
 | Param                                       | Description
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [addOrderBy](#addorderby)                   | Adds additional ORDER BY columns to the query.
 | [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the Matrix blocks’ owners are drafts.
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.
@@ -21,7 +20,6 @@
 | [dateUpdated](#dateupdated)                 | Narrows the query results based on the Matrix blocks’ last-updated dates.
 | [field](#field)                             | Narrows the query results based on the field the Matrix blocks belong to.
 | [fieldId](#fieldid)                         | Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.
-| [fields](#fields)                           | Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
 | [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
 | [id](#id)                                   | Narrows the query results based on the Matrix blocks’ IDs.
 | [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v3/craft-services-elements.html#method-setplaceholderelement).
@@ -47,19 +45,6 @@
 
 
 <!-- textlint-enable -->
-
-
-#### `addOrderBy`
-
-Adds additional ORDER BY columns to the query.
-
-
-
-
-
-
-
-
 
 
 #### `afterPopulate`
@@ -345,45 +330,6 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
-#### `fields`
-
-Returns the list of fields that should be returned by default by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail) when no specific fields are specified.
-
-A field is a named element in the returned array by [toArray()](https://www.yiiframework.com/doc/api/2.0/yii-base-arrayabletrait#toArray()-detail).
-This method should return an array of field names or field definitions.
-If the former, the field name will be treated as an object property name whose value will be used
-as the field value. If the latter, the array key should be the field name while the array value should be
-the corresponding field definition which can be either an object property name or a PHP callable
-returning the corresponding field value. The signature of the callable should be:
-
-```php
-function ($model, $field) {
-    // return field value
-}
-```
-
-For example, the following code declares four fields:
-
-- `email`: the field name is the same as the property name `email`;
-- `firstName` and `lastName`: the field names are `firstName` and `lastName`, and their
-  values are obtained from the `first_name` and `last_name` properties;
-- `fullName`: the field name is `fullName`. Its value is obtained by concatenating `first_name`
-  and `last_name`.
-
-```php
-return [
-    'email',
-    'firstName' => 'first_name',
-    'lastName' => 'last_name',
-    'fullName' => function ($model) {
-        return $model->first_name . ' ' . $model->last_name;
-    },
-];
-```
-
-
-
-
 #### `fixedOrder`
 
 Causes the query results to be returned in the order specified by [id](#id).
@@ -595,9 +541,7 @@ Possible values include:
 | Value | Fetches Matrix blocks…
 | - | -
 | `1` | created for an element with an ID of 1.
-| `'not 1'` | not created for an element with an ID of 1.
 | `[1, 2]` | created for an element with an ID of 1 or 2.
-| `['not', 1, 2]` | not created for an element with an ID of 1 or 2.
 
 
 
