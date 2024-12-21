@@ -117,7 +117,6 @@ To give your plugin a settings page, create a `templates/` directory within your
 {% import '_includes/forms.twig' as forms %}
 
 {{ forms.textField({
-  first: true,
   label: 'Foo',
   name: 'foo',
   value: settings.foo
@@ -152,7 +151,7 @@ class Plugin extends \craft\base\Plugin
     {
         return \Craft::$app->getView()->renderTemplate(
             'my-plugin-handle/settings',
-            [ 'settings' => $this->getSettings() ]
+            ['settings' => $this->getSettings()]
         );
     }
 
@@ -160,15 +159,15 @@ class Plugin extends \craft\base\Plugin
 }
 ```
 
-With all that in place, your plugin will now get its own icon on the Settings page, and a cog icon in its row on the Settings → Plugins page, which will link to `/admin/settings/plugins/my-plugin-handle`.
+With all that in place, your plugin will now get its own icon on the Settings page, and a cog icon in its row on the <Journey path="Settings, Plugins" /> page, which will link to `/admin/settings/plugins/my-plugin-handle`. Craft manages the routing internally, for both displaying settings pages and receiving POSTed data; `settingsHtml()` should _not_ return an entire HTML `<form>` element.
+
+<See path="project-config.md" hash="secrets-and-environmental-differences" label="Settings and Project Config" description="Learn how to support environment variables and aliases in your plugin settings." />
 
 ### Advanced Settings Pages
 
 When the `/admin/settings/plugins/my-plugin-handle` control panel URL is requested, your plugin is ultimately in charge of the response. Namely, your plugin’s `getSettingsResponse()` method. The default `getSettingsResponse()` implementation in <craft5:craft\base\Plugin> will call your plugin’s `settingsHtml()` method, and then tell the active controller to render Craft’s `settings/plugins/_settings` template (the layout template for plugin settings pages), passing it the HTML returned by `settingsHtml()`.
 
-If a plugin needs more control over its settings page(s), it can override its `getSettingsResponse()` method and do whatever it wants with the request.
-
-It can choose to render its own template, rather than being confined to Craft’s `settings/plugins/_settings` layout template:
+If a plugin needs more control over its settings page(s), it can override its `getSettingsResponse()` method and do whatever it wants with the request, like render its own template…
 
 ```php
 public function getSettingsResponse(): mixed
@@ -179,7 +178,7 @@ public function getSettingsResponse(): mixed
 }
 ```
 
-It can redirect the request to a completely different URL, too:
+…or redirect the request:
 
 ```php
 public function getSettingsResponse(): mixed
@@ -190,4 +189,4 @@ public function getSettingsResponse(): mixed
 }
 ```
 
-Just note that whatever it returns needs to make sense as something a controller action would return, because that’s exactly what’s happening. The <craft5:craft\controllers\PluginsController::actionEditPluginSettings()> method returns whatever `getSettingsResponse()` returns directly.
+Be aware that whatever you return is directly returned by <craft5:craft\controllers\PluginsController::actionEditPluginSettings()>, and therefore must be compatible with a standard controller action.

@@ -2,9 +2,9 @@
 
 If your plugin has any configurable components that store settings outside of your main [plugin settings](plugin-settings.md), they may be good candidates for [project config](../system/project-config.md) support.
 
-## Is Project Config Support Right for You?
+<Block label="Is Project Config Support Right for You?">
 
-Before adding project config support to your component, consider the tradeoff: components that are managed by the project config [should](../system/project-config.md#production-changes-reverted) only be editable by administrators in development environments.
+Before adding project config support to your component, consider the tradeoff: components that are managed via project config [should only be editable by administrators](../system/project-config.md#production-changes-reverted) in development environments.
 
 Ask yourself:
 
@@ -19,6 +19,8 @@ Plugins do not need to track _everything_ in project config for it to be worthwh
 ::: tip
 We also maintain some recommendations for effective use of project config in [teams and multi-environment systems](../deploy.md)—keep these in mind as you consider project config support.
 :::
+
+</Block>
 
 ## Project Config Theory
 
@@ -352,3 +354,129 @@ Craft treats project config as the authority on system state, so config must be 
 Similarly, project config handlers can (and should) only care about how to bring the database’s state into agreement with that map. Unless your plugin emits [events](events.md) when a savable component is updated, you may not even need to populate a model!
 
 Looking back at the examples, notice that we _are_ validating a `ProductType` model [when making changes](#step-3-push-config-changes) to project config, but _not_ [when synchronizing](#step-2-handle-config-changes) project config into the database.
+
+## Secrets and Environmental Differences
+
+One of the benefits of project config is that secrets and other environment-specific settings can be kept out of the database and tracked files. Whenever you capture a setting or component bound for project config, make sure only the raw, un-parsed value is saved.
+
+The best way to manage this is by attaching <craft5:craft\behaviors\EnvAttributeParserBehavior> to a model, and declaring the properties that you wish to be parsed as environment strings:
+
+```php
+use craft\base\Model;
+use craft\behaviors\EnvAttributeParserBehavior;
+
+class Webhook extends Model
+{
+    public ?string $targetUrl;
+    public ?string $secret;
+    public ?string $secretParam;
+
+    protected function defineBehaviors(): array
+    {
+        return [
+            'parser' => [
+                'class' => EnvAttributeParserBehavior::class,
+                'attributes' => [
+                    'targetUrl',
+                    'secret',
+                ],
+            ],
+        ];
+    }
+}
+```
+
+The class property will still return the literal configured value when accessed (i.e. `$API_KEY`), so you must evaluate it at the time of use:
+
+```php{7}
+$client = \Craft::createGuzzleClient([
+    'baseUri' => App::parseEnv($crm->targetUrl),
+]);
+
+$response = $client->post('', [
+    'body' => [
+        $webhook->secretParam => \craft\helpers\App::parseEnv($crm->secret),
+        'payload' => [
+            // ...
+        ],
+    ],
+]);
+```
+
+If you would prefer this to be automatic, consider using a private property and a pair of getter/setter methods:
+
+```php
+private ?string $_secret;
+
+public function getSecret(bool $parse = true): ?string
+{
+     if ($this->_secret) {
+        if ($parse) {
+            return \craft\helpers\App::parseEnv($this->_secret);
+        }
+
+        return $this->_secret;
+    }
+
+    return null;
+}
+
+public function setSecret(?string $secret): void
+{
+    $this->_secret = $secret;
+}
+```
+
+::: tip
+Yii helps make these methods transparent, allowing you (and other developers) to use `$webhook->secret` [as though it were a regular property](guide:concept-properties).
+:::
+
+Note that we are never memoizing or overwriting the parsed value. In situations where you need to get the raw value, you can call `getSecret(false)`—perhaps most importantly, when building the object that will get serialized into config:
+
+```php{11}
+use craft\base\Model;
+
+class Webhook extends Model
+{
+    // ...
+
+    public function getConfig(): array
+    {
+        return [
+            'targetUrl' => $this->targetUrl,
+            'secret' => $this->getSecret(false),
+            'secretParam' => $this->secretParam,
+        ];
+    }
+}
+```
+
+You would then call the `getConfig()` method on your configurable component just before [pushing it to project config](#step-3-push-config-changes):
+
+```php
+$path = "myPlugin.webhooks.{$webhook->uid}";
+
+Craft::$app->getProjectConfig()->set($path, $webhook->getConfig());
+```
+
+### Settings UI
+
+Settings that accept an alias or environment variable should use the autosuggest input helper:
+
+```twig
+{% from "_includes/forms" import autosuggestField %}
+
+{{ autosuggestField({
+    label: 'Secret'|t('my-plugin'),
+    instructions: 'Provide a shared secret that will be sent under the `secretParam` key in the request body.'|t('my-plugin'),
+    id: 'webhook-secret',
+    name: 'secret',
+    suggestEnvVars: true,
+    value: webhook.secret,
+    required: true,
+    placeholder: 'https://',
+    errors: webhook.getErrors('secret'),
+}) }}
+```
+
+The `value` passed to the autosuggest input should always be the raw, un-parsed setting. In the getter/setter example above, this means you might need to call `webhook.getSecret(false)` to explicitly bypass parsing.
