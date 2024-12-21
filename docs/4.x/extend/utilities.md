@@ -4,7 +4,7 @@ description: Utilities are special, non-content pages in the control panel, that
 
 # Utilities
 
-Plugins can provide new utilities for the [control panel](../control-panel.md)’s **Utilities** section by creating a class that implements <craft4:craft\base\UtilityInterface> or extends <craf4:craft\base\Utility>. A utility is typically used to surface information and controls for administrative features that aren’t tied to specific [elements](../elements.md). Each registered utility gets its own [permissions](#permissions).
+Plugins can provide new utilities for the [control panel](../control-panel.md)’s **Utilities** section by creating a class that implements <craft4:craft\base\UtilityInterface> or extends <craft4:craft\base\Utility>. A utility is typically used to surface information and controls for administrative features that aren’t tied to specific [elements](../elements.md). Each registered utility gets its own [permissions](#permissions).
 
 ## Utility Class
 
