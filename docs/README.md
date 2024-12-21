@@ -35,7 +35,7 @@ Learn about the foundation of the Craft platform.
         icon="/docs/icons/icon-cloud.svg" />
 </div>
 
-#### Plugins + Tools
+### Plugins + Tools
 
 Discover solutions and extensions from the Craft team and beyond.
 

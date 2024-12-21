@@ -28,6 +28,12 @@ Since
 
 The default user accessibility preferences that should be applied to users that haven’t saved their preferences yet.
 
+The array can contain the following keys:
+
+- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus
+- `useShapes` – Whether shapes should be used to represent statuses
+- `underlineLinks` – Whether links should be underlined
+
 
 
 ### `allowAdminChanges`
@@ -49,6 +55,16 @@ Since
 </div>
 
 Whether admins should be allowed to make administrative changes to the system.
+
+When this is disabled, the Settings section will be hidden, the Craft edition and Craft/plugin versions will be locked,
+and the project config and Plugin Store will become read-only—though Craft and plugin licenses may still be purchased.
+
+It’s best to disable this in production environments with a deployment workflow that runs `composer install` and
+[propagates project config updates](../project-config.md#propagating-changes) on deploy.
+
+::: warning
+Don’t disable this setting until **all** environments have been updated to Craft 3.1.0 or later.
+:::
 
 
 
@@ -87,6 +103,8 @@ Defined by
 </div>
 
 Whether Craft should allow system and plugin updates in the control panel, and plugin installation from the Plugin Store.
+
+This setting will automatically be disabled if <config3:allowAdminChanges> is disabled.
 
 
 
@@ -129,6 +147,8 @@ Since
 
 Whether drafts should be saved automatically as they are edited.
 
+Note that drafts *will* be autosaved while Live Preview is open, regardless of this setting.
+
 
 
 ### `backupOnUpdate`
@@ -167,6 +187,10 @@ Defined by
 
 The default length of time Craft will store data, RSS feed, and template caches.
 
+If set to `0`, data and RSS feed caches will be stored indefinitely; template caches will be stored for one year.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
 
 
 ### `cpHeadTags`
@@ -188,6 +212,23 @@ Since
 </div>
 
 List of additional HTML tags that should be included in the `<head>` of control panel pages.
+
+Each tag can be specified as an array of the tag name and its attributes.
+
+For example, you can give the control panel a custom favicon (etc.) like this:
+
+```php
+'cpHeadTags' => [
+    // Traditional favicon
+    ['link', ['rel' => 'icon', 'href' => '/icons/favicon.ico']],
+    // Scalable favicon for browsers that support them
+    ['link', ['rel' => 'icon', 'type' => 'image/svg+xml', 'sizes' => 'any', 'href' => '/icons/favicon.svg']],
+    // Touch icon for mobile devices
+    ['link', ['rel' => 'apple-touch-icon', 'sizes' => '180x180', 'href' => '/icons/touch-icon.svg']],
+    // Pinned tab icon for Safari
+    ['link', ['rel' => 'mask-icon', 'href' => '/icons/mask-icon.svg', 'color' => '#663399']],
+],
+```
 
 
 
@@ -231,6 +272,8 @@ Since
 The default locale the control panel should use for date/number formatting, for users who haven’t set
 a preferred language or formatting locale.
 
+If this is `null`, the <config3:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
+
 
 
 ### `defaultDirMode`
@@ -249,6 +292,8 @@ Defined by
 </div>
 
 The default permission to be set for newly-generated directories.
+
+If set to `null`, the permission will be determined by the current environment.
 
 
 
@@ -269,6 +314,8 @@ Defined by
 
 The default permission to be set for newly-generated files.
 
+If set to `null`, the permission will be determined by the current environment.
+
 
 
 ### `defaultSearchTermOptions`
@@ -287,6 +334,14 @@ Defined by
 </div>
 
 The default options that should be applied to each search term.
+
+Options include:
+
+- `attribute` – The attribute that the term should apply to (e.g. `'title'`), if any. (`null` by default)
+- `exact` – Whether the term must be an exact match (only applies if `attribute` is set). (`false` by default)
+- `exclude` – Whether search results should *exclude* records with this term. (`false` by default)
+- `subLeft` – Whether to include keywords that contain the term, with additional characters before it. (`false` by default)
+- `subRight` – Whether to include keywords that contain the term, with additional characters after it. (`true` by default)
 
 
 
@@ -329,6 +384,16 @@ Defined by
 
 The default day new users should have set as their Week Start Day.
 
+This should be set to one of the following integers:
+
+- `0` – Sunday
+- `1` – Monday
+- `2` – Tuesday
+- `3` – Wednesday
+- `4` – Thursday
+- `5` – Friday
+- `6` – Saturday
+
 
 
 ### `devMode`
@@ -370,6 +435,25 @@ Since
 
 Array of plugin handles that should be disabled, regardless of what the project config says.
 
+```php
+'dev' => [
+    'disabledPlugins' => ['webhooks'],
+],
+```
+
+This can also be set to `'*'` to disable **all** plugins.
+
+```php
+'dev' => [
+    'disabledPlugins' => '*',
+],
+```
+
+::: warning
+This should not be set on a per-environment basis, as it could result in plugin schema version mismatches
+between environments, which will prevent project config changes from getting applied.
+:::
+
 
 
 ### `disallowRobots`
@@ -392,6 +476,10 @@ Since
 
 Whether front end requests should respond with `X-Robots-Tag: none` HTTP headers, indicating that pages should not be indexed,
 and links on the page should not be followed, by web crawlers.
+
+::: tip
+This should be set to `true` for development and staging environments.
+:::
 
 
 
@@ -430,6 +518,8 @@ Defined by
 </div>
 
 The prefix that should be prepended to HTTP error status codes when determining the path to look for an error’s template.
+
+If set to `'_'` your site’s 404 template would live at `templates/_404.html`, for example.
 
 
 
@@ -472,6 +562,9 @@ Since
 
 List of extra locale IDs that the application should support, and users should be able to select as their Preferred Language.
 
+Only use this setting if your server has the Intl PHP extension, or if you’ve saved the corresponding
+[locale data](https://github.com/craftcms/locales) into your `config/locales/` folder.
+
 
 
 ### `handleCasing`
@@ -493,6 +586,12 @@ Since
 </div>
 
 The casing to use for autogenerated component handles.
+
+This can be set to one of the following:
+
+- `camel` – for camelCase
+- `pascal` – for PascalCase (aka UpperCamelCase)
+- `snake` – for snake_case
 
 
 
@@ -516,6 +615,21 @@ Since
 
 Whether the system should run in Headless Mode, which optimizes the system and control panel for headless CMS implementations.
 
+When this is enabled, the following changes will take place:
+
+- Template settings for sections and category groups will be hidden.
+- Template route management will be hidden.
+- Front-end routing will skip checks for element and template requests.
+- Front-end responses will be JSON-formatted rather than HTML by default.
+- Twig will be configured to escape unsafe strings for JavaScript/JSON rather than HTML by default for front-end requests.
+- The <config3:loginPath>, <config3:logoutPath>, <config3:setPasswordPath>, and <config3:verifyEmailPath> settings will be ignored.
+
+::: tip
+With Headless Mode enabled, users may only set passwords and verify email addresses via the control panel. Be sure to grant “Access the control
+panel” permission to all content editors and administrators. You’ll also need to set the <config3:baseCpUrl> config setting if the control
+panel is located on a different domain than your front end.
+:::
+
 
 
 ### `httpProxy`
@@ -537,6 +651,8 @@ Since
 </div>
 
 The proxy server that should be used for outgoing HTTP requests.
+
+This can be set to a URL (`http://localhost`) or a URL plus a port (`http://localhost:8125`).
 
 
 
@@ -579,6 +695,10 @@ Defined by
 
 List of headers where proxies store the real client IP.
 
+See [yii\web\Request::$ipHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$ipHeaders-detail) for more details.
+
+If not set, the default [craft\web\Request::$ipHeaders](https://docs.craftcms.com/api/v3/craft-web-request.html#property-ipheaders) value will be used.
+
 
 
 ### `isSystemLive`
@@ -617,6 +737,10 @@ Defined by
 </div>
 
 Whether non-ASCII characters in auto-generated slugs should be converted to ASCII (i.e. ñ → n).
+
+::: tip
+This only affects the JavaScript auto-generated slugs. Non-ASCII characters can still be used in slugs if entered manually.
+:::
 
 
 
@@ -659,6 +783,8 @@ Since
 </div>
 
 The maximum number of revisions that should be stored for each element.
+
+Set to `0` if you want to store an unlimited number of revisions.
 
 
 
@@ -721,6 +847,8 @@ Defined by
 The maximum amount of memory Craft will try to reserve during memory-intensive operations such as zipping,
 unzipping and updating. Defaults to an empty string, which means it will use as much memory as it can.
 
+See <https://php.net/manual/en/faq.using.php#faq.using.shorthandbytes> for a list of acceptable values.
+
 
 
 ### `previewIframeResizerOptions`
@@ -743,6 +871,12 @@ Since
 
 Custom [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) that should be used for preview iframes.
 
+```php
+'previewIframeResizerOptions' => [
+    'autoResize' => false,
+],
+```
+
 
 
 ### `privateTemplateTrigger`
@@ -763,6 +897,8 @@ Defined by
 The template path segment prefix that should be used to identify “private” templates, which are templates that are not
 directly accessible via a matching URL.
 
+Set to an empty value to disable public template routing.
+
 
 
 ### `runQueueAutomatically`
@@ -781,6 +917,19 @@ Defined by
 </div>
 
 Whether Craft should run pending queue jobs automatically when someone visits the control panel.
+
+If disabled, an alternate queue worker *must* be set up separately, either as an
+[always-running daemon](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/worker.md), or a cron job that runs the
+`queue/run` command every minute:
+
+```cron
+** * * * * /path/to/project/craft queue/run
+```
+
+::: tip
+This setting should be disabled for servers running Win32, or with Apache’s mod_deflate/mod_gzip installed,
+where PHP’s [flush()](https://php.net/manual/en/function.flush.php) method won’t work.
+:::
 
 
 
@@ -803,6 +952,12 @@ Since
 </div>
 
 The [SameSite](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) value that should be set on Craft cookies, if any.
+
+This can be set to `'None'`, `'Lax'`, `'Strict'`, or `null`.
+
+::: tip
+This setting requires PHP 7.3 or later.
+:::
 
 
 
@@ -885,6 +1040,9 @@ Defined by
 Configures Craft to send all system emails to either a single email address or an array of email addresses
 for testing purposes.
 
+By default, the recipient name(s) will be “Test Recipient”, but you can customize that by setting the value with the format
+`['me@domain.tld' => 'Name']`.
+
 
 
 ### `timezone`
@@ -903,6 +1061,8 @@ Defined by
 </div>
 
 The timezone of the site. If set, it will take precedence over the Timezone setting in Settings → General.
+
+This can be set to one of PHP’s [supported timezones](https://php.net/manual/en/timezones.php).
 
 
 
@@ -943,6 +1103,12 @@ Defined by
 
 Whether Craft should set users’ usernames to their email addresses, rather than let them set their username separately.
 
+If you enable this setting after user accounts already exist, run this terminal command to update existing usernames:
+
+```bash
+php craft utils/update-usernames
+```
+
 
 
 ### `useFileLocks`
@@ -961,6 +1127,10 @@ Defined by
 </div>
 
 Whether to grab an exclusive lock on a file when writing to it by using the `LOCK_EX` flag.
+
+Some file systems, such as NFS, do not support exclusive file locking.
+
+If not set to `true` or `false`, Craft will try to detect if the underlying file system supports exclusive file locking and cache the results.
 
 
 
@@ -983,6 +1153,21 @@ Since
 </div>
 
 Whether [iFrame Resizer options](http://davidjbradshaw.github.io/iframe-resizer/#options) should be used for Live Preview.
+
+Using iFrame Resizer makes it possible for Craft to retain the preview’s scroll position between page loads, for cross-origin web pages.
+
+It works by setting the height of the iframe to match the height of the inner web page, and the iframe’s container will be scrolled rather
+than the iframe document itself. This can lead to some unexpected CSS issues, however, because the previewed viewport height will be taller
+than the visible portion of the iframe.
+
+If you have a [decoupled front end](https://craftcms.com/docs/3.x/entries.html#previewing-decoupled-front-ends), you will need to include
+[iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) on your
+page as well for this to work. You can conditionally include it for only Live Preview requests by checking if the requested URL contains a
+`x-craft-live-preview` query string parameter.
+
+::: tip
+You can customize the behavior of iFrame Resizer via the <config3:previewIframeResizerOptions> config setting.
+:::
 
 
 
@@ -1023,6 +1208,21 @@ Defined by
 </div>
 
 The shell command that Craft should execute to create a database backup.
+
+When set to `null` (default), Craft will run `mysqldump` or `pg_dump`, provided that those libraries are in the `$PATH` variable
+for the system user running the web server.
+
+You may provide your own command, which can include several tokens Craft will substitute at runtime:
+
+- `{file}` - the target backup file path
+- `{port}` - the current database port
+- `{server}` - the current database hostname
+- `{user}` - user that was used to connect to the database
+- `{password}` - password for the specified `{user}`
+- `{database}` - the current database name
+- `{schema}` - the current database schema (if any)
+
+This can also be set to `false` to disable database backups completely.
 
 
 
@@ -1102,6 +1302,19 @@ Defined by
 
 The shell command Craft should execute to restore a database backup.
 
+By default Craft will run `mysql` or `psql`, provided those libraries are in the `$PATH` variable for the user the web server is running as.
+
+There are several tokens you can use that Craft will swap out at runtime:
+
+- `{path}` - the backup file path
+- `{port}` - the current database port
+- `{server}` - the current database hostname
+- `{user}` - the user to connect to the database
+- `{database}` - the current database name
+- `{schema}` - the current database schema (if any)
+
+This can also be set to `false` to disable database restores completely.
+
 
 
 ## Routing
@@ -1141,6 +1354,8 @@ Defined by
 </div>
 
 The URI that users without access to the control panel should be redirected to after activating their account.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1199,6 +1414,12 @@ Defined by
 
 The base URL Craft should use when generating control panel URLs.
 
+It will be determined automatically if left blank.
+
+::: tip
+The base control panel URL should **not** include the [control panel trigger word](config3:cpTrigger) (e.g. `/admin`).
+:::
+
 
 
 ### `cpTrigger`
@@ -1218,6 +1439,19 @@ Defined by
 
 The URI segment Craft should look for when determining if the current request should route to the control panel rather than
 the front-end website.
+
+This can be set to `null` if you have a dedicated hostname for the control panel (e.g. `cms.my-project.tld`), or you are running Craft in
+[Headless Mode](config3:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root
+directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
+
+```php
+define('CRAFT_CP', true);
+```
+
+Alternatively, you can set the <config3:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your
+control panel due to URI conflicts with actual folders/files in your main web root.
+
+(For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
 
 
 
@@ -1239,6 +1473,8 @@ Defined by
 The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account
 passwords. Note that this only affects front-end site requests.
 
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
 
 
 ### `loginPath`
@@ -1257,6 +1493,12 @@ Defined by
 </div>
 
 The URI Craft should use for user login on the front end.
+
+This can be set to `false` to disable front-end login.
+
+Note that this config setting is ignored when <config3:headlessMode> is enabled.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1277,6 +1519,12 @@ Defined by
 
 The URI Craft should use for user logout on the front end.
 
+This can be set to `false` to disable front-end logout.
+
+Note that this config setting is ignored when <config3:headlessMode> is enabled.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
 
 
 ### `omitScriptNameInUrls`
@@ -1295,6 +1543,22 @@ Defined by
 </div>
 
 Whether generated URLs should omit `index.php` (e.g. `http://my-project.tld/path` instead of `http://my-project.tld/index.php/path`)
+
+This can only be possible if your server is configured to redirect would-be 404s to `index.php`, for example, with the redirect found
+in the `.htaccess` file that came with Craft:
+
+```
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.+) /index.php?p= [QSA,L]
+```
+
+::: tip
+Even when this is set to `true`, the script name could still be included in some action URLs.
+If you want to ensure that `index.php` is fully omitted from **all** generated URLs, set the <config3:pathParam>
+config setting to `null`.
+:::
 
 
 
@@ -1316,6 +1580,18 @@ Defined by
 The string preceding a number which Craft will look for when determining if the current request is for a particular page in
 a paginated list of pages.
 
+Example Value | Example URI
+------------- | -----------
+`p` | `/news/p5`
+`page` | `/news/page5`
+`page/` | `/news/page/5`
+`?page` | `/news?page=5`
+
+::: tip
+If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config3:pathParam> setting which defaults to `p`.
+If your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
+:::
+
 
 
 ### `pathParam`
@@ -1334,6 +1610,13 @@ Defined by
 </div>
 
 The query string param that Craft will check when determining the request’s path.
+
+This can be set to `null` if your web server is capable of directing traffic to `index.php` without a query string param.
+If you’re using Apache, that means you’ll need to change the `RewriteRule` line in your `.htaccess` file to:
+
+```
+RewriteRule (.+) index.php [QSA,L]
+```
 
 
 
@@ -1354,6 +1637,11 @@ Defined by
 
 The path users should be redirected to after logging into the control panel.
 
+This setting will also come into effect if a user visits the control panel’s login page (`/admin/login`) or the control panel’s
+root URL (`/admin`) when they are already logged in.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
 
 
 ### `postLoginRedirect`
@@ -1372,6 +1660,11 @@ Defined by
 </div>
 
 The path users should be redirected to after logging in from the front-end site.
+
+This setting will also come into effect if the user visits the login page (as specified by the <config3:loginPath> config setting) when
+they are already logged in.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1392,6 +1685,8 @@ Defined by
 
 The path that users should be redirected to after logging out from the front-end site.
 
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
 
 
 ### `setPasswordPath`
@@ -1410,6 +1705,14 @@ Defined by
 </div>
 
 The URI or URL that Craft should use for Set Password forms on the front end.
+
+Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+::: tip
+You might also want to set <config3:invalidUserTokenPath> in case a user clicks on an expired password reset link.
+:::
 
 
 
@@ -1433,6 +1736,15 @@ Since
 
 The URI to the page where users can request to change their password.
 
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
+
+::: tip
+You’ll also need to set [setPasswordPath](config3:setPasswordPath), which determines the URI and template path for the Set Password form
+where the user resets their password after following the link in the Password Reset email.
+:::
+
 
 
 ### `setPasswordSuccessPath`
@@ -1451,6 +1763,8 @@ Defined by
 </div>
 
 The URI Craft should redirect users to after setting their password from the front end.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1512,6 +1826,8 @@ Defined by
 
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
+Note that this setting only takes effect if <config3:omitScriptNameInUrls> is set to `false`.
+
 
 
 ### `useSslOnTokenizedUrls`
@@ -1532,6 +1848,8 @@ Defined by
 Determines what protocol/schema Craft will use when generating tokenized URLs. If set to `'auto'`, Craft will check the
 current site’s base URL and the protocol of the current request and if either of them are HTTPS will use `https` in the tokenized URL. If not,
 will use `http`.
+
+If set to `false`, Craft will always use `http`. If set to `true`, then, Craft will always use `https`.
 
 
 
@@ -1555,6 +1873,10 @@ Since
 
 The URI or URL that Craft should use for email verification links on the front end.
 
+Note that this config setting is ignored when <config3:headlessMode> is enabled, unless it’s set to an absolute URL.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
 
 
 ### `verifyEmailSuccessPath`
@@ -1576,6 +1898,8 @@ Since
 </div>
 
 The URI that users without access to the control panel should be redirected to after verifying a new email address.
+
+See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 
 
@@ -1617,6 +1941,10 @@ Defined by
 
 The amount of time Craft will remember a username and pre-populate it on the control panel’s Login page.
 
+Set to `0` to disable this feature altogether.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
 
 
 ### `rememberedUserSessionDuration`
@@ -1635,6 +1963,10 @@ Defined by
 </div>
 
 The amount of time a user stays logged if “Remember Me” is checked on the login page.
+
+Set to `0` to disable the “Remember Me” feature altogether.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1693,6 +2025,10 @@ Defined by
 
 The amount of time before a user will get logged out due to inactivity.
 
+Set to `0` if you want users to stay logged in as long as their browser is open rather than a predetermined amount of time.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
 
 
 ## Security
@@ -1714,6 +2050,15 @@ Defined by
 
 The higher the cost value, the longer it takes to generate a password hash and to verify against it.
 
+Therefore, higher cost slows down a brute-force attack.
+
+For best protection against brute force attacks, set it to the highest value that is tolerable on production servers.
+
+The time taken to compute the hash doubles for every increment by one for this value.
+
+For example, if the hash takes 1 second to compute when the value is 14 then the compute time varies as
+2^(value - 14) seconds.
+
 
 
 ### `cooldownDuration`
@@ -1733,6 +2078,10 @@ Defined by
 
 The amount of time a user must wait before re-attempting to log in after their account is locked due to too many
 failed login attempts.
+
+Set to `0` to keep the account locked indefinitely, requiring an admin to manually unlock the account.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1772,6 +2121,8 @@ Defined by
 
 The default amount of time tokens can be used before expiring.
 
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
 
 
 ### `deferPublicRegistrationPassword`
@@ -1792,6 +2143,9 @@ Defined by
 By default, Craft requires a front-end “password” field for public user registrations. Setting this to `true`
 removes that requirement for the initial registration form.
 
+If you have email verification enabled, new users will set their password once they’ve followed the verification link in the email.
+If you don’t, the only way they can set their password is to go through your “forgot password” workflow.
+
 
 
 ### `elevatedSessionDuration`
@@ -1810,6 +2164,10 @@ Defined by
 </div>
 
 The amount of time a user’s elevated session will last, which is required for some sensitive actions (e.g. user group/permission assignment).
+
+Set to `0` to disable elevated session support.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1892,6 +2250,8 @@ Defined by
 
 The amount of time to track invalid login attempts for a user, for determining if Craft should lock an account.
 
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
 
 
 ### `maxInvalidLogins`
@@ -1930,6 +2290,10 @@ Defined by
 
 When `true`, Craft will always return a successful response in the “forgot password” flow, making it difficult to enumerate users.
 
+When set to `false` and you go through the “forgot password” flow from the control panel login page, you’ll get distinct messages indicating
+whether the username/email exists and whether an email was sent with further instructions. This can be helpful for the user attempting to
+log in but allow for username/email enumeration based on the response.
+
 
 
 ### `previewTokenDuration`
@@ -1951,6 +2315,8 @@ Since
 </div>
 
 The amount of time content preview tokens can be used before expiring.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -1993,6 +2359,8 @@ Defined by
 
 Whether Craft should sanitize uploaded SVG files and strip out potential malicious-looking content.
 
+This should definitely be enabled if you are accepting SVG uploads from untrusted sources.
+
 
 
 ### `secureHeaders`
@@ -2011,6 +2379,10 @@ Defined by
 </div>
 
 Lists of headers that are, by default, subject to the trusted host configuration.
+
+See [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) for more details.
+
+If not set, the default [yii\web\Request::$secureHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureHeaders-detail) value will be used.
 
 
 
@@ -2031,6 +2403,10 @@ Defined by
 
 List of headers to check for determining whether the connection is made via HTTPS.
 
+See [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) for more details.
+
+If not set, the default [yii\web\Request::$secureProtocolHeaders](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$secureProtocolHeaders-detail) value will be used.
+
 
 
 ### `securityKey`
@@ -2049,6 +2425,8 @@ Defined by
 </div>
 
 A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft3:craft\services\Security).
+
+This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
 
 
 
@@ -2093,6 +2471,10 @@ Defined by
 
 The configuration for trusted security-related headers.
 
+See [yii\web\Request::$trustedHosts](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$trustedHosts-detail) for more details.
+
+By default, all hosts are trusted.
+
 
 
 ### `useSecureCookies`
@@ -2112,6 +2494,9 @@ Defined by
 
 Whether Craft will set the “secure” flag when saving cookies when using `Craft::cookieConfig()` to create a cookie.
 
+Valid values are `true`, `false`, and `'auto'`. Defaults to `'auto'`, which will set the secure flag if the page you’re currently accessing
+is over `https://`. `true` will always set the flag, regardless of protocol and `false` will never automatically set the flag.
+
 
 
 ### `verificationCodeDuration`
@@ -2130,6 +2515,8 @@ Defined by
 </div>
 
 The amount of time a user verification code can be used before expiring.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -2269,6 +2656,10 @@ Defined by
 
 Whether uploaded filenames with non-ASCII characters should be converted to ASCII (i.e. `ñ` → `n`).
 
+::: tip
+You can run `php craft utils/ascii-filenames` in your terminal to apply ASCII filenames to all existing assets.
+:::
+
 
 
 ### `extraFileKinds`
@@ -2291,6 +2682,25 @@ Since
 
 List of additional file kinds Craft should support. This array will get merged with the one defined in
 `\craft\helpers\Assets::_buildFileKinds()`.
+
+```php
+'extraFileKinds' => [
+    // merge .psb into list of Photoshop file kinds
+    'photoshop' => [
+        'extensions' => ['psb'],
+    ],
+    // register new "Stylesheet" file kind
+    'stylesheet' => [
+        'label' => 'Stylesheet',
+        'extensions' => ['css', 'less', 'pcss', 'sass', 'scss', 'styl'],
+    ],
+],
+```
+
+::: tip
+File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with
+the <config3:extraAllowedFileExtensions> config setting.
+:::
 
 
 
@@ -2329,6 +2739,8 @@ Defined by
 </div>
 
 The maximum upload file size allowed.
+
+See [craft\helpers\ConfigHelper::sizeInBytes()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-sizeinbytes) for a list of supported value types.
 
 
 
@@ -2376,6 +2788,8 @@ Since
 
 The server path to an image file that should be sent when responding to an image request with a
 404 status code.
+
+This can be set to an aliased path such as `@webroot/assets/404.svg`.
 
 
 
@@ -2527,6 +2941,9 @@ Since
 
 Whether CMYK should be preserved as the colorspace when manipulating images.
 
+Setting this to `true` will prevent Craft from transforming CMYK images to sRGB, but on some ImageMagick versions it can cause
+image color distortion. This will only have an effect if ImageMagick is in use.
+
 
 
 ### `preserveExifData`
@@ -2546,6 +2963,10 @@ Defined by
 
 Whether the EXIF data should be preserved when manipulating and uploading images.
 
+Setting this to `true` will result in larger image file sizes.
+
+This will only have effect if ImageMagick is in use.
+
 
 
 ### `preserveImageColorProfiles`
@@ -2564,6 +2985,9 @@ Defined by
 </div>
 
 Whether the embedded Image Color Profile (ICC) should be preserved when manipulating images.
+
+Setting this to `false` will reduce the image size a little bit, but on some ImageMagick versions can cause images to be saved with
+an incorrect gamma value, which causes the images to become very dark. This will only have effect if ImageMagick is in use.
 
 
 
@@ -2586,6 +3010,8 @@ Since
 </div>
 
 Whether SVG thumbnails should be rasterized.
+
+Note this will only work if ImageMagick is installed, and <config3:imageDriver> is set to either `auto` or `imagick`.
 
 
 
@@ -2696,6 +3122,11 @@ Since
 
 The Ajax origins that should be allowed to access the GraphQL API, if enabled.
 
+If this is set to an array, then `graphql/api` requests will only include the current request’s [origin](https://www.yiiframework.com/doc/api/2.0/yii-web-request#getOrigin()-detail)
+in the `Access-Control-Allow-Origin` response header if it’s listed here.
+
+If this is set to `false`, then the `Access-Control-Allow-Origin` response header will never be sent.
+
 
 
 ### `disableGraphqlTransformDirective`
@@ -2740,6 +3171,8 @@ Since
 
 Whether the GraphQL API should be enabled.
 
+Note that the GraphQL API is only available for Craft Pro.
+
 
 
 ### `enableGraphqlCaching`
@@ -2761,6 +3194,12 @@ Since
 </div>
 
 Whether Craft should cache GraphQL queries.
+
+If set to `true`, Craft will cache the results for unique GraphQL queries per access token. The cache is automatically invalidated any time
+an element is saved, the site structure is updated, or a GraphQL schema is saved.
+
+This setting will have no effect if a plugin is using the [craft\services\Gql::EVENT_BEFORE_EXECUTE_GQL_QUERY](https://docs.craftcms.com/api/v3/craft-services-gql.html#constant-event-before-execute-gql-query) event to provide its own
+caching logic and setting the `result` property.
 
 
 
@@ -2956,6 +3395,16 @@ Defined by
 
 The amount of time to wait before Craft purges pending users from the system that have not activated.
 
+Any content assigned to a pending user will be deleted as well when the given time interval passes.
+
+Set to `0` to disable this feature.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: tip
+Users will only be purged when [garbage collection](https://craftcms.com/docs/3.x/gc.html) is run.
+:::
+
 
 
 ### `purgeStaleUserSessionDuration`
@@ -2977,6 +3426,10 @@ Since
 </div>
 
 The amount of time to wait before Craft purges stale user sessions from the sessions table in the database.
+
+Set to `0` to disable this feature.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
@@ -3000,6 +3453,10 @@ Since
 
 The amount of time to wait before Craft purges unpublished drafts that were never updated with content.
 
+Set to `0` to disable this feature.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
 
 
 ### `softDeleteDuration`
@@ -3021,6 +3478,10 @@ Since
 </div>
 
 The amount of time before a soft-deleted item will be up for hard-deletion by garbage collection.
+
+Set to `0` if you don’t ever want to delete soft-deleted items.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v3/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 
 
