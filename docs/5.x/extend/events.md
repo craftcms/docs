@@ -12,6 +12,12 @@ See [Using Events in a Custom Module](kb:custom-module-events) for an end-to-end
 
 This page covers customizing Craft’s native behavior by registering event handlers in your plugin, and how to implement [your own events](#custom-events) that other developers can take advantage of.
 
+## Event Code Generator
+
+Quickly find events and generate code samples. Many events will appear more than once, as they’re listed for each class that emits them—read about [discovering events](#discovering-events) for more information!
+
+<event-browser source="craft-5" />
+
 ## Anatomy of an Event
 
 We use “event” to describe the **name** and **sender** that uniquely identify it, as well as the actual <yii2:yii\base\Event> instance that is emitted.
@@ -67,7 +73,7 @@ The best way to discover an event is to get familiar with a known procedure by s
 A fresh Craft install can easily emit 100 or more events per request, so using your IDE’s _conditional breakpoint_ may be necessary to cut down on noise!
 :::
 
-Directly searching the Craft source is a great way to learn about Craft-specific events—but it will miss a host of events emitted by Yii, as well as those that are inherited from parent classes. The [event browser](#event-code-generator) and generator below enumerates _all_ of those events, even if they’re technically defined by a parent.
+Directly searching the Craft source is a great way to learn about Craft-specific events—but it will miss a host of events emitted by Yii, as well as those that are inherited from parent classes. The [event browser](#event-code-generator) and generator enumerates _all_ of those events, even if they’re technically defined by a parent.
 
 ### Inherited Events
 
@@ -232,12 +238,6 @@ $query->attachBehavior('myBehavior', new EventBehavior([
 ```
 
 The second argument to the `EventBehavior` constructor tells the behavior to mimic <craft5:craft\base\Event::once()> and will only invoke your handler once. All handlers are treated the same way, but you may mix one-time and continuous handlers by attaching multiple `EventBehavior` instances.
-
-## Event Code Generator
-
-Select an event for more detail and a code snippet.
-
-<event-browser source="craft-5" />
 
 ## Common Event Flows
 
