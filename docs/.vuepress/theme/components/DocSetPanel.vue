@@ -24,6 +24,15 @@
 
         <span>{{ set.setTitle ? set.setTitle : set.title }}</span>
       </RouterLink>
+
+      <!-- Special handling for external Cloud docs! -->
+      <a class="doc-set" href="https://craftcms.com/knowledge-base/cloud" target="_blank">
+        <span class="mr-2 inline-block relative set-icon">
+          <img src="/docs/icons/icon-cloud.svg" width="16" height="16" alt="Craft Cloud" />
+        </span>
+
+        <span>Craft Cloud</span>
+      </a>
     </div>
     <div v-if="$activeSet" class="doc-set-current">
       <RouterLink :to="defaultUri($activeSet)" class="flex items-center">
@@ -38,6 +47,7 @@
         <select name class="doc-set-version" @change="handleVersionSelect($event)">
           <option
             v-for="version in $activeSet.versions"
+            :key="version[0]"
             :value="version[0]"
             :selected="version[0] == $activeVersion"
           >{{ version[0] }}</option>
