@@ -149,6 +149,7 @@ module.exports = {
             "element-types",
             "element-exporter-types",
             "field-types",
+            "field-layout-element-types",
             "filesystem-types",
             "widget-types",
           ]

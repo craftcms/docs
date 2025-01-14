@@ -354,14 +354,7 @@ Event::on(
 
 ## Fields + Content
 
-Add a static `hasContent()` method to your element class to give them their own rows in the `content` table. This is required to support [titles](#titles) and [custom fields](#field-layouts).
-
-```php
-public static function hasContent(): bool
-{
-    return true;
-}
-```
+Every element comes with automatic support for custom fields and multi-site content.
 
 ### Titles
 
@@ -418,7 +411,9 @@ Read about managing [multiple field layouts](#variations-multiple-field-layouts)
 
 #### Native Layout Elements
 
-Native element properties (like our Product’s `price`) can be made editable via the [sidebar](#edit-screen), or as customizable field layout elements. Craft has some pre-packaged field layout elements (like <craft5:craft\fieldlayoutelements\TitleField>), but you are responsible for configuring others—either with the existing classes, or by implementing new layout elements:
+<See path="field-layout-element-types.md" />
+
+Native element properties (like our Product’s `price`) can be made editable via the [sidebar](#edit-screen), or as customizable [field layout elements](field-layout-elements.md). Craft has some pre-packaged field layout elements (like <craft5:craft\fieldlayoutelements\TitleField>), but you are responsible for configuring others—either with the existing classes, or by implementing new layout elements:
 
 ```php
 use craft\models\FieldLayout;
