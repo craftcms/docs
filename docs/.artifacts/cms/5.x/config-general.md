@@ -3622,7 +3622,17 @@ Defined by
 
 A private, random, cryptographically-secure key that is used for hashing and encrypting data in [craft\services\Security](craft5:craft\services\Security).
 
-This value should be the same across all environments. If this key ever changes, any data that was encrypted with it will be inaccessible.
+::: warning
+**Do not** share this key publicly. If exposed, it could lead to a compromised system.
+:::
+
+In the event that the key is compromised, a new secure key can be generated with the command:
+
+```sh
+php craft setup/security-key
+```
+
+Note that if the key changes, any data that is encrypted with it (e.g. user session cookies) will be inaccessible.
 
 ```php Static Config
 ->securityKey('2cf24dba5...')
