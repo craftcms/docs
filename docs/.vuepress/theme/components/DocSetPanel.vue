@@ -26,7 +26,7 @@
       </RouterLink>
 
       <!-- Special handling for external Cloud docs! -->
-      <a class="doc-set" href="https://craftcms.com/knowledge-base/cloud" target="_blank">
+      <a v-if="$page.frontmatter.home" class="doc-set" href="https://craftcms.com/knowledge-base/cloud" target="_blank">
         <span class="mr-2 inline-block relative set-icon">
           <img src="/docs/icons/icon-cloud.svg" width="16" height="16" alt="Craft Cloud" />
         </span>
