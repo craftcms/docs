@@ -48,27 +48,35 @@ On multi-site installs, the following settings will also be available (under **A
 
 ### Dynamic Subfolder Paths
 
-Subfolder paths defined by the **Upload Location** and **Default Upload Location** settings can optionally contain Twig tags (e.g. `news/{{ slug }}`).
-
-Any properties supported by the source element (the element that has the Assets field) can be used here.
-
-::: tip
-If you want to include the entry’s ID or UID in a dynamic subfolder path, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source entry’s ID or UID is used rather than the those of a draft or revision.
-:::
-
-::: tip
-If an Assets field is used on an [entry type](../element-types/entries.md#entry-types) within a [Matrix field](matrix.md), the source element is going to be the nested entry, _not_ the element that the entry belongs to.
-
-In this case, if you wanted to incorporate the main element’s ID in a dynamic subfolder path, you would use `owner.id` instead of just `id`. Combined with the above, this would mean `owner.canonicalId`.
-:::
+Subfolder paths defined by the **Upload Location** and **Default Upload Location** settings are [object templates](../../system/object-templates.md). Any properties supported by the source element (the element that has the assets field) can be used here.
 
 ::: warning
-If the rendered subfolder path ends up blank, contains a leading or trailing forward slash (e.g. `foo/`), or an empty segment (e.g. `foo//bar`), Craft will interpret that as a sign that a variable in the subfolder template couldn’t be resolved successfully, and the path will be considered invalid. If you are intentionally outputting a blank segment, output `:ignore:`. For example, if you want to output the first selected category, or nothing if there isn’t one, do this:
+Be aware that _fields are reusable_, and can be added to [nested](#nested-elements) _and_ non-nested elements’ field layouts—and on different element types! Constructing a subfolder template that works in all contexts (and is readable and reliable) can be challenging—consider maintaining separate fields to avoid this complexity.
+:::
+
+#### IDs and UIDs
+
+If you want to include an element’s ID or UID in a dynamic subfolder path, use `{canonicalId}` or `{canonicalUid}` rather than `{id}` or `{uid}`, so the source element’s ID or UID is used rather than the those of a draft or revision.
+
+#### Nested Elements
+
+If an Assets field is used by an [entry type](../element-types/entries.md#entry-types) within a [Matrix field](matrix.md), the source element will be the nested entry, _not_ the element that the entry belongs to. This means that assets attached to different nested entries may end up in different folders!
+
+In these situations, you should use `owner.someElementProperty` instead of just `someElementProperty`; the previous example would become `owner.canonicalId` or `owner.canonicalUid`.
+
+#### Conditional Path Segments
+
+If a rendered subfolder path ends up blank or contains a leading, trailing, or double forward slash (e.g. `/bar/baz`, `foo/`, or `foo//bar`), Craft considers it invalid. When you suspect a value it depends on may not be available, output `:ignore:`. Suppose you want to output the first selected category, or nothing (when one isn’t selected):
 
 ```twig
-{{ categoriesFieldHandle.one().slug ?? ':ignore:' }}
+blog/{{ categoriesFieldHandle.one().slug ?? ':ignore:' }}/{canonicalId}
 ```
-:::
+
+This is equivalent to conditionally outputting the slashes as part of a value:
+
+```twig
+blog/{{ categoriesFieldHandle.exists() ? "#{categoriesFieldHandle.one().slug}/" : null }}{canonicalId}
+```
 
 ## The Field
 
