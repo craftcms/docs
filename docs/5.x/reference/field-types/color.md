@@ -1,73 +1,102 @@
 # Color Fields
 
-Color fields give you a hexadecimal color input with a preview of the current color, and on browsers that support `<input type="color">`, clicking on the preview will open the browser’s color picker.
+Color fields provide a flexible way to store hexadecimal color values. You can define a [palette](#palette) to guide authors <Since ver="5.6.0" feature="Color field palettes" />, or use an [open-ended input](#custom-colors).
 
 <!-- more -->
 
+![Screenshot of a color field interface in the Craft control panel](../../images/fields-color-ui.png)
+
+## Settings
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new color field via the control panel.">
+<img src="../../images/fields-color-settings.png" alt="Color field settings screen in the Craft control panel">
+</BrowserShot>
+
+### Palette
+
+Each field contains a **Palette** of colors that authors can select from a drop-down menu.
+
+### Custom Colors
+
+Turn on **Allow custom colors** to display a compact input and color preview UI. When used in conjunction with a palette, an additional **Custom…** option is listed at the bottom of the drop-down menu.
+
+::: tip
+In [browsers that support `<input type="color">`](https://caniuse.com/input-color), clicking on the color preview “well” opens a native OS color picker.
+:::
+
 ## Development
 
-Calling a Color field in your templates will return a <craft5:craft\fields\data\ColorData> object, or `null` if no color was selected.
+Accessing a color field returns a <craft5:craft\fields\data\ColorData> object, or `null` if no color was selected.
 
-By default, the bare field handle will return a hexadecimal representation of that color:
+Casting a `ColorData` object to a string by outputting it directly produces a hexadecimal representation of the color:
 
 ::: code
 ```twig
-{% if entry.myFieldHandle %}
+{% if entry.myColorField %}
   <style type="text/css">
     .content a {
-      color: {{ entry.myFieldHandle }};
+      {# Directly outputting the value... #}
+      color: {{ entry.myColorField }};
     }
     .content b {
-      {# same thing #}
-      color: {{ entry.myFieldHandle.getHex() }};
+      {# ...is equivalent to: #}
+      color: {{ entry.myColorField.getHex() }};
     }
   </style>
 {% endif %}
 ```
 ```php
-if ($entry->myFieldHandle) {
-    echo $entry->myFieldHandle;
-    // same thing
-    echo $entry->myFieldHandle->getHex();
+if ($entry->myColorField) {
+    echo $entry->myColorField;
+    // …is equivalent to…
+    echo $entry->myColorField->getHex();
 }
 ```
 :::
 
-Here’s an impractical example illustrating each <craft5:craft\fields\data\ColorData> method:
+`ColorData` objects have a number of methods that streamline working with color values:
 
 ::: code
 ```twig
-{% if entry.myFieldHandle %}
-  {{ entry.myFieldHandle }}                 {# output: #e5422b #}
-  {{ entry.myFieldHandle.getHex() }}        {# output: #e5422b #}
-  {{ entry.myFieldHandle.getRgb() }}        {# output: rgb(229,66,43) #}
-  {{ entry.myFieldHandle.getHsl() }}        {# output: hsl(7,81%,90%) #}
-  {{ entry.myFieldHandle.getLuma() }}       {# output: 0.38820862745098 #}
-  {{ entry.myFieldHandle.getHue() }}        {# output: 7 #}
-  {{ entry.myFieldHandle.getLightness() }}  {# output: 90 #}
-  {{ entry.myFieldHandle.getSaturation() }} {# output: 81 #}
-  {{ entry.myFieldHandle.getRed() }}        {# output: 229 #}
-  {{ entry.myFieldHandle.getGreen() }}      {# output: 66 #}
-  {{ entry.myFieldHandle.getBlue() }}       {# output: 43 #}
+{% if entry.myColorField %}
+  {{ entry.myColorField }}                 {# output: #e5422b #}
+  {{ entry.myColorField.getHex() }}        {# output: #e5422b #}
+  {{ entry.myColorField.getRgb() }}        {# output: rgb(229,66,43) #}
+  {{ entry.myColorField.getHsl() }}        {# output: hsl(7,81%,90%) #}
+  {{ entry.myColorField.getLuma() }}       {# output: 0.38820862745098 #}
+  {{ entry.myColorField.getHue() }}        {# output: 7 #}
+  {{ entry.myColorField.getLightness() }}  {# output: 90 #}
+  {{ entry.myColorField.getSaturation() }} {# output: 81 #}
+  {{ entry.myColorField.getRed() }}        {# output: 229 #}
+  {{ entry.myColorField.getGreen() }}      {# output: 66 #}
+  {{ entry.myColorField.getBlue() }}       {# output: 43 #}
 {% endif %}
 ```
 ```php
-if ($entry->myFieldHandle) {
-    echo $entry->myFieldHandle;                  // output: #e5422b
-    echo $entry->myFieldHandle->getHex();        // output: #e5422b
-    echo $entry->myFieldHandle->getRgb();        // output: rgb(229,66,43)
-    echo $entry->myFieldHandle->getHsl();        // output: hsl(7,81%,90%)
-    echo $entry->myFieldHandle->getLuma();       // output: 0.38820862745098
-    echo $entry->myFieldHandle->getHue();        // output: 7
-    echo $entry->myFieldHandle->getLightness();  // output: 90
-    echo $entry->myFieldHandle->getSaturation(); // output: 81
-    echo $entry->myFieldHandle->getRed();        // output: 229
-    echo $entry->myFieldHandle->getGreen();      // output: 66
-    echo $entry->myFieldHandle->getBlue();       // output: 43
+if ($entry->myColorField) {
+    echo $entry->myColorField;                  // output: #e5422b
+    echo $entry->myColorField->getHex();        // output: #e5422b
+    echo $entry->myColorField->getRgb();        // output: rgb(229,66,43)
+    echo $entry->myColorField->getHsl();        // output: hsl(7,81%,90%)
+    echo $entry->myColorField->getLuma();       // output: 0.38820862745098
+    echo $entry->myColorField->getHue();        // output: 7
+    echo $entry->myColorField->getLightness();  // output: 90
+    echo $entry->myColorField->getSaturation(); // output: 81
+    echo $entry->myColorField->getRed();        // output: 229
+    echo $entry->myColorField->getGreen();      // output: 66
+    echo $entry->myColorField->getBlue();       // output: 43
 }
 ```
 :::
 
 ::: tip
-The example omits the `getL()`, `getS()`, `getR()`, `getG()`, and `getB()` methods, which are abbreviated forms of `getLuma()`, `getSaturation()`, `getRed()`, `getGreen()`, and `getBlue()` respectively.
+Refer to the [`ColorData`](craft5:craft\fields\data\ColorData) class reference for a complete list of methods!
 :::
+
+## Querying by Color
+
+There are no special query features for color fields; refer to the [plain text](plain-text.md) field for a list of standard string comparison syntaxes.
