@@ -10,6 +10,10 @@ Email fields give you a normal text input that requires a valid email address.
 
 <!-- more -->
 
+::: tip
+The new [Link field](link.md) also supports email addresses.
+:::
+
 ## Settings
 
 Email fields have the following settings:
