@@ -18,11 +18,11 @@ Color fields provide a flexible way to store hexadecimal color values. You can d
 
 ### Palette
 
-Each field contains a **Palette** of colors that authors can select from a drop-down menu.
+Each field contains a **Palette** of colors that authors can select from a dropdown menu.
 
 ### Custom Colors
 
-Turn on **Allow custom colors** to display a compact input and color preview UI. When used in conjunction with a palette, an additional **Custom…** option is listed at the bottom of the drop-down menu.
+Turn on **Allow custom colors** to display a compact input and color preview UI. When used in conjunction with a palette, an additional **Custom…** option is listed at the bottom of the dropdown menu.
 
 ::: tip
 In [browsers that support `<input type="color">`](https://caniuse.com/input-color), clicking on the color preview “well” opens a native OS color picker.

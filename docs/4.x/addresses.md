@@ -115,7 +115,7 @@ $countries = Craft::$app->getAddresses()->getCountryRepository()->getAll();
 ```
 :::
 
-This returns an array of [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) objects, indexed by their two-letter code. You might use this to populate a drop-down menu:
+This returns an array of [Country](https://github.com/commerceguys/addressing/blob/master/src/Country/Country.php) objects, indexed by their two-letter code. You might use this to populate a dropdown menu:
 
 ```twig
 <select name="myCountry">
