@@ -43,6 +43,7 @@ Variable | Description
 [loginUrl](#loginurl) | The URL to the front-end Login page.
 [logoutUrl](#logouturl) | The URL to the front-end Logout page.
 [now](#now) | The current date/time.
+[primarySite](#primarysite) <Since ver="5.6.0" feature="Global Twig variable for the primary site" /> | In multi-site projects, the “primary” site.
 [setPasswordUrl](#setpasswordurl) | The URL to the front-end [Reset Password](kb:front-end-user-accounts#reset-password-forms) page.
 [siteName](#sitename) | The name of the current site.
 [siteUrl](#siteurl) | The base URL of the current site.
@@ -215,6 +216,23 @@ A [DateTime](http://php.net/manual/en/class.datetime.php) object set to the curr
 ```twig
 Today is {{ now|date('M j, Y') }}.
 ```
+
+### `primarySite` <Since ver="5.6.0" feature="Global Twig variable for the primary site" />
+
+The _primary_ site (as designated in <Journey path="Settings, Sites" />), as an instance of <craft4:craft\models\Site>.
+
+```twig
+{# Output the primary site’s name: #}
+We are a proud member of {{ primarySite.name }}
+
+{# Link to a page on the primary site: #}
+{{ tag('a', {
+  href: siteUrl('about/governance', siteId = primarySite.id),
+  text: 'Learn about our family of businesses',
+}) }}
+```
+
+`primarySite` will be a reference to the same object as [`currentSite`](#currentsite), when `currentSite.primary` is `true`. You can also retrieve the primary site via `craft.app.sites.primarySite`.
 
 ### `setPasswordUrl`
 
