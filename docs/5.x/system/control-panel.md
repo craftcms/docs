@@ -131,9 +131,9 @@ You can disable a utility for all users with the [`disabledUtilities` config set
 The **Settings** screen is where you’ll configure the system and design your content model. Settings complement [configuration](../configure.md) are typically stored in [Project Config](project-config.md) so that you can easily deploy them to other environments.
 
 ::: tip
-Don’t see **Settings** in the main navigation? Make sure you have admin privileges, and that <config5:allowAdminChanges> is enabled.
+Don’t see **Settings** in the main navigation? Make sure you have admin privileges, and that <config5:allowAdminChanges> is enabled. In Craft 5.6 and later, administrators always have access to settings in [read-only mode](#read-only-mode).
 
-We recommend that this is enabled only in development environments.
+We recommend that this is enabled [only in development environments](../deploy.md#admin-changes).
 :::
 
 <BrowserShot
@@ -189,9 +189,20 @@ Group | Description
 
 Additional tiles may appear in a fourth group, after installing [plugins](plugins.md). Plugin settings are also accessible via the <Journey path="Settings, Plugins" /> screen.
 
+#### Read-Only Mode <Since ver="5.6.0" feature="Read-only settings screens" />
+
+[Administrators](user-management.md#admin-accounts) can always _view_ settings. A banner appears at the top of each settings screen, and inputs and controls are simplified or disabled:
+
+<BrowserShot
+    url="https://my-craft-project.ddev.site/admin/settings"
+    :link="false"
+    caption="The settings screen in read-only mode">
+<img src="../images/control-panel-settings-read-only.png" alt="Craft settings screen in read-only mode">
+</BrowserShot>
+
 ### Plugin Store
 
-The control panel provides an easy way to browse the [Plugin Store](plugins.md#the-plugin-store) and try or buy plugins with one click.
+The control panel provides an easy way to browse the [Plugin Store](plugins.md#the-plugin-store) and try or buy plugins with one click. Plugins can only be installed when [admin changes](config5:allowAdminChanges) are allowed.
 
 ## Tips + Tricks
 
