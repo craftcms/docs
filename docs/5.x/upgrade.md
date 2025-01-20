@@ -52,7 +52,8 @@ ddev start
 1. Capture a fresh database backup from your live environment and import it.
 1. Make sure you don’t have any pending or active jobs in your queue.
 1. Run `php craft project-config/rebuild` and allow any new background tasks to complete.
-1. Capture a database backup of your _local_ environment, just in case things go sideways.
+1. Run `php craft utils/fix-field-layout-uids`.
+1. Deploy any project config changes to your live environment. (Be sure to run `php craft up` or `php craft pc/apply`.)
 1. Note your current **Temp Uploads Location** setting in **Settings** &rarr; **Assets** &rarr; **Settings**.
 1. MySQL users: Add your database’s _current_ character set and collation to `.env`. If you have always used Craft’s defaults, this will be:
 
