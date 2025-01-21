@@ -123,7 +123,7 @@ In situations where there is simply too much work to do in a single request (or 
 
 Batched jobs’ `execute()` method is handled for you. Instead, you must define two new methods:
 
-- `loadData()` — Returns a class extending <craft5:craft\base\Batchable>, like <craft5:craft\db\QueryBatcher>. Data is not necessarily loaded at this point, but a means of fetching data in “slices” must be.
+- `loadData()` — Returns a class implementing <craft5:craft\base\Batchable>, like <craft5:craft\db\QueryBatcher>. Data is not necessarily loaded at this point, but a means of fetching data in “slices” must be.
 - `processItem($item)` — Your logic for handling a single item in each batch.
 
 ::: tip

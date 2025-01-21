@@ -1005,6 +1005,8 @@ This query is used to query for users.
 | `authors`| `Boolean` | Narrows the query results based on whether the users are listed as the author of any entries.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
+| `affiliatedSite`| `[String]` | Determines which site(s) the users should be affiliated with.
+| `affiliatedSiteId`| `[QueryArgument]` | Determines which site(s) the users should be affiliated with.
 
 ### The `userCount` query
 This query is used to return the number of users.
@@ -1051,6 +1053,8 @@ This query is used to return the number of users.
 | `authors`| `Boolean` | Narrows the query results based on whether the users are listed as the author of any entries.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
+| `affiliatedSite`| `[String]` | Determines which site(s) the users should be affiliated with.
+| `affiliatedSiteId`| `[QueryArgument]` | Determines which site(s) the users should be affiliated with.
 
 ### The `user` query
 This query is used to query for a single user.
@@ -1097,6 +1101,8 @@ This query is used to query for a single user.
 | `authors`| `Boolean` | Narrows the query results based on whether the users are listed as the author of any entries.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 | `group`| `[QueryArgument]` | Narrows the query results based on the user group the users belong to.
+| `affiliatedSite`| `[String]` | Determines which site(s) the users should be affiliated with.
+| `affiliatedSiteId`| `[QueryArgument]` | Determines which site(s) the users should be affiliated with.
 
 ### The `tags` query
 This query is used to query for tags.
@@ -1644,6 +1650,8 @@ This is the interface implemented by all users.
 | `firstName`| `String` | The user’s first name.
 | `lastName`| `String` | The user’s last name.
 | `email`| `String` | The user’s email.
+| `affiliatedSiteHandle`| `String` | The handle of the site the user is affiliated with.
+| `affiliatedSiteId`| `Int` | The ID of the site the user is affiliated with.
 | `addresses`| `[AddressInterface]` | The user’s addresses.
 
 

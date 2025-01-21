@@ -6,56 +6,60 @@
 
 <!-- textlint-disable -->
 
-| Param                                       | Description
-| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [admin](#admin)                             | Narrows the query results to only users that have admin accounts.
-| [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
-| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only users that are not related to certain other elements.
-| [andRelatedTo](#andrelatedto)               | Narrows the query results to only users that are related to certain other elements.
-| [asArray](#asarray)                         | Causes the query to return matching users as arrays of data, rather than [User](craft5:craft\elements\User) objects.
-| [assetUploaders](#assetuploaders)           | Narrows the query results to only users that have uploaded an asset.
-| [authorOf](#authorof)                       | Narrows the query results to users who are the author of the given entry.
-| [authors](#authors)                         | Narrows the query results to only users that are authors of an entry.
-| [cache](#cache)                             | Enables query cache for this Query.
-| [can](#can)                                 | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
-| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
-| [dateCreated](#datecreated)                 | Narrows the query results based on the users’ creation dates.
-| [dateUpdated](#dateupdated)                 | Narrows the query results based on the users’ last-updated dates.
-| [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
-| [email](#email)                             | Narrows the query results based on the users’ email addresses.
-| [firstName](#firstname)                     | Narrows the query results based on the users’ first names.
-| [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
-| [fullName](#fullname)                       | Narrows the query results based on the users’ full names.
-| [group](#group)                             | Narrows the query results based on the user group the users belong to.
-| [groupId](#groupid)                         | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
-| [hasPhoto](#hasphoto)                       | Narrows the query results to only users that have (or don’t have) a user photo.
-| [id](#id)                                   | Narrows the query results based on the users’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching users as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
-| [inBulkOp](#inbulkop)                       | Narrows the query results to only users that were involved in a bulk element operation.
-| [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
-| [language](#language)                       | Determines which site(s) the users should be queried in, based on their language.
-| [lastLoginDate](#lastlogindate)             | Narrows the query results based on the users’ last login dates.
-| [lastName](#lastname)                       | Narrows the query results based on the users’ last names.
-| [limit](#limit)                             | Determines the number of users that should be returned.
-| [notRelatedTo](#notrelatedto)               | Narrows the query results to only users that are not related to certain other elements.
-| [offset](#offset)                           | Determines how many users should be skipped in the results.
-| [orderBy](#orderby)                         | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
-| [preferSites](#prefersites)                 | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
-| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [relatedTo](#relatedto)                     | Narrows the query results to only users that are related to certain other elements.
-| [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
-| [search](#search)                           | Narrows the query results to only users that match a search query.
-| [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the users’ IDs in the `elements_sites` table.
-| [status](#status)                           | Narrows the query results based on the users’ statuses.
-| [trashed](#trashed)                         | Narrows the query results to only users that have been soft-deleted.
-| [uid](#uid)                                 | Narrows the query results based on the users’ UIDs.
-| [username](#username)                       | Narrows the query results based on the users’ usernames.
-| [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
-| [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
-| [with](#with)                               | Causes the query to return matching users eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
-| [withGroups](#withgroups)                   | Causes the query to return matching users eager-loaded with their user groups.
+| Param                                           | Description
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [admin](#admin)                                 | Narrows the query results to only users that have admin accounts.
+| [affiliatedSite](#affiliatedsite)               | Narrows the query results based on the users’ affiliated sites.
+| [affiliatedSiteId](#affiliatedsiteid)           | Narrows the query results based on the users’ affiliated sites, per the site’s ID(s).
+| [afterPopulate](#afterpopulate)                 | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only users that are not related to certain other elements.
+| [andRelatedTo](#andrelatedto)                   | Narrows the query results to only users that are related to certain other elements.
+| [asArray](#asarray)                             | Causes the query to return matching users as arrays of data, rather than [User](craft5:craft\elements\User) objects.
+| [assetUploaders](#assetuploaders)               | Narrows the query results to only users that have uploaded an asset.
+| [authorOf](#authorof)                           | Narrows the query results to users who are the author of the given entry.
+| [authors](#authors)                             | Narrows the query results to only users that are authors of an entry.
+| [cache](#cache)                                 | Enables query cache for this Query.
+| [can](#can)                                     | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
+| [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+| [dateCreated](#datecreated)                     | Narrows the query results based on the users’ creation dates.
+| [dateUpdated](#dateupdated)                     | Narrows the query results based on the users’ last-updated dates.
+| [eagerly](#eagerly)                             | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [email](#email)                                 | Narrows the query results based on the users’ email addresses.
+| [firstName](#firstname)                         | Narrows the query results based on the users’ first names.
+| [fixedOrder](#fixedorder)                       | Causes the query results to be returned in the order specified by [id](#id).
+| [fullName](#fullname)                           | Narrows the query results based on the users’ full names.
+| [getFieldLayouts](#getfieldlayouts)             | Returns the field layouts that could be associated with the resulting elements.
+| [group](#group)                                 | Narrows the query results based on the user group the users belong to.
+| [groupId](#groupid)                             | Narrows the query results based on the user group the users belong to, per the groups’ IDs.
+| [hasPhoto](#hasphoto)                           | Narrows the query results to only users that have (or don’t have) a user photo.
+| [id](#id)                                       | Narrows the query results based on the users’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)       | Causes the query to return matching users as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                           | Narrows the query results to only users that were involved in a bulk element operation.
+| [inReverse](#inreverse)                         | Causes the query results to be returned in reverse order.
+| [language](#language)                           | Determines which site(s) the users should be queried in, based on their language.
+| [lastLoginDate](#lastlogindate)                 | Narrows the query results based on the users’ last login dates.
+| [lastName](#lastname)                           | Narrows the query results based on the users’ last names.
+| [limit](#limit)                                 | Determines the number of users that should be returned.
+| [notRelatedTo](#notrelatedto)                   | Narrows the query results to only users that are not related to certain other elements.
+| [offset](#offset)                               | Determines how many users should be skipped in the results.
+| [orderBy](#orderby)                             | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
+| [preferSites](#prefersites)                     | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [relatedTo](#relatedto)                         | Narrows the query results to only users that are related to certain other elements.
+| [render](#render)                               | Executes the query and renders the resulting elements using their partial templates.
+| [search](#search)                               | Narrows the query results to only users that match a search query.
+| [siteSettingsId](#sitesettingsid)               | Narrows the query results based on the users’ IDs in the `elements_sites` table.
+| [status](#status)                               | Narrows the query results based on the users’ statuses.
+| [trashed](#trashed)                             | Narrows the query results to only users that have been soft-deleted.
+| [uid](#uid)                                     | Narrows the query results based on the users’ UIDs.
+| [username](#username)                           | Narrows the query results based on the users’ usernames.
+| [wasCountEagerLoaded](#wascounteagerloaded)     | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)               | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                                   | Causes the query to return matching users eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)           | Sets whether custom fields should be factored into the query.
+| [withGroups](#withgroups)                       | Causes the query to return matching users eager-loaded with their user groups.
+| [withProvisionalDrafts](#withprovisionaldrafts) | Causes the query to return provisional drafts for the matching elements, when they exist for the current user.
 
 
 <!-- textlint-enable -->
@@ -79,6 +83,71 @@ Narrows the query results to only users that have admin accounts.
 // Fetch admins
 $users = \craft\elements\User::find()
     ->admin()
+    ->all();
+```
+:::
+
+
+#### `affiliatedSite`
+
+Narrows the query results based on the users’ affiliated sites.
+
+Possible values include:
+
+| Value | Fetches users…
+| - | -
+| `'foo'` | affiliated with the site with a handle of `foo`.
+| `['foo', 'bar']` | affiliated with a site with a handle of `foo` or `bar`.
+| `['not', 'foo', 'bar']` | not affiliated with a site with a handle of `foo` or `bar`.
+| a [craft\models\Site](craft5:craft\models\Site) object | affiliated with the site represented by the object.
+| `'*'` | affiliated with any site.
+
+
+
+::: code
+```twig
+{# Fetch users affiliated with the Foo site #}
+{% set users = craft.users()
+  .affiliatedSite('foo')
+  .all() %}
+```
+
+```php
+// Fetch users affiliated with the Foo site
+$users = \craft\elements\User::find()
+    ->affiliatedSite('foo')
+    ->all();
+```
+:::
+
+
+#### `affiliatedSiteId`
+
+Narrows the query results based on the users’ affiliated sites, per the site’s ID(s).
+
+Possible values include:
+
+| Value | Fetches users…
+| - | -
+| `1` | affiliated with the site with an ID of `1`.
+| `[1, 2]` | affiliated with a site with an ID of `1` or `2`.
+| `['not', 1, 2]` | not affiliated with a site with an ID of `1` or `2`.
+| `'*'` | affiliated with any site.
+
+
+
+::: code
+```twig
+{# Fetch users affiliated with the site with an ID of 1 #}
+{% set users = craft.users()
+  .affiliatedSiteId(1)
+  .all() %}
+```
+
+```php
+// Fetch users affiliated with the site with an ID of 1
+$users = \craft\elements\User::find()
+    ->affiliatedSiteId(1)
     ->all();
 ```
 :::
@@ -494,6 +563,19 @@ $users = \craft\elements\User::find()
     ->one();
 ```
 :::
+
+
+#### `getFieldLayouts`
+
+Returns the field layouts that could be associated with the resulting elements.
+
+
+
+
+
+
+
+
 
 
 #### `group`
@@ -1255,6 +1337,20 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
+
+
+#### `withProvisionalDrafts`
+
+Causes the query to return provisional drafts for the matching elements,
+when they exist for the current user.
+
+
+
+
+
+
+
+
 
 
 
