@@ -24,6 +24,12 @@ Matrix fields have the following settings:
 
 Select from existing, globally-defined [entry types](../element-types/entries.md#entry-types), or create a new one on-the-fly.
 
+::: tip
+You can specify local overrides for each of the attached entry types’ **Name** and **Handle** by selecting **Settings** from a chip’s action <Icon kind="ellipses" /> menu. <Since ver="5.6.0" feature="Contextual entry type name and handle overrides" /> A pencil icon will be displayed in any entry type chip that has overrides.
+
+![Opening a selected entry type’s settings](../../images/fields-matrix-entry-types.png)
+:::
+
 #### Propagation Method
 
 Choose how nested entries are propagated to other sites. This applies only to _new_ nested entries—changes to _existing_ nested entries are propagated on a per-field basis.

@@ -50,15 +50,26 @@ In addition to the standard field options, Link fields have the following settin
   :::
 
 - **Show the “Label” field** — Displays a dedicated field to override the default/generated link label.
-- **Show the “Open in a new tab” field** — Whether or not authors can choose to have links open in a new tab.
-- **Max Length** — The maximum number of characters the field can contain. (Defaults to `255`.)
+- **Advanced Fields** <Since ver="5.6.0" feature="Advanced link settings" /> — Expose a variety of options to editors for controlling specific anchor tag attributes in the resulting HTML.
+  - **Target** — Shows an **Open in a new tab?** lightswitch. (In earlier versions of Craft, this was a discrete setting labeled **Show the “Open in a new tab” field**.)
+  - **URL Suffix** — Shows a field for an arbitrary URI fragment that will be appended to the resolved URL.
+  - **Title Text** — Content for the anchor’s `title` attribute.
+  - **Class Name** — Content for the anchor’s `class` attribute.
+  - **ID** — Content for the anchor’s `id` attribute. 
+  - **Relation (rel)** — Content for the anchor’s `rel` attribute.
+  - **ARIA Label ** — Content for the anchor’s `aria-label` attribute.
+
+### Advanced Options
+
+- **Max Length** — The maximum number of characters the primary field value can contain. (Defaults to `255`.)
+- **GraphQL Mode** — For backwards-compatibility with the URL field type, Craft returns the fully-rendered link as a string when requested via GraphQL; switch this to **Full data** to make individual nested properties available. View the `LinkData` type in the [GraphiQL explorer](../../development/graphql.md#using-the-graphiql-ide) for a complete list of supported sub-properties. The full URL (equivalent to the field’s behavior in **URL only** mode) is under the `url` field.
 
 ### Type-Specific Options
 
-When the _URL link type is enabled, two more options become available:
+When the **URL** link type is enabled, two more options become available:
 
 - **Allow root-relative URLs** — Accepts an absolute path, without a protocol or hostname (i.e. `/give`). Relative paths are still not allowed (i.e. `donate`), as they are ambiguous in most contexts.
-- **Allow anchors** — Accepts values that contain only a fragment or hash-prefixed anchor, like `#my-heading`.
+- **Allow anchors** — Accepts values that contain only a fragment or hash-prefixed anchor, like `#my-heading`. This should not be enabled alongside the **URL Suffix** advanced field.
 
 When enabling a link type that references elements, Craft will display a set of checkboxes that allow you to limit selection to specific [sources](../../system/elements.md#sources)—and in the case of assets, the allowable file kinds.
 

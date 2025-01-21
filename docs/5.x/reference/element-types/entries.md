@@ -24,17 +24,18 @@ Craft uses _entry types_ to define atomic units of content, which are then expos
 
 <Block label="Global Entry Types">
 
-Entry types became a global resource in Craft 5. This means you can define a content type _once_, then use it in multiple sections, as a [nested](#nested-entries) block in a Matrix field, or some combination of the two. As a result, some settings have moved around!
+Entry types became a global resource in Craft 5. This means you can define a content type _once_, then use it in multiple sections, as a [nested](#nested-entries) block in a [Matrix](../field-types/matrix.md) field, or some combination of the two. As a result, some settings have moved around!
 
 Most importantly, you’ll manage entry types in the **Settings** &rarr; **Entry Types** screen—or create them on-the-fly when working on a section or Matrix field.
 
 </Block>
 
 <BrowserShot
-  url="https://my-craft-project.ddev.site/admin/settings/sections/1/entry-types/1"
+  url="https://my-craft-project.ddev.site/admin/settings/entry-types/1"
   :link="false"
+  :max-height="450"
   caption="Editing an entry type in the control panel.">
-  <img src="../../images/sections-and-entries-entry-types.png" alt="Screenshot of entry type settings">
+  <img src="../../images/entry-type-edit.png" alt="Screenshot of entry type settings">
 </BrowserShot>
 
 Entry types have the following settings:
@@ -48,6 +49,58 @@ Entry types have the following settings:
   - **Slug Translation Method** — In multi-site projects, choose how slugs are localized.
 - **Show the Status field** — Manually set each entry’s status, or allow it to be dictated by its usage.
 - **Field Layout** — Add and arrange [custom fields](../../system/fields.md) to suit your content model.
+
+### Aliases <Since ver="5.6.0" feature="Entry type aliases" />
+
+When attaching an entry type to a [section](#sections) or [field](../field-types/matrix.md), you can configure a local override for its **Name** and **Handle**. This affects labels in the control panel, but does _not_ change how you reference them in queries.
+
+As an example, an _Announcement_ entry type could be used in a _News_ section and a _Content_ Matrix or [CKEditor](plugin:ckeditor) field; in the _Content_ field context, the entry type is given a new **Name** (_Banner_) and handle (`banner`). Authors would then see _Banner_ when selecting **New entry** in the CKEditor toolbar, but developers would need to continue using the original, global handle to directly query those nested entries:
+
+```twig{3}
+{% set embeddedAnnouncements = craft.entries()
+  .field('pageContent')
+  .type('announcement')
+  .all() %}
+```
+
+However, when _accessing_ the entry type via those nested entries (or an entry within a section), the aliases are applied automatically:
+
+```twig{2,8}
+{% set announcements = craft.entries()
+  .type('announcement')
+  .all() %}
+
+{% for announcement in announcements %}
+  <article>
+    <h2>{{ announcement.title }}</h2>
+    <span class="type">{{ announcement.type.name }}</span>
+    {{ announcement.body|md }}
+  </article>
+{% endfor %}
+```
+
+In this example, `announcement.type.name` might resolve to _Critical Release_ in one section, but _New Face_ in another—even though we queried for them using the original, global handle. To access the global <craft5:craft\models\EntryType>, use `entry.type.original`.
+
+This can help improve the legibility of templates, wherein the generic `announcement` handle doesn’t describe how the entry type is actually used:
+
+```twig{2,8-11}
+{% for contentBlock in entry.myMatrixField %}
+  <div class="content-block content-block--type-{{ contentBlock.type.handle }}">
+    {% switch contentBlock.type.handle %}
+      {% case 'carousel'}
+        {# ... #}
+      {% case 'recommended'}
+        {# ... #}
+      {% case 'banner' %}
+        {# Perhaps “Banner” made more sense than “Announcement” in this context, when designing! #}
+        <h3>{{ contentBlock.title }}</h3>
+        {{ contentBlock.message|md }}
+      {% default %}
+        {{ contentBlock.render() }}
+    {% endswitch %}
+  </div>
+{% endfor %}
+```
 
 ### Dynamic Entry Titles
 
@@ -67,7 +120,7 @@ The available translation methods are covered in the [custom fields documentatio
 
 ## Sections
 
-Sections organize and expose entry types for content authors. In each section you can define the following:
+Sections organize and expose [entry types](#entry-types) for content authors. In each section you can define the following:
 
 - Whether entries in the section have URLs;
 - What the entries’ URLs should look like;
@@ -80,7 +133,7 @@ If your project has multiple [sites](../../system/sites.md), your section can de
 - Which sites entries in the section should target;
 - Which sites entries are created in, by default;
 
-To create a new section, go to **Settings** → **Sections** and choose **New Section**.
+To create a new section, go to <Journey path="Settings, Sections" /> and choose **New Section**.
 
 ### Section Types
 
@@ -88,7 +141,7 @@ Craft has three different types of sections:
 
 #### Singles
 
-![Illustration of Entries layout with “Singles” selected, showing “About Us”, “Contact” and “Home” entries](../../images/entry-types-singles.png)
+![Illustration of Entries layout with “Singles” selected, showing “About Us”, “Contact” and “Home” entries](../../images/section-types-singles.png)
 
 Singles are used for one-off pages or content objects that have unique requirements, such as…
 
@@ -106,7 +159,7 @@ A single’s **Status** controls can be hidden with the **Show the Status field*
 
 #### Channels
 
-![Illustration of Entries layout with a “Press Releases” channel selected, showing three dated news entries](../../images/entry-types-channels.png)
+![Illustration of Entries layout with a “Press Releases” channel selected, showing three dated news entries](../../images/section-types-channels.png)
 
 Channels are used for lists or streams of similar content, such as…
 
@@ -121,11 +174,11 @@ Entries in channels are intended to be queried and displayed ordered by one or m
 
 Structures are an extension of channels that support explicit, hierarchical organization.
 
-![Illustration of Entries layout with a “Galleries” structure selected, showing nested building and gallery entries with drag-and-drop handles](../../images/entry-types-structures.png)
+![Illustration of Entries layout with a “Galleries” structure selected, showing nested building and gallery entries with drag-and-drop handles](../../images/section-types-structures.png)
 
 Unlike other section types, structure sections expose a **Structure** view option on their [element indexes](../../system/elements.md#indexes):
 
-![Illustration of an element index’s “View” options with “Structure” selected.](../../images/entry-types-structure-view-mode.png)
+![Illustration of an element index’s “View” options with “Structure” selected.](../../images/section-types-structure-view-mode.png)
 
 Types of content that might benefit from being defined as a structure include…
 
@@ -166,7 +219,7 @@ When Craft matches a request to an entry, its section’s designated **Template*
 
 Consider these tips for creating special URIs:
 
-- A URI that evaluates to `__home__` (and nothing more) will be available at your site’s base path;
+- A URI that evaluates to `__home__` (and nothing more) will be available at your site’s base path (this should only be used for [singles](#singles));
 - An empty URI means the entry does not get a route and will not have a public URL—unless you define one manually via `routes.php`;
 - Any Twig statement can be used to output values in a URI template—including ones that query for other elements, e.g. `{{ craft.entries().section('mySingle').one().slug }}/news` (see note below);
 - [Aliases](../../configure.md#aliases-and-environment-variables) can be evaluated with the [`alias()` function](../twig/functions.md#alias): `{{ alias('@basePressUri') }}/news`, `{{ alias('@mySectionUri') }}`.

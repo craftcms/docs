@@ -8,9 +8,9 @@ sidebarDepth: 2
 
 # Custom Fields
 
-On their own, [elements](elements.md) only provide a scaffold for your content—the content itself will be stored in *fields*.
+On their own, [elements](elements.md) only provide a scaffold for your content—most of the content itself will be stored in *fields*.
 
-Fields are managed in **Settings** → **Fields**, and can be created on-the-fly from a [field layout](#field-layouts) designer. Field layouts and [conditions](#conditions) determine where and when your fields should appear for content authors.
+Fields are managed in <Journey path="Settings, Fields" />, and can be created on-the-fly from a [field layout](#field-layouts) designer. Field layouts and [conditions](#conditions) determine where and when your fields should appear for content authors.
 
 ## Field Types
 
@@ -28,7 +28,7 @@ Choosing a field type determines what the field’s input UI is going to look l
 <img src="../images/fields-new.png" alt="Editing a field in the Craft control panel">
 </BrowserShot>
 
-Most field types share a few settings.
+Most field types share these core settings:
 
 Name
 :   The user-facing label for the field. This should identify the field reasonably well among other fields, and be descriptive enough for authors. _You can override this in a field layout._
@@ -63,7 +63,7 @@ Handles are used when accessing field data from code:
 </div>
 ```
 
-They’re also how you will [query by a field’s value](../development/element-queries.md#querying-with-custom-fields):
+They’re also how you [query by a field’s value](../development/element-queries.md#querying-with-custom-fields):
 
 ```twig
 {# Filter by the value of a lightswitch field: #}
@@ -76,7 +76,7 @@ Refer to each field type’s documentation for information about what kinds of d
 
 ### Translation Methods
 
-If you’re running a multi-site Craft installation, most of your fields will have a “Translation Method” setting (depending on their type).
+If you’re running a multi-site Craft installation, most of your fields will have a “Translation Method” setting.
 
 Fields can have the following translation method:
 
@@ -108,21 +108,30 @@ Everything in Craft that has content associated with it will expose a configurab
 - **[Users](../reference/element-types/users.md)** share a single field layout defined in **Settings** → **Users** → **User Fields**.
 - **[Addresses](../reference/element-types/addresses.md)** also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
 
-The field layout editor works the same way regardless of which content type you’re configuring:
+The field layout editor works roughly the same way, regardless of which element type you’re configuring:
 
-![Screenshot of an entry’s field layout editor, with a Content tab containing three fields and a sidebar menu with “Fields” and “UI Elements” items that can be placed in the field layout](../images/field-layout-editor.png)
+![Screenshot of an entry’s field layout editor, with a Content tab containing three fields and a sidebar menu with “Fields” and “UI Elements” items that can be placed in the field layout](../images/field-layout-designer.png)
+
+::: tip
+Fields and other element-specific attributes can also be added to [element cards](elements.md#chips--cards) using the [card designer](#card-designer).
+:::
 
 ### Tabs
 
-Every layout starts with a “Content” tab at the top. Add more tabs with the **New Tab** button, or update an existing tab by clicking its gear icon (<icon kind="settings" />) and selecting **Settings**. Drag and drop those tabs into whatever order you prefer—the first tab is selected by default when editing an entry.
+Every layout starts with a _Content_ tab. Add more tabs with the **New Tab** button, or update an existing tab by clicking its action button (<icon kind="ellipses" />) and selecting **Settings**. Drag and drop those tabs into whatever order you prefer—the first tab is selected by default when editing an entry.
 
 ::: tip
-If the field layout has only one tab (or only one tab is visible due to applied conditions), its fields will be displayed in the editor without the tab itself—so its name will not be visible until more tabs are added.
+When editing an element, if its field layout has only one tab (or only one tab is visible due to applied conditions), the fields within it will be displayed _without_ the tab or tab bar. Its name will not be visible until there are at least two tabs.
 :::
 
 A tab’s settings include its name and optional conditions that determine when it will be displayed for editors:
 
-![Screenshot of field layout editor with “Content” tab settings open in a slideout: Name, Current User Condition, and Entry Condition](../images/field-layout-tab-settings.png)
+<BrowserShot
+  url="https://my-project.tld/admin/settings/entry-types/42"
+  :link="false"
+  caption="Updating a tab’s settings in the field layout designer.">
+<img src="../images/field-layout-tab-settings.png" alt="Screenshot of field layout editor with “Content” tab settings open in a slideout: Name, Current User Condition, and Entry Condition">
+</BrowserShot>
 
 - **Name** – the label displayed for the tab when it’s visible in the editor.
 - **Current User Condition** – optional rules for determining which users should see the tab in the editor. (When the tab is not displayed, its fields are hidden regardless of their individual conditions.)
@@ -130,17 +139,28 @@ A tab’s settings include its name and optional conditions that determine when 
 
 ### Field Layout Elements
 
-Add however many fields you’d like to each tab, dragging them into your desired order. Most layouts include at least a **Title** field by default—even if it’s marked as _hidden_. Any available fields and UI elements will be available at the right edge of the layout designer, where you can drag them from the sidebar into your field layout. You can move fields back to the sidebar and out of your field layout (unless they’re _mandatory_ fields for the element type), but take care not to remove any fields already being used for important content.
+Add fields to any tab using the **+ Add** button, then dragging them into the desired order. Most layouts include at least a **Title** field by default—even if it’s marked as _hidden_. To remove a field, select **Remove** from its action <Icon kind="ellipses" /> menu. Some field layout elements are designated as _mandatory_ by an element type, meaning they cannot be removed from its field layout.
 
-By default, each field will be displayed at the full width (100%) of its tab. You can use the field width control, however, to designate a column size. This can be 25%, 50%, 75% or the default 100% width. Fields can appear side by side as long as the content editor’s browser window is wide enough. On small screens, fields may be shown at full width.
+::: warning
+Take care when removing a field from a layout: Craft stores field content using each instance’s UID. _Re-adding a field (whether or not it uses the same handle) will give it a new UID, meaning it will no longer be associated with existing content!_ By relegating these changes to a development environment, your live data is typically insulated from major loss—if you do mistakenly remove a field, you can always roll back the corresponding [project config](project-config.md) changes via git before deploying.
 
-Click the gear icon (<icon kind="settings" />) next to a field to open a slideout with its settings:
+Moving field layout elements between tabs, however, is nondestructive.
+:::
 
-![Screenshot of field layout editor with “Summary” field settings open in a slideout: Required, Label, Instructions, Current User Condition, and Entry Condition](../images/field-slideout.png)
+By default, each field will be displayed at the full width (100%) of its tab. Use the field width control to adjust this in increments of 25%. Fields can appear side by side as long as the content editor’s browser window is wide enough. On narrow screens, fields may be shown at full width, even if they are configured differently.
+
+Click the action button (<icon kind="ellipses" />) next to a field and select **Instance settings** to open a slideout with its settings:
+
+<BrowserShot
+  url="https://my-project.tld/admin/settings/entry-types/42"
+  :link="false"
+  caption="Customizing a field instance within a field layout.">
+<img src="../images/field-layout-instance-settings.png" alt="Screenshot of field layout editor with “Summary” field instance settings open in a slideout: Required, Label, Instructions, Current User Condition, and Entry Condition">
+</BrowserShot>
 
 The field’s settings let you control how and when it’s displayed:
 
-- **Label** – Override the field’s default label.
+- **Label** – Override the field’s default label, or hide it entirely.
 - **Handle** – Override the field’s handle.
 - **Instructions** – Override the field’s default instructions.
 - **Current User Condition** – Set rules for determining which users can see the field and change its value.
@@ -153,7 +173,7 @@ The field’s settings let you control how and when it’s displayed:
 Only one field can be used as an element’s thumbnail at a time.
 :::
 
-Some field layout elements’ settings are bubbled up to the layout designer, beside the field’s name:
+Some field layout elements’ settings are bubbled up to the layout designer as _indicators_, beside the field’s name:
 
 - An _asterisk_ (<icon kind="asterisk" />) means the field is **Required**.
 - A _diamond_ means that it has been assigned one or more user or element [condition rules](#conditions).
@@ -161,9 +181,11 @@ Some field layout elements’ settings are bubbled up to the layout designer, be
 - An _eye_ means the field will appear in element cards.
 - A _pencil_ icon indicates that the field contains overridden settings.
 
+You can also edit the original field’s configuration by selecting **Edit global field settings** from its action menu.
+
 ### Multi-Instance Fields <Badge text="New!" />
 
-Most fields can be added to a single layout multiple times. Craft will automatically assign a new handle to fields that are used more than once in a layout. To customize a field’s handle for a given layout, click the settings <icon kind="gear" /> icon on the field layout element and change the **Handle** setting.
+Most fields can be added to a single layout multiple times. Craft will automatically assign a new handle to fields that are used more than once in a layout. To customize a field’s handle for a given layout, click its action button (<Icon kind="ellipses" />) and select **Instance settings** slideout, then look for the **Handle** field.
 
 Multi-instance fields behave as though they were entirely different fields, in almost every situation: templates, element queries, condition builders, search, and so on. The field layout will retain a reference to the underlying field, so any settings updated for the base field will be reflected on each instance. For example, a [plain text](../reference/field-types/plain-text.md) field named “Attribution” could be used two (or more) times in a single entry type’s field layout: once for an article “Byline,” then again as “Photo Credit.” In a template, you would use those fields exactly like any other field:
 
@@ -216,18 +238,30 @@ Any fields (or [tabs](#tabs)) that have a **Current User Condition** or **Elemen
 Conditions determine when (and to whom) a field or tab is displayed and validated. You can create sophisticated editorial processes by exposing parts of the authoring interface only when specific criteria are met.
 
 ::: warning
-Conditions are not intended as a complete substitute for [permissions](user-management.md#permissions)! It’s still important to configure sensible base permissions for your editors.
+Conditions are not intended as a substitute for [permissions](user-management.md#permissions)! It’s still important to configure sensible base permissions for your editors.
 :::
 
 ### UI Elements
 
-Switch to the **UI Elements** tab at the right edge of the screen (replacing the **Fields** browser) to add special field layout elements.
+Switch to the **UI Elements** tab in the **New field** popover to add special field layout elements:
 
 - **Heading** — Create a label that splits up form inputs, within a tab.
-- **Tip** & **Warning** — Display a message with the corresponding urgency. Equivalent, except in visual design.
+- **Tip** + **Warning** — Display a message with the corresponding urgency. Equivalent, except in visual design.
 - **Template** — Render a Twig template from your [`templates/` directory](directory-structure.md#templates). The template will receive the element being edited under an `element` variable.
 - **Horizontal Rule** — A thin divider line. Subsequent fields will start in a new row.
 - **Line Break** — An invisible element that ensures the next field is rendered in a new row.
-- **Markdown** — Renders a multi-line Markdown snippet.
+- **Markdown** — Renders a multi-line Markdown snippet. HTML is encoded prior to parsing as Markdown; if you want to add arbitrary HTML, use the **Template** UI element.
 
 In addition to their own options (accessible via their <Icon kind="ellipses" /> action menu), most field layout UI elements share regular fields’ [condition](#conditions) settings.
+
+### Card Designer <Since ver="5.5.0" feature="Customizable card attributes" />
+
+Below the field layout designer, you can add previews of field and attribute data to the [card](elements.md#chips-cards) representation of that element. Note that values that appear in the card preview do not represent the content of any specific element.
+
+![Screenshot of an element card preview within a field layout designer.](../images/element-card-preview.png)
+
+#### Thumbnails
+
+Card thumbnails are assigned using the main field layout designer. Select **Use for element thumbnails** from the action <Icon kind="ellipses" /> menu of any [relational field](relations.md) to display the first attached asset—or, when using a non-asset relational field, _that_ element’s thumbnail!
+
+Only one field can be used as the thumbnail source at a time. Additional asset fields’ values can be displayed in the card body, as chips.

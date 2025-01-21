@@ -129,59 +129,60 @@ The permissions Craft comes with are:
 | ---------- | ------
 | Access the site when the system is off | `accessSiteWhenSystemIsOff`
 | Access the control panel | `accessCp`
-| ↳&nbsp;Access the control panel when the system is offline | `accessCpWhenSystemIsOff`
-| ↳&nbsp; Perform Craft CMS and plugin updates | `performUpdates`
-| ↳&nbsp; Access <CodePlaceholder>Plugin Name</CodePlaceholder> | `accessPlugin-[PluginHandle]`
-| Edit users | `editUsers`
-| ↳&nbsp; Register users | `registerUsers`
-| ↳&nbsp; Moderate users <InfoHud>Moderation includes editing other users’ names, usernames, custom fields, and addresses.</InfoHud> | `moderateUsers`
-| ↳&nbsp; Administrate users <InfoHud>User administration includes changing emails, sending activation and password reset emails, setting passwords, and deactivating users. This permission can be used to elevate one’s own permissions by gaining access to other administrators’ accounts!</InfoHud> | `administrateUsers`
-| ↳&nbsp; Impersonate users <InfoHud>User impersonation allows one user to temporarily access the site as though they were another user with the same (or more restrictive) permissions.</InfoHud> | `impersonateUsers`
-| ↳&nbsp; Assign user permissions | `assignUserPermissions`
-| ↳&nbsp; Assign users to this group <InfoHud>This is not an actual permission so much as a convenience feature for automatically granting the ability to add peers to the group you are currently editing, as its handle may not be known, yet!</InfoHud> | See note.
-| ↳&nbsp; Assign users to <CodePlaceholder>Group Name</CodePlaceholder> | `assignUserGroup:[UserGroupUID]`
-| Delete users | `deleteUsers`
+| <Indent :level="1" /> Access the control panel when the system is offline | `accessCpWhenSystemIsOff`
+| <Indent :level="1" /> Perform Craft CMS and plugin updates | `performUpdates`
+| <Indent :level="1" /> Access <CodePlaceholder>Plugin Name</CodePlaceholder> | `accessPlugin-[PluginHandle]`
+| View users <InfoHud>Read-only access to user elements. In earlier versions of Craft, user management permissions were not nested within this one.</InfoHud> <Since ver="5.6.0" feature="View users permission" /> | `viewUsers`
+| <Indent :level="1" /> Edit users | `editUsers`
+| <Indent :level="2" /> Register users | `registerUsers`
+| <Indent :level="2" /> Moderate users <InfoHud>Moderation includes editing other users’ names, usernames, custom fields, and addresses.</InfoHud> | `moderateUsers`
+| <Indent :level="2" /> Administrate users <InfoHud>User administration includes changing emails, sending activation and password reset emails, setting passwords, and deactivating users. This permission can be used to elevate one’s own permissions by gaining access to other administrators’ accounts!</InfoHud> | `administrateUsers`
+| <Indent :level="2" /> Impersonate users <InfoHud>User impersonation allows one user to temporarily access the site as though they were another user with the same (or more restrictive) permissions.</InfoHud> | `impersonateUsers`
+| <Indent :level="2" /> Assign user permissions | `assignUserPermissions`
+| <Indent :level="2" /> Assign users to this group <InfoHud>This is not an actual permission so much as a convenience feature for automatically granting the ability to add peers to the <em>group</em> you are currently editing, as its handle/UUID may not be known, yet!</InfoHud> | See note.
+| <Indent :level="2" /> Assign users to <CodePlaceholder>Group Name</CodePlaceholder> | `assignUserGroup:[UserGroupUID]`
+| <Indent :level="1" /> Delete users | `deleteUsers`
 | Edit <CodePlaceholder>Site Name</CodePlaceholder> <InfoHud>Site permissions are intersected with other permissions. A user will only be able to edit something if they have access to the site <em>and</em> the element itself.</InfoHud> | `editSite:[SiteUID]`
 | View entries <InfoHud>This section is repeated for each configured section.</InfoHud> | `viewEntries:[SectionUID]`
-| ↳&nbsp; Create entries | `createEntries:[SectionUID]`
-| ↳&nbsp; Save entries | `saveEntries:[SectionUID]`
-| ↳&nbsp; Delete entries | `deleteEntries:[SectionUID]`
-| ↳&nbsp; View other users’ entries | `viewPeerEntries:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ entries | `savePeerEntries:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ entries | `deletePeerEntries:[SectionUID]`
-| ↳&nbsp;View other users’ drafts | `viewPeerEntryDrafts:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerEntryDrafts:[SectionUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerEntryDrafts:[SectionUID]`
+| <Indent :level="1" /> Create entries | `createEntries:[SectionUID]`
+| <Indent :level="1" /> Save entries | `saveEntries:[SectionUID]`
+| <Indent :level="1" /> Delete entries | `deleteEntries:[SectionUID]`
+| <Indent :level="1" /> View other users’ entries | `viewPeerEntries:[SectionUID]`
+| <Indent :level="2" /> Save other users’ entries | `savePeerEntries:[SectionUID]`
+| <Indent :level="2" /> Delete other users’ entries | `deletePeerEntries:[SectionUID]`
+| <Indent :level="1" /> View other users’ drafts | `viewPeerEntryDrafts:[SectionUID]`
+| <Indent :level="2" /> Save other users’ drafts | `savePeerEntryDrafts:[SectionUID]`
+| <Indent :level="2" /> Delete other users’ drafts | `deletePeerEntryDrafts:[SectionUID]`
 | Edit <CodePlaceholder>Global Set Name</CodePlaceholder> | `editGlobalSet:[GlobalSetUID]`
 | View categories <InfoHud>This section is repeated for each configured category group.</InfoHud> | `viewCategories:[CategoryGroupUID]`
-| ↳&nbsp; Save categories | `saveCategories:[CategoryGroupUID]`
-| ↳&nbsp; Delete categories | `deleteCategories:[CategoryGroupUID]`
-| ↳&nbsp; View other users’ drafts | `viewPeerCategoryDrafts:[CategoryGroupUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save other users’ drafts | `savePeerCategoryDrafts:[CategoryGroupUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Delete other users’ drafts | `deletePeerCategoryDrafts:[CategoryGroupUID]`
+| <Indent :level="1" /> Save categories | `saveCategories:[CategoryGroupUID]`
+| <Indent :level="1" /> Delete categories | `deleteCategories:[CategoryGroupUID]`
+| <Indent :level="1" /> View other users’ drafts | `viewPeerCategoryDrafts:[CategoryGroupUID]`
+| <Indent :level="2" /> Save other users’ drafts | `savePeerCategoryDrafts:[CategoryGroupUID]`
+| <Indent :level="2" /> Delete other users’ drafts | `deletePeerCategoryDrafts:[CategoryGroupUID]`
 | View assets | `viewAssets:[VolumeUID]`
-| ↳&nbsp; Save assets | `saveAssets:[VolumeUID]`
-| ↳&nbsp; Delete assets | `deleteAssets:[VolumeUID]`
-| ↳&nbsp; Replace files | `replaceFiles:[VolumeUID]`
-| ↳&nbsp; Edit images | `editImages:[VolumeUID]`
-| ↳&nbsp; View assets uploaded by other users | `viewPeerAssets:[VolumeUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Save assets uploaded by other users | `savePeerAssets:[VolumeUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Replace files uploaded by other users | `replacePeerFiles:[VolumeUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Remove files uploaded by other users | `deletePeerAssets:[VolumeUID]`
-| &nbsp;&nbsp;&nbsp; ↳&nbsp; Edit images uploaded by other users | `editPeerImages:[VolumeUID]`
-| ↳&nbsp; Create subfolders | `createFolders:[VolumeUID]`
+| <Indent :level="1" /> Save assets | `saveAssets:[VolumeUID]`
+| <Indent :level="1" /> Delete assets | `deleteAssets:[VolumeUID]`
+| <Indent :level="1" /> Replace files | `replaceFiles:[VolumeUID]`
+| <Indent :level="1" /> Edit images | `editImages:[VolumeUID]`
+| <Indent :level="1" /> View assets uploaded by other users | `viewPeerAssets:[VolumeUID]`
+| <Indent :level="2" /> Save assets uploaded by other users | `savePeerAssets:[VolumeUID]`
+| <Indent :level="2" /> Replace files uploaded by other users | `replacePeerFiles:[VolumeUID]`
+| <Indent :level="2" /> Remove files uploaded by other users | `deletePeerAssets:[VolumeUID]`
+| <Indent :level="2" /> Edit images uploaded by other users | `editPeerImages:[VolumeUID]`
+| <Indent :level="1" /> Create subfolders | `createFolders:[VolumeUID]`
 | Utilities |
-| ↳&nbsp; Updates | `utility:updates`
-| ↳&nbsp; System Report | `utility:system-report`
-| ↳&nbsp; PHP Info | `utility:php-info`
-| ↳&nbsp; System Messages | `utility:system-messages`
-| ↳&nbsp; Asset Indexes | `utility:asset-indexes`
-| ↳&nbsp; Queue Manager | `utility:queue-manager`
-| ↳&nbsp; Caches | `utility:clear-caches`
-| ↳&nbsp; Deprecation Warnings | `utility:deprecation-errors`
-| ↳&nbsp; Database Backup | `utility:db-backup`
-| ↳&nbsp; Find and Replace | `utility:find-replace`
-| ↳&nbsp; Migrations | `utility:migrations`
+| <Indent :level="1" /> Updates | `utility:updates`
+| <Indent :level="1" /> System Report | `utility:system-report`
+| <Indent :level="1" /> PHP Info | `utility:php-info`
+| <Indent :level="1" /> System Messages | `utility:system-messages`
+| <Indent :level="1" /> Asset Indexes | `utility:asset-indexes`
+| <Indent :level="1" /> Queue Manager | `utility:queue-manager`
+| <Indent :level="1" /> Caches | `utility:clear-caches`
+| <Indent :level="1" /> Deprecation Warnings | `utility:deprecation-errors`
+| <Indent :level="1" /> Database Backup | `utility:db-backup`
+| <Indent :level="1" /> Find and Replace | `utility:find-replace`
+| <Indent :level="1" /> Migrations | `utility:migrations`
 
 You may not see all of these options, initially—only ones that are relevant based on the current content schema will be displayed. For example, everything under _View categories_ will be hidden until you have at least one [category group](../reference/element-types/categories.md#category-groups).
 
@@ -298,6 +299,10 @@ Once you set up your site to allow public user registration, the last step is to
 ::: tip
 By default, Craft puts new users in a [pending state](#statuses) and allows them to activate their own accounts via email. You can instead select **Deactivate users by default** to place a moderation buffer between public registration and eventual access.
 :::
+
+### Affiliated Site <Since ver="5.6.0" feature="Affiliated sites for user elements" />
+
+During registration, Craft captures the current [site](sites.md) and stores it as the user’s **Affiliated Site**. This is primarily used to determine what language [system emails](mail.md#system-messages) should be sent in, when dispatched in site-agnostic contexts (like the control panel or from a CLI command).
 
 ### Default Group
 

@@ -92,6 +92,18 @@ By {{ collect(entry.authors).pluck('fullName').join(', ', ', and ') }}
 
 Unlike most other element types, users do _not_ have a “URI format” setting or support slugs, and are not factored into routing.
 
+### Affiliated Site <Since ver="5.6.0" feature="Affiliated sites for user elements" />
+
+[Multi-site](../../system/sites.md) projects capture the site a user [registers](../../system/user-management.md#affiliated-site) from (or is assigned to by an admin). Add the **Affiliated Site** [field layout element](#custom-fields) to manage this in the control panel.
+
+A user’s affiliated site can be accessed in a template via `user.affiliatedSite`:
+
+```twig
+{% if currentUser.affiliatedSite %}
+  You registered via {{ currentUser.affiliatedSite.name }}.
+{% endif %}
+```
+
 ## Querying Users
 
 You can fetch users in your templates or PHP code using **user queries**.

@@ -139,7 +139,7 @@ Both chips and cards support thumbnails, but only cards allow additional custom 
 
 #### Custom Card Attributes <Since ver="5.5.0" feature="Customizable card attributes" />
 
-The attributes and fields displayed on element cards is ultimately determined by the interface below each field layout designer:
+The attributes and fields displayed on element cards is ultimately determined by the interface below each [field layout designer](fields.md#field-layouts):
 
 <img src="../images/element-card-attributes.png" alt="Element card attribute customization interface." />
 
@@ -182,6 +182,8 @@ As an example, if you wanted to customize the output of an asset in a volume wit
 ```
 _partials/asset/images.twig
 ```
+
+For element types without a _field layout provider_ (like addresses and users)—or when a more specific template is not found—Craft falls back to just the `refHandle`. In the example above, if `_partials/assets/images.twig` doesn’t exist, `_partials/asset.twig` would also be checked. <Since ver="5.6.0" feature="Element partial template fallbacks for elements without field layout providers" />
 
 If some property of the asset (like its extension, or the user group its uploader is in) should affect its template, you can put whatever logic you need into the template and render something different:
 

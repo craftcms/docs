@@ -6,19 +6,19 @@ Plugins may send email under other circumstances, either by registering a global
 
 ## System Messages <badge type="edition" vertical="middle" text="Pro" title="Craft Pro only" />
 
-You can view and edit the built-in (and plugin-provided) email messages by navigating to **Utilities** &rarr; **System Messages**.
+You can view and edit the built-in (and plugin-provided) email messages by navigating to <Journey path="Utilities, System Messages" />.
 
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/utilities/system-messages"
     :link="false"
-    caption="Viewing system messages in the utilities section of the control panel.  Customizing system messages is limited to Craft Pro.">
+    caption="Viewing system messages in the utilities section of the control panel. Customizing system messages is limited to Craft Pro.">
 <img src="../images/system-messages.png" alt="System messages">
 </BrowserShot>
 
 Click on any message to open a modal and edit its subject and body.
 
 ::: tip
-Running a multi-site installation? You can customize system messages on a per-site basis using the site selection menu in the upper-right corner of the message modal.
+Running a [multi-site](sites.md) installation? You can customize system messages (and [mail settings](#settings)) on a per-site basis using the site selection menu in the upper-right corner of the message editor modal.
 :::
 
 ### Twig
@@ -120,8 +120,9 @@ Craft uses a single configuration for its [mailer component](craft5:craft\mail\M
     :poi="{
         systemAddress: [28, 14],
         replyToAddress: [28, 22],
-        htmlTemplate: [28, 38.5],
-        transportAdapter: [20, 52],
+        htmlTemplate: [28, 39.5],
+        siteOverrides: [48, 52],
+        transportAdapter: [18, 62],
     }"
     caption="Email settings screen in the control panel.">
 <img src="../images/mail-settings.png" alt="Craft email settings">
@@ -177,7 +178,13 @@ This template is handled a bit differently than the normal Twig “layout” sch
 
 Otherwise, this is a regular Twig environment, so all the filters, functions, global variables, tags, and tests are available to you—including element queries!
 
-### Transport Adapters <Poi target="mail-settings" id="transportAdapter" label="4" />
+### Site Overrides <Since ver="5.6.0" feature="Site-specific overrides for email settings" /> <Poi target="mail-settings" id="siteOverrides" label="4" />
+
+Multi-site projects provide a means to override the **System Email Address**, **Reply-To Address**, **Sender Name**, and **HTML Email Template** on a site-by-site basis. Like the fields above, overrides accept environment variables that are resolved at runtime. When a value is not populated for a site, the global setting is used.
+
+Craft uses site-specific settings when sending email to users with an [affiliated site](user-management.md#affiliated-site).
+
+### Transport Adapters <Poi target="mail-settings" id="transportAdapter" label="5" />
 
 Three adapters are provided with Craft, with more installable from the [Plugin Store](https://plugins.craftcms.com/categories/mailer-adapters?craft4). You can switch adapters at any time—each adapter exposes a [Transport](https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport) class that conforms to a consistent interface, allowing Craft and plugins to send email without worrying about the underlying implementation or service.
 
