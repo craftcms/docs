@@ -952,7 +952,7 @@ To give your elements dedicated edit pages, you must define a route that agrees 
 $event->rules['products/<elementId:\d+>'] = 'elements/edit';
 ```
 
-Craft takes care of assembling the actual edit template, through the unified [`elements/edit`](craft5:craft\controllers\Elements::actionEdit()) controller action.
+Craft takes care of assembling the actual edit template, through the unified [`elements/edit`](craft5:craft\controllers\ElementsController::actionEdit()) controller action.
 
 ::: warning
 You can use your own controller to render element edit screens, but it becomes your responsibility to handle permissions, drafts, revisions, and auto-saving.
