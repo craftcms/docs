@@ -42,7 +42,7 @@ The ‘Order Reference Number Format’ is a mini Twig template, which will be r
 Attributes on the order can be accessed as well as Twig filters and functions, for example:
 
 ```twig
-{{ object.dateCompleted|date('Y') }}-{{ id }}
+{{ object.dateOrdered|date('Y') }}-{{ id }}
 ```
 
 Ouput:
@@ -61,7 +61,7 @@ The `seq()` function takes the following parameters:
 
 For example:
 ```twig
-{{object.dateCompleted|date('Y')}}-{{ seq(object.dateCompleted|date('Y'), 8) }}
+{{object.dateOrdered|date('Y')}}-{{ seq(object.dateOrdered|date('Y'), 8) }}
 ```
 
 Ouput:
