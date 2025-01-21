@@ -130,11 +130,8 @@ Exclude elements with a specific field value by preceding a value with `not`:
   .colorGroupCode('not BLUE')
   .all() %}
 ```
-<!-- textlint-disable apostrophe -->
 
 Multiple values can be excluded by preceding each term in a comma-separated list by a `not` (`'not BLUE, not GREEN'`), or by using `not` as the first item in an array (`['not', 'BLUE', 'GREEN']`).
-
-<!-- textlint-enable apostrophe -->
 
 ::: warning
 The grouping of terms is important when combining ranges and negation! `not RED, YELLOW` means “Swatches with a color other than `RED`, _or_ swatches with a color of `YELLOW`.” On the other hand, `['not', 'RED', 'YELLOW']` means “Swatches with a color other than `RED` or `YELLOW`.” The former would exclude “red” swatches, but allow “yellow;” the latter would exclude both colors.
