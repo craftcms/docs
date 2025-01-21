@@ -135,7 +135,7 @@ The _order reference_ is generated upon completing a cart using the store’s **
 The “Order Reference Number Format” is an [object template](/5.x/system/object-templates.md) that’s rendered when the order is completed. It can use order attributes along with Twig filters and functions. For example:
 
 ```twig
-{{ dateCompleted|date('Y') }}-{{ id }}
+{{ dateOrdered|date('Y') }}-{{ id }}
 ```
 
 Output:
@@ -154,7 +154,7 @@ The `seq()` function takes the following parameters:
 For example:
 
 ```twig
-{{ dateCompleted|date('Y') }}-{{ seq(dateCompleted|date('Y'), 8) }}
+{{ dateOrdered|date('Y') }}-{{ seq(dateOrdered|date('Y'), 8) }}
 ```
 
 Output:
@@ -168,7 +168,7 @@ In this example we’ve used the current year as the sequence name so we automat
 Sequences are global, so constructing keys that will not collide with others you may use in other fields or templates is essential to avoid gaps.
 
 ::: tip
-Order references cannot be relied upon for sorting. Use `.orderBy('dateCompleted DESC')` if you wish to display orders in reverse-chronological order.
+Order references cannot be relied upon for sorting. Use `.orderBy('dateOrdered DESC')` if you wish to display orders in reverse-chronological order.
 :::
 
 ### Creating Orders
