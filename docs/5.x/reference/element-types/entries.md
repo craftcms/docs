@@ -52,9 +52,9 @@ Entry types have the following settings:
 
 ### Aliases <Since ver="5.6.0" feature="Entry type aliases" />
 
-When attaching an entry type to a [section](#sections) or [field](../field-types/matrix.md), you can configure a local override for its **Title** and **Handle**. This affects labels in the control panel, but does _not_ change how you reference them in queries.
+When attaching an entry type to a [section](#sections) or [field](../field-types/matrix.md), you can configure a local override for its **Name** and **Handle**. This affects labels in the control panel, but does _not_ change how you reference them in queries.
 
-As an example, an _Announcement_ entry type could be used in a _News_ section and a _Content_ Matrix or [CKEditor](plugin:ckeditor) field; in the _Content_ field context, the entry type is given a new **Title** (_Banner_) and handle (`banner`). Authors would then see _Banner_ when selecting **New entry** in the CKEditor toolbar, but developers would need to continue using the original, global handle to directly query those nested entries:
+As an example, an _Announcement_ entry type could be used in a _News_ section and a _Content_ Matrix or [CKEditor](plugin:ckeditor) field; in the _Content_ field context, the entry type is given a new **Name** (_Banner_) and handle (`banner`). Authors would then see _Banner_ when selecting **New entry** in the CKEditor toolbar, but developers would need to continue using the original, global handle to directly query those nested entries:
 
 ```twig{3}
 {% set embeddedAnnouncements = craft.entries()
