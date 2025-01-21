@@ -476,9 +476,11 @@ Queries for nested entries will be largely the same—equivalent methods have be
 ::: warning
 Values passed to the `type()` method of [entry queries](./reference/element-types/entries.md#querying-entries) may require updates, as migrated entry types _can_ receive new handles. For example, a Matrix field that contained a block type with the handle `gallery` might conflict with a preexisting entry type belonging to a section; in that event, the new entry type for that block would get the handle `gallery1` (or potentially `gallery2`, `gallery3`, and so on, if multiple similar Matrix fields are being migrated).
 
-Visit **Settings** &rarr; **Entry Types** to check if any handles appear to have collided in this way, then review and update templates as necessary.
+Craft will set [local overrides for entry type names and handles](reference/element-types/entries.md#aliases) so that the control panel experience is as consistent as possible, post-upgrade—but this does _not_ change the query behavior. It _does_, however, make most templates that tested Matrix block type handles (i.e. `myBlock.type.handle == 'carousel'`, or within a [`switch` tag](reference/twig/tags.md#switch)) compatible. <Since ver="5.6.0" feature="Local overrides for entry type names and handles" />
 
-_Matrix block IDs were not stable in Craft 4, and will change as they are converted to entry types. If you maintain code that loads Matrix block definitions by hard-coded IDs, it will no longer work in Craft 5._
+Visit <Journey path="Settings, Entry Types" /> to check if any handles appear to have collided in this way, then review and update templates as necessary.
+
+_Matrix block type IDs were not stable in Craft 4, and will change as they are converted to entry types. If you maintain code that loaded Matrix block definitions by hard-coded IDs, it will no longer work in Craft 5._
 :::
 
 ### Eager-Loading
