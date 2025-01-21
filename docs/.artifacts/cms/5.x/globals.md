@@ -6,44 +6,46 @@
 
 <!-- textlint-disable -->
 
-| Param                                       | Description
-| ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
-| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only global sets that are not related to certain other elements.
-| [andRelatedTo](#andrelatedto)               | Narrows the query results to only global sets that are related to certain other elements.
-| [asArray](#asarray)                         | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft5:craft\elements\GlobalSet) objects.
-| [cache](#cache)                             | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
-| [dateCreated](#datecreated)                 | Narrows the query results based on the global sets’ creation dates.
-| [dateUpdated](#dateupdated)                 | Narrows the query results based on the global sets’ last-updated dates.
-| [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
-| [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
-| [handle](#handle)                           | Narrows the query results based on the global sets’ handles.
-| [id](#id)                                   | Narrows the query results based on the global sets’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
-| [inBulkOp](#inbulkop)                       | Narrows the query results to only global sets that were involved in a bulk element operation.
-| [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
-| [language](#language)                       | Determines which site(s) the global sets should be queried in, based on their language.
-| [limit](#limit)                             | Determines the number of global sets that should be returned.
-| [notRelatedTo](#notrelatedto)               | Narrows the query results to only global sets that are not related to certain other elements.
-| [offset](#offset)                           | Determines how many global sets should be skipped in the results.
-| [orderBy](#orderby)                         | Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
-| [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
-| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [relatedTo](#relatedto)                     | Narrows the query results to only global sets that are related to certain other elements.
-| [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
-| [search](#search)                           | Narrows the query results to only global sets that match a search query.
-| [site](#site)                               | Determines which site(s) the global sets should be queried in.
-| [siteId](#siteid)                           | Determines which site(s) the global sets should be queried in, per the site’s ID.
-| [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the global sets’ IDs in the `elements_sites` table.
-| [trashed](#trashed)                         | Narrows the query results to only global sets that have been soft-deleted.
-| [uid](#uid)                                 | Narrows the query results based on the global sets’ UIDs.
-| [unique](#unique)                           | Determines whether only elements with unique IDs should be returned by the query.
-| [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
-| [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
-| [with](#with)                               | Causes the query to return matching global sets eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
+| Param                                           | Description
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [afterPopulate](#afterpopulate)                 | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only global sets that are not related to certain other elements.
+| [andRelatedTo](#andrelatedto)                   | Narrows the query results to only global sets that are related to certain other elements.
+| [asArray](#asarray)                             | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft5:craft\elements\GlobalSet) objects.
+| [cache](#cache)                                 | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+| [dateCreated](#datecreated)                     | Narrows the query results based on the global sets’ creation dates.
+| [dateUpdated](#dateupdated)                     | Narrows the query results based on the global sets’ last-updated dates.
+| [eagerly](#eagerly)                             | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [fixedOrder](#fixedorder)                       | Causes the query results to be returned in the order specified by [id](#id).
+| [getFieldLayouts](#getfieldlayouts)             | Returns the field layouts that could be associated with the resulting elements.
+| [handle](#handle)                               | Narrows the query results based on the global sets’ handles.
+| [id](#id)                                       | Narrows the query results based on the global sets’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)       | Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                           | Narrows the query results to only global sets that were involved in a bulk element operation.
+| [inReverse](#inreverse)                         | Causes the query results to be returned in reverse order.
+| [language](#language)                           | Determines which site(s) the global sets should be queried in, based on their language.
+| [limit](#limit)                                 | Determines the number of global sets that should be returned.
+| [notRelatedTo](#notrelatedto)                   | Narrows the query results to only global sets that are not related to certain other elements.
+| [offset](#offset)                               | Determines how many global sets should be skipped in the results.
+| [orderBy](#orderby)                             | Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
+| [preferSites](#prefersites)                     | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [relatedTo](#relatedto)                         | Narrows the query results to only global sets that are related to certain other elements.
+| [render](#render)                               | Executes the query and renders the resulting elements using their partial templates.
+| [search](#search)                               | Narrows the query results to only global sets that match a search query.
+| [site](#site)                                   | Determines which site(s) the global sets should be queried in.
+| [siteId](#siteid)                               | Determines which site(s) the global sets should be queried in, per the site’s ID.
+| [siteSettingsId](#sitesettingsid)               | Narrows the query results based on the global sets’ IDs in the `elements_sites` table.
+| [trashed](#trashed)                             | Narrows the query results to only global sets that have been soft-deleted.
+| [uid](#uid)                                     | Narrows the query results based on the global sets’ UIDs.
+| [unique](#unique)                               | Determines whether only elements with unique IDs should be returned by the query.
+| [wasCountEagerLoaded](#wascounteagerloaded)     | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)               | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                                   | Causes the query to return matching global sets eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)           | Sets whether custom fields should be factored into the query.
+| [withProvisionalDrafts](#withprovisionaldrafts) | Causes the query to return provisional drafts for the matching elements, when they exist for the current user.
 
 
 <!-- textlint-enable -->
@@ -288,6 +290,19 @@ $globalSets = \craft\elements\GlobalSet::find()
     ->all();
 ```
 :::
+
+
+#### `getFieldLayouts`
+
+Returns the field layouts that could be associated with the resulting elements.
+
+
+
+
+
+
+
+
 
 
 #### `handle`
@@ -922,6 +937,20 @@ $globalSets = \craft\elements\GlobalSet::find()
 #### `withCustomFields`
 
 Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
+
+
+#### `withProvisionalDrafts`
+
+Causes the query to return provisional drafts for the matching elements,
+when they exist for the current user.
 
 
 

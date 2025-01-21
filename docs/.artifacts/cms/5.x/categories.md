@@ -6,61 +6,63 @@
 
 <!-- textlint-disable -->
 
-| Param                                       | Description
-| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
-| [ancestorDist](#ancestordist)               | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
-| [ancestorOf](#ancestorof)                   | Narrows the query results to only categories that are ancestors of another category in its structure.
-| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only categories that are not related to certain other elements.
-| [andRelatedTo](#andrelatedto)               | Narrows the query results to only categories that are related to certain other elements.
-| [asArray](#asarray)                         | Causes the query to return matching categories as arrays of data, rather than [Category](craft5:craft\elements\Category) objects.
-| [cache](#cache)                             | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
-| [dateCreated](#datecreated)                 | Narrows the query results based on the categories’ creation dates.
-| [dateUpdated](#dateupdated)                 | Narrows the query results based on the categories’ last-updated dates.
-| [descendantDist](#descendantdist)           | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
-| [descendantOf](#descendantof)               | Narrows the query results to only categories that are descendants of another category in its structure.
-| [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
-| [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
-| [group](#group)                             | Narrows the query results based on the category groups the categories belong to.
-| [groupId](#groupid)                         | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
-| [hasDescendants](#hasdescendants)           | Narrows the query results based on whether the categories have any descendants in their structure.
-| [id](#id)                                   | Narrows the query results based on the categories’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching categories as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
-| [inBulkOp](#inbulkop)                       | Narrows the query results to only categories that were involved in a bulk element operation.
-| [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
-| [language](#language)                       | Determines which site(s) the categories should be queried in, based on their language.
-| [leaves](#leaves)                           | Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
-| [level](#level)                             | Narrows the query results based on the categories’ level within the structure.
-| [limit](#limit)                             | Determines the number of categories that should be returned.
-| [nextSiblingOf](#nextsiblingof)             | Narrows the query results to only the category that comes immediately after another category in its structure.
-| [notRelatedTo](#notrelatedto)               | Narrows the query results to only categories that are not related to certain other elements.
-| [offset](#offset)                           | Determines how many categories should be skipped in the results.
-| [orderBy](#orderby)                         | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
-| [positionedAfter](#positionedafter)         | Narrows the query results to only categories that are positioned after another category in its structure.
-| [positionedBefore](#positionedbefore)       | Narrows the query results to only categories that are positioned before another category in its structure.
-| [preferSites](#prefersites)                 | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
-| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [prevSiblingOf](#prevsiblingof)             | Narrows the query results to only the category that comes immediately before another category in its structure.
-| [relatedTo](#relatedto)                     | Narrows the query results to only categories that are related to certain other elements.
-| [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
-| [search](#search)                           | Narrows the query results to only categories that match a search query.
-| [siblingOf](#siblingof)                     | Narrows the query results to only categories that are siblings of another category in its structure.
-| [site](#site)                               | Determines which site(s) the categories should be queried in.
-| [siteId](#siteid)                           | Determines which site(s) the categories should be queried in, per the site’s ID.
-| [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the categories’ IDs in the `elements_sites` table.
-| [slug](#slug)                               | Narrows the query results based on the categories’ slugs.
-| [status](#status)                           | Narrows the query results based on the categories’ statuses.
-| [title](#title)                             | Narrows the query results based on the categories’ titles.
-| [trashed](#trashed)                         | Narrows the query results to only categories that have been soft-deleted.
-| [uid](#uid)                                 | Narrows the query results based on the categories’ UIDs.
-| [unique](#unique)                           | Determines whether only elements with unique IDs should be returned by the query.
-| [uri](#uri)                                 | Narrows the query results based on the categories’ URIs.
-| [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
-| [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
-| [with](#with)                               | Causes the query to return matching categories eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
+| Param                                           | Description
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [afterPopulate](#afterpopulate)                 | Performs any post-population processing on elements.
+| [ancestorDist](#ancestordist)                   | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
+| [ancestorOf](#ancestorof)                       | Narrows the query results to only categories that are ancestors of another category in its structure.
+| [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only categories that are not related to certain other elements.
+| [andRelatedTo](#andrelatedto)                   | Narrows the query results to only categories that are related to certain other elements.
+| [asArray](#asarray)                             | Causes the query to return matching categories as arrays of data, rather than [Category](craft5:craft\elements\Category) objects.
+| [cache](#cache)                                 | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+| [dateCreated](#datecreated)                     | Narrows the query results based on the categories’ creation dates.
+| [dateUpdated](#dateupdated)                     | Narrows the query results based on the categories’ last-updated dates.
+| [descendantDist](#descendantdist)               | Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
+| [descendantOf](#descendantof)                   | Narrows the query results to only categories that are descendants of another category in its structure.
+| [eagerly](#eagerly)                             | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [fixedOrder](#fixedorder)                       | Causes the query results to be returned in the order specified by [id](#id).
+| [getFieldLayouts](#getfieldlayouts)             | Returns the field layouts that could be associated with the resulting elements.
+| [group](#group)                                 | Narrows the query results based on the category groups the categories belong to.
+| [groupId](#groupid)                             | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
+| [hasDescendants](#hasdescendants)               | Narrows the query results based on whether the categories have any descendants in their structure.
+| [id](#id)                                       | Narrows the query results based on the categories’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)       | Causes the query to return matching categories as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                           | Narrows the query results to only categories that were involved in a bulk element operation.
+| [inReverse](#inreverse)                         | Causes the query results to be returned in reverse order.
+| [language](#language)                           | Determines which site(s) the categories should be queried in, based on their language.
+| [leaves](#leaves)                               | Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
+| [level](#level)                                 | Narrows the query results based on the categories’ level within the structure.
+| [limit](#limit)                                 | Determines the number of categories that should be returned.
+| [nextSiblingOf](#nextsiblingof)                 | Narrows the query results to only the category that comes immediately after another category in its structure.
+| [notRelatedTo](#notrelatedto)                   | Narrows the query results to only categories that are not related to certain other elements.
+| [offset](#offset)                               | Determines how many categories should be skipped in the results.
+| [orderBy](#orderby)                             | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
+| [positionedAfter](#positionedafter)             | Narrows the query results to only categories that are positioned after another category in its structure.
+| [positionedBefore](#positionedbefore)           | Narrows the query results to only categories that are positioned before another category in its structure.
+| [preferSites](#prefersites)                     | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [prevSiblingOf](#prevsiblingof)                 | Narrows the query results to only the category that comes immediately before another category in its structure.
+| [relatedTo](#relatedto)                         | Narrows the query results to only categories that are related to certain other elements.
+| [render](#render)                               | Executes the query and renders the resulting elements using their partial templates.
+| [search](#search)                               | Narrows the query results to only categories that match a search query.
+| [siblingOf](#siblingof)                         | Narrows the query results to only categories that are siblings of another category in its structure.
+| [site](#site)                                   | Determines which site(s) the categories should be queried in.
+| [siteId](#siteid)                               | Determines which site(s) the categories should be queried in, per the site’s ID.
+| [siteSettingsId](#sitesettingsid)               | Narrows the query results based on the categories’ IDs in the `elements_sites` table.
+| [slug](#slug)                                   | Narrows the query results based on the categories’ slugs.
+| [status](#status)                               | Narrows the query results based on the categories’ statuses.
+| [title](#title)                                 | Narrows the query results based on the categories’ titles.
+| [trashed](#trashed)                             | Narrows the query results to only categories that have been soft-deleted.
+| [uid](#uid)                                     | Narrows the query results based on the categories’ UIDs.
+| [unique](#unique)                               | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#uri)                                     | Narrows the query results based on the categories’ URIs.
+| [wasCountEagerLoaded](#wascounteagerloaded)     | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)               | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                                   | Causes the query to return matching categories eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)           | Sets whether custom fields should be factored into the query.
+| [withProvisionalDrafts](#withprovisionaldrafts) | Causes the query to return provisional drafts for the matching elements, when they exist for the current user.
 
 
 <!-- textlint-enable -->
@@ -435,6 +437,19 @@ $categories = \craft\elements\Category::find()
     ->all();
 ```
 :::
+
+
+#### `getFieldLayouts`
+
+Returns the field layouts that could be associated with the resulting elements.
+
+
+
+
+
+
+
+
 
 
 #### `group`
@@ -1509,6 +1524,20 @@ $categories = \craft\elements\Category::find()
 #### `withCustomFields`
 
 Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
+
+
+#### `withProvisionalDrafts`
+
+Causes the query to return provisional drafts for the matching elements,
+when they exist for the current user.
 
 
 

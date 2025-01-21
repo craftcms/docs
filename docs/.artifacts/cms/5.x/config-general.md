@@ -1572,6 +1572,38 @@ CRAFT_SLUG_WORD_SEPARATOR=.
 
 
 
+### `systemTemplateCss`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$systemTemplateCss](craft5:craft\config\GeneralConfig::$systemTemplateCss)
+
+Since
+:  5.6.0
+
+</div>
+
+The URL to a CSS file that should be included when rendering system templates on the front end,
+such as the Login and Set Password templates.
+
+::: code
+```php Static Config
+->systemTemplateCss('/css/cp-theme.css');
+```
+```shell Environment Override
+CRAFT_SYSTEM_TEMPLATE_CSS=/css/cp-theme.css
+```
+:::
+
+
+
 ### `testToEmailAddress`
 
 <div class="compact">
@@ -2276,8 +2308,6 @@ The URI Craft should use for user login on the front end.
 
 This can be set to `false` to disable front-end login.
 
-Note that this config setting is ignored when <config5:headlessMode> is enabled.
-
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
@@ -2309,8 +2339,6 @@ Defined by
 The URI Craft should use for user logout on the front end.
 
 This can be set to `false` to disable front-end logout.
-
-Note that this config setting is ignored when <config5:headlessMode> is enabled.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2558,8 +2586,6 @@ Defined by
 
 The URI or URL that Craft should use for Set Password forms on the front end.
 
-This setting is ignored when <config5:headlessMode> is enabled, unless it’s set to an absolute URL.
-
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: tip
@@ -2787,8 +2813,6 @@ Since
 </div>
 
 The URI or URL that Craft should use for email verification links on the front end.
-
-This setting is ignored when <config5:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -5129,6 +5153,37 @@ CRAFT_SOFT_DELETE_DURATION=0
 
 
 ## Users
+
+### `disable2fa`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$disable2fa](craft5:craft\config\GeneralConfig::$disable2fa)
+
+Since
+:  5.6.0
+
+</div>
+
+Whether two-step verification features should be disabled.
+
+::: code
+```php Static Config
+->disable2fa()
+```
+```shell Environment Override
+CRAFT_DISABLE_2FA=true
+```
+:::
+
+
 
 ### `extraLastNamePrefixes`
 

@@ -6,54 +6,56 @@
 
 <!-- textlint-disable -->
 
-| Param                                       | Description
-| ------------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [addressLine1](#addressline1)               | Narrows the query results based on the first address line the addresses have.
-| [addressLine2](#addressline2)               | Narrows the query results based on the second address line the addresses have.
-| [addressLine3](#addressline3)               | Narrows the query results based on the third address line the addresses have.
-| [administrativeArea](#administrativearea)   | Narrows the query results based on the administrative areas the addresses belongs to.
-| [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
-| [andNotRelatedTo](#andnotrelatedto)         | Narrows the query results to only addresses that are not related to certain other elements.
-| [andRelatedTo](#andrelatedto)               | Narrows the query results to only addresses that are related to certain other elements.
-| [asArray](#asarray)                         | Causes the query to return matching addresses as arrays of data, rather than [Address](craft5:craft\elements\Address) objects.
-| [cache](#cache)                             | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
-| [countryCode](#countrycode)                 | Narrows the query results based on the country the addresses belong to.
-| [dateCreated](#datecreated)                 | Narrows the query results based on the addresses’ creation dates.
-| [dateUpdated](#dateupdated)                 | Narrows the query results based on the addresses’ last-updated dates.
-| [dependentLocality](#dependentlocality)     | Narrows the query results based on the dependent locality the addresses belong to.
-| [eagerly](#eagerly)                         | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
-| [firstName](#firstname)                     | Narrows the query results based on the first name the addresses have.
-| [fixedOrder](#fixedorder)                   | Causes the query results to be returned in the order specified by [id](#id).
-| [fullName](#fullname)                       | Narrows the query results based on the full name the addresses have.
-| [id](#id)                                   | Narrows the query results based on the addresses’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders)   | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
-| [inBulkOp](#inbulkop)                       | Narrows the query results to only addresses that were involved in a bulk element operation.
-| [inReverse](#inreverse)                     | Causes the query results to be returned in reverse order.
-| [language](#language)                       | Determines which site(s) the addresses should be queried in, based on their language.
-| [lastName](#lastname)                       | Narrows the query results based on the last name the addresses have.
-| [limit](#limit)                             | Determines the number of addresses that should be returned.
-| [locality](#locality)                       | Narrows the query results based on the locality the addresses belong to.
-| [notRelatedTo](#notrelatedto)               | Narrows the query results to only addresses that are not related to certain other elements.
-| [offset](#offset)                           | Determines how many addresses should be skipped in the results.
-| [orderBy](#orderby)                         | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
-| [organization](#organization)               | Narrows the query results based on the organization the addresses have.
-| [organizationTaxId](#organizationtaxid)     | Narrows the query results based on the tax ID the addresses have.
-| [postalCode](#postalcode)                   | Narrows the query results based on the postal code the addresses belong to.
-| [preferSites](#prefersites)                 | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepForEagerLoading](#prepforeagerloading) | Prepares the query for lazy eager loading.
-| [prepareSubquery](#preparesubquery)         | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [relatedTo](#relatedto)                     | Narrows the query results to only addresses that are related to certain other elements.
-| [render](#render)                           | Executes the query and renders the resulting elements using their partial templates.
-| [search](#search)                           | Narrows the query results to only addresses that match a search query.
-| [siteSettingsId](#sitesettingsid)           | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
-| [sortingCode](#sortingcode)                 | Narrows the query results based on the sorting code the addresses have.
-| [trashed](#trashed)                         | Narrows the query results to only addresses that have been soft-deleted.
-| [uid](#uid)                                 | Narrows the query results based on the addresses’ UIDs.
-| [wasCountEagerLoaded](#wascounteagerloaded) | Returns whether the query result count was already eager loaded by the query's source element.
-| [wasEagerLoaded](#waseagerloaded)           | Returns whether the query results were already eager loaded by the query's source element.
-| [with](#with)                               | Causes the query to return matching addresses eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)       | Sets whether custom fields should be factored into the query.
+| Param                                           | Description
+| ----------------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [addressLine1](#addressline1)                   | Narrows the query results based on the first address line the addresses have.
+| [addressLine2](#addressline2)                   | Narrows the query results based on the second address line the addresses have.
+| [addressLine3](#addressline3)                   | Narrows the query results based on the third address line the addresses have.
+| [administrativeArea](#administrativearea)       | Narrows the query results based on the administrative areas the addresses belongs to.
+| [afterPopulate](#afterpopulate)                 | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only addresses that are not related to certain other elements.
+| [andRelatedTo](#andrelatedto)                   | Narrows the query results to only addresses that are related to certain other elements.
+| [asArray](#asarray)                             | Causes the query to return matching addresses as arrays of data, rather than [Address](craft5:craft\elements\Address) objects.
+| [cache](#cache)                                 | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+| [countryCode](#countrycode)                     | Narrows the query results based on the country the addresses belong to.
+| [dateCreated](#datecreated)                     | Narrows the query results based on the addresses’ creation dates.
+| [dateUpdated](#dateupdated)                     | Narrows the query results based on the addresses’ last-updated dates.
+| [dependentLocality](#dependentlocality)         | Narrows the query results based on the dependent locality the addresses belong to.
+| [eagerly](#eagerly)                             | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [firstName](#firstname)                         | Narrows the query results based on the first name the addresses have.
+| [fixedOrder](#fixedorder)                       | Causes the query results to be returned in the order specified by [id](#id).
+| [fullName](#fullname)                           | Narrows the query results based on the full name the addresses have.
+| [getFieldLayouts](#getfieldlayouts)             | Returns the field layouts that could be associated with the resulting elements.
+| [id](#id)                                       | Narrows the query results based on the addresses’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)       | Causes the query to return matching addresses as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                           | Narrows the query results to only addresses that were involved in a bulk element operation.
+| [inReverse](#inreverse)                         | Causes the query results to be returned in reverse order.
+| [language](#language)                           | Determines which site(s) the addresses should be queried in, based on their language.
+| [lastName](#lastname)                           | Narrows the query results based on the last name the addresses have.
+| [limit](#limit)                                 | Determines the number of addresses that should be returned.
+| [locality](#locality)                           | Narrows the query results based on the locality the addresses belong to.
+| [notRelatedTo](#notrelatedto)                   | Narrows the query results to only addresses that are not related to certain other elements.
+| [offset](#offset)                               | Determines how many addresses should be skipped in the results.
+| [orderBy](#orderby)                             | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
+| [organization](#organization)                   | Narrows the query results based on the organization the addresses have.
+| [organizationTaxId](#organizationtaxid)         | Narrows the query results based on the tax ID the addresses have.
+| [postalCode](#postalcode)                       | Narrows the query results based on the postal code the addresses belong to.
+| [preferSites](#prefersites)                     | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [relatedTo](#relatedto)                         | Narrows the query results to only addresses that are related to certain other elements.
+| [render](#render)                               | Executes the query and renders the resulting elements using their partial templates.
+| [search](#search)                               | Narrows the query results to only addresses that match a search query.
+| [siteSettingsId](#sitesettingsid)               | Narrows the query results based on the addresses’ IDs in the `elements_sites` table.
+| [sortingCode](#sortingcode)                     | Narrows the query results based on the sorting code the addresses have.
+| [trashed](#trashed)                             | Narrows the query results to only addresses that have been soft-deleted.
+| [uid](#uid)                                     | Narrows the query results based on the addresses’ UIDs.
+| [wasCountEagerLoaded](#wascounteagerloaded)     | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)               | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                                   | Causes the query to return matching addresses eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)           | Sets whether custom fields should be factored into the query.
+| [withProvisionalDrafts](#withprovisionaldrafts) | Causes the query to return provisional drafts for the matching elements, when they exist for the current user.
 
 
 <!-- textlint-enable -->
@@ -548,6 +550,19 @@ $addresses = \craft\elements\Address::find()
     ->all();
 ```
 :::
+
+
+#### `getFieldLayouts`
+
+Returns the field layouts that could be associated with the resulting elements.
+
+
+
+
+
+
+
+
 
 
 #### `id`
@@ -1229,6 +1244,20 @@ $addresses = \craft\elements\Address::find()
 #### `withCustomFields`
 
 Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
+
+
+#### `withProvisionalDrafts`
+
+Causes the query to return provisional drafts for the matching elements,
+when they exist for the current user.
 
 
 
