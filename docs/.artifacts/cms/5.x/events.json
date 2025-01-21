@@ -1453,6 +1453,49 @@
     },
     {
         "class": "craft\\base\\Element",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\base\\Element",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -4641,6 +4684,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\utils\\DeleteEmptyVolumeFoldersController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\utils\\DeleteEmptyVolumeFoldersController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\utils\\DeleteEmptyVolumeFoldersController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\utils\\FixElementUidsController",
         "name": "EVENT_DEFINE_ACTIONS",
         "type": "craft\\events\\DefineConsoleActionsEvent",
@@ -6684,6 +6745,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Address",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -9054,6 +9158,49 @@
     },
     {
         "class": "craft\\elements\\Asset",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Asset",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -11043,6 +11190,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Category",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -13984,6 +14174,84 @@
     },
     {
         "class": "craft\\elements\\Entry",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "draft": {
+                "label": "Element is a draft",
+                "conditionsPhp": "ElementHelper::isDraft($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "provisional": {
+                "label": "Element is a provisional draft",
+                "conditionsPhp": "ElementHelper::rootElement($event->sender)->isProvisionalDraft",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            },
+            "revision": {
+                "label": "Element is a revision",
+                "conditionsPhp": "ElementHelper::isRevision($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "provisional",
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Entry",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -17144,6 +17412,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\GlobalSet",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -19277,6 +19588,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Tag",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -21604,6 +21958,49 @@
     },
     {
         "class": "craft\\elements\\User",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\User",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -26232,6 +26629,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\conditions\\entries\\FieldConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\FieldConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\FieldConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\FieldConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\FieldConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\FieldConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\entries\\FieldConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\conditions\\entries\\MatrixFieldConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -26616,6 +27055,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\elements\\conditions\\users\\AffiliatedSiteConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\elements\\conditions\\users\\AffiliatedSiteConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\elements\\conditions\\users\\AffiliatedSiteConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\elements\\conditions\\users\\AffiliatedSiteConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\users\\AffiliatedSiteConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\elements\\conditions\\users\\AffiliatedSiteConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\elements\\conditions\\users\\AffiliatedSiteConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\elements\\conditions\\users\\CredentialedConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -28573,6 +29054,54 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\entries\\EntryTitleField",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
+        "name": "EVENT_DEFINE_SHOW_IN_FORM",
+        "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
+        "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -41648,6 +42177,12 @@
     },
     {
         "class": "craft\\web\\ErrorHandler",
+        "name": "EVENT_BEFORE_REDIRECT",
+        "type": "craft\\events\\RedirectEvent",
+        "desc": "The event that is triggered before a 404 redirect."
+    },
+    {
+        "class": "craft\\web\\ErrorHandler",
         "name": "EVENT_SHUTDOWN",
         "type": "yii\\base\\Event",
         "desc": "an event that is triggered when the handler is called by shutdown function via `handleFatalError()`."
@@ -41783,6 +42318,12 @@
         "name": "EVENT_REGISTER_CP_SETTINGS",
         "type": "craft\\events\\RegisterCpSettingsEvent",
         "desc": "The event that is triggered when registering links that should render on the Settings page in the control panel."
+    },
+    {
+        "class": "craft\\web\\twig\\variables\\Cp",
+        "name": "EVENT_REGISTER_READ_ONLY_CP_SETTINGS",
+        "type": "craft\\events\\RegisterCpSettingsEvent",
+        "desc": "The event that is triggered when registering links that should render on the Settings page in the control panel, when admin changes are disallowed."
     },
     {
         "class": "craft\\web\\twig\\variables\\CraftVariable",

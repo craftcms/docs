@@ -312,6 +312,29 @@ id
 
 
 
+<h3 id="elements-delete-all-of-type">
+    <a href="#elements-delete-all-of-type" class="header-anchor">#</a>
+    <code>elements/delete-all-of-type</code>
+</h3>
+
+
+Deletes all elements of a given type.
+
+<h4 id="elements-delete-all-of-type-parameters" class="command-subheading">Parameters</h4>
+
+type
+:  The element type to delete.
+
+
+
+<h4 id="elements-delete-all-of-type-options" class="command-subheading">Options</h4>
+
+
+--dry-run
+: Whether to only do a dry run of the prune elements of type process.
+
+
+
 <h3 id="elements-restore">
     <a href="#elements-restore" class="header-anchor">#</a>
     <code>elements/restore</code>
@@ -2386,14 +2409,17 @@ Re-saves entries.
 
 --drafts
 : Whether to resave element drafts.
+Set to `null` if all elements should be resaved regardless of whether they’re drafts.
 
 
 --provisional-drafts
 : Whether to resave provisional element drafts.
+Set to `null` if all elements should be resaved regardless of whether they’re provisional drafts.
 
 
 --revisions
 : Whether to resave element revisions.
+Set to `null` if all elements should be resaved regardless of whether they’re revisions.
 
 
 --element-id
@@ -3242,6 +3268,25 @@ user
 
 
 Converts all non-ASCII asset filenames to ASCII.
+
+## `utils/delete-empty-volume-folders`
+
+
+<h3 id="utils-delete-empty-volume-folders-index">
+    <a href="#utils-delete-empty-volume-folders-index" class="header-anchor">#</a>
+    <code>utils/delete-empty-volume-folders</code>
+</h3>
+
+
+Deletes empty volume folders.
+
+<h4 id="utils-delete-empty-volume-folders-index-options" class="command-subheading">Options</h4>
+
+
+--volume
+: The volume handle(s) to delete folders from. Can be set to multiple comma-separated volumes.
+
+
 
 ## `utils/fix-element-uids`
 
