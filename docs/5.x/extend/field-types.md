@@ -481,10 +481,21 @@ Custom fields that use the native content storage system (not a [custom table](#
 ```twig
 {% set topAssets = craft.entries()
   .orderBy('myCurrencyField DESC')
+  .limit(5)
   .all() %}
 ```
 
 Craft determines how to sort the data using the `dbType()`’s first (or only) key and type. In [our example](#database-type), that would be either the single “simple” value, or the nested `amount` key.
+
+::: tip
+Developers may specify a nested key using dot notation to override the default. <Since ver="5.6.0" feature="Ordering by nested field keys" />
+
+```twig{2}
+{% set assetsBySymbol = craft.entries()
+  .orderBy('myCurrencyField.symbol ASC')
+  .all() %}
+```
+:::
 
 To be eligible for sortable columns within [element indexes](../system/elements.md#indexes), field types must implement <craft5:craft\base\SortableFieldInterface> and the `getSortOption()` method. The default implementation from <craft5:craft\base\Field> covers most use cases, again using the first `dbType()`. You can override this to gain more control over the handling—suppose the field’s values don’t naturally sort how users would expect, as is often the case with “statuses” or other strings whose order in a process don’t agree with their alphabetic order:
 
