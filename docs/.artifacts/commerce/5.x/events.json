@@ -1135,6 +1135,49 @@
     },
     {
         "class": "craft\\commerce\\base\\Purchasable",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\base\\Purchasable",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -4438,6 +4481,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Donation",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Donation",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -7069,6 +7155,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Order",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -9227,6 +9356,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Product",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Product",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -11342,6 +11514,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Subscription",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Subscription",
         "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
         "type": "craft\\events\\DefineMenuItemsEvent",
         "desc": "The event that is triggered when defining action menu items..",
@@ -13417,6 +13632,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -15704,6 +15962,49 @@
         "name": "EVENT_DEFINE_ADDITIONAL_BUTTONS",
         "type": "craft\\events\\DefineHtmlEvent",
         "desc": "The event that is triggered when defining additional buttons that should be shown at the top of the element’s edit page.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Variant",
+        "name": "EVENT_DEFINE_ALT_ACTIONS",
+        "type": "craft\\events\\DefineAltActionsEvent",
+        "desc": "The event that is triggered when defining alternative form actions for the element.",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
