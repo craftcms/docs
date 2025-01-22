@@ -6,80 +6,82 @@
 
 <!-- textlint-disable -->
 
-| Param                                         | Description
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)               | Performs any post-population processing on elements.
-| [andNotRelatedTo](#andnotrelatedto)           | Narrows the query results to only orders that are not related to certain other elements.
-| [andRelatedTo](#andrelatedto)                 | Narrows the query results to only orders that are related to certain other elements.
-| [asArray](#asarray)                           | Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
-| [cache](#cache)                               | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)       | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
-| [customer](#customer)                         | Narrows the query results based on the customer’s user account.
-| [customerId](#customerid)                     | Narrows the query results based on the customer, per their user ID.
-| [dateAuthorized](#dateauthorized)             | Narrows the query results based on the orders’ authorized dates.
-| [dateCreated](#datecreated)                   | Narrows the query results based on the orders’ creation dates.
-| [dateOrdered](#dateordered)                   | Narrows the query results based on the orders’ completion dates.
-| [datePaid](#datepaid)                         | Narrows the query results based on the orders’ paid dates.
-| [dateUpdated](#dateupdated)                   | Narrows the query results based on the orders’ last-updated dates.
-| [eagerly](#eagerly)                           | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
-| [email](#email)                               | Narrows the query results based on the customers’ email addresses.
-| [expiryDate](#expirydate)                     | Narrows the query results based on the orders’ expiry dates.
-| [fixedOrder](#fixedorder)                     | Causes the query results to be returned in the order specified by [id](#id).
-| [gateway](#gateway)                           | Narrows the query results based on the gateway.
-| [gatewayId](#gatewayid)                       | Narrows the query results based on the gateway, per its ID.
-| [hasLineItems](#haslineitems)                 | Narrows the query results to only orders that have line items.
-| [hasPurchasables](#haspurchasables)           | Narrows the query results to only orders that have certain purchasables.
-| [hasTransactions](#hastransactions)           | Narrows the query results to only carts that have at least one transaction.
-| [id](#id)                                     |
-| [ignorePlaceholders](#ignoreplaceholders)     | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
-| [inBulkOp](#inbulkop)                         | Narrows the query results to only orders that were involved in a bulk element operation.
-| [inReverse](#inreverse)                       | Causes the query results to be returned in reverse order.
-| [isCompleted](#iscompleted)                   | Narrows the query results to only orders that are completed.
-| [isPaid](#ispaid)                             | Narrows the query results to only orders that are paid.
-| [isUnpaid](#isunpaid)                         | Narrows the query results to only orders that are not paid.
-| [itemSubtotal](#itemsubtotal)                 | Narrows the query results based on the order’s item subtotal.
-| [itemTotal](#itemtotal)                       | Narrows the query results based on the order’s item total.
-| [language](#language)                         | Determines which site(s) the orders should be queried in, based on their language.
-| [limit](#limit)                               | Determines the number of orders that should be returned.
-| [notRelatedTo](#notrelatedto)                 | Narrows the query results to only orders that are not related to certain other elements.
-| [number](#number)                             | Narrows the query results based on the order number.
-| [offset](#offset)                             | Determines how many orders should be skipped in the results.
-| [orderBy](#orderby)                           | Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
-| [orderLanguage](#orderlanguage)               | Narrows the query results based on the order language, per the language string provided.
-| [orderSiteId](#ordersiteid)                   | Narrows the query results based on the order language, per the language string provided.
-| [orderStatus](#orderstatus)                   | Narrows the query results based on the order statuses.
-| [orderStatusId](#orderstatusid)               | Narrows the query results based on the order statuses, per their IDs.
-| [origin](#origin)                             | Narrows the query results based on the origin.
-| [preferSites](#prefersites)                   | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepForEagerLoading](#prepforeagerloading)   | Prepares the query for lazy eager loading.
-| [prepareSubquery](#preparesubquery)           | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [reference](#reference)                       | Narrows the query results based on the order reference.
-| [relatedTo](#relatedto)                       | Narrows the query results to only orders that are related to certain other elements.
-| [render](#render)                             | Executes the query and renders the resulting elements using their partial templates.
-| [search](#search)                             | Narrows the query results to only orders that match a search query.
-| [shippingMethodHandle](#shippingmethodhandle) | Narrows the query results based on the shipping method handle.
-| [shortNumber](#shortnumber)                   | Narrows the query results based on the order short number.
-| [siteSettingsId](#sitesettingsid)             | Narrows the query results based on the orders’ IDs in the `elements_sites` table.
-| [storeId](#storeid)                           | Narrows the query results to only orders that are related to the given store.
-| [total](#total)                               | Narrows the query results based on the total.
-| [totalDiscount](#totaldiscount)               | Narrows the query results based on the total discount.
-| [totalPaid](#totalpaid)                       | Narrows the query results based on the total paid amount.
-| [totalPrice](#totalprice)                     | Narrows the query results based on the total price.
-| [totalQty](#totalqty)                         | Narrows the query results based on the total qty of items.
-| [totalTax](#totaltax)                         | Narrows the query results based on the total tax.
-| [totalWeight](#totalweight)                   | Narrows the query results based on the total weight of items.
-| [trashed](#trashed)                           | Narrows the query results to only orders that have been soft-deleted.
-| [uid](#uid)                                   | Narrows the query results based on the orders’ UIDs.
-| [wasCountEagerLoaded](#wascounteagerloaded)   | Returns whether the query result count was already eager loaded by the query's source element.
-| [wasEagerLoaded](#waseagerloaded)             | Returns whether the query results were already eager loaded by the query's source element.
-| [with](#with)                                 | Causes the query to return matching orders eager-loaded with related elements.
-| [withAddresses](#withaddresses)               | Eager loads the shipping and billing addressees on the resulting orders.
-| [withAdjustments](#withadjustments)           | Eager loads the order adjustments on the resulting orders.
-| [withAll](#withall)                           | Eager loads all relational data (addresses, adjustments, customers, line items, transactions) for the resulting orders.
-| [withCustomFields](#withcustomfields)         | Sets whether custom fields should be factored into the query.
-| [withCustomer](#withcustomer)                 | Eager loads the user on the resulting orders.
-| [withLineItems](#withlineitems)               | Eager loads the line items on the resulting orders.
-| [withTransactions](#withtransactions)         | Eager loads the transactions on the resulting orders.
+| Param                                           | Description
+| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [afterPopulate](#afterpopulate)                 | Performs any post-population processing on elements.
+| [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only orders that are not related to certain other elements.
+| [andRelatedTo](#andrelatedto)                   | Narrows the query results to only orders that are related to certain other elements.
+| [asArray](#asarray)                             | Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
+| [cache](#cache)                                 | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+| [customer](#customer)                           | Narrows the query results based on the customer’s user account.
+| [customerId](#customerid)                       | Narrows the query results based on the customer, per their user ID.
+| [dateAuthorized](#dateauthorized)               | Narrows the query results based on the orders’ authorized dates.
+| [dateCreated](#datecreated)                     | Narrows the query results based on the orders’ creation dates.
+| [dateOrdered](#dateordered)                     | Narrows the query results based on the orders’ completion dates.
+| [datePaid](#datepaid)                           | Narrows the query results based on the orders’ paid dates.
+| [dateUpdated](#dateupdated)                     | Narrows the query results based on the orders’ last-updated dates.
+| [eagerly](#eagerly)                             | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [email](#email)                                 | Narrows the query results based on the customers’ email addresses.
+| [expiryDate](#expirydate)                       | Narrows the query results based on the orders’ expiry dates.
+| [fixedOrder](#fixedorder)                       | Causes the query results to be returned in the order specified by [id](#id).
+| [gateway](#gateway)                             | Narrows the query results based on the gateway.
+| [gatewayId](#gatewayid)                         | Narrows the query results based on the gateway, per its ID.
+| [getFieldLayouts](#getfieldlayouts)             | Returns the field layouts that could be associated with the resulting elements.
+| [hasLineItems](#haslineitems)                   | Narrows the query results to only orders that have line items.
+| [hasPurchasables](#haspurchasables)             | Narrows the query results to only orders that have certain purchasables.
+| [hasTransactions](#hastransactions)             | Narrows the query results to only carts that have at least one transaction.
+| [id](#id)                                       |
+| [ignorePlaceholders](#ignoreplaceholders)       | Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                           | Narrows the query results to only orders that were involved in a bulk element operation.
+| [inReverse](#inreverse)                         | Causes the query results to be returned in reverse order.
+| [isCompleted](#iscompleted)                     | Narrows the query results to only orders that are completed.
+| [isPaid](#ispaid)                               | Narrows the query results to only orders that are paid.
+| [isUnpaid](#isunpaid)                           | Narrows the query results to only orders that are not paid.
+| [itemSubtotal](#itemsubtotal)                   | Narrows the query results based on the order’s item subtotal.
+| [itemTotal](#itemtotal)                         | Narrows the query results based on the order’s item total.
+| [language](#language)                           | Determines which site(s) the orders should be queried in, based on their language.
+| [limit](#limit)                                 | Determines the number of orders that should be returned.
+| [notRelatedTo](#notrelatedto)                   | Narrows the query results to only orders that are not related to certain other elements.
+| [number](#number)                               | Narrows the query results based on the order number.
+| [offset](#offset)                               | Determines how many orders should be skipped in the results.
+| [orderBy](#orderby)                             | Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
+| [orderLanguage](#orderlanguage)                 | Narrows the query results based on the order language, per the language string provided.
+| [orderSiteId](#ordersiteid)                     | Narrows the query results based on the order language, per the language string provided.
+| [orderStatus](#orderstatus)                     | Narrows the query results based on the order statuses.
+| [orderStatusId](#orderstatusid)                 | Narrows the query results based on the order statuses, per their IDs.
+| [origin](#origin)                               | Narrows the query results based on the origin.
+| [preferSites](#prefersites)                     | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [reference](#reference)                         | Narrows the query results based on the order reference.
+| [relatedTo](#relatedto)                         | Narrows the query results to only orders that are related to certain other elements.
+| [render](#render)                               | Executes the query and renders the resulting elements using their partial templates.
+| [search](#search)                               | Narrows the query results to only orders that match a search query.
+| [shippingMethodHandle](#shippingmethodhandle)   | Narrows the query results based on the shipping method handle.
+| [shortNumber](#shortnumber)                     | Narrows the query results based on the order short number.
+| [siteSettingsId](#sitesettingsid)               | Narrows the query results based on the orders’ IDs in the `elements_sites` table.
+| [storeId](#storeid)                             | Narrows the query results to only orders that are related to the given store.
+| [total](#total)                                 | Narrows the query results based on the total.
+| [totalDiscount](#totaldiscount)                 | Narrows the query results based on the total discount.
+| [totalPaid](#totalpaid)                         | Narrows the query results based on the total paid amount.
+| [totalPrice](#totalprice)                       | Narrows the query results based on the total price.
+| [totalQty](#totalqty)                           | Narrows the query results based on the total qty of items.
+| [totalTax](#totaltax)                           | Narrows the query results based on the total tax.
+| [totalWeight](#totalweight)                     | Narrows the query results based on the total weight of items.
+| [trashed](#trashed)                             | Narrows the query results to only orders that have been soft-deleted.
+| [uid](#uid)                                     | Narrows the query results based on the orders’ UIDs.
+| [wasCountEagerLoaded](#wascounteagerloaded)     | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)               | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                                   | Causes the query to return matching orders eager-loaded with related elements.
+| [withAddresses](#withaddresses)                 | Eager loads the shipping and billing addressees on the resulting orders.
+| [withAdjustments](#withadjustments)             | Eager loads the order adjustments on the resulting orders.
+| [withAll](#withall)                             | Eager loads all relational data (addresses, adjustments, customers, line items, transactions) for the resulting orders.
+| [withCustomFields](#withcustomfields)           | Sets whether custom fields should be factored into the query.
+| [withCustomer](#withcustomer)                   | Eager loads the user on the resulting orders.
+| [withLineItems](#withlineitems)                 | Eager loads the line items on the resulting orders.
+| [withProvisionalDrafts](#withprovisionaldrafts) | Causes the query to return provisional drafts for the matching elements, when they exist for the current user.
+| [withTransactions](#withtransactions)           | Eager loads the transactions on the resulting orders.
 
 
 <!-- textlint-enable -->
@@ -589,6 +591,19 @@ Possible values include:
 | `'not 1'` | not with a gateway with an ID of 1.
 | `[1, 2]` | with a gateway with an ID of 1 or 2.
 | `['not', 1, 2]` | not with a gateway with an ID of 1 or 2.
+
+
+
+
+#### `getFieldLayouts`
+
+Returns the field layouts that could be associated with the resulting elements.
+
+
+
+
+
+
 
 
 
@@ -1688,6 +1703,20 @@ Possible values include:
 | Value | Fetches line items
 | - | -
 | bool | `true` to eager-load, `false` to not eager load.
+
+
+
+
+#### `withProvisionalDrafts`
+
+Causes the query to return provisional drafts for the matching elements,
+when they exist for the current user.
+
+
+
+
+
+
 
 
 
