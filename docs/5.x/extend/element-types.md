@@ -452,6 +452,8 @@ Event::on(
 
 `mandatory` here means that the layout element _must_ be present in the field layout, not that a value is required. Even if a developer has not customized the field layout, Craft will ensure this layout element is added to the first tab. The `TitleField` layout element is mandatory by default, and assumes the title comes from a `title` attribute, so there’s nothing to customize!
 
+Field layout elements that map to native attributes on your element should be [declared as “safe”](guide:structure-models#safe-attributes) so that they can be mass-assigned by the `elements/save` action. If you maintain your own controller, you will need to manually assign each attribute (i.e: `$element->price = Craft::$app->getRequest()->getRequiredBody('price'))`).
+
 Take a look at the existing [field layout element types](repo:craftcms/cms/blob/5.x/src/fieldlayoutelements) to see which makes the most sense for your attribute. Field layout elements that exist only to provide feedback or information should extend <craft5:craft\fieldlayoutelements\BaseUiElement>.
 
 ::: tip
@@ -462,7 +464,7 @@ Custom fields are handled for you, automatically—they’ll appear just below y
 
 ### Saving Custom Field Values
 
-When saving values to a custom field, you may use the [`setFieldValue()`](craft5:craft\base\ElementInterface::setFieldValue()) and [`setFieldValues()`](craft5:craft\base\ElementInterface::setFieldValues()) methods or assign directly to a property corresponding to its handle.
+When saving values to a custom field attached to your element, can use any combination of [`setFieldValue()`](craft5:craft\base\ElementInterface::setFieldValue()), [`setFieldValues()`](craft5:craft\base\ElementInterface::setFieldValues()), and direct assignment to a property corresponding to its instance handle.
 
 ::: code
 ```php Single Value
@@ -488,6 +490,8 @@ $product->setFieldValues([
 \Craft::$app->getElements()->saveElement($product);
 ```
 :::
+
+When using Craft’s default `elements/save` controller action, field values are automatically assigned from POST data.
 
 #### Validating Required Custom Fields
 
@@ -532,12 +536,17 @@ Elements that support multiple sites will have their `afterSave()` method called
 All that is required to support [element indexes](../system/elements.md#indexes) is a route that points to a template containing this:
 
 ```twig
+{# This template is provided by Craft: #}
 {% extends '_layouts/elementindex.twig' %}
+
+{# Set a page title: #}
 {% set title = 'Products'|t('my-plugin') %}
-{% set elementType = 'ns\\prefix\\elements\\Product' %}
+
+{# Let Craft know what element type the index is for: #}
+{% set elementType = 'mynamespace\\elements\\Product' %}
 ```
 
-To create a new element from this page, define an `actionButton` block:
+To let authors create new elements from this page, define an `actionButton` block:
 
 ```twig
 {% block actionButton %}
@@ -555,7 +564,7 @@ To create a new element from this page, define an `actionButton` block:
 Some element types may require more information to properly initialize, or will enforce permissions based on initial configuration. Entries, for example, are always created in a particular _section_—and a user may not be [permitted](#permissions) to create them in every section they’re allowed to view or publish in. In these cases, you may need to define extra params in the action URL, or <badge vertical="baseline" type="verb">POST</badge> to your own controller.
 :::
 
-Your route should be registered via [`EVENT_REGISTER_CP_URL_RULES`](craft5:craft\web\UrlManager::EVENT_REGISTER_CP_URL_RULES):
+Your index’s route should be registered via [`EVENT_REGISTER_CP_URL_RULES`](craft5:craft\web\UrlManager::EVENT_REGISTER_CP_URL_RULES):
 
 ```php
 use craft\events\RegisterUrlRulesEvent;
@@ -570,6 +579,10 @@ Event::on(
     }
 );
 ```
+
+A controller is not necessary, here—the route maps directly to a template.
+
+At this point, your element index will be empty. You can skip down to the [Editing Elements](#editing-elements) section to learn more about populating and persisting elements!
 
 ### Sources
 
@@ -948,7 +961,11 @@ Craft makes editing elements frictionless by providing turn-key edit screens as 
 
 To give your elements dedicated edit pages, you must define a route that agrees with their `getCpEditUrl()` method. Collocate this rule with the one that defines your [index](#element-index):
 
-```php
+```php{5}
+// Index:
+$event->rules['products'] = ['template' => 'my-plugin/products/_index.twig'];
+
+// Edit:
 $event->rules['products/<elementId:\d+>'] = 'elements/edit';
 ```
 
@@ -994,7 +1011,7 @@ If you are interested in rendering context-agnostic views for your element (or o
 
 ### Saving
 
-If your element does not require any special processing, you may be able to use the generic `elements/save` controller action. Craft will use the <badge vertical="baseline" type="verb">POST</badge> body to bulk-assign and typecast [safe attributes](guide:structure-models#safe-attributes) with <craft5:craft\base\Model::setAttributes()>, populate custom fields with <craft5:craft\base\Element::setFieldValues()>, check permissions, validate, and eventually save the element.
+Most element types can use the generic `elements/save` controller action to persist data. Craft will use the <badge vertical="baseline" type="verb">POST</badge> body to bulk-assign and typecast [safe attributes](guide:structure-models#safe-attributes) with <craft5:craft\base\Model::setAttributes()>, populate custom fields with <craft5:craft\base\Element::setFieldValues()>, check permissions, validate, and eventually save the element.
 
 Any time you _do_ require some special handling (or need to do more sophisticated authorization than is encapsulated by the element’s [`canSave()`](#permissions) method), you should implement a custom [controller](./controllers.md) action. To programmatically save an element, you will need to do at least the following:
 
@@ -1031,7 +1048,7 @@ return $this->asModelSuccess(
 );
 ```
 
-The elements service will in turn call your element’s [`beforeSave()` and `afterSave()` methods](#save-hooks), in which you must persist any additional custom properties.
+The elements service will in turn call your element’s [`beforeSave()` and `afterSave()` methods](#save-hooks), in which you must persist any native attributes.
 
 ::: tip
 This process is discussed in greater depth in the [controllers documentation](./controllers.md#model-lifecycle).
@@ -1052,7 +1069,7 @@ Create Drafts | [`canCreateDraft()`](craft5:craft\base\Element::canCreateDraft()
 ::: warning
 The default implementation of these methods in <craft5:craft\base\Element> is typically _restrictive_, meaning users will be _denied_ access by default.
 
-Your element should always call the parent method to ensure that events are emitted when a permission check is taking place.
+Your element should always call the parent method to ensure that [events](events.md) are emitted when a permission check is taking place.
 :::
 
 If your element would benefit from a user-manageable permissions structure, you must [register each relevant permission](./user-permissions.md) and check them in the corresponding methods—or as part of custom [controller actions](#saving).
@@ -1063,7 +1080,7 @@ If your element would benefit from a user-manageable permissions structure, you 
 
 You can give your element its own relation field by creating a new [field type](field-types.md) that extends <craft5:craft\fields\BaseRelationField>.
 
-That base class does most of the grunt work for you, so you can get your field up and running by implementing three simple methods:
+That base class does most of the grunt work for you, so you can get your field up and running by implementing three methods:
 
 ```php
 <?php
@@ -1091,11 +1108,13 @@ class Products extends BaseRelationField
 }
 ```
 
+Be sure and [register your field type](field-types.md#registering-custom-field-types), so that developers can select it!
+
 ## Eager-Loading
 
-If your element type has its own [relation field](#relation-field), it is already eager-loadable through that. Furthermore, if you have declared support for [content](#fields--content), any elements that are selected as relations via other relation fields will be eager-loadable from your element.
+If your element type has its own [relation field](#relation-field), it is already eager-loadable through that. Furthermore, if you have declared support for [content](#fields--content), any elements that are selected as relations via other relational fields will be eager-loadable from your element.
 
-The only case where eager-loading support is _not_ provided for free is if your element type has any “hard-coded” relations with other elements. For example, entries have authors (users), but those relations are defined in a dedicated `authorId` column in the `entries` table—not the `relations` table.
+Eager-loading support is _not_ provided automatically for “hard-coded” relations with other elements. For example, entries have authors (user elements), but those relationships are stored in a separate `entries_authors` table.
 
 If your elements maintain this kind of relationship to other elements, make them eager-loadable by adding an `eagerLoadingMap()` method to your element class:
 
@@ -1137,26 +1156,53 @@ public static function eagerLoadingMap(array $sourceElements, string $handle): a
 }
 ```
 
-This function takes an array of already-queried elements (the “source” elements) and an eager-loading handle. It returns a map of which _source_ element IDs should eager-load which _target_ element IDs.
+This function takes an array of already-queried elements (the “source” elements) and an eager-loading handle. It returns a map of which _source_ element IDs should eager-load which _target_ element IDs. The structure of that array should look something like this:
+
+```php
+[
+    'elementType' => User::class,
+    'map' => [
+        // Source: Product ID; Target: User ID
+        ['source' => 8735, 'target' => 385],
+        ['source' => 7319, 'target' => 1388],
+        ['source' => 6684, 'target' => 139],
+        ['source' => 6693, 'target' => 139],
+        // ...
+    ]
+]
+```
+
+Note that user ID `139` appears twice, for product IDs `6684` and `6693`! That’s to be expected—Craft knows to only load that element _once_, but will make it available on both of those products.
 
 ::: tip
-You may be able to create the source-target map without another database query, if the target IDs have already been loaded along with the elements!
+You may be able to create the source-target map without another database query, if the target IDs have already been loaded along with the elements! In the example, if products are owned by a single vendor, the vendor ID could be stored an [selected](#element-query-class) such that the map can be built in memory:
+
+```php
+$map = array_map(function($src) {
+    return [
+        'source' => $src->id,
+        'target' => $src->vendorId,
+    ];
+}, $sourceElements);
+```
 :::
 
-If you need to override where eager-loaded elements are stored, add a `setEagerLoadedElements()` method to your element class as well:
+To assign eager-loaded elements to a specific attribute (or process the value in some other way), add a `setEagerLoadedElements()` method to your element class:
 
 ```php
 public function setEagerLoadedElements(string $handle, array $elements): void
 {
     // The handle can be anything, so long as it matches what is used in `eagerLoadingMap()`:
-    if ($handle === 'author') {
-        $author = $elements[0] ?? null;
-        $this->setAuthor($author);
+    if ($handle === 'vendor') {
+        $vendor = $elements[0] ?? null;
+        $this->setVendor($vendor);
     } else {
         parent::setEagerLoadedElements($handle, $elements);
     }
 }
 ```
+
+Otherwise, Craft stashes the results in a generic `_eagerLoadedElements` array by handle, which you must retrieve later. Be sure and handle each eager-loadable native attribute in this method.
 
 ## Advanced Topics
 
