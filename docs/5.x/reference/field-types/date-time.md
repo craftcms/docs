@@ -6,11 +6,9 @@ related:
 
 # Date Fields
 
-Date fields give you a date picker, and optionally a time picker as well.
+Date fields provide a specialized input that captures and stores a date and time, in UTC. You may [configure](#settings) it to only accept a date (no time), and to expose a timezone selector.
 
 <!-- more -->
-
-You can also pick minimum and maximum dates that should be allowed, and if you’re showing the time, you can choose what the minute increment should be.
 
 ## Settings
 
@@ -25,80 +23,13 @@ Date fields have the following settings:
 
 ## Development
 
-### Querying Elements with Date Fields
+Date values are always stored in UTC, and normalized to the system timezone (set in <Journey path="Settings, General" />), or whichever timezone was selected by the author.
 
-When [querying for elements](element-queries.md) that have a Date field, you can filter the results based on the Date field data using a query param named after your field’s handle.
-
-Possible values include:
-
-| Value | Fetches elements…
-| - | -
-| `':empty:'` | that don’t have a selected date.
-| `':notempty:'` | that have a selected date.
-| `'>= 2018-04-01'` | that have a date selected on or after 2018-04-01.
-| `'< 2018-05-01'` | that have a date selected before 2018-05-01
-| `['and', '>= 2018-04-01', '< 2018-05-01']` | that have a date selected between 2018-04-01 and 2018-05-01.
-| `['or', '< 2018-04-01', '> 2018-05-01']` | that have a date selected before 2018-04-01 or after 2018-05-01.
-
-Date values are always assumed to be in the system timezone, which is set in **Settings** &rarr; **General**.
-
-::: code
-```twig
-{# Fetch entries with a selected date in the next month #}
-{% set start = now|atom %}
-{% set end = now|date_modify('+1 month')|atom %}
-
-{% set entries = craft.entries()
-  .myFieldHandle(['and', ">= #{start}", "< #{end}"])
-  .all() %}
-```
-```php
-// Fetch entries with a selected date in the next month
-$start = (new \DateTime())->format(\DateTime::ATOM);
-$end = (new \DateTime('+1 month'))->format(\DateTime::ATOM);
-
-$entries = \craft\elements\Entry::find()
-    ->myFieldHandle(['and', ">= ${start}", "< ${end}"])
-    ->all();
-```
-:::
-
-::: tip
-The [atom](../twig/filters.md#atom) filter converts a date to an ISO-8601 timestamp.
-:::
-
-Craft 3.7 added support for using `now` in date comparison strings:
-
-::: code
-```twig
-{# Fetch entries with a selected date in the past #}
-{% set pastEntries = craft.entries()
-  .myFieldHandle('< now')
-  .all() %}
-{# Fetch entries with a selected date now onward #}
-{% set futureEntries = craft.entries()
-  .myFieldHandle('>= now')
-  .all() %}
-```
-```php
-// Fetch entries with a selected date in the past
-$pastEntries = \craft\elements\Entry::find()
-    ->myFieldHandle('< now')
-    ->all();
-// Fetch entries with a selected date now onward
-$futureEntries = \craft\elements\Entry::find()
-    ->myFieldHandle('>= now')
-    ->all();
-```
-:::
-
-::: tip
-Me mindful of [template caching](../twig/tags.md#cache) when comparing against the current time!
-:::
+As a result, outputting dates in a template will typically not require
 
 ### Working with Date Field Data
 
-If you have an element with a Date field in your template, you can access its value by its handle:
+If you have an element with a date field in your template, you can access its value by its handle:
 
 ::: code
 ```twig
@@ -113,21 +44,21 @@ That will give you a [DateTime](http://php.net/manual/en/class.datetime.php) obj
 
 ::: code
 ```twig
-{% if entry.myFieldHandle %}
-  Selected date: {{ entry.myFieldHandle|datetime('short') }}
+{% if entry.myDateField %}
+  Selected date: {{ entry.myDateField|datetime('short') }}
 {% endif %}
 ```
 ```php
-if ($entry->myFieldHandle) {
+if ($entry->myDateField) {
     $selectedDate = \Craft::$app->getFormatter()->asDatetime(
-        $entry->myFieldHandle,
+        $entry->myDateField,
         'short'
     );
 }
 ```
 :::
 
-Craft and Twig provide several Twig filters for manipulating and outputting dates, which you can use depending on your needs:
+Twig has a number of filters for manipulating and outputting dates:
 
 - [date](../twig/filters.md#date)
 - [time](../twig/filters.md#time)
@@ -138,6 +69,84 @@ Craft and Twig provide several Twig filters for manipulating and outputting date
 - [rss](../twig/filters.md#rss)
 - [date_modify](https://twig.symfony.com/doc/3.x/filters/date_modify.html)
 
+As a `DateTime` object, you can also use PHP’s native formatting method:
+
+```twig
+{{ entry.myDateField.format('F j, Y') }}
+{# -> January 1, 2025 #}
+```
+
+### Querying Elements with Date Fields
+
+When [querying for elements](element-queries.md) that have a date field, you can filter the results using a query param named after your field’s handle.
+
+Possible values include:
+
+Value | Fetches elements…
+--- | ---
+`':empty:'` | …that don’t have a selected date.
+`':notempty:'` | …that have a selected date.
+`'>= 2025-01-01'` | …that have a date selected on or after 1 January, 2025.
+`'< 2025-01-01'` | …that have a date selected before 1 January, 2025.
+`['and', '>= 2024-01-01', '< 2024-06-01']` | …that have a date selected after 1 January, 2024 and before 1 June, 2025.
+`['or', '< 2024-06-01', '> 2025-01-01']` | …that have a date selected before 1 June, 2024 or after 1 January, 2025.
+
+::: code
+```twig
+{# Fetch entries with a selected date in the next month #}
+{% set start = now|atom %}
+{% set end = now|date_modify('+1 month')|atom %}
+
+{% set entries = craft.entries()
+  .myDateField(['and', ">= #{start}", "< #{end}"])
+  .all() %}
+```
+```php
+// Fetch entries with a selected date in the next month
+$start = (new \DateTime())->format(\DateTime::ATOM);
+$end = (new \DateTime('+1 month'))->format(\DateTime::ATOM);
+
+$entries = \craft\elements\Entry::find()
+    ->myDateField(['and', ">= ${start}", "< ${end}"])
+    ->all();
+```
+:::
+
+::: tip
+The [atom](../twig/filters.md#atom) filter converts a date to an ISO-8601 timestamp. `#{...}` interpolates the timestamp into a double-quoted string (`"`) with an operator.
+:::
+
+In place of a timestamp, you can use a handful of tokens to stand in for commonly-referenced relative times:
+
+::: code
+```twig
+{# Fetch entries with a selected date in the past #}
+{% set pastEntries = craft.entries()
+  .myDateField('< now')
+  .all() %}
+{# Fetch entries with a selected date now onward #}
+{% set futureEntries = craft.entries()
+  .myDateField('>= now')
+  .all() %}
+```
+```php
+// Fetch entries with a selected date in the past
+$pastEntries = \craft\elements\Entry::find()
+    ->myDateField('< now')
+    ->all();
+// Fetch entries with a selected date now onward
+$futureEntries = \craft\elements\Entry::find()
+    ->myDateField('>= now')
+    ->all();
+```
+:::
+
+In these examples, `now` can be substituted for `today` (midnight of the current day), `tomorrow` (midnight of the following day), or `yesterday` (midnight of the previous day).
+
+::: tip
+Me mindful of [template caching](../twig/tags.md#cache) when comparing against the current time!
+:::
+
 #### Timezones
 
 Craft treats all dates as though they are in the system’s timezone, except when one is set explicitly for a date field.
@@ -147,6 +156,38 @@ The returned `DateTime` object’s timezone will be set, accordingly. If you wis
 ::: tip
 This flexibility is only a feature of date fields, and native element properties (like entries’ _post date_) are always stored in the system timezone.
 :::
+
+#### Advanced Conditions <Since ver="5.6.0" feature="Field aliases in advanced where() clauses" />
+
+Building some date-based constraints can be cumbersome or inscrutable in Twig. In these cases, the database or query builder may be able to make them more declarative:
+
+::: code
+```twig{5} MySQL
+{% set year = 2024 %}
+
+{% set sentInYear = craft.entries()
+  .section('letters')
+  .andWhere("YEAR([[dateSent]]) = :y", { y: year })
+  .all() %}
+```
+```twig{5} Postgres
+{% set year = 2024 %}
+
+{% set sentInYear = craft.entries()
+  .section('letters')
+  .andWhere("EXTRACT(YEAR FROM TIMESTAMP [[dateSent]]) = :y", { y: year })
+  .all() %}
+```
+:::
+
+This uses the database’s built-in functions to extract and compare only the year of each date; similarly, you could use the `MONTH()` function (or `MONTH FROM TIMESTAMP`) to find entries with a `dateSent` only in a specific month.
+
+::: danger
+_Do not_ pass user input (like a field value or query string) directly to `.andWhere()`! Here, we’ve used a bound parameter (`:y`) to safely escape the input.
+:::
+
+Prior to the introduction of custom field column aliases in Craft 5.6.0, advanced queries such as this were still possible, but required that you build the field value SQL expression using the [`fieldValueSql()` function](../twig/functions.md#fieldvaluesql).
+
 
 ### Saving Date Fields
 
@@ -174,7 +215,7 @@ If you want the user to be able to select a time as well, use a `datetime-local`
 
 #### Customizing the Timezone
 
-By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you can post dates in a different timezone by changing the input name to `fields[myFieldHandle][datetime]` and adding a hidden input named `fields[myFieldHandle][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
+By default, Craft will assume the date is posted in UTC. You can post dates in a different timezone by changing the primary input’s `name` to `fields[myFieldHandle][datetime]` and adding a hidden input named `fields[myFieldHandle][timezone]`, set to a [valid PHP timezone](http://php.net/manual/en/timezones.php):
 
 ```twig
 {# Use the timezone selected under Settings → General Settings → Time Zone #}
@@ -183,6 +224,7 @@ By default, Craft will assume the date is posted in UTC. As of Craft 3.1.6 you c
 {# Or set a specific timezone #}
 {% set tz = 'America/Los_Angeles' %}
 
+{# Normalize saved dates with the specified timezone: #}
 {% set currentValue = entry is defined and entry.myFieldHandle
   ? entry.myFieldHandle|date('Y-m-d\\TH:i', timezone=tz)
   : '' %}
@@ -207,13 +249,14 @@ Or you can let users decide which timezone the date should be posted in:
 </select>
 ```
 
+In this example, we’ve elected to normalize the stored date (and timezone) to UTC, then allow the user to send it back to Craft in a localized way.
+
 #### Posting the Date and Time Separately
 
-If you’d like to post the date and time as separate HTML inputs, give them the names `fields[myFieldHandle][date]` and `fields[myFieldHandle][time]`.
+If you’d like to post the date and time as separate HTML inputs, give them the names `fields[myDateField][date]` and `fields[myDateField][time]`.
 
-The date input can either be set to the `YYYY-MM-DD` format, or the current locale’s short date format.
-
-The time input can either be set to the `HH:MM` format (24-hour), or the current locale’s short time format.
+- The `date` input can use either the `YYYY-MM-DD` format, or the current locale’s short date format.
+- The `time` input can use either the `HH:MM` format (24-hour), or the current locale’s short time format.
 
 ::: tip
 To find out what your current locale’s date and time formats are, add this to your template:
@@ -224,6 +267,8 @@ Time format: <code>{{ craft.app.locale.getTimeFormat('short', 'php') }}</code>
 ```
 
 Then refer to PHP’s [date()](http://php.net/manual/en/function.date.php) function docs to see what each of the format letters mean.
+
+The locale that Craft uses to parse dates and times depends on the [site](../../system/sites.md)’s language for front-end requests, and user preferences for control panel requests.
 :::
 
 This strategy can by combined with [timezone customization](#customizing-the-timezone).
