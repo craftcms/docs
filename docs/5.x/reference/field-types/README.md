@@ -54,6 +54,11 @@ Arbitrary and predefined strings.
 - [Dropdown](dropdown.md) — A fixed set of options to choose from.
 - [Radio Buttons](radio-buttons.md) — Same as a dropdown, but allows “custom” values.
 - [Country](country.md) — A specific set of values used to populate addresses.
+- [Email](email.md) — Validate an email address. (See: [Link](link.md))
+
+::: tip
+Our first-party [CKEditor](plugin:ckeditor) plugin provides a powerful rich text composer that supports [nested entries](../element-types/entries.md#nested-entries).
+:::
 
 ### Booleans
 
@@ -65,22 +70,24 @@ On or off; yes or no; 1 or 0; true or false!
 ### Numbers
 
 - [Money](money.md) — A safer way to store currency values.
-- [Number](number.md)
-- [Range](range.md)
+- [Number](number.md) — Single numeric value with controls for min/max values and precision.
+- [Range](range.md) — A number field with an additional slider UI for tactile selection.
 
 ### Date + Time
 
-- [Date](date-time.md)
-- [Time](time.md)
+These fields yield `DateTime` objects that can be conveniently compared, queried, and formatted in templates.
+
+- [Date](date-time.md) — Capture a date _and_ time.
+- [Time](time.md) — Store only the time of day.
 
 ### Lists
 
 Sometimes, you need more than a single value!
 
-- [Checkboxes](checkboxes.md)
-- [Matrix](matrix.md)
-- [Multi-Select](multi-select.md)
-- [Table](table.md)
+- [Checkboxes](checkboxes.md) — Select any number of predefined options, or let authors set one manually.
+- [Matrix](matrix.md) — Manage nested entries as an embedded element index or inline blocks.
+- [Multi-Select](multi-select.md) — A rudimentary multi-select input, without manual options.
+- [Table](table.md) — Repeatable rows of simple data.
 
 ::: tip
 Most of the fields in the [references](#references) section allow you to attach multiple relationships, as well.
@@ -90,16 +97,16 @@ Most of the fields in the [references](#references) section allow you to attach 
 
 Create relationships to content, on- or off-site.
 
-- [Link](link.md)
-- [Assets](categories.md)
-- [Categories](categories.md)
-- [Entries](entries.md)
-- [Tags](tags.md)
-- [Users](users.md)
+- [Link](link.md) — Flexible input for multiple kinds of locators, like URLs, element relationships, phone numbers, and email addresses.
+- [Assets](categories.md) — Connect uploaded [media](#media) to any element.
+- [Categories](categories.md) — Organize elements into hierarchical [taxonomies](#taxonomies).
+- [Entries](entries.md) — Relate content to or from anywhere!
+- [Tags](tags.md) — Organize elements into a flat “[folksonomy](#taxonomies).”
+- [Users](users.md) — Associate users with any type of content.
 
 ### Taxonomies
 
-Organize content
+Help users and authors understand content by establishing explicit connections.
 
 - [Categories](categories.md)
 - [Entries](entries.md)
