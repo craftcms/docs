@@ -1,6 +1,6 @@
 # Element Queries
 
-You can fetch [elements](../system/elements.md) (like entries, categories, assets, etc.) in your templates or PHP code using **element queries**.
+You can fetch [elements](../system/elements.md) (like entries, categories, assets, etc.) in your [templates](templates.md) or [extension](../extend/README.md) using **element queries**.
 
 <!-- more -->
 
@@ -227,6 +227,54 @@ In this example, each time `entry.attachments` is accessed, it returns a fresh e
 ```
 
 The first two sets of results here will contain the expected elements—`relatedDocuments` modifies the base query, and then `relatedArticles` overwrites the `type` param—but the third will retain the last-set `type` value and apply additional `dateCreated` and `orderBy` params. Instead of containing the latest five attachments of any type, it will only include the latest five _articles_.
+
+### Ordering
+
+Each type of element query has a default sort order—[entries](../reference/element-types/entries.md), for example, use the `postDate`; [tags](../reference/element-types/tags.md) are sorted by `title`; and [users](../reference/element-types/users.md) by `username`.
+
+You can sort by most attributes or custom fields with the `.orderBy()` query method:
+
+```twig{4}
+{% set latestTastes = craft.entries()
+  .section('tasteTests')
+  .orderBy('reviewDate DESC')
+  .limit(5)
+  .all() %}
+```
+
+If a field would produce the same value for many entries, multiple criteria can be combined:
+
+```twig{3}
+{% set bigFlavors = craft.entries()
+  .section('tasteTests')
+  .orderBy('primaryFlavorGroup ASC, flavorIntensity DESC')
+  .all() %}
+```
+
+Ascending (`ASC`) and descending (`DESC`) sorting depend on how the attribute’s data is stored.
+
+Value Type | Ascending | Descending
+--- | --- | ---
+String | Alphabetic | Reverse alphabetic
+Number | Increasing | Decreasing
+Date | Oldest first | Most recent first
+
+In the last example, if `primaryFlavorGroup` was a [dropdown](../reference/field-types/dropdown.md) field, entries would be sorted by the “value” of the selected options not the “label,” which can sometimes be unpredictable: one might expect “Dark Chocolate” to follow “Clove,” when its value is actually `chocolateDark` (and would therefore come _before_ `clove`, alphabetically).
+
+::: tip
+Not _all_ fields can be used for ordering a query. Relational fields, Matrix fields, and authors, for example, are all stored in external tables, and don’t have accessible or neatly comparable values to sort by. 
+:::
+
+#### Nested Sorting <Since ver="5.6.0" feature="Ordering by non-default nested field values" />
+
+Some fields (like the built-in [link](../reference/field-types/link.md) and [date](../reference/field-types/date-time.md) fields) store multiple values. Craft allows you to sort on specific sub-keys—say, to gather similar types of contact info together:
+
+```twig
+{% set reps = craft.entries()
+  .section('reps')
+  .orderBy('primaryContact.type ASC, dateHired DESC')
+  .all() %}
+```
 
 ## Executing Element Queries
 
@@ -754,7 +802,26 @@ You may call <craft5:craft\db\Query::asArray()> to skip populating element model
 
 Most custom field values are stored in a single JSON column, keyed by their unique field instance UUID. Craft handles this automatically when using a field or field instance’s built-in query methods (i.e. `.myCustomDateField('<= 2025-11-05')`) by building the appropriate “JSON extraction” expression.
 
-However, Craft _does not_ intercept direct use of `.where()` and other specialized [condition](#conditions) and [execution](#query-execution) methods, and cannot infer what is a plain column name versus a field or field instance handle. This means you are responsible for building equivalent field value expressions. Typically, this involves a field instance handle and a _field layout provider_ (like an entry type, asset volume, category group, or other component that manages a field layout):
+Craft also tries to intercept direct use of `.where()` and `.orderBy()`, such that field instance handles work naturally. <Since ver="5.6.0" feature="Field instance handle mappings for query constraints and ordering" />
+
+```twig
+{% set safeStews = craft.entries()
+  .section('dishes')
+  .andWhere([
+    ['>', 'scovilleRating', 1000],
+    ['<', 'scovilleRating', 9000],
+  ])
+  .andWhere([
+    'not',
+    ['like', 'primaryProtein, '%shellfish%'],
+    ['like', 'primaryProtein, '%shrimp%'],
+    ['like', 'primaryProtein, '%scallop%'],
+  ])
+  .orderBy('scovilleRating')
+  .all() %}
+```
+
+However, Craft can’t _always_ infer what should be a plain column name or a field or field instance handle, when working with advanced [condition](#conditions) and [execution](#query-execution) methods. This means you are responsible for building equivalent field value expressions. Typically, this involves a field instance handle and a _field layout provider_ (like an entry type, asset volume, category group, or other component that manages a field layout):
 
 ::: code
 ```twig{1,7} Twig
