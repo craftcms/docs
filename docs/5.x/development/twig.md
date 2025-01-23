@@ -402,9 +402,9 @@ You can also access hash values directly by their keys, using either dot or arra
 </dl>
 ```
 
-### Arrow functions
+### Arrow functions <Since ver="5.6.0" feature="Twig arrow functions allowed in any context" />
 
-Some [functions](#functions) and [filters](#filters) let you pass an **arrow function** as an argument. Arrow functions are compact, single-statement functions that you define in-line.
+Arrow functions are compact, single-statement functions that you define in-line.
 
 For example, Craft’s [group](../reference/twig/filters.md#group) filter accepts an arrow function, which is executed once for each item in an array to determine the key it will be grouped by.
 
@@ -426,6 +426,22 @@ For example, Craft’s [group](../reference/twig/filters.md#group) filter accept
     {% endfor %}
   </ul>
 {% endfor %}
+```
+
+::: tip
+Prior to Craft 5.6.0 (which uses Twig 3.15), arrow functions were allowed in more limited contexts, like some [functions](#functions) and [filters](#filters).
+:::
+
+Arrow functions are particularly useful when working with [Collections](collections.md):
+
+```twig{5}
+{% set vendorsByRating = craft.entries()
+  .section('vendors')
+  .with('reviews')
+  .collect()
+  .sortBy((v) => v.reviews.pluck('score').avg()) %}
+
+{# -> Vendor entries sorted by highest average rating score #}
 ```
 
 ## Operators

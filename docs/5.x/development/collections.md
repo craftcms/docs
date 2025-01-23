@@ -55,7 +55,7 @@ If at any point you need a plain array from a collection, call its `.all()` meth
 ::: tip
 Some common array-manipulation features are already implemented in Craft as Twig [filters](../reference/twig/filters.md) or [functions](../reference/twig/functions.md), but equivalent methods are usually available via Collections. Their supported arguments and signatures may differ slightly, so consult the documentation if you are combining or switching between features.
 
-One common problem, however, is that Twig’s default configuration does not parse anonymous functions or “closures” in every expression context. The [`nystudio107/craft-closure` package](repo:nystudio107/craft-closure/) provides a shim to work around this limitation.
+Until Craft [5.6.0](github:craftcms/cms/releases/5.6.0), Twig’s default configuration did not parse anonymous functions or “closures” in every expression context. The [`nystudio107/craft-closure` package](repo:nystudio107/craft-closure/) provides a shim to work around this limitation in earlier versions.
 :::
 
 ## Element Collections
