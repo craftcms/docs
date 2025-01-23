@@ -816,15 +816,19 @@ You can optionally set flash messages that will show up for the user on the next
 
 ## `requireAdmin`
 
-This tag will ensure that an admin user is logged in. If the user is not logged in, they’ll be redirected to the Login page specified by your <config5:loginPath> config setting and returned to the original page after logging in as an admin.
-
-A user that’s already logged in but *not* an admin will get a 403 response.
+This tag will ensure that an admin user is logged in. If the user is not logged in, they’ll be redirected to the Login page specified by your <config5:loginPath> config setting and returned to the original page after logging in as an admin. A user that’s already logged in but *not* an admin will get a 403 response.
 
 ```twig
 {% requireAdmin %}
 ```
 
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the admin enforcement will take place.
+
+By default, Craft also ensures <config5:allowAdminChanges> is _on_. If not, a different 403 error is returned. You can opt out of this behavior (say, to display a [read-only](../../system/control-panel.md#read-only-mode) settings screen) by passing `false`:
+
+```twig
+{% requireAdmin false %}
+```
 
 ## `requireEdition`
 
