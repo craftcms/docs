@@ -157,6 +157,7 @@ Header | Notes
 `X-Requested-With` | Set to `XMLHttpRequest` if your templates rely on `craft.app.request.isAjax`.
 `X-CSRF-Token` | Send a valid CSRF token (for POST requests) if none is provided in the request body under the key determined by <config5:csrfTokenName>.
 `Content-Type` | Set to `application/json` if the request’s body is a serialized [JSON payload](#sending-json) (as opposed to `FormData`).
+`X-Craft-Site` | Set to a valid [site](../system/sites.md) handle to treat the request as though it were part of a specific site.
 
 A CSRF token is still required for Ajax requests using the `POST` method. You can ensure a session is started (for guests) by preflighting a request to the [`users/session-info` action](#get-userssession-info):
 
@@ -261,6 +262,27 @@ Files cannot be uploaded when using `Content-Type: application/json`.
 ::: warning
 When sending a JSON payload in the body of a request, you _must_ use an action path (`/actions/users/save-user`, as in the example above), or provide the action in a query parameter (`/index.php?action=users/save-user`)—the action will _not_ be properly picked up as a property of the decoded payload.
 :::
+
+#### Sites
+
+In [headless](config5:headlessMode) mode, and when using [actions](#actions) or otherwise site-agnostic routes (i.e. configured via the [Element API](plugin:element-api) plugin), Craft uses the [primary site](../system/sites.md#primary-site), by default. This means that element queries, static message translations, emails, and other language-dependent features may be handled in unexpected ways.
+
+Send a valid site ID or handle under the `X-Craft-Site` header to tell Craft that it should handle the request in the context of a specific site:
+
+```js{8}
+// Assuming there is a matching Element API route configured...
+fetch('/my/api/news/5361', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    'X-Craft-Site': 'corporateFr',
+  },
+})
+.then(response => response.json())
+.then(result => console.log(result));
+```
 
 ### Models and Validation
 
