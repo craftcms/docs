@@ -833,7 +833,8 @@ Requires Craft’s active edition to be equal to or “greater” than what’s 
 If the Craft edition does not meet the requirement, the visitor will get a 404 response.
 
 - `0` – Craft Solo
-- `1` – Craft Pro
+- `1` – Craft Team
+- `2` – Craft Pro
 
 ```twig
 {# Require Craft Pro #}
@@ -843,7 +844,7 @@ If the Craft edition does not meet the requirement, the visitor will get a 404 r
 You can place this tag anywhere in your template, including within a conditional. If/when Twig gets to it, the edition enforcement will take place.
 
 ::: tip
-Control panel templates can use the `CraftSolo` and `CraftPro` variables.\
+Control panel templates can use the `CraftSolo`, `CraftTeam`, and `CraftPro` edition variables.\
 Example: `{% requireEdition CraftPro %}`.
 :::
 
