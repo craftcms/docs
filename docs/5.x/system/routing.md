@@ -40,6 +40,10 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
     If none of the above criteria are met, Craft will throw a [NotFoundHttpException](yii2:yii\web\NotFoundHttpException).
 
+6. **Redirects** <Since ver="5.6.0" feature="Redirection rules" />
+
+    When a 404 exception is thrown, Craft does one final check for a matching [redirect](#redirection) rule. If one is found, the exception is dropped and a 300-level response is sent.
+
 ::: warning
 If an exception is thrown at any point during a request, Craft will display an error page instead of the expected content.
 
@@ -56,7 +60,7 @@ A good example of this is a yearly archive page, where you want a year to be one
 
 ### Creating Routes
 
-To create a new Route, go to **Settings** → **Routes** and choose **New Route**. A modal window will appear where you can define the route settings:
+To create a new Route, go to <Journey path="Settings, Routes" /> and choose **New Route**. A modal window will appear where you can define the route settings:
 
 - What should the URI look like?
 - Which template should get loaded?
@@ -138,7 +142,7 @@ return [
 ];
 ```
 
-If your Craft installation has multiple sites, you can create site-specific URL rules by placing them in a sub-array, and set the key to the site’s handle. Craft will take care of determining the site’s base URL via this handle, so you don’t need to declare it as part of the route.
+If your Craft installation has multiple sites, you can create site-specific URL rules by placing them in a sub-array, and set the key to the site’s handle. Craft will take care of determining the site’s base URL via this handle, so you don’t need to declare it as part of the route pattern itself.
 
 ```php
 return [
@@ -255,5 +259,73 @@ If Craft finds a matching error template, it will render it with the following v
 - `statusCode` – error’s HTTP status code
 
 ::: tip
-Custom error templates are only used when [Dev Mode](config5:devMode) is **disabled**. When it’s enabled, an exception view will be rendered instead.
+Custom error templates are only used when [Dev Mode](config5:devMode) is **disabled**. When it’s enabled, an exception view will be rendered instead. Note that `devMode` may also be set via the `CRAFT_DEV_MODE` [environment override](../configure.md#environment-overrides)!
 :::
+
+### Redirection <Since ver="5.6.0" feature="Redirects config file" />
+
+Craft also supports a `redirects.php` config file that can contain any number of rules, structured similarly to the [advanced routing](#advanced-routing-with-url-rules) examples, above. Redirects are only evaluated after Craft decides it can’t serve the request and begins handling the HTTP exception.
+
+Each item in the returned array is a “rule,” and rules are evaluated from top to bottom. The simplest rule is a case-insensitive mapping from one path to another:
+
+```php
+return [
+    'old/path' => 'new/path',
+];
+```
+
+This key-value syntax is equivalent to explicitly declaring a `from` and `to` key in the rule:
+
+```php
+return [
+    [
+        'from' => 'old/path',
+        'to' => 'new/path',
+    ],
+];
+```
+
+When using an array, you may also include `caseSensitive` and `statusCode` keys for more control over the rule’s behavior:
+
+```php
+return [
+    [
+        'from' => 'old/path',
+        'to' => 'new/path',
+        'caseSensitive' => true,
+        // Defaults to 302 (“Temporary”)
+        'statusCode' => 301, // “Permanent”
+    ],
+];
+```
+
+Rules can contain [parameters](#advanced-routing-with-url-rules), as well:
+
+```php
+return [
+  'posts/<year:\d{4}>/<slug:{slug}>]' => 'news/<year>-<slug>',
+];
+```
+
+Named parameters can be used in the `to` value by wrapping them in angle brackets, like `<year>` and `<slug>` in this example.
+
+If you need complete control over the matching _and_ redirection logic, create a rule with a `match` key, set to a closure:
+
+```php
+return [
+    [
+        'match' => function (\Psr\Http\Message\UriInterface $url): ?string {
+            parse_str($url->getQuery(), $params);
+
+            if (!isset($params['orderId'])) {
+                return null;
+            }
+
+            return sprintf('account/orders/%s', $params['orderId']);
+        },
+        'statusCode' => 301,
+    ],
+];
+```
+
+You may return `null` from a match callback to skip the rule and continue processing.

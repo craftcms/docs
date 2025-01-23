@@ -33,7 +33,7 @@ The most common way to customize your Craft project is by editing files in the [
 | [General Configuration](#general) | `general.php` | Global options that can affect the front-end, control panel, debugging, etc.
 | [Database Settings](#database) | `db.php` | Connection settings for your database.
 | [Custom Options](#custom-settings) | `custom.php` | Arbitrary key-value storage for your own options.
-| [Routing](#url-rules) | `routes.php` | Custom HTTP routes.
+| [Routing](#url-rules) | `routes.php`, `redirects.php` | Custom HTTP routes and redirect rules.
 | [Application Configuration](#application-configuration) | `app.php`, `app.web.php`, `app.console.php` | Overrides for the root application and any of its [Components](https://www.yiiframework.com/doc/guide/2.0/en/concept-components).
 | Plugin Settings | `{plugin-handle}.php`, or other custom files | Consult the plugin’s documentation for specifics.
 | [Advanced](#advanced) | | Specific library options and/or behaviors that may be exposed in a non-standard way.
@@ -481,7 +481,9 @@ Your [database connection settings](reference/config/db.md) are set via the `con
 
 ### URL Rules
 
-You can define custom [URL rules](guide:runtime-routing#url-rules) in `config/routes.php`. See [Routing](system/routing.md) for more details.
+You can define custom [URL rules](guide:runtime-routing#url-rules) in `config/routes.php`, and [redirection rules](system/routing.md#redirection) in `config/redirects.php`. <Since ver="5.6.0" feature="Redirection rules" />
+
+See [Routing](system/routing.md) for more details.
 
 ### Application Configuration
 
