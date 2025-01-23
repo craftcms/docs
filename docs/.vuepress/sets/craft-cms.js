@@ -234,6 +234,7 @@ module.exports = {
           collapsable: false,
           children: [
             "development/templates",
+            "development/twig",
             "development/element-queries",
             "development/eager-loading",
             "development/image-transforms",
