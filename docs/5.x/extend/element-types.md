@@ -1175,7 +1175,7 @@ This function takes an array of already-queried elements (the “source” eleme
 Note that user ID `139` appears twice, for product IDs `6684` and `6693`! That’s to be expected—Craft knows to only load that element _once_, but will make it available on both of those products.
 
 ::: tip
-You may be able to create the source-target map without another database query, if the target IDs have already been loaded along with the elements! In the example, if products are owned by a single vendor, the vendor ID could be stored an [selected](#element-query-class) such that the map can be built in memory:
+You may be able to create the source-target map without another database query, if the target IDs have already been loaded along with the elements! In the example, if products are owned by a single vendor, the vendor ID could be stored an [selected](#element-query-class) such that the map can be assembled in memory:
 
 ```php
 $map = array_map(function($src) {
