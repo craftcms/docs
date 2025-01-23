@@ -27,7 +27,7 @@ Table fields have the following settings:
 :   Choose whether rows can be managed by the author, or if the table should include only the rows defined in **Default Values**. Use the **Row Heading** column type to create read-only labels for each row, and clear all **Column Heading** fields to remove the table’s header.
 
 **Min Rows**
-:   The _minimum_ number of rows allowed.
+:   The _minimum_ number of rows that must be provided.
 
 **Max Rows**
 :   The _maximum_ number of rows allowed.
@@ -49,7 +49,7 @@ The appearance of a table field in an element editor will be identical to the ta
 
 ### Querying Elements with Table Fields
 
-Due to the way Table field data is stored (a blob of JSON), [element queries](../../development/element-queries.md) can be challenging to construct. Internally, Craft stores each row with keys that are stable across changes to [project config](../../system/project-config.md), and won’t agree with the handles you’ve defined in 
+Due to the way Table field data is stored (a blob of JSON), [element queries](../../development/element-queries.md) can be challenging to construct. Internally, Craft stores each row with keys that are stable across changes to [project config](../../system/project-config.md), and won’t always agree with the handles you’ve defined in the field’s settings.
 
 ::: tip
 If you anticipate needing to query by sub-fields, consider using nested entries via the [Matrix](matrix.md) field, instead. As a native element type, entries support the full array of element query params required to narrow results by specific fields’ values.
@@ -95,7 +95,7 @@ foreach ($entry->myFieldHandle as $row) {
 :::
 
 ::: tip
-In each example above, the custom column handle can also be accessed by a key named `'col*'`, where `*` is the order in which it was saved. Example:
+In each example above, the custom column handle can also be accessed by a key named `'col*'`, where `*` is the order in which it was created. Example:
 
 - `whiskey` → `col1`
 - `description` → `col2`
