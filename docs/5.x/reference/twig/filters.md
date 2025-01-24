@@ -105,7 +105,6 @@ Filter | Description
 [translate](#translate-or-t) | Translates a message.
 [trim](https://twig.symfony.com/doc/3.x/filters/trim.html) | Strips whitespace from the beginning and end of a string.
 [truncate](#truncate) | Truncates a string to a given length, while ensuring that it does not split words.
-[ucfirst](#ucfirst) | Capitalizes the first character of a string.
 [unique](#unique) | Removes duplicate values from an array.
 [unshift](#unshift) | Prepends one or more items to the beginning of an array.
 [upper](https://twig.symfony.com/doc/3.x/filters/upper.html) | Formats a string into “UPPER CASE”.
@@ -1492,11 +1491,24 @@ If you’d prefer to have the entire word removed, set the `splitSingleWord` arg
 
 ## `ucfirst`
 
+::: warning
+The `ucfirst` filter is deprecated. Use Twig’s native [`capitalize`](https://twig.symfony.com/doc/3.x/filters/capitalize.html) filter, instead.
+:::
+
 Capitalizes the first character of a string.
 
 ```twig
 {{ 'foobar'|ucfirst }}
 {# Output: Foobar #}
+```
+
+## `ucwords`
+
+Uppercases the first character of each word in a string.
+
+```twig
+{{ 'foo bar baz hyphenated-pair'|ucwords }}
+{# Output: Foo Bar Baz Hyphenated-Pair #}
 ```
 
 ## `unique`
@@ -1517,15 +1529,6 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 {% set array1 = ['foo'] %}
 {% set array2 = array1|unshift('bar', 'baz') %}
 {# Result: ['bar', 'baz', 'foo'] #}
-```
-
-## `ucwords`
-
-Uppercases the first character of each word in a string.
-
-```twig
-{{ 'foo bar baz hyphenated-pair'|ucwords }}
-{# Output: Foo Bar Baz Hyphenated-Pair #}
 ```
 
 ## `values`
