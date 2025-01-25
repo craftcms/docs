@@ -303,7 +303,7 @@ Rules can contain [parameters](#advanced-routing-with-url-rules), as well:
 
 ```php
 return [
-  'posts/<year:\d{4}>/<slug:{slug}>]' => 'news/<year>-<slug>',
+  'posts/<year:\d{4}>/<slug:{slug}>' => 'news/<year>-<slug>',
 ];
 ```
 
