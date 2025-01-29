@@ -8,7 +8,7 @@ related:
 
 # User Management
 
-[Users](../reference/element-types/users.md) in Craft represent humans that have some relationship with your site or application. They may be control panel users, member accounts, or records that represent people in general. Users implicitly have the ability to create passwords and log in, but must be granted [permissions](#permissions) or added to [groups](#user-groups) to access the control panel or manage content.
+[Users](../reference/element-types/users.md) in Craft represent humans that have some relationship with your site or application. They may be control panel users, member accounts, or records that represent people in general. Users implicitly have the ability to create passwords and [log in](#logging-in), but must be granted [permissions](#permissions) or added to [groups](#user-groups) to access the control panel or manage content.
 
 The first user account is created during [installation](../install.md). The number of additional users that can be created (and their capabilities) depends on your Craft [edition](../editions.md):
 
@@ -86,6 +86,8 @@ In addition, the [users field layout](../reference/element-types/users.md#custom
 ### Config Files
 
 A combination of [user-specific](../reference/config/general.md#users), [session](../reference/config/general.md#session), and [security](../reference/config/general.md#security) settings are tracked via the [General](../reference/config/general.md) configuration file.
+
+A summary of these settings (as they relate to front-end development) is available in the [Additional Tools](#additional-tools) section, below.
 
 ## Admin Accounts
 
@@ -288,6 +290,10 @@ The control panel may require users to reauthorize to perform some actions, like
 
 An elevated session’s duration is governed by the <config5:elevatedSessionDuration> setting.
 
+### Front-end Multi-factor Authentication <Since ver="5.6.0" feature="Multi-factor auth support outside the control panel" />
+
+When **Require two-step verification** is enabled for user groups that _don’t_ have control panel access, those users may be sent to the Craft-provided [front-end login page]() to perform additional authentication.
+
 <a name="public-registration"></a>
 
 ## Public Registration <badge type="edition" title="Craft Pro only">Pro</badge>
@@ -311,6 +317,154 @@ Users created via public registration are automatically added to the group desig
 ::: danger
 Select this group’s [permissions](#permissions) carefully, ensuring that new users don’t immediately get access to tools that can negatively affect other users’ experience.
 :::
+
+## Logging In
+
+Any [credentialed](#statuses) user can set a password and log in.
+
+### Control Panel
+
+Users with [control panel](control-panel.md) access should use Craft’s native login form, which is shown when visiting `/admin` (or the path corresponding to your <config5:cpTrigger>). Any time an unauthenticated client tries to access a resource in the control panel, they will be redirected to the login page. 
+
+After logging in (and, when configured, completing [two-step verification](#authentication)), they will be returned to the [dashboard](control-panel.md#dashboard), or whichever protected page they originally attempted to access.
+
+::: tip
+When a control panel user authenticates and is redirected, their permissions _may_ still prevent them from viewing that resource.
+:::
+
+### Front-end <badge type="edition" title="Craft Pro only">Pro</badge>
+
+Sites that support [public registration](#public-registration) or whose administrators create accounts without control panel access are apt to require front-end login forms.
+
+The <config5:loginPath> setting determines where Craft sends users who access pages guarded by the [`{% requireLogin %}`](../reference/twig/tags.md#requirelogin) or [`{% requirePermission %}`](../reference/twig/tags.md#requirepermission) tags, as well as the value of the global [`loginUrl` variable](../reference/twig/global-variables.md#loginurl):
+
+```twig{9}
+<header>
+  <img src="{{ siteUrl('assets/logo.png') }}" alt="{{ siteName }}">
+
+  {% if currentUser %}
+    Welcome, {{ currentUser.fullName ?: currentUser.username }}!
+    <a href="{{ siteUrl('my-account') }}">My Account</a>
+    <a href="{{ logoutUrl }}">Sign out</a>
+  {% else %}
+    <a href="{{ loginUrl }}">Sign in</a>
+  {% endif %}
+</header>
+```
+
+By default, this path is `login`, so `{{ loginUrl }}` would print something like `https://my-project.ddev.site/login`.
+
+When this route is requested, Craft looks for the [corresponding template](#custom-template), `templates/login.twig`. If it can’t be found, a bare-bones internal version will be used: <Since ver="5.6.0" feature="Built-in front-end login template" />
+
+<BrowserShot url="https://my-project.ddev.site/login" :link="false" caption="Logging in to the front end of a Craft website, for which a login template does not exist.">
+<img src="../images/login.png" alt="The login template included with Craft" />
+</BrowserShot>
+
+You can inject additional styles into this page using the <config5:systemTemplateCss> setting:
+
+```php
+use craft\config\GeneralConfig;
+
+return GeneralConfig::create()
+    // ...
+    ->systemTemplateCss('/assets/styles/system.css')
+;
+```
+
+Full reference for the CSS variables used on this page are [available in the source](https://github.com/craftcms/cms/blob/5.x/src/web/assets/theme/dist/fe.css). <Since ver="5.6.0" feature="System template stylesheet setting" />
+
+::: tip
+This template will also be displayed when users are required to set up a new [two-step verification](#authentication) method (or complete authorization, later).
+:::
+
+No template is rendered for requests matching the <config5:logoutPath>; the user’s session is terminated, and they are redirected to the <config5:postLogoutRedirect>.
+
+### Custom Template
+
+Create a new Twig file at `templates/login.twig` (or `templates/{loginPath}.twig`, if you have a custom <config5:loginPath>) with the following content:
+
+```twig
+<form method="post">
+  {{ csrfInput() }}
+  {{ actionInput('users/login') }}
+
+  <label for="login-name">Username/Email</label>
+  <input type="text" name="loginName" id="login-name">
+
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password">
+
+  <button>Sign in</button>
+</form>
+```
+
+You are free to have this template extend an existing layout, or directly add `<head>` and `<body>` tags.
+
+Visiting your site’s `/login` page in a _private_ browser, you should see the unstyled form. Opening the same page in a browser with an _active_ session may redirect you to the configured <config5:postLoginRedirect> (or the primary site’s homepage, by default).
+
+<See path="../development/forms.md" label="Working with Forms" description="Learn about sending data to Craft with forms." />
+
+::: tip
+Additional information about handling login and account creation can be found in our [Front-End User Accounts](kb:front-end-user-accounts) guide.
+:::
+
+Any valid username and email combination can be submitted to log in. As mentioned above, if the user needs to set up or authenticate with a two-step verification method, they will be taken to the “system” login view to complete their login.
+
+To help users understand the state of their session (and in some limited circumstances, specific issues with the submitted information), you can output [flashes](../development/forms.md#flashes) from the login action:
+
+```twig
+{% set flashes = craft.app.session.getAllFlashes(true) %}
+
+{% if flashes is not empty %}
+  <ul>
+    {% for flash in flashes %}
+      <li>{{ flash }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+```
+
+### Custom Routes
+
+The `loginUrl` Twig variable is set based on the corresponding config value. How this route is handled is actually up to your project! When the `loginUrl` path is requested by a client, Craft uses its normal [route resolution process](routing.md), including the normal element URI search, `routes.php` rule matching, and looking in your project’s `templates/` directory.
+
+This means that you can decouple the route from the template by adding a [rule](routing.md) to your `routes.php` file:
+
+```php
+return [
+    // Assuming your `general.php` config sets `loginPath` to `account/sign-in`...
+    'account/sign-in' => ['template' => '_accounts/login'],
+];
+```
+
+Then, you would be free to create `templates/_accounts/login.twig`, alongside other templates in a [hidden](../development/templates.md#hidden-templates) directory.
+
+### Additional Tools
+
+These variables are available in all Twig contexts:
+
+- `loginUrl` — Defined by <config5:loginPath>. Used to build a link to the central login page, and where users will be redirected when requesting a protected resource.
+- `logoutUrl` — Defined by <config5:logoutPath>. Used to build a link that immediately logs the user out.
+- `setPasswordUrl` — Defined by <config5:setPasswordRequestPath>. Used to build a link to a central page where users can request their password be reset. An link is sent to the user’s email address (based on the <config5:setPasswordPath> setting) with `id` and `code` query parameters.
+
+Other URLs are generated when activating accounts or resetting passwords, and are not available for direct use in templates.
+
+Fine-grained control over registration and sign-in workflows are possible with these settings:
+
+- Logging in and out…
+  - <config5:loginPath> — Determines the `loginUrl` variable. (Default: `login`)
+  - <config5:logoutPath> — Determines the `logoutUrl` variable, and maps the specified path to the `users/logout` controller action. (Default: `logout`)
+- Account activation…
+  - <config5:setPasswordRequestPath> — Determines the `setPasswordPath` variable. (Default: `setpassword`) Users will visit this page to _request_ a password reset link.
+  - <config5:setPasswordPath> — Where users will be sent to _set_ a password. These secure, temporary URLs are generated by Craft when sending a password reset email, or when another user with the _Administrate users_ permission requests a password reset link via the control panel.
+  - <config5:setPasswordSuccessPath> — Where users are redirected after successfully setting a new password.
+- Changing and verifying email addresses…
+  - <config5:verifyEmailPath> — Used when generating a link sent via email to verify access to an email address.
+  - <config5:verifyEmailSuccessPath> — Similar to `setPasswordSuccessPath`, but for redirection after a user verifies their email address (either upon creating an account, or changing its email address).
+- Security and timing…
+  - <config5:autoLoginAfterAccountActivation> — Control whether users are immediately logged in after setting a password. (Default: `false`)
+  - <config5:purgePendingUsersDuration> — How long Craft waits before deleting pending, non-activated users. (Default: `0`, or _disabled_)
+  - <config5:purgeStaleUserSessionDuration> — How long Craft waits before dropping stale sessions from the `sessions` database table. This may (Default: 90 days)
 
 ## CLI
 
