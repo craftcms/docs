@@ -14,6 +14,7 @@
 | [asArray](#asarray)                             | Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
 | [cache](#cache)                                 | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+| [couponCode](#couponcode)                       | Narrows the query results based on the order's coupon code.
 | [customer](#customer)                           | Narrows the query results based on the customer’s user account.
 | [customerId](#customerid)                       | Narrows the query results based on the customer, per their user ID.
 | [dateAuthorized](#dateauthorized)               | Narrows the query results based on the orders’ authorized dates.
@@ -203,6 +204,43 @@ Clears the [cached result](https://craftcms.com/docs/5.x/development/element-que
 
 
 
+
+
+#### `couponCode`
+
+Narrows the query results based on the order's coupon code.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `':empty:'` | that don’t have a coupon code.
+| `':notempty:'` | that have a coupon code.
+| `'Foo'` | with a coupon code of `Foo`.
+| `'Foo*'` | with a coupon code that begins with `Foo`.
+| `'*Foo'` | with a coupon code that ends with `Foo`.
+| `'*Foo*'` | with a coupon code that contains `Foo`.
+| `'not *Foo*'` | with a coupon code that doesn’t contain `Foo`.
+| `['*Foo*', '*Bar*']` | with a coupon code that contains `Foo` or `Bar`.
+| `['not', '*Foo*', '*Bar*']` | with a coupon code that doesn’t contain `Foo` or `Bar`.
+
+
+
+::: code
+```twig
+{# Fetch the requested order #}
+{% set order = craft.orders()
+  .reference('foo')
+  .one() %}
+```
+
+```php
+// Fetch the requested order
+$order = \craft\commerce\elements\Order::find()
+    ->reference('foo')
+    ->one();
+```
+:::
 
 
 #### `customer`
