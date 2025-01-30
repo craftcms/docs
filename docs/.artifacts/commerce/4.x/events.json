@@ -21921,6 +21921,12 @@
     },
     {
         "class": "craft\\commerce\\services\\Taxes",
+        "name": "EVENT_REGISTER_TAX_ID_VALIDATORS",
+        "type": "craft\\commerce\\events\\TaxIdValidatorsEvent",
+        "desc": "The event that is raised when tax ID validators are registered."
+    },
+    {
+        "class": "craft\\commerce\\services\\Taxes",
         "name": "EVENT_REGISTER_TAX_ENGINE",
         "type": "craft\\commerce\\events\\TaxEngineEvent",
         "desc": "The event that is triggered when determining the tax engine."
