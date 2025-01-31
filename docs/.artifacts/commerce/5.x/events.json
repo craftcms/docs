@@ -18033,6 +18033,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\CouponCodeConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\CouponCodeConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\CouponCodeConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\CouponCodeConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\CouponCodeConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\CouponCodeConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\CouponCodeConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\conditions\\orders\\CustomerConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -18628,6 +18670,48 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\orders\\PaidConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\PaymentGatewayConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\PaymentGatewayConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\PaymentGatewayConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\PaymentGatewayConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\PaymentGatewayConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\PaymentGatewayConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\PaymentGatewayConditionRule",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -20020,6 +20104,48 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\variants\\CatalogPricingRuleVariantCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\ProductConditionRule",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\ProductConditionRule",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\ProductConditionRule",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\ProductConditionRule",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\ProductConditionRule",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\ProductConditionRule",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\variants\\ProductConditionRule",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
@@ -28083,6 +28209,12 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\services\\Carts",
+        "name": "EVENT_BEFORE_PURGE_INACTIVE_CARTS",
+        "type": "craft\\commerce\\events\\CartPurgeEvent",
+        "desc": "The event that is triggered before the carts are purged."
+    },
+    {
         "class": "craft\\commerce\\services\\Customers",
         "name": "EVENT_UPDATE_PRIMARY_PAYMENT_SOURCE",
         "type": "craft\\commerce\\events\\UpdatePrimaryPaymentSourceEvent",
@@ -28474,6 +28606,12 @@
     },
     {
         "class": "craft\\commerce\\services\\Purchasables",
+        "name": "EVENT_PURCHASABLE_OUT_OF_STOCK_PURCHASES_ALLOWED",
+        "type": "craft\\commerce\\services\\PurchasableAllowOutOfStockPurchasesEvent",
+        "desc": "The event that is triggered when checking if the purchasable can be purchased when out of stock."
+    },
+    {
+        "class": "craft\\commerce\\services\\Purchasables",
         "name": "EVENT_PURCHASABLE_AVAILABLE",
         "type": "craft\\commerce\\events\\PurchasableAvailableEvent",
         "desc": "The event that is triggered when the availability of a purchasables is checked."
@@ -28615,6 +28753,12 @@
         "name": "EVENT_RECEIVE_SUBSCRIPTION_PAYMENT",
         "type": "craft\\commerce\\events\\SubscriptionPaymentEvent",
         "desc": "The event that is triggered when a subscription payment is received."
+    },
+    {
+        "class": "craft\\commerce\\services\\Taxes",
+        "name": "EVENT_REGISTER_TAX_ID_VALIDATORS",
+        "type": "craft\\commerce\\events\\TaxIdValidatorsEvent",
+        "desc": "The event that is raised when tax ID validators are registered."
     },
     {
         "class": "craft\\commerce\\services\\Taxes",
