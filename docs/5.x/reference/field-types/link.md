@@ -57,7 +57,7 @@ In addition to the standard field options, Link fields have the following settin
   - **Class Name** — Content for the anchor’s `class` attribute.
   - **ID** — Content for the anchor’s `id` attribute. 
   - **Relation (rel)** — Content for the anchor’s `rel` attribute.
-  - **ARIA Label ** — Content for the anchor’s `aria-label` attribute.
+  - **ARIA Label** — Content for the anchor’s `aria-label` attribute.
 
 ### Advanced Options
 
