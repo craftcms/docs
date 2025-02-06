@@ -28607,7 +28607,7 @@
     {
         "class": "craft\\commerce\\services\\Purchasables",
         "name": "EVENT_PURCHASABLE_OUT_OF_STOCK_PURCHASES_ALLOWED",
-        "type": "craft\\commerce\\services\\PurchasableAllowOutOfStockPurchasesEvent",
+        "type": "craft\\commerce\\events\\PurchasableOutOfStockPurchasesAllowedEvent",
         "desc": "The event that is triggered when checking if the purchasable can be purchased when out of stock."
     },
     {
