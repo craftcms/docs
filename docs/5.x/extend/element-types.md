@@ -1190,14 +1190,14 @@ $map = array_map(function($src) {
 To assign eager-loaded elements to a specific attribute (or process the value in some other way), add a `setEagerLoadedElements()` method to your element class:
 
 ```php
-public function setEagerLoadedElements(string $handle, array $elements): void
+public function setEagerLoadedElements(string $handle, array $elements, EagerLoadPlan $plan): void
 {
     // The handle can be anything, so long as it matches what is used in `eagerLoadingMap()`:
     if ($handle === 'vendor') {
         $vendor = $elements[0] ?? null;
         $this->setVendor($vendor);
     } else {
-        parent::setEagerLoadedElements($handle, $elements);
+        parent::setEagerLoadedElements($handle, $elements, $plan);
     }
 }
 ```
