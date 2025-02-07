@@ -2,25 +2,26 @@
 
 Craft supports a variety of publishing workflows through sophisticated permissions and version-tracking systems.
 
-Drafts and revisions behave similarly to collaborative source code versioning systems like git:
+Drafts and revisions behave similarly to collaborative source code control, like git:
 
 - Nondestructive changes can be [drafted](#drafts) (or “forked”) from the canonical version of an element;
 - The draft is kept up-to-date by periodically [merging](#merging-changes) (or “rebasing”) upstream changes;
 - A changeset is later applied (or “pulled”) into the canonical element;
+- [Revisions](#revisions) capture the state of an element, over time (like a “commit”);
 
 This same process is used, no matter the scale of an edit—even the smallest typo receives its own draft, so that authors can be confident they are publishing exactly what they want.
 
 ::: tip
-Most of this page describes the draft and revisions systems in the context of [entries](../reference/element-types/entries.md), but other [element types](elements.md) (including those provided by plugins) provide support for some or all of the same features!
+Most of this page describes the draft and revisions systems in the context of [entries](../reference/element-types/entries.md), but other [element types](elements.md) (including those provided by plugins) provide support for some or all of the same features! One notable exception here is [assets](../reference/element-types/assets.md), due to their relationship with files, on-disk.
 :::
 
 ## Drafts
 
 _Drafts_ are used to capture changes that shouldn’t be immediately published to your site. They also power Craft’s live preview functionality, making changes extremely reliable to visualize.
 
-Most elements begin their life as an _unsaved draft_. When you press a **New entry** button in the control panel, Craft quietly creates element with only the essential attributes (like section and entry type IDs), then redirects to its “edit” page. This means that there is always a place for Craft to [auto-save](#auto-saving) edits.
+Most elements begin their life as an _unsaved draft_. When you press a **New entry** button in the control panel, Craft quietly creates element with only the essential attributes (like section and entry type IDs), then redirects to its “edit” page. This means that there is always a place for Craft to [auto-save](#auto-saving) your input.
 
-Unsaved drafts are typically short-lived. They don’t appear in element indexes, and are largely disposable. Once a user begins making changes to an unsaved draft, Craft assumes the element should remain accessible and it becomes a regular _draft_. Using the **Save** action from this state immediately makes the draft [live](#statuses-visibility)
+Unsaved drafts are typically short-lived. They don’t appear in element indexes, and are largely disposable. Once a user begins making changes to an unsaved draft, Craft assumes the element should remain accessible and it becomes a regular _draft_. Using the **Create entry** action from this state immediately makes the draft [live](#statuses-visibility) (so long as it [validates](#validation)). Leaving the page or selecting **Save draft** from the fly-out menu keeps the element in an unpublished state.
 
 ::: tip
 Unsaved drafts are periodically purged during [garbage collection](gc.md) based on the <config5:purgeUnsavedDraftsDuration> setting.
@@ -46,6 +47,28 @@ Drafts that have been explicitly created (using the **Create a draft** button) a
 
 Whenever Craft is auto-saving an element, you’ll see a spinner in its toolbar. If something prevents changes from being saved, a caution icon will appear in its place, and you will be notified when attempting to navigate away from the page or close a slideout.
 
+### Validation
+
+Craft uses Yii’s [validation scenarios](guide:structure-models#scenarios) to determine which attributes and fields are validated at a given stage. As drafts, elements’ custom fields are typically _not_ validated, so that authors can progressively add content with the protection of auto-saving.
+
+Once an author goes to publish or apply a draft, Craft will only validate the entry if it would be [enabled](#statuses-visibility).
+
+::: tip
+To avoid issues when rendering drafts in live preview, [templates](../development/templates.md) should guard against missing field data. When <config5:devMode> is _off_, Craft ignores some template errors—but in doing so, it may omit sections of problematic markup, causing disruptions to the structure or layout of the final document. Here’s an example of a resilient template:
+
+```twig
+{# Attempt to load the field’s value: #}
+{% set topic = entry.primaryTopic.one() %}
+
+{# Check if anything came back: #}
+{% if topic %}
+    <span class="topic-flag">{{ topic.title }}</span>
+{% else %}
+    {# Optional: Fallback output! #}
+{% endif %}
+```
+:::
+
 ### Change Tracking
 
 Fields that have been modified in a draft are recorded in the database and marked in the editor with a status badge. These fields’ values are protected against automatic [merging](#merging-changes) of changes from the canonical element.
@@ -56,7 +79,7 @@ When a draft is viewed in the control panel, Craft merges in any changes from th
 
 ### Saved Drafts
 
-Each user is only allowed one _provisional_ draft per canonical element, but can create any number of saved drafts. If you need to stash provisional changes, press the **Create a draft** button.
+Each user is only allowed one _provisional_ draft per canonical element, but can create any number of _saved_ drafts. If you need to stash provisional changes, press the **Create a draft** button.
 
 Use the **Edit draft settings** item in the action menu next to the **Save* button to give your draft a name. This helps you and any collaborators identify a draft by more than its number and creator. You can also add **Notes** to most elements, in the sidebar; these are copied into the [revision](#revisions) when the draft is eventually merged.
 
@@ -110,12 +133,12 @@ Owner
 
 Several interrelated systems affect whether an element is accessible by users of your site, or by developers working with [element queries](#querying). For Craft to [route](routing.md) to an element, it must…
 
-- …be **Enabled** globally, and for the requested site;
+- …be **Enabled** globally, _and_ for the requested site;
 - …be _canonical_;
 - …_not_ be a draft (this sounds redundant, but unpublished drafts are technically both a draft _and_ a canonical element);
-- …meet other element type-specific “status conditions” (like **Post Date** and **Expiry Date**);
+- …meet other element type-specific “status conditions” (like entries’ **Post Date** and **Expiry Date**);
 
-Craft’s default behavior safeguards drafts and revisions from public view, and developers must explicitly introduce mechanisms to expose them. The lifespan of secure preview tokens is determined by the <config5:previewTokenDuration> setting. Suppose you wanted to be transparent with an audience about edits to pages in a particular section:
+Craft’s default behavior safeguards drafts and revisions from public view, and developers must explicitly expose them using [queries](#querying). Suppose you wanted to be transparent with an audience about edits to pages in a particular section:
 
 ```twig
 <h1>{{ entry.title }}</h1>
@@ -140,6 +163,16 @@ Craft’s default behavior safeguards drafts and revisions from public view, and
 
 Unless otherwise specified, Craft returns revisions in the same sequence that is displayed in the control panel.
 
+## Previews
+
+[Entries](../reference/element-types/entries.md) belonging to sections can have any number of **Preview Targets**, each representing a location in the front-end where the entry might appear. Authors can use the **Preview** button when editing an entry to open the split “live preview” interface, or the **View** action to open a preview in a new window. Both show the same content, but—as the name suggests—_live_ preview refreshes any time a draft is auto-saved.
+
+The URL of a preview includes a temporary `token` param that Craft validates before swapping in the unpublished entry. Tokenized preview URLs can be shared with anyone (even users without an account), and will reflect the state of the draft at the time it is accessed—but it will _not_ auto-refresh like a live preview does.
+
+::: tip
+The lifespan of preview tokens is determined by the <config5:previewTokenDuration> setting.
+:::
+
 ## Querying
 
 You can include drafts and revisions in [element queries](../development/element-queries.md) by using a handful of special parameters:
@@ -147,29 +180,110 @@ You can include drafts and revisions in [element queries](../development/element
 [`drafts()`](craft5:craft\elements\db\ElementQuery::drafts())
 :   Returns only element drafts.
 
+    ```twig
+    {% set newsDrafts = craft.entries()
+      .section('news')
+      .drafts()
+      .all() %}
+    ```
+
 [`draftOf($element)`](craft5:craft\elements\db\ElementQuery::draftOf())
 :   Get drafts of a specific element.
+
+    ```twig
+    {% set proposedChanges = craft.entries()
+      .draftsOf(entry)
+      .all() %}
+    ```
 
 [`draftId($id)`](craft5:craft\elements\db\ElementQuery::draftId())
 :   Find a specific draft by its ID. Draft IDs are distinct from element IDs!
 
+    ```twig
+    {% set specificDraft = craft.entries()
+      .draftId(1234)
+      .one() %}
+    ```
+
 [`draftCreator($user)`](craft5:craft\elements\db\ElementQuery::draftCreator())
-:   Finds element drafts by a specific user.
+:   Finds drafts by a specific user. The returned drafts may be from different canonical elements!
+
+    ```twig
+    {% set myNewsDrafts = craft.entries()
+      .section('news')
+      .draftCreator(currentUser)
+      .all() %}
+    ```
+
+[`provisionalDrafts()`](craft5:craft\elements\db\ElementQuery::provisionalDrafts())
+:   Returns only unsaved drafts.
+
+    ```twig
+    {% set proposedChanges = craft.entries()
+      .section('news')
+      .provisionalDrafts()
+      .all() %}
+    ```
 
 [`withProvisionalDrafts()`](craft5:craft\elements\db\ElementQuery::withProvisionalDrafts())
-:   Any results in the query that have provisional drafts belonging to the current user are swapped out for those drafts.
+:   Any results in the query that have provisional drafts belonging to the current user are swapped out for those drafts. This has no effect for anonymous users.
+
+    ```twig
+    {% set posts = craft.entries()
+      .section('news')
+      .withProvisionalDrafts()
+      .all() %}
+
+    <ul>
+      {% for post in posts %}
+        <li>
+          <strong>{{ post.title }}</strong>
+          {% if post.isDraft %}
+            <em>Showing your proposed changes</em>
+            <a href="{{ post.getCpEditUrl() }}">Edit</a>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+    ```
 
 [`revisions()`](craft5:craft\elements\db\ElementQuery::revisions())
-:   Returns only element revisions.
+:   Returns only element revisions. To find revisions of a specific entry, use `.revisionOf()`.
+
+    ```twig
+    {% set changelog = craft.entries()
+      .section('news')
+      .revisions()
+      .all() %}
+    ```
 
 [`revisionOf($element)`](craft5:craft\elements\db\ElementQuery::revisionOf())
 :   Get revisions of a specific element.
+
+    ```twig
+    {% set editHistory = craft.entries()
+      .section('news')
+      .revisionOf(entry)
+      .all() %}
+    ```
 
 [`revisionId($id)`](craft5:craft\elements\db\ElementQuery::revisionId())
-:   Find a specific revision by its revision ID. Revision IDs are distinct from element IDs!
+:   Find a specific revision by its revision ID. Revision IDs are distinct from element IDs, and are typically only discovered by first querying for revisions of an element using `revisionOf()` (at which point you’ll already have the revision, anyway)!
+
+    ```twig
+    {% set specificRevision = craft.entries()
+      .revisionId(5678)
+      .one() %}
+    ```
 
 [`revisionCreator($user)`](craft5:craft\elements\db\ElementQuery::revisionCreator())
-:   Finds element revisions by a specific user.
+:   Finds element revisions by a specific user. The returned revisions may be from different canonical elements!
 
-[`revisionOf($element)`](craft5:craft\elements\db\ElementQuery::revisionOf())
-:   Get revisions of a specific element.
+    ```twig
+    {% set myChangelog = craft.entries()
+      .section('news')
+      .revisionCreator(currentUser)
+      .all() %}
+    ```
+
+These query methods are apt to be most useful when building [authenticated front-end areas](user-management.md#logging-in), or in templates for the control panel (like with the **Template** [field layout UI element](fields.md#field-layout-elements)).
