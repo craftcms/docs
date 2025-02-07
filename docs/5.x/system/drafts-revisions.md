@@ -89,7 +89,7 @@ When you create a new nested element (within a [Matrix](../reference/field-types
 
 Nested entries are only returned by [element queries](../development/element-queries.md) once their _primary owner_ becomes the canonical element.
 
-Nested entries are sometimes *not* drafts and *not* canonical. We carefully filter them out of normal results, but swap them in so that edits are visible in the CP.
+Nested entries are sometimes *not* drafts and *not* canonical. We carefully filter them out of normal results, but swap them in so that edits are visible in the control panel.
 
 ## Revisions
 
