@@ -329,18 +329,41 @@ Craft 5 encapsulates operations that affect one or more elements in a special ev
 ```php
 use craft\elements\Entry;
 use craft\events\BulkOpEvent;
+use craft\helpers\Db;
 use craft\services\Elements;
 use yii\base\Event;
 
 Event::on(Elements::class, Elements::EVENT_AFTER_BULK_OP, function(BulkOpEvent $event) {
-    // Fetch all the entries that were affected
+    // Fetch the affected entries in batches:
     $entries = Entry::find()
         ->inBulkOp($event->key)
-        ->status(null)
-        ->all();
-    // ...
+        ->status(null);
+
+    foreach (Db::each($entries) as $entry) {
+        // ...
+    }
 });
 ```
+
+Note that we didn’t immediately execute the entry query, above; instead, it’s passed to `Db::each()` and “batched” to help keep the memory usage flat. By default, elements will be loaded in chunks of 100.
+
+::: warning
+Avoid memoizing the individual `$entry` objects, within the loop! This can prevent PHP from releasing the memory saved by batching the queries. If you need to tally special cases (say, failed communication with a remote API), consider capturing just the ID of the entry, instead:
+
+```php
+$skipped = [];
+
+foreach (Db::each($entries) as $entry) {
+    if (!$entry->getIsCanonical()) {
+        $skipped[] = $entry->id;
+
+        continue;
+    }
+
+    // ...
+}
+```
+:::
 
 If your plugin performs many sequential element saves, you can explicitly start and end a bulk operation via the elements service:
 
