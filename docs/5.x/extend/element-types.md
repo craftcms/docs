@@ -712,7 +712,7 @@ If a user has customized a source, the default attributes will no longer apply t
 Table attribute values default to the corresponding element attribute, cast as a string. Add a protected `tableAttributeHtml()` method on your element class to override the returned HTML:
 
 ```php
-protected function tableAttributeHtml(string $attribute): string
+protected function attributeHtml(string $attribute): string
 {
     switch ($attribute) {
         case 'price':
@@ -722,7 +722,7 @@ protected function tableAttributeHtml(string $attribute): string
             return strtoupper($this->currency);
     }
 
-    return parent::tableAttributeHtml($attribute);
+    return parent::attributeHtml($attribute);
 }
 ```
 
