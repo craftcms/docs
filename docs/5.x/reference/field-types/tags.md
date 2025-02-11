@@ -16,20 +16,28 @@ Tags fields allow you relate [tags](../element-types/tags.md) to other elements.
 
 Tags fields have the following settings:
 
-- **Source** – Which tag group the field should be able to relate tags from.
-- **Selection Label** – The label that should be used on the field’s tag search input.
+- **Source** — Which tag group(s) the field should be able to relate tags from.
+- **“Add” Button Label** — The label that should be used on the field’s search input.
+- **Validate related tags** — Whether or not validation errors on the related tags will be bubbled up.
+
+### Advanced Settings
+
+Additional settings are available under the **Advanced** toggle:
+
+- **Allow self-relations** — If this field is added to a tag group field layout, should the author be allowed to select the tag they are editing as a relationship to itself?
 
 ### Multi-Site Settings
 
-On multi-site installs, the following settings will also be available (under “Advanced”):
+On multi-site installs, the following settings will also be available:
 
-- **Relate tags from a specific site?** – Whether to only allow relations to tags from a specific site.
+- **Translation Method** — How relationships are handled when [propagating changes to other sites](../../system/fields.md#translation-methods).
+- **Relate tags from a specific site?** — Whether to only allow relations to tags from a specific site.
+  - If _enabled_, a new setting will appear where you can choose which site.
+  - If _disabled_, related tags will always be pulled from the current site.
 
-  If enabled, a new setting will appear where you can choose which site.
+- **Show the site menu** — Whether to display the site menu in tag selection modals. (This setting is hidden when relations are locked to a single site.)
 
-  If disabled, related tags will always be pulled from the current site.
-
-- **Manage relations on a per-site basis** – Whether each site should get its own set of related tags.
+<See path="../../system/fields.md" hash="translation-methods" label="Translation Methods" description="Learn about options for translating field values." />
 
 ## The Field
 

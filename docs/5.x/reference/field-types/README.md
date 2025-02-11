@@ -9,11 +9,11 @@ related:
 
 # Custom Field Types
 
-Craft has over 20 built-in field types that help create tightly-tailored authoring and developer experiences.
+Craft has over 20 built-in field types that help create tightly-tailored authoring and developer experiences. The table below lists fields in the same order you’ll encounter them in the [control panel](../../system/control-panel.md); you can also browse them by the [type of data](#data-types) they store.
 
 <See path="../system/fields.md" label="Fields + Content" description="Get started with fields in Craft." />
 
-<hr>
+## All Fields
 
 | Field Type | Description |
 | --- | --- |
@@ -57,7 +57,7 @@ Arbitrary and predefined strings.
 - [Email](email.md) — Validate an email address. (See: [Link](link.md))
 
 ::: tip
-Our first-party [CKEditor](plugin:ckeditor) plugin provides a powerful rich text composer that supports [nested entries](../element-types/entries.md#nested-entries).
+Our first-party [CKEditor](plugin:ckeditor) plugin provides a powerful rich text composer that also supports [nested entries](../element-types/entries.md#nested-entries).
 :::
 
 ### Booleans
@@ -95,7 +95,7 @@ Most of the fields in the [references](#references) section allow you to attach 
 
 ### References
 
-Create relationships to content, on- or off-site.
+Create [relationships](../../system/relations.md) to content, on- or off-site.
 
 - [Link](link.md) — Flexible input for multiple kinds of locators, like URLs, element relationships, phone numbers, and email addresses.
 - [Assets](categories.md) — Connect uploaded [media](#media) to any element.
@@ -108,19 +108,17 @@ Create relationships to content, on- or off-site.
 
 Help users and authors understand content by establishing explicit connections.
 
-- [Categories](categories.md)
-- [Entries](entries.md)
-- [Tags](tags.md)
+- [Categories](categories.md) — Connect content to hierarchical structures.
+- [Tags](tags.md) — Expressive, ad-hoc organization.
+- [Entries](entries.md) — Anything can be a taxonomy!
 
 ::: tip
-You can even attach fields to the elements you relate via these fields!
+You can even attach fields to the elements you relate via these fields—metadata for your metadata!
 :::
 
 ### Media
 
-Upload and attach files.
-
-- [Assets](assets.md)
+- [Assets](assets.md) — Upload and attach files anywhere.
 
 ### Structured
 
@@ -130,10 +128,15 @@ Manage nested data.
 - [Matrix](matrix.md)
 - [Table](table.md)
 
+::: tip
+Have a complex content model? You can nest entries as deeply as you want!
+:::
+
 ### Fun + Cosmetic
 
 Spruce up the authoring experience with these dedicated UIs.
 
-- [Color](color.md)
-- [Icon](icon.md)
-- [Money](money.md)
+- [Color](color.md) — Select from a palette of colors, or choose a new one.
+- [Icon](icon.md) — Pick from a library of icons.
+- [Money](money.md) — Input values in a specific currency.
+- [Range](range.md) — Contextualize numeric values.

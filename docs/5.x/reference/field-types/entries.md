@@ -39,7 +39,8 @@ Entries fields have the following settings:
   - **Min Relations** — The minimum number of entries that must be selected when the field is marked as “required” in a field layout. (Default is no minimum.)
   - **Max Relations** — The maximum number of entries that can be selected. (Default is no maximum.)
 
-- **Selection Label** — The label that should be used on the field’s selection button.
+- **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
+- **“Add” Button Label** — The label that should be used on the field’s selection button.
 
 ### Advanced Settings
 
@@ -51,15 +52,14 @@ Additional settings are available under the **Advanced** toggle:
 
 On multi-site installs, additional advanced settings will be available:
 
-- **Relate entries from a specific site?** – Whether to only allow relations to entries from a specific site.
+- **Translation Method** — How relationships are handled when [propagating changes to other sites](../../system/fields.md#translation-methods).
+- **Relate entries from a specific site?** — Whether to only allow relations to entries from a specific site.
+  - If _enabled_, a new setting will appear where you can choose which site.
+  - If _disabled_, related entries will always be pulled from the current site.
 
-  If enabled, a new setting will appear where you can choose which site.
+- **Show the site menu** — Whether to display the site menu in entry selection modals. (This setting is hidden when relations are locked to a single site.)
 
-  If disabled, related entries will always be pulled from the current site.
-
-- **Show the site menu** – Whether to display the site menu in entry selection modals. (The selected site isn’t stored, so this should only be enabled if some entries aren’t propagated to all sites.)
-
-- **Manage relations on a per-site basis** – Whether each site should get its own set of related entries.
+<See path="../../system/fields.md" hash="translation-methods" label="Translation Methods" description="Learn about options for translating field values." />
 
 ## The Field
 

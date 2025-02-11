@@ -22,29 +22,32 @@ Assets fields have the following settings:
 
   If enabled, the following setting will be visible:
 
-  - **Upload Location** – The location that files dragged directly onto the field should be saved in.
+  - **Asset Location** – A specific volume and folder from which assets can be selected (and into which assets uploaded directly to the field are saved). The path portion of this setting is evaluated as an [object template](../../system/object-templates.md).
 
   If disabled, the following settings will be visible:
 
-  - **Sources** – Which asset volumes (or other asset index sources) the field should be able to relate assets from.
-  - **Default Upload Location** – The default location that files dragged directly onto the field should be saved in.
+  - **Sources** – Which asset volumes (or other asset index [sources](../../system/elements.md#sources)) the field should be able to relate assets from.
+  - **Default Upload Location** – The default volume and path that files are stored in when uploaded directly to the field. This setting is evaluated as an [object template](../../system/object-templates.md).
 
 - **Restrict allowed file types?** Whether the field should only be able to upload/relate files of a certain type(s).
 - **Limit** – The maximum number of assets that can be related with the field at once. (Default is no limit.)
 - **View Mode** – How the field should appear for authors.
-- **Selection Label** – The label that should be used on the field’s selection button.
+- **“Add” Button Label** – The label that should be used on the field’s selection button.
+- **Validate related assets** — Whether or not validation errors on the related assets will be bubbled up.
+- **Preview Mode** — How this field’s values are displayed when included on element indexes.
 
 ### Multi-Site Settings
 
-On multi-site installs, the following settings will also be available (under **Advanced**):
+On multi-site installs, the following settings will also be available:
 
-- **Relate assets from a specific site?** – Whether to only allow relations to assets from a specific site.
+- **Translation Method** — How relationships are handled when [propagating changes to other sites](../../system/fields.md#translation-methods).
+- **Relate assets from a specific site?** — Whether to only allow relations to assets from a specific site.
+  - If _enabled_, a new setting will appear where you can choose which site.
+  - If _disabled_, related assets will always be pulled from the current site.
 
-  If enabled, a new setting will appear where you can choose which site.
+- **Show the site menu** — Whether to display the site menu in asset selection modals. (This setting is hidden when relations are locked to a single site.)
 
-  If disabled, related assets will always be pulled from the current site.
-
-- **Manage relations on a per-site basis** – Whether each site should get its own set of related assets.
+<See path="../../system/fields.md" hash="translation-methods" label="Translation Methods" description="Learn about options for translating field values." />
 
 ### Dynamic Subfolder Paths
 

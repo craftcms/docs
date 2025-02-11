@@ -26,7 +26,7 @@ Categories fields allow you to relate [categories](../element-types/categories.m
 
 Categories fields have the following settings:
 
-- **Source** — Which category group (or other category index source) the field should be able to relate categories from.
+- **Source** — Which category group (or other category index [source](../../system/elements.md#sources)) the field should be able to relate categories from.
 - **Maintain Hierarchy** — Should the selected categories’ order and hierarchy be preserved?
 
   When **enabled**, the following options become available:
@@ -38,19 +38,28 @@ Categories fields have the following settings:
   - **Min Relations** — The minimum number of categories that must be selected when the field is marked as “required” in a field layout. (Default is no minimum.)
   - **Max Relations** — The maximum number of categories that can be selected. (Default is no maximum.)
 
-- **Selection Label** — The label that should be used on the field’s selection button.
+- **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
+- **“Add” Button Label** — The label that should be used on the field’s selection button.
+- **Validate related categories** — Whether or not validation errors on the related categories will be bubbled up.
+
+### Advanced Settings
+
+Additional settings are available under the **Advanced** toggle:
+
+- **Allow self-relations** — If this field is added to a category group field layout, should the author be allowed to select the category they are editing as a relationship to itself?
 
 ### Multi-Site Settings
 
-On multi-site installs, the following settings will also be available (under “Advanced”):
+On multi-site installs, the following settings will also be available:
 
-- **Relate categories from a specific site?** – Whether to only allow relations to categories from a specific site.
+- **Translation Method** — How relationships are handled when [propagating changes to other sites](../../system/fields.md#translation-methods).
+- **Relate categories from a specific site?** — Whether to only allow relations to categories from a specific site.
+  - If _enabled_, a new setting will appear where you can choose which site.
+  - If _disabled_, related categories will always be pulled from the current site.
 
-  If enabled, a new setting will appear where you can choose which site.
+- **Show the site menu** — Whether to display the site menu in category selection modals. (This setting is hidden when relations are locked to a single site.)
 
-  If disabled, related categories will always be pulled from the current site.
-
-- **Manage relations on a per-site basis** – Whether each site should get its own set of related categories.
+<See path="../../system/fields.md" hash="translation-methods" label="Translation Methods" description="Learn about options for translating field values." />
 
 ## The Field
 

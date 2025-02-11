@@ -76,7 +76,7 @@ Refer to each field type’s documentation for information about what kinds of d
 
 ### Translation Methods
 
-If you’re running a multi-site Craft installation, most of your fields will have a “Translation Method” setting.
+If you’re running a multi-site Craft installation, most of your fields will have a **Translation Method** setting.
 
 Fields can have the following translation method:
 
@@ -86,11 +86,11 @@ Fields can have the following translation method:
 - **Translate for each language** – The field can have a different value for each unique language associated with your sites.
 - **Custom…** – The field can have different values based on a custom differentiator.
 
-If you choose “Custom…”, a **Translation Key Format** setting will appear below, where you can define an [object template](object-templates.md) that determines how Craft copies the field’s value to other sites. When an element that uses the field is saved, Craft renders this template for each site the element exists in, and copies the value to any that produce the same key.
+If you choose **Custom…**, a **Translation Key Format** setting will appear below, where you can define an [object template](object-templates.md) that determines how Craft copies the field’s value to other sites. When an element that uses the field is saved, Craft renders this template for each site the element exists in, and copies the value to any that produce the same key.
 
 For example, if a field’s translation key format were `{site.handle[0:2]}`, then new field values would be copied over to any other sites where the first two characters of the site handle matches the first two characters of the original site’s handle. Looking at this from the opposite direction: any site that produces a _unique_ translation key for a field will have its value isolated from other sites.
 
-If the translation key format returns an empty string (`''`), the field will not appear as translatable, and its value will not be copied to any other sites. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per-site from _only_ the `blog` section—otherwise it would not be available for translation in any other context.
+If the translation key format returns an empty string (`''`), the field will not appear as translatable, and its value will not be copied to any other sites. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per-site from _only_ the `blog` section—in all other contexts, it would not be translatable.
 
 ::: tip
 Keep in mind that fields can be assigned to multiple element types. Accessing invalid properties of the current element (like `section` on an [asset](../reference/element-types/assets.md)) may cause the key to end up blank (and therefore not translated).
