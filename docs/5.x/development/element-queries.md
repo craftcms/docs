@@ -943,7 +943,7 @@ When using `.id()` to query for elements with a specific set of IDs, you can cal
   .asArray()
   .all() %}
 
-{% Translate SKUs to internal IDs, and load the entries in that order: #}
+{# Translate SKUs to internal IDs, and load the entries in that order: #}
 {% set orderedMatches = craft.entries()
   .id(someExternalApiResult | map(sku => internalIdMatches[sku].id))
   .fixedOrder()
@@ -961,7 +961,7 @@ Selections modify what columns and rows are returned.
 : Return only rows that have a unique combination of values in the provided column(s).
 
 [groupBy($columns)](yii2:yii\db\Query::groupBy())
-: Combine or flatten database rows based on the value of one or more columns. Often used in combination with aggregate selections or [execution methods](#query-execution) like `.sum(columnName)`. Note that this is _not_ equivalent to or compatible with the [`group` filter](../reference/twig/filters.md#group) in Twig, which operates on arrays, in-memory.
+: Combine or flatten database rows based on the value of one or more columns. Often used in combination with aggregate selections or [execution methods](#query-execution) like `.sum(columnName)`. Note that this is _not_ equivalent to or compatible with the [`group` Twig filter](../reference/twig/filters.md#group) or the [collection](collections.md) method of the same name, which operate on arrays, in-memory.
 
 [limit($n)](yii2:yii\db\Query::limit())
 : Set a maximum number of results that can be returned.
