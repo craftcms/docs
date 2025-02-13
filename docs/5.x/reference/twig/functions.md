@@ -317,7 +317,7 @@ Creates a new object instance based on a given class name or object configuratio
 
 ## `csrfInput`
 
-Renders a CSRF token `input` element for use in an HTML form. All sites that have CSRF protection enabled must include this in each form that makes a POST request.
+Renders a CSRF token `input` element for use in an HTML form. All sites that have CSRF protection enabled must include this in each [form](../../development/forms.md) that makes a POST request.
 
 ::: code
 ```twig Usage
@@ -328,6 +328,7 @@ Renders a CSRF token `input` element for use in an HTML form. All sites that hav
 ```
 :::
 
+
 You can set additional attributes on the rendered tag by passing an `options` argument:
 
 ```twig
@@ -336,7 +337,13 @@ You can set additional attributes on the rendered tag by passing an `options` ar
 }) }}
 ```
 
-A special `async` key in the passed object allows you to override the global <config5:asyncCsrfInputs> setting <Since ver="5.1.0" feature="The asyncCsrfInputs setting" />:
+::: warning
+The output of `csrfInput()` should not be cached—statically, or using [template caches](tags.md#cache).
+:::
+
+Craft automatically sends [`no-cache` headers](craft5:craft\web\Response::setNoCacheHeaders()) when generating or outputting a CSRF token. <Since ver="5.3.0" description="We began sending automatic no-cache headers in {product} {ver}." />
+
+A special `async` key in the passed hash allows you to override the global <config5:asyncCsrfInputs> setting for a single input <Since ver="5.1.0" feature="The asyncCsrfInputs setting" />:
 
 ```twig
 {{ csrfInput({
@@ -344,9 +351,9 @@ A special `async` key in the passed object allows you to override the global <co
 }) }}
 ```
 
-::: warning
-The output of `csrfInput()` should not be cached—statically, or using [template caches](tags.md#cache).
-:::
+Asynchronous CSRF inputs _are_ cacheable, and therefore no headers are sent—but other features of the page (including other `csrfInput()` calls) can still cause no-cache headers to be sent.
+
+Craft outputs a placeholder element, and registers a snippet of JavaScript that requests a token over Ajax, once the page has loaded in the client. Only one request is made, regardless of the number of inputs on the page.
 
 ## `dataUrl`
 
