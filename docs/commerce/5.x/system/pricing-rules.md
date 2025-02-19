@@ -3,7 +3,9 @@
 Pricing rules are sets of [conditions](#conditions) and [actions](#actions) that determine prices of [purchasables](purchasables.md).
 
 ::: tip
-The catalog pricing system replaces [sales](sales.md) from earlier versions of Commerce. If you upgraded your store from 4.x to 5.x and had already configured one or more sales, you will retain access to them—but we strongly recommend migrating your sales into pricing rules.
+The catalog pricing system replaces [sales](sales.md) from earlier versions of Commerce. If you [upgraded](../upgrade.md) your store from 4.x to 5.x and had already configured one or more sales, they will continue to work as expected. However, the new and old systems are _not_ interoperable, and Commerce will only expose one set of controls at a time—you will see _either_ a **Sales** _or_ **Pricing Rules** item within the **Store Management** navigation.
+
+If you wish to take advantage of pricing rules after the upgrade, you must first remove all existing sales.
 :::
 
 Catalog pricing is computed and stored in the database when the underlying data changes. Prices can also be manually refreshed at any time (or on a schedule) with the `commerce/pricing-catalog/generate` console command. The resulting pricing information is joined in with normal variant queries and available transparently on the returned elements—even when rules produce customer-specific pricing!

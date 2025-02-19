@@ -169,7 +169,9 @@ Commerce will try and keep your pricing up-to-date, but some events (like a user
 
 ### Sales
 
-Upgraded projects that had at least one [sale](system/sales.md) configured will retain access to the sales feature. New projects, however, should use the new [catalog pricing](system/pricing-rules.md) engine.
+Upgraded projects that had at least one [sale](system/sales.md) configured will retain access to the sales feature. New projects, however, only have access to the new [catalog pricing](system/pricing-rules.md) engine.
+
+Until you’ve cleared out _all_ existing sales, the **Pricing Rules** tab will be hidden from the **Store Management** navigation. Inversely, if a store has _no_ sales (as is the case with fresh installs), the **Sales** tab will be hidden.
 
 ## Templates
 
