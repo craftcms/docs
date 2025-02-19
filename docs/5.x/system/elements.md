@@ -45,6 +45,7 @@ Some features are available to all (or most) element types:
 - [Custom fields](fields.md) and field layouts with advanced condition rules for storing [content](#fields-and-content);
 - Slugs, URIs, URLs, and automatic [routing](routing.md);
 - Localization via [sites](sites.md);
+- [Drafts and revisions](drafts-revisions.md);
 - Sophisticated [permissions](user-management.md#permissions);
 - [Element queries](../development/element-queries.md) with advanced sorting and filtering capabilities;
 - Bi-directional [relationships](relations.md);

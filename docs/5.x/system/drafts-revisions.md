@@ -1,3 +1,7 @@
+---
+description: Propose and track changes to your content with powerful workflow tools.
+---
+
 # Drafts & Revisions
 
 Craft supports a variety of publishing workflows through sophisticated permissions and version-tracking systems.

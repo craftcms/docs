@@ -384,6 +384,8 @@ Depending on your section’s settings, can perform some or all of the following
 If you leave the **Post Date** blank, Craft will automatically set it the first time an entry is saved as enabled.
 :::
 
+<See path="../../system/drafts-revisions.md" />
+
 ### Entry Creation
 
 As soon as you click **New entry**, Craft creates an empty entry, and redirects you to its edit screen. This gives the system a place to auto-save your edits—effectively a new entry represented only as a [draft](#drafts). Internally, this is called a “fresh” entry.

@@ -16,15 +16,15 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
 2. **Is it an element request?**
 
-    If the URI matches an [element](elements.md)’s URI, Craft lets the element decide how to route the request. For example, if an [entry](../reference/element-types/entries.md)’s URI is requested, Craft will render the template specified in its section’s settings, automatically injecting an [`entry` variable](../reference/twig/global-variables.md#other-elements).
+    If the URI matches an [element](elements.md)’s URI, Craft lets the element decide how to route the request. For example, if an [entry](../reference/element-types/entries.md)’s URI is requested, Craft will render the template specified in its section’s settings, automatically injecting an [`entry` variable](../reference/twig/global-variables.md#other-elements). Only elements that are enabled and [live](drafts-revisions.md#statuses-visibility) are eligible for matching in this way.
 
     Whenever an element is saved, its URI is rendered and stored in the `elements_sites` database table.
 
     ::: tip
-    Modules and plugins can re-map an element’s route to a different controller using the [EVENT_SET_ROUTE](craft5:craft\base\Element::EVENT_SET_ROUTE) event.
+    Modules and plugins can re-map an element’s route to a custom controller using the [EVENT_SET_ROUTE](craft5:craft\base\Element::EVENT_SET_ROUTE) event to gather and organize additional data, or output it as a different content-type.
     :::
 
-3. **Does the URI match a route or URI rule?**
+3. **Does the URI match a route or rule?**
 
     If the URI matches any [dynamic routes](#dynamic-routes) or [URI rules](#advanced-routing-with-url-rules), the template or controller action specified by it will get loaded.
 
@@ -33,7 +33,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
     Craft will check if the URI is a valid [template path](../development/templates.md#template-paths). If it is, Craft will render the matched template.
 
     ::: tip
-    If any of the URI segments begin with an underscore (e.g. `blog/_archive/index`), Craft will skip this step.
+    If any of the URI segments begin with an underscore (e.g. `blog/_archive/index`), Craft will skip this step. Similarly, [hidden templates](../development/templates.md#hidden-templates) are not matched.
     :::
 
 5. **404**
@@ -52,7 +52,7 @@ If [Dev Mode](config5:devMode) is enabled, an error report for the exception wil
 
 ## Dynamic Routes
 
-In some cases, you may want a URL to load a template, but its location in your `templates/` folder doesn’t agree with the URI (therefore bypassing step #4), or the URI itself is dynamic.
+In some cases, you may want a URL to load a template, but its location in your `templates/` folder doesn’t agree with the URI (therefore bypassing step #4), or the URI itself is “dynamic” or parameterized.
 
 A good example of this is a yearly archive page, where you want a year to be one of the segments in the URL (e.g. `blog/archive/2018`). Creating a static route or template for every year would be impractical—instead, you can define a single route with placeholders for dynamic values:
 

@@ -211,6 +211,7 @@ module.exports = {
             "system/control-panel",
             "system/user-management",
             "system/elements",
+            "system/drafts-revisions",
             "system/fields",
             "system/relations",
             "system/sites",
