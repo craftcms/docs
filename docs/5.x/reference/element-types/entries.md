@@ -400,7 +400,7 @@ The entry editing lifecycle is designed to provide authors clear, actionable inf
 
 ### Drafts
 
-As soon as you alter a field on an entry, Craft auto-saves the changes as a _provisional draft_.
+As soon as you alter a field on an entry, Craft auto-saves the changes as a [provisional draft](../../system/drafts-revisions.md#provisional-drafts).
 
 ![Screenshot of an entry with unsaved changes](../../images/entries-edit-provisional.png)
 
