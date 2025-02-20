@@ -59,33 +59,6 @@ db
 
 Lists the caches that can be flushed.
 
-## `ckeditor/convert`
-
-Converts existing fields to CKEditor
-
-<h3 id="ckeditor-convert-matrix">
-    <a href="#ckeditor-convert-matrix" class="header-anchor">#</a>
-    <code>ckeditor/convert/matrix</code>
-</h3>
-
-
-Converts a Matrix field to CKEditor
-
-<h4 id="ckeditor-convert-matrix-parameters" class="command-subheading">Parameters</h4>
-
-fieldHandle
-: 
-
-
-
-<h3 id="ckeditor-convert-redactor">
-    <a href="#ckeditor-convert-redactor" class="header-anchor">#</a>
-    <code>ckeditor/convert/redactor</code>
-</h3>
-
-
-Converts Redactor fields to CKEditor
-
 ## `clear-caches`
 
 Allows you to clear various Craft caches.
