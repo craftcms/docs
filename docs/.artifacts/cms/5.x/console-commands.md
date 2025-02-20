@@ -59,6 +59,33 @@ db
 
 Lists the caches that can be flushed.
 
+## `ckeditor/convert`
+
+Converts existing fields to CKEditor
+
+<h3 id="ckeditor-convert-matrix">
+    <a href="#ckeditor-convert-matrix" class="header-anchor">#</a>
+    <code>ckeditor/convert/matrix</code>
+</h3>
+
+
+Converts a Matrix field to CKEditor
+
+<h4 id="ckeditor-convert-matrix-parameters" class="command-subheading">Parameters</h4>
+
+fieldHandle
+: 
+
+
+
+<h3 id="ckeditor-convert-redactor">
+    <a href="#ckeditor-convert-redactor" class="header-anchor">#</a>
+    <code>ckeditor/convert/redactor</code>
+</h3>
+
+
+Converts Redactor fields to CKEditor
+
 ## `clear-caches`
 
 Allows you to clear various Craft caches.
@@ -138,14 +165,6 @@ Clears the caches.
 <h3 id="clear-caches-transform-indexes">
     <a href="#clear-caches-transform-indexes" class="header-anchor">#</a>
     <code>clear-caches/transform-indexes</code>
-</h3>
-
-
-Clears the caches.
-
-<h3 id="clear-caches-twigpack-manifest-cache">
-    <a href="#clear-caches-twigpack-manifest-cache" class="header-anchor">#</a>
-    <code>clear-caches/twigpack-manifest-cache</code>
 </h3>
 
 
