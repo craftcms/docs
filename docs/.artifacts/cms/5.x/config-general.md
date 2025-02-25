@@ -3222,11 +3222,9 @@ Defined by
 
 </div>
 
-By default, Craft requires a front-end “password” field for public user registrations. Setting this to `true`
-removes that requirement for the initial registration form.
-
-If you have email verification enabled, new users will set their password once they’ve followed the verification link in the email.
-If you don’t, the only way they can set their password is to go through your “forgot password” workflow.
+By default, Craft requires a front-end “password” field for public user registrations. Setting this to
+`true` removes that requirement for the initial registration form. Instead, new users will set their password
+once they’ve followed the link in their activation email.
 
 ::: code
 ```php Static Config
