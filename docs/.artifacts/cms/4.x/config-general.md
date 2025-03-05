@@ -250,7 +250,7 @@ Defined by
 
 The default length of time Craft will store data, RSS feed, and template caches.
 
-If set to `0`, data and RSS feed caches will be stored indefinitely; template caches will be stored for one year.
+If set to `0`, data and RSS feed caches will be stored indefinitely.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
