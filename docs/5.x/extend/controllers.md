@@ -211,14 +211,14 @@ Perform request validation in your controller’s `beforeAction()` method to enf
 Craft requires a valid [CSRF token](../development/forms.md#csrf) for any <badge vertical="baseline" type="verb">POST</badge> requests. This can be disabled for an entire controller by overriding its `$enableCsrfValidation` property, or just for a specific action:
 
 ```php
-public function beforeAction($actionId): bool
+public function beforeAction($action): bool
 {
     // Don’t require a CSRF token for incoming webhooks:
-    if ($actionId === 'receive-webhook') {
+    if ($action->id === 'receive-webhook') {
         $this->enableCsrfValidation = false;
     }
 
-    return parent::beforeAction($actionId);
+    return parent::beforeAction($action);
 }
 ```
 
