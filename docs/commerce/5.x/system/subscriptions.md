@@ -62,10 +62,10 @@ $mySubscriptionQuery = \craft\commerce\elements\Subscription::find();
 ```
 :::
 
-Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](/4.x/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Subscription](commerce4:craft\commerce\elements\Subscription) objects will be returned.
+Once you’ve created a subscription query, you can set [parameters](#parameters) on it to narrow down the results, and then [execute it](/5.x/development/element-queries.md#executing-element-queries) by calling `.all()`. An array of [Subscription](commerce4:craft\commerce\elements\Subscription) objects will be returned.
 
 ::: tip
-See [Element Queries](/4.x/element-queries.md) in the Craft docs to learn about how element queries work.
+See [Element Queries](/5.x/development/element-queries.md) in the Craft docs to learn about how element queries work.
 :::
 
 ### Example

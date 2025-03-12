@@ -7,7 +7,7 @@ To capture live payments, you must install a [payment gateway plugin](#first-par
 In the control panel, navigate to **Commerce** → **Settings** → **Gateways**, and click **+ New gateway**. Each gateway requires different settings—for more detailed instructions, see the plugin’s documentation. Many payment processors require third-party accounts, and provide credentials for communicating with their infrastructure that must be added to the gateway’s configuration.
 
 ::: tip
-When providing secrets in the control panel, we recommend using the special [environment variable syntax](/4.x/config/README.md#control-panel-settings) to prevent them leaking into project config.
+When providing secrets in the control panel, we recommend using the special [environment variable syntax](/5.x/configure.md#control-panel-settings) to prevent them leaking into project config.
 :::
 
 Payment gateways (and the specific methods they support) generally use one of two payment flows:

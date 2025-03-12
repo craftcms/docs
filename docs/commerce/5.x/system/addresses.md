@@ -5,7 +5,7 @@ sidebarDepth: 2
 # Addresses
 
 ::: tip
-Addresses are now a native part of Craft! We recommend reviewing the [main documentation on addresses](/4.x/addresses.md) before digging in on Commerce-specifics.
+Addresses are now a native part of Craft! We recommend reviewing the [main documentation on addresses](/5.x/addresses.md) before digging in on Commerce-specifics.
 :::
 
 Commerce manages shipping and billing information using Craft’s <craft4:craft\elements\Address> element type.
