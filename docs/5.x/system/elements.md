@@ -154,8 +154,8 @@ A card’s thumbnail can come from any field that implements <craft5:craft\base\
 
 Craft ships with two native _nested element_ implementations, which provide unique authoring or administrative experiences:
 
-- [**Matrix field**](../reference/field-types/matrix.md) — Create dynamic or repeatable content sections, or manage 
-- [**Addresses**](../reference/element-types/addresses.md) and [**Address fields**](../reference/field-types/addresses.md) — 
+- [**Entries**](../reference/element-types/entries.md) and the [**Matrix field**](../reference/field-types/matrix.md) — Create dynamic or repeatable content sections, or manage any kind of records that belong to a single owner.
+- [**Addresses**](../reference/element-types/addresses.md) and the [**Address fields**](../reference/field-types/addresses.md) — Capture region-aware location information.
 
 While [relationships](relations.md) are supported by every element type, only addresses and entries are eligible for nesting. Plugins may use the nested element interface to provide other functionality, like Commerce’s product and variant system.
 
