@@ -299,6 +299,10 @@ return [
 ];
 ```
 
+::: tip
+To send a user to the homepage, use an empty string (`''`) for the `to` value.
+:::
+
 Rules can contain [parameters](#advanced-routing-with-url-rules), as well:
 
 ```php
@@ -315,6 +319,12 @@ If you need complete control over the matching _and_ redirection logic, create a
 return [
     [
         'match' => function (\Psr\Http\Message\UriInterface $url): ?string {
+            // Match a path:
+            if ($url->getPath() !== 'customer_order.aspx') {
+                return null;
+            }
+
+            // Or test for the presence of a query parameter:
             parse_str($url->getQuery(), $params);
 
             if (!isset($params['orderId'])) {
@@ -328,4 +338,26 @@ return [
 ];
 ```
 
-You may return `null` from a match callback to skip the rule and continue processing.
+You may return `null` from a match callback to skip the rule and continue processing. Callbacks are only invoked if all previous rules fail to match.
+
+#### Multi-Site Redirection
+
+Unlike routes, redirection rules are processed globally, and matched against full paths. For example, a rule like `old/page` would _not_ catch a request path beginning with a site’s base path, like `/secondary-site/old/page`. You may parameterize rules to match multiple sites’ base paths (i.e: `<site:{slug}>/old/page`), or define individual rules for each relevant site.
+
+However, as part of Craft’s normal routing behavior, every front-end request is handled in the context of a site—typically one with the correct hostname and the longest matching base path, or the “default” site when none match. When a redirect rule is evaluated, its `to` value is treated as site-relative, meaning this rule…
+
+```php
+return [
+    'corporate/team' => 'about-us',
+];
+```
+
+…behaves differently depending on whether or not a site exists with the base path `corporate`. _Without_, it would redirect normally (`/corporate/team` to `/about-us`), but _with_, requests to `/corporate/team` would actually end up at `/corporate/about`, because Craft tried to route the request in the “Corporate” site context.
+
+To avoid this ambiguity, prefix the destination with a slash (`/`) to make it an “absolute” path:
+
+```php
+return [
+    'corporate/team' => '/about-us',
+];
+```
