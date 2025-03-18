@@ -61,7 +61,7 @@ Regenerates [catalog pricing](../system/pricing-rules.md) data for all purchasab
 Run this command at an interval (via CRON or another task scheduler) to ensure pricing is calculated at an interval that makes sense for your storefront.
 
 ```
-0 0 * * * /usr/bin/env php /path/to/craft commerce/catalog-pricing/generate
+0 0 * * * /usr/bin/env php /path/to/craft commerce/pricing-catalog/generate
 ```
 
 ::: warning
