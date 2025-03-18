@@ -429,7 +429,7 @@ Any changes you make to the Mailer component from `config/app.php` will not be r
 
 ### Queue
 
-Craft’s job queue is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default, Craft will use a [custom queue driver](craft5:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md).
+Craft’s [queue](../../system/queue.md) is powered by the [Yii2 Queue Extension](https://github.com/yiisoft/yii2-queue). By default, Craft will use a [custom queue driver](craft5:craft\queue\Queue) based on the extension’s [DB driver](https://github.com/yiisoft/yii2-queue/blob/master/docs/guide/driver-db.md).
 
 Switching to a different driver by overriding Craft’s `queue` component from `config/app.php` will result in a loss of visibility into the queue’s state from the control panel. Instead of replacing the entire component, set your custom queue driver config on <craft5:craft\queue\Queue::$proxyQueue>:
 
@@ -459,7 +459,27 @@ Only drivers that implement <craft5:craft\queue\QueueInterface> will be visible 
 :::
 
 ::: tip
-If your queue driver supplies its own worker, set the <config5:runQueueAutomatically> config setting to `false` in `config/general.php`.
+If your queue driver supplies its own [worker](../../system/queue.md#workers), set the <config5:runQueueAutomatically> config setting to `false` in `config/general.php`.
+:::
+
+For projects that spawn many long-running jobs (as is often the case when synchronizing content from other sources), you may wish to extend the default job `ttr` or _time to reserve_:
+
+```php
+
+return [
+    'components' => [
+        'queue' => [
+            // Allow individual jobs to run for 15 minutes:
+            'ttr' => 900,
+        ],
+    ],
+];
+```
+
+This does not prevent plugins or modules from pushing jobs with a shorter `ttr`, but Craft will respect it for all built-in queue usage.
+
+::: warning
+[Daemonized queue runners](../../system/queue.md#daemon) should be configured to allow the full `ttr` duration before issuing a `KILL` signal.
 :::
 
 ### Mutex

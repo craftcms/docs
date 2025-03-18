@@ -66,9 +66,10 @@ We recommend ImageMagick over GD for expanded [image handling options](developme
 
 Some shared hosting environments disable common PHP methods and configurations that affect Craft features.
 
-- [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) must be enabled for updating and installing plugins from the Plugin Store.
-- [proc_*](http://php.net/manual/en/ref.exec.php) methods must be enabled in order to utilize the Plugin Store, install updates, and send emails.
-- [ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) must be enabled for the [default, web-based queue runner](config5:runQueueAutomatically) to operate.
+- [allow_url_fopen](http://php.net/manual/en/filesystem.configuration.php#ini.allow-url-fopen) — This `ini` setting must be enabled to support updating and installing plugins from the Plugin Store.
+- [proc_*](http://php.net/manual/en/ref.exec.php) — These methods are required in order to utilize the Plugin Store, install updates, and send emails.
+- [ignore_user_abort](https://www.php.net/manual/en/function.ignore-user-abort.php) — Required when using the default [web-based queue runner](system/queue.md#http) to operate.
+- [pcntl_*](https://www.php.net/manual/en/book.pcntl.php) — The _Process Control_ extension allows [daemonized queue runners](system/queue.md#daemon) to gracefully exit between jobs.
 
 ## File Permissions
 
