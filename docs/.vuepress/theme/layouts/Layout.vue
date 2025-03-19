@@ -5,6 +5,12 @@
     @touchstart="onTouchStart"
     @touchend="onTouchEnd"
   >
+    <span ref="backToTop" tabindex="-1" />
+    <ul class="skip-links">
+      <li>
+        <a @click="handleSkipLink" href="#content" class="skip-link">Skip to main content</a>
+      </li>
+    </ul>
     <div id="nprogress-container"></div>
     <div class="sidebar-mask" @click="toggleSidebar(false)" />
     <LeftBar
@@ -31,6 +37,7 @@
         </div>
       </div>
       <Page
+        ref="pageContent"
         :sidebar-items="sidebarItems"
         :heading-items="headingItems"
         :is-dark="isDark"
@@ -177,6 +184,12 @@ export default {
     RightBar,
     SearchBox,
     Hamburger,
+  },
+
+  watch: {
+    $route() {
+      this.$refs.backToTop.focus()
+    }
   },
 
   data: () => ({
@@ -356,6 +369,18 @@ export default {
       this.temporarilyAnimateBody();
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
       this.$emit("toggle-sidebar", this.isSidebarOpen);
+    },
+
+    handleSkipLink(event) {
+      event.preventDefault();
+
+      const {target} = event;
+      console.log(target);
+      const skipLinkTarget = this.$el.querySelector(target.getAttribute('href'));
+
+      if (skipLinkTarget) {
+        skipLinkTarget.focus({focusVisible: false});
+      }
     },
 
     handleWidthChange() {

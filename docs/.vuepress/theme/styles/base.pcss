@@ -18,6 +18,8 @@
   --custom-block-bg-color: theme("colors.softer");
   --custom-block-border-color: theme("colors.soft");
   --craft-red: #e5422b;
+  --white: theme("colors.white");
+  --black: theme("colors.black");
 }
 
 html {
@@ -51,6 +53,28 @@ body {
 
 a {
   @apply text-blue no-underline;
+}
+
+.skip-links {
+  list-style: none;
+}
+
+.skip-link {
+  white-space: nowrap;
+  margin: 1em auto;
+  top: 0;
+  position: fixed;
+  left: 50%;
+  margin-left: -72px;
+  opacity: 0;
+}
+
+.skip-link:focus {
+  opacity: 1;
+  z-index: 100;
+  background-color: var(--white);
+  padding: 0.5em;
+  border: 1px solid var(--black);
 }
 
 img {
