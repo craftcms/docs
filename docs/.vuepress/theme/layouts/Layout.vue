@@ -37,7 +37,6 @@
         </div>
       </div>
       <Page
-        ref="pageContent"
         :sidebar-items="sidebarItems"
         :heading-items="headingItems"
         :is-dark="isDark"
@@ -373,9 +372,7 @@ export default {
 
     handleSkipLink(event) {
       event.preventDefault();
-
       const {target} = event;
-      console.log(target);
       const skipLinkTarget = this.$el.querySelector(target.getAttribute('href'));
 
       if (skipLinkTarget) {
