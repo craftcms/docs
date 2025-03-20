@@ -10,6 +10,8 @@
         :sidebar-depth="sidebarDepth"
         :depth="depth"
         :fixed-heading="fixedHeading"
+        :fixed-heading-id="fixedHeadingId"
+        :heading-level="headingLevel"
         @toggle="toggleGroup(i)"
       />
       <ToggleSidebarGroup
@@ -69,6 +71,12 @@ export default {
     fixedHeading: {
       type: String
     },
+    fixedHeadingId: {
+      type: String
+    },
+    headingLevel: {
+      type: String
+    }
   },
 
   data() {

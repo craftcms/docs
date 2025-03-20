@@ -1,5 +1,6 @@
 <template>
-  <aside class="left-bar">
+  <nav class="left-bar" aria-labelledby="main-nav-heading">
+    <h2 id="main-nav-heading" class="sr-only">Sidebar</h2>
     <div class="wrap">
       <div id="top" class="h-12 flex items-center">
         <RouterLink :to="`/`" ref="siteName" class="site-name font-bold px-4 mt-1">{{ $siteTitle }}</RouterLink>
@@ -63,7 +64,7 @@
         </div>
       </transition>
     </div>
-  </aside>
+  </nav>
 </template>
 
 <style lang="postcss">
