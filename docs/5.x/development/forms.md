@@ -267,7 +267,7 @@ When sending a JSON payload in the body of a request, you _must_ use an action p
 
 In [headless](config5:headlessMode) mode, and when using [actions](#actions) or otherwise site-agnostic routes (i.e. configured via the [Element API](plugin:element-api) plugin), Craft uses the [primary site](../system/sites.md#primary-site), by default. This means that element queries, static message translations, emails, and other language-dependent features may be handled in unexpected ways.
 
-Send a valid site ID or handle under the `X-Craft-Site` header to tell Craft that it should handle the request in the context of a specific site:
+Send a valid site ID or handle under the `X-Craft-Site` header <Since ver="5.6.0" feature="The X-Craft-Site header" /> to tell Craft that it should handle the request in the context of a specific site:
 
 ```js{8}
 // Assuming there is a matching Element API route configured...
