@@ -2019,7 +2019,7 @@ Defined by
 
 </div>
 
-The URL to the root directory that should store published control panel resources.
+The URL to stored control panel resources.
 
 ::: code
 ```php Static Config
