@@ -1577,6 +1577,15 @@ CRAFT_TRANSLATION_DEBUG_OUTPUT=true
 ```
 :::
 
+The symbols are as follows:
+
+| Symbol | Example | Category |
+| `$` | `$Date Field$` | Site |
+| `@` | `@Entry Type@` | Application |
+| `%` | `%Object Template% | Other (plugin or custom source) |
+
+Translations _may_ be nested or surrounded by multiple symbols.
+
 
 
 ### `useEmailAsUsername`
