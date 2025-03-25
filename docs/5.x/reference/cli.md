@@ -9,6 +9,10 @@ containsGeneratedContent: yes
 
 The complete list of available commands will include those from any plugins or custom modules you’ve added to your project. Only those that are present by default in all Craft installations are listed below.
 
+::: tip
+Run `ddev craft help` to see a list of commands your project supports.
+:::
+
 ### Global Options
 
 All commands support the following options:

@@ -1,4 +1,5 @@
 ---
+description: Customize and extend core application components.
 related:
   - uri: ../../configure.md
     label: Configuring Craft
@@ -25,6 +26,8 @@ Of course, this power comes with a greater risk of misconfiguration. Some compon
 ::: tip
 Keep in mind that even when Craft doesn’t provide “defaults” explicitly in its own `app.php` config files (or config helper methods), the underlying component classes may have default property values—or even compute defaults based on other values.
 :::
+
+You may place configuration directly in `config/app.php`, or use `config/app.web.php` or `config/app.console.php` to apply it specifically to one app context. Defining options in the global space may cause errors for components that Craft itself only uses in one context or the other!
 
 ### Static
 

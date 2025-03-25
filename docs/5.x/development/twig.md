@@ -15,30 +15,35 @@ Let’s take a look at how it works.
 
 ## Types of Twig code
 
-Twig templates are HTML files that are sprinkled with bits of Twig code. When Twig loads a template, the first thing it will do is separate the raw HTML code from the Twig code. The raw HTML code will be output to the browser without any tampering.
+Twig templates are HTML files that are sprinkled with bits of logic. When Twig loads a template, the first thing it does is identify which parts of the file represent Twig code.
 
-All Twig code follows a basic pattern that separates it from the surrounding HTML. At its outer edges you will find left and right curly braces (`{` and `}`), coupled with another character that signifies what _type_ of Twig code it is. These sets of characters are called “delimiters”.
+All Twig code follows a basic pattern that separates it from the surrounding HTML. At its outer edges you will find left and right curly braces (`{` and `}`), coupled with another character that signifies what type of Twig expression it expects to be inside. These pairs of characters are called _delimiters_.
 
-There are three types of delimiters that Twig looks out for:
+There are three types of delimiters that Twig parses:
 
-- `{#` – [Comments](#comments)
-- `{%` – [Tags](#tags)
-- `{{` – [Print statements](#print-statements)
+- `{# ... #}` – [Comments](#comments)
+- `{% ... %}` – [Tags](#tags)
+- `{{ ... }}` – [Print statements](#print-statements)
 
 ### Comments
 
 Twig comments are wrapped in `{#` and `#}` delimiters. You can use them to leave little notes for yourself in the code.
 
-They are similar to HTML comments in that they won’t show up as rendered text in the browser. The difference is that they will never make it into the HTML source in the first place.
+They are similar to HTML comments in that they won’t show up as rendered text in the browser—but _Twig_ comments are stripped from the HTML output:
 
-```twig
-<!-- This will be visible in the HTML source -->
+::: code
+```twig Template
+<!-- This will be visible in the HTML source! -->
 {# This won’t! #}
 ```
+```html Output
+<!-- This will be visible in the HTML source! -->
+```
+:::
 
 ### Tags
 
-Twig tags are wrapped in `{%` and `%}` delimiters, and are used to define the _logic_ of your template, such as conditionals, loops, variable definitions, template includes, and other things.
+Twig tags are wrapped in `{%` and `%}` delimiters, and are used to define the _logic_ of your template, such as conditionals, loops, variable definitions, template includes, and other instructions.
 
 The syntax within the `{%` and `%}` delimiters varies from tag to tag, but they will always start with the same thing: the name of the tag.
 
@@ -68,9 +73,9 @@ Some tags can have nested tags _between_ the opening and closing tags:
 
 ```twig
 {% if currentUser %}
-  <a href="/logout">Logout</a>
+  <a href="{{ logoutUrl }}">Logout</a>
 {% else %}
-  <a href="/login">Login</a>
+  <a href="{{ loginUrl }}">Login</a>
 {% endif %}
 ```
 
@@ -78,7 +83,7 @@ Refer to the [Tags](../reference/twig/tags.md) page for a full list of tags avai
 
 ### Print Statements
 
-To output dynamic values, use a print statement. Print statements are opened and closed with `{{` and `}}` delimiters, respectively, can contain any valid Twig expression—so long as it produces something that can be treated as a [string](#strings).
+To output dynamic values, use a print statement. Print statements are opened and closed with `{{` and `}}` delimiters, respectively, and can contain any valid Twig expression—so long as it produces something that can be treated as a [string](#strings).
 
 ```twig
 <p>Hi, {{ currentUser.name }}</p>

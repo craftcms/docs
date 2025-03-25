@@ -1,5 +1,5 @@
 ---
-description: Reference
+description: Customize your project’s directory structure and other low-level behaviors.
 related:
   - uri: ../../configure.md
     label: Configuring Craft
