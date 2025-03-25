@@ -358,6 +358,10 @@ While abbreviated, this “user profile” form contains all the patterns requir
 ```
 :::
 
+::: tip
+Note that we’re outputting errors from the `user` object (in `account.twig`) as well as any success or failure [flashes](#flashes) (in `_layouts/default.twig`).
+:::
+
 The same principles apply to anything else you want to make editable in the front-end, so long as the user has the correct permissions. Take a look at the [public registration forms](kb:front-end-user-accounts) for some examples of validation on forms available to guests—and to learn about some nice abstractions that will help reduce repetition in your form markup!
 
 #### Flashes
@@ -463,7 +467,7 @@ Inspecting the HTML output, you’ll see your template exactly as provided. Why 
 
 For JSON responses, redirection does’t make as much sense—so Craft will include the resolved `redirect` value for your client to navigate programmatically (say, via `window.location = resp.redirect`).
 
-In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response)—either a specific message from Craft, or one provided in the request via the [globally-supported `successMessage` param](../reference/controller-actions.md#global-params). Additional action-specific properties are also returned at the top level of the response object.
+In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response)—either a specific message from Craft, or one provided in the request via the [globally-supported `successMessage` param](../reference/controller-actions.md#globally-supported-params). Additional action-specific properties are also returned at the top level of the response object.
 
 ### Failure
 
