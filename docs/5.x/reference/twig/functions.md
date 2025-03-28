@@ -924,7 +924,7 @@ You can also specify a custom class name that should be added to the root `<svg>
 ```
 
 ::: tip
-Consider caching the output, especially if you’re loading SVG files from remote volumes or URLs, so Craft doesn’t download the file each time your template is rendered.
+Consider caching the output, especially if you’re loading SVG files from a remote volume, so Craft doesn’t download the file each time your template is rendered.
 :::
 
 ## `tag`
