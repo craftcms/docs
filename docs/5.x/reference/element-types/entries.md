@@ -6,6 +6,7 @@ related:
     label: Introduction to Elements
   - uri: ../field-types/entries.md
     label: Entries Fields
+sidebarDepth: 2
 ---
 
 # Entries
@@ -461,6 +462,12 @@ Notifications will appear in the bottom-left corner along with other flashes, an
 ::: tip
 Automatic merging of changes from canonical entries is nondestructive, and non-optional. Merging occurs just before an entry’s edit screen is viewed.
 :::
+
+### Copying Entries <Since ver="5.7.0" feature="Copying entries" />
+
+Entries can be copied and pasted between sections and fields that support the given type(s).
+
+<See path="../../system/elements.md" hash="copying-elements" label="Copying Elements" description="Learn how to copy entries and other elements between contexts." />
 
 ## Querying Entries
 

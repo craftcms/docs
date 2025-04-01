@@ -62,6 +62,8 @@ Craft is adamantly agnostic about your content model, and comes with no predefin
 
 Content can be a great deal more than text, too! Craft has a number of built-in [field types](../reference/field-types/README.md) that provide a highly-customizable authoring and developer experience.
 
+<See path="fields.md" />
+
 ## Indexes
 
 You’ll access most elements via their element index. Indexes allow you to browse, sort, filter, and [search](searching.md) for elements in a paginated, table-like view.
@@ -148,6 +150,30 @@ An element’s **Title** and **Status** are always visible, and the presence of 
 
 ::: tip
 A card’s thumbnail can come from any field that implements <craft5:craft\base\ThumbableFieldInterface> (like [assets](../reference/field-types/assets.md) or [icon](../reference/field-types/icon.md) fields), or be “inherited” from another element via a [relational field](relations.md).
+:::
+
+### Copying Elements <Since ver="5.7.0" feature="Copying elements" />
+
+[Entries](../reference/element-types/entries.md) and [addresses](../reference/element-types/addresses.md) can by copied-and-pasted between sections and fields. Open the action menu <Icon kind="ellipses" /> on any chip, card, or inline nested entry and select **Copy <Placeholder help="A built-in or plugin-provided element type.">element type</Placeholder>**:
+
+![Screenshot](../images/entries-copy-action.png)
+
+From an element index, you can copy multiple elements by selecting any number of rows, then pressing **Copy** from the element actions menu <Icon kind="settings" /> in the bottom toolbar.
+
+Only one group of elements can be copied at a time—copying another element or group of elements will replace whatever was previously copied. Craft will display a notification on every control panel screen, until you press **Cancel** (or paste it somewhere else).
+
+![Screenshot](../images/entries-copy-notification.png)
+
+When pasting an element, you will see a notification confirming the element has been “duplicated” into the new context.
+
+You can paste elements anywhere the special **Paste** button appears. The eligible targets are determined by the type of copied element—addresses are portable between user address books and custom fields; entries can only be pasted into fields and sections that support the copied element’s entry type.
+
+![Screenshot](../images/entries-copy-target.png)
+
+The **Paste** button is displayed in the same row as the **Add** button for nested element interfaces; on an element index, it is displayed in the bottom toolbar, where the element action <Icon kind="settings" /> menu would be.
+
+::: warning
+A copied [draft](drafts-revisions.md) (provisional or otherwise) is pasted as a _canonical_ element, with the pending changes applied.
 :::
 
 ## Nested Elements
