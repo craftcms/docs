@@ -7,8 +7,8 @@ module.exports = {
   versions: [
     ["5.x", { label: "5.x" }],
     ["4.x", { label: "4.x" }],
-    ["3.x", { label: "3.x" }],
-    ["2.x", { label: "2.x", isEol: true }]
+    ["3.x", { label: "3.x", isEol: true }],
+    ["2.x", { label: "2.x", isEol: true }],
   ],
   defaultVersion: "5.x",
   abandoned: false,
