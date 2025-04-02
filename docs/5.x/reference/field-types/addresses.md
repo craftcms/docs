@@ -16,7 +16,7 @@ Address fields are separate from users’ [address book](../element-types/users.
 <img src="../../images/fields-addresses.png" alt="Screenshot of addresses field with two nested address elements" />
 </BrowserShot>
 
-Addresses can be copied user-to-user, and field-to-field.
+Addresses can be [copied](../../system/elements.md#copying-elements) between fields, and to or from users’ address books. <Since ver="5.7.0" feature="Copying-and-pasting address elements" />
 
 ## Settings
 
