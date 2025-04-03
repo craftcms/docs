@@ -127,8 +127,9 @@ Sections organize and expose [entry types](#entry-types) for content authors. In
 - Whether entries in the section have URLs;
 - What the entries’ URLs should look like;
 - Which template should get loaded if an entry’s URL is requested;
+- What preview targets are available to authors;
 - What [entry types](#entry-types) are available in the section;
-- How many authors can be associated with each entry;
+- How many authors can be associated with each entry (or disable authors <Since ver="5.7.0" feature="Authorless sections" />);
 
 If your project has multiple [sites](../../system/sites.md), your section can define these additional settings:
 
