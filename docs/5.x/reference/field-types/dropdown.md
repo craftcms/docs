@@ -116,9 +116,6 @@ To loop through all of the available options, iterate over the [options](craft5:
 {% endfor %}
 ```
 
-#### Icons and Colors
-
-
 
 ### Saving Dropdown Fields
 
