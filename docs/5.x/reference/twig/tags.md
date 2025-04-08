@@ -550,7 +550,7 @@ That would result in:
 ```
 
 ::: tip
-This tag works identically to the [namespace](filters.md#namespace) filter, except that it will call <craft5:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
+This tag works identically to the [namespace](filters.md#namespace-or-ns) filter, except that it will call <craft5:craft\web\View::setNamespace()> at the beginning, so any PHP code executed within it can be aware of what the nested IDs will become.
 :::
 
 ## `nav`
