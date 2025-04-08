@@ -26,7 +26,12 @@ Checkboxes fields give you a group of [checkbox](https://developer.mozilla.org/e
 
 In addition to the standard field options, checkboxes fields have the following settings:
 
-- **Checkbox Options** – Define the options that will be available to authors. Each option contains a **Label** (shown to the author) and a **Value** (saved to the database), as well as a checkbox indicating whether it should be selected by default.
+- **Checkbox Options** – Define the options that will be available to authors. Each option contains…
+  - **Label** — A text description of the option, displayed to the author.
+  - **Value** — The value stored when a given option is checked.
+  - **Icon** (Optional) — Choose from the standard system icon palette.
+  - **Color** (Optional) — A color for the icon, or, when no icon is selected, a color pip.
+  - **Default?** — Whether the option should be checked by default.
 - **Allow custom options** <Since ver="5.5.0" feature="Custom options" /> — Whether authors can provide “other” options, on-the-fly.
 
 ## Development

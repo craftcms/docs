@@ -24,36 +24,15 @@ Radio buttons fields give you a group of [radio](https://developer.mozilla.org/e
 
 In addition to the standard field options, radio buttons fields have the following settings:
 
-- **Radio Button Options** — Define the options that will be available to authors. Each option contains a **Label** (shown to the author) and a **Value** (saved to the database), as well as a checkbox indicating whether it should be selected by default.
+- **Radio Button Options** — Define any number of options to populate the menu.
+  - **Label** — A text description of the option, displayed to the author.
+  - **Value** — The value stored when a given option is selected.
+  - **Icon** (Optional) — Choose from the standard system icon palette.
+  - **Color** (Optional) — A color for the icon, or, when no icon is selected, a color pip.
+  - **Default?** — One option can be marked as the default.
 - **Allow custom options** — Whether authors can define an “other” option, on-the-fly.
 
 ## Development
-
-### Querying Elements with Radio Buttons Fields
-
-When [querying for elements](element-queries.md) that have a radio buttons field, you can filter the results using a query param named after your field’s handle. Possible values include:
-
-| Value | Fetches elements…
-| - | -
-| `'foo'` | with the `foo` option selected (or a custom value of `foo`).
-| `'not foo'` | without the `foo` option selected (or a custom value of `foo`).
-| `['foo', 'bar']` | with either the `foo` or `bar` options selected (or a custom value of `foo`).
-| `['not', 'foo', 'bar']` | without either the `foo` or `bar` options selected (or a custom value of `foo`).
-
-::: code
-```twig
-{# Fetch entries with the 'foo' option selected #}
-{% set entries = craft.entries()
-  .myRadioFieldHandle('foo')
-  .all() %}
-```
-```php
-// Fetch entries with the 'foo' option selected
-$entries = \craft\elements\Entry::find()
-    ->myRadioFieldHandle('foo')
-    ->all();
-```
-:::
 
 ### Working with Radio Buttons Field Data
 
@@ -134,26 +113,89 @@ foreach ($entry->myRadioFieldHandle->options as $option) {
 
 If the author provides a “custom” value, no `option` will be marked as `selected`.
 
+### Querying Elements with Radio Buttons Fields
+
+When [querying for elements](element-queries.md) that have a radio buttons field, you can filter the results using a query param named after your field’s handle. Possible values include:
+
+| Value | Fetches elements…
+| - | -
+| `'foo'` | with the `foo` option selected (or a custom value of `foo`).
+| `'not foo'` | without the `foo` option selected (or a custom value of `foo`).
+| `['foo', 'bar']` | with either the `foo` or `bar` options selected (or a custom value of `foo`).
+| `['not', 'foo', 'bar']` | without either the `foo` or `bar` options selected (or a custom value of `foo`).
+
+::: code
+```twig
+{# Fetch entries with the 'foo' option selected #}
+{% set entries = craft.entries()
+  .myRadioFieldHandle('foo')
+  .all() %}
+```
+```php
+// Fetch entries with the 'foo' option selected
+$entries = \craft\elements\Entry::find()
+    ->myRadioFieldHandle('foo')
+    ->all();
+```
+:::
+
 ### Saving Radio Buttons Fields
 
-In an element or [entry form](kb:entry-form) that needs to save a value to a radio buttons field, you can use this template as a starting point:
+If you have a front-end element form (such as an [entry form](kb:entry-form)) that incorporates radio button field data, you can use this fragment as a starting point:
 
 ```twig
+{# Fetch the global field definition: #}
 {% set field = craft.app.fields.getFieldByHandle('myRadioFieldHandle') %}
+{% set currentValue = entry.myRadioFieldHandle.value ?? null %}
+{% set hasCustomValue = currentValue and currentValue not in (field.options|map(o => o.value)) %}
 
 <ul>
+  {# Iterate over the defined options: #}
   {% for option in field.options %}
-    {% set selected = entry is defined
-      ? entry.myRadioFieldHandle.value == option.value
-      : option.default %}
+    {% set selected = currentValue == option.value or not currentValue and option.default %}
 
-    <li><label>
-      <input type="radio"
-        name="fields[myRadioFieldHandle]"
-        value="{{ option.value }}"
-        {% if selected %} checked{% endif %}>
-      {{ option.label }}
-    </label></li>
+    <li>
+      <label>
+        {{ input('radio', 'fields[myRadioFieldHandle]', option.value, {
+          checked: selected,
+        }) }}
+        {{ option.label }}
+      </label>
+    </li>
   {% endfor %}
+
+  {# Optional — Provide a text input for a custom value: #}
+  <li>
+    <label>
+      {{ input('radio', 'fields[myRadioFieldHandle]', '', {
+        id: 'myRadioFieldHandleOther',
+        checked: hasCustomValue,
+      }) }}
+      Other:
+      {{ input('text', 'fields[myRadioFieldHandle]', hasCustomValue ? currentValue : null, {
+        disabled: not hasCustomValue,
+        id: 'myRadioFieldHandleCustom',
+      }) }}
+    </label>
+  </li>
 </ul>
 ```
+
+Unfortunately, browsers will always send the _last_ input value among those with the same `name`. This means we need to selectively disable the text input:
+
+```twig
+<script>
+  // Connect to the form element with an ID:
+  const $form = document.getElementById('form');
+
+  // 
+  const $other = document.getElementById('myRadioFieldHandleOther');
+  const $custom = document.getElementById('myRadioFieldHandleCustom');
+
+  $form.addEventListener('change', function(e) {
+    $custom.disabled = !$other.checked;
+  });
+</script>
+```
+
+The first snippet handles initializing the pair of inputs in the correct state; JavaScript takes over and watches for changes to the form, and synchronizes them in the client.

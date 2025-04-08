@@ -121,7 +121,7 @@ You can even attach fields to the elements you relate via these fields—metadat
 
 ### Media
 
-- [Assets](assets.md) — Upload and attach files anywhere.
+- [Assets](assets.md) — Upload and attach files to anything.
 
 ### Structured
 

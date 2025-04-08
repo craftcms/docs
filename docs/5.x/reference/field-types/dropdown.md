@@ -27,7 +27,7 @@ Dropdown fields provide an enhanced version of the familiar `<select>` input. Op
 Dropdown fields have the following settings:
 
 - **Dropdown Options** — Define any number of options to populate the menu.
-  - **Label** — A text description of the option.
+  - **Label** — A text description of the option, displayed to the author.
   - **Value** — The value stored when a given option is selected.
   - **Icon** (Optional) — Choose from the standard system icon palette.
   - **Color** (Optional) — A color for the icon, or, when no icon is selected, a color pip.
