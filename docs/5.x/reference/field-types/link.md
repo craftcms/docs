@@ -58,6 +58,7 @@ In addition to the standard field options, Link fields have the following settin
   - **ID** — Content for the anchor’s `id` attribute. 
   - **Relation (rel)** — Content for the anchor’s `rel` attribute.
   - **ARIA Label** — Content for the anchor’s `aria-label` attribute.
+  - **Download** — Include the `download` attribute. This also provides authors a **Filename** field to customize the name of the file when downloaded.
 
 ### Advanced Options
 
