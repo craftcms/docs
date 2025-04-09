@@ -150,7 +150,9 @@ When a label is _not_ explicitly defined, Craft will figure out the best textual
 <a href="{{ entry.myLinkFieldHandle.value }}">{{ entry.myLinkFieldHandle.label }}</a>
 ```
 
-This is the default behavior when using a link’s `link` property. Craft also automatically includes the `target` attribute when rendering a link, if the **Open in a new tab** option is available (and enabled) for the field. You can access this manually via the `target` property:
+This is the default behavior when using a link’s `link` property. If you need to retrieve the label _as it was entered_ (bypassing Craft’s internal fallback logic), use `link.getLabel(false)`.
+
+Craft also automatically includes the `target` attribute when rendering a link, if the **Open in a new tab** option is available (and enabled) for the field. You can access this manually via the `target` property:
 
 ```twig
 {% set link = entry.myLinkFieldHandle %}
@@ -167,7 +169,7 @@ This is the default behavior when using a link’s `link` property. Craft also a
 <a href="https://custom-url.com/page" target="_blank" rel="noopener noreferrer">custom-url.com</a>
 ```
 
-When the **Open in a new tab** option is _off_, the `target` attribute is omitted.
+When the **Open in a new tab** option is _off_, the `target` attribute is omitted. Craft handles other [advanced link settings](#advanced-options) in a similar manner, across all link types.
 
 ### Relations
 
