@@ -14,11 +14,21 @@ Entries fields allow you to relate [entries](../element-types/entries.md) to oth
 
 <!-- more -->
 
+![Screenshot of the entries field interface in the Craft control panel](../../images/fields-entries-ui.png)
+
 ::: tip
-If you would like to manage a set of _nested_ entries within another element, consider using the [Matrix field](matrix.md).
+If you would like to manage a set of _nested_ entries within another element (as opposed to selecting from an external set), consider using the [Matrix field](matrix.md).
 :::
 
 ## Settings
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new entries field via the control panel.">
+<img src="../../images/fields-entries-settings.png" alt="Entries field settings screen in the Craft control panel">
+</BrowserShot>
 
 Entries fields have the following settings:
 
@@ -38,8 +48,9 @@ Entries fields have the following settings:
 
   - **Min Relations** — The minimum number of entries that must be selected when the field is marked as “required” in a field layout. (Default is no minimum.)
   - **Max Relations** — The maximum number of entries that can be selected. (Default is no maximum.)
-
-- **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
+  - **Default Entry Placement** — Whether new selections are prepended or appended to the existing relations.
+  - **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
+- **Show cards in a grid** — When using the **Cards** view mode, this setting allows cards to tile horizontally, as space allows.
 - **“Add” Button Label** — The label that should be used on the field’s selection button.
 
 ### Advanced Settings
