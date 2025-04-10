@@ -44,6 +44,7 @@ In addition to the standard field options, Link fields have the following settin
   - **Email** — The value is automatically prepended with `mailto:`.
   - **Entry** — Select an [entry](../element-types/entries.md) element.
   - **Phone** — The value is automatically prepended with `tel:`.
+  - **SMS** — The value is automatically prepended with `sms:`.
 
   ::: tip
   The list of available link types can be supplemented by plugins via the <craft5:craft\fields\Link::EVENT_REGISTER_LINK_TYPES> event.
@@ -67,12 +68,16 @@ In addition to the standard field options, Link fields have the following settin
 
 ### Type-Specific Options
 
-When the **URL** link type is enabled, two more options become available:
+When the **URL** link type is enabled, three more options become available:
 
 - **Allow root-relative URLs** — Accepts an absolute path, without a protocol or hostname (i.e. `/give`). Relative paths are still not allowed (i.e. `donate`), as they are ambiguous in most contexts.
-- **Allow anchors** — Accepts values that contain only a fragment or hash-prefixed anchor, like `#my-heading`. This should not be enabled alongside the **URL Suffix** advanced field.
+- **Allow anchors** — Accepts values that contain _only_ a hash-prefixed fragment or anchor, like `#my-heading`. This should not be enabled alongside the **URL Suffix** advanced field.
+- **Allow custom URL schemes** — Permits arbitrary URL “schemes,” so that authors can use deep-links and other nonstandard protocols (e.g: `sftp://user@domain.com:1234`).
 
-When enabling a link type that references elements, Craft will display a set of checkboxes that allow you to limit selection to specific [sources](../../system/elements.md#sources)—and in the case of assets, the allowable file kinds.
+When enabling a link type that references elements, Craft will display a set of checkboxes that allow you to limit selection to specific [sources](../../system/elements.md#sources), as well as options specific to that element type. In most cases, these match the corresponding settings for each element type’s [relational field](../../system/relations.md):
+
+- **Assets** — _Allowed File Types_, _Show unpermitted volumes_, _Show unpermitted files_ <Since ver="5.7.0" feature="Limiting selection of assets in link fields by volume and file visibility" />;
+- **Entries** — _Show unpermitted sections_, _Show unpermitted entries_ <Since ver="5.7.0" feature="Limiting selection of entries in link fields by section and entry visibility" />;
 
 ## The Field
 
