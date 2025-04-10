@@ -1,3 +1,12 @@
+---
+description: Store arbitrary, structured data as JSON.
+related:
+  - uri: table.md
+    label: Table fields
+  - uri: matrix.md
+    label: Matrix fields
+---
+
 # JSON <Badge text="New!" />
 
 Validate and store arbitrary JSON data in a simple [CodeMirror](https://codemirror.net/) editor. The data is automatically [deserialized](#development) for you and can be 
