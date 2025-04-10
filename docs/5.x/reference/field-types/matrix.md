@@ -50,6 +50,12 @@ The _minimum_ number of entries that can be created within the field. (Default i
 
 The _maximum_ number of entries that can be created within the field. (Default is no upper limit.)
 
+#### Versioning <Since ver="5.7.0" feature="Control over creation of revisions for nested entries in Matrix fields" />
+
+Nested entries using the _As inline-editable blocks_ [view mode](#view-mode) are “versioned” alongside their owner—when making a change directly within the context of the owner, Craft automatically creates [revisions](../../system/drafts-revisions.md) for both elements. However, revisions of the nested element are hidden, by default.
+
+The **Enable versioning for entries in this field** setting exposes the revisions menu and the **Notes** field in the sidebar, when editing a nested entry on its own.
+
 #### View Mode <Badge text="New!" />
 
 Choose how the nested elements are represented within the [field UI](#the-field):
