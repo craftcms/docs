@@ -53,6 +53,7 @@ module.exports = {
             "field-types/dropdown",
             "field-types/email",
             "field-types/entries",
+            "field-types/json",
             "field-types/icon",
             "field-types/lightswitch",
             "field-types/link",
