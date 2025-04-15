@@ -13,6 +13,7 @@
 | [andRelatedTo](#andrelatedto)                   | Narrows the query results to only global sets that are related to certain other elements.
 | [asArray](#asarray)                             | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft5:craft\elements\GlobalSet) objects.
 | [cache](#cache)                                 | Enables query cache for this Query.
+| [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
 | [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 | [dateCreated](#datecreated)                     | Narrows the query results based on the global sets’ creation dates.
 | [dateUpdated](#dateupdated)                     | Narrows the query results based on the global sets’ last-updated dates.
@@ -154,6 +155,22 @@ Enables query cache for this Query.
 
 
 
+
+
+
+
+
+
+#### `canonicalsOnly`
+
+Narrows the query results to only canonical elements, including elements
+that reference another canonical element via `canonicalId` so long as they
+aren’t a draft.
+
+
+
+Unpublished drafts can be included as well if `drafts(null)` and
+`draftOf(false)` are also passed.
 
 
 

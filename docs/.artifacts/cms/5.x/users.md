@@ -20,6 +20,7 @@
 | [authors](#authors)                             | Narrows the query results to only users that are authors of an entry.
 | [cache](#cache)                                 | Enables query cache for this Query.
 | [can](#can)                                     | Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
+| [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
 | [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 | [dateCreated](#datecreated)                     | Narrows the query results based on the users’ creation dates.
 | [dateUpdated](#dateupdated)                     | Narrows the query results based on the users’ last-updated dates.
@@ -340,6 +341,22 @@ $users = \craft\elements\User::find()
     ->all();
 ```
 :::
+
+
+#### `canonicalsOnly`
+
+Narrows the query results to only canonical elements, including elements
+that reference another canonical element via `canonicalId` so long as they
+aren’t a draft.
+
+
+
+Unpublished drafts can be included as well if `drafts(null)` and
+`draftOf(false)` are also passed.
+
+
+
+
 
 
 #### `clearCachedResult`
