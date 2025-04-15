@@ -130,7 +130,7 @@ Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button
 
 A streamlined version of indexes are used when adding elements to a [relational](relations.md) field via a modal. Depending on the field’s configuration, Craft may hide sources or actions, and disable [slideouts](control-panel.md#slideouts) (except to create a new element, in-context) and pagination (in favor of scrolling). Internally, Craft refers to these variations as “contexts,” which [plugins](../extend/element-types.md#sources) have an opportunity to modify.
 
-### Chips & Cards <Badge text="New!" />
+## Chips & Cards <Badge text="New!" />
 
 <img src="../images/element-chips.png" alt="An element “chip” with a title, thumbnail, and label indicated it has been modified." />
 
@@ -140,7 +140,7 @@ Both chips and cards support thumbnails, but only cards allow additional custom 
 
 <img src="../images/element-cards.png" alt="Two element “cards” in the Craft control panel, show thumbnails, titles, and statuses." />
 
-#### Custom Card Attributes <Since ver="5.5.0" feature="Customizable card attributes" />
+### Custom Card Attributes <Since ver="5.5.0" feature="Customizable card attributes" />
 
 The attributes and fields displayed on element cards is ultimately determined by the interface below each [field layout designer](fields.md#field-layouts):
 
@@ -152,7 +152,7 @@ An element’s **Title** and **Status** are always visible, and the presence of 
 A card’s thumbnail can come from any field that implements <craft5:craft\base\ThumbableFieldInterface> (like [assets](../reference/field-types/assets.md) or [icon](../reference/field-types/icon.md) fields), or be “inherited” from another element via a [relational field](relations.md).
 :::
 
-### Copying Elements <Since ver="5.7.0" feature="Copying elements" />
+## Copying Elements <Since ver="5.7.0" feature="Copying elements" />
 
 [Entries](../reference/element-types/entries.md) and [addresses](../reference/element-types/addresses.md) can by copied-and-pasted between sections and fields. Open the action menu <Icon kind="ellipses" /> on any chip, card, or inline nested entry and select **Copy <Placeholder help="A built-in or plugin-provided element type.">element type</Placeholder>**:
 
@@ -175,6 +175,31 @@ The **Paste** button is displayed in the same row as the **Add** button for nest
 ::: warning
 A copied [draft](drafts-revisions.md) (provisional or otherwise) is pasted as a _canonical_ element, with the pending changes applied.
 :::
+
+## Statuses
+
+Most element types support _statuses_. An element’s status is most often a combination of its `enabled` and `enabledForSite` attributes (which Craft stores explicitly for all elements), and any number of other attributes determined by its type. Statuses are represented as strings, and can be accessed via `element.status` in a template, or fed into element query’s `.status()` param as a short-hand for the combination of specific properties they represent.
+
+- **Draft** (`draft`) — The element has a `draftId`.
+- **Archived** (`archived`) — The element’s `archived` property is `true`; currently only used by [user](../reference/element-types/users.md) elements.
+- **Disabled** (`disabled`) — One or both of the `enabled` and `enabledForSite` attributes are `false`.
+- **Enabled** — Both the `enabled` _and_ `enabledForSite` attributes are `true`.
+
+::: tip
+To query for elements without applying _any_ status constraints (including the element type’s defaults), use `query.status(null)`.
+:::
+
+An element’s status is reflected in element indexes, chips, and cards through color pips and labels.
+
+![Sample element status badges](../images/elements-statuses.png)
+
+<Block label="Provisional Drafts and Statuses">
+
+In the illustration above, **Edited** is technically a supplemental label applied to [provisional drafts](drafts-revisions.md#provisional-drafts), and is not a status on its own—but it is often applied in combination with other statuses. Elements with this label have been “substituted” for their canonical counterparts, meaning that provisional changes (like a new title) will appear with a **Live** status.
+
+Conversely, disabling an element in a provisional draft may make it _appear_ as **Disabled** throughout the control panel, despite its canonical element actually being **Live**. Despite this, sorting and filtering always operates on the canonical element; the derivative is substituted as the final step in the query.
+
+</Block>
 
 ## Nested Elements
 
