@@ -112,10 +112,10 @@ Accessing things via `craft.app` is considered advanced. There are more security
 Some of the services commonly used in templates:
 
 - `craft.app.request` – [Request](craft5:craft\web\Request) object with information about the current HTTP request
-- `craft.app.session` – [Session](craft5:craft\web\Session) object useful for getting and setting flash messages
+- `craft.app.session` – [Session](craft5:craft\web\Session) object useful for getting and setting [flash messages](../../development/forms.md#flashes)
 - `craft.app.user` – [User](craft5:craft\web\User) object for getting information about the client’s identity
 - `craft.app.config.general` – [GeneralConfig](craft5:craft\config\GeneralConfig) object of [General Config Settings](../config/general.md)
-- `craft.app.fields` – [Fields](craft5:craft\services\Fields) service for accessing custom field details
+- `craft.app.fields` – [Fields](craft5:craft\services\Fields) service for accessing [custom field](../../system/fields.md) details
 - `craft.app.sites` – [Sites](craft5:craft\services\Sites) service for getting [site](../../system/sites.md) details
 
 ::: tip
