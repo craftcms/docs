@@ -32,7 +32,7 @@ $entries = \craft\elements\Entry::find()
 ```
 :::
 
-Elements without a value for a lightswitch field (say, because they haven't been saved since the field was added) are treated as if they have the default field value. For example, querying against a field that defaults to _off_…
+Elements without a value for a lightswitch field (say, because they haven’t been saved since the field was added) are treated as if they have the default field value. For example, querying against a field that defaults to _off_…
 
 ```twig{3}
 {% set archive = craft.entries()
