@@ -30,6 +30,8 @@ There are also **Preferences** for localization, accessibility, and debugging th
 
 All users share a [field layout](../../system/fields.md#field-layouts), which is managed via <Journey path="Settings, Users, User Profile Fields" />. Custom fields are added to the **Profile** tab of each user’s management screen, alongside native **Username**, **Email**, **Full Name**, and **Photo** fields.
 
+Fields and tabs in the user field layout can be given [conditions](../../system/fields.md#conditions) to provide special functionality based on their user group or other criteria.
+
 ::: tip
 Relate users to other elements with the [users field](../field-types/users.md).
 :::

@@ -44,6 +44,7 @@ module.exports = {
           children: [
             "field-types/addresses",
             "field-types/assets",
+            "field-types/button-group",
             "field-types/categories",
             "field-types/checkboxes",
             "field-types/color",
@@ -52,6 +53,7 @@ module.exports = {
             "field-types/dropdown",
             "field-types/email",
             "field-types/entries",
+            "field-types/json",
             "field-types/icon",
             "field-types/lightswitch",
             "field-types/link",

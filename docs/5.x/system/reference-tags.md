@@ -10,7 +10,7 @@ A reference tag usually takes this form:
 
 Curly braces (`{}`) surround three segments, separated by colons (`:`):
 
-1.  `<Type>` – The type of element you’re creating a reference to. This can be a fully-qualified element class name (e.g. `craft\elements\Entry`) or the element type’s “reference handle”.
+1.  `<Type>` – The type of element you’re creating a reference to. This can be a fully-qualified element class name (e.g. `craft\elements\Entry`) or the element type’s “reference handle.”
 
     Core element types have the following reference handles:
 

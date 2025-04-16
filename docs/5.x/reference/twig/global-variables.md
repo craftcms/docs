@@ -112,10 +112,10 @@ Accessing things via `craft.app` is considered advanced. There are more security
 Some of the services commonly used in templates:
 
 - `craft.app.request` – [Request](craft5:craft\web\Request) object with information about the current HTTP request
-- `craft.app.session` – [Session](craft5:craft\web\Session) object useful for getting and setting flash messages
+- `craft.app.session` – [Session](craft5:craft\web\Session) object useful for getting and setting [flash messages](../../development/forms.md#flashes)
 - `craft.app.user` – [User](craft5:craft\web\User) object for getting information about the client’s identity
 - `craft.app.config.general` – [GeneralConfig](craft5:craft\config\GeneralConfig) object of [General Config Settings](../config/general.md)
-- `craft.app.fields` – [Fields](craft5:craft\services\Fields) service for accessing custom field details
+- `craft.app.fields` – [Fields](craft5:craft\services\Fields) service for accessing [custom field](../../system/fields.md) details
 - `craft.app.sites` – [Sites](craft5:craft\services\Sites) service for getting [site](../../system/sites.md) details
 
 ::: tip
@@ -178,6 +178,10 @@ The currently-logged-in user, represented by a <craft5:craft\elements\User> obje
   Welcome, {{ currentUser.friendlyName }}!
 {% endif %}
 ```
+
+::: warning
+Some templates are rendered in contexts that don’t use sessions or have any concept of a “current user,” like the command line. [System messages](../../system/mail.md#system-messages) are also somewhat unintuitive in this regard, because the current user may not be the recipient!
+:::
 
 ### `devMode`
 
@@ -434,7 +438,17 @@ They will be represented as <craft5:craft\elements\GlobalSet> objects.
 
 ### Singles
 
-Your [single](../element-types/entries.md#singles) section entries can also be loaded automatically by setting <config5:preloadSingles> to `true`.
+Your [single section](../element-types/entries.md#singles) entries can also be loaded automatically by setting <config5:preloadSingles> to `true`. This makes them available by handle in all Twig contexts, just as global sets are. For example, if you had an “About Us” single with the handle `about`, you could access content from that entry in your footer, without setting up a query:
+
+```twig{3}
+<footer>
+  &copy;{{ now|date('Y') }}
+  {{ about.phoneNumber }}
+</footer>
+
+::: tip
+When you convert a global set to a single using the [`entrify/global-set` command](../cli.md#entrify-global-set), template references should remain compatible, so long as <config5:preloadSingles> is enabled.
+:::
 
 ### Other Elements
 

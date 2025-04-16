@@ -231,14 +231,39 @@ This example assumes you have multiple [entry types](../reference/element-types/
 
 ### Conditions
 
-Any fields (or [tabs](#tabs)) that have a **Current User Condition** or **Element Condition** configured will display an orange rhombus.
+Any fields (or [tabs](#tabs)) that have a _condition_ configured will display an orange rhombus.
 
 <img src="../images/field-layout-conditional.png" alt="A field layout element with conditions applied">
 
-Conditions determine when (and to whom) a field or tab is displayed and validated. You can create sophisticated editorial processes by exposing parts of the authoring interface only when specific criteria are met.
+Conditions determine when (and to whom) a field or tab is [displayed](#visibility-conditions) and [editable](#editability-conditions). You can create sophisticated editorial processes by exposing parts of the authoring interface only when specific criteria are met.
 
 ::: warning
-Conditions are not intended as a substitute for [permissions](user-management.md#permissions)! It’s still important to configure sensible base permissions for your editors.
+Conditions are not intended as complete substitute for [permissions](user-management.md#permissions)! It’s still important to configure sensible base permissions for your editors.
+
+However, Craft only populates fields that are visible _and_ editable to a given user, regardless of context; as a result, your [front-end forms](../development/forms.md) are automatically protected against clever manipulation of POST values.
+:::
+
+#### Visibility Conditions
+
+Two conditions are available to determine when a field (or tab) is visible within a field layout, and whether it will be validated:
+
+- **Current User Condition** — Evaluated against the user that is currently editing the element.
+- **<Placeholder help="One of Craft’s built-in or plugin-provided element type names.">Element Type</Placeholder> Condition** — Evaluated against the element being edited. Available rules depend on the element type, its configuration (i.e. entry type or asset volume), and the field layout.
+
+As you edit an element, the visibility of conditional fields is determined while [auto-saving](drafts-revisions.md#auto-saving). Take care when designing a field layout to avoid major visual shifts as fields are shown or hidden. Only visible fields are validated.
+
+::: tip
+Prior to Craft 5.7.0, these were the only two condition builders, and the UI did not explicitly group them into **Visibility Conditions**.
+:::
+
+#### Editability Conditions <Since ver="5.7.0" feature="Editability conditions in the field layout designer" />
+
+User and element conditions completely hide field layout elements when their criteria are not met. If you would prefer to make a field read-only or “static” (so that authors can still reference its value), you can move conditions into the **Editability Conditions**.
+
+To be editable, a field must also be [visible](#visibility-conditions).
+
+::: warning
+It’s possible to short-circuit validation with editability conditions! Fields marked as **Required** that the user cannot populate with content still prevent entries from being saved.
 :::
 
 ### UI Elements

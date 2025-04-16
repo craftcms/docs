@@ -1,4 +1,5 @@
 ---
+description: Use element-based “folksonomies” to connect content.
 related:
   - uri: ../element-types/tags.md
     label: Tag Elements
@@ -12,11 +13,22 @@ Tags fields allow you relate [tags](../element-types/tags.md) to other elements.
 
 <!-- more -->
 
+![Screenshot of the tags field interface in the Craft control panel](../../images/fields-tags-ui.png)
+
 ## Settings
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new tags field via the control panel.">
+<img src="../../images/fields-tags-settings.png" alt="Tags field settings screen in the Craft control panel">
+</BrowserShot>
 
 Tags fields have the following settings:
 
-- **Source** — Which tag group(s) the field should be able to relate tags from.
+- **Source** — Which tag group the field should be able to relate tags from. Only one source is allowed, because Craft needs to know which group to create new tags in.
+- **Default Tag Placement** — Whether new selections are prepended or appended to the existing relations.
 - **“Add” Button Label** — The label that should be used on the field’s search input.
 - **Validate related tags** — Whether or not validation errors on the related tags will be bubbled up.
 
@@ -51,7 +63,7 @@ By default you won’t be able to create multiple tags that are too similar in n
 
 ### Inline Tag Editing
 
-When you double-click on a related tag, a [slideout](../../system/control-panel.md#slideouts) will appear where you can edit the tag’s title and custom fields.
+When you double-click on a related tag, a [slideout](../../system/control-panel.md#slideouts) will appear where you can edit the tag’s title and any custom fields added to its group’s field layout.
 
 ## Development
 

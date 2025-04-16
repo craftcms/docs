@@ -6,6 +6,7 @@ related:
     label: Introduction to Elements
   - uri: ../field-types/entries.md
     label: Entries Fields
+sidebarDepth: 2
 ---
 
 # Entries
@@ -126,8 +127,9 @@ Sections organize and expose [entry types](#entry-types) for content authors. In
 - Whether entries in the section have URLs;
 - What the entries’ URLs should look like;
 - Which template should get loaded if an entry’s URL is requested;
+- What preview targets are available to authors;
 - What [entry types](#entry-types) are available in the section;
-- How many authors can be associated with each entry;
+- How many authors can be associated with each entry (or disable authors <Since ver="5.7.0" feature="Authorless sections" />);
 
 If your project has multiple [sites](../../system/sites.md), your section can define these additional settings:
 
@@ -461,6 +463,81 @@ Notifications will appear in the bottom-left corner along with other flashes, an
 ::: tip
 Automatic merging of changes from canonical entries is nondestructive, and non-optional. Merging occurs just before an entry’s edit screen is viewed.
 :::
+
+### Copying Entries <Since ver="5.7.0" feature="Copying entries" />
+
+Entries can be copied and pasted between sections and fields that support the given type(s).
+
+<See path="../../system/elements.md" hash="copying-elements" label="Copying Elements" description="Learn how to copy entries and other elements between contexts." />
+
+## Statuses
+
+In addition to the [base element statuses](../../system/elements.md#statuses), entries may appear in any of these states:
+
+- **Pending** (`pending`) — The **Post Date** is in the future, or not set.
+- **Expired** (`expired`) — The **Expiry Date** is set, and in the past.
+- **Live** (`live`) — The **Post Date** is in the past, and the **Expiry Date** is in the future (if set at all). This is the default status used in entry queries.
+
+::: tip
+Status pips and controls may be hidden from element edit screes, indexes, chips, and cards, if an entry’s type has the **Show the Status field** setting _off_.
+:::
+
+When [querying entries by status](../../system/elements.md#querying-by-status), keep in mind that each status identifier in the list above represents multiple conditions. Statuses and their default query conditions help make the appearance or availability of entries consistent between the control panel and front-end; for this reason, params like `.postDate()` and `.expiryDate()` introduce _additional_ constraints, rather than replacing Craft’s. If you need full control over the query constraints, call `.status(null)`.
+
+### Static Statuses <Since ver="5.7.0" feature="Static storage of entry statuses" />
+
+Craft’s powerful [events](../../extend/events.md) system allows developers to react to element updates, and connect author activity and content to other systems. Statuses, however, can be difficult to pin down—entries rely heavily on their **Post Date** and **Expiry Date** attributes to determine when an entry is returned, and what its “status” is at any given time.
+
+Take this query that fetches blog articles:
+
+```twig
+{% set posts = craft.entries()
+  .section('blog')
+  .all() %}
+```
+
+Suppose we have an article with a **Post Date** five minutes in the future. Loading the page with this query _now_ would not display the pending article; if we wait five minutes and refresh the page, the entry _does_ show up… without any intervention by the author! This is because each query compares the server’s current time with entries’ stored `postDate` and `expiryDate` columns; depending on when you look at the data, Craft considers it to be in different statuses. Therein lies the issue: nothing _happens_ when a pending entry “goes live” (or a live entry “expires”), so Craft can’t emit status-change events.
+
+The <config5:staticStatuses> config setting alters this behavior: instead of calculating statuses on-the-fly, Craft stores a static representation of an entry’s status at the time it is saved. Entry queries also use simplified conditions, matching against the stored values instead of date-based comparisons. In this mode, however, entries’ statuses only change when they are saved. The accompanying [`update-statuses` console command](../cli.md#update-statuses) provides a means of routinely checking and re-saving entries:
+
+```bash
+ddev craft update-statuses
+```
+
+::: warning
+If you opt in to static statuses, you must run this command with a tool like [cron](https://en.wikipedia.org/wiki/Cron) to ensure your content is published and expired in a reasonable amount of time.
+:::
+
+In a [private plugin](../../extend/plugin-guide.md) or [custom module](../../extend/module-guide.md), you can [listen for save events](kb:handling-entry-saves) and check whether an entry received a new status:
+
+```php
+use craft\base\Event;
+use craft\elements\Entry;
+use craft\events\ModelEvent;
+use craft\helpers\ElementHelper;
+
+Event::on(
+    Entry::class,
+    Entry::EVENT_AFTER_SAVE,
+    function (ModelEvent $event) {
+        /** @var Entry $entry */
+        $entry = $event->sender;
+
+        // Make sure we’re dealing with a canonical entry, and that there was indeed a status change:
+        if (
+            !ElementHelper::isDraftOrRevision($entry) &&
+            $entry->getStatus() !== $entry->oldStatus
+        ) {
+            if ($entry->getStatus() === Entry::STATUS_LIVE) {
+                // The entry just moved into the "live" status!
+            } elseif ($entry->oldStatus === Entry::STATUS_LIVE) {
+                // The entry *was* live, but isn’t any more!
+            }
+        }
+    });
+```
+
+Depending on your editorial process, you will need to adjust the cases here to handle different transitions. Keep in mind that this handler may also run in response to normal entry saves (during an HTTP request) so it is advisable to offload any time- or resource-intensive operations to a [queue job](../../extend/queue-jobs.md).
 
 ## Querying Entries
 

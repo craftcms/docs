@@ -42,6 +42,12 @@ For compatibility and localization, core address components (aside from the Coun
 
 You may set a default country for new addresses via the <config5:defaultCountryCode> setting.
 
+### Copying Addresses <Since ver="5.7.0" feature="Copying addresses" />
+
+Addresses can be copied and pasted between users and [addresses fields](../field-types/addresses.md).
+
+<See path="../../system/elements.md" hash="copying-elements" label="Copying Elements" description="Learn how to copy addresses and other elements between contexts." />
+
 ## Querying Addresses
 
 You can fetch addresses in your templates or PHP code using an [AddressQuery](craft5:craft\elements\db\AddressQuery).
