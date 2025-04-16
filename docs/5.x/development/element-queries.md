@@ -107,8 +107,9 @@ Parameters are set using methods after creating an element query, or by passing 
 {# ...or... #}
 
 {% set images = craft.assets({
-  kind: 'image',
-}).all() %}
+    kind: 'image',
+  })
+  .all() %}
 
 {# ...or if you’re fancy, set some parameters conditionally: #}
 
@@ -123,7 +124,7 @@ Parameters are set using methods after creating an element query, or by passing 
 ```
 
 ::: tip
-Query methods (except for those that [execute](#executing-element-queries) a query) modify some internal properties and return the query itself, allowing you to chained more methods together—just like Craft’s [fluent config](../configure.md#style) syntax!
+Query methods (except for those that [execute](#executing-element-queries) a query) modify some internal properties and return the query itself, allowing you to chain methods together—just like Craft’s [fluent config](../configure.md#style) syntax!
 :::
 
 All element queries support a standard set of methods (like `.id()`, `.title()`, and [`.search()`](../system/searching.md)). These are documented alongside the [element type-specific](#element-types) parameters (like `.kind()` in the example above).
