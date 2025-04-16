@@ -178,12 +178,12 @@ A copied [draft](drafts-revisions.md) (provisional or otherwise) is pasted as a 
 
 ## Statuses
 
-Most element types support _statuses_. An element’s status is most often a combination of its `enabled` and `enabledForSite` attributes (which Craft stores explicitly for all elements), and any number of other attributes determined by its type. Statuses are represented as strings, and can be accessed via `element.status` in a template, or fed into element query’s `.status()` param as a short-hand for the combination of specific properties they represent.
+Most element types support _statuses_. An element’s status is most often a combination of its `enabled` and `enabledForSite` attributes (which Craft stores explicitly for all elements), and any number of other attributes determined by its [type](#element-types). Statuses are represented as strings, and can be accessed via `element.status` in a template, or fed into element query’s `.status()` param as a short-hand for the combination of specific properties they represent.
 
 - **Draft** (`draft`) — The element has a `draftId`.
 - **Archived** (`archived`) — The element’s `archived` property is `true`; currently only used by [user](../reference/element-types/users.md) elements.
 - **Disabled** (`disabled`) — One or both of the `enabled` and `enabledForSite` attributes are `false`.
-- **Enabled** — Both the `enabled` _and_ `enabledForSite` attributes are `true`.
+- **Enabled** (`enabled`) — Both the `enabled` _and_ `enabledForSite` attributes are `true`.
 
 ::: tip
 To query for elements without applying _any_ status constraints (including the element type’s defaults), use `query.status(null)`.
@@ -201,7 +201,53 @@ Conversely, disabling an element in a provisional draft may make it _appear_ as 
 
 </Block>
 
-## Nested Elements
+### Querying by Status
+
+When querying for elements using the `.status()` param, you’ll need to refer to the list of global identifiers above, and to additional statuses provided by the specific element type:
+
+```twig{3,9,15}
+{% set currentDeals = craft.entries()
+  .section('deals')
+  .status('live')
+  .order('postDate DESC')
+  .all() %}
+
+{% set upcomingDeals = craft.entries()
+  .section('deals')
+  .status('pending')
+  .order('postDate ASC')
+  .all() %}
+
+{% set pastDeals = craft.entries()
+  .section('deals')
+  .status('expired')
+  .order('expiryDate DESC')
+  .all() %}
+```
+
+Statuses can be logically combined in a single query, as well:
+
+```twig
+{# Two explicit statuses: #}
+{% set bannedUsers = craft.users()
+  .status([
+    'suspended',
+    'locked',
+  ])
+  .all() %}
+
+{# One explicit status: #}
+{% set inactiveUsers = craft.users()
+  .status('inactive')
+  .all() %}
+
+{# Negated/inverted status: #}
+{% set inactiveUsersAlt = craft.users()
+  .status(['not', 'active'])
+  .all() %}
+```
+
+## Nested Elements <Badge text="New!" />
 
 Craft ships with two native _nested element_ implementations, which provide unique authoring or administrative experiences:
 
@@ -314,11 +360,9 @@ When accessing related or nested content within an element partial, use the `.ea
 
 ## Properties and Methods
 
-<Todo notes="Move to elements reference?" />
-
 All elements share a few characteristics that make them familiar to work with in your [templates](../development/templates.md). Each [element type](#element-types) will supplement these lists with their own properties and methods.
 
-Additionally, [custom fields](fields.md) attached to an element are automatically made available as properties corresponding to their handles—so a field called “Post Summary” with a handle of `summary` would be accessed as `entry.summary` (if it were attached to an [entry type](../reference/element-types/entries.md#entry-types)’s field layout).
+Additionally, [custom fields](fields.md) attached to an element are automatically made available as properties corresponding to their handles—so a field called “Post Summary” with a handle of `summary` would be accessed as `entry.summary` (if it were attached to an [entry type](../reference/element-types/entries.md#entry-types)’s field layout, and its handle was not overridden).
 
 ::: warning
 This is not an exhaustive list! If you’re curious, consult the <craft5:craft\base\Element> and <craft5:craft\base\ElementTrait> class reference for a complete picture of what data is available inside elements and how it can be used.
@@ -329,7 +373,7 @@ This is not an exhaustive list! If you’re curious, consult the <craft5:craft\b
 Properties give you access to values, and do not accept arguments.
 
 Property | Type | Notes
--------- | ---- | -----
+--- | --- | ---
 `archived` | `bool|null` | Whether the element is soft-deleted, or “trashed.”
 `dateCreated` | `DateTime` | Date the element was originally created.
 `dateDeleted` | `DateTime|null` | Date the element was soft-deleted or `null` if not.
@@ -352,11 +396,11 @@ Property | Type | Notes
 Methods also return values, but may accept or require arguments.
 
 ::: tip
-Any method beginning with `get` can be used like a [property](#properties) by removing the prefix and down-casing the first letter. For example, `{{ entry.getLink() }}` can also be accessed as `{{ entry.link }}`
+Any method beginning with `get` (and that accepts no arguments) can be used like a [property](#properties) by removing the prefix and down-casing the first letter. For example, `{{ entry.getLink() }}` can also be used as `{{ entry.link }}` in a template. This is referred to as a “getter” or “magic getter,” and works in part due to the [design of Yii](guide:concept-properties), Craft’s underlying PHP library.
 :::
 
 Method | Notes
------- | -----
+--- | ---
 `getAncestors(dist)` | Returns up to `dist` parents of the element, or all parents when omitted. _Structures only._
 `getChildren()` | Returns immediate children of the element. _Structures only._
 `getCpEditUrl()` | Gets a URL to the Craft control panel.
@@ -367,7 +411,7 @@ Method | Notes
 `getNext(criteria)` | Load the “next” element relative to this one, given a set of criteria.
 `getNextSibling()` | Load the next sibling of this element, within a structure. _Structures only._
 `getOwner()` | Return the element that “owns” a [nested element](../reference/element-types/entries.md#nested-entries). _Nested elements only._
-`getParent()` | Returns the element’s parent. _Structures only._
+`getParent()` | Returns the element’s parent. _Structure elements only._
 `getPrev(criteria)` | Load the previous element relative to this one, given a set of criteria.
 `getPrevSibling()` | Load the previous sibling of this element, within a structure. _Structures only._
 `getRef()` | Builds the part of a [reference tag](reference-tags.md) unique to the element.
