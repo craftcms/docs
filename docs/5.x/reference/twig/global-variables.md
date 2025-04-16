@@ -179,6 +179,10 @@ The currently-logged-in user, represented by a <craft5:craft\elements\User> obje
 {% endif %}
 ```
 
+::: warning
+Some templates are rendered in contexts that don’t use sessions or have any concept of a “current user,” like the command line. [System messages](../../system/mail.md#system-messages) are also somewhat unintuitive in this regard, because the current user may not be the recipient!
+:::
+
 ### `devMode`
 
 Whether the <config5:devMode> config setting is currently enabled.
