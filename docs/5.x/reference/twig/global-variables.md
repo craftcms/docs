@@ -434,7 +434,17 @@ They will be represented as <craft5:craft\elements\GlobalSet> objects.
 
 ### Singles
 
-Your [single](../element-types/entries.md#singles) section entries can also be loaded automatically by setting <config5:preloadSingles> to `true`.
+Your [single section](../element-types/entries.md#singles) entries can also be loaded automatically by setting <config5:preloadSingles> to `true`. This makes them available by handle in all Twig contexts, just as global sets are. For example, if you had an “About Us” single with the handle `about`, you could access content from that entry in your footer, without setting up a query:
+
+```twig{3}
+<footer>
+  &copy;{{ now|date('Y') }}
+  {{ about.phoneNumber }}
+</footer>
+
+::: tip
+When you convert a global set to a single using the [`entrify/global-set` command](../cli.md#entrify-global-set), template references should remain compatible, so long as <config5:preloadSingles> is enabled.
+:::
 
 ### Other Elements
 
