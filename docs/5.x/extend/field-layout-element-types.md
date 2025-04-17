@@ -351,3 +351,14 @@ protected function useFieldset(): bool
     return true;
 }
 ```
+
+#### Refresh Behavior <Since ver="5.7.0" feature="Refreshable field layout elements" />
+
+By default, field layout elements are only rendered when the form is initially loaded, or when their visibility changes (due to a user or element condition being satisfied). To refresh it after every auto-save, implement the `alwaysRefresh()` method:
+
+```php
+protected function alwaysRefresh(): bool
+{
+    return true;
+}
+```
