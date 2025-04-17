@@ -805,7 +805,7 @@ We typically recommend using the [methods corresponding to your fields’ global
 
 Most custom field values are stored in a single JSON column, keyed by their unique field instance UUID. Craft handles this automatically when using a field or field instance’s built-in query methods (i.e. `.myCustomDateField('<= 2025-11-05')`) by building the appropriate “JSON extraction” expression.
 
-Craft attempts to detect use of field instance handles in `.where()` and `.orderBy()`, and map them to the corresponding extraction expression. <Since ver="5.6.0" feature="Field instance handle mappings for query constraints and ordering" />
+Craft also attempts to detect use of field instance handles in `.where()` and `.orderBy()`, and map them to the corresponding extraction expression. <Since ver="5.6.0" feature="Field instance handle mappings for query constraints and ordering" />
 
 ```twig
 {% set safeStews = craft.entries()
