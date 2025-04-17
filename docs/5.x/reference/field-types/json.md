@@ -7,7 +7,7 @@ related:
     label: Matrix fields
 ---
 
-# JSON <Badge text="New!" />
+# JSON Fields <Badge text="New!" />
 
 Validate and store arbitrary JSON data in a simple [CodeMirror](https://codemirror.net/) editor. The data is automatically [deserialized](#development) for you and can be 
 
