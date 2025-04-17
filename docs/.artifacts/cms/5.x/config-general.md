@@ -13,10 +13,8 @@ Allowed types
 
 Default value
 :  `[
-    'alwaysShowFocusRings' => false,
     'useShapes' => false,
     'underlineLinks' => false,
-    'disableAutofocus' => false,
     'notificationDuration' => 5000,
 ]`
 
@@ -32,7 +30,6 @@ The default user accessibility preferences that should be applied to users that 
 
 The array can contain the following keys:
 
-- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus.
 - `useShapes` – Whether shapes should be used to represent statuses.
 - `underlineLinks` – Whether links should be underlined.
 - `notificationDuration` – How long notifications should be shown before they disappear automatically (in
@@ -1572,6 +1569,38 @@ CRAFT_SLUG_WORD_SEPARATOR=.
 
 
 
+### `staticStatuses`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$staticStatuses](craft5:craft\config\GeneralConfig::$staticStatuses)
+
+Since
+:  5.7.0
+
+</div>
+
+Whether entries’ statuses should be stored statically, and only get updated on entry save, or when the
+`update-statuses` command is executed.
+
+::: code
+```php Static Config
+->staticStatuses()
+```
+```shell Environment Override
+CRAFT_STATIC_STATUSES=true
+```
+:::
+
+
+
 ### `systemTemplateCss`
 
 <div class="compact">
@@ -2019,7 +2048,7 @@ Defined by
 
 </div>
 
-The URL to the root directory that should store published control panel resources.
+The URL to the root directory where control panel resources are published.
 
 ::: code
 ```php Static Config

@@ -37,8 +37,9 @@ Categories fields have the following settings:
 
   - **Min Relations** — The minimum number of categories that must be selected when the field is marked as “required” in a field layout. (Default is no minimum.)
   - **Max Relations** — The maximum number of categories that can be selected. (Default is no maximum.)
+  - **Default Category Placement** — Whether new selections are prepended or appended to the existing relations.
+  - **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
 
-- **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
 - **“Add” Button Label** — The label that should be used on the field’s selection button.
 - **Validate related categories** — Whether or not validation errors on the related categories will be bubbled up.
 

@@ -1,23 +1,18 @@
+<template>
+  <div class="custom-block">
+    <div v-if="label" class="banner">
+      <span class="label">{{ label }}</span>
+    </div>
+    <div class="content">
+      <slot />
+    </div>
+  </div>
+</template>
+
 <script>
 export default {
-  functional: true,
   props: {
     label: String,
-  },
-  render(h, { props, slots }) {
-    const content = [h('div', { class: 'content' }, slots().default)];
-
-    if (props.label) {
-        content.unshift(h(
-            'div',
-            {
-                class: 'banner',
-            },
-            [h('span', { class: 'label' }, props.label)]
-        ));
-    }
-
-    return h('div', { class: 'custom-block' }, content);
   },
 };
 </script>

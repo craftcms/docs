@@ -16,6 +16,8 @@ Address fields are separate from users’ [address book](../element-types/users.
 <img src="../../images/fields-addresses.png" alt="Screenshot of addresses field with two nested address elements" />
 </BrowserShot>
 
+Addresses can be [copied](../../system/elements.md#copying-elements) between fields, and to or from users’ address books. <Since ver="5.7.0" feature="Copying-and-pasting address elements" />
+
 ## Settings
 
 Address fields can be displayed to editors as [cards](../../system/elements.md#chips-cards) or in a full [element index](../../system/elements.md#indexes). Either way, individual addresses are always displayed as cards.

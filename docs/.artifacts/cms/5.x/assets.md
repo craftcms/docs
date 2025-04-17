@@ -13,6 +13,7 @@
 | [andRelatedTo](#andrelatedto)                   | Narrows the query results to only assets that are related to certain other elements.
 | [asArray](#asarray)                             | Causes the query to return matching assets as arrays of data, rather than [Asset](craft5:craft\elements\Asset) objects.
 | [cache](#cache)                                 | Enables query cache for this Query.
+| [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
 | [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 | [dateCreated](#datecreated)                     | Narrows the query results based on the assets’ creation dates.
 | [dateModified](#datemodified)                   | Narrows the query results based on the assets’ files’ last-modified dates.
@@ -169,6 +170,22 @@ Enables query cache for this Query.
 
 
 
+
+
+
+
+
+
+#### `canonicalsOnly`
+
+Narrows the query results to only canonical elements, including elements
+that reference another canonical element via `canonicalId` so long as they
+aren’t a draft.
+
+
+
+Unpublished drafts can be included as well if `drafts(null)` and
+`draftOf(false)` are also passed.
 
 
 

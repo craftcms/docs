@@ -1,20 +1,37 @@
 ---
 related:
+  - uri: button-group.md
+    label: Button Group fields
   - uri: radio-buttons.md
-    label: Radio button fields
+    label: Radio Button fields
 ---
 
 # Dropdown Fields
 
-Dropdown fields give you a dropdown input.
+Dropdown fields provide an enhanced version of the familiar `<select>` input. Optional colors and icons help authors quickly identify choices. <Since ver="5.7.0" feature="Color and icon support in dropdown fields." />
 
 <!-- more -->
 
+![Screenshot of the dropdown field interface in the Craft control panel](../../images/fields-dropdown-ui.png)
+
 ## Settings
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new dropdown field via the control panel.">
+<img src="../../images/fields-dropdown-settings.png" alt="Dropdown field settings screen in the Craft control panel">
+</BrowserShot>
 
 Dropdown fields have the following settings:
 
-- **Dropdown Options** — Define the label and value for each option that will be displayed in the menu.
+- **Dropdown Options** — Define any number of options to populate the menu.
+  - **Label** — A text description of the option, displayed to the author.
+  - **Value** — The value stored when a given option is selected.
+  - **Icon** (Optional) — Choose from the standard system icon palette.
+  - **Color** (Optional) — A color for the icon, or, when no icon is selected, a color pip.
+  - **Default?** — One option can be marked as the default.
 
 ::: tip
 If you change the underlying value of an option that is used by existing entries, Craft will select the designated default option the next time one of those elements is edited.
@@ -98,6 +115,7 @@ To loop through all of the available options, iterate over the [options](craft5:
   Selected: {{ option.selected ? 'Yes' : 'No' }}
 {% endfor %}
 ```
+
 
 ### Saving Dropdown Fields
 

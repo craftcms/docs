@@ -52,8 +52,6 @@ class Plugin extends \craft\base\Plugin
 
 If you used the generator to scaffold the field type, it ought to have inserted this, automatically. You may register as many field types as you wish, from one `EVENT_REGISTER_FIELD_TYPES` event handler.
 
-### 
-
 ### Missing Fields
 
 If your field class ever goes missing (say, because a developer uninstalls your plugin or removes the package), Craft will use an instance of <craft5:craft\fields\MissingField>, and display a message in any field layouts it was present in. This ensures the control panel doesn’t become inoperable, but doesn’t prevent front-end templates from breaking.

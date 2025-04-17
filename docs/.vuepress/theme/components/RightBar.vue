@@ -3,12 +3,14 @@
     <div class="switch-wrapper hidden xl:block">
       <ColorModeSwitch v-on="$listeners" :on="isDark" />
     </div>
-    <nav class="sidebar-link-wrapper">
+    <nav class="sidebar-link-wrapper" aria-labelledby="right-bar-nav-heading">
       <SidebarLinks
         :depth="depth"
         :sidebar-depth="$page.frontmatter.sidebarDepth || sidebarDepth"
         :items="headingItems"
         fixed-heading="On this Page"
+        fixed-heading-id="right-bar-nav-heading"
+        heading-level="h2"
       />
     </nav>
   </div>

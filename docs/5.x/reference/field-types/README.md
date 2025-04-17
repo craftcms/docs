@@ -11,6 +11,8 @@ related:
 
 Craft has over 20 built-in field types that help create tightly-tailored authoring and developer experiences. The table below lists fields in the same order you’ll encounter them in the [control panel](../../system/control-panel.md); you can also browse them by the [type of data](#data-types) they store.
 
+<!-- more -->
+
 <See path="../system/fields.md" label="Fields + Content" description="Get started with fields in Craft." />
 
 ## All Fields
@@ -19,6 +21,7 @@ Craft has over 20 built-in field types that help create tightly-tailored authori
 | --- | --- |
 | [Addresses](addresses.md) | Manage nested [address](../element-types/addresses.md) elements. |
 | [Assets](assets.md) | Relate [asset](../element-types/assets.md) elements. |
+| [Button Group](button-group.md) | Choose a single item from a graphical, icon-based toolbar. |
 | [Categories](categories.md) | Relate [category](../element-types/categories.md) elements. |
 | [Checkboxes](checkboxes.md) | Choose one or more predefined options using `checkbox` inputs. |
 | [Color](color.md) | Pick a color with your platform’s native color picker—or provide a hexadecimal value. |
@@ -118,7 +121,7 @@ You can even attach fields to the elements you relate via these fields—metadat
 
 ### Media
 
-- [Assets](assets.md) — Upload and attach files anywhere.
+- [Assets](assets.md) — Upload and attach files to anything.
 
 ### Structured
 
@@ -137,6 +140,7 @@ Have a complex content model? You can nest entries as deeply as you want!
 Spruce up the authoring experience with these dedicated UIs.
 
 - [Color](color.md) — Select from a palette of colors, or choose a new one.
+- [Button Group](button-group.md) — Choose from options identified by an icon—great for layout, positioning, and scale controls
 - [Icon](icon.md) — Pick from a library of icons.
 - [Money](money.md) — Input values in a specific currency.
 - [Range](range.md) — Contextualize numeric values.
