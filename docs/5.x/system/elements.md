@@ -136,7 +136,7 @@ A streamlined version of indexes are used when adding elements to a [relational]
 
 Throughout the control panel, you’ll encounter references to elements in a number of different contexts, like element indexes, [Matrix](../reference/field-types/matrix.md) fields, and other [relational](relations.md) fields. Element _cards_ are a new way to display nested or related elements. They share the core features of element _chips_ (like quick-actions and ordering controls), but provide an additional layer of customization via the element’s [field layout](fields.md#field-layouts).
 
-Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by a combination of the field layout and customizable [card attributes](#custom-cart-attributes) <Since ver="5.5.0" feature="Customizable card attributes" />; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
+Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by a combination of the field layout and customizable [card attributes](#custom-card-attributes) <Since ver="5.5.0" feature="Customizable card attributes" />; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
 
 <img src="../images/element-cards.png" alt="Two element “cards” in the Craft control panel, show thumbnails, titles, and statuses." />
 
