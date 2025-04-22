@@ -8,10 +8,10 @@
 
 | Param                                       | Description
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)             | Performs any post-population processing on elements.
 | [allowOwnerDrafts](#allowownerdrafts)       | Narrows the query results based on whether the Matrix blocks’ owners are drafts.
 | [allowOwnerRevisions](#allowownerrevisions) | Narrows the query results based on whether the Matrix blocks’ owners are revisions.
 | [andRelatedTo](#andrelatedto)               | Narrows the query results to only Matrix blocks that are related to certain other elements.
+| [andWith](#andwith)                         | Causes the query to return matching Matrix blocks eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
 | [asArray](#asarray)                         | Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft4:craft\elements\MatrixBlock) objects.
 | [cache](#cache)                             | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)     | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
@@ -51,20 +51,8 @@
 <!-- textlint-enable -->
 
 
-#### `afterPopulate`
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 #### `allowOwnerDrafts`
+
 
 Narrows the query results based on whether the Matrix blocks’ owners are drafts.
 
@@ -80,6 +68,7 @@ Possible values include:
 
 #### `allowOwnerRevisions`
 
+
 Narrows the query results based on whether the Matrix blocks’ owners are revisions.
 
 Possible values include:
@@ -93,6 +82,8 @@ Possible values include:
 
 
 #### `andRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only Matrix blocks that are related to certain other elements.
 
@@ -121,7 +112,24 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 :::
 
 
+#### `andWith`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching Matrix blocks eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+
+
+
+.
+
+
+
+
+
+
 #### `asArray`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching Matrix blocks as arrays of data, rather than [MatrixBlock](craft4:craft\elements\MatrixBlock) objects.
 
@@ -148,6 +156,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `cache`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -161,6 +171,8 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
@@ -169,6 +181,8 @@ Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#ca
 
 
 #### `dateCreated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the Matrix blocks’ creation dates.
 
@@ -210,6 +224,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `dateUpdated`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the Matrix blocks’ last-updated dates.
 
 
@@ -248,6 +264,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `field`
 
+
 Narrows the query results based on the field the Matrix blocks belong to.
 
 Possible values include:
@@ -281,6 +298,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `fieldId`
 
+
 Narrows the query results based on the field the Matrix blocks belong to, per the fields’ IDs.
 
 Possible values include:
@@ -313,6 +331,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `fixedOrder`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query results to be returned in the order specified by [id](#id).
 
 
@@ -343,6 +363,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `id`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-id" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the Matrix blocks’ IDs.
 
@@ -384,6 +406,8 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 
 #### `ignorePlaceholders`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching Matrix blocks as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
@@ -397,6 +421,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 #### `inReverse`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -422,6 +448,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `language`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the Matrix blocks should be queried in, based on their language.
 
@@ -461,6 +489,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `limit`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines the number of Matrix blocks that should be returned.
 
 
@@ -483,6 +513,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `offset`
+
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
 
 Determines how many Matrix blocks should be skipped in the results.
 
@@ -507,6 +539,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `orderBy`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines the order that the Matrix blocks should be returned in. (If empty, defaults to `sortOrder ASC`.)
 
 
@@ -530,6 +564,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `owner`
 
+
 Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 
 
@@ -552,6 +587,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `ownerId`
+
 
 Narrows the query results based on the owner element of the Matrix blocks, per the owners’ IDs.
 
@@ -582,6 +618,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `preferSites`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -618,6 +656,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `prepareSubquery`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -626,6 +666,7 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 #### `primaryOwner`
+
 
 Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
 
@@ -649,6 +690,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `primaryOwnerId`
+
 
 Narrows the query results based on the primary owner element of the Matrix blocks, per the owners’ IDs.
 
@@ -680,6 +722,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `relatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only Matrix blocks that are related to certain other elements.
 
 
@@ -706,6 +750,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `search`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only Matrix blocks that match a search query.
 
@@ -739,6 +785,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `site`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-site" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the Matrix blocks should be queried in.
 
@@ -782,6 +830,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `siteId`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-siteid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines which site(s) the Matrix blocks should be queried in, per the site’s ID.
 
 
@@ -818,6 +868,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `siteSettingsId`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the Matrix blocks’ IDs in the `elements_sites` table.
 
 
@@ -852,6 +904,8 @@ $MatrixBlock = \craft\elements\MatrixBlock::find()
 
 #### `status`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-status" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the Matrix blocks’ statuses.
 
 
@@ -885,6 +939,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `trashed`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only Matrix blocks that have been soft-deleted.
 
 
@@ -909,6 +965,7 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `type`
+
 
 Narrows the query results based on the Matrix blocks’ block types.
 
@@ -943,6 +1000,7 @@ $MatrixBlocks = $myEntry->myMatrixField
 
 #### `typeId`
 
+
 Narrows the query results based on the Matrix blocks’ block types, per the types’ IDs.
 
 Possible values include:
@@ -975,6 +1033,8 @@ $MatrixBlocks = $myEntry->myMatrixField
 
 #### `uid`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the Matrix blocks’ UIDs.
 
 
@@ -999,6 +1059,8 @@ $MatrixBlock = \craft\elements\MatrixBlock::find()
 
 
 #### `unique`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines whether only elements with unique IDs should be returned by the query.
 
@@ -1030,6 +1092,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 #### `with`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching Matrix blocks eager-loaded with related elements.
 
 
@@ -1056,6 +1120,8 @@ $MatrixBlocks = \craft\elements\MatrixBlock::find()
 
 
 #### `withCustomFields`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Sets whether custom fields should be factored into the query.
 
