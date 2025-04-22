@@ -311,6 +311,7 @@ This query is used to query for assets.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -359,6 +360,7 @@ This query is used to return the number of assets.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -407,6 +409,7 @@ This query is used to query for a single asset.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -464,6 +467,7 @@ This query is used to query for entries.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -533,6 +537,7 @@ This query is used to return the number of entries.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -602,6 +607,7 @@ This query is used to query for a single entry.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -671,6 +677,7 @@ Entries within the blog section.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -738,6 +745,7 @@ Entries within the about section.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -805,6 +813,7 @@ Entries within the home section.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -863,6 +872,7 @@ This query is used to query for global sets.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -899,6 +909,7 @@ This query is used to query for a single global set.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -935,6 +946,7 @@ This query is used to query for users.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -980,6 +992,7 @@ This query is used to return the number of users.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1025,6 +1038,7 @@ This query is used to query for a single user.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1070,6 +1084,7 @@ This query is used to query for tags.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1107,6 +1122,7 @@ This query is used to return the number of tags.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1144,6 +1160,7 @@ This query is used to query for a single tag.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1181,6 +1198,7 @@ This query is used to query for categories.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1232,6 +1250,7 @@ This query is used to return the number of categories.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1283,6 +1302,7 @@ This query is used to query for a single category.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1339,6 +1359,7 @@ This query is used to query for addresses.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1382,6 +1403,7 @@ This query is used to return the number of addresses.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
@@ -1425,6 +1447,7 @@ This query is used to query for a single address.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `relatedToAssets`| `[AssetCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
 | `relatedToEntries`| `[EntryCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.

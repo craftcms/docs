@@ -249,6 +249,16 @@ prefix
 
 
 
+<h3 id="db-repair">
+    <a href="#db-repair" class="header-anchor">#</a>
+    <code>db/repair</code>
+</h3>
+
+
+Repairs all tables in the database.
+
+Note that this can cause table locking, which could interfere with SQL being executed.
+
 <h3 id="db-restore">
     <a href="#db-restore" class="header-anchor">#</a>
     <code>db/restore</code>
@@ -1715,6 +1725,9 @@ Choose a plugin handle to install: ckeditor
 handle
 :  The plugin handle (omitted if --all provided).
 
+edition
+: 
+
 
 
 <h4 id="plugin-install-options" class="command-subheading">Options</h4>
@@ -2156,6 +2169,10 @@ Re-saves user addresses.
 : Whether the elements should be resaved via a queue job.
 
 
+--batch-size
+: The number of entries that should be resaved per queue job, if --queue is passed.
+
+
 --element-id
 : The ID(s) of the elements to resave.
 
@@ -2235,6 +2252,10 @@ Re-saves assets.
 : Whether the elements should be resaved via a queue job.
 
 
+--batch-size
+: The number of entries that should be resaved per queue job, if --queue is passed.
+
+
 --element-id
 : The ID(s) of the elements to resave.
 
@@ -2310,6 +2331,10 @@ Re-saves categories.
 : Whether the elements should be resaved via a queue job.
 
 
+--batch-size
+: The number of entries that should be resaved per queue job, if --queue is passed.
+
+
 --element-id
 : The ID(s) of the elements to resave.
 
@@ -2383,6 +2408,10 @@ Re-saves entries.
 
 --queue
 : Whether the elements should be resaved via a queue job.
+
+
+--batch-size
+: The number of entries that should be resaved per queue job, if --queue is passed.
 
 
 --drafts
@@ -2488,6 +2517,10 @@ You must supply the `--field` or `--element-id` argument for this to work proper
 : Whether the elements should be resaved via a queue job.
 
 
+--batch-size
+: The number of entries that should be resaved per queue job, if --queue is passed.
+
+
 --element-id
 : The ID(s) of the elements to resave.
 
@@ -2571,6 +2604,10 @@ Re-saves tags.
 : Whether the elements should be resaved via a queue job.
 
 
+--batch-size
+: The number of entries that should be resaved per queue job, if --queue is passed.
+
+
 --element-id
 : The ID(s) of the elements to resave.
 
@@ -2644,6 +2681,10 @@ Re-saves users.
 
 --queue
 : Whether the elements should be resaved via a queue job.
+
+
+--batch-size
+: The number of entries that should be resaved per queue job, if --queue is passed.
 
 
 --element-id
@@ -3185,6 +3226,10 @@ Creates a user.
 
 --admin
 : Whether the user should be an admin.
+
+
+--send-activation-email
+: Whether to send the user an activation email.
 
 
 --groups
