@@ -145,7 +145,7 @@ class Plugin extends \craft\base\Plugin
 ```
 
 ::: warning
-Don’t move or rename this class or file after [publishing](plugin-store.md) a plugin. Craft stores references to its fully-resolved class name in configuration, and 
+Don’t move or rename this class or file after [publishing](plugin-store.md) a plugin. Craft stores references to its fully-resolved class name in configuration, and may have issues initializing if it goes missing.
 :::
 
 ### Automatic Defaults
