@@ -48,58 +48,6 @@ Addresses can be copied and pasted between users and [addresses fields](../field
 
 <See path="../../system/elements.md" hash="copying-elements" label="Copying Elements" description="Learn how to copy addresses and other elements between contexts." />
 
-## Querying Addresses
-
-You can fetch addresses in your templates or PHP code using an [AddressQuery](craft5:craft\elements\db\AddressQuery).
-
-::: code
-```twig
-{# Create a new address query #}
-{% set myAddressQuery = craft.addresses() %}
-```
-```php
-// Create a new address query
-$myAddressQuery = \craft\elements\Address::find();
-```
-:::
-
-<See path="../../development/element-queries.md" label="Introduction to Element Queries" description="Learn more about how element queries work." />
-
-### Example
-
-Let’s output a list of the logged-in user’s addresses:
-
-1. Create an address query with `craft.addresses()`.
-2. Restrict the query to addresses owned by the current User, with the [`owner`](#owner) parameter.
-3. Fetch the addresses with `.all()`.
-4. Loop through the addresses using a [`{% for %}` tag](https://twig.symfony.com/doc/3.x/tags/for.html).
-5. Output preformatted address details with the [`|address`](../twig/filters.md#address) filter.
-
-```twig
-{% requireLogin %}
-
-{% set addresses = craft.addresses()
-  .owner(currentUser)
-  .all() %}
-
-{% for addr in addresses %}
-  <address>{{ addr|address }}</address>
-{% endfor %}
-```
-
-We’ll expand on this example in the [Managing Addresses](#managing-addresses) section.
-
-::: warning
-Protect your users’ personal information by carefully auditing queries and displaying private addresses only on pages that [require login](../twig/tags.md#requirelogin).
-:::
-
-### Parameters
-
-Address queries support the following parameters:
-
-<!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
-!!!include(docs/.artifacts/cms/5.x/addresses.md)!!!
-
 ## Address Repository
 
 The [commerceguys/addressing](repo:commerceguys/addressing) library powers planet-friendly address handling and formatting, and its exhaustive repository of global address information is available to all Craft projects. If you need a list of countries, states, or provinces, for example, you can fetch them via Craft’s [Addresses](craft5:craft\services\Addresses) service, from Twig templates or PHP:
@@ -672,3 +620,55 @@ Event::on(
 ```
 
 Errors are available through the same `address.getErrors()` method used in other action and [model validation examples](../../development/forms.md#models-and-validation), regardless of whether they were produced by built-in rules or ones you added.
+
+## Querying Addresses
+
+You can fetch addresses in your templates or PHP code using an [AddressQuery](craft5:craft\elements\db\AddressQuery).
+
+::: code
+```twig
+{# Create a new address query #}
+{% set myAddressQuery = craft.addresses() %}
+```
+```php
+// Create a new address query
+$myAddressQuery = \craft\elements\Address::find();
+```
+:::
+
+<See path="../../development/element-queries.md" label="Introduction to Element Queries" description="Learn more about how element queries work." />
+
+### Example
+
+Let’s output a list of the logged-in user’s addresses:
+
+1. Create an address query with `craft.addresses()`.
+2. Restrict the query to addresses owned by the current User, with the [`owner`](#owner) parameter.
+3. Fetch the addresses with `.all()`.
+4. Loop through the addresses using a [`{% for %}` tag](https://twig.symfony.com/doc/3.x/tags/for.html).
+5. Output preformatted address details with the [`|address`](../twig/filters.md#address) filter.
+
+```twig
+{% requireLogin %}
+
+{% set addresses = craft.addresses()
+  .owner(currentUser)
+  .all() %}
+
+{% for addr in addresses %}
+  <address>{{ addr|address }}</address>
+{% endfor %}
+```
+
+We’ll expand on this example in the [Managing Addresses](#managing-addresses) section.
+
+::: warning
+Protect your users’ personal information by carefully auditing queries and displaying private addresses only on pages that [require login](../twig/tags.md#requirelogin).
+:::
+
+### Parameters
+
+Address queries support the following parameters:
+
+<!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
+!!!include(docs/.artifacts/cms/5.x/addresses.md)!!!
