@@ -352,7 +352,7 @@ return [
 ];
 ```
 
-…behaves differently depending on whether or not a site exists with the base path `corporate`. _Without_, it would redirect normally (`/corporate/team` to `/about-us`), but _with_, requests to `/corporate/team` would actually end up at `/corporate/about`, because Craft tried to route the request in the “Corporate” site context.
+…behaves differently depending on whether or not a site exists with the base path `corporate`. _Without_, it would redirect normally (`/corporate/team` to `/about-us`), but _with_, requests to `/corporate/team` would actually end up at `/corporate/about-us`, because Craft tried to route the request in the “Corporate” site context.
 
 To avoid this ambiguity, prefix the destination with a slash (`/`) to make it an “absolute” path:
 
