@@ -33763,6 +33763,12 @@
     },
     {
         "class": "craft\\models\\UpdateRelease",
+        "name": "EVENT_IS_CRITICAL",
+        "type": "craft\\events\\UpdateReleaseEvent",
+        "desc": "The event that is triggered when determining if this release should be flagged as critical."
+    },
+    {
+        "class": "craft\\models\\UpdateRelease",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
         "desc": "The event that is triggered after the model's init cycle"

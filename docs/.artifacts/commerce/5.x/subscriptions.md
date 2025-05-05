@@ -8,9 +8,9 @@
 
 | Param                                           | Description
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)                 | Performs any post-population processing on elements.
 | [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only subscriptions that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)                   | Narrows the query results to only subscriptions that are related to certain other elements.
+| [andWith](#andwith)                             | Causes the query to return matching subscriptions eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
 | [asArray](#asarray)                             | Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce5:craft\commerce\elements\Subscription) objects.
 | [cache](#cache)                                 | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
@@ -65,20 +65,9 @@
 <!-- textlint-enable -->
 
 
-#### `afterPopulate`
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 #### `andNotRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andnotrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only subscriptions that are not related to certain other elements.
 
@@ -109,6 +98,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `andRelatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only subscriptions that are related to certain other elements.
 
 
@@ -136,7 +127,24 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 :::
 
 
+#### `andWith`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching subscriptions eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+
+
+
+.
+
+
+
+
+
+
 #### `asArray`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching subscriptions as arrays of data, rather than [Subscription](commerce5:craft\commerce\elements\Subscription) objects.
 
@@ -163,6 +171,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `cache`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -176,6 +186,8 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 
 
@@ -184,6 +196,7 @@ Clears the [cached result](https://craftcms.com/docs/5.x/development/element-que
 
 
 #### `dateCanceled`
+
 
 Narrows the query results based on the subscriptions’ cancellation date.
 
@@ -219,6 +232,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 
 #### `dateCreated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the subscriptions’ creation dates.
 
@@ -260,6 +275,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `dateExpired`
 
+
 Narrows the query results based on the subscriptions’ expiration date.
 
 Possible values include:
@@ -295,6 +311,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `dateSuspended`
 
+
 Narrows the query results based on the subscriptions’ suspension date.
 
 Possible values include:
@@ -328,6 +345,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 
 #### `dateUpdated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the subscriptions’ last-updated dates.
 
@@ -367,6 +386,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `eagerly`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-eagerly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to be used to eager-load results for the query’s source element
 and any other elements in its collection.
 
@@ -380,6 +401,8 @@ and any other elements in its collection.
 
 
 #### `fixedOrder`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in the order specified by [id](#id).
 
@@ -412,6 +435,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `gatewayId`
 
+
 Narrows the query results based on the gateway, per its ID.
 
 Possible values include:
@@ -428,6 +452,8 @@ Possible values include:
 
 #### `getFieldLayouts`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-getfieldlayouts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns the field layouts that could be associated with the resulting elements.
 
 
@@ -440,6 +466,7 @@ Returns the field layouts that could be associated with the resulting elements.
 
 
 #### `hasStarted`
+
 
 Narrows the query results to only subscriptions that have started.
 
@@ -463,6 +490,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 
 #### `id`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-id" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the subscriptions’ IDs.
 
@@ -504,6 +533,8 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 
 #### `ignorePlaceholders`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching subscriptions as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
 
@@ -518,6 +549,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 #### `inBulkOp`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-inbulkop" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only subscriptions that were involved in a bulk element operation.
 
 
@@ -530,6 +563,8 @@ Narrows the query results to only subscriptions that were involved in a bulk ele
 
 
 #### `inReverse`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -556,6 +591,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `isCanceled`
 
+
 Narrows the query results to only subscriptions that are canceled.
 
 
@@ -578,6 +614,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 
 #### `isExpired`
+
 
 Narrows the query results to only subscriptions that have expired.
 
@@ -602,6 +639,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `isSuspended`
 
+
 Narrows the query results to only subscriptions that are suspended.
 
 
@@ -624,6 +662,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 
 #### `language`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the subscriptions should be queried in, based on their language.
 
@@ -663,6 +703,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `limit`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines the number of subscriptions that should be returned.
 
 
@@ -685,6 +727,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 
 #### `nextPaymentDate`
+
 
 Narrows the query results based on the subscriptions’ next payment dates.
 
@@ -721,6 +764,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `notRelatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-notrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only subscriptions that are not related to certain other elements.
 
 
@@ -748,6 +793,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `offset`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines how many subscriptions should be skipped in the results.
 
 
@@ -770,6 +817,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 
 #### `onTrial`
+
 
 Narrows the query results to only subscriptions that are on trial.
 
@@ -794,6 +842,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `orderBy`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines the order that the subscriptions should be returned in. (If empty, defaults to `dateCreated DESC`.)
 
 
@@ -817,6 +867,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `orderId`
 
+
 Narrows the query results based on the order, per its ID.
 
 Possible values include:
@@ -832,6 +883,7 @@ Possible values include:
 
 
 #### `plan`
+
 
 Narrows the query results based on the subscription plan.
 
@@ -864,6 +916,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `planId`
 
+
 Narrows the query results based on the subscription plans’ IDs.
 
 Possible values include:
@@ -878,6 +931,8 @@ Possible values include:
 
 
 #### `preferSites`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -914,6 +969,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `prepForEagerLoading`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-prepforeagerloading" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the query for lazy eager loading.
 
 
@@ -927,6 +984,8 @@ Prepares the query for lazy eager loading.
 
 #### `prepareSubquery`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -936,6 +995,7 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 #### `reference`
 
+
 Narrows the query results based on the reference.
 
 
@@ -944,6 +1004,8 @@ Narrows the query results based on the reference.
 
 
 #### `relatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only subscriptions that are related to certain other elements.
 
@@ -972,6 +1034,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `render`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-render" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Executes the query and renders the resulting elements using their partial templates.
 
 If no partial template exists for an element, its string representation will be output instead.
@@ -980,6 +1044,8 @@ If no partial template exists for an element, its string representation will be 
 
 
 #### `search`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only subscriptions that match a search query.
 
@@ -1013,6 +1079,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 
 #### `siteSettingsId`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the subscriptions’ IDs in the `elements_sites` table.
 
@@ -1048,6 +1116,7 @@ $subscription = \craft\commerce\elements\Subscription::find()
 
 #### `status`
 
+
 Narrows the query results based on the subscriptions’ statuses.
 
 Possible values include:
@@ -1078,6 +1147,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `trashed`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only subscriptions that have been soft-deleted.
 
 
@@ -1103,6 +1174,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `trialDays`
 
+
 Narrows the query results based on the number of trial days.
 
 
@@ -1111,6 +1183,8 @@ Narrows the query results based on the number of trial days.
 
 
 #### `uid`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the subscriptions’ UIDs.
 
@@ -1136,6 +1210,7 @@ $subscription = \craft\commerce\elements\Subscription::find()
 
 
 #### `user`
+
 
 Narrows the query results based on the subscriptions’ user accounts.
 
@@ -1169,6 +1244,7 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `userId`
 
+
 Narrows the query results based on the subscriptions’ user accounts’ IDs.
 
 Possible values include:
@@ -1201,6 +1277,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `wasCountEagerLoaded`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-wascounteagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns whether the query result count was already eager loaded by the query's source element.
 
 
@@ -1214,6 +1292,8 @@ Returns whether the query result count was already eager loaded by the query's s
 
 #### `wasEagerLoaded`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-waseagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns whether the query results were already eager loaded by the query's source element.
 
 
@@ -1226,6 +1306,8 @@ Returns whether the query results were already eager loaded by the query's sourc
 
 
 #### `with`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching subscriptions eager-loaded with related elements.
 
@@ -1254,6 +1336,8 @@ $subscriptions = \craft\commerce\elements\Subscription::find()
 
 #### `withCustomFields`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Sets whether custom fields should be factored into the query.
 
 
@@ -1266,6 +1350,8 @@ Sets whether custom fields should be factored into the query.
 
 
 #### `withProvisionalDrafts`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-withprovisionaldrafts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return provisional drafts for the matching elements,
 when they exist for the current user.

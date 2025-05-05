@@ -8,11 +8,11 @@
 
 | Param                                           | Description
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)                 | Performs any post-population processing on elements.
 | [ancestorDist](#ancestordist)                   | Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 | [ancestorOf](#ancestorof)                       | Narrows the query results to only categories that are ancestors of another category in its structure.
 | [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only categories that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)                   | Narrows the query results to only categories that are related to certain other elements.
+| [andWith](#andwith)                             | Causes the query to return matching categories eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
 | [asArray](#asarray)                             | Causes the query to return matching categories as arrays of data, rather than [Category](craft5:craft\elements\Category) objects.
 | [cache](#cache)                                 | Enables query cache for this Query.
 | [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
@@ -69,20 +69,9 @@
 <!-- textlint-enable -->
 
 
-#### `afterPopulate`
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 #### `ancestorDist`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-ancestordist" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only categories that are up to a certain distance away from the category specified by [ancestorOf](#ancestorof).
 
@@ -110,6 +99,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `ancestorOf`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-ancestorof" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only categories that are ancestors of another category in its structure.
 
@@ -149,6 +140,8 @@ This can be combined with [ancestorDist](#ancestordist) if you want to limit how
 
 #### `andNotRelatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andnotrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that are not related to certain other elements.
 
 
@@ -178,6 +171,8 @@ $categories = \craft\elements\Category::find()
 
 #### `andRelatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that are related to certain other elements.
 
 
@@ -205,7 +200,24 @@ $categories = \craft\elements\Category::find()
 :::
 
 
+#### `andWith`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching categories eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+
+
+
+.
+
+
+
+
+
+
 #### `asArray`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching categories as arrays of data, rather than [Category](craft5:craft\elements\Category) objects.
 
@@ -232,6 +244,8 @@ $categories = \craft\elements\Category::find()
 
 #### `cache`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -244,6 +258,8 @@ Enables query cache for this Query.
 
 
 #### `canonicalsOnly`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-canonicalsonly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only canonical elements, including elements
 that reference another canonical element via `canonicalId` so long as they
@@ -261,6 +277,8 @@ Unpublished drafts can be included as well if `drafts(null)` and
 
 #### `clearCachedResult`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 
 
@@ -269,6 +287,8 @@ Clears the [cached result](https://craftcms.com/docs/5.x/development/element-que
 
 
 #### `dateCreated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the categories’ creation dates.
 
@@ -310,6 +330,8 @@ $categories = \craft\elements\Category::find()
 
 #### `dateUpdated`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the categories’ last-updated dates.
 
 
@@ -348,6 +370,8 @@ $categories = \craft\elements\Category::find()
 
 #### `descendantDist`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-descendantdist" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that are up to a certain distance away from the category specified by [descendantOf](#descendantof).
 
 
@@ -374,6 +398,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `descendantOf`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-descendantof" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only categories that are descendants of another category in its structure.
 
@@ -413,6 +439,8 @@ This can be combined with [descendantDist](#descendantdist) if you want to limit
 
 #### `eagerly`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-eagerly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to be used to eager-load results for the query’s source element
 and any other elements in its collection.
 
@@ -426,6 +454,8 @@ and any other elements in its collection.
 
 
 #### `fixedOrder`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in the order specified by [id](#id).
 
@@ -458,6 +488,8 @@ $categories = \craft\elements\Category::find()
 
 #### `getFieldLayouts`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-getfieldlayouts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns the field layouts that could be associated with the resulting elements.
 
 
@@ -470,6 +502,7 @@ Returns the field layouts that could be associated with the resulting elements.
 
 
 #### `group`
+
 
 Narrows the query results based on the category groups the categories belong to.
 
@@ -504,6 +537,7 @@ $categories = \craft\elements\Category::find()
 
 #### `groupId`
 
+
 Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
 
 Possible values include:
@@ -536,6 +570,8 @@ $categories = \craft\elements\Category::find()
 
 #### `hasDescendants`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-hasdescendants" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on whether the categories have any descendants in their structure.
 
 
@@ -562,6 +598,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `id`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-id" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the categories’ IDs.
 
@@ -603,6 +641,8 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 
 #### `ignorePlaceholders`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching categories as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
 
@@ -617,6 +657,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 #### `inBulkOp`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-inbulkop" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that were involved in a bulk element operation.
 
 
@@ -629,6 +671,8 @@ Narrows the query results to only categories that were involved in a bulk elemen
 
 
 #### `inReverse`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -654,6 +698,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `language`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the categories should be queried in, based on their language.
 
@@ -693,6 +739,8 @@ $categories = \craft\elements\Category::find()
 
 #### `leaves`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-leaves" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on whether the categories are “leaves” (categories with no descendants).
 
 
@@ -719,6 +767,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `level`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-level" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the categories’ level within the structure.
 
@@ -756,6 +806,8 @@ $categories = \craft\elements\Category::find()
 
 #### `limit`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines the number of categories that should be returned.
 
 
@@ -778,6 +830,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `nextSiblingOf`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-nextsiblingof" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only the category that comes immediately after another category in its structure.
 
@@ -811,6 +865,8 @@ $category = \craft\elements\Category::find()
 
 #### `notRelatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-notrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that are not related to certain other elements.
 
 
@@ -838,6 +894,8 @@ $categories = \craft\elements\Category::find()
 
 #### `offset`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines how many categories should be skipped in the results.
 
 
@@ -860,6 +918,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `orderBy`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC,
     elements.id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
@@ -884,6 +944,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `positionedAfter`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-positionedafter" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only categories that are positioned after another category in its structure.
 
@@ -917,6 +979,8 @@ $categories = \craft\elements\Category::find()
 
 #### `positionedBefore`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-positionedbefore" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that are positioned before another category in its structure.
 
 
@@ -948,6 +1012,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `preferSites`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -984,6 +1050,8 @@ $categories = \craft\elements\Category::find()
 
 #### `prepForEagerLoading`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-prepforeagerloading" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the query for lazy eager loading.
 
 
@@ -997,6 +1065,8 @@ Prepares the query for lazy eager loading.
 
 #### `prepareSubquery`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -1005,6 +1075,8 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 #### `prevSiblingOf`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-prevsiblingof" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only the category that comes immediately before another category in its structure.
 
@@ -1038,6 +1110,8 @@ $category = \craft\elements\Category::find()
 
 #### `relatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that are related to certain other elements.
 
 
@@ -1065,6 +1139,8 @@ $categories = \craft\elements\Category::find()
 
 #### `render`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-render" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Executes the query and renders the resulting elements using their partial templates.
 
 If no partial template exists for an element, its string representation will be output instead.
@@ -1073,6 +1149,8 @@ If no partial template exists for an element, its string representation will be 
 
 
 #### `search`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only categories that match a search query.
 
@@ -1107,6 +1185,8 @@ $categories = \craft\elements\Category::find()
 
 #### `siblingOf`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-siblingof" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that are siblings of another category in its structure.
 
 
@@ -1138,6 +1218,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `site`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-site" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the categories should be queried in.
 
@@ -1181,6 +1263,8 @@ $categories = \craft\elements\Category::find()
 
 #### `siteId`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-siteid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines which site(s) the categories should be queried in, per the site’s ID.
 
 
@@ -1217,6 +1301,8 @@ $categories = \craft\elements\Category::find()
 
 #### `siteSettingsId`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the categories’ IDs in the `elements_sites` table.
 
 
@@ -1250,6 +1336,8 @@ $category = \craft\elements\Category::find()
 
 
 #### `slug`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-slug" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the categories’ slugs.
 
@@ -1294,6 +1382,8 @@ $category = \craft\elements\Category::find()
 
 #### `status`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-status" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the categories’ statuses.
 
 
@@ -1326,6 +1416,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `title`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-title" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the categories’ titles.
 
@@ -1364,6 +1456,8 @@ $categories = \craft\elements\Category::find()
 
 #### `trashed`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only categories that have been soft-deleted.
 
 
@@ -1389,6 +1483,8 @@ $categories = \craft\elements\Category::find()
 
 #### `uid`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the categories’ UIDs.
 
 
@@ -1413,6 +1509,8 @@ $category = \craft\elements\Category::find()
 
 
 #### `unique`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines whether only elements with unique IDs should be returned by the query.
 
@@ -1443,6 +1541,8 @@ $categories = \craft\elements\Category::find()
 
 
 #### `uri`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-uri" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the categories’ URIs.
 
@@ -1487,6 +1587,8 @@ $category = \craft\elements\Category::find()
 
 #### `wasCountEagerLoaded`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-wascounteagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns whether the query result count was already eager loaded by the query's source element.
 
 
@@ -1500,6 +1602,8 @@ Returns whether the query result count was already eager loaded by the query's s
 
 #### `wasEagerLoaded`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-waseagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns whether the query results were already eager loaded by the query's source element.
 
 
@@ -1512,6 +1616,8 @@ Returns whether the query results were already eager loaded by the query's sourc
 
 
 #### `with`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching categories eager-loaded with related elements.
 
@@ -1540,6 +1646,8 @@ $categories = \craft\elements\Category::find()
 
 #### `withCustomFields`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Sets whether custom fields should be factored into the query.
 
 
@@ -1552,6 +1660,8 @@ Sets whether custom fields should be factored into the query.
 
 
 #### `withProvisionalDrafts`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-withprovisionaldrafts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return provisional drafts for the matching elements,
 when they exist for the current user.

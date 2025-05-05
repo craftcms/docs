@@ -15,7 +15,10 @@ Default value
 :  `[
     'useShapes' => false,
     'underlineLinks' => false,
+    'disableAutofocus' => false,
     'notificationDuration' => 5000,
+    'notificationPosition' => 'end-start',
+    'slideoutPosition' => 'end',
 ]`
 
 Defined by
@@ -32,8 +35,14 @@ The array can contain the following keys:
 
 - `useShapes` – Whether shapes should be used to represent statuses.
 - `underlineLinks` – Whether links should be underlined.
+- `disableAutofocus` – Whether inputs should make use of the `autofocus` attribute.
 - `notificationDuration` – How long notifications should be shown before they disappear automatically (in
   milliseconds). Set to `0` to show them indefinitely.
+- `notificationPosition` – Where notifications should be shown on the screen (`'start-start'` for top-left,
+  `'start-end'` for top-right, `'end-start'` for bottom-left, or `'end-end'` for bottom-right, when using an
+  LTR orientation).
+- `slideoutPosition` – Where slideouts should be shown on the screen (`'start'` for left, or `'end'`
+  for right, when using an LTR orientation).
 
 ```php
 ->accessibilityDefaults([
