@@ -35,7 +35,7 @@ Plugin name
 
 A plugin can be made “private” by prefixing its handle with an underscore (like `_my-private-plugin`). Private plugins have all the same features as regular plugins, but are excluded from license verification (and are ineligible for listing on the [Plugin Store](plugin-store.md)); you can even publish a private plugin to GitHub or Packagist and share it between multiple projects, taking advantage of features like [migration tracks](migrations.md).
 
-Private plugins can be scaffolded with the [Generator](generator.md).
+Private plugins can also be scaffolded with the [Generator](generator.md).
 
 ## Scaffolding
 
@@ -43,6 +43,8 @@ Private plugins can be scaffolded with the [Generator](generator.md).
 If this is your first time setting up a plugin, consider using the [Generator](generator.md)—it will prompt you for all of the required information, and leave you with a nicely-organized workspace.
 
 <p><Generator component="plugin" /></p>
+
+The remainder of this section covers the outcome of the choices you’ll make when using the Generator—but you won’t need to follow any instructions that involve creating files or folders.
 :::
 
 To create a plugin, create a new directory for it somewhere on your computer. A common approach is to store them in a `~/dev/` folder alongside your Craft projects:
