@@ -11,7 +11,7 @@ Craft provides a [GraphQL](https://graphql.org) API you can use to work with you
 
 ## Getting Started
 
-GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel gives you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
+GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel give you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
 ::: tip
 You can also execute GraphQL queries from [Twig templates](templates.md) with the [`gql()` function](../reference/twig/functions.md#gql).
@@ -19,7 +19,22 @@ You can also execute GraphQL queries from [Twig templates](templates.md) with th
 
 ### Setting Up Your API Endpoint
 
-By default, none of your content is publicly accessible via GraphQL—you must explicitly authorize resources by configuring one or more public or private [schemas](#define-your-schemas).
+By default, none of your content is publicly accessible via GraphQL—you must explicitly authorize resources by defining a route and configuring one or more public or private [schemas](#define-your-schemas).
+
+#### Create a GraphQL Route
+
+The GraphQL endpoint is always available via its [action path](../system/routing.md), at `/index.php?action=graphql/api`. If you would prefer to access the API via a more concise path, create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) in `config/routes.php` that maps to this `graphql/api` controller action—the following rule would make the GraphQL API available at `/api`:
+
+```php
+return [
+    'api' => 'graphql/api',
+    // ...
+];
+```
+
+::: tip
+Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config5:allowedGraphqlOrigins> setting.
+:::
 
 #### Define Your Schemas
 
@@ -50,25 +65,10 @@ To create a token, visit <Journey path="GraphQL, Tokens" /> and click **New toke
 
 Because tokens are similar to [user groups](../system/user-management.md#user-groups) in the way they grant access to system resources, only admins are allowed to create and modify them. Tokens can also be created via the CLI, with the [`graphql/create-token` command](../reference/cli.md#graphql-create-token). To find a schema’s UUID (required by this command), run `graphql/list-schemas`.
 
-While [schemas](#define-your-schemas) are tracked in [project config](../system/project-config.md), tokens are only stored in the database.
+While [schemas](#define-your-schemas) are tracked in [project config](../system/project-config.md), tokens are only stored in the database and must be created in each environment.
 
 ::: danger
 Carefully protect tokens for schemas that allow [mutations](#mutations)! These are effectively as dangerous as a user with the equivalent permissions.
-:::
-
-#### Create a GraphQL Route
-
-The GraphQL endpoint is always available via its [action path](../system/routing.md), at `/index.php?action=graphql/api`. If you would prefer to access the API via a more concise path, create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) in `config/routes.php` that maps to this `graphql/api` controller action—the following rule would make the GraphQL API available at `/api`:
-
-```php
-return [
-    'api' => 'graphql/api',
-    // ...
-];
-```
-
-::: tip
-Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config5:allowedGraphqlOrigins> setting.
 :::
 
 ## Sending API Requests
