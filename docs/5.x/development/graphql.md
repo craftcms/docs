@@ -185,6 +185,34 @@ RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 ```
 :::
 
+## Custom Fields
+
+In addition to nave element properties, all your [custom field](../system/fields.md) content is accessible via the GraphQL API.
+
+The keys you use to access that data often depends on how the fields are connected to each type of element via [field layouts](../system/fields.md#field-layouts). Craft defines interfaces for each of your element types’ variations (like entry types or category groups) and exposes fields using either their global or locally-overridden handle. Altogether, this means that you will often add custom fields within an inline fragment:
+
+```graphql{5,10,13}
+query StationsQuery {
+  entries(section: "weatherBeacons") {
+    title
+    id
+    ... on terrestrialStation_Entry {
+      location {
+        administrativeArea
+      }
+    }
+    ... on atmosphericStation_Entry {
+      altitude
+    }
+    ... on maritimeStation_Entry {
+      douglasSeaScale
+    }
+  }
+}
+```
+
+In this example, `title` and `id` are fields available on _all_ entries, whereas `location`, `altitude`, and `douglasSeaScale` are fields available only on specific entry type interfaces (`terrestrialStation_Entry`, `atmosphericStation_Entry`, and `maritimeStation_Entry`, respectively).
+
 ## Examples
 
 ### Query
