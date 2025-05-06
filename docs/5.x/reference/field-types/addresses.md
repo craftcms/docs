@@ -43,3 +43,64 @@ Typically, you will access addresses attached to an element via the field’s ha
 ```
 
 <See path="../element-types/addresses.md" label="Addresses" description="Learn more about managing and displaying address data." />
+
+### GraphQL
+
+Nested address elements are available via [GraphQL](../../development/graphql.md) anywhere you have access to their owners. Address properties are retrieved piecemeal:
+
+```graphql{7-24}
+query StationsQuery {
+  entries(section: "weatherBeacons") {
+    title
+    id
+    ... on station_Entry {
+      location {
+        addressLine1
+        addressLine2
+        addressLine3
+        administrativeArea
+        dependentLocality
+        countryCode
+        locality
+        postalCode
+        sortingCode
+
+        fullName
+        firstName
+        lastName
+        organization
+        organizationTaxId
+
+        latitude
+        longitude
+      }
+    }
+  }
+}
+```
+
+Not all properties will contain data, due to differences in international storage and formatting. [Address formatters](../element-types/addresses.md#address-formatter) are not available via GraphQL, so you are responsible for handling variations in the returned data.
+
+With the admin-only **Full Schema**, you may directly query for one or more addresses using the `address()` and `addresses()` queries:
+
+```graphql
+query Headquarters {
+  address(id: 123) {
+    addressLine1
+    # ...
+  }
+}
+```
+
+```graphql
+query MyAddresses {
+  address(ownerId: 123) {
+    addressLine1
+    # ...
+  }
+}
+```
+
+::: tip
+In public and custom schemas, addresses are only accessible via their owners.
+:::
