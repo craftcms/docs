@@ -416,8 +416,6 @@ Event::on(
 
 Just like PHP interfaces, GraphQL interfaces are abstract types that describe the fields a type must implement.
 
-![Screenshot of EntryInterface in GraphiQL’s documentation sidebar](../images/graphiql-entry-interface.png)
-
 You don’t have to use interfaces, but they’re a nice way of formalizing the fields exposed by your type. Craft provides GraphQL interfaces for each included element type:
 
 - <craft5:craft\gql\interfaces\Element>

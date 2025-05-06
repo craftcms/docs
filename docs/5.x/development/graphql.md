@@ -100,9 +100,7 @@ The easiest way to start exploring your GraphQL API is with the built-in [Graphi
 ![The built-in GraphiQL IDE](../images/graphiql.png)
 
 ::: tip
-The included GraphiQL IDE preselects a special “Full Schema” option for exploration. This schema is only available to logged-in administrators. Change the active schema from the dropdown menu:
-
-![GraphiQL’s Full Schema default](../images/graphiql-full-schema.png)
+The included GraphiQL IDE preselects a special “Full Schema” option for exploration. This schema is only available to logged-in administrators. Change the active schema from the dropdown menu in the upper-right corner.
 :::
 
 ### Using Another IDE
