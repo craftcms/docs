@@ -78,9 +78,7 @@ Double-click on a related category to edit it in a [slideout](../../system/contr
 
 ### Querying Elements with Categories Fields
 
-When [querying for elements](../../development/element-queries.md) that have a Categories field, you can filter the results based on the Categories field data using a query param named after your field’s handle.
-
-Possible values include:
+When [querying for elements](../../development/element-queries.md) that may have a categories field, you can use values compatible with [relational query params](../../system/relations.md) to narrow the results:
 
 | Value | Fetches elements…
 | - | -
@@ -90,44 +88,102 @@ Possible values include:
 | `[100, 200]` | that are related to a category with an ID of 100 or 200.
 | `[':empty:', 100, 200]` | with no related categories, or are related to a category with an ID of 100 or 200.
 | `['and', 100, 200]` | that are related to the categories with IDs of 100 and 200.
-| a [Category](craft5:craft\elements\Category) object | that are related to the category.
+| one or more [Category](craft5:craft\elements\Category) elements | that are related to the category/categories.
 | a [CategoryQuery](craft5:craft\elements\db\CategoryQuery) object | that are related to any of the resulting categories.
 
-::: code
+In general, you won’t know a specific category’s ID up-front. Here’s how you might use a category field param to fetch entries belonging to a particular category, in a blog:
+
 ```twig
-{# Fetch entries with a related category #}
-{% set entries = craft.entries()
-  .myFieldHandle(':notempty:')
+{% set posts = craft.entries()
+  .section('posts')
+  .myCategoriesField(category)
   .all() %}
 ```
-```php
-// Fetch entries with a related category
-$entries = \craft\elements\Entry::find()
-    ->myFieldHandle(':notempty:')
-    ->all();
+
+This example assumes we’re loading entries from a [category’s template](../element-types/categories.md#routing-and-templates), where the `category` variable is automatically injected. This same approach would work if we were instead looking for related content, on an individual post page:
+
+```twig
+{# Fetch IDs of the current post’s categories: #}
+{% set currentPostCategories = entry.myCategoriesField.ids() %}
+
+{# Use them in a new entries query: #}
+{% set relatedPosts = craft.entries()
+  .section('posts')
+  .myCategoriesField(currentPostCategories)
+  .limit(5)
+  .all() %}
+```
+
+This query will return entries related to _any_ of the current post’s categories. Prepend `and` to the array to find entries that share _all_ their categories with the current post:
+
+```twig
+['and', ...currentPostCategories]
+```
+
+All the examples so far are achievable using generic [relational query methods](../../system/relations.md#the-relatedto-parameter), but automatically ensure that relationships are defined in a specific field, and in a specific direction (as _targets_). An equivalent query using `.relatedTo()` might look something like this:
+
+```twig{5-8}
+{% set currentPostCategories = entry.myCategoriesField.ids() %}
+
+{% set relatedPosts = craft.entries()
+  .section('posts')
+  .relatedTo({
+    field: 'myCategoriesField',
+    targetElement: currentPostCategories,
+  })
+  .limit(5)
+  .all() %}
+```
+
+The last example we’ll look at uses the [special `:empty:` token](../../system/relations.md#sources-and-targets) to find post entries with _no_ categories related to the field:
+
+```twig{3}
+{% set uncategorized = craft.entries()
+  .section('posts')
+  .myCategoriesField(':empty:')
+  .all() %}
+```
+
+::: warning
+This query may still return entries related to categories via _other_ fields! You can combine multiple category field params to better define “uncategorized:”
+
+```twig{3-4}
+{% set uncategorized = craft.entries()
+  .section('posts')
+  .topics(':empty:')
+  .productFamilies(':empty:')
+  .all() %}
+
+{# ...or... }
+
+{% set uncategorized = craft.entries()
+  .section('posts')
+  .relatedTo({
+    targetElement: ':empty:',
+    field: ['topics', 'productFamilies'],
+  })
+  .all() %}
 ```
 :::
 
 ### Working with Categories Field Data
 
-If you have an element with a Categories field in your template, you can access its related categories using your Categories field’s handle:
+If you have an element with a categories field in your template, you can access the related category elements using the field’s handle:
 
 ::: code
 ```twig
-{% set query = entry.myFieldHandle %}
+{% set query = entry.myCategoriesField %}
 ```
 ```php
-$query = $entry->myFieldHandle; 
+$query = $entry->myCategoriesField; 
 ```
 :::
 
-That will give you a [category query](../element-types/categories.md#querying-categories), prepped to output all the related categories for the given field.
-
-To loop through all the related categories as a flat list, call [all()](craft5:craft\db\Query::all()) and then loop over the results:
+That will give you a [category query](../element-types/categories.md#querying-categories), prepped to return all the related categories for the given field. You can use the results as a list…
 
 ::: code
 ```twig
-{% set relatedCategories = entry.myFieldHandle.all() %}
+{% set relatedCategories = entry.myCategoriesField.all() %}
 {% if relatedCategories|length %}
   <ul>
     {% for rel in relatedCategories %}
@@ -137,7 +193,7 @@ To loop through all the related categories as a flat list, call [all()](craft5:c
 {% endif %}
 ```
 ```php
-$relatedCategories = $entry->myFieldHandle->all();
+$relatedCategories = $entry->myCategoriesField->all();
 if (count($relatedCategories)) {
     foreach ($relatedCategories as $rel) {
         // do something with $rel->url and $rel->title
@@ -146,10 +202,10 @@ if (count($relatedCategories)) {
 ```
 :::
 
-Or you can show them as a hierarchical list with the [nav](../twig/tags.md#nav) tag:
+…or you can show them as a hierarchical list with the [nav](../twig/tags.md#nav) tag:
 
 ```twig
-{% set relatedCategories = entry.myFieldHandle.all() %}
+{% set relatedCategories = entry.myCategoriesField.all() %}
 {% if relatedCategories|length %}
   <ul>
     {% nav rel in relatedCategories %}
@@ -170,13 +226,13 @@ If you only want the first related category, call [one()](craft5:craft\db\Query:
 
 ::: code
 ```twig
-{% set rel = entry.myFieldHandle.one() %}
+{% set rel = entry.myCategoriesField.one() %}
 {% if rel %}
   <p><a href="{{ rel.url }}">{{ rel.title }}</a></p>
 {% endif %}
 ```
 ```php
-$rel = $entry->myFieldHandle->one();
+$rel = $entry->myCategoriesField->one();
 if ($rel) {
     // do something with $rel->url and $rel->title
 }
@@ -187,12 +243,12 @@ If you need to check for related categories without fetching them, you can call 
 
 ::: code
 ```twig
-{% if entry.myFieldHandle.exists() %}
+{% if entry.myCategoriesField.exists() %}
   <p>There are related categories!</p>
 {% endif %}
 ```
 ```php
-if ($entry->myFieldHandle->exists()) {
+if ($entry->myCategoriesField->exists()) {
     // do something with related categories
 }
 ```
@@ -202,21 +258,19 @@ You can set [parameters](../element-types/categories.md#parameters) on the categ
 
 ::: code
 ```twig
-{% set relatedCategories = entry.myFieldHandle
+{% set relatedCategories = entry.myCategoriesField
   .leaves()
   .all() %}
 ```
 ```php
-$relatedAssets = $entry->myFieldHandle
+$relatedAssets = $entry->myCategoriesField
     ->leaves()
     ->all();
 ```
 :::
 
 ::: tip
-<Todo notes="Extract this into a snippet." />
-
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](../twig/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
+Each time you access a category field by its handle, Craft returns a new element query.
 :::
 
 ### Saving Categories Fields
@@ -228,7 +282,7 @@ For example, you could create a list of checkboxes for each of the possible rela
 ```twig
 {# Include a hidden input first so Craft knows to update the existing value
    if no checkboxes are checked. #}
-{{ hiddenInput('fields[myFieldHandle]', '') }}
+{{ hiddenInput('fields[myCategoriesField]', '') }}
 
 {# Get all of the possible category options #}
 {% set possibleCategories = craft.categories()
@@ -237,7 +291,7 @@ For example, you could create a list of checkboxes for each of the possible rela
 
 {# Get the currently related category IDs #}
 {% set relatedCategoryIds = entry is defined
-  ? entry.myFieldHandle.ids()
+  ? entry.myCategoriesField.ids()
   : [] %}
 
 <ul>
@@ -246,7 +300,7 @@ For example, you could create a list of checkboxes for each of the possible rela
       <label>
         {{ input(
           'checkbox',
-          'fields[myFieldHandle][]',
+          'fields[myCategoriesField][]',
           possibleCategory.id,
           { checked: possibleCategory.id in relatedCategoryIds }
         ) }}
