@@ -341,7 +341,7 @@ Use the **Explorer** pane in the [GraphiQL IDE](#using-the-graphiql-ide) to brow
 
 [Arguments](https://graphql.org/learn/queries/#arguments) typically correlate to element query params and are used to narrow the results of a query.
 
-```gql{2}
+```graphql{2}
 query BlogPosts {
   newsEntries(orderBy: "postDate DESC") {
     title
@@ -369,7 +369,7 @@ Some input types are only used for mutations:
 Each element type provides dedicated query and mutation interfaces that expose unique properties based on the system’s configuration. An additional generic query type is provided for each element type that allows you to build queries from scratch, similar to the `craft.entries()` or `craft.assets()` APIs available in Twig:
 
 ::: code
-```gql{2} Entries
+```graphql{2} Entries
 query FeaturedResources {
   entries(section: "documents", type: ["report", "dataset"], featured: true) {
     title
@@ -377,7 +377,7 @@ query FeaturedResources {
   }
 }
 ```
-```gql{2} Assets
+```graphql{2} Assets
 query Images {
   assets(volume: "uploads", kind: "image") {
     filename
@@ -391,7 +391,7 @@ Specific query types are available for some subsets of elements, like [sections]
 
 [Mutations](#mutations) follow a similar pattern—to create or update an entry in our _News_ section, you would use the dedicated `save_news_post_Entry` mutation:
 
-```gql{2}
+```graphql{2}
 mutation CreateContact {
   save_contacts_person_Entry(
     title: "Oli",
@@ -2080,7 +2080,7 @@ Entry _drafts_ are created and updated with mutations named after the combinatio
 You can use the generic `createDraft` mutation to create a new draft. It requires the `id` of the draft’s canonical entry and returns the ID of the newly-saved draft:
 
 ::: code
-```gql Query
+```graphql Query
 mutation MyNewDraft {
   createDraft(id: 1234)
 }
@@ -2099,7 +2099,7 @@ Additional (optional) arguments include a `name` for the draft, `notes`, a `crea
 _Applying_ a draft is handled in the same way, but with the `publishDraft` mutation. It requires the `id` of the draft to be published and returns the ID of the updated canonical entry:
 
 ::: code
-```gql Query
+```graphql Query
 mutation PublishMyDraft {
   publishDraft(id: 5678)
 }
