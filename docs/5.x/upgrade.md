@@ -261,7 +261,7 @@ The reusability of entry types means that some GraphQL queries have changed.
     Entries can still be queried by section using the corresponding query type (i.e. `ingredientsEntries`) or the `section` argument for the generic `entries` query:
 
     ::: code
-    ```gql{2} Section Query
+    ```graphql{2} Section Query
     query MyIngredients {
       ingredientsEntries {
         ... on ingredient_Entry {
@@ -270,7 +270,7 @@ The reusability of entry types means that some GraphQL queries have changed.
       }
     }
     ```
-    ```gql{2} Generic Query
+    ```graphql{2} Generic Query
     query MyIngredients {
       entries(section: "ingredients") {
         ... on ingredient_Entry {
@@ -284,7 +284,7 @@ The reusability of entry types means that some GraphQL queries have changed.
     The corresponding queries for entries nested within a Matrix field would look like this:
 
     ::: code
-    ```gql{2} Field Query
+    ```graphql{2} Field Query
     query DifficultSteps {
       stepsFieldEntries(difficulty: "hard") {
         ... on step_Entry {
@@ -294,7 +294,7 @@ The reusability of entry types means that some GraphQL queries have changed.
       }
     }
     ```
-    ```gql{2} Generic Query
+    ```graphql{2} Generic Query
     query DifficultSteps {
       entries(field: "steps", difficulty: "hard") {
         ... on step_Entry {
@@ -309,7 +309,7 @@ The reusability of entry types means that some GraphQL queries have changed.
 - Mutations directly targeting nested entries in Matrix fields will use a similar structure, but combining the field handle and entry type handle: `save_stepsField_step_Entry`.
 - When mutating a Matrix field value via GraphQL, the nested entries must be passed under an `entries` key instead of a `blocks` key:
 
-    ```gql{2,5}
+    ```graphql{2,5}
     mutation AddStep {
       save_recipes_recipe_Entry(
         title: "Yummy Bits and Bytes"
