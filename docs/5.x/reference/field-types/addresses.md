@@ -94,7 +94,7 @@ query Headquarters {
 
 ```graphql
 query MyAddresses {
-  address(ownerId: 123) {
+  addresses(ownerId: 123) {
     addressLine1
     # ...
   }
