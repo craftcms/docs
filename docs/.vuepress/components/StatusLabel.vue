@@ -53,6 +53,10 @@
         &.pending {
             background-color: theme('colors.craft.orange');
         }
+
+        &.deprecated {
+            background-color: theme('colors.craft.amber');
+        }
     }
 
     .status-label-pip {
