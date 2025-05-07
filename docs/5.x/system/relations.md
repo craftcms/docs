@@ -244,7 +244,7 @@ Property
 :  One of `element`, `sourceElement`, or `targetElement`
 
 Accepts
-:  Element ID, element, [element query](../development/element-queries.md), or an array thereof
+:  Element ID, element, [element query](../development/element-queries.md), special `:empty:` or `:notempty:` tokens, or an array thereof
 
 Description
 :  - Use `element` to get results on either end of a relational field (source _or_ target);
@@ -262,6 +262,8 @@ One way of thinking about the difference between `sourceElement` and `targetElem
   .all() %}
 {# -> Equivalent to `recipe.ingredients.all()`, from our very first example! #}
 ```
+
+The special `:notempty:` and `:empty:` tokens allow you to query for elements that are related (or _not_ related) to _any_ other element. These can be combined with [field](#fields) and [site](#sites) conditions.
 
 ### Fields
 
