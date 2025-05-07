@@ -101,37 +101,53 @@ You can choose which custom fields should be available for assets in each volume
 
 ## Development
 
+Asset fields have similar features to other [relational fields](../../system/relations.md).
+
 ### Querying Elements with Assets Fields
 
-When [querying for elements](../../development/element-queries.md) that have an Assets field, you can filter the results based on the Assets field data using a query param named after your field’s handle.
-
-Possible values include:
+When [querying for elements](../../development/element-queries.md) that may have an assets field, you can use values compatible with [relational query params](../../system/relations.md) to narrow the results:
 
 | Value | Fetches elements…
 | - | -
 | `':empty:'` | that don’t have any related assets.
 | `':notempty:'` | that have at least one related asset.
 | `100` | that are related to the asset with an ID of 100.
-| `[100, 200]` | that are related to an asset with an ID of 100 or 200.
-| `[':empty:', 100, 200]` | with no related assets, or are related to an asset with an ID of 100 or 200.
+| `[100, 200]` | that are related to an asset with an ID of 100 _or_ 200.
+| `[':empty:', 100, 200]` | with no related assets, or are related to an asset with an ID of 100 _or_ 200.
 | `['and', 100, 200]` | that are related to the assets with IDs of 100 and 200.
-| an [Asset](craft5:craft\elements\Asset) object | that are related to the asset.
+| one or more [Asset](craft5:craft\elements\Asset) elements | that are related to the asset/assets.
 | an [AssetQuery](craft5:craft\elements\db\AssetQuery) object | that are related to any of the resulting assets.
 
-::: code
+In this example, we’re querying for other “product” entries that reference the same document:
+
 ```twig
-{# Fetch entries with a related asset #}
-{% set entries = craft.entries()
-  .myFieldHandle(':notempty:')
+{% set document = entry.materialDisclosures.one() %}
+
+{% set similarProducts = craft.entries()
+  .section('products')
+  .materialDisclosures(document)
   .all() %}
 ```
-```php
-// Fetch entries with a related asset
-$entries = \craft\elements\Entry::find()
-    ->myFieldHandle(':notempty:')
-    ->all();
-```
+
+::: tip
+Exclude the current entry by setting `.id(['not', entry.id])` to the query!
 :::
+
+You might also want to search for elements that have (or _don’t_ have) assets attached to a specific field:
+
+```twig
+{# Products for which documentation of hazardous materials is provided: #}
+{% set potentiallyDangerousProducts = craft.entries()
+  .section('products')
+  .materialDisclosures(':notempty:')
+  .all() %}
+
+{# Products that have no disclosures: #}
+{% set probablySafeProducts = craft.entries()
+  .section('products')
+  .materialDisclosures(':empty:')
+  .all() %}
+```
 
 ### Working with Assets Field Data
 
@@ -223,12 +239,6 @@ $relatedAssets = $entry->myFieldHandle
 ```
 :::
 
-::: tip
-<Todo notes="Extract this into a snippet." />
-
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](../twig/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
-:::
-
 ### Saving Assets Fields
 
 If you have an element form, such as an [entry form](kb:entry-form), that needs to contain an Assets field, you will need to submit your field value as a list of asset IDs in the order you want them to be related.
@@ -315,6 +325,54 @@ You can do this by passing each of the related asset IDs in the field data array
 {{ input('file', 'fields[myFieldHandle][]', options={
   multiple: true,
 }) }}
+```
+
+### GraphQL
+
+<See path="../../development/graphql.md" hash="custom-fields" label="Custom Fields in GraphQL" description="Get familiar with using custom fields in GraphQL queries." />
+
+Assets related via an assets field can be queried by via the field’s handle. You must make one or more sub-selections:
+
+```graphql{4-8}
+query News {
+  entries(section: "blog") {
+    ... on post_Entry {
+      featureImage {
+        id
+        filename
+        url
+      }
+    }
+  }
+}
+```
+
+The special [`@transform` directive](../../development/graphql.md#the-transform-directive) allows you to apply [image transforms](../../development/image-transforms.md#graphql) to assets, on-the-fly. The directive can be used on the entire asset field, or many subfields thereof:
+
+```graphql{4,16}
+query HomepageContent {
+  hero: entries(section: "blog", limit: 1) {
+    ... on post_Entry {
+      featureImage@transform(handle: "hero") {
+        url
+        filename
+        width
+        height
+      }
+    }
+  }
+
+  feed: entries(section: "blog", offset: 1) {
+    ... on post_Entry {
+      featureImage {
+        url@transform(handle: "thumbnail")
+        filename
+        width
+        height
+      }
+    }
+  }
+}
 ```
 
 ## See Also
