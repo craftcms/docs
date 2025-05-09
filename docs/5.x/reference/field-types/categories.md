@@ -317,8 +317,48 @@ For example, you could create a list of checkboxes for each of the possible rela
 ```
 
 ::: tip
-Note that it’s not possible to customize the order that categories will be related in, and if a nested category is related, so will each of its ancestors.
+When the **Maintain Hierarchy** [setting](#settings) is _enabled_, Craft enforces an order for the selected categories and normalizes the selections to “fill in” gaps in the tree.
+
+With the setting _disabled_, only the explicitly-selected categories will be related, in the order they appear in the request—most often, their order in the form’s HTML.
 :::
+
+### GraphQL
+
+Categories related via a categories field can be selected along with the source of the relationship:
+
+```graphql{7-10}
+query Posts {
+  entries(section: "blog") {
+    title
+    url
+
+    ... on post_Entry {
+      topics {
+        title
+        url
+      }
+    }
+  }
+}
+```
+
+You can also use categories fields as query arguments, to narrow the results:
+
+```graphql{4}
+query TopicPosts {
+  entries(
+    section: "blog"
+    topics: [1234, 5678]
+  ) {
+    title
+    url
+  }
+}
+```
+
+Some relational queries may require that you translate category identifiers (like slugs or UUIDs) to IDs.
+
+<See path="../../development/graphql.md" hash="relationships" label="Relational Fields in GraphQL" description="Get the most out of Craft’s relational fields via the GraphQL API." />
 
 ## See Also
 

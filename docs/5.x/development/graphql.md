@@ -185,37 +185,9 @@ RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 ```
 :::
 
-## Custom Fields
-
-In addition to nave element properties, all your [custom field](../system/fields.md) content is accessible via the GraphQL API.
-
-The keys you use to access that data often depends on how the fields are connected to each type of element via [field layouts](../system/fields.md#field-layouts). Craft defines interfaces for each of your element types’ variations (like entry types or category groups) and exposes fields using either their global or locally-overridden handle. Altogether, this means that you will often add custom fields within an inline fragment:
-
-```graphql{5,10,13}
-query StationsQuery {
-  entries(section: "weatherBeacons") {
-    title
-    id
-    ... on terrestrialStation_Entry {
-      location {
-        administrativeArea
-      }
-    }
-    ... on atmosphericStation_Entry {
-      altitude
-    }
-    ... on maritimeStation_Entry {
-      douglasSeaScale
-    }
-  }
-}
-```
-
-In this example, `title` and `id` are fields available on _all_ entries, whereas `location`, `altitude`, and `douglasSeaScale` are fields available only on specific entry type interfaces (`terrestrialStation_Entry`, `atmosphericStation_Entry`, and `maritimeStation_Entry`, respectively).
-
 ## Examples
 
-### Query
+### Basic Query
 
 Here’s what a [query](#query-reference) for two news entries might look like, complete with a formatted `dateCreated` and custom-transformed `featureImage`:
 
@@ -272,25 +244,211 @@ Here’s what a [query](#query-reference) for two news entries might look like, 
 ```
 :::
 
-#### Relations
+### Custom Fields
 
-You can use relational arguments like `relatedToAssets` and `relatedToEntries` to limit results based on relationships to other elements. Their respective types (referenced below) look like `[*CriteriaInput]`, where `*` will be the name of the target element, and you can pass an array of one or more objects each having the same arguments you’d use in an [element query](element-queries.md).
+In addition to nave element properties, content stored in [custom fields](../system/fields.md) is accessible via the GraphQL API.
 
-We could use the `relatedToCategories` argument, for example, to narrow our previous example’s news articles to those related to an “Announcements” category:
+The keys you use to access that data often depends on how the fields are connected to each type of element via [field layouts](../system/fields.md#field-layouts). Craft defines interfaces for each of your element types’ variations (like entry types or category groups) and exposes fields using either their global or locally-overridden handle. Altogether, this means that you will often add custom fields within an inline fragment:
 
-```graphql{2}
-{
-  entries (section: "news", relatedToCategories: [{slug: "announcements"}]) {
+```graphql{5,10,13}
+query StationsQuery {
+  entries(section: "weatherBeacons") {
     title
+    id
+    ... on terrestrialStation_Entry {
+      location {
+        administrativeArea
+      }
+    }
+    ... on atmosphericStation_Entry {
+      altitude
+    }
+    ... on maritimeStation_Entry {
+      douglasSeaScale
+    }
+  }
+}
+```
+
+In this example, `title` and `id` are fields available on _all_ entries, whereas `location`, `altitude`, and `douglasSeaScale` are fields available only on specific entry type interfaces (`terrestrialStation_Entry`, `atmosphericStation_Entry`, and `maritimeStation_Entry`, respectively).
+
+While specific interfaces are required for _selecting_ fields, they aren’t required when using custom fields as query arguments. Here, we’re using a `sentiment` field to narrow a query for “Review” entries:
+
+```graphql
+query PositiveReviews {
+  entries(section: "reviews", sentiment: "awesome") {
+    postDate@formatDateTime(format: "F j, Y")
+    title
+    body
   }
 }
 ```
 
 ::: tip
-See [Relations](../system/relations.md) for more on Craft’s relational field types.
+Mouseover any token in the GraphiQL editor to view introspections, or open the **Documentation Explorer** to learn about the acceptable argument types for each [field type](../reference/field-types/README.md).
 :::
 
-Advanced relational conditions are possible using the `relatedViaField` and `relatedViaSite` params. <Since ver="5.4.0" feature="Site- and field-specific relational criteria" />
+#### Relationships
+
+The GraphQL API exposes Craft’s powerful, field-driven [relations](../system/relations.md) system in a familiar way.
+
+::: tip
+The following examples include server-rendered Twig “equivalents,” which are necessarily bound to HTML output.
+:::
+
+- Select fields from related elements:
+
+  ::: code
+  ```graphql GraphQL
+  query Posts {
+    entries(section: "blog") {
+      title
+      url
+
+      ... on post_Entry {
+        # Assets:
+        featureImage {
+          url
+          width
+          height
+        }
+
+
+        # Categories:
+        primaryCategory {
+          title
+          url
+        }
+
+        topics {
+          title
+          url
+        }
+      }
+    }
+  }
+  ```
+  ```twig Twig
+  {% set posts = craft.entries()
+    .section('blog')
+    .all() %}
+
+  {% for post in posts %}
+    {{ post.primaryCategory.eagerly().one().title }}
+
+    {% set image = post.featureImage.eagerly().one() %}
+
+    {% if image %}
+      {{ image.getImg() }}
+    {% endif %}
+
+    {{ post.title }}
+
+    <ul>
+      {% for category in post.topics.eagerly().all() %}
+        <li>{{ category.getLink() }}</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+  ```
+  :::
+
+  Selections can be arbitrarily deep, but they must be explicit—GraphQL does not provide a means of recursively querying data.
+
+- Narrow results using a specific field:
+
+  ::: code
+  ```graphql GraphQL
+  query TopicPosts {
+    entries(section: "blog", primaryCategory: [1234]) {
+      title
+      url
+
+      # ...
+    }
+  }
+  ```
+  ```twig Twig
+  {% set topicPosts = craft.entries()
+    .section('blog')
+    .primaryCategory(category)
+    .all() %}
+
+  {% for post in topicPosts %}
+    {# ... #}
+  {% endfor %}
+  ```
+  :::
+
+  You may need to pre-flight a query to translate an identifier (like a slug) into a valid category ID:
+
+  ```graphql
+  query CategoryLookup($slug: String) {
+    category(slug: [$slug]) {
+      id
+    }
+  }
+  ```
+
+- Find elements using abstract relational criteria:
+
+  ::: code
+  ```graphql GraphQL
+  query TopicPosts {
+    entries(
+      section: "blog"
+      relatedToCategories: [
+        {
+          slug: ["travel", "winter-sports"]
+          group: "topics"
+          relatedViaField: "topics"
+        }
+      ]
+    ) {
+      title
+      url
+
+      # ...
+    }
+  }
+  ```
+  ```twig{1-4,8-11} Twig
+  {% set categoryIds = craft.categories()
+    .group('topics')
+    .slug(['travel', 'winter-sports'])
+    .ids() %}
+
+  {% set relatedPosts = craft.entries()
+    .section('blog')
+    .relatedTo({
+      targetElement: categoryIds,
+      field: 'topics',
+    })
+    .all() %}
+  ```
+  :::
+
+  The criteria for `relatedToCategories` (or any of the `relatedTo*` arguments) are the same as the corresponding element query types (like `category()` and `categories()`).
+
+::: tip
+By default, relational criteria are logically joined with “or.” To query for elements that match _all_ the relational criteria, prepend `"and"` to the list of IDs passed to the `relatedTo` query argument.
+:::
+
+Advanced relational conditions are possible using the `relatedViaField` (seen above) and `relatedViaSite` params. <Since ver="5.4.0" feature="Site- and field-specific relational criteria" />
+
+### Search
+
+Craft’s search index is also exposed via GraphQL via the `search` query argument:
+
+```graphql
+query SearchResults($terms: String) {
+  entries(search: $terms, orderBy: "score") {
+    title
+    url
+    searchScore
+  }
+}
+```
 
 ### Mutation
 
