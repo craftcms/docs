@@ -318,11 +318,11 @@ The `expires` tag accepts a single, optional expression beginning with either `i
 `on`
 :   Sets cache headers to a specific date:
 
-    - `{% expires on entry.expiryDate %}`
-    - `{% expires on now|date_modify('midnight next friday') %}`
-    - `{% expires on tomorrow %}`
+    - `{% expires on entry.expiryDate %}` — Derived from an element attribute or custom field.
+    - `{% expires on now|date_modify('midnight next friday') %}` — Using an offset compatible with PHP’s [relative date parser](https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative).
+    - `{% expires on tomorrow %}` — One of the [date variables](global-variables.md#tomorrow) Craft provides.
 
-When neither an `in` or `on` clause are used in the tag, Craft instead calls <craft5:craft\web\Response::setNoCacheHeaders()>. Using the `expires` tag multiple times in a single request will only honor the _last_ call.
+When neither an `in` nor `on` clause are used in the tag, Craft instead calls <craft5:craft\web\Response::setNoCacheHeaders()>. Using the `expires` tag multiple times in a single request will only honor the _last_ evaluated call. This behavior be unintuitive due to Twig’s processing order, particularly when using `extends` and `embed` tags.
 
 ## `header`
 
