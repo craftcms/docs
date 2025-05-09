@@ -138,3 +138,71 @@ If you have an element form, such as an [entry form](kb:entry-form), that needs 
   {% endfor %}
 </select>
 ```
+
+### GraphQL
+
+Dropdown fields (and the similar [button group](button-group.md) and [radio buttons](radio-buttons.md) fields) return a single string (or `null`) when selected in a GraphQL query:
+
+::: code
+```graphql{7} Query
+query Reviews {
+  entries(section: "reviews") {
+    title
+    postDate
+
+    ... on review_Entry {
+    	sentiment
+    }
+  }
+}
+```
+```json{7,12,17,22} Response
+{
+  "data": {
+    "entries": [
+      {
+        "title": "Meh…",
+        "postDate": "2025-05-07T10:30:00-07:00",
+        "sentiment": "neutral"
+      },
+      {
+        "title": "Undecided",
+        "postDate": "2025-05-07T10:20:00-07:00",
+        "sentiment": null
+      },
+      {
+        "title": "Disappointed!",
+        "postDate": "2025-05-07T10:10:00-07:00",
+        "sentiment": "miserable"
+      },
+      {
+        "title": "Out-of-this-world!",
+        "postDate": "2025-05-07T10:00:00-07:00",
+        "sentiment": "awesome"
+      }
+    ]
+  }
+}
+```
+:::
+
+Fields can also be used as query arguments:
+
+::: code
+```graphql Query
+query ReviewTally {
+  positive: entryCount(section: "reviews", sentiment: "awesome")
+  negative: entryCount(section: "reviews", sentiment: "miserable")
+  impartial: entryCount(section: "reviews", sentiment: ["neutral", null])
+}
+```
+```json Response
+{
+  "data": {
+    "positive": 1,
+    "negative": 1,
+    "impartial": 2
+  }
+}
+```
+:::

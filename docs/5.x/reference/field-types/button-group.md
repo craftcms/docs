@@ -37,4 +37,4 @@ The field works best with a limited number of visually distinct options.
 
 ## Development
 
-Button group fields share the same template and query capabilities with [dropdown fields](dropdown.md).
+Button group fields share template, query, and GraphQL capabilities with [dropdown fields](dropdown.md).
