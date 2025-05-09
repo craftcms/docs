@@ -390,6 +390,37 @@ The following examples include server-rendered Twig “equivalents,” which are
   }
   ```
 
+- Scope selection of related elements:
+
+  ::: code
+  ```graphql{6} GraphQL
+  query PostsWithBroadTopics {
+    entries(section: "blog") {
+      title
+      url
+
+      ... on post_Entry {
+        topics(level: 1) {
+          title
+        }
+      }
+    }
+  }
+  ```
+  ```twig{8} Twig
+  {% set posts = craft.entries()
+    .section('blog')
+    .all() %}
+
+  {% for post in posts %}
+    {{ post.title }}
+
+    Filed in {{ post.topics.level(1).eagerly().collect().join(', ') }}
+  {% endfor %}
+  ```
+  :::
+
+
 - Find elements using abstract relational criteria:
 
   ::: code
