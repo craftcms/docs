@@ -34,7 +34,7 @@ class MyUtility extends Utility
         return 'my-utility';
     }
 
-    public static function iconPath(): ?string
+    public static function icon(): ?string
     {
         return Craft::getAlias('@my-plugin/icon.svg');
     }
@@ -74,7 +74,7 @@ The static [`badgeCount()`](craft5:craft\base\UtilityInterface::badgeCount()) me
 ::: warning
 Badge counts are calculated on every control panel request. Be mindful of your users’ experience, and cache any expensive arithmetic or database queries!
 
-It’s also important to display a number that reflects items that are actionable for the current user. Suppose you wanted to list “stale” entries (things that hadn’t been edited in the last month)—showing a user a count across all sections (even if they didn’t have teh correct [permissions](#permissions)) might continue to display a badge, even when their backlog was cleared!
+It’s also important to display a number that reflects items that are actionable for the current user. Suppose you wanted to list “stale” entries (things that hadn’t been edited in the last month)—showing a user a count across all sections (even if they didn’t have the correct [permissions](#permissions)) might continue to display a badge, even when their backlog was cleared!
 
 ```php
 public static function badgeCount(): int
