@@ -189,7 +189,7 @@ Since
 :  3.5.6
 
 Deprecated
-:  in 4.0.0
+:  in 4.0.0 <Icon kind="danger" style="color: var(--craft-red)" />
 
 </div>
 
@@ -1159,7 +1159,7 @@ Since
 :  3.6.14
 
 Deprecated
-:  in 4.11.0. [[\craft\filters\Headers]] should be used instead.
+:  in 4.11.0. [[\craft\filters\Headers]] should be used instead. <Icon kind="danger" style="color: var(--craft-red)" />
 
 </div>
 
@@ -3187,7 +3187,7 @@ Since
 :  3.5.0
 
 Deprecated
-:  in 4.13.0. [[\craft\filters\BasicHttpAuthLogin]] should be used instead.
+:  in 4.13.0. [[\craft\filters\BasicHttpAuthLogin]] should be used instead. <Icon kind="danger" style="color: var(--craft-red)" />
 
 </div>
 
@@ -4471,7 +4471,7 @@ Since
 :  3.5.0
 
 Deprecated
-:  in 4.11.0. [[\craft\filters\Cors]] should be used instead.
+:  in 4.11.0. [[\craft\filters\Cors]] should be used instead. <Icon kind="danger" style="color: var(--craft-red)" />
 
 </div>
 
