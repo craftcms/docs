@@ -26205,19 +26205,19 @@
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
@@ -26253,19 +26253,19 @@
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
@@ -26301,19 +26301,19 @@
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
@@ -26349,19 +26349,19 @@
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
@@ -26397,19 +26397,19 @@
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
@@ -26445,19 +26445,19 @@
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
@@ -26493,19 +26493,19 @@
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
@@ -26541,19 +26541,19 @@
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
@@ -26589,19 +26589,19 @@
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
