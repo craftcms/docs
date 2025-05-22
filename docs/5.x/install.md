@@ -113,9 +113,11 @@ Pre-built starter project ZIPs should only be used for evaluating Craft in limit
 
 ### Hosting
 
+The fastest way to share your work is with a free seven-day trial of our first-party hosting platform, [Craft Cloud](https://craftcms.com/cloud).
+
 <See path="deploy.md" hash="selecting-a-host" label="Selecting a Host" description="Know your options when looking for a good hosting solution." />
 
-Craft’s own footprint is relatively light, but it’s important to choose a platform that matches your traffic, storage, and redundancy needs. We maintain a [list of Craft-friendly providers](https://craftcms.com/hosting) for projects of varying scale.
+Craft’s own footprint is relatively light, but it’s important to choose a platform that matches your traffic, storage, and redundancy needs. We maintain a [list of Craft-friendly hosting products](kb:hosting-craft-101) for projects of varying scale.
 
 ### Deployment
 

@@ -52,7 +52,7 @@ If you ever need to prepare content ahead of a deployment (say, if you’ve crea
 Craft will work on virtually any hosting platform that meets its [requirements](requirements.md), but choosing one that matches your expectations for performance and reliability—and your appetite for devops—is key.
 
 ::: tip
-Check out our list of [hosting partners](https://craftcms.com/hosting), and the [introduction to hosting](kb:hosting-craft-101) Knowledge Base article if this is your first time launching a Craft project.
+Check out our [introduction to hosting](kb:hosting-craft-101) Knowledge Base article if this is your first time launching a Craft project, or spin up a free seven-day trial of [Craft Cloud](https://craftcms.com/cloud)!
 :::
 
 <columns>
