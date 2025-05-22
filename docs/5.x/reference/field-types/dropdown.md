@@ -33,6 +33,8 @@ Dropdown fields have the following settings:
   - **Color** (Optional) — A color for the icon, or, when no icon is selected, a color pip.
   - **Default?** — One option can be marked as the default.
 
+Unlike the [radio buttons](radio-buttons.md) field, dropdown fields do not accept custom values from authors. If you need to select multiple values, consider the [checkboxes](checkboxes.md) field.
+
 ::: tip
 If you change the underlying value of an option that is used by existing entries, Craft will select the designated default option the next time one of those elements is edited.
 
