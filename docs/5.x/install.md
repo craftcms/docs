@@ -38,7 +38,7 @@ While we [strongly recommend](#why-ddev) DDEV for new Craft projects, [alternate
 1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft):
 
     ```bash
-    ddev composer create-project -y "craftcms/craft"
+    ddev composer create-project "craftcms/craft"
     ```
 
     The setup wizard will start automatically! Accept all defaults (in `[square brackets]`), and note your chosen username and password.
