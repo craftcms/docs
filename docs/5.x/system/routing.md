@@ -240,14 +240,14 @@ This rule only serves as an alias to the controller action, which will always be
 
 You can provide your own error templates for Craft to use when returning errors on the front end.
 
-When an error is encountered, Craft will look for a template in your `templates/` directory, in the following order:
+When an error is encountered, Craft looks in your `templates/` directory for a template matching these criteria (in order):
 
-1. A template matching the error’s status code, like `404.twig`.
-2. For a 503 error, a template named `offline.twig`.
-3. A template named `error.twig`.
+1. …a template matching the error’s status code, like `404.twig`;
+2. …(for 503 errors) a template named `offline.twig`;
+3. …a generic template named `error.twig`;
 
 ::: tip
-You can tell Craft to look for the error template in a nested template directory, using the <config5:errorTemplatePrefix> config setting.
+You can tell Craft to look for the error template in a nested template directory, using the <config5:errorTemplatePrefix> config setting. Using `_errors/` would mean that the above rules check `_errors/404.twig`, `_errors/offline.twig`, and `_errors/error.twig`.
 :::
 
 If Craft finds a matching error template, it will render it with the following variables:
@@ -260,7 +260,12 @@ If Craft finds a matching error template, it will render it with the following v
 
 ::: tip
 Custom error templates are only used when [Dev Mode](config5:devMode) is **disabled**. When it’s enabled, an exception view will be rendered instead. Note that `devMode` may also be set via the `CRAFT_DEV_MODE` [environment override](../configure.md#environment-overrides)!
+
+Logged-in control panel users can enable **Show full exception views when Dev Mode is disabled** in their [preferences](user-management.md).
 :::
+
+If Craft _can’t_ find an appropriate template, it renders the built-in front-end error template. This view can be customized via CSS using the <config5:systemTemplateCss> config setting. 
+Full reference for the CSS variables used on this page are [available in the source](https://github.com/craftcms/cms/blob/5.x/src/web/assets/theme/dist/fe.css). <Since ver="5.6.0" feature="Customizable front-end error templates" />
 
 ### Redirection <Since ver="5.6.0" feature="Redirects config file" />
 
