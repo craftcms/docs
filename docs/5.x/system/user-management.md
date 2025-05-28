@@ -262,6 +262,12 @@ Keep in mind that permissions issues are dealt with differently than [validation
 
 You can look up users with a given permission using the [`can()` method](../reference/element-types/users.md#can) on a user query. To find users belonging to a specific group, use the [`group()` method](../reference/element-types/users.md#group).
 
+## Preferences
+
+Users have a few settings that govern their experience of the control panel and front-end, including their preferred **Language** and **Formatting Locale**, a number of **Accessibility** features, and (for [administrators](#admin-accounts)) debugging tools.
+
+![User preferences screen in the Craft control panel](../images/users-preferences.png)
+
 ## Authentication <Badge text="New!" />
 
 [Credentialed](#special-states) users in Craft can authenticate with one or more methods. By default, Craft uses a password to verify the user’s identity. In addition to passwords, users can set up [two-factor authentication](#time-based-one-time-passwords), or add a [passkey](#passkeys).
