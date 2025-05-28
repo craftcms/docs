@@ -314,7 +314,7 @@ By default, Craft puts new users in a [pending state](#statuses) and allows them
 
 ### Affiliated Site <Since ver="5.6.0" feature="Affiliated sites for user elements" />
 
-During registration, Craft captures the current [site](sites.md) and stores it as the user’s **Affiliated Site**. This is primarily used to determine what language [system emails](mail.md#system-messages) should be sent in, when dispatched in site-agnostic contexts (like the control panel or from a CLI command).
+During registration, Craft captures the current [site](sites.md) and stores it as the user’s **Affiliated Site**. This is primarily used to determine what language and template [system emails](mail.md#system-messages) should be use, when sent from site-agnostic contexts (like the control panel or CLI).
 
 ### Default Group
 
