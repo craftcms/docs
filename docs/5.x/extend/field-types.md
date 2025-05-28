@@ -301,6 +301,10 @@ In this example, `validateSymbol` is a method _on the field class itself_—not 
 
 When the effective rules differ this greatly, however, it may be a sign that your field type should actually be _two_ distinct types. Short of that, field settings can also influence the sort of [inputs](#inputs) you display to an author: for this “currency” field, the default appearance could be a dropdown menu with a fixed set of known options; then, in “securities” mode, it could switch to a plain-text input with a placeholder value that takes the shape of a typical ISIN.
 
+### Emptiness
+
+Implement the `isValueEmpty()` to tell Craft what kinds of values you consider “empty.” Internally, we use this to determine whether an author explicitly selected a value (or if it’s a default or incidental) in the process of saving elements and propagating content between sites. The base method treats `null` and zero-length arrays (`[]`) and strings (`''`) as empty.
+
 ## Previews
 
 In order for your field type to be displayed on [element indexes](../system/elements.md#indexes) or [cards](../system/elements.md#chips-cards), it must implement <craft5:craft\base\PreviewableFieldInterface>. Some field types will work with no additional configuration, as the base <craft5:craft\base\Field\getPreviewHtml()> method handles a number of common value types including booleans, dates, and anything that can be cast to a string.
