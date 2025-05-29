@@ -362,7 +362,7 @@ For example, loading and populating hundreds of element models into a collection
 
 ### `one()`
 
-If you only need a single element, call `one()` instead of [`all()`](#all). It will either a populated element model or `null` if no matching element exists.
+If you only need a single element, call `one()` instead of [`all()`](#all). It will return either a populated element model or `null` if no matching element exists.
 
 ::: code
 ```twig
