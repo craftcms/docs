@@ -81,11 +81,11 @@ We believe that starting with a local development environment (rather than direc
 <See path="deploy.md#workflow" label="Defining a Workflow" />
 
 ::: tip
-To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./reference/cli.md#db-backup). Have them clone the project and run:
+To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./reference/cli.md#db-backup). Have them clone the project, download the backup, and run:
 
 ```bash
 ddev start
-ddev import-db path/to/backup.sql
+ddev import-db < path/to/backup.sql
 ```
 :::
 
