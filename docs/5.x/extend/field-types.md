@@ -239,6 +239,19 @@ public function inputHtml(mixed $value, ?ElementInterface $element, bool $inline
 }
 ```
 
+### Fieldsets
+
+When your field appears in a field layout, it is wrapped in an instance of <craft5:craft\fieldlayoutelements\CustomField>. You can customize the structure and semantics of your field’s [input](#inputs)(s) by implementing the `useFieldset()` method on your field class:
+
+```php
+public function useFieldset(): bool
+{
+    return true;
+}
+```
+
+The field layout element calls this method as it renders the surrounding markup, including the field label, instructions, and errors. You may wish to base the return value on your field’s configuration—the <craft5:craft\fields\Date> field, for example, uses a fieldset only when its `showTime` setting is _enabled_ and the user will be presented with two discrete HTML inputs.
+
 ## Validation
 
 Field types provide two sets of [validation rules](guide:structure-models#validation-rules).
