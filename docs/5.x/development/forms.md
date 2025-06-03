@@ -232,6 +232,39 @@ This example assumes you have no preexisting HTML from the server, as though it 
 Note that by generating and outputting a CSRF token into HTML, the page can no longer be safely cached.
 :::
 
+The body of a request can be set to a `FormData` object populated from an HTML form, as well:
+
+```twig
+<form method="post" id="user-profile">
+  {{ csrfInput() }}
+  {{ actionInput('users/save-user') }}
+
+  <input type="text" name="fullName" value="{{ currentUser.fullName }}" required>
+
+  <button>Save</button>
+</form>
+
+<script>
+  const $form = document.getElementById('user-profile');
+
+  $form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    fetch('/actions/users/save-user', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: new FormData($form),
+    })
+    .then(response => response.json())
+    .then(result => console.log(result));
+  })
+</script>
+```
+
+
 #### Sending JSON
 
 If you prefer to work with a JSON payload for the body, you must include [the appropriate `Content-Type` header](yii2:yii\web\Request::parsers). The equivalent `users/save-user` request would look like this:
