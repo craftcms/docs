@@ -239,7 +239,7 @@ State | `application/json`
 Sends a password reset email.
 
 ::: tip
-See the [Front-End User Accounts](kb:front-end-user-accounts#reset-password-forms) guide for an example of working with this action.
+See the [Front-End User Accounts](kb:front-end-user-accounts#reset-password-form) guide for an example of working with this action.
 :::
 
 #### Supported Params
