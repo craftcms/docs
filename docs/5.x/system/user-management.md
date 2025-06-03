@@ -451,7 +451,7 @@ These variables are available in all Twig contexts:
 
 - `loginUrl` — Defined by <config5:loginPath>. Used to build a link to the central login page, and where users will be redirected when requesting a protected resource.
 - `logoutUrl` — Defined by <config5:logoutPath>. Used to build a link that immediately logs the user out.
-- `setPasswordUrl` — Defined by <config5:setPasswordRequestPath>. Used to build a link to a central page where users can request their password be reset. An link is sent to the user’s email address (based on the <config5:setPasswordPath> setting) with `id` and `code` query parameters.
+- `setPasswordUrl` — Defined by <config5:setPasswordRequestPath>. Used to build a link to a central page where users can request their password be reset. A link is sent to the user’s email address (based on the <config5:setPasswordPath> setting) with `id` and `code` query parameters.
 
 Other URLs are generated when activating accounts or resetting passwords, and are not available for direct use in templates.
 
@@ -467,10 +467,12 @@ Fine-grained control over registration and sign-in workflows are possible with t
 - Changing and verifying email addresses…
   - <config5:verifyEmailPath> — Used when generating a link sent via email to verify access to an email address.
   - <config5:verifyEmailSuccessPath> — Similar to `setPasswordSuccessPath`, but for redirection after a user verifies their email address (either upon creating an account, or changing its email address).
+  - <config5:useEmailAsUsername> — Simplifies record-keeping and authentication by eliminating discrete usernames.
 - Security and timing…
   - <config5:autoLoginAfterAccountActivation> — Control whether users are immediately logged in after setting a password. (Default: `false`)
   - <config5:purgePendingUsersDuration> — How long Craft waits before deleting pending, non-activated users. (Default: `0`, or _disabled_)
   - <config5:purgeStaleUserSessionDuration> — How long Craft waits before dropping stale sessions from the `sessions` database table. This may (Default: 90 days)
+  - <config5:invalidUserTokenPath> — Where users are redirected if the token or code in an activation or verification link is invalid or has expired.
 
 ## CLI
 
