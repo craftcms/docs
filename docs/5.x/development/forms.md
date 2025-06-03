@@ -232,9 +232,9 @@ This example assumes you have no preexisting HTML from the server, as though it 
 Note that by generating and outputting a CSRF token into HTML, the page can no longer be safely cached.
 :::
 
-The body of a request can be set to a `FormData` object populated from an HTML form, as well:
+When using the `fetch()` API, the body of a request can be set to a `FormData` object populated from an HTML form, as well:
 
-```twig
+```twig{11,22}
 <form method="post" id="user-profile">
   {{ csrfInput() }}
   {{ actionInput('users/save-user') }}
