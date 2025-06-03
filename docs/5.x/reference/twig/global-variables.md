@@ -44,7 +44,7 @@ Variable | Description
 [logoutUrl](#logouturl) | The URL to the front-end Logout page.
 [now](#now) | The current date/time.
 [primarySite](#primarysite) <Since ver="5.6.0" feature="Global Twig variable for the primary site" /> | In multi-site projects, the “primary” site.
-[setPasswordUrl](#setpasswordurl) | The URL to the front-end [Reset Password](kb:front-end-user-accounts#reset-password-forms) page.
+[setPasswordUrl](#setpasswordurl) | The URL to the front-end [Reset Password](kb:front-end-user-accounts#reset-password-form) page.
 [siteName](#sitename) | The name of the current site.
 [siteUrl](#siteurl) | The base URL of the current site.
 [systemName](#systemname) | The system name.
