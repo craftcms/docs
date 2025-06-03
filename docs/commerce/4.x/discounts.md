@@ -104,60 +104,55 @@ Restrict the discount to a specific time period defined by start and end date fi
 
 ### Order Condition Formula
 
-The order condition formula lets you use a simple Twig condition syntax to add a matching rule to the discount.
-If the field is left blank, the condition will match the order being matched to the discount (the other conditions will still apply).
+The order condition formula lets you define custom logic via a pared-down [Twig expression](https://twig.symfony.com/doc/3.x/templates.html#expressions) that returns `true` or `false`. Formulas are ultimately evaluated as part of an `{% if ... %}` control tag.
 
-The field accepts the [Twig’s expression syntax](https://twig.symfony.com/doc/3.x/templates.html#expressions), which is an expression that returns `true` or `false`.
+- If the field is left blank it has no effect on the matching.
+- If the expression evaluates to `true` (or any equivalent “[truthy](https://twig.symfony.com/doc/3.x/tags/if.html)” value), the discount _matches_ the order.
+- If the expression evaluates to `false` (or any equivalent “falsey” value) the condition _disqualifies_ the order.
 
-If the expression is calculated as `true`, the discount matches the order. If not, the condition disqualifies the order from the discount. An empty condition is the same as a `true` expression.
-
-The condition formula can use an `order` variable, which for safety is an array and not the order element—it’s the same representation of the order you’d see if you exported it from the order index page. This data-only format prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
+The condition formula has access to an `order` variable, which (for safety) is an array and not the order element—effectively the same representation of the order you’d see if you exported it from the order index page. This data-only format prevents a store manager from accidentally or maliciously calling methods like `order.markAsComplete()`. The same is true for any nested elements and custom field values—everything is serialized into arrays and scalar values.
 
 ::: tip
-The condition formula’s `order` array is generated with:
-
-```php
-$order->toArray(
-    [], ['lineItems.snapshot', 'shippingAddress', 'billingAddress']
-);
-```
+As an additional safeguard, only a handful of Twig filters, functions, tags, and variables are available in this context. See <commerce4:craft\commerce\services\Formulas> for a complete list of allowed features.
 :::
 
 Here are some examples of an discount’s condition formula:
 
-**Example 1:**
+Example 1: Company Email Discount
 
-```twig
-'@myclient.com' in order.email
-```
+:   ```twig
+    '@myclient.com' in order.email
+    ```
 
-The above would be a `true` statement if the order’s email contains the string `@myclient.com`.
+    The above would be a `true` statement if the order’s email contains the string `@myclient.com`.
 
-This would be a way of giving this discount to anyone from that company.
+    This would be a way of giving a discount to customers using a specific company’s email address.
 
-**Example 2:**
+    ::: warning
+    Guest customers do not need to verify the email they use on an order! You may need to use the **Match Customer** condition builder to ensure they are a registered user.
+    :::
 
-```twig
-order.shippingAddressId and order.shippingAddress.zipCode[0:2] == '70'
-```
+Example 2: Local Customers
 
-The above would be a `true` statement if the order has a shipping address and the shipping address `zipCode` starts with `70`.
+:   ```twig
+    order.shippingAddressId and order.shippingAddress.postalCode[0:2] == '70'
+    ```
 
-This would be a way of giving this discount to anyone shipping to that postal code.
+    The above would be a `true` statement if the order has a shipping address and the shipping address `postalCode` starts with `70`.
 
-**Example 3:**
+    This would be a way of giving this discount to anyone shipping to that postal code.
 
-```twig
-order.myCustomLicenseField and order.myCustomLicenseField == 'Supporter'
-```
+Example 3: Custom Fields
 
-The above would be a `true` statement if the order has a custom `myCustomLicenseField` field with a value of `Supporter`.
+:   ```twig
+    order.myCustomLicenseField and order.myCustomLicenseField == 'Supporter'
+    ```
 
-This would be a way of giving this discount to anyone that’s chosen a specific product license, and you could similarly use it to offer discounts that depend on custom field data.
+    The above would be a `true` statement if the order has a custom `myCustomLicenseField` field with a value of `Supporter`.
 
-::: tip
-For safety, only a serialized representation of order attributes is available; you can’t call custom field methods from a condition formula.
-:::
+    This would be a way of giving this discount to anyone that’s chosen a specific product license, and you could similarly use it to offer discounts that depend on custom field data.
+
+Whenever possible, we recommend implementing **Order Condition Formula** as **Match Order** conditions. Doing so means that we can automatically migrate conditions or provide suggestions during major version upgrades.
 
 ### Purchase Total
 
