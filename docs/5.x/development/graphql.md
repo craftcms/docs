@@ -1818,7 +1818,7 @@ This is the interface implemented by all entries.
 | `sectionHandle`| `String` | The handle of the section that contains the entry.
 | `fieldId`| `Int` | The ID of the field that contains the entry.
 | `fieldHandle`| `String` | The handle of the field that contains the entry.
-| `ownerId`| `Int` | The ID of the entry’s owner elementt.
+| `ownerId`| `Int` | The ID of the entry’s owner element.
 | `sortOrder`| `Int` | The entry’s position within the field that contains it.
 | `typeId`| `Int!` | The ID of the entry type that contains the entry.
 | `typeHandle`| `String!` | The handle of the entry type that contains the entry.
