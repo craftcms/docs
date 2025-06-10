@@ -228,14 +228,22 @@ Consider these tips for creating special URIs:
 - [Aliases](../../configure.md#aliases-and-environment-variables) can be evaluated with the [`alias()` function](../twig/functions.md#alias): `{{ alias('@basePressUri') }}/news`, `{{ alias('@mySectionUri') }}`.
 - The [null-coalescing operator](https://twig.symfony.com/doc/3.x/templates.html#other-operators) (`??`) can silently swallow undefined variable errors (like `parent.uri`, above);
 
+Elements accessed via the current `object` (like authors or [relational fields](../../system/relations.md#custom-fields)) will be loaded in the appropriate site, but _new_ element queries (like the example above that uses `craft.entries()`), must explicitly use `.site()` or `.siteId()` to load elements in the same site. The current element’s site can always be accessed via `object.site` or `object.siteId`, respectively:
+
+```
+{craft.entries().section('mySingle').site(object.site).one().slug}
+```
+
+If you only have one site, you can omit this for brevity; similarly, if the resolved value tends to be the same as a value you’re already storing in project config, consider hard-coding it.
+
 ::: warning
-Elements accessed via the current `object` (like authors or relational fields) will be loaded in the appropriate site, but _new_ element queries (like the example above that uses `craft.entries()`), must explicitly use `.site()` to avoid loading elements in the default site:
+**Do not** use element IDs directly in URI formats. They are not a [reliable identifier](../../system/project-config.md#ids-uuids-and-handles) across environments. For example, keeping channel entries’ URLs synchronized with a [single](#singles) using this format…
 
 ```
-{craft.entries().section('mySingle').site(object.siteId).one().slug}
+{craft.entries().id(123).one().slug}/{slug}
 ```
 
-The current element’s site ID can always be accessed via `object.siteId`.
+…may load the correct entry in development, but find a different one on your live site. Use a handle (like the example above) for consistency!
 :::
 
 #### Hierarchical URIs
