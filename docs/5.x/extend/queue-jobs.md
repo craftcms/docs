@@ -154,6 +154,7 @@ Batched jobs **must** be pushed using <craft5:craft\helpers\Queue::push()>, or `
 Special setup and cleanup actions can be defined in two pairs of methods:
 
 | Method… | Runs… |
+| --- | --- |
 | `before()` | …at the very beginning of a series of batched jobs. |
 | `beforeBatch()` | …prior to each batch in a series. |
 | `afterBatch()` | …after each batch in a series. |
