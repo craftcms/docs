@@ -30,7 +30,7 @@ A tax category may have zero or more [tax rates](#tax-rates), which we’ll expl
 
 ### Fetching Tax Categories
 
-You can fetch your site’s tax categories through the [TaxCategories](commerce4:craft\commerce\services\TaxCategories) service:
+You can fetch your site’s tax categories through the [TaxCategories](commerce5:craft\commerce\services\TaxCategories) service:
 
 ::: code
 ```twig
@@ -45,7 +45,7 @@ $categories = \craft\commerce\Plugin::getInstance()
 ```
 :::
 
-This returns an array of [TaxCategory](commerce4:craft\commerce\models\TaxCategory) models. You can use these to work with basic details like the category’s ID, name, and description, as well as related [product types](products-variants.md#product-types) and [tax rates](#tax-rates):
+This returns an array of [TaxCategory](commerce5:craft\commerce\models\TaxCategory) models. You can use these to work with basic details like the category’s ID, name, and description, as well as related [product types](products-variants.md#product-types) and [tax rates](#tax-rates):
 
 ```twig
 {% for categories as taxCategory %}
@@ -140,7 +140,7 @@ The tax rate also has settings for exactly *what* it applies to and *how* it sho
 
 ### Fetching Tax Rates
 
-You can fetch all of your site’s tax rates through the [TaxRates](commerce4:craft\commerce\services\TaxRates) service:
+You can fetch all of your site’s tax rates through the [TaxRates](commerce5:craft\commerce\services\TaxRates) service:
 
 ::: code
 ```twig
@@ -155,7 +155,7 @@ $rates = \craft\commerce\Plugin::getInstance()
 ```
 :::
 
-This returns an array of [TaxRate](commerce4:craft\commerce\models\TaxRate) models. You can use these to work with basic details like the rate’s ID, name, code, and rate, as well as related tax zones and categories:
+This returns an array of [TaxRate](commerce5:craft\commerce\models\TaxRate) models. You can use these to work with basic details like the rate’s ID, name, code, and rate, as well as related tax zones and categories:
 
 ```twig
 {% for rates as taxRate %}
@@ -252,7 +252,7 @@ postalCode in ['NG102', 'NG103', 'NG104']
 
 ### Fetching Tax Zones
 
-You can fetch your site’s tax zones through the [TaxZones](commerce4:craft\commerce\services\TaxZones) service:
+You can fetch your site’s tax zones through the [TaxZones](commerce5:craft\commerce\services\TaxZones) service:
 
 ::: code
 ```twig
@@ -267,7 +267,7 @@ $zones = \craft\commerce\Plugin::getInstance()
 ```
 :::
 
-This returns an array of [TaxAddressZone](commerce4:craft\commerce\models\TaxAddressZone) models. You can use these to work with basic details like the zone’s ID, name, and description and the geographic conditions you’ve established for it:
+This returns an array of [TaxAddressZone](commerce5:craft\commerce\models\TaxAddressZone) models. You can use these to work with basic details like the zone’s ID, name, and description and the geographic conditions you’ve established for it:
 
 ```twig
 {% for zones as taxZone %}

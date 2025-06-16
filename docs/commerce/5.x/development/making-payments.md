@@ -76,13 +76,13 @@ If a payment fails, Commerce passes the payment form model back to the template 
 
 ### Model Attributes
 
-Each gateway provides its own payment form, extending [BasePaymentForm](commerce4:craft\commerce\models\payments\BasePaymentForm). Generic models are available (like when using the “Dummy” gateway), but we only recommend using them for testing.
+Each gateway provides its own payment form, extending [BasePaymentForm](commerce5:craft\commerce\models\payments\BasePaymentForm). Generic models are available (like when using the “Dummy” gateway), but we only recommend using them for testing.
 
 ::: danger
 **You should never accept credit card or bank details directly from a customer.** Modern payment gateways use one-time identifiers to securely transport sensitive information, without ever requiring it to pass through your server. The following section on [tokenization](#tokenization) covers this in greater detail.
 :::
 
-The [CreditCardPaymentForm](commerce4:craft\commerce\models\payments\CreditCardPaymentForm), for example, supports a variety of card-like attributes to help simulate payments.
+The [CreditCardPaymentForm](commerce5:craft\commerce\models\payments\CreditCardPaymentForm), for example, supports a variety of card-like attributes to help simulate payments.
 
 | Attribute | Validation | Description |
 | --- | --- | --- |

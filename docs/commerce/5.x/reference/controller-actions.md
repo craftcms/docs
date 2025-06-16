@@ -222,8 +222,8 @@ The action’s output depends on whether the payment source was saved and the `A
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark label="Success" /> | [Standard behavior][after-success]. | [Standard behavior][after-success]; [PaymentSource](commerce4:craft\commerce\models\PaymentSource) data available under the `paymentSource` key.
-<x-mark label="Failure" /> | [Standard behavior][after-failure]; [BasePaymentForm](commerce4:craft\commerce\models\payments\BasePaymentForm) subclass available in the template as `paymentForm`, | [Standard behavior][after-failure]; payment form data available under the `paymentForm` key.
+<check-mark label="Success" /> | [Standard behavior][after-success]. | [Standard behavior][after-success]; [PaymentSource](commerce5:craft\commerce\models\PaymentSource) data available under the `paymentSource` key.
+<x-mark label="Failure" /> | [Standard behavior][after-failure]; [BasePaymentForm](commerce5:craft\commerce\models\payments\BasePaymentForm) subclass available in the template as `paymentForm`, | [Standard behavior][after-failure]; payment form data available under the `paymentForm` key.
 
 </span>
 
@@ -352,7 +352,7 @@ Param | Description
 `planUid` | **Required.** UID of the Commerce plan the customer wants to subscribe to.
 `fields[...]` | Subscription custom field values, indexed by their handles.
 `fieldsLocation` | Allows relocation of the default `fields` key for custom field data (see above).
-`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SubscriptionForm> subclass.
+`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce5:craft\commerce\models\subscriptions\SubscriptionForm> subclass.
 
 ::: warning
 `planUid` and all gateway-specific properties must be [hashed][hash-filter] to prevent tampering.
@@ -378,7 +378,7 @@ Cancels an active subscription.
 Param | Description
 ----- | -----------
 `subscriptionUid` | **Required.** UID of the subscription to cancel. Must be [hashed][hash-filter].
-`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\CancelSubscriptionForm> subclass.
+`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce5:craft\commerce\models\subscriptions\CancelSubscriptionForm> subclass.
 
 #### Response
 
@@ -401,7 +401,7 @@ Param | Description
 ----- | -----------
 `subscriptionUid` | **Required.** UID of the subscription getting updated. Must be [hashed][hash-filter].
 `planUid` | **Required.** UID of the plan to switch to. Must be [hashed][hash-filter].
-`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce4:craft\commerce\models\subscriptions\SwitchPlansForm> subclass.
+`*` | **Conditionally required.** Each [gateway](../system/gateways.md) that supports subscriptions may require additional properties on its <commerce5:craft\commerce\models\subscriptions\SwitchPlansForm> subclass.
 
 #### Response
 

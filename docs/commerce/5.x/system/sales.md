@@ -103,7 +103,7 @@ This is a sale-level option, not a purchasable-level option like the above `Igno
 
 ### craft.commerce.sales.allSales
 
-Returns an array of all sales set up in the system, each represented as a [Sale](commerce4:craft\commerce\models\Sale) model.
+Returns an array of all sales set up in the system, each represented as a [Sale](commerce5:craft\commerce\models\Sale) model.
 
 ```twig
 {% for sale in craft.commerce.sales.allSales %}

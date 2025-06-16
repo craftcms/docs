@@ -35,8 +35,8 @@ Emails are managed per-store. To create a new email, navigate to <Journey path="
 
 Emails have the following configuration settings. Unless otherwise noted, textual settings are treated as [object templates](/5.x/system/object-templates.md), and are provided two special variables:
 
-- `order` — the [Order object](commerce4:craft\commerce\elements\Order) that triggered the email;
-- `orderHistory` — the [OrderHistory object](commerce4:craft\commerce\models\OrderHistory) created as the order changed status, or `null` if the email was triggered manually;
+- `order` — the [Order object](commerce5:craft\commerce\elements\Order) that triggered the email;
+- `orderHistory` — the [OrderHistory object](commerce5:craft\commerce\models\OrderHistory) created as the order changed status, or `null` if the email was triggered manually;
 
 This allows you to customize the behavior of an email, without a module or plugin—for example, sending a copy of an email to 
 
@@ -66,8 +66,8 @@ If “Send to custom recipient” is selected, a comma-separated list of email a
 
 Like the [Email Subject](#email-subject), this field is an [object template](/5.x/system/object-templates.md). Two special variables are available:
 
-- `order` — the [Order object](commerce4:craft\commerce\elements\Order) that triggered the email;
-- `orderHistory` — the [OrderHistory object](commerce4:craft\commerce\models\OrderHistory) created as the order changed status, or `null` if the email was triggered manually;
+- `order` — the [Order object](commerce5:craft\commerce\elements\Order) that triggered the email;
+- `orderHistory` — the [OrderHistory object](commerce5:craft\commerce\models\OrderHistory) created as the order changed status, or `null` if the email was triggered manually;
 
 `order` is the cart or order relevant to the notification. To replicate the “Send to the customer” behavior, you might provide this:
 
