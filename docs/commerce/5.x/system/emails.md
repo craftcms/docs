@@ -17,7 +17,7 @@ Commerce emails are sent via the [queue](/5.x/system/queue.md). To ensure prompt
 Let’s look at a couple examples of emails you might want to send:
 
 - **Customer Order Confirmation** —  When an order is completed, you’ll often want to send a receipt to the customer. This would be linked to the default order status since we want it to trigger when a cart is completed and becomes an order.
-- **Admin Order Notification** — At the same time (when a cart becomes an order with the default order status), a separate email is sent to the store owner’s email address, with stock alerts or shipping information.
+- **Admin Order Notification** — At the same time (when a cart becomes an order with the default order status), a separate email can be sent to the store owner’s email address, with stock alerts or shipping information.
 - **Shipping Update** — When an order is packed and has a shipping label, an administrator might add tracking information to a custom field on the order, then move the order into a status that triggers a specially-formatted message with a link to the courier’s tracking tool.
 - **Back-ordered** — Suppose inventory was off, or a distributor’s shipment is late. You could notify the customer that their order is on hold.
 
@@ -83,32 +83,32 @@ To give customers the ability to control where notifications are sent, you can s
 
 ### Reply-To Address
 
-The Reply-To address for this email.
+The “Reply-To” address for this email.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce5:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce5:craft\commerce\models\OrderHistory).
 
 ### BCC’d Recipient
 
-The BCC addresses for this email. Most likely, you would BCC the store owner on order confirmation.
+The “BCC” addresses for this email. Most likely, you would BCC the store owner on order confirmation.
 
 Separate multiple addresses with a comma (`,`).
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce5:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce5:craft\commerce\models\OrderHistory).
 
 ### CC’d Recipient
 
-The CC addresses for this email. Separate multiple addresses with a comma (`,`).
+The “CC” addresses for this email. Separate multiple addresses with a comma (`,`).
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce5:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce5:craft\commerce\models\OrderHistory).
 
 ### HTML Email Template Path
 
@@ -116,28 +116,27 @@ The path to an HTML template in your site’s `templates/` folder.
 
 This field takes plain text as well as Twig values. Two special variables are available:
 
-- `order` is a populated [Order object](commerce4:craft\commerce\elements\Order).
-- `orderHistory` is a populated [OrderHistory object](commerce4:craft\commerce\models\OrderHistory).
+- `order` is a populated [Order object](commerce5:craft\commerce\elements\Order).
+- `orderHistory` is a populated [OrderHistory object](commerce5:craft\commerce\models\OrderHistory).
 
-This allows you to have full design flexibility.
+By using a dynamic template path, you can recycle a single “email” for a variety of different status updates.
 
 ### Plain Text Email Template Path
 
-The path to a plain text template in your site’s `templates/` folder.
-
-This works the same way as the “HTML Email Template Path”.
-
+The path to a plain text template in your site’s `templates/` folder. This works the same way as the [HTML Email Template Path](#html-email-template-path).
 
 ### PDF Attachment
 
-Choose a PDF that will be attached to this email.
+Choose a [PDF](pdfs.md) to render and attach to the email.
 
-## Email Language
+### Language
 
-Under most circumstances, emails are sent in the language of the site the order was placed in. Commerce captures this at checkout, and it cannot be changed after the order is completed. As a result, emails triggered by orders from a single store _can_ be rendered in different languages, if that store is attached to multiple sites.
+Select a **Language** that the email will be rendered in.
+
+By default, emails are sent in the language of the site the order was placed in. Commerce captures this at checkout, and it cannot be changed after the order is completed. As a result, emails triggered by orders from a single store _can_ be rendered in different languages, if that store is attached to multiple sites.
 
 ::: tip
-Set up [static message translations](/5.x/system/sites.md#static-message-translations) if you need to localize parts of your emails.
+Set up [static message translations](/5.x/system/sites.md#static-message-translations) and use the [`t()` filter](/5.x/reference/twig/filters.html#translate-or-t) if you need to localize parts of your emails.
 :::
 
 ## Selecting an Email
