@@ -156,7 +156,7 @@ When a label is _not_ explicitly defined, Craft will figure out the best textual
 <a href="{{ entry.myLinkFieldHandle.value }}">{{ entry.myLinkFieldHandle.label }}</a>
 ```
 
-This is the default behavior when using a link’s `link` property. If you need to retrieve the label _as it was entered_ (bypassing Craft’s internal fallback logic), use `link.getLabel(false)`.
+This is the default behavior when using a link’s `link` property. If you need to retrieve the label _as it was entered_ (bypassing Craft’s internal fallback logic, and potentially returning an empty value), use `link.getLabel(true)`. Passing `false` _ignores_ explicitly-entered labels and returns the fallback label.
 
 Craft also automatically includes the `target` attribute when rendering a link, if the **Open in a new tab** option is available (and enabled) for the field. You can access this manually via the `target` property:
 
