@@ -17,6 +17,8 @@ Default value
     'underlineLinks' => false,
     'disableAutofocus' => false,
     'notificationDuration' => 5000,
+    'notificationPosition' => 'end-start',
+    'slideoutPosition' => 'end',
 ]`
 
 Defined by
@@ -36,6 +38,11 @@ The array can contain the following keys:
 - `disableAutofocus` – Whether inputs should make use of the `autofocus` attribute.
 - `notificationDuration` – How long notifications should be shown before they disappear automatically (in
   milliseconds). Set to `0` to show them indefinitely.
+- `notificationPosition` – Where notifications should be shown on the screen (`'start-start'` for top-left,
+  `'start-end'` for top-right, `'end-start'` for bottom-left, or `'end-end'` for bottom-right, when using an
+  LTR orientation).
+- `slideoutPosition` – Where slideouts should be shown on the screen (`'start'` for left, or `'end'`
+  for right, when using an LTR orientation).
 
 ```php
 ->accessibilityDefaults([
@@ -2304,17 +2311,19 @@ Allowed types
 :  `mixed`
 
 Default value
-:  `''`
+:  `null`
 
 Defined by
 :  [GeneralConfig::$invalidUserTokenPath](craft5:craft\config\GeneralConfig::$invalidUserTokenPath)
 
 </div>
 
-The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account
-passwords. Note that this only affects front-end site requests.
+The URI Craft should redirect to when user token validation fails. User tokens are used for
+email verification and password resets. If `null`, <config5:loginPath> will be used by default.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+Note that this only affects front-end site requests.
 
 ::: code
 ```php Static Config
