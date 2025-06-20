@@ -13,10 +13,12 @@ Allowed types
 
 Default value
 :  `[
-    'alwaysShowFocusRings' => false,
     'useShapes' => false,
     'underlineLinks' => false,
+    'disableAutofocus' => false,
     'notificationDuration' => 5000,
+    'notificationPosition' => 'end-start',
+    'slideoutPosition' => 'end',
 ]`
 
 Defined by
@@ -31,11 +33,16 @@ The default user accessibility preferences that should be applied to users that 
 
 The array can contain the following keys:
 
-- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus.
 - `useShapes` – Whether shapes should be used to represent statuses.
 - `underlineLinks` – Whether links should be underlined.
+- `disableAutofocus` – Whether inputs should make use of the `autofocus` attribute.
 - `notificationDuration` – How long notifications should be shown before they disappear automatically (in
   milliseconds). Set to `0` to show them indefinitely.
+- `notificationPosition` – Where notifications should be shown on the screen (`'start-start'` for top-left,
+  `'start-end'` for top-right, `'end-start'` for bottom-left, or `'end-end'` for bottom-right, when using an
+  LTR orientation).
+- `slideoutPosition` – Where slideouts should be shown on the screen (`'start'` for left, or `'end'`
+  for right, when using an LTR orientation).
 
 ```php
 ->accessibilityDefaults([
@@ -131,7 +138,7 @@ Defined by
 
 Whether Craft should allow system and plugin updates in the control panel, and plugin installation from the Plugin Store.
 
-This setting will automatically be disabled if <config4:allowAdminChanges> is disabled.
+This setting will automatically be disabled if <config5:allowAdminChanges> is disabled.
 
 ::: code
 ```php Static Config
@@ -386,7 +393,7 @@ Since
 The default locale the control panel should use for date/number formatting, for users who haven’t set
 a preferred language or formatting locale.
 
-If this is `null`, the <config4:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
+If this is `null`, the <config5:defaultCpLanguage> config setting will determine which locale is used for date/number formatting by default.
 
 ::: code
 ```php Static Config
@@ -501,8 +508,8 @@ Allowed types
 
 Default value
 :  `[
-    'html',
     'twig',
+    'html',
 ]`
 
 Defined by
@@ -514,10 +521,10 @@ The template file extensions Craft will look for when matching a template path t
 
 ::: code
 ```php Static Config
-->defaultTemplateExtensions(['html', 'twig', 'txt'])
+->defaultTemplateExtensions(['twig', 'html', 'txt'])
 ```
 ```shell Environment Override
-CRAFT_DEFAULT_TEMPLATE_EXTENSIONS=html,twig,txt
+CRAFT_DEFAULT_TEMPLATE_EXTENSIONS=twig,html,txt
 ```
 :::
 
@@ -783,7 +790,7 @@ Defined by
 
 </div>
 
-List of file extensions that will be merged into the <config4:allowedFileExtensions> config setting.
+List of file extensions that will be merged into the <config5:allowedFileExtensions> config setting.
 
 ::: code
 ```php Static Config
@@ -876,11 +883,11 @@ When this is enabled, the following changes will take place:
 - Front-end routing will skip checks for element and template requests.
 - Front-end responses will be JSON-formatted rather than HTML by default.
 - Twig will be configured to escape unsafe strings for JavaScript/JSON rather than HTML by default for front-end requests.
-- The <config4:loginPath>, <config4:logoutPath>, <config4:setPasswordPath>, and <config4:verifyEmailPath> settings will be ignored.
+- The <config5:loginPath>, <config5:logoutPath>, <config5:setPasswordPath>, and <config5:verifyEmailPath> settings will be ignored.
 
 ::: tip
 With Headless Mode enabled, users may only set passwords and verify email addresses via the control panel. Be sure to grant “Access the control
-panel” permission to all content editors and administrators. You’ll also need to set the <config4:baseCpUrl> config setting if the control
+panel” permission to all content editors and administrators. You’ll also need to set the <config5:baseCpUrl> config setting if the control
 panel is located on a different domain than your front end.
 :::
 
@@ -1052,6 +1059,45 @@ CRAFT_LIMIT_AUTO_SLUGS_TO_ASCII=true
 
 
 
+### `localeAliases`
+
+<div class="compact">
+
+Allowed types
+:  [array](https://php.net/language.types.array)
+
+Default value
+:  `[]`
+
+Defined by
+:  [GeneralConfig::$localeAliases](craft4:craft\config\GeneralConfig::$localeAliases)
+
+Since
+:  5.0.0
+
+</div>
+
+Custom locale aliases, which will be included when fetching all known locales.
+
+Each locale alias should be defined as an array with the following keys:
+
+- `id`: The alias locale ID
+- `aliasOf`: The original locale ID
+- `displayName`: The locale alias’s display name _(optional)_
+
+ ::: code
+ ```php Static Config
+ ->localeAliases([
+    'smj' => [
+        'aliasOf' => 'sv',
+        'displayName' => 'Lule Sámi',
+    ],
+])
+ ```
+ :::
+
+
+
 ### `maxBackups`
 
 <div class="compact">
@@ -1137,6 +1183,50 @@ The highest number Craft will tack onto a slug in order to make it unique before
 ```
 ```shell Environment Override
 CRAFT_MAX_SLUG_INCREMENT=10
+```
+:::
+
+
+
+### `partialTemplatesPath`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string)
+
+Default value
+:  `'_partials'`
+
+Defined by
+:  [GeneralConfig::$partialTemplatesPath](craft4:craft\config\GeneralConfig::$partialTemplatesPath)
+
+Since
+:  5.0.0
+
+</div>
+
+The path within the `templates` folder where element partial templates will live.
+
+Partial templates are used to render elements when calling [craft\elements\db\ElementQuery::render()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-render),
+[craft\elements\ElementCollection::render()](https://docs.craftcms.com/api/v4/craft-elements-elementcollection.html#method-render), or [craft\base\Element::render()](https://docs.craftcms.com/api/v4/craft-base-element.html#method-render).
+
+For example, you could render all the entries within a Matrix field like so:
+
+```twig
+{{ entry.myMatrixField.render() }}
+```
+
+The full path to a partial template will also include the element type handle (e.g. `asset` or `entry`) and the
+field layout provider’s handle (e.g. the volume handle or entry type handle). For an entry of type `article`,
+that would be: `_partials/entry/article.twig`.
+
+::: code
+```php Static Config
+->partialTemplatesPath('_cp/partials')
+```
+```shell Environment Override
+CRAFT_PARTIAL_TEMPLATES_PATH=_cp/partials
 ```
 :::
 
@@ -1359,7 +1449,7 @@ Defined by
 :  [GeneralConfig::$safeMode](craft4:craft\config\GeneralConfig::$safeMode)
 
 Since
-:  4.9.0
+:  5.1.0
 
 </div>
 
@@ -1483,6 +1573,70 @@ The character(s) that should be used to separate words in slugs.
 ```
 ```shell Environment Override
 CRAFT_SLUG_WORD_SEPARATOR=.
+```
+:::
+
+
+
+### `staticStatuses`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$staticStatuses](craft4:craft\config\GeneralConfig::$staticStatuses)
+
+Since
+:  5.7.0
+
+</div>
+
+Whether entries’ statuses should be stored statically, and only get updated on entry save, or when the
+`update-statuses` command is executed.
+
+::: code
+```php Static Config
+->staticStatuses()
+```
+```shell Environment Override
+CRAFT_STATIC_STATUSES=true
+```
+:::
+
+
+
+### `systemTemplateCss`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$systemTemplateCss](craft4:craft\config\GeneralConfig::$systemTemplateCss)
+
+Since
+:  5.6.0
+
+</div>
+
+The URL to a CSS file that should be included when rendering system templates on the front end,
+such as the Login and Set Password templates.
+
+::: code
+```php Static Config
+->systemTemplateCss('/css/cp-theme.css');
+```
+```shell Environment Override
+CRAFT_SYSTEM_TEMPLATE_CSS=/css/cp-theme.css
 ```
 :::
 
@@ -1680,13 +1834,13 @@ It works by setting the height of the iframe to match the height of the inner we
 than the iframe document itself. This can lead to some unexpected CSS issues, however, because the previewed viewport height will be taller
 than the visible portion of the iframe.
 
-If you have a [decoupled front end](https://craftcms.com/docs/4.x/entries.html#previewing-decoupled-front-ends), you will need to include
+If you have a [decoupled front end](https://craftcms.com/docs/5.x/reference/element-types/entries.html#previewing-decoupled-front-ends), you will need to include
 [iframeResizer.contentWindow.min.js](https://raw.github.com/davidjbradshaw/iframe-resizer/master/js/iframeResizer.contentWindow.min.js) on your
 page as well for this to work. You can conditionally include it for only Live Preview requests by checking if the requested URL contains a
 `x-craft-live-preview` query string parameter.
 
 ::: tip
-You can customize the behavior of iFrame Resizer via the <config4:previewIframeResizerOptions> config setting.
+You can customize the behavior of iFrame Resizer via the <config5:previewIframeResizerOptions> config setting.
 :::
 
 ::: code
@@ -1784,7 +1938,7 @@ Defined by
 :  [GeneralConfig::$backupCommandFormat](craft4:craft\config\GeneralConfig::$backupCommandFormat)
 
 Since
-:  4.9.0
+:  5.1.0
 
 </div>
 
@@ -2093,7 +2247,7 @@ The base URL Craft should use when generating control panel URLs.
 It will be determined automatically if left blank.
 
 ::: tip
-The base control panel URL should **not** include the [control panel trigger word](config4:cpTrigger) (e.g. `/admin`).
+The base control panel URL should **not** include the [control panel trigger word](config5:cpTrigger) (e.g. `/admin`).
 :::
 
 ::: code
@@ -2126,14 +2280,14 @@ The URI segment Craft should look for when determining if the current request sh
 the front-end website.
 
 This can be set to `null` if you have a dedicated hostname for the control panel (e.g. `cms.my-project.tld`), or you are running Craft in
-[Headless Mode](config4:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root
+[Headless Mode](config5:headlessMode). If you do that, you will need to ensure that the control panel is being served from its own web root
 directory on your server, with an `index.php` file that defines the `CRAFT_CP` PHP constant.
 
 ```php
 define('CRAFT_CP', true);
 ```
 
-Alternatively, you can set the <config4:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your
+Alternatively, you can set the <config5:baseCpUrl> config setting, but then you will run the risk of losing access to portions of your
 control panel due to URI conflicts with actual folders/files in your main web root.
 
 (For example, if you have an `assets/` folder, that would conflict with the `/assets` page in the control panel.)
@@ -2157,17 +2311,19 @@ Allowed types
 :  `mixed`
 
 Default value
-:  `''`
+:  `null`
 
 Defined by
 :  [GeneralConfig::$invalidUserTokenPath](craft4:craft\config\GeneralConfig::$invalidUserTokenPath)
 
 </div>
 
-The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account
-passwords. Note that this only affects front-end site requests.
+The URI Craft should redirect to when user token validation fails. User tokens are used for
+email verification and password resets. If `null`, <config5:loginPath> will be used by default.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+Note that this only affects front-end site requests.
 
 ::: code
 ```php Static Config
@@ -2201,8 +2357,6 @@ The URI Craft should use for user login on the front end.
 
 This can be set to `false` to disable front-end login.
 
-Note that this config setting is ignored when <config4:headlessMode> is enabled.
-
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: code
@@ -2234,8 +2388,6 @@ Defined by
 The URI Craft should use for user logout on the front end.
 
 This can be set to `false` to disable front-end logout.
-
-Note that this config setting is ignored when <config4:headlessMode> is enabled.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2288,7 +2440,7 @@ CRAFT_OMIT_SCRIPT_NAME_IN_URLS=true
 
 ::: tip
 Even when this is set to `true`, the script name could still be included in some action URLs.
-If you want to ensure that `index.php` is fully omitted from **all** generated URLs, set the <config4:pathParam>
+If you want to ensure that `index.php` is fully omitted from **all** generated URLs, set the <config5:pathParam>
 config setting to `null`.
 :::
 
@@ -2320,7 +2472,7 @@ Example Value | Example URI
 `?page` | `/news?page=5`
 
 ::: tip
-If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config4:pathParam> setting which defaults to `p`.
+If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config5:pathParam> setting which defaults to `p`.
 If your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
 :::
 
@@ -2420,7 +2572,7 @@ Defined by
 
 The path users should be redirected to after logging in from the front-end site.
 
-This setting will also come into effect if the user visits the login page (as specified by the <config4:loginPath> config setting) when
+This setting will also come into effect if the user visits the login page (as specified by the <config5:loginPath> config setting) when
 they are already logged in.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
@@ -2483,12 +2635,10 @@ Defined by
 
 The URI or URL that Craft should use for Set Password forms on the front end.
 
-This setting is ignored when <config4:headlessMode> is enabled, unless it’s set to an absolute URL.
-
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
 ::: tip
-You might also want to set <config4:invalidUserTokenPath> in case a user clicks on an expired password reset link.
+You might also want to set <config5:invalidUserTokenPath> in case a user clicks on an expired password reset link.
 :::
 
 ::: code
@@ -2527,7 +2677,7 @@ See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api
 If this is set, Craft will redirect [.well-known/change-password requests](https://w3c.github.io/webappsec-change-password-url/) to this URI.
 
 ::: tip
-You’ll also need to set [setPasswordPath](config4:setPasswordPath), which determines the URI and template path for the Set Password form
+You’ll also need to set [setPasswordPath](config5:setPasswordPath), which determines the URI and template path for the Set Password form
 where the user resets their password after following the link in the Password Reset email.
 :::
 
@@ -2648,7 +2798,7 @@ Defined by
 
 Whether Craft should specify the path using `PATH_INFO` or as a query string parameter when generating URLs.
 
-This setting only takes effect if <config4:omitScriptNameInUrls> is set to `false`.
+This setting only takes effect if <config5:omitScriptNameInUrls> is set to `false`.
 
 ::: code
 ```php Static Config
@@ -2712,8 +2862,6 @@ Since
 </div>
 
 The URI or URL that Craft should use for email verification links on the front end.
-
-This setting is ignored when <config4:headlessMode> is enabled, unless it’s set to an absolute URL.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
 
@@ -2961,11 +3109,11 @@ Defined by
 :  [GeneralConfig::$asyncCsrfInputs](craft4:craft\config\GeneralConfig::$asyncCsrfInputs)
 
 Since
-:  4.9.0
+:  5.1.0
 
 </div>
 
-Whether CSRF values should be injected via JavaScript for greater cache-ability.
+Whether CSRF values should be injected via JavaScript for greater cache-ability. This setting can be overridden by passing an `async` option into the `csrfInput()` function.
 
 ::: code
 ```php Static Config
@@ -3063,7 +3211,7 @@ Defined by
 
 </div>
 
-The name of CSRF token used for CSRF validation if <config4:enableCsrfProtection> is set to `true`.
+The name of CSRF token used for CSRF validation if <config5:enableCsrfProtection> is set to `true`.
 
 ::: code
 ```php Static Config
@@ -3219,7 +3367,7 @@ Defined by
 
 </div>
 
-Whether to use a cookie to persist the CSRF token if <config4:enableCsrfProtection> is enabled. If false, the CSRF token will be
+Whether to use a cookie to persist the CSRF token if <config5:enableCsrfProtection> is enabled. If false, the CSRF token will be
 stored in session under the `csrfTokenName` config setting name. Note that while storing CSRF tokens in session increases security,
 it requires starting a session for every page that a CSRF token is needed, which may degrade site performance.
 
@@ -3374,7 +3522,7 @@ Since
 
 The amount of time content preview tokens can be used before expiring.
 
-Defaults to <config4:defaultTokenDuration> value.
+Defaults to <config5:defaultTokenDuration> value.
 
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
@@ -3886,7 +4034,7 @@ List of additional file kinds Craft should support. This array will get merged w
 
 ::: tip
 File extensions listed here won’t immediately be allowed to be uploaded. You will also need to list them with
-the <config4:extraAllowedFileExtensions> config setting.
+the <config5:extraAllowedFileExtensions> config setting.
 :::
 
 
@@ -3977,6 +4125,38 @@ Whether asset URLs should be revved so browsers don’t load cached versions whe
 ```
 ```shell Environment Override
 CRAFT_REV_ASSET_URLS=true
+```
+:::
+
+
+
+### `tempAssetUploadFs`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$tempAssetUploadFs](craft4:craft\config\GeneralConfig::$tempAssetUploadFs)
+
+Since
+:  5.0.0
+
+</div>
+
+The handle of the filesystem that should be used for storing temporary asset uploads. A local temp folder will
+be used by default.
+
+::: code
+```php Static Config
+->tempAssetUploadFs('$TEMP_ASSET_UPLOADS_FS')
+```
+```shell Environment Override
+CRAFT_TEMP_ASSET_UPLOAD_FS=tempAssetUploads
 ```
 :::
 
@@ -4318,7 +4498,7 @@ Since
 
 Whether SVG thumbnails should be rasterized.
 
-This will only work if ImageMagick is installed, and <config4:imageDriver> is set to either `auto` or `imagick`.
+This will only work if ImageMagick is installed, and <config5:imageDriver> is set to either `auto` or `imagick`.
 
 ::: code
 ```php Static Config
@@ -4667,7 +4847,7 @@ Defined by
 :  [GeneralConfig::$lazyGqlTypes](craft4:craft\config\GeneralConfig::$lazyGqlTypes)
 
 Since
-:  4.11.0
+:  5.3.0
 
 </div>
 
@@ -4826,7 +5006,7 @@ Since
 
 </div>
 
-Whether the <config4:gqlTypePrefix> config setting should have an impact on `query`, `mutation`, and `subscription` types.
+Whether the <config5:gqlTypePrefix> config setting should have an impact on `query`, `mutation`, and `subscription` types.
 
 ::: code
 ```php Static Config
@@ -4896,7 +5076,7 @@ Set to `0` to disable this feature.
 See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v4/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
 
 ::: tip
-Users will only be purged when [garbage collection](https://craftcms.com/docs/4.x/gc.html) is run.
+Users will only be purged when [garbage collection](https://craftcms.com/docs/5.x/system/gc.html) is run.
 :::
 
 ::: code
@@ -5020,6 +5200,37 @@ CRAFT_SOFT_DELETE_DURATION=0
 
 
 ## Users
+
+### `disable2fa`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$disable2fa](craft4:craft\config\GeneralConfig::$disable2fa)
+
+Since
+:  5.6.0
+
+</div>
+
+Whether two-step verification features should be disabled.
+
+::: code
+```php Static Config
+->disable2fa()
+```
+```shell Environment Override
+CRAFT_DISABLE_2FA=true
+```
+:::
+
+
 
 ### `extraLastNamePrefixes`
 
