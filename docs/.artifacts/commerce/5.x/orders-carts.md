@@ -13,6 +13,7 @@
 | [andWith](#andwith)                             | Causes the query to return matching orders eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
 | [asArray](#asarray)                             | Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
 | [cache](#cache)                                 | Enables query cache for this Query.
+| [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
 | [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 | [couponCode](#couponcode)                       | Narrows the query results based on the order's coupon code.
 | [customer](#customer)                           | Narrows the query results based on the customer’s user account.
@@ -201,6 +202,24 @@ Enables query cache for this Query.
 
 
 
+
+
+
+
+
+
+#### `canonicalsOnly`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-canonicalsonly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Narrows the query results to only canonical elements, including elements
+that reference another canonical element via `canonicalId` so long as they
+aren’t a draft.
+
+
+
+Unpublished drafts can be included as well if `drafts(null)` and
+`draftOf(false)` are also passed.
 
 
 
