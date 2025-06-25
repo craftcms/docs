@@ -5,3 +5,4 @@
 /docs-build
 /docs/.vuepress/dist
 report/
+coverage/
