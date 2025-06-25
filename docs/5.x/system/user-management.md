@@ -298,7 +298,7 @@ An elevated session’s duration is governed by the <config5:elevatedSessionDura
 
 ### Front-end Multi-factor Authentication <Since ver="5.6.0" feature="Multi-factor auth support outside the control panel" />
 
-When **Require two-step verification** is enabled for user groups that _don’t_ have control panel access, those users may be sent to the Craft-provided [front-end login page]() to perform additional authentication.
+When **Require two-step verification** is enabled for user groups that _don’t_ have control panel access, those users may be sent to the Craft-provided [front-end login page](#front-end-pro) to perform additional authentication.
 
 <a name="public-registration"></a>
 
