@@ -13,6 +13,7 @@
     "axe-html-reporter": "^2.2.3",
     "axe-playwright": "^1.1.11",
     "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^27.5.1",
     "babel-preset-vue": "^2.0.2",
     "commander": "^2.20.3",
     "css-loader": "^4.0.0",
@@ -66,19 +67,5 @@
     "html-to-text": "^7.1.1",
     "marked": "^4.0.17",
     "vue-autosuggest": "^2.2.0"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "vue"
-    ],
-    "testMatch": [
-      "**/*.test.js"
-    ],
-    "transform": {
-      "^.+\\.js$": "babel-jest",
-      ".*\\.(vue)$": "@vue/vue2-jest"
-    }
   }
 }
