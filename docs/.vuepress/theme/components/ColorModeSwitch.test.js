@@ -8,19 +8,24 @@ const RenderComponent = () => render(ColorModeSwitch);
 describe('Color Mode Switcher', () => {
   it('renders', () => {
     RenderComponent();
-    const toggle = screen.getByLabelText('Switch dark/light mode');
-    console.log(toggle);
+    const toggle = screen.getByRole('switch');
     expect(toggle).toBeInTheDocument();
   })
 
-  // it ('toggles dark mode with the keyboard', async () => {
-  //   RenderComponent();
-  //   const toggle = screen.getByRole('switch', {
-  //     name: /Dark mode/
-  //   });
+  it ('has a name that details an explicit on/off state', () => {
+    RenderComponent();
+    const toggle = screen.getByRole('switch');
+    expect(toggle).toHaveAccessibleName('Dark mode');
+  })
 
-  //   await userEvent.type(toggle, '{enter}');
+  it ('toggles dark mode with the keyboard', async () => {
+    RenderComponent();
+    const toggle = screen.getByRole('switch', {
+      name: /Dark mode/
+    });
 
-  //   expect(toggle).toHaveAttribute('aria-checked', 'true');
-  // })
+    await userEvent.type(toggle, '{enter}');
+
+    expect(toggle).toHaveAttribute('aria-checked', 'true');
+  })
 })

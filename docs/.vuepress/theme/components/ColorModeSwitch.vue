@@ -1,9 +1,11 @@
 <template>
   <button
     @click="handleClick"
+    role="switch"
     class="dark-mode-toggle"
     :class="{ 'dark': on, 'light': ! on }"
-    :aria-label="`Switch dark/light mode`"
+    :aria-label="`Dark mode`"
+    :aria-pressed="false"
   >
     <div class="backdrop relative w-full h-full">
       <div class="knob"></div>
