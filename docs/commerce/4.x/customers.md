@@ -71,4 +71,4 @@ If a customer chooses to register an account upon order completion, an activatio
 </form>
 ```
 
-When registering at checkout, the order’s billing and shipping [addresses](addresses.md) are automatically saved to the new accounts for future use. <Since product="commerce" ver="4.3.0" feature="Auto-saving guest address when registering at checkout" />
+When registering at checkout, the order’s billing and shipping [addresses](addresses.md) are automatically saved to the new accounts for future use. <Since product="Commerce" repo="craftcms/commerce" ver="4.3.0" feature="Auto-saving guest address when registering at checkout" />
