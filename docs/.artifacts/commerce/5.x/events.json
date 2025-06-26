@@ -17949,6 +17949,102 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingMethodCustomerCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingMethodCustomerCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingMethodCustomerCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingMethodCustomerCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingMethodCustomerCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingMethodCustomerCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingMethodCustomerCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingMethodCustomerCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingRuleCustomerCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingRuleCustomerCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingRuleCustomerCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingRuleCustomerCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingRuleCustomerCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingRuleCustomerCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingRuleCustomerCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\customers\\ShippingRuleCustomerCondition",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\commerce\\elements\\conditions\\customers\\SignedInConditionRule",
         "name": "EVENT_INIT",
         "type": "yii\\base\\Event",
@@ -18244,6 +18340,54 @@
     },
     {
         "class": "craft\\commerce\\elements\\conditions\\orders\\DiscountedItemSubtotalConditionRule",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\GatewayOrderCondition",
+        "name": "EVENT_REGISTER_CONDITION_RULES",
+        "type": "craft\\events\\RegisterConditionRulesEvent",
+        "desc": "The event that is triggered when defining the selectable condition rules."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\GatewayOrderCondition",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\GatewayOrderCondition",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\GatewayOrderCondition",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\GatewayOrderCondition",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\GatewayOrderCondition",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\GatewayOrderCondition",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\commerce\\elements\\conditions\\orders\\GatewayOrderCondition",
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"

@@ -719,8 +719,8 @@ Entries within the blog section.
 | `after`| `String` | Narrows the query results to only entries that were posted on or after a certain date.
 | `expiryDate`| `[String]` | Narrows the query results based on the entries’ expiry dates.
 
-### The `aboutEntries` query
-Entries within the about section.
+### The `homeEntries` query
+Entries within the home section.
 | Argument | Type | Description
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
@@ -787,8 +787,8 @@ Entries within the about section.
 | `after`| `String` | Narrows the query results to only entries that were posted on or after a certain date.
 | `expiryDate`| `[String]` | Narrows the query results based on the entries’ expiry dates.
 
-### The `homeEntries` query
-Entries within the home section.
+### The `aboutEntries` query
+Entries within the about section.
 | Argument | Type | Description
 | - | - | -
 | `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
