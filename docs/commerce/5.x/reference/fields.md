@@ -64,6 +64,6 @@ Variants fields behave almost identically to [products fields](#products-field),
 
 Unlike the products field, however, you cannot create variants directly from the element selection modal—variants are always created within the context of a product, which we don’t have, in this view.
 
-## Link Field <Since product="commerce" ver="5.1.0" feature="Selecting product elements in Craft’s Link field" />
+## Link Field <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Selecting product elements in Craft’s Link field" />
 
 When configuring Craft’s native [Link field](/5.x/reference/field-types/link.md), you can enable selection of Commerce products.

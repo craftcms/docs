@@ -66,7 +66,7 @@ Any time inventory directly altered, changed in response to a completed order, o
 
 Commerce uses database transactions to isolate and roll back groups of inventory changes. Consider a transfer, which must simultaneously add stock to one location and deduct it from another: if one of those operations fails, they are reverted as a group, which can be safely retried later. This “atomicity” also means that concurrent updates to a single inventory value (like a transfer setting its **Available** quantity to `50` and its quantity being reduced by one as an order is completed) are guaranteed to be consistent, regardless which action actually happens first.
 
-## Transfers <Since product="commerce" ver="5.1.0" feature="Transferring inventory between locations" />
+## Transfers <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Transferring inventory between locations" />
 
 When you have two or more inventory locations configured, Commerce adds an **Inventory Transfers** screen to the control panel. Here, you can create and manage transfers of inventory between locations. A transfer encapsulates a list of inventory items and quantities and makes it possible to adjust many [inventory levels](#levels) at once.
 

@@ -179,7 +179,7 @@ To create a new order, navigate to <Journey path="Commerce, Orders" />, and choo
 
 To complete the order, press **Mark as completed**.
 
-#### Custom Line Items <Since product="commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
+#### Custom Line Items <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
 
 In addition to selecting from the store’s available [purchasables](purchasables.md), store managers can create ad-hoc _custom line items_ to represent one-off fees or other order contents.
 

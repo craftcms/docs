@@ -52,7 +52,7 @@ Handle
       .all() %}
     ```
 
-Enable structure for products of this type <Since ver="5.4.0" product="commerce" feature="Structure mode for product types" />
+Enable structure for products of this type <Since product="Commerce" repo="craftcms/commerce" ver="5.4.0" feature="Structure mode for product types" />
 :   Products can be organized hierarchically, like [structure sections](/5.x/reference/element-types/entries.html#structures).
 
     Default Product Placement
@@ -67,7 +67,7 @@ Enable versioning for products of this type
 Show the Title field for products
 :   When enabled, each product will require a **Title**. Disable this if you’d like to generate titles with an [object template](/5.x/system/object-templates.md), using values of other attributes or fields.
 
-    Title translation method <Since product="commerce" ver="5.1.0" feature="Product title translation method settings" />
+    Title translation method <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Product title translation method settings" />
     :   When using custom titles, you can choose how titles are synchronized across sites that the product exists in. The options are identical to those available in [custom fields](/5.x/system/fields.md#translation-methods).
 
         For [multi-store](stores.md) projects, you can use the **Custom…** option with a key format like this to synchronize titles across sites that use the same store:
@@ -102,7 +102,7 @@ Show the Dimensions and Weight fields
 Show the Title field for variants
 :   Equivalent to **Show the Title field for products**, but for variants.
 
-    When _enabled_, you will select a **Title Translation Method**. To avoid confusion, this should generally match the product’s setting. <Since product="commerce" ver="5.1.0" feature="Variant title translation method settings" />
+    When _enabled_, you will select a **Title Translation Method**. To avoid confusion, this should generally match the product’s setting. <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Variant title translation method settings" />
 
     When _disabled_, you must define a **Variant Title Format** using an [object template](/5.x/system/object-templates.md). Note that this template is evaluated in the context of the variant, so product attributes and custom fields must be accessed as `{product.slug}` (not `{slug}` alone). The **Title** field layout element will always appear in the [variant field layout designer](#variant-fields), but it will be hidden when editing a variant.
 
@@ -113,7 +113,7 @@ Site Settings
     Variants do not have their own routing mechanism; calling `variant.url` will return the product’s URL (for the site it was loaded in) with a `variant={id}` query string appended.
     :::
 
-Propagation Method <Since product="commerce" ver="5.1.0" feature="Product element propagation" />
+Propagation Method <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Product element propagation" />
 :   Choose how new product and variant elements are propagated across its supported sites.
 
 ::: tip
@@ -152,10 +152,10 @@ Price
 :   The variant’s [base price](#prices) and [promotional price](#promotional-price), as well as a table showing any matching [catalog pricing rules](pricing-rules.md).
 
 [Stock](#stock)
-:   Enable [inventory management](inventory.md) for the variant, and quickly modify available stock or jump to a detail view for each inventory location. Open the field layout element’s **Settings** slideout to choose the default state for **Track Inventory** and **Allow out of stock purchases** settings for new variants. <Since ver="5.4.0" repo="craftcms/commerce" feature="Control over default state of the “Track Inventory” and “Allow out of stock purchases” settings on variants" />
+:   Enable [inventory management](inventory.md) for the variant, and quickly modify available stock or jump to a detail view for each inventory location. Open the field layout element’s **Settings** slideout to choose the default state for **Track Inventory** and **Allow out of stock purchases** settings for new variants. <Since product="Commerce" repo="craftcms/commerce" ver="5.4.0" feature="Control over default state of the “Track Inventory” and “Allow out of stock purchases” settings on variants" />
 
 Available for Purchase
-:   Prevent a variant from being added to carts. This setting is independent from the global and site-specific **Status**, and allows administrators to make variants discoverable prior to actually selling them. Open the field layout element’s **Settings** slideout to choose its default state for new variants. <Since ver="5.4.0" repo="craftcms/commerce" feature="Control over default state of the  “Available for Purchase” setting on variants" />
+:   Prevent a variant from being added to carts. This setting is independent from the global and site-specific **Status**, and allows administrators to make variants discoverable prior to actually selling them. Open the field layout element’s **Settings** slideout to choose its default state for new variants. <Since product="Commerce"  repo="craftcms/commerce" ver="5.4.0" feature="Control over default state of the  “Available for Purchase” setting on variants" />
 
 Allowed Qty
 :   Set minimum and maximum quantities that customers can purchase.

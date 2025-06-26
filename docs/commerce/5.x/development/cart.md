@@ -93,7 +93,7 @@ Craft includes a powerful [internationalization engine](guide:tutorial-i18n#plur
 
 ### Line Items
 
-A cart’s contents are represented by _line items_. Line items are typically populated and refreshed from [purchasables](../system/purchasables.md) when they are added to the cart, but [custom line items](#custom-line-items) can also be created on-the-fly. <Since product="commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
+A cart’s contents are represented by _line items_. Line items are typically populated and refreshed from [purchasables](../system/purchasables.md) when they are added to the cart, but [custom line items](#custom-line-items) can also be created on-the-fly. <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
 
 Out-of-the-box, most line items represent a [variant](../system/products-variants.md), and have a quantity, description, notes, a calculated subtotal, options, adjustments (like tax and shipping costs), and other metadata. Most importantly, though, the line item retains a reference to its purchasable so that it can be refreshed with the latest information from your store while the customer is shopping. [Donations](../system/donations.md) are also added to the cart as line items.
 

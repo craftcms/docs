@@ -24,10 +24,10 @@ Start Date
 End Date
 :   Apply this rule _before_ the chosen date.
 
-Match Product <Since product="commerce" ver="5.1.0" feature="Product matching" />
+Match Product <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Product matching" />
 :   Apply the rule only to purchasables belonging to products that match the provided conditions.
 
-Match Variant <Since product="commerce" ver="5.1.0" feature="Variant matching" />
+Match Variant <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Variant matching" />
 :   Apply the rule only to variants matching the provided condition.
 
 Match Purchasable
