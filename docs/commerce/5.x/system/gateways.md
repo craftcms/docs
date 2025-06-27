@@ -30,7 +30,7 @@ Most gateways available for Commerce use a [tokenization](https://squareup.com/u
 | [Mollie](https://plugins.craftcms.com/commerce-mollie) | Mollie | Does not support authorize charges | Yes |
 | [PayPal](https://plugins.craftcms.com/commerce-paypal) _deprecated_ | PayPal Pro; PayPal REST; PayPal Express | PayPal REST supports storing payment information | Only PayPal Express |
 
-Additional third-party gateways can be found in the [Plugin Store](https://plugins.craftcms.com/categories/ecommerce?craft4).
+Additional third-party gateways can be found in the [Plugin Store](https://plugins.craftcms.com/categories/ecommerce?craft5).
 
 Before using a plugin-provided gateway, consult the its readme for specifics. Gateways themselves do not implement the logic to process payments against financial institutions, and therefore have external dependencies and fees.
 
@@ -42,11 +42,11 @@ The _Dummy_ gateway is only for testing with placeholder credit card numbers. A 
 
 Example Card Number | Dummy Gateway Response
 ------------------- | ----------------------
-4242424242424242 | <span class="text-green"> <check-mark class="inline" /> Success</span>
-4444333322221111 | <span class="text-red"> <x-mark class="inline" /> Failure</span>
+4242424242424242 | <span class="text-green"> <check-mark inline /> Success</span>
+4444333322221111 | <span class="text-red"> <x-mark inline /> Failure</span>
 
 ::: danger
-**Do not** use real credit card information when testing, as it may be captured as plain text in logs or caches.
+**Do not** use real credit card information when testing, as it may be captured as plain text in logs, caches, or the database.
 :::
 
 ### Manual Gateway
@@ -65,7 +65,15 @@ Gateways can only be configured in development environments with <config5:allowA
 
 See the _Extending Commerce_ section’s [Payment Gateway Types](../extend/payment-gateway-types.md) page to learn about building your own gateway in a plugin or module.
 
-## Storing Config Outside of the Database
+### Gateway Conditions <Since ver="5.4.0" product="Commerce" repo="craftcms/commerce" feature="Order conditions on gateways" />
+
+In a gateway’s settings screen, the **Match Order** condition builder allows you to restrict a gateway to orders that match specific criteria.
+
+![Configuring a gateway with order conditions](../images/gateway-order-condition.png)
+
+Here, we’ve made the _Cash_ gateway available only on orders that the customer will pick up in-store.
+
+### Storing Config Outside of the Database
 
 When you’re configuring gateways in the Craft control panel, we recommend using [environment variables](/5.x/configure.md#control-panel-settings) so environment-specific settings and sensitive API keys don’t end up in the database or project config.
 
@@ -104,26 +112,32 @@ All [first-party provided gateways](#first-party-gateway-plugins) support partia
 Returns all payment gateways available to the customer.
 
 ```twig
-{% set gateways = craft.commerce.gateways.getAllCustomerEnabledGateways %}
+{% set gateways = craft.commerce.gateways.getAllCustomerEnabledGateways() %}
 
-{% if not gateways|length %}
-<p>No payment methods available.</p>
-{% endif %}
+{% if gateways is empty %}
+  {# This is an awkward state, but possible if all enabled gateways have conditions that are too restrictive! #}
+  <p>No payment methods available.</p>
+{% else %}
+  <form method="post">
+    {{ csrfInput() }}
+    {{ actionInput('commerce/cart/update-cart') }}
+    {{ redirectInput('checkout/payment') }}
 
-{% if gateways|length %}
-<form method="post">
-  {{ csrfInput() }}
-  {{ actionInput('commerce/cart/update-cart') }}
-  {{ redirectInput('commerce/checkout/payment') }}
+    <label for="gatewayId">Payment Method</label>
 
-  <label for="gatewayId">Payment Method</label>
-  <select name="gatewayId" id="gatewayId">
-    {% for id,name in gateways %}
-      <option value="{{ id }}"{% if id == cart.gatewayId %} selected{% endif %}>
-        {{- name -}}
-      </option>
-    {% endfor %}
-  </select>
-</form>
+    <select name="gatewayId" id="gatewayId">
+      {% for id, name in gateways %}
+        {{ tag('option', {
+          value: id,
+          selected: id == cart.gatewayId,
+          text: name,
+        }) }}
+      {% endfor %}
+    </select>
+
+    <button>Save + Continue</button>
+  </form>
 {% endif %}
 ```
+
+Once a gateway is selected, you’ll need to [display the selected gateway’s payment form](../development/making-payments.md) using `gateway.getPaymentFormHtml({})`.
