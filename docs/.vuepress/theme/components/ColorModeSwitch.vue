@@ -3,7 +3,9 @@
     @click="handleClick"
     class="dark-mode-toggle"
     :class="{ 'dark': on, 'light': ! on }"
-    :aria-label="`Switch dark/light mode`"
+    role="switch"
+    :aria-label="`Dark mode`"
+    :aria-checked="on ? 'true' : 'false'"
   >
     <div class="backdrop relative w-full h-full">
       <div class="knob"></div>
