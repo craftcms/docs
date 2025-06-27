@@ -2,10 +2,6 @@
 
 Craft Commerce includes a shipping system for adding shipping costs to a cart.
 
-::: warning
-Prior to version 4.5, [shipping features differ](#edition-differences) between Commerce editions.
-:::
-
 You can add any number of [shipping methods](#shipping-methods) to your store, where each one’s purpose is to supply relevant *shipping options* for an order at checkout.
 
 The shipping method determines relevant options with its [shipping rules](#shipping-rules) and the store’s [shipping categories](#shipping-categories) and [shipping zones](#shipping-zones) configured in the control panel.
@@ -63,11 +59,11 @@ postalCode in ['NG102', 'ZZ200', 'CC101']
 
 ## Shipping Methods
 
-Shipping methods are the choices available to the customer during checkout. For example, a shipping method might be called “Pickup”, “FedEx”, “USPS”, or “Express”.
+Shipping methods are the choices available to the customer during checkout. You can name them in whatever way will make sense to your customers: _In-Store Pickup_, _FedEx_, _USPS_, _Freight_, and _Express_ are all succinct ways to describe the general method by which the customer will get their order.
 
-You can name these shipping methods anything that makes sense to the customer. They don’t need to be shipping company names, but usually indicate the delivery method. For example, you could have two shipping methods: one called “FedEx Standard” and “FedEx Overnight”.
+Shipping methods contain a collection of [shipping rules](#shipping-rules), which contribute eligibility conditions and determine the actual costs.
 
-Shipping methods contain a collection of shipping rules, which are conditions for determining when the shipping method should be available.
+Additionally, **Match Order** and **Match Customer** <Since ver="5.4.0" product="Commerce" repo="craftcms/commerce" feature="Customer conditions for shipping methods" /> conditions can be set on the method itself to consolidate some rules.
 
 ::: warning
 If a customer changes their shipping address during checkout, a previously selected shipping method may no longer match and will be immediately removed as the shipping method set on the cart.
@@ -75,23 +71,27 @@ If a customer changes their shipping address during checkout, a previously selec
 
 ## Shipping Rules
 
-Shipping rules belong to a shipping method and may be edited in that shipping method’s “Rules” tab after it’s first saved. Each rule is checked one by one, in order, against the cart to see if it’s a match. The first rule that matches the cart supplies the pricing to the shipping method. If no rules match the cart, that shipping method is not available for the customer to select.
+Shipping rules belong to a shipping method and may be edited in that shipping method’s **Rules** tab after it’s first saved. Each rule is checked one by one, in order, against the cart (and the customer <Since ver="5.4.0" product="Commerce" repo="craftcms/commerce" feature="Customer conditions for shipping methods" />) to see if it’s a match. The first rule that matches the cart supplies the pricing to the shipping method. If no rules match the cart, that shipping method is not available for the customer to select.
 
-## Shipping Rule Conditions
+### Conditions
 
-The matching of the shipping rules to the cart is based on the following rules conditions:
+Each rule uses **Match Order** and **Match Customer** <Since ver="5.4.0" product="Commerce" repo="craftcms/commerce" feature="Customer conditions for shipping rules" /> conditions to determine when a shipping rule is used.
 
-![A default Shipping Method Rule Conditions form.](../images/shipping-method-conditions.png)
+![A new shipping method rule, with no conditions defined.](../images/shipping-method-conditions.png)
+
+::: tip
+If a [shipping method](#shipping-methods) doesn’t include any conditions, each of its rules will be checked.
+:::
 
 ### Shipping Zone
 
-Each shipping rule can have a single zone. This condition is met if the order’s shipping address falls within this zone.
+In earlier version of Commerce, each rule could be connected to a single **Shipping Zone**. This setting was migrated during the upgrade to a **Shipping Address Zone** order condition; you may now select any number of zones that the shipping address must be part of (or not part of).
 
 ### Order Condition Formula
 
-An optional condition for specifying criteria for the shipping method to be available for selection.
+For advanced conditions, you may provide a Twig expression via the **Order Condition Formula** field. Whenever possible, we recommend using the dedicated condition builder UIs.
 
-The condition formula can use an `order` variable, which for safety is an array and not the order element—it’s the same representation of the order you’d see if you exported it from the order index page. This data-only format prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
+The condition formula has access to an `order` variable, which (for safety) is an array and not the order element—it’s the same representation of the order you’d see if you exported it from the order index page. This data-only format prevents a store manager from accidentally calling methods like `order.markAsComplete()`.
 
 ::: tip
 The condition formula’s `order` array is generated with:
@@ -103,31 +103,19 @@ $order->toArray(
 ```
 :::
 
-### Order Total Quantity
-
-This condition is met if the order has at least and/or at most a certain number of items.
-
-### Order Total Value
-
-This condition is met if the total order price is at least and/or at most a certain amount.
-
-### Order Total Weight
-
-This condition is met if the total order weight is at least and/or at most a certain amount.
-
 ### Shipping Categories
 
-The shipping rule has options for each category in the system. Each shipping category can be set to:
+The shipping rule has matching logic for each shipping category in the system. Your selection describes whether the rule **Allow**s, **Disallows**, or **Requires** products of the category to be in the cart:
 
-1. **Allow**: products can be allowed for this shipping method.
-2. **Disallow**: if products are found in the cart the rule will not match the cart.
-3. **Require**: products must exist in the cart for this rule to match.
+1. **Allow** (Default): The rule _may_ match carts with products in this category.
+2. **Disallow**: The rule will _not_ match carts that contain products in this category.
+3. **Require**: The rule will _only_ match if the cart contains products in this category.
 
-This rule can allow, disallow, or require certain products to match this rule.
+Category policies ensure that the available methods and costs accurately reflect the combined needs of the ordered products. For example, if you sell products with lithium batteries, many carriers require disclosures, insurance, special packaging, or other documentation that often increases costs. By setting up a shipping category for potentially-hazardous materials, you can easily exclude other unsuitable methods.
 
 ## Shipping Rule Costs
 
-![A default Shipping Method Rule Costs form.](../images/shipping-method-costs.png)
+![A new shipping method rule.](../images/shipping-method-costs.png)
 
 ### Base Rate
 
@@ -163,58 +151,31 @@ You can further customize the Per Item, Weight, and Percentage rates in each cat
 
 There are lots of ways you might combine the included shipping rules depending on what matters most for your store.
 
-For example, some stores may sell relatively uniform items that ship to a number of specific **areas**. In this case, the shipping configuration will depend heavily on zones and rules that ensure the right shipping methods are available for each target zone.
+- **Regional Sales** — Some stores may sell relatively uniform items, but ship to many well-defined **areas** using local couriers’ flat-rate services. In this case, the shipping configuration will depend heavily on shipping zones to ensure customers see only methods that are actually available in their region.
+- **Diverse Catalog** — Another store may have huge **variety in product types** that require radically different types of shipping and handling. This store’s shipping configuration will likely lean on shipping categories to narrow options, and use weight- or quantity-based rules to calculate costs.
+- **Speed** — Customers often want options when it comes to shipping speed and cost. This store may wish to advertise services from many carriers, while ensuring the total order weight doesn’t exceed the carrier’s limits.
 
-Another type of store may have broad **variation in product types**, from a pack of stickers to a refrigerator that may require a radically different type of shipping. This store’s shipping configuration will likely emphasize shipping prices per product type.
-
-Yet another store may place more importance on providing a **broad range of delivery methods**, meaning its shipping configuration will rely heavily on categories and rules across a significant number of shipping methods.
-
-It’s best to identify whatever aspect of the store’s shipping is most complex or specific, and plan around that concern with whatever features need to support it.
-
-## Edition Differences
-
-<Block label="Commerce Edition Changes">
-
-With the release of Commerce 4.5, Lite and Pro editions have been merged. This section discusses differences in earlier versions of the plugin.
-
-</Block>
-
-In the Lite edition of Craft Commerce only two fixed shipping costs can be configured:
-
-1. A single fixed per-order shipping cost
-2. A per-item fixed shipping cost
-
-These shipping cost settings can be updated in **Commerce** → **Settings** → **General**, and show up on every order made when running the Lite edition of Craft Commerce. You can set these to zero if no shipping costs need to be added to the order.
-
-In the Pro edition of Commerce, complex shipping rules including categories, zones and rules are available. The core components of the shipping system are:
-
-- Shipping categories
-- Shipping zones
-- Shipping methods and rules
-
-Shipping methods and rules are at the core of the shipping engine in the Pro edition of Craft Commerce. The shipping rules use shipping categories, shipping zones, and additional order conditions to determine which shipping methods are available to the cart for customer selection.
-
-::: tip
-See the [Shipping Methods](../extend/shipping-methods.md) page in the _Extending Commerce_ section to learn how to write your own custom shipping method.
-:::
+It’s best to identify aspects of the store’s shipping is most complex or specific, and plan around that concern with whatever features support it.
 
 ## Templating
 
-### cart.availableShippingMethodOptions
+### Displaying the Available Shipping Methods
 
 Returns the shipping method options available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
 
 ```twig
+<h3>Select a shipping method</h3>
+
 {% for handle, method in cart.availableShippingMethodOptions %}
-  {% set isCurrentSelection = handle == cart.shippingMethodHandle %}
   {% set formattedPrice = method.priceForOrder(cart)|currency(cart.currency) %}
+
   <label>
-    <input type="radio"
-      name="shippingMethodHandle"
-      value="{{ handle }}"
-      {{ isCurrentSelection ? ' checked' : '' }}
-    />
+    {{ input('radio', 'shippingMethodHandle', handle, {
+      checked: handle == cart.shippingMethodHandle,
+    }) }}
     <strong>{{ method.name }}</strong> {{ formattedPrice }}
   </label>
 {% endfor %}
 ```
+
+Customers select a shipping _method_, not a _rule_. The rule is only used for matching against the cart, but does ultimately determine the cost.
