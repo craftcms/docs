@@ -19,8 +19,6 @@ The term “tax engine” refers to a relatively straightforward class that impl
 
 By default, categories, zones, and rates may each be created, edited, and deleted by the store manager.
 
-![](../images/tax-ui.png)
-
 Let’s use tax categories as an example to demonstrate how TaxEngineInterface methods can determine what’s available to the store manager:
 
 - You’ll return `true` or `false` for `viewTaxCategories()`, `createTaxCategories()`, and `editTaxCategories()` to toggle what UI is available in the control panel.
