@@ -28,7 +28,7 @@ For more on coupon code setup and templating, see the [coupon codes](coupon-code
 
 ## Discount Matching Items
 
-Each discount’s **Matching Items** tab provides options for limiting what store items qualify for the discount. By default, _all purchasables_ qualify for the discount.
+Each discount’s **Matching Items** tab provides options for limiting what store items qualify for the discount. By default, _all purchasables_ (that are considered promotable) qualify for the discount.
 
 ### Purchasables
 
