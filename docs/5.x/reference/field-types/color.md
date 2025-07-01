@@ -93,6 +93,14 @@ if ($entry->myColorField) {
 ```
 :::
 
+You may also access any of the color components as properties: <Since ver="5.8.0" feature="Accessing color data components as properties" />
+
+```twig
+{{ entry.myColorField.hex }}
+{{ entry.myColorField.rgb }}
+{# ... #}
+```
+
 ::: tip
 Refer to the [`ColorData`](craft5:craft\fields\data\ColorData) class reference for a complete list of methods!
 :::
