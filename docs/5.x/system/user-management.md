@@ -137,8 +137,8 @@ The permissions Craft comes with are:
 | View users <InfoHud>Read-only access to user elements. In earlier versions of Craft, user management permissions were not nested within this one.</InfoHud> <Since ver="5.6.0" feature="View users permission" /> | `viewUsers`
 | <Indent :level="1" /> Edit users | `editUsers`
 | <Indent :level="2" /> Register users | `registerUsers`
-| <Indent :level="2" /> Moderate users <InfoHud>Moderation includes editing other users’ names, usernames, custom fields, and addresses.</InfoHud> | `moderateUsers`
-| <Indent :level="2" /> Administrate users <InfoHud>User administration includes changing emails, sending activation and password reset emails, setting passwords, and deactivating users. This permission can be used to elevate one’s own permissions by gaining access to other administrators’ accounts!</InfoHud> | `administrateUsers`
+| <Indent :level="2" /> Moderate users <InfoHud>Moderation includes editing other users’ names, usernames, custom fields, and addresses, and sending activation emails. <Since ver="5.8.0" description="Users with the “Moderate users” permission were given the ability to send activation emails in {ver}." /></InfoHud> | `moderateUsers`
+| <Indent :level="2" /> Administrate users <InfoHud>User administration includes changing emails, sending password reset emails, setting passwords, and deactivating users. This permission can be used to elevate one’s own permissions by gaining access to other administrators’ accounts!</InfoHud> | `administrateUsers`
 | <Indent :level="2" /> Impersonate users <InfoHud>User impersonation allows one user to temporarily access the site as though they were another user with the same (or more restrictive) permissions.</InfoHud> | `impersonateUsers`
 | <Indent :level="2" /> Assign user permissions | `assignUserPermissions`
 | <Indent :level="2" /> Assign users to this group <InfoHud>This is not an actual permission so much as a convenience feature for automatically granting the ability to add peers to the <em>group</em> you are currently editing, as its handle/UUID may not be known, yet!</InfoHud> | See note.

@@ -25,6 +25,7 @@ Craft has over 20 built-in field types that help create tightly-tailored authori
 | [Categories](categories.md) | Relate [category](../element-types/categories.md) elements. |
 | [Checkboxes](checkboxes.md) | Choose one or more predefined options using `checkbox` inputs. |
 | [Color](color.md) | Pick a color with your platform’s native color picker—or provide a hexadecimal value. |
+| [Content Block](content-block.md) | Group other fields in a [nested entry](../element-types/entries.md#nested-entries). |
 | [Country](country.md) | Choose from a list of countries in a `select` menu. |
 | [Date/Time](date-time.md) | Set a date, time, and timezone (optional). |
 | [Dropdown](dropdown.md) | Choose a single item from a predefined list using a `select` menu. |
@@ -128,6 +129,7 @@ You can even attach fields to the elements you relate via these fields—metadat
 Manage nested data.
 
 - [Addresses](addresses.md)
+- [Content Block](content-block.md) <Since ver="5.8.0" feature="The Content Block field" />
 - [Matrix](matrix.md)
 - [Table](table.md)
 
@@ -144,3 +146,7 @@ Spruce up the authoring experience with these dedicated UIs.
 - [Icon](icon.md) — Pick from a library of icons.
 - [Money](money.md) — Input values in a specific currency.
 - [Range](range.md) — Contextualize numeric values.
+
+::: tip
+The [Content Block](content-block.md) field can be also be used to semantically and structurally group (and reuse!) a set of fields. <Since ver="5.8.0" feature="The Content Block field" />
+:::
