@@ -65,8 +65,6 @@ export default {};
 /* https://github.com/craftcms/cms/blob/37e3e20d9c8096d5489e16ebe0f9a46ae3eb5808/src/web/assets/pluginstore/src/sass/_tooltip.scss */
 
 .tooltip {
-  user-select: none;
-  pointer-events: none;
   border-radius: 3px;
   display: block !important;
   z-index: 10000;

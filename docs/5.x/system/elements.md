@@ -64,6 +64,76 @@ Content can be a great deal more than text, too! Craft has a number of built-in 
 
 <See path="fields.md" />
 
+### Generated Fields <Since ver="5.8.0" feature="Generated fields" />
+
+[Field layout](fields.md#field-layouts) providers (the components that dictate what kind of content can be saved on an element, like [entry types](../reference/element-types/entries.md#entry-types) or [asset volumes](../reference/element-types/assets.md#volumes)) include a **Generated Fields** setting, allowing you to store additional computed values alongside native attributes and custom fields.
+
+<img src="../images/elements-generated-fields.png" alt="Adding generated fields to an entry via an entry type." />
+
+Each field’s **Template** is evaluated as an [object template](object-templates.md) when the element is saved, and the resulting value is exposed via its **Handle**:
+
+```twig{3}
+<article>
+  <h2>{{ entry.title }}</h2>
+  <address>{{ entry.byline }}</address>
+
+  {# ... #}
+</article>
+```
+
+All generated fields are stored and [queried](#querying-generated-field-values) as text. When used in a condition builder, you will only be able to use string operands (like “starts with…” or “contains…”).
+
+::: tip
+Generated fields are _not_ automatically displayed in the control panel, but they can be added to element [cards](#custom-card-attributes), or output in a [template field layout element](fields.md#ui-elements).
+:::
+
+#### Use Cases
+
+Here are a few ideas for how to use generated fields:
+
+Memoize Expensive Data
+:   Run a complex query and “cache” the result in a succinct way.
+
+    **Example:** Reverse-lookup of the number of entries in a category.
+
+    ```twig
+    {{ craft.entries().relatedTo({ targetElement: object, field: 'category' }).count() }}
+    ```
+
+Presentational Summaries
+:   Truncate or clean up text for use on element cards.
+
+    **Example:** Get the first text chunk from a CKEditor field, and strip the HTML.
+
+    ```twig
+    {{ object.body.firstWhere('type', 'markup')|strip_tags }}
+    ```
+
+Binary Criteria
+:   State derived from nested or related records can be coalesced into a single value.
+
+    **Example:** Tally up a customer’s lifetime order total and mark them as a “VIP” if it exceeds some amount. This template stores a `1` when it evaluates to `true`, and nothing for `false`.
+
+    ```twig
+    {{ craft.orders().customer(object).sum('totalPaid') > 1000 }}
+    ```
+
+Record-Keeping
+:   Track data over some period of time.
+
+    **Example:** Use the [`seq()` Twig function](../reference/twig/functions.md#seq) to increment a counter.
+
+    ```twig
+    {{ seq("entry-save-count:#{canonicalId}") }}
+    ```
+
+Templates that produce errors are quietly ignored.
+Avoid using generated field references inside one another—within a single save, fields are evaluated in the order they were defined, and only have access to values from the previous save.
+
+#### Querying Generated Field Values
+
+Craft provides [element query](../development/element-queries.md) methods for each of the possible generated fields, meaning that you can use generated field values as 
+
 ## Indexes
 
 You’ll access most elements via their element index. Indexes allow you to browse, sort, filter, and [search](searching.md) for elements in a paginated, table-like view.

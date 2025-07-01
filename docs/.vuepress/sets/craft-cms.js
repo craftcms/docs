@@ -48,6 +48,7 @@ module.exports = {
             "field-types/categories",
             "field-types/checkboxes",
             "field-types/color",
+            "field-types/content-block",
             "field-types/country",
             "field-types/date-time",
             "field-types/dropdown",

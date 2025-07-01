@@ -370,7 +370,7 @@ When moving an entry, it’s important to note these behaviors:
 
 Entries also power the [Matrix](../field-types/matrix.md) and [CKEditor](plugin:ckeditor) fields, which means your [entry types](#entry-types) can represent entire pages, or the building blocks thereof. How you implement your content model and authoring experience is entirely up to you!
 
-Nested entries are an implementation of nested _elements_, a broader category of “owned” elements that includes [addresses](addresses.md) and powers Commerce’s product and variant architecture.
+Nested entries are an implementation of nested _elements_, a broader category of “owned” elements that includes [addresses](addresses.md) and powers Commerce’s product and variant architecture. The [Content Block](../field-types/content-block.md) field also stores data in a nested entry. <Since ver="5.8.0" feature="The Content Block field" />
 
 ## Editing Entries
 

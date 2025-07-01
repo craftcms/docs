@@ -290,3 +290,7 @@ Below the field layout designer, you can add previews of field and attribute dat
 Card thumbnails are assigned using the main field layout designer. Select **Use for element thumbnails** from the action <Icon kind="ellipses" /> menu of any [relational field](relations.md) to display the first attached asset—or, when using a non-asset relational field, _that_ element’s thumbnail!
 
 Only one field can be used as the thumbnail source at a time. Additional asset fields’ values can be displayed in the card body, as chips.
+
+## Generated Fields
+
+In addition to the native attributes and custom fields added to an element’s field layout, you can add any number of [**Generated Fields**](elements.md#generated-fields) that expose pre-computed values on the associated elements.
