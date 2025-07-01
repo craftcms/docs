@@ -4,7 +4,7 @@ related:
     label: Matrix fields
 ---
 
-# Content Block <Since ver="5.8.0" feature="The content block field" />
+# Content Block Fields <Since ver="5.8.0" feature="The content block field" />
 
 The content block field semantically groups existing fields into a reusable bundle, and stores content as a nested element.
 
