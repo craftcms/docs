@@ -68,7 +68,7 @@ function replacePrefix(link, ctx) {
         // used to start with `property-`, but more recent yii2-apidoc dropped it
       }
 
-      hash += ref.subject.replace(/_/g, "-").toLowerCase();
+      hash += ref.subject.toLowerCase();
     }
 
     return url + (hash ? `#${hash}` : "");
