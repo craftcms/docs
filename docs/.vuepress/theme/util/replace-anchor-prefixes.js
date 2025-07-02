@@ -1,6 +1,8 @@
 const dictionary = require("../../anchor-prefixes");
 const placeholders = Object.keys(dictionary);
 
+const PHP_LABEL_PATTERN = /^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/;
+
 function replacePrefixes(md, ctx) {
   // expand custom prefix into full URL
   md.normalizeLink = url => {
@@ -26,27 +28,25 @@ function replacePrefix(link, ctx) {
   link = decodeURIComponent(link);
 
   // do we have a protocol or prefix?
-  const prefix = getPrefix(link);
-
-  if (!prefix) {
+  if (!usesCustomPrefix(link)) {
     return link;
   }
 
+  const prefix = getPrefix(link);
+
   // is one of our custom placeholders being used?
-  const inUse = placeholders.filter(placeholder => {
-    return placeholder === prefix;
-  });
+  const inUse = placeholders.indexOf(prefix) > -1;
 
   if (prefix === "api" || prefix === "config") {
     console.log('broken legacy `' + prefix + '` link: "' + link + '"');
   }
 
-  if (!inUse || inUse.length === 0) {
+  if (!inUse) {
     return link;
   }
 
   // get relevant settings from `anchor-prefixes.js`
-  const prefixSettings = dictionary[inUse[0]];
+  const prefixSettings = dictionary[prefix];
 
   if (!prefixSettings.hasOwnProperty("format")) {
     // Nothing we can do without a format:
@@ -62,16 +62,27 @@ function replacePrefix(link, ctx) {
 
     if (ref.subject) {
       hash = "";
-      if (ref.isMethod) {
-        hash = "method-";
-      } else if (!ref.subject.match(/^EVENT_/)) {
-        // used to start with `property-`, but more recent yii2-apidoc dropped it
-      }
 
-      hash += ref.subject.toLowerCase();
+      if (ref.isMethod) {
+        // Remove parens and downcase:
+        hash = `method-${ref.subject.replace('()', '').toLowerCase()}`;
+        // (Underscores are considered significant, here!)
+      } else if (ref.isProperty) {
+        // Remove variable symbol and downcase:
+        hash = `property-${ref.subject.replace('$', '').toLowerCase()}`;
+        // (Underscores are considered significant, here!)
+      } else if (ref.isEvent) {
+        // Remove EVENT_ prefix, replace underscores with dashes,
+        hash = `event-${ref.subject.replace('EVENT_', '').replace('_', '-').toLowerCase()}`;
+      } else if (ref.isConstant) {
+        // Constants are all lumped together in a table and share a static hash:
+        hash = 'constants';
+      } else {
+        // ???
+      }
     }
 
-    return url + (hash ? `#${hash}` : "");
+    return url + (hash ? `#${hash}` : '');
   }
 
   if (ref && prefixSettings.format === "yii") {
@@ -80,12 +91,13 @@ function replacePrefix(link, ctx) {
     let url = isVersion1
       ? `${prefixSettings.base}${ref.className}`
       : `${prefixSettings.base}${slugifyClassName(ref.className)}`;
-    let hash = ref.hash;
+    let hash = '';
 
     if (ref.subject) {
-      let parens = isVersion1 ? '' : '()';
+      const sub = isVersion1 ? ref.subject.replace('()', '') : ref.subject;
+
       hash =
-        (ref.isMethod ? `${ref.subject}${parens}` : `\$${ref.subject}`) + "-detail";
+        `${sub}-detail`;
     }
 
     return url + (hash ? `#${hash}` : "");
@@ -126,18 +138,24 @@ function replacePrefix(link, ctx) {
   }
 
   // No hit?
-  console.warn("Unrecognized or unhandled anchor prefix!");
+  console.warn(`Unrecognized or unhandled anchor!`, link);
 
   return link;
 }
 
 /**
- * Grabs characters prior to `:`, returning undefined if there isn’t a colon.
+ * Grabs characters prior to `:`, or `null` if it doesn’t begin with a prefix-looking string followed by a colon.
  * @param string link
  */
 function getPrefix(link) {
-  const linkParts = link.split(":");
-  return linkParts.length === 0 ? undefined : linkParts[0];
+  const match = link.match(/^(\w+):/);
+
+  if (!match) {
+    return;
+  }
+
+  // Return the first capture group:
+  return match[1];
 }
 
 /**
@@ -147,11 +165,7 @@ function getPrefix(link) {
 function usesCustomPrefix(link) {
   const prefix = getPrefix(link);
 
-  const inUse = placeholders.filter(placeholder => {
-    return placeholder === prefix;
-  });
-
-  return inUse.length > 0;
+  return placeholders.includes(prefix);
 }
 
 /**
@@ -189,19 +203,27 @@ function removePrefix(link) {
  * @returns object or null
  */
 function parseReference(link) {
-  let m = removePrefix(link).match(
-    /^\\?([\w\\]+)(?:::\$?(\w+)(\(\))?)?(?:#([\w\-]+))?$/
-  );
+  const ref = removePrefix(link);
+  const [className, subject] = ref.split('::');
 
-  if (!m) {
+  // If it’s not a fully-qualified class and subject, it needs to be at least class-like:
+  if (!subject && !(className.includes('\\') || className.match(PHP_LABEL_PATTERN))) {
     return;
   }
 
+  const isMethod = subject && subject.endsWith('()')
+  const isProperty = subject && subject.startsWith('$');
+  const isEvent = subject && subject.startsWith('EVENT_');
+
+  const isConstant = subject && !(isMethod || isProperty || isEvent);
+
   return {
-    className: m[1],
-    subject: m[2],
-    isMethod: typeof m[3] !== "undefined",
-    hash: m[4]
+    className,
+    subject,
+    isMethod,
+    isProperty,
+    isEvent,
+    isConstant,
   };
 }
 
