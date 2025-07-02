@@ -14,7 +14,7 @@ Craft lets you manage media and document files (“assets”) just like entries 
 
 <!-- more -->
 
-Assets are one of Craft’s built-in [element types](../../system/elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Asset>.
+Assets are one of Craft’s built-in [element types](../../system/elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Asset>. You can attach them to other elements via the [assets field](../field-types/assets.md), and get their URLs, ready-made `<img>` tags, or `srcset`s in your templates.
 
 ## Volumes
 
