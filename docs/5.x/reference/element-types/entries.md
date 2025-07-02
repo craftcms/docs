@@ -50,6 +50,7 @@ Entry types have the following settings:
   - **Slug Translation Method** — In multi-site projects, choose how slugs are localized.
 - **Show the Status field** — Manually set each entry’s status, or allow it to be dictated by its usage.
 - **Field Layout** — Add and arrange [custom fields](../../system/fields.md) to suit your content model.
+- **Generated Fields** — Create additional [virtual attributes](../../system/elements.md#generated-fields) on entries of this type from short [object templates](../../system/object-templates.md).
 - **Card Attributes** — Select which attributes and fields appear on [cards](../../system/elements.md#chips-cards) of this type.
 
 ### Aliases <Since ver="5.6.0" feature="Entry type aliases" />
