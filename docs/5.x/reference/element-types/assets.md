@@ -107,6 +107,10 @@ php craft resave/assets --set alt --to myAltTextField --if-empty
 ```
 :::
 
+### Generated Fields <Since ver="5.8.0" feature="Generated fields on asset volumes" />
+
+Below the volume’s field layout designer, you can create any number of [generated fields](../../system/elements.md#generated-fields) to capture additional values via [object templates](../../system/object-templates.md).
+
 ## Assets Page
 
 After creating your first volume, an **Assets** item will be added to the main control panel navigation. Clicking on it will take you to the Assets page, which shows a list of all of your volumes in the left sidebar, and the selected volume’s files and subfolders in the main content area.
