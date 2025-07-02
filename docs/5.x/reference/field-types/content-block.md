@@ -76,6 +76,11 @@ You’ll access their content via the content block field’s handle:
 
 You do not need to test for the presence of the content block element itself—any time you have a reference to an element, the nested content block will be available, even for newly-created elements in memory.
 
+### Querying Content Blocks
+
+Content blocks do not expose nested fields as [element query parameters](../../development/element-queries.md#querying-with-custom-fields) on their owners.
+However, nested content can be hoisted onto the owner via [generated fields](../../system/elements.md#generated-fields), which are then given corresponding query methods.
+
 ### Element Partials
 
 If a content block represents a very specific fragment of HTML throughout your site, you can use an [element partial](../../system/elements.md#element-partials) to render it.
