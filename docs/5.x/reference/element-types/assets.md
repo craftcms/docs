@@ -88,7 +88,7 @@ Asset field layouts can include the native **Alternative Text** <Poi label="1" t
   :link="false"
   id="assetFieldLayout"
   :poi="{
-    altText: [90, 32.5],
+    altText: [28, 36.5],
   }">
 <img src="../../images/assets-field-layout.png" />
 </BrowserShot>
