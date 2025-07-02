@@ -127,12 +127,49 @@ Record-Keeping
     {{ seq("entry-save-count:#{canonicalId}") }}
     ```
 
-Templates that produce errors are quietly ignored.
+Templates that reference nonexistent values are quietly ignored, but compilation errors (like missing Twig functions or filters) will produce an error.
 Avoid using generated field references inside one another—within a single save, fields are evaluated in the order they were defined, and only have access to values from the previous save.
+
+::: warning
+Field values are only refreshed when the element itself is saved, so references to _other_ elements’ content in a template may become stale.
+
+If you need to keep generated fields fresh, use one of the [`resave/*` commands](../reference/cli.md#resave) to periodically re-render their values.
+It may be more reliable and economical to continue rendering simple values in regular templates, rather than pre-generating them.
+As an example, there won’t often be a benefit to storing a primary author’s registration date on an entry (`{author.dateCreated|date}`), when the dynamic value is already accessible via a single element query (`{{ entry.author.dateCreated|date }}`).
+:::
 
 #### Querying Generated Field Values
 
-Craft provides [element query](../development/element-queries.md) methods for each of the possible generated fields, meaning that you can use generated field values as 
+Craft provides [element query](../development/element-queries.md) methods for each of the generated fields available to the element type.
+Entry queries, for example, combine generated fields from entry types’ field layouts.
+
+Suppose we want to display a list of movie directors sorted by the total runtime of films they’ve made.
+Our _Director_ entries might have a generated field like _Total Runtime_ (with a handle of `runtimeTotal`) containing this template:
+
+```twig
+{{ craft.entries().section('films').director(object).select('runtime').column()|reduce((sum, val) => sum + val, 0) }}
+```
+
+Directors can now use the generated field for sorting…
+
+```twig
+{% set directorsByRuntime = craft.entries()
+  .section('directors')
+  .orderBy('runtimeTotal DESC')
+  .all() %}
+```
+
+…and filtering:
+
+```twig
+{% set multidayRuntime = craft.entries()
+  .section('directors')
+  .runtimeTotal("> #{60 * 24 * 2}")
+  .all() %}
+```
+
+Note that we are assuming runtimes are stored in minutes.
+Formatted time values are not as trivial to compare, sort, or sum!
 
 ## Indexes
 
