@@ -18,9 +18,9 @@ Assets are one of Craft’s built-in [element types](../../system/elements.md), 
 
 ## Volumes
 
-Assets are organized into **volumes**, each of which sits on top of a [filesystem](#filesystems) and carries its own permissions and [content](#asset-custom-fields) options. Volumes are configured from **Settings** → **Assets**.
+Assets are organized into **volumes**, each of which sits on top of a [filesystem](#filesystems) and carries its own permissions and [content](#asset-custom-fields) options. Volumes are configured from <Journey path="Settings, Assets" />.
 
-When setting up a volume, you will be asked to choose or create its underlying filesystem.
+When setting up a volume, you will be asked to choose or create its underlying **Filesystem**.
 
 <BrowserShot
   url="https://my-craft-project.ddev.site/admin/assets/volumes/new"
