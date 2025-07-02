@@ -339,7 +339,7 @@ Craft::error(new PsrMessage(
 ));
 ```
 
-Using the [convenience methods](#using-crafts-logger) will automatically translate Yii log levels to the most appropriate PSR-3 level when dispatched to a `MonologTarget`.
+Using the [convenience methods](#using-craft-s-logger) will automatically translate Yii log levels to the most appropriate PSR-3 level when dispatched to a `MonologTarget`.
 
 ## Further Reading
 
