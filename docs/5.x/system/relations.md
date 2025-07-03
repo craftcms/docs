@@ -6,11 +6,13 @@ sidebarDepth: 2
 
 Craft has a powerful engine for relating elements to one another with five [relational field types](#custom-fields). Just like other field types, relational fields can be added to any [field layout](./fields.md#field-layouts), including those within [nested entries](#relations-via-matrix).
 
+![An entries field being populated from a quick-search interface](../images/relations-field-ui.png)
+
 _Unlike_ other field types, relational fields store their data in a dedicated `relations` table. In that table, Craft tracks:
 
 - The element that is the **source** of the relationship;
 - Which **field** a relationship uses;
-- The **site** a relationship was defined;
+- The **site** in which a relationship is defined;
 - The element that is the **target** of the relationship;
 - The **order** in which the related elements are arranged;
 
@@ -22,6 +24,11 @@ Each relationship consists of two elements we call the *source* and *target*:
 
 - The <dfn>source</dfn> has the relational field where other elements are chosen.
 - The <dfn>target</dfn> is the one selected by the source.
+
+Individual [relational fields](#custom-fields) can impose restrictions on what elements may be selected.
+The element type is always determined by the field type; additional criteria narrowing eligible targets to existing [sources](elements.md#sources) or ad-hoc _conditions_ tailored to that element type:
+
+![Configuring an asset field’s selection conditions](../images/relations-field-conditions.png)
 
 ## Illustrating Relations
 
@@ -47,7 +54,7 @@ Relationships are primarily used within [element queries](../development/element
 
 _Ingredients_ attached to a _Recipe_ can be accessed using the relational field’s handle. Unlike most fields (which return their stored value), relational fields return an [element query](../development/element-queries.md), ready to fetch the attached elements in the order they were selected.
 
-Craft has five built-in relational fields, each of which establishes links to a different [element type](elements.md#element-types):
+Craft has five built-in relational fields, each of which establishes connections to a different [element type](elements.md#element-types):
 
 - [Assets](../reference/field-types/assets.md)
 - [Categories](../reference/field-types/categories.md)
@@ -57,13 +64,22 @@ Craft has five built-in relational fields, each of which establishes links to a 
 
 Additionally, the [link field](../reference/field-types/link.md) uses the relations system to store references to assets, categories, and entries.
 
-Addresses and global sets don’t have relational fields, in the traditional sense—the former are managed as nested elements, and the latter exist as static, singleton elements that can be queried by handle using the value of a dropdown field.
+[Addresses](../reference/element-types/addresses.md) (as well as other nested entries like those in [Matrix](../reference/field-types/matrix.md) or [content blocks](../reference/field-types/content-block.md) fields) and [global sets](../reference/element-types/globals.md) don’t have relational fields, in the traditional sense—the former are managed as nested elements and implicitly connected to their owners; the latter exist as static, singleton elements and are functionally equivalent to a boolean value.
+If you do need to point to one of your global sets (say, to display one of a few fixed sets of data), consider adding a [dropdown field](../reference/field-types/dropdown.md) populated with the global set handles.
+You can then directly load the corresponding global set element using a query:
+
+```twig
+{% set source = craft.globalSets.handle(entry.myDropdownField).one() %}
+
+{# Assuming `myGlobalField` is available on all the global sets that might be selected... #}
+{{ source.myGlobalField }}
+```
 
 ::: tip
-[Eager-loading](../development/eager-loading.md) related elements _does_ make them available directly on the source element! Don’t worry about this just yet—let’s get comfortable with the default behavior, first.
+Craft’s [eager-loading](../development/eager-loading.md) system makes it possible to efficiently load batches of related elements.
 :::
 
-To output the list of ingredients for a recipe on the recipe’s page, you could do this (assuming the relational field handle is `ingredients`):
+Returning to our example: to output the list of ingredients for a recipe on the recipe’s page, you could do this (assuming the relational field handle is `ingredients`)…
 
 ```twig
 {# Fetch related elements by calling `.all()` on the relational field: #}
@@ -85,7 +101,7 @@ To output the list of ingredients for a recipe on the recipe’s page, you could
 Because `entry.ingredients` is an element query, you can set additional constraints before executing it:
 
 ```twig
-{# Narrow the query to only “Vegetables”: %}
+{# Narrow the query to only “vegetables:” %}
 {% set veggies = entry.ingredients.foodGroup('vegetable').all() %}
 
 <h3>Vegetables</h3>
@@ -101,7 +117,7 @@ Because `entry.ingredients` is an element query, you can set additional constrai
 {% endif %}
 ```
 
-This query will display ingredients attached to the current recipe that _also_ have their `foodGroup` field (perhaps a [Dropdown](../reference/field-types/dropdown.md)) set to `vegetable`. Here’s another example using the same schema—but a different [query execution method](../development/element-queries.md#executing-element-queries)—that lets us answer a question that some cooks might have:
+This query will display ingredients attached to the current recipe that _also_ have their `foodGroup` field (perhaps a [dropdown](../reference/field-types/dropdown.md)) set to `vegetable`. Here’s another example using the same schema—but a different [query execution method](../development/element-queries.md#executing-element-queries)—that lets us answer a question that some cooks might have:
 
 ```twig
 {% set hasMeat = entry.ingredients.foodGroup(['meat', 'poultry']).exists() %}
