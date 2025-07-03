@@ -259,6 +259,8 @@ An element’s **Title** and **Status** are always visible, and the presence of 
 A card’s thumbnail can come from any field that implements <craft5:craft\base\ThumbableFieldInterface> (like [assets](../reference/field-types/assets.md) or [icon](../reference/field-types/icon.md) fields), or be “inherited” from another element via a [relational field](relations.md).
 :::
 
+In addition to fields and attributes, [generated fields](#generated-fields) can also be added to element cards. <Since ver="5.8.0" feature="Generated fields" />
+
 ## Copying Elements <Since ver="5.7.0" feature="Copying elements" />
 
 [Entries](../reference/element-types/entries.md) and [addresses](../reference/element-types/addresses.md) can by copied-and-pasted between sections and fields. Open the action menu <Icon kind="ellipses" /> on any chip, card, or inline nested entry and select **Copy <Placeholder help="A built-in or plugin-provided element type.">element type</Placeholder>**:
