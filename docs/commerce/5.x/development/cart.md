@@ -28,7 +28,7 @@ A customer’s cart is always available via the _carts_ service:
 {% set cart = craft.commerce.carts.cart %}
 ```
 
-Carts are also available to headless or hybrid front-ends, via Ajax:
+Carts are also available to headless or hybrid front-ends, [via Ajax](/5.x/development/forms.md#ajax):
 
 ```js
 fetch('/actions/commerce/cart/get-cart', {
@@ -43,7 +43,10 @@ fetch('/actions/commerce/cart/get-cart', {
 ```
 
 ::: warning
-The path of this Ajax request matters when working with multiple sites and stores! Prefix the [action path](/5.x/system/routing.md) with your site’s base URI if you need to load information about a specific cart.
+The path of this Ajax request is significant when working with multiple sites and stores! To fetch a store-specific cart, you can either…
+
+- …prefix the [action path](/5.x/system/routing.md) with your site’s base URI;
+- …[set the `X-Craft-Site` header](/5.x/development/forms.md#ajax) to the ID or handle of the desired site;
 :::
 
 Either of the examples above will generate a new cart number if one is not already present in the session. The cart may exist only in-memory, until a customer interacts with it in some way (typically by [adding an item](#adding-items), but also saving a custom field, setting their email, adding an address, etc…).
