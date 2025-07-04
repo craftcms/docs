@@ -1,8 +1,12 @@
 # Icon Fields
 
-Icon fields allow the user to pick from a curated list of [FontAwesome](https://fontawesome.com) icons that fit the control panel’s style. The field’s value can be used to decorate related or nested element chips and cards by enabling **Use this field’s values for element thumbnails** or **Include this field in element cards** when adding it to a field layout.
+Icon fields allow the user to pick icons that fit the control panel’s style from the [FontAwesome](https://fontawesome.com) library. The field’s value can be used to decorate related or nested element chips and cards by enabling **Use this field’s values for element thumbnails** or **Include this field in element cards** when adding it to a field layout.
 
 <!-- more -->
+
+::: tip
+Prior to Craft 5.8.0, only a portion of the FontAwesome library was available. We no longer editorialize, and expose the entire 6.x suite.
+:::
 
 ## Settings
 
