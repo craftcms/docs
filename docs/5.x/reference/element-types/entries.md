@@ -27,7 +27,7 @@ Craft uses _entry types_ to define atomic units of content, which are then expos
 
 Entry types became a global resource in Craft 5. This means you can define a content type _once_, then use it in multiple sections, as a [nested](#nested-entries) block in a [Matrix](../field-types/matrix.md) field, or some combination of the two. As a result, some settings have moved around!
 
-Most importantly, you’ll manage entry types in the **Settings** &rarr; **Entry Types** screen—or create them on-the-fly when working on a section or Matrix field.
+Most importantly, you’ll manage entry types in the **Settings** &rarr; **Entry Types** screen—or create them on-the-fly in a slideout when working on a section or Matrix field.
 
 </Block>
 
@@ -52,6 +52,12 @@ Entry types have the following settings:
 - **Field Layout** — Add and arrange [custom fields](../../system/fields.md) to suit your content model.
 - **Generated Fields** — Create additional [virtual attributes](../../system/elements.md#generated-fields) on entries of this type from short [object templates](../../system/object-templates.md).
 - **Card Attributes** — Select which attributes and fields appear on [cards](../../system/elements.md#chips-cards) of this type.
+
+When you’re done configuring an entry type, press **Save** or <kbd>Ctrl/Command + S</kbd> to apply the changes.
+
+::: tip
+Entry types can be duplicated or cloned by using the **Save** menu’s **Save as new entry type** option. <Since ver="5.8.0" feature="Duplicating entry types" />
+:::
 
 ### Aliases <Since ver="5.6.0" feature="Entry type aliases" />
 
