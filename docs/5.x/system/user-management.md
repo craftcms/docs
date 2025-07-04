@@ -130,12 +130,12 @@ The permissions Craft comes with are:
 | Permission | [Handle](#checking-permissions)
 | ---------- | ------
 | Access the site when the system is off | `accessSiteWhenSystemIsOff`
-| Access the control panel | `accessCp`
+| Access the control panel <InfoHud>This inherently enables limited read-only access to user data and most content via element selector modals and other means.</InfoHud> | `accessCp`
 | <Indent :level="1" /> Access the control panel when the system is offline | `accessCpWhenSystemIsOff`
 | <Indent :level="1" /> Perform Craft CMS and plugin updates | `performUpdates`
 | <Indent :level="1" /> Access <CodePlaceholder>Plugin Name</CodePlaceholder> | `accessPlugin-[PluginHandle]`
 | View users <InfoHud>Read-only access to user elements. In earlier versions of Craft, user management permissions were not nested within this one.</InfoHud> <Since ver="5.6.0" feature="View users permission" /> | `viewUsers`
-| <Indent :level="1" /> Edit users | `editUsers`
+| <Indent :level="1" /> Edit users <InfoHud>Non-critical actions like updating custom field values.</InfoHud> | `editUsers`
 | <Indent :level="2" /> Register users | `registerUsers`
 | <Indent :level="2" /> Moderate users <InfoHud>Moderation includes editing other users’ names, usernames, custom fields, and addresses, and sending activation emails. <Since ver="5.8.0" description="Users with the “Moderate users” permission were given the ability to send activation emails in {ver}." /></InfoHud> | `moderateUsers`
 | <Indent :level="2" /> Administrate users <InfoHud>User administration includes changing emails, sending password reset emails, setting passwords, and deactivating users. This permission can be used to elevate one’s own permissions by gaining access to other administrators’ accounts!</InfoHud> | `administrateUsers`
@@ -151,6 +151,7 @@ The permissions Craft comes with are:
 | <Indent :level="1" /> Delete entries | `deleteEntries:[SectionUID]`
 | <Indent :level="1" /> View other users’ entries | `viewPeerEntries:[SectionUID]`
 | <Indent :level="2" /> Save other users’ entries | `savePeerEntries:[SectionUID]`
+| <Indent :level="2" /> Delete other users’ entries for site <InfoHud>Allow deleting other users’ entries for individual sites they have access to.</InfoHud> | `deletePeerEntriesForSite:[SectionUID]`
 | <Indent :level="2" /> Delete other users’ entries | `deletePeerEntries:[SectionUID]`
 | <Indent :level="1" /> View other users’ drafts | `viewPeerEntryDrafts:[SectionUID]`
 | <Indent :level="2" /> Save other users’ drafts | `savePeerEntryDrafts:[SectionUID]`
