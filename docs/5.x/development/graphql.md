@@ -1944,7 +1944,7 @@ This is the interface implemented by all entries.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
 | `authorId`| `Int` | The primary entry author’s ID.
-| `author`| `[UserInterface]` | The primary entry author.
+| `author`| `UserInterface` | The primary entry author.
 | `authorIds`| `[Int]` | The entry authors’ IDs.
 | `authors`| `[UserInterface]` | The entry authors.
 | `draftCreator`| `UserInterface` | The creator of a given draft.
