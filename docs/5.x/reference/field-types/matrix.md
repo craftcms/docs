@@ -291,9 +291,8 @@ $nestedTextEntries = $entry->myFieldHandle
 
 #### Eager Loading
 
-Nested entries can be [eager-loaded](../../development/eager-loading.md) with their owners using the special `.with()` query method. Eager-loading can greatly improve performance if you need to output one or more nested entries within a list of other elements—like generating summaries of articles in list of blog posts from their first text blocks.
-
-The new `.eagerly()` method simplifies this in situations where you need to output or act on nested entry information within a query for their owners. Take this list of recipes, where `steps` is a Matrix field:
+Nested entries can be [eager-loaded](../../development/eager-loading.md) with their owners to greatly improve performance in situations when you need to output one or more nested entries within a list of other elements.
+Take this list of recipes, where `steps` is a Matrix field:
 
 ```twig
 {% set latestRecipes = craft.entries()
