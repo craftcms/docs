@@ -160,6 +160,25 @@ Here’s how to apply the `with` param to our example:
 
 This template code will only cost three queries (one to fetch the entries, one to determine which assets should be eager-loaded, and one to fetch the assets), and the number of queries will not grow proportional to the number of elements being displayed. The entries are then are automatically populated with their respective related asset(s).
 
+### Matrix and Field Contexts
+
+When building an eager-loading plan, you may prepend a valid field layout provider’s handle to a field to narrow its scope or avoid ambiguity.
+For instance, a Matrix field with two media-driven entry types (_Two-Up_ and _Gallery_) might both use an asset field with the handle `images`, but the design only uses information about the uploader to generate captions in the proposed full-screen gallery interface:
+
+```twig{3-4}
+{% set sections = entry.myContentField
+  .with([
+    'gallery:images.uploader',
+    'twoUp:images',
+  ])
+  .all() %}
+
+{# ... #}
+```
+
+If we were to use a single `images.uploader` path, Craft would unnecessarily load user data for the _Two-Up_ sections, as well.
+This specific example is not apt to have a significant performance impact in most projects; however, similarly-structured queries returning hundreds or thousands of elements with many unique relations may benefit from reduced memory usage.
+
 ## Accessing Eager-Loaded Elements
 
 Eager-loaded elements are returned as a [collection](collections.md)—or more specifically, an <craft5:craft\elements\ElementCollection>.
