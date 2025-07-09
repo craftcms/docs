@@ -93,12 +93,32 @@ templates/_partials/block/{yourFieldHandle}.twig
 Then, wherever that content block is attached to an element, you can output its template:
 
 ```twig
+{# Output the owner’s title... #}
 <h1>{{ entry.title }}</h1>
 
+{# ...and render the content block: #}
 {{ entry.credits.render() }}
 ```
 
-Your content block is available in the template under the `block` variable, and its owner is accessible as `block.owner`.
+Your content block is available in the template under the `block` variable, and its owner is accessible as `block.owner`. Adapting the example from above, you can create a reusable article credits component:
+
+```twig
+<p class="byline">
+  {# Gather authors from the owner... #}
+  {{ collect(owner.authors).select('fullName').join(', ', ', and') }}
+
+  {# ...and supplement with fields from the content block: #}
+  {% if block.credits.contributors is not empty %}
+    with support from {{ contributors }}
+  {% endif %}
+</p>
+
+{% if block.credits.photographer is not empty %}
+  <p class="photo-credits">
+    Photos by {{ block.credits.photographer }}
+  </p>
+{% endif %}
+```
 
 ### GraphQL
 
