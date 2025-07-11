@@ -25,7 +25,7 @@ Most of your interactions with Craft so far have likely been over HTTP. Let’s 
 
 This page will make frequent references to _query_ and _body_ params. These are named values sent with a request, either encoded after a `?` in the URL, or within the “body” of a request. Query params are used in [GET](#get) and [POST](#post) requests, but body params are only used in POST requests.
 
-Craft uses a handful of params to properly route a request, but may expect others based on what it thinks the user is requesting. For example, most requests use an [action](#actions) param, but a [login request](../reference/controller-actions.md#post-userslogin) also requires a `username` and `password` param.
+Craft uses a handful of params to properly route a request, but may expect others based on what it thinks the user is requesting. For example, most requests use an [action](#actions) param, but a [login request](../reference/controller-actions.md#post-userslogin) also requires `loginName` and `password` params.
 
 ### Actions
 
