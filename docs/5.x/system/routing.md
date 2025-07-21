@@ -19,7 +19,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
     Any request to a path beginning with the <config5:cpTrigger> setting (`admin`, by default) uses the [control panel](control-panel.md) request context. This means that _only_ control panel-specific routes are considered, and authentication is enforced. Craft does not look for element URIs, evaluate site routes (whether [defined via the CP](#dynamic-routes) or [`routes.php`](#advanced-routing-with-url-rules)), or check for path matches in your `templates/` directory.
 
     ::: warning
-    Setting `cpTrigger` to `null` or `''` (an empty string) means that _all_ requests that reach this stage will be treated as control panel requests. This is usually only appropriate for [headless](#headless) sites, but comes with some drawbacks.
+    Setting `cpTrigger` to `null` or `''` (an empty string) means that _all_ requests that reach this stage will be treated as control panel requests. This is usually only appropriate for [headless](#headless) sites, and comes with some drawbacks.
     :::
 
 1. **Is it an element request?**
@@ -383,8 +383,8 @@ Enabling the <config5:headlessMode> setting skips three routing steps:
 - Site routes are ignored ([dynamic](#dynamic-routes) _and_ [advanced](#advanced-routing-with-url-rules));
 - The `templates/` folder is not checked for matching paths;
 
-Even when your Craft instance hosts no valid front-end URLs, you must access the control panel via its path (`/admin`, by default), or set <config5:cpTrigger> to `null` or `''` (an empty string).
+Even when your Craft instance hosts no valid front-end URLs, you must access the control panel via its path (`/admin`, by default)—or set <config5:cpTrigger> to `null` or `''` (an empty string).
 
 ::: warning
-Bypassing site rules means that [custom GraphQL routes](../development/graphql.md#create-a-graphql-route) will not work.
+Bypassing site rules means that [custom GraphQL routes](../development/graphql.md#create-a-graphql-route) will not work. The same is true for plugins that automatically register front-end routes.
 :::
