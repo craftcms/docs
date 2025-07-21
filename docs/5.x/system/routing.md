@@ -16,7 +16,7 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
 1. **Is it a control panel request?**
 
-    Any request to a path beginning with the <config5:cpTrigger> setting (`admin`, by default) uses the [control panel](control-panel.md) request context. This means that _only_ control panel-specific routes are considered, and authentication is enforced. Craft does not look for element URIs, evaluate site routes (whether [defined via the CP](#dynamic-routes) or [`routes.php`](#advanced-routing-with-url-rules)), or check for path matches in your `templates/` directory.
+    Any request to a path beginning with the <config5:cpTrigger> setting (`admin`, by default) uses the [control panel](control-panel.md) request context. This means that _only_ control panel-specific routes are considered, and authentication is enforced. Craft does not look for element URIs, evaluate site routes (whether [defined via the control panel](#dynamic-routes) or [`routes.php`](#advanced-routing-with-url-rules)), or check for path matches in your `templates/` directory.
 
     ::: warning
     Setting `cpTrigger` to `null` or `''` (an empty string) means that _all_ requests that reach this stage will be treated as control panel requests. This is usually only appropriate for [headless](#headless) sites, and comes with some drawbacks.
