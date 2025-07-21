@@ -14,7 +14,15 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
 
     [Action requests](../reference/controller-actions.md) either have a path that begins with `/actions/` (or whatever your <config5:actionTrigger> config setting is set to), or an `action` parameter in the POST body or query string. Every request Craft handles is ultimately routed to a controller action, but explicit action requests take precedence and guarantee that essential features are always accessible. If you look at your browser’s _Network_ tab while using the control panel, you’ll see a lot of action requests, like `/index.php?action=users/session-info`.
 
-2. **Is it an element request?**
+1. **Is it a control panel request?**
+
+    Any request to a path beginning with the <config5:cpTrigger> setting (`admin`, by default) uses the [control panel](control-panel.md) request context. This means that _only_ control panel-specific routes are considered, and authentication is enforced. Craft does not look for element URIs, evaluate site routes (whether [defined via the CP](#dynamic-routes) or [`routes.php`](#advanced-routing-with-url-rules)), or check for path matches in your `templates/` directory.
+
+    ::: warning
+    Setting `cpTrigger` to `null` or `''` (an empty string) means that _all_ requests that reach this stage will be treated as control panel requests. This is usually only appropriate for [headless](#headless) sites, but comes with some drawbacks.
+    :::
+
+1. **Is it an element request?**
 
     If the URI matches an [element](elements.md)’s URI, Craft lets the element decide how to route the request. For example, if an [entry](../reference/element-types/entries.md)’s URI is requested, Craft will render the template specified in its section’s settings, automatically injecting an [`entry` variable](../reference/twig/global-variables.md#other-elements). Only elements that are enabled and [live](drafts-revisions.md#statuses-visibility) are eligible for matching in this way.
 
@@ -24,23 +32,23 @@ Understanding Craft’s high-level approach to routing can help you troubleshoot
     Modules and plugins can re-map an element’s route to a custom controller using the [EVENT_SET_ROUTE](craft5:craft\base\Element::EVENT_SET_ROUTE) event to gather and organize additional data, or output it as a different content-type.
     :::
 
-3. **Does the URI match a route or rule?**
+1. **Does the URI match a route or rule?**
 
-    If the URI matches any [dynamic routes](#dynamic-routes) or [URI rules](#advanced-routing-with-url-rules), the template or controller action specified by it will get loaded.
+    If the URI matches any [dynamic routes](#dynamic-routes) or [URI rules](#advanced-routing-with-url-rules), the template or controller action specified by it is loaded.
 
-4. **Does the URI match a template?**
+1. **Does the URI match a template?**
 
-    Craft will check if the URI is a valid [template path](../development/templates.md#template-paths). If it is, Craft will render the matched template.
+    Craft will check if the URI is a valid [template path](../development/templates.md#template-paths). If it is, Craft renders the matched template.
 
     ::: tip
-    If any of the URI segments begin with an underscore (e.g. `blog/_archive/index`), Craft will skip this step. Similarly, [hidden templates](../development/templates.md#hidden-templates) are not matched.
+    If any of the URI segments begin with an underscore (e.g. `blog/_archive/index`), Craft skips this step. Similarly, [hidden templates](../development/templates.md#hidden-templates) are not matched.
     :::
 
-5. **404**
+1. **404**
 
     If none of the above criteria are met, Craft will throw a [NotFoundHttpException](yii2:yii\web\NotFoundHttpException).
 
-6. **Redirects** <Since ver="5.6.0" feature="Redirection rules" />
+1. **Redirects** <Since ver="5.6.0" feature="Redirection rules" />
 
     When a 404 exception is thrown, Craft does one final check for a matching [redirect](#redirection) rule. If one is found, the exception is dropped and a 300-level response is sent.
 
@@ -366,3 +374,17 @@ return [
     'corporate/team' => '/about-us',
 ];
 ```
+
+## Headless
+
+Enabling the <config5:headlessMode> setting skips three routing steps:
+
+- No lookup is done against known element URIs;
+- Site routes are ignored ([dynamic](#dynamic-routes) _and_ [advanced](#advanced-routing-with-url-rules));
+- The `templates/` folder is not checked for matching paths;
+
+Even when your Craft instance hosts no valid front-end URLs, you must access the control panel via its path (`/admin`, by default), or set <config5:cpTrigger> to `null` or `''` (an empty string).
+
+::: warning
+Bypassing site rules means that [custom GraphQL routes](../development/graphql.md#create-a-graphql-route) will not work.
+:::

@@ -23,7 +23,7 @@ By default, none of your content is publicly accessible via GraphQL—you must e
 
 #### Create a GraphQL Route
 
-The GraphQL endpoint is always available via its [action path](../system/routing.md), at `/index.php?action=graphql/api`. If you would prefer to access the API via a more concise path, create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) in `config/routes.php` that maps to this `graphql/api` controller action—the following rule would make the GraphQL API available at `/api`:
+The GraphQL endpoint is always available via its [action path](../system/routing.md), at `/index.php?action=graphql/api` or `/actions/graphql/api`. If you would prefer to access the API via a more concise path, create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) in `config/routes.php` that maps to this `graphql/api` controller action—the following rule would make the GraphQL API available at `/api`:
 
 ```php
 return [
@@ -32,8 +32,10 @@ return [
 ];
 ```
 
+These routes are _not_ evaluated when <config5:headlessMode> is enabled! you must use one of the built-in action URLs.
+
 ::: tip
-Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config5:allowedGraphqlOrigins> setting.
+Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using a [CORS filter](../reference/config/app.md#cors).
 :::
 
 #### Define Your Schemas
