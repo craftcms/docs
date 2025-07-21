@@ -32,7 +32,7 @@ return [
 ];
 ```
 
-These routes are _not_ evaluated when <config5:headlessMode> is enabled! you must use one of the built-in action URLs.
+These routes are _not_ evaluated when <config5:headlessMode> is enabled; you must use one of the built-in action URLs.
 
 ::: tip
 Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using a [CORS filter](../reference/config/app.md#cors).
