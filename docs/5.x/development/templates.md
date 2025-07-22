@@ -76,5 +76,5 @@ TITLE:Sales Representative
 END:VCARD
 ```
 
-When Craft renders this template, it will send the appropriate `Content-Type` header for the extension—in this case, `text/x-vcard`.
+When Craft renders this template, it also sets the extension-appropriate `Content-Type` header—in this case, `text/x-vcard`.
 To make the template dynamic, you would need to create a [parameterized route](../system/routing.md#dynamic-routes) pointed to the template, [load](../system/routing.md#accessing-named-parameters-in-your-templates) the corresponding entry or user element, and [print](twig.md#print-statements) its values.
