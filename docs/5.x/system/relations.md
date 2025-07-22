@@ -197,22 +197,45 @@ Passing an array returns results related to _any_ of the supplied elements. This
   .section('recipes')
   .relatedTo(proteins)
   .all() %}
-{# -> Recipes that share one or more proteins with the current one. #}
+{# -> Recipes that share *any* proteins with the current one. #}
 ```
 
-Passing `and` at the beginning of an array returns results relating to *all* of the supplied items:
+Passing `and` at the beginning of an array returns results related to *all* of the supplied items:
 
 ```twig
 {% set proteins = entry.ingredients.foodGroup('protein').all() %}
 
 {% set moreRecipes = craft.entries()
   .section('recipes')
-  .relatedTo(['and'] | merge(proteins))
+  .relatedTo(['and', ...proteins]))
   .all() %}
-{# -> Recipes that also use all this recipe’s proteins. #}
+{# -> Recipes that also use *all* this recipe’s proteins. #}
 ```
 
 This is equivalent to `.relatedTo(['and', beef, pork])`, if you already had variables for `beef` and `pork`.
+
+### Empty and Not Empty
+
+Like most other fields, relational field query methods accept special `:notempty:` and `:empty:` tokens.
+This allow you to query for elements that are related (or _not_ related) to _any_ other element—useful when the existence of a relationship has meaning:
+
+```twig
+{% set smallKitchenRecipes = craft.entries()
+  .section('recipes')
+  .specialEquipment(':empty:')
+  .all() %}
+{# -> Recipes that don’t require any specialized cookware. #}
+```
+
+You can still use the `specialEquipment` field’s data like any other relational field:
+
+```twig
+{% set equipment = entry.specialEquipment.all() %}
+
+{% if equipment %}
+  {# Output a list of cookware... #}
+{% endif %}
+```
 
 ## Compound Criteria
 
@@ -260,14 +283,14 @@ Property
 :  One of `element`, `sourceElement`, or `targetElement`
 
 Accepts
-:  Element ID, element, [element query](../development/element-queries.md), special `:empty:` or `:notempty:` tokens, or an array thereof
+:  Element ID, element, [element query](../development/element-queries.md), or an array thereof
 
 Description
-:  - Use `element` to get results on either end of a relational field (source _or_ target);
-:  - Use `sourceElement` to return elements selected in a relational field on the provided element(s);
-:  - Use `targetElement` to return elements that have the provided element(s) selected in a relational field.
+:  - Use `element` to allow results on either end of a relational field (source _or_ target);
+:  - Use `sourceElement` to scope the query to elements selected in a relational field on the provided element(s);
+:  - Use `targetElement` to scope the query to elements that have the provided element(s) selected in a relational field.
 
-One way of thinking about the difference between `sourceElement` and `targetElement` is that specifying a _source_ is roughly equivalent to using a field handle:
+One way of thinking about the difference between `sourceElement` and `targetElement` is that specifying a _single source_ is roughly equivalent to accessing related elements [via a field handle](#custom-fields):
 
 ```twig
 {% set ingredients = craft.entries()
@@ -276,10 +299,21 @@ One way of thinking about the difference between `sourceElement` and `targetElem
     sourceElement: recipe,
   })
   .all() %}
-{# -> Equivalent to `recipe.ingredients.all()`, from our very first example! #}
+{# -> Similar to `recipe.ingredients.all()`, from our very first example! #}
 ```
 
-The special `:notempty:` and `:empty:` tokens allow you to query for elements that are related (or _not_ related) to _any_ other element. These can be combined with [field](#fields) and [site](#sites) conditions.
+Using an _array of source elements_ returns any elements used as a relation on one or more of those sources—but each of the related elements will only appear in the results once!
+
+```twig
+{% set favorites = currentUser.favoriteRecipes.ids() %}
+{% set likedIngredients = craft.entries()
+  .section('ingredients')
+  .relatedTo({
+    sourceElement: favorites,
+  })
+  .all() %}
+{# -> Any ingredients in recipes you’ve added to your favorites. #}
+```
 
 ### Fields
 
@@ -311,6 +345,8 @@ By being explicit about the field we want the relation to use, we can show the u
 ::: warning
 The `field` param does not honor handles overridden in a field layout. Craft doesn’t know until elements are actually loaded which field layouts are relevant.
 :::
+
+The `field` param has [additional features](#relations-via-matrix) when scoping a query to a Matrix field.
 
 ### Sites
 
@@ -357,18 +393,36 @@ Here, we’re allowing Craft to look up substitutions defined in any site, which
 
 Relational fields on nested entries within Matrix fields are used the same way they would be on any other element type.
 
-If you want to find elements related to a source element through a [Matrix](../reference/field-types/matrix.md) field, pass the Matrix field’s handle to the `field` parameter:
+If you want to find elements related to a source element through a [Matrix](../reference/field-types/matrix.md) field, pass the Matrix field’s handle to the [`field` parameter](#fields):
 
 ```twig{5}
 {% set relatedRecipes = craft.entries()
-    .section('recipes')
-    .relatedTo({
-        targetElement: ingredient,
-        field: 'ingredients'
-    })
-    .all() %}
+  .section('recipes')
+  .relatedTo({
+      targetElement: ingredient,
+      field: 'steps'
+  })
+  .all() %}
 ```
 
-In this example, we’ve changed our schema a bit: ingredients are now attached to nested entries in a `steps` Matrix field, so we can tie instructions and quantities or volume to each one. We still have access to all the same relational query capabilities!
+In this example, we’ve changed our schema a bit: ingredients are now attached to nested entries in a `steps` Matrix field.
+We still have access to all the same relational query capabilities!
 
-We’ve also specified a field handle, to ensure that the relationships are defined through the intended field; if nested entries have multiple relational fields, it’s possible to get “false positive” results!
+We’ve specified a field handle to ensure that only elements selected as relations via a specific field are returned.
+If you need to be more precise about the field those relationships come from, you can use a dot (`.`) to target a nested field:
+
+```twig{5}
+{% set relatedRecipes = craft.entries()
+  .section('recipes')
+  .relatedTo({
+      targetElement: ingredient,
+      field: 'steps.ingredients',
+  })
+  .all() %}
+```
+
+::: warning
+Despite similarities to [eager-loading notation](../development/eager-loading.md#matrix-and-field-contexts), the `field` param does does _not_ support narrowing by entry type or beyond the first level of nested elements.
+Relations in any fields with handles matching the second segment (after the dot) are considered.
+Local handles are honored here, because Craft knows which entry types (and therefore field layouts) may be used by the nested entries.
+:::
