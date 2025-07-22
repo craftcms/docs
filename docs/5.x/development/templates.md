@@ -57,3 +57,24 @@ If you’re running [multiple sites](../system/sites.md) with Craft, you can cre
 For example, if you want to create a special template welcoming your German customers (but there’s no need for it on your English site) then you could save it in `templates/de/welcome.twig`. That template would be available from `https://example.de/welcome`, assuming the German site’s base URL is `https://example.de` and its handle is `de`.
 
 Craft will look for localized templates _before_ it looks for templates in the normal location, so you can use them to override non-localized templates. See our [Localization Guide](../system/sites.md) for more details.
+
+## Content Type Inference
+
+In situations when you want to serve non-HTML content, you can use an additional extension in your template’s name.
+Suppose your client wanted to provide an easy way to get contact information for sales representatives: rather than creating and uploading a [`.vcf` file](https://en.wikipedia.org/wiki/VCard) for each representative, you can generate them on-the-fly:
+
+```twig
+{# Template: templates/contacts/card.vcs.twig #}
+BEGIN:VCARD
+VERSION:4.0
+FN:Kelsey Kölsch
+N:Kölsch;Kelsey;;;
+BDAY:--0223
+EMAIL;TYPE=work:kelsey.kolsch@happylager.com
+TEL;TYPE=cell:(123) 555-5832
+TITLE:Sales Representative
+END:VCARD
+```
+
+When Craft renders this template, it will send the appropriate `Content-Type` header for the extension—in this case, `text/x-vcard`.
+To make the template dynamic, you would need to create a [parameterized route](../system/routing.md#dynamic-routes) pointed to the template, [load](../system/routing.md#accessing-named-parameters-in-your-templates) the corresponding entry or user element, and [print](twig.md#print-statements) its values.
