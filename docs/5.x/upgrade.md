@@ -64,13 +64,20 @@ ddev start
 
     Read more about this process in the [Database Character Set and Collation](#database-character-set-and-collation) section, below.
 
-1. Edit your project’s `composer.json` to require `"craftcms/cms": "^5.0.0"` and Craft-5-compatible plugins, all at once.
+1. Visit the **Craft 5 Upgrade** utility, and press **Prep `composer.json`** to generate an updated version of your `composer.json`.
+    You may copy this output verbatim into your project, or transcribe individual version constraints.
+    Craft also adjusts [your `platform` config](https://getcomposer.org/doc/06-config.md#platform) to agree with Craft 5’s requirements.
+
+    ![Screenshot of the Upgrade utility showing a button labeled “Prep composer.json”](./images/upgrade-prep-composer.png)
+
+    Beta versions of plugins may be suggested!
+    Adjust your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings if those plugins depend on other packages that do not yet have stable releases.
+    This tool does _not_ adjust your project’s other dependencies.
 
     ::: tip
-    You’ll need to manually edit each plugin version in `composer.json`. If any plugins are still in beta, you may need to change your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings.
+    To perform this step manually, change your `craftcms/cms` constraint to `^5.0.0`, and each plugin’s constraint to the Craft 5-compatible versions listed in the upgrade utility.
+    You must make _all_ of these edits before proceeding!
     :::
-
-    While you’re at it, review your project’s [other dependencies](#entry-scripts)! You may also need to add `"php": "8.2"` to your [platform](https://getcomposer.org/doc/06-config.md#platform) requirements, or remove it altogether.
 
 1. Run `composer update`.
 1. Make any required changes to your [configuration](#configuration).
