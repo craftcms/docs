@@ -64,7 +64,7 @@ In situations when you want to serve non-HTML content, you can use an additional
 Suppose your client wanted to provide an easy way to get contact information for sales representatives: rather than creating and uploading a [`.vcf` file](https://en.wikipedia.org/wiki/VCard) for each representative, you can generate them on-the-fly:
 
 ```twig
-{# Template: templates/contacts/card.vcs.twig #}
+{# Template: templates/contact/card.vcf.twig #}
 BEGIN:VCARD
 VERSION:4.0
 FN:Kelsey Kölsch
@@ -76,5 +76,53 @@ TITLE:Sales Representative
 END:VCARD
 ```
 
-When Craft renders this template, it also sets the extension-appropriate `Content-Type` header—in this case, `text/x-vcard`.
-To make the template dynamic, you would need to create a [parameterized route](../system/routing.md#dynamic-routes) pointed to the template, [load](../system/routing.md#accessing-named-parameters-in-your-templates) the corresponding entry or user element, and [print](twig.md#print-statements) its values.
+When Craft renders this template (`card.vcf.twig`), it also sets the extension-appropriate `Content-Type` header—in this case, `text/x-vcard`.
+If a template does not have a secondary extension, it is treated as HTML.
+Use the [`{% header %}` tag](../reference/twig/tags.md#header) in the event you need to force a specific `Content-Type` in a response.
+
+MIME types are determined using <yii2:yii\helpers\BaseFileHelper::getMimeTypeByExtension()>.
+
+<Block label="Dynamic vCards">
+
+To make the template dynamic, you would need to…
+
+1. Rename the template so it includes the <config5:privateTemplateTrigger> (i.e: `templates/contacts/_card.vcf`);
+1. Create a [parameterized route](../system/routing.md#dynamic-routes) pointed to the template:
+
+    ```php
+    return [
+        'contacts/download/<contactId:\d+>' => ['template' => 'contacts/_card.vcf'],
+    ];
+    ```
+
+1. [Load](../system/routing.md#accessing-named-parameters-in-your-templates) the corresponding entry or user element:
+
+    ```twig
+    {% set contact = craft.entries()
+      .section('reps')
+      .id(contactId)
+      .one() %}
+
+    {% if contact == null %}
+      {% exit 404 %}
+    {% endif %}
+
+    {# ... #}
+    ```
+
+1. [Print](twig.md#print-statements) its values:
+
+    ```twig
+    BEGIN:VCARD
+    VERSION:4.0
+    FN:{{ contact.fullName }}
+    N:{{ contact.lastName }};{{ contact.firstName }};;;
+    BDAY:--{{ contact.birthDate.format('md') }}
+    EMAIL;TYPE=work:{{ contact.emailAddress }}
+    TEL;TYPE=cell:{{ contact.telephone }}
+    TITLE:{{ contact.professionalTitle }}
+    END:VCARD
+    ```
+
+It’s worth noting that the vCard spec (and potentially other novel content types) is extremely strict about character encoding and escaping. You may need to escape or encode text entered by authors!
+</Block>
