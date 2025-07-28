@@ -816,9 +816,9 @@ Craft also attempts to detect use of field instance handles in `.where()` and `.
   ])
   .andWhere([
     'not',
-    ['like', 'primaryProtein, '%shellfish%'],
-    ['like', 'primaryProtein, '%shrimp%'],
-    ['like', 'primaryProtein, '%scallop%'],
+    ['like', 'primaryProtein', '%shellfish%'],
+    ['like', 'primaryProtein', '%shrimp%'],
+    ['like', 'primaryProtein', '%scallop%'],
   ])
   .orderBy('scovilleRating')
   .all() %}
