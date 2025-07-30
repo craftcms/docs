@@ -125,4 +125,5 @@ To make the template dynamic, you would need to…
     ```
 
 It’s worth noting that the vCard spec (and potentially other novel content types) is extremely strict about character encoding and escaping. You may need to escape or encode text entered by authors!
+
 </Block>
