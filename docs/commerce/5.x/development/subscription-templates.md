@@ -133,9 +133,8 @@ The form should post to the `commerce/subscriptions/cancel` action:
   {{ actionInput('commerce/subscriptions/cancel') }}
   {{ hiddenInput('subscriptionUid', subscription.uid|hash) }}
 
-  {% namespace subscription.getGateway().handle|commercePaymentFormNamespace %}
-    {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml(subscription)|raw }}
-  {% endnamespace %}
+  {# Include gateway-specific options: #}
+  {{ subscription.plan.getGateway().getCancelSubscriptionFormHtml(subscription)|raw }}
 
   <button>Unsubscribe</button>
 </form>
