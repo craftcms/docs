@@ -23,7 +23,7 @@ Craft relies on the [webonyx/graphql-php](https://github.com/webonyx/graphql-php
 Be mindful of Craft vs. GraphQL terminology, because there are overlapping terms that can be confusing. It helps to pay careful attention to namespacing when looking at code examples.
 :::
 
-The rest of this page will cover each of the main things you may need to work with. If you’d like some concrete examples, have a look at Craft’s own pieces in the [`src/gql/` directory](https://github.com/craftcms/cms/tree/main/src/gql).
+The rest of this page will cover each of the main things you may need to work with. If you’d like some concrete examples, have a look at Craft’s own pieces in the [`src/gql/` directory](https://github.com/craftcms/cms/tree/5.x/src/gql).
 
 ### Limitations
 
