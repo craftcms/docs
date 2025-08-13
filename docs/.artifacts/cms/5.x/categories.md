@@ -38,7 +38,7 @@
 | [nextSiblingOf](#nextsiblingof)                 | Narrows the query results to only the category that comes immediately after another category in its structure.
 | [notRelatedTo](#notrelatedto)                   | Narrows the query results to only categories that are not related to certain other elements.
 | [offset](#offset)                               | Determines how many categories should be skipped in the results.
-| [orderBy](#orderby)                             | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
+| [orderBy](#orderby)                             | Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC, id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
 | [positionedAfter](#positionedafter)             | Narrows the query results to only categories that are positioned after another category in its structure.
 | [positionedBefore](#positionedbefore)           | Narrows the query results to only categories that are positioned before another category in its structure.
 | [preferSites](#prefersites)                     | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -922,7 +922,7 @@ $categories = \craft\elements\Category::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines the order that the categories should be returned in. (If empty, defaults to `dateCreated DESC,
-    elements.id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
+    id`, or the order defined by the category group if the [group](#group) or [groupId](#groupid) params are set to a single group.)
 
 
 
