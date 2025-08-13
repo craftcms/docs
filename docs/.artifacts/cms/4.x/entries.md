@@ -6,73 +6,92 @@
 
 <!-- textlint-disable -->
 
-| Param                                     | Description
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [after](#after)                           | Narrows the query results to only entries that were posted on or after a certain date.
-| [ancestorDist](#ancestordist)             | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
-| [ancestorOf](#ancestorof)                 | Narrows the query results to only entries that are ancestors of another entry in its structure.
-| [andRelatedTo](#andrelatedto)             | Narrows the query results to only entries that are related to certain other elements.
-| [andWith](#andwith)                       | Causes the query to return matching entries eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
-| [asArray](#asarray)                       | Causes the query to return matching entries as arrays of data, rather than [Entry](craft4:craft\elements\Entry) objects.
-| [authorGroup](#authorgroup)               | Narrows the query results based on the user group the entries’ authors belong to.
-| [authorGroupId](#authorgroupid)           | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
-| [authorId](#authorid)                     | Narrows the query results based on the entries’ authors.
-| [before](#before)                         | Narrows the query results to only entries that were posted before a certain date.
-| [cache](#cache)                           | Enables query cache for this Query.
-| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
-| [dateCreated](#datecreated)               | Narrows the query results based on the entries’ creation dates.
-| [dateUpdated](#dateupdated)               | Narrows the query results based on the entries’ last-updated dates.
-| [descendantDist](#descendantdist)         | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [descendantOf](#descendantof).
-| [descendantOf](#descendantof)             | Narrows the query results to only entries that are descendants of another entry in its structure.
-| [draftCreator](#draftcreator)             | Narrows the query results to only drafts created by a given user.
-| [draftId](#draftid)                       | Narrows the query results based on the entries’ draft’s ID (from the `drafts` table).
-| [draftOf](#draftof)                       | Narrows the query results to only drafts of a given entry.
-| [drafts](#drafts)                         | Narrows the query results to only drafts entries.
-| [expiryDate](#expirydate)                 | Narrows the query results based on the entries’ expiry dates.
-| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
-| [hasDescendants](#hasdescendants)         | Narrows the query results based on whether the entries have any descendants in their structure.
-| [id](#id)                                 | Narrows the query results based on the entries’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
-| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
-| [language](#language)                     | Determines which site(s) the entries should be queried in, based on their language.
-| [leaves](#leaves)                         | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
-| [level](#level)                           | Narrows the query results based on the entries’ level within the structure.
-| [limit](#limit)                           | Determines the number of entries that should be returned.
-| [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry in its structure.
-| [offset](#offset)                         | Determines how many entries should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
-| [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry in its structure.
-| [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry in its structure.
-| [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.
-| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [prevSiblingOf](#prevsiblingof)           | Narrows the query results to only the entry that comes immediately before another entry in its structure.
-| [provisionalDrafts](#provisionaldrafts)   | Narrows the query results to only provisional drafts.
-| [relatedTo](#relatedto)                   | Narrows the query results to only entries that are related to certain other elements.
-| [revisionCreator](#revisioncreator)       | Narrows the query results to only revisions created by a given user.
-| [revisionId](#revisionid)                 | Narrows the query results based on the entries’ revision’s ID (from the `revisions` table).
-| [revisionOf](#revisionof)                 | Narrows the query results to only revisions of a given entry.
-| [revisions](#revisions)                   | Narrows the query results to only revision entries.
-| [savable](#savable)                       | Sets the [savable](https://docs.craftcms.com/api/v4/craft-elements-db-entryquery.html#property-savable) property.
-| [savedDraftsOnly](#saveddraftsonly)       | Narrows the query results to only unpublished drafts which have been saved after initial creation.
-| [search](#search)                         | Narrows the query results to only entries that match a search query.
-| [section](#section)                       | Narrows the query results based on the sections the entries belong to.
-| [sectionId](#sectionid)                   | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
-| [siblingOf](#siblingof)                   | Narrows the query results to only entries that are siblings of another entry in its structure.
-| [site](#site)                             | Determines which site(s) the entries should be queried in.
-| [siteId](#siteid)                         | Determines which site(s) the entries should be queried in, per the site’s ID.
-| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the entries’ IDs in the `elements_sites` table.
-| [slug](#slug)                             | Narrows the query results based on the entries’ slugs.
-| [status](#status)                         | Narrows the query results based on the entries’ statuses.
-| [title](#title)                           | Narrows the query results based on the entries’ titles.
-| [trashed](#trashed)                       | Narrows the query results to only entries that have been soft-deleted.
-| [type](#type)                             | Narrows the query results based on the entries’ entry types.
-| [typeId](#typeid)                         | Narrows the query results based on the entries’ entry types, per the types’ IDs.
-| [uid](#uid)                               | Narrows the query results based on the entries’ UIDs.
-| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
-| [uri](#uri)                               | Narrows the query results based on the entries’ URIs.
-| [with](#with)                             | Causes the query to return matching entries eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)     | Sets whether custom fields should be factored into the query.
+| Param                                           | Description
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [after](#after)                                 | Narrows the query results to only entries that were posted on or after a certain date.
+| [allowOwnerDrafts](#allowownerdrafts)           | Narrows the query results based on whether the entries’ owners are drafts.
+| [allowOwnerRevisions](#allowownerrevisions)     | Narrows the query results based on whether the entries’ owners are revisions.
+| [ancestorDist](#ancestordist)                   | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [ancestorOf](#ancestorof).
+| [ancestorOf](#ancestorof)                       | Narrows the query results to only entries that are ancestors of another entry in its structure.
+| [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only entries that are not related to certain other elements.
+| [andRelatedTo](#andrelatedto)                   | Narrows the query results to only entries that are related to certain other elements.
+| [andWith](#andwith)                             | Causes the query to return matching entries eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+| [asArray](#asarray)                             | Causes the query to return matching entries as arrays of data, rather than [Entry](craft4:craft\elements\Entry) objects.
+| [authorGroup](#authorgroup)                     | Narrows the query results based on the user group the entries’ authors belong to.
+| [authorGroupId](#authorgroupid)                 | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
+| [authorId](#authorid)                           | Narrows the query results based on the entries’ author ID(s).
+| [before](#before)                               | Narrows the query results to only entries that were posted before a certain date.
+| [cache](#cache)                                 | Enables query cache for this Query.
+| [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
+| [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+| [dateCreated](#datecreated)                     | Narrows the query results based on the entries’ creation dates.
+| [dateUpdated](#dateupdated)                     | Narrows the query results based on the entries’ last-updated dates.
+| [descendantDist](#descendantdist)               | Narrows the query results to only entries that are up to a certain distance away from the entry specified by [descendantOf](#descendantof).
+| [descendantOf](#descendantof)                   | Narrows the query results to only entries that are descendants of another entry in its structure.
+| [draftCreator](#draftcreator)                   | Narrows the query results to only drafts created by a given user.
+| [draftId](#draftid)                             | Narrows the query results based on the entries’ draft’s ID (from the `drafts` table).
+| [draftOf](#draftof)                             | Narrows the query results to only drafts of a given entry.
+| [drafts](#drafts)                               | Narrows the query results to only drafts entries.
+| [eagerly](#eagerly)                             | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
+| [expiryDate](#expirydate)                       | Narrows the query results based on the entries’ expiry dates.
+| [field](#field)                                 | Narrows the query results based on the field the entries are contained by.
+| [fieldId](#fieldid)                             | Narrows the query results based on the field the entries are contained by, per the fields’ IDs.
+| [fixedOrder](#fixedorder)                       | Causes the query results to be returned in the order specified by [id](#id).
+| [getFieldLayouts](#getfieldlayouts)             | Returns the field layouts that could be associated with the resulting elements.
+| [hasDescendants](#hasdescendants)               | Narrows the query results based on whether the entries have any descendants in their structure.
+| [id](#id)                                       | Narrows the query results based on the entries’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders)       | Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
+| [inBulkOp](#inbulkop)                           | Narrows the query results to only entries that were involved in a bulk element operation.
+| [inReverse](#inreverse)                         | Causes the query results to be returned in reverse order.
+| [language](#language)                           | Determines which site(s) the entries should be queried in, based on their language.
+| [leaves](#leaves)                               | Narrows the query results based on whether the entries are “leaves” (entries with no descendants).
+| [level](#level)                                 | Narrows the query results based on the entries’ level within the structure.
+| [limit](#limit)                                 | Determines the number of entries that should be returned.
+| [nextSiblingOf](#nextsiblingof)                 | Narrows the query results to only the entry that comes immediately after another entry in its structure.
+| [notRelatedTo](#notrelatedto)                   | Narrows the query results to only entries that are not related to certain other elements.
+| [offset](#offset)                               | Determines how many entries should be skipped in the results.
+| [orderBy](#orderby)                             | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+| [owner](#owner)                                 | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
+| [ownerId](#ownerid)                             | Narrows the query results based on the owner element of the entries, per the owners’ IDs.
+| [positionedAfter](#positionedafter)             | Narrows the query results to only entries that are positioned after another entry in its structure.
+| [positionedBefore](#positionedbefore)           | Narrows the query results to only entries that are positioned before another entry in its structure.
+| [postDate](#postdate)                           | Narrows the query results based on the entries’ post dates.
+| [preferSites](#prefersites)                     | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
+| [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [prevSiblingOf](#prevsiblingof)                 | Narrows the query results to only the entry that comes immediately before another entry in its structure.
+| [primaryOwner](#primaryowner)                   | Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
+| [primaryOwnerId](#primaryownerid)               | Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
+| [provisionalDrafts](#provisionaldrafts)         | Narrows the query results to only provisional drafts.
+| [relatedTo](#relatedto)                         | Narrows the query results to only entries that are related to certain other elements.
+| [render](#render)                               | Executes the query and renders the resulting elements using their partial templates.
+| [revisionCreator](#revisioncreator)             | Narrows the query results to only revisions created by a given user.
+| [revisionId](#revisionid)                       | Narrows the query results based on the entries’ revision’s ID (from the `revisions` table).
+| [revisionOf](#revisionof)                       | Narrows the query results to only revisions of a given entry.
+| [revisions](#revisions)                         | Narrows the query results to only revision entries.
+| [savable](#savable)                             | Sets the [savable](https://docs.craftcms.com/api/v4/craft-elements-db-entryquery.html#property-savable) property.
+| [savedDraftsOnly](#saveddraftsonly)             | Narrows the query results to only unpublished drafts which have been saved after initial creation.
+| [search](#search)                               | Narrows the query results to only entries that match a search query.
+| [section](#section)                             | Narrows the query results based on the sections the entries belong to.
+| [sectionId](#sectionid)                         | Narrows the query results based on the sections the entries belong to, per the sections’ IDs.
+| [siblingOf](#siblingof)                         | Narrows the query results to only entries that are siblings of another entry in its structure.
+| [site](#site)                                   | Determines which site(s) the entries should be queried in.
+| [siteId](#siteid)                               | Determines which site(s) the entries should be queried in, per the site’s ID.
+| [siteSettingsId](#sitesettingsid)               | Narrows the query results based on the entries’ IDs in the `elements_sites` table.
+| [slug](#slug)                                   | Narrows the query results based on the entries’ slugs.
+| [status](#status)                               | Narrows the query results based on the entries’ statuses.
+| [title](#title)                                 | Narrows the query results based on the entries’ titles.
+| [trashed](#trashed)                             | Narrows the query results to only entries that have been soft-deleted.
+| [type](#type)                                   | Narrows the query results based on the entries’ entry types.
+| [typeId](#typeid)                               | Narrows the query results based on the entries’ entry types, per the types’ IDs.
+| [uid](#uid)                                     | Narrows the query results based on the entries’ UIDs.
+| [unique](#unique)                               | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#uri)                                     | Narrows the query results based on the entries’ URIs.
+| [wasCountEagerLoaded](#wascounteagerloaded)     | Returns whether the query result count was already eager loaded by the query's source element.
+| [wasEagerLoaded](#waseagerloaded)               | Returns whether the query results were already eager loaded by the query's source element.
+| [with](#with)                                   | Causes the query to return matching entries eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)           | Sets whether custom fields should be factored into the query.
+| [withProvisionalDrafts](#withprovisionaldrafts) | Causes the query to return provisional drafts for the matching elements, when they exist for the current user.
 
 
 <!-- textlint-enable -->
@@ -112,6 +131,46 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `allowOwnerDrafts`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-nestedelementquerytrait.html#method-allowownerdrafts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\NestedElementQueryTrait</code></a>
+
+Narrows the query results based on whether the entries’ owners are drafts.
+
+
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `true` | which can belong to a draft.
+| `false` | which cannot belong to a draft.
+
+
+
+
+
+
+#### `allowOwnerRevisions`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-nestedelementquerytrait.html#method-allowownerrevisions" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\NestedElementQueryTrait</code></a>
+
+Narrows the query results based on whether the entries’ owners are revisions.
+
+
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `true` | which can belong to a revision.
+| `false` | which cannot belong to a revision.
+
+
+
+
 
 
 #### `ancestorDist`
@@ -183,6 +242,37 @@ This can be combined with [ancestorDist](#ancestordist) if you want to limit how
 :::
 
 
+#### `andNotRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andnotrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Narrows the query results to only entries that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all entries that are related to myCategoryA and not myCategoryB #}
+{% set entries = craft.entries()
+  .relatedTo(myCategoryA)
+  .andNotRelatedTo(myCategoryB)
+  .all() %}
+```
+
+```php
+// Fetch all entries that are related to $myCategoryA and not $myCategoryB
+$entries = \craft\elements\Entry::find()
+    ->relatedTo($myCategoryA)
+    ->andNotRelatedTo($myCategoryB)
+    ->all();
+```
+:::
+
+
 #### `andRelatedTo`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -191,7 +281,7 @@ Narrows the query results to only entries that are related to certain other elem
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -327,7 +417,7 @@ $entries = \craft\elements\Entry::find()
 #### `authorId`
 
 
-Narrows the query results based on the entries’ authors.
+Narrows the query results based on the entries’ author ID(s).
 
 Possible values include:
 
@@ -336,6 +426,7 @@ Possible values include:
 | `1` | with an author with an ID of 1.
 | `'not 1'` | not with an author with an ID of 1.
 | `[1, 2]` | with an author with an ID of 1 or 2.
+| `['and', 1, 2]` |  with authors with IDs of 1 and 2.
 | `['not', 1, 2]` | not with an author with an ID of 1 or 2.
 
 
@@ -408,11 +499,29 @@ Enables query cache for this Query.
 
 
 
+#### `canonicalsOnly`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-canonicalsonly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Narrows the query results to only canonical elements, including elements
+that reference another canonical element via `canonicalId` so long as they
+aren’t a draft.
+
+
+
+Unpublished drafts can be included as well if `drafts(null)` and
+`draftOf(false)` are also passed.
+
+
+
+
+
+
 #### `clearCachedResult`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
-Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 
 
 
@@ -650,7 +759,9 @@ Possible values include:
 | Value | Fetches drafts…
 | - | -
 | `1` | for the entry with an ID of 1.
+| `[1, 2]` | for the entries with an ID of 1 or 2.
 | a [Entry](craft4:craft\elements\Entry) object | for the entry represented by the object.
+| an array of [Entry](craft4:craft\elements\Entry) objects | for the entries represented by the objects.
 | `'*'` | for any entry
 | `false` | that aren’t associated with a published entry
 
@@ -702,6 +813,22 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `eagerly`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-eagerly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to be used to eager-load results for the query’s source element
+and any other elements in its collection.
+
+
+
+
+
+
+
+
+
+
 #### `expiryDate`
 
 
@@ -741,6 +868,77 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `field`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-nestedelementquerytrait.html#method-field" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\NestedElementQueryTrait</code></a>
+
+Narrows the query results based on the field the entries are contained by.
+
+
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `'foo'` | in a field with a handle of `foo`.
+| `['foo', 'bar']` | in a field with a handle of `foo` or `bar`.
+| a `\craft\elements\db\craft\fields\Matrix` object | in a field represented by the object.
+
+
+
+::: code
+```twig
+{# Fetch entries in the Foo field #}
+{% set entries = craft.entries()
+  .field('foo')
+  .all() %}
+```
+
+```php
+// Fetch entries in the Foo field
+$entries = \craft\elements\Entry::find()
+    ->field('foo')
+    ->all();
+```
+:::
+
+
+#### `fieldId`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-nestedelementquerytrait.html#method-fieldid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\NestedElementQueryTrait</code></a>
+
+Narrows the query results based on the field the entries are contained by, per the fields’ IDs.
+
+
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `1` | in a field with an ID of 1.
+| `'not 1'` | not in a field with an ID of 1.
+| `[1, 2]` | in a field with an ID of 1 or 2.
+| `['not', 1, 2]` | not in a field with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch entries in the field with an ID of 1 #}
+{% set entries = craft.entries()
+  .fieldId(1)
+  .all() %}
+```
+
+```php
+// Fetch entries in the field with an ID of 1
+$entries = \craft\elements\Entry::find()
+    ->fieldId(1)
+    ->all();
+```
+:::
+
+
 #### `fixedOrder`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -772,6 +970,21 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `getFieldLayouts`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-getfieldlayouts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Returns the field layouts that could be associated with the resulting elements.
+
+
+
+
+
+
+
+
 
 
 #### `hasDescendants`
@@ -851,6 +1064,21 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 
 Causes the query to return matching entries as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
+
+
+
+
+
+
+
+
+
+
+#### `inBulkOp`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inbulkop" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Narrows the query results to only entries that were involved in a bulk element operation.
 
 
 
@@ -1054,6 +1282,35 @@ $entry = \craft\elements\Entry::find()
 :::
 
 
+#### `notRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-notrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Narrows the query results to only entries that are not related to certain other elements.
+
+
+
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+
+
+
+::: code
+```twig
+{# Fetch all entries that are related to myEntry #}
+{% set entries = craft.entries()
+  .notRelatedTo(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch all entries that are related to $myEntry
+$entries = \craft\elements\Entry::find()
+    ->notRelatedTo($myEntry)
+    ->all();
+```
+:::
+
+
 #### `offset`
 
 <a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
@@ -1084,7 +1341,7 @@ $entries = \craft\elements\Entry::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC,
-    elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+    id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 
 
 
@@ -1100,6 +1357,67 @@ Determines the order that the entries should be returned in. (If empty, defaults
 // Fetch all entries in order of date created
 $entries = \craft\elements\Entry::find()
     ->orderBy('dateCreated ASC')
+    ->all();
+```
+:::
+
+
+#### `owner`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-nestedelementquerytrait.html#method-owner" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\NestedElementQueryTrait</code></a>
+
+Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
+
+
+
+
+
+::: code
+```twig
+{# Fetch entries created for this entry #}
+{% set entries = craft.entries()
+  .owner(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch entries created for this entry
+$entries = \craft\elements\Entry::find()
+    ->owner($myEntry)
+    ->all();
+```
+:::
+
+
+#### `ownerId`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-nestedelementquerytrait.html#method-ownerid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\NestedElementQueryTrait</code></a>
+
+Narrows the query results based on the owner element of the entries, per the owners’ IDs.
+
+
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `1` | created for an element with an ID of 1.
+| `[1, 2]` | created for an element with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch entries created for an element with an ID of 1 #}
+{% set entries = craft.entries()
+  .ownerId(1)
+  .all() %}
+```
+
+```php
+// Fetch entries created for an element with an ID of 1
+$entries = \craft\elements\Entry::find()
+    ->ownerId(1)
     ->all();
 ```
 :::
@@ -1249,6 +1567,21 @@ $entries = \craft\elements\Entry::find()
 :::
 
 
+#### `prepForEagerLoading`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prepforeagerloading" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Prepares the query for lazy eager loading.
+
+
+
+
+
+
+
+
+
+
 #### `prepareSubquery`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -1294,6 +1627,67 @@ $entry = \craft\elements\Entry::find()
 :::
 
 
+#### `primaryOwner`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-nestedelementquerytrait.html#method-primaryowner" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\NestedElementQueryTrait</code></a>
+
+Sets the [primaryOwnerId](#primaryownerid) and [siteId](#siteid) parameters based on a given element.
+
+
+
+
+
+::: code
+```twig
+{# Fetch entries created for this entry #}
+{% set entries = craft.entries()
+  .primaryOwner(myEntry)
+  .all() %}
+```
+
+```php
+// Fetch entries created for this entry
+$entries = \craft\elements\Entry::find()
+    ->primaryOwner($myEntry)
+    ->all();
+```
+:::
+
+
+#### `primaryOwnerId`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-nestedelementquerytrait.html#method-primaryownerid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\NestedElementQueryTrait</code></a>
+
+Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
+
+
+
+Possible values include:
+
+| Value | Fetches entries…
+| - | -
+| `1` | created for an element with an ID of 1.
+| `[1, 2]` | created for an element with an ID of 1 or 2.
+
+
+
+::: code
+```twig
+{# Fetch entries created for an element with an ID of 1 #}
+{% set entries = craft.entries()
+  .primaryOwnerId(1)
+  .all() %}
+```
+
+```php
+// Fetch entries created for an element with an ID of 1
+$entries = \craft\elements\Entry::find()
+    ->primaryOwnerId(1)
+    ->all();
+```
+:::
+
+
 #### `provisionalDrafts`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-provisionaldrafts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -1331,7 +1725,7 @@ Narrows the query results to only entries that are related to certain other elem
 
 
 
-See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1350,6 +1744,17 @@ $entries = \craft\elements\Entry::find()
     ->all();
 ```
 :::
+
+
+#### `render`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-render" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Executes the query and renders the resulting elements using their partial templates.
+
+If no partial template exists for an element, its string representation will be output instead.
+
+
 
 
 #### `revisionCreator`
@@ -1529,7 +1934,7 @@ Narrows the query results to only entries that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/5.x/system/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1570,6 +1975,7 @@ Possible values include:
 | `['foo', 'bar']` | in a section with a handle of `foo` or `bar`.
 | `['not', 'foo', 'bar']` | not in a section with a handle of `foo` or `bar`.
 | a [Section](craft4:craft\models\Section) object | in a section represented by the object.
+| `'*'` | in any section.
 
 
 
@@ -2094,6 +2500,36 @@ $entry = \craft\elements\Entry::find()
 :::
 
 
+#### `wasCountEagerLoaded`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-wascounteagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Returns whether the query result count was already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
+
+
+#### `wasEagerLoaded`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-waseagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Returns whether the query results were already eager loaded by the query's source element.
+
+
+
+
+
+
+
+
+
+
 #### `with`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -2102,7 +2538,7 @@ Causes the query to return matching entries eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/5.x/development/eager-loading.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -2128,6 +2564,22 @@ $entries = \craft\elements\Entry::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
+
+
+#### `withProvisionalDrafts`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withprovisionaldrafts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return provisional drafts for the matching elements,
+when they exist for the current user.
 
 
 
