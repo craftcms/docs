@@ -6,8 +6,9 @@
   --dl-color: theme("colors.soft-gray");
   --medium-zoom-overlay-color: theme("colors.soft");
   --heading-color: theme("colors.slate");
+  --link-color-default: theme("colors.blue.default");
   --sidebar-link-color: theme("colors.slate");
-  --sidebar-active-link-color: theme("colors.blue");
+  --sidebar-active-link-color: theme("colors.blue.default");
   --hamburger-color: theme("colors.black");
   --tooltip-bg-color: theme("colors.white");
   --border-color: #e2e8f0;
@@ -50,7 +51,8 @@ body {
 }
 
 a {
-  @apply text-blue no-underline;
+  @apply no-underline;
+  color: var(--link-color-default);
 }
 
 img {

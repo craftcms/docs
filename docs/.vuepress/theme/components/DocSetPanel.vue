@@ -120,6 +120,10 @@
       .home-title {
         @apply relative pl-0 text-blue;
         left: -2px;
+
+        .theme-dark & {
+          @apply text-blue-lighter;
+        }
       }
     }
   }
