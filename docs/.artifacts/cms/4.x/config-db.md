@@ -48,7 +48,7 @@ Defined by
 
 </div>
 
-The character set to use when creating tables.
+The charset to use when creating tables.
 
 ::: tip
 You can change the character set and collation across all existing database tables using this terminal command:
@@ -58,19 +58,12 @@ php craft db/convert-charset
 ```
 :::
 
-::: warning
-If you set this to something besides `utf8` or `utf8mb4` for MySQL, you **must** also set the [collation()](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#method-collation)
-setting to a compatible collation name.
-:::
-
 ::: code
 ```php Static Config
-->charset('utf8mb3')
-->collation('utf8mb3_general_ci')
+->charset('utf8mb4')
 ```
 ```shell Environment Override
-CRAFT_DB_CHARSET=utf8mb3
-CRAFT_DB_COLLATION=utf8mb3_general_ci
+CRAFT_DB_CHARSET=utf8mb4
 ```
 :::
 
@@ -94,12 +87,14 @@ Since
 
 </div>
 
-The collation to use when creating tables. (MySQL only.)
+The collation to use when creating tables.
 
-If null, the following collation will be used by default:
+This is only used by MySQL. If null, the [charset’s](https://docs.craftcms.com/api/v4/craft-config-dbconfig.html#property-charset) default collation will be used.
 
-- **MySQL 8.0+**: `utf8mb4_0900_ai_ci`
-- **Older MySQL versions and MariaDB**: `utf8mb4_unicode_ci`
+| Charset   | Default collation    |
+| --------- | -------------------- |
+| `utf8`    | `utf8_general_ci`    |
+| `utf8mb4` | `utf8mb4_0900_ai_ci` |
 
 ::: tip
 You can change the character set and collation across all existing database tables using this terminal command:
@@ -111,12 +106,10 @@ php craft db/convert-charset
 
 ::: code
 ```php Static Config
-->charset('utf8mb3')
-->collation('utf8mb3_general_ci')
+->collation('utf8mb4_0900_ai_ci')
 ```
 ```shell Environment Override
-CRAFT_DB_CHARSET=utf8mb3
-CRAFT_DB_COLLATION=utf8mb3_general_ci
+CRAFT_DB_COLLATION=utf8mb4_0900_ai_ci
 ```
 :::
 
