@@ -84,7 +84,7 @@
 
   .home {
     @apply text-sm relative;
-    color: #718096;
+    color: var(--text-color-muted);
 
     .back {
       @apply inline-block absolute mr-1 opacity-100;
@@ -118,12 +118,9 @@
       }
 
       .home-title {
-        @apply relative pl-0 text-blue;
+        color: var(--link-color-default);
+        @apply relative pl-0;
         left: -2px;
-
-        .theme-dark & {
-          @apply text-blue-lighter;
-        }
       }
     }
   }
