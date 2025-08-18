@@ -4,7 +4,7 @@
     <div v-for="item in items">
       <RouterLink v-if=" ! isExternal(item.link)" :to="item.link" class="sidebar-extra-item">
         <span class="sidebar-extra-icon">
-          <img :src="item.icon" />
+          <img :src="item.icon" alt="" />
         </span>
         <span class="sidebar-extra-title">{{ item.title }}</span>
       </RouterLink>
@@ -16,7 +16,7 @@
         target="_blank"
       >
         <span :class="['sidebar-extra-icon', item.iconSize || 'sidebar-extra-icon-sm']">
-          <img :src="item.icon" />
+          <img :src="item.icon" alt="" />
         </span>
         <span class="sidebar-extra-title mr-1">{{ item.title }}</span>
         <OutboundLink />
