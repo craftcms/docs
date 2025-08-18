@@ -20,7 +20,6 @@ module.exports = {
         blue: {
           "lighter": "#86A7F9",
           "default": "#2E68F5",
-          "darker": "#4a7cf6",
         },
         red: "#da5a47",
         cinder: "#131119",
