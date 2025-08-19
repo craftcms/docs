@@ -5,7 +5,7 @@ Craft’s entire [application configuration](https://www.yiiframework.com/doc/gu
 You can further customize the application configuration for only web requests or console requests from `config/app.web.php` and `config/app.console.php`.
 
 ::: warning
-New [Craft projects](https://github.com/craftcms/craft/tree/4.x) include a stub of `app.php` that exists solely to set an app ID, which affects how caches and sessions are stored. Most applications will _not_ require additional application config.
+New [Craft projects](repo:craftcms/craft/tree/4.x) include a stub of `app.php` that exists solely to set an app ID, which affects how caches and sessions are stored. Most applications will _not_ require additional application config.
 :::
 
 ## Approach
@@ -444,7 +444,7 @@ return [
 ];
 ```
 
-Available drivers are listed in the [Yii2 Queue Extension documentation](https://github.com/yiisoft/yii2-queue/tree/master/docs/guide).
+Available drivers are listed in the [Yii2 Queue Extension documentation](repo:yiisoft/yii2-queue/tree/master/docs/guide).
 
 ::: warning
 Only drivers that implement <craft4:craft\queue\QueueInterface> will be visible within the control panel.

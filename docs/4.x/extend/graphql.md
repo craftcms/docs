@@ -23,18 +23,18 @@ Craft relies on the [webonyx/graphql-php](https://github.com/webonyx/graphql-php
 Be mindful of Craft vs. GraphQL terminology, because there are overlapping terms that can be confusing. It helps to pay careful attention to namespacing when looking at code examples.
 :::
 
-The rest of this page will cover each of the main things you may need to work with. If you’d like some concrete examples, have a look at Craft’s own pieces in the [`src/gql/` directory](https://github.com/craftcms/cms/tree/main/src/gql).
+The rest of this page will cover each of the main things you may need to work with. If you’d like some concrete examples, have a look at Craft’s own pieces in the [`src/gql/` directory](repo:craftcms/cms/tree/4.x/src/gql).
 
 ### Limitations
 
 If you’re planning advanced or elaborate GraphQL features, please be aware of the following limitations with Craft’s GraphQL implementation:
 
 - GraphQL subscriptions aren’t currently supported.
-- Advanced query builder functions [are not exposed for GraphQL](https://github.com/craftcms/cms/issues/7842).
+- Advanced query builder functions [are not exposed for GraphQL](repo:craftcms/cms/issues/7842).
 
 ## Folder Structure
 
-Here’s a high-level look at the folder structure we’ll explore in our example adding a “Widget” element. You can structure things however you want, we’re just following [Craft’s organization](https://github.com/craftcms/cms/tree/main/src/gql):
+Here’s a high-level look at the folder structure we’ll explore in our example adding a “Widget” element. You can structure things however you want, we’re just following [Craft’s organization](repo:craftcms/cms/tree/4.x/src/gql):
 
 ```treeview
 src/gql/
