@@ -28,7 +28,7 @@
       <!-- Special handling for external Cloud docs! -->
       <a v-if="$page.frontmatter.home" class="doc-set" href="https://craftcms.com/knowledge-base/cloud" target="_blank">
         <span class="mr-2 inline-block relative set-icon">
-          <img src="/docs/icons/icon-cloud.svg" width="16" height="16" alt="Craft Cloud" />
+          <img src="/docs/icons/icon-cloud.svg" width="16" height="16" alt="" />
         </span>
 
         <span>Craft Cloud</span>
@@ -44,7 +44,8 @@
         >{{ $activeSet.setTitle ? $activeSet.setTitle : $activeSet.title }}</div>
       </RouterLink>
       <div v-if="$activeSet.versions" class="doc-set-version-wrapper">
-        <select name class="doc-set-version" @change="handleVersionSelect($event)">
+        <label for="doc-version-select" class="sr-only">Version</label>
+        <select name id="doc-version-select" class="doc-set-version" @change="handleVersionSelect($event)">
           <option
             v-for="version in $activeSet.versions"
             :key="version[0]"
