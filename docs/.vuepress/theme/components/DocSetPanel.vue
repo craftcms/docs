@@ -44,7 +44,8 @@
         >{{ $activeSet.setTitle ? $activeSet.setTitle : $activeSet.title }}</div>
       </RouterLink>
       <div v-if="$activeSet.versions" class="doc-set-version-wrapper">
-        <select name class="doc-set-version" @change="handleVersionSelect($event)">
+        <label for="doc-version-select" class="sr-only">Version</label>
+        <select name id="doc-version-select" class="doc-set-version" @change="handleVersionSelect($event)">
           <option
             v-for="version in $activeSet.versions"
             :key="version[0]"
