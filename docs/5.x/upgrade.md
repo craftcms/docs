@@ -19,6 +19,11 @@ Let’s take a moment to audit and prepare your project.
 - All your environments meet Craft 5’s [minimum requirements](requirements.md) (the latest version of Craft 4 will run in any environment that meets Craft 5’s requirements, so it’s safe to update PHP and your database ahead of the 5.x upgrade):
     - PHP 8.2
     - MySQL 8.0.17+ using InnoDB, MariaDB 10.4.6+, or PostgreSQL 13+
+
+      ::: warning
+      Due to its diverging parity with MySQL, we no longer recommend MariaDB for Craft 5. If you are not able to [migrate to MySQL](https://blogs.oracle.com/mysql/post/how-to-migrate-from-mariadb-to-mysql-80), make sure your server is using the latest MariaDB version to avoid stability issues.
+      :::
+
 - You’ve reviewed the breaking changes in Craft 5 further down this page and understand that additional work and testing may lie ahead, post-upgrade;
 
 Once you’ve completed everything above, you’re ready to start the upgrade process!

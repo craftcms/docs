@@ -456,7 +456,7 @@ Event::on(
 );
 ```
 
-`mandatory` here means that the layout element _must_ be present in the field layout, not that a value is required. Take a look at the existing [field layout element types](repo:craftcms/cms/tree/main/src/fieldlayoutelements) to see which makes the most sense for your attribute.
+`mandatory` here means that the layout element _must_ be present in the field layout, not that a value is required. Take a look at the existing [field layout element types](repo:craftcms/cms/tree/4.x/src/fieldlayoutelements) to see which makes the most sense for your attribute.
 
 ::: tip
 Despite basing our `price` layout element on <craft4:craft\fieldlayoutelements\TextField>, the class is deceptively well-suited for customization. Here, we’ve begun to transform it into a `number` input.

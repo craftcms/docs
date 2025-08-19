@@ -147,5 +147,5 @@ public function init()
 The `getIsSiteRequest()` check is optional. If your extension provides features that will be useful in system emails (commonly triggered from the control panel), or will be used when rendering templates from console requests (less common, but still valid), you may want to register it in all contexts.
 
 ::: tip
-We’ve only covered the simplest means of extending the Twig environment—you can also provide custom _tags_ or _operators_. Craft’s own [Twig extension](https://github.com/craftcms/cms/tree/main/src/web/twig) is a great place to look for examples of advanced features.
+We’ve only covered the simplest means of extending the Twig environment—you can also provide custom _tags_ or _operators_. Craft’s own [Twig extension](repo:craftcms/cms/tree/4.x/src/web/twig) is a great place to look for examples of advanced features.
 :::

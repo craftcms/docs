@@ -8,7 +8,7 @@ Before you begin working on a module, you need to decide on a couple things:
 - **Module ID** – Something that uniquely identifies your plugin within your project. (Module IDs must begin with a letter and contain only lowercase letters, numbers, and dashes. They should be `kebab-cased`.)
 
 ::: warning
-When choosing a module ID, try to avoid names that will conflict with Craft’s core [controllers](https://github.com/craftcms/cms/tree/develop/src/controllers) (e.g. `app` would conflict with `AppController.php`), as well as any installed plugin handles. Otherwise bad things will happen.
+When choosing a module ID, try to avoid names that will conflict with Craft’s core [controllers](repo:craftcms/cms/tree/3.x/src/controllers) (e.g. `app` would conflict with `AppController.php`), as well as any installed plugin handles. Otherwise bad things will happen.
 :::
 
 ## Set up the basic file structure

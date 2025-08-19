@@ -492,7 +492,7 @@ Property | Type | Notes
 `level` | `int|null` | Depth of the element in a structure. _Structures only._
 `ownerId` | `int|null` | ID of the element that “owns” this element. _[Nested elements]() only._
 `parentId` | `int|null` | ID of the parent element. _Structures only._
-`searchScore` | `int` | Score relative to other results when returned from an [element query](../development/element-queries.md) using the [`search` param](searching.md).
+`searchScore` | `int` | Score relative to other results when returned from an [element query](../development/element-queries.md) using the [`search` param](searching.md), _and_ `.orderBy('score')`.
 `siteId` | `int` | ID of the <craft5:craft\models\Site> the element was loaded in.
 `slug` | `string|null` | _Only for elements with slugs._
 `title` | `string|null` | _Only for elements with titles._

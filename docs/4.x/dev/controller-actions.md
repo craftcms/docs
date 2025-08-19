@@ -460,7 +460,7 @@ The value of `modelName` in a JSON response is the same as the variable name Cra
 
 ## Available Actions
 
-This is not a comprehensive list! We have selected a few actions to illustrate fundamentals that many projects can benefit from—and to get you prepared to explore the rest of Craft’s [HTTP API](https://github.com/craftcms/cms/tree/main/src/controllers).
+This is not a comprehensive list! We have selected a few actions to illustrate fundamentals that many projects can benefit from—and to get you prepared to explore the rest of Craft’s [HTTP API](repo:craftcms/cms/tree/4.x/src/controllers).
 
 Action | Description
 ------ | -----------

@@ -6,96 +6,54 @@
 
 <!-- textlint-disable -->
 
-| Param                                           | Description
-| ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only assets that are not related to certain other elements.
-| [andRelatedTo](#andrelatedto)                   | Narrows the query results to only assets that are related to certain other elements.
-| [andWith](#andwith)                             | Causes the query to return matching assets eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
-| [asArray](#asarray)                             | Causes the query to return matching assets as arrays of data, rather than [Asset](craft4:craft\elements\Asset) objects.
-| [cache](#cache)                                 | Enables query cache for this Query.
-| [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
-| [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
-| [dateCreated](#datecreated)                     | Narrows the query results based on the assets’ creation dates.
-| [dateModified](#datemodified)                   | Narrows the query results based on the assets’ files’ last-modified dates.
-| [dateUpdated](#dateupdated)                     | Narrows the query results based on the assets’ last-updated dates.
-| [eagerly](#eagerly)                             | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
-| [filename](#filename)                           | Narrows the query results based on the assets’ filenames.
-| [fixedOrder](#fixedorder)                       | Causes the query results to be returned in the order specified by [id](#id).
-| [folderId](#folderid)                           | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
-| [folderPath](#folderpath)                       | Narrows the query results based on the folders the assets belong to, per the folders’ paths.
-| [getFieldLayouts](#getfieldlayouts)             | Returns the field layouts that could be associated with the resulting elements.
-| [hasAlt](#hasalt)                               | Narrows the query results based on whether the assets have alternative text.
-| [height](#height)                               | Narrows the query results based on the assets’ image heights.
-| [id](#id)                                       | Narrows the query results based on the assets’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders)       | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
-| [inBulkOp](#inbulkop)                           | Narrows the query results to only assets that were involved in a bulk element operation.
-| [inReverse](#inreverse)                         | Causes the query results to be returned in reverse order.
-| [includeSubfolders](#includesubfolders)         | Broadens the query results to include assets from any of the subfolders of the folder specified by [folderId](#folderid).
-| [kind](#kind)                                   | Narrows the query results based on the assets’ file kinds.
-| [language](#language)                           | Determines which site(s) the assets should be queried in, based on their language.
-| [limit](#limit)                                 | Determines the number of assets that should be returned.
-| [notRelatedTo](#notrelatedto)                   | Narrows the query results to only assets that are not related to certain other elements.
-| [offset](#offset)                               | Determines how many assets should be skipped in the results.
-| [orderBy](#orderby)                             | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC, id`.)
-| [preferSites](#prefersites)                     | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
-| [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [relatedTo](#relatedto)                         | Narrows the query results to only assets that are related to certain other elements.
-| [render](#render)                               | Executes the query and renders the resulting elements using their partial templates.
-| [savable](#savable)                             | Sets the [savable](https://docs.craftcms.com/api/v4/craft-elements-db-assetquery.html#property-savable) property.
-| [search](#search)                               | Narrows the query results to only assets that match a search query.
-| [site](#site)                                   | Determines which site(s) the assets should be queried in.
-| [siteId](#siteid)                               | Determines which site(s) the assets should be queried in, per the site’s ID.
-| [siteSettingsId](#sitesettingsid)               | Narrows the query results based on the assets’ IDs in the `elements_sites` table.
-| [size](#size)                                   | Narrows the query results based on the assets’ file sizes (in bytes).
-| [title](#title)                                 | Narrows the query results based on the assets’ titles.
-| [trashed](#trashed)                             | Narrows the query results to only assets that have been soft-deleted.
-| [uid](#uid)                                     | Narrows the query results based on the assets’ UIDs.
-| [unique](#unique)                               | Determines whether only elements with unique IDs should be returned by the query.
-| [uploader](#uploader)                           | Narrows the query results based on the user the assets were uploaded by, per the user’s IDs.
-| [volume](#volume)                               | Narrows the query results based on the volume the assets belong to.
-| [volumeId](#volumeid)                           | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
-| [wasCountEagerLoaded](#wascounteagerloaded)     | Returns whether the query result count was already eager loaded by the query's source element.
-| [wasEagerLoaded](#waseagerloaded)               | Returns whether the query results were already eager loaded by the query's source element.
-| [width](#width)                                 | Narrows the query results based on the assets’ image widths.
-| [with](#with)                                   | Causes the query to return matching assets eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)           | Sets whether custom fields should be factored into the query.
-| [withProvisionalDrafts](#withprovisionaldrafts) | Causes the query to return provisional drafts for the matching elements, when they exist for the current user.
-| [withTransforms](#withtransforms)               | Causes the query to return matching assets eager-loaded with image transform indexes.
+| Param                                     | Description
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only assets that are related to certain other elements.
+| [andWith](#andwith)                       | Causes the query to return matching assets eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+| [asArray](#asarray)                       | Causes the query to return matching assets as arrays of data, rather than [Asset](craft4:craft\elements\Asset) objects.
+| [cache](#cache)                           | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [dateCreated](#datecreated)               | Narrows the query results based on the assets’ creation dates.
+| [dateModified](#datemodified)             | Narrows the query results based on the assets’ files’ last-modified dates.
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the assets’ last-updated dates.
+| [filename](#filename)                     | Narrows the query results based on the assets’ filenames.
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [folderId](#folderid)                     | Narrows the query results based on the folders the assets belong to, per the folders’ IDs.
+| [folderPath](#folderpath)                 | Narrows the query results based on the folders the assets belong to, per the folders’ paths.
+| [hasAlt](#hasalt)                         | Narrows the query results based on whether the assets have alternative text.
+| [height](#height)                         | Narrows the query results based on the assets’ image heights.
+| [id](#id)                                 | Narrows the query results based on the assets’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [includeSubfolders](#includesubfolders)   | Broadens the query results to include assets from any of the subfolders of the folder specified by [folderId](#folderid).
+| [kind](#kind)                             | Narrows the query results based on the assets’ file kinds.
+| [language](#language)                     | Determines which site(s) the assets should be queried in, based on their language.
+| [limit](#limit)                           | Determines the number of assets that should be returned.
+| [offset](#offset)                         | Determines how many assets should be skipped in the results.
+| [orderBy](#orderby)                       | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC, id`.)
+| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [relatedTo](#relatedto)                   | Narrows the query results to only assets that are related to certain other elements.
+| [savable](#savable)                       | Sets the [savable](https://docs.craftcms.com/api/v4/craft-elements-db-assetquery.html#property-savable) property.
+| [search](#search)                         | Narrows the query results to only assets that match a search query.
+| [site](#site)                             | Determines which site(s) the assets should be queried in.
+| [siteId](#siteid)                         | Determines which site(s) the assets should be queried in, per the site’s ID.
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the assets’ IDs in the `elements_sites` table.
+| [size](#size)                             | Narrows the query results based on the assets’ file sizes (in bytes).
+| [title](#title)                           | Narrows the query results based on the assets’ titles.
+| [trashed](#trashed)                       | Narrows the query results to only assets that have been soft-deleted.
+| [uid](#uid)                               | Narrows the query results based on the assets’ UIDs.
+| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
+| [uploader](#uploader)                     | Narrows the query results based on the user the assets were uploaded by, per the user’s IDs.
+| [volume](#volume)                         | Narrows the query results based on the volume the assets belong to.
+| [volumeId](#volumeid)                     | Narrows the query results based on the volumes the assets belong to, per the volumes’ IDs.
+| [width](#width)                           | Narrows the query results based on the assets’ image widths.
+| [with](#with)                             | Causes the query to return matching assets eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)     | Sets whether custom fields should be factored into the query.
+| [withTransforms](#withtransforms)         | Causes the query to return matching assets eager-loaded with image transform indexes.
 
 
 <!-- textlint-enable -->
-
-
-#### `andNotRelatedTo`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andnotrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Narrows the query results to only assets that are not related to certain other elements.
-
-
-
-See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
-
-
-
-::: code
-```twig
-{# Fetch all assets that are related to myCategoryA and not myCategoryB #}
-{% set assets = craft.assets()
-  .relatedTo(myCategoryA)
-  .andNotRelatedTo(myCategoryB)
-  .all() %}
-```
-
-```php
-// Fetch all assets that are related to $myCategoryA and not $myCategoryB
-$assets = \craft\elements\Asset::find()
-    ->relatedTo($myCategoryA)
-    ->andNotRelatedTo($myCategoryB)
-    ->all();
-```
-:::
 
 
 #### `andRelatedTo`
@@ -106,7 +64,7 @@ Narrows the query results to only assets that are related to certain other eleme
 
 
 
-See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -186,29 +144,11 @@ Enables query cache for this Query.
 
 
 
-#### `canonicalsOnly`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-canonicalsonly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Narrows the query results to only canonical elements, including elements
-that reference another canonical element via `canonicalId` so long as they
-aren’t a draft.
-
-
-
-Unpublished drafts can be included as well if `drafts(null)` and
-`draftOf(false)` are also passed.
-
-
-
-
-
-
 #### `clearCachedResult`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
-Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
 
@@ -332,22 +272,6 @@ $assets = \craft\elements\Asset::find()
     ->all();
 ```
 :::
-
-
-#### `eagerly`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-eagerly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Causes the query to be used to eager-load results for the query’s source element
-and any other elements in its collection.
-
-
-
-
-
-
-
-
 
 
 #### `filename`
@@ -490,21 +414,6 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-#### `getFieldLayouts`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-getfieldlayouts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Returns the field layouts that could be associated with the resulting elements.
-
-
-
-
-
-
-
-
-
-
 #### `hasAlt`
 
 
@@ -597,21 +506,6 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 
 Causes the query to return matching assets as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
-
-
-
-
-
-
-
-
-
-
-#### `inBulkOp`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inbulkop" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Narrows the query results to only assets that were involved in a bulk element operation.
 
 
 
@@ -798,35 +692,6 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-#### `notRelatedTo`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-notrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Narrows the query results to only assets that are not related to certain other elements.
-
-
-
-See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
-
-
-
-::: code
-```twig
-{# Fetch all assets that are related to myEntry #}
-{% set assets = craft.assets()
-  .notRelatedTo(myEntry)
-  .all() %}
-```
-
-```php
-// Fetch all assets that are related to $myEntry
-$assets = \craft\elements\Asset::find()
-    ->notRelatedTo($myEntry)
-    ->all();
-```
-:::
-
-
 #### `offset`
 
 <a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
@@ -915,21 +780,6 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-#### `prepForEagerLoading`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prepforeagerloading" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Prepares the query for lazy eager loading.
-
-
-
-
-
-
-
-
-
-
 #### `prepareSubquery`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -949,7 +799,7 @@ Narrows the query results to only assets that are related to certain other eleme
 
 
 
-See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -970,17 +820,6 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-#### `render`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-render" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Executes the query and renders the resulting elements using their partial templates.
-
-If no partial template exists for an element, its string representation will be output instead.
-
-
-
-
 #### `savable`
 
 
@@ -999,7 +838,7 @@ Narrows the query results to only assets that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/5.x/system/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1400,36 +1239,6 @@ $assets = \craft\elements\Asset::find()
 :::
 
 
-#### `wasCountEagerLoaded`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-wascounteagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Returns whether the query result count was already eager loaded by the query's source element.
-
-
-
-
-
-
-
-
-
-
-#### `wasEagerLoaded`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-waseagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Returns whether the query results were already eager loaded by the query's source element.
-
-
-
-
-
-
-
-
-
-
 #### `width`
 
 
@@ -1472,7 +1281,7 @@ Causes the query to return matching assets eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/5.x/development/eager-loading.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1498,22 +1307,6 @@ $assets = \craft\elements\Asset::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Sets whether custom fields should be factored into the query.
-
-
-
-
-
-
-
-
-
-
-#### `withProvisionalDrafts`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withprovisionaldrafts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Causes the query to return provisional drafts for the matching elements,
-when they exist for the current user.
 
 
 

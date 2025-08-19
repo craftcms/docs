@@ -121,7 +121,7 @@ Keep in mind that any user marked as an “Admin” implicitly has access to _al
 
 #### Disabling Utilities
 
-You can disable a utility for all users with the [`disabledUtilities` config setting](config4:disabledUtilities). <Since ver="4.6.0" feature="Disabling utilities" /> Refer to each [utility class](repo:craftcms/cms/tree/main/src/utilities)’s `id()` method for their handles—including those provided by plugins.
+You can disable a utility for all users with the [`disabledUtilities` config setting](config4:disabledUtilities). <Since ver="4.6.0" feature="Disabling utilities" /> Refer to each [utility class](repo:craftcms/cms/tree/4.x/src/utilities)’s `id()` method for their handles—including those provided by plugins.
 
 ### Settings
 

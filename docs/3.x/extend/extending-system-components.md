@@ -8,7 +8,7 @@ updatedVersion: 4.x/extend/topics.md
 
 You can add your own custom validation rules to elements and other system components using the [EVENT_DEFINE_RULES](craft3:craft\base\Model#event-define-rules) event.
 
-Additional rules can use any of [Yii’s core validators](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-core-validators), [Craft’s validators](https://github.com/craftcms/cms/tree/develop/src/validators), or an [inline validation method](https://www.yiiframework.com/doc/guide/2.0/en/input-validation#inline-validators).
+Additional rules can use any of [Yii’s core validators](https://www.yiiframework.com/doc/guide/2.0/en/tutorial-core-validators), [Craft’s validators](repo:craftcms/cms/tree/3.x/src/validators), or an [inline validation method](https://www.yiiframework.com/doc/guide/2.0/en/input-validation#inline-validators).
 
 In this example, we’re adding a 5-item maximum for custom entry fields in a “News” section. It uses Craft’s `ArrayValidator` to easily validate based on the size of an array or element query result (like the Tags field):
 

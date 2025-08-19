@@ -444,7 +444,7 @@ Arrow functions are particularly useful when working with [Collections](collecti
   .section('vendors')
   .with('reviews')
   .collect()
-  .sortBy((v) => v.reviews.pluck('score').avg()) %}
+  .sortBy((v) => v.reviews.pluck('userScore').avg()) %}
 
 {# -> Vendor entries sorted by highest average rating score #}
 ```

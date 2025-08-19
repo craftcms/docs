@@ -6,84 +6,42 @@
 
 <!-- textlint-disable -->
 
-| Param                                           | Description
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only tags that are not related to certain other elements.
-| [andRelatedTo](#andrelatedto)                   | Narrows the query results to only tags that are related to certain other elements.
-| [andWith](#andwith)                             | Causes the query to return matching tags eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
-| [asArray](#asarray)                             | Causes the query to return matching tags as arrays of data, rather than [Tag](craft4:craft\elements\Tag) objects.
-| [cache](#cache)                                 | Enables query cache for this Query.
-| [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
-| [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
-| [dateCreated](#datecreated)                     | Narrows the query results based on the tags’ creation dates.
-| [dateUpdated](#dateupdated)                     | Narrows the query results based on the tags’ last-updated dates.
-| [eagerly](#eagerly)                             | Causes the query to be used to eager-load results for the query’s source element and any other elements in its collection.
-| [fixedOrder](#fixedorder)                       | Causes the query results to be returned in the order specified by [id](#id).
-| [getFieldLayouts](#getfieldlayouts)             | Returns the field layouts that could be associated with the resulting elements.
-| [group](#group)                                 | Narrows the query results based on the tag groups the tags belong to.
-| [groupId](#groupid)                             | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
-| [id](#id)                                       | Narrows the query results based on the tags’ IDs.
-| [ignorePlaceholders](#ignoreplaceholders)       | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
-| [inBulkOp](#inbulkop)                           | Narrows the query results to only tags that were involved in a bulk element operation.
-| [inReverse](#inreverse)                         | Causes the query results to be returned in reverse order.
-| [language](#language)                           | Determines which site(s) the tags should be queried in, based on their language.
-| [limit](#limit)                                 | Determines the number of tags that should be returned.
-| [notRelatedTo](#notrelatedto)                   | Narrows the query results to only tags that are not related to certain other elements.
-| [offset](#offset)                               | Determines how many tags should be skipped in the results.
-| [orderBy](#orderby)                             | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
-| [preferSites](#prefersites)                     | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
-| [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
-| [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
-| [relatedTo](#relatedto)                         | Narrows the query results to only tags that are related to certain other elements.
-| [render](#render)                               | Executes the query and renders the resulting elements using their partial templates.
-| [search](#search)                               | Narrows the query results to only tags that match a search query.
-| [site](#site)                                   | Determines which site(s) the tags should be queried in.
-| [siteId](#siteid)                               | Determines which site(s) the tags should be queried in, per the site’s ID.
-| [siteSettingsId](#sitesettingsid)               | Narrows the query results based on the tags’ IDs in the `elements_sites` table.
-| [title](#title)                                 | Narrows the query results based on the tags’ titles.
-| [trashed](#trashed)                             | Narrows the query results to only tags that have been soft-deleted.
-| [uid](#uid)                                     | Narrows the query results based on the tags’ UIDs.
-| [unique](#unique)                               | Determines whether only elements with unique IDs should be returned by the query.
-| [uri](#uri)                                     | Narrows the query results based on the tags’ URIs.
-| [wasCountEagerLoaded](#wascounteagerloaded)     | Returns whether the query result count was already eager loaded by the query's source element.
-| [wasEagerLoaded](#waseagerloaded)               | Returns whether the query results were already eager loaded by the query's source element.
-| [with](#with)                                   | Causes the query to return matching tags eager-loaded with related elements.
-| [withCustomFields](#withcustomfields)           | Sets whether custom fields should be factored into the query.
-| [withProvisionalDrafts](#withprovisionaldrafts) | Causes the query to return provisional drafts for the matching elements, when they exist for the current user.
+| Param                                     | Description
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| [andRelatedTo](#andrelatedto)             | Narrows the query results to only tags that are related to certain other elements.
+| [andWith](#andwith)                       | Causes the query to return matching tags eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+| [asArray](#asarray)                       | Causes the query to return matching tags as arrays of data, rather than [Tag](craft4:craft\elements\Tag) objects.
+| [cache](#cache)                           | Enables query cache for this Query.
+| [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
+| [dateCreated](#datecreated)               | Narrows the query results based on the tags’ creation dates.
+| [dateUpdated](#dateupdated)               | Narrows the query results based on the tags’ last-updated dates.
+| [fixedOrder](#fixedorder)                 | Causes the query results to be returned in the order specified by [id](#id).
+| [group](#group)                           | Narrows the query results based on the tag groups the tags belong to.
+| [groupId](#groupid)                       | Narrows the query results based on the tag groups the tags belong to, per the groups’ IDs.
+| [id](#id)                                 | Narrows the query results based on the tags’ IDs.
+| [ignorePlaceholders](#ignoreplaceholders) | Causes the query to return matching tags as they are stored in the database, ignoring matching placeholder elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
+| [inReverse](#inreverse)                   | Causes the query results to be returned in reverse order.
+| [language](#language)                     | Determines which site(s) the tags should be queried in, based on their language.
+| [limit](#limit)                           | Determines the number of tags that should be returned.
+| [offset](#offset)                         | Determines how many tags should be skipped in the results.
+| [orderBy](#orderby)                       | Determines the order that the tags should be returned in. (If empty, defaults to `title ASC`.)
+| [preferSites](#prefersites)               | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
+| [prepareSubquery](#preparesubquery)       | Prepares the element query and returns its subquery (which determines what elements will be returned).
+| [relatedTo](#relatedto)                   | Narrows the query results to only tags that are related to certain other elements.
+| [search](#search)                         | Narrows the query results to only tags that match a search query.
+| [site](#site)                             | Determines which site(s) the tags should be queried in.
+| [siteId](#siteid)                         | Determines which site(s) the tags should be queried in, per the site’s ID.
+| [siteSettingsId](#sitesettingsid)         | Narrows the query results based on the tags’ IDs in the `elements_sites` table.
+| [title](#title)                           | Narrows the query results based on the tags’ titles.
+| [trashed](#trashed)                       | Narrows the query results to only tags that have been soft-deleted.
+| [uid](#uid)                               | Narrows the query results based on the tags’ UIDs.
+| [unique](#unique)                         | Determines whether only elements with unique IDs should be returned by the query.
+| [uri](#uri)                               | Narrows the query results based on the tags’ URIs.
+| [with](#with)                             | Causes the query to return matching tags eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)     | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
-
-
-#### `andNotRelatedTo`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andnotrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Narrows the query results to only tags that are not related to certain other elements.
-
-
-
-See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
-
-
-
-::: code
-```twig
-{# Fetch all tags that are related to myCategoryA and not myCategoryB #}
-{% set tags = craft.tags()
-  .relatedTo(myCategoryA)
-  .andNotRelatedTo(myCategoryB)
-  .all() %}
-```
-
-```php
-// Fetch all tags that are related to $myCategoryA and not $myCategoryB
-$tags = \craft\elements\Tag::find()
-    ->relatedTo($myCategoryA)
-    ->andNotRelatedTo($myCategoryB)
-    ->all();
-```
-:::
 
 
 #### `andRelatedTo`
@@ -94,7 +52,7 @@ Narrows the query results to only tags that are related to certain other element
 
 
 
-See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -174,29 +132,11 @@ Enables query cache for this Query.
 
 
 
-#### `canonicalsOnly`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-canonicalsonly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Narrows the query results to only canonical elements, including elements
-that reference another canonical element via `canonicalId` so long as they
-aren’t a draft.
-
-
-
-Unpublished drafts can be included as well if `drafts(null)` and
-`draftOf(false)` are also passed.
-
-
-
-
-
-
 #### `clearCachedResult`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
-Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
 
@@ -285,22 +225,6 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
-#### `eagerly`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-eagerly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Causes the query to be used to eager-load results for the query’s source element
-and any other elements in its collection.
-
-
-
-
-
-
-
-
-
-
 #### `fixedOrder`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -332,21 +256,6 @@ $tags = \craft\elements\Tag::find()
     ->all();
 ```
 :::
-
-
-#### `getFieldLayouts`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-getfieldlayouts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Returns the field layouts that could be associated with the resulting elements.
-
-
-
-
-
-
-
-
 
 
 #### `group`
@@ -474,21 +383,6 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 
-#### `inBulkOp`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inbulkop" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Narrows the query results to only tags that were involved in a bulk element operation.
-
-
-
-
-
-
-
-
-
-
 #### `inReverse`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -581,35 +475,6 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
-#### `notRelatedTo`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-notrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Narrows the query results to only tags that are not related to certain other elements.
-
-
-
-See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
-
-
-
-::: code
-```twig
-{# Fetch all tags that are related to myEntry #}
-{% set tags = craft.tags()
-  .notRelatedTo(myEntry)
-  .all() %}
-```
-
-```php
-// Fetch all tags that are related to $myEntry
-$tags = \craft\elements\Tag::find()
-    ->notRelatedTo($myEntry)
-    ->all();
-```
-:::
-
-
 #### `offset`
 
 <a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
@@ -697,21 +562,6 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
-#### `prepForEagerLoading`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prepforeagerloading" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Prepares the query for lazy eager loading.
-
-
-
-
-
-
-
-
-
-
 #### `prepareSubquery`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -731,7 +581,7 @@ Narrows the query results to only tags that are related to certain other element
 
 
 
-See [Relations](https://craftcms.com/docs/5.x/system/relations.html) for a full explanation of how to work with this parameter.
+See [Relations](https://craftcms.com/docs/4.x/relations.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -752,17 +602,6 @@ $tags = \craft\elements\Tag::find()
 :::
 
 
-#### `render`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-render" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Executes the query and renders the resulting elements using their partial templates.
-
-If no partial template exists for an element, its string representation will be output instead.
-
-
-
-
 #### `search`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -771,7 +610,7 @@ Narrows the query results to only tags that match a search query.
 
 
 
-See [Searching](https://craftcms.com/docs/5.x/system/searching.html) for a full explanation of how to work with this parameter.
+See [Searching](https://craftcms.com/docs/4.x/searching.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1086,36 +925,6 @@ $tag = \craft\elements\Tag::find()
 :::
 
 
-#### `wasCountEagerLoaded`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-wascounteagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Returns whether the query result count was already eager loaded by the query's source element.
-
-
-
-
-
-
-
-
-
-
-#### `wasEagerLoaded`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-waseagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Returns whether the query results were already eager loaded by the query's source element.
-
-
-
-
-
-
-
-
-
-
 #### `with`
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
@@ -1124,7 +933,7 @@ Causes the query to return matching tags eager-loaded with related elements.
 
 
 
-See [Eager-Loading Elements](https://craftcms.com/docs/5.x/development/eager-loading.html) for a full explanation of how to work with this parameter.
+See [Eager-Loading Elements](https://craftcms.com/docs/4.x/dev/eager-loading-elements.html) for a full explanation of how to work with this parameter.
 
 
 
@@ -1150,22 +959,6 @@ $tags = \craft\elements\Tag::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Sets whether custom fields should be factored into the query.
-
-
-
-
-
-
-
-
-
-
-#### `withProvisionalDrafts`
-
-<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withprovisionaldrafts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
-
-Causes the query to return provisional drafts for the matching elements,
-when they exist for the current user.
 
 
 
