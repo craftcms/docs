@@ -1,5 +1,4 @@
 ---
-title: Configuration
 description: Set up Craft to work with your team and infrastructure.
 sidebarDepth: 2
 related:
