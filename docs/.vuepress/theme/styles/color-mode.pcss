@@ -1,38 +1,46 @@
 /* initial load, no class on html element */
 @media (prefers-color-scheme: light) {
   html:not([class]) {
-    --bg-color: theme("colors.white");
+    --bg-color: theme("colors.white")
   }
 }
 
 @media (prefers-color-scheme: dark) {
   html:not([class]) {
     --text-color: theme("colors.white");
+    --text-color-muted: #818EA2;
+    --ui-component-color: theme("colors.gray.600");
     --bg-color: theme("colors.gray.900");
     --sidebar-bg-color: rgba(0, 0, 0, 0.1);
     --search-bg-color: theme("colors.slate");
     --dl-color: theme("colors.soft-gray");
     --heading-color: theme("colors.gray.100");
-    --sidebar-link-color: theme("colors.gray.500");
     --border-color: theme("colors.slate");
     --doc-set-color: theme("colors.gray.200");
     --code-highlight-color: rgba(45, 55, 72, 0.25);
     --code-bg-color: theme("colors.cinder");
     --custom-block-bg-color: theme("colors.slate");
     --custom-block-border-color: transparent;
+
+    /* Links */
+    --link-color-default: theme("colors.blue.lighter");
+    --link-underline-color: var(--link-color-default);
+    --sidebar-link-color: theme("colors.gray.400");
+    --sidebar-active-link-color: var(--link-color-default);
   }
 }
 
 /* JS-applied, which may differ from browser setting */
 .theme-dark {
   --text-color: theme("colors.white");
+  --text-color-muted: #818EA2;
+  --ui-component-color: theme("colors.gray.600");
   --bg-color: theme("colors.gray.900");
   --sidebar-bg-color: rgba(0, 0, 0, 0.1);
   --search-bg-color: theme("colors.slate");
   --dl-color: rgba(0, 0, 0, 0.2);
   --medium-zoom-overlay-color: rgba(23, 29, 40, 1);
   --heading-color: theme("colors.gray.100");
-  --sidebar-link-color: theme("colors.gray.400");
   --hamburger-color: theme("colors.white");
   --tooltip-bg-color: theme("colors.gray.800");
   --border-color: theme("colors.slate");
@@ -41,6 +49,12 @@
   --code-bg-color: theme("colors.cinder");
   --custom-block-bg-color: theme("colors.slate");
   --custom-block-border-color: transparent;
+
+  /* Links */
+  --link-color-default: theme("colors.blue.lighter");
+  --link-underline-color: var(--link-color-default);
+  --sidebar-link-color: theme("colors.gray.400");
+  --sidebar-active-link-color: var(--link-color-default);
 
   .link-panel {
     background-color: var(--border-color);

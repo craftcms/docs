@@ -143,7 +143,7 @@
 }
 
 .point--active {
-  background-color: theme("colors.blue");
+  background-color: theme("colors.blue.default");
   transform: scale(1.25);
 }
 </style>

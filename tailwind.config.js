@@ -17,7 +17,10 @@ module.exports = {
         soft: "#f1f5fd",
         "soft-gray": "#f1f5f8",
         softer: "#fafbfe",
-        blue: "#4a7cf6",
+        blue: {
+          "lighter": "#86A7F9",
+          "default": "#2E68F5",
+        },
         red: "#da5a47",
         cinder: "#131119",
         green: "#27AB83",

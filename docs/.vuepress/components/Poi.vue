@@ -76,6 +76,6 @@ export default {
     }
     
     .active {
-        background-color: theme("colors.blue");
+        background-color: theme("colors.blue.default");
     }
 </style>

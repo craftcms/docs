@@ -98,8 +98,12 @@
     @apply text-base mb-2;
   }
 
-  a:hover {
+  p a,
+  li a {
     @apply underline;
+    text-decoration-color: var(--link-underline-color);
+    text-underline-offset: .15em;
+    text-decoration-thickness: .075em;
   }
 
   ::selection {

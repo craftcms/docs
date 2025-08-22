@@ -203,7 +203,7 @@ module.exports = {
             "update",
             "deploy",
             "upgrade",
-            "configure",
+            ["configure", 'Configuration'],
           ]
         },
         {
