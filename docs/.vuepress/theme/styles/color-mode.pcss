@@ -27,6 +27,7 @@
     --link-underline-color: var(--link-color-default);
     --sidebar-link-color: theme("colors.gray.400");
     --sidebar-active-link-color: var(--link-color-default);
+    --code-link-color: theme("colors.blue.lighter");
 
     /* Code */
     --code-color-default: #7F9CB8;
@@ -64,6 +65,7 @@
   --link-underline-color: var(--link-color-default);
   --sidebar-link-color: theme("colors.gray.400");
   --sidebar-active-link-color: var(--link-color-default);
+  --code-link-color: theme("colors.blue.lighter");
 
   /* Code */
   --code-color-default: #7F9CB8;
@@ -178,7 +180,7 @@
 
   kbd {
     background-color: rgba(0, 0, 0, 0.4);
-    color: #476582;
+    color: var(--code-color-default);
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-bottom: 3px solid #111;
   }
