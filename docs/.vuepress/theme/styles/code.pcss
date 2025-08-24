@@ -18,7 +18,10 @@
         color: #27ab83;
       }
 
-      &.comment {
+      &.comment,
+      &.prolog,
+      &.doctype,
+      &.cdata {
         color: var(--code-color-gray);
       }
 
@@ -27,7 +30,13 @@
         color: var(--code-color-gold);
       }
 
-      &.string {
+      &.selector,
+      &.attr-name,
+      &.string,
+      &.char,
+      &.builtin,
+      &.url,
+      &.inserted {
         color: var(--code-color-green);
       }
 
