@@ -7,7 +7,7 @@
     @apply py-1 px-2 m-0 rounded;
     font-size: 0.8rem;
     background-color: var(--code-bg-color);
-    color: #476582;
+    color: var(--code-color-default);
 
     .token {
       &.deleted {
@@ -16,6 +16,41 @@
 
       &.inserted {
         color: #27ab83;
+      }
+
+      &.comment {
+        color: var(--code-color-gray);
+      }
+
+      &.function,
+      &.class-name {
+        color: var(--code-color-gold);
+      }
+
+      &.string {
+        color: var(--code-color-green);
+      }
+
+      &.property,
+      &.tag,
+      &.boolean,
+      &.number,
+      &.constant,
+      &.symbol,
+      &.deleted {
+        color: var(--code-color-blue);
+      }
+
+      &.regex,
+      &.important,
+      &.variable {
+        color: var(--code-color-orange);
+      }
+
+      &.atrule,
+      &.attr-value,
+      &.keyword {
+        color: var(--code-color-olive);
       }
     }
   }

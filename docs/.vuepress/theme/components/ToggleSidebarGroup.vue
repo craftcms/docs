@@ -85,7 +85,7 @@ export default {
 
   .toggle {
     @apply text-xs tracking-wide uppercase font-bold;
-    color: #a0aec0;
+    color: var(--text-color-muted);
   }
 
   .toggle-arrow {
