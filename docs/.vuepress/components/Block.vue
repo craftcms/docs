@@ -28,7 +28,6 @@ export default {
     border-color: currentColor;
     border-radius: 3px;
     border-width: 1px;
-    opacity: 0.4;
     padding: 4px 8px 3px;
 }
 </style>
