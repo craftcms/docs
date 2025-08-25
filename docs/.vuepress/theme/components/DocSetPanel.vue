@@ -15,6 +15,7 @@
       <RouterLink
         v-if="$page.frontmatter.home && set.primarySet"
         v-for="(set, index) in $site.themeConfig.docSets"
+        v-bind:key="set.handle"
         :to="defaultUri(set)"
         class="doc-set"
       >
@@ -85,7 +86,7 @@
 
   .home {
     @apply text-sm relative;
-    color: var(--text-color-muted);
+    color: #718096;
 
     .back {
       @apply inline-block absolute mr-1 opacity-100;
@@ -119,8 +120,7 @@
       }
 
       .home-title {
-        color: var(--link-color-default);
-        @apply relative pl-0;
+        @apply relative pl-0 text-blue;
         left: -2px;
       }
     }
