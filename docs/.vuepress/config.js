@@ -1,3 +1,5 @@
+const markdownHelpers = require('./theme/util/markdown');
+
 module.exports = {
   theme: "craftdocs",
   base: "/docs/",
@@ -73,7 +75,9 @@ module.exports = {
   markdown: {
     extractHeaders: ['h2', 'h3', 'h4'],
     anchor: {
-      level: [2, 3, 4]
+      level: [2, 3, 4],
+      permalinkSymbol: '#',
+      renderPermalink: markdownHelpers.renderPermalink,
     },
     toc: {
       format(content) {
@@ -92,6 +96,6 @@ module.exports = {
     }
   },
   postcss: {
-    plugins: require("../../postcss.config.js").plugins
+    plugins: require("../../postcss.config.js").plugins,
   }
 };
