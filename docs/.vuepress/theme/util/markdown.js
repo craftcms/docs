@@ -1,4 +1,4 @@
-function getHeaderText(token) {
+export function getHeaderText(token) {
   // Get the full text of the token (including any children, if it had formatting), and do a crude entity conversion:
   let text = decodeEntities(token.content);
 
@@ -11,7 +11,7 @@ function getHeaderText(token) {
   return text;
 }
 
-function decodeEntities(str) {
+export function decodeEntities(str) {
   const entityMap = {
     '&lt;': '<',
     '&gt;': '>',
@@ -24,7 +24,7 @@ function decodeEntities(str) {
   });
 }
 
-function renderPermalink(slug, opts, state, idx) {
+export function renderPermalink(slug, opts, state, idx) {
   // Get text of current header:
   const headerText = getHeaderText(state.tokens[idx + 1]);
 
@@ -47,8 +47,3 @@ function renderPermalink(slug, opts, state, idx) {
   // Place at the beginning of the heading tag:
   state.tokens[idx + 1].children.unshift(...linkTokens);
 }
-
-export {
-    getHeaderText,
-    renderPermalink,
-};
