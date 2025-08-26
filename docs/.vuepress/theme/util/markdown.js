@@ -48,7 +48,7 @@ function renderPermalink(slug, opts, state, idx) {
   state.tokens[idx + 1].children.unshift(...linkTokens);
 }
 
-export default {
+module.exports = {
   getHeaderText,
   decodeEntities,
   renderPermalink,
