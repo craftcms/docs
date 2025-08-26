@@ -82,28 +82,50 @@ Self-contained, step-by-step training materials.
             title="Intro to Craft CMS"
             subtitle="Learn the fundamentals by building a simple blog."
             link="/getting-started-tutorial/"
-            icon="/docs/icons/icon-tutorial.svg" />
+            icon="/docs/icons/icon-tutorial.svg"
+            iconSize="large" />
     </li>
 </ul>
 
 ## Starter Projects
 
-Complete projects you can use to learn or jump start your own.
+Complete projects you can use to learn or jump-start your own.
 
 <ul class="theme-default-content-override w-full px-0 sm:flex sm:-mx-2 flex-wrap">
     <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <LinkPanel
-            title="Blog Starter"
-            subtitle="craftcms/starter-blog"
-            link="https://github.com/craftcms/starter-blog"
-            :repo="true" />
+            title="Blank Slate"
+            subtitle="The original, minimal Composer project."
+            link="https://github.com/craftcms/craft"
+            repo="craftcms/craft" />
     </li>
     <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <LinkPanel
-            title="Blank Slate"
-            subtitle="craftcms/craft"
-            link="https://github.com/craftcms/craft"
-            :repo="true" />
+            title="Twig Starter"
+            subtitle="A simple server-rendered blog."
+            link="https://github.com/craftcms/starter-twig"
+            repo="craftcms/starter-twig" />
+    </li>
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
+        <LinkPanel
+            title="Nuxt Starter"
+            subtitle="Nuxt + GraphQL-powered blog."
+            link="https://github.com/craftcms/starter-nuxt"
+            repo="craftcms/starter-nuxt" />
+    </li>
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
+        <LinkPanel
+            title="Next.js Starter"
+            subtitle="Next.js + GraphQL-powered blog."
+            link="https://github.com/craftcms/starter-next"
+            repo="craftcms/starter-next" />
+    </li>
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
+        <LinkPanel
+            title="Astro Starter"
+            subtitle="A hybrid, pre-rendered application."
+            link="https://github.com/craftcms/starter-astro"
+            repo="craftcms/starter-astro" />
     </li>
 </ul>
 
