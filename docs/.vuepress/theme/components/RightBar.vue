@@ -59,7 +59,6 @@ export default {
   }
 
   .sidebar-links {
-    --sidebar-link-color: var(--text-color-muted);
     @apply ml-0 pl-0 pb-4 overflow-y-auto;
     max-height: calc(100vh - 6.5rem);
 
