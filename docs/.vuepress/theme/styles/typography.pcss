@@ -81,7 +81,8 @@
   }
 
   p,
-  li:not(.theme-default-content-override) {
+  li:not(.theme-default-content-override),
+  dl {
     a[target="_blank"] {
       span {
         @apply inline-block;
@@ -89,6 +90,8 @@
         .icon.outbound {
           width: 14px;
           height: 14px;
+          color: currentColor;
+          margin-left: 3px;
         }
       }
     }
@@ -99,7 +102,8 @@
   }
 
   p:not(.theme-default-content-override) a,
-  li:not(.theme-default-content-override) a {
+  li:not(.theme-default-content-override) a,
+  dl a {
     @apply underline;
     text-decoration-color: var(--link-underline-color);
     text-underline-offset: .15em;
@@ -148,15 +152,14 @@
 
   dl {
     @apply py-5 px-6 rounded;
-    background: var(--dl-color);
-
-    dt,
-    dd {
-      @apply mt-1 mx-0 mb-0;
-    }
+    background-color: var(--custom-block-bg-color);
 
     dt {
-      @apply pr-4 box-border font-medium;
+      @apply mb-2 pr-4 box-border font-medium;
+
+      &:not(:first-child) {
+        @apply mt-4;
+      }
 
       code {
         @apply font-semibold bg-transparent px-0;
@@ -166,10 +169,6 @@
     dd {
       @apply pl-8;
 
-      code {
-        @apply bg-transparent px-0;
-      }
-    
       p:first-child {
         @apply mt-0;
       }
@@ -177,10 +176,6 @@
       .custom-block p:first-child {
         @apply mt-4;
       }
-    }
-
-    code {
-      background: #dadfe3;
     }
   }
 
