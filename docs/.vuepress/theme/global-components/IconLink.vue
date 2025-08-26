@@ -5,6 +5,7 @@
       v-if="isInternal"
       :to="link"
       :class="{ 'large': iconSize == 'large' }"
+      :title="title"
     >
       <div class="icon absolute left-0">
         <img :src="icon" class="no-zoom" alt />
@@ -25,6 +26,7 @@
       :target="target"
       :rel="rel"
       :class="{ 'large': iconSize == 'large' }"
+      :title="title"
     >
       <div class="icon absolute left-0">
         <img :src="icon" class="no-zoom" alt />

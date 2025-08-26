@@ -1,5 +1,5 @@
 <template>
-  <RouterLink v-if="isInternal" class="link-panel" :to="link" :class="{ 'has-icon': icon }">
+  <RouterLink v-if="isInternal" class="link-panel" :to="link" :class="{ 'has-icon': icon }" :title="title">
     <div v-if="icon" class="link-panel-icon">
       <img :src="icon" class="no-zoom" alt />
     </div>
@@ -24,6 +24,7 @@
     :target="target"
     :rel="rel"
     :class="{ 'has-icon': icon }"
+    :title="title"
   >
     <div v-if="icon" class="link-panel-icon">
       <img :src="icon" class="no-zoom" alt />
@@ -33,6 +34,7 @@
       {{ title }}
     </div>
     <div class="subtitle">{{ subtitle }}</div>
+    <div v-if="repo" class="repo-name">{{ repo }}</div>
 
     <div class="flags">
       <div v-if="repo" class="repo-icon">
@@ -55,6 +57,10 @@
 
   .subtitle {
     @apply text-sm text-slate leading-tight;
+  }
+
+  .repo-name {
+    @apply text-xs text-light-slate font-mono mt-1;
   }
 
   .flags {
