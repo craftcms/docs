@@ -33,17 +33,17 @@
         :class="{ open }"
         @click="$emit('toggle')"
       >
-        <span>{{ fixedHeading || item.title }}</span>
+        {{ fixedHeading || item.title }}
         <span class="arrow" :class="open ? 'down' : 'right'" />
       </button>
 
-      <p
+      <span
         v-else
         class="sidebar-heading"
         :class="{ open }"
       >
-        <span>{{ fixedHeading || item.title }}</span>
-      </p>
+        {{ fixedHeading || item.title }}
+      </span>
     </component>
 
     <DropdownTransition>

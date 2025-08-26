@@ -58,10 +58,6 @@ export default {
     @apply fixed mt-24 w-64 pt-1 overflow-hidden;
   }
 
-  .sidebar-group:not(.collapsable) .sidebar-heading:not(.clickable) {
-    color: #a0aec0;
-  }
-
   .sidebar-links {
     --sidebar-link-color: var(--text-color-muted);
     @apply ml-0 pl-0 pb-4 overflow-y-auto;
