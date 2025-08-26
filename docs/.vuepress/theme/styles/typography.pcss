@@ -81,7 +81,7 @@
   }
 
   p,
-  li {
+  li:not(.theme-default-content-override) {
     a[target="_blank"] {
       span {
         @apply inline-block;
@@ -98,8 +98,8 @@
     @apply text-base mb-2;
   }
 
-  p a,
-  li a {
+  p:not(.theme-default-content-override) a,
+  li:not(.theme-default-content-override) a {
     @apply underline;
     text-decoration-color: var(--link-underline-color);
     text-underline-offset: .15em;
@@ -118,8 +118,8 @@
     @apply my-4;
   }
 
-  ul,
-  ol {
+  ul:not(.theme-default-content-override),
+  ol:not(.theme-default-content-override) {
     @apply pl-6;
   }
 

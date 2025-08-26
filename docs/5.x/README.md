@@ -43,69 +43,69 @@ Craft is a self-hosted PHP application, built on [Yii 2](https://www.yiiframewor
 
 Here are some great ways to begin your journey with Craft:
 
-<div class="sm:flex sm:flex-wrap">
-    <div class="py-1 sm:w-1/2 sm:py-0">
+<ul class="theme-default-content-override w-full px-0 sm:flex sm:-mx-2 flex-wrap">
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <IconLink
             title="Tutorial"
             subtitle="New to Craft? This is the place to start."
             link="/getting-started-tutorial"
             icon="/docs/icons/icon-tutorial.svg"
             iconSize="large" />
-    </div>
-</div>
+    </li>
+</ul>
 
-<div class="sm:flex sm:flex-wrap">
-    <div class="py-1 sm:w-1/2 sm:py-0">
+<ul class="theme-default-content-override w-full px-0 sm:flex sm:-mx-2 flex-wrap">
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <IconLink
             title="System Tour"
             subtitle="Discover all the tools at your disposal."
             link="system"
             icon="/docs/icons/icon-generic-link.svg"
             iconSize="large" />
-    </div>
-    <div class="py-1 sm:w-1/2 sm:py-0">
+    </li>
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <IconLink
             title="Content & Elements"
             subtitle="Learn about content modeling in Craft."
             link="system/elements"
             icon="/docs/icons/icon-generic-link.svg"
             iconSize="large" />
-    </div>
-    <div class="py-1 sm:w-1/2 sm:py-0">
+    </li>
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <IconLink
             title="Front-End Development"
             subtitle="Deliver your content to any screen."
             link="system/elements"
             icon="/docs/icons/icon-generic-link.svg"
             iconSize="large" />
-    </div>
-    <div class="py-1 sm:w-1/2 sm:py-0">
+    </li>
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <IconLink
             title="Configuration"
             subtitle="Customize Craft to your heart’s content."
             link="configure"
             icon="/docs/icons/icon-generic-link.svg"
             iconSize="large" />
-    </div>
-</div>
+    </li>
+</ul>
 
-#### Resources
+## Resources
 
-<div class="sm:flex sm:flex-wrap">
-    <div class="py-1 sm:w-1/2 sm:py-0">
+<ul class="theme-default-content-override w-full px-0 sm:flex sm:-mx-2 flex-wrap">
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <IconLink
             title="Reference"
             subtitle="Find exactly what you’re looking for."
             link="reference"
             icon="/docs/icons/icon-book.svg"
             iconSize="large" />
-    </div>
-    <div class="py-1 sm:w-1/2 sm:py-0">
+    </li>
+    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <IconLink
             title="Extending Craft"
             subtitle="Add radical new functionality to your site or app."
             link="extend"
             icon="/docs/icons/icon-flask.svg"
             iconSize="large" />
-    </div>
-</div>
+    </li>
+</ul>

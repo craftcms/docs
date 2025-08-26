@@ -1,65 +1,60 @@
 <template>
-  <div class="link-panel-wrapper">
-    <RouterLink v-if="isInternal" class="link-panel" :to="link" :class="{ 'has-icon': icon }">
-      <div v-if="icon" class="link-panel-icon">
-        <img :src="icon" class="no-zoom" alt />
+  <RouterLink v-if="isInternal" class="link-panel" :to="link" :class="{ 'has-icon': icon }">
+    <div v-if="icon" class="link-panel-icon">
+      <img :src="icon" class="no-zoom" alt />
+    </div>
+
+    <div class="title">
+      {{ title }}
+    </div>
+    <div class="subtitle">{{ subtitle }}</div>
+
+    <div class="flags">
+      <div v-if="repo" class="repo-icon">
+        <Octocat />
       </div>
 
-      <span class="title">
-        {{ title }}
-      </span>
-      <span class="subtitle">{{ subtitle }}</span>
+      <span v-if="currentVersion" v-text="currentVersion" class="version"></span>
+    </div>
+  </RouterLink>
+  <a
+    v-else
+    class="link-panel"
+    :href="link"
+    :target="target"
+    :rel="rel"
+    :class="{ 'has-icon': icon }"
+  >
+    <div v-if="icon" class="link-panel-icon">
+      <img :src="icon" class="no-zoom" alt />
+    </div>
 
-      <div class="flags">
-        <div v-if="repo" class="repo-icon">
-          <Octocat />
-        </div>
+    <div class="title">
+      {{ title }}
+    </div>
+    <div class="subtitle">{{ subtitle }}</div>
 
-        <span v-if="currentVersion" v-text="currentVersion" class="version"></span>
+    <div class="flags">
+      <div v-if="repo" class="repo-icon">
+        <Octocat />
       </div>
-    </RouterLink>
-    <a
-      v-else
-      class="link-panel"
-      :href="link"
-      :target="target"
-      :rel="rel"
-      :class="{ 'has-icon': icon }"
-    >
-      <div v-if="icon" class="link-panel-icon">
-        <img :src="icon" class="no-zoom" alt />
-      </div>
-
-      <span class="title">
-        {{ title }}
-      </span>
-      <span class="subtitle">{{ subtitle }}</span>
-
-      <div class="flags">
-        <div v-if="repo" class="repo-icon">
-          <Octocat />
-        </div>
-        <span v-if="currentVersion" v-text="currentVersion" class="version"></span>
-      </div>
-    </a>
-  </div>
+      <span v-if="currentVersion" v-text="currentVersion" class="version"></span>
+    </div>
+  </a>
 </template>
 
 <style lang="postcss">
-.link-panel-wrapper {
-  @apply block mb-4;
-}
-
 .link-panel {
   @apply rounded border block w-full p-4 relative;
+  @apply no-underline !important;
   transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   .title {
-    @apply leading-none text-lg font-medium block mb-1;
+    @apply leading-none text-lg font-medium mb-1;
   }
 
   .subtitle {
-    @apply text-sm text-slate block leading-tight;
+    @apply text-sm text-slate leading-tight;
   }
 
   .flags {
@@ -78,7 +73,6 @@
   }
 
   &:hover {
-    @apply no-underline !important;
     box-shadow: 0 0 36px rgba(74, 124, 246, 0.1);
     transform: translateY(-3px) translateZ(0);
   }
@@ -93,16 +87,6 @@
       padding-left: 2.25rem;
     }
   }
-}
-
-@screen sm {
-  .link-panel-wrapper {
-    @apply w-1/2 px-2 py-0;
-  }
-}
-
-@screen md {
-  .link-panel-wrapper {}
 }
 
 </style>

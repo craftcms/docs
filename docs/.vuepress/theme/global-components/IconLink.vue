@@ -10,12 +10,12 @@
         <img :src="icon" class="no-zoom" alt />
       </div>
       <div class="text">
-        <span class="leading-none text-lg font-medium block mb-1">
+        <div class="leading-none text-lg font-medium block mb-1">
           {{ title }}
-        </span>
-        <span class="text-sm text-slate block leading-tight">
+        </div>
+        <div class="text-sm text-slate block leading-tight">
           {{ subtitle }}
-        </span>
+        </div>
       </div>
     </RouterLink>
     <a
@@ -30,12 +30,12 @@
         <img :src="icon" class="no-zoom" alt />
       </div>
       <div class="text">
-        <span class="leading-none text-lg font-medium block mb-1">
+        <div class="leading-none text-lg font-medium block mb-1">
           {{ title }}
-        </span>
-        <span class="text-sm text-slate block leading-tight">
+        </div>
+        <div class="text-sm text-slate block leading-tight">
           {{ subtitle }}
-        </span>
+        </div>
       </div>
     </a>
   </fragment>
@@ -43,7 +43,8 @@
 
 <style lang="postcss">
 .icon-link {
-  @apply block relative my-2;
+  @apply block relative;
+  @apply no-underline !important;
 
   .icon {
     @apply flex items-center content-center justify-center w-3 h-3;
