@@ -1,5 +1,4 @@
 ---
-title: Craft CMS 4.x
 description: Official documentation for Craft CMS 4.x
 ---
 

@@ -1,5 +1,4 @@
 ---
-title: Craft Commerce 3.x
 description: Official documentation for Craft Commerce 3.x
 ---
 

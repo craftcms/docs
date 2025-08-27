@@ -1,5 +1,4 @@
 ---
-title: Craft Commerce 1.x
 description: Official documentation for Craft Commerce 1.x
 ---
 
