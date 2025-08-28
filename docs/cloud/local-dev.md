@@ -14,11 +14,11 @@ The [Cloud extension](extension.md) allows us to dynamically override some of yo
 
 Your configuration is *not* modified when your project is running outside of Cloud. It’s important to be aware when [moving to Cloud](projects.md), though, which components’ configuration *will* be overridden—especially if your local development environment is designed to reflect your production infrastructure, and you expect certain features (Redis, for instance) to be available at all times.
 
-When your local environment *does* need special configuration (say, to work with your team’s Docker Compose setup), that configuration should be handled with [environment variables](/docs/5.x/configure.html#environment-overrides) or [scoped to a specific environment](/docs/5.x/configure.html#multi-environment-configs).
+When your local environment *does* need special configuration (say, to work with your team’s Docker Compose setup), that configuration should be handled with [environment variables](/5.x/configure.html#environment-overrides) or [scoped to a specific environment](/5.x/configure.html#multi-environment-configs).
 
 ### Database Connection
 
-We recommend *against* using a `db.php` config file when working on a project that is deployed to Craft Cloud. Instead, use the special `CRAFT_DB_*` [environment variables](/docs/5.x/reference/config/db.html) to set only the connection properties your development environment relies on.
+We recommend *against* using a `db.php` config file when working on a project that is deployed to Craft Cloud. Instead, use the special `CRAFT_DB_*` [environment variables](/5.x/reference/config/db.html) to set only the connection properties your development environment relies on.
 
 ::: tip
 Make note of which variables you need for local development in a `.env.example` file so your teammates can get up to speed quickly!

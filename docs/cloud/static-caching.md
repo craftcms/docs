@@ -18,7 +18,7 @@ Most Craft features that rely on dynamic rendering are already set up to bypass 
 
 The request’s entire URL (including query parameters) is used when determining whether to serve a page from the cache.
 
-In Craft versions 4.10 and 5.2, the [`expires` Twig tag](/docs/5.x/reference/twig/tags.html#expires) was introduced to simplify setting cache headers. Examples are provided below for this method as well as precise control of individual headers via the [`header` tag](/docs/5.x/reference/twig/tags.html#header).
+In Craft versions 4.10 and 5.2, the [`expires` Twig tag](/5.x/reference/twig/tags.html#expires) was introduced to simplify setting cache headers. Examples are provided below for this method as well as precise control of individual headers via the [`header` tag](/5.x/reference/twig/tags.html#header).
 
 ### Force Caching
 
@@ -48,7 +48,7 @@ You can explicitly flag a template or response as being _ineligible_ for full-pa
 {% expires %}
 ```
 
-In PHP, use the `Response` component available from any [controller](/docs/5.x/extend/controllers.html):
+In PHP, use the `Response` component available from any [controller](/5.x/extend/controllers.html):
 
 ```php
 public function actionSaveWidget(): Response
@@ -67,7 +67,7 @@ This method also sets `Expires` and `Pragma` headers. When using the `expires` t
 
 ## Duration
 
-The Cloud extension uses the same source of information as Craft when determining how long to statically cache a page (if it is cachable at all). This means that pages using elements with an **Expiry Date** sooner than the default [`cacheDuration` setting](/docs/5.x/reference/config/general.html#cacheduration) will only be cached as long as all the underlying content ought to be visible. As with Craft’s template caches system, there is not currently a mechanism in place to invalidate caches that _would_ contain elements with a future **Post Date**.
+The Cloud extension uses the same source of information as Craft when determining how long to statically cache a page (if it is cachable at all). This means that pages using elements with an **Expiry Date** sooner than the default [`cacheDuration` setting](/5.x/reference/config/general.html#cacheduration) will only be cached as long as all the underlying content ought to be visible. As with Craft’s template caches system, there is not currently a mechanism in place to invalidate caches that _would_ contain elements with a future **Post Date**.
 
 If you have [manually set cache headers](#force-caching) at some point in the request, Craft will not overwrite those headers.
 
@@ -99,13 +99,13 @@ If you suspect a page is not being cached, look for a `Set-Cookie` header in the
 
 ### Users
 
-The `{% requireLogin %}`, `{% requireGuest %}`, `{% requireAdmin %}`, and `{% requirePermission %}` [Twig tags](/docs/5.x/reference/twig/tags.html) all use session data to dynamically redirect users.
+The `{% requireLogin %}`, `{% requireGuest %}`, `{% requireAdmin %}`, and `{% requirePermission %}` [Twig tags](/5.x/reference/twig/tags.html) all use session data to dynamically redirect users.
 
-Reading the [`currentUser` variable](/docs/5.x/reference/twig/global-variables.html) does not implicitly start a session, and may result in the logged-out state of a page being cached. Any pages you anticipate including personalized content (like user dashboards) should include the [`{% expires %}` tag](#opting-out) so that they are excluded from the cache, or lazily fetch session-dependent regions [via Ajax](#including-via-ajax).
+Reading the [`currentUser` variable](/5.x/reference/twig/global-variables.html) does not implicitly start a session, and may result in the logged-out state of a page being cached. Any pages you anticipate including personalized content (like user dashboards) should include the [`{% expires %}` tag](#opting-out) so that they are excluded from the cache, or lazily fetch session-dependent regions [via Ajax](#including-via-ajax).
 
 ### CSRF
 
-Use Craft’s [`asyncCsrfInputs` setting](/docs/5.x/reference/config/general.html#asynccsrfinputs) to make CSRF inputs generated with the [`csrfInput()` Twig function](/docs/5.x/reference/twig/functions.html#csrfinput) compatible with the static cache. Instead of outputting the `input` element and token directly (therefore opening a session), a placeholder is rendered and replaced after the browser/client loads the page and fetches a CSRF token via Ajax.
+Use Craft’s [`asyncCsrfInputs` setting](/5.x/reference/config/general.html#asynccsrfinputs) to make CSRF inputs generated with the [`csrfInput()` Twig function](/5.x/reference/twig/functions.html#csrfinput) compatible with the static cache. Instead of outputting the `input` element and token directly (therefore opening a session), a placeholder is rendered and replaced after the browser/client loads the page and fetches a CSRF token via Ajax.
 
 You can also opt in to asynchronous CSRF inputs on a case-by-case basis:
 
@@ -121,7 +121,7 @@ Avoid calling `craft.app.request.getCsrfToken()` directly, or manually building 
 
 ### Flashes
 
-Any time you access session-dependent information like [flashes](/docs/5.x/development/forms.html#flashes), Craft sends no-cache headers. Form submissions via POST are never cached and will therefore re-render the page with any contextual [validation errors](/docs/5.x/development/forms.html#models-and-validation) as you would expect—but when the form itself is otherwise cachable (including using [asynchronous CSRF tokens](#csrf)), you can guard flash messages with a check for a flag:
+Any time you access session-dependent information like [flashes](/5.x/development/forms.html#flashes), Craft sends no-cache headers. Form submissions via POST are never cached and will therefore re-render the page with any contextual [validation errors](/5.x/development/forms.html#models-and-validation) as you would expect—but when the form itself is otherwise cachable (including using [asynchronous CSRF tokens](#csrf)), you can guard flash messages with a check for a flag:
 
 ```twig
 {# Access session data only when the `success` query param is set: #}

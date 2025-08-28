@@ -6,7 +6,7 @@ Be sure and review our [Getting Started with Craft Cloud](started.md) guide!
 
 This guide collects information from multiple other articles about making an existing project compatible with Craft Cloud.
 
-Most projects will *not* need any special treatment, and will work with minimal configuration—just like a new project. Heavily-customized projects (including those with a non-standard [directory structure](/docs/5.x/system/directory-structure.html)) may require additional auditing or configuration.
+Most projects will *not* need any special treatment, and will work with minimal configuration—just like a new project. Heavily-customized projects (including those with a non-standard [directory structure](/5.x/system/directory-structure.html)) may require additional auditing or configuration.
 
 Projects based on our official Composer [starter project](kb:using-the-starter-project) tend to enjoy a minimally disruptive migration process, but it’s still a good idea to fully review this document and the resources it links to.
 
@@ -26,7 +26,7 @@ Read more about using the [Cloud config file](config.md).
 
 ### Filesystems
 
-Craft Cloud does not have a persistent filesystem (it is [ephemeral](/docs/5.x/reference/config/bootstrap.html#craft-ephemeral) in nature), so **Local** filesystems must be migrated to use the **Cloud** filesystem provided by the Cloud extension.
+Craft Cloud does not have a persistent filesystem (it is [ephemeral](/5.x/reference/config/bootstrap.html#craft-ephemeral) in nature), so **Local** filesystems must be migrated to use the **Cloud** filesystem provided by the Cloud extension.
 
 We have a dedicated article about [working with assets on Cloud](assets.md), and a section that [specifically addresses this migration](assets.md#synchronizing-assets).
 
@@ -42,13 +42,13 @@ You do _not_ need to set a `@web` [alias](https://craftcms.com/docs/5.x/configur
 
 ### Application Config
 
-Craft Cloud automatically configures a number of key application components to make use of platform resources. If you have made any changes via `app.php` to support features of your current infrastructure, you may need to remove or [scope those modifications to a non-Cloud environment](/docs/5.x/configure.html#multi-environment-configs).
+Craft Cloud automatically configures a number of key application components to make use of platform resources. If you have made any changes via `app.php` to support features of your current infrastructure, you may need to remove or [scope those modifications to a non-Cloud environment](/5.x/configure.html#multi-environment-configs).
 
 ### Environment Variables
 
-Your environment variables are managed via each environment’s **Variables** screen—not a `.env` file. Craft Cloud automatically sets a number of important variables, including all of your database connection details, the current site URL or domain, and some [config overrides](/docs/5.x/configure.html#config-overrides) that ensure a consistent experience.
+Your environment variables are managed via each environment’s **Variables** screen—not a `.env` file. Craft Cloud automatically sets a number of important variables, including all of your database connection details, the current site URL or domain, and some [config overrides](/5.x/configure.html#config-overrides) that ensure a consistent experience.
 
-Before your first deployment, add any *custom* variables you reference in your code or project config. Sensitive values can be marked as “write-only” to prevent them from being lifted back out of Craft Console by another organization member. Those values are decrypted at runtime to a special [secrets file](/docs/5.x/configure.html#secrets), and will not appear in logs or be set at the process level.
+Before your first deployment, add any *custom* variables you reference in your code or project config. Sensitive values can be marked as “write-only” to prevent them from being lifted back out of Craft Console by another organization member. Those values are decrypted at runtime to a special [secrets file](/5.x/configure.html#secrets), and will not appear in logs or be set at the process level.
 
 ## Content
 
@@ -70,7 +70,7 @@ Craft Cloud does not support the `tablePrefix` setting. See [this section](datab
 
 ## Deployment
 
-Once you’ve made the required code changes and imported your content, run a [deployment](deployment.md). While it’s a good idea to test the updates locally, you do *not* need to deploy the updates to your legacy infrastructure—Cloud will apply any pending [Project Config](/docs/5.x/system/project-config.html) updates (say, from changing your filesystems’ configuration) at the end of the deployment.
+Once you’ve made the required code changes and imported your content, run a [deployment](deployment.md). While it’s a good idea to test the updates locally, you do *not* need to deploy the updates to your legacy infrastructure—Cloud will apply any pending [Project Config](/5.x/system/project-config.html) updates (say, from changing your filesystems’ configuration) at the end of the deployment.
 
 ### Preview Domains
 
@@ -92,6 +92,6 @@ The exact process will differ based on your project’s tolerance of downtime—
 The AWS S3 CLI’s `sync` command is extremely useful for [uploading](assets.md) only new and modified assets. Consider running it periodically in your local environment to keep your content up-to-date—it also works when _uploading_ large asset libraries to your Cloud environment!
 :::
 
-With your latest code and content on Cloud, [disable maintenance mode](/docs/5.x/reference/cli.html#on) and [update your DNS](domains.md) to point your live domain at our infrastructure!
+With your latest code and content on Cloud, [disable maintenance mode](/5.x/reference/cli.html#on) and [update your DNS](domains.md) to point your live domain at our infrastructure!
 
 More information about launching projects on Cloud is available in the [Going Live](checklist.md) article.

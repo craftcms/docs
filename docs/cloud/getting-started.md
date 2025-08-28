@@ -28,7 +28,7 @@ Any Craft CMS site running version {globalset:productVitals:vitalsCloudMinCraftV
 
 ### New Sites
 
-Cloud projects begin the same way as any other. Follow the standard [installation instructions](/docs/5.x/install.html) to get a new site running locally, then run this command to get it Cloud-ready:
+Cloud projects begin the same way as any other. Follow the standard [installation instructions](/5.x/install.html) to get a new site running locally, then run this command to get it Cloud-ready:
 
 ```bash
 ddev craft setup/cloud
@@ -40,7 +40,7 @@ Commit and push the project files to a fresh Git repository.
 
 ### Existing Sites
 
-Update your project to at least Craft {globalset:productVitals:vitalsCloudMinCraftVersion}, then run the command above. Most projects will run on Cloud without modification—but we recommend reviewing the [compatibility guide](compatibility.md) if you’ve made any customizations via [application config](/docs/5.x/reference/config/app.html), custom modules, or private plugins. We also have a dedicated guide on [moving projects to Craft Cloud](projects.md) from other hosts.
+Update your project to at least Craft {globalset:productVitals:vitalsCloudMinCraftVersion}, then run the command above. Most projects will run on Cloud without modification—but we recommend reviewing the [compatibility guide](compatibility.md) if you’ve made any customizations via [application config](/5.x/reference/config/app.html), custom modules, or private plugins. We also have a dedicated guide on [moving projects to Craft Cloud](projects.md) from other hosts.
 
 ::: tip
 Does your project use the `tablePrefix` setting or `CRAFT_DB_TABLE_PREFIX` config variable? Run `ddev craft db/drop-table-prefix` before continuing.

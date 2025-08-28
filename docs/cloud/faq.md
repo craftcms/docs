@@ -14,7 +14,7 @@ A link to the status page is available in the footer of every page on <craftcms.
 
 The [Knowledge Base](kb:cloud) is the best place to find answers to your Cloud questions—in particular, our [Getting Started](started.md) guide and the [Troubleshooting Common Problems on Craft Cloud](troubleshooting.md) are pathways into many platform concepts.
 
-If you have questions about our software products, check out the [Craft CMS](/docs/5.x) or [Craft Commerce](/docs/commerce/5.x) documentation.
+If you have questions about our software products, check out the [Craft CMS](/5.x) or [Craft Commerce](/docs/commerce/5.x) documentation.
 
 ### How do I get support for my Craft Cloud project?
 
@@ -118,7 +118,7 @@ Yes! Please send us an email at <{globalset:productVitals:custom_cloudSupportEma
 
 We currently do not have a dedicated transactional email service. You are free to use any Craft-compatible mailer adapter or SMTP service.
 
-We cover [customizing Craft’s mailer](/docs/5.x/system/mail.html) in the documentation.
+We cover [customizing Craft’s mailer](/5.x/system/mail.html) in the documentation.
 
 ### Does Craft Cloud provide a deployment pipeline?
 

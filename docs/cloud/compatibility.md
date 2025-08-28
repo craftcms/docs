@@ -26,7 +26,7 @@ See our article on [working with databases](databases.md) for up-to-date informa
 
 ## Mailers
 
-Craft Cloud does not have a built-in mail service. You must [configure your own adapter](/docs/5.x/system/mail.html) in Craft, as the default `sendmail` adapter will not work.
+Craft Cloud does not have a built-in mail service. You must [configure your own adapter](/5.x/system/mail.html) in Craft, as the default `sendmail` adapter will not work.
 
 ## Filesystems
 
@@ -34,13 +34,13 @@ Craft Cloud does not have a built-in mail service. You must [configure your own 
 
 ## Configuration
 
-Some [Craft settings](/docs/5.x/configure.html) behave differently when running on Cloud.
+Some [Craft settings](/5.x/configure.html) behave differently when running on Cloud.
 
 ### General Config
 
-The [`resourceBasePath`](/docs/5.x/reference/config/general.html#resourcesbasepath) and [`resourceBaseUrl`](/docs/5.x/reference/config/general.html#resourcebaseurl) have no effect when running on Cloud. Asset bundles and anything that ends up in your [web root](#project-structure) are published to our CDN.
+The [`resourceBasePath`](/5.x/reference/config/general.html#resourcesbasepath) and [`resourceBaseUrl`](/5.x/reference/config/general.html#resourcebaseurl) have no effect when running on Cloud. Asset bundles and anything that ends up in your [web root](#project-structure) are published to our CDN.
 
-We automatically enable Craft’s [`asyncCsrfInputs`](/docs/5.x/reference/config/general.html#asynccsrfinputs) setting to support [static caching](caching.md).
+We automatically enable Craft’s [`asyncCsrfInputs`](/5.x/reference/config/general.html#asynccsrfinputs) setting to support [static caching](caching.md).
 
 ### Application Config
 
@@ -52,7 +52,7 @@ Changes made via `app.php` may not be honored when deployed to Cloud. Specifical
 - `queue`
 - `session`
 
-In addition, we automatically set properties on the `db` component via [environment overrides](/docs/5.x/configure.html#environment-overrides) to ensure Craft can connect to the current environment’s database. You may have connectivity issues if you use a `db.php` file, or add any other `CRAFT_DB_*` variables to an environment.
+In addition, we automatically set properties on the `db` component via [environment overrides](/5.x/configure.html#environment-overrides) to ensure Craft can connect to the current environment’s database. You may have connectivity issues if you use a `db.php` file, or add any other `CRAFT_DB_*` variables to an environment.
 
 ### Project Structure
 
@@ -60,11 +60,11 @@ If your project has a different directory structure than our official [starter p
 
 ## Workflow
 
-Cloud was built with teams in mind, so it reflects our recommendations for maintaining a healthy [development and deployment workflow](/docs/5.x/deploy.html). This means that…
+Cloud was built with teams in mind, so it reflects our recommendations for maintaining a healthy [development and deployment workflow](/5.x/deploy.html). This means that…
 
 - …we require your code to be pushed to a Git provider;
 - …direct access to the server/function filesystem is not allowed;
-- …[Project Config](/docs/5.x/system/project-config.html) and changes that would alter `composer.json` (like running system updates) are discouraged;
+- …[Project Config](/5.x/system/project-config.html) and changes that would alter `composer.json` (like running system updates) are discouraged;
 
 We believe these limitations will not affect most developers, but understand that they may involve some adjustment to processes.
 
@@ -76,4 +76,4 @@ Whenever possible, we recommend adopting one-way flows for code and content: cod
 
 ### Headers
 
-Our infrastructure flattens duplicate HTTP response headers into a single, comma-separated one. If you are using the [`{% header … %}` tag](/docs/5.x/reference/twig/tags.html#header) in your templates or manipulating the response object’s `HeaderCollection` directly, you may see *slightly* different output from a Cloud response than you would in other environments. Rest assured, they are functionally equivalent in the HTTP spec!
+Our infrastructure flattens duplicate HTTP response headers into a single, comma-separated one. If you are using the [`{% header … %}` tag](/5.x/reference/twig/tags.html#header) in your templates or manipulating the response object’s `HeaderCollection` directly, you may see *slightly* different output from a Cloud response than you would in other environments. Rest assured, they are functionally equivalent in the HTTP spec!

@@ -6,12 +6,12 @@ In technical terms, the Cloud extension is a self-bootstrapping Yii module. Prac
 
 - …a special [filesystem type](assets.md) that interfaces seamlessly with Cloud’s storage solution;
 - …automatic and reliable configuration of your project’s database connection, cache, queue, and other application components;
-- …[Twig helpers](/docs/5.x/reference/twig/functions.html) for generating [special URLs](#resource-uRLs);
+- …[Twig helpers](/5.x/reference/twig/functions.html) for generating [special URLs](#resource-uRLs);
 
 For most projects—and in local development—the extension will be largely undetectable. It only initializes functionality in environments that suggest (through the presence of special variables) it is necessary.
 
 ::: tip
-Note that Cloud applies additional configuration directly to Craft via special, non-optional [environment overrides](/docs/5.x/configure.html#environment-overrides).
+Note that Cloud applies additional configuration directly to Craft via special, non-optional [environment overrides](/5.x/configure.html#environment-overrides).
 :::
 
 ## Installation
@@ -30,15 +30,15 @@ You will be prompted for some information about your project, and the wizard wil
 
 ### Cloud Filesystem
 
-We recommend that new projects use the [Craft Cloud filesystem type](assets.md) for all [asset volumes](/docs/5.x/reference/element-types/assets.html). Other remote filesystem types may be compatible with Cloud, but will *not* support automatic fallback to your local disk, in development environments.
+We recommend that new projects use the [Craft Cloud filesystem type](assets.md) for all [asset volumes](/5.x/reference/element-types/assets.html). Other remote filesystem types may be compatible with Cloud, but will *not* support automatic fallback to your local disk, in development environments.
 
 ### Application Components
 
-The extension replaces configuration for Craft’s cache, database, mutex, queue, and session [application components](/docs/5.x/reference/config/app.html) to ensure that they are configured in a way that is compatible with Cloud infrastructure.
+The extension replaces configuration for Craft’s cache, database, mutex, queue, and session [application components](/5.x/reference/config/app.html) to ensure that they are configured in a way that is compatible with Cloud infrastructure.
 
 ### Resource URLs
 
-By default, Craft publishes asset bundles to the public web root and generates URLs according to [`resourceBasePath`](/docs/5.x/reference/config/general.html#resourcebasepath) and [`resourceBaseUrl`](/docs/5.x/reference/config/general.html#resourcebaseurl). _These settings have no effect, when running on Cloud._
+By default, Craft publishes asset bundles to the public web root and generates URLs according to [`resourceBasePath`](/5.x/reference/config/general.html#resourcebasepath) and [`resourceBaseUrl`](/5.x/reference/config/general.html#resourcebaseurl). _These settings have no effect, when running on Cloud._
 
 To conserve resources, Cloud’s compute layer doesn’t serve *any* static asset requests. Instead, these files are pre-generated and pushed to our CDN when your project is deployed.
 

@@ -1,6 +1,6 @@
 # Plugin Development
 
-As long as your plugin’s design and implementation follows our established [best practices](/docs/5.x/extend/index.html), it should work on Craft Cloud without changes. All Craft features are available on Cloud, making the platform’s architectural differences inconsequential when using official, documented APIs.
+As long as your plugin’s design and implementation follows our established [best practices](/5.x/extend/index.html), it should work on Craft Cloud without changes. All Craft features are available on Cloud, making the platform’s architectural differences inconsequential when using official, documented APIs.
 
 Plugins must be compatible with at least Craft 4.6 (the minimum version of Craft required to run on Cloud), but they may support earlier versions.
 
@@ -66,7 +66,7 @@ Doing so will take advantage of the existing volumes and filesystems, while stil
 
 Craft Cloud pre-publishes all known asset bundles to our CDN at [build-time](builds.md) to conserve compute resources.
 
-Any static assets your plugin provides to the control panel or front-end must be encapsulated in an [Asset Bundle](/docs/5.x/extend/asset-bundles.html), and its `sourcePath` must begin with your plugin’s predefined alias. To register an asset bundle, call `Craft::$app->getView()->registerAssetBundle($myBundle)` from a controller or template. Publishing one-off or ad-hoc assets at runtime is **not** supported on Cloud.
+Any static assets your plugin provides to the control panel or front-end must be encapsulated in an [Asset Bundle](/5.x/extend/asset-bundles.html), and its `sourcePath` must begin with your plugin’s predefined alias. To register an asset bundle, call `Craft::$app->getView()->registerAssetBundle($myBundle)` from a controller or template. Publishing one-off or ad-hoc assets at runtime is **not** supported on Cloud.
 
 Asset bundles have some additional requirements:
 
@@ -77,11 +77,11 @@ Asset bundles have some additional requirements:
 
 To help support Cloud’s [static caching](caching.md) system, avoid interacting with the session unnecessarily, during _site_ requests.
 
-Always use the [`csrfInput()` Twig function](/docs/5.x/reference/twig/functions.html#csrfinput) when rendering front-end forms to maintain compatibility with Craft’s [`asyncCsrfInputs` config setting](/docs/5.x/reference/config/general.html#asynccsrfinputs) (4.9.0+). _Building an input manually (or using `craft\web\Request::getCsrfToken()` directly) can leak one user’s CSRF tokens to another!_
+Always use the [`csrfInput()` Twig function](/5.x/reference/twig/functions.html#csrfinput) when rendering front-end forms to maintain compatibility with Craft’s [`asyncCsrfInputs` config setting](/5.x/reference/config/general.html#asynccsrfinputs) (4.9.0+). _Building an input manually (or using `craft\web\Request::getCsrfToken()` directly) can leak one user’s CSRF tokens to another!_
 
 ## Other Best Practices
 
-Plugins that already embrace our existing [coding guidelines and best practices](/docs/5.x/extend/coding-guidelines.html) should be Cloud-ready—or take significantly less time to make compatible.
+Plugins that already embrace our existing [coding guidelines and best practices](/5.x/extend/coding-guidelines.html) should be Cloud-ready—or take significantly less time to make compatible.
 
 In addition, these tips can help avoid hiccups when your plugins are deployed to Craft Cloud:
 

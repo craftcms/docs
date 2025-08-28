@@ -6,7 +6,7 @@ To take advantage of that storage (and other features, like the built-in CDN and
 
 ## New Filesystems
 
-New projects can start using it right away—new filesystems don’t require any special handling. You can [create a new filesystem and volume](/docs/5.x/reference/element-types/assets.html) the same way you would with any other filesystem type. Cloud filesystems do not require any credentials—they’re provided automatically by Cloud’s runtime.
+New projects can start using it right away—new filesystems don’t require any special handling. You can [create a new filesystem and volume](/5.x/reference/element-types/assets.html) the same way you would with any other filesystem type. Cloud filesystems do not require any credentials—they’re provided automatically by Cloud’s runtime.
 
 When you are ready to stage or launch the project, you can [upload your local asset library](#uploading-to-a-bucket) to the equivalent subpath in the target Cloud environment’s storage bucket. Live assets can be referenced from a [local development environment](#local-development), in read-only mode.
 
@@ -18,7 +18,7 @@ Existing projects may require some additional work to ensure their filesystems a
 Filesystems’ base paths cannot overlap! Even if you only need a single filesystem on Cloud, we recommend using the Cloud filesystem’s **Subpath** option to make room at the root of your volume for other filesystems, later.
 :::
 
-Changes to your filesystems + volumes will be applied via [Project Config](/docs/5.x/system/project-config.html), the next time you deploy your environment.
+Changes to your filesystems + volumes will be applied via [Project Config](/5.x/system/project-config.html), the next time you deploy your environment.
 
 ### Local
 
@@ -100,7 +100,7 @@ Automated environment duplication/synchronization is a planned feature of Cloud.
 
 ## Transforms
 
-The [Cloud extension](extension.md) transparently enhances Craft’s [asset transform](/docs/5.x/development/image-transforms.html) APIs by generating and caching images at the edge, using special pre-signed URLs. Existing transforms will work seamlessly on Cloud, whether predefined via [named transforms](/docs/5.x/development/image-transforms.html#applying-named-transforms-to-images) and as [ad-hoc transforms](/docs/5.x/development/image-transforms.html#defining-transforms-in-your-templates) (except for one [limitation](#limitations), noted below).
+The [Cloud extension](extension.md) transparently enhances Craft’s [asset transform](/5.x/development/image-transforms.html) APIs by generating and caching images at the edge, using special pre-signed URLs. Existing transforms will work seamlessly on Cloud, whether predefined via [named transforms](/5.x/development/image-transforms.html#applying-named-transforms-to-images) and as [ad-hoc transforms](/5.x/development/image-transforms.html#defining-transforms-in-your-templates) (except for one [limitation](#limitations), noted below).
 
 These images don’t contribute to your [storage quota](quotas.md), and there are no limits on the number of transforms or compute time.
 
@@ -110,7 +110,7 @@ When no format is explicitly defined for a transform (or the transform uses the 
 
 ### Limitations
 
-Our workers treat the [`stretch` mode](/docs/5.x/development/image-transforms.html#stretch) similarly to how the CSS `object-fit: cover` property works—instead of independently scaling an image’s width and height to the specified dimensions, it enlarges the image proportionately to fill the space. This difference will only manifest if you are using the `stretch` mode, and setting _both_ the `height` and `width` properties in such a way that the transformed image’s aspect ratio would be different from the source.
+Our workers treat the [`stretch` mode](/5.x/development/image-transforms.html#stretch) similarly to how the CSS `object-fit: cover` property works—instead of independently scaling an image’s width and height to the specified dimensions, it enlarges the image proportionately to fill the space. This difference will only manifest if you are using the `stretch` mode, and setting _both_ the `height` and `width` properties in such a way that the transformed image’s aspect ratio would be different from the source.
 
 Additional technical limitations include:
 

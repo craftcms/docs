@@ -97,7 +97,7 @@ You may also directly add and verify a non-apex domain if your project will neve
 
 Every domain that sends traffic to Craft Cloud is automatically protected with SSL by [Cloudflare](https://cloudflare.com). You do not need to manage certificates, redirection, or any other configuration—Cloud takes care of this for you, at the edge.
 
-Cloud also sets the `@web` alias to ensure all URLs are generated with the secure `https://` protocol. The only place we *don’t* know what `@web` should be is on the CLI—if you need to generate URLs from a command (or queue job), you may need to define this alias in your [application config](/docs/5.x/configure.html#aliases).
+Cloud also sets the `@web` alias to ensure all URLs are generated with the secure `https://` protocol. The only place we *don’t* know what `@web` should be is on the CLI—if you need to generate URLs from a command (or queue job), you may need to define this alias in your [application config](/5.x/configure.html#aliases).
 
 ## Nameservers
 

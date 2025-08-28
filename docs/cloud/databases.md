@@ -35,12 +35,12 @@ In addition to automated nightly backups of your database, you can trigger a man
 &rarr; Read more about [database backups](backups.md).
 
 ::: warning
-The **Database Backup** [utility](/docs/5.x/system/control-panel.html#utilities) is not currently supported on Cloud. Use the **Backups** screen in Craft Console to capture a backup.
+The **Database Backup** [utility](/5.x/system/control-panel.html#utilities) is not currently supported on Cloud. Use the **Backups** screen in Craft Console to capture a backup.
 :::
 
 ## Importing Data
 
-From an existing Craft installation, run the [`db/backup` command](/docs/5.x/reference/cli.html#db-backup) to generate a Cloud-compatible database dump. To restore data from another Craft Cloud environment, instead capture and download a backup from the **Backups** screen of the source environment.
+From an existing Craft installation, run the [`db/backup` command](/5.x/reference/cli.html#db-backup) to generate a Cloud-compatible database dump. To restore data from another Craft Cloud environment, instead capture and download a backup from the **Backups** screen of the source environment.
 
 The specific commands for importing a backup to Cloud depend on your driver, but they will always be run from your local machine (or from wherever your current Craft installation lives). Substitute the parameters in `{brackets}` with corresponding values from the [**Access** screen](#connecting-to-your-database) of the target Cloud environment.
 
@@ -97,7 +97,7 @@ pg_restore \
     < path/to/backup.sql
 ```
 
-As of Craft 4.10, you can choose the format Craft uses to back up a Postgres database with the [`backupCommandFormat` setting](/docs/5.x/reference/config/general.html#backupcommandformat).
+As of Craft 4.10, you can choose the format Craft uses to back up a Postgres database with the [`backupCommandFormat` setting](/5.x/reference/config/general.html#backupcommandformat).
 
 Make sure the version of `pg_restore` matches the version of `pg_dump` that was used to create the backup. Some GUI tools (like Table Plus) make it possible to choose the version when using binary backups.
 
@@ -105,7 +105,7 @@ When dumping and restoring, the `--password` flag forces a password prompt—you
 
 ## Table Prefixes
 
-The [`tablePrefix` setting](/docs/5.x/reference/config/db.html#tableprefix) (and the corresponding `CRAFT_DB_TABLE_PREFIX` environment variable) are not supported on Cloud.
+The [`tablePrefix` setting](/5.x/reference/config/db.html#tableprefix) (and the corresponding `CRAFT_DB_TABLE_PREFIX` environment variable) are not supported on Cloud.
 
 Run `php craft db/drop-table-prefix` in a local environment before importing your data into Cloud to rename the tables. After doing so, you should unset `tablePrefix` in `db.php` and remove `CRAFT_DB_TABLE_PREFIX` from your `.env`.
 
@@ -115,7 +115,7 @@ Here are some common sources of issues when backing up or restoring databases.
 
 ### Craft’s `backupCommand`
 
-Using a custom [`backupCommand` config setting](/docs/5.x/reference/config/general.html#backupcommand) can lead to unreliable backups. Be sure to check `general.php` _and_ your `.env` file for a `CRAFT_BACKUP_COMMAND` environment override! Try the default command and [reach out to support](/contact) if you still get malformed backups.
+Using a custom [`backupCommand` config setting](/5.x/reference/config/general.html#backupcommand) can lead to unreliable backups. Be sure to check `general.php` _and_ your `.env` file for a `CRAFT_BACKUP_COMMAND` environment override! Try the default command and [reach out to support](/contact) if you still get malformed backups.
 
 ### Backing up without Craft
 

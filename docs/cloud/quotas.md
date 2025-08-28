@@ -24,7 +24,7 @@ If a response can be served from our edge (like a [statically-cached](caching.md
 - **Team** projects get 250GB of transfer per month, shared between environments.
 - **Pro** projects get 500GB of transfer per month, shared between environments.
 
-All transfer from our edge and CDN to your clients is free. Most projects will not need to do anything to take advantage of our edge cache, but you can optimize your cache-hit ratio by following our [static caching guide](caching.md), and limit asset egress by creating thoughtful [named asset transforms](/docs/5.x/development/image-transforms.html).
+All transfer from our edge and CDN to your clients is free. Most projects will not need to do anything to take advantage of our edge cache, but you can optimize your cache-hit ratio by following our [static caching guide](caching.md), and limit asset egress by creating thoughtful [named asset transforms](/5.x/development/image-transforms.html).
 
 The following table shows some common resource sizes, and an approximation of the number of uncached requests that fit within the **Team** plan’s bandwidth quota:
 
@@ -60,7 +60,7 @@ You can [deploy](deployment.md) as often as you like. There are no limits on the
 
 A brand new [starter project](kb:using-the-starter-project) will typically deploy in about 90 seconds. Projects that use many plugins or have complex Node build steps will naturally take more time—long-running processes like automated tests may need to be offloaded to a different CI pipeline.
 
-The final [migration](/docs/5.x/deploy.html#migrate) phase of each deployment does *not* count toward the build time limit, but _are_ governed by the discrete command duration limit.
+The final [migration](/5.x/deploy.html#migrate) phase of each deployment does *not* count toward the build time limit, but _are_ governed by the discrete command duration limit.
 
 Commands must complete within **15 minutes**, as well. This applies to automatically-triggered commands (like migrations) as well as those run manually from an environment’s **Commands** screen.
 
@@ -72,7 +72,7 @@ Migrations for major Craft or plugin version upgrades can sometimes exceed this 
 
 ## Queue
 
-There are no limits to the number of concurrent or monthly queue jobs, but—like builds and commands—each job must be completed within **15 minutes**. For long-running tasks, plugin developers should implement `craft\queue\BaseBatchedJob` so that jobs can be [gracefully batched](/docs/5.x/extend/queue-jobs.html#batched-jobs) as that timeout approaches.
+There are no limits to the number of concurrent or monthly queue jobs, but—like builds and commands—each job must be completed within **15 minutes**. For long-running tasks, plugin developers should implement `craft\queue\BaseBatchedJob` so that jobs can be [gracefully batched](/5.x/extend/queue-jobs.html#batched-jobs) as that timeout approaches.
 
 ## Craft License
 

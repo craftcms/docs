@@ -6,7 +6,7 @@ When you [trigger a deployment](#deployment-triggers) (by pushing code or manual
 2. [Migrate](#2-migrations)
 3. [Release/Deploy](#3-deployment)
 
-This process reflects our general [deployment and workflow recommendations](/docs/5.x/deploy.html) laid out in the documentation—but it’s all handled for you!
+This process reflects our general [deployment and workflow recommendations](/5.x/deploy.html) laid out in the documentation—but it’s all handled for you!
 
 You can review an [environment](environments.md)’s deployment history (and the status of any active deployments) by navigating to its **Deployments** screen.
 
