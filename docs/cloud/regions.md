@@ -2,7 +2,7 @@
 
 Craft Cloud is currently available in **North America**, **Canada**, **Europe**, and **Asia/Pacific**. You select a region when creating a new project.
 
-A project’s region determines where your [database](/knowledge-base/cloud-databases) and compute resources are located, but *not* your assets.
+A project’s region determines where your [database](databases.md) and compute resources are located, but *not* your assets.
 
 ## Choosing a Region
 

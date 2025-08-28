@@ -3,26 +3,26 @@
 Craft Cloud was designed to be compatible with a wide variety of projects—but for security and performance, we did have to make some decisions about what versions of Craft (and the software it depends on) we would officially support. This article covers those limitations, as well as some common features and configurations that may require special attention when moving a project to Cloud.
 
 ::: tip
-If you maintain a plugin or module, review our [Cloud for Plugin Developers](/knowledge-base/cloud-plugin-development) guide, as well!
+If you maintain a plugin or module, review our [Cloud for Plugin Developers](development.md) guide, as well!
 :::
 
 ## Craft
 
-Your project must be updated to at least {globalset:productVitals:vitalsCloudMinCraftVersion} to be able to install the [Cloud extension](/knowledge-base/cloud-extension), which provides essential functionality like automatic [configuration](/knowledge-base/cloud-config) and the [Cloud filesystem](/knowledge-base/cloud-assets). Version {globalset:productVitals:vitalsCloudMinExtensionVersion} of the extension is required to deploy your project.
+Your project must be updated to at least {globalset:productVitals:vitalsCloudMinCraftVersion} to be able to install the [Cloud extension](extension.md), which provides essential functionality like automatic [configuration](config.md) and the [Cloud filesystem](assets.md). Version {globalset:productVitals:vitalsCloudMinExtensionVersion} of the extension is required to deploy your project.
 
 ## PHP
 
-PHP {globalset:productVitals:custom_cloudMinPhpVersion} and newer are supported on Cloud. Pick a major and minor version via your project’s [`craft-cloud.yaml` config file](/knowledge-base/cloud-config).
+PHP {globalset:productVitals:custom_cloudMinPhpVersion} and newer are supported on Cloud. Pick a major and minor version via your project’s [`craft-cloud.yaml` config file](config.md).
 
 ## Node
 
-Versions 16 and newer of Node are supported in our [builder](/knowledge-base/cloud-builds) via the `node-version` key in your [Cloud config file](/knowledge-base/cloud-config). We plan to add all [LTS releases](https://nodejs.org/en/about/previous-releases), moving forward.
+Versions 16 and newer of Node are supported in our [builder](builds.md) via the `node-version` key in your [Cloud config file](config.md). We plan to add all [LTS releases](https://nodejs.org/en/about/previous-releases), moving forward.
 
 We recommend declaring only a major version (i.e. `20`) to receive security and stability updates, but minor releases (i.e. `18.6`) are supported.
 
 ## Database Engines
 
-See our article on [working with databases](/knowledge-base/cloud-databases) for up-to-date information on supported MySQL and Postgres versions. MariaDB is not supported on Craft Cloud, and we no longer recommended it for Craft 5.
+See our article on [working with databases](databases.md) for up-to-date information on supported MySQL and Postgres versions. MariaDB is not supported on Craft Cloud, and we no longer recommended it for Craft 5.
 
 ## Mailers
 
@@ -30,7 +30,7 @@ Craft Cloud does not have a built-in mail service. You must [configure your own 
 
 ## Filesystems
 
-**Local** filesystems will not work on Craft Cloud, and must be [converted](/knowledge-base/cloud-assets#converting-a-filesystem) to the Cloud filesystem provided by the extension. Remote filesystems provided by plugins that have not received updates from their maintainers to be compatible with Cloud may not be fully functional.
+**Local** filesystems will not work on Craft Cloud, and must be [converted](assets.md#converting-a-filesystem) to the Cloud filesystem provided by the extension. Remote filesystems provided by plugins that have not received updates from their maintainers to be compatible with Cloud may not be fully functional.
 
 ## Configuration
 
@@ -40,11 +40,11 @@ Some [Craft settings](/docs/5.x/configure.html) behave differently when running 
 
 The [`resourceBasePath`](/docs/5.x/reference/config/general.html#resourcesbasepath) and [`resourceBaseUrl`](/docs/5.x/reference/config/general.html#resourcebaseurl) have no effect when running on Cloud. Asset bundles and anything that ends up in your [web root](#project-structure) are published to our CDN.
 
-We automatically enable Craft’s [`asyncCsrfInputs`](/docs/5.x/reference/config/general.html#asynccsrfinputs) setting to support [static caching](/knowledge-base/cloud-static-caching).
+We automatically enable Craft’s [`asyncCsrfInputs`](/docs/5.x/reference/config/general.html#asynccsrfinputs) setting to support [static caching](caching.md).
 
 ### Application Config
 
-Changes made via `app.php` may not be honored when deployed to Cloud. Specifically, the [Cloud extension](/knowledge-base/cloud-extension) overrides these system components to guarantee they work in a Cloud-compatible way:
+Changes made via `app.php` may not be honored when deployed to Cloud. Specifically, the [Cloud extension](extension.md) overrides these system components to guarantee they work in a Cloud-compatible way:
 
 - `assetManager`
 - `cache`
@@ -56,7 +56,7 @@ In addition, we automatically set properties on the `db` component via [environm
 
 ### Project Structure
 
-If your project has a different directory structure than our official [starter project](/knowledge-base/using-the-starter-project), you may need to set some additional keys in your [Cloud config file](/knowledge-base/cloud-config). This includes the `webroot` and other `*-path` settings.
+If your project has a different directory structure than our official [starter project](/knowledge-base/using-the-starter-project), you may need to set some additional keys in your [Cloud config file](config.md). This includes the `webroot` and other `*-path` settings.
 
 ## Workflow
 

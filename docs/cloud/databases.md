@@ -12,7 +12,7 @@ related:
 
 Craft Cloud supports [MySQL](#mySQL) and [Postgres](#postgres) databases. You will pick a database engine when creating a new Cloud project: if you are starting a new project, we recommend MySQL 8.0; existing projects should use the same engine and version used by their current infrastructure.
 
-Both engines support [automated and manual backups](/knowledge-base/cloud-backups) via Craft Console.
+Both engines support [automated and manual backups](backups.md) via Craft Console.
 
 ::: tip
 Using a `tablePrefix` from an earlier version of Craft? Follow [these instructions](#table-prefixes) to make your database Cloud-compatible.
@@ -20,11 +20,11 @@ Using a `tablePrefix` from an earlier version of Craft? Follow [these instructio
 
 ## Database Engines
 
-Craft Cloud currently supports MySQL {globalset:productVitals:custom_cloudDbSupportMysql} and Postgres {globalset:productVitals:custom_cloudDbSupportPostgres} in [all regions](/knowledge-base/cloud-regions).
+Craft Cloud currently supports MySQL {globalset:productVitals:custom_cloudDbSupportMysql} and Postgres {globalset:productVitals:custom_cloudDbSupportPostgres} in [all regions](regions.md).
 
 ## Connecting to your Database
 
-Each environment gets its own database. Connection details are automatically provided to your application via the [Cloud extension](/knowledge-base/cloud-extension), so no configuration is necessary!
+Each environment gets its own database. Connection details are automatically provided to your application via the [Cloud extension](extension.md), so no configuration is necessary!
 
 If you need to connect to your database from outside of Cloud (like with a database GUI), visit the **Access** screen of your environment to get credentials.
 
@@ -32,7 +32,7 @@ If you need to connect to your database from outside of Cloud (like with a datab
 
 In addition to automated nightly backups of your database, you can trigger a manual backup of any environment from Craft Console.
 
-&rarr; Read more about [database backups](/knowledge-base/cloud-backups).
+&rarr; Read more about [database backups](backups.md).
 
 ::: warning
 The **Database Backup** [utility](/docs/5.x/system/control-panel.html#utilities) is not currently supported on Cloud. Use the **Backups** screen in Craft Console to capture a backup.

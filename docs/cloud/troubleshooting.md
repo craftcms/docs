@@ -21,19 +21,19 @@ Return to the **Integrations** screen in your personal Craft Console account, th
 
 ### Why did my build/deployment fail?
 
-Build failures always display an error in that [deployment](/knowledge-base/cloud-deployment)’s details page. If you believe you've encountered a temporary failure, you can try redeploying the latest commit by clicking **Deploy**—even if the environment is set to deploy **On Push**.
+Build failures always display an error in that [deployment](deployment.md)’s details page. If you believe you've encountered a temporary failure, you can try redeploying the latest commit by clicking **Deploy**—even if the environment is set to deploy **On Push**.
 
 The most common problems are:
 
 - **Issues cloning the repository.** Was it made private, renamed, or otherwise disconnected?
-- **No PHP version was declared.** Make sure you have a `php-version` key in your [`craft-cloud.yaml` config file](/knowledge-base/cloud-config).
+- **No PHP version was declared.** Make sure you have a `php-version` key in your [`craft-cloud.yaml` config file](config.md).
 - **Unsupported software or package versions.**
   - Your Cloud config file must include a `php-version`, set to a public release of PHP, version {globalset:productVitals:custom_cloudMinPhpVersion} or later. Patch versions are not supported.
   - If you are using Node, `node-version` must be set to {globalset:productVitals:custom_cloudMinNodeVersion} or higher. Only major version numbers are supported.
   - Craft CMS version {globalset:productVitals:vitalsCloudMinCraftVersion} or later is required.
   - `craftcms/cloud` version {globalset:productVitals:vitalsCloudMinExtensionVersion} or later is required.
 - **Errors when installing Composer packages.** Do you have a valid `composer.json` and `composer.lock` file in the connected repository? (It's technically possible—but exceedingly rare—for there to be connectivity issues when downloading packages. Check your logs, try again, or reach out to support if you continue to have problems at this stage in the build.)
-- **Failures in the Node/NPM build script.** Something went wrong when installing your Node modules or while running the `build` script. Read more about the [build process](/knowledge-base/cloud-builds) and how we determine [what build script is run](/knowledge-base/cloud-config).
+- **Failures in the Node/NPM build script.** Something went wrong when installing your Node modules or while running the `build` script. Read more about the [build process](builds.md) and how we determine [what build script is run](config.md).
 
 Cloud will report specific errors that fall into one of these categories. Some errors may require that you investigate the build logs, which are also available in the deployment screen; the step that failed will display a red <span style="color: red;">X</span>.
 

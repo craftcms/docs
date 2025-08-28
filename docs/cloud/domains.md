@@ -12,7 +12,7 @@ Every environment in your Cloud project gets a unique preview domain. Preview do
 project-my-handle-environment-b62dec18.preview.craft.cloud
 ```
 
-To find your preview domain, click the globe icon next to any environment in the project navigation menu. If you don't see this icon, it’s likely because it hasn’t been [deployed](/knowledge-base/cloud-deployments) yet!
+To find your preview domain, click the globe icon next to any environment in the project navigation menu. If you don't see this icon, it’s likely because it hasn’t been [deployed](deployments.md) yet!
 
 ::: tip
 Changing the handle of a project or environment may take a moment to update in our routing layer. If you have other services that rely on a consistent hostname (say, for the delivery of webhooks), consider temporarily pointing a [subdomain](#subdomains) at the environment.
@@ -24,7 +24,7 @@ In your Cloud project, navigate to **Domains**, then click **New domain**.
 
 Provide the root domain you wish to add, and select an environment, if you want to tie it to one right away. You aren’t required to point the new root domain at Cloud, but any custom domains you do connect must go through a brief verification process before Cloud will respond to requests on it (or any subdomain thereof).
 
-Verifying a domain does _not_ automatically start [routing traffic](#route-traffic) to the selected environment. Conversely, you may elect to perform [real-time validation](/knowledge-base/cloud-for-cloudflare-users#real-time-validation) by immediately sending traffic to Cloud.
+Verifying a domain does _not_ automatically start [routing traffic](#route-traffic) to the selected environment. Conversely, you may elect to perform [real-time validation](users.md#real-time-validation) by immediately sending traffic to Cloud.
 
 ::: warning
 A `www` [subdomain](#subdomains) is not automatically created for you. You must add it explicitly, if you wish to use it in addition to the bare domain. See the [redirection](#redirection) section to learn about normalizing access via `www` or non-`www` URLs.
@@ -50,7 +50,7 @@ DNS records are cached for different amounts of time by different providers arou
 Heroku has a great [guide](https://devcenter.heroku.com/articles/custom-domains) that covers some of this technology, in the same context. If you are unfamiliar with DNS, consider starting with the [domain name glossary](https://devcenter.heroku.com/articles/custom-domains#domain-name-glossary) section, or flipping through Cloudflare’s [How DNS Works](https://www.cloudflare.com/learning/dns/what-is-dns/) series!
 :::
 
-To send traffic from a verified domain to your Cloud project, add the records below. Keep in mind that making changes to your DNS *can* result in downtime. Read more about how to [prepare for going live](/knowledge-base/cloud-launch-checklist).
+To send traffic from a verified domain to your Cloud project, add the records below. Keep in mind that making changes to your DNS *can* result in downtime. Read more about how to [prepare for going live](checklist.md).
 
 The preferred way of routing traffic to Cloud is via a `CNAME` record:
 
@@ -109,7 +109,7 @@ Every Cloud project includes one root domain, and as many subdomains as you need
 
 ## Redirection
 
-After adding your apex domain _and_ a `www` subdomain, you can create a [redirection rule](/knowledge-base/cloud-redirects) that matches one or the other to ensure traffic is always served at a single address.
+After adding your apex domain _and_ a `www` subdomain, you can create a [redirection rule](redirects.md) that matches one or the other to ensure traffic is always served at a single address.
 
 ## Troubleshooting
 
@@ -124,4 +124,4 @@ Some <abbr title="Internet service provider">ISPs</abbr> cache DNS lookups more 
 
 All traffic enters Craft Cloud’s infrastructure via Cloudflare, which means it (and your projects!) are protected by enterprise-grade security features. However, this can complicate ownership and certificate verification for existing Cloudflare users who have proxying enabled on the domain’s current apex records.
 
-If you are in this situation (what Cloudflare calls [Orange-to-Orange](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)), you will need to [follow this guide](/knowledge-base/cloud-for-cloudflare-users) to validate and connect your domain.
+If you are in this situation (what Cloudflare calls [Orange-to-Orange](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)), you will need to [follow this guide](users.md) to validate and connect your domain.

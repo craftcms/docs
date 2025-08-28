@@ -1,8 +1,8 @@
 # Assets
 
-Each of the environments in your Craft Cloud projects come with a generous [storage quota](/knowledge-base/cloud-quotas).
+Each of the environments in your Craft Cloud projects come with a generous [storage quota](quotas.md).
 
-To take advantage of that storage (and other features, like the built-in CDN and [image transform](#transforms) service), you must use the [Cloud extension](/knowledge-base/cloud-extension)’s built-in filesystem type.
+To take advantage of that storage (and other features, like the built-in CDN and [image transform](#transforms) service), you must use the [Cloud extension](extension.md)’s built-in filesystem type.
 
 ## New Filesystems
 
@@ -91,7 +91,7 @@ aws s3 sync --delete s3://{project-uuid}/{environment-uuid}/assets/ ./web/craft-
 ```
 
 ::: tip
-For projects with large asset libraries (especially those over our soft 15GB per-environment [limit](/knowledge-base/cloud-quotas)), consider reaching out to us for recommendations about importing directly from other platforms. Credentials last for 1 hour—but as long as you use the `sync` command, it will be able to pick up where it left off.
+For projects with large asset libraries (especially those over our soft 15GB per-environment [limit](quotas.md)), consider reaching out to us for recommendations about importing directly from other platforms. Credentials last for 1 hour—but as long as you use the `sync` command, it will be able to pick up where it left off.
 :::
 
 ### Copying Assets Between Environments
@@ -100,9 +100,9 @@ Automated environment duplication/synchronization is a planned feature of Cloud.
 
 ## Transforms
 
-The [Cloud extension](/knowledge-base/cloud-extension) transparently enhances Craft’s [asset transform](/docs/5.x/development/image-transforms.html) APIs by generating and caching images at the edge, using special pre-signed URLs. Existing transforms will work seamlessly on Cloud, whether predefined via [named transforms](/docs/5.x/development/image-transforms.html#applying-named-transforms-to-images) and as [ad-hoc transforms](/docs/5.x/development/image-transforms.html#defining-transforms-in-your-templates) (except for one [limitation](#limitations), noted below).
+The [Cloud extension](extension.md) transparently enhances Craft’s [asset transform](/docs/5.x/development/image-transforms.html) APIs by generating and caching images at the edge, using special pre-signed URLs. Existing transforms will work seamlessly on Cloud, whether predefined via [named transforms](/docs/5.x/development/image-transforms.html#applying-named-transforms-to-images) and as [ad-hoc transforms](/docs/5.x/development/image-transforms.html#defining-transforms-in-your-templates) (except for one [limitation](#limitations), noted below).
 
-These images don’t contribute to your [storage quota](/knowledge-base/cloud-quotas), and there are no limits on the number of transforms or compute time.
+These images don’t contribute to your [storage quota](quotas.md), and there are no limits on the number of transforms or compute time.
 
 ### Content Negotiation
 

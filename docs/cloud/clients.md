@@ -8,14 +8,14 @@ Craft Cloud is part of Craft Console, so features that support teams like multi-
 Either way, taking advantage of organizations is key to collaborating on Cloud.
 
 ::: tip
-Our [Managing a Craft Cloud Project](/knowledge-base/cloud-project-management) article covers the project lifecycle in greater detail.
+Our [Managing a Craft Cloud Project](management.md) article covers the project lifecycle in greater detail.
 :::
 
 ## Payment Methods
 
 An organization’s owner is responsible for maintaining its payment methods. A valid payment method is required to start a Cloud project; whenever a monthly or yearly bill is due, the organization’s primary payment method is automatically charged.
 
-Organization owners will be notified if there are [billing issues](/knowledge-base/cloud-billing) any of its Cloud projects.
+Organization owners will be notified if there are [billing issues](billing.md) any of its Cloud projects.
 
 ## Transferring Projects
 

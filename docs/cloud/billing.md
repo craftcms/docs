@@ -8,7 +8,7 @@ Like the Plugin Store and Developer Support plans, all Craft Cloud payments are 
 
 You must have a valid payment method on file to start a seven-day trial of Craft Cloud, but you will not be billed until the end of the trial. If you cancel prior to your first bill, you will not be charged for any services.
 
-Trials provide access to all Cloud features, except for custom domains. Connecting a custom domain will prompt you to skip the trial and immediately start a subscription. Either way, you always have access to a [preview domain](/knowledge-base/cloud-domains).
+Trials provide access to all Cloud features, except for custom domains. Connecting a custom domain will prompt you to skip the trial and immediately start a subscription. Either way, you always have access to a [preview domain](domains.md).
 
 ## Personal Accounts + Organizations
 

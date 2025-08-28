@@ -1,7 +1,7 @@
 Moving a Project to Cloud
 
 ::: tip
-Be sure and review our [Getting Started with Craft Cloud](/knowledge-base/cloud-getting-started) guide!
+Be sure and review our [Getting Started with Craft Cloud](started.md) guide!
 :::
 
 This guide collects information from multiple other articles about making an existing project compatible with Craft Cloud.
@@ -16,26 +16,26 @@ The first thing we’ll tackle is updates to your code and configuration.
 
 ### Key Requirements
 
-Your Craft project must already be running Craft {globalset:productVitals:vitalsCloudMinCraftVersion} or later to be compatible with Cloud. In addition, you will need to install the first-party [Cloud extension](/knowledge-base/cloud-extension).
+Your Craft project must already be running Craft {globalset:productVitals:vitalsCloudMinCraftVersion} or later to be compatible with Cloud. In addition, you will need to install the first-party [Cloud extension](extension.md).
 
 ### Cloud Config
 
 Cloud expects a `craft-cloud.yaml` file at the root of your repository. At a minimum, this file must contain a `php-version` key to tell Cloud what PHP runtime to use. It’s also where you’ll communicate to the builder where your Composer and Node “roots” are—if you have customized your project’s directory structure, you may need to provide additional keys in this config file.
 
-Read more about using the [Cloud config file](/knowledge-base/cloud-config).
+Read more about using the [Cloud config file](config.md).
 
 ### Filesystems
 
 Craft Cloud does not have a persistent filesystem (it is [ephemeral](/docs/5.x/reference/config/bootstrap.html#craft-ephemeral) in nature), so **Local** filesystems must be migrated to use the **Cloud** filesystem provided by the Cloud extension.
 
-We have a dedicated article about [working with assets on Cloud](/knowledge-base/cloud-assets), and a section that [specifically addresses this migration](/knowledge-base/cloud-assets#synchronizing-assets).
+We have a dedicated article about [working with assets on Cloud](assets.md), and a section that [specifically addresses this migration](assets.md#synchronizing-assets).
 
 ### Artifacts, Templates, and URLs
 
-When you deploy your site to Craft Cloud, an [automated build process](/knowledge-base/cloud-builds) takes care of generating artifacts via NPM and uploading them to our CDN. This means that they are not directly accessible in the webroot of your site—via the filesystem *or* over HTTP. See our recommendations for [handling references to those artifacts](/knowledge-base/cloud-builds#artifact-urls) in your templates.
+When you deploy your site to Craft Cloud, an [automated build process](builds.md) takes care of generating artifacts via NPM and uploading them to our CDN. This means that they are not directly accessible in the webroot of your site—via the filesystem *or* over HTTP. See our recommendations for [handling references to those artifacts](builds.md#artifact-urls) in your templates.
 
 ::: tip
-You have control over the build process via [the `craft-cloud.yaml` config file](/knowledge-base/cloud-config).
+You have control over the build process via [the `craft-cloud.yaml` config file](config.md).
 :::
 
 You do _not_ need to set a `@web` [alias](https://craftcms.com/docs/5.x/configure.html#aliases) on Cloud, as all traffic to your site will arrive via our gateway, which sets and validates headers to prevent common security issues.
@@ -56,25 +56,25 @@ This section is primarily concerned with importing your existing content to Craf
 
 ### Assets
 
-Once you’ve [converted your asset filesystems](/knowledge-base/cloud-assets#converting-a-filesystem) in a local environment, you must [upload the assets](/knowledge-base/cloud-assets#synchronizing-assets) within them.
+Once you’ve [converted your asset filesystems](assets.md#converting-a-filesystem) in a local environment, you must [upload the assets](assets.md#synchronizing-assets) within them.
 
 ### Database
 
-Unlike assets, your database does not require any configuration changes—simply choose the database driver and version matching your current infrastructure when [setting up your Cloud project](/knowledge-base/cloud-getting-started). Keep in mind (per the above [application config](#application-config) section) that changes to your database connection component may be overridden when running on Cloud. A `db.php` file is not required for Craft Cloud; we recommend setting all connection information for local development (or other non-Cloud environments) via environment variables.
+Unlike assets, your database does not require any configuration changes—simply choose the database driver and version matching your current infrastructure when [setting up your Cloud project](started.md). Keep in mind (per the above [application config](#application-config) section) that changes to your database connection component may be overridden when running on Cloud. A `db.php` file is not required for Craft Cloud; we recommend setting all connection information for local development (or other non-Cloud environments) via environment variables.
 
-Our [Craft Cloud Databases](/knowledge-base/cloud-databases) article contains sections on importing and exporting data.
+Our [Craft Cloud Databases](databases.md) article contains sections on importing and exporting data.
 
 ::: warning
-Craft Cloud does not support the `tablePrefix` setting. See [this section](/knowledge-base/cloud-databases#table-prefixes) for information about renaming the tables in your project.
+Craft Cloud does not support the `tablePrefix` setting. See [this section](databases.md#table-prefixes) for information about renaming the tables in your project.
 :::
 
 ## Deployment
 
-Once you’ve made the required code changes and imported your content, run a [deployment](/knowledge-base/cloud-deployment). While it’s a good idea to test the updates locally, you do *not* need to deploy the updates to your legacy infrastructure—Cloud will apply any pending [Project Config](/docs/5.x/system/project-config.html) updates (say, from changing your filesystems’ configuration) at the end of the deployment.
+Once you’ve made the required code changes and imported your content, run a [deployment](deployment.md). While it’s a good idea to test the updates locally, you do *not* need to deploy the updates to your legacy infrastructure—Cloud will apply any pending [Project Config](/docs/5.x/system/project-config.html) updates (say, from changing your filesystems’ configuration) at the end of the deployment.
 
 ### Preview Domains
 
-Your project automatically gets a [preview domain](/knowledge-base/cloud-domains#preview-domains) to validate your configuration and content before going live.
+Your project automatically gets a [preview domain](domains.md#preview-domains) to validate your configuration and content before going live.
 
 ## Launch
 
@@ -84,14 +84,14 @@ When it comes time to launch, there are likely three steps you’ll need to take
 2. Import new content;
 3. Reapply migrations and project config;
 
-Read about [using custom domains with Craft Cloud](/knowledge-base/cloud-domains) to prepare for the required DNS changes, or review a more complete [launch checklist](/knowledge-base/cloud-launch-checklist).
+Read about [using custom domains with Craft Cloud](domains.md) to prepare for the required DNS changes, or review a more complete [launch checklist](checklist.md).
 
 The exact process will differ based on your project’s tolerance of downtime—but generally, it’s a good idea to put your existing site into [maintenance mode](/5.x/reference/cli.html#off), export and re-import the database (and upload new assets), then run a final deployment.
 
 ::: tip
-The AWS S3 CLI’s `sync` command is extremely useful for [uploading](/knowledge-base/cloud-assets) only new and modified assets. Consider running it periodically in your local environment to keep your content up-to-date—it also works when _uploading_ large asset libraries to your Cloud environment!
+The AWS S3 CLI’s `sync` command is extremely useful for [uploading](assets.md) only new and modified assets. Consider running it periodically in your local environment to keep your content up-to-date—it also works when _uploading_ large asset libraries to your Cloud environment!
 :::
 
-With your latest code and content on Cloud, [disable maintenance mode](/docs/5.x/reference/cli.html#on) and [update your DNS](/knowledge-base/cloud-domains) to point your live domain at our infrastructure!
+With your latest code and content on Cloud, [disable maintenance mode](/docs/5.x/reference/cli.html#on) and [update your DNS](domains.md) to point your live domain at our infrastructure!
 
-More information about launching projects on Cloud is available in the [Going Live](/knowledge-base/cloud-launch-checklist) article.
+More information about launching projects on Cloud is available in the [Going Live](checklist.md) article.

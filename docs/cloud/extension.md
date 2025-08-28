@@ -4,7 +4,7 @@ To run a project on Craft Cloud, it must require our first-party `craftcms/cloud
 
 In technical terms, the Cloud extension is a self-bootstrapping Yii module. Practically, it provides…
 
-- …a special [filesystem type](/knowledge-base/cloud-assets) that interfaces seamlessly with Cloud’s storage solution;
+- …a special [filesystem type](assets.md) that interfaces seamlessly with Cloud’s storage solution;
 - …automatic and reliable configuration of your project’s database connection, cache, queue, and other application components;
 - …[Twig helpers](/docs/5.x/reference/twig/functions.html) for generating [special URLs](#resource-uRLs);
 
@@ -24,13 +24,13 @@ php craft setup/cloud
 
 If you would prefer to use Composer directly, require the `craftcms/cloud` package. After installation, perform one-time setup by running `php craft cloud/setup`.
 
-You will be prompted for some information about your project, and the wizard will write a [Craft Cloud configuration file](/knowledge-base/cloud-config) to the project’s root.
+You will be prompted for some information about your project, and the wizard will write a [Craft Cloud configuration file](config.md) to the project’s root.
 
 ## Special Features
 
 ### Cloud Filesystem
 
-We recommend that new projects use the [Craft Cloud filesystem type](/knowledge-base/cloud-assets) for all [asset volumes](/docs/5.x/reference/element-types/assets.html). Other remote filesystem types may be compatible with Cloud, but will *not* support automatic fallback to your local disk, in development environments.
+We recommend that new projects use the [Craft Cloud filesystem type](assets.md) for all [asset volumes](/docs/5.x/reference/element-types/assets.html). Other remote filesystem types may be compatible with Cloud, but will *not* support automatic fallback to your local disk, in development environments.
 
 ### Application Components
 
@@ -44,7 +44,7 @@ To conserve resources, Cloud’s compute layer doesn’t serve *any* static asse
 
 #### Build Artifacts
 
-Other static assets in your web root will also be uploaded to our CDN at build time. See our article on [build artifacts](/knowledge-base/cloud-builds#artifact-urls) for more information about generating URLs for these files.
+Other static assets in your web root will also be uploaded to our CDN at build time. See our article on [build artifacts](builds.md#artifact-urls) for more information about generating URLs for these files.
 
 ### Additional Configuration
 

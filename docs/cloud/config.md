@@ -2,10 +2,10 @@
 
 Craft Cloud looks for a `craft-cloud.yaml` file in the root of the connected repository.
 
-This file has a specific syntax (YAML) and [schema](#config-schema) that determines a few things about how your project is [built](/knowledge-base/cloud-builds), [deployed](/knowledge-base/cloud-deployment), and served. If there are problems with your config file, the deployment will fail with an error describing the issue.
+This file has a specific syntax (YAML) and [schema](#config-schema) that determines a few things about how your project is [built](builds.md), [deployed](deployment.md), and served. If there are problems with your config file, the deployment will fail with an error describing the issue.
 
 ::: tip
-When you run `php craft setup/cloud` to install the [Cloud extension](/knowledge-base/cloud-extension), it will offer to generate a config file for you, then walk you through setting PHP and Node versions based on your project’s state.
+When you run `php craft setup/cloud` to install the [Cloud extension](extension.md), it will offer to generate a config file for you, then walk you through setting PHP and Node versions based on your project’s state.
 :::
 
 ## Config Schema
@@ -53,12 +53,12 @@ Expanding on the above:
 - `webroot` — If your project uses a different directory for the public web root, you should specify it here. This is relative to `app-path`. (Default: `web`)
 
 ::: tip
-For the latest information on supported PHP and Node versions, see our [Cloud Services and Compatibility](/knowledge-base/cloud-compatibility) article.
+For the latest information on supported PHP and Node versions, see our [Cloud Services and Compatibility](compatibility.md) article.
 :::
 
 ### Redirects and Rewrites
 
-In addition to the above runtime and build settings, you can configure any number of [redirection and rewrite rules](/knowledge-base/cloud-redirects). These rules are evaluated _before_ the request reaches your Craft application, and can be used to normalize URLs, proxy assets or artifacts, redirect secondary domains, or map legacy URLs to your new site.
+In addition to the above runtime and build settings, you can configure any number of [redirection and rewrite rules](redirects.md). These rules are evaluated _before_ the request reaches your Craft application, and can be used to normalize URLs, proxy assets or artifacts, redirect secondary domains, or map legacy URLs to your new site.
 
 ### Directory Structure
 
@@ -71,7 +71,7 @@ If you have moved your `composer.json` or `package.json` into subdirectories, yo
 You can update `craft-cloud.yaml` any time. The settings will be validated and used during the next deployment. If you want to test a setting, commit the changes to a branch, and deploy it to another environment!
 
 ::: tip
-If you encounter an error at build time, check out our [Troubleshooting](/knowledge-base/cloud-troubleshooting) guide.
+If you encounter an error at build time, check out our [Troubleshooting](troubleshooting.md) guide.
 :::
 
 ## Headless and Decoupled Front-Ends

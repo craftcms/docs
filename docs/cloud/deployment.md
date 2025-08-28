@@ -8,7 +8,7 @@ When you [trigger a deployment](#deployment-triggers) (by pushing code or manual
 
 This process reflects our general [deployment and workflow recommendations](/docs/5.x/deploy.html) laid out in the documentation—but it’s all handled for you!
 
-You can review an [environment](/knowledge-base/cloud-environments)’s deployment history (and the status of any active deployments) by navigating to its **Deployments** screen.
+You can review an [environment](environments.md)’s deployment history (and the status of any active deployments) by navigating to its **Deployments** screen.
 
 ### Deployment Triggers
 
@@ -21,7 +21,7 @@ Each environment in Cloud defines its own **Deploy Trigger**, which determines w
 
 ## 1. Build Step
 
-The first thing Cloud does is assemble PHP and Node dependencies, and package them into a new function. This process is described in greater detail in our [Build Process and Artifacts](/knowledge-base/cloud-builds) article.
+The first thing Cloud does is assemble PHP and Node dependencies, and package them into a new function. This process is described in greater detail in our [Build Process and Artifacts](builds.md) article.
 
 If your project uses Node (or has unique PHP requirements), we strongly recommend familiarizing yourself with this stage of the deployment!
 

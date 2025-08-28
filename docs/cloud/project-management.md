@@ -36,4 +36,4 @@ This connection is established for your *personal* account, even if the project 
 
 Whoever sets up a project must have the correct permissions at the provider (and grant access to any additional scopes) when establishing the connection.
 
-Follow [this guide](/knowledge-base/cloud-troubleshooting) if you need to reauthorize a provider.
+Follow [this guide](troubleshooting.md) if you need to reauthorize a provider.

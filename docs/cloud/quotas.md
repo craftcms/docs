@@ -4,7 +4,7 @@ Every Craft Cloud project comes with generous resource quotas and simple, predic
 
 ## Environments
 
-Projects are given three [environments](/knowledge-base/cloud-environments), one of which may be selected as the [production environment](/knowledge-base/cloud-environments#production-environment). You cannot currently purchase additional environments, but you may delete and recreate them whenever you need.
+Projects are given three [environments](environments.md), one of which may be selected as the [production environment](environments.md#production-environment). You cannot currently purchase additional environments, but you may delete and recreate them whenever you need.
 
 ## Storage
 
@@ -19,12 +19,12 @@ There are no limits on page views, database size, inbound transfer, or the numbe
 
 Outbound transfer from your application and asset storage bucket are metered.
 
-If a response can be served from our edge (like a [statically-cached](/knowledge-base/cloud-static-caching) HTML document, an [image transform](https://craftcms.com/knowledge-base/cloud-assets#transforms), or any previously-requested asset or [build artifact](/knowledge-base/cloud-builds)), it does _not_ count toward your monthly bandwidth:
+If a response can be served from our edge (like a [statically-cached](caching.md) HTML document, an [image transform](https://craftcms.comassets.md#transforms), or any previously-requested asset or [build artifact](builds.md)), it does _not_ count toward your monthly bandwidth:
 
 - **Team** projects get 250GB of transfer per month, shared between environments.
 - **Pro** projects get 500GB of transfer per month, shared between environments.
 
-All transfer from our edge and CDN to your clients is free. Most projects will not need to do anything to take advantage of our edge cache, but you can optimize your cache-hit ratio by following our [static caching guide](/knowledge-base/cloud-static-caching), and limit asset egress by creating thoughtful [named asset transforms](/docs/5.x/development/image-transforms.html).
+All transfer from our edge and CDN to your clients is free. Most projects will not need to do anything to take advantage of our edge cache, but you can optimize your cache-hit ratio by following our [static caching guide](caching.md), and limit asset egress by creating thoughtful [named asset transforms](/docs/5.x/development/image-transforms.html).
 
 The following table shows some common resource sizes, and an approximation of the number of uncached requests that fit within the **Team** plan’s bandwidth quota:
 
@@ -42,7 +42,7 @@ Keep in mind that each image will only be loaded from the origin _once_ unless t
 
 ## Domains
 
-One [custom domain](/knowledge-base/cloud-domains) is included with every project. You may add as many subdomains as you need, but additional domains are billed at $20 per month. Adding a domain part way through a billing period immediately bills a prorated amount to the payment method on file.
+One [custom domain](domains.md) is included with every project. You may add as many subdomains as you need, but additional domains are billed at $20 per month. Adding a domain part way through a billing period immediately bills a prorated amount to the payment method on file.
 
 ## Requests + Responses
 
@@ -56,7 +56,7 @@ Build artifacts are also _not_ subject to this limit, as they are served from ou
 
 ## Builds and Commands
 
-You can [deploy](/knowledge-base/cloud-deployment) as often as you like. There are no limits on the total number of “build minutes” per billing period, but each [build](/knowledge-base/cloud-builds) must complete within **15 minutes**.
+You can [deploy](deployment.md) as often as you like. There are no limits on the total number of “build minutes” per billing period, but each [build](builds.md) must complete within **15 minutes**.
 
 A brand new [starter project](/knowledge-base/using-the-starter-project) will typically deploy in about 90 seconds. Projects that use many plugins or have complex Node build steps will naturally take more time—long-running processes like automated tests may need to be offloaded to a different CI pipeline.
 

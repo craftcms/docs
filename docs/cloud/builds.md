@@ -1,20 +1,20 @@
 # Build Pipeline and Artifacts
 
-As part of every [deployment](/knowledge-base/cloud-deployment), Craft Cloud assembles all the code and configuration required to run your PHP application and build front-end assets.
+As part of every [deployment](deployment.md), Craft Cloud assembles all the code and configuration required to run your PHP application and build front-end assets.
 
-Everything about the build process is dictated by your repository, and [the `craft-cloud.yaml` config file](/knowledge-base/cloud-config).
+Everything about the build process is dictated by your repository, and [the `craft-cloud.yaml` config file](config.md).
 
 ## PHP
 
-Your project’s `composer.json` and `composer.lock` files determine what PHP packages are installed. By default, Cloud expects both files to be at the root of your repository—but your Composer root can be [customized](/knowledge-base/cloud-config#config-schema). If either file is missing, the build will fail.
+Your project’s `composer.json` and `composer.lock` files determine what PHP packages are installed. By default, Cloud expects both files to be at the root of your repository—but your Composer root can be [customized](config.md#config-schema). If either file is missing, the build will fail.
 
 Cloud installs packages by running `composer install`.
 
 ## Node
 
-Similarly, Cloud looks for `package.json` and `package-lock.json` files at the root of your repository (or at a path set in your [config file](/knowledge-base/cloud-config#config-schema)). Unlike the PHP build step, if `package-lock.json` is *missing*, this step is skipped and the deployment will continue.
+Similarly, Cloud looks for `package.json` and `package-lock.json` files at the root of your repository (or at a path set in your [config file](config.md#config-schema)). Unlike the PHP build step, if `package-lock.json` is *missing*, this step is skipped and the deployment will continue.
 
-To enable the Node build step, you must set a `node-version` in your [Cloud config file](/knowledge-base/cloud-config#config-schema).
+To enable the Node build step, you must set a `node-version` in your [Cloud config file](config.md#config-schema).
 
 ### Build Command
 
@@ -56,7 +56,7 @@ Within that `artifacts/` directory, the file structure of your existing artifact
 There is no need for filename-based cache-busting, as all artifact URLs will change with every build!
 :::
 
-The [Cloud extension](/knowledge-base/cloud-extension) also provides the `cloud.artifactUrl()` helper function for generating URLs to files published during your build. If you have historically used the `siteUrl()` or `url()` functions to link a stylesheet or JavaScript file (or any other static asset) in your web root, use this function instead.
+The [Cloud extension](extension.md) also provides the `cloud.artifactUrl()` helper function for generating URLs to files published during your build. If you have historically used the `siteUrl()` or `url()` functions to link a stylesheet or JavaScript file (or any other static asset) in your web root, use this function instead.
 
 Outside of Cloud, `cloud.artifactUrl()` falls back to the automatically-determined `@web` alias—and anything in your web root will resolve normally. The special `@artifactBaseUrl` alias mirrors this behavior, and can be used in Project Config—or [anywhere else that evaluates aliases](/docs/5.x/configure.html#control-panel-settings):
 
@@ -90,7 +90,7 @@ The `current` segment takes the place of a specific build ID, and will always po
 
 ### Rewriting Artifact URLs
 
-As an alternative to replacing root-relative asset references in your templates, you can create [rewrite rules](/knowledge-base/cloud-redirects) to proxy individual files (or entire directories) from the CDN:
+As an alternative to replacing root-relative asset references in your templates, you can create [rewrite rules](redirects.md) to proxy individual files (or entire directories) from the CDN:
 
 ```yml
 rewrites:
@@ -99,7 +99,7 @@ rewrites:
     destination: '{artifactBaseUrl}{request.uri}'
 ```
 
-You can also serve artifacts from an [additional domain or subdomain](/knowledge-base/cloud-domains), as a kind of white-labeled CDN:
+You can also serve artifacts from an [additional domain or subdomain](domains.md), as a kind of white-labeled CDN:
 
 ```yml
 rewrites:
@@ -133,7 +133,7 @@ If you would like to continue to support this workflow, your configuration may r
 Users of the [Twigpack](https://plugins.craftcms.com/twigpack?craft5) plugin are protected from performance impacts by its built-in cache. The [Asset Rev](https://plugins.craftcms.com/assetrev?craft5) plugin memoizes manifest files for the duration of a request, but it does _not_ cache them between requests.
 
 ::: tip
-Craft Cloud’s [static cache](/knowledge-base/cloud-static-caching) can also mitigate latency issues when interacting with remote files.
+Craft Cloud’s [static cache](caching.md) can also mitigate latency issues when interacting with remote files.
 :::
 
 ### Common Toolchains

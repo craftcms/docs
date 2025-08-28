@@ -10,7 +10,7 @@ Most of your work in Cloud will be in the context of an environment. Each enviro
 
 ### Deployments
 
-View current and past deployments, or start a new one. Read more about [deploying to Craft Cloud](/knowledge-base/cloud-deployment).
+View current and past deployments, or start a new one. Read more about [deploying to Craft Cloud](deployment.md).
 
 ### Logs
 
@@ -18,7 +18,7 @@ Review + search logs from your live app.
 
 ### Backups
 
-Create and download snapshots of your [database](/knowledge-base/cloud-databases). Backups are created nightly, and you can start a new one at-will—they’re retained for 30 days, either way.
+Create and download snapshots of your [database](databases.md). Backups are created nightly, and you can start a new one at-will—they’re retained for 30 days, either way.
 
 ### Variables
 
@@ -34,11 +34,11 @@ Every deploy also triggers a `cloud/up` command, so you’ll see those records a
 
 ### Access
 
-Get credentials to this environment’s database and [asset storage](/knowledge-base/cloud-assets). Don’t share these details with anyone!
+Get credentials to this environment’s database and [asset storage](assets.md). Don’t share these details with anyone!
 
 ### Settings
 
-Rename the environment, or change the branch it’s associated with (and when it will be [deployed](/knowledge-base/cloud-deployment)).
+Rename the environment, or change the branch it’s associated with (and when it will be [deployed](deployment.md)).
 
 ## Resources
 
@@ -46,11 +46,11 @@ Every environment gets its own database. Data is not automatically cloned from o
 
 All environments in a project share a single asset storage bucket, but they are separated into top-level directories named after their environment’s ID (or, more accurately, its UUID).
 
-Cloud generates a [preview domain](/knowledge-base/cloud-domains) for each environment—or allows you to connect a [custom domain](/knowledge-base/cloud-domains#adding-a-domain) or [subdomain](/knowledge-base/cloud-domains#subdomains) thereof.
+Cloud generates a [preview domain](domains.md) for each environment—or allows you to connect a [custom domain](domains.md#adding-a-domain) or [subdomain](domains.md#subdomains) thereof.
 
 ## Environment Settings
 
-When you create an environment, you’ll give it a name, select a Git branch, and choose a [deployment trigger](/knowledge-base/cloud-deployment#deployment-triggers). All three options can be changed any time from the environment’s **Settings** screen.
+When you create an environment, you’ll give it a name, select a Git branch, and choose a [deployment trigger](deployment.md#deployment-triggers). All three options can be changed any time from the environment’s **Settings** screen.
 
 ## Production Environment
 

@@ -42,7 +42,7 @@ If you do need to customize the delivery of binary data, Cloud’s web runtime i
 
 ### Asset Filesystems
 
-While we recommend that projects on Cloud use our first-party [Cloud filesystem](/knowledge-base/cloud-assets), it is not a requirement. Plugins that provide filesystem types may need to implement a custom uploader to send binary files directly to the storage provider (rather than POST them to the Craft application itself).
+While we recommend that projects on Cloud use our first-party [Cloud filesystem](assets.md), it is not a requirement. Plugins that provide filesystem types may need to implement a custom uploader to send binary files directly to the storage provider (rather than POST them to the Craft application itself).
 
 The Cloud filesystem’s [client-side](https://github.com/craftcms/cloud-extension-yii2/blob/2.x/src/web/assets/uploader/UploaderAsset.php) and [server-side](https://github.com/craftcms/cloud-extension-yii2/blob/2.x/src/controllers/AssetsController.php) code is available for reference.
 
@@ -64,7 +64,7 @@ Doing so will take advantage of the existing volumes and filesystems, while stil
 
 ### Asset Bundles
 
-Craft Cloud pre-publishes all known asset bundles to our CDN at [build-time](/knowledge-base/cloud-builds) to conserve compute resources.
+Craft Cloud pre-publishes all known asset bundles to our CDN at [build-time](builds.md) to conserve compute resources.
 
 Any static assets your plugin provides to the control panel or front-end must be encapsulated in an [Asset Bundle](/docs/5.x/extend/asset-bundles.html), and its `sourcePath` must begin with your plugin’s predefined alias. To register an asset bundle, call `Craft::$app->getView()->registerAssetBundle($myBundle)` from a controller or template. Publishing one-off or ad-hoc assets at runtime is **not** supported on Cloud.
 
@@ -75,7 +75,7 @@ Asset bundles have some additional requirements:
 
 ### Sessions + CSRF
 
-To help support Cloud’s [static caching](/knowledge-base/cloud-static-caching) system, avoid interacting with the session unnecessarily, during _site_ requests.
+To help support Cloud’s [static caching](caching.md) system, avoid interacting with the session unnecessarily, during _site_ requests.
 
 Always use the [`csrfInput()` Twig function](/docs/5.x/reference/twig/functions.html#csrfinput) when rendering front-end forms to maintain compatibility with Craft’s [`asyncCsrfInputs` config setting](/docs/5.x/reference/config/general.html#asynccsrfinputs) (4.9.0+). _Building an input manually (or using `craft\web\Request::getCsrfToken()` directly) can leak one user’s CSRF tokens to another!_
 
@@ -85,9 +85,9 @@ Plugins that already embrace our existing [coding guidelines and best practices]
 
 In addition, these tips can help avoid hiccups when your plugins are deployed to Craft Cloud:
 
-- Implement batched jobs if your workload is [apt to exceed 15 minutes](/knowledge-base/cloud-quotas). It is often better to spawn many small jobs than a single long-running one.
+- Implement batched jobs if your workload is [apt to exceed 15 minutes](quotas.md). It is often better to spawn many small jobs than a single long-running one.
 - Don’t set cookies unless absolutely necessary—like in response to a user action.
-  - If possible, register JavaScript to fetch CSRF tokens *asynchronously*. Using `{{ csrfInput() }}` in a template outside the control panel will immediately set a cookie and prevent [static caching](/knowledge-base/cloud-static-caching).
+  - If possible, register JavaScript to fetch CSRF tokens *asynchronously*. Using `{{ csrfInput() }}` in a template outside the control panel will immediately set a cookie and prevent [static caching](caching.md).
 
 ## Publishing Your Plugin
 
