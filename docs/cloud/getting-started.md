@@ -58,10 +58,10 @@ With your project running locally, it’s the perfect time to collect a few thin
 
 ## Your First Cloud Project
 
-If you haven’t already, create a [Craft Console](/knowledge-base/what-is-craft-console) account and add a [payment method](/knowledge-base/craft-console-organizations#managing-payment-information).
+If you haven’t already, create a [Craft Console](kb:what-is-craft-console) account and add a [payment method](kb:craft-console-organizations#managing-payment-information).
 
 ::: tip
-Cloud projects can be created from your personal Console account, or within an [organization](/knowledge-base/craft-console-organizations), but we strongly recommend using organizations whenever possible—especially for businesses and agencies that can benefit from delegated access.
+Cloud projects can be created from your personal Console account, or within an [organization](kb:craft-console-organizations), but we strongly recommend using organizations whenever possible—especially for businesses and agencies that can benefit from delegated access.
 :::
 
 From the **Cloud** tab, click **New Project**. Select from the available git providers (or connect a new one), then choose the repository your Craft project was pushed to, in the previous step. Don’t see your repo? Try [one of these troubleshooting tips](troubleshooting.md#repo-not-visible).

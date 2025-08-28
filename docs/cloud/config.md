@@ -64,7 +64,7 @@ In addition to the above runtime and build settings, you can configure any numbe
 
 Multiple settings influence how Cloud locates key files in your project. The defaults agree with our official [starter project](https://github.com/craftcms/craft).
 
-If you have moved your `composer.json` or `package.json` into subdirectories, you will need to specify an `app-path` or `node-path`, respectively. Similarly, [changing your web root](/knowledge-base/moving-craft-files) will require setting a `webroot` value, unless it remains below `app-path`, in a directory named `web`.
+If you have moved your `composer.json` or `package.json` into subdirectories, you will need to specify an `app-path` or `node-path`, respectively. Similarly, [changing your web root](kb:moving-craft-files) will require setting a `webroot` value, unless it remains below `app-path`, in a directory named `web`.
 
 ## Changing Settings
 

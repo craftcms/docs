@@ -16,7 +16,7 @@ Payment methods for personal accounts and organizations are separate. You will o
 
 **All Cloud projects are billed to the primary payment method on the account or organization it was created in.**
 
-Read more about [managing payment methods](/knowledge-base/craft-console-organizations#managing-payment-information) on Craft Console.
+Read more about [managing payment methods](kb:craft-console-organizations#managing-payment-information) on Craft Console.
 
 ## Billing History
 
@@ -51,7 +51,7 @@ Please email <support@craftcms.com> or use our [contact form](https://craftcms.c
 We will notify you as soon as we detect problems with the payment method on file, and prior to any automated changes in your project’s status or availability. Set up a new payment method as soon as possible to avoid service disruptions!
 
 ::: tip
-All billing-related communication will be sent from notifications@craft.cloud. If your project is managed within a Craft Console [organization](/knowledge-base/craft-console-organizations), all its owners will be notified of billing issues.
+All billing-related communication will be sent from notifications@craft.cloud. If your project is managed within a Craft Console [organization](kb:craft-console-organizations), all its owners will be notified of billing issues.
 :::
 
 **Keep a valid payment method on file and monitor the inbox associated with your Craft Console account to avoid billing issues.** We strongly recommend using [organizations](kb:craft-console-organizations) for Craft Cloud projects—adding a second owner ensures that critical billing notifications are sent to users that can act on them.

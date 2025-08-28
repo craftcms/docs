@@ -8,7 +8,7 @@ This guide collects information from multiple other articles about making an exi
 
 Most projects will *not* need any special treatment, and will work with minimal configuration—just like a new project. Heavily-customized projects (including those with a non-standard [directory structure](/docs/5.x/system/directory-structure.html)) may require additional auditing or configuration.
 
-Projects based on our official Composer [starter project](/knowledge-base/using-the-starter-project) tend to enjoy a minimally disruptive migration process, but it’s still a good idea to fully review this document and the resources it links to.
+Projects based on our official Composer [starter project](kb:using-the-starter-project) tend to enjoy a minimally disruptive migration process, but it’s still a good idea to fully review this document and the resources it links to.
 
 ## Code + Configuration
 

@@ -56,7 +56,7 @@ In addition, we automatically set properties on the `db` component via [environm
 
 ### Project Structure
 
-If your project has a different directory structure than our official [starter project](/knowledge-base/using-the-starter-project), you may need to set some additional keys in your [Cloud config file](config.md). This includes the `webroot` and other `*-path` settings.
+If your project has a different directory structure than our official [starter project](kb:using-the-starter-project), you may need to set some additional keys in your [Cloud config file](config.md). This includes the `webroot` and other `*-path` settings.
 
 ## Workflow
 

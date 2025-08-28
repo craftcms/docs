@@ -1,6 +1,6 @@
 # Managing Projects
 
-Craft Cloud projects are always created via [Craft Console](/knowledge-base/what-is-craft-console). You can start projects with your [personal account](/knowledge-base/craft-console-organizations#individual-private-accounts), or within an [organization](/knowledge-base/craft-console-organizations#organizations).
+Craft Cloud projects are always created via [Craft Console](kb:what-is-craft-console). You can start projects with your [personal account](kb:craft-console-organizations#individual-private-accounts), or within an [organization](kb:craft-console-organizations#organizations).
 
 We generally recommend organizations for Cloud projects, as they support delegated access and other features that underpin safe collaboration.
 
@@ -8,7 +8,7 @@ We generally recommend organizations for Cloud projects, as they support delegat
 
 Log in to your Craft Console account, then click **Cloud** in the main navigation. If this is your first project, you’ll see a welcome screen and a **New project** button; existing Cloud users will see a list of current projects.
 
-Use the menu in the upper-right corner to switch between your personal account and the organizations you are a member of. You must have a [payment method](/knowledge-base/craft-console-organizations#managing-payment-information) on file (in the current account context) to start a Cloud trial.
+Use the menu in the upper-right corner to switch between your personal account and the organizations you are a member of. You must have a [payment method](kb:craft-console-organizations#managing-payment-information) on file (in the current account context) to start a Cloud trial.
 
 Within an organization, only owners and administrators can create projects. If you don’t have adequate permissions, get in touch with the person who created the organization.
 
@@ -26,7 +26,7 @@ Projects are billed to the primary payment method on file for the personal accou
 
 ### Inviting a User
 
-Read about [inviting users](/knowledge-base/craft-console-organizations#inviting-members-to-an-organization) in our Using Organizations article.
+Read about [inviting users](kb:craft-console-organizations#inviting-members-to-an-organization) in our Using Organizations article.
 
 ## Connecting a Repository
 

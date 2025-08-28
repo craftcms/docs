@@ -1,6 +1,6 @@
 # Working with Clients
 
-Craft Cloud is part of Craft Console, so features that support teams like multi-user [organizations](/knowledge-base/craft-console-organizations) and access control are built in:
+Craft Cloud is part of Craft Console, so features that support teams like multi-user [organizations](kb:craft-console-organizations) and access control are built in:
 
 - As a *developer* or agency, you can create organizations and projects on behalf of clients;
 - As a *client*, you can invite your development partner to an organization and let them configure a project;

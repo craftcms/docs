@@ -12,13 +12,13 @@ A link to the status page is available in the footer of every page on <craftcms.
 
 ### Where can I find more information on Craft Cloud?
 
-The [Knowledge Base](/knowledge-base/cloud) is the best place to find answers to your Cloud questions—in particular, our [Getting Started](started.md) guide and the [Troubleshooting Common Problems on Craft Cloud](troubleshooting.md) are pathways into many platform concepts.
+The [Knowledge Base](kb:cloud) is the best place to find answers to your Cloud questions—in particular, our [Getting Started](started.md) guide and the [Troubleshooting Common Problems on Craft Cloud](troubleshooting.md) are pathways into many platform concepts.
 
 If you have questions about our software products, check out the [Craft CMS](/docs/5.x) or [Craft Commerce](/docs/commerce/5.x) documentation.
 
 ### How do I get support for my Craft Cloud project?
 
-Your Craft Cloud subscription entitles you to complementary [developer support](/support-services)! Start a new conversation from our [contact page](/contact?whatCanWeHelpYouWith=Support) using the email associated with your [Craft Console](/knowledge-base/what-is-craft-console) account, or email us directly at <{globalset:productVitals:custom_cloudSupportEmail}>.
+Your Craft Cloud subscription entitles you to complementary [developer support](/support-services)! Start a new conversation from our [contact page](/contact?whatCanWeHelpYouWith=Support) using the email associated with your [Craft Console](kb:what-is-craft-console) account, or email us directly at <{globalset:productVitals:custom_cloudSupportEmail}>.
 
 ### How fast are support response times?
 
@@ -141,7 +141,7 @@ Check out our [migration guide](projects.md)! As long as you are using Craft CMS
 
 ### How does billing work in Craft Cloud?
 
-Craft Cloud plans require a valid payment method on file in your Craft Console account or [organization](/knowledge-base/craft-console-organizations#managing-payment-information). Monthly and yearly plans are available.
+Craft Cloud plans require a valid payment method on file in your Craft Console account or [organization](kb:craft-console-organizations#managing-payment-information). Monthly and yearly plans are available.
 
 Read more about [billing on Craft Cloud](billing.md).
 
