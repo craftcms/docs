@@ -40,6 +40,7 @@ module.exports = {
     docSets: [
       require("./sets/craft-cms"),
       require("./sets/craft-commerce"),
+      require("./sets/craft-cloud"),
       require("./sets/craft-nitro"),
       require("./sets/getting-started-tutorial")
     ],
@@ -53,7 +54,7 @@ module.exports = {
     prevLinks: true,
     searchMaxSuggestions: 10,
     nav: [
-      { text: "Knowlege Base", link: "https://craftcms.com/knowledge-base" }
+      { text: "Knowledge Base", link: "https://craftcms.com/knowledge-base" }
     ],
     codeLanguages: {
       twig: "Twig",
