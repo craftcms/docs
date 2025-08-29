@@ -243,4 +243,4 @@ A `MISS` value on the other hand can mean two things:
 
 Of course, every page must be requested from the origin at least once for it to be present in the cache—so a `MISS` is not always indicative of a problem! If you observe repeated misses, you may need to audit your templates for use [features that involve the session and cookies](#session-cookies)—the most common offenders will result in a `Set-Cookie` header being sent.
 
-It's important to note that these conditions only apply to requests that would be served by Cloud’s compute layer. Requests for assets (including transforms) also go through our edge, but are governed by different rules and typically out of your control.
+It’s important to note that these conditions only apply to requests that would be served by Cloud’s compute layer. Requests for assets (including transforms) also go through our edge, but are governed by different rules and typically out of your control.

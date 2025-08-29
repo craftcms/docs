@@ -27,7 +27,7 @@ These settings are optional, and should only be used when your project is incomp
 # Choose a major version of Node.js to use in your build step.
 node-version: '18'
 
-# Directory NPM commands will be run in.
+# Directory npm commands will be run in.
 node-path: buildchain
 
 # Key/name of the `script` in package.json run at build time.
@@ -46,7 +46,7 @@ webroot: web
 Expanding on the above:
 
 - `node-version` — When declared, Cloud will use this Node.js version in your build step. (Default: None. If you wish to run a Node.js build step, you must specify a version!)
-- `node-path` — This directory must contain `package.json` and `package-lock.json`. Your NPM script will be run here. (Default: `''`)
+- `node-path` — This directory must contain `package.json` and `package-lock.json`. Your npm script will be run here. (Default: `''`)
 - `npm-script` — A single script name. Arbitrary Bash (including other `npx` commands) is not allowed. (Default: `build`)
 - `artifact-path` — Anything emitted from your build step must be in this directory, or it will not be uploaded to the CDN or available to your running app, in any way. (Default: Inherits the value of `webroot`)
 - `app-path` — `composer.json` and `composer.lock` must be located here. Cloud will run `composer install` in this directory. (Default: `''`)

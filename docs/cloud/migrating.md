@@ -20,7 +20,7 @@ Your Craft project must already be running Craft {{ $activeSetVars.minCraftVersi
 
 ### Cloud Config
 
-Cloud expects a `craft-cloud.yaml` file at the root of your repository. At a minimum, this file must contain a `php-version` key to tell Cloud what PHP runtime to use. It’s also where you’ll communicate to the builder where your Composer and Node “roots” are—if you have customized your project’s directory structure, you may need to provide additional keys in this config file.
+Cloud expects a `craft-cloud.yaml` file at the root of your repository. At a minimum, this file must contain a `php-version` key to tell Cloud what PHP runtime to use. It’s also where you’ll communicate to the builder where your Composer and Node.js “roots” are—if you have customized your project’s directory structure, you may need to provide additional keys in this config file.
 
 Read more about using the [Cloud config file](config.md).
 
@@ -32,7 +32,7 @@ We have a dedicated article about [working with assets on Cloud](assets.md), and
 
 ### Artifacts, Templates, and URLs
 
-When you deploy your site to Craft Cloud, an [automated build process](builds.md) takes care of generating artifacts via NPM and uploading them to our CDN. This means that they are not directly accessible in the webroot of your site—via the filesystem *or* over HTTP. See our recommendations for [handling references to those artifacts](builds.md#artifact-urls) in your templates.
+When you deploy your site to Craft Cloud, an [automated build process](builds.md) takes care of generating artifacts via `npm` and uploading them to our CDN. This means that they are not directly accessible in the web root of your site—via the filesystem *or* over HTTP. See our recommendations for [handling references to those artifacts](builds.md#artifact-urls) in your templates.
 
 ::: tip
 You have control over the build process via [the `craft-cloud.yaml` config file](config.md).

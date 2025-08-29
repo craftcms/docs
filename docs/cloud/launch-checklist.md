@@ -8,7 +8,7 @@ Make sure you have access to your domain’s DNS management tool well in advance
 
 ### Domain Validation
 
-This is typically the most volatile part of connecting a domain to Cloud—so make sure you’ve started the process by [adding the validation records](domains.md#adding-a-domain) to your DNS provider as soon as you know where the site will live. Don’t worry—validating a domain won't automatically send traffic to Cloud!
+This is typically the most volatile part of connecting a domain to Cloud—so make sure you’ve started the process by [adding the validation records](domains.md#adding-a-domain) to your DNS provider as soon as you know where the site will live. Don’t worry—validating a domain won’t automatically send traffic to Cloud!
 
 ### TTL
 

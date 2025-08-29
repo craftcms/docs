@@ -58,7 +58,7 @@ Build artifacts are also _not_ subject to this limit, as they are served from ou
 
 You can [deploy](deployment.md) as often as you like. There are no limits on the total number of “build minutes” per billing period, but each [build](builds.md) must complete within **15 minutes**.
 
-A brand new [starter project](kb:using-the-starter-project) will typically deploy in about 90 seconds. Projects that use many plugins or have complex Node build steps will naturally take more time—long-running processes like automated tests may need to be offloaded to a different CI pipeline.
+A brand new [starter project](kb:using-the-starter-project) will typically deploy in about 90 seconds. Projects that use many plugins or have complex .js build steps will naturally take more time—long-running processes like automated tests may need to be offloaded to a different CI pipeline.
 
 The final [migration](/5.x/deploy.html#migrate) phase of each deployment does *not* count toward the build time limit, but _are_ governed by the discrete command duration limit.
 
