@@ -5,7 +5,7 @@ Craft Cloud looks for a `craft-cloud.yaml` file in the root of the connected rep
 This file has a specific syntax (YAML) and [schema](#config-schema) that determines a few things about how your project is [built](builds.md), [deployed](deployment.md), and served. If there are problems with your config file, the deployment will fail with an error describing the issue.
 
 ::: tip
-When you run `php craft setup/cloud` to install the [Cloud extension](extension.md), it will offer to generate a config file for you, then walk you through setting PHP and Node versions based on your project’s state.
+When you run `php craft setup/cloud` to install the [Cloud extension](extension.md), it will offer to generate a config file for you, then walk you through setting PHP and Node.js versions based on your project’s state.
 :::
 
 ## Config Schema
@@ -24,7 +24,7 @@ php-version: '8.2'
 These settings are optional, and should only be used when your project is incompatible with the platform defaults.
 
 ```yaml
-# Choose a major version of Node to use in your build step.
+# Choose a major version of Node.js to use in your build step.
 node-version: '18'
 
 # Directory NPM commands will be run in.
@@ -45,7 +45,7 @@ webroot: web
 
 Expanding on the above:
 
-- `node-version` — When declared, Cloud will use this Node version in your build step. (Default: None. If you wish to run a Node build step, you must specify a version!)
+- `node-version` — When declared, Cloud will use this Node.js version in your build step. (Default: None. If you wish to run a Node.js build step, you must specify a version!)
 - `node-path` — This directory must contain `package.json` and `package-lock.json`. Your NPM script will be run here. (Default: `''`)
 - `npm-script` — A single script name. Arbitrary Bash (including other `npx` commands) is not allowed. (Default: `build`)
 - `artifact-path` — Anything emitted from your build step must be in this directory, or it will not be uploaded to the CDN or available to your running app, in any way. (Default: Inherits the value of `webroot`)
@@ -53,7 +53,7 @@ Expanding on the above:
 - `webroot` — If your project uses a different directory for the public web root, you should specify it here. This is relative to `app-path`. (Default: `web`)
 
 ::: tip
-For the latest information on supported PHP and Node versions, see our [Cloud Services and Compatibility](compatibility.md) article.
+For the latest information on supported PHP and Node.js versions, see our [Cloud Services and Compatibility](compatibility.md) article.
 :::
 
 ### Redirects and Rewrites

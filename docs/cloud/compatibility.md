@@ -14,9 +14,9 @@ Your project must be updated to at least {{ $activeSetVars.minCraftVersion }} to
 
 PHP {{ $activeSet.minPhpVersion }} and newer are supported on Cloud. Pick a major and minor version via your project’s [`craft-cloud.yaml` config file](config.md).
 
-## Node
+## Node.js
 
-Versions 16 and newer of Node are supported in our [builder](builds.md) via the `node-version` key in your [Cloud config file](config.md). We plan to add all [LTS releases](https://nodejs.org/en/about/previous-releases), moving forward.
+Versions 16 and newer of Node.js are supported in our [builder](builds.md) via the `node-version` key in your [Cloud config file](config.md). We plan to add all [LTS releases](https://nodejs.org/en/about/previous-releases), moving forward.
 
 We recommend declaring only a major version (i.e. `20`) to receive security and stability updates, but minor releases (i.e. `18.6`) are supported.
 

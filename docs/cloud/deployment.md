@@ -10,7 +10,7 @@ This process reflects our general [deployment and workflow recommendations](/5.x
 
 You can review an [environment](environments.md)’s deployment history (and the status of any active deployments) by navigating to its **Deployments** screen.
 
-### Deployment Triggers
+## Deployment Triggers
 
 Each environment in Cloud defines its own **Deploy Trigger**, which determines when it is deployed. You may select from:
 
@@ -19,19 +19,21 @@ Each environment in Cloud defines its own **Deploy Trigger**, which determines w
 
 **On Push** is a great option for teams with a well-defined Git flow that ensures only production-ready changes are committed or merged into the selected branch.
 
-## 1. Build Step
+## Process
 
-The first thing Cloud does is assemble PHP and Node dependencies, and package them into a new function. This process is described in greater detail in our [Build Process and Artifacts](builds.md) article.
+### 1. Build Step
 
-If your project uses Node (or has unique PHP requirements), we strongly recommend familiarizing yourself with this stage of the deployment!
+The first thing Cloud does is assemble PHP and Node.js dependencies, and package them into a new function. This process is described in greater detail in our [Build Process and Artifacts](builds.md) article.
 
-## 2. Migrations
+If your project uses Node.js (or has unique PHP requirements), we strongly recommend familiarizing yourself with this stage of the deployment!
+
+### 2. Migrations
 
 On your new function, Cloud executes `php craft cloud/up` (a special version of `php craft up`), which applies project config changes and database migrations, and publishes all asset bundles. This must complete successfully for the deployment to continue—if a migration fails, the last-deployed version of your project will continue to serve requests.
 
 A record of this command (and its output) is added to the **Commands** section in that environment.
 
-## 3. Deployment
+### 3. Deployment
 
 When Cloud determines that the previous two steps have run without issue, it will begin serving requests from the newly-built functions.
 

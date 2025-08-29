@@ -12,7 +12,7 @@ Every environment in your Cloud project gets a unique preview domain. Preview do
 project-my-handle-environment-b62dec18.preview.craft.cloud
 ```
 
-To find your preview domain, click the globe icon next to any environment in the project navigation menu. If you don't see this icon, it’s likely because it hasn’t been [deployed](deployments.md) yet!
+To find your preview domain, click the globe icon next to any environment in the project navigation menu. If you don’t see this icon, it’s likely because it hasn’t been [deployed](deployments.md) yet!
 
 ::: tip
 Changing the handle of a project or environment may take a moment to update in our routing layer. If you have other services that rely on a consistent hostname (say, for the delivery of webhooks), consider temporarily pointing a [subdomain](#subdomains) at the environment.
@@ -45,7 +45,7 @@ Cloud will provide a `CNAME` and two `TXT` records that together complete a veri
 Depending on your DNS provider (and the TTL or “time to live” of any existing records), it may take anywhere from a couple of minutes to 24 hours for traffic to be routed to Cloud.
 
 ::: warning
-DNS records are cached for different amounts of time by different providers around the globe. You may see changes before or after your client and their customers—especially if you access the Internet from different regions.
+DNS records are cached for different amounts of time by different providers around the globe. You may see changes before or after your client and their customers—especially if you access the internet from different regions.
 
 Heroku has a great [guide](https://devcenter.heroku.com/articles/custom-domains) that covers some of this technology, in the same context. If you are unfamiliar with DNS, consider starting with the [domain name glossary](https://devcenter.heroku.com/articles/custom-domains#domain-name-glossary) section, or flipping through Cloudflare’s [How DNS Works](https://www.cloudflare.com/learning/dns/what-is-dns/) series!
 :::

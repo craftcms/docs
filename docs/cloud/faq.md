@@ -148,7 +148,7 @@ Database and asset access credentials can be retrieved from your Craft Cloud con
 
 ### Do I have to supply my own SSL certificate for my site?
 
-Nope! SSL is included with every domain connected to your Craft Cloud project, and requests are automatically redirected to HTTPs.
+Nope! SSL is included with every domain connected to your Craft Cloud project, and requests are automatically redirected to HTTPS.
 
 <a id="custom-cert"></a>
 

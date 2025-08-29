@@ -10,17 +10,17 @@ Your project’s `composer.json` and `composer.lock` files determine what PHP pa
 
 Cloud installs packages by running `composer install`.
 
-## Node
+## Node.js
 
 Similarly, Cloud looks for `package.json` and `package-lock.json` files at the root of your repository (or at a path set in your [config file](config.md#config-schema)). Unlike the PHP build step, if `package-lock.json` is *missing*, this step is skipped and the deployment will continue.
 
-To enable the Node build step, you must set a `node-version` in your [Cloud config file](config.md#config-schema).
+To enable the Node.js build step, you must set a `node-version` in your [Cloud config file](config.md#config-schema).
 
 ### Build Command
 
 Cloud executes the `build` script via `npm run build` after installing the listed packages with `npm clean-install`. You can change which script is run with the `npm-script` setting in `craft-cloud.yaml`—or the directory the command is run in with `node-path`.
 
-Special environment variables are exposed to your Node build process:
+Special environment variables are exposed to your Node.js build process:
 
 - `CRAFT_CLOUD_PROJECT_ID`: UUID of the project the build is running in.
 - `CRAFT_CLOUD_ENVIRONMENT_ID`: UUID of the build’s target environment.
@@ -42,7 +42,7 @@ You can specify a different `artifact-path` in `craft-cloud.yaml`, but when usin
 
 ### Artifact URLs
 
-If you need to refer to the final, published URL of a build artifact from your build scripts, a file they generate, or from your Craft app, a special `CRAFT_CLOUD_ARTIFACT_BASE_URL` is provided to every environment. From Node, you can access this variable via `process.env.CRAFT_CLOUD_ARTIFACT_BASE_URL`—but be aware that it will _not_ be available (or useful) when your scripts are evaluated in a browser.
+If you need to refer to the final, published URL of a build artifact from your build scripts, a file they generate, or from your Craft app, a special `CRAFT_CLOUD_ARTIFACT_BASE_URL` is provided to every environment. From Node.js, you can access this variable via `process.env.CRAFT_CLOUD_ARTIFACT_BASE_URL`—but be aware that it will _not_ be available (or useful) when your scripts are evaluated in a browser.
 
 On Cloud, that URL will always look something like this:
 
@@ -56,7 +56,7 @@ Within that `artifacts/` directory, the file structure of your existing artifact
 There is no need for filename-based cache-busting, as all artifact URLs will change with every build!
 :::
 
-The [Cloud extension](extension.md) also provides the `cloud.artifactUrl()` helper function for generating URLs to files published during your build. If you have historically used the `siteUrl()` or `url()` functions to link a stylesheet or JavaScript file (or any other static asset) in your web root, use this function instead.
+The [Cloud extension](extension.md) also provides the `cloud.artifactUrl()` helper function for generating URLs to files published during your build. If you have historically used the `siteUrl()` or `url()` functions to link a style sheet or JavaScript file (or any other static asset) in your web root, use this function instead.
 
 Outside of Cloud, `cloud.artifactUrl()` falls back to the automatically-determined `@web` alias—and anything in your web root will resolve normally. The special `@artifactBaseUrl` alias mirrors this behavior, and can be used in Project Config—or [anywhere else that evaluates aliases](/5.x/configure.html#control-panel-settings):
 
