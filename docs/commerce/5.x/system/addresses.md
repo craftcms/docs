@@ -14,7 +14,7 @@ In the control panel, you’ll encounter addresses within the context of [orders
 
 Customer’s addresses are managed from their user account, if you’ve [added the native Addresses field](/5.x/reference/element-types/addresses.md#setup) to Users’ field layout. Commerce also inserts a **Commerce Settings** field into the [address field layout](/5.x/reference/element-types/addresses.md#native-and-custom-fields)) with primary shipping and billing controls.
 
-### How Addresses are Used
+## How Addresses are Used
 
 Your customers will work with addresses [directly](#address-book), or [via the cart](#cart-addresses).
 
@@ -29,7 +29,7 @@ Every order may have a shipping and billing address, and customers with accounts
 - Methods for working with geographic regions provided by Craft’s supporting [address repository](/5.x/reference/element-types/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
-#### Store Addresses
+### Store Addresses
 
 Each store’s primary address (set via **Commerce** &rarr; **System Settings** &rarr; **Stores**) is available via the global `currentStore` variable or the [`Stores` service](commerce5:craft\commerce\services\Stores):
 
