@@ -6,6 +6,18 @@ module.exports = {
   abandoned: false,
   searchPlaceholder: "Search Cloud docs (Press “/” to focus)",
   primarySet: true,
+  globalVars: {
+    supportEmail: 'support@craft.cloud',
+    minCraftVersion: '4.6.0',
+    minCloudExtensionVersion: '1.16.5',
+    minPhpVersion: '8.1',
+    dbSupportMySql: '8.0',
+    dbSupportPostgres: '15',
+    trialDays: 7,
+    minNodeVersion: '18',
+    regionSupport: 'North America, Canada, Europe, and Asia/Pacific',
+    scheduledCommandsMax: 'five',
+  },
   sidebar: {
     "/": [
       {
