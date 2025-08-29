@@ -8,11 +8,11 @@ If you maintain a plugin or module, review our [Cloud for Plugin Developers](dev
 
 ## Craft
 
-Your project must be updated to at least {globalset:productVitals:vitalsCloudMinCraftVersion} to be able to install the [Cloud extension](extension.md), which provides essential functionality like automatic [configuration](config.md) and the [Cloud filesystem](assets.md). Version {globalset:productVitals:vitalsCloudMinExtensionVersion} of the extension is required to deploy your project.
+Your project must be updated to at least {{ $activeSetVars.minCraftVersion }} to be able to install the [Cloud extension](extension.md), which provides essential functionality like automatic [configuration](config.md) and the [Cloud filesystem](assets.md). Version {{ $activeSetVars.minCloudExtensionVersion }} of the extension is required to deploy your project.
 
 ## PHP
 
-PHP {globalset:productVitals:custom_cloudMinPhpVersion} and newer are supported on Cloud. Pick a major and minor version via your project’s [`craft-cloud.yaml` config file](config.md).
+PHP {{ $activeSet.minPhpVersion }} and newer are supported on Cloud. Pick a major and minor version via your project’s [`craft-cloud.yaml` config file](config.md).
 
 ## Node
 

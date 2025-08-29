@@ -28,10 +28,10 @@ The most common problems are:
 - **Issues cloning the repository.** Was it made private, renamed, or otherwise disconnected?
 - **No PHP version was declared.** Make sure you have a `php-version` key in your [`craft-cloud.yaml` config file](config.md).
 - **Unsupported software or package versions.**
-  - Your Cloud config file must include a `php-version`, set to a public release of PHP, version {globalset:productVitals:custom_cloudMinPhpVersion} or later. Patch versions are not supported.
-  - If you are using Node, `node-version` must be set to {globalset:productVitals:custom_cloudMinNodeVersion} or higher. Only major version numbers are supported.
-  - Craft CMS version {globalset:productVitals:vitalsCloudMinCraftVersion} or later is required.
-  - `craftcms/cloud` version {globalset:productVitals:vitalsCloudMinExtensionVersion} or later is required.
+  - Your Cloud config file must include a `php-version`, set to a public release of PHP, version {{ $activeSetVars.minPhpVersion }} or later. Patch versions are not supported.
+  - If you are using Node, `node-version` must be set to {{ $activeSetVars.minNodeVersion }} or higher. Only major version numbers are supported.
+  - Craft CMS version {{ $activeSetVars.minCraftVersion }} or later is required.
+  - `craftcms/cloud` version {{ $activeSetVars.minCloudExtensionVersion }} or later is required.
 - **Errors when installing Composer packages.** Do you have a valid `composer.json` and `composer.lock` file in the connected repository? (It's technically possible—but exceedingly rare—for there to be connectivity issues when downloading packages. Check your logs, try again, or reach out to support if you continue to have problems at this stage in the build.)
 - **Failures in the Node/NPM build script.** Something went wrong when installing your Node modules or while running the `build` script. Read more about the [build process](builds.md) and how we determine [what build script is run](config.md).
 

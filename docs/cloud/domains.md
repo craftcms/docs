@@ -105,7 +105,7 @@ Craft Cloud *does not* include domain registration or DNS management tools. You 
 
 ## Pricing
 
-Every Cloud project includes one root domain, and as many subdomains as you need. You can purchase additional root domains at any time. Read more at [Cloud pricing](/cloud).
+Every Cloud project includes one root domain, and as many subdomains as you need. You can purchase additional root domains at any time. Read more at [Cloud pricing](craftcom:cloud).
 
 ## Redirection
 

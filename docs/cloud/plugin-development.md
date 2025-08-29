@@ -5,7 +5,7 @@ As long as your plugin’s design and implementation follows our established [be
 Plugins must be compatible with at least Craft 4.6 (the minimum version of Craft required to run on Cloud), but they may support earlier versions.
 
 ::: tip
-Want to test your plugin on Cloud? [Get in touch](/contact) for a free sandbox environment!
+Want to test your plugin on Cloud? [Get in touch](craftcom:contact) for a free sandbox environment!
 :::
 
 ## Special Considerations
@@ -16,7 +16,7 @@ There are still a few things about Craft Cloud that may require reevaluation of 
 
 Craft Cloud sets the `CRAFT_EPHEMERAL` config override, which tells Craft to treat file writes as unreliable (or downright impossible). Plugins should honor this setting by checking `craft\helpers\App::isEphemeral()` before trying to perform any writes to the disk.
 
-If you must write files to disk, use the temporary directory determined by the system. **Do not hard-code this path or construct it dynamically.** Instead, use Craft’s [`Path` service](https://docs.craftcms.com/api/v5/craft-services-path.html) to get information about system directories’ locations:
+If you must write files to disk, use the temporary directory determined by the system. **Do not hard-code this path or construct it dynamically.** Instead, use Craft’s [`Path` service](craft5:craft\services\Path) to get information about system directories’ locations:
 
 ```php
 $path = Craft::$app->getPath();
@@ -34,7 +34,7 @@ Avoid writing logs directly to a file, as its contents will disappear as soon as
 
 ### File Responses
 
-The Cloud extension automatically handles binary responses (like when a controller action ends with [`sendContentAsFile()`](https://docs.craftcms.com/api/v5/craft-web-response.html#method-sendcontentasfile)) by uploading the data to S3 and redirecting to a pre-signed URL.
+The Cloud extension automatically handles binary responses (like when a controller action ends with [`sendContentAsFile()`](craft5:craft\web\Response::sendContentAsFile())) by uploading the data to S3 and redirecting to a pre-signed URL.
 
 In general, we recommend _not_ sending binary responses that could otherwise be served as a static asset via [asset bundles](#asset-bundles)—the only situations in which Craft should be involved is when the data is based on some user input, like a dynamically-generated ZIP or PDF. Additionally, pre-signed URLs are unnecessary (and extremely inefficient) for files whose contents are static, predictable, or non-private.
 
@@ -95,4 +95,4 @@ Cloud-compatible plugins go through the same [submission and approval process](h
 
 ## Getting Help
 
-Please [reach out to us](/contact) if you have questions about your plugin’s compatibility.
+Please [reach out to us](craftcom:contact) if you have questions about your plugin’s compatibility.

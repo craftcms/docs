@@ -1,6 +1,6 @@
 # Getting Started
 
-Welcome to [Craft Cloud](/cloud), our new hosting platform tailor-made for Craft CMS!
+Welcome to [Craft Cloud](craftcom:cloud), our new hosting platform tailor-made for Craft CMS!
 
 This article covers the critical path to deploying your first project to Cloud. For [new projects](#new-sites), we still recommend starting with a local development environment; most [existing projects](#existing-sites) can be moved to Cloud after a quick system update.
 
@@ -24,7 +24,7 @@ You will be able to follow along using the seven-day free trial included with ev
 
 ## Preparing your Codebase
 
-Any Craft CMS site running version {globalset:productVitals:vitalsCloudMinCraftVersion} or later can be configured to run on Cloud. Plugins and custom modules must be compatible with at least PHP {globalset:productVitals:custom_cloudMinPhpVersion}, and the project must `require` version {globalset:productVitals:vitalsCloudMinExtensionVersion} of the [Cloud extension](extension.md).
+Any Craft CMS site running version {{ $activeSetVars.minCraftVersion }} or later can be configured to run on Cloud. Plugins and custom modules must be compatible with at least PHP {{ $activeSetVars.minPhpVersion }}, and the project must `require` version {{ $activeSetVars.minCloudExtensionVersion }} of the [Cloud extension](extension.md).
 
 ### New Sites
 
@@ -40,7 +40,7 @@ Commit and push the project files to a fresh Git repository.
 
 ### Existing Sites
 
-Update your project to at least Craft {globalset:productVitals:vitalsCloudMinCraftVersion}, then run the command above. Most projects will run on Cloud without modification—but we recommend reviewing the [compatibility guide](compatibility.md) if you’ve made any customizations via [application config](/5.x/reference/config/app.html), custom modules, or private plugins. We also have a dedicated guide on [moving projects to Craft Cloud](projects.md) from other hosts.
+Update your project to at least Craft {{ $activeSetVars.minCraftVersion }}, then run the command above. Most projects will run on Cloud without modification—but we recommend reviewing the [compatibility guide](compatibility.md) if you’ve made any customizations via [application config](/5.x/reference/config/app.html), custom modules, or private plugins. We also have a dedicated guide on [moving projects to Craft Cloud](projects.md) from other hosts.
 
 ::: tip
 Does your project use the `tablePrefix` setting or `CRAFT_DB_TABLE_PREFIX` config variable? Run `ddev craft db/drop-table-prefix` before continuing.
@@ -72,7 +72,7 @@ When creating a project, you will be asked for a **Project Name** and **Handle**
 
 ### Billing + Terms
 
-You can pay for Cloud projects monthly or annually. Discounts are provided on annual plans, and to verified [Partners](/become-a-partner). Learn more about how [billing](billing.md) works.
+You can pay for Cloud projects monthly or annually. Discounts are provided on annual plans, and to verified [Partners](craftcom:become-a-partner). Learn more about how [billing](billing.md) works.
 
 All Cloud plans come with a free seven-day trial!
 

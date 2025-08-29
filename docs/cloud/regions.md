@@ -1,6 +1,6 @@
 # Regions
 
-Craft Cloud is currently available in **North America**, **Canada**, **Europe**, and **Asia/Pacific**. You select a region when creating a new project.
+Craft Cloud is currently available in {{ $activeSetVars.regionSupport }}. You select a region when creating a new project.
 
 A project’s region determines where your [database](databases.md) and compute resources are located, but *not* your assets.
 

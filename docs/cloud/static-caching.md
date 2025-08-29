@@ -150,7 +150,7 @@ This allows Cloud to cache the form when it is initially requested, while always
 
 ### Commerce
 
-Any time you access a customer’s cart via `craft.commerce.carts.cart`, Commerce either reads or writes a [cart number](/docs/commerce/5.x/system/orders-carts.html#order-numbers) to the session. This is not apt to be a problem on pages that only on-session users will access (like the cart, checkout, or account), but it can mean that common ecommerce patterns make your site more difficult to conform with the expectations of Cloud’s static cache.
+Any time you access a customer’s cart via `craft.commerce.carts.cart`, Commerce either reads or writes a [cart number](/commerce/5.x/system/orders-carts.html#order-numbers) to the session. This is not apt to be a problem on pages that only on-session users will access (like the cart, checkout, or account), but it can mean that common ecommerce patterns make your site more difficult to conform with the expectations of Cloud’s static cache.
 
 In particular, displaying dynamic cart data on _every_ page (say, in the site’s header) means that Cloud will be unable to cache your site. See the [Including via Ajax](#including-via-ajax) section to learn about a technique that can help retain these dynamic sections of your site!
 

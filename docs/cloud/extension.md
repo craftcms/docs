@@ -16,7 +16,7 @@ Note that Cloud applies additional configuration directly to Craft via special, 
 
 ## Installation
 
-You can install the extension with one command, in any project running Craft CMS 4.5.10 or later (but only projects on {globalset:productVitals:vitalsCloudMinCraftVersion} or later can be deployed to Cloud):
+You can install the extension with one command, in any project running Craft CMS 4.5.10 or later (but only projects on {{ $activeSetVars.minCraftVersion }} or later can be deployed to Cloud):
 
 ```bash
 php craft setup/cloud
@@ -54,4 +54,4 @@ The Cloud extension includes some [additional settings](https://github.com/craft
 
 Additional technical details and the extension’s source are available in the [readme on GitHub](https://github.com/craftcms/cloud-extension-yii2).
 
-If you encounter a bug or compatibility issues with another plugin (public or private), please [file an issue](https://github.com/craftcms/cloud-extension-yii2/issues/new/choose) or [contact support](/contact?whatCanWeHelpYouWith=Support)!
+If you encounter a bug or compatibility issues with another plugin (public or private), please [file an issue](https://github.com/craftcms/cloud-extension-yii2/issues/new/choose) or [contact support](craftcom:contact?whatCanWeHelpYouWith=Support)!

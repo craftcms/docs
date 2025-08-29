@@ -16,7 +16,7 @@ The first thing we’ll tackle is updates to your code and configuration.
 
 ### Key Requirements
 
-Your Craft project must already be running Craft {globalset:productVitals:vitalsCloudMinCraftVersion} or later to be compatible with Cloud. In addition, you will need to install the first-party [Cloud extension](extension.md).
+Your Craft project must already be running Craft {{ $activeSetVars.minCraftVersion }} or later to be compatible with Cloud. In addition, you will need to install the first-party [Cloud extension](extension.md).
 
 ### Cloud Config
 

@@ -1,6 +1,6 @@
 # Resource Limits
 
-Every Craft Cloud project comes with generous resource quotas and simple, predictable [pricing](/cloud#pricing).
+Every Craft Cloud project comes with generous resource quotas and simple, predictable [pricing](craftcom:cloud#pricing).
 
 ## Environments
 
@@ -76,6 +76,6 @@ There are no limits to the number of concurrent or monthly queue jobs, but—lik
 
 ## Craft License
 
-The included Craft Pro or Team license is valid as long as your project is active on Cloud, and is not transferrable to a self-hosted installation. Otherwise, its terms are identical to a normal Craft license—there are no additional restrictions on the variety or quantity of content you manage with the installation, nor the size of your audience. Cloud is subject to our [Acceptable Use Policy](/acceptable-use-policy).
+The included Craft Pro or Team license is valid as long as your project is active on Cloud, and is not transferrable to a self-hosted installation. Otherwise, its terms are identical to a normal Craft license—there are no additional restrictions on the variety or quantity of content you manage with the installation, nor the size of your audience. Cloud is subject to our [Acceptable Use Policy](craftcom:acceptable-use-policy).
 
 Plugin licenses are *not* included with your Cloud subscription and will need to be purchased separately.

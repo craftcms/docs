@@ -20,7 +20,7 @@ Using a `tablePrefix` from an earlier version of Craft? Follow [these instructio
 
 ## Database Engines
 
-Craft Cloud currently supports MySQL {globalset:productVitals:custom_cloudDbSupportMysql} and Postgres {globalset:productVitals:custom_cloudDbSupportPostgres} in [all regions](regions.md).
+Craft Cloud currently supports MySQL {{ $activeSetVars.dbSupportMySql }} and Postgres {{ $activeSetVars.dbSupportPostgres }} in [all regions](regions.md).
 
 ## Connecting to your Database
 
@@ -115,7 +115,7 @@ Here are some common sources of issues when backing up or restoring databases.
 
 ### Craft’s `backupCommand`
 
-Using a custom [`backupCommand` config setting](/5.x/reference/config/general.html#backupcommand) can lead to unreliable backups. Be sure to check `general.php` _and_ your `.env` file for a `CRAFT_BACKUP_COMMAND` environment override! Try the default command and [reach out to support](/contact) if you still get malformed backups.
+Using a custom [`backupCommand` config setting](/5.x/reference/config/general.html#backupcommand) can lead to unreliable backups. Be sure to check `general.php` _and_ your `.env` file for a `CRAFT_BACKUP_COMMAND` environment override! Try the default command and [reach out to support](craftcom:contact) if you still get malformed backups.
 
 ### Backing up without Craft
 
