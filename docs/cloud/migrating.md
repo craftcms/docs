@@ -1,4 +1,4 @@
-Moving a Project to Cloud
+# Moving a Project to Cloud
 
 ::: tip
 Be sure and review our [Getting Started with Craft Cloud](started.md) guide!
