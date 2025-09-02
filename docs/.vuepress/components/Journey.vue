@@ -1,5 +1,5 @@
 <template>
-    <ol class="journey">
+    <ol class="journey theme-default-content-override">
         <li v-for="(segment, i) in segments" :key="i" class="step">
             {{ ' ' }}
             <span class="step-label">{{ segment }}</span><span v-if="i < (segments.length - 1)" class="step-arrow" aria-hidden="true">&rarr;</span>

@@ -30,18 +30,6 @@
           <span>{{ set.setTitle ? set.setTitle : set.title }}</span>
         </RouterLink>
       </li>
-      
-
-      <!-- Special handling for external Cloud docs! -->
-      <li v-if="$page.frontmatter.home" class="doc-set">
-        <a class="doc-set-link" href="https://craftcms.com/knowledge-base/cloud" target="_blank">
-          <span class="mr-2 inline-block relative set-icon">
-            <img src="/docs/icons/icon-cloud.svg" width="16" height="16" alt="">
-          </span>
-
-          <span>Craft Cloud</span>
-        </a>
-      </li>
     </ul>
     <div v-if="$activeSet" class="doc-set-current">
       <RouterLink :to="defaultUri($activeSet)" class="flex items-center">
