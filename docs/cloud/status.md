@@ -14,4 +14,4 @@ Routine updates to our web services are typically _not_ shared here, as they do 
 
 ## Project Health
 
-Individual projects report each [deployment](deployment.md)’s status to its owners. Failed deployments are never released (say, if some part of the [build](builds.md) doesn’t work), but a “successful” deployment doesn't mean that the new code is free from regressions! We recommend setting up a tool like [Oh Dear](http://ohdear.app) or [BetterStack](https://betterstack.com) to monitor specific conditions appropriate for your project.
+Individual projects report each [deployment](deployment.md)’s status to its owners. Failed deployments are never released (say, if some part of the [build](builds.md) doesn’t work), but a “successful” deployment doesn’t mean that the new code is free from regressions! We recommend setting up a tool like [Oh Dear](http://ohdear.app) or [BetterStack](https://betterstack.com) to monitor specific conditions appropriate for your project.
