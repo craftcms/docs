@@ -39,6 +39,8 @@ module.exports = {
           "builds",
           "databases",
           "assets",
+          "commands",
+          "cron",
           "local-dev",
           "launch-checklist",
         ],
