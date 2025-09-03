@@ -53,6 +53,7 @@ module.exports = {
           "regions",
           "domains",
           "plugin-development",
+          "status",
         ],
       },
       {
