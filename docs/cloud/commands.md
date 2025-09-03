@@ -4,7 +4,7 @@ Craft Cloud’s serverless architecture means that traditional access via SSH is
 
 Each [environment](environments.md) in your Cloud project has a **Commands** screen, from which you can run one-off Craft commands, or manage [scheduled commands](cron.md).
 
-![Screenshot of the commands screen in Craft Console, showing logs for a completed command.](images/cloud-commands.png)
+![Screenshot of the commands screen in Craft Console, showing logs for a completed command.](./images/cloud-commands.png)
 
 
 To run a command, enter just the segment following `craft` into the **Command** field. Press <kbd>Enter</kbd> or click **Execute** to send the command to Cloud.

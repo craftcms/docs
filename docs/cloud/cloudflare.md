@@ -1,6 +1,6 @@
 # Cloudflare
 
-![Illustration showing Cloudflare’s “proxy” setting toggle.](images/cloud-cf-o2o.png)
+![Illustration showing Cloudflare’s “proxy” setting toggle.](./images/cloud-cf-o2o.png)
 
 Every Craft Cloud project is protected by [Cloudflare](https://cloudflare.com/)’s enterprise-grade global WAF or _web application firewall_.
 For most sites and apps, our default policies (in combination with an evolving set of custom rules) will be enough to thwart inorganic and malicious traffic—but occasionally, customers will need access to deeper customization.

@@ -3,7 +3,7 @@
 In addition to [running one-off commands](commands.md) in a Craft Cloud environment, you can set up recurring commands using standard cron syntax.
 Each environment is allowed {{ $activeSetVars.scheduledCommandsMax }} scheduled commands.
 
-![Screenshot showing a modal in Craft Console for configuring a scheduled/recurring command.](images/cloud-scheduled-commands.png)
+![Screenshot showing a modal in Craft Console for configuring a scheduled/recurring command.](./images/cloud-scheduled-commands.png)
 
 ::: tip
 Cloud automatically processes [queue jobs](extension.md) for you.
