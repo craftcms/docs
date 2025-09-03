@@ -57,6 +57,7 @@ module.exports = {
           "domains",
           "plugin-development",
           "status",
+          "cloudflare",
         ],
       },
       {
