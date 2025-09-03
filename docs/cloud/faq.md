@@ -16,7 +16,8 @@ A link to the status page is available in the footer of every page on <https://c
 
 ### Where can I find more information on Craft Cloud?
 
- [Knowledge Base](kb:cloud) is the best place to find answers to your Cloud questions—in particular, our [Getting Started](getting-started.md) guide and the [Troubleshooting](troubleshooting.md) pages are pathways into many platform concepts.
+[Our website](https://craftcms.com/cloud) is the best place to find answers to your Cloud questions.
+Within this section of the docs, our [Getting Started](getting-started.md) guide and the [Troubleshooting](troubleshooting.md) pages are the best pathways into many platform concepts.
 
 If you have questions about our software products, check out the [Craft CMS](/5.x) or [Craft Commerce](/commerce/5.x) documentation.
 
