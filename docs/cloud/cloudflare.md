@@ -9,7 +9,7 @@ As part of [launching a site on Cloud](launch-checklist.md), you’ll [connect a
 If you or your client are already users of Cloudflare’s proxy (colloquially, “orange cloud”), you may encounter validation errors unless you follow a specific “[Orange-to-Orange](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)” setup process.
 
 ::: tip
-Unless you have a specific need for **Proxy** mode (like your own firewall rules, functions, or routes), we recommend using the straightforward **DNS-only** (or “grey cloud”) option in your own zone.
+Unless you have a specific need for **Proxy** mode (like your own firewall rules, functions, or routes), we recommend using the straightforward **DNS-only** (or “gray cloud”) option in your own zone.
 _Either way, your site is protected by Craft Cloud’s WAF._
 :::
 
