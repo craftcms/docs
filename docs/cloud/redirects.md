@@ -93,7 +93,7 @@ Unlike a [redirect](#redirects), URL rewrites are used to create virtual resourc
 Rules follow essentially the same structure as redirects: the pattern-matching process and destination templates are identical. Rules are created under a `rewrites` key in your `craft-cloud.yml` config file.
 
 ::: tip
-Using rewrites, you can avoid referencing `cdn.craft.cloud` or updating templates to use [`cloud.artifactUrl`](https://craftcms.com/knowledge-base/cloud-builds#artifact-uRLs)–any CDN requests can be served directly from your custom domain.
+Using rewrites, you can avoid referencing `cdn.craft.cloud` or updating templates to use [`cloud.artifactUrl`](builds.md#artifact-urls)–any CDN requests can be served directly from your custom domain.
 :::
 
 ### Examples
