@@ -50,6 +50,7 @@ module.exports = {
           "compatibility",
           "static-caching",
           "quotas",
+          "backups",
           "regions",
           "domains",
           "plugin-development",
