@@ -20,7 +20,7 @@ If you are ready to send traffic to Cloud, you can use the [real-time validation
 
 This method is designed to reduce the amount of downtime that might occur.
 
-Once you’ve begun the process of [adding a domain](/knowledge-base/cloud-domains#adding-a-domain), follow these steps to disable proxying:
+Once you’ve begun the process of [adding a domain](domains.md#adding-a-domain), follow these steps to disable proxying:
 
 1. Navigate to the **DNS** page of the domain in your Cloudflare dashboard;
 2. Locate the `CNAME` (preferred) or `A` record for the domain or subdomain you are connecting to Craft Cloud;
@@ -53,7 +53,7 @@ Once the Craft Cloud dashboard indicates that the domain is validated (as well a
 
 ## Subdomains
 
-Either strategy will work for [subdomains](/knowledge-base/cloud-domains#subdomains), as well.
+Either strategy will work for [subdomains](domains.md#subdomains), as well.
 For example, instead of connecting `mydomain.com`, you could perform pre-validation or real-time validation on `staging.mydomain.com` by adding that as a domain on your project.
 
 When it comes time to launch (and you want your site to be available at `mydomain.com`), you’ll need to add that as a new domain in Craft Cloud.
