@@ -55,6 +55,7 @@ module.exports = {
           "backups",
           "regions",
           "domains",
+          "redirects",
           "plugin-development",
           "status",
           "cloudflare",
