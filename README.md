@@ -29,6 +29,7 @@ The pages served from `docs/` are treated like any other VuePress project, and t
 ## Local Development
 
 ```
+nvm use
 npm install
 npm run docs:dev
 ```

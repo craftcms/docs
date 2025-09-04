@@ -82,7 +82,6 @@
 
   .home {
     @apply text-sm relative;
-    color: #718096;
 
     .back {
       @apply inline-block absolute mr-1 opacity-100;
