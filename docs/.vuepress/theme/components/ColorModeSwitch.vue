@@ -22,7 +22,7 @@
   height: 22px;
 
   &:focus {
-    @apply outline-none;
+    outline: 2px solid var(--link-color-default);
   }
 
   .knob {
