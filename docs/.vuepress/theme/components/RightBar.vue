@@ -49,8 +49,7 @@ export default {
   @apply w-64 absolute right-0 top-0 bottom-0 hidden;
 
   .sidebar-heading {
-    @apply text-xs mx-0 tracking-wide uppercase;
-    padding: 0.35rem 0;
+    @apply text-xs mx-0 p-1 tracking-wide uppercase;
     border-left: none;
   }
 
@@ -63,7 +62,7 @@ export default {
     max-height: calc(100vh - 6.5rem);
 
     .sidebar-links {
-      @apply pb-0;
+      @apply p-1;
       max-height: none;
     }
 
