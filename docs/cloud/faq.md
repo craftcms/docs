@@ -107,7 +107,7 @@ Nope, sorry! Craft Cloud is serverless, and doesn’t use a traditional HTTP ser
 
 ### Can I SSH into my server?
 
-Craft Cloud’s serverless architecture means there is nothing to SSH into! Images are built during each deployment, and spun up and destroyed based on traffic—even though the [ephemeral filesystem](projects.md) takes some getting used to, its inherent stability and security are an essential part of what makes Cloud such a great place to host your Craft project.
+Craft Cloud’s serverless architecture means there is nothing to SSH into! Images are built during each deployment, and spun up and destroyed based on traffic—even though the [ephemeral filesystem](migrating.md) takes some getting used to, its inherent stability and security are an essential part of what makes Cloud such a great place to host your Craft project.
 
 <a id="console-commands"></a>
 
@@ -175,7 +175,7 @@ Yes! Read all about [deployments](deployment.md) and the [build pipeline](builds
 
 ### How can I statically cache the front end of my site?
 
-Craft Cloud has a built-in [static caching](cache.md) system that is designed to work seamlessly with Craft CMS. On-disk and rewrite-based caches will not work, as the Cloud filesystem is ephemeral—and files in the “web root” aren’t directly exposed to the web.
+Craft Cloud has a built-in [static caching](static-caching.md) system that is designed to work seamlessly with Craft CMS. On-disk and rewrite-based caches will not work, as the Cloud filesystem is ephemeral—and files in the “web root” aren’t directly exposed to the web.
 
 <a id="local-dev"></a>
 
@@ -187,7 +187,7 @@ The [Cloud filesystem](assets.md) has a special “fallback” feature for worki
 
 ### How do I move an existing project to Craft Cloud?
 
-Check out our [migration guide](projects.md)! As long as you are using Craft CMS {{ $activeSetVars.minCraftVersion }} or later, your project is apt to work on Craft Cloud with very few changes.
+Check out our [migration guide](migrating.md)! As long as you are using Craft CMS {{ $activeSetVars.minCraftVersion }} or later, your project is apt to work on Craft Cloud with very few changes.
 
 
 ## Billing + Legal
