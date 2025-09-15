@@ -49,7 +49,7 @@ export default {
   @apply w-64 absolute right-0 top-0 bottom-0 hidden;
 
   .sidebar-heading {
-    @apply text-xs mx-0 p-1 tracking-wide uppercase;
+    @apply text-xs mx-0 tracking-wide uppercase;
     padding: 0.35rem 0;
     border-left: none;
   }
