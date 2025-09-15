@@ -39,7 +39,6 @@
     }
     .sidebar-links {
       @apply list-none p-0 mx-0 mb-3;
-
       li {
         @apply list-none;
         a {
