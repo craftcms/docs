@@ -50,6 +50,7 @@ export default {
 
   .sidebar-heading {
     @apply text-xs mx-0 p-1 tracking-wide uppercase;
+    padding: 0.35rem 0;
     border-left: none;
   }
 
@@ -62,7 +63,7 @@ export default {
     max-height: calc(100vh - 6.5rem);
 
     .sidebar-links {
-      @apply p-1;
+      @apply pb-0;
       max-height: none;
     }
 

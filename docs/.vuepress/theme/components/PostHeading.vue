@@ -38,11 +38,7 @@
       border-color: var(--border-color);
     }
     .sidebar-links {
-      --padding-x: 3px;
-      --margin-x: calc(var(--padding-x) * -1);
-      @apply list-none;
-      margin: 1rem var(--margin-x) 0.75rem var(--margin-x);
-      padding: var(--padding-x);
+      @apply list-none p-0 mx-0 mb-3;
 
       li {
         @apply list-none;

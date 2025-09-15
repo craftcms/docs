@@ -74,6 +74,7 @@
   .doc-set-link {
     @apply block px-4 mt-2 font-medium text-lg;
     color: var(--doc-set-color);
+    outline-offset: -2px;
 
     .title {
       color: var(--doc-set-color);
