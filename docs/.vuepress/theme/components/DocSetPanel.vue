@@ -74,6 +74,7 @@
   .doc-set-link {
     @apply block px-4 mt-2 font-medium text-lg;
     color: var(--doc-set-color);
+    outline-offset: -2px;
 
     .title {
       color: var(--doc-set-color);
@@ -82,7 +83,6 @@
 
   .home {
     @apply text-sm relative;
-    color: #718096;
 
     .back {
       @apply inline-block absolute mr-1 opacity-100;

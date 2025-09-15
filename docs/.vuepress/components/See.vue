@@ -88,6 +88,7 @@ export default {
     }
 
     .see-description {
-        @apply text-sm text-gray-500 mt-1;
+        @apply text-sm mt-1;
+        color: var(--text-color-muted);
     }
 </style>
