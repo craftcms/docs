@@ -38,9 +38,12 @@
       border-color: var(--border-color);
     }
     .sidebar-links {
+      --padding-x: 3px;
+      --margin-x: calc(var(--padding-x) * -1);
       @apply list-none;
-      margin: 1rem -3px 0.75rem -3px;
-      padding: 3px;
+      margin: 1rem var(--margin-x) 0.75rem var(--margin-x);
+      padding: var(--padding-x);
+
       li {
         @apply list-none;
         a {
