@@ -21,7 +21,7 @@ Filter | Description
 [datetime](#datetime) | Formats a date with its time.
 [default](https://twig.symfony.com/doc/2.x/filters/default.html) | Returns the value or a default value if empty.
 [diff](#diff) | Returns the difference between arrays.
-[duration](#duration) | Returns a `DateInterval` object.
+[duration](#duration) | Builds a human-readable duration expression.
 [encenc](#encenc) | Encrypts and base64-encodes a string.
 [escape](https://twig.symfony.com/doc/2.x/filters/escape.html) | Escapes a string.
 [explodeClass](#explodeclass) | Converts a `class` attribute value into an array of class names.
