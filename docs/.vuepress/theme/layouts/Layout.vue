@@ -186,7 +186,7 @@ export default {
   },
 
   watch: {
-    $route() {
+    '$route.path'() {
       this.$refs.backToTop.focus()
     }
   },
