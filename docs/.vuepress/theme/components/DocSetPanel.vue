@@ -74,6 +74,7 @@
   .doc-set-link {
     @apply block px-4 mt-2 font-medium text-lg;
     color: var(--doc-set-color);
+    outline-offset: -2px;
 
     .title {
       color: var(--doc-set-color);
@@ -82,7 +83,6 @@
 
   .home {
     @apply text-sm relative;
-    color: #718096;
 
     .back {
       @apply inline-block absolute mr-1 opacity-100;
@@ -102,7 +102,8 @@
     }
 
     &.active {
-      @apply text-blue text-lg;
+      @apply text-lg;
+      color: var(--sidebar-active-link-color);
 
       .home-icon {
         @apply inline-block;
@@ -116,7 +117,8 @@
       }
 
       .home-title {
-        @apply relative pl-0 text-blue;
+        @apply relative pl-0;
+        color: var(--sidebar-active-link-color);
         left: -2px;
       }
     }

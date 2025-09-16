@@ -23,6 +23,15 @@
   --custom-block-bg-color: theme("colors.softer");
   --custom-block-border-color: theme("colors.soft");
   --craft-red: #e5422b;
+  --white: theme("colors.white");
+  --black: theme("colors.black");
+  --custom-focus-outline: 2px solid var(--link-color-default);
+
+  /* Custom button */
+  --button-background-color: theme("colors.blue.default");
+  --button-text-color: var(--white);
+  --button-border-color: theme("colors.blue.darker");
+  --button-border-radius: 4px;
 
   /* Code */
   --code-color-default: #476582;
@@ -68,6 +77,30 @@ a {
   color: var(--link-color-default);
 }
 
+.skip-links {
+  list-style: none;
+}
+
+.skip-link {
+  white-space: nowrap;
+  top: .5em;
+  position: fixed;
+  left: -1000px;
+  opacity: 0;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  font-weight: 500;
+  padding: .75em 1.5em;
+  border: 1px solid var(--button-border-color);
+  border-radius: var(--button-border-radius);
+}
+
+.skip-link:focus {
+  opacity: 1;
+  z-index: 100;
+  left: .5em;
+}
+
 img {
   @apply max-w-full;
 }
@@ -103,5 +136,11 @@ img {
 @screen xxl {
   body {
     font-size: 108%;
+  }
+}
+
+.sidebar-links {
+  a {
+    outline-offset: -2px;
   }
 }

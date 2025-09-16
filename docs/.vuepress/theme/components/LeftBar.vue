@@ -81,6 +81,12 @@
     /* browser height - approx. .doc-set-panel - #top height - #bottom height */
     height: calc(100vh - 93px - 3rem - 3rem);
   }
+
+  .sidebar-links {
+    a:focus {
+      outline-offset: -2px;
+    }
+  }
 }
 
 .sidebar-transitioning {

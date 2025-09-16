@@ -19,7 +19,7 @@ module.exports = {
         softer: "#fafbfe",
         blue: {
           "lighter": "#86A7F9",
-          "default": "#2E68F5",
+          "default": "#2963F5",
           "darker": "#1554F4",
         },
         red: "#da5a47",
