@@ -27,6 +27,12 @@
   --black: theme("colors.black");
   --custom-focus-outline: 2px solid var(--link-color-default);
 
+  /* Custom button */
+  --button-background-color: theme("colors.blue.default");
+  --button-text-color: var(--white);
+  --button-border-color: theme("colors.blue.darker");
+  --button-border-radius: 4px;
+
   /* Code */
   --code-color-default: #476582;
   --code-color-gold: #8A6700;
@@ -77,20 +83,22 @@ a {
 
 .skip-link {
   white-space: nowrap;
-  margin: 1em auto;
-  top: 0;
+  top: .5em;
   position: fixed;
-  left: 50%;
-  margin-left: -72px;
+  left: -1000px;
   opacity: 0;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  font-weight: 500;
+  padding: .75em 1.5em;
+  border: 1px solid var(--button-border-color);
+  border-radius: var(--button-border-radius);
 }
 
 .skip-link:focus {
   opacity: 1;
   z-index: 100;
-  background-color: var(--white);
-  padding: 0.5em;
-  border: 1px solid var(--black);
+  left: .5em;
 }
 
 img {
