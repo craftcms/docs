@@ -29,6 +29,7 @@ module.exports = {
   'kb': { base: 'https://craftcms.com/knowledge-base/', format: 'generic' },
   'repo': { base: 'https://github.com/', format: 'generic' },
   'plugin': { base: 'https://plugins.craftcms.com/', format: 'generic', },
+  'craftcom' : { base: 'https://craftcms.com/', format: 'generic' },
   // This doesn't do anything, but I'd hoped we could implement a context-aware format:
   '@': { base: '/', format: 'set-local' },
 };

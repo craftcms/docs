@@ -805,7 +805,7 @@ Event::on(
 
 The event that is triggered when getting a default status for a line item.
 
-You may set [DefaultLineItemStatusEvent::lineItemStatus](commerce4:craft\commerce\events\DefaultLineItemStatusEvent) to a desired LineItemStatus to override the default status set in the control panel.
+You may set [DefaultLineItemStatusEvent::lineItemStatus](commerce5:craft\commerce\events\DefaultLineItemStatusEvent) to a desired LineItemStatus to override the default status set in the control panel.
 
 Plugins can get notified when a default line item status is being fetched.
 
@@ -1623,7 +1623,7 @@ Event handlers can customize PDF rendering by modifying several properties on th
 
 | Property    | Value                                                                                                                     |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `order`     | populated [Order](commerce4:craft\commerce\elements\Order) model                                                                |
+| `order`     | populated [Order](commerce5:craft\commerce\elements\Order) model                                                                |
 | `template`  | optional Twig template path (string) to be used for rendering                                                             |
 | `variables` | populated with the variables availble to the template used for rendering                                                  |
 | `option`    | optional string for the template that can be used to show different details based on context (example: `receipt`, `ajax`) |

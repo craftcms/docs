@@ -79,7 +79,8 @@ export default {
     }
 
     .see-title {
-        @apply text-lg font-medium text-blue;
+        color: var(--link-color-default);
+        @apply text-lg font-medium;
     }
 
     .see:hover .see-title {
@@ -87,6 +88,7 @@ export default {
     }
 
     .see-description {
-        @apply text-sm text-gray-500 mt-1;
+        @apply text-sm mt-1;
+        color: var(--text-color-muted);
     }
 </style>

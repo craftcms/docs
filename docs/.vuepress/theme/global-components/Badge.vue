@@ -44,7 +44,8 @@ export default {
     background-color: #42b983;
   }
 
-  &.error {
+  &.error,
+  &.danger {
     background-color: #da5961;
   }
 

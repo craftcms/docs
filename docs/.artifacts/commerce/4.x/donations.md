@@ -8,8 +8,8 @@
 
 | Param                                     | Description
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only elements that are related to certain other elements.
+| [andWith](#andwith)                       | Causes the query to return matching elements eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
 | [asArray](#asarray)                       | Causes the query to return matching elements as arrays of data, rather than ElementClass objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
@@ -32,25 +32,15 @@
 | [trashed](#trashed)                       | Narrows the query results to only elements that have been soft-deleted.
 | [uid](#uid)                               | Narrows the query results based on the elements’ UIDs.
 | [with](#with)                             | Causes the query to return matching elements eager-loaded with related elements.
+| [withCustomFields](#withcustomfields)     | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
 
 
-#### `afterPopulate`
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 #### `andRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only elements that are related to certain other elements.
 
@@ -79,7 +69,24 @@ $elements = ElementClass::find()
 :::
 
 
+#### `andWith`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching elements eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+
+
+
+.
+
+
+
+
+
+
 #### `asArray`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching elements as arrays of data, rather than ElementClass objects.
 
@@ -106,6 +113,8 @@ $elements = ElementClass::find()
 
 #### `cache`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -119,6 +128,8 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
@@ -127,6 +138,8 @@ Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#ca
 
 
 #### `dateCreated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the elements’ creation dates.
 
@@ -168,6 +181,8 @@ $elements = ElementClass::find()
 
 #### `dateUpdated`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the elements’ last-updated dates.
 
 
@@ -206,6 +221,8 @@ $elements = ElementClass::find()
 
 #### `fixedOrder`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query results to be returned in the order specified by [id](#id).
 
 
@@ -236,6 +253,8 @@ $elements = ElementClass::find()
 
 
 #### `id`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-id" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the elements’ IDs.
 
@@ -277,6 +296,8 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 
 #### `ignorePlaceholders`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching elements as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
@@ -290,6 +311,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 #### `inReverse`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -315,6 +338,8 @@ $elements = ElementClass::find()
 
 
 #### `language`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the elements should be queried in, based on their language.
 
@@ -354,6 +379,8 @@ $elements = ElementClass::find()
 
 #### `limit`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines the number of elements that should be returned.
 
 
@@ -376,6 +403,8 @@ $elements = ElementClass::find()
 
 
 #### `offset`
+
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
 
 Determines how many elements should be skipped in the results.
 
@@ -400,6 +429,8 @@ $elements = ElementClass::find()
 
 #### `orderBy`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines the order that the elements should be returned in. (If empty, defaults to `dateCreated DESC,
     elements.id`.)
 
@@ -423,6 +454,8 @@ $elements = ElementClass::find()
 
 
 #### `preferSites`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -459,6 +492,8 @@ $elements = ElementClass::find()
 
 #### `prepareSubquery`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -467,6 +502,8 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 #### `relatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only elements that are related to certain other elements.
 
@@ -494,6 +531,8 @@ $elements = ElementClass::find()
 
 
 #### `search`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only elements that match a search query.
 
@@ -527,6 +566,8 @@ $elements = ElementClass::find()
 
 
 #### `siteSettingsId`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the elements’ IDs in the `elements_sites` table.
 
@@ -562,6 +603,7 @@ $element = ElementClass::find()
 
 #### `sku`
 
+
 Narrows the query results based on the SKU.
 
 Possible values include:
@@ -593,6 +635,8 @@ $element = ElementClass::find()
 
 #### `trashed`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only elements that have been soft-deleted.
 
 
@@ -617,6 +661,8 @@ $elements = ElementClass::find()
 
 
 #### `uid`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the elements’ UIDs.
 
@@ -643,6 +689,8 @@ $element = ElementClass::find()
 
 #### `with`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching elements eager-loaded with related elements.
 
 
@@ -666,6 +714,21 @@ $elements = ElementClass::find()
     ->all();
 ```
 :::
+
+
+#### `withCustomFields`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 

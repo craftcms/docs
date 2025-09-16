@@ -52,8 +52,6 @@ class Plugin extends \craft\base\Plugin
 
 If you used the generator to scaffold the field type, it ought to have inserted this, automatically. You may register as many field types as you wish, from one `EVENT_REGISTER_FIELD_TYPES` event handler.
 
-### 
-
 ### Missing Fields
 
 If your field class ever goes missing (say, because a developer uninstalls your plugin or removes the package), Craft will use an instance of <craft5:craft\fields\MissingField>, and display a message in any field layouts it was present in. This ensures the control panel doesn’t become inoperable, but doesn’t prevent front-end templates from breaking.
@@ -241,6 +239,19 @@ public function inputHtml(mixed $value, ?ElementInterface $element, bool $inline
 }
 ```
 
+### Fieldsets
+
+When your field appears in a field layout, it is wrapped in an instance of <craft5:craft\fieldlayoutelements\CustomField>. You can customize the structure and semantics of your field’s [input](#inputs)(s) by implementing the `useFieldset()` method on your field class:
+
+```php
+public function useFieldset(): bool
+{
+    return true;
+}
+```
+
+The field layout element calls this method as it renders the surrounding markup, including the field label, instructions, and errors. You may wish to base the return value on your field’s configuration—the <craft5:craft\fields\Date> field, for example, uses a fieldset only when its `showTime` setting is _enabled_ and the user will be presented with two discrete HTML inputs.
+
 ## Validation
 
 Field types provide two sets of [validation rules](guide:structure-models#validation-rules).
@@ -302,6 +313,10 @@ In this example, `validateSymbol` is a method _on the field class itself_—not 
 :::
 
 When the effective rules differ this greatly, however, it may be a sign that your field type should actually be _two_ distinct types. Short of that, field settings can also influence the sort of [inputs](#inputs) you display to an author: for this “currency” field, the default appearance could be a dropdown menu with a fixed set of known options; then, in “securities” mode, it could switch to a plain-text input with a placeholder value that takes the shape of a typical ISIN.
+
+### Emptiness
+
+Implement the `isValueEmpty()` to tell Craft what kinds of values you consider “empty.” Internally, we use this to determine whether an author explicitly selected a value (or if it’s a default or incidental) in the process of saving elements and propagating content between sites. The base method treats `null` and zero-length arrays (`[]`) and strings (`''`) as empty.
 
 ## Previews
 

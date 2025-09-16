@@ -11,10 +11,10 @@ By default, Craft writes log files to the `storage/logs/` directory. Messages ar
 - `web-[Y-m-d].log`: logs generated from front-end web requests
 
 ::: tip
-You can change where runtime artifacts are stored (including logs) using the [CRAFT_STORAGE_PATH](./config/README.md#craft-storage-path) PHP constant.
+You can change where runtime artifacts are stored (including logs) using the [CRAFT_STORAGE_PATH](../reference/config/bootstrap.md#craft-storage-path) PHP constant.
 :::
 
-Additionally, low-level PHP errors are logged to `phperrors.log` if allowed by [your configuration](./config/README.md#craft-log-php-errors). These messages are special, and bypass Craft’s logging system entirely.
+Additionally, low-level PHP errors are logged to `phperrors.log` if allowed by [your configuration](../reference/config/bootstrap.md#craft-log-php-errors). These messages are special, and bypass Craft’s logging system entirely.
 
 All other messages follow the same format:
 
@@ -260,7 +260,7 @@ The available options for each type of `Target` will differ, and may include thi
 
 ### `stdout` and `stderr`
 
-Craft redirects all log output from Monolog targets to `stdout` and `stderr` when [`CRAFT_STREAM_LOG`](./config/README.md#craft-stream-log) is set to `true`. This is common in load-balanced environments and servers with ephemeral filesystems, where log output is aggregated from multiple sources, or the sources themselves are not directly accessible.
+Craft redirects all log output from Monolog targets to `stdout` and `stderr` when [`CRAFT_STREAM_LOG`](../reference/config/bootstrap.md#craft-stream-log) is set to `true`. This is common in load-balanced environments and servers with ephemeral filesystems, where log output is aggregated from multiple sources, or the sources themselves are not directly accessible.
 
 ### Trace Level
 
@@ -339,7 +339,7 @@ Craft::error(new PsrMessage(
 ));
 ```
 
-Using the [convenience methods](#using-crafts-logger) will automatically translate Yii log levels to the most appropriate PSR-3 level when dispatched to a `MonologTarget`.
+Using the [convenience methods](#using-craft-s-logger) will automatically translate Yii log levels to the most appropriate PSR-3 level when dispatched to a `MonologTarget`.
 
 ## Further Reading
 

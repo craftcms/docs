@@ -19,10 +19,7 @@ Here are some recommended permissions depending on that relationship:
 
 ## Manually Updating
 
-You can download the latest release in the format you prefer to work with:
-
-- [zip](http://craftcms.com/latest-v2.zip)
-- [tar.gz](http://craftcms.com/latest-v2.tar.gz)
+You can download the latest release in the format you prefer to work with by following the instructions in [this article](kb:downloading-previous-craft-versions).
 
 Or click the menu button beside your “Update” button on the Updates page of your control panel, which will give you the zip file.
 

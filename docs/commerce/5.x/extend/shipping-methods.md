@@ -25,11 +25,11 @@ To learn more about adjusters and how you can create your own, see [Adjusters](a
 
 ## Creating a Shipping Method
 
-Shipping methods must be classes that meet the [shipping method interface](commerce4:craft\commerce\base\ShippingMethodInterface), generally providing a name, rules for applying the method to an order, and the logic that evaluates those rules to decide whether the shipping method should return _shipping method options_ for the customer based on an order.
+Shipping methods must be classes that meet the [shipping method interface](commerce5:craft\commerce\base\ShippingMethodInterface), generally providing a name, rules for applying the method to an order, and the logic that evaluates those rules to decide whether the shipping method should return _shipping method options_ for the customer based on an order.
 
 ### Shipping Method Interface
 
-The [shipping method interface](commerce4:craft\commerce\base\ShippingMethodInterface) requires a class with the following methods:
+The [shipping method interface](commerce5:craft\commerce\base\ShippingMethodInterface) requires a class with the following methods:
 
 #### getType()
 
@@ -63,13 +63,13 @@ Returns `true` if this shipping method should be an option for the customer to s
 
 The shipping method returns an array of these rules objects. The shipping engine processes the array in the order it was received, calling `matchOrder()` on each item. It expects to get `true` or `false` from each, indicating whether this shipping method can be applied to the order/cart. The first matched (`true`) rule returns the costs to the cart.
 
-These are the methods required for each [shipping rule](commerce4:craft\commerce\base\ShippingRuleInterface) object:
+These are the methods required for each [shipping rule](commerce5:craft\commerce\base\ShippingRuleInterface) object:
 
 #### getHandle();
 
 Returns the unique handle of this shipping rule.
 
-#### matchOrder([Order \$order](commerce4:craft\commerce\elements\Order))
+#### matchOrder([Order \$order](commerce5:craft\commerce\elements\Order))
 
 Returns `true` if this rule is a match on the order, or `false` if the shipping engine should continue and evaluate the next rule for the current shipping method.
 
@@ -133,4 +133,4 @@ Event::on(
 
 ## Fetching a Cart’s Shipping Method
 
-When looking to get a cart’s selected shipping method, use [`shippingMethodHandle`](commerce4:craft\commerce\elements\Order::shippingMethodHandle) and [`shippingMethodName`](commerce4:craft\commerce\elements\Order::shippingMethodName). These return the handle and name of the chosen shipping method, or `null` if none has been selected.
+When looking to get a cart’s selected shipping method, use [`shippingMethodHandle`](commerce5:craft\commerce\elements\Order::shippingMethodHandle) and [`shippingMethodName`](commerce5:craft\commerce\elements\Order::shippingMethodName). These return the handle and name of the chosen shipping method, or `null` if none has been selected.

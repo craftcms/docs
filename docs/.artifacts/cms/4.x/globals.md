@@ -8,8 +8,8 @@
 
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only global sets that are related to certain other elements.
+| [andWith](#andwith)                       | Causes the query to return matching global sets eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
 | [asArray](#asarray)                       | Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft4:craft\elements\GlobalSet) objects.
 | [cache](#cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
@@ -41,20 +41,9 @@
 <!-- textlint-enable -->
 
 
-#### `afterPopulate`
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 #### `andRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only global sets that are related to certain other elements.
 
@@ -83,7 +72,24 @@ $globalSets = \craft\elements\GlobalSet::find()
 :::
 
 
+#### `andWith`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching global sets eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+
+
+
+.
+
+
+
+
+
+
 #### `asArray`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching global sets as arrays of data, rather than [GlobalSet](craft4:craft\elements\GlobalSet) objects.
 
@@ -110,6 +116,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `cache`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -123,6 +131,8 @@ Enables query cache for this Query.
 
 #### `clearCachedResult`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
@@ -131,6 +141,8 @@ Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#ca
 
 
 #### `dateCreated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the global sets’ creation dates.
 
@@ -172,6 +184,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `dateUpdated`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the global sets’ last-updated dates.
 
 
@@ -210,6 +224,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `fixedOrder`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query results to be returned in the order specified by [id](#id).
 
 
@@ -240,6 +256,7 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 
 #### `handle`
+
 
 Narrows the query results based on the global sets’ handles.
 
@@ -272,6 +289,8 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 
 #### `id`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-id" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the global sets’ IDs.
 
@@ -313,6 +332,8 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 
 #### `ignorePlaceholders`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching global sets as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
@@ -326,6 +347,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 #### `inReverse`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -351,6 +374,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 
 #### `language`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the global sets should be queried in, based on their language.
 
@@ -390,6 +415,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `limit`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines the number of global sets that should be returned.
 
 
@@ -412,6 +439,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 
 #### `offset`
+
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
 
 Determines how many global sets should be skipped in the results.
 
@@ -436,6 +465,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `orderBy`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines the order that the global sets should be returned in. (If empty, defaults to `sortOrder ASC`.)
 
 
@@ -458,6 +489,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 
 #### `preferSites`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -494,6 +527,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `prepareSubquery`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -502,6 +537,8 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 #### `relatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only global sets that are related to certain other elements.
 
@@ -529,6 +566,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 
 #### `search`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only global sets that match a search query.
 
@@ -562,6 +601,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 
 #### `site`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-site" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the global sets should be queried in.
 
@@ -605,6 +646,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `siteId`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-siteid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines which site(s) the global sets should be queried in, per the site’s ID.
 
 
@@ -641,6 +684,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `siteSettingsId`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the global sets’ IDs in the `elements_sites` table.
 
 
@@ -675,6 +720,8 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 #### `trashed`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only global sets that have been soft-deleted.
 
 
@@ -700,6 +747,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `uid`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the global sets’ UIDs.
 
 
@@ -724,6 +773,8 @@ $globalSet = \craft\elements\GlobalSet::find()
 
 
 #### `unique`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines whether only elements with unique IDs should be returned by the query.
 
@@ -755,6 +806,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 #### `with`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching global sets eager-loaded with related elements.
 
 
@@ -781,6 +834,8 @@ $globalSets = \craft\elements\GlobalSet::find()
 
 
 #### `withCustomFields`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Sets whether custom fields should be factored into the query.
 

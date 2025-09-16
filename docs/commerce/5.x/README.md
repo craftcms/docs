@@ -1,5 +1,4 @@
 ---
-title: Craft Commerce 5.x
 description: Official documentation for Craft Commerce 5.
 ---
 
@@ -12,5 +11,5 @@ Craft Commerce is the powerful and flexible first-party ecommerce platform for [
 - **Developers** enjoy the freedom and speed with which they can deliver high-quality, outsize ecommerce solutions.
 
 ::: tip
-Familiarity with [Craft CMS](https://craftcms.com/) is essential when embarking on a Craft Commerce project! Take a spin through the [Craft CMS documentation](https://craftcms.com/docs/) to get a sense for the blank-slate approach to content modeling
+Familiarity with [Craft CMS](https://craftcms.com/) is essential when embarking on a Craft Commerce project! Take a spin through the [Craft CMS documentation](/5.x/) to get a sense for the blank-slate approach to content modeling
 :::

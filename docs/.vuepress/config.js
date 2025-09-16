@@ -1,3 +1,5 @@
+const markdownHelpers = require('./theme/util/markdown');
+
 module.exports = {
   theme: "craftdocs",
   base: "/docs/",
@@ -38,6 +40,7 @@ module.exports = {
     docSets: [
       require("./sets/craft-cms"),
       require("./sets/craft-commerce"),
+      require("./sets/craft-cloud"),
       require("./sets/craft-nitro"),
       require("./sets/getting-started-tutorial")
     ],
@@ -51,7 +54,7 @@ module.exports = {
     prevLinks: true,
     searchMaxSuggestions: 10,
     nav: [
-      { text: "Knowlege Base", link: "https://craftcms.com/knowledge-base" }
+      { text: "Knowledge Base", link: "https://craftcms.com/knowledge-base" }
     ],
     codeLanguages: {
       twig: "Twig",
@@ -73,7 +76,9 @@ module.exports = {
   markdown: {
     extractHeaders: ['h2', 'h3', 'h4'],
     anchor: {
-      level: [2, 3, 4]
+      level: [2, 3, 4],
+      permalinkSymbol: '#',
+      renderPermalink: markdownHelpers.renderPermalink,
     },
     toc: {
       format(content) {
@@ -92,6 +97,6 @@ module.exports = {
     }
   },
   postcss: {
-    plugins: require("../../postcss.config.js").plugins
+    plugins: require("../../postcss.config.js").plugins,
   }
 };

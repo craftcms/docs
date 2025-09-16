@@ -3,12 +3,14 @@
     <div class="switch-wrapper hidden xl:block">
       <ColorModeSwitch v-on="$listeners" :on="isDark" />
     </div>
-    <nav class="sidebar-link-wrapper">
+    <nav class="sidebar-link-wrapper" aria-labelledby="right-bar-nav-heading">
       <SidebarLinks
         :depth="depth"
         :sidebar-depth="$page.frontmatter.sidebarDepth || sidebarDepth"
         :items="headingItems"
         fixed-heading="On this Page"
+        fixed-heading-id="right-bar-nav-heading"
+        heading-level="h2"
       />
     </nav>
   </div>
@@ -56,10 +58,6 @@ export default {
     @apply fixed mt-24 w-64 pt-1 overflow-hidden;
   }
 
-  .sidebar-group:not(.collapsable) .sidebar-heading:not(.clickable) {
-    color: #a0aec0;
-  }
-
   .sidebar-links {
     @apply ml-0 pl-0 pb-4 overflow-y-auto;
     max-height: calc(100vh - 6.5rem);
@@ -71,12 +69,6 @@ export default {
 
     .sidebar-link {
       @apply mx-0 px-0 border-0 pr-4;
-      color: var(--sidebar-link-color);
-      opacity: 0.7;
-
-      &:hover {
-        @apply text-blue opacity-100;
-      }
 
       &.active {
         @apply opacity-100;

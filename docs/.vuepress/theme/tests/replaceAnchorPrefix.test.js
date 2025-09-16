@@ -5,8 +5,16 @@ const replaceAnchorPrefix = require("../util/replace-anchor-prefixes");
  */
 const craft = [
   {
+    source: "craft5:Craft",
+    result: "https://docs.craftcms.com/api/v5/craft.html",
+  },
+  {
+    source: "craft5:Craft::Pro",
+    result: "https://docs.craftcms.com/api/v5/craft.html#constants",
+  },
+  {
     source: "craft4:craft\\web\\Controller::$allowAnonymous",
-    result: "https://docs.craftcms.com/api/v4/craft-web-controller.html#allowanonymous",
+    result: "https://docs.craftcms.com/api/v4/craft-web-controller.html#property-allowanonymous",
   },
   {
     source: "craft4:craft\\console\\Controller::EVENT_DEFINE_ACTIONS",

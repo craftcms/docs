@@ -38,7 +38,7 @@ While we [strongly recommend](#why-ddev) DDEV for new Craft projects, [alternate
 1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft):
 
     ```bash
-    ddev composer create -y "craftcms/craft"
+    ddev composer create-project "craftcms/craft"
     ```
 
     The setup wizard will start automatically! Accept all defaults (in `[square brackets]`), and note your chosen username and password.
@@ -81,11 +81,11 @@ We believe that starting with a local development environment (rather than direc
 <See path="deploy.md#workflow" label="Defining a Workflow" />
 
 ::: tip
-To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./reference/cli.md#db-backup). Have them clone the project and run:
+To get a collaborator set up, commit your working folder to git (including the `.ddev/` directory) and create a [database backup](./reference/cli.md#db-backup). Have them clone the project, download the backup, and run:
 
 ```bash
 ddev start
-ddev import-db path/to/backup.sql
+ddev import-db < path/to/backup.sql
 ```
 :::
 
@@ -113,9 +113,11 @@ Pre-built starter project ZIPs should only be used for evaluating Craft in limit
 
 ### Hosting
 
+The fastest way to share your work is with a free seven-day trial of our first-party hosting platform, [Craft Cloud](https://craftcms.com/cloud).
+
 <See path="deploy.md" hash="selecting-a-host" label="Selecting a Host" description="Know your options when looking for a good hosting solution." />
 
-Craft’s own footprint is relatively light, but it’s important to choose a platform that matches your traffic, storage, and redundancy needs. We maintain a [list of Craft-friendly providers](https://craftcms.com/hosting) for projects of varying scale.
+Craft’s own footprint is relatively light, but it’s important to choose a platform that matches your traffic, storage, and redundancy needs. We maintain a [list of Craft-friendly hosting products](kb:hosting-craft-101) for projects of varying scale.
 
 ### Deployment
 

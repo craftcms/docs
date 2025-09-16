@@ -1,39 +1,36 @@
 <template>
   <div class="doc-set-panel">
-    <div class="primary-sets">
-      <RouterLink :to="`/`" class="doc-set home" :class="{ active: $activeSet === false }">
-        <span class="back">
-          <BackChevron />
-        </span>
+    <ul class="primary-sets">
+      <!-- Home -->
+      <li class="doc-set">
+        <RouterLink :to="`/`" class="doc-set-link home" :class="{ active: $activeSet === false }">
+          <span class="back" aria-hidden="true">
+            <BackChevron />
+          </span>
 
-        <span class="mr-2 inline-block relative home-icon">
-          <Home />
-        </span>
+          <span class="mr-2 inline-block relative home-icon" aria-hidden="true">
+            <Home />
+          </span>
 
-        <span class="home-title">Home</span>
-      </RouterLink>
-      <RouterLink
+          <span class="home-title">Home</span>
+        </RouterLink>
+      </li>
+
+      <!-- Docsets -->
+      <li
+        class="doc-set"
         v-if="$page.frontmatter.home && set.primarySet"
         v-for="(set, index) in $site.themeConfig.docSets"
-        :to="defaultUri(set)"
-        class="doc-set"
-      >
-        <span class="mr-2 inline-block relative set-icon">
-          <img :src="set.icon" width="16" height="16" alt />
-        </span>
+        v-bind:key="set.handle">
+        <RouterLink :to="defaultUri(set)" class="doc-set-link">
+          <span class="mr-2 inline-block relative set-icon">
+            <img :src="set.icon" width="16" height="16" alt="">
+          </span>
 
-        <span>{{ set.setTitle ? set.setTitle : set.title }}</span>
-      </RouterLink>
-
-      <!-- Special handling for external Cloud docs! -->
-      <a v-if="$page.frontmatter.home" class="doc-set" href="https://craftcms.com/knowledge-base/cloud" target="_blank">
-        <span class="mr-2 inline-block relative set-icon">
-          <img src="/docs/icons/icon-cloud.svg" width="16" height="16" alt="Craft Cloud" />
-        </span>
-
-        <span>Craft Cloud</span>
-      </a>
-    </div>
+          <span>{{ set.setTitle ? set.setTitle : set.title }}</span>
+        </RouterLink>
+      </li>
+    </ul>
     <div v-if="$activeSet" class="doc-set-current">
       <RouterLink :to="defaultUri($activeSet)" class="flex items-center">
         <span class="icon mr-3 inline-block">
@@ -44,7 +41,8 @@
         >{{ $activeSet.setTitle ? $activeSet.setTitle : $activeSet.title }}</div>
       </RouterLink>
       <div v-if="$activeSet.versions" class="doc-set-version-wrapper">
-        <select name class="doc-set-version" @change="handleVersionSelect($event)">
+        <label for="doc-version-select" class="sr-only">Version</label>
+        <select name id="doc-version-select" class="doc-set-version" @change="handleVersionSelect($event)">
           <option
             v-for="version in $activeSet.versions"
             :key="version[0]"
@@ -73,9 +71,10 @@
     }
   }
 
-  .doc-set {
+  .doc-set-link {
     @apply block px-4 mt-2 font-medium text-lg;
     color: var(--doc-set-color);
+    outline-offset: -2px;
 
     .title {
       color: var(--doc-set-color);
@@ -84,7 +83,6 @@
 
   .home {
     @apply text-sm relative;
-    color: #718096;
 
     .back {
       @apply inline-block absolute mr-1 opacity-100;

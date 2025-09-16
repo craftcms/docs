@@ -44,6 +44,7 @@ In addition to the standard field options, Link fields have the following settin
   - **Email** — The value is automatically prepended with `mailto:`.
   - **Entry** — Select an [entry](../element-types/entries.md) element.
   - **Phone** — The value is automatically prepended with `tel:`.
+  - **SMS** — The value is automatically prepended with `sms:`.
 
   ::: tip
   The list of available link types can be supplemented by plugins via the <craft5:craft\fields\Link::EVENT_REGISTER_LINK_TYPES> event.
@@ -58,6 +59,7 @@ In addition to the standard field options, Link fields have the following settin
   - **ID** — Content for the anchor’s `id` attribute. 
   - **Relation (rel)** — Content for the anchor’s `rel` attribute.
   - **ARIA Label** — Content for the anchor’s `aria-label` attribute.
+  - **Download** — Include the `download` attribute. This also provides authors a **Filename** field to customize the name of the file when downloaded.
 
 ### Advanced Options
 
@@ -66,12 +68,16 @@ In addition to the standard field options, Link fields have the following settin
 
 ### Type-Specific Options
 
-When the **URL** link type is enabled, two more options become available:
+When the **URL** link type is enabled, three more options become available:
 
 - **Allow root-relative URLs** — Accepts an absolute path, without a protocol or hostname (i.e. `/give`). Relative paths are still not allowed (i.e. `donate`), as they are ambiguous in most contexts.
-- **Allow anchors** — Accepts values that contain only a fragment or hash-prefixed anchor, like `#my-heading`. This should not be enabled alongside the **URL Suffix** advanced field.
+- **Allow anchors** — Accepts values that contain _only_ a hash-prefixed fragment or anchor, like `#my-heading`. This should not be enabled alongside the **URL Suffix** advanced field.
+- **Allow custom URL schemes** — Permits arbitrary URL “schemes,” so that authors can use deep-links and other nonstandard protocols (e.g: `sftp://user@domain.com:1234`).
 
-When enabling a link type that references elements, Craft will display a set of checkboxes that allow you to limit selection to specific [sources](../../system/elements.md#sources)—and in the case of assets, the allowable file kinds.
+When enabling a link type that references elements, Craft will display a set of checkboxes that allow you to limit selection to specific [sources](../../system/elements.md#sources), as well as options specific to that element type. In most cases, these match the corresponding settings for each element type’s [relational field](../../system/relations.md):
+
+- **Assets** — _Allowed File Types_, _Show unpermitted volumes_, _Show unpermitted files_ <Since ver="5.7.0" feature="Limiting selection of assets in link fields by volume and file visibility" />;
+- **Entries** — _Show unpermitted sections_, _Show unpermitted entries_ <Since ver="5.7.0" feature="Limiting selection of entries in link fields by section and entry visibility" />;
 
 ## The Field
 
@@ -150,7 +156,9 @@ When a label is _not_ explicitly defined, Craft will figure out the best textual
 <a href="{{ entry.myLinkFieldHandle.value }}">{{ entry.myLinkFieldHandle.label }}</a>
 ```
 
-This is the default behavior when using a link’s `link` property. Craft also automatically includes the `target` attribute when rendering a link, if the **Open in a new tab** option is available (and enabled) for the field. You can access this manually via the `target` property:
+This is the default behavior when using a link’s `link` property. If you need to retrieve the label _as it was entered_ (bypassing Craft’s internal fallback logic, and potentially returning an empty value), use `link.getLabel(true)`. Passing `false` _ignores_ explicitly-entered labels and returns the fallback label.
+
+Craft also automatically includes the `target` attribute when rendering a link, if the **Open in a new tab** option is available (and enabled) for the field. You can access this manually via the `target` property:
 
 ```twig
 {% set link = entry.myLinkFieldHandle %}
@@ -167,7 +175,7 @@ This is the default behavior when using a link’s `link` property. Craft also a
 <a href="https://custom-url.com/page" target="_blank" rel="noopener noreferrer">custom-url.com</a>
 ```
 
-When the **Open in a new tab** option is _off_, the `target` attribute is omitted.
+When the **Open in a new tab** option is _off_, the `target` attribute is omitted. Craft handles other [advanced link settings](#advanced-options) in a similar manner, across all link types.
 
 ### Relations
 

@@ -495,19 +495,37 @@ Creates and returns a new <yii2:yii\db\Expression> object, for use in database q
 
 ## `failMessageInput`
 
-Shortcut for typing `<input type="hidden" name="failMessage" value="{{ 'Custom fail message'|hash }}">`.
+Renders a hidden `input` element with a tamper-proof [failure](../../development/forms.md#failure) message.
 
-```twig
-{{ failMessageInput('Custom fail message') }}
+```twig{3}
+<form method="post">
+  {{ actionInput('users/save-user') }}
+  {{ failMessageInput('Something went wrong when updating your profile.') }}
+
+  {# ... #}
+</form>
 ```
 
-You can optionally set additional attributes on the tag by passing an `options` argument.
+You can set additional attributes on the `input` tag by passing an `options` argument:
 
 ```twig
-{{ failMessageInput('Custom fail message', {
-  id: 'fail-message-input'
+{{ failMessageInput('Something went wrong when updating your profile.', {
+  id: 'failure-message-input'
 }) }}
 ```
+
+The output is equivalent to this Twig:
+
+```twig
+<input
+  type="hidden"
+  name="failMessage"
+  value="{{ 'Something went wrong when updating your profile.'|hash }}">
+```
+
+Failure messages are stored in the session as [flashes](../../development/forms.md#flashes).
+
+<See path="../../development/forms.md" label="Working with Forms" />
 
 ## `fieldValueSql`
 
@@ -827,19 +845,37 @@ This works identically to Twig’s core [`source`](https://twig.symfony.com/doc/
 
 ## `successMessageInput`
 
-Shortcut for typing `<input type="hidden" name="successMessage" value="{{ 'Custom success message'|hash }}">`.
+Renders a hidden `input` element with a tamper-proof [success](../../development/forms.md#success) message.
 
-```twig
-{{ successMessageInput('Custom success message') }}
+```twig{3}
+<form method="post">
+  {{ actionInput('users/save-user') }}
+  {{ successMessageInput('Your profile has been updated!') }}
+
+  {# ... #}
+</form>
 ```
 
-You can optionally set additional attributes on the tag by passing an `options` argument.
+You can set additional attributes on the `input` tag by passing an `options` argument:
 
 ```twig
-{{ successMessageInput('Custom success message', {
+{{ successMessageInput('Your profile has been updated!', {
   id: 'success-message-input'
 }) }}
 ```
+
+The output is equivalent to this Twig:
+
+```twig
+<input
+  type="hidden"
+  name="successMessage"
+  value="{{ 'Your profile has been updated!'|hash }}">
+```
+
+Success messages are stored in the session as [flashes](../../development/forms.md#flashes).
+
+<See path="../../development/forms.md" label="Working with Forms" />
 
 ## `svg`
 
@@ -888,7 +924,7 @@ You can also specify a custom class name that should be added to the root `<svg>
 ```
 
 ::: tip
-Consider caching the output, especially if you’re loading SVG files from remote volumes or URLs, so Craft doesn’t download the file each time your template is rendered.
+Consider caching the output, especially if you’re loading SVG files from a remote volume, so Craft doesn’t download the file each time your template is rendered.
 :::
 
 ## `tag`

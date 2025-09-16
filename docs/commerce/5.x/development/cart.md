@@ -28,7 +28,7 @@ A customer’s cart is always available via the _carts_ service:
 {% set cart = craft.commerce.carts.cart %}
 ```
 
-Carts are also available to headless or hybrid front-ends, via Ajax:
+Carts are also available to headless or hybrid front-ends, [via Ajax](/5.x/development/forms.md#ajax):
 
 ```js
 fetch('/actions/commerce/cart/get-cart', {
@@ -43,7 +43,10 @@ fetch('/actions/commerce/cart/get-cart', {
 ```
 
 ::: warning
-The path of this Ajax request matters when working with multiple sites and stores! Prefix the [action path](/5.x/system/routing.md) with your site’s base URI if you need to load information about a specific cart.
+The path of this Ajax request is significant when working with multiple sites and stores! To fetch a store-specific cart, you can either…
+
+- …prefix the [action path](/5.x/system/routing.md) with your site’s base URI;
+- …[set the `X-Craft-Site` header](/5.x/development/forms.md#ajax) to the ID or handle of the desired site;
 :::
 
 Either of the examples above will generate a new cart number if one is not already present in the session. The cart may exist only in-memory, until a customer interacts with it in some way (typically by [adding an item](#adding-items), but also saving a custom field, setting their email, adding an address, etc…).
@@ -93,7 +96,7 @@ Craft includes a powerful [internationalization engine](guide:tutorial-i18n#plur
 
 ### Line Items
 
-A cart’s contents are represented by _line items_. Line items are typically populated and refreshed from [purchasables](../system/purchasables.md) when they are added to the cart, but [custom line items](#custom-line-items) can also be created on-the-fly. <Since product="commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
+A cart’s contents are represented by _line items_. Line items are typically populated and refreshed from [purchasables](../system/purchasables.md) when they are added to the cart, but [custom line items](#custom-line-items) can also be created on-the-fly. <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0" feature="Custom, ad-hoc line items" />
 
 Out-of-the-box, most line items represent a [variant](../system/products-variants.md), and have a quantity, description, notes, a calculated subtotal, options, adjustments (like tax and shipping costs), and other metadata. Most importantly, though, the line item retains a reference to its purchasable so that it can be refreshed with the latest information from your store while the customer is shopping. [Donations](../system/donations.md) are also added to the cart as line items.
 

@@ -11,7 +11,7 @@ This feature relies on [Yii’s queue system](https://www.yiiframework.com/exten
 - The ability to set a fallback description for the job.
 - The ability to label and report task progress for a better user experience.
 
-## To Queue or Not to Queue
+## To Queue or Not to Queue?
 
 An ideal queue job is something slow that the a user shouldn’t have to wait on while using a site’s front end or the control panel. Multi-step processes and actions that connect with third-party APIs can be ideal candidates for queueing.
 
@@ -40,15 +40,15 @@ class MyJob extends \craft\queue\BaseJob
         $message = new Message();
 
         $message->setTo('to@domain.tld');
-        $message->setSubject('Oh Hai');
-        $message->setTextBody('Hello from the queue system! 👋');
+        $message->setSubject('Craft Queue Test');
+        $message->setTextBody('Hello from the Craft queue worker! 👋');
 
         Craft::$app->getMailer()->send($message);
     }
 
     protected function defaultDescription(): string
     {
-        return Craft::t('app', 'Sending a worthless email');
+        return Craft::t('app', 'Sending a test email');
     }
 }
 ```
@@ -63,16 +63,14 @@ You can do this with BaseJob’s [`setProgress()`](craft5:craft\queue\BaseJob::s
 - a number between 0 and 1 representing the percent complete
 - an optional, human-friendly label describing the progress
 
-We can modify our example `execute()` method to send an email to every Craft user and report the job’s progress.
-
-::: danger
-Do not lightheartedly send an email to every Craft user. Not cool.
-:::
+We can modify our example `execute()` method to send an email to a number of users and report the job’s progress between each send.
 
 ```php{7-14}
 public function execute($queue): void
 {
-    $users = \craft\elements\User::findAll();
+    $users = \craft\elements\User::find()
+        ->admin(false)
+        ->all();
     $totalUsers = count($users);
 
     foreach ($users as $i => $user) {
@@ -88,8 +86,8 @@ public function execute($queue): void
         $message = new Message();
 
         $message->setTo($user->email);
-        $message->setSubject('Oh Hai');
-        $message->setTextBody('Hello from the queue system! 👋');
+        $message->setSubject('Craft Queue Test');
+        $message->setTextBody('Hello from the Craft queue worker! 👋');
 
         // Swallow exceptions from the mailer:
         try {
@@ -101,29 +99,31 @@ public function execute($queue): void
 }
 ```
 
+Depending on the number of users (or any kind of record or item) and the app’s mailer configuration, this may take longer than the queue’s allowed <abbr title="Time to reserve">TTR</abbr>. Consider [batching](#batched-jobs) jobs that act on many individual items!
+
 ### Dealing with Failed Jobs
 
 In our first example, exceptions from the mailer can bubble out of our job—but in the second example, we catch those errors so the job is not halted prematurely.
 
-This decision is up to you: if the work in a job is nonessential (or will be done again later, like <craft5:craft\queue\jobs\GeneratePendingTransforms>), you can catch and log errors and let the job end nominally; if the work is critical (like synchronizing something to an external API), it may be better to let the exception bubble out of `execute()`.
+This decision is up to you: if the work in a job is nonessential (or can be done again later without consequence, as is the case with <craft5:craft\queue\jobs\GeneratePendingTransforms>), you can catch errors, log them, and let the job exit nominally; if the work is critical (like synchronizing something to or from an external API), it may be better to let the exception bubble out of `execute()`.
 
 The queue wraps every job in its own `try` block, and will mark any jobs that throw exceptions as _failed_. The exception message that caused the failure will be recorded along with the job. Failed jobs can be retried from the control panel or with the `php craft queue/retry [id]` command.
 
 #### Retryable Jobs
 
-The queue will automatically retry failed jobs that implement the [`RetryableJobInterface`](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.0/en/retryable#retryablejobinterface). A job will only be retried after its `ttr` has passed—even if it didn’t use up the allowed time, and will be marked as failed once `canRetry()` returns false.
+The queue will automatically retry failed jobs that implement [`RetryableJobInterface`](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.0/en/retryable#retryablejobinterface). A job will only be retried after its “time to reserve” has passed—even if it didn’t use up the allowed time—and will be marked as failed once `canRetry()` returns false.
 
 ::: warning
-Returning `true` from `canRetry()` can pollute your queue with jobs that may never succeed. Failed jobs are not necessarily bad! Exceptions can be used to track failures in code that runs unattended.
+Unconditionally returning `true` from `canRetry()` will pollute your queue with jobs that may never succeed. Failed jobs are not necessarily bad—exceptions can (and should) be thrown to track failures in code that runs unattended!
 :::
 
 ### Batched Jobs
 
 In situations where there is simply too much work to do in a single request (or within PHP’s memory limit), consider extending <craft5:craft\queue\BaseBatchedJob>.
 
-Batched jobs’ `execute()` method is handled for you. Instead, you must define two new methods:
+Batched jobs’ `execute()` method is implemented for you. Instead, you must define two new methods:
 
-- `loadData()` — Returns a class implementing <craft5:craft\base\Batchable>, like <craft5:craft\db\QueryBatcher>. Data is not necessarily loaded at this point, but a means of fetching data in “slices” must be.
+- `loadData()` — Returns a class implementing <craft5:craft\base\Batchable>, like <craft5:craft\db\QueryBatcher>. Data is not necessarily _loaded_ at this point—instead, you’ll return a means of fetching data in “slices” or “pages.”
 - `processItem($item)` — Your logic for handling a single item in each batch.
 
 ::: tip
@@ -143,23 +143,37 @@ return new QueryBatcher($query);
 Also note that we’re explicitly ordering by `id`—this can help avoid skipped or double-processed items across batches when the underlying data changes (including changes made _within a job_)!
 :::
 
-Batched jobs can also define a default `$batchSize` that is appropriate for the workload. The batch size is not a guaranteed value, but a target when Craft spawns the next job—it will keep track of memory usage and _may_ stop short, scheduling the next batch to resume where it left off.
+Batched jobs can also define a default `$batchSize` that is appropriate for the workload. The batch size is a _maximum_ value, carried from job to job—Craft keeps track of memory usage and _may_ stop short and push a new job for the next batch. Every job maintains an `itemOffset` so they can be resumed exactly where the last one left off.
 
 ::: warning
 Batched jobs **must** be pushed using <craft5:craft\helpers\Queue::push()>, or `delay` and `ttr` settings may be lost for subsequent batches.
 :::
 
+#### Batch Hooks
+
+Special setup and cleanup actions can be defined in two pairs of methods:
+
+| Method… | Runs… |
+| --- | --- |
+| `before()` | …at the very beginning of a series of batched jobs. |
+| `beforeBatch()` | …prior to each batch in a series. |
+| `afterBatch()` | …after each batch in a series. |
+| `after()` | …at the very end of a series of batched jobs. |
+
+`before()` and `after()` are invoked _once_ per manually-pushed batched job, whereas `beforeBatch()` and `afterBatch()` are run for _every_ slice. If all the items in a batched job are processed in a single job, it will invoke all four hooks.
+
 ## Adding Your Job to the Queue
 
-Once you’ve created your job, you can add it to the queue:
+Once you’ve created your job, add it to the queue with the helper:
 
-```php
+```php{4}
+use craft\helpers\Queue;
 use mynamespace\queue\jobs\MyJob;
 
-\craft\helpers\Queue::push(new MyJob());
+Queue::push(new MyJob());
 ```
 
-You can do this wherever it makes sense—most likely in a controller action or service.
+Users and developers typically cannot (and should not need to) trigger specific jobs at-will, so it’s important that your plugin push jobs where it makes sense—typically in a [controller action](controllers.md) or [service](services.md).
 
 ### Specifying Priority
 

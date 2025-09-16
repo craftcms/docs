@@ -9,8 +9,8 @@
 | Param                                     | Description
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [admin](#admin)                           | Narrows the query results to only users that have admin accounts.
-| [afterPopulate](#afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#andrelatedto)             | Narrows the query results to only users that are related to certain other elements.
+| [andWith](#andwith)                       | Causes the query to return matching users eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
 | [asArray](#asarray)                       | Causes the query to return matching users as arrays of data, rather than [User](craft4:craft\elements\User) objects.
 | [assetUploaders](#assetuploaders)         | Narrows the query results to only users that have uploaded an asset.
 | [authors](#authors)                       | Narrows the query results to only users that are authors of an entry.
@@ -54,6 +54,7 @@
 
 #### `admin`
 
+
 Narrows the query results to only users that have admin accounts.
 
 
@@ -75,20 +76,9 @@ $users = \craft\elements\User::find()
 :::
 
 
-#### `afterPopulate`
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 #### `andRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only users that are related to certain other elements.
 
@@ -117,7 +107,24 @@ $users = \craft\elements\User::find()
 :::
 
 
+#### `andWith`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching users eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+
+
+
+.
+
+
+
+
+
+
 #### `asArray`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching users as arrays of data, rather than [User](craft4:craft\elements\User) objects.
 
@@ -144,6 +151,7 @@ $users = \craft\elements\User::find()
 
 #### `assetUploaders`
 
+
 Narrows the query results to only users that have uploaded an asset.
 
 
@@ -166,6 +174,7 @@ $users = \craft\elements\User::find()
 
 
 #### `authors`
+
 
 Narrows the query results to only users that are authors of an entry.
 
@@ -190,6 +199,8 @@ $users = \craft\elements\User::find()
 
 #### `cache`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -202,6 +213,7 @@ Enables query cache for this Query.
 
 
 #### `can`
+
 
 Narrows the query results to only users that have a certain user permission, either directly on the user account or through one of their user groups.
 
@@ -228,6 +240,8 @@ $users = \craft\elements\User::find()
 
 #### `clearCachedResult`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
@@ -236,6 +250,8 @@ Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#ca
 
 
 #### `dateCreated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the users’ creation dates.
 
@@ -277,6 +293,8 @@ $users = \craft\elements\User::find()
 
 #### `dateUpdated`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the users’ last-updated dates.
 
 
@@ -315,6 +333,7 @@ $users = \craft\elements\User::find()
 
 #### `email`
 
+
 Narrows the query results based on the users’ email addresses.
 
 Possible values include:
@@ -346,6 +365,7 @@ $users = \craft\elements\User::find()
 
 #### `firstName`
 
+
 Narrows the query results based on the users’ first names.
 
 Possible values include:
@@ -375,6 +395,8 @@ $users = \craft\elements\User::find()
 
 
 #### `fixedOrder`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in the order specified by [id](#id).
 
@@ -407,6 +429,7 @@ $users = \craft\elements\User::find()
 
 #### `fullName`
 
+
 Narrows the query results based on the users’ full names.
 
 Possible values include:
@@ -436,6 +459,7 @@ $users = \craft\elements\User::find()
 
 
 #### `group`
+
 
 Narrows the query results based on the user group the users belong to.
 
@@ -471,6 +495,7 @@ $users = \craft\elements\User::find()
 
 #### `groupId`
 
+
 Narrows the query results based on the user group the users belong to, per the groups’ IDs.
 
 Possible values include:
@@ -504,6 +529,7 @@ $users = \craft\elements\User::find()
 
 #### `hasPhoto`
 
+
 Narrows the query results to only users that have (or don’t have) a user photo.
 
 
@@ -526,6 +552,8 @@ $users = \craft\elements\User::find()
 
 
 #### `id`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-id" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the users’ IDs.
 
@@ -567,6 +595,8 @@ This can be combined with [fixedOrder](#fixedorder) if you want the results to b
 
 #### `ignorePlaceholders`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching users as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
@@ -580,6 +610,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 #### `inReverse`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -605,6 +637,8 @@ $users = \craft\elements\User::find()
 
 
 #### `language`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the users should be queried in, based on their language.
 
@@ -644,6 +678,7 @@ $users = \craft\elements\User::find()
 
 #### `lastLoginDate`
 
+
 Narrows the query results based on the users’ last login dates.
 
 Possible values include:
@@ -680,6 +715,7 @@ $users = \craft\elements\User::find()
 
 #### `lastName`
 
+
 Narrows the query results based on the users’ last names.
 
 Possible values include:
@@ -710,6 +746,8 @@ $users = \craft\elements\User::find()
 
 #### `limit`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines the number of users that should be returned.
 
 
@@ -732,6 +770,8 @@ $users = \craft\elements\User::find()
 
 
 #### `offset`
+
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
 
 Determines how many users should be skipped in the results.
 
@@ -756,6 +796,8 @@ $users = \craft\elements\User::find()
 
 #### `orderBy`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
 
 
@@ -778,6 +820,8 @@ $users = \craft\elements\User::find()
 
 
 #### `preferSites`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -814,6 +858,8 @@ $users = \craft\elements\User::find()
 
 #### `prepareSubquery`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -822,6 +868,8 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 #### `relatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only users that are related to certain other elements.
 
@@ -849,6 +897,8 @@ $users = \craft\elements\User::find()
 
 
 #### `search`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only users that match a search query.
 
@@ -883,6 +933,8 @@ $users = \craft\elements\User::find()
 
 #### `siteSettingsId`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the users’ IDs in the `elements_sites` table.
 
 
@@ -916,6 +968,7 @@ $user = \craft\elements\User::find()
 
 
 #### `status`
+
 
 Narrows the query results based on the users’ statuses.
 
@@ -953,6 +1006,8 @@ $users = \craft\elements\User::find()
 
 #### `trashed`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only users that have been soft-deleted.
 
 
@@ -978,6 +1033,8 @@ $users = \craft\elements\User::find()
 
 #### `uid`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the users’ UIDs.
 
 
@@ -1002,6 +1059,7 @@ $user = \craft\elements\User::find()
 
 
 #### `username`
+
 
 Narrows the query results based on the users’ usernames.
 
@@ -1039,6 +1097,8 @@ $user = \craft\elements\User::find()
 
 #### `with`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching users eager-loaded with related elements.
 
 
@@ -1066,6 +1126,8 @@ $users = \craft\elements\User::find()
 
 #### `withCustomFields`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Sets whether custom fields should be factored into the query.
 
 
@@ -1078,6 +1140,7 @@ Sets whether custom fields should be factored into the query.
 
 
 #### `withGroups`
+
 
 Causes the query to return matching users eager-loaded with their user groups.
 

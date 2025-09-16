@@ -19,6 +19,11 @@ Let’s take a moment to audit and prepare your project.
 - All your environments meet Craft 5’s [minimum requirements](requirements.md) (the latest version of Craft 4 will run in any environment that meets Craft 5’s requirements, so it’s safe to update PHP and your database ahead of the 5.x upgrade):
     - PHP 8.2
     - MySQL 8.0.17+ using InnoDB, MariaDB 10.4.6+, or PostgreSQL 13+
+
+      ::: warning
+      Due to its diverging parity with MySQL, we no longer recommend MariaDB for Craft 5. If you are not able to [migrate to MySQL](https://blogs.oracle.com/mysql/post/how-to-migrate-from-mariadb-to-mysql-80), make sure your server is using the latest MariaDB version to avoid stability issues.
+      :::
+
 - You’ve reviewed the breaking changes in Craft 5 further down this page and understand that additional work and testing may lie ahead, post-upgrade;
 
 Once you’ve completed everything above, you’re ready to start the upgrade process!
@@ -64,13 +69,20 @@ ddev start
 
     Read more about this process in the [Database Character Set and Collation](#database-character-set-and-collation) section, below.
 
-1. Edit your project’s `composer.json` to require `"craftcms/cms": "^5.0.0"` and Craft-5-compatible plugins, all at once.
+1. Visit the **Craft 5 Upgrade** utility, and press **Prep `composer.json`** to generate an updated version of your `composer.json`.
+    You may copy this output verbatim into your project, or transcribe individual version constraints.
+    Craft also adjusts [your `platform` config](https://getcomposer.org/doc/06-config.md#platform) to agree with Craft 5’s requirements.
+
+    ![Screenshot of the Upgrade utility showing a button labeled “Prep composer.json”](./images/upgrade-prep-composer.png)
+
+    Beta versions of plugins may be suggested!
+    Adjust your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings if those plugins depend on other packages that do not yet have stable releases.
+    This tool does _not_ adjust your project’s other dependencies.
 
     ::: tip
-    You’ll need to manually edit each plugin version in `composer.json`. If any plugins are still in beta, you may need to change your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings.
+    To perform this step manually, change your `craftcms/cms` constraint to `^5.0.0`, and each plugin’s constraint to the Craft 5-compatible versions listed in the upgrade utility.
+    You must make _all_ of these edits before proceeding!
     :::
-
-    While you’re at it, review your project’s [other dependencies](#entry-scripts)! You may also need to add `"php": "8.2"` to your [platform](https://getcomposer.org/doc/06-config.md#platform) requirements, or remove it altogether.
 
 1. Run `composer update`.
 1. Make any required changes to your [configuration](#configuration).
@@ -261,7 +273,7 @@ The reusability of entry types means that some GraphQL queries have changed.
     Entries can still be queried by section using the corresponding query type (i.e. `ingredientsEntries`) or the `section` argument for the generic `entries` query:
 
     ::: code
-    ```gql{2} Section Query
+    ```graphql{2} Section Query
     query MyIngredients {
       ingredientsEntries {
         ... on ingredient_Entry {
@@ -270,7 +282,7 @@ The reusability of entry types means that some GraphQL queries have changed.
       }
     }
     ```
-    ```gql{2} Generic Query
+    ```graphql{2} Generic Query
     query MyIngredients {
       entries(section: "ingredients") {
         ... on ingredient_Entry {
@@ -284,7 +296,7 @@ The reusability of entry types means that some GraphQL queries have changed.
     The corresponding queries for entries nested within a Matrix field would look like this:
 
     ::: code
-    ```gql{2} Field Query
+    ```graphql{2} Field Query
     query DifficultSteps {
       stepsFieldEntries(difficulty: "hard") {
         ... on step_Entry {
@@ -294,7 +306,7 @@ The reusability of entry types means that some GraphQL queries have changed.
       }
     }
     ```
-    ```gql{2} Generic Query
+    ```graphql{2} Generic Query
     query DifficultSteps {
       entries(field: "steps", difficulty: "hard") {
         ... on step_Entry {
@@ -309,7 +321,7 @@ The reusability of entry types means that some GraphQL queries have changed.
 - Mutations directly targeting nested entries in Matrix fields will use a similar structure, but combining the field handle and entry type handle: `save_stepsField_step_Entry`.
 - When mutating a Matrix field value via GraphQL, the nested entries must be passed under an `entries` key instead of a `blocks` key:
 
-    ```gql{2,5}
+    ```graphql{2,5}
     mutation AddStep {
       save_recipes_recipe_Entry(
         title: "Yummy Bits and Bytes"

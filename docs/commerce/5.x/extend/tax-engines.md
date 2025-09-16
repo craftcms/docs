@@ -12,14 +12,12 @@ You can also add your own navigation items and views to the tax section.
 
 ## Tax Engine Class
 
-The term “tax engine” refers to a relatively straightforward class that implements [TaxEngineInterface](commerce4:craft\commerce\base\TaxEngineInterface), like Commerce does in its [Tax](commerce4:craft\commerce\engines\Tax) class. It does two important things:
+The term “tax engine” refers to a relatively straightforward class that implements [TaxEngineInterface](commerce5:craft\commerce\base\TaxEngineInterface), like Commerce does in its [Tax](commerce5:craft\commerce\engines\Tax) class. It does two important things:
 
-1. Returns the class name for the [Adjuster](adjusters.md) that should be used for calculating tax, where you have the option of replacing [the one that ships with Commerce](commerce4:craft\commerce\adjusters\Tax).
+1. Returns the class name for the [Adjuster](adjusters.md) that should be used for calculating tax, where you have the option of replacing [the one that ships with Commerce](commerce5:craft\commerce\adjusters\Tax).
 2. Uses a series of simple methods to toggle and customize parts of the control panel tax UI.
 
 By default, categories, zones, and rates may each be created, edited, and deleted by the store manager.
-
-![](../images/tax-ui.png)
 
 Let’s use tax categories as an example to demonstrate how TaxEngineInterface methods can determine what’s available to the store manager:
 

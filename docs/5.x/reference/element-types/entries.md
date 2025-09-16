@@ -6,6 +6,7 @@ related:
     label: Introduction to Elements
   - uri: ../field-types/entries.md
     label: Entries Fields
+sidebarDepth: 2
 ---
 
 # Entries
@@ -26,7 +27,7 @@ Craft uses _entry types_ to define atomic units of content, which are then expos
 
 Entry types became a global resource in Craft 5. This means you can define a content type _once_, then use it in multiple sections, as a [nested](#nested-entries) block in a [Matrix](../field-types/matrix.md) field, or some combination of the two. As a result, some settings have moved around!
 
-Most importantly, you’ll manage entry types in the **Settings** &rarr; **Entry Types** screen—or create them on-the-fly when working on a section or Matrix field.
+Most importantly, you’ll manage entry types in the **Settings** &rarr; **Entry Types** screen—or create them on-the-fly in a slideout when working on a section or Matrix field.
 
 </Block>
 
@@ -42,6 +43,7 @@ Entry types have the following settings:
 
 - **Name** — Used throughout the control panel as a UI label.
 - **Handle** — Uniquely identifies entries of this type in [templates](../../development/templates.md) and [queries](../../development/element-queries.md).
+- **Description** <Since ver="5.8.0" feature="Entry type descriptions" /> — A short explanation of what the entry type is used for. This is displayed in a tooltip when the entry type is selected elsewhere in the control panel.
 - **Icon** and **Color** — Choose a symbol and color to subtly distinguish entries of this type throughout the control panel.
 - **Title Translation Method** — In multi-site projects, choose how titles are localized.
 - **Default Title Format** — Entry titles can be set by the author or [dynamically defined](#dynamic-entry-titles) from other values via an [object template](../../system/object-templates.md).
@@ -49,7 +51,14 @@ Entry types have the following settings:
   - **Slug Translation Method** — In multi-site projects, choose how slugs are localized.
 - **Show the Status field** — Manually set each entry’s status, or allow it to be dictated by its usage.
 - **Field Layout** — Add and arrange [custom fields](../../system/fields.md) to suit your content model.
+- **Generated Fields** <Since ver="5.8.0" feature="Generated fields" /> — Create additional [virtual attributes](../../system/elements.md#generated-fields) on entries of this type from short [object templates](../../system/object-templates.md).
 - **Card Attributes** — Select which attributes and fields appear on [cards](../../system/elements.md#chips-cards) of this type.
+
+When you’re done configuring an entry type, press **Save** or <kbd>Ctrl/Command + S</kbd> to apply the changes.
+
+::: tip
+Entry types can be duplicated or cloned by using the **Save** menu’s **Save as new entry type** option. <Since ver="5.8.0" feature="Duplicating entry types" />
+:::
 
 ### Aliases <Since ver="5.6.0" feature="Entry type aliases" />
 
@@ -126,8 +135,9 @@ Sections organize and expose [entry types](#entry-types) for content authors. In
 - Whether entries in the section have URLs;
 - What the entries’ URLs should look like;
 - Which template should get loaded if an entry’s URL is requested;
+- What preview targets are available to authors;
 - What [entry types](#entry-types) are available in the section;
-- How many authors can be associated with each entry;
+- How many authors can be associated with each entry (or disable authors <Since ver="5.7.0" feature="Authorless sections" />);
 
 If your project has multiple [sites](../../system/sites.md), your section can define these additional settings:
 
@@ -226,14 +236,22 @@ Consider these tips for creating special URIs:
 - [Aliases](../../configure.md#aliases-and-environment-variables) can be evaluated with the [`alias()` function](../twig/functions.md#alias): `{{ alias('@basePressUri') }}/news`, `{{ alias('@mySectionUri') }}`.
 - The [null-coalescing operator](https://twig.symfony.com/doc/3.x/templates.html#other-operators) (`??`) can silently swallow undefined variable errors (like `parent.uri`, above);
 
+Elements accessed via the current `object` (like authors or [relational fields](../../system/relations.md#custom-fields)) will be loaded in the appropriate site, but _new_ element queries (like the example above that uses `craft.entries()`), must explicitly use `.site()` or `.siteId()` to load elements in the same site. The current element’s site can always be accessed via `object.site` or `object.siteId`, respectively:
+
+```
+{craft.entries().section('mySingle').site(object.site).one().slug}
+```
+
+If you only have one site, you can omit this for brevity; similarly, if the resolved value tends to be the same as a value you’re already storing in project config, consider hard-coding it.
+
 ::: warning
-Elements accessed via the current `object` (like authors or relational fields) will be loaded in the appropriate site, but _new_ element queries (like the example above that uses `craft.entries()`), must explicitly use `.site()` to avoid loading elements in the default site:
+**Do not** use element IDs directly in URI formats. They are not a [reliable identifier](../../system/project-config.md#ids-uuids-and-handles) across environments. For example, keeping channel entries’ URLs synchronized with a [single](#singles) using this format…
 
 ```
-{craft.entries().section('mySingle').site(object.siteId).one().slug}
+{craft.entries().id(123).one().slug}/{slug}
 ```
 
-The current element’s site ID can always be accessed via `object.siteId`.
+…may load the correct entry in development, but find a different one on your live site. Use a handle (like the example above) for consistency!
 :::
 
 #### Hierarchical URIs
@@ -360,7 +378,7 @@ When moving an entry, it’s important to note these behaviors:
 
 Entries also power the [Matrix](../field-types/matrix.md) and [CKEditor](plugin:ckeditor) fields, which means your [entry types](#entry-types) can represent entire pages, or the building blocks thereof. How you implement your content model and authoring experience is entirely up to you!
 
-Nested entries are an implementation of nested _elements_, a broader category of “owned” elements that includes [addresses](addresses.md) and powers Commerce’s product and variant architecture.
+Nested entries are an implementation of nested _elements_, a broader category of “owned” elements that includes [addresses](addresses.md) and powers Commerce’s product and variant architecture. The [Content Block](../field-types/content-block.md) field also stores data in a nested entry. <Since ver="5.8.0" feature="The Content Block field" />
 
 ## Editing Entries
 
@@ -461,6 +479,81 @@ Notifications will appear in the bottom-left corner along with other flashes, an
 ::: tip
 Automatic merging of changes from canonical entries is nondestructive, and non-optional. Merging occurs just before an entry’s edit screen is viewed.
 :::
+
+### Copying Entries <Since ver="5.7.0" feature="Copying entries" />
+
+Entries can be copied and pasted between sections and fields that support the given type(s).
+
+<See path="../../system/elements.md" hash="copying-elements" label="Copying Elements" description="Learn how to copy entries and other elements between contexts." />
+
+## Statuses
+
+In addition to the [base element statuses](../../system/elements.md#statuses), entries may appear in any of these states:
+
+- **Pending** (`pending`) — The **Post Date** is in the future, or not set.
+- **Expired** (`expired`) — The **Expiry Date** is set, and in the past.
+- **Live** (`live`) — The **Post Date** is in the past, and the **Expiry Date** is in the future (if set at all). This is the default status used in entry queries.
+
+::: tip
+Status pips and controls may be hidden from element edit screes, indexes, chips, and cards, if an entry’s type has the **Show the Status field** setting _off_.
+:::
+
+When [querying entries by status](../../system/elements.md#querying-by-status), keep in mind that each status identifier in the list above represents multiple conditions. Statuses and their default query conditions help make the appearance or availability of entries consistent between the control panel and front-end; for this reason, params like `.postDate()` and `.expiryDate()` introduce _additional_ constraints, rather than replacing Craft’s. If you need full control over the query constraints, call `.status(null)`.
+
+### Static Statuses <Since ver="5.7.0" feature="Static storage of entry statuses" />
+
+Craft’s powerful [events](../../extend/events.md) system allows developers to react to element updates, and connect author activity and content to other systems. Statuses, however, can be difficult to pin down—entries rely heavily on their **Post Date** and **Expiry Date** attributes to determine when an entry is returned, and what its “status” is at any given time.
+
+Take this query that fetches blog articles:
+
+```twig
+{% set posts = craft.entries()
+  .section('blog')
+  .all() %}
+```
+
+Suppose we have an article with a **Post Date** five minutes in the future. Loading the page with this query _now_ would not display the pending article; if we wait five minutes and refresh the page, the entry _does_ show up… without any intervention by the author! This is because each query compares the server’s current time with entries’ stored `postDate` and `expiryDate` columns; depending on when you look at the data, Craft considers it to be in different statuses. Therein lies the issue: nothing _happens_ when a pending entry “goes live” (or a live entry “expires”), so Craft can’t emit status-change events.
+
+The <config5:staticStatuses> config setting alters this behavior: instead of calculating statuses on-the-fly, Craft stores a static representation of an entry’s status at the time it is saved. Entry queries also use simplified conditions, matching against the stored values instead of date-based comparisons. In this mode, however, entries’ statuses only change when they are saved. The accompanying [`update-statuses` console command](../cli.md#update-statuses) provides a means of routinely checking and re-saving entries:
+
+```bash
+ddev craft update-statuses
+```
+
+::: warning
+If you opt in to static statuses, you must run this command with a tool like [cron](https://en.wikipedia.org/wiki/Cron) to ensure your content is published and expired in a reasonable amount of time.
+:::
+
+In a [private plugin](../../extend/plugin-guide.md) or [custom module](../../extend/module-guide.md), you can [listen for save events](kb:handling-entry-saves) and check whether an entry received a new status:
+
+```php
+use craft\base\Event;
+use craft\elements\Entry;
+use craft\events\ModelEvent;
+use craft\helpers\ElementHelper;
+
+Event::on(
+    Entry::class,
+    Entry::EVENT_AFTER_SAVE,
+    function (ModelEvent $event) {
+        /** @var Entry $entry */
+        $entry = $event->sender;
+
+        // Make sure we’re dealing with a canonical entry, and that there was indeed a status change:
+        if (
+            !ElementHelper::isDraftOrRevision($entry) &&
+            $entry->getStatus() !== $entry->oldStatus
+        ) {
+            if ($entry->getStatus() === Entry::STATUS_LIVE) {
+                // The entry just moved into the "live" status!
+            } elseif ($entry->oldStatus === Entry::STATUS_LIVE) {
+                // The entry *was* live, but isn’t any more!
+            }
+        }
+    });
+```
+
+Depending on your editorial process, you will need to adjust the cases here to handle different transitions. Keep in mind that this handler may also run in response to normal entry saves (during an HTTP request) so it is advisable to offload any time- or resource-intensive operations to a [queue job](../../extend/queue-jobs.md).
 
 ## Querying Entries
 

@@ -80,8 +80,60 @@ Event::on(
 Here, we’re only bothering to attach the behavior to entry elements that belong to the `blog` section.
 
 ::: tip
-This event registration signature is consistent across any class that emits the `EVENT_DEFINE_BEHAVIORS` event.
+This event registration signature is consistent across any class that emits the `EVENT_DEFINE_BEHAVIORS` event:
+
+- Subclasses of <craft5:craft\base\Model>, <craft5:craft\db\ActiveRecord>, <craft5:craft\db\Query>, and <craft5:craft\web\Controller>
+- <craft5:craft\web\twig\variables\CraftVariable>
 :::
+
+### Configuration
+
+Behaviors can also be attached to system components as they’re initialized, with [application configuration](../reference/config/app.md):
+
+```php app.web.php
+use craft\web\ErrorHandler;
+use mynamespace\myplugin\behaviors\RedirectBehavior;
+
+return [
+    // ...
+    'components' => [
+        'errorHandler' => [
+            'as customRedirectHandler' => RedirectBehavior::class,
+        ],
+    ],
+];
+```
+
+This behavior can then add event handlers, provide additional methods, and so on.
+
+::: warning
+If your goal is to expose functionality to developers (say, via Craft’s Twig-accessible `craft.app` APIs), consider implementing that logic in a helper class, a [Twig extension](extending-twig.md), or a behavior attached to `<craft5:craft\web\twig\variables\CraftVariable>`.
+:::
+
+### Late Attachment
+
+Some classes will be instantiated prior to your plugin [initializing](plugin-guide.md#initialization), and registering its `EVENT_DEFINE_BEHAVIORS` handler. In these cases, you may need to retroactively attach a behavior to specific objects:
+
+```php
+// Load all the known/memoized instances of a model:
+$sites = Craft::$app->getSites()->getAllSites(true);
+
+// Attach the behavior to each one, manually:
+foreach ($sites as $site) {
+    $site->attachBehavior('myplugin:geolocation', Geolocation::class);
+}
+
+// Attach to any other models that are instantiated later:
+Event::on(
+    Site::class,
+    Site::EVENT_DEFINE_BEHAVIORS,
+    function(DefineBehaviorsEvent $event) {
+        $event->behaviors['myplugin:geolocation'] = Geolocation::class;
+    }
+);
+```
+
+Models that are _not_ memoized like the <craft5:craft\models\Site>s above (and inaccessible via Craft’s public APIs) may be more difficult (or impossible) to retroactively attach behaviors to. In these situations, you can try a [configuration](../reference/config/app.md)-based approach, or look for an [event](events.md) that exposes it. This can also be an indication that the object has limited extensibility.
 
 ### Naming
 

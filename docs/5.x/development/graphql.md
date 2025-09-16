@@ -11,7 +11,7 @@ Craft provides a [GraphQL](https://graphql.org) API you can use to work with you
 
 ## Getting Started
 
-GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel gives you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
+GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel give you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
 ::: tip
 You can also execute GraphQL queries from [Twig templates](templates.md) with the [`gql()` function](../reference/twig/functions.md#gql).
@@ -19,7 +19,24 @@ You can also execute GraphQL queries from [Twig templates](templates.md) with th
 
 ### Setting Up Your API Endpoint
 
-By default, none of your content is publicly accessible via GraphQL—you must explicitly authorize resources by configuring one or more public or private [schemas](#define-your-schemas).
+By default, none of your content is publicly accessible via GraphQL—you must explicitly authorize resources by defining a route and configuring one or more public or private [schemas](#define-your-schemas).
+
+#### Create a GraphQL Route
+
+The GraphQL endpoint is always available via its [action path](../system/routing.md), at `/index.php?action=graphql/api` or `/actions/graphql/api`. If you would prefer to access the API via a more concise path, create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) in `config/routes.php` that maps to this `graphql/api` controller action—the following rule would make the GraphQL API available at `/api`:
+
+```php
+return [
+    'api' => 'graphql/api',
+    // ...
+];
+```
+
+These routes are _not_ evaluated when <config5:headlessMode> is enabled; you must use one of the built-in action URLs.
+
+::: tip
+Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using a [CORS filter](../reference/config/app.md#cors).
+:::
 
 #### Define Your Schemas
 
@@ -50,25 +67,10 @@ To create a token, visit <Journey path="GraphQL, Tokens" /> and click **New toke
 
 Because tokens are similar to [user groups](../system/user-management.md#user-groups) in the way they grant access to system resources, only admins are allowed to create and modify them. Tokens can also be created via the CLI, with the [`graphql/create-token` command](../reference/cli.md#graphql-create-token). To find a schema’s UUID (required by this command), run `graphql/list-schemas`.
 
-While [schemas](#define-your-schemas) are tracked in [project config](../system/project-config.md), tokens are only stored in the database.
+While [schemas](#define-your-schemas) are tracked in [project config](../system/project-config.md), tokens are only stored in the database and must be created in each environment.
 
 ::: danger
 Carefully protect tokens for schemas that allow [mutations](#mutations)! These are effectively as dangerous as a user with the equivalent permissions.
-:::
-
-#### Create a GraphQL Route
-
-The GraphQL endpoint is always available via its [action path](../system/routing.md), at `/index.php?action=graphql/api`. If you would prefer to access the API via a more concise path, create a [URL rule](../system/routing.md#advanced-routing-with-url-rules) in `config/routes.php` that maps to this `graphql/api` controller action—the following rule would make the GraphQL API available at `/api`:
-
-```php
-return [
-    'api' => 'graphql/api',
-    // ...
-];
-```
-
-::: tip
-Craft sets an `access-control-allow-origin: *` header by default on GraphQL responses; consider limiting that for security using the <config5:allowedGraphqlOrigins> setting.
 :::
 
 ## Sending API Requests
@@ -100,9 +102,7 @@ The easiest way to start exploring your GraphQL API is with the built-in [Graphi
 ![The built-in GraphiQL IDE](../images/graphiql.png)
 
 ::: tip
-The included GraphiQL IDE preselects a special “Full Schema” option for exploration. This schema is only available to logged-in administrators. Change the active schema from the dropdown menu:
-
-![GraphiQL’s Full Schema default](../images/graphiql-full-schema.png)
+The included GraphiQL IDE preselects a special “Full Schema” option for exploration. This schema is only available to logged-in administrators. Change the active schema from the dropdown menu in the upper-right corner.
 :::
 
 ### Using Another IDE
@@ -189,7 +189,7 @@ RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 
 ## Examples
 
-### Query
+### Basic Query
 
 Here’s what a [query](#query-reference) for two news entries might look like, complete with a formatted `dateCreated` and custom-transformed `featureImage`:
 
@@ -246,25 +246,242 @@ Here’s what a [query](#query-reference) for two news entries might look like, 
 ```
 :::
 
-#### Relations
+### Custom Fields
 
-You can use relational arguments like `relatedToAssets` and `relatedToEntries` to limit results based on relationships to other elements. Their respective types (referenced below) look like `[*CriteriaInput]`, where `*` will be the name of the target element, and you can pass an array of one or more objects each having the same arguments you’d use in an [element query](element-queries.md).
+In addition to nave element properties, content stored in [custom fields](../system/fields.md) is accessible via the GraphQL API.
 
-We could use the `relatedToCategories` argument, for example, to narrow our previous example’s news articles to those related to an “Announcements” category:
+The keys you use to access that data often depends on how the fields are connected to each type of element via [field layouts](../system/fields.md#field-layouts). Craft defines interfaces for each of your element types’ variations (like entry types or category groups) and exposes fields using either their global or locally-overridden handle. Altogether, this means that you will often add custom fields within an inline fragment:
 
-```graphql{2}
-{
-  entries (section: "news", relatedToCategories: [{slug: "announcements"}]) {
+```graphql{5,10,13}
+query StationsQuery {
+  entries(section: "weatherBeacons") {
     title
+    id
+    ... on terrestrialStation_Entry {
+      location {
+        administrativeArea
+      }
+    }
+    ... on atmosphericStation_Entry {
+      altitude
+    }
+    ... on maritimeStation_Entry {
+      douglasSeaScale
+    }
+  }
+}
+```
+
+In this example, `title` and `id` are fields available on _all_ entries, whereas `location`, `altitude`, and `douglasSeaScale` are fields available only on specific entry type interfaces (`terrestrialStation_Entry`, `atmosphericStation_Entry`, and `maritimeStation_Entry`, respectively).
+
+While specific interfaces are required for _selecting_ fields, they aren’t required when using custom fields as query arguments. Here, we’re using a `sentiment` field to narrow a query for “Review” entries:
+
+```graphql
+query PositiveReviews {
+  entries(section: "reviews", sentiment: "awesome") {
+    postDate@formatDateTime(format: "F j, Y")
+    title
+    body
   }
 }
 ```
 
 ::: tip
-See [Relations](../system/relations.md) for more on Craft’s relational field types.
+Mouseover any token in the GraphiQL editor to view introspections, or open the **Documentation Explorer** to learn about the acceptable argument types for each [field type](../reference/field-types/README.md).
 :::
 
-Advanced relational conditions are possible using the `relatedViaField` and `relatedViaSite` params. <Since ver="5.4.0" feature="Site- and field-specific relational criteria" />
+#### Relationships
+
+The GraphQL API exposes Craft’s powerful, field-driven [relations](../system/relations.md) system in a familiar way.
+
+::: tip
+The following examples include server-rendered Twig “equivalents,” which are necessarily bound to HTML output.
+:::
+
+- Select fields from related elements:
+
+  ::: code
+  ```graphql GraphQL
+  query Posts {
+    entries(section: "blog") {
+      title
+      url
+
+      ... on post_Entry {
+        # Assets:
+        featureImage {
+          url
+          width
+          height
+        }
+
+
+        # Categories:
+        primaryCategory {
+          title
+          url
+        }
+
+        topics {
+          title
+          url
+        }
+      }
+    }
+  }
+  ```
+  ```twig Twig
+  {% set posts = craft.entries()
+    .section('blog')
+    .all() %}
+
+  {% for post in posts %}
+    {{ post.primaryCategory.eagerly().one().title }}
+
+    {% set image = post.featureImage.eagerly().one() %}
+
+    {% if image %}
+      {{ image.getImg() }}
+    {% endif %}
+
+    {{ post.title }}
+
+    <ul>
+      {% for category in post.topics.eagerly().all() %}
+        <li>{{ category.getLink() }}</li>
+      {% endfor %}
+    </ul>
+  {% endfor %}
+  ```
+  :::
+
+  Selections can be arbitrarily deep, but they must be explicit—GraphQL does not provide a means of recursively querying data.
+
+- Narrow results using a specific field:
+
+  ::: code
+  ```graphql GraphQL
+  query TopicPosts {
+    entries(section: "blog", primaryCategory: [1234]) {
+      title
+      url
+
+      # ...
+    }
+  }
+  ```
+  ```twig Twig
+  {% set topicPosts = craft.entries()
+    .section('blog')
+    .primaryCategory(category)
+    .all() %}
+
+  {% for post in topicPosts %}
+    {# ... #}
+  {% endfor %}
+  ```
+  :::
+
+  You may need to pre-flight a query to translate an identifier (like a slug) into a valid category ID:
+
+  ```graphql
+  query CategoryLookup($slug: String) {
+    category(slug: [$slug]) {
+      id
+    }
+  }
+  ```
+
+- Scope selection of related elements:
+
+  ::: code
+  ```graphql{6} GraphQL
+  query PostsWithBroadTopics {
+    entries(section: "blog") {
+      title
+      url
+
+      ... on post_Entry {
+        topics(level: 1) {
+          title
+        }
+      }
+    }
+  }
+  ```
+  ```twig{8} Twig
+  {% set posts = craft.entries()
+    .section('blog')
+    .all() %}
+
+  {% for post in posts %}
+    {{ post.title }}
+
+    Filed in {{ post.topics.level(1).eagerly().collect().join(', ') }}
+  {% endfor %}
+  ```
+  :::
+
+
+- Find elements using abstract relational criteria:
+
+  ::: code
+  ```graphql GraphQL
+  query TopicPosts {
+    entries(
+      section: "blog"
+      relatedToCategories: [
+        {
+          slug: ["travel", "winter-sports"]
+          group: "topics"
+          relatedViaField: "topics"
+        }
+      ]
+    ) {
+      title
+      url
+
+      # ...
+    }
+  }
+  ```
+  ```twig{1-4,8-11} Twig
+  {% set categoryIds = craft.categories()
+    .group('topics')
+    .slug(['travel', 'winter-sports'])
+    .ids() %}
+
+  {% set relatedPosts = craft.entries()
+    .section('blog')
+    .relatedTo({
+      targetElement: categoryIds,
+      field: 'topics',
+    })
+    .all() %}
+  ```
+  :::
+
+  The criteria for `relatedToCategories` (or any of the `relatedTo*` arguments) are the same as the corresponding element query types (like `category()` and `categories()`).
+
+::: tip
+By default, relational criteria are logically joined with “or.” To query for elements that match _all_ the relational criteria, prepend `"and"` to the list of IDs passed to the `relatedTo` query argument.
+:::
+
+Advanced relational conditions are possible using the `relatedViaField` (seen above) and `relatedViaSite` params. <Since ver="5.4.0" feature="Site- and field-specific relational criteria" />
+
+### Search
+
+Craft’s search index is also exposed via GraphQL via the `search` query argument:
+
+```graphql
+query SearchResults($terms: String) {
+  entries(search: $terms, orderBy: "score") {
+    title
+    url
+    searchScore
+  }
+}
+```
 
 ### Mutation
 
@@ -315,7 +532,7 @@ Use the **Explorer** pane in the [GraphiQL IDE](#using-the-graphiql-ide) to brow
 
 [Arguments](https://graphql.org/learn/queries/#arguments) typically correlate to element query params and are used to narrow the results of a query.
 
-```gql{2}
+```graphql{2}
 query BlogPosts {
   newsEntries(orderBy: "postDate DESC") {
     title
@@ -343,7 +560,7 @@ Some input types are only used for mutations:
 Each element type provides dedicated query and mutation interfaces that expose unique properties based on the system’s configuration. An additional generic query type is provided for each element type that allows you to build queries from scratch, similar to the `craft.entries()` or `craft.assets()` APIs available in Twig:
 
 ::: code
-```gql{2} Entries
+```graphql{2} Entries
 query FeaturedResources {
   entries(section: "documents", type: ["report", "dataset"], featured: true) {
     title
@@ -351,7 +568,7 @@ query FeaturedResources {
   }
 }
 ```
-```gql{2} Assets
+```graphql{2} Assets
 query Images {
   assets(volume: "uploads", kind: "image") {
     filename
@@ -365,7 +582,7 @@ Specific query types are available for some subsets of elements, like [sections]
 
 [Mutations](#mutations) follow a similar pattern—to create or update an entry in our _News_ section, you would use the dedicated `save_news_post_Entry` mutation:
 
-```gql{2}
+```graphql{2}
 mutation CreateContact {
   save_contacts_person_Entry(
     title: "Oli",
@@ -396,6 +613,7 @@ This query is used to query for addresses.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `withProvisionalDrafts`| `Boolean` | Whether canonical elements should be replaced with provisional drafts if those exist.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -407,6 +625,7 @@ This query is used to query for addresses.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -440,6 +659,7 @@ This query is used to return the number of addresses.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `withProvisionalDrafts`| `Boolean` | Whether canonical elements should be replaced with provisional drafts if those exist.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -451,6 +671,7 @@ This query is used to return the number of addresses.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -484,6 +705,7 @@ This query is used to query for a single address.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `withProvisionalDrafts`| `Boolean` | Whether canonical elements should be replaced with provisional drafts if those exist.
 | `status`| `[String]` | Narrows the query results based on the elements’ statuses.
 | `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
 | `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
@@ -495,6 +717,7 @@ This query is used to query for a single address.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -534,6 +757,7 @@ This query is used to query for assets.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -583,6 +807,7 @@ This query is used to return the number of assets.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -632,6 +857,7 @@ This query is used to query for a single asset.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -675,6 +901,7 @@ This query is used to query for entries.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `withProvisionalDrafts`| `Boolean` | Whether canonical elements should be replaced with provisional drafts if those exist.
 | `revisions`| `Boolean` | Whether revision elements should be returned.
 | `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
 | `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
@@ -690,6 +917,7 @@ This query is used to query for entries.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -749,6 +977,7 @@ This query is used to return the number of entries.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `withProvisionalDrafts`| `Boolean` | Whether canonical elements should be replaced with provisional drafts if those exist.
 | `revisions`| `Boolean` | Whether revision elements should be returned.
 | `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
 | `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
@@ -764,6 +993,7 @@ This query is used to return the number of entries.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -823,6 +1053,7 @@ This query is used to query for a single entry.
 | `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
 | `draftCreator`| `Int` | The drafts’ creator ID
 | `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `withProvisionalDrafts`| `Boolean` | Whether canonical elements should be replaced with provisional drafts if those exist.
 | `revisions`| `Boolean` | Whether revision elements should be returned.
 | `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
 | `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
@@ -838,6 +1069,7 @@ This query is used to query for a single entry.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -886,6 +1118,148 @@ This query is used to query for a single entry.
 | `after`| `String` | Narrows the query results to only entries that were posted on or after a certain date.
 | `expiryDate`| `[String]` | Narrows the query results based on the entries’ expiry dates.
 
+### The `aboutEntry` query
+Single entry within the “About” section.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `withProvisionalDrafts`| `Boolean` | Whether canonical elements should be replaced with provisional drafts if those exist.
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
+| `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
+| `structureId`| `Int` | Determines which structure data should be joined into the query.
+| `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants in their structure.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element in its structure, provided by its ID.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element in its structure provided by its ID.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” in their structure (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element in its structure, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element in its structure, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element in its structure, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element in its structure, provided by its ID.
+| `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
+| `primaryOwnerId`| `[QueryArgument]` | Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
+| `type`| `[String]` | Narrows the query results based on the entries’ entry type handles.
+| `typeId`| `[QueryArgument]` | Narrows the query results based on the entries’ entry types, per the types’ IDs.
+| `authorId`| `[QueryArgument]` | Narrows the query results based on the entries’ authors.
+| `authorGroup`| `[String]` | Narrows the query results based on the user group the entries’ authors belong to.
+| `authorGroupId`| `[QueryArgument]` | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
+| `postDate`| `[String]` | Narrows the query results based on the entries’ post dates.
+| `before`| `String` | Narrows the query results to only entries that were posted before a certain date.
+| `after`| `String` | Narrows the query results to only entries that were posted on or after a certain date.
+| `expiryDate`| `[String]` | Narrows the query results based on the entries’ expiry dates.
+
+### The `homeEntry` query
+Single entry within the “Home” section.
+| Argument | Type | Description
+| - | - | -
+| `id`| `[QueryArgument]` | Narrows the query results based on the elements’ IDs.
+| `uid`| `[String]` | Narrows the query results based on the elements’ UIDs.
+| `drafts`| `Boolean` | Whether draft elements should be returned.
+| `draftOf`| `QueryArgument` | Narrows the query results to only drafts of a given element.  Set to `false` to fetch unpublished drafts.
+| `draftId`| `Int` | The ID of the draft to return (from the `drafts` table)
+| `draftCreator`| `Int` | The drafts’ creator ID
+| `provisionalDrafts`| `Boolean` | Whether provisional drafts should be returned.
+| `withProvisionalDrafts`| `Boolean` | Whether canonical elements should be replaced with provisional drafts if those exist.
+| `revisions`| `Boolean` | Whether revision elements should be returned.
+| `revisionOf`| `QueryArgument` | The source element ID that revisions should be returned for
+| `revisionId`| `Int` | The ID of the revision to return (from the `revisions` table)
+| `revisionCreator`| `Int` | The revisions’ creator ID
+| `status`| `[String]` | Narrows the query results based on the elements’ statuses.
+| `archived`| `Boolean` | Narrows the query results to only elements that have been archived.
+| `trashed`| `Boolean` | Narrows the query results to only elements that have been soft-deleted.
+| `site`| `[String]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `siteId`| `[QueryArgument]` | Determines which site(s) the elements should be queried in. Defaults to the current (requested) site.
+| `unique`| `Boolean` | Determines whether only elements with unique IDs should be returned by the query.
+| `preferSites`| `[QueryArgument]` | Determines which site should be selected when querying multi-site elements.
+| `title`| `[String]` | Narrows the query results based on the elements’ titles.
+| `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
+| `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
+| `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
+| `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
+| `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
+| `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
+| `relatedToEntries`| `[EntryRelationCriteriaInput]` | Narrows the query results to elements that relate to an entry list defined with this argument.
+| `relatedToUsers`| `[UserRelationCriteriaInput]` | Narrows the query results to elements that relate to a use list defined with this argument.
+| `relatedToCategories`| `[CategoryRelationCriteriaInput]` | Narrows the query results to elements that relate to a category list defined with this argument.
+| `relatedToTags`| `[TagRelationCriteriaInput]` | Narrows the query results to elements that relate to a tag list defined with this argument.
+| `relatedToAll`| `[QueryArgument]` | Narrows the query results to elements that relate to *all* of the provided element IDs. Using this argument will cause `relatedTo` argument to be ignored. **This argument is deprecated.** `relatedTo: ["and", ...ids]` should be used instead.
+| `ref`| `[String]` | Narrows the query results based on a reference string.
+| `fixedOrder`| `Boolean` | Causes the query results to be returned in the order specified by the `id` argument.
+| `inReverse`| `Boolean` | Causes the query results to be returned in reverse order.
+| `dateCreated`| `[String]` | Narrows the query results based on the elements’ creation dates.
+| `dateUpdated`| `[String]` | Narrows the query results based on the elements’ last-updated dates.
+| `offset`| `Int` | Sets the offset for paginated results.
+| `language`| `[String]` | Determines which site(s) the elements should be queried in, based on their language.
+| `limit`| `Int` | Sets the limit for paginated results.
+| `orderBy`| `String` | Sets the field the returned elements should be ordered by.
+| `siteSettingsId`| `[QueryArgument]` | Narrows the query results based on the unique identifier for an element-site relation.
+| `withStructure`| `Boolean` | Explicitly determines whether the query should join in the structure data.
+| `structureId`| `Int` | Determines which structure data should be joined into the query.
+| `level`| `Int` | Narrows the query results based on the elements’ level within the structure.
+| `hasDescendants`| `Boolean` | Narrows the query results based on whether the elements have any descendants in their structure.
+| `ancestorOf`| `Int` | Narrows the query results to only elements that are ancestors of another element in its structure, provided by its ID.
+| `ancestorDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `ancestorOf`.
+| `descendantOf`| `Int` | Narrows the query results to only elements that are descendants of another element in its structure provided by its ID.
+| `descendantDist`| `Int` | Narrows the query results to only elements that are up to a certain distance away from the element in its structure specified by `descendantOf`.
+| `leaves`| `Boolean` | Narrows the query results based on whether the elements are “leaves” in their structure (element with no descendants).
+| `nextSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately after another element in its structure, provided by its ID.
+| `prevSiblingOf`| `Int` | Narrows the query results to only the entry that comes immediately before another element in its structure, provided by its ID.
+| `positionedAfter`| `Int` | Narrows the query results to only entries that are positioned after another element in its structure, provided by its ID.
+| `positionedBefore`| `Int` | Narrows the query results to only entries that are positioned before another element in its structure, provided by its ID.
+| `editable`| `Boolean` | Whether to only return entries that the user has permission to edit.
+| `primaryOwnerId`| `[QueryArgument]` | Narrows the query results based on the primary owner element of the entries, per the owners’ IDs.
+| `type`| `[String]` | Narrows the query results based on the entries’ entry type handles.
+| `typeId`| `[QueryArgument]` | Narrows the query results based on the entries’ entry types, per the types’ IDs.
+| `authorId`| `[QueryArgument]` | Narrows the query results based on the entries’ authors.
+| `authorGroup`| `[String]` | Narrows the query results based on the user group the entries’ authors belong to.
+| `authorGroupId`| `[QueryArgument]` | Narrows the query results based on the user group the entries’ authors belong to, per the groups’ IDs.
+| `postDate`| `[String]` | Narrows the query results based on the entries’ post dates.
+| `before`| `String` | Narrows the query results to only entries that were posted before a certain date.
+| `after`| `String` | Narrows the query results to only entries that were posted on or after a certain date.
+| `expiryDate`| `[String]` | Narrows the query results based on the entries’ expiry dates.
+
 ### The `globalSets` query
 This query is used to query for global sets.
 | Argument | Type | Description
@@ -903,6 +1277,7 @@ This query is used to query for global sets.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -940,6 +1315,7 @@ This query is used to query for a single global set.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -977,6 +1353,7 @@ This query is used to query for users.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1025,6 +1402,7 @@ This query is used to return the number of users.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1073,6 +1451,7 @@ This query is used to query for a single user.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1121,6 +1500,7 @@ This query is used to query for tags.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1159,6 +1539,7 @@ This query is used to return the number of tags.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1197,6 +1578,7 @@ This query is used to query for a single tag.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1235,6 +1617,7 @@ This query is used to query for categories.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1287,6 +1670,7 @@ This query is used to return the number of categories.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1339,6 +1723,7 @@ This query is used to query for a single category.
 | `slug`| `[String]` | Narrows the query results based on the elements’ slugs.
 | `uri`| `[String]` | Narrows the query results based on the elements’ URIs.
 | `search`| `String` | Narrows the query results to only elements that match a search query.
+| `searchTermOptions`| `SearchTermOptions` | Defines the default options that should be applied terms within the `search` argument.
 | `relatedTo`| `[QueryArgument]` | Narrows the query results to elements that relate to the provided element IDs. This argument is ignored, if `relatedToAll` is also used.
 | `notRelatedTo`| `[QueryArgument]` | Narrows the query results to elements that do not relate to the provided element IDs.
 | `relatedToAssets`| `[AssetRelationCriteriaInput]` | Narrows the query results to elements that relate to an asset list defined with this argument.
@@ -1561,7 +1946,7 @@ This is the interface implemented by all entries.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
 | `authorId`| `Int` | The primary entry author’s ID.
-| `author`| `[UserInterface]` | The primary entry author.
+| `author`| `UserInterface` | The primary entry author.
 | `authorIds`| `[Int]` | The entry authors’ IDs.
 | `authors`| `[UserInterface]` | The entry authors.
 | `draftCreator`| `UserInterface` | The creator of a given draft.
@@ -1577,7 +1962,7 @@ This is the interface implemented by all entries.
 | `sectionHandle`| `String` | The handle of the section that contains the entry.
 | `fieldId`| `Int` | The ID of the field that contains the entry.
 | `fieldHandle`| `String` | The handle of the field that contains the entry.
-| `ownerId`| `Int` | The ID of the entry’s owner elementt.
+| `ownerId`| `Int` | The ID of the entry’s owner element.
 | `sortOrder`| `Int` | The entry’s position within the field that contains it.
 | `typeId`| `Int!` | The ID of the entry type that contains the entry.
 | `typeHandle`| `String!` | The handle of the entry type that contains the entry.
@@ -2028,7 +2413,7 @@ Entry _drafts_ are created and updated with mutations named after the combinatio
 You can use the generic `createDraft` mutation to create a new draft. It requires the `id` of the draft’s canonical entry and returns the ID of the newly-saved draft:
 
 ::: code
-```gql Query
+```graphql Query
 mutation MyNewDraft {
   createDraft(id: 1234)
 }
@@ -2047,7 +2432,7 @@ Additional (optional) arguments include a `name` for the draft, `notes`, a `crea
 _Applying_ a draft is handled in the same way, but with the `publishDraft` mutation. It requires the `id` of the draft to be published and returns the ID of the updated canonical entry:
 
 ::: code
-```gql Query
+```graphql Query
 mutation PublishMyDraft {
   publishDraft(id: 5678)
 }

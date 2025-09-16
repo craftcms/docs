@@ -15533,19 +15533,19 @@
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\commerce\\elements\\db\\DonationQuery",
@@ -15581,19 +15581,19 @@
         "class": "craft\\commerce\\elements\\db\\OrderQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\OrderQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\OrderQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\commerce\\elements\\db\\OrderQuery",
@@ -15629,19 +15629,19 @@
         "class": "craft\\commerce\\elements\\db\\ProductQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\ProductQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\ProductQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\commerce\\elements\\db\\ProductQuery",
@@ -15677,19 +15677,19 @@
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\commerce\\elements\\db\\SubscriptionQuery",
@@ -15725,19 +15725,19 @@
         "class": "craft\\commerce\\elements\\db\\VariantQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\VariantQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\commerce\\elements\\db\\VariantQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\commerce\\elements\\db\\VariantQuery",

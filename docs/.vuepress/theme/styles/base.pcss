@@ -1,13 +1,18 @@
 :root {
   --text-color: theme("colors.slate");
+  --text-color-muted: #6D7480;
+  --ui-component-color: #8491A4;
   --bg-color: theme("colors.white");
   --sidebar-bg-color: theme("colors.softer");
   --search-bg-color: theme("colors.soft");
   --dl-color: theme("colors.soft-gray");
   --medium-zoom-overlay-color: theme("colors.soft");
   --heading-color: theme("colors.slate");
+  --link-color-default: theme("colors.blue.default");
+  --code-link-color: theme("colors.blue.darker");
+  --link-underline-color: #5E8BF7;
   --sidebar-link-color: theme("colors.slate");
-  --sidebar-active-link-color: theme("colors.blue");
+  --sidebar-active-link-color: theme("colors.blue.default");
   --hamburger-color: theme("colors.black");
   --tooltip-bg-color: theme("colors.white");
   --border-color: #e2e8f0;
@@ -20,6 +25,16 @@
   --craft-red: #e5422b;
   --white: theme("colors.white");
   --black: theme("colors.black");
+  --custom-focus-outline: 2px solid var(--link-color-default);
+
+  /* Code */
+  --code-color-default: #476582;
+  --code-color-gold: #8A6700;
+  --code-color-green: #1F7A74;
+  --code-color-blue: #2075B1;
+  --code-color-orange: #C14915;
+  --code-color-olive: #667500;
+  --code-color-gray: #6A707C;
 }
 
 html {
@@ -52,7 +67,8 @@ body {
 }
 
 a {
-  @apply text-blue no-underline;
+  @apply no-underline;
+  color: var(--link-color-default);
 }
 
 .skip-links {
@@ -87,30 +103,36 @@ img {
   &.up {
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    border-bottom: 6px solid #ccc;
+    border-bottom: 6px solid currentColor;
   }
 
   &.down {
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    border-top: 6px solid #ccc;
+    border-top: 6px solid currentColor;
   }
 
   &.right {
     border-top: 4px solid transparent;
     border-bottom: 4px solid transparent;
-    border-left: 6px solid #ccc;
+    border-left: 6px solid currentColor;
   }
 
   &.left {
     border-top: 4px solid transparent;
     border-bottom: 4px solid transparent;
-    border-right: 6px solid #ccc;
+    border-right: 6px solid currentColor;
   }
 }
 
 @screen xxl {
   body {
     font-size: 108%;
+  }
+}
+
+.sidebar-links {
+  a {
+    outline-offset: -2px;
   }
 }

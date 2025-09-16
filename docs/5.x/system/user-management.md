@@ -130,15 +130,15 @@ The permissions Craft comes with are:
 | Permission | [Handle](#checking-permissions)
 | ---------- | ------
 | Access the site when the system is off | `accessSiteWhenSystemIsOff`
-| Access the control panel | `accessCp`
+| Access the control panel <InfoHud>This inherently enables limited read-only access to user data and most content via element selector modals and other means.</InfoHud> | `accessCp`
 | <Indent :level="1" /> Access the control panel when the system is offline | `accessCpWhenSystemIsOff`
 | <Indent :level="1" /> Perform Craft CMS and plugin updates | `performUpdates`
 | <Indent :level="1" /> Access <CodePlaceholder>Plugin Name</CodePlaceholder> | `accessPlugin-[PluginHandle]`
 | View users <InfoHud>Read-only access to user elements. In earlier versions of Craft, user management permissions were not nested within this one.</InfoHud> <Since ver="5.6.0" feature="View users permission" /> | `viewUsers`
-| <Indent :level="1" /> Edit users | `editUsers`
+| <Indent :level="1" /> Edit users <InfoHud>Non-critical actions like updating custom field values.</InfoHud> | `editUsers`
 | <Indent :level="2" /> Register users | `registerUsers`
-| <Indent :level="2" /> Moderate users <InfoHud>Moderation includes editing other users’ names, usernames, custom fields, and addresses.</InfoHud> | `moderateUsers`
-| <Indent :level="2" /> Administrate users <InfoHud>User administration includes changing emails, sending activation and password reset emails, setting passwords, and deactivating users. This permission can be used to elevate one’s own permissions by gaining access to other administrators’ accounts!</InfoHud> | `administrateUsers`
+| <Indent :level="2" /> Moderate users <InfoHud>Moderation includes editing other users’ names, usernames, custom fields, and addresses, and sending activation emails. <Since ver="5.8.0" description="Users with the “Moderate users” permission were given the ability to send activation emails in {ver}." /></InfoHud> | `moderateUsers`
+| <Indent :level="2" /> Administrate users <InfoHud>User administration includes changing emails, sending password reset emails, setting passwords, and deactivating users. This permission can be used to elevate one’s own permissions by gaining access to other administrators’ accounts!</InfoHud> | `administrateUsers`
 | <Indent :level="2" /> Impersonate users <InfoHud>User impersonation allows one user to temporarily access the site as though they were another user with the same (or more restrictive) permissions.</InfoHud> | `impersonateUsers`
 | <Indent :level="2" /> Assign user permissions | `assignUserPermissions`
 | <Indent :level="2" /> Assign users to this group <InfoHud>This is not an actual permission so much as a convenience feature for automatically granting the ability to add peers to the <em>group</em> you are currently editing, as its handle/UUID may not be known, yet!</InfoHud> | See note.
@@ -151,6 +151,7 @@ The permissions Craft comes with are:
 | <Indent :level="1" /> Delete entries | `deleteEntries:[SectionUID]`
 | <Indent :level="1" /> View other users’ entries | `viewPeerEntries:[SectionUID]`
 | <Indent :level="2" /> Save other users’ entries | `savePeerEntries:[SectionUID]`
+| <Indent :level="2" /> Delete other users’ entries for site <InfoHud>Allow deleting other users’ entries for individual sites they have access to.</InfoHud> | `deletePeerEntriesForSite:[SectionUID]`
 | <Indent :level="2" /> Delete other users’ entries | `deletePeerEntries:[SectionUID]`
 | <Indent :level="1" /> View other users’ drafts | `viewPeerEntryDrafts:[SectionUID]`
 | <Indent :level="2" /> Save other users’ drafts | `savePeerEntryDrafts:[SectionUID]`
@@ -262,6 +263,12 @@ Keep in mind that permissions issues are dealt with differently than [validation
 
 You can look up users with a given permission using the [`can()` method](../reference/element-types/users.md#can) on a user query. To find users belonging to a specific group, use the [`group()` method](../reference/element-types/users.md#group).
 
+## Preferences
+
+Users have a few settings that govern their experience of the control panel and front-end, including their preferred **Language** and **Formatting Locale**, a number of **Accessibility** features, and (for [administrators](#admin-accounts)) debugging tools.
+
+![User preferences screen in the Craft control panel](../images/users-preferences.png)
+
 ## Authentication <Badge text="New!" />
 
 [Credentialed](#special-states) users in Craft can authenticate with one or more methods. By default, Craft uses a password to verify the user’s identity. In addition to passwords, users can set up [two-factor authentication](#time-based-one-time-passwords), or add a [passkey](#passkeys).
@@ -292,7 +299,7 @@ An elevated session’s duration is governed by the <config5:elevatedSessionDura
 
 ### Front-end Multi-factor Authentication <Since ver="5.6.0" feature="Multi-factor auth support outside the control panel" />
 
-When **Require two-step verification** is enabled for user groups that _don’t_ have control panel access, those users may be sent to the Craft-provided [front-end login page]() to perform additional authentication.
+When **Require two-step verification** is enabled for user groups that _don’t_ have control panel access, those users may be sent to the Craft-provided [front-end login page](#front-end-pro) to perform additional authentication.
 
 <a name="public-registration"></a>
 
@@ -308,7 +315,7 @@ By default, Craft puts new users in a [pending state](#statuses) and allows them
 
 ### Affiliated Site <Since ver="5.6.0" feature="Affiliated sites for user elements" />
 
-During registration, Craft captures the current [site](sites.md) and stores it as the user’s **Affiliated Site**. This is primarily used to determine what language [system emails](mail.md#system-messages) should be sent in, when dispatched in site-agnostic contexts (like the control panel or from a CLI command).
+During registration, Craft captures the current [site](sites.md) and stores it as the user’s **Affiliated Site**. This is primarily used to determine what language and template [system emails](mail.md#system-messages) should be use, when sent from site-agnostic contexts (like the control panel or CLI).
 
 ### Default Group
 
@@ -445,7 +452,7 @@ These variables are available in all Twig contexts:
 
 - `loginUrl` — Defined by <config5:loginPath>. Used to build a link to the central login page, and where users will be redirected when requesting a protected resource.
 - `logoutUrl` — Defined by <config5:logoutPath>. Used to build a link that immediately logs the user out.
-- `setPasswordUrl` — Defined by <config5:setPasswordRequestPath>. Used to build a link to a central page where users can request their password be reset. An link is sent to the user’s email address (based on the <config5:setPasswordPath> setting) with `id` and `code` query parameters.
+- `setPasswordUrl` — Defined by <config5:setPasswordRequestPath>. Used to build a link to a central page where users can request their password be reset. A link is sent to the user’s email address (based on the <config5:setPasswordPath> setting) with `id` and `code` query parameters.
 
 Other URLs are generated when activating accounts or resetting passwords, and are not available for direct use in templates.
 
@@ -461,10 +468,12 @@ Fine-grained control over registration and sign-in workflows are possible with t
 - Changing and verifying email addresses…
   - <config5:verifyEmailPath> — Used when generating a link sent via email to verify access to an email address.
   - <config5:verifyEmailSuccessPath> — Similar to `setPasswordSuccessPath`, but for redirection after a user verifies their email address (either upon creating an account, or changing its email address).
+  - <config5:useEmailAsUsername> — Simplifies record-keeping and authentication by eliminating discrete usernames.
 - Security and timing…
   - <config5:autoLoginAfterAccountActivation> — Control whether users are immediately logged in after setting a password. (Default: `false`)
   - <config5:purgePendingUsersDuration> — How long Craft waits before deleting pending, non-activated users. (Default: `0`, or _disabled_)
   - <config5:purgeStaleUserSessionDuration> — How long Craft waits before dropping stale sessions from the `sessions` database table. This may (Default: 90 days)
+  - <config5:invalidUserTokenPath> — Where users are redirected if the token or code in an activation or verification link is invalid or has expired.
 
 ## CLI
 

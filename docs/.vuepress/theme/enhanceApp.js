@@ -20,7 +20,7 @@ export default ({ Vue, options, router, siteData }) => {
   Vue.mixin({
     data() {
       return {
-        version: null
+        version: null,
       };
     },
     computed: {
@@ -112,6 +112,14 @@ export default ({ Vue, options, router, siteData }) => {
           }
         }
       },
+      $activeSetVars() {
+        return Object.assign(
+          {
+            // Default/global variables can go here!
+          },
+          this.$activeSet.globalVars || {},
+        );
+      },
       /**
        * Every doc set base path, including set base, version, and/or language. Example:
        * - `/2.x/`
@@ -164,7 +172,7 @@ export default ({ Vue, options, router, siteData }) => {
         : this.$localePath;
 
       return (this.$allLocales || {})[localePath] || {};
-    }
+    },
   });
 
   Object.assign(options, {

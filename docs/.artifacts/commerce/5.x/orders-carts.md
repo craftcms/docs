@@ -8,11 +8,12 @@
 
 | Param                                           | Description
 | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#afterpopulate)                 | Performs any post-population processing on elements.
 | [andNotRelatedTo](#andnotrelatedto)             | Narrows the query results to only orders that are not related to certain other elements.
 | [andRelatedTo](#andrelatedto)                   | Narrows the query results to only orders that are related to certain other elements.
+| [andWith](#andwith)                             | Causes the query to return matching orders eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
 | [asArray](#asarray)                             | Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
 | [cache](#cache)                                 | Enables query cache for this Query.
+| [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
 | [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 | [couponCode](#couponcode)                       | Narrows the query results based on the order's coupon code.
 | [customer](#customer)                           | Narrows the query results based on the customer’s user account.
@@ -88,20 +89,9 @@
 <!-- textlint-enable -->
 
 
-#### `afterPopulate`
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 #### `andNotRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andnotrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only orders that are not related to certain other elements.
 
@@ -132,6 +122,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `andRelatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only orders that are related to certain other elements.
 
 
@@ -159,7 +151,24 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `andWith`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching orders eager-loaded with related elements, in addition to the elements that were already specified by [with](#with).
+
+
+
+.
+
+
+
+
+
+
 #### `asArray`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching orders as arrays of data, rather than [Order](commerce5:craft\commerce\elements\Order) objects.
 
@@ -186,6 +195,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `cache`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -197,7 +208,27 @@ Enables query cache for this Query.
 
 
 
+#### `canonicalsOnly`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-canonicalsonly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Narrows the query results to only canonical elements, including elements
+that reference another canonical element via `canonicalId` so long as they
+aren’t a draft.
+
+
+
+Unpublished drafts can be included as well if `drafts(null)` and
+`draftOf(false)` are also passed.
+
+
+
+
+
+
 #### `clearCachedResult`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
 
@@ -207,6 +238,7 @@ Clears the [cached result](https://craftcms.com/docs/5.x/development/element-que
 
 
 #### `couponCode`
+
 
 Narrows the query results based on the order's coupon code.
 
@@ -245,6 +277,7 @@ $order = \craft\commerce\elements\Order::find()
 
 #### `customer`
 
+
 Narrows the query results based on the customer’s user account.
 
 Possible values include:
@@ -279,6 +312,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `customerId`
 
+
 Narrows the query results based on the customer, per their user ID.
 
 Possible values include:
@@ -311,6 +345,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `dateAuthorized`
+
 
 Narrows the query results based on the orders’ authorized dates.
 
@@ -346,6 +381,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `dateCreated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the orders’ creation dates.
 
@@ -387,6 +424,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `dateOrdered`
 
+
 Narrows the query results based on the orders’ completion dates.
 
 Possible values include:
@@ -422,6 +460,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `datePaid`
 
+
 Narrows the query results based on the orders’ paid dates.
 
 Possible values include:
@@ -456,6 +495,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `dateUpdated`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the orders’ last-updated dates.
 
@@ -495,6 +536,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `eagerly`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-eagerly" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to be used to eager-load results for the query’s source element
 and any other elements in its collection.
 
@@ -508,6 +551,7 @@ and any other elements in its collection.
 
 
 #### `email`
+
 
 Narrows the query results based on the customers’ email addresses.
 
@@ -539,6 +583,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `expiryDate`
+
 
 Narrows the query results based on the orders’ expiry dates.
 
@@ -575,6 +620,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `fixedOrder`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query results to be returned in the order specified by [id](#id).
 
 
@@ -606,6 +653,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `gateway`
 
+
 Narrows the query results based on the gateway.
 
 Possible values include:
@@ -618,6 +666,7 @@ Possible values include:
 
 
 #### `gatewayId`
+
 
 Narrows the query results based on the gateway, per its ID.
 
@@ -635,6 +684,8 @@ Possible values include:
 
 #### `getFieldLayouts`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-getfieldlayouts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns the field layouts that could be associated with the resulting elements.
 
 
@@ -647,6 +698,7 @@ Returns the field layouts that could be associated with the resulting elements.
 
 
 #### `hasLineItems`
+
 
 Narrows the query results to only orders that have line items.
 
@@ -671,6 +723,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `hasPurchasables`
 
+
 Narrows the query results to only orders that have certain purchasables.
 
 Possible values include:
@@ -684,6 +737,7 @@ Possible values include:
 
 
 #### `hasTransactions`
+
 
 Narrows the query results to only carts that have at least one transaction.
 
@@ -715,7 +769,10 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 
+
 #### `ignorePlaceholders`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching orders as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v5/craft-services-elements.html#method-setplaceholderelement).
@@ -731,6 +788,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 #### `inBulkOp`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-inbulkop" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only orders that were involved in a bulk element operation.
 
 
@@ -743,6 +802,8 @@ Narrows the query results to only orders that were involved in a bulk element op
 
 
 #### `inReverse`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -769,6 +830,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `isCompleted`
 
+
 Narrows the query results to only orders that are completed.
 
 
@@ -791,6 +853,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `isPaid`
+
 
 Narrows the query results to only orders that are paid.
 
@@ -815,6 +878,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `isUnpaid`
 
+
 Narrows the query results to only orders that are not paid.
 
 
@@ -838,6 +902,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `itemSubtotal`
 
+
 Narrows the query results based on the order’s item subtotal.
 
 Possible values include:
@@ -853,6 +918,7 @@ Possible values include:
 
 #### `itemTotal`
 
+
 Narrows the query results based on the order’s item total.
 
 Possible values include:
@@ -867,6 +933,8 @@ Possible values include:
 
 
 #### `language`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the orders should be queried in, based on their language.
 
@@ -906,6 +974,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `limit`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines the number of orders that should be returned.
 
 
@@ -928,6 +998,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `notRelatedTo`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-notrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only orders that are not related to certain other elements.
 
@@ -955,6 +1027,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `number`
+
 
 Narrows the query results based on the order number.
 
@@ -987,6 +1060,8 @@ $order = \craft\commerce\elements\Order::find()
 
 #### `offset`
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines how many orders should be skipped in the results.
 
 
@@ -1010,6 +1085,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `orderBy`
 
+
 Determines the order that the orders should be returned in. (If empty, defaults to `id ASC`.)
 
 
@@ -1032,6 +1108,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `orderLanguage`
+
 
 Narrows the query results based on the order language, per the language string provided.
 
@@ -1065,6 +1142,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `orderSiteId`
 
+
 Narrows the query results based on the order language, per the language string provided.
 
 Possible values include:
@@ -1096,6 +1174,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `orderStatus`
+
 
 Narrows the query results based on the order statuses.
 
@@ -1130,6 +1209,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `orderStatusId`
 
+
 Narrows the query results based on the order statuses, per their IDs.
 
 Possible values include:
@@ -1162,6 +1242,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `origin`
 
+
 Narrows the query results based on the origin.
 
 Possible values include:
@@ -1193,6 +1274,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 
 #### `preferSites`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -1229,6 +1312,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `prepForEagerLoading`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-prepforeagerloading" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the query for lazy eager loading.
 
 
@@ -1242,6 +1327,8 @@ Prepares the query for lazy eager loading.
 
 #### `prepareSubquery`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -1250,6 +1337,7 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 #### `reference`
+
 
 Narrows the query results based on the order reference.
 
@@ -1288,6 +1376,8 @@ $order = \craft\commerce\elements\Order::find()
 
 #### `relatedTo`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only orders that are related to certain other elements.
 
 
@@ -1315,6 +1405,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `render`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-render" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Executes the query and renders the resulting elements using their partial templates.
 
 If no partial template exists for an element, its string representation will be output instead.
@@ -1323,6 +1415,8 @@ If no partial template exists for an element, its string representation will be 
 
 
 #### `search`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only orders that match a search query.
 
@@ -1357,6 +1451,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `shippingMethodHandle`
 
+
 Narrows the query results based on the shipping method handle.
 
 Possible values include:
@@ -1390,6 +1485,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `shortNumber`
 
+
 Narrows the query results based on the order short number.
 
 Possible values include:
@@ -1420,6 +1516,8 @@ $order = \craft\commerce\elements\Order::find()
 
 
 #### `siteSettingsId`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the orders’ IDs in the `elements_sites` table.
 
@@ -1455,6 +1553,7 @@ $order = \craft\commerce\elements\Order::find()
 
 #### `storeId`
 
+
 Narrows the query results to only orders that are related to the given store.
 
 Possible values include:
@@ -1467,6 +1566,7 @@ Possible values include:
 
 
 #### `total`
+
 
 Narrows the query results based on the total.
 
@@ -1482,6 +1582,7 @@ Possible values include:
 
 #### `totalDiscount`
 
+
 Narrows the query results based on the total discount.
 
 Possible values include:
@@ -1495,6 +1596,7 @@ Possible values include:
 
 
 #### `totalPaid`
+
 
 Narrows the query results based on the total paid amount.
 
@@ -1510,6 +1612,7 @@ Possible values include:
 
 #### `totalPrice`
 
+
 Narrows the query results based on the total price.
 
 Possible values include:
@@ -1523,6 +1626,7 @@ Possible values include:
 
 
 #### `totalQty`
+
 
 Narrows the query results based on the total qty of items.
 
@@ -1538,6 +1642,7 @@ Possible values include:
 
 #### `totalTax`
 
+
 Narrows the query results based on the total tax.
 
 Possible values include:
@@ -1552,6 +1657,7 @@ Possible values include:
 
 #### `totalWeight`
 
+
 Narrows the query results based on the total weight of items.
 
 Possible values include:
@@ -1565,6 +1671,8 @@ Possible values include:
 
 
 #### `trashed`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only orders that have been soft-deleted.
 
@@ -1591,6 +1699,8 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `uid`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the orders’ UIDs.
 
 
@@ -1616,6 +1726,8 @@ $order = \craft\commerce\elements\Order::find()
 
 #### `wasCountEagerLoaded`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-wascounteagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns whether the query result count was already eager loaded by the query's source element.
 
 
@@ -1629,6 +1741,8 @@ Returns whether the query result count was already eager loaded by the query's s
 
 #### `wasEagerLoaded`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-waseagerloaded" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Returns whether the query results were already eager loaded by the query's source element.
 
 
@@ -1641,6 +1755,8 @@ Returns whether the query results were already eager loaded by the query's sourc
 
 
 #### `with`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching orders eager-loaded with related elements.
 
@@ -1669,6 +1785,7 @@ $orders = \craft\commerce\elements\Order::find()
 
 #### `withAddresses`
 
+
 Eager loads the shipping and billing addressees on the resulting orders.
 
 Possible values include:
@@ -1681,6 +1798,7 @@ Possible values include:
 
 
 #### `withAdjustments`
+
 
 Eager loads the order adjustments on the resulting orders.
 
@@ -1695,6 +1813,7 @@ Possible values include:
 
 #### `withAll`
 
+
 Eager loads all relational data (addresses, adjustments, customers, line items, transactions) for the resulting orders.
 
 Possible values include:
@@ -1707,6 +1826,8 @@ Possible values include:
 
 
 #### `withCustomFields`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Sets whether custom fields should be factored into the query.
 
@@ -1721,6 +1842,7 @@ Sets whether custom fields should be factored into the query.
 
 #### `withCustomer`
 
+
 Eager loads the user on the resulting orders.
 
 Possible values include:
@@ -1733,6 +1855,7 @@ Possible values include:
 
 
 #### `withLineItems`
+
 
 Eager loads the line items on the resulting orders.
 
@@ -1747,6 +1870,8 @@ Possible values include:
 
 #### `withProvisionalDrafts`
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-withprovisionaldrafts" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return provisional drafts for the matching elements,
 when they exist for the current user.
 
@@ -1760,6 +1885,7 @@ when they exist for the current user.
 
 
 #### `withTransactions`
+
 
 Eager loads the transactions on the resulting orders.
 

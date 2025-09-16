@@ -4,16 +4,16 @@ Purchasables should be extended to add useful attributes like Commerce’s inclu
 
 ## Custom Purchasables
 
-If you’d like to introduce your own purchasable in a custom module or plugin, you can either implement [`craft\commerce\base\PurchasableInterface`](commerce4:craft\commerce\base\PurchasableInterface) or extend [`craft\commerce\base\Purchasable`](commerce4:craft\commerce\base\Purchasable).
+If you’d like to introduce your own purchasable in a custom module or plugin, you can either implement [`craft\commerce\base\PurchasableInterface`](commerce5:craft\commerce\base\PurchasableInterface) or extend [`craft\commerce\base\Purchasable`](commerce5:craft\commerce\base\Purchasable).
 
-We recommend extending [the base Purchasable](commerce4:craft\commerce\base\Purchasable) because you’ll automatically get...
+We recommend extending [the base Purchasable](commerce5:craft\commerce\base\Purchasable) because you’ll automatically get...
 
 - `getSalePrice()` calculation
 - `getSales()` to see the details of each sale applied in that calculation
 - a standard Yii model that includes everything in `attributes()` and `extraFields()`
 - automatic `sku` validation
 
-You may alternatively choose to implement [PurchasableInterface](commerce4:craft\commerce\base\PurchasableInterface), but you’ll need to handle these and any additional features yourself.
+You may alternatively choose to implement [PurchasableInterface](commerce5:craft\commerce\base\PurchasableInterface), but you’ll need to handle these and any additional features yourself.
 
 ## Implementation
 

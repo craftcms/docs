@@ -13,8 +13,8 @@ Product queries support the following parameters:
 | Param                                                 | Description
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | [after](#product-after)                               | Narrows the query results to only products that were posted on or after a certain date.
-| [afterPopulate](#product-afterpopulate)               | Performs any post-population processing on elements.
 | [andRelatedTo](#product-andrelatedto)                 | Narrows the query results to only products that are related to certain other elements.
+| [andWith](#product-andwith)                           | Causes the query to return matching products eager-loaded with related elements, in addition to the elements that were already specified by [with](#product-with).
 | [asArray](#product-asarray)                           | Causes the query to return matching products as arrays of data, rather than [Product](commerce4:craft\commerce\elements\Product) objects.
 | [availableForPurchase](#product-availableforpurchase) | Narrows the query results to only products that are available for purchase.
 | [before](#product-before)                             | Narrows the query results to only products that were posted before a certain date.
@@ -60,12 +60,14 @@ Product queries support the following parameters:
 | [unique](#product-unique)                             | Determines whether only elements with unique IDs should be returned by the query.
 | [uri](#product-uri)                                   | Narrows the query results based on the products’ URIs.
 | [with](#product-with)                                 | Causes the query to return matching products eager-loaded with related elements.
+| [withCustomFields](#product-withcustomfields)         | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
 
 
 <h4 id="product-after"><a href="#product-after" class="header-anchor">#</a> <code>after</code></h4>
+
 
 Narrows the query results to only products that were posted on or after a certain date.
 
@@ -99,20 +101,9 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
-<h4 id="product-afterpopulate"><a href="#product-afterpopulate" class="header-anchor">#</a> <code>afterPopulate</code></h4>
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 <h4 id="product-andrelatedto"><a href="#product-andrelatedto" class="header-anchor">#</a> <code>andRelatedTo</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only products that are related to certain other elements.
 
@@ -141,7 +132,24 @@ $products = \craft\commerce\elements\Product::find()
 :::
 
 
+<h4 id="product-andwith"><a href="#product-andwith" class="header-anchor">#</a> <code>andWith</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching products eager-loaded with related elements, in addition to the elements that were already specified by [with](#product-with).
+
+
+
+.
+
+
+
+
+
+
 <h4 id="product-asarray"><a href="#product-asarray" class="header-anchor">#</a> <code>asArray</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching products as arrays of data, rather than [Product](commerce4:craft\commerce\elements\Product) objects.
 
@@ -168,6 +176,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-availableforpurchase"><a href="#product-availableforpurchase" class="header-anchor">#</a> <code>availableForPurchase</code></h4>
 
+
 Narrows the query results to only products that are available for purchase.
 
 
@@ -190,6 +199,7 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-before"><a href="#product-before" class="header-anchor">#</a> <code>before</code></h4>
+
 
 Narrows the query results to only products that were posted before a certain date.
 
@@ -225,6 +235,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-cache"><a href="#product-cache" class="header-anchor">#</a> <code>cache</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -238,6 +250,8 @@ Enables query cache for this Query.
 
 <h4 id="product-clearcachedresult"><a href="#product-clearcachedresult" class="header-anchor">#</a> <code>clearCachedResult</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
@@ -246,6 +260,8 @@ Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#ca
 
 
 <h4 id="product-datecreated"><a href="#product-datecreated" class="header-anchor">#</a> <code>dateCreated</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the products’ creation dates.
 
@@ -287,6 +303,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-dateupdated"><a href="#product-dateupdated" class="header-anchor">#</a> <code>dateUpdated</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the products’ last-updated dates.
 
 
@@ -325,6 +343,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-defaultheight"><a href="#product-defaultheight" class="header-anchor">#</a> <code>defaultHeight</code></h4>
 
+
 Narrows the query results based on the products’ default variant height dimension IDs.
 
 Possible values include:
@@ -356,6 +375,7 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-defaultlength"><a href="#product-defaultlength" class="header-anchor">#</a> <code>defaultLength</code></h4>
+
 
 Narrows the query results based on the products’ default variant length dimension IDs.
 
@@ -389,6 +409,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-defaultprice"><a href="#product-defaultprice" class="header-anchor">#</a> <code>defaultPrice</code></h4>
 
+
 Narrows the query results based on the products’ default variant price.
 
 Possible values include:
@@ -418,6 +439,7 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-defaultsku"><a href="#product-defaultsku" class="header-anchor">#</a> <code>defaultSku</code></h4>
+
 
 Narrows the query results based on the default productvariants defaultSku
 
@@ -451,6 +473,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-defaultweight"><a href="#product-defaultweight" class="header-anchor">#</a> <code>defaultWeight</code></h4>
 
+
 Narrows the query results based on the products’ default variant weight dimension IDs.
 
 Possible values include:
@@ -483,6 +506,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-defaultwidth"><a href="#product-defaultwidth" class="header-anchor">#</a> <code>defaultWidth</code></h4>
 
+
 Narrows the query results based on the products’ default variant width dimension IDs.
 
 Possible values include:
@@ -514,6 +538,7 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-expirydate"><a href="#product-expirydate" class="header-anchor">#</a> <code>expiryDate</code></h4>
+
 
 Narrows the query results based on the products’ expiry dates.
 
@@ -550,6 +575,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-fixedorder"><a href="#product-fixedorder" class="header-anchor">#</a> <code>fixedOrder</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query results to be returned in the order specified by [id](#product-id).
 
 
@@ -581,6 +608,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-hasvariant"><a href="#product-hasvariant" class="header-anchor">#</a> <code>hasVariant</code></h4>
 
+
 Narrows the query results to only products that have certain variants.
 
 Possible values include:
@@ -593,6 +621,8 @@ Possible values include:
 
 
 <h4 id="product-id"><a href="#product-id" class="header-anchor">#</a> <code>id</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-id" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the products’ IDs.
 
@@ -634,6 +664,8 @@ This can be combined with [fixedOrder](#product-fixedorder) if you want the resu
 
 <h4 id="product-ignoreplaceholders"><a href="#product-ignoreplaceholders" class="header-anchor">#</a> <code>ignorePlaceholders</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching products as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
@@ -647,6 +679,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 <h4 id="product-inreverse"><a href="#product-inreverse" class="header-anchor">#</a> <code>inReverse</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -672,6 +706,8 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-language"><a href="#product-language" class="header-anchor">#</a> <code>language</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the products should be queried in, based on their language.
 
@@ -711,6 +747,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-limit"><a href="#product-limit" class="header-anchor">#</a> <code>limit</code></h4>
 
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
+
 Determines the number of products that should be returned.
 
 
@@ -733,6 +771,8 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-offset"><a href="#product-offset" class="header-anchor">#</a> <code>offset</code></h4>
+
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
 
 Determines how many products should be skipped in the results.
 
@@ -757,6 +797,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-orderby"><a href="#product-orderby" class="header-anchor">#</a> <code>orderBy</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines the order that the products should be returned in. (If empty, defaults to `postDate DESC`.)
 
 
@@ -779,6 +821,7 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-postdate"><a href="#product-postdate" class="header-anchor">#</a> <code>postDate</code></h4>
+
 
 Narrows the query results based on the products’ post dates.
 
@@ -817,6 +860,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-prefersites"><a href="#product-prefersites" class="header-anchor">#</a> <code>preferSites</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 If [unique](#product-unique) is set, this determines which site should be selected when querying multi-site elements.
 
 
@@ -852,6 +897,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-preparesubquery"><a href="#product-preparesubquery" class="header-anchor">#</a> <code>prepareSubquery</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -860,6 +907,8 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 <h4 id="product-relatedto"><a href="#product-relatedto" class="header-anchor">#</a> <code>relatedTo</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only products that are related to certain other elements.
 
@@ -887,6 +936,8 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-search"><a href="#product-search" class="header-anchor">#</a> <code>search</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only products that match a search query.
 
@@ -921,6 +972,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-shippingcategory"><a href="#product-shippingcategory" class="header-anchor">#</a> <code>shippingCategory</code></h4>
 
+
 Narrows the query results based on the products’ shipping category.
 
 Possible values include:
@@ -954,6 +1006,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-shippingcategoryid"><a href="#product-shippingcategoryid" class="header-anchor">#</a> <code>shippingCategoryId</code></h4>
 
+
 Narrows the query results based on the products’ shipping categories, per the shipping categories’ IDs.
 
 Possible values include:
@@ -985,6 +1038,8 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-site"><a href="#product-site" class="header-anchor">#</a> <code>site</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-site" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the products should be queried in.
 
@@ -1028,6 +1083,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-siteid"><a href="#product-siteid" class="header-anchor">#</a> <code>siteId</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-siteid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines which site(s) the products should be queried in, per the site’s ID.
 
 
@@ -1064,6 +1121,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-sitesettingsid"><a href="#product-sitesettingsid" class="header-anchor">#</a> <code>siteSettingsId</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the products’ IDs in the `elements_sites` table.
 
 
@@ -1097,6 +1156,8 @@ $product = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-slug"><a href="#product-slug" class="header-anchor">#</a> <code>slug</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-slug" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the products’ slugs.
 
@@ -1141,6 +1202,7 @@ $product = \craft\commerce\elements\Product::find()
 
 <h4 id="product-status"><a href="#product-status" class="header-anchor">#</a> <code>status</code></h4>
 
+
 Narrows the query results based on the products’ statuses.
 
 Possible values include:
@@ -1173,6 +1235,7 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-taxcategory"><a href="#product-taxcategory" class="header-anchor">#</a> <code>taxCategory</code></h4>
+
 
 Narrows the query results based on the products’ tax category.
 
@@ -1207,6 +1270,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-taxcategoryid"><a href="#product-taxcategoryid" class="header-anchor">#</a> <code>taxCategoryId</code></h4>
 
+
 Narrows the query results based on the products’ tax categories, per the tax categories’ IDs.
 
 Possible values include:
@@ -1238,6 +1302,8 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-title"><a href="#product-title" class="header-anchor">#</a> <code>title</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-title" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the products’ titles.
 
@@ -1276,6 +1342,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-trashed"><a href="#product-trashed" class="header-anchor">#</a> <code>trashed</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only products that have been soft-deleted.
 
 
@@ -1300,6 +1368,7 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-type"><a href="#product-type" class="header-anchor">#</a> <code>type</code></h4>
+
 
 Narrows the query results based on the products’ types.
 
@@ -1334,6 +1403,7 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-typeid"><a href="#product-typeid" class="header-anchor">#</a> <code>typeId</code></h4>
 
+
 Narrows the query results based on the products’ types, per the types’ IDs.
 
 Possible values include:
@@ -1366,6 +1436,8 @@ $products = \craft\commerce\elements\Product::find()
 
 <h4 id="product-uid"><a href="#product-uid" class="header-anchor">#</a> <code>uid</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the products’ UIDs.
 
 
@@ -1390,6 +1462,8 @@ $product = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-unique"><a href="#product-unique" class="header-anchor">#</a> <code>unique</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines whether only elements with unique IDs should be returned by the query.
 
@@ -1420,6 +1494,8 @@ $products = \craft\commerce\elements\Product::find()
 
 
 <h4 id="product-uri"><a href="#product-uri" class="header-anchor">#</a> <code>uri</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-uri" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the products’ URIs.
 
@@ -1464,6 +1540,8 @@ $product = \craft\commerce\elements\Product::find()
 
 <h4 id="product-with"><a href="#product-with" class="header-anchor">#</a> <code>with</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching products eager-loaded with related elements.
 
 
@@ -1487,6 +1565,21 @@ $products = \craft\commerce\elements\Product::find()
     ->all();
 ```
 :::
+
+
+<h4 id="product-withcustomfields"><a href="#product-withcustomfields" class="header-anchor">#</a> <code>withCustomFields</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 
@@ -1656,8 +1749,8 @@ Variant queries support the following parameters:
 
 | Param                                             | Description
 | ------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| [afterPopulate](#variant-afterpopulate)           | Performs any post-population processing on elements.
 | [andRelatedTo](#variant-andrelatedto)             | Narrows the query results to only variants that are related to certain other elements.
+| [andWith](#variant-andwith)                       | Causes the query to return matching variants eager-loaded with related elements, in addition to the elements that were already specified by [with](#variant-with).
 | [asArray](#variant-asarray)                       | Causes the query to return matching variants as arrays of data, rather than [Variant](commerce4:craft\commerce\elements\Variant) objects.
 | [cache](#variant-cache)                           | Enables query cache for this Query.
 | [clearCachedResult](#variant-clearcachedresult)   | Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
@@ -1701,25 +1794,15 @@ Variant queries support the following parameters:
 | [weight](#variant-weight)                         | Narrows the query results based on the variants’ weight dimension.
 | [width](#variant-width)                           | Narrows the query results based on the variants’ width dimension.
 | [with](#variant-with)                             | Causes the query to return matching variants eager-loaded with related elements.
+| [withCustomFields](#variant-withcustomfields)     | Sets whether custom fields should be factored into the query.
 
 
 <!-- textlint-enable -->
 
 
-<h4 id="variant-afterpopulate"><a href="#variant-afterpopulate" class="header-anchor">#</a> <code>afterPopulate</code></h4>
-
-Performs any post-population processing on elements.
-
-
-
-
-
-
-
-
-
-
 <h4 id="variant-andrelatedto"><a href="#variant-andrelatedto" class="header-anchor">#</a> <code>andRelatedTo</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andrelatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only variants that are related to certain other elements.
 
@@ -1748,7 +1831,24 @@ $variants = \craft\commerce\elements\Variant::find()
 :::
 
 
+<h4 id="variant-andwith"><a href="#variant-andwith" class="header-anchor">#</a> <code>andWith</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-andwith" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Causes the query to return matching variants eager-loaded with related elements, in addition to the elements that were already specified by [with](#variant-with).
+
+
+
+.
+
+
+
+
+
+
 <h4 id="variant-asarray"><a href="#variant-asarray" class="header-anchor">#</a> <code>asArray</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-asarray" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching variants as arrays of data, rather than [Variant](commerce4:craft\commerce\elements\Variant) objects.
 
@@ -1775,6 +1875,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-cache"><a href="#variant-cache" class="header-anchor">#</a> <code>cache</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-cache" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Enables query cache for this Query.
 
 
@@ -1788,6 +1890,8 @@ Enables query cache for this Query.
 
 <h4 id="variant-clearcachedresult"><a href="#variant-clearcachedresult" class="header-anchor">#</a> <code>clearCachedResult</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#cache).
 
 
@@ -1796,6 +1900,8 @@ Clears the [cached result](https://craftcms.com/docs/4.x/element-queries.html#ca
 
 
 <h4 id="variant-datecreated"><a href="#variant-datecreated" class="header-anchor">#</a> <code>dateCreated</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-datecreated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the variants’ creation dates.
 
@@ -1837,6 +1943,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-dateupdated"><a href="#variant-dateupdated" class="header-anchor">#</a> <code>dateUpdated</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-dateupdated" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results based on the variants’ last-updated dates.
 
 
@@ -1875,6 +1983,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-fixedorder"><a href="#variant-fixedorder" class="header-anchor">#</a> <code>fixedOrder</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-fixedorder" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query results to be returned in the order specified by [id](#variant-id).
 
 
@@ -1906,6 +2016,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-hasproduct"><a href="#variant-hasproduct" class="header-anchor">#</a> <code>hasProduct</code></h4>
 
+
 Narrows the query results to only variants for certain products.
 
 Possible values include:
@@ -1918,6 +2029,7 @@ Possible values include:
 
 
 <h4 id="variant-hassales"><a href="#variant-hassales" class="header-anchor">#</a> <code>hasSales</code></h4>
+
 
 Narrows the query results to only variants that are on sale.
 
@@ -1933,6 +2045,7 @@ Possible values include:
 
 <h4 id="variant-hasstock"><a href="#variant-hasstock" class="header-anchor">#</a> <code>hasStock</code></h4>
 
+
 Narrows the query results to only variants that have stock.
 
 Possible values include:
@@ -1946,6 +2059,7 @@ Possible values include:
 
 
 <h4 id="variant-hasunlimitedstock"><a href="#variant-hasunlimitedstock" class="header-anchor">#</a> <code>hasUnlimitedStock</code></h4>
+
 
 Narrows the query results to only variants that have been set to unlimited stock.
 
@@ -1961,6 +2075,7 @@ Possible values include:
 
 <h4 id="variant-height"><a href="#variant-height" class="header-anchor">#</a> <code>height</code></h4>
 
+
 Narrows the query results based on the variants’ height dimension.
 
 Possible values include:
@@ -1975,6 +2090,8 @@ Possible values include:
 
 
 <h4 id="variant-id"><a href="#variant-id" class="header-anchor">#</a> <code>id</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-id" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the variants’ IDs.
 
@@ -2016,6 +2133,8 @@ This can be combined with [fixedOrder](#variant-fixedorder) if you want the resu
 
 <h4 id="variant-ignoreplaceholders"><a href="#variant-ignoreplaceholders" class="header-anchor">#</a> <code>ignorePlaceholders</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-ignoreplaceholders" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Causes the query to return matching variants as they are stored in the database, ignoring matching placeholder
 elements that were set by [craft\services\Elements::setPlaceholderElement()](https://docs.craftcms.com/api/v4/craft-services-elements.html#method-setplaceholderelement).
 
@@ -2029,6 +2148,8 @@ elements that were set by [craft\services\Elements::setPlaceholderElement()](htt
 
 
 <h4 id="variant-inreverse"><a href="#variant-inreverse" class="header-anchor">#</a> <code>inReverse</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-inreverse" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query results to be returned in reverse order.
 
@@ -2055,6 +2176,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-isdefault"><a href="#variant-isdefault" class="header-anchor">#</a> <code>isDefault</code></h4>
 
+
 Narrows the query results to only default variants.
 
 
@@ -2077,6 +2199,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 
 <h4 id="variant-language"><a href="#variant-language" class="header-anchor">#</a> <code>language</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-language" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the variants should be queried in, based on their language.
 
@@ -2116,6 +2240,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-length"><a href="#variant-length" class="header-anchor">#</a> <code>length</code></h4>
 
+
 Narrows the query results based on the variants’ length dimension.
 
 Possible values include:
@@ -2130,6 +2255,8 @@ Possible values include:
 
 
 <h4 id="variant-limit"><a href="#variant-limit" class="header-anchor">#</a> <code>limit</code></h4>
+
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#limit()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
 
 Determines the number of variants that should be returned.
 
@@ -2154,6 +2281,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-maxqty"><a href="#variant-maxqty" class="header-anchor">#</a> <code>maxQty</code></h4>
 
+
 Narrows the query results based on the variants’ max quantity.
 
 Possible values include:
@@ -2169,6 +2297,7 @@ Possible values include:
 
 <h4 id="variant-minqty"><a href="#variant-minqty" class="header-anchor">#</a> <code>minQty</code></h4>
 
+
 Narrows the query results based on the variants’ min quantity.
 
 Possible values include:
@@ -2183,6 +2312,8 @@ Possible values include:
 
 
 <h4 id="variant-offset"><a href="#variant-offset" class="header-anchor">#</a> <code>offset</code></h4>
+
+<a class="ref-defined-by" href="https://www.yiiframework.com/doc/api/2.0/yii-db-querytrait#offset()-detail" target="_blank" rel="noopener noreferer">Defined by <code>yii\db\QueryTrait</code></a>
 
 Determines how many variants should be skipped in the results.
 
@@ -2207,6 +2338,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-orderby"><a href="#variant-orderby" class="header-anchor">#</a> <code>orderBy</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Determines the order that the variants should be returned in. (If empty, defaults to `sortOrder ASC`.)
 
 
@@ -2229,6 +2362,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 
 <h4 id="variant-prefersites"><a href="#variant-prefersites" class="header-anchor">#</a> <code>preferSites</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-prefersites" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 If [unique](#variant-unique) is set, this determines which site should be selected when querying multi-site elements.
 
@@ -2265,6 +2400,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-preparesubquery"><a href="#variant-preparesubquery" class="header-anchor">#</a> <code>prepareSubquery</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-preparesubquery" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Prepares the element query and returns its subquery (which determines what elements will be returned).
 
 
@@ -2273,6 +2410,7 @@ Prepares the element query and returns its subquery (which determines what eleme
 
 
 <h4 id="variant-price"><a href="#variant-price" class="header-anchor">#</a> <code>price</code></h4>
+
 
 Narrows the query results based on the variants’ price.
 
@@ -2289,6 +2427,7 @@ Possible values include:
 
 <h4 id="variant-product"><a href="#variant-product" class="header-anchor">#</a> <code>product</code></h4>
 
+
 Narrows the query results based on the variants’ product.
 
 Possible values include:
@@ -2301,6 +2440,7 @@ Possible values include:
 
 
 <h4 id="variant-productid"><a href="#variant-productid" class="header-anchor">#</a> <code>productId</code></h4>
+
 
 Narrows the query results based on the variants’ products’ IDs.
 
@@ -2316,6 +2456,8 @@ Possible values include:
 
 
 <h4 id="variant-relatedto"><a href="#variant-relatedto" class="header-anchor">#</a> <code>relatedTo</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-relatedto" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only variants that are related to certain other elements.
 
@@ -2343,6 +2485,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 
 <h4 id="variant-search"><a href="#variant-search" class="header-anchor">#</a> <code>search</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-search" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results to only variants that match a search query.
 
@@ -2376,6 +2520,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 
 <h4 id="variant-site"><a href="#variant-site" class="header-anchor">#</a> <code>site</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-site" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines which site(s) the variants should be queried in.
 
@@ -2426,7 +2572,10 @@ $variants = \craft\commerce\elements\Variant::find()
 
 
 
+
 <h4 id="variant-sitesettingsid"><a href="#variant-sitesettingsid" class="header-anchor">#</a> <code>siteSettingsId</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-sitesettingsid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the variants’ IDs in the `elements_sites` table.
 
@@ -2461,6 +2610,7 @@ $variant = \craft\commerce\elements\Variant::find()
 
 
 <h4 id="variant-sku"><a href="#variant-sku" class="header-anchor">#</a> <code>sku</code></h4>
+
 
 Narrows the query results based on the variants’ SKUs.
 
@@ -2510,7 +2660,9 @@ $variant = \craft\commerce\elements\Variant::find()
 
 
 
+
 <h4 id="variant-stock"><a href="#variant-stock" class="header-anchor">#</a> <code>stock</code></h4>
+
 
 Narrows the query results based on the variants’ stock.
 
@@ -2526,6 +2678,8 @@ Possible values include:
 
 
 <h4 id="variant-title"><a href="#variant-title" class="header-anchor">#</a> <code>title</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-title" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the variants’ titles.
 
@@ -2564,6 +2718,8 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-trashed"><a href="#variant-trashed" class="header-anchor">#</a> <code>trashed</code></h4>
 
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-trashed" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
 Narrows the query results to only variants that have been soft-deleted.
 
 
@@ -2589,6 +2745,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-typeid"><a href="#variant-typeid" class="header-anchor">#</a> <code>typeId</code></h4>
 
+
 Narrows the query results based on the variants’ product types, per their IDs.
 
 Possible values include:
@@ -2603,6 +2760,8 @@ Possible values include:
 
 
 <h4 id="variant-uid"><a href="#variant-uid" class="header-anchor">#</a> <code>uid</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-uid" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Narrows the query results based on the variants’ UIDs.
 
@@ -2628,6 +2787,8 @@ $variant = \craft\commerce\elements\Variant::find()
 
 
 <h4 id="variant-unique"><a href="#variant-unique" class="header-anchor">#</a> <code>unique</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines whether only elements with unique IDs should be returned by the query.
 
@@ -2659,6 +2820,7 @@ $variants = \craft\commerce\elements\Variant::find()
 
 <h4 id="variant-weight"><a href="#variant-weight" class="header-anchor">#</a> <code>weight</code></h4>
 
+
 Narrows the query results based on the variants’ weight dimension.
 
 Possible values include:
@@ -2674,6 +2836,7 @@ Possible values include:
 
 <h4 id="variant-width"><a href="#variant-width" class="header-anchor">#</a> <code>width</code></h4>
 
+
 Narrows the query results based on the variants’ width dimension.
 
 Possible values include:
@@ -2688,6 +2851,8 @@ Possible values include:
 
 
 <h4 id="variant-with"><a href="#variant-with" class="header-anchor">#</a> <code>with</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-with" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Causes the query to return matching variants eager-loaded with related elements.
 
@@ -2712,6 +2877,21 @@ $variants = \craft\commerce\elements\Variant::find()
     ->all();
 ```
 :::
+
+
+<h4 id="variant-withcustomfields"><a href="#variant-withcustomfields" class="header-anchor">#</a> <code>withCustomFields</code></h4>
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-withcustomfields" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Sets whether custom fields should be factored into the query.
+
+
+
+
+
+
+
+
 
 
 

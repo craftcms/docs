@@ -1,5 +1,4 @@
 ---
-title: Configuration
 description: Set up Craft to work with your team and infrastructure.
 sidebarDepth: 2
 related:
@@ -342,6 +341,10 @@ Out of the box, Craft provides these aliases—but you can override them or prov
 | `@vendor` | Path to your `vendor/` folder. | [CRAFT_VENDOR_PATH](reference/config/bootstrap.md#craft-vendor-path)
 | `@web` | URL to the folder that contains the `index.php` file that was loaded for the request. | [CRAFT_WEB_URL](reference/config/bootstrap.md#craft-web-url)
 | `@webroot` | Path to the folder that contains the `index.php` file that was loaded for the request. | [CRAFT_WEB_ROOT](reference/config/bootstrap.md#craft-web-root)
+
+::: danger
+The `@web` alias is [determined automatically](kb:how-craft-determines-the-site-url), and generally should _not_ be overridden. Additionally, using `@web` in sites’ or asset volumes’ **Base URL** settings can lead to unpredictable behavior.
+:::
 
 Aliases can be set to plain strings, or to the content of an environment variable. Keep in mind that **aliases are resolved recursively**, so you can define one based on another (including those whose values came from the environment):
 

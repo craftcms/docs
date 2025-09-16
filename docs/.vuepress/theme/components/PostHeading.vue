@@ -51,6 +51,18 @@
       @apply p-0 text-xs mx-0 mb-2 tracking-wide uppercase;
     }
   }
+
+  .theme-dark & {
+    .post-heading {
+      .sidebar-links {
+        li {
+          a {
+            @apply text-blue-lighter px-0;
+          }
+        }
+      }
+    }
+  }
 }
 
 .version-warning {

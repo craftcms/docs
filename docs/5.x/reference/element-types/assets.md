@@ -14,13 +14,13 @@ Craft lets you manage media and document files (“assets”) just like entries 
 
 <!-- more -->
 
-Assets are one of Craft’s built-in [element types](../../system/elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Asset>.
+Assets are one of Craft’s built-in [element types](../../system/elements.md), and are represented throughout the application as instances of <craft5:craft\elements\Asset>. You can attach them to other elements via the [assets field](../field-types/assets.md), and get their URLs, ready-made `<img>` tags, or `srcset`s in your templates.
 
 ## Volumes
 
-Assets are organized into **volumes**, each of which sits on top of a [filesystem](#filesystems) and carries its own permissions and [content](#asset-custom-fields) options. Volumes are configured from **Settings** → **Assets**.
+Assets are organized into **volumes**, each of which sits on top of a [filesystem](#filesystems) and carries its own permissions and [content](#asset-custom-fields) options. Volumes are configured from <Journey path="Settings, Assets" />.
 
-When setting up a volume, you will be asked to choose or create its underlying filesystem.
+When setting up a volume, you will be asked to choose or create its underlying **Filesystem**.
 
 <BrowserShot
   url="https://my-craft-project.ddev.site/admin/assets/volumes/new"
@@ -88,7 +88,7 @@ Asset field layouts can include the native **Alternative Text** <Poi label="1" t
   :link="false"
   id="assetFieldLayout"
   :poi="{
-    altText: [90, 32.5],
+    altText: [28, 36.5],
   }">
 <img src="../../images/assets-field-layout.png" />
 </BrowserShot>
@@ -106,6 +106,10 @@ Do you have existing `alt` text stored in a different field? You can migrate it 
 php craft resave/assets --set alt --to myAltTextField --if-empty
 ```
 :::
+
+### Generated Fields <Since ver="5.8.0" feature="Generated fields on asset volumes" />
+
+Below the volume’s field layout designer, you can create any number of [generated fields](../../system/elements.md#generated-fields) to capture additional values via [object templates](../../system/object-templates.md).
 
 ## Assets Page
 

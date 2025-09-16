@@ -113,7 +113,7 @@ Craft includes a handful of abstract types that can be extended to leverage spec
 - <craft5:craft\fieldlayoutelements\TextField> — General-purpose input element suitable for most scalar values. You can customize many of the underlying HTML element’s attributes via class properties—see below for an example.
 
 ::: tip
-Somewhat counterintuitively, the <craft5:craft\fieldlayoutelements\CustomField> class is _not_ intended to be extended. Craft automatically wraps each custom field instance with this layout element, exposing
+Somewhat counterintuitively, the <craft5:craft\fieldlayoutelements\CustomField> class is _not_ intended to be extended. Craft automatically wraps each custom field instance with this layout element, exposing actions and [indicators](#indicators-fields) that make sense for the field type. New [field types](field-types.md) should _not_ introduce their own field layout element type—instead, their `getInputHtml()` method should return all markup required for the field to function, and other field methods should signal what features it supports (like multiple instances or conditions).
 :::
 
 ### Ad-Hoc Elements
@@ -347,6 +347,17 @@ Wrap the input HTML in a `fieldset`, and use special handling for labels, instru
 
 ```php
 protected function useFieldset(): bool
+{
+    return true;
+}
+```
+
+#### Refresh Behavior <Since ver="5.7.0" feature="Refreshable field layout elements" />
+
+By default, field layout elements are only rendered when the form is initially loaded, or when their visibility changes (due to a user or element condition being satisfied). To refresh it after every auto-save, implement the `alwaysRefresh()` method:
+
+```php
+protected function alwaysRefresh(): bool
 {
     return true;
 }

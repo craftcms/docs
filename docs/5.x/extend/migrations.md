@@ -2,41 +2,37 @@
 
 Migrations are PHP classes that make one-time changes to the system.
 
-For the most part, migrations in Craft work similarly to [Yii’s implementation](https://www.yiiframework.com/doc/guide/2.0/en/db-migrations), but unlike Yii, Craft manages three different types of migrations:
+For the most part, migrations in Craft work similarly to [Yii’s implementation](guide:db-migrations). _Unlike_ Yii, Craft manages three different types of migrations:
 
-- **App migrations** – Craft’s own internal migrations.
-- **Plugin migrations** – Each installed plugin has its own migration track.
-- **Content migrations** – Your Craft project itself can have migrations, too.
+App migrations
+:   Craft’s own internal migrations. You will only create an `app` migration when contributing to Craft. Every Craft installation runs these migrations after an update.
+
+Plugin migrations
+:   Each installed plugin has its own migration “track.” Only Craft projects that have your plugin installed and enabled will run these migrations.
+
+Content migrations
+:   Migrations specific to your Craft project. These often contain steps that manipulate data based on handles or other identifiers that are only relevant internally.
 
 ## Creating Migrations
 
-::: tip
-If your Craft install is running from a Vagrant box, you will need to SSH into the box to run these commands.
-:::
-
-To create a new migration for your plugin or project, open up your terminal and go to your Craft project:
-
-```bash
-cd /path/to/project
-```
-
-Then run the following command to generate a new migration file for your plugin or project:
+To create a new migration, use the `migrate/create` command:
 
 ::: code
-
 ```bash Plugin Migration
 php craft migrate/create my_migration_name --plugin=my-plugin-handle
 ```
-
 ```bash Content Migration
 php craft migrate/create my_migration_name
 ```
-
 :::
 
-Enter `yes` at the prompt, and a new migration file will be created for you. You can find it at the file path output by the command.
+Enter `yes` at the prompt, and a new migration file will be created for you. You can find it at the file path output by the command; migration classes include a timestamp prefix with the format `mYYMMDD_HHMMSS`, like `m250923_000000`.
 
-If this is a plugin migration, increase your plugin’s [schema version](craft5:craft\base\PluginTrait::$schemaVersion), so Craft knows to check for new plugin migrations as people update to your new version.
+This file and class should _never_ be renamed after release! Doing so can cause it to run again, or out of order.
+
+::: tip
+If this is a plugin migration, increase your plugin’s [schema version](craft5:craft\base\PluginTrait::$schemaVersion), so Craft knows to check for new plugin migrations after an update.
+:::
 
 ### What Goes Inside
 

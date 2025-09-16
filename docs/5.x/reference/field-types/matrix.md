@@ -8,33 +8,48 @@ related:
 
 # Matrix Fields
 
-Matrix fields allow you to manage nested [entries](../element-types/entries.md) in a fluid way. Entries created within a Matrix field are “owned” by the element that field is attached to, and can represent anything from a slide in a gallery to an entire resources section, each record having its own URL.
+Matrix fields allow you to manage nested [entries](../element-types/entries.md) in a fluid way. Entries created within a Matrix field are “owned” by the element the field is attached to, and can represent anything from a slide in a gallery to an entire resource library, each record having its own URL.
 
 <!-- more -->
 
+![Screenshot of the Matrix field in an element edit screen](../../images/fields-matrix-ui-entry-type-groups.png)
+
 ::: tip
-During the Craft 5 upgrade process, _Matrix blocks_ were converted to _entries_. [Fields](../../system/fields.md) that were previously owned by a particular “block type” are now managed in (and assigned from) a global pool. You are now able to design [entry types](../element-types/entries.md#entry-types) that exist as standalone content objects (in a section), _or_ as nested entries (in a Matrix field)!
+During the Craft 5 upgrade, _Matrix blocks_ were converted to _entries_. [Fields](../../system/fields.md) that were previously owned by a particular “block type” are now managed in (and assigned from) a global pool. You are now able to design [entry types](../element-types/entries.md#entry-types) that exist as standalone content objects (in a [section](entries.md#sections)), _or_ as nested entries (in a Matrix field)!
 :::
 
 ## Settings
 
-Matrix fields have the following settings:
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new Matrix field via the control panel.">
+<img src="../../images/fields-matrix-settings.png" alt="Matrix field settings screen in the Craft control panel">
+</BrowserShot>
 
-#### Entry Types
+### Entry Types
 
 Select from existing, globally-defined [entry types](../element-types/entries.md#entry-types), or create a new one on-the-fly.
 
 ::: tip
-You can specify local overrides for each of the attached entry types’ **Name** and **Handle** by selecting **Settings** from a chip’s action <Icon kind="ellipses" /> menu. <Since ver="5.6.0" feature="Contextual entry type name and handle overrides" /> A pencil icon will be displayed in any entry type chip that has overrides.
+You can specify local overrides for each attached entry type’s **Name** and **Handle** by selecting **Settings** from a chip’s action <Icon kind="ellipses" /> menu. <Since ver="5.6.0" feature="Contextual entry type name and handle overrides" /> A pencil icon will be displayed in any entry type chip that has overrides.
 
-![Opening a selected entry type’s settings](../../images/fields-matrix-entry-types.png)
+![An entry type chip with a pencil icon indicating its name or handle have been overridden](../../images/fields-matrix-settings-entry-type-overrides.png)
 :::
 
-#### Propagation Method
+#### Groups <Since ver="5.8.0" feature="Grouped entry types in Matrix fields" />
+
+Entry types are organized into named _groups_.
+Groups affect the structure of the **+ Add …** menu, for authors.
+
+![Adding and organizing entry types in a Matrix field](../../images/fields-matrix-settings-entry-type-groups.png)
+
+### Propagation Method
 
 Choose how nested entries are propagated to other sites. This applies only to _new_ nested entries—changes to _existing_ nested entries are propagated on a per-field basis.
 
-#### Site Settings <Badge text="New!" />
+### Site Settings <Badge text="New!" />
 
 Nested entries can have their own URIs and templates.
 
@@ -42,15 +57,21 @@ Nested entries can have their own URIs and templates.
 Incorporate the owner’s URI in a nested element by using `{owner.uri}` in its **URI Format** [object template](../../system/object-templates.md)!
 :::
 
-#### Min Entries
+### Min Entries
 
 The _minimum_ number of entries that can be created within the field. (Default is no lower limit.)
 
-#### Max Entries
+### Max Entries
 
 The _maximum_ number of entries that can be created within the field. (Default is no upper limit.)
 
-#### View Mode <Badge text="New!" />
+### Versioning <Since ver="5.7.0" feature="Control over creation of revisions for nested entries in Matrix fields" />
+
+Nested entries using the _As inline-editable blocks_ [view mode](#view-mode) are “versioned” alongside their owner: when making a change directly within the context of the owner, Craft automatically creates [revisions](../../system/drafts-revisions.md) for both elements. However, revisions of the nested element are hidden, by default.
+
+The **Enable versioning for entries in this field** setting exposes the revisions menu and the **Notes** field in the sidebar, when editing a nested entry in its own screen.
+
+### View Mode <Badge text="New!" />
 
 Choose how the nested elements are represented within the [field UI](#the-field):
 
@@ -60,7 +81,7 @@ Choose how the nested elements are represented within the [field UI](#the-field)
 
     When using the element index view mode, you can also allow authors to toggle between a card view and standard table view. Enabling the table view reveals controls for the columns that will be displayed, by default.
 
-#### “New” Button Label
+### “New” Button Label
 
 By default, the button authors use to create nested entries will be labeled **New entry**. You can override this label with one that better suits the intended content.
 
@@ -76,11 +97,17 @@ A new entry of the chosen type will be appended to the list:
 
 ![A newly-added Quote entry](../../images/fields-matrix-inline-new.png)
 
-You can add as many nested entries to your Matrix field as you’d like—or at least as many as the field’s **Min Entries** and **Max Entries** settings allow.
+You can add as many nested entries to your Matrix field as you’d like (as long as it’s between the field’s **Min Entries** and **Max Entries** settings).
 
-Each block has a menu that provides access to additional controls:
+### Actions
 
-![A nested entry’s action menu](../../images/matrix-block-action-menu.png)
+Each block has a menu that provides access to additional controls…
+
+![A nested entry’s action menu](../../images/fields-matrix-ui-nested-entry-actions.png)
+
+…and the Matrix field itself includes options to **Collapse all blocks** <Since ver="5.8.0" feature="The “Collapse all blocks” action on Matrix fields" /> and **Copy all entries**:
+
+<img src="../../images/fields-matrix-ui-actions.png" alt="A Matrix field’s action menu in an element form">
 
 ::: tip
 If multiple nested entries are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of them.
@@ -92,6 +119,8 @@ Inline-blocks can also be reordered by dragging the “Move” icon (<icon kind=
 You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd>/<kbd>⌘</kbd> + <kbd>A</kbd>, or selecting a range of blocks starting with the first and then <kbd>Shift</kbd>-clicking the last.
 :::
 
+### Additional View Modes
+
 The **As cards** [view mode](#view-mode) provides many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips-cards). Double-click any card to edit its content in a slideout, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
 
 ![An newly-created nested entry, represented as a card](../../images/fields-matrix-cards-new.png)
@@ -100,7 +129,11 @@ Finally, the **As an element index** view mode behaves just like a normal elemen
 
 ## Nesting Matrix Fields
 
-A Matrix field can include an entry type that has another Matrix field (or the same Matrix field) in its field layout. Those Matrix fields can use the same view mode, or different view modes, depending on how they’re composed. Take care when designing your authoring experience to avoid confusing, infinitely-recursive data structures.
+A Matrix field can include an entry type that has another Matrix field (or the same Matrix field) in its field layout. Those Matrix fields can use the same view mode, or different view modes, depending on how they’re composed. Take care when designing your authoring experience to avoid confusing or infinitely-recursive data structures.
+
+::: tip
+The **As cards** and **As an element index** view modes always open nested entries in a slideout, which can be used to break up complex content models.
+:::
 
 ## Development
 
@@ -258,9 +291,8 @@ $nestedTextEntries = $entry->myFieldHandle
 
 #### Eager Loading
 
-Nested entries can be [eager-loaded](../../development/eager-loading.md) with their owners using the special `.with()` query method. Eager-loading can greatly improve performance if you need to output one or more nested entries within a list of other elements—like generating summaries of articles in list of blog posts from their first text blocks.
-
-The new `.eagerly()` method simplifies this in situations where you need to output or act on nested entry information within a query for their owners. Take this list of recipes, where `steps` is a Matrix field:
+Nested entries can be [eager-loaded](../../development/eager-loading.md) with their owners to greatly improve performance in situations when you need to output one or more nested entries within a list of other elements.
+Take this list of recipes, where `steps` is a Matrix field:
 
 ```twig
 {% set latestRecipes = craft.entries()

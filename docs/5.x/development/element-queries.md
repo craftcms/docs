@@ -107,8 +107,9 @@ Parameters are set using methods after creating an element query, or by passing 
 {# ...or... #}
 
 {% set images = craft.assets({
-  kind: 'image',
-}).all() %}
+    kind: 'image',
+  })
+  .all() %}
 
 {# ...or if you’re fancy, set some parameters conditionally: #}
 
@@ -123,7 +124,7 @@ Parameters are set using methods after creating an element query, or by passing 
 ```
 
 ::: tip
-Query methods (except for those that [execute](#executing-element-queries) a query) modify some internal properties and return the query itself, allowing you to chained more methods together—just like Craft’s [fluent config](../configure.md#style) syntax!
+Query methods (except for those that [execute](#executing-element-queries) a query) modify some internal properties and return the query itself, allowing you to chain methods together—just like Craft’s [fluent config](../configure.md#style) syntax!
 :::
 
 All element queries support a standard set of methods (like `.id()`, `.title()`, and [`.search()`](../system/searching.md)). These are documented alongside the [element type-specific](#element-types) parameters (like `.kind()` in the example above).
@@ -361,7 +362,7 @@ For example, loading and populating hundreds of element models into a collection
 
 ### `one()`
 
-If you only need a single element, call `one()` instead of [`all()`](#all). It will either a populated element model or `null` if no matching element exists.
+If you only need a single element, call `one()` instead of [`all()`](#all). It will return either a populated element model or `null` if no matching element exists.
 
 ::: code
 ```twig
@@ -800,28 +801,34 @@ You may call <craft5:craft\db\Query::asArray()> to skip populating element model
 
 ### Content and Custom Fields
 
+We typically recommend using the [methods corresponding to your fields’ global handles](#querying-with-custom-fields) to narrow element queries—but sometimes, criteria can only be expressed with direct use of ActiveRecord’s `where()` and `andWhere()`.
+
 Most custom field values are stored in a single JSON column, keyed by their unique field instance UUID. Craft handles this automatically when using a field or field instance’s built-in query methods (i.e. `.myCustomDateField('<= 2025-11-05')`) by building the appropriate “JSON extraction” expression.
 
-Craft also tries to intercept direct use of `.where()` and `.orderBy()`, such that field instance handles work naturally. <Since ver="5.6.0" feature="Field instance handle mappings for query constraints and ordering" />
+Craft also attempts to detect use of field instance handles in `.where()` and `.orderBy()`, and map them to the corresponding extraction expression. <Since ver="5.6.0" feature="Field instance handle mappings for query constraints and ordering" />
 
 ```twig
 {% set safeStews = craft.entries()
   .section('dishes')
   .andWhere([
-    ['>', 'scovilleRating', 1000],
-    ['<', 'scovilleRating', 9000],
+    ['>', 'scovilleRating', '1000'],
+    ['<', 'scovilleRating', '9000'],
   ])
   .andWhere([
     'not',
-    ['like', 'primaryProtein, '%shellfish%'],
-    ['like', 'primaryProtein, '%shrimp%'],
-    ['like', 'primaryProtein, '%scallop%'],
+    ['like', 'primaryProtein', '%shellfish%'],
+    ['like', 'primaryProtein', '%shrimp%'],
+    ['like', 'primaryProtein', '%scallop%'],
   ])
   .orderBy('scovilleRating')
   .all() %}
 ```
 
-However, Craft can’t _always_ infer what should be a plain column name or a field or field instance handle, when working with advanced [condition](#conditions) and [execution](#query-execution) methods. This means you are responsible for building equivalent field value expressions. Typically, this involves a field instance handle and a _field layout provider_ (like an entry type, asset volume, category group, or other component that manages a field layout):
+::: warning
+Note that our `scovilleRating` constraints (`'1000'` and `'9000'`) are passed as _strings_, not _integers_. This is necessary, as JSON values are not “cast” during comparison when using `where()`, directly.
+:::
+
+Craft can’t _always_ infer what should be a plain column name or a field or field instance handle, when working with advanced [condition](#conditions) and [execution](#query-execution) methods. This means you are responsible for building equivalent field value expressions. Typically, this involves a field instance handle and a _field layout provider_ (like an entry type, asset volume, category group, or other component that manages a field layout):
 
 ::: code
 ```twig{1,7} Twig

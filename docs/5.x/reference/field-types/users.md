@@ -11,7 +11,7 @@ related:
 
 # Users Fields
 
-Users fields allow you relate [users](../element-types/users.md) to other elements.
+Users fields allow you relate [users](../element-types/users.md) to other elements. It is one of Craft’s [relational](../../system/relations.md) custom fields.
 
 <!-- more -->
 
@@ -21,12 +21,12 @@ Users fields have the following settings:
 
 - **Sources** – Which user groups (or other user index [source](../../system/elements.md#sources)) the field should be able to relate users from.
 - **Selectable Users Condition** – Rules that determine which users should be available for selection.
-- **Min Relations** – The minimum number of users that must be related with the field at once. (Default is no limit.
-- **Max Relations** – The maximum number of users that can be related with the field at once. (Default is no limit.)
+- **Min Relations** – The _minimum_ number of users that must be selected. (Default is no limit.)
+- **Max Relations** – The _maximum_ number of users that can be selected. (Default is no limit.)
+- **Default User Placement** — Whether new selections are prepended or appended to the existing relations.
 - **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
 - **“Add” Button Label** – The label that should be used on the field’s selection button.
 - **Validate related users** — Whether or not validation errors on the related users will be bubbled up.
-- **Translation Method** — How relationships are handled when [propagating changes to other sites](../../system/fields.md#translation-methods).
 
 ### Advanced Settings
 
@@ -41,7 +41,7 @@ On multi-site installs, the following setting will also be available:
 
 - **Translation Method** — How relationships are handled when [propagating changes to other sites](../../system/fields.md#translation-methods).
 
-While user elements do have an [affiliated site](../../system/user-management.md#affiliated-site), their content is not localized (and therefore, you cannot establish relationships to a specific site, as you can with other relational fields). You may still use the **Translation Method** setting to determine whether authors can select different users for each site, site group, or language.
+While user elements do have an [affiliated site](../../system/user-management.md#affiliated-site) <Since ver="5.6.0" feature="Affiliated sites for users" />, their content is not localized (and therefore, you cannot establish relationships to a specific site, as you can with other relational fields). You may still use the **Translation Method** setting to determine whether authors can select different users for each site, site group, or language.
 
 ## The Field
 

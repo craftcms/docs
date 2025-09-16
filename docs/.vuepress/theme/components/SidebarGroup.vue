@@ -9,37 +9,42 @@
       `depth-${depth}`,
     ]"
   >
-    <RouterLink
-      v-if="item.path"
-      class="sidebar-heading clickable"
-      :class="{
-        open,
-        active: isActive($route, item.path),
-      }"
-      :to="item.path"
-      @click.native="$emit('toggle')"
+    <component 
+      :id="fixedHeadingId" 
+      :is="headingLevel"
     >
-      <span>{{ item.title }}</span>
-      <span v-if="collapsible" class="arrow" :class="open ? 'down' : 'right'" />
-    </RouterLink>
+      <RouterLink
+        v-if="item.path"
+        class="sidebar-heading clickable"
+        :class="{
+          open,
+          active: isActive($route, item.path),
+        }"
+        :to="item.path"
+        @click.native="$emit('toggle')"
+      >
+        <span>{{ item.title }}</span>
+        <span v-if="collapsible" class="arrow" :class="open ? 'down' : 'right'" />
+      </RouterLink>
 
-    <button
-      v-else-if="collapsible"
-      class="sidebar-heading"
-      :class="{ open }"
-      @click="$emit('toggle')"
-    >
-      <span>{{ fixedHeading || item.title }}</span>
-      <span class="arrow" :class="open ? 'down' : 'right'" />
-    </button>
+      <button
+        v-else-if="collapsible"
+        class="sidebar-heading"
+        :class="{ open }"
+        @click="$emit('toggle')"
+      >
+        {{ fixedHeading || item.title }}
+        <span class="arrow" :class="open ? 'down' : 'right'" />
+      </button>
 
-    <p
-      v-else
-      class="sidebar-heading"
-      :class="{ open }"
-    >
-      <span>{{ fixedHeading || item.title }}</span>
-    </p>
+      <span
+        v-else
+        class="sidebar-heading"
+        :class="{ open }"
+      >
+        {{ fixedHeading || item.title }}
+      </span>
+    </component>
 
     <DropdownTransition>
       <SidebarLinks
@@ -64,14 +69,33 @@ export default {
     DropdownTransition,
   },
 
-  props: [
-    "item",
-    "open",
-    "collapsible",
-    "depth",
-    "sidebarDepth",
-    "fixedHeading",
-  ],
+  props: {
+    item: {
+      type: Object
+    },
+    open: {
+      type: Boolean
+    },
+    collapsible: {
+      type: Boolean
+    },
+    depth: {
+      type: Number
+    },
+    sidebarDepth: {
+      type: Number
+    },
+    fixedHeading: {
+      type: String
+    },
+    fixedHeadingId: {
+      type: String
+    },
+    headingLevel: {
+      type: String,
+      default: 'h3'
+    }
+  },
 
   // ref: https://vuejs.org/v2/guide/components-edge-cases.html#Circular-References-Between-Components
   beforeCreate() {

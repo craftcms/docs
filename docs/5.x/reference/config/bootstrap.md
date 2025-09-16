@@ -1,5 +1,5 @@
 ---
-description: Reference
+description: Customize your project’s directory structure and other low-level behaviors.
 related:
   - uri: ../../configure.md
     label: Configuring Craft
@@ -155,8 +155,12 @@ The path to the [vendor/](../../system/directory-structure.md#vendor) folder. (I
 
 ## `CRAFT_WEB_URL`
 
-Automatically sets the `@web` [alias](../../configure.md#aliases).
+Used to set the `@web` [alias](../../configure.md#aliases).
+
+::: danger
+This is not recommended unless Craft cannot automatically [determine the hostname](kb:how-craft-determines-the-site-url).
+:::
 
 ## `CRAFT_WEB_ROOT`
 
-Automatically sets the `@webroot` [alias](../../configure.md#aliases).
+Used to set the `@webroot` [alias](../../configure.md#aliases).

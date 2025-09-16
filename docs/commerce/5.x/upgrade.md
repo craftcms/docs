@@ -240,5 +240,9 @@ To support multi-store functionality and the new pricing catalog, there are a nu
 
 With the adoption of the universal element editor, some template hooks have been removed:
 
-- `cp.commerce.product.edit.content`
-- `cp.commerce.product.edit.details`
+- `cp.commerce.product.edit.content` — Create a custom [field layout element](/5.x/extend/field-layout-element-types.md) to allow developers to customize where and when additional form components are displayed.
+- `cp.commerce.product.edit.details` — Use the <commerce5:craft\commerce\elements\Product::EVENT_DEFINE_SIDEBAR_HTML> to inject markup into the editor sidebar, or <commerce5:craft\commerce\elements\Product::EVENT_DEFINE_META_FIELDS_HTML> to specifically target the “meta” region.
+
+::: tip
+These new customization methods event is emitted by _all_ elements, so you can use it to customize variant edit screens, as well.
+:::

@@ -222,7 +222,7 @@ Elements’ default representation in the control panel (and *only* representati
 - `craft\helpers\Cp::elementHtml()` has been deprecated, and should be replaced with `craft\helpers\Cp::elementChipHtml($element, $config)`. Configuration of a chip is handled via a single `$config` array, the keys of which correspond to the legacy arguments’ names.
 - When generating a chip for an input, you must pass the full `name` attribute, including (or omitting) the `[]` suffix for single or multiple element inputs.
 - Chips no longer display a “remove” button. Use `craft\base\Element::EVENT_DEFINE_ACTION_MENU_ITEMS` to add items to the new “action menu.”
-- To modify output of an element chip rendered by an element type you don’t control, listen for the `craft\helpers\Cp::EVENT_DEFINE_ELEMENT_CHIP_HTML` event.
+- To modify output of an element chip rendered by an element type you don’t control, listen for the `craft\helpers\Cp::EVENT_DEFINE_ELEMENT_CHIP_HTML` event, or modify individual attributes’ output via `craft\base\Element::EVENT_DEFINE_ATTRIBUTE_HTML`.
 - Use the new `elementChip()` Twig function to render a chip in your control panel templates.
 
 Both chips and cards support *thumbnails*.
@@ -517,7 +517,7 @@ The `craft\services\Utilities::EVENT_REGISTER_UTILITY_TYPES` constant has been r
 
 #### Element Indexes
 
-The event constant for customizing element table attribute output has been renamed from `craft\base\Element::EVENT_SET_TABLE_ATTRIBUTE_HTML` to `EVENT_DEFINE_ATTRIBUTE_HTML` to agree with other events that allow post-processing of HTML.
+The event constant for customizing element table attribute output has been renamed from `craft\base\Element::EVENT_SET_TABLE_ATTRIBUTE_HTML` to `EVENT_DEFINE_ATTRIBUTE_HTML`. This same event is also emitted when rendering attributes included on [element cards](#chips-cards).
 
 #### Condition Builder
 

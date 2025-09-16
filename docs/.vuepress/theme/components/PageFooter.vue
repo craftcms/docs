@@ -83,7 +83,7 @@
   }
 
   &:focus {
-    @apply outline-none;
+    outline: var(--custom-focus-outline);
   }
 
   &:hover {

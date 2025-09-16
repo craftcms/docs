@@ -4961,6 +4961,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\controllers\\UpgradeController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\UpgradeController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\controllers\\UpgradeController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\controllers\\UserSettingsController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
@@ -26205,19 +26223,19 @@
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\AddressQuery",
@@ -26253,19 +26271,19 @@
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\AssetQuery",
@@ -26301,19 +26319,19 @@
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\CategoryQuery",
@@ -26349,19 +26367,19 @@
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\ElementQuery",
@@ -26397,19 +26415,19 @@
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\EntryQuery",
@@ -26445,19 +26463,19 @@
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\GlobalSetQuery",
@@ -26493,19 +26511,19 @@
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\MatrixBlockQuery",
@@ -26541,19 +26559,19 @@
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\TagQuery",
@@ -26589,19 +26607,19 @@
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_BEFORE_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered before an element is populated."
+        "desc": "The event that is triggered before an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENT",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event that is triggered after an element is populated from a database row."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
         "name": "EVENT_AFTER_POPULATE_ELEMENTS",
         "type": "craft\\events\\PopulateElementEvent",
-        "desc": "The event that is triggered after an element is populated."
+        "desc": "The event triggered after all elements are populated."
     },
     {
         "class": "craft\\elements\\db\\UserQuery",
@@ -31290,6 +31308,48 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\fields\\data\\ColorData",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\fields\\data\\ColorData",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\fields\\data\\ColorData",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\fields\\data\\ColorData",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\data\\ColorData",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\fields\\data\\ColorData",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\fields\\data\\ColorData",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\fs\\Local",
         "name": "EVENT_BEFORE_SAVE",
         "type": "craft\\events\\ModelEvent",
@@ -33760,6 +33820,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\models\\UpdateRelease",
+        "name": "EVENT_IS_CRITICAL",
+        "type": "craft\\events\\UpdateReleaseEvent",
+        "desc": "The event that is triggered when determining if this release should be flagged as critical."
     },
     {
         "class": "craft\\models\\UpdateRelease",

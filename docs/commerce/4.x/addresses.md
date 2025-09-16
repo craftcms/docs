@@ -220,7 +220,7 @@ Both properties can be set at once with the `saveAddressesOnOrderComplete` param
 ::: tip
 The `saveAddress*` properties are only applicable to customers who created addresses directly on the cart. Setting these options to `true` if a _registered_ customer selected an address from their [address book](#auto-fill-from-address-book) has no effect.
 
-Guests’ addresses are automatically saved to their customer account when [registering at checkout](customers.md#registration-at-checkout). <Since product="commerce" ver="4.3.0" feature="Auto-saving guest address when registering at checkout" />
+Guests’ addresses are automatically saved to their customer account when [registering at checkout](customers.md#registration-at-checkout). <Since product="Commerce" repo="craftcms/commerce" ver="4.3.0" feature="Auto-saving guest address when registering at checkout" />
 :::
 
 #### Auto-fill from Address Book

@@ -57,5 +57,9 @@
 /docs/commerce/ /docs/commerce/5.x/
 /docs/nitro/ /docs/nitro/2.x/
 
+# Unversioned Legacy URLs
+# -> Published elsewhere, but that haven’t been updated since we moved to a versioned scheme.
+/docs/reference-tags /docs/5.x/system/reference-tags.html
+
 # 404s
 /* /docs/404.html 404

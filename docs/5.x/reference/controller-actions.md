@@ -43,11 +43,16 @@ In each of the following examples, you’ll find a list of **Supported Params** 
 
 <a name="global-params" title="Parameters respected for all POST requests"></a>
 
-::: tip
+### Globally-Supported Params
+
 All POST actions honor a few additional parameters, except when using an `Accepts: application/json` header:
-- `redirect`: A [hashed](twig/filters.md#hash) URL or path that Craft will send the user to after a [successful request][success-after-post] (i.e. a user is registered or an entry is saved).
-- `successMessage`: Overrides the default flash notice for the action.
-- `failMessage`: Overrides the default flash error for the action.
+
+- `redirect` — A [hashed](twig/filters.md#hash) URL or path that Craft will send the user to after a [successful request][success-after-post] (i.e. a user is registered or an entry is saved).
+- `successMessage` — Overrides the default flash notice for the action.
+- `failMessage` — Overrides the default flash error for the action.
+
+::: tip
+You can use the [`redirectInput()`](twig/functions.md#redirectinput), [`successMessageInput()`](twig/functions.md#successmessageinput), and [`failMessageInput()`](twig/functions.md#failmessageinput) Twig functions to inject these params into a form.
 :::
 
 ### <badge vertical="baseline" type="verb">POST</badge> `entries/save-entry`
@@ -234,7 +239,7 @@ State | `application/json`
 Sends a password reset email.
 
 ::: tip
-See the [Front-End User Accounts](kb:front-end-user-accounts#reset-password-forms) guide for an example of working with this action.
+See the [Front-End User Accounts](kb:front-end-user-accounts#reset-password-form) guide for an example of working with this action.
 :::
 
 #### Supported Params

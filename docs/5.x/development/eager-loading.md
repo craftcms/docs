@@ -13,6 +13,9 @@ When you are working with a list of elements and need to access their nested or 
 
 <!-- more -->
 
+Much of this is handled by Craft, automatically.
+However, there are opportunities to tune certain queries with [lazy eager-loading](#lazy-eager-loading) and manual [eager-loading maps](#the-with-query-param).
+
 <Block label="The N+1 Problem">
 
 Let’s look at a [template](templates.md) that loops through a list of news posts (entries), and displays an image (asset) attached to each one.
@@ -37,7 +40,7 @@ Let’s look at a [template](templates.md) that loops through a list of news pos
 
 In addition to the main query for the entry elements, an additional query is executed for _each_ article to find the attached asset. The number of queries will be _N_ (the number of entries) _+ 1_ (the initial entries query). If there are 50 entries, this innocent-looking template will cost the page 51 queries!
 
-If we were to then display the name of the user who uploaded each image (i.e. `image.uploader.fullName`) or a list of categories for each entry (i.e. `post.topics.all()`), we would introduce a _2N+1_ query, whereby each entry in the initial query would trigger _two_ additional queries, for a minimum of 101. Supposing each query takes a couple of milliseconds, this can quickly add up to 250–500ms _just waiting for data_.
+If we were to then display the name of the user who uploaded each image (i.e. `image.uploader.fullName`) or a list of categories for each entry (i.e. `post.topics.all()`), we would introduce a _2N+1_ or _3N+1_ query, whereby each entry in the initial query would trigger _two_ or _three_ additional queries, for a minimum of 101. Supposing each query takes a couple of milliseconds, this can mean your site spends 250–750ms _just waiting for data_.
 
 </Block>
 
@@ -52,7 +55,7 @@ Not every relationship needs to be eager-loaded! We have a list of recommendatio
 Auditing your templates for performance problems solvable with eager-loading can be tricky, but you may be able to narrow down what you’re looking for with these common bottlenecks:
 
 - [Nested](#eager-loading-nested-sets-of-elements) `{% for %}` loops;
-- Accessing or outputting data from nested blocks in a Matrix field;
+- Accessing or outputting data from nested entries in a Matrix field;
 - Getting information about an entry’s author, within a loop;
 - Using multiple [asset transforms](#eager-loading-image-transforms);
 - Using relational fields within a loop;
@@ -65,7 +68,8 @@ Not all of these situations will require (or benefit from) eager-loading—the g
 
 ## Lazy Eager-Loading <Badge text="New!" />
 
-Element queries in Craft 5 have a new `.eagerly()` query param that simplifies eager-loading of relational fields. Most projects can replace custom eager-loading maps (via the [`.with()` method](#the-with-query-param)) with a call to `.eagerly()` on down-stream element queries.
+Element queries in Craft have an `.eagerly()` query method that simplifies eager-loading of relational fields.
+Most projects can eschew custom eager-loading maps (using the [`.with()` method](#the-with-query-param)) in favor of calling `.eagerly()` on down-stream element queries:
 
 ::: code
 ```twig{3-6} Using .with()
@@ -126,10 +130,10 @@ Element queries in Craft 5 have a new `.eagerly()` query param that simplifies e
 
 In this example, our primary query (for entries in the _News_ section) no longer needs to be concerned about what nested or related queries _might_ be used—instead, each query that stems from an entry returned by the primary query should use `.eagerly()` to let Craft know that there is an opportunity to fetch a set of elements _as though they had been eager-loaded_, up-front. The main difference between this strategy and `.with()` is that—as the name “lazy” suggests—nested and related elements aren’t loaded until Craft actually evaluates logic that needs them; templates (like [element partials](../system/elements.md#rendering-elements)) can request additional relational data without impacting the upstream query, while avoiding optimistic-but-unnecessary up-front queries.
 
-After calling `.eagerly()`, lazily eager-loaded relations are used just like normal relational field values. This means your templates can continue chaining `.one()`, `.all()`, or applying filters like `|first` to get results.
+After calling `.eagerly()`, lazily eager-loaded relations are used just like normal relational field values. This means your templates can continue chaining `.one()` or `.all()`, use them like arrays in a loop, or pass them to filters like `|first`.
 
 ::: warning
-[Native attributes](#eligible-fields-and-attributes) currently do not support lazy eager-loading due to the way many of their values are accessed, but they can be eager loaded using `.with()`.
+Some [native attributes](#eligible-fields-and-attributes) currently do not support lazy eager-loading due to the way many of their values are accessed, but they can be eager loaded using `.with()`.
 :::
 
 ## The `.with()` Query Param
@@ -156,9 +160,29 @@ Here’s how to apply the `with` param to our example:
 
 This template code will only cost three queries (one to fetch the entries, one to determine which assets should be eager-loaded, and one to fetch the assets), and the number of queries will not grow proportional to the number of elements being displayed. The entries are then are automatically populated with their respective related asset(s).
 
+### Matrix and Field Contexts
+
+When building an eager-loading plan, you may prepend a valid field layout provider’s handle to a field to narrow its scope or avoid ambiguity.
+For instance, a Matrix field with two media-driven entry types (_Two-Up_ and _Gallery_) might both use an asset field with the handle `images`, but the design only uses information about the uploader to generate captions in the proposed full-screen gallery interface:
+
+```twig{3-4}
+{% set sections = entry.myContentField
+  .with([
+    'gallery:images.uploader',
+    'twoUp:images',
+  ])
+  .all() %}
+
+{# ... #}
+```
+
+If we were to use a single `images.uploader` path, Craft would unnecessarily load user data for the _Two-Up_ sections, as well.
+This specific example is not apt to have a significant performance impact in most projects; however, similarly-structured queries returning hundreds or thousands of elements with many unique relations may benefit from reduced memory usage.
+
 ## Accessing Eager-Loaded Elements
 
-Eager-loaded elements are returned as a [collections](collections.md)—or more specifically, an <craft5:craft\elements\ElementCollection>. This means that (in most cases) eager-loaded and non-eager-loaded elements can be treated in the same way.
+Eager-loaded elements are returned as a [collection](collections.md)—or more specifically, an <craft5:craft\elements\ElementCollection>.
+This means that (in most cases) eager-loaded and non-eager-loaded elements can be treated in the same way at the template level, including as an iterable in `for` loops.
 
 ## Eager-Loading Multiple Sets of Elements
 
@@ -360,7 +384,9 @@ Image transform indexes can be eager-loaded on assets that are also eager-loaded
 
 ## Eligible Fields and Attributes
 
-[Relational fields](../system/relations.md) are the most common candidate for eager-loading. Fields are always eager-loaded using their handle. In this example, `manufacturer` is an entries field attached to each “car” entry:
+[Relational fields](../system/relations.md) are the most common candidate for eager-loading.
+Fields are always eager-loaded using their handle.
+In this example, `manufacturer` is an [entries field](../reference/field-types/entries.md) attached to each “car” entry:
 
 ```twig
 {% set carsWithManufacturers = craft.entries()
@@ -371,18 +397,43 @@ Image transform indexes can be eager-loaded on assets that are also eager-loaded
   .all() %}
 ```
 
-[Element types](../system/elements.md) support a variety of unique eager-loadable attributes, as well:
+Fields that manage nested elements (like [Matrix](../reference/field-types/matrix.md) or [addresses](../reference/field-types/addresses.md)) use the same syntax:
+
+```twig
+{% set carsWithSaleHistory = craft.entries()
+  .section('cars')
+  .with([
+    ['saleHistory'],
+  ])
+  .all() %}
+```
+
+The handle you use for eager-loading respects any overrides set in the relevant field layouts.
+
+Each [element type](../system/elements.md) supports a variety of unique eager-loadable attributes, as well:
 
 All Element Types
-:   - Immediate children: `children`
-    - All descendants: `descendants`
-    - Immediate parent: `parent`
-    - All ancestors: `ancestors`
-    - Same element in other sites: `localized`
+:   - Same element in other sites: `localized`
     - Drafts: `drafts`
     - Draft creators: `draftCreator`
     - Revisions: `revisions`
     - Revision creators: `revisionCreator`
+    - Current revision: `currentRevision`
+
+    (Not all element types actually make use of sites, drafts, and revisions.)
+
+All [Nested Elements](../system/elements.md#nested-elements)
+:   - Owners: `owner`
+    - Primary owners: `primaryOwner`
+
+    Note that owners may not have a uniform element type.
+
+Structure elements
+:   Entries in structure sections, categories, and any other hierarchical elements support these:
+    - Immediate children: `children`
+    - All descendants: `descendants`
+    - Immediate parent: `parent`
+    - All ancestors: `ancestors`
 
 Assets
 :   - Uploader: `uploader`
@@ -395,10 +446,15 @@ Users
 :   - Addresses: `addresses`
     - Profile photo: `photo`
 
-Fields and attributes that don’t use element queries (or don’t ultimately resolve to one or more elements) are generally not eager-loadable—and trying to eager-load them may result in an error.
+Like custom relational fields, some commonly-used attributes (like `authors` and `owner`) support automatic eager-loading.
+If you are noticing sluggish queries, it never hurts to add an attribute to an eager-loading map.
+
+### Non-Element Relationships
+
+Fields and attributes that don’t use element queries (or don’t ultimately resolve to one or more elements) are generally not eager-loadable—and trying to eager-load them may result in an error. This includes scalar field values (like strings and numbers) as well as complex fields like [table](../reference/field-types/table.md).
 
 ::: tip
-Some elements may also expose query methods that optimize the loading of associated _non-element_ records (like [asset transforms](#eager-loading-image-transforms)), but their interfaces are not part of the core element-only eager-loading system.
+Some elements may also expose query methods that optimize the loading of associated _non-element_ records (like [asset transforms](#eager-loading-image-transforms)), but their interfaces are not part of the core element-only eager-loading system, and may not support automatic or lazy eager-loading.
 :::
 
 ### Reverse Relationships

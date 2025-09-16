@@ -14,7 +14,7 @@ In the control panel, you’ll encounter addresses within the context of [orders
 
 Customer’s addresses are managed from their user account, if you’ve [added the native Addresses field](/5.x/reference/element-types/addresses.md#setup) to Users’ field layout. Commerce also inserts a **Commerce Settings** field into the [address field layout](/5.x/reference/element-types/addresses.md#native-and-custom-fields)) with primary shipping and billing controls.
 
-### How Addresses are Used
+## How Addresses are Used
 
 Your customers will work with addresses [directly](#address-book), or [via the cart](#cart-addresses).
 
@@ -29,7 +29,7 @@ Every order may have a shipping and billing address, and customers with accounts
 - Methods for working with geographic regions provided by Craft’s supporting [address repository](/5.x/reference/element-types/addresses.md#address-repository).
 - A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
 
-#### Store Addresses
+### Store Addresses
 
 Each store’s primary address (set via **Commerce** &rarr; **System Settings** &rarr; **Stores**) is available via the global `currentStore` variable or the [`Stores` service](commerce5:craft\commerce\services\Stores):
 
@@ -65,7 +65,7 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 :::
 
 ::: tip
-That `getStore().getStore()` is not a typo! We’re getting the <commerce4:craft\commerce\services\Store> _service_ with the first method and getting the <commerce4:craft\commerce\models\Store> _model_ with the second.
+That `getStore().getStore()` is not a typo! We’re getting the <commerce5:craft\commerce\services\Store> _service_ with the first method and getting the <commerce5:craft\commerce\models\Store> _model_ with the second.
 :::
 
 ## Cart Addresses
@@ -186,7 +186,7 @@ If your request also includes a non-empty `shippingAddressId` or `billingAddress
 
 #### Save Addresses when Completing an Order
 
-Your customers can save the billing and/or shipping addresses on their cart to their address book when they check out. These options are stored as `saveBillingAddressOnOrderComplete` and `saveShippingAddressOnOrderComplete` on the cart or <commerce4:craft\commerce\elements\Order> object. You may send corresponding values any time you update the customer’s cart:
+Your customers can save the billing and/or shipping addresses on their cart to their address book when they check out. These options are stored as `saveBillingAddressOnOrderComplete` and `saveShippingAddressOnOrderComplete` on the cart or <commerce5:craft\commerce\elements\Order> object. You may send corresponding values any time you update the customer’s cart:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -313,7 +313,7 @@ Estimated addresses are <craft4:craft\elements\Address> elements, just like ship
 
 You can add or update an estimated addresses on the order with the same `commerce/cart/update-cart` form action.
 
-In this example we’ll first check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce4:craft\commerce\elements\Order) object, displaying a form to collect only the shipping country, state, and postal code if we don’t already have them:
+In this example we’ll first check for existing estimate addresses with the `estimatedShippingAddressId` and `estimatedBillingAddressId` attributes on the [cart](commerce5:craft\commerce\elements\Order) object, displaying a form to collect only the shipping country, state, and postal code if we don’t already have them:
 
 ```twig
 {% set cart = craft.commerce.carts.cart %}
@@ -365,7 +365,7 @@ In this example we’ll first check for existing estimate addresses with the `es
 ```
 
 ::: tip
-[Tax adjusters](commerce4:craft\commerce\adjusters\Tax) and [shipping adjusters](commerce4:craft\commerce\adjusters\Shipping) will include an `isEstimated` attribute when their calculations were based on estimated address data.
+[Tax adjusters](commerce5:craft\commerce\adjusters\Tax) and [shipping adjusters](commerce5:craft\commerce\adjusters\Shipping) will include an `isEstimated` attribute when their calculations were based on estimated address data.
 :::
 
 A full example of this can be seen in the [example templates](../development/example-templates.md) on the cart page.

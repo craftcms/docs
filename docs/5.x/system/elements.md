@@ -62,6 +62,115 @@ Craft is adamantly agnostic about your content model, and comes with no predefin
 
 Content can be a great deal more than text, too! Craft has a number of built-in [field types](../reference/field-types/README.md) that provide a highly-customizable authoring and developer experience.
 
+<See path="fields.md" />
+
+### Generated Fields <Since ver="5.8.0" feature="Generated fields" />
+
+[Field layout](fields.md#field-layouts) providers (the components that dictate what kind of content can be saved on an element, like [entry types](../reference/element-types/entries.md#entry-types) or [asset volumes](../reference/element-types/assets.md#volumes)) include a **Generated Fields** setting, allowing you to store additional computed values alongside native attributes and custom fields.
+
+<img src="../images/elements-generated-fields.png" alt="Adding generated fields to an entry via an entry type." />
+
+Each field’s **Template** is evaluated as an [object template](object-templates.md) when the element is saved, and the resulting value is exposed via its **Handle**:
+
+```twig{3}
+<article>
+  <h2>{{ entry.title }}</h2>
+  <address>{{ entry.byline }}</address>
+
+  {# ... #}
+</article>
+```
+
+All generated fields are stored and [queried](#querying-generated-field-values) as text. When used in a condition builder, you will only be able to use string operands (like “starts with…” or “contains…”).
+
+::: tip
+Generated fields are _not_ automatically displayed in the control panel, but they can be added to element [cards](#custom-card-attributes), or output in a [template field layout element](fields.md#ui-elements).
+:::
+
+#### Use Cases
+
+Here are a few ideas for how to use generated fields:
+
+Memoize Expensive Data
+:   Run a complex query and “cache” the result in a succinct way.
+
+    **Example:** Reverse-lookup of the number of entries in a category.
+
+    ```twig
+    {{ craft.entries().relatedTo({ targetElement: object, field: 'category' }).count() }}
+    ```
+
+Presentational Summaries
+:   Truncate or clean up text for use on element cards.
+
+    **Example:** Get the first text chunk from a CKEditor field, and strip the HTML.
+
+    ```twig
+    {{ object.body.firstWhere('type', 'markup')|strip_tags }}
+    ```
+
+Binary Criteria
+:   State derived from nested or related records can be coalesced into a single value.
+
+    **Example:** Tally up a customer’s lifetime order total and mark them as a “VIP” if it exceeds some amount. This template stores a `1` when it evaluates to `true`, and nothing for `false`.
+
+    ```twig
+    {{ craft.orders().customer(object).sum('totalPaid') > 1000 }}
+    ```
+
+Record-Keeping
+:   Track data over some period of time.
+
+    **Example:** Use the [`seq()` Twig function](../reference/twig/functions.md#seq) to increment a counter.
+
+    ```twig
+    {{ seq("entry-save-count:#{canonicalId}") }}
+    ```
+
+Templates that reference nonexistent values are quietly ignored, but compilation errors (like missing Twig functions or filters) will produce an error.
+Avoid using generated field references inside one another—within a single save, fields are evaluated in the order they were defined, and only have access to values from the previous save.
+
+::: warning
+Field values are only refreshed when the element itself is saved, so references to _other_ elements’ content in a template may become stale.
+
+If you need to keep generated fields fresh, use one of the [`resave/*` commands](../reference/cli.md#resave) to periodically re-render their values.
+It may be more reliable and economical to continue rendering simple values in regular templates, rather than pre-generating them.
+As an example, there won’t often be a benefit to storing a primary author’s registration date on an entry (`{author.dateCreated|date}`), when the dynamic value is already accessible via a single element query (`{{ entry.author.dateCreated|date }}`).
+:::
+
+#### Querying Generated Field Values
+
+Craft provides [element query](../development/element-queries.md) methods for each of the generated fields available to the element type.
+Entry queries, for example, combine generated fields from entry types’ field layouts.
+
+Suppose we want to display a list of movie directors sorted by the total runtime of films they’ve made.
+Our _Director_ entries might have a generated field like _Total Runtime_ (with a handle of `runtimeTotal`) containing this template:
+
+```twig
+{{ craft.entries().section('films').director(object).select('runtime').column()|reduce((sum, val) => sum + val, 0) }}
+```
+
+Directors can now use the generated field for sorting…
+
+```twig
+{% set directorsByRuntime = craft.entries()
+  .section('directors')
+  .orderBy('runtimeTotal DESC')
+  .all() %}
+```
+
+…and filtering:
+
+```twig
+{% set multidayRuntime = craft.entries()
+  .section('directors')
+  .runtimeTotal("> #{60 * 24 * 2}")
+  .all() %}
+```
+
+Note that we are assuming runtimes are stored in minutes.
+Formatted time values are not as trivial to compare, sort, or sum!
+
 ## Indexes
 
 You’ll access most elements via their element index. Indexes allow you to browse, sort, filter, and [search](searching.md) for elements in a paginated, table-like view.
@@ -128,17 +237,17 @@ Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button
 
 A streamlined version of indexes are used when adding elements to a [relational](relations.md) field via a modal. Depending on the field’s configuration, Craft may hide sources or actions, and disable [slideouts](control-panel.md#slideouts) (except to create a new element, in-context) and pagination (in favor of scrolling). Internally, Craft refers to these variations as “contexts,” which [plugins](../extend/element-types.md#sources) have an opportunity to modify.
 
-### Chips & Cards <Badge text="New!" />
+## Chips & Cards <Badge text="New!" />
 
 <img src="../images/element-chips.png" alt="An element “chip” with a title, thumbnail, and label indicated it has been modified." />
 
 Throughout the control panel, you’ll encounter references to elements in a number of different contexts, like element indexes, [Matrix](../reference/field-types/matrix.md) fields, and other [relational](relations.md) fields. Element _cards_ are a new way to display nested or related elements. They share the core features of element _chips_ (like quick-actions and ordering controls), but provide an additional layer of customization via the element’s [field layout](fields.md#field-layouts).
 
-Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by a combination of the field layout and customizable [card attributes](#custom-cart-attributes) <Since ver="5.5.0" feature="Customizable card attributes" />; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
+Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by a combination of the field layout and customizable [card attributes](#custom-card-attributes) <Since ver="5.5.0" feature="Customizable card attributes" />; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
 
 <img src="../images/element-cards.png" alt="Two element “cards” in the Craft control panel, show thumbnails, titles, and statuses." />
 
-#### Custom Card Attributes <Since ver="5.5.0" feature="Customizable card attributes" />
+### Custom Card Attributes <Since ver="5.5.0" feature="Customizable card attributes" />
 
 The attributes and fields displayed on element cards is ultimately determined by the interface below each [field layout designer](fields.md#field-layouts):
 
@@ -150,7 +259,104 @@ An element’s **Title** and **Status** are always visible, and the presence of 
 A card’s thumbnail can come from any field that implements <craft5:craft\base\ThumbableFieldInterface> (like [assets](../reference/field-types/assets.md) or [icon](../reference/field-types/icon.md) fields), or be “inherited” from another element via a [relational field](relations.md).
 :::
 
-## Nested Elements
+In addition to fields and attributes, [generated fields](#generated-fields) can also be added to element cards. <Since ver="5.8.0" feature="Generated fields" />
+
+## Copying Elements <Since ver="5.7.0" feature="Copying elements" />
+
+[Entries](../reference/element-types/entries.md) and [addresses](../reference/element-types/addresses.md) can by copied-and-pasted between sections and fields. Open the action menu <Icon kind="ellipses" /> on any chip, card, or inline nested entry and select **Copy <Placeholder help="A built-in or plugin-provided element type.">element type</Placeholder>**:
+
+![Screenshot](../images/entries-copy-action.png)
+
+From an element index, you can copy multiple elements by selecting any number of rows, then pressing **Copy** from the element actions menu <Icon kind="settings" /> in the bottom toolbar.
+
+Only one group of elements can be copied at a time—copying another element or group of elements will replace whatever was previously copied. Craft will display a notification on every control panel screen, until you press **Cancel** (or paste it somewhere else).
+
+![Screenshot](../images/entries-copy-notification.png)
+
+When pasting an element, you will see a notification confirming the element has been “duplicated” into the new context.
+
+You can paste elements anywhere the special **Paste** button appears. The eligible targets are determined by the type of copied element—addresses are portable between user address books and custom fields; entries can only be pasted into fields and sections that support the copied element’s entry type.
+
+![Screenshot](../images/entries-copy-target.png)
+
+The **Paste** button is displayed in the same row as the **Add** button for nested element interfaces; on an element index, it is displayed in the bottom toolbar, where the element action <Icon kind="settings" /> menu would be.
+
+::: warning
+A copied [draft](drafts-revisions.md) (provisional or otherwise) is pasted as a _canonical_ element, with the pending changes applied.
+:::
+
+## Statuses
+
+Most element types support _statuses_. An element’s status is most often a combination of its `enabled` and `enabledForSite` attributes (which Craft stores explicitly for all elements), and any number of other attributes determined by its [type](#element-types). Statuses are represented as strings, and can be accessed via `element.status` in a template, or fed into element query’s `.status()` param as a short-hand for the combination of specific properties they represent.
+
+- **Draft** (`draft`) — The element has a `draftId`.
+- **Archived** (`archived`) — The element’s `archived` property is `true`; currently only used by [user](../reference/element-types/users.md) elements.
+- **Disabled** (`disabled`) — One or both of the `enabled` and `enabledForSite` attributes are `false`.
+- **Enabled** (`enabled`) — Both the `enabled` _and_ `enabledForSite` attributes are `true`.
+
+::: tip
+To query for elements without applying _any_ status constraints (including the element type’s defaults), use `query.status(null)`.
+:::
+
+An element’s status is reflected in element indexes, chips, and cards through color pips and labels.
+
+![Sample element status badges](../images/elements-statuses.png)
+
+<Block label="Provisional Drafts and Statuses">
+
+In the illustration above, **Edited** is technically a supplemental label applied to [provisional drafts](drafts-revisions.md#provisional-drafts), and is not a status on its own—but it is often applied in combination with other statuses. Elements with this label have been “substituted” for their canonical counterparts, meaning that provisional changes (like a new title) will appear with a **Live** status.
+
+Conversely, disabling an element in a provisional draft may make it _appear_ as **Disabled** throughout the control panel, despite its canonical element actually being **Live**. Despite this, sorting and filtering always operates on the canonical element; the derivative is substituted as the final step in the query.
+
+</Block>
+
+### Querying by Status
+
+When querying for elements using the `.status()` param, you’ll need to refer to the list of global identifiers above, and to additional statuses provided by the specific element type:
+
+```twig{3,9,15}
+{% set currentDeals = craft.entries()
+  .section('deals')
+  .status('live')
+  .order('postDate DESC')
+  .all() %}
+
+{% set upcomingDeals = craft.entries()
+  .section('deals')
+  .status('pending')
+  .order('postDate ASC')
+  .all() %}
+
+{% set pastDeals = craft.entries()
+  .section('deals')
+  .status('expired')
+  .order('expiryDate DESC')
+  .all() %}
+```
+
+Statuses can be logically combined in a single query, as well:
+
+```twig
+{# Two explicit statuses: #}
+{% set bannedUsers = craft.users()
+  .status([
+    'suspended',
+    'locked',
+  ])
+  .all() %}
+
+{# One explicit status: #}
+{% set inactiveUsers = craft.users()
+  .status('inactive')
+  .all() %}
+
+{# Negated/inverted status: #}
+{% set inactiveUsersAlt = craft.users()
+  .status(['not', 'active'])
+  .all() %}
+```
+
+## Nested Elements <Badge text="New!" />
 
 Craft ships with two native _nested element_ implementations, which provide unique authoring or administrative experiences:
 
@@ -263,11 +469,9 @@ When accessing related or nested content within an element partial, use the `.ea
 
 ## Properties and Methods
 
-<Todo notes="Move to elements reference?" />
-
 All elements share a few characteristics that make them familiar to work with in your [templates](../development/templates.md). Each [element type](#element-types) will supplement these lists with their own properties and methods.
 
-Additionally, [custom fields](fields.md) attached to an element are automatically made available as properties corresponding to their handles—so a field called “Post Summary” with a handle of `summary` would be accessed as `entry.summary` (if it were attached to an [entry type](../reference/element-types/entries.md#entry-types)’s field layout).
+Additionally, [custom fields](fields.md) attached to an element are automatically made available as properties corresponding to their handles—so a field called “Post Summary” with a handle of `summary` would be accessed as `entry.summary` (if it were attached to an [entry type](../reference/element-types/entries.md#entry-types)’s field layout, and its handle was not overridden).
 
 ::: warning
 This is not an exhaustive list! If you’re curious, consult the <craft5:craft\base\Element> and <craft5:craft\base\ElementTrait> class reference for a complete picture of what data is available inside elements and how it can be used.
@@ -278,7 +482,7 @@ This is not an exhaustive list! If you’re curious, consult the <craft5:craft\b
 Properties give you access to values, and do not accept arguments.
 
 Property | Type | Notes
--------- | ---- | -----
+--- | --- | ---
 `archived` | `bool|null` | Whether the element is soft-deleted, or “trashed.”
 `dateCreated` | `DateTime` | Date the element was originally created.
 `dateDeleted` | `DateTime|null` | Date the element was soft-deleted or `null` if not.
@@ -288,7 +492,7 @@ Property | Type | Notes
 `level` | `int|null` | Depth of the element in a structure. _Structures only._
 `ownerId` | `int|null` | ID of the element that “owns” this element. _[Nested elements]() only._
 `parentId` | `int|null` | ID of the parent element. _Structures only._
-`searchScore` | `int` | Score relative to other results when returned from an [element query](../development/element-queries.md) using the [`search` param](searching.md).
+`searchScore` | `int` | Score relative to other results when returned from an [element query](../development/element-queries.md) using the [`search` param](searching.md), _and_ `.orderBy('score')`.
 `siteId` | `int` | ID of the <craft5:craft\models\Site> the element was loaded in.
 `slug` | `string|null` | _Only for elements with slugs._
 `title` | `string|null` | _Only for elements with titles._
@@ -301,11 +505,11 @@ Property | Type | Notes
 Methods also return values, but may accept or require arguments.
 
 ::: tip
-Any method beginning with `get` can be used like a [property](#properties) by removing the prefix and down-casing the first letter. For example, `{{ entry.getLink() }}` can also be accessed as `{{ entry.link }}`
+Any method beginning with `get` (and that accepts no arguments) can be used like a [property](#properties) by removing the prefix and down-casing the first letter. For example, `{{ entry.getLink() }}` can also be used as `{{ entry.link }}` in a template. This is referred to as a “getter” or “magic getter,” and works in part due to the [design of Yii](guide:concept-properties), Craft’s underlying PHP library.
 :::
 
 Method | Notes
------- | -----
+--- | ---
 `getAncestors(dist)` | Returns up to `dist` parents of the element, or all parents when omitted. _Structures only._
 `getChildren()` | Returns immediate children of the element. _Structures only._
 `getCpEditUrl()` | Gets a URL to the Craft control panel.
@@ -316,7 +520,7 @@ Method | Notes
 `getNext(criteria)` | Load the “next” element relative to this one, given a set of criteria.
 `getNextSibling()` | Load the next sibling of this element, within a structure. _Structures only._
 `getOwner()` | Return the element that “owns” a [nested element](../reference/element-types/entries.md#nested-entries). _Nested elements only._
-`getParent()` | Returns the element’s parent. _Structures only._
+`getParent()` | Returns the element’s parent. _Structure elements only._
 `getPrev(criteria)` | Load the previous element relative to this one, given a set of criteria.
 `getPrevSibling()` | Load the previous sibling of this element, within a structure. _Structures only._
 `getRef()` | Builds the part of a [reference tag](reference-tags.md) unique to the element.

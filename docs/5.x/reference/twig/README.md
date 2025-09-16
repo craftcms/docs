@@ -1,5 +1,7 @@
 # Twig Reference
 
+This section covers features available in Twig, Craft’s template environment.
+
 <See path="../../development/twig.md" label="Twig Fundamentals" />
 
 <hr>

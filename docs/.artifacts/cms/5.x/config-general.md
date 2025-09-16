@@ -13,11 +13,12 @@ Allowed types
 
 Default value
 :  `[
-    'alwaysShowFocusRings' => false,
     'useShapes' => false,
     'underlineLinks' => false,
     'disableAutofocus' => false,
     'notificationDuration' => 5000,
+    'notificationPosition' => 'end-start',
+    'slideoutPosition' => 'end',
 ]`
 
 Defined by
@@ -32,11 +33,16 @@ The default user accessibility preferences that should be applied to users that 
 
 The array can contain the following keys:
 
-- `alwaysShowFocusRings` - Whether focus rings should always be shown when an element has focus.
 - `useShapes` – Whether shapes should be used to represent statuses.
 - `underlineLinks` – Whether links should be underlined.
+- `disableAutofocus` – Whether inputs should make use of the `autofocus` attribute.
 - `notificationDuration` – How long notifications should be shown before they disappear automatically (in
   milliseconds). Set to `0` to show them indefinitely.
+- `notificationPosition` – Where notifications should be shown on the screen (`'start-start'` for top-left,
+  `'start-end'` for top-right, `'end-start'` for bottom-left, or `'end-end'` for bottom-right, when using an
+  LTR orientation).
+- `slideoutPosition` – Where slideouts should be shown on the screen (`'start'` for left, or `'end'`
+  for right, when using an LTR orientation).
 
 ```php
 ->accessibilityDefaults([
@@ -190,7 +196,7 @@ Since
 :  3.5.6
 
 Deprecated
-:  in 4.0.0
+:  in 4.0.0 <Icon kind="danger" style="color: var(--craft-red)" />
 
 </div>
 
@@ -1243,7 +1249,7 @@ Since
 :  3.6.14
 
 Deprecated
-:  in 4.11.0. [[\craft\filters\Headers]] should be used instead.
+:  in 4.11.0. [[\craft\filters\Headers]] should be used instead. <Icon kind="danger" style="color: var(--craft-red)" />
 
 </div>
 
@@ -1572,6 +1578,38 @@ CRAFT_SLUG_WORD_SEPARATOR=.
 
 
 
+### `staticStatuses`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$staticStatuses](craft5:craft\config\GeneralConfig::$staticStatuses)
+
+Since
+:  5.7.0
+
+</div>
+
+Whether entries’ statuses should be stored statically, and only get updated on entry save, or when the
+`update-statuses` command is executed.
+
+::: code
+```php Static Config
+->staticStatuses()
+```
+```shell Environment Override
+CRAFT_STATIC_STATUSES=true
+```
+:::
+
+
+
 ### `systemTemplateCss`
 
 <div class="compact">
@@ -1696,8 +1734,9 @@ CRAFT_TRANSLATION_DEBUG_OUTPUT=true
 The symbols are as follows:
 
 | Symbol | Example | Category |
-| `$` | `$Date Field$` | Site |
-| `@` | `@Entry Type@` | Application |
+| --- | --- | --- |
+| `$` | `$Date Field$` | Site (front-end, `site.php`) |
+| `@` | `@Entry Type@` | Application (Craft, `app.php`) |
 | `%` | `%Object Template% | Other (plugin or custom source) |
 
 Translations _may_ be nested or surrounded by multiple symbols.
@@ -2019,7 +2058,7 @@ Defined by
 
 </div>
 
-The URL to the root directory that should store published control panel resources.
+The URL to the root directory where control panel resources are published.
 
 ::: code
 ```php Static Config
@@ -2273,17 +2312,19 @@ Allowed types
 :  `mixed`
 
 Default value
-:  `''`
+:  `null`
 
 Defined by
 :  [GeneralConfig::$invalidUserTokenPath](craft5:craft\config\GeneralConfig::$invalidUserTokenPath)
 
 </div>
 
-The URI Craft should redirect to when user token validation fails. A token is used on things like setting and resetting user account
-passwords. Note that this only affects front-end site requests.
+The URI Craft should redirect to when user token validation fails. User tokens are used for
+email verification and password resets. If `null`, <config5:loginPath> will be used by default.
 
 See [craft\helpers\ConfigHelper::localizedValue()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-localizedvalue) for a list of supported value types.
+
+Note that this only affects front-end site requests.
 
 ::: code
 ```php Static Config
@@ -2424,16 +2465,16 @@ Defined by
 The string preceding a number which Craft will look for when determining if the current request is for a particular page in
 a paginated list of pages.
 
-Example Value | Example URI
-------------- | -----------
-`p` | `/news/p5`
-`page` | `/news/page5`
-`page/` | `/news/page/5`
-`?page` | `/news?page=5`
+| Example Value | Example URI |
+| --- | --- |
+| `p` | `/news/p5` |
+| `page` | `/news/page5` |
+| `page/` | `/news/page/5` |
+| `?page` | `/news?page=5` |
 
-::: tip
-If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config5:pathParam> setting which defaults to `p`.
-If your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
+::: warning
+Craft may override this setting if it conflicts with <config5:pathParam>. If you want to set this to `?p` (e.g. `/news?p=5`), you’ll also need to change your <config5:pathParam> setting (which defaults to `p`).
+Then, if your server is running Apache, you’ll need to update the redirect code in your `.htaccess` file to match your new `pathParam` value.
 :::
 
 ::: code
@@ -3295,7 +3336,7 @@ Since
 :  3.5.0
 
 Deprecated
-:  in 4.13.0. [[\craft\filters\BasicHttpAuthLogin]] should be used instead.
+:  in 4.13.0. [[\craft\filters\BasicHttpAuthLogin]] should be used instead. <Icon kind="danger" style="color: var(--craft-red)" />
 
 </div>
 
@@ -4611,7 +4652,7 @@ Since
 :  3.5.0
 
 Deprecated
-:  in 4.11.0. [[\craft\filters\Cors]] should be used instead.
+:  in 4.11.0. [[\craft\filters\Cors]] should be used instead. <Icon kind="danger" style="color: var(--craft-red)" />
 
 </div>
 

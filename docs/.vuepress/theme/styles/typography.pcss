@@ -81,7 +81,8 @@
   }
 
   p,
-  li {
+  li:not(.theme-default-content-override),
+  dl {
     a[target="_blank"] {
       span {
         @apply inline-block;
@@ -89,6 +90,8 @@
         .icon.outbound {
           width: 14px;
           height: 14px;
+          color: currentColor;
+          margin-left: 3px;
         }
       }
     }
@@ -98,8 +101,13 @@
     @apply text-base mb-2;
   }
 
-  a:hover {
+  p:not(.theme-default-content-override) a,
+  li:not(.theme-default-content-override) a,
+  dl a {
     @apply underline;
+    text-decoration-color: var(--link-underline-color);
+    text-underline-offset: .15em;
+    text-decoration-thickness: .075em;
   }
 
   ::selection {
@@ -114,8 +122,8 @@
     @apply my-4;
   }
 
-  ul,
-  ol {
+  ul:not(.theme-default-content-override),
+  ol:not(.theme-default-content-override) {
     @apply pl-6;
   }
 
@@ -144,15 +152,14 @@
 
   dl {
     @apply py-5 px-6 rounded;
-    background: var(--dl-color);
-
-    dt,
-    dd {
-      @apply mt-1 mx-0 mb-0;
-    }
+    background-color: var(--custom-block-bg-color);
 
     dt {
-      @apply pr-4 box-border font-medium;
+      @apply mb-2 pr-4 box-border font-medium;
+
+      &:not(:first-child) {
+        @apply mt-4;
+      }
 
       code {
         @apply font-semibold bg-transparent px-0;
@@ -162,10 +169,6 @@
     dd {
       @apply pl-8;
 
-      code {
-        @apply bg-transparent px-0;
-      }
-    
       p:first-child {
         @apply mt-0;
       }
@@ -173,10 +176,6 @@
       .custom-block p:first-child {
         @apply mt-4;
       }
-    }
-
-    code {
-      background: #dadfe3;
     }
   }
 
@@ -208,7 +207,7 @@
   }
 
   p a code {
-    @apply font-normal text-blue;
+    @apply font-normal;
   }
 
   blockquote {
@@ -233,11 +232,14 @@
     @apply text-sm float-left opacity-0;
     font-size: 0.85em;
     margin-left: -0.87em;
-    padding-right: 0.23em;
     margin-top: 0.125em;
 
     &:hover {
       @apply no-underline;
+    }
+
+    &:focus {
+      @apply opacity-100;
     }
   }
 

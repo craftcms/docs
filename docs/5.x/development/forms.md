@@ -25,7 +25,7 @@ Most of your interactions with Craft so far have likely been over HTTP. Let’s 
 
 This page will make frequent references to _query_ and _body_ params. These are named values sent with a request, either encoded after a `?` in the URL, or within the “body” of a request. Query params are used in [GET](#get) and [POST](#post) requests, but body params are only used in POST requests.
 
-Craft uses a handful of params to properly route a request, but may expect others based on what it thinks the user is requesting. For example, most requests use an [action](#actions) param, but a [login request](../reference/controller-actions.md#post-userslogin) also requires a `username` and `password` param.
+Craft uses a handful of params to properly route a request, but may expect others based on what it thinks the user is requesting. For example, most requests use an [action](#actions) param, but a [login request](../reference/controller-actions.md#post-userslogin) also requires `loginName` and `password` params.
 
 ### Actions
 
@@ -157,7 +157,7 @@ Header | Notes
 `X-Requested-With` | Set to `XMLHttpRequest` if your templates rely on `craft.app.request.isAjax`.
 `X-CSRF-Token` | Send a valid CSRF token (for POST requests) if none is provided in the request body under the key determined by <config5:csrfTokenName>.
 `Content-Type` | Set to `application/json` if the request’s body is a serialized [JSON payload](#sending-json) (as opposed to `FormData`).
-`X-Craft-Site` | Set to a valid [site](../system/sites.md) handle to treat the request as though it were part of a specific site.
+`X-Craft-Site` | Set to a valid [site](../system/sites.md) handle or ID to treat the request as though it were part of a specific site.
 
 A CSRF token is still required for Ajax requests using the `POST` method. You can ensure a session is started (for guests) by preflighting a request to the [`users/session-info` action](#get-userssession-info):
 
@@ -232,6 +232,42 @@ This example assumes you have no preexisting HTML from the server, as though it 
 Note that by generating and outputting a CSRF token into HTML, the page can no longer be safely cached.
 :::
 
+When using the `fetch()` API, the body of a request can be set to a `FormData` object populated from an HTML form, as well:
+
+```twig{11,22}
+<form method="post" id="user-profile">
+  {{ csrfInput() }}
+  {{ actionInput('users/save-user') }}
+
+  <input type="text" name="fullName" value="{{ currentUser.fullName }}" required>
+
+  <button>Save</button>
+</form>
+
+<script>
+  const $form = document.getElementById('user-profile');
+
+  $form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    fetch('/actions/users/save-user', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: new FormData($form),
+    })
+    .then(response => response.json())
+    .then(result => console.log(result));
+  })
+</script>
+```
+
+#### CORS
+
+Requests sent from a domain other than the one Craft is running on (including different subdomains, unless you’ve set <config5:defaultCookieDomain>) may need to use the [`credentials`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#including_credentials) request option, and configure appropriate `Access-Control-Allow-Credentials` and `Access-Control-Allow-Origin` [headers](../reference/config/app.md#cors) in Craft.
+
 #### Sending JSON
 
 If you prefer to work with a JSON payload for the body, you must include [the appropriate `Content-Type` header](yii2:yii\web\Request::parsers). The equivalent `users/save-user` request would look like this:
@@ -267,7 +303,7 @@ When sending a JSON payload in the body of a request, you _must_ use an action p
 
 In [headless](config5:headlessMode) mode, and when using [actions](#actions) or otherwise site-agnostic routes (i.e. configured via the [Element API](plugin:element-api) plugin), Craft uses the [primary site](../system/sites.md#primary-site), by default. This means that element queries, static message translations, emails, and other language-dependent features may be handled in unexpected ways.
 
-Send a valid site ID or handle under the `X-Craft-Site` header to tell Craft that it should handle the request in the context of a specific site:
+Send a valid site ID or handle under the `X-Craft-Site` header <Since ver="5.6.0" feature="The X-Craft-Site header" /> to tell Craft that it should handle the request in the context of a specific site:
 
 ```js{8}
 // Assuming there is a matching Element API route configured...
@@ -356,6 +392,10 @@ While abbreviated, this “user profile” form contains all the patterns requir
   </body>
 </html>
 ```
+:::
+
+::: tip
+Note that we’re outputting errors from the `user` object (in `account.twig`) as well as any success or failure [flashes](#flashes) (in `_layouts/default.twig`).
 :::
 
 The same principles apply to anything else you want to make editable in the front-end, so long as the user has the correct permissions. Take a look at the [public registration forms](kb:front-end-user-accounts) for some examples of validation on forms available to guests—and to learn about some nice abstractions that will help reduce repetition in your form markup!
@@ -463,7 +503,7 @@ Inspecting the HTML output, you’ll see your template exactly as provided. Why 
 
 For JSON responses, redirection does’t make as much sense—so Craft will include the resolved `redirect` value for your client to navigate programmatically (say, via `window.location = resp.redirect`).
 
-In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response)—either a specific message from Craft, or one provided in the request via the [globally-supported `successMessage` param](../reference/controller-actions.md#global-params). Additional action-specific properties are also returned at the top level of the response object.
+In addition to the `redirect` property, the response object will include a `message` key with the same text that would have been flashed (for a `text/html` response)—either a specific message from Craft, or one provided in the request via the [globally-supported `successMessage` param](../reference/controller-actions.md#globally-supported-params). Additional action-specific properties are also returned at the top level of the response object.
 
 ### Failure
 
