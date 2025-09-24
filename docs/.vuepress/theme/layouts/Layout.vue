@@ -170,6 +170,7 @@ import {
   getPageWithRelativePath,
   fixDoubleSlashes,
   getSameContentForVersion,
+  makeOverflowingContainersFocusable,
 } from "../util";
 
 import { getStorage, setStorage, unsetStorage } from "../Storage";
@@ -187,7 +188,10 @@ export default {
 
   watch: {
     '$route.path'() {
-      this.$refs.backToTop.focus()
+      this.$refs.backToTop.focus();
+      this.$nextTick(function () {
+        makeOverflowingContainersFocusable();
+      });
     }
   },
 
@@ -282,17 +286,11 @@ export default {
 
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
-      this.$nextTick(() => {
-        this.makeScrollingCodeBlocksFocusable();
-      });
-      
     });
 
-    this.$nextTick(() => {
-      this.makeScrollingCodeBlocksFocusable();
+    this.$nextTick(function () {
+      makeOverflowingContainersFocusable();
     });
-
-    this.makeScrollingCodeBlocksFocusable();
 
     // temporary means of scrolling to URL hash on load
     // https://github.com/vuejs/vuepress/issues/2428
@@ -374,14 +372,6 @@ export default {
   },
 
   methods: {
-    makeScrollingCodeBlocksFocusable() {
-      document.querySelectorAll('pre').forEach(el => {
-        if (el.scrollWidth > el.clientWidth) {
-          el.setAttribute('tabindex', '0');
-        }
-      });
-    },
-
     toggleSidebar(to) {
       this.temporarilyAnimateBody();
       this.isSidebarOpen = typeof to === "boolean" ? to : !this.isSidebarOpen;
