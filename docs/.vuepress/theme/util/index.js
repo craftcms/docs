@@ -624,6 +624,21 @@ function getAnchorHash(path) {
 }
 
 /**
+ * Adds tabindex="0" to all containers (e.g., <pre>, <div>, etc.) that have overflowing content,
+ * making them focusable for keyboard navigation accessibility.
+ *
+ * This utility is typically used to improve accessibility for code blocks or other scrollable regions,
+ * allowing users to focus and scroll them using the keyboard.
+ */
+export function makeOverflowingContainersFocusable() {
+  document.querySelectorAll('pre,.toggle-tip .wrapper,.viewport.limit-height').forEach(el => {
+    if (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight) {
+      el.setAttribute('tabindex', '0');
+    }
+  });
+}
+
+/**
  * Returns doc set base paths combinations with their configs,
  * accounting for set base, version, and/or language.
  *

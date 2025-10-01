@@ -170,6 +170,7 @@ import {
   getPageWithRelativePath,
   fixDoubleSlashes,
   getSameContentForVersion,
+  makeOverflowingContainersFocusable,
 } from "../util";
 
 import { getStorage, setStorage, unsetStorage } from "../Storage";
@@ -187,7 +188,10 @@ export default {
 
   watch: {
     '$route.path'() {
-      this.$refs.backToTop.focus()
+      this.$refs.backToTop.focus();
+      this.$nextTick(function () {
+        makeOverflowingContainersFocusable();
+      });
     }
   },
 
@@ -282,6 +286,10 @@ export default {
 
     this.$router.afterEach(() => {
       this.isSidebarOpen = false;
+    });
+
+    this.$nextTick(function () {
+      makeOverflowingContainersFocusable();
     });
 
     // temporary means of scrolling to URL hash on load
