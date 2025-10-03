@@ -1,6 +1,6 @@
 # Adjusters
 
-Adjuster classes return models that modify pricing when an order is [recalculated](../orders-carts.md#recalculating-orders).
+Adjuster classes return models that modify pricing when an order is [recalculated](../system/orders-carts.md#recalculating-orders).
 
 ::: warning
 Prior to version 4.5, custom adjusters were only honored in Commerce Pro.
