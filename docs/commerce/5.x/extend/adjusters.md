@@ -20,10 +20,9 @@ The rest of this page covers discount and shipping adjusters even though there i
 
 ## Registering a New Adjuster
 
-You can register your adjuster class by including it in the `types` array attribute of the [`registerOrderAdjusters`](events.md#registerorderadjusters) or [`registerDiscountAdjusters`](events.md#registerdiscountadjusters) event model.
+You can register your adjuster class by pushing it onto the `types` attribute of the model emitted by [`EVENT_REGISTER_ORDER_ADJUSTERS`](events.md#registerorderadjusters):
 
-::: code
-```php Order Adjuster
+```php
 use craft\commerce\services\OrderAdjustments;
 use yii\base\Event;
 use MyAdjuster;
@@ -36,22 +35,8 @@ Event::on(
     }
 );
 ```
-```php Discount Adjuster
-use craft\commerce\services\OrderAdjustments;
-use yii\base\Event;
-use MyAdjuster;
 
-Event::on(
-    OrderAdjustments::class,
-    OrderAdjustments::EVENT_REGISTER_DISCOUNT_ADJUSTERS,
-    function(RegisterComponentTypesEvent $event) {
-        $event->types[] = MyAdjuster::class;
-    }
-);
-```
-:::
-
-The order of the adjustments within the `types` array is important because adjusters will be called in exactly that sequence when an order is calculated.
+The order of the adjustments within the `types` array is important: adjusters are called in exactly that sequence when an order is calculated.
 
 ::: tip
 Even if you don’t add or replace an adjuster you might still use either event solely to change the order in which *existing* adjustments are applied.
