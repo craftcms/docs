@@ -1,0 +1,25 @@
+name: Glossary Term Request
+description: Add something to the glossary.
+title: "[Glossary Term]: "
+labels: ["content", "glossary"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to request a new term! Please use the title field above for the term or concept itself; the rest of these fields are optional.
+  - type: checkboxes
+    id: product
+    attributes:
+      label: Product
+      description: Which of our products does this pertain to? It’s OK if none apply—the glossary contains a number of web-development terms that are still relevant to Craft developers!
+      options:
+        - label: Craft CMS
+        - label: Craft Cloud
+        - label: Craft Console
+        - label: Craft Commerce
+        - label: Another first-party plugin
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Clarifying details can be provided here. We may reach out if the term has different meanings to different groups of developers (like “layout”).

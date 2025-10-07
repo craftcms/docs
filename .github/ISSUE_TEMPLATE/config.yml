@@ -4,11 +4,14 @@ contact_links:
     url: https://craftcms.com/
     about: Our official website
   - name: Documentation
-    url: https://docs.craftcms.com/
+    url: https://craftcms.com/docs
     about: Documentation for all our products
   - name: Knowledge Base
     url: https://craftcms.com/knowledge-base
     about: Guides for Craft users and developers
+  - name: Class Reference
+    url: https://docs.craftcms.com/api/v5
+    about: Searchable auto-generated reference from Craft’s source code
   - name: Developer Support Services
     url: https://craftcms.com/support-services
     about: Priority developer support from Craft team
