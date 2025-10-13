@@ -1,7 +1,7 @@
 name: Bug
 description: Having trouble viewing the documentation? Report a bug.
-title: "[Bug]: "
-labels: ["bug"]
+title: ""
+labels: ["Bug"]
 body:
   - type: input
     attributes:

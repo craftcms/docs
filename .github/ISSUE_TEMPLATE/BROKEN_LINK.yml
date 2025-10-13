@@ -1,7 +1,7 @@
 name: Broken Link
 description: Hit a 404? Report it here.
-title: "[Broken Link]: "
-labels: ["content"]
+title: "Broken Link"
+labels: ["Broken Link"]
 body:
   - type: input
     id: url

@@ -1,7 +1,7 @@
 name: Error or Omission
 description: Let us know about inaccurate or missing information.
 title: "[Content]: "
-labels: ["content"]
+labels: []
 body:
   - type: dropdown
     id: product
@@ -10,7 +10,8 @@ body:
       description: Which section of the documentation are you having trouble with?
       options:
         - Craft CMS
-        - Commerce
+        - Craft Commerce
+        - Cloud
         - Other/Multiple/Not Sure
   - type: textarea
     attributes:

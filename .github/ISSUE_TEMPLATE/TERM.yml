@@ -1,7 +1,7 @@
 name: Glossary Term Request
 description: Add something to the glossary.
 title: "[Glossary Term]: "
-labels: ["content", "glossary"]
+labels: ["Glossary"]
 body:
   - type: markdown
     attributes:
