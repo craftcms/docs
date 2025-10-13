@@ -3,7 +3,7 @@
 Craft Cloud was designed to be compatible with a wide variety of projects—but for security and performance, we did have to make some decisions about what versions of Craft (and the software it depends on) we would officially support. This article covers those limitations, as well as some common features and configurations that may require special attention when moving a project to Cloud.
 
 ::: tip
-If you maintain a plugin or module, review our [Cloud for Plugin Developers](development.md) guide, as well!
+If you maintain a plugin or module, review our [Cloud for Plugin Developers](plugin-development.md) guide, as well!
 :::
 
 ## Craft
