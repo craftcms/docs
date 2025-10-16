@@ -265,6 +265,8 @@ When using the `fetch()` API, the body of a request can be set to a `FormData` o
 </script>
 ```
 
+[GraphQL](graphql.md) requests _do not_ use CSRF, for queries or mutations.
+
 #### CORS
 
 Requests sent from a domain other than the one Craft is running on (including different subdomains, unless you’ve set <config5:defaultCookieDomain>) may need to use the [`credentials`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#including_credentials) request option, and configure appropriate `Access-Control-Allow-Credentials` and `Access-Control-Allow-Origin` [headers](../reference/config/app.md#cors) in Craft.
