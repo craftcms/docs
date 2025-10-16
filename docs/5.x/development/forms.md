@@ -158,6 +158,7 @@ Header | Notes
 `X-CSRF-Token` | Send a valid CSRF token (for POST requests) if none is provided in the request body under the key determined by <config5:csrfTokenName>.
 `Content-Type` | Set to `application/json` if the request’s body is a serialized [JSON payload](#sending-json) (as opposed to `FormData`).
 `X-Craft-Site` | Set to a valid [site](../system/sites.md) handle or ID to treat the request as though it were part of a specific site.
+`X-Craft-Site-Token` | Set to a hashed site ID (_not_ a handle) to force a request to use a particular site. This can also be supplied as a query or body parameter under a key determined by <config5:siteToken>.
 
 A CSRF token is still required for Ajax requests using the `POST` method. You can ensure a session is started (for guests) by preflighting a request to the [`users/session-info` action](#get-userssession-info):
 
