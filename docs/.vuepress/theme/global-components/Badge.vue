@@ -37,11 +37,11 @@ export default {
   font-size: 14px;
   height: 18px;
   line-height: 18px;
-  background-color: #42b983;
+  background-color: var(--badge-bg-color-tip);
 
   &.tip,
   &.green {
-    background-color: #42b983;
+    background-color: var(--badge-bg-color-tip);
   }
 
   &.error,
