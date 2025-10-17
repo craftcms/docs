@@ -77,7 +77,7 @@ Asset field layouts can include the native **Alternative Text** <Poi label="1" t
   :poi="{
     altText: [90, 32.5],
   }">
-<img src="./images/assets-field-layout.png" />
+<img src="./images/assets-field-layout.png" alt="The field layout designer for an asset element. The content pane includes a Title field. The sidebar includes a native field called Alternative Text." />
 </BrowserShot>
 
 Craft 4 introduced the `alt` attribute to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](./fields.md) values, attributes, or combination thereof. 

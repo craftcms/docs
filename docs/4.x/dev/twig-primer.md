@@ -678,7 +678,7 @@ With [devMode](config4:devMode) on, Craft will output a stack trace for any erro
   url="https://my-project.ddev.site/example"
   :link="false"
   caption="Example Twig error reporting view.">
-<img src="../images/twig-errors.png" />
+<img src="../images/twig-errors.png" alt="An error reporting page showing there was a Twig Runtime Error because the variable 'var' does not exist." />
 </BrowserShot>
 
 ::: tip
