@@ -117,7 +117,7 @@ rewrites:
     destination: '{assetBaseUrl}/{matches.pathname.groups.assetPath}{request.url.search}'
 ```
 
-With this strategy, your files are still stored on (and available from) our CDN—all we’ve done is create an alias for the canonical CDN URL. _Craft continues to generate canonical URLs for assets to ensure that they resolve, independent of rewrite configuration._
+With this strategy, your files are still stored on (and available from) our CDN—all we’ve done is create an alias for the canonical CDN URL. Craft continues to generate canonical URLs for assets to ensure that they resolve, independent of rewrite configuration, unless you [explicitly set a custom URL](assets.md#custom-urls).
 
 [Build artifacts](/knowledge-base/cloud-builds) (including static files from your web root) can also be proxied:
 

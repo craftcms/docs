@@ -146,13 +146,17 @@ The Cloud extension will construct predictable production URLs for _existing_ as
 You can configure a custom [rewrite](redirects.md#rewrites) to serve assets from additional URLs or paths.
 However, Craft will continue to generate canonical CDN URLs, unless you explicitly set a **Base URL** in the filesystem’s settings.
 
+::: danger
+Misconfiguration of the **Base URL** setting can result in Craft generating incorrect or invalid asset URLs.
+:::
+
 In most cases, this should point to an [environment variable](environments.md#variables) containing a fully-qualified URL—likely one of your configured [domains](domains.md).
 
 ::: warning
 Using a value beginning with `@web` is strongly discouraged, as its value can differ based on how the site is accessed.
 :::
 
-To serve assets from a vanity domain like `assets.mydomain.com`, follow these steps:
+To serve assets from a vanity domain like `cdn.mydomain.com`, follow these steps:
 
 1. Create a [subdomain](domains.md#subdomains);
 1. Add a rewrite to your `cloud.yaml` file:
@@ -167,5 +171,6 @@ To serve assets from a vanity domain like `assets.mydomain.com`, follow these st
     ```
 1. Define a variable containing that domain in each of your environments, like `ASSET_DOMAIN_HOST`;
 1. Set **Base URL** in your Cloud filesystem to `$ASSET_DOMAIN_HOST/assets/`;
+1. Commit the resulting project config changes and [deploy](deployment.md) your environment;
 
-If you are not using a **Subpath**, you can omit that from the **Base URL** setting.
+If you are not using a **Subpath**, omit that segment from the `pathname` and  **Base URL** settings.
