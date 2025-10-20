@@ -15,7 +15,7 @@ When you are ready to stage or launch the project, you can [upload your local as
 Existing projects may require some additional work to ensure their filesystems are migrated properly. This process will differ based on the filesystem’s *current* type—and if multiple filesystem types are represented in your configuration, you may need to follow different steps for each one.
 
 ::: warning
-Filesystems’ base paths cannot overlap! Even if you only need a single filesystem on Cloud, we recommend using the Cloud filesystem’s **Subpath** option to make room at the root of your volume for other filesystems, later.
+Filesystems’ base paths cannot overlap! Even if you only need a single filesystem on Cloud, we still recommend using the Cloud filesystem’s **Subpath** option to make room at the root of your volume for other filesystems, later.
 :::
 
 Changes to your filesystems + volumes will be applied via [Project Config](/5.x/system/project-config.html), the next time you deploy your environment.
@@ -24,7 +24,7 @@ Changes to your filesystems + volumes will be applied via [Project Config](/5.x/
 
 Local filesystems are the most straightforward to migrate. Take note of the current filesystem’s **Base Path** setting, as we’ll copy this into the new Cloud filesystem, to take advantage of the files already on your development environment’s disk.
 
-From your Local filesystem’s settings screen, change the **Filesystem Type** to **Cloud**. Copy the old **Base Path** and **Base URL** settings into the corresponding **Base Path** and **Base URL** fields, within the **Local Filesystem** section.
+From your Local filesystem’s settings screen, change the **Filesystem Type** to **Cloud**. Copy the old **Base Path** and **Base URL** settings into the corresponding fields within the **Local Filesystem** section.
 
 The **Subpath** setting is appended to the **Base Path** and **URL** values, automatically.
 
@@ -140,3 +140,32 @@ CRAFT_CLOUD_USE_ASSET_CDN=1
 ```
 
 The Cloud extension will construct predictable production URLs for _existing_ assets. Note that uploading new assets to a remote Cloud bucket (or creating transforms from existing images) is not yet supported from local environments. The remote bucket is read-only in this scenario.
+
+## Custom URLs
+
+You can configure a custom [rewrite](redirects.md#rewrites) to serve assets from additional URLs or paths.
+However, Craft will continue to generate canonical CDN URLs, unless you explicitly set a **Base URL** in the filesystem’s settings.
+
+In most cases, this should point to an [environment variable](environments.md#variables) containing a fully-qualified URL—likely one of your configured [domains](domains.md).
+
+::: warning
+Using a value beginning with `@web` is strongly discouraged, as its value can differ based on how the site is accessed.
+:::
+
+To serve assets from a vanity domain like `assets.mydomain.com`, follow these steps:
+
+1. Create a [subdomain](domains.md#subdomains);
+1. Add a rewrite to your `cloud.yaml` file:
+    ```
+    # ...
+
+    rewrites:
+    - pattern:
+        hostname: 'cdn.mydomain.com'
+        pathname: '/assets/:assetPath+'
+        destination: '{assetBaseUrl}/{matches.pathname.groups.assetPath}{request.url.search}'
+    ```
+1. Define a variable containing that domain in each of your environments, like `ASSET_DOMAIN_HOST`;
+1. Set **Base URL** in your Cloud filesystem to `$ASSET_DOMAIN_HOST/assets/`;
+
+If you are not using a **Subpath**, you can omit that from the **Base URL** setting.

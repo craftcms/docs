@@ -91,7 +91,7 @@ If your provider does not support CNAME flattening, but you would like to take a
 
 Each domain can have any number of subdomains. Subdomains can point to the same environment as the primary domain (great for multi-site projects) or a different environment (perfect for a staging environment).
 
-You may also directly add and verify a non-apex domain if your project will never need to serve traffic from the apex—but we only recommend this in limited circumstances.
+You may also directly add and verify a non-apex domain if your project will never need to serve traffic from the apex—but we only recommend this in limited circumstances, like when using [rewrites and redirects](redirects.md).
 
 ## SSL
 
