@@ -102,6 +102,33 @@ a {
   left: .5em;
 }
 
+.search-box {
+  --input-padding-x: 1.25rem;
+  --input-padding-y: 0.5rem;
+  --icon-size: 1rem;
+  --icon-padding-x: 0.7rem;
+  --placeholder-color: #5C7194;
+
+  input {
+    border: 1px solid var(--ui-component-color);
+    padding: var(--input-padding-y) var(--input-padding-x) var(--input-padding-y) calc((var(--icon-padding-x) * 1.5) + var(--icon-size));
+  
+    &::placeholder {
+      color: var(--placeholder-color);
+    }
+  }
+
+  & > svg {
+    @apply block absolute;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    top: 50%;
+    left: var(--icon-padding-x);
+    transform: translateY(-50%);
+    color: var(--placeholder-color);
+  }
+}
+
 img {
   @apply max-w-full;
 }

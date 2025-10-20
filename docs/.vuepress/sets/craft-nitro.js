@@ -11,7 +11,7 @@ module.exports = {
   defaultVersion: "2.x",
   abandoned: true,
   deprecationMessage: "Nitro is no longer supported. Please see our <a href=\"https://craftcms.com/blog/retiring-craft-nitro\">announcement</a> and <a href=\"https://craftcms.com/knowledge-base/migrating-from-craft-nitro-to-ddev\">DDEV migration guide</a>.",
-  searchPlaceholder: "Search the Nitro docs (Press “/” to focus)",
+  searchPlaceholder: "Search the Nitro docs (Press Ctrl/⌘ + ”/” to focus)",
   primarySet: false,
   sidebar: {
     "2.x": {

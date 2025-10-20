@@ -48,7 +48,7 @@ module.exports = {
     docsDir: "docs",
     docsBranch: "main",
     baseUrl: "https://craftcms.com/docs",
-    searchPlaceholder: "Search all documentation (Press “/” to focus)",
+    searchPlaceholder: "Search all documentation (Press Ctrl/⌘ + ”/” to focus)",
     editLinks: true,
     nextLinks: true,
     prevLinks: true,
