@@ -1,12 +1,12 @@
 # Redirects and Rewrites
 
-Craft Cloud allows you to define any number of custom [redirect](#redirects) and [rewrite](#rewrites) rules via your [`craft-cloud.yml` config file](config.md).
+Craft Cloud allows you to define any number of custom [redirect](#redirects) and [rewrite](#rewrites) rules via your [`craft-cloud.yaml` config file](config.md).
 
 Both features use the flexible [`URLPattern` API](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/exec) to match request URLs. These rules are evaluated on our gateway, _before_ we pass the request to your Craft application.
 
 ## Redirects
 
-Redirection rules live in your `craft-cloud.yml` file, under a `redirects` key:
+Redirection rules live in your `craft-cloud.yaml` file, under a `redirects` key:
 
 ```yml
 php-version: '8.2'
@@ -90,7 +90,7 @@ When the parsed `destination` begins with a slash (a _root-relative_ path), Craf
 
 Unlike a [redirect](#redirects), URL rewrites are used to create virtual resources at our gateway—effectively giving you a configurable proxy. This means that when a matching URL is requested, the corresponding origin’s response is sent back, verbatim, without an initial 300-level response.
 
-Rules follow essentially the same structure as redirects: the pattern-matching process and destination templates are identical. Rules are created under a `rewrites` key in your `craft-cloud.yml` config file.
+Rules follow essentially the same structure as redirects: the pattern-matching process and destination templates are identical. Rules are created under a `rewrites` key in your `craft-cloud.yaml` config file.
 
 ::: tip
 Using rewrites, you can avoid referencing `cdn.craft.cloud` or updating templates to use [`cloud.artifactUrl`](builds.md#artifact-urls)–any CDN requests can be served directly from your custom domain.
