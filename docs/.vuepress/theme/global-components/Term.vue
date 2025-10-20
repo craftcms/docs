@@ -11,12 +11,22 @@
 
         <InfoHud>
             <template v-if="loaded">
-                <h3 class="glossary-term-title" v-text="this.term.title"></h3>
+                <h3 class="glossary-term-heading" v-text="this.term.title"></h3>
                 <div class="glossary-term-content theme-default-content" v-html="this.term.summaryHtml"></div>
+
                 <a :href="this.term.url" target="_blank" class="glossary-term-more">
                     <span class="glossary-term-more-label">View in the glossary</span>
                     <span class="glossary-term-more-arrow">&rarr;</span>
                 </a>
+
+                <div v-if="this.term.docsLinks.length" class="glossary-term-docs-links">
+                    <h4 class="glossary-term-heading">In the documentation…</h4>
+                    <ul class="glossary-term-docs-links-list">
+                        <li v-for="(link, i) in this.term.docsLinks" v-bind:key="i" class="glossary-term-docs-link">
+                            <a :href="link.url">{{ link.title }}</a>
+                        </li>
+                    </ul>
+                </div>
             </template>
             <template v-else>
                 …
@@ -37,7 +47,7 @@
     text-decoration: none !important;
 }
 
-.glossary-term-title {
+.glossary-term-heading {
     font-weight: 500;
 }
 
@@ -60,6 +70,20 @@
         color: var(--text-color-muted);
     }
 }
+
+.glossary-term-docs-links {
+    @apply mt-3;
+}
+
+.glossary-term-docs-link {
+    &::before {
+        @apply text-gray-500;
+        content: '–';
+        margin: 0 0.5em;
+    }
+}
+
+/* Special HUD styles */
 
 .info-hud {
     @apply ml-1;
