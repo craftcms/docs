@@ -1,10 +1,10 @@
 # Get to Know Your Terminal
 
-Every operating system comes with a text-based _command line interface_ (CLI) for issuing commands. This provides a powerful way to accomplish things that the _graphical_ user interface (GUI) may not expose.
+Every operating system comes with a text-based _command line interface_ or <Term slug="cli" label="CLI" /> for issuing commands. This provides a powerful way to accomplish things that the _graphical_ user interface (GUI) may not expose.
 
 Already know your way around a terminal? Skip ahead to [setup](stack.md)!
 
-### Find your OS terminal
+## Find your OS terminal
 
 ![Examples of terminal applications for macOS, Windows, and Linux](../images/os-terminal.png)
 
@@ -18,7 +18,7 @@ There are other apps like [Hyper](https://hyper.is/) (cross-platform) and [iTerm
 For a more in-depth introduction to your computer’s command line, the [Ubuntu guide](https://ubuntu.com/tutorials/command-line-for-beginners) (also linked above) is a great resource.
 :::
 
-### Run a command
+## Run a command
 
 Once you’ve launched your terminal, you’ll be greeted by an empty _prompt_.
 
@@ -43,7 +43,7 @@ You should see your username printed to the terminal!
 The line beginning with a `#` is just an example of the expected output. Unless your name is Oli, you’ll probably see something else!
 :::
 
-### Navigate directories
+## Navigate directories
 
 We’ll eventually want to run commands alongside your site’s code, so you’ll need to know how to move around your computer’s filesystem.
 
