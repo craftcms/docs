@@ -18,7 +18,7 @@ All fields share a few settings:
 - **Field Type** – What [type](#field-types) of field it is;
 
 <BrowserShot url="https://my-project.tld/admin/settings/fields/new" :link="false" :max-height="500">
-<img src="./images/fields-field-settings.png">
+<img src="./images/fields-field-settings.png" alt="The 'Create a new field' page. In addition to the settings listed above, the field also includes settings for UI Mode, Placeholder text, maximum characters/bytes, and more." >
 </BrowserShot>
 
 ::: tip
