@@ -8,10 +8,17 @@
 </template>
 
 <style lang="postcss">
+.pre-heading {
+  @apply mb-2;
+}
+
+/* This is here for specificity! */
 .theme-default-content {
   .pre-heading-title {
-    @apply my-0 py-0 px-2 relative inline-block leading-normal uppercase rounded text-xs border tracking-wider;
+    @apply my-0 px-2 relative inline-block leading-normal uppercase rounded text-xs border tracking-wider;
     border-color: currentColor;
+    padding-bottom: 0;
+    padding-top: 0.2em;
   }
 }
 </style>
