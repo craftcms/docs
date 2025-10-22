@@ -123,11 +123,9 @@ export default {
     },
 
     placeholder() {
-      return (
-        this.$activeSet.searchPlaceholder ||
-        this.$site.themeConfig.searchPlaceholder ||
-        ""
-      );
+      let label = this.$activeSet.searchPlaceholder || this.$site.themeConfig.searchPlaceholder || "";
+
+      return `${label} (Press Ctrl/⌘ + “/” to focus)`;
     }
   },
   watch: {

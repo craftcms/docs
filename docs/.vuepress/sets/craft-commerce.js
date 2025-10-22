@@ -13,7 +13,7 @@ module.exports = {
   ],
   defaultVersion: "5.x",
   abandoned: false,
-  searchPlaceholder: "Search the Commerce docs (Press Ctrl/⌘ + ”/” to focus)",
+  searchPlaceholder: "Search the Commerce docs",
   primarySet: true,
   sidebar: {
     "5.x": {

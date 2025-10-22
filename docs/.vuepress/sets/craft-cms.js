@@ -12,7 +12,7 @@ module.exports = {
   ],
   defaultVersion: "5.x",
   abandoned: false,
-  searchPlaceholder: "Search the Craft docs (Press Ctrl/⌘ + ”/” to focus)",
+  searchPlaceholder: "Search the Craft docs",
   primarySet: true,
   sidebar: {
     "5.x": {

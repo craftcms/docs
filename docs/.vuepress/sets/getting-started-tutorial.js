@@ -4,7 +4,7 @@ module.exports = {
   icon: "/docs/icons/tutorial.svg",
   baseDir: "getting-started-tutorial",
   abandoned: false,
-  searchPlaceholder: "Search the tutorial (Press Ctrl/⌘ + ”/” to focus)",
+  searchPlaceholder: "Search the tutorial",
   primarySet: false,
   sidebar: {
     "/": [
