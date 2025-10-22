@@ -1,6 +1,5 @@
 import Flexsearch from "flexsearch";
 import _ from "lodash";
-import FlexSearch from "flexsearch";
 
 const defaultLang = "en-US";
 
