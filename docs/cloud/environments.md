@@ -70,14 +70,13 @@ Craft Console uses the production environment’s preview domain (or a custom do
 
 ### robots.txt
 
-For any environment that is not marked as production, Craft Cloud will serve requests to `robots.txt` with this body:
+For any environment that is not marked as production, Cloud injects a `robots.txt` with this body, to prevent indexing:
 
 ```
 User-agent: *
 Disallow: /
 ```
-
-So they don’t get indexed by search engines. Production environments will allow the application to dictate the contents of `robots.txt`.
+Production environments allow the application to dictate the contents of `robots.txt`. This is typically handled by creating `templates/robots.txt.twig` and populating it with static text, or using a plugin like [SEOMatic](plugin:seomatic) that expose an editing interface in the control panel.
 
 ## Deleting an Environment
 

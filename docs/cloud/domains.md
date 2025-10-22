@@ -18,6 +18,8 @@ To find your preview domain, click the globe icon next to any environment in the
 Changing the handle of a project or environment may take a moment to update in our routing layer. If you have other services that rely on a consistent hostname (say, for the delivery of webhooks), consider temporarily pointing a [subdomain](#subdomains) at the environment.
 :::
 
+We automatically inject a `robots.txt` for preview domains (and non-production [environments](environments.md)) that disallows all crawling. If you want to prevent regular users from accessing your site’s front-end, consider using [basic HTTP authentication](/5.x/reference/config/app.md#basic-authentication).
+
 ## Adding a Domain
 
 In your Cloud project, navigate to **Domains**, then click **New domain**.
