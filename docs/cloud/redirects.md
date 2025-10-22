@@ -1,12 +1,12 @@
 # Redirects and Rewrites
 
-Craft Cloud allows you to define any number of custom [redirect](#redirects) and [rewrite](#rewrites) rules via your [`craft-cloud.yml` config file](config.md).
+Craft Cloud allows you to define any number of custom [redirect](#redirects) and [rewrite](#rewrites) rules via your [`craft-cloud.yaml` config file](config.md).
 
 Both features use the flexible [`URLPattern` API](https://developer.mozilla.org/en-US/docs/Web/API/URLPattern/exec) to match request URLs. These rules are evaluated on our gateway, _before_ we pass the request to your Craft application.
 
 ## Redirects
 
-Redirection rules live in your `craft-cloud.yml` file, under a `redirects` key:
+Redirection rules live in your `craft-cloud.yaml` file, under a `redirects` key:
 
 ```yml
 php-version: '8.2'
@@ -90,7 +90,7 @@ When the parsed `destination` begins with a slash (a _root-relative_ path), Craf
 
 Unlike a [redirect](#redirects), URL rewrites are used to create virtual resources at our gateway—effectively giving you a configurable proxy. This means that when a matching URL is requested, the corresponding origin’s response is sent back, verbatim, without an initial 300-level response.
 
-Rules follow essentially the same structure as redirects: the pattern-matching process and destination templates are identical. Rules are created under a `rewrites` key in your `craft-cloud.yml` config file.
+Rules follow essentially the same structure as redirects: the pattern-matching process and destination templates are identical. Rules are created under a `rewrites` key in your `craft-cloud.yaml` config file.
 
 ::: tip
 Using rewrites, you can avoid referencing `cdn.craft.cloud` or updating templates to use [`cloud.artifactUrl`](builds.md#artifact-urls)–any CDN requests can be served directly from your custom domain.
@@ -117,7 +117,7 @@ rewrites:
     destination: '{assetBaseUrl}/{matches.pathname.groups.assetPath}{request.url.search}'
 ```
 
-With this strategy, your files are still stored on (and available from) our CDN—all we’ve done is create an alias for the canonical CDN URL. _Craft continues to generate canonical URLs for assets to ensure that they resolve, independent of rewrite configuration._
+With this strategy, your files are still stored on (and available from) our CDN—all we’ve done is create an alias for the canonical CDN URL. Craft continues to generate canonical URLs for assets to ensure that they resolve, independent of rewrite configuration, unless you [explicitly set a custom URL](assets.md#custom-urls).
 
 [Build artifacts](/knowledge-base/cloud-builds) (including static files from your web root) can also be proxied:
 

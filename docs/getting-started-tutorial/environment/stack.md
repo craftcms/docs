@@ -10,7 +10,7 @@ Craft is a dynamic web application (as opposed to static files), so it must have
 - **PHP Interpreter** – A program that compiles and executes PHP source code.
 - **Database** – A storage medium not unlike a collection of spreadsheets that can be queried from code.
 
-We recommend [DDEV](https://ddev.readthedocs.io/en/stable/) for new and returning Craft developers, because it offers the most consistent experience among the tools we’ve tried, and works across all major operating systems. DDEV uses [containers](https://www.docker.com/resources/what-container/) to run each of the components above, meaning you don’t need to worry about configuring each of them independently—or whether your computer has (or is compatible with) a particular version.
+We recommend <Term slug="ddev" label="DDEV" /> for new and returning Craft developers, because it offers the most consistent experience among the tools we’ve tried, and works across all major operating systems. DDEV uses [containers](https://www.docker.com/resources/what-container/) to run each of the components above, meaning you don’t need to worry about configuring each of them independently—or whether your computer has (or is compatible with) a particular version.
 
 ## DDEV
 

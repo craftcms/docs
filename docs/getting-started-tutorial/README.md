@@ -19,7 +19,7 @@ If you get stuck, [join us on Discord](https://craftcms.com/discord)! We all wan
 
 ## Why Craft CMS?
 
-Craft is a flexible, user-friendly <abbr title="Content management system">CMS</abbr> for creating custom digital experiences on the web—and beyond.
+Craft is a flexible, user-friendly <Term slug="cms" label="CMS" /> for creating custom digital experiences on the web—and beyond.
 
 You have a _ton_ of options when it comes to choosing a CMS. Craft is uniquely equipped to deliver high-quality, content-driven experiences to your clients and their audiences, in large part due to its blank-slate approach to content modeling and front-end development.
 
@@ -27,6 +27,6 @@ To demonstrate Craft’s agility, we’ll build a basic blog—and in doing so, 
 
 ## Editions + Licensing
 
-Craft’s <Badge type="edition" vertical="text-bottom">Solo</Badge> edition is free to use for personal projects. Everything we’ll cover in this tutorial is available in Solo, and you won’t be asked to sign up for accounts or add payment info. If you want to explore features of Craft’s <Badge type="edition" vertical="text-bottom">Team</Badge> or <Badge type="edition" vertical="text-bottom">Pro</Badge> editions, you are welcome to upgrade and test locally for as long as you like!
+Craft’s <Badge type="edition" vertical="text-bottom">Solo</Badge> <Term slug="edition" label="edition" /> is free to use for personal projects. Everything we’ll cover in this tutorial is available in Solo, and you won’t be asked to sign up for accounts or add payment info. If you want to explore features of Craft’s <Badge type="edition" vertical="text-bottom">Team</Badge> or <Badge type="edition" vertical="text-bottom">Pro</Badge> editions, you are welcome to upgrade and test locally for as long as you like!
 
 _Please note that installing any version of Craft binds you to our [Terms of Service](https://craftcms.com/terms-of-service) and [Acceptable Use Policy](https://craftcms.com/acceptable-use-policy)._

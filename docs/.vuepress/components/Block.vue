@@ -19,7 +19,7 @@ export default {
 
 <style lang="postcss" scoped>
 .banner {
-    @apply mb-5 mt-5;
+    @apply mb-5;
 }
 
 .label {

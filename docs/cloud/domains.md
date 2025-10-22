@@ -18,6 +18,8 @@ To find your preview domain, click the globe icon next to any environment in the
 Changing the handle of a project or environment may take a moment to update in our routing layer. If you have other services that rely on a consistent hostname (say, for the delivery of webhooks), consider temporarily pointing a [subdomain](#subdomains) at the environment.
 :::
 
+We automatically inject a `robots.txt` for preview domains (and non-production [environments](environments.md)) that disallows all crawling. If you want to prevent regular users from accessing your site’s front-end, consider using [basic HTTP authentication](/5.x/reference/config/app.md#basic-authentication).
+
 ## Adding a Domain
 
 In your Cloud project, navigate to **Domains**, then click **New domain**.
@@ -91,7 +93,7 @@ If your provider does not support CNAME flattening, but you would like to take a
 
 Each domain can have any number of subdomains. Subdomains can point to the same environment as the primary domain (great for multi-site projects) or a different environment (perfect for a staging environment).
 
-You may also directly add and verify a non-apex domain if your project will never need to serve traffic from the apex—but we only recommend this in limited circumstances.
+You may also directly add and verify a non-apex domain if your project will never need to serve traffic from the apex—but we only recommend this in limited circumstances, like when using [rewrites and redirects](redirects.md).
 
 ## SSL
 
