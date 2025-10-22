@@ -128,7 +128,7 @@ class Module extends \yii\base\Module
 If Craft has already fully initialized, your callback will be invoked immediately.
 :::
 
-In particular, avoid creating [element queries](../element-queries.md) or causing the [Twig environment](../dev/twig-primer.md) to be loaded from your `init()` method. Both can result in race conditions and incomplete initialization.
+In particular, avoid creating [element queries](../development/element-queries.md) or causing the [Twig environment](../development/twig.md) to be loaded from your `init()` method. Both can result in race conditions and incomplete initialization.
 
 ### Update the application config
 
