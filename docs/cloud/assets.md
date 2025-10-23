@@ -166,11 +166,27 @@ To serve assets from a vanity domain like `cdn.mydomain.com`, follow these steps
     rewrites:
     - pattern:
         hostname: 'cdn.mydomain.com'
-        pathname: '/assets/:assetPath+'
-        destination: '{assetBaseUrl}/{matches.pathname.groups.assetPath}{request.url.search}'
+      destination: '{assetBaseUrl}/{request.uri}'
     ```
-1. Define a variable containing that domain in each of your environments, like `ASSET_DOMAIN_HOST`;
-1. Set **Base URL** in your Cloud filesystem to `$ASSET_DOMAIN_HOST/assets/`;
+1. Define a variable containing that domain (beginning with `https://`) in each of your environments, like `ASSET_BASE_URL`;
+1. Set **Base URL** in your Cloud filesystem to `$ASSET_BASE_URL`;
 1. Commit the resulting project config changes and [deploy](deployment.md) your environment;
 
-If you are not using a **Subpath**, omit that segment from the `pathname` and  **Base URL** settings.
+The filesystem’s **Subpath** setting is _always_ appended to its **Base URL**, regardless of whether Craft is generating default Cloud CDN URLs or custom, rewritten URLs.
+An asset’s URL will also include the **Subpath** of the [asset volume](/5.x/reference/element-types/assets.md#volumes) it belongs to.
+Note that the `{assetBaseUrl}` destination token already points to the `assets/` directory in the environment’s storage bucket.
+
+Reusing this URL throughout your app (or across multiple filesystems) is often simplified by creating an intermediate [alias](/5.x/configure.html#aliases):
+
+```php
+# config/general.php
+
+GeneralConfig::create()
+    // ...
+    ->aliases([
+        '@assetBaseUrl' => App::env('ASSET_BASE_URL') . '/assets',
+    ])
+;
+```
+
+In this case, you would use `@assetBaseUrl` in the **Base URL** setting, instead of directly referencing the environment variable and subpath.
