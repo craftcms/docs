@@ -113,8 +113,7 @@ Similarly, you can serve user uploads from a secondary domain or subdomain:
 rewrites:
   - pattern:
       hostname: 'cdn.mydomain.com'
-      pathname: '/assets/:assetPath+'
-    destination: '{assetBaseUrl}/{matches.pathname.groups.assetPath}{request.url.search}'
+    destination: '{assetBaseUrl}/{request.uri}'
 ```
 
 With this strategy, your files are still stored on (and available from) our CDN—all we’ve done is create an alias for the canonical CDN URL. Craft continues to generate canonical URLs for assets to ensure that they resolve, independent of rewrite configuration, unless you [explicitly set a custom URL](assets.md#custom-urls).
