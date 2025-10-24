@@ -1,6 +1,5 @@
-import Flexsearch from "flexsearch";
-import _ from "lodash";
 import FlexSearch from "flexsearch";
+import _ from "lodash";
 
 const defaultLang = "en-US";
 
@@ -33,7 +32,7 @@ export default {
       }
     };
 
-    const globalIndex = new Flexsearch(indexSettings);
+    const globalIndex = new FlexSearch(indexSettings);
     globalIndex.add(
       pages.filter(page => {
         // default language, primary set, and primary version (designated or versionless set)
