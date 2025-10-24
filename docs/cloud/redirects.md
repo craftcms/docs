@@ -126,3 +126,18 @@ rewrites:
       pathname: '/(favicon.ico|.well-known|dist)/*?'
     destination: '{artifactBaseUrl}/{request.uri}'
 ```
+
+### Custom Headers <Since ver="2.16.0" repo="craftcms/cloud-extension-yii2" product="Cloud extension" description="The ability to set custom headers in rewrite rules was added in {product} {ver}." :use-changelog="false" />
+
+You can set arbitrary HTTP headers on any rewritten response by including a key-value map under a `headers` key:
+
+```yml
+rewrites:
+  - pattern:
+      pathname: '/dist/js/*'
+    destination: '{artifactBaseUrl}/{request.uri}'
+    headers:
+      Access-Control-Allow-Origin: 'https://mydomain.com'
+```
+
+Headers are combined with those from the `destination`, overwriting any shared names.
