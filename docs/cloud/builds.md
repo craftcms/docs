@@ -6,15 +6,16 @@ Everything about the build process is dictated by your repository, and [the `cra
 
 ## PHP
 
-Your project’s `composer.json` and `composer.lock` files determine what PHP packages are installed. By default, Cloud expects both files to be at the root of your repository—but your Composer root can be [customized](config.md#config-schema). If either file is missing, the build will fail.
+Your project’s `composer.json` and `composer.lock` files determine what PHP packages are installed. By default, Cloud expects both files to be at the root of your repository—but your Composer root can be [customized](config.md#config-schema).
+If either file is missing, the build will fail.
 
 Cloud installs packages by running `composer install`.
 
 ## Node.js
 
-Similarly, Cloud looks for `package.json` and `package-lock.json` files at the root of your repository (or at a path set in your [config file](config.md#config-schema)). Unlike the PHP build step, if `package-lock.json` is *missing*, this step is skipped and the deployment will continue.
-
-To enable the Node.js build step, you must set a `node-version` in your [Cloud config file](config.md#config-schema).
+To enable the Node.js build step, set a `node-version` in your [Cloud config file](config.md#config-schema).
+Cloud looks for `package.json` and `package-lock.json` files at the root of your repository (or within the configured `node-path`).
+Like the PHP build step, if either file is missing, we fail the build.
 
 ### Build Command
 
