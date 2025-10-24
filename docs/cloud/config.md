@@ -45,7 +45,7 @@ webroot: web
 
 Expanding on the above:
 
-- `node-version` — When declared, Cloud will use this Node.js version in your build step. (Default: None. If you wish to run a Node.js build step, you must specify a version!)
+- `node-version` — When declared, Cloud will use this Node.js version in your [build](builds.md) step. (Default: None. If you wish to run a Node.js build step, you must specify a version!)
 - `node-path` — This directory must contain `package.json` and `package-lock.json`. Your npm script will be run here. (Default: `''`)
 - `npm-script` — A single script name. Arbitrary Bash (including other `npx` commands) is not allowed. (Default: `build`)
 - `artifact-path` — Anything emitted from your build step must be in this directory, or it will not be uploaded to the CDN or available to your running app, in any way. (Default: Inherits the value of `webroot`)
