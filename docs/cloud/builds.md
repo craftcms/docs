@@ -58,7 +58,7 @@ There is no need for filename-based cache-busting, as all artifact URLs will cha
 
 The [Cloud extension](extension.md) also provides the `cloud.artifactUrl()` helper function for generating URLs to files published during your build. If you have historically used the `siteUrl()` or `url()` functions to link a style sheet or JavaScript file (or any other static asset) in your web root, use this function instead.
 
-Outside of Cloud, `cloud.artifactUrl()` falls back to the automatically-determined `@web` alias—and anything in your web root will resolve normally. The special `@artifactBaseUrl` alias mirrors this behavior, and can be used in Project Config—or [anywhere else that evaluates aliases](/5.x/configure.html#control-panel-settings):
+Outside of Cloud, `cloud.artifactUrl()` falls back to the automatically-determined `@web` alias—and anything in your web root will resolve normally. The special `@artifactBaseUrl` alias mirrors this behavior, and can be used in project config—or [anywhere else that evaluates aliases](/5.x/configure.html#control-panel-settings):
 
 ```twig
 {# Register a `script` tag to a static asset: #}
