@@ -35,7 +35,7 @@ To learn more about filesystem settings and synchronizing files, see our article
 
 ### Static Assets
 
-References to files in your web root (like scripts and stylesheets) should use the `artifactUrl()` helper provided by the Cloud extension. Read more about [generating artifact URLs](builds.md#artifact-uRLs), especially if you use a development server for front-end assets like Vite or webpack!
+References to files in your web root (like scripts and stylesheets) should use the `cloud.artifactUrl()` helper provided by the Cloud extension. Read more about [generating artifact URLs](builds.md#artifact-uRLs), especially if you use a development server for front-end assets like Vite or webpack!
 
 ## Database Backups
 
