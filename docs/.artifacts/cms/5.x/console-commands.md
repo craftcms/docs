@@ -77,7 +77,7 @@ Clear all caches.
 </h3>
 
 
-Clears the caches.
+Asset caches
 
 <h3 id="clear-caches-asset-indexing-data">
     <a href="#clear-caches-asset-indexing-data" class="header-anchor">#</a>
@@ -85,7 +85,7 @@ Clears the caches.
 </h3>
 
 
-Clears the caches.
+Asset indexing data
 
 <h3 id="clear-caches-compiled-classes">
     <a href="#clear-caches-compiled-classes" class="header-anchor">#</a>
@@ -93,7 +93,7 @@ Clears the caches.
 </h3>
 
 
-Clears the caches.
+Compiled classes
 
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
@@ -101,7 +101,7 @@ Clears the caches.
 </h3>
 
 
-Clears the caches.
+Compiled templates
 
 <h3 id="clear-caches-cp-resources">
     <a href="#clear-caches-cp-resources" class="header-anchor">#</a>
@@ -109,7 +109,7 @@ Clears the caches.
 </h3>
 
 
-Clears the caches.
+Control panel resources
 
 <h3 id="clear-caches-data">
     <a href="#clear-caches-data" class="header-anchor">#</a>
@@ -117,7 +117,7 @@ Clears the caches.
 </h3>
 
 
-Clears the caches.
+Data caches
 
 <h3 id="clear-caches-index">
     <a href="#clear-caches-index" class="header-anchor">#</a>
@@ -133,7 +133,7 @@ Lists the caches that can be cleared.
 </h3>
 
 
-Clears the caches.
+Temp files
 
 <h3 id="clear-caches-transform-indexes">
     <a href="#clear-caches-transform-indexes" class="header-anchor">#</a>
@@ -141,7 +141,7 @@ Clears the caches.
 </h3>
 
 
-Clears the caches.
+Asset transform index
 
 ## `clear-deprecations`
 
