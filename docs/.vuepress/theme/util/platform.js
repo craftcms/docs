@@ -1,7 +1,7 @@
 /**
  * Map of platform keys to uniquely identifying user-agent substring.
  */
-const PLATFORMS = {
+const PLATFORM_STRINGS = {
     ANDROID: ['Android'],
     IOS: ['iPhone', 'iPod', 'iPad'],
     MACOS: ['Macintosh', 'macOS'],
@@ -28,15 +28,15 @@ function getPlatform() {
 
     const ua = window.navigator.userAgent;
 
-    for (let p in PLATFORMS) {
-        for (let str of PLATFORMS[p]) {
+    for (let p in PLATFORM_STRINGS) {
+        for (let str of PLATFORM_STRINGS[p]) {
             if (ua.includes(str)) {
                 return p;
             }
         }
     }
 
-    return PLATFORMS.UNKNOWN;
+    return PLATFORM_STRINGS.UNKNOWN;
 }
 
 /**
@@ -54,4 +54,4 @@ function getShortcutKey(platform) {
 }
 
 
-export { PLATFORMS, META_KEYS, getPlatform, getShortcutKey };
+export { PLATFORM_STRINGS, META_KEYS, getPlatform, getShortcutKey };
