@@ -125,7 +125,7 @@ export default {
 
     placeholder() {
       const label = this.$activeSet.searchPlaceholder || this.$site.themeConfig.searchPlaceholder || "";
-      return `${label} (Press ${getShortcutKey()} + “/” to focus)`;
+      return `${label} (Press ${getShortcutKey()} + / to focus)`;
     },
   },
   watch: {
