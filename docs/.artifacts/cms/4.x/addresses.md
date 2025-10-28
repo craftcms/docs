@@ -24,7 +24,7 @@
 | [language](#language)                     | Determines which site(s) the addresses should be queried in, based on their language.
 | [limit](#limit)                           | Determines the number of addresses that should be returned.
 | [offset](#offset)                         | Determines how many addresses should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, id`.)
+| [orderBy](#orderby)                       | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [owner](#owner)                           | Sets the [ownerId](#ownerid) parameter based on a given owner element.
 | [ownerId](#ownerid)                       | Narrows the query results based on the addresses’ owner elements, per their IDs.
 | [preferSites](#prefersites)               | If [unique()](https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
@@ -501,7 +501,7 @@ $addresses = \craft\elements\Address::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC,
-    id`.)
+    elements.id`.)
 
 
 

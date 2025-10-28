@@ -40,7 +40,7 @@
 | [limit](#limit)                           | Determines the number of entries that should be returned.
 | [nextSiblingOf](#nextsiblingof)           | Narrows the query results to only the entry that comes immediately after another entry in its structure.
 | [offset](#offset)                         | Determines how many entries should be skipped in the results.
-| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+| [orderBy](#orderby)                       | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 | [positionedAfter](#positionedafter)       | Narrows the query results to only entries that are positioned after another entry in its structure.
 | [positionedBefore](#positionedbefore)     | Narrows the query results to only entries that are positioned before another entry in its structure.
 | [postDate](#postdate)                     | Narrows the query results based on the entries’ post dates.
@@ -1084,7 +1084,7 @@ $entries = \craft\elements\Entry::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v4/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC,
-    id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+    elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 
 
 
