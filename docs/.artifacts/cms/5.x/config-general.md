@@ -166,14 +166,14 @@ Defined by
 
 </div>
 
-Whether users should automatically be logged in after activating their account or resetting their password.
+Whether users should automatically be logged in after activating their account.
 
 ::: code
 ```php Static Config
 ->autoLoginAfterAccountActivation(true)
 ```
 ```shell Environment Override
-CRAFT_ALLOW_AUTO_LOGIN_AFTER_ACCOUNT_ACTIVATION=true
+CRAFT_AUTO_LOGIN_AFTER_ACCOUNT_ACTIVATION=true
 ```
 :::
 
@@ -205,6 +205,9 @@ Whether drafts should be saved automatically as they are edited.
 Note that drafts *will* be autosaved while Live Preview is open, regardless of this setting.
 
 ::: code
+ ```php Static Config
+ ->autosaveDrafts(false)
+ ```
 ```shell Environment Override
 CRAFT_AUTOSAVE_DRAFTS=false
 ```

@@ -50,7 +50,7 @@
 | [nextSiblingOf](#nextsiblingof)                 | Narrows the query results to only the entry that comes immediately after another entry in its structure.
 | [notRelatedTo](#notrelatedto)                   | Narrows the query results to only entries that are not related to certain other elements.
 | [offset](#offset)                               | Determines how many entries should be skipped in the results.
-| [orderBy](#orderby)                             | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+| [orderBy](#orderby)                             | Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC, elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 | [owner](#owner)                                 | Sets the [ownerId](#ownerid) and [siteId](#siteid) parameters based on a given element.
 | [ownerId](#ownerid)                             | Narrows the query results based on the owner element of the entries, per the owners’ IDs.
 | [positionedAfter](#positionedafter)             | Narrows the query results to only entries that are positioned after another entry in its structure.
@@ -1341,7 +1341,7 @@ $entries = \craft\elements\Entry::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines the order that the entries should be returned in. (If empty, defaults to `postDate DESC,
-    id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
+    elements.id`, or the order defined by the section if the [section](#section) or [sectionId](#sectionid) params are set to a single Structure section.)
 
 
 

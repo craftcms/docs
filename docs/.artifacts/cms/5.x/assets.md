@@ -36,7 +36,7 @@
 | [limit](#limit)                                 | Determines the number of assets that should be returned.
 | [notRelatedTo](#notrelatedto)                   | Narrows the query results to only assets that are not related to certain other elements.
 | [offset](#offset)                               | Determines how many assets should be skipped in the results.
-| [orderBy](#orderby)                             | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC, id`.)
+| [orderBy](#orderby)                             | Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [preferSites](#prefersites)                     | If [unique](#unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
 | [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
@@ -857,7 +857,7 @@ $assets = \craft\elements\Asset::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines the order that the assets should be returned in. (If empty, defaults to `dateCreated DESC,
-    id`.)
+    elements.id`.)
 
 
 

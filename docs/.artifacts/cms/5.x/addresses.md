@@ -42,7 +42,7 @@
 | [locality](#locality)                           | Narrows the query results based on the locality the addresses belong to.
 | [notRelatedTo](#notrelatedto)                   | Narrows the query results to only addresses that are not related to certain other elements.
 | [offset](#offset)                               | Determines how many addresses should be skipped in the results.
-| [orderBy](#orderby)                             | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, id`.)
+| [orderBy](#orderby)                             | Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC, elements.id`.)
 | [organization](#organization)                   | Narrows the query results based on the organization the addresses have.
 | [organizationTaxId](#organizationtaxid)         | Narrows the query results based on the tax ID the addresses have.
 | [owner](#owner)                                 | Sets the [ownerId](#ownerid) and `\craft\elements\db\siteId()` parameters based on a given element.
@@ -1021,7 +1021,7 @@ $addresses = \craft\elements\Address::find()
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Determines the order that the addresses should be returned in. (If empty, defaults to `dateCreated DESC,
-    id`.)
+    elements.id`.)
 
 
 
