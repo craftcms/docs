@@ -22,7 +22,7 @@ const META_KEYS = {
  * @returns {String}
  */
 function getPlatform() {
-    if (!window) {
+    if (typeof window === 'undefined') {
         return 'UNKNOWN';
     }
 
