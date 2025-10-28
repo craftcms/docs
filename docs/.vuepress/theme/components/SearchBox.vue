@@ -1,12 +1,13 @@
 <template>
   <div class="search-box relative w-full">
+    <SearchIcon />
     <input
       ref="input"
       aria-label="Search"
       :value="query"
       :class="{ focused: focused }"
       :placeholder="placeholder"
-      class="rounded-md w-full px-5 py-2 text-sm"
+      class="rounded-md w-full text-sm"
       autocomplete="off"
       spellcheck="false"
       @input="query = $event.target.value"
@@ -83,9 +84,14 @@
 
 <script>
 import searchService from "../util/flexsearch-service";
+import { getShortcutKey } from '../util/platform';
+import SearchIcon from "../icons/SearchIcon.vue";
 
 export default {
   name: "SearchBox",
+  components: {
+    SearchIcon,
+  },
   data() {
     return {
       query: "",
@@ -118,12 +124,9 @@ export default {
     },
 
     placeholder() {
-      return (
-        this.$activeSet.searchPlaceholder ||
-        this.$site.themeConfig.searchPlaceholder ||
-        ""
-      );
-    }
+      const label = this.$activeSet.searchPlaceholder || this.$site.themeConfig.searchPlaceholder || "";
+      return `${label} (Press ${getShortcutKey()} + / to focus)`;
+    },
   },
   watch: {
     query() {
@@ -182,9 +185,11 @@ export default {
     },
     onHotkey(event) {
       // take us to the search input if it doesn’t have focus
+      // Require Command (metaKey) or Control (ctrlKey) plus '/'
       if (
         event.srcElement !== this.$refs.input &&
-        this.hotkeys.includes(event.key)
+        this.hotkeys.includes(event.key) &&
+        (event.ctrlKey || event.metaKey)
       ) {
         this.$refs.input.focus();
         event.preventDefault();

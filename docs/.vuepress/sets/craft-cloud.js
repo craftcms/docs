@@ -4,7 +4,7 @@ module.exports = {
   icon: "/docs/icons/icon-cloud.svg",
   baseDir: "cloud",
   abandoned: false,
-  searchPlaceholder: "Search Cloud docs (Press “/” to focus)",
+  searchPlaceholder: "Search Cloud docs",
   primarySet: true,
   globalVars: {
     supportEmail: 'support@craft.cloud',
