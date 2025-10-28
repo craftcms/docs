@@ -84,6 +84,7 @@
 
 <script>
 import searchService from "../util/flexsearch-service";
+import { getShortcutKey } from '../util/platform';
 import SearchIcon from "../icons/SearchIcon.vue";
 
 export default {
@@ -123,10 +124,9 @@ export default {
     },
 
     placeholder() {
-      let label = this.$activeSet.searchPlaceholder || this.$site.themeConfig.searchPlaceholder || "";
-
-      return `${label} (Press Ctrl/⌘ + “/” to focus)`;
-    }
+      const label = this.$activeSet.searchPlaceholder || this.$site.themeConfig.searchPlaceholder || "";
+      return `${label} (Press ${getShortcutKey()} + “/” to focus)`;
+    },
   },
   watch: {
     query() {

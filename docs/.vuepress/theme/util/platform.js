@@ -1,0 +1,57 @@
+/**
+ * Map of platform keys to uniquely identifying user-agent substring.
+ */
+const PLATFORMS = {
+    ANDROID: ['Android'],
+    IOS: ['iPhone', 'iPod', 'iPad'],
+    MACOS: ['Macintosh', 'macOS'],
+    WINDOWS: ['Windows NT'],
+    LINUX: ['Linux'],
+    // This isn’t an expected match—we just need a fallback value to index on:
+    UNKNOWN: ['Unknown'],
+};
+
+const META_KEYS = {
+    MACOS: '⌘',
+    UNKNOWN: 'Ctrl',
+};
+
+/**
+ * Return the current “platform” identifier, based on crude UA-sniffing.
+ * 
+ * @returns {String}
+ */
+function getPlatform() {
+    if (!window) {
+        return 'UNKNOWN';
+    }
+
+    const ua = window.navigator.userAgent;
+
+    for (let p in PLATFORMS) {
+        for (let str of PLATFORMS[p]) {
+            if (ua.includes(str)) {
+                return p;
+            }
+        }
+    }
+
+    return PLATFORMS.UNKNOWN;
+}
+
+/**
+ * Returns the name/symbol for the current platform’s primary modifier/shortcut key.
+ * 
+ * @param {String} platform 
+ * @returns {String}
+ */
+function getShortcutKey(platform) {
+    if (!platform) {
+        platform = getPlatform();
+    }
+
+    return META_KEYS[platform] || META_KEYS['UNKNOWN'];
+}
+
+
+export { PLATFORMS, META_KEYS, getPlatform, getShortcutKey };
