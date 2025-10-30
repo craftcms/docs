@@ -75,7 +75,7 @@ Here are some great ways to begin your journey with Craft:
         <IconLink
             title="Front-End Development"
             subtitle="Deliver your content to any screen."
-            link="system/elements"
+            link="development"
             icon="/docs/icons/icon-generic-link.svg"
             iconSize="large" />
     </li>
