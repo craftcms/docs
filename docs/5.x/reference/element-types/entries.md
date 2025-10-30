@@ -364,7 +364,7 @@ For live preview, you should also consider [enabling iFrame Resizer](config5:use
 
 ### Moving Entries Between Sections <Since ver="5.3.0" feature="Transferring entries between sections" />
 
-Entries in [channel](#channels) and [structure](#structures) sections cane be moved to other sections that support the same [entry type](#entry-types). Use the **Move to…** element action from any entry element index, then select the new section. If the action is disabled, the entry has no suitable targets—you may be able to change its entry type _in-situ_, reconcile any custom field changes, then move it to a compatible section.
+Entries in [channel](#channels) and [structure](#structures) sections can be moved to other sections that support the same [entry type](#entry-types). Use the **Move to…** element action from any entry element index, then select the new section. If the action is disabled, the entry has no suitable targets—you may be able to change its entry type _in-situ_, reconcile any custom field changes, then move it to a compatible section.
 
 When moving an entry, it’s important to note these behaviors:
 
