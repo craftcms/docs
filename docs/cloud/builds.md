@@ -11,6 +11,10 @@ If either file is missing, the build will fail.
 
 Cloud installs packages by running `composer install`.
 
+::: tip
+In some exceedingly rare circumstances, we may install a more recent version of our [Cloud extension](extension.md#automatic-updates) to keep your app compatible with the platform.
+:::
+
 ## Node.js
 
 To enable the Node.js build step, set a `node-version` in your [Cloud config file](config.md#config-schema).

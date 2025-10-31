@@ -26,6 +26,20 @@ If you would prefer to use Composer directly, require the `craftcms/cloud` packa
 
 You will be prompted for some information about your project, and the wizard will write a [Craft Cloud configuration file](config.md) to the project’s root.
 
+## Updating
+
+The `craftcms/cloud` package will be updated any time you run `composer update`, but _not_ when using Craft’s built-in update tool.
+
+### Automatic Updates
+
+Occasionally, we need to bump the minimum supported extension version in Cloud to phase out old infrastructure.
+In these situations, we may attempt to install a more recent version of `craftcms/cloud` than is present in your `composer.lock` file—but only when the locked version has fallen behind our minimum supported version.
+You will see a log message in any deployment that an automatic upgrade occurs, with the new minimum version.
+
+::: tip
+Automatic updates are _never_ pushed back to your git provider.
+:::
+
 ## Special Features
 
 ### Cloud Filesystem
