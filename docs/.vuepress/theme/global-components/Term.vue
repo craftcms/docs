@@ -95,7 +95,7 @@
 </style>
 
 <script>
-const CRAFTCOM_BASE_URL = 'https://craftcom.ddev.site';
+const CRAFTCOM_BASE_URL = 'https://craftcms.com';
 
 export default {
     props: {
