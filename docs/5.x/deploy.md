@@ -57,6 +57,8 @@ Craft will work on virtually any hosting platform that meets its [requirements](
 Check out our [introduction to hosting](kb:hosting-craft-101) Knowledge Base article if this is your first time launching a Craft project, or spin up a free seven-day trial of [Craft Cloud](https://craftcms.com/cloud)!
 :::
 
+Here are a few things to look out for when reviewing traditional hosting services:
+
 <columns>
 <column>
 
