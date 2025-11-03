@@ -52,7 +52,7 @@ export default {
 
 <style lang="postcss" scoped>
     .see {
-        @apply relative rounded border block no-underline w-full my-4 p-4 text-current;
+        @apply relative rounded border block no-underline w-full my-4 py-4 px-5 text-current shadow-md;
 
         border: 1px solid var(--border-color);
 
