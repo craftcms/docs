@@ -1,15 +1,23 @@
 <template>
   <div class="code-toggle">
-    <ul class="code-language-switcher" v-if="!usePageToggle">
+    <ul class="code-language-switcher theme-default-content-override" v-if="!usePageToggle">
       <li v-for="(language, index) in languages" :key="index">
-        <a
-          :class="{ active: language === selectedLanguage }"
+        <button
+          :class="{ active: isSelectedLanguage(language) }"
+          :aria-selected="isSelectedLanguage(language)"
+          role="tab"
+          :aria-controls="'#' + getLanguageTabId(language)"
           @click="setLanguage(language)"
-        >{{ getLanguageLabel(language) }}</a>
+        >{{ getLanguageLabel(language) }}</button>
       </li>
     </ul>
-    <div v-for="(language, index) in languages" :key="index">
-      <slot :name="language" v-if="isSelectedLanguage(language)" />
+    <div
+      v-for="(language, index) in languages"
+      :key="index"
+      :id="getLanguageTabId(language)"
+      :hidden="!isSelectedLanguage(language)"
+      role="tabpanel">
+      <slot :name="language" />
     </div>
   </div>
 </template>
@@ -35,30 +43,23 @@
 }
 
 ul.code-language-switcher {
-  @apply flex flex-row rounded-t box-border m-0 px-4 py-2;
-  background: #e1e9f0;
+  @apply flex flex-row rounded-t box-border m-0 p-2;
+  background: var(--border-color);
   z-index: 2;
 
   li {
     @apply p-0 mr-1 list-none;
 
-    a {
-      @apply block font-medium px-3 cursor-pointer rounded leading-relaxed;
-      font-size: 15px;
-      color: #476582;
-      padding-top: 0.2rem;
-      padding-bottom: 0.2rem;
+    button {
+      @apply block py-3 px-4 font-medium text-xs tracking-wider uppercase leading-none cursor-pointer rounded;
 
       &:hover {
-        text-decoration: none !important;
-
-        &:not(.active) {
-          background: rgba(255, 255, 255, 0.5);
-        }
+        background-color: var(--sidebar-bg-color);
       }
 
       &.active {
-        @apply cursor-default bg-white;
+        color: var(--text-color);
+        background-color: var(--bg-color);
       }
     }
   }
@@ -72,12 +73,14 @@ ul.code-language-switcher {
 </style>
 
 <script>
+import { isStarted } from 'nprogress';
+
 export default {
   props: ["languages", "labels"],
 
   data() {
     return {
-      selectedLanguage: this.languages[0]
+      selectedLanguage: this.languages[0],
     };
   },
 
@@ -118,6 +121,9 @@ export default {
           ? this.$store.state.codeLanguage
           : this.selectedLanguage)
       );
+    },
+    getLanguageTabId(language) {
+      return `tab-${this._uid}-${language}`;
     }
   }
 };

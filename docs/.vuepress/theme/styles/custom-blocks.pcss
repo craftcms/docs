@@ -3,7 +3,7 @@
  */
 
 .custom-block {
-  @apply p-5 rounded overflow-hidden relative;
+  @apply p-5 rounded overflow-hidden relative shadow-md;
   background-color: var(--custom-block-bg-color);
   border: 1px solid var(--custom-block-border-color);
 
@@ -25,10 +25,10 @@
     &:before {
       content: "";
       @apply block absolute top-0 left-0 mt-5 ml-4;
-      width: 1.75rem;
-      height: 1.75rem;
       background: transparent url("/docs/icons/icon-tip.svg") no-repeat 0 0;
       background-size: contain;
+      width: 28px;
+      height: 28px;
     }
 
     .since {
@@ -36,7 +36,9 @@
     }
   }
 
-  &.tip {}
+  &.tip {
+    border: 1px solid var(--link-underline-color);
+  }
 
   &.warning {
     border: 1px solid rgba(178, 148, 0, 1);
@@ -47,10 +49,10 @@
   }
 
   &.danger {
-    border: 1px solid rgba(229, 66, 43, 1);
+    border: 1px solid theme('colors.red');
 
     .custom-block-title {
-      color: rgba(229, 66, 43, 1);
+      color: theme('colors.red');
     }
 
     &:before {
