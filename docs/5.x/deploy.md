@@ -79,7 +79,7 @@ Check out our [introduction to hosting](kb:hosting-craft-101) Knowledge Base art
 
 ### Advanced Options
 
-Craft plays well with non-traditional infrastructure. Let’s look at some examples of how you might take advantage of a provider’s other services.
+Craft plays well with non-traditional infrastructure, as well. Let’s look at some examples of how you might take advantage of a provider’s other services.
 
 #### Remote Databases
 
