@@ -34,10 +34,10 @@ export default {
 }
 
 .step-label {
-    border: 1px solid var(--custom-block-bg-color);
-    border-radius: 2px;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
     font-weight: bold;
-    padding: 2px 6px;
+    padding: 2px 7px 1px;
     white-space: nowrap;
 }
 
