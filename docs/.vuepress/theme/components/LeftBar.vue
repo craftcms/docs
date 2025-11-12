@@ -99,6 +99,7 @@
   @apply w-64 h-screen fixed z-10;
   background-color: var(--sidebar-bg-color);
   transform: translateX(-16rem);
+  box-shadow: -40px 0 40px -40px rgba(0, 0, 0, 0.1) inset;
 
   .wrap {
     @apply w-64 absolute right-0;
