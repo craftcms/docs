@@ -66,8 +66,6 @@ Configuration
 Purpose
 : This directory represents your server’s web root. The public `index.php` file lives here, alongside your static images, stylesheets, and JavaScript files.
 
-  You can generate a URL to a file in this folder with Twig’s [`siteUrl()` function](../reference/twig/functions.md#siteurl).
-
 Customization
 : [`CRAFT_WEB_ROOT`](../reference/config/bootstrap.md#craft-web-root) — This is primarily used to set the [`@webroot` alias](../configure.md#aliases).
 
