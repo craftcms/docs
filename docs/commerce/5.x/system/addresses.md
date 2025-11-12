@@ -8,7 +8,7 @@ sidebarDepth: 2
 Addresses are now a native part of Craft! We recommend reviewing the [main documentation on addresses](/5.x/addresses.md) before digging in on Commerce-specifics.
 :::
 
-Commerce manages shipping and billing information using Craft’s <craft4:craft\elements\Address> element type.
+Commerce manages shipping and billing information using Craft’s <craft5:craft\elements\Address> element type.
 
 In the control panel, you’ll encounter addresses within the context of [orders](./orders-carts.md) and [users](/5.x/system/users.md). [Store locations](#store-addresses) may also be entered at **Commerce** → **Store Management** → **General** → **Store Location**.
 
@@ -86,11 +86,11 @@ Once you have a [cart object](orders-carts.md#fetching-a-cart), you can access t
 {% endif %}
 ```
 
-It’s important to code defensively, here! If the customer hasn’t set an address yet, you’ll get back `null`—otherwise, it’ll be an [Address](craft4:craft\elements\Address) object.
+It’s important to code defensively, here! If the customer hasn’t set an address yet, you’ll get back `null`—otherwise, it’ll be an [Address](craft5:craft\elements\Address) object.
 
 ### Updating Cart Addresses
 
-Any time you submit data to the `commerce/cart/update-cart` action, you can include parameters for modifying shipping and billing addresses:
+Any time you submit data to the `commerce/cart/update-cart` action, you can include parameters for modifying addresses:
 
 1. Send `shippingAddress` and/or `billingAddress` arrays with new values (guests and logged-in users);
 2. `shippingAddressId` and/or `billingAddressId` parameters for [choosing an existing address](#address-book) by ID (logged-in users only);
@@ -109,14 +109,14 @@ If you provide `shippingAddress` fields *and* a `shippingAddressId`, the latter 
 ::: warning
 Customize what address information is required at checkout with the **Require Billing Address At Checkout** and **Require Shipping Address At Checkout** [store settings](stores.md#settings).
 
-The tax and shipping engines require address information to generate accurate options and costs.
+The [tax](tax.md) and [shipping](shipping.md) engines require address information to generate accurate options and costs.
 :::
 
 Use the `cart.hasMatchingAddresses()` method to confirm to customers that their addresses match. Read more about how Commerce handles changes to addresses in the [address book](#auto-fill-from-address-book) section.
 
 #### Address Fields
 
-The specific properties and fields supported when updating an order’s `shippingAddress` or `billingAddress` in this way are determined by the [Address](craft4:craft\elements\Address) element, regional differences based on the provided `countryCode`, and any [custom fields](/5.x/system/fields.md) assigned to it.
+The specific properties and fields supported when updating an order’s `shippingAddress` or `billingAddress` in this way are determined by the [Address](craft5:craft\elements\Address) element, regional differences based on the provided `countryCode`, and any [custom fields](/5.x/system/fields.md) assigned to it.
 
 ```twig
 <form method="post">
@@ -300,14 +300,16 @@ You may also send `firstName` and `lastName` properties, separately.
 ::: warning
 Changes to an address in the customer’s address book (via the [`users/save-address` action](/5.x/reference/controller-actions.md#users-save-address)) are copied to any carts it is attached to.
 
-_However_, any field(s) updated on an order address that was originally populated from the customer’s address book will _not_ propagate back to the source, and will break the association to it. Sending `shippingAddressId` and `billingAddressId` are only intended to populate an order address with existing information, and to track where it originally came from—not bind them in both directions.
+_However_, any field(s) updated on an order address that was originally populated from the customer’s address book will _not_ propagate back to the source, and will break the association to it.
+Sending `shippingAddressId` and `billingAddressId` are only intended to populate an order address with existing information, and to track where it originally came from—not bind them in both directions.
+Commerce tracks the source of an address with the `sourceBillingAddressId` and `sourceShippingAddressId` properties.
 :::
 
 ### Estimate Cart Addresses
 
 It’s common to provide a shipping or tax cost estimate before a customer has entered full address details. To help with this, the cart can use “estimated” shipping and billing addresses for calculations, before complete addresses are available.
 
-Estimated addresses are <craft4:craft\elements\Address> elements, just like shipping and billing addresses.
+Estimated addresses are <craft5:craft\elements\Address> elements, just like shipping and billing addresses.
 
 #### Adding a Shipping Estimate Address to the Cart
 
@@ -403,4 +405,6 @@ To let your customers set a address, add this code to your [new address](/5.x/re
 `checkbox` inputs only send a value when checked. In order to support _un_-setting a primary billing or shipping address, you must include the hidden input _before_ the visible checkbox, in the DOM. This ensures that the falsy `0` value is sent when the checkbox is unchecked, differentiating it from simply not sending a value at all (omitting `isPrimaryShipping` or `isPrimaryBilling` entirely makes no changes to the user’s current settings).
 :::
 
-Send `makePrimaryBillingAddress` and/or `makePrimaryShippingAddress` params along with any `cart/update-cart` request to set an address attached to the cart as the customer’s primary billing or shipping address. Only addresses that retain their `sourceBillingAddressId` or `sourceShippingAddressId` can be configured this way—an address that has been modified from its source is not considered part of the customer’s [address book](/5.x/reference/element-types/addresses.md#managing-addresses).
+Send `makePrimaryBillingAddress` and/or `makePrimaryShippingAddress` params along with any `cart/update-cart` request to set an address attached to the cart as the customer’s primary billing or shipping address.
+These flags are persisted on the cart through checkout and are interoperable with `saveShippingAddressOnOrderComplete` and `saveBillingAddressOnOrderComplete`, which means _new_ addresses can be saved _and_ set as the customer’s primary. <Since product="Commerce" repo="craftcms/commerce" ver="5.3.0" description="Making a newly-saved address the customer’s primary was first possible in version {ver} of {product}" :useChangelog="false" />
+_Prior_ to Commerce 5.3, only cart addresses that retained a `sourceBillingAddressId` or `sourceShippingAddressId` (effectively, addresses from the customer’s [address book](/5.x/reference/element-types/addresses.md#managing-addresses)) could be updated this way; new addresses (and addresses that had been modified from their source) could not be set as the customer’s primary due to the transient nature of the  `makePrimary*` params.

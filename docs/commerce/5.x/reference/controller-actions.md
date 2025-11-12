@@ -105,12 +105,14 @@ Param | Description
 `couponCode` | Coupon code for a [discount](../system/discounts.md) that should be applied to the cart.
 `email` | Email address to be associated with the cart.
 `estimatedBillingAddress[]` | Estimated billing address attributes. (See [Addresses](../system/addresses.md)).
-`estimatedBillingAddressSameAsShipping` | Set to `true` to use shipping address for estimated billing address.
 `estimatedShippingAddress[]` | Estimated shipping address attributes. (See [Addresses](../system/addresses.md)).
-`fields[]` | Optional array of custom fields to be submitted to the cart.
-`forceSave` | Optionally set to `true` to force saving the cart.
+`estimatedBillingAddressSameAsShipping` | Set to `true` to use shipping address for estimated billing address.
+`fields[]` | Optional array of [custom fields](/5.x/development/forms.md#custom-fields) to be submitted to the cart.
+`forceSave` | Optionally set to `true` to force saving the cart, even if no attributes changed.
 `gatewayId` | The payment gateway ID to be used when the cart is completed.
 `lineItems[]` | Array of one or more of the cart’s line items to update. Each must have an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
+`makePrimaryBillingAddress` | Set a source address (supplied via `billingAddressId`, or memoized via `sourceBillingAddressId`) as the customer’s primary/default _billing_ address.
+`makePrimaryShippingAddress` | Set a source address (supplied via `shippingAddressId`, or memoized via `sourceShippingAddressId`) as the customer’s primary/default _shipping_ address.
 `number` | Optional order number for specific, existing cart.
 `paymentCurrency` | ISO code of a configured [payment currency](../system/currencies.md) to be used for the cart.
 `paymentSourceId` | The ID for a payment source that should be used when the cart is completed.

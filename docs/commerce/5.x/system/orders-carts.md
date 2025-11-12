@@ -191,7 +191,7 @@ Shipping, tax, and other adjustments _can_ still affect custom line items! Any r
 
 Completed orders can be edited in the control panel by visiting the order edit page and choosing **Edit**.
 
-While editing the order, it will refresh subtotals and totals and display any errors. It will _not_ automatically recalculate the order based on system rules like shipping, taxes, or promotions. Choose **Recalculate order** to have it fully recalculate including those system rules.
+While editing the order, it will refresh subtotals and totals and display any errors. It will _not_ automatically [recalculate](#recalculating-orders) the order based on system rules like shipping, taxes, or promotions. Choose **Recalculate order** to have it fully recalculate including those system rules.
 
 Once you’re happy with your changes, choose **Update Order** to save it to the database. Updating an order after it is completed does not automatically charge or refund the customer! You must take these actions explicitly via the **Transactions** tab.
 
@@ -204,6 +204,9 @@ Every order includes a few important totals:
 - **order.adjustmentsTotal** is the sum of the order’s adjustments.
 - **order.total** is the sum of the order’s `itemSubtotal` and `adjustmentsTotal`.
 - **order.totalPrice** is the total order price with a minimum enforced by the **Minimum Total Price Strategy** [store setting](stores.md#settings).
+- **order.totalTax** is the sum of all [tax](tax.md) adjustments.
+- **order.totalTaxIncluded** is the sum of all tax adjustments marked as _included_ in item prices.
+- **order.totalShippingCost** is the sum of all [shipping](shipping.md) adjustments.
 
 ::: tip
 Note that `total` _can_ be negative!
@@ -221,7 +224,7 @@ A cart or order is always in one of three calculation modes:
 
 Cart/order subtotals and totals are computed values that always reflect the sum of line items. A few examples are `totalPrice`, `itemTotal`, and `itemSubtotal`.
 
-You can manually recalculate an order by choosing “Recalculate order” at the bottom of the order edit screen:
+You can manually recalculate a completed order by choosing “Recalculate order” at the bottom of the order edit screen:
 
 ![](../images/recalculate-order.png)
 
