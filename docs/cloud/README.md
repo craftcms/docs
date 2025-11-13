@@ -2,7 +2,7 @@
 
 Craft Cloud is our very own serverless hosting platform. We designed it from the ground-up to be the best way to launch and scale your Craft project.
 
-<See url="https://craftcms.com/cloud" label="Craft Cloud" description="Take a tour of Cloud’s main features." />
+<Cloud />
 
 You can [get started](getting-started.md) on Cloud by deploying a new or existing project with a free seven-day trial.
 
