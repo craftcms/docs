@@ -44,6 +44,9 @@ All filesystems support the following options:
 A filesystem’s **Base URL** can be set to an environment variable, or begin with an alias. [Read more](../../configure.md#control-panel-settings) about special configuration values.
 
 In the screenshot above, we’re using a `@cdn` [alias](../../configure.md#aliases) so that the URL can be updated across multiple filesystems with a single change in our general config file—or even with an environment variable, if the alias gets _its_ value from one!
+
+We strongly discourage using the automatically-determined `@web` alias as a **Base URL** in [local](#local-filesystems) filesystems, as it can differ between sites.
+Assets should generally have a single, stable URL.
 :::
 
 Multiple volumes can share a single filesystem, so long as they each have a unique and non-overlapping **Base Path**. If another volume is already mounted at the top level of a filesystem, that filesystem won’t be available for selection.
