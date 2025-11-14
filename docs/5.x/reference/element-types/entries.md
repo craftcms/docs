@@ -45,6 +45,7 @@ Entry types have the following settings:
 - **Handle** — Uniquely identifies entries of this type in [templates](../../development/templates.md) and [queries](../../development/element-queries.md).
 - **Description** <Since ver="5.8.0" feature="Entry type descriptions" /> — A short explanation of what the entry type is used for. This is displayed in a tooltip when the entry type is selected elsewhere in the control panel.
 - **Icon** and **Color** — Choose a symbol and color to subtly distinguish entries of this type throughout the control panel.
+- **UI Label Format** <Since ver="5.9.0" feature="Entry type UI label formats" /> — Customize this entry type’s labels (used primarily on [element chips and cards](../../system/elements.md#chips--cards)).
 - **Title Translation Method** — In multi-site projects, choose how titles are localized.
 - **Default Title Format** — Entry titles can be set by the author or [dynamically defined](#dynamic-entry-titles) from other values via an [object template](../../system/object-templates.md).
 - **Show the Slug field** — As with titles, slugs can be manually or automatically generated.
@@ -121,6 +122,8 @@ If you want your entries’ titles to _always_ be generated from a template (and
 ::: tip
 Prior to Craft 5.5.0, this behavior was governed by two settings (**Show the Title field** and **Show the Title field?**), with no intermediate “default” option.
 :::
+
+You also have control over the labels used to identify your entries in chips and cards, with the **UI Label Format** setting. <Since ver="5.9.0" feature="Entry type UI label formats" />
 
 ### Translation Settings
 
@@ -213,10 +216,6 @@ Structures can also make use of the **Maintain Hierarchy** setting on [entries f
 ::: tip
 Entries belonging to a structure are discrete from [nested entries](#nested-entries) in [Matrix](../field-types/matrix.md) fields. Structure entries can be freely moved around in their hierarchy (receiving new “parent” elements in the process), whereas nested entries are always owned by the element they were created within.
 :::
-
-#### Custom Sources
-
-You can supplement the automatic [sources](../../system/elements.md#sources) presented in the entries [element index](../../system/elements.md#indexes) with _custom sources_. Each custom source lists all entries by default, but can be filtered to only those that meet the specified **Entry Criteria**.
 
 ### Entry URI Formats
 
@@ -373,6 +372,33 @@ When moving an entry, it’s important to note these behaviors:
 - If the new section has a lower **Max authors** setting, author data will remain intact and produce a validation error when saved.
 - Authors who don’t have access to the new section will also be removed, the next time the entry is saved. Permissions are still checked based on the section, not authorship.
 - Singles will never appear as targets for moving an entry.
+
+## Sources
+
+You can supplement the automatic [sources](../../system/elements.md#sources) presented in the entries [element index](../../system/elements.md#indexes) with custom _pages_ <Since ver="5.9.0" feature="Customizing top-level entry source groups" /> and _sources_.
+
+![The source customization modal, introduced in Craft 5.9.0](../../images/entries-customize-sources.png)
+
+### Pages <Since ver="5.9.0" feature="Customizing top-level entry source groups" />
+
+By default, all sources are created inside a single **Entries** page.
+You may divide those sources into as many pages as necessary, each with their own label and icon.
+Each page is then given a top-level navigation menu item.
+
+Sources can be moved from one page to another by dragging-and-dropping, or using the action menu and selecting one of the **Move to …** options.
+
+### Custom Sources
+
+In addition to the sources created for each section, you can define any number of additional _custom sources_.
+Custom sources list all non-nested entries by default, but can define **Entry Criteria** to hone the index, and set **Default Table Columns** that make sense for the content.
+Control panel users can add temporary tweaks using [filters and columns](../../system/elements.md#filters-and-columns) controls on each index.
+Conditions provided this way are _additive_, meaning the base criteria cannot be relaxed.
+
+::: warning
+All users are able to access custom sources, but Craft still enforces section-based permissions for viewing and editing.
+:::
+
+Built-in sources are differentiated by the presence of a handle, derived from its [section](#sections) (save for the special **All entries** source).
 
 ## Nested Entries
 
