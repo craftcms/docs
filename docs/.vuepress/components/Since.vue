@@ -64,10 +64,10 @@ export default {
   font-size: 13px;
   vertical-align: super;
   line-height: 12px;
+  text-decoration: none !important;
 
   &:hover {
     background-color: var(--code-bg-color);
-    text-decoration: none;
   }
 }
 </style>
