@@ -45058,13 +45058,13 @@
     {
         "class": "craft\\services\\Users",
         "name": "EVENT_BEFORE_SAVE_USER_PHOTO",
-        "type": "craft\\services\\UserSavePhotoEvent",
+        "type": "craft\\events\\UserPhotoEvent",
         "desc": "The event that is triggered before a user photo is saved."
     },
     {
         "class": "craft\\services\\Users",
         "name": "EVENT_AFTER_SAVE_USER_PHOTO",
-        "type": "craft\\services\\UserSavePhotoEvent",
+        "type": "craft\\events\\UserPhotoEvent",
         "desc": "The event that is triggered after a user photo is saved."
     },
     {

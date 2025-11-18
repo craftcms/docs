@@ -77,7 +77,7 @@ Clear all caches.
 </h3>
 
 
-Asset caches
+Asset caches (Local copies of remote images, generated thumbnails)
 
 <h3 id="clear-caches-asset-indexing-data">
     <a href="#clear-caches-asset-indexing-data" class="header-anchor">#</a>
@@ -93,7 +93,7 @@ Asset indexing data
 </h3>
 
 
-Compiled classes
+Compiled classes (Contents of `storage/runtime/compiled_classes/`)
 
 <h3 id="clear-caches-compiled-templates">
     <a href="#clear-caches-compiled-templates" class="header-anchor">#</a>
@@ -101,7 +101,7 @@ Compiled classes
 </h3>
 
 
-Compiled templates
+Compiled templates (Contents of `storage/runtime/compiled_templates/`)
 
 <h3 id="clear-caches-cp-resources">
     <a href="#clear-caches-cp-resources" class="header-anchor">#</a>
@@ -109,7 +109,7 @@ Compiled templates
 </h3>
 
 
-Control panel resources
+Control panel resources (Contents of `@webroot/cpresources/`)
 
 <h3 id="clear-caches-data">
     <a href="#clear-caches-data" class="header-anchor">#</a>
@@ -117,7 +117,7 @@ Control panel resources
 </h3>
 
 
-Data caches
+Data caches (Anything cached with `Craft::$app->getCache()->set()`)
 
 <h3 id="clear-caches-index">
     <a href="#clear-caches-index" class="header-anchor">#</a>
@@ -133,7 +133,7 @@ Lists the caches that can be cleared.
 </h3>
 
 
-Temp files
+Temp files (Contents of `storage/runtime/temp/`)
 
 <h3 id="clear-caches-transform-indexes">
     <a href="#clear-caches-transform-indexes" class="header-anchor">#</a>
@@ -141,7 +141,7 @@ Temp files
 </h3>
 
 
-Asset transform index
+Asset transform index (Record of generated image transforms)
 
 ## `clear-deprecations`
 
