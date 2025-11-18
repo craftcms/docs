@@ -20,6 +20,7 @@
 | [customerId](#customerid)                       | Narrows the query results based on the customer, per their user ID.
 | [dateAuthorized](#dateauthorized)               | Narrows the query results based on the orders’ authorized dates.
 | [dateCreated](#datecreated)                     | Narrows the query results based on the orders’ creation dates.
+| [dateFirstPaid](#datefirstpaid)                 | Narrows the query results based on the orders’ first paid dates.
 | [dateOrdered](#dateordered)                     | Narrows the query results based on the orders’ completion dates.
 | [datePaid](#datepaid)                           | Narrows the query results based on the orders’ paid dates.
 | [dateUpdated](#dateupdated)                     | Narrows the query results based on the orders’ last-updated dates.
@@ -422,6 +423,42 @@ $orders = \craft\commerce\elements\Order::find()
 :::
 
 
+#### `dateFirstPaid`
+
+
+Narrows the query results based on the orders’ first paid dates.
+
+Possible values include:
+
+| Value | Fetches orders…
+| - | -
+| `'>= 2018-04-01'` | that were first paid on or after 2018-04-01.
+| `'< 2018-05-01'` | that were first paid before 2018-05-01
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were first paid between 2018-04-01 and 2018-05-01.
+
+
+
+::: code
+```twig
+{# Fetch orders that were first paid for recently #}
+{% set aWeekAgo = date('7 days ago')|atom %}
+
+{% set orders = craft.orders()
+  .dateFirstPaid(">= #{aWeekAgo}")
+  .all() %}
+```
+
+```php
+// Fetch orders that were first paid for recently
+$aWeekAgo = new \DateTime('7 days ago')->format(\DateTime::ATOM);
+
+$orders = \craft\commerce\elements\Order::find()
+    ->dateFirstPaid(">= {$aWeekAgo}")
+    ->all();
+```
+:::
+
+
 #### `dateOrdered`
 
 
@@ -469,7 +506,7 @@ Possible values include:
 | - | -
 | `'>= 2018-04-01'` | that were paid on or after 2018-04-01.
 | `'< 2018-05-01'` | that were paid before 2018-05-01
-| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were completed between 2018-04-01 and 2018-05-01.
+| `['and', '>= 2018-04-04', '< 2018-05-01']` | that were paid between 2018-04-01 and 2018-05-01.
 
 
 
