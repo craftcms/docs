@@ -5,16 +5,19 @@
         v-for="(language, index) in languages" :key="index"
         :class="{ active: isSelectedLanguage(language) }"
         :aria-selected="isSelectedLanguage(language)"
+        :id="getTabId(language)"
         role="tab"
-        :aria-controls="getLanguageTabId(language)"
+        :aria-controls="getTabPanelId(language)"
         @click="setLanguage(language)"
+        :tabindex="isSelectedLanguage(language) ? null : '-1'"
       >{{ getLanguageLabel(language) }}</button>
     </div>
     <div
       v-for="(language, index) in languages"
       :key="index"
-      :id="getLanguageTabId(language)"
+      :id="getTabPanelId(language)"
       :hidden="!isSelectedLanguage(language)"
+      :aria-labelledby="getTabId(language)"
       role="tabpanel">
       <slot :name="language" />
     </div>
@@ -68,7 +71,7 @@
 </style>
 
 <script>
-import { isStarted } from 'nprogress';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   props: ["languages", "labels"],
@@ -76,7 +79,12 @@ export default {
   data() {
     return {
       selectedLanguage: this.languages[0],
+      uniqueId: null,
     };
+  },
+
+  mounted() {
+    this.uniqueId = uuidv4();
   },
 
   computed: {
@@ -117,9 +125,12 @@ export default {
           : this.selectedLanguage)
       );
     },
-    getLanguageTabId(language) {
-      return `tab-${this._uid}-${language}`;
-    }
+    getTabId(language) {
+      return `tab-${this.uniqueId}-${language}`;
+    },
+    getTabPanelId(language) {
+      return `tabpanel-${this.uniqueId}-${language}`;
+    },
   }
 };
 </script>
