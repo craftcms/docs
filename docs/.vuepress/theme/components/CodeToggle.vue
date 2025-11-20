@@ -1,21 +1,27 @@
 <template>
   <div class="code-toggle">
-    <ul class="code-language-switcher theme-default-content-override" v-if="!usePageToggle">
-      <li v-for="(language, index) in languages" :key="index">
-        <button
-          :class="{ active: isSelectedLanguage(language) }"
-          :aria-selected="isSelectedLanguage(language)"
-          role="tab"
-          :aria-controls="'#' + getLanguageTabId(language)"
-          @click="setLanguage(language)"
-        >{{ getLanguageLabel(language) }}</button>
-      </li>
-    </ul>
+    <div class="code-lang-switcher theme-default-content-override" role="tablist" v-if="!usePageToggle">
+      <button
+        v-for="(language, index) in languages"
+        :key="language"
+        :class="{ active: isSelectedTab(language) }"
+        :aria-selected="isSelectedTab(language)"
+        :id="getTabId(language)"
+        :data-language="language"
+        role="tab"
+        :aria-controls="getTabPanelId(language)"
+        @click="setLanguage(language)"
+        :tabindex="isSelectedTab(language) ? null : '-1'"
+        v-on:keyup="handleKeyup"
+      >{{ getLanguageLabel(language) }}</button>
+    </div>
     <div
       v-for="(language, index) in languages"
+      tabindex="0"
       :key="index"
-      :id="getLanguageTabId(language)"
-      :hidden="!isSelectedLanguage(language)"
+      :id="getTabPanelId(language)"
+      :hidden="!isSelectedTab(language)"
+      :aria-labelledby="getTabId(language)"
       role="tabpanel">
       <slot :name="language" />
     </div>
@@ -42,38 +48,41 @@
   }
 }
 
-ul.code-language-switcher {
+.code-lang-switcher {
   @apply flex flex-row rounded-t box-border m-0 p-2;
   background: var(--border-color);
   z-index: 2;
+  gap: .3rem;
 
-  li {
-    @apply p-0 mr-1 list-none;
+  button {
+    @apply block py-3 px-4 font-medium text-xs tracking-wider uppercase leading-none cursor-pointer rounded;
+    border: 1px solid transparent;
+    &:hover {
+      background-color: var(--sidebar-bg-color);
+    }
 
-    button {
-      @apply block py-3 px-4 font-medium text-xs tracking-wider uppercase leading-none cursor-pointer rounded;
+    &:focus-visible {
+      outline: var(--custom-focus-outline);
+      outline-offset: 2px;
+    }
 
-      &:hover {
-        background-color: var(--sidebar-bg-color);
-      }
-
-      &.active {
-        color: var(--text-color);
-        background-color: var(--bg-color);
-      }
+    &.active {
+      border-color: var(--active-tab-border-color);
+      color: var(--text-color);
+      background-color: var(--bg-color);
     }
   }
 }
 
 .theme-default-content {
-  ul.code-language-switcher {
+  .code-lang-switcher {
     @apply mb-0;
   }
 }
 </style>
 
 <script>
-import { isStarted } from 'nprogress';
+import { v4 as uuidv4 } from 'uuid';
 
 export default {
   props: ["languages", "labels"],
@@ -81,7 +90,19 @@ export default {
   data() {
     return {
       selectedLanguage: this.languages[0],
+      uniqueId: null,
+      focusedTabIndex: null,
     };
+  },
+
+  mounted() {
+    this.uniqueId = uuidv4();
+  },
+
+  watch: {
+    selectedLanguage(newLanguage) {
+      this.$el.querySelector(`button[data-language="${newLanguage}"]`).focus();
+    },
   },
 
   computed: {
@@ -98,6 +119,12 @@ export default {
     setLanguage(language) {
       this.selectedLanguage = language;
     },
+    getLanguageFromIndex(index) {
+      return this.languages[index];
+    },
+    getIndexFromLanguage(language) {
+      return this.languages.indexOf(language);
+    },
     getLanguageLabel(language) {
       if (this.labels && this.labels[language]) {
         return this.labels[language];
@@ -111,10 +138,8 @@ export default {
         (themeLanguages && themeLanguages[language]) ||
         language
       );
-
-      return language;
     },
-    isSelectedLanguage(language) {
+    isSelectedTab(language) {
       return (
         language ==
         (this.usePageToggle
@@ -122,9 +147,44 @@ export default {
           : this.selectedLanguage)
       );
     },
-    getLanguageTabId(language) {
-      return `tab-${this._uid}-${language}`;
-    }
+    getTabId(language) {
+      return `tab-${this.uniqueId}-${language}`;
+    },
+    getTabPanelId(language) {
+      return `tabpanel-${this.uniqueId}-${language}`;
+    },
+    getNextIndex(index) {
+      return index + 1 <= this.languages.length - 1 ? index + 1 : 0;
+    },
+    getPrevIndex(index) {
+      return index - 1 >= 0 ? index - 1 : this.languages.length - 1;
+    },
+    handleKeyup(event) {
+      const {keyCode, target} = event;
+      let indexToFocus;
+      const currentIndex = this.getIndexFromLanguage(target.getAttribute('data-language'));
+
+      switch (keyCode) {
+        case 37:
+          indexToFocus = this.getPrevIndex(currentIndex);
+          break;
+        case 39:
+          indexToFocus = this.getNextIndex(currentIndex);
+          break;
+        case 36:
+          indexToFocus = 0;
+          break;
+        case 35:
+          indexToFocus = this.languages.length - 1;
+          break;
+        default:
+          return;
+      }
+
+      if (indexToFocus !== undefined) {
+        this.setLanguage(this.getLanguageFromIndex(indexToFocus));
+      }
+    },
   }
 };
 </script>
