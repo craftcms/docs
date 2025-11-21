@@ -59,7 +59,7 @@ If a customer chooses to register an account upon order completion, an activatio
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
 
-  {{ input('checbox', 'registerUserOnOrderComplete', 1, {checked: cart.registerUserOnOrderComplete}) }}
+  {{ input('checkbox', 'registerUserOnOrderComplete', 1, {checked: cart.registerUserOnOrderComplete}) }}
 
   {# ... #}
 
