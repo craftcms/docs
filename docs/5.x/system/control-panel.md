@@ -257,3 +257,32 @@ In some situations, dragging can be combined with [group selections](#group-sele
 ### Search
 
 Craft has a powerful [search](searching.md) system that complements the [condition builder](elements.md#filters-and-columns) on every element index.
+
+## Accessibility
+
+### Navigation
+
+Skip links and landmarks have been incorporated throughout the control panel to make keyboard and screen reader navigation more straightforward.
+
+#### Skip Links
+Global skip links are found at the beginning of each control panel screen. These include:
+- **Skip to main section:** Skips to the `main` container. This container includes the page header, which contains the page title and controls for the current screen.
+- **Skip to left sidebar:** Skips to the sub-navigation container (when using an LTR orientation). For example:
+  - On element index pages, this moves keyboard focus to the "Sources" menu.
+  - On account pages, this moves keyboard focus to the "Account" navigation.
+- **Skip to content:** Skips to the primary content pane on the page.
+- **Skip to right sidebar:** Skips to the details container (when using an LTR orientation), which includes page metadata.
+
+#### Landmarks
+
+### Alternative Text
+
+Image and video assets can have alternative text populate in the control panel when they use the Alternative Text native field.
+
+### User Preferences
+
+#### Session Limits
+
+#### Underlines
+
+#### Status Icons
