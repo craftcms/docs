@@ -265,13 +265,20 @@ Craft has a powerful [search](searching.md) system that complements the [conditi
 Skip links and landmarks have been incorporated throughout the control panel to make keyboard and screen reader navigation more straightforward.
 
 #### Skip Links
-Global skip links are found at the beginning of each control panel screen. These include:
+Global skip links are found at the beginning of each control panel screen.
+
+![A link to 'Skip to main section' has visible focus at the beginning of the Dashboard page](../images/skip-links.png)
+
+These include:
 - **Skip to main section:** Skips to the `main` container. This container includes the page header, which contains the page title and controls for the current screen.
-- **Skip to left sidebar:** Skips to the sub-navigation container (when using an LTR orientation). For example:
+- **Skip to left sidebar:** <Since ver="5.7.0" /> Skips to the sub-navigation container (when using an LTR orientation). For example:
   - On element index pages, this moves keyboard focus to the "Sources" menu.
   - On account pages, this moves keyboard focus to the "Account" navigation.
-- **Skip to content:** Skips to the primary content pane on the page.
-- **Skip to right sidebar:** Skips to the details container (when using an LTR orientation), which includes page metadata.
+- **Skip to content:** <Since ver="5.7.0" /> Skips to the primary content pane on the page.
+- **Skip to right sidebar:** <Since ver="5.7.0" /> Skips to the details container (when using an LTR orientation), which includes page metadata.
+
+In addition to global skip links, other parts of the control panel may include skip links. For example:
+- On element index pages, a **Skip to footer** link allows you to skip to the pagination and actions in the footer bar
 
 #### Landmarks
 
