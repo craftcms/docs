@@ -111,10 +111,6 @@ foreach ($entry->myFieldHandle->options as $option) {
 ```
 :::
 
-::: warning
-
-:::
-
 To see if any options are checked, use the [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter or [empty](https://twig.symfony.com/doc/3.x/tests/empty.html) test (or the [count](https://www.php.net/manual/en/function.count.php) method in PHP):
 
 ::: code
