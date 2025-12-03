@@ -1,9 +1,11 @@
 ---
 related:
+  - uri: lightswitch.md
+    label: Lightswitch fields (for storing a single true/false value)
   - uri: multi-select.md
-    label: Multi-select fields
+    label: Multi-select fields (for selecting multiple values)
   - uri: radio-buttons.md
-    label: Radio buttons fields
+    label: Radio buttons fields (for selecting one of many values)
 ---
 
 # Checkboxes Fields
