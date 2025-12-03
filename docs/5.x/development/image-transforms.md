@@ -1,14 +1,14 @@
 # Image Transforms
 
-Instead of requiring content editors to upload images at a specific sizes, Craft lets you define “image transforms” for automatically manipulating images in predefined ways, or on-demand. Transforms are _non-destructive_, meaning they have no effect on the original uploaded image.
+Instead of requiring content editors to upload images at a specific sizes, Craft lets you define “image transforms” to automatically manipulate images in predefined ways, or on-demand. Transforms are _non-destructive_, meaning they have no effect on the original uploaded image.
 
 <!-- more -->
 
-Transforms can be defined in the control panel or directly from your templates and GraphQL queries.
+Transforms can be defined in the control panel as [named transforms](#named-transforms) or [directly from your templates](#defining-transforms-in-your-templates) and GraphQL queries.
 
 ## Named Transforms
 
-Named transforms are created from the [control panel](../system/control-panel.md) by navigating to **Settings** → **Assets** → **Image Transforms** and press **New Transform**.
+Named transforms are created from the [control panel](../system/control-panel.md) by navigating to <Journey path="Settings, Assets, Image Transforms" /> and press **+ New image transform**.
 
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/settings/assets/transforms/new"
@@ -16,7 +16,7 @@ Named transforms are created from the [control panel](../system/control-panel.md
     caption="Creating a new predefined asset transform in the control panel."
     id="settings"
     :maxHeight="600">
-<img src="../images/assets-transforms.png" alt="Asset transform edit screen">
+<img src="../images/asset-transform-config.png" alt="Asset transform edit screen">
 </BrowserShot>
 
 <Todo notes="Add POI/waypoints to this screen" />
