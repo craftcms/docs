@@ -18,7 +18,7 @@ _Unlike_ other field types, relational fields store their data in a dedicated `r
 
 This allows you to design fast and powerful [queries](#the-relatedto-parameter) for related content, and to [optimize loading](../development/eager-loading.md) of nested and related resources.
 
-### Terminology
+## Terminology
 
 Each relationship consists of two elements we call the *source* and *target*:
 
