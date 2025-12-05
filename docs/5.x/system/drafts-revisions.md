@@ -73,6 +73,11 @@ To avoid issues when rendering drafts in live preview, [templates](../developmen
 ```
 :::
 
+#### Explicit Validation <Since ver="5.8.0" feature="The explicit element validation action" />
+
+Authors can explicitly validate an element without publishing (as though it were live), using the **Validate [Type]** action menu item on any element’s edit screen.
+The page will reload and display any validation failures, and a global success or failure notification.
+
 ### Change Tracking
 
 Fields that have been modified in a draft are recorded in the database and marked in the editor with a status badge. These fields’ values are protected against automatic [merging](#merging-changes) of changes from the canonical element.
