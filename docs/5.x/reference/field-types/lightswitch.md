@@ -4,6 +4,28 @@ Lightswitch fields give you a simple toggle input and store a boolean value.
 
 <!-- more -->
 
+## Settings
+
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new lightswitch field via the control panel.">
+<img src="../../images/fields-lightswitch-settings.png" alt="Lightswitch field settings screen in the Craft control panel">
+</BrowserShot>
+
+Lightswitch fields have the following settings:
+
+Default Value
+:   Choose a default value for the field.
+
+OFF Label and ON Label
+:   The text and accessibility label for the toggle’s disabled and enabled states.
+
+Show ON/OFF labels in cards
+:   When rendered on a [card](../../system/elements.md#custom-card-attributes), this determines whether the ON/OFF labels are displayed (instead of the field’s name).
+    These labels can be localized for control panel users with the [`site` translation category](../../system/sites.md#static-message-translations).
+
 ## Development
 
 ### Querying Elements with Lightswitch Fields
@@ -16,6 +38,8 @@ Possible values include:
 | --- | --- |
 | `true` | …with the switch _on_. |
 | `false` | …with the switch _off_. |
+
+See below for more information about how [default values](#default-value-handling) work in queries.
 
 ::: code
 ```twig
@@ -32,7 +56,9 @@ $entries = \craft\elements\Entry::find()
 ```
 :::
 
-Elements without a value for a lightswitch field (say, because they haven’t been saved since the field was added) are treated as if they have the default field value. For example, querying against a field that defaults to _off_…
+### Default Value Handling
+
+Elements without a value for a lightswitch field (say, because they haven’t been saved since the field was added, or because one of the query’s relevant field layouts doesn’t include an instance of it) are treated as if they have the **Default Value**. For example, querying against a field that defaults to _off_…
 
 ```twig{3}
 {% set archive = craft.entries()
@@ -94,6 +120,25 @@ if ($entry->myLightswitchField) {
     // I’m off.
 }
 ```
+:::
+
+The field’s _on_ and _off_ labels are not intended for display to users, but you can get them via the fields service:
+
+::: code
+```twig
+{% set field = craft.app.fields.getFieldByHandle('myLightswitchField') %}
+
+{{ entry.myLightswitchField ? field.onLabel : field.offLabel }}
+```
+```php
+$field = Craft::$app->getFields()->getFieldByHandle('myLightswitchField');
+
+echo $entry->myLightswitchField ? $field->onLabel : $field->offLabel;
+```
+:::
+
+::: tip
+`onLabel` and `offLabel` are the literal strings stored in project config; if you wish to localize them (as the control panel does), you must pass them through the [`site` translation category](../../system/sites.md#static-message-translations).
 :::
 
 ### Saving Lightswitch Fields
