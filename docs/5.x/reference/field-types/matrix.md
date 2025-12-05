@@ -32,11 +32,9 @@ During the Craft 5 upgrade, _Matrix blocks_ were converted to _entries_. [Fields
 
 Select from existing, globally-defined [entry types](../element-types/entries.md#entry-types), or create a new one on-the-fly.
 
-::: tip
 You can specify local overrides for each attached entry type’s **Name** and **Handle** by selecting **Settings** from a chip’s action <Icon kind="ellipses" /> menu. <Since ver="5.6.0" feature="Contextual entry type name and handle overrides" /> A pencil icon will be displayed in any entry type chip that has overrides.
 
 ![An entry type chip with a pencil icon indicating its name or handle have been overridden](../../images/fields-matrix-settings-entry-type-overrides.png)
-:::
 
 #### Groups <Since ver="5.8.0" feature="Grouped entry types in Matrix fields" />
 
@@ -67,7 +65,7 @@ The _maximum_ number of entries that can be created within the field. (Default i
 
 ### Versioning <Since ver="5.7.0" feature="Control over creation of revisions for nested entries in Matrix fields" />
 
-Nested entries using the _As inline-editable blocks_ [view mode](#view-mode) are “versioned” alongside their owner: when making a change directly within the context of the owner, Craft automatically creates [revisions](../../system/drafts-revisions.md) for both elements. However, revisions of the nested element are hidden, by default.
+Nested entries using the _As inline-editable blocks_ [view mode](#view-mode) are “versioned” alongside their owner: when making a change directly within the context of the owner, Craft automatically creates [revisions](../../system/drafts-revisions.md) for both elements. Those revisions are only exposed via the control panel; they are only returned in the front-end when explicitly requested (or as part of a preview request).
 
 The **Enable versioning for entries in this field** setting exposes the revisions menu and the **Notes** field in the sidebar, when editing a nested entry in its own screen.
 
@@ -76,10 +74,11 @@ The **Enable versioning for entries in this field** setting exposes the revision
 Choose how the nested elements are represented within the [field UI](#the-field):
 
   - **As cards**: Read-only [element cards](../../system/elements.md#chips-cards) that surface nested field data.
+  - **As card grid**: Similar to **As cards**, but cards are limited in width and arranged in a grid. <Since ver="5.9.0" feature="The dedicated card grid Matrix view mode" />
   - **As inline-editable blocks**: Manage nested entries as though they were part of the current element. In prior versions of Craft, this was the _only_ display option for Matrix fields.
   - **As an element index**: A simplified [element index](../../system/elements.md#indexes) with sorting, searching, and filtering controls.
 
-    When using the element index view mode, you can also allow authors to toggle between a card view and standard table view. Enabling the table view reveals controls for the columns that will be displayed, by default.
+    When using the element index view mode, you can enabled **Include Table View** to allow authors to toggle between the card view and the traditional table view. Enabling the table view reveals controls for the **Default Table Columns**, and the index’s **Default View Mode**.
 
 ### “New” Button Label
 
