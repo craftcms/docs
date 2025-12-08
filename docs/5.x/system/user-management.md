@@ -52,7 +52,7 @@ Suspended
 Inactive
 :   New users and users that have been explicitly deactivated are marked as **Inactive**. An inactive user cannot log in, reset their password, or reactivate their account.
 
-#### Special States
+### Special States
 
 Credentialed
 :   Craft has a special distinction for users who are able to log in _or could become able to log in_ under their own power. Any user that is either **Active** or **Pending** is considered **Credentialed**.
