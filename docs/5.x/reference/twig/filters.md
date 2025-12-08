@@ -701,7 +701,7 @@ public function actionSubmitData()
 Generating an HMAC uses your app’s [`securityKey` config setting](config5:securityKey), by default. If this setting changes between generating and validating a hash, it will fail!
 :::
 
-Attempting to validate a hash from non-default algorithm <Since ver="5.9.0" feature="Non-HMAC data-hashing algorithms in Twig" /> will always fail.
+Attempting to validate a hash from a non-default algorithm <Since ver="5.9.0" feature="Non-HMAC data-hashing algorithms in Twig" /> will always fail.
 Hashes from other algorithms can be checked by re-computing the them from your trusted data:
 
 ```twig
