@@ -55,7 +55,7 @@ CRAFT_ENVIRONMENT=dev
 # ...and comments!
 ```
 
-These values can be referenced in your config files by calling [App::env()](craft5:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The equivalent [`getenv()` Twig function](reference/twig/functions.md#getenv) uses `App::env()`, and is therefore fine to use in templates.
+These values can be referenced in your config files by calling [App::env()](craft5:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The [`getenv()` Twig function](reference/twig/functions.md#getenv) is a wrapper around our custom `App::env()` method, and therefore fine to use in templates.
 
 Craft doesn’t require your variables to follow any kind of naming convention, but it will automatically discover [some specific environment variables](#environment-overrides) for general and database settings.
 
@@ -82,7 +82,7 @@ PRIMARY_SITE_URL="https://${BASE_HOSTNAME}"
 GLOBAL_SITE_URL="https://global.${BASE_HOSTNAME}"
 ```
 
-Depending on your infrastructure, this may also be possible at other points in process of loading environment variables. The example above works thanks to `vlucas/phpdotenv`, the default `.env` file loader; Docker (and therefore DDEV) share this general syntax, but not all variables are available at each step as the container boots up—so interpolation is best left until this last stage. Earlier layers may allow interpolation to be escaped so that it is only evaluated by a later one:
+Depending on your infrastructure, this may also be possible at other points in process of loading environment variables. The example above works [thanks to `vlucas/phpdotenv`](https://github.com/vlucas/phpdotenv?tab=readme-ov-file#nesting-variables), the default `.env` file loader; Docker (and therefore DDEV) share this general syntax, but not all variables are available at each step as the container boots up—so interpolation is best left until this last stage. Earlier layers may allow interpolation to be escaped so that it is only evaluated by a later one:
 
 ```bash
 # Here, we escape the beginning interpolation token with a backslash (\):
