@@ -51,6 +51,7 @@ Function | Description
 [parseEnv](#parseenv) | Parses a string as an environment variable or alias.
 [plugin](#plugin) | Returns a plugin instance by its handle.
 [random](https://twig.symfony.com/doc/3.x/functions/random.html) | Returns a random value.
+[randomString](#randomstring) | Generates a string of random characters.
 [range](https://twig.symfony.com/doc/3.x/functions/range.html) | Returns a list containing an arithmetic progression of integers.
 [raw](#raw) | Wraps the given string in a `Twig\Markup` object to prevent it from getting HTML-encoded when output.
 [redirectInput](#redirectinput) | Outputs a hidden `redirect` input.
@@ -727,6 +728,38 @@ Returns a plugin instance by its handle, or `null` if no plugin is installed and
 ```twig
 {{ plugin('commerce').version }}
 ```
+
+## `randomString`
+
+Returns a series of 36 random characters from `a` through `z`.
+Pass a `length` to generate fewer or more characters.
+This is a wrapper around <craft5:craft\helpers\StringHelper::randomString()>, and in turn a feature of the [Stringy](https://github.com/voku/Stringy) API.
+
+```twig
+{% set rid = "toggle-#{randomString(8)}" %}
+
+{# -> "toggle-smqfsfgt" #}
+
+<button aria-controls="{{ rid }}">Toggle</button>
+
+<div id="{{ rid }}">
+  {{ entry.details }}
+</div>
+```
+
+::: warning
+The output of `randomString()` is **not** cryptographically secure, and does not guarantee uniqueness.
+Use `craft.app.security.generateRandomString()` if you need a true random value.
+:::
+
+While strings generated from the base character set (`a-z`) are generally safe to use as HTML `id`s, class names, and CSS identifiers; the extended character set includes symbols that should be [escaped](../../development/twig.md#manual-escaping) in most contexts.
+
+### Arguments
+
+The signature of `randomString()` is the same as its [helper function](craft5:craft\helpers\StringHelper::randomString()) in PHP:
+
+- **`length`** — An integer that determines the number of characters returned.
+- **`extendedChars`** — Whether to allow additional special characters, including uppercase letters, numbers, punctuation, etc.
 
 ## `raw`
 
