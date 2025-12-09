@@ -65,6 +65,13 @@ For most installations, the `.env` file is the only place where secrets should b
 Some platforms (especially those with ephemeral filesystems, like [Craft Cloud](https://craftcms.com/cloud)) provide a GUI for managing environment variables in lieu of using a `.env` file, and will automatically inject them when the server or process starts. `App::env()` is still the recommended method for retrieving environment variables set in this way.
 :::
 
+Once Craft has fully initialized and the current [site](system/sites.md) is known, it adds two additional environment variables: <Since ver="5.9.0" feature="$CRAFT_SITE and $CRAFT_SITE_UPPER variables" />
+
+| Variable Name | Value |
+| --- | --- |
+| `CRAFT_SITE` | The current site’s handle. |
+| `CRAFT_SITE_UPPER` | The current site’s handle, converted to `SNAKE_CASE`. |
+
 #### Nested Variables
 
 In your `.env` file, one variable can reference another:
@@ -75,7 +82,7 @@ PRIMARY_SITE_URL="https://${BASE_HOSTNAME}"
 GLOBAL_SITE_URL="https://global.${BASE_HOSTNAME}"
 ```
 
-Depending on your infrastructure, this may also be possible at other points in process of loading environment variables. The example above works thanks to `vlucas/phpdotenv`; Docker (and therefore DDEV) share this general syntax, but not all variables are available at each step as the container boots up—so interpolation is best left until this last stage. Earlier layers may allow interpolation to be escaped so that it is only evaluated by a later one:
+Depending on your infrastructure, this may also be possible at other points in process of loading environment variables. The example above works thanks to `vlucas/phpdotenv`, the default `.env` file loader; Docker (and therefore DDEV) share this general syntax, but not all variables are available at each step as the container boots up—so interpolation is best left until this last stage. Earlier layers may allow interpolation to be escaped so that it is only evaluated by a later one:
 
 ```bash
 # Here, we escape the beginning interpolation token with a backslash (\):
@@ -87,6 +94,8 @@ Craft does not know or indicate when substitutions have occurred—it only sees 
 ::: warning
 Variables with substitutions will only be written back into the environment when using one of the [mutable loaders](https://github.com/vlucas/phpdotenv?tab=readme-ov-file#immutability-and-repository-customization).
 :::
+
+[Control panel settings](#control-panel-settings) can also use interpolation.
 
 ### Entry Script
 
@@ -422,6 +431,14 @@ You may combine aliases and environment variables with additional path segments,
 ::: tip
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](extend/environmental-settings.md) to learn how.
 :::
+
+#### Interpolation <Since ver="5.9.0" feature="Nested interpolation of environment variables" />
+
+Environment variables can be used _anywhere_ in a string that is ultimately passed to <craft\helpers\App::env()> or <craft\helpers\App::parseEnv()>.
+For example, you could parameterize the subdomain portion of a group of [sites](system/sites.md) **Base URL** as `https://$SUBDOMAIN_CORPORATE.$DOMAIN_BASE/en` or `https://$SUBDOMAIN_B2B.$DOMAIN_BASE/en`.
+
+An additional syntax (similar to platform-dependent [nested variables](#nested-variables)) brings dynamic resolution to settings stored in project config—but instead of concatenating values, Craft evaluates references inside `${...}` as part of building the variable name itself.
+Combined with the special [`CRAFT_SITE_UPPER` variables](#env), you can make settings like **System Email Address** more reactive: `$MAILER_FROM_${CRAFT_SITE_UPPER}` would first flatten `${CRAFT_SITE_UPPER}` to something like `ACME_CORPORATE`, then look for the environment variable `MAILER_FROM_ACME_CORPORATE`. A request to a different site might end up trying to resolve the variable `MAILER_FROM_ACME_LABS` or `MAILER_FROM_ACME_B2B`.
 
 ### Templates and Modules
 
