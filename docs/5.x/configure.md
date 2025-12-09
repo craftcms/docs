@@ -70,7 +70,7 @@ Once Craft has fully initialized and the current [site](system/sites.md) is know
 | Variable Name | Value |
 | --- | --- |
 | `CRAFT_SITE` | The current site’s handle. |
-| `CRAFT_SITE_UPPER` | The current site’s handle, converted to `SNAKE_CASE`. |
+| `CRAFT_SITE_UPPER` | The current site’s handle, converted to `SCREAMING_SNAKE_CASE`. |
 
 #### Nested Variables
 
