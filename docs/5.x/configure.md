@@ -434,7 +434,7 @@ Plugins can add support for environment variables and aliases in their settings 
 
 #### Interpolation <Since ver="5.9.0" feature="Nested interpolation of environment variables" />
 
-Environment variables can be used _anywhere_ in a string that is ultimately passed to <craft\helpers\App::env()> or <craft\helpers\App::parseEnv()>.
+Environment variables can be used _anywhere_ in a string that is ultimately passed to <craft5:craft\helpers\App::env()> or <craft5:craft\helpers\App::parseEnv()>.
 For example, you could parameterize the subdomain portion of a group of [sites](system/sites.md) **Base URL** as `https://$SUBDOMAIN_CORPORATE.$DOMAIN_BASE/en` or `https://$SUBDOMAIN_B2B.$DOMAIN_BASE/en`.
 
 An additional syntax (similar to platform-dependent [nested variables](#nested-variables)) brings dynamic resolution to settings stored in project config—but instead of concatenating values, Craft evaluates references inside `${...}` as part of building the variable name itself.
