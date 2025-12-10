@@ -589,18 +589,25 @@ Take care to not leak sensitive environment variables into your HTML!
 
 ## `gql`
 
-Executes a GraphQL query against the full schema.
+Executes a [GraphQL](../../development/graphql.md) query against the full schema.
+
+::: tip
+While this can be useful for debugging GraphQL queries, most front-end templates should use [element queries](../../development/element-queries.md) to load data.
+GraphQL returns plain arrays and scalar values (instead of element objects), which means you won’t have access to any methods and getters on the results—or their fields’ data.
+:::
 
 ```twig
 {% set result = gql('{
   entries (section: "news", limit: 2, orderBy: "dateCreated DESC") {
-    postDate @formatDateTime (format: "Y-m-d")
+    postDate @formatDateTime(format: "Y-m-d")
     title
     url
-    ... on news_article_Entry {
+    typeHandle
+
+    ... on article_Entry {
       shortDescription
       featuredImage {
-        url @transform (width: 300)
+        url @transform(width: 300)
         altText
       }
     }
@@ -611,10 +618,13 @@ Executes a GraphQL query against the full schema.
   <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
   <p class="timestamp">{{ entry.postDate }}</p>
 
-  {% set image = entry.featuredImage[0] %}
-  <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
+  {% set image = entry.featuredImage[0] ?? null %}
+  {% if image %}
+    <img class="thumb" src="{{ image.url }}" alt="{{ image.altText }}">
+  {% endif %}
 
   {{ entry.shortDescription|markdown }}
+
   <p><a href="{{ entry.url }}">Continue reading…</a></p>
 {% endfor %}
 ```
