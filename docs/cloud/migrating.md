@@ -1,7 +1,7 @@
 # Moving a Project to Cloud
 
 ::: tip
-Be sure and review our [Getting Started with Craft Cloud](started.md) guide!
+Be sure and review our [Getting Started with Craft Cloud](getting-started.md) guide!
 :::
 
 This guide collects information from multiple other articles about making an existing project compatible with Craft Cloud.
