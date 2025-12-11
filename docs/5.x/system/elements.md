@@ -190,10 +190,13 @@ Each source also controls what columns are visible in the index, and its default
 </BrowserShot>
 
 ::: tip
-Custom sources are stored in [Project Config](project-config.md). The interface for conditions that involve specific elements (like an author) may appear differently than the equivalent [filter](#filters-and-columns), because the ID may not be stable between environments.
+Custom sources are stored in [project config](project-config.md).
+The interface for conditions that involve specific elements (like an author) may appear differently than the equivalent [filter](#filters-and-columns), because IDs are [not stable between environments](project-config.md#ids-uuids-and-handles).
 
-Instead of an element select field, you’ll see an [autosuggest input](project-config.md#secrets-and-the-environment).
+As an example, element select inputs are replaced by [autosuggest inputs](project-config.md#secrets-and-the-environment), so that the rule’s value can still be dynamic, despite being stored statically.
 :::
+
+Entries provide an additional level of source organization, called [pages](../reference/element-types/entries.md#pages).
 
 ### Filters and Columns
 

@@ -123,7 +123,7 @@ If you want your entries’ titles to _always_ be generated from a template (and
 Prior to Craft 5.5.0, this behavior was governed by two settings (**Show the Title field** and **Show the Title field?**), with no intermediate “default” option.
 :::
 
-You also have control over the labels used to identify your entries in chips and cards, with the **UI Label Format** setting. <Since ver="5.9.0" feature="Entry type UI label formats" />
+You also have control over the labels used to identify your entries in [chips and cards](../../system/elements.md#chips-cards), with the **UI Label Format** setting. <Since ver="5.9.0" feature="Entry type UI label formats" />
 
 ### Translation Settings
 
@@ -368,10 +368,14 @@ Entries in [channel](#channels) and [structure](#structures) sections can be mov
 When moving an entry, it’s important to note these behaviors:
 
 - If the new section is a structure, the entry will be placed at the root, according to its **Default Entry Placement** setting.
-- Drafts and revisions will be moved along with the entry and remain accessible, but only drafts that use an entry type that is allowed in the new section can be restored—same as if an entry type were _removed_ from a section.
+- [Drafts and revisions](../../system/drafts-revisions.md) will be moved along with the entry and remain accessible, but only drafts that use an entry type that is allowed in the new section can be restored—same as if an entry type were _removed_ from a section.
 - If the new section has a lower **Max authors** setting, author data will remain intact and produce a validation error when saved.
 - Authors who don’t have access to the new section will also be removed, the next time the entry is saved. Permissions are still checked based on the section, not authorship.
 - Singles will never appear as targets for moving an entry.
+
+::: tip
+You can also [copy and paste](#copying-entries) entries between compatible sections and [Matrix](../field-types/matrix.md) fields.
+:::
 
 ## Sources
 

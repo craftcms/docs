@@ -109,7 +109,7 @@ Each block has a menu that provides access to additional controls…
 <img src="../../images/fields-matrix-ui-actions.png" alt="A Matrix field’s action menu in an element form">
 
 ::: tip
-If multiple nested entries are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of them.
+If multiple nested entries are selected, the **Collapse**/**Expand**, **Disable**/**Enable**, and **Delete** options will apply to each of them.
 
 You can collapse inline Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
 
