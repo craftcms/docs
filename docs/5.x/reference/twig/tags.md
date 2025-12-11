@@ -127,7 +127,7 @@ The accepted duration units are defined by <craft5:craft\helpers\DateTimeHelper:
 - `year`(`s`)
 - `week`(`s`)
 
-If this parameter is omitted, your <config5:cacheDuration> config setting will be used to define the default duration.
+If this parameter is omitted, Craft uses the default <config5:cacheDuration>.
 
 #### `until`
 
@@ -169,7 +169,7 @@ Your template caches will automatically clear when any elements (entries, assets
 
 If you have any element _queries_ within the tags (e.g. a `craft.entries`), and you create a new element that should be returned by one of the queries, Craft will also be able to figure that out and clear the cache.
 
-You can also manually clear your template caches from the Utilities page, using the “Clear Caches” tool, or by using the `invalidate-tags/template` console command.
+You can also manually clear your template caches from <Journey path="Utilities, Clear Caches" />, or with the `invalidate-tags/template` console command:
 
 ```bash
 php craft invalidate-tags/template
