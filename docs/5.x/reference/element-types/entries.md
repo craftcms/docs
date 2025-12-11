@@ -45,7 +45,7 @@ Entry types have the following settings:
 - **Handle** — Uniquely identifies entries of this type in [templates](../../development/templates.md) and [queries](../../development/element-queries.md).
 - **Description** <Since ver="5.8.0" feature="Entry type descriptions" /> — A short explanation of what the entry type is used for. This is displayed in a tooltip when the entry type is selected elsewhere in the control panel.
 - **Icon** and **Color** — Choose a symbol and color to subtly distinguish entries of this type throughout the control panel.
-- **UI Label Format** <Since ver="5.9.0" feature="Entry type UI label formats" /> — Customize this entry type’s labels (used primarily on [element chips and cards](../../system/elements.md#chips--cards)).
+- **UI Label Format** <Since ver="5.9.0" feature="Entry type UI label formats" /> — Customize this entry type’s labels (used primarily on [element chips and cards](../../system/elements.md#chips--cards)). Use this to more accurately describe entries in the control panel, without also affecting titles.
 - **Title Translation Method** — In multi-site projects, choose how titles are localized.
 - **Default Title Format** — Entry titles can be set by the author or [dynamically defined](#dynamic-entry-titles) from other values via an [object template](../../system/object-templates.md).
 - **Show the Slug field** — As with titles, slugs can be manually or automatically generated.
