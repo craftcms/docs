@@ -66,6 +66,7 @@ Function | Description
 [template_from_string](https://twig.symfony.com/doc/3.x/functions/template_from_string.html) | Loads a template from a string.
 [ul](#ul) | Outputs an array of items as an unordered list.
 [url](#url) | Generates a URL.
+[uuid](#uuid) | Generates a UUID.
 
 ## `actionInput`
 
@@ -1086,4 +1087,22 @@ You can use the `url()` function for appending query string parameters and/or en
 {{ url('http://my-project.tld', 'foo=1', 'https') }}
 {# Output: "https://my-project.tld?foo=1" #}
 ```
+:::
+
+## `uuid`
+
+Generates a v4 UUID.
+
+```twig
+{{ uuid() }}
+{# -> 77b2b7f2-9ff2-450c-a2e8-d772fc8cdddc #}
+```
+
+UUIDs are generally _not_ safe for use as HTML `id`s or CSS identifiers.
+If you need a character-only string (and the exact format isn’t important), consider using [`randomString()`](#randomstring).
+
+The implementation of this function can be found in <craft5:craft\helpers\StringHelper::UUID()>.
+
+::: warning
+Avoid [caching](tags.md#cache) the output of `uuid()` if its value is used for customization or analytics, as the same value may be sent to multiple clients.
 :::
