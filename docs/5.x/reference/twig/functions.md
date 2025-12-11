@@ -866,7 +866,7 @@ Randomizes the order of the elements within an array.
 
 ## `siteUrl`
 
-Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ for creating URLs to pages on your site.
+Similar to [url()](#url), except _only_ for creating URLs to pages on your site.
 
 ```twig
 <a href="{{ siteUrl('company/contact') }}">Contact Us</a>
@@ -876,10 +876,10 @@ Similar to [url()](#url-path-params-scheme-mustshowscriptname), except _only_ fo
 
 The `siteUrl()` function has the following arguments:
 
-- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](../../development/twig.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-- **`siteId`** – The ID of the site that the URL should point to. By default the current site will be used.
+- **`path`** – The path that the resulting URL should point to on your site. It will be appended to the current site’s **Base URL**.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](../../development/twig.md#hashes) (e.g. `{ foo: 1, bar: 2 }`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL.
+- **`siteId`** – The ID of the site that the URL should point to, if different from the current site.
 
 ## `source`
 
@@ -1060,20 +1060,22 @@ The `ul()` function has the following arguments:
 
 ## `url`
 
-Returns a URL.
+Builds or modifies a URL.
 
 ```twig
 <a href="{{ url('company/contact') }}">Contact Us</a>
 ```
 
+The [`siteUrl()`](#siteurl) may be a better choice when generating internal URLs—particularly if you expect a template to be rendered in the control panel or from the command line.
+
 ### Arguments
 
 The `url()` function has the following arguments:
 
-- **`path`** – The path that the resulting URL should point to on your site. It will be appended to your base site URL.
-- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](../../development/twig.md#hashes) (e.g. `{foo:'1', bar:'2'}`).
-- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL or not. If not, then the scheme in your Site URL will be used; if so, then `https` will be used.
-- **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include “index.php”, disregarding the <config5:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s .htaccess file redirect.)
+- **`path`** –A path or absolute URL. _Paths_ are appended to the current site’s **Base URL**; _absolute URLs_ are adjusted according to additional arguments.
+- **`params`** – Any query string parameters that should be appended to the URL. This can be either a string (e.g. `'foo=1&bar=2'`) or a [hash](../../development/twig.md#hashes) (e.g. `{ foo: 1, bar: 2 }`).
+- **`scheme`** – Which scheme the URL should use (`'http'` or `'https'`). The default value depends on whether the current request is served over SSL.
+- **`mustShowScriptName`** – If this is set to `true`, then the URL returned will include `index.php`, disregarding the <config5:omitScriptNameInUrls> config setting. (This can be useful if the URL will be used by POST requests over Ajax, where the URL will not be shown in the browser’s address bar, and you want to avoid a possible collision with your site’s `.htaccess` file redirect.)
 
 Using the `url()` function has advantages over hard-coding URLs in your templates:
 
@@ -1083,8 +1085,9 @@ Using the `url()` function has advantages over hard-coding URLs in your template
 
 ::: tip
 You can use the `url()` function for appending query string parameters and/or enforcing a scheme on an absolute URL:
+
 ```twig
-{{ url('http://my-project.tld', 'foo=1', 'https') }}
+{{ url('http://my-project.tld', { foo: 1 }, 'https') }}
 {# Output: "https://my-project.tld?foo=1" #}
 ```
 :::
