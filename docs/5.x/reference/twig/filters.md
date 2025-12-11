@@ -360,6 +360,10 @@ If the passed-in value isn’t a valid number it will be returned verbatim:
 {# Output: oh hai #}
 ```
 
+::: warning
+[Money](../field-types/money.md) field values should be formatted with the [`money`](#money) filter.
+:::
+
 ## `date`
 
 Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object.
