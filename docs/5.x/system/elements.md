@@ -224,7 +224,9 @@ Use the **View** controls to switch back into structure mode on an index if you 
 
 ### Actions
 
-Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="action" /> icon in the footer (like _Delete_). Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
+Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="settings" /> icon in the footer (like _Delete_). Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
+
+Additional actions may be available on an individual element’s edit screen, under the action <Icon kind="ellipses" /> menu.
 
 ### In-line Editing <Badge text="New!" />
 
@@ -234,7 +236,7 @@ Not all fields are editable in-line, and some may have simplified controls or in
 
 ### Exporters
 
-Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button in the index footer displays all options, including any [custom exporters](../extend/element-exporter-types.md) registered by modules and plugins.
+Craft can export sets of elements to CSV, JSON, XML, <Since ver="5.9.0" feature="XLSX and YAML export formats">XLSX, or YAML</Since>. The **Export…** button in the index footer displays all options, including any [custom exporters](../extend/element-exporter-types.md) registered by modules and plugins.
 
 ### Modals & Contexts
 
