@@ -26,7 +26,7 @@ Plugins are also able to use addresses to store their own location data.
 
 ## Setup
 
-Address elements share a single field layout, which is managed in the control panel via <Journey path="Settings, Addresses" />.
+All address elements share a single field layout, which is managed in the control panel via <Journey path="Settings, Addresses" />.
 
 <BrowserShot url="https://my-project.ddev.site/admin/settings/addresses" :link="false">
 <img src="../../images/address-field-layout.png" alt="Screenshot of the address element field layout" />
@@ -34,13 +34,28 @@ Address elements share a single field layout, which is managed in the control pa
 
 ### Native and Custom Fields
 
-The address field layout has additional native (but optional) fields for a handful of useful attributes. Addresses—just like other element types—support custom fields for anything else you might need to store.
+The address field layout has additional native (but optional) fields for a handful of useful attributes:
 
-For compatibility and localization, core address components (aside from the Country Code) can’t be separated from one another in the field layout.
+- **Label** — An <Since ver="5.9.0" description="The label field on addresses can be made optional as of {product} {ver}">optional</Since> description of the address.
+- **Organization** — A text field for entering a business or entity name.
+- **Organization Tax ID** — Designed to hold an identifier for the legal entity represented by the address. Used by [Commerce](/commerce/5.x/) to aide in tax calculations.
+- **Full Name** — Associate the address with a name. As with [users](users.md), a single input is displayed, unless <config5:showFirstAndLastNameFields> is enabled.
+- **Latitude/Longitude** — A pair of inputs for latitude and longitude values. Craft does not use these, internally.
+
+Addresses—just like other element types—support [custom fields](../../system/fields.md) for anything else you might need to store.
+
+::: tip
+For compatibility and localization, core address components (aside from the **Country Code**) can’t be separated from one another in the field layout.
+The relevant fields for the given country are rendered wherever the **Address** field layout element is placed.
+:::
 
 ### Config Options
 
-You may set a default country for new addresses via the <config5:defaultCountryCode> setting.
+These settings affect authors’ (and front-end users’) experience with address elements:
+
+- **<config5:defaultCountryCode>** — Choose a default country for new addresses.
+- **<config5:showFirstAndLastNameFields>** — Determines whether the **Full Name** field is a single input, or split into **First Name** and **Last Name** inputs. Names are always stored as a single value, and split back out into first and last, as necessary.
+- **<config5:extraLastNamePrefixes>**, **<config5:extraNameSuffixes>**, and **<config5:extraNameSalutations>**,  — Additional ways to customize the built-in name parser.
 
 ### Copying Addresses <Since ver="5.7.0" feature="Copying addresses" />
 
