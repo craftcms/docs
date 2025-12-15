@@ -62,28 +62,34 @@ If [Dev Mode](config5:devMode) is enabled, an error report for the exception wil
 
 In some cases, you may want a URL to load a template, but its location in your `templates/` folder doesn’t agree with the URI (therefore bypassing step #4), or the URI itself is “dynamic” or parameterized.
 
-A good example of this is a yearly archive page, where you want a year to be one of the segments in the URL (e.g. `blog/archive/2018`). Creating a static route or template for every year would be impractical—instead, you can define a single route with placeholders for dynamic values:
+A good example of this is an “archive” browseable by year, controlled by a path segment in the URL (e.g. `blog/2025`).
+Remembering to create an entry, static route, or template each year would be impractical—instead, you can define a single route with placeholders for dynamic segments:
 
 ![Creating a New Route](../images/routing-creating-new-route.png)
 
 ### Creating Routes
 
-To create a new Route, go to <Journey path="Settings, Routes" /> and choose **New Route**. A modal window will appear where you can define the route settings:
+To create a new route, go to <Journey path="Settings, Routes" /> and choose **New route**. A modal window will appear where you can define the route settings:
 
 - What should the URI look like?
 - Which template should get loaded?
+- Which sites does the route apply to?
 
-The first setting can contain “tokens”, which represent a range of possible matches, rather than a specific string. (The `year` token, for example, represents four consecutive digits.) When you click on a token, Craft inserts it into the URI setting wherever the cursor is.
+The first setting can contain [tokens](#available-tokens), which represent a range of possible matches, rather than a specific string.
+The `year` token, for example, represents four consecutive digits.
+Tokens can be anywhere in a route, and do not need exclusive control over a path segment (i.e. `blog/daily-summary/{year}-{month}-{day}`).
+When you click on a token, Craft inserts it into the URI setting wherever the cursor is.
 
-If you want to match URIs that look like `blog/archive/2018`, type `blog/archive/` into the URI field and choose the `year` token.
+If you want to match URIs that look like `blog/2025`, type `blog/` into the URI field, then insert the `year` token.
 
 ::: tip
-Route URIs should _not_ begin with a slash (`/`).
+Route URIs should _not_ begin with a slash (`/`), and cannot contain query strings (`?`) or fragments (`#`).
 :::
 
-After defining your URI pattern and entering a template path, press **Save**. The modal will close, revealing your new route on the page.
+After defining your URI pattern and entering a template path, press **Save**.
+The modal will close, revealing your new route on the page.
 
-When you point your browser to `https://my-project.tld/blog/archive/2018`, it will match your new route, and Craft will load the specified template with value of the `year` token automatically available in a variable called `year`:
+When you point your browser to `https://my-project.tld/blog/2025`, it will match your new route, and Craft will render the specified template with a variable named `year`, corresponding to the token:
 
 ```twig
 {# Fetch posts in the specified `year`: #}
@@ -109,9 +115,12 @@ When you point your browser to `https://my-project.tld/blog/archive/2018`, it wi
 Routes automatically support [pagination](../reference/twig/tags.md#paginate), so this one route covers other URIs like `/blog/archive/2018/page/2` (assuming your <config5:pageTrigger> was `page/`). If you wanted to break the archive into smaller logical chunks, you could use additional [tokens](#available-tokens) to collect results by month—or even by day!
 :::
 
+The order of your routes is important!
+New routes are appended to this list, but can be dragged-and-dropped <Icon kind="move" /> into the desired order.
+
 ### Available Tokens
 
-The following tokens are available to the URI setting:
+The following tokens are available in the URI setting:
 
 - `*` – Any string of characters, except for a forward slash (`/`)
 - `day` – Day of a month (`1`-`31` or `01`-`31`)
@@ -124,9 +133,7 @@ The following tokens are available to the URI setting:
 - `year` – Four consecutive digits
 
 ::: tip
-If you define a route using a wildcard token (`*`) in the control panel, it will automatically be available as a named parameter called `any`.
-
-![Screenshot of Create a new route control panel form with wildcard token](../images/route-with-wildcard-token.png =400x300)
+If you define a route using a wildcard token (`*`) in the control panel, the captured value will automatically be available as a named parameter called `any`.
 
 The template for `my-project.tld/foo/some-slug` could then use `{{ any }}`:
 
@@ -138,7 +145,7 @@ It seems you’re looking for `{{ any }}`.
 
 ## Advanced Routing with URL Rules
 
-In addition to routes defined via the control panel, you can define [URL rules](guide:runtime-routing#url-rules) in `config/routes.php`.
+In addition to routes defined via the control panel, you can define [URL rules](guide:runtime-routing#url-rules) in `config/routes.php` that map to templates or [custom controllers](../extend/controllers.md):
 
 ```php
 return [
@@ -150,7 +157,8 @@ return [
 ];
 ```
 
-If your Craft installation has multiple sites, you can create site-specific URL rules by placing them in a sub-array, and set the key to the site’s handle. Craft will take care of determining the site’s base URL via this handle, so you don’t need to declare it as part of the route pattern itself.
+If your Craft installation has multiple sites, you can create site-specific URL rules by nesting them under a key corresponding to the site’s handle.
+Craft will take care of determining the site’s base URL via this handle, so you don’t need to declare it as part of the route pattern itself:
 
 ```php
 return [
@@ -160,7 +168,7 @@ return [
 ];
 ```
 
-A subset of the [tokens](#available-tokens) above can be used within the regular expression portion of your [named parameters](guide:runtime-routing#named-parameters):
+A subset of the [tokens](#available-tokens) above can be used in place of a regular expression in any [named parameter](guide:runtime-routing#named-parameters):
 
 - `{handle}` – matches a field handle, volume handle, etc.
 - `{slug}` – matches an entry slug, category slug, etc.
@@ -175,7 +183,8 @@ return [
 
 ### Accessing Named Parameters in your Templates
 
-URL rules that route to a template (`['template' => 'my/template/path']`) will pass any named parameters to the template as variables—just like CP-defined routes. For example, this rule…
+URL rules that route to a template (`['template' => 'my/template/path']`) will pass any named parameters to the template as variables—just like CP-defined routes.
+For example, this rule…
 
 ```php
 'blog/archive/<year:\d{4}>' => ['template' => 'blog/_archive'],
