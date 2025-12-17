@@ -110,7 +110,9 @@ Craft generates transforms for images used within emails prior to sending them. 
 
 ## Other Messages
 
-Plugins may create and send email messages outside of [system messages](#system-messages). For example, [Commerce](/commerce/5.x/README.md) provides a [user-configurable suite of messages](/commerce/5.x/system/emails.md) and status-based triggers, rather than defining messages in the global space. The mailer will use the **System Email**
+Plugins may create and send email messages outside of [system messages](#system-messages).
+For example, [Commerce](/commerce/5.x/README.md) provides a [user-configurable suite of messages](/commerce/5.x/system/emails.md) and status-based triggers, rather than defining messages in the global space.
+Craft’s mailer sends from the **System Email Address**, unless overridden by a plugin.
 
 ::: tip
 If you are unsure where an email is sent from (or how to edit it), check the system messages utility, then consult the documentation for any installed plugins.
