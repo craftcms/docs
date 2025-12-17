@@ -1,8 +1,8 @@
 <template>
   <span :class="{ 'since': true, 'since--with-highlight': $slots.default }">
-    <span v-if="$slots.default" class="since__highlight">
+    <mark v-if="$slots.default" class="since__highlight">
       <slot></slot>
-    </span>
+    </mark>
 
     <a
       class="since__label" 
@@ -84,6 +84,14 @@ export default {
 }
 
 .since__highlight {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    color: currentColor;
+    background-color: transparent;
+
+    /*
     &::before,
     &::after {
       display: inline-block;
@@ -109,5 +117,6 @@ export default {
       border-right-width: 1px;
       margin-left: 0.15em;
     }
+    */
 }
 </style>
