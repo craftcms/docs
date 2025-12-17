@@ -34,11 +34,7 @@ Entries fields have the following settings:
 
 - **Sources** — Which sections (or other entry index sources) the field should be able to relate entries from.
 - **Selectable Entries Condition** — Rules that determine which entries should be available for selection.
-- **Maintain Hierarchy** — When selecting from a _structure_ section, should the entries’ order and hierarchy be preserved?
-
-  ::: tip
-  This option is available only when the selected sources are all structures.
-  :::
+- **Maintain Hierarchy** — When selecting from a [structure section](../element-types/entries.md#structures), should the entries’ order and hierarchy be preserved? (This option is available only when _all_ the selected **Sources** are structures.)
 
   When **enabled**, the following options become available:
 
@@ -49,9 +45,12 @@ Entries fields have the following settings:
   - **Min Relations** — The minimum number of entries that must be selected when the field is marked as “required” in a field layout. (Default is no minimum.)
   - **Max Relations** — The maximum number of entries that can be selected. (Default is no maximum.)
   - **Default Entry Placement** — Whether new selections are prepended or appended to the existing relations.
-  - **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
-- **Show cards in a grid** — When using the **Cards** view mode, this setting allows cards to tile horizontally, as space allows.
+  - **View Mode** — How the related entries are displayed to authors (_List_, _Cards_, <Since ver="5.9.0" feature="The inline list and card grid view modes for relational fields">_Card grid_, or _Inline list_</Since>).
 - **“Add” Button Label** — The label that should be used on the field’s selection button.
+
+When a single source is selected, you can also configure these settings:
+
+- **Show the search input** — Allow authors to quick-search (and create) entries, without opening an element selector modal. <Since ver="5.8.0" feature="Quick-search support for relational fields" />
 
 ### Advanced Settings
 
@@ -120,7 +119,7 @@ $works = \craft\elements\Entry::find()
 
 ### Working with Entries Field Data
 
-If you have an element with an Entries field in your template, you can access its related entries using your Entries field’s handle:
+If you have an element with an entries field in your template, you can access its related entries using your entries field’s handle:
 
 ::: code
 ```twig
@@ -203,15 +202,42 @@ $relatedEntries = $entry->myFieldHandle
 ```
 :::
 
-::: tip
-<Todo notes="Extract this into a snippet." />
+Each time you access an entries field from an element, a new copy of its value is returned.
+This means that applying parameters _does not_ influence the original query, and you can always get the authoritative set of related entries by calling `.all()`:
 
-In Craft 3, we recommended cloning these query objects using the [`clone` keyword](https://www.php.net/manual/en/language.oop5.cloning.php) or [`clone()`](../twig/functions.md#clone) Twig function before applying params. **This is no longer required in Craft 4**, because a new copy of the query is returned each time you access the field property.
-:::
+```twig{12}
+{# Get a list of just organization(s): #}
+{% set orgsQuery = asset.documentSources
+  .type('org')
+  .all() %}
+
+{# Get a list of only individual people: #}
+{% set individualsQuery = asset.documentSources
+  .type('individual')
+  .all() %}
+
+{# Get everything, regardless of the type: #}
+{% set allSources = asset.documentSources.all() %}
+```
+
+Save the returned value to an intermediate variable if you need to refer to it again:
+
+```twig{1,5,8}
+{% set sourceQuery = asset.documentSources %}
+{% set sourceType = craft.app.request.getParam('sourceType') %}
+
+{% if sourceType is not empty and sourceType in ['org', 'individual', 'anonymous'] %}
+  {% do sourceQuery.type(sourceType) %}
+{% endif %}
+
+{% for source in sourceQuery.all() %}
+  {# ... #}
+{% endfor %}
+```
 
 ### Saving Entries Fields
 
-If you have front-end form for saving an element, that needs to contain an Entries field, you will need to submit your field value as a list of entry IDs, in the order you want them to be related.
+If you have front-end form for saving an element, that needs to contain an entries field, you will need to submit your field value as a list of entry IDs, in the order you want them to be related.
 
 For example, you could create a list of checkboxes for each of the possible relations:
 

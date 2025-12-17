@@ -196,7 +196,7 @@ The interface for conditions that involve specific elements (like an author) may
 As an example, element select inputs are replaced by [autosuggest inputs](project-config.md#secrets-and-the-environment), so that the rule’s value can still be dynamic, despite being stored statically.
 :::
 
-Entries provide an additional level of source organization, called [pages](../reference/element-types/entries.md#pages).
+Entries provide an additional level of source organization, called [pages](../reference/element-types/entries.md#pages). <Since ver="5.9.0" feature="Customizable entry source “pages”" />
 
 ### Filters and Columns
 

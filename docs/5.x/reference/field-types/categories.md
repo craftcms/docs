@@ -12,7 +12,7 @@ related:
 
 <div class="version-warning">
 
-Categories are being phased out in favor of [Structure sections](../element-types/entries.md#structures). The corresponding [entries field](entries.md) has a _maintain hierarchy_ setting that mimics categories fields.
+Categories are being phased out in favor of [structure sections](../element-types/entries.md#structures). The corresponding [entries field](entries.md) has a _maintain hierarchy_ setting that mimics categories fields.
 
 Read more about this [transition](https://craftcms.com/blog/entrification) on our blog.
 
@@ -38,10 +38,14 @@ Categories fields have the following settings:
   - **Min Relations** — The minimum number of categories that must be selected when the field is marked as “required” in a field layout. (Default is no minimum.)
   - **Max Relations** — The maximum number of categories that can be selected. (Default is no maximum.)
   - **Default Category Placement** — Whether new selections are prepended or appended to the existing relations.
-  - **View Mode** — How the related users are displayed to authors (_List_ or _Cards_).
+  - **View Mode** — How the related categories are displayed to authors (_List_, _Cards_, <Since ver="5.9.0" feature="The inline list and card grid view modes for relational fields">_Card grid_, or _Inline list_</Since>).
 
 - **“Add” Button Label** — The label that should be used on the field’s selection button.
 - **Validate related categories** — Whether or not validation errors on the related categories will be bubbled up.
+
+When a single source is selected, you can also configure these settings:
+
+- **Show the search input** — Allow authors to quick-search (and create) categories, without opening an element selector modal. <Since ver="5.8.0" feature="Quick-search support for relational fields" />
 
 ### Advanced Settings
 

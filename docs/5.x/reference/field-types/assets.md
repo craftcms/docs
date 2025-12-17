@@ -56,13 +56,15 @@ These settings are part of every relational field:
 - **Min Relations** – The _minimum_ number of assets that must be related to pass validation.
 - **Max Relations** – The _maximum_ number of assets that can be related to pass validation.
 - **Default Asset Placement** — Choose whether newly-attached assets are _prepended_ or _appended_ to the existing selection.
-- **View Mode** – How the field should appear for authors.
+- **View Mode** — How the related assets are displayed to authors (_List_, _Cards_, <Since ver="5.9.0" feature="The inline list and card grid view modes for relational fields">_Card grid_, or _Inline list_</Since>).
 - **“Add” Button Label** – The label that should be used on the field’s selection button.
 - **Validate related assets** — Whether or not validation errors on the related assets will be bubbled up.
 - **Preview Mode** — How this field’s values are displayed when included on element indexes.
-- Within the **Advanced** toggle, two additional options are available:
-  - **Allow self relations** — If this field is attached to an asset via a [volume field layout](../element-types/assets.md#volumes), should the author be allowed to create a circular reference?
-  - **Relate assets from a specific site?** — Lock relations to a single [site](#multi-site-settings).
+
+Within the **Advanced** toggle, two additional options are available:
+
+- **Allow self relations** — If this field is attached to an asset via a [volume field layout](../element-types/assets.md#volumes), should the author be allowed to create a circular reference?
+- **Relate assets from a specific site?** — Lock relations to a single [site](#multi-site-settings).
 
 #### Multi-Site Settings
 
