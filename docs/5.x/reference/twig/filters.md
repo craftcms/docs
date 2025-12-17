@@ -56,6 +56,7 @@ Filter | Description
 [indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [integer](#integer) | Coerces the passed value to an integer.
 [intersect](#intersect) | Returns the intersecting items of two arrays.
+[invoke](https://twig.symfony.com/doc/3.x/filters/invoke.html) | Calls a function, passing through any arguments.
 [join](https://twig.symfony.com/doc/3.x/filters/join.html) | Concatenates multiple strings into one.
 [json_decode](#json_decode) | JSON-decodes a value.
 [json_encode](#json_encode) | JSON-encodes a value.
