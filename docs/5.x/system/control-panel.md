@@ -283,7 +283,7 @@ In addition to global skip links, other parts of the control panel may include s
 #### Landmarks
 Landmarks have been incorporated into the control panel. These include:
 - **`main`:** This landmark contains the bulk of the page content. (See the **Tour** section on this page for more details.)
-- **`nav`:** Depending on the page you're on, there may be several navigaton landmarks. These include:
+- **`nav`:** Depending on the page, there may be several navigaton landmarks. These include:
   - **Primary navigation:** Available throughout the control panel, this navigation list contains links for the primary sections of the control panel (i.e., Settings, Entries, Dashboard, etc.)
   - **Breadcrumb navigation:** This is only available when working with nested content or settings.
   - **Secondary navigation:** This navigation list is only available on pages with nested content. Located inside the `main` landmark, its accessible name will change based on where you are in the control panel. For example, in the My Account area, it will be called "Account," while on the Entries or Assets pages it will be called "Sources."
@@ -291,7 +291,7 @@ Landmarks have been incorporated into the control panel. These include:
 ### User Preferences
 
 #### Display Settings
-- **Use shapes to represent statuses:** The control panel generally uses color-based badges to indicate statuses. Enabling this setting will change the badge shape depending on status, so status isn't indicated using color _alone_.
+- **Use shapes to represent statuses:** The control panel generally uses color-based badges to indicate statuses. Enabling this setting will change the badge shape depending on status, so status isn’t indicated using color _alone_.
 - **Underline links:** This setting adds underlines to all links inside the control panel.
 
 #### General Settings
