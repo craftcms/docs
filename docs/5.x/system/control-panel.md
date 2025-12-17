@@ -260,7 +260,7 @@ Craft has a powerful [search](searching.md) system that complements the [conditi
 
 ## Accessibility
 
-### Navigation
+### Navigating the control panel
 
 Skip links and landmarks have been incorporated throughout the control panel to make keyboard and screen reader navigation more straightforward.
 
@@ -281,15 +281,26 @@ In addition to global skip links, other parts of the control panel may include s
 - On element index pages, a **Skip to footer** link allows you to skip to the pagination and actions in the footer bar
 
 #### Landmarks
-
-### Alternative Text
-
-Image and video assets can have alternative text populate in the control panel when they use the Alternative Text native field.
+Landmarks have been incorporated into the control panel. These include:
+- **`main`:** This landmark contains the bulk of the page content. (See the **Tour** section on this page for more details.)
+- **`nav`:** Depending on the page you're on, there may be several navigaton landmarks. These include:
+  - **Primary navigation:** Available throughout the control panel, this navigation list contains links for the primary sections of the control panel (i.e., Settings, Entries, Dashboard, etc.)
+  - **Breadcrumb navigation:** This is only available when working with nested content or settings.
+  - **Secondary navigation:** This navigation list is only available on pages with nested content. Located inside the `main` landmark, its accessible name will change based on where you are in the control panel. For example, in the My Account area, it will be called "Account," while on the Entries or Assets pages it will be called "Sources."
 
 ### User Preferences
 
-#### Session Limits
+#### Display Settings
+- **Use shapes to represent statuses:** The control panel generally uses color-based badges to indicate statuses. Enabling this setting will change the badge shape depending on status, so status isn't indicated using color _alone_.
+- **Underline links:** This setting adds underlines to all links inside the control panel.
 
-#### Underlines
+#### General Settings
+- **Disable autofocus:** Some inputs inside the control panel use the `autofocus` attribute, so keyboard focus may move unexpectedly; these include search inputs on element index pages, and the first input on Edit screens or inside of slideouts. Enabling this setting will prevent this autofocus behavior.
 
-#### Status Icons
+#### Notification Settings
+Both **Duration** and **Position** of notification toasts can be managed.
+- **Notification Duration**: By default, notifications are only shown for 5 seconds before they disappear automatically. However, the duration can be increased to 10 seconds, or be shown indefinitely (with the option to close them manally).
+- **Notification Position**: Notifications toasts show on the bottom-left of the screen by default (when using an LTR orientation). This setting allows you to customize which corner of the screen they are placed.
+
+#### Slideout Position
+Slideout position can be changed to show on the left- or right-hand side of the screen.
