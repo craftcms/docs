@@ -25,6 +25,8 @@ Either way, individual addresses are always displayed as cards.
 
 You can also use the **Min Addresses** and **Max Addresses** settings to control how many addresses must (or _can_) be added to the field for the owner to validate.
 
+All addresses in the system use [a single field layout](../element-types/addresses.md#setup), managed via <Journey path="Settings, Addresses" />.
+
 ## Development
 
 Like Matrix and [relational fields](../../system/relations.md#fields), address field data is returned as an [element query](../../development/element-queries.md) (or an [element collection](../../development/collections.md#element-collections), when [eager-loaded](../../development/eager-loading.md)).
