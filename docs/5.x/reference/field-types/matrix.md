@@ -460,8 +460,8 @@ Then define the form inputs for any additional entries that should be appended t
 ```twig
 {{ hiddenInput('fields[myFieldHandle][sortOrder][]', 'new:1') }}
 
-{# Prefix the entry’s input names with `fields[myFieldHandle][blocks][new:1]` #}
-{% namespace "fields[myFieldHandle][blocks][new:1]" %}
+{# Prefix the entry’s input names with `fields[myFieldHandle][entries][new:1]` #}
+{% namespace "fields[myFieldHandle][entries][new:1]" %}
   {# This hidden `type` input will be expanded like the example above: #}
   {{ hiddenInput('type', 'text') }}
 
