@@ -14,6 +14,7 @@ Security in Craft Cloud environments follows the industry standard cloud shared 
     - Platform configuration
     - Service availability and stability
 
+
 - Customer’s Responsibilities:
     - Keep Craft CMS, plugins, and dependencies up to date, including the Craft Cloud extension
     - Manage application credentials securely
@@ -28,8 +29,8 @@ Craft Cloud’s infrastructure runs on industry-leading cloud providers that imp
 
 You can read more about their compliance and security policies here:
 
-- AWS: https://aws.amazon.com/compliance/
-- Cloudflare: https://www.cloudflare.com/trust-hub/compliance-resources/
+- AWS: [https://aws.amazon.com/compliance/](https://aws.amazon.com/compliance/)
+- Cloudflare: [https://www.cloudflare.com/trust-hub/compliance-resources/](https://www.cloudflare.com/trust-hub/compliance-resources/)
 
 ### Network Security and Segregation
 
