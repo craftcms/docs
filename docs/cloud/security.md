@@ -8,13 +8,15 @@ This document outlines the security principles, controls, and practices that gov
 
 Security in Craft Cloud environments follows the industry standard cloud shared responsibility model:
 
-- Craft Cloud’s responsibilities:
+### Craft Cloud’s responsibilities:
+  
   - Underlying infrastructure
   - Network security
   - Platform configuration
   - Service availability and stability
 
-- Customer’s Responsibilities:
+### Customer’s Responsibilities:
+
   - Keep Craft CMS, plugins, and dependencies up to date, including the Craft Cloud extension
   - Manage application credentials securely
   - Implement secure coding practices to prevent common vulnerabilities
