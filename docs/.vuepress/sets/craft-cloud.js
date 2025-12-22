@@ -78,6 +78,7 @@ module.exports = {
         children: [
           "faq",
           "troubleshooting",
+          "security",
         ],
       },
     ],
