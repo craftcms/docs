@@ -220,6 +220,7 @@ return [
 
                 // Full Redis connection details:
                 'redis' => [
+                    'class' => yii\redis\Connection::class,
                     'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
                     'port' => 6379,
                     'password' => App::env('REDIS_PASSWORD') ?: null,
@@ -444,6 +445,7 @@ return [
             'proxyQueue' => [
                 'class' => yii\queue\redis\Queue::class,
                 'redis' => [
+                    'class' => yii\redis\Connection::class,
                     'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
                     'port' => 6379,
                     'password' => App::env('REDIS_PASSWORD') ?: null,
