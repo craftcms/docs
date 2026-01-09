@@ -1,6 +1,7 @@
 <template>
   <div v-if="prev || next || relatedItems.length" class="content-wrapper">
-    <nav class="page-nav">
+    <nav class="page-nav" aria-labelledby="pagination-nav-label">
+      <span id="pagination-nav-label" hidden>Pagination</span>
       <div v-if="prev || next" class="p-4">
         <span v-if="prev" class="prev float-left">
           <span class="paging-arrow inline-block" aria-hidden="true">←</span>

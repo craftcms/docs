@@ -104,6 +104,7 @@
     &.active {
       @apply text-lg;
       color: var(--sidebar-active-link-color);
+      font-weight: 600;
 
       .home-icon {
         @apply inline-block;
