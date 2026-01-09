@@ -43,7 +43,7 @@
 | [limit](#limit)                                 | Determines the number of users that should be returned.
 | [notRelatedTo](#notrelatedto)                   | Narrows the query results to only users that are not related to certain other elements.
 | [offset](#offset)                               | Determines how many users should be skipped in the results.
-| [orderBy](#orderby)                             | Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
+| [orderBy](#orderby)                             | Determines the order that the users should be returned in. (If empty, defaults to `username ASC, users.active`.)
 | [preferSites](#prefersites)                     | If [unique()](https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-unique) is set, this determines which site should be selected when querying multi-site elements.
 | [prepForEagerLoading](#prepforeagerloading)     | Prepares the query for lazy eager loading.
 | [prepareSubquery](#preparesubquery)             | Prepares the element query and returns its subquery (which determines what elements will be returned).
@@ -1013,7 +1013,8 @@ $users = \craft\elements\User::find()
 
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-orderby" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
-Determines the order that the users should be returned in. (If empty, defaults to `username ASC`.)
+Determines the order that the users should be returned in. (If empty, defaults to `username ASC,
+    users.active`.)
 
 
 
