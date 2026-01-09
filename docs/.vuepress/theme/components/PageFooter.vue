@@ -57,8 +57,8 @@
       </li>
     </ul>
 
-    <div v-if="this.$page.frontmatter.containsGeneratedContent" class="text-sm opacity-75 text-center my-4">
-      Parts of this page are generated or assembled by automations. While we greatly appreciate contributions to the documentation, <a :href="getIssueUrl()" target="_blank" rel="noopener">reporting automated content issues</a> will allow us to fix them at the source!
+    <div v-if="this.$page.frontmatter.containsGeneratedContent" class="text-sm text-center my-4 footer-disclaimer">
+      Parts of this page are generated or assembled by automations. While we greatly appreciate contributions to the documentation, <a :href="getIssueUrl()" target="_blank" rel="noopener" class="underline">reporting automated content issues</a> will allow us to fix them at the source!
     </div>
 
     <div class="w-full flex justify-center xl:hidden">
@@ -108,6 +108,10 @@
     @apply inline-block relative mr-1 text-light-slate opacity-25;
     top: 2px;
   }
+}
+
+.footer-disclaimer {
+  color: var(--text-color-muted);
 }
 </style>
 
