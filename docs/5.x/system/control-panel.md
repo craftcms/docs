@@ -296,26 +296,37 @@ Global skip links are found at the beginning of each control panel screen.
 These include:
 
 - **Skip to main section:** Skips to the `main` container. This container includes the page header, which contains the page title and controls for the current screen.
-- **Skip to left sidebar:** <Since ver="5.7.0" /> Skips to the sub-navigation container (when using an LTR orientation). For example:
-  - On element index pages, this moves keyboard focus to the "Sources" menu.
-  - On account pages, this moves keyboard focus to the "Account" navigation.
+- **Skip to left sidebar:** <Since ver="5.7.0" /> Skips to the sub-navigation container. For example:
+  - On element index pages, this moves keyboard focus to the “Sources” menu.
+  - On account pages, this moves keyboard focus to the “Account” navigation.
 - **Skip to content:** <Since ver="5.7.0" /> Skips to the primary content pane on the page.
-- **Skip to right sidebar:** <Since ver="5.7.0" /> Skips to the details container (when using an LTR orientation), which includes page metadata.
+- **Skip to right sidebar:** <Since ver="5.7.0" /> Skips to the details container, which includes page metadata.
+
+::: tip
+The accessible names for the “left” and “right” sidebars respect your user’s language setting, and will flip when using a right-to-left script.
+:::
 
 Only links that point to a region used in the current screen are exposed in this list.
+In addition to global skip links, other parts of the control panel may include local skip links.
+For example, element index pages contain a **Skip to footer** link within the content region that jumps to pagination and bulk actions in the “footer” toolbar.
 
-In addition to global skip links, other parts of the control panel may include skip links.
-For example, element index pages contain a **Skip to footer** link that jumps to pagination and bulk actions in the “footer” bar.
+When saving an element, success and failure states are announced via a live region, and an error summary is added to the top of the content region:
+
+![Screenshot of the error summary at the top of an element edit screen, with jump links to each field with problems.](../images/accessibility-validation-errors.png)
+
+Each of the validation messages link to the field that they apply to.
+Jumping to an error may switch to a different tab in the field layout than is currently selected.
 
 #### Landmarks
 
-Special regions of the control panel are designated using [landmark roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/landmark_role). These include:
+Special regions of the control panel are designated using [roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/landmark_role). These include:
 
-- **`main`:** This landmark contains the bulk of the page content. 
-- **`nav`:** Depending on the page, there may be several navigation landmarks, including:
-  - **Primary navigation:** Links for the primary sections of the control panel, like **Settings**, **Entries**, **Dashboard**, and so on. Available on most screens.
-  - **Breadcrumb navigation:** Links to each parent, owner, and relevant organizational component (like a section or static route). Available only when working with [structures](../reference/element-types/entries.md#structures), [nested elements](../system/elements.md#nested-elements), or settings.
-  - **Secondary navigation:** Located inside the `main` landmark, the secondary navigation’s accessible name will change based on where you are in the control panel and what the links within it represent. For example, in the **My Account** screen, it is called _Account_; on the **Entries** or **Assets** element index it is called _Sources_.
+- **`main`** — This landmark contains the bulk of the page content.
+- **`nav`** — Depending on the page, there may be several navigation landmarks, including:
+  - **Primary navigation** — Links for the primary sections of the control panel, like **Dashboard**, **Entries**, **Settings**, and so on. Available on most screens.
+  - **Breadcrumb navigation** — Links to each parent, owner, and relevant organizational component (like a section or static route). Available only when working with [structures](../reference/element-types/entries.md#structures), [nested elements](../system/elements.md#nested-elements), or settings.
+  - **Secondary navigation** — Located inside the `main` landmark, the secondary navigation’s accessible name will change based on where you are in the control panel and what the links within it represent. For example, in the **My Account** screen, it is called _Account_; on the **Entries** or **Assets** element index it is called _Sources_.
+- **`status`** — A live region where [flashes](../development/forms.md#flashes) and other dynamic messages are injected.
 
 ::: tip
 See the [tour](#tour) section on this page for more information on each of these sections.
