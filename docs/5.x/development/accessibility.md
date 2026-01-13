@@ -123,6 +123,52 @@ IMG 4567
 For this reason, Craft _does not_ fall back to the title in the absence of explicit alternative text.
 Below, we cover [a few patterns](#alt-text-overrides) that make alternative text easier to maintain.
 
+#### Rich Text
+
+Inserting an image into a rich text editor may not automatically populate `alt` attributes.
+
+- **[Redactor](plugin:redactor)** — The editor has mislabled this as the image’s **Title**. Select an inserted image and pick **Edit** to open a modal.
+- **[CKEditor](plugin:ckeditor)** — Select an inserted image and pick the **Change image text alternative** button to add a description.
+
+Both plugins also support captions, which convert the image into `<figure>` and `<figcaption>` elements.
+
+### Video and captioning
+
+Craft also uses the native `alt` attribute for transcripts on video and audio.
+Transcripts are shown when previewing media in the control panel.
+
+There is currently no built-in support for time-based transcripts or closed captioning (in the control panel or front-end), but you are free to implement them via custom fields:
+
+```twig
+<video id="player" src="{{ asset.getUrl() }}">
+
+{# Assume `chapters` is a table field: #}
+<ul>
+  {% for chapter in asset.chapters %}
+    {% set ts = chapter.timestamp | integer %}
+    <li>
+      <button data-timestamp="{{ ts }}" title="Seek to {{ ts }} seconds">
+        {{ '%d:%02d' | format(ts // 60, ts % 60) }}
+      </button>
+      {{ chapter.description }}
+    </li>
+  {% endfor %}
+</ul>
+
+<script>
+  const $video = document.getElementById('player');
+  const $chapters = document.querySelectorAll('[data-timestamp]');
+
+  $chapters.forEach(function($chapter) {
+    $chapter.addEventListener('click', function(e) {
+      $video.currentTime = parseFloat($chapter.dataset.timestamp);
+    });
+  });
+</script>
+```
+
+Highlighting or announcing the currently-active chapter or timestamp requires additional scripting.
+
 ## Recipes
 
 ### `alt` text overrides
@@ -145,7 +191,7 @@ You have two options for applying local description overrides:
     }) }}
     ```
 
-1. **Encapsulate accessible image descriptions in a content block.**
+1. **Componentize descriptions with a content block.**
     If you wish to implement the same logic on a number of pages, it may make sense to encapsulate it in a [content block field](../reference/field-types/content-block.md):
 
     ![Screenshot of an entry edit screen, showing a content block field with nested image and description fields.](../images/accessibility-recipe-image-preview-block.png)
