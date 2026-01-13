@@ -42,6 +42,7 @@ module.exports = {
           "commands",
           "cron",
           "local-dev",
+          "rebrand-assets",
           "launch-checklist",
         ],
       },
