@@ -169,6 +169,24 @@ There is currently no built-in support for time-based transcripts or closed capt
 
 Highlighting or announcing the currently-active chapter or timestamp requires additional scripting.
 
+### Reference tags
+
+The [reference tag](../system/reference-tags.md) parser will call magic “getter” methods, so you can get a complete `<img>` element using a syntax like this:
+
+```
+{asset:1234:img}
+```
+
+### Markdown
+
+Craft’s Markdown parser supports [image tags](https://daringfireball.net/projects/markdown/syntax#img):
+
+```md
+![My alt text](/path/to/image.jpg)
+```
+
+You may include a hard-coded URL, or use a [reference tag](#reference-tags) to ensure it remains up-to-date.
+
 ## Recipes
 
 ### `alt` text overrides
