@@ -12,12 +12,12 @@ On Craft Cloud, we recommend explicitly setting `CRAFT_REBRAND_PATH` to a path w
 
 …then making sure that path is tracked in your git repository. Rebrand assets must be present when your project is deployed, and they cannot be uploaded to the control panel.
 
-If you use `@root/storage/rebrand` (and based your project on our `craftcms/craft` [starter project](/knowledge-base/using-the-starter-project)), you don't need to do anything else for Craft to pick up the icons—the `storage/rebrand/` folder is [already tracked](https://github.com/craftcms/craft/blob/5.x/storage/.gitignore) and will be available in the image we build and deploy.
+If you use `@root/storage/rebrand` (and based your project on our `craftcms/craft` [starter project](/knowledge-base/using-the-starter-project)), you don’t need to do anything else for Craft to pick up the icons—the `storage/rebrand/` folder is [already tracked](https://github.com/craftcms/craft/blob/5.x/storage/.gitignore) and will be available in the image we build and deploy.
 
 Otherwise, you may need to relocate your assets so they agree with this path. Test your configuration locally by setting `CRAFT_REBRAND_PATH` in your `.env` file!
 
 ::: tip
-Prefix the path with `@root` to ensure it's within your project directory.
+Prefix the path with `@root` to ensure it’s within your project directory.
 :::
 
 After changing one or more environment variables, Console will remind you to start a [deployment](deployment.md) to apply the configuration.
