@@ -9,7 +9,7 @@
             :title="`${label} in the Glossary`"
             v-text="label"></a>
 
-        <InfoHud>
+        <InfoHud :activateLabel="triggerLabel">
             <template v-if="loaded">
                 <h3 class="glossary-term-heading" v-text="this.term.title"></h3>
                 <div class="glossary-term-content theme-default-content" v-html="this.term.summaryHtml"></div>
@@ -121,7 +121,10 @@ export default {
         },
         apiUrl() {
             return `${CRAFTCOM_BASE_URL}/api/glossary/${this.slug}`;
-        }
+        },
+        triggerLabel() {
+            return `Open definition for “${this.label}”`;
+        },
     },
     mounted() {},
     data() {
