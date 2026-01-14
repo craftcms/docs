@@ -149,6 +149,8 @@ user=www-data
 group=www-data
 ; Sometimes required for other packages that rely on `getcwd()`:
 directory=/var/www
+; Allow more time before issuing a kill signal:
+stopwaitsecs=300
 ```
 :::
 
