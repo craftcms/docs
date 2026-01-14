@@ -92,12 +92,11 @@ This might be a perfectly acceptable way to handle icons attached to [categories
   src: myAsset.getUrl(),
   height: myAsset.getHeight(),
   width: myAsset.getWidth(),
-  role: 'none',
-  aria: {
-    hidden: true,
-  },
+  alt: '',
 }) }}
 ```
+
+The [W3C `alt` Decision Tree](https://www.w3.org/WAI/tutorials/images/decision-tree/) is a great resource for deciding what an appropriate alternative text should be.
 
 </Block>
 
@@ -120,7 +119,7 @@ IMG 4567
 ```
 :::
 
-For this reason, Craft _does not_ fall back to the title in the absence of explicit alternative text.
+For this reason, Craft _does not_ attempt to repair a missing `alt` attribute by falling back to the title in the absence of explicit alternative text. Generic or irrelevant alt text is also a barrier for screen reader users, and one that can be difficult to identify without a manual accessibility audit. Instead, we leave the `alt` attribute off entirely so the image can be flagged by automated accessibility tests.
 Below, we cover [a few patterns](#alt-text-overrides) that make alternative text easier to maintain.
 
 #### Rich Text
