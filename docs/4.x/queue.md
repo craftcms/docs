@@ -125,6 +125,7 @@ User=www-data
 Group=www-data
 # Sometimes required for other packages that rely on `getcwd()`:
 WorkingDirectory=/var/www
+# The command we want to daemonize:
 ExecStart=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 # Only restart after unexpected failures:
 Restart=on-failure
@@ -141,6 +142,7 @@ WantedBy=multi-user.target
 ; Use the process number in its name (required when using `numprocs`):
 process_name=%(program_name)s_%(process_num)02d
 numprocs=4
+; The command we want to daemonize:
 command=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 ; User + Group should agree with HTTP processes:
 user=www-data
