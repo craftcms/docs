@@ -123,6 +123,8 @@ Requires=mysql.service
 # User + Group should agree with HTTP processes:
 User=www-data
 Group=www-data
+# Sometimes required for other packages that rely on `getcwd()`:
+WorkingDirectory=/var/www
 ExecStart=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 # Only restart after unexpected failures:
 Restart=on-failure
@@ -143,6 +145,8 @@ command=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 ; User + Group should agree with HTTP processes:
 user=www-data
 group=www-data
+; Sometimes required for other packages that rely on `getcwd()`:
+directory=/var/www
 ```
 :::
 
