@@ -154,10 +154,12 @@ stopwaitsecs=300
 ```
 :::
 
+The `TimeoutStopSec` and `stopwaitsecs` settings in the examples above should agree with (or exceed) [your queue’s `ttr`](config/app.md#queue), so that currently-running jobs may complete and the runner may exit gracefully when the process manager sends a `TERM` signal. At the end of that window (if the queue has not voluntarily exited), the process manager sends a `KILL` signal and may interrupt the queue in the middle of a task. This safeguard relies on the [`pcntl` PHP extension](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.3/en/retryable), which is _not_ a core Craft [requirement](requirements.md), and may need to be enabled by your host.
+
 ::: warning
 Long-running processes must be restarted to pick up code and schema changes after a deployment or migration!
 
-To register your newly created service, the process manager itself may need to be restarted, or specifically told to look for new configuration.
+To register your newly created (or updated) service, the process manager itself may need to be restarted, or specifically told to look for new configuration.
 :::
 
 Your process manager also has commands for interacting with the service:
