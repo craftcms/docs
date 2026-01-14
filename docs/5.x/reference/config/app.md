@@ -334,6 +334,8 @@ The `session` component should only be overridden from `app.web.php` so it gets 
 
 #### Redis Example
 
+To use Redis for session storage, install [yii2-redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis) and replace your `session` component with `yii\redis\Session::class`, providing connection details to its nested `redis` property:
+
 ```php
 // config/app.web.php
 <?php
@@ -530,7 +532,9 @@ We only need to replace the driver, using the component’s nested `mutex` prope
 
 #### Redis Example
 
-Like the [session](#session), [cache](#cache), and [queue](#queue), the mutex component can take advantage of a Redis connection:
+Like the [session](#session), [cache](#cache), and [queue](#queue), the mutex component can take advantage of a Redis connection.
+
+Install the [yii2-redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis) package and replace your `mutex` component’s nested `mutex` property with `yii\redis\Mutex::class`, along with a complete connection object:
 
 ```php
 <?php
