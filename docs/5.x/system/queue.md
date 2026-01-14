@@ -145,9 +145,9 @@ command=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 ; User + Group should agree with HTTP processes:
 user=www-data
 group=www-data
-# Sometimes required for other packages that rely on `getcwd()`:
+; Sometimes required for other packages that rely on `getcwd()`:
 directory=/var/www
-# Allow more time before issuing a kill signal:
+; Allow more time before issuing a kill signal:
 stopwaitsecs=300
 ```
 :::
