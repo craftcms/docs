@@ -283,6 +283,10 @@ Craft has built-in support for one-time passwords via your favorite authenticato
 
 If a user loses access to their <abbr title="Time-based, one-time password">TOTP</abbr> provider, they can use one of the recovery codes generated at the time it was set up.
 
+::: tip
+In development environments, you can globally disable two-factor authentication checks with the <config5:disable2fa> setting—either via `general.php`, or temporarily by adding a `CRAFT_DISABLE_2FA=true` [environment override](../configure.md#environment-overrides).
+:::
+
 ### Passkeys
 
 Individual users can elect to log in with a [Passkey](https://fidoalliance.org/passkeys/). To configure a passkey, visit your user’s account screen via the menu in the upper-right corner of the control panel, then choose **Passkeys**.
