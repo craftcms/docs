@@ -203,7 +203,9 @@ sudo systemctl status "craft-queue-worker@*"
 sudo systemctl restart "craft-queue-worker@*"
 ```
 
-This is possible due to the `@` symbol at the end of our service unit file’s name. Note that the bash “range” syntax (`{1..4}`) is _not_ surrounded by quotes, but the “glob” patterns (`*`) _are_. This is critical for the system to be able to expand and map the commands to the appropriate service instances(s).
+This is possible due to the `@` symbol at the end of our service unit file’s name.
+Note that the bash-specific [expansion syntax](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion) (`{1..4}`) is _not_ surrounded by quotes, but the “glob” patterns (`*`) _are_.
+This is critical for the system to be able to expand and map the commands to the appropriate service instances(s).
 :::
 
 These setup instructions ensure your service is started whenever the host machine is rebooted, but it’s important to check your work! If your host allows, consider manually rebooting your machine and verifying that the queue is active.
