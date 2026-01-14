@@ -85,6 +85,7 @@ return [
             $config = [
                 'class' => yii\redis\Cache::class,
                 'redis' => [
+                    'class' => yii\redis\Connection::class,
                     // ... Redis connection configuration
                 ],
             ];
@@ -220,6 +221,7 @@ return [
 
                 // Full Redis connection details:
                 'redis' => [
+                    'class' => yii\redis\Connection::class,
                     'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
                     'port' => 6379,
                     'password' => App::env('REDIS_PASSWORD') ?: null,
@@ -233,7 +235,7 @@ return [
 ```
 
 ::: warning
-If you are also using Redis for [session](#session-redis) storage or the [queue](#queue), you should [set a unique `database`](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/api/2.0/yii-redis-connection#$database-detail) for each component’s connection to prevent inadvertently flushing important data!
+If you are also using Redis for [session](#session-redis) storage, [mutex](#mutex-redis), or the [queue](#queue), you should [set a unique `database`](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/api/2.0/yii-redis-connection#$database-detail) for each component’s connection to prevent inadvertently flushing important data!
 :::
 
 ### Database
@@ -332,6 +334,8 @@ The `session` component should only be overridden from `app.web.php` so it gets 
 
 #### Redis Example
 
+To use Redis for session storage, install [yii2-redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis) and replace your `session` component with `yii\redis\Session::class`, providing connection details to its nested `redis` property:
+
 ```php
 // config/app.web.php
 <?php
@@ -349,6 +353,7 @@ return [
 
             // Define additional properties:
             $config['redis'] = [
+                'class' => yii\redis\Connection::class,
                 'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
                 'port' => 6379,
                 'password' => App::env('REDIS_PASSWORD') ?: null,
@@ -362,7 +367,7 @@ return [
 ```
 
 ::: warning
-If you are sharing a Redis server between multiple components, you should [set a unique `database`](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/api/2.0/yii-redis-connection#$database-detail) for each one.
+If you are also using Redis for the [cache](#cache-redis), [mutex](#mutex-redis), or the [queue](#queue), you should [set a unique `database`](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/api/2.0/yii-redis-connection#$database-detail) for each component’s connection to prevent inadvertently flushing important data!
 :::
 
 #### Database Example
@@ -444,6 +449,7 @@ return [
             'proxyQueue' => [
                 'class' => yii\queue\redis\Queue::class,
                 'redis' => [
+                    'class' => yii\redis\Connection::class,
                     'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
                     'port' => 6379,
                     'password' => App::env('REDIS_PASSWORD') ?: null,
@@ -499,7 +505,7 @@ return [
 
             $config = [
                 'class' => craft\mutex\Mutex::class,
-                // Alter just this nested property of the main mutex component:
+                // Swap out the default database driver:
                 'mutex' => [
                     'class' => yii\mutex\FileMutex::class,
                     'fileMode' => $generalConfig->defaultFileMode,
@@ -518,7 +524,49 @@ return [
 The specific properties that you can (or must) use in the configuration object will differ based on the specified mutex class—check the driver’s documentation for instructions.
 
 ::: warning
-The primary mutex _component_ should always be an instance of <craft5:craft\mutex\Mutex>. We’re only modifying the existing `mutex` component’s nested _driver_ property and leaving the rest of its config as-is!
+The primary mutex _component_ should always be an instance of <craft5:craft\mutex\Mutex>.
+We only need to replace the driver, using the component’s nested `mutex` property.
+:::
+
+<a name="mutex-redis"></a>
+
+#### Redis Example
+
+Like the [session](#session), [cache](#cache), and [queue](#queue), the mutex component can take advantage of a Redis connection.
+
+Install the [yii2-redis](https://www.yiiframework.com/extension/yiisoft/yii2-redis) package and replace your `mutex` component’s nested `mutex` property with `yii\redis\Mutex::class`, along with a complete connection object:
+
+```php
+<?php
+
+use craft\helpers\App;
+
+return [
+    'components' => [
+        'mutex' => function() {
+            // Build a new configuration object:
+            $config = [
+                'class' => craft\mutex\Mutex::class,
+                'mutex' => [
+                    'class' => yii\redis\Mutex::class,
+                    'redis' => [
+                        'class' => yii\redis\Connection::class,
+                        'hostname' => App::env('REDIS_HOSTNAME') ?: 'localhost',
+                        'port' => 6379,
+                        'password' => App::env('REDIS_PASSWORD') ?: null,
+                    ],
+                ],
+            ];
+
+            // Return the initialized component:
+            return Craft::createObject($config);
+        }
+    ],
+];
+```
+
+::: warning
+If you are also using Redis for the [cache](#cache-redis), [session](#session-redis) storage, or the [queue](#queue), you should [set a unique `database`](https://www.yiiframework.com/extension/yiisoft/yii2-redis/doc/api/2.0/yii-redis-connection#$database-detail) for each component’s connection to prevent inadvertently flushing important data!
 :::
 
 ## Modules
@@ -536,6 +584,11 @@ return [
     'bootstrap' => ['my-module'],
 ];
 ```
+
+::: tip
+Using the generator to scaffold a module will attempt to insert this configuration into `app.php` for you.
+If it can’t, instructions for modifying it manually are output to the console.
+:::
 
 ## Requests + Responses <Since ver="5.3.0" feature="CORS and headers filters" />
 
