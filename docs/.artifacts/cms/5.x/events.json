@@ -5821,7 +5821,7 @@
     {
         "class": "craft\\controllers\\UsersController",
         "name": "EVENT_DEFINE_EDIT_SCREENS",
-        "type": "craft\\controllers\\DefineEditUserScreensEvent",
+        "type": "craft\\events\\DefineEditUserScreensEvent",
         "desc": "The event that is triggered when defining the screens that should be shown for the user being edited."
     },
     {
