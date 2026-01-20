@@ -243,6 +243,7 @@ module.exports = {
             "development/eager-loading",
             "development/image-transforms",
             "development/forms",
+            "development/accessibility",
             "development/graphql",
             "development/collections",
           ]

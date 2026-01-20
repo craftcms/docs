@@ -55,6 +55,15 @@ export default {
     background-color: #e7c000;
   }
 
+  &.default {
+    @apply bg-transparent leading-none h-auto;
+
+    border-width: 1px;
+    border-color: var(--border-color);
+    color: var(--sidebar-link-color);
+    padding: 4px calc(4px - 0.1em) 4px 5px;
+  }
+
   /* Custom Badge Types */
 
   &.verb {
