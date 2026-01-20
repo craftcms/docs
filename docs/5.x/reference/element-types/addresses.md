@@ -591,7 +591,7 @@ To edit an existing address, we’ll use the `addressUid` parameter from our rou
 
 Addresses are validated like any other type of element, but some of the rules are dependent upon its localized format.
 
-You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), but additional validation of any address properties requires a [custom plugin or module](../../extend/README.md).
+You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), or directly manipulate validation rules using a [custom plugin or module](../../extend/README.md).
 
 ::: tip
 Take a look at the [Using Events in a Custom Module](kb:custom-module-events) article for a dedicated primer on module setup and events.
@@ -620,6 +620,33 @@ Event::on(
 ```
 
 Errors are available through the same `address.getErrors()` method used in other action and [model validation examples](../../development/forms.md#models-and-validation), regardless of whether they were produced by built-in rules or ones you added.
+
+This same pattern can also be used to _unset_ validation rules that you don’t need (but may have been imposed by the [address repository](#address-repository)).
+Your handler function might look something like this:
+
+```php
+function(DefineRulesEvent $event) {
+    $event->rules = array_filter(
+        $event->rules,
+        function($rule) {
+            // Keep/ignore all rules except those having to do with the “state:”
+            if ($rule[0] !== 'administrativeArea') {
+                return true;
+            }
+
+            // Does this rule do something other than mark it as required?
+            if ($rule[1] !== 'required') {
+              return true;
+            }
+
+            // Ok, filter out this rule:
+            return false;
+        }
+    );
+}
+```
+
+In this example, we are only removing a single rule (one that would be written `['administrativeArea', 'required']`), but others may remain that ensure the selected value is valid _when provided_.
 
 ## Querying Addresses
 
