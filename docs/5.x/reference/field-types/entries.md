@@ -56,7 +56,7 @@ When a single source is selected, you can also configure these settings:
 
 Additional settings are available under the **Advanced** toggle:
 
-- **Allow self relations** — Whether the current entry (with this field) should be allowed to select itself as a relation.
+- **Allow self relations** — If this field is added to an entry type field layout, should the author be allowed to select the entry they are editing as a relationship to itself?
 
 ### Multi-Site Settings
 

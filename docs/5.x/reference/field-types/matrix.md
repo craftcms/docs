@@ -39,7 +39,7 @@ You can specify local overrides for each attached entry type’s **Name** and **
 #### Groups <Since ver="5.8.0" feature="Grouped entry types in Matrix fields" />
 
 Entry types are organized into named _groups_.
-Groups affect the structure of the **+ Add …** menu, for authors.
+Groups affect the structure of the menu (or menus, when horizontal space allows <Since ver="5.9.0" feature="Separate menus for each entry type group in Matrix fields" />) displayed to authors.
 
 ![Adding and organizing entry types in a Matrix field](../../images/fields-matrix-settings-entry-type-groups.png)
 
@@ -49,7 +49,7 @@ Choose how nested entries are propagated to other sites. This applies only to _n
 
 ### Site Settings <Badge text="New!" />
 
-Nested entries can have their own URIs and templates.
+Nested entries can have their own URLs and templates.
 
 ::: tip
 Incorporate the owner’s URI in a nested element by using `{owner.uri}` in its **URI Format** [object template](../../system/object-templates.md)!
@@ -71,16 +71,29 @@ The **Enable versioning for entries in this field** setting exposes the revision
 
 ### View Mode <Badge text="New!" />
 
+![The “view mode” setting on a Matrix field](../../images/fields-matrix-settings-view-mode.png)
+
 Choose how the nested elements are represented within the [field UI](#the-field):
 
-  - **As cards**: Read-only [element cards](../../system/elements.md#chips-cards) that surface nested field data.
-  - **As card grid**: Similar to **As cards**, but cards are limited in width and arranged in a grid. <Since ver="5.9.0" feature="The dedicated card grid Matrix view mode" />
-  - **As inline-editable blocks**: Manage nested entries as though they were part of the current element. In prior versions of Craft, this was the _only_ display option for Matrix fields.
-  - **As an element index**: A simplified [element index](../../system/elements.md#indexes) with sorting, searching, and filtering controls.
+  - **Cards**: Read-only [element cards](../../system/elements.md#chips-cards) that surface nested field data.
+  - **Card grid**: Similar to **As cards**, but cards are limited in width and arranged in a grid. <Since ver="5.9.0" feature="The dedicated card grid Matrix view mode" />
+  - **Blocks**: Manage nested entries as though they were part of the current element. Historically, this was the _only_ display option for Matrix fields.
+  - **Index**: A simplified [element index](../../system/elements.md#indexes) with sorting, searching, and filtering controls.
+    This view mode includes additional options:
+      - **Include Table View**: Allow authors to toggle between the default card view and a traditional table view.
+        - **Default Table Columns**: Select which attributes and fields are visible when using the table mode. (To change what attributes are displayed on _cards_, refer to that entry type’s settings.)
+        - **Default View Mode**: Set the _default_ presentation of elements in the index. Authors can always switch between them, later.
 
-    When using the element index view mode, you can enabled **Include Table View** to allow authors to toggle between the card view and the traditional table view. Enabling the table view reveals controls for the **Default Table Columns**, and the index’s **Default View Mode**.
+::: warning
+Some settings were consolidated into **View Mode** controls in [5.9.0](repo:craftcms/cms/releases/tag/5.9.0). Prior, the **As cards** view mode had a nested setting that controlled whether the cards were stacked or presented in a grid.
+:::
 
 ### “New” Button Label
+
+::: tip
+This setting only applies when there is not enough horizontal space to display a button per [group](#groups) of entry types.
+When grouped, each button uses its group’s label.
+:::
 
 By default, the button authors use to create nested entries will be labeled **New entry**. You can override this label with one that better suits the intended content.
 
@@ -88,7 +101,8 @@ By default, the button authors use to create nested entries will be labeled **Ne
 
 The interface of a Matrix field depends on its selected [view mode](#view-mode). 
 
-Traditionally, Matrix fields have used the **As inline-editable blocks** view mode, which makes the nested entries appear as though they are a repeating or modular region the main element’s form. An empty Matrix field shows a single button, which will either immediately create a new nested entry (if there is only a single available entry type), or present a menu of entry types to select from:
+Traditionally, Matrix fields have used the **Blocks** view mode, which makes the nested entries appear as though they are a repeating or modular region the main element’s form.
+An empty Matrix field shows one or more buttons, which will either immediately create a new nested entry (if there is only a single available entry type), or present a menu of entry types to select from:
 
 ![An empty Matrix field’s entry types](../../images/fields-matrix-inline-empty.png)
 
