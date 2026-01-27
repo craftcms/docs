@@ -34,7 +34,7 @@ Content block fields cannot be nested within other content block fields, as the 
 If you need an arbitrarily-deep set of nested elements, consider the [Matrix](matrix.md) field.
 :::
 
-Nested fields can be selected as columns in their owners’ element indexes. <Since ver="5.9.0" feature="Content block fields in their owners’ element indexes" />
+Nested fields can be selected as columns in their owners’ [element indexes](../../system/elements.md#indexes) and [cards](../../system/elements.md#chips-cards). <Since ver="5.9.0" feature="Content block fields in their owners’ element indexes" />
 
 ### Generated Fields
 
