@@ -32,7 +32,7 @@ The most common way to customize your Craft project is by editing files in the [
 | [Routing](#url-rules) | `routes.php` | Custom HTTP routes.
 | [Application Configuration](#application-configuration) | `app.php`, `app.web.php`, `app.console.php` | Overrides for the root application and any of its [Components](https://www.yiiframework.com/doc/guide/2.0/en/concept-components).
 | Plugin Settings | `{plugin-handle}.php`, or other custom files | Consult the plugin’s documentation for specifics.
-| [Advanced](#advanced) | | Specific library options and/or behaviors that may be exposed in a non-standard way.
+| [Advanced](#advanced) | | Specific library options and/or behaviors that may be exposed in a non-standard way, like [Guzzle](#guzzle) or the Twig [sandbox environment](#twig-sandbox).
 
 ::: tip
 You may find other files in the `config/` folder, like `license.key` or the `project/` folder. Craft (and many plugins) will ask you to place config-adjacent files here, even if they don’t work in a consistent way.
@@ -515,6 +515,68 @@ The options defined here will be passed into new `GuzzleHttp\Client` instances. 
 To use a proxy for _all_ requests, set an [httpProxy](config4:httpProxy) in general config. This will get merged with the Guzzle configuration, and passed to the front-end for use by JavaScript, in the [control panel](../control-panel.md). Setting a proxy only in Guzzle’s config will not affect Ajax requests!
 :::
 
+#### Twig Sandbox <Since ver="4.17.0" feature="Twig sandbox rendering" />
+
+When <config4:enableTwigSandbox> is _on_, some templates (like [system messages](../mail.md#system-messages)) are rendered in a Twig environment governed by a strict security policy.
+
+You can customize this policy via a `twig-sandbox.php` config file, which is merged on top of [Craft’s defaults](repo:craftcms/cms/blob/4.x/src/config/twig-sandbox.php).
+
+```php
+<?php return [
+    'allowedTags' => [
+        // Additional Twig tags to allow ...
+    ],
+    'allowedFilters' => [
+        // Additional Twig filters to allow ...
+    ],
+    'allowedFunctions' => [
+        // Additional Twig functions to allow ...
+    ],
+    'allowedMethods' => [
+        // Keys are class names;
+        // Values are arrays of methods to allow;
+        craft\elements\Asset::class => [
+            'getUploader',
+        ],
+    ],
+    'allowedProperties' => [
+        // Same format as the above.
+    ],
+    'allowedClasses' => [
+        // Each item must be a fully-qualified class name.
+        // Beware: *all* methods and properties are implicitly allowed!
+        craft\web\twig\variables\CraftVariable::class,
+    ],
+];
+```
+
+Internally, Craft uses PHP [attributes](https://www.php.net/manual/en/language.attributes.overview.php) to flag classes, methods, and properties as [allowed](craft4:craft\web\twig\AllowedInSandbox), so they do not appear in the default config array.
+
+::: tip
+If you find that sandboxed rendering is too restrictive, try adding features to the security policy one-by-one, _before_ completely disabling it.
+:::
+
+
+#### HTML Purifier
+
+JSON files containing valid [HTML Purifier configuration](https://htmlpurifier.org/live/configdoc/plain.html) can be added to `config/htmlpurifier/`.
+
+When creating a [Redactor](https://plugins.craftcms.com/redactor/) or [CKEditor](https://plugins.craftcms.com/ckeditor/) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](../dev/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
+
+A simple config that scrubs everything but paragraph and anchor tags would look like this:
+
+```json
+{
+  "HTML.AllowedElements": "p, a",
+}
+```
+
+For security, any keys _not_ set will use their [defaults](https://github.com/ezyang/htmlpurifier/blob/master/plugins/phorum/config.default.php).
+
+::: tip
+Note that HTML Purifier expresses many options with dot notation, like `HTML.AllowedElements`. These are the literal keys, not an indication that keys should be nested!
+:::
+
 ### Custom Settings
 
 Settings defined in a `config/custom.php` file don’t map to or affect any built-in Craft features, but can useful to centralize data, flags, or secrets that otherwise don’t have a place to live.
@@ -553,26 +615,6 @@ $client->post('/donations', [
 
 ::: tip
 If these settings need to be changed frequently, edited by a control panel user, or don’t depend on the environment, they may be a better fit for a [Global Set](../globals.md).
-:::
-
-#### HTML Purifier
-
-JSON files containing valid [HTML Purifier configuration](https://htmlpurifier.org/live/configdoc/plain.html) can be added to `config/htmlpurifier/`.
-
-When creating a [Redactor](https://plugins.craftcms.com/redactor/) or [CKEditor](https://plugins.craftcms.com/ckeditor/) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](../dev/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
-
-A simple config that scrubs everything but paragraph and anchor tags would look like this:
-
-```json
-{
-  "HTML.AllowedElements": "p, a",
-}
-```
-
-For security, any keys _not_ set will use their [defaults](https://github.com/ezyang/htmlpurifier/blob/master/plugins/phorum/config.default.php).
-
-::: tip
-Note that HTML Purifier expresses many options with dot notation, like `HTML.AllowedElements`. These are the literal keys, not an indication that keys should be nested!
 :::
 
 <a id="php-constants"></a>

@@ -255,6 +255,32 @@ public function actionFoo(): Response
 
 <craft4:craft\web\Controller::renderTemplate()> calls <craft4:craft\web\View::renderPageTemplate()> internally, which ensures all registered assets are added to the rendered HTML—then it will set the `Content-Type` header on the response, based template’s extension, or `text/html` when a MIME type can’t be determined.
 
+#### Sandboxing <Since ver="4.17.0" feature="Sandboxed Twig template rendering" />
+
+Some plugins may need to render templates defined by a control panel user, as Craft does with [system messages](../mail.md#system-messages).
+
+Providing access to low-level Craft APIs in this way is effectively a form of [remote code execution](https://www.cloudflare.com/learning/security/what-is-remote-code-execution/) for trusted users; whenever possible, this should be restricted to administrators, or enabled via a specific [permission](user-permissions.md).
+
+Your implementation should _always_ process these templates via the special sandbox view methods:
+
+```php
+// Load template from a database record or project config:
+$notification = Automator::getInstance()->getNotifications()->getActivityNotification();
+
+// Render safely via the sandbox environment:
+$message = Craft::$app->getView()->renderSandboxedString($notification->template, [
+    'user' => $user,
+]);
+```
+
+To render a regular, on-disk template, use <craft4:craft\web\View::renderSandboxedTemplate()>; to render an [object template](../system/object-templates.md), use <craft4:craft\web\View::renderSandboxedObjectTemplate()>.
+
+If a developer has opted out of sandbox rendering for a project where your plugin is installed (using the <config4:enableTwigSandbox> setting), these methods silently fall back to normal rendering.
+
+::: warning
+Any user-space templates that your plugin provides by default (say, seeded during the [install migration](migrations.md#plugin-install-migrations)) should be fully compatible with sandboxed rendering.
+:::
+
 #### Registering Assets
 
 To register an asset for inclusion in a rendered page, call one of the <craft4:craft\web\View> methods:
