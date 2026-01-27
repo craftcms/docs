@@ -53,6 +53,9 @@ Administrators have access to a third “full” schema, for testing with the [G
 Schema customization is only possible with an admin account and <config5:allowAdminChanges> _on_.
 :::
 
+In addition to the content and mutation settings for each schema, you can opt in to support for the `@transform` and `@parseRefs` [directives](#list-of-available-directives).
+You may globally disable image transforms in GraphQL using the <config5:disableGraphqlTransformDirective> setting (this completely hides the option in the schema customization screen). <Since ver="5.9.0" feature="Per-schema control over availability of @transform and @parseRefs directives" />
+
 #### Generate Tokens
 
 A _token_ is required to use any non-public schema. Tokens use the standard “bearer” `Authorization` HTTP header:
