@@ -86,7 +86,7 @@ Values are still [queried](#querying-generated-field-values) and ordered as stri
 When used in a condition builder, you will only be able to use string operands (like “starts with…” or “contains…”).
 
 ::: tip
-Generated fields are not automatically displayed in edit screens, but they can be added to element [cards](#custom-card-attributes), output in a [template field layout element](fields.md#ui-elements), <Since ver="5.9.0" feature="Displaying generated fields as element index tables columns">and added as columns to [element indexes](#indexes)</Since>.
+Generated fields are not automatically displayed in elements’ edit screens, but they can be added to [cards](#custom-card-attributes), output in a [template field layout element](fields.md#ui-elements), <Since ver="5.9.0" feature="Displaying generated fields as element index tables columns">and added as columns</Since> to [element indexes](#indexes).
 :::
 
 #### Use Cases
