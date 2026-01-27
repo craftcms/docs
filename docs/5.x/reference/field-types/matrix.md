@@ -114,11 +114,11 @@ You can add as many nested entries to your Matrix field as you’d like (as long
 
 ### Actions
 
-Each block has a menu that provides access to additional controls…
+Each block (or card) has a menu that provides access to additional controls, depending on the context…
 
 ![A nested entry’s action menu](../../images/fields-matrix-ui-nested-entry-actions.png)
 
-…and the Matrix field itself includes options to **Collapse all blocks** <Since ver="5.8.0" feature="The “Collapse all blocks” action on Matrix fields" /> and **Copy all entries**:
+…and the Matrix field itself includes options to **Collapse all/selected blocks** <Since ver="5.8.0" feature="The “Collapse all blocks” action on Matrix fields" /> and **Copy all/selected entries**:
 
 <img src="../../images/fields-matrix-ui-actions.png" alt="A Matrix field’s action menu in an element form">
 
@@ -134,18 +134,18 @@ You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd
 
 ### Additional View Modes
 
-The **As cards** [view mode](#view-mode) provides many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips-cards). Double-click any card to edit its content in a slideout, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
+The **Cards** and **Cards grid** [view modes](#view-mode) provide many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips-cards). Double-click any card to edit its content in a slideout, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
 
 ![An newly-created nested entry, represented as a card](../../images/fields-matrix-cards-new.png)
 
-Finally, the **As an element index** view mode behaves just like a normal element index—except it only ever shows the entries owned by that field. This mode is perfect for large data sets that may span multiple pages, need to be sorted by nested fields, or that would otherwise be unwieldy as blocks or cards.
+Finally, the **Index** view mode behaves just like a normal element index—except it only ever shows the entries owned by that field. This mode is perfect for large data sets that may span multiple pages, need to be dynamically searched or sorted by nested fields, or that would otherwise be unwieldy as blocks or cards.
 
 ## Nesting Matrix Fields
 
 A Matrix field can include an entry type that has another Matrix field (or the same Matrix field) in its field layout. Those Matrix fields can use the same view mode, or different view modes, depending on how they’re composed. Take care when designing your authoring experience to avoid confusing or infinitely-recursive data structures.
 
 ::: tip
-The **As cards** and **As an element index** view modes always open nested entries in a slideout, which can be used to break up complex content models.
+The **Cards**, **Cards grid**, and **Index** view modes always open nested entries in a slideout, which can be used to break up complex content models.
 :::
 
 ## Development
@@ -232,6 +232,8 @@ Here’s an example of what the template might look like for a Matrix field that
   {% endif %}
 {% endfor %}
 ```
+
+Craft is aware of any overridden entry types handles and labels, so comparisons against `typeHandle` are specific to the context.
 
 ::: tip
 This code can be simplified using the [switch](../twig/tags.md#switch) tag.
