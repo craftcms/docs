@@ -121,6 +121,17 @@ Use the `--minor` or `--patch` flag when running `craft update` to update in fin
 :::
 
 As of Craft [5.9.0](repo:craftcms/cms/releases/tags/5.9.0), constraints are set using the caret (`^`) operator for better interoperability with direct [Composer](#composer) usage.
+The updater will _not_ update expired packages.
+
+If for any reason you end up with a set of installed packages outside what a license allows (say, by alternating between the built-in updater and Composer CLI), Craft will warn you when running `craft up`:
+
+```
+The following licensing issues were detected:
+- Commerce isn’t licensed to run version 5.5.1.
+- ...
+
+Continue anyway? (yes|no) [no]: 
+```
 
 ### Composer
 
@@ -159,6 +170,10 @@ The same applies when working with teammates! Any time you pull new code into a 
 ```
 
 This tells Composer that _after_ it has successfully installed packages from a lockfile (typically the result of running `composer install`), it should check if Craft is installed (`@php craft install/check`) and if so, run `craft up` non-interactively to apply migrations and project config. `|| exit 0` ensures that the command exits nominally, so as not to disrupt other processes that expect `composer install` to succeed.
+
+::: tip
+Running `craft up` will warn you before running migrations if there are licensing issues with the installed packages—say, as the result of using [Composer](#composer) directly. <Since ver="5.9.0" feature="Warnings about licensing issues when running `craft up`" />
+:::
 
 ## Licensing
 
