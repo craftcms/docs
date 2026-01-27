@@ -1812,6 +1812,47 @@ CRAFT_USE_FILE_LOCKS=false
 
 
 
+### `useIdnaNontransitionalToUnicode`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$useIdnaNontransitionalToUnicode](craft5:craft\config\GeneralConfig::$useIdnaNontransitionalToUnicode)
+
+Since
+:  5.9.0
+
+</div>
+
+Whether the [`IDNA_NONTRANSITIONAL_TO_UNICODE`](https://www.php.net/manual/en/intl.constants.php#constant.idna-nontransitional-to-unicode)
+flag should be passed to [idn_to_utf8()](https://www.php.net/manual/en/function.idn-to-utf8.php) when converting
+email addresses from IDNA ASCII to Unicode.
+
+`INTL_IDNA_VARIANT_UTS46` by default, which uses the UTS 46 algorithm, consistent with the requirements of the
+IDNA2008 protocol and mostly compatible with IDNA2003 (deprecated in PHP 7.2).
+
+There are a handful of characters which result in different resolution of IDNs between IDNA2008 and IDNA2003,
+including ß, ς, and joiner characters (ZWJ and ZWNJ). ([More info](https://unicode.org/reports/tr46/#Deviations))
+
+For example, `ß` will be converted to `ss` by default. Enabling this setting will ensure it gets preserved as `ß`.
+
+::: code
+```php Static Config
+->useIdnaNontransitionalToUnicode(true)
+```
+```shell Environment Override
+CRAFT_USE_IDNA_NONTRANSITIONAL_TO_UNICODE=true
+```
+:::
+
+
+
 ### `useIframeResizer`
 
 <div class="compact">
@@ -3414,6 +3455,37 @@ CRAFT_ENABLE_CSRF_PROTECTION=false
 
 
 
+### `enableTwigSandbox`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$enableTwigSandbox](craft5:craft\config\GeneralConfig::$enableTwigSandbox)
+
+Since
+:  5.9.0
+
+</div>
+
+Whether user-defined Twig templates should be sandboxed.
+
+::: code
+```php Static Config
+->enableTwigSandbox()
+```
+```shell Environment Override
+CRAFT_ENABLE_TWIG_SANDBOX=true
+```
+:::
+
+
+
 ### `invalidLoginWindowDuration`
 
 <div class="compact">
@@ -4336,14 +4408,14 @@ Allowed types
 :  [integer](https://php.net/language.types.integer)
 
 Default value
-:  `2000`
+:  `0`
 
 Defined by
 :  [GeneralConfig::$maxCachedCloudImageSize](craft5:craft\config\GeneralConfig::$maxCachedCloudImageSize)
 
 </div>
 
-The maximum dimension size to use when caching images from external sources to use in transforms. Set to `0` to never cache them.
+The maximum dimension size to use when caching images from external sources to use in transforms. Set to `0` to never cache them. Defaults to `0` as of 5.9.0. Earlier versions default to `2000`.
 
 ::: code
 ```php Static Config
@@ -4693,9 +4765,12 @@ Defined by
 Since
 :  3.6.0
 
+Deprecated
+:  in 5.9.0 <Icon kind="danger" style="color: var(--craft-red)" />
+
 </div>
 
-Whether the `transform` directive should be disabled for the GraphQL API.
+Whether the `@transform` directive should be disabled for the GraphQL API.
 
 ::: code
 ```php Static Config
@@ -4704,6 +4779,11 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 ```shell Environment Override
 CRAFT_DISABLE_GRAPHQL_TRANSFORM_DIRECTIVE=true
 ```
+:::
+
+::: tip
+As of Craft 5.9.0, the `@transform` directive can be optionally included for each GraphQL schema,
+unless this setting is set to `true`.
 :::
 
 
