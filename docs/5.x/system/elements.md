@@ -123,7 +123,7 @@ Binary Criteria
 Record-Keeping
 :   Track data over some period of time.
 
-    **Example:** Use the [`seq()` Twig function](../reference/twig/functions.md#seq) to increment a counter.
+    **Example:** Use the [`seq()` Twig function](../reference/twig/functions.md#seq) to increment a counter. (Note that this will increment every time an element is auto-saved!)
 
     ```twig
     {{ seq("entry-save-count:#{canonicalId}") }}
