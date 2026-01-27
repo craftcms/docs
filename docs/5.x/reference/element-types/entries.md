@@ -48,6 +48,7 @@ Entry types have the following settings:
 - **UI Label Format** <Since ver="5.9.0" feature="Entry type UI label formats" /> — Customize this entry type’s labels (used primarily on [element chips and cards](../../system/elements.md#chips--cards)). Use this to more accurately describe entries in the control panel, without also affecting titles.
 - **Title Translation Method** — In multi-site projects, choose how titles are localized.
 - **Default Title Format** — Entry titles can be set by the author or [dynamically defined](#dynamic-entry-titles) from other values via an [object template](../../system/object-templates.md).
+- **Allow line breaks in titles** — Display the title field as a multi-line input, and retain newline characters. Newlines are not rendered in the control panel, and must be decorated in the front-end using the `nl2br` filter or other logic. <Since ver="5.9.0" feature="Line breaks in titles" />
 - **Show the Slug field** — As with titles, slugs can be manually or automatically generated.
   - **Slug Translation Method** — In multi-site projects, choose how slugs are localized.
 - **Show the Status field** — Manually set each entry’s status, or allow it to be dictated by its usage.
