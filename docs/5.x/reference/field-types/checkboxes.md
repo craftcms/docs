@@ -1,9 +1,11 @@
 ---
 related:
+  - uri: lightswitch.md
+    label: Lightswitch fields (for storing a single true/false value)
   - uri: multi-select.md
-    label: Multi-select fields
+    label: Multi-select fields (for selecting multiple values)
   - uri: radio-buttons.md
-    label: Radio buttons fields
+    label: Radio buttons fields (for selecting one of many values)
 ---
 
 # Checkboxes Fields
@@ -109,10 +111,6 @@ foreach ($entry->myFieldHandle->options as $option) {
     // checked: $option->selected ? 'Yes' : 'No'
 }
 ```
-:::
-
-::: warning
-
 :::
 
 To see if any options are checked, use the [length](https://twig.symfony.com/doc/3.x/filters/length.html) filter or [empty](https://twig.symfony.com/doc/3.x/tests/empty.html) test (or the [count](https://www.php.net/manual/en/function.count.php) method in PHP):

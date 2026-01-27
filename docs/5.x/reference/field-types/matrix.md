@@ -32,16 +32,14 @@ During the Craft 5 upgrade, _Matrix blocks_ were converted to _entries_. [Fields
 
 Select from existing, globally-defined [entry types](../element-types/entries.md#entry-types), or create a new one on-the-fly.
 
-::: tip
 You can specify local overrides for each attached entry type’s **Name** and **Handle** by selecting **Settings** from a chip’s action <Icon kind="ellipses" /> menu. <Since ver="5.6.0" feature="Contextual entry type name and handle overrides" /> A pencil icon will be displayed in any entry type chip that has overrides.
 
 ![An entry type chip with a pencil icon indicating its name or handle have been overridden](../../images/fields-matrix-settings-entry-type-overrides.png)
-:::
 
 #### Groups <Since ver="5.8.0" feature="Grouped entry types in Matrix fields" />
 
 Entry types are organized into named _groups_.
-Groups affect the structure of the **+ Add …** menu, for authors.
+Groups affect the structure of the menu (or menus, when horizontal space allows <Since ver="5.9.0" feature="Separate menus for each entry type group in Matrix fields" />) displayed to authors.
 
 ![Adding and organizing entry types in a Matrix field](../../images/fields-matrix-settings-entry-type-groups.png)
 
@@ -51,7 +49,7 @@ Choose how nested entries are propagated to other sites. This applies only to _n
 
 ### Site Settings <Badge text="New!" />
 
-Nested entries can have their own URIs and templates.
+Nested entries can have their own URLs and templates.
 
 ::: tip
 Incorporate the owner’s URI in a nested element by using `{owner.uri}` in its **URI Format** [object template](../../system/object-templates.md)!
@@ -67,21 +65,35 @@ The _maximum_ number of entries that can be created within the field. (Default i
 
 ### Versioning <Since ver="5.7.0" feature="Control over creation of revisions for nested entries in Matrix fields" />
 
-Nested entries using the _As inline-editable blocks_ [view mode](#view-mode) are “versioned” alongside their owner: when making a change directly within the context of the owner, Craft automatically creates [revisions](../../system/drafts-revisions.md) for both elements. However, revisions of the nested element are hidden, by default.
+Nested entries using the _As inline-editable blocks_ [view mode](#view-mode) are “versioned” alongside their owner: when making a change directly within the context of the owner, Craft automatically creates [revisions](../../system/drafts-revisions.md) for both elements. Those revisions are only exposed via the control panel; they are only returned in the front-end when explicitly requested (or as part of a preview request).
 
 The **Enable versioning for entries in this field** setting exposes the revisions menu and the **Notes** field in the sidebar, when editing a nested entry in its own screen.
 
 ### View Mode <Badge text="New!" />
 
+![The “view mode” setting on a Matrix field](../../images/fields-matrix-settings-view-mode.png)
+
 Choose how the nested elements are represented within the [field UI](#the-field):
 
-  - **As cards**: Read-only [element cards](../../system/elements.md#chips-cards) that surface nested field data.
-  - **As inline-editable blocks**: Manage nested entries as though they were part of the current element. In prior versions of Craft, this was the _only_ display option for Matrix fields.
-  - **As an element index**: A simplified [element index](../../system/elements.md#indexes) with sorting, searching, and filtering controls.
+  - **Cards**: Read-only [element cards](../../system/elements.md#chips-cards) that surface nested field data.
+  - **Card grid**: Similar to **As cards**, but cards are limited in width and arranged in a grid. <Since ver="5.9.0" feature="The dedicated card grid Matrix view mode" />
+  - **Blocks**: Manage nested entries as though they were part of the current element. Historically, this was the _only_ display option for Matrix fields.
+  - **Index**: A simplified [element index](../../system/elements.md#indexes) with sorting, searching, and filtering controls.
+    This view mode includes additional options:
+      - **Include Table View**: Allow authors to toggle between the default card view and a traditional table view.
+        - **Default Table Columns**: Select which attributes and fields are visible when using the table mode. (To change what attributes are displayed on _cards_, refer to that entry type’s settings.)
+        - **Default View Mode**: Set the _default_ presentation of elements in the index. Authors can always switch between them, later.
 
-    When using the element index view mode, you can also allow authors to toggle between a card view and standard table view. Enabling the table view reveals controls for the columns that will be displayed, by default.
+::: warning
+Some settings were consolidated into **View Mode** controls in [5.9.0](repo:craftcms/cms/releases/tag/5.9.0). Prior, the **As cards** view mode had a nested setting that controlled whether the cards were stacked or presented in a grid.
+:::
 
 ### “New” Button Label
+
+::: tip
+This setting only applies when there is not enough horizontal space to display a button per [group](#groups) of entry types.
+When grouped, each button uses its group’s label.
+:::
 
 By default, the button authors use to create nested entries will be labeled **New entry**. You can override this label with one that better suits the intended content.
 
@@ -89,7 +101,8 @@ By default, the button authors use to create nested entries will be labeled **Ne
 
 The interface of a Matrix field depends on its selected [view mode](#view-mode). 
 
-Traditionally, Matrix fields have used the **As inline-editable blocks** view mode, which makes the nested entries appear as though they are a repeating or modular region the main element’s form. An empty Matrix field shows a single button, which will either immediately create a new nested entry (if there is only a single available entry type), or present a menu of entry types to select from:
+Traditionally, Matrix fields have used the **Blocks** view mode, which makes the nested entries appear as though they are a repeating or modular region the main element’s form.
+An empty Matrix field shows one or more buttons, which will either immediately create a new nested entry (if there is only a single available entry type), or present a menu of entry types to select from:
 
 ![An empty Matrix field’s entry types](../../images/fields-matrix-inline-empty.png)
 
@@ -101,16 +114,16 @@ You can add as many nested entries to your Matrix field as you’d like (as long
 
 ### Actions
 
-Each block has a menu that provides access to additional controls…
+Each block (or card) has a menu that provides access to additional controls, depending on the context…
 
 ![A nested entry’s action menu](../../images/fields-matrix-ui-nested-entry-actions.png)
 
-…and the Matrix field itself includes options to **Collapse all blocks** <Since ver="5.8.0" feature="The “Collapse all blocks” action on Matrix fields" /> and **Copy all entries**:
+…and the Matrix field itself includes options to **Collapse all/selected blocks** <Since ver="5.8.0" feature="The “Collapse all blocks” action on Matrix fields" /> and **Copy all/selected entries**:
 
 <img src="../../images/fields-matrix-ui-actions.png" alt="A Matrix field’s action menu in an element form">
 
 ::: tip
-If multiple nested entries are selected, the Collapse/Expand, Disable/Enable, and Delete options will apply to each of them.
+If multiple nested entries are selected, the **Collapse**/**Expand**, **Disable**/**Enable**, and **Delete** options will apply to each of them.
 
 You can collapse inline Matrix blocks by choosing the **Collapse** menu option or by double-clicking on a block’s title bar. When a block is collapsed, its title bar will show a preview of its content so you can still identify which block it is.
 
@@ -121,18 +134,18 @@ You can quickly select _all_ blocks by selecting one and pressing <kbd>Ctrl</kbd
 
 ### Additional View Modes
 
-The **As cards** [view mode](#view-mode) provides many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips-cards). Double-click any card to edit its content in a slideout, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
+The **Cards** and **Cards grid** [view modes](#view-mode) provide many of the same management tools, but the entries are represented as read-only [cards](../../system/elements.md#chips-cards). Double-click any card to edit its content in a slideout, or use the “Move” icon (<icon kind="move" />) to drag them into a new order.
 
 ![An newly-created nested entry, represented as a card](../../images/fields-matrix-cards-new.png)
 
-Finally, the **As an element index** view mode behaves just like a normal element index—except it only ever shows the entries owned by that field. This mode is perfect for large data sets that may span multiple pages, need to be sorted by nested fields, or that would otherwise be unwieldy as blocks or cards.
+Finally, the **Index** view mode behaves just like a normal element index—except it only ever shows the entries owned by that field. This mode is perfect for large data sets that may span multiple pages, need to be dynamically searched or sorted by nested fields, or that would otherwise be unwieldy as blocks or cards.
 
 ## Nesting Matrix Fields
 
 A Matrix field can include an entry type that has another Matrix field (or the same Matrix field) in its field layout. Those Matrix fields can use the same view mode, or different view modes, depending on how they’re composed. Take care when designing your authoring experience to avoid confusing or infinitely-recursive data structures.
 
 ::: tip
-The **As cards** and **As an element index** view modes always open nested entries in a slideout, which can be used to break up complex content models.
+The **Cards**, **Cards grid**, and **Index** view modes always open nested entries in a slideout, which can be used to break up complex content models.
 :::
 
 ## Development
@@ -219,6 +232,8 @@ Here’s an example of what the template might look like for a Matrix field that
   {% endif %}
 {% endfor %}
 ```
+
+Craft is aware of any overridden entry types handles and labels, so comparisons against `typeHandle` are specific to the context.
 
 ::: tip
 This code can be simplified using the [switch](../twig/tags.md#switch) tag.

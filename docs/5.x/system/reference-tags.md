@@ -52,7 +52,7 @@ Curly braces (`{}`) surround the entire tag, with segments separated by colons (
 Element types provided by plugins may offer their own reference handles. Check the element type’s static `refHandle()` method, or [generate an example tag](#generating-tags) from an element index.
 :::
 
-### Examples
+## Examples
 
 The following are all valid reference tag formats:
 

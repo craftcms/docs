@@ -56,6 +56,7 @@ Filter | Description
 [indexOf](#indexof) | Returns the index of a given value within an array, or the position of a passed-in string within another string.
 [integer](#integer) | Coerces the passed value to an integer.
 [intersect](#intersect) | Returns the intersecting items of two arrays.
+[invoke](https://twig.symfony.com/doc/3.x/filters/invoke.html) | Calls a function, passing through any arguments.
 [join](https://twig.symfony.com/doc/3.x/filters/join.html) | Concatenates multiple strings into one.
 [json_decode](#json_decode) | JSON-decodes a value.
 [json_encode](#json_encode) | JSON-encodes a value.
@@ -360,6 +361,10 @@ If the passed-in value isn’t a valid number it will be returned verbatim:
 {# Output: oh hai #}
 ```
 
+::: warning
+[Money](../field-types/money.md) field values should be formatted with the [`money`](#money) filter.
+:::
+
 ## `date`
 
 Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) object.
@@ -660,41 +665,69 @@ Groups items in an array by the results of an arrow function.
 
 ## `hash`
 
-Prefixes the given string with a keyed-hash message authentication code (HMAC), for passing data in plain view (i.e. via front-end forms) that must not be tampered with.
+Generates a hash of the passed string.
+The default behavior uses Craft’s built-in data hashing service, which prepends a [keyed-hash message authentication code](https://en.wikipedia.org/wiki/HMAC) (HMAC) to the input.
+
+This is primarily intended to pass data in plain view (i.e. via front-end forms) that must not be tampered with.
 
 ```twig
-{{ hiddenInput('foo', 'bar'|hash) }}
+{{ hiddenInput('foo', '!!!qux'|hash) }}
+{# -> <input type="hidden" name="foo" value="3c672d401a486334511baf27d9c717dad0f27d7bebc890895f3b15c4b3f6edd3!!!qux"> #}
 ```
 
-PHP scripts can validate the value via [Security::validateData()](yii2:yii\base\Security::validateData()):
+::: danger
+**Do not hash sensitive data.** Hashed values are tamper-proof, but still expose the original value!
+Hashes are **not** a suitable alternative to CSRF tokens or authentication.
+:::
+
+In a plugin or module, you can validate the value via [Security::validateData()](yii2:yii\base\Security::validateData()):
 
 ```php
 $foo = Craft::$app->getRequest()->getBodyParam('foo');
 $foo = Craft::$app->getSecurity()->validateData($foo);
 
 if ($foo !== false) {
-    // $foo is valid!
+    // $foo was not tampered with!
 }
 ```
 
-::: danger
-**Do not hash sensitive data.** Hashed values are tamper-proof, but still expose the original value!
-:::
-
-[Request::getValidatedBodyParam()](craft5:craft\web\Request::getValidatedBodyParam()) can also perform this comparison in a controller, automatically throwing an error when it finds a missing or invalid value:
+[Request::getValidatedBodyParam()](craft5:craft\web\Request::getValidatedBodyParam()) can be used in a [controller](../../extend/controllers.md) to automatically throw an exception on missing or invalid values:
 
 ```php
 public function actionSubmitData()
 {
     $foo = Craft::$app->getRequest()->getValidatedBodyParam('foo');
 
-    // $foo is valid!
+    // $foo is present and valid!
 }
 ```
 
 ::: warning
-Hashing data uses your app’s [`securityKey` config setting](config5:securityKey), by default. If this setting changes between generating and validating a hash, it will fail!
+Generating an HMAC uses your app’s [`securityKey` config setting](config5:securityKey), by default. If this setting changes between generating and validating a hash, it will fail!
 :::
+
+Attempting to validate a hash from a non-default algorithm <Since ver="5.9.0" feature="Non-HMAC data-hashing algorithms in Twig" /> will always fail.
+Hashes from other algorithms can be checked by re-computing the them from your trusted data:
+
+```twig
+{% if craft.app.request.getQueryParam('contentChecksum') != entry.myTextContentField|hash('md5') %}
+  The content of this page has changed since the link was shared.
+{% endif %}
+```
+
+#### Arguments
+
+`algo` <Since ver="5.9.0" feature="Arbitrary data-hasing algorithms in Twig" />
+:   The hashing algorithm to use.
+    Check the output of the `hash_algos()` function on your system for a complete list of supported algorithms.
+
+    ```twig
+    {{ 'My string'|hash('sha256') }}
+    {# -> 3f9a07d83c604dba400d13df4d34566b78338804f0b3181d4e02089fe4daa7b0 #}
+
+    {{ 'My string'|hash('md5') }}
+    {# -> a537d002d4b595d99b7a2a9db4dfa2ff #}
+    ```
 
 ## `httpdate`
 

@@ -52,7 +52,7 @@ Suspended
 Inactive
 :   New users and users that have been explicitly deactivated are marked as **Inactive**. An inactive user cannot log in, reset their password, or reactivate their account.
 
-#### Special States
+### Special States
 
 Credentialed
 :   Craft has a special distinction for users who are able to log in _or could become able to log in_ under their own power. Any user that is either **Active** or **Pending** is considered **Credentialed**.
@@ -262,6 +262,50 @@ Keep in mind that permissions issues are dealt with differently than [validation
 ### Querying by Permissions
 
 You can look up users with a given permission using the [`can()` method](../reference/element-types/users.md#can) on a user query. To find users belonging to a specific group, use the [`group()` method](../reference/element-types/users.md#group).
+
+### Customizing Authorization
+
+Any time Craft checks a user’s capabilities in the context of a specific [element](elements.md), it emits a number of [events](../extend/events.md).
+If the built-in permissions (combined with field layout conditions) are not granular enough to enforce your editorial workflow, you can design arbitrarily complex checks in code.
+
+In a [custom module](../extend/module-guide.md), listen for any of the <craft5:craft\base\Element> `EVENT_AUTHORIZE_*` events, and set the <craft5:craft\events\AuthorizationCheckEvent::$authorized> property to `true` when your criteria are met.
+
+```php
+use craft\elements\Entry;
+use craft\services\Elements;
+use craft\events\AuthorizationCheckEvent;
+
+Event::on(
+    Entry::class,
+    Elements::EVENT_AUTHORIZE_SAVE,
+    function(AuthorizationCheckEvent $e) {
+        // Make sure the system says they’re capable of this:
+        if (!$e->element->canSave($e->user)) {
+          return;
+        }
+
+        // Is the entry part of a section we care about?
+        $section = $e->element->getSection();
+
+        if (!$section || $section->handle !== 'classifieds') {
+          return;
+        }
+
+        // Ok, they have the relevant permissions.
+        // Let’s see if they've accepted the terms of service:
+        if (!$e->user->acceptedTos) {
+          $e->authorized = false;
+        }
+    }
+);
+```
+
+::: warning
+Setting `true` _or_ `false` in a handler shortcuts Craft’s internal checks, and the user’s real system permissions are never evaluated.
+Avoid setting either value until you are absolutely certain a user should (or should not) be permitted to perform an action.
+:::
+
+Permissions violations can result in confusion and lost data, so your criteria should be stable and well-communicated: in the front-end, this might mean hiding or disabling a link to an entry form so that the user learns about account limitations _prior_ to entering data.
 
 ## Preferences
 

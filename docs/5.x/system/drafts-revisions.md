@@ -73,6 +73,11 @@ To avoid issues when rendering drafts in live preview, [templates](../developmen
 ```
 :::
 
+#### Explicit Validation <Since ver="5.8.0" feature="The explicit element validation action" />
+
+Authors can explicitly validate an element without publishing (as though it were live), using the **Validate [Type]** action menu item on any element’s edit screen.
+The page will reload and display any validation failures, and a global success or failure notification.
+
 ### Change Tracking
 
 Fields that have been modified in a draft are recorded in the database and marked in the editor with a status badge. These fields’ values are protected against automatic [merging](#merging-changes) of changes from the canonical element.
@@ -85,7 +90,11 @@ When a draft is viewed in the control panel, Craft merges in any changes from th
 
 Each user is only allowed one _provisional_ draft per canonical element, but can create any number of _saved_ drafts. If you need to stash provisional changes, press the **Create a draft** button.
 
-Use the **Edit draft settings** item in the action menu next to the **Save* button to give your draft a name. This helps you and any collaborators identify a draft by more than its number and creator. You can also add **Notes** to most elements, in the sidebar; these are copied into the [revision](#revisions) when the draft is eventually merged.
+Use the **Edit draft settings** item in the action menu next to the **Save** button to give your draft a name. This helps you and any collaborators identify a draft by more than its number and creator. You can also add **Notes** to most elements, in the sidebar; these are copied into the [revision](#revisions) when the draft is eventually merged.
+
+::: warning
+Users with the **View/Edit/Delete other users’ drafts** [permissions](user-management.md#permissions) may have access to your saved drafts.
+:::
 
 ## Nested Elements
 
@@ -97,19 +106,23 @@ Nested entries are sometimes *not* drafts and *not* canonical. We carefully filt
 
 ## Revisions
 
-In the process of saving an element (or in technical terms, applying a [draft](#drafts) to a canonical element), Craft copies the canonical element into a derivative, called a _revision_. Support for revisions (and the number of revisions each element can have) depends on the element type and [configuration](config5:maxRevisions). 
+In the process of saving an element (or in technical terms, applying a [draft](#drafts) to a canonical element), Craft copies the canonical element into a derivative, called a _revision_.
+Support for revisions (and the number of revisions each element can have) depends on the element type and [configuration](config5:maxRevisions). 
 
 Revisions ensure that edits to an element are both auditable and recoverable. An element’s revisions can be viewed via the menu in its breadcrumbs:
 
 ![The drafts + revisions menu among an entry’s breadcrumbs in the Craft control panel](../images/drafts-revisions-menu.png)
 
-Selecting a revision takes you to a read-only version of the element’s edit screen, where you can **View** the previous state, or **Revert content from this revision**. If there are more than ten revisions for an element, a **View all revisions** button appears at the end of the menu, linking to a dedicated revisions browser. The “Current” revision displays the canonical element, or a provisional draft of it.
+Selecting a revision takes you to a read-only version of the element’s edit screen, where you can **View** the previous state, or **Revert content from this revision**. If there are more than ten revisions for an element, a **View all revisions** button appears at the end of the menu, linking to a dedicated revisions browser. The “Current” revision displays the canonical element (or a provisional draft of it, if you have one).
 
 Restoring a revision copies its content (fields and attributes) into the canonical element.
 
 ::: warning
 Unlike merging upstream changes into a draft, restoring a revision _does not_ take into consideration which fields and attributes were changed in that particular revision; the entire revision effectively becomes the canonical version. Changes in other drafts are not replaced, but the next time a draft is loaded, Craft will merge in any compatible non-conflicting “changes” from the canonical element.
 :::
+
+When restoring a revision, the current state is saved as a _new_ revision—the element’s history is not just rewound to that point in time!
+A note is automatically added to the new canonical element, indicating where the changes came from.
 
 ## Vocabulary
 

@@ -1,11 +1,17 @@
 <template>
+  <span :class="{ 'since': true, 'since--with-highlight': $slots.default }">
+    <mark v-if="$slots.default" class="since__highlight">
+      <slot></slot>
+    </mark>
+
     <a
-      class="since" 
+      class="since__label" 
       :href="releaseUrl"
       :title="parsedDescription"
       target="_blank">
-        {{ ver }}<span class="plus">+</span>
-      </a>
+      {{ ver }}<span class="plus">+</span>
+    </a>
+  </span>
 </template>
 
 <script>
@@ -58,16 +64,59 @@ export default {
 
 <style lang="postcss" scoped>
 .since {
+  &--with-highlight {}
+}
+
+.since__label {
   @apply inline-block rounded-md py-1 px-1;
   background-color: var(--custom-block-bg-color);
-  border-color: var(--custom-block-border-color);
+  border-color: var(--border-color);
   font-size: 13px;
   vertical-align: super;
   line-height: 12px;
+  text-decoration: none !important;
 
   &:hover {
     background-color: var(--code-bg-color);
-    text-decoration: none;
   }
+
+  .since--with-highlight & {}
+}
+
+.since__highlight {
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    color: currentColor;
+    background-color: transparent;
+
+    /*
+    &::before,
+    &::after {
+      display: inline-block;
+      height: 1.3em;
+      width: 4px;
+      border-width: 1px 0;
+      border-radius: 3px;
+      border-color: currentColor;
+      opacity: 0.25;
+      position: relative;
+      bottom: -0.3em;
+      vertical-align: baseline;
+    }
+
+    &::before {
+      content: '';
+      border-left-width: 1px;
+      margin-right: 0.15em;
+    }
+
+    &::after {
+      content: '';
+      border-right-width: 1px;
+      margin-left: 0.15em;
+    }
+    */
 }
 </style>

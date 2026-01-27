@@ -1,6 +1,7 @@
 # Email
 
-Craft sends email in response to some user actions, like account activation, email verification, password resets, and testing [email settings](#settings). All Craft editions are capable of sending emails, but system messages are only customizable in **Pro**.
+Craft sends email in response to some user actions, like account activation, email verification, password resets, and testing [email settings](#settings).
+All Craft editions are capable of sending emails, but system messages are only customizable in **Pro**.
 
 Plugins may send email under other circumstances, either by registering a global [system message](#system-messages), or using [their own management tools](#other-messages).
 
@@ -18,12 +19,14 @@ You can view and edit the built-in (and plugin-provided) email messages by navig
 Click on any message to open a modal and edit its subject and body.
 
 ::: tip
-Running a [multi-site](sites.md) installation? You can customize system messages (and [mail settings](#settings)) on a per-site basis using the site selection menu in the upper-right corner of the message editor modal.
+Running a [multi-site](sites.md) installation?
+You can customize system messages (and [mail settings](#settings)) on a per-site basis using the site selection menu in the upper-right corner of the message editor modal.
 :::
 
 ### Twig
 
-The body of each system message is evaluated as a Twig template, then parsed as [Markdown](https://daringfireball.net/projects/markdown/). Subject lines may also include Twig.
+The body of each system message is evaluated as a Twig template, then parsed as [Markdown](https://daringfireball.net/projects/markdown/) (or [Github-flavored Markdown](https://github.github.com/gfm/), since 5.9.0).
+Subject lines can also include Twig.
 
 <See path="../development/twig.md" description="Get to know Twig, Craft’s template engine." />
 
@@ -64,10 +67,12 @@ Password Reset
 : - `link`: A tokenized password reset URL.
 
 ::: warning
-When outputting user-provided values (like a username, email, or [address](../reference/element-types/addresses.md)), always use the [escape](https://twig.symfony.com/doc/3.x/filters/escape.html) filter. You can see the shorter version (`|e`) in use in the template, above.
+When outputting user-provided values (like a username, email, or [address](../reference/element-types/addresses.md)), always use the [escape](https://twig.symfony.com/doc/3.x/filters/escape.html) filter.
+You can see the shorter version (`|e`) in use in the template, above.
 :::
 
-Keep in mind that users may have different amounts of profile data populated when they register or reset their password. Include default or alternate text when the desired text may not be available:
+Keep in mind that users may have different amounts of profile data populated when they register or reset their password.
+Include default or alternate text when the desired text may not be available:
 
 ```twig
 {# Output a comma before the user’s name, or jump right to a punctuation mark: #}
@@ -76,7 +81,8 @@ Hello{{ user.fullName is not empty ? ", #{user.fullName}" : null }}!
 
 #### URLs
 
-You may output element URLs just as you would in a front-end template. However, if you are linking to an arbitrary path, use the appropriate URL helper function, in Twig:
+You may output element URLs just as you would in a front-end template.
+However, if you are linking to an arbitrary path, use the appropriate URL helper function, in Twig:
 
 ```twig
 {# Forces a site URL: #}
@@ -86,7 +92,9 @@ You may output element URLs just as you would in a front-end template. However, 
 {{ cpUrl('myaccount')}}
 ```
 
-Using the agnostic `url()` function may generate incorrect URLs that reflect how an email was triggered rather than the kind of access the recipient has. For example, a user requesting a password reset link from the front-end will get the proper site URL, but the same email sent in response to an administrator’s action would be prefixed with the <config5:cpTrigger>.
+Using the context-agnostic `url()` function may generate incorrect URLs that reflect _how an email was triggered_ rather than _the kind of access the recipient has_.
+For example, a user requesting a password reset link from the front-end will get the proper site URL, but the same email sent by an administrator from the control panel may be prefixed with the <config5:cpTrigger>.
+When Craft provides a URL in one of the predefined [variables](#variables), it uses the appropriate context: a control panel URL for users with access, or a site URL for those without.
 
 #### Language
 
@@ -102,7 +110,9 @@ Craft generates transforms for images used within emails prior to sending them. 
 
 ## Other Messages
 
-Plugins may create and send email messages outside of [system messages](#system-messages). For example, [Commerce](/commerce/5.x/README.md) provides a [user-configurable suite of messages](/commerce/5.x/system/emails.md) and status-based triggers, rather than defining messages in the global space. The mailer will use the **System Email**
+Plugins may create and send email messages outside of [system messages](#system-messages).
+For example, [Commerce](/commerce/5.x/README.md) provides a [user-configurable suite of messages](/commerce/5.x/system/emails.md) and status-based triggers, rather than defining messages in the global space.
+Craft’s mailer sends from the **System Email Address**, unless overridden by a plugin.
 
 ::: tip
 If you are unsure where an email is sent from (or how to edit it), check the system messages utility, then consult the documentation for any installed plugins.

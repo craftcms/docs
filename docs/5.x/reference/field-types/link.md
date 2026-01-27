@@ -85,6 +85,25 @@ Link fields have—at minimum—an input specific to the allowed type of link. I
 
 When the **Show the “Label” field** setting is enabled, an additional input allows authors to customize the textual representation of the link. This input’s `placeholder` text will reflect the automatically-determined value.
 
+A number of other inputs are displayed in a based on the field’s enabled **Advanced Fields**, within a 
+
+### Translations
+
+Elements selected via a relational link type are site-specific, which differs from the default behavior of other relational fields.
+When the field is marked as **Not translatable**, the selected element is returned, regardless of the request’s current site (or which site the element with the link field was loaded in).
+
+Choose one of the other translation modes to allow authors to select different elements on each site, or handle localization in the template:
+
+```twig{4}
+{% set target = entry.myLinkFieldHandle.element %}
+{% set localTarget = craft.entries()
+  .id(target)
+  .site(currentSite)
+  .one() %}
+```
+
+Craft _does_ attempt to localize relations in translatable link fields when they are initially propagated to other sites. <Since ver="5.5.0" feature="Automatic replacement with localized relations during initial propagation of link fields" />
+
 ## Development
 
 Outputting a link field in a template will return a normalized value suitable for use in an anchor tag’s `href` attribute:
@@ -191,6 +210,8 @@ When using an element in a link field, Craft makes the corresponding connections
 
 {# -> Returns other entries connected to the given `post` via a specific link field. #}
 ```
+
+[Translation](#translations) of link fields is handled differently from other relational fields.
 
 ::: warning
 It is not currently possible to [eager-load](../../development/eager-loading.md) link field relationships, as their element type is not known until the field data is loaded.

@@ -468,7 +468,7 @@ If you don’t have control over the query _value_ (say, it comes from a third-p
   .all() %}
 ```
 
-You may also want to review any [custom sources](system/elements.md#sources) that use condition rules targeting the [affected field types](development/element-queries.md#case-sensitivity).
+Textual condition rules in [custom sources](system/elements.md#sources) and [field layouts](system/fields.md#conditions) are always handled case-insensitively. <Since ver="5.9.0" description="Condition rules were made case-insensitive in {product} {ver}" />
 
 ### Matrix Fields
 

@@ -174,6 +174,8 @@ To make a query case-_insensitive_, pass an object with the special `caseInsensi
 
 [Dropdown](../reference/field-types/dropdown.md), [Radio](../reference/field-types/radio.md), [Checkboxes](../reference/field-types/checkboxes.md), and other fields whose only allowable values are determined by the field’s configuration are _always_ handled in a case-sensitive way.
 
+Textual condition rules in [custom sources](system/elements.md#sources) and [field layouts](system/fields.md#conditions) are always handled case-insensitively. <Since ver="5.9.0" description="Condition rules were made case-insensitive in {product} {ver}" />
+
 ### Reusing Queries
 
 Sometimes, you might want to run a number of similar queries. Take this case, where we want to show some information about upcoming events at a library:

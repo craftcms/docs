@@ -39,9 +39,9 @@ Any value compatible with <craft5:craft\helpers\Db::parseMoneyParam()> can be pa
 | - | -
 | `':empty:'` | …that have no amount saved.
 | `':notempty:'` | …that have an amount saved.
-| `'>= 123.45'` | …that have a normalized amount greater than `123.45`.
+| `'>= 123.45'` | …that have a normalized amount greater than or equal to `123.45`.
 | `'< 123.45'` | …that have a normalized amount less than `123.45`.
-| `['and', '>= 50.00', '< 75.00']` | …that have a normalized amount between `50.00` and `75.00`.
+| `['and', '>= 50.00', '< 75.00']` | …that have a normalized amount between `50.00` (inclusive) and `75.00`.
 | `['or', '< -100.00', '> 100.00']` | …that have a normalized amount less than `-100.00` or greater than `100.00`.
 
 All values are assumed to be in the field’s currency.
@@ -59,5 +59,8 @@ $value = \craft\helpers\MoneyHelper::toString($entry->myFieldHandle);
 ```
 :::
 
-That will give you a formatted currency value for the field, if it has a value.
+A formatted representation of the amount is returned, if the field had a value.
 
+::: warning
+The `currency` filter does _not_ work with money field values, due to the way the underlying value is represented.
+:::
