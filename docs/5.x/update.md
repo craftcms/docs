@@ -101,7 +101,9 @@ php craft update commerce element-api
 ```
 :::
 
-Craft will install the latest available version(s), unless you append `:<version>` to the handle:
+#### Version Behavior
+
+The updater installs the latest available version of Craft or a plugin, unless you append `:<version>` to the handle, where `<version>` is a legal Composer constraint:
 
 ::: code
 ```bash DDEV
@@ -118,21 +120,23 @@ After an update is performed from the CLI, Craft will apply any relevant migrati
 Use the `--minor` or `--patch` flag when running `craft update` to update in finer increments. Pass `--except craft,plugin-name` to update all but the provided package(s).
 :::
 
+As of Craft [5.9.0](repo:craftcms/cms/releases/tags/5.9.0), constraints are set using the caret (`^`) operator for better interoperability with direct [Composer](#composer) usage.
+
 ### Composer
 
 `craft update` is mostly a wrapper around Composer—but you can use Composer directly for more control over the update process.
-
-The main behavioral difference is that `craft update` will always set _specific_ Craft and plugin versions (like `5.4.1` or `1.2.3`), whereas Composer allows you to use [version _constraints_](https://getcomposer.org/doc/articles/versions.md)  (like `^5.3.0` or `^1.0.0`) to define dependencies.
+The main behavioral difference is that `craft update` will _never_ update Craft or plugin versions beyond what is permitted by their respective licenses.
 
 When using version constraints, `composer.lock` will still make sure you get a stable set of packages from `composer install`. To update all your packages to the most recent versions allowed by their constraints, run `composer update`. Update a _single_ package by specifying it in the command: `composer update craftcms/cms`.
 
 ::: tip
-If you have used the Craft CLI in the past, `composer update` may do nothing!
+If you have used Craft’s [control panel](#using-the-control-panel) or [CLI](#craft-cli) updater in the past, `composer update` may do nothing!
 
-Open `composer.json`, and look at the packages under the `require` key—if you see exact version numbers, Composer will never update those packages.
+Open `composer.json`, and look at the packages under the `require` key—if you see exact version numbers (i.e. `2.3.4`), Composer will never update those packages.
 :::
 
-Keep in mind that manually altering constraints _can_ lead to an irreconcilable set of packages—Composer will let you know about this before updating the lockfile. Generally speaking, the “major-version” constraints set automatically when using `composer require` should continue to work, while protecting your project from breaking changes in dependencies.
+Keep in mind that manually altering constraints _can_ lead to an irreconcilable set of packages—Composer will let you know about this before updating the lockfile.
+Generally speaking, the “major-version” constraints set automatically when using `composer require ...` should continue to work, while protecting your project from breaking changes in dependencies.
 
 ## Workflow
 
@@ -158,7 +162,8 @@ This tells Composer that _after_ it has successfully installed packages from a l
 
 ## Licensing
 
-When you buy a Craft Pro or plugin license, you are entitled to use that version in perpetuity—or any version that you update to, during the year of included updates. To get the most out of your Craft licenses, run updates frequently!
+When you buy a Craft or plugin license, you are entitled to use that version (or any version that you update to, during the year of included updates) in perpetuity.
+To get the most out of your licenses, run updates frequently!
 
 ## Upgrade Guides
 
