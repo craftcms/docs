@@ -11,7 +11,7 @@ Craft provides a [GraphQL](https://graphql.org) API you can use to work with you
 
 ## Getting Started
 
-GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel give you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
+GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel gives you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
 ::: tip
 You can also execute GraphQL queries from [Twig templates](templates.md) with the [`gql()` function](../reference/twig/functions.md#gql).
