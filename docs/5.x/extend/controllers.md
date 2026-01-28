@@ -278,8 +278,9 @@ $message = Craft::$app->getView()->renderSandboxedString($notification->template
 ```
 
 To render a regular, on-disk template, use <craft5:craft\web\View::renderSandboxedTemplate()>; to render an [object template](../system/object-templates.md), use <craft5:craft\web\View::renderSandboxedObjectTemplate()>.
-
 If a developer has opted out of sandbox rendering for a project where your plugin is installed (using the <config5:enableTwigSandbox> setting), these methods silently fall back to normal rendering.
+
+You can mark your own classes, methods, and properties as “safe” for use in the sandbox by tagging them with <craft5:craft\web\twig\AllowedInSandbox>.
 
 ::: warning
 Any user-space templates that your plugin provides by default (say, seeded during the [install migration](migrations.md#plugin-install-migrations)) should be fully compatible with sandboxed rendering.
