@@ -15197,6 +15197,84 @@
     },
     {
         "class": "craft\\elements\\Entry",
+        "name": "EVENT_DEFINE_META_FIELDS",
+        "type": "craft\\events\\DefineMetaFields",
+        "desc": "The event that is triggered when defining the meta fields.",
+        "filters": {
+            "draft": {
+                "label": "Element is a draft",
+                "conditionsPhp": "ElementHelper::isDraft($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "provisional": {
+                "label": "Element is a provisional draft",
+                "conditionsPhp": "ElementHelper::rootElement($event->sender)->isProvisionalDraft",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "revision",
+                    "firstSave"
+                ]
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            },
+            "revision": {
+                "label": "Element is a revision",
+                "conditionsPhp": "ElementHelper::isRevision($event->sender)",
+                "imports": [
+                    "craft\\helpers\\ElementHelper"
+                ],
+                "excludes": [
+                    "draft",
+                    "provisional",
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\elements\\Entry",
         "name": "EVENT_REGISTER_SOURCES",
         "type": "craft\\events\\RegisterElementSourcesEvent",
         "desc": "The event that is triggered when registering the available sources for the element type.",
@@ -30776,6 +30854,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\BaseField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\BaseField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -30824,6 +30908,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\BaseNativeField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\BaseNativeField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -30920,6 +31010,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\CustomField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\CustomField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -30968,6 +31064,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\FullNameField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\FullNameField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31304,6 +31406,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\TextField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\TextField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31352,6 +31460,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\TextareaField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\TextareaField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31448,6 +31562,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\TitleField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\TitleField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31496,6 +31616,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\AddressField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\AddressField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31544,6 +31670,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\CountryCodeField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\CountryCodeField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31592,6 +31724,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\LabelField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\LabelField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31640,6 +31778,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\LatLongField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\LatLongField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31688,6 +31832,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\OrganizationField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\OrganizationField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31736,6 +31886,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\addresses\\OrganizationTaxIdField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\addresses\\OrganizationTaxIdField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31784,6 +31940,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\assets\\AltField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\assets\\AltField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31832,6 +31994,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\assets\\AssetTitleField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\assets\\AssetTitleField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31880,6 +32048,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\entries\\EntryTitleField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\entries\\EntryTitleField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31928,6 +32102,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\AffiliatedSiteField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -31976,6 +32156,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\EmailField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\EmailField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -32024,6 +32210,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\FullNameField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\FullNameField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -32072,6 +32264,12 @@
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\PhotoField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\PhotoField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -32117,6 +32315,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\fieldlayoutelements\\users\\UsernameField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
     },
     {
         "class": "craft\\fieldlayoutelements\\users\\UsernameField",
@@ -44850,6 +45054,18 @@
         "name": "EVENT_AFTER_INSERT_ELEMENT",
         "type": "craft\\events\\MoveElementEvent",
         "desc": "The event that is triggered after an element is inserted into a structure."
+    },
+    {
+        "class": "craft\\services\\Structures",
+        "name": "EVENT_BEFORE_UPDATE_ELEMENT",
+        "type": "craft\\events\\MoveElementEvent",
+        "desc": "The event that is triggered before an element’s position is updated."
+    },
+    {
+        "class": "craft\\services\\Structures",
+        "name": "EVENT_AFTER_UPDATE_ELEMENT",
+        "type": "craft\\events\\MoveElementEvent",
+        "desc": "The event that is triggered after an element’s position is updated."
     },
     {
         "class": "craft\\services\\Structures",
