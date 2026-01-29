@@ -1,10 +1,12 @@
 # Project Config
 
-Craft tracks system settings in a centralized store called _Project Config_. Changes are recorded as YAML files in the `config/project/` folder, which can be version-controlled alongside your templates and other front-end resources.
+Craft tracks system settings and content schema in a centralized store called _Project Config_. Changes are automatically written to YAML files in the `config/project/` folder, which can be version-controlled alongside your templates and other front-end resources.
+
+<!-- more -->
 
 This workflow provides two main benefits:
 
-1. Your [project’s state](#whats-stored-in-project-config) is tracked over time.
+1. Your [project’s state](#scope) is tracked over time.
 2. Settings are [automatically propagated](#propagating-changes) to other development/staging/production environments.
 
 The overarching principle behind Project Config is to separate the management of content and settings. In doing so, it’s possible to establish a one-way flow for configuration, and to tie settings and schema to the rest of your project’s code.
@@ -22,10 +24,9 @@ Broadly speaking, Project Config tracks things that are managed via the **Settin
 - Craft and plugin schema versions
 - Craft edition
 - Email settings
-- Fields, field groups, and all field layouts
+- Fields and field layouts
 - Global sets (settings only, not their content)
 - GraphQL schemas, and the access settings for the public schema
-- Matrix block types
 - Plugin versions, editions, and settings
 - Routes defined in **Settings** → **Routes**
 - Sections and entry types
@@ -42,7 +43,7 @@ Plugins and Modules can store their own settings in Project Config, too. See [Su
 
 Project Config is always active, but you may need to adjust your workflow to get the most out of it.
 
-Use of Project Config often involves disabling the <config5:allowAdminChanges> option in all but development environments, which makes the **Settings** section of the control panel inaccessible—even for admin users. This guarantees settings are only changed under circumstances where their effects can be tested alongside any relevant templates or code.
+Use of Project Config often involves disabling the <config5:allowAdminChanges> option in all but development environments, which puts the **Settings** section of the control panel in read-only mode—even for admin users. This guarantees settings are only changed under circumstances where their effects can be tested alongside any relevant templates or code.
 
 Suppose you are asked to add a new entry type to an existing section. The process is probably pretty familiar: make some updates via the control panel, adjust templates and styles, then push your code. But how does the new entry type definition actually make it to the live site?
 
@@ -50,7 +51,11 @@ Suppose you are asked to add a new entry type to an existing section. The proces
 - **With** Project Config, Craft tracks the schema changes as YAML and can apply them automatically (as part of your deployment process) or at the click of a button.
 
 ::: warning
-Never directly edit YAML files. Missing changes in other parts of the Project Config that should be made simultaneously can cause inconsistencies and instability.
+Directly editing YAML files can cause inconsistencies and instability.
+Craft should have exclusive control over the `config/project` directory.
+
+This applies to LLMs and coding agents, as well: their training data will include configuration from many different (incompatible) versions of Craft.
+Invalid configuration puts your data and access at risk.
 :::
 
 ## Propagating Changes
@@ -90,7 +95,7 @@ Project Config simplifies collaboration on big features by letting you share ver
 Merge conflicts _can_ still happen (when two contributors modify the same setting), but resolving them is rarely more difficult than a template or stylesheet—you’ll just have to run `php craft project-config/touch` and then `php craft project-config/apply` to ensure the final result is applied.
 :::
 
-Any time you integrate new code into an environment (say, while developing locally, or deploying to a server), run `craft up` to apply pending migrations and project config changes.
+Any time you integrate new code into an environment (say, while developing locally, or deploying to a server), run `craft up` to apply pending migrations and Project Config changes.
 
 ## Adopting Project Config
 
