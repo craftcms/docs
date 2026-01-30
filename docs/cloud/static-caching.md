@@ -156,9 +156,23 @@ In particular, displaying dynamic cart data on _every_ page (say, in the site’
 
 ## Dynamic Pages
 
-Pages that rely on dynamic content but don’t necessarily access session data are apt to be cached without some intervention.
+Pages that rely on dynamic content (but not necessarily session-dependent data) are apt to be cached, without some intervention.
 
 For example, shuffling, sorting, or querying records based on random values (i.e. `.orderBy('RAND()')`) do _not_ use the session, and cannot be detected by Cloud. If you wish to show randomized content on a page, you may need to [explicitly send no-cache headers](#controlling-the-cache), or reorder content with JavaScript, in the client.
+
+### Edge-Side Includes
+
+The [`cloud.esi()` helper](esi.md) allows you to stitch together fragments of a document _at the edge_.
+
+Responses involving ESI tags (either as the initiator or sub-resource) are always cached independently and combined in our runtime.
+
+<See path="esi.md" />
+
+Edge-side includes are _not_ a silver bullet!
+Each include still incurs a performance penalty, and may not actually reduce the total number of requests that make it to Craft.
+For example, a newsletter sign-up form in the footer of every page that includes a CSRF token could be handled via ESI (so the remainder of the complex pages can be cached), but the request for dynamic content will still hold up _every_ page.
+
+Instead, you might want to defer that lower-traffic fragment and [load it via Ajax](#including-via-ajax) based on some interaction criteria, like scroll distance.
 
 ### Including via Ajax
 
