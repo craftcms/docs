@@ -263,13 +263,16 @@ Prior to Craft 5.7.0, these were the only two condition builders, and the UI did
 
 #### Editability Conditions <Since ver="5.7.0" feature="Editability conditions in the field layout designer" />
 
-User and element conditions completely hide field layout elements when their criteria are not met. If you would prefer to make a field read-only or “static” (so that authors can still reference its value), you can move conditions into the **Editability Conditions**.
+![A field layout element with conditions applied](../images/field-layout-read-only.png)
+
+User and element conditions completely hide field layout elements when their criteria are not met.
+If you would prefer to make a field read-only or “static” in some situations (so that authors can still reference its value), you can move conditions into the **Editability Conditions**.
 
 To be editable, a field must also be [visible](#visibility-conditions).
 
 ::: warning
 It’s possible to short-circuit validation with editability conditions!
-Fields marked as **Required** that the user cannot populate with content still prevent entries from being saved.
+Fields marked as **Required** will prevent authors from applying a draft, even if they aren’t able to provide a value.
 :::
 
 ### UI Elements
