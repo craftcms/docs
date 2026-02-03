@@ -35,6 +35,7 @@ If you need an arbitrarily-deep set of nested elements, consider the [Matrix](ma
 :::
 
 Nested fields can be selected as columns in their owners’ [element indexes](../../system/elements.md#indexes) and [cards](../../system/elements.md#chips-cards). <Since ver="5.9.0" feature="Content block fields in their owners’ element indexes" />
+[Assets fields](../field-types/assets.md) within content blocks can also be used as the source of their owner’s [thumbnails](../../system/elements.md#chips-cards). <Since ver="5.9.6" feature="Using assets fields within content blocks as element thumbnails" />
 
 ### Generated Fields
 
@@ -64,7 +65,7 @@ You’ll access their content via the content block field’s handle:
 
   {# ...and supplement with a custom byline: #}
   {% if entry.credits.contributors is not empty %}
-    with support from {{ contributors }}
+    with support from {{ entry.credits.contributors }}
   {% endif %}
 </p>
 
