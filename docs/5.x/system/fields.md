@@ -118,7 +118,7 @@ The field layout editor works roughly the same way, regardless of which element 
 ![Screenshot of an entry’s field layout editor, with a Content tab containing three fields and a sidebar menu with “Fields” and “UI Elements” items that can be placed in the field layout](../images/field-layout-designer.png)
 
 ::: tip
-Fields and other element-specific attributes can also be added to [element cards](elements.md#chips--cards) using the [card designer](#card-designer).
+Fields and other element-specific attributes can also be added to [element cards](elements.md#chips-cards) using the [card designer](#card-designer).
 :::
 
 ### Tabs
