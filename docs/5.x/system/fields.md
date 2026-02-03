@@ -268,7 +268,8 @@ User and element conditions completely hide field layout elements when their cri
 To be editable, a field must also be [visible](#visibility-conditions).
 
 ::: warning
-It’s possible to short-circuit validation with editability conditions! Fields marked as **Required** that the user cannot populate with content still prevent entries from being saved.
+It’s possible to short-circuit validation with editability conditions!
+Fields marked as **Required** that the user cannot populate with content still prevent entries from being saved.
 :::
 
 ### UI Elements
@@ -276,7 +277,7 @@ It’s possible to short-circuit validation with editability conditions! Fields 
 Switch to the **UI Elements** tab in the **New field** popover to add special field layout elements:
 
 - **Heading** — Create a label that splits up form inputs, within a tab.
-- **Tip** + **Warning** — Display a message with the corresponding urgency. Equivalent, except in visual design.
+- **Tip** + **Warning** — Display a Markdown message with the corresponding urgency. Enable the **Can be dismissed?** setting to allow authors to hide a message in the current browser (using the `localStorage` API).
 - **Template** — Render a Twig template from your [`templates/` directory](directory-structure.md#templates). The template will receive the element being edited under an `element` variable.
 - **Horizontal Rule** — A thin divider line. Subsequent fields will start in a new row.
 - **Line Break** — An invisible element that ensures the next field is rendered in a new row.
