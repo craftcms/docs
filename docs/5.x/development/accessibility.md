@@ -309,3 +309,7 @@ The best time to start auditing your front-end for accessibility is during devel
 As you build out your templates, tools like Deque’s [Axe DevTools for Web](https://www.deque.com/axe/devtools/web-accessibility) can flag concrete violations and help you prioritize remediation.
 
 To monitor the accessibility of content and quickly identify issues that crop up after launch, consider using a tool like [Accessible Web](https://accessibleweb.com/)’s [automated scanning tool](https://accessibleweb.com/ramp-web-accessibility-tools/accessibility-monitoring/).
+
+Set up a [custom source](../system/elements.md#sources) for your assets using the **Has alternative text** condition rule to give authors a central place to remedy missing image descriptions:
+
+![Screenshot of the asset source configuration modal in the Craft control panel](../images/accessibility-audit-alt-text.png)
