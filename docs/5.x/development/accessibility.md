@@ -9,38 +9,6 @@ Craft gives you a powerful suite of tools to help make your projects <Term slug=
 
 <!-- more -->
 
-Let’s begin by looking at some key authoring features.
-
-## Control panel
-
-Craft’s [control panel](../system/control-panel.md#accessibility) is [designed and built to be accessible](https://craftcms.com/accessibility), out-of-the-box.
-In addition to built-in interfaces, the content tools you configure for authors are backed by components that we [regularly audit](https://craftcms.com/accessibility/reports) for conformance.
-
-### Image editor
-
-The built-in image editor features a number of keyboard-accessible adjustments. <Since ver="5.9.0" feature="A keyboard-accessible image editor" />
-
-From the right sidebar on an [asset](../reference/element-types/assets.md)’s edit screen, find the **Edit image** button.
-A modal will open, with tabs for [**Rotate**](#rotation) and [**Crop**](#cropping).
-
-::: tip
-If you can’t find the **Edit image** button, the asset may not be transformable on the current system.
-This may be due to the file type (i.e. `PDF`), or your [image driver](../requirements.md).
-:::
-
-#### Rotation
-
-Images can be rotated 90&deg; clockwise (**Rotate Right**) or counter-clockwise (**Rotate Left**), flipped vertically and horizontally, or “straightened” in increments of 1&deg; using the **Rotate** slider.
-
-Use the **Focal Point** button to add a position control to the image.
-You can nudge the focal point horizontally or vertically; the value is stored as a proportional coordinate pair, with decimal values between `0` and `1`.
-The focal point is used to keep subjects within a transformed image—for example, vertical head-shots attached to staff profiles 
-
-::: tip
-Some asset filesystem types ([AWS S3](plugin:aws-s3), in particular) can automatically detect subjects and populate the **Focal Point** attributes.
-Combined with [transforms](image-transforms.md), this can help keep subjects in-frame, when assets are used in multiple contexts.
-:::
-
 ## Media
 
 When marked up appropriately, text the web is inherently accessible.
