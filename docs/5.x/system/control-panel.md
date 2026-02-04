@@ -346,7 +346,6 @@ Your preferences are _not_ applied to the login screen or other off-session page
 :::
 
 Display Settings
-
 :   These settings are concerned with the appearance of the control panel UI.
 
     - **Use shapes to represent statuses:** Statuses are always represented by colorized “badges,” and—in some cases—icons. Enable this setting to use shapes for otherwise indistinguishable states.
@@ -355,18 +354,15 @@ Display Settings
     ![The appearance of statuses in Craft, when the “use shapes to represent statuses” setting is enabled.](../images/accessibility-status-shapes.png)
 
 General Settings
-
 :   - **Disable autofocus:** Some inputs inside the control panel use the `autofocus` attribute, so keyboard focus may move unexpectedly; these include search inputs on element index pages, and the first input on Edit screens or inside of slideouts. Enabling this setting will prevent this autofocus behavior.
 
 Notification Settings
-
 :   Both **Duration** and **Position** of notification “toasts” can be configured.
 
     - **Notification Duration**: By default, toasts are shown for _five seconds_ before disappearing. You can shorten this timer to _two seconds_, extend it to _ten seconds_, or have them remain _indefinitely_ (allowing the user to close them manually).
     - **Notification Position**: Toasts appear at the bottom-left corner of the screen, by default. This setting allows you to customize which corner of the screen they are placed.
 
 Slideout Position
-
 :   Slideout position can be changed to show on the left- or right-hand side of the screen.
 
 ::: tip
