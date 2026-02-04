@@ -161,6 +161,7 @@ module.exports = {
           title: "More",
           collapsable: false,
           children: [
+            "announcements",
             "asset-bundles",
             "behaviors",
             "commands",
