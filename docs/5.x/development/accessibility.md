@@ -265,20 +265,26 @@ Everything else (like rows in a [table field](../reference/field-types/table.md)
 
 ```twig
 {% set tabMap = collect([]) %}
+{% set groupId = "tab-group-#{random()}" %}
 
-{# Loop over once to output tabs: #}
-{% for tab in tabs %}
-  {# Create a temporary ID and add it to the map: #}
-  {% set id = "pane-#{random()}" %}
-  {% do tabMap.set(id, tab) %}
+<div role="tablist" aria-labelledby="{{ groupId }}-label">
+  {# The name for this group of tabs could be something dynamic: #}
+  <h2 id="{{ groupId }}-label">Tab List</h2>
 
-  <button
-    id="{{ id }}-tab"
-    role="tab"
-    aria-controls="{{ id }}">
-    {{ tab.label }}
-  </button>
-{% endfor %}
+  {# Loop over once to output tabs: #}
+  {% for tab in tabs %}
+    {# Create a temporary ID and add it to the map: #}
+    {% set id = "pane-#{random()}" %}
+    {% do tabMap.set(id, tab) %}
+
+    <button
+      id="{{ id }}-tab"
+      role="tab"
+      aria-controls="{{ id }}">
+      {{ tab.label }}
+    </button>
+  {% endfor %}
+</div>
 
 {# ... #}
 
