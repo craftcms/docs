@@ -46,7 +46,7 @@ return [
 ];
 ```
 
-Throughout your plugin, pass any string you'd like localized through <craft5:Craft::t()>:
+Throughout your plugin, pass any string you’d like localized through <craft5:Craft::t()>:
 
 ```php{9}
 protected function defineRules(): array
