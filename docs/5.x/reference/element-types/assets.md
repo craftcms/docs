@@ -198,9 +198,9 @@ To help serve optimized images, Craft supports predefined (or “named”) and a
 
 ## Image Editor
 
-Craft provides a built-in Image Editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose a focal point on them.
+Craft provides a built-in image editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose their [focal point](#focal-points).
 
-To launch the Image Editor, double-click an image (either on the Assets page or from an [Assets field](../field-types/assets.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (<icon kind="settings" />).
+To launch the image editor, double-click an image (either on the Assets page or from an [Assets field](../field-types/assets.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (<icon kind="settings" />).
 
 ### Focal Points
 
