@@ -96,7 +96,7 @@ Below, we cover [a few patterns](#alt-text-overrides) that make alternative text
 
 Inserting an image into a rich text editor may not automatically populate `alt` attributes.
 
-- **[Redactor](plugin:redactor)** — The editor has mislabled this as the image’s **Title**. Select an inserted image and pick **Edit** to open a modal.
+- **[Redactor](plugin:redactor)** — Select an inserted image and pick **Edit** to open a modal. Redactor incorrectly labels the alternative text field as its **Title**.
 - **[CKEditor](plugin:ckeditor)** — Select an inserted image and pick the **Change image text alternative** button to add a description.
 
 Both plugins also support captions, which convert the image into `<figure>` and `<figcaption>` elements.
