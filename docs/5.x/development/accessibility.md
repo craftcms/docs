@@ -96,7 +96,9 @@ This might be a perfectly acceptable way to handle icons attached to [categories
 }) }}
 ```
 
+::: tip
 The [W3C `alt` Decision Tree](https://www.w3.org/WAI/tutorials/images/decision-tree/) is a great resource for deciding what an appropriate alternative text should be.
+:::
 
 </Block>
 
