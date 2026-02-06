@@ -18,6 +18,8 @@ To create a pricing rule, visit <Journey path="Commerce, Store Management, Prici
 
 A pricing rule applies to any purchasable that satisfies its **Conditions**, but may can be scoped to a specific set of **Customers** (Craft [users](/5.x/reference/element-types/users.md)).
 
+Despite the similar name, purchasables do not need to be _promotable_ to be eligible for catalog pricing.
+
 Start Date
 :   Apply this rule _after_ the chosen date.
 

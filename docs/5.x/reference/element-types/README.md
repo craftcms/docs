@@ -22,8 +22,11 @@ Use the sidebar to find information about a specific element type, or learn abou
 
 <See path="users.md" />
 
+Craft has one additional element type used exclusively by the [content block](../field-types/content-block.md) field.
+
 <hr>
 
 ::: tip
-Looking for [Matrix](../field-types/matrix.md) blocks? They were converted to [entries](entries.md#nested-entries) during the [upgrade](../../upgrade.md) to Craft 5!
+Looking for [Matrix](../field-types/matrix.md) blocks?
+They were converted to [entries](entries.md#nested-entries) during the [upgrade](../../upgrade.md) to Craft 5!
 :::

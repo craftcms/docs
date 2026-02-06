@@ -123,6 +123,9 @@ Requires=mysql.service
 # User + Group should agree with HTTP processes:
 User=www-data
 Group=www-data
+# Sometimes required for other packages that rely on `getcwd()`:
+WorkingDirectory=/var/www
+# The command we want to daemonize:
 ExecStart=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 # Only restart after unexpected failures:
 Restart=on-failure
@@ -139,17 +142,24 @@ WantedBy=multi-user.target
 ; Use the process number in its name (required when using `numprocs`):
 process_name=%(program_name)s_%(process_num)02d
 numprocs=4
+; The command we want to daemonize:
 command=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 ; User + Group should agree with HTTP processes:
 user=www-data
 group=www-data
+; Sometimes required for other packages that rely on `getcwd()`:
+directory=/var/www
+; Allow more time before issuing a kill signal:
+stopwaitsecs=300
 ```
 :::
+
+The `TimeoutStopSec` and `stopwaitsecs` settings in the examples above should agree with (or exceed) [your queue’s `ttr`](config/app.md#queue), so that currently-running jobs may complete and the runner may exit gracefully when the process manager sends a `TERM` signal. At the end of that window (if the queue has not voluntarily exited), the process manager sends a `KILL` signal and may interrupt the queue in the middle of a task. This safeguard relies on the [`pcntl` PHP extension](https://www.yiiframework.com/extension/yiisoft/yii2-queue/doc/guide/2.3/en/retryable), which is _not_ a core Craft [requirement](requirements.md), and may need to be enabled by your host.
 
 ::: warning
 Long-running processes must be restarted to pick up code and schema changes after a deployment or migration!
 
-To register your newly created service, the process manager itself may need to be restarted, or specifically told to look for new configuration.
+To register your newly created (or updated) service, the process manager itself may need to be restarted, or specifically told to look for new configuration.
 :::
 
 Your process manager also has commands for interacting with the service:
@@ -197,7 +207,9 @@ sudo systemctl status "craft-queue-worker@*"
 sudo systemctl restart "craft-queue-worker@*"
 ```
 
-This is possible due to the `@` symbol at the end of our service unit file’s name. Note that the bash “range” syntax (`{1..4}`) is _not_ surrounded by quotes, but the “glob” patterns (`*`) _are_. This is critical for the system to be able to expand and map the commands to the appropriate service instances(s).
+This is possible due to the `@` symbol at the end of our service unit file’s name.
+Note that the bash-specific [expansion syntax](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion) (`{1..4}`) is _not_ surrounded by quotes, but the “glob” patterns (`*`) _are_.
+This is critical for the system to be able to expand and map the commands to the appropriate service instances(s).
 :::
 
 These setup instructions ensure your service is started whenever the host machine is rebooted, but it’s important to check your work! If your host allows, consider manually rebooting your machine and verifying that the queue is active.

@@ -36,7 +36,7 @@ The most common way to customize your Craft project is by editing files in the [
 | [Redirection](system/routing.md#redirection) | `redirects.php` | Additional patterns for redirection.
 | [Application Configuration](#application-configuration) | `app.php`, `app.web.php`, `app.console.php` | Overrides for the root application and any of its [Components](https://www.yiiframework.com/doc/guide/2.0/en/concept-components).
 | Plugin Settings | `{plugin-handle}.php`, or other custom files | Consult the plugin’s documentation for specifics.
-| [Advanced](#advanced) | | Specific library options and/or behaviors that may be exposed in a non-standard way.
+| [Advanced](#advanced) | | Specific library options and/or behaviors that may be exposed in a non-standard way, like [Guzzle](#guzzle) or the Twig [sandbox environment](#twig-sandbox).
 
 ::: tip
 You may find other files in the `config/` folder, like `license.key` or the `project/` folder. Craft (and many plugins) will ask you to place config-adjacent files here, even if they don’t work in a consistent way.
@@ -55,7 +55,7 @@ CRAFT_ENVIRONMENT=dev
 # ...and comments!
 ```
 
-These values can be referenced in your config files by calling [App::env()](craft5:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The equivalent [`getenv()` Twig function](reference/twig/functions.md#getenv) uses `App::env()`, and is therefore fine to use in templates.
+These values can be referenced in your config files by calling [App::env()](craft5:craft\helpers\App::env()), or using them directly in a [control panel setting](#control-panel-settings). Use of PHP’s `getenv()` directly is discouraged, due to [issues with thread-safety](https://github.com/craftcms/cms/issues/3631). The [`getenv()` Twig function](reference/twig/functions.md#getenv) is a wrapper around our custom `App::env()` method, and therefore fine to use in templates.
 
 Craft doesn’t require your variables to follow any kind of naming convention, but it will automatically discover [some specific environment variables](#environment-overrides) for general and database settings.
 
@@ -64,6 +64,13 @@ For most installations, the `.env` file is the only place where secrets should b
 ::: tip
 Some platforms (especially those with ephemeral filesystems, like [Craft Cloud](https://craftcms.com/cloud)) provide a GUI for managing environment variables in lieu of using a `.env` file, and will automatically inject them when the server or process starts. `App::env()` is still the recommended method for retrieving environment variables set in this way.
 :::
+
+Once Craft has fully initialized and the current [site](system/sites.md) is known, it adds two additional environment variables: <Since ver="5.9.0" feature="$CRAFT_SITE and $CRAFT_SITE_UPPER variables" />
+
+| Variable Name | Value |
+| --- | --- |
+| `CRAFT_SITE` | The current site’s handle. |
+| `CRAFT_SITE_UPPER` | The current site’s handle, converted to `SCREAMING_SNAKE_CASE`. |
 
 #### Nested Variables
 
@@ -75,7 +82,7 @@ PRIMARY_SITE_URL="https://${BASE_HOSTNAME}"
 GLOBAL_SITE_URL="https://global.${BASE_HOSTNAME}"
 ```
 
-Depending on your infrastructure, this may also be possible at other points in process of loading environment variables. The example above works thanks to `vlucas/phpdotenv`; Docker (and therefore DDEV) share this general syntax, but not all variables are available at each step as the container boots up—so interpolation is best left until this last stage. Earlier layers may allow interpolation to be escaped so that it is only evaluated by a later one:
+Depending on your infrastructure, this may also be possible at other points in process of loading environment variables. The example above works [thanks to `vlucas/phpdotenv`](https://github.com/vlucas/phpdotenv?tab=readme-ov-file#nesting-variables), the default `.env` file loader; Docker (and therefore DDEV) share this general syntax, but not all variables are available at each step as the container boots up—so interpolation is best left until this last stage. Earlier layers may allow interpolation to be escaped so that it is only evaluated by a later one:
 
 ```bash
 # Here, we escape the beginning interpolation token with a backslash (\):
@@ -87,6 +94,8 @@ Craft does not know or indicate when substitutions have occurred—it only sees 
 ::: warning
 Variables with substitutions will only be written back into the environment when using one of the [mutable loaders](https://github.com/vlucas/phpdotenv?tab=readme-ov-file#immutability-and-repository-customization).
 :::
+
+[Control panel settings](#control-panel-settings) can also use interpolation.
 
 ### Entry Script
 
@@ -423,6 +432,14 @@ You may combine aliases and environment variables with additional path segments,
 Plugins can add support for environment variables and aliases in their settings as well. See [Environmental Settings](extend/environmental-settings.md) to learn how.
 :::
 
+#### Interpolation <Since ver="5.9.0" feature="Nested interpolation of environment variables" />
+
+Environment variables can be used _anywhere_ in a string that is ultimately passed to <craft5:craft\helpers\App::env()> or <craft5:craft\helpers\App::parseEnv()>.
+For example, you could parameterize the subdomain portion of a group of [sites](system/sites.md) **Base URL** as `https://$SUBDOMAIN_CORPORATE.$DOMAIN_BASE/en` or `https://$SUBDOMAIN_B2B.$DOMAIN_BASE/en`.
+
+An additional syntax (similar to platform-dependent [nested variables](#nested-variables)) brings dynamic resolution to settings stored in project config—but instead of concatenating values, Craft evaluates references inside `${...}` as part of building the variable name itself.
+Combined with the special [`CRAFT_SITE_UPPER` variables](#env), you can make settings like **System Email Address** more reactive: `$MAILER_FROM_${CRAFT_SITE_UPPER}` would first flatten `${CRAFT_SITE_UPPER}` to something like `ACME_CORPORATE`, then look for the environment variable `MAILER_FROM_ACME_CORPORATE`. A request to a different site might end up trying to resolve the variable `MAILER_FROM_ACME_LABS` or `MAILER_FROM_ACME_B2B`.
+
 ### Templates and Modules
 
 #### Accessing Config Values
@@ -523,6 +540,67 @@ The options defined here will be passed into new `GuzzleHttp\Client` instances. 
 To use a proxy for _all_ requests, set an [httpProxy](config5:httpProxy) in general config. This will get merged with the Guzzle configuration, and passed to the front-end for use by JavaScript, in the [control panel](system/control-panel.md). Setting a proxy only in Guzzle’s config will not affect Ajax requests!
 :::
 
+#### Twig Sandbox <Since ver="5.9.0" feature="Twig sandbox rendering" />
+
+When <config5:enableTwigSandbox> is _on_, some templates (like [system messages](system/mail.md#system-messages)) are rendered in a Twig environment governed by a strict security policy.
+
+You can customize this policy via a `twig-sandbox.php` config file, which is merged on top of [Craft’s defaults](repo:craftcms/cms/blob/5.x/src/config/twig-sandbox.php).
+
+```php
+<?php return [
+    'allowedTags' => [
+        // Additional Twig tags to allow ...
+    ],
+    'allowedFilters' => [
+        // Additional Twig filters to allow ...
+    ],
+    'allowedFunctions' => [
+        // Additional Twig functions to allow ...
+    ],
+    'allowedMethods' => [
+        // Keys are class names;
+        // Values are arrays of methods to allow;
+        craft\elements\Asset::class => [
+            'getUploader',
+        ],
+    ],
+    'allowedProperties' => [
+        // Same format as the above.
+    ],
+    'allowedClasses' => [
+        // Each item must be a fully-qualified class name.
+        // Beware: *all* methods and properties are implicitly allowed!
+        craft\web\twig\variables\CraftVariable::class,
+    ],
+];
+```
+
+Internally, Craft uses PHP [attributes](https://www.php.net/manual/en/language.attributes.overview.php) to flag classes, methods, and properties as [allowed](craft5:craft\web\twig\AllowedInSandbox), so they do not appear in the default config array.
+
+::: tip
+If you find that sandboxed rendering is too restrictive, try adding features to the security policy one-by-one, _before_ completely disabling it.
+:::
+
+#### HTML Purifier
+
+JSON files containing valid [HTML Purifier configuration](https://htmlpurifier.org/live/configdoc/plain.html) can be added to `config/htmlpurifier/`.
+
+When creating a [Redactor](plugin:redactor) or [CKEditor](plugin:ckeditor) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](reference/twig/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
+
+A simple config that scrubs everything but paragraph and anchor tags would look like this:
+
+```json
+{
+  "HTML.AllowedElements": "p, a",
+}
+```
+
+For security, any keys _not_ set will use their [defaults](https://github.com/ezyang/htmlpurifier/blob/master/plugins/phorum/config.default.php).
+
+::: tip
+Note that HTML Purifier expresses many options with dot notation, like `HTML.AllowedElements`. These are the literal keys, not an indication that keys should be nested!
+:::
+
 ### Custom Settings
 
 Settings defined in a `config/custom.php` file don’t map to or affect any built-in Craft features, but can useful to centralize data, flags, or secrets that otherwise don’t have a place to live.
@@ -561,26 +639,6 @@ $client->post('/donations', [
 
 ::: tip
 If these settings need to be changed frequently, edited by a control panel user, or don’t depend on the environment, they may be a better fit for a [Global Set](reference/element-types/globals.md).
-:::
-
-#### HTML Purifier
-
-JSON files containing valid [HTML Purifier configuration](https://htmlpurifier.org/live/configdoc/plain.html) can be added to `config/htmlpurifier/`.
-
-When creating a [Redactor](plugin:redactor) or [CKEditor](plugin:ckeditor) field, you can select one of your predefined purifier configs—or provide a one-off config object. The [`purify`](reference/twig/filters.md#purify) filter also accepts a reference to an existing config file or a complete config object.
-
-A simple config that scrubs everything but paragraph and anchor tags would look like this:
-
-```json
-{
-  "HTML.AllowedElements": "p, a",
-}
-```
-
-For security, any keys _not_ set will use their [defaults](https://github.com/ezyang/htmlpurifier/blob/master/plugins/phorum/config.default.php).
-
-::: tip
-Note that HTML Purifier expresses many options with dot notation, like `HTML.AllowedElements`. These are the literal keys, not an indication that keys should be nested!
 :::
 
 <a id="php-constants"></a>

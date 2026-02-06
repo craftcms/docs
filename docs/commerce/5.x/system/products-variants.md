@@ -120,6 +120,16 @@ Propagation Method <Since product="Commerce" repo="craftcms/commerce" ver="5.1.0
 When you create a new product type, don’t forget to give your store managers the appropriate [permissions](../reference/permissions.md)!
 :::
 
+Within the [**Product Fields**](#product-fields) and [**Variants Fields**](#variant-fields) tabs, you can also configure some default behaviors.
+Use the action menu on any of these field layout elements and select **Settings** to configure them:
+
+- **Allow out of stock purchases** (Variants) — Enable overselling of variants.
+- **Available for purchase** (Variants) — An additional safeguard against immediately releasing products for sale.
+- **Promotable** (Variants) — Opt in/out of promotions.
+- **Track Inventory** (Variants) — Useful when selling primarily digital or physical goods.
+
+These settings only control the _initial_ value for the corresponding fields, and serve to optimize entry of products and variants; your administrators can always modify them to suit each product and variant.
+
 #### Tax & Shipping
 
 The second tab in a product type’s settings screen is strictly informational—it displays a list of **Shipping Categories** and **Tax Categories** (from the **Store Management** area) that can be selected from _variants_ of current product type.

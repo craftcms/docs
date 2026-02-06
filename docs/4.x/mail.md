@@ -43,6 +43,9 @@ Thanks for creating an account with {{systemName}}! To activate your account, cl
 If you were not expecting this email, just ignore it.
 ```
 
+When the <config4:enableTwigSandbox> setting is enabled, Craft uses a special Twig “sandbox” environment to load and render system messages.
+Features and APIs available in this mode can be [configured via `twig-sandbox.php`](../configure.md#twig-sandbox). <Since ver="4.17.0" feature="Twig sandbox rendering of system messages" />
+
 #### Variables
 
 Each system message (and subject line) is provided some special, context-specific variables, in addition to those available in normal Twig environments.

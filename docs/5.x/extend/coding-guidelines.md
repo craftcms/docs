@@ -137,7 +137,7 @@ PHP 8 introduced [union types](https://www.php.net/manual/en/language.types.type
 
 ### Interfaces vs. Implementation Classes
 
-`@param` , `@return` , `@var` , `@method` and `@property` tags on public service methods should reference Interfaces (when applicable), not their implementation class:
+`@param`, `@return`, `@var`, `@method`, and `@property` tags on public service methods should reference Interfaces (when applicable), not their implementation class:
 
 ```php
 // Bad:
@@ -227,7 +227,7 @@ return $this->renderTemplate($template, $variables);
 
 ### JSON Actions
 
-Controller actions that have the option of returning JSON should do so if the request explicitly accepts a JSON response; not if it’s an Ajax request.
+[Controller actions](controllers.md) that have the option of returning JSON should do so _only if the request explicitly accepts a JSON response_, not based on whether it’s identified as an Ajax request.
 
 ```php
 // Bad:
@@ -320,16 +320,18 @@ $entry->setAuthor($newAuthor);
 
 ### App Component Getters
 
-App components should have their own getter functions, which call the app component getter method [get()](yii2:yii\di\ServiceLocator::get()) directly, using component class as its [return type](#return-types):
+Relying on “magic” component resolution incurs some overhead in Yii (including the instantiation of configured [behaviors](behaviors.md)).
+
+App components should have their own getter functions, which call the app component getter method [get()](yii2:yii\di\ServiceLocator::get()) directly, and have the component’s class as its return type:
 
 ```php
-use craft\services\Entries;
+use craft\services\Elements;
 
 // ...
 
-public function getEntries(): Entries
+public function getElements(): Elements
 {
-    return $this->get('entries');
+    return $this->get('elements');
 }
 ```
 
@@ -337,21 +339,24 @@ Use those instead of their magic properties:
 
 ```php
 // Bad:
-\Craft::$app->entries->saveEntry($entry);
+\Craft::$app->elements->saveElement($element);
 
 // Better:
-\Craft::$app->getEntries()->saveEntry($entry);
+\Craft::$app->getElements()->saveElement($element);
 ```
 
-If you will be referencing the same app component multiple times within the same method, save a local reference to it.
+If you will be referencing the same app component multiple times within the same scope, save a local reference to it.
 
 ```php
 // Bad:
-\Craft::$app->getEntries()->saveEntry($entry1);
-\Craft::$app->getEntries()->saveEntry($entry2);
+foreach ($elements as $element) {
+    \Craft::$app->getElements()->saveElement($element);
+}
 
 // Better:
-$entriesService = \Craft::$app->getEntries();
-$entriesService->saveEntry($entry1);
-$entriesService->saveEntry($entry2);
+$elementsService = \Craft::$app->getElements();
+
+foreach ($elements as $element) {
+    $elementsService->saveElement($element);
+}
 ```

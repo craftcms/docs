@@ -26,7 +26,7 @@ Plugins are also able to use addresses to store their own location data.
 
 ## Setup
 
-Address elements share a single field layout, which is managed in the control panel via <Journey path="Settings, Addresses" />.
+All address elements share a single field layout, which is managed in the control panel via <Journey path="Settings, Addresses" />.
 
 <BrowserShot url="https://my-project.ddev.site/admin/settings/addresses" :link="false">
 <img src="../../images/address-field-layout.png" alt="Screenshot of the address element field layout" />
@@ -34,13 +34,28 @@ Address elements share a single field layout, which is managed in the control pa
 
 ### Native and Custom Fields
 
-The address field layout has additional native (but optional) fields for a handful of useful attributes. Addresses—just like other element types—support custom fields for anything else you might need to store.
+The address field layout has additional native (but optional) fields for a handful of useful attributes:
 
-For compatibility and localization, core address components (aside from the Country Code) can’t be separated from one another in the field layout.
+- **Label** — An <Since ver="5.9.0" description="The label field on addresses can be made optional as of {product} {ver}">optional</Since> description of the address.
+- **Organization** — A text field for entering a business or entity name.
+- **Organization Tax ID** — Designed to hold an identifier for the legal entity represented by the address. Used by [Commerce](/commerce/5.x/) to aide in tax calculations.
+- **Full Name** — Associate the address with a name. As with [users](users.md), a single input is displayed, unless <config5:showFirstAndLastNameFields> is enabled.
+- **Latitude/Longitude** — A pair of inputs for latitude and longitude values. Craft does not use these, internally.
+
+Addresses—just like other element types—support [custom fields](../../system/fields.md) for anything else you might need to store.
+
+::: tip
+For compatibility and localization, core address components (aside from the **Country Code**) can’t be separated from one another in the field layout.
+The relevant fields for the given country are rendered wherever the **Address** field layout element is placed.
+:::
 
 ### Config Options
 
-You may set a default country for new addresses via the <config5:defaultCountryCode> setting.
+These settings affect authors’ (and front-end users’) experience with address elements:
+
+- **<config5:defaultCountryCode>** — Choose a default country for new addresses.
+- **<config5:showFirstAndLastNameFields>** — Determines whether the **Full Name** field is a single input, or split into **First Name** and **Last Name** inputs. Names are always stored as a single value, and split back out into first and last, as necessary.
+- **<config5:extraLastNamePrefixes>**, **<config5:extraNameSuffixes>**, and **<config5:extraNameSalutations>**,  — Additional ways to customize the built-in name parser.
 
 ### Copying Addresses <Since ver="5.7.0" feature="Copying addresses" />
 
@@ -406,6 +421,10 @@ The next few snippets may be a bit dense—numbered comments are peppered throug
 They also assume you have a layout template functionally equivalent to the [models and validation](../../development/forms.md#models-and-validation) example.
 :::
 
+### Scaffolding
+
+The following templates assume you have a layout functionally equivalent to the [models and validation](../../development/forms.md#models-and-validation) example.
+
 ### Listing Addresses
 
 Let’s display the current user’s address book on their account “dashboard.”
@@ -588,7 +607,7 @@ To edit an existing address, we’ll use the `addressUid` parameter from our rou
 
 Addresses are validated like any other type of element, but some of the rules are dependent upon its localized format.
 
-You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), but additional validation of any address properties requires a [custom plugin or module](../../extend/README.md).
+You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), or directly manipulate validation rules using a [custom plugin or module](../../extend/README.md).
 
 ::: tip
 Take a look at the [Using Events in a Custom Module](kb:custom-module-events) article for a dedicated primer on module setup and events.
@@ -617,6 +636,33 @@ Event::on(
 ```
 
 Errors are available through the same `address.getErrors()` method used in other action and [model validation examples](../../development/forms.md#models-and-validation), regardless of whether they were produced by built-in rules or ones you added.
+
+This same pattern can also be used to _unset_ validation rules that you don’t need (but may have been imposed by the [address repository](#address-repository)).
+Your handler function might look something like this:
+
+```php
+function(DefineRulesEvent $event) {
+    $event->rules = array_filter(
+        $event->rules,
+        function($rule) {
+            // Keep/ignore all rules except those having to do with the “state:”
+            if ($rule[0] !== 'administrativeArea') {
+                return true;
+            }
+
+            // Does this rule do something other than mark it as required?
+            if ($rule[1] !== 'required') {
+              return true;
+            }
+
+            // Ok, filter out this rule:
+            return false;
+        }
+    );
+}
+```
+
+In this example, we are only removing a single rule (one that would be written `['administrativeArea', 'required']`), but others may remain that ensure the selected value is valid _when provided_.
 
 ## Querying Addresses
 

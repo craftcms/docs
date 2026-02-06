@@ -81,10 +81,12 @@ Each field’s **Template** is evaluated as an [object template](object-template
 </article>
 ```
 
-All generated fields are stored and [queried](#querying-generated-field-values) as text. When used in a condition builder, you will only be able to use string operands (like “starts with…” or “contains…”).
+Craft passes the resolved string value through <craft5:craft\helpers\App::normalizeValue()> before saving, so their types are predictable when used in the front-end.
+Values are still [queried](#querying-generated-field-values) and ordered as strings, however.
+When used in a condition builder, you will only be able to use string operands (like “starts with…” or “contains…”).
 
 ::: tip
-Generated fields are _not_ automatically displayed in the control panel, but they can be added to element [cards](#custom-card-attributes), or output in a [template field layout element](fields.md#ui-elements).
+Generated fields are not automatically displayed in elements’ edit screens, but they can be added to [cards](#custom-card-attributes), output in a [template field layout element](fields.md#ui-elements), <Since ver="5.9.0" feature="Displaying generated fields as element index tables columns">and added as columns</Since> to [element indexes](#indexes).
 :::
 
 #### Use Cases
@@ -121,7 +123,7 @@ Binary Criteria
 Record-Keeping
 :   Track data over some period of time.
 
-    **Example:** Use the [`seq()` Twig function](../reference/twig/functions.md#seq) to increment a counter.
+    **Example:** Use the [`seq()` Twig function](../reference/twig/functions.md#seq) to increment a counter. (Note that this will increment every time an element is auto-saved!)
 
     ```twig
     {{ seq("entry-save-count:#{canonicalId}") }}
@@ -190,10 +192,13 @@ Each source also controls what columns are visible in the index, and its default
 </BrowserShot>
 
 ::: tip
-Custom sources are stored in [Project Config](project-config.md). The interface for conditions that involve specific elements (like an author) may appear differently than the equivalent [filter](#filters-and-columns), because the ID may not be stable between environments.
+Custom sources are stored in [project config](project-config.md).
+The interface for conditions that involve specific elements (like an author) may appear differently than the equivalent [filter](#filters-and-columns), because IDs are [not stable between environments](project-config.md#ids-uuids-and-handles).
 
-Instead of an element select field, you’ll see an [autosuggest input](project-config.md#secrets-and-the-environment).
+As an example, element select inputs are replaced by [autosuggest inputs](project-config.md#secrets-and-the-environment), so that the rule’s value can still be dynamic, despite being stored statically.
 :::
+
+Entries provide an additional level of source organization, called [pages](../reference/element-types/entries.md#pages). <Since ver="5.9.0" feature="Customizable entry source “pages”" />
 
 ### Filters and Columns
 
@@ -221,7 +226,9 @@ Use the **View** controls to switch back into structure mode on an index if you 
 
 ### Actions
 
-Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="action" /> icon in the footer (like _Delete_). Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
+Each element type supports its own set of _actions_ that can be performed on one or more elements, from an index. These actions are either visible directly in the index toolbar (like _Status_), or collected under the <Icon kind="settings" /> icon in the footer (like _Delete_). Actions may be hidden or disabled when they don’t apply to the selection or [source](#sources).
+
+Additional actions may be available on an individual element’s edit screen, under the action <Icon kind="ellipses" /> menu.
 
 ### In-line Editing <Badge text="New!" />
 
@@ -231,7 +238,7 @@ Not all fields are editable in-line, and some may have simplified controls or in
 
 ### Exporters
 
-Craft can export sets of elements to CSV, JSON, or XML. The **Export…** button in the index footer displays all options, including any [custom exporters](../extend/element-exporter-types.md) registered by modules and plugins.
+Craft can export sets of elements to CSV, JSON, XML, <Since ver="5.9.0" feature="XLSX and YAML export formats">XLSX, or YAML</Since>. The **Export…** button in the index footer displays all options, including any [custom exporters](../extend/element-exporter-types.md) registered by modules and plugins.
 
 ### Modals & Contexts
 
@@ -243,7 +250,7 @@ A streamlined version of indexes are used when adding elements to a [relational]
 
 Throughout the control panel, you’ll encounter references to elements in a number of different contexts, like element indexes, [Matrix](../reference/field-types/matrix.md) fields, and other [relational](relations.md) fields. Element _cards_ are a new way to display nested or related elements. They share the core features of element _chips_ (like quick-actions and ordering controls), but provide an additional layer of customization via the element’s [field layout](fields.md#field-layouts).
 
-Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by a combination of the field layout and customizable [card attributes](#custom-card-attributes) <Since ver="5.5.0" feature="Customizable card attributes" />; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
+Both chips and cards support thumbnails, but only cards allow additional custom field values to be bubbled up. The presence and order of those fields is dictated by a combination of the field layout and <Since ver="5.5.0" feature="Customizable card attributes">customizable [card attributes](#custom-card-attributes)</Since>; additional features like colorization and icons are supported by [entries](../reference/element-types/entries.md).
 
 <img src="../images/element-cards.png" alt="Two element “cards” in the Craft control panel, show thumbnails, titles, and statuses." />
 

@@ -126,4 +126,4 @@ Some <abbr title="Internet service provider">ISPs</abbr> cache DNS lookups more 
 
 All traffic enters Craft Cloud’s infrastructure via Cloudflare, which means it (and your projects!) are protected by enterprise-grade security features. However, this can complicate ownership and certificate verification for existing Cloudflare users who have proxying enabled on the domain’s current apex records.
 
-If you are in this situation (what Cloudflare calls [Orange-to-Orange](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)), you will need to [follow this guide](users.md) to validate and connect your domain.
+If you are in this situation (what Cloudflare calls [Orange-to-Orange](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)), you will need to [follow this guide](cloudflare.md) to validate and connect your domain.

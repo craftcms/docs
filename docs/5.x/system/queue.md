@@ -119,6 +119,9 @@ Requires=mysql.service
 # User + Group should agree with HTTP processes:
 User=www-data
 Group=www-data
+# Sometimes required for other packages that rely on `getcwd()`:
+WorkingDirectory=/var/www
+# The command we want to daemonize:
 ExecStart=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 # Only restart after unexpected failures:
 Restart=on-failure
@@ -137,11 +140,14 @@ WantedBy=multi-user.target
 ; Use the process number in its name (required when using `numprocs`):
 process_name=%(program_name)s_%(process_num)02d
 numprocs=4
+; The command we want to daemonize:
 command=/usr/bin/php /var/www/craft queue/listen --verbose=1 --color=0
 ; User + Group should agree with HTTP processes:
 user=www-data
 group=www-data
-# Allow more time before issuing a kill signal:
+; Sometimes required for other packages that rely on `getcwd()`:
+directory=/var/www
+; Allow more time before issuing a kill signal:
 stopwaitsecs=300
 ```
 :::
@@ -199,7 +205,9 @@ sudo systemctl status "craft-queue-worker@*"
 sudo systemctl restart "craft-queue-worker@*"
 ```
 
-This is possible due to the `@` symbol at the end of our service unit file’s name. Note that the bash-specific “range” syntax (`{1..4}`) is _not_ surrounded by quotes, but the “glob” patterns (`*`) _are_. This is critical for the system to be able to expand and map the commands to the appropriate service instances(s).
+This is possible due to the `@` symbol at the end of our service unit file’s name.
+Note that the bash-specific [expansion syntax](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion) (`{1..4}`) is _not_ surrounded by quotes, but the “glob” patterns (`*`) _are_.
+This is critical for the system to be able to expand and map the commands to the appropriate service instances(s).
 :::
 
 These setup instructions ensure your service is started whenever the host machine is rebooted, but it’s important to check your work! If your host allows, consider manually rebooting your machine and verifying that the queue is active.

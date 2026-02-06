@@ -10,11 +10,14 @@ sidebarDepth: 2
 
 On their own, [elements](elements.md) only provide a scaffold for your content—most of the content itself will be stored in *fields*.
 
-Fields are managed in <Journey path="Settings, Fields" />, and can be created on-the-fly from a [field layout](#field-layouts) designer. Field layouts and [conditions](#conditions) determine where and when your fields should appear for content authors.
+<!-- more -->
+
+Fields are managed in <Journey path="Settings, Fields" />, or created on-the-fly from a [field layout](#field-layouts) designer.
+Field layouts and [conditions](#conditions) determine where and when your fields should appear for content authors.
 
 ## Field Types
 
-Choosing a field type determines what the field’s input UI is going to look like, how it stores data, how you’ll use that data in [templates](../development/templates.md), and the ways that you can [query](../development/element-queries.md) against that data.
+Choosing a field type determines what the field’s input UI is going to look like, how it stores data, how you’ll use that data in [templates](../development/templates.md), and the way you [query](../development/element-queries.md) against that data.
 
 <See path="../reference/field-types/" />
 
@@ -34,7 +37,7 @@ Name
 :   The user-facing label for the field. This should identify the field reasonably well among other fields, and be descriptive enough for authors. _You can override this in a field layout._
 
 Handle
-:   A developer-facing identifier for the field, used to access or query by its value from code. _You can override this in a field layout._
+:   A developer-facing identifier for the field, used to access or query by its value from code. Every field must have a unique handle. _You can override this in a field layout._
 
 Default Instructions
 :   Text displayed to authors in the field layout. Basic Markdown formatting is supported. _You can override this in a field layout._
@@ -43,7 +46,9 @@ Translation Method
 :   How Craft handles the field’s value for elements that exist in multiple [sites](sites.md). See [Translation Methods](#translation-methods) below for more information.
 
 ::: tip
-A field’s _name_ and _instructions_ can be overridden when adding it to a [layout](#field-layouts).  When a field supports [multiple instances](#multi-instance-fields) per layout, you can also override its _handle_.
+A field’s _name_, _instructions_, and _handle_ can be overridden when adding it to a [layout](#field-layouts).
+
+[Multi-instance](#multi-instance-fields) fields are distinguished by those overridden names and handles; every field in a layout must have a unique handle.
 :::
 
 ### Handles
@@ -93,27 +98,27 @@ For example, if a field’s translation key format were `{site.handle[0:2]}`, th
 If the translation key format returns an empty string (`''`), the field will not appear as translatable, and its value will not be copied to any other sites. A key format of `{section.handle == 'blog' ? site.handle : ''}`, for example, would display its field as translatable per-site from _only_ the `blog` section—in all other contexts, it would not be translatable.
 
 ::: tip
-Keep in mind that fields can be assigned to multiple element types. Accessing invalid properties of the current element (like `section` on an [asset](../reference/element-types/assets.md)) may cause the key to end up blank (and therefore not translated).
+Keep in mind that fields can be attached to multiple element types. Accessing invalid properties of the current element (like `section` on an [asset](../reference/element-types/assets.md)) may cause the key to end up blank (and therefore not translated).
 :::
 
 ## Field Layouts
 
 Everything in Craft that has content associated with it will expose a configurable _field layout_, to which you can add your fields:
 
-- **[Entries](../reference/element-types/entries.md)** use the field layout defined by their entry type in **Settings** → **Entry Types** → [entry type name] → **Field Layout**.
-- **[Global sets](../reference/element-types/globals.md)** each get their own field layout, defined in **Settings** → **Globals** → [global set name] → **Field Layout**.
-- **[Assets](../reference/element-types/assets.md)** use the field layout defined by their asset volume in **Settings** → **Assets** → [asset volume name] → **Field Layout**.
-- **[Categories](../reference/element-types/categories.md)** use the field layout defined by their category group in **Settings** → **Categories** → [category group name] → **Field Layout**.
-- **[Tags](../reference/element-types/tags.md)** use the field layout defined by their tag group in **Settings** → **Tags** → [tag group name] → **Field Layout**.
-- **[Users](../reference/element-types/users.md)** share a single field layout defined in **Settings** → **Users** → **User Fields**.
-- **[Addresses](../reference/element-types/addresses.md)** also share a field layout, which can be found alongside **Users** in **Settings** → **Users** → **Address Fields**.
+- **[Entries](../reference/element-types/entries.md)** use the field layout defined by their entry type in <Journey path="Settings, Entry Types, Entry Type, Field Layout" />.
+- **[Global sets](../reference/element-types/globals.md)** each get their own field layout, defined in <Journey path="Settings, Globals, Global Set, Field Layout" />.
+- **[Assets](../reference/element-types/assets.md)** use the field layout defined by their asset volume in <Journey path="Settings, Assets, Asset Volume, Field Layout" />.
+- **[Categories](../reference/element-types/categories.md)** use the field layout defined by their category group in <Journey path="Settings, Categories, Category Group, Field Layout" />.
+- **[Tags](../reference/element-types/tags.md)** use the field layout defined by their tag group in <Journey path="Settings, Tags, Tag Group, Field Layout" />.
+- **[Users](../reference/element-types/users.md)** share a single field layout defined in <Journey path="Settings, Users, User Fields" />.
+- **[Addresses](../reference/element-types/addresses.md)** also share a field layout, which can be found alongside **Users** in <Journey path="Settings, Users, Address Fields" />.
 
 The field layout editor works roughly the same way, regardless of which element type you’re configuring:
 
 ![Screenshot of an entry’s field layout editor, with a Content tab containing three fields and a sidebar menu with “Fields” and “UI Elements” items that can be placed in the field layout](../images/field-layout-designer.png)
 
 ::: tip
-Fields and other element-specific attributes can also be added to [element cards](elements.md#chips--cards) using the [card designer](#card-designer).
+Fields and other element-specific attributes can also be added to [element cards](elements.md#chips-cards) using the [card designer](#card-designer).
 :::
 
 ### Tabs
@@ -258,12 +263,16 @@ Prior to Craft 5.7.0, these were the only two condition builders, and the UI did
 
 #### Editability Conditions <Since ver="5.7.0" feature="Editability conditions in the field layout designer" />
 
-User and element conditions completely hide field layout elements when their criteria are not met. If you would prefer to make a field read-only or “static” (so that authors can still reference its value), you can move conditions into the **Editability Conditions**.
+![A field layout element with conditions applied](../images/field-layout-read-only.png)
+
+User and element conditions completely hide field layout elements when their criteria are not met.
+If you would prefer to make a field read-only or “static” in some situations (so that authors can still reference its value), you can move conditions into the **Editability Conditions**.
 
 To be editable, a field must also be [visible](#visibility-conditions).
 
 ::: warning
-It’s possible to short-circuit validation with editability conditions! Fields marked as **Required** that the user cannot populate with content still prevent entries from being saved.
+It’s possible to short-circuit validation with editability conditions!
+Fields marked as **Required** will prevent authors from applying a draft, even if they aren’t able to provide a value.
 :::
 
 ### UI Elements
@@ -271,7 +280,7 @@ It’s possible to short-circuit validation with editability conditions! Fields 
 Switch to the **UI Elements** tab in the **New field** popover to add special field layout elements:
 
 - **Heading** — Create a label that splits up form inputs, within a tab.
-- **Tip** + **Warning** — Display a message with the corresponding urgency. Equivalent, except in visual design.
+- **Tip** + **Warning** — Display a Markdown message with the corresponding urgency. Enable the **Can be dismissed?** setting to allow authors to hide a message in the current browser (using the `localStorage` API).
 - **Template** — Render a Twig template from your [`templates/` directory](directory-structure.md#templates). The template will receive the element being edited under an `element` variable.
 - **Horizontal Rule** — A thin divider line. Subsequent fields will start in a new row.
 - **Line Break** — An invisible element that ensures the next field is rendered in a new row.

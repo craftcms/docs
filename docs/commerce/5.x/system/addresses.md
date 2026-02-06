@@ -27,7 +27,7 @@ Every order may have a shipping and billing address, and customers with accounts
 - The ability to use [estimated addresses](#estimate-addresses) to calculate shipping and tax costs with minimal data entry before checkout.
 - Multiple ways of [updating cart addresses](#updating-cart-addresses) to avoid data re-entry.
 - Methods for working with geographic regions provided by Craft’s supporting [address repository](/5.x/reference/element-types/addresses.md#address-repository).
-- A separate endpoint that can be used to allow customers to [manage their saved addresses](#customer-addresses).
+- A separate endpoint that can be used to allow customers to [manage their saved addresses](#address-book).
 
 ### Store Addresses
 
@@ -62,10 +62,6 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
     ->getSettings()
     ->getLocationAddress();
 ```
-:::
-
-::: tip
-That `getStore().getStore()` is not a typo! We’re getting the <commerce5:craft\commerce\services\Store> _service_ with the first method and getting the <commerce5:craft\commerce\models\Store> _model_ with the second.
 :::
 
 ## Cart Addresses
@@ -179,6 +175,8 @@ Customers—especially guests—will probably need to enter an address at checko
   <button>Save Shipping Address</button>
 </form>
 ```
+
+That `getStore().getStore()` is not a typo! We’re getting the <commerce5:craft\commerce\services\Store> _service_ with the first method and getting the <commerce5:craft\commerce\models\Store> _model_ with the second.
 
 ::: warning
 If your request also includes a non-empty `shippingAddressId` or `billingAddressId param, the corresponding individual address fields are ignored and Commerce attempts to fill from an [existing address](#auto-fill-from-address-book).

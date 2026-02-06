@@ -16,36 +16,61 @@ Assets fields allow you to upload and relate [assets](../element-types/assets.md
 
 ## Settings
 
-Assets fields have the following settings:
+<BrowserShot
+  url="https://my-craft-project.ddev.site/admin/settings/fields/new"
+  :link="false"
+  :max-height="500"
+  caption="Adding a new assets field via the control panel.">
+<img src="../../images/fields-assets-settings.png" alt="Assets field settings screen in the Craft control panel">
+</BrowserShot>
 
-- **Restrict uploads to a single folder?** – Whether file uploads/relations should be constrained to a single folder.
+Assets fields have the following novel settings:
 
-  If enabled, the following setting will be visible:
+- **Restrict assets to a single location?** – Force files to be uploaded to (and selected from) a single folder.
+
+  If _enabled_, the following setting will be visible:
 
   - **Asset Location** – A specific volume and folder from which assets can be selected (and into which assets uploaded directly to the field are saved). The path portion of this setting is evaluated as an [object template](../../system/object-templates.md).
 
-  If disabled, the following settings will be visible:
+  If _disabled_, the following settings will be visible:
 
   - **Sources** – Which asset volumes (or other asset index [sources](../../system/elements.md#sources)) the field should be able to relate assets from.
   - **Default Upload Location** – The default volume and path that files are stored in when uploaded directly to the field. This setting is evaluated as an [object template](../../system/object-templates.md).
 
-- **Restrict allowed file types?** Whether the field should only be able to upload/relate files of a certain type(s).
-- **Limit** – The maximum number of assets that can be related with the field at once. (Default is no limit.)
-- **View Mode** – How the field should appear for authors.
+- **Selectable Assets Condition** — Provide additional constraints on the assets that can be selected.
+- **Show unpermitted volumes** — Allow authors to select assets from volumes they aren’t otherwise [allowed to view or modify](../../system/user-management.md#permissions).
+- **Show unpermitted files** — Allow authors to select assets that otherwise would’t be viewable (per their **View files uploaded by other users** permission).
+- **Restrict allowed file types?** — Whether the field should only be able to upload/relate files of a certain type(s).
+  ::: tip
+  You can add novel file “types” with the <config5:extraFileKinds> setting.
+  Craft always respects the <config5:allowedFileExtensions> and <config5:extraAllowedFileExtensions> setting for new uploads.
+
+  If you want to require a single, specific extension (rather than a general “type”), add a **Filename** condition to the **Selectable Assets Condition**, and set it to **ends with** `.jpeg`.
+  :::
+- **Allow uploading directly to the field** — When enabled, authors can drag-and-drop files onto the field to upload and attach them in a single step. Review the **Default Upload Location** setting to make sure these assets are organized.
+
+### Base Relation Field Settings
+
+These settings are part of every relational field:
+
+- **Min Relations** – The _minimum_ number of assets that must be related to pass validation.
+- **Max Relations** – The _maximum_ number of assets that can be related to pass validation.
+- **Default Asset Placement** — Choose whether newly-attached assets are _prepended_ or _appended_ to the existing selection.
+- **View Mode** — How the related assets are displayed to authors (_List_, _Cards_, <Since ver="5.9.0" feature="The inline list and card grid view modes for relational fields">_Card grid_, or _Inline list_</Since>).
 - **“Add” Button Label** – The label that should be used on the field’s selection button.
 - **Validate related assets** — Whether or not validation errors on the related assets will be bubbled up.
 - **Preview Mode** — How this field’s values are displayed when included on element indexes.
 
-### Multi-Site Settings
+Within the **Advanced** toggle, two additional options are available:
 
-On multi-site installs, the following settings will also be available:
+- **Allow self relations** — If this field is attached to an asset via a [volume field layout](../element-types/assets.md#volumes), should the author be allowed to create a circular reference?
+- **Relate assets from a specific site?** — Lock relations to a single [site](#multi-site-settings).
+
+#### Multi-Site Settings
+
+On multi-site installs, the following setting will also be available:
 
 - **Translation Method** — How relationships are handled when [propagating changes to other sites](../../system/fields.md#translation-methods).
-- **Relate assets from a specific site?** — Whether to only allow relations to assets from a specific site.
-  - If _enabled_, a new setting will appear where you can choose which site.
-  - If _disabled_, related assets will always be pulled from the current site.
-
-- **Show the site menu** — Whether to display the site menu in asset selection modals. (This setting is hidden when relations are locked to a single site.)
 
 <See path="../../system/fields.md" hash="translation-methods" label="Translation Methods" description="Learn about options for translating field values." />
 

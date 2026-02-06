@@ -82,9 +82,5 @@ export default {
     color: var(--text-color);
     padding: 0.35em 0.3em 0.2em 0.4em;
   }
-
-  & + & {
-    margin-left: 5px;
-  }
 }
 </style>

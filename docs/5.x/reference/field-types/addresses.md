@@ -20,15 +20,18 @@ Addresses can be [copied](../../system/elements.md#copying-elements) between fie
 
 ## Settings
 
-Address fields can be displayed to editors as [cards](../../system/elements.md#chips-cards) or in a full [element index](../../system/elements.md#indexes). Either way, individual addresses are always displayed as cards.
+Address fields can be displayed to editors as [cards](../../system/elements.md#chips-cards) or in a full [element index](../../system/elements.md#indexes).
+Either way, individual addresses are always displayed as cards.
 
-You can also choose a minimum and maximum number of addresses that can be added to the field for the owner element to validate.
+You can also use the **Min Addresses** and **Max Addresses** settings to control how many addresses must (or _can_) be added to the field for the owner to validate.
+
+All addresses in the system use [a single field layout](../element-types/addresses.md#setup), managed via <Journey path="Settings, Addresses" />.
 
 ## Development
 
-Like Matrix and [relational fields](../../system/relations.md#fields), address field data is provided as an [element query](../../development/element-queries.md) or [element collection](../../development/collections.md#element-collections).
+Like Matrix and [relational fields](../../system/relations.md#fields), address field data is returned as an [element query](../../development/element-queries.md) (or an [element collection](../../development/collections.md#element-collections), when [eager-loaded](../../development/eager-loading.md)).
 
-Typically, you will access addresses attached to an element via the field’s handle followed by a query execution method like `.all()`:
+Typically, you will access addresses attached to an element via the field’s handle, followed by a query execution method like `.all()`:
 
 ```twig
 {% set addresses = entry.contacts.all() %}
@@ -54,6 +57,7 @@ query StationsQuery {
     title
     id
     ... on station_Entry {
+      # Our addresses field:
       location {
         addressLine1
         addressLine2
@@ -79,7 +83,8 @@ query StationsQuery {
 }
 ```
 
-Not all properties will contain data, due to differences in international storage and formatting. [Address formatters](../element-types/addresses.md#address-formatter) are not available via GraphQL, so you are responsible for handling variations in the returned data.
+Not all properties will contain data, due to differences in international storage and formatting.
+[Address formatters](../element-types/addresses.md#address-formatter) are not available via GraphQL, so you are responsible for handling variations in the returned data.
 
 With the admin-only **Full Schema**, you may directly query for one or more addresses using the `address()` and `addresses()` queries:
 

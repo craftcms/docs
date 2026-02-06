@@ -28,7 +28,7 @@ For more on coupon code setup and templating, see the [coupon codes](coupon-code
 
 ## Discount Matching Items
 
-Each discount’s **Matching Items** tab provides options for limiting what store items qualify for the discount. By default, _all purchasables_ (that are considered promotable) qualify for the discount.
+Each discount’s **Matching Items** tab provides options for limiting what store items qualify for the discount. By default, all purchasables that are considered _promotable_ qualify for the discount.
 
 ### Purchasables
 
@@ -37,7 +37,7 @@ You can restrict a discount to specific purchasables by enabling the **Only matc
 If this is enabled and no purchasables are selected, the discount will never match.
 
 ::: warning
-Only variants marked as **Promotable** will match discount conditions (even if they are explicitly selected in one of the rules).
+Only variants marked as **Promotable** (using the native field layout element attached to their field layout via [product type settings](products-variants.md#product-type-options)) will match discount conditions (even if they are explicitly selected in one of the rules).
 :::
 
 ## Discount Conditions Rules

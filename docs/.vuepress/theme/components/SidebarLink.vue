@@ -154,5 +154,9 @@ a.sidebar-link {
   &.active {
     color: var(--sidebar-active-link-color);
   }
+
+  &.active {
+    font-weight: 600;
+  }
 }
 </style>

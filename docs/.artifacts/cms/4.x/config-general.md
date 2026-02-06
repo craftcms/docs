@@ -3262,6 +3262,37 @@ CRAFT_ENABLE_CSRF_PROTECTION=false
 
 
 
+### `enableTwigSandbox`
+
+<div class="compact">
+
+Allowed types
+:  [boolean](https://php.net/language.types.boolean)
+
+Default value
+:  `false`
+
+Defined by
+:  [GeneralConfig::$enableTwigSandbox](craft4:craft\config\GeneralConfig::$enableTwigSandbox)
+
+Since
+:  4.17.0
+
+</div>
+
+Whether user-defined Twig templates should be sandboxed.
+
+::: code
+```php Static Config
+->enableTwigSandbox()
+```
+```shell Environment Override
+CRAFT_ENABLE_TWIG_SANDBOX=true
+```
+:::
+
+
+
 ### `invalidLoginWindowDuration`
 
 <div class="compact">
@@ -4509,9 +4540,12 @@ Defined by
 Since
 :  3.6.0
 
+Deprecated
+:  in 4.17.0 <Icon kind="danger" style="color: var(--craft-red)" />
+
 </div>
 
-Whether the `transform` directive should be disabled for the GraphQL API.
+Whether the `@transform` directive should be disabled for the GraphQL API.
 
 ::: code
 ```php Static Config
@@ -4520,6 +4554,11 @@ Whether the `transform` directive should be disabled for the GraphQL API.
 ```shell Environment Override
 CRAFT_DISABLE_GRAPHQL_TRANSFORM_DIRECTIVE=true
 ```
+:::
+
+::: tip
+As of Craft 4.17.0, the `@transform` directive can be optionally included for each GraphQL schema,
+unless this setting is set to `true`.
 :::
 
 

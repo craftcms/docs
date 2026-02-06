@@ -11,7 +11,7 @@ Craft provides a [GraphQL](https://graphql.org) API you can use to work with you
 
 ## Getting Started
 
-GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel give you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
+GraphQL’s API is self-documenting, so you can immediately start building and executing queries interactively via Craft’s included [GraphiQL IDE](#using-the-graphiql-ide). Querying from the control panel gives you unfettered access to your content, whereas queries from the outside require [an endpoint and appropriate permissions](#setting-up-your-api-endpoint).
 
 ::: tip
 You can also execute GraphQL queries from [Twig templates](templates.md) with the [`gql()` function](../reference/twig/functions.md#gql).
@@ -52,6 +52,9 @@ Administrators have access to a third “full” schema, for testing with the [G
 ::: warning
 Schema customization is only possible with an admin account and <config5:allowAdminChanges> _on_.
 :::
+
+In addition to the content and mutation settings for each schema, you can opt in to support for the `@transform` and `@parseRefs` [directives](#list-of-available-directives).
+You may globally disable image transforms in GraphQL using the <config5:disableGraphqlTransformDirective> setting (this completely hides the option in the schema customization screen). <Since ver="5.9.0" feature="Per-schema control over availability of @transform and @parseRefs directives" />
 
 #### Generate Tokens
 

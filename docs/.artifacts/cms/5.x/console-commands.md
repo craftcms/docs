@@ -127,6 +127,13 @@ Data caches (Anything cached with `Craft::$app->getCache()->set()`)
 
 Lists the caches that can be cleared.
 
+<h4 id="clear-caches-index-parameters" class="command-subheading">Parameters</h4>
+
+which
+:  The cache(s) to clear
+
+
+
 <h3 id="clear-caches-temp-files">
     <a href="#clear-caches-temp-files" class="header-anchor">#</a>
     <code>clear-caches/temp-files</code>

@@ -208,6 +208,8 @@ Nope! A Craft license is included with your Craft Cloud plan. It is valid for as
 
 You _do_ need to purchase licenses for any plugins you use, via the in-app Plugin Store.
 
+Read more about [how licenses work](licensing.md) on Craft Cloud.
+
 <a id="quotas"></a>
 
 ### Are there any resource limits on Craft Cloud?

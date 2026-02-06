@@ -77,7 +77,7 @@ ddev start
 
     Beta versions of plugins may be suggested!
     Adjust your [`minimum-stability`](https://getcomposer.org/doc/04-schema.md#minimum-stability) and [`prefer-stable`](https://getcomposer.org/doc/04-schema.md#prefer-stable) settings if those plugins depend on other packages that do not yet have stable releases.
-    This tool does _not_ adjust your project’s other dependencies.
+    This tool does _not_ adjust your project’s other dependencies; many projects require `craftcms/generator`, which has been updated to `^2.0.0` for Craft 5.
 
     ::: tip
     To perform this step manually, change your `craftcms/cms` constraint to `^5.0.0`, and each plugin’s constraint to the Craft 5-compatible versions listed in the upgrade utility.
@@ -468,7 +468,7 @@ If you don’t have control over the query _value_ (say, it comes from a third-p
   .all() %}
 ```
 
-You may also want to review any [custom sources](system/elements.md#sources) that use condition rules targeting the [affected field types](development/element-queries.md#case-sensitivity).
+Textual condition rules in [custom sources](system/elements.md#sources) and [field layouts](system/fields.md#conditions) are always handled case-insensitively. <Since ver="5.9.0" description="Condition rules were made case-insensitive in {product} {ver}" />
 
 ### Matrix Fields
 

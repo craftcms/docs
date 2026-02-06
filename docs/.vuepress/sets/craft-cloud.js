@@ -42,6 +42,7 @@ module.exports = {
           "commands",
           "cron",
           "local-dev",
+          "rebrand-assets",
           "launch-checklist",
         ],
       },
@@ -51,7 +52,9 @@ module.exports = {
         children: [
           "compatibility",
           "static-caching",
+          "esi",
           "quotas",
+          "licensing",
           "backups",
           "regions",
           "domains",
@@ -78,6 +81,7 @@ module.exports = {
         children: [
           "faq",
           "troubleshooting",
+          "security",
         ],
       },
     ],

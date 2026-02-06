@@ -18,7 +18,7 @@ _Unlike_ other field types, relational fields store their data in a dedicated `r
 
 This allows you to design fast and powerful [queries](#the-relatedto-parameter) for related content, and to [optimize loading](../development/eager-loading.md) of nested and related resources.
 
-### Terminology
+## Terminology
 
 Each relationship consists of two elements we call the *source* and *target*:
 
@@ -64,7 +64,7 @@ Craft has five built-in relational fields, each of which establishes connections
 
 Additionally, the [link field](../reference/field-types/link.md) uses the relations system to store references to assets, categories, and entries.
 
-[Addresses](../reference/element-types/addresses.md) (as well as other nested entries like those in [Matrix](../reference/field-types/matrix.md) or [content blocks](../reference/field-types/content-block.md) fields) and [global sets](../reference/element-types/globals.md) don’t have relational fields, in the traditional sense—the former are managed as nested elements and implicitly connected to their owners; the latter exist as static, singleton elements and are functionally equivalent to a boolean value.
+[Addresses](../reference/element-types/addresses.md) (as well as other nested elements like those in [Matrix](../reference/field-types/matrix.md) or [content blocks](../reference/field-types/content-block.md) fields) and [global sets](../reference/element-types/globals.md) don’t have relational fields, in the traditional sense—the former are managed as nested elements and implicitly connected to their owners; the latter exist as static, singleton elements and are functionally equivalent to a boolean value.
 If you do need to point to one of your global sets (say, to display one of a few fixed sets of data), consider adding a [dropdown field](../reference/field-types/dropdown.md) populated with the global set handles.
 You can then directly load the corresponding global set element using a query:
 

@@ -9,6 +9,7 @@
   html:not([class]) {
     --text-color: theme("colors.white");
     --text-color-muted: #818EA2;
+    --text-color-inverted: theme("colors.slate");
     --ui-component-color: theme("colors.gray.600");
     --bg-color: theme("colors.gray.900");
     --sidebar-bg-color: rgba(0, 0, 0, 0.1);
@@ -219,7 +220,7 @@
     border-bottom: 1px solid var(--border-color);
   }
 
-  ul.code-language-switcher {
+  div.code-language-switcher {
     background: var(--border-color);
 
     li a.active {
