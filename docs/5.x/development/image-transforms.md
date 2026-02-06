@@ -251,6 +251,13 @@ You can also provide relative image sizes when eager-loading asset transforms. S
 
 When requesting asset data via the [GraphQL](graphql.md) API, you can get named and ad-hoc transforms with the `@transform` directive.
 
+::: warning
+To prevent abuse, the `@transform` directive is disabled by default. <Since ver="5.9.0" description="The @transform GraphQL directive is disabled as of {ver} of {product}." />
+You can enable it on a per-schema basis by visiting <Journey path="GraphQL, Schemas, *Schema" />
+
+The <config5:disableGraphqlTransformDirective> setting can be used to globally disable transforms, regardless of existing schemas’ settings.
+:::
+
 Like we’ve seen in the template-defined transforms, the GraphQL API allows you to retrieve individual properties as though they were tied to a transform…
 
 ::: code
