@@ -2,7 +2,7 @@
     <ol class="journey theme-default-content-override">
         <li v-for="(segment, i) in segments" :key="i" class="step">
             {{ ' ' }}
-            <span class="step-label">{{ segment }}</span><span v-if="i < (segments.length - 1)" class="step-arrow" aria-hidden="true">&rarr;</span>
+            <span :class="{ 'step-label': true, 'step-label--is-user-defined': segment.isDynamic }">{{ segment.label }}</span><span v-if="i < (segments.length - 1)" class="step-arrow" aria-hidden="true">&rarr;</span>
         </li>
     </ol>
 </template>
@@ -14,7 +14,23 @@ export default {
   },
   computed: {
     segments() {
-        return this.path.split(',').map((s) => s.trim());
+      let arr = this.path.split(',')
+        .map((s) => s.trim())
+        .map(function(s) {
+          if (s.indexOf('*') === 0) {
+            return {
+                label: s.substring(1),
+                isDynamic: true,
+            };
+          }
+
+          return {
+            label: s,
+            isDynamic: false,
+          };
+        });
+
+      return arr;
     }
   }
 };
@@ -39,6 +55,10 @@ export default {
     border-radius: 3px;
     padding: 0.2em 0.4em;
     white-space: nowrap;
+
+    &--is-user-defined {
+        border-style: dashed;
+    }
 }
 
 .step-arrow {

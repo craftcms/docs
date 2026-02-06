@@ -36,7 +36,8 @@ Multi-select fields have the following settings:
 
 ## Development
 
-The order in which options are selected is _not_ preserved, and . If you wish to order the selections, consider using one of the [relational](README.md#references) fields.
+The order in which options are selected is _not_ preserved.
+If the order of selections is important, consider using one of the [relational](README.md#references) fields.
 
 ### Working with Multi-select Field Data
 
@@ -167,7 +168,7 @@ If you have a front-end element form (such as an [entry form](kb:entry-form)) th
       value: option.value,
       text: option.label,
       selected: selected,
-    })}}
+    }) }}
   {% endfor %}
 </select>
 ```

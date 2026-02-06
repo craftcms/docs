@@ -96,11 +96,13 @@ Asset field layouts can include the native **Alternative Text** <Poi label="1" t
 <img src="../../images/assets-field-layout.png" alt="The field layout designer for an asset element. The content pane includes a Title field and an Alternative Text field."/>
 </BrowserShot>
 
-A native `alt` attribute is provided to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](../../system/fields.md) values, attributes, or combination thereof. 
+A native `alt` attribute is provided to standardize the inclusion of assistive text on `img` elements that Craft generates—especially in the control panel. Alt text is also added when outputting an image with `asset.getImg()` in Twig. You can always render `img` elements yourself, using any [custom field](../../system/fields.md) values, attributes, or combination thereof.
 
 We strongly recommend adding the native attribute to your volumes’ field layouts; alt text is a critical interface for many users, and essential for anyone using assistive technology in the control panel. Well-considered image descriptions (and titles!) have the added benefit of making search and discovery of previously-uploaded images much easier. The WCAG [advises against](https://www.w3.org/TR/2015/REC-ATAG20-20150924/Overview.html#gl_b23) automatically repairing alt text with “generic or irrelevant strings,” including the name of the file (which asset titles are generated from), so Craft omits the `alt` attribute when using `asset.getImg()` if no explicit text is available.
 
 **Alternative Text** is also displayed as a “transcript” beneath video previews, in the control panel.
+
+<See path="../../development/accessibility.md" label="Authoring alternative text" description="Learn more about setting up a smart alternative text authoring experience." />
 
 ::: tip
 Do you have existing `alt` text stored in a different field? You can migrate it to the native attribute with the [`resave/assets` command](../cli.md#resave):
@@ -108,6 +110,8 @@ Do you have existing `alt` text stored in a different field? You can migrate it 
 ```bash
 php craft resave/assets --set alt --to myAltTextField --if-empty
 ```
+
+After running this command in your live environment, replace any usages in your templates, remove the field from your volumes’ field layouts, and deploy the changes.
 :::
 
 ### Generated Fields <Since ver="5.8.0" feature="Generated fields on asset volumes" />
@@ -194,9 +198,9 @@ To help serve optimized images, Craft supports predefined (or “named”) and a
 
 ## Image Editor
 
-Craft provides a built-in Image Editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose a focal point on them.
+Craft provides a built-in image editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose their [focal point](#focal-points).
 
-To launch the Image Editor, double-click an image (either on the Assets page or from an [Assets field](../field-types/assets.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (<icon kind="settings" />).
+To launch the image editor, double-click an image (either on the Assets page or from an [Assets field](../field-types/assets.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (<icon kind="settings" />).
 
 ### Focal Points
 

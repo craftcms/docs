@@ -43,19 +43,36 @@ Craft also has multiple [editions](../editions.md), some of which give you acces
 <img src="../images/control-panel-tour-screen.png" alt="A representative screen from the Craft control panel">
 </BrowserShot>
 
-Let’s take a quick spin around a typical control panel _screen_:
-- On the left edge is the _main navigation_ <Poi label="1" target="tour" id="navigation" />. At the top of this bar, your system name and icon are displayed. Below, each [main section](#main-sections) of the control panel you have access to is linked, and the current one is highlighted. Click the **Toggle sidebar** button to collapse it and make more room for the page content.
-- At the top, the _global header_ <Poi label="2" target="tour" id="globalHeader" /> contains breadcrumbs (when working with nested content or settings), actions for the current screen, and the user menu.
-- The current screen’s _main container_ takes up the remainder of the horizontal space, and will scroll if the content is tall enough. Within this region, you’ll find some combination of the following features:
-    - A _header_ <Poi label="3" target="tour" id="header" />, displaying a title and controls for the current screen;
-    - A _sub-menu_ at the left edge (not pictured), listing siblings of the current screen;
-    - A _content container_ <Poi label="4" target="tour" id="content" /> for the screen’s primary content (usually set off from the background on a lighter color);
-    - _Tabs_, splitting the screen’s content or settings into logical groups (not pictured);
-    - A _details_ <Poi label="5" target="tour" id="details" /> pane at the right edge, with metadata and controls specific to the type of content being viewed;
+Let’s take a quick spin around a typical control panel screen.
+
+Global sidebar <Poi label="1" target="tour" id="navigation" />
+:   Contains the system name and icon, followed by the _primary navigation_.
+    Each of the control panel’s [main sections](#main-sections) is linked, when configured (and your user has the related [permission](user-management.md#permissions)).
+    Pick the **Toggle sidebar** button to collapse it and make more room for the page content.
+
+    Some items in the primary navigation contain nested links.
+    Those lists are automatically expanded based on the current screen’s URI, or when you pick the **Open subnavigation** toggle.
+
+Global header <Poi label="2" target="tour" id="globalHeader" />
+:   Contains _breadcrumbs_ (when working with nested content or settings), actions for the current screen, and the user menu.
+
+Main container
+:   The page’s main region typically contains editable content or settings, as well as secondary navigation and a sidebar.
+    - A _header_ <Poi label="3" target="tour" id="header" /> displays the page’s title and actions for the current screen.
+        - On element edit screens, a _recent activity_ region holds information about any other users that may be viewing or editing that element.
+    - _Secondary navigation_ contains links to adjacent pages (like other [utilities](#utilities), element [sources](elements.md#sources), or related settings). Like the global menu menu’s content tends to be stable between the linked pages, but it may not be present when viewing more deeply-nested resources.
+    - The _content_ <Poi label="4" target="tour" id="content" /> area’s structure and substance can vary dramatically between areas of the control panel.
+        - _Tabs_ may split the screen’s content or settings into logical groups (not pictured). The selected tab is appended to the current URL as a hash.
+        - When present, the nested _sidebar_ <Poi label="5" target="tour" id="details" /> is a mix of editable and read-only metadata.
 
 You will see these same page components crop up in other screens—and even in [slideouts](#slideouts)!
 
-#### Main Sections
+::: tip
+The control panel includes [skip links](#skip-links) to a number of landmarks present in the current screen.
+Use the **Disable autofocus** [accessibility preference](#user-preferences) to prevent search inputs or other UI from being focused when navigating.
+:::
+
+### Main Sections
 
 You may not see (or need) all these sections in your _main navigation_. They’ll appear only when Craft determines that they’ll be useful to the logged-in user—for example, _Categories_ is hidden until you’ve configured at least one [Category Group](../reference/element-types/categories.md#category-groups).
 
@@ -73,7 +90,7 @@ Section | Description
 [Plugin Store](#plugin-store) | Browse, install, and purchase Craft and plugin licenses from the official Plugin Store.
 …and more! | Some plugins provide their own control panel screens; others may only have a pane in the [Settings](#settings) section.
 
-#### Announcements
+### Announcements
 
 Keep an eye on the _global header_ for a <Icon kind="gift" /> gift icon—Craft and any installed plugins may send notifications about new features to all control panel users, when updates are applied.
 
@@ -124,7 +141,8 @@ Keep in mind that any user marked as an “Admin” implicitly has access to _al
 
 #### Disabling Utilities
 
-You can disable a utility for all users with the [`disabledUtilities` config setting](config5:disabledUtilities). Refer to each [utility class](repo:craftcms/cms/tree/5.x/src/utilities)’s `id()` method for their handles—including those provided by plugins.
+You can disable a utility for all users with the [`disabledUtilities` config setting](config5:disabledUtilities).
+Refer to each [utility class](repo:craftcms/cms/tree/5.x/src/utilities)’s `id()` method for their handles (including those provided by plugins), or inspect its URL in the control panel—the handle is the last segment (i.e. `system-messages` in `/admin/utilities/system-messages`).
 
 ### Settings
 
@@ -257,3 +275,128 @@ In some situations, dragging can be combined with [group selections](#group-sele
 ### Search
 
 Craft has a powerful [search](searching.md) system that complements the [condition builder](elements.md#filters-and-columns) on every element index.
+
+## Accessibility
+
+The control panel is designed and built with <Term slug="accessibility" label="accessibility" /> principles in mind.
+We target AA conformance with [WCAG 2.2](https://www.w3.org/TR/WCAG22/), and publish progress reports our website’s [accessibility portal](https://craftcms.com/accessibility).
+
+In addition to built-in interfaces, the content tools you configure for authors are backed by components that we [regularly audit](https://craftcms.com/accessibility/reports) for conformance.
+
+<See path="../development/accessibility.md" />
+
+### Navigating the control panel
+
+[Skip links](#skip-links) and [landmarks](#landmarks) have been incorporated throughout the control panel to make navigation via keyboard and screen reader more straightforward.
+
+#### Skip Links
+
+Global skip links are found at the beginning of each control panel screen.
+
+![A link to 'Skip to main section' with a visible focus ring](../images/accessibility-jump-link-example.png)
+
+These include:
+
+- **Skip to main section:** Skips to the `main` container. This container includes the page header, which contains the page title and controls for the current screen.
+- **Skip to left sidebar:** <Since ver="5.7.0" /> Skips to the sub-navigation container. For example:
+  - On element index pages, this moves keyboard focus to the “Sources” menu.
+  - On account pages, this moves keyboard focus to the “Account” navigation.
+- **Skip to content:** <Since ver="5.7.0" /> Skips to the primary content pane on the page.
+- **Skip to right sidebar:** <Since ver="5.7.0" /> Skips to the details container, which includes page metadata.
+
+::: tip
+The accessible names for the “left” and “right” sidebars respect your user’s language setting, and will flip when using a right-to-left script.
+:::
+
+Only links that point to a region used in the current screen are exposed in this list.
+In addition to global skip links, other parts of the control panel may include local skip links.
+For example, element index pages contain a **Skip to footer** link within the content region that jumps to pagination and bulk actions in the “footer” toolbar.
+
+When saving an element, success and failure states are announced via a live region, and an error summary is added to the top of the content region:
+
+![Screenshot of the error summary at the top of an element edit screen, with jump links to each field with problems.](../images/accessibility-validation-errors.png)
+
+Each of the validation messages link to the field that they apply to.
+Jumping to an error may switch to a different tab in the field layout than is currently selected.
+
+#### Landmarks
+
+Special regions of the control panel are designated using [roles](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/landmark_role). These include:
+
+- **`main`** — This landmark contains the bulk of the page content.
+- **`nav`** — Depending on the page, there may be several navigation landmarks, including:
+  - **Primary navigation** — Links for the primary sections of the control panel, like **Dashboard**, **Entries**, **Settings**, and so on. Available on most screens.
+  - **Breadcrumb navigation** — Links to each parent, owner, and relevant organizational component (like a section or static route). Available only when working with [structures](../reference/element-types/entries.md#structures), [nested elements](../system/elements.md#nested-elements), or settings.
+  - **Secondary navigation** — Located inside the `main` landmark, the secondary navigation’s accessible name will change based on where you are in the control panel and what the links within it represent. For example, in the **My Account** screen, it is called _Account_; on the **Entries** or **Assets** element index it is called _Sources_.
+- **`status`** — A live region where [flashes](../development/forms.md#flashes) and other dynamic messages are injected.
+
+::: tip
+See the [tour](#tour) section on this page for more information on each of these sections.
+:::
+
+Some screens (like the login page, errors, and post-[update](../update.md) prompts) have a single, generic content container, and don’t include labeled content or navigation regions.
+
+### User Preferences
+
+The control panel can be customized to match your needs by visiting <Journey path="My Account, Preferences" />.
+Settings are split into three groups, and are stored on your user, so your experience will be consistent across all sessions.
+
+::: warning
+Your preferences are _not_ applied to the login screen or other off-session pages, but your developer can use the <config5:accessibilityDefaults> setting to apply defaults.
+:::
+
+Display Settings
+:   These settings are concerned with the appearance of the control panel UI.
+
+    - **Use shapes to represent statuses:** Statuses are always represented by colorized “badges,” and—in some cases—icons. Enable this setting to use shapes for otherwise indistinguishable states.
+    - **Underline links:** This setting adds underlines to all links inside the control panel.
+
+    ![The appearance of statuses in Craft, when the “use shapes to represent statuses” setting is enabled.](../images/accessibility-status-shapes.png)
+
+General Settings
+:   - **Disable autofocus:** Some inputs inside the control panel use the `autofocus` attribute, so keyboard focus may move unexpectedly; these include search inputs on element index pages, and the first input on Edit screens or inside of slideouts. Enabling this setting will prevent this autofocus behavior.
+
+Notification Settings
+:   Both **Duration** and **Position** of notification “toasts” can be configured.
+
+    - **Notification Duration**: By default, toasts are shown for _five seconds_ before disappearing. You can shorten this timer to _two seconds_, extend it to _ten seconds_, or have them remain _indefinitely_ (allowing the user to close them manually).
+    - **Notification Position**: Toasts appear at the bottom-left corner of the screen, by default. This setting allows you to customize which corner of the screen they are placed.
+
+Slideout Position
+:   Slideout position can be changed to show on the left- or right-hand side of the screen.
+
+::: tip
+Notification and slideout preferences are stored in a script-agnostic way, so they will behave naturally if you switch between <abbr title="left-to-right">LTR</abbr> and <abbr title="right-to-left">RTL</abbr> languages.
+:::
+
+### Image editor
+
+The built-in image editor features a number of keyboard-accessible adjustments. <Since ver="5.9.0" feature="A keyboard-accessible image editor" />
+
+From the right sidebar on an [asset](../reference/element-types/assets.md)’s edit screen, find the **Edit image** button.
+A modal will open, with tabs for [**Rotate**](#rotation) and [**Crop**](#cropping).
+
+::: tip
+If you can’t find the **Edit image** button, the asset may not be transformable on the current system.
+This may be due to the file type (i.e. `PDF`), or your [image driver](../requirements.md).
+:::
+
+#### Rotation
+
+Images can be rotated 90&deg; clockwise (**Rotate Right**) or counter-clockwise (**Rotate Left**), flipped vertically and horizontally, or “straightened” in increments of 1&deg; using the **Rotate** slider.
+
+Use the **Focal Point** button to add a position control to the image.
+You can nudge the focal point horizontally or vertically; the value is stored as a proportional coordinate pair, with decimal values between `0` and `1`.
+The focal point is used to keep subjects within a transformed image—for example, vertical head-shots attached to staff profiles 
+
+::: tip
+Some asset filesystem types ([AWS S3](plugin:aws-s3), in particular) can automatically detect subjects and populate the **Focal Point** attributes.
+Combined with [transforms](../development/image-transforms.md), this can help keep subjects in-frame, when assets are used in multiple contexts.
+:::
+
+### Alternative Text
+
+Craft provides a native [**Alternative Text** field](../reference/element-types/assets.md#alt-text) for [assets](../reference/element-types/assets.md).
+In addition to simplifying how images are output in your [front-end templates](../development/templates.md), this provides a known source for image descriptions, when their thumbnails are displayed in the control panel.
+
+<See path="../development/accessibility.md" hash="alt-text" label="Handling alt text" description="Learn how to set up sensible alternative text authoring tools." />
