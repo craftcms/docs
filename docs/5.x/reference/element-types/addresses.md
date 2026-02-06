@@ -418,7 +418,6 @@ return [
 
 ::: tip
 The next few snippets may be a bit dense—numbered comments are peppered throughout, corresponding to items in the **Guide** section just below it.
-They also assume you have a layout template functionally equivalent to the [models and validation](../../development/forms.md#models-and-validation) example.
 :::
 
 ### Scaffolding
