@@ -44,7 +44,7 @@ Due to its diverging parity with MySQL, we no longer recommend MariaDB for sites
 - [BCMath](https://www.php.net/manual/en/book.bc.php)
 - [ctype](https://secure.php.net/manual/en/book.ctype.php)
 - [cURL](http://php.net/manual/en/book.curl.php)
-- [GD](http://php.net/manual/en/book.image.php) or [ImageMagick](http://php.net/manual/en/book.imagick.php)
+- [GD](http://php.net/manual/en/book.image.php) <Since ver="5.9.0" description="GD became a requirement in {ver} of {product}" />
 - [iconv](http://php.net/manual/en/book.iconv.php)
 - [Intl](http://php.net/manual/en/book.intl.php)
 - [JSON](http://php.net/manual/en/book.json.php)
@@ -59,7 +59,10 @@ Due to its diverging parity with MySQL, we no longer recommend MariaDB for sites
 - [DOM](http://php.net/manual/en/book.dom.php)
 
 ::: tip
-We recommend ImageMagick over GD for expanded [image handling options](development/image-transforms.md).
+We recommend [ImageMagick](http://php.net/manual/en/book.imagick.php) over GD for expanded [image handling options](development/image-transforms.md).
+
+When multiple image drivers are available on your platform, Craft prefers ImageMagick.
+You can explicitly select a driver with the <config5:imageDriver> setting.
 :::
 
 ## Optional PHP Methods and Configurations
