@@ -21323,6 +21323,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\ProductTitleField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\ProductTitleField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21371,6 +21377,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAllowedQtyField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21419,6 +21431,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableAvailableForPurchaseField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21467,6 +21485,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableDimensionsField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21515,6 +21539,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableFreeShippingField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21563,6 +21593,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePriceField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21611,6 +21647,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasablePromotableField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21659,6 +21701,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableSkuField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21707,6 +21755,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableStockField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21755,6 +21809,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\PurchasableWeightField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21803,6 +21863,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\TransferManagementField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21851,6 +21917,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\UserAddressSettings",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21899,6 +21971,12 @@
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\VariantTitleField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\VariantTitleField",
         "name": "EVENT_DEFINE_SHOW_IN_FORM",
         "type": "craft\\events\\DefineShowFieldLayoutComponentInFormEvent",
         "desc": "The event that is triggered when determining whether the component should be shown in a field layout."
@@ -21944,6 +22022,12 @@
         "name": "EVENT_AFTER_VALIDATE",
         "type": "yii\\base\\Event",
         "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\commerce\\fieldlayoutelements\\VariantsField",
+        "name": "EVENT_DEFINE_ACTION_MENU_ITEMS",
+        "type": "craft\\events\\DefineFieldActionsEvent",
+        "desc": "The event that is triggered when defining action menu items."
     },
     {
         "class": "craft\\commerce\\fieldlayoutelements\\VariantsField",
