@@ -9,7 +9,8 @@ related:
 
 # JSON Fields <Badge text="New!" />
 
-Validate and store arbitrary JSON data in a simple [CodeMirror](https://codemirror.net/) editor. The data is automatically [deserialized](#development) for you and can be 
+Validate and store arbitrary JSON data in a simple [CodeMirror](https://codemirror.net/) editor.
+The data is automatically [deserialized](#development) for you and can be used in templates as whatever [value type](#data-types) was stored.
 
 <!-- more -->
 
@@ -31,7 +32,7 @@ JSON fields have no custom settings.
 
 The JSON field returns an instance of <craft5:craft\fields\data\JsonData>, which has a handful of helpful features for interacting with the deserialized data.
 
-Directly outputting the field’s value serializes it back to JSON:
+Directly outputting the field’s value serializes it back to a JSON string:
 
 ::: code
 ```twig Template
@@ -88,8 +89,26 @@ The [scalar](../twig/tests.md#scalar) test makes it possible to quickly differen
 ```
 
 ::: tip
-Note that we’re directly testing against the field’s underlying deserialized value, not the `JsonData` object that wraps it. The latter will always be non-scalar!
+Note that we’re directly testing against the field’s underlying deserialized value, not the `JsonData` object that wraps it.
+The latter will always be non-scalar!
 :::
+
+If you plan to use the root JSON field value as a specific type, you may want to take additional steps to resolve a usable value.
+Take this example, where we’re directly configuring a JavaScript-based animation, but constrain simple “duration” values:
+
+```twig
+{% set config = section.animationConfig %}
+
+{# Constrain numeric, “duration-only” values: #}
+{% if section.animationConfig.getType() in ['integer', 'float'] %}
+  {% set config = max(min(section.animationConfig, 1000), 100) %}
+{% endif %}
+
+{# Output the resolved value in a script: #}
+<script>
+  new FadeAnimation("animated-{{ section.id }}", {{ config }});
+</script>
+```
 
 ### Nested Keys
 
@@ -99,7 +118,8 @@ If you know the structure of a JSON value, you can access nested keys directly f
 {{ entry.myJsonField.appId }}
 ```
 
-The field only ensures values are valid JSON, but doesn’t enforce any kind of schema. You should always handle input cautiously, to avoid runtime errors:
+The field ensures values are valid JSON, but does _not_ enforce any kind of schema.
+You should always handle input cautiously, to avoid runtime errors:
 
 ```twig
 {{ entry.myJsonField.appId ?? null }}
@@ -107,7 +127,7 @@ The field only ensures values are valid JSON, but doesn’t enforce any kind of 
 
 ### Objects + Arrays
 
-JSON “objects” and “arrays” are deserialized into PHP arrays (associative and sequential, respectively), and the `JsonData` object provides a means of iterating over them, directly:
+JSON “objects” and “arrays” are deserialized into PHP arrays (associative and sequential, respectively), and the root `JsonData` object provides a means of iterating over them, directly:
 
 ```twig
 <table>
@@ -122,6 +142,7 @@ JSON “objects” and “arrays” are deserialized into PHP arrays (associativ
         <tr>
           <td>{{ key }}</td>
           <td>
+            {# Make sure the value is printable: #}
             <pre>{{ val is scalar ? val : val|json_encode }}</pre>
           </td>
         </tr>
@@ -130,11 +151,17 @@ JSON “objects” and “arrays” are deserialized into PHP arrays (associativ
 </table>
 ```
 
-Once you have traversed into a data structure, you must explicitly serialize nested objects for output—Craft doesn’t recursively wrap that data with instances of `JsonData`!
+Once you have traversed into a data structure, you must explicitly serialize nested objects for output—Craft doesn’t recursively wrap that data with instances of `JsonData`, which provides the magic `__toString()` method.
+This also means that `.getType()` and other helper methods are not available on nested values.
+
+::: tip
+Craft provides a number of [Twig tests](../twig/functions.md) for checking value types.
+:::
 
 ### GraphQL
 
-JSON fields are treated like plain strings, when queried via GraphQL. Values must be deserialized in the client or app:
+JSON fields are treated like plain strings, when queried via GraphQL.
+Values must be deserialized in the client or app:
 
 ```js
 const gql = `
@@ -155,7 +182,10 @@ fetch('/api', {
     'X-Craft-Gql-Schema': '*',
   },
 })
+  // Unpack the text response:
   .then(response => response.json())
+  // Deserialize the JSON field’s data:
   .then(json => JSON.parse(json.data.globalSet.analyticsConfig))
+  // Use the returned object:
   .then(config => new AcmeAnalytics(config));
 ```
