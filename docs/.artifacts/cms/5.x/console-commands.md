@@ -224,7 +224,9 @@ charset
 
 collation
 :  The target collation, which honors `DbConfig::$collation`
-                              or defaults to `utf8_unicode_ci`.
+                              or defaults to `utf8mb4_0900_ai_ci` for MySQL 8.0+,
+                              otherwise, `utf8mb4_unicode_ci` for MariaDB and earlier
+                              MySQL versions.
 
 
 
