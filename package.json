@@ -39,6 +39,7 @@
     "vuepress": "^1.8.3",
     "vuepress-plugin-container": "^2.1.5",
     "vuepress-plugin-medium-zoom": "^1.1.9",
+    "vuepress-plugin-seo": "^0.2.0",
     "vuepress-plugin-sitemap": "docs/.vuepress/theme/vuepress-plugin-sitemap",
     "vuex": "^3.6.2",
     "webpack": "^4.46.0"
