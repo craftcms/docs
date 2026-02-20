@@ -1449,7 +1449,9 @@ You can customize the timezone the time is output in, using the `timezone` param
 
 ## `timestamp`
 
-Outputs a date with <craft5:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible. Dates with the same day return only the time, using the provided `format`; dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`). Anything longer ago than that 
+Outputs a date with <craft5:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible.
+Dates with the same day return only the time, using the provided `format` (or `today` if the passed value only included date information); dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`).
+Anything longer ago than that is handed off to <craft5:craft\i18n\Formatter::asDate()> using the provided `format`.
 
 ```twig
 {{ now|timestamp }}
@@ -1466,6 +1468,10 @@ Outputs a date with <craft5:craft\i18n\Formatter::asTimestamp()>, using plain-la
 ```
 
 #### Arguments
+
+`format`
+:   Any date formatting string, or a special value compatible with <craft5:craft\i18n\Formatter::asTimestamp()>.
+    The default format depends on the current [system locale](../../system/sites.md#language).
 
 `withPreposition`
 
