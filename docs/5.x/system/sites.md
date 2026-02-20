@@ -53,7 +53,7 @@ Site Group Name:  {{ siteGroup.name }}
 
 ### Language
 
-Choosing the language for the site determines how Craft formats dates, times, and numbers, and which [static message translations](#static-message-translations) are used, in the front-end.
+A site’s language determines how Craft formats dates, times, and numbers, and which [static message translations](#static-message-translations) are used, in the front-end.
 
 In your templates, you can access the current site’s language setting via `craft.app.language`:
 
