@@ -267,10 +267,10 @@ Everything else (like rows in a [table field](../reference/field-types/table.md)
 {% set tabMap = collect([]) %}
 {% set groupId = "tab-group-#{random()}" %}
 
-<div role="tablist" aria-labelledby="{{ groupId }}-label">
-  {# The name for this group of tabs could be something dynamic: #}
-  <h2 id="{{ groupId }}-label">Tab List</h2>
+{# The name for this group of tabs could be something dynamic: #}
+<h2 id="{{ groupId }}-label">Tab List</h2>
 
+<div role="tablist" aria-labelledby="{{ groupId }}-label">
   {# Loop over once to output tabs: #}
   {% for tab in tabs %}
     {# Create a temporary ID and add it to the map: #}
@@ -304,11 +304,11 @@ Note that we’re creating a two-way binding between the `tab` and `tabpanel`:
 
 ## Testing and auditing
 
-The best time to start auditing your front-end for accessibility is during development.
+The best time to audit your front-end for accessibility is during the design phase. The next best time is during development.
 
-As you build out your templates, tools like Deque’s [Axe DevTools for Web](https://www.deque.com/axe/devtools/web-accessibility) can flag concrete violations and help you prioritize remediation.
+As you build your templates, tools like Deque’s [Axe DevTools for Web](https://www.deque.com/axe/devtools/web-accessibility) can flag violations and help you prioritize remediation.
 
-To monitor the accessibility of content and quickly identify issues that crop up after launch, consider using a tool like [Accessible Web](https://accessibleweb.com/)’s [automated scanning tool](https://accessibleweb.com/ramp-web-accessibility-tools/accessibility-monitoring/).
+To monitor content accessibility and quickly identify issues after launch, consider using a tool like [Accessible Web](https://accessibleweb.com/)’s [automated scanning tool](https://accessibleweb.com/ramp-web-accessibility-tools/accessibility-monitoring/). Keep in mind that automated scans catch only a fraction of accessibility issues, and manual testing should also be part of your process.
 
 Set up a [custom source](../system/elements.md#sources) for your assets using the **Has alternative text** condition rule to give authors a central place to remedy missing image descriptions:
 
