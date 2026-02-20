@@ -11,7 +11,7 @@ Craft gives you a powerful suite of tools to help make your projects <Term slug=
 
 ## Media
 
-When marked up appropriately, text the web is inherently accessible.
+When marked up appropriately, text on the web is inherently accessible.
 The same cannot be said for visual media like images, video, and icons; without explicit descriptions or context clues, unsighted users may miss essential content.
 
 ### Alternative text
