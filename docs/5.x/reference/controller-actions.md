@@ -155,7 +155,9 @@ See the [Front-End User Accounts](kb:front-end-user-accounts#registration-form) 
 :::
 
 ::: warning
-Note that _all_ custom fields can updated by users. For this reason, you should not assume that custom fields are protected from modification simply because they are omitted from the form.
+Users can update all of their own custom field values—hiding or omitting them in a front-end form is not enough to protect modification!
+
+Add a [user editability condition](../system/fields.md#editability-conditions) to any fields that should be tamper-proof.
 :::
 
 #### Supported Params
