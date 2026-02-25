@@ -16,7 +16,7 @@ Most Craft features that rely on dynamic rendering are already set up to bypass 
 
 ## Controlling the Cache
 
-The request’s entire URL (including query parameters) is used when determining whether to serve a page from the cache.
+The request’s entire URL (including [most query parameters](#query-parameters)) is used when determining whether to serve a page from the cache.
 
 In Craft versions 4.10 and 5.2, the [`expires` Twig tag](/5.x/reference/twig/tags.html#expires) was introduced to simplify setting cache headers. Examples are provided below for this method as well as precise control of individual headers via the [`header` tag](/5.x/reference/twig/tags.html#header).
 
@@ -64,6 +64,14 @@ This method also sets `Expires` and `Pragma` headers. When using the `expires` t
 ```twig
 {% do craft.app.response.setNoCacheHeaders() %}
 ```
+
+### Query Parameters
+
+Cloud performs some basic filtering and normalization to query parameters when determining whether to serve a page from the cache.
+Some common tracking params (like [`gclid`](https://support.google.com/google-ads/answer/9744275)) that contain random or identifying values do _not_ influence this decision.
+
+Adding a custom query parameter to a URL is not enough to entirely prevent a page from being cached!
+Each unique value is cached independently, when allowed.
 
 ## Duration
 
