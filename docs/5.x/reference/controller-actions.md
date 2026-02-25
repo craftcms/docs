@@ -165,7 +165,7 @@ Add a [user editability condition](../system/fields.md#editability-conditions) t
 Param | Description
 ----- | -----------
 `admin` | Whether the user should be saved as an admin (`1`/`0`). Only assignable if the logged-in user is an admin.
-`currentPassword` | The user’s current password, which is required if `email` or `newPassword` are sent.
+`currentPassword` | The user’s _current_ password, required when updating the `email` or setting a `newPassword`, when outside the <config5:elevatedSessionDuration>.
 `email` | The user’s email address. (Only checked if registering a new user, updating the logged-in user, or the logged-in user is allowed to administrate users.)
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
 `fields[...]` | [Custom field](../development/forms.md#custom-fields) values.
