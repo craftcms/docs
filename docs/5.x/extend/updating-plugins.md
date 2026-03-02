@@ -357,6 +357,10 @@ Making a field [editable in-line](../system/elements.md#in-line-editing) (in an 
 
 Craft’s `craft\base\Field` class provides baseline support for in-line editing to all subclasses, by recycling the normal `inputHtml()` output.
 
+::: tip
+[Custom element index attributes](#element-indexes) are also affected by this change, and may require handling an additional event.
+:::
+
 #### Field Icons
 
 Choose one of the [built-in FontAwesome icons](https://fontawesome.com/search) to represent your field type by implementing the `icon()` method and returning a valid icon handle. These icons are used in the field type selection menu, and in field layout designers.
@@ -518,6 +522,9 @@ The `craft\services\Utilities::EVENT_REGISTER_UTILITY_TYPES` constant has been r
 #### Element Indexes
 
 The event constant for customizing element table attribute output has been renamed from `craft\base\Element::EVENT_SET_TABLE_ATTRIBUTE_HTML` to `EVENT_DEFINE_ATTRIBUTE_HTML`. This same event is also emitted when rendering attributes included on [element cards](#chips-cards).
+
+When an element index is in _editable_ mode, you’ll also need to handle <craft\base\Element::EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML> for custom attributes.
+If your attribute does not need an editing interface, you should return the same value that you do from `EVENT_SET_TABLE_ATTRIBUTE_HTML`.
 
 #### Condition Builder
 
