@@ -21,7 +21,7 @@ This gives downstream providers’ caches time to expire, at which point they wi
 When it’s time to flip the switch, you’ll need to do two things:
 
 1. Promote your [environment](environments.md) to [production](environments.md#production-environment) by selecting it in the project’s **Settings** screen. This signals to Cloud that the function should be kept warm by the platform so there’s no delay when the first request comes in.
-2. [Update your domains’ DNS records](domains.md). Any domains (or subdomains) that should point to your production environment will require changes. Existing Cloudflare users may need to [disable proxying](users.md) on the apex domain.
+2. [Update your domains’ DNS records](domains.md). Any domains (or subdomains) that should point to your production environment will require changes. Existing Cloudflare users may need to [disable proxying](cloudflare.md) on the apex domain.
 
 ## Deployments
 
