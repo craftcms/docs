@@ -8,7 +8,7 @@ Here are the top questions we get asked about [Craft Cloud](https://craftcms.com
 
 ### Can I monitor Craft Cloud’s health?
 
-Our [status page](https://status.craftcms.com) inclues information about Craft Cloud and all our other web services. More information about health checks is available in the [Cloud Status](status.md) article.
+Our [status page](https://status.craftcms.com) includes information about Craft Cloud and all our other web services. More information about health checks is available in the [Cloud Status](status.md) article.
 
 A link to the status page is available in the footer of every page on <https://craftcms.com>.
 
