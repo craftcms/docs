@@ -1,6 +1,6 @@
 # Security
 
-Craft Cloud is designed as a fully managed, secure cloud PaaS hosting platform optimized for Craft CMS applications.
+Craft Cloud is designed as a fully managed, secure cloud <abbr title="Platform-as-a-service">PaaS</abbr> hosting platform optimized for Craft CMS applications.
 
 This document outlines the security principles, controls, and practices that govern ****Craft Cloud to protect customer applications, data, and infrastructure against unauthorized access and vulnerabilities.
 
