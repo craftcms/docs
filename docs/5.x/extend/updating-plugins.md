@@ -523,7 +523,7 @@ The `craft\services\Utilities::EVENT_REGISTER_UTILITY_TYPES` constant has been r
 
 The event constant for customizing element table attribute output has been renamed from `craft\base\Element::EVENT_SET_TABLE_ATTRIBUTE_HTML` to `EVENT_DEFINE_ATTRIBUTE_HTML`. This same event is also emitted when rendering attributes included on [element cards](#chips-cards).
 
-When an element index is in _editable_ mode, you’ll also need to handle <craft\base\Element::EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML> for custom attributes.
+When an element index is in _editable_ mode, you’ll also need to handle <craft5:craft\base\Element::EVENT_DEFINE_INLINE_ATTRIBUTE_INPUT_HTML> for custom attributes.
 If your attribute does not need an editing interface, you should return the same value that you do from `EVENT_SET_TABLE_ATTRIBUTE_HTML`.
 
 #### Condition Builder
