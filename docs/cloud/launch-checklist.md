@@ -23,6 +23,13 @@ When it’s time to flip the switch, you’ll need to do two things:
 1. Promote your [environment](environments.md) to [production](environments.md#production-environment) by selecting it in the project’s **Settings** screen. This signals to Cloud that the function should be kept warm by the platform so there’s no delay when the first request comes in.
 2. [Update your domains’ DNS records](domains.md). Any domains (or subdomains) that should point to your production environment will require changes. Existing Cloudflare users may need to [disable proxying](cloudflare.md) on the apex domain.
 
+### Licensing
+
+The first time your project’s control panel is [accessed from a public domain](kb:how-craft-license-enforcement-works#public-domains), we bind your CMS and plugin trial licenses to that domain.
+Administrators may see a [license resolution notice](kb:how-craft-license-enforcement-works#notices) in the control panel if any plugins require payment.
+
+<See path="licensing.md" />
+
 ## Deployments
 
 Chances are, you’ve been iterating and deploying changes frequently over the course of development. Now that the site is publicly accessible, make sure the [deployment trigger](deployment.md#deployment-triggers) in your environment’s **Settings** screen agrees with your team’s desired workflow.
