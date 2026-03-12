@@ -143,7 +143,7 @@ The Cloud extension will construct predictable production URLs for _existing_ as
 
 ## Custom URLs
 
-You can configure a custom [rewrite](redirects.md#rewrites) to serve assets from additional URLs or paths.
+You can configure a custom [rewrite](redirects.md#rewrites) to serve assets from additional, non-default URLs or paths.
 However, Craft will continue to generate canonical CDN URLs, unless you explicitly set a **Base URL** in the filesystem’s settings.
 
 ::: danger
@@ -175,18 +175,3 @@ To serve assets from a vanity domain like `cdn.mydomain.com`, follow these steps
 The filesystem’s **Subpath** setting is _always_ appended to its **Base URL**, regardless of whether Craft is generating default Cloud CDN URLs or custom, rewritten URLs.
 An asset’s URL will also include the **Subpath** of the [asset volume](/5.x/reference/element-types/assets.md#volumes) it belongs to.
 Note that the `{assetBaseUrl}` destination token already points to the `assets/` directory in the environment’s storage bucket.
-
-Reusing this URL throughout your app (or across multiple filesystems) is often simplified by creating an intermediate [alias](/5.x/configure.html#aliases):
-
-```php
-# config/general.php
-
-GeneralConfig::create()
-    // ...
-    ->aliases([
-        '@assetBaseUrl' => App::env('ASSET_BASE_URL') . '/assets',
-    ])
-;
-```
-
-In this case, you would use `@assetBaseUrl` in the **Base URL** setting, instead of directly referencing the environment variable and subpath.
