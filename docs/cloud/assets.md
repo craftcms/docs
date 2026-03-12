@@ -159,7 +159,7 @@ Using a value beginning with `@web` is strongly discouraged, as its value can di
 To serve assets from a vanity domain like `cdn.mydomain.com`, follow these steps:
 
 1. Create a [subdomain](domains.md#subdomains);
-1. Add a rewrite to your `cloud.yaml` file:
+1. Add a rewrite to your `craft-cloud.yaml` file:
     ```
     # ...
 
