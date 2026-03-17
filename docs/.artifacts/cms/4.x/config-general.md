@@ -3393,7 +3393,7 @@ Allowed types
 :  `mixed`
 
 Default value
-:  `null` (1 day)
+:  `null`
 
 Defined by
 :  [GeneralConfig::$previewTokenDuration](craft4:craft\config\GeneralConfig::$previewTokenDuration)
