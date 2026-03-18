@@ -952,6 +952,24 @@ protected function route(): array|string|null
     ];
 }
 ```
+You can also use your custom controller actions inside the routes of your element type:
+
+```php
+protected function route(): array|string|null
+{
+    return ['plugin/product/see', ['element' => $this]];
+
+}
+```
+And you will get any params you provide on your ``ProductController`` action:
+
+```php
+public function actionSee(Product $element): Response
+{
+    // Additional operations
+    return $this->renderTemplate(...);
+}
+```
 
 ## Editing Elements
 
