@@ -936,7 +936,9 @@ public function getUriFormat(): ?string
 }
 ```
 
-URIs are rendered and stored on a per-site basis. Whenever an element’s URL is requested, Craft will instantiate the element and call its `getRoute()` method. Internally, <craft5:craft\base\Element::getRoute()> will call a protected `route()` method, which is what you should implement in your element class:
+URIs are rendered and stored on a per-site basis.
+Whenever an element’s URL is requested, Craft will instantiate the element and call its `getRoute()` method.
+Internally, <craft5:craft\base\Element::getRoute()> will call a protected `route()` method, which is what you should implement in your element class:
 
 ```php
 protected function route(): array|string|null
@@ -952,6 +954,42 @@ protected function route(): array|string|null
     ];
 }
 ```
+
+Your route can map to any [controller action](controllers.md), including ones in your plugin’s namespace—handy when you want to organize additional view logic:
+
+```php
+protected function route(): array|string|null
+{
+    return [
+        // Route to `mynamespace\myplugin\controllers\StoreController::actionView()`:
+        'plugin-handle/store/view',
+        [
+            'product' => $this,
+        ],
+    ];
+}
+```
+
+The second item in the rule array is treated as [route params](guide:structure-controllers#action-parameters), and will be automatically mapped to arguments of the same name in your action:
+
+```php
+public function actionView(Product $product): Response
+{
+    // Load a user-defined template for this product type:
+    $type = $product->getType();
+    $template = $type->templatePath;
+
+    // Gather additional data for the template:
+    $variables = [
+        'product' => $product,
+        // ...
+    ];
+
+    return $this->renderTemplate($template, $variables);
+}
+```
+
+Using an action in this way does _not_ change your elements’ URLs—we’re only switching the underlying action that builds a response.
 
 ## Editing Elements
 
