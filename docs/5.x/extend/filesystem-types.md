@@ -11,7 +11,7 @@ Asset storage is split into two concepts:
 
 ## Filesystem Class
 
-Use the [generator] to create a filesystem class and register it with Craft:
+Use the [generator](generator.md) to create a filesystem class and register it with Craft:
 
 <Generator component="filesystem-type" plugin="my-plugin" />
 
