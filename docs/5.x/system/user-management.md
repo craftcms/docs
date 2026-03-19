@@ -74,7 +74,7 @@ The behavior of Craft’s user registration and authentication system is governe
 ### Project Config
 
 - **User Photo Location**: Which volume user profile assets are stored in. Files are always uploaded directly to a profile, and cannot be selected from the existing asset library.
-- **Require two-step verification**: Choose which user groups (if any) are required to configure a two-step verification method to access the control panel. This has no effect on users who do not have control panel permissions.
+- **Require two-step verification**: Choose which user groups (if any) are required to configure a two-step verification method. After [Craft 5.6](https://github.com/craftcms/cms/releases/tag/5.6.0), this setting affects _all_ matching users, not just those with control panel access.
 - **Verify email addresses**: A user must demonstrate they have access to an email address before they can activate their account, or change the email on an existing account.
 - **Allow public registration**: Whether or not users can register from the front-end.
 - **Validate custom fields on public registration**: When registering via the front-end, require a complete user profile (including any fields marked as **Required** in the user field layout).
@@ -379,7 +379,8 @@ Any [credentialed](#statuses) user can set a password and log in.
 
 ### Control Panel
 
-Users with [control panel](control-panel.md) access should use Craft’s native login form, which is shown when visiting `/admin` (or the path corresponding to your <config5:cpTrigger>). Any time an unauthenticated client tries to access a resource in the control panel, they will be redirected to the login page. 
+Users with [control panel](control-panel.md) access should use Craft’s native login form, which is shown when visiting `/admin` (or the path corresponding to your <config5:cpTrigger>).
+Any time an unauthenticated client tries to access a resource in the control panel, they will be redirected to the login page.
 
 After logging in (and, when configured, completing [two-step verification](#authentication)), they will be returned to the [dashboard](control-panel.md#dashboard), or whichever protected page they originally attempted to access.
 
