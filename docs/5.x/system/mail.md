@@ -20,13 +20,16 @@ Click on any message to open a modal and edit its subject and body.
 
 ::: tip
 Running a [multi-site](sites.md) installation?
-You can customize system messages (and [mail settings](#settings)) on a per-site basis using the site selection menu in the upper-right corner of the message editor modal.
+You can customize system messages (and [mail settings](#settings)) on a per-_language_ basis using the menu in the upper-right corner of the message editor modal.
+Craft only displays options for the “locale IDs” used by one or more sites.
+
+Within the [subject or message body](#twig), you can apply further customizations based on the recipient’s [affiliated site](user-management.md#affiliated-site).
 :::
 
 ### Twig
 
 The body of each system message is evaluated as a Twig template, then parsed as [Markdown](https://daringfireball.net/projects/markdown/) (or [Github-flavored Markdown](https://github.github.com/gfm/), since 5.9.0).
-Subject lines can also include Twig.
+Subject lines can also include Twig, but are not parsed as Markdown.
 
 <See path="../development/twig.md" description="Get to know Twig, Craft’s template engine." />
 
