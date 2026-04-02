@@ -85,19 +85,7 @@ Previously, we used the Twig `{% header %}` tag to set the `Cache-Control` heade
 
 ## Manual Purging
 
-If you would like to clear your environment’s entire static page cache, visit the **Utilities** screen, check **Cloud Static Caches**, then **Clear Caches**.
-
-To clear a specific cache tag, use the CLI via the environment’s **Commands** screen:
-
-```bash
-php craft cloud/static-cache/purge-tags tag-one tag-two
-```
-
-You can also directly purge URLs by one or more URL path prefix:
-
-```bash
-php craft cloud/static-cache/purge-prefixes /vendors /listings
-```
+To clear your environment’s entire static page cache, visit the **Utilities** screen, check **Cloud Static Caches**, then **Clear Caches**.
 
 ## Session & Cookies
 
