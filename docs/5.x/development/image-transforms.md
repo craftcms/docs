@@ -34,7 +34,7 @@ Mode
 
     - [**Crop**](#crop) (Default) — Crops the image to the specified width and height.
     - [**Fit**](#fit) — Scales the image so that it is as big as possible with all dimensions fitting within the specified width and height.
-    - [**Letterbox**](#letterbox) — Stretches the image to the specified width and height.
+    - [**Letterbox**](#letterbox) — Scales the image to fit within a box of the specified dimensions (like **Fit**), but fills the negative space with a color.
     - [**Stretch**](#stretch) — Stretches the image to the specified width and height.
 
 All [modes](#transform-modes) support some general controls over image size and quality:
