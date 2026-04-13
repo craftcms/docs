@@ -144,7 +144,7 @@ $futureEntries = \craft\elements\Entry::find()
 In these examples, `now` can be substituted for `today` (midnight of the current day), `tomorrow` (midnight of the following day), or `yesterday` (midnight of the previous day).
 
 ::: tip
-Me mindful of [template caching](../twig/tags.md#cache) when comparing against the current time!
+Be mindful of [template caching](../twig/tags.md#cache) when comparing against the current time!
 :::
 
 #### Timezones
