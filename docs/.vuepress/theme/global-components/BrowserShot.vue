@@ -113,7 +113,7 @@
   text-align: center;
   margin-top: 1em;
   font-size: 0.9em;
-  color: #637599;
+  color: var(--text-color-muted);
 }
 
 /* Points of Interest */
