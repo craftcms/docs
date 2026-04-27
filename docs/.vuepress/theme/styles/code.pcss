@@ -113,6 +113,7 @@ div[class*="language-"] {
 
     .highlighted {
       background-color: var(--code-highlight-color);
+      border-left: 3px solid var(--code-highlight-border);
     }
   }
 
@@ -127,7 +128,7 @@ div[class*="language-"] {
     z-index: 3;
     top: 0.8em;
     right: 1em;
-    color: rgba(0, 0, 0, 0.25);
+    color: var(--text-color-muted);
   }
 
   &:not(.line-numbers-mode) {
