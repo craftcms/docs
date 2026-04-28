@@ -213,6 +213,23 @@ The [Cloud filesystem](assets.md) has a special “fallback” feature for worki
 Check out our [migration guide](migrating.md)!
 As long as you are using Craft CMS {{ $activeSetVars.minCraftVersion }} or later, your project is apt to work on Craft Cloud with very few changes.
 
+## WAF
+
+<a id="rule"></a>
+
+### Will you make a specific firewall rule for my site?
+
+Only if it benefits Craft Cloud sites. We do make site-specific WAF rules for enterprise projects.
+
+<a id="pentest"></a>
+
+### Will you disable WAF rules so I can have my site pentested?
+
+No. The WAF rules are designed to protect the Craft Cloud infrastructure against the types of things pentests perform.
+
+As part of the [shared responsibility model](security.md), we would not disable those purposefully.
+
+If you want to pentest your application, you can do that locally or on a separate, non-Craft Cloud installation.
 
 ## Billing + Legal
 
