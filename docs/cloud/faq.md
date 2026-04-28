@@ -219,7 +219,7 @@ As long as you are using Craft CMS {{ $activeSetVars.minCraftVersion }} or later
 
 ### Will you make a specific firewall rule for my site?
 
-Only if it benefits Craft Cloud sites. We do make site-specific WAF rules for enterprise projects.
+Only if it benefits all Craft Cloud projects.
 
 <a id="pentest"></a>
 
