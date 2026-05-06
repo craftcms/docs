@@ -19,10 +19,10 @@ module.exports = {
     "6.x": {
       "/": [
         {
-          title: "Intro",
+          title: "Welcome",
           collapsable: false,
           children: [
-            ["", "About the Alpha"],
+            ["", "About Craft CMS"],
           ],
         },
         {
