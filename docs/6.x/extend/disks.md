@@ -49,3 +49,7 @@ Event::listen(function (RegisterFilesystemTypes $event) {
 ::: tip
 If you would like to look at a complete Craft 6.x-ready example, check out our [AWS S3](https://github.com/craftcms/aws-s3/tree/3.x) plugin.
 :::
+
+## Subpaths
+
+Return a `prefix` config key from `getDiskConfig()` to create a [scoped](laravel:filesystem#scoped-and-read-only-filesystems) disk that quarantines operations to a non-root directory.
