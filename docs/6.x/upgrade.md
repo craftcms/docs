@@ -1,3 +1,8 @@
+---
+description: Craft 6.x is our biggest technical leap and easiest upgrade, yet. Let’s get started!
+sidebarDepth: 3
+---
+
 # Upgrading to Craft 6.x
 
 The smoothest way to upgrade to Craft 6 is to make sure your live and local environments are already running the [latest version of Craft 5](/5.x/updating.md).
