@@ -125,3 +125,8 @@ We used the opportunity to refactor a number of Craft’s core features—as an 
 
 To make the transition a bit easier, we’ve brought along some of Yii’s “component” features that were upstream of Craft services.
 Your services (and other data models) can extend `CraftCms\Cms\Component\Component` to get access to validation, macros, array-style access, and more.
+
+## Plugin Getters
+
+Because your services are all accessible by their class names, plugins no longer need to call `setComponents([])`, or implement “getter” methods.
+As a result, most calls to `Plugin::getInstance()` will be unnecessary (except for calling methods on the class itself).
