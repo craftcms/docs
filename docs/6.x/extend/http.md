@@ -51,7 +51,7 @@ Route::prefix('activity', function() {
 
 See the [Guest Entries](repo:craftcms/guest-entries/tree/5.x) plugin for an example.
 
-### Middleware
+## Middleware
 
 All of Craft’s middleware is registered by `CraftCms\Cms\Route\RouteServiceProvider`.
 Each middleware group referenced in `HasRoutes` corresponds to a list of handlers in the route service provider.
@@ -73,7 +73,7 @@ Laravel’s “terminable” middleware is not compatible with all hosting envir
 app()->terminating($this->flushLazyEvents());
 ```
 
-### Authorization
+## Authorization
 
 Controllers in Laravel don’t often do their own authorization, because they’re no longer automatically exposed to the router.
 See the [permissions](#) for info about guards, policies, and other middleware that you can define alongside your routes.
@@ -87,7 +87,7 @@ Route::get('events/history', ListHistory::class)
 
 The [session](session.md) section has information about interacting with the current user.
 
-### Controllers
+## Controllers
 
 As a result of so much logic being composed from existing middleware, there is no base controller to extend!
 You are welcome to continue grouping multiple actions into a single controller class, or split controllers into individual *invokable* classes.
