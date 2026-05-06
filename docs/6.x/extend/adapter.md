@@ -19,9 +19,17 @@ When possible, we’ve actually extended the _new_ classes and backfilled any me
 
 We have also added `@deprecated` tags and `#[Deprecated]` attributes to methods and classes that point to suitable replacements, and deprecation errors when old code paths are reached.
 
+::: warning
+At this point, _most plugins will be fully compatible with Craft 6.x_.
+
+The rest of this section describes how the adapter works, and how you would go about writing a compatibility layer of your own.
+Broadly speaking, this will _not_ be necessary, and you can safely continue from the [required changes](upgrade.md) page.
+Consider returning here when your plugin has been fully ported!
+:::
+
 ## Legacy Support
 
-You are not obligated to provide legacy API support—especially if your plugin is not typically extended by other plugins or individual projects.
+You are not obligated to provide legacy API support—especially if your plugin is not extensible by other plugins (or from individual projects).
 
 The most common use case for this section is apt to be plugins that store fully-qualified class names in the database or project config.
 As an example, a plugin that lets administrators configure notifications and stores their `type` in the database (corresponding directly to a class) should at least move the class into your new namespace and map the old name using PHP’s `class_alias()`.
@@ -35,7 +43,7 @@ If you _do_ end up with any kind of compatibility layer, `composer.json` must in
 ### Your own adapter
 
 Due to its size, Craft’s adapter lives in an external package.
-It also results in all of Yii being pulled in as a dependency, which should *not* be necessary for most plugins: your goal should be to have your entire plugin *and* its own compatibility layer running natively in the new Laravel environment.
+It also results in all of Yii being pulled in as a dependency, which should *not* be necessary for most plugins: your goal should be to have your entire plugin *and* its own compatibility layer (if one is necessary at all) running natively in the new Laravel environment.
 
 Your adapter’s primary function is to map existing projects’ lingering references to old classes (and class members) to their new counterparts.
 Here’s an idea for the kinds of changes to expect, based on our first-party plugins:
