@@ -25,13 +25,13 @@ DDEV is a Docker-based PHP development environment that streamlines the creation
 
     ```bash
     # Note the new project type for 6.x!
-    ddev config --project-type=laravel --docroot=public --php-version=8.5
+    ddev config --project-type=laravel --docroot=public --php-version=8.5 --database=mysql:8.4
     ```
 
 1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft/tree/6.x):
 
     ```bash
-    ddev composer create-project "craftcms/craft@6"
+    ddev composer create-project "craftcms/craft:^6.0.0-alpha.1"
     ```
 
     The setup wizard will start automatically! Accept all defaults (in `[square brackets]`), and note your chosen username and password.
