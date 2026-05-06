@@ -69,6 +69,7 @@ module.exports = {
             "extend/services",
             "extend/session",
             "extend/templates",
+            "extend/validation",
           ],
         }
       ],
