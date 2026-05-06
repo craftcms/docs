@@ -39,6 +39,9 @@ You can use the official [server check](https://github.com/craftcms/server-check
 Due to its diverging parity with MySQL, we no longer recommend MariaDB for sites with many users or a large volume of content.
 :::
 
+Partial (and _experimental_) support has been added for SQLite 3.38.0+.
+We will make a determination about official support as we approach a general release.
+
 ## Required PHP Extensions
 
 - [BCMath](https://www.php.net/manual/en/book.bc.php)
