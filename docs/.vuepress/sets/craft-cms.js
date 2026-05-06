@@ -40,7 +40,7 @@ module.exports = {
           children: [
             "extend/introduction",
             "extend/adapter",
-            "extend/resources",
+            // "extend/resources",
             "extend/upgrade",
             "extend/avenues",
             "extend/approach",
@@ -57,7 +57,7 @@ module.exports = {
             "extend/commands",
             "extend/config",
             "extend/http",
-            "extend/elements",
+            // "extend/elements",
             "extend/events",
             "extend/fields",
             "extend/disks",
