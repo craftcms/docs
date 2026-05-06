@@ -15,6 +15,11 @@
       You are viewing documentation for an unreleased version of {{ $activeSet.setTitle }}. Please be aware that some pages, screenshots, and technical reference may still reflect older versions.
     </div>
     <div
+      v-else-if="$activeVersionInfo && $activeVersionInfo.stabilityFlag === 'alpha'"
+      class="version-warning">
+      You are viewing documentation for an unreleased version of {{ $activeSet.setTitle }}. Please be aware that the material is changing frequently and may be incomplete or inaccurate, and links may point back to older versions.
+    </div>
+    <div
       v-else-if="isSearchReferral && suggestedPath"
       class="version-warning"
     >

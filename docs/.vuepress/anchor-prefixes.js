@@ -10,6 +10,7 @@
  * - `source` for GitHub-hosted file references.
  */
 module.exports = {
+  'craft6': { base: 'https://docs.craftcms.com/api/v6/', format: 'internal' },
   'craft5': { base: 'https://docs.craftcms.com/api/v5/', format: 'internal' },
   'craft4': { base: 'https://docs.craftcms.com/api/v4/', format: 'internal' },
   'craft3': { base: 'https://docs.craftcms.com/api/v3/', format: 'internal' },
@@ -22,6 +23,7 @@ module.exports = {
   'yii2': { base: 'https://www.yiiframework.com/doc/api/2.0/', format: 'yii' },
   'yii1': { base: 'https://www.yiiframework.com/doc/api/1.1/', format: 'yii' },
   'guide': { base: 'https://www.yiiframework.com/doc/guide/2.0/en/', format: 'generic' },
+  'laravel': { base: 'https://laravel.com/docs/13.x/', format: 'generic' },
   'config5': { base: '/5.x/reference/config/general.md#', format: 'config' },
   'config4': { base: '/4.x/config/general.md#', format: 'config' },
   'config3': { base: '/3.x/config/config-settings.md#', format: 'config' },
