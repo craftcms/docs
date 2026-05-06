@@ -41,9 +41,9 @@ module.exports = {
             "extend/introduction",
             "extend/adapter",
             "extend/resources",
+            "extend/upgrade",
             "extend/avenues",
             "extend/approach",
-            "extend/upgrade",
             "extend/local-dev",
           ],
         },
@@ -51,6 +51,7 @@ module.exports = {
           title: "Plugin Upgrade Guide",
           collapsable: false,
           children: [
+            "extend/provider",
             "extend/assets",
             "extend/macros",
             "extend/commands",
