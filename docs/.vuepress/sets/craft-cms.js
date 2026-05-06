@@ -38,7 +38,7 @@ module.exports = {
           title: "Extensions",
           collapsable: false,
           children: [
-            "extend",
+            "extend/introduction",
             "extend/adapter",
             "extend/resources",
             "extend/avenues",
@@ -52,7 +52,7 @@ module.exports = {
           collapsable: false,
           children: [
             "extend/assets",
-            "extend/behaviors",
+            "extend/macros",
             "extend/commands",
             "extend/config",
             "extend/http",
@@ -67,6 +67,7 @@ module.exports = {
             "extend/models",
             "extend/services",
             "extend/session",
+            "extend/templates",
           ],
         }
       ],
