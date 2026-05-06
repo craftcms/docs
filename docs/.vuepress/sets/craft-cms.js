@@ -5,6 +5,7 @@ module.exports = {
   icon: "/docs/icons/craft.svg",
   baseDir: "",
   versions: [
+    ["6.x", { label: "6.x", stabilityFlag: 'alpha' }],
     ["5.x", { label: "5.x" }],
     ["4.x", { label: "4.x" }],
     ["3.x", { label: "3.x", isEol: true }],
@@ -15,6 +16,61 @@ module.exports = {
   searchPlaceholder: "Search the Craft docs",
   primarySet: true,
   sidebar: {
+    "6.x": {
+      "/": [
+        {
+          title: "Intro",
+          collapsable: false,
+          children: [
+            ["", "About the Alpha"],
+          ],
+        },
+        {
+          title: "Projects",
+          collapsable: false,
+          children: [
+            "requirements",
+            "install",
+            "upgrade",
+          ],
+        },
+        {
+          title: "Extensions",
+          collapsable: false,
+          children: [
+            "extend",
+            "extend/adapter",
+            "extend/resources",
+            "extend/avenues",
+            "extend/approach",
+            "extend/upgrade",
+            "extend/local-dev",
+          ],
+        },
+        {
+          title: "Plugin Upgrade Guide",
+          collapsable: false,
+          children: [
+            "extend/assets",
+            "extend/behaviors",
+            "extend/commands",
+            "extend/config",
+            "extend/http",
+            "extend/elements",
+            "extend/events",
+            "extend/fields",
+            "extend/disks",
+            "extend/helpers",
+            "extend/queue",
+            "extend/logging",
+            "extend/mail",
+            "extend/models",
+            "extend/services",
+            "extend/session",
+          ],
+        }
+      ],
+    },
     "5.x": {
       // Sections here are greedily-matched, so the more specific ones must come first:
       "/reference/": [
