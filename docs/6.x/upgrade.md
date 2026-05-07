@@ -112,6 +112,10 @@ If you see a warning about the application being in production, it’s safe to i
 
 We recommend taking another snapshot of your database and code so that you can revert to this freshly-upgraded state if you want to try different strategies for dealing with [deprecations](#deprecations).
 
+::: warning
+The upgrade tool added `craftcms/yii2-adapter` to your project’s Composer requirements to make templates and modules compatible with 6.x.
+Don’t remove this until you have resolved all new deprecation warnings!
+:::
 
 ## Deprecations
 
