@@ -38,7 +38,7 @@ module.exports = {
           title: "Extensions",
           collapsable: false,
           children: [
-            "extend/introduction",
+            "extend/",
             "extend/adapter",
             // "extend/resources",
             "extend/upgrade",
