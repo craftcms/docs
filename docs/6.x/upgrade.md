@@ -269,6 +269,8 @@ Markdown::parse($text);
 Markdown::parseParagraph($line);
 ```
 
+The `md` Twig filter remains functionally identical.
+
 ### Commands
 
 Craft’s `exec` command has been removed.
