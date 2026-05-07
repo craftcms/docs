@@ -27,7 +27,7 @@ The alpha is primarily intended to give [plugin developers](extend/README.md) a 
 That said, we were seeing successful upgrades as early as the first developer preview, which we shared at Dot All Lisbon, in October 2025!
 
 If you haven’t already, consider spinning up a fresh Craft 6.x project.
-You’ll be able to get a sense for the new project structure without the pressure of immediately
+You’ll be able to get a sense for the new project structure without the pressure of plugin compatibility or deprecation warnings.
 
 - If you want to customize how Categories, Global Sets, and Tags are migrated, use the [`entrify/*` commands](/5.x/reference/cli.md#entrify) before you begin the upgrade.
 - Commit and deploy any final changes to your live environment
