@@ -16,9 +16,9 @@ PHP {{ $activeSet.minPhpVersion }} and newer are supported on Cloud. Pick a majo
 
 ## Node.js
 
-Versions 16 and newer of Node.js are supported in our [builder](builds.md) via the `node-version` key in your [Cloud config file](config.md). We plan to add all [LTS releases](https://nodejs.org/en/about/previous-releases), moving forward.
+Versions {{ $activeSetVars.minNodeVersion }} and newer of Node.js are supported in our [builder](builds.md) via the `node-version` key in your [Cloud config file](config.md). We plan to add all [LTS releases](https://nodejs.org/en/about/previous-releases), moving forward.
 
-We recommend declaring only a major version (i.e. `20`) to receive security and stability updates, but minor releases (i.e. `18.6`) are supported.
+We recommend declaring only a major version (i.e. `20`) to receive security and stability updates. Only major version numbers are supported.
 
 ## Database Engines
 

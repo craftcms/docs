@@ -10,7 +10,7 @@ module.exports = {
     supportEmail: 'support@craft.cloud',
     minCraftVersion: '4.6.0',
     minCloudExtensionVersion: '1.16.5',
-    minPhpVersion: '8.1',
+    minPhpVersion: '8.2',
     dbSupportMySql: '8.0',
     dbSupportPostgres: '15',
     trialDays: 7,
