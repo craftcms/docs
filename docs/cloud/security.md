@@ -98,6 +98,6 @@ Customers are notified of incidents via [status.craftcms.com](https://status.cra
 
 ## Reporting a Vulnerability
 
-Please report any security vulnerabilities to <Email :address="$activeSetVars.supportEmail" />.
+Please report any security vulnerabilities via our [Vulnerability Disclosure Program](https://www.hckrt.com/Reports/EmbeddedReportForm?program=craftcms-vdp).
 
 You can read our policy on reporting vulnerabilities [here](https://github.com/craftcms/cms/security/policy).
