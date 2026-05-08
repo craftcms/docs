@@ -44,7 +44,10 @@ public function rulesClass(): string
 ```
 
 You may also tag the settings model with the `#[Ruleset(MyPluginSettingsRuleset::class)]` attribute.
-For more control over how your settings data is normalized, return your own form request class from `getSettingsRequestClass()`.
+For more control over how your settings data is normalized, return your own [form request](validation#form-request-validation) class from `getSettingsRequestClass()`.
+
+When using a custom `FormRequest`, your rules are evaluated against the entire request, not just the nested `settings` key that Craft ordinarily assigns to your settings model.
+The example above (validating `adminNotificationsAddress` on the settings model) would need to be updated to `settings.adminNotificationsAddress` if returned from `FormRequest::rules()`.
 
 ::: tip
 See our [Guest Entries](repo:craftcms/guest-entries/tree/5.x) plugin for an example of these new techniques.
