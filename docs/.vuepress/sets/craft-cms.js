@@ -45,6 +45,7 @@ module.exports = {
             "extend/avenues",
             "extend/approach",
             "extend/local-dev",
+            "extend/structure",
           ],
         },
         {

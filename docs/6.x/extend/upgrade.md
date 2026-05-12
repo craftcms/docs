@@ -4,7 +4,7 @@ There are only a couple of things that you must do to get your plugin running in
 
 ## Adapter
 
-Your plugin package should require `craftcms/yii2-adapter`:
+To initialize properly in a Laravel project, your plugin package must require `craftcms/yii2-adapter`:
 
 ```bash
 composer require craftcms/yii2-adapter
@@ -26,11 +26,15 @@ The legacy base plugin class (`craft\base\Plugin`) and the interfaces in impleme
 We have mainly observed this with the `attributes()` and `attributeLabels()` methods.
 If you don’t use these, there’s nothing to do here.
 
-## Paths
+<Block label="Wait… is that it?">
 
-In general, we recommend keeping your primary plugin class within a `src/` directory at the root of your package.
+Basically, _yes_!
 
-Plugin icons (`icon.svg` and `icon-mask.svg`) are expected to be in a new top-level `resources/` directory.
-This is also typically where [static or publishable assets](assets.md) live; resources are *not* exposed in the web root, automatically.
+The rest of this guide is focused on extension points that need your attention in order to eject the [adapter](adapter.md), which is _not_ a requirement for Craft 6.x.
+You are free to tackle as much (or as little) of it as you wish, for the public release.
 
-If you *must* use a different structure for your plugin package, define `basePath()` and/or `resourcesPath()` methods in your base plugin class so that Craft can locate your resources.
+We want to stress: _using the adapter is an official, supported way to release 6.x-compatible plugin_—and it will remain part of many developers’ toolkit (and the Craft ecosystem) _at least_ as long as 6.x receives updates.
+
+While the changes above must happen _before_ any other work, reducing or eliminating dependence on the adapter can be relatively fluid.
+
+</Block>
