@@ -21,6 +21,7 @@
 | [cache](#cache)                                 | Enables query cache for this Query.
 | [canonicalsOnly](#canonicalsonly)               | Narrows the query results to only canonical elements, including elements that reference another canonical element via `canonicalId` so long as they aren’t a draft.
 | [clearCachedResult](#clearcachedresult)         | Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+| [collectIds](#collectids)                       | Executes the query and returns the IDs of the resulting elements as a collection.
 | [countryCode](#countrycode)                     | Narrows the query results based on the country the addresses belong to.
 | [dateCreated](#datecreated)                     | Narrows the query results based on the addresses’ creation dates.
 | [dateUpdated](#dateupdated)                     | Narrows the query results based on the addresses’ last-updated dates.
@@ -381,6 +382,21 @@ Unpublished drafts can be included as well if `drafts(null)` and
 <a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-clearcachedresult" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
 
 Clears the [cached result](https://craftcms.com/docs/5.x/development/element-queries.html#cache).
+
+
+
+
+
+
+#### `collectIds`
+
+<a class="ref-defined-by" href="https://docs.craftcms.com/api/v5/craft-elements-db-elementquery.html#method-collectids" target="_blank" rel="noopener noreferer">Defined by <code>craft\elements\db\ElementQuery</code></a>
+
+Executes the query and returns the IDs of the resulting elements as a collection.
+
+
+
+
 
 
 
