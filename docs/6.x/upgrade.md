@@ -244,16 +244,49 @@ Submitted values are flashed back to the session and can be retrieved using the 
 #### HTML Purification
 
 HTMLPurifier has been replaced by Symfony’s [HtmlSanitizer](https://symfony.com/doc/current/html_sanitizer.html).
-This means any custom configurations in `config/craft/htmlpurifier/*` will need to be translated into [the new format](https://symfony.com/doc/current/html_sanitizer.html#configuration), and registered via a service provider (or contributed by plugin).
+This means any custom configurations in `config/craft/htmlpurifier/*` will need to be translated into the new format.
 
 ::: tip
 If you never modified Craft’s `Default.json` config, you can just remove it.
 The new defaults are intended to be equivalent.
 :::
 
+You have two options for configuration, both of which use a [standard config schema](https://symfony.com/doc/current/html_sanitizer.html#configuration):
+
+1. **Config file:** Create a new PHP file in `config/craft/sanitiziers/`, and return an array:
+    ```php
+    <?php
+
+    return [
+        'allow_elements' => [
+            'a' => ['href'],
+        ],
+    ];
+    ```
+1. **Service provider:** In the `boot()` method, instantiate and register a new sanitizer object:
+    ```php
+    use CraftCms\Cms\Support\HtmlSanitizer\HtmlSanitizers;
+    use Symfony\Component\HtmlSanitizer\HtmlSanitizer;
+    use Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig;
+
+    public function boot(HtmlSanitizers $sanitizers): void
+    {
+        $config = new HtmlSanitizerConfig()
+            ->allowElement('a')
+            ->allowAttribute('href', ['a']);
+
+        $sanitizers->register('links-only', new HtmlSanitizer($config));
+    }
+    ```
+    If you do not wish to add the manager as an injected dependency, you can resolve it via the service container:
+    ```php
+    $sanitizers = app(\CraftCms\Cms\Support\HtmlSanitizer\HtmlSanitizers);
+    ```
+
+Plugins can also register configurations using the second method.
+
 The `purify` Twig filter has also been replaced with the appropriately-named `sanitize` filter.
 Like the old one, this filter accepts a custom configuration handle.
-
 
 #### Markdown
 
