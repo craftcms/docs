@@ -40,6 +40,7 @@ Function | Description
 [getenv](#getenv) | Returns the value of an environment variable.
 [gql](#gql) | Executes a GraphQL query against the full schema.
 [head](#head) | Outputs scripts and styles that were registered for the “head” position.
+[heading](#heading) | Outputs an HTML heading tag.
 [hiddenInput](#hiddeninput) | Outputs a hidden input.
 [include](https://twig.symfony.com/doc/3.x/functions/include.html) | Returns the rendered content of a template.
 [input](#input) | Outputs an HTML input.
@@ -641,6 +642,47 @@ Outputs any scripts and styles that were registered for the “head” position.
 </head>
 ```
 
+## `heading` or `h`
+
+Outputs an HTML heading tag.
+
+```twig
+{{ heading(2', 'Hello) }}
+{# Output: <h2>Hello</h2> #}
+```
+
+```twig
+{{ h(2', 'Hello) }}
+{# Output: <h2>Hello</h2> #}
+```
+
+Like [tag](#tag), you can set attributes on the tag, by replacing the second argument with a hash:
+
+```twig
+{{ h(2', {
+  text: 'Hello',
+  class: 'foo'
+}) }}
+{# Output: <h2 class="foo">Hello</h2> #}
+```
+
+### `h1`…`h6`
+
+Additional functions are available for each specific heading level:
+
+```twig
+{{ h2('Hello) }}
+{# Output: <h2>Hello</h2> #}
+```
+
+```twig
+{{ h2({
+  text: 'Hello',
+  class: 'foo'
+}) }}
+{# Output: <h2 class="foo">Hello</h2> #}
+```
+
 ## `hiddenInput`
 
 Generates an HTML input tag.
@@ -973,25 +1015,24 @@ Consider caching the output, especially if you’re loading SVG files from a rem
 
 ## `tag`
 
-Renders a complete HTML tag.
+Outputs an HTML tag.
 
 ```twig
-{{ tag('div', {
-  class: 'foo'
-}) }}
-{# Output: <div class="foo"></div> #}
-```
-
-If `text` is included in the attributes argument, its value will be HTML-encoded and set as the text contents of the tag.
-
-```twig
-{{ tag('div', {
-  text: 'Hello'
-}) }}
+{{ tag('div', 'Hello) }}
 {# Output: <div>Hello</div> #}
 ```
 
-If `html` is included in the attributes argument (and `text` isn’t), its value will be set as the inner HTML of the tag (without getting HTML-encoded).
+To set attributes on the tag, replace the second argument with a hash:
+
+```twig
+{{ tag('div', {
+  text: 'Hello',
+  class: 'foo'
+}) }}
+{# Output: <div class="foo">Hello</div> #}
+```
+
+The tag contents will be automatically HTML-encoded. If that’s not desired, you can specify a `html` key instead.
 
 ::: warning
 Be sure you trust any input you provide via `html` since it could be an XSS (cross-site scripting) attack vector. It’s safer to use `text` wherever possible.

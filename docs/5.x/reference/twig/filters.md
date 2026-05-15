@@ -481,6 +481,15 @@ Formats a timestamp or [DateTime](http://php.net/manual/en/class.datetime.php) o
     {# Output: 1/18/2038, 7:14 PM #}
     ```
 
+`withTimeZone`
+
+:   Include the time zone in the rendered date using the `withTimeZone` param:
+
+    ```twig
+    {{ entry.postDate|datetime('short', timezone='UTC', withTimeZone=true) }}
+    {# Output: 1/19/2038, 3:14 AM UTC #}
+    ```
+
 ::: tip
 Applying the filter to a `null` value uses the current date. If this is the desired behavior, consider explicitly passing the [`now` variable](global-variables.md#now): `now|date`.
 :::
@@ -1184,6 +1193,7 @@ The value is passed to [`Craft::$app->getFormatter()->asDecimal()`](yii2:yii\i18
 - **decimals** – number of digits that should appear after the decimal point (defaults to `null`)
 - **options** – key-value array of [number formatter options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute) (ignored if PHP intl extension is not installed)
 - **textOptions** – key-value array of [text formatting options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute) for the formatter
+- **locale** – the locale the number should be formatted for (defaults to the current application locale)
 
 ```twig
 {{ 1000000|number(2) }}
@@ -1445,6 +1455,13 @@ You can customize the timezone the time is output in, using the `timezone` param
 ```twig
 {{ entry.postDate|time('short', timezone='UTC') }}
 {# Output: 12:00 AM #}
+```
+
+The timezone can be included in the rendered time by passing a `withTimeZone` param:
+
+```twig
+{{ entry.postDate|time('short', timezone='UTC', withTimeZone=true) }}
+{# Output: 12:00 AM UTC #}
 ```
 
 ## `timestamp`
