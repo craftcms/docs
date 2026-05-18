@@ -66,6 +66,7 @@ module.exports = {
             "extend/queue",
             "extend/logging",
             "extend/mail",
+            "extend/migrations",
             "extend/models",
             "extend/services",
             "extend/session",
