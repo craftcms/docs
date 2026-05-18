@@ -36,3 +36,7 @@ This is also typically where [static or publishable assets](assets.md) live; res
 ## Routes
 
 The new [route](http.md) registration files must be created in a top-level `routes/` directory.
+
+## Migrations
+
+[Migrations](migrations.md) now live in a top-level `database/migrations/` directory.
