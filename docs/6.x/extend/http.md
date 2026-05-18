@@ -141,3 +141,45 @@ Route::middleware(['throttle:activity'])->group(function () {
 ```
 
 A complete example of this kind of configurable routing can be found in our [Guest Entries](https://github.com/craftcms/guest-entries/tree/5.x) plugin.
+
+## Named Routes
+
+If your route map is growing or changing frequently in development, you can give your routes [names](laravel:routing#named-routes) to avoid form actions, redirects, and routes from getting out of sync.
+
+## Helpers
+
+Laravel comes with a number of ergonomic improvements for generating [responses](laravel:responses):
+
+```php
+// Default:
+if (in_array($event->name, $forbiddenEvents)) {
+    abort(400, 'We are no longer tracking this event.');
+}
+
+// Succinct:
+abort_if(in_array($event->name, $forbiddenEvents), 400, 'We are no longer tracking this event.');
+
+// Inverse:
+abort_unless($event->isTrackable(), 400, 'We are no longer tracking this event.');
+
+// Redirect to a path:
+return redirect('/my-account/profile');
+
+// Redirect to a named route:
+return redirect()->route('account.profile');
+
+// Send the client back to the referring path:
+return back()
+    ->with('event_name', $event->name);
+
+// Flash input back to the session to repopulate a form (using the `old()` helper):
+return back()
+    ->withInput();
+```
+
+Some of these are roughly equivalent to the familiar convenience methods provided by `CraftCms\Cms\Http\RespondsWithFlash`.
+You don’t need to `return` the `abort()` calls, as they exit the method by throwing an exception.
+
+::: tip
+If you’ve implemented [middleware](#middleware) for authorization, you may find that you’re not even reaching for these helpers very often!
+:::
