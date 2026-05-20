@@ -1,6 +1,15 @@
 # Helpers
 
-Most of Craft’s static helper classes have moved to the `CraftCms\Cms\Support` namespace.
+Most of Craft’s static “helper” classes have moved to the `CraftCms\Cms\Support` namespace.
+
+<!-- more -->
+
+## Functions
+
+A handful of helper functions are defined in `src/helpers.php`, at the top level of the `CraftCms\Cms` namespace.
+These are mostly shortcuts for high-traffic features, like [rendering templates](templates.md) (`template()`), [translating strings](translation.md) (`t()`), or generating URLs (`cp_url()`, `site_url()`).
+
+You are not obligated to use these helpers, but they provide a highly stable, public API that we hope will simplify and standardize common tasks.
 
 ## Facades
 
