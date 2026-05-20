@@ -142,11 +142,11 @@ These action classes can then be called from HTTP or console requests—or even 
 ### Registration
 
 Another prime candidate for refactoring are methods that exist solely to define configuration or list features.
-In Craft 5.x, there was no event to directly register a global variable in Twig; in fact, all the logic for determining what global variables were available was contained in the `Extension` class itself.
+In Craft 5.x, there was no event to directly register a [global variable in Twig](templates.md#globals); in fact, all the logic for determining what global variables were available was contained in the `Extension` class itself.
 For Craft 6.x, we extracted this into `CraftCms\Cms\View\TemplateGlobals`, which has a single `resolve()` with the legacy variable-gathering logic, plus an event emitter.
 When resolved via `app()`, its constructor receives dependencies which are then used in `resolve()` to assemble the array.
 
-Now, we can test this in isolation, share between Twig and Blade environments, get a list of variables without instantiating Twig, or split up variables into categories without polluting one of our extensions.
+Now, we can test this in isolation, share between [Twig and Blade environments](templates.md#blade), get a list of variables without instantiating Twig, or split up variables into categories without polluting one of our extensions.
 The same pattern could be applied to widgets (`CraftCms\Cms\Dashboard\Dashboard::getAllWidgetTypes()`), elements (`\CraftCms\Cms\Element\Elements::getAllElementTypes()`), or utilities (`CraftCms\Cms\Utility\Utilities::getAllUtilityTypes()`).
 
 ## Components
