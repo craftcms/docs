@@ -151,14 +151,19 @@ A few settings have been removed, renamed, or relocated:
 | `systemMessageTemplate` | Site-specific templates are configured via Settings &rarr; Email |
 | `elevatedSessionDuration` | Use [`password_timeout`](laravel:authentication#password-confirmation) in Laravel’s authentication config file (`config/auth.php`). The default is now 10800 seconds (three hours). |
 
-
 You can selectively publish Laravel’s default config files from the console:
 
 ```bash
 ddev artisan config:publish [auth|session|hashing|mail|...]
 ```
 
-### Database
+Additionally, these settings’ default values have changed:
+
+| Setting | Previous | New | Notes |
+| --- | --- | --- | --- |
+| `loginPath` | `'login'` | `false` |  The front-end login form is now hidden, by default. |
+
+#### Database
 
 `db.php` is no longer used.
 Environment variables beginning with `CRAFT_DB_*` in `.env` have been renamed to agree with [Laravel convention](laravel:database#configuration) and the new DDEV project type behavior.
