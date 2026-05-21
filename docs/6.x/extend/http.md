@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # Controllers + Routing
 
 Your plugin’s HTTP API is entirely up to you.
@@ -73,19 +77,142 @@ Laravel’s “terminable” middleware is not compatible with all hosting envir
 app()->terminating($this->flushLazyEvents());
 ```
 
-## Authorization
+### Authorization
 
 Controllers in Laravel don’t often do their own authorization, because they’re no longer automatically exposed to the router.
-See the [permissions](#) for info about guards, policies, and other middleware that you can define alongside your routes.
+See the [permissions](#permissions) section for info about guards, policies, and other middleware that you can define alongside your routes.
 
 Any route can be guarded with a known permission using the `can` middleware:
 
 ```php
-Route::get('events/history', ListHistory::class)
-    ->middleware(['can:eventsPlugin-viewEventHistory']);
+Route::get('activity/history', [HistoryController::class, 'index'])
+    ->middleware(['can:activityPlugin-viewEventHistory']);
 ```
 
 The [session](session.md) section has information about interacting with the current user.
+
+### Permissions
+
+Register permissions with Craft by defining a `getPermissions()` method in your plugin and returning an array of `CraftCms\Cms\User\Data\Permission` objects:
+
+```php
+use CraftCms\Cms\User\Data\Permission;
+
+protected function getPermissions(): array
+{
+    return [
+        new Permission(
+            key: 'activity-viewReports',
+            label: t('View {type}', [
+                'type' => Report::pluralLowerDisplayName(),
+            ]),
+            nested: [
+                // ...
+            ],
+        ),
+        new Permission(
+            key: 'activity-createReportTemplate',
+            label: t('Create {type}', [
+                'type' => Template::pluralLowerDisplayName(),
+            ]),
+        ),
+
+        // ...
+    ];
+}
+```
+
+::: tip
+Permissions should be explicitly named, as they are globally unique.
+:::
+
+In addition to the `can:` middleware (which is enforced before an action is invoked), a user’s permissions can be checked explicitly at any time throughout an action:
+
+```php
+// Check (but don’t throw):
+if (! Gate::check('activity-viewReports')) {
+    // ...
+}
+
+// Halt if unauthorized:
+Gate::authorize('view', $report);
+```
+
+Unless another package has defined a simple gate, bare ability checks (like the first example) fall through to Craft permissions.
+In the second example, we’re authorize against a specific object.
+We do this internally, for elements: many related permissions determine whether a user can `save` an entry, so it doesn’t make sense to check against each of those specific permissions in each place an element might be saved.
+Instead, these complex or compound checks are bundled with a [policy](laravel:authorization#creating-policies):
+
+```php
+class ReportPolicy
+{
+    /**
+     * Runs before every check that resolves through this policy.
+     */
+    public function before(User $user, string $ability): ?bool
+    {
+        // ...
+    }
+
+    /**
+     * Runs when explicitly checking the `view` ability against a Report object.
+     */
+    public function view(User $user, Report $report): bool
+    {
+        if (! $user->can('viewReports')) {
+            return false;
+        }
+
+        $template = $report->getTemplate();
+
+        // Are they allowed to view reports based on this template?
+        if (! $user->can('viewReports:'.$template->uid)) {
+            return false;
+        }
+
+        // Can they view reports they didn’t run?
+        if ($user->id !== $report->creatorId && ! $user->can('viewPeerReports:'.$template->uid)) {
+            return false;
+        }
+
+        return true;
+    }
+}
+```
+
+[Register your policy class](authorization#manually-registering-policies) with Laravel’s gate system, specifying the resource it should be evaluated against:
+
+```php
+Gate::policy(Report::class, ReportPolicy::class);
+```
+
+When bound to a class like this, your ability names can be simplified: our `activity-viewReports` permission is reduced to just the “action” `view`, as it only needs to be unique within that policy.
+
+::: tip
+Listen to the `Illuminate\Auth\Access\Events\GateEvaluated` event (or register an “after-check” callback with `Gate::after(...)`) to audit or alter the outcome of gate checks.
+
+You can also intercept permission checks early, by registering a `before` handler:
+
+```php
+Gate::before('saveEntries:a6dbf63e-89fb-4f17-9205-2e7469f0aa2a', function (User $user, Entry $entry) {
+    // Return `true` or `false` only if you have enough information; return `null` to continue processing.
+});
+```
+
+In a plugin, the UUID in this example would need to be looked up, dynamically.
+:::
+
+In some situations, you may still need to resolve permissions directly via the user element:
+
+```php
+// Check against the current user:
+Auth::user()->can('triggerReport');
+
+// Check against a specific user:
+$recipient->can('requestAccess', $report);
+```
+
+These calls ultimately flow through the same checks, and are eventually handled by Craft using `CraftCms\Cms\User\UserPermissions::doesUserHavePermission()`.
 
 ## Controllers
 
