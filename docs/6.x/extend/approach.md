@@ -17,3 +17,16 @@ Examples of this are:
 - **Mail transport adapters** — Projects can set up mailers via `config/mail.php` and select one in <Journey path="Settings, Email" />
 - **Custom log back-ends** — As with prior versions of Craft, plugins may not be initialized early enough in the app’s lifecycle to capture a complete picture. Consider whether projects can effectively use Laravel’s built-in [logging](laravellogging) tools.
 - **Filesystem types** — Developers can directly configure *disks* and use them for volumes. The <Journey path="Settings, Filesystems" /> screen also acts as a disk configurator.
+
+## Style
+
+You’ll notice that a number of code style conventions have changed, internally: we adopted Laravel’s [Pint](laravel:pint) tool to audit the new codebase.
+
+If you’d like to use this in your own project, require the `laravel/pint` package and run:
+
+```bash
+ddev php vendor/bin/pint --test path/to/plugin
+```
+
+A `pint.json` configuration file is not necessary, unless you need to exclude directories or otherwise customize Pint’s behavior.
+Pint is a static analysis tool, and runs independently from Laravel or Craft; this means it can provide feedback via the command line or in CI without the rest of the application.
