@@ -136,9 +136,9 @@ You do not need to do anything to continue using a `.env` file.
 
 ### Configuration
 
-### General Config
-
 As mentioned in the preparation step, multi-environment configuration is no longer supported.
+
+#### General Config
 
 A few settings have been removed, renamed, or relocated:
 
