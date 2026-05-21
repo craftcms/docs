@@ -131,7 +131,7 @@ These classes all live in the `CraftCms\Cms\Twig\Extensions` namespace, and are 
 - `DateTwigExtension` — Functions and filters for working with dates and times.
 - `ArrayTwigExtension` — Array helpers.
 - `TextTwigExtension` — Text manipulation helpers.
-- `HtmlTwigExtension` — HTML and markdown manipulation and filtering helpers.
+- `HtmlTwigExtension` — HTML and Markdown manipulation and filtering helpers.
 - `CpExtension` — Additional features available only to the “control panel” template mode.
 - `FeExtension` — Additional features available only to the “site” template mode.
 - `SinglePreloaderExtension` — Automatically loads single section entries when accessed like a global variable. (Only active when the `preloadSingles` setting is `true`.)
@@ -179,7 +179,7 @@ public function bootPlugin(): void
 Any variables registered in this way will be available in Twig _and_ [Blade](#blade) environments!
 
 ::: tip
-Craft injects a few additional global Twig variables from its extensions, so `$event->globals` (and the return from `CraftCms\Cms\View\TemplateGlobals::resolve()`) is not a comprehensive list of variables you have access to in Twig—it's just the core set that is intended to be useful and compatible with every language and mode.
+Craft injects a few additional global Twig variables from its extensions, so `$event->globals` (and the return from `CraftCms\Cms\View\TemplateGlobals::resolve()`) is not a comprehensive list of variables you have access to in Twig—it’s just the core set that is intended to be useful and compatible with every language and mode.
 :::
 
 ### Facades
