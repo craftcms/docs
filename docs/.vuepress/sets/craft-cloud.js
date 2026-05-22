@@ -15,7 +15,7 @@ module.exports = {
     dbSupportPostgres: '15',
     trialDays: 7,
     minNodeVersion: '18',
-    regionSupport: 'North America, Canada, Europe, and Asia/Pacific',
+    regionSupport: 'United States, Canada, Europe, Sweden, United Kingdom, and Asia Pacific',
     scheduledCommandsMax: 'five',
   },
   sidebar: {
