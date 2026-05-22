@@ -843,8 +843,8 @@ By default, your elements will support two statuses: Enabled and Disabled. If yo
 public static function statuses(): array
 {
     return [
-        'foo' => ['label' => \Craft::t('plugin-handle', 'Foo'), 'color' => '27AE60'],
-        'bar' => ['label' => \Craft::t('plugin-handle', 'Bar'), 'color' => 'F2842D'],
+        'foo' => ['label' => \Craft::t('plugin-handle', 'Foo'), 'color' => Color::Indigo],
+        'bar' => ['label' => \Craft::t('plugin-handle', 'Bar'), 'color' => Color::Lime],
     ];
 }
 ```
