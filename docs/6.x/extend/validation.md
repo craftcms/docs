@@ -134,7 +134,7 @@ Together, these form a local validation API that incorporates aspects of Yii “
 
 ## Rulesets
 
-If you have multiple objects that follow similar validation rules (but do not share a parent class), you can bundle them in a [Ruleset](repo:craftcms/laravel-ruleset-validation) and attach them with an attribute or the `ruleset()` method:
+If you have multiple objects that follow similar validation rules (but do not share a parent class), you can bundle them in a [Ruleset](repo:craftcms/laravel-ruleset-validation) and attach them with the `#[Ruleset(...)] attribute or the `ruleset()` method:
 
 ```php{5,10}
 use CraftCms\Cms\Component\Component;
@@ -190,7 +190,9 @@ You are free to reimplement any of those methods for more control over the valid
 When you extend `CraftCms\Cms\Validation\Ruleset`, Craft automatically emits an [event](#events) as rules are resolved.
 :::
 
-By default, [components](#components) use the `CraftCms\Cms\Validation\ComponentRules` ruleset, which forwards many internal calls to the corresponding `Validatable` methods so that the validation “subject” can be responsible for its own validation lifecycle.
+By default, [components](#components) use the `CraftCms\Cms\Validation\ValidatableRules` ruleset, which forwards many internal calls to the corresponding `Validatable` methods so that the validation “subject” can be responsible for its own lifecycle.
+If a ruleset is instantiated _without_ a subject, it’s assumed you want to work with request data.
+As a result, you can use ruleset classes in place of [form requests](#form-requests).
 
 ### Scenarios
 
