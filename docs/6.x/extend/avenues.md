@@ -1,6 +1,13 @@
-# Extension Types
+---
+sidebarDepth: 2
+description: There are a ton of different ways (and reasons) to extend Craft.
+---
+
+# Extension Options
 
 Historically, you’ve been able to extend Craft in two ways: [plugins](#plugins) (distributable packages installed via the [Plugin Store](https://plugins.craftcms.com)) and [modules](#modules) (a low-level extension usually tied to a single project, but still somewhat portable).
+
+<!-- more -->
 
 ## Plugins
 
@@ -72,7 +79,7 @@ Laravel’s definition of a [model](models.md) is much narrower than Craft’s, 
 
 We discuss this in greater detail in the [Models, Records, and Data](models.md) section.
 
-### Initialization
+## Initialization
 
 Plugins have an entirely new, phased initialization mechanism that makes it much easier to reason about the availability of other systems and add features in a declarative way.
 
@@ -103,7 +110,7 @@ To be notified when the app has fully booted, register a callback:
 app()->booted($callback);
 ```
 
-#### Plugin Traits
+### Plugin Traits
 
 A handful of built-in *concerns* handle this bootstrapping process for plugins, providing a declarative way to register many common for define any of their corresponding properties and methods.
 Instead of setting up an event listener to, say, register a field type, 
@@ -148,7 +155,7 @@ Once all plugins are booted, Craft emits the `CraftCms\Cms\Plugin\Events\Plugins
 
 ::: danger
 **Do not** override your plugin’s `register()` or `boot()` methods.
-All your initialization logic should be in the `bootPlugin()` methods.
+All your initialization logic should be in the `bootPlugin()` method (or `registerPlugin()` in some rare circumstances).
 :::
 
 ## Termination
