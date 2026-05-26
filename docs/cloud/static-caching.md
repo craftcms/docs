@@ -12,7 +12,7 @@ Cloud’s static cache operates on *full pages*, which means that either the ent
 
 Craft’s built-in `{% cache %}` tag can be combined with static caching—but because the caches are invalidated at the same time, they may be redundant. If you have a highly-dynamic front-end that isn’t possible to cache statically, the normal template cache system is still a great option for caching parts of a page.
 
-Most Craft features that rely on dynamic rendering are already set up to bypass the cache, including the entire control panel, live preview, any front-end pages that use the session or cookies. [Asynchronous CSRF](#csrf) can be enabled in Craft to make most front-end forms cachable.
+Most Craft features that rely on dynamic rendering are already set up to bypass the cache, including the entire control panel, live preview, any front-end pages that use the session or cookies. [Asynchronous CSRF](#csrf) can be enabled in Craft to make most front-end forms cacheable.
 
 ## Controlling the Cache
 
@@ -75,7 +75,7 @@ Each unique value is cached independently, when allowed.
 
 ## Duration
 
-The Cloud extension uses the same source of information as Craft when determining how long to statically cache a page (if it is cachable at all). This means that pages using elements with an **Expiry Date** sooner than the default [`cacheDuration` setting](/5.x/reference/config/general.html#cacheduration) will only be cached as long as all the underlying content ought to be visible. As with Craft’s template caches system, there is not currently a mechanism in place to invalidate caches that _would_ contain elements with a future **Post Date**.
+The Cloud extension uses the same source of information as Craft when determining how long to statically cache a page (if it is cacheable at all). This means that pages using elements with an **Expiry Date** sooner than the default [`cacheDuration` setting](/5.x/reference/config/general.html#cacheduration) will only be cached as long as all the underlying content ought to be visible. As with Craft’s template caches system, there is not currently a mechanism in place to invalidate caches that _would_ contain elements with a future **Post Date**.
 
 If you have [manually set cache headers](#force-caching) at some point in the request, Craft will not overwrite those headers.
 
@@ -117,7 +117,7 @@ Avoid calling `craft.app.request.getCsrfToken()` directly, or manually building 
 
 ### Flashes
 
-Any time you access session-dependent information like [flashes](/5.x/development/forms.html#flashes), Craft sends no-cache headers. Form submissions via POST are never cached and will therefore re-render the page with any contextual [validation errors](/5.x/development/forms.html#models-and-validation) as you would expect—but when the form itself is otherwise cachable (including using [asynchronous CSRF tokens](#csrf)), you can guard flash messages with a check for a flag:
+Any time you access session-dependent information like [flashes](/5.x/development/forms.html#flashes), Craft sends no-cache headers. Form submissions via POST are never cached and will therefore re-render the page with any contextual [validation errors](/5.x/development/forms.html#models-and-validation) as you would expect—but when the form itself is otherwise cacheable (including using [asynchronous CSRF tokens](#csrf)), you can guard flash messages with a check for a flag:
 
 ```twig
 {# Access session data only when the `success` query param is set: #}
