@@ -14,7 +14,7 @@ Your `craft-cloud.yaml` must contain at least a `php-version` key:
 
 ```yaml
 # Versions must include major + minor, but no patch.
-php-version: '8.2'
+php-version: '8.5'
 ```
 
 `composer.json`’s [`config.platform`](https://getcomposer.org/doc/06-config.md#platform) is only used to determine the default value that the CLI setup wizard presents.

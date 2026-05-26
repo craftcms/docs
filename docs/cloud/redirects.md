@@ -9,7 +9,7 @@ Both features use the flexible [`URLPattern` API](https://developer.mozilla.org/
 Redirection rules live in your `craft-cloud.yaml` file, under a `redirects` key:
 
 ```yml
-php-version: '8.2'
+php-version: '8.5'
 
 # ...
 
