@@ -65,6 +65,10 @@ For the latest information on supported PHP and Node.js versions, see our [Cloud
 
 In addition to the above runtime and build settings, you can configure any number of [redirection and rewrite rules](redirects.md). These rules are evaluated _before_ the request reaches your Craft application, and can be used to normalize URLs, proxy assets or artifacts, redirect secondary domains, or map legacy URLs to your new site.
 
+### Cache Keys
+
+Our default [static cache key structure](static-caching.md#query-parameters) is designed to minimize cache misses by reducing fragmentation, but you can tweak it on a per-URL basis.
+
 ### Directory Structure
 
 Multiple settings influence how Cloud locates key files in your project. The defaults agree with our official [starter project](https://github.com/craftcms/craft).

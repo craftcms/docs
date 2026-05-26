@@ -67,11 +67,141 @@ This method also sets `Expires` and `Pragma` headers. When using the `expires` t
 
 ### Query Parameters
 
-Cloud performs some basic filtering and normalization to query parameters when determining whether to serve a page from the cache.
-Some common tracking params (like [`gclid`](https://support.google.com/google-ads/answer/9744275)) that contain random or identifying values do _not_ influence this decision.
+Cloud performs some basic filtering and normalization to query parameters when determining static cache keys.
+Common tracking params (like [`gclid`](https://support.google.com/google-ads/answer/9744275)) that contain randomized identifiers for client-side scripts are [excluded](#excluded-params) from this logic, to reduce cache fragmentation and maximize cache hits.
+You can [control this behavior](#customizing-cache-keys) via `craft-cloud.yaml`.
 
-Adding a custom query parameter to a URL is not enough to entirely prevent a page from being cached!
-Each unique value is cached independently, when allowed.
+Cache keys (and the rules behind them) don’t actually control whether a request is served from the cache; they only help determine the uniqueness of a request, using a combination of query parameters and session values.
+For example, these URLs are all treated as equivalent, by default:
+
+```
+https://acme.biz/newsroom?page=3&category=widgets&gclid=AB42
+https://acme.biz/newsroom?page=3&gclid=AB42&category=widgets
+https://acme.biz/newsroom?category=widgets&page=3&gclid=CD47
+https://acme.biz/newsroom?page=3&category=widgets
+https://acme.biz/newsroom?category=widgets&page=3
+```
+
+This demonstrates two important features of cache key generation:
+
+1. **Some query params are dropped:** The presence of `gclid` (and other [excluded params](#excluded-params)) has no effect.
+1. **Query params are alphabetized:** The order of params is not considered significant, so you can safely transpose `page` and `category`.
+
+#### Ignored Params
+
+These query parameters are not not considered when building cache keys, by default:
+
+::: details View Complete List
+- Google Analytics / Ads
+  - `utm_source`
+  - `utm_medium`
+  - `utm_campaign`
+  - `utm_term`
+  - `utm_content`
+  - `gclid`
+  - `gclsrc`
+  - `dclid`
+  - `wbraid`
+  - `gbraid`
+- Facebook
+  - `fbclid`
+  - `fb_action_ids`
+  - `fb_action_types`
+  - `fb_source`
+- Microsoft
+  - `msclkid`
+- Hubspot
+  - `hsa_cam`
+  - `hsa_grp`
+  - `hsa_mt`
+  - `hsa_src`
+  - `hsa_ad`
+  - `hsa_acc`
+  - `hsa_net`
+  - `hsa_kw`
+  - `hsa_tgt`
+  - `hsa_ver`
+  - `hsa_la`
+  - `hsa_ol`
+- Mailchimp
+  - `mc_cid`
+  - `mc_eid`
+- Klaviyo
+  - `_kx`
+- Other common tracking
+  - `_ga`
+  - `_gl`
+  - `_ke`
+  - `trk_contact`
+  - `trk_msg`
+  - `trk_module`
+  - `trk_sid`
+:::
+
+Params are _not_ dropped from the request itself—they will always be available to client-side scripts, and forwarded to your application for uncached requests.
+
+::: tip
+This list may change, based on telemetry from Cloudflare—if we observe that a randomized value (say, a param appended to a URL by a new link shortening service) is causing unnecessary cache misses (and therefore origin and database load), we will add temporary or permanent defaults to protect your application and our infrastructure.
+:::
+
+### Customizing Cache Keys
+
+In `craft-cloud.yaml`, you can add any number of custom rulesets under the `cache.rules` key:
+
+```yaml
+php-version: 8.5
+cache:
+  rules:
+    - pattern: "/contact/thank-you{/}?"
+      # Allow different confirmation messages to be cached uniquely:
+      query-string:
+        mode: include
+        keys:
+          - message
+    - pattern: /referral
+      # Cache based on unique values for an `AD_SOURCE` cookie:
+      session:
+        - AD_SOURCE
+        - REFERRER_NETWORK
+    - pattern: /
+      # Ignore all query params when caching the homepage:
+      query-string:
+        mode: exclude
+        keys: all
+```
+
+The order of rules is significant!
+Cloud uses the first rule that matches, so you should declare them with _descending_ specificity.
+
+::: warning
+Note that customizing `query-string` _replaces_ our default behavior and [exclusion list](#ignored-params).
+:::
+
+Each `pattern` uses the same URL matching logic as [rewrites and redirects](redirects.md), and must define at least a `query-string` or `session` key.
+
+- **Query String** (`query-string`) — Two nested keys are required:
+  - `mode` — Determines the behavior for this rule. `include` treats the provided `keys` as an allow-list; `exclude` treats it as a deny-list.
+  - `keys` — The query string keys that are used as a mask for the chosen `mode`.
+- **Cookies** (`session`) — Directly nest a list of strings corresponding to cookie names that should be incorporated into the cache key. There is no `mode` for cookie settings; when a key is provided _and present in a client’s request_, it is added to the cache key. Otherwise, cookies are ignored.
+
+In both cases, keys _and their values_ are ultimately used to build cache keys—so pages matching the `session` rule above would be cached uniquely for clients with different `AD_SOURCE` cookie values.
+You can combine `query-string` and `session` masks in a single rule for additional granularity.
+
+The default behavior can be represented as a catch-all rule, like this:
+
+```yaml
+php-version: 8.5
+cache:
+  rules:
+    - pattern: "/*?"
+      query-string:
+        mode: exclude
+        keys:
+          - utm_source
+          - utm_medium
+          - utm_campaign
+          - # ...
+```
 
 ## Duration
 
