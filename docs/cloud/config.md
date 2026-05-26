@@ -17,7 +17,12 @@ Your `craft-cloud.yaml` must contain at least a `php-version` key:
 php-version: '8.5'
 ```
 
+The full schema used to validate `craft-cloud.yaml` in the _Prepare_ step of every deployment is [publicly accessible](https://api.craft.cloud/schemas/craft-cloud.schema.json).
+You are welcome to use this in your IDE, or in a web-based validation tool.
+
+::: tip
 `composer.json`’s [`config.platform`](https://getcomposer.org/doc/06-config.md#platform) is only used to determine the default value that the CLI setup wizard presents.
+:::
 
 ### Advanced Options
 
