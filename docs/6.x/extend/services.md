@@ -1,3 +1,7 @@
+---
+description: Services are the heart of your extension.
+---
+
 # Services
 
 ::: tip
@@ -57,7 +61,7 @@ class Reports extends Facade
 # -> Reports::generate(...)
 ```
 
-Services don’t need to extend any other classes, implement any interfaces, or use any traits.
+Services don’t need to extend any other classes, implement any interfaces, or use any traits… but [components](#components) are still a great starting place.
 
 ## Resolving a Service
 
@@ -131,7 +135,7 @@ The first time it is resolved through the container, Laravel will create an inst
 The structure of your services remains entirely up to you.
 To start, though, we recommend doing a strict horizontal port of your service classes; if you are compelled to rearrange after the port, Craft’s new codebase is a buffet of fun examples.
 
-Here are a couple patterns that might apply
+Here are a couple patterns that might apply:
 
 ### Atomization
 
@@ -152,7 +156,7 @@ The same pattern could be applied to widgets (`CraftCms\Cms\Dashboard\Dashboard:
 ## Components
 
 To make the transition a bit easier, we’ve brought along some of Yii’s “component” features that were upstream of Craft services.
-Your services (and other data models) can extend `CraftCms\Cms\Component\Component` to get access to validation, macros, array-style access, and more.
+Your services (and other data models) can extend `CraftCms\Cms\Component\Component` to get access to [validation](validation.md), macros, array-style access, and more.
 
 ## Plugin Getters
 
