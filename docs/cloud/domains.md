@@ -22,7 +22,7 @@ We automatically inject a `robots.txt` for preview domains (and non-production [
 
 ## Adding a Domain
 
-In your Cloud project, navigate to **Domains**, then click **New domain**.
+To serve traffic from your own domain, find the **Domains** panel in your Cloud project, then pick **New domain**.
 
 Provide the root domain you wish to add, and select an environment, if you want to tie it to one right away. You aren’t required to point the new root domain at Cloud, but any custom domains you do connect must go through a brief verification process before Cloud will respond to requests on it (or any subdomain thereof).
 
