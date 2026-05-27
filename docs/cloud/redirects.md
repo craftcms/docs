@@ -86,6 +86,15 @@ While this pattern appears to have only a single path segment, the `+` [modifies
 When the parsed `destination` begins with a slash (a _root-relative_ path), Craft Cloud uses the original request’s hostname and protocol as the base.
 :::
 
+To force all traffic to use a [custom domain](domains.md#adding-a-domain) (instead of your always-on [preview domain](domains.md#preview-domains)), you would use a `hostname`-only rule, like this:
+
+```yaml
+redirects:
+  - pattern:
+      hostname: 'my-project-my-environment-c2b74631.preview.craft.cloud'
+    destination: 'https://mydomain.com/{request.uri}'
+```
+
 ## Rewrites
 
 Unlike a [redirect](#redirects), URL rewrites are used to create virtual resources at our gateway—effectively giving you a configurable proxy. This means that when a matching URL is requested, the corresponding origin’s response is sent back, verbatim, without an initial 300-level response.
