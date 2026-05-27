@@ -158,6 +158,30 @@ The same pattern could be applied to widgets (`CraftCms\Cms\Dashboard\Dashboard:
 To make the transition a bit easier, we’ve brought along some of Yii’s “component” features that were upstream of Craft services.
 Your services (and other data models) can extend `CraftCms\Cms\Component\Component` to get access to [validation](validation.md), macros, array-style access, and more.
 
+### Configuration
+
+Laravel is broadly less config-driven than Yii.
+Services can be instantiated from anywhere (and at any time), so it’s expected that they know how to resolve their configuration, internally (usually by grabbing values with `config(...)` at runtime).
+As a result of flattening the application’s overall architecture, Yii’s [application configuration](guide:structure-applications#application-configurations) is no longer relevant—there is no centrally-defined component “tree” to initialize from config.
+
+Components bridge this gap by accepting a “configuration” array in their constructors, which is mapped and typecast onto its public properties.
+In many cases, we have elected to replace this top-down pattern with a combination of other strategies:
+
+- Initialize with defaults that draw from general config settings and other `config(...)` calls;
+- Provide methods to dynamically or temporarily reconfigure a service for the duration of a closure;
+
+You may have already been exposed to the second strategy when rendering templates, in earlier versions of Craft:
+
+```php
+use CraftCms\Cms\View\TemplateMode;
+
+TemplateMode::with(TemplateMode::Site, function () {
+    // ...
+});
+
+// Previously: Craft::$app->getView()->renderTemplate(sprintf('forms/%s', $form->handle), View::TEMPLATE_MODE_SITE);
+```
+
 ## Plugin Getters
 
 Because your services are all accessible by their class names, plugins no longer need to call `setComponents([])`, or implement “getter” methods.
