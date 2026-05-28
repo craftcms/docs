@@ -340,8 +340,49 @@ public function boot()
 
 ### Routing
 
-The `{uid}` placeholder token now matches UUIDs of any version.
-This only means that the rule may be *more* permissive; your routes will continue to work as expected.
+The `{uid}` placeholder token now matches UUIDs of any version, meaning rules that use it will be _slightly_ more permissive.
+Otherwise, there are no changes to routes defined in the control panel (and stored in project config).
+
+#### Custom Rules
+
+Your existing `config/routes.php` file (having moved to `config/craft/routes.php` during the upgrade) is evaluated by the adapter.
+Yii routes can be translated to [Laravel routes](laravel:routing) and relocated to `routes/web.php`:
+
+::: code
+```php Yii
+# config/craft/routes.php
+return [
+    // Mapping a route to a template:
+    'newsletter' => ['template' => '_forms/newsletter'],
+
+    // Adding a cosmetic alias for a controller:
+    'subscribe' => 'newsletter/subscribers/add',
+];
+```
+```php Laravel
+# routes/web.php
+use Illuminate\Support\Facades\Route;
+
+// Render a template:
+Route::view('newsletter', '_forms/newsletter');
+
+// Map a controller:
+Route::post('subscribe', [\AcmeLabs\Newsletter\Http\Controllers\Subscriber::class, 'create']);
+```
+:::
+
+If you want to gather some data before rendering a template, this is equivalent to `Route::view()`:
+
+```php
+use Illuminate\Http\Request;
+use function CraftCms\Cms\pageTemplate;
+
+Route::get('newsletter', function (Request $request) {
+    return pageTemplate('_forms/newsletter', [
+        'source' => $request->input('campaign_id', 'internal'),
+    ]);
+});
+```
 
 ## Extensions
 
