@@ -102,13 +102,17 @@ A simplified view of [the initialization process](laravel:lifecycle) looks like 
 - Routing
 
 Only bits and pieces of “Craft” are resolved in this process—unlike Yii, there is no central *Craft* instance that exists prior to plugins being booted!
-Despite this, we are able to make sure during the boot phase that only plugins that are installed and enabled are actually “booted.”
+Despite this, we are able to make sure during the boot phase that only plugins that are installed and enabled end up being fully “booted.”
 
-To be notified when the app has fully booted, register a callback:
+To be notified when the app has fully booted (along with all plugins), register a callback:
 
 ```php
 app()->booted($callback);
 ```
+
+::: tip
+This hook replaces the legacy `EVENT_AFTER_LOAD_PLUGINS` event.
+:::
 
 ### Plugin Traits
 
@@ -151,11 +155,13 @@ class InspirationPlugin extends Plugin
 ```
 
 A plugin’s traits are all initialized before finally calling the `bootPlugin()` method.
-Once all plugins are booted, Craft emits the `CraftCms\Cms\Plugin\Events\PluginsLoaded` event, indicating that it’s safe to check for and interact with other plugins.
 
 ::: danger
 **Do not** override your plugin’s `register()` or `boot()` methods.
-All your initialization logic should be in the `bootPlugin()` method (or `registerPlugin()` in some rare circumstances).
+All your initialization logic should be in the `bootPlugin()` method (or `registerPlugin()` in some very rare circumstances).
+
+As service providers, every plugin’s `register()` and `registerPlugin()` methods are called as they’re discovered, regardless of whether it’s installed or enabled.
+The same is true for `boot()`, but _not_ `bootPlugin()` and traits’ boot methods.
 :::
 
 ## Termination
