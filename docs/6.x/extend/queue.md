@@ -12,7 +12,7 @@ use MyOrg\Activity\Reporting\Manager;
 class GenerateReport extends Job
 {
     public function __construct(
-        public int $reportId,
+        public int $templateId,
         public bool $notifyOwner,
     ) {}
 
@@ -21,7 +21,7 @@ class GenerateReport extends Job
         Manager $manager,
     ): void
     {
-        $report = $manager->getReportById($this->reportId);
+        $report = $manager->getTemplateById($this->templateId);
     }
 }
 ```
@@ -50,3 +50,7 @@ A few other changes are worth noting:
 - `ttr` has been renamed `timeout`
 - Job are identified by UUIDs instead of IDs.
 - New kinds of jobs are available to projects that support them: consider implementing [chained jobs](laravel:queues#chains-and-batches), [collision-avoidance](laravel:queues#preventing-job-overlaps), or [parallelization](laravel:queues#job-batching)
+
+## Scheduling
+
+Jobs can also be [executed on a schedule](laravel:scheduling#scheduling-queued-jobs).

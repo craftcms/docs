@@ -68,6 +68,7 @@ module.exports = {
             "extend/mail",
             "extend/migrations",
             "extend/models",
+            "extend/scheduling",
             "extend/services",
             "extend/session",
             "extend/templates",

@@ -127,7 +127,8 @@ Instead of setting up an event listener to, say, register a field type,
 - `HasFrontendAssets` → `$vite`, `$styles`, `$scripts` — Configuration or path maps for various [asset publishing](assets.md) options.
 - `HasListeners` → `$events` — Bind [events](events.md) (keys) to listeners (values).
 - `HasPermissions` → `getPermissions()` (Array) — `CraftCms\Cms\User\Data\Permission` objects, with optional nesting.
-- `HasRoutes` → Loads [routes](http.md) defined in `routes/[web|cp|~~actions~~].php`.
+- `HasRoutes` → Loads [routes](http.md) defined in `routes/[web|cp|actions].php`.
+- `HasScheduling` → `schedule()` — Register [recurring tasks](scheduling.md).
 - `HasSettings` → `$hasCpSettings`, `$hasReadOnlyCpSettings` (Boolean) — Enables automatic routing to a dedicated [settings](config.md) screen in the control panel.
 - `HasTranslations` → `$t9nCategory`, `$sourceLanguage` — Customize the translation category. Defaults to your plugin handle.
 - `HasUtilities` → `$utilities` (Array) — Register utilities.
