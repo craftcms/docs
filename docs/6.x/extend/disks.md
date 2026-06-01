@@ -33,9 +33,12 @@ class Backblaze extends Filesystem
 ```
 
 Craft takes care of populating an instance of your filesystem class with incoming settings from the edit screen in the control panel.
+The shape of this configuration object depends on the underlying adapter.
+A `driver` key is always required, which must match one of the built-in or third-party storage adapters.
 
 ::: tip
-If your filesystem relies on a non-standard Flysystem adapter, you may need to add it to your `composer.json`. In our example, that would be `gliterd/laravel-backblaze-b2`.
+If your filesystem relies on a Flysystem adapter that is not already supported in Laravel, you may need to add it to your `composer.json`.
+In our example, that would be `gliterd/laravel-backblaze-b2`.
 :::
 
 To register a filesystem type, listen for the `\CraftCms\Cms\Filesystem\Events\RegisterFilesystemTypes` event:
@@ -52,4 +55,4 @@ If you would like to look at a complete Craft 6.x-ready example, check out our [
 
 ## Subpaths
 
-Return a `prefix` config key from `getDiskConfig()` to create a [scoped](laravel:filesystem#scoped-and-read-only-filesystems) disk that quarantines operations to a non-root directory.
+Return a `prefix` config key from `getDiskConfig()` to create a [scoped disk](laravel:filesystem#scoped-and-read-only-filesystems) that quarantines operations to a non-root directory.
