@@ -10,7 +10,7 @@ Outside a plugin, listen to `CraftCms\Cms\Field\Events\RegisterFieldTypes`, and 
 
 Field layout elements must be registered via the `CraftCms\Cms\FieldLayout\Events\DefineUIElements` or `DefineNativeFields` events, as there is no corresponding plugin property.
 
-### Rules
+## Rules
 
 Depending on complexity, field types can define two sets of validation rules:
 
