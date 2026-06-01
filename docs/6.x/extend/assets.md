@@ -1,60 +1,10 @@
-# Asset and Publishables
+# Assets and Publishables
 
-## Asset Bundles
+You are free to handle static assets in whatever way fits your needs, but there are a few built-in tools that simplify developing and distributing extensions.
 
-Craft includes a lightweight implementation of Yii’s asset bundle system, to help with the transition.
-This is an *alternative* to legacy asset registration, and still requires some changes to work.
-
-::: tip
-If you had previously maintained an asset bundle to register a single resource (with no dependencies) in the control panel, consider using your plugin’s `$scripts` or `$styles` property.
-:::
-
-Your asset bundle(s) must adopt a new interface and define a `register()` method:
-
-```php
-namespace MyOrg\MyPlugin\Assets;
-
-use MyOrg\MyPlugin\Plugin;
-use CraftCms\Cms\View\LegacyAssets\LegacyAssetInterface;
-
-class ActivityGraph implements LegacyAssetInterface
-{
-    // Optional:
-    public array $depends = [
-        \CraftCms\Cms\View\LegacyAssets\D3Asset::class,
-    ];
-
-    // Assets defined  `$css` and `$js` should be directly registered against the passed HtmlStack:
-    public function register(HtmlStack $htmlStack): void
-    {
-        $plugin = Plugin::getInstance();
-        $publicPath = public_path("vendor/{$plugin->packageName}");
-
-        $htmlStack->jsFile($publicPath.'/build/js/activity.js'));
-        $htmlStack->cssFile($publicPath.'/build/css/activity.css'));
-    }
-}
-```
-
-Then, whenever you’re preparing a response that will use the asset (typically in a controller), let the registry know:
-
-```php
-use MyOrg\MyPlugin\Assets\ActivityGraph;
-use CraftCms\Cms\View\LegacyAssets\InternalAssetRegistry;
-
-app(InternalAssetRegistry::class)->register(ActivityGraph::class);
-```
-
-When the app is ready to inject your asset into a response, the _asset’s_ `register()` method is called.
-
-::: warning
-Note that the `InternalAssetRegistry` class (and all our own asset bundles) have been deprecated, proactively.
-This is a stopgap solution that allowed us to fully eject the adapter for new projects, while gradually rebuilding the control on [Inertia](https://inertiajs.com).
-:::
+<!-- more -->
 
 ## Asset Pipelines
-
-You are free to handle assets in whatever way fits your needs.
 
 Plugins can register scripts and styles for every control panel request by declaring a map of paths as `$scripts` and `$styles`.
 These assets (the keys) become *publishable*, and will be copied into `public/vendor/myorg/plugin-name/...` (the value) when your plugin is installed.
@@ -163,3 +113,58 @@ If you want to work on multiple plugins at once, each will need a unique `port` 
 The Vite server config block (JS) needs both values; your plugin (PHP) only needs the `hotFile`.
 
 See `CraftCms\Cms\Plugin\Concerns\HasFrontendAssets` for more information about the `$vite` configuration.
+
+
+## Asset Bundles
+
+Craft includes a lightweight implementation of Yii’s asset bundle system, to help with the transition.
+This is an *alternative* to legacy asset registration, and still requires some changes to work.
+
+::: tip
+If you had previously maintained an asset bundle to register a single resource (with no dependencies) in the control panel, consider using your plugin’s `$scripts` or `$styles` property.
+:::
+
+Your asset bundle(s) must adopt a new interface and define a `register()` method:
+
+```php
+namespace MyOrg\MyPlugin\Assets;
+
+use MyOrg\MyPlugin\Plugin;
+use CraftCms\Cms\View\HtmlStack;
+use CraftCms\Cms\View\LegacyAssets\LegacyAssetInterface;
+
+class ActivityGraph implements LegacyAssetInterface
+{
+    // Optional:
+    public array $depends = [
+        \CraftCms\Cms\View\LegacyAssets\D3Asset::class,
+    ];
+
+    // Assets defined  `$css` and `$js` should be directly registered against the passed HtmlStack:
+    public function register(HtmlStack $htmlStack): void
+    {
+        $plugin = Plugin::getInstance();
+        $publicPath = public_path("vendor/{$plugin->packageName}");
+
+        $htmlStack->jsFile($publicPath.'/build/js/activity.js'));
+        $htmlStack->cssFile($publicPath.'/build/css/activity.css'));
+    }
+}
+```
+
+Then, whenever you’re preparing a response that will use the asset (typically in a controller), let the registry know:
+
+```php
+use MyOrg\MyPlugin\Assets\ActivityGraph;
+use CraftCms\Cms\View\LegacyAssets\InternalAssetRegistry;
+
+app(InternalAssetRegistry::class)->register(ActivityGraph::class);
+```
+
+When the app is ready to inject your asset into a response, the _asset’s_ `register()` method is called.
+
+::: warning
+Note that the `InternalAssetRegistry` class (and all our own asset bundles) have been deprecated, proactively.
+This is a stopgap solution that allowed us to fully eject the adapter for new projects, while gradually rebuilding the control on [Inertia](https://inertiajs.com).
+:::
+
