@@ -168,3 +168,20 @@ Note that the `InternalAssetRegistry` class (and all our own asset bundles) have
 This is a stopgap solution that allowed us to fully eject the adapter for new projects, while gradually rebuilding the control on [Inertia](https://inertiajs.com).
 :::
 
+## HTML Fragments
+
+You can use this same system to register any kind of HTML fragment—not just scripts and stylesheets:
+
+```php
+use CraftCms\Cms\Support\Facades\HtmlStack;
+use CraftCms\Cms\View\Enums\Position;
+
+$link = CraftCms\Cms\Support\Html::tag('link', null, [
+    'rel' => 'preconnect',
+    'href' => $fs->rootUrl,
+]);
+
+HtmlStack::html($link, Position::Head, sprintf('fs-link:%s', $fs->handle));
+```
+
+The `View::POS_*` class constants have been replaced with the `Position` enum, used above.
