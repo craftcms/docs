@@ -10,7 +10,7 @@ Use `CraftCms\Cms\Support\Facades\Deprecator::log()` to send deprecation notices
 CraftCms\Cms\Support\Facades\Deprecator::log(__METHOD__, 'The track() Twig function is deprecated. Activity plugin APIs have been consolidated into the global `activity` variable: {% do activity.track(...) %}');
 ```
 
-You can log warnings for newly-deprecated APIs throughout 6.x, or within your compatibility layer.
+You can log warnings for APIs you deprecate during the 6.x release cycle, or in a compatibility layer.
 
 ::: warning
 Do not use the adapter’s deprecation API, as it may trigger its *own* warning!
