@@ -39,7 +39,32 @@ Mail::send($message);
 ## Other Mailables
 
 A system messages is just one implementation of Laravel’s `Mailable`, with the notable limitation of requiring an existing Craft user.
-For all other email, extend our `CraftCms\Cms\Email\Mailables\CraftMailable` base class to apply site-specific mailer overrides.
+For all other email, extend our `CraftCms\Cms\Email\Mailables\CraftMailable` class:
+
+```php
+namespace MyOrg\Activity\Notifications;
+
+use CraftCms\Cms\Email\Mailables\CraftMailable;
+
+class ReportFinished extends CraftMailable
+{
+    public int $reportId;
+    public string $summary = '';
+
+    // ...
+}
+```
+
+This gives your mailables a `siteId` property, which helps Craft pick up site-specific mailer overrides before sending:
+
+```php
+$message = new ReportFinished($report);
+$message->setTo($report->notifyEmail);
+$message->siteId = $report->getTemplate()->siteId;
+
+// Send after resolving mailer overrides for `siteId`:
+$message->send();
+```
 
 ## Mail Events
 
