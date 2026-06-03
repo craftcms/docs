@@ -2180,6 +2180,10 @@ Re-saves user addresses.
     - An empty value: `--to :empty:`
 
 
+--to-default
+: Sets the specified fields to their default values.
+
+
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
@@ -2257,6 +2261,10 @@ Runs all other `resave/*` commands.
     - A raw value: `--to "=foo bar"`
     - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
+
+
+--to-default
+: Sets the specified fields to their default values.
 
 
 --if-empty
@@ -2342,6 +2350,10 @@ Re-saves assets.
     - An empty value: `--to :empty:`
 
 
+--to-default
+: Sets the specified fields to their default values.
+
+
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
@@ -2423,6 +2435,10 @@ Re-saves categories.
     - A raw value: `--to "=foo bar"`
     - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
+
+
+--to-default
+: Sets the specified fields to their default values.
 
 
 --if-empty
@@ -2549,6 +2565,10 @@ Set to `null` if all elements should be resaved regardless of whether they’re 
     - An empty value: `--to :empty:`
 
 
+--to-default
+: Sets the specified fields to their default values.
+
+
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
@@ -2632,6 +2652,10 @@ Re-saves tags.
     - An empty value: `--to :empty:`
 
 
+--to-default
+: Sets the specified fields to their default values.
+
+
 --if-empty
 : Whether the `--set` attribute should only be set if it doesn’t have a value.
 
@@ -2713,6 +2737,10 @@ Re-saves users.
     - A raw value: `--to "=foo bar"`
     - A PHP arrow function: `--to "fn(\$element) => \$element->callSomething()"`
     - An empty value: `--to :empty:`
+
+
+--to-default
+: Sets the specified fields to their default values.
 
 
 --if-empty
@@ -3286,6 +3314,14 @@ Removes user's two-step verification method(s)
 
 user
 :  The ID, username, or email address of the user account.
+
+
+
+<h4 id="users-remove-2fa-options" class="command-subheading">Options</h4>
+
+
+--method
+: The name of the two-step verification method you would like to remove for user, e.g. Authenticator App, Recovery Codes. Use "all" to remove all 2FA methods.
 
 
 
