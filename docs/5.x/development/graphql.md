@@ -1776,6 +1776,7 @@ Formats a date in the desired format. Can be applied to all fields, only changes
 | `format`| `String` | The format to use. Can be `short`, `medium`, `long`, `full`, an [ICU date format](http://userguide.icu-project.org/formatparse/datetime), or a [PHP date format](https://www.php.net/manual/en/function.date.php). Defaults to the [Atom date time format](https://www.php.net/manual/en/class.datetimeinterface.php#datetime.constants.atom]).
 | `timezone`| `String` | The full name of the timezone (e.g., America/New_York). Defaults to UTC if no timezone set on the field.
 | `locale`| `String` | The locale to use when formatting the date. (E.g., en-US)
+| `withTimeZone`| `Boolean` | Whether the time zone abbreviation should be appended to the formatted time.
 
 
 ### The `markdown` directive
@@ -1807,7 +1808,7 @@ Returns a URL for an [asset transform](https://craftcms.com/docs/5.x/development
 | `interlace`| `String` | The interlace mode to use for the transform
 | `quality`| `Int` | The quality of the transform
 | `format`| `String` | The format to use for the transform
-| `immediately`| `Boolean` | [_Deprecated_] This argument is deprecated and has no effect.
+| `immediately`| `Boolean` | Whether the transform should be generated immediately or only when the image is requested used the generated URL
 
 
 ### The `stripTags` directive

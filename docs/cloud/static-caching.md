@@ -160,7 +160,7 @@ cache:
           - message
     - pattern: /referral
       # Cache based on unique values for an `AD_SOURCE` cookie:
-      session:
+      cookies:
         - AD_SOURCE
         - REFERRER_NETWORK
     - pattern: /
@@ -177,15 +177,15 @@ Cloud uses the first rule that matches, so you should declare them with _descend
 Note that customizing `query-string` _replaces_ our default behavior and [exclusion list](#ignored-params).
 :::
 
-Each `pattern` uses the same URL matching logic as [rewrites and redirects](redirects.md), and must define at least a `query-string` or `session` key.
+Each `pattern` uses the same URL matching logic as [rewrites and redirects](redirects.md), and must define at least a `query-string` or `cookies` key.
 
 - **Query String** (`query-string`) — Two nested keys are required:
   - `mode` — Determines the behavior for this rule. `include` treats the provided `keys` as an allow-list; `exclude` treats it as a deny-list.
   - `keys` — The query string keys that are used as a mask for the chosen `mode`.
-- **Cookies** (`session`) — Directly nest a list of strings corresponding to cookie names that should be incorporated into the cache key. There is no `mode` for cookie settings; when a key is provided _and present in a client’s request_, it is added to the cache key. Otherwise, cookies are ignored.
+- **Cookies** (`cookies`) — Directly nest a list of strings corresponding to cookie names that should be incorporated into the cache key. There is no `mode` for cookie settings; when a key is provided _and present in a client’s request_, it is added to the cache key. Otherwise, cookies are ignored.
 
-In both cases, keys _and their values_ are ultimately used to build cache keys—so pages matching the `session` rule above would be cached uniquely for clients with different `AD_SOURCE` cookie values.
-You can combine `query-string` and `session` masks in a single rule for additional granularity.
+In both cases, keys _and their values_ are ultimately used to build cache keys—so pages matching the `cookies` rule above would be cached uniquely for clients with different `AD_SOURCE` cookie values.
+You can combine `query-string` and `cookies` masks in a single rule for additional granularity.
 
 The default behavior can be represented as a catch-all rule, like this:
 
