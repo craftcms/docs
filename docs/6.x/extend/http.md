@@ -138,8 +138,8 @@ if (! Gate::check('activity-viewReports')) {
 Gate::authorize('view', $report);
 ```
 
-Unless another package has defined a simple gate, bare ability checks (like the first example) fall through to Craft permissions.
-In the second example, we’re authorize against a specific object.
+Unless another package has defined a simple gate with the exact name, bare ability checks (like the first example) fall through to Craft permissions.
+In the second example, we’re authorizing against a specific object.
 We do this internally, for elements: many related permissions determine whether a user can `save` an entry, so it doesn’t make sense to check against each of those specific permissions in each place an element might be saved.
 Instead, these complex or compound checks are bundled with a [policy](laravel:authorization#creating-policies):
 
@@ -180,7 +180,7 @@ class ReportPolicy
 }
 ```
 
-[Register your policy class](authorization#manually-registering-policies) with Laravel’s gate system, specifying the resource it should be evaluated against:
+[Register your policy class](laravel:authorization#manually-registering-policies) with Laravel’s gate system, specifying the resource it should be evaluated against:
 
 ```php
 Gate::policy(Report::class, ReportPolicy::class);
@@ -202,7 +202,7 @@ Gate::before('saveEntries:a6dbf63e-89fb-4f17-9205-2e7469f0aa2a', function (User 
 In a plugin, the UUID in this example would need to be looked up, dynamically.
 :::
 
-In some situations, you may still need to resolve permissions directly via the user element:
+In some situations, you may still need to resolve permissions directly via a user element:
 
 ```php
 // Check against the current user:
