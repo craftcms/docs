@@ -9,9 +9,9 @@ Controllers are not automatically discovered or given routes in Craft 6.x, so yo
 
 As your plugin is booted, the `CraftCms\Cms\Plugin\Concerns\HasRoutes` concern looks for three files in your plugin’s top-level `routes/` directory, each with a distinct behavior:
 
-- `web.php` — Front-end routes, with standard middleware (`craft` and `craft.web`).
+- `web.php` — Front-end routes, with standard [middleware](#middleware) (`craft` and `craft.web`).
 - `cp.php` — Control panel routes, with additional middleware  (`craft.cp`) that automatically enforces basic permissions. These routes are prefixed with your `cpTrigger`.
-- `actions.php` — A compatibility layer for Yii’s “action path” routing scheme. These routes are registered twice: once prefixed with your `actionTrigger` using standard middleware, and once prefixed with `{cpTrigger}/{actionTrigger}` using the additional control panel middleware.
+- `actions.php` — A compatibility layer for Yii’s [action path](#action-paths) routing scheme. These routes are registered twice: once prefixed with the project’s `actionTrigger` using standard middleware, and once prefixed with `{cpTrigger}/{actionTrigger}` using the additional control panel middleware. Your plugin’s handle is also inserted between these prefixes and the declared routes.
 
 Here’s an example of a `web.php` file:
 
@@ -35,7 +35,7 @@ This is similar to how Craft has required each project to choose where its Graph
 :::
 
 Yii’s automatic routing scheme for controller actions used specific paths that involved the plugin or module’s identifier and kebab-cased controller and action names.
-Craft 6.x does not impose any of these requirements—but continuing to prefix routes with your plugin handle is a great way to avoid collisions.
+Craft 6.x does not impose any of these requirements for routes defined in `web.php` or `cp.php`—but continuing to prefix routes with your plugin handle is a great way to avoid collisions.
 
 ## Action Paths
 
@@ -44,16 +44,19 @@ Plugins can define a special `routes/actions.php` file to maintain compatibility
 ```php
 # routes/actions.php
 
-Route::prefix('activity', function() {
-    Route::post('events/log', TrackEvent::class);
-});
+Route::post('events/track', TrackEvent::class);
 
 # Two routes:
-# -> actions/activity/events/log
-# -> admin/actions/activity/events/log
+# -> actions/activity/events/track
+# -> admin/actions/activity/events/track
 ```
 
+Action routes are automatically prefixed with your plugin’s handle (`activity`, in this example).
 See the [Guest Entries](repo:craftcms/guest-entries/tree/5.x) plugin for an example.
+
+::: warning
+Action routes are considered a legacy feature, and while they are fully supported (even without the adapter), we encourage plugins to move to standard Laravel routing in `routes/web.php` and `routes/cp.php`
+:::
 
 ## Middleware
 
@@ -206,7 +209,7 @@ In some situations, you may still need to resolve permissions directly via a use
 
 ```php
 // Check against the current user:
-Auth::user()->can('triggerReport');
+Auth::craftUser()->can('triggerReport');
 
 // Check against a specific user:
 $recipient->can('requestAccess', $report);
@@ -269,9 +272,14 @@ Route::middleware(['throttle:activity'])->group(function () {
 
 A complete example of this kind of configurable routing can be found in our [Guest Entries](https://github.com/craftcms/guest-entries/tree/5.x) plugin.
 
+::: warning
+Individual projects can always add routes to your controllers that fully or selectively bypass middleware you would normally include.
+:::
+
 ## Named Routes
 
 If your route map is growing or changing frequently in development, you can give your routes [names](laravel:routing#named-routes) to avoid form actions, redirects, and routes from getting out of sync.
+This can also help when making some portion of your plugin-provided routes customizable on a per-project basis, while retaining
 
 ## Helpers
 
