@@ -62,6 +62,8 @@ class EventFormRequest extends FormRequest
 From a controller, replace the injected `Illuminate\Http\Request` class with your custom form request, and Laravel will automatically call its `authorize()` method (if defined) and validate against its returned `rules()`.
 Execution won’t even reach the body of your action if those checks don’t pass!
 
+The `messages()` method can be used to customize error messages for each attribute and rule, and `attributes()` helps Laravel build human-readable field names.
+
 ### Middleware
 
 Middleware can be applied to specific routes to limit access, protect against abuse, tidy up the incoming data, or post-process responses.
@@ -134,7 +136,7 @@ Together, these form a local validation API that incorporates aspects of Yii “
 
 ## Rulesets
 
-If you have multiple objects that follow similar validation rules (but do not share a parent class), you can bundle them in a [Ruleset](repo:craftcms/laravel-ruleset-validation) and attach them with the `#[Ruleset(...)] attribute or the `ruleset()` method:
+If you have multiple objects that follow similar validation rules (but do not share a parent class), you can bundle them in a [Ruleset](repo:craftcms/laravel-ruleset-validation) and attach them with the `#[Ruleset(...)]` attribute or the `ruleset()` method:
 
 ```php{5,10}
 use CraftCms\Cms\Component\Component;
@@ -190,9 +192,47 @@ You are free to reimplement any of those methods for more control over the valid
 When you extend `CraftCms\Cms\Validation\Ruleset`, Craft automatically emits an [event](#events) as rules are resolved.
 :::
 
-By default, [components](#components) use the `CraftCms\Cms\Validation\ValidatableRules` ruleset, which forwards many internal calls to the corresponding `Validatable` methods so that the validation “subject” can be responsible for its own lifecycle.
+By default, [components](#components) use the `CraftCms\Cms\Validation\ValidatableRules` ruleset, which forwards many internal calls to the corresponding `Validatable` methods so that the validation “subject” can be responsible for its own lifecycle:
+
+- `rules()` &rarr; `getRules()`
+- `messages()` &rarr; `getMessages()`
+- `attributes()` &rarr; `attributeLabels()`
+
 If a ruleset is instantiated _without_ a subject, it’s assumed you want to work with request data.
-As a result, you can use ruleset classes in place of [form requests](#form-requests).
+As a result, you can often use rulesets in place of a dependency-injected [form request](#form-requests):
+
+```php
+namespace MyOrg\Activity\Http\Controllers;
+
+class TrackEvent
+{
+    public function __invoke(EventRules $ruleset)
+    {
+        $data = $ruleset->validate();
+    }
+}
+```
+
+There are two important differences to be aware of, when using a ruleset in place of a `FormRequest`:
+
+1. Rulesets are not a subclass of `Illuminate\Http\Request`, so request data and methods must be accessed via the _subject_:
+    ```php
+    class EventRules extends Ruleset
+    {
+        public function prepareForValidation(): void
+        {
+            $request = $this->resolveSubject();
+
+            // Force metadata to be an array, and cull empty items:
+            $request->merge([
+                'metadata' => array_filter($request->array('metadata')),
+            ]);
+        }
+
+        // ...
+    }
+    ```
+2. Rulesets do not implement `ValidatesWhenResolved`, so you must call `$ruleset->validate()` in the body of your action method (or retrieve individual safe inputs with `$ruleset->validated('name')`). `$ruleset->validated()` throws an `Illuminate\Validation\ValidationException`, which bubbles up the same way failed `FormRequest` validation would.
 
 ### Scenarios
 
