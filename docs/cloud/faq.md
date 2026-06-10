@@ -65,7 +65,7 @@ Each project gets one free domain, and unlimited subdomains; additional domains 
 
 ### Which Git providers do you support?
 
-We currently support connecting GitHub, Gitlab, and BitBucket repositories.
+We currently support connecting GitHub, GitLab, and Bitbucket repositories.
 
 <a id="min-versions"></a>
 
@@ -76,7 +76,7 @@ Your `composer.lock` file determines what version of Craft gets installed; your 
 
 <a id="trials"></a>
 
-### Is there are a trial for Craft Cloud?
+### Is there a trial for Craft Cloud?
 
 Yes, all Craft Cloud projects start with a free 7-day trial.
 Read more about trials in our [Billing](billing.md) article.
@@ -91,9 +91,9 @@ Read more about [region support](regions.md).
 
 <a id="encryption"></a>
 
-### Is data encrypted at-rest?
+### Is data encrypted at rest?
 
-Yes—your [assets](assets.md) and database are both encrypted at-rest.
+Yes—your [assets](assets.md) and database are both encrypted at rest.
 More information is available in our dedicated [databases](databases.md) and [security](security.md) articles.
 
 <a id="firewall"></a>
@@ -103,7 +103,7 @@ More information is available in our dedicated [databases](databases.md) and [se
 All Craft Cloud projects are protected by our Cloudflare WAF, with a “reasonable” setup of default rules.
 We make specific changes to the firewall as needs arise.
 
-Some customers have their own Cloudflare accounts in front of ours, allowing them to manage specific WAF rules before requests make it to Craft Cloud.
+Some customers have their own Cloudflare accounts in front of ours, allowing them to manage specific WAF rules before requests reach Craft Cloud.
 Cloudflare refers to this as the “[Orange-to-Orange](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)” scenario; more information about this setup is available in the [Craft Cloud for Cloudflare](users.md) article.
 
 <a id="htaccess"></a>
@@ -111,7 +111,7 @@ Cloudflare refers to this as the “[Orange-to-Orange](https://developers.cloudf
 ### Can I edit my .htaccess or nginx config file?
 
 Nope, sorry!
-Craft Cloud is serverless, and doesn’t use a traditional HTTP server like nginx or Apache.
+Craft Cloud is serverless and doesn’t use a traditional HTTP server like nginx or Apache.
 
 However, [redirects and rewrites](redirects.md) can be configured via your `craft-cloud.yaml` file.
 
@@ -145,9 +145,9 @@ If you are migrating a site to Cloud, make sure its database can be neatly impor
 
 Currently, there is no automatic way to do this.
 
-As a result of each environment being connected to a git repository, you can revert problematic commits and re-deploy.
-If changes were made to the database that need to be rolled back (say, via a migration), the database will need to be restored to an appropriate point.
-Migrations are only run once Cloud has finished building your application image.
+As a result of each environment being connected to a git repository, you can revert problematic commits and redeploy.
+If changes to the database need to be rolled back (e.g., via a migration), the database will need to be restored to an appropriate point.
+Migrations are run only after Cloud finishes building your application image.
 Failed builds are never deployed!
 
 Read more about [deployments](deployment.md) and our [build pipeline](builds.md).
@@ -197,8 +197,8 @@ Read all about [deployments](deployment.md) and the [build pipeline](builds.md).
 
 ### How can I statically cache the front end of my site?
 
-Craft Cloud has a built-in [static caching](static-caching.md) system that is designed to work seamlessly with Craft CMS.
-On-disk and rewrite-based caches will not work, as the Cloud filesystem is ephemeral—and files in the “web root” aren’t directly exposed to the web.
+Craft Cloud includes a built-in [static caching](static-caching.md) system that works seamlessly with Craft CMS.
+On-disk and rewrite-based caches will not work, as the Cloud filesystem is ephemeral, and files in the “web root” aren’t directly exposed to the web.
 
 <a id="local-dev"></a>
 
@@ -229,7 +229,7 @@ No. The WAF rules are designed to protect the Craft Cloud infrastructure against
 
 As part of the [shared responsibility model](security.md), we would not disable those purposefully.
 
-If you want to pentest your application, you can do that locally or on a separate, non-Craft Cloud installation.
+If you want to pentest your application outside of that context, you can do so locally or on a separate, non-Craft Cloud installation.
 
 ## Billing + Legal
 
