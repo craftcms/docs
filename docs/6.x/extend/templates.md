@@ -59,6 +59,12 @@ Mark a class, property, or method as safe for sandboxed environments with the `#
 
 Rendered templates are acceptable return values for controllers; Laravel automatically wrap the output in a complete response object before it bubbles back through any middleware.
 
+Routes can also be mapped directly to templates, in your plugin’s [route files](http.md):
+
+```php
+Route::view('my-stats', 'activity/_stats/user-summary');
+```
+
 ## Events
 
 A pair of events are emitted whenever a template is rendered:

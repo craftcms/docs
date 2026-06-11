@@ -276,6 +276,28 @@ A complete example of this kind of configurable routing can be found in our [Gue
 Individual projects can always add routes to your controllers that fully or selectively bypass middleware you would normally include.
 :::
 
+### Rendering Templates
+
+Use the `template()` helper function to [render a Twig template](templates.md):
+
+```php
+public function __invoke()
+{
+    return template('activity/_session-report', [
+        // ...
+    ]);
+}
+```
+
+Laravel’s generic `view()` helper function will also locate Blade templates.
+`pageTemplate()` should be used when the template extends a control panel layout, or any time you want to trigger [page lifecycle](templates.md) hooks.
+
+Templates that require no additional logic can be bound directly to a route:
+
+```php
+Route::view('my-stats', 'activity/_stats/user-summary');
+```
+
 ## Named Routes
 
 If your route map is growing or changing frequently in development, you can give your routes [names](laravel:routing#named-routes) to avoid form actions, redirects, and routes from getting out of sync.
