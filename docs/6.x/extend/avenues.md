@@ -167,8 +167,16 @@ The same is true for `boot()`, but _not_ `bootPlugin()` and traits’ boot metho
 
 ## Termination
 
-Your plugin can register cleanup tasks at the end of the app’s lifecycle—roughly equivalent to Yii’s `EVENT_AFTER_REQUEST` event:
+Your plugin can register cleanup tasks at the end of the app’s lifecycle:
 
 ```php
 app()->terminating($callback);
+```
+
+Work can also be [deferred](laravel:helpers#deferred-functions) only until a response has been sent (roughly equivalent to Yii’s `EVENT_AFTER_REQUEST` event):
+
+```php
+defer(function () {
+    // ...
+});
 ```
