@@ -111,3 +111,8 @@ The organization is entirely up to you, but you must register your plugin’s su
 ```php
 Event::subscribe(CustomerRetentionSubscriber::class);
 ```
+
+## Transactions
+
+Events that implement `Illuminate\Contracts\Events\ShouldDispatchAfterCommit` are deferred until the current transaction completes.
+This can help handlers from executing in another process before the underlying data is committed (say, if the event is [queueable](laravel:events#queued-event-listeners)).
