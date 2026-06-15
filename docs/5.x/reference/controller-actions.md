@@ -311,8 +311,8 @@ For <badge vertical="baseline" type="verb">POST</badge> requests:
 
 State | `text/html` | `application/json`
 ----- | ----------- | ------------------
-<check-mark label="Success" /> | [Standard behavior][success-after-post]; redirection depends on the <config5:autoLoginAfterAccountActivation> and <config5:setPasswordSuccessPath> config settings, and whether the user has access to the control panel. | [Standard behavior][success-after-post]; additional `csrfTokenName` key will be available in the response object.
-<x-mark label="Failure" /> | [Standard behavior][failure-during-post]; `errors` , `code`, `id`, and `newUser` variables will be passed to the resulting template. | [Standard behavior][failure-during-post].
+<check-mark label="Success" /> | [Standard behavior][success-after-post]; redirection depends on the user’s [status](../system/user-management.md#statuses), the <config5:autoLoginAfterAccountActivation> and <config5:setPasswordSuccessPath> config settings, and whether the user has access to the control panel. | [Standard behavior][success-after-post]; additional `csrfTokenName` key will be available in the response object.
+<x-mark label="Failure" /> | [Standard behavior][failure-during-post]; `errors`, `code`, `id`, and `newUser` variables will be passed to the resulting template. | [Standard behavior][failure-during-post].
 
 </span>
 

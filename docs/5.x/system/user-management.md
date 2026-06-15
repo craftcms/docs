@@ -519,7 +519,7 @@ Fine-grained control over registration and sign-in workflows are possible with t
   - <config5:verifyEmailSuccessPath> — Similar to `setPasswordSuccessPath`, but for redirection after a user verifies their email address (either upon creating an account, or changing its email address).
   - <config5:useEmailAsUsername> — Simplifies record-keeping and authentication by eliminating discrete usernames.
 - Security and timing…
-  - <config5:autoLoginAfterAccountActivation> — Control whether users are immediately logged in after setting a password. (Default: `false`)
+  - <config5:autoLoginAfterAccountActivation> — Control whether users are immediately logged in after completing registration (typically when a [pending](#statuses) user clicking an email confirmation link or setting a password). (Default: `false`)
   - <config5:purgePendingUsersDuration> — How long Craft waits before deleting pending, non-activated users. (Default: `0`, or _disabled_)
   - <config5:purgeStaleUserSessionDuration> — How long Craft waits before dropping stale sessions from the `sessions` database table. This may (Default: 90 days)
   - <config5:invalidUserTokenPath> — Where users are redirected if the token or code in an activation or verification link is invalid or has expired.
