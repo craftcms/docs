@@ -4987,6 +4987,12 @@
     },
     {
         "class": "craft\\controllers\\AssetsController",
+        "name": "EVENT_BEFORE_SAVE_IMAGE",
+        "type": "craft\\events\\SaveAssetImageEvent",
+        "desc": "The event that is triggered before an edited asset image is saved."
+    },
+    {
+        "class": "craft\\controllers\\AssetsController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
         "desc": "The event that is triggered when defining the class behaviors"
