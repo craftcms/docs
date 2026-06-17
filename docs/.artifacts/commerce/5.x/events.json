@@ -1952,6 +1952,49 @@
     },
     {
         "class": "craft\\commerce\\base\\Purchasable",
+        "name": "EVENT_DEFINE_DELETION_BLOCKERS",
+        "type": "craft\\events\\DefineElementDeletionBlockersEvent",
+        "desc": "The event that is triggered when defining any blockers that should prevent a user from being deleted",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\base\\Purchasable",
         "name": "EVENT_BEFORE_DELETE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the element is deleted.",
@@ -5341,6 +5384,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Donation",
+        "name": "EVENT_DEFINE_DELETION_BLOCKERS",
+        "type": "craft\\events\\DefineElementDeletionBlockersEvent",
+        "desc": "The event that is triggered when defining any blockers that should prevent a user from being deleted",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Donation",
         "name": "EVENT_BEFORE_DELETE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the element is deleted.",
@@ -8058,6 +8144,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Order",
+        "name": "EVENT_DEFINE_DELETION_BLOCKERS",
+        "type": "craft\\events\\DefineElementDeletionBlockersEvent",
+        "desc": "The event that is triggered when defining any blockers that should prevent a user from being deleted",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Order",
         "name": "EVENT_BEFORE_DELETE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the element is deleted.",
@@ -10302,6 +10431,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Product",
+        "name": "EVENT_DEFINE_DELETION_BLOCKERS",
+        "type": "craft\\events\\DefineElementDeletionBlockersEvent",
+        "desc": "The event that is triggered when defining any blockers that should prevent a user from being deleted",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Product",
         "name": "EVENT_BEFORE_DELETE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the element is deleted.",
@@ -12503,6 +12675,49 @@
     },
     {
         "class": "craft\\commerce\\elements\\Subscription",
+        "name": "EVENT_DEFINE_DELETION_BLOCKERS",
+        "type": "craft\\events\\DefineElementDeletionBlockersEvent",
+        "desc": "The event that is triggered when defining any blockers that should prevent a user from being deleted",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Subscription",
         "name": "EVENT_BEFORE_DELETE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered before the element is deleted.",
@@ -14664,6 +14879,49 @@
         "name": "EVENT_AFTER_PROPAGATE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Transfer",
+        "name": "EVENT_DEFINE_DELETION_BLOCKERS",
+        "type": "craft\\events\\DefineElementDeletionBlockersEvent",
+        "desc": "The event that is triggered when defining any blockers that should prevent a user from being deleted",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
@@ -17037,6 +17295,49 @@
         "name": "EVENT_AFTER_PROPAGATE",
         "type": "craft\\events\\ModelEvent",
         "desc": "The event that is triggered after the element is fully saved and propagated to other sites.",
+        "filters": {
+            "duplicating": {
+                "label": "Element is being duplicated to a new element",
+                "conditionsPhp": "($event->sender->duplicateOf && $event->sender->getIsCanonical() && !$event->sender->updatingFromDerivative)",
+                "excludes": [
+                    "isNew",
+                    "resaving",
+                    "revision"
+                ]
+            },
+            "enabled": {
+                "label": "Element is enabled",
+                "conditionsPhp": "($event->sender->enabled && $event->sender->getEnabledForSite())"
+            },
+            "firstSave": {
+                "label": "Element is being saved for the first time",
+                "conditionsPhp": "$event->sender->firstSave",
+                "excludes": [
+                    "isNew",
+                    "draft",
+                    "provisional",
+                    "revision",
+                    "resaving"
+                ]
+            },
+            "propagating": {
+                "label": "Element is being propagated",
+                "conditionsPhp": "$event->sender->propagating"
+            },
+            "resaving": {
+                "label": "Element is being bulk-resaved",
+                "conditionsPhp": "$event->sender->resaving",
+                "excludes": [
+                    "firstSave"
+                ]
+            }
+        }
+    },
+    {
+        "class": "craft\\commerce\\elements\\Variant",
+        "name": "EVENT_DEFINE_DELETION_BLOCKERS",
+        "type": "craft\\events\\DefineElementDeletionBlockersEvent",
+        "desc": "The event that is triggered when defining any blockers that should prevent a user from being deleted",
         "filters": {
             "duplicating": {
                 "label": "Element is being duplicated to a new element",
