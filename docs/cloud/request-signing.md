@@ -50,7 +50,7 @@ $isValid = (new Verifier(new HmacSha256(App::env('CRAFT_CLOUD_SIGNING_KEY'))))
     ->verify($request);
 ```
 
-## Signing Requests from Outside Craft
+## Signing Requests Externally
 
 External systems can generate valid signatures for a Craft Cloud environment, given the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
 
