@@ -10,11 +10,11 @@ This is useful for automated systems like serverless build processes or CI/CD pi
 
 When Cloud verifies a request signature, it treats the request as project-approved and bypasses bot-specific rate limiting.
 
-Signatures use the environment's `$CRAFT_CLOUD_SIGNING_KEY` to generate signatures. Treat this as a secret!
+Signatures use the environment’s `$CRAFT_CLOUD_SIGNING_KEY` to generate signatures. Treat this as a secret!
 
 For more details on RFC 9421 HTTP Message Signatures, see [httpsig.org](https://httpsig.org/).
 
-Craft Cloud's gateway verifier treats request signatures as short-lived and only accepts signatures created within roughly the last 5 minutes. Set `expires` about 5 minutes after `created`.
+Craft Cloud’s gateway verifier treats request signatures as short-lived and only accepts signatures created within roughly the last 5 minutes. Set `expires` about 5 minutes after `created`.
 
 ## Signing Requests from Craft
 
@@ -110,4 +110,4 @@ const response = await fetch(url, {
 const result = await response.json();
 ```
 
-Store the signing key in the external system's secret manager. The `@target-uri` value must match the requested URL exactly, including any query string.
+Store the signing key in the external system’s secret manager. The `@target-uri` value must match the requested URL exactly, including any query string.
