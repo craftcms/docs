@@ -41,9 +41,13 @@ $signedRequest = $signer->sign($request);
 $response = (new Client())->send($signedRequest);
 ```
 
-## Signing Requests from Node.js
+## Signing Requests from Outside Craft
 
-Node.js can generate valid signatures for a Craft Cloud environment, given the corresponding `$CRAFT_CLOUD_SIGNING_KEY`. The following example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig):
+External systems can generate valid signatures for a Craft Cloud environment, given the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
+
+### Node.js
+
+This example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig):
 
 ```bash
 npm install http-message-sig
