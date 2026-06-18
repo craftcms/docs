@@ -14,9 +14,11 @@ Signatures use the environment's `$CRAFT_CLOUD_SIGNING_KEY` to generate signatur
 
 For more details on RFC 9421 HTTP Message Signatures, see [httpsig.org](https://httpsig.org/).
 
+Craft Cloud's gateway verifier treats request signatures as short-lived and only accepts signatures created within roughly the last 5 minutes. Set `expires` about 5 minutes after `created`.
+
 ## Signing Requests from Craft
 
-The Cloud extension can sign any PSR-7 request:
+The `craftcms/cloud` package can sign any PSR-7 request:
 
 ```php
 use craft\cloud\Module;
