@@ -6,7 +6,7 @@ description: Sign trusted programmatic requests to avoid bot rate limiting.
 
 Request signing lets trusted systems make programmatic requests to Craft Cloud without being treated like unsanctioned bot traffic.
 
-This is useful for automated systems like serverless build processes or CI/CD pipelines, which can correctly look like bots and be rate-limited more aggressively than browsers.
+This is useful for automated systems like headless build processes or CI/CD pipelines, which can correctly look like bots and be rate-limited more aggressively than browsers.
 
 When Cloud verifies a request signature, it treats the request as project-approved and bypasses bot-specific rate limiting.
 
