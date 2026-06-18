@@ -14,7 +14,11 @@ Signatures use the environment’s `$CRAFT_CLOUD_SIGNING_KEY` to generate signat
 
 For more details on RFC 9421 HTTP Message Signatures, see [httpsig.org](https://httpsig.org/).
 
-Craft Cloud’s gateway verifier treats request signatures as short-lived and only accepts signatures created within roughly the last 5 minutes. Set `expires` about 5 minutes after `created`.
+## Verifying Requests
+
+If you verify signatures in Craft, you can choose your own validation policy.
+
+Craft Cloud’s gateway verifier treats request signatures as short-lived, because verified requests can bypass bot-specific rate limiting. It only accepts signatures created within roughly the last 5 minutes, so set `expires` about 5 minutes after `created`.
 
 ## Signing Requests from Craft
 
