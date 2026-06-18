@@ -50,13 +50,11 @@ $isValid = (new Verifier(new HmacSha256(App::env('CRAFT_CLOUD_SIGNING_KEY'))))
     ->verify($request);
 ```
 
-If you verify signatures in Craft, you can choose your own validation policy.
-
 ## Signing Requests from Outside Craft
 
 External systems can generate valid signatures for a Craft Cloud environment, given the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
 
-When Craft Cloud’s gateway verifies a signed request, it treats the request as short-lived because verified requests can bypass bot-specific rate limiting. Set `expires` about 5 minutes after `created`.
+Signatures expire after 5 minutes when verified by the Craft Cloud gateway. Set `expires` about 5 minutes after `created`.
 
 ### Node.js
 
