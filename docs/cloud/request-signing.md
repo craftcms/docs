@@ -14,12 +14,6 @@ Signatures use the environment’s `$CRAFT_CLOUD_SIGNING_KEY` to generate signat
 
 For more details on RFC 9421 HTTP Message Signatures, see [httpsig.org](https://httpsig.org/).
 
-## Verifying Requests
-
-If you verify signatures in Craft, you can choose your own validation policy.
-
-Craft Cloud’s gateway verifier treats request signatures as short-lived, because verified requests can bypass bot-specific rate limiting. It only accepts signatures created within roughly the last 5 minutes, so set `expires` about 5 minutes after `created`.
-
 ## Signing Requests from Craft
 
 The `craftcms/cloud` package can sign any PSR-7 request:
@@ -45,13 +39,28 @@ $signedRequest = $signer->sign($request);
 $response = (new Client())->send($signedRequest);
 ```
 
+To verify a signed PSR-7 request in Craft, use the same signing key:
+
+```php
+use craft\helpers\App;
+use HttpMessageSignatures\Algorithm\HmacSha256;
+use HttpMessageSignatures\Verifier;
+
+$isValid = (new Verifier(new HmacSha256(App::env('CRAFT_CLOUD_SIGNING_KEY'))))
+    ->verify($request);
+```
+
+If you verify signatures in Craft, you can choose your own validation policy.
+
 ## Signing Requests from Outside Craft
 
 External systems can generate valid signatures for a Craft Cloud environment, given the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
 
+When Craft Cloud’s gateway verifies a signed request, it treats the request as short-lived because verified requests can bypass bot-specific rate limiting. Set `expires` about 5 minutes after `created`.
+
 ### Node.js
 
-This example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig):
+This example signs a request with [`http-message-sig`](https://www.npmjs.com/package/http-message-sig):
 
 ```bash
 npm install http-message-sig
