@@ -4,74 +4,42 @@ description: Sign trusted programmatic requests to avoid bot rate limiting.
 
 # Request Signing
 
-Request signing lets trusted systems make programmatic requests to Craft Cloud without being treated like unsanctioned bot traffic.
+Request signing allows trusted systems to make programmatic requests to Craft Cloud without being treated like unsanctioned bot traffic.
 
-This is useful for automated systems like headless build processes or CI/CD pipelines, which can correctly look like bots and be rate-limited more aggressively than browsers.
+This is useful for automated systems like static site builds or CI/CD pipelines, which will often be identified (correctly!) as “bots” and be rate-limited more aggressively than browsers.
 
-When Cloud verifies a request signature, it treats the request as project-approved and bypasses bot-specific rate limiting.
+Each environment’s `$CRAFT_CLOUD_SIGNING_KEY` [system variable](environments.md#variables) is used as a shared secret when generating and validating signed requests.
 
-Signatures use the environment’s `$CRAFT_CLOUD_SIGNING_KEY` to generate signatures. Treat this as a secret!
-
+::: tip
 For more details on RFC 9421 HTTP Message Signatures, see [httpsig.org](https://httpsig.org/).
+:::
 
-## Signing Requests from Craft
+## Creating a Signed Request
 
-The `craftcms/cloud` package can sign any PSR-7 request:
+External systems can generate valid signatures for a Craft Cloud environment, provided the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
 
-```php
-use craft\cloud\Module;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Request;
+Signatures are valid at the Craft Cloud gateway for a maximum of **five minutes**.
+A signed request is not consumed (like a token URL is, in Craft), and they are not idempotent.
 
-$signer = Module::getInstance()->getRequestSigner();
+### From Node.js
 
-$request = new Request(
-    'POST',
-    'https://api.example.test/webhook',
-    ['Content-Type' => 'application/json'],
-    json_encode([
-        'event' => 'order.paid',
-    ], JSON_THROW_ON_ERROR),
-);
-
-$signedRequest = $signer->sign($request);
-
-$response = (new Client())->send($signedRequest);
-```
-
-To verify a signed PSR-7 request in Craft, use the same signing key:
-
-```php
-use craft\helpers\App;
-use HttpMessageSignatures\Algorithm\HmacSha256;
-use HttpMessageSignatures\Verifier;
-
-$isValid = (new Verifier(new HmacSha256(App::env('CRAFT_CLOUD_SIGNING_KEY'))))
-    ->verify($request);
-```
-
-## Signing Requests Externally
-
-External systems can generate valid signatures for a Craft Cloud environment, given the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
-
-Signatures expire after 5 minutes when verified by the Craft Cloud gateway. Set `expires` about 5 minutes after `created`.
-
-### Node.js
-
-This example signs a request with [`http-message-sig`](https://www.npmjs.com/package/http-message-sig):
+This example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig) to generate an RFC 9421-compliant signature:
 
 ```bash
 npm install http-message-sig
 ```
 
-Then sign the request before sending it to Craft:
+Build and send a signed request like this:
 
 ```js
 import crypto from 'node:crypto';
 import { signatureHeadersSync } from 'http-message-sig';
 
 const method = 'POST';
-const url = process.env.CRAFT_GRAPHQL_URL;
+
+// These variables/secrets can be store in (and fetched from) the environment, instead:
+const url = 'https://my-env.some-domain.com/api';
+const schemaToken = 'WcVqivS64CCRQN9ohVcKk5FB6RIFTApd';
 
 const body = JSON.stringify({
     query: `
@@ -86,7 +54,7 @@ const body = JSON.stringify({
 
 const headers = {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${process.env.CRAFT_GRAPHQL_TOKEN}`,
+    'Authorization': `Bearer ${schemaToken}`,
 };
 
 const created = new Date();
@@ -109,7 +77,8 @@ const signatureHeaders = signatureHeadersSync(
         signer,
         components: ['@method', '@target-uri'],
         created,
-        expires: new Date(created.getTime() + 300_000),
+        // This is optional (and cannot exceed five minutes, to validate at the edge):
+        expires: new Date(created.getTime() + 60_000),
     },
 );
 
@@ -125,4 +94,41 @@ const response = await fetch(url, {
 const result = await response.json();
 ```
 
-Store the signing key in the external system’s secret manager. The `@target-uri` value must match the requested URL exactly, including any query string.
+::: tip
+Requests signed using the `@target-uri` [component](https://www.rfc-editor.org/rfc/rfc9421.html#name-derived-components) are only valid when sent to a URL that matches _exactly_, including the scheme, hostname, path, and query string.
+The example above satisfies this by using the same `url` variable for the signed request and the `fetch()` call.
+:::
+
+### From Craft
+
+Any Craft project running on Cloud can sign requests.
+This can be useful when making HTTP requests from a console command, queue job, or for communication between environments or projects.
+
+```php
+use Craft;
+
+use craft\cloud\Module;
+use GuzzleHttp\Psr7\Request;
+
+$signer = Module::getInstance()->getRequestSigner();
+
+$request = new Request(
+    'POST',
+    'https://api.example.test/webhook',
+    ['Content-Type' => 'application/json'],
+    json_encode([
+        'event' => 'order.paid',
+    ], JSON_THROW_ON_ERROR),
+);
+
+$signedRequest = $signer->sign($request);
+
+$response = Craft::createGuzzleClient()->send($signedRequest);
+```
+
+## Signature Verification
+
+Craft Cloud automatically tries to validate signed requests, at the gateway.
+If validation _fails_, normal bot- and rate-limiting rules are applied; if no policies are triggered, the request is forwarded to Craft like any other.
+
+Once the request reaches your application, you are free to perform additional verification (like checking a separate shared secret).
