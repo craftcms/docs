@@ -53,6 +53,7 @@ module.exports = {
           "compatibility",
           "static-caching",
           "esi",
+          "request-signing",
           "quotas",
           "licensing",
           "backups",
