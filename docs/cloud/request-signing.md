@@ -32,29 +32,29 @@ npm install http-message-sig
 Build and send a signed request like this:
 
 ```js
-import crypto from "node:crypto";
-import { signatureHeadersSync } from "http-message-sig";
+import crypto from 'node:crypto';
+import { signatureHeadersSync } from 'http-message-sig';
 
-const method = "POST";
-const url = "https://my-env.some-domain.com/api";
+const method = 'POST';
+const url = 'https://my-env.some-domain.com/api';
 
 const body = JSON.stringify({
   query: `{ entries(section: "blog") { title url } }`,
 });
 
 const headers = {
-  "Content-Type": "application/json",
-  Authorization: "Bearer my-secret-gql-schema-token",
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer my-secret-gql-schema-token',
 };
 
 const created = new Date();
 
 const signer = {
-  keyid: "hmac",
-  alg: "hmac-sha256",
+  keyid: 'hmac',
+  alg: 'hmac-sha256',
   signSync(data) {
     return crypto
-      .createHmac("sha256", process.env.CRAFT_CLOUD_SIGNING_KEY)
+      .createHmac('sha256', process.env.CRAFT_CLOUD_SIGNING_KEY)
       .update(data)
       .digest();
   },
@@ -63,9 +63,9 @@ const signer = {
 const signatureHeaders = signatureHeadersSync(
   { method, url, headers, body },
   {
-    key: "sig",
+    key: 'sig',
     signer,
-    components: ["@method", "@target-uri"],
+    components: ['@method', '@target-uri'],
     created,
 
     // Optional 60-second expiry. The maximum is five minutes.
@@ -93,11 +93,11 @@ The example above satisfies this by using the same `url` variable for the signed
 This example uses [Grafana Cloud k6](https://grafana.com/docs/k6/latest/examples/) with native dependencies:
 
 ```js
-import crypto from "k6/crypto";
-import http from "k6/http";
+import crypto from 'k6/crypto';
+import http from 'k6/http';
 
-const method = "POST";
-const url = "https://my-env.some-domain.com/api";
+const method = 'POST';
+const url = 'https://my-env.some-domain.com/api';
 
 const body = JSON.stringify({
   query: `{ entries(section: "blog") { title url } }`,
@@ -114,21 +114,21 @@ export default function () {
     `"@method": ${method}`,
     `"@target-uri": ${url}`,
     `"@signature-params": ${signatureParams}`,
-  ].join("\n");
+  ].join('\n');
 
   const signature = crypto.hmac(
-    "sha256",
+    'sha256',
     __ENV.CRAFT_CLOUD_SIGNING_KEY,
     signatureBase,
-    "base64"
+    'base64'
   );
 
   http.post(url, body, {
     headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer my-secret-gql-schema-token",
-      "Signature-Input": `sig=${signatureParams}`,
-      Signature: `sig=:${signature}:`,
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer my-secret-gql-schema-token',
+      'Signature-Input': `sig=${signatureParams}`,
+      'Signature': `sig=:${signature}:`,
     },
   });
 }
