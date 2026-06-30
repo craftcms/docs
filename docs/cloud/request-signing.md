@@ -42,11 +42,6 @@ const body = JSON.stringify({
   query: `{ entries(section: "blog") { title url } }`,
 });
 
-const headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer my-secret-gql-schema-token',
-};
-
 const created = new Date();
 
 const signer = {
@@ -61,7 +56,7 @@ const signer = {
 };
 
 const signatureHeaders = signatureHeadersSync(
-  { method, url, headers, body },
+  { method, url },
   {
     key: 'sig',
     signer,
@@ -76,7 +71,8 @@ const signatureHeaders = signatureHeadersSync(
 await fetch(url, {
   method,
   headers: {
-    ...headers,
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer my-secret-gql-schema-token',
     ...signatureHeaders,
   },
   body,
