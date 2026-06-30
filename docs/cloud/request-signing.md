@@ -116,10 +116,12 @@ export default function () {
   ].join(';');
 
   const signatureBase = [
-    `"@method": ${method}`,
-    `"@target-uri": ${url}`,
-    `"@signature-params": ${signatureParams}`,
-  ].join('\n');
+    ['@method', method],
+    ['@target-uri', url],
+    ['@signature-params', signatureParams],
+  ]
+    .map(([component, value]) => `"${component}": ${value}`)
+    .join('\n');
 
   const signature = crypto.hmac(
     'sha256',
