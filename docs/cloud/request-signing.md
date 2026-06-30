@@ -107,8 +107,13 @@ export default function () {
   const created = Math.floor(Date.now() / 1000);
   const expires = created + 60;
 
-  const signatureParams =
-    `("@method" "@target-uri");created=${created};expires=${expires};keyid="hmac";alg="hmac-sha256"`;
+  const signatureParams = [
+    '("@method" "@target-uri")',
+    `created=${created}`,
+    `expires=${expires}`,
+    'keyid="hmac"',
+    'alg="hmac-sha256"',
+  ].join(';');
 
   const signatureBase = [
     `"@method": ${method}`,
