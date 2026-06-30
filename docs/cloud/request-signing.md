@@ -36,68 +36,106 @@ import crypto from 'node:crypto';
 import { signatureHeadersSync } from 'http-message-sig';
 
 const method = 'POST';
-
-// These variables/secrets can be store in (and fetched from) the environment, instead:
 const url = 'https://my-env.some-domain.com/api';
-const schemaToken = 'WcVqivS64CCRQN9ohVcKk5FB6RIFTApd';
 
 const body = JSON.stringify({
-    query: `
-        {
-            entries(section: "blog") {
-                title
-                url
-            }
-        }
-    `,
+  query: `{ entries(section: "blog") { title url } }`,
 });
-
-const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${schemaToken}`,
-};
 
 const created = new Date();
 
 const signer = {
-    keyid: 'hmac',
-    alg: 'hmac-sha256',
-    signSync(data) {
-        return crypto
-            .createHmac('sha256', process.env.CRAFT_CLOUD_SIGNING_KEY)
-            .update(data)
-            .digest();
-    },
+  keyid: 'hmac',
+  alg: 'hmac-sha256',
+  signSync(data) {
+    return crypto
+      .createHmac('sha256', process.env.CRAFT_CLOUD_SIGNING_KEY)
+      .update(data)
+      .digest();
+  },
 };
 
 const signatureHeaders = signatureHeadersSync(
-    { method, url, headers, body },
-    {
-        key: 'sig',
-        signer,
-        components: ['@method', '@target-uri'],
-        created,
-        // This is optional (and cannot exceed five minutes, to validate at the edge):
-        expires: new Date(created.getTime() + 60_000),
-    },
+  { method, url },
+  {
+    key: 'sig',
+    signer,
+    components: ['@method', '@target-uri'],
+    created,
+
+    // Optional 60-second expiry. The maximum is five minutes.
+    expires: new Date(created.getTime() + 60 * 1000),
+  }
 );
 
-const response = await fetch(url, {
-    method,
-    headers: {
-        ...headers,
-        ...signatureHeaders,
-    },
-    body,
+await fetch(url, {
+  method,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer my-secret-gql-schema-token',
+    ...signatureHeaders,
+  },
+  body,
 });
-
-const result = await response.json();
 ```
 
 ::: tip
 Requests signed using the `@target-uri` [component](https://www.rfc-editor.org/rfc/rfc9421.html#name-derived-components) are only valid when sent to a URL that matches _exactly_, including the scheme, hostname, path, and query string.
 The example above satisfies this by using the same `url` variable for the signed request and the `fetch()` call.
 :::
+
+### From Grafana Cloud k6
+
+This example uses [Grafana Cloud k6](https://grafana.com/docs/k6/latest/examples/) with native dependencies:
+
+```js
+import crypto from 'k6/crypto';
+import http from 'k6/http';
+
+const method = 'POST';
+const url = 'https://my-env.some-domain.com/api';
+
+const body = JSON.stringify({
+  query: `{ entries(section: "blog") { title url } }`,
+});
+
+export default function () {
+  const created = Math.floor(Date.now() / 1000);
+  const expires = created + 60;
+
+  const signatureParams = [
+    '("@method" "@target-uri")',
+    `created=${created}`,
+    `expires=${expires}`,
+    'keyid="hmac"',
+    'alg="hmac-sha256"',
+  ].join(';');
+
+  const signatureBase = [
+    ['@method', method],
+    ['@target-uri', url],
+    ['@signature-params', signatureParams],
+  ]
+    .map(([component, value]) => `"${component}": ${value}`)
+    .join('\n');
+
+  const signature = crypto.hmac(
+    'sha256',
+    __ENV.CRAFT_CLOUD_SIGNING_KEY,
+    signatureBase,
+    'base64'
+  );
+
+  http.post(url, body, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer my-secret-gql-schema-token',
+      'Signature-Input': `sig=${signatureParams}`,
+      'Signature': `sig=:${signature}:`,
+    },
+  });
+}
+```
 
 ### From Craft
 
