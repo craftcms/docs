@@ -106,7 +106,7 @@ These images don’t contribute to your [storage quota](quotas.md), and there ar
 
 ### Content Negotiation
 
-When no format is explicitly defined for a transform (or the transform uses the **Auto** format), our workers may create and return a more modern WEBP or AVIF file, if the client supports it.
+When no format is explicitly defined for a transform (or the transform uses the **Auto** format), our gateway may create and return a more modern WEBP or AVIF file, if the client supports it.
 
 ### Limitations
 

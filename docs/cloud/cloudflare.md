@@ -44,7 +44,7 @@ If you _can’t_ disable proxying on a domain (say, because Cloudflare provides 
 The process is the same as above, but you can skip records in the **Verify Ownership** section. Add the **Validate Certificate** records, then…
 
 1. In Cloudflare, locate the `CNAME` (preferred) or `A` record for the domain or subdomain you are connecting to Craft Cloud;
-2. Press **Edit**, then update the record to be a `CNAME` pointing to `edge.craft.cloud` _and_ toggle the **Proxy status** (“orange cloud”) to _off_;
+2. Press **Edit**, then update the record to be a `CNAME` pointing to `gateway.craft.cloud` _and_ toggle the **Proxy status** (“orange cloud”) to _off_;
 3. Press **Save** to confirm the changes;
 4. Repeat this process for any subdomains you’ve added in Craft Cloud—you must validate all the records at once;
 
