@@ -77,7 +77,7 @@ const signatureHeaders = signatureHeadersSync(
         signer,
         components: ['@method', '@target-uri'],
         created,
-        // This is optional (and cannot exceed five minutes, to validate at the edge):
+        // This is optional (and cannot exceed five minutes, to validate at the gateway):
         expires: new Date(created.getTime() + 60_000),
     },
 );

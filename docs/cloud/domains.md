@@ -47,30 +47,42 @@ Cloud will provide a `CNAME` and two `TXT` records that together complete a veri
 Depending on your DNS provider (and the TTL or “time to live” of any existing records), it may take anywhere from a couple of minutes to 24 hours for traffic to be routed to Cloud.
 
 ::: warning
-DNS records are cached for different amounts of time by different providers around the globe. You may see changes before or after your client and their customers—especially if you access the internet from different regions.
+DNS records are cached for different amounts of time by different providers around the globe.
+You may see changes before or after your client and their customers—especially if you access the internet from a different region than your project is hosted.
+Use the **Verify** link in any row to check from specific places-of-presence with [DNSChecker](https://dnschecker.org).
 
-Heroku has a great [guide](https://devcenter.heroku.com/articles/custom-domains) that covers some of this technology, in the same context. If you are unfamiliar with DNS, consider starting with the [domain name glossary](https://devcenter.heroku.com/articles/custom-domains#domain-name-glossary) section, or flipping through Cloudflare’s [How DNS Works](https://www.cloudflare.com/learning/dns/what-is-dns/) series!
+Heroku has a great [guide](https://devcenter.heroku.com/articles/custom-domains) that covers some of this technology, in the same context.
+If you are unfamiliar with DNS, consider starting with the [domain name glossary](https://devcenter.heroku.com/articles/custom-domains#domain-name-glossary) section, or flipping through Cloudflare’s [How DNS Works](https://www.cloudflare.com/learning/dns/what-is-dns/) series!
 :::
 
 To send traffic from a verified domain to your Cloud project, add the records below. Keep in mind that making changes to your DNS *can* result in downtime. Read more about how to [prepare for going live](checklist.md).
 
-The preferred way of routing traffic to Cloud is via a `CNAME` record:
-
-| Record Type | Value |
-| --- | --- |
-| `CNAME` | `edge.craft.cloud` |
-
-All DNS providers support `CNAME` records on subdomains (like `www`), but some do not accept them at the root or “apex” domain—sometimes called “[`CNAME` flattening](#cname-flattening).”
-
-If your provider does *not* support `CNAME` flattening at the root, you can still connect your domain to Cloud. Instead of the single `CNAME` record, add the two `A` records provided in the **A Record** tab of the **Route Traffic** step.
+The preferred way of routing traffic to Cloud is via the pair of `A` records displayed in your domain’s **Route Traffic** table.
+You must add _both_ DNS records to ensure requests always reach our infrastructure, even if your prior configuration only had one.
 
 ::: tip
-You should never need to use `A` records for subdomains.
+For compatibility, we have moved away from recommending `CNAME` records for apex domains.
+Some providers still do not support “[`CNAME` flattening](#cname-flattening),” so we have standardized the instructions around the common denominator.
+
+Domains using CNAME flattening will continue to work.
 :::
 
-The only difference between `A` and `CNAME` records is that—in the unlikely event we add or change edge IPs—you may need to make updates to your DNS configuration. *We will not make this kind of infrastructure change without providing customers a reasonable timeline and clear instructions for making required updates.*
+If you have set up any [subdomains](#subdomains), the table includes an additional `CNAME` record for each one.
+These should all point to `gateway.craft.cloud`.
 
-#### CNAME Flattening
+::: tip
+You should never need to use the `A` records for subdomains, with Craft Cloud.
+If you host other websites or services on subdomains, you may see existing `A` records in your DNS zone.
+:::
+
+<a name="cname-flattening"></a>
+
+#### CNAME Flattening (Legacy)
+
+::: tip
+This section covers a legacy DNS feature.
+New projects will use normal `A` records, which are supported across all registrars and DNS providers.
+:::
 
 Using `CNAME` records at the root domain (also sometimes referred to as `ALIAS` or `ANAME` records) is supported by these popular DNS providers:
 
@@ -87,17 +99,17 @@ We have _not_ been able to verify CNAME flattening or ANAME support for these se
 - Google domains
 - GoDaddy
 
-If your provider does not support CNAME flattening, but you would like to take advantage of it, we recommend switching to Cloudflare before launching on Cloud. When setting up a domain with Cloudflare, they copy all your existing records, and give you an opportunity to tweak them before cutting over.
-
 ### Subdomains
 
-Each domain can have any number of subdomains. Subdomains can point to the same environment as the primary domain (great for multi-site projects) or a different environment (perfect for a staging environment).
+Each domain can have any number of subdomains.
+Subdomains can point to the same environment as the primary domain (great for multi-site projects) or a different environment (perfect for a staging environment).
 
 You may also directly add and verify a non-apex domain if your project will never need to serve traffic from the apex—but we only recommend this in limited circumstances, like when using [rewrites and redirects](redirects.md).
+Domain [verification](#verify-ownership) is possible without routing traffic to a apex domain; you can then send traffic from more subdomains using the `CNAME` records in the **Route Traffic** table.
 
 ## SSL
 
-Every domain that sends traffic to Craft Cloud is automatically protected with SSL by [Cloudflare](https://cloudflare.com). You do not need to manage certificates, redirection, or any other configuration—Cloud takes care of this for you, at the edge.
+Every domain that sends traffic to Craft Cloud is automatically protected with SSL by [Cloudflare](https://cloudflare.com). You do not need to manage certificates, redirection, or any other configuration—Cloud takes care of this for you, at the gateway.
 
 Cloud also sets the `@web` alias to ensure all URLs are generated with the secure `https://` protocol. The only place we *don’t* know what `@web` should be is on the CLI—if you need to generate URLs from a command (or queue job), you may need to define this alias in your [application config](/5.x/configure.html#aliases).
 
