@@ -17,20 +17,23 @@ You can use the official [server check](https://github.com/craftcms/server-check
 
 ## Minimum System Specs
 
-- PHP 8.5+
-- MySQL 8.0.17+ using InnoDB, MariaDB 10.4.6+, or PostgreSQL 13+
-- 256MB+ memory allocated to PHP
-- 200MB+ free disk space
-- Composer 2.0+
+- PHP 8.5
+- MySQL 8.0.17 using InnoDB, MariaDB 10.4.6, or PostgreSQL 13
+- 256MB memory allocated to PHP
+- 200MB free disk space
+- Composer 2.0
 
 </column>
 <column>
 
 ## Recommended System Specs
 
-- PHP 8.2+
+- Latest PHP version (see changelog for minor version compatibility)
 - MySQL 8.0.36+ using InnoDB, or PostgreSQL 16+
 - 512MB+ of memory allocated to PHP
+
+Storage requirements are mostly determined by the expected number of uploaded assets (and transforms) and the size of your codebase (including static files), both of which will grow over time.
+Craft also supports a variety of [remote storage drivers](laravel:filesystem).
 
 </column>
 </columns>
@@ -39,7 +42,7 @@ You can use the official [server check](https://github.com/craftcms/server-check
 Due to its diverging parity with MySQL, we no longer recommend MariaDB for sites with many users or a large volume of content.
 :::
 
-Partial (and _experimental_) support has been added for SQLite 3.38.0+.
+Experimental support has also been added for SQLite 3.38.0+.
 We will make a determination about official support as we approach a general release.
 
 ## Required PHP Extensions
