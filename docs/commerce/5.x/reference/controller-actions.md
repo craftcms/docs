@@ -63,7 +63,7 @@ State | `text/html` | `application/json`
 
 ### <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
 
-Returns the [current cart](../system/orders-carts.md#fetching-a-cart) as JSON. A new cart cookie will be generated if one doesn’t already exist.
+Returns the [current cart](../development/cart.md) as JSON. A new cart cookie will be generated if one doesn’t already exist.
 
 The request must include `Accept: application/json` in its headers.
 
@@ -182,7 +182,7 @@ State | `text/html`
 
 ### <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
 
-Returns the [current cart](../system/orders-carts.md#fetching-a-cart) as JSON. A new cart cookie will be generated if one doesn’t already exist.
+Returns the [current cart](../development/cart.md) as JSON. A new cart cookie will be generated if one doesn’t already exist.
 
 The request must include `Accept: application/json` in its headers.
 
