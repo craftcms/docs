@@ -77,7 +77,7 @@ Shipping rules belong to a shipping method and may be edited in that shipping me
 
 Each rule uses **Match Order** and **Match Customer** <Since ver="5.4.0" product="Commerce" repo="craftcms/commerce" feature="Customer conditions for shipping rules" /> conditions to determine when a shipping rule is used.
 
-![A new shipping method rule, with no conditions defined.](../images/shipping-method-conditions.png)
+![A new shipping method rule, with no conditions defined.](../images/shipping-rule-conditions.png)
 
 ::: tip
 If a [shipping method](#shipping-methods) doesn’t include any conditions, each of its rules will be checked.
@@ -105,7 +105,7 @@ $order->toArray(
 
 ### Shipping Categories
 
-The shipping rule has matching logic for each shipping category in the system. Your selection describes whether the rule **Allow**s, **Disallows**, or **Requires** products of the category to be in the cart:
+The shipping rule has matching logic for each shipping category in the system. Your selection describes whether the rule **Allow**s, **Disallow**s, or **Require**s products of the category to be in the cart:
 
 1. **Allow** (Default): The rule _may_ match carts with products in this category.
 2. **Disallow**: The rule will _not_ match carts that contain products in this category.
@@ -115,25 +115,30 @@ Category policies ensure that the available methods and costs accurately reflect
 
 ## Shipping Rule Costs
 
-![A new shipping method rule.](../images/shipping-method-costs.png)
+![A new shipping method rule.](../images/shipping-rule-costs.png)
+
+When a shipping rule matches an order, _all_ of its costs are tabulated, then constrained by its [minimum](#minimum-total-shipping-cost) and [maximum](#maximum-total-shipping-cost) cost.
 
 ### Base Rate
 
-Set a base shipping rate for the order as a whole. This is a shipping cost added to the order as a whole and not to a single line item.
+Set a base shipping rate for the order as a whole.
 
 ### Minimum Total Shipping Cost
 
-The minimum the person should spend on shipping.
+Enforce a minimum shipping cost that the rule can apply (after adding up the base rate plus all item-level rates).
+When required, this is applied as a _positive_ adjustment.
 
 ### Maximum Total Shipping Cost
 
-The maximum the person should spend on shipping after adding up the base rate plus all item-level rates.
+Limit the shipping cost the rule can apply (after adding up the base rate plus all item-level rates).
+When required, this is applied as a _negative_ adjustment.
 
 ### Item Rates
 
 #### Per Item Rate
 
-Set a default per-order item shipping rate.
+Set a base shipping cost per item.
+This might also be called a _quantity_ rate.
 
 #### Weight Rate
 
@@ -141,11 +146,11 @@ Default cost per whole unit of the store’s dimension units. For example, if yo
 
 #### Percentage Rate
 
-The default amount based on a percentage of item’s cost.
+The default amount based on a percentage of item’s price.
 
 #### Category Rate Overrides
 
-You can further customize the Per Item, Weight, and Percentage rates in each category.
+You can further customize the **Per Item**, **Weight**, and **Percentage** rates for each [shipping category](#shipping-categories).
 
 ## Configuration Examples
 
@@ -161,9 +166,10 @@ It’s best to identify aspects of the store’s shipping is most complex or spe
 
 ### Displaying the Available Shipping Methods
 
-Returns the shipping method options available for the current cart. Some shipping methods may not be included, as only those whose rules apply to the current cart will be returned.
+You can offer customers a choice between shipping methods.
+Only shipping methods whose rules (and store) match the current cart will be returned.
 
-```twig
+```twig{3}
 <h3>Select a shipping method</h3>
 
 {% for handle, method in cart.availableShippingMethodOptions %}
@@ -178,4 +184,17 @@ Returns the shipping method options available for the current cart. Some shippin
 {% endfor %}
 ```
 
-Customers select a shipping _method_, not a _rule_. The rule is only used for matching against the cart, but does ultimately determine the cost.
+::: tip
+Customers select an eligible shipping _method_, not a _rule_.
+:::
+
+The shipping method’s handle is stored on the cart (or order) element, and is used to load and display information about the method:
+
+```twig
+{% set shippingMethod = craft.commerce.shippingMethods.getShippingMethodByHandle(cart.shippingMethodHandle) %}
+
+Your order will be shipped via {{ shippingMethod.name }} to:
+<address>
+{{ cart.shippingAddress|address }}
+</address>
+```

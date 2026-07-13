@@ -5,21 +5,21 @@ sidebarDepth: 2
 # Addresses
 
 ::: tip
-Addresses are now a native part of Craft! We recommend reviewing the [main documentation on addresses](/5.x/addresses.md) before digging in on Commerce-specifics.
+Addresses are now a native part of Craft! We recommend reviewing the [main documentation on addresses](/5.x/reference/element-types/addresses.md) before digging in on Commerce-specifics.
 :::
 
 Commerce manages shipping and billing information using Craft’s <craft5:craft\elements\Address> element type.
 
-In the control panel, you’ll encounter addresses within the context of [orders](./orders-carts.md) and [users](/5.x/system/users.md). [Store locations](#store-addresses) may also be entered at **Commerce** → **Store Management** → **General** → **Store Location**.
+In the control panel, you’ll encounter addresses within the context of [orders](./orders-carts.md) and [users](/5.x/system/users.md). [Store locations](#store-addresses) may also be entered at <Journey path="Commerce, Store Management, General, Store Location" />.
 
-Customer’s addresses are managed from their user account, if you’ve [added the native Addresses field](/5.x/reference/element-types/addresses.md#setup) to Users’ field layout. Commerce also inserts a **Commerce Settings** field into the [address field layout](/5.x/reference/element-types/addresses.md#native-and-custom-fields)) with primary shipping and billing controls.
+Customer’s addresses are managed from their user account. Commerce also inserts a **Commerce Settings** field into the [field layout](/5.x/reference/element-types/addresses.md#native-and-custom-fields) of addresses owned by a user, with primary shipping and billing controls.
 
 ## How Addresses are Used
 
-Your customers will work with addresses [directly](#address-book), or [via the cart](#cart-addresses).
+Your customers can provide addresses [directly](#address-book), or [via the cart](#cart-addresses).
 
 ::: tip
-Your primary source for information about [working with Addresses](/5.x/reference/element-types/addresses.md) is the main Craft documentation!
+Your primary source for information about [working with addresses](/5.x/reference/element-types/addresses.md) is the main Craft documentation!
 :::
 
 Every order may have a shipping and billing address, and customers with accounts can save and re-use addresses when placing new orders. How you collect and validate addresses on the front end is up to you—but Craft and Commerce provide tools that help streamline address management:
@@ -27,11 +27,11 @@ Every order may have a shipping and billing address, and customers with accounts
 - The ability to use [estimated addresses](#estimate-addresses) to calculate shipping and tax costs with minimal data entry before checkout.
 - Multiple ways of [updating cart addresses](#updating-cart-addresses) to avoid data re-entry.
 - Methods for working with geographic regions provided by Craft’s supporting [address repository](/5.x/reference/element-types/addresses.md#address-repository).
-- A separate endpoint that can be used to allow customers to [manage their saved addresses](#address-book).
+- A separate endpoint that customers can use to [manage their saved addresses](#address-book).
 
 ### Store Addresses
 
-Each store’s primary address (set via **Commerce** &rarr; **System Settings** &rarr; **Stores**) is available via the global `currentStore` variable or the [`Stores` service](commerce5:craft\commerce\services\Stores):
+Each store’s primary address (set via <Journey path="Commerce, System Settings, Stores" />) is available via the global `currentStore` variable or the [`Stores` service](commerce5:craft\commerce\services\Stores):
 
 ::: code
 ```twig
@@ -68,7 +68,7 @@ $storeAddress = \craft\commerce\Plugin::getInstance()
 
 ### Fetching Cart Addresses
 
-Once you have a [cart object](orders-carts.md#fetching-a-cart), you can access the attached addresses via `cart.shippingAddress` and `cart.billingAddress`:
+Once you have a [cart object](../development/cart.md), you can access the attached addresses via `cart.shippingAddress` and `cart.billingAddress`:
 
 ```twig
 {% if cart.shippingAddress %}
