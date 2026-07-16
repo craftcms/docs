@@ -122,14 +122,26 @@ Features like the [`_globals` collection](/5.x/reference/twig/global-variables.m
 
 ### Side Effects
 
-Templates that depend on (or cause) side-effects of the sequence in which they are rendered, like registering scripts and styles, modifying the `_globals` collection, or setting headers.
+Templates that depend on (or cause) side-effects of the sequence in which they are rendered may behave unexpectedly:
+
+- Registered scripts and styles may not be injected;
+- Modifications to the `_globals` collection will not be available (or persist);
+- Headers set in the main or sub-resource won’t apply to the other;
+- State manipulation via direct API usage `{% do craft.app... %}` is lost between requests;
+
+This is true even if the final HTML document delivered to the client appears to contain all the markup.
+ESIs also increase the risk of inconsistent representations of the database between main and sub-resource requests: the time between two queries could be significantly longer in separate requests.
 
 ### Content Types
 
 Only `text/html` and `text/plain` responses are parsed for edge-side include tags.
-A sub-resource may be any compatible content type (i.e. not binary or streams), i.e. `application/json`.
+A sub-resource may be any compatible content type (not binary or streams), i.e. `application/json`.
 
 ## Development
 
-Outside of cloud, the module silently falls back to synchronous rendering.
-This behavior is _not_ identical to `include` tag or function: the included template does not have access to the parent context, and only some [variables](#variables) can be passed.
+Outside of Cloud, the module silently falls back to synchronous rendering.
+This behavior is deliberately _not_ identical to the `include` tag (or function): the included template does not have access to the parent context, and only some [variables](#variables) can be passed.
+
+::: warning
+Take care when working with includes that you are not relying on any [side effects](#side-effects).
+:::
