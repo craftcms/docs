@@ -19,12 +19,12 @@ There are no limits on page views, database size, inbound transfer, or the numbe
 
 Outbound transfer from your application and asset storage bucket are metered.
 
-If a response can be served from our edge (like a [statically-cached](caching.md) HTML document, an [image transform](https://craftcms.comassets.md#transforms), or any previously-requested asset or [build artifact](builds.md)), it does _not_ count toward your monthly bandwidth:
+If a response can be served from our edge (like a [statically-cached](static-caching.md) HTML document, an [image transform](https://craftcms.comassets.md#transforms), or any previously-requested asset or [build artifact](builds.md)), it does _not_ count toward your monthly bandwidth:
 
 - **Team** projects get 250GB of transfer per month, shared between environments.
 - **Pro** projects get 500GB of transfer per month, shared between environments.
 
-All transfer from our edge and CDN to your clients is free. Most projects will not need to do anything to take advantage of our edge cache, but you can optimize your cache-hit ratio by following our [static caching guide](caching.md), and limit asset egress by creating thoughtful [named asset transforms](/5.x/development/image-transforms.html).
+All transfer from our edge and CDN to your clients is free. Most projects will not need to do anything to take advantage of our edge cache, but you can optimize your cache-hit ratio by following our [static caching guide](static-caching.md), and limit asset egress by creating thoughtful [named asset transforms](/5.x/development/image-transforms.html).
 
 The following table shows some common resource sizes, and an approximation of the number of uncached requests that fit within the **Team** plan’s bandwidth quota:
 

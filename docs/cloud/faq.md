@@ -104,7 +104,7 @@ All Craft Cloud projects are protected by our Cloudflare WAF, with a “reasonab
 We make specific changes to the firewall as needs arise.
 
 Some customers have their own Cloudflare accounts in front of ours, allowing them to manage specific WAF rules before requests reach Craft Cloud.
-Cloudflare refers to this as the “[Orange-to-Orange](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)” scenario; more information about this setup is available in the [Craft Cloud for Cloudflare](users.md) article.
+Cloudflare refers to this as the “[Orange-to-Orange](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)” scenario; more information about this setup is available in the [Craft Cloud for Cloudflare](cloudflare.md) article.
 
 <a id="htaccess"></a>
 

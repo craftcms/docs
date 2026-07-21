@@ -40,7 +40,7 @@ Some [Craft settings](/5.x/configure.html) behave differently when running on Cl
 
 The [`resourceBasePath`](/5.x/reference/config/general.html#resourcesbasepath) and [`resourceBaseUrl`](/5.x/reference/config/general.html#resourcebaseurl) have no effect when running on Cloud. Asset bundles and anything that ends up in your [web root](#project-structure) are published to our CDN.
 
-We automatically enable Craft’s [`asyncCsrfInputs`](/5.x/reference/config/general.html#asynccsrfinputs) setting to support [static caching](caching.md).
+We automatically enable Craft’s [`asyncCsrfInputs`](/5.x/reference/config/general.html#asynccsrfinputs) setting to support [static caching](static-caching.md).
 
 ### Application Config
 

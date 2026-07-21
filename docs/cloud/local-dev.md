@@ -2,7 +2,7 @@
 
 Craft Cloud has very little impact on your local development stack. Any changes required to make your project infrastructure-agnostic are apt to be in code or configuration—not tooling!
 
-Our [Moving to Craft Cloud](projects.md) article covers these changes in detail, but the bits and pieces relevant to local development are collected here.
+Our [Moving to Craft Cloud](migrating.md) article covers these changes in detail, but the bits and pieces relevant to local development are collected here.
 
 ::: tip
 DDEV remains our recommended development environment, as it supports all the PHP and database versions that Cloud does.
@@ -12,7 +12,7 @@ DDEV remains our recommended development environment, as it supports all the PHP
 
 The [Cloud extension](extension.md) allows us to dynamically override some of your Craft application’s configuration to take advantage of platform features, like connecting to the managed database and asset storage.
 
-Your configuration is *not* modified when your project is running outside of Cloud. It’s important to be aware when [moving to Cloud](projects.md), though, which components’ configuration *will* be overridden—especially if your local development environment is designed to reflect your production infrastructure, and you expect certain features (Redis, for instance) to be available at all times.
+Your configuration is *not* modified when your project is running outside of Cloud. It’s important to be aware when [moving to Cloud](migrating.md), though, which components’ configuration *will* be overridden—especially if your local development environment is designed to reflect your production infrastructure, and you expect certain features (Redis, for instance) to be available at all times.
 
 When your local environment *does* need special configuration (say, to work with your team’s Docker Compose setup), that configuration should be handled with [environment variables](/5.x/configure.html#environment-overrides) or [scoped to a specific environment](/5.x/configure.html#multi-environment-configs).
 

@@ -138,7 +138,7 @@ If you would like to continue to support this workflow, your configuration may r
 Users of the [Twigpack](https://plugins.craftcms.com/twigpack?craft5) plugin are protected from performance impacts by its built-in cache. The [Asset Rev](https://plugins.craftcms.com/assetrev?craft5) plugin memoizes manifest files for the duration of a request, but it does _not_ cache them between requests.
 
 ::: tip
-Craft Cloud’s [static cache](caching.md) can also mitigate latency issues when interacting with remote files.
+Craft Cloud’s [static cache](static-caching.md) can also mitigate latency issues when interacting with remote files.
 :::
 
 ### Common Toolchains
