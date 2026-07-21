@@ -26,7 +26,7 @@ To serve traffic from your own domain, find the **Domains** panel in your Cloud 
 
 Provide the root domain you wish to add, and select an environment, if you want to tie it to one right away. You aren’t required to point the new root domain at Cloud, but any custom domains you do connect must go through a brief verification process before Cloud will respond to requests on it (or any subdomain thereof).
 
-Verifying a domain does _not_ automatically start [routing traffic](#route-traffic) to the selected environment. Conversely, you may elect to perform [real-time validation](users.md#real-time-validation) by immediately sending traffic to Cloud.
+Verifying a domain does _not_ automatically start [routing traffic](#route-traffic) to the selected environment. Conversely, you may elect to perform [real-time validation](cloudflare.md#real-time-validation) by immediately sending traffic to Cloud.
 
 ::: warning
 A `www` [subdomain](#subdomains) is not automatically created for you. You must add it explicitly, if you wish to use it in addition to the bare domain. See the [redirection](#redirection) section to learn about normalizing access via `www` or non-`www` URLs.
