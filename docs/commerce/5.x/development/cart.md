@@ -66,15 +66,6 @@ To see what cart information you can use in your templates, take a look at the [
 
 Once a cart is completed and becomes an order, accessing the current cart via either method starts this process over.
 
-### Whose Cart Is Returned
-
-The cart Commerce returns depends on who is asking for it:
-
-- A **guest** (not signed in) gets the cart referenced by their cart cookie.
-- A **signed-in user** gets the cart referenced by their cookie, and it’s automatically claimed under their account (its customer and email are set to match) the first time they access it.
-
-For privacy, a cart that belongs to a registered user is only returned to that same user while they’re signed in. If a guest—or a _different_ signed-in user—ends up with that cart’s cookie, Commerce quietly starts them a fresh cart instead. The one exception is a session that has been authorized to use the cart, which happens when it was [loaded with a valid link](#load-a-cart).
-
 ## Displaying Cart Contents
 
 Your store should provide enough information about the contents of a customer’s cart for them to shop and check out confidently.
@@ -617,36 +608,17 @@ Read more about the [`redirectInput()` Twig function](/5.x/reference/twig/functi
 
 ### Load a Cart
 
-Commerce provides a [`commerce/cart/load-cart`](../reference/controller-actions.md#get-post-cart-load-cart) endpoint for loading an existing cart into the current customer’s session, referenced by its [number](../system/orders-carts.md#order-number).
+Commerce provides a [`commerce/cart/load-cart`](../reference/controller-actions.md#get-post-cart-load-cart) endpoint for loading an existing cart into a cookie for the current customer.
 
-You can have the customer interact with the endpoint by [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form).
+You can have the user interact with the endpoint by [navigating to a URL](#loading-a-cart-with-a-url) or by [submitting a form](#loading-a-cart-with-a-form). Either way, an existing cart number is required.
 
-#### How Carts Are Protected
-
-An _empty_ cart—one with no email address and no shipping or billing address—can be loaded by anyone who has its number.
-
-As soon as a cart has an email or an address on it, Commerce protects it. Loading a protected cart requires **one** of the following:
-
-- a valid, unexpired **load-cart token**, passed as the `code` parameter; or
-- being signed in as the cart’s own customer.
-
-If neither is true, the customer is sent to an [email challenge](#recovering-a-protected-cart), where they can request a fresh recovery link by email.
-
-This table summarizes the outcome of a `load-cart` request for a **protected** cart:
-
-| Signed-in status | Valid `code` token? | Outcome |
-| --- | --- | --- |
-| Signed in as the cart’s customer | Not required | Cart loads |
-| Signed in as a _different_ user | Yes | Cart loads, and is reassigned to the signed-in user |
-| Signed in as a _different_ user | No | Redirected to the email challenge |
-| Guest (not signed in) | Yes | Cart loads; the guest can view and edit it |
-| Guest (not signed in) | No | Redirected to the email challenge |
+If there are issues loading the cart, an error message will be flashed to the user.
 
 ::: tip
-When a signed-in user loads a cart that isn’t already theirs (with a valid token), the cart is **reassigned** to them—its customer and email are updated to match their account. A guest who loads a cart keeps it as-is; if they later sign in or register, it’s reassigned to their account at that point.
+If the desired cart belongs to a user, that user must be logged in to load it into a browser cookie.
 :::
 
-The [`loadCartRedirectUrl`](../configure.md#loadcartredirecturl) setting determines where the customer is sent by default after a cart is loaded. If there are issues loading the cart, an error message is flashed to the customer.
+The [`loadCartRedirectUrl`](../configure.md#loadcartredirecturl) setting determines where the customer will be sent by default after the cart has been loaded.
 
 ### Loading a Cart with a URL
 
@@ -656,42 +628,30 @@ Store managers can get this URL by navigating in the control panel to <Journey p
 
 ![Share cart context menu option](../images/share-cart.png)
 
-You can also do this from an order edit page by choosing the gear icon and then **Share cart…**. <Since product="Commerce" repo="craftcms/commerce" ver="5.7.0" feature="Tokenized share-cart URLs" /> This link includes a secure, expiring token, so it works even for a [protected cart](#how-carts-are-protected) that belongs to a signed-out customer.
+You can also do this from an order edit page by choosing the gear icon and then **Share cart…**.
 
-To build a shareable link programmatically (without the involvement of a store manager), use the carts service’s <commerce5:craft\commerce\services\Carts::getLoadCartUrl()> method, which mints a tokenized URL for a given cart:
+To do this programmatically (without the involvement of a store manager), you’ll need to create the action URL using the desired cart [number](../system/orders-carts.md#order-number).
+
+This example sets a `loadCartUrl` variable to an absolute URL the customer can access to load their cart. We’re assuming a `cart` object already exists for the cart that should be loaded:
 
 ::: code
 ```twig
-{% set loadCartUrl = craft.commerce.carts.getLoadCartUrl(cart) %}
+{% set loadCartUrl = actionUrl(
+  'commerce/cart/load-cart',
+  { number: cart.number }
+) %}
 ```
 ```php
-use craft\commerce\Plugin as Commerce;
-
-$loadCartUrl = Commerce::getInstance()->getCarts()->getLoadCartUrl($cart);
+$loadCartUrl = craft\helpers\UrlHelper::actionUrl(
+    'commerce/cart/load-cart',
+    ['number' => $cart->number]
+);
 ```
 :::
 
-The token embedded in the URL is valid for the duration of the [`loadCartUrlExpiry`](../configure.md#loadcarturlexpiry) setting (seven days, by default).
-
 ::: tip
-This URL can be presented to the customer however you’d like. It’s particularly useful in an email that allows the customer to retrieve an abandoned cart—even if they aren’t signed in.
+This URL can be presented to the user however you’d like. It’s particularly useful in an email that allows the customer to retrieve an abandoned cart.
 :::
-
-::: warning
-If you construct a load-cart URL by hand with only a `number` (and no `code` token), it will still load an [empty cart](#how-carts-are-protected)—but a protected cart will send the customer to the [email challenge](#recovering-a-protected-cart) instead of loading. Use `getLoadCartUrl()` to generate links for protected carts.
-:::
-
-### Recovering a Protected Cart
-
-When a customer tries to load a [protected cart](#how-carts-are-protected) without a valid token—for example, by following an expired or hand-built link—Commerce sends them to an **email challenge** rather than exposing the cart to the wrong person. <Since product="Commerce" repo="craftcms/commerce" ver="5.7.0" feature="The cart email challenge" />
-
-The flow works like this:
-
-1. The customer confirms they’d like to recover the cart. Commerce emails a fresh, tokenized [load-cart link](#loading-a-cart-with-a-url) to the address already stored on the cart.
-2. The customer sees a confirmation page with their email address partially masked.
-3. Following the link from their inbox loads the cart into their session.
-
-Because the recovery link is only ever sent to the cart’s _own_ email address, customers can recover a cart on a new device or browser without it ever being publicly accessible.
 
 ### Loading a Cart with a Form
 
