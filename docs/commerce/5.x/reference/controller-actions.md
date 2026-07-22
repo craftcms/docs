@@ -150,6 +150,7 @@ Loads a cookie for the specified cart.
 Param | Description
 ----- | -----------
 `number` | Required cart number to be loaded.
+`code` | A secure load-cart token, required to load a [protected cart](/5.x/development/cart.md#how-carts-are-protected) when not signed in as its customer. Generate one with <commerce5:craft\commerce\services\Carts::getLoadCartUrl()>.
 
 #### Response
 
