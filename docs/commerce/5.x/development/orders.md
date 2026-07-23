@@ -74,7 +74,7 @@ To load an order with that number, we’ll use an [order query](../system/orders
 {{ order.dateOrdered|date }}
 ```
 
-Note that when we check whether an order came back and immediately `{% exit 404 %}` to 
+If the query does not return an order, we immediately call `{% exit 404 %}` to halt the request and render your project’s [error page](/5.x/system/routing.md#error-templates).
 
 The substance of this “receipt” view is entirely up to you—orders contain [a huge amount of data](#order-data), including line items, adjustments, transactions, status history, notes, custom fields, and more.
 
