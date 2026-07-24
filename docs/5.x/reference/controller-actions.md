@@ -326,14 +326,15 @@ Saves or updates an [address](element-types/addresses.md) element against the cu
 Param | Description
 ----- | -----------
 `addressId` | An existing address’s ID can be sent to update it, as long as it’s owned by the current user.
-`userId` | Owner of the new address. Owners cannot be changed after creation, and new addresses can only be created for the current user or other users they are allowed to edit.
+`userId` | Owner of the new address. Owners cannot be changed after creation, and new addresses can only be created for the current user (or other users they are allowed to edit).
 `fullName` | Name for the address. First and last names are not stored discretely, but can by submitted separately.
 `firstName` | Can be submitted independently from `lastName`, but will be combined for storage.
 `lastName` | Can be submitted independently from `firstName`, but will be combined for storage.
 `countryCode` | Required to localize and validate the rest of the address.
+`addressLine1`, `addressLine2`, `addressLine3` | Primary and supplemental location description. These are not necessarily the first, second, and third lines of a [formatted address](element-types/addresses.md#fields-and-formatting), and may be used differently between regions or people.
 `organization` | Additional line for an organization or business name.
 `organizationTaxId` | Tax/VAT ID.
-`latitude` and `longitude` | GPS coordinates for the address. Not automatically populated or validated.
+`latitude` and `longitude` | GPS coordinates for the address. Craft does not automatically geocode address information or use these fields, internally.
 `fields[...]` | [Custom field](../development/forms.md#custom-fields) values.
 `fieldsLocation` | Parameter name under which Craft will look for custom field data. (Defaults to `fields`.)
 
