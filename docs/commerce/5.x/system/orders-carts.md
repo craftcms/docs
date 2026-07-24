@@ -86,9 +86,17 @@ An order is a type of [element](/5.x/extend/element-types.md) that underpins the
 When a cart becomes an order, the following things happen:
 
 1. The `dateOrdered` order attribute is set to the current date.
-2. The `isCompleted` order attribute is set to `true`.
-3. The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
-4. The order reference number is generated for the order, based on the [**Order Reference Number Format** setting](stores.md#settings) for the store it was placed in.
+1. The `isCompleted` order attribute is set to `true`.
+1. The default [order status](custom-order-statuses.md) is set on the order and any emails for this status are sent.
+1. The order reference number is generated for the order, based on the [**Order Reference Number Format** setting](stores.md#settings) for the store it was placed in.
+1. The order element is saved for a final time.
+1. [Order status emails](#status-emails) are queued (if configured).
+1. Coupon usage is deducted.
+1. If the customer opted in to registration, their user is sent an activation email.
+1. Addresses are duplicated into the customer’s account (if requested).
+1. Inventory is deducted.
+1. Line items are assigned a default status.
+1. Commerce invokes “order complete” [event handlers](../extend/events.md#aftercompleteorder).
 
 Instead of being recalculated on each change like a cart, the order will only be recalculated if you [manually trigger recalculation](#recalculating-orders).
 
@@ -132,7 +140,7 @@ The _order reference_ is generated upon completing a cart using the store’s **
 {{ order.reference }}
 ```
 
-The “Order Reference Number Format” is an [object template](/5.x/system/object-templates.md) that’s rendered when the order is completed. It can use order attributes along with Twig filters and functions. For example:
+The **Order Reference Number Format** is an [object template](/5.x/system/object-templates.md) that’s rendered when the order is completed. It can use order attributes along with Twig filters and functions. For example:
 
 ```twig
 {{ dateOrdered|date('Y') }}-{{ id }}
