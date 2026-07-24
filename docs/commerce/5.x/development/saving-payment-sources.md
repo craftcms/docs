@@ -5,7 +5,7 @@ sidebarDepth: 2
 # Saving Payment Sources
 
 ::: warning
-Payment sources can only be saved for [payment gateways](../system/gateways.md) that support them.
+Payment sources can only be saved for [gateways](../system/gateways.md) that support them.
 :::
 
 There are two ways for customers to create reusable payment sources:

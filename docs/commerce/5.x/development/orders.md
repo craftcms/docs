@@ -4,11 +4,11 @@ Customers with (and without!) accounts often want to see evidence of their purch
 
 ## Post-Checkout
 
-After a customer has paid for or otherwise completed an order, Commerce redirects them to the `returnUrl` memoized on the order. This is often set with the standard [`redirectInput()` function](/5.x/reference/twig/functions.md#redirectinput) when [making a payment](making-payments.md), but may not take effect until the customer returns from completing off-site authentication.
+After a customer has paid for or otherwise completed an order, Commerce redirects them to the `returnUrl` memoized on the order. This is often set with the standard [`redirectInput()` function](/5.x/reference/twig/functions.md#redirectinput) when [making a payment](making-payments.md), but may not take effect until the customer returns from completing off-site authorization.
 
 To send them to a dedicated order summary page, you can send a `redirect` param like this:
 
-```twig
+```twig{4}
 <form method="post">
   {{ csrfInput() }}
   {{ actionInput('commerce/payments/pay') }}
