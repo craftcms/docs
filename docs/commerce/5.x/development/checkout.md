@@ -21,15 +21,15 @@ The primary design constraint for multi-step checkout is dependent data:
 
 A few [store settings](../system/stores.md#settings) can also impact what data you need to collect:
 
-- `requireBillingAddressAtCheckout` and `requireShippingAddressAtCheckout` ensure carts have each kind of address before payment or completion is allowed.
-- `requireShippingMethodSelectionAtCheckout`
-- `allowCheckoutWithoutPayment` and `allowPartialPaymentOnCheckout` can be used to generate invoices and estimates, or other special handling. Administrators can later use the _Manual_ gateway to record offline payments.
-- `allowEmptyCartOnCheckout` is generally not advisable, except when customers need to open an order that will be modified by an administrator, later. You can still collect custom field data on an empty cart.
-- Returning customers may appreciate the convenience of `autoSetNewCartAddresses` and `autoSetPaymentSource`, especially for frequent, small orders. These settings have no impact for stores that do not use registration and accounts.
-- Stores with a single shipping method should enable `autoSetCartShippingMethodOption` and present the shipping price. [Discounts](../system/discounts.md) can still modify shipping costs, so you are still able to run shipping promotions.
+- **Require Shipping Address At Checkout** and **Require Billing Address At Checkout** ensure carts have each kind of address before payment or completion is allowed.
+- **Require Shipping Method Selection At Checkout** guarantees that the customer has selected a valid shipping method (but may result in some customers being unable to check out at all, say, due to restrictions on shipping zones).
+- **Allow Checkout Without Payment** and **Allow Partial Payment On Checkout** can be used to generate invoices and estimates, or other special handling. Administrators can later use the _Manual_ gateway to record offline payments.
+- **Allow Empty Cart On Checkout** is generally not advisable, except when customers need to open an order that will be modified by an administrator, later. You can still collect custom field data on an empty cart.
+- Returning customers may appreciate the convenience of **Auto Set New Cart Addresses** and **Auto Set Payment Source**, especially for frequent, small orders. These settings have no impact for stores that do not use registration and accounts.
+- Stores with a single shipping method should enable **Auto Set Cart Shipping Method Option** and present the shipping price as early as possible. [Discounts](../system/discounts.md) can still modify shipping costs, so you are still able to run shipping promotions.
 
 To complete an order, you’ll have the customer submit a request to the [`payments/pay`](../reference/controller-actions.md#post-payments-pay) action.
-Stores that allow zero-total orders or have `allowCheckoutWithoutPayment` enabled can use the [`cart/complete`](../reference/controller-actions.md#post-cart-complete) action to quickly submit an order.
+Stores that allow zero-total orders or have **Allow Checkout Without Payment** enabled can use the [`cart/complete`](../reference/controller-actions.md#post-cart-complete) action to quickly submit an order.
 Either way, “completing” a cart turns it into a [read-only order](orders.md#post-checkout).
 
 <Block>
