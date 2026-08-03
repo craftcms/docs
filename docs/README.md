@@ -201,14 +201,6 @@ The best places to look for help, inspiration, and news.
         />
     </li>
     <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
-        <IconLink title="Twitter"
-            subtitle="The official Craft Twitter feed."
-            link="https://twitter.com/craftcms"
-            icon="/docs/icons/icon-twitter.svg"
-            icon-size="large"
-        />
-    </li>
-    <li class="block mb-4 sm:w-1/2 sm:px-2 sm:py-0">
         <IconLink title="Mastodon"
             subtitle="The official Craft Mastodon feed."
             link="https://mastodon.social/@CraftCMS"
