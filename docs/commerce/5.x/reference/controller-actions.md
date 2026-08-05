@@ -63,7 +63,7 @@ State | `text/html` | `application/json`
 
 ### <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
 
-Returns the [current cart](../system/orders-carts.md#fetching-a-cart) as JSON. A new cart cookie will be generated if one doesn’t already exist.
+Returns the [current cart](../development/cart.md) as JSON. A new cart cookie will be generated if one doesn’t already exist.
 
 The request must include `Accept: application/json` in its headers.
 
@@ -87,45 +87,41 @@ State | `application/json`
 
 ### <badge vertical="baseline" type="verb">POST</badge> `cart/update-cart`
 
-Updates the cart by [adding](../system/orders-carts.md#adding-items-to-a-cart) or [updating](../system/orders-carts.md#working-with-line-items) line items, and setting addresses and other cart attributes.
-
-::: tip
-Read more about [working with Addresses](../system/addresses.md) in Commerce.
-:::
+Updates the cart by [adding](../development/cart.md#adding-items) or [updating](../development/cart.md#updating-line-items) line items, and [setting addresses](../development/address-management.md) and other cart attributes.
 
 #### Supported Params
 
 Param | Description
 ----- | -----------
-`billingAddress[]` | Billing address attributes. (See [Addresses](../system/addresses.md)).
-`billingAddressId` | ID of an existing address to use as the billing address.
-`billingAddressSameAsShipping` | Set to `true` to use shipping address for billing address. (Will ignore billing address ID and fields.)
+`billingAddress[]` | Billing address attributes.
+`billingAddressId` | ID of an existing address owned by the customer to copy into the cart’s billing address.
+`billingAddressSameAsShipping` | Set to `true` to use shipping address for billing address. (Ignores billing address ID and fields; complement of `shippingAddressSameAsBilling`)
 `clearNotices` | When passed, clears all cart notices.
 `clearLineItems` | When passed, empties all line items from cart.
 `couponCode` | Coupon code for a [discount](../system/discounts.md) that should be applied to the cart.
 `email` | Email address to be associated with the cart.
-`estimatedBillingAddress[]` | Estimated billing address attributes. (See [Addresses](../system/addresses.md)).
-`estimatedShippingAddress[]` | Estimated shipping address attributes. (See [Addresses](../system/addresses.md)).
+`estimatedBillingAddress[]` | Estimated billing address attributes.
+`estimatedShippingAddress[]` | Estimated shipping address attributes.
 `estimatedBillingAddressSameAsShipping` | Set to `true` to use shipping address for estimated billing address.
 `fields[]` | Optional array of [custom fields](/5.x/development/forms.md#custom-fields) to be submitted to the cart.
 `forceSave` | Optionally set to `true` to force saving the cart, even if no attributes changed.
-`gatewayId` | The payment gateway ID to be used when the cart is completed.
+`gatewayId` | The [payment gateway](../development/making-payments.md) ID to be used when the cart is completed.
 `lineItems[]` | Array of one or more of the cart’s line items to update. Each must have an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs. An item may include a `remove` key with a value of `1` or a `qty` of `0` to be removed from the cart.
 `makePrimaryBillingAddress` | Set a source address (supplied via `billingAddressId`, or memoized via `sourceBillingAddressId`) as the customer’s primary/default _billing_ address.
 `makePrimaryShippingAddress` | Set a source address (supplied via `shippingAddressId`, or memoized via `sourceShippingAddressId`) as the customer’s primary/default _shipping_ address.
-`number` | Optional order number for specific, existing cart.
+`number` | Optional order number for specific, existing cart. The order must be owned by the current customer, or the request must be from a registered Craft user with the appropriate permission.
 `paymentCurrency` | ISO code of a configured [payment currency](../system/currencies.md) to be used for the cart.
-`paymentSourceId` | The ID for a payment source that should be used when the cart is completed.
+`paymentSourceId` | The ID for a [payment source](../development/saving-payment-sources.md) that should be used when the cart is completed.
 `purchasableId` | Single purchasable ID to be added to the cart. If provided, will also use optional `note`, `options[]`, and `qty` parameters.
-`purchasables[]` | Array of one or more purchasables to be [added to the cart](../system/orders-carts.md#adding-a-multiple-items). Each must include an `id` key-value pair, and may include `options`, `note`, and `qty` key-value pairs.
-`registerUserOnOrderComplete` | Whether to create a user account for the customer when the cart is completed and turned into an order.
-`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book when the cart is completed and turned into an order.
-`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book when the cart is completed and turned into an order.
-`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book when the cart is completed and turned into an order. Unlike `saveBillingAddressOnOrderComplete` and `saveShippingAddressOnOrderComplete`, this is _not_ stored on the order itself—it just allows customers to set both at the same time.
-`shippingAddress[]` | Shipping address attributes. (See [Addresses](../system/addresses.md)).
+`purchasables[]` | Array of one or more purchasables to be [added to the cart](../development/cart.md#adding-items). Each requires an `id` field, and may include `options` (array), `note` (string), and `qty` (integer) fields. To update an existing line item, use the `lineItems[]` parameter.
+`registerUserOnOrderComplete` | Whether to create a user account at [checkout](../development/checkout.md#registration).
+`saveBillingAddressOnOrderComplete` | Whether to save the billing address to the customer’s address book at checkout.
+`saveShippingAddressOnOrderComplete` | Whether to save the shipping address to the customer’s address book at checkout.
+`saveAddressesOnOrderComplete` | Whether to save both the shipping _and_ billing address to the customer’s address book at checkout. Unlike `saveBillingAddressOnOrderComplete` and `saveShippingAddressOnOrderComplete`, this is _not_ stored on the order itself—it just allows customers to set both at the same time.
+`shippingAddress[]` | Shipping address attributes.
 `shippingAddressId` | ID of an existing address to use as the shipping address.
-`shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address and ignore `shippingAddress` and `shippingAddressId`.
-`shippingMethodHandle` | The handle of a shipping method to be set for the cart.
+`shippingAddressSameAsBilling` | Set to `true` to use billing address for shipping address (and ignore `shippingAddress` and `shippingAddressId`).
+`shippingMethodHandle` | The handle of a [shipping method](../system/shipping.md) to be set for the cart.
 
 #### Response
 
@@ -183,7 +179,7 @@ State | `text/html`
 
 ### <badge vertical="baseline" type="verb">GET</badge> `cart/get-cart`
 
-Returns the [current cart](../system/orders-carts.md#fetching-a-cart) as JSON. A new cart cookie will be generated if one doesn’t already exist.
+Returns the [current cart](../development/cart.md) as JSON. A new cart cookie will be generated if one doesn’t already exist.
 
 The request must include `Accept: application/json` in its headers.
 
@@ -263,13 +259,14 @@ Makes a payment on an order. Read more about [making payments](../development/ma
 
 #### Supported Params
 
+All body parameters will be provided directly to the gateway’s [payment form model](../development/making-payments.md#payment-form-models).
+
 Param | Description
 ----- | -----------
-`*` | All body parameters will be provided directly to the gateway’s payment form model.
-`cancelUrl` | URL user should end up on if they choose to cancel payment.
+`cancelUrl` | A [hashed](/5.x/reference/twig/filters.md#hash) URL the customer is sent to if they cancel the payment, off-site.
+`number` | The order number payment should be applied to. When omitted, payment is applied to the current cart.
 `email` | Email address of the person responsible for payment, which must match the email address on the order. Required if the order being paid is not the active cart.
 `gatewayId` | The payment gateway ID to be used for payment.
-`number` | The order number payment should be applied to. When ommitted, payment is applied to the current cart.
 `paymentAmount` | Hashed payment amount, expressed in the cart’s `paymentCurrency`. Available only if [partial payments](../development/making-payments.md#checkout-with-partial-payment) are allowed.
 `paymentCurrency` | ISO code of a configured [payment currency](../system/currencies.md) to be used for the payment.
 `paymentSourceId` | The ID for a payment source that should be used for payment.

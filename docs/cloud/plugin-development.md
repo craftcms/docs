@@ -75,7 +75,7 @@ Asset bundles have some additional requirements:
 
 ### Sessions + CSRF
 
-To help support Cloud’s [static caching](caching.md) system, avoid interacting with the session unnecessarily, during _site_ requests.
+To help support Cloud’s [static caching](static-caching.md) system, avoid interacting with the session unnecessarily, during _site_ requests.
 
 Always use the [`csrfInput()` Twig function](/5.x/reference/twig/functions.html#csrfinput) when rendering front-end forms to maintain compatibility with Craft’s [`asyncCsrfInputs` config setting](/5.x/reference/config/general.html#asynccsrfinputs) (4.9.0+). _Building an input manually (or using `craft\web\Request::getCsrfToken()` directly) can leak one user’s CSRF tokens to another!_
 
@@ -87,7 +87,7 @@ In addition, these tips can help avoid hiccups when your plugins are deployed to
 
 - Implement batched jobs if your workload is [apt to exceed 15 minutes](quotas.md). It is often better to spawn many small jobs than a single long-running one.
 - Don’t set cookies unless absolutely necessary—like in response to a user action.
-  - If possible, register JavaScript to fetch CSRF tokens *asynchronously*. Using `{{ csrfInput() }}` in a template outside the control panel will immediately set a cookie and prevent [static caching](caching.md).
+  - If possible, register JavaScript to fetch CSRF tokens *asynchronously*. Using `{{ csrfInput() }}` in a template outside the control panel will immediately set a cookie and prevent [static caching](static-caching.md).
 
 ## Publishing Your Plugin
 

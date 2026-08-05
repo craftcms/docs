@@ -3,7 +3,7 @@ description: Store flexible, globally-aware location information.
 related:
   - uri: ../../system/elements.md
     label: Introduction to Elements
-  - uri: /commerce/4.x/addresses.md
+  - uri: /commerce/5.x/addresses.md
     label: Using addresses in Craft Commerce
   - uri: ../controller-actions.md
     label: Controller Actions Reference
@@ -36,17 +36,19 @@ All address elements share a single field layout, which is managed in the contro
 
 The address field layout has additional native (but optional) fields for a handful of useful attributes:
 
-- **Label** — An <Since ver="5.9.0" description="The label field on addresses can be made optional as of {product} {ver}">optional</Since> description of the address.
-- **Organization** — A text field for entering a business or entity name.
-- **Organization Tax ID** — Designed to hold an identifier for the legal entity represented by the address. Used by [Commerce](/commerce/5.x/) to aide in tax calculations.
-- **Full Name** — Associate the address with a name. As with [users](users.md), a single input is displayed, unless <config5:showFirstAndLastNameFields> is enabled.
-- **Latitude/Longitude** — A pair of inputs for latitude and longitude values. Craft does not use these, internally.
+- **Label** (`title`) — An <Since ver="5.9.0" description="The label field on addresses can be made optional as of {product} {ver}">optional</Since> description of the address.
+- **Organization** (`organization`) — A text field for entering a business or entity name.
+- **Organization Tax ID** (`organizationTaxId`) — Designed to hold an identifier for the legal entity represented by the address. Used by [Commerce](/commerce/5.x/) to aide in tax calculations.
+- **Full Name** (`fullName` or `firstName` and `lastName`) — Associate the address with a name. As with [users](users.md), a single input is displayed, unless <config5:showFirstAndLastNameFields> is enabled.
+- **Latitude/Longitude** (`latitude` and `longitude`) — A pair of inputs for latitude and longitude values. Craft does not use these, internally.
 
-Addresses—just like other element types—support [custom fields](../../system/fields.md) for anything else you might need to store.
+Just like other element types, addresses support [custom fields](../../system/fields.md) for anything else you might need to store.
 
 ::: tip
 For compatibility and localization, core address components (aside from the **Country Code**) can’t be separated from one another in the field layout.
 The relevant fields for the given country are rendered wherever the **Address** field layout element is placed.
+
+When building [front-end address forms](#managing-addresses), you are free to organize the inputs in whatever way is appropriate for your users.
 :::
 
 ### Config Options
@@ -275,8 +277,11 @@ You can also pass your own formatter to the `|address` filter. The addressing li
     addressService.getAddressFormatRepository(),
     addressService.getCountryRepository(),
     addressService.getSubdivisionRepository(),
-  ]) %}
+  ]
+) %}
+
 {{ addr|address({ origin_country: 'GB' }, labelFormatter) }}
+
 {# Output:
   1234 Balboa Towers Circle
   LOS ANGELES, CA 92662
@@ -398,21 +403,20 @@ The default formatter is used in the control panel as well as your templates, so
 
 ## Managing Addresses
 
-Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](../../development/forms.md#users-save-address).
+Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](../controller-actions.md#post-users-save-address).
 
-Craft doesn’t automatically give Addresses their own URLs, though—so it’s up to you to define a [routing scheme](../../system/routing.md#advanced-routing-with-url-rules) for them via `routes.php`. We’ll cover each of these three routes in the following sections:
+Craft doesn’t automatically give addresses their own URLs, so it’s up to you to define a [routing scheme](../../system/routing.md#advanced-routing-with-url-rules) for them via `routes.php`. We’ll cover each of these three routes in the following sections:
 
 ```php
-<?php
 return [
-  // Listing Addresses
-  'account' => ['template' => '_account/dashboard'],
+    // Listing Addresses
+    'account' => ['template' => '_account/dashboard'],
 
-  // New Addresses
-  'account/addresses/new' => ['template' => '_account/edit-address'],
+    // New Addresses
+    'account/addresses/new' => ['template' => '_account/edit-address'],
 
-  // Existing Addresses
-  'account/addresses/<addressUid:{uid}>' => ['template' => '_account/edit-address'],
+    // Existing Addresses
+    'account/addresses/<addressUid:{uid}>' => ['template' => '_account/edit-address'],
 ];
 ```
 

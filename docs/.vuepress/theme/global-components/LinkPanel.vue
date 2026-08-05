@@ -49,7 +49,7 @@
 .link-panel {
   @apply rounded border block w-full p-4 relative;
   @apply no-underline !important;
-  transition: all 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   .title {
     @apply leading-none text-lg font-medium mb-1;
@@ -80,7 +80,6 @@
 
   &:hover {
     box-shadow: 0 0 36px rgba(74, 124, 246, 0.1);
-    transform: translateY(-3px) translateZ(0);
   }
 
   &.has-icon {

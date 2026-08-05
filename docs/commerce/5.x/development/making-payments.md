@@ -2,7 +2,7 @@
 
 Commerce supports taking payments from the customer at checkout and by a store manager via the Craft control panel. Payments can be [required](#full-payment-at-checkout) for order completion, [deferred](#checkout-without-payment) until later, or made [in parts](#checkout-with-partial-payment), depending on your store’s [configuration](../configure.md) and [gateway](../system/gateways.md) support.
 
-Payments are always via a [payment form model](#payment-form-models), which is populated during a request to the `commerce/payments/pay` action.
+Payments are always made via a [payment form model](#payment-form-models), which is populated during a request to the `commerce/payments/pay` action.
 
 ## Choosing a Payment Method and Source
 
@@ -51,7 +51,7 @@ If you have a single gateway, you can send its ID along with the payment details
 ```
 
 ::: tip
-When allowing customers to select a gateway, ensure they have enough information to make a decisions. Choosing between “Stripe” and “Braintree” may not be clear—but “Credit Card”and “ACH transfer” clarify how you’re using each service.
+When allowing customers to select a gateway, ensure they have enough information to make a decisions. Choosing between “Stripe” and “Braintree” may not be clear—but “Credit Card” and “ACH transfer” clarify how you’re using each service.
 :::
 
 ### Saved Payment Sources

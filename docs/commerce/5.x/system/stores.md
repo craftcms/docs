@@ -101,10 +101,10 @@ Require Billing Address At Checkout
 :   Allow customers to check out without a billing address.
 
 Require Shipping Method Selection At Checkout
-:   Make a shipping method mandatory, even if items in the order don’t require shipping (or the shipping total would be zero). _If your shipping methods and rules are not configured carefully, this can result in some customers getting stuck at checkout._
+:   Make a shipping method mandatory, even if items in the order don’t require shipping (or the shipping total would be zero). _If your shipping methods and rules are not configured carefully, this can result in customers getting stuck at checkout._
 
 Use Billing Address For Tax
-:   By default, Commerce uses the shipping address for calculating tax (via the built-in tax engine, or a plugin). Enable this to use the billing address, instead.
+:   By default, Commerce uses the _shipping_ address for calculating tax (via the built-in tax engine, or a plugin). Enable this to use the _billing_ address, instead.
 
 Order Reference Number Format
 :   Each store can have its own reference format. If you use the same template between stores (or the template comes from an environment variable), make sure it contains at least one value that guarantees uniqueness across all stores. For example, `ACME-{{ seq("order-counter-#{order.storeId}", 8) }}-{{ now|date('Y') }}` _looks_ like it would be unique, but the first order in each store would result in the same reference: `ACME-00000001-2024`. Moving the `{storeId}` into the actual template (rather than the sequence key) can help avoid this.
@@ -126,4 +126,7 @@ A store’s location is strictly informational—the [inventory](inventory.md) s
 
 ## Markets
 
-Markets define which countries a store accepts orders from. You can whitelist countries here, or use the **Order Address Condition** section to configure advanced rules.
+Markets define which countries a store accepts orders from.
+You can whitelist countries here, or use the **Order Address Condition** section to configure advanced rules.
+
+Orders can only be placed when both the billing _and_ shipping addresses are within the selected markets (when provided).

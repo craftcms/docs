@@ -2,7 +2,7 @@
 
 Line item statuses are custom labels that can be applied to an order’s line items.
 
-Unlike the [order status](custom-order-statuses.md), a line item’s status is optional. They have no functional impact on the line item or its order; it simply provides a way to designate status for store managers. It could be used internally or to communicate stock status to the customer—an item being back-ordered, for example.
+Unlike the [order status](custom-order-statuses.md), a line item’s status is optional. They have no functional impact on the line item or its order; it simply provides a way to designate status for store managers. It could be used internally or to communicate stock issues to the customer—an item being back-ordered, for example.
 
 Add and manage line item statuses per-[store](stores.md) by navigating to <Journey path="Commerce, System Settings, Line Item Statuses" />. When choosing **New line item status** you’ll need to specify a *Name*, *Handle*, and optional *Color*.
 
@@ -23,3 +23,7 @@ You can access the status of a line item to a user via `item.lineItemStatus`:
   {# ... #}
 {% endfor %}
 ```
+
+## Extension
+
+Add a handler for the <commerce5:craft\commerce\services\LineItemStatuses::EVENT_DEFAULT_LINE_ITEM_STATUS> [event](../extend/events.md) to change the default status on a per-line item basis.

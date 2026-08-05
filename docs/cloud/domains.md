@@ -26,7 +26,7 @@ To serve traffic from your own domain, find the **Domains** panel in your Cloud 
 
 Provide the root domain you wish to add, and select an environment, if you want to tie it to one right away. You aren’t required to point the new root domain at Cloud, but any custom domains you do connect must go through a brief verification process before Cloud will respond to requests on it (or any subdomain thereof).
 
-Verifying a domain does _not_ automatically start [routing traffic](#route-traffic) to the selected environment. Conversely, you may elect to perform [real-time validation](users.md#real-time-validation) by immediately sending traffic to Cloud.
+Verifying a domain does _not_ automatically start [routing traffic](#route-traffic) to the selected environment. Conversely, you may elect to perform [real-time validation](cloudflare.md#real-time-validation) by immediately sending traffic to Cloud.
 
 ::: warning
 A `www` [subdomain](#subdomains) is not automatically created for you. You must add it explicitly, if you wish to use it in addition to the bare domain. See the [redirection](#redirection) section to learn about normalizing access via `www` or non-`www` URLs.
@@ -55,7 +55,7 @@ Heroku has a great [guide](https://devcenter.heroku.com/articles/custom-domains)
 If you are unfamiliar with DNS, consider starting with the [domain name glossary](https://devcenter.heroku.com/articles/custom-domains#domain-name-glossary) section, or flipping through Cloudflare’s [How DNS Works](https://www.cloudflare.com/learning/dns/what-is-dns/) series!
 :::
 
-To send traffic from a verified domain to your Cloud project, add the records below. Keep in mind that making changes to your DNS *can* result in downtime. Read more about how to [prepare for going live](checklist.md).
+To send traffic from a verified domain to your Cloud project, add the records below. Keep in mind that making changes to your DNS *can* result in downtime. Read more about how to [prepare for going live](launch-checklist.md).
 
 The preferred way of routing traffic to Cloud is via the pair of `A` records displayed in your domain’s **Route Traffic** table.
 You must add _both_ DNS records to ensure requests always reach our infrastructure, even if your prior configuration only had one.

@@ -15,17 +15,12 @@ This tab includes the following:
 - **Orders** – a searchable list of the customer’s orders.
 - **Active Carts** – a list of the customer’s _active_ carts, based on the [activeCartDuration](../configure.md#activecartduration) setting.
 - **Inactive Carts** – a list of the customer’s _inactive_ carts, based on the [activeCartDuration](../configure.md#activecartduration) setting.
-- **Subscriptions** – a list of the customer’s subscriptions.
+- **Subscriptions** – a list of the customer’s [subscriptions](subscriptions.md).
 
-The visibility of this tab is controlled by the [showCustomerInfoTab](../configure.md#showeditusercommercetab) setting.
-
-::: tip
-If you’d like to be able to see and manage customer addresses from the control panel, [include the addresses field](/5.x/reference/element-types/addresses.md#setup) in the user field layout.
-:::
 
 ## Customers and Users
 
-A customer with saved login information is considered a [credentialed](/5.x/reference/element-types/users.md#active-and-inactive-users) user. Conversely, customers who check out as guests are set up as inactive users.
+A customer with saved login information is considered a [credentialed](/5.x/reference/element-types/users.md#active-and-inactive-users) user. Conversely, customers who check out as guests are set up as _inactive_ users.
 
 ### User Checkout
 
@@ -33,14 +28,16 @@ A customer with saved login information is considered a [credentialed](/5.x/refe
 Prior to version 4.5, some customer registration features were only only available in Commerce Pro.
 :::
 
-Logged in customers are bound to their cart the moment it is created.
+Logged-in customers are bound to their cart the moment it is created.
 
 A guest can register for an account before or after checkout using a standard [Craft user registration form](kb:front-end-user-accounts#registration-form). This workflow may look a bit different depending on your configuration:
 
 Setting | Result
 ------- | ------
-<config4:useEmailAsUsername> | Only requires an email address to register; can be pre-filled if the customer already set an email on their cart (as this creates an inactive user, behind the scenes).
-<config4:deferPublicRegistrationPassword> | A password is set only after activating their account (typically only used in combination with [email verification](/5.x/system/user-management.md#public-registration)).
+<config5:useEmailAsUsername> | Only requires an email address to register; can be pre-filled if the customer already set an email on their cart (as this creates an inactive user, behind the scenes).
+<config5:deferPublicRegistrationPassword> | A password is set only after activating their account (typically only used in combination with [email verification](/5.x/system/user-management.md#public-registration)).
+
+<See path="../development/checkout.md" />
 
 ### Guest Checkout
 
@@ -59,7 +56,9 @@ If a customer chooses to register an account upon order completion, an activatio
   {{ csrfInput() }}
   {{ actionInput('commerce/cart/update-cart') }}
 
-  {{ input('checkbox', 'registerUserOnOrderComplete', 1, {checked: cart.registerUserOnOrderComplete}) }}
+  {{ input('checkbox', 'registerUserOnOrderComplete', 1, {
+    checked: cart.registerUserOnOrderComplete,
+  }) }}
 
   {# ... #}
 
@@ -67,4 +66,9 @@ If a customer chooses to register an account upon order completion, an activatio
 </form>
 ```
 
-When registering at checkout, the order’s billing and shipping [addresses](addresses.md) are automatically saved to the new accounts for future use
+When registering at checkout, their order’s billing and shipping addresses are automatically saved to their new accounts.
+Commerce attempts to set the user’s name based on the order’s billing address, falling back to the name on the shipping address.
+If neither address contained a name, it will be blank.
+
+New users will not have a username, so they must use their email address to [log in](/5.x/system/user-management.md#logging-in).
+Consider enabling <config5:useEmailAsUsername> and labeling your `loginName` fields appropriately.

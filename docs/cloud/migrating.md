@@ -84,7 +84,7 @@ When it comes time to launch, there are likely three steps you’ll need to take
 2. Import new content;
 3. Reapply migrations and project config;
 
-Read about [using custom domains with Craft Cloud](domains.md) to prepare for the required DNS changes, or review a more complete [launch checklist](checklist.md).
+Read about [using custom domains with Craft Cloud](domains.md) to prepare for the required DNS changes, or review a more complete [launch checklist](launch-checklist.md).
 
 The exact process will differ based on your project’s tolerance of downtime—but generally, it’s a good idea to put your existing site into [maintenance mode](/5.x/reference/cli.html#off), export and re-import the database (and upload new assets), then run a final deployment.
 
@@ -94,4 +94,4 @@ The AWS S3 CLI’s `sync` command is extremely useful for [uploading](assets.md)
 
 With your latest code and content on Cloud, [disable maintenance mode](/5.x/reference/cli.html#on) and [update your DNS](domains.md) to point your live domain at our infrastructure!
 
-More information about launching projects on Cloud is available in the [Going Live](checklist.md) article.
+More information about launching projects on Cloud is available in the [Going Live](launch-checklist.md) article.

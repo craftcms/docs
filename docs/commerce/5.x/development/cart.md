@@ -839,7 +839,7 @@ Like any other type of [element](/5.x/system/elements.md), orders can have custo
 Custom fields are perfect for storing information about an order that falls outside [line item options or notes](#line-item-options-and-notes).
 
 ::: tip
-Now that [Addresses](/5.x/reference/element-types/addresses.md#setup) are stored as elements, they support custom fields, too!
+Orders’ [addresses](address-management.md) are also elements, so they support custom fields, too!
 :::
 
 You can update custom fields on a cart by posting data to the [`commerce/cart/update-cart`](../reference/controller-actions.md#post-cart-update-cart) action under a `fields` key:
