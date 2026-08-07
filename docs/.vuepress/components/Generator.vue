@@ -120,33 +120,10 @@ export default {
         font-size: 0.8rem;
     }
 
-    .executable {
-        @apply opacity-50 transition-opacity duration-200;
-
-        .generator:hover & {
-            @apply opacity-100;
-        }
-    }
-
     .make {
         @apply text-red;
     }
 
-    .component {
-        @apply opacity-50 transition-opacity duration-200 delay-100;
-
-        .generator:hover & {
-            @apply opacity-100;
-        }
-    }
-
-    .options {
-        @apply opacity-50 transition-opacity duration-200 delay-200;
-
-        .generator:hover & {
-            @apply opacity-100;
-        }
-    }
     .copy {
         @apply absolute top-0 right-0 mt-4 mr-4 uppercase tracking-widest text-xs;
     }
