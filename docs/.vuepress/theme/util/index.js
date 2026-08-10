@@ -2,6 +2,7 @@ export const hashRE = /#.*$/;
 export const extRE = /\.(md|html)$/;
 export const endingSlashRE = /\/$/;
 export const outboundRE = /^[a-z]+:/i;
+import { applyTabindexIfOverflowing } from "./apply-tabindex-if-overflowing";
 
 export function normalize(path) {
   return decodeURI(path)
@@ -631,10 +632,10 @@ function getAnchorHash(path) {
  * allowing users to focus and scroll them using the keyboard.
  */
 export function makeOverflowingContainersFocusable() {
-  document.querySelectorAll('pre,.toggle-tip .wrapper,.viewport.limit-height').forEach(el => {
-    if (el.scrollWidth > el.clientWidth || el.scrollHeight > el.clientHeight) {
-      el.setAttribute('tabindex', '0');
-    }
+  const containers = document.querySelectorAll('pre,.toggle-tip .wrapper');
+
+  containers.forEach(el => {
+    applyTabindexIfOverflowing(el);
   });
 }
 
