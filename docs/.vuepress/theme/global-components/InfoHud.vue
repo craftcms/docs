@@ -67,7 +67,7 @@ export default {
 }
 
 .info-circle {
-  fill: currentColor;
+  fill: var(--ui-component-color);
   width: 18px;
   height: 18px;
   top: -1px;
