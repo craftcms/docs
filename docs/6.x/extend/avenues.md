@@ -83,13 +83,16 @@ We discuss this in greater detail in the [Models, Records, and Data](models.md) 
 
 Plugins have an entirely new, phased initialization mechanism that makes it much easier to reason about the availability of other systems and add features in a declarative way.
 
-As the application boots, Laravel instantiates each known service provider, including Craft and all plugins.
+As the application boots, Laravel instantiates each known service provider, including Craft itself.
 Those providers are then asked to [register](laravel:providers#the-register-method) any low-level behavior (like how classes are resolved through the container), and are later [booted](laravel:providers#the-boot-method).
 
-::: tip
-You’ll almost never need to implement the `register()` or `registerPlugin()` methods, and the kinds of things you can do in either are extremely limited.
+Plugins do not directly participate in the discovery process; rather, our own [`craftcms/plugin-installer` Composer plugin](https://github.com/craftcms/plugin-installer) caches packages with the `craftcms-plugin` type and checks whether they are installed and enabled before booting them.
+This way, they have the same ergonomics as a regular service provider, while remaining manageable via project config and respecting <config5:disabledPlugins>.
 
-As an example: it comes so early in the request lifecycle that the events system may not work reliably.
+::: tip
+You’ll almost never need to implement the `register()` method, as the kinds of things you can at this stage are are extremely limited.
+
+As an example: registration comes so early in the request lifecycle that the events system may not work reliably.
 The app is still waiting to be told what class is responsible for dispatching events… and another service provider may re-bind it before an event triggers!
 :::
 
@@ -111,7 +114,7 @@ app()->booted($callback);
 ```
 
 ::: tip
-This hook replaces the legacy `EVENT_AFTER_LOAD_PLUGINS` event.
+This replaces the legacy `Craft::$app->onInit()` hook, and the `EVENT_INIT` and `EVENT_AFTER_LOAD_PLUGINS` events.
 :::
 
 ### Plugin Traits
@@ -155,15 +158,12 @@ class InspirationPlugin extends Plugin
 }
 ```
 
-A plugin’s traits are all initialized before finally calling the `bootPlugin()` method.
+A plugin’s traits are all initialized before Craft finally calls its `boot()` method.
 
 ::: danger
-**Do not** override your plugin’s `register()` or `boot()` methods.
-All your initialization logic should be in the `bootPlugin()` method (or `registerPlugin()` in some very rare circumstances).
-
-As service providers, every plugin’s `register()` and `registerPlugin()` methods are called as they’re discovered, regardless of whether it’s installed or enabled.
-The same is true for `boot()`, but _not_ `bootPlugin()` and traits’ boot methods.
+Like service providers, your initialization logic should be in the `boot()` method (or `register()` in some very rare circumstances).
 :::
+
 
 ## Termination
 
@@ -173,7 +173,7 @@ Your plugin can register cleanup tasks at the end of the app’s lifecycle:
 app()->terminating($callback);
 ```
 
-Work can also be [deferred](laravel:helpers#deferred-functions) only until a response has been sent (roughly equivalent to Yii’s `EVENT_AFTER_REQUEST` event):
+Work can also be [deferred](laravel:helpers#deferred-functions) until a response has been sent (roughly equivalent to Yii’s `EVENT_AFTER_REQUEST` event):
 
 ```php
 defer(function () {

@@ -59,7 +59,7 @@ public array $commands = [
 
 ## Command Closure
 
-You can also create simple commands directly in your plugin’s `bootPlugin()` method, using a [laravel:artisan#closure-commands]:
+You can also create simple commands directly in your plugin’s `boot()` method, using a [laravel:artisan#closure-commands]:
 
 ```php
 Artisan::command('report:generate {templateId}', function (Manager $manager, int $templateId) {

@@ -85,9 +85,9 @@ use MyVendor\MyPlugin\Filesystems\Dropbox
 
 // ...
 
-public function bootPlugin(): void
+public function boot(): void
 {
-    // Closures must be bound in your plugin’s bootPlugin() method, as PHP doesn’t support them as static class properties!
+    // Closures must be bound in your plugin’s boot() method, as PHP doesn’t support them as static class properties!
     Event::listen(function(RegisterFilesystemTypes $event): void {
         $event->types->push(Dropbox::class)
     });
@@ -106,7 +106,7 @@ As you update your handlers, enforce this by giving the return value a `void` ty
 ### Subscribers
 
 [Subscribers](laravel:events#writing-event-subscribers) bundle multiple handlers into a class.
-The organization is entirely up to you, but you must register your plugin’s subscribers in `bootPlugin()`:
+The organization is entirely up to you, but you must register your plugin’s subscribers in `boot()`:
 
 ```php
 Event::subscribe(CustomerRetentionSubscriber::class);

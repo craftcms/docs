@@ -121,7 +121,7 @@ These replace Craft’s <craft5:craft\db\Migration::EVENT_AFTER_UP> and <craft5:
 If your plugin has optional migrations (like unique database tables for logs from each of a large number of supported third-party integrations), you can offer them to the application as a [publishable migration](laravel:packages#migrations):
 
 ```php
-public function bootPlugin(): void
+public function boot(): void
 {
     $this->publishesMigrations([
         __DIR__.'/../database/publishable-migrations' => database_path('migrations'),
@@ -132,7 +132,7 @@ public function bootPlugin(): void
 ::: danger
 Don’t publish all of your plugin’s regular migrations!
 Craft can discover and track those, automatically.
-If they get published into the application’s migrations, they could be run again.
+If they get published into the application’s migrations, they may end up running twice.
 :::
 
 Some downstream Laravel packages may already do this—for example, a Craft plugin that wrapped [Cashier](laravel:billing) would _not_ need to publish or replicate the migrations that are already provided by the package.

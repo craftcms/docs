@@ -83,18 +83,16 @@ Plugins can register [middleware](http.md#middleware) that filters HTML output, 
 Your plugin gets its own _template root_ for the control panel Twig environment.
 By default, this is `resources/views/` directory, but the `CraftCms\Cms\Plugin\Concerns\HasViews` concern will fall back to `resources/templates/`, or a top-level `templates/` directory, for compatibility.
 
-To register a _site_ template root, listen to the corresponding event:
+To register a _site_ template root, add the mapping to your plugin’s `$siteTemplateRoots` property…
 
 ```php
 use CraftCms\Cms\View\Events\SiteTemplateRootsResolving;
 
-public function bootPlugin(): void
-{
-    Event::listen(function (SiteTemplateRootsResolving $event) {
-        $handle = self::getInstance()->handle;
+public array $siteTemplateRoots = [
+    'theme/light' => __DIR__.'/resources',
+];
+```
 
-        $event->roots[$handle] = $this->getBasePath().'/site-templates';
-    });
 }
 ```
 
@@ -111,7 +109,7 @@ However, because Blade is essentially a normal PHP environment, you can reach di
 
 ## Extensions
 
-Register a [Twig extension](https://twig.symfony.com/doc/3.x/advanced.html#creating-an-extension) from your plugin’s `bootPlugin()` method:
+Register a [Twig extension](https://twig.symfony.com/doc/3.x/advanced.html#creating-an-extension) from your plugin’s `boot()` method:
 
 ```php
 $extension = new MyTwigExtension;
@@ -174,7 +172,7 @@ You can inject global variables much more easily in Craft 6.x, using the `CraftC
 use MyOrg\Activity\Reporting\Manager;
 use CraftCms\Cms\View\Events\TemplateGlobalsResolving;
 
-public function bootPlugin(): void
+public function boot(): void
 {
     Event::listen(function (TemplateGlobalsResolving::class $event) {
         $event->globals['reporting'] = app(Manager::class);

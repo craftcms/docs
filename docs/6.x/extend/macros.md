@@ -2,12 +2,12 @@
 
 There is no direct equivalent to Yii’s [behavior](guide:behaviors) system, but classes that use `Illuminate\Support\Traits\Macroable` can be extended at runtime using [macros](laravel:macros).
 Anything that extends our base component class (`CraftCms\Cms\Component\Component`) is “macroable.”
-Define macros from your plugin’s `bootPlugin()` method:
+Define macros from your plugin’s `boot()` method:
 
 ```php
 use CraftCms\Cms\Site\Data\Site;
 
-public function bootPlugin()
+public function boot()
 {
     Site::macro('isB2b', function() {
         return str_contains($this->handle, 'biz');

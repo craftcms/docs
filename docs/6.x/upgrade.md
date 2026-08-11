@@ -128,7 +128,7 @@ The rest of the upgrade can be tackled at your leisure, but you should review th
 During the upgrade, we removed the `bootstrap.php` file that has come with new projects [since Craft 3.7](https://github.com/craftcms/craft/releases/tag/1.1.5).
 If you had any customizations to Craft’s initialization process (like how environment variables are loaded), you may need to find equivalent features in Laravel.
 
-Many of the [bootstrap variables](https://craftcms.com/docs/5.x/reference/config/bootstrap.html) you would define here have been removed and will have no effect.
+Many of the [bootstrap variables](/5.x/reference/config/bootstrap.md) you would define here have been removed and will have no effect.
 We strongly recommend using the [new default Craft project structure](https://github.com/craftcms/craft/tree/6.x).
 
 If you used the upgrade tool, it removed `vlucas/phpdotenv` from your `composer.json`, but it will still be installed as a transitive dependency of Laravel.
