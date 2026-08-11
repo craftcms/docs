@@ -47,7 +47,7 @@ export default {
 }
 
 .info-hud .v-popover {
-  color: #b8c2cc;
+  color: var(--ui-component-color);
   display: inline-block;
   line-height: 0;
 
@@ -67,7 +67,7 @@ export default {
 }
 
 .info-circle {
-  fill: var(--ui-component-color);
+  fill: currentColor;
   width: 18px;
   height: 18px;
   top: -1px;
