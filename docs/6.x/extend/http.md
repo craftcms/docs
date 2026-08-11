@@ -252,7 +252,7 @@ In reality, it can be exposed in a completely safe way with the appropriate midd
 Your plugin can even make these hardening measures configurable:
 
 ```php
-public function bootPlugin()
+public function boot()
 {
     RateLimiter::for('activity', function (Request $request) {
         $limit = $this->getSettings()->maxEventsPerMinute;

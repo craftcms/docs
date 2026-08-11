@@ -46,6 +46,7 @@ module.exports = {
             "extend/approach",
             "extend/local-dev",
             "extend/structure",
+            "extend/registries",
           ],
         },
         {

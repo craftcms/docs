@@ -119,8 +119,8 @@ This replaces the legacy `Craft::$app->onInit()` hook, and the `EVENT_INIT` and 
 
 ### Plugin Traits
 
-A handful of built-in *concerns* handle this bootstrapping process for plugins, providing a declarative way to register many common for define any of their corresponding properties and methods.
-Instead of setting up an event listener to, say, register a field type, 
+A handful of built-in *concerns* handle this bootstrapping process for plugins, providing a declarative way to [register](registries.md) many common system component types.
+To take advantage of this automatic registration, use a trait’s corresponding properties and methods:
 
 - `HasCommands` → `$commands` — List of [command](commands.md) classes exposed to the Artisan CLI.
 - `HasConfig` → `$config` (Boolean) — Set to `false` to prevent [config](config.md) file publishing and discovery.
@@ -139,7 +139,7 @@ Instead of setting up an event listener to, say, register a field type,
 - `HasWidgets` → `$widgets` (Array) — Register widgets for the control panel dashboard.
 
 ::: tip
-The base plugin class includes all of these traits, by default—you don’t need to opt-in or define properties your plugin doesn’t use.
+The base plugin class includes all of these traits, by default; you don’t need to `use` them or define properties your plugin doesn’t use.
 :::
 
 As an example, if your plugin provided a new type of dashboard widget, you would add a `$widgets` property to your main plugin class:
@@ -164,6 +164,26 @@ A plugin’s traits are all initialized before Craft finally calls its `boot()` 
 Like service providers, your initialization logic should be in the `boot()` method (or `register()` in some very rare circumstances).
 :::
 
+### Registration
+
+Many system components are managed via [registries](registries.md).
+When the [traits](#plugin-traits) above are initialized, the declared types are pushed into the corresponding registry.
+You can also manipulate these registries, directly, in your `boot()` method:
+
+```php
+use CraftCms\Cms\Auth\AuthMethodCatalog;
+
+public function boot(AuthMethodCatalog $authMethods): void
+{
+    // Add a plugin-provided method (perhaps conditionally):
+    $authMethods->register(Auth\Trivia::class);
+
+    // Remove a built-in method:
+    $authMethods->remove(\CraftCms\Cms\Auth\Methods\RecoveryCodes::class);
+}
+```
+
+<See path="registries.md" />
 
 ## Termination
 

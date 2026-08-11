@@ -1,27 +1,36 @@
+---
+description: Craft’s email capabilities sit on top of Laravel’s highly flexible mailer.
+---
+
 # Mail
 
 Mailer adapters are no longer necessary, as drivers are [configured directly via Laravel](laravel:mail), in `config/mailer.php`.
+
+<!-- more -->
 
 ## System Messages
 
 Craft’s **System Messages** utility is still used to manage built-in and plugin-provided email messages.
 
-Register a system message with the `RegisterSystemMessages` event, from your `bootPlugin()` method:
+Your plugin can [register](registries.md) system messages by implementing the `getSystemMessages()` method:
 
 ```php
-use Illuminate\Support\Facades\Event;
 use CraftCms\Cms\SystemMessage\Data\SystemMessage;
-use CraftCms\Cms\SystemMessage\Events\RegisterSystemMessages;
 
-Event::listen(function(RegisterSystemMessages $event) {
-    $event->messages->push(new SystemMessage(
-        key: 'report_finished',
-        heading: 'When a report is finished generating',
-        subject: 'Here is your {report.template.name} report',
-        body: "Hi, {report.creator.fullName}!\n\nA {report.template.name} just finished running. To download it, ...",
-    ));
-});
+public function getSystemMessages()
+{
+    return [
+        'report_finished' => fn () => new SystemMessage(
+            key: 'report_finished',
+            heading: 'When a report is finished generating',
+            subject: 'Here is your {report.template.name} report',
+            body: "Hi, {report.creator.fullName}!\n\nA {report.template.name} just finished running. To download it, ...",
+        ),
+    ];
+}
 ```
+
+This method is invoked as your plugin is booted, so each value in the returned array must be a [closure](registries.md#lazy-resolution), under the same key the `SystemMessage` will produce, later.
 
 To send a system message, pass the “mailable” to Laravel’s `Mail` facade:
 

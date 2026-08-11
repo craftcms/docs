@@ -93,6 +93,19 @@ public array $siteTemplateRoots = [
 ];
 ```
 
+…or use the [registry](registries.md#template-roots), directly:
+
+```php
+use CraftCms\Cms\View\TemplateMode;
+use CraftCms\Cms\View\TemplateRoots;
+
+public function boot(TemplateRoots $roots): void
+{
+    $roots->register(
+        TemplateMode::Cp,
+        'my-plugin/themes/light',
+        $this->getResourcesPath().'/themes/light',
+    );
 }
 ```
 
