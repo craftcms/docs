@@ -15,6 +15,7 @@
         </div>
         <div
           class="viewport"
+          ref="viewport"
           :class="{ 'limit-height': maxHeight }"
           :style="{ maxHeight: maxHeight ? `${maxHeight}px` : null }">
           <div class="image">
@@ -150,6 +151,7 @@
 </style>
 
 <script>
+import { applyTabindexIfOverflowing } from '../util/apply-tabindex-if-overflowing';
 import { v4 as uuidv4 } from 'uuid';
 
 export default {
@@ -213,6 +215,17 @@ export default {
         .replace("http://", "")
         .replace(/\/$/, "");
     }
-  }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      applyTabindexIfOverflowing(this.$refs.viewport);
+
+      const img = this.$refs.viewport.querySelector('img');
+      if (img && !img.complete) {
+        img.addEventListener('load', () =>
+        applyTabindexIfOverflowing(this.$refs.viewport), { once: true });
+      }
+    });
+  },
 };
 </script>

@@ -22,7 +22,7 @@ module.exports = {
           "default": "#2963F5",
           "darker": "#1554F4",
         },
-        red: "#da5a47",
+        red: "var(--color-red)",
         cinder: "#131119",
         green: "#27AB83",
         "light-slate": "#66778A",

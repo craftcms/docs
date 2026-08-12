@@ -47,7 +47,7 @@ export default {
 }
 
 .info-hud .v-popover {
-  color: #b8c2cc;
+  color: var(--ui-component-color);
   display: inline-block;
   line-height: 0;
 
