@@ -46,7 +46,8 @@
 }
 
 .glossary-term-link {
-    text-decoration: none !important;
+    text-decoration: var(--link-underline-color) dotted underline !important;
+    font-weight: 500;
 }
 
 .glossary-term-heading {
