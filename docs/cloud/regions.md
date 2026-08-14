@@ -1,6 +1,7 @@
 # Regions
 
-Craft Cloud is currently available in {{ $activeSetVars.regionSupport }}. You select a region when creating a new project.
+Craft Cloud is currently available in {{ $activeSetVars.regionSupport }}.
+You select a region when creating a new project.
 
 <!-- more -->
 
@@ -27,6 +28,8 @@ Assets uploaded to Cloud filesystems cannot be kept in a single region, by virtu
 
 ## Timezones
 
-Craft Cloud’s entire infrastructure uses UTC clocks. Select the appropriate timezone (in <Journey path="Settings, General" />) when setting up your Craft installation to display date information correctly for your region. Dates in the database are stored in the system’s timezone.
+Craft Cloud’s entire infrastructure uses UTC clocks.
+Select the appropriate timezone (in <Journey path="Settings, General" />) when setting up your Craft installation to display date information correctly for your region.
+Dates in the database are stored in the system’s timezone.
 
 [Backups](./backups.md) are captured nightly, respective of your chosen region.
