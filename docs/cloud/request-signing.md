@@ -68,7 +68,7 @@ const signatureHeaders = signatureHeadersSync(
   }
 );
 
-await fetch(url, {
+const response = await fetch(url, {
   method,
   headers: {
     'Content-Type': 'application/json',
@@ -77,6 +77,10 @@ await fetch(url, {
   },
   body,
 });
+
+if (!response.ok) {
+  throw new Error(`Craft request failed: ${response.status}`);
+}
 ```
 
 ::: tip

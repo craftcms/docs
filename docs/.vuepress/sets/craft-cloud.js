@@ -52,6 +52,7 @@ module.exports = {
         children: [
           "compatibility",
           "static-caching",
+          "headless",
           "esi",
           "request-signing",
           "quotas",
