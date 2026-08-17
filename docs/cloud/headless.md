@@ -38,18 +38,18 @@ Install Ky and the same signature library used in the general
 npm install ky http-message-sig
 ```
 
-Configure `CRAFT_URL`, `CRAFT_GRAPHQL_TOKEN`, and
-`CRAFT_CLOUD_SIGNING_KEY` as server-side environment variables, then create a
-GraphQL helper:
+Create a GraphQL helper:
 
 ```js
 import crypto from 'node:crypto';
 import { signatureHeadersSync } from 'http-message-sig';
 import ky from 'ky';
 
+const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN, CRAFT_CLOUD_SIGNING_KEY } = process.env;
+
 export async function queryCraft(query, variables = {}) {
   const method = 'POST';
-  const url = `${process.env.CRAFT_URL}/api`;
+  const url = `${CRAFT_URL}/api`;
   const body = JSON.stringify({ query, variables });
   const created = new Date();
 
@@ -62,7 +62,7 @@ export async function queryCraft(query, variables = {}) {
         alg: 'hmac-sha256',
         signSync(data) {
           return crypto
-            .createHmac('sha256', process.env.CRAFT_CLOUD_SIGNING_KEY)
+            .createHmac('sha256', CRAFT_CLOUD_SIGNING_KEY)
             .update(data)
             .digest();
         },
@@ -78,7 +78,7 @@ export async function queryCraft(query, variables = {}) {
       body,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.CRAFT_GRAPHQL_TOKEN}`,
+        'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
         ...signatureHeaders,
       },
       retry: {
