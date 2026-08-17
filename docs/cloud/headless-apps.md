@@ -34,27 +34,28 @@ provide this retry policy. If you prefer not to add a dependency, use a small
 wrapper around the native Fetch API:
 
 ```js
-const RETRYABLE_STATUSES = new Set([429, 503]);
 const TOTAL_TIMEOUT = 30_000;
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 function getRetryDelay(response, attempt) {
-  const backoff = 1000 * 2 ** attempt * (0.5 + Math.random() / 2);
   const retryAfter = response.headers.get('Retry-After');
 
-  if (retryAfter) {
-    const seconds = Number(retryAfter);
+  if (!retryAfter) {
+    return null;
+  }
 
-    if (Number.isFinite(seconds)) {
-      return Math.max(backoff, seconds * 1000);
-    }
+  const backoff = 1000 * 2 ** attempt * (0.5 + Math.random() / 2);
+  const seconds = Number(retryAfter);
 
-    const date = Date.parse(retryAfter);
+  if (Number.isFinite(seconds)) {
+    return Math.max(backoff, seconds * 1000);
+  }
 
-    if (!Number.isNaN(date)) {
-      return Math.max(backoff, date - Date.now());
-    }
+  const date = Date.parse(retryAfter);
+
+  if (!Number.isNaN(date)) {
+    return Math.max(backoff, date - Date.now());
   }
 
   return backoff;
@@ -81,15 +82,13 @@ export async function fetchWithRetry(input, init = {}) {
     }
 
     const error = new Error(`Craft request failed: ${response.status}`);
-    const canRetry = RETRYABLE_STATUSES.has(response.status);
+    const delay = getRetryDelay(response, attempt);
 
     await response.body?.cancel();
 
-    if (!canRetry) {
+    if (delay === null) {
       throw error;
     }
-
-    const delay = getRetryDelay(response, attempt);
 
     if (Date.now() + delay >= deadline) {
       throw error;
@@ -100,9 +99,8 @@ export async function fetchWithRetry(input, init = {}) {
 }
 ```
 
-`fetchWithRetry()` retries only `429` and `503` responses that fit within a
-30-second deadline. Retry `POST` requests only when they contain read-only
-GraphQL queries.
+`fetchWithRetry()` retries responses with a `Retry-After` header that fit within
+a 30-second deadline.
 
 ## Request Signatures
 
