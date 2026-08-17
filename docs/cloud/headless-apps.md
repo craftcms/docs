@@ -270,6 +270,4 @@ therefore leaves the current production app in place.
 
 For on-demand rendering, Astro 7 provides a
 [route cache API](https://docs.astro.build/en/guides/caching/) with
-`stale-while-revalidate` semantics. Its Netlify and Vercel CDN cache providers
-are currently experimental, so use the static build approach unless runtime
-revalidation is required.
+`stale-while-revalidate` semantics.
