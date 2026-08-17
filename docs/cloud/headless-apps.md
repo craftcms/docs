@@ -34,6 +34,7 @@ provide this retry policy. If you prefer not to add a dependency, use a small
 wrapper around the native Fetch API:
 
 ```js
+// Bound all attempts and delays.
 const TOTAL_TIMEOUT = 30_000;
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
@@ -41,6 +42,7 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 function getRetryDelay(response, attempt) {
   const retryAfter = response.headers.get('Retry-After');
 
+  // Retry only responses that include Retry-After.
   if (!retryAfter) {
     return null;
   }
@@ -98,9 +100,6 @@ export async function fetchWithRetry(input, init = {}) {
   }
 }
 ```
-
-`fetchWithRetry()` retries responses with a `Retry-After` header that fit within
-a 30-second deadline.
 
 ## Request Signatures
 
