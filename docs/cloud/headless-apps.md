@@ -162,7 +162,7 @@ Use narrow tags such as `craft:blog` or `craft:products`, and avoid bursts of
 app-wide invalidations. When revalidation throws, Next.js continues serving
 the last successful result and tries again on a later request.
 
-Vercel provides this stale-while-revalidate behavior through
+Vercel provides `stale-while-revalidate` behavior through
 [ISR](https://vercel.com/docs/incremental-static-regeneration). Netlify’s
 [current Next.js adapter](https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/)
 also supports the Full Route and Data caches, including tag- and path-based
