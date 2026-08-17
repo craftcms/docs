@@ -2,7 +2,7 @@
 description: Reliably connect a headless app to a Craft Cloud environment.
 ---
 
-# Headless
+# Headless Apps
 
 Craft Cloud uses advanced bot detection and makes a best effort to prioritize
 human traffic. This creates a challenge for headless apps: all content
