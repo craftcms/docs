@@ -4,17 +4,7 @@ description: Safely collect useful details when diagnosing failed requests to Cr
 
 # Diagnostics
 
-When a request to your Craft Cloud environment fails, log the following details
-before handling the error:
-
-- Timestamp and timezone
-- HTTP method, hostname, and path
-- HTTP status code
-- `cf-ray`, if present
-- `x-gateway-cf-ray`, if present
-- `x-gateway-flow`, if present
-- `x-gateway-http-signature`, if present
-- `Retry-After`, if present
+## Response Headers
 
 The `x-gateway-flow` header identifies how Craft Cloud produced the response.
 For example, `/origin/fetch` means the gateway fetched the environment’s
