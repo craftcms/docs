@@ -1,11 +1,11 @@
 ---
-description: Reliably connect a headless site to a Craft Cloud environment.
+description: Reliably connect a headless app to a Craft Cloud environment.
 ---
 
 # Headless
 
 Craft Cloud uses advanced bot detection and makes a best effort to prioritize
-human traffic. This creates a challenge for headless sites: all content
+human traffic. This creates a challenge for headless apps: all content
 retrieval is automated and often arrives in concentrated bursts during static
 builds and background revalidation.
 
@@ -164,7 +164,7 @@ The 30-second total timeout keeps all attempts and delays within the
 signature’s 60-second lifetime.
 
 Use narrow tags such as `craft:blog` or `craft:products`, and avoid bursts of
-site-wide invalidations. When revalidation throws, Next.js continues serving
+app-wide invalidations. When revalidation throws, Next.js continues serving
 the last successful result and tries again on a later request.
 
 Vercel provides this stale-while-revalidate behavior through
@@ -271,7 +271,7 @@ const data = result.data;
 
 Netlify uses [atomic deploys](https://docs.netlify.com/deploy/deploy-overview/),
 and Vercel promotes successful deployments to production. A failed build
-therefore leaves the current production site in place.
+therefore leaves the current production app in place.
 
 For on-demand rendering, Astro 7 provides a
 [route cache API](https://docs.astro.build/en/guides/caching/) with

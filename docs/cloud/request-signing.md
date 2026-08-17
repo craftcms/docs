@@ -6,7 +6,7 @@ description: Sign trusted programmatic requests to avoid bot rate limiting.
 
 Request signing allows trusted systems to make programmatic requests to Craft Cloud without being treated like unsanctioned bot traffic.
 
-This is useful for automated systems like static site builds or CI/CD pipelines, which will often be identified (correctly!) as “bots” and be rate-limited more aggressively than browsers.
+This is useful for automated systems like static app builds or CI/CD pipelines, which will often be identified (correctly!) as “bots” and be rate-limited more aggressively than browsers.
 
 Each environment’s `$CRAFT_CLOUD_SIGNING_KEY` [system variable](environments.md#variables) is used as a shared secret when generating and validating signed requests.
 
@@ -15,7 +15,7 @@ For more details on RFC 9421 HTTP Message Signatures, see [httpsig.org](https://
 :::
 
 ::: tip
-If you are building a headless site, also follow the [Headless guide](headless.md)
+If you are building a headless app, also follow the [Headless Apps guide](headless-apps.md)
 for required retry and caching behavior.
 :::
 
