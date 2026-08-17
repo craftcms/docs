@@ -24,7 +24,7 @@ Two components are critical for a successful headless setup on Craft Cloud:
     with exponential backoff and jitter.
   - Only retry `POST` requests that contain read-only GraphQL queries—never
     mutations.
-  - Throw after retries are exhausted so stale-while-revalidate caching can
+  - Throw after retries are exhausted so `stale-while-revalidate` caching can
     preserve the last successful result.
 
 ## Automated Retries
@@ -209,7 +209,7 @@ export default defineEventHandler(async () => {
 });
 ```
 
-Apply stale-while-revalidate caching with a route rule, then call the route
+Apply `stale-while-revalidate` caching with a route rule, then call the route
 from your components with `useFetch('/api/blog')`:
 
 ```js
@@ -270,6 +270,6 @@ therefore leaves the current production app in place.
 
 For on-demand rendering, Astro 7 provides a
 [route cache API](https://docs.astro.build/en/guides/caching/) with
-stale-while-revalidate semantics. Its Netlify and Vercel CDN cache providers
+`stale-while-revalidate` semantics. Its Netlify and Vercel CDN cache providers
 are currently experimental, so use the static build approach unless runtime
 revalidation is required.
