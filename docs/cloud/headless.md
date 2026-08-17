@@ -119,8 +119,7 @@ updated in bulk.
 When a request fails, inspect its status and these response headers in your
 front-end deployment logs:
 
-- `x-gateway-http-signature` contains request-signature diagnostics;
-- `x-gateway-rate-limit` identifies applicable gateway rate limiting; and
+- `x-gateway-http-signature` contains request-signature diagnostics; and
 - `Retry-After` tells the caller how long to wait before retrying a `429` or
   `503` response.
 
