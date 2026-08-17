@@ -116,7 +116,9 @@ framework-specific request options.
 [Next.js extends `fetch()`](https://nextjs.org/docs/app/api-reference/functions/fetch)
 with cache and revalidation options. This example uses
 [Ky](https://github.com/sindresorhus/ky), which passes those options through to
-the underlying Fetch implementation:
+the underlying Fetch implementation. Use Next.js 15.5.21 or later, or 16.2.11
+or later, to avoid a [cache-confusion vulnerability](https://github.com/vercel/next.js/security/advisories/GHSA-68g3-v927-f742)
+affecting requests with bodies:
 
 ```js
 import ky from 'ky';
