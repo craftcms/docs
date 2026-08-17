@@ -30,10 +30,6 @@ A signed request is not consumed (like a token URL is, in Craft), and they are n
 
 This example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig) for convenience, but the package is not required. You may use any RFC 9421-compatible implementation.
 
-```bash
-npm install http-message-sig
-```
-
 Create a reusable `request-signatures.js` helper:
 
 ```js
@@ -42,11 +38,14 @@ import { signatureHeadersSync } from 'http-message-sig';
 
 const { CRAFT_CLOUD_SIGNING_KEY } = process.env;
 
-export function getSignatureHeaders(method, url) {
+export function getSignatureHeaders(
+  request,
+  components = ['@method', '@target-uri']
+) {
   const created = new Date();
 
   return signatureHeadersSync(
-    { method, url },
+    request,
     {
       key: 'sig',
       signer: {
@@ -59,7 +58,7 @@ export function getSignatureHeaders(method, url) {
             .digest();
         },
       },
-      components: ['@method', '@target-uri'],
+      components,
       created,
 
       // Optional 60-second expiry. The maximum is five minutes.
@@ -69,25 +68,32 @@ export function getSignatureHeaders(method, url) {
 }
 ```
 
+Pass additional [covered components](https://www.rfc-editor.org/rfc/rfc9421.html#name-http-message-components), such as `content-type`, in the second argument when those values must also be signed.
+
 Import the helper when sending a signed request:
 
 ```js
 import { getSignatureHeaders } from './request-signatures.js';
 
-const method = 'POST';
-const url = 'https://my-env.some-domain.com/api';
+const request = {
+  method: 'POST',
+  url: 'https://my-env.some-domain.com/api',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer my-secret-gql-schema-token',
+  },
+};
 
 const body = JSON.stringify({
   query: `{ entries(section: "blog") { title url } }`,
 });
 
-const signatureHeaders = getSignatureHeaders(method, url);
+const signatureHeaders = getSignatureHeaders(request);
 
-const response = await fetch(url, {
-  method,
+const response = await fetch(request.url, {
+  method: request.method,
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer my-secret-gql-schema-token',
+    ...request.headers,
     ...signatureHeaders,
   },
   body,
@@ -100,7 +106,7 @@ if (!response.ok) {
 
 ::: tip
 Requests signed using the `@target-uri` [component](https://www.rfc-editor.org/rfc/rfc9421.html#name-derived-components) are only valid when sent to a URL that matches _exactly_, including the scheme, hostname, path, and query string.
-The example above satisfies this by using the same `url` variable for the signed request and the `fetch()` call.
+The example above satisfies this by using the same `request.url` value for signing and the `fetch()` call.
 :::
 
 ### From Grafana Cloud k6

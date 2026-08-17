@@ -116,7 +116,7 @@ framework-specific request options.
 [Next.js extends `fetch()`](https://nextjs.org/docs/app/api-reference/functions/fetch)
 with cache and revalidation options. This example uses
 [Ky](https://github.com/sindresorhus/ky), which passes those options through to
-the underlying Fetch implementation. Install it with `npm install ky`:
+the underlying Fetch implementation:
 
 ```js
 import ky from 'ky';
@@ -127,13 +127,16 @@ const method = 'POST';
 const url = `${CRAFT_URL}/api`;
 const query = `{ entries(section: "blog") { title url } }`;
 const body = JSON.stringify({ query });
-const signatureHeaders = getSignatureHeaders(method, url);
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+};
+const signatureHeaders = getSignatureHeaders({ method, url, headers });
 
 const result = await ky.post(url, {
   body,
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+    ...headers,
     ...signatureHeaders,
   },
   retry: {
@@ -186,15 +189,18 @@ const method = 'POST';
 const url = `${CRAFT_URL}/api`;
 const query = `{ entries(section: "blog") { title url } }`;
 const body = JSON.stringify({ query });
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+};
 
 export default defineEventHandler(async () => {
-  const signatureHeaders = getSignatureHeaders(method, url);
+  const signatureHeaders = getSignatureHeaders({ method, url, headers });
   const response = await fetchWithRetry(url, {
     method,
     body,
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+      ...headers,
       ...signatureHeaders,
     },
   });
@@ -240,13 +246,16 @@ const method = 'POST';
 const url = `${CRAFT_URL}/api`;
 const query = `{ entries(section: "blog") { title url } }`;
 const body = JSON.stringify({ query });
-const signatureHeaders = getSignatureHeaders(method, url);
+const headers = {
+  'Content-Type': 'application/json',
+  'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+};
+const signatureHeaders = getSignatureHeaders({ method, url, headers });
 const response = await fetchWithRetry(url, {
   method,
   body,
   headers: {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+    ...headers,
     ...signatureHeaders,
   },
 });
