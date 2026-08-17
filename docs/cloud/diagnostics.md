@@ -16,13 +16,19 @@ validated [request signing](request-signing.md). A value of `verified` means
 validation succeeded; `unverified` means signing was detected but validation
 failed.
 
-The `cf-ray` and `x-gateway-cf-ray` headers identify the request at separate
-Cloudflare layers. Log both when they are present so Craft support can
-correlate the request.
+The `cf-ray` header identifies the request in Cloudflare, while
+`cf-cache-status` describes how Cloudflare handled it in the cache. See
+[Troubleshooting Static Caching](static-caching.md#troubleshooting) for common
+cache statuses.
 
-The `Retry-After` header indicates how long the client should wait before
-retrying. Preserve the returned value in logs and honor it when scheduling a
-retry.
+### Cloudflare O2O
+
+When [Cloudflare O2O](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)
+routes a request through both a customer zone and Craft Cloud’s SaaS provider
+zone, `cf-ray` and `cf-cache-status` describe the customer zone.
+`x-gateway-cf-ray` and `x-gateway-cf-cache-status` provide the corresponding
+Ray ID and cache status for the Craft Cloud zone. Preserve both sets when they
+are present so Craft support can correlate the request.
 
 ## Interpreting Failures
 
