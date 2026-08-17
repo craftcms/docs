@@ -14,6 +14,11 @@ Each environment’s `$CRAFT_CLOUD_SIGNING_KEY` [system variable](environments.m
 For more details on RFC 9421 HTTP Message Signatures, see [httpsig.org](https://httpsig.org/).
 :::
 
+::: tip
+If you are building a headless site, also follow the [Headless guide](headless.md)
+for required retry and caching behavior.
+:::
+
 ## Creating a Signed Request
 
 External systems can generate valid signatures for a Craft Cloud environment, provided the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
@@ -23,17 +28,51 @@ A signed request is not consumed (like a token URL is, in Craft), and they are n
 
 ### From Node.js
 
-This example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig) to generate an RFC 9421-compliant signature:
+This example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig) for convenience, but the package is not required. You may use any RFC 9421-compatible implementation.
 
 ```bash
 npm install http-message-sig
 ```
 
-Build and send a signed request like this:
+Create a reusable `request-signatures.js` helper:
 
 ```js
 import crypto from 'node:crypto';
 import { signatureHeadersSync } from 'http-message-sig';
+
+const { CRAFT_CLOUD_SIGNING_KEY } = process.env;
+
+export function getSignatureHeaders(method, url) {
+  const created = new Date();
+
+  return signatureHeadersSync(
+    { method, url },
+    {
+      key: 'sig',
+      signer: {
+        keyid: 'hmac',
+        alg: 'hmac-sha256',
+        signSync(data) {
+          return crypto
+            .createHmac('sha256', CRAFT_CLOUD_SIGNING_KEY)
+            .update(data)
+            .digest();
+        },
+      },
+      components: ['@method', '@target-uri'],
+      created,
+
+      // Optional 60-second expiry. The maximum is five minutes.
+      expires: new Date(created.getTime() + 60 * 1000),
+    }
+  );
+}
+```
+
+Import the helper when sending a signed request:
+
+```js
+import { getSignatureHeaders } from './request-signatures.js';
 
 const method = 'POST';
 const url = 'https://my-env.some-domain.com/api';
@@ -42,31 +81,7 @@ const body = JSON.stringify({
   query: `{ entries(section: "blog") { title url } }`,
 });
 
-const created = new Date();
-
-const signer = {
-  keyid: 'hmac',
-  alg: 'hmac-sha256',
-  signSync(data) {
-    return crypto
-      .createHmac('sha256', process.env.CRAFT_CLOUD_SIGNING_KEY)
-      .update(data)
-      .digest();
-  },
-};
-
-const signatureHeaders = signatureHeadersSync(
-  { method, url },
-  {
-    key: 'sig',
-    signer,
-    components: ['@method', '@target-uri'],
-    created,
-
-    // Optional 60-second expiry. The maximum is five minutes.
-    expires: new Date(created.getTime() + 60 * 1000),
-  }
-);
+const signatureHeaders = getSignatureHeaders(method, url);
 
 const response = await fetch(url, {
   method,

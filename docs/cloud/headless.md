@@ -27,90 +27,245 @@ Two components are critical for a successful headless setup on Craft Cloud:
   - Throw after retries are exhausted so stale-while-revalidate caching can
     preserve the last successful result.
 
-## Examples
+## Automated Retries
 
-### Next.js on Vercel
-
-This example uses [Ky](https://github.com/sindresorhus/ky) to implement that
-retry policy while preserving
-[Next.js fetch options](https://nextjs.org/docs/app/api-reference/functions/fetch).
-
-Install Ky and the signature library used in the general
-[Node.js example](request-signing.md#from-node-js):
-
-```bash
-npm install ky http-message-sig
-```
-
-Create a GraphQL helper:
+A maintained Fetch client such as [Ky](https://github.com/sindresorhus/ky) can
+provide this retry policy. If you prefer not to add a dependency, use a small
+wrapper around the native Fetch API:
 
 ```js
-import crypto from 'node:crypto';
-import { signatureHeadersSync } from 'http-message-sig';
-import ky from 'ky';
+const RETRYABLE_STATUSES = new Set([429, 503]);
+const TOTAL_TIMEOUT = 30_000;
 
-const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN, CRAFT_CLOUD_SIGNING_KEY } = process.env;
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
-export async function queryCraft(query, variables = {}) {
-  const method = 'POST';
-  const url = `${CRAFT_URL}/api`;
-  const body = JSON.stringify({ query, variables });
-  const created = new Date();
+function getRetryDelay(response, attempt) {
+  const backoff = 1000 * 2 ** attempt * (0.5 + Math.random() / 2);
+  const retryAfter = response.headers.get('Retry-After');
 
-  const signatureHeaders = signatureHeadersSync(
-    { method, url },
-    {
-      key: 'sig',
-      signer: {
-        keyid: 'hmac',
-        alg: 'hmac-sha256',
-        signSync(data) {
-          return crypto
-            .createHmac('sha256', CRAFT_CLOUD_SIGNING_KEY)
-            .update(data)
-            .digest();
-        },
-      },
-      components: ['@method', '@target-uri'],
-      created,
-      expires: new Date(created.getTime() + 60 * 1000),
+  if (retryAfter) {
+    const seconds = Number(retryAfter);
+
+    if (Number.isFinite(seconds)) {
+      return Math.max(backoff, seconds * 1000);
     }
-  );
 
-  const result = await ky
-    .post(url, {
-      body,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
-        ...signatureHeaders,
-      },
-      retry: {
-        limit: 1,
-        methods: ['post'],
-        statusCodes: [429, 503],
-        jitter: true,
-      },
-      totalTimeout: 30_000,
-      next: {
-        revalidate: 300,
-        tags: ['craft:blog'],
-      },
-    })
-    .json();
+    const date = Date.parse(retryAfter);
+
+    if (!Number.isNaN(date)) {
+      return Math.max(backoff, date - Date.now());
+    }
+  }
+
+  return backoff;
+}
+
+export async function fetchWithRetry(input, init = {}) {
+  const deadline = Date.now() + TOTAL_TIMEOUT;
+
+  for (let attempt = 0; ; attempt++) {
+    const remaining = deadline - Date.now();
+
+    if (remaining <= 0) {
+      throw new Error('Craft request timed out');
+    }
+
+    const timeoutSignal = AbortSignal.timeout(remaining);
+    const signal = init.signal
+      ? AbortSignal.any([init.signal, timeoutSignal])
+      : timeoutSignal;
+    const response = await fetch(input, { ...init, signal });
+
+    if (response.ok) {
+      return response;
+    }
+
+    const error = new Error(`Craft request failed: ${response.status}`);
+    const canRetry = RETRYABLE_STATUSES.has(response.status);
+
+    await response.body?.cancel();
+
+    if (!canRetry) {
+      throw error;
+    }
+
+    const delay = getRetryDelay(response, attempt);
+
+    if (Date.now() + delay >= deadline) {
+      throw error;
+    }
+
+    await sleep(delay);
+  }
+}
+```
+
+`fetchWithRetry()` retries only `429` and `503` responses that fit within a
+30-second deadline. Retry `POST` requests only when they contain read-only
+GraphQL queries.
+
+## Request Signatures
+
+Create a `request-signatures.js` module using `getSignatureHeaders()` from the
+general [Node.js signing example](request-signing.md#from-node-js). The
+framework examples below import that helper so signing does not interfere with
+framework-specific request options.
+
+## Next.js Example
+
+[Next.js extends `fetch()`](https://nextjs.org/docs/app/api-reference/functions/fetch)
+with cache and revalidation options. This example uses
+[Ky](https://github.com/sindresorhus/ky), which passes those options through to
+the underlying Fetch implementation. Install it with `npm install ky`:
+
+```js
+import ky from 'ky';
+import { getSignatureHeaders } from './request-signatures.js';
+
+const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN } = process.env;
+const method = 'POST';
+const url = `${CRAFT_URL}/api`;
+const query = `{ entries(section: "blog") { title url } }`;
+const body = JSON.stringify({ query });
+const signatureHeaders = getSignatureHeaders(method, url);
+
+const result = await ky.post(url, {
+  body,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+    ...signatureHeaders,
+  },
+  retry: {
+    limit: Number.POSITIVE_INFINITY,
+    methods: ['post'],
+    statusCodes: [429, 503],
+    jitter: true,
+  },
+  timeout: false,
+  totalTimeout: 30_000,
+  next: {
+    revalidate: 300,
+    tags: ['craft:blog'],
+  },
+}).json();
+
+if (result.errors?.length) {
+  throw new Error(result.errors.map((error) => error.message).join('\n'));
+}
+
+const data = result.data;
+```
+
+The 30-second total timeout keeps all attempts and delays within the
+signature’s 60-second lifetime.
+
+Use narrow tags such as `craft:blog` or `craft:products`, and avoid bursts of
+site-wide invalidations. When revalidation throws, Next.js continues serving
+the last successful result and tries again on a later request.
+
+Vercel provides this stale-while-revalidate behavior through
+[ISR](https://vercel.com/docs/incremental-static-regeneration). Netlify’s
+[current Next.js adapter](https://docs.netlify.com/build/frameworks/framework-setup-guides/nextjs/overview/)
+also supports the Full Route and Data caches, including tag- and path-based
+revalidation.
+
+## Nuxt Example
+
+Nuxt’s `$fetch` uses [ofetch](https://github.com/unjs/ofetch#-auto-retry), which
+can retry requests but does not provide this `Retry-After` and backoff policy.
+Keep the signed request in a server route and use the shared helper:
+
+```js
+// server/api/blog.get.js
+import { fetchWithRetry } from '../utils/fetch-with-retry.js';
+import { getSignatureHeaders } from '../utils/request-signatures.js';
+
+const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN } = process.env;
+const method = 'POST';
+const url = `${CRAFT_URL}/api`;
+const query = `{ entries(section: "blog") { title url } }`;
+const body = JSON.stringify({ query });
+
+export default defineEventHandler(async () => {
+  const signatureHeaders = getSignatureHeaders(method, url);
+  const response = await fetchWithRetry(url, {
+    method,
+    body,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+      ...signatureHeaders,
+    },
+  });
+  const result = await response.json();
 
   if (result.errors?.length) {
     throw new Error(result.errors.map((error) => error.message).join('\n'));
   }
 
   return result.data;
-}
+});
 ```
 
-The 30-second overall timeout keeps the retry within the signature’s 60-second
-lifetime. If the request still fails, Ky throws, allowing
-[Vercel ISR](https://vercel.com/docs/incremental-static-regeneration) to treat a
-revalidation as failed and preserve the last successful result.
+Apply stale-while-revalidate caching with a route rule, then call the route
+from your components with `useFetch('/api/blog')`:
 
-Adjust `next.revalidate` for your content. Use narrow tags such as `craft:blog`
-or `craft:products`, and avoid bursts of site-wide invalidations.
+```js
+// nuxt.config.js
+export default defineNuxtConfig({
+  routeRules: {
+    '/api/blog': { swr: 300 },
+  },
+});
+```
+
+Nuxt also supports an `isr` route rule on Vercel and Netlify, but adapter
+behavior differs. Netlify currently documents a
+[cache-control limitation for Nuxt ISR routes](https://docs.netlify.com/build/caching/caching-overview/),
+so verify the deployed response before relying on CDN caching.
+
+## Astro Example
+
+Astro prerenders pages by default, so a failed Craft request should fail the
+build rather than publish partial content:
+
+```js
+---
+import { fetchWithRetry } from '../lib/fetch-with-retry.js';
+import { getSignatureHeaders } from '../lib/request-signatures.js';
+
+const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN } = process.env;
+const method = 'POST';
+const url = `${CRAFT_URL}/api`;
+const query = `{ entries(section: "blog") { title url } }`;
+const body = JSON.stringify({ query });
+const signatureHeaders = getSignatureHeaders(method, url);
+const response = await fetchWithRetry(url, {
+  method,
+  body,
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
+    ...signatureHeaders,
+  },
+});
+const result = await response.json();
+
+if (result.errors?.length) {
+  throw new Error(result.errors.map((error) => error.message).join('\n'));
+}
+
+const data = result.data;
+---
+```
+
+Netlify uses [atomic deploys](https://docs.netlify.com/deploy/deploy-overview/),
+and Vercel promotes successful deployments to production. A failed build
+therefore leaves the current production site in place.
+
+For on-demand rendering, Astro 7 provides a
+[route cache API](https://docs.astro.build/en/guides/caching/) with
+stale-while-revalidate semantics. Its Netlify and Vercel CDN cache providers
+are currently experimental, so use the static build approach unless runtime
+revalidation is required.
