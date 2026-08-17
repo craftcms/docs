@@ -65,8 +65,8 @@ export function getSignatureHeaders(
       components,
       created,
 
-      // Optional 60-second expiry. The maximum is five minutes.
-      expires: new Date(created.getTime() + 60 * 1000),
+      // Optional expiry. The maximum is five minutes.
+      // expires: new Date(created.getTime() + 60 * 1000),
     }
   );
 }

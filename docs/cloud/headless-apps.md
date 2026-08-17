@@ -158,9 +158,6 @@ if (result.errors?.length) {
 const data = result.data;
 ```
 
-The 30-second total timeout keeps all attempts and delays within the
-signature’s 60-second lifetime.
-
 Use narrow tags such as `craft:blog` or `craft:products`, and avoid bursts of
 app-wide invalidations. When revalidation throws, Next.js continues serving
 the last successful result and tries again on a later request.
