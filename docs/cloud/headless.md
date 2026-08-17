@@ -11,8 +11,8 @@ builds and background revalidation.
 
 Two components are critical for a successful headless setup on Craft Cloud:
 
-- **Signed requests:**
-  - [Sign requests](request-signing.md) from trusted server-side code so they
+- **Request signing:**
+  - Use [request signing](request-signing.md) from trusted server-side code to
     bypass the untrusted-bot policy.
   - Signatures do not bypass shared capacity limits, so signed requests can
     still receive `429` or `503` responses.
