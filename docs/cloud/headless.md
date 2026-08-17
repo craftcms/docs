@@ -27,7 +27,9 @@ Two components are critical for a successful headless setup on Craft Cloud:
   - Throw after retries are exhausted so stale-while-revalidate caching can
     preserve the last successful result.
 
-## Next.js on Vercel
+## Examples
+
+### Next.js on Vercel
 
 This example uses [Ky](https://github.com/sindresorhus/ky) to implement that
 retry policy while preserving
