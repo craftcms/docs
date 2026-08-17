@@ -114,8 +114,3 @@ revalidation as failed and preserve the last successful result.
 
 Adjust `next.revalidate` for your content. Use narrow tags such as `craft:blog`
 or `craft:products`, and avoid bursts of site-wide invalidations.
-
-## Diagnostics
-
-Log the response status, `x-gateway-http-signature`, and `Retry-After` when
-diagnosing failures. Never log signing keys or GraphQL tokens.
