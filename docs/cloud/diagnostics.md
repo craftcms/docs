@@ -6,29 +6,18 @@ description: Safely collect useful details when diagnosing failed requests to Cr
 
 ## Response Headers
 
-The `x-gateway-flow` header identifies how Craft Cloud produced the response.
-For example, `/origin/fetch` means the gateway fetched the environment’s
-origin, while `/origin/reject` means it rejected the request before contacting
-the origin.
+- `cf-*` headers come from Cloudflare.
+- `x-gateway-*` headers are added by the Craft Cloud gateway.
+- All other headers are returned by the origin (Craft).
 
-The `x-gateway-http-signature` header reports whether Craft Cloud detected and
-validated [request signing](request-signing.md). A value of `verified` means
-validation succeeded; `unverified` means signing was detected but validation
-failed.
-
-The `cf-ray` header identifies the request in Cloudflare, while
-`cf-cache-status` describes how Cloudflare handled it in the cache. See
-[Troubleshooting Static Caching](static-caching.md#troubleshooting) for common
-cache statuses.
-
-### Cloudflare O2O
-
-When [Cloudflare O2O](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/)
-routes a request through both a customer zone and Craft Cloud’s SaaS provider
-zone, `cf-ray` and `cf-cache-status` describe the customer zone.
-`x-gateway-cf-ray` and `x-gateway-cf-cache-status` provide the corresponding
-Ray ID and cache status for the Craft Cloud zone. Preserve both sets when they
-are present so Craft support can correlate the request.
+| Response Header | Description |
+| --- | --- |
+| <code style="white-space: nowrap;">x-gateway-flow</code> | Identifies how Craft Cloud produced the response. `/origin/fetch` means the gateway fetched the environment’s origin, while `/origin/reject` means it rejected the request before contacting the origin. |
+| <code style="white-space: nowrap;">x-gateway-http-signature</code> | Reports whether Craft Cloud detected and validated [request signing](request-signing.md). `verified` means validation succeeded; `unverified` means signing was detected but validation failed. |
+| <code style="white-space: nowrap;">cf-ray</code> | Identifies the request in Cloudflare. For [Cloudflare O2O](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/), this is the customer zone Ray ID. |
+| <code style="white-space: nowrap;">cf-cache-status</code> | Describes how Cloudflare handled the response in the cache. For Cloudflare O2O, this is the customer zone cache status. See [Troubleshooting Static Caching](static-caching.md#troubleshooting) for common values. |
+| <code style="white-space: nowrap;">x-gateway-cf-ray</code> | For Cloudflare O2O, the Ray ID for Craft Cloud’s SaaS provider zone. |
+| <code style="white-space: nowrap;">x-gateway-cf-cache-status</code> | For Cloudflare O2O, the cache status for Craft Cloud’s SaaS provider zone. |
 
 ## Interpreting Failures
 
@@ -50,8 +39,3 @@ it with `x-gateway-flow` and the other diagnostic headers:
 | `503` | `x-gateway-flow: /origin/fetch/error` and `Retry-After` | Origin compute was temporarily throttled. Honor `Retry-After` before retrying a safe request. |
 | `504` | `x-gateway-flow: /origin/fetch/error` | Origin work exceeded the [request duration limit](quotas.md#requests-responses). Reduce the work performed during the request. |
 | `5xx` | No `x-gateway-flow` | The failure may have occurred before the request reached the gateway. Preserve the Ray IDs and `Retry-After`, if present, when contacting support. |
-
-Log these fields individually from trusted server-side code. Do not log query
-strings unless you have removed sensitive values. Never dump complete request
-headers, environment variables, or credentials. In particular, never log the
-Craft Cloud signing key, GraphQL tokens, or other secrets.
