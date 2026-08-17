@@ -11,16 +11,21 @@ builds and background revalidation.
 
 Two components are critical for a successful headless setup on Craft Cloud:
 
-- **Signed requests:** [Sign requests](request-signing.md) from trusted
-  server-side code so they bypass the untrusted-bot policy. Signatures do not
-  bypass shared capacity limits, so signed requests can still receive `429` or
-  `503` responses. Never expose the signing key to a browser or in a public
-  environment variable.
-- **Automated retries:** Treat every non-2xx response as a failure. For `429` and
-  `503` responses, honor `Retry-After` and use bounded retries with exponential
-  backoff and jitter. Only retry `POST` requests that contain read-only GraphQL
-  queries—never mutations. Throw after retries are exhausted so
-  stale-while-revalidate caching can preserve the last successful result.
+- **Signed requests:**
+  - [Sign requests](request-signing.md) from trusted server-side code so they
+    bypass the untrusted-bot policy.
+  - Signatures do not bypass shared capacity limits, so signed requests can
+    still receive `429` or `503` responses.
+  - Never expose the signing key to a browser or in a public environment
+    variable.
+- **Automated retries:**
+  - Treat every non-2xx response as a failure.
+  - For `429` and `503` responses, honor `Retry-After` and use bounded retries
+    with exponential backoff and jitter.
+  - Only retry `POST` requests that contain read-only GraphQL queries—never
+    mutations.
+  - Throw after retries are exhausted so stale-while-revalidate caching can
+    preserve the last successful result.
 
 ## Next.js on Vercel
 
