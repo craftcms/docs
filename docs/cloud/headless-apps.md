@@ -110,13 +110,13 @@ framework-specific request options.
 
 ## Next.js Example
 
-[Next.js extends `fetch()`](https://nextjs.org/docs/app/api-reference/functions/fetch)
-with cache and revalidation options. This example uses
-[Ky](https://github.com/sindresorhus/ky), which passes those options through to
-the underlying Fetch implementation:
+[Next.js can cache](https://nextjs.org/docs/app/api-reference/functions/unstable_cache)
+the validated result of a data-fetching function. This example uses
+[Ky](https://github.com/sindresorhus/ky) for the underlying request:
 
 ```js
 import ky from 'ky';
+import { unstable_cache } from 'next/cache';
 import { getSignatureHeaders } from './request-signatures.js';
 
 const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN } = process.env;
@@ -128,33 +128,41 @@ const headers = {
   'Content-Type': 'application/json',
   'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
 };
-const signatureHeaders = getSignatureHeaders({ method, url, headers });
 
-const result = await ky.post(url, {
-  body,
-  headers: {
-    ...headers,
-    ...signatureHeaders,
+const getBlogEntries = unstable_cache(
+  async () => {
+    const signatureHeaders = getSignatureHeaders({ method, url, headers });
+    const result = await ky.post(url, {
+      body,
+      cache: 'no-store',
+      headers: {
+        ...headers,
+        ...signatureHeaders,
+      },
+      retry: {
+        limit: Number.POSITIVE_INFINITY,
+        methods: ['post'],
+        statusCodes: [429, 503],
+        jitter: true,
+      },
+      timeout: false,
+      totalTimeout: 30_000,
+    }).json();
+
+    if (result.errors?.length) {
+      throw new Error(result.errors.map((error) => error.message).join('\n'));
+    }
+
+    return result.data;
   },
-  retry: {
-    limit: Number.POSITIVE_INFINITY,
-    methods: ['post'],
-    statusCodes: [429, 503],
-    jitter: true,
-  },
-  timeout: false,
-  totalTimeout: 30_000,
-  next: {
+  ['craft:blog', url, query],
+  {
     revalidate: 300,
     tags: ['craft:blog'],
-  },
-}).json();
+  }
+);
 
-if (result.errors?.length) {
-  throw new Error(result.errors.map((error) => error.message).join('\n'));
-}
-
-const data = result.data;
+const data = await getBlogEntries();
 ```
 
 Use narrow tags such as `craft:blog` or `craft:products`, and avoid bursts of
