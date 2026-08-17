@@ -38,6 +38,10 @@ import { signatureHeadersSync } from 'http-message-sig';
 
 const { CRAFT_CLOUD_SIGNING_KEY } = process.env;
 
+if (!CRAFT_CLOUD_SIGNING_KEY) {
+  throw new Error('CRAFT_CLOUD_SIGNING_KEY is not set');
+}
+
 export function getSignatureHeaders(
   request,
   components = ['@method', '@target-uri']
