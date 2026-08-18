@@ -1,41 +1,41 @@
 ---
-description: Safely collect useful details when diagnosing failed requests to Craft Cloud.
+description: Diagnose failed requests to Craft Cloud.
+pageClass: cloud-diagnostics
 ---
 
 # Diagnostics
 
 ## Response Headers
 
-- `cf-*` headers come from Cloudflare.
-- `x-gateway-*` headers are added by the Craft Cloud gateway.
-- All other headers are returned by the origin (Craft).
+- `cf-*`: Cloudflare
+- `x-gateway-*`: Craft Cloud gateway
+- All others: origin (Craft)
 
 | Response Header | Description |
 | --- | --- |
-| <code style="white-space: nowrap;">x-gateway-flow</code> | Identifies how Craft Cloud produced the response. `/origin/fetch` means the gateway fetched the environment’s origin, while `/origin/reject` means it rejected the request before contacting the origin. |
-| <code style="white-space: nowrap;">x-gateway-http-signature</code> | Reports whether Craft Cloud detected and validated [request signing](request-signing.md). `verified` means validation succeeded; `unverified` means signing was detected but validation failed. |
-| <code style="white-space: nowrap;">cf-ray</code> | Identifies the request in Cloudflare. For [Cloudflare O2O](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/), this is the customer zone Ray ID. |
-| <code style="white-space: nowrap;">cf-cache-status</code> | Describes how Cloudflare handled the response in the cache. For Cloudflare O2O, this is the customer zone cache status. See [Troubleshooting Static Caching](static-caching.md#troubleshooting) for common values. |
-| <code style="white-space: nowrap;">x-gateway-cf-ray</code> | For Cloudflare O2O, the Ray ID for Craft Cloud’s SaaS provider zone. |
-| <code style="white-space: nowrap;">x-gateway-cf-cache-status</code> | For Cloudflare O2O, the cache status for Craft Cloud’s SaaS provider zone. |
+| `x-gateway-flow` | How Craft Cloud produced the response. For example, `/origin/fetch` reached Craft. |
+| `x-gateway-http-signature` | [Request-signing](request-signing.md) result. `verified` succeeded; `unverified` was detected but failed validation. |
+| `cf-ray` | Cloudflare request ID.<sup>1</sup> |
+| `cf-cache-status` | Cloudflare [cache status](static-caching.md#troubleshooting).<sup>1</sup> |
+| `x-gateway-cf-ray` | Cloudflare request ID.<sup>2</sup> |
+| `x-gateway-cf-cache-status` | Cloudflare [cache status](static-caching.md#troubleshooting).<sup>2</sup> |
+
+<sup>1</sup> With [Cloudflare O2O](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/) requests, the marked headers describe the customer zone.
+
+<sup>2</sup> The marked headers describe the Craft Cloud zone and are only present with [Cloudflare O2O](https://developers.cloudflare.com/cloudflare-for-platforms/cloudflare-for-saas/saas-customers/how-it-works/) requests.
 
 ## Interpreting Failures
 
-A status code describes the outcome, but not which layer produced it. Combine
-it with `x-gateway-flow` and the other diagnostic headers:
+Status alone does not identify the response layer. Use it with the diagnostic
+headers:
 
 | Status | Response Headers | Interpretation |
 | --- | --- | --- |
-| `4xx/5xx` | `x-gateway-flow: /origin/fetch` | Your application returned the response. Inspect its logs and error handling. |
-| `400` | `x-gateway-flow: /origin/reject` | The request body failed gateway validation. Fix the request rather than retrying it unchanged. |
-| `401` | `x-gateway-http-signature: unverified` | A signature-protected gateway endpoint rejected an invalid or expired signature. Check the signing key, method, target URL, timestamp, and expiry before signing again. |
-| `403` | `x-gateway-flow: /origin/reject` | A gateway request policy blocked the request before it reached your application. Do not retry it unchanged. |
-| `404` | `x-gateway-flow: /` | The gateway could not match the hostname to a Craft Cloud environment. Check the requested hostname. |
-| `413` | `x-gateway-flow: /origin/reject` | The request body was too large for the origin request path. Reduce its size. |
-| `429` | `x-gateway-flow: /origin/reject` and `Retry-After` | The gateway rate limited the request before it reached your application. Honor `Retry-After`. A `verified` signature confirms signing worked, but does not bypass shared capacity limits. |
-| `429` | `x-gateway-flow: /origin/fetch` | Your application returned the rate limit. Honor its `Retry-After` header, if present, and inspect application-level limits. |
-| `500` | `x-gateway-flow` ending in `/error` | The gateway encountered an internal error. Retry only safe requests, and contact support if it persists. |
-| `502` | `x-gateway-flow: /origin/fetch/error` | The gateway could not get a usable response from the origin after a connection or platform error. Contact support if it persists. |
-| `503` | `x-gateway-flow: /origin/fetch/error` and `Retry-After` | Origin compute was temporarily throttled. Honor `Retry-After` before retrying a safe request. |
-| `504` | `x-gateway-flow: /origin/fetch/error` | Origin work exceeded the [request duration limit](quotas.md#requests-responses). Reduce the work performed during the request. |
-| `5xx` | No `x-gateway-flow` | The failure may have occurred before the request reached the gateway. Preserve the Ray IDs and `Retry-After`, if present, when contacting support. |
+| `4xx/5xx` | `x-gateway-flow: /origin/fetch` | Returned by Craft; check application logs. |
+| `400/403/413` | `x-gateway-flow: /origin/reject` | Detected invalid or malicious request. |
+| `401` | `x-gateway-http-signature: unverified` | The signature was invalid or expired. |
+| `404` | `x-gateway-flow: /` | Hostname did not match a Craft Cloud environment. |
+| `429/503` | `Retry-After: 𝑛` | Automate retry, honoring `Retry-After`. |
+| `500/502` | No `x-gateway-flow: /origin/fetch` | A gateway error occurred; contact support if it persists. |
+| `504` | `x-gateway-flow: /origin/fetch/error` | The origin exceeded the [request duration limit](quotas.md#requests-responses). |
+| `5xx` | No `x-gateway-flow` | The error occurred before the gateway, either in the `craft.cloud` zone or a parent Cloudflare zone. |
