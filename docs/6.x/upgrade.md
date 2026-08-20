@@ -55,7 +55,7 @@ Laravel makes it possible to directly configure mailers, loggers, filesystems, a
 1. Install the upgrade tool:
 
     ```bash
-    composer global install craftcms/craft6-revamp
+    composer global require craftcms/craft6-revamp
     ```
     
     The tool will examine your project structure and will warn you if it’s unable to safely make changes.
