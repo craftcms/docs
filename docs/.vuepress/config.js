@@ -4,6 +4,7 @@ module.exports = {
   theme: "craftdocs",
   base: "/docs/",
   plugins: [
+    ['seo'],
     ["@vuepress/google-analytics", { ga: "UA-39036834-9" }],
     [
       "vuepress-plugin-medium-zoom",
