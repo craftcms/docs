@@ -22,6 +22,7 @@ for required retry and caching behavior.
 ## Creating a Signed Request
 
 External systems can generate valid signatures for a Craft Cloud environment, provided the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
+Every signature must include the application-specific signature parameter `tag="craft-cloud"`.
 
 Signatures are valid at the Craft Cloud gateway for a maximum of **five minutes**.
 A signed request is not consumed (like a token URL is, in Craft), and they are not idempotent.
@@ -64,6 +65,7 @@ export function getSignatureHeaders(
       },
       components,
       created,
+      tag: 'craft-cloud',
 
       // Optional expiry. The maximum is five minutes.
       // expires: new Date(created.getTime() + 60 * 1000),
@@ -138,6 +140,7 @@ export default function () {
     `expires=${expires}`,
     'keyid="hmac"',
     'alg="hmac-sha256"',
+    'tag="craft-cloud"',
   ].join(';');
 
   const signatureBase = [
