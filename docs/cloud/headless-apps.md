@@ -63,7 +63,7 @@ function getRetryDelay(response, attempt) {
   return backoff;
 }
 
-export async function fetchWithRetry(input, init = {}) {
+export async function fetchWithRetry(request) {
   const deadline = Date.now() + TOTAL_TIMEOUT;
 
   for (let attempt = 0; ; attempt++) {
@@ -73,11 +73,11 @@ export async function fetchWithRetry(input, init = {}) {
       throw new Error('Craft request timed out');
     }
 
-    const timeoutSignal = AbortSignal.timeout(remaining);
-    const signal = init.signal
-      ? AbortSignal.any([init.signal, timeoutSignal])
-      : timeoutSignal;
-    const response = await fetch(input, { ...init, signal });
+    const signal = AbortSignal.any([
+      request.signal,
+      AbortSignal.timeout(remaining),
+    ]);
+    const response = await fetch(request.clone(), { signal });
 
     if (response.ok) {
       return response;
@@ -105,8 +105,8 @@ export async function fetchWithRetry(input, init = {}) {
 
 Create a `request-signatures.js` module using `getSignatureHeaders()` from the
 general [Node.js signing example](request-signing.md#from-node-js). The
-framework examples below import that helper so signing does not interfere with
-framework-specific request options.
+framework examples below construct and sign a native `Request` before sending
+it.
 
 ## Next.js Example
 
@@ -131,14 +131,14 @@ const headers = {
 
 const getBlogEntries = unstable_cache(
   async () => {
-    const signatureHeaders = getSignatureHeaders({ method, url, headers });
-    const result = await ky.post(url, {
-      body,
+    const request = new Request(url, { method, body, headers });
+
+    for (const [name, value] of Object.entries(getSignatureHeaders(request))) {
+      request.headers.set(name, value);
+    }
+
+    const result = await ky(request, {
       cache: 'no-store',
-      headers: {
-        ...headers,
-        ...signatureHeaders,
-      },
       retry: {
         limit: Number.POSITIVE_INFINITY,
         methods: ['post'],
@@ -197,15 +197,13 @@ const headers = {
 };
 
 export default defineEventHandler(async () => {
-  const signatureHeaders = getSignatureHeaders({ method, url, headers });
-  const response = await fetchWithRetry(url, {
-    method,
-    body,
-    headers: {
-      ...headers,
-      ...signatureHeaders,
-    },
-  });
+  const request = new Request(url, { method, body, headers });
+
+  for (const [name, value] of Object.entries(getSignatureHeaders(request))) {
+    request.headers.set(name, value);
+  }
+
+  const response = await fetchWithRetry(request);
   const result = await response.json();
 
   if (result.errors?.length) {
@@ -252,15 +250,13 @@ const headers = {
   'Content-Type': 'application/json',
   'Authorization': `Bearer ${CRAFT_GRAPHQL_TOKEN}`,
 };
-const signatureHeaders = getSignatureHeaders({ method, url, headers });
-const response = await fetchWithRetry(url, {
-  method,
-  body,
-  headers: {
-    ...headers,
-    ...signatureHeaders,
-  },
-});
+const request = new Request(url, { method, body, headers });
+
+for (const [name, value] of Object.entries(getSignatureHeaders(request))) {
+  request.headers.set(name, value);
+}
+
+const response = await fetchWithRetry(request);
 const result = await response.json();
 
 if (result.errors?.length) {

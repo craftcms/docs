@@ -49,61 +49,55 @@ export function getSignatureHeaders(
 ) {
   const created = new Date();
 
-  return signatureHeadersSync(
-    request,
-    {
-      key: 'sig',
-      signer: {
-        keyid: 'hmac',
-        alg: 'hmac-sha256',
-        signSync(data) {
-          return crypto
-            .createHmac('sha256', CRAFT_CLOUD_SIGNING_KEY)
-            .update(data)
-            .digest();
-        },
+  return signatureHeadersSync(request, {
+    key: 'sig',
+    signer: {
+      keyid: 'hmac',
+      alg: 'hmac-sha256',
+      signSync(data) {
+        return crypto
+          .createHmac('sha256', CRAFT_CLOUD_SIGNING_KEY)
+          .update(data)
+          .digest();
       },
-      components,
-      created,
-      tag: 'craft-cloud',
+    },
+    components,
+    created,
+    tag: 'craft-cloud',
 
-      // Optional expiry. The maximum is five minutes.
-      // expires: new Date(created.getTime() + 60 * 1000),
-    }
-  );
+    // Optional expiry. The maximum is five minutes.
+    // expires: new Date(created.getTime() + 60 * 1000),
+  });
 }
 ```
 
 Pass additional [covered components](https://www.rfc-editor.org/rfc/rfc9421.html#name-http-message-components), such as `content-type`, in the second argument when those values must also be signed.
 
-Import the helper when sending a signed request:
+Construct a native `Request`, sign it, then send the same object:
 
 ```js
 import { getSignatureHeaders } from './request-signatures.js';
 
-const request = {
-  method: 'POST',
-  url: 'https://my-env.some-domain.com/api',
-  headers: {
-    'Content-Type': 'application/json',
-    'Authorization': 'Bearer my-secret-gql-schema-token',
-  },
-};
+const url = new URL('https://my-env.some-domain.com/api');
 
 const body = JSON.stringify({
   query: `{ entries(section: "blog") { title url } }`,
 });
 
-const signatureHeaders = getSignatureHeaders(request);
-
-const response = await fetch(request.url, {
-  method: request.method,
+const request = new Request(url, {
+  method: 'POST',
   headers: {
-    ...request.headers,
-    ...signatureHeaders,
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer my-secret-gql-schema-token',
   },
   body,
 });
+
+for (const [name, value] of Object.entries(getSignatureHeaders(request))) {
+  request.headers.set(name, value);
+}
+
+const response = await fetch(request);
 
 if (!response.ok) {
   throw new Error(`Craft request failed: ${response.status}`);
@@ -112,7 +106,9 @@ if (!response.ok) {
 
 ::: tip
 Requests signed using the `@target-uri` [component](https://www.rfc-editor.org/rfc/rfc9421.html#name-derived-components) are only valid when sent to a URL that matches _exactly_, including the scheme, hostname, path, and query string.
-The example above satisfies this by using the same `request.url` value for signing and the `fetch()` call.
+Constructing, signing, and sending the same `Request` object ensures that the signed URL matches the URL sent by `fetch()`.
+
+When adding query parameters, use `url.searchParams.set(name, value)` rather than appending raw values. This encodes parameter names and values before the request is signed.
 :::
 
 ### From Grafana Cloud k6
