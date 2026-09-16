@@ -22,7 +22,6 @@ for required retry and caching behavior.
 ## Creating a Signed Request
 
 External systems can generate valid signatures for a Craft Cloud environment, provided the corresponding `$CRAFT_CLOUD_SIGNING_KEY`.
-Every signature must include the application-specific signature parameter `tag="craft-cloud"`.
 
 Signatures are valid at the Craft Cloud gateway for a maximum of **five minutes**.
 A signed request is not consumed (like a token URL is, in Craft), and they are not idempotent.
