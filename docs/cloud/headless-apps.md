@@ -40,10 +40,10 @@ wrapper around the native Fetch API:
 
 ::: details View Dependency-Free Fetch Wrapper
 ```js
+import { setTimeout as sleep } from 'node:timers/promises';
+
 // Bound all attempts and delays.
 const TOTAL_TIMEOUT = 30_000;
-
-const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
 const getBackoffDelay = (attempt) =>
   1000 * 2 ** attempt * (0.5 + Math.random() / 2);
@@ -97,7 +97,7 @@ export async function fetchWithRetry(request) {
         throw error;
       }
 
-      await sleep(delay);
+      await sleep(delay, undefined, { signal: request.signal });
       continue;
     }
 
@@ -118,7 +118,7 @@ export async function fetchWithRetry(request) {
       throw error;
     }
 
-    await sleep(delay);
+    await sleep(delay, undefined, { signal: request.signal });
   }
 }
 ```
