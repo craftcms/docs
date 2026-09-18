@@ -59,8 +59,6 @@ protected function settingsForm(FormContext $context = new FormContext): ?Form
 }
 ```
 
-
-
 ::: tip
 While your [validation](#validation) setup needs to account for what part of the request it is looking at, your settings form is automatically placed within the `settings` namespace, so its [control paths](forms.md#paths) do not need to be prefixed.
 :::
