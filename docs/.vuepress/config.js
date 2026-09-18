@@ -32,6 +32,7 @@ module.exports = {
       }
     ],
     [require("./plugins/craft.js")],
+    [require("./plugins/og.js")],
   ],
   shouldPrefetch: () => false,
   head: require("./head"),
