@@ -6,12 +6,17 @@ description: Sign trusted programmatic requests to avoid bot rate limiting.
 
 Request signing allows trusted systems to make programmatic requests to Craft Cloud without being treated like unsanctioned bot traffic.
 
-This is useful for automated systems like static site builds or CI/CD pipelines, which will often be identified (correctly!) as “bots” and be rate-limited more aggressively than browsers.
+This is useful for automated systems like static app builds or CI/CD pipelines, which will often be identified (correctly!) as “bots” and be rate-limited more aggressively than browsers.
 
 Each environment’s `$CRAFT_CLOUD_SIGNING_KEY` [system variable](environments.md#variables) is used as a shared secret when generating and validating signed requests.
 
 ::: tip
 For more details on RFC 9421 HTTP Message Signatures, see [httpsig.org](https://httpsig.org/).
+:::
+
+::: tip
+If you are building a headless app, also follow the [Headless Apps guide](headless-apps.md)
+for required retry and caching behavior.
 :::
 
 ## Creating a Signed Request
@@ -23,65 +28,86 @@ A signed request is not consumed (like a token URL is, in Craft), and they are n
 
 ### From Node.js
 
-This example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig) to generate an RFC 9421-compliant signature:
+This example uses [`http-message-sig`](https://www.npmjs.com/package/http-message-sig) for convenience, but the package is not required. You may use any RFC 9421-compatible implementation.
 
-```bash
-npm install http-message-sig
-```
-
-Build and send a signed request like this:
+Create a reusable `request-signatures.js` helper:
 
 ```js
 import crypto from 'node:crypto';
 import { signatureHeadersSync } from 'http-message-sig';
 
-const method = 'POST';
-const url = 'https://my-env.some-domain.com/api';
+const { CRAFT_CLOUD_SIGNING_KEY } = process.env;
+
+if (!CRAFT_CLOUD_SIGNING_KEY) {
+  throw new Error('CRAFT_CLOUD_SIGNING_KEY is not set');
+}
+
+export function getSignatureHeaders(
+  request,
+  components = ['@method', '@target-uri']
+) {
+  const created = new Date();
+
+  return signatureHeadersSync(request, {
+    key: 'sig',
+    signer: {
+      keyid: 'hmac',
+      alg: 'hmac-sha256',
+      signSync(data) {
+        return crypto
+          .createHmac('sha256', CRAFT_CLOUD_SIGNING_KEY)
+          .update(data)
+          .digest();
+      },
+    },
+    components,
+    created,
+    tag: 'craft-cloud',
+
+    // Optional expiry. The maximum is five minutes.
+    // expires: new Date(created.getTime() + 60 * 1000),
+  });
+}
+```
+
+Pass additional [covered components](https://www.rfc-editor.org/rfc/rfc9421.html#name-http-message-components), such as `content-type`, in the second argument when those values must also be signed.
+
+Construct a native `Request`, sign it, then send the same object:
+
+```js
+import { getSignatureHeaders } from './request-signatures.js';
+
+const url = new URL('https://my-env.some-domain.com/api');
 
 const body = JSON.stringify({
   query: `{ entries(section: "blog") { title url } }`,
 });
 
-const created = new Date();
-
-const signer = {
-  keyid: 'hmac',
-  alg: 'hmac-sha256',
-  signSync(data) {
-    return crypto
-      .createHmac('sha256', process.env.CRAFT_CLOUD_SIGNING_KEY)
-      .update(data)
-      .digest();
-  },
-};
-
-const signatureHeaders = signatureHeadersSync(
-  { method, url },
-  {
-    key: 'sig',
-    signer,
-    components: ['@method', '@target-uri'],
-    created,
-
-    // Optional 60-second expiry. The maximum is five minutes.
-    expires: new Date(created.getTime() + 60 * 1000),
-  }
-);
-
-await fetch(url, {
-  method,
+const request = new Request(url, {
+  method: 'POST',
   headers: {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer my-secret-gql-schema-token',
-    ...signatureHeaders,
   },
   body,
 });
+
+for (const [name, value] of Object.entries(getSignatureHeaders(request))) {
+  request.headers.set(name, value);
+}
+
+const response = await fetch(request);
+
+if (!response.ok) {
+  throw new Error(`Craft request failed: ${response.status}`);
+}
 ```
 
 ::: tip
 Requests signed using the `@target-uri` [component](https://www.rfc-editor.org/rfc/rfc9421.html#name-derived-components) are only valid when sent to a URL that matches _exactly_, including the scheme, hostname, path, and query string.
-The example above satisfies this by using the same `url` variable for the signed request and the `fetch()` call.
+Constructing, signing, and sending the same `Request` object ensures that the signed URL matches the URL sent by `fetch()`.
+
+When adding query parameters, use `url.searchParams.set(name, value)` rather than appending raw values. This encodes parameter names and values before the request is signed.
 :::
 
 ### From Grafana Cloud k6
@@ -109,6 +135,7 @@ export default function () {
     `expires=${expires}`,
     'keyid="hmac"',
     'alg="hmac-sha256"',
+    'tag="craft-cloud"',
   ].join(';');
 
   const signatureBase = [
