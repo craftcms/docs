@@ -38,6 +38,7 @@ A maintained Fetch client such as [Ky](https://github.com/sindresorhus/ky) can
 provide this retry policy. If you prefer not to add a dependency, use a small
 wrapper around the native Fetch API:
 
+::: details View Dependency-Free Fetch Wrapper
 ```js
 // Bound all attempts and delays.
 const TOTAL_TIMEOUT = 30_000;
@@ -121,6 +122,7 @@ export async function fetchWithRetry(request) {
   }
 }
 ```
+:::
 
 ## Request Signatures
 
