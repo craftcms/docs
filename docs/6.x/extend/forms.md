@@ -5,7 +5,7 @@ Throughout the control panel, Craft constructs forms using a set of new form bui
 <!-- more -->
 
 These classes roughly correspond to the legacy Twig includes and macros, but provide an output-agnostic, typed API that connects back-end logic to our new front-end web component library.
-They also make it significantly easier to inject plugin-provided fields and context: you no longer need to worry about the resulting DOM structure, HTML identifiers, namespacing and nesting, or how Javascript is registered and bound.
+They also make it significantly easier to inject plugin-provided fields and context: you no longer need to worry about the resulting DOM structure, HTML identifiers, namespacing and nesting, or how JavaScript is registered and bound.
 Your forms’ logic (including the behavior of individual form [controls](#controls)) can now be entirely driven by the back-end, while remaining [responsive](#refreshing) to user input.
 
 ## Components
@@ -59,7 +59,7 @@ return Form::make([
 ]);
 ```
 
-The static form factory method `make()` accepts an array of nodes, and returns a form builder instance, which you can use to manipulate the node list like you would build DOM using Javascript APIs:
+The static form factory method `make()` accepts an array of nodes, and returns a form builder instance, which you can use to manipulate the node list like you would build DOM using JavaScript APIs:
 
 ```php
 $form = Form::make([

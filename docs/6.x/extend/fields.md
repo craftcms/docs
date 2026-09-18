@@ -116,7 +116,7 @@ public function formControl(FieldContext $context): Control
 ```
 
 Like [settings](#settings), your input is rebuilt by the back-end whenever its value changes.
-This means you can react to the current value (`$context->value`) and conditionally expose additional controls, instructions, or settings without registering any Javascript.
+This means you can react to the current value (`$context->value`) and conditionally expose additional controls, instructions, or settings without registering any JavaScript.
 
 ::: warning
 Inline editing is still handled with plain HTML output, so your fields’ `inputHtml()` remains relevant.
