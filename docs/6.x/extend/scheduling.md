@@ -18,7 +18,7 @@ protected function schedule(Schedule $schedule): void
     $schedule->job(new GenerateReport(['templateId' => 1234]))
         ->hourly();
 
-    // Report
+    // Log status and ping an uptime service:
     $schedule->call(function () {
         Log::info('Scheduler healthy!');
     })
