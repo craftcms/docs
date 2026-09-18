@@ -48,3 +48,11 @@ app(\MyOrg\Activity\Reporting\Manager::class)->track(
 ```
 
 Either way, Laravel will make sure `#[Singleton]` service classes are reused.
+
+### Twig
+
+Craft exposes all known facades to Twig, from `CraftCms\Cms\Twig\Extensions\LaravelExtension`:
+
+```twig
+You are viewing <code>{{ Request.path() }}</code>.
+```
