@@ -29,14 +29,25 @@ If you care about the outcome of the event, store the event instance in a variab
 - **Cancelable** events should `use CraftCms\Cms\Shared\Concerns\ValidatableEvent`, and the emitting context can proceed based on `$event->isValid`. As with the legacy `CancelableEvent`, the last handler to set `isValid` wins.
 - **Handleable** events should `use CraftCms\Cms\Shared\Concerns\HandleableEvent`, and the emitting context can check `$event->handled` to determine whether a handler intervened.
 
-As an alternative to handleable events, `Event::until()` or `event(..., halt: true)` can be used to capture the first non-null return value from a handler.
-Similarly, instruct other developers to return `false` from an event to prevent further handlers from running.
+As an alternative to handleable events, `Event::until()` or `event(..., halt: true)` can be used to capture the first non-null return value from a handler (and skip further handlers), without an intermediate variable.
+Similarly, developer may return `false` from a “halting” event to prevent subsequent handlers from running.
 
 [Dispatchable](laravel:events#dispatching-events) events provide an alternative pattern:
 
 ```php
 DeliveryConfirmed::dispatch($args);
 ```
+
+### Naming Events
+
+We have adopted an “object-action” pattern for our event names:
+
+- `InputOptionsResolving` — “Resolving” generally corresponds to our historical use of “define” events. This one replaces the `EVENT_DEFINE_OPTIONS` constant and `DefineInputOptionsEvent` event.
+- `EntryTypeDeleting` — “Deleting,” “saving,” “restoring,” and other -ing events are typically emitted _before_ something takes place, and should be used to prevent or modify behavior. This used to be `EVENT_BEFORE_DELETE`
+- `SectionSaved` — “Saved” and other past-tense actions replace `AFTER_*` events, and indicate that something has taken place (and can no longer be modified or prevented).
+
+As a result, most event constant names have semantically changed, and cannot be automatically transformed (i.e. with regular expressions).
+Refer to the docblocks for each constant to locate the new event class.
 
 ## Listeners
 
@@ -48,7 +59,7 @@ Specific objects/instances may be attached to an event, but there is no *de fact
 Bind listeners to events using your plugin’s `$events` property (see the `HasListeners` trait):
 
 ```php
-use CraftCms\Cms\Cp\Events\DefineElementCardHtml;
+use CraftCms\Cms\Cp\Events\ElementCardHtmlResolving;
 use CraftCms\Cms\Element\Events\DraftApplied;
 use CraftCms\Cms\Plugin\Plugin;
 use Illuminate\Mail\Events\MessageSending;
@@ -64,7 +75,7 @@ class DemoPlugin extends Plugin
         // Laravel event:
         MessageSending::class => Listeners\LogMailMessage::class,
         // Multiple listeners can be attached to a single event name:
-        DefineElementCardHtml::class => [
+        ElementCardHtmlResolving::class => [
             // Listener class:
             Listeners\AddCardDetails::class,
             // “Callable” array:
