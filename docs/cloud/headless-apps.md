@@ -35,9 +35,8 @@ Follow these guidelines for a successful headless setup on Craft Cloud:
 ## Automated Retries
 
 [Ky’s retry options](https://github.com/sindresorhus/ky#retry) support network
-errors, `Retry-After`, exponential backoff, and jitter. Use an
-[overall timeout](https://github.com/sindresorhus/ky#totaltimeout) to bound all
-attempts and delays. The examples below use Ky for this policy.
+errors, `Retry-After`, exponential backoff, and jitter. The examples below use
+Ky for this policy.
 
 ## Request Signatures
 
