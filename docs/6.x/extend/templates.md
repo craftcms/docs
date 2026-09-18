@@ -177,6 +177,8 @@ CraftVariable::macro('track', function () {
 ```
 :::
 
+Note that before calling its own macro methods, `CraftVariable` attempts to forward unknown calls to `CraftCms\Cms\Cms`, then Laravel’s `Illuminate\Foundation\Application` instance, so generically-named macros may be intercepted by built-in functionality.
+
 ### Globals
 
 You can inject global variables much more easily in Craft 6.x, using the `CraftCms\Cms\View\Events\TemplateGlobalsResolving` event:
