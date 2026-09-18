@@ -21,7 +21,7 @@ To test adequately, remove the adapter and all other plugins from the host proje
 
 ## Signatures
 
-The legacy base plugin class (`craft\base\Plugin`) and the interfaces in implements may require signature updates for some lower-level methods.
+The legacy base plugin class (`craft\base\Plugin`) and the interfaces it implements may require signature updates for some lower-level methods.
 
 We have mainly observed this with the `attributes()` and `attributeLabels()` methods.
 If you don’t use these, there’s nothing to do here.
