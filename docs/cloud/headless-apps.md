@@ -11,9 +11,10 @@ builds and background revalidation.
 
 Follow these guidelines for a successful headless setup on Craft Cloud:
 
-- **Request signing:** [Sign requests](request-signing.md) made by your
-  hosting platform, such as Vercel or Netlify, to bypass the stricter
-  untrusted-bot policy.
+- **Request signing:** [Sign requests](request-signing.md) within your hosting
+  platform, such as Vercel or Netlify, to bypass the stricter untrusted-bot
+  policy. Never expose the signing key to browser code or a public environment
+  variable.
 - **Automated retries:** Retries provide resilience against unavoidable
   transient network errors, not just rate limits. Rate limits exist to protect
   your origin. Without them, traffic bursts could overwhelm your database and
@@ -26,9 +27,9 @@ Follow these guidelines for a successful headless setup on Craft Cloud:
     options.
   - When possible, send GraphQL queries with
     [`GET` requests](/5.x/development/graphql.html#sending-requests-manually) so
-    successful responses can be served from Cloud’s static cache.
-  - For error responses (4xx and up), honor `Retry-After`, ideally with
-    exponential backoff.
+    successful responses can be cached by your hosting platform.
+  - For retryable error responses, honor `Retry-After`, ideally with exponential
+    backoff.
   - Only retry `POST` requests that contain read-only GraphQL queries—never
     mutations.
 
