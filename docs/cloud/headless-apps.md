@@ -21,7 +21,9 @@ Follow these guidelines for a successful headless setup on Craft Cloud:
   - Automated builds can issue many requests in a short window. If possible,
     slow the request rate by reducing build concurrency or adding an interval
     between requests.
-    [Nuxt’s Nitro engine supports both options](https://nitro.build/config#prerender).
+    [Nuxt’s Nitro engine](https://nitro.build/config#prerender)
+    ([no relation](https://craftcms.com/blog/retiring-craft-nitro)) supports both
+    options.
   - When possible, send GraphQL queries with
     [`GET` requests](/5.x/development/graphql.html#sending-requests-manually) so
     successful responses can be served from Cloud’s static cache.
