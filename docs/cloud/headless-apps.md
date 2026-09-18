@@ -9,23 +9,26 @@ human traffic. This poses a challenge for headless apps: all content
 retrieval is automated and often arrives in concentrated bursts during static
 builds and background revalidation.
 
-Two components are critical for a successful headless setup on Craft Cloud:
+Follow these guidelines for a successful headless setup on Craft Cloud:
 
-- **Request signing:**
-  - Use [request signing](request-signing.md) from trusted server-side code to
-    bypass the untrusted-bot policy.
-  - Signatures do not bypass shared capacity limits, so signed requests can
-    still receive `429` or `503` responses.
-  - Never expose the signing key to a browser or in a public environment
-    variable.
-- **Automated retries:**
-  - Treat every non-2xx response as a failure.
-  - For `429` and `503` responses, honor `Retry-After` and use bounded retries
-    with exponential backoff and jitter.
+- **Request signing:** [Sign requests](request-signing.md) made by your
+  hosting platform, such as Vercel or Netlify, to bypass the stricter
+  untrusted-bot policy.
+- **Automated retries:** Retries provide resilience against unavoidable
+  transient network errors, not just rate limits. Rate limits exist to protect
+  your origin. Without them, traffic bursts could overwhelm your database and
+  result in more problematic errors.
+  - Automated builds can issue many requests in a short window. If possible,
+    slow the request rate by reducing build concurrency or adding an interval
+    between requests.
+    [Nuxt's Nitro engine supports both options](https://nitro.build/config#prerender).
+  - When possible, send GraphQL queries with
+    [`GET` requests](/5.x/development/graphql.html#sending-requests-manually) so
+    successful responses can be served from Cloud's static cache.
+  - For error responses (4xx and up), honor `Retry-After`, ideally with
+    exponential backoff.
   - Only retry `POST` requests that contain read-only GraphQL queries—never
     mutations.
-  - Throw after retries are exhausted so `stale-while-revalidate` caching can
-    preserve the last successful result.
 
 ## Automated Retries
 
