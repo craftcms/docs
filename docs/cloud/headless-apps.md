@@ -9,97 +9,36 @@ human traffic. This poses a challenge for headless apps: all content
 retrieval is automated and often arrives in concentrated bursts during static
 builds and background revalidation.
 
-Two components are critical for a successful headless setup on Craft Cloud:
+Follow these guidelines for a successful headless setup on Craft Cloud:
 
-- **Request signing:**
-  - Use [request signing](request-signing.md) from trusted server-side code to
-    bypass the untrusted-bot policy.
-  - Signatures do not bypass shared capacity limits, so signed requests can
-    still receive `429` or `503` responses.
-  - Never expose the signing key to a browser or in a public environment
-    variable.
-- **Automated retries:**
-  - Treat every non-2xx response as a failure.
-  - For `429` and `503` responses, honor `Retry-After` and use bounded retries
-    with exponential backoff and jitter.
+- **Request signing:** [Sign requests](request-signing.md) within your hosting
+  platform, such as Vercel or Netlify, to bypass the stricter untrusted-bot
+  policy. Never expose the signing key to browser code or a public environment
+  variable.
+- **Automated retries:** Retries provide resilience against unavoidable
+  transient network errors, not just rate limits. Rate limits exist to protect
+  your origin. Without them, traffic bursts could overwhelm your database and
+  result in more problematic errors.
+  - Automated builds can issue many requests in a short window. If possible,
+    slow the request rate by reducing build concurrency or adding an interval
+    between requests.
+    [Nuxt’s Nitro engine](https://nitro.build/config#prerender)
+    ([no relation](https://craftcms.com/blog/retiring-craft-nitro)) supports both
+    options.
+  - When possible, send GraphQL queries with
+    [`GET` requests](/5.x/development/graphql.html#sending-requests-manually) so
+    successful responses can be cached by your hosting platform.
+  - For retryable error responses, honor `Retry-After`, ideally with exponential
+    backoff.
   - Only retry `POST` requests that contain read-only GraphQL queries—never
     mutations.
-  - Throw after retries are exhausted so `stale-while-revalidate` caching can
-    preserve the last successful result.
 
 ## Automated Retries
 
-A maintained Fetch client such as [Ky](https://github.com/sindresorhus/ky) can
-provide this retry policy. If you prefer not to add a dependency, use a small
-wrapper around the native Fetch API:
-
-```js
-// Bound all attempts and delays.
-const TOTAL_TIMEOUT = 30_000;
-
-const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
-
-function getRetryDelay(response, attempt) {
-  const retryAfter = response.headers.get('Retry-After');
-
-  // Retry only responses that include Retry-After.
-  if (!retryAfter) {
-    return null;
-  }
-
-  const backoff = 1000 * 2 ** attempt * (0.5 + Math.random() / 2);
-  const seconds = Number(retryAfter);
-
-  if (Number.isFinite(seconds)) {
-    return Math.max(backoff, seconds * 1000);
-  }
-
-  const date = Date.parse(retryAfter);
-
-  if (!Number.isNaN(date)) {
-    return Math.max(backoff, date - Date.now());
-  }
-
-  return backoff;
-}
-
-export async function fetchWithRetry(request) {
-  const deadline = Date.now() + TOTAL_TIMEOUT;
-
-  for (let attempt = 0; ; attempt++) {
-    const remaining = deadline - Date.now();
-
-    if (remaining <= 0) {
-      throw new Error('Craft request timed out');
-    }
-
-    const signal = AbortSignal.any([
-      request.signal,
-      AbortSignal.timeout(remaining),
-    ]);
-    const response = await fetch(request.clone(), { signal });
-
-    if (response.ok) {
-      return response;
-    }
-
-    const error = new Error(`Craft request failed: ${response.status}`);
-    const delay = getRetryDelay(response, attempt);
-
-    await response.body?.cancel();
-
-    if (delay === null) {
-      throw error;
-    }
-
-    if (Date.now() + delay >= deadline) {
-      throw error;
-    }
-
-    await sleep(delay);
-  }
-}
-```
+Resilient automated requests should handle network errors, `Retry-After`,
+exponential backoff, and jitter. For brevity, the examples below use
+[Ky](https://github.com/sindresorhus/ky#retry) for this policy, but no dependency
+is required.
 
 ## Request Signatures
 
@@ -140,9 +79,8 @@ const getBlogEntries = unstable_cache(
     const result = await ky(request, {
       cache: 'no-store',
       retry: {
-        limit: Number.POSITIVE_INFINITY,
-        methods: ['post'],
-        statusCodes: [429, 503],
+        limit: 10,
+        methods: ['get', 'post'],
         jitter: true,
       },
       timeout: false,
@@ -177,13 +115,11 @@ revalidation.
 
 ## Nuxt Example
 
-Nuxt’s `$fetch` uses [ofetch](https://github.com/unjs/ofetch#-auto-retry), which
-can retry requests but does not provide this `Retry-After` and backoff policy.
-Keep the signed request in a server route and use the shared helper:
+Keep the signed request in a Nuxt server route:
 
 ```js
 // server/api/blog.get.js
-import { fetchWithRetry } from '../utils/fetch-with-retry.js';
+import ky from 'ky';
 import { getSignatureHeaders } from '../utils/request-signatures.js';
 
 const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN } = process.env;
@@ -203,8 +139,15 @@ export default defineEventHandler(async () => {
     request.headers.set(name, value);
   }
 
-  const response = await fetchWithRetry(request);
-  const result = await response.json();
+  const result = await ky(request, {
+    retry: {
+      limit: 10,
+      methods: ['get', 'post'],
+      jitter: true,
+    },
+    timeout: false,
+    totalTimeout: 30_000,
+  }).json();
 
   if (result.errors?.length) {
     throw new Error(result.errors.map((error) => error.message).join('\n'));
@@ -238,7 +181,7 @@ build rather than publish partial content:
 
 ```js
 ---
-import { fetchWithRetry } from '../lib/fetch-with-retry.js';
+import ky from 'ky';
 import { getSignatureHeaders } from '../lib/request-signatures.js';
 
 const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN } = process.env;
@@ -256,8 +199,15 @@ for (const [name, value] of Object.entries(getSignatureHeaders(request))) {
   request.headers.set(name, value);
 }
 
-const response = await fetchWithRetry(request);
-const result = await response.json();
+const result = await ky(request, {
+  retry: {
+    limit: 10,
+    methods: ['get', 'post'],
+    jitter: true,
+  },
+  timeout: false,
+  totalTimeout: 30_000,
+}).json();
 
 if (result.errors?.length) {
   throw new Error(result.errors.map((error) => error.message).join('\n'));
