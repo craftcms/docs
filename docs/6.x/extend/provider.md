@@ -2,10 +2,12 @@
 
 Plugins now extend `CraftCms\Cms\Plugin\Plugin`, and are Laravel [service providers](laravel:providers).
 
+<!-- more -->
+
 Many plugins will only need to update their [settings model](#settings) and rename the `init()` method to `boot()`.
 At this point—with the adapter installed—your plugin should be in a stable state from which you can gradually move [initialization logic](avenues.md#initialization) to the new architecture.
 
-You are not obligated to adopt `PascalCase` namespaces, but if you do (and your base class is named something other than `Plugin`, in your autoloading root), be sure and make the corresponding update to the `extra.class` property in `composer.json`:
+You are not obligated to adopt `PascalCase` namespaces, but if you do (and your base class is named something other than `Plugin`, in your autoloading root), make the corresponding update to the `extra.class` property in `composer.json`:
 
 ```json{8}
 {
@@ -24,8 +26,8 @@ In order to support the Craft plugin lifecycle (installation and uninstallation,
 
 ## Settings
 
-When you change your plugin’s base class, its `createSettingsModel()` method signature will require that it return a `CraftCms\Cms\Validation\Contracts\Validatable` (or `null`) instead of a `craft\base\Model`.
-We provide the abstract `CraftCms\Cms\Plugin\PluginSettings` class for you to extend, which retains much of the same [component](models.md#data-objects) functionality.
+The `createSettings()` method replaces `createSettingsModel()`, and must return a subclass of `CraftCms\Cms\Plugin\PluginSettings` (or `null`).
+This base class retains much of the same [component](models.md#data-objects) functionality, and should be a drop-in replacement for `craft\base\Model`.
 
 ::: tip
 Laravel tends to use *model* in the context of its Eloquent ORM.
