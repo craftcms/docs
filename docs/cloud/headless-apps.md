@@ -200,9 +200,8 @@ revalidation.
 
 ## Nuxt Example
 
-Nuxt’s `$fetch` uses [ofetch](https://github.com/unjs/ofetch#-auto-retry), which
-can retry requests but does not provide this `Retry-After` and backoff policy.
-Keep the signed request in a server route and use the shared helper:
+Keep the signed request in a Nuxt server route and use the dependency-free
+wrapper above:
 
 ```js
 // server/api/blog.get.js
