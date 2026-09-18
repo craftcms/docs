@@ -10,13 +10,17 @@ If you maintain a plugin that provides its own extension surface (events, servic
 
 ## Necessity
 
-Some low-level plugins may not be strictly necessary in the Laravel ecosystem, but developers will still appreciate a configuration layer that is accessible via the control panel and tracked in project config.
+Some low-level plugins may no longer be necessary in the Laravel ecosystem, but developers will still appreciate a configuration layer that is accessible via the control panel and tracked in project config.
 
 Examples of this are:
 
-- **Mail transport adapters** — Projects can set up mailers via `config/mail.php` and select one in <Journey path="Settings, Email" />
+- **Mail transport adapters** — Projects can set up mailers via `config/mail.php` and select one in <Journey path="Settings, Email" />.
 - **Custom log back-ends** — As with prior versions of Craft, plugins may not be initialized early enough in the app’s lifecycle to capture a complete picture. Consider whether projects can effectively use Laravel’s built-in [logging](laravellogging) tools.
-- **Filesystem types** — Developers can directly configure [disks](disks.md) and use them for volumes. The <Journey path="Settings, Filesystems" /> screen also acts as a disk configurator.
+
+::: warning
+Filesystems have been completely removed in Craft 6.x.
+Developers will configure Laravel [disks](laravel:filesystem) and select them from each volume’s settings.
+:::
 
 ## Style
 
