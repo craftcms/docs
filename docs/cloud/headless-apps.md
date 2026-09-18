@@ -79,7 +79,7 @@ const getBlogEntries = unstable_cache(
       cache: 'no-store',
       retry: {
         limit: 10,
-        methods: ['post'],
+        methods: ['get', 'post'],
         jitter: true,
       },
       timeout: false,
@@ -141,7 +141,7 @@ export default defineEventHandler(async () => {
   const result = await ky(request, {
     retry: {
       limit: 10,
-      methods: ['post'],
+      methods: ['get', 'post'],
       jitter: true,
     },
     timeout: false,
@@ -201,7 +201,7 @@ for (const [name, value] of Object.entries(getSignatureHeaders(request))) {
 const result = await ky(request, {
   retry: {
     limit: 10,
-    methods: ['post'],
+    methods: ['get', 'post'],
     jitter: true,
   },
   timeout: false,
