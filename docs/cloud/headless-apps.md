@@ -80,7 +80,6 @@ const getBlogEntries = unstable_cache(
       retry: {
         limit: 10,
         methods: ['post'],
-        statusCodes: [429, 503],
         jitter: true,
       },
       timeout: false,
@@ -143,7 +142,6 @@ export default defineEventHandler(async () => {
     retry: {
       limit: 10,
       methods: ['post'],
-      statusCodes: [429, 503],
       jitter: true,
     },
     timeout: false,
@@ -204,7 +202,6 @@ const result = await ky(request, {
   retry: {
     limit: 10,
     methods: ['post'],
-    statusCodes: [429, 503],
     jitter: true,
   },
   timeout: false,
