@@ -32,6 +32,7 @@ module.exports = {
             "requirements",
             "install",
             "upgrade",
+            ["compatibility", "Compatibility"],
           ],
         },
         {

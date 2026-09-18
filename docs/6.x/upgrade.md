@@ -14,12 +14,11 @@ We recommend approaching the upgrade in three phases: [preparation](#preparing-f
 
 ### Requirements
 
-There’s a few things that you need to take care of _before_ the upgrade (even with the [adapter](#adapter)):
+There are a few things that you need to take care of _before_ the upgrade (even with the [adapter](compatibility.md)):
 
 - Update Craft to the latest 5.x release, and all plugins to their latest compatible versions (see the note below about the state of plugins during alpha). You cannot upgrade directly to Craft 6.x from Craft 4.x or earlier.
 - Upgrade PHP on your host to 8.5
 - Resolve any outstanding deprecation notices
-- Flatten any [multi-environment](/5.x/configure.md#multi-environment-configs) config files (arrays with a `*` key and one or more environment names) using environment variables. If you use the [fluent style](/5.x/configure.md#style) for configuration, you are good to go.
 
 ### Reminders
 
@@ -34,7 +33,7 @@ You’ll be able to get a sense for the new project structure without the pressu
     - While project config schema is *mostly* consistent between 5.x and 6.x, we do not recommend attempting to merge changes across versions (i.e. from an a feature branch), especially during the alpha and beta.
 - Allow your queue to fully process. Consider running `ddev craft queue/run` if there are a lot of pending jobs and you can’t keep a browser open.
     ::: warning
-    During the upgrade, your `queue` table is removed and rebuilt. _Any remaining jobs will be lost._
+    During the upgrade, your `queue` table is removed and rebuilt. _Any remaining jobs will be lost, regardless of their status._
     :::
 - Capture a database backup.
 - Take note of your configured mail adapter in <Journey path="Settings, Email" />.
@@ -94,295 +93,54 @@ ddev artisan craft:up
 ddev php craft up
 ```
 
-The new DDEV project type means that it will only forward `artisan` commands, but you can still use Craft’s entry point via `php`.
+The new DDEV project type means that it will only forward `artisan` commands, but you can still use Craft’s entry point via `ddev php`.
 
-::: tip
+::: warning
 If you see a warning about the application being in production, it’s safe to ignore.
 Laravel will warn you before applying migrations when `APP_DEBUG` is off.
 :::
-
-<aside>
-<img src="/icons/warning_red.svg" alt="/icons/warning_red.svg" width="40px" />
-
-If you see a warning about the application being in production, it’s safe to ignore. Laravel will warn you before applying migrations when `APP_DEBUG` is off.
-
-</aside>
-
-### Cleanup
-
-We recommend taking another snapshot of your database and code so that you can revert to this freshly-upgraded state if you want to try different strategies for dealing with [deprecations](#deprecations).
-
-::: warning
-The upgrade tool added `craftcms/yii2-adapter` to your project’s Composer requirements to make templates and modules compatible with 6.x.
-Don’t remove this until you have resolved all new deprecation warnings!
-:::
-
-## Deprecations
-
-At this point, you should have a fully-functional Craft application!
-
-The rest of the upgrade can be tackled at your leisure, but you should review the rest of this section to get an idea of how much work is ahead.
 
 ### Bootstrapping
 
 During the upgrade, we removed the `bootstrap.php` file that has come with new projects [since Craft 3.7](https://github.com/craftcms/craft/releases/tag/1.1.5).
 If you had any customizations to Craft’s initialization process (like how environment variables are loaded), you may need to find equivalent features in Laravel.
 
-Many of the [bootstrap variables](/5.x/reference/config/bootstrap.md) you would define here have been removed and will have no effect.
+Many of the [bootstrap variables](compatibility.md#constants) you would define here have been removed and will have no effect.
 We strongly recommend using the [new default Craft project structure](https://github.com/craftcms/craft/tree/6.x).
 
 If you used the upgrade tool, it removed `vlucas/phpdotenv` from your `composer.json`, but it will still be installed as a transitive dependency of Laravel.
-You do not need to do anything to continue using a `.env` file.
+You do not need to do anything to continue using a `.env` file, provided it is at the application “root” (typically next to the `vendor/` directory, or the path passed to `Application::configure()` in the new `bootstrap/app.php`).
 
-### Configuration
+### Cleanup
 
-As mentioned in the preparation step, multi-environment configuration is no longer supported.
+We recommend taking another snapshot of your database and code so that you can revert to this freshly-upgraded state if you want to try different strategies for dealing with [deprecations](#deprecations).
 
-#### General Config
-
-A few settings have been removed, renamed, or relocated:
-
-| Setting | Notes |
-| --- | --- |
-| `timezone` | Use the `timezone` key in the main Laravel config file (`config/app.php`). Project config supersedes this. |
-| `defaultCookieDomain` | Use the `domain` key in Laravel’s [session](laravel:session#configuration) config file (`config/session.php`). |
-| `blowfishHashCost` | Use `blowfish.bcrypt.rounds` in Laravel’s [hashing](laravel:hashing#main-content) config file (`config/hashing.php`). |
-| `phpSessionName` | Use `cookie` in Laravel’s `config/session.php` |
-| `systemMessageTemplate` | Site-specific templates are configured via Settings &rarr; Email |
-| `elevatedSessionDuration` | Use [`password_timeout`](laravel:authentication#password-confirmation) in Laravel’s authentication config file (`config/auth.php`). The default is now 10800 seconds (three hours). |
-
-You can selectively publish Laravel’s default config files from the console:
-
-```bash
-ddev artisan config:publish [auth|session|hashing|mail|...]
-```
-
-Additionally, these settings’ default values have changed:
-
-| Setting | Previous | New | Notes |
-| --- | --- | --- | --- |
-| `loginPath` | `'login'` | `false` |  The front-end login form is now hidden, by default. |
-
-#### Database
-
-`db.php` is no longer used.
-Environment variables beginning with `CRAFT_DB_*` in `.env` have been renamed to agree with [Laravel convention](laravel:database#configuration) and the new DDEV project type behavior.
-
-Advanced configuration (historically done via `app.php`) can be accomplished with Laravel’s `config/database.php`.
-
-### Control Panel
-
-Some sections in the control panel have been replaced by direct Laravel configuration.
-
-#### Email
-
-Configure Laravel’s [mailer](laravel:mail) using `config/mail.php`.
-
-- Translate your old mail adapter’s settings into the appropriate config array, under `mailers`.
-- Set the `default` near the top of `mail.php` to your chosen driver. The default configuration works with DDEV’s Mailpit service.
-- Optional: Remove any drivers you don’t want/need.
-- Optional: Configure additional `failover` drivers.
-- Test from the control panel (<Journey path="Settings, Email, Send a test email" />) or console (`ddev artisan craft:mailer:test`).
-
-::: tip
-Password reset and email validation notifications are now sent via the queue.
+::: warning
+The upgrade tool added `craftcms/yii2-adapter` to your project’s Composer requirements to make templates and modules [compatible with 6.x](compatibility.md).
+Don’t remove this until you have resolved all new deprecation warnings!
 :::
 
-#### Branding
+### Deployment
 
-Two new general config settings are available, which replace customizations you would make via the control panel in <Journey path="Settings, General" />.
-`cpIconUrl` and `cpLogoUrl` can be set to any string that resolves to a publicly-accessible url:
-
-- `/logo.png`
-- `asset('logo.png')`
-- `env('LOGO_URL')`
-- `https://...`
-- Aliases (e.g: `@brand/logo.png`)
-
-::: tip
-Control panel branding is now available to all editions (Solo, Team, and Pro)!
+::: danger
+Craft 6.x is not ready for production use.
+This section is for reference only.
 :::
 
-### Templates
+When your project is in a stable state, you can deploy it to a server that meets Craft’s requirements.
+Keep in mind that the layout of your project has changed significantly!
 
-Your templates have been moved to `resources/views/`, per Laravel convention.
+- Any steps in your deployment that involve paths (i.e. symlinking storage or other persistent files) may need to change;
+- Commands should be mostly compatible, but slash-separated action paths are only supported with the adapter;
+- CRON tasks, daemons, and other queue processes should be reviewed (or replaced/supplemented with the [scheduler](laravel:scheduling) command when applicable);
 
-#### Twig
+## Deprecations
 
-All Twig features remain intact, but accessing Craft APIs via `craft.app` has been deprecated.
-Common use cases for this were…
+At this point, you should have a fully-functional Craft application!
 
-- **Request data** (`craft.app.request.getQueryParam()`) — Use `app('request').get('paramName')` to retrieve data from a `GET` query string or `POST` body.
-- **Session data** (`craft.app.session`) — See the [flashes](#flashes) section, below.
-- **Other services** (`craft.app.entries`, `craft.app.fields`, `craft.app.sites`, …) — All of Craft’s facades are exposed to Twig, using their standard names (`Entries`, `Fields`, `Sites`, …). These proxy classes that are close equivalents to the services you’re familiar with in Craft. For a list of facades, see `extra.laravel.aliases` in `vendor/craftcms/cms/composer.json`.
+The rest of the upgrade can be tackled at your leisure—but you should review the [compatibility](compatibility.md) section to get an idea of how much work is ahead.
 
-These filters have been deprecated:
-
-- `filterByValue` &rarr; Use the `where` filter for closures, or `collect(arr).where('someKey', 'exactValue')`
-- `firstWhere` &rarr; Going forward, only closures will be supported (i.e: `guesses|firstWhere(guess => guess.qty == raffle.realQty)`). This had limited utility, because the only comparison was strict (`===`) or lax (`==`) equality; closures can use any operator, call methods, etc.
-- `index` &rarr; Use `collect(arr).keyBy('myKey')`.
-- `purify` &rarr; Replace with new `sanitize` filter. See the section on our [HTMLPurifier replacement](#html-purification).
-- `ucfirst` &rarr; Replace with Twig’s built-in `capitalize` filter.
-
-#### Flashes
-
-The way you access flashes and restore submitted data has changed.
-A global `errors` variable will be populated when a model fails validation.
-
-Access individual field errors from that object using `errors.has('fieldName')` and `errors.get('fieldName')`.
-This snippet is equivalent to the macro in our [entry form guide](kb:entry-form) and can be used similarly to the [forms documentation](/5.x/development/forms.md#models-and-validation) on models and validation:
-
-```twig
-{% macro errorList(errors, field) %}
-    {% if errors.has(field) ?? false %}
-        <ul>
-            {% for error in errors.get(field) %}
-                <li class="error">{{ error }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-{% endmacro %}
-```
-
-Submitted values are flashed back to the session and can be retrieved using the `old('fieldName')` Twig helper, after redirection.
-
-#### HTML Purification
-
-HTMLPurifier has been replaced by Symfony’s [HtmlSanitizer](https://symfony.com/doc/current/html_sanitizer.html).
-This means any custom configurations in `config/craft/htmlpurifier/*` will need to be translated into the new format.
-
-::: tip
-If you never modified Craft’s `Default.json` config, you can just remove it.
-The new defaults are intended to be equivalent.
-:::
-
-You have two options for configuration, both of which use a [standard config schema](https://symfony.com/doc/current/html_sanitizer.html#configuration):
-
-1. **Config file:** Create a new PHP file in `config/craft/sanitiziers/`, and return an array:
-    ```php
-    <?php
-
-    return [
-        'allow_elements' => [
-            'a' => ['href'],
-        ],
-    ];
-    ```
-1. **Service provider:** In the `boot()` method, instantiate and register a new sanitizer object:
-    ```php
-    use CraftCms\Cms\Support\HtmlSanitizer\HtmlSanitizers;
-    use Symfony\Component\HtmlSanitizer\HtmlSanitizer;
-    use Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig;
-
-    public function boot(HtmlSanitizers $sanitizers): void
-    {
-        $config = new HtmlSanitizerConfig()
-            ->allowElement('a')
-            ->allowAttribute('href', ['a']);
-
-        $sanitizers->register('links-only', new HtmlSanitizer($config));
-    }
-    ```
-    If you do not wish to add the manager as an injected dependency, you can resolve it via the service container:
-    ```php
-    $sanitizers = app(\CraftCms\Cms\Support\HtmlSanitizer\HtmlSanitizers);
-    ```
-
-Plugins can also register configurations using the second method.
-
-The `purify` Twig filter has also been replaced with the appropriately-named `sanitize` filter.
-Like the old one, this filter accepts a custom configuration handle.
-
-#### Markdown
-
-We also replaced the Markdown engine that came with Yii (`cebe/markdown`) with [CommonMark](https://commonmark.thephpleague.com/).
-All the same filters and flavors remain available, but customizations to the parser may not work.
-
-If you were parsing Markdown anywhere in PHP (like an [Element API](plugin:element-api) transformer), you should use the new facade:
-
-```php
-use CraftCms\Cms\Support\Facades\Markdown;
-
-Markdown::parse($text);
-Markdown::parseParagraph($line);
-```
-
-The `md` Twig filter remains functionally identical.
-
-### Commands
-
-Craft’s `exec` command has been removed.
-We recommend using [Laravel’s `tinker` REPL](https://github.com/laravel/tinker) as a replacement for this and Yii’s `shell` command.
-
-If you still find the need to evaluate arbitrary PHP code in a non-interactive setting, you can re-implement it as a [closure command](laravel:artisan#closure-commands) on a project-by-project basis, from a service provider:
-
-```php
-public function boot()
-{
-    Artisan::command('eval {code}', function ($code) {
-        $output = '';
-
-        $this->components->task(
-            'Evaluating PHP code',
-            function () use ($code, &$output) {
-                ob_start();
-                eval($code);
-                $output = ob_get_clean();
-            }
-        );
-
-        $this->line($output);
-
-        return 0;
-    });
-}
-```
-
-### Routing
-
-The `{uid}` placeholder token now matches UUIDs of any version, meaning rules that use it will be _slightly_ more permissive.
-Otherwise, there are no changes to routes defined in the control panel (and stored in project config).
-
-#### Custom Rules
-
-Your existing `config/routes.php` file (having moved to `config/craft/routes.php` during the upgrade) is evaluated by the adapter.
-Yii routes can be translated to [Laravel routes](laravel:routing) and relocated to `routes/web.php`:
-
-::: code
-```php Yii
-# config/craft/routes.php
-return [
-    // Mapping a route to a template:
-    'newsletter' => ['template' => '_forms/newsletter'],
-
-    // Adding a cosmetic alias for a controller:
-    'subscribe' => 'newsletter/subscribers/add',
-];
-```
-```php Laravel
-# routes/web.php
-use Illuminate\Support\Facades\Route;
-
-// Render a template:
-Route::view('newsletter', '_forms/newsletter');
-
-// Map a controller:
-Route::post('subscribe', [\AcmeLabs\Newsletter\Http\Controllers\Subscriber::class, 'create']);
-```
-:::
-
-If you want to gather some data before rendering a template, this is equivalent to `Route::view()`:
-
-```php
-use Illuminate\Http\Request;
-use function CraftCms\Cms\pageTemplate;
-
-Route::get('newsletter', function (Request $request) {
-    return pageTemplate('_forms/newsletter', [
-        'source' => $request->input('campaign_id', 'internal'),
-    ]);
-});
-```
+<See path="compatibility.md" description="A detailed guide for ejecting the adapter package." />
 
 ## Extensions
 
