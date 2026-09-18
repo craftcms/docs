@@ -34,95 +34,10 @@ Follow these guidelines for a successful headless setup on Craft Cloud:
 
 ## Automated Retries
 
-A maintained Fetch client such as [Ky](https://github.com/sindresorhus/ky) can
-provide this retry policy. If you prefer not to add a dependency, use a small
-wrapper around the native Fetch API:
-
-::: details View Dependency-Free Fetch Wrapper
-```js
-import { setTimeout as sleep } from 'node:timers/promises';
-
-// Bound all attempts and delays.
-const TOTAL_TIMEOUT = 30_000;
-
-const getBackoffDelay = (attempt) =>
-  1000 * 2 ** attempt * (0.5 + Math.random() / 2);
-
-function getRetryDelay(response, attempt) {
-  const retryAfter = response.headers.get('Retry-After');
-
-  // Retry only responses that include Retry-After.
-  if (!retryAfter) {
-    return null;
-  }
-
-  const backoff = getBackoffDelay(attempt);
-  const seconds = Number(retryAfter);
-
-  if (Number.isFinite(seconds)) {
-    return Math.max(backoff, seconds * 1000);
-  }
-
-  const date = Date.parse(retryAfter);
-
-  if (!Number.isNaN(date)) {
-    return Math.max(backoff, date - Date.now());
-  }
-
-  return backoff;
-}
-
-export async function fetchWithRetry(request) {
-  const deadline = Date.now() + TOTAL_TIMEOUT;
-
-  for (let attempt = 0; ; attempt++) {
-    const remaining = deadline - Date.now();
-
-    if (remaining <= 0) {
-      throw new Error('Craft request timed out');
-    }
-
-    const signal = AbortSignal.any([
-      request.signal,
-      AbortSignal.timeout(remaining),
-    ]);
-    let response;
-
-    try {
-      response = await fetch(request.clone(), { signal });
-    } catch (error) {
-      const delay = getBackoffDelay(attempt);
-
-      if (request.signal.aborted || Date.now() + delay >= deadline) {
-        throw error;
-      }
-
-      await sleep(delay, undefined, { signal: request.signal });
-      continue;
-    }
-
-    if (response.ok) {
-      return response;
-    }
-
-    const error = new Error(`Craft request failed: ${response.status}`);
-    const delay = getRetryDelay(response, attempt);
-
-    await response.body?.cancel();
-
-    if (delay === null) {
-      throw error;
-    }
-
-    if (Date.now() + delay >= deadline) {
-      throw error;
-    }
-
-    await sleep(delay, undefined, { signal: request.signal });
-  }
-}
-```
-:::
+[Ky’s retry options](https://github.com/sindresorhus/ky#retry) support network
+errors, `Retry-After`, exponential backoff, and jitter. Use an
+[overall timeout](https://github.com/sindresorhus/ky#totaltimeout) to bound all
+attempts and delays. The examples below use Ky for this policy.
 
 ## Request Signatures
 
@@ -163,7 +78,7 @@ const getBlogEntries = unstable_cache(
     const result = await ky(request, {
       cache: 'no-store',
       retry: {
-        limit: Number.POSITIVE_INFINITY,
+        limit: 10,
         methods: ['post'],
         statusCodes: [429, 503],
         jitter: true,
@@ -200,12 +115,11 @@ revalidation.
 
 ## Nuxt Example
 
-Keep the signed request in a Nuxt server route and use the dependency-free
-wrapper above:
+Keep the signed request in a Nuxt server route:
 
 ```js
 // server/api/blog.get.js
-import { fetchWithRetry } from '../utils/fetch-with-retry.js';
+import ky from 'ky';
 import { getSignatureHeaders } from '../utils/request-signatures.js';
 
 const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN } = process.env;
@@ -225,8 +139,16 @@ export default defineEventHandler(async () => {
     request.headers.set(name, value);
   }
 
-  const response = await fetchWithRetry(request);
-  const result = await response.json();
+  const result = await ky(request, {
+    retry: {
+      limit: 10,
+      methods: ['post'],
+      statusCodes: [429, 503],
+      jitter: true,
+    },
+    timeout: false,
+    totalTimeout: 30_000,
+  }).json();
 
   if (result.errors?.length) {
     throw new Error(result.errors.map((error) => error.message).join('\n'));
@@ -260,7 +182,7 @@ build rather than publish partial content:
 
 ```js
 ---
-import { fetchWithRetry } from '../lib/fetch-with-retry.js';
+import ky from 'ky';
 import { getSignatureHeaders } from '../lib/request-signatures.js';
 
 const { CRAFT_URL, CRAFT_GRAPHQL_TOKEN } = process.env;
@@ -278,8 +200,16 @@ for (const [name, value] of Object.entries(getSignatureHeaders(request))) {
   request.headers.set(name, value);
 }
 
-const response = await fetchWithRetry(request);
-const result = await response.json();
+const result = await ky(request, {
+  retry: {
+    limit: 10,
+    methods: ['post'],
+    statusCodes: [429, 503],
+    jitter: true,
+  },
+  timeout: false,
+  totalTimeout: 30_000,
+}).json();
 
 if (result.errors?.length) {
   throw new Error(result.errors.map((error) => error.message).join('\n'));
