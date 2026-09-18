@@ -39,7 +39,8 @@
         "Markdown",
         "URL",
         "walk[- ]through",
-        "web[- ]?site(s)?"
+        "web[- ]?site(s)?",
+        "Node(?:js)?"
       ]
     }
   }
