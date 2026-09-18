@@ -21,10 +21,10 @@ Follow these guidelines for a successful headless setup on Craft Cloud:
   - Automated builds can issue many requests in a short window. If possible,
     slow the request rate by reducing build concurrency or adding an interval
     between requests.
-    [Nuxt's Nitro engine supports both options](https://nitro.build/config#prerender).
+    [Nuxt’s Nitro engine supports both options](https://nitro.build/config#prerender).
   - When possible, send GraphQL queries with
     [`GET` requests](/5.x/development/graphql.html#sending-requests-manually) so
-    successful responses can be served from Cloud's static cache.
+    successful responses can be served from Cloud’s static cache.
   - For error responses (4xx and up), honor `Retry-After`, ideally with
     exponential backoff.
   - Only retry `POST` requests that contain read-only GraphQL queries—never
@@ -42,6 +42,9 @@ const TOTAL_TIMEOUT = 30_000;
 
 const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay));
 
+const getBackoffDelay = (attempt) =>
+  1000 * 2 ** attempt * (0.5 + Math.random() / 2);
+
 function getRetryDelay(response, attempt) {
   const retryAfter = response.headers.get('Retry-After');
 
@@ -50,7 +53,7 @@ function getRetryDelay(response, attempt) {
     return null;
   }
 
-  const backoff = 1000 * 2 ** attempt * (0.5 + Math.random() / 2);
+  const backoff = getBackoffDelay(attempt);
   const seconds = Number(retryAfter);
 
   if (Number.isFinite(seconds)) {
@@ -80,7 +83,20 @@ export async function fetchWithRetry(request) {
       request.signal,
       AbortSignal.timeout(remaining),
     ]);
-    const response = await fetch(request.clone(), { signal });
+    let response;
+
+    try {
+      response = await fetch(request.clone(), { signal });
+    } catch (error) {
+      const delay = getBackoffDelay(attempt);
+
+      if (request.signal.aborted || Date.now() + delay >= deadline) {
+        throw error;
+      }
+
+      await sleep(delay);
+      continue;
+    }
 
     if (response.ok) {
       return response;
