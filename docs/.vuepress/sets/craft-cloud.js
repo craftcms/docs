@@ -81,6 +81,7 @@ module.exports = {
         title: "Help",
         collapsable: false,
         children: [
+          "diagnostics",
           "faq",
           "troubleshooting",
           "security",
