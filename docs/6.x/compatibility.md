@@ -157,14 +157,14 @@ Chaining remains supported:
     .all() %}
 ```
 
-### Twig Features
-
-- `purify` &rarr; `sanitize`
-
-## Forms
+### Forms
 
 Legacy “action paths” are still registered by Craft to avoid breaking changes, even without the adapter.
-Plugins can also continue registering action routes for backwards-compatibility, but 
+Your forms’ usage of `actionInput()` can remain the same.
+
+::: tip
+Plugins can also continue registering [action routes](extend/http.md#action-paths) for backwards-compatibility, without the adapter; carefully review their migration guides for recommendations.
+:::
 
 ## Ejecting the Adapter
 
@@ -181,9 +181,6 @@ Additional errors may present themselves, with the compatibility layer removed�
 Note that during the 6.x alpha and beta, your editor may still be able to discover classes in the old `craftcms\` namespace.
 While in active development, we elected to version Craft and the adapter together, and do a “subtree split” into the adapter package.
 :::
-
-
----
 
 ### Configuration
 
