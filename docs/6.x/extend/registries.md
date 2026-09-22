@@ -57,7 +57,6 @@ These feature registries accept one or more class string identifiers to `registe
 | Auth methods | `CraftCms\Cms\Auth\AuthMethods` |
 | Element types | `CraftCms\Cms\Element\ElementTypes` |
 | Field types | `CraftCms\Cms\Field\FieldTypes` |
-| Filesystem adapters | `CraftCms\Cms\Filesystem\FilesystemTypes` |
 | GraphQL directives | `CraftCms\Cms\Gql\GqlDirectives` |
 | GraphQL mutations | `CraftCms\Cms\Gql\GqlMutations` |
 | GraphQL queries | `CraftCms\Cms\Gql\GqlQueries` |
