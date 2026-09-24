@@ -5,7 +5,7 @@ sidebarDepth: 2
 # The Adapter + Compatibility
 
 To make existing projects compatible with the new Laravel architecture, our adapter package is installed during the upgrade.
-This page covers a few groups of features that you’ll need to review before ejecting the adapter.
+This page covers a few groups of features that you’ll need to review before [ejecting the adapter](#ejecting-the-adapter).
 
 <!-- more -->
 
@@ -39,6 +39,23 @@ Its primary function is to let _us_ (the maintainers of Craft) iterate on archit
 Everything on this page is optional, and can be addressed over time, in as many discrete chunks as your time and budget require.
 :::
 
+## Ejecting the Adapter
+
+When you have reviewed the rest of this page and resolved all deprecation warnings, you’re ready to test your project without the adapter.
+The adapter is active as long as it is installed with Composer, so you must remove it from the project, completely:
+
+```bash
+ddev composer remove craftcms/yii2-adapter
+```
+
+Additional errors may present themselves, with the compatibility layer removed—especially if your project directly accessed Yii features.
+`yiisoft/yii2` is only a dependency of the adapter, so _all_ classes 
+
+::: warning
+Note that during the 6.x alpha and beta, your editor may still discover classes in the old `craftcms\` namespace, even though they are not auto-loadable.
+While in active development, we elected to version control Craft and the adapter together, and do a “subtree split” into the adapter package.
+:::
+
 ## Configuration
 
 Multi-environment configuration is only supported with the adapter.
@@ -47,6 +64,40 @@ If you use the [fluent style](/5.x/configure.md#style) for configuration, you ar
 
 Config files that use “app-type” prefixes (i.e. `general.web.php`) will also need to be flattened into a single config file.
 HTTP and console applications are even more similar in Laravel, so scoping configuration to one or the other is rarely necessary.
+
+### General Config
+
+A few settings have been removed, renamed, or relocated:
+
+| Setting | Notes |
+| --- | --- |
+| `timezone` | Use the `timezone` key in the main Laravel config file (`config/app.php`). Project config supersedes this. |
+| `defaultCookieDomain` | Use the `domain` key in Laravel’s [session](laravel:session#configuration) config file (`config/session.php`). |
+| `blowfishHashCost` | Use `blowfish.bcrypt.rounds` in Laravel’s [hashing](laravel:hashing#main-content) config file (`config/hashing.php`). |
+| `phpSessionName` | Use `cookie` in Laravel’s `config/session.php` |
+| `systemMessageTemplate` | Site-specific templates are configured via Settings &rarr; Email |
+| `elevatedSessionDuration` | Use [`password_timeout`](laravel:authentication#password-confirmation) in Laravel’s authentication config file (`config/auth.php`). The default is now 10800 seconds (three hours). |
+| `omitScriptNameInUrls` | No longer used; the script name is never used when generating URLs. |
+| `pathParam` | No longer used. |
+
+You can selectively publish Laravel’s default config files from the console:
+
+```bash
+ddev artisan config:publish [auth|session|hashing|mail|...]
+```
+
+Additionally, these settings’ default values have changed:
+
+| Setting | Previous | New | Notes |
+| --- | --- | --- | --- |
+| `loginPath` | `'login'` | `false` |  The front-end login form is now hidden, by default. |
+
+### Database
+
+`db.php` is no longer used.
+Environment variables beginning with `CRAFT_DB_*` in `.env` have been renamed to agree with [Laravel convention](laravel:database#configuration) and the new DDEV project type behavior.
+
+Advanced database configuration (historically handled via `app.php`) can be accomplished with Laravel’s `config/database.php`.
 
 ### Constants
 
@@ -64,6 +115,39 @@ These constants (sometimes called [bootstrap variables](/5.x/reference/config/bo
 ::: warning
 If you had set any of these in your `boostrap.php` file, they were removed during the upgrade.
 We strongly recommend using the new directory structure so that your project remains compatible with Laravel.
+:::
+
+## Control Panel
+
+Some sections in the control panel have been replaced by direct Laravel configuration.
+
+### Email
+
+Configure Laravel’s [mailer](laravel:mail) using `config/mail.php`.
+
+- Translate your old mail adapter’s settings into the appropriate config array, under `mailers`.
+- Set the `default` near the top of `mail.php` to your chosen driver. The default configuration works with DDEV’s Mailpit service.
+- Optional: Remove any drivers you don’t want/need.
+- Optional: Configure additional `failover` drivers.
+- Test from the control panel (<Journey path="Settings, Email, Send a test email" />) or console (`ddev artisan craft:mailer:test`).
+
+::: tip
+Password reset and email validation notifications are now sent via the queue.
+:::
+
+### Branding
+
+Two new general config settings are available, which replace customizations you would make via the control panel in <Journey path="Settings, General" />.
+`cpIconUrl` and `cpLogoUrl` can be set to any string that resolves to a publicly-accessible url:
+
+- `/logo.png`
+- `asset('logo.png')`
+- `env('LOGO_URL')`
+- `https://...`
+- Aliases (e.g: `@brand/logo.png`)
+
+::: tip
+Control panel branding is now available to all editions (Solo, Team, and Pro)!
 :::
 
 ## Services
@@ -113,12 +197,29 @@ The most common application for this is likely in your main service provider, wh
 
 ## Templating
 
-Templates now live in the `resources/views/` directory.
+Your templates have been moved to `resources/views/`, per Laravel convention.
 If your `templates/` directory was not relocated by the upgrade tool, you will need to move it before ejecting the adapter, or [add the old location](extend/templates.md) via an application service provider.
+
+### Twig
+
+All Twig features remain intact, but Craft APIs are no longer accessible via `craft.app`.
+Common use cases for this were…
+
+- **Request data** (`craft.app.request`) — Use `Request.get('paramName')` to retrieve data from a `GET` query string or `POST` body.
+- **Session data** (`craft.app.session`) — See the [flashes](#flashes) section, below.
+- **Other services** (`craft.app.entries`, `craft.app.fields`, `craft.app.sites`, …) — All of Craft’s facades are exposed to Twig, using their standard names (`Entries`, `Fields`, `Sites`, …). These proxy classes that are close equivalents to the services you’re familiar with in Craft. For a list of facades, see `extra.laravel.aliases` in `vendor/craftcms/cms/composer.json`.
+
+These filters have been _deprecated_:
+
+- `filterByValue` &rarr; Use the `where` filter for closures, or `collect(arr).where('someKey', 'exactValue')`
+- `firstWhere` &rarr; Going forward, only closures will be supported (i.e: `guesses|firstWhere(guess => guess.qty == raffle.realQty)`). This had limited utility, because the only comparison was strict (`===`) or lax (`==`) equality; closures can use any operator, call methods, etc.
+- `index` &rarr; Use `collect(arr).keyBy('myKey')`.
+- `purify` &rarr; Replace with new `sanitize` filter. See the section on our [HTMLPurifier replacement](#html-purification).
+- `ucfirst` &rarr; Replace with Twig’s built-in `capitalize` filter.
 
 ### Globals
 
-References to `craft.app` (or `Craft::$app`, in a module) must be replaced with their equivalent facades or helpers.
+As noted above, references to `craft.app` (or `Craft::$app`, in a module) must be replaced with their equivalent facades or helpers.
 See the [services](#services) section above for specifics.
 
 The global `craft` variable now attempts to forward unknown method calls to…
@@ -133,7 +234,7 @@ It is possible that generically-named methods supplied by plugins (via legacy be
 The `view` variable was primarily used to register HTML fragments (i.e: `view.registerJs()`, `view.registerCssFile()`, etc…), or render templates:
 
 - Use the `HtmlStack` facade to buffer scripts, styles, and other markup.
-- Use `renderObjectTemplate()`, or Twig’s `include()` function to compile and render a template. The new `blade()` function provides interoperability, in case you want to experiment with or incrementally adopt [Blade templates](laravel:blade).
+- Use `renderObjectTemplate()` or Twig’s `include()` function to compile and render a template. The new `blade()` function provides interoperability, in case you want to experiment with or incrementally adopt [Blade templates](laravel:blade).
 
 ### Element Queries
 
@@ -157,6 +258,11 @@ Chaining remains supported:
     .all() %}
 ```
 
+#### Advanced Query Builder Features
+
+Queries that use `where()`, `andWhere()`, `orWhere()`, and other [low-level builder methods](queries#basic-where-clauses) will require updates.
+Refer to the Laravel documentation for usage specifics.
+
 ### Forms
 
 Legacy “action paths” are still registered by Craft to avoid breaking changes, even without the adapter.
@@ -165,110 +271,6 @@ Your forms’ usage of `actionInput()` can remain the same.
 ::: tip
 Plugins can also continue registering [action routes](extend/http.md#action-paths) for backwards-compatibility, without the adapter; carefully review their migration guides for recommendations.
 :::
-
-## Ejecting the Adapter
-
-When you have resolved all deprecation warnings and are ready to test your project without the adapter, remove it with Composer:
-
-```bash
-ddev composer remove craftcms/yii2-adapter
-```
-
-Additional errors may present themselves, with the compatibility layer removed—especially if your project directly accessed Yii features.
-`yiisoft/yii2` is only a dependency of the adapter, so _all_ classes 
-
-::: warning
-Note that during the 6.x alpha and beta, your editor may still be able to discover classes in the old `craftcms\` namespace.
-While in active development, we elected to version Craft and the adapter together, and do a “subtree split” into the adapter package.
-:::
-
-### Configuration
-
-#### General Config
-
-A few settings have been removed, renamed, or relocated:
-
-| Setting | Notes |
-| --- | --- |
-| `timezone` | Use the `timezone` key in the main Laravel config file (`config/app.php`). Project config supersedes this. |
-| `defaultCookieDomain` | Use the `domain` key in Laravel’s [session](laravel:session#configuration) config file (`config/session.php`). |
-| `blowfishHashCost` | Use `blowfish.bcrypt.rounds` in Laravel’s [hashing](laravel:hashing#main-content) config file (`config/hashing.php`). |
-| `phpSessionName` | Use `cookie` in Laravel’s `config/session.php` |
-| `systemMessageTemplate` | Site-specific templates are configured via Settings &rarr; Email |
-| `elevatedSessionDuration` | Use [`password_timeout`](laravel:authentication#password-confirmation) in Laravel’s authentication config file (`config/auth.php`). The default is now 10800 seconds (three hours). |
-
-You can selectively publish Laravel’s default config files from the console:
-
-```bash
-ddev artisan config:publish [auth|session|hashing|mail|...]
-```
-
-Additionally, these settings’ default values have changed:
-
-| Setting | Previous | New | Notes |
-| --- | --- | --- | --- |
-| `loginPath` | `'login'` | `false` |  The front-end login form is now hidden, by default. |
-
-#### Database
-
-`db.php` is no longer used.
-Environment variables beginning with `CRAFT_DB_*` in `.env` have been renamed to agree with [Laravel convention](laravel:database#configuration) and the new DDEV project type behavior.
-
-Advanced database configuration (historically handled via `app.php`) can be accomplished with Laravel’s `config/database.php`.
-
-### Control Panel
-
-Some sections in the control panel have been replaced by direct Laravel configuration.
-
-#### Email
-
-Configure Laravel’s [mailer](laravel:mail) using `config/mail.php`.
-
-- Translate your old mail adapter’s settings into the appropriate config array, under `mailers`.
-- Set the `default` near the top of `mail.php` to your chosen driver. The default configuration works with DDEV’s Mailpit service.
-- Optional: Remove any drivers you don’t want/need.
-- Optional: Configure additional `failover` drivers.
-- Test from the control panel (<Journey path="Settings, Email, Send a test email" />) or console (`ddev artisan craft:mailer:test`).
-
-::: tip
-Password reset and email validation notifications are now sent via the queue.
-:::
-
-#### Branding
-
-Two new general config settings are available, which replace customizations you would make via the control panel in <Journey path="Settings, General" />.
-`cpIconUrl` and `cpLogoUrl` can be set to any string that resolves to a publicly-accessible url:
-
-- `/logo.png`
-- `asset('logo.png')`
-- `env('LOGO_URL')`
-- `https://...`
-- Aliases (e.g: `@brand/logo.png`)
-
-::: tip
-Control panel branding is now available to all editions (Solo, Team, and Pro)!
-:::
-
-### Templates
-
-Your templates have been moved to `resources/views/`, per Laravel convention.
-
-#### Twig
-
-All Twig features remain intact, but Craft APIs are no longer accessible via `craft.app`.
-Common use cases for this were…
-
-- **Request data** (`craft.app.request`) — Use `Request.get('paramName')` to retrieve data from a `GET` query string or `POST` body.
-- **Session data** (`craft.app.session`) — See the [flashes](#flashes) section, below.
-- **Other services** (`craft.app.entries`, `craft.app.fields`, `craft.app.sites`, …) — All of Craft’s facades are exposed to Twig, using their standard names (`Entries`, `Fields`, `Sites`, …). These proxy classes that are close equivalents to the services you’re familiar with in Craft. For a list of facades, see `extra.laravel.aliases` in `vendor/craftcms/cms/composer.json`.
-
-These filters have been _deprecated_:
-
-- `filterByValue` &rarr; Use the `where` filter for closures, or `collect(arr).where('someKey', 'exactValue')`
-- `firstWhere` &rarr; Going forward, only closures will be supported (i.e: `guesses|firstWhere(guess => guess.qty == raffle.realQty)`). This had limited utility, because the only comparison was strict (`===`) or lax (`==`) equality; closures can use any operator, call methods, etc.
-- `index` &rarr; Use `collect(arr).keyBy('myKey')`.
-- `purify` &rarr; Replace with new `sanitize` filter. See the section on our [HTMLPurifier replacement](#html-purification).
-- `ucfirst` &rarr; Replace with Twig’s built-in `capitalize` filter.
 
 #### Flashes
 
@@ -292,7 +294,7 @@ This snippet is equivalent to the macro in our [entry form guide](kb:entry-form)
 
 Submitted values are flashed back to the session and can be retrieved using the `old('fieldName')` Twig helper, after redirection.
 
-#### HTML Purification
+## HTML Purification
 
 HTMLPurifier has been replaced by Symfony’s [HtmlSanitizer](https://symfony.com/doc/current/html_sanitizer.html).
 This means any custom configurations in `config/craft/htmlpurifier/*` will need to be translated into the new format.
@@ -344,7 +346,7 @@ Plugins can contribute configurations using the second method.
 The `purify` Twig filter has also been replaced with the appropriately-named `sanitize` filter.
 Like the old one, this filter accepts a custom configuration handle, like `instructions | sanitize('links-only')`
 
-#### Markdown
+## Markdown
 
 We also replaced the Markdown engine that came with Yii (`cebe/markdown`) with [CommonMark](https://commonmark.thephpleague.com/).
 All the same filters and flavors remain available, but customizations to the parser may not work.
@@ -361,6 +363,11 @@ Markdown::parseParagraph($line);
 The `md` Twig filter remains functionally identical.
 
 ### Commands
+
+During the upgrade, we replaced your `craft` CLI entrypoint with one that wraps Laravel’s [Artisan Console](laravel:artisan).
+`php craft list` displays the full CLI API, using Laravel’s colon-separated command names; the legacy slash-separated command syntax still works (`php craft gc/run`), but we recommend updating any external invocations to match Artisan convention (`php craft gc:run`).
+
+#### Ad-hoc execution
 
 Craft’s `exec` command has been removed.
 We recommend using [Laravel’s `tinker` REPL](https://github.com/laravel/tinker) as a replacement for this and Yii’s `shell` command.
@@ -392,12 +399,12 @@ public function boot()
 ### Routing
 
 The `{uid}` placeholder token now matches UUIDs of any version, meaning rules that use it will be _slightly_ more permissive.
-Otherwise, there are no changes to routes defined in the control panel (and stored in project config).
+Otherwise, there are no changes to routes defined in the control panel (nor stored in project config).
 
 #### Custom Rules
 
-Your existing `config/routes.php` file (having moved to `config/craft/routes.php` during the upgrade) is evaluated by the adapter.
-Yii routes can be translated to [Laravel routes](laravel:routing) and relocated to `routes/web.php`:
+Your existing `config/routes.php` file (having moved to `config/craft/routes.php` during the upgrade) is only evaluated by the adapter.
+Yii routes must be translated to [Laravel routes](laravel:routing) and relocated to `routes/web.php`:
 
 ::: code
 ```php Yii
