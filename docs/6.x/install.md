@@ -34,7 +34,9 @@ DDEV is a Docker-based PHP development environment that streamlines the creation
     ddev composer create-project "craftcms/craft:^6.0.0-alpha.1"
     ```
 
-    The setup wizard will start automatically! Accept all defaults (in `[square brackets]`), and note your chosen username and password.
+    The setup wizard will start automatically!
+    Accept all defaults, and note your chosen username and password.
+    If you are prompted for a timezone, use DDEV’s `$TZ` environment variable.
 
     ::: tip
     Our [First-Time Setup](kb:first-time-setup) guide in the Knowledge Base has more information about what to expect during setup.
