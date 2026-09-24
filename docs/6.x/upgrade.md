@@ -89,7 +89,7 @@ Laravel makes it possible to directly configure mailers, loggers, filesystems, a
 
 The upgrade tool is intended to align your project with the new starter, rather than strictly what is required for compatibility.
 If your project uses a filesystem adapter other than the default _Local_ one, you’ll see some configuration suggestions for each one.
-Add these to `config/filesystems.php`.
+Add these to the `disks` array in `config/filesystems.php`, keyed by their handles.
 
 ### Run Migrations
 
