@@ -98,6 +98,4 @@ Customers are notified of incidents via [status.craftcms.com](https://status.cra
 
 ## Reporting a Vulnerability
 
-Please report any security vulnerabilities via our [Vulnerability Disclosure Program](https://www.hckrt.com/Reports/EmbeddedReportForm?program=craftcms-vdp).
-
-You can read our policy on reporting vulnerabilities [here](https://github.com/craftcms/cms/security/policy).
+You can read our security policy and how to report policy via our [Vulnerability Disclosure Program](https://craftcsm.com/security).
