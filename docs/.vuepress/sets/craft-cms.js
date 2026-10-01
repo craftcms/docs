@@ -76,6 +76,7 @@ module.exports = {
             "extend/templates",
             "extend/translation",
             "extend/validation",
+            "extend/widgets",
           ],
         }
       ],
