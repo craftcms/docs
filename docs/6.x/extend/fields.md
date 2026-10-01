@@ -3,6 +3,8 @@
 Fields are wholly a Craft concept, and therefore isolated from many of the internal changes.
 The most significant differences are apt to be in how you register field types and field layout elements, and those classes’ validation rules.
 
+<!-- more -->
+
 ## Registration
 
 Add your field type classes to `Plugin::$fieldTypes` and they will be registered automatically.
