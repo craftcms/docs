@@ -5,10 +5,16 @@ This is populated with values according to [the process below](#config-files), a
 
 <!-- more -->
 
-You can get an instance of your plugin’s settings from anywhere (after booting) via the container:
+You can get an instance of your plugin’s settings from anywhere (after booting) via the container…
 
 ```php
 $settings = app(\CraftCms\DemoPlugin\Demo)->getSettings();
+```
+
+…or the static instance getter:
+
+```php
+$settings = CraftCms\DemoPlugin\Demo::getInstance()->getSettings();
 ```
 
 ## Config Files
@@ -24,6 +30,22 @@ The final config map your plugin’s settings model is initialized with will be 
 ::: warning
 This process also applies to settings as they’re committed to project config.
 :::
+
+Your config stub can return a plain array, or encourage the developer to use a fluent model, for better type security:
+
+```php
+use CraftCms\DemoPlugin\Demo;
+
+return Demo::config()
+    ->apiKey(env('MY_SERVICE_KEY'))
+;
+```
+
+Fluent methods are _not_ provided for you; you must declare properties and setters, appropriately.
+By default, Craft will only pick up your class’s public properties when validating and serializing it to project config.
+
+Note that `Plugin::config()` should only be used to _build_ a config object—not consume it.
+Call `getSettings()` on the plugin instance (as described above) if you need the final, resolved settings.
 
 ## Environmental Config
 
