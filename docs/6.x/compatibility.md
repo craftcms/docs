@@ -79,6 +79,7 @@ A few settings have been removed, renamed, or relocated:
 | `elevatedSessionDuration` | Use [`password_timeout`](laravel:authentication#password-confirmation) in Laravel’s authentication config file (`config/auth.php`). The default is now 10800 seconds (three hours). |
 | `omitScriptNameInUrls` | No longer used; the script name is never used when generating URLs. |
 | `pathParam` | No longer used. |
+| `testToEmailAddress` | Use `Mail::alwaysTo($email, $name)` in your app service provider, or switch your mail driver to `log` (or another “black hole” service like [Mailpit](https://docs.ddev.com/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit)). |
 
 You can selectively publish Laravel’s default config files from the console:
 
