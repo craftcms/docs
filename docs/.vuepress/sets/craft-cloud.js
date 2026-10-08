@@ -16,7 +16,7 @@ module.exports = {
     trialDays: 7,
     minNodeVersion: '18',
     regionSupport: 'United States, Canada, Germany, Sweden, United Kingdom, and Australia',
-    scheduledCommandsMax: 'five',
+    scheduledCommandsMax: 'ten',
   },
   sidebar: {
     "/": [
