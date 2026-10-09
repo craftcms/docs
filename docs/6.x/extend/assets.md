@@ -100,7 +100,7 @@ export default defineConfig({
             // Live dangerously...
             origin: true,
             // ...or permit only DDEV origins.
-            // See: https://dev.to/mandrasch/vite-is-suddenly-not-working-anymore-due-to-cors-error-ddev-3673
+            // See: https://docs.ddev.com/en/stable/users/usage/vite/
             // origin: /https?:\/\/([A-Za-z0-9\-\.]+)?(\.ddev\.site)(?::\d+)?$/,
         },
     },
