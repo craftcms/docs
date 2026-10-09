@@ -261,7 +261,7 @@ Chaining remains supported:
 
 #### Advanced Query Builder Features
 
-Queries that use `where()`, `andWhere()`, `orWhere()`, and other [low-level builder methods](queries#basic-where-clauses) will require updates.
+Queries that use `where()`, `andWhere()`, `orWhere()`, and other [low-level builder methods](laravel:queries#basic-where-clauses) will require updates.
 Refer to the Laravel documentation for usage specifics.
 
 ### Forms
