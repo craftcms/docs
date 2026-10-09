@@ -131,7 +131,7 @@ This may change during the alpha.
 In most cases, Craft can figure out how to translate query conditions based on your field’s `dbType()` return value.
 Fields that store non-scalar values, select data from a separate table, or  may require intervention, using `modifyQuery()`.
 This replaces `queryCondition()` in earlier versions of Craft, and requires a signature update.
-You now operate directly on the query object, rather than returning 
+You now operate directly on the query object, rather than returning an array of conditions:
 
 ```php
 public static function modifyQuery(
