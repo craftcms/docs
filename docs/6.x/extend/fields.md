@@ -15,11 +15,12 @@ use CraftCms\Cms\Field\FieldTypes;
 
 public function boot(FieldTypes $fieldTypesRegistry): void
 {
-    $fieldTypesRegistry->register(Backblaze::class);
+    $fieldTypesRegistry->register(PatternField::class);
 }
 ```
 
 Field layout elements must be registered via the `CraftCms\Cms\FieldLayout\Events\FieldLayoutUIElementsResolving` event, as there is no corresponding plugin property.
+New field types do not typically need a dedicated field layout element—Craft automatically wraps every custom field instance in a `CraftCms\Cms\FieldLayout\LayoutElements\CustomField`.
 
 ## Rules
 
@@ -123,4 +124,43 @@ This means you can react to the current value (`$context->value`) and conditiona
 ::: warning
 Inline editing is still handled with plain HTML output, so your fields’ `inputHtml()` remains relevant.
 This may change during the alpha.
+:::
+
+## Query Handling
+
+In most cases, Craft can figure out how to translate query conditions based on your field’s `dbType()` return value.
+Fields that store non-scalar values, select data from a separate table, or  may require intervention, using `modifyQuery()`.
+This replaces `queryCondition()` in earlier versions of Craft, and requires a signature update.
+You now operate directly on the query object, rather than returning 
+
+```php
+public static function modifyQuery(
+    Builder $query,
+    array $instances,
+    mixed $value,
+    ElementQueryInterface $elementQuery
+): void
+{
+    // Normalize the incoming `$value` so it can be applied as params on the query:
+    if (! is_array($value)) {
+        $value = [
+            'amount' => $value,
+        ];
+    }
+
+    if (! isset($value['currency'])) {
+        $value['currency'] = $this->defaultCurrency;
+    }
+
+    // Build each param using the nested keys:
+    $query->whereNumericParam(static::valueSql($instances, 'amount'), $value['amount']);
+    $query->whereParam(static::valueSql($instances, 'currency'), $value['currency']);
+}
+```
+
+You can return early or `throw` to reject invalid values and skip the param altogether.
+Note that Craft quietly swallows these exceptions, so it can be helpful for developers to log a message about the improper use.
+
+::: tip
+Craft adds a number of methods to Laravel’s query builder (like `whereParam()`, in the example), in `CraftCms\Cms\Database\DatabaseServiceProvider`, which correspond with the old `Db::parseParam()` helper methods.
 :::
