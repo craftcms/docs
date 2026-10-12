@@ -1,6 +1,8 @@
 # Plugin Editions
 
-The Plugin Store supports multi-edition plugins, which work similarly to Craft’s editions (Solo, Team, and Pro).
+The Plugin Store supports multi-edition plugins, which work similarly to [Craft’s editions](../editions.md) (Solo, Team, and Pro).
+
+<!-- more -->
 
 - Plugins that support multiple editions are still comprised of a single Composer package.
 - Plugins’ active edition is recorded in the [project config](../project-config.md).
@@ -21,7 +23,6 @@ class Plugin extends \craft\base\Plugin;
     // The order of your constants isn’t important...
     const EDITION_LITE = 'lite';
     const EDITION_PRO = 'pro';
-    const EDITION_EXTREME = 'extreme';
 
     public static function editions(): array
     {
@@ -29,7 +30,6 @@ class Plugin extends \craft\base\Plugin;
             // ...but the order you return them *is*!
             self::EDITION_LITE,
             self::EDITION_PRO,
-            self::EDITION_EXTREME,
         ];
     }
 
@@ -48,7 +48,7 @@ if (Plugin::getInstance()->is(Plugin::EDITION_PRO) {
 }
 
 if (Plugin::getInstance()->is(Plugin::EDITION_LITE, '>')) {
-    // Advanced functionality goes here (`pro` or `extreme`)
+    // Advanced functionality goes here (`pro`, or any higher editions added later)
 }
 ```
 ```twig
@@ -90,7 +90,7 @@ Individual [controllers](controllers.md) cannot be conditionally registered (wit
 ```php
 public function beforeAction($action): bool
 {
-    // This controller is only accessible to Pro + Extreme installations:
+    // This controller is only accessible to Pro installations:
     if (Plugin::getInstance()->is(Plugin::EDITION_PRO, '<')) {
         return false;
     }
@@ -103,10 +103,16 @@ public function beforeAction($action): bool
 
 The [`minCraftEdition`](craft5:craft\base\Plugin::$minCraftEdition) property of your plugin class can be set to any of the <craft5:craft\enums\CmsEdition>
 
-For example, a plugins that provides some additional functionality to [user groups](../system/user-management.md#user-groups) (a feature only available in <Badge type="edition" text="Pro" vertical="middle" />) should have a `minCraftEdition` of `CmsEdition::Pro`.
+For example, a plugin that provides some additional functionality to [user groups](../system/user-management.md#user-groups) (a feature only available in <Badge type="edition" text="Pro" vertical="middle" />) should have a `minCraftEdition` of `CmsEdition::Pro`.
 
 ## Testing
 
 You can toggle the active edition by changing the `plugins.<plugin-handle>.edition` property in `config/project/project.yaml`.
 
 After changing the value to a valid edition handle (one returned by your plugin’s `editions()` method), Craft will prompt you to sync your project config YAML changes into the loaded project config. Once that’s done, your plugin’s active edition will be set to the new edition, and [feature toggles](#add-feature-toggles) should start behaving accordingly.
+
+Project config can be updated and applied in one operation, via the command line:
+
+```bash
+php craft project-config/set plugins.plugin-handle.edition newEdition --update-timestamp
+```
