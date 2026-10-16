@@ -80,6 +80,27 @@ Laravel’s “terminable” middleware is not compatible with all hosting envir
 app()->terminating($this->flushLazyEvents());
 ```
 
+### CSRF
+
+Laravel verifies CSRF tokens on web routes, so a form posted without a token is rejected with a 419.
+Front-end templates can keep using `{{ csrfInput() }}`, and Ajax requests can send the `XSRF-TOKEN` cookie value in an `X-XSRF-TOKEN` header.
+
+If an endpoint must accept posts without a token (a webhook, or a plugin that used to disable `enableCsrfValidation` on a Yii controller), exempt its URI from your plugin’s `boot()` method:
+
+```php
+use CraftCms\Cms\Route\Routes;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
+
+public function boot(Routes $routes): void
+{
+    PreventRequestForgery::except([
+        $routes->actionTriggerUriPrefix()."/$this->handle/save",
+    ]);
+}
+```
+
+Craft uses the same mechanism for its own `graphql/api` action.
+
 ### Authorization
 
 Controllers in Laravel don’t often do their own authorization, because they’re no longer automatically exposed to the router.
@@ -209,7 +230,7 @@ In some situations, you may still need to resolve permissions directly via a use
 
 ```php
 // Check against the current user:
-Auth::craftUser()->can('triggerReport');
+currentUserElement()->can('triggerReport');
 
 // Check against a specific user:
 $recipient->can('requestAccess', $report);

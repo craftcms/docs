@@ -4,7 +4,7 @@ The session is deeply integrated with validation, templating, controllers, and a
 
 ## Auth
 
-You can always get the current `User` element with `Illuminate\Support\Facades\Auth::craftUser()`.
+You can always get the current user with the `craftUser()` method on the request (`$request->craftUser()`), or the `CraftCms\Cms\currentUser()` and `CraftCms\Cms\currentUserElement()` helper functions.
 Users are largely unchanged, but the class has been relocated to `CraftCms\Cms\User\Elements\User` and some of its functionality has been split out into concerns (or is handled entirely by Laravel).
 
 ## Flashes
