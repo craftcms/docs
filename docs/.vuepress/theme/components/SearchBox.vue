@@ -99,7 +99,7 @@ export default {
       focusIndex: 0,
       maxSuggestions: 10,
       suggestions: null,
-      hotkeys: ["/"]
+      hotkeys: ["/", "k"]
     };
   },
   computed: {
