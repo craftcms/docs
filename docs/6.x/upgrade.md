@@ -85,7 +85,8 @@ Laravel makes it possible to directly configure mailers, loggers, filesystems, a
 3. Perform any **Next Steps** recommended by the tool. At a minimum, this should include…
     - `ddev restart` to apply the new project settings (DDEV users only);
     - `ddev composer update` to install new dependencies (or `composer update` outside of DDEV);
-    - `ddev artisan vendor:publish --tag=craftcms` to publish stubs for Laravel and Craft;
+    - `ddev artisan craft:setup:publish` to publish Craft’s config stubs, control panel assets, and `craft` executable;
+    - `ddev artisan key:generate` to set the new `APP_KEY` in your `.env` file;
 
 The upgrade tool is intended to align your project with the new starter, rather than strictly what is required for compatibility.
 If your project uses a filesystem adapter other than the default _Local_ one, you’ll see some configuration suggestions for each one.
@@ -214,6 +215,20 @@ If you want to tackle the upgrade by hand, the steps below are synthesized from 
 In `composer.json`, update the `craftcms/cms` constraint to `^6.0.0-alpha.1`.
 Do the same for each 6.x-ready plugin, noting that some may no longer be necessary.
 
+Add Laravel’s package discovery and Craft’s publish command to the `post-autoload-dump` scripts, as in [the starter project](repo:craftcms/craft/blob/6.x/composer.json):
+
+```json
+{
+  "scripts": {
+    "post-autoload-dump": [
+      "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+      "@php artisan package:discover --ansi",
+      "@php artisan craft:setup:publish --ansi"
+    ]
+  }
+}
+```
+
 ::: warning
 Don’t run `composer update` yet!
 :::
@@ -235,13 +250,23 @@ Laravel uses different variables to configure your database connection and debug
 | `CRAFT_DB_PASSWORD` | `DB_PASSWORD` |
 | `CRAFT_DB_DATABASE` | `DB_DATABASE` |
 | `CRAFT_DB_SCHEMA` | `DB_SCHEMA` |
-| `CRAFT_DB_TABLE` | `DB_TABLE_PREFIX` |
+| `CRAFT_DB_TABLE_PREFIX` | `DB_TABLE_PREFIX` |
 | `CRAFT_DEV_MODE` | `APP_DEBUG` |
 | `CRAFT_SECURITY_KEY` | Remove |
 
 ::: tip
 Be sure and look in your main `.env` file, as well as any container-specific files that DDEV might merge in (`.ddev/.env` and `.ddev/.env.web`).
 :::
+
+Then add these to your main `.env` file:
+
+```bash
+CACHE_STORE=file
+SESSION_DRIVER=file
+APP_KEY=
+```
+
+`APP_KEY` stays empty for now; you’ll generate it in the [final steps](#final-steps).
 
 ### Web Root
 
@@ -315,7 +340,10 @@ The same applies to any container-based environment—you may need to pull and r
 
 Run `ddev composer update` to reconcile and install the new [packages](#packages).
 
-To publish the `craft` console executable and the latest control panel assets, run `ddev artisan vendor:publish --tag=craftcms`.
+To publish Craft’s config stubs, the latest control panel assets, and the `craft` console executable, run `ddev artisan craft:setup:publish`.
+(Composer also runs this after every `composer update`, via the `post-autoload-dump` script you added.)
+
+Generate a value for the empty `APP_KEY` in your `.env` file by running `ddev artisan key:generate`.
 
 Complete the upgrade by running [migrations](#run-migrations):
 
