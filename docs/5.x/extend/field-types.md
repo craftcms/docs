@@ -318,6 +318,32 @@ When the effective rules differ this greatly, however, it may be a sign that you
 
 Implement the `isValueEmpty()` to tell Craft what kinds of values you consider “empty.” Internally, we use this to determine whether an author explicitly selected a value (or if it’s a default or incidental) in the process of saving elements and propagating content between sites. The base method treats `null` and zero-length arrays (`[]`) and strings (`''`) as empty.
 
+### Input Schema <Since ver="5.12.0" feature="Describing accepted field values with a JSON schema" />
+
+Field types can describe the values they accept by implementing <craft5:craft\base\InputSchemaFieldInterface>. Its `getInputSchema()` method returns a [JSON schema](https://json-schema.org/) (as a PHP array), which [MCP](../system/mcp.md) clients use to learn what they can submit when creating or updating elements:
+
+```php
+use craft\base\Field;
+use craft\base\InputSchemaFieldInterface;
+
+class MyField extends Field implements InputSchemaFieldInterface
+{
+    // ...
+
+    public function getInputSchema(): array
+    {
+        return [
+            'type' => 'string',
+            'enum' => ['small', 'medium', 'large'],
+        ];
+    }
+}
+```
+
+Craft adds the field’s name, instructions, and nullability to the schema, so you only need to describe the value itself. Fields that don’t implement the interface get a schema inferred from their [GraphQL mutation argument type](graphql.md), if possible.
+
+Plain Text, Email, Link, Number, Money, Lightswitch, Date, Time, Color, Country, Table, and option fields (like Dropdown and Checkboxes) implement this interface.
+
 ## Previews
 
 In order for your field type to be displayed on [element indexes](../system/elements.md#indexes) or [cards](../system/elements.md#chips-cards), it must implement <craft5:craft\base\PreviewableFieldInterface>. Some field types will work with no additional configuration, as the base <craft5:craft\base\Field\getPreviewHtml()> method handles a number of common value types including booleans, dates, and anything that can be cast to a string.

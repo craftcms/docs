@@ -120,6 +120,14 @@ There are a few things you should keep in mind when working with Project Config:
 
 When Craft tries to apply Project Config changes, it will first verify that the Craft and plugin schema versions declared in YAML are compatible with what’s actually installed. Inconsistencies can usually be resolved by running `composer install`.
 
+To run this check on its own—say, as a step in your deployment pipeline, before migrations or `project-config/apply`—use the `project-config/check` command: <Since ver="5.12.0" feature="The project-config/check command" />
+
+```bash
+php craft project-config/check
+```
+
+It reports any schema version mismatches between your YAML files and the installed versions of Craft and enabled plugins, and exits with a non-zero code when they’re incompatible. Nothing is applied or migrated. The command requires an existing Craft installation (with database access), and fails if `config/project/project.yaml` is missing—pass `--require-yaml=0` to skip the check successfully instead.
+
 ::: tip
 `composer.lock` should be checked in to version control alongside Project Config files. To stay ahead of these errors, run `composer install` during every deploy and when integrating changes from collaborators!
 :::

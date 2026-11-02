@@ -941,6 +941,24 @@ class Widget extends ElementMutationResolver
 }
 ```
 
+For requests [authenticated as a user](#authenticated-requests), `populateElementWithData()` and `saveElement()` make sure the user can save the element. Before you perform any other action on an element, call `requireUserAuthorization()` with the element and one of `save`, `saveCanonical`, `delete`, or `createDrafts`. It does nothing for schema token requests, and throws an error if the user isn’t authorized: <Since ver="5.12.0" feature="User authorization checks in GraphQL mutation resolvers" />
+
+```php
+public function deleteWidget($source, array $arguments, $context, ResolveInfo $resolveInfo)
+{
+    $this->requireSchemaAction('widget', 'delete');
+
+    $widget = Craft::$app->getElements()->getElementById($arguments['id'], WidgetElement::class);
+
+    if ($widget) {
+        $this->requireUserAuthorization($widget, 'delete');
+        Craft::$app->getElements()->deleteElement($widget);
+    }
+
+    return true;
+}
+```
+
 ### Registering Mutations
 
 You can register your mutation by including its definitions to the `mutations` array on the [registerGqlMutations](craft5:craft\services\Gql::EVENT_REGISTER_GQL_MUTATIONS) event object:
@@ -1053,6 +1071,52 @@ Event::on(
     }
 );
 ```
+
+#### Authenticated Requests <Since ver="5.12.0" feature="Schema component support for authenticated GraphQL requests" />
+
+GraphQL requests can be [authenticated as a user](../development/graphql.md#authenticating-as-a-user) with an [OAuth](../system/oauth.md) access token or personal access token. Craft doesn’t use a saved schema for those requests. It builds one with <craft5:craft\services\Gql::getSchemaForUser()>, out of the components that support authenticated requests and are available to that user.
+
+Components are left out of these schemas unless their config has an `authenticated` key. Set it to `true` to make the component available to every authenticated user, or to a callable that receives the <craft5:craft\elements\User> and returns whether it should be available to them:
+
+```php
+use craft\elements\User;
+use craft\events\RegisterGqlSchemaComponentsEvent;
+use craft\services\Gql;
+use yii\base\Event;
+
+Event::on(
+    Gql::class,
+    Gql::EVENT_REGISTER_GQL_SCHEMA_COMPONENTS,
+    function(RegisterGqlSchemaComponentsEvent $event) {
+        $event->queries['Widgets'] = [
+            'widget:read' => [
+                'label' => 'View Widgets',
+                'authenticated' => fn(User $user) => $user->can('myPlugin:viewWidgets'),
+            ],
+        ];
+    }
+);
+```
+
+Nested components (like `:save` and `:delete` under an `:edit` component) need their own `authenticated` keys. Mutation components are only included when the token has the `graphql:write` scope (<craft5:craft\services\Gql::SCOPE_WRITE>); `graphql:read` (<craft5:craft\services\Gql::SCOPE_READ>) tokens only get queries.
+
+Each user’s schema is cached, and rebuilt when the project config or their permissions change. If your callback depends on anything else, keep the component available and limit results instead.
+
+Enabling a component for a user only gives them access to that part of the schema. Your resolvers are still responsible for limiting results to what the user can access. <craft5:craft\helpers\Gql::getSchemaUser()> returns the user for authenticated requests, and `null` for requests that use a schema token:
+
+```php
+use craft\helpers\Gql as GqlHelper;
+
+$user = GqlHelper::getSchemaUser();
+
+if ($user && !$user->can('myPlugin:viewPrivateWidgets')) {
+    $query->private(false);
+}
+```
+
+If your resolvers query entries or assets, setting the `editable` param limits results to elements the user can view. Craft’s own entry and asset resolvers do this.
+
+The GraphQL API’s OAuth resource definition (its `graphql` resource ID, scopes, and URL) is returned by <craft5:craft\services\Gql::getOAuthResource()>. If your GraphQL API is routed somewhere other than `actions/graphql/api`, change the resource’s `resourceUrl` from a <craft5:craft\services\OAuth::EVENT_REGISTER_RESOURCES> handler so clients can discover it.
 
 ### Eager Loading
 

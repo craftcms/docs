@@ -59,7 +59,7 @@ Due to its diverging parity with MySQL, we no longer recommend MariaDB for sites
 - [DOM](http://php.net/manual/en/book.dom.php)
 
 ::: tip
-We recommend [ImageMagick](http://php.net/manual/en/book.imagick.php) over GD for expanded [image handling options](development/image-transforms.md).
+We recommend [ImageMagick](http://php.net/manual/en/book.imagick.php) over GD for expanded [image handling options](development/image-transforms.md). Some formats (like JPEG XL) are only [supported](development/image-transforms.md#supported-formats) via ImageMagick.
 
 When multiple image drivers are available on your platform, Craft prefers ImageMagick.
 You can explicitly select a driver with the <config5:imageDriver> setting.

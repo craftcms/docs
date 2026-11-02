@@ -238,6 +238,7 @@ module.exports = {
             "events",
             "extending-twig",
             "graphql",
+            "mcp",
             "migrations",
             "queue-jobs",
             "services",
@@ -290,6 +291,8 @@ module.exports = {
             "system/plugins",
             "system/cli",
             "system/routing", // Development?
+            "system/mcp",
+            "system/oauth",
           ],
           toggleChildren: [
             "system/object-templates",

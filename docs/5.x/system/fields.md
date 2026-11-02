@@ -42,11 +42,17 @@ Handle
 Default Instructions
 :   Text displayed to authors in the field layout. Basic Markdown formatting is supported. _You can override this in a field layout._
 
+Default Tip <Since ver="5.12.0" feature="Default tips and warnings for custom fields" />
+:   A tip displayed below the field’s input, wherever it’s used. _You can override this in a field layout._
+
+Default Warning <Since ver="5.12.0" feature="Default tips and warnings for custom fields" />
+:   A warning displayed below the field’s input, wherever it’s used. _You can override this in a field layout._
+
 Translation Method
 :   How Craft handles the field’s value for elements that exist in multiple [sites](sites.md). See [Translation Methods](#translation-methods) below for more information.
 
 ::: tip
-A field’s _name_, _instructions_, and _handle_ can be overridden when adding it to a [layout](#field-layouts).
+A field’s _name_, _handle_, _instructions_, _tip_, and _warning_ can be overridden when adding it to a [layout](#field-layouts).
 
 [Multi-instance](#multi-instance-fields) fields are distinguished by those overridden names and handles; every field in a layout must have a unique handle.
 :::
@@ -168,6 +174,7 @@ The field’s settings let you control how and when it’s displayed:
 - **Label** – Override the field’s default label, or hide it entirely.
 - **Handle** – Override the field’s handle.
 - **Instructions** – Override the field’s default instructions.
+- **Tip** + **Warning** – Override the field’s default tip or warning. Leave these blank to use the global field’s **Default Tip** and **Default Warning**, which are shown as placeholders.
 - **Current User Condition** – Set rules for determining which users can see the field and change its value.
 - **Element Condition** – Set rules (based on the current element) that determine when the field should be displayed in an editor.
 - **Required** – When a field is marked as **Required**, the element only validate when a value is present in the field. This may have different effects on different field types.
