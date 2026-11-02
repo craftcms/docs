@@ -114,7 +114,7 @@ These constants (sometimes called [bootstrap variables](/5.x/reference/config/bo
 | `CRAFT_LICENSE_KEY_PATH` | Technically still supported, defaults to `config_path('craft/license.key')` |
 
 ::: warning
-If you had set any of these in your `boostrap.php` file, they were removed during the upgrade.
+If you had set any of these in your `bootstrap.php` file, they were removed during the upgrade.
 We strongly recommend using the new directory structure so that your project remains compatible with Laravel.
 :::
 
