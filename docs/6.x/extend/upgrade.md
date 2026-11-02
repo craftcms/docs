@@ -26,6 +26,11 @@ The legacy base plugin class (`craft\base\Plugin`) and the interfaces it impleme
 We have mainly observed this with the `attributes()` and `attributeLabels()` methods.
 If you don’t use these, there’s nothing to do here.
 
+## Elements
+
+One of the few extension surfaces we couldn’t reasonably cover with the adapter is [custom element types](elements.md).
+Elements are traditionally one of Craft’s most complex components to extend, based strictly on the number of interdependent classes required to make them work.
+
 <Block label="Wait… is that it?">
 
 Basically, _yes_!
