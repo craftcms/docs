@@ -82,7 +82,7 @@ These settings can also be set with environment variables prefixed with `CRAFT_O
 
 ## Authorization Flow
 
-Most clients (like AI assistants) handle the flow on their own—all you need to do is give them the API’s URL. Here’s what happens behind the scenes:
+Most clients (like AI assistants) handle the flow on their own—all you need to do is give them the URL of the API. Here’s what happens behind the scenes:
 
 1. The client fetches the resource’s discovery metadata.
 1. The client registers itself and receives a `client_id`. Registering doesn’t grant any access.

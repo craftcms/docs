@@ -211,10 +211,10 @@ The `resources` map is keyed by resource ID (1–64 letters, numbers, underscore
 | `scopeLabels` | Short labels for each access level, shown on the consent screen. |
 | `userScopes` | A closure (`function(User $user, array $scopes): array`) that returns which of the given scopes a user may grant. |
 | `permissions` | Permissions the user must have to authorize and use the resource. |
-| `resourceUrl` | The API’s canonical absolute URL, or a closure that returns it. Each resource needs a distinct URL path. |
+| `resourceUrl` | The canonical absolute URL of the API, or a closure that returns it. Each resource needs a distinct URL path. |
 | `consentDescription` | An explanation shown above the requested scopes on the consent screen. |
 
-Registering a resource does not create your API’s route or controller. Include `accessCp` in `permissions` if your API requires control panel access. Otherwise, users sign in via the front-end <config5:loginPath> during authorization, which must implement Craft’s normal [login flow](../system/user-management.md#front-end-pro) and return the user to the authorization request.
+Registering a resource does not create a route or controller for your API. Include `accessCp` in `permissions` if your API requires control panel access. Otherwise, users sign in via the front-end <config5:loginPath> during authorization, which must implement Craft’s normal [login flow](../system/user-management.md#front-end-pro) and return the user to the authorization request.
 
 In a multi-site project, generate `resourceUrl` for a specific site (or use a fixed URL) so it doesn’t vary with the current site.
 

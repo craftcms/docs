@@ -1116,7 +1116,7 @@ if ($user && !$user->can('myPlugin:viewPrivateWidgets')) {
 
 If your resolvers query entries or assets, setting the `editable` param limits results to elements the user can view. Craft’s own entry and asset resolvers do this.
 
-The GraphQL API’s OAuth resource definition (its `graphql` resource ID, scopes, and URL) is returned by <craft5:craft\services\Gql::getOAuthResource()>. If your GraphQL API is routed somewhere other than `actions/graphql/api`, change the resource’s `resourceUrl` from a <craft5:craft\services\OAuth::EVENT_REGISTER_RESOURCES> handler so clients can discover it.
+The OAuth resource definition for the GraphQL API (its `graphql` resource ID, scopes, and URL) is returned by <craft5:craft\services\Gql::getOAuthResource()>. If your GraphQL API is routed somewhere other than `actions/graphql/api`, change the resource’s `resourceUrl` from a <craft5:craft\services\OAuth::EVENT_REGISTER_RESOURCES> handler so clients can discover it.
 
 ### Eager Loading
 
