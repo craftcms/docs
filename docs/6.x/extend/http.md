@@ -85,7 +85,7 @@ app()->terminating($this->flushLazyEvents());
 Controllers in Laravel don’t often do their own authorization, because they’re no longer automatically exposed to the router.
 See the [permissions](#permissions) section for info about guards, policies, and other middleware that you can define alongside your routes.
 
-Any route can be guarded with a known permission using the `can` middleware:
+Any route can be guarded with a known permission using the [parameterized](middleware#middleware-parameters) `can` middleware [alias](middleware#middleware-aliases):
 
 ```php
 Route::get('activity/history', [HistoryController::class, 'index'])
