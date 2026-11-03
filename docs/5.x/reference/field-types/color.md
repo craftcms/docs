@@ -79,11 +79,11 @@ if ($entry->myColorField) {
   {{ entry.myColorField }}                 {# output: #e5422b #}
   {{ entry.myColorField.getHex() }}        {# output: #e5422b #}
   {{ entry.myColorField.getRgb() }}        {# output: rgb(229,66,43) #}
-  {{ entry.myColorField.getHsl() }}        {# output: hsl(7,81%,90%) #}
+  {{ entry.myColorField.getHsl() }}        {# output: hsl(7,78%,53%) #}
   {{ entry.myColorField.getLuma() }}       {# output: 0.38820862745098 #}
   {{ entry.myColorField.getHue() }}        {# output: 7 #}
-  {{ entry.myColorField.getLightness() }}  {# output: 90 #}
-  {{ entry.myColorField.getSaturation() }} {# output: 81 #}
+  {{ entry.myColorField.getLightness() }}  {# output: 53 #}
+  {{ entry.myColorField.getSaturation() }} {# output: 78 #}
   {{ entry.myColorField.getRed() }}        {# output: 229 #}
   {{ entry.myColorField.getGreen() }}      {# output: 66 #}
   {{ entry.myColorField.getBlue() }}       {# output: 43 #}
@@ -94,11 +94,11 @@ if ($entry->myColorField) {
     echo $entry->myColorField;                  // output: #e5422b
     echo $entry->myColorField->getHex();        // output: #e5422b
     echo $entry->myColorField->getRgb();        // output: rgb(229,66,43)
-    echo $entry->myColorField->getHsl();        // output: hsl(7,81%,90%)
+    echo $entry->myColorField->getHsl();        // output: hsl(7,78%,53%)
     echo $entry->myColorField->getLuma();       // output: 0.38820862745098
     echo $entry->myColorField->getHue();        // output: 7
-    echo $entry->myColorField->getLightness();  // output: 90
-    echo $entry->myColorField->getSaturation(); // output: 81
+    echo $entry->myColorField->getLightness();  // output: 53
+    echo $entry->myColorField->getSaturation(); // output: 78
     echo $entry->myColorField->getRed();        // output: 229
     echo $entry->myColorField->getGreen();      // output: 66
     echo $entry->myColorField->getBlue();       // output: 43
