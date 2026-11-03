@@ -106,4 +106,4 @@ Element collections have a few extra methods that make them more interoperable w
 :   Remove elements with the provided ID(s) from the collection.
 
 `render(variables)`
-:   Render [element partials](../system/elements.md#element-partials) for each element in the collection, optionally passing a hash of extra variables. Each partial also gets a `loop` variable, like in a `{% for %}` loop. As of Craft 5.12, `render()` is available on _every_ collection, as long as all of its items are elements (or other <craft5:craft\base\Renderable> objects). You can also use the [`{% render %}` tag](../reference/twig/tags.md#render).
+:   Render [element partials](../system/elements.md#element-partials) for each element in the collection. Each partial automatically gets a `loop` variable, with the same structure as Twig’s `{% for %}` loop. As of Craft 5.12, `render()` is available on _every_ collection, as long as all of its items are elements (or other <craft5:craft\base\Renderable> objects). You can also use the [`{% render %}` tag](../reference/twig/tags.md#render).
