@@ -5,45 +5,52 @@ includesLlmOutput: true
 
 # MCP <Since ver="5.12.0" feature="MCP servers" />
 
-Craft can expose content and configuration to AI assistants and other clients through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP). MCP clients discover the _tools_, _resources_, and _prompts_ (collectively, _capabilities_) that a server offers, then call them on behalf of the person using the assistant.
+Craft can expose content and configuration to AI assistants and other clients through the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP).
+MCP clients discover the _tools_, _resources_, and _prompts_ (collectively, _capabilities_) that a server offers, then call them on behalf of the person using the assistant.
+
+<!-- more -->
 
 Craft provides three MCP servers:
 
-Authenticated HTTP
-:   Users sign in to Craft and authorize a client using [OAuth](oauth.md). The client then acts as that user, within their [permissions](user-management.md#permissions) and the [access level](#access-levels) they granted it. Any active user can connect.
+- **HTTP (Authenticated)** — Users sign in to Craft and authorize a client using [OAuth](oauth.md). The client then acts as that user, within their [permissions](user-management.md#permissions) and the [access level](#access-levels) they granted it. Any [active user](user-management.md#statuses) can connect, but the exposed capabilities will differ based on their permissions.
+- **HTTP (Public)** — Anyone can connect without signing in, but they only get the capabilities and content an administrator has [approved](#public-server).
+- **stdio** — The `mcp/serve` [console command](cli.md) opens a long-running session over [standard input and output](https://modelcontextprotocol.io/specification/2026-07-28/basic/transports/stdio), acting as the specified user. This is useful for assistants running on the same machine as Craft.
 
-Public HTTP
-:   Anyone can connect without signing in, but they only get the capabilities and content an administrator has [approved](#public-server).
+Both HTTP servers are disabled by default.
 
-Stdio
-:   The `mcp/serve` [console command](cli.md) runs a local server over standard input and output, acting as a user you choose. This is useful for assistants running on the same machine as Craft.
-
-Both HTTP servers are disabled by default. Plugins can add their own capabilities—see [Extending MCP](../extend/mcp.md).
+::: tip
+Plugins can add their own capabilities—see [Extending MCP](../extend/mcp.md).
+:::
 
 ## Settings
 
-Administrators can enable and configure the HTTP servers from <Journey path="Settings, MCP" />. These settings are stored in [project config](project-config.md), so they can only be changed in environments where <config5:allowAdminChanges> is on.
+Administrators can enable and configure the HTTP servers from <Journey path="Settings, MCP" />.
+These settings are stored in [project config](project-config.md), so they can only be changed in environments where <config5:allowAdminChanges> is on.
 
 The settings screen has two tabs:
 
-**Public**
-:   Enable the public server, set its endpoint, and approve the [capabilities and content](#public-server) it exposes.
+- **Public** — Enable the public server, set its **Endpoint**, and approve the [capabilities and content](#public-server) it exposes.
+- **Authenticated** — Enable the authenticated server and set its **Endpoint** and **Authorization Endpoint**.
 
-**Authenticated**
-:   Enable the authenticated server and set its **Endpoint** and **Authorization Endpoint**.
-
-Endpoints are paths relative to your site’s base URL. They can’t begin with the <config5:actionTrigger> or `.well-known`, and can’t conflict with existing [routes](routing.md).
+[Endpoints](#endpoints) in both contexts are paths relative to your site’s base URL.
+They can’t begin with the <config5:actionTrigger> or `.well-known`, and can’t conflict with existing [routes](routing.md).
 
 ### Endpoints
 
-The authenticated server’s endpoints default to `/{cpTrigger}/mcp` and `/{cpTrigger}/mcp/auth` (i.e. `/admin/mcp` and `/admin/mcp/auth`). If [public registration](user-management.md#public-registration-pro) is enabled or the <config5:cpTrigger> is empty, they default to `/mcp` and `/mcp/auth`, instead. The public server’s endpoint defaults to `/mcp`.
+The authenticated server’s endpoints default to `/{cpTrigger}/mcp` and `/{cpTrigger}/mcp/auth` (i.e. `/admin/mcp` and `/admin/mcp/auth`).
+If [public registration](user-management.md#public-registration-pro) is enabled or the <config5:cpTrigger> is empty, they default to `/mcp` and `/mcp/auth`, instead.
+The public server’s endpoint defaults to `/mcp`.
 
-Endpoints that begin with the control panel trigger (or any endpoint requested on a separate <config5:baseCpUrl> domain) are treated as control panel requests, so only users with the **Access the control panel** permission can use them. The public server’s endpoint can’t be in the control panel.
+Endpoints that begin with the control panel trigger (or any endpoint requested on a separate <config5:baseCpUrl> domain) are treated as control panel requests, so only users with the **Access the control panel** permission can use them.
+The public server’s endpoint can’t be in the control panel.
 
-The **Authorization Endpoint** always requires an access token, so MCP clients can discover how to sign in. This is the URL you should give to clients that sign in with OAuth. It can be the same as the **Endpoint**, as long as the public server doesn’t share that path.
+The **Authorization Endpoint** always requires an access token, so MCP clients can discover how to sign in.
+This is the URL you should give to clients that sign in with OAuth.
 
-::: tip
-The authenticated and public servers can share an endpoint. Requests that include an `Authorization` header are sent to the authenticated server, and requests without one go to the public server. Clients can’t discover how to sign in at a shared endpoint, so give them the authorization endpoint.
+::: warning
+The authenticated and public servers can _technically_ share an endpoint; Craft forwards requests that include an `Authorization` header to the authenticated server, and requests without one go to the public server.
+However, this may prevent clients from discovering how to begin the OAuth handshake.
+Use separate endpoints for the best compatibility.
 :::
 
 ## Authenticated Server
@@ -66,7 +73,8 @@ Craft checks the user’s current account status and permissions on every reques
 
 ### Access Levels
 
-When authorizing a client, the user chooses one of three access levels. Each level includes the ones before it:
+When authorizing a client, the user chooses one of three access levels.
+Each level includes the ones before it:
 
 | Access | Scope | Grants |
 | --- | --- | --- |
@@ -74,39 +82,51 @@ When authorizing a client, the user chooses one of three access levels. Each lev
 | **Read and write** | `mcp:write` | Also tools that create, change, or delete things. |
 | **Full access** | `mcp:admin` | Also admin-only capabilities, such as changing settings. |
 
-The consent screen preselects **Read only**, and only offers **Full access** to [admins](user-management.md#admin-accounts). Access levels only narrow what a client can do—the user’s own permissions still apply.
+The consent screen preselects **Read only**, and only offers **Full access** to [admins](user-management.md#admin-accounts).
+Access levels only narrow what a client can do—the user’s own permissions still apply.
 
-If a client authorizes again while the user still has an active token for it, Craft skips the consent screen and keeps the access level the user chose before. Clients can send `prompt=consent` to show the screen anyway. See [OAuth](oauth.md#scopes-consent-and-token-lifetimes) for more on consent and token lifetimes.
+If a client authorizes again while the user still has an active token for it, Craft skips the consent screen and keeps the access level the user chose before.
+Clients can send `prompt=consent` to show the screen anyway.
+See [OAuth](oauth.md#scopes-consent-and-token-lifetimes) for more on consent and token lifetimes.
 
 ## Public Server
 
-The public server lets anyone use the capabilities and content you approve, without signing in. Public callers have no Craft user identity.
+The public server lets anyone use the capabilities and content you approve, without signing in.
+Public callers have no Craft user identity.
 
 Under <Journey path="Settings, MCP, Public" />, turn on **Enable the public MCP server**, set its **Endpoint**, and approve…
 
-- **Capabilities:** each tool, resource, resource template, and prompt that unauthenticated clients may discover and call. Only capabilities that have been marked as safe for public use are listed.
+- **Capabilities:** each tool, resource, resource template, and prompt that unauthenticated clients may discover and call. Only capabilities that have been marked as safe for public use (in Craft’s source code) are listed.
 - **Content:** the sites, sections, nested entry fields, volumes, user groups, and element types (like [addresses](../reference/element-types/addresses.md)) that approved capabilities may expose. Leaving a list empty exposes none of that content.
 - **Element States:** whether public queries can include drafts (**Allow Drafts**), revisions (**Allow Revisions**), and elements that aren’t enabled (**Allow Inactive Elements**).
 
-Categories, tags, and global sets aren’t available via MCP.
+Categories, tags, and global sets aren’t available via MCP (but they can be [entrified](https://craftcms.com/blog/entrification)).
 
-Craft’s own public tools are `craft-context-get`, which describes the approved content, and `craft-query`, which queries it. Public queries return 25 results by default, and at most 100.
+Craft provides two tools, out of the box:
+- `craft-context-get` — Describes the content accessible to the client.
+- `craft-query` — Runs a query against the available content. Public queries return 25 results by default, and at most 100.
 
 ::: warning
-Approving a capability provided by a plugin may expose data outside the content approvals above. Plugins are responsible for restricting what their own public capabilities return.
+Approving a plugin-provided capability can expose data outside the content approvals above.
+Plugins are responsible for restricting what their own public capabilities return.
 :::
 
-## Stdio Server
+## `stdio` Server
 
-The `mcp/serve` command runs an MCP server over stdin/stdout, acting as the user you pass to `--user` (an ID, username, or email):
+The `mcp/serve` command runs an MCP server over `stdin`/`stdout`, acting as the user you pass to `--user` (an ID, username, or email):
 
 ```bash
 php craft mcp/serve --user=admin
 ```
 
-The user must be active, and not suspended or locked. Configure your MCP client to launch this command (from your project’s root) as a local server.
+The user must be active, and not suspended or locked.
+Configure your MCP client to launch this command (from your project’s root) as a local server.
 
-The stdio server isn’t restricted by OAuth access levels—it can do anything the selected user can. It omits capabilities that only work over HTTP. Restart the process after changing the user’s permissions, the [instructions](#configuration), or the content model outside of that session.
+::: danger
+The `stdio` server isn’t restricted by OAuth access levels—it can do anything the selected user can.
+It omits capabilities that only work over HTTP.
+Restart the process after changing the user’s permissions, the [instructions](#configuration), or the content model outside of that session.
+:::
 
 ## Connecting Clients
 
