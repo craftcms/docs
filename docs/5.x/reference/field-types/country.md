@@ -50,7 +50,7 @@ In earlier versions of Craft, use the [address repository](../element-types/addr
 
 The `country` variable in this example is an instance of  [`CommerceGuys\Addressing\Country\Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php).
 
-#### Localization
+### Localization
 
 To get the localized name of a country, you must re-fetch it from the address repository:
 
