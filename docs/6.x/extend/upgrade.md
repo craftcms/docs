@@ -26,6 +26,12 @@ The legacy base plugin class (`craft\base\Plugin`) and the interfaces it impleme
 We have mainly observed this with the `attributes()` and `attributeLabels()` methods.
 If you don’t use these, there’s nothing to do here.
 
+::: tip
+This applies while you keep extending `craft\base\Plugin` and `craft\base\Model`.
+The new `CraftCms\Cms\Plugin\PluginSettings` class extends `CraftCms\Cms\Component\Component`, which has no `attributes()` method, so a settings class that moves to it can’t call `parent::attributes()`.
+Expose values as public properties instead.
+:::
+
 <Block label="Wait… is that it?">
 
 Basically, _yes_!
