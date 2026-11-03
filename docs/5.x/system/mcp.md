@@ -1,5 +1,6 @@
 ---
 description: Connect AI assistants and other MCP clients to your Craft project’s content and settings.
+includesLlmOutput: true
 ---
 
 # MCP <Since ver="5.12.0" feature="MCP servers" />

@@ -1,5 +1,6 @@
 ---
 description: Craft’s built-in OAuth authorization server lets apps access its APIs on behalf of your users.
+includesLlmOutput: true
 ---
 
 # OAuth <Since ver="5.12.0" feature="OAuth authorization server" />

@@ -1,5 +1,6 @@
 ---
 description: Add MCP capabilities, protect your own APIs with OAuth, and offer personal access token scopes.
+includesLlmOutput: true
 ---
 
 # Extending MCP <Since ver="5.12.0" feature="MCP and OAuth extension points" />
