@@ -34,6 +34,8 @@ The most common way to customize your Craft project is by editing files in the [
 | [Custom Options](#custom-settings) | `custom.php` | Arbitrary key-value storage for your own options.
 | [Routing](#url-rules) | `routes.php` | Custom HTTP routes.
 | [Redirection](system/routing.md#redirection) | `redirects.php` | Additional patterns for redirection.
+| [MCP](#mcp) | `mcp.php` | Options for Craft’s [MCP servers](system/mcp.md).
+| [OAuth](#oauth) | `oauth.php` | Signing keys, token lifetimes, and redirect rules for Craft’s [OAuth server](system/oauth.md).
 | [Application Configuration](#application-configuration) | `app.php`, `app.web.php`, `app.console.php` | Overrides for the root application and any of its [Components](https://www.yiiframework.com/doc/guide/2.0/en/concept-components).
 | Plugin Settings | `{plugin-handle}.php`, or other custom files | Consult the plugin’s documentation for specifics.
 | [Advanced](#advanced) | | Specific library options and/or behaviors that may be exposed in a non-standard way, like [Guzzle](#guzzle) or the Twig [sandbox environment](#twig-sandbox).
@@ -506,6 +508,14 @@ You can define custom [URL rules](guide:runtime-routing#url-rules) in `config/ro
 
 See [Routing](system/routing.md) for more details about Craft’s request handling behavior.
 
+### MCP <Since ver="5.12.0" feature="MCP config file" />
+
+Options for Craft’s [MCP servers](system/mcp.md) (like additional instructions for MCP clients) are set via the `config/mcp.php` file, or using environment variables prefixed with `CRAFT_MCP_`. See [MCP configuration](system/mcp.md#configuration) for the available settings.
+
+### OAuth <Since ver="5.12.0" feature="OAuth config file" />
+
+Craft’s [OAuth authorization server](system/oauth.md) is configured via the `config/oauth.php` file, or using environment variables prefixed with `CRAFT_OAUTH_`. See [OAuth configuration](system/oauth.md#configuration) for the available settings.
+
 ### Application Configuration
 
 Some projects may require customization of Craft [application components](reference/config/app.md) beyond what is exposed through specific config files. This is done directly via the `config/app.php` file.
@@ -576,6 +586,8 @@ You can customize this policy via a `twig-sandbox.php` config file, which is mer
 ```
 
 Internally, Craft uses PHP [attributes](https://www.php.net/manual/en/language.attributes.overview.php) to flag classes, methods, and properties as [allowed](craft5:craft\web\twig\AllowedInSandbox), so they do not appear in the default config array.
+
+The [`{% render %}`](reference/twig/tags.md#render) tag and `render()` methods (like those on elements, element queries, and collections) are allowed in the sandbox. <Since ver="5.12.0" feature="Rendering elements in the Twig sandbox" />
 
 ::: tip
 If you find that sandboxed rendering is too restrictive, try adding features to the security policy one-by-one, _before_ completely disabling it.

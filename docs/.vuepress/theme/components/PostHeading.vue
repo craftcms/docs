@@ -26,6 +26,18 @@
       This document is for an older version of {{ $activeSet.setTitle }}.
       <RouterLink :to="suggestedPath">View latest version →</RouterLink>
     </div>
+
+    <!-- LLM-assisted pages -->
+    <div
+      v-if="$page.frontmatter.includesLlmOutput"
+      class="llm-disclosure">
+        <div class="llm-disclosure-icon">
+          <Clanker />
+        </div>
+        <div class="llm-disclosure-text">
+          <p>This page includes text produced by a large language model. It may contain subtle errors or omit important details; we are in the process of editing it for accuracy.</p>
+        </div>
+    </div>
     <div
       class="auto-toc block xl:hidden"
       v-if="headingItems.length && headingItems[0].children.length"
@@ -83,15 +95,30 @@
     margin-bottom: 0;
   }
 }
+
+.llm-disclosure {
+  @apply block flex w-full mt-2 px-5 py-4 rounded border border-dashed border-blue-lighter;
+}
+
+.llm-disclosure-icon {
+  fill: theme('colors.blue.lighter');
+  width: 66px;
+}
+
+.llm-disclosure-text {
+  margin-left: 1em;
+}
 </style>
 
 <script>
 import { resolveHeaders, getSameContentForVersion } from "../util";
 import SidebarLinks from "./SidebarLinks";
+import Clanker from "../icons/Clanker";
 
 export default {
   components: {
     SidebarLinks,
+    Clanker,
   },
   mounted() {
     const searchMatch = [

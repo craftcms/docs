@@ -349,6 +349,29 @@ An elevated session’s duration is governed by the <config5:elevatedSessionDura
 
 When **Require two-step verification** is enabled for user groups that _don’t_ have control panel access, those users may be sent to the Craft-provided [front-end login page](#front-end-pro) to perform additional authentication.
 
+### Rate Limiting <Since ver="5.12.0" feature="Rate limits for authentication requests" />
+
+Craft limits how many times a single IP address can submit these requests within a window of time:
+
+- `users/login` (`POST` requests only)
+- `users/send-password-reset-email`
+- `auth/verify-totp`
+- `auth/verify-recovery-code`
+
+Each action is tracked separately. By default, an IP address can make 10 of each request per minute; any more get a `429` response. Use the <config5:defaultRateLimit> and <config5:defaultRateLimitDuration> settings to adjust the limit (or set <config5:defaultRateLimit> to `false` to disable it).
+
+These limits complement the per-account lockouts governed by <config5:maxInvalidLogins> (see [Special States](#special-states)).
+
+::: tip
+If Craft is running behind a load balancer or reverse proxy, make sure <config5:ipHeaders> (and your request component’s `trustedHosts`) are configured so that limits apply to each visitor’s IP address rather than the proxy’s.
+:::
+
+### Personal Access Tokens <Since ver="5.12.0" feature="Personal access tokens" />
+
+Users can create personal access tokens for APIs that offer them (like the [GraphQL API](../development/graphql.md)) from <Journey path="My Account, Tokens" />. Tokens are useful for scripts and other tools that can’t complete an [OAuth](oauth.md) authorization flow, and act on behalf of the user who created them, within the scopes they choose.
+
+The same screen lists the apps the user has authorized via OAuth. Tokens can be renamed, and tokens and authorized apps can be revoked at any time.
+
 <a name="public-registration"></a>
 
 ## Public Registration <badge type="edition" title="Craft Pro only">Pro</badge>

@@ -65,6 +65,10 @@ Addresses can be copied and pasted between users and [addresses fields](../field
 
 <See path="../../system/elements.md" hash="copying-elements" label="Copying Elements" description="Learn how to copy addresses and other elements between contexts." />
 
+### Drafts <Since ver="5.12.0" feature="Drafts support for addresses" />
+
+Addresses support [drafts](../../system/drafts-revisions.md). Addresses within an [addresses field](../field-types/addresses.md) can be edited from a draft of their owner element, like other [nested elements](../../system/drafts-revisions.md#nested-elements)—so users who can save drafts of an element (but not the canonical element itself) can still update the addresses in its addresses fields.
+
 ## Address Repository
 
 The [commerceguys/addressing](repo:commerceguys/addressing) library powers planet-friendly address handling and formatting, and its exhaustive repository of global address information is available to all Craft projects. If you need a list of countries, states, or provinces, for example, you can fetch them via Craft’s [Addresses](craft5:craft\services\Addresses) service, from Twig templates or PHP:

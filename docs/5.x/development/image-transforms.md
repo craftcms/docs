@@ -63,6 +63,7 @@ Image Format
     - `gif`
     - `webp` (when supported by ImageMagick)
     - `avif` (when supported by ImageMagick)
+    - `jxl` (when supported by ImageMagick) <Since ver="5.12.0" feature="JPEG XL transform output" />
 
     ::: tip
     The <config5:transformGifs> setting allows you to completely disable transformation of GIF images. Animated GIFs often consume significant resources to resize, and rarely produce well-optimized output.
@@ -74,6 +75,21 @@ Image Format
 Some modes may behave the same when using only one of the **Width** and **Height** settings. Typically, an unset dimension means the image’s aspect ratio is maintained.
 
 Suppose we have a source image that is 600 pixels wide and 400 pixels tall. Applying a **Stretch** transform that only declares a **Width** of 60 pixels would produce an image 40 pixels tall.
+:::
+
+### Supported Formats
+
+Craft can always transform JPEG, PNG, and GIF images. Other formats can be transformed (and edited in the [Image Editor](../reference/element-types/assets.md#image-editor)) only when your server’s image driver supports them:
+
+- **WebP** and **AVIF** — Supported as source images and output formats.
+- **HEIC/HEIF** — Supported as source images.
+- **BMP** <Since ver="5.12.0" feature="Transforming and editing BMP images" /> — Supported as source images.
+- **JPEG XL** (`.jxl`) <Since ver="5.12.0" feature="JPEG XL images" /> — Supported as source images and output formats, when ImageMagick supports it.
+
+When a transform’s format is set to **Auto**, images in formats that aren’t [web-safe](craft5:craft\helpers\Image::webSafeFormats()) (like BMP, HEIC, or JPEG XL) are converted to `jpg`. Set an explicit format (like `jxl`) to output something else.
+
+::: tip
+The [System Report](../system/control-panel.md#utilities) utility shows which image driver Craft is using.
 :::
 
 ## Transform Modes
@@ -186,7 +202,7 @@ All the same settings available to [named transforms](#named-transforms) are ava
 - The `mode` property can be set to either `'crop'`, `'fit'`, `'letterbox'`, or `'stretch'`.
 - `width` and `height` can each be set to an integer, or omitted.
 - `quality` can be set to a number between 0 and 100, or omitted to use the <config5:defaultImageQuality> setting.
-- `format` can be set to `'jpg'`, `'gif'`, `'png'`, `'webp'`, `'avif'`, or omitted.
+- `format` can be set to `'jpg'`, `'gif'`, `'png'`, `'webp'`, `'avif'`, `'jxl'`, or omitted. Formats other than `jpg`, `gif`, and `png` must be [supported](#supported-formats) by your server.
 - A `position` property (set to one of the [valid values](#crop) listed above) is supported when `mode` is set to `'crop'` or `'letterbox'`. The behavior is different for each [type of transform](#transform-modes).
 
 ### Overriding Named Transforms

@@ -56,6 +56,8 @@ Schema customization is only possible with an admin account and <config5:allowAd
 In addition to the content and mutation settings for each schema, you can opt in to support for the `@transform` and `@parseRefs` [directives](#list-of-available-directives).
 You may globally disable image transforms in GraphQL using the <config5:disableGraphqlTransformDirective> setting (this completely hides the option in the schema customization screen). <Since ver="5.9.0" feature="Per-schema control over availability of @transform and @parseRefs directives" />
 
+Schemas can also grant read-only access to some of your project’s configuration, using the **Query for sites**, **Query for sections**, **Query for entry types**, **Query for volumes**, **Query for user groups**, **Query for category groups**, and **Query for tag groups** components. Each one adds a pair of [settings queries](#settings-queries) (like `sections` and `section`), and a field that links elements to that configuration (like `section` on entries). <Since ver="5.12.0" feature="Read-only GraphQL schema components for sites, sections, entry types, volumes, and groups" />
+
 #### Generate Tokens
 
 A _token_ is required to use any non-public schema. Tokens use the standard “bearer” `Authorization` HTTP header:
@@ -74,6 +76,35 @@ While [schemas](#define-your-schemas) are tracked in [project config](../system/
 
 ::: danger
 Carefully protect tokens for schemas that allow [mutations](#mutations)! These are effectively as dangerous as a user with the equivalent permissions.
+:::
+
+#### Authenticating as a User <Since ver="5.12.0" feature="OAuth and personal access token authentication for GraphQL" />
+
+Instead of a schema token, requests can be authenticated with an [OAuth](../system/oauth.md) access token that was issued to a specific user. Apps can get one by having the user sign in and authorize them, or the user can create a personal access token in the control panel.
+
+Access tokens are sent in the same `Authorization` header as schema tokens:
+
+```bash
+curl \
+  -H "Authorization: Bearer {access-token}" \
+  -H "Content-Type: application/graphql" \
+  -d '{currentUser{id,fullName}}' \
+  https://my-project.ddev.site/api
+```
+
+Craft doesn’t use one of your schemas for these requests. It builds one for the user that authorized the token instead, from the schema components that support authenticated requests and match that user’s [permissions](../system/user-management.md#permissions). For example, entries in a section are only queryable if the user can view entries in it, and drafts, revisions, and disabled elements are only available to users with control panel access. The request runs as that user, so queries only return elements they can view, and mutations are only allowed if they can save, delete, or create drafts of the element in question. Category, tag, and global set components aren’t available to authenticated requests.
+
+The user also decides how much access a token gets when they authorize an app or create a token, using two OAuth scopes:
+
+- `graphql:read` (“Read only”) — The token can run queries.
+- `graphql:write` (“Read and write”) — The token can run queries and [mutations](#mutations).
+
+To create a personal access token, go to <Journey path="My Account, Tokens" /> and click **New token**. This requires an [elevated session](../system/user-management.md#elevated-sessions). Give the token a name, select the scopes it should have, and choose when it expires (7, 30, or 90 days, or one year). The token is only shown once, so copy it right away. The **Tokens** screen also lists the apps you’ve authorized. From there you can rename personal tokens, and revoke tokens or an app’s access. The screen only appears when an API offers personal access tokens. GraphQL does this whenever <config5:enableGql> is on.
+
+Authenticated requests can use the [`currentUser` query](#the-currentuser-query) to get the user that authorized the token.
+
+::: tip
+Results for authenticated requests are [cached](#caching) separately for each user, and vary by their current permissions.
 :::
 
 ## Sending API Requests
@@ -292,6 +323,8 @@ query PositiveReviews {
 ::: tip
 Mouseover any token in the GraphiQL editor to view introspections, or open the **Documentation Explorer** to learn about the acceptable argument types for each [field type](../reference/field-types/README.md).
 :::
+
+Some field types let you choose how their values are represented. For example, [Color](../reference/field-types/color.md) fields have a **GraphQL Mode** setting. **Full data** returns an object with fields like `hex`, `rgba`, `hsl`, and `contrastColor`, and **Hex only** returns just the hex string. New Color fields use “Full data”, and Color fields created before Craft 5.12 use “Hex only”. Values from [Icon](../reference/field-types/icon.md) fields also have `set`, `svg`, and `keywords` fields. <Since ver="5.12.0" feature="Color field GraphQL modes and new icon data fields" />
 
 #### Relationships
 
@@ -1763,6 +1796,94 @@ This query is used to query for a single category.
 | `groupId`| `[QueryArgument]` | Narrows the query results based on the category groups the categories belong to, per the groups’ IDs.
 
 <!-- END QUERIES -->
+
+### The `currentUser` query <Since ver="5.12.0" feature="The currentUser GraphQL query" />
+
+This query returns the user that authenticated the request. It only exists for requests [authenticated as a user](#authenticating-as-a-user), and is always available to them, even if they can’t query other users. Requests that use a schema token don’t have it. It takes no arguments and returns a `UserInterface`, with the same fields as the [`user` query](#the-user-query).
+
+```graphql
+query Me {
+  currentUser {
+    id
+    fullName
+    email
+  }
+}
+```
+
+### Settings Queries <Since ver="5.12.0" feature="GraphQL queries for sites, sections, entry types, volumes, and groups" />
+
+Each of the read-only [schema components](#define-your-schemas) for your project’s configuration adds a plural query that returns a list, and a singular query that returns the first match (or `null`):
+
+| Schema component | Queries | Type
+| - | - | -
+| Query for sites | `sites`, `site` | `Site`
+| Query for sections | `sections`, `section` | `Section`
+| Query for entry types | `entryTypes`, `entryType` | `EntryType`
+| Query for volumes | `volumes`, `volume` | `Volume`
+| Query for user groups | `userGroups`, `userGroup` | `UserGroup`
+| Query for category groups | `categoryGroups`, `categoryGroup` | `CategoryGroup`
+| Query for tag groups | `tagGroups`, `tagGroup` | `TagGroup`
+
+All of them accept the same arguments:
+
+| Argument | Type | Description
+| - | - | -
+| `id`| `[Int]` | Narrows the query results based on their IDs.
+| `uid`| `[String]` | Narrows the query results based on their UUIDs.
+| `handle`| `[String]` | Narrows the query results based on their handles.
+
+```graphql
+query Structure {
+  sites {
+    handle
+    language
+    baseUrl
+  }
+  section(handle: "news") {
+    name
+    type
+    entryTypes {
+      handle
+      hasTitleField
+    }
+  }
+}
+```
+
+The `sites` query returns enabled sites, plus any disabled sites the schema can query elements in.
+
+Every type has `id` (`Int!`), `uid` (`String!`), `name` (`String!`), and `handle` (`String!`) fields. Some have more:
+
+| Type | Additional fields
+| - | -
+| `Site` | `language` (`String!`), `primary` (`Boolean!`), `enabled` (`Boolean!`), `hasUrls` (`Boolean!`), `baseUrl` (`String`)
+| `Section` | `type` (`String!`; `single`, `channel`, or `structure`), `maxLevels` (`Int`), `entryTypes` (`[EntryType!]!`; requires **Query for entry types**)
+| `EntryType` | `description` (`String`), `icon` (`String`), `color` (`String`), `hasTitleField` (`Boolean!`)
+| `UserGroup` | `description` (`String`)
+| `CategoryGroup` | `maxLevels` (`Int`)
+
+The same components add fields to elements, so you can get an element’s configuration without a separate query:
+
+| Field | Type | Available on | Requires
+| - | - | - | -
+| `site` | `Site!` | All elements | Query for sites
+| `section` | `Section` | Entries (`null` for nested entries) | Query for sections
+| `type` | `EntryType!` | Entries | Query for entry types
+| `volume` | `Volume!` | Assets | Query for volumes
+| `groups` | `[UserGroup!]!` | Users | Query for user groups
+| `group` | `CategoryGroup!` | Categories | Query for category groups
+| `group` | `TagGroup!` | Tags | Query for tag groups
+
+```graphql
+query Articles {
+  entries(section: "news") {
+    title
+    site { name }
+    type { name icon }
+  }
+}
+```
 
 ## List of available directives
 Directives are not regulated by permissions and they affect how the returned data is displayed.

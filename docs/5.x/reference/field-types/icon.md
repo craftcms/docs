@@ -1,6 +1,6 @@
 # Icon Fields
 
-Icon fields allow the user to pick icons that fit the control panel’s style from the [FontAwesome](https://fontawesome.com) library. The field’s value can be used to decorate related or nested element chips and cards by enabling **Use this field’s values for element thumbnails** or **Include this field in element cards** when adding it to a field layout.
+Icon fields allow the user to pick icons that fit the control panel’s style from the [FontAwesome](https://fontawesome.com) library, or from [custom icon sets](#custom-icon-sets). The field’s value can be used to decorate related or nested element chips and cards by enabling **Use this field’s values for element thumbnails** or **Include this field in element cards** when adding it to a field layout.
 
 <!-- more -->
 
@@ -12,7 +12,8 @@ Prior to Craft 5.8.0, only a portion of the FontAwesome library was available. W
 
 The icons field has these settings:
 
-- **Include Pro Icons** — Makes FontAwesome Pro icons available for selection. _You may need to purchase a FontAwesome Pro license to use icons in your site’s front-end._
+- **Icon Sets** <Since ver="5.12.0" feature="Custom icon sets" /> — Choose which icon sets (**Font Awesome**, plus any [custom icon sets](#custom-icon-sets)) are selectable, and drag them to set the order they appear in the icon picker. This setting only appears when at least one custom icon set is registered.
+- **Include Pro Icons** — Makes FontAwesome Pro icons available for selection. _You may need to purchase a FontAwesome Pro license to use icons in your site’s front-end._ Only available when the **Font Awesome** icon set is selected.
 - **Advanced**
   - **GraphQL Mode** <Since ver="5.8.0" feature="Customizing icon field value styles" /> — Choose how this field is represented in the GraphQL API. **Name only** returns only the icon identifier; **Full data** allows selection of the `name` and `styles`.
 
@@ -20,9 +21,54 @@ The icons field has these settings:
 Icon fields created prior to Craft 5.8.0 retain the **Name only** mode. New fields default to **Full data**.
 :::
 
+## Custom Icon Sets <Since ver="5.12.0" feature="Custom icon sets" />
+
+In addition to Font Awesome, icon pickers can offer icons from custom icon sets.
+
+The simplest way to add your own icons is with the <config5:customIconPath> setting, which registers a “Custom” icon set made up of the SVG files in a directory:
+
+```php
+// config/general.php
+use craft\config\GeneralConfig;
+
+return GeneralConfig::create()
+    ->customIconPath('@config/icons');
+```
+
+Each file’s name (without its `.svg` extension) becomes the icon’s name, so `config/icons/rocket.svg` is available as the `rocket` icon in the “Custom” set (handle `custom`). Only files directly within the directory are included.
+
+Once a custom icon set is registered, select it in an icon field’s [**Icon Sets**](#settings) setting to make its icons selectable.
+
+### Registering Icon Sets
+
+Plugins and modules can register their own icon sets via the <craft5:craft\services\Icons::EVENT_REGISTER_ICON_SETS> event. Each icon set is an instance of a <craft5:craft\icons\IconSet> subclass, with a unique `handle` and a user-facing `name`. Handles must begin with a letter, can only contain letters, numbers, underscores, and hyphens, and can’t be `fontawesome`.
+
+To register a directory of SVG files, use <craft5:craft\icons\DirectoryIconSet>:
+
+```php
+use craft\events\RegisterIconSetsEvent;
+use craft\icons\DirectoryIconSet;
+use craft\services\Icons;
+use yii\base\Event;
+
+Event::on(
+    Icons::class,
+    Icons::EVENT_REGISTER_ICON_SETS,
+    function(RegisterIconSetsEvent $event) {
+        $event->iconSets[] = new DirectoryIconSet([
+            'handle' => 'brand',
+            'name' => 'Brand Icons',
+            'path' => '@my/plugin/icons',
+        ]);
+    }
+);
+```
+
+For icons that come from somewhere else, extend <craft5:craft\icons\IconSet> and implement `getIcons()` (returning a list of icon names) and `getSvg($icon)` (returning an icon’s SVG markup, or `null` if it doesn’t exist). You can also override `getKeywords($icon)` to return additional search terms for an icon. Icon names can’t contain slashes, backslashes, or angle brackets.
+
 ## Development
 
-The saved value is suitable for use in the front-end with your own FontAwesome library.
+The saved value is suitable for use in the front-end with your own FontAwesome library. Icons from [custom icon sets](#custom-icons) are handled a bit differently.
 
 ### Webfonts
 
@@ -59,6 +105,26 @@ Some icons are present in multiple sets or “styles.” You can check support f
     ],
 }) }}
 ```
+
+### Custom Icons
+
+Icons selected from a [custom icon set](#custom-icon-sets) are stored as `set-handle:icon-name` (like `custom:rocket`). Font Awesome icons are stored as just their name, without a prefix.
+
+Icon field values have a `set` property containing the handle of the custom icon set the icon was selected from, or `null` for Font Awesome icons. Converting a value to a string (or reading its `name` property) always returns the icon name, without the set handle.
+
+Use `getSvg()` to output an icon’s SVG markup inline, regardless of which set it comes from:
+
+```twig
+{% if entry.myIconField %}
+  {% if entry.myIconField.set is null %}
+    <i class="fa-solid fa-{{ entry.myIconField }}"></i>
+  {% else %}
+    {{ entry.myIconField.getSvg()|raw }}
+  {% endif %}
+{% endif %}
+```
+
+`getSvg()` returns `null` if the icon no longer exists. `getKeywords()` returns an array of search keywords for the icon—for Font Awesome icons, these come from the library’s metadata.
 
 ### Saving Icon Field Data
 
@@ -130,3 +196,9 @@ query Contacts {
 :::
 
 **Name only** returns a string; **Full data** requires a selection of `name` and/or `styles` fields. The `name` sub-selection is equivalent to the value returned by **Name only**.
+
+In **Full data** mode, you can also select <Since ver="5.12.0" feature="Icon set data in GraphQL" />:
+
+- `set` — The handle of the [custom icon set](#custom-icon-sets) the icon belongs to, or `null` for Font Awesome icons;
+- `svg` — The icon’s SVG markup;
+- `keywords` — A list of the icon’s search keywords.

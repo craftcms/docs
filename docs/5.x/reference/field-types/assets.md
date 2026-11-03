@@ -47,7 +47,7 @@ Assets fields have the following novel settings:
 
   If you want to require a single, specific extension (rather than a general “type”), add a **Filename** condition to the **Selectable Assets Condition**, and set it to **ends with** `.jpeg`.
   :::
-- **Allow uploading directly to the field** — When enabled, authors can drag-and-drop files onto the field to upload and attach them in a single step. Review the **Default Upload Location** setting to make sure these assets are organized.
+- **Allow uploading directly to the field** — When enabled, authors can drag-and-drop or paste files into the field to upload and attach them in a single step. Review the **Default Upload Location** setting to make sure these assets are organized.
 
 ### Base Relation Field Settings
 
@@ -114,6 +114,8 @@ Choosing **Add an asset** will bring up a modal window where you can find and se
 
 ::: tip
 You can also upload assets by dragging files directly onto the assets field, or into the modal window.
+
+You can paste files from your clipboard, too: click the field to give it focus, then paste (<kbd>Ctrl</kbd> + <kbd>V</kbd>, or <kbd>⌘</kbd> + <kbd>V</kbd> on macOS). <Since ver="5.12.0" feature="Pasting files into assets fields" />
 :::
 
 ### Inline Asset Editing

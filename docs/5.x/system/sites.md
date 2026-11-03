@@ -129,13 +129,28 @@ Save entries to all sites enabled for this section
 :   Entries are created and managed in all sites that are enabled in the **Site Settings** table.
 
 Let each entry choose which sites it should be saved to
-:   Leave these decisions up to each entry. Use the **Status** section in the sidebar to create the entry in another site:
+:   Leave these decisions up to each entry. Use the [**Sites** pane](#managing-an-element-s-sites) in the sidebar to create the entry in another site:
 
     ![Creating an entry in secondary sites](../images/entry-propagation-manual.png)
 
     This option also allows entries to be deleted on a per-site basis (rather than just _disabled_).
 
 When an entry exists in multiple sites, its content can be translated using similar (but even more flexible) rules, [on a field-by-field basis](fields.md#translation-methods).
+
+[Asset volumes](../reference/element-types/assets.md#propagation-method) have a simpler **Propagation Method** setting, which either saves assets to all sites, or lets each asset choose which sites it should be saved to.
+
+## Managing an Element’s Sites <Since ver="5.12.0" feature="The Sites pane on element edit pages" />
+
+On multi-site installations, edit pages for elements that can exist in more than one site have a **Sites** pane in their sidebars (in place of the **Status** pane). It lists each site the element is saved to—limited to those the current user has permission to edit—and lets authors:
+
+- Toggle the element’s status in each site (for element types that have per-site statuses, like entries);
+- Jump to the element in another site by clicking that site’s name;
+- Add the element to another site it supports but isn’t saved to yet, using the **Add a site…** menu (for example, entries in sections that let each entry choose its sites, or assets in volumes that let each asset choose its sites);
+- Remove a site that was added from the pane.
+
+In [slideouts](control-panel.md#slideouts), clicking a site name in the **Sites** pane switches the slideout to that site, rather than leaving the current page.
+
+Elements that can be saved to individual sites can also be deleted from individual sites, via the **Delete for site** action. Deleting an element from the only site it exists in soft-deletes it (so it can be restored until it’s [garbage-collected](gc.md)), unless it’s a draft or a nested element, in which case it’s deleted permanently.
 
 ## Setting Up a New Site
 
@@ -179,6 +194,8 @@ Using new or existing entries, verify that the section, field, and translation m
 ### Step 6: Check Your Asset Settings
 
 If you have any _Local_ asset filesystems, you will need to make sure they (and the files in each volume that depends on them) are available from each of your sites. Relative paths (like `uploads/images/`) or root-relative paths (like `/uploads/images/`) may only work coincidentally. Filesystems’ **Base URL** setting should use a stable, absolute URL like `https://craftcms.com/` (or a special alias or environment variable).
+
+Then, review each volume’s [**Propagation Method**](../reference/element-types/assets.md#propagation-method). Volumes set to **Let each asset choose which sites it should be saved to** (the default for new volumes, and for volumes created on single-site installs) won’t add existing assets to your new site; switch a volume to **Save assets to all sites** if its assets should be available everywhere.
 
 ::: tip
 Review your translation method for asset titles and `alt` text to make sure they’re relevant to users and authors!

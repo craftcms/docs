@@ -48,7 +48,7 @@ Use of Project Config often involves disabling the <config5:allowAdminChanges> o
 Suppose you are asked to add a new entry type to an existing section. The process is probably pretty familiar: make some updates via the control panel, adjust templates and styles, then push your code. But how does the new entry type definition actually make it to the live site?
 
 - **Without** Project Config, you would eventually need to squash a live database with a development one (risking content loss), or copy settings from one control panel to another (risking misconfiguration).
-- **With** Project Config, Craft tracks the schema changes as YAML and can apply them automatically (as part of your deployment process) or at the click of a button.
+- **With** Project Config, Craft tracks the schema changes as YAML and can apply them automatically (as part of your [deployment](../deploy.md) process) or at the click of a button.
 
 ::: warning
 Directly editing YAML files can cause inconsistencies and instability.
@@ -120,8 +120,19 @@ There are a few things you should keep in mind when working with Project Config:
 
 When Craft tries to apply Project Config changes, it will first verify that the Craft and plugin schema versions declared in YAML are compatible with what’s actually installed. Inconsistencies can usually be resolved by running `composer install`.
 
+To run this check on its own, use the `project-config/check` command: <Since ver="5.12.0" feature="The project-config/check command" />
+
+```bash
+php craft project-config/check
+```
+
+Add this as a step your [deployment](../deploy.md) pipeline to quickly fail and incompatible build and avoid partial upgrades.
+The command expects that Craft is installed and has access to the database.
+If you have disabled <config5:writeYamlAutomatically> (and don’t have a `config/project/project.yaml` file), pass `--require-yaml=0` to suppress the warning.
+
 ::: tip
-`composer.lock` should be checked in to version control alongside Project Config files. To stay ahead of these errors, run `composer install` during every deploy and when integrating changes from collaborators!
+`composer.lock` should be checked in to version control alongside Project Config files.
+To stay ahead of these errors, run `composer install` during every deploy and when integrating changes from collaborators!
 :::
 
 ### Production Changes Reverted
