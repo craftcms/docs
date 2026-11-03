@@ -5,9 +5,13 @@ includesLlmOutput: true
 
 # OAuth <Since ver="5.12.0" feature="OAuth authorization server" />
 
-Craft includes an OAuth 2 authorization server, which lets apps and AI assistants access Craft’s APIs on behalf of a user—without ever seeing their password. The [MCP](mcp.md) servers and the [GraphQL API](../development/graphql.md) both use it, and plugins can [protect their own APIs](../extend/mcp.md#oauth-resources) with it.
+Craft includes an OAuth 2 authorization server, which lets apps and AI assistants access Craft’s APIs on behalf of a user—without ever seeing their password.
+The authenticated [MCP](mcp.md) server and the [GraphQL API](../development/graphql.md) both use it, and plugins can [protect their own APIs](../extend/mcp.md#oauth-resources) with it.
 
-Each API is an OAuth **resource** with its own URL, scopes, and required permissions. A token issued for one resource can’t be used with another.
+<!-- more -->
+
+Each API is an OAuth **resource** with its own URL, scopes, and required permissions.
+A token issued for one resource can’t be used with another.
 
 Craft’s server supports…
 
@@ -79,17 +83,18 @@ return [
 `resources`
 :   Additional [resource definitions](../extend/mcp.md#oauth-resources), keyed by resource ID.
 
-These settings can also be set with environment variables prefixed with `CRAFT_OAUTH_`, like `CRAFT_OAUTH_ACCESS_TOKEN_DURATION`.
+Settings that use scalar values (like a string or integer) can also be set with environment variables prefixed with `CRAFT_OAUTH_`, like `CRAFT_OAUTH_ACCESS_TOKEN_DURATION`.
 
 ## Authorization Flow
 
 Most clients (like AI assistants) handle the flow on their own—all you need to do is give them the URL of the API. Here’s what happens behind the scenes:
 
-1. The client fetches the resource’s discovery metadata.
+1. The client fetches the [resource](#endpoints)’s discovery metadata.
 1. The client registers itself and receives a `client_id`. Registering doesn’t grant any access.
-1. The client sends the user to Craft’s authorization endpoint with the scopes it wants and an `S256` PKCE code challenge.
-1. The user signs in to Craft, if they aren’t already, and approves or denies the request on a [consent](#consent) screen.
-1. The client exchanges the authorization code for an access token and a refresh token.
+1. The client sends the user to Craft’s authorization endpoint with the scopes it wants and an `S256` [PKCE code challenge](https://oauth.net/2/pkce/).
+1. The user signs in to Craft (if they aren’t already) and approves or denies the request on a [consent](#consent) screen.
+1. The user is redirected to the client application with a temporary _authorization code_.
+1. The client exchanges that authorization code for an _access token_ and a _refresh token_.
 1. The client sends the access token in an `Authorization: Bearer …` header with each API request, and uses the refresh token to get a new one when it expires.
 
 Redirect URIs must exactly match those the client registered.
@@ -147,18 +152,24 @@ Scopes never grant a user additional permissions. Tokens stop working as soon as
 
 ## Personal Access Tokens
 
-Apps and scripts that can’t complete the OAuth flow in a browser can use a **personal access token**, instead. Users create these from <Journey path="My Account, Tokens" /> in the control panel:
+Apps and scripts that can’t complete the OAuth flow in a browser can use a _personal access token_, instead.
+Users create these from <Journey path="My Account, Tokens" /> in the control panel:
 
 1. Click **New token** (you may be asked to verify your identity, to start an [elevated session](user-management.md#elevated-sessions));
 1. Enter a **Name** describing what the token will be used for;
 1. Choose the **Scopes** to grant, from any of the available APIs;
 1. Choose an **Expiration**: 7 days, 30 days, 90 days, or 1 year;
 
-Copy the token when it’s displayed—you won’t be able to see it again. Send it with API requests in an `Authorization: Bearer …` header, just like an OAuth access token.
+Copy the token when it’s displayed—you won’t be able to see it again.
+Send it with API requests in an `Authorization: Bearer …` header, just like an OAuth access token.
 
-Clicking a token shows its scopes and lets you rename it. A token’s scopes can’t be changed after it’s created. The same screen lists the apps you’ve authorized via OAuth. Revoking a personal token revokes it for every API; revoking an app revokes its access and refresh tokens.
+Clicking a token shows its scopes and lets you rename it.
+A token’s scopes can’t be changed after it’s created.
+The same screen lists the apps you’ve authorized via OAuth. Revoking a personal token revokes it for every API; revoking an app revokes its access and refresh tokens.
 
-The **Tokens** screen is only shown when some API offers scopes the user can grant. Craft offers GraphQL scopes when the GraphQL API is enabled; MCP clients authorize themselves, so MCP doesn’t offer any. Plugins can [offer their own](../extend/mcp.md#personal-access-token-scopes).
+The **Tokens** screen is only shown when at least one API offers scopes the user can grant.
+
+Craft offers GraphQL scopes when the GraphQL API is enabled; MCP clients authorize themselves, so MCP doesn’t offer any. Plugins can [offer their own](../extend/mcp.md#personal-access-token-scopes).
 
 ## GraphQL
 
