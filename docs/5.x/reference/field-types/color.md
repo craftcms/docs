@@ -1,10 +1,14 @@
 # Color Fields
 
-Color fields provide a flexible way to store hexadecimal color values. You can define a [palette](#palette) to guide authors <Since ver="5.6.0" feature="Color field palettes" />, or use an [open-ended input](#custom-colors).
+Color fields provide a flexible way to store hexadecimal color values.
+You can define a [palette](#palette) to guide authors <Since ver="5.6.0" feature="Color field palettes" />, or use an [open-ended input](#custom-colors).
 
 <!-- more -->
 
 ![Screenshot of a color field interface in the Craft control panel](../../images/fields-color-ui.png)
+
+Color field values (custom, or from a palette) can be translucent. <Since ver="5.12.0" feature="Translucent colors in color fields" />
+Enter an 8-digit hex value (like `#0000ff80`) where the last two digits are the alpha channel, or set the opacity in the color picker, in browsers that support it.
 
 ## Settings
 
@@ -20,8 +24,6 @@ Color fields provide a flexible way to store hexadecimal color values. You can d
 
 Each field contains a **Palette** of colors that authors can select from a dropdown menu.
 
-Palette colors can be translucent. <Since ver="5.12.0" feature="Translucent colors in color fields" /> Enter an 8-digit hex value (like `#0000ff80`) where the last two digits are the alpha channel, or set the opacity in the color picker, in browsers that support it.
-
 ### Custom Colors
 
 Turn on **Allow custom colors** to display a compact input and color preview UI. When used in conjunction with a palette, an additional **Custom…** option is listed at the bottom of the dropdown menu.
@@ -34,12 +36,9 @@ Turn on **Allow opacity for custom colors** <Since ver="5.12.0" feature="Translu
 
 ### GraphQL Mode <Since ver="5.12.0" feature="Color field GraphQL modes" />
 
-When GraphQL is enabled, the **GraphQL Mode** setting determines how the field’s values are represented in the [GraphQL API](#graphql):
+When GraphQL is enabled, the **GraphQL Mode** setting determines how the field’s values are exposed in the [GraphQL API](#graphql).
 
-- **Full data** — Values are objects with sub-selections for each color component and format.
-- **Hex only** — Values are just the color’s hex string.
-
-New color fields default to **Full data**. Fields created before Craft 5.12 retain the **Hex only** mode, so existing queries continue to work.
+New color fields default to **Full data**; fields created before Craft 5.12 retain the **Hex only** mode, so existing queries continue to work.
 
 ## Development
 
@@ -116,9 +115,10 @@ You may also access any of the color components as properties: <Since ver="5.8.0
 
 ### Translucency and Other Formats <Since ver="5.12.0" feature="Translucent colors and additional color formats" />
 
-When a color isn’t fully opaque, its hex value (whether output directly or via `hex`/`getHex()`) includes the alpha channel as two extra digits, like `#e5422b80`. Fully opaque colors are still output as 6-digit hex values. Pass `false` to `getHex()` to always get the 6-digit value, without the alpha channel.
+When a color isn’t fully opaque, Craft stores and returns the alpha channel as two extra hexadecimal digits (like `#e5422b80`).
+Pass `false` to `getHex()` to discard the alpha channel (if present) and return a standard six-character hexadecimal code.
 
-`ColorData` objects also provide these formats and helpers:
+Other `ColorData` methods are named explicitly, rather than parameterized (like `getHsl()` and `getHsla()`):
 
 ::: code
 ```twig
@@ -151,7 +151,7 @@ echo $color->getContrastRatio('#ffffff'); // output: 4.0810201549497
 ```
 :::
 
-- `alpha` is a number between `0` (fully transparent) and `1` (fully opaque).
+- `alpha` is a number between `0` (fully transparent) and `1` (fully opaque), rounded to two or three places.
 - `rgbChannels` contains just the space-separated red, green, and blue channels, which is handy for defining a CSS custom property that you combine with your own opacity: `rgb(var(--brand) / 50%)`.
 - `oklch` only includes the alpha channel (`/ 0.5`) when the color isn’t fully opaque.
 - `contrastColor` is either black (`#000000`) or white (`#ffffff`), whichever contrasts more with the color—useful for choosing a legible text color to display over it.
@@ -172,7 +172,9 @@ echo $color->getContrastRatio('#ffffff'); // output: 4.0810201549497
 
 ### GraphQL
 
-When the field’s [GraphQL Mode](#graphql-mode) is **Hex only**, it returns a hex string (which may include an alpha channel). In **Full data** mode, you can select any of these fields: `hex`, `label`, `red`, `green`, `blue`, `alpha`, `hue`, `saturation`, `lightness`, `luma`, `rgb`, `rgba`, `rgbChannels`, `hsl`, `hsla`, `oklch`, `contrastColor`, and `contrastRatio`.
+When the field’s [GraphQL Mode](#graphql-mode) is **Hex only**, it returns a hexadecimal string of six or eight characters (when the value includes a relevant [alpha](#translucency-and-other-formats) component).
+
+In **Full data** mode, you can select any of these fields: `hex`, `label`, `red`, `green`, `blue`, `alpha`, `hue`, `saturation`, `lightness`, `luma`, `rgb`, `rgba`, `rgbChannels`, `hsl`, `hsla`, `oklch`, `contrastColor`, and `contrastRatio`.
 
 ```gql
 query Swatches {
