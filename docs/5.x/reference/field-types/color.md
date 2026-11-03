@@ -113,6 +113,10 @@ You may also access any of the color components as properties: <Since ver="5.8.0
 {# ... #}
 ```
 
+::: tip
+Refer to the [`ColorData`](craft5:craft\fields\data\ColorData) class reference for a complete list of methods!
+:::
+
 ### Translucency and Other Formats <Since ver="5.12.0" feature="Translucent colors and additional color formats" />
 
 When a color isn’t fully opaque, Craft stores and returns the alpha channel as two extra hexadecimal digits (like `#e5422b80`).
@@ -196,9 +200,54 @@ query Swatches {
 
 The `hex` field accepts a `withAlpha` argument (default `true`), and `contrastRatio` requires a `with` argument containing the hex value of the color to compare against.
 
+### Saving Color Field Data
+
+In an element or [entry form](kb:entry-form) that includes a color field, you can use the browser’s native `color` input type to submit a custom value:
+
+```twig
+{{ input('color', 'fields[myColorField]', entry.myColorField) }}
+
+{# ...equivalent to... #}
+
+<input type="color" name="fields[myColorField]" value="entry.myColorField">
+```
+
+If you cannot use a `color` input (or you are deriving or submitting the value in some other way), Craft can normalize a wide variety of [hexadecimal values](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hex-color):
+
+- `f00` &rarr; `#ff0000` (a `#` is prepended to all values, if not present)
+- `#f00` &rarr; `#ff0000` (expanding three-value syntax to six)
+- `#f004` &rarr; `#ff000044` (expanding four-value syntax to eight, including alpha)
+- `#ff0000ff` &rarr; `#ff0000` (removing alpha channel for fully-opaque colors) <Since ver="5.12.0" feature="Normalization of colors with non-significant alpha channels" />
+
 ::: tip
-Refer to the [`ColorData`](craft5:craft\fields\data\ColorData) class reference for a complete list of methods!
+To avoid ambiguity, it’s best to submit a six- or eight-character <Since ver="5.12.0" feature="Eight-character translucent hexadecimal color values" /> hexadecimal color, prepended with the `#` symbol.
 :::
+
+Most browsers’ color picker interfaces [do not present an alpha channel](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/color#html.elements.input.alpha), but you can enable it for those that do:
+
+```twig{4}
+{% set colorField = craft.app.fields.getFieldByHandle('myColorField') %}
+
+{{ input('color', 'fields[myColorField]', entry.myColorField, {
+  alpha: colorField.allowCustomAlpha,
+}) }}
+```
+
+Color fields that use a palette can be presented as a [dropdown](dropdown.md):
+
+```twig
+{% set colorField = craft.app.fields.getFieldByHandle('myColorField') %}
+
+<select name="fields[myColorField]">
+  {% for swatch in colorField.palette %}
+    {{ tag('option', {
+      value: swatch.color,
+      selected: entry.myColorField.hex == swatch.color,
+      text: swatch.label,
+    }) }}
+  {% endfor %}
+</select>
+```
 
 ## Querying by Color
 
