@@ -742,7 +742,7 @@ Hashes from other algorithms can be checked by re-computing the them from your t
 
 #### Arguments
 
-`algo` <Since ver="5.9.0" feature="Arbitrary data-hasing algorithms in Twig" />
+`algo` <Since ver="5.9.0" feature="Arbitrary data-hashing algorithms in Twig" />
 :   The hashing algorithm to use.
     Check the output of the `hash_algos()` function on your system for a complete list of supported algorithms.
 
