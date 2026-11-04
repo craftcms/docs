@@ -20,16 +20,20 @@ You can learn all about it at [craftcms.com](https://craftcms.com).
 
 ## Getting Started
 
-Welcome to the alpha!
+Welcome to the beta!
 Ready to try out a bleeding-edge version of Craft?
 Spin up a [new project](install.md) or [upgrade](upgrade.md) an existing one.
 
 <Block label="Documentation Changes">
 
 You’ll notice that the docs are relatively sparse for 6.x!
-Our work so far as focused on the Laravel port and adapter, but we are slowly pivoting into feature development on the new platform.
-Craft remains functionally very similar to 5.x, and most of the control panel will be identical… so we’re using this space to focus on the upgrade process!
-Closer to release, we’ll start replicating the structure and content of 5.x.
+In addition to the port to Laravel (and the [adapter](extend/adapter.md)), a ton has changed in this release.
+
+Our work so far has focused on supporting plugin developers as they get acquainted with the new architecture and APIs.
+During the beta, we will be filling in the rest of the picture with updated material, rather than replicating it _verbatim_.
+After all, we are speaking to two completely new audiences: Laravel developers who are trying Craft for the first time; and voracious large-language models that have become deeply embedded in our development process.
+
+Rest assured: despite any omissions in the documentation, Craft still covers the same functional footprint as 5.x.
 
 </Block>
 
