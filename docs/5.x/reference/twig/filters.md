@@ -26,7 +26,7 @@ Filter | Description
 [batch](https://twig.symfony.com/doc/3.x/filters/batch.html) | Batches items in an array.
 [boolean](#boolean) | Coerces the passed value to a boolean.
 [camel](#camel) | Formats a string into camelCase.
-[capitalize](https://twig.symfony.com/doc/3.x/filters/capitalize.html) | Capitalizes the first character of a string.
+[capitalize](#capitalize) | Capitalizes the first character of a string.
 [column](#column) | Returns the values from a single property or key in an array.
 [contains](#contains) | Returns whether an array contains a nested item with a given key-value pair.
 [convert_encoding](https://twig.symfony.com/doc/3.x/filters/convert_encoding.html) | Converts a string from one encoding to another.
@@ -66,7 +66,7 @@ Filter | Description
 [lcfirst](#lcfirst) | Lowercases the first character of a string.
 [length](#length) | Returns the length of a string or array, or the count of a query.
 [literal](#literal) | Escapes an untrusted string for use with element query params.
-[lower](https://twig.symfony.com/doc/3.x/filters/lower.html) | Lowercases a string.
+[lower](#lower) | Lowercases a string.
 [map](https://twig.symfony.com/doc/3.x/filters/map.html) | Applies an arrow function to the items in an array.
 [markdown](#markdown-or-md) | Processes a string as Markdown.
 [merge](#merge) | Merges an array with another one.
@@ -102,13 +102,13 @@ Filter | Description
 [striptags](https://twig.symfony.com/doc/3.x/filters/striptags.html) | Strips SGML/XML tags from a string.
 [time](#time) | Formats a time.
 [timestamp](#timestamp) | Formats a human-readable timestamp.
-[title](https://twig.symfony.com/doc/3.x/filters/title.html) | Formats a string into “Title Case”.
+[title](#title) | Formats a string into “Title Case”.
 [translate](#translate-or-t) | Translates a message.
 [trim](https://twig.symfony.com/doc/3.x/filters/trim.html) | Strips whitespace from the beginning and end of a string.
 [truncate](#truncate) | Truncates a string to a given length, while ensuring that it does not split words.
 [unique](#unique) | Removes duplicate values from an array.
 [unshift](#unshift) | Prepends one or more items to the beginning of an array.
-[upper](https://twig.symfony.com/doc/3.x/filters/upper.html) | Formats a string into “UPPER CASE”.
+[upper](#upper) | Formats a string into “UPPER CASE”.
 [url_encode](https://twig.symfony.com/doc/3.x/filters/url_encode.html) | Percent-encodes a string as a URL segment or an array as a query string.
 [ucwords](#ucwords) | Uppercases the first character of each word in a string.
 [values](#values) | Returns all the values in an array, resetting its keys.
@@ -305,6 +305,22 @@ Returns a string formatted in “camelCase”.
 ```twig
 {{ 'foo bar'|camel }}
 {# Output: fooBar #}
+```
+
+## `capitalize`
+
+Uppercases the first character of a string, and lowercases the rest.
+
+```twig
+{{ 'hello WORLD'|capitalize }}
+{# Output: Hello world #}
+```
+
+Casing follows the rules of the current application language. You can pass a different `language` <Since ver="5.12.0" feature="The language argument for case-changing filters" />:
+
+```twig
+{{ 'istanbul'|capitalize('tr') }}
+{# Output: İstanbul #}
 ```
 
 ## `column`
@@ -726,7 +742,7 @@ Hashes from other algorithms can be checked by re-computing the them from your t
 
 #### Arguments
 
-`algo` <Since ver="5.9.0" feature="Arbitrary data-hasing algorithms in Twig" />
+`algo` <Since ver="5.9.0" feature="Arbitrary data-hashing algorithms in Twig" />
 :   The hashing algorithm to use.
     Check the output of the `hash_algos()` function on your system for a complete list of supported algorithms.
 
@@ -873,6 +889,22 @@ Runs a string through <craft5:craft\helpers\Db::escapeParam()> to escape commas 
 {% set entry = craft.entries()
   .title(titleParam|literal)
   .one() %}
+```
+
+## `lower`
+
+Lowercases a string.
+
+```twig
+{{ 'Hello World'|lower }}
+{# Output: hello world #}
+```
+
+Casing follows the rules of the current application language. You can pass a different `language` <Since ver="5.12.0" feature="The language argument for case-changing filters" />:
+
+```twig
+{{ 'IŞIK'|lower('tr') }}
+{# Output: ışık #}
 ```
 
 ## `markdown` or `md`
@@ -1494,6 +1526,21 @@ Anything longer ago than that is handed off to <craft5:craft\i18n\Formatter::asD
 
 :   Pass `true` to include `at` or `on` prepositions when outputting the timestamp (when appropriate). These values are localized based on the current site’s language. Defaults to `false`.
 
+## `title`
+
+Formats a string into “Title Case”, by uppercasing the first character of each word.
+
+```twig
+{{ 'the quick brown fox'|title }}
+{# Output: The Quick Brown Fox #}
+```
+
+Casing follows the rules of the current application language. You can pass a different `language` <Since ver="5.12.0" feature="The language argument for case-changing filters" />:
+
+```twig
+{{ entry.title|title(currentSite.language) }}
+```
+
 ## `translate` or `t`
 
 Translates a message with [Craft::t()](yii2:yii\BaseYii::t()).
@@ -1548,7 +1595,7 @@ If you’d prefer to have the entire word removed, set the `splitSingleWord` arg
 ## `ucfirst`
 
 ::: warning
-The `ucfirst` filter is deprecated. Use Twig’s native [`capitalize`](https://twig.symfony.com/doc/3.x/filters/capitalize.html) filter, instead.
+The `ucfirst` filter is deprecated. Use the [`capitalize`](#capitalize) filter, instead.
 :::
 
 Capitalizes the first character of a string.
@@ -1585,6 +1632,22 @@ Prepends one or more items to the beginning of an array, and returns the new arr
 {% set array1 = ['foo'] %}
 {% set array2 = array1|unshift('bar', 'baz') %}
 {# Result: ['bar', 'baz', 'foo'] #}
+```
+
+## `upper`
+
+Formats a string into “UPPER CASE”.
+
+```twig
+{{ 'Hello World'|upper }}
+{# Output: HELLO WORLD #}
+```
+
+Casing follows the rules of the current application language. You can pass a different `language` <Since ver="5.12.0" feature="The language argument for case-changing filters" />:
+
+```twig
+{{ 'istanbul'|upper('tr') }}
+{# Output: İSTANBUL #}
 ```
 
 ## `values`

@@ -31,9 +31,26 @@ When setting up a volume, you will be asked to choose or create its underlying *
 
 Volumes can store their [transforms](#image-transforms) alongside the original images, or in a separate filesystem altogether. This is useful for private volumes or filesystems that still benefit from having previews available in the control panel.
 
+### Propagation Method <Since ver="5.12.0" feature="Volume propagation methods" />
+
+On [multi-site](../../system/sites.md) installations, each volume has a **Propagation Method** setting that determines which sites its assets are saved to:
+
+- **Save assets to all sites** — Every asset exists in every site. This was the only behavior prior to Craft 5.12.
+- **Let each asset choose which sites it should be saved to** — Assets are initially saved only to the site they were uploaded from, and can be added to (or removed from) other sites individually.
+
+New volumes use **Let each asset choose which sites it should be saved to** by default, as do existing volumes on single-site installs. Volumes that existed on multi-site installs before Craft 5.12 continue to save assets to all sites until you change the setting. Switching a volume to **Save assets to all sites** propagates its existing assets to any sites they’re missing from.
+
+Assets in volumes that let each asset choose its sites have a **Sites** pane in their edit pages’ sidebars, where authors can see which sites the asset exists in, toggle its status per site, and add it to other sites. Read more about [managing an element’s sites](../../system/sites.md#managing-an-element-s-sites).
+
+Users with permission to delete assets in the volume can also remove an asset from individual sites, via the **Delete for site** action—as long as the asset still exists in at least one other site. Removing an asset from the only site it exists in requires normal delete permissions, and deletes the asset entirely.
+
+::: tip
+A volume’s **Title Translation Method** (and its fields’ [translation methods](../../system/fields.md#translation-methods)) is independent of its propagation method: the former determines whether titles can differ between the sites an asset belongs to; the latter determines which sites it belongs to in the first place.
+:::
+
 ## Filesystems
 
-Filesystems decouple the minutiae of storing and serving actual files from asset management (organization, permissions, and content).
+Filesystems decouple the minutiae of storing and serving actual files from asset management (organization, permissions, and content). In addition to creating them from a volume’s settings screen, you can manage filesystems via <Journey path="Settings, Assets, Filesystems" />.
 
 All filesystems support the following options:
 
@@ -167,6 +184,14 @@ The first method is a great way to quickly move assets into a parent directory, 
 You can automatically organize assets when they are uploaded via an [assets field](../field-types/assets.md) with the **Restrict assets to a single location** setting.
 :::
 
+### File Kinds
+
+Craft groups files into “kinds” based on their extensions, like **Image**, **Video**, **PDF**, or **Markdown** <Since ver="5.12.0" feature="The Markdown file kind" />. Kinds are used to [filter asset queries](#kind), limit what can be selected in [assets fields](../field-types/assets.md), and decide how a file is previewed in the control panel.
+
+Uploads are only allowed if their extension is included in <config5:allowedFileExtensions> (or <config5:extraAllowedFileExtensions>). As of Craft 5.12, `md` and `markdown` files are allowed by default, and they’re classified as the `markdown` kind. Text-based files—including HTML, JavaScript, JSON, Markdown, PHP, plain text, and XML—are previewed with syntax highlighting.
+
+Images in the AVIF, HEIC, WebP, BMP, and [JPEG XL](../../development/image-transforms.md#supported-formats) formats can only be [transformed](#image-transforms) if your server’s image driver supports them.
+
 ## Updating Asset Indexes
 
 If any files are ever added, modified, or deleted outside of Craft (such as over FTP), you’ll need to tell Craft to update its indexes for the volume. You can do that from <Journey path="Utilities, Asset Indexes" />, or using the [`index-assets` console commands](../cli.md#index-assets):
@@ -198,7 +223,7 @@ To help serve optimized images, Craft supports predefined (or “named”) and a
 
 ## Image Editor
 
-Craft provides a built-in image editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose their [focal point](#focal-points).
+Craft provides a built-in image editor for making changes to your images. You can crop, straighten, rotate, and flip your images, as well as choose their [focal point](#focal-points). Any raster image format that Craft can [transform](../../development/image-transforms.md#supported-formats) can be edited, including BMP images (as of Craft 5.12).
 
 To launch the image editor, double-click an image (either on the Assets page or from an [Assets field](../field-types/assets.md)) and press **Edit** in the top-right of the image preview area in the HUD. Alternatively, you can select an asset on the [Assets page](#assets-page) and choose **Edit image** from the task menu (<icon kind="settings" />).
 

@@ -160,9 +160,9 @@ We recommend that this is enabled [only in development environments](../deploy.m
     caption="The settings screen in Craft Pro. Some tiles may only be available in paid editions of Craft."
     id="settings"
     :poi="{
-        system: [80, 24],
-        content: [80, 46],
-        media: [80, 68],
+        system: [85, 24],
+        content: [85, 46],
+        extend: [85, 68],
     }">
 <img src="../images/control-panel-settings.png" alt="Craft settings screen">
 </BrowserShot>
@@ -179,7 +179,6 @@ Group | Description
 **Users** | Set [registration policies](user-management.md#public-registration), define your [permissions structure](user-management.md#permissions) with [user groups](user-management.md#user-groups), and add [custom fields](fields.md) to users.
 **Addresses** | Set up the field layout used by [address](../reference/element-types/addresses.md) elements.
 **Email** | Configure how Craft sends [email](mail.md).
-**Plugins** | Manage available [plugins](plugins.md).
 
 #### Content <Poi label="2" target="settings" id="content" />
 
@@ -189,27 +188,35 @@ Group | Description
 ----- | -----------
 **Sections** | Manage entry [sections](../reference/element-types/entries.md#sections).
 **Entry types** | Manage entry [types](../reference/element-types/entries.md#entry-types), used by sections and Matrix fields.
+**Assets** | Create [volumes](../reference/element-types/assets.md#volumes) for organizing uploaded files, set up local or remote storage via [filesystems](../reference/element-types/assets.md#filesystems), and configure [image transforms](../development/image-transforms.md).
 **Fields** | Create and organize [custom fields](fields.md) available to your elements.
 **Globals** | Configure [globals](../reference/element-types/globals.md).
 **Categories** | Define complex taxonomies with [category groups](../reference/element-types/categories.md#category-groups).
 **Tags** | Define simple taxonomies with [tag groups](../reference/element-types/tags.md#tag-groups).
 
-#### Media <Poi label="3" target="settings" id="media" />
+::: tip
+Prior to Craft 5.12, asset settings and filesystems had their own tiles in a separate “Media” section.
+Filesystems are now managed from <Journey path="Settings, Assets, Filesystems" />.
+:::
 
-Decide how you want to store and organize uploaded files.
+#### Extend <Poi label="3" target="settings" id="extend" /> <Since ver="5.12.0" feature="The Extend settings section" />
+
+Manage how Craft is extended and connected to other tools.
 
 Group | Description
 ----- | -----------
-**Assets** | Create volumes for organizing [assets](../reference/element-types/assets.md) and attach them to filesystems, and configure [image transforms](../reference/element-types/assets.md#image-transforms).
-**Filesystems** | Set up local or remote storage for an [asset volume](../reference/element-types/assets.md#filesystems).
+**Plugins** | Manage available [plugins](plugins.md).
+**MCP** | Enable Craft’s [MCP servers](mcp.md), set their endpoints, and choose what the public server exposes.
 
 #### Plugins
 
-Additional tiles may appear in a fourth group, after installing [plugins](plugins.md). Plugin settings are also accessible via the <Journey path="Settings, Plugins" /> screen.
+Installed [plugins](plugins.md) may add more tiles to a final **Plugins** group.
+Plugins’ settings screens are also accessible via their rows in <Journey path="Settings, Plugins" />.
 
 #### Read-Only Mode <Since ver="5.6.0" feature="Read-only settings screens" />
 
-[Administrators](user-management.md#admin-accounts) can always _view_ settings. A banner appears at the top of each settings screen, and inputs and controls are simplified or disabled:
+[Administrators](user-management.md#admin-accounts) can always _view_ settings.
+A banner appears at the top of each settings screen, and inputs and controls are simplified or disabled:
 
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/settings"
@@ -242,7 +249,7 @@ Slideouts also work for creating new elements on-the-fly from an [element browse
 There is one exception, here: slideouts cannot be opened if the user doesn’t have [permission](user-management.md#permissions) to edit the element—even if they were able to select it from a relational field.
 :::
 
-While slideouts support most element edit screen features, you may find that it’s more comfortable to open it in a new window—just click the icon in the upper-right corner, or use the [action menu](#action-menus). Features you’d normally find in the sidebar have been tucked into a secondary panel for slideouts; this can be toggled with the button next to the pop-out link.
+While slideouts support most element edit screen features, you may find that it’s more comfortable to open it in a new window—just click the icon in the upper-right corner, or use the [action menu](#action-menus). Features you’d normally find in the sidebar have been tucked into a secondary panel for slideouts; this can be toggled with the button next to the pop-out link. On multi-site installations, you can switch a slideout to another site by clicking that site’s name in the [**Sites** pane](sites.md#managing-an-element-s-sites).
 
 ### Action Menus
 

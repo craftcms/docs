@@ -104,6 +104,8 @@ Nested entries are only returned by [element queries](../development/element-que
 
 Nested entries are sometimes *not* drafts and *not* canonical. We carefully filter them out of normal results, but swap them in so that edits are visible in the control panel.
 
+As of Craft 5.12, addresses also support drafts. Addresses within an [addresses field](../reference/field-types/addresses.md) can be edited from a draft of their owner, so users who can save drafts (but not the canonical owner) can still update them.
+
 ## Revisions
 
 In the process of saving an element (or in technical terms, applying a [draft](#drafts) to a canonical element), Craft copies the canonical element into a derivative, called a _revision_.

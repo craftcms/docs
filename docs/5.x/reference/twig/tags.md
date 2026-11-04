@@ -36,6 +36,7 @@ Tag | Description
 [nav](#nav) | Creates a hierarchical nav menu.
 [paginate](#paginate) | Paginates an element query.
 [redirect](#redirect) | Redirects the browser.
+[render](#render) | Renders an element or list of elements using their partial templates.
 [requireAdmin](#requireAdmin) | Requires that an admin user is logged in.
 [requireEdition](#requireEdition) | Requires Craft’s edition to be equal to or better than what’s specified.
 [requireGuest](#requireguest) | Requires that no user is logged in.
@@ -813,6 +814,65 @@ You can optionally set flash messages that will show up for the user on the next
   {% redirect "pricing" 301 with notice "You have to be a member to access that!" %}
 {% endif %}
 ```
+
+## `render` <Since ver="5.12.0" feature="The “render” Twig tag" />
+
+This tag outputs an element using its [partial template](../../system/elements.md#element-partials). It works like calling the element’s `render()` method, but reads more like an `{% include %}` tag:
+
+```twig
+{% render entry %}
+```
+
+You can also pass it a list of elements: an [element query](../../development/element-queries.md), a [collection](../../development/collections.md), or an array. Each element is rendered with its own partial, and the results are joined by newlines:
+
+```twig
+{% render entry.myMatrixField %}
+
+{% render craft.entries().section('news').limit(5) %}
+```
+
+If you pass `null` or an empty list, nothing is output. Passing anything other than an element (or another object that implements <craft5:craft\base\Renderable>) throws an error.
+
+### Parameters
+
+The `{% render %}` tag has the following parameters:
+
+#### Object(s)
+
+The first parameter is the element or list of elements to render.
+
+#### `with`
+
+Pass a hash of extra variables to the partial(s) after the `with` keyword:
+
+```twig
+{% render recipe.ingredients with {
+  portionSize: currentUser.householdSize,
+} %}
+```
+
+#### `only`
+
+Like `{% include %}`, the partials can also access all of the current template’s variables. Add the `only` keyword to pass them just the variables from `with` (along with the element itself):
+
+```twig
+{% render recipe.ingredients with { portionSize: 2 } only %}
+```
+
+### The `loop` Variable
+
+When a list is rendered, each partial gets a `loop` variable, the same as inside a [`{% for %}`](https://twig.symfony.com/doc/3.x/tags/for.html#the-loop-variable) loop. It has `index`, `index0`, `revindex`, `revindex0`, `first`, `last`, `length`, and `parent` keys:
+
+```twig
+{# _partials/entry/ingredient.twig #}
+<li class="{{ loop.last ? 'last' }}">{{ loop.index }}. {{ entry.title }}</li>
+```
+
+If you pass your own `loop` variable using `with`, Craft leaves it alone.
+
+::: tip
+The `{% render %}` tag and `render()` methods are allowed in the [Twig sandbox](../../configure.md#twig-sandbox).
+:::
 
 ## `requireAdmin`
 

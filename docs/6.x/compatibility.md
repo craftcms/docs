@@ -73,7 +73,7 @@ A few settings have been removed, renamed, or relocated:
 | --- | --- |
 | `timezone` | Use the `timezone` key in the main Laravel config file (`config/app.php`). Project config supersedes this. |
 | `defaultCookieDomain` | Use the `domain` key in Laravel’s [session](laravel:session#configuration) config file (`config/session.php`). |
-| `blowfishHashCost` | Use `blowfish.bcrypt.rounds` in Laravel’s [hashing](laravel:hashing#main-content) config file (`config/hashing.php`). |
+| `blowfishHashCost` | Use `hashing.bcrypt.rounds` in Laravel’s [hashing](laravel:hashing#main-content) config file (`config/hashing.php`), or set the `BCRYPT_ROUNDS` environment variable. |
 | `phpSessionName` | Use `cookie` in Laravel’s `config/session.php` |
 | `systemMessageTemplate` | Site-specific templates are configured via Settings &rarr; Email |
 | `elevatedSessionDuration` | Use [`password_timeout`](laravel:authentication#password-confirmation) in Laravel’s authentication config file (`config/auth.php`). The default is now 10800 seconds (three hours). |

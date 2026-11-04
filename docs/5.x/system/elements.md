@@ -416,8 +416,17 @@ If some property of the asset (like its extension, or the user group its uploade
 ```
 
 ::: tip
-You can also render lists of elements by calling the `render()` method on an [element query](../development/element-queries.md) or [element collection](../development/collections.md#element-collections).
+You can also render lists of elements by calling the `render()` method on an [element query](../development/element-queries.md) or [collection](../development/collections.md#element-collections).
 :::
+
+The [`{% render %}` tag](../reference/twig/tags.md#render) does the same thing, for a single element or a list of them: <Since ver="5.12.0" feature="The “render” Twig tag" />
+
+```twig
+{% render entry %}
+{% render entry.myMatrixField with { theme: 'dark' } %}
+```
+
+Unlike the `render()` method, the tag also gives partials access to the current template’s variables (unless you add `only`). When you render a list with either one, each partial gets a `loop` variable, like in a `{% for %}` loop.
 
 [Nested entries](../reference/element-types/entries.md#nested-entries) (like those in [Matrix](../reference/field-types/matrix.md) and [CKEditor](plugin:ckeditor) fields) include information about where they live in the system, via `owner` and `field` properties:
 
@@ -440,7 +449,7 @@ Users and addresses don’t have field layout providers, and therefore do not su
 
 Each partial is passed its element under a variable that agrees with its `refHandle`—same as would be passed to a template, when Craft matches an [element’s route](routing.md).
 
-When manually rendering an element partial (by calling `element.render()` or `.render()` on an [element collection](../development/collections.md#element-collections)), you have an opportunity to make additional variables available to the template:
+When manually rendering an element partial (by calling `element.render()`, calling `.render()` on an [element collection](../development/collections.md#element-collections), or using the [`{% render %}` tag](../reference/twig/tags.md#render)’s `with` parameter), you have an opportunity to make additional variables available to the template:
 
 ```twig
 {{ recipe.ingredients.render({
