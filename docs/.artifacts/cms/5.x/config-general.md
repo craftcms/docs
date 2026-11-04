@@ -314,6 +314,42 @@ For example, you can give the control panel a custom favicon (etc.) like this:
 
 
 
+### `customIconPath`
+
+<div class="compact">
+
+Allowed types
+:  [string](https://php.net/language.types.string), [null](https://php.net/language.types.null)
+
+Default value
+:  `null`
+
+Defined by
+:  [GeneralConfig::$customIconPath](craft5:craft\config\GeneralConfig::$customIconPath)
+
+Since
+:  5.12.0
+
+</div>
+
+The path to a directory of SVG files that should be made available to icon pickers as a “Custom” icon set.
+
+This can be set to an aliased path such as `@config/icons`.
+
+Each file’s name (sans `.svg` extension) becomes its icon name, and icons selected from it will be stored as
+`custom:icon-name`.
+
+::: code
+```php Static Config
+->customIconPath('@config/icons')
+```
+```shell Environment Override
+CRAFT_CUSTOM_ICON_PATH=@config/icons
+```
+:::
+
+
+
 ### `defaultCountryCode`
 
 <div class="compact">
@@ -3269,6 +3305,90 @@ CRAFT_CSRF_TOKEN_NAME=MY_CSRF
 
 
 
+### `defaultRateLimit`
+
+<div class="compact">
+
+Allowed types
+:  [integer](https://php.net/language.types.integer), [false](https://php.net/language.types.boolean)
+
+Default value
+:  `10`
+
+Defined by
+:  [GeneralConfig::$defaultRateLimit](craft5:craft\config\GeneralConfig::$defaultRateLimit)
+
+Since
+:  5.12.0
+
+</div>
+
+The number of requests Craft will allow from a single IP address within <config5:defaultRateLimitDuration>,
+for actions that are rate-limited by default, before responding with a 429 error.
+
+This applies to the following actions, each of which is tracked separately:
+
+- `auth/verify-recovery-code`
+- `auth/verify-totp`
+- `mcp/catalog`
+- `mcp/server-card`
+- `users/login` (POST requests only)
+- `users/send-password-reset-email`
+
+This can be set to `false` to disable the default rate limits.
+
+::: tip
+If Craft is running behind a load balancer or reverse proxy, make sure [yii\web\Request::$trustedHosts](https://www.yiiframework.com/doc/api/2.0/yii-web-request#$trustedHosts-detail) and
+<config5:ipHeaders> are configured correctly, so rate limits are applied to each visitor’s IP rather than the
+proxy’s.
+:::
+
+::: code
+```php Static Config
+->defaultRateLimit(20)
+```
+```shell Environment Override
+CRAFT_DEFAULT_RATE_LIMIT=20
+```
+:::
+
+
+
+### `defaultRateLimitDuration`
+
+<div class="compact">
+
+Allowed types
+:  `mixed`
+
+Default value
+:  `60` (1 minute)
+
+Defined by
+:  [GeneralConfig::$defaultRateLimitDuration](craft5:craft\config\GeneralConfig::$defaultRateLimitDuration)
+
+Since
+:  5.12.0
+
+</div>
+
+The amount of time that <config5:defaultRateLimit> applies to.
+
+See [craft\helpers\ConfigHelper::durationInSeconds()](https://docs.craftcms.com/api/v5/craft-helpers-confighelper.html#method-durationinseconds) for a list of supported value types.
+
+::: code
+```php Static Config
+// 5 minutes
+->defaultRateLimitDuration(300)
+```
+```shell Environment Override
+# 5 minutes
+CRAFT_DEFAULT_RATE_LIMIT_DURATION=300
+```
+:::
+
+
+
 ### `defaultTokenDuration`
 
 <div class="compact">
@@ -3956,11 +4076,14 @@ Default value
     'jpx',
     'js',
     'json',
+    'jxl',
     'lrc',
     'm2t',
     'm4a',
     'm4v',
+    'markdown',
     'mcc',
+    'md',
     'mid',
     'mov',
     'mp3',
