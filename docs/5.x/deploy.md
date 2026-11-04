@@ -269,8 +269,8 @@ We can also address persistent files with symbolic links. For each file or direc
 SHARED="$WORKING/shared"
 
 # Create links to persistent files:
-ln -s "$RELEASE/.env" "$SHARED/.env"
-ln -s "$RELEASE/web/uploads" "$SHARED/web/uploads"
+ln -s "$SHARED/.env" "$RELEASE/.env"
+ln -s "$SHARED/web/uploads" "$RELEASE/web/uploads"
 
 # Create a symbolic link to the new release:
 ln -sf $RELEASE $CURRENT
