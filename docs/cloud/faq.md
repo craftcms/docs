@@ -26,7 +26,7 @@ If you have questions about our software products, check out the [Craft CMS](/5.
 
 ### How do I get support for my Craft Cloud project?
 
-Your Craft Cloud subscription entitles you to complementary [developer support](craftcom:support-services)!
+Your Craft Cloud subscription entitles you to complimentary [developer support](craftcom:support-services)!
 Start a new conversation from our [contact page](craftcom:contact?whatCanWeHelpYouWith=Support) using the email associated with your [Craft Console](kb:what-is-craft-console) account, or email us directly at <Email :address="$activeSetVars.supportEmail" />.
 
 <a id="support-response-times"></a>
@@ -59,7 +59,7 @@ We welcome feature requests via the [public discussion board](https://github.com
 
 Yes! This is a perfect way to manage multi-site installations.
 
-Each project gets one free domain, and unlimited subdomains; additional domains can be added [for a fee](craftcom:cloud#cloud-infrastructure).
+Each project gets one free domain and unlimited subdomains; additional domains can be added [for a fee](craftcom:cloud#cloud-infrastructure).
 
 <a id="git-providers"></a>
 
@@ -85,7 +85,7 @@ Read more about trials in our [Billing](billing.md) article.
 
 ### Which specific regions do you cover?
 
-We currently have presence in North America (Oregon, USA), Canada (Quebec), Europe (Frankfurt, Germany), and Asia-Pacific (Sydney, Australia).
+We currently have a presence in North America (USA, Oregon - Canada, Quebec), Europe (Germany, Frankfurt - Sweden, Stockholm - United Kingdom, London), and Asia-Pacific (Australia, Sydney).
 
 Read more about [region support](regions.md).
 
@@ -146,7 +146,7 @@ If you are migrating a site to Cloud, make sure its database can be neatly impor
 Currently, there is no automatic way to do this.
 
 As a result of each environment being connected to a git repository, you can revert problematic commits and redeploy.
-If changes to the database need to be rolled back (e.g., via a migration), the database will need to be restored to an appropriate point.
+If changes to the database need to be rolled back (e.g., via a migration), it will need to be restored to an appropriate point in time.
 Migrations are run only after Cloud finishes building your application image.
 Failed builds are never deployed!
 
@@ -156,7 +156,7 @@ Read more about [deployments](deployment.md) and our [build pipeline](builds.md)
 
 ### Can I sync code/databases/assets between environments?
 
-You can populate environments’ storage from whatever source(s) you want, but there is not currently an automated tool for this.
+You can populate environments’ storage from any source(s) you want, but there is currently no automated tool for this.
 
 - **Code:** Select the same branch as another environment, and start a deployment.
 - **Database:** [Capture and download a backup](backups.md), then [restore it](backups.md#restoring-backups) to the secondary environment.
@@ -198,7 +198,7 @@ Read all about [deployments](deployment.md) and the [build pipeline](builds.md).
 ### How can I statically cache the front end of my site?
 
 Craft Cloud includes a built-in [static caching](static-caching.md) system that works seamlessly with Craft CMS.
-On-disk and rewrite-based caches will not work, as the Cloud filesystem is ephemeral, and files in the “web root” aren’t directly exposed to the web.
+On-disk and rewrite-based caches will not work because the Cloud filesystem is ephemeral and files in the “web root” aren’t directly exposed to the web.
 
 <a id="local-dev"></a>
 
@@ -227,7 +227,7 @@ Only if it benefits all Craft Cloud projects.
 
 No. The WAF rules are designed to protect the Craft Cloud infrastructure against the types of things pentests perform.
 
-As part of the [shared responsibility model](security.md), we would not disable those purposefully.
+As part of the [shared responsibility model](security.md), we would not disable them on purpose.
 
 If you want to pentest your application outside of that context, you can do so locally or on a separate, non-Craft Cloud installation.
 
@@ -250,7 +250,7 @@ Nope!
 A Craft license is included with your Craft Cloud plan.
 It is valid for as long as your plan is in good standing.
 
-You _do_ need to purchase licenses for any plugins you use, via the in-app Plugin Store.
+You _do_ need to purchase licenses for any plugins you use via the in-app Plugin Store.
 
 Read more about [how licenses work](licensing.md) on Craft Cloud.
 
