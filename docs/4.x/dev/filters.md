@@ -607,6 +607,7 @@ if ($foo !== false) {
 
 ::: danger
 **Do not hash sensitive data.** Hashed values are tamper-proof, but still expose the original value!
+**Do not trust hashed values from untrusted sources.** This could lead to [potential security vulnerabilities](https://craftcms.com/knowledge-base/securing-craft#dont-trust-front-end-user-input).
 :::
 
 [Request::getValidatedBodyParam()](craft4:craft\web\Request::getValidatedBodyParam()) can also perform this comparison in a controller, automatically throwing an error when it finds a missing or invalid value:

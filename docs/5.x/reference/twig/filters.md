@@ -687,6 +687,7 @@ This is primarily intended to pass data in plain view (i.e. via front-end forms)
 ::: danger
 **Do not hash sensitive data.** Hashed values are tamper-proof, but still expose the original value!
 Hashes are **not** a suitable alternative to CSRF tokens or authentication.
+**Do not trust hashed values from untrusted sources.** This could lead to [potential security vulnerabilities](https://craftcms.com/knowledge-base/securing-craft#dont-trust-front-end-user-input).
 :::
 
 In a plugin or module, you can validate the value via [Security::validateData()](yii2:yii\base\Security::validateData()):
