@@ -1958,6 +1958,7 @@ This is the interface implemented by all addresses.
 | - | - | -
 | `id`| `ID` | The ID of the entity
 | `uid`| `String` | The UID of the entity
+| `site`| `Site!` | The site the element is associated with.
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -1997,6 +1998,7 @@ This is the interface implemented by all assets.
 | - | - | -
 | `id`| `ID` | The ID of the entity
 | `uid`| `String` | The UID of the entity
+| `site`| `Site!` | The site the element is associated with.
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -2012,6 +2014,7 @@ This is the interface implemented by all assets.
 | `status`| `String` | The element’s status.
 | `dateCreated`| `DateTime` | The date the element was created.
 | `dateUpdated`| `DateTime` | The date the element was last updated.
+| `volume`| `Volume!` | The volume that the asset belongs to.
 | `uploaderId`| `Int` | The ID of the user who first added this asset (if known).
 | `uploader`| `UserInterface` | The user who first added this asset (if known).
 | `alt`| `String` | Alternative text for the asset.
@@ -2042,6 +2045,7 @@ This is the interface implemented by all entries.
 | - | - | -
 | `id`| `ID` | The ID of the entity
 | `uid`| `String` | The UID of the entity
+| `site`| `Site!` | The site the element is associated with.
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -2070,6 +2074,8 @@ This is the interface implemented by all entries.
 | `isUnpublishedDraft`| `Boolean` | Returns whether this is an unpublished draft.
 | `draftName`| `String` | The name of the draft.
 | `draftNotes`| `String` | The notes for the draft.
+| `section`| `Section` | The section that contains the entry.
+| `type`| `EntryType!` | The entry’s entry type.
 | `authorId`| `Int` | The primary entry author’s ID.
 | `author`| `UserInterface` | The primary entry author.
 | `authorIds`| `[Int]` | The entry authors’ IDs.
@@ -2110,6 +2116,7 @@ This is the interface implemented by all global sets.
 | - | - | -
 | `id`| `ID` | The ID of the entity
 | `uid`| `String` | The UID of the entity
+| `site`| `Site!` | The site the element is associated with.
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -2135,6 +2142,7 @@ This is the interface implemented by all users.
 | - | - | -
 | `id`| `ID` | The ID of the entity
 | `uid`| `String` | The UID of the entity
+| `site`| `Site!` | The site the element is associated with.
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -2171,6 +2179,7 @@ This is the interface implemented by all categories.
 | - | - | -
 | `id`| `ID` | The ID of the entity
 | `uid`| `String` | The UID of the entity
+| `site`| `Site!` | The site the element is associated with.
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.
@@ -2209,6 +2218,7 @@ This is the interface implemented by all tags.
 | - | - | -
 | `id`| `ID` | The ID of the entity
 | `uid`| `String` | The UID of the entity
+| `site`| `Site!` | The site the element is associated with.
 | `_count`| `Int` | Return a number of related elements for a field.
 | `title`| `String` | The element’s title.
 | `slug`| `String` | The element’s slug.

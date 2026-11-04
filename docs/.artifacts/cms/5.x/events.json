@@ -4104,6 +4104,90 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\config\\McpConfig",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\config\\McpConfig",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\config\\McpConfig",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\config\\McpConfig",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\config\\McpConfig",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\config\\McpConfig",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\config\\McpConfig",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
+        "class": "craft\\config\\OAuthConfig",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\config\\OAuthConfig",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\config\\OAuthConfig",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\config\\OAuthConfig",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\config\\OAuthConfig",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\config\\OAuthConfig",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\config\\OAuthConfig",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\console\\Application",
         "name": "EVENT_BEFORE_REQUEST",
         "type": "yii\\base\\Event",
@@ -4488,6 +4572,24 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\console\\controllers\\McpController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\McpController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\McpController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\console\\controllers\\MigrateController",
         "name": "EVENT_REGISTER_MIGRATOR",
         "type": "craft\\events\\RegisterMigratorEvent",
@@ -4501,6 +4603,24 @@
     },
     {
         "class": "craft\\console\\controllers\\MigrateController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\console\\controllers\\OauthController",
+        "name": "EVENT_DEFINE_ACTIONS",
+        "type": "craft\\events\\DefineConsoleActionsEvent",
+        "desc": "The event that is triggered when defining custom actions for this controller."
+    },
+    {
+        "class": "craft\\console\\controllers\\OauthController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\console\\controllers\\OauthController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -5472,6 +5592,42 @@
         "desc": "an event raised right after executing a controller action."
     },
     {
+        "class": "craft\\controllers\\McpController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\McpController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\controllers\\McpController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\McpSettingsController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\McpSettingsController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\controllers\\McpSettingsController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
         "class": "craft\\controllers\\NestedElementsController",
         "name": "EVENT_DEFINE_BEHAVIORS",
         "type": "craft\\events\\DefineBehaviorsEvent",
@@ -5503,6 +5659,24 @@
     },
     {
         "class": "craft\\controllers\\NotFoundController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\OauthController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\OauthController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\controllers\\OauthController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -5965,6 +6139,24 @@
     },
     {
         "class": "craft\\controllers\\VolumesController",
+        "name": "EVENT_AFTER_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right after executing a controller action."
+    },
+    {
+        "class": "craft\\controllers\\WellKnownController",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\controllers\\WellKnownController",
+        "name": "EVENT_BEFORE_ACTION",
+        "type": "yii\\base\\ActionEvent",
+        "desc": "an event raised right before executing a controller action. You may set `ActionEvent::isValid` to be false to cancel the action execution."
+    },
+    {
+        "class": "craft\\controllers\\WellKnownController",
         "name": "EVENT_AFTER_ACTION",
         "type": "yii\\base\\ActionEvent",
         "desc": "an event raised right after executing a controller action."
@@ -39417,6 +39609,60 @@
         "desc": "an event raised at the end of `validate()`"
     },
     {
+        "class": "craft\\mcp\\AdminInstructions",
+        "name": "EVENT_COLLECT_INSTRUCTIONS",
+        "type": "craft\\mcp\\events\\CollectingAdminInstructions",
+        "desc": "The event that is triggered when collecting the full instructions returned by `info.get`."
+    },
+    {
+        "class": "craft\\mcp\\AdminInstructions",
+        "name": "EVENT_COLLECT_SERVER_INSTRUCTIONS",
+        "type": "craft\\mcp\\events\\CollectingServerInstructions",
+        "desc": "The event that is triggered when collecting the instructions the authenticated and stdio servers send every client when it connects, regardless of the user’s permissions."
+    },
+    {
+        "class": "craft\\mcp\\Settings",
+        "name": "EVENT_INIT",
+        "type": "yii\\base\\Event",
+        "desc": "The event that is triggered after the model's init cycle"
+    },
+    {
+        "class": "craft\\mcp\\Settings",
+        "name": "EVENT_DEFINE_BEHAVIORS",
+        "type": "craft\\events\\DefineBehaviorsEvent",
+        "desc": "The event that is triggered when defining the class behaviors"
+    },
+    {
+        "class": "craft\\mcp\\Settings",
+        "name": "EVENT_DEFINE_RULES",
+        "type": "craft\\events\\DefineRulesEvent",
+        "desc": "The event that is triggered when defining the model rules"
+    },
+    {
+        "class": "craft\\mcp\\Settings",
+        "name": "EVENT_DEFINE_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the arrayable fields"
+    },
+    {
+        "class": "craft\\mcp\\Settings",
+        "name": "EVENT_DEFINE_EXTRA_FIELDS",
+        "type": "craft\\events\\DefineFieldsEvent",
+        "desc": "The event that is triggered when defining the extra arrayable fields"
+    },
+    {
+        "class": "craft\\mcp\\Settings",
+        "name": "EVENT_BEFORE_VALIDATE",
+        "type": "yii\\base\\ModelEvent",
+        "desc": "an event raised at the beginning of `validate()`. You may set `ModelEvent::isValid` to be false to stop the validation."
+    },
+    {
+        "class": "craft\\mcp\\Settings",
+        "name": "EVENT_AFTER_VALIDATE",
+        "type": "yii\\base\\Event",
+        "desc": "an event raised at the end of `validate()`"
+    },
+    {
         "class": "craft\\migrations\\BaseContentRefactorMigration",
         "name": "EVENT_AFTER_UP",
         "type": "yii\\base\\Event",
@@ -45178,6 +45424,12 @@
         "desc": "The event that is triggered after executing the GraphQL query."
     },
     {
+        "class": "craft\\services\\Icons",
+        "name": "EVENT_REGISTER_ICON_SETS",
+        "type": "craft\\events\\RegisterIconSetsEvent",
+        "desc": "The event that is triggered when registering custom icon sets."
+    },
+    {
         "class": "craft\\services\\ImageTransforms",
         "name": "EVENT_BEFORE_SAVE_IMAGE_TRANSFORM",
         "type": "craft\\services\\AssetTransformEvent",
@@ -45218,6 +45470,24 @@
         "name": "EVENT_REGISTER_IMAGE_TRANSFORMERS",
         "type": "craft\\events\\RegisterComponentTypesEvent",
         "desc": "The event that is triggered when registering image transformers."
+    },
+    {
+        "class": "craft\\services\\Mcp",
+        "name": "EVENT_REGISTER_CAPABILITY_TYPES",
+        "type": "craft\\events\\RegisterComponentTypesEvent",
+        "desc": "Registers SDK-attributed MCP capability classes."
+    },
+    {
+        "class": "craft\\services\\Mcp",
+        "name": "EVENT_DISCOVERING_CAPABILITY",
+        "type": "craft\\mcp\\events\\DiscoveringCapability",
+        "desc": "The event that is triggered for each capability the authenticated or stdio server would expose to the current user. Set `$event->allowed = false` to hide it."
+    },
+    {
+        "class": "craft\\services\\OAuth",
+        "name": "EVENT_REGISTER_RESOURCES",
+        "type": "craft\\events\\RegisterOAuthResourcesEvent",
+        "desc": "Registers protected API definitions. */"
     },
     {
         "class": "craft\\services\\Plugins",

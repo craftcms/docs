@@ -1036,6 +1036,25 @@ Tests sending an email with the current mailer settings.
 
 
 
+## `mcp`
+
+
+<h3 id="mcp-serve">
+    <a href="#mcp-serve" class="header-anchor">#</a>
+    <code>mcp/serve</code>
+</h3>
+
+
+Run the MCP server on stdin/stdout as a named Craft user. *
+
+<h4 id="mcp-serve-options" class="command-subheading">Options</h4>
+
+
+--user
+: 
+
+
+
 ## `migrate`
 
 Manages Craft and plugin migrations.
@@ -1388,6 +1407,25 @@ will be applied.
 
 
 
+## `oauth`
+
+
+<h3 id="oauth-generate-keys">
+    <a href="#oauth-generate-keys" class="header-anchor">#</a>
+    <code>oauth/generate-keys</code>
+</h3>
+
+
+Generate shared OAuth signing keys. *
+
+<h4 id="oauth-generate-keys-options" class="command-subheading">Options</h4>
+
+
+--force
+: 
+
+
+
 ## `off`
 
 
@@ -1463,6 +1501,25 @@ Applies project config file changes.
 
 --quiet
 : Whether to reduce the command output.
+
+
+
+<h3 id="pc-check">
+    <a href="#pc-check" class="header-anchor">#</a>
+    <code>pc/check</code>
+</h3>
+
+
+Checks project config schema compatibility with installed Craft and enabled plugins.
+
+Requires database access to an existing Craft installation, even when `--require-yaml=0` is passed. Does not apply project config or migrations.
+Pass `--require-yaml=0` to skip the check successfully if `project.yaml` is missing.
+
+<h4 id="pc-check-options" class="command-subheading">Options</h4>
+
+
+--require-yaml
+: Whether the check should fail if `project.yaml` is missing.
 
 
 
@@ -1774,6 +1831,25 @@ Applies project config file changes.
 
 --quiet
 : Whether to reduce the command output.
+
+
+
+<h3 id="project-config-check">
+    <a href="#project-config-check" class="header-anchor">#</a>
+    <code>project-config/check</code>
+</h3>
+
+
+Checks project config schema compatibility with installed Craft and enabled plugins.
+
+Requires database access to an existing Craft installation, even when `--require-yaml=0` is passed. Does not apply project config or migrations.
+Pass `--require-yaml=0` to skip the check successfully if `project.yaml` is missing.
+
+<h4 id="project-config-check-options" class="command-subheading">Options</h4>
+
+
+--require-yaml
+: Whether the check should fail if `project.yaml` is missing.
 
 
 
