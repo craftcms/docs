@@ -117,7 +117,7 @@ php craft update element-api:4.1.0
 After an update is performed from the CLI, Craft will apply any relevant migrations.
 
 ::: tip
-Use the `--minor` or `--patch` flag when running `craft update` to update in finer increments. Pass `--except craft,plugin-name` to update all but the provided package(s).
+Use the `--minorOnly` or `--patchOnly` flag when running `craft update` to update in finer increments. Pass `--except craft,plugin-name` to update all but the provided package(s).
 :::
 
 As of Craft [5.9.0](repo:craftcms/cms/releases/tags/5.9.0), constraints are set using the caret (`^`) operator for better interoperability with direct [Composer](#composer) usage.
