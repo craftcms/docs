@@ -445,6 +445,7 @@ Your [single section](../element-types/entries.md#singles) entries can also be l
   &copy;{{ now|date('Y') }}
   {{ about.phoneNumber }}
 </footer>
+```
 
 ::: tip
 When you convert a global set to a single using the [`entrify/global-set` command](../cli.md#entrify-global-set), template references should remain compatible, so long as <config5:preloadSingles> is enabled.
