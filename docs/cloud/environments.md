@@ -36,27 +36,28 @@ Every deploy also triggers a `cloud/up` command, so you’ll see those records a
 
 Get credentials to this environment’s database and [asset storage](assets.md). Don’t share these details with anyone!
 
-### Settings
+## Environment Settings
 
-#### Name
+When you create an environment, you’ll give it a name, select a Git branch, and choose a [deployment trigger](deployment.md#deployment-triggers). All three options can be changed any time from the environment’s **Settings** screen.
 
-Where you can rename the environment.
+You can also enable Maintenance Mode for this environment, which will return a 503 Service Unavailable response to all web traffic. It can take up to a minute to take effect.
 
-#### Deploy Trigger
+## Deleting an Environment
 
-Change how the environment is [deployed](deployment.md)) — either “On Push” or “Manual”.
+Environments can be deleted at any time. Keep in mind that their resources will be destroyed, and they will immediately stop serving traffic. **Everything below will be unrecoverable:**
 
-#### Branch
+- Your **database** and everything in it will be deleted;
+- Any **assets** uploaded to the environment will be deleted;
+- We remove all **system and custom variables** belonging to the environment;
+- The environment’s **settings**, **deployment history**, **command history**, **logs**, and **temporary credentials** are all deleted;
 
-Change the branch the environment is associated with.
+::: warning
+Always capture a database backup—and download it—before destroying an environment.
+:::
 
-#### Maintenance Mode
+Domains pointed at a deleted environment will also stop resolving.
 
-Enabling this returns a 503 Service Unavailable response to all web traffic for this environment. It can take up to a minute to take effect.
-
-#### Danger Zone
-
-Where you can delete the environment.
+Instead of deleting an environment, we recommend creating a new one and pointing custom domains to it—the “old” environment can stay around until you’re confident the new one is properly configured. You are not billed for inactive environments.
 
 ## Resources
 
@@ -65,10 +66,6 @@ Every environment gets its own database. Data is not automatically cloned from o
 All environments in a project share a single asset storage bucket, but they are separated into top-level directories named after their environment’s ID (or, more accurately, its UUID).
 
 Craft Cloud generates a [preview domain](domains.md) for each environment, or allows you to connect a [custom domain](domains.md#adding-a-domain) or [subdomain](domains.md#subdomains).
-
-## Environment Settings
-
-When you create an environment, you’ll give it a name, select a Git branch, and choose a [deployment trigger](deployment.md#deployment-triggers). All three options can be changed any time from the environment’s **Settings** screen.
 
 ## Production Environment
 
@@ -95,20 +92,3 @@ User-agent: *
 Disallow: /
 ```
 Production environments allow the application to dictate the contents of `robots.txt`. This is typically handled by creating `templates/robots.txt.twig` and populating it with static text, or using a plugin like [SEOMatic](plugin:seomatic) that exposes an editing interface in the control panel.
-
-## Deleting an Environment
-
-Environments can be deleted at any time. Keep in mind that their resources will be destroyed, and they will immediately stop serving traffic. **Everything below will be unrecoverable:**
-
-- Your **database** and everything in it will be deleted;
-- Any **assets** uploaded to the environment will be deleted;
-- We remove all **system and custom variables** belonging to the environment;
-- The environment’s **settings**, **deployment history**, **command history**, **logs**, and **temporary credentials** are all deleted;
-
-::: warning
-Always capture a database backup—and download it—before destroying an environment.
-:::
-
-Domains pointed at a deleted environment will also stop resolving.
-
-Instead of deleting an environment, we recommend creating a new one and pointing custom domains to it—the “old” environment can stay around until you’re confident the new one is properly configured. You are not billed for inactive environments.
