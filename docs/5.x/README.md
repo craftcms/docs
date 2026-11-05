@@ -35,7 +35,7 @@ The documentation has been rearranged a bit for this release, in order to better
 
 ## Tech Specs
 
-Craft is a self-hosted PHP application, built on [Yii 2](https://www.yiiframework.com/). It can connect to MySQL and PostgreSQL [databases](reference/config/db.md) for content storage. Server-side rendering is powered by [Twig](https://twig.symfony.com), and headless applications have access to content via a [GraphQL API](development/graphql.md).
+Craft is a self-hosted PHP application, built on [Yii 2](https://www.yiiframework.com/). It can connect to MySQL and PostgreSQL [databases](reference/config/db.md) for content storage. Server-side rendering is powered by [Twig](development/twig.md), and headless applications have access to content via a [GraphQL API](development/graphql.md).
 
 <See path="requirements.md" label="View System Requirements" description="Craft runs best on the latest PHP and MySQL or Postgres versions, but can be configured to work on most modern hosting platforms." />
 
