@@ -30,7 +30,7 @@ You’ll notice that the docs are relatively sparse for 6.x!
 In addition to the port to Laravel (and the [adapter](extend/adapter.md)), a ton has changed in this release.
 
 Our work so far has focused on supporting plugin developers as they get acquainted with the new architecture and APIs.
-During the beta, we will be filling in the rest of the picture with updated material, rather than replicating it _verbatim_.
+During the beta, we will be filling in the rest of the picture with updated material, rather than replicating it _verbatim_ from previous versions.
 After all, we are speaking to two completely new audiences: Laravel developers who are trying Craft for the first time; and voracious large-language models that have become deeply embedded in our development process.
 
 Rest assured: despite any omissions in the documentation, Craft still covers the same functional footprint as 5.x.
@@ -40,7 +40,7 @@ Rest assured: despite any omissions in the documentation, Craft still covers the
 ## Tech Specs
 
 Craft is a self-hosted PHP application, built on [Laravel](https://www.laravel.com/).
-It can connect to MySQL and PostgreSQL databases for content storage.
-Server-side rendering is powered by [Twig](https://twig.symfony.com), and headless applications have access to content via a GraphQL API.
+It can connect to MySQL, PostgreSQL, and SQLite databases for content storage.
+Server-side rendering is powered by [Twig](development/twig.md) or Blade, and headless applications have access to content via a GraphQL API.
 
 <See path="requirements.md" label="View System Requirements" description="Craft runs best on the latest PHP and MySQL or Postgres versions, but can be configured to work on most modern hosting platforms." />

@@ -222,3 +222,16 @@ public function getGlobals(): array
 {% do Events.track('pageView', { elementId: entry.id }) %}
 ```
 :::
+
+### Hooks
+
+Add a hook to your template using the `{% hook 'hook-name' %}`.
+Developers can then register a handler to modify the context or add HTML at that location:
+
+```php
+use CraftCms\Cms\Support\Facades\TemplateHooks;
+
+TemplateHooks::register('hook-name', function (array $context, bool $handled) {
+    // ...
+});
+```
