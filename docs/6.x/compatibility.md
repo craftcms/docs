@@ -80,6 +80,7 @@ A few settings have been removed, renamed, or relocated:
 | `omitScriptNameInUrls` | No longer used; the script name is never used when generating URLs. |
 | `pathParam` | No longer used. |
 | `testToEmailAddress` | Use `Mail::alwaysTo($email, $name)` in your app service provider, or switch your mail driver to `log` (or another “black hole” service like [Mailpit](https://docs.ddev.com/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit)). |
+| `errorTemplatePrefix` | See the [errors](#error-templates) section for new behavior. |
 
 You can selectively publish Laravel’s default config files from the console:
 
@@ -294,6 +295,12 @@ This snippet is equivalent to the macro in our [entry form guide](kb:entry-form)
 ```
 
 Submitted values are flashed back to the session and can be retrieved using the `old('fieldName')` Twig helper, after redirection.
+
+### Error Templates
+
+The `errorTemplatePrefix` setting has been removed, so templates must be placed in `resources/views/errors/`, according to Laravel’s [custom error views](laravel:errors#custom-http-error-pages) behavior.
+
+<Todo notes="Explain required changes for generic `error.twig` templates (if any), and/or move this to upgrade.md" />
 
 ## HTML Purification
 
