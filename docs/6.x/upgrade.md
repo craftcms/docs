@@ -122,10 +122,10 @@ To reuse the transforms Craft 5 generated instead, move them into the new locati
 Craft 5 stored each transform at `{folderPath}/{transform}/{filename}`.
 Craft 6 adds a folder named after the volume’s UID: `_{volumeUid}/{folderPath}/{transform}/{filename}`.
 
-- `{volumeUid}` is the volume’s UID, the part after `--` in its `config/craft/project/volumes/{handle}--{uid}.yaml` file name.
+- `{volumeUid}` is the volume’s UID, the part after `--` in its `config/craft/project/volumes/{handle}--{uid}.yaml` filename.
 - `{folderPath}` is the asset’s folder within the volume, and is empty for assets in the volume’s root.
 - `{transform}` is an underscore followed by a named transform’s handle, such as `_thumb`, or an ad-hoc transform’s parameters, such as `_1200xAUTO_crop_center-center_82_none`.
-  These folder names and file names haven’t changed.
+  These folder names and filenames haven’t changed.
 
 Both paths are relative to the root of the disk transforms are stored on, not the volume’s subpath.
 That’s the volume’s own disk, unless the disk’s `asset_transformer` settings in `config/filesystems.php` set an `output_disk`.
