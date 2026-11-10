@@ -132,7 +132,7 @@ The database user you tell Craft to connect with must have the following privile
 
 <column>
 
-#### PostgreSQL
+### PostgreSQL
 
 - `SELECT`
 - `INSERT`

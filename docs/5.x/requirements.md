@@ -109,7 +109,7 @@ The database user you tell Craft to connect with must have the following privile
 <columns>
 <column>
 
-#### MySQL/MariaDB
+### MySQL/MariaDB
 
 - `SELECT`
 - `INSERT`
@@ -126,7 +126,7 @@ The database user you tell Craft to connect with must have the following privile
 
 <column>
 
-#### PostgreSQL
+### PostgreSQL
 
 - `SELECT`
 - `INSERT`
@@ -145,14 +145,14 @@ The database user you tell Craft to connect with must have the following privile
 
 Craft’s [control panel](system/control-panel.md) requires a browser that [supports JavaScript modules](https://caniuse.com/#feat=es6-module-dynamic-import).
 
-#### Windows and macOS
+### Windows and macOS
 
 - Firefox 67+
 - Chrome 63+
 - Safari 11.1+
 - Edge 79+
 
-#### Mobile
+### Mobile
 
 - iOS: Safari 11+
 - Android: Chrome 81+ or Firefox 68+
