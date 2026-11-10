@@ -20,8 +20,8 @@ If you’d like to know more about the individual steps involved in the upgrade,
 There are a few things that you must take care of _before_ the upgrade:
 
 - Update Craft to the latest 5.x release, and all plugins to their latest compatible versions (see the note below about the state of plugins during alpha). You cannot upgrade directly to Craft 6.x from Craft 4.x or earlier.
-- Upgrade PHP on your host to 8.5
-- Resolve any outstanding deprecation notices
+- Upgrade PHP on your host to 8.5, and make sure the sodium extension is installed.
+- Resolve any outstanding deprecation notices.
 
 The adapter can only make project and plugin code compatible with Craft 6.x; it is not a PHP polyfill, and it does not loosen Craft’s [system requirements](requirements.md).
 

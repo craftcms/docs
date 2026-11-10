@@ -54,6 +54,7 @@ Due to its diverging parity with MySQL, we no longer recommend MariaDB for sites
 - [PDO MySQL Driver](http://php.net/manual/en/ref.pdo-mysql.php) or [PDO PostgreSQL Driver](http://php.net/manual/en/ref.pdo-pgsql.php)
 - [PDO](http://php.net/manual/en/book.pdo.php)
 - [Reflection](http://php.net/manual/en/class.reflectionextension.php)
+- [Sodium](https://php.net/manual/en/book.sodium.php) <Since ver="5.12" description="The sodium PHP extension was first required in {product} {ver}." />
 - [SPL](http://php.net/manual/en/book.spl.php)
 - [Zip](http://php.net/manual/en/book.zip.php)
 - [DOM](http://php.net/manual/en/book.dom.php)
