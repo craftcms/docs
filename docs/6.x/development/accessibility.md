@@ -324,3 +324,4 @@ Craft has a handful of opt-in [AI tasks](../system/ai.md) for populating assisti
 - **Tag images** and **Classify images** — Add keywords
 
 When an image is uploaded, Craft first attempts to populate the `alt` attribute and `title` from embedded metadata (like EXIF or XMP), only using AI when there is no explicit source.
+The resolved metadata is available as `CraftCms\Cms\Asset\Elements\Asset::$analysis`, even if stripped from the original file when `sanitizeCpImageUploads` is enabled and `preserveExifData` is off (the defaults).
