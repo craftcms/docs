@@ -31,7 +31,7 @@ DDEV is a Docker-based PHP development environment that streamlines the creation
 1. Scaffold the project from the official [starter project](https://github.com/craftcms/craft/tree/6.x):
 
     ```bash
-    ddev composer create-project "craftcms/craft:^6.0.0-alpha.1"
+    ddev composer create-project "craftcms/craft:^6.0.0-beta.1"
     ```
 
     The setup wizard will start automatically!
