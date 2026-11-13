@@ -113,6 +113,43 @@ If you see a warning about the application being in production, it’s safe to i
 Laravel will warn you before applying migrations when `APP_DEBUG` is off.
 :::
 
+### Image Transforms
+
+Craft 6 stores generated image transforms in a new location, and the migrations clear the transform index.
+Transforms are generated again as they’re requested, which can take a while (and cost a lot of writes) on volumes with many transforms.
+To reuse the transforms Craft 5 generated instead, move them into the new location.
+
+Craft 5 stored each transform at `{folderPath}/{transform}/{filename}`.
+Craft 6 adds a folder named after the volume’s UID: `_{volumeUid}/{folderPath}/{transform}/{filename}`.
+
+- `{volumeUid}` is the volume’s UID, the part after `--` in its `config/craft/project/volumes/{handle}--{uid}.yaml` filename.
+- `{folderPath}` is the asset’s folder within the volume, and is empty for assets in the volume’s root.
+- `{transform}` is an underscore followed by a named transform’s handle, such as `_thumb`, or an ad-hoc transform’s parameters, such as `_1200xAUTO_crop_center-center_82_none`.
+  These folder names and filenames haven’t changed.
+
+Both paths are relative to the root of the disk transforms are stored on, not the volume’s subpath.
+That’s the volume’s own disk, unless the disk’s `asset_transformer` settings in `config/filesystems.php` set an `output_disk`.
+If your Craft 5 volume had a _Transform Filesystem_ or _Transform Subpath_, those settings aren’t carried over: set an `output_disk` that points at the same place, such as a `scoped` disk with the transform subpath as its `prefix`, and move the files within it.
+
+For a volume with the UID `6d1f0b4e-…`, a `thumb` transform of `blog/2024/sunset.jpg` moves like this:
+
+```
+blog/2024/_thumb/sunset.jpg  →  _6d1f0b4e-…/blog/2024/_thumb/sunset.jpg
+```
+
+Move every transform folder (each folder whose name begins with an underscore) this way, keeping the folders around it, and leave the assets themselves where they are.
+For remote disks, use your storage provider’s tools to move them on the server, so the files don’t have to be downloaded.
+
+Craft picks up the moved files without generating them again:
+
+- On local disks, Craft finds each file the first time the transform is requested, and returns its URL.
+- On other disks, the first request for each transform returns a URL that generates it, as usual.
+  Generating it finds the existing file and uses it, without processing the image.
+  To get the transforms’ own URLs straight away, generate them before the page loads, such as with the `immediately` argument in GraphQL: `url @transform(handle: "thumb", immediately: true)`.
+
+Transforms whose settings changed after they were generated are generated again either way.
+Craft doesn’t delete transforms you leave in their old location.
+
 ### Bootstrapping
 
 During the upgrade, we removed the `bootstrap.php` file that has come with new projects [since Craft 3.7](https://github.com/craftcms/craft/releases/tag/1.1.5).
