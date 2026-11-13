@@ -43,7 +43,7 @@ It is generally not safe to assume a user-space template exists.
 
 ## Sandboxing
 
-Some of the above rendering methods also supports “sandboxed” rendering, in which only subset of objects, properties, and methods are accessible:
+Some of the above rendering methods also support “sandboxed” rendering, in which only a subset of objects, properties, and methods are accessible:
 
 - `sandboxedTemplate()`
 - `renderSandboxedString()`
@@ -57,7 +57,7 @@ Mark a class, property, or method as safe for sandboxed environments with the `#
 
 ## Responses
 
-Rendered templates are acceptable return values for controllers; Laravel automatically wrap the output in a complete response object before it bubbles back through any middleware.
+Rendered templates are acceptable return values for controllers. Laravel automatically wraps the output in a complete response object before it bubbles back through any middleware.
 
 Routes can also be mapped directly to templates, in your plugin’s [route files](http.md):
 
@@ -69,8 +69,8 @@ Route::view('my-stats', 'activity/_stats/user-summary');
 
 A pair of events are emitted whenever a template is rendered:
 
-- `CraftCms\Cms\Twig\Events\TemplateRendering`, just before rendering a template. It receives the template path, local variables, and the template mode.
-- `CraftCms\Cms\Twig\Events\TemplateRendered`, after the template is rendered. It receives the same arguments, as well as the final `output`.
+- `CraftCms\Cms\View\Events\TemplateRendering`, just before rendering a template. It receives the template path, local variables, and the template mode.
+- `CraftCms\Cms\View\Events\TemplateRendered`, after the template is rendered. It receives the same arguments, as well as the final `output`.
 
 These events are supplemented by `PageTemplateRendering` (before) and `PageTemplateRendered` (after), when a _page_ template is rendered.
 
@@ -81,15 +81,13 @@ Plugins can register [middleware](http.md#middleware) that filters HTML output, 
 ## Plugin Templates
 
 Your plugin gets its own _template root_ for the control panel Twig environment.
-By default, this is `resources/views/` directory, but the `CraftCms\Cms\Plugin\Concerns\HasViews` concern will fall back to `resources/templates/`, or a top-level `templates/` directory, for compatibility.
+By default, this is the `resources/views/` directory. The `CraftCms\Cms\Plugin\Concerns\HasViews` concern also checks `resources/templates/` and `src/templates/` for compatibility.
 
 To register a _site_ template root, add the mapping to your plugin’s `$siteTemplateRoots` property…
 
 ```php
-use CraftCms\Cms\View\Events\SiteTemplateRootsResolving;
-
-public array $siteTemplateRoots = [
-    'theme/light' => __DIR__.'/resources',
+protected array $siteTemplateRoots = [
+    'my-plugin/themes/light' => __DIR__.'/../resources/themes/light',
 ];
 ```
 
@@ -102,7 +100,7 @@ use CraftCms\Cms\View\TemplateRoots;
 public function boot(TemplateRoots $roots): void
 {
     $roots->register(
-        TemplateMode::Cp,
+        TemplateMode::Site,
         'my-plugin/themes/light',
         $this->getResourcesPath().'/themes/light',
     );
@@ -166,10 +164,10 @@ Your entire API will always be available via Twig through the `app()` function, 
 
 ::: code
 ```php
-CraftVariable::macro('track', function () {
-    return function (string $eventName, array $data = [], int $value = 1) {
-        // ...
-    }
+use CraftCms\Cms\Twig\Variables\CraftVariable;
+
+CraftVariable::macro('track', function (string $eventName, array $data = [], int $value = 1): void {
+    // ...
 });
 ```
 ```twig
@@ -186,10 +184,11 @@ You can inject global variables much more easily in Craft 6.x, using the `CraftC
 ```php
 use MyOrg\Activity\Reporting\Manager;
 use CraftCms\Cms\View\Events\TemplateGlobalsResolving;
+use Illuminate\Support\Facades\Event;
 
 public function boot(): void
 {
-    Event::listen(function (TemplateGlobalsResolving::class $event) {
+    Event::listen(function (TemplateGlobalsResolving $event): void {
         $event->globals['reporting'] = app(Manager::class);
     });
 }
@@ -214,7 +213,7 @@ use CraftCms\Cms\Twig\Variables\Facade as FacadeVariable;
 public function getGlobals(): array
 {
     return [
-        new FacadeVariable(Events::class),
+        'Events' => new FacadeVariable(Events::class),
     ];
 }
 ```
