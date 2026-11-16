@@ -40,14 +40,13 @@ Additional variables provided by Craft.
 Variable | Description
 --- | ---
 [_globals](#globals) | Get and set values on a globally-available store.
-[craft](#craft-2) | A <craft5:craft\web\twig\variables\CraftVariable> object.
+[craft](#craft-2) | A `CraftCms\Cms\Twig\Variables\CraftVariable` object.
 [currentSite](#currentsite) | The requested site.
 [currentUser](#currentuser) | The currently logged-in user.
 [isInstalled](#isinstalled) | Whether Craft is installed.
 [loginUrl](#loginurl) | The URL to the front-end Login page.
 [logoutUrl](#logouturl) | The URL to the front-end Logout page.
 [now](#now) | The current date/time.
-[primarySite](#primarysite) <Since ver="5.6.0" feature="Global Twig variable for the primary site" /> | In multi-site projects, the “primary” site.
 [setPasswordUrl](#setpasswordurl) | The URL to the front-end [Reset Password](kb:front-end-user-accounts#reset-password-form) page.
 [siteName](#sitename) | The name of the current site.
 [siteUrl](#siteurl) | The base URL of the current site.
@@ -148,6 +147,8 @@ The URL to your site’s login page, based on the <config5:loginPath> config set
 {% endif %}
 ```
 
+If `loginPath` is set to `null` (as it is, in the starter project), this variable will also be `null`.
+
 ### `logoutUrl`
 
 The URL Craft uses to log users out, based on the <config5:logoutPath> config setting. Note that Craft will automatically redirect users to your homepage after going here; there’s no such thing as a “logout _page_”.
@@ -158,6 +159,8 @@ The URL Craft uses to log users out, based on the <config5:logoutPath> config se
 {% endif %}
 ```
 
+As with [`loginUrl`](#loginurl), if the `logoutPath` is set to `null`, this variable will also be `null`.
+
 ### `now`
 
 A [DateTime](http://php.net/manual/en/class.datetime.php) object set to the current date and time.
@@ -166,26 +169,10 @@ A [DateTime](http://php.net/manual/en/class.datetime.php) object set to the curr
 Today is {{ now|date('M j, Y') }}.
 ```
 
-### `primarySite` <Since ver="5.6.0" feature="Global Twig variable for the primary site" />
-
-The _primary_ site (as designated in <Journey path="Settings, Sites" />), as an instance of <craft4:craft\models\Site>.
-
-```twig
-{# Output the primary site’s name: #}
-We are a proud member of {{ primarySite.name }}
-
-{# Link to a page on the primary site: #}
-{{ tag('a', {
-  href: siteUrl('about/governance', siteId = primarySite.id),
-  text: 'Learn about our family of businesses',
-}) }}
-```
-
-`primarySite` will be a reference to the same object as [`currentSite`](#currentsite), when `currentSite.primary` is `true`. You can also retrieve the primary site via `craft.app.sites.primarySite`.
-
 ### `setPasswordUrl`
 
-The URL to [`setPasswordRequestPath`](config5:setPasswordRequestPath) if it’s set. (This wraps the path in [`siteUrl`](#siteurl).)
+The URL to [`setPasswordRequestPath`](config5:setPasswordRequestPath) if it’s set.
+Craft wraps the path in [`siteUrl`](#siteurl).
 
 ```twig
 {% if setPasswordUrl %}
@@ -195,7 +182,7 @@ The URL to [`setPasswordRequestPath`](config5:setPasswordRequestPath) if it’s 
 
 ### `siteName`
 
-The name of the current site, as defined in **Settings** → **Sites**.
+The name of the current site, as defined in <Journey path="Settings, Sites" />.
 
 ```twig
 <h1>{{ siteName }}</h1>
@@ -236,11 +223,11 @@ However, Craft exposes a few that make it easier to work with built-in features.
 
 Variable | Description
 -------- | -----------
-[POS_BEGIN](#pos-begin) | The [craft\web\View::POS_BEGIN](craft5:craft\web\View#constants) constant.
-[POS_END](#pos-end) | The [craft\web\View::POS_END](craft5:craft\web\View#constants) constant.
-[POS_HEAD](#pos-head) | The [craft\web\View::POS_HEAD](craft5:craft\web\View#constants) constant.
-[POS_LOAD](#pos-load) | The [craft\web\View::POS_LOAD](craft5:craft\web\View#constants) constant.
-[POS_READY](#pos-ready) | The [craft\web\View::POS_READY](craft5:craft\web\View#constants) constant.
+[POS_BEGIN](#pos-begin) | The `CraftCms\Cms\View\Enums\Position::BodyBegin` value.
+[POS_END](#pos-end) | The `CraftCms\Cms\View\Enums\Position::BodyEnd` value.
+[POS_HEAD](#pos-head) | The `CraftCms\Cms\View\Enums\Position::Head` value.
+[POS_LOAD](#pos-load) | The `CraftCms\Cms\View\Enums\Position::Load` value.
+[POS_READY](#pos-ready) | The `CraftCms\Cms\View\Enums\Position::Ready` value.
 [SORT_ASC](#sort-asc) | The `SORT_ASC` PHP constant.
 [SORT_DESC](#sort-desc) | The `SORT_DESC` PHP constant.
 [SORT_FLAG_CASE](#sort-flag-case) | The `SORT_FLAG_CASE` PHP constant.
@@ -250,17 +237,18 @@ Variable | Description
 [SORT_REGULAR](#sort-regular) | The `SORT_REGULAR` PHP constant.
 [SORT_STRING](#sort-string) | The `SORT_STRING` PHP constant.
 
-Other constants are accessible with the [`constant()` function](https://twig.symfony.com/doc/3.x/functions/constant.html). Pass a string representing the way you would access it in PHP, including (when applicable) the fully-qualified, properly-escaped class name:
+Other constants are accessible with Twig’s [`constant()` function](https://twig.symfony.com/doc/3.x/functions/constant.html).
+Pass a string representing the way you would access it in PHP, including (when applicable) the fully-qualified, properly-escaped class name:
 
 ```twig
 {# You can fetch native PHP constants... #}
 {{ constant('PHP_VERSION') }}
 
-{# ...constants defined by Craft... #}
-{{ constant('CRAFT_BASE_PATH') }}
+{# ...constants defined by Laravel or Craft... #}
+{{ constant('LARAVEL_START') }}
 
 {# ...and even class constants: #}
-{{ constant('craft\\elements\\Entry::STATUS_LIVE') }}
+{{ constant('CraftCms\\Cms\\Entry\\Elements\\Entry::STATUS_LIVE') }}
 ```
 
 ### `POS_BEGIN`
@@ -289,7 +277,7 @@ Twig-facing copy of the `CraftCms\Cms\View\Enums\Position::Head` enum value. Use
 
 ```twig
 {% js at POS_HEAD %}
-  console.log('Where am I?!');
+  console.log('♬ Where is my mind?');
 {% endjs %}
 ```
 
