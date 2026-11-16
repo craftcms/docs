@@ -271,9 +271,9 @@ In this example, we are using Laravel’s default `csrf_field()` to inject a hid
 
 #### CORS
 
-<Todo notes="CORS is probably a middleware concern?" />
+<Todo notes="CORS is (in part) a middleware concern? Is Laravel’s config file enough?" />
 
-Requests sent from a domain other than the one Craft is running on (including different subdomains, unless you’ve set <config5:defaultCookieDomain>) may need to use the [`credentials`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#including_credentials) request option, and configure appropriate `Access-Control-Allow-Credentials` and `Access-Control-Allow-Origin` [headers](../reference/config/app.md#cors) in Craft.
+Requests sent from a domain other than the one Craft is running on (including different subdomains, unless you’ve set `defaultCookieDomain`) may need to use the [`credentials`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#including_credentials) request option, and configure appropriate `Access-Control-Allow-Credentials` and `Access-Control-Allow-Origin` [CORS headers](laravel:routing#cors) using Laravel’s `cors.php` config file.
 
 #### Sending JSON
 
