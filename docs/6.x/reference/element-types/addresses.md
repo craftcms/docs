@@ -1,0 +1,725 @@
+---
+description: Store flexible, globally-aware location information.
+related:
+  - uri: ../../system/elements.md
+    label: Introduction to Elements
+  - uri: /commerce/5.x/addresses.md
+    label: Using addresses in Craft Commerce
+  - uri: ../controller-actions.md
+    label: Controller Actions Reference
+  - uri: ../field-types/addresses.md
+    label: Addresses Fields
+containsGeneratedContent: yes
+---
+
+# Addresses
+
+Addresses are a type of [element](../../system/elements.md) you’ll most commonly encounter in conjunction with [Users](users.md).
+[Querying addresses](#querying-addresses) and working with their [field data](#fields-and-formatting) is nearly identical to the experience working with any other element type.
+
+<!-- more -->
+
+For sites supporting [public registration](../../system/user-management.md#public-registration) (like a storefront built on [Craft Commerce](/commerce/5.x/)) users can manage their own [address book](#managing-addresses).
+
+::: tip
+Plugins are also able to use addresses to store their own location data.
+:::
+
+## Setup
+
+All address elements share a single field layout, which is managed in the control panel via <Journey path="Settings, Addresses" />.
+
+<BrowserShot url="https://my-project.ddev.site/admin/settings/addresses" :link="false">
+<img src="../../images/address-field-layout.png" alt="Screenshot of the address element field layout" />
+</BrowserShot>
+
+### Native and Custom Fields
+
+The address field layout has additional native (but optional) fields for a handful of useful attributes:
+
+- **Label** (`title`) — An optional description of the address.
+- **Organization** (`organization`) — A text field for entering a business or entity name.
+- **Organization Tax ID** (`organizationTaxId`) — Designed to hold an identifier for the legal entity represented by the address. Used by [Commerce](/commerce/5.x/) to aide in tax calculations.
+- **Full Name** (`fullName` or `firstName` and `lastName`) — Associate the address with a name. As with [users](users.md), a single input is displayed, unless `showFirstAndLastNameFields` is enabled.
+- **Latitude/Longitude** (`latitude` and `longitude`) — A pair of inputs for latitude and longitude values. Craft does not use these, internally.
+
+Just like other element types, addresses support [custom fields](../../system/fields.md) for anything else you might need to store.
+
+::: tip
+For compatibility and localization, core address components (aside from the **Country Code**) can’t be separated from one another in the field layout.
+The relevant fields for the given country are rendered wherever the **Address** field layout element is placed.
+
+When building [front-end address forms](#managing-addresses), you are free to organize the inputs in whatever way is appropriate for your users.
+:::
+
+### Config Options
+
+These settings affect authors’ (and front-end users’) experience with address elements:
+
+- `defaultCountryCode` — Choose a default country for new addresses.
+- `showFirstAndLastNameFields` — Determines whether the **Full Name** field is a single input, or split into **First Name** and **Last Name** inputs. Names are always stored as a single value, and split back out into first and last, as necessary.
+- `extraLastNamePrefixes`, `extraNameSuffixes`, and `extraNameSalutations`,  — Additional ways to customize the built-in name parser.
+
+### Copying Addresses
+
+Addresses can be copied and pasted between users and [addresses fields](../field-types/addresses.md).
+
+<See path="../../system/elements.md" hash="copying-elements" label="Copying Elements" description="Learn how to copy addresses and other elements between contexts." />
+
+### Drafts
+
+Addresses support [drafts](../../system/drafts-revisions.md).
+Addresses within an [addresses field](../field-types/addresses.md) can be edited from a draft of their owner element, like other [nested elements](../../system/drafts-revisions.md#nested-elements)—so users who can save drafts of an element (but not the canonical element itself) can still update the addresses in its addresses fields.
+
+## Address Repository
+
+The [commerceguys/addressing](repo:commerceguys/addressing) library powers planet-friendly address handling and formatting, and its exhaustive repository of global address information is available to all Craft projects.
+If you need a list of countries, states, or provinces, for example, you can fetch them via Craft’s `Addresses` class, from Twig templates or PHP:
+
+::: code
+```twig
+{% set countries = Addresses.getCountryRepository().getAll() %}
+```
+```php
+use CraftCms\Cms\Support\Facades\Addresses;
+
+$countries = Addresses::getCountryRepository()->getAll();
+```
+:::
+
+This returns an array of [Country](repo:commerceguys/addressing/blob/master/src/Country/Country.php) objects, indexed by their two-letter code. You might use this to populate a dropdown menu:
+
+```twig
+<select name="myCountry">
+  {% for code, country in countries %}
+    <option value="{{ code }}">{{ country.name }}</option>
+  {% endfor %}
+</select>
+
+{# Output:
+<select name="myCountry">
+  <option value="AF">Afghanistan</option>
+  <option value="AX">Åland Islands</option>
+  ...
+</select>
+#}
+```
+
+Similarly, a repository of subdivisions are available, hierarchically—with up to three levels, depending on how a given country is organized: _Administrative Area_ → _Locality_ → _Dependent Locality_.
+
+Expanding upon our previous example, we could output a nicely organized list of “administrative areas,” like this:
+
+```twig
+{% set subdivisionRepo = Addresses.getSubdivisionRepository() %}
+{% set countriesWithSubdivisions = countries | filter(c => subdivisionRepo.getAll([c.countryCode]) | length) %}
+
+<select name="administrativeArea">
+  {% for country in countriesWithSubdivisions %}
+    {% set administrativeAreas = subdivisionRepo.getAll([country.countryCode]) %}
+
+    <optgroup label="{{ country.name }}">
+      {% for a in administrativeAreas %}
+        <option value="{{ a.code }}">{{ a.name }}</option>
+      {% endfor %}
+    </optgroup>
+  {% endfor %}
+</select>
+```
+
+Either repository’s `getList()` method is a shortcut that returns only key-value pairs, suitable for our examples—it also accepts an array of “parent” groups (beginning with country code) to narrow the subdivisions.
+
+::: tip
+These designations are deliberately generic, and won’t generally be recognized by users. Check out the [labels](#attribute-labels) section for information on how to output localized or context-aware names for each level (i.e. _Provinces_ in Canada or _States_ and _Counties_ in the United States).
+:::
+
+You may supplement the subdivision data provided by the [upstream repository](https://github.com/commerceguys/addressing) by listening to the `CraftCms\Cms\Address\Events\AddressSubdivisionsResolving` [event](../../extend/events.md).
+Similarly, deeper customization of the required [fields](#fields-and-formatting) (and those fields’ [labels](#attribute-labels)) may require modifying the defaults via the `CraftCms\Cms\Address\Events\AddressUsedSubdivisionFieldsResolving` or `AddressFieldLabelResolving` events.
+
+::: tip
+Check out the [addressing docs](https://github.com/commerceguys/addressing#data-model) for more details and examples of what’s possible—including translation of place names, postal codes, timezones, and [formatting](#fields-and-formatting)!
+:::
+
+## Fields and Formatting
+
+### Field Handles
+
+Individual fields—native and custom—are accessed via their handles, like any other element:
+
+```twig
+<ul>
+  <li>Name: {{ myAddress.title }}</li>
+  <li>Postal Code: {{ myAddress.postalCode }}</li>
+  <li>Custom Label Color: {{ myAddress.myCustomColorFieldHandle }}</li>
+</ul>
+```
+
+### Attribute Labels
+
+The addressing library’s abstracted _Administrative Area_ → _Locality_ → _Dependent Locality_ terminology probably isn’t what you are accustomed to calling those address components in your part of the world—and it’s even less likely you’d want to show those terms to site visitors.
+
+You can use any address element’s `attributeLabel()` method to get human-friendly labels for a given locale. Assuming we’re working with a U.S. address…
+
+```twig
+{{ myAddress.attributeLabel('administrativeArea') }} {# State #}
+{{ myAddress.attributeLabel('locality') }} {# City #}
+{{ myAddress.attributeLabel('dependentLocality') }} {# Suburb #}
+{{ myAddress.attributeLabel('postalCode') }} {# Zip Code #}
+```
+
+Labels use the address’s current `countryCode` value for localization.
+
+### `|address` Formatter
+
+You can use the [`|address`](../twig/filters.md#address) filter to output a formatted address with basic HTML:
+
+```twig
+{{ myAddress|address }}
+{# Output:
+  <p translate="no">
+    <span class="address-line1">1234 Balboa Towers Circle</span><br>
+    <span class="locality">Los Angeles</span>, <span class="administrative-area">CA</span> <span class="postal-code">92662</span><br>
+    <span class="country">United States</span>
+  </p>
+#}
+```
+
+The default formatter includes the following options:
+
+- **locale** – defaults to `'en'`
+- **html** – defaults to `true`; disable with `false` to maintain line breaks but omit HTML tags
+- **html_tag** – defaults to `p`
+- **html_attributes** – is an array that defaults to `['translate' => 'no']`
+
+```twig
+{# Swap enclosing paragraph tag for a `div`: #}
+{{ myAddress|address({ html_tag: 'div' }) }}
+{# Output:
+  <div translate="no">
+    <span class="address-line1">1234 Balboa Towers Circle</span><br>
+    <span class="locality">Los Angeles</span>, <span class="administrative-area">CA</span> <span class="postal-code">92662</span><br>
+    <span class="country">United States</span>
+  </div>
+#}
+
+{# Turn the entire address into a Google Maps link: #}
+{{ myAddress|address({
+  html_tag: 'a',
+  html_attributes: {
+    href: url('https://maps.google.com/maps/search/', {
+      query_place_id: address.myCustomPlaceIdField,
+    }),
+  },
+}) }}
+{# Output:
+  <a href="https://maps.google.com/maps/search/?query_place_id=...">
+    <span class="address-line1">1234 Balboa Towers Circle</span><br>
+    <span class="locality">Los Angeles</span>, <span class="administrative-area">CA</span> <span class="postal-code">92662</span><br>
+    <span class="country">United States</span>
+  </a>
+#}
+
+{# Omit all HTML tags: #}
+{{ myAddress|address({ html: false }) }}
+{# Output:
+  1234 Balboa Towers Circle
+  Los Angeles, CA 92662
+  United States
+#}
+
+{# Force output in the Ukrainian (`uk`) locale: #}
+{{ myAddress|address({ html: false, locale: 'uk' }) }}
+{# Output:
+  1234 Balboa Towers Circle
+  Los Angeles, CA 92662
+  Сполучені Штати
+#}
+```
+
+#### Country Names
+
+Only the two-letter “country code” is stored on addresses.
+To display the full country name, use the attached [`Country`](repo:commerceguys/addressing/blob/master/src/Country/Country.php) model:
+
+```twig
+{% set country = address.country %}
+
+{{ country.name }}
+```
+
+Via the `Country` object, you also have access to the following data:
+
+- `countryCode` — Same ISO 3166-1 alpha-2 code as was stored as `address.countryCode`.
+- `name` — Name of the country, localized for the current site.
+- `threeLetterCode` — ISO 3166-1 alpha-3 code for the country.
+- `numericalCode` — ISO ISO 3166-1 numeric codes.
+- `currencyCode` — ISO 4217 currency code (not the symbol).
+- `timezones` — A list of PHP timezone identifiers for the country. This is not necessarily specific to the address!
+- `locale` — The locale the country name is localized for. Defaults to the app’s current language, which might be a site’s language or a control panel user’s language preference. If you need to manually localize a country’s name, see below.
+
+To get the localized name of a country without an address element, you must re-fetch it from the address repository:
+
+```twig{2}
+{% set repo = Addresses.getCountryRepository() %}
+{% set country = repo.get(entry.country, currentSite.locale) %}
+
+{{ country.name }}
+{# -> In a site set to use US English (en-US): "United States" #}
+{# -> In a site set to use Swiss French (fr-CH): "États-Unis" #}
+```
+
+### Customizing the Formatter
+
+You can also pass your own formatter to the `|address` filter. The addressing library includes [PostalLabelFormatter](https://github.com/commerceguys/addressing/blob/master/src/Formatter/PostalLabelFormatter.php) to make it easier to print shipping labels. Here, we can specify that formatter and set its additional `origin_country` option:
+
+```twig
+{# Use the postal label formatter #}
+{% set labelFormatter = create(
+  'CommerceGuys\\Addressing\\Formatter\\PostalLabelFormatter',
+  [
+    Addresses.getAddressFormatRepository(),
+    Addresses.getCountryRepository(),
+    Addresses.getSubdivisionRepository(),
+  ]
+) %}
+
+{{ addr|address({ origin_country: 'GB' }, labelFormatter) }}
+
+{# Output:
+  1234 Balboa Towers Circle
+  LOS ANGELES, CA 92662
+  UNITED STATES
+#}
+```
+
+You can also write a custom formatter that implements [FormatterInterface](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php). We could extend the default formatter, for example, to add a `hide_countries` option that avoids printing the names of specified countries:
+
+```php
+<?php
+
+namespace App\Addresses\Formatters;
+
+use CommerceGuys\Addressing\AddressInterface;
+use CommerceGuys\Addressing\Formatter\DefaultFormatter;
+use CommerceGuys\Addressing\Locale;
+use CraftCms\Cms\Support\Html;
+
+class OptionalCountryFormatter extends DefaultFormatter
+{
+    protected $defaultOptions = [
+        'locale' => 'en',
+        'html' => true,
+        'html_tag' => 'p',
+        'html_attributes' => ['translate' => 'no'],
+        'hide_countries' => [],
+    ];
+
+    public function format(AddressInterface $address, array $options = []): string
+    {
+        $this->validateOptions($options);
+        $options = array_replace($this->defaultOptions, $options);
+        $countryCode = $address->getCountryCode();
+        $addressFormat = $this->addressFormatRepository->get($countryCode);
+
+        if (!in_array($countryCode, $options['hide_countries'])) {
+            if (Locale::matchCandidates($addressFormat->getLocale(), $address->getLocale())) {
+                $formatString = '%country' . "\n" . $addressFormat->getLocalFormat();
+            } else {
+                $formatString = $addressFormat->getFormat() . "\n" . '%country';
+            }
+        } else {
+            // If this is in our `hide_countries` list, omit the country
+            $formatString = $addressFormat->getFormat();
+        }
+
+        $view = $this->buildView($address, $addressFormat, $options);
+        $view = $this->renderView($view);
+        $replacements = [];
+
+        foreach ($view as $key => $element) {
+            $replacements['%' . $key] = $element;
+        }
+
+        $output = strtr($formatString, $replacements);
+        $output = $this->cleanupOutput($output);
+
+        if (!empty($options['html'])) {
+            $output = nl2br($output, false);
+
+            // Add the HTML wrapper element with Craft’s HTML helper:
+            $output = Html::tag($options['html_tag'], $output, $options['html_attributes']);
+        }
+
+        return $output;
+    }
+}
+```
+
+We can instantiate and use that just like the postal label formatter:
+
+```twig
+{# Use our custom formatter #}
+{% set customFormatter = create(
+  'App\\Addresses\\Formatters\\OptionalCountryFormatter',
+  [
+    Addresses.getAddressFormatRepository(),
+    Addresses.getCountryRepository(),
+    Addresses.getSubdivisionRepository(),
+  ]
+) %}
+{{ addr|address({ hide_countries: ['US'] }, customFormatter) }}
+{# Output:
+  1234 Balboa Towers Circle
+  Los Angeles, CA 92662
+#}
+```
+
+To replace the default formatter, register a [contextual binding](laravel:container#contextual-binding) to your application’s service provider:
+
+```php
+public function register(): void
+{
+    $this->app->when(CraftCms\Cms\Address\Addresses::class)
+        ->needs(CommerceGuys\Addressing\Formatter\FormatterInterface::class)
+        ->give(function () {
+            return new App\Addresses\Formatters\OptionalCountryFormatter(
+                Addresses::getAddressFormatRepository(),
+                Addresses::getCountryRepository(),
+                Addresses::getSubdivisionRepository(),
+            );
+        });
+}
+```
+
+::: warning
+The default formatter is used in the control panel as well as your templates, so make sure it includes all the fields required for administrators to act on users’ information!
+Complete address data is always be available when viewing or editing it in a slideout.
+:::
+
+## Managing Addresses
+
+Users can add, edit, and delete their own addresses from the front-end via the `users/save-address` and `users/delete-address` [controller actions](../controller-actions.md#post-users-save-address).
+
+Craft doesn’t automatically give addresses their own URLs, so it’s up to you to define a [routing scheme](../../system/routing.md#advanced-routing-with-url-rules) for them via `routes.php`. We’ll cover each of these three routes in the following sections:
+
+```php
+// Listing Addresses
+Route::view('account', '_account/dashboard');
+
+// New Addresses
+Route::view('account/addresses/new', '_account/edit-address');
+
+// Existing Addresses
+Route::get('account/addresses/{uid}', function (string $uid) {
+    $address = (new AddressQuery)
+        ->uid($uid)
+        ->owner(Auth::craftUser())
+        ->one();
+
+    abort_if(! $address, 404, 'The address could not be found.');
+
+    return view('_account/edit-address', [
+        'address' => $address,
+    ]);
+})
+  ->whereUid('uid');
+```
+
+Craft handles the `POST` route for creating and updating addresses.
+
+::: tip
+The next few snippets may be a bit dense—numbered comments are peppered throughout, corresponding to items in the **Guide** section just below it.
+:::
+
+### Scaffolding
+
+The following templates assume you have a layout functionally equivalent to the [models and validation](../../development/forms.md#models-and-validation) example.
+
+### Listing Addresses
+
+Let’s display the current user’s address book on their account “dashboard.”
+
+::: code
+```twig _account/dashboard.twig
+{% extends '_layouts/default' %}
+
+{% requireLogin %}
+
+{# 1. Load addresses: #}
+{% set addresses = currentUser.getAddresses() %}
+
+{% block content %}
+  <h1>Hello, {{ currentUser.fullName }}!</h1>
+
+  {% if addresses | length %}
+    <ul>
+      {% for address in addresses %}
+        <li>
+          {{ address.title }}<br>
+          {{ address|address }}<br>
+
+          {# 2. Build an edit URL: #}
+          <a href="{{ url("account/addresses/#{address.uid}") }}">Edit</a>
+
+          {# 3. Use a form to delete addresses: #}
+          <form method="post">
+            {{ csrfInput() }}
+            {{ actionInput('users/delete-address') }}
+            {{ hiddenInput('addressId', address.id) }}
+
+            <button>Delete</button>
+          </form>
+        </li>
+      {% endfor $}
+    </ul>
+  {% else %}
+    <p>You haven’t added any addresses, yet!</p>
+  {% endif %}
+
+  {# 4. Link to "new" route: #}
+  <p><a href="{{ url('account/addresses/new') }}">New Address</a></p>
+{% endblock %}
+```
+:::
+
+#### Guide
+
+1. We’re using a `CraftCms\Cms\User\Elements\User` convenience method to load the current user’s saved addresses, but this is equivalent to our earlier [query example](#querying-addresses).
+2. These URLs will need to match the pattern defined in `routes/web.php`. In our case, that means we need to interpolate the Address’s UID into the path.
+3. [Deleting an address](../http.md#post-users-delete-address) requires a <badge vertical="baseline" type="verb">POST</badge> request, which—for the sake of simplicity—we’re handling with a regular HTML form.
+4. The [new address](#new-addresses) route is static—there’s nothing to interpolate or parameterize.
+
+### New Addresses
+
+The form code for new addresses will end up being reused for [existing addresses](#existing-addresses).
+
+::: code
+```twig _account/edit-address.twig
+{% extends '_layouts/default' %}
+
+{% requireLogin %}
+
+{% block content %}
+  <h1>New Address</h1>
+
+  {# 1. Render the form #}
+  {{ include('_account/address-form') }}
+{% endblock %}
+```
+```twig _account/address-form.twig
+{# 2. Set the controller action: #}
+<form method="post" action="{{ actionUrl('users/save-user') }}">
+  {{ csrfInput() }}
+
+  {# 3. Special cases for existing addresses: #}
+  {% if address is defined %}
+    {{ hiddenInput('addressId', old('addressId', address.id ?? null)) }}
+  {% endif %}
+
+  {# 4. Redirection: #}
+  {{ redirectInput('account/addresses/{uid}') }}
+
+  {# 5. Address Fields: #}
+
+  <label for="title">Title</label>
+  <input
+    type="text"
+    name="title"
+    id="title"
+    value="{{ title }}">
+
+  <label for="addressLine1">Address Line 1</label>
+  <input
+    type="text"
+    name="addressLine1"
+    id="addressLine1"
+    value="{{ old('addressLine1', address.addressLine1 ?? null) }}">
+
+  <label for="addressLine2">Address Line 2</label>
+  <input
+    type="text"
+    name="addressLine2"
+    id="addressLine2"
+    value="{{ old('addressLine2', address.addressLine2 ?? null) }}">
+
+  <label for="countryCode">Country</label>
+  <select name="countryCode" id="countryCode">
+    {% for country in Addresses.getCountryRepository().getAll() %}
+      {{ tag('option', {
+        value: country.countryCode,
+        selected: country.countryCode == old('countryCode', address.countryCode ?? null),
+        text: country.name,
+      }) }}
+    {% endfor %}
+  </select>
+
+  {# ... #}
+
+  <button>Save</button>
+</form>
+```
+:::
+
+#### Guide
+
+1. Include the form partial, which does all the work of building inputs. We have no address object to pass to it yet.
+2. Whether we’re creating a new address or editing an existing one (this partial handles both), the request should be sent to the `users/save-address` action.
+3. Addresses that have been previously saved will have an `id`, so we need to send that back to apply updates to the correct Address.
+4. The [`redirectInput()` function](../twig/functions.md#redirectinput) accepts an [object template](../../system/object-templates.md), which can include properties of the thing we’re working with. The template won’t be evaluated when it appears in the form—instead, Craft will render it using the address element _after_ it’s been successfully saved. In this case, we’ll be taken to the [edit screen](#existing-addresses) for the newly-saved address.
+5. Which fields are output is up to you—but be aware that the selected `countryCode` may influence what additional address fields are required. If you want to capture input for [custom fields](../../system/fields.md), it should be nested under the `fields` key, as it is for entries and other element types: `<input type="text" name="fields[myCustomFieldHandle]" value="...">`
+
+Throughout the form, we’re using the [`old()` function](../twig/functions.md#old) to retrieve submitted values, or populate an input with an existing address’s data.
+The second argument to `old()` is a “default” value, but because the form is shared between new and existing addresses, we can’t be sure that an `address` variable was passed.
+By specifying the default as `address.addressLine1 ?? null` (for example), we swallow any “undefined” errors.
+
+::: tip
+See the [complete list of parameters](../http-api.md#post-users-save-address) that can be sent to the `users/save-address` action.
+:::
+
+### Existing Addresses
+
+To edit an existing address, we’ll use the `addressUid` parameter from our route.
+
+```twig
+{% extends '_layouts/default' %}
+
+{% requireLogin %}
+
+{# 1. Resolve the address: #}
+{% set address = addresses()
+  .owner(currentUser)
+  .uid(addressUid)
+  .one() %}
+
+{# 2. Make sure we got something: #}
+{% if not address %}
+  {% exit 404 %}
+{% endif %}
+
+{% block content %}
+  <h1>Edit Address: {{ address.title }}</h1>
+
+  {# 3. Render form, passing the resolved address: #}
+  {{ include('_account/address-form', {
+    address: address,
+  }) }}
+{% endblock %}
+```
+
+#### Guide
+
+1. We always load the address from disk. By calling `.owner(currentUser)`, we can be certain we’re only ever showing a user an address they own.
+2. If the UID from our route didn’t match one of the current user’s addresses, we bail.
+3. The address is passed to the form partial for rendering—see the [new address example](#new-addresses) for the form’s markup.
+
+## Validating Addresses
+
+Addresses are validated like any other type of element, but some of the rules are dependent upon its localized format.
+
+You can set requirements for custom fields in the Address Fields [field layout](#native-custom-fields), or directly manipulate validation rules using a [custom plugin or module](../../extend/README.md).
+
+::: tip
+Take a look at the [Using Events in a Custom Module](kb:custom-module-events) article for a dedicated primer on module setup and events.
+:::
+
+[Validation rules](guide:input-validation) are added via the `Model::EVENT_DEFINE_RULES` event:
+
+```php
+use yii\base\Event;
+use craft\base\Model;
+use craft\elements\Address;
+use craft\events\DefineRulesEvent;
+
+Event::on(
+    Address::class,
+    Model::EVENT_DEFINE_RULES,
+    function(DefineRulesEvent $event) {
+        $event->rules[] = [
+            ['fullName'],
+            'match',
+            'pattern' => '/droid|bot/i',
+            'message' => Craft::t('site', 'Robots are not allowed.'),
+        ];
+    }
+);
+```
+
+Errors are available through the same `address.getErrors()` method used in other action and [model validation examples](../../development/forms.md#models-and-validation), regardless of whether they were produced by built-in rules or ones you added.
+
+This same pattern can also be used to _unset_ validation rules that you don’t need (but may have been imposed by the [address repository](#address-repository)).
+Your handler function might look something like this:
+
+```php
+function(DefineRulesEvent $event) {
+    $event->rules = array_filter(
+        $event->rules,
+        function($rule) {
+            // Keep/ignore all rules except those having to do with the “state:”
+            if ($rule[0] !== 'administrativeArea') {
+                return true;
+            }
+
+            // Does this rule do something other than mark it as required?
+            if ($rule[1] !== 'required') {
+              return true;
+            }
+
+            // Ok, filter out this rule:
+            return false;
+        }
+    );
+}
+```
+
+In this example, we are only removing a single rule (one that would be written `['administrativeArea', 'required']`), but others may remain that ensure the selected value is valid _when provided_.
+
+## Querying Addresses
+
+You can fetch addresses in your templates or PHP code using an `CraftCms\Cms\Element\Queries\AddressQuery`.
+
+::: code
+```twig
+{# Create a new address query #}
+{% set myAddressQuery = addresses() %}
+```
+```php
+// Create a new address query
+$myAddressQuery = new CraftCms\Cms\Element\Queries\AddressQuery;
+```
+:::
+
+<See path="../../development/element-queries.md" label="Introduction to Element Queries" description="Learn more about how element queries work." />
+
+### Example
+
+Let’s output a list of the logged-in user’s addresses:
+
+1. Create an address query with `addresses()`.
+2. Restrict the query to addresses owned by the current User, with the [`owner`](#owner) parameter.
+3. Fetch the addresses with `.all()`.
+4. Loop through the addresses using a [`{% for %}` tag](https://twig.symfony.com/doc/3.x/tags/for.html).
+5. Output preformatted address details with the [`|address`](../twig/filters.md#address) filter.
+
+```twig
+{% requireLogin %}
+
+{% set addresses = addresses()
+  .owner(currentUser)
+  .all() %}
+
+{% for addr in addresses %}
+  <address>{{ addr|address }}</address>
+{% endfor %}
+```
+
+We’ll expand on this example in the [Managing Addresses](#managing-addresses) section.
+
+::: warning
+Protect your users’ personal information by carefully auditing queries and displaying private addresses only on pages that [require login](../twig/tags.md#requirelogin).
+:::
+
+### Parameters
+
+Address queries support the following parameters:
+
+<!-- This section of the page is dynamically generated! Changes to the file below may be overwritten by automated tools. -->
+!!!include(docs/.artifacts/cms/6.x/addresses.md)!!!
