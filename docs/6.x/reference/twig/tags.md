@@ -90,22 +90,28 @@ Caches the output globally (for the current site), rather than on a per-URL basi
 
 #### `using key`
 
-Specifies the name of the key the cache should use. When the key changes, the tag’s contents are re-rendered. If this parameter is not provided, a random key will be generated each time Twig re-parses the template.
+Specifies the name of the key the cache should use.
+When the key changes, the tag’s contents are re-rendered.
+If this parameter is not provided, a random key will be generated each time Twig re-parses the template.
 
 ```twig
 {% cache using key "page-header" %}
 ```
 
 ::: warning
-If you change template code within a `{% cache %}` that uses a custom key, existing template caches will not automatically be purged. Either assign the tag a new key, or clear your existing template caches manually by navigating to **Utilities** → **Caches** and clearing **Data caches**.
+If you change template code within a `{% cache %}` that uses a custom key, existing template caches will not automatically be purged.
+Either assign the tag a new key, or clear your existing template caches manually by navigating to <Journey path="Utilities, Caches" /> and clearing **Data caches**.
 :::
 
-You can provide a dynamic key and combine it with [globally](#globally) for more control over template caching. For example, you could cache based on the URL *with* the query string that’s ignored by default:
+You can provide a dynamic key and combine it with [globally](#globally) for more control over template caching.
+For example, you could cache based on the URL *with* the query string that’s ignored by default:
 
 ```twig
-{% set request = craft.app.request %}
-{% set uriWithQueryString = request.fullUri ~ request.queryStringWithoutPath %}
-{% cache globally using key uriWithQueryString %}
+{% set pathWithQuery = Request.getPathInfo() ~ '?' ~ Request.getQueryString() %}
+
+{% cache globally using key pathWithQuery %}
+  {# ... #}
+{% endcache %}
 ```
 
 #### `for`
