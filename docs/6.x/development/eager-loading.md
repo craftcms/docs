@@ -21,7 +21,7 @@ However, there are opportunities to tune certain queries with [lazy eager-loadin
 Let’s look at a [template](templates.md) that loops through a list of news posts (entries), and displays an image (asset) attached to each one.
 
 ```twig
-{% set posts = craft.entries()
+{% set posts = entries()
   .section('news')
   .all() %}
 
@@ -73,7 +73,7 @@ Most projects can eschew custom eager-loading maps (using the [`.with()` method]
 
 ::: code
 ```twig{3-6} Using .with()
-{% set posts = craft.entries()
+{% set posts = entries()
   .section('news')
   .with([
     ['featureImage', { withTransforms: ['large'] }],
@@ -102,7 +102,7 @@ Most projects can eschew custom eager-loading maps (using the [`.with()` method]
 {% endfor %}
 ```
 ```twig{6,18} Using .eagerly()
-{% set posts = craft.entries()
+{% set posts = entries()
   .section('news')
   .all() %}
 
@@ -143,7 +143,7 @@ The purpose of the `.with()` param is to tell Craft which related or nested elem
 Here’s how to apply the `with` param to our example:
 
 ```twig
-{% set entries = craft.entries()
+{% set entries = entries()
   .section('news')
   .with(['assetsField'])
   .all() %}
@@ -189,7 +189,7 @@ This means that (in most cases) eager-loaded and non-eager-loaded elements can b
 If you have multiple sets of elements you wish to eager-load via the primary query, add those field handles to your `.with()` parameter:
 
 ```twig{4-5}
-{% set posts = craft.entries
+{% set posts = entries
   .section('news')
   .with([
     'topics',
@@ -212,7 +212,7 @@ If you have multiple sets of elements you wish to eager-load via the primary que
 If you need to conditionally add eager-loading criteria, use the `.andWith()` method:
 
 ```twig
-{% set postsQuery = craft.entries()
+{% set postsQuery = entries()
   .section('news')
   .with(['topics']) %}
 
@@ -232,7 +232,7 @@ Craft will merge your criteria into a single plan before executing the query.
 It’s also possible to optimize loading of elements nested two or more levels deep, using a special syntax. Suppose the topics in our news feed from previous examples each had a thumbnail or icon:
 
 ```twig{4,17-18}
-{% set posts = craft.entries()
+{% set posts = entries()
   .section('news')
   .with([
     'topics.thumbnail',
@@ -270,7 +270,7 @@ A dot (`.`) in the eager-loading map indicates that another set of elements on t
 The same optimization is possible with [lazy eager-loading](#lazy-eager-loading)—the `.with()` param can be omitted from the main query, and `.eagerly()` can be added to all the nested queries:
 
 ```twig{10-11}
-{% set posts = craft.entries()
+{% set posts = entries()
   .section('news')
   .all() %}
 
@@ -297,7 +297,7 @@ Elements that are the target of multiple relations (as you might expect with a s
 You can define custom parameters that will get applied as elements are being eager-loaded, by replacing its handle with an array that has two values: the handle, and a [hash](twig.md#hashes) that defines the parameters that should be applied.
 
 ```twig
-{% set entries = craft.entries()
+{% set entries = entries()
   .section('news')
   .with([
     ['assetsField', { kind: 'image' }],
@@ -308,7 +308,7 @@ You can define custom parameters that will get applied as elements are being eag
 When eager-loading nested sets of elements, you can apply parameters at any level of the eager-loading path.
 
 ```twig
-{% set entries = craft.entries()
+{% set entries = entries()
   .section('news')
   .with([
     ['featureImage', { dateUploaded: ">= #{now|date_modify('-1 month')}" }],
@@ -324,7 +324,7 @@ The accepted parameters correspond to the kind of element that each relationship
 You can also provide nested `with` directives via these hashes. Here’s an example where we’re loading each topic’s `thumbnail` and `sectionEditor`, as well as all their `descendants` (presuming that our topic category group is a multi-level structure):
 
 ```twig
-{% set entries = craft.entries()
+{% set entries = entries()
   .section('news')
   .with([
     ['topic', {
@@ -373,7 +373,7 @@ Using the `withTransforms` param has no effect on how you’d access image trans
 Image transform indexes can be eager-loaded on assets that are also eager-loaded:
 
 ```twig
-{% set entries = craft.entries()
+{% set entries = entries()
   .with([
     ['assetsField', {
       withTransforms: ['heroImage']
@@ -389,7 +389,7 @@ Fields are always eager-loaded using their handle.
 In this example, `manufacturer` is an [entries field](../reference/field-types/entries.md) attached to each “car” entry:
 
 ```twig
-{% set carsWithManufacturers = craft.entries()
+{% set carsWithManufacturers = entries()
   .section('cars')
   .with([
     ['manufacturer'],
@@ -400,7 +400,7 @@ In this example, `manufacturer` is an [entries field](../reference/field-types/e
 Fields that manage nested elements (like [Matrix](../reference/field-types/matrix.md) or [addresses](../reference/field-types/addresses.md)) use the same syntax:
 
 ```twig
-{% set carsWithSaleHistory = craft.entries()
+{% set carsWithSaleHistory = entries()
   .section('cars')
   .with([
     ['saleHistory'],
@@ -463,12 +463,12 @@ While related elements can be queried in either direction using [`sourceElement`
 
 ```twig
 {# We can’t load these poets *and* their poems in one query: #}
-{% set poets = craft.users()
+{% set poets = users()
   .group('poets')
   .all() %}
 
 {# This second query takes the list of poets and loads all their poems: #}
-{% set poems = craft.entries()
+{% set poems = entries()
   .section('poems')
   .authorId(poets|column('id'))
   .all() %}
@@ -491,7 +491,7 @@ While related elements can be queried in either direction using [`sourceElement`
 Of course, if each _poet_ user element had a custom field in which administrators selected “Featured Poems,” that _would_ be eager-loadable:
 
 ```twig
-{% set poets = craft.users()
+{% set poets = users()
   .group('poets')
   .with([
     ['featuredPoems'],

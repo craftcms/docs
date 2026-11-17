@@ -104,9 +104,9 @@ Most of the time, print statements will automatically HTML-encode the content be
 For example, let’s say you have a search results page, where the search query is defined by a `q` query string parameter, and in the event that there are no results, you want to output a message to the user that includes the query:
 
 ```twig{16}
-{% set query = craft.app.request.getQueryParam('q') %}
+{% set query = Request.query('q') %}
 
-{% set entries = craft.entries()
+{% set entries = entries()
   .section('blog')
   .search(query)
   .all() %}
@@ -437,14 +437,10 @@ For example, Craft’s [group](../reference/twig/filters.md#group) filter accept
 {% endfor %}
 ```
 
-::: tip
-Prior to Craft 5.6.0 (which uses Twig 3.15), arrow functions were allowed in more limited contexts, like some [functions](#functions) and [filters](#filters).
-:::
-
 Arrow functions are particularly useful when working with [Collections](collections.md):
 
 ```twig{5}
-{% set vendorsByRating = craft.entries()
+{% set vendorsByRating = entries()
   .section('vendors')
   .with('reviews')
   .collect()
@@ -545,7 +541,7 @@ Twig has a few features that help you write more resilient templates. When you s
 {% endif %}
 ```
 
-This ensures that the `style` variable exists before we try and use it. Accessing an undefined variable or property when Craft’s Twig environment has [`strict_variables`](https://twig.symfony.com/doc/3.x/api.html#environment-options) enabled (set when [`devMode`](config5:devMode) is _on_) will result in an [error](#handling-errors). When `devMode` is _off_, Twig will suppress those errors and treat undefined values as `null`.
+This ensures that the `style` variable exists before we try and use it. Accessing an undefined variable or property when Craft’s Twig environment has [`strict_variables`](https://twig.symfony.com/doc/3.x/api.html#environment-options) enabled (set when `APP_DEBUG` is _on_) will result in an [error](#handling-errors). When `APP_DEBUG` is _off_, Twig will suppress those errors and treat undefined values as `null`.
 
 Given this template…
 
@@ -572,7 +568,7 @@ Expression | Result
 `config.timingFunction is defined` | `false`
 
 ::: warning
-When `devMode` is on, any row indicating “Error” will instead produce a `null` value.
+When `APP_DEBUG` is on, any row indicating “Error” will instead produce a `null` value.
 :::
 
 #### Emptiness
@@ -622,12 +618,17 @@ This section treads into some heavier programming concepts, and makes reference 
 These objects are authoritatively documented in the [class reference](https://docs.craftcms.com/api/v5/). You will find references to methods and properties of common objects here in the main documentation, but to make the best use of them, some independent research may be required.
 :::
 
-So far, we’ve mostly looked at plain values—but Craft exposes a number of _objects_ to your templates, like elements (an <craft5:craft\elements\Entry> or <craft5:craft\elements\Asset> for instance) or services (accessible via [`craft.app`](../reference/twig/global-variables.md#craft-app)).
+So far, we’ve mostly looked at plain values—but Craft exposes a number of _objects_ to your templates, like [elements](../system/elements.md) or instances of any classes you can access via facades or `app()`.
 
-When in doubt about the type of value you’re dealing with (or you encounter a [Twig error](#handling-errors) when attempting to use them), use the [`{% dump %}` tag](../reference/twig/tags.md#dump) to output them to the debug toolbar.
+When in doubt about the type of value you’re dealing with (or you encounter a [Twig error](#handling-errors) when attempting to use them), use the [`{% dump ... %}` tag](../reference/twig/tags.md#dump) to output them to the debug toolbar.
 
 ::: tip
-Using an undefined variable in the dump tag will still trigger an error. If this happens, dump the entire context by passing nothing to the tag.
+Using an undefined variable in the dump tag will still trigger an error.
+Dump the entire context by passing nothing to the tag, or just the keys if you aren’t sure what is defined in the context:
+
+```twig
+{% dump _context|keys %}
+```
 :::
 
 #### Negation
@@ -654,7 +655,7 @@ In an entry’s template, for example, comparing the automatically-injected `ent
 
 ```twig
 {% set category = entry.topic.one() %}
-{% set relatedPosts = craft.entries
+{% set relatedPosts = entries()
   .section('blog')
   .relatedTo(category)
   .all() %}
@@ -700,7 +701,7 @@ Errors can come from a number of places throughout the system, but the most comm
 
 You may see other errors throughout development—but they are typically the result of a lower-level issue like improper use of methods, database connectivity, or templates getting out of sync with [project config](../system/project-config.md).
 
-With [devMode](config5:devMode) on, Craft will output a stack trace for any errors it encounters when rendering a template.
+With `APP_DEBUG` on, Craft will output a stack trace for any errors it encounters when rendering a template.
 
 <BrowserShot
   url="https://my-project.ddev.site/example"

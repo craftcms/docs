@@ -41,7 +41,7 @@ If a collection is created from an array that contains only [elements](../system
 These methods can be chained together to process data in an elegant way. Take this average review score logic:
 
 ```twig
-{% set recentReviews = craft.entries()
+{% set recentReviews = entries()
   .section('reviews')
   .relatedTo({
     targetElement: product,
@@ -69,8 +69,8 @@ You can also wrap an existing list of elements with `collect()`, and Craft will 
 
 ```twig
 {# These produce the same results: #}
-{% set posts = craft.entries().section('news').collect() %}
-{% set posts = collect(craft.entries().section('news').all()) %}
+{% set posts = entries().section('news').collect() %}
+{% set posts = collect(entries().section('news').all()) %}
 ```
 
 [Eager-loaded elements](eager-loading.md) are also wrapped in an `ElementCollection` that allows them to behave a bit like an element query—you can safely call `.all()` on any relational field without worrying about whether it was eager-loaded or not—or use `.with()` to eager-load another set of nested elements!

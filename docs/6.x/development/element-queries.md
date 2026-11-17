@@ -313,13 +313,13 @@ Collections can simplify some common array manipulation and filtering tasks that
 
 ::: code
 ```twig
-{% set entries = entries()
+{% set articles = entries()
   .section('news')
   .with(['category'])
   .limit(10)
   .collect() %}
 
-{% set categoriesDescription = entries
+{% set categoriesDescription = articles
   .pluck('category')
   .collapse()
   .pluck('title')
@@ -329,13 +329,13 @@ Posted in: {{ categoriesDescription }}
 ```php
 use CraftCms\Cms\Entry\Elements\Entry;
 
-$entries = Entry::find()
+$articles = Entry::find()
     ->section('news')
     ->with(['category'])
     ->limit(10)
     ->collect();
 
-$categoriesDescription = $entries
+$categoriesDescription = $articles
     // Collate all the attached categories:
     ->pluck('category')
     // Flatten those into a single array:
@@ -498,7 +498,8 @@ Results from a [search](#search) query are perfectly fine to paginate.
 
 ### Navigating Pages
 
-In our example, the `pageInfo` variable (a [Paginate](craft5:craft\web\twig\variables\Paginate) instance) has a number of properties and methods to help you work with paginated results. The variable can be named anything you like, so long as references to it are updated.
+In our example, the `pageInfo` variable (a `CraftCms\Cms\Twig\Variables\Paginate` instance) has a number of properties and methods to help you work with paginated results.
+The variable can be named anything you like, so long as references to it are updated.
 
 `first`
 : Number of the first element on the _current_ page. For example, on the second page of 10 results, `first` would be `11`.
@@ -510,7 +511,7 @@ In our example, the `pageInfo` variable (a [Paginate](craft5:craft\web\twig\vari
 : Total number of results, across all pages.
 
 `currentPage`
-: The current page. Equivalent to `craft.app.request.getPageNum()`.
+: The current page. Equivalent to accessing the `pageTrigger` query param (`Request.param('page')`, by default), but clamped to the valid range for the paginated records.
 
 `totalPages`
 : The total number of pages the results are spread across. The last page of results may not be complete.
@@ -613,15 +614,15 @@ Craft gives you access to its [search](../system/searching.md) index from any el
 
 ::: code
 ```twig{5}
-{% set q = craft.app.request.getQueryParam('search') %}
+{% set q = Request.query('search') %}
 
-{% set results = entries
+{% set results = entries()
   .section('news')
   .search(q)
   .all() %}
 ```
 ```php{5}
-$q = Craft::$app->getRequest()->getQueryParam('search');
+$q = Request::query('search');
 
 $results = Entry::find()
     ->section('news')
@@ -632,10 +633,10 @@ $results = Entry::find()
 
 <See path="../system/search.md" description="Learn about the supported syntaxes for plain-text search." />
 
-The value passed to `.search()` can come from anywhere—user input via an HTML form (via `craft.app.request`), hard-coded terms, or from another field (like `entry.relatedSearchFilter`). While search is a great tool, it’s generally not appropriate for finding up elements with specific qualities—for example, you _can_ search for JPEG assets by calling `.search('extension:jpg')`, but using the dedicated [`.extension('jpg')` query method](../reference/element-types/assets.md#extension) will produce faster and more consistent results.
+The value passed to `.search()` can come from anywhere—user input via an HTML form (via `Request.param()`), hard-coded terms, or from another field (like `entry.relatedSearchFilter`). While search is a great tool, it’s generally not appropriate for finding up elements with specific qualities—for example, you _can_ search for JPEG assets by calling `.search('extension:jpg')`, but using the dedicated [`.extension('jpg')` query method](../reference/element-types/assets.md#extension) will produce faster and more consistent results.
 
 ::: warning
-Be aware that exposing records to search _can_ lead to [unintended disclosure or enumeration](../system/searching.md#development) of content that is not otherwise visible. For example, a query like `entries.section('locations').search(q)` (where `q` is a term provided by a user with some understanding of your content model) could attempt to figure out which stores are managed by people with the last name “Smith” by sending a query like `managedBy:*smith*`.
+Be aware that exposing records to search _can_ lead to [unintended disclosure or enumeration](../system/searching.md#development) of content that is not otherwise visible. For example, a query like `entries().section('locations').search(q)` (where `q` is a term provided by a user with some understanding of your content model) could attempt to figure out which stores are managed by people with the last name “Smith” by sending a query like `managedBy:*smith*`.
 :::
 
 ## Performance and Optimization

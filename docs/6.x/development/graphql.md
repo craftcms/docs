@@ -141,7 +141,7 @@ Additional GraphQL IDEs are available as well:
 - [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
 
 ::: tip
-When you are initially exploring the API, make sure <config5:devMode> is enabled so the IDE can be informed about the entire schema available to it.
+When you are initially exploring the API, make sure `APP_DEBUG` is enabled so the IDE can be informed about the entire schema available to it.
 :::
 
 ### Sending Requests Manually
@@ -206,7 +206,7 @@ If you’re unable to query private schemas (and every requests ends up using th
 You can test whether the header reaches Craft by to your app by creating a test template and making a `POST` request to it:
 
 ```twig
-{{ craft.app.getRequest().getHeaders().has('authorization')
+{{ Request.hasHeader('authorization')
   ? 'auth header present ✓'
   : 'auth header missing!' }}
 ```
@@ -401,7 +401,7 @@ The following examples include server-rendered Twig “equivalents,” which are
   }
   ```
   ```twig Twig
-  {% set posts = craft.entries()
+  {% set posts = entries()
     .section('blog')
     .all() %}
 
@@ -441,7 +441,7 @@ The following examples include server-rendered Twig “equivalents,” which are
   }
   ```
   ```twig Twig
-  {% set topicPosts = craft.entries()
+  {% set topicPosts = entries()
     .section('blog')
     .primaryCategory(category)
     .all() %}
@@ -480,7 +480,7 @@ The following examples include server-rendered Twig “equivalents,” which are
   }
   ```
   ```twig{8} Twig
-  {% set posts = craft.entries()
+  {% set posts = entries()
     .section('blog')
     .all() %}
 
@@ -516,12 +516,12 @@ The following examples include server-rendered Twig “equivalents,” which are
   }
   ```
   ```twig{1-4,8-11} Twig
-  {% set categoryIds = craft.categories()
+  {% set categoryIds = categories()
     .group('topics')
     .slug(['travel', 'winter-sports'])
     .ids() %}
 
-  {% set relatedPosts = craft.entries()
+  {% set relatedPosts = entries()
     .section('blog')
     .relatedTo({
       targetElement: categoryIds,
@@ -627,7 +627,7 @@ Some input types are only used for mutations:
 
 ### Elements
 
-Each element type provides dedicated query and mutation interfaces that expose unique properties based on the system’s configuration. An additional generic query type is provided for each element type that allows you to build queries from scratch, similar to the `craft.entries()` or `craft.assets()` APIs available in Twig:
+Each element type provides dedicated query and mutation interfaces that expose unique properties based on the system’s configuration. An additional generic query type is provided for each element type that allows you to build queries from scratch, similar to the `entries()` or `assets()` APIs available in Twig:
 
 ::: code
 ```graphql{2} Entries

@@ -105,7 +105,7 @@ To make the template dynamic, you would need to…
 1. [Load](../system/routing.md#accessing-named-parameters-in-your-templates) the corresponding entry or user element:
 
     ```twig
-    {% set contact = craft.entries()
+    {% set contact = entries()
       .section('reps')
       .id(contactId)
       .one() %}
