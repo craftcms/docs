@@ -73,7 +73,7 @@ It also prevents usage of dot-path notation to access nested properties of objec
 Returns whether the passed-in array contains any nested arrays/objects with a particular key/attribute set to a given value.
 
 ```twig
-{% set works = craft.entries()
+{% set works = entries()
   .section('artwork')
   .all() %}
 
@@ -187,7 +187,7 @@ Flattens an array into a single level, up to `depth` levels.
 Groups items in an array by the results of an arrow function.
 
 ```twig
-{% set allEntries = craft.entries().section('blog').all() %}
+{% set allEntries = entries().section('blog').all() %}
 {% set allEntriesByYear = allEntries|group(e => e.postDate|date('Y')) %}
 
 {% for year, entriesInYear in allEntriesByYear %}
@@ -433,7 +433,7 @@ Runs an array through <craft5:craft\helpers\ArrayHelper::where()>.
 Returns an array without the specified item(s).
 
 ```twig
-{% set entries = craft.entries().section('articles').limit(3).all() %}
+{% set entries = entries().section('articles').limit(3).all() %}
 {% set firstEntry = entries|first %}
 {% set remainingEntries = entries|without(firstEntry) %}
 ```
@@ -625,8 +625,8 @@ If used on anything besides a query, Twig’s built-in [length](https://twig.sym
 Runs a string through <craft5:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
 
 ```twig
-{% set titleParam = craft.app.request.getQueryParam('title') %}
-{% set entry = craft.entries()
+{% set titleParam = Request.query('title') %}
+{% set entry = entries()
   .title(titleParam|literal)
   .one() %}
 ```
@@ -658,11 +658,11 @@ For example, comma group symbols are added by default in English:
 {# Output: 1,000,000 #}
 ```
 
-The value is passed to [`Craft::$app->getFormatter()->asDecimal()`](yii2:yii\i18n\Formatter::asDecimal()) and may include three additional arguments:
+The value is passed to `CraftCms\Cms\Translation\Formatter::asDecimal()`, with four optional arguments:
 
 - **decimals** – number of digits that should appear after the decimal point (defaults to `null`)
 - **options** – key-value array of [number formatter options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformatattribute) (ignored if PHP intl extension is not installed)
-- **textOptions** – key-value array of [text formatting options](https://www.php.net/manual/en/class.numberformatter.php#intl.numberformatter-constants.unumberformattextattribute) for the formatter
+- **textOptions** – This argument has no effect and has been deprecated.
 - **locale** – the locale the number should be formatted for (defaults to the current application locale)
 
 ```twig
@@ -1470,52 +1470,57 @@ Encrypts and base64-encodes a string.
 
 ### `hash`
 
-Generates a hash of the passed string.
-The default behavior uses Craft’s built-in data hashing service, which prepends a [keyed-hash message authentication code](https://en.wikipedia.org/wiki/HMAC) (HMAC) to the input.
+Encrypts the passed string.
+The default behavior uses Laravel’s built-in encryption service.
 
 This is primarily intended to pass data in plain view (i.e. via front-end forms) that must not be tampered with.
 
 ```twig
-{{ hiddenInput('foo', '!!!qux'|hash) }}
-{# -> <input type="hidden" name="foo" value="3c672d401a486334511baf27d9c717dad0f27d7bebc890895f3b15c4b3f6edd3!!!qux"> #}
+{{ hiddenInput('foo', 'secret value'|hash) }}
+{# -> <input type="hidden" name="foo" value="eyJpdiI6IjVwWHh1d1hXdkE4UHBJMVg0ZHZ6emc9PSIsInZhbHVlIjoieXVTK2FuMmFMMWl6ODhKenh1VE9LVHM4VjVIbUhFVjJMcjRhSUowLzNlcz0iLCJtYWMiOiIzZmFjZWJkMGMwODYzOTc5NWFkOWE2NzhmMDRhNjE0YTdkMDdiNDg1MjgxNjUyNTA0MmMxMzQ0YWQ1ZWMzM2M5IiwidGFnIjoiIn0="> #}
 ```
 
-::: danger
-**Do not hash sensitive data.** Hashed values are tamper-proof, but still expose the original value!
-Hashes are **not** a suitable alternative to CSRF tokens or authentication.
-:::
-
-In a plugin or module, you can validate the value via [Security::validateData()](yii2:yii\base\Security::validateData()):
+In a plugin, you can validate the value via `Crypt::decrypt()`:
 
 ```php
-$foo = Craft::$app->getRequest()->getBodyParam('foo');
-$foo = Craft::$app->getSecurity()->validateData($foo);
+$foo = Request::input('foo');
+Crypt::decrypt($foo);
 
 if ($foo !== false) {
     // $foo was not tampered with!
 }
 ```
 
-`Illuminate\Encryption\Encrypter::decrypt()` can be used in a [controller](../../extend/http.md) to automatically throw an exception on missing or invalid values:
+Craft adds the `getSigned()` method to Laravel’s request object, so the above can be simplified to:
 
 ```php
-public function actionSubmitData()
+public function actionSubmitData(Request $request)
 {
-    $foo = Craft::$app->getRequest()->getValidatedBodyParam('foo');
+    $token = $request->getSigned('referralToken');
 
-    // $foo is present and valid!
+    if (! $token) {
+      // ...
+    }
+
+    // $token is a decrypted, unserialized value.
 }
 ```
 
+A missing `referralToken` param is considered valid, so we check the return value before proceeding.
+If a value _is_ present but fails to decrypt, the application throws an exception.
+
 ::: warning
-Generating an HMAC uses your app’s [`securityKey` config setting](config5:securityKey), by default. If this setting changes between generating and validating a hash, it will fail!
+Generating an HMAC uses your `APP_KEY`, by default.
+If this setting changes between generating and validating a hash, it may fail!
+
+You can rotate old keys into `APP_PREVIOUS_KEYS`, separated by commas, to ensure hashed data in-flight can still be decrypted.
 :::
 
-Attempting to validate a hash from a non-default algorithm <Since ver="5.9.0" feature="Non-HMAC data-hashing algorithms in Twig" /> will always fail.
+Attempting to validate a hash from a non-default algorithm will always fail.
 Hashes from other algorithms can be checked by re-computing the them from your trusted data:
 
 ```twig
-{% if craft.app.request.getQueryParam('contentChecksum') != entry.myTextContentField|hash('md5') %}
+{% if Request.query('contentChecksum') != entry.myTextContentField|hash('md5') %}
   The content of this page has changed since the link was shared.
 {% endif %}
 ```

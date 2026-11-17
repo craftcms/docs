@@ -149,8 +149,8 @@ You can only use [for](#for) **_or_** [until](#until) in a single `{% cache %}` 
 Only activates the `{% cache %}` tag if a certain condition is met.
 
 ```twig
-{# Only cache if this is a mobile browser #}
-{% cache if craft.app.request.isMobileBrowser() %}
+{# Only cache after the start of an event #}
+{% cache if entry.dateStart > now %}
 ```
 
 #### `unless`
@@ -170,7 +170,7 @@ You can only use [if](#if) _or_ [unless](#unless) in a single `{% cache %}` tag.
 
 Your template caches will automatically clear when any elements (entries, assets, etc.) within the tags are saved or deleted.
 
-If you have any element _queries_ within the tags (e.g. a `craft.entries`), and you create a new element that should be returned by one of the queries, Craft will also be able to figure that out and clear the cache.
+If you have any element _queries_ within the tags (e.g. a `entries()`), and you create a new element that should be returned by one of the queries, Craft will also be able to figure that out and clear the cache.
 
 You can also manually clear your template caches from <Journey path="Utilities, Clear Caches" />, or with the `invalidate-tags/template` console command:
 
@@ -198,7 +198,7 @@ Depending on your project’s infrastructure and [cache configuration](../config
 The `{% cache %}` tag detects un-generated [image transform](../../development/image-transforms.md) URLs within it and holds off caching the template until the next request so those temporary image URLs aren’t cached.
 :::
 
-To cache scalar values that don’t benefit from the cache tag’s automatic invalidation, you can use Craft’s caching API directly via `craft.app.cache`.
+To cache scalar values that don’t benefit from the cache tag’s automatic invalidation, use the caching APIs directly via `Cache.get()`, `Cache.put()`.
 
 ## `css`
 
@@ -239,7 +239,7 @@ Attributes will be rendered by <yii2:yii\helpers\BaseHtml::renderTagAttributes()
 Outputs a variable to the browser and ends the request. (`dd` is short for “Dump-and-Die”)
 
 ```twig
-{% set entry = craft.entries().id(entryId).one() %}
+{% set entry = entries().id(entryId).one() %}
 {% dd entry %}
 ```
 
@@ -272,7 +272,7 @@ To enable the debug toolbar, visit your user profile in the [control panel](../.
 This tag will prevent the rest of the template from executing, and end the request.
 
 ```twig
-{% set entry = craft.entries().id(entryId).one() %}
+{% set entry = entries().id(entryId).one() %}
 
 {% if not entry %}
   {% exit 404 %}
@@ -288,7 +288,7 @@ The `{% exit %}` tag supports the following parameters:
 If you choose to set the HTTP status code that should be included with the response, Craft will look for the appropriate error template to render. For example, `{% exit 404 %}` will get Craft to return the `404.twig` template. If the template doesn’t exist, Craft will fall back on its own template corresponding to the status code.
 
 ::: tip
-`{% exit %}` throws an [HttpException](yii2:yii\web\HttpException) with the appropriate status code, so with <config5:devMode> enabled a full error report and stack trace will be shown instead of an error template.
+`{% exit %}` throws a `Symfony\Component\HttpKernel\Exception\HttpException` with the appropriate status code, so with `APP_DEBUG` on, a full error report and stack trace will be shown instead of an error template.
 :::
 
 #### Message
@@ -347,7 +347,7 @@ Headers which contain dates must be formatted according to [RFC 7234](https://to
 ```
 :::
 
-Setting a header this way will override any previously-set value. Some headers are best set with dedicated features like the [`expires` tag](#expires), or internal cookie APIs ([`craft.app.response.cookies`](yii2:yii\web\Response::getCookies()))
+Setting a header this way will override any previously-set value. Some headers are best set with dedicated features like the [`expires` tag](#expires), or internal cookie APIs (`app('cookie')`).
 
 ### Parameters
 
@@ -561,7 +561,7 @@ This tag works identically to the [namespace](filters.md#namespace-or-ns) filter
 This tag helps create a hierarchical navigation menu for entries in a [Structure section](../element-types/entries.md#section-types) or a [Category Group](../element-types/categories.md).
 
 ```twig
-{% set entries = craft.entries()
+{% set entries = entries()
   .section('pages')
   .orderBy('lft ASC')
   .all() %}
@@ -622,7 +622,7 @@ Don’t add any special logic between your `{% ifchildren %}` and `{% endifchild
 This tag makes it easy to paginate query results across multiple pages.
 
 ```twig
-{% set query = craft.entries()
+{% set query = entries()
   .section('blog')
   .limit(10) %}
 
@@ -680,7 +680,7 @@ The `{% paginate %}` tag won’t actually output the current page’s results fo
 Following your `{% paginate %}` tag, you will need to loop through this page’s results using a [for](https://twig.symfony.com/doc/tags/for.html) tag.
 
 ```twig
-{% paginate craft.entries().section('blog').limit(10) as pageEntries %}
+{% paginate entries().section('blog').limit(10) as pageEntries %}
 
 {% for entry in pageEntries %}
   <article>
@@ -718,7 +718,7 @@ The [pageInfo](#the-pageInfo-variable) variable gives you lots of options for bu
 If you just want simple Previous Page and Next Page links to appear, you can do this:
 
 ```twig
-{% set query = craft.entries()
+{% set query = entries()
   .section('blog')
   .limit(10) %}
 
@@ -735,7 +735,7 @@ Note that we’re wrapping those links in conditionals because there won’t alw
 You can add First Page and Last Page links into the mix, you can do that too:
 
 ```twig
-{% set query = craft.entries()
+{% set query = entries()
   .section('blog')
   .limit(10) %}
 
@@ -754,7 +754,7 @@ There’s no reason to wrap those links in conditionals since there will always 
 If you want to create a list of nearby pages, perhaps surrounding the current page number, you can do that too!
 
 ```twig
-{% set query = craft.entries()
+{% set query = entries()
   .section('blog')
   .limit(10) %}
 
@@ -830,7 +830,7 @@ You can also pass it a list of elements: an [element query](../../development/el
 ```twig
 {% render entry.myMatrixField %}
 
-{% render craft.entries().section('news').limit(5) %}
+{% render entries().section('news').limit(5) %}
 ```
 
 If you pass `null` or an empty list, nothing is output. Passing anything other than an element (or another object that implements <craft5:craft\base\Renderable>) throws an error.

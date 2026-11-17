@@ -45,7 +45,7 @@ Combines two arrays into one, using the first array to define the keys, and the 
 Randomizes the order of the elements within an array.
 
 ```twig
-{% set promos = craft.entries().section('promos').all() %}
+{% set promos = entries().section('promos').all() %}
 {% set shuffledPromos = shuffle(promos) %}
 
 {% for promo in shuffledPromos %}
@@ -238,7 +238,7 @@ Returns the fully qualified class name of a given object.
 Clones a given object.
 
 ```twig
-{% set query = craft.entries().section('news') %}
+{% set query = entries().section('news') %}
 {% set articles = clone(query).type('articles') %}
 ```
 
@@ -257,7 +257,7 @@ Passes through the behavior of the `Craft::configure()` method inherited from [`
 
 ```twig
 {% do configure(entry, { title: 'New Title' }) %}
-{% do craft.app.elements.saveElement(entry) %}
+{% do Elements.saveElement(entry) %}
 ```
 
 ### `contentBlocks`
@@ -315,7 +315,7 @@ Creates a new object instance based on a given class name or object configuratio
 Overrides Twig’s default [`dump()`](https://twig.symfony.com/doc/3.x/functions/dump.html) function  with one that is available in all contexts (not just when the Twig environment is in “debug” mode), and produces consistent output with the [`{% dd %}` tag](./tags.md#dd).
 
 ```twig
-{% set news = craft.entries()
+{% set news = entries()
   .section('news')
   .all() %}
 
@@ -397,7 +397,7 @@ Get a reference to an entry type, by its handle:
 This is equivalent to using the entries service, directly:
 
 ```twig{1}
-{% set type = craft.app.entries.getEntryTypeByHandle('post') %}
+{% set type = EntryTypes.getEntryTypeByHandle('post') %}
 
 {{ type.name }}
 ```
@@ -405,9 +405,8 @@ This is equivalent to using the entries service, directly:
 When creating entries in a [front-end form](../../development/forms.md), you can use the `entryType()` function to find the correct ID to submit (IDs can be unstable between environments, due to the way [project config](../../system/project-config.md#ids-uuids-and-handles) works):
 
 ```twig
-<form method="post">
+<form method="post" action="{{ actionUrl('entries/save-entry') }}">
   {{ csrfInput() }}
-  {{ actionInput('entries/save-entry') }}
 
   {{ hiddenInput('typeId', entryType('post').id) }}
 
@@ -417,10 +416,10 @@ When creating entries in a [front-end form](../../development/forms.md), you can
 
 ### `expression`
 
-Creates and returns a new <yii2:yii\db\Expression> object, for use in database queries.
+Creates and returns a new `Illuminate\Contracts\Database\Query\Expression` object, for use in database queries.
 
 ```twig
-{% set entries = craft.entries()
+{% set entries = entries()
   .andWhere(expression('[[authorId]] = :authorId', {authorId: currentUser.id}))
   .all() %}
 ```
@@ -430,7 +429,7 @@ Creates and returns a new <yii2:yii\db\Expression> object, for use in database q
 Generates a platform-specific SQL expression to extract a value from elements’ JSON content column.
 
 ```twig
-{% set longestFilm = craft.entries()
+{% set longestFilm = entries()
   .section('films')
   .max(fieldValueSql(entryType('film'), 'runtimeMinutes')) %}
 ```
@@ -439,7 +438,7 @@ Generates a platform-specific SQL expression to extract a value from elements’
 Craft automatically handles this for `orderBy()` and `select()` expressions, as well as when using field methods, directly:
 
 ```twig
-{% set shortFilms = craft.entries()
+{% set shortFilms = entries()
   .section('films')
   .runtimeMinutes('<= 20')
   .orderBy('runtimeMinutes DESC')
@@ -452,8 +451,8 @@ Craft automatically handles this for `orderBy()` and `select()` expressions, as 
 - `provider` — An object that implements `CraftCms\Cms\FieldLayout\Contracts\FieldLayoutProviderInterface`, like an [entry type](../element-types/entries.md#entry-types) or [asset volume](../element-types/assets.md#volumes)—basically anything that defines a field layout.
     ```twig
     {# Load a field layout provider: #}
-    {# set volume = craft.app.volumes.getVolumeByHandle('photos') %}
-    {% set longExposures = craft.assets()
+    {# set volume = Volumes.getVolumeByHandle('photos') %}
+    {% set longExposures = assets()
       .volume('photos')
       .andWhere('between', (fieldValueSql(volume, 'shutterSpeed')), 0.17, 1)
       .all() %}
@@ -959,7 +958,7 @@ You can optionally set additional attributes on the tag by passing an `options` 
 Outputs an array of items as an ordered list.
 
 ```twig
-{% set titles = craft.entries()
+{% set titles = entries()
   .section('news')
   .select('title')
   .column() %}
@@ -1151,7 +1150,7 @@ Attribute values are HTML-encoded automatically:
 Outputs an array of items as an unordered list.
 
 ```twig
-{% set titles = craft.entries()
+{% set titles = entries()
   .section('news')
   .select('title')
   .column() %}
@@ -1310,7 +1309,7 @@ Function | Description
 
 Returns a series of 36 random characters from `a` through `z`.
 Pass a `length` to generate fewer or more characters.
-This is a wrapper around <craft5:craft\helpers\StringHelper::randomString()>, and in turn a feature of the [Stringy](https://github.com/voku/Stringy) API.
+This is a wrapper around `CraftCms\Cms\Support\Str::random()`, and in turn a feature of the [Stringy](https://github.com/voku/Stringy) API.
 
 ```twig
 {% set rid = "toggle-#{randomString(8)}" %}
@@ -1326,7 +1325,7 @@ This is a wrapper around <craft5:craft\helpers\StringHelper::randomString()>, an
 
 ::: warning
 The output of `randomString()` is **not** cryptographically secure, and does not guarantee uniqueness.
-Use `craft.app.security.generateRandomString()` if you need a true random value.
+Use `Str.random(len, extendedChars: true)` if you need a true random value.
 :::
 
 While strings generated from the base character set (`a-z`) are generally safe to use as HTML `id`s, class names, and CSS identifiers; the extended character set includes symbols that should be [escaped](../../development/twig.md#manual-escaping) in most contexts.

@@ -66,12 +66,8 @@ Returns whether an object is callable via PHP’s [`is_callable()`](https://www.
 
 Returns whether an object is a countable value via PHP’s [`is_countable()`](https://www.php.net/manual/en/function.is-countable.php) method.
 
-::: tip
-`is_countable()` was added in PHP 7.3.0, so for versions less than 7.3 this returns `true` if the object [is an array](#array) or instance of [Countable](https://www.php.net/manual/en/class.countable.php).
-:::
-
 ```twig
-{{ craft.entries() is countable ? 'true' : 'false' }}
+{{ entries().all() is countable ? 'true' : 'false' }}
 {# result: true #}
 
 {{ ['apple', 'orange'] is countable ? 'true' : 'false' }}

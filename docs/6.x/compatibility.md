@@ -207,9 +207,9 @@ If your `templates/` directory was not relocated by the upgrade tool, you will n
 All Twig features remain intact, but Craft APIs are no longer accessible via `craft.app`.
 Common use cases for this were…
 
-- **Request data** (`craft.app.request`) — Use `Request.get('paramName')` to retrieve data from a `GET` query string or `POST` body.
+- **Request data** (`craft.app.request`) — Use `Request.input('paramName')` to retrieve data from a `GET` query string or `POST` body.
 - **Session data** (`craft.app.session`) — See the [flashes](#flashes) section, below.
-- **Other services** (`craft.app.entries`, `craft.app.fields`, `craft.app.sites`, …) — All of Craft’s facades are exposed to Twig, using their standard names (`Entries`, `Fields`, `Sites`, …). These proxy classes that are close equivalents to the services you’re familiar with in Craft. For a list of facades, see `extra.laravel.aliases` in `vendor/craftcms/cms/composer.json`.
+- **Other services** (`craft.app.entries`, `craft.app.fields`, `craft.app.sites`, …) — All of Craft’s facades are exposed to Twig, using their standard names (`Entries`, `Fields`, `Sites`, …). These proxy classes are close equivalents to the services you’re familiar with in Craft. For a list of facades, see `extra.laravel.aliases` in `vendor/craftcms/cms/composer.json`.
 
 These filters have been _deprecated_:
 
