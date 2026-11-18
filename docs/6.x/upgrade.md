@@ -115,9 +115,11 @@ Laravel will warn you before applying migrations when `APP_DEBUG` is off.
 
 ### Image Transforms
 
-Craft 6 stores generated image transforms in a new location, and the migrations clear the transform index.
+Craft 6 stores generated image transforms in a new location and includes a migration which clears the transform index to ensure the new changes are picked up.
+
 Transforms are generated again as they’re requested, which can take a while (and cost a lot of writes) on volumes with many transforms.
-To reuse the transforms Craft 5 generated instead, move them into the new location.
+
+Craft luckily reuses any existing transforms it finds, so if they're moved to the new location, Craft will pick them up.
 
 Craft 5 stored each transform at `{folderPath}/{transform}/{filename}`.
 Craft 6 adds a folder named after the volume’s UID: `_{volumeUid}/{folderPath}/{transform}/{filename}`.
@@ -127,11 +129,13 @@ Craft 6 adds a folder named after the volume’s UID: `_{volumeUid}/{folderPath}
 - `{transform}` is an underscore followed by a named transform’s handle, such as `_thumb`, or an ad-hoc transform’s parameters, such as `_1200xAUTO_crop_center-center_82_none`.
   These folder names and filenames haven’t changed.
 
-Both paths are relative to the root of the disk transforms are stored on, not the volume’s subpath.
-That’s the volume’s own disk, unless the disk’s `asset_transformer` settings in `config/filesystems.php` set an `output_disk`.
-If your Craft 5 volume had a _Transform Filesystem_ or _Transform Subpath_, those settings aren’t carried over: set an `output_disk` that points at the same place, such as a `scoped` disk with the transform subpath as its `prefix`, and move the files within it.
+Both paths are relative to the root of the filesystem (disk in Laravel) transforms are stored on, not the volume’s subpath.
 
-For a volume with the UID `6d1f0b4e-…`, a `thumb` transform of `blog/2024/sunset.jpg` moves like this:
+This is either the filesystem of the volume, unless the config defines an `asset_transformer` with a different `output_disk`.
+
+If your Craft 5 volume had a _Transform Filesystem_ or _Transform Subpath_, those settings aren’t carried over: set an `output_disk` that points at the same place, such as a [`scoped`](https://laravel.com/framework/docs/13.x/filesystem#scoped-and-read-only-filesystems) disk with the transform subpath as its `prefix`, and move the files within it.
+
+For example: a volume with the UID `6d1f0b4e-…`, a `thumb` transform of `blog/2024/sunset.jpg` moves like this:
 
 ```
 blog/2024/_thumb/sunset.jpg  →  _6d1f0b4e-…/blog/2024/_thumb/sunset.jpg
@@ -144,7 +148,7 @@ Craft picks up the moved files without generating them again:
 
 - On local disks, Craft finds each file the first time the transform is requested, and returns its URL.
 - On other disks, the first request for each transform returns a URL that generates it, as usual.
-  Generating it finds the existing file and uses it, without processing the image.
+  Generating it finds the existing file and uses it, without re-processing the image.
   To get the transforms’ own URLs straight away, generate them before the page loads, such as with the `immediately` argument in GraphQL: `url @transform(handle: "thumb", immediately: true)`.
 
 Transforms whose settings changed after they were generated are generated again either way.
