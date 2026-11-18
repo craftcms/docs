@@ -624,53 +624,42 @@ Take a look at the [Using Events in a Custom Module](kb:custom-module-events) ar
 [Validation rules](guide:input-validation) are added via the `Model::EVENT_DEFINE_RULES` event:
 
 ```php
-use yii\base\Event;
-use craft\base\Model;
-use craft\elements\Address;
-use craft\events\DefineRulesEvent;
+use CraftCms\Cms\Address\Elements\Address;
+use CraftCms\Cms\Validation\Events\ValidationRulesResolving;
 
-Event::on(
-    Address::class,
-    Model::EVENT_DEFINE_RULES,
-    function(DefineRulesEvent $event) {
-        $event->rules[] = [
-            ['fullName'],
-            'match',
-            'pattern' => '/droid|bot/i',
-            'message' => Craft::t('site', 'Robots are not allowed.'),
-        ];
+Event::listen(function (ValidationRulesResolving $event) {
+    if (! $event->subject instanceof Address) {
+        return;
     }
-);
+
+    $event->rules['fullName'] = ['regex:/droid|bot/i'];
+});
 ```
 
-Errors are available through the same `address.getErrors()` method used in other action and [model validation examples](../../development/forms.md#models-and-validation), regardless of whether they were produced by built-in rules or ones you added.
+Errors are available through `address.getErrors()`, or in templates via the global `errors` variable used in other [validation examples](../../development/forms.md#models-and-validation), regardless of whether they were produced by built-in rules or ones you added.
 
 This same pattern can also be used to _unset_ validation rules that you don’t need (but may have been imposed by the [address repository](#address-repository)).
 Your handler function might look something like this:
 
 ```php
-function(DefineRulesEvent $event) {
-    $event->rules = array_filter(
-        $event->rules,
-        function($rule) {
-            // Keep/ignore all rules except those having to do with the “state:”
-            if ($rule[0] !== 'administrativeArea') {
-                return true;
-            }
+function (ValidationRulesResolving $event) {
+    if (! $event->subject instanceof Address) {
+        return;
+    }
 
-            // Does this rule do something other than mark it as required?
-            if ($rule[1] !== 'required') {
-              return true;
-            }
+    $rules = $event->rules;
 
-            // Ok, filter out this rule:
-            return false;
-        }
-    );
+    // Are there rules for us to manipulate?
+    if (! isset($rules['administrativeArea'])) {
+        return;
+    }
+
+    // Ok, pull just the `required` field:
+    $rules['administrativeArea'] = array_diff($rules['administrativeArea'], ['required']);
 }
 ```
 
-In this example, we are only removing a single rule (one that would be written `['administrativeArea', 'required']`), but others may remain that ensure the selected value is valid _when provided_.
+In this example, we are only removing a single rule (one that would be written `'administrativeArea' => 'required'`), but others may remain that ensure the selected value is valid _when provided_.
 
 ## Querying Addresses
 
