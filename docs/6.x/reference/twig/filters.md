@@ -705,7 +705,7 @@ Coerces the passed value to a string using PHP’s [`strval()`](https://www.php.
 
 ### `translate` or `t`
 
-Translates a message with [Craft::t()](yii2:yii\BaseYii::t()).
+Translates a message with the global `t()` helper.
 
 ```twig
 {{ 'Hello world'|t('myCategory') }}
