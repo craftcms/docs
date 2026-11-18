@@ -122,11 +122,14 @@ The `actionUrl()` function has the following arguments:
 
 ### `alias`
 
-Passes a string through [Craft::getAlias()](yii2:yii\BaseYii::getAlias()), which will check if the string begins with an [alias](guide:concept-aliases). (See [Configuration](../../configure.md#aliases) for more info.)
+Passes a string through `CraftCms\Aliases\Aliases::get(), which gently substitutes a previously-registered path or URL-like string.
+See [Configuration](../../configure.md#aliases) for more info.
 
 ```twig
 <img src="{{ alias('@assetBaseUrl/images/logo.png') }}">
 ```
+
+Aliases are provided by our separate `craftcms/laravel-aliases` package, which is a wrapper around Yii’s [aliases](https://yiisoft.github.io/docs/guide/concept/aliases.html#defining-aliases) feature.
 
 ### `addresses`
 
@@ -244,13 +247,18 @@ Clones a given object.
 
 ### `configure`
 
-Passes through the behavior of the `Craft::configure()` method inherited from [`Yii::configure()`](yii2:yii\BaseYii::configure()). It’s similar to [`create`](#create) in that it applies attributes to an object, but instead of creating new instances it accepts an existing object and modifies it.
+Sets a map of values onto an existing object, using `CraftCms\Cms\Support\Typecast::configure()`.
 
 ```twig
-{# Modify an `EntryQuery` object set up by a relational field: #}
-{% set myRelatedEntries = configure(entry.myEntriesField, {
-  section: 'blog'
-}).all() %}
+{% set options = {
+  html: "<h1>#{entry.title}</h1>",
+} %}
+
+{% if entry.useDarkTheme %}
+  {% do configure(options, { dark: true }) %}
+{% endif %}
+
+{{ tag('section', options) }}
 ```
 
 `configure()` _can_ be used to set a model or element’s attributes—but we don’t generally recommend this, as templates are intended to present content rather than modify it:
