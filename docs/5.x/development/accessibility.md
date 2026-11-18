@@ -117,7 +117,7 @@ There is currently no built-in support for time-based transcripts or closed capt
     {% set ts = chapter.timestamp | integer %}
     <li>
       <button data-timestamp="{{ ts }}" title="Seek to {{ ts }} seconds">
-        {{ '%d:%02d' | format(ts // 60, ts % 60) }}
+        {{ '%d:%02d' | format(floor(ts / 60), ts % 60) }}
       </button>
       {{ chapter.description }}
     </li>
