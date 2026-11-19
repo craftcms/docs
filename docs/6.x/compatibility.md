@@ -81,6 +81,8 @@ A few settings have been removed, renamed, or relocated:
 | `pathParam` | No longer used. |
 | `testToEmailAddress` | Use `Mail::alwaysTo($email, $name)` in your app service provider, or switch your mail driver to `log` (or another “black hole” service like [Mailpit](https://docs.ddev.com/en/stable/users/usage/developer-tools/#email-capture-and-review-mailpit)). |
 | `errorTemplatePrefix` | See the [errors](#error-templates) section for new behavior. |
+| `cpIconUrl` | Use `cpIconPath` to include an on-disk SVG. Aliases are supported. |
+| `cpLogoUrl` | Use `cpLogoPath` to include an on-disk SVG. Aliases are supported. |
 
 You can selectively publish Laravel’s default config files from the console:
 
@@ -457,3 +459,27 @@ Route::get('newsletter', function (Request $request) {
 ```
 
 The [templating](extend/templates.md) section of the extension documentation has additional information about `pageTemplate()` and other view helper functions.
+
+## Branding
+
+The `rebrand/` directory is not supported without the adapter.
+In its place, you can explicitly set `cpIconPath` and `cpLogoPath` to a on-disk SVGs:
+
+- `cpIconPath` — The icon that appears in the top-left corner of the control panel. A square graphic (32px by 32px) is recommended.
+- `cpLogoPath` — A graphic displayed on the control panel login page. The dimensions are flexible, but your image is scaled proportionally to 288px in width.
+
+Both settings support [aliases](configuration.md#aliases).
+You can leave your existing icons in the `storage/rebrand/` directory, and add these two settings…
+
+```php
+GeneralConfig::create()
+    // ...
+    ->cpIconPath('@root/storage/rebrand/icon/your-icon-name.svg')
+    ->cpLogoPath('@root/storage/rebrand/logo/your-logo-name.svg')
+;
+```
+
+::: warning
+Historically, the first file in each directory would be picked up, so the icons’ filenames were not important.
+Your files are apt to be named differently!
+:::
