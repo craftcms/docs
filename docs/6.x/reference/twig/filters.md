@@ -119,7 +119,8 @@ When an arrow function is passed, this works identically to Twig’s core [`filt
 
 ### `firstWhere`
 
-Searches the incoming array for an element that matches the provided criteria.
+Searches the incoming array for an item that matches the provided criteria.
+The functionality is similar to the [collection](../../development/collections.md) method of the same name.
 
 ```twig
 {% set mountains = [
@@ -138,26 +139,21 @@ Searches the incoming array for an element that matches the provided criteria.
 {% set tallestSister = mountains | firstWhere(m => m.name contains 'Sister') %}
 ```
 
-When using a closure, complex comparisons are possible by returning a boolean, which is implicitly checked for “truthiness.” You can also compute a value in the closure for comparison against an explicitly-passed value.
+When using a closure, complex comparisons are possible by returning a boolean, which is implicitly checked for “truthiness.”
+You can also compute a value in the closure for comparison against an explicitly-passed value.
 
 #### Arguments
 
-The signature of `firstWhere()` is the same as <craft5:craft\helpers\ArrayHelper::firstWhere()>, but the first argument comes from the filter’s input.
-
 `key`
-:   A key used to resolve a value from each item in the array, or a closure that returns a value for comparison.
+:   A key used to resolve a value from each item in the array, or a closure that returns a value for comparison (or the result of a comparison, if `value` is omitted).
 
-    When using a string, you can target a nested key within each item using “dot notation,” like `author.name`. See <craft5:craft\helpers\ArrayHelper::getValue()> for details.
+    When using a string, you can target a nested key within each item using “dot notation,” like `author.name`. This is not possible in [sandbox mode](../../configure.md#twig-sandbox).
 
 `value`
 :   The fixed value to compare against. Defaults to `true`.
 
 `strict`
 :   Whether the comparison should be performed with strict typing. Defaults to `false`.
-
-::: tip
-This filter is similar in functionality to the [collection](../../development/collections.md) method of the same name.
-:::
 
 ### `flatten`
 
@@ -278,7 +274,7 @@ If you want to make sure specific values are defined by default in an array, lik
 ```
 :::
 
-You can also provide an optional `recursive` argument that will use [ArrayHelper::merge()](craft5:craft\helpers\ArrayHelper::merge()) to merge nested arrays or hashes.
+Pass the `recursive` argument to merge nested arrays or hashes using `CraftCms\Cms\Support\Arr::merge()`.
 
 Without `recursive`:
 
@@ -323,7 +319,6 @@ With `recursive`:
   }
 } #}
 ```
-
 
 ### `multisort`
 
@@ -420,13 +415,15 @@ Returns an array of all the values in a given array, but without any custom keys
 
 ### `where`
 
-Runs an array through <craft5:craft\helpers\ArrayHelper::where()>.
+Runs an array through the corresponding [Collection](../../development/collections.md) method.
 
 ```twig
 {% set array = { 'foo': 'bar', 'bar': 'baz', 'bat': 'bar' } %}
 {{ array|where(v => v == 'bar') }}
 {# Result: { 'foo': 'bar', 'bat': 'bar' } #}
 ```
+
+You may pass the same arguments as the [`firstWhere` filter](#firstwhere), plus `keepKeys = false` to return only the values.
 
 ### `without`
 
@@ -507,7 +504,7 @@ Applies formatting to an [Address](../element-types/addresses.md#address-formatt
 #}
 ```
 
-This calls [Addresses::formatAddress()](craft5:craft\services\Addresses::formatAddress()), so you can optionally provide an array of `options` and even your own [`formatter`](https://github.com/commerceguys/addressing/blob/master/src/Formatter/FormatterInterface.php).
+This calls `CraftCms\Cms\Address\Addresses::formatAddress()`, so you can optionally provide an array of `options` and even [your own `formatter`](../element-types/addresses.md#customizing-the-formatter).
 
 ### `base64_decode`
 
@@ -622,7 +619,7 @@ If used on anything besides a query, Twig’s built-in [length](https://twig.sym
 
 ### `literal`
 
-Runs a string through <craft5:craft\helpers\Db::escapeParam()> to escape commas and asterisks so they’re are not treated as special characters in query params.
+Runs a string through `CraftCms\Cms\Support\Query::escapeParam()` to escape commas and asterisks so they’re are not treated as special characters in query params.
 
 ```twig
 {% set titleParam = Request.query('title') %}
@@ -883,7 +880,7 @@ Applying the filter to a `null` value uses the current date. If this is the desi
 
 ### `duration`
 
-Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object or integer (number of seconds) through <craft5:craft\helpers\DateTimeHelper::humanDuration()> to output human-friendly duration text.
+Runs a [DateInterval](http://php.net/manual/en/class.dateinterval.php) object or integer (number of seconds) through `CraftCms\Cms\Support\DateTimeHelper::humanDuration()` to output human-friendly duration text.
 
 ```twig
 <p>Posted {{ entry.postDate.diff(now)|duration(false) }} ago.</p>
@@ -980,9 +977,9 @@ The timezone can be included in the rendered time by passing a `withTimeZone` pa
 
 ### `timestamp`
 
-Outputs a date with <craft5:craft\i18n\Formatter::asTimestamp()>, using plain-language relative terms when possible.
+Outputs a date with `CraftCms\Cms\Translation\Formatter::asTimestamp()`, using plain-language relative terms when possible.
 Dates with the same day return only the time, using the provided `format` (or `today` if the passed value only included date information); dates from the previous 24-hour window return `yesterday`; dates within the last week return the day’s name (like `Wednesday`).
-Anything longer ago than that is handed off to <craft5:craft\i18n\Formatter::asDate()> using the provided `format`.
+Anything longer ago than that is handed off to `CraftCms\Cms\Translation\Formatter::asDate()` using the provided `format`.
 
 ```twig
 {{ now|timestamp }}
@@ -1001,7 +998,7 @@ Anything longer ago than that is handed off to <craft5:craft\i18n\Formatter::asD
 #### Arguments
 
 `format`
-:   Any date formatting string, or a special value compatible with <craft5:craft\i18n\Formatter::asTimestamp()>.
+:   Any date formatting string, or a special value compatible with `CraftCms\Cms\Translation\Formatter::asTimestamp()`.
     The default format depends on the current [system locale](../../system/sites.md#language).
 
 `withPreposition`
@@ -1155,7 +1152,7 @@ If an array is passed in, it will be returned as-is.
 
 ### `id`
 
-Formats a string into something that will work well as an HTML input `id`, via <craft5:craft\web\View::formatInputId()>.
+Formats a string into something that will work well as an HTML input `id`, using `CraftCms\Cms\Support\Html::id()`.
 
 ```twig
 {% set name = 'input[name]' %}

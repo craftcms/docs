@@ -356,7 +356,9 @@ In general, it will be more reliable to use one of the specific element query fa
 
 ### `encodeUrl`
 
-Ensures a URL contains only ASCII characters. The underlying <craft5:craft\helpers\UrlHelper::encodeUrl()> function is automatically called by Craft’s internal redirection logic. This is typically only required when using a URL in an HTTP header. Supposing we have a URL with accented characters like `https://my-project.ddev.site/pages/åbçdé`…
+Ensures a URL contains only ASCII characters. The underlying `CraftCms\Cms\Support\Url::encodeUrl()` function is automatically called by Craft’s internal redirection logic.
+This is typically only required when using a URL in an HTTP header.
+Supposing we have a URL with accented characters like `https://my-project.ddev.site/pages/åbçdé`…
 
 ```twig
 {# …unencoded output leads to garbled characters, and won’t resolve if requested: #}
@@ -1057,7 +1059,7 @@ You can pass the following things into it:
   {{ svg('@webroot/icons/lemon.svg') }}
   ```
 
-- A <craft5:craft\elements\Asset> object, such as one pulled in from an [Assets field](../field-types/assets.md).
+- A `CraftCms\Cms\Asset\Elements\Asset` object, such as one pulled in from an [Assets field](../field-types/assets.md).
 
   ```twig
   {% set image = entry.myAssetsField.one() %}
@@ -1316,8 +1318,7 @@ Function | Description
 ### `randomString`
 
 Returns a series of 36 random characters from `a` through `z`.
-Pass a `length` to generate fewer or more characters.
-This is a wrapper around `CraftCms\Cms\Support\Str::random()`, and in turn a feature of the [Stringy](https://github.com/voku/Stringy) API.
+Pass a `length` to generate a shorter or longer string:
 
 ```twig
 {% set rid = "toggle-#{randomString(8)}" %}
@@ -1332,19 +1333,19 @@ This is a wrapper around `CraftCms\Cms\Support\Str::random()`, and in turn a fea
 ```
 
 ::: warning
-The output of `randomString()` is **not** cryptographically secure, and does not guarantee uniqueness.
-Use `Str.random(len, extendedChars: true)` if you need a true random value.
+The output of `randomString()` is **not** cryptographically secure, by default, and does not guarantee uniqueness.
+Use `randomString(len, extendedChars = true)` if you need a true random value.
 :::
 
-While strings generated from the base character set (`a-z`) are generally safe to use as HTML `id`s, class names, and CSS identifiers; the extended character set includes symbols that should be [escaped](../../development/twig.md#manual-escaping) in most contexts.
+While strings generated from the base character set (`a-z`) are safe to use as HTML `id`s, class names, or CSS identifiers, the extended character set may include numbers.
+Pass the output through the [`id` filter](filters.md#id) to avoid syntax issues.
 
 #### Arguments
 
-The signature of `randomString()` is the same as its [helper function](craft5:craft\helpers\StringHelper::randomString()) in PHP:
+The signature of `randomString()` is the same as the static helper in PHP:
 
 - **`length`** — An integer that determines the number of characters returned.
-- **`extendedChars`** — Whether to allow additional special characters, including uppercase letters, numbers, punctuation, etc.
-
+- **`extendedChars`** — Whether to allow uppercase letters and numbers. Technically
 
 ### `uuid`
 
