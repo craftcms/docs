@@ -1,10 +1,14 @@
 # Color Fields
 
-Color fields provide a flexible way to store hexadecimal color values. You can define a [palette](#palette) to guide authors <Since ver="5.6.0" feature="Color field palettes" />, or use an [open-ended input](#custom-colors).
+Color fields provide a flexible way to store hexadecimal color values.
+You can define a [palette](#palette) to guide authors <Since ver="5.6.0" feature="Color field palettes" />, or use an [open-ended input](#custom-colors).
 
 <!-- more -->
 
 ![Screenshot of a color field interface in the Craft control panel](../../images/fields-color-ui.png)
+
+Color field values (custom, or from a palette) can be translucent. <Since ver="5.12.0" feature="Translucent colors in color fields" />
+Enter an 8-digit hex value (like `#0000ff80`) where the last two digits are the alpha channel, or set the opacity in the color picker, in browsers that support it.
 
 ## Settings
 
@@ -20,8 +24,6 @@ Color fields provide a flexible way to store hexadecimal color values. You can d
 
 Each field contains a **Palette** of colors that authors can select from a dropdown menu.
 
-Palette colors can be translucent. <Since ver="5.12.0" feature="Translucent colors in color fields" /> Enter an 8-digit hex value (like `#0000ff80`) where the last two digits are the alpha channel, or set the opacity in the color picker, in browsers that support it.
-
 ### Custom Colors
 
 Turn on **Allow custom colors** to display a compact input and color preview UI. When used in conjunction with a palette, an additional **Custom…** option is listed at the bottom of the dropdown menu.
@@ -34,12 +36,9 @@ Turn on **Allow opacity for custom colors** <Since ver="5.12.0" feature="Translu
 
 ### GraphQL Mode <Since ver="5.12.0" feature="Color field GraphQL modes" />
 
-When GraphQL is enabled, the **GraphQL Mode** setting determines how the field’s values are represented in the [GraphQL API](#graphql):
+When GraphQL is enabled, the **GraphQL Mode** setting determines how the field’s values are exposed in the [GraphQL API](#graphql).
 
-- **Full data** — Values are objects with sub-selections for each color component and format.
-- **Hex only** — Values are just the color’s hex string.
-
-New color fields default to **Full data**. Fields created before Craft 5.12 retain the **Hex only** mode, so existing queries continue to work.
+New color fields default to **Full data**; fields created before Craft 5.12 retain the **Hex only** mode, so existing queries continue to work.
 
 ## Development
 
@@ -79,11 +78,11 @@ if ($entry->myColorField) {
   {{ entry.myColorField }}                 {# output: #e5422b #}
   {{ entry.myColorField.getHex() }}        {# output: #e5422b #}
   {{ entry.myColorField.getRgb() }}        {# output: rgb(229,66,43) #}
-  {{ entry.myColorField.getHsl() }}        {# output: hsl(7,81%,90%) #}
+  {{ entry.myColorField.getHsl() }}        {# output: hsl(7,78%,53%) #}
   {{ entry.myColorField.getLuma() }}       {# output: 0.38820862745098 #}
   {{ entry.myColorField.getHue() }}        {# output: 7 #}
-  {{ entry.myColorField.getLightness() }}  {# output: 90 #}
-  {{ entry.myColorField.getSaturation() }} {# output: 81 #}
+  {{ entry.myColorField.getLightness() }}  {# output: 53 #}
+  {{ entry.myColorField.getSaturation() }} {# output: 78 #}
   {{ entry.myColorField.getRed() }}        {# output: 229 #}
   {{ entry.myColorField.getGreen() }}      {# output: 66 #}
   {{ entry.myColorField.getBlue() }}       {# output: 43 #}
@@ -94,11 +93,11 @@ if ($entry->myColorField) {
     echo $entry->myColorField;                  // output: #e5422b
     echo $entry->myColorField->getHex();        // output: #e5422b
     echo $entry->myColorField->getRgb();        // output: rgb(229,66,43)
-    echo $entry->myColorField->getHsl();        // output: hsl(7,81%,90%)
+    echo $entry->myColorField->getHsl();        // output: hsl(7,78%,53%)
     echo $entry->myColorField->getLuma();       // output: 0.38820862745098
     echo $entry->myColorField->getHue();        // output: 7
-    echo $entry->myColorField->getLightness();  // output: 90
-    echo $entry->myColorField->getSaturation(); // output: 81
+    echo $entry->myColorField->getLightness();  // output: 53
+    echo $entry->myColorField->getSaturation(); // output: 78
     echo $entry->myColorField->getRed();        // output: 229
     echo $entry->myColorField->getGreen();      // output: 66
     echo $entry->myColorField->getBlue();       // output: 43
@@ -114,11 +113,16 @@ You may also access any of the color components as properties: <Since ver="5.8.0
 {# ... #}
 ```
 
+::: tip
+Refer to the [`ColorData`](craft5:craft\fields\data\ColorData) class reference for a complete list of methods!
+:::
+
 ### Translucency and Other Formats <Since ver="5.12.0" feature="Translucent colors and additional color formats" />
 
-When a color isn’t fully opaque, its hex value (whether output directly or via `hex`/`getHex()`) includes the alpha channel as two extra digits, like `#e5422b80`. Fully opaque colors are still output as 6-digit hex values. Pass `false` to `getHex()` to always get the 6-digit value, without the alpha channel.
+When a color isn’t fully opaque, Craft stores and returns the alpha channel as two extra hexadecimal digits (like `#e5422b80`).
+Pass `false` to `getHex()` to discard the alpha channel (if present) and return a standard six-character hexadecimal code.
 
-`ColorData` objects also provide these formats and helpers:
+Other `ColorData` methods are named explicitly, rather than parameterized (like `getHsl()` and `getHsla()`):
 
 ::: code
 ```twig
@@ -151,7 +155,7 @@ echo $color->getContrastRatio('#ffffff'); // output: 4.0810201549497
 ```
 :::
 
-- `alpha` is a number between `0` (fully transparent) and `1` (fully opaque).
+- `alpha` is a number between `0` (fully transparent) and `1` (fully opaque), rounded to two or three places.
 - `rgbChannels` contains just the space-separated red, green, and blue channels, which is handy for defining a CSS custom property that you combine with your own opacity: `rgb(var(--brand) / 50%)`.
 - `oklch` only includes the alpha channel (`/ 0.5`) when the color isn’t fully opaque.
 - `contrastColor` is either black (`#000000`) or white (`#ffffff`), whichever contrasts more with the color—useful for choosing a legible text color to display over it.
@@ -172,7 +176,9 @@ echo $color->getContrastRatio('#ffffff'); // output: 4.0810201549497
 
 ### GraphQL
 
-When the field’s [GraphQL Mode](#graphql-mode) is **Hex only**, it returns a hex string (which may include an alpha channel). In **Full data** mode, you can select any of these fields: `hex`, `label`, `red`, `green`, `blue`, `alpha`, `hue`, `saturation`, `lightness`, `luma`, `rgb`, `rgba`, `rgbChannels`, `hsl`, `hsla`, `oklch`, `contrastColor`, and `contrastRatio`.
+When the field’s [GraphQL Mode](#graphql-mode) is **Hex only**, it returns a hexadecimal string of six or eight characters (when the value includes a relevant [alpha](#translucency-and-other-formats) component).
+
+In **Full data** mode, you can select any of these fields: `hex`, `label`, `red`, `green`, `blue`, `alpha`, `hue`, `saturation`, `lightness`, `luma`, `rgb`, `rgba`, `rgbChannels`, `hsl`, `hsla`, `oklch`, `contrastColor`, and `contrastRatio`.
 
 ```gql
 query Swatches {
@@ -194,9 +200,54 @@ query Swatches {
 
 The `hex` field accepts a `withAlpha` argument (default `true`), and `contrastRatio` requires a `with` argument containing the hex value of the color to compare against.
 
+### Saving Color Field Data
+
+In an element or [entry form](kb:entry-form) that includes a color field, you can use the browser’s native `color` input type to submit a custom value:
+
+```twig
+{{ input('color', 'fields[myColorField]', entry.myColorField) }}
+
+{# ...equivalent to... #}
+
+<input type="color" name="fields[myColorField]" value="entry.myColorField">
+```
+
+If you cannot use a `color` input (or you are deriving or submitting the value in some other way), Craft can normalize a wide variety of [hexadecimal values](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/hex-color):
+
+- `f00` &rarr; `#ff0000` (a `#` is prepended to all values, if not present)
+- `#f00` &rarr; `#ff0000` (expanding three-value syntax to six)
+- `#f004` &rarr; `#ff000044` (expanding four-value syntax to eight, including alpha)
+- `#ff0000ff` &rarr; `#ff0000` (removing alpha channel for fully-opaque colors) <Since ver="5.12.0" feature="Normalization of colors with non-significant alpha channels" />
+
 ::: tip
-Refer to the [`ColorData`](craft5:craft\fields\data\ColorData) class reference for a complete list of methods!
+To avoid ambiguity, it’s best to submit a six- or eight-character <Since ver="5.12.0" feature="Eight-character translucent hexadecimal color values" /> hexadecimal color, prepended with the `#` symbol.
 :::
+
+Most browsers’ color picker interfaces [do not present an alpha channel](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/color#html.elements.input.alpha), but you can enable it for those that do:
+
+```twig{4}
+{% set colorField = craft.app.fields.getFieldByHandle('myColorField') %}
+
+{{ input('color', 'fields[myColorField]', entry.myColorField, {
+  alpha: colorField.allowCustomAlpha,
+}) }}
+```
+
+Color fields that use a palette can be presented as a [dropdown](dropdown.md):
+
+```twig
+{% set colorField = craft.app.fields.getFieldByHandle('myColorField') %}
+
+<select name="fields[myColorField]">
+  {% for swatch in colorField.palette %}
+    {{ tag('option', {
+      value: swatch.color,
+      selected: entry.myColorField.hex == swatch.color,
+      text: swatch.label,
+    }) }}
+  {% endfor %}
+</select>
+```
 
 ## Querying by Color
 

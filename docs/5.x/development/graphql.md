@@ -56,58 +56,49 @@ Schema customization is only possible with an admin account and <config5:allowAd
 In addition to the content and mutation settings for each schema, you can opt in to support for the `@transform` and `@parseRefs` [directives](#list-of-available-directives).
 You may globally disable image transforms in GraphQL using the <config5:disableGraphqlTransformDirective> setting (this completely hides the option in the schema customization screen). <Since ver="5.9.0" feature="Per-schema control over availability of @transform and @parseRefs directives" />
 
-Schemas can also grant read-only access to some of your project’s configuration, using the **Query for sites**, **Query for sections**, **Query for entry types**, **Query for volumes**, **Query for user groups**, **Query for category groups**, and **Query for tag groups** components. Each one adds a pair of [settings queries](#settings-queries) (like `sections` and `section`), and a field that links elements to that configuration (like `section` on entries). <Since ver="5.12.0" feature="Read-only GraphQL schema components for sites, sections, entry types, volumes, and groups" />
+Schemas can also grant read-only access to some of your project’s configuration. <Since ver="5.12.0" feature="Read-only GraphQL permissions for site, section, entry type, volume, and user group configuration" />
+
+- **Query for sites**
+- **Query for sections**
+- **Query for entry types**
+- **Query for volumes**
+- **Query for user groups**
+- **Query for category groups**
+- **Query for tag groups**
+
+Each of these permissions adds a pair of [settings queries](#settings-queries) (like `sections` and `section`), and makes the configuration type’s fields accessible via the relevant elements (like `section` on entries, or `volume` on assets).
+This supplements existing fields containing primitive references, like `sectionId`, `typeHandle`, or `volumeId`.
 
 #### Generate Tokens
 
-A _token_ is required to use any non-public schema. Tokens use the standard “bearer” `Authorization` HTTP header:
+A _token_ is required to use any non-public schema.
+Tokens are sent using the standard “bearer” `Authorization` HTTP header:
 
 ```http
 Authorization: Bearer {token}
 ```
 
-Invalid tokens will produce a 400-level HTTP exception; requests _without_ a token default to the public schema, if it is enabled. More [examples](#examples) of token usage appear below!
+Invalid tokens will produce a 400-level HTTP exception; requests _without_ a token default to the public schema, if it is enabled.
 
-To create a token, visit <Journey path="GraphQL, Tokens" /> and click **New token**. Every token’s **Name** must be unique, but multiple tokens may be created for each schema. Craft automatically generates a random 32-character access token, which can be copied from the **Authorization Header** section. Regenerate and save a token to revoke access to existing clients.
+To create a token, visit <Journey path="GraphQL, Tokens" /> and click **New token**.
+Every token’s **Name** must be unique, but multiple tokens may be created for each schema.
+Craft automatically generates a random 32-character access token, which can be copied from the **Authorization Header** section.
+Regenerate and save a token to revoke access to existing clients.
 
-Because tokens are similar to [user groups](../system/user-management.md#user-groups) in the way they grant access to system resources, only admins are allowed to create and modify them. Tokens can also be created via the CLI, with the [`graphql/create-token` command](../reference/cli.md#graphql-create-token). To find a schema’s UUID (required by this command), run `graphql/list-schemas`.
+Tokens are similar to [user groups](../system/user-management.md#user-groups) in the way they grant access to system resources, so only admins are allowed to create and modify them.
+Tokens can also be created via the CLI, with the [`graphql/create-token` command](../reference/cli.md#graphql-create-token).
+To find a schema’s UUID (required by this command), run `graphql/list-schemas`.
 
 While [schemas](#define-your-schemas) are tracked in [project config](../system/project-config.md), tokens are only stored in the database and must be created in each environment.
 
 ::: danger
-Carefully protect tokens for schemas that allow [mutations](#mutations)! These are effectively as dangerous as a user with the equivalent permissions.
-:::
-
-#### Authenticating as a User <Since ver="5.12.0" feature="OAuth and personal access token authentication for GraphQL" />
-
-Instead of a schema token, requests can be authenticated with an [OAuth](../system/oauth.md) access token that was issued to a specific user. Apps can get one by having the user sign in and authorize them, or the user can create a personal access token in the control panel.
-
-Access tokens are sent in the same `Authorization` header as schema tokens:
-
-```bash
-curl \
-  -H "Authorization: Bearer {access-token}" \
-  -H "Content-Type: application/graphql" \
-  -d '{currentUser{id,fullName}}' \
-  https://my-project.ddev.site/api
-```
-
-Craft doesn’t use one of your schemas for these requests. It builds one for the user that authorized the token instead, from the schema components that support authenticated requests and match that user’s [permissions](../system/user-management.md#permissions). For example, entries in a section are only queryable if the user can view entries in it, and drafts, revisions, and disabled elements are only available to users with control panel access. The request runs as that user, so queries only return elements they can view, and mutations are only allowed if they can save, delete, or create drafts of the element in question. Category, tag, and global set components aren’t available to authenticated requests.
-
-The user also decides how much access a token gets when they authorize an app or create a token, using two OAuth scopes:
-
-- `graphql:read` (“Read only”) — The token can run queries.
-- `graphql:write` (“Read and write”) — The token can run queries and [mutations](#mutations).
-
-To create a personal access token, go to <Journey path="My Account, Tokens" /> and click **New token**. This requires an [elevated session](../system/user-management.md#elevated-sessions). Give the token a name, select the scopes it should have, and choose when it expires (7, 30, or 90 days, or one year). The token is only shown once, so copy it right away. The **Tokens** screen also lists the apps you’ve authorized. From there you can rename personal tokens, and revoke tokens or an app’s access. The screen only appears when an API offers personal access tokens. GraphQL does this whenever <config5:enableGql> is on.
-
-Authenticated requests can use the [`currentUser` query](#the-currentuser-query) to get the user that authorized the token.
-
-::: tip
-Results for authenticated requests are [cached](#caching) separately for each user, and vary by their current permissions.
+Carefully protect tokens for schemas that allow [mutations](#mutations)!
+These are effectively as dangerous as a user with the equivalent permissions.
 :::
 
 ## Sending API Requests
+
+A variety of clients can communicate with Craft’s GraphQL API.
 
 ### CURL
 
@@ -148,12 +139,12 @@ Additional GraphQL IDEs are available as well:
 - [GraphQL Playground online](https://www.graphqlbin.com/v2/new)
 
 ::: tip
-When you’re initially exploring the API, make sure <config5:devMode> is enabled so the IDE can be informed about the entire schema available to it.
+When you are initially exploring the API, make sure <config5:devMode> is enabled so the IDE can be informed about the entire schema available to it.
 :::
 
 ### Sending Requests Manually
 
-The GraphQL API can be queried in three ways:
+A GraphQL request can have three main formats:
 
 1. **A `GET` request** with the GraphQL query defined by a `query` parameter:
   ```bash
@@ -178,9 +169,12 @@ The GraphQL API can be queried in three ways:
     https://my-project.ddev.site/api
   ```
 
+Note that `curl` implicitly uses `-X POST` when supplying body params with `-d`.
+Other clients (like a browser’s `fetch()` API) may require additional setup.
+
 #### Specifying Variables
 
-If you need to specify any [variables](https://graphql.org/learn/queries/#variables) along with your query, then you must send request as a `POST` request with an `application/json` content type, and include a `variables` key in the JSON body alongside your `query`.
+If you need to specify any [variables](https://graphql.org/learn/queries/#variables) along with your query, you must send a `POST` request with an `application/json` content type, and include a `variables` key in the JSON body alongside your `query`.
 
 ```bash
 curl \
@@ -194,18 +188,20 @@ curl \
 
 #### Querying a Private Schema
 
-The **Public Schema** is used by default. To query against a different [schema](#define-your-schemas), pass a valid [token](#generate-tokens) under the `Authorization` header.
+The **Public Schema** is used by default.
+To query against a different [schema](#define-your-schemas), pass a valid [token](#generate-tokens) under the `Authorization` header.
 
 ```bash
 curl \
   -H "Authorization: Bearer xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" \
   -H "Content-Type: application/graphql" \
-  -d '{entries{id}}' \
+  -d '{ entries { id } }' \
   https://my-project.ddev.site/api
 ```
 
 ::: warning
-If you’re unable to query a private schema because of a “missing authorization header,” make sure Craft received it from the web server with a quick post to a test template:
+If you’re unable to query private schemas (and every requests ends up using the public schema, or you get an explicit “missing authorization header” error) the `Authorization` header may be getting stripped from the request.
+You can test whether the header reaches Craft by to your app by creating a test template and making a `POST` request to it:
 
 ```twig
 {{ craft.app.getRequest().getHeaders().has('authorization')
@@ -219,6 +215,42 @@ Apache strips `Authorization` headers by default, which can be fixed by enabling
 RewriteCond %{HTTP:Authorization} ^(.*)
 RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
 ```
+:::
+
+#### Authenticating as a User <Since ver="5.12.0" feature="OAuth and personal access token authentication for GraphQL" />
+
+GraphQL requests can also be authenticated against a specific user, identified by an access token.
+Tokens created via [OAuth](../system/oauth.md) are equivalent to [personal access tokens](../system/oauth.md#personal-access-tokens) created via the control panel.
+
+These personal access tokens are sent in the same way as [schema tokens](#querying-a-private-schema):
+
+```bash
+curl \
+  -H "Authorization: Bearer {access-token}" \
+  -H "Content-Type: application/graphql" \
+  -d '{ currentUser { id, fullName } }' \
+  https://my-project.ddev.site/api
+```
+
+Craft constructs the schema for an authorized request based on that user’s [permissions](../system/user-management.md#permissions) (and the token’s scopes), rather than a [predefined](#define-your-schemas) one.
+For example: entries in a section are only queryable if the user has the corresponding `viewEntries:{uuid}` permission; drafts, revisions, and disabled elements are only available to users with control panel access.
+The request runs as that user, so queries only return elements they can view, and mutations are only allowed if they can save, delete, or create drafts of the element in question.
+
+::: warning
+Category, tag, and global sets are not accessible via authenticated requests.
+:::
+
+The user also decides how much access a token gets when they authorize an app or create a token, using two OAuth scopes:
+
+- `graphql:read` (“Read only”) — The token can run queries.
+- `graphql:write` (“Read and write”) — The token can run queries and [mutations](#mutations).
+
+To create a personal access token, go to <Journey path="My Account, Tokens" /> and click **New token**. This requires an [elevated session](../system/user-management.md#elevated-sessions). Give the token a name, select the scopes it should have, and choose when it expires (7, 30, or 90 days, or one year). The token is only shown once, so copy it right away. The **Tokens** screen also lists the apps you’ve authorized. From there you can rename personal tokens, and revoke tokens or an app’s access. The screen only appears when an API offers personal access tokens. GraphQL does this whenever <config5:enableGql> is on.
+
+Authenticated requests can use the [`currentUser` query](#the-currentuser-query) to get the user that authorized the token.
+
+::: tip
+Results for authenticated requests are [cached](#caching) separately for each user, and vary by their current permissions.
 :::
 
 ## Examples
@@ -1799,7 +1831,10 @@ This query is used to query for a single category.
 
 ### The `currentUser` query <Since ver="5.12.0" feature="The currentUser GraphQL query" />
 
-This query returns the user that authenticated the request. It only exists for requests [authenticated as a user](#authenticating-as-a-user), and is always available to them, even if they can’t query other users. Requests that use a schema token don’t have it. It takes no arguments and returns a `UserInterface`, with the same fields as the [`user` query](#the-user-query).
+This query returns the user that authenticated the request.
+It only exists for requests [authenticated as a user](#authenticating-as-a-user), and is always available to them, even if they can’t query other users.
+Requests that use a [schema token](#generate-tokens) don’t have it.
+It takes no arguments and returns a `UserInterface`, with the same fields as the [`user` query](#the-user-query).
 
 ```graphql
 query Me {
@@ -1811,27 +1846,29 @@ query Me {
 }
 ```
 
+There is no equivalent [mutation](#mutations) for the current user.
+
 ### Settings Queries <Since ver="5.12.0" feature="GraphQL queries for sites, sections, entry types, volumes, and groups" />
 
 Each of the read-only [schema components](#define-your-schemas) for your project’s configuration adds a plural query that returns a list, and a singular query that returns the first match (or `null`):
 
-| Schema component | Queries | Type
-| - | - | -
-| Query for sites | `sites`, `site` | `Site`
-| Query for sections | `sections`, `section` | `Section`
-| Query for entry types | `entryTypes`, `entryType` | `EntryType`
-| Query for volumes | `volumes`, `volume` | `Volume`
-| Query for user groups | `userGroups`, `userGroup` | `UserGroup`
-| Query for category groups | `categoryGroups`, `categoryGroup` | `CategoryGroup`
-| Query for tag groups | `tagGroups`, `tagGroup` | `TagGroup`
+| Permission | Queries | GraphQL Type |
+| - | - | - |
+| Query for sites | `sites`, `site` | `Site` |
+| Query for sections | `sections`, `section` | `Section` |
+| Query for entry types | `entryTypes`, `entryType` | `EntryType` |
+| Query for volumes | `volumes`, `volume` | `Volume` |
+| Query for user groups | `userGroups`, `userGroup` | `UserGroup` |
+| Query for category groups | `categoryGroups`, `categoryGroup` | `CategoryGroup` |
+| Query for tag groups | `tagGroups`, `tagGroup` | `TagGroup` |
 
-All of them accept the same arguments:
+All of these queries accept at least three arguments:
 
-| Argument | Type | Description
-| - | - | -
-| `id`| `[Int]` | Narrows the query results based on their IDs.
-| `uid`| `[String]` | Narrows the query results based on their UUIDs.
-| `handle`| `[String]` | Narrows the query results based on their handles.
+| Argument | Type | Description |
+| - | - | - |
+| `id`| `[Int]` | Narrows the query results based on their IDs. |
+| `uid`| `[String]` | Narrows the query results based on their UUIDs. |
+| `handle`| `[String]` | Narrows the query results based on their handles. |
 
 ```graphql
 query Structure {
@@ -1886,7 +1923,10 @@ query Articles {
 ```
 
 ## List of available directives
-Directives are not regulated by permissions and they affect how the returned data is displayed.
+
+Directives affect how field data is returned.
+A query can use directives on any field with a relevant type that is accessible in the schema.
+However, you must explicitly enable the special `transform` and `parseRefs` directives, as they carry some inherent risks.
 
 <!-- BEGIN DIRECTIVES -->
 

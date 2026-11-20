@@ -160,9 +160,9 @@ We recommend that this is enabled [only in development environments](../deploy.m
     caption="The settings screen in Craft Pro. Some tiles may only be available in paid editions of Craft."
     id="settings"
     :poi="{
-        system: [80, 24],
-        content: [80, 46],
-        extend: [80, 68],
+        system: [85, 24],
+        content: [85, 46],
+        extend: [85, 68],
     }">
 <img src="../images/control-panel-settings.png" alt="Craft settings screen">
 </BrowserShot>
@@ -195,7 +195,8 @@ Group | Description
 **Tags** | Define simple taxonomies with [tag groups](../reference/element-types/tags.md#tag-groups).
 
 ::: tip
-Prior to Craft 5.12, asset settings and filesystems had their own tiles in a separate “Media” section. Filesystems are now managed from <Journey path="Settings, Assets, Filesystems" />.
+Prior to Craft 5.12, asset settings and filesystems had their own tiles in a separate “Media” section.
+Filesystems are now managed from <Journey path="Settings, Assets, Filesystems" />.
 :::
 
 #### Extend <Poi label="3" target="settings" id="extend" /> <Since ver="5.12.0" feature="The Extend settings section" />
@@ -209,11 +210,13 @@ Group | Description
 
 #### Plugins
 
-Additional tiles may appear in a final group, after installing [plugins](plugins.md). Plugin settings are also accessible via the <Journey path="Settings, Plugins" /> screen.
+Installed [plugins](plugins.md) may add more tiles to a final **Plugins** group.
+Plugins’ settings screens are also accessible via their rows in <Journey path="Settings, Plugins" />.
 
 #### Read-Only Mode <Since ver="5.6.0" feature="Read-only settings screens" />
 
-[Administrators](user-management.md#admin-accounts) can always _view_ settings. A banner appears at the top of each settings screen, and inputs and controls are simplified or disabled:
+[Administrators](user-management.md#admin-accounts) can always _view_ settings.
+A banner appears at the top of each settings screen, and inputs and controls are simplified or disabled:
 
 <BrowserShot
     url="https://my-craft-project.ddev.site/admin/settings"
