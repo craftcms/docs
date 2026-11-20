@@ -15,12 +15,12 @@ class Activity extends Plugin
 {
     // ...
 
-    public array $scripts = [
-           __DIR__.'/../resources/css/sparkline.css' => 'css/sparkline.css',
+    protected array $scripts = [
+        __DIR__.'/../resources/js/sparkline.js' => 'js/sparkline.js',
     ];
 
-    public array $styles = 
-            __DIR__.'/../resources/js/sparkline.js' => 'js/sparkline.js',
+    protected array $styles = [
+        __DIR__.'/../resources/css/sparkline.css' => 'css/sparkline.css',
     ];
 
     // ...
@@ -110,7 +110,8 @@ export default defineConfig({
 ```
 
 If you want to work on multiple plugins at once, each will need a unique `port` and `hotFile`.
-The Vite server config block (JS) needs both values; your plugin (PHP) only needs the `hotFile`.
+Set `port` in Vite’s `server` configuration and `hotFile` in the Laravel Vite plugin’s configuration.
+Your Craft plugin’s PHP configuration also needs the matching `hotFile`.
 
 See `CraftCms\Cms\Plugin\Concerns\HasFrontendAssets` for more information about the `$vite` configuration.
 
@@ -140,19 +141,19 @@ class ActivityGraph implements LegacyAssetInterface
         \CraftCms\Cms\View\LegacyAssets\D3Asset::class,
     ];
 
-    // Assets defined  `$css` and `$js` should be directly registered against the passed HtmlStack:
+    // Register the published asset URLs against the passed HtmlStack:
     public function register(HtmlStack $htmlStack): void
     {
         $plugin = Plugin::getInstance();
-        $publicPath = public_path("vendor/{$plugin->packageName}");
 
-        $htmlStack->jsFile($publicPath.'/build/js/activity.js'));
-        $htmlStack->cssFile($publicPath.'/build/css/activity.css'));
+        $htmlStack->jsFile($plugin->asset('build/js/activity.js'));
+        $htmlStack->cssFile($plugin->asset('build/css/activity.css'));
     }
 }
 ```
 
-Then, whenever you’re preparing a response that will use the asset (typically in a controller), let the registry know:
+The referenced files must already be published, for example through the plugin’s `$publishables` map.
+When preparing a response that will use the asset (typically in a controller), let the registry know:
 
 ```php
 use MyOrg\MyPlugin\Assets\ActivityGraph;

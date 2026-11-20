@@ -62,7 +62,7 @@ Places you’d use `Craft::createObject()` can be mostly replaced with `app()->m
 ## Settings Form
 
 The `CraftCms\Cms\Plugin\Concerns\HasSettings` trait gives your plugin a `hasCpSettings` property; set this to `true` to give your plugin a tile in the **Settings** screen of the control panel, and a dedicated settings page.
-Craft handles all the routing, so you only need to implement a `settingsForm()` method:
+Craft handles all the routing, so you only need to implement a `settingsUi()` method:
 
 ```php
 use CraftCms\Cms\Form\Form;
@@ -71,7 +71,7 @@ use CraftCms\Cms\Form\Controls\Text;
 use CraftCms\Cms\Form\Nodes\Field;
 
 #[\Override]
-protected function settingsForm(FormContext $context = new FormContext): ?Form
+protected function settingsUi(UiContext $context = new UiContext): ?Ui
 {
     return Form::make([
         Field::make(t('API Key', category: 'my-plugin'), Text::make('apiKey'))
