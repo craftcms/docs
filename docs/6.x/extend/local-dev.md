@@ -6,7 +6,7 @@ If the host project doesn’t include the recommended `scripts` for a Laravel ap
 ```bash
 ddev composer require myorg/activity-plugin
 
-# New: Ask Laravel to 
+# New: Ask Laravel to discover the package
 ddev artisan package:discover
 ```
 
