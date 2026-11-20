@@ -1,8 +1,0 @@
-base_url: 'https://craftcms.com/docs'
-preserve_hierarchy: true
-files:
-  - source: /docs/3.x/**/*.md
-    ignore:
-      - /docs/3.x/ja
-      - /docs/3.x/fr
-    translation: /docs/3.x/%two_letters_code%/**/%original_file_name%
