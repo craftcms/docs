@@ -94,6 +94,36 @@ Additionally, these settings’ default values have changed:
 | --- | --- | --- | --- |
 | `loginPath` | `'login'` | `false` |  The front-end login form is now hidden, by default. |
 
+### Environment Overrides
+
+Overriding general config settings with `CRAFT_{SETTING}` environment variables (like `CRAFT_ALLOW_ADMIN_CHANGES`) is deprecated.
+These variables still work, but each one you set logs a deprecation warning.
+
+Instead, read an environment variable in `config/craft/general.php` with `env()`:
+
+```php
+use CraftCms\Cms\Config\GeneralConfig;
+
+return GeneralConfig::create()
+    ->allowAdminChanges(env('ALLOW_ADMIN_CHANGES', false))
+    ->disallowRobots(env('DISALLOW_ROBOTS', false));
+```
+
+Then rename the variables in your `.env` file:
+
+```bash
+# Before:
+CRAFT_ALLOW_ADMIN_CHANGES=false
+CRAFT_DISALLOW_ROBOTS=true
+
+# After:
+ALLOW_ADMIN_CHANGES=false
+DISALLOW_ROBOTS=true
+```
+
+The new names must not start with `CRAFT_`, or Craft will keep applying them as overrides.
+Laravel’s own config files, like `config/database.php` and `config/mail.php`, read environment variables the same way.
+
 ### Database
 
 `db.php` is no longer used.
