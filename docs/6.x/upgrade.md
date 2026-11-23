@@ -48,7 +48,7 @@ Don’t remove it before reviewing the rest of this guide!
 
 <Block label="On Plugins">
 
-During the alpha and beta phases, you may need to set `CRAFT_DISABLED_PLUGINS="*"` in `.env` or fully uninstall plugins before starting the upgrade to prevent incompatible ones from loading or running.
+During the alpha and beta phases, you may need to add `->disabledPlugins('*')` to your general config file or fully uninstall plugins before starting the upgrade to prevent incompatible ones from loading or running.
 They are bootstrapped very early in the app’s lifecycle, and an error can leave your project in a partially-upgraded state.
 
 Not all plugins will be necessary!
@@ -250,7 +250,7 @@ Laravel uses different variables to configure your database connection and debug
 | `CRAFT_DB_PASSWORD` | `DB_PASSWORD` |
 | `CRAFT_DB_DATABASE` | `DB_DATABASE` |
 | `CRAFT_DB_SCHEMA` | `DB_SCHEMA` |
-| `CRAFT_DB_TABLE_PREFIX` | `DB_TABLE_PREFIX` |
+| `CRAFT_DB_TABLE_PREFIX` | `DB_PREFIX` (include the trailing underscore, like `craft_`, which Craft 5 added for you) |
 | `CRAFT_DEV_MODE` | `APP_DEBUG` |
 | `CRAFT_SECURITY_KEY` | Remove |
 
@@ -267,6 +267,9 @@ APP_KEY=
 ```
 
 `APP_KEY` stays empty for now; you’ll generate it in the [final steps](#final-steps).
+
+Other `CRAFT_` variables that override general config settings (like `CRAFT_ALLOW_ADMIN_CHANGES`) keep working, but they’re deprecated.
+Move them into your general config file with `env()`, as described in [Environment Overrides](compatibility.md#environment-overrides).
 
 ### Web Root
 
