@@ -54,7 +54,11 @@ These feature registries accept one or more class string identifiers to `registe
 
 | Feature | Registry Class |
 | --- | --- |
-| Auth methods | `CraftCms\Cms\Auth\AuthMethods` |
+| AI tasks | `CraftCms\Cms\Ai\AiTasks` |
+| Assistant context types | `CraftCms\Cms\Ai\AssistantContextTypes` |
+| Auth methods | `CraftCms\Cms\Auth\AuthMethodCatalog` |
+| Component kinds | `CraftCms\Cms\Component\Kinds\ComponentKinds` |
+| Content model audit types | `CraftCms\Cms\Mcp\ContentModel\CheckRegistry` |
 | Element types | `CraftCms\Cms\Element\ElementTypes` |
 | Field types | `CraftCms\Cms\Field\FieldTypes` |
 | GraphQL directives | `CraftCms\Cms\Gql\GqlDirectives` |
@@ -63,10 +67,16 @@ These feature registries accept one or more class string identifiers to `registe
 | GraphQL types | `CraftCms\Cms\Gql\GqlTypes` |
 | Image transformers | `CraftCms\Cms\Image\ImageTransformers` |
 | Link types | `CraftCms\Cms\Field\LinkTypes` |
+| MCP capabilities | `CraftCms\Cms\Mcp\CapabilityRegistry` |
+| MCP element adapters | `CraftCms\Cms\Mcp\Elements\ElementAdapterRegistry` |
 | Nested entry field types | `CraftCms\Cms\Field\NestedEntryFieldTypes` |
+| Table cell types | `CraftCms\Cms\Field\TableCellTypes` |
 | Template cache collectors | `CraftCms\Cms\View\TemplateCacheCollectors` |
+| UI control types | `CraftCms\Cms\Ui\UiControlTypes` |
+| UI node types | `CraftCms\Cms\Ui\UiNodeTypes` |
 | Utility types | `CraftCms\Cms\Utility\UtilityTypes` |
 | Widget types | `CraftCms\Cms\Dashboard\WidgetTypes` |
+| Workflow stage types | `CraftCms\Cms\Workflow\WorkflowStageTypes` |
 
 A number of other features use registry-like patterns for collecting and validating configuration.
 Most require unique _domain identifiers_, passed explicitly (as with _asset file kinds_), or derived from other criteria (like _template roots_) against which the value or closure is registered.
