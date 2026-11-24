@@ -76,7 +76,7 @@ When this is disabled, the Settings section will be hidden, the Craft edition an
 and the project config and Plugin Store will become read-only—though Craft and plugin licenses may still be purchased.
 
 It’s best to disable this in production environments with a deployment workflow that runs `composer install` and
-[propagates project config updates](../project-config.md#propagating-changes) on deploy.
+[propagates project config updates](../../system/project-config.md#propagating-changes) on deploy.
 
 ::: warning
 Don’t disable this setting until **all** environments have been updated to Craft 3.1.0 or later.
