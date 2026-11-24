@@ -288,6 +288,22 @@ The only items that can be added to a navigation via the configurator are _secti
 
 Both kinds of custom items can be [conditionally](#conditions) included.
 
+## Notifications
+
+Some actions in the control panel trigger notifications:
+
+- [Workflow](workflows.md) review requests
+- Mentions in element activity comments
+- [Release](releases.md) failures
+
+The bell icon in the header indicates when you have unread notifications.
+Notifications can be strictly informational (no actions or interactivity), a link (taking you to a predetermined URL), or have multiple explicit actions (each with their own URL).
+
+::: tip
+Notifications replace _announcements_ in prior version of Craft, but cover a much broader range of use cases.
+Plugins may still use notifications to send summaries of changes, after an update.
+:::
+
 ## Tips + Tricks
 
 The control panel has some cool tricks up its sleeve.
