@@ -322,5 +322,5 @@ While it’s _possible_ to run 5000 sites on a single Craft installation, we str
 ## Further Reading
 
 - [The Power of t() in Craft 3](https://medium.com/@drifter/the-power-of-t-in-craft-3-b4bc3489edc4)
-- [Language switcher for Craft 3 by Jan D’Hollander](https://www.thebasement.be/language-switcher-for-craft-3/)
+- [Language switcher for Craft 3 by Jan D’Hollander](https://web.archive.org/web/20250525013236/https://www.thebasement.be/language-switcher-for-craft-3/)
 - [Stack Exchange: Getting full native language name in Craft 3 language switcher](https://craftcms.stackexchange.com/questions/27116/getting-full-native-language-name-in-craft3-language-switcher)

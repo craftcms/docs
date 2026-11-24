@@ -191,7 +191,7 @@ Not all queue drivers support setting a priority; `Queue::push()` will attempt t
 
 | Queue Driver                 | Supports Priority
 | ---------------------------- | -----------------
-| [amqp](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/amqp/Queue.php)         | <x-mark />
+| [amqp](https://github.com/yiisoft/yii2-queue/blob/2.3.9/src/drivers/amqp/Queue.php)         | <x-mark />
 | [amqp_interop](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/amqp_interop/Queue.php) | <check-mark />
 | [beanstalk](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/beanstalk/Queue.php) | <check-mark />
 | [db](https://github.com/yiisoft/yii2-queue/tree/master/src/drivers/db/Queue.php) | <check-mark />

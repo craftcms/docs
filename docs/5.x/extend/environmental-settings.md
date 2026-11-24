@@ -120,4 +120,4 @@ For boolean settings, a similar `forms.booleanMenuField()` is available:
 }) }}
 ```
 
-Boolean fields only list environment variables that contain values satisfying PHP’s underlying [boolean filters](https://www.php.net/manual/en/filter.filters.validate.php).
+Boolean fields only list environment variables that contain values satisfying PHP’s underlying [boolean filters](https://www.php.net/manual/en/filter.constants.validation.php).
