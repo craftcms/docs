@@ -131,20 +131,20 @@ Avoid defining global variables that are ambiguous (like `plugin` or `elements`)
 
 Register your Twig extension in your plugin or module’s `init()` method by calling <craft4:craft\web\View::registerTwigExtension()>:
 
-```php {7-8}
+```php {6-7}
 public function init()
 {
     parent::init();
 
-    if (Craft::$app->getRequest()->getIsSiteRequest()) {
-        // Instantiate + register the extension:
-        $extension = new mynamespace\myplugin\twig\Extension();
-        Craft::$app->getView()->registerTwigExtension($extension);
-    }
+    // Instantiate + register the extension:
+    $extension = new mynamespace\myplugin\twig\Extension();
+    Craft::$app->getView()->registerTwigExtension($extension);
 }
 ```
 
-The `getIsSiteRequest()` check is optional. If your extension provides features that will be useful in system emails (commonly triggered from the control panel), or will be used when rendering templates from console requests (less common, but still valid), you may want to register it in all contexts.
+Register the extension for every type of request, not only site requests. Site templates are also rendered outside of them: CKEditor renders the partial templates of nested entries in the control panel, system emails are often sent from the control panel, and console commands can render templates too. If a template that uses your extension is rendered where the extension isn’t registered, Twig fails with an unknown function, filter, or tag.
+
+Only wrap the registration in a check like `Craft::$app->getRequest()->getIsSiteRequest()` when the extension must stay out of other contexts.
 
 ::: tip
 We’ve only covered the simplest means of extending the Twig environment—you can also provide custom _tags_ or _operators_. Craft’s own [Twig extension](repo:craftcms/cms/tree/4.x/src/web/twig) is a great place to look for examples of advanced features.
