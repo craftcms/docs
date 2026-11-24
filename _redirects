@@ -62,6 +62,7 @@
 # -> Published elsewhere, but that haven’t been updated since we moved to a versioned scheme.
 /docs/reference-tags /docs/5.x/system/reference-tags.html
 /docs/config-settings /docs/5.x/reference/config/general.html
+/docs/templating/cache /docs/5.x/reference/twig/tags.html
 
 # 404s
 /* /docs/404.html 404
