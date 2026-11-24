@@ -130,6 +130,7 @@ Possible values include:
 | `'not foo'` | without a `foo` option selected.
 | `['foo', 'bar']` | with `foo` or `bar` options selected.
 | `['and', 'foo', 'bar']` | with `foo` and `bar` options selected.
+| `['not', 'foo', 'bar']` | with neither `foo` nor `bar` options selected.
 
 ::: code
 ```twig

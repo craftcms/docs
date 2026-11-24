@@ -48,6 +48,7 @@ When [querying for elements](../../development/element-queries.md) that have a c
 | `'not foo'` | without a `foo` option checked  (and without `foo` among custom values).
 | `['foo', 'bar']` | with `foo` _or_ `bar` options selected (or `foo` provided as a custom value).
 | `['and', 'foo', 'bar']` | with `foo` _and_ `bar` options selected (or among provided custom values).
+| `['not', 'foo', 'bar']` | with neither `foo` nor `bar` options checked (and with neither among custom values).
 
 ::: code
 ```twig
