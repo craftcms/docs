@@ -45,7 +45,7 @@ class GenerateReport extends Command
 }
 ```
 
-Your command’s [arguments and options](artisan#defining-input-expectations) are determined by its _signature_.
+Your command’s [arguments and options](laravel:artisan#defining-input-expectations) are determined by its _signature_.
 Laravel takes care of matching command arguments with those of the `handle()` method; other arguments are resolved with dependency injection.
 In this example, `$manager` isn’t an argument that we’d expect a user to supply—it’s just a [service](services.md) we want access to in that scope.
 
@@ -59,7 +59,7 @@ public array $commands = [
 
 ## Command Closure
 
-You can also create simple commands directly in your plugin’s `boot()` method, using a [laravel:artisan#closure-commands]:
+You can also create simple commands directly in your plugin’s `boot()` method, using a [closure command](laravel:artisan#closure-commands):
 
 ```php
 Artisan::command('report:generate {templateId}', function (Manager $manager, int $templateId) {

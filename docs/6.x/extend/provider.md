@@ -7,6 +7,13 @@ Plugins now extend `CraftCms\Cms\Plugin\Plugin`, and are Laravel [service provid
 Many plugins will only need to update their [settings model](#settings) and rename the `init()` method to `boot()`.
 At this point—with the adapter installed—your plugin should be in a stable state from which you can gradually move [initialization logic](avenues.md#initialization) to the new architecture.
 
+::: warning
+The adapter only routes `actions/{handle}/…` URLs to plugins that extend the legacy `craft\base\Plugin` class.
+Once your plugin extends `CraftCms\Cms\Plugin\Plugin`, any Yii controllers it ships return a 404 until you port them to Laravel controllers and [route](http.md#action-paths) them in `routes/actions.php`.
+Switch the base class together with your controllers, and test your action URLs afterwards.
+The settings page also changes: `settingsHtml()` is not used by the new base class, so implement `settingsForm()` (see [settings](config.md#settings-form)).
+:::
+
 You are not obligated to adopt `PascalCase` namespaces, but if you do (and your base class is named something other than `Plugin`, in your autoloading root), make the corresponding update to the `extra.class` property in `composer.json`:
 
 ```json{8}
@@ -27,6 +34,15 @@ In order to support the Craft plugin lifecycle (installation and uninstallation,
 ## Settings
 
 The `createSettings()` method replaces `createSettingsModel()`, and must return a subclass of `CraftCms\Cms\Plugin\PluginSettings` (or `null`).
+Note that it is a **static** method:
+
+```php
+protected static function createSettings(): ?PluginSettings
+{
+    return new Settings();
+}
+```
+
 This base class retains much of the same [component](models.md#data-objects) functionality, and should be a drop-in replacement for `craft\base\Model`.
 
 ::: tip
