@@ -9,8 +9,8 @@ Many objects that were *records* in Craft 5.x are now Eloquent models, and exten
 This implementation provides some familiar features, like standardized `dateCreated`, `dateUpdated`, and `dateDeleted` columns.
 UIDs are optional, and come from `CraftCms\Cms\Shared\Concerns\HasUid`.
 
-Models are only concerned with the shape of data in the database—they no longer define methods or properties, use validation rules, emit events, etc.
-We still use service-like classes to translate data objects to Eloquent models, for saving.
+Craft generally uses Eloquent models for persistence, with data objects and services handling validation and translating data for saving.
+Models can still define methods, casts, relationships, and Eloquent event handlers.
 
 This separation is _not_ required, for plugins; you are free to use `BaseModel` for anything that must be persisted in the database, while also implementing validation traits and interfaces!
 
@@ -22,7 +22,7 @@ Components retain a lot of familiar features, like mass-assignment via construct
 You can also opt in to some component features, piecemeal:
 
 - `CraftCms\Cms\Validation\Contracts\Validatable` and `CraftCms\Cms\Validation\Concerns\Validates` together provide a full suite of [validation](validation.md) tools;
-- The `#[\CraftCms\Cms\Validation\Ruleset()]` attribute lets you share sets of validation rules between objects;
+- The `#[\CraftCms\RulesetValidation\Attributes\Ruleset(MyRuleset::class)]` attribute lets you share sets of validation rules between objects;
 - Any class can be safely “configured” (in its constructor, or from outside) using `CraftCms\Cms\Support\Typecast::configure()`;
 
 <Block label="DTOs and Plain Arrays">
