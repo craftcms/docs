@@ -4,6 +4,10 @@ containsGeneratedContent: yes
 
 # Subscriptions
 
+::: warning
+Subscriptions are being removed in an upcoming release of Commerce. We recommend migrating to subscriptions managed by the [Stripe plugin](https://github.com/craftcms/stripe#migrating-from-craft-commerce).
+:::
+
 Commerce supports recurring revenue via _subscriptions_, a feature of [some gateways](#capabilities).
 
 Once you’ve added a payment gateway that supports subscriptions, navigate to <Journey path="Commerce, Subscription Plans" /> to set up one or more _plans_.
